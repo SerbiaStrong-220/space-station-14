@@ -299,6 +299,7 @@
   id: ClothingNeckCloakEnby
   name: treasure hunter cloak
   description: This cloak belonged to a greedy treasure hunter.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/enby.rsi

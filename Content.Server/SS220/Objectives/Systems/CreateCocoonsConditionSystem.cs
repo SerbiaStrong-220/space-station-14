@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Objectives.Systems;
+using Content.Server.Roles;
 using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Roles;
 using Content.Shared.Mind;
@@ -11,6 +12,7 @@ namespace Content.Server.SS220.Objectives.Systems;
 public sealed partial class CreateCocoonsConditionSystem : EntitySystem
 {
     [Dependency] private readonly NumberObjectiveSystem _number = default!;
+    [Dependency] private readonly RoleSystem _role = default!;
 
     public override void Initialize()
     {
@@ -26,10 +28,10 @@ public sealed partial class CreateCocoonsConditionSystem : EntitySystem
 
     private float GetProgress(EntityUid mindId, MindComponent mind, int target)
     {
-        if (!TryComp<SpiderQueenRoleComponent>(mindId, out var spiderQueenRole))
+        if (!_role.MindHasRole<SpiderQueenRoleComponent>(mindId, out var spiderQueenRole))
             return 0f;
 
-        if (spiderQueenRole.IsCreateCocoonsCompletedOnce)
+        if (spiderQueenRole.Value.Comp2.IsCreateCocoonsCompletedOnce)
             return 1f;
 
         var mobUid = mind.CurrentEntity;
@@ -42,7 +44,7 @@ public sealed partial class CreateCocoonsConditionSystem : EntitySystem
             : (float)spiderQueen.CocoonsList.Count / (float)target;
 
         if (progress == 1f)
-            spiderQueenRole.IsCreateCocoonsCompletedOnce = true;
+            spiderQueenRole.Value.Comp2.IsCreateCocoonsCompletedOnce = true;
 
         return progress;
     }

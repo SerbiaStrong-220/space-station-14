@@ -1,0 +1,71 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: SMEmitter
+  name: Supermatter emitter
+  parent: Emitter
+  description: A experimental supermatter emitter, which allows user to manually specify bolt parameters and power consumption
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Power/Generation/Supermatter/smemitter.rsi
+    layers:
+    - state: emitter
+    - state: beam
+      shader: unshaded
+      visible: false
+      map: ["enum.EmitterVisualLayers.Lights"]
+    - state: locked
+      shader: unshaded
+      map: ["enum.LockVisualLayers.Lock"]
+  - type: Emitter
+    boltType: SMEmitterBolt
+  - type: Machine
+    board: SuperMatterEmitterCircuitboard
+  - type: SuperMatterEmitterExtension
+    energyToMatterRatio: 50
+    powerConsumption: 600
+  - type: ActivatableUI
+    singleUser: true
+    key: enum.SuperMatterEmitterExtensionUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SuperMatterEmitterExtensionUiKey.Key:
+        type: SuperMatterEmitterExtensionBUI
+
+- type: entity
+  id: SuperMatterEmitterCircuitboard
+  parent: BaseMachineCircuitboard
+  name: super matter emitter machine board
+  components:
+    - type: Sprite
+      state: engineering
+    - type: MachineBoard
+      prototype: SMEmitter
+      stackRequirements:
+        Capacitor: 2
+        CableHV: 5
+        Glass: 2
+    - type: Construction
+      graph: SuperMatterEmitterBoard
+      deconstructionTarget: null
+      node: smEmitter
+
+- type: constructionGraph
+  id: SuperMatterEmitterBoard
+  start: emitter
+  graph:
+  - node: emitter
+    entity: EmitterCircuitboard
+    edges:
+    - to: smEmitter
+      steps:
+      - tool: Screwing
+        doAfter: 2
+  - node: smEmitter
+    entity: SuperMatterEmitterCircuitboard
+    edges:
+    - to: emitter
+      steps:
+      - tool: Screwing
+        doAfter: 2

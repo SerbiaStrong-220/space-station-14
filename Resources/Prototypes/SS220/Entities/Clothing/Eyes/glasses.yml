@@ -31,3 +31,31 @@
     - HamsterWearable
     - WhitelistChameleon
     - SecDogWearable
+
+- type: entity
+  parent: [ClothingEyesBase, ShowSecurityIcons]
+  id: ClothingEyesGlassesBallistic
+  name: ballistic glasses
+  description: Tactical security element
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/secballistic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Glasses/secballistic.rsi 
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: Construction
+    graph: GlassesSecHUD
+    node: glassesSec
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - SecDogWearable # Roxi
+  - type: GuideHelp
+    guides:
+    - Security
+    - Antagonists
+  - type: IdentityBlocker
+    coverage: EYES

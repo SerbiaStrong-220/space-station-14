@@ -5,6 +5,6 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.DarkReaper;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class DarkReaperRoleComponent : AntagonistRoleComponent
+public sealed partial class DarkReaperRoleComponent : BaseMindRoleComponent
 {
 }

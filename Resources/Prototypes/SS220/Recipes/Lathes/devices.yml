@@ -28,3 +28,9 @@
     Plasma: 600
     Plastic: 400
 
+  id: DeviceCalculator
+  result: DeviceCalculator
+  completetime: 4
+  materials:
+    Steel: 200
+    Plastic: 200

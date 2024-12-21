@@ -1,0 +1,130 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: SuperMatterCrystal
+  name: supermatter crystal
+  description: A strangely translucent and iridescent crystal.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Pullable
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Fixtures # TODO find masks/layers together
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.3,0.3,0.3" # TEST QoL
+        mask:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          - InteractImpassable
+          - Opaque
+        layer:
+          - MidImpassable
+          - HighImpassable
+          - BulletImpassable
+          - InteractImpassable
+  - type: CollisionWake
+    enabled: false
+  - type: SinguloFood
+    energy: 10000
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 25000
+    intensitySlope: 5
+    totalIntensity: 25000
+  - type: NameIdentifier
+    group: GenericNumber
+  - type: TTS
+    voice: glados
+    # randomVoicesList: SuperMatterVoices uncomment when map load/save test fixed
+  - type: AmbientSound
+    range: 5
+    volume: 0
+    sound:
+      path: /Audio/SS220/Ambience/Supermatter/calm.ogg
+  - type: HallucinationSource
+    hallucination:
+        randomEntities: HallucinationSupermatterCrystal
+        betweenHallucinations: 4
+        hallucinationMinTime: 2
+        hallucinationMaxTime: 10
+        totalDuration: 20
+        componentName: EyeProtection
+        itemSlot: EYES
+        checkPockets: false
+    range: 7
+  - type: SuperMatter
+    consumeSound:
+      collection: SupermatterConsume
+  - type: RadiationSource
+    enabled: true
+    intensity: 2
+    slope: 2
+  - type: LightningArcShooter
+    enabled: false
+    shootRange: 3
+  - type: Sprite
+    offset: 0, 0.25
+    sprite: SS220/Structures/Power/Generation/Supermatter/crystal.rsi
+    layers:
+    - state: base
+      map: ["enum.SuperMatterVisualLayers.Shaded"]
+    - state: field
+      shader: unshaded
+      map: ["enum.SuperMatterVisualLayers.Unshaded"]
+  - type: Icon
+    sprite: SS220/Structures/Power/Generation/Supermatter/crystal.rsi
+    state: icon
+  - type: Appearance
+  - type: SuperMatterObserverVisualReceiver
+    unActiveState:
+      shaded: icon
+      unshaded: field
+    onState:
+      shaded: base
+    warningState:
+      shaded: glow
+    dangerState:
+      shaded: psy
+    delaminateState:
+      unshaded: psy
+  - type: PointLight
+    enabled: true
+    radius: 10
+    energy: 5
+    color: "#ffe000"
+  - type: Speech
+    speechSounds: Pai
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Engineering
+    - Common
+  - type: Clickable
+  - type: InteractionOutline
+  - type: InteractionPopup # add its own hugging!
+    successChance: 1
+    interactSuccessString: hugging-success-generic
+    interactSuccessSound: /Audio/Effects/thudswoosh.ogg
+    messagePerceivedByOthers: hugging-success-generic-others
+  - type: WarpPoint
+    follow: true
+    location: SuperMatterCrystal
+  - type: GuideHelp
+    guides: [ Supermatter, Power ]
+
+# Not in use cause of errors in map load/save test
+- type: randomVoicesList
+  id: SuperMatterVoices
+  voices:
+  - adjutant
+  - good_thalya
+  - turret_floor
+  - glados
+  - fact_core

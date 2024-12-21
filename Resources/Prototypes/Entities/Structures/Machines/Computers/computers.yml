@@ -50,6 +50,39 @@
           type: WiresBoundUserInterface
 
 - type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerAtmosMonitoring
+  name: atmospheric network monitor
+  description: Used to monitor the station's atmospheric networks.
+  components:
+  - type: Computer
+    board: AtmosMonitoringComputerCircuitboard
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: tank
+    - map: ["computerLayerKeys"]
+      state: atmos_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: AtmosMonitoringConsole
+    navMapTileColor: "#1a1a1a"
+    navMapWallColor: "#404040"
+  - type: ActivatableUI
+    singleUser: true
+    key: enum.AtmosMonitoringConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.AtmosMonitoringConsoleUiKey.Key:
+        type: AtmosMonitoringConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+
+- type: entity
   parent: BaseComputer
   id: ComputerEmergencyShuttle
   name: emergency shuttle console
@@ -630,7 +663,7 @@
   parent: BaseComputerAiAccess
   id: ComputerComms
   name: communications computer
-  description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
+  description: A computer used to make station wide announcements via keyboard or microphone, set the appropriate alert level, and call the emergency shuttle. #ss220-fix
   components:
   - type: Sprite
     layers:

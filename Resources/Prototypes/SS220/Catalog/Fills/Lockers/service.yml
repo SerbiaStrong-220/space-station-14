@@ -1,12 +1,9 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-- type: entity
-  id: LockerClownFilled
-  suffix: Filled
-  parent: LockerClown
-  components:
-  - type: StorageFill
-    contents:
+- type: entityTable
+  id: LockerFillClown
+  table: !type:AllSelector
+    children:
     - id: ClothingMaskClown
     - id: ClothingShoesClown
     - id: ClothingUniformJumpsuitClown
@@ -16,6 +13,23 @@
     - id: ClothingBackpackDuffelClown
     - id: CrayonRainbow
     - id: ClownStampBox #ss220-fake-stump-update
+    - !type:NestedSelector
+      tableId: AllToyWeaponsBundleTable
+      prob: 0.075
+    - !type:NestedSelector
+      tableId: AllFakeSyndieHardsuitsTable
+      prob: 0.075
+
+
+- type: entity
+  id: LockerClownFilled
+  suffix: Filled
+  parent: LockerClown
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: LockerFillClown
 
 - type: entity
   id: LockerMimeFilled
