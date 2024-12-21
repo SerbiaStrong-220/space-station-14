@@ -19,6 +19,14 @@
     Plastic: 400
 
 - type: latheRecipe
+  id: DeviceCalculator
+  result: DeviceCalculator
+  completetime: 4
+  materials:
+    Steel: 200
+    Plastic: 200
+
+- type: latheRecipe
   id: JetpackVoid
   result: JetpackVoid
   completetime: 4
@@ -27,10 +35,3 @@
     Glass: 400
     Plasma: 600
     Plastic: 400
-
-  id: DeviceCalculator
-  result: DeviceCalculator
-  completetime: 4
-  materials:
-    Steel: 200
-    Plastic: 200
