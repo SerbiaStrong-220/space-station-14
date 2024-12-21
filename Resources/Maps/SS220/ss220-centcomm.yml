@@ -23877,6 +23877,54 @@ entities:
           priority: 0
           component: Armor
         title: null
+- proto: ClothingBackpackBlueShieldHightFilled
+  entities:
+  - uid: 3077
+    components:
+    - type: Transform
+      parent: 28
+    - type: Physics
+      canCollide: False
+    - type: GroupExamine
+      group:
+      - hoverMessage: ""
+        contextText: verb-examine-group-other
+        icon: /Textures/Interface/examine-star.png
+        components:
+        - Armor
+        - ClothingSpeedModifier
+        entries:
+        - message: >-
+            Обеспечивает следующую защиту:
+
+            - [color=orange]Взрывной[/color] урон [color=white]к содержимому[/color] снижается на [color=lightblue]10%[/color].
+          priority: 0
+          component: Armor
+        title: null
+    - type: InsideEntityStorage
+  - uid: 3084
+    components:
+    - type: Transform
+      parent: 3078
+    - type: Physics
+      canCollide: False
+    - type: GroupExamine
+      group:
+      - hoverMessage: ""
+        contextText: verb-examine-group-other
+        icon: /Textures/Interface/examine-star.png
+        components:
+        - Armor
+        - ClothingSpeedModifier
+        entries:
+        - message: >-
+            Обеспечивает следующую защиту:
+
+            - [color=orange]Взрывной[/color] урон [color=white]к содержимому[/color] снижается на [color=lightblue]10%[/color].
+          priority: 0
+          component: Armor
+        title: null
+    - type: InsideEntityStorage
 - proto: ClothingBeltBandolier
   entities:
   - uid: 3102
