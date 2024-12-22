@@ -1,2 +1,2 @@
-ent-EmergencyRadiationKit = { ent-CrateChemistryVials }
+ent-MedicalChemistryVials = { ent-CrateChemistryVials }
     .desc = { ent-CrateChemistryVials.desc }
