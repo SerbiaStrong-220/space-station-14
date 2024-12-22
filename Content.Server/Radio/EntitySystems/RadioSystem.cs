@@ -1,15 +1,11 @@
-// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
-using Content.Server.VoiceMask;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
-using Content.Shared.SS220.Radio;
 using Content.Shared.Radio.Components;
-using Content.Shared.SS220.Radio.Components;
 using Content.Shared.Speech;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -51,12 +47,18 @@ public sealed class RadioSystem : EntitySystem
         SubscribeLocalEvent<IntrinsicRadioReceiverComponent, RadioReceiveEvent>(OnIntrinsicReceive);
         SubscribeLocalEvent<IntrinsicRadioTransmitterComponent, EntitySpokeEvent>(OnIntrinsicSpeak);
 
+        //SS220 PAI with encryption keys begin
+        SubscribeLocalEvent<IntrinsicRadioReceiverComponent, EncryptionChannelsChangedEvent>(OnEncryptionChannelsChangeReceiver);
+        SubscribeLocalEvent<IntrinsicRadioTransmitterComponent, EncryptionChannelsChangedEvent>(OnEncryptionChannelsChangeTransmitter);
+        //SS220 PAI with encryption keys end
+
         _exemptQuery = GetEntityQuery<TelecomExemptComponent>();
     }
 
     private void OnIntrinsicSpeak(EntityUid uid, IntrinsicRadioTransmitterComponent component, EntitySpokeEvent args)
     {
-        if (args.Channel != null && component.Channels.Contains(args.Channel.ID))
+        if (args.Channel != null && (component.Channels.Contains(args.Channel.ID) ||
+            component.EncryptionKeyChannels.Contains(args.Channel.ID))) //SS220 PAI with encryption keys
         {
             SendRadioMessage(uid, args.Message, args.Channel, uid);
             args.Channel = null; // prevent duplicate messages from other listeners.
@@ -88,23 +90,18 @@ public sealed class RadioSystem : EntitySystem
         if (!_messages.Add(message))
             return;
 
-        var name = TryComp(messageSource, out VoiceMaskComponent? mask) && mask.Enabled
-            ? mask.VoiceName
-            : MetaData(messageSource).EntityName;
+        var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);
+        RaiseLocalEvent(messageSource, evt);
 
+        var name = evt.VoiceName;
         name = FormattedMessage.EscapeText(name);
 
         // SS220 department-radio-color
         var formattedName = $"[color={GetIdCardColor(messageSource)}]{GetIdCardName(messageSource)}{name}[/color]";
 
         SpeechVerbPrototype speech;
-        if (mask != null
-            && mask.Enabled
-            && mask.SpeechVerb != null
-            && _prototype.TryIndex<SpeechVerbPrototype>(mask.SpeechVerb, out var proto))
-        {
-            speech = proto;
-        }
+        if (evt.SpeechVerb != null && _prototype.TryIndex(evt.SpeechVerb, out var evntProto))
+            speech = evntProto;
         else
             speech = _chat.GetSpeechVerb(messageSource, message);
 
@@ -210,7 +207,7 @@ public sealed class RadioSystem : EntitySystem
     private string GetIdCardName(EntityUid senderUid)
     {
         var idCardTitle = Loc.GetString("chat-radio-no-id");
-        idCardTitle = GetIdCard(senderUid)?.JobTitle ?? idCardTitle;
+        idCardTitle = GetIdCard(senderUid)?.LocalizedJobTitle ?? idCardTitle;
 
         var textInfo = CultureInfo.CurrentCulture.TextInfo;
         idCardTitle = textInfo.ToTitleCase(idCardTitle);
@@ -247,4 +244,26 @@ public sealed class RadioSystem : EntitySystem
         }
         return false;
     }
+
+    //SS220 PAI with encryption keys begin
+    private void OnEncryptionChannelsChangeTransmitter(Entity<IntrinsicRadioTransmitterComponent> entity, ref EncryptionChannelsChangedEvent args)
+    {
+        if (args.Component.Channels.Count == 0)
+            entity.Comp.EncryptionKeyChannels.Clear();
+        else
+            entity.Comp.EncryptionKeyChannels = new(args.Component.Channels);
+    }
+
+    private void OnEncryptionChannelsChangeReceiver(Entity<IntrinsicRadioReceiverComponent> entity, ref EncryptionChannelsChangedEvent args)
+    {
+        HashSet<string> channels = new();
+        channels.UnionWith(args.Component.Channels);
+        channels.UnionWith(entity.Comp.Channels);
+
+        if (channels.Count > 0)
+            EnsureComp<ActiveRadioComponent>(entity.Owner).Channels = channels;
+        else
+            RemComp<ActiveRadioComponent>(entity.Owner);
+    }
+    //SS220 PAI with encryption keys end
 }

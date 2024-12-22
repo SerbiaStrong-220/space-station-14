@@ -1,4 +1,5 @@
 // Original code github.com/CM-14 Licence MIT, EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Client.Graphics;
 using Robust.Client.GameObjects;
 using Robust.Shared.Map;
@@ -9,14 +10,15 @@ public sealed class ThermalVisionOverlay : IgnoreLightVisionOverlay
 {
     private readonly TransformSystem _transformSystem = default!;
 
-    public ThermalVisionOverlay(float showRadius) : base(showRadius)
+    public ThermalVisionOverlay(float showRadius, float closeShowRadius) : base(showRadius, closeShowRadius)
     {
         _transformSystem = Entity.System<TransformSystem>();
     }
+
     protected override void Render(Entity<SpriteComponent, TransformComponent> ent,
                         MapId? map, DrawingHandleWorld handle, Angle eyeRot)
     {
-        var (uid, sprite, xform) = ent;
+        var (_, sprite, xform) = ent;
         if (xform.MapID != map)
             return;
 

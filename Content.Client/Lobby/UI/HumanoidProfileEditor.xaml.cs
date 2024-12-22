@@ -439,7 +439,7 @@ namespace Content.Client.Lobby.UI
 
             #region TeleportAfkToCryoStorage
 
-            TabContainer.SetTabTitle(5, Loc.GetString("humanoid-profile-edtior-afkPreferences-tab"));
+            TabContainer.SetTabTitle(5, Loc.GetString("humanoid-profile-editor-afkPreferences-tab")); //ss220 loc fix
             CTeleportAfkToCryoStorage.Pressed = Profile?.TeleportAfkToCryoStorage ?? true;
             CTeleportAfkToCryoStorage.OnToggled += args => SetTeleportAfkToCryoStorage(args.Pressed);
 
@@ -664,7 +664,14 @@ namespace Content.Client.Lobby.UI
                 selector.Select(Profile?.AntagPreferences.Contains(antag.ID) == true ? 0 : 1);
 
                 var requirements = _entManager.System<SharedRoleSystem>().GetAntagRequirement(antag);
-                if (!_requirements.CheckRoleRequirements(requirements, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
+                // SS220 Add role-ban check begin
+                if (_requirements.IsRoleBaned(antag.ID, out var banReason))
+                {
+                    selector.LockRequirements(banReason);
+                    Profile = Profile?.WithAntagPreference(antag.ID, false);
+                    SetDirty();
+                } // SS220 Add role-ban check end
+                else if (!_requirements.CheckRoleRequirements(requirements, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason)) // SS220 change 'if' -> 'else if'
                 {
                     selector.LockRequirements(reason);
                     Profile = Profile?.WithAntagPreference(antag.ID, false);
@@ -1243,6 +1250,7 @@ namespace Content.Client.Lobby.UI
         private void SetTeleportAfkToCryoStorage(bool newTeleportAfkToCryoStorage)
         {
             Profile = Profile?.WithTeleportAfkToCryoStorage(newTeleportAfkToCryoStorage);
+            SetDirty(); // ss220 cryo button fix
         }
 
         private void SetSpawnPriority(SpawnPriorityPreference newSpawnPriority)

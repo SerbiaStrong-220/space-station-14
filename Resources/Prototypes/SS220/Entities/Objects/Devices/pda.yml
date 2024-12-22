@@ -3,6 +3,7 @@
   id: DarkCEPDA
   name: dark chief engineer PDA
   description: A prestigious dark-colored PDA for a Chef Engineer that has put a lot of time into his work.
+  suffix: For playtime
   components:
   - type: Pda
     id: CEIDCard
@@ -54,3 +55,78 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-seniorservice
+- type: entity
+  parent: BasePDA
+  id: MagistratePDA
+  name: magistrate PDA
+  description: Concentration of justice. Don't drown!
+  components:
+  - type: Pda
+    id: MagistrateIDCard
+    state: pda-magistrate
+  - type: PdaBorderColor
+    borderColor: "#414452"
+    accentVColor: "#262c8a"
+    accentHColor: "#dfac5c"
+  - type: Sprite
+    sprite: Objects/Devices/pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+    - state: "screen-nt"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    sprite: Objects/Devices/pda.rsi
+    state: pda-magistrate
+
+- type: entity
+  parent: DeathsquadPDA
+  id: DeathsquadCommanderPDA
+  suffix: Death Squad Commander
+  components:
+  - type: Pda
+    id: CentcomIDCardDeathsquadCommander
+    state: pda-deathsquad
+
+- type: entity
+  parent: DeathsquadPDA
+  id: DeathsquadHealerPDA
+  suffix: Death Squad Healer
+  components:
+  - type: Pda
+    id: CentcomIDCardDeathsquadHealer
+    state: pda-deathsquad
+
+- type: entity
+  parent: BasePDA
+  id: AltRnDDirPDA
+  name: alternative research director PDA
+  description: He looks a little different than his copy
+  suffix: For playtime
+  components:
+  - type: Pda
+    id: RDIDCard
+    state: pda-rd-alt
+  - type: PdaBorderColor
+    borderColor: "#98afb8"
+    accentHColor: "#542a6c"
+    sprite: Objects/Devices/pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+    - state: "screen-nt"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-rd-alt

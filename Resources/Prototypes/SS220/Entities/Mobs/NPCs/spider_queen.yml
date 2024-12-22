@@ -1,14 +1,17 @@
 #Base
 - type: entity
   parent:
-  - MobAtmosStandard
   - SimpleMobBase
   - MobCombat
   id: BaseMobSpiderQueen
   abstract: true
-  name: Probca
+  name: Spider queen
   description: spider dance
   components:
+  - type: Emoting
+  - type: AutoImplant
+    implants:
+    - ThermalVisionImplant
   - type: NpcFactionMember
     factions:
     - SpiderQueen
@@ -17,6 +20,8 @@
   - type: InputMover
   - type: MobMover
   - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/spider.rsi
@@ -24,12 +29,6 @@
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: midwife-moving
-  - type: MobThresholds #HP
-    thresholds:
-      0: Alive
-      300: Dead
-  - type: Stamina
-    critThreshold: 150
   - type: DamageStateVisuals
     states:
       Alive:
@@ -57,17 +56,6 @@
         - MobMask
         layer:
         - MobLayer
-  - type: MeleeWeapon
-    hidden: true
-    soundHit:
-      path: /Audio/Effects/bite.ogg
-    angle: 0.
-    animation: WeaponArcBite
-    damage:
-      types:
-        Piercing: 12 #Damage
-        Poison: 4
-        Structural: 15
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 3
@@ -77,22 +65,11 @@
     interactFailureString: petting-failure-generic
   - type: NoSlip
   - type: IgnoreSpiderWeb
-  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute.Самолечение
-    allowedStates:
-    - Alive
-    damageCap: 300
-    damage:
-      types:
-        Heat: -2.5
-      groups:
-        Brute: -3
-        Toxin: -5
-        Airloss: -2.5
-        Burn: -2.5
   - type: Tag
     tags:
       - CannotSuicide
       - DoorBumpOpener
+      - SpiderQueen
   - type: Tool # Open door from xeno.yml.
     speedModifier: 1.5
     qualities:
@@ -106,12 +83,19 @@
       true
     useSound:
       path: /Audio/Items/crowbar.ogg
-  - type: Barotrauma #Damage
+  - type: Barotrauma
     damage:
       types:
-        Blunt: 1
-        Heat: 1
-  - type: Temperature #Damage
+        Blunt: 0.3
+        Heat: 0.1
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 1.5
+    damageRecovery:
+      types:
+        Asphyxiation: -1.0
+  - type: Temperature
     heatDamageThreshold: 325
     coldDamageThreshold: 260
     currentTemperature: 310.15
@@ -135,39 +119,67 @@
     energy: 0
     color: "#ff4242"
     castShadows: false
-  - type: IntrinsicRadioReceiver
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - HiveRadio
-  - type: ActiveRadio
-    channels:
-    - HiveRadio
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelHive
+
+- type: entity
+  parent: BaseMobSpiderQueen
+  id: BaseMobSpiderServant
+  abstract: true
+  components:
+  - type: Stamina
+    critThreshold: 150
+  - type: HTN
+    rootTask:
+      task: SpiderServantCompound
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - DoorBumpOpener
+      - SpiderServant
+  - type: Puller
+    needsHands: false
 
 #Spider queen
 - type: entity
   parent:
   - BaseMobSpiderQueen
   - MobSpiderQueenGhostRole
-  id: MobSpiderSpaceQueen
+  id: MobSpiderQueen
   name: Spider queen
   description: spider dance
   components:
-  - type: AutoImplant
-    implants:
-    - LightImplantSpiderEggHunter
-    - LightImplantSpiderWallWebDurable
-    - LightImplantSpiderEggDrone
-    - LightImplantSpiderEggGhost
-    - LightImplantSpiderCrystal
-    - LightImplantSpiderLittle
-    - LightImplantSingleSpiderWebDurable
-    - LightImplantSpiderEggShooter
-    - ThermalVisionImplant
+  - type: SpiderQueen
+    currentBloodPoints: 100
+    cocoonsCountToAnnouncement: 10
+    cocoonPrototypes:
+    - SpiderCocoonHorizontal
+    - SpiderCocoonVertical
+  - type: ActionGrant
+    actions:
+    - ActionSpawnSpiderEggDroneBloodPoints
+    - ActionSpawnSpiderEggHunterBloodPoints
+    - ActionSpawnSpiderEggGhostBloodPoints
+    - ActionSpawnSpiderEggShooterBloodPoints
+    - ActionSpawnSpiderLittleBloodPoints
+    - ActionSpawnSpiderCrystalBloodPoints
+    - ActionSpawnSingleSpiderWebDurableBloodPoints
+    - ActionSpawnWebTileBloodPoints
+    - ActionSpawnSpiderWallWebDurableBloodPoints
+    - ActionSpiderCoconning
+  - type: Hunger
+    thresholds: # only animals and rats are derived from this prototype so let's override it here and in rats' proto
+      Overfed: 150
+      Okay: 75
+      Peckish: 35
+      Starving: 15
+      Dead: 0
   - type: Butcherable
     spawned:
     - id: FoodMeatSpider
       amount: 3
-    - id: MobSpiderSpaceLittle
+    - id: MobSpiderLittle
       amount: 7
   - type: Spider
     webPrototype: SpiderWebDespawned
@@ -177,6 +189,17 @@
     proto: PoisonousAcid
     capacity: 2
     count: 2
+  - type: MeleeWeapon
+    hidden: true
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0.
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 25 #Damage
+        Poison: 5
+        Structural: 25
   - type: Gun
     fireRate: 1
     useKey: false
@@ -184,6 +207,9 @@
     availableModes:
       - FullAuto
     soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderQueen
   - type: SolutionContainerManager
     solutions:
       melee:
@@ -194,14 +220,36 @@
     baseWalkSpeed : 3.5
     baseSprintSpeed : 4
   - type: LizardAccent
+  - type: Puller
+    needsHands: false
+  - type: Stamina
+    critThreshold: 200
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      360: Dead
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damageCap: 350
+    damage:
+      types:
+        Piercing: -0.30
+        Blunt: -0.15
+        Slash: -0.15
+        Heat: -0.30
+        Cold: -0.15
+      groups:
+        Toxin: -4
+        Airloss: -2
 
 #Spiders-servants
 - type: entity
   parent:
   - MobSpiderDroneGhostRole
-  - BaseMobSpiderQueen
-  id: MobSpiderSpaceDrone
-  name: spider guard
+  - BaseMobSpiderServant
+  id: MobSpiderDrone
+  name: spider drone
   description: spider dance
   components:
   - type: Sprite #Спрайт
@@ -214,25 +262,27 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      85: Dead   #HP
+      75: Dead
   - type: DamageStateVisuals
     states:
       Alive:
         Base: guard-moving
       Dead:
         Base: guard_dead
-  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute. Самолечение
+  - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 85
+    damageCap: 75
     damage:
       types:
-        Heat: -3
+        Piercing: -0.33
+        Blunt: -0.33
+        Slash: -0.33
+        Heat: -0.33
+        Cold: -0.15
       groups:
-        Brute: -2
-        Toxin: -5
+        Toxin: -4
         Airloss: -2
-        Burn: -2
   - type: MeleeWeapon #Damage
     hidden: true
     soundHit:
@@ -242,12 +292,16 @@
     damage:
       types:
         Piercing: 5 #Damage
-        Structural: 10
-  - type: AutoImplant
-    implants:
-    - LightImplantSpiderWallWebDurable
-    - LightImplantSpiderCrystal
-    - LightImplantSingleSpiderWebShortDelay
+        Structural: 20
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderDrone
+  - type: ActionGrant
+    actions:
+    - ActionSpawnWebTile
+    - ActionSpawnSpiderWallWebDurable
+    - ActionSpawnSpiderCrystal
+    - ActionSpawnSingleSpiderWebShortDelay
   - type: Spider
     webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
@@ -257,8 +311,8 @@
 - type: entity
   parent:
   - MobSpiderHunterGhostRole
-  - BaseMobSpiderQueen
-  id: MobSpiderSpaceHunter
+  - BaseMobSpiderServant
+  id: MobSpiderHunter
   name: spider hunt
   description: spider dance
   components:
@@ -272,7 +326,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      110: Dead
+      130: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -282,15 +336,17 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 110
+    damageCap: 130
     damage:
       types:
-        Heat: -2.5
+        Piercing: -0.5
+        Blunt: -0.25
+        Slash: -0.25
+        Heat: -0.5
+        Cold: -0.25
       groups:
-        Brute: -3
-        Toxin: -5
-        Airloss: -2
-        Burn: -1
+        Toxin: -4
+        Airloss: -2.5
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -299,22 +355,26 @@
     animation: WeaponArcBite
     damage:
       types:
-        Piercing: 15
-        Structural: 15
+        Piercing: 20
+        Poison: 5
+        Structural: 10
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderHunter
   - type: Spider
     webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 3.9
-  - type: AutoImplant
-    implants:
-    - LightImplantSingleSpiderWebLongDelay
+  - type: ActionGrant
+    actions:
+    - ActionSpawnSingleSpiderWebLongDelay
 
 - type: entity
   parent:
   - MobSpiderGhostGhostRole
-  - BaseMobSpiderQueen
-  id: MobSpiderSpaceGhost
+  - BaseMobSpiderServant
+  id: MobSpiderGhost
   name: spider ghost
   description: spider dance
   components:
@@ -328,7 +388,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead
+      110: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -338,15 +398,17 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 100
+    damageCap: 110
     damage:
       types:
-        Heat: -2
+        Piercing: -0.5
+        Blunt: -0.25
+        Slash: -0.25
+        Heat: -0.5
+        Cold: -0.25
       groups:
-        Brute: -3
-        Toxin: -5
-        Airloss: -2
-        Burn: -1
+        Toxin: -4
+        Airloss: -2.5
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -355,9 +417,12 @@
     animation: WeaponArcBite
     damage:
       types:
-        Piercing: 3
-        Poison: 4
-        Structural: 10
+        Piercing: 5
+        Poison: 10
+        Structural: 5
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderGhost
   - type: SolutionContainerManager
     solutions:
       melee:
@@ -384,15 +449,15 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 1.5
     baseSprintSpeed : 3.9
-  - type: AutoImplant
-    implants:
-    - LightImplantSingleSpiderWebLongDelay
+  - type: ActionGrant
+    actions:
+    - ActionSpawnSingleSpiderWebLongDelay
 
 - type: entity
   parent:
   - MobSpiderShooterGhostRole
-  - BaseMobSpiderQueen
-  id: MobSpiderSpaceShooter
+  - BaseMobSpiderServant
+  id: MobSpiderShooter
   name: spider shooter
   description: spider dance
   components:
@@ -406,7 +471,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      80: Dead
+      90: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -416,15 +481,17 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 80
+    damageCap: 90
     damage:
       types:
-        Heat: -3
+        Piercing: -0.30
+        Blunt: -0.15
+        Slash: -0.15
+        Heat: -0.30
+        Cold: -0.15
       groups:
-        Brute: -1
-        Toxin: -5
+        Toxin: -4
         Airloss: -2
-        Burn: -2
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -434,8 +501,11 @@
     damage:
       types:
         Poison: 5
-        Piercing: 2
+        Piercing: 5
         Structural: 5
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderShooter
   - type: SolutionContainerManager
     solutions:
       melee:
@@ -455,9 +525,9 @@
     availableModes:
       - FullAuto
     soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
-  - type: AutoImplant
-    implants:
-    - LightImplantSingleSpiderWebClown
+  - type: ActionGrant
+    actions:
+    - ActionSpawnSingleSpiderWebClown
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 3.7
@@ -466,7 +536,7 @@
   parent:
   - BaseMobSpiderQueen
   - MobSpiderLittleGhostRole
-  id: MobSpiderSpaceLittle
+  id: MobSpiderLittle
   name: small spider
   description: spider dance
   components:
@@ -480,7 +550,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      15: Dead
+      40: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -490,10 +560,8 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 15
+    damageCap: 40
     damage:
-      types:
-        Heat: -0.5
       groups:
         Brute: -0.5
         Toxin: -0.5
@@ -508,18 +576,27 @@
     damage:
       types:
         Piercing: 5
+        Structural: 10
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderLittle
   - type: TimedDespawn
     lifetime: 20
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.5
     baseSprintSpeed : 4.5
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - DoorBumpOpener
+      - SpiderLittle
 
 # GHOST ROLES
 
 - type: entity
   name: Ghost role
   id: MobSpiderQueenGhostRole
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -537,7 +614,7 @@
 - type: entity
   name: Ghost role
   id: MobSpiderDroneGhostRole
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -549,13 +626,13 @@
     - !type:OverallPlaytimeRequirement
       time: 18000 # 5h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
   name: Ghost role
   id: MobSpiderHunterGhostRole
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -567,13 +644,13 @@
     - !type:OverallPlaytimeRequirement
       time: 18000 # 5h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
   name: Ghost role
   id: MobSpiderGhostGhostRole
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -585,13 +662,13 @@
     - !type:OverallPlaytimeRequirement
       time: 18000 # 5h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
   name: Ghost role
   id: MobSpiderShooterGhostRole
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -603,13 +680,13 @@
     - !type:OverallPlaytimeRequirement
       time: 3600 # 5h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
   name: Ghost role
   id: MobSpiderLittleGhostRole
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: GhostRole #Ghost role
     makeSentient: true
@@ -621,5 +698,5 @@
     - !type:OverallPlaytimeRequirement
       time: 3600 # 1h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role

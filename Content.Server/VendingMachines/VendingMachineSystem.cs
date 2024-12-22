@@ -42,10 +42,8 @@ namespace Content.Server.VendingMachines
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly AccessReaderSystem _accessReader = default!;
         [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
-        [Dependency] private readonly SharedActionsSystem _action = default!;
         [Dependency] private readonly PricingSystem _pricing = default!;
         [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
-        [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly AdvertiseSystem _advertise = default!;
         [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
@@ -53,6 +51,8 @@ namespace Content.Server.VendingMachines
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly SpeakOnUIClosedSystem _speakOnUIClosed = default!;
         [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+        [Dependency] private readonly SharedPointLightSystem _light = default!;
+        [Dependency] private readonly SharedTransformSystem _transform = default!;
 
         private const float WallVendEjectDistanceFromWall = 1f;
 
@@ -60,7 +60,6 @@ namespace Content.Server.VendingMachines
         {
             base.Initialize();
 
-            SubscribeLocalEvent<VendingMachineComponent, MapInitEvent>(OnComponentMapInit);
             SubscribeLocalEvent<VendingMachineComponent, PowerChangedEvent>(OnPowerChanged);
             SubscribeLocalEvent<VendingMachineComponent, BreakageEventArgs>(OnBreak);
             SubscribeLocalEvent<VendingMachineComponent, GotEmaggedEvent>(OnEmagged);
@@ -73,7 +72,6 @@ namespace Content.Server.VendingMachines
 
             Subs.BuiEvents<VendingMachineComponent>(VendingMachineUiKey.Key, subs =>
             {
-                subs.Event<BoundUIOpenedEvent>(OnBoundUIOpened);
                 subs.Event<VendingMachineEjectMessage>(OnInventoryEjectMessage);
             });
 
@@ -82,12 +80,6 @@ namespace Content.Server.VendingMachines
             SubscribeLocalEvent<VendingMachineComponent, RestockDoAfterEvent>(OnDoAfter);
 
             SubscribeLocalEvent<VendingMachineRestockComponent, PriceCalculationEvent>(OnPriceCalculation);
-        }
-
-        private void OnComponentMapInit(EntityUid uid, VendingMachineComponent component, MapInitEvent args)
-        {
-            _action.AddAction(uid, ref component.ActionEntity, component.Action, uid);
-            Dirty(uid, component);
         }
 
         private void OnVendingPrice(EntityUid uid, VendingMachineComponent component, ref PriceCalculationEvent args)
@@ -108,9 +100,9 @@ namespace Content.Server.VendingMachines
             args.Price += price;
         }
 
-        protected override void OnComponentInit(EntityUid uid, VendingMachineComponent component, ComponentInit args)
+        protected override void OnMapInit(EntityUid uid, VendingMachineComponent component, MapInitEvent args)
         {
-            base.OnComponentInit(uid, component, args);
+            base.OnMapInit(uid, component, args);
 
             if (HasComp<ApcPowerReceiverComponent>(uid))
             {
@@ -124,18 +116,6 @@ namespace Content.Server.VendingMachines
         {
             if (component.Broken)
                 args.Cancel();
-        }
-
-        private void OnBoundUIOpened(EntityUid uid, VendingMachineComponent component, BoundUIOpenedEvent args)
-        {
-            UpdateVendingMachineInterfaceState(uid, component);
-        }
-
-        private void UpdateVendingMachineInterfaceState(EntityUid uid, VendingMachineComponent component)
-        {
-            var state = new VendingMachineInterfaceState(GetAllInventory(uid, component));
-
-            _userInterfaceSystem.SetUiState(uid, VendingMachineUiKey.Key, state);
         }
 
         private void OnInventoryEjectMessage(EntityUid uid, VendingMachineComponent component, VendingMachineEjectMessage args)
@@ -228,6 +208,18 @@ namespace Content.Server.VendingMachines
                 return;
 
             component.CanShoot = canShoot;
+        }
+
+        /// <summary>
+        /// Sets the <see cref="VendingMachineComponent.Contraband"/> property of the vending machine.
+        /// </summary>
+        public void SetContraband(EntityUid uid, bool contraband, VendingMachineComponent? component = null)
+        {
+            if (!Resolve(uid, ref component))
+                return;
+
+            component.Contraband = contraband;
+            Dirty(uid, component);
         }
 
         public void Deny(EntityUid uid, VendingMachineComponent? vendComponent = null)
@@ -380,7 +372,7 @@ namespace Content.Server.VendingMachines
                 _speakOnUIClosed.TrySetFlag((uid, speakComponent));
 
             entry.Amount--;
-            UpdateVendingMachineInterfaceState(uid, vendComponent);
+            Dirty(uid, vendComponent);
             TryUpdateVisualState(uid, vendComponent);
             Audio.PlayPvs(vendComponent.SoundVend, uid);
         }
@@ -425,6 +417,12 @@ namespace Content.Server.VendingMachines
             else if (!this.IsPowered(uid, EntityManager))
             {
                 finalState = VendingMachineVisualState.Off;
+            }
+
+            if (_light.TryGetLight(uid, out var pointlight))
+            {
+                var lightState = finalState != VendingMachineVisualState.Broken && finalState != VendingMachineVisualState.Off;
+                _light.SetEnabled(uid, lightState, pointlight);
             }
 
             _appearanceSystem.SetData(uid, VendingMachineVisuals.VisualState, finalState);
@@ -493,6 +491,23 @@ namespace Content.Server.VendingMachines
 
             EntityUid ent;
 
+            // Default spawn coordinates
+            var spawnCoordinates = Transform(uid).Coordinates;
+
+            //Make sure the wallvends spawn outside of the wall.
+
+            //ss220 nanomed eject entities fix start
+            if (HasComp<WallMountComponent>(uid))
+            {
+                var rotation = _transform.GetWorldRotation(uid);
+                var directionVector = new Vector2((float)-Math.Cos(rotation.Theta), (float)-Math.Sin(rotation.Theta));
+
+                var offset = directionVector * WallVendEjectDistanceFromWall;
+
+                spawnCoordinates = spawnCoordinates.Offset(offset);
+            }
+            //ss220 nanomed eject entities fix end
+
             // SS220 vending-machine-inv begin
             if (vendComponent.NextEntityToEject is { } entityUid)
             {
@@ -501,22 +516,9 @@ namespace Content.Server.VendingMachines
             }
             else
             {
-                ent = Spawn(vendComponent.NextItemToEject, Transform(uid).Coordinates);
+                ent = Spawn(vendComponent.NextItemToEject, spawnCoordinates);
             }
             // SS220 vending-machine-inv end
-
-
-            // Default spawn coordinates
-            var spawnCoordinates = Transform(uid).Coordinates;
-
-            //Make sure the wallvends spawn outside of the wall.
-
-            if (TryComp<WallMountComponent>(uid, out var wallMountComponent))
-            {
-
-                var offset = wallMountComponent.Direction.ToWorldVec() * WallVendEjectDistanceFromWall;
-                spawnCoordinates = spawnCoordinates.Offset(offset);
-            }
 
             if (vendComponent.ThrowNextItem)
             {
@@ -603,7 +605,7 @@ namespace Content.Server.VendingMachines
 
             RestockInventoryFromPrototype(uid, vendComponent);
 
-            UpdateVendingMachineInterfaceState(uid, vendComponent);
+            Dirty(uid, vendComponent);
             TryUpdateVisualState(uid, vendComponent);
         }
 

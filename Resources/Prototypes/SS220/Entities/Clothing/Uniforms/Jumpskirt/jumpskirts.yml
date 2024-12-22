@@ -1,0 +1,335 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Сервис
+
+  # Ведущий сервис
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtSeniorService
+  name: юбка-комбинезон сервисного администратора #SS220 rename
+  description: Знак мастерства и мастерства сервисной службы.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/senior_service.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/senior_service.rsi
+
+  # Клоун
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtClowns
+  name: юбка-комбинезон клоуна
+  description: ХОНК!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/clown.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/clown.rsi
+
+  # Ботаник
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtHydroponicsBlue
+  name: blue hydroponics jumpskirt
+  description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydroblue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydroblue.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtHydroponicsWhite
+  name: white hydroponics jumpskirt
+  description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydrowhite.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydrowhite.rsi
+
+  # Бармен
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtBartenderRed
+  name: red bartender's uniform
+  description: A special red outfit to serve drinks.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_red.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_red.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtBartenderGreen
+  name: green bartender's uniform
+  description: A special green outfit to serve drinks.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_green.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtBartenderNanotrasen
+  name: униформа заслуженного бармена NanoTrasen
+  description: Дорогая униформа, сделанная на заказ для лучшей из лучших.
+  suffix: За время в игре
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
+
+  # Шеф повар
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChefWhite
+  name: белая униформа шеф-повара
+  description: Без этого нельзя готовить.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_white.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChefGreen
+  name: зелёная униформа шеф-повара
+  description: Без этого нельзя готовить.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_green.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChefBlack
+  name: чёрная униформа шеф-повара
+  description: Без этого нельзя готовить.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_black.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_black.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChefNanotrasen
+  name: униформа заслуженного шеф-повара NanoTrasen
+  description: Дорогая униформа, сделанная на заказ для лучшей из лучших.
+  suffix: За время в игре, Сеньор
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_nt.rsi
+
+
+# Medical
+
+  # Интерн
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtIntern
+  name: intern's jumpskirt
+  description: Suit for female medical interns.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/intern.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/intern.rsi
+
+ # Главный врач
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtCMOCorporate
+  name: corporate CMO Jumpskirt
+  description: «A beautiful, stylish suit of a real chief medical officer. It emphasises the person's nature and the beauty of his charisma...» Nothing further on the unopened label.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/cmo_corpW.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/cmo_corpW.rsi
+
+  # Парамед
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtFeldsher
+  name: uniform feldsher
+  description: Just don't be offended, are you a feldsher or a real doctor?
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/paramedic_feldsher.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/paramedic_feldsher.rsi
+
+  # Бригмедик
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtMilitaryFeldsher
+  name: uniform military feldsher
+  description: This is not a red color at all..
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_military_feldsher.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_military_feldsher.rsi
+
+# Инженерия
+
+  # Старший инженер
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChiefEngineerDark
+  name: dark uniform chief engineer
+  description: Dark uniform for years of service as head of the engineering department.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/CE_dark/jumpskirt/ce_dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/CE_dark/jumpskirt/ce_dark.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtChiefEngineerTurtleDark
+  name: dark chief engineer's turtleneck
+  description: Dark turtleneck designed specifically for work in conditions of the engineering department.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi
+
+  # Ассистент
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtTechAssistant
+  name: technical assistant's jumpskirt
+  description: Suit for female technical assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/tech_assist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/tech_assist.rsi
+
+# Синдикат
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtSyndicateDiplomatist
+  name: syndicate diplomatist uniforms
+  description: The uniform of a crime syndicate diplomat, nothing unusual.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi
+
+  # Капитан
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformWhiteJumpskirtCaptain
+  name: captain's white jumpskirt
+  description: It's a white jumpskirt with some gold markings denoting the rank of "Captain".
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/whitecaptain.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/whitecaptain.rsi
+
+# Карго
+
+  #Квартирмейстер
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtWarehouseman
+  name: the overalls of the warehouse manager
+  description: Practical, comfortable, movement-free and, most importantly, stylish jumpskirt. You have bad memories of your former boss with him.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/qm_warehouseman_skirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/qm_warehouseman_skirt.rsi
+
+  #RND / РНД
+
+# Ассистент
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtBachelor
+  name: bachelor's graduation uniform
+  description: In vain students wait for a friend in the pub, Science is not without sacrifice.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/assistant_bachelor_uniform.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/assistant_bachelor_uniform.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtResearchAssistant
+  name: research assistant's jumpskirt
+  description: Suit for female research assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/science_assist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/science_assist.rsi
+
+# Ученый
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtPhdCandidate
+  name: phd candidate uniform
+  description: Students, prepare for a lecture.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/phd_candidate.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/phd_candidate.rsi
+
+# Ведущий учёный
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtAssociateProfessor
+  name: assistant professor's uniform
+  description:
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/associate_professor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/associate_professor.rsi
+
+# Научрук
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtProfessor
+  name: professor's uniform
+  description:
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/professor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/professor.rsi

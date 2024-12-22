@@ -5,6 +5,9 @@
   minLimit: 0
   maxLimit: 3
   loadouts:
+  - FlowerWreath
+  - Hairflower
+  - Headphones
   - PlushieLizard
   - PlushieSpaceLizard
   - Lighter
@@ -18,6 +21,7 @@
   - ClothingNeckAromanticPin
   - ClothingNeckAsexualPin
   - ClothingNeckBisexualPin
+  - ClothingNeckGayPin
   - ClothingNeckIntersexPin
   - ClothingNeckLesbianPin
   - ClothingNeckNonBinaryPin
@@ -25,6 +29,25 @@
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  - TowelColorBlack
+  - TowelColorWhite
+  # SS220 Too many towels begin
+#  - TowelColorDarkBlue
+#  - TowelColorDarkGreen
+#  - TowelColorGold
+#  - TowelColorGray
+#  - TowelColorGreen
+#  - TowelColorLightBlue
+#  - TowelColorLightBrown
+#  - TowelColorMaroon
+#  - TowelColorMime
+#  - TowelColorOrange
+#  - TowelColorPurple
+#  - TowelColorRed
+#  - TowelColorSilver
+#  - TowelColorLightBlue
+#  - TowelColorYellow
+  # SS220 Too many towels begin end
   # SS220 Hand/FootWraps begin
   - ClothingHandWraps
   - ClothingFootWraps
@@ -51,6 +74,7 @@
   - Glasses
   - GlassesJamjar
   - GlassesJensen
+  - GlassesCyber #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: GroupTankHarness
@@ -78,6 +102,14 @@
   - LoadoutSpeciesEVANitrogen
   - LoadoutSpeciesEVAOxygen
 
+- type: loadoutGroup
+  id: GroupPocketTankDouble
+  name: loadout-group-pocket-tank-double
+  hidden: true
+  loadouts:
+  - LoadoutSpeciesPocketDoubleNitrogen
+  - LoadoutSpeciesPocketDoubleOxygen
+
 # Command
 - type: loadoutGroup
   id: CaptainHead
@@ -94,6 +126,10 @@
   - CaptainWhiteHead
   - CaptainWhiteBeret
   #ss220-loadout-captain-end
+  #ss220-loadout-fullwhitecap-Begin
+  - CaptainWhiteHardhat
+  - CaptainWhiteHat
+  #ss220-loadout-fullwhitecap-End
 
 - type: loadoutGroup
   id: CaptainJumpsuit
@@ -103,6 +139,10 @@
   - CaptainJumpskirt
   - CaptainFormalSuit
   - CaptainWhiteJumpsuit #ss220-loadout-captain
+#ss220-loadout-fullwhitecap-Begin
+  - CaptainWhiteJumpskirt
+  - CaptainWhiteFormalSuit
+#ss220-loadout-fullwhitecap-End
 #  - CaptainFormalSkirt SS220-RemoveFormalSkirtLoadouts
 
 - type: loadoutGroup
@@ -114,6 +154,7 @@
   - CaptainCloakFormal
   - CaptainMantle
   - CaptainFormalWhiteCloak #ss220-loadout-captain
+  - CaptainWhiteMantle #ss220-loadout-fullwhitecap
 
 - type: loadoutGroup
   id: CaptainBackpack
@@ -138,6 +179,7 @@
   - CaptainWhiteOuterClothing
   - CaptainWhiteCoat
 #ss220-loadout-captain-end
+  - CaptainWhiteWintercoat #ss220-loadout-fullwhitecap
 
 - type: loadoutGroup
   id: HoPHead
@@ -145,6 +187,7 @@
   minLimit: 0
   loadouts:
   - HoPHead
+  - HoPSilverHeadBand #SS220-Purple HoP
 
 - type: loadoutGroup
   id: HoPJumpsuit
@@ -176,6 +219,7 @@
   minLimit: 0
   loadouts:
   - HoPWintercoat
+  - HoPPurpleDress #SS220-Purple HoP
 
 # Civilian
 - type: loadoutGroup
@@ -257,6 +301,7 @@
   - BartenderJumpskirtRed
   - BartenderJumpskirtGreen
   - BartenderJumpskirtNanotrasen #SS220-BartenderResprited-End
+  - BartenderPivozavr #SS220-Two Floppa Iterarion
 
 - type: loadoutGroup
   id: BartenderOuterClothing
@@ -336,6 +381,7 @@
   - LawyerJumpskirtRed
   - LawyerJumpsuitGood
   - LawyerJumpskirtGood
+  - JumpsuitJujutsuShlepa #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: LawyerNeck
@@ -343,6 +389,7 @@
   minLimit: 0
   loadouts:
   - LawyerNeck
+  - CloakJujutsuShlepa #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: ChaplainHead
@@ -388,6 +435,7 @@
   minLimit: 0
   loadouts:
   - ChaplainNeck
+  - ChaplainNeckCloak #ss220-dress-cloak-tweak
 
 - type: loadoutGroup
   id: JanitorHead
@@ -396,6 +444,8 @@
   loadouts:
   - JanitorHead
   - JanitorOrangeHat #SS220-OrangeJanitor
+  - JanitorJRHat #SS220-JRHat
+  - JanitorJRSoft #SS220-JRSoft
 
 - type: loadoutGroup
   id: JanitorJumpsuit
@@ -405,6 +455,7 @@
   - JanitorJumpskirt
   - JanitorBlueJumpsuit #SS220-Janitor-Control
   - JanitorOrangeJumpsuit #SS220-OrangeJanitor
+  - JanitorJRJumpsuit #SS220-JanitorJR
 
 - type: loadoutGroup
   id: JanitorGloves
@@ -415,6 +466,7 @@
   - JanitorOrangeGloves #SS220-OrangeJanitor
   - OrangeGloves
   - PurpleGloves
+  - JanitorJRGloves #SS220-JRGloves
 
 - type: loadoutGroup
   id: JanitorOuterClothing
@@ -484,6 +536,7 @@
   loadouts:
   - JesterHat
   - JesterAltHat
+  - HeadMuzhik #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: ClownJumpsuit
@@ -495,6 +548,10 @@
   - ClownJumpsuit #SS220-Clown-reSprite-Begin
   - ClownJumpskirt #SS220-Clown-reSprite-End
   - JesterAltSuit
+  - ClownPennywiseJumpsuit #SS220-Clown-Pennywise
+  - JumpsuitMuzhik #SS220-Two Floppa Iteration
+  - JumpsuitGold #SS220-Two Floppa Iteration
+  - ClownJumpsuitClassic #SS220-ClassicJumpsuit
 
 - type: loadoutGroup
   id: ClownBackpack
@@ -518,6 +575,29 @@
   loadouts:
   - ClownShoes
   - JesterShoes
+  - ClownPennywiseShoes #SS220-Clown-Pennywise
+  - ShoesMuzhik #SS220-Two Floppa Iteration
+  - ShoesGold #SS220-Two Floppa Iteration
+
+#ss220-loadout-clown-mask-begin
+- type: loadoutGroup
+  id: ClownMask
+  name: loadout-group-clown-mask
+  loadouts:
+  - MaskClown #SS220-Two Floppa Iteration
+  - ClownPennywiseMask
+  - MaskMuzhik #SS220-Two Floppa Iteration
+  - MaskGold #SS220-Two Floppa Iteration
+#ss220-loadout-clown-mask-end
+
+#ss220-loadout-clown-neck-begin
+- type: loadoutGroup
+  id: ClownNeck
+  name: loadout-group-clown-neck
+  minLimit: 0 #ss220 clown neck fix
+  loadouts:
+  - ClownPennywiseRuff
+#ss220-loadout-clown-neck-end
 
 - type: loadoutGroup
   id: SurvivalClown
@@ -537,6 +617,7 @@
   - MimeHead
   - MimeFrenchBeret
   - MimeCap
+  - MoryakHead #SS220-Two Floppa Iterarion
 
 - type: loadoutGroup
   id: MimeMask
@@ -545,6 +626,7 @@
   - MimeMask
   - MimeMaskSad
   - MimeMaskScared
+  - MoryakMask #SS220-Two Floppa Iterarion
 
 - type: loadoutGroup
   id: MimeJumpsuit
@@ -552,6 +634,7 @@
   loadouts:
   - MimeJumpsuit
   - MimeJumpskirt
+  - MoryakJumpsuit #SS220-Two Floppa Iterarion
 
 - type: loadoutGroup
   id: MimeBackpack
@@ -574,7 +657,7 @@
   loadouts:
   - MimeSuspendersRed
   - MimeSuspendersBlack
-  
+
 - type: loadoutGroup
   id: SurvivalMime
   name: loadout-group-survival-mime
@@ -659,6 +742,7 @@
   - QuartermasterFormalSuit
   - QuartermasterJumpsuitCargonovich #SS220-Cargonovich
   - QuartermasterJumpsuitWarehouseman #SS220-QM-Trip
+  - QuartermasterJumpskirtWarehouseman #SS220-QM-Trip
 
 - type: loadoutGroup
   id: QuartermasterNeck
@@ -798,6 +882,7 @@
   minLimit: 0
   loadouts:
   - ChiefEngineerWintercoat
+  - CyberJacketEngineer #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ChiefEngineerShoes
@@ -810,6 +895,8 @@
   id: TechnicalAssistantJumpsuit
   name: loadout-group-technical-assistant-jumpsuit
   loadouts:
+  - TechAssistantJumpsuit #SS220 new assistant uniforms
+  - TechAssistantJumpskirt #SS220 new assistant uniforms
   - YellowJumpsuit
   - YellowJumpskirt
   - TechnicalAssistantJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
@@ -855,6 +942,7 @@
   loadouts:
   - StationEngineerOuterVest
   - StationEngineerWintercoat
+  - CyberJacketEngineer #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: StationEngineerShoes
@@ -886,6 +974,7 @@
   minLimit: 0
   loadouts:
   - AtmosphericTechnicianWintercoat
+  - CyberJacketEngineer #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: AtmosphericTechnicianBackpack
@@ -934,6 +1023,18 @@
   loadouts:
   - ResearchDirectorJumpsuit
   - ResearchDirectorJumpskirt
+#SS220-RD-New-Loadout-begin
+  - ResearchDirectorJumpsuitProfessor #SS220-loadout-academy
+  - ResearchDirectorJumpskirtProfessor #SS220-loadout-academy
+  - ClothingUniformJumpsuitRDAlt
+
+- type: loadoutGroup
+  id: ResearchDirectorPDA
+  name: loadout-group-research-director-pda
+  loadouts:
+  - RnDPDA
+  - AltRnDDirPDA
+#SS220-RD-New-Loadout-end
 
 - type: loadoutGroup
   id: ResearchDirectorOuterClothing
@@ -942,6 +1043,7 @@
   loadouts:
   - ResearchDirectorLabCoat
   - ResearchDirectorWintercoat
+  - CyberJacketRnD #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ResearchDirectorShoes
@@ -980,6 +1082,8 @@
   - ScientistJumpsuitTurtleneckAlt
   - ScientistJumpskirtTurtleneck
   - ScientistJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - ScientistJumpsuitPhdCandidate #SS220-loadout-academy
+  - ScientistJumpskirtPhdCandidate #SS220-loadout-academy
 
 - type: loadoutGroup
   id: ScientistBackpack
@@ -1000,6 +1104,7 @@
   - RoboticistLabCoat
   - RoboticistWintercoat
   # - SeniorResearcherLabCoat  #SS220 Seniors roles
+  - CyberJacketRnD #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: ScientistShoes
@@ -1029,8 +1134,12 @@
   id: ResearchAssistantJumpsuit
   name: loadout-group-research-assistant-jumpsuit
   loadouts:
+  - ResearchAssistantJumpsuit #SS220 new assistant uniforms
+  - ResearchAssistantJumpskirt #SS220 new assistant uniforms
   - WhiteJumpsuit
   - WhiteJumpskirt
+  - ResearchAssistantBachelor #SS220-loadout-academy
+  - ResearchAssistantBachelorSkirt #SS220-loadout-academy
   - ResearchAssistantJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - ResearchAssistantJumpsuitTurtleneckAlt
   - ResearchAssistantJumpskirtTurtleneck
@@ -1079,6 +1188,8 @@
   - HeadofSecurityCoat
   - HeadofSecurityWinterCoat
   - WinterHoSUnarmored #ss220 sec loadout update
+  - Outer1984 #SS220-Two Floppa Iteration
+  - CyberVestSecurity #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: WardenHead
@@ -1102,6 +1213,7 @@
   loadouts:
   - WardenCoat
   - WardenArmoredWinterCoat
+  - CyberVestSecurity #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: SecurityHead
@@ -1113,6 +1225,7 @@
   - SecurityHat
   - HatCowboyBlack #ss220 sec loadout update
   - HelmetTacSec #ss220 tacsec update
+  - TrooperHat # SS220 TrooperHat neck-to-head loadout transfer
 
 #SS220 neck loadout begin
 - type: loadoutGroup
@@ -1124,6 +1237,7 @@
   - Headphones #SS220 sec loadout update
   - ProtectGear #ss220 tacsec update
 #SS220 neck loadout end
+#- TrooperHat # SS220 TrooperHat neck-to-head loadout transfer
 
 - type: loadoutGroup
   id: SecurityJumpsuit
@@ -1139,6 +1253,10 @@
   - SecurityJumpskirtTurtleneck #SS220-MoreTurtleneck-End
   - JumpsuitSecBlue #ss220 sec loadout update
   - JumpsuitTacSec #ss220 tacsec update
+  - SeniorOfficerJumpsuit
+  - SeniorOfficerJumpskirt
+  - TrooperUniform
+  - JumpsuitSecVaas #ss220 security loadout
 
 - type: loadoutGroup
   id: SecurityBackpack
@@ -1164,6 +1282,7 @@
   - SecurityOfficerWintercoat
   - CoatSecurityOvercoat #ss220 sec loadout update
   - VestArmorSec #ss220 sec loadout update
+  - CyberVestSecurity #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: SecurityShoes
@@ -1209,11 +1328,11 @@
 - type: loadoutGroup
   id: DetectiveOuterClothing
   name: loadout-group-detective-outerclothing
-  minLimit: 0
   loadouts:
   - DetectiveArmorVest
   - DetectiveCoat
   - DetectiveCoatDark # Corvax-Resprite-Detective
+  - DetectiveCoatGrey
 
 - type: loadoutGroup
   id: SecurityCadetJumpsuit
@@ -1225,6 +1344,8 @@
   - SecurityCadetJumpsuitTurtleneckAlt
   - SecurityCadetJumpskirtTurtleneck
   - SecurityCadetJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - SecurityGrayJumpsuit #ss220-grey-jumpsit-add
+  - SecurityGrayJumpskirt #ss220-grey-jumpsit-add
 
 - type: loadoutGroup
   id: SurvivalSecurity
@@ -1260,6 +1381,8 @@
   - ChiefMedicalOfficerJumpskirt
   - ChiefMedicalOfficerTurtleneckJumpsuit
   - ChiefMedicalOfficerTurtleneckJumpskirt
+  - CMOCorpJumpsuit #SS220-CMOCorporate
+  - CMOCorpJumpskirt #SS220-CMOCorporate
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerOuterClothing
@@ -1268,6 +1391,7 @@
   loadouts:
   - ChiefMedicalOfficerLabCoat
   - ChiefMedicalOfficerWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerNeck
@@ -1321,6 +1445,7 @@
   - RegularLabCoat
   - MedicalDoctorWintercoat
   # - SeniorPhysicianLabCoat  #SS220 Seniors roles
+  - CyberJacketMed #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: MedicalBackpack
@@ -1363,6 +1488,8 @@
   id: MedicalInternJumpsuit
   name: loadout-group-medical-intern-jumpsuit
   loadouts:
+  - InternJumpsuit #SS220 new assistant uniforms
+  - InternJumpskirt #SS220 new assistant uniforms
   - WhiteJumpsuit
   - WhiteJumpskirt
   - MedicalInternJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
@@ -1387,6 +1514,7 @@
   - RegularLabCoat
   - ChemistLabCoat
   - ChemistWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ChemistBackpack
@@ -1420,6 +1548,7 @@
   loadouts:
   - ParamedicWindbreaker
   - ParamedicWintercoat
+  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
 
 - type: loadoutGroup
   id: ParamedicShoes

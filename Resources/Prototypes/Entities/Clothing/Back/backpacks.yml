@@ -4,7 +4,7 @@
   name: backpack
   description: You wear this on your back and put items into it.
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
     sound:
       path: /Audio/SS220/Effects/Drop/clothing_bag.ogg
       params:
@@ -53,6 +53,7 @@
   id: ClothingBackpackIan
   name: Ian's backpack
   description: Sometimes he wears it.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Back/Backpacks/ian.rsi
@@ -61,7 +62,7 @@
       collection: IanBark
 
 - type: entity
-  parent: [ClothingBackpack, BaseRestrictedContraband]
+  parent: [ClothingBackpack]
   id: ClothingBackpackSecurity
   name: security backpack
   description: It's a very robust backpack.
@@ -70,7 +71,7 @@
     sprite: Clothing/Back/Backpacks/security.rsi
 
 - type: entity
-  parent: [ClothingBackpack, BaseRestrictedContraband]
+  parent: [ClothingBackpack]
   id: ClothingBackpackBrigmedic
   name: brigmedic backpack
   description: It's a very sterile backpack.
@@ -106,7 +107,7 @@
     sprite: Clothing/Back/Backpacks/medical.rsi
 
 - type: entity
-  parent: [ClothingBackpack, BaseCommandContraband]
+  parent: [ClothingBackpack]
   id: ClothingBackpackCaptain
   name: captain's backpack
   description: It's a special backpack made exclusively for Nanotrasen officers.
@@ -189,7 +190,7 @@
 - type: entity
   parent: ClothingBackpack
   id: ClothingBackpackMerc
-  name: merc bag
+  name: mercenary bag
   description: A backpack that has been in many dangerous places, a reliable combat backpack.
   components:
     - type: Sprite
@@ -197,7 +198,7 @@
 
 #ERT
 - type: entity
-  parent: ClothingBackpack
+  parent: [ ClothingBackpack]
   id: ClothingBackpackERTLeader
   name: ERT leader backpack
   description: A spacious backpack with lots of pockets, worn by the Commander of an Emergency Response Team.
@@ -274,7 +275,7 @@
 
 #SS220 RETURNED FOR CENTCOMM MAP
 - type: entity
-  noSpawn: false
+
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackDeathSquadFilled
   name: death squad backpack
@@ -306,7 +307,7 @@
 
 #Syndicate
 - type: entity
-  parent: [ClothingBackpack, BaseSyndicateContraband]
+  parent: [ClothingBackpack]
   id: ClothingBackpackSyndicate
   name: syndicate backpack
   description:

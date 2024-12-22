@@ -1,5 +1,5 @@
 - type: entity
-  parent: [IDCardStandard, BaseSyndicateContraband] #ss-220 FakeCont
+  parent: [IDCardStandard] #ss-220 FakeCont
   id: EmagUnlimited
   suffix: Unlimited
   name: cryptographic sequencer

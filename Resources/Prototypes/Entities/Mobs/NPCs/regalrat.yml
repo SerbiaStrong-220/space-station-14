@@ -121,6 +121,12 @@
   - type: Grammar
     attributes:
       gender: male
+    # ss220 lowTTKUpdate
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: RatKing
+    # ss220 lowTTKUpdate
+  - type: Sharp
 
 - type: entity
   id: MobRatKingBuff

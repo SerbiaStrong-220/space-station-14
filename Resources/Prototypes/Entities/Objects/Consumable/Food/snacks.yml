@@ -129,6 +129,10 @@
   - type: Sprite
     state: chocolatebar-open
   - type: Item
+  - type: Tag
+    tags:
+      - FoodSnack
+      - ReptilianFood
   - type: SolutionContainerManager
     solutions:
       food:
@@ -680,7 +684,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 30
+        maxVol: 45
         reagents:
         - ReagentId: Fiber
           Quantity: 40

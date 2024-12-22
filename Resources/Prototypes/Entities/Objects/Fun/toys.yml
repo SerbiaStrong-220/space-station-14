@@ -35,6 +35,7 @@
     damage:
       types:
         Blunt: 0
+    hidden: true
   - type: PhysicalComposition
     materialComposition:
       Cloth: 100
@@ -52,6 +53,24 @@
         reagents:
         - ReagentId: Fiber
           Quantity: 10
+  - type: ContainerContainer
+    containers:
+      stash: !type:ContainerSlot {}
+  - type: Speech
+    speechVerb: Default # for pais (In the secret stash)
+  - type: SecretStash
+    secretStashName: secret-stash-plushie
+    blacklist:
+      components:
+      - SecretStash # Prevents being able to insert plushies inside each other (infinite plush)!
+      - NukeDisk # Could confuse the nukies if they don't know that plushies have a stash.
+      tags:
+      - QuantumSpinInverter # It will cause issues with the grinder...
+      - FakeNukeDisk # So you can't tell if the nuke disk is real or fake depending on if it can be inserted or not.
+  - type: ToolOpenable
+    openToolQualityNeeded: Slicing
+    closeToolQualityNeeded: Slicing # Should probably be stitching or something if that gets added
+    name: secret-stash-plushie
 
 - type: entity
   parent: BasePlushie
@@ -282,7 +301,10 @@
   description: An adorable stuffed toy that resembles a lizardperson. Made by CentComm as a token initiative to combat speciesism in work environments. "Welcome your new colleagues as you do this plush, with open arms!"
   components:
   - type: Sprite
+    sprite: Objects/Fun/toys.rsi
     state: plushie_lizard
+  - type: Item
+    heldPrefix: plushielizard
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/weh.ogg
@@ -323,6 +345,25 @@
     equippedPrefix: lizard
     slots:
     - HEAD
+  - type: Speech
+    speechVerb: Reptilian # for pais (In the secret stash)
+
+- type: entity
+  parent: PlushieLizard
+  id: PlushieRainbowLizard #Weh but gay
+  description: An adorable stuffed toy that resembles a lizardperson of every color. You just might trip while staring at it...
+  name: rainbow lizard plushie
+  components:
+  - type: PointLight
+    radius: 1.5
+    energy: 2
+  - type: RgbLightController
+    layers: [ 0 ]
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: lizard-equipped-HELMET
+        shader: unshaded
 
 - type: entity
   parent: PlushieLizard
@@ -331,7 +372,8 @@
   - type: Item
     size: Small
   - type: Sprite
-    state: plushie_lizard_mirrored
+    state: plushie_lizard
+    scale: -1, 1
 
 - type: entity
   parent: BasePlushie
@@ -375,6 +417,58 @@
           Quantity: 10
         - ReagentId: JuiceThatMakesYouWeh
           Quantity: 10
+
+- type: entity
+  parent: PlushieLizard
+  id: PlushieLizardInversed #Hew!
+  name: drazil plushie
+  description: An adorable stuffed toy that resembles a lizardperson from an inversed dimension. Hew!
+  components:
+  - type: Sprite
+    state: plushie_lizard_inversed
+  - type: Item
+    heldPrefix: plushielizardinversed
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: Food
+    requiresSpecialDigestion: true
+    useSound:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: MeleeWeapon
+    wideAnimationRotation: 180
+    soundHit:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: JuiceThatMakesYouHew
+        Quantity: 30
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+        - ReagentId: JuiceThatMakesYouHew
+          Quantity: 10
+  - type: Clothing
+    quickEquip: false
+    sprite: Objects/Fun/toys.rsi
+    equippedPrefix: lizard-inversed
+    slots:
+    - HEAD
+
 
 - type: entity
   parent: BasePlushie
@@ -460,11 +554,21 @@
   - type: Sprite
     sprite: Objects/Fun/sharkplush.rsi
     state: blue
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/rawr.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Items/Toys/rawr.ogg
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/rawr.ogg
   - type: EmitSoundOnActivate
     sound:
+      path: /Audio/Items/Toys/rawr.ogg
+  - type: MeleeWeapon
+    wideAnimationRotation: 180
+    soundHit:
       path: /Audio/Items/Toys/rawr.ogg
   - type: Item
     heldPrefix: blue
@@ -561,6 +665,11 @@
       path: /Audio/Effects/bite.ogg
     angle: 0
     animation: WeaponArcBite # Rrrr!
+  - type: Tag
+    tags:
+      - Payload
+      - ClothMade
+      - PlushieCarp
 
 - type: entity
   parent: PlushieCarp
@@ -930,8 +1039,15 @@
   - type: Sprite
     sprite: Objects/Fun/toys.rsi
     state: foamcrossbow
+  #ss220 toys begin
   - type: Item
-    size: Normal
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+  #- type: Item
+  #  size: Normal
+  #ss220 toys end
     sprite: Objects/Fun/toys.rsi
     heldPrefix: foamcrossbow
   - type: Gun
@@ -968,6 +1084,7 @@
   name: cap gun
   description: Looks almost like the real thing! Ages 8 and up.
   components:
+  - type: AmmoCounter #SS220-FIX bullet show
   - type: Sprite
     sprite: Objects/Fun/toys.rsi
     layers:
@@ -1004,6 +1121,11 @@
   - type: ContainerContainer
     containers:
       revolver-ammo: !type:Container
+  #ss220 recyclable-plastic-pistols begin
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 150
+  #ss220 recyclable-plastic-pistols end
 
 - type: entity
   parent: RevolverCapGun
@@ -1220,6 +1342,14 @@
     heldPrefix: orb
   - type: TileFrictionModifier
     modifier: 0.001
+  # ss220 PonderingOrb speak on use begin
+  - type: SpeakOnTrigger
+    pack: PonderingOrbPhrases
+  - type: UseDelay
+    delay: 10
+  - type: Speech
+    speechSounds: Pai
+  # ss220 PonderingOrb speak on use end
 
 - type: entity
   parent: BaseItem
@@ -1228,8 +1358,8 @@
   description: New Sandy-Cat plastic sword! Comes with realistic sound and full color! Looks almost like the real thing!
   components:
     - type: EnergySword
-      colorOptions:
-        - DodgerBlue
+    #  colorOptions: ss220 toy sword all colors
+    #    - DodgerBlue ss220 toy sword all colors
     - type: ItemToggle
       soundActivate:
         path: /Audio/Weapons/ebladeon.ogg
@@ -1319,10 +1449,9 @@
     sprite: Objects/Weapons/Melee/cutlass.rsi
     state: foam_icon
   - type: MeleeWeapon
+    wideAnimationRotation: -135
     attackRate: 1.5
     range: 2.0
-    angle: 0
-    animation: WeaponArcThrust
     damage:
       types:
         Blunt: 0
@@ -1375,6 +1504,7 @@
     - type: DisarmMalus
       malus: 0
     - type: MeleeWeapon
+      wideAnimationRotation: -135 #SS220-Fix ClownHammer wideAnimation
       soundHit:
         collection: RubberHammer
         params:
@@ -1545,3 +1675,52 @@
       params:
         volume: -9
         maxDistance: 3
+
+- type: entity
+  parent: BasePlushie
+  id: RubberChicken
+  name: rubber chicken
+  description: A stress inducing parody of nature's most delectable avian.
+  components:
+  - type: Sprite
+    state: rubber_chicken
+  - type: EmitSoundOnUse
+    sound:
+      collection: RubberChicken
+      params:
+        variation: 0.125
+  - type: EmitSoundOnLand
+    sound:
+      collection: RubberChicken
+      params:
+        variation: 0.125
+  - type: EmitSoundOnActivate
+    sound:
+      collection: RubberChicken
+      params:
+        variation: 0.125
+  - type: EmitSoundOnCollide
+    sound:
+      collection: RubberChicken
+      params:
+        variation: 0.125
+  - type: EmitSoundOnTrigger
+    sound:
+      collection: RubberChicken
+      params:
+        variation: 0.125
+  - type: Food
+    requiresSpecialDigestion: true
+    useSound:
+      collection: RubberChicken
+      params:
+        variation: 0.125
+  - type: MeleeWeapon
+    wideAnimationRotation: 110
+    soundHit:
+      collection: RubberChicken
+      params:
+        variation: 0.125
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 25

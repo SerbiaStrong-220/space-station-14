@@ -27,7 +27,7 @@
 
 - type: entity
   name: china lake
-  parent: [BaseWeaponLauncher, BaseGunWieldable, BaseSyndicateContraband]
+  parent: [BaseWeaponLauncher, BaseGunWieldable]
   id: WeaponLauncherChinaLake
   description: PLOOP.
   components:
@@ -65,7 +65,7 @@
 
 - type: entity
   name: RPG-7
-  parent: [ BaseWeaponLauncher, BaseMajorContraband ]
+  parent: [ BaseWeaponLauncher]
   id: WeaponLauncherRocket
   description: A modified ancient rocket-propelled grenade launcher.
   components:
@@ -302,6 +302,7 @@
           unshaded:
             True: { state: base-unshaded }
             False: { state: base-unshaded-off }
+    - type: PacifismAllowedGun
 
 # Admeme
 - type: entity

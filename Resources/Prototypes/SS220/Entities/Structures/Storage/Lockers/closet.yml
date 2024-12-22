@@ -119,3 +119,16 @@
   - type: EntityStorageVisuals
     stateDoorOpen: generic_open
     stateDoorClosed: generic_red_door
+
+- type: entity
+  id: LockerMagistrate
+  parent: LockerBase
+  name: magistrate locker
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: nt
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: magistrate_door
+  - type: AccessReader
+    access: [ [ "Magistrate" ] ]

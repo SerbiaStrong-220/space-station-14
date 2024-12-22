@@ -9,12 +9,19 @@
   - type: Icon
     sprite: Mobs/Species/Slime/parts.rsi
     state: full
+# SS220-change-races-height begin
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    scale: 0.9, 0.9
+# SS220-change-races-height end
   - type: Body
     prototype: Slime
     requiredLegs: 2
   # they like eat it idk lol
   - type: Storage
     clickInsert: false
+    openOnActivate: false
     grid:
     - 0,0,1,2
     maxItemSize: Large
@@ -28,8 +35,6 @@
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
-      enum.VoiceMaskUIKey.Key:
-        type: VoiceMaskBoundUserInterface
       enum.HumanoidMarkingModifierKey.Key:
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
@@ -114,6 +119,20 @@
     spawned:
     - id: FoodMeatSlime
       amount: 5
+# SS220-change-races-height begin
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.325
+        density: 185
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+# SS220-change-races-height end
   - type: Respirator
     damage:
       types:
@@ -139,6 +158,10 @@
   id: MobSlimePersonDummy
   categories: [ HideSpawnMenu ]
   components:
+# SS220-change-races-height begin
+  - type: Sprite
+    scale: 0.9, 0.9
+# SS220-change-races-height end
   - type: HumanoidAppearance
     species: SlimePerson
   - type: Inventory

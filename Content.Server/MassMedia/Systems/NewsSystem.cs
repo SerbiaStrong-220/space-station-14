@@ -4,7 +4,6 @@ using Content.Server.CartridgeLoader;
 using Content.Server.CartridgeLoader.Cartridges;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
-using Content.Server.Interaction;
 using Content.Server.MassMedia.Components;
 using Content.Server.Popups;
 using Content.Server.Station.Systems;
@@ -29,8 +28,6 @@ public sealed class NewsSystem : SharedNewsSystem
 {
     [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly InteractionSystem _interaction = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoaderSystem = default!;
@@ -38,7 +35,6 @@ public sealed class NewsSystem : SharedNewsSystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly GameTicker _ticker = default!;
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
 
     public override void Initialize()
@@ -54,6 +50,8 @@ public sealed class NewsSystem : SharedNewsSystem
             subs.Event<NewsWriterDeleteMessage>(OnWriteUiDeleteMessage);
             subs.Event<NewsWriterArticlesRequestMessage>(OnRequestArticlesUiMessage);
             subs.Event<NewsWriterPublishMessage>(OnWriteUiPublishMessage);
+            subs.Event<NewsWriterSaveDraftMessage>(OnNewsWriterDraftUpdatedMessage);
+            subs.Event<NewsWriterRequestDraftMessage>(OnRequestArticleDraftMessage);
         });
 
         // News reader
@@ -259,7 +257,7 @@ public sealed class NewsSystem : SharedNewsSystem
         if (!TryGetArticles(ent, out var articles))
             return;
 
-        var state = new NewsWriterBoundUserInterfaceState(articles.ToArray(), ent.Comp.PublishEnabled, ent.Comp.NextPublish);
+        var state = new NewsWriterBoundUserInterfaceState(articles.ToArray(), ent.Comp.PublishEnabled, ent.Comp.NextPublish, ent.Comp.DraftTitle, ent.Comp.DraftContent);
         _ui.SetUiState(ent.Owner, NewsWriterUiKey.Key, state);
     }
 
@@ -310,9 +308,6 @@ public sealed class NewsSystem : SharedNewsSystem
 
     private bool CanUse(EntityUid user, EntityUid console)
     {
-        // This shouldn't technically be possible because of BUI but don't trust client.
-        if (!_interaction.InRangeUnobstructed(console, user))
-            return false;
 
         if (TryComp<AccessReaderComponent>(console, out var accessReaderComponent))
         {
@@ -321,4 +316,14 @@ public sealed class NewsSystem : SharedNewsSystem
         return true;
     }
 
+    private void OnNewsWriterDraftUpdatedMessage(Entity<NewsWriterComponent> ent, ref NewsWriterSaveDraftMessage args)
+    {
+        ent.Comp.DraftTitle = args.DraftTitle;
+        ent.Comp.DraftContent = args.DraftContent;
+    }
+
+    private void OnRequestArticleDraftMessage(Entity<NewsWriterComponent> ent, ref NewsWriterRequestDraftMessage msg)
+    {
+        UpdateWriterUi(ent);
+    }
 }

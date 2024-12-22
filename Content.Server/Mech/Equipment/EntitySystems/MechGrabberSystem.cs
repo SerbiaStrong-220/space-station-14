@@ -129,12 +129,18 @@ public sealed class MechGrabberSystem : EntitySystem
             return;
         var target = args.Target;
 
+        //ss220 mech grabb fix start
+        if (HasComp<MechComponent>(target))
+            return;
+        //ss220 mech grabb fix end
+
         if (args.Target == args.User || component.DoAfter != null)
             return;
 
         if (TryComp<PhysicsComponent>(target, out var physics) && physics.BodyType == BodyType.Static ||
             HasComp<WallMountComponent>(target) ||
-            HasComp<MobStateComponent>(target))
+            HasComp<MobStateComponent>(target) ||
+            HasComp<MechComponent>(target)) //SS220 Ripley in ripley fix (AddMechToClothing)
         {
             return;
         }
@@ -155,7 +161,7 @@ public sealed class MechGrabberSystem : EntitySystem
             return;
 
         args.Handled = true;
-        component.AudioStream = _audio.PlayPvs(component.GrabSound, uid).Value.Entity;
+        component.AudioStream = _audio.PlayPvs(component.GrabSound, uid)?.Entity;
         var doAfterArgs = new DoAfterArgs(EntityManager, args.User, component.GrabDelay, new GrabberDoAfterEvent(), uid, target: target, used: uid)
         {
             BreakOnMove = true

@@ -5,25 +5,15 @@
   description: Sends your eye back to the core.
   components:
   - type: InstantAction
+    priority: -9
     itemIconStyle: BigAction
     icon:
-      sprite: Interface/Actions/actions_ai.rsi
+      # SS220-resprite start
+      #sprite: Interface/Actions/actions_ai.rsi
+      sprite: SS220/Interface/Actions/actions_ai.rsi
       state: ai_core
+      # SS220-resprite end
     event: !type:JumpToCoreEvent
-
-- type: entity
-  id: ActionShowJobIcons
-  name: Show job icons
-  description: Shows job icons for crew members.
-  components:
-  - type: InstantAction
-    itemIconStyle: BigAction
-    icon:
-      sprite: Interface/Actions/actions_ai.rsi
-      state: job_view
-    event: !type:ActionComponentChangeEvent
-      components:
-      - type: ShowJobIcons
 
 - type: entity
   id: ActionSurvCameraLights
@@ -31,10 +21,13 @@
   description: Enable surveillance camera lights near wherever you're viewing.
   components:
   - type: InstantAction
-    itemIconStyle: BigAction
+    priority: -5
     icon:
-      sprite: Interface/Actions/actions_ai.rsi
+      # SS220-resprite start
+      #sprite: Interface/Actions/actions_ai.rsi
+      sprite: SS220/Interface/Actions/actions_ai.rsi
       state: camera_light
+      # SS220-resprite end
     event: !type:RelayedActionComponentChangeEvent
       components:
       - type: LightOnCollideCollider
@@ -56,9 +49,13 @@
   description: View the laws that you must follow.
   components:
   - type: InstantAction
+    priority: -3
     itemIconStyle: NoItem
     icon:
-      sprite: Interface/Actions/actions_ai.rsi
+      # SS220-resprite start
+      #sprite: SS220/Interface/Actions/actions_ai.rsi
+      sprite: SS220/Interface/Actions/actions_ai.rsi
       state: state_laws
+      # SS220-resprite end
     event: !type:ToggleLawsScreenEvent
     useDelay: 0.5

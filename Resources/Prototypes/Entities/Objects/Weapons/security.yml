@@ -1,6 +1,6 @@
 - type: entity
   name: stun baton
-  parent: [BaseItem, BaseRestrictedContraband]
+  parent: [BaseItem]
   id: Stunbaton
   description: A stun baton for incapacitating people with. Actively harming with this is considered bad tone.
   components:
@@ -79,7 +79,13 @@
     damage:
       types:
         Blunt: 7
+        # Stamina: 55 #ss220 stunbaton fix
+  #ss220 stunbaton fix start
+  - type: ItemToggleDamageOtherOnHit
+    activatedDamage:
+      types:
         Stamina: 55
+  #ss220 stunbaton fix end
   - type: LandAtCursor # it deals stamina damage when thrown
   - type: Battery
     maxCharge: 1000
@@ -128,7 +134,7 @@
 
 - type: entity
   name: truncheon
-  parent: [BaseItem, BaseRestrictedContraband]
+  parent: [BaseItem]
   id: Truncheon
   description: A rigid, steel-studded baton, meant to harm.
   components:
@@ -170,7 +176,7 @@
 
 - type: entity
   name: flash
-  parent: [BaseItem, BaseSecurityScienceCommandContraband]
+  parent: [BaseItem]
   id: Flash
   description: An ultrabright flashbulb with a trigger, which causes the victim to be dazed and lose their eyesight for a moment. Useless when burnt out.
   components:
@@ -231,7 +237,7 @@
 
 - type: entity
   name: portable flasher
-  parent: [BaseMachine, BaseRestrictedContraband]
+  parent: [BaseMachine]
   id: PortableFlasher
   description: An ultrabright flashbulb with a proximity trigger, useful for making an area security-only.
   components:

@@ -12,7 +12,6 @@
       - id: BodySecurityCamera #SS220-Bodycam
 #      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
       - id: ClothingEyesGlassesSecurity
-      - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
 #      - id: ClothingOuterCoatWarden #SS220-MinorTweaks
@@ -42,7 +41,6 @@
       - id: BodySecurityCamera #SS220-Bodycam
 #      - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks
       - id: ClothingEyesGlassesSecurity
-      - id: ClothingHeadsetAltSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
 #      - id: ClothingOuterCoatWarden SS220-MinorTweaks start
@@ -128,6 +126,8 @@
         prob: 0.5
       - id: ClothingOuterCoatLabSecurityMedic # Corvax-Resprite
         prob: 0.5
+      - id: OxygenTankFilled   #SS220 add-tanks-brigmed
+      - id: NitrogenTankFilled #SS220 add-tanks-brigmed
 
 - type: entity
   id: LockerDetectiveFilled
@@ -159,6 +159,7 @@
       - id: DetectiveHiddenCamera # SS220 add-detective-camera
         amount: 3
       - id: HandLabeler
+      - id: BoxTapeRecorder # SS220 Tape Recorder #32234 early merge
 
 - type: entity
   id: ClosetBombFilled
@@ -178,7 +179,7 @@
         prob: 0.5
 
 - type: entity
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafeBaseSecure]
   id: GunSafeDisabler
   name: disabler safe
   components:
@@ -188,7 +189,7 @@
       amount: 5
 
 - type: entity
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafeBaseSecure]
   id: GunSafePistolMk58
   name: mk58 safe
   components:
@@ -200,7 +201,7 @@
       amount: 8
 
 - type: entity
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafeBaseSecure]
   id: GunSafeRifleLecter
   name: lecter safe
   components:
@@ -212,7 +213,7 @@
       amount: 4
 
 - type: entity
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafeBaseSecure]
   id: GunSafeSubMachineGunDrozd
   name: drozd safe
   components:
@@ -224,7 +225,7 @@
       amount: 4
 
 - type: entity
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafeBaseSecure]
   id: GunSafeShotgunEnforcer
   name: enforcer safe
   components:
@@ -236,7 +237,7 @@
       amount: 4
 
 - type: entity
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafeBaseSecure]
   id: GunSafeShotgunKammerer
   name: kammerer safe
   components:
@@ -250,7 +251,7 @@
 - type: entity
   id: GunSafeSubMachineGunWt550
   suffix: Wt550
-  parent: [GunSafe, BaseRestrictedContraband]
+  parent: [GunSafeBaseSecure]
   name: wt550 safe
   components:
   - type: StorageFill
@@ -261,7 +262,7 @@
       amount: 4
 
 - type: entity
-  parent: GunSafe
+  parent: GunSafeBaseSecure
   id: GunSafeLaserCarbine
   name: laser safe
   components:

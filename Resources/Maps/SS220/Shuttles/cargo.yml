@@ -18,6 +18,7 @@ entities:
       name: NT-CV "Mule"
     - type: Transform
       pos: 2.2710133,-2.4148211
+      parent: invalid
     - type: MapGrid
       chunks:
         -1,0:
@@ -173,6 +174,7 @@ entities:
         chunkSize: 4
     - type: OccluderTree
     - type: Shuttle
+      fTLCooldown: 300
     - type: GridPathfinding
     - type: RadiationGridResistance
     - type: SpreaderGrid
@@ -249,36 +251,24 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 0.5,4.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 25
   - uid: 6
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 0.5,0.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 4
   - uid: 21
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -5.5,4.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 27
   - uid: 22
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -5.5,0.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 20
 - proto: CableApcExtension
   entities:
   - uid: 100
@@ -643,108 +633,72 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 0.5,4.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 36
   - uid: 39
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -0.5,4.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 36
   - uid: 40
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -1.5,4.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 36
   - uid: 41
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -5.5,0.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 34
   - uid: 42
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -4.5,0.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 34
   - uid: 43
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -3.5,0.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 34
   - uid: 46
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -0.5,0.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 35
   - uid: 47
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -3.5,4.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 37
   - uid: 48
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -4.5,4.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 37
   - uid: 49
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -5.5,4.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 37
   - uid: 51
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -1.5,0.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 35
   - uid: 167
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 0.5,0.5
       parent: 173
-    - type: DeviceLinkSink
-      links:
-      - 35
 - proto: GasPipeStraight
   entities:
   - uid: 69

@@ -74,3 +74,125 @@
     sprite: SS220/Clothing/Head/Hats/FloppaHat.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/FloppaHat.rsi
+
+- type: entity
+  parent: ClothingHeadHatHoodBioGeneral
+  id: ClothingHeadHatHoodBioChemistry
+  name: bio hood
+  suffix: Chemistry
+  description: An advanced hood for chemistry officers that protects the head and face from biological contaminants.
+  components:
+  - type: IdentityBlocker
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/Bio/chemistry.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/Bio/chemistry.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodChaplainHoodWhite
+  categories: [ HideSpawnMenu ]
+  name: chaplain's white hood
+  description: Maximum piety in this star system.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/chaplainwhite.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/chaplainwhite.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodHeartFinaly
+  name: сердечный капюшон
+  description: Капюшон.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/HeartHood.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/HeartHood.rsi
+
+# SS220 wintercoats hoods start
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodWardenArmored
+  categories: [ HideSpawnMenu ]
+  name: warden's coat hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodwardenarmored.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodwardenarmored.rsi
+
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodWinterChef
+  categories: [ HideSpawnMenu ]
+  name: chef coat hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodchef.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodchef.rsi
+
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodWinterGen
+  categories: [ HideSpawnMenu ]
+  name: genetics coat hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodgen.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodgen.rsi
+
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodWinterViro
+  categories: [ HideSpawnMenu ]
+  name: virology coat hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodviro.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodviro.rsi
+
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodWinterAtmos
+  categories: [ HideSpawnMenu ]
+  name: atmospherics coat hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodatmos.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodatmos.rsi
+
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodWinterSyndieCapArmored
+  categories: [ HideSpawnMenu ]
+  name: syndicate's coat hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodsyndiecaparmored.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodsyndiecaparmored.rsi
+
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatHoodWinterSyndieCap
+  categories: [ HideSpawnMenu ]
+  name: syndicate coat hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodsyndiearmored.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/Coat/hoodsyndiearmored.rsi
+# SS220 wintercoats hoods end

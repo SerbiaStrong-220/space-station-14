@@ -4,6 +4,7 @@
   weights:
     Dragon: 1
     Revenant: 1
+    SpiderQueen: 1 #SS220 spider queen antag
 
 - type: ninjaHackingThreat
   id: Dragon

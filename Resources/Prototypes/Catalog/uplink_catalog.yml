@@ -88,7 +88,7 @@
   productEntity: ThrowingKnivesKit
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 2 #ss220-uplink-minor-fixes-and-discounts
   cost:
     Telecrystal: 4 #SS220-underused-uplinks-stuff
   categories:
@@ -115,6 +115,11 @@
   productEntity: EnergySwordDouble
   cost:
     Telecrystal: 16
+  #ss220-uplink-minor-fixes-and-discounts-begin #Discount added for the reason that on the official build d-esword is only in the nukies uplink, but nukies don't have discounts
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 9
+  #ss220-uplink-minor-fixes-and-discounts-end
   categories:
   - UplinkWeaponry
   conditions:
@@ -187,7 +192,7 @@
   discountDownTo:
     Telecrystal: 6
   cost:
-    Telecrystal: 12
+    Telecrystal: 14 #ss220TTKUpdate
   categories:
   - UplinkWeaponry
 
@@ -254,9 +259,9 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledLMG
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 24
+    Telecrystal: 30 #ss220TTKUpdate
   cost:
-    Telecrystal: 30
+    Telecrystal: 40 #ss220TTKUpdate
   categories:
   - UplinkWeaponry
   conditions:
@@ -575,7 +580,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi, state: icon }
   productEntity: SpeedLoaderMagnumAP
   cost:
-    Telecrystal: 3
+    Telecrystal: 4 #ss220TTKUpdate
   categories:
   - UplinkAmmo
 
@@ -597,7 +602,7 @@
   description: uplink-sniper-ammo-desc
   productEntity: MagazineBoxAntiMateriel
   cost:
-    Telecrystal: 2
+    Telecrystal: 4 #ss220TTKUpdate
   categories:
   - UplinkAmmo
 
@@ -755,9 +760,11 @@
   name: uplink-cigarettes-name
   description: uplink-cigarettes-desc
   productEntity: CigPackSyndicate
-  discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 1
+  #ss220 1 tc uplink sales fix start
+  #discountCategory: rareDiscounts
+  #discountDownTo:
+    #Telecrystal: 1
+  #ss220 1 tc uplink sales fix end
   cost:
     Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
@@ -770,9 +777,9 @@
   productEntity: ClothingBackpackDuffelSyndicateMedicalBundleFilled
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 12
+    Telecrystal: 16
   cost:
-    Telecrystal: 20
+    Telecrystal: 24
   categories:
   - UplinkChemicals
   conditions:
@@ -844,8 +851,8 @@
   id: UplinkBinaryTranslatorKey
   name: uplink-binary-translator-key-name
   description: uplink-binary-translator-key-desc
-  icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: rd_label }
-  productEntity: EncryptionKeyBinary
+  icon: { sprite: /Textures/Objects/Devices/encryption_keys.rsi, state: ai_label }
+  productEntity: EncryptionKeyBinarySyndicate
   cost:
     Telecrystal: 1
   categories:
@@ -970,7 +977,7 @@
   discountDownTo:
     Telecrystal: 2
   cost:
-    Telecrystal: 4
+    Telecrystal: 3
   categories:
   - UplinkDisruption
 
@@ -1076,10 +1083,48 @@
   categories:
   - UplinkDisruption
   conditions:
-    - !type:BuyerWhitelistCondition
+  - !type:BuyerWhitelistCondition
       blacklist:
         components:
           - SurplusBundle
+
+#   SS 220 -  Antimov Laws hided from uplink - begin
+# - type: listing
+#   id: UplinkAntimovCircuitBoard
+#   name: uplink-antimov-law-name
+#   description: uplink-antimov-law-desc
+#   productEntity: AntimovCircuitBoard
+#   discountCategory: usualDiscounts
+#   discountDownTo:
+#     Telecrystal: 10
+#   cost:
+#     Telecrystal: 14
+#   categories:
+#   - UplinkDisruption
+#   conditions:
+#   - !type:StoreWhitelistCondition
+#      blacklist:
+#        tags:
+#        - NukeOpsUplink
+#   SS 220 -  Antimov Laws hided from uplink - end
+
+- type: listing
+  id: UplinkNukieAntimovCircuitBoard
+  name: uplink-antimov-law-name
+  description: uplink-antimov-law-desc
+  productEntity: AntimovCircuitBoard
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 36 # 20 default | SS220 Antimov Laws hide changes
+  cost:
+    Telecrystal: 40 # 24 default | SS220 Antimov Laws hide changes
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkSurplusBundle
@@ -1135,6 +1180,16 @@
 #  categories:
 #    - UplinkDisruption
 #ss220-uplink-fix-end
+
+- type: listing
+  id: UplinkCameraBug
+  name: uplink-cameraBug-name
+  description: uplink-cameraBug-desc
+  productEntity: CameraBug
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkDisruption
 
 # Allies
 
@@ -1328,7 +1383,7 @@
   productEntity: FreedomImplanter
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 1 #ss220-uplink-minor-fixes-and-discounts
   cost:
     Telecrystal: 3 #SS220-underused-uplinks-stuff
   categories:
@@ -1368,9 +1423,11 @@
   description: uplink-emp-implanter-desc
   icon: { sprite: /Textures/Objects/Magic/magicactions.rsi, state: shield }
   productEntity: EmpImplanter
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 1
+  #ss220 1 tc uplink sales fix start
+  #discountCategory: veryRareDiscounts
+  #discountDownTo:
+    #Telecrystal: 1
+  #ss220 1 tc uplink sales fix end
   cost:
     Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
@@ -1438,9 +1495,11 @@
   description: uplink-uplink-implanter-desc
   icon: { sprite: /Textures/Objects/Devices/communication.rsi, state: old-radio }
   productEntity: UplinkImplanter
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 1
+  #ss220 1 tc uplink sales fix start
+  #discountCategory: usualDiscounts
+  #discountDownTo:
+    #Telecrystal: 1
+  #ss220 1 tc uplink sales fix end
   cost:
     Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
@@ -1591,9 +1650,11 @@
   description: uplink-eva-syndie-desc
   icon: { sprite: /Textures/Clothing/OuterClothing/Suits/eva_syndicate.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateEVABundle
-  discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 1
+  #ss220 1 tc uplink sales fix start
+  #discountCategory: rareDiscounts
+  #discountDownTo:
+    #Telecrystal: 1
+  #ss220 1 tc uplink sales fix end
   cost:
     Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
@@ -1643,17 +1704,20 @@
   id: UplinkClothingOuterArmorRaid
   name: uplink-syndie-raid-name
   description: uplink-syndie-raid-desc
-  icon: { sprite: /Textures/Clothing/OuterClothing/Armor/syndie-raid.rsi, state: icon }
+  # icon: { sprite: /Textures/Clothing/OuterClothing/Armor/syndie-raid.rsi, state: icon }
+  icon: { sprite: /Textures/SS220/Clothing/OuterClothing/Armor/syndie-raid.rsi, state: icon } #ss220 raid suit resprite
   productEntity: ClothingBackpackDuffelSyndicateRaidBundle
   cost:
     Telecrystal: 8
   categories:
   - UplinkWearables
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
+#ss220 raid suit rework begin
+#  conditions:
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#      tags:
+#      - NukeOpsUplink
+#ss220 raid suit rework end
 
 - type: listing
   id: UplinkHardsuitSyndieElite
@@ -1703,21 +1767,33 @@
       - LoneOpsUplink
 # ss220-fix-uplink-end
 
+#SS220 Syndie visor buff begin
+#- type: listing
+#  id: UplinkClothingEyesHudSyndicate
+#  name: uplink-clothing-eyes-hud-syndicate-name
+#  description: uplink-clothing-eyes-hud-syndicate-desc
+#  productEntity: ClothingEyesHudSyndicate
+#  cost:
+#    Telecrystal: 2
+#  categories:
+#    - UplinkWearables
+#  conditions:
+#   - !type:StoreWhitelistCondition
+#      blacklist:
+#        tags:
+#        - NukeOpsUplink
+#        - LoneOpsUplink
+
 - type: listing
-  id: UplinkClothingEyesHudSyndicate
-  name: uplink-clothing-eyes-hud-syndicate-name
-  description: uplink-clothing-eyes-hud-syndicate-desc
-  productEntity: ClothingEyesHudSyndicate
+  id: UplinkClothingEyesHudSyndicateAgent
+  name: uplink-clothing-eyes-hud-syndicate-agent-name
+  description: uplink-clothing-eyes-hud-syndicate-agent-desc
+  productEntity: ClothingEyesHudSyndicateAgent
   cost:
     Telecrystal: 2
   categories:
     - UplinkWearables
-  conditions:
-    - !type:StoreWhitelistCondition
-      blacklist:
-        tags:
-        - NukeOpsUplink
-        - LoneOpsUplink
+#SS220 Syndie visor buff end
 
 - type: listing
   id: UplinkClothingConductingGloves
@@ -1852,8 +1928,11 @@
   name: uplink-operative-suit-name
   description: uplink-operative-suit-desc
   productEntity: ClothingUniformJumpsuitOperative
-  cost:
-    Telecrystal: 1
+  #ss220 free-operative-jumpsuit begin
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  #ss220 free-operative-jumpsuit end
   categories:
   - UplinkPointless
 
@@ -1862,8 +1941,11 @@
   name: uplink-operative-skirt-name
   description: uplink-operative-skirt-desc
   productEntity: ClothingUniformJumpskirtOperative
-  cost:
-    Telecrystal: 1
+  #ss220 free-operative-jumpsuit begin
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  #ss220 free-operative-jumpsuit end
   categories:
   - UplinkPointless
 
@@ -1896,6 +1978,17 @@
     Telecrystal: 1
   categories:
     - UplinkPointless
+
+- type: listing
+  id: UplinkSyndicateBusinessCard
+  name: uplink-business-card-name
+  description: uplink-business-card-desc
+  productEntity: SyndicateBusinessCard
+  categories:
+    - UplinkPointless
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 3
 
 # Job Specific
 

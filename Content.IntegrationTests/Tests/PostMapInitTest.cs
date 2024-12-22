@@ -69,10 +69,14 @@ namespace Content.IntegrationTests.Tests
             "Train",
             "Oasis",
             "Cog",
+            "Gate",
+            "Amber",
+            "Loop",
 
             // SS220 Maps
             "Frankenstein",
             //"Nox",
+            "Astro",
             "Axioma",
 			"Donuts",
             "Eclipse",
@@ -83,6 +87,9 @@ namespace Content.IntegrationTests.Tests
             "Snout",
             "VoidZone",
             "NTvsSSSP",
+
+            // SS220 Test Maps
+            // "TestSM"
         };
 
         /// <summary>

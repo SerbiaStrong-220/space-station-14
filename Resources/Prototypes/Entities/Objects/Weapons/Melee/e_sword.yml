@@ -93,7 +93,7 @@
 
 - type: entity
   name: energy sword
-  parent: [BaseMeleeWeaponEnergy, BaseSyndicateContraband]
+  parent: [BaseMeleeWeaponEnergy]
   id: EnergySword
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Cuts through unarmored targets like butter.
   components:
@@ -108,10 +108,20 @@
       map: [ "blade" ]
   - type: Item
     sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
+    #ss220lowTTKUpdate
+  - type: Reflect
+    reflectProb: 0.45 #ss220 ttkTweaks
+    reflects:
+      - NonEnergy
+      - Energy #SS220-FixReflects
+    spread: 80
+    reflectProbProjectile: 0.40 #ss220 ttkTweaks
+    spreadProjectile: 180
+    #ss220lowTTKUpdate
 
 - type: entity
   name: energy dagger
-  parent: [BaseMeleeWeaponEnergy, BaseSyndicateContraband]
+  parent: [BaseMeleeWeaponEnergy]
   id: EnergyDaggerLoud
   description: A not as loud and dangerous dagger with a beam made of pure, concentrated plasma. This one is completely undisguised.
   components:
@@ -259,7 +269,7 @@
 # Corvax-HiddenDesc-End
 
 - type: entity
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseItem]
   id: EnergyDaggerBox
   name: e-dagger box
   suffix: E-Dagger
@@ -278,7 +288,7 @@
 
 - type: entity
   name: energy cutlass
-  parent: [BaseMeleeWeaponEnergy, BaseMajorContraband]
+  parent: [BaseMeleeWeaponEnergy]
   id: EnergyCutlass
   description: An exotic energy weapon.
   components:
@@ -319,12 +329,13 @@
 
 - type: entity
   name: double-bladed energy sword
-  parent: [BaseMeleeWeaponEnergy, BaseSyndicateContraband]
+  parent: [BaseMeleeWeaponEnergy]
   id: EnergySwordDouble
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
   components:
   - type: ItemToggle
     onUse: false # wielding events control it instead
+    onActivate: false # prevents the weapon from being able to be turned on when it is on the ground
     soundActivate:
       path: /Audio/Weapons/ebladeon.ogg
       params:
@@ -379,12 +390,12 @@
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
 # ss220 FixESword
   - type: Reflect
-    reflectProb: 0.95
+    reflectProb: 0.80 #ss220 ttkTweaks
     reflects:
       - NonEnergy
       - Energy #SS220-FixReflects
     spread: 45
-    reflectProbProjectile: 0.5
+    reflectProbProjectile: 0.70 #ss220lowTTKUpdate
     spreadProjectile: 180
 # ss220 FixESword
 

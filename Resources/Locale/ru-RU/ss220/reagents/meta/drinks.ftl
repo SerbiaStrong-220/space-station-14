@@ -14,3 +14,7 @@ reagent-name-french-75 = френч-75
 reagent-desc-french-75 = Не только блюспейс артиллерия всё ещё может задать жару.
 reagent-name-eggnog = гоголь-моголь
 reagent-desc-eggnog = Взять сыру яичку и кокнуть в кружку, покрошить хлеба, посолить и взболтать.
+reagent-name-champagnesponsor = элитное шампанское
+reagent-desc-champagnesponsor = Элитный вид шампанского.
+reagent-name-ReaperSauce = соус "Тёмный жнец"
+reagent-desc-ReaperSauce = Этот соус оправдывает своё название. Используйте в блюдах на свой страх и риск.

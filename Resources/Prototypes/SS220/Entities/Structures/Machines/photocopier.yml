@@ -34,6 +34,7 @@
     shape:
       !type:PhysShapeCircle
       radius: 0.2
+  - type: StationAiWhitelist
   - type: Photocopier
     formCollections: [ "nanotrasen_station" ]
     contrabandFormCollections: [ "syndicate" ]
@@ -47,6 +48,8 @@
           - FaxableObject
           - Paper
           - ButtScan
+        tags: 
+          - Folder
     tonerSlot:
       insertSound: /Audio/Machines/screwdriveropen.ogg
       ejectSound: /Audio/Machines/screwdriverclose.ogg
@@ -82,6 +85,7 @@
   parent: PhotocopierBase
   name: central command photocopier
   components:
+  - type: StationAiWhitelist
   - type: Photocopier
     formCollections: [ "nanotrasen_station", "nanotrasen_central_command" ]
     tonerSlot:

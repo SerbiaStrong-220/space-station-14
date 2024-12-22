@@ -44,7 +44,7 @@
   id: ClothingMaskGasVoiceChameleon
   suffix: Voice Mask, Chameleon
   components:
-    - type: VoiceMasker
+    - type: VoiceMask
     - type: HideLayerClothing
       slots:
       - Snout
@@ -74,6 +74,12 @@
           - Scientist
           - Borg
 # Corvax-HiddenDesc-End
+    - type: UserInterface
+      interfaces:
+        enum.ChameleonUiKey.Key:
+          type: ChameleonBoundUserInterface
+        enum.VoiceMaskUIKey.Key:
+          type: VoiceMaskBoundUserInterface
 
 - type: entity
   parent: ClothingMaskBase

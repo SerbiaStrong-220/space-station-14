@@ -90,7 +90,14 @@ namespace Content.MapRenderer.Painters
                     var position = transform.LocalPosition;
 
                     var (x, y) = TransformLocalPosition(position, grid);
-                    var data = new EntityData(serverEntity, sprite, x, y);
+                    // SS220 Map Rendering Crash Fix start
+                    //var data = new EntityData(serverEntity, sprite, x, y)
+                    var data = new EntityData(serverEntity, sprite, x, y)
+                    {
+                        MetaData = _sEntityManager.GetComponent<MetaDataComponent>(serverEntity),
+                        LocalPosition = position,
+                    };
+                    // SS220 Map Rendering Crash Fix end
 
                     components.GetOrAdd(transform.GridUid.Value, _ => new List<EntityData>()).Add(data);
                 }

@@ -4,10 +4,14 @@
   name: bomber jacket
   description: A thick, well-worn WW2 leather bomber jacket.
   components:
+# SS220 resprite begin
   - type: Sprite
-    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+#    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/bomber.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+#    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/bomber.rsi
+# SS220 resprite end
 
 - type: entity
   parent: [ClothingOuterStorageBase, AllowSuitStorageClothing, ClothingOuterArmorBasic]
@@ -350,7 +354,7 @@
     sprite: Clothing/OuterClothing/Coats/pirate.rsi
 
 - type: entity
-  parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase, BaseRestrictedContraband]
+  parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase]
   id: ClothingOuterCoatWarden
   name: warden's armored jacket
   description: A sturdy, utilitarian jacket designed to protect a warden from any brig-bound threats.
@@ -359,6 +363,16 @@
     sprite: Clothing/OuterClothing/Coats/warden.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/warden.rsi
+# SS220 new hood start
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodWardenArmored
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+      storagebase: !type:Container
+        ents: []
+# SS220 new hood end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -383,7 +397,7 @@
     sprite: Clothing/OuterClothing/Coats/clownpriest.rsi
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageBase] # SS220 Remove BaseMajorContraband
   id: ClothingOuterDogi
   name: samurai dogi
   description: Dogi is a type of traditional Japanese clothing. The dogi is made of heavy, durable fabric, it is practical in combat and stylish in appearance. It is decorated with intricate patterns and embroidery on the back.
@@ -411,7 +425,7 @@
     sprite: Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageBase]
   id: ClothingOuterCoatSyndieCap
   name: syndicate's coat
   description: The syndicate's coat is made of durable fabric, with gilded patterns.
@@ -422,7 +436,7 @@
     sprite: Clothing/OuterClothing/Coats/syndicate/coatsyndiecap.rsi
 
 - type: entity
-  parent: ClothingOuterCoatHoSTrench
+  parent: [ClothingOuterCoatHoSTrench] # BaseSyndicateContraband as first parent so contraband system takes that as priority, yeah I know
   id: ClothingOuterCoatSyndieCapArmored
   name: syndicate's armored coat
   description: The syndicate's armored coat is made of durable fabric, with gilded patterns.

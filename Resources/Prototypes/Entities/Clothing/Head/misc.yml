@@ -91,6 +91,7 @@
   id: ClothingHeadMirror
   name: head mirror
   description: I doubt even the CMO knows how to use this thing.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Head/Misc/head_mirror.rsi
@@ -173,7 +174,7 @@
     accent: MobsterAccent
 
 - type: entity
-  parent: [ ClothingHeadBase, BaseSyndicateContraband ]
+  parent: [ ClothingHeadBase]
   id: ClothingHeadHatCatEars
   name: cat ears
   description: "NYAH!"
@@ -196,6 +197,11 @@
       Female: FemaleFelinid
       Unsexed: MaleFelinid
   #ss220 special_sounds end
+  #SS220 clothing special emotes begin
+  - type: ClothingSpecialEmotes
+    emotes: ['Meow', 'Mew', 'Growl', 'Purr', 'Hiss']
+  #SS220 clothing special emotes end
+
 
 - type: entity
   parent: [ClothingHeadHatCatEars, BaseToggleClothing]
@@ -322,3 +328,14 @@
       - WhitelistChameleon
   - type: StaticPrice
     price: 1
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHairflower
+  name: hairflower
+  description: A beautiful hairflower that can be inserted between locks of hair.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Misc/hairflower.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Misc/hairflower.rsi

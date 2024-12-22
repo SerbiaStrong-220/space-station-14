@@ -91,7 +91,7 @@
     mustBeEquippedToUse: true
 
 - type: entity
-  parent: [ClothingHandsBase, BaseCommandContraband]
+  parent: [ClothingHandsBase]
   id: ClothingHandsGlovesCaptain
   name: captain gloves
   description: Regal blue gloves, with a nice gold trim. Swanky.
@@ -199,7 +199,7 @@
   - type: FingerprintMask
 
 - type: entity
-  parent: [ClothingHandsBase, BaseToggleClothing, BaseMajorContraband]
+  parent: [ClothingHandsBase, BaseToggleClothing]
   id: ClothingHandsGlovesSpaceNinja
   name: space ninja gloves
   description: These black nano-enhanced gloves insulate from electricity and provide fire resistance.
@@ -227,6 +227,7 @@
     stealthy: true
   - type: ToggleClothing
     action: ActionToggleNinjaGloves
+    disableOnUnequip: true
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
@@ -260,7 +261,7 @@
       - type: CriminalRecordsHacker
 
 - type: entity
-  parent: [ClothingHandsGlovesColorBlack, BaseSecurityEngineeringContraband]
+  parent: [ ClothingHandsGlovesColorBlack]
   id: ClothingHandsGlovesCombat
   name: combat gloves
   description: These tactical gloves are fireproof and shock resistant.
@@ -276,7 +277,7 @@
   - type: Tag
     tags:
     - Kangaroo
-    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
   - type: Insulated
   - type: Fiber
     fiberMaterial: fibers-insulative
@@ -297,7 +298,7 @@
     fiberColor: fibers-black
 
 - type: entity
-  parent: ClothingHandsGlovesCombat
+  parent: [ ClothingHandsGlovesCombat ] # SS220 Remove BaseSecurityCargoContraband
   id: ClothingHandsMercGlovesCombat
   name: mercenary combat gloves
   description: High-quality combat gloves to protect hands from mechanical damage during combat.
@@ -405,15 +406,15 @@
     lockToHands: false
 
 - type: entity
-  parent: [ClothingHandsButcherable, BaseSyndicateContraband]
+  parent: [ClothingHandsButcherable]
   id: ClothingHandsGlovesNorthStar
   name: gloves of the north star
   description: These gloves allow you to punch incredibly fast.
   components:
   - type: Sprite
-    sprite: Clothing/Hands/Gloves/northstar.rsi
+    sprite: SS220/Clothing/Hands/Gloves/northstar.rsi # SS220 sprite fix
   - type: Clothing
-    sprite: Clothing/Hands/Gloves/northstar.rsi
+    sprite: SS220/Clothing/Hands/Gloves/northstar.rsi # SS220 sprite fix
   - type: MeleeWeapon
     autoAttack: true
     attackRate: 4

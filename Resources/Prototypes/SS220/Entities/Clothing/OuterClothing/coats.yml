@@ -63,14 +63,15 @@
 
 - type: entity
   parent: ClothingOuterStorageBase
-  id: ClothingOuterSRTCoat
-  name: пальто ГСН
-  description: Пальто тёмно-синего цвета. Отличная защита от большинства видов урона.
+  id: ClothingOuterBSOCoat
+  name: the Blue Shield operative's coat
+  description: The coat is blue. Excellent protection against most types of damage.
+  suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/SRTCoat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/blueshield_coat.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Coats/SRTCoat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/blueshield_coat.rsi
   - type: TemperatureProtection
     heatingCoefficient: 0.1
     coolingCoefficient: 0.1
@@ -79,10 +80,10 @@
   - type: Armor
     modifiers:
       coefficients:
-        Heat: 0.7
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
+        Heat: 0.65
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.55
         Caustic: 0.75
 
 # Command
@@ -91,6 +92,7 @@
   id: ClothingOuterWhiteCoatCaptain
   name: белое пальто капитана
   description: Белый цвет - символ власти на флоте.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/whitecapcoat.rsi
@@ -107,6 +109,18 @@
     sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatHoPPurpleDress
+  name: purple dress
+  description: The robe of a real smug snake.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
 
 # Cargo
 - type: entity
@@ -132,6 +146,7 @@
   id: ClothingOuterCoatQMWarehouseman
   name: the warehouse manager's coat
   description: A coat that perfectly combines a mature style and a working purpose. In fact, it is your old work coat, which is still intact only thanks to the use of durotan and cigarette ash, which has already eaten into the fabric. You've never understood people putting on layers of clothes over coats.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/qm_warehouseman.rsi
@@ -194,6 +209,7 @@
   id: ClothingOuterCoatDanger
   name: опасная куртка
   description: Опасный лук, опасного человека.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi
@@ -244,3 +260,30 @@
     sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_nt.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_nt.rsi
+
+# WMT Ebent begin
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatBluetunic
+  name: blue army jacket
+  description: The jacket of the line infantry of the great army of the Kingdom.
+  suffix: Ebent, HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/bluetunic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/bluetunic.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatRedtunic
+  name: red army jaket
+  description: The scarlet infantry jacket of the River Republic.
+  suffix: Ebent, HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/redtunic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/redtunic.rsi
+# WMT Ebent end

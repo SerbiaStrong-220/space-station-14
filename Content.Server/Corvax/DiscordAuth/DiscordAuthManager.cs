@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading;
@@ -47,7 +47,7 @@ public sealed class DiscordAuthManager
         _netMgr.RegisterNetMessage<MsgDiscordAuthRequired>();
         _netMgr.RegisterNetMessage<MsgDiscordAuthCheck>(OnAuthCheck);
 
-        _playerMgr.PlayerStatusChanged += OnPlayerStatusChanged;
+        // _playerMgr.PlayerStatusChanged += OnPlayerStatusChanged;
     }
 
     private async void OnAuthCheck(MsgDiscordAuthCheck message)
@@ -55,7 +55,7 @@ public sealed class DiscordAuthManager
         var isVerified = await IsVerified(message.MsgChannel.UserId);
         if (isVerified)
         {
-            var session = _playerMgr.GetSessionByUserId(message.MsgChannel.UserId);
+            var session = _playerMgr.GetSessionById(message.MsgChannel.UserId);
 
             PlayerVerified?.Invoke(this, session);
         }
@@ -83,7 +83,7 @@ public sealed class DiscordAuthManager
 
             var authUrl = await GenerateAuthLink(e.Session.UserId);
             var msg = new MsgDiscordAuthRequired() { AuthUrl = authUrl };
-            e.Session.ConnectedClient.SendMessage(msg);
+            e.Session.Channel.SendMessage(msg);
         }
     }
 

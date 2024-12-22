@@ -24,15 +24,17 @@
     minAngle: 2
     maxAngle: 16
     fireRate: 8
+    burstFireRate: 8
     angleIncrease: 3
     angleDecay: 16
     selectedMode: FullAuto
     availableModes:
     - SemiAuto
     - FullAuto
-    - Burst #ss220 gunmodes 
+    - Burst #ss220 gunmodes
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/smg.ogg
+    defaultDirection: 1, 0
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/Weapons/Guns/Cock/smg_cock.ogg
@@ -64,7 +66,7 @@
 
 - type: entity
   name: Atreides
-  parent: [BaseWeaponSubMachineGun, BaseMajorContraband]
+  parent: [BaseWeaponSubMachineGun]
   id: WeaponSubMachineGunAtreides
   description: Pla-ket-ket-ket-ket! Uses .35 auto ammo.
   components:
@@ -86,8 +88,8 @@
   - type: Appearance
 
 - type: entity
-  name: C-20r sub machine gun
-  parent: [BaseWeaponSubMachineGun, BaseSyndicateContraband]
+  name: C-20r submachine gun
+  parent: [BaseWeaponSubMachineGun]
   id: WeaponSubMachineGunC20r
   description: A firearm that is often used by the infamous nuclear operatives. Uses .35 auto ammo.
   components:
@@ -125,7 +127,7 @@
 
 - type: entity
   name: Drozd
-  parent: [BaseWeaponSubMachineGun, BaseRestrictedContraband]
+  parent: [BaseWeaponSubMachineGun]
   id: WeaponSubMachineGunDrozd
   description: An excellent fully automatic Heavy SMG.
   components:
@@ -146,12 +148,15 @@
     - type: Gun
       minAngle: 21
       maxAngle: 32
-      fireRate: 6
-      selectedMode: FullAuto
+      fireRate: 12
+      burstFireRate: 12
+      selectedMode: Burst
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
-#     availableModes: #ss220 gunmodes
-#        - FullAuto   #ss220 gunmodes
+      availableModes:
+        - Burst
+      shotsPerBurst: 3
+      burstCooldown: 0.25
     - type: ItemSlots
       slots:
         gun_magazine:
@@ -227,7 +232,7 @@
 
 - type: entity
   name: WT550
-  parent: [ BaseWeaponSubMachineGun, BaseRestrictedContraband ]
+  parent: [ BaseWeaponSubMachineGun]
   id: WeaponSubMachineGunWt550
   description: An excellent SMG, produced by NanoTrasen's Small Arms Division. Uses .35 auto ammo.
   components:
@@ -256,6 +261,8 @@
     angleDecay: 6
     selectedMode: FullAuto
     shotsPerBurst: 5
+    burstCooldown: 0.2
+    burstFireRate: 7
     availableModes:
     - SemiAuto
     - Burst

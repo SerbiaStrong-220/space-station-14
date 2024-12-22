@@ -2,6 +2,25 @@
 
 - type: entity
   parent: ClothingNeckBase
+  id: ClothingNeckCloakFieldOfficerCentComm
+  name: плащ Полевого Офицера Центрального Командования
+  description: От этого плаща так и веет властью и вашим увольнением.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/centcomm_fo.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakWhiteCapFormal
+  name: белый формальный плащ капитана
+  description: Роскошный плащ почётного ветерана за выслугу лет.
+  suffix: За время в игре
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/whitecapcloakformal.rsi
+
+- type: entity
+  parent: ClothingNeckBase
   id: ClothingNeckCloakNanotrasenAdmiral
   name: admiral's cape
   description: A cape with gold stitching, worn by Nanotrasen Navy Admirals.
@@ -35,6 +54,26 @@
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/Blueshield.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingCloak1984
+  name: плащ 1984
+  suffix: Shitspawn
+  description: Литерали 1984.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Neck/Cloaks/shitty-1984.rsi
+      scale: 0.125, 0.125
+    - type: Clothing
+      clothingVisuals:
+        neck:
+          - scale: 0.125, 0.125
+            sprite: SS220/Clothing/Neck/Cloaks/shitty-1984.rsi
+            state: equipped-NECK
+    - type: Tag
+      tags:
+      - ClothMade
 
 - type: entity
   parent: ClothingNeckBase

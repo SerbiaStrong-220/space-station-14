@@ -111,7 +111,7 @@
     radius: 4
 
 - type: entity
-  parent: [BaseWeaponCrusher, BaseSecurityCargoContraband]
+  parent: [BaseWeaponCrusher]
   id: WeaponCrusher
   components:
   - type: Tag
@@ -159,11 +159,12 @@
   - type: GunRequiresWield
   - type: Item
     size: Ginormous
+    sprite: Objects/Weapons/Melee/crusher-inhands.rsi
   - type: DisarmMalus
   - type: Prying
 
 - type: entity
-  parent: [ BaseWeaponCrusher, BaseSecurityCargoContraband]
+  parent: [ BaseWeaponCrusher]
   id: WeaponCrusherDagger
   name: crusher dagger
   description: A scaled down version of a proto-kinetic crusher. Uses kinetic energy to vibrate the blade at high speeds.
@@ -181,10 +182,15 @@
   - type: Tag
     tags:
     - Knife
+#SS220-knife-cutter-fix-begin
+  - type: Utensil
+    types:
+      - Knife
+#SS220-knife-cutter-fix-end
 
 # Like a crusher... but better
 - type: entity
-  parent: [ WeaponCrusher, BaseSecurityCargoContraband]
+  parent: [ WeaponCrusher]
   id: WeaponCrusherGlaive
   name: crusher glaive
   description: An early design of the proto-kinetic accelerator, in glaive form.
@@ -201,3 +207,6 @@
   - type: Tag
     tags:
       - Pickaxe
+  - type: Item
+    size: Ginormous
+    sprite: Objects/Weapons/Melee/crusher_glaive-inhands.rsi

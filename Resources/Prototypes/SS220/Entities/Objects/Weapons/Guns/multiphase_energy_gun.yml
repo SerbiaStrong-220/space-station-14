@@ -20,17 +20,20 @@
     - proto: BulletDisabler
       name: firemode-name-disabler
       fireCost: 40
-      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+      gunModifiers:
+        soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
       magState: disabler-mag
     - proto: RedMediumLaser
       name: firemode-name-laser
       fireCost: 62.5
-      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      gunModifiers:
+        soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
       magState: laser-mag
     - proto: BulletEMP
       name: firemode-name-emp
       fireCost: 200
-      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser.ogg
+      gunModifiers:
+        soundGunshot: /Audio/Weapons/Guns/Gunshots/taser.ogg
       magState: emp-mag
   - type: ProjectileBatteryAmmoProvider
     proto: BulletDisabler

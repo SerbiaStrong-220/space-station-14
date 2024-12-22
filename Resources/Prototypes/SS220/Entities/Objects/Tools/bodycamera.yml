@@ -31,7 +31,6 @@
         - SurveillanceCamera
         - SurveillanceCameraMonitor
         - RadioSpeaker
-        - BodyCameraBase
   - type: ActiveListener
     range: 10
   - type: StationAiVision

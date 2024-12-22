@@ -1,0 +1,5 @@
+# Jumpsuit
+- type: loadout
+  id: ServiceWorkerWaiter
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWaiter

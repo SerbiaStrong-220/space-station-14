@@ -106,6 +106,7 @@ public sealed class AdminSystem : EntitySystem
         SubscribeLocalEvent<GameRuleStartedEvent>(OnGameRuleStarted);
         SubscribeLocalEvent<GameRuleEndedEvent>(OnGameRuleEnded);
         // SS220-View-active-gamerules end
+        SubscribeLocalEvent<ActorComponent, EntityRenamedEvent>(OnPlayerRenamed);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -160,6 +161,11 @@ public sealed class AdminSystem : EntitySystem
         RaiseNetworkEvent(ev);
     }
     // SS220-View-active-gamerules end
+
+    private void OnPlayerRenamed(Entity<ActorComponent> ent, ref EntityRenamedEvent args)
+    {
+        UpdatePlayerList(ent.Comp.PlayerSession);
+    }
 
     public void UpdatePlayerList(ICommonSession player)
     {
@@ -368,16 +374,24 @@ public sealed class AdminSystem : EntitySystem
 
     private void UpdatePanicBunker()
     {
+        // SS220 additional admin rights check begin
+        //var hasAdmins = false;
+        //foreach (var admin in _adminManager.AllAdmins)
+        //{
+        //    if (_adminManager.HasAdminFlag(admin, AdminFlags.Admin, includeDeAdmin: PanicBunker.CountDeadminnedAdmins))
+        //    {
+        //        hasAdmins = true;
+        //        break;
+        //    }
+        //}
         var admins = PanicBunker.CountDeadminnedAdmins
             ? _adminManager.AllAdmins
             : _adminManager.ActiveAdmins;
-        // var hasAdmins = admins.Any();
-
-        // SS220 additional admin rights check.
         var hasAdmins = admins
             .Select(x => _adminManager.GetAdminData(_playerManager.GetSessionById(x.UserId)))
             .Where(x => x is not null && x.HasFlag(AdminFlags.Ban) && x.Title != Loc.GetString("admin-manager-admin-data-host-title"))
             .Any();
+        // SS220 additional admin rights check end
 
         // TODO Fix order dependent Cvars
         // Please for the sake of my sanity don't make cvars & order dependent.

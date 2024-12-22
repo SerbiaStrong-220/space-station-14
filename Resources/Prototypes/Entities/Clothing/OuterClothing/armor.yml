@@ -3,7 +3,7 @@
 
 #Basic armor vest
 - type: entity
-  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseRestrictedContraband]
+  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing]
   id: ClothingOuterArmorBasic
   name: armor vest
   description: A standard Type I armored vest that provides decent protection against most types of damage.
@@ -31,12 +31,12 @@
   description: A slim Type I armored vest that provides decent protection against most types of damage.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/security_slim.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/security_slim.rsi #SS220-updated
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/security_slim.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/security_slim.rsi #SS220-updated
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseRestrictedContraband]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
   id: ClothingOuterArmorRiot
   name: riot suit
   description: A suit of semi-flexible polycarbonate body armor with heavy padding to protect against melee attacks. Perfect for fighting delinquents around the station.
@@ -101,20 +101,27 @@
       - Energy
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseSyndicateContraband ]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
   id: ClothingOuterArmorRaid
   name: syndicate raid suit
   description: A somewhat flexible and well-armored suit with a powerful shoulder mounted flashlight manufactured in the Gorlex Marauder's iconic blood-red color scheme, it does not protect its wearer from space.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/syndie-raid.rsi
+    # sprite: Clothing/OuterClothing/Armor/syndie-raid.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/syndie-raid.rsi #ss220 raid suit resprite
     layers:
     - state: icon
+    #ss220 raid suit resprite begin
+    - state: icon-flash
+      visible: false
+      map: [ "light" ]
+    #ss220 raid suit resprite end
     - state: light-overlay
       visible: false
       shader: unshaded
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/syndie-raid.rsi
+    # sprite: Clothing/OuterClothing/Armor/syndie-raid.rsi #ss220 raid suit resprite
+    sprite: SS220/Clothing/OuterClothing/Armor/syndie-raid.rsi #ss220 raid suit resprite
   - type: Armor
     modifiers:
       coefficients:
@@ -123,11 +130,13 @@
         Piercing: 0.35
         Heat: 0.35
         Caustic: 0.5
+        Stamina: 0.3 #SS220 stamina resist fix
+        Radiation: 0.85 #ss220 raid suit rework
   - type: ExplosionResistance
     damageCoefficient: 0.35
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 1 #ss220 raid suit rework
+    sprintModifier: 0.95 #ss220 raid suit rework
   #Shoulder mounted flashlight
   - type: ToggleableLightVisuals
     spriteLayer: light
@@ -171,9 +180,27 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 2
+  #ss220 raid suit rework begin
+  - type: TemperatureProtection
+    heatingCoefficient: 0.15
+    coolingCoefficient: 0.15
+  - type: FireProtection
+    reduction: 0.4
+  - type: NeedleProtection # ss220 needleprotection
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.5
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
+  #ss220 raid suit rework end
 
 - type: entity
-  parent: ClothingOuterBaseLarge
+  parent: [ ClothingOuterBaseLarge,  AllowSuitStorageClothing ]
   id: ClothingOuterArmorCult
   name: acolyte armor
   description: An evil-looking piece of cult armor, made of bones.
@@ -211,7 +238,7 @@
         Radiation: 0
         Caustic: 0.75
   - type: GroupExamine
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
 
 - type: entity
@@ -259,7 +286,7 @@
     sprite: Clothing/OuterClothing/Armor/magusred.rsi
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseCommandContraband]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
   id: ClothingOuterArmorCaptainCarapace
   name: "captain's carapace"
   description: "An armored chestpiece that provides protection whilst still offering maximum mobility and flexibility. Issued only to the station's finest."
@@ -285,7 +312,7 @@
   - type: GroupExamine
 
 - type: entity
-  parent: ClothingOuterBaseLarge
+  parent: [ ClothingOuterBaseLarge,  AllowSuitStorageClothing ]
   id: ClothingOuterArmorChangeling
   name: chitinous armor
   description: Inflates the changeling's body into an all-consuming chitinous mass of armor.
@@ -309,11 +336,11 @@
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: GroupExamine
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
 
 - type: entity
-  parent: ClothingOuterBaseLarge
+  parent: [ ClothingOuterBaseLarge,  AllowSuitStorageClothing ]
   id: ClothingOuterArmorBone
   name: bone armor
   description: Sits on you like a second skin.
@@ -337,11 +364,11 @@
   - type: Construction
     graph: BoneArmor
     node: armor
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
 
 - type: entity
-  parent: ClothingOuterBaseLarge
+  parent: [ ClothingOuterBaseLarge,  AllowSuitStorageClothing ]
   id: ClothingOuterArmorPodWars
   name: ironclad II armor
   description: A repurposed suit of ironclad II armor, a relic of the pod wars.
@@ -358,6 +385,6 @@
         Piercing: 0.6
         Heat: 0.5
   - type: GroupExamine
-  - type: ClothingRequiredStepTriggerImmune
+  - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
 

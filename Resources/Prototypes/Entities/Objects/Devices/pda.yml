@@ -120,16 +120,30 @@
 
 - type: entity
   parent: BasePDA
+  id: BaseSecurityPDA
+  abstract: true
+  components:
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - MessengerCartridgeClient # SS220 Messenger
+
+- type: entity
+  parent: BasePDA
   id: BaseMedicalPDA
   abstract: true
   components:
-  - type: ItemToggle
-    onUse: false
-  - type: ItemTogglePointLight
-  - type: HealthAnalyzer
-    scanDelay: 1
-    scanningEndSound:
-      path: "/Audio/Items/Medical/healthscanner.ogg"
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - CrewManifestCartridge
+      - NotekeeperCartridge
+      - NewsReaderCartridge
+      - MedTekCartridge
+      - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: BasePDA
@@ -203,7 +217,7 @@
   parent: BaseMedicalPDA
   id: MedicalInternPDA
   name: medical intern PDA
-  description: Why isn't it white? Has a built-in health analyzer.
+  description: Why isn't it white?
   components:
   - type: Pda
     id: MedicalInternIDCard
@@ -232,7 +246,7 @@
     - Medical Doctor
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: SecurityCadetPDA
   name: security cadet PDA
   description: Why isn't it red?
@@ -241,8 +255,8 @@
     id: SecurityCadetIDCard
     state: pda-interncadet
   - type: PdaBorderColor
-    borderColor: "#a4a3a6" #SS220 PDA-Resprite
-    accentVColor: "#4977a6" #SS220 PDA-Resprite
+    borderColor: "#717059" #SS220 PDA-Resprite
+    accentVColor: "#A32D26" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
@@ -384,6 +398,7 @@
     penSlot:
       startingItem: CrayonOrange # no pink crayon?!?
       # ^ Still unacceptable.
+      # ^ I would have to concur.
       ejectSound: /Audio/Items/bikehorn.ogg
       priority: -1
       whitelist:
@@ -428,6 +443,15 @@
         density: 5
         mask:
         - ItemMask
+
+- type: entity
+  parent: ClownPDA
+  id: VisitorClownPDA
+  suffix: Visitor
+  components:
+  - type: Pda
+    id: VisitorIDCard
+    state: pda-clown
 
 - type: entity
   parent: BasePDA
@@ -488,6 +512,15 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
+    state: pda-chaplain
+
+- type: entity
+  parent: ChaplainPDA
+  id: VisitorChaplainPDA
+  suffix: Visitor
+  components:
+  - type: Pda
+    id: VisitorIDCard
     state: pda-chaplain
 
 - type: entity
@@ -572,6 +605,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-miner
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - CrewManifestCartridge
+      - NotekeeperCartridge
+      - NewsReaderCartridge
+      - AstroNavCartridge
+      - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: BasePDA
@@ -635,7 +676,16 @@
     state: pda-library
 
 - type: entity
-  parent: BasePDA
+  parent: LibrarianPDA
+  id: VisitorLibrarianPDA
+  suffix: Visitor
+  components:
+  - type: Pda
+    id: VisitorIDCard
+    state: pda-library
+
+- type: entity
+  parent: BaseSecurityPDA
   id: LawyerPDA
   name: lawyer PDA
   description: For lawyers to poach dubious clients.
@@ -651,12 +701,12 @@
         - Write
   - type: PdaBorderColor
     borderColor: "#414452" #SS220 PDA-Resprite
-    accentVColor: "#731611" #SS220 PDA-Resprite
+    accentVColor: "#262c8a" #SS220-Law Department
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
-    - state: "screen-security"
+    - state: "screen-law" #SS220-Law Department
       shader: "unshaded"
     - state: "light_overlay"
       map: [ "enum.PdaVisualLayers.Flashlight" ]
@@ -666,6 +716,15 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
+    state: pda-lawyer
+
+- type: entity
+  parent: LawyerPDA
+  id: VisitorLawyerPDA
+  suffix: Visitor
+  components:
+  - type: Pda
+    id: VisitorIDCard
     state: pda-lawyer
 
 - type: entity
@@ -823,7 +882,7 @@
   parent: BaseMedicalPDA
   id: CMOPDA
   name: chief medical officer PDA
-  description: Extraordinarily shiny and sterile. Has a built-in health analyzer.
+  description: Extraordinarily shiny and sterile.
   components:
   - type: Pda
     id: CMOIDCard
@@ -851,7 +910,7 @@
   parent: BaseMedicalPDA
   id: MedicalPDA
   name: medical PDA
-  description: Shiny and sterile. Has a built-in health analyzer.
+  description: Shiny and sterile.
   components:
   - type: Pda
     id: MedicalIDCard
@@ -880,10 +939,19 @@
     - Medical Doctor
 
 - type: entity
+  parent: MedicalPDA
+  id: VisitorMedicalPDA
+  suffix: Visitor
+  components:
+  - type: Pda
+    id: VisitorIDCard
+    state: pda-medical
+
+- type: entity
   parent: BaseMedicalPDA
   id: ParamedicPDA
   name: paramedic PDA
-  description: Shiny and sterile. Has a built-in rapid health analyzer.
+  description: Shiny and sterile.
   components:
   - type: Pda
     id: ParamedicIDCard
@@ -994,7 +1062,7 @@
     state: pda-science
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: HoSPDA
   name: head of security PDA
   description: Whosoever bears this PDA is the law.
@@ -1020,9 +1088,16 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-hos
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - LogProbeCartridge
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: WardenPDA
   name: warden PDA
   description: The OS appears to have been jailbroken.
@@ -1050,7 +1125,7 @@
     state: pda-warden
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: SecurityPDA
   name: security PDA
   description: Red to hide the stains of passenger blood.
@@ -1104,7 +1179,7 @@
     state: pda-security #SS220-PDA-End
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: CentcomPDA
   name: CentComm PDA
   description: Light green sign of walking bureaucracy.
@@ -1135,6 +1210,16 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-centcom
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - CrewManifestCartridge
+      - NotekeeperCartridge
+      - NewsReaderCartridge
+      - MedTekCartridge
+      - WantedListCartridge
+      - LogProbeCartridge
+      - AstroNavCartridge
 
 - type: entity
   parent: BasePDA #SS220 PDA-Resprite
@@ -1177,6 +1262,10 @@
       - NotekeeperCartridge
       - NewsReaderCartridge
       - LogProbeCartridge
+      - WantedListCartridge
+      - MessengerCartridgeClient # SS220 Messenger
+      - MedTekCartridge
+      - AstroNavCartridge
 
 - type: entity
   parent: CentcomPDA
@@ -1207,7 +1296,7 @@
   suffix: Death Squad
   components:
   - type: Pda
-    id: CentcomIDCardDeathsquad
+    id: CentcomIDCardDeathsquadOperative #SS220-DeathSquad Update
     state: pda-deathsquad #SS220 PDA-Resprite
   - type: PdaBorderColor #SS220 PDA-Resprite
     borderColor: "#212129" #SS220 PDA-Resprite
@@ -1247,6 +1336,15 @@
     handheld: true
     bank: 1
     program: 2
+
+- type: entity
+  parent: MusicianPDA
+  id: VisitorMusicianPDA
+  suffix: Visitor
+  components:
+  - type: Pda
+    id: VisitorIDCard
+    state: pda-musician
 
 - type: entity
   parent: BasePDA
@@ -1302,6 +1400,14 @@
     state: pda-clear
 
 - type: entity
+  parent: ClearPDA
+  id: VisitorPDA
+  components:
+  - type: Pda
+    id: VisitorIDCard
+    state: pda
+
+- type: entity
   parent: BasePDA
   id: SyndiPDA
   name: syndicate PDA
@@ -1332,17 +1438,10 @@
     uiKey: enum.PdaUiKey.Key
     preinstalled:
       - NotekeeperCartridge
-    cartridgeSlot:
-      priority: -1
-      name: Cartridge
-      ejectSound: /Audio/Machines/id_swipe.ogg
-      insertSound: /Audio/Machines/id_insert.ogg
-      whitelist:
-        components:
-          - Cartridge
+      - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: ERTLeaderPDA
   name: ERT Leader PDA
   suffix: Leader
@@ -1370,6 +1469,16 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-ert
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - CrewManifestCartridge
+      - NotekeeperCartridge
+      - NewsReaderCartridge
+      - MedTekCartridge
+      - WantedListCartridge
+      - LogProbeCartridge
+      - AstroNavCartridge
 
 - type: entity
   parent: ERTLeaderPDA
@@ -1445,14 +1554,10 @@
   id: ERTMedicPDA
   name: ERT Medic PDA
   suffix: Medic
-  description: Red for firepower, it's shiny and sterile. Has a built-in rapid health analyzer.
+  description: Red for firepower, it's shiny and sterile.
   components:
   - type: Pda
     id: ERTMedicIDCard
-  - type: HealthAnalyzer
-    scanDelay: 1
-    scanningEndSound:
-      path: "/Audio/Items/Medical/healthscanner.ogg"
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
@@ -1466,6 +1571,15 @@
     - state: "id_overlay"
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false #SS220 PDA-Resprite-End
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - CrewManifestCartridge
+      - NotekeeperCartridge
+      - NewsReaderCartridge
+      - MedTekCartridge
+      - WantedListCartridge
+      - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: ERTLeaderPDA
@@ -1597,7 +1711,7 @@
     state: pda-boxer
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: DetectivePDA
   name: detective PDA
   description: Smells like rain... pouring down the rooftops...
@@ -1623,12 +1737,19 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-detective
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - LogProbeCartridge
 
 - type: entity
   parent: BaseMedicalPDA
   id: BrigmedicPDA
   name: brigmedic PDA
-  description: I wonder whose pulse is on the screen? I hope he doesnt stop... PDA has a built-in health analyzer.
+  description: I wonder whose pulse is on the screen? I hope it doesn't stop...
   components:
   - type: Pda
     id: BrigmedicIDCard
@@ -1652,6 +1773,13 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-brigmedic
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - MedTekCartridge
 
 - type: entity
   parent: ClownPDA
@@ -1750,7 +1878,7 @@
   parent: BaseMedicalPDA
   id: SeniorPhysicianPDA
   name: senior physician PDA
-  description: Smells faintly like iron and chemicals. Has a built-in health analyzer.
+  description: Smells faintly like iron and chemicals.
   components:
   - type: Pda
     id: SeniorPhysicianIDCard
@@ -1776,7 +1904,7 @@
     state: pda-seniorphysician
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: SeniorOfficerPDA
   name: senior officer PDA
   description: Beaten, battered and broken, but just barely useable.
@@ -1862,11 +1990,5 @@
     uiKey: enum.PdaUiKey.Key
     preinstalled:
       - NotekeeperCartridge
-    cartridgeSlot:
-      priority: -1
-      name: Cartridge
-      ejectSound: /Audio/Machines/id_swipe.ogg
-      insertSound: /Audio/Machines/id_insert.ogg
-      whitelist:
-        components:
-          - Cartridge
+      - MedTekCartridge
+      - MessengerCartridgeClient # SS220 Messenger

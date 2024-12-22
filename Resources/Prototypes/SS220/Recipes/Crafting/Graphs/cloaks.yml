@@ -1,0 +1,15 @@
+﻿- type: constructionGraph
+  id: GoliathCloak
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: goliath-cloak
+          steps:
+            - material: GoliathHide
+              amount: 5
+            - material: Cloth
+              amount: 10
+              doAfter: 10
+    - node: goliath-cloak
+      entity: ClothingNeckCloakGoliathCloak

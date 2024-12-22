@@ -24,9 +24,6 @@ namespace Content.Server.StationEvents
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly EventManagerSystem _event = default!;
 
-        public const float MinEventTime = 60 * 8; //SS220 Event_spawn_decrease
-        public const float MaxEventTime = 60 * 15; //SS220 Event_spawn_decrease
-
         protected override void Started(EntityUid uid, BasicStationEventSchedulerComponent component, GameRuleComponent gameRule,
             GameRuleStartedEvent args)
         {

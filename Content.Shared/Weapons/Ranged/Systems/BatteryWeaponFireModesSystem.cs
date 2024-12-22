@@ -133,13 +133,21 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
         //SS220 Add Multifaze gun begin
         var name = string.Empty;
 
-        //if (TryComp(uid, out ProjectileBatteryAmmoProviderComponent? projectileBatteryAmmoProvider))
+        //if (TryComp(uid, out ProjectileBatteryAmmoProviderComponent? projectileBatteryAmmoProviderComponent))
         //{
         //    if (!_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var prototype))
         //        return;
 
-        //    projectileBatteryAmmoProvider.Prototype = fireMode.Prototype;
-        //    projectileBatteryAmmoProvider.FireCost = fireMode.FireCost;
+        //    // TODO: Have this get the info directly from the batteryComponent when power is moved to shared.
+        //    var OldFireCost = projectileBatteryAmmoProviderComponent.FireCost;
+        //    projectileBatteryAmmoProviderComponent.Prototype = fireMode.Prototype;
+        //    projectileBatteryAmmoProviderComponent.FireCost = fireMode.FireCost;
+        //    float FireCostDiff = (float)fireMode.FireCost / (float)OldFireCost;
+        //    projectileBatteryAmmoProviderComponent.Shots = (int)Math.Round(projectileBatteryAmmoProviderComponent.Shots/FireCostDiff);
+        //    projectileBatteryAmmoProviderComponent.Capacity = (int)Math.Round(projectileBatteryAmmoProviderComponent.Capacity/FireCostDiff);
+        //    Dirty(uid, projectileBatteryAmmoProviderComponent);
+        //    var updateClientAmmoEvent = new UpdateClientAmmoEvent();
+        //    RaiseLocalEvent(uid, ref updateClientAmmoEvent);
         //}
 
         if (_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var entProto))
@@ -150,7 +158,7 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
             if (!_gameTiming.ApplyingState)
                 EnsureComp<ProjectileBatteryAmmoProviderComponent>(uid);
 
-            if (TryComp(uid, out ProjectileBatteryAmmoProviderComponent? projectileBatteryAmmoProvider))
+            if (TryComp(uid, out ProjectileBatteryAmmoProviderComponent? projectileBatteryAmmoProviderComponent))
             {
 
                 if (fireMode.FireModeName is not null)
@@ -158,10 +166,18 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
                 else
                     name = entProto.Name;
 
-                projectileBatteryAmmoProvider.Prototype = fireMode.Prototype;
-                projectileBatteryAmmoProvider.FireCost = fireMode.FireCost;
+                // TODO: Have this get the info directly from the batteryComponent when power is moved to shared.
+                var OldFireCost = projectileBatteryAmmoProviderComponent.FireCost;
+                projectileBatteryAmmoProviderComponent.Prototype = fireMode.Prototype;
+                projectileBatteryAmmoProviderComponent.FireCost = fireMode.FireCost;
+                float FireCostDiff = (float)fireMode.FireCost / (float)OldFireCost;
+                projectileBatteryAmmoProviderComponent.Shots = (int)Math.Round(projectileBatteryAmmoProviderComponent.Shots/FireCostDiff);
+                projectileBatteryAmmoProviderComponent.Capacity = (int)Math.Round(projectileBatteryAmmoProviderComponent.Capacity/FireCostDiff);
+                Dirty(uid, projectileBatteryAmmoProviderComponent);
+                var updateClientAmmoEvent = new UpdateClientAmmoEvent();
+                RaiseLocalEvent(uid, ref updateClientAmmoEvent);
 
-                Dirty(uid, projectileBatteryAmmoProvider);
+                Dirty(uid, projectileBatteryAmmoProviderComponent);
             }
         }
         else if (_prototypeManager.TryIndex<HitscanPrototype>(fireMode.Prototype, out _))
@@ -216,8 +232,18 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
     {
         var firemode = GetMode(ent.Comp);
 
-        if (firemode.SoundGunshot is not null)
-            args.SoundGunshot = new SoundPathSpecifier(firemode.SoundGunshot);
+        if (firemode.GunModifiers is not { } modifiers ||
+            !TryComp<GunComponent>(ent.Owner, out var gunComponent))
+            return;
+
+        args.SoundGunshot = modifiers.SoundGunshot ?? gunComponent.SoundGunshot;
+        args.AngleIncrease = modifiers.AngleIncrease ?? gunComponent.AngleIncrease;
+        args.AngleDecay = modifiers.AngleDecay ?? gunComponent.AngleDecay;
+        args.MaxAngle = modifiers.MaxAngle ?? gunComponent.MaxAngle;
+        args.MinAngle = modifiers.MinAngle ?? gunComponent.MinAngle;
+        args.ShotsPerBurst = modifiers.ShotsPerBurst ?? gunComponent.ShotsPerBurst;
+        args.FireRate = modifiers.FireRate ?? gunComponent.FireRate;
+        args.ProjectileSpeed = modifiers.ProjectileSpeed ?? gunComponent.ProjectileSpeed;
     }
     //SS220 Add Multifaze gun end
 }

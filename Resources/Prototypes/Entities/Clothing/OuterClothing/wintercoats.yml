@@ -71,7 +71,7 @@
       outerClothing:
       - state: ATMOS-equipped-OUTERCLOTHING
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHatHoodWinterEngineer
+    clothingPrototype: ClothingHeadHatHoodWinterAtmos # SS220 hood resprite
 
 - type: entity
   parent: ClothingOuterWinterCoatToggleable
@@ -97,7 +97,7 @@
     clothingPrototype: ClothingHeadHatHoodWinterBartender
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable, BaseCommandContraband]
+  parent: [ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterCap
   name: captain's winter coat
   components:
@@ -143,7 +143,7 @@
     clothingPrototype: ClothingHeadHatHoodWinterCargo
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable, BaseCommandContraband]
+  parent: [ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterCE
   name: chief engineer's winter coat
   components:
@@ -166,7 +166,7 @@
     clothingPrototype: ClothingHeadHatHoodWinterCE
 
 - type: entity
-  parent: ClothingOuterWinterCoatToggleable
+  parent: [ ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterCentcom
   name: CentComm winter coat
   categories: [ HideSpawnMenu ] #SS220 New CentCom
@@ -190,7 +190,7 @@
     clothingPrototype: ClothingHeadHatHoodWinterCentcom
 
 - type: entity
-  parent: ClothingOuterWinterCoat
+  parent: ClothingOuterWinterCoatToggleable # SS220 new hood
   id: ClothingOuterWinterChef
   name: chef's freezer coat
   description: A coat specifically designed for work inside cold storage, sorely needed by cold-blooded lizard chefs.
@@ -210,6 +210,10 @@
     clothingVisuals:
       outerClothing:
       - state: CHEF-equipped-OUTERCLOTHING
+# SS220 new hood start
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodWinterChef
+# SS220 new hood end
 
 - type: entity
   parent: ClothingOuterWinterCoatToggleable
@@ -242,7 +246,7 @@
     clothingPrototype: ClothingHeadHatHoodWinterChem
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable, BaseCommandContraband]
+  parent: [ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterCMO
   name: chief medical officer's winter coat
   components:
@@ -332,10 +336,10 @@
         Caustic: 0.9
     priceMultiplier: 0.15
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHatHoodWinterSci
+    clothingPrototype: ClothingHeadHatHoodWinterGen # SS220 hood resprite
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable, BaseCommandContraband]
+  parent: [ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterHoP
   name: head of personnel's winter coat
   components:
@@ -360,7 +364,7 @@
 
 ##########################################################
 - type: entity
-  parent: [ClothingOuterArmorHoS, ClothingOuterWinterCoatToggleable, BaseCommandContraband]
+  parent: [ClothingOuterArmorHoS, ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterHoS
   name: head of security's armored winter coat
   description: A sturdy, utilitarian winter coat designed to protect a head of security from any brig-bound threats and hypothermic events.
@@ -374,7 +378,7 @@
 ##########################################################
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable, BaseCommandContraband]
+  parent: [ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterHoSUnarmored
   name: head of security's winter coat
   description: A sturdy coat, a warm coat, but not an armored coat.
@@ -434,7 +438,7 @@
       left:
       - state: JANI-inhand-left
       right:
-      - state: CHEF-inhand-right
+      - state: JANI-inhand-right # SS220 CHEF-inhand-right -> JANI-inhand-right. it's janitor coat.
   - type: Clothing
     sprite: Clothing/OuterClothing/WinterCoats/coat.rsi
     clothingVisuals:
@@ -557,7 +561,7 @@
     clothingPrototype: ClothingHeadHatHoodWinterPara
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable, BaseCommandContraband]
+  parent: [ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterQM
   name: quartermaster's winter coat
   components:
@@ -581,7 +585,7 @@
 
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable, BaseCommandContraband]
+  parent: [ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterRD
   name: research director's winter coat
   components:
@@ -665,7 +669,7 @@
     clothingPrototype: ClothingHeadHatHoodWinterSci
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable, BaseRestrictedContraband]
+  parent: [ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterSec
   name: security winter coat
   components:
@@ -715,11 +719,11 @@
         Caustic: 0.9
     priceMultiplier: 0.15
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHatHoodWinterSci
+    clothingPrototype: ClothingHeadHatHoodWinterViro # SS220 hood resprite
 
 ################################################################
 - type: entity
-  parent: [ClothingOuterArmorWarden, ClothingOuterWinterCoatToggleable, BaseRestrictedContraband]
+  parent: [ClothingOuterArmorWarden, ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterWarden
   name: warden's armored winter coat
   description: A sturdy, utilitarian winter coat designed to protect a warden from any brig-bound threats and hypothermic events.
@@ -733,7 +737,7 @@
 ################################################################
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable, BaseRestrictedContraband]
+  parent: [ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterWardenUnarmored
   name: warden's winter coat
   description: A sturdy coat, a warm coat, but not an armored coat.
@@ -757,7 +761,7 @@
     clothingPrototype: ClothingHeadHatHoodWinterWarden
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable, BaseSyndicateContraband]
+  parent: [ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterSyndieCap
   name: syndicate's winter coat
   description: "The syndicate's winter coat is made of durable fabric, with gilded patterns, and coarse wool."
@@ -778,11 +782,11 @@
       outerClothing:
       - state: SYNDIECAP-equipped-OUTERCLOTHING
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHatHoodWinterSyndie
+    clothingPrototype: ClothingHeadHatHoodWinterSyndieCap # SS220 hood resprite
 
 ##############################################################
 - type: entity
-  parent: [ClothingOuterWinterWarden, BaseSyndicateContraband]
+  parent: [ClothingOuterWinterWarden]
   id: ClothingOuterWinterSyndieCapArmored
   name: syndicate's armored winter coat
   description: "The syndicate's armored winter coat is made of durable fabric, with gilded patterns, and coarse wool."
@@ -792,11 +796,11 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/WinterCoats/syndicate/coatsyndiecaparmored.rsi
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHatHoodWinterSyndie
+    clothingPrototype: ClothingHeadHatHoodWinterSyndieCapArmored # SS220 new hood
 ##############################################################
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable, BaseSyndicateContraband]
+  parent: [ClothingOuterWinterCoatToggleable]
   id: ClothingOuterWinterSyndie
   name: syndicate's winter coat
   description: Insulated winter coat, looks like a merch from "Syndieland".
@@ -854,6 +858,10 @@
   - type: Construction
     graph: WebObjects
     node: coat
+  - type: Butcherable
+    spawned:
+    - id: MaterialWebSilk1
+      amount: 5
   - type: FlavorProfile
     flavors:
       - cobwebs

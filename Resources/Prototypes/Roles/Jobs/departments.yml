@@ -22,11 +22,11 @@
   - Chaplain
   - Chef
   - Clown
-  - Detective
+#  - Detective #SS220-Transfer Detective To Security
   - HeadOfPersonnel
   - SeniorService #ss220-SEniorService
   - Janitor
-  - Lawyer
+#  - Lawyer #SS220-Law Department
   - Librarian
   - Mime
   - Musician
@@ -37,6 +37,25 @@
   - ServiceWorker
 
 - type: department
+  id: CentralCommand
+  name: department-CentralCommand
+  description: department-CentralCommand-description
+  color: "#18689a" #ss220-chatcolor
+  roles:
+  - CentralCommandOfficial
+  - CBURN
+  - ERTLeader
+  - ERTChaplain
+  - ERTJanitor
+  - ERTMedical
+  - ERTSecurity
+  - ERTEngineer
+  - DeathSquad
+  editorHidden: true
+  weight: 120
+  lightColor: "#387195" # SS220 Round End Titles
+
+- type: department
   id: Command
   name: department-Command
   sort: 1
@@ -44,7 +63,8 @@
   color: "#052EED"
   roles:
   - Captain
-  - IAA # Corvax-IAA
+#  - IAA #SS220-Law Department
+  - Magistrate #SS220-Law Department
   - CentralCommandOfficial
   - ChiefEngineer
   - ChiefMedicalOfficer
@@ -53,8 +73,17 @@
   - ResearchDirector
   - Quartermaster
   - BlueShield
+  - CBURN
+  - ERTLeader
+  - ERTChaplain
+  - ERTJanitor
+  - ERTMedical
+  - ERTSecurity
+  - ERTEngineer
+  - DeathSquad
   primary: false
   weight: 100
+  lightColor: "#2c60f8" # SS220 Round End Titles
 
 - type: department
   id: Engineering
@@ -99,6 +128,8 @@
   - SecurityOfficer
   - Warden
   - SecurityPilot
+  - Detective #SS220-Transfer Detective To Security
+
 
 - type: department
   id: Science
@@ -120,11 +151,13 @@
   color: "#88FF88"
   roles: []
   primary: false
+  editorHidden: true # ss220-departments-hidden
   weight: -50
 
 - type: department
   id: Silicon
   name: department-Silicon
+  sort: 0 # ss220-departments-fix
   description: department-Silicon-description
   color: "#D381C9"
   roles:
@@ -144,6 +177,7 @@
   - Zookeeper
 #  - Psychologist SS220-psychologist-chat-color-fix
   primary: false
+  roundEndTitlesHidden: true # SS220 Round End Titles
 
 - type: department
   id: GhostRoles
@@ -154,4 +188,5 @@
   roles:
   - GhostRole
   primary: false
+  editorHidden: true # ss220-departments-hidden
   weight: -100

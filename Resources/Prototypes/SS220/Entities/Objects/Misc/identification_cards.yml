@@ -8,7 +8,7 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
   - type: IdCard
-    jobTitle: СССП
+    jobTitle: job-name-ussp #SS220 (upstream 65 localization)
   - type: Sprite
     layers:
     - state: ussp
@@ -36,12 +36,10 @@
     layers:
     - state: silver
     - state: idcentcom
-    - type: IdCard
-      jobTitle: Дипломат NanoTrasen
-    - type: Access
-      groups:
-      - AllAccess # SS220 Fast fix access
-      - CentralCommand
+  - type: IdCard
+    jobTitle: job-name-nt-politician #SS220 (upstream 65 localization)
+  - type: PresetIdCard
+    job: CentCommNanoTrasenDiplomat
 
 - type: entity
   parent: CentcomIDCard
@@ -50,11 +48,9 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Полевой Офицер ЦК
-    - type: Access
-      groups:
-      - AllAccess # SS220 Fast fix access
-      - CentralCommand
+      jobTitle: job-name-cc-operational-oficier #SS220 (upstream 65 localization)
+    - type: PresetIdCard
+      job: CentcomFieldOfficer
 
 - type: entity
   parent: CentcomIDCard
@@ -63,26 +59,20 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Офицер ЦК
-    - type: Access
-      groups:
-      - AllAccess # SS220 Fast fix access
-      - CentralCommand
+      jobTitle: job-name-cc-oficier #SS220 (upstream 65 localization)
+    - type: PresetIdCard
+      job: CentcommOfficer
 
 - type: entity
   parent: CentcomIDCard
-  id: OperativeSRTIDCard
-  name: ID карта Оперативника ГСН
+  id: OperativeBSOIDCard
+  name: ID карта Оперативника "Синий Щит"
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Оперативник ГСН
-    - type: Access
-      groups:
-      - AllAccess # SS220 Fast fix access
-      tags:
-      - CentralCommandGSN
-      - CentralCommand
+      jobTitle: job-name-cc-bs-operative #SS220 (upstream 65 localization)
+    - type: PresetIdCard
+      job: CentcomOperativeBSO
 
 - type: entity # SS220 - Security dog Roxi ID card
   parent: IDCardStandard
@@ -118,8 +108,81 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: Адмирал NanoTrasen
-    - type: Access
-      groups:
-      - AllAccess # SS220 Fast fix access
-      - CentralCommand
+      jobTitle: job-name-nt-admiral #SS220 (upstream 65 localization)
+    - type: PresetIdCard
+      job: CentComNanoTrasenAdmiral
+
+- type: entity
+  parent: IDCardStandard
+  id: MagistrateIDCard
+  name: magistrate ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: silver
+        - state: idmagistrate
+    - type: PresetIdCard
+      job: Magistrate
+
+- type: entity
+  parent: IDCardStandard
+  id: PrisonerIDCard
+  name: prisoner ID card
+  components:
+    - type: IdCard
+      jobTitle: job-name-prisoner #SS220 (upstream 65 localization)
+    - type: Sprite
+      layers:
+        - state: orange
+        - state: idprisoner
+    - type: PresetIdCard
+      job: Prisoner
+
+# Deathsquad
+- type: entity
+  parent: IDCardStandard
+  id: CentcomIDCardDeathsquadOperative
+  name: ID карта оперативника Эскадрона Смерти
+  description: Карта, необходимая для доступа в различные области станции.
+  components:
+  - type: Sprite
+    layers:
+    - state: deathsquad
+  - type: Item
+    heldPrefix: blue
+  - type: IdCard
+    jobTitle: job-name-dq-operative
+  - type: Access
+    groups:
+    - AllAccess
+    tags:
+    - CentralCommandDeathSquad
+    - CentralCommand
+  - type: PresetIdCard
+    job: DeathSquad
+
+- type: entity
+  parent: CentcomIDCardDeathsquadOperative
+  id: CentcomIDCardDeathsquadCommander
+  name: ID карта командира Эскадрона Смерти
+  components:
+  - type: Sprite
+    layers:
+    - state: deathsquad
+  - type: IdCard
+    jobTitle: job-name-dq-commander
+  - type: PresetIdCard
+    job: DeathsquadCommander
+
+- type: entity
+  parent: CentcomIDCardDeathsquadOperative
+  id: CentcomIDCardDeathsquadHealer
+  name: ID карта специалиста Эскадрона Смерти
+  components:
+  - type: Sprite
+    layers:
+    - state: deathsquad
+  - type: IdCard
+    jobTitle: job-name-dq-specialist
+  - type: PresetIdCard
+    job:  DeathsquadHealer

@@ -22,8 +22,19 @@
     RiotLaserShield: 2
     RiotBulletShield: 2
     RadioHandheldSecurity: 5
+    CigPackSEC: 2 #SS220 Cigarettes
   # security officers need to follow a diet regimen!
   contrabandInventory:
     FoodDonutHomer: 12
     FoodBoxDonut: 2
     #box evidence
+  #ss220 emagged SecTech begin
+  emaggedInventory:
+    SyndicateWhistle: 1
+    ClothingHandsGlovesCombat: 1
+    ExGrenade: 1
+    SmokeGrenade: 1
+    EmpGrenade: 1
+    Truncheon: 1
+    ThrowingKnife: 2
+  #ss220 emagged SecTech end

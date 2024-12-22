@@ -6,7 +6,7 @@
   name: web
   description: Sticky web.. I wonder where it comes from?
   abstract: true
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   placement:
     mode: SnapgridCenter
     snap:
@@ -89,6 +89,24 @@
     - type: SpeedModifierContacts
       walkSpeedModifier: 0.25
       sprintSpeedModifier: 0.25
+    - type: DamageContacts
+      standStillTime: 3
+      ignoreResistances: true
+      damage:
+        types:
+          Piercing: -1.5
+          Blunt: -0.75
+          Slash: -0.75
+          Heat: -1.5
+          Cold: -0.75
+        groups:
+          Toxin: -5
+          Airloss: -2.5
+      ignoreBlacklist:
+        tags:
+        - SpiderQueen
+        - SpiderServant
+        - SpiderLittle
 
 - type: entity
   parent: BaseSpiderWeb
@@ -99,7 +117,7 @@
     snap:
       - Wall
   components:
-
+    - type: Sprite
     - type: Destructible
       thresholds:
       - trigger:
@@ -111,12 +129,30 @@
     - type: SpeedModifierContacts
       walkSpeedModifier: 0.15
       sprintSpeedModifier: 0.15
+    - type: DamageContacts
+      standStillTime: 3
+      ignoreResistances: true
+      damage:
+        types:
+          Piercing: -3
+          Blunt: -1.5
+          Slash: -1.5
+          Heat: -3
+          Cold: -1.5
+        groups:
+          Toxin: -8
+          Airloss: -4
+      ignoreBlacklist:
+        tags:
+        - SpiderQueen
+        - SpiderServant
+        - SpiderLittle
 
 - type: entity
   parent: BaseSpiderWeb
   id: SpiderWebDespawned
   name: web
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   placement:
     mode: SnapgridCenter
     snap:

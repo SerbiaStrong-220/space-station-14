@@ -14,6 +14,11 @@
     noRot: true
   - type: Pullable
   - type: InteractionOutline
+   #ss220 fix start
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+    #ss220 fix end
   - type: Destructible
     thresholds:
     - trigger:

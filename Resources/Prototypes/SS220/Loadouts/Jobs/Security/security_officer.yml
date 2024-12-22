@@ -17,6 +17,37 @@
       role: JobSecurityOfficer
       time: 360000 # 100 hrs
 
+- type: loadoutEffectGroup
+  id: SecuritySecVaas
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobSecurityOfficer
+      time: 180000 #50hrs
+
+# Glasses
+- type: loadout
+  id: GlassesSecurity
+  equipment:
+    eyes: ClothingEyesGlassesSecurity
+
+- type: loadout
+  id: CyberGlassesSecurity
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    eyes: ClothingSponsorCyberSecVisor
+
+- type: loadout
+  id: GlassesBallistic
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TacSec
+  equipment:
+    eyes: ClothingEyesGlassesBallistic
+
 # Jumpsuit
 - type: loadout
   id: SecurityJumpsuitTurtleneck
@@ -47,6 +78,14 @@
   equipment:
     jumpsuit: ClothingUniformTacticalSecurity
 
+- type: loadout
+  id: JumpsuitSecVaas
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SecuritySecVaas
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitVaas
+
 # Head
 - type: loadout
   id: HatCowboyBlack
@@ -72,11 +111,6 @@
 
 # Neck
 - type: loadout
-  id: Headphones
-  equipment:
-    neck: ClothingNeckHeadphones
-
-- type: loadout
   id: ProtectGear
   equipment:
     neck: ClothingNeckProtectBundle
@@ -92,10 +126,25 @@
   equipment:
     outerClothing: ClothingOuterCoatSecurityOvercoat
 
+- type: loadout
+  id: CyberVestSecurity
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    outerClothing: ClothingSponsorCyberVestSecurity
+
 # Shoes
 - type: loadout
   id: BootsJackSec
   equipment:
     shoes: ClothingShoesBootsJackSecFilled
 
-
+# Gloves
+- type: loadout
+  id: GlovesSecTactical
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TacSec
+  equipment:
+    gloves: ClothingHandsGlovesSecTactical

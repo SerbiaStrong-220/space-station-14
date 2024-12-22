@@ -15,7 +15,7 @@
   parent: ClothingEyesGlassesCheapSunglasses
   id: ClothingEyesQuartermasterGlasses
   name: очки квартирмейстера
-  description: Эксклюзивные очки квартирмейстера, совмещающие в себе защиту ваших, зрящих в корень, глаз от ярких лучей в совокупности со встроенным интерфейсом оценивания груза. Выдержанный стиль отдела снабжения для своего лучшего сотрудника. 
+  description: Эксклюзивные очки квартирмейстера, совмещающие в себе защиту ваших, зрящих в корень, глаз от ярких лучей в совокупности со встроенным интерфейсом оценивания груза. Выдержанный стиль отдела снабжения для своего лучшего сотрудника.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Eyes/qmglasses.rsi
@@ -31,3 +31,60 @@
     - HamsterWearable
     - WhitelistChameleon
     - SecDogWearable
+
+- type: entity
+  parent: [ClothingEyesBase, ShowSecurityIcons]
+  id: ClothingEyesGlassesBallistic
+  name: ballistic glasses
+  description: Tactical security element
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/secballistic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Glasses/secballistic.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: Construction
+    graph: GlassesSecHUD
+    node: glassesSec
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - SecDogWearable # Roxi
+  - type: GuideHelp
+    guides:
+    - Security
+    - Antagonists
+  - type: IdentityBlocker
+    coverage: EYES
+
+- type: entity
+  parent: ClothingEyesGlassesBlueShield
+  id: ClothingEyesBlueShieldGlasses
+  name: blueshield glasses
+  description: Upgraded sunglasses for blue shields.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/blueshield_glasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/blueshield_glasses.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: ShowJobIcons
+
+- type: entity
+  parent: ClothingEyesBlueShieldGlasses
+  id: ClothingEyesBlueShieldTacticGlasses
+  name: blueshield tactic glasses
+  description: Tactical glasses for combat situations.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/blueshield_tactic_glasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/blueshield_tactic_glasses.rsi

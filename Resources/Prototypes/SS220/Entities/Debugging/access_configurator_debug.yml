@@ -47,11 +47,12 @@
       - Service
       - SyndicateAgent
       - Theatre
+      - Magistrate
       #New centcomm accesses begin
       - CentralCommand
       - CentralCommandCBURN
       - CentralCommandERT
-      - CentralCommandGSN
+      - CentralCommandBSO
       - CentralCommandDeathSquad
       #New centcomm accesses end
       #Ussp accesses begin

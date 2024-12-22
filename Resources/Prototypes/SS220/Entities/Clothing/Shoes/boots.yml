@@ -25,17 +25,59 @@
   id: ClothingShoesBootsDruid #SS220 druid loadout
   name: druid spanks
   description: Druid spanks made from natural materials.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Boots/druidboots.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/druidboots.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -100
+    attackRate: 1
+    range: 1
+    angle: 90
+    damage:
+      types:
+        Blunt: 1
+    soundHit:
+      path: "/Audio/Items/snap.ogg"
+
+- type: entity
+  parent: ClothingShoesBootsJackSec
+  id: ClothingShoesBootsJackSecFilled
+  components:
+  - type: ContainerFill
+    containers:
+     item:
+      - CombatKnife
+
+- type: entity
+  parent: ClothingShoesBootsJack
+  id: ClothingShoesBootsBlueShieldJack
+  name: blueshield jackboots
+  description: Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time.
+  suffix: Blue Shield
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/jackboots_blueshield.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/jackboots_blueshield.rsi
+
+- type: entity
+  parent: ClothingShoesBootsBlueShieldJack
+  id: ClothingShoesBootsBlueShieldJackFilled
+  components:
+  - type: ContainerFill
+    containers:
+     item:
+      - CombatKnife
 
 - type: entity
   parent: ClothingShoesBaseButcherable
   id: ClothingShoesBootsBard #SS220 bard loadout
   name: bard shoes
   description: Shoes for true music lovers!
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Boots/bardboots.rsi
@@ -304,3 +346,53 @@
     footstepSoundCollection:
       collection: BarestepHard
 # SS220 FootWraps end
+# Уборщик
+
+- type: entity
+  parent: ClothingShoesGaloshes
+  id: ClothingShoesJanitorJR
+  name: rubberized Work Boots Junk Recycles
+  description: Comfortable boots with a special treatment of the sole. They inspire confidence.
+  suffix: JR, For playing time
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/janitor_jr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/janitor_jr.rsi
+
+# Эскадрон Смерти
+- type: entity
+  parent: ClothingShoesBootsMagBase
+  id: ClothingShoesBootsMagDQ
+  name: Death Squad Magnetic Boots
+  description: The most modern magnetic shoes in recognizable colors.
+  components:
+  - type: InputMover
+    toParent: true
+  - type: MovementSpeedModifier
+    weightlessAcceleration: 1.2
+    weightlessFriction: 0.5
+    weightlessModifier: 1.5
+  - type: CanMoveInAir
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/dq_magboots.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/dq_magboots.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: GasTank
+    outputPressure: 42.6
+    air:
+      volume: 5
+      temperature: 293.15
+      moles:
+        - 1.153853429 # oxygen
+        - 1.153853429 # nitrogen
+  - type: UserInterface
+    interfaces:
+      enum.SharedGasTankUiKey.Key:
+        type: GasTankBoundUserInterface
+  - type: Jetpack
+    moleUsage: 0.00085

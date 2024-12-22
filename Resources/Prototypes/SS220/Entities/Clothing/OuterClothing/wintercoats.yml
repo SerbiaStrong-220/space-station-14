@@ -11,3 +11,13 @@
     sprite: SS220/Clothing/OuterClothing/WinterCoats/coatcentcom.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodWinterCentcomm
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: ClothingOuterWhiteWinterCap
+  name: captain's white winter coat
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/WinterCoats/whitecapcoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/WinterCoats/whitecapcoat.rsi
