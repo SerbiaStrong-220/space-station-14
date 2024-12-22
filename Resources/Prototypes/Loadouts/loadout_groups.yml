@@ -63,7 +63,7 @@
   - ClothingFootWrapsBlue
   - ClothingHandWrapsBlack
   - ClothingFootWrapsBlack
-  # SS220-Hand/FootWraps-More-Color-End
+  # -Hand/FootWraps-More-Color-End
 
 
 - type: loadoutGroup
@@ -74,7 +74,7 @@
   - Glasses
   - GlassesJamjar
   - GlassesJensen
-  - GlassesCyber #SS220-Two Floppa Iteration
+  - GlassesCyber #-Two Floppa Iteration
 
 - type: loadoutGroup
   id: GroupTankHarness
@@ -118,14 +118,14 @@
   loadouts:
   - CaptainHead
   - CaptainCap
-  #SS220-CapHeadLoadoutsChanges-Begin
+  #-CapHeadLoadoutsChanges-Begin
   - CaptainBeret
   - CaptainHeadHat
-  #SS220-CapHeadLoadoutsChanges-End
-  #ss220-loadout-captain-begin
+  #-CapHeadLoadoutsChanges-End
+  #-loadout-captain-begin
   - CaptainWhiteHead
   - CaptainWhiteBeret
-  #ss220-loadout-captain-end
+  #-loadout-captain-end
   #ss220-loadout-fullwhitecap-Begin
   - CaptainWhiteHardhat
   - CaptainWhiteHat
@@ -1383,7 +1383,7 @@
   - ChiefMedicalOfficerTurtleneckJumpsuit
   - ChiefMedicalOfficerTurtleneckJumpskirt
   - CMOCorpJumpsuit #SS220-CMOCorporate
-  - CMOCorpJumpskirt #ss220
+  - CMOCorpJumpskirt #SS220-CMOCorporate
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerOuterClothing
