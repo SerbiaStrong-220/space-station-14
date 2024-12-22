@@ -86,7 +86,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             return;
 
         target.PortalEntity = SpawnAtPosition("ContractorPortal", Transform(ent.Owner).Coordinates);
-        target.PositionVector = Transform(ent.Owner).Coordinates.Position;
+        target.PositionOnStation = Transform(ent.Owner).Coordinates.Position;
 
         args.Handled = true;
 
@@ -107,6 +107,8 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         EnsureComp<ContractorTargetComponent>(GetEntity(ev.ContractEntity), out var target);
 
+        //Only for test
+        /*
         if (target.AmountTc > 8)
         {
             _adminLogger.Add(
@@ -116,10 +118,10 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
             return;
         }
-
+        */
         foreach (var amountPosition in ev.ContractData.AmountPositions)
         {
-            target.Position = GetCoordinates(amountPosition.Value);
+            target.PortalPosition = GetCoordinates(amountPosition.Value);
             target.AmountTc = amountPosition.Key;
             target.Performer = ev.Actor;
         }
@@ -150,7 +152,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         if (contractorComponent.PortalEntity != null)
             return;
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, ev.Actor, 5f, new OpenPortalContractorEvent(), ev.Actor)
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, ev.Actor, 5f, new OpenPortalContractorEvent(), ev.Actor, ev.Actor)
         {
             BreakOnMove = true,
             BreakOnDamage = true,

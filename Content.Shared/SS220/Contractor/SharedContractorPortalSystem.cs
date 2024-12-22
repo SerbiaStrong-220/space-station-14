@@ -16,27 +16,17 @@ public sealed class SharedContractorPortalSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly SharedContractorSystem _contractor = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     public override void Initialize()
     {
-        SubscribeLocalEvent<ContractorPortalOnTriggerComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<ContractorPortalOnTriggerComponent, StartCollideEvent>(OnEnterPortal);
-        SubscribeLocalEvent<ContractorPortalOnTriggerComponent, ContractorClosedPortalEvent>(OnClosePortal);
-    }
-
-    private void OnComponentInit(Entity<ContractorPortalOnTriggerComponent> ent, ref ComponentInit args)
-    {
-        ent.Comp.OpenPortalTime = _timing.CurTime;
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, ent.Owner, 5f, new ContractorClosedPortalEvent(), ent.Owner));
     }
 
     private void OnEnterPortal(Entity<ContractorPortalOnTriggerComponent> ent, ref StartCollideEvent args)
     {
         if (!TryComp<ContractorTargetComponent>(args.OtherEntity, out var targetComponent))
         {
-            _popup.PopupEntity("Портал недоступен для вас", args.OtherEntity, PopupType.MediumCaution);
+            _popup.PopupClient("Портал недоступен для вас", args.OtherEntity, PopupType.Medium);
             return;
         }
 
@@ -54,7 +44,7 @@ public sealed class SharedContractorPortalSystem : EntitySystem
         if (contractorComponent.CurrentContractEntity != GetNetEntity(args.OtherEntity))
             return;
 
-        targetComponent.Position = Transform(args.OtherEntity).Coordinates;
+        targetComponent.PortalPosition = Transform(args.OtherEntity).Coordinates;
         targetComponent.EnteredPortalTime = _timing.CurTime;
 
         contractorComponent.CurrentContractEntity = null;
@@ -67,7 +57,7 @@ public sealed class SharedContractorPortalSystem : EntitySystem
 
         if (needsPortalEntity != args.OurEntity)
         {
-            _popup.PopupEntity("Этот портал предназначен не для этой цели", args.OtherEntity, PopupType.MediumCaution);
+            _popup.PopupClient("Этот портал предназначен не для этой цели", args.OtherEntity, PopupType.Medium);
             return;
         }
 
@@ -81,20 +71,9 @@ public sealed class SharedContractorPortalSystem : EntitySystem
             _uiSystem.ServerSendUiMessage(GetEntity(contractorComponent.PdaEntity)!.Value, ContractorPdaKey.Key, new ContractorCompletedContractMessage());
         }
 
-        _transformSystem.SetCoordinates(args.OtherEntity, Transform(contractorEntity).Coordinates); // ????
+        _transformSystem.SetCoordinates(args.OtherEntity, Transform(contractorEntity).Coordinates); // tp target to other map in future
 
         Dirty(contractorPdaEntity, contractorPdaComponent);
         Dirty(contractorEntity, contractorComponent);
     }
-
-    private void OnClosePortal(Entity<ContractorPortalOnTriggerComponent> ent, ref ContractorClosedPortalEvent args)
-    {
-        Del(ent.Owner);
-    }
-}
-
-[Serializable, NetSerializable]
-public sealed partial class ContractorClosedPortalEvent : DoAfterEvent
-{
-    public override DoAfterEvent Clone() => this;
 }

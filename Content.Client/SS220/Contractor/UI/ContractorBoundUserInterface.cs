@@ -381,7 +381,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_contractorComponent?.CurrentContractData is null)
             return;
 
-        SendMessage(new ContractorExecutionButtonPressedMessage()); // TODO only message mb DONE
+        SendMessage(new ContractorExecutionButtonPressedMessage());
 
     }
 
@@ -393,7 +393,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_contractorComponent == null || _contractorComponent.AmountTc <= 0)
             return;
 
-        if (EntMan.GetEntity(_contractorPdaComponent.PdaOwner) != Owner)
+        if (EntMan.GetEntity(_contractorPdaComponent.PdaOwner) != PlayerManager.LocalEntity)
             return;
 
         _withdrawWindow?.Close();

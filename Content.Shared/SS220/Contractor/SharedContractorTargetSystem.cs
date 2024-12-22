@@ -27,7 +27,7 @@ public sealed class SharedContractorTargetSystem : EntitySystem
 
             if (comp.EnteredPortalTime + comp.TimeInJail < _timing.CurTime)
             {
-                _transform.SetCoordinates(uid, comp.Position);
+                _transform.SetCoordinates(uid, comp.PortalPosition);
                 comp.EnteredPortalTime = TimeSpan.Zero;
                 RemComp<ContractorTargetComponent>(uid);
             }

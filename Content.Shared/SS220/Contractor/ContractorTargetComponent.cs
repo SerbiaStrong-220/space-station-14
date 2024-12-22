@@ -20,11 +20,11 @@ public sealed partial class ContractorTargetComponent : Component
     public FixedPoint2 AmountTc;
 
     [DataField]
-    public EntityCoordinates Position; //position where target must be placed
+    public EntityCoordinates PortalPosition; //position where target must be placed
 
     [DataField]
     [AutoNetworkedField]
-    public Vector2 PositionVector; // position where target was placed on station
+    public Vector2 PositionOnStation; // position where target was placed on station
 
     [DataField]
     public TimeSpan EnteredPortalTime;

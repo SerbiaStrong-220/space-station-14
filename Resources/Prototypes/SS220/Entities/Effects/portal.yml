@@ -6,6 +6,8 @@
     - type: Sprite
       layers:
         - state: portal-red
+    - type: TimedDespawn
+      lifetime: 10 #Only for test
     - type: PointLight
       color: OrangeRed
       radius: 3
