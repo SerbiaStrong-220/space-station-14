@@ -346,6 +346,23 @@
     footstepSoundCollection:
       collection: BarestepHard
 # SS220 FootWraps end
+
+# Клоун
+- type: entity
+  parent: ClothingShoesClownBase
+  id: ClothingShoesClownPennywise
+  name: dance clown shoes
+  description: "Their elegance can cause genuine laughter."
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/clown_pennywise.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/clown_pennywise.rsi
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepClown
+
 # Уборщик
 
 - type: entity

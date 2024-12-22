@@ -25,6 +25,7 @@
   id: ClothingBackpackWhiteSatchelCaptain
   name: белая сумка капитана
   description: Дорогая белая сумка, выданная за выслугу лет капитану.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Back/Satchels/whitecapsatchel.rsi
@@ -63,7 +64,6 @@
   components:
     - type: Sprite
       sprite: SS220/Clothing/Back/Satchels/leather-noir.rsi
-# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
   parent: ClothingBackpack
