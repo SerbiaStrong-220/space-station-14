@@ -1,4 +1,4 @@
-ent-BlueprintBeltChiefEngineer = чертёж пояса СИ
+ent-BlueprintBeltChiefEngineer = чертёж пояса Старшего Инженера
     .desc = { ent-BaseBlueprint.desc }
 
 ent-BlueprintSuperSynthesizerInstrument = чертёж супер синтезатора
@@ -40,7 +40,7 @@ ent-BlueprintSawAdvanced = чертёж улучшенной циркулярн�
 ent-BlueprintGlowstickBlue = чертёж синего химсвета
     .desc = { ent-BaseBlueprint.desc }
 
-ent-BlueprintSyndicateMicrowaveMachineCircuitboard = чертёж микроволновки Donk co
+ent-BlueprintSyndicateMicrowaveMachineCircuitboard = чертёж платы микроволновки Donk co.
     .desc = { ent-BaseBlueprint.desc }
 
 ent-BlueprintPowerCellHyperPrinted = чертёж батареи гипер ёмкости
