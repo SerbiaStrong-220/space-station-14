@@ -45,13 +45,8 @@ public sealed partial class CreateEntityTileReaction : ITileReaction
         {
             if (Whitelist != null)
             {
-                //ss220 infinity entities on tile fix start
-                var entityLookup = entityManager.System<EntityLookupSystem>();
-                var entities = entityLookup.GetLocalEntitiesIntersecting(tile);
-                //ss220 infinity entities on tile fix end
-
                 int acc = 0;
-                foreach (var ent in entities) //ss220 infinity entities on tile fix
+                foreach (var ent in tile.GetEntitiesInTile())
                 {
                     var whitelistSystem = entityManager.System<EntityWhitelistSystem>();
                     if (whitelistSystem.IsWhitelistPass(Whitelist, ent))

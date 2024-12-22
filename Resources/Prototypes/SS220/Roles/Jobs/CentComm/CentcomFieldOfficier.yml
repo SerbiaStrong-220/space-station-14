@@ -12,11 +12,8 @@
 
 - type: randomHumanoidSettings
   id: CentcomFieldOfficer
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
   components:
-    - type: RandomHumanoidAppearance
-      randomizeName: false
-      hair: HairBald
     - type: RandomMetadata
       nameSegments:
         - NamesFirstCentcomAgent
@@ -34,7 +31,7 @@
 
 - type: job
   id: CentcomFieldOfficer
-  name: job-name-cc-operational-oficier
+  name: job-name-centcomoff
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentcomFieldOfficerGear
@@ -45,11 +42,6 @@
   radioBold: true
   accessGroups:
   - AllAccess
-  access:
-  - CentralCommand
-  - CentralCommandERT
-  - CentralCommandBSO
-  - CentralCommandCBURN
 
 - type: startingGear
   id: CentcomFieldOfficerGear

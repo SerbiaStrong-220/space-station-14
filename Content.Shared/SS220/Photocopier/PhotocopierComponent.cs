@@ -72,7 +72,7 @@ public sealed partial class PhotocopierComponent : Component
         };
 
     /// <summary>
-    /// Contains an item to be copied, assumes it's paper or container of papers
+    /// Contains an item to be copied, assumes it's paper
     /// </summary>
     [DataField("paperSlot", required: true)]
     public ItemSlot PaperSlot = new();
@@ -143,10 +143,17 @@ public sealed partial class PhotocopierComponent : Component
     public bool SusFormsUnlocked = false;
 
     /// <summary>
-    /// Currently queued documents to be copied.
+    /// Contains fields of components that will be copied.
+    /// Is applied to a new entity that is created as a result of photocopying.
     /// </summary>
     [ViewVariables]
-    public List<PrintableDocumentData> DocumentsToCopy = new();
+    public Dictionary<Type, IPhotocopiedComponentData>? DataToCopy;
+
+    /// <summary>
+    /// Contains metadata that will be copied.
+    /// Is applied to a new entity that is created as a result of photocopying.
+    /// </summary>
+    public PhotocopyableMetaData? MetaDataToCopy;
 
     /// <summary>
     /// An audio stream of printing sound.
@@ -168,16 +175,10 @@ public sealed partial class PhotocopierComponent : Component
     public float PrintingTimeRemaining;
 
     /// <summary>
-    /// Total amount of copies to print
+    /// Remaining amount of copies to print
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
     public int CopiesQueued;
-
-    [ViewVariables(VVAccess.ReadOnly)]
-    public int CurrentDocumentIndex;
-
-    [ViewVariables(VVAccess.ReadOnly)]
-    public int CurrentDocumentCopyIndex;
 
     [ViewVariables(VVAccess.ReadOnly)]
     public bool IsCopyingPhysicalButt;
@@ -185,3 +186,4 @@ public sealed partial class PhotocopierComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public float? ManualButtBurnAnimationRemainingTime;
 }
+

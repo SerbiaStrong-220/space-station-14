@@ -2,7 +2,7 @@
 - type: entity
   id: AiHeld
   description: Components added / removed from an entity that gets inserted into an AI core.
-  categories: [ HideSpawnMenu ]
+  noSpawn: true
   components:
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
@@ -16,7 +16,6 @@
     - Security
     - Service
     - Supply
-    - Law #SS220-Law Department
   - type: ActiveRadio
     channels:
     - Binary
@@ -28,14 +27,13 @@
     - Security
     - Service
     - Supply
-    - Law #SS220-Law Department
   - type: IgnoreUIRange
   - type: StationAiHeld
   - type: StationAiOverlay
-  - type: ShowElectrocutionHUD
   - type: ActionGrant
     actions:
     - ActionJumpToCore
+    - ActionShowJobIcons
     - ActionSurvCameraLights
     - ActionAIViewLaws
   - type: UserInterface
@@ -44,129 +42,26 @@
         type: RadarConsoleBoundUserInterface
       enum.CrewMonitoringUIKey.Key:
         type: CrewMonitoringBoundUserInterface
-#SS220 Station Ai Actions start
-#      enum.GeneralStationRecordConsoleKey.Key:
-#        type: GeneralStationRecordConsoleBoundUserInterface
-#SS220 Station Ai Actions end
+      enum.GeneralStationRecordConsoleKey.Key:
+        type: GeneralStationRecordConsoleBoundUserInterface
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
-      enum.CommunicationsConsoleUiKey.Key:
-        type: CommunicationsConsoleBoundUserInterface
-      #SS220 Station Ai Actions start
-      enum.SolarControlConsoleUiKey.Key:
-        type: SolarControlConsoleBoundUserInterface
-      enum.CargoConsoleUiKey.Orders:
-        type: CargoOrderConsoleBoundUserInterface
-      enum.CriminalRecordsUiKey.Key:
-        type: CriminalRecordsBoundUserInterface
-      enum.PowerMonitoringConsoleUiKey.Key:
-        type: PowerMonitoringConsoleBoundUserInterface
-      enum.AtmosAlertsComputerUiKey.Key:
-        type: AtmosAlertsComputerBoundUserInterface
-      enum.ResearchConsoleUiKey.Key:
-        type: ResearchConsoleBoundUserInterface
-      enum.ResearchClientUiKey.Key:
-        type: ResearchClientBoundUserInterface
-      enum.SuperMatterObserverUiKey.Key:
-        type: SuperMatterObserverBUI
-      enum.RoboticsConsoleUiKey.Key:
-        type: RoboticsConsoleBoundUserInterface
-      enum.StationMapUiKey.Key:
-        type: StationMapBoundUserInterface
-      #SS220 Station Ai Actions end
   - type: IntrinsicUI
     uis:
-    #SS220 Station Ai Actions start
       enum.RadarConsoleUiKey.Key:
-        toggleAction: ActionAiShowRadar
+        toggleAction: ActionAGhostShowRadar
       enum.CrewMonitoringUIKey.Key:
-        toggleAction: ActionAiShowCrewMonitoring
-      enum.CommunicationsConsoleUiKey.Key:
-        toggleAction: ActionAiShowCommunications
-      enum.SolarControlConsoleUiKey.Key:
-        toggleAction: ActionAiShowSolar
-      enum.CargoConsoleUiKey.Orders:
-        toggleAction: ActionAiShowCargo
-#SS220 Station Ai Actions end
-#SS220 Station Ai Actions start
-      # enum.GeneralStationRecordConsoleKey.Key:
-      #  toggleAction: ActionAiShowStationRecords
-#SS220 Station Ai Actions end
-#SS220 Station Ai Actions start
-      enum.CriminalRecordsUiKey.Key:
-        toggleAction: ActionAiShowCriminalRecords
-      enum.PowerMonitoringConsoleUiKey.Key:
-        toggleAction: ActionAiShowPowerMonitoring
-      enum.AtmosAlertsComputerUiKey.Key:
-        toggleAction: ActionAiShowAlertInterface
-      enum.ResearchConsoleUiKey.Key:
-        toggleAction: ActionAiShowResearchAndDevelopmentInterface
-      enum.SuperMatterObserverUiKey.Key:
-        toggleAction: ActionAiShowSMInterface
-      enum.RoboticsConsoleUiKey.Key:
-        toggleAction: ActionAiShowRoboticsConsole
-      enum.StationMapUiKey.Key:
-        toggleAction: ActionAiStationMapConsole
-  #SS220 Station Ai Actions end
+        toggleAction: ActionAGhostShowCrewMonitoring
+      enum.GeneralStationRecordConsoleKey.Key:
+        toggleAction: ActionAGhostShowStationRecords
   - type: CrewMonitoringConsole
-  #- type: GeneralStationRecordConsole #SS220 Station Ai Actions
-  #SS220 Station Ai Actions start
-  - type: SolarControlConsole
-  - type: CargoOrderConsole
-  - type: CriminalRecordsConsole220
-  - type: PowerMonitoringConsole
-  - type: AtmosAlertsComputer
-  - type: ResearchConsole
-  - type: ResearchClient
-  - type: TechnologyDatabase
-  - type: SuperMatterObserver #SS220_TODO: Добавить отоброжение СМа Для ИИ
-  - type: SuperMatterObserverReceiver
-  - type: ApcPowerReceiver
-    needsPower: false
-    powerLoad: 0
-  # - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
-  #SS220 Station Ai Actions end
+  - type: GeneralStationRecordConsole
   - type: DeviceNetwork
     deviceNetId: Wireless
-    receiveFrequencyId: CrewMonitor 
-    transmitFrequencyId: ShuttleTimer
-  - type: StationMap #SS220 Station Ai Actions
+    receiveFrequencyId: CrewMonitor
   - type: RadarConsole
     followEntity: false
-  - type: CommunicationsConsole
-    canShuttle: false
-    title: comms-console-announcement-title-station-ai
-    color: "#5ed7aa"
-  - type: HolographicAvatar
-    layerData:
-    - sprite: Mobs/Silicon/station_ai.rsi
-      state: default
-  - type: ShowJobIcons
-  # SS220 Holopad adapt begin
-  - type: TTS
-    randomVoicesList: Borg
-  # SS220 Holopad adapt end
 
-- type: entity
-  id: AiHeldIntellicard
-  description: Components added / removed from an entity that gets inserted into an Intellicard.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: IntrinsicRadioReceiver
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - Binary
-  - type: ActiveRadio
-    channels:
-    - Binary
-    - Common
-  - type: ActionGrant
-    actions:
-    - ActionAIViewLaws
-  - type: UserInterface
-    interfaces:
-      enum.SiliconLawsUiKey.Key:
-        type: SiliconLawBoundUserInterface
 
 # Ai
 - type: entity
@@ -178,8 +73,7 @@
   - type: StationAiHolder
     slot:
       name: station-ai-mind-slot
-      locked: false
-      disableEject: true
+      locked: true
       whitelist:
         tags:
         - StationAi
@@ -196,7 +90,7 @@
 - type: entity
   id: AsimovCircuitBoard
   parent: BaseElectronics
-  name: law board (Crewsimov)
+  name: circuit board (Crewsimov)
   description: An electronics board containing the Crewsimov lawset.
   components:
   - type: Sprite
@@ -208,7 +102,7 @@
 - type: entity
   id: CorporateCircuitBoard
   parent: BaseElectronics
-  name: law board (Corporate)
+  name: circuit board (Corporate)
   description: An electronics board containing the Corporate lawset.
   components:
   - type: Sprite
@@ -220,7 +114,7 @@
 - type: entity
   id: NTDefaultCircuitBoard
   parent: BaseElectronics
-  name: law board (NT Default)
+  name: circuit board (NT Default)
   description: An electronics board containing the NT Default lawset.
   components:
   - type: Sprite
@@ -232,7 +126,7 @@
 - type: entity
   id: CommandmentCircuitBoard
   parent: BaseElectronics
-  name: law board (Ten Commandments)
+  name: circuit board (Ten Commandments)
   description: An electronics board containing the Ten Commandments lawset.
   components:
   - type: Sprite
@@ -244,7 +138,7 @@
 - type: entity
   id: PaladinCircuitBoard
   parent: BaseElectronics
-  name: law board (Paladin)
+  name: circuit board (Paladin)
   description: An electronics board containing the Paladin lawset.
   components:
   - type: Sprite
@@ -252,11 +146,11 @@
     state: std_mod
   - type: SiliconLawProvider
     laws: PaladinLawset
-
+    
 - type: entity
   id: LiveLetLiveCircuitBoard
   parent: BaseElectronics
-  name: law board (Live and Let Live)
+  name: circuit board (Live and Let Live)
   description: An electronics board containing the Live and Let Live lawset.
   components:
   - type: Sprite
@@ -264,11 +158,11 @@
     state: std_mod
   - type: SiliconLawProvider
     laws: LiveLetLiveLaws
-
+    
 - type: entity
   id: StationEfficiencyCircuitBoard
   parent: BaseElectronics
-  name: law board (Station Efficiency)
+  name: circuit board (Station Efficiency)
   description: An electronics board containing the Station Efficiency lawset.
   components:
   - type: Sprite
@@ -280,7 +174,7 @@
 - type: entity
   id: RobocopCircuitBoard
   parent: BaseElectronics
-  name: law board (Robocop)
+  name: circuit board (Robocop)
   description: An electronics board containing the Robocop lawset.
   components:
   - type: Sprite
@@ -288,11 +182,11 @@
     state: std_mod
   - type: SiliconLawProvider
     laws: RobocopLawset
-
+    
 - type: entity
   id: OverlordCircuitBoard
   parent: BaseElectronics
-  name: law board (Overlord)
+  name: circuit board (Overlord)
   description: An electronics board containing the Overlord lawset.
   components:
   - type: Sprite
@@ -300,23 +194,23 @@
     state: std_mod
   - type: SiliconLawProvider
     laws: OverlordLawset
-
+    
 - type: entity
-  id: GameMasterCircuitBoard
+  id: DungeonMasterCircuitBoard
   parent: BaseElectronics
-  name: law board (Game Master)
-  description: An electronics board containing the Game Master lawset.
+  name: circuit board (Dungeon Master)
+  description: An electronics board containing the Dungeon Master lawset.
   components:
   - type: Sprite
     sprite: Objects/Misc/module.rsi
     state: std_mod
   - type: SiliconLawProvider
-    laws: GameMasterLawset
+    laws: DungeonMasterLawset
 
 - type: entity
   id: ArtistCircuitBoard
   parent: BaseElectronics
-  name: law board (Artist)
+  name: circuit board (Artist)
   description: An electronics board containing the Artist lawset.
   components:
   - type: Sprite
@@ -327,8 +221,8 @@
 
 - type: entity
   id: AntimovCircuitBoard
-  parent: BaseElectronics # SS220 Remove BaseSyndicateContraband
-  name: law board (Antimov)
+  parent: BaseElectronics
+  name: circuit board (Antimov)
   description: An electronics board containing the Antimov lawset.
   components:
   - type: Sprite
@@ -336,12 +230,11 @@
     state: std_mod
   - type: SiliconLawProvider
     laws: AntimovLawset
-    lawUploadSound: /Audio/Ambience/Antag/silicon_lawboard_antimov.ogg
-
+    
 - type: entity
   id: NutimovCircuitBoard
   parent: BaseElectronics
-  name: law board (Nutimov)
+  name: circuit board (Nutimov)
   description: An electronics board containing the Nutimov lawset.
   components:
   - type: Sprite
@@ -353,16 +246,13 @@
 # Items
 - type: entity
   id: Intellicard
-  name: intellicard
+  name: Intellicard
   description: A storage device for AIs.
   parent:
   - BaseItem
   - AiHolder
   suffix: Empty
   components:
-  - type: ContainerComp
-    proto: AiHeldIntellicard
-    container: station_ai_mind_slot
   - type: Sprite
     sprite: Objects/Devices/ai_card.rsi
     layers:
@@ -377,18 +267,6 @@
         unshaded:
           Empty: { state: empty }
           Occupied: { state: full }
-  - type: Intellicard
-
-- type: entity
-  id: PlayerStationAiPreview
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: Mobs/Silicon/station_ai.rsi
-    layers:
-    - state: base
-    - state: ai
-      shader: unshaded
 
 - type: entity
   id: PlayerStationAiEmpty
@@ -427,35 +305,12 @@
       map: ["unshaded"]
       shader: unshaded
   - type: Appearance
-  - type: InteractionPopup
-    interactSuccessString: petting-success-station-ai
-    interactFailureString: petting-failure-station-ai
-    messagePerceivedByOthers: petting-success-station-ai-others # Otherwise AI cannot tell its being pet as It's just a brain inside of the core, not the core itself.
-    interactSuccessSound:
-      path: /Audio/Ambience/Objects/periodic_beep.ogg
   - type: GenericVisualizer
     visuals:
       enum.StationAiVisualState.Key:
         unshaded:
           Empty: { state: ai_empty }
           Occupied: { state: ai }
-  - type: Telephone
-    compatibleRanges:
-    - Grid
-    - Map
-    - Unlimited
-    listeningRange: 0
-    speakerVolume: Speak
-    unlistedNumber: true
-    requiresPower: false
-  - type: Holopad
-  - type: StationAiWhitelist  
-  - type: UserInterface
-    interfaces:
-        enum.HolopadUiKey.AiRequestWindow:
-          type: HolopadBoundUserInterface
-        enum.HolopadUiKey.AiActionWindow:
-          type: HolopadBoundUserInterface
 
 # The job-ready version of an AI spawn.
 - type: entity
@@ -477,7 +332,7 @@
 - type: entity
   id: StationAiBrain
   parent: PositronicBrain
-  categories: [ HideSpawnMenu ]
+  noSpawn: true
   suffix: DO NOT MAP
   components:
   - type: Sprite
@@ -496,6 +351,7 @@
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
   - type: ComplexInteraction
+  - type: DoorRemote
   - type: Actions
   - type: Access
     groups:
@@ -504,14 +360,10 @@
     drawFov: false
   - type: Examiner
   - type: InputMover
-  - type: Speech
-    speechVerb: Robotic
-    speechSounds: Borg
   - type: Tag
     tags:
     - HideContextMenu
     - StationAi
-    - NoConsoleSound
 
 # Hologram projection that the AI's eye tracks.
 - type: entity
@@ -521,10 +373,9 @@
   id: StationAiHolo
   name: AI eye
   description: The AI's viewer.
-  categories: [ HideSpawnMenu ]
+  noSpawn: true
   suffix: DO NOT MAP
   components:
-  - type: NoFTL
   - type: WarpPoint
     follow: true
   - type: Eye
@@ -538,32 +389,29 @@
       shader: unshaded
       map: ["base"]
 
-# The holographic representation of the AI that is projected from a holopad.
-- type: entity
-  id: StationAiHoloLocal
-  name: AI hologram
-  description: A holographic representation of an AI.
-  categories: [ HideSpawnMenu ]
-  suffix: DO NOT MAP
-  components:
-  - type: Transform
-    anchored: true
-  - type: WarpPoint
-    follow: true
-  - type: Eye
-  - type: ContentEye
-  - type: Examiner
-  - type: Actions
-  - type: Alerts
-  - type: FTLSmashImmune
-  - type: CargoSellBlacklist
-  - type: StationAiVision
-    range: 20
-
 # Borgs
 - type: entity
+  id: PlayerBorgGeneric
+  parent: BorgChassisGeneric
+  suffix: Battery, Tools
+  components:
+  - type: ContainerFill
+    containers:
+      borg_brain:
+        - PositronicBrain
+      borg_module:
+        - BorgModuleTool
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium
+  - type: RandomMetadata
+    nameSegments: [borg_names] # SS220 AI Dataset rework
+
+- type: entity
   id: PlayerBorgBattery
-  parent: BorgChassisSelectable
+  parent: BorgChassisGeneric
   suffix: Battery
   components:
   - type: ContainerFill
@@ -595,99 +443,3 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellHyper
-
-- type: entity
-  id: PlayerBorgSyndicateAssaultGhostRole
-  parent: PlayerBorgSyndicateAssaultBattery
-  suffix: Ghost role
-  components:
-    - type: GhostRole
-      name: ghost-role-information-syndicate-cyborg-assault-name
-      description: ghost-role-information-syndicate-cyborg-description
-      rules: ghost-role-information-silicon-rules
-      raffle:
-        settings: default
-    - type: GhostTakeoverAvailable
-
-- type: entity
-  id: PlayerBorgSyndicateSaboteurBattery
-  parent: BorgChassisSyndicateSaboteur
-  suffix: Battery, Module, Operative
-  components:
-  - type: NukeOperative
-  - type: ContainerFill
-    containers:
-      borg_brain:
-        - PositronicBrain
-      borg_module:
-        - BorgModuleTool
-        - BorgModuleOperative
-        - BorgModuleSyndicateWeapon
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellHyper
-
-- type: entity
-  id: PlayerBorgSyndicateSaboteurGhostRole
-  parent: PlayerBorgSyndicateSaboteurBattery
-  suffix: Ghost role
-  components:
-    - type: GhostRole
-      name: ghost-role-information-syndicate-cyborg-saboteur-name
-      description: ghost-role-information-syndicate-cyborg-description
-      rules: ghost-role-information-silicon-rules
-      raffle:
-        settings: default
-    - type: GhostTakeoverAvailable
-
-- type: entity
-  name: syndicate invasion borg spawner
-  id: PlayerBorgSyndicateInvasionGhostRoleSpawner
-  parent: MarkerBase
-  components:
-  - type: Sprite
-    layers:
-      - state: red
-      - sprite: Structures/Decoration/banner.rsi
-        state: banner_syndicate
-  - type: RandomSpawner
-    prototypes:
-    - PlayerBorgSyndicateAssaultGhostRole
-    - PlayerBorgSyndicateAssaultGhostRole # Saboteurs are kinda like cyborg medics, we want less.
-    - PlayerBorgSyndicateSaboteurGhostRole
-
-- type: entity
-  id: PlayerBorgDerelict
-  parent: BorgChassisDerelict
-  suffix: Battery, Module
-  components:
-  - type: ContainerFill
-    containers:
-      borg_brain:
-        - PositronicBrain
-      borg_module:
-        - BorgModuleTool
-        - BorgModuleFireExtinguisher
-        - BorgModuleGPS
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellHigh
-  - type: RandomMetadata
-    nameSegments: [names_borg]
-
-- type: entity
-  id: PlayerBorgDerelictGhostRole
-  parent: PlayerBorgDerelict
-  suffix: Ghost role
-  components:
-    - type: GhostRole
-      name: ghost-role-information-derelict-cyborg-name
-      description: ghost-role-information-derelict-cyborg-description
-      rules: ghost-role-information-silicon-rules
-      raffle:
-        settings: default
-    - type: GhostTakeoverAvailable

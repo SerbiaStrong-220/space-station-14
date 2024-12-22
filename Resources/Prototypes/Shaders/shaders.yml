@@ -104,8 +104,3 @@
   id: Cataracts
   kind: source
   path: "/Textures/Shaders/cataracts.swsl"
-
-- type: shader
-  id: Hologram
-  kind: source
-  path: "/Textures/Shaders/hologram.swsl"

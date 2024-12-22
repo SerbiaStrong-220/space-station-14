@@ -154,20 +154,20 @@ public sealed partial class PhotocopierSystem
     }
 
     /// <summary>
-    /// Spawns a copy of paper using data cached in <see cref="PhotocopierComponent.DocumentsToCopy"/>
+    /// Spawns a copy of paper using data cached in PhotocopierComponent.DataToCopy and PhotocopierComponent.MetaDataToCopy.
     /// </summary>
-    private void SpawnCopyFromPhotocopier(EntityUid uid, int documentIndex, PhotocopierComponent? component = null)
+    private void SpawnCopyFromPhotocopier(EntityUid uid, PhotocopierComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return;
 
-        if (documentIndex < 0 || documentIndex >= component.DocumentsToCopy.Count)
+        var printout = component.DataToCopy;
+        if (printout is null)
         {
-            _sawmill.Error($"Entity {uid} tried to spawn a copy of paper, but document index {documentIndex} is out of range, total documents: {component.DocumentsToCopy.Count}.");
+            _sawmill.Error("Entity " + uid + " tried to spawn a copy of paper, but DataToCopy was null.");
             return;
         }
-        var document = component.DocumentsToCopy[documentIndex];
 
-        SpawnCopy(Transform(uid).Coordinates, document.MetaData, document.Data);
+        SpawnCopy(Transform(uid).Coordinates, component.MetaDataToCopy, printout);
     }
 }

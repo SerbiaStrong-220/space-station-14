@@ -36,7 +36,6 @@ public sealed class FloorTileSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TileSystem _tile = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
 
     private static readonly Vector2 CheckRange = new(1f, 1f);
 
@@ -133,7 +132,7 @@ public sealed class FloorTileSystem : EntitySystem
                     return;
                 }
 
-                var tile = _map.GetTileRef(gridUid, mapGrid, location);
+                var tile = mapGrid.GetTileRef(location);
                 var baseTurf = (ContentTileDefinition) _tileDefinitionManager[tile.Tile.TypeId];
 
                 if (HasBaseTurf(currentTileDefinition, baseTurf.ID))
@@ -177,7 +176,7 @@ public sealed class FloorTileSystem : EntitySystem
 
         var random = new System.Random((int) _timing.CurTick.Value);
         var variant = _tile.PickVariant((ContentTileDefinition) _tileDefinitionManager[tileId], random);
-        _map.SetTile(gridUid, mapGrid,location.Offset(new Vector2(offset, offset)), new Tile(tileId, 0, variant));
+        mapGrid.SetTile(location.Offset(new Vector2(offset, offset)), new Tile(tileId, 0, variant));
 
         _audio.PlayPredicted(placeSound, location, user);
     }

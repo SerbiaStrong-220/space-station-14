@@ -10,7 +10,6 @@ using Content.Shared.SS220.ItemOfferVerb;
 using Content.Shared.Verbs;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Shared.Silicons.Borgs.Components;
 
 namespace Content.Server.SS220.ItemOfferVerb.Systems
 {
@@ -81,10 +80,6 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
         {
             if (!args.CanInteract || !args.CanAccess || args.Hands == null || args.Hands.ActiveHandEntity == null
                 || args.Target == args.User || !FindFreeHand(component, out var freeHand))
-                return;
-
-            // (fix https://github.com/SerbiaStrong-220/space-station-14/issues/2054)
-            if (HasComp<BorgChassisComponent>(args.User))
                 return;
 
             EquipmentVerb verb = new EquipmentVerb()

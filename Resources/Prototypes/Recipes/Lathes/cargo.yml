@@ -1,9 +1,9 @@
-- type: latheRecipe
+﻿- type: latheRecipe
   id: ConveyorBeltAssembly
   result: ConveyorBeltAssembly
   completetime: 4
   materials:
-    Steel: 250
+    Steel: 500
     Plastic: 50
 
 - type: latheRecipe

@@ -1,10 +1,9 @@
-using System.Linq;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Cuffs.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
-using Content.Shared.SS220.BlockBuckleVerbsInteraction;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 
@@ -16,11 +15,11 @@ public abstract partial class SharedBuckleSystem
     private void InitializeInteraction()
     {
         SubscribeLocalEvent<StrapComponent, GetVerbsEvent<InteractionVerb>>(AddStrapVerbs);
-        SubscribeLocalEvent<StrapComponent, InteractHandEvent>(OnStrapInteractHand, before: [typeof(InteractionPopupSystem)]);
+        SubscribeLocalEvent<StrapComponent, InteractHandEvent>(OnStrapInteractHand, after: [typeof(InteractionPopupSystem)]);
         SubscribeLocalEvent<StrapComponent, DragDropTargetEvent>(OnStrapDragDropTarget);
         SubscribeLocalEvent<StrapComponent, CanDropTargetEvent>(OnCanDropTarget);
 
-        SubscribeLocalEvent<BuckleComponent, InteractHandEvent>(OnBuckleInteractHand, before: [typeof(InteractionPopupSystem)]);
+        SubscribeLocalEvent<BuckleComponent, InteractHandEvent>(OnBuckleInteractHand, after: [typeof(InteractionPopupSystem)]);
         SubscribeLocalEvent<BuckleComponent, GetVerbsEvent<InteractionVerb>>(AddUnbuckleVerb);
     }
 
@@ -85,29 +84,15 @@ public abstract partial class SharedBuckleSystem
         if (!TryComp(args.User, out BuckleComponent? buckle))
             return;
 
-        // Buckle self
-        if (buckle.BuckledTo == null && component.BuckleOnInteractHand && StrapHasSpace(uid, buckle, component))
-        {
+        if (buckle.BuckledTo == null && component.BuckleOnInteractHand)
             TryBuckle(args.User, args.User, uid, buckle, popup: true);
-            args.Handled = true;
+        else if (buckle.BuckledTo == uid)
+            TryUnbuckle(args.User, args.User, buckle, popup: true);
+        else
             return;
-        }
-
-        // Unbuckle self
-        if (buckle.BuckledTo == uid && TryUnbuckle(args.User, args.User, buckle, popup: true))
-        {
-            args.Handled = true;
-            return;
-        }
-
-        // Unbuckle others
-        if (component.BuckledEntities.TryFirstOrNull(out var buckled) && TryUnbuckle(buckled.Value, args.User))
-        {
-            args.Handled = true;
-            return;
-        }
 
         // TODO BUCKLE add out bool for whether a pop-up was generated or not.
+        args.Handled = true;
     }
 
     private void OnBuckleInteractHand(Entity<BuckleComponent> ent, ref InteractHandEvent args)
@@ -116,20 +101,16 @@ public abstract partial class SharedBuckleSystem
             return;
 
         if (ent.Comp.BuckledTo != null)
-            args.Handled = TryUnbuckle(ent!, args.User, popup: true);
+            TryUnbuckle(ent!, args.User, popup: true);
 
         // TODO BUCKLE add out bool for whether a pop-up was generated or not.
+        args.Handled = true;
     }
 
     private void AddStrapVerbs(EntityUid uid, StrapComponent component, GetVerbsEvent<InteractionVerb> args)
     {
         if (args.Hands == null || !args.CanAccess || !args.CanInteract || !component.Enabled)
             return;
-
-        //ss220 fix revenant verbs start
-        if (HasComp<BlockBuckleVerbsInteractionComponent>(args.User))
-            return;
-        //ss220 fix revenant verbs end
 
         // Note that for whatever bloody reason, buckle component has its own interaction range. Additionally, this
         // range can be set per-component, so we have to check a modified InRangeUnobstructed for every verb.
@@ -205,11 +186,6 @@ public abstract partial class SharedBuckleSystem
     {
         if (!args.CanAccess || !args.CanInteract || !component.Buckled)
             return;
-
-        //ss220 fix revenant verbs start
-        if (HasComp<BlockBuckleVerbsInteractionComponent>(args.User))
-            return;
-        //ss220 fix revenant verbs end
 
         InteractionVerb verb = new()
         {

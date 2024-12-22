@@ -25,6 +25,9 @@ public sealed partial class ApcComponent : BaseApcNetComponent
 
     [DataField("enabled")]
     public bool MainBreakerEnabled = true;
+    // TODO: remove this since it probably breaks when 2 people use it
+    [DataField("hasAccess")]
+    public bool HasAccess = false;
 
     /// <summary>
     /// APC state needs to always be updated after first processing tick.

@@ -166,16 +166,10 @@ namespace Content.Shared.GameTicking
 
             public string Role;
 
-            // SS220 Round End Titles begin
-            //[DataField, NonSerialized]
-            [DataField]
-            // SS220 Round End Titles end
+            [DataField, NonSerialized]
             public string[] JobPrototypes;
 
-            // SS220 Round End Titles begin
-            //[DataField, NonSerialized]
-            [DataField]
-            // SS220 Round End Titles end
+            [DataField, NonSerialized]
             public string[] AntagPrototypes;
 
             public NetEntity? PlayerNetEntity;
@@ -189,29 +183,12 @@ namespace Content.Shared.GameTicking
             public bool Connected;
         }
 
-        // SS220 Round End Titles begin
-        [Serializable, NetSerializable, DataDefinition]
-        public partial struct RoundEndSponsorInfo
-        {
-            [DataField]
-            public string PlayerOOCName;
-            public SS220.Discord.SponsorTier[] Tiers;
-
-            public RoundEndSponsorInfo(string playerOOCName, SS220.Discord.SponsorTier[] tiers)
-            {
-                PlayerOOCName = playerOOCName;
-                Tiers = tiers;
-            }
-        }
-        // SS220 Round End Titles end
-
         public string GamemodeTitle { get; }
         public string RoundEndText { get; }
         public TimeSpan RoundDuration { get; }
         public int RoundId { get; }
         public int PlayerCount { get; }
         public RoundEndPlayerInfo[] AllPlayersEndInfo { get; }
-        public RoundEndSponsorInfo[] Sponsors { get; } // SS220 Round End Titles
 
         /// <summary>
         /// Sound gets networked due to how entity lifecycle works between client / server and to avoid clipping.
@@ -225,7 +202,6 @@ namespace Content.Shared.GameTicking
             int roundId,
             int playerCount,
             RoundEndPlayerInfo[] allPlayersEndInfo,
-            RoundEndSponsorInfo[] sponsors, // SS220 Round End Titles
             string? restartSound)
         {
             GamemodeTitle = gamemodeTitle;
@@ -234,7 +210,6 @@ namespace Content.Shared.GameTicking
             RoundId = roundId;
             PlayerCount = playerCount;
             AllPlayersEndInfo = allPlayersEndInfo;
-            Sponsors = sponsors; // SS220 Round End Titles
             RestartSound = restartSound;
         }
     }

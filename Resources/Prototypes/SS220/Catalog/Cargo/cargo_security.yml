@@ -1,9 +1,0 @@
-- type: cargoProduct
-  id: DecKit
-  icon:
-    sprite: Objects/Storage/boxes.rsi
-    state: box_security
-  product: CrateDecKit
-  cost: 2500
-  category: cargoproduct-category-name-security
-  group: market

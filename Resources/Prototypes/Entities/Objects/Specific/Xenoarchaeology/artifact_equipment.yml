@@ -71,9 +71,6 @@
         whitelist:
           components:
             - Paper
-        blacklist:
-          tags:
-          - Book
     - type: Appearance
     - type: EntityStorageVisuals
       stateDoorOpen: artifact_container_open

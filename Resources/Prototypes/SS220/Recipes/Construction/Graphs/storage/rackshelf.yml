@@ -22,7 +22,6 @@
           - !type:SpawnPrototype
                 prototype: SheetSteel1
                 amount: 2
-          - !type:EmptyAllContainers
           - !type:DeleteEntity {}
           steps:
             - tool: Welding

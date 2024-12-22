@@ -9,14 +9,9 @@ public sealed class LightCollideSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SlimPoweredLightSystem _lights = default!;
 
-    private EntityQuery<LightOnCollideComponent> _lightQuery;
-
     public override void Initialize()
     {
         base.Initialize();
-
-        _lightQuery = GetEntityQuery<LightOnCollideComponent>();
-
         SubscribeLocalEvent<LightOnCollideColliderComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<LightOnCollideColliderComponent, StartCollideEvent>(OnStart);
         SubscribeLocalEvent<LightOnCollideColliderComponent, EndCollideEvent>(OnEnd);
@@ -40,7 +35,7 @@ public sealed class LightCollideSystem : EntitySystem
 
             var other = contact.OtherEnt(ent.Owner);
 
-            if (_lightQuery.HasComp(other))
+            if (HasComp<LightOnCollideComponent>(other))
             {
                 _physics.RegenerateContacts(other);
             }
@@ -51,7 +46,7 @@ public sealed class LightCollideSystem : EntitySystem
     // At the moment there's no easy way to do collision whitelists based on components.
     private void OnPreventCollide(Entity<LightOnCollideColliderComponent> ent, ref PreventCollideEvent args)
     {
-        if (!_lightQuery.HasComp(args.OtherEntity))
+        if (!HasComp<LightOnCollideComponent>(args.OtherEntity))
         {
             args.Cancelled = true;
         }
@@ -62,7 +57,7 @@ public sealed class LightCollideSystem : EntitySystem
         if (args.OurFixtureId != ent.Comp.FixtureId)
             return;
 
-        if (!_lightQuery.HasComp(args.OtherEntity))
+        if (!HasComp<LightOnCollideComponent>(args.OtherEntity))
             return;
 
         // TODO: Engine bug IsTouching box2d yay.
@@ -79,7 +74,7 @@ public sealed class LightCollideSystem : EntitySystem
         if (args.OurFixtureId != ent.Comp.FixtureId)
             return;
 
-        if (!_lightQuery.HasComp(args.OtherEntity))
+        if (!HasComp<LightOnCollideComponent>(args.OtherEntity))
             return;
 
         _lights.SetEnabled(args.OtherEntity, true);

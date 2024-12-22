@@ -14,9 +14,9 @@
   - type: AmmoCounter
   - type: UseDelayOnShoot
   - type: UseDelay
-    delay: 6 #ss220 fix 4 -> 6
+    delay: 4
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 6 #NerfCrossbow
+    rechargeCooldown: 4
     rechargeSound:
       path: /Audio/SS220/Weapons/Guns/MagIn/draw_bow2.ogg
   - type: Gun

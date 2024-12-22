@@ -29,5 +29,3 @@ ent-ImmovableRodThrongler = неподвижный нагибатор
     .desc = Поймаете - можете оставить себе.
 ent-ImmovableRodGibstick = неподвижная гиб-палка
     .desc = А чего вы ожидали?
-ent-ImmovableRodWeh = неподвижный вех
-    .desc = ВЕХ!

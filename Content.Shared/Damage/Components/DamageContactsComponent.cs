@@ -17,28 +17,4 @@ public sealed partial class DamageContactsComponent : Component
     /// </summary>
     [DataField("ignoreWhitelist")]
     public EntityWhitelist? IgnoreWhitelist;
-
-    //SS220 Add ignore blacklist begin
-    /// <summary>
-    /// Entities that damaged by this entity
-    /// </summary>
-    [DataField]
-    public EntityWhitelist? IgnoreBlacklist;
-    //SS220 Add ignore blacklist end
-
-    //SS220 Add stand still time begin
-    /// <summary>
-    /// How many seconds does a entity need to stand still to start taking damage
-    /// </summary>
-    [DataField]
-    public TimeSpan StandStillTime = TimeSpan.Zero;
-    //SS220 Add stand still time end
-
-    //SS220 Add IgnoreResistances datafield begin
-    /// <summary>
-    /// Should this damage ignore resists
-    /// </summary>
-    [DataField]
-    public bool IgnoreResistances = false;
-    //SS220 Add IgnoreResistances datafield end
 }

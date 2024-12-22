@@ -100,7 +100,7 @@ public sealed class FatExtractorSystem : EntitySystem
         if (!TryComp<HungerComponent>(occupant, out var hunger))
             return false;
 
-        if (_hunger.GetHunger(hunger) < component.NutritionPerSecond)
+        if (hunger.CurrentHunger < component.NutritionPerSecond)
             return false;
 
         if (hunger.CurrentThreshold < component.MinHungerThreshold && !HasComp<EmaggedComponent>(uid))

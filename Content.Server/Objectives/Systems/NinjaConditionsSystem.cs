@@ -1,10 +1,9 @@
 using Content.Server.Objectives.Components;
-using Content.Server.Roles;
 using Content.Server.Warps;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Ninja.Components;
-using Content.Shared.Roles;
 using Robust.Shared.Random;
+using Content.Server.Roles;
 
 namespace Content.Server.Objectives.Systems;
 
@@ -17,7 +16,6 @@ public sealed class NinjaConditionsSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly NumberObjectiveSystem _number = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
 
     public override void Initialize()
     {
@@ -48,8 +46,10 @@ public sealed class NinjaConditionsSystem : EntitySystem
     // spider charge
     private void OnSpiderChargeRequirementCheck(EntityUid uid, SpiderChargeConditionComponent comp, ref RequirementCheckEvent args)
     {
-        if (args.Cancelled || !_roles.MindHasRole<NinjaRoleComponent>(args.MindId))
+        if (args.Cancelled || !HasComp<NinjaRoleComponent>(args.MindId))
+        {
             return;
+        }
 
         // choose spider charge detonation point
         var warps = new List<EntityUid>();

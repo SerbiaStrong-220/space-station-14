@@ -11,7 +11,6 @@
     - id: CargoSaleComputerCircuitboard
     - id: CargoShuttleComputerCircuitboard
     - id: CargoShuttleConsoleCircuitboard
-    - id: SalvageMagnetMachineCircuitboard
     - id: CigPackGreen
       prob: 0.50
     - id: ClothingHeadsetAltCargo
@@ -23,9 +22,6 @@
     - id: Telescopichka # SS220 Telescopic Baton
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: GlassCaseEngravedKnuckledusterFilled # SS220 New Qm highrisk
-    - id: AstroNavCartridge
-    - id: ClothingOuterMechLoaderFull # SS220 AddMechToClothing
-    - id: DeviceCalculator # SS220 Calculator
 
 - type: entity
   id: LockerQuarterMasterFilled
@@ -46,7 +42,7 @@
     - id: CigarGoldCase
       prob: 0.25
     - id: ClothingBeltSheathFilled
-    - id: ClothingHeadsetAltCaptain #SS220-Law Department
+    - id: ClothingHeadsetAltCommand
     - id: ClothingOuterArmorCaptainCarapace
     - id: CommsComputerCircuitboard
     - id: DoorRemoteCommand
@@ -176,8 +172,6 @@
     - id: RubberStampCE
     - id: Telescopichka
     - id: ClothingWristWatchGold # SS220 Wrist Watch
-    - id: CigPackENG #SS220 Cigarettes
-    - id: DeviceCalculator # SS220 Calculator
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -237,8 +231,6 @@
     - id: RubberStampCMO
     - id: Telescopichka # SS220 Telescopic Baton
     - id: ClothingWristWatchGold # SS220 Wrist Watch
-    - id: CigPackMED #SS220 Cigarettes
-    - id: MedTekCartridge
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -280,7 +272,6 @@
   id: LockerFillResearchDirectorNoHardsuit
   table: !type:AllSelector
     children:
-    - id: Intellicard
     - id: BoxEncryptionKeyScience
     - id: CircuitImprinterMachineCircuitboard
     - id: ClothingBeltUtilityFilled
@@ -292,9 +283,6 @@
     - id: RubberStampRd
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: Telescopichka # SS220 Telescopic Baton
-    - id: CigPackRnD #SS220 Cigarettes
-    - id: ClothingOuterReactiveArmor #SS220 New RD highrisk
-    - id: DeviceCalculator # SS220 Calculator
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -337,7 +325,6 @@
   table: !type:AllSelector
     children:
     #- id: WeaponEnergyShotgun #SS220 Energy shotgun removal
-    - id: BookSecretDocuments # SS220 mindslave-stop-word
     - id: BookSpaceLaw
     - id: BoxEncryptionKeySecurity
     - id: CigarGoldCase
@@ -357,8 +344,6 @@
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: WeaponMultiPhaseEnergyGun #SS220 MultiPhaze Energy Gun
     - id: BodySecurityCamera #SS220-Bodycam
-    - id: CigPackSEC #SS220 Cigarettes
-    - id: WantedListCartridge
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

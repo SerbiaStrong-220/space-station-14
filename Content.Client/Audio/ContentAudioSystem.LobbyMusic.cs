@@ -20,6 +20,7 @@ public sealed partial class ContentAudioSystem
 {
     [Dependency] private readonly IBaseClient _client = default!;
     [Dependency] private readonly ClientGameTicker _gameTicker = default!;
+    [Dependency] private readonly IStateManager _stateManager = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private readonly AudioParams _lobbySoundtrackParams = new(-5f, 1, 0, 0, 0, false, 0f);
@@ -70,7 +71,7 @@ public sealed partial class ContentAudioSystem
         Subs.CVar(_configManager, CCVars.LobbyMusicEnabled, LobbyMusicCVarChanged);
         Subs.CVar(_configManager, CCVars.LobbyMusicVolume, LobbyMusicVolumeCVarChanged);
 
-        _state.OnStateChanged += StateManagerOnStateChanged;
+        _stateManager.OnStateChanged += StateManagerOnStateChanged;
 
         _client.PlayerLeaveServer += OnLeave;
 
@@ -114,7 +115,7 @@ public sealed partial class ContentAudioSystem
 
     private void LobbyMusicCVarChanged(bool musicEnabled)
     {
-        if (musicEnabled && _state.CurrentState is LobbyState)
+        if (musicEnabled && _stateManager.CurrentState is LobbyState)
         {
             StartLobbyMusic();
         }
@@ -184,7 +185,7 @@ public sealed partial class ContentAudioSystem
             false,
             _lobbySoundtrackParams.WithVolume(_lobbySoundtrackParams.Volume + SharedAudioSystem.GainToVolume(_configManager.GetCVar(CCVars.LobbyMusicVolume)))
         );
-        if (playResult == null)
+        if (playResult.Value.Entity == default)
         {
             _sawmill.Warning(
                 $"Tried to play lobby soundtrack '{{Filename}}' using {nameof(SharedAudioSystem)}.{nameof(SharedAudioSystem.PlayGlobal)} but it returned default value of EntityUid!",
@@ -233,7 +234,7 @@ public sealed partial class ContentAudioSystem
 
     private void ShutdownLobbyMusic()
     {
-        _state.OnStateChanged -= StateManagerOnStateChanged;
+        _stateManager.OnStateChanged -= StateManagerOnStateChanged;
 
         _client.PlayerLeaveServer -= OnLeave;
 

@@ -9,7 +9,7 @@
   - type: InteractionOutline
   - type: Sprite
     snapCardinals: true
-    sprite: SS220/Structures/Power/Generation/ame.rsi #SS220 Ame Resprite
+    sprite: Structures/Power/Generation/ame.rsi
     state: control
     layers:
     - state: control
@@ -89,7 +89,7 @@
   - type: PowerMonitoringDevice
     group: Generator
     loadNode: input
-    sprite: SS220/Structures/Power/Generation/ame.rsi #SS220 Ame Resprite
+    sprite: Structures/Power/Generation/ame.rsi
     state: static
   - type: PowerSupplier
     supplyRate: 0
@@ -129,7 +129,7 @@
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Walls
-    sprite: SS220/Structures/Power/Generation/ame.rsi #SS220 Ame Resprite
+    sprite: Structures/Power/Generation/ame.rsi
     state: shield_0
     layers:
     - state: shield_0

@@ -123,8 +123,6 @@
       - id: ClothingMaskSterile
       - id: HandLabeler
         prob: 0.5
-      - id: ClothingOuterBioChemistry #SS220-Chemistry-Bio-Coat
-      - id: ClothingHeadHatHoodBioChemistry #SS220-Chemistry-Bio-Coat
 
 - type: entity
   id: LockerParamedicFilled

@@ -10,7 +10,7 @@
   startingGear: LawyerGear
   setPreference: true # SS220 return-of-the-lawyer
   icon: "JobIconLawyer"
-  supervisors: job-supervisors-magistrate #SS220-Law Department
+  supervisors: job-supervisors-hop
   access:
   - Service
   - Lawyer
@@ -22,11 +22,10 @@
   equipment:
     shoes: ClothingShoesBootsLaceup
     id: LawyerPDA
-#    ears: ClothingHeadsetLaw #SS220-Law Department
+    ears: ClothingHeadsetSecurity
   inhand:
     - BriefcaseBrownFilled
   storage:
     back:
     - RubberStampLawyer
     - BookSpaceLaw
-    - BoxTapeRecorder #ss220 recorder-for-iaa-and-lawyer

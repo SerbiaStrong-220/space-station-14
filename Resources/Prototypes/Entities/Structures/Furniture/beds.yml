@@ -27,7 +27,6 @@
   - type: Strap
     position: Down
     rotation: -90
-    drawDepth: Items #SS220 Change DrawDepth on buckle
   # Construction has to be before PlaceableSurface or you'll place things onto the entity instead of deconstructing it.
   - type: Construction
     graph: bed
@@ -57,11 +56,6 @@
     noRot: true
   - type: Anchorable
   - type: Pullable
-  #SS220 Add lying action begin
-  - type: Tag
-    tags:
-    - Bed
-  #SS220 Add lying action end
 
 
 - type: entity

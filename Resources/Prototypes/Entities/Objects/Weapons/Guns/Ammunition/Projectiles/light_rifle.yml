@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 33 #ss220lowTTKUpdate
+        Piercing: 19
 
 - type: entity
   id: BulletLightRiflePractice
@@ -29,7 +29,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 16 #weaponBalance #Incendary rebalance
+        Blunt: 16 #weaponBalance
         Heat: 3 #weaponBalance
 
 - type: entity
@@ -42,4 +42,4 @@
     damage:
       types:
         Radiation: 9
-        Piercing: 14 #ss220lowTTKUpdate
+        Piercing: 10

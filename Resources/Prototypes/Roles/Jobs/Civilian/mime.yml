@@ -20,13 +20,12 @@
     components:
     - type: MimePowers
     - type: FrenchAccent
-    - type: RenameStart #SS220-RenameStart
 
 - type: startingGear
   id: MimeGear
   equipment:
     gloves: ClothingHandsGlovesColorWhite
-#    shoes: ClothingShoesColorWhite #SS220-Two Floppa Iterarion
+    shoes: ClothingShoesColorWhite
     pocket1: CrayonMime
     pocket2: Paper
     id: MimePDA

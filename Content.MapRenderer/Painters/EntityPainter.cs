@@ -56,17 +56,7 @@ public sealed class EntityPainter
             return;
         }
 
-        // SS220 Map Rendering Crash Fix start
-        //var worldRotation = xformSystem.GetWorldRotation(entity.Owner);
-        if (!_sEntityManager.TryGetComponent<TransformComponent>(entity.Owner, out var xform))
-        {
-            Console.WriteLine(
-                $"{nameof(TransformComponent)} can not be found on entity at ({entity.X}, {entity.Y}) global position, {entity.LocalPosition} local position, " +
-                $"with {entity.Sprite.BaseRSI?.Path} RSI, prototype id '{entity.MetaData.EntityPrototype?.ID}', it is probably already destroyed, skipping.");
-            return;
-        }
-        var worldRotation = xformSystem.GetWorldRotation(xform);
-        // SS220 Map Rendering Crash Fix end
+        var worldRotation = xformSystem.GetWorldRotation(entity.Owner);
         foreach (var layer in entity.Sprite.AllLayers)
         {
             if (!layer.Visible)

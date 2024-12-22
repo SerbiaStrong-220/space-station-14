@@ -102,7 +102,12 @@
 
   - !type:CorridorClutterDunGen
     contents:
-    - id: FloraStalagmite
+    - id: FloraStalagmite1
+    - id: FloraStalagmite2
+    - id: FloraStalagmite3
+    - id: FloraStalagmite4
+    - id: FloraStalagmite5
+    - id: FloraStalagmite6
 
   - !type:BoundaryWallDunGen
 
@@ -122,8 +127,6 @@
       Junction: BaseAirlock
       WallMounts: ScienceLabsWalls
       Window: BaseWindow
-    tiles:
-      FallbackTile: FloorDark
     whitelists:
       Rooms:
         tags:

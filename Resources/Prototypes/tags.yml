@@ -16,9 +16,6 @@
   id: Ambrosia
 
 - type: Tag
-  id: AnomalyHost
-
-- type: Tag
   id: AppraisalTool
 
 - type: Tag
@@ -76,25 +73,94 @@
   id: BorgArm
 
 - type: Tag
+  id: BorgEngineerHead
+
+- type: Tag
+  id: BorgEngineerLArm
+
+- type: Tag
+  id: BorgEngineerLLeg
+
+- type: Tag
+  id: BorgEngineerRArm
+
+- type: Tag
+  id: BorgEngineerRLeg
+
+- type: Tag
+  id: BorgEngineerTorso
+
+- type: Tag
+  id: BorgGenericHead
+
+- type: Tag
+  id: BorgGenericLArm
+
+- type: Tag
+  id: BorgGenericLLeg
+
+- type: Tag
+  id: BorgGenericRArm
+
+- type: Tag
+  id: BorgGenericRLeg
+
+- type: Tag
+  id: BorgGenericTorso
+
+- type: Tag
   id: BorgHead
 
 - type: Tag
-  id: BorgLArm
+  id: BorgJanitorHead
 
 - type: Tag
-  id: BorgLLeg
+  id: BorgJanitorLLeg
 
 - type: Tag
-  id: BorgRArm
+  id: BorgJanitorRLeg
 
 - type: Tag
-  id: BorgRLeg
-
-- type: Tag
-  id: BorgTorso
+  id: BorgJanitorTorso
 
 - type: Tag
   id: BorgLeg
+
+- type: Tag
+  id: BorgMedicalHead
+
+- type: Tag
+  id: BorgMedicalLArm
+
+- type: Tag
+  id: BorgMedicalLLeg
+
+- type: Tag
+  id: BorgMedicalRArm
+
+- type: Tag
+  id: BorgMedicalRLeg
+
+- type: Tag
+  id: BorgMedicalTorso
+
+- type: Tag
+  id: BorgMiningHead
+
+- type: Tag
+  id: BorgMiningLArm
+
+- type: Tag
+  id: BorgMiningLLeg
+
+- type: Tag
+  id: BorgMiningRArm
+
+- type: Tag
+  id: BorgMiningRLeg
+
+- type: Tag
+  id: BorgMiningTorso
 
 - type: Tag
   id: BorgModuleCargo
@@ -121,7 +187,22 @@
   id: BorgModuleSyndicateAssault
 
 - type: Tag
-  id: Bot
+  id: BorgServiceHead
+
+- type: Tag
+  id: BorgServiceLArm
+
+- type: Tag
+  id: BorgServiceLLeg
+
+- type: Tag
+  id: BorgServiceRArm
+
+- type: Tag
+  id: BorgServiceRLeg
+
+- type: Tag
+  id: BorgServiceTorso
 
 - type: Tag
   id: BotanyHatchet
@@ -140,9 +221,6 @@
 
 - type: Tag
   id: BoxHug
-
-- type: Tag
-  id: Brain
 
 - type: Tag
   id: BrassInstrument
@@ -166,16 +244,10 @@
   id: Bucket
 
 - type: Tag
-  id: Burger
-
-- type: Tag
   id: BulletFoam
 
 - type: Tag
   id: Burnt
-
-- type: Tag
-  id: Bun
 
 - type: Tag
   id: BypassDropChecks
@@ -295,9 +367,6 @@
 - type: Tag
   id: Chicken
 
-- type: Tag
-  id: Cheese
-
 # Allowed to control someone wearing a Chef's hat if inside their hat.
 - type: Tag
   id: ChefPilot
@@ -373,9 +442,6 @@
 
 - type: Tag
   id: Cow
-
-- type: Tag
-  id: Crab
 
 - type: Tag
   id: Crayon
@@ -539,12 +605,6 @@
   id: FirelockElectronics
 
 - type: Tag
-  id: FireExtinguisher
-
-- type: Tag
-  id: FireHelmet
-
-- type: Tag
   id: Flare
 
 - type: Tag
@@ -573,9 +633,6 @@
 
 - type: Tag
   id: ForceNoFixRotations # fixrotations command WON'T target this
-
-- type: Tag
-  id: FreezerElectronics
 
 - type: Tag
   id: Fruit
@@ -618,9 +675,6 @@
 
 - type: Tag
   id: Grenade
-
-- type: Tag
-  id: GrenadeFlashBang
 
 - type: Tag
   id: HudMedical
@@ -916,16 +970,10 @@
   id: NoBlockAnchoring
 
 - type: Tag
-  id: NoConsoleSound
-
-- type: Tag
   id: NozzleBackTank
 
 - type: Tag
   id: Nugget # for chicken nuggets
-
-- type: Tag
-  id: FakeNukeDisk
 
 - type: Tag
   id: NukeOpsUplink
@@ -1001,9 +1049,6 @@
 
 - type: Tag
   id: Plunger
-
-- type: Tag
-  id: PlushieCarp
 
 - type: Tag
   id: PlushieGhost
@@ -1109,15 +1154,6 @@
   id: SecBeltEquip
 
 - type: Tag
-  id: SecurePlasmaWindoor
-
-- type: Tag
-  id: SecureUraniumWindoor
-
-- type: Tag
-  id: SecureWindoor
-
-- type: Tag
   id: SecurityHelmet
 
 - type: Tag
@@ -1128,9 +1164,6 @@
 
 - type: Tag
   id: ShellShotgun
-
-- type: Tag
-  id: ShellShotgunLight # shotgun shells that are compatible with the flare gun.
 
 - type: Tag
   id: Shiv
@@ -1238,16 +1271,10 @@
   id: Syringe
 
 - type: Tag
-  id: SyringeGunAmmo
-
-- type: Tag
   id: Spellbook
 
 - type: Tag
   id: TabletopBoard
-
-- type: Tag
-  id: Taco
 
 - type: Tag
   id: TabletopPiece
@@ -1302,9 +1329,6 @@
 
 - type: Tag
   id: Vegetable
-
-- type: Tag
-  id: VGRoidInterior
 
 - type: Tag
   id: VimPilot
@@ -1458,10 +1482,5 @@
 - type: Tag
   id: ShrineMaidenWig
 # SS220-TohaUpdate-End
-
-# SS220 Fix #2009 begin
-- type: Tag
-  id: HolofanProjectorSecurity
-# SS220 Fix #2009 end
 
 # ALPHABETICAL

@@ -23,7 +23,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Content.Shared.Whitelist;
-using Content.Shared.SS220.MechRobot; //SS220-AddMechToClothing
 
 namespace Content.Server.Mech.Systems;
 
@@ -51,7 +50,6 @@ public sealed partial class MechSystem : SharedMechSystem
         SubscribeLocalEvent<MechComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MechComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<MechComponent, MechOpenUiEvent>(OnOpenUi);
-        SubscribeLocalEvent<MechComponent, MechClothingOpenUiEvent>(OnOpenClothingUi); //SS220-AddMechToClothing
         SubscribeLocalEvent<MechComponent, RemoveBatteryEvent>(OnRemoveBattery);
         SubscribeLocalEvent<MechComponent, MechEntryEvent>(OnMechEntry);
         SubscribeLocalEvent<MechComponent, MechExitEvent>(OnMechExit);
@@ -165,14 +163,6 @@ public sealed partial class MechSystem : SharedMechSystem
         ToggleMechUi(uid, component);
     }
 
-    //SS220-AddMechToClothing-start
-    private void OnOpenClothingUi(Entity<MechComponent> ent, ref MechClothingOpenUiEvent args)
-    {
-        args.Handled = true;
-        ToggleMechClothingUi(ent.Owner, args.Performer, ent.Comp);
-    }
-    //SS220-AddMechToClothing-end
-
     private void OnToolUseAttempt(EntityUid uid, MechPilotComponent component, ref ToolUserAttemptUseEvent args)
     {
         if (args.Target == component.Mech)
@@ -183,11 +173,6 @@ public sealed partial class MechSystem : SharedMechSystem
     {
         if (!args.CanAccess || !args.CanInteract || component.Broken)
             return;
-
-        //SS220-AddMechToClothing-start
-        if (!TryComp<MechRobotComponent>(uid, out var _))
-            return;
-        //SS220-AddMechToClothing-end
 
         if (CanInsert(uid, args.User, component))
         {
@@ -212,13 +197,8 @@ public sealed partial class MechSystem : SharedMechSystem
             args.Verbs.Add(enterVerb);
             args.Verbs.Add(openUiVerb);
         }
-        else if (!IsEmpty(component, uid)) //SS220-AddMechToClothing
+        else if (!IsEmpty(component))
         {
-            //SS220-AddMechToClothing-start
-            if (!TryComp<MechRobotComponent>(uid, out var _))
-                return;
-            //SS220-AddMechToClothing-end
-
             var ejectVerb = new AlternativeVerb
             {
                 Text = Loc.GetString("mech-verb-exit"),
@@ -231,11 +211,8 @@ public sealed partial class MechSystem : SharedMechSystem
                         return;
                     }
 
-                    var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.ExitDelay, new MechExitEvent(), uid, target: uid)
-                    {
-                        BreakOnMove = true,
-                    };
-                    _popup.PopupEntity(Loc.GetString("mech-eject-pilot-alert", ("item", uid), ("user", args.User)), uid, PopupType.Large);
+                    var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.ExitDelay,
+                        new MechExitEvent(), uid, target: uid);
 
                     _doAfter.TryStartDoAfter(doAfterEventArgs);
                 }
@@ -248,11 +225,6 @@ public sealed partial class MechSystem : SharedMechSystem
     {
         if (args.Cancelled || args.Handled)
             return;
-
-        //SS220-AddMechToClothing-start
-        if (!TryComp<MechRobotComponent>(uid, out var _))
-            return;
-        //SS220-AddMechToClothing-end
 
         if (_whitelistSystem.IsWhitelistFail(component.PilotWhitelist, args.User))
         {
@@ -304,20 +276,6 @@ public sealed partial class MechSystem : SharedMechSystem
         _ui.TryToggleUi(uid, MechUiKey.Key, actor.PlayerSession);
         UpdateUserInterface(uid, component);
     }
-
-    //SS220-AddMechToClothing-start
-    private void ToggleMechClothingUi(EntityUid entOwner, EntityUid argsPerformer, MechComponent? entComp = null)
-    {
-        if (!Resolve(entOwner, ref entComp))
-            return;
-
-        if (!TryComp<ActorComponent>(argsPerformer, out var actor))
-            return;
-
-        _ui.TryToggleUi(entOwner, MechUiKey.Key, actor.PlayerSession);
-        UpdateUserInterface(entOwner, entComp);
-    }
-    //SS220-AddMechToClothing-end
 
     private void ReceiveEquipmentUiMesssages<T>(EntityUid uid, MechComponent component, T args) where T : MechEquipmentUiMessage
     {

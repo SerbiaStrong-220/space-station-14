@@ -37,12 +37,6 @@ reagent-effect-guidebook-emp-reaction-effect =
         *[other] cause
     } an electromagnetic pulse
 
-reagent-effect-guidebook-flash-reaction-effect =
-    { $chance ->
-        [1] Causes
-        *[other] cause
-    } a blinding flash
-
 reagent-effect-guidebook-foam-area-reaction-effect =
     { $chance ->
         [1] Creates

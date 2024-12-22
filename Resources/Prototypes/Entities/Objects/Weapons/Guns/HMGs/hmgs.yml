@@ -29,10 +29,9 @@
 - type: entity
   name: minigun
   id: WeaponMinigun
-  parent: [ BaseWeaponHeavyMachineGun]
+  parent: [ BaseWeaponHeavyMachineGun, BaseMajorContraband ]
   description: Vzzzzzt! Rahrahrahrah! Vrrrrr! Uses .10 rifle ammo.
   components:
-  - type: AmmoCounter #SS220-FIX bullet show
   - type: Sprite
     sprite: Objects/Weapons/Guns/HMGs/minigun.rsi
     layers:

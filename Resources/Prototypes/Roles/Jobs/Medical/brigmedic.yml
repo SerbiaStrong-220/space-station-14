@@ -21,12 +21,12 @@
 - type: startingGear
   id: BrigmedicGear
   equipment:
-#    eyes: ClothingEyesHudMedical #SS220-TwoOne-Floppa-Iteration
+    eyes: ClothingEyesHudMedical
     id: BrigmedicPDA
     ears: ClothingHeadsetBrigmedic
     belt: ClothingBeltSecurityMedicalFilled #SS220-Brigmedic-Fashion
   storage:
     back:
-#    - BoxSurvivalBrigmedic #SS220-Brigmedic SurvivalBox Fix
+    - BoxSurvivalBrigmedic
     - Flash
 #SS220-brigmedic-loadout-end

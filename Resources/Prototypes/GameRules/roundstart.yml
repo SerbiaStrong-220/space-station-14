@@ -115,7 +115,7 @@
       spawnerPrototype: SpawnPointNukeopsCommander
       startingGear: SyndicateCommanderGearFull
       roleLoadout:
-      - RoleSurvivalNukie
+      - RoleSurvivalSyndicate
       components:
       - type: NukeOperative
       - type: RandomMetadata
@@ -125,14 +125,15 @@
       - type: NpcFactionMember
         factions:
         - Syndicate
-      mindRoles:
-      - MindRoleNukeopsCommander
+      mindComponents:
+      - type: NukeopsRole
+        prototype: NukeopsCommander
     - prefRoles: [ NukeopsMedic ]
       fallbackRoles: [ Nukeops, NukeopsCommander ]
       spawnerPrototype: SpawnPointNukeopsMedic
       startingGear: SyndicateOperativeMedicFull
       roleLoadout:
-      - RoleSurvivalNukie
+      - RoleSurvivalSyndicate
       components:
       - type: NukeOperative
       - type: RandomMetadata
@@ -142,8 +143,9 @@
       - type: NpcFactionMember
         factions:
         - Syndicate
-      mindRoles:
-      - MindRoleNukeopsMedic
+      mindComponents:
+      - type: NukeopsRole
+        prototype: NukeopsMedic
     - prefRoles: [ Nukeops ]
       fallbackRoles: [ NukeopsCommander, NukeopsMedic ]
       spawnerPrototype: SpawnPointNukeopsOperative
@@ -151,7 +153,7 @@
       playerRatio: 10
       startingGear: SyndicateOperativeGearFull
       roleLoadout:
-      - RoleSurvivalNukie
+      - RoleSurvivalSyndicate
       components:
       - type: NukeOperative
       - type: RandomMetadata
@@ -161,8 +163,9 @@
       - type: NpcFactionMember
         factions:
         - Syndicate
-      mindRoles:
-      - MindRoleNukeops
+      mindComponents:
+      - type: NukeopsRole
+        prototype: Nukeops
 
 - type: entity
   abstract: true
@@ -197,8 +200,9 @@
         components:
         - AntagImmune
       lateJoinAdditional: true
-      mindRoles:
-      - MindRoleTraitor
+      mindComponents:
+      - type: TraitorRole
+        prototype: Traitor
 
 #- type: entity
 #  id: Sandbox
@@ -206,24 +210,6 @@
 #  categories: [ GameRules ]
 #  components:
 #  - type: SandboxRule
-
-- type: entity
-  id: TraitorReinforcement
-  parent: BaseTraitorRule
-  components:
-  - type: TraitorRule
-    giveUplink: false
-    giveCodewords: false # It would actually give them a different set of codewords than the regular traitors, anyway
-    giveBriefing: false
-  - type: AntagSelection
-    definitions:
-    - prefRoles: [ Traitor ]
-      mindRoles:
-      - MindRoleTraitor
-  #ss220 reinforcement objective fix begin
-  - type: AntagRandomObjectives
-    enabled: false
-  #ss220 reinforcement objective fix end
 
 - type: entity
   id: Revolutionary
@@ -245,8 +231,9 @@
       components:
       - type: Revolutionary
       - type: HeadRevolutionary
-      mindRoles:
-      - MindRoleHeadRevolutionary
+      mindComponents:
+      - type: RevolutionaryRole
+        prototype: HeadRev
 
 - type: entity
   id: Secret
@@ -282,13 +269,9 @@
       - type: ZombifyOnDeath
       - type: IncurableZombie
       - type: InitialInfected
-      # Corvax-MRP
-      - type: NpcFactionMember
-        addFriendlyFactions:
-        - Zombie
-      # Corvax
-      mindRoles:
-      - MindRoleInitialInfected
+      mindComponents:
+      - type: InitialInfectedRole
+        prototype: InitialInfected
 
 - type: entity
   id: EmergencyShuttleAutoCall
@@ -313,6 +296,7 @@
         tableId: CalmPestEventsTable
       - !type:NestedSelector
         tableId: SpicyPestEventsTable
+        
 
 # SS220-NoUnknownShuttles begin
 # - type: entityTable
@@ -344,17 +328,17 @@
       tableId: BasicGameRulesTable
 
 # SS220-NoUnknownShuttles begin
-#- type: entity
-#  id: SpaceTrafficControlEventScheduler # iff we make a selector for EntityTables that can respect StationEventComp restrictions, or somehow impliment them otherwise in said tables,
-#  parent: BaseGameRule                  # we can remerge this with the other schedulers, but it will silently fail due to that limitation without a separate scheduler to balance atm.
-#  components:
-#  - type: BasicStationEventScheduler
-#    minimumTimeUntilFirstEvent: 2700 # 45 mins #shows up like half way through shift.
-#    minMaxEventTiming:
-#      min: 1200 # 20 mins
-#      max: 7200 # 120 mins # you probably arent getting a second visitor shuttle in one round, but it is possible.
-#    scheduledGameRules: !type:NestedSelector
-#      tableId: SpaceTrafficControlTable
+# - type: entity
+#   id: SpaceTrafficControlEventScheduler # iff we make a selector for EntityTables that can respect StationEventComp restrictions, or somehow impliment them otherwise in said tables,
+#   parent: BaseGameRule                  # we can remerge this with the other schedulers, but it will silently fail due to that limitation without a separate scheduler to balance atm.
+#   components:
+#   - type: BasicStationEventScheduler
+#     minimumTimeUntilFirstEvent: 1200 # 20 mins
+#     minMaxEventTiming:
+#       min: 600 # 10 mins
+#       max: 1800 # 30 mins
+#     scheduledGameRules: !type:NestedSelector
+#       tableId: SpaceTrafficControlTable
 
 # - type: entity
 #   id: SpaceTrafficControlFriendlyEventScheduler

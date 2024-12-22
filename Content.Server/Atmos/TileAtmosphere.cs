@@ -23,6 +23,9 @@ namespace Content.Server.Atmos
         public float Temperature { get; set; } = Atmospherics.T20C;
 
         [ViewVariables]
+        public float TemperatureArchived { get; set; } = Atmospherics.T20C;
+
+        [ViewVariables]
         public TileAtmosphere? PressureSpecificTarget { get; set; }
 
         /// <summary>
@@ -90,15 +93,11 @@ namespace Content.Server.Atmos
         [Access(typeof(AtmosphereSystem), Other = AccessPermissions.ReadExecute)] // FIXME Friends
         public GasMixture? Air { get; set; }
 
-        /// <summary>
-        /// Like Air, but a copy stored each atmos tick before tile processing takes place. This lets us update Air
-        /// in-place without affecting the results based on update order.
-        /// </summary>
-        [ViewVariables]
-        public GasMixture? AirArchived;
-
         [DataField("lastShare")]
         public float LastShare;
+
+        [ViewVariables]
+        public readonly float[] MolesArchived = new float[Atmospherics.AdjustedNumberOfGases];
 
         GasMixture IGasMixtureHolder.Air
         {
@@ -140,7 +139,6 @@ namespace Content.Server.Atmos
             GridIndex = gridIndex;
             GridIndices = gridIndices;
             Air = mixture;
-            AirArchived = Air != null ? Air.Clone() : null;
             Space = space;
 
             if(immutable)
@@ -155,7 +153,7 @@ namespace Content.Server.Atmos
             NoGridTile = other.NoGridTile;
             MapAtmosphere = other.MapAtmosphere;
             Air = other.Air?.Clone();
-            AirArchived = Air != null ? Air.Clone() : null;
+            Array.Copy(other.MolesArchived, MolesArchived, MolesArchived.Length);
         }
 
         public TileAtmosphere()

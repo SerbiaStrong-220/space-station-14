@@ -53,7 +53,7 @@
         Blunt: 10
 
 - type: entity
-  parent: [ClothingEyesBase]
+  parent: [ClothingEyesBase, BaseEngineeringContraband]
   id: ClothingEyesGlassesMeson
   name: engineering goggles #less confusion
   description: Green-tinted goggles using a proprietary polymer that provides protection from eye damage of all types.
@@ -90,7 +90,6 @@
   id: ClothingEyesGlassesJensen
   name: jensen glasses
   description: A pair of yellow tinted folding glasses. You never asked for these.
-  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/jensen.rsi
@@ -104,8 +103,7 @@
   parent: ClothingEyesBase
   id: ClothingEyesGlassesJamjar
   name: jamjar glasses
-  description: These retro glasses remind you of a simpler time.
-  suffix: For playtime #SS220-add-time-loadout-suffix
+  description: Also known as Virginity Protectors.
   components:
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/jamjar.rsi
@@ -164,15 +162,15 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons]
+  parent: [ClothingEyesBase, ShowSecurityIcons, BaseRestrictedContraband]
   id: ClothingEyesGlassesSecurity
   name: security glasses
   description: Upgraded sunglasses that provide flash immunity and a security HUD.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Eyes/Glasses/secglasses.rsi #SS220-updated
+    sprite: Clothing/Eyes/Glasses/secglasses.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Eyes/Glasses/secglasses.rsi #SS220-updated
+    sprite: Clothing/Eyes/Glasses/secglasses.rsi
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
@@ -192,10 +190,10 @@
     coverage: EYES
 
 - type: entity
-  parent: [ClothingEyesBase]
+  parent: [ClothingEyesBase, BaseCommandContraband]
   id: ClothingEyesGlassesCommand
   name: administration glasses
-  description: Upgraded sunglasses that provide flash immunity and show ID card status.
+  description: Upgraded sunglasses that provide flash immunity and show ID card status. 
   components:
   - type: Sprite
     sprite: Clothing/Eyes/Glasses/commandglasses.rsi
@@ -285,7 +283,7 @@
 #SS220-Blueshield-end
 
 - type: entity
-  parent: [ClothingEyesBase]
+  parent: [ClothingEyesBase, BaseMajorContraband]
   id: ClothingEyesVisorNinja
   name: ninja visor
   description: An advanced visor protecting a ninja's eyes from flashing lights.

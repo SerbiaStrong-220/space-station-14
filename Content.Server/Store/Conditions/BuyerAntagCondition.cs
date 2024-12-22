@@ -33,16 +33,16 @@ public sealed partial class BuyerAntagCondition : ListingCondition
             return true;
 
         var roleSystem = ent.System<SharedRoleSystem>();
-        var roles = roleSystem.MindGetAllRoleInfo(mindId);
+        var roles = roleSystem.MindGetAllRoles(mindId);
 
         if (Blacklist != null)
         {
             foreach (var role in roles)
             {
-                if (!role.Antagonist || string.IsNullOrEmpty(role.Prototype))
+                if (role.Component is not AntagonistRoleComponent blacklistantag)
                     continue;
 
-                if (Blacklist.Contains(role.Prototype))
+                if (blacklistantag.PrototypeId != null && Blacklist.Contains(blacklistantag.PrototypeId))
                     return false;
             }
         }
@@ -52,11 +52,10 @@ public sealed partial class BuyerAntagCondition : ListingCondition
             var found = false;
             foreach (var role in roles)
             {
-
-                if (!role.Antagonist || string.IsNullOrEmpty(role.Prototype))
+                if (role.Component is not AntagonistRoleComponent antag)
                     continue;
 
-                if (Whitelist.Contains(role.Prototype))
+                if (antag.PrototypeId != null && Whitelist.Contains(antag.PrototypeId))
                     found = true;
             }
             if (!found)

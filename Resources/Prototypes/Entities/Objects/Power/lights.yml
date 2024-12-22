@@ -129,7 +129,6 @@
   - type: Tag
     tags:
     - LightBulb
-    - Trash
 
 - type: entity
   parent: BaseLightbulb
@@ -148,24 +147,6 @@
   - type: Tag
     tags:
     - LightBulb
-    - Trash
-
-- type: entity
-  parent: BaseLightbulb
-  name: dim light bulb
-  id: DimLightBulb
-  description: A dim light bulb for populating the darkness of maintenance.
-  components:
-  - type: LightBulb
-    bulb: Bulb
-    color: "#ba473f"
-    lightEnergy: 0.5
-    lightRadius: 5
-    lightSoftness: 3
-  - type: Tag
-    tags:
-    - LightBulb
-    - Trash
 
 - type: entity
   parent: LightBulb
@@ -182,7 +163,6 @@
   - type: Tag
     tags:
     - LightBulb
-    - Trash #ss220 light-bulbs-trash-fix
 
 - type: entity
   suffix: Broken
@@ -210,7 +190,6 @@
   - type: Tag
     tags:
     - LightBulb
-    - Trash
 
 - type: entity
   parent: BaseLightTube

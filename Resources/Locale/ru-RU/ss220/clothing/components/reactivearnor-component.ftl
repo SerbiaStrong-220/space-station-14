@@ -1,1 +1,0 @@
-toggle-reactivearmor-verb-get-data-text = Переключить реактивную броню

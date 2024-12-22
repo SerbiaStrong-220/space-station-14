@@ -1,5 +1,5 @@
 - type: entity
-  parent: [MobObserverBase, InventoryBase]
+  parent: [MobObserver, InventoryBase]
   id: AdminObserver
   name: admin observer
   categories: [ HideSpawnMenu ]
@@ -12,7 +12,6 @@
     - CanPilot
     - BypassInteractionRangeChecks
     - BypassDropChecks
-    - NoConsoleSound
   - type: Input
     context: "aghost"
   - type: Ghost
@@ -25,7 +24,7 @@
   - type: CombatMode
   - type: Physics
     ignorePaused: true
-    bodyType: KinematicController # SS220 aghost pusher fix
+    bodyType: Kinematic
   - type: Body
     prototype: Aghost
   - type: Access
@@ -98,7 +97,7 @@
 - type: entity
   id: ActionAGhostShowSolar
   name: Solar Control Interface
-  description: View a Solar Control Interface.
+  description: View a solar control interface.
   components:
   - type: InstantAction
     icon: Corvax/Interface/AdminActions/solar.png # Corvax-Resprite
@@ -110,31 +109,31 @@
 - type: entity
   id: ActionAGhostShowCommunications
   name: Communications Interface
-  description: View a Communications Interface.
+  description: View a communications interface.
   components:
   - type: InstantAction
     icon: Corvax/Interface/AdminActions/communications.png # Corvax-Resprite
     iconOn: Corvax/Interface/AdminActions/communications.png # Corvax-Resprite
     keywords: [ "AI", "console", "interface" ]
-    priority: -4
+    priority: -10
     event: !type:ToggleIntrinsicUIEvent { key: enum.CommunicationsConsoleUiKey.Key }
 
 - type: entity
   id: ActionAGhostShowRadar
   name: Mass Scanner Interface
-  description: View a Mass Scanner Interface.
+  description: View a mass scanner interface.
   components:
   - type: InstantAction
     icon: Corvax/Interface/AdminActions/radar.png # Corvax-Resprite
     iconOn: Corvax/Interface/AdminActions/radar.png # Corvax-Resprite
     keywords: [ "AI", "console", "interface" ]
-    priority: -6
+    priority: -10
     event: !type:ToggleIntrinsicUIEvent { key: enum.RadarConsoleUiKey.Key }
 
 - type: entity
   id: ActionAGhostShowCargo
   name: Cargo Ordering Interface
-  description: View a Cargo Ordering Interface.
+  description: View a cargo ordering interface.
   components:
   - type: InstantAction
     icon: Corvax/Interface/AdminActions/cargo.png # Corvax-Resprite
@@ -146,23 +145,23 @@
 - type: entity
   id: ActionAGhostShowCrewMonitoring
   name: Crew Monitoring Interface
-  description: View a Crew Monitoring Interface.
+  description: View a crew monitoring interface.
   components:
   - type: InstantAction
     icon: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
     iconOn: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
     keywords: [ "AI", "console", "interface" ]
-    priority: -8
+    priority: -10
     event: !type:ToggleIntrinsicUIEvent { key: enum.CrewMonitoringUIKey.Key }
 
 - type: entity
   id: ActionAGhostShowStationRecords
   name: Station Records Interface
-  description: View a Station Records Interface.
+  description: View a station records Interface.
   components:
   - type: InstantAction
     icon: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
     iconOn: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
     keywords: [ "AI", "console", "interface" ]
-    priority: -7
+    priority: -10
     event: !type:ToggleIntrinsicUIEvent { key: enum.GeneralStationRecordConsoleKey.Key }

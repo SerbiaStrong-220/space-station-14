@@ -7,8 +7,3 @@
     Steel: 600
     Glass: 600
     Silver: 100
-
-- type: latheRecipe
-  parent: BaseGoldBorgModuleRecipe
-  id: BorgModuleFireAxe
-  result: BorgModuleFireAxe

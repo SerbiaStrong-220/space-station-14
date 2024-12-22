@@ -112,22 +112,6 @@ public sealed partial class DarkReaperComponent : Component
     public float StunAbilityLightBreakRadius = 4.5f;
 
     /// <summary>
-    /// StunAbilityConfusion - radius in which entities are affected by confusion 
-    /// </summary>
-    [DataField]
-    public float StunAbilityConfusion = 12f;
-    /// <summary>
-    /// ConfusionDuration - duration of the confusion effect
-    /// </summary>
-    [DataField]
-    public TimeSpan ConfusionDuration = TimeSpan.FromSeconds(7);
-    /// <summary>
-    /// ConfusionEffectName - name of effect that applied
-    /// </summary>
-    [DataField]
-    public string ConfusionEffectName = "Flashed";
-
-    /// <summary>
     /// Duration of the stun that is applied by the ability
     /// </summary>
     [ViewVariables, DataField, AutoNetworkedField]
@@ -235,24 +219,21 @@ public sealed partial class DarkReaperComponent : Component
         new()
         {
             { "Slash", 12 },
-            { "Piercing", 4 },
-            { "Structural", 20 }
+            { "Piercing", 4 }
         },
 
         // Stage 2
         new()
         {
             { "Slash", 16 },
-            { "Piercing", 8 },
-            { "Structural", 40 }
+            { "Piercing", 8 }
         },
 
         // Stage 3
         new()
         {
             { "Slash", 20 },
-            { "Piercing", 16 },
-            { "Structural", 80 }
+            { "Piercing", 16 }
         }
     };
 
@@ -267,8 +248,7 @@ public sealed partial class DarkReaperComponent : Component
         {
             Coefficients = new()
             {
-                {"Radiation", 0},
-                {"Piercing", 0.8f}
+                {"Radiation", 0}
             }
         },
 
@@ -277,8 +257,7 @@ public sealed partial class DarkReaperComponent : Component
         {
             Coefficients = new()
             {
-                {"Radiation", 0},
-                {"Piercing", 0.6f}
+                {"Radiation", 0}
             }
         },
 
@@ -315,8 +294,6 @@ public sealed partial class DarkReaperComponent : Component
     public EntProtoId ConsumeAction = "ActionDarkReaperConsume";
     [DataField]
     public EntProtoId MaterializeAction = "ActionDarkReaperMaterialize";
-    [DataField]
-    public EntProtoId BloodMistAction = "ActionDarkReaperBloodMist";
 
     [DataField, AutoNetworkedField]
     public EntityUid? RoflActionEntity;
@@ -326,8 +303,6 @@ public sealed partial class DarkReaperComponent : Component
     public EntityUid? ConsumeActionEntity;
     [DataField, AutoNetworkedField]
     public EntityUid? MaterializeActionEntity;
-    [DataField, AutoNetworkedField]
-    public EntityUid? BloodMistActionEntity;
 
     // ABILITY STATES ///
     [ViewVariables, AutoNetworkedField]
@@ -344,8 +319,6 @@ public sealed partial class DarkReaperComponent : Component
 
     [ViewVariables]
     public TimeSpan? MaterializedStart;
-    [ViewVariables, AutoNetworkedField]
-    public TimeSpan? BloodMistStart;
 }
 
 [Serializable, NetSerializable]

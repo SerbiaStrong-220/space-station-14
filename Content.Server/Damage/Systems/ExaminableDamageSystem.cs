@@ -39,7 +39,7 @@ public sealed class ExaminableDamageSystem : EntitySystem
 
         var level = GetDamageLevel(uid, component);
         var msg = Loc.GetString(messages[level]);
-        args.PushMarkup(msg,-99);
+        args.PushMarkup(msg);
     }
 
     private int GetDamageLevel(EntityUid uid, ExaminableDamageComponent? component = null,

@@ -131,10 +131,7 @@ namespace Content.Server.Atmos.EntitySystems
 
         private void TemperatureShareMutualSolid(TileAtmosphere tile, TileAtmosphere other, float conductionCoefficient)
         {
-            if (tile.AirArchived == null || other.AirArchived == null)
-                return;
-
-            var deltaTemperature = (tile.AirArchived.Temperature - other.AirArchived.Temperature);
+            var deltaTemperature = (tile.TemperatureArchived - other.TemperatureArchived);
             if (MathF.Abs(deltaTemperature) > Atmospherics.MinimumTemperatureDeltaToConsider
                 && tile.HeatCapacity != 0f && other.HeatCapacity != 0f)
             {
@@ -148,14 +145,11 @@ namespace Content.Server.Atmos.EntitySystems
 
         public void RadiateToSpace(TileAtmosphere tile)
         {
-            if (tile.AirArchived == null)
-                return;
-
             // Considering 0ºC as the break even point for radiation in and out.
             if (tile.Temperature > Atmospherics.T0C)
             {
                 // Hardcoded space temperature.
-                var deltaTemperature = (tile.AirArchived.Temperature - Atmospherics.TCMB);
+                var deltaTemperature = (tile.TemperatureArchived - Atmospherics.TCMB);
                 if ((tile.HeatCapacity > 0) && (MathF.Abs(deltaTemperature) > Atmospherics.MinimumTemperatureDeltaToConsider))
                 {
                     var heat = tile.ThermalConductivity * deltaTemperature * (tile.HeatCapacity *

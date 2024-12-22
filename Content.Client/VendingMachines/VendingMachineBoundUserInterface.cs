@@ -23,17 +23,29 @@ namespace Content.Client.VendingMachines
         {
             base.Open();
 
+            var vendingMachineSys = EntMan.System<VendingMachineSystem>();
+
+            _cachedInventory = vendingMachineSys.GetAllInventory(Owner);
+
             _menu = this.CreateWindow<VendingMachineMenu>();
             _menu.OpenCenteredLeft();
             _menu.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;
+
             _menu.OnItemSelected += OnItemSelected;
-            Refresh();
+
+            _menu.Populate(_cachedInventory);
+
+            _menu.OpenCenteredLeft();
         }
 
-        public void Refresh()
+        protected override void UpdateState(BoundUserInterfaceState state)
         {
-            var system = EntMan.System<VendingMachineSystem>();
-            _cachedInventory = system.GetAllInventory(Owner);
+            base.UpdateState(state);
+
+            if (state is not VendingMachineInterfaceState newState)
+                return;
+
+            _cachedInventory = newState.Inventory;
 
             _menu?.Populate(_cachedInventory);
         }

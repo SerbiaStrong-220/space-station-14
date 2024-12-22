@@ -19,10 +19,7 @@
         mask:
         - MachineMask
         layer:
-        # SS220 Plastic Flaps Collision Fix begin
-        #- WallLayer
-        - MachineLayer
-        # SS220 Plastic Flaps Collision Fix end
+        - WallLayer
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic

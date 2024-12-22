@@ -27,6 +27,7 @@ namespace Content.Server.Nutrition.EntitySystems
         [Dependency] private readonly FoodSystem _foodSystem = default!;
         [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
+        [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
 
         private void InitializeVapes()
         {
@@ -122,10 +123,11 @@ namespace Content.Server.Nutrition.EntitySystems
 
         private void OnVapeDoAfter(Entity<VapeComponent> entity, ref VapeDoAfterEvent args)
         {
-            if (args.Cancelled || args.Handled || args.Args.Target == null)
+            if (args.Handled
+            || args.Args.Target == null)
                 return;
 
-            var environment = _atmos.GetContainingMixture(args.Args.Target.Value, true, true);
+            var environment = _atmosphereSystem.GetContainingMixture(args.Args.Target.Value, true, true);
             if (environment == null)
             {
                 return;
@@ -137,7 +139,7 @@ namespace Content.Server.Nutrition.EntitySystems
             var merger = new GasMixture(1) { Temperature = args.Solution.Temperature };
             merger.SetMoles(entity.Comp.GasType, args.Solution.Volume.Value / entity.Comp.ReductionFactor);
 
-            _atmos.Merge(environment, merger);
+            _atmosphereSystem.Merge(environment, merger);
 
             args.Solution.RemoveAllSolution();
 

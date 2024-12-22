@@ -22,6 +22,8 @@ public sealed class RoleRequirementSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        // this whitelist trick only works because roles are components on the mind and not entities
+        // if that gets reworked then this will need changing
         if (_whitelistSystem.IsWhitelistFail(comp.Roles, args.MindId))
             args.Cancelled = true;
     }

@@ -48,10 +48,7 @@ public enum CollisionGroup
     LargeMobLayer = Opaque | HighImpassable | MidImpassable | LowImpassable | BulletImpassable,
 
     // Machines, computers
-    // SS220 Plastic Flaps Collision Fix Again begin
-    //MachineMask = Impassable | MidImpassable | LowImpassable,
-    MachineMask = Impassable | HighImpassable | LowImpassable,
-    // SS220 Plastic Flaps Collision Fix Again end
+    MachineMask = Impassable | MidImpassable | LowImpassable,
     MachineLayer = Opaque | MidImpassable | LowImpassable | BulletImpassable,
     ConveyorMask = Impassable | MidImpassable | LowImpassable | DoorPassable,
 

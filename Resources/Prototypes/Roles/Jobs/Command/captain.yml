@@ -16,6 +16,7 @@
   weight: 20
   startingGear: CaptainGear
   icon: "JobIconCaptain"
+  requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -35,7 +36,7 @@
     shoes: ClothingShoesBootsLaceup
     eyes: ClothingEyesGlassesSunglasses
     id: CaptainPDA
-#    ears: ClothingHeadsetAltCommand #SS220-Law Department
+    ears: ClothingHeadsetAltCommand
   storage:
     back:
     - Flash

@@ -12,11 +12,8 @@
 
 - type: randomHumanoidSettings
   id: CentCommNanoTrasenDiplomat
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid ]
   components:
-    - type: RandomHumanoidAppearance
-      randomizeName: false
-      hair: HairBald
     - type: RandomMetadata
       nameSegments:
         - NamesFirstDiplomatMale
@@ -34,7 +31,7 @@
 
 - type: job
   id: CentCommNanoTrasenDiplomat
-  name: job-name-nt-politician
+  name: job-name-centcomoff
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentCommNanoTrasenDiplomatGear
@@ -45,11 +42,6 @@
   radioBold: true
   accessGroups:
   - AllAccess
-  access:
-  - CentralCommand
-  - CentralCommandERT
-  - CentralCommandBSO
-  - CentralCommandCBURN
 
 - type: startingGear
   id: CentCommNanoTrasenDiplomatGear

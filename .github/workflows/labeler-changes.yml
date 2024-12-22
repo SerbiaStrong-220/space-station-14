@@ -6,11 +6,10 @@ on:
 
 jobs:
   update_label:
-    if: github.event.review.state == 'changes_requested'
-    runs-on: ubuntu-latest
     permissions:
       pull-requests: write
-      contents: write
+    if: github.event.review.state == 'changes_requested'
+    runs-on: ubuntu-latest
     steps:
     - uses: actions-ecosystem/action-add-labels@v1
       with:

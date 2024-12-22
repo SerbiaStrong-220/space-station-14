@@ -2,7 +2,6 @@ using Content.Shared.CriminalRecords.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Ninja.Systems;
-using Content.Shared.SS220.CriminalRecords; // SS220-criminal-console-fix
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.CriminalRecords.Systems;
@@ -25,8 +24,7 @@ public abstract class SharedCriminalRecordsHackerSystem : EntitySystem
         if (args.Handled || !_gloves.AbilityCheck(ent, args, out var target))
             return;
 
-        //if (!HasComp<CriminalRecordsConsoleComponent>(target))  // SS220-criminal-console-fix
-        if (!HasComp<CriminalRecordsConsole220Component>(target)) // SS220-criminal-console-fix
+        if (!HasComp<CriminalRecordsConsoleComponent>(target))
             return;
 
         var doAfterArgs = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, new CriminalRecordsHackDoAfterEvent(), target: target, used: ent, eventTarget: ent)

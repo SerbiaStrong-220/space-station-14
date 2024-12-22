@@ -10,16 +10,6 @@
 
 # Jumpsuit
 - type: loadout
-  id: TechAssistantJumpsuit
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitTechAssistant
-
-- type: loadout
-  id: TechAssistantJumpskirt
-  equipment:
-    jumpsuit: ClothingUniformJumpskirtTechAssistant
-
-- type: loadout
   id: TechnicalAssistantJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect

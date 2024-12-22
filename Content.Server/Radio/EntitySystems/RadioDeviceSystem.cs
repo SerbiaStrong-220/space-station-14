@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Linq;
 using Content.Server.Chat.Systems;
 using Content.Server.Interaction;
@@ -12,7 +13,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Power;
 using Content.Shared.Radio;
 using Content.Shared.SS220.Radio;
-using Content.Shared.Chat;
 using Content.Shared.Radio.Components;
 using Content.Shared.SS220.Radio.Components;
 using Robust.Shared.Prototypes;
@@ -36,7 +36,7 @@ public sealed class RadioDeviceSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
     // Used to prevent a shitter from using a bunch of radios to spam chat.
-    private HashSet<(string, EntityUid, RadioChannelPrototype)> _recentlySent = new();
+    private HashSet<(string, EntityUid)> _recentlySent = new();
 
     public override void Initialize()
     {
@@ -127,7 +127,7 @@ public sealed class RadioDeviceSystem : EntitySystem
     {
         if (args.Powered)
             return;
-        SetMicrophoneEnabled(uid, null, false, true, component);
+        SetMicrophoneEnabled(uid, null, false,  true, component);
     }
 
     public void SetMicrophoneEnabled(EntityUid uid, EntityUid? user, bool enabled, bool quiet = false, RadioMicrophoneComponent? component = null)
@@ -203,9 +203,8 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (HasComp<RadioSpeakerComponent>(args.Source))
             return; // no feedback loops please.
 
-        var channel = _protoMan.Index<RadioChannelPrototype>(component.BroadcastChannel)!;
-        if (_recentlySent.Add((args.Message, args.Source, channel)))
-            _radio.SendRadioMessage(args.Source, args.Message, channel, uid);
+        if (_recentlySent.Add((args.Message, args.Source)))
+            _radio.SendRadioMessage(args.Source, args.Message, _protoMan.Index<RadioChannelPrototype>(component.BroadcastChannel), uid);
     }
 
     private void OnAttemptListen(EntityUid uid, RadioMicrophoneComponent component, ListenAttemptEvent args)
@@ -227,7 +226,7 @@ public sealed class RadioDeviceSystem : EntitySystem
 
         var name = Loc.GetString("speech-name-relay",
             ("speaker", Name(uid)),
-            ("originalName", nameEv.VoiceName));
+            ("originalName", nameEv.Name));
 
         // log to chat so people can identity the speaker/source, but avoid clogging ghost chat if there are many radios
         _chat.TrySendInGameICMessage(uid, args.Message, InGameICChatType.Whisper, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false);
@@ -300,7 +299,7 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (TryComp<RadioMicrophoneComponent>(ent, out var mic))
             mic.BroadcastChannel = channel;
         if (TryComp<RadioSpeakerComponent>(ent, out var speaker))
-            speaker.Channels = new() { channel };
+            speaker.Channels = new(){ channel };
         Dirty(ent);
     }
     // SS220 HandheldRadio start

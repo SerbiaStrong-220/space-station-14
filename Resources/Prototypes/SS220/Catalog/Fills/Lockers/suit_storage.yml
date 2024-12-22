@@ -9,22 +9,8 @@
         - id: NitrogenTankFilled
         - id: OxygenTankFilled
         - id: JetpackSecurityFilled
-#        - id: ClothingOuterHardsuitBlueshield #SS220 BlueShield Rework
+        - id: ClothingOuterHardsuitBlueshield
         - id: ClothingMaskBreath
-#        - id: BlueShieldSWAT #SS220 BlueShield Rework
+        - id: BlueShieldSWAT #ss220 respriting mask
   - type: AccessReader
     access: [["Blueshield"]]
-
-#SuperMatter operator's hardsuit
-- type: entity
-  id: SuitStorageSuperMatterOperator
-  parent: SuitStorageBase
-  suffix: SuperMatter operator
-  components:
-  - type: StorageFill
-    contents:
-        - id: OxygenTankFilled
-        - id: ClothingShoesBootsMag
-        - id: ClothingOuterHardsuitSuperMatterOperator
-  - type: AccessReader
-    access: [["Atmospherics"]]

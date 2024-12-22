@@ -1,4 +1,3 @@
-using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Sound.Components;
@@ -9,9 +8,4 @@ namespace Content.Shared.Sound.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class EmitSoundOnUIOpenComponent : BaseEmitSoundComponent
 {
-    /// <summary>
-    /// Blacklist for making the sound not play if certain entities open the UI
-    /// </summary>
-    [DataField]
-    public EntityWhitelist Blacklist = new();
 }

@@ -130,9 +130,9 @@ namespace Content.Client.Hands.Systems
             OnPlayerHandsAdded?.Invoke(hands);
         }
 
-        public override void DoDrop(EntityUid uid, Hand hand, bool doDropInteraction = true, HandsComponent? hands = null, bool log = true)
+        public override void DoDrop(EntityUid uid, Hand hand, bool doDropInteraction = true, HandsComponent? hands = null)
         {
-            base.DoDrop(uid, hand, doDropInteraction, hands, log);
+            base.DoDrop(uid, hand, doDropInteraction, hands);
 
             if (TryComp(hand.HeldEntity, out SpriteComponent? sprite))
                 sprite.RenderOrder = EntityManager.CurrentTick.Value;

@@ -1,4 +1,3 @@
-using Content.Server.Animals.Systems;
 using Content.Shared.Storage;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -10,47 +9,44 @@ namespace Content.Server.Animals.Components;
 ///     It also grants an action to players who are controlling these entities, allowing them to do it manually.
 /// </summary>
 
-[RegisterComponent, Access(typeof(EggLayerSystem)), AutoGenerateComponentPause]
+[RegisterComponent]
 public sealed partial class EggLayerComponent : Component
 {
-    /// <summary>
-    ///     The item that gets laid/spawned, retrieved from animal prototype.
-    /// </summary>
-    [DataField(required: true)]
-    public List<EntitySpawnEntry> EggSpawn = new();
-
-    /// <summary>
-    ///     Player action.
-    /// </summary>
     [DataField]
     public EntProtoId EggLayAction = "ActionAnimalLayEgg";
 
-    [DataField]
-    public SoundSpecifier EggLaySound = new SoundPathSpecifier("/Audio/Effects/pop.ogg");
+    /// <summary>
+    ///     The amount of nutrient consumed on update.
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public float HungerUsage = 60f;
 
     /// <summary>
     ///     Minimum cooldown used for the automatic egg laying.
     /// </summary>
-    [DataField]
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float EggLayCooldownMin = 60f;
 
     /// <summary>
     ///     Maximum cooldown used for the automatic egg laying.
     /// </summary>
-    [DataField]
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float EggLayCooldownMax = 120f;
 
     /// <summary>
-    ///     The amount of nutrient consumed on update.
+    ///     Set during component init.
     /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float CurrentEggLayCooldown;
+
+    [DataField(required: true), ViewVariables(VVAccess.ReadWrite)]
+    public List<EntitySpawnEntry> EggSpawn = default!;
+
     [DataField]
-    public float HungerUsage = 60f;
+    public SoundSpecifier EggLaySound = new SoundPathSpecifier("/Audio/Effects/pop.ogg");
+
+    [DataField]
+    public float AccumulatedFrametime;
 
     [DataField] public EntityUid? Action;
-
-    /// <summary>
-    ///     When to next try to produce.
-    /// </summary>
-    [DataField, AutoPausedField]
-    public TimeSpan NextGrowth = TimeSpan.Zero;
 }

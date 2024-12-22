@@ -37,9 +37,9 @@
   - type: Sprite
     state: mecha_clamp_small
   - type: MechGrabber
-    maxContents: 2 #SS220-AddMechToClothing
+    maxContents: 4
     grabDelay: 3
-    grabEnergyDelta: -20
+    grabEnergyDelta: 20
   - type: Tag
     tags:
     - SmallMech

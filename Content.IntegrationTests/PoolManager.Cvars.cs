@@ -36,9 +36,7 @@ public static partial class PoolManager
         (CCVars.ConfigPresetDevelopment.Name, "false"),
         (CCVars.AdminLogsEnabled.Name, "false"),
         (CCVars.AutosaveEnabled.Name, "false"),
-        (CVars.NetBufferSize.Name, "0"),
-        (CCVars.InteractionRateLimitCount.Name, "9999999"),
-        (CCVars.InteractionRateLimitPeriod.Name, "0.1"),
+        (CVars.NetBufferSize.Name, "0")
     };
 
     public static async Task SetupCVars(RobustIntegrationTest.IntegrationInstance instance, PoolSettings settings)

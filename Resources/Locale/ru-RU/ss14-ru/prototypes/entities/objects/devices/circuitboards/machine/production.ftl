@@ -22,8 +22,6 @@ ent-ExosuitFabricatorMachineCircuitboard = фабрикатор экзокост
     .desc = { ent-BaseMachineCircuitboard.desc }
 ent-ResearchAndDevelopmentServerMachineCircuitboard = сервер РнД (машинная плата)
     .desc = Машинная плата для сервера РнД.
-ent-BiogeneratorMachineCircuitboard = биогенератор (машинная плата)
-    .desc = Машинная плата для биогенератора.
 ent-UniformPrinterMachineCircuitboard = принтер униформы (машинная плата)
     .desc = { ent-BaseMachineCircuitboard.desc }
 ent-VaccinatorMachineCircuitboard = вакцинатор (машинная плата)
@@ -156,13 +154,9 @@ ent-SalvageMagnetMachineCircuitboard = магнит обломков (машин
     .desc = Печатная плата магнита обломков.
 ent-MiniGravityGeneratorCircuitboard = мини-генератор гравитации (машинная плата)
     .desc = Печатная плата мини-генератора гравитации.
-ent-StationAnchorCircuitboard = станционный якорь (машинная плата)
-    .desc = Печатная плата для станционного якоря.
 ent-JukeboxCircuitBoard = музыкальный автомат (машинная плата)
     .desc = Печатная плата для музыкального автомата.
 ent-ReagentGrinderIndustrialMachineCircuitboard = промышленный измельчитель реагентов (машинная плата)
     .desc = { ent-BaseMachineCircuitboard.desc }
-#SS220 Loc-Change
-ent-CutterMachineCircuitboard = лазерный станок (машинная плата)
+ent-CutterMachineCircuitboard = лазерный станок (машинная плата) #SS220 Loc-Change
     .desc = { ent-BaseMachineCircuitboard.desc }
-#SS220 Loc-Change

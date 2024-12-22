@@ -23,7 +23,7 @@
     whitelist:
       tags:
         - BulletFoam
-    capacity: 60 #ss220 toys
+    capacity: 40
     proto: BulletFoam
   - type: Sprite
     sprite: Objects/Storage/boxes.rsi
@@ -38,7 +38,7 @@
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeCap
-    capacity: 60 #ss220 toys
+    capacity: 20
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/magnum.rsi
     layers:

@@ -96,7 +96,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
                 PrivilegedIdIsAuthorized(uid, component),
                 true,
                 targetIdComponent.FullName,
-                targetIdComponent.LocalizedJobTitle,
+                targetIdComponent.JobTitle,
                 targetAccessComponent.Tags.ToList(),
                 possibleAccess,
                 jobProto,

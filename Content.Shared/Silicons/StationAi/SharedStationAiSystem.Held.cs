@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Actions.Events;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -14,9 +13,9 @@ public abstract partial class SharedStationAiSystem
     /*
      * Added when an entity is inserted into a StationAiCore.
      */
-
-    //TODO: Fix this, please
-    private const string JobNameLocId = "job-name-station-ai";
+	 
+	//TODO: Fix this, please
+	private const string JobNameLocId = "job-name-station-ai";
 
     private void InitializeHeld()
     {
@@ -27,10 +26,10 @@ public abstract partial class SharedStationAiSystem
         SubscribeLocalEvent<StationAiHeldComponent, InteractionAttemptEvent>(OnHeldInteraction);
         SubscribeLocalEvent<StationAiHeldComponent, AttemptRelayActionComponentChangeEvent>(OnHeldRelay);
         SubscribeLocalEvent<StationAiHeldComponent, JumpToCoreEvent>(OnCoreJump);
-        SubscribeLocalEvent<TryGetIdentityShortInfoEvent>(OnTryGetIdentityShortInfo);
+		SubscribeLocalEvent<TryGetIdentityShortInfoEvent>(OnTryGetIdentityShortInfo);
     }
-
-    private void OnTryGetIdentityShortInfo(TryGetIdentityShortInfoEvent args)
+	
+	private void OnTryGetIdentityShortInfo(TryGetIdentityShortInfoEvent args)
     {
         if (args.Handled)
         {
@@ -41,7 +40,7 @@ public abstract partial class SharedStationAiSystem
         {
             return;
         }
-        args.Title = $"{Name(args.ForActor)} ({Loc.GetString(JobNameLocId)})";
+	    args.Title = $"{Name(args.ForActor)} ({Loc.GetString(JobNameLocId)})";
         args.Handled = true;
     }
 
@@ -54,7 +53,7 @@ public abstract partial class SharedStationAiSystem
     }
 
     /// <summary>
-    /// Tries to get the entity held in the AI core using StationAiCore.
+    /// Tries to get the entity held in the AI core.
     /// </summary>
     private bool TryGetHeld(Entity<StationAiCoreComponent?> entity, out EntityUid held)
     {
@@ -64,24 +63,6 @@ public abstract partial class SharedStationAiSystem
             return false;
 
         if (!_containers.TryGetContainer(entity.Owner, StationAiCoreComponent.Container, out var container) ||
-            container.ContainedEntities.Count == 0)
-            return false;
-
-        held = container.ContainedEntities[0];
-        return true;
-    }
-
-    /// <summary>
-    /// Tries to get the entity held in the AI using StationAiHolder.
-    /// </summary>
-    private bool TryGetHeldFromHolder(Entity<StationAiHolderComponent?> entity, out EntityUid held)
-    {
-        held = EntityUid.Invalid;
-
-        if (!Resolve(entity.Owner, ref entity.Comp))
-            return false;
-
-        if (!_containers.TryGetContainer(entity.Owner, StationAiHolderComponent.Container, out var container) ||
             container.ContainedEntities.Count == 0)
             return false;
 
@@ -127,56 +108,41 @@ public abstract partial class SharedStationAiSystem
             return;
 
         if (TryComp(ev.Actor, out StationAiHeldComponent? aiComp) &&
-           (!TryComp(ev.Target, out StationAiWhitelistComponent? whitelistComponent) ||
-            !ValidateAi((ev.Actor, aiComp))))
+           (!ValidateAi((ev.Actor, aiComp)) ||
+            !HasComp<StationAiWhitelistComponent>(ev.Target)))
         {
-            if (whitelistComponent is { Enabled: false })
-            {
-                ShowDeviceNotRespondingPopup(ev.Actor);
-            }
             ev.Cancel();
         }
     }
 
     private void OnHeldInteraction(Entity<StationAiHeldComponent> ent, ref InteractionAttemptEvent args)
     {
-        // Cancel if it's not us or something with a whitelist, or whitelist is disabled.
-        args.Cancelled = (!TryComp(args.Target, out StationAiWhitelistComponent? whitelistComponent)
-                          || !whitelistComponent.Enabled)
-                         && ent.Owner != args.Target
-                         && args.Target != null;
-        if (whitelistComponent is { Enabled: false })
-        {
-            ShowDeviceNotRespondingPopup(ent.Owner);
-        }
+        // Cancel if it's not us or something with a whitelist.
+        args.Cancelled = ent.Owner != args.Target &&
+                         args.Target != null &&
+                         (!TryComp(args.Target, out StationAiWhitelistComponent? whitelist) || !whitelist.Enabled);
     }
 
     private void OnTargetVerbs(Entity<StationAiWhitelistComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!args.CanComplexInteract
-            || !HasComp<StationAiHeldComponent>(args.User))
+        if (!args.CanComplexInteract ||
+            !ent.Comp.Enabled ||
+            !HasComp<StationAiHeldComponent>(args.User) ||
+            !HasComp<StationAiWhitelistComponent>(args.Target))
         {
             return;
         }
 
         var user = args.User;
-
         var target = args.Target;
 
         var isOpen = _uiSystem.IsUiOpen(target, AiUi.Key, user);
 
-        var verb = new AlternativeVerb
+        args.Verbs.Add(new AlternativeVerb()
         {
             Text = isOpen ? Loc.GetString("ai-close") : Loc.GetString("ai-open"),
-            Act = () => 
+            Act = () =>
             {
-                // no need to show menu if device is not powered.
-                if (!PowerReceiver.IsPowered(ent.Owner))
-                {
-                    ShowDeviceNotRespondingPopup(user);
-                    return;
-                }
-
                 if (isOpen)
                 {
                     _uiSystem.CloseUi(ent.Owner, AiUi.Key, user);
@@ -186,13 +152,7 @@ public abstract partial class SharedStationAiSystem
                     _uiSystem.OpenUi(ent.Owner, AiUi.Key, user);
                 }
             }
-        };
-        args.Verbs.Add(verb);
-    }
-
-    private void ShowDeviceNotRespondingPopup(EntityUid toEntity)
-    {
-        _popup.PopupClient(Loc.GetString("ai-device-not-responding"), toEntity, PopupType.MediumCaution);
+        });
     }
 }
 

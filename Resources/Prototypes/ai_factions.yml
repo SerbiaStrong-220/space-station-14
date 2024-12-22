@@ -2,7 +2,6 @@
   id: Dragon
   hostile:
     - NanoTrasen
-    - DeathSquad #SS220 dq update
     - Syndicate
     - Xeno
     - PetsNT
@@ -55,7 +54,6 @@
   id: Syndicate
   hostile:
   - NanoTrasen
-  - DeathSquad #SS220 dq update
   - SimpleHostile
   - Xeno
   - PetsNT
@@ -66,7 +64,6 @@
   id: Xeno
   hostile:
   - NanoTrasen
-  - DeathSquad #SS220 dq update
   - Syndicate
   - Passive
   - PetsNT
@@ -78,7 +75,6 @@
   id: Zombie
   hostile:
   - NanoTrasen
-  - DeathSquad #SS220 dq update
   - SimpleNeutral
   - SimpleHostile
   - Syndicate

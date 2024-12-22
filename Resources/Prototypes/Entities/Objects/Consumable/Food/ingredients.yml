@@ -647,9 +647,14 @@
     tags:
     - Slice
   - type: FoodSequenceElement
+    sprite:
+      sprite: Objects/Consumable/Food/ingredients.rsi
+      state: cheesewedge
     entries:
-      Taco: CheeseTaco
-      Burger: CheeseBurger
+      burger:
+        name: food-sequence-content-cheese
+      taco: 
+        name: food-sequence-content-cheese
 
 - type: entity
   name: chèvre log
@@ -700,6 +705,15 @@
   - type: Tag
     tags:
     - Slice
+  - type: FoodSequenceElement
+    sprite:
+      sprite: Objects/Consumable/Food/ingredients.rsi
+      state: chevredisk
+    entries:
+      burger:
+        name: food-sequence-content-chevre
+      taco: 
+        name: food-sequence-content-chevre
 
 - type: entity
   name: tofu
@@ -715,7 +729,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 18
+        maxVol: 6
         reagents:
         - ReagentId: Protein
           Quantity: 9
@@ -748,6 +762,15 @@
   - type: Tag
     tags:
     - Slice
+  - type: FoodSequenceElement
+    sprite:
+      sprite: Objects/Consumable/Food/ingredients.rsi
+      state: tofu
+    entries:
+      burger:
+        name: food-sequence-content-tofu
+      taco: 
+        name: food-sequence-content-tofu
 
 - type: entity
   name: burned mess
@@ -763,7 +786,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 8
+        maxVol: 5
         reagents:
         - ReagentId: Nutriment
           Quantity: 2
@@ -804,6 +827,15 @@
   - type: Tag
     tags:
       - Ingredient
+  - type: FoodSequenceElement
+    sprite:
+      sprite: Objects/Specific/Hydroponics/cocoa.rsi
+      state: produce-beans
+    entries:
+      burger:
+        name: food-sequence-content-cocoa
+      taco: 
+        name: food-sequence-content-cocoa
 
 - type: entity
   name: raw croissant

@@ -22,11 +22,11 @@ namespace Content.Client.Administration.UI.BanPanel;
 [GenerateTypedNameReferences]
 public sealed partial class BanPanel : DefaultWindow
 {
-    public event Action<string?, (IPAddress, int)?, bool, ImmutableTypedHwid?, bool, uint, string, NoteSeverity, int, string[]?, bool, bool>? BanSubmitted;
+    public event Action<string?, (IPAddress, int)?, bool, byte[]?, bool, uint, string, NoteSeverity, int, string[]?, bool, bool>? BanSubmitted;
     public event Action<string>? PlayerChanged;
     private string? PlayerUsername { get; set; }
     private (IPAddress, int)? IpAddress { get; set; }
-    private ImmutableTypedHwid? Hwid { get; set; }
+    private byte[]? Hwid { get; set; }
     private double TimeEntered { get; set; }
     private int statedRoundEntered { get; set; }
     private uint Multiplier { get; set; }
@@ -392,8 +392,9 @@ public sealed partial class BanPanel : DefaultWindow
     private void OnHwidChanged()
     {
         var hwidString = HwidLine.Text;
-        ImmutableTypedHwid? hwid = null;
-        if (HwidCheckbox.Pressed && !(string.IsNullOrEmpty(hwidString) && LastConnCheckbox.Pressed) && !ImmutableTypedHwid.TryParse(hwidString, out hwid))
+        var length = 3 * (hwidString.Length / 4) - hwidString.TakeLast(2).Count(c => c == '=');
+        Hwid = new byte[length];
+        if (HwidCheckbox.Pressed && !(string.IsNullOrEmpty(hwidString) && LastConnCheckbox.Pressed) && !Convert.TryFromBase64String(hwidString, Hwid, out _))
         {
             ErrorLevel |= ErrorLevelEnum.Hwid;
             HwidLine.ModulateSelfOverride = Color.Red;
@@ -410,7 +411,7 @@ public sealed partial class BanPanel : DefaultWindow
             Hwid = null;
             return;
         }
-        Hwid = hwid;
+        Hwid = Convert.FromHexString(hwidString);
     }
 
     private void OnTypeChanged()

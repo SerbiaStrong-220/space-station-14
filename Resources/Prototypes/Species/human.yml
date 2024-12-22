@@ -24,7 +24,7 @@
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobHumanTorso
-    # Tail: MobHumanoidAnyMarking # Corvax-Sponsors #ss220 no cat tail n ears
+    Tail: MobHumanoidAnyMarking # Corvax-Sponsors
     Eyes: MobHumanoidEyes
     HeadTop: MobHumanoidAnyMarking
     LArm: MobHumanLArm

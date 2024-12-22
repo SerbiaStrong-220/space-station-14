@@ -4,7 +4,6 @@
   id: BloodCult
   hostile:
   - NanoTrasen
-  - DeathSquad #SS220 dq update
   - Syndicate
   - Passive
   - PetsNT
@@ -18,7 +17,6 @@
   id: Revolutionary
   hostile:
   - NanoTrasen
-  - DeathSquad #SS220 dq update
   - Zombie
   - SimpleHostile
   - Dragon
@@ -37,7 +35,6 @@
   id: SpiderQueen
   hostile:
   - NanoTrasen
-  - DeathSquad #SS220 dq update
   - Syndicate
   - Passive
   - Zombie
@@ -51,7 +48,6 @@
   id: SpiderHostile
   hostile:
   - NanoTrasen
-  - DeathSquad #SS220 dq update
   - Syndicate
   - Passive
   - PetsNT
@@ -59,18 +55,3 @@
   - Revolutionary
 
 # ss220 spider queen end
-
-# Death Squad
-- type: npcFaction
-  id: DeathSquad
-  hostile:
-  - NanoTrasen
-  - Syndicate
-  - Xeno
-  - Passive
-  - PetsNT
-  - Mouse
-  - Zombie
-  - Revolutionary
-  - SpiderQueen
-  - SimpleHostile

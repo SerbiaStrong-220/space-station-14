@@ -98,9 +98,9 @@
     Tequila:
       amount: 1
     VodkaRedBool:
-      amount: 3
+      amount: 2
   products:
-    BudgetInsulsDrink: 4
+    BudgetInsulsDrink: 3
 
 - type: reaction
   id: BlueHawaiian
@@ -769,20 +769,6 @@
     NuclearCola: 5
 
 - type: reaction
-  id: NuclearColaBreakdown
-  source: true
-  requiredMixerCategories:
-  - Centrifuge
-  reactants:
-    NuclearCola:
-      amount: 10 # assuming we loose all o2 released as gas in the centrifugal process
-  products:
-    Ipecac: 2
-    Water: 2
-    Sugar: 2
-    Uranium: 1
-
-- type: reaction
   id: Patron
   requiredMixerCategories:
   - Shake
@@ -953,19 +939,7 @@
     LemonLime:
       amount: 1
   products:
-    SnowWhite: 2
-
-- type: reaction
-  id: SodaWater
-  requiredMixerCategories:
-  - Shake
-  reactants:
-    Water:
-      amount: 5
-    CarbonDioxide:
-      amount: 1
-  products:
-    SodaWater: 6
+    SnowWhite: 3
 
 - type: reaction
   id: SoyLatte
@@ -1111,11 +1085,11 @@
   id: WhiteRussian
   reactants:
     BlackRussian:
-      amount: 1
+      amount: 2
     Cream:
       amount: 1
   products:
-    WhiteRussian: 2
+    WhiteRussian: 3
 
 - type: reaction
   id: WhiskeySoda
@@ -1173,18 +1147,6 @@
     TheMartinez: 6
 
 - type: reaction
-  id: Vodka
-  requiredMixerCategories:
-  - Stir
-  reactants:
-    Ethanol:
-      amount: 1
-    Water:
-      amount: 1
-  products:
-    Vodka: 2
-
-- type: reaction
   id: WaterBreakdown
   source: true
   requiredMixerCategories:
@@ -1219,15 +1181,3 @@
       amount: 1
   products:
     Cola: 4
-
-- type: reaction
-  id: ZombieCocktail
-  reactants:
-    Rum:
-      amount: 2
-    Grenadine:
-      amount: 1
-    ZombieBlood:
-      amount: 1
-  products:
-    ZombieCocktail: 4

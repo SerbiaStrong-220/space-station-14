@@ -114,14 +114,19 @@ public abstract class SharedGrapplingGunSystem : EntitySystem
 
     private void OnGunActivate(EntityUid uid, GrapplingGunComponent component, ActivateInWorldEvent args)
     {
-        if (!Timing.IsFirstTimePredicted || args.Handled || !args.Complex || component.Projectile is not {} projectile)
+        if (!Timing.IsFirstTimePredicted || args.Handled || !args.Complex)
+            return;
+
+        if (Deleted(component.Projectile))
             return;
 
         _audio.PlayPredicted(component.CycleSound, uid, args.User);
         _appearance.SetData(uid, SharedTetherGunSystem.TetherVisualsStatus.Key, true);
 
         if (_netManager.IsServer)
-            QueueDel(projectile);
+        {
+            QueueDel(component.Projectile.Value);
+        }
 
         component.Projectile = null;
         SetReeling(uid, component, false, args.User);

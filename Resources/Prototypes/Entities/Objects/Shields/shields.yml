@@ -64,7 +64,7 @@
 
 - type: entity
   name: riot shield
-  parent: [ BaseShield]
+  parent: [ BaseShield, BaseRestrictedContraband ]
   id: RiotShield
   description: A large tower shield. Good for controlling crowds.
   components:
@@ -85,7 +85,7 @@
 
 - type: entity
   name: riot laser shield
-  parent: [ BaseShield]
+  parent: [ BaseShield, BaseRestrictedContraband ]
   id: RiotLaserShield
   description: A riot shield built for withstanding lasers, but not much else.
   components:
@@ -105,7 +105,7 @@
 
 - type: entity
   name: riot bullet shield
-  parent: [ BaseShield]
+  parent: [ BaseShield, BaseRestrictedContraband ]
   id: RiotBulletShield
   description: A ballistic riot shield built for withstanding bullets, but not much else.
   components:
@@ -368,7 +368,7 @@
 
 - type: entity
   name: energy shield
-  parent: [BaseItem]
+  parent: [BaseItem, BaseSyndicateContraband]
   id: EnergyShield
   description: Exotic energy shield, when folded, can even fit in your pocket.
   components:
@@ -437,23 +437,6 @@
         flatReductions:
           Heat: 1
           Piercing: 1
-    #ss220 shield blocking damage fix start
-    - type: ItemToggleBlockingDamage
-      deactivatedActiveModifier:
-        coefficients:
-          Blunt: 0.0
-          Slash: 0.0
-          Piercing: 0.0
-          Heat: 0.0
-      deactivatedPassiveModifier:
-        coefficients:
-          Blunt: 0.0
-          Slash: 0.0
-          Piercing: 0.0
-          Heat: 0.0
-      deactivatedActiveFraction: 0
-      deactivatedPassiveFraction: 0
-    #ss220 shield blocking damage fix end
     - type: Appearance
     - type: Damageable
       damageContainer: Shield
@@ -500,7 +483,7 @@
         jobRequired:
           - SalvageSpecialist
 # Corvax-HiddenDesc-End
-
+        
 - type: entity
   name: broken energy shield
   parent: BaseItem

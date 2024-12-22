@@ -137,7 +137,7 @@
   name: SCRAM!
   #SS220-underused-uplinks-stuff begin
   description: Randomly teleports you within a medium distance.
-  categories: [ HideSpawnMenu ]
+  noSpawn: true
   #SS220-underused-uplinks-stuff end
   components:
   - type: InstantAction
@@ -285,8 +285,6 @@
     checkCanInteract: false
     checkConsciousness: false
     event: !type:WakeActionEvent
-    startDelay: true
-    useDelay: 2
 
 - type: entity
   id: ActionActivateHonkImplant

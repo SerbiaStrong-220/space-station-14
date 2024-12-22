@@ -21,7 +21,6 @@
     - Telecrystal
     balance:
       Telecrystal: 0
-    currencyInsertTime: 1.15 #SS220-insert-currency-doafter
 
 - type: entity
   id: StorePresetSpellbook

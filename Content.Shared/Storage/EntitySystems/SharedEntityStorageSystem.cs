@@ -321,13 +321,6 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         if (component.Contents.ContainedEntities.Count >= component.Capacity)
             return false;
 
-        // SS220 fix #1121 begin
-        SharedEntityStorageComponent? insertedComp = null;
-
-        if (ResolveStorage(toInsert,  ref insertedComp))
-            return false;
-        // SS220 fix #1121 end
-
         return CanFit(toInsert, container, component);
     }
 
@@ -351,14 +344,6 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         return true;
     }
 
-    public bool IsOpen(EntityUid target, SharedEntityStorageComponent? component = null)
-    {
-        if (!ResolveStorage(target, ref component))
-            return false;
-
-        return component.Open;
-    }
-
     public bool CanOpen(EntityUid user, EntityUid target, bool silent = false, SharedEntityStorageComponent? component = null)
     {
         if (!ResolveStorage(target, ref component))
@@ -375,18 +360,16 @@ public abstract class SharedEntityStorageSystem : EntitySystem
             return false;
         }
 
-        // SS220 Fix #1397 begin
-        // if (_container.IsEntityInContainer(target))
-        // {
-        //     if (_container.TryGetOuterContainer(target,Transform(target) ,out var container) &&
-        //         !HasComp<HandsComponent>(container.Owner))
-        //     {
-        //         Popup.PopupClient(Loc.GetString("entity-storage-component-already-contains-user-message"), user, user);
+        if (_container.IsEntityInContainer(target))
+        {
+            if (_container.TryGetOuterContainer(target,Transform(target) ,out var container) &&
+                !HasComp<HandsComponent>(container.Owner))
+            {
+                Popup.PopupClient(Loc.GetString("entity-storage-component-already-contains-user-message"), user, user);
 
-        //         return false;
-        //     }
-        // }
-        // SS220 Fix #1397 end
+                return false;
+            }
+        }
 
         //Checks to see if the opening position, if offset, is inside of a wall.
         if (component.EnteringOffset != new Vector2(0, 0) && !HasComp<WallMountComponent>(target)) //if the entering position is offset
@@ -503,6 +486,9 @@ public abstract class SharedEntityStorageSystem : EntitySystem
                 component.RemovedMasks = 0;
             }
         }
+
+        if (TryComp<PlaceableSurfaceComponent>(uid, out var surface))
+            _placeableSurface.SetPlaceable(uid, component.Open, surface);
 
         _appearance.SetData(uid, StorageVisuals.Open, component.Open);
         _appearance.SetData(uid, StorageVisuals.HasContents, component.Contents.ContainedEntities.Count > 0);

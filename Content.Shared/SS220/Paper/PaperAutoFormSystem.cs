@@ -67,16 +67,16 @@ public sealed partial class PaperAutoFormSystem : EntitySystem
                             // PDA
                             if (EntityManager.TryGetComponent(idUid, out PdaComponent? pda) &&
                                 TryComp<IdCardComponent>(pda.ContainedId, out var id) &&
-                                id.LocalizedJobTitle != null)
+                                id.JobTitle != null)
                             {
-                                return id.LocalizedJobTitle;
+                                return id.JobTitle;
                             }
 
                             // ID Card
                             if (EntityManager.TryGetComponent(idUid, out id) &&
-                                id.LocalizedJobTitle != null)
+                                id.JobTitle != null)
                             {
-                                return id.LocalizedJobTitle;
+                                return id.JobTitle;
                             }
                         }
 

@@ -16,7 +16,6 @@
     pack: ChemDispenserStandardInventory
   - type: ApcPowerReceiver
   - type: ExtensionCableReceiver
-  - type: StationAiWhitelist #SS220 AI Access
   - type: Destructible
     thresholds:
     - trigger:
@@ -56,6 +55,5 @@
   suffix: Empty
   parent: ChemDispenser
   components:
-  - type: StationAiWhitelist #SS220 AI Access
   - type: ReagentDispenser
     pack: EmptyInventory

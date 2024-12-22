@@ -2,7 +2,7 @@
 - type: entity
   parent: Eggshells
   id: EggshellsSpider
-  categories: [ HideSpawnMenu ]
+  noSpawn: true
   name: eggshells
   description: You're walkin' on 'em bud.
   suffix: FraG 

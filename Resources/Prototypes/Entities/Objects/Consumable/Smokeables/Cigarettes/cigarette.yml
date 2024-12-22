@@ -58,7 +58,7 @@
     state: burnt-icon
   - type: Smokable
     state: Burnt
-  - type: SolutionContainerManager 
+  - type: SolutionContainerManager
     solutions:
       smokable:
         maxVol: 20
@@ -71,40 +71,40 @@
 - type: entity
   id: CigaretteSyndicate
   suffix: syndicate
-  parent: SoakedHealCigarette # SS220 Cigarettes
+  parent: Cigarette
   name: cigarette
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
-    solutions:
-      smokable:
-        maxVol: 80
-        reagents:
-          - ReagentId: Nicotine
-            Quantity: 20
-          - ReagentId: Omnizine
-            Quantity: 45 #SS220 Cigarettes end
-
-- type: entity
-  id: CigaretteOmnizine
-  parent: SoakedHealCigarette # SS220 Cigarettes
-  name: Hot Dog Water Flavor Explosion
-  components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
         maxVol: 40
         reagents:
           - ReagentId: Nicotine
-            Quantity: 20
+            Quantity: 10
           - ReagentId: Omnizine
-            Quantity: 20 #SS220 Cigarettes end
+            Quantity: 30
+
+- type: entity
+  id: CigaretteOmnizine
+  parent: SoakedCigarette
+  name: Hot Dog Water Flavor Explosion
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Nicotine
+            Quantity: 10
+          - ReagentId: Omnizine
+            Quantity: 10
 
 - type: entity
   id: CigaretteIron
   parent: SoakedCigarette
   name: Rusty Orange Baja Blast
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
         maxVol: 40
@@ -112,302 +112,302 @@
           - ReagentId: Nicotine
             Quantity: 10
           - ReagentId: Iron
-            Quantity: 10 #SS220 Cigarettes end
+            Quantity: 10
 
 - type: entity
   id: CigaretteTricordrazine
-  parent: SoakedHealCigarette # SS220 Cigarettes
+  parent: SoakedCigarette
   name: Licorice Allsorts
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
-    solutions:
-      smokable:
-        maxVol: 50
-        reagents:
-          - ReagentId: Nicotine
-            Quantity: 20
-          - ReagentId: Tricordrazine
-            Quantity: 20 #SS220 Cigarettes end
-
-- type: entity
-  id: CigaretteDylovene
-  parent: SoakedHealCigarette # SS220 Cigarettes
-  name: Urinal Cake Disolver
-  components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
-    solutions:
-      smokable:
-        maxVol: 50
-        reagents:
-          - ReagentId: Nicotine
-            Quantity: 20
-          - ReagentId: Dylovene
-            Quantity: 20 #SS220 Cigarettes end
-
-- type: entity
-  id: CigaretteDermaline
-  parent: SoakedHealCigarette # SS220 Cigarettes
-  name: Aloe Peanut Butter Medley
-  components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
-    solutions:
-      smokable:
-        maxVol: 50
-        reagents:
-          - ReagentId: Nicotine
-            Quantity: 20
-          - ReagentId: Dermaline
-            Quantity: 20 #SS220 Cigarettes end
-
-- type: entity
-  id: CigaretteArithrazine
-  parent: SoakedHealCigarette # SS220 Cigarettes
-  name: Roman Pipe Works
-  components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
-    solutions:
-      smokable:
-        maxVol: 50
-        reagents:
-          - ReagentId: Nicotine
-            Quantity: 20
-          - ReagentId: Arithrazine
-            Quantity: 20 #SS220 Cigarettes end
-
-- type: entity
-  id: CigaretteIpecac
-  parent: SoakedHealCigarette #  SS220 Cigarettes
-  name: Grandma's Christmas Fruitcake
-  components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
         maxVol: 40
         reagents:
           - ReagentId: Nicotine
-            Quantity: 20
+            Quantity: 10
+          - ReagentId: Tricordrazine
+            Quantity: 10
+
+- type: entity
+  id: CigaretteDylovene
+  parent: SoakedCigarette
+  name: Urinal Cake Disolver
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Nicotine
+            Quantity: 10
+          - ReagentId: Dylovene
+            Quantity: 10
+
+- type: entity
+  id: CigaretteDermaline
+  parent: SoakedCigarette
+  name: Aloe Peanut Butter Medley
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Nicotine
+            Quantity: 10
+          - ReagentId: Dermaline
+            Quantity: 10
+
+- type: entity
+  id: CigaretteArithrazine
+  parent: SoakedCigarette
+  name: Roman Pipe Works
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Nicotine
+            Quantity: 10
+          - ReagentId: Arithrazine
+            Quantity: 10
+
+- type: entity
+  id: CigaretteIpecac
+  parent: SoakedCigarette
+  name: Grandma's Christmas Fruitcake
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: Ipecac
-            Quantity: 12 #SS220 Cigarettes end
+            Quantity: 2
 
 - type: entity
   id: CigaretteBicaridine
-  parent: SoakedHealCigarette #  SS220 Cigarettes
+  parent: SoakedCigarette
   name: Wet Dog Enhanced Cigarette
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 50
+        maxVol: 40
         reagents:
           - ReagentId: Nicotine
-            Quantity: 20
+            Quantity: 10
           - ReagentId: Bicaridine
-            Quantity: 20
+            Quantity: 10
 
 - type: entity
   id: CigaretteDexalin
-  parent: SoakedHealCigarette #  SS220 Cigarettes
+  parent: SoakedCigarette
   name: Rocky Mountain Musk
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 50
+        maxVol: 40
         reagents:
           - ReagentId: Nicotine
-            Quantity: 20
+            Quantity: 10
           - ReagentId: Dexalin
-            Quantity: 20 #SS220 Cigarettes end
+            Quantity: 10
 
 - type: entity
   id: CigarettePax
   parent: SoakedCigarette
   name: Switzerland Express
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 110
+        maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: Pax
-            Quantity: 55 #SS220 Cigarettes end
+            Quantity: 2
 
 - type: entity
   id: CigaretteBbqSauce
   parent: SoakedCigarette
   name: Spicy Wood Aroma
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 110
+        maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: BbqSauce
-            Quantity: 55 #SS220 Cigarettes end
+            Quantity: 10
 
 - type: entity
   id: CigaretteBlackPepper
   parent: SoakedCigarette
   name: English Spice
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 110
+        maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: Blackpepper
-            Quantity: 55 #SS220 Cigarettes end
+            Quantity: 10
 
 - type: entity
   id: CigaretteCapsaicinOil
   parent: SoakedCigarette
   name: Chilly P
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 110
+        maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: CapsaicinOil
-            Quantity: 55 #SS220 Cigarettes end
+            Quantity: 10
 
 - type: entity
   id: CigaretteBread
   parent: SoakedCigarette
   name: Double Toasted
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
         maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55 #SS220 Cigarettes end
+          - ReagentId: Nicotine
+            Quantity: 10
 
 - type: entity
   id: CigaretteMilk
   parent: SoakedCigarette
   name: Bovine Extract
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 110
+        maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: Milk
-            Quantity: 25 #SS220 Cigarettes end
+            Quantity: 10
 
 - type: entity
   id: CigaretteBanana
   parent: SoakedCigarette
   name: Clown Adjancency Bonus
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 110
+        maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: BananaHonk
-            Quantity: 25 #SS220 Cigarettes end
+            Quantity: 10
 
 - type: entity
   id: CigaretteSpaceDrugs
   parent: SoakedCigarette
   name: 80's Power Hour
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 110
+        maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: SpaceDrugs
-            Quantity: 25 #SS220 Cigarettes end
+            Quantity: 10
 
 - type: entity
   id: CigaretteMuteToxin
   parent: SoakedCigarette
   name: Mixed Lozenges
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 110
+        maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: MuteToxin
-            Quantity: 55 #SS220 Cigarettes end
+            Quantity: 2
 
 - type: entity
   id: CigaretteMold
   parent: SoakedCigarette
   name: Beneath The Sink Experience
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 110
+        maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: Mold
-            Quantity: 55 #SS220 Cigarettes end
+            Quantity: 2
 
 - type: entity
   id: CigaretteLicoxide
   parent: SoakedCigarette
   name: Wake Up Call
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 110
+        maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: Licoxide
-            Quantity: 55 #SS220 Cigarettes end
+            Quantity: 5
 
 - type: entity
   id: CigaretteWeldingFuel
   parent: SoakedCigarette
   name: Plasma Sauce
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 110
+        maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: WeldingFuel
-            Quantity: 55 #SS220 Cigarettes end
+            Quantity: 5
 
 - type: entity
   id: CigaretteTHC
   parent: SoakedCigarette
   name: Hippy Romance Novel
   components:
-  - type: SolutionContainerManager #SS220 Cigarettes begin
+  - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 110
+        maxVol: 40
         reagents:
-          - ReagentId: NeoNicotinoid
-            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 10
           - ReagentId: THC
-            Quantity: 35 #SS220 Cigarettes end
+            Quantity: 5

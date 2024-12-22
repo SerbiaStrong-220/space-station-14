@@ -17,6 +17,7 @@ public sealed partial class CableSystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _toolSystem = default!;
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly ElectrocutionSystem _electrocutionSystem = default!;
+    [Dependency] private readonly IAdminLogManager _adminLogs = default!;
 
     public override void Initialize()
     {
@@ -35,10 +36,7 @@ public sealed partial class CableSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (cable.CuttingQuality != null)
-        {
-            args.Handled = _toolSystem.UseTool(args.Used, args.User, uid, cable.CuttingDelay, cable.CuttingQuality, new CableCuttingFinishedEvent());
-        }
+        args.Handled = _toolSystem.UseTool(args.Used, args.User, uid, cable.CuttingDelay, cable.CuttingQuality, new CableCuttingFinishedEvent());
     }
 
     private void OnCableCut(EntityUid uid, CableComponent cable, DoAfterEvent args)
@@ -53,7 +51,7 @@ public sealed partial class CableSystem : EntitySystem
         if (_electrocutionSystem.TryDoElectrifiedAct(uid, args.User))
             return;
 
-        _adminLogger.Add(LogType.CableCut, LogImpact.Medium, $"The {ToPrettyString(uid)} at {xform.Coordinates} was cut by {ToPrettyString(args.User)}.");
+        _adminLogs.Add(LogType.CableCut, LogImpact.Medium, $"The {ToPrettyString(uid)} at {xform.Coordinates} was cut by {ToPrettyString(args.User)}.");
 
         Spawn(cable.CableDroppedOnCutPrototype, xform.Coordinates);
         QueueDel(uid);

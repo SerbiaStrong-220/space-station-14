@@ -1,9 +1,0 @@
-- type: entity
-  name: law encryption key box
-  parent: BoxEncryptionKeyPassenger
-  id: BoxEncryptionKeyLaw
-  components:
-  - type: StorageFill
-    contents:
-      - id: EncryptionKeyLaw
-        amount: 4

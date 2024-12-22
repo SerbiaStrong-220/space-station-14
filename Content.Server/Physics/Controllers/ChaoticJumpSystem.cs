@@ -18,6 +18,7 @@ public sealed class ChaoticJumpSystem : VirtualController
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedTransformSystem _xform = default!;
 
     public override void Initialize()
     {
@@ -72,6 +73,6 @@ public sealed class ChaoticJumpSystem : VirtualController
 
         Spawn(component.Effect, transform.Coordinates);
 
-        _transform.SetWorldPosition(uid, targetPos);
+        _xform.SetWorldPosition(uid, targetPos);
     }
 }

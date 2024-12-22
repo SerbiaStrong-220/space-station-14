@@ -1,0 +1,27 @@
+- type: entity
+  id: ThermalVisorImplanter
+  name: Thermal-Visor Implanter
+  description: Thermal-Visor right in your brain!
+  parent: BaseImplantOnlyImplanterSyndi
+  components:
+    - type: Implanter
+      implant: ThermalVisionImplant
+    - type: HiddenDescription
+      entries:
+      - label: corvax-hidden-desc-IllegalImplants-medical
+        jobRequired:
+          - Paramedic
+          - MedicalDoctor
+          - ChiefMedicalOfficer
+          - Brigmedic
+      - label: hidden-desc-ThermalVisorImplanter-research
+        jobRequired:
+          - ResearchAssistant
+          - ResearchDirector
+          - Scientist
+          - Borg
+      - label: hidden-desc-ThermalGoogles-syndicate
+        whitelistMind:
+          components:
+            - TraitorRole
+            - NukeOperative

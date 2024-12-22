@@ -13,7 +13,6 @@ public sealed class SimpleFloorPlanPopulatorSystem : BaseWorldSystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefinition = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
 
     /// <inheritdoc />
     public override void Initialize()
@@ -26,7 +25,7 @@ public sealed class SimpleFloorPlanPopulatorSystem : BaseWorldSystem
     {
         var placeables = new List<string?>(4);
         var grid = Comp<MapGridComponent>(uid);
-        var enumerator = _map.GetAllTilesEnumerator(uid, grid);
+        var enumerator = grid.GetAllTilesEnumerator();
         while (enumerator.MoveNext(out var tile))
         {
             var coords = grid.GridTileToLocal(tile.Value.GridIndices);

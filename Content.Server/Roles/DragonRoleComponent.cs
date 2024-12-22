@@ -4,9 +4,9 @@ using Content.Shared.Roles;
 namespace Content.Server.Roles;
 
 /// <summary>
-///     Added to mind role entities to tag that they are a space dragon.
+/// Role used to keep track of space dragons for antag purposes.
 /// </summary>
-[RegisterComponent, Access(typeof(DragonSystem))]
-public sealed partial class DragonRoleComponent : BaseMindRoleComponent
+[RegisterComponent, Access(typeof(DragonSystem)), ExclusiveAntagonist]
+public sealed partial class DragonRoleComponent : AntagonistRoleComponent
 {
 }

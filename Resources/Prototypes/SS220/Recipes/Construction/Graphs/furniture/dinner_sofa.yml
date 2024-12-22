@@ -10,21 +10,24 @@
       edges:
         - to: DinnerSofaLeft
           completed:
-            - !type:SnapToGrid { }
+            - !type:SnapToGrid
+              southRotation: true
           steps:
             - material: WoodPlank
               amount: 3
               doAfter: 1
         - to: DinnerSofaRight
           completed:
-            - !type:SnapToGrid { }
+            - !type:SnapToGrid
+              southRotation: true
           steps:
             - material: WoodPlank
               amount: 3
               doAfter: 1
         - to: DinnerSofaMiddle
           completed:
-            - !type:SnapToGrid { }
+            - !type:SnapToGrid
+              southRotation: true
           steps:
             - material: WoodPlank
               amount: 3

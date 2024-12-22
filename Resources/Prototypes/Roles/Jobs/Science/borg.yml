@@ -7,22 +7,11 @@
   requirements:
   - !type:RoleTimeRequirement
     role: JobBorg
-    time: 72000 # SS220-AITime-20H
-  # SS220-AITime-begin
-  - !type:DepartmentTimeRequirement
-    department: Command
-    time: 108000 # SS220-AITime-30H
-  # SS220-AITime-end
+    time: 18000  # 5 hrs
   canBeAntag: false
   icon: JobIconStationAi
   supervisors: job-supervisors-rd
   jobEntity: StationAiBrain
-  jobPreviewEntity: PlayerStationAiPreview
-  applyTraits: false
-  special: #SS220-RenameStart - start
-  - !type:AddComponentSpecial
-    components:
-    - type: RenameStart #SS220-RenameStart - end
 
 - type: job
   id: Borg
@@ -35,9 +24,4 @@
   canBeAntag: false
   icon: JobIconBorg
   supervisors: job-supervisors-rd
-  jobEntity: PlayerBorgBattery
-  applyTraits: false
-  special: #SS220-RenameStart - start
-  - !type:AddComponentSpecial
-    components:
-    - type: RenameStart #SS220-RenameStart - end
+  jobEntity: PlayerBorgGeneric

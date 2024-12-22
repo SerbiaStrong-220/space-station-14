@@ -12,13 +12,9 @@ using Robust.Shared.Timing;
 namespace Content.Server.ServerUpdates;
 
 /// <summary>
-/// Responsible for restarting the server periodically or for update, when not disruptive.
+/// Responsible for restarting the server for update, when not disruptive.
 /// </summary>
-/// <remarks>
-/// This was originally only designed for restarting on *update*,
-/// but now also handles periodic restarting to keep server uptime via <see cref="CCVars.ServerUptimeRestartMinutes"/>.
-/// </remarks>
-public sealed class ServerUpdateManager : IPostInjectInit
+public sealed class ServerUpdateManager
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IWatchdogApi _watchdog = default!;
@@ -26,43 +22,23 @@ public sealed class ServerUpdateManager : IPostInjectInit
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly IBaseServer _server = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
-
-    private ISawmill _sawmill = default!;
 
     [ViewVariables]
     private bool _updateOnRoundEnd;
 
     private TimeSpan? _restartTime;
 
-    private TimeSpan _uptimeRestart;
-
     public void Initialize()
     {
         _watchdog.UpdateReceived += WatchdogOnUpdateReceived;
         _playerManager.PlayerStatusChanged += PlayerManagerOnPlayerStatusChanged;
-
-        _cfg.OnValueChanged(
-            CCVars.ServerUptimeRestartMinutes,
-            minutes => _uptimeRestart = TimeSpan.FromMinutes(minutes),
-            true);
     }
 
     public void Update()
     {
-        if (_restartTime != null)
+        if (_restartTime != null && _restartTime < _gameTiming.RealTime)
         {
-            if (_restartTime < _gameTiming.RealTime)
-            {
-                DoShutdown();
-            }
-        }
-        else
-        {
-            if (ShouldShutdownDueToUptime())
-            {
-                ServerEmptyUpdateRestartCheck("uptime");
-            }
+            DoShutdown();
         }
     }
 
@@ -72,7 +48,7 @@ public sealed class ServerUpdateManager : IPostInjectInit
     /// <returns>True if the server is going to restart.</returns>
     public bool RoundEnded()
     {
-        if (_updateOnRoundEnd || ShouldShutdownDueToUptime())
+        if (_updateOnRoundEnd)
         {
             DoShutdown();
             return true;
@@ -85,14 +61,11 @@ public sealed class ServerUpdateManager : IPostInjectInit
     {
         switch (e.NewStatus)
         {
-            case SessionStatus.Connected:
-                if (_restartTime != null)
-                    _sawmill.Debug("Aborting server restart timer due to player connection");
-
+            case SessionStatus.Connecting:
                 _restartTime = null;
                 break;
             case SessionStatus.Disconnected:
-                ServerEmptyUpdateRestartCheck("last player disconnect");
+                ServerEmptyUpdateRestartCheck();
                 break;
         }
     }
@@ -101,20 +74,20 @@ public sealed class ServerUpdateManager : IPostInjectInit
     {
         _chatManager.DispatchServerAnnouncement(Loc.GetString("server-updates-received"));
         _updateOnRoundEnd = true;
-        ServerEmptyUpdateRestartCheck("update notification");
+        ServerEmptyUpdateRestartCheck();
     }
 
     /// <summary>
     ///     Checks whether there are still players on the server,
     /// and if not starts a timer to automatically reboot the server if an update is available.
     /// </summary>
-    private void ServerEmptyUpdateRestartCheck(string reason)
+    private void ServerEmptyUpdateRestartCheck()
     {
         // Can't simple check the current connected player count since that doesn't update
         // before PlayerStatusChanged gets fired.
         // So in the disconnect handler we'd still see a single player otherwise.
         var playersOnline = _playerManager.Sessions.Any(p => p.Status != SessionStatus.Disconnected);
-        if (playersOnline || !(_updateOnRoundEnd || ShouldShutdownDueToUptime()))
+        if (playersOnline || !_updateOnRoundEnd)
         {
             // Still somebody online.
             return;
@@ -122,30 +95,16 @@ public sealed class ServerUpdateManager : IPostInjectInit
 
         if (_restartTime != null)
         {
-            // Do nothing because we already have a timer running.
+            // Do nothing because I guess we already have a timer running..?
             return;
         }
 
         var restartDelay = TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.UpdateRestartDelay));
         _restartTime = restartDelay + _gameTiming.RealTime;
-
-        _sawmill.Debug("Started server-empty restart timer due to {Reason}", reason);
     }
 
     private void DoShutdown()
     {
-        _sawmill.Debug($"Shutting down via {nameof(ServerUpdateManager)}!");
-        var reason = _updateOnRoundEnd ? "server-updates-shutdown" : "server-updates-shutdown-uptime";
-        _server.Shutdown(Loc.GetString(reason));
-    }
-
-    private bool ShouldShutdownDueToUptime()
-    {
-        return _uptimeRestart != TimeSpan.Zero && _gameTiming.RealTime > _uptimeRestart;
-    }
-
-    void IPostInjectInit.PostInject()
-    {
-        _sawmill = _logManager.GetSawmill("restart");
+        _server.Shutdown(Loc.GetString("server-updates-shutdown"));
     }
 }

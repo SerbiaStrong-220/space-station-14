@@ -1,7 +1,7 @@
 ent-BaseComputerCircuitboard = консольная плата
     .desc = { ent-BaseItem.desc }
-ent-AlertsComputerCircuitboard = консоль атмосферной сигнализации (консольная плата)
-    .desc = Консольная плата для консоли атмосферной сигнализации.
+ent-AlertsComputerCircuitboard = консоль оповещений (консольная плата)
+    .desc = Консольная плата для консоли оповещений.
 ent-PowerComputerCircuitboard = консоль контроля питания (консольная плата)
     .desc = Консольная плата для консоли контроля питания.
 ent-MedicalRecordsComputerCircuitboard = консоль медицинских карт (консольная плата)
@@ -72,5 +72,3 @@ ent-SensorConsoleCircuitboard = консоль мониторинга датчи
     .desc = Консольная плата для консоли мониторинга датчиков.
 ent-RoboticsConsoleCircuitboard = консоль управления робототехникой (консольная плата)
     .desc = Консольная плата для консоли управления робототехникой.
-ent-StationAiUploadCircuitboard = консоль загрузки ИИ (консольная плата)
-    .desc = Консольная плата для консоли загрузки ИИ.

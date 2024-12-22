@@ -8,7 +8,6 @@
     noRot: true
     overrideContainerOcclusion: true # Always show up regardless of where they're contained.
     drawdepth: Ghosts
-  - type: FTLSmashImmune
   - type: CargoSellBlacklist
   - type: MovementSpeedModifier
     baseSprintSpeed: 12
@@ -28,13 +27,11 @@
         layer:
         - GhostImpassable
 
-# shared parent between aghosts, replay spectators and normal observers
 - type: entity
   parent:
   - Incorporeal
   - BaseMob
-  id: MobObserverBase
-  abstract: true
+  id: MobObserver
   name: observer
   description: Boo!
   categories: [ HideSpawnMenu ]
@@ -55,8 +52,6 @@
     skipChecks: true
   - type: Ghost
   - type: GhostHearing
-  - type: HallucinationImmune # SS220 - hallucinationSystem
-  - type: SuperMatterImmune # SS220 - SuperMatterCrystal
   # SS220 ADD GHOST HUD'S START
   - type: ShowHealthBars
     damageContainers:
@@ -65,26 +60,13 @@
     damageContainers:
       - Biological
   # SS220 ADD GHOST HUD'S END
-  - type: ShowElectrocutionHUD
   - type: IntrinsicRadioReceiver
   - type: ActiveRadio
     receiveAllChannels: true
     globalReceive: true
-  # SS220 telepathy begin
-  - type: Telepathy
-    canSend: false
-    receiveAllChannels: true
-  # SS220 telepathy end
   - type: Tag
     tags:
     - BypassInteractionRangeChecks
-
-# proto for player ghosts specifically
-- type: entity
-  parent: MobObserverBase
-  id: MobObserver
-  components:
-  - type: Spectral
 
 - type: entity
   id: ActionGhostBoo
@@ -95,7 +77,6 @@
     icon: Interface/Actions/scream.png
     checkCanInteract: false
     event: !type:BooActionEvent
-    startDelay: true
     useDelay: 120
 
 - type: entity

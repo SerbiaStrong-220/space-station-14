@@ -102,7 +102,6 @@
     messagePerceivedByOthers: comp-window-knock
     interactSuccessSound:
       path: /Audio/Effects/glass_knock.ogg
-    needHands: true
   - type: BlockWeather
 
 - type: entity

@@ -16,6 +16,7 @@
   weight: 10
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"
+  requireAdminNotify: true
   supervisors: job-supervisors-captain
   access:
   - Maintenance
@@ -35,7 +36,7 @@
   id: ChiefEngineerGear
   equipment:
 #    id: CEPDA SS220-dark-chief-engineer-pda
-#    eyes: ClothingEyesGlassesMeson #SS220-TwoOne-Floppa-Iteration
+    eyes: ClothingEyesGlassesMeson
     ears: ClothingHeadsetCE
     belt: ClothingBeltUtilityEngineering
   storage:

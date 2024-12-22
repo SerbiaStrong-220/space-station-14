@@ -10,21 +10,24 @@
       edges:
         - to: PewLeft
           completed:
-            - !type:SnapToGrid { }
+            - !type:SnapToGrid
+              southRotation: true
           steps:
             - material: WoodPlank
               amount: 2
               doAfter: 1
         - to: PewRight
           completed:
-            - !type:SnapToGrid { }
+            - !type:SnapToGrid
+              southRotation: true
           steps:
             - material: WoodPlank
               amount: 2
               doAfter: 1
         - to: PewMiddle
           completed:
-            - !type:SnapToGrid { }
+            - !type:SnapToGrid
+              southRotation: true
           steps:
             - material: WoodPlank
               amount: 2

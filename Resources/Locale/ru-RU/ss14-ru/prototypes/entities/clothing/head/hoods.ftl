@@ -104,5 +104,3 @@ ent-ClothingHeadHatHoodWinterColorWhite = капюшон белой зимней
     .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
 ent-ClothingHeadHatHoodWinterColorYellow = капюшон жёлтой зимней куртки
     .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
-ent-ClothingHeadHatHoodVoidCloak = капюшон плаща пустоты
-    .desc = Капюшон плаща пустоты. Для тех, кто перешел на тёмную сторону силы.

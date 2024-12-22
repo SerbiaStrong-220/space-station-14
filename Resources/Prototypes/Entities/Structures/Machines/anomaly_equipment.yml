@@ -184,7 +184,7 @@
     guides:
     - APE
   - type: Gun
-    projectileSpeed: 10
+    projectileSpeed: 4
     fireRate: 10 #just has to be fast enough to keep up with upgrades
     showExamineText: false
     selectedMode: SemiAuto

@@ -57,7 +57,6 @@
       - MiningDrill
       rarePrototypes:
         - LotteryCash #SS220 Lottery
-        - CigaretteWeh #SS220 Cigarettes
       rareChance: 0.05
       offset: 0.0
 

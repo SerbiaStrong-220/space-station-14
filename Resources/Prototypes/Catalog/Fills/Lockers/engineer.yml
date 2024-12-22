@@ -95,7 +95,6 @@
       - id: GasAnalyzer
       - id: MedkitOxygenFilled
       - id: HolofanProjector
-      - id: DoorRemoteFirefight # SS220 revert "remove fire remote controller"
       - id: ClothingShoesBootsMag
       - id: RCD
       - id: RCDAmmo
@@ -114,7 +113,6 @@
       - id: GasAnalyzer
       - id: MedkitOxygenFilled
       - id: HolofanProjector
-      - id: DoorRemoteFirefight # SS220 revert "remove fire remote controller"
       - id: RCD
       - id: RCDAmmo
 

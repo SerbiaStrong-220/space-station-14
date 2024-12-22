@@ -1,12 +1,11 @@
 ### Announcement
 
 earlyleave-cryo-job-unknown = Должность неизвестна
-# SS220 Cryostorage ghost role fix
 earlyleave-cryo-announcement =
-    { $character } ({ $job }) { GENDER($entity) ->
+    { $character } ({ $job }) { $gender ->
         [male] был перемещён
         [female] была перемещена
         [epicene] были перемещены
-       *[neuter] было перемещено
+       *[neuter] был перемещён
     } в криогенное хранилище!
 earlyleave-cryo-sender = Станция

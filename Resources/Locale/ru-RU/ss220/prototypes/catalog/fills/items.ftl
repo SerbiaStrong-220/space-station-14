@@ -16,8 +16,3 @@ ent-ClothingBeltSecurityMedicalFilled = { ent-ClothingBeltSecurityMedical }
 ent-ClothingBeltCutlassSheathFilled = { ent-ClothingBeltCutlassSheath }
     .suffix = Заполненный
     .desc = { ent-ClothingBeltCutlassSheath.desc }
-
-ent-BriefcaseMagistrateFilled = { ent-BriefcaseBrown }
-    .suffix = Магистрат
-    .desc = { ent-BriefcaseBrown.desc }
-

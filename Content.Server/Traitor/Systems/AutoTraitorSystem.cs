@@ -12,6 +12,9 @@ public sealed class AutoTraitorSystem : EntitySystem
 {
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
 
+    [ValidatePrototypeId<EntityPrototype>]
+    private const string DefaultTraitorRule = "Traitor";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -21,6 +24,6 @@ public sealed class AutoTraitorSystem : EntitySystem
 
     private void OnMindAdded(EntityUid uid, AutoTraitorComponent comp, MindAddedMessage args)
     {
-        _antag.ForceMakeAntag<AutoTraitorComponent>(args.Mind.Comp.Session, comp.Profile);
+        _antag.ForceMakeAntag<AutoTraitorComponent>(args.Mind.Comp.Session, DefaultTraitorRule);
     }
 }

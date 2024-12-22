@@ -135,10 +135,6 @@
           Quantity: 5
         - ReagentId: Vitamin
           Quantity: 5
-  - type: Tag
-    tags:
-    - Cake
-    - Vegetable
 
 - type: entity
   name: slice of carrot cake
@@ -159,11 +155,6 @@
           Quantity: 1
         - ReagentId: Vitamin
           Quantity: 1
-  - type: Tag
-    tags:
-    - Cake
-    - Vegetable
-    - Slice
 
 # Tastes like sweetness, cake, carrot.
 
@@ -177,10 +168,7 @@
     state: brain
   - type: SliceableFood
     slice: FoodCakeBrainSlice
-  - type: Tag
-    tags:
-    - Cake
-    - Meat
+
 
 - type: entity
   name: slice of brain cake
@@ -190,11 +178,6 @@
   components:
   - type: Sprite
     state: brain-slice
-  - type: Tag
-    tags:
-    - Cake
-    - Meat
-    - Slice
 # Tastes like sweetness, cake, brains.
 
 - type: entity
@@ -446,10 +429,6 @@
     state: slime
   - type: SliceableFood
     slice: FoodCakeSlimeSlice
-  - type: Tag
-    tags:
-    - Cake
-    - Meat
 
 - type: entity
   name: slice of slime cake
@@ -459,11 +438,6 @@
   components:
   - type: Sprite
     state: slime-slice
-  - type: Tag
-    tags:
-    - Cake
-    - Meat
-    - Slice
 # Tastes like sweetness, cake, slime.
 
 - type: entity
@@ -524,10 +498,6 @@
     state: christmas
   - type: SliceableFood
     slice: FoodCakeChristmasSlice
-  - type: Tag
-    tags:
-    - Cake
-    - Fruit
 
 - type: entity
   name: slice of christmas cake
@@ -536,11 +506,6 @@
   components:
   - type: Sprite
     state: christmas-slice
-  - type: Tag
-    tags:
-    - Cake
-    - Fruit
-    - Slice
 # Tastes like sweetness, cake, christmas.
 
 - type: entity
@@ -669,7 +634,7 @@
           Quantity: 20
         - ReagentId: Vitamin
           Quantity: 5
-        - ReagentId: PolypyryliumOligomers
+        - ReagentId: Omnizine #This is a really rare cake with healing stuff and we don't have any of its chems yet
           Quantity: 15
 
 - type: entity
@@ -689,14 +654,14 @@
           Quantity: 4
         - ReagentId: Vitamin
           Quantity: 1
-        - ReagentId: PolypyryliumOligomers
+        - ReagentId: Omnizine
           Quantity: 3
 # Tastes like sweetness, cake, jam.
 
 - type: entity
   name: cak
   id: MobCatCake
-  parent: [ FoodCakeBase, MobLyingDownOnEntity ] #SS220 Add lying down on entity
+  parent: FoodCakeBase
   description: It's a cake. It's a cat. It's a cak.
   components:
   - type: Sprite
@@ -706,13 +671,6 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: cak
-    #SS220 Add lying down on entity begin
-    - map: ["enum.LyingVisuals.LyingDown"]
-      state: cak_rest
-      visible: false
-  - type: LyingDownOnBuckledEntity
-    offset: -0.1, 0
-    #SS220 Add lying down on entity end
   - type: Fixtures
     fixtures:
       fix1:
@@ -827,6 +785,11 @@
     tags:
     - Slice
   - type: FoodSequenceElement
+    sprite:
+      sprite: Objects/Consumable/Food/Baked/cake.rsi
+      state: suppermatter-shard
     entries:
-      Taco: Suppermatter
-      Burger: SuppermatterBurger
+      burger:
+        name: food-sequence-burger-content-suppermatter
+      taco:
+        name: food-sequence-content-suppermatter

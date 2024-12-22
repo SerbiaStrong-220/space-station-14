@@ -7,10 +7,8 @@
     contents:
       - id: ClothingHeadHatCaptain
       - id: ClothingHeadBeretCap #SS220 CapBeret
-#SS220-cloak-dress-tweak-begin
-#     - id: ClothingNeckCloakCap
-#     - id: ClothingNeckCloakCapFormal
-#SS220-cloak-dress-tweak-end
+      - id: ClothingNeckCloakCap
+      - id: ClothingNeckCloakCapFormal
       - id: ClothingUniformJumpsuitCapFormal
       - id: ClothingUniformJumpskirtCapFormalDress
       - id: ClothingHandsGlovesCaptain
@@ -37,7 +35,7 @@
       - id: ClothingOuterWinterCE
       - id: ClothingOuterCoatCEFormalDress #SS220-FormalDress
       - id: ClothingHeadHatBeretCE #SS220-CEBeret
-#     - id: ClothingNeckCloakCe #SS220-cloak-dress-tweak
+      - id: ClothingNeckCloakCe
 
 - type: entity
   id: DresserChiefMedicalOfficerFilled
@@ -53,10 +51,8 @@
       - id: ClothingHeadMirror
       - id: ClothingEyesGlasses
       - id: ClothingOuterWinterCMO
-      - id: ClothingUniformJumpsuitCMOCorporate #SS220-CMOCorporate
-      - id: ClothingUniformJumpskirtCMOCorporate #SS220-CMOCorporate
       - id: ClothingOuterCoatCMOFormalDress #SS220-FormalDress
-#     - id: ClothingCloakCmo #SS220-cloak-dress-tweak
+      - id: ClothingCloakCmo
 
 - type: entity
   id: DresserHeadOfPersonnelFilled
@@ -69,7 +65,7 @@
       - id: ClothingOuterWinterHoP
       - id: ClothingEyesGlasses
       - id: ClothingOuterCoatHoPFormalDress #SS220-FormalDress
-#     - id: ClothingNeckCloakHop #SS220-cloak-dress-tweak
+      - id: ClothingNeckCloakHop
 
 - type: entity
   id: DresserHeadOfSecurityFilled
@@ -89,7 +85,7 @@
       - id: ClothingMaskNeckGaiter
       - id: ClothingOuterWinterHoS
       - id: ClothingHeadBigCapHoS # SS220-FreedomHoSCap
-#     - id: ClothingNeckCloakHos #SS220-cloak-dress-tweak
+      - id: ClothingNeckCloakHos
 
 - type: entity
   id: DresserQuarterMasterFilled
@@ -105,7 +101,7 @@
       - id: ClothingHandsGlovesColorBrown
       - id: ClothingOuterWinterQM
       - id: ClothingOuterCoatQM #SS220-Fashion
-#     - id: ClothingNeckCloakQm #SS220-cloak-dress-tweak
+      - id: ClothingNeckCloakQm
 
 - type: entity
   id: DresserResearchDirectorFilled
@@ -120,7 +116,7 @@
       - id: ClothingOuterWinterRD
       - id: ClothingOuterCoatRDFormalDress #SS220-FormalDress
       - id: ClothingOuterCoatRD
-#     - id: ClothingNeckCloakRd #SS220-cloak-dress-tweak
+      - id: ClothingNeckCloakRd
 
 - type: entity
   id: DresserWardenFilled

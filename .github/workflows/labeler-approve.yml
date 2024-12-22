@@ -6,11 +6,10 @@ on:
 
 jobs:
   remove_label:
-    if: github.event.review.state == 'approved'
-    runs-on: ubuntu-latest
     permissions:
       pull-requests: write
-      contents: write
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-latest
     steps:
     - uses: actions-ecosystem/action-remove-labels@v1
       with:

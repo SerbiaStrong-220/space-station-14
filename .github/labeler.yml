@@ -1,4 +1,4 @@
-"Changes: Sprites":
+﻿"Changes: Sprites":
 - changed-files:
   - any-glob-to-any-file: '**/*.rsi/*.png'
 
@@ -20,14 +20,7 @@
 - changed-files:
   - any-glob-to-any-file: '**/*.swsl'
 
-"Changes: Prototypes":
+"No C#":
 - changed-files:
   # Equiv to any-glob-to-all as long as this has one matcher. If ALL changed files are not C# files, then apply label.
-  - all-globs-to-any-file:
-    - "Resources/Prototypes/**/*.yml"
-    - '!Resources/Prototypes/Maps/**/*.yml'
-
-"Changes: C#":
-- changed-files:
-  - any-glob-to-any-file: '**/*.cs'
-
+  - all-globs-to-all-files: "!**/*.cs"

@@ -24,7 +24,7 @@
 #- type: entity
 #  id: SpiderMigration
 #  parent: BaseGameRule
-#  categories: [ HideSpawnMenu ]
+#  noSpawn: true
 #  components:
 #  - type: StationEvent
 #    startDelay: 5

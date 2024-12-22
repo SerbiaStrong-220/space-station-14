@@ -31,7 +31,8 @@
   components:
   # make the player a traitor once its taken
   - type: AutoTraitor
-    profile: TraitorReinforcement
+    giveUplink: false
+    giveObjectives: false
 
 - type: entity
   parent: MobHumanSyndicateAgent

@@ -78,13 +78,9 @@
     visuals:
       enum.HolidayVisuals.Holiday:
         base:
-          festive:
-            sprite: SS220/Objects/Misc/Lights/lamp.rsi #SS220 Xmas resprite
-            state: christmaslamp
+          festive: { state: christmaslamp }
         light:
-          festive:
-            sprite: SS220/Objects/Misc/Lights/lamp.rsi #SS220 Xmas resprite
-            state: christmaslamp-on
+          festive: { state: christmaslamp-on }
 
 - type: entity
   name: banana lamp
@@ -128,11 +124,11 @@
       enum.HolidayVisuals.Holiday:
         base:
           festive:
-            sprite: SS220/Objects/Misc/Lights/lamp.rsi #SS220 Xmas resprite
+            sprite: Objects/Misc/Lights/lamp.rsi
             state: christmaslamp
         light:
           festive:
-            sprite: SS220/Objects/Misc/Lights/lamp.rsi #SS220 Xmas resprite
+            sprite: Objects/Misc/Lights/lamp.rsi
             state: christmaslamp-on
 
 - type: entity

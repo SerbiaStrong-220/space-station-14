@@ -226,9 +226,7 @@
   suffix: Security/Lawyer, Locked
   components:
   - type: AccessReader
-    #SS220 Fix start
-    access: [["Lawyer"], ["Brig"]] #SS220 Law Department
-    #SS220 Fix end
+    access: [["Security"], ["Lawyer"]]
 
 - type: entity
   parent: DoorElectronics

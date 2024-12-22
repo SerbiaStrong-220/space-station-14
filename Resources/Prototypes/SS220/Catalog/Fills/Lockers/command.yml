@@ -1,5 +1,3 @@
-# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-
 - type: entity
   id: LockerBlueshieldFilled
   suffix: Filled
@@ -9,14 +7,11 @@
     contents:
     - id: WeaponDisabler
     - id: MedkitAdvancedFilled
-#    - id: ClothingUniformJumpsuitBlueShield2 #SS220 BlueShield Rework
-#   - id: ClothingCloakBlueShield #SS220 new cloak
+    - id: ClothingUniformJumpsuitBlueShield2 #SS220 new jumpsuit
+    - id: ClothingCloakBlueShield #SS220 new cloak
     - id: ExpensiveLighterShield #SS220-Zippo
-#   - id: HandheldCrewMonitor #ss220-fix-blueshield
-#    - id: ClothingOuterBSOCoat #SS220 BlueShield Rework
-    - id: BlueShieldGasMask
-    - id: RubberStampBlueShield #SS220-additional paperwork
-    - id: JetpackMiniBlueFilled #SS220 BlueShield Rework
+    #- id: HandheldCrewMonitor #ss220-fix-blueshield
+    - id: ClothingOuterSRTCoat #SS220-CentComm
 
 - type: entity
   parent: GunSafe
@@ -29,8 +24,9 @@
     contents:
 #    - id: WeaponDisabler #SS220-MinorTweaks
 #      amount: 1 #SS220-MinorTweaks
-    - id: WeaponBlasterKRS #SS220-BlueShield Rework
-    - id: BlasterPowerCellAlt
+    - id: WeaponSubMachineGunDrozdRubber #SS220-MinorTweaks(#Rubber)
+      amount: 1
+    - id: MagazinePistolSubMachineGun
       amount: 2
-    - id: BlasterPowerCellDisabler
+    - id: MagazinePistolSubMachineGunRubber #SS220-MinorTweaks
       amount: 2

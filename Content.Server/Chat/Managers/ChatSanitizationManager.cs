@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared.CCVar;
@@ -6,14 +7,11 @@ using Robust.Shared.Configuration;
 
 namespace Content.Server.Chat.Managers;
 
-/// <summary>
-///     Sanitizes messages!
-///     It currently ony removes the shorthands for emotes (like "lol" or "^-^") from a chat message and returns the last
-///     emote in their message
-/// </summary>
 public sealed class ChatSanitizationManager : IChatSanitizationManager
 {
-    private static readonly Dictionary<string, string> ShorthandToEmote = new()
+    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+
+    private static readonly Dictionary<string, string> SmileyToEmote = new()
     {
         // SS220 Fard emote :DD
         { "пук", "chatsan-farts" },
@@ -53,7 +51,7 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         { ":D", "chatsan-smiles-widely" },
         { "D:", "chatsan-frowns-deeply" },
         { ":O", "chatsan-surprised" },
-        { ":3", "chatsan-smiles" },
+        { ":3", "chatsan-smiles" }, //nope
         { ":S", "chatsan-uncertain" },
         { ":>", "chatsan-grins" },
         { ":<", "chatsan-pouts" },
@@ -95,7 +93,7 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         { "kek", "chatsan-laughs" },
         { "rofl", "chatsan-laughs" },
         { "o7", "chatsan-salutes" },
-        { ";_;7", "chatsan-tearfully-salutes" },
+        { ";_;7", "chatsan-tearfully-salutes"},
         { "idk", "chatsan-shrugs" },
         { ";)", "chatsan-winks" },
         { ";]", "chatsan-winks" },
@@ -108,11 +106,8 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         { "(':", "chatsan-tearfully-smiles" },
         { "[':", "chatsan-tearfully-smiles" },
         { "('=", "chatsan-tearfully-smiles" },
-        { "['=", "chatsan-tearfully-smiles" }
+        { "['=", "chatsan-tearfully-smiles" },
     };
-
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly ILocalizationManager _loc = default!;
 
     private bool _doSanitize;
 
@@ -121,60 +116,28 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         _configurationManager.OnValueChanged(CCVars.ChatSanitizerEnabled, x => _doSanitize = x, true);
     }
 
-    /// <summary>
-    ///     Remove the shorthands from the message, returning the last one found as the emote
-    /// </summary>
-    /// <param name="message">The pre-sanitized message</param>
-    /// <param name="speaker">The speaker</param>
-    /// <param name="sanitized">The sanitized message with shorthands removed</param>
-    /// <param name="emote">The localized emote</param>
-    /// <returns>True if emote has been sanitized out</returns>
-    public bool TrySanitizeEmoteShorthands(string message,
-        EntityUid speaker,
-        out string sanitized,
-        [NotNullWhen(true)] out string? emote)
+    public bool TrySanitizeOutSmilies(string input, EntityUid speaker, out string sanitized, [NotNullWhen(true)] out string? emote)
     {
+        input = input.TrimEnd();
+        sanitized = input;
         emote = null;
-        sanitized = message;
 
         if (!_doSanitize)
             return false;
 
-        // -1 is just a canary for nothing found yet
-        var lastEmoteIndex = -1;
+        var emoteSanitized = false;
 
-        foreach (var (shorthand, emoteKey) in ShorthandToEmote)
+        foreach (var (smiley, replacement) in SmileyToEmote)
         {
-            // We have to escape it because shorthands like ":)" or "-_-" would break the regex otherwise.
-            var escaped = Regex.Escape(shorthand);
-
-            // So there are 2 cases:
-            // - If there is whitespace before it and after it is either punctuation, whitespace, or the end of the line
-            //   Delete the word and the whitespace before
-            // - If it is at the start of the string and is followed by punctuation, whitespace, or the end of the line
-            //   Delete the word and the punctuation if it exists.
-            var pattern =
-                $@"\s{escaped}(?=\p{{P}}|\s|$)|^{escaped}(?:\p{{P}}|(?=\s|$))";
-
-            var r = new Regex(pattern, RegexOptions.RightToLeft | RegexOptions.IgnoreCase);
-
-            // We're using sanitized as the original message until the end so that we can make sure the indices of
-            // the emotes are accurate.
-            var lastMatch = r.Match(sanitized);
-
-            if (!lastMatch.Success)
-                continue;
-
-            if (lastMatch.Index > lastEmoteIndex)
+            if (input.EndsWith(smiley, true, CultureInfo.InvariantCulture))
             {
-                lastEmoteIndex = lastMatch.Index;
-                emote = _loc.GetString(emoteKey, ("ent", speaker));
+                sanitized = input.Remove(input.Length - smiley.Length).TrimEnd();
+                emote = Loc.GetString(replacement, ("ent", speaker));
+                emoteSanitized = true;
+                break;
             }
-
-            message = r.Replace(message, string.Empty);
         }
 
-        // SS220 no English begin
         var ntAllowed = sanitized.Replace("NanoTrasen", string.Empty, StringComparison.OrdinalIgnoreCase);
         ntAllowed = ntAllowed.Replace("nt", string.Empty, StringComparison.OrdinalIgnoreCase);
 
@@ -185,9 +148,7 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
             emote = "кашляет";
             return true;
         }
-        // SS220 no English end
 
-        sanitized = message.Trim();
-        return emote is not null;
+        return emoteSanitized;
     }
 }

@@ -6,7 +6,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.MindSlave;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class MindSlaveRoleComponent : BaseMindRoleComponent
+public sealed partial class MindSlaveRoleComponent : AntagonistRoleComponent
 {
     /// <summary>
     /// Enslaved person's master, which he obeys to.

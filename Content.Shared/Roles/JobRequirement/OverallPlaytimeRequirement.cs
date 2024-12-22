@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.Localizations;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences;
 using JetBrains.Annotations;
@@ -26,9 +25,7 @@ public sealed partial class OverallPlaytimeRequirement : JobRequirement
         reason = new FormattedMessage();
 
         var overallTime = playTimes.GetValueOrDefault(PlayTimeTrackingShared.TrackerOverall);
-        var overallDiffSpan = Time - overallTime;
-        var overallDiff = overallDiffSpan.TotalMinutes;
-        var formattedOverallDiff = ContentLocalizationManager.FormatPlaytime(overallDiffSpan);
+        var overallDiff = Time.TotalMinutes - overallTime.TotalMinutes;
 
         if (!Inverted)
         {
@@ -37,14 +34,14 @@ public sealed partial class OverallPlaytimeRequirement : JobRequirement
 
             reason = FormattedMessage.FromMarkupPermissive(Loc.GetString(
                 "role-timer-overall-insufficient",
-                ("time", formattedOverallDiff)));
+                ("time", Math.Ceiling(overallDiff))));
             return false;
         }
 
         if (overallDiff <= 0 || overallTime >= Time)
         {
             reason = FormattedMessage.FromMarkupPermissive(Loc.GetString("role-timer-overall-too-high",
-                ("time", formattedOverallDiff)));
+                ("time", -overallDiff)));
             return false;
         }
 

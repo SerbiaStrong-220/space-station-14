@@ -20,7 +20,7 @@
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/light_rifle.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 4
+    steps: 3 #SS220-FixAmmoSprite
     zeroVisible: false
   - type: Appearance
 
@@ -41,7 +41,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: magb
-    steps: 4
+    steps: 3 #SS220-FixAmmoSprite
     zeroVisible: false
   - type: Appearance
 

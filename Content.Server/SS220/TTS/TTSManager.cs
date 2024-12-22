@@ -90,10 +90,10 @@ public sealed class TTSManager
     /// <param name="speaker">Identifier of speaker</param>
     /// <param name="text">SSML formatted text</param>
     /// <returns>WAV audio bytes or null if failed</returns>
-    public async Task<byte[]?> ConvertTextToSpeech(string speaker, string text, bool isRadio , bool isAnnounce)
+    public async Task<byte[]?> ConvertTextToSpeech(string speaker, string text)
     {
         WantedCount.Inc();
-        var cacheKey = GenerateCacheKey(speaker, text, isRadio);
+        var cacheKey = GenerateCacheKey(speaker, text);
 
         return await ExecuteWithNamedLockAsync(cacheKey, async () =>
         {
@@ -104,11 +104,7 @@ public sealed class TTSManager
                 return data;
             }
 
-            if (isRadio)
-                _sawmill.Debug($"Generate new radio sound for '{text}' speech by '{speaker}' speaker");
-            else
-                _sawmill.Debug($"Generate new audio for '{text}' speech by '{speaker}' speaker");
-
+            _sawmill.Debug($"Generate new audio for '{text}' speech by '{speaker}' speaker");
             var reqTime = DateTime.UtcNow;
             try
             {
@@ -118,16 +114,6 @@ public sealed class TTSManager
                     { "speaker", speaker },
                     { "text", text },
                     { "ext", "wav" }});
-
-                if (isRadio)
-                {
-                    requestUrl += "&effect=radio";
-                }
-
-                if (isAnnounce)
-                {
-                    requestUrl += "&effect=announce";
-                }
 
                 var response = await _httpClient.GetAsync(requestUrl, cts.Token);
                 if (!response.IsSuccessStatusCode)
@@ -153,10 +139,8 @@ public sealed class TTSManager
                     _cacheKeysSeq.Remove(firstKey);
                 }
 
-                if (isRadio)
-                    _sawmill.Debug($"Generated new radio sound for '{text}' speech by '{speaker}' speaker ({soundData.Length} bytes)");
-                else
-                    _sawmill.Debug($"Generated new sound for '{text}' speech by '{speaker}' speaker ({soundData.Length} bytes)");
+                _sawmill.Debug(
+                    $"Generated new sound for '{text}' speech by '{speaker}' speaker ({soundData.Length} bytes)");
                 RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
 
                 return soundData;
@@ -192,7 +176,7 @@ public sealed class TTSManager
     {
         WantedRadioCount.Inc();
 
-        var cacheKey = GenerateCacheKey($"radio-{speaker}", text, isRadio: true);
+        var cacheKey = GenerateCacheKey($"radio-{speaker}", text);
         return await ExecuteWithNamedLockAsync(cacheKey, async () =>
         {
             if (_cacheRadio.TryGetValue(cacheKey, out var cachedSoundData))
@@ -202,7 +186,7 @@ public sealed class TTSManager
                 return cachedSoundData;
             }
 
-            var soundData = await ConvertTextToSpeech(speaker, text, isRadio: true, isAnnounce: false);
+            var soundData = await ConvertTextToSpeech(speaker, text);
             if (soundData == null)
                 return null;
 
@@ -243,6 +227,10 @@ public sealed class TTSManager
                     _cacheRadioKeysSeq.Remove(firstKey);
                 }
 
+                _sawmill.Debug(
+                    $"Generated new radio sound for '{text}' speech by '{speaker}' speaker ({soundData.Length} bytes)");
+                RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
+
                 return soundData;
             }
             catch (TaskCanceledException)
@@ -275,11 +263,12 @@ public sealed class TTSManager
         _cacheRadioKeysSeq.Clear();
     }
 
-    private static string GenerateCacheKey(string speaker, string text, bool isRadio)
+    private string GenerateCacheKey(string speaker, string text)
     {
-        var key = $"{speaker}/{text}/{isRadio}";
-        var keyData = Encoding.UTF8.GetBytes(key);
-        var bytes = System.Security.Cryptography.SHA256.HashData(keyData);
+        var key = $"{speaker}/{text}";
+        byte[] keyData = Encoding.UTF8.GetBytes(key);
+        var sha256 = System.Security.Cryptography.SHA256.Create();
+        var bytes = sha256.ComputeHash(keyData);
         return Convert.ToHexString(bytes);
     }
 

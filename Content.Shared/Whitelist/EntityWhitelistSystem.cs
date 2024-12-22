@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Item;
-using Content.Shared.Roles;
 using Content.Shared.Tag;
 
 namespace Content.Shared.Whitelist;
@@ -8,7 +7,6 @@ namespace Content.Shared.Whitelist;
 public sealed class EntityWhitelistSystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
@@ -48,32 +46,9 @@ public sealed class EntityWhitelistSystem : EntitySystem
     public bool IsValid(EntityWhitelist list, EntityUid uid)
     {
         if (list.Components != null)
-        {
-            if (list.Registrations == null)
-            {
-                var regs = StringsToRegs(list.Components);
-                list.Registrations = new List<ComponentRegistration>();
-                list.Registrations.AddRange(regs);
-            }
-        }
+            EnsureRegistrations(list);
 
-        if (list.MindRoles != null)
-        {
-            var regs = StringsToRegs(list.MindRoles);
-
-            foreach (var role in regs)
-            {
-                if ( _roles.MindHasRole(uid, role.Type, out _))
-                {
-                    if (!list.RequireAll)
-                        return true;
-                }
-                else if (list.RequireAll)
-                    return false;
-            }
-        }
-
-        if (list.Registrations != null && list.Registrations.Count > 0)
+        if (list.Registrations != null)
         {
             foreach (var reg in list.Registrations)
             {
@@ -178,7 +153,7 @@ public sealed class EntityWhitelistSystem : EntitySystem
         return IsWhitelistPassOrNull(blacklist, uid);
     }
 
-    /// <summary>
+    /// <summary>                                        
     /// Helper function to determine if Blacklist is either null or the entity is not on the list
     /// Duplicate of equivalent Whitelist function
     /// </summary>
@@ -187,27 +162,24 @@ public sealed class EntityWhitelistSystem : EntitySystem
         return IsWhitelistFailOrNull(blacklist, uid);
     }
 
-    private List<ComponentRegistration> StringsToRegs(string[]? input)
+    private void EnsureRegistrations(EntityWhitelist list)
     {
-        var list = new List<ComponentRegistration>();
+        if (list.Components == null)
+            return;
 
-        if (input == null || input.Length == 0)
-            return list;
-
-        foreach (var name in input)
+        list.Registrations = new List<ComponentRegistration>();
+        foreach (var name in list.Components)
         {
             var availability = _factory.GetComponentAvailability(name);
             if (_factory.TryGetRegistration(name, out var registration)
                 && availability == ComponentAvailability.Available)
             {
-                list.Add(registration);
+                list.Registrations.Add(registration);
             }
             else if (availability == ComponentAvailability.Unknown)
             {
-                Log.Error($"StringsToRegs failed: Unknown component name {name} passed to EntityWhitelist!");
+                Log.Warning($"Unknown component name {name} passed to EntityWhitelist!");
             }
         }
-
-        return list;
     }
 }

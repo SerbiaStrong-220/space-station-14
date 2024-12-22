@@ -94,7 +94,7 @@ public sealed class UseableBookSystem : EntitySystem
             _entManager.AddComponent(args.User, copiedComp, true);
         }
 
-        Dirty(uid, comp);
+        Dirty(comp);
         var useableArgs = new UseableBookOnReadEvent();
         useableArgs.Interactor = args.User;
         useableArgs.BookComp = comp;

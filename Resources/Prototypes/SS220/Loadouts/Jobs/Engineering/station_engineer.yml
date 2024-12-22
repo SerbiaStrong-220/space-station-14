@@ -8,20 +8,6 @@
       role: JobStationEngineer
       time: 108000 # 30 hrs
 
-# Glasses
-- type: loadout
-  id: GlassesEngineer
-  equipment:
-    eyes: ClothingEyesGlassesMeson
-
-- type: loadout
-  id: CyberGlassesEngineer
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: BigShlopaSponsorTier
-  equipment:
-    eyes: ClothingSponsorCyberEngVisor
-
 # Jumpsuit
 - type: loadout
   id: StationEngineerJumpsuitTurtleneck
@@ -54,12 +40,3 @@
     proto: StationEngineerTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorOrange
-
-# Outerclothing
-- type: loadout
-  id: CyberJacketEngineer
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: BigShlopaSponsorTier
-  equipment:
-    outerClothing: ClothingSponsorCyberJacketEng

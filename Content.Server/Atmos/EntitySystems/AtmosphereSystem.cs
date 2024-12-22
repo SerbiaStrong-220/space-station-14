@@ -4,7 +4,6 @@ using Content.Server.Body.Systems;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Shared.Atmos.EntitySystems;
-using Content.Shared.Decals;
 using Content.Shared.Doors.Components;
 using Content.Shared.Maps;
 using JetBrains.Annotations;
@@ -13,8 +12,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
-using System.Linq;
+using Robust.Shared.Random;
 
 namespace Content.Server.Atmos.EntitySystems;
 
@@ -26,6 +24,7 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
 {
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly InternalsSystem _internals = default!;
@@ -48,8 +47,6 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
     private EntityQuery<FirelockComponent> _firelockQuery;
     private HashSet<EntityUid> _entSet = new();
 
-    private string[] _burntDecals = [];
-
     public override void Initialize()
     {
         base.Initialize();
@@ -69,9 +66,7 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
         _firelockQuery = GetEntityQuery<FirelockComponent>();
 
         SubscribeLocalEvent<TileChangedEvent>(OnTileChanged);
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
-        CacheDecals();
     }
 
     public override void Shutdown()
@@ -84,12 +79,6 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
     private void OnTileChanged(ref TileChangedEvent ev)
     {
         InvalidateTile(ev.NewTile.GridUid, ev.NewTile.GridIndices);
-    }
-
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
-    {
-        if (ev.WasModified<DecalPrototype>())
-            CacheDecals();
     }
 
     public override void Update(float frameTime)
@@ -117,10 +106,5 @@ public sealed partial class AtmosphereSystem : SharedAtmosphereSystem
         }
 
         _exposedTimer -= ExposedUpdateDelay;
-    }
-
-    private void CacheDecals()
-    {
-        _burntDecals = _protoMan.EnumeratePrototypes<DecalPrototype>().Where(x => x.Tags.Contains("burnt")).Select(x => x.ID).ToArray();
     }
 }

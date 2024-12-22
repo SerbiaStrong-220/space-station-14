@@ -12,6 +12,7 @@ namespace Content.Server.Entry
             "GuideHelp",
             "Clickable",
             "Icon",
+            "HandheldGPS",
             "CableVisualizer",
             "SolutionItemStatus",
             "UIFragment",

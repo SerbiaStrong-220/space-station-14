@@ -63,8 +63,7 @@ namespace Content.Server.SS220.MapMigration
 
             var processed = 0;
 
-            var childEnumerator = xformQuery.GetComponent(gridId.Value).ChildEnumerator;
-            while (childEnumerator.MoveNext(out var child))
+            foreach (var child in xformQuery.GetComponent(gridId.Value).ChildEntities)
             {
                 if (!_entManager.EntityExists(child))
                 {

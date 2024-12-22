@@ -14,9 +14,6 @@
   id: EventRole
 
 - type: playTimeTracker
-  id: JobMagistrate
-
-- type: playTimeTracker
   id: JobSeniorEngineer
 
 - type: playTimeTracker
@@ -30,9 +27,6 @@
 
 - type: playTimeTracker
   id: JobSeniorService
-
-- type: playTimeTracker
-  id: Prisoner
 
 # Antags
 - type: playTimeTracker
@@ -55,10 +49,3 @@
 
 - type: playTimeTracker
   id: AntagInitialInfected
-
-# Centcom
-- type: playTimeTracker
-  id: JobDeathSquadCommander
-
-- type: playTimeTracker
-  id: JobDeathSquadHealer

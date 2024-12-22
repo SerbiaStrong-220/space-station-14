@@ -1,3 +1,4 @@
+using Content.Shared.Actions;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind.Components;
 using Robust.Shared.GameStates;
@@ -86,20 +87,16 @@ public sealed partial class MindComponent : Component
     /// <summary>
     ///     Prevents user from ghosting out
     /// </summary>
-    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("preventGhosting")]
     public bool PreventGhosting { get; set; }
 
     /// <summary>
     ///     Prevents user from suiciding
     /// </summary>
-    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("preventSuicide")]
     public bool PreventSuicide { get; set; }
-
-    /// <summary>
-    ///     Mind Role Entities belonging to this Mind
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public List<EntityUid> MindRoles = new List<EntityUid>();
 
     /// <summary>
     ///     The session of the player owning this mind.

@@ -8,7 +8,7 @@
 - type: stack
   id: Capacitor
   name: capacitor
-  icon: { sprite: /Textures/Objects/Misc/stock_parts.rsi, state: capacitor }
+  icon: { sprite: /Textures/Objects/Misc/stock_parts.rsi, state: capacitor } #SS220 Recepies fix
   spawn: CapacitorStockPart
   maxCount: 10
 

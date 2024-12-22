@@ -13,4 +13,3 @@ reagent-effect-status-effect-RatvarianLanguage = паттерны ратварс
 reagent-effect-status-effect-StaminaModifier = модифицированная выносливость
 reagent-effect-status-effect-RadiationProtection = защита от радиации
 reagent-effect-status-effect-Drowsiness = сонливость
-reagent-effect-status-effect-Adrenaline = адреналин

@@ -29,11 +29,8 @@
   id: OrganDionaBrain
   parent: [BaseDionaOrgan, OrganHumanBrain]
   name: brain
-  description: "The central hub of a diona's pseudo-neurological activity, its root-like tendrils search for its former body."
+  description: "The source of incredible, unending intelligence. Honk."
   components:
-  - type: Item
-    size: Small
-    heldPrefix: brain
   - type: Sprite
     state: brain
   - type: SolutionContainerManager
@@ -67,7 +64,7 @@
   id: OrganDionaStomach
   parent: BaseDionaOrgan
   name: stomach
-  description: "The diona's equivalent of a stomach, it reeks of asparagus and vinegar."
+  description: "Gross. This is hard to stomach."
   components:
   - type: Sprite
     state: stomach
@@ -93,21 +90,18 @@
       - id: Narcotic
       - id: Alcohol
         rateModifier: 0.1
-  - type: Item
-    size: Small
-    heldPrefix: stomach
 
 - type: entity
   id: OrganDionaLungs
   parent: BaseDionaOrgan
   name: lungs
-  description: "A spongy mess of slimy, leaf-like structures. Capable of breathing both carbon dioxide and oxygen."
+  description: "Filters oxygen from an atmosphere, which is then sent into the bloodstream to be used as an electron carrier."
   components:
   - type: Sprite
-    state: lungs
-  - type: Item
-    size: Small
-    heldPrefix: lungs
+    sprite: Mobs/Species/Human/organs.rsi
+    layers:
+      - state: lung-l
+      - state: lung-r
   - type: Lung 
   - type: Metabolizer
     removeEmpty: true

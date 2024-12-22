@@ -53,7 +53,7 @@
   - badidea
   - punishment
   name: aller-at-once-title
-  description: aller-at-once-description
+  description: all-at-once-description
   showInVote: false #Please god dont do this
   rules:
     - Nukeops
@@ -180,7 +180,7 @@
   showInVote: false
   rules:
     - Nukeops
-    # - SubGamemodesRule #SS220 no-thief-on-nukie-round-fix
+    - SubGamemodesRule
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles

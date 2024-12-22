@@ -112,7 +112,7 @@
     - state: idintern-service
 
 - type: entity
-  parent: [IDCardStandard]
+  parent: [IDCardStandard, BaseGrandTheftContraband]
   id: CaptainIDCard
   name: captain ID card
   components:
@@ -459,21 +459,6 @@
 
 - type: entity
   parent: IDCardStandard
-  id: VisitorIDCard
-  name: visitor ID card
-  components:
-  - type: Sprite
-    layers:
-    - state: default
-    - state: idvisitor
-  - type: IdCard
-    jobTitle: job-title-visitor
-    jobIcon: JobIconVisitor
-  - type: PresetIdCard
-    job: Visitor
-
-- type: entity
-  parent: IDCardStandard
   id: BrigmedicIDCard
   name: brigmedic ID card
   components:
@@ -497,20 +482,17 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
-    jobTitle: job-name-cc-default #SS220 (upstream 65 localization)
+    jobTitle: Central Commander
     jobIcon: JobIconNanotrasen
-# SS220 centcomm access fix begin
-#  - type: Access
-#    groups:
-#    - AllAccess # SS220 Fast fix access
-#    tags:
-#    - CentralCommand
-# SS220 centcomm access fix end
-  - type: PresetIdCard
-    job: CentralCommandOfficial
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    tags:
+    - CentralCommand
+    - CentralCommandERT # SS220 New CentComm
 
 - type: entity
-  parent: IDCardStandard
+  parent: CentcomIDCard
   id: ERTLeaderIDCard
   name: ERT leader ID card
   components:
@@ -519,11 +501,15 @@
     - state: gold
     - state: ert_commander
   - type: IdCard
-    jobTitle: job-name-ert-commander # SS220 new CentComm #SS220 (upstream 65 localization)
-  - type: PresetIdCard
-    job: ERTLeader
+    jobTitle: Лидер отряда ОБР # SS220 new CentComm
   - type: Item
     heldPrefix: gold
+  # SS220 new CentComm begin
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    - CentralCommand
+  # SS220 new CentComm end
 
 - type: entity
   parent: CentcomIDCard # SS220 new CentComm begin
@@ -534,18 +520,16 @@
     layers:
     - state: gold
     - state: ert_chaplain # we have the sprite for the id but dont have chaplain ERT equipment for now.
-  - type: PresetIdCard
-    job: ERTChaplain
+  - type: IdCard
+    jobTitle: ERT Soul Officer
   - type: Item
     heldPrefix: blue
-# SS220 centcomm access fix begin
-#  - type: Access
-#    groups:
-#    - AllAccess # SS220 Fast fix access
-# SS220 centcomm access fix end
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
 
 - type: entity
-  parent: IDCardStandard
+  parent: ERTChaplainIDCard
   id: ERTEngineerIDCard
   name: ERT engineer ID card
   components:
@@ -553,11 +537,11 @@
     layers:
     - state: gold
     - state: ert_engineer
-  - type: PresetIdCard
-    job: ERTEngineer
+  - type: IdCard
+    jobTitle: ERT Field Engineer
 
 - type: entity
-  parent: IDCardStandard
+  parent: ERTChaplainIDCard
   id: ERTJanitorIDCard
   name: ERT janitor ID card
   components:
@@ -565,11 +549,11 @@
     layers:
     - state: gold
     - state: ert_janitor
-  - type: PresetIdCard
-    job: ERTJanitor
+  - type: IdCard
+    jobTitle: ERT Custodian
 
 - type: entity
-  parent: IDCardStandard
+  parent: ERTChaplainIDCard
   id: ERTMedicIDCard
   name: ERT medic ID card
   components:
@@ -577,11 +561,11 @@
     layers:
     - state: gold
     - state: ert_medic
-  - type: PresetIdCard
-    job: ERTMedical
+  - type: IdCard
+    jobTitle: ERT Medical Doctor
 
 - type: entity
-  parent: IDCardStandard
+  parent: ERTChaplainIDCard
   id: ERTSecurityIDCard
   name: ERT security ID card
   components:
@@ -589,8 +573,8 @@
     layers:
     - state: gold
     - state: ert_security
-  - type: PresetIdCard
-    job: ERTSecurity
+  - type: IdCard
+    jobTitle: ERT Field Officer
 
 - type: entity
   parent: IDCardStandard
@@ -606,7 +590,7 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
-    jobTitle: job-name-cc-default # #SS220 (upstream 65 localization)
+    jobTitle: Central Commander
   - type: Access
     groups:
     - AllAccess
@@ -624,7 +608,7 @@
       job: Musician
 
 - type: entity
-  parent: IDCardStandard
+  parent: CentcomIDCard
   id: CentcomIDCardDeathsquad
   name: death squad ID card
   categories: [ HideSpawnMenu ] #SS220 New CentCom
@@ -635,9 +619,15 @@
   - type: Item
     heldPrefix: blue
   - type: IdCard
-    jobTitle: job-name-cc-agent #SS220 (upstream 65 localization)
-  - type: PresetIdCard
-    job: DeathSquad
+    jobTitle: Centcomm Agent
+  # SS220 new CentComm begin
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    tags:
+    - CentralCommandDeathSquad
+    - CentralCommand
+  # SS220 new CentComm end
 
 - type: entity
   name: passenger ID card
@@ -812,10 +802,14 @@
   - type: IdCard
   # SS220 new CentComm begin
   # SS220 CBURN questions changes name 05.07.2024
-    jobTitle: job-name-cburn-agent #SS220 (upstream 65 localization)
+    jobTitle: Агент РХБЗ
+  - type: Access
+    groups:
+    - AllAccess # SS220 Fast fix access
+    tags:
+    - CentralCommandCBURN
+    - CentralCommand
   # SS220 new CentComm end
-  - type: PresetIdCard
-    job: CBURN
 
 - type: entity
   parent: IDCardStandard
@@ -828,7 +822,7 @@
     - state: default
     - state: idcluwne
   - type: IdCard
-    jobTitle: job-title-cluwne
+    jobTitle: Cluwne
   - type: Unremoveable
 
 - type: entity #ss220
@@ -896,7 +890,7 @@
   - type: Item
     heldPrefix: green
   - type: IdCard
-    jobTitle: job-title-universal
+    jobTitle: Universal
     jobIcon: JobIconAdmin
   - type: Access
     groups:
@@ -905,4 +899,3 @@
     - CentralCommand
     - NuclearOperative
     - SyndicateAgent
-    - Wizard

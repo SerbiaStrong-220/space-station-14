@@ -1,4 +1,2 @@
-# ss 220 Svarshik's toy guns
-ent-MagazineFoamBox = короб патронов L6 SAW
+ent-MagazineFoamBox = коробка боеприпасов (пенопласт)
     .desc = { ent-MagazineLightRifleBox.desc }
-    .suffix = Поролон

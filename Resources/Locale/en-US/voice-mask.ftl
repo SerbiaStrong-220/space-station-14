@@ -1,5 +1,3 @@
-voice-mask-default-name-override = Unknown
-
 voice-mask-name-change-window = Voice Mask Name Change
 voice-mask-name-change-info = Type in the name you want to mimic.
 voice-mask-name-change-speech-style = Speech style

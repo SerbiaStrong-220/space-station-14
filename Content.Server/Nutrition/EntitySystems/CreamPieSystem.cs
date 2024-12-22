@@ -41,9 +41,7 @@ namespace Content.Server.Nutrition.EntitySystems
 
         protected override void SplattedCreamPie(EntityUid uid, CreamPieComponent creamPie)
         {
-            // The entity is deleted, so play the sound at its position rather than parenting
-            var coordinates = Transform(uid).Coordinates;
-            _audio.PlayPvs(_audio.GetSound(creamPie.Sound), coordinates, AudioParams.Default.WithVariation(0.125f));
+            _audio.PlayPvs(_audio.GetSound(creamPie.Sound), uid, AudioParams.Default.WithVariation(0.125f));
 
             if (EntityManager.TryGetComponent(uid, out FoodComponent? foodComp))
             {
@@ -51,9 +49,12 @@ namespace Content.Server.Nutrition.EntitySystems
                 {
                     _puddle.TrySpillAt(uid, solution, out _, false);
                 }
-                foreach (var trash in foodComp.Trash)
+                if (foodComp.Trash.Count == 0)
                 {
-                    EntityManager.SpawnEntity(trash, Transform(uid).Coordinates);
+                    foreach (var trash in foodComp.Trash)
+                    {
+                        EntityManager.SpawnEntity(trash, Transform(uid).Coordinates);
+                    }
                 }
             }
             ActivatePayload(uid);

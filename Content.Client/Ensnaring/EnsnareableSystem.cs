@@ -2,7 +2,7 @@ using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
 using Robust.Client.GameObjects;
 
-namespace Content.Client.Ensnaring;
+namespace Content.Client.Ensnaring.Visualizers;
 
 public sealed class EnsnareableSystem : SharedEnsnareableSystem
 {
@@ -12,14 +12,13 @@ public sealed class EnsnareableSystem : SharedEnsnareableSystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<EnsnareableComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<EnsnareableComponent, AppearanceChangeEvent>(OnAppearanceChange);
     }
 
-    protected override void OnEnsnareInit(Entity<EnsnareableComponent> ent, ref ComponentInit args)
+    private void OnComponentInit(EntityUid uid, EnsnareableComponent component, ComponentInit args)
     {
-        base.OnEnsnareInit(ent, ref args);
-
-        if(!TryComp<SpriteComponent>(ent.Owner, out var sprite))
+        if(!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
         // TODO remove this, this should just be in yaml.

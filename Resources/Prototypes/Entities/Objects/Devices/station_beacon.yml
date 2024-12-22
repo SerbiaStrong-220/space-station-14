@@ -139,14 +139,6 @@
 
 - type: entity
   parent: DefaultStationBeaconCommand
-  id: DefaultStationBeaconGateway
-  suffix: Gateway
-  components:
-  - type: NavMapBeacon
-    defaultText: station-beacon-gateway
-
-- type: entity
-  parent: DefaultStationBeaconCommand
   id: DefaultStationBeaconCaptainsQuarters
   suffix: Captain's Quarters
   components:
@@ -440,14 +432,6 @@
 
 - type: entity
   parent: DefaultStationBeaconEngineering
-  id: DefaultStationBeaconAnchor
-  suffix: Anchor
-  components:
-  - type: NavMapBeacon
-    defaultText: station-beacon-anchor
-
-- type: entity
-  parent: DefaultStationBeaconEngineering
   id: DefaultStationBeaconSingularity
   suffix: PA Control
   components:
@@ -542,7 +526,7 @@
   components:
   - type: NavMapBeacon
     defaultText: station-beacon-ai
-    color: "#5ed7aa"
+    color: "#2ed2fd"
 
 - type: entity
   parent: DefaultStationBeaconAI
@@ -647,11 +631,3 @@
   components:
   - type: NavMapBeacon
     defaultText: station-beacon-escape-pod
-
-- type: entity
-  parent: DefaultStationBeacon
-  id: DefaultStationBeaconVox
-  suffix: Vox
-  components:
-  - type: NavMapBeacon
-    defaultText: station-beacon-vox

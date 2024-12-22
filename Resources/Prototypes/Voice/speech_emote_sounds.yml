@@ -52,8 +52,6 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
-    Hew:
-      collection: Hew
     #Gasp: SS220-emotes
     #  collection: MaleGasp
     #DefaultDeathgasp:
@@ -112,8 +110,6 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
-    Hew:
-      collection: Hew
     #Gasp: SS220 emotes
     #  collection: FemaleGasp
     #DefaultDeathgasp:
@@ -156,8 +152,6 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
-    Hew:
-      collection: Hew
     #Gasp: SS220 emotes
     #  collection: MaleGasp
     #DefaultDeathgasp:
@@ -200,8 +194,6 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
-    Hew:
-      collection: Hew
     Gasp:
       collection: FemaleGasp
     DefaultDeathgasp:
@@ -256,8 +248,6 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
-    Hew:
-      collection: Hew
     #Gasp: SS220-emotes
     #  collection: MaleGasp
     #DefaultDeathgasp:
@@ -314,8 +304,6 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
-    Hew:
-      collection: Hew
     #Gasp: SS220 emotes
     #  collection: FemaleGasp
     #DefaultDeathgasp:
@@ -353,8 +341,6 @@
       collection: BikeHorn
     Weh:
       collection: Weh
-    Hew:
-      collection: Hew
     Gasp:
       collection: MaleGasp
     DefaultDeathgasp:
@@ -387,8 +373,6 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
-    Hew:
-      collection: Hew
     #Gasp: SS220 emotes
     #  collection: MaleGasp
     #DefaultDeathgasp:
@@ -439,8 +423,6 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
-    Hew:
-      collection: Hew
     #Gasp: SS220 emotes
     #  collection: MaleGasp
     #DefaultDeathgasp:
@@ -485,8 +467,6 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
-    Hew:
-      collection: Hew
     Gasp:
       collection: FemaleGasp
     DefaultDeathgasp:
@@ -520,8 +500,6 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
-    Hew:
-      collection: Hew
     #Gasp: SS220 emotes
     #  collection: MaleGasp
     #DefaultDeathgasp:
@@ -591,22 +569,6 @@
       path: /Audio/Voice/Diona/diona_salute.ogg
       params:
        volume: -5
-
-- type: emoteSounds
-  id: ReptilianBodyEmotes
-  sounds:
-    Thump:
-      path: /Audio/Voice/Reptilian/reptilian_tailthump.ogg
-      params:
-        variation: 0.125
-    Clap:
-      collection: Claps
-    Snap:
-      collection: Snaps
-      params:
-        volume: -6
-    Salute:
-      collection: Salutes
 
 # mobs
 - type: emoteSounds

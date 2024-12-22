@@ -60,19 +60,18 @@
   id: BlueShieldGear
   equipment:
 #    jumpsuit: ClothingUniformJumpsuitBlueShield #SS220-blueshield-loadouts
-    shoes: ClothingShoesBootsBlueShieldJackFilled #SS220 BlueShield Rework
-#    eyes: ClothingEyesBlueShieldGlasses #SS220 BlueShield Rework
-#    head: ClothingHeadHatBeretNavyBlue #SS220 BlueShield Rework
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesBlueShield
+    head: ClothingHeadHatBeretNavyBlue
 #    outerClothing: ClothingOuterArmorBulletproof #SS220-blueshield-loadouts
     id: BlueShieldPDA
-    ears: ClothingHeadsetBlueShield #SS220 BlueShield Rework
-    pocket1: WeaponSynergisticEnergyGun #SS220 BlueShield Rework
+    ears: ClothingHeadsetAltCommand
+    pocket1: WeaponAdvancedRevolver
 #    belt: ClothingBeltSecurityFilled #SS220-blueshield-loadouts
     gloves: ClothingHandsGlovesCombat
 # SS220-Blueshield-Storage-Fix-Begin
   storage:
     back:
-#    - BoxSurvival SS220-Two Floppa Iteration
-    - Stunbaton #SS220 BlueShieldReworks
+    - BoxSurvival
     - Flash
 # SS220-Blueshield-Storage-Fix-End

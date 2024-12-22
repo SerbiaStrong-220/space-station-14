@@ -4,7 +4,7 @@
   name: centcom communications computer
   components:
     - type: AccessReader
-      access: [[ "CentralCommand" ]] # SS220 change CentcomComms access
+      access: [[ "Command" ]]
     - type: CommunicationsConsole
       title: comms-console-announcement-title-centcom
       global: true

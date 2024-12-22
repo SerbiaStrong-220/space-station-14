@@ -56,9 +56,6 @@
       whitelist:
         components:
         - Paper
-      blacklist:
-        tags:
-        - Book
   - type: Appearance
   - type: EntityStorageVisuals
     stateDoorOpen: open_overlay

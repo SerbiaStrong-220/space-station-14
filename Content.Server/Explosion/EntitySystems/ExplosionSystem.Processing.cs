@@ -23,10 +23,9 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
-
 namespace Content.Server.Explosion.EntitySystems;
 
-public sealed partial class ExplosionSystem
+public sealed partial class ExplosionSystem : SharedExplosionSystem
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly FlammableSystem _flammableSystem = default!;
@@ -221,7 +220,7 @@ public sealed partial class ExplosionSystem
         // get the entities on a tile. Note that we cannot process them directly, or we get
         // enumerator-changed-while-enumerating errors.
         List<(EntityUid, TransformComponent)> list = new();
-        var state = (list, processed, EntityManager.TransformQuery);
+        var state = (list, processed, _transformQuery);
 
         // get entities:
         lookup.DynamicTree.QueryAabb(ref state, GridQueryCallback, gridBox, true);
@@ -320,7 +319,7 @@ public sealed partial class ExplosionSystem
         var gridBox = Box2.FromDimensions(tile * DefaultTileSize, new Vector2(DefaultTileSize, DefaultTileSize));
         var worldBox = spaceMatrix.TransformBox(gridBox);
         var list = new List<(EntityUid, TransformComponent)>();
-        var state = (list, processed, invSpaceMatrix, lookup.Owner, EntityManager.TransformQuery, gridBox, _transformSystem);
+        var state = (list, processed, invSpaceMatrix, lookup.Owner, _transformQuery, gridBox, _transformSystem);
 
         // get entities:
         lookup.DynamicTree.QueryAabb(ref state, SpaceQueryCallback, worldBox, true);
@@ -490,12 +489,9 @@ public sealed partial class ExplosionSystem
             && physics.BodyType == BodyType.Dynamic)
         {
             var pos = _transformSystem.GetWorldPosition(xform);
-            var dir = pos - epicenter.Position;
-            if (dir.IsLengthZero())
-                dir = _robustRandom.NextVector2().Normalized();
             _throwingSystem.TryThrow(
                 uid,
-                dir,
+                 pos - epicenter.Position,
                 physics,
                 xform,
                 _projectileQuery,
@@ -671,7 +667,6 @@ sealed class Explosion
 
     private readonly IEntityManager _entMan;
     private readonly ExplosionSystem _system;
-    private readonly SharedMapSystem _mapSystem;
 
     public readonly EntityUid VisualEnt;
 
@@ -694,13 +689,11 @@ sealed class Explosion
         IEntityManager entMan,
         IMapManager mapMan,
         EntityUid visualEnt,
-        EntityUid? cause,
-        SharedMapSystem mapSystem)
+        EntityUid? cause)
     {
         VisualEnt = visualEnt;
         Cause = cause;
         _system = system;
-        _mapSystem = mapSystem;
         ExplosionType = explosionType;
         _tileSetIntensity = tileSetIntensity;
         Epicenter = epicenter;
@@ -907,7 +900,7 @@ sealed class Explosion
         {
             if (list.Count > 0 && _entMan.EntityExists(grid.Owner))
             {
-                _mapSystem.SetTiles(grid.Owner, grid, list);
+                grid.SetTiles(list);
             }
         }
         _tileUpdateDict.Clear();

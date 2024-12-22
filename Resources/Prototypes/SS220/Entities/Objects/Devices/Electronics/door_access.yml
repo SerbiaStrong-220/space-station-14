@@ -40,11 +40,3 @@
   components:
   - type: AccessReader
     access: [["UsspEngineering"]]
-
-- type: entity
-  parent: DoorElectronics
-  id: DoorElectronicsMagistrate
-  suffix: Magistrate, Locked
-  components:
-  - type: AccessReader
-    access: [["Magistrate"]]

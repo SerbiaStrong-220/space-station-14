@@ -14,7 +14,6 @@ namespace Content.Client.MassMedia.Ui;
 public sealed partial class ArticleEditorPanel : Control
 {
     public event Action? PublishButtonPressed;
-    public event Action<string, string>? ArticleDraftUpdated;
 
     private readonly HashSet<Control> _invalidInputs = new(); // SS220 Text Edit Limits
     private bool _preview;
@@ -54,7 +53,6 @@ public sealed partial class ArticleEditorPanel : Control
         ButtonPreview.OnPressed += OnPreview;
         ButtonCancel.OnPressed += OnCancel;
         ButtonPublish.OnPressed += OnPublish;
-        //ButtonSaveDraft.OnPressed += OnDraftSaved; SS220-upstream-merge
 
         // SS220 Text Edit Limits begin
         //TitleField.OnTextChanged += args => OnTextChanged(args.Text.Length, args.Control, SharedNewsSystem.MaxTitleLength);
@@ -95,9 +93,6 @@ public sealed partial class ArticleEditorPanel : Control
                 ButtonPreview.Disabled = false;
             } // SS220 Text Edit Limits 
         }
-
-        // save draft regardless; they can edit down the length later
-        ArticleDraftUpdated?.Invoke(TitleField.Text, Rope.Collapse(ContentField.TextRope));
     }
 
     private void OnPreview(BaseButton.ButtonEventArgs eventArgs)
@@ -122,12 +117,6 @@ public sealed partial class ArticleEditorPanel : Control
         Visible = false;
     }
 
-    private void OnDraftSaved(BaseButton.ButtonEventArgs eventArgs)
-    {
-        ArticleDraftUpdated?.Invoke(TitleField.Text, Rope.Collapse(ContentField.TextRope));
-        Visible = false;
-    }
-
     private void Reset()
     {
         _preview = false;
@@ -136,7 +125,6 @@ public sealed partial class ArticleEditorPanel : Control
         PreviewLabel.SetMarkup("");
         TitleField.Text = "";
         ContentField.TextRope = Rope.Leaf.Empty;
-        ArticleDraftUpdated?.Invoke(string.Empty, string.Empty);
     }
 
     protected override void Dispose(bool disposing)

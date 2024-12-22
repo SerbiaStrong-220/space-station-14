@@ -6,7 +6,6 @@ using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
@@ -48,7 +47,6 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -345,6 +343,7 @@ public sealed class PullingSystem : EntitySystem
             RaiseLocalEvent(pullableUid, message);
         }
 
+
         _alertsSystem.ClearAlert(pullableUid, pullableComp.PulledAlert);
     }
 
@@ -456,7 +455,7 @@ public sealed class PullingSystem : EntitySystem
         if (!CanPull(pullerUid, pullableUid))
             return false;
 
-        if (!TryComp(pullerUid, out PhysicsComponent? pullerPhysics) || !TryComp(pullableUid, out PhysicsComponent? pullablePhysics))
+        if (!HasComp<PhysicsComponent>(pullerUid) || !TryComp(pullableUid, out PhysicsComponent? pullablePhysics))
             return false;
 
         // Ensure that the puller is not currently pulling anything.
@@ -503,19 +502,17 @@ public sealed class PullingSystem : EntitySystem
         // joint state handling will manage its own state
         if (!_timing.ApplyingState)
         {
-            var joint = _joints.CreateDistanceJoint(pullableUid, pullerUid,
-                    pullablePhysics.LocalCenter, pullerPhysics.LocalCenter,
-                    id: pullableComp.PullJointId);
+            // Joint startup
+            var union = _physics.GetHardAABB(pullerUid).Union(_physics.GetHardAABB(pullableUid, body: pullablePhysics));
+            var length = Math.Max(union.Size.X, union.Size.Y) * 0.75f;
+
+            var joint = _joints.CreateDistanceJoint(pullableUid, pullerUid, id: pullableComp.PullJointId);
             joint.CollideConnected = false;
             // This maximum has to be there because if the object is constrained too closely, the clamping goes backwards and asserts.
-            // Internally, the joint length has been set to the distance between the pivots.
-            // Add an additional 15cm (pretty arbitrary) to the maximum length for the hard limit.
-            joint.MaxLength = joint.Length + 0.15f;
+            joint.MaxLength = Math.Max(1.0f, length);
+            joint.Length = length * 0.75f;
             joint.MinLength = 0f;
-            // Set the spring stiffness to zero. The joint won't have any effect provided
-            // the current length is beteen MinLength and MaxLength. At those limits, the
-            // joint will have infinite stiffness.
-            joint.Stiffness = 0f;
+            joint.Stiffness = 1f;
 
             _physics.SetFixedRotation(pullableUid, pullableComp.FixedRotationOnPull, body: pullablePhysics);
         }
@@ -531,10 +528,6 @@ public sealed class PullingSystem : EntitySystem
 
         Dirty(pullerUid, pullerComp);
         Dirty(pullableUid, pullableComp);
-
-        var pullingMessage =
-            Loc.GetString("getting-pulled-popup", ("puller", Identity.Entity(pullerUid, EntityManager)));
-        _popup.PopupEntity(pullingMessage, pullableUid, pullableUid);
 
         _adminLogger.Add(LogType.Action, LogImpact.Low,
             $"{ToPrettyString(pullerUid):user} started pulling {ToPrettyString(pullableUid):target}");

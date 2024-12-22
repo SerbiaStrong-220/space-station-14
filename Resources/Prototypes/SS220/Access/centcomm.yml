@@ -9,8 +9,8 @@
   canBeSwitchableInReader: false #DoorElectronicsConfiguratorFix
 
 - type: accessLevel
-  id: CentralCommandBSO
-  name: id-card-access-level-central-command-bs-operative
+  id: CentralCommandGSN
+  name: id-card-access-level-central-command-gsn
   canBeSwitchableInReader: false #DoorElectronicsConfiguratorFix
 
 - type: accessLevel
@@ -24,6 +24,6 @@
   tags:
   - CentralCommand
   - CentralCommandDeathSquad
-  - CentralCommandBSO
+  - CentralCommandGSN
   - CentralCommandCBURN
   - CentralCommandERT

@@ -16,6 +16,7 @@
   weight: 10
   startingGear: ResearchDirectorGear
   icon: "JobIconResearchDirector"
+  requireAdminNotify: true
   supervisors: job-supervisors-captain
   radioBold: true
   access:
@@ -33,7 +34,7 @@
 - type: startingGear
   id: ResearchDirectorGear
   equipment:
-    #id: RnDPDA #SS220-RD-New-Loadout
+    id: RnDPDA
     ears: ClothingHeadsetRD
   storage:
     back:
