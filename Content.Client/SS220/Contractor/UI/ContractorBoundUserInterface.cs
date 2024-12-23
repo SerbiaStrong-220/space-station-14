@@ -215,7 +215,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         {
             var positionButton = new Button
             {
-                Text = $"{amountPosition.Value} ({amountPosition.Key} ТК)",
+                Text = $"{amountPosition.Location} ({amountPosition.TcReward} ТК) ({amountPosition.Difficulty})",
                 HorizontalExpand = false,
                 VerticalExpand = false,
                 StyleClasses = { "OpenBoth" },
@@ -225,7 +225,10 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
             positionButton.OnPressed += _ =>
             {
-                SendMessage(new ContractorNewContractAcceptedMessage(key, contract));
+                SendMessage(new ContractorNewContractAcceptedMessage(key,
+                    contract,
+                    amountPosition.TcReward,
+                    amountPosition.Uid));
 
                 foreach (var buttons in _allPositionButtons)
                 {

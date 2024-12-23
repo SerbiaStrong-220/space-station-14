@@ -253,8 +253,10 @@
   conditions:
     - !type:ListingLimitedStockCondition
       stock: 1
-    - !type:BuyTimeForListingCondition
-      timeAmount: 30
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink
     #TODO amount kit for 0.25 * traitor count
 #ss220 contractor add end
 

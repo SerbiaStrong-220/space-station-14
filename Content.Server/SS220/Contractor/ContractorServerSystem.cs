@@ -13,7 +13,6 @@ using Content.Shared.SSDIndicator;
 using Content.Shared.Store;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
-using Robust.Shared.Map;
 using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Contractor;
@@ -119,12 +118,11 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             return;
         }
         */
-        foreach (var amountPosition in ev.ContractData.AmountPositions)
-        {
-            target.PortalPosition = GetCoordinates(amountPosition.Value);
-            target.AmountTc = amountPosition.Key;
-            target.Performer = ev.Actor;
-        }
+
+        target.PortalPosition = Transform(GetEntity(ev.WarpPointEntity)).Coordinates;
+        target.AmountTc = ev.TcReward;
+        target.Performer = ev.Actor;
+
         Dirty(GetEntity(ev.ContractEntity), target);
 
         contractorComponent.CurrentContractData = ev.ContractData;
@@ -161,7 +159,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
     private void OnWithdrawTc(Entity<ContractorPdaComponent> ent, ref ContractorWithdrawTcMessage ev)
     {
-        if (!TryComp<ContractorComponent>(GetEntity(ent.Comp.PdaOwner), out var contractorComponent))
+        if (!TryComp<ContractorComponent>(ev.Actor, out var contractorComponent))
             return;
 
         if (ev.Amount > contractorComponent.AmountTc)
@@ -223,13 +221,42 @@ public sealed class ContractorServerSystem : SharedContractorSystem
                 new ContractorContract
                 {
                     Job = jobName,
-                    AmountPositions = GeneratePositionsForTargets(ent.Owner, player),
+                    AmountPositions = GeneratePositionsForTarget(),
                 });
         }
     }
-    private Dictionary<FixedPoint2, NetCoordinates> GeneratePositionsForTargets(EntityUid contractor, EntityUid target)
+
+    private List<(NetEntity Uid, string Location, FixedPoint2 TcReward, string Difficulty)> GeneratePositionsForTarget()
     {
-        return new Dictionary<FixedPoint2, NetCoordinates> { { FixedPoint2.New(10) + target.Id, GetNetCoordinates(Transform(target).Coordinates)} };
+        List<(NetEntity Uid, string Location, FixedPoint2 TcReward, string Difficulty)> allLocations = [];
+
+        var query = EntityQueryEnumerator<ContractorWarpPointComponent>();
+
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            allLocations.Add((GetNetEntity(uid), comp.LocationName, comp.AmountTc, comp.Difficulty));
+        }
+
+        var easyLocations = allLocations.Where(loc => loc.Difficulty == "Easy").ToList();
+        var mediumLocations = allLocations.Where(loc => loc.Difficulty == "Medium").ToList();
+        var hardLocations = allLocations.Where(loc => loc.Difficulty == "Hard").ToList();
+
+        _random.Shuffle(easyLocations);
+        _random.Shuffle(mediumLocations);
+        _random.Shuffle(hardLocations);
+
+        var result = new List<(NetEntity uid, string Location, FixedPoint2 Value, string Difficulty)>();
+
+        if (easyLocations.Count > 0)
+            result.Add(easyLocations[0]);
+
+        if (mediumLocations.Count > 0)
+            result.Add(mediumLocations[0]);
+
+        if (hardLocations.Count > 0)
+            result.Add(hardLocations[0]);
+
+        return result;
     }
 
     public bool IsCloseWithPosition(NetEntity playerNet)
@@ -245,10 +272,10 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         var playerPosition = GetNetCoordinates(Transform(player).Coordinates).Position;
 
-        var targetPosition = contractorComponent.CurrentContractData!.Value.AmountPositions.FirstOrDefault().Value.Position;
+        var targetPosition = GetNetCoordinates(Transform(GetEntity(contractorComponent.CurrentContractData!.Value.AmountPositions.First().Uid)).Coordinates).Position;
 
         var distance = (playerPosition - targetPosition).Length();
 
-        return distance < 4f; //4 tiles distance
+        return distance < 1f; //4 tiles distance
     }
 }

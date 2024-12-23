@@ -1,6 +1,5 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
-using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Contractor;
@@ -49,5 +48,5 @@ public sealed partial class ContractorComponent : Component
 public struct ContractorContract
 {
     public string Job;
-    public Dictionary<FixedPoint2, NetCoordinates> AmountPositions;
+    public List<(NetEntity Uid, string Location, FixedPoint2 TcReward, string Difficulty)> AmountPositions;
 }

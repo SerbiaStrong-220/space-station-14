@@ -1,9 +1,27 @@
+# Items in store in contractor uplink
 - type: contractorItems
   id: ContractorItems
   items:
     Stunbaton: 1
     Crowbar: 3
     CrowbarRed: 2
+
+# Contractor warp point
+- type: entity
+  parent: MarkerBase
+  id: ContractorWarpPoint
+  name: warp point
+  suffix: contractor target point
+  components:
+    - type: ContractorWarpPoint
+      locationName: contractor warp point
+      amountTc: 1
+      difficulty: Easy
+    - type: Sprite
+      layers:
+        - state: pink
+        - sprite: Objects/Weapons/Bombs/spidercharge.rsi #TODO Sprite
+          state: icon
 
 - type: entity
   name: cardboard box

@@ -1,5 +1,4 @@
 using Content.Shared.FixedPoint;
-using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Contractor;
@@ -7,19 +6,21 @@ namespace Content.Shared.SS220.Contractor;
 [Serializable, NetSerializable]
 public sealed class ContractorGenerateContractsMessage : BoundUserInterfaceMessage
 {
-    public ContractorGenerateContractsMessage() { }
 }
 
 [Serializable, NetSerializable]
 public sealed class ContractorUpdateStatsMessage : BoundUserInterfaceMessage
 {
-    public ContractorUpdateStatsMessage() { }
 }
 
 [Serializable, NetSerializable]
 public sealed class ContractorCompletedContractMessage : BoundUserInterfaceMessage
 {
-    public ContractorCompletedContractMessage() { }
+}
+
+[Serializable, NetSerializable]
+public sealed class ContractorExecutionButtonPressedMessage : BoundUserInterfaceMessage
+{
 }
 
 [Serializable, NetSerializable]
@@ -38,18 +39,16 @@ public sealed class ContractorNewContractAcceptedMessage : BoundUserInterfaceMes
 {
     public NetEntity ContractEntity;
     public ContractorContract ContractData;
+    public FixedPoint2 TcReward;
+    public NetEntity WarpPointEntity;
 
-    public ContractorNewContractAcceptedMessage(NetEntity contractEntity, ContractorContract contractData)
+    public ContractorNewContractAcceptedMessage(NetEntity contractEntity, ContractorContract contractData, FixedPoint2 tcReward, NetEntity warpPointEntity)
     {
         ContractEntity = contractEntity;
         ContractData = contractData;
+        TcReward = tcReward;
+        WarpPointEntity = warpPointEntity;
     }
-}
-
-[Serializable, NetSerializable]
-public sealed class ContractorExecutionButtonPressedMessage : BoundUserInterfaceMessage
-{
-
 }
 
 [Serializable, NetSerializable]

@@ -32,5 +32,5 @@ public sealed partial class ContractorTargetComponent : Component
     [DataField]
     public EntityUid? PortalEntity;
 
-    public TimeSpan TimeInJail = TimeSpan.FromSeconds(5);
+    public TimeSpan TimeInJail = TimeSpan.FromSeconds(5); // Time in another map
 }
