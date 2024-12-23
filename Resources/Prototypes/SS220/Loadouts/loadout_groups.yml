@@ -236,7 +236,7 @@
     - SecuritySatchel
     - SecurityDuffel
     - DetectiveNoirSatchel
-  
+
 - type: loadoutGroup
   id: SecurityGloves
   name: loadout-group-security-gloves
@@ -687,9 +687,10 @@
 - type: loadoutGroup
   id: ServiceWorkerJumpsuit
   name: loadout-group-service-worker-jumpsuit
-  hidden: true
   loadouts:
   - ServiceWorkerWaiter
+  - ServiceWorkerWaitress
+
   # Сервисный работник (Конец)
 
 #! Сервис (Конец)
