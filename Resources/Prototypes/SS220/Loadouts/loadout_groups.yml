@@ -226,7 +226,7 @@
   loadouts:
   - GlassesSecurity
   - CyberGlassesSecurity
-#  - GlassesBallistic #ss220 ballistic glasses fix
+#  - GlassesBallistic
 
 - type: loadoutGroup
   id: DetectiveSecBackpack
@@ -264,6 +264,14 @@
   - SecurityBeret
   - SecurityHat
   - PilotCapCap
+
+- type: loadoutGroup
+  id: SecurityPilotGlasses
+  name: loadout-group-security-pilot-glasses
+  loadouts:
+  - GlassesBallistic
+  - GlassesSecurity
+  - CyberGlassesSecurity
 
 - type: loadoutGroup
   id: SecurityPilotOuterClothing
