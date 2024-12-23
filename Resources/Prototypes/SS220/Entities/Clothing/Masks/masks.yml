@@ -42,6 +42,25 @@
   - type: FlashImmunity
   - type: EyeProtection
 
+- type: entity
+  parent: ClothingMaskGasExplorer
+  id: BlueShieldGasMask
+  name: blue shield gas mask
+  description: An impeccable gas mask for Blue Shield officers. In addition to fire resistance, it also provides eye protection.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/blueshield_mask.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/blueshield_mask.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.9
+
 # Syndie HOTLINE MIAMI MASKS
 
 - type: entity

@@ -31,6 +31,9 @@ uplink-thermal-visor-implanter-desc = Новейшая разработка си
 hidden-desc-SilentShoes-syndicate = [color=#e31735]Разработанные специально для шпионских миссий Синдиката, эти ботинки совершенно бесшумны на любых поверхностях[/color]
 hidden-desc-SilentShoes-research = [color=#D381C9]Вы можете различить скрытый слой поглощающего материала, полностью глушащий любые звуки шагов[/color]
 
+hidden-desc-flaming-axe-module-syndicate = [color=#e31735]Модуль предоставляет топор, модифицированный компанией Cybersun, поджигающий жертв при ударе![/color]
+hidden-desc-flaming-axe-module-research = [color=#D381C9]Данный модуль поставляет нестандартный топор. Вы можете различить воспламеняющее устройство на острие топора.[/color]
+
 # Svarshik's toy guns!
 hidden-desc-toy-weapons-syndicate = [color=#e31735]Оно сделано из бананиума.[/color]
 hidden-desc-toy-weapons-clown = [color=#cc0099]Устройте самый смешной штурм станции с этим оружием, заряженным безобидными пистонами! ХОНК![/color]

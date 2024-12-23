@@ -1,3 +1,97 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseWeaponBatterySmall
+  id: WeaponSynergisticEnergyGun
+  name: synergistic gun
+  description: "An innovative weapon that combines advanced technology and a unique design. It has two shooting modes: normal and enhanced."
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/synergistic_enetgy_gun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: laser-mag-3
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: laser-mag-unshaded-3
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/synergistic_enetgy_gun.rsi
+  - type: Gun
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLightLaser
+    fireCost: 24.5
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: RedLightLaser
+      name: firemode-name-laser
+      fireCost: 24.5
+      gunModifiers:
+        soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+        fireRate: 4
+      magState: laser-mag
+    - proto: PulseEnhanced
+      name: firemode-name-enhanced
+      fireCost: 62.5
+      gunModifiers:
+        soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+        fireRate: 1.5
+      magState: enhanced-mag
+  - type: MagazineVisuals
+    magState: laser-mag
+    steps: 4
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice
+    price: 750
+
+- type: entity
+  id: WeaponBlasterKRS
+  parent: WeaponBlaster
+  name: krs
+  description: An old reliable blaster rifle. There is only a semi-automatic type of shooting.
+  suffix: Blaster
+  components:
+  - type: Item
+    size: Large
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/SS220/Weapons/Guns/Gunshots/blaster_nt.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: BlasterPowerCellAlt
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - BlasterPowerCell
+
+- type: entity
+  id: WeaponBlasterKRV
+  parent: WeaponBlaster
+  name: KRV
+  description: An advanced blaster rifle. Used by special operatives.
+  suffix: Blaster
+  components:
+  - type: Item
+    size: Large
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: BlasterPowerCellPulse
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - BlasterPowerCell
+
 # Новые прототипы пишите выше
 # Death Squad
 - type: entity
