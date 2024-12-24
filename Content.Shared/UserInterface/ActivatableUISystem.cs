@@ -86,6 +86,10 @@ public sealed partial class ActivatableUISystem : EntitySystem
         if (component.VerbOnly || !ShouldAddVerb(uid, component, args))
             return;
 
+        // SS220 Alternative-open-verb
+        if (component.AltentativeOnly)
+            return;
+
         args.Verbs.Add(new ActivationVerb
         {
             Act = () => InteractUI(args.User, uid, component),
@@ -100,6 +104,10 @@ public sealed partial class ActivatableUISystem : EntitySystem
         if (!component.VerbOnly || !ShouldAddVerb(uid, component, args))
             return;
 
+        // SS220 Alternative-open-verb
+        if (component.AltentativeOnly)
+            return;
+
         args.Verbs.Add(new Verb
         {
             Act = () => InteractUI(args.User, uid, component),
@@ -108,6 +116,25 @@ public sealed partial class ActivatableUISystem : EntitySystem
             Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
         });
     }
+
+    // SS220 Alternative-open-verb begin
+    private void GetAlternativeVerb(EntityUid uid, ActivatableUIComponent component, GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!component.VerbOnly || !ShouldAddVerb(uid, component, args))
+            return;
+
+        if (!component.AltentativeOnly)
+            return;
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Act = () => InteractUI(args.User, uid, component),
+            Text = Loc.GetString(component.VerbText),
+
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
+        });
+    }
+    // SS220 Alternative-open-verb end
 
     private bool ShouldAddVerb<T>(EntityUid uid, ActivatableUIComponent component, GetVerbsEvent<T> args) where T : Verb
     {
