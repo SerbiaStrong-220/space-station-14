@@ -341,6 +341,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/truckershat-white.rsi
 
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadTiaraDruid #SS220 druid loadout
+  name: druid tiara
+  description: A symbol of harmony with nature, even among the stars and planets.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/druid_tiara.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/druid_tiara.rsi
+
+
   # Бармен
 - type: entity
   parent: ClothingHeadBase
@@ -375,7 +387,6 @@
     - WhitelistChameleon
 
   # Уборщик
-
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatOrangeJanitor
@@ -392,11 +403,22 @@
     - HamsterWearable
     - WhitelistChameleon
 
+  # Музыкант
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretBard #SS220 bard loadout
+  name: beret with feather
+  description: Will add atmosphere!
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_bard.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_bard.rsi
 
 # Служба безопасности
 
-  # ГСБ
-
+  # Глава службы безопасности
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadBigCapHoS
@@ -407,7 +429,6 @@
       sprite: SS220/Clothing/Head/Hats/hosbigcap.rsi
     - type: Clothing
       sprite: SS220/Clothing/Head/Hats/hosbigcap.rsi
-
 
   # Пилот
 - type: entity
@@ -480,17 +501,6 @@
     - type: Clothing
       sprite: SS220/Clothing/Head/Hats/beret_salvage_specialist.rsi
 
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadTiaraDruid #SS220 druid loadout
-  name: druid tiara
-  description: A symbol of harmony with nature, even among the stars and planets.
-  suffix: For playtime
-  components:
-    - type: Sprite
-      sprite: SS220/Clothing/Head/Hats/druid_tiara.rsi
-    - type: Clothing
-
 # Инженерия
 
   # Старший инженер
@@ -517,7 +527,6 @@
       Male: MaleEngineer
       Female: FemaleEngineer
       Unsexed: MaleEngineer
-
 
 # OTHER
 
@@ -563,29 +572,6 @@
   - type: Construction
     graph: Clothingwsflowerhead
     node: ClothingWSFlowerhead
-
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadHatBeretBard #SS220 bard loadout
-  name: beret with feather
-  description: Will add atmosphere!
-  suffix: For playtime
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/beret_bard.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/beret_bard.rsi
-
-- type: entity
-  parent: ClothingHeadHatHoodWinterBase
-  id: ClothingHeadHatFloppa
-  name: шлёпафон
-  description: Шлёпашон
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/FloppaHat.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/FloppaHat.rsi
 
 # WMT Ebent begin
 - type: entity

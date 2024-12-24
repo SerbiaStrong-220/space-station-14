@@ -68,8 +68,8 @@
 - type: entity
   parent: ClothingSponsorShoesBase
   id: ClothingShoesMoryak
-  name: башмаки морячка
-  description: Тесные матроские башмаки, но хотя бы водонепроницаемые.
+  name: moryak shoes
+  description: Tight sailor shoes, but at least they're waterproof.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Shoes/Boots/moryachok_flops.rsi

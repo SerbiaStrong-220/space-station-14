@@ -1,3 +1,379 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+
+# SS220 admin head beginning
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_hell
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/hellspawn_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/hellspawn_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_revenant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/mobsGhostsrevenant_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/mobsGhostsrevenant_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_mothroach
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/mothroach_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/mothroach_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_carpsuit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/carpsuit_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/carpsuit_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_buffrat
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Ghosts
+    sprite: SS220/Clothing/Head/admin_head/buffrat_a.rsi
+    layers:
+    - state: equipped-HELMET
+      shader: unshaded
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/buffrat_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_behonker
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/behonker_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/behonker_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_jensencoat
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/jensencoat_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/jensencoat_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_ghostsheet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/ghostsheet_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/ghostsheet_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_terminator
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/terminator_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/terminator_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_mimebot
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/mimebot_a.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/mimebot_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_tech_guardians
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/tech_guardians_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/tech_guardians_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_miner_guardians
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/miner_guardians_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/miner_guardians_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_holoclown_guardians
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/holoclown_guardians_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/holoclown_guardians_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_magic_guardians
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/magic_guardians_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/magic_guardians_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_judge
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/judge_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/judge_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_rainbow_slime
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/rainbow_slime_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/rainbow_slime_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_nuke
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/nuke_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/nuke_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_plushie_lizard
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/plushie_lizard_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/plushie_lizard_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_singularitytoy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/singularitytoy_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/singularitytoy_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_db_shotgun
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/db_shotgun_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/db_shotgun_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_watermelon
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/watermelon_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/watermelon_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_whiskeybottle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/whiskeybottle_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/whiskeybottle_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_parrot
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/parrot_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/parrot_a.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: admin_Head_blue_slime
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clothing
+    sprite: SS220/Clothing/Head/admin_head/blue_slime_a.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Head/admin_head/blue_slime_a.rsi
+
+# SS220 admin head end
+
+# SS220 PayDay masks beginning
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPDDallas
+  name: маска Далласа
+  description: Хей, хей! Давай посмотрим, насколько ты будешь разговорчив с моим стволом в твоей пасти.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/PayDay/dallas.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/PayDay/dallas.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPDChains
+  name: маска Чейнса
+  description: Твоя задница это трава, а я гребанная газонокосилка.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/PayDay/chains.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/PayDay/chains.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPDWolf
+  name: маска Вульфа
+  description: Самый разыскиваемый? Чек. Пулевые ранения? Чек. Самый богатый? Большой черт подери чек.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/PayDay/wolf.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/PayDay/wolf.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatPDHoxton
+  name: маска Хокстона
+  description: Мне нужно, чтобы вы стояли смирно как чертовы садовые гномы.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/PayDay/hoxton.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/PayDay/hoxton.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+# SS220 PayDay masks end
+
+# SS220 hotline masks beginning
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatAlex
+  name: Алекс #С большой, ибо оффовская маска Ричарда тоже
+  description: Кто пригласил всех этих идиотов?
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/Hotline/alex.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/Hotline/alex.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatJake
+  name: Джейк
+  description: Алло?! Кто это? Дай мне поговорить с твоим начальником!
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/Hotline/jake.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/Hotline/jake.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatRasmus
+  name: Расмус
+  description: Я не знаю тебя! Зачем ты здесь? Я тебя не приглашал.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/Hotline/rasmus.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/Hotline/rasmus.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatRichter
+  name: Рихтер
+  description: Ааа, вот ты где! А я всё думал, когда ты вернёшься?
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/Hotline/richter.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/Hotline/richter.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatTony
+  name: Тони
+  description: Чувак, эта вечеринка отстой. Я ненавижу этих людей.
+  components:
+   - type: Sprite
+     sprite: SS220/Clothing/Head/Hats/Hotline/tony.rsi
+   - type: Clothing
+     sprite: SS220/Clothing/Head/Hats/Hotline/tony.rsi
+   - type: IngestionBlocker
+   - type: IdentityBlocker
+
+# SS220 hotline masks end
+
 #Svarshik's toys
 #BASE for differnet hardsuits helmets with battery
 - type: entity

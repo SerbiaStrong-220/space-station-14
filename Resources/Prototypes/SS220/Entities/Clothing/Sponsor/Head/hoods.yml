@@ -1,0 +1,14 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Say my name
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatFloppa
+  name: шлёпафон
+  description: Шлёпашон
+  suffix: Sponsor
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/FloppaHat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/FloppaHat.rsi

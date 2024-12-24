@@ -1,1 +1,35 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingBackpackHolding
+  id: ClothingBackpack_admin_Head
+  suffix: Shitspawn, AdminV
+  name: Админ шляпы
+  description: Все шляпы специально для админов
+  components:
+    - type: StorageFill
+      contents:
+      - id: admin_Head_hell
+      - id: admin_Head_db_shotgun
+      - id: admin_Head_magic_guardians
+      - id: admin_Head_singularitytoy
+      - id: admin_Head_buffrat
+      - id: admin_Head_jensencoat
+      - id: admin_Head_holoclown_guardians
+      - id: admin_Head_parrot
+      - id: admin_Head_ghostsheet
+      - id: admin_Head_mimebot
+      - id: admin_Head_terminator
+      - id: admin_Head_tech_guardians
+      - id: admin_Head_carpsuit
+      - id: admin_Head_rainbow_slime
+      - id: admin_Head_miner_guardians
+      - id: admin_Head_mothroach
+      - id: admin_Head_plushie_lizard
+      - id: admin_Head_judge
+      - id: admin_Head_whiskeybottle
+      - id: admin_Head_revenant
+      - id: admin_Head_nuke
+      - id: admin_Head_watermelon
+      - id: admin_Head_blue_slime
+      - id: admin_Head_behonker
