@@ -34,6 +34,21 @@ public sealed partial class RadiationCollectorComponent : Component
     [ViewVariables]
     public bool Enabled;
 
+    // SS220-SM-fix-begin
+    /// <summary>
+    /// This bool ensure less usage of plasmas near SM crystal
+    /// </summary>
+    [DataField]
+    public bool NearSM = false;
+
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float SMNearReactionRateModifier = 0.2f;
+
+    [DataField]
+    public float SMLookupRange = 3f;
+    // SS220-SM-fix-end
+
     /// <summary>
     ///     List of gases that will react to the radiation passing through the collector
     /// </summary>
