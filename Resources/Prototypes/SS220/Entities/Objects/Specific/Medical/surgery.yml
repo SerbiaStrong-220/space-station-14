@@ -15,6 +15,12 @@
     tags:
     - SurgeryTool
   - type: SurgeryDrape
+  - type: OnInteractUI
+    key: enum.SurgeryDrapeUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SurgeryDrapeUiKey.Key:
+        type: SurgeryDrapeBUI
 
 - type: entity
   parent: BaseItem
