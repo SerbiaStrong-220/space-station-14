@@ -46,7 +46,7 @@ public sealed partial class RadiationCollectorComponent : Component
     public float SMNearReactionRateModifier = 0.2f;
 
     [DataField]
-    public float SMLookupRange = 3f;
+    public float SMLookupRange = 5f;
     // SS220-SM-fix-end
 
     /// <summary>
