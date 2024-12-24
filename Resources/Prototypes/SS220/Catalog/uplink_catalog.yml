@@ -257,7 +257,8 @@
       blacklist:
         tags:
           - NukeOpsUplink
-    #TODO amount kit for 0.25 * traitor count
+    - !type:ListingStockLimitByTraitorsCondition #amount kit for traitor count / 4
+      contractorPercentage: 0.25
 #ss220 contractor add end
 
 #- type: listing

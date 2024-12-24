@@ -14,7 +14,4 @@ public sealed partial class ContractorPortalOnTriggerComponent : Component
 
     [DataField]
     public NetEntity? TargetEntity;
-
-    public TimeSpan MaxPortalTime = TimeSpan.FromSeconds(15);
-
 }

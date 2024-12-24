@@ -14,9 +14,9 @@ public sealed class SharedContractorTargetSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var quary = EntityQueryEnumerator<ContractorTargetComponent>();
+        var query = EntityQueryEnumerator<ContractorTargetComponent>();
 
-        while (quary.MoveNext(out var uid, out var comp))
+        while (query.MoveNext(out var uid, out var comp))
         {
             if (comp.EnteredPortalTime == TimeSpan.Zero)
                 return;
