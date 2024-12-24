@@ -40,6 +40,7 @@ using Content.Server.Administration.Managers;
 using Content.Shared.Humanoid.Markings;
 using Robust.Server.Player;
 using Content.Shared.Ghost.Roles.Components;
+using Content.Shared.SS220.Language; // SS220-Add-Languages
 
 namespace Content.Server.Zombies;
 
@@ -111,6 +112,7 @@ public sealed partial class ZombieSystem
         RemComp<ReproductivePartnerComponent>(target);
         RemComp<LegsParalyzedComponent>(target);
         RemComp<ComplexInteractionComponent>(target);
+        RemComp<LanguageComponent>(target); // SS220-Add-Languages
 
         //funny voice
         var accentType = "zombie";

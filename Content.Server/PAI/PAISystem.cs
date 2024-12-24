@@ -9,6 +9,7 @@ using Content.Shared.Popups;
 using Robust.Shared.Random;
 using System.Text;
 using Robust.Shared.Player;
+using Content.Shared.SS220.Language; // SS220-Add-Languages
 
 namespace Content.Server.PAI;
 
@@ -55,6 +56,7 @@ public sealed class PAISystem : SharedPAISystem
         // Cause then you could remotely figure out information about the owner's equipped items.
 
         _metaData.SetEntityName(uid, val);
+        GetUserLanguages(component.LastUser, uid); // SS220-Add-Languages
     }
 
     private void OnMindRemoved(EntityUid uid, PAIComponent component, MindRemovedMessage args)
@@ -117,5 +119,30 @@ public sealed class PAISystem : SharedPAISystem
             if (proto != null)
                 _metaData.SetEntityName(uid, proto.Name);
         }
+    // SS220-Add-Languages begin
+        if (TryComp<LanguageComponent>(uid, out var languages))
+        {
+            languages.LearnedLanguages.Clear();
+            languages.LearnedLanguages.Add(LanguagesPrototype.Galactic);
+            languages.LearnedLanguages.Add(LanguagesPrototype.Universal);
+            languages.CurrentLanguage = languages.LearnedLanguages[0];
+        }
     }
+
+    public void GetUserLanguages(EntityUid? ent, EntityUid pai)
+    {
+        if (!TryComp<LanguageComponent>(ent, out var languages) || languages == null)
+            return;
+
+        if (!TryComp<LanguageComponent>(pai, out var paiLanguages))
+            return;
+
+        foreach (var language in languages.LearnedLanguages)
+        {
+            if (!paiLanguages.LearnedLanguages.Contains(language))
+                paiLanguages.LearnedLanguages.Add(language);
+        }
+        Dirty(pai, paiLanguages);
+    }
+    // SS220-Add-Languages end
 }
