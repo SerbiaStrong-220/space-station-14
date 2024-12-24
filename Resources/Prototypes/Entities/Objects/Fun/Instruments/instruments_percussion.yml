@@ -96,7 +96,7 @@
   - type: Sprite
     sprite: Objects/Fun/Instruments/kalimba.rsi
     state: icon
-  - type: Tag
+  
     tags:
     - KeyedInstrument
   - type: Item

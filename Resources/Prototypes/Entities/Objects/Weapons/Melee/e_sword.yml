@@ -118,6 +118,15 @@
     reflectProbProjectile: 0.40 #ss220 ttkTweaks
     spreadProjectile: 180
     #ss220lowTTKUpdate
+  #SS220 craftable desword start
+  - type: Tag
+    tags: 
+    - EnergySword
+  - type: Construction
+    deconstructionTarget: null
+    graph: EnergyDoubleSwordGraph
+    node: esword
+  #SS220 craftable desword end
 
 - type: entity
   name: energy dagger
@@ -398,6 +407,12 @@
     reflectProbProjectile: 0.70 #ss220lowTTKUpdate
     spreadProjectile: 180
 # ss220 FixESword
+  #SS220 craftable desword start
+  - type: Construction
+    deconstructionTarget: null
+    graph: EnergyDoubleSwordGraph
+    node: desword
+  #SS220 craftable desword end
 
 - type: entity
   suffix: One-Handed, For Borgs

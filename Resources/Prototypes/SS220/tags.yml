@@ -181,3 +181,10 @@
 #HOCebent
 - type: Tag
   id: CartridgeUnitary
+
+#Craftable desword
+- type: Tag
+  id: EnergySword
+
+- type: Tag
+  id: ToyEnergySword
