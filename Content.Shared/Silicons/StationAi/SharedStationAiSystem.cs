@@ -29,6 +29,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.SS220.Silicons.StationAi;
 
 namespace Content.Shared.Silicons.StationAi;
 
@@ -404,6 +405,16 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         QueueDel(ent.Comp.RemoteEntity);
         ent.Comp.RemoteEntity = null;
         Dirty(ent);
+
+        // SS220 Silicon TTS fix begin
+        RaiseLocalEvent(ent, new StationAiEyeDetachedEvent(ent));
+        if (_containers.TryGetContainer(ent.Owner, StationAiHolderComponent.Container, out var container) &&
+            container.ContainedEntities.Count == 1)
+        {
+            var user = container.ContainedEntities[0];
+            RaiseLocalEvent(user, new StationAiEyeDetachedEvent(ent));
+        }
+        // SS220 Silicon TTS fix end
     }
 
     private void AttachEye(Entity<StationAiCoreComponent> ent)
@@ -427,6 +438,11 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         }
 
         _mover.SetRelay(user, ent.Comp.RemoteEntity.Value);
+
+        // SS220 Silicon TTS fix begin
+        RaiseLocalEvent(ent, new StationAiEyeAttachedEvent(ent));
+        RaiseLocalEvent(user, new StationAiEyeAttachedEvent(ent));
+        // SS220 Silicon TTS fix end
     }
 
     private EntityUid? GetInsertedAI(Entity<StationAiCoreComponent> ent)

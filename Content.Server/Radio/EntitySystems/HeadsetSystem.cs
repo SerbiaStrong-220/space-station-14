@@ -107,7 +107,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
             if (actorUid != args.MessageSource && TryComp(args.MessageSource, out TTSComponent? _))
             {
-                args.Receivers.Add(actorUid);
+                args.Receivers.Add(new(actorUid));
             }
         }
         // SS220 TTS-Radio end
