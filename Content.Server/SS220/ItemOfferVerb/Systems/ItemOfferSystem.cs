@@ -11,6 +11,7 @@ using Content.Shared.Verbs;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.Interaction.Components;
 
 namespace Content.Server.SS220.ItemOfferVerb.Systems
 {
@@ -80,7 +81,7 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
         private void AddOfferVerb(EntityUid uid, HandsComponent component, GetVerbsEvent<EquipmentVerb> args)
         {
             if (!args.CanInteract || !args.CanAccess || args.Hands == null || args.Hands.ActiveHandEntity == null
-                || args.Target == args.User || !FindFreeHand(component, out var freeHand))
+                || HasComp<UnremoveableComponent>(args.Hands.ActiveHandEntity) || args.Target == args.User || !FindFreeHand(component, out var freeHand))
                 return;
 
             // (fix https://github.com/SerbiaStrong-220/space-station-14/issues/2054)

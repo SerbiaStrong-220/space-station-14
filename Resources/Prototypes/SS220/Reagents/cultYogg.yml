@@ -1,0 +1,37 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: reagent
+  id: TheBloodOfYogg
+  name: reagent-name-yoggs-blood
+  group: Toxins
+  desc: reagent-desc-yoggs-blood
+  physicalDesc: reagent-physical-desc-putrid
+  flavor: menacing
+  color: "#afdd9a" #change color to a shroom color
+  metabolisms:
+    Poison:
+      effects:
+      - !type:ChemMiGomicelium
+      - !type:GenericStatusEffect
+        key: Rave
+        component: Rave
+        type: Add
+        time: 150
+        refresh: false
+        conditions:
+        - !type:ReagentThreshold
+            reagent: TheBloodOfYogg
+            min: 2
+
+- type: reagent
+  id: ElixirOfLiberation
+  name: reagent-name-elixir-of-liberation
+  group: Toxins
+  desc: reagent-desc-elixir-of-liberation
+  physicalDesc: reagent-physical-desc-putrid
+  flavor: menacing
+  color: "#afdd9a" #change color to a shroom color
+  metabolisms:
+    Poison:
+      effects:
+      - !type:ChemElixirOfLiberation

@@ -12,6 +12,7 @@
 - type: speciesBaseSprites
   id: MobGingerbreadSprites
   sprites:
+    Special: MobHumanoidAnyMarking
     Head: MobGingerbreadHead
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking

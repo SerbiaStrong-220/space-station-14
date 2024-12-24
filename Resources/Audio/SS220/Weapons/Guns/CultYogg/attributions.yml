@@ -1,0 +1,14 @@
+- files: ["spitballer_reload.ogg", "spitballer_shot.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Made by MIXnikita for SS220. Licensed under EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
+  source: "https://github.com/SerbiaStrong-220/space-station-14"
+
+- files: ["spikegun_shot.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Made by MIXnikita for SS220. Licensed under EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
+  source: "https://github.com/SerbiaStrong-220/space-station-14"
+
+- files: ["bubble_fly1.ogg", "bubble_fly2.ogg", "bubble_fly3.ogg", "bubble_exp.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Made by MIXnikita for SS220. Licensed under EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
+  source: "https://github.com/SerbiaStrong-220/space-station-14"

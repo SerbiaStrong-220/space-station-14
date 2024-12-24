@@ -1,0 +1,17 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: marking
+  id: CultStage-Halo
+  bodyPart: Special
+  markingCategory: Special
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: halo
+
+- type: marking
+  id: CultStage-Moth
+  bodyPart: Special
+  markingCategory: Special
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: moth

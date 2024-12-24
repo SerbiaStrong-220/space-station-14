@@ -181,3 +181,7 @@
 #HOCebent
 - type: Tag
   id: CartridgeUnitary
+
+# SS220 Cult
+- type: Tag
+  id: Omnivorous
