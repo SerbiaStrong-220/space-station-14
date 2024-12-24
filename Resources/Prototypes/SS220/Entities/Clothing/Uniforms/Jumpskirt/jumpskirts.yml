@@ -333,3 +333,15 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/professor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/professor.rsi
+
+# ГСБ
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformJumpskirtHoS
+  name: head of security's jumpskirt
+  description: It's bright red and rather crisp, much like security's victims tend to be.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hos.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hos.rsi
