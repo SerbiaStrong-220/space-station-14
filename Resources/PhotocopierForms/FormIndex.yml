@@ -26,6 +26,11 @@
     - /PhotocopierForms/nanotrasen_central_command/blank/blank_registered_letter_cc.xml
     - /PhotocopierForms/nanotrasen_central_command/blank/blank_regular_cc.xml
     - /PhotocopierForms/nanotrasen_central_command/blank/blank_secure_cc.xml
+  - Id: roundstart
+    Name: Особые документы
+    IconPath: /Textures/SS220/DepartmentIcons/Centcom_dep.png
+    Forms:
+    - /PhotocopierForms/nanotrasen_central_command/roundstart/hos_mindslave_briefing.xml
 - Id: nanotrasen_station
   Groups:
   - Id: goal

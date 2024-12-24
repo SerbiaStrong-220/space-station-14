@@ -7,7 +7,7 @@
   parent: ClothingSponsorNeckBase
   id: ClothingSponsorNeckParadise
   name: накидка причастия
-  description: Вручается избранным, удостоенных уникального места в этом мире.
+  description: Вручается избранным, удостоенным уникального места в этом мире.
   suffix: Sponsor Neck
   components:
   - type: Sprite

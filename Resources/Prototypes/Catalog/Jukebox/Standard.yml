@@ -91,4 +91,22 @@
   path:
     path: /Audio/SS220/Jukebox/The_Bar_Counter.ogg
 
+- type: jukebox
+  id: tchaikovsky_waltz_of_the_flowers
+  name: Pyotr Ilyich Tchaikovsky - Waltz of the Flowers
+  path:
+    path: /Audio/SS220/Jukebox/Pyotr Ilyich Tchaikovsky - Waltz of the Flowers.ogg
+
+- type: jukebox
+  id: chopin_nocturne_9_2
+  name: Frédéric Chopin - Nocturne in E flat major, Op. 9 no. 2
+  path:
+    path: /Audio/SS220/Jukebox/Frédéric Chopin - Nocturne in E flat major, Op. 9 no. 2.ogg
+
+- type: jukebox
+  id: beethoven_moonlight_sonata
+  name: Ludwig van Beethoven - Moonlight Sonata, Op. 27 No. 2
+  path:
+    path: /Audio/SS220/Jukebox/Ludwig van Beethoven - Moonlight Sonata, Op. 27 No. 2.ogg
+
 # SS220 music begin

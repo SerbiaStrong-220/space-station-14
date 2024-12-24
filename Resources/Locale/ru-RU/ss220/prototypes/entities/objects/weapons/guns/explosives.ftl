@@ -1,0 +1,15 @@
+ent-GrenadeBlastToy = фугасная граната
+    .desc = { ent-BaseGrenade.desc }
+    .suffix = Игрушечная
+ent-GrenadeFlashToy = светошумовая граната
+    .desc = { ent-BaseGrenade.desc }
+    .suffix = Игрушечная
+ent-GrenadeFragToy = осколочная граната
+    .desc = { ent-BaseGrenade.desc }
+    .suffix = Игрушечная
+ent-GrenadeKaboomToy = КАБУМ граната
+    .desc = РП ядерка
+    .suffix = Игрушечная, Адмемы
+ent-GrenadeLubeToy = смазочная граната
+    .desc = { ent-BaseCartridge.desc }
+    .suffix = Игрушечная, Смазка

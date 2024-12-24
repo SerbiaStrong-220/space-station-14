@@ -45,6 +45,7 @@
   radioBold: true
   accessGroups:
   - AllAccess
+  - CentralCommand
 
 - type: startingGear
   id: CentComNanoTrasenAdmiralGear

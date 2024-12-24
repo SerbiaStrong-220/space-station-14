@@ -397,6 +397,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         {
             EnsureComp<PullerComponent>(uid).NeedsHands = false;
             _tag.AddTag(uid, "DoorBumpOpener");
+            _tag.RemoveTag(uid, "HideContextMenu");
 
             if (TryComp<ExplosionResistanceComponent>(uid, out var explosionResistanceComponent))
             {
@@ -412,6 +413,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         else
         {
             _tag.RemoveTag(uid, "DoorBumpOpener");
+            _tag.AddTag(uid, "HideContextMenu");
             comp.StunScreamStart = null;
             comp.MaterializedStart = null;
 

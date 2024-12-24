@@ -702,9 +702,13 @@
   description: It's very... sensible. # Corvax-Resprite
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/librarian.rsi
+#SS220 librarian resprite start
+#    sprite: Clothing/Uniforms/Jumpsuit/librarian.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/librarian.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/librarian.rsi
+#    sprite: Clothing/Uniforms/Jumpsuit/librarian.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/librarian.rsi
+#SS220 librarian resprite end
 
 - type: entity
   parent: ClothingUniformBase
@@ -883,7 +887,7 @@
       mode: SensorOff
 
 - type: entity
-  parent: [ ClothingUniformBase]
+  parent: [ ClothingUniformBase ]
   id: ClothingUniformJumpsuitMercenary
   name: mercenary jumpsuit
   description: Clothing for real mercenaries who have gone through fire, water and the jungle of planets flooded with dangerous monsters or targets for which a reward has been assigned.

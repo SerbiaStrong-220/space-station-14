@@ -81,6 +81,16 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/silverheadband.rsi
 
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBeretBlueshield
+  name: beret the "Blue Shield"
+  description: An inexpensive beret favored by the "Blue Shield" officers. It has the shield emblem in blue color on it.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/beret_blueshield.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/beret_blueshield.rsi
 # CentCom
 
   # Берет
@@ -583,7 +593,7 @@
   id: ClothingHeadKiver
   name: kiver
   description: The headdress of a soldier of the Kingdom's great army.
-  suffix: HOCebent
+  suffix: Ebent, HOCebent
   components:
     - type: Sprite
       sprite: SS220/Clothing/Head/Hats/kiver.rsi
@@ -598,7 +608,7 @@
   id: ClothingHeadPithHelmet
   name: pith helmet
   description: Army helmet of the army of the River Republic.
-  suffix: HOCebent
+  suffix: Ebent, HOCebent
   components:
     - type: Sprite
       sprite: SS220/Clothing/Head/Hats/pith_helmet.rsi
