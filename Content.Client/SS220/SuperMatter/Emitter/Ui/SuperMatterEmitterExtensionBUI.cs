@@ -28,4 +28,16 @@ public sealed class SuperMatterEmitterExtensionBUI : BoundUserInterface
             SendMessage(new SuperMatterEmitterExtensionValueMessage(powerConsumption, ratio));
         };
     }
+
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        base.UpdateState(state);
+
+        switch (state)
+        {
+            case SuperMatterEmitterExtensionUpdate update:
+                _menu?.SetEmitterParams(update.EnergyToMatterRatio, update.PowerConsumption);
+                break;
+        }
+    }
 }

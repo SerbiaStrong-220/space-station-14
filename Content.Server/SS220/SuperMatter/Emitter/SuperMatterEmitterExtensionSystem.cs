@@ -2,6 +2,7 @@
 using Content.Shared.Singularity.Components;
 using Content.Shared.SS220.SuperMatter.Emitter;
 using Content.Shared.SS220.SuperMatter.Ui;
+using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.SuperMatter.Emitter;
@@ -10,6 +11,8 @@ namespace Content.Server.SS220.SuperMatter.Emitter;
 public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
 {
     [Dependency] IPrototypeManager _prototypeManager = default!;
+    [Dependency] UserInterfaceSystem _userInterface = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -29,19 +32,29 @@ public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
     }
     private void OnApplyMessage(Entity<SuperMatterEmitterExtensionComponent> entity, ref SuperMatterEmitterExtensionValueMessage args)
     {
-        entity.Comp.PowerConsumption = args.PowerConsumption;
-        entity.Comp.EnergyToMatterRatio = args.EnergyToMatterRatio;
+        entity.Comp.PowerConsumption = Math.Min(16384, args.PowerConsumption);
+        entity.Comp.EnergyToMatterRatio = Math.Clamp(args.EnergyToMatterRatio, 0, 100);
 
-        UpdateCorrespondingComponents(entity.Owner, entity.Comp);
+        UpdateCorrespondingComponents(entity.Owner, entity.Comp, out var emitterComponent);
+
         Dirty(entity);
+        if (emitterComponent != null)
+            Dirty(entity.Owner, emitterComponent);
     }
-    private void UpdateCorrespondingComponents(EntityUid uid, SuperMatterEmitterExtensionComponent comp)
+    private void UpdateCorrespondingComponents(EntityUid uid, SuperMatterEmitterExtensionComponent comp, out EmitterComponent? emitterComponent)
     {
-        if (!TryComp<EmitterComponent>(uid, out var emitterComponent))
+        if (!TryComp<EmitterComponent>(uid, out emitterComponent))
         {
             Log.Debug($"SM Emitter Extension exist in entity, but it doesnt have {nameof(EmitterComponent)}");
             return;
         }
         emitterComponent.PowerUseActive = comp.PowerConsumption;
+    }
+
+    private void UpdateBUI(Entity<SuperMatterEmitterExtensionComponent> entity)
+    {
+        var state = new SuperMatterEmitterExtensionUpdate(entity.Comp.PowerConsumption, entity.Comp.EnergyToMatterRatio);
+
+        _userInterface.SetUiState(entity.Owner, SuperMatterEmitterExtensionUiKey.Key, state);
     }
 }

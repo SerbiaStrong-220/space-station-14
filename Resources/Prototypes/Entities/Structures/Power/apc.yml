@@ -203,6 +203,26 @@
     open: true
 
 # APCs in use
+# SS220-SM-fix-begin
+
+- type: entity
+  parent: BaseAPC
+  id: BaseAPCEventProof
+  suffix: Basic, EventProof
+  components:
+  - type: HighPriorityAPC
+
+- type: entity
+  parent: BaseAPC
+  id: APCBasicEventProof
+  suffix: Basic, 50kJ, EventProof
+  components:
+  - type: Battery
+    maxCharge: 50000
+    startingCharge: 50000
+  - type: HighPriorityAPC
+# SS220-SM-fix-end
+
 - type: entity
   parent: BaseAPC
   id: APCBasic

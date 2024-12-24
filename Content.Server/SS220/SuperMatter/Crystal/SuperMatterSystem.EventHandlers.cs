@@ -10,6 +10,7 @@ using Content.Server.Construction.Completions;
 using Content.Shared.Destructible;
 using Content.Shared.SS220.SuperMatter.Ui;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Content.Shared.Humanoid;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 
@@ -77,7 +78,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             return;
         }
 
-        ConsumeObject(args.OtherEntity, entity);
+        ConsumeObject(args.OtherEntity, entity, HasComp<HumanoidAppearanceComponent>(args.OtherEntity));
     }
     private void OnActivation(Entity<SuperMatterComponent> entity, ref SuperMatterActivationEvent args)
     {
