@@ -14,7 +14,7 @@
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
-      role: JobSecurityOfficer
+      role: JobSecurityPilot #ss220 fix ballistic glasses
       time: 360000 # 100 hrs
 
 - type: loadoutEffectGroup
