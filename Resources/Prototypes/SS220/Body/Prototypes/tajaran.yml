@@ -17,7 +17,7 @@
       organs:
         heart: OrganAnimalHeart
         lungs: OrganHumanLungs
-        stomach: OrganReptilianStomach
+        stomach: OrganTajaranStomach
         liver: OrganAnimalLiver
         kidneys: OrganHumanKidneys
       connections:

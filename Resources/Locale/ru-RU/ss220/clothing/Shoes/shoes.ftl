@@ -1,4 +1,15 @@
 ent-ClothingShoesBootsBard = ботинки барда
         .desc = Не слишком удобны, но вы ведь надели их не ради удобства, не так ли?
+        .suffix = За время в игре
 ent-ClothingShoesBootsDruid = экологически чистые шлёпанцы
         .desc = Эко-друидские шлёпанцы, выполненные из натуральных материалов.
+        .suffix = За время в игре
+ent-ClothingShoesJanitorJR = прорезиненные рабочие ботинки
+        .suffix = JR, За время в игре
+        .desc = Удобные ботинки с специальной обработкой подошвы. Внушают доверие.
+ent-ClothingShoesBootsBlueShieldJack = подкованные сапоги
+        .suffix = Синий Щит
+        .desc = Защитные боевые ботинки для боевых сценариев или боевых ситуаций. Все время в бою.
+ent-ClothingShoesBootsBlueShieldJackFilled = { ent-ClothingShoesBootsBlueShieldJack }
+        .suffix = Синий Щит, Заполненный
+        .desc = { ent-ClothingShoesBootsBlueShieldJack.desc }

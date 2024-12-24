@@ -1,0 +1,22 @@
+- type: entity
+  parent: PinpointerBase
+  id: PinpointerNuclearBomb
+  name: nuclear bomb pinpointer
+  description: A handheld tracking device that leads to the direction of any nearby station.
+  suffix: Nuclear Bomb, dq, Death Squad
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Devices/pinpointer.rsi
+    layers:
+    - state: pinpointer-nuclear
+      map: ["enum.PinpointerLayers.Base"]
+    - state: pinonnull
+      map: ["enum.PinpointerLayers.Screen"]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: SS220/Objects/Devices/pinpointer.rsi
+    state: pinpointer-nuclear
+  - type: Pinpointer
+    component: Nuke
+    targetName: ядерная боеголовка

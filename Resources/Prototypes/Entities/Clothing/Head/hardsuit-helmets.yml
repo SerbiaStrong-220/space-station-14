@@ -296,9 +296,11 @@
   description: Lightweight medical hardsuit helmet that doesn't restrict your head movements.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/medical.rsi
+  #ss220 cmo hardsuit resprite begin
+    sprite: SS220/Clothing/Head/Hardsuits/medical.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/medical.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/medical.rsi
+  #ss220 cmo hardsuit resprite end
   - type: PointLight
     color: "#adf1ff"
   - type: PressureProtection

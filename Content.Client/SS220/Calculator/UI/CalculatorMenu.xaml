@@ -1,0 +1,39 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<calculator:CalculatorMenu xmlns="https://spacestation14.io"
+                    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                    xmlns:calculator="clr-namespace:Content.Client.SS220.Calculator.UI"
+                    xmlns:ui220="clr-namespace:Content.Client.SS220.UserInterface"
+                    MouseFilter="Stop"
+                    Resizable="False"
+                    SetSize="368 586">
+    <Control Name="MainContainer">
+        <PanelContainer Name="BackgroundPanel" StyleClasses="CalculatorPanel" />
+        <Control>
+            <Label Name="NumberDisplayLabel" StyleClasses="CalculatorDisplay" VerticalAlignment="Stretch" Align="Right" VAlign="Top" Margin="54 74 36 0" />
+
+            <ui220:SpriteButton Name="ButtonClose" StyleClasses="CalculatorButtonClose" Margin="30 178 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonClearEntry" StyleClasses="CalculatorButtonClearEntry" Margin="110 178 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonClear" StyleClasses="CalculatorButtonClear" Margin="190 178 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonDivide" StyleClasses="CalculatorButtonDivide" Margin="270 178 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+
+            <ui220:SpriteButton Name="ButtonDigit7" StyleClasses="CalculatorButtonDigit7" Margin="30 250 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonDigit8" StyleClasses="CalculatorButtonDigit8" Margin="110 250 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonDigit9" StyleClasses="CalculatorButtonDigit9" Margin="190 250 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonMultiply" StyleClasses="CalculatorButtonMultiply" Margin="270 250 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+
+            <ui220:SpriteButton Name="ButtonDigit4" StyleClasses="CalculatorButtonDigit4" Margin="30 322 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonDigit5" StyleClasses="CalculatorButtonDigit5" Margin="110 322 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonDigit6" StyleClasses="CalculatorButtonDigit6" Margin="190 322 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonMinus" StyleClasses="CalculatorButtonMinus" Margin="270 322 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+
+            <ui220:SpriteButton Name="ButtonDigit1" StyleClasses="CalculatorButtonDigit1" Margin="30 394 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonDigit2" StyleClasses="CalculatorButtonDigit2" Margin="110 394 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonDigit3" StyleClasses="CalculatorButtonDigit3" Margin="190 394 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonPlus" StyleClasses="CalculatorButtonPlus" Margin="270 394 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+
+            <ui220:SpriteButton Name="ButtonDigit0" StyleClasses="CalculatorButtonDigit0" Margin="30 466 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonDot" StyleClasses="CalculatorButtonDot" Margin="150 466 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+            <ui220:SpriteButton Name="ButtonEquals" StyleClasses="CalculatorButtonEquals" Margin="230 466 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" MuteSounds="True" />
+        </Control>
+    </Control>
+</calculator:CalculatorMenu>

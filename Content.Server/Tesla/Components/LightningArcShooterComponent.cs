@@ -1,3 +1,5 @@
+using Content.Server.SS220.SuperMatterCrystal;
+using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Server.Tesla.EntitySystems;
 using Robust.Shared.Prototypes;
 
@@ -6,9 +8,14 @@ namespace Content.Server.Tesla.Components;
 /// <summary>
 /// Periodically fires electric arcs at surrounding objects.
 /// </summary>
-[RegisterComponent, Access(typeof(LightningArcShooterSystem)), AutoGenerateComponentPause]
+[RegisterComponent, Access(typeof(LightningArcShooterSystem), typeof(SuperMatterSystem)), AutoGenerateComponentPause] // SS220-Add-SM
 public sealed partial class LightningArcShooterComponent : Component
 {
+    // SS220-SM-begin
+    /// <summary> Basically just to turn off arcs from SM and nothing else  </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public bool Enabled = true;
+    // SS220 SM-end
     /// <summary>
     /// The number of lightning bolts that are fired at the same time. From 0 to N
     /// Important balance value: if there aren't a N number of coils or grounders around the tesla,

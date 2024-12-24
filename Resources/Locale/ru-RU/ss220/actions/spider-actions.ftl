@@ -1,25 +1,31 @@
-action-speech-spell-spider = Кссс...!??
-
-
-ent-ActionSpawnSpiderEggDrone = Яйцо паука рыцаря
+ent-ActionSpawnSpiderEggDroneBloodPoints = Яйцо паука трутня
     .desc = Он же трутень, может строить кристаллы и стены.
+            Стоимость [color=#800000]40 крови[/color].
 
-ent-ActionSpawnSpiderEggHunter = Яйцо паучьего охотника
+ent-ActionSpawnSpiderEggHunterBloodPoints = Яйцо паучьего охотника
     .desc = Создает яйцо паучьего охотника. Главный добытчик пищи. Во имя королевы!
+            Стоимость [color=#800000]60 крови[/color].
 
-ent-ActionSpawnSpiderEggGhost = Яйцо паучьего призрака
+ent-ActionSpawnSpiderEggGhostBloodPoints = Яйцо паучьего призрака
     .desc = Создает яйцо паучьего призрака. Ваш невидимый слуга. Уничтожит всех ваших врагов скрытым способом.
+            Стоимость [color=#800000]60 крови[/color].
 
-ent-ActionSpawnSpiderEggShooter = Яйцо паучьего стрелка
+ent-ActionSpawnSpiderEggShooterBloodPoints = Яйцо паучьего стрелка
     .desc = Создает яйцо паучьего стрелка Дальнобойные враги не проблема. Стрелок сможет защитить вас от них.
+            Стоимость [color=#800000]50 крови[/color].
 
 
-ent-ActionSpawnSpiderLittle  = Выпустить паучат
+ent-ActionSpawnSpiderLittleBloodPoints  = Выпустить паучат
     .desc = Выпускает трёх маленьких паучков, которые атакуют вашу добычу. Пауки исчезают через 20 секунд.
+            Стоимость [color=#800000]20 крови[/color].
 
 
 ent-ActionSpawnSpiderCrystal = Создать осколок кристалла
     .desc = Осколок, который служит подсветкой для пауков.
+
+ent-ActionSpawnSpiderCrystalBloodPoints = { ent-ActionSpawnSpiderCrystal }
+    .desc = Осколок, который служит подсветкой для пауков. Генерирует небольшое количество кислорода вокруг себя.
+            Стоимость [color=#800000]5 крови[/color].
 
 
 ent-ActionSpawnSpiderWallWeb = Создать стену
@@ -27,6 +33,18 @@ ent-ActionSpawnSpiderWallWeb = Создать стену
 
 ent-ActionSpawnSpiderWallWebDurable = Создать прочную стену
     .desc = Создаёт прочную стену из... Паутины?!?!?
+
+ent-ActionSpawnSpiderWallWebDurableBloodPoints = { ent-ActionSpawnSpiderWallWebDurable }
+    .desc = Создаёт прочную стену из... Паутины?!?!?
+            Стоимость [color=#800000]10 крови[/color].
+
+
+ent-ActionSpawnWebTile = Создать паутинный пол
+    .desc = Создаёт пол из паутины блокирующий утечку воздуха.
+
+ent-ActionSpawnWebTileBloodPoints = { ent-ActionSpawnWebTile }
+    .desc = Создаёт пол из паутины, блокирующий утечку воздуха
+            Стоимость [color=#800000]10 крови[/color].
 
 
 ent-ActionSpawnSingleSpiderWebShortDelay = Пустить паутину
@@ -38,5 +56,13 @@ ent-ActionSpawnSingleSpiderWebLongDelay = { ent-ActionSpawnSingleSpiderWebShortD
 ent-ActionSpawnSingleSpiderWebDurable = Пустить прочную паутину
     .desc = { ent-ActionSpawnSingleSpiderWebShortDelay.desc }
 
+ent-ActionSpawnSingleSpiderWebDurableBloodPoints  = { ent-ActionSpawnSingleSpiderWebDurable } 
+    .desc = Создаёт паутину, которая замедляет вашу добычу.
+            Стоимость [color=#800000]2 крови[/color].
+
 ent-ActionSpawnSingleSpiderWebClown = Пустить клоунскую паутину
     .desc = { ent-ActionSpawnSingleSpiderWebShortDelay.desc }
+
+
+ent-ActionSpiderCoconning = Сплести кокон
+    .desc = Заматывает жертву в паутину! После полного облачения в шёлк из неё можно пить кровь.

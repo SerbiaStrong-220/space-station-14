@@ -641,6 +641,25 @@
           defaultPrototype: PowerCellSmall
 
 - type: entity
+  id: SMESAdvancedMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: advanced SMES machine board
+  description: A machine printed circuit board for an Advanced SMES.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: power_mod
+  - type: MachineBoard
+    prototype: SMESAdvancedEmpty
+    stackRequirements:
+      Capacitor: 2
+      CableHV: 20
+    componentRequirements:
+      PowerCell:
+        amount: 4
+        defaultPrototype: PowerCellMedium
+
+- type: entity
   id: CellRechargerCircuitboard
   parent: BaseMachineCircuitboard
   name: cell recharger machine board
@@ -1080,6 +1099,12 @@
         Capacitor: 2
         CableHV: 5
         Glass: 2
+    # SS220 SuperMatter-begin
+    - type: Construction
+      graph: SuperMatterEmitterBoard
+      deconstructionTarget: null
+      node: emitter
+    # SS220 SuperMatter-end
 
 - type: entity
   id: SurveillanceCameraRouterCircuitboard

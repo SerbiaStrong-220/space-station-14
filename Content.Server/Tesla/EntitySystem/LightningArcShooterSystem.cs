@@ -32,12 +32,19 @@ public sealed class LightningArcShooterSystem : EntitySystem
         var query = EntityQueryEnumerator<LightningArcShooterComponent>();
         while (query.MoveNext(out var uid, out var arcShooter))
         {
+            // SS220-SM-begin
+            if (!arcShooter.Enabled)
+                continue;
+            // SS220-SM-end
             if (arcShooter.NextShootTime > _gameTiming.CurTime)
                 continue;
 
             ArcShoot(uid, arcShooter);
             var delay = TimeSpan.FromSeconds(_random.NextFloat(arcShooter.ShootMinInterval, arcShooter.ShootMaxInterval));
-            arcShooter.NextShootTime += delay;
+            // SS220-SM-Arc-Fix begin
+            // arcShooter.NextShootTime += delay;
+            arcShooter.NextShootTime = _gameTiming.CurTime + delay;
+            // SS220-SM-Arc-Fix end
         }
     }
 

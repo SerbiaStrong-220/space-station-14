@@ -238,6 +238,7 @@
   components:
     - type: Tag
       tags:
+        - Tourniquet #SS220 Add Tourniquet to medic's belt
         - SecBeltEquip
     - type: Sprite
       state: tourniquet
@@ -1036,7 +1037,7 @@
   id: SyringeStimulants
   components:
   - type: Label
-    currentLabel: reagent-name-hyperzine
+    currentLabel: reagent-name-stimulants
   - type: SolutionContainerManager
     solutions:
       injector:

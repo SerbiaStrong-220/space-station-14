@@ -78,3 +78,95 @@
   materials:
     Steel: 175
     Plastic: 300
+
+#Svarshik's missing mags
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: SpeedLoaderLightRifle
+  result: SpeedLoaderLightRifle
+  materials:
+    Steel: 75
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineBoxCaselessRifle
+  result: MagazineBoxCaselessRifle
+  materials:
+    Steel: 600
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolCaselessRifle
+  result: MagazinePistolCaselessRifle
+  materials:
+    Steel: 135
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolSubMachineGunIncendiary
+  result: MagazinePistolSubMachineGunIncendiary
+  materials:
+    Steel: 275
+    Plastic: 25
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolSubMachineGunUranium
+  result: MagazinePistolSubMachineGunUranium
+  materials:
+    Steel: 25
+    Plastic: 300
+    Uranium: 300
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineMagnumEmpty
+  result: MagazineMagnumEmpty
+  materials:
+    Steel: 60
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineMagnum
+  result: MagazineMagnum
+  materials:
+    Steel: 200
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineMagnumIncendiary
+  result: MagazineMagnumIncendiary
+  materials:
+    Steel: 180
+    Plastic: 25
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineMagnumUranium
+  result: MagazineMagnumUranium
+  materials:
+    Steel: 60
+    Plastic: 150
+    Uranium: 120
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineMagnumRubber
+  result: MagazineMagnumRubber
+  materials:
+    Steel: 180
+    Plastic: 150
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolHighCapacityEmpty
+  result: MagazinePistolHighCapacityEmpty
+  materials:
+    Steel: 30
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolHighCapacity
+  result: MagazinePistolHighCapacity
+  materials:
+    Steel: 240

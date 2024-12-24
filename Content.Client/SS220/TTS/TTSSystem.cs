@@ -33,6 +33,11 @@ public sealed partial class TTSSystem : EntitySystem
     private static readonly ResPath Prefix = ResPath.Root / "TTS";
     private static bool _rootSetUp = false;
 
+    /// <summary>
+    /// Reducing the volume of the TTS when whispering. Will be converted to logarithm.
+    /// </summary>
+    private const float WhisperFade = 4f;
+
     private float _volume = 0.0f;
     private float _radioVolume = 0.0f;
     private int _fileIdx = 0;
@@ -263,10 +268,25 @@ public sealed partial class TTSSystem : EntitySystem
 
     private void OnPlayTTS(PlayTTSEvent ev)
     {
-        var volume = (ev.IsRadio ? _radioVolume : _volume) * ev.VolumeModifier;
+        var volume = AdjustVolume(ev.IsRadio, isAnounce: false, ev.IsWhisper);
+
         var audioParams = AudioParams.Default.WithVolume(volume);
 
         PlayTTSBytes(ev.Data, GetEntity(ev.SourceUid), audioParams);
+    }
+
+    private float AdjustVolume(bool isRadio, bool isAnounce, bool isWhisper)
+    {
+        var volume = isRadio ? _radioVolume : isAnounce ? VolumeAnnounce : _volume;
+
+        volume = SharedAudioSystem.GainToVolume(volume);
+
+        if (isWhisper)
+        {
+            volume -= SharedAudioSystem.GainToVolume(WhisperFade);
+        }
+
+        return volume;
     }
 
     // Play requests //

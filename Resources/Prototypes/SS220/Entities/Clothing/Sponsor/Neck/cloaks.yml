@@ -7,7 +7,7 @@
   parent: ClothingSponsorNeckBase
   id: ClothingSponsorNeckParadise
   name: накидка причастия
-  description: Вручается избранным, удостоенных уникального места в этом мире.
+  description: Вручается избранным, удостоенным уникального места в этом мире.
   suffix: Sponsor Neck
   components:
   - type: Sprite
@@ -94,6 +94,19 @@
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/administrator.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/administrator.rsi
+
+# Moderator
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckModerator
+  name: плащ министерства любви
+  description: Плащ министерства, где нет тьмы. Такие плащи часто носят сотрудники полиции мысли. Глаза на рисунке определённо следят за вами.
+  suffix: Sponsor Neck, Moderator
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/moder.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/moder.rsi
 
 # Разное
 - type: entity

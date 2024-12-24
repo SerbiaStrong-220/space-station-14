@@ -27,6 +27,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using Robust.Shared.Audio;
+using Content.Shared.SS220.CCVars;
 
 namespace Content.Client.UserInterface.Systems.Bwoink;
 
@@ -56,10 +57,10 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
         base.Initialize();
 
         // SS220 Ahelp-Volume begin
-        _AHelpParams = new(_configManager.GetCVar(CCVars.AHelpVolume), 1, 0, 0, 0, false, 0f); // Set AHelp volume on start
-        _AHelpSoundsEnabled = _configManager.GetCVar(CCVars.AHelpSoundsEnabled);
-        _configManager.OnValueChanged(CCVars.AHelpVolume, AHelpVolumeCVarChanged); // Track AHekp volume change
-        _configManager.OnValueChanged(CCVars.AHelpSoundsEnabled, AHelpSoundsEnabledCVarChanged); // Track AHekp sound change
+        _AHelpParams = new(_configManager.GetCVar(CCVars220.AHelpVolume), 1, 0, 0, 0, false, 0f); // Set AHelp volume on start
+        _AHelpSoundsEnabled = _configManager.GetCVar(CCVars220.AHelpSoundsEnabled);
+        _configManager.OnValueChanged(CCVars220.AHelpVolume, AHelpVolumeCVarChanged); // Track AHekp volume change
+        _configManager.OnValueChanged(CCVars220.AHelpSoundsEnabled, AHelpSoundsEnabledCVarChanged); // Track AHekp sound change
         // SS220 Ahelp-Volume end
 
         SubscribeNetworkEvent<BwoinkDiscordRelayUpdated>(DiscordRelayUpdated);
@@ -598,6 +599,10 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
         _window.OnClose += () => { OnClose?.Invoke(); };
         _window.OnOpen += () => { OnOpen?.Invoke(); };
         _window.Contents.AddChild(_chatPanel);
+
+        var introText = Loc.GetString("bwoink-system-introductory-message");
+        var introMessage = new SharedBwoinkSystem.BwoinkTextMessage( _ownerId, SharedBwoinkSystem.SystemUserId, introText);
+        Receive(introMessage);
     }
 
     public void Dispose()
