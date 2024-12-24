@@ -207,14 +207,14 @@
 
 - type: entity
   parent: BaseAPC
-  id: APCBasic
+  id: BaseAPCEventProof
   suffix: Basic, EventProof
   components:
   - type: HighPriorityAPC
 
 - type: entity
   parent: BaseAPC
-  id: APCBasic
+  id: APCBasicEventProof
   suffix: Basic, 50kJ, EventProof
   components:
   - type: Battery
