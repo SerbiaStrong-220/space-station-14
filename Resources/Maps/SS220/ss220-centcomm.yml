@@ -7947,7 +7947,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -16.5,-9.5
       parent: 1
-- proto: AirlockCentcommLockedGSN
+- proto: AirlockCentcommLockedBSO
   entities:
   - uid: 162
     components:
@@ -21687,7 +21687,7 @@ entities:
     - type: Transform
       pos: 1.4865685,4.5342445
       parent: 1
-- proto: CentcomOperativeSRTPDA
+- proto: CentcomOperativeBSOPDA
   entities:
   - uid: 3074
     components:
@@ -23877,7 +23877,7 @@ entities:
           priority: 0
           component: Armor
         title: null
-- proto: ClothingBackSatchelSRTFilled
+- proto: ClothingBackpackBlueShieldHightFilled
   entities:
   - uid: 3077
     components:
@@ -24094,7 +24094,7 @@ entities:
     - type: Transform
       pos: -12.423534,13.668186
       parent: 1
-- proto: ClothingBeltWebbingSRTFilled
+- proto: ClothingBeltBlueShieldFilled
   entities:
   - uid: 29
     components:
@@ -24888,7 +24888,7 @@ entities:
     - type: Transform
       pos: -8.6548195,-5.8582706
       parent: 1
-- proto: ClothingNeckScarfCentcomGSN
+- proto: ClothingNeckScarfBSO
   entities:
   - uid: 2908
     components:
@@ -25239,7 +25239,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: ClothingOuterSRTCoat
+- proto: ClothingOuterBSOCoat
   entities:
   - uid: 2897
     components:
@@ -46477,7 +46477,7 @@ entities:
       parent: 1
     - type: AccessReader
       access:
-      - - CentralCommandGSN
+      - - CentralCommandBSO
     - type: EntityStorage
       air:
         volume: 200
@@ -46527,7 +46527,7 @@ entities:
       parent: 1
     - type: AccessReader
       access:
-      - - CentralCommandGSN
+      - - CentralCommandBSO
     - type: EntityStorage
       air:
         volume: 200

@@ -1,5 +1,48 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+# Base
+# Flipped
+- type: entity
+  parent: [UnsensoredClothingUniformBase, BaseFoldable]
+  id: ClothingUniformBaseFoldable
+  abstract: true
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-tie-verb
+    foldVerbText: fold-untie-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: tie
+    foldedHeldPrefix: tie
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_tie
+      map: ["foldedLayer"]
+      visible: false
+
+- type: entity
+  parent: ClothingUniformBaseFoldable
+  id: ClothingUniformBaseFoldableTie
+  abstract: true
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: tie
+  - type: Item
+    heldPrefix: tie
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon_tie
+      map: ["foldedLayer"]
+      visible: true
+
 # ЦК
 
 - type: entity
@@ -67,23 +110,96 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/whitecapformal.rsi
 
+  # Главный врач
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitCMOCorporate
+  name: corporate CMO Jumpsuit
+  description: «A beautiful, stylish suit of a real chief medical officer. It emphasises the person's nature and the beauty of his charisma...» Nothing further on the unopened label.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/cmo_corp.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/cmo_corp.rsi
+
   # Синий щит
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitBlueShield2
-  name: униформа Синего Щита
-  description: Модная форма Синего Щита - как же она хороша!
+  id: ClothingUniformJumpsuitBlueShieldCombez
+  name: blue shield jumpsuit
+  description: The standard jumpsuit for the blue shield.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Blueshield_uniform.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_combez.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Blueshield_uniform.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_combez.rsi
   - type: Armor
     modifiers:
       coefficients:
         Slash: 0.9
         Piercing: 0.9
+
+- type: entity
+  parent: ClothingUniformJumpsuitBlueShieldCombez #Чтобы наследовать резисты
+  id: ClothingUniformJumpsuitBlueShieldOperative
+  name: the operative "Blue Shield" jumpsuit
+  description: The fashionable uniform of the Blue Shield operative - how good it is!
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_operative.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_operative.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitBlueShieldCombat
+  name: blue shield combat jumpsuit
+  description: Special clothing designed for combat operations. It is made of high-tech materials, taking into account the requirements for protection from external influences.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_combat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_combat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Piercing: 0.85
+
+- type: entity
+  parent: ClothingUniformBaseFoldable
+  id: ClothingUniformJumpsuitBlueShieldShirt
+  name: the "Blue Shield" shirt
+  description: A shirt used by high-ranking people of the blue shield during official meetings.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.9
+        Piercing: 0.9
+
+- type: entity
+  parent: [ClothingUniformBaseFoldableTie, ClothingUniformJumpsuitBlueShieldShirt]
+  id: ClothingUniformJumpsuitBlueShieldShirtTie
+
+- type: entity
+  parent: ClothingUniformJumpsuitBlueShieldCombez #Чтобы наследовать резисты
+  id: ClothingUniformJumpsuitBlueShieldTShirt
+  name: the "Blue Shield" t-shirt
+  description: A black T-shirt with short sleeves, paired with black trousers made of durable material. Perfect for relaxing in the safe sector of NanoTrasen.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_t-shirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_t-shirt.rsi
 
 
 # Внутренние дела

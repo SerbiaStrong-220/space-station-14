@@ -18,6 +18,7 @@
         layer:
           - MachineLayer
   - type: Lathe
+  - type: StationAiWhitelist #SS220 AI Access
   - type: MaterialStorage
   - type: Destructible
     thresholds:
@@ -564,6 +565,7 @@
       - MassMediaCircuitboard
       - ReagentGrinderIndustrialMachineCircuitboard
       - JukeboxCircuitBoard
+      - SMESAdvancedMachineCircuitboard
   - type: EmagLatheRecipes
     emagDynamicRecipes:
       - ShuttleGunDusterCircuitboard
@@ -630,6 +632,7 @@
     - BorgModuleProtoKineticAccelerator #SS220 Borg Modules
     - BorgModuleAdvancedTool
     - BorgModuleGPS
+    - BorgModuleFireAxe #SS220 Borg Modules
     - BorgModuleArtifact
     - BorgModuleAnomaly
     - BorgModuleGardening
@@ -1313,7 +1316,7 @@
       staticRecipes:
         - SheetSteel
         - SheetGlass1
-        - SheetRGlass
+        - SheetRGlassRaw
         - SheetPlasma1
         - SheetPGlass1
         - SheetRPGlass1
@@ -1339,7 +1342,7 @@
     staticRecipes:
       - SheetSteel
       - SheetGlass1
-      - SheetRGlass
+      - SheetRGlassRaw
       - SheetPlasma1
       - SheetPGlass1
       - SheetRPGlass1

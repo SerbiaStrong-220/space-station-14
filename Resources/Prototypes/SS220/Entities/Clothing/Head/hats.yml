@@ -81,6 +81,16 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/silverheadband.rsi
 
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBeretBlueshield
+  name: beret the "Blue Shield"
+  description: An inexpensive beret favored by the "Blue Shield" officers. It has the shield emblem in blue color on it.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/beret_blueshield.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/beret_blueshield.rsi
 # CentCom
 
   # Берет

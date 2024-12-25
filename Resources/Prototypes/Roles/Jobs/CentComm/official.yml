@@ -15,7 +15,7 @@
   - CentralCommand
   # SS220 centcomm access fix begin
   - CentralCommandERT
-  - CentralCommandGSN
+  - CentralCommandBSO
   - CentralCommandCBURN
   # SS220 centcomm access fix end
   departmentsToIgnoreInTitles: # SS220 Round End Titles

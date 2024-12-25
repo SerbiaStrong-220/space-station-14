@@ -1,36 +1,70 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-
-  parent: ClothingBeltStorageBase
-  id: ClothingBeltWebbingSRT
-  name: пояс ГСН
-  description: Этот пояс позволяет хранить всё необходимое в удобном и быстродоступном месте, а материал из которого он выполнен, позволяет выглядеть ещё более стильно.
+  parent: ClothingBeltSecurity
+  id: ClothingBeltBlueShield
+  name: the Blue Shield belt
+  description: This belt allows you to store everything you need in a convenient and quickly accessible place, and the material from which it is made allows you to look even more stylish.
   components:
   - type: Sprite
-    sprite: Clothing/Belt/assault.rsi
+    sprite: SS220/Clothing/Belt/blueshieldbelt.rsi
   - type: Clothing
-    sprite: Clothing/Belt/assault.rsi
+    sprite: SS220/Clothing/Belt/blueshieldbelt.rsi
   - type: Storage
-    blacklist: # SS220 Fix #2009 begin
-      tags:
-        - HolofanProjector
-    # SS220 Fix #2009 end
+    maxItemSize: Normal
+    defaultStorageOrientation: Vertical
+    grid:
+    - 0,0,4,2
 
 - type: entity
-  parent: ClothingBeltWebbingSRT
-  id: ClothingBeltWebbingSRTFilled
-  suffix: Заполненный
+  parent: ClothingBeltBlueShield
+  id: ClothingBeltBlueShieldFilled
+  suffix: Filled
   components:
   - type: StorageFill
     contents:
+      - id: Handcuffs
+      - id: Handcuffs
+      - id: GrenadeFlashBang
+      - id: GrenadeFlashBang
       - id: FlashlightSeclite
-      - id: CombatKnife
-      - id: Handcuffs
-      - id: Handcuffs
-      - id: GrenadeFlashBang
-      - id: GrenadeFlashBang
 
+- type: entity
+  parent: ClothingBeltStorageBase
+  id: ClothingBeltWebbingBlueShield
+  name: the Blue Shield RPS
+  description: Universal unloading vest with straps and belt. It can accommodate anything... anything of a small size.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/blueshieldwebbing.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/blueshieldwebbing.rsi
+  - type: Storage
+    grid:
+    - 0,1,0,2
+    - 1,1,1,1
+    - 2,2,2,3
+    - 3,0,3,1
+    - 4,2,4,3
+    - 5,0,5,1
+    - 6,2,6,3
+    - 7,0,7,1
+    - 8,2,8,3
+    - 9,1,9,1
+    - 10,1,10,2
+
+- type: entity
+  parent: ClothingBeltWebbingBlueShield
+  id: ClothingBeltWebbingBlueShieldFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: Handcuffs
+      - id: FlashlightSeclite
+      - id: Handcuffs
+      - id: GrenadeFlashBang
+      - id: GrenadeFlashBang
 
 - type: entity
   parent: ClothingBeltSheath
@@ -401,7 +435,7 @@
         - LightReplacer
         - SmokeOnTrigger
     maxItemSize: Large
-  - type: Appearance  
+  - type: Appearance
 
 - type: entity
   id: ClothingBeltJanitorJRFilled

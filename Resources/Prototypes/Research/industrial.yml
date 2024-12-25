@@ -42,6 +42,7 @@
   recipeUnlocks:
   - PowerCellHigh
   - TurboItemRechargerCircuitboard
+  - SMESAdvancedMachineCircuitboard
 
 - type: technology
   id: MechanicalCompression
@@ -175,6 +176,7 @@
     - JawsOfLife
     - BorgModuleAdvancedTool
     - BorgModuleProtoKineticAccelerator # ss220
+    - BorgModuleFireAxe #SS220 Borg Modules
 
 # ss220 start thermoelectric generator
 - type: technology

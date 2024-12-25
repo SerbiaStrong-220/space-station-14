@@ -10,6 +10,37 @@
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/whitecapbackpack.rsi
 
+  # Офицер "Синий Щит"
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: ClothingBackpackBlueShield
+  name: blueshield backpack
+  description: A backpack specially designed for the Blue Shield, with a unique pocket hardsuit technology.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/blueshield.rsi
+  - type: Storage
+    grid:
+    - 0,0,7,4
+  - type: ToggleableClothing
+    slot: outerClothing
+    requiredSlot: back
+    clothingPrototype: ClothingOuterHardsuitLightBlueshield
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+      toggleable-clothing: !type:ContainerSlot {}
+
+- type: entity
+  parent: ClothingBackpackBlueShield
+  id: ClothingBackpackBlueShieldHight
+  name: blueshield backpack
+  description: A backpack specially designed for the Blue Shield, with a unique pocket hardsuit technology.
+  components:
+  - type: ToggleableClothing
+    clothingPrototype: ClothingOuterHardsuitHightBlueshield
+
 # WMT Ebent begin
 - type: entity
   parent: ClothingBackpack

@@ -140,29 +140,63 @@
 
   # Офицер "Синий Щит" (Начало)
 - type: loadoutGroup
+  id: BlueShieldHead
+  name: loadout-group-blueshield-head
+  minLimit: 0
+  loadouts:
+  - BlueshieldBeret
+  - BlueshieldBlueBeret
+
+- type: loadoutGroup
+  id: BlueShieldGlasses
+  name: loadout-group-blueshield-glasses
+  minLimit: 1
+  loadouts:
+  - BlueshieldGlasses
+  - BlueshieldTacticGlasses
+
+- type: loadoutGroup
   id: BlueShieldNeck
   name: loadout-group-blueshield-neck
   minLimit: 0
   loadouts:
   - SecurityHolster
   - Headphones
-  - ProtectGear
+  - ProtectGearBlue
   - BlueShieldNeckCloak
 
 - type: loadoutGroup
   id: BlueShieldJumpsuit
   name: loadout-group-blueshield-jumpsuit
   loadouts:
-  - BlueShieldJumpsuit
-  - BlueShieldJumpsuit2
+  - BlueShieldCombez
+  - BlueShieldJumpsuitOperative
+  - BlueShieldJumpsuitShirt
   - BlueShieldJumpsuitTurtle
+  - BlueShieldJumpsuitTShirt
+  - BlueShieldJumpsuitCombat
 
 - type: loadoutGroup
   id: BlueShieldOuterclothing
   name: loadout-group-blueshield-outerclothing
   loadouts:
-  - BlueShieldArmorBulletproof
-  - BlueShieldSRTCoat
+  - BlueShieldArmorAssault
+  - BlueShieldArmorScale
+  - BlueShieldOperativeCoat
+
+- type: loadoutGroup
+  id: BlueShieldBelt
+  name: loadout-group-blueshield-belt
+  loadouts:
+  - BlueshieldBelt
+  - BlueshieldWebbing
+
+- type: loadoutGroup
+  id: BlueShieldBackpack
+  name: loadout-group-blueshield-backpack
+  hidden: true
+  loadouts:
+  - BlueShieldBackpack
   # Офицер "Синий Щит" (Конец)
 #! Юридический (Конец)
 
@@ -202,7 +236,7 @@
     - SecuritySatchel
     - SecurityDuffel
     - DetectiveNoirSatchel
-  
+
 - type: loadoutGroup
   id: SecurityGloves
   name: loadout-group-security-gloves
@@ -653,9 +687,10 @@
 - type: loadoutGroup
   id: ServiceWorkerJumpsuit
   name: loadout-group-service-worker-jumpsuit
-  hidden: true
   loadouts:
   - ServiceWorkerWaiter
+  - ServiceWorkerWaitress
+
   # Сервисный работник (Конец)
 
 #! Сервис (Конец)
