@@ -8,6 +8,7 @@ using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Content.Server.SS220.Language; // SS220-Add-Languages
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -15,6 +16,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 {
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private readonly LanguageSystem _languageSystem = default!; // SS220-Add-Languages
 
     public override void Initialize()
     {
@@ -104,7 +106,12 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         var actorUid = Transform(uid).ParentUid;
         if (TryComp(actorUid, out ActorComponent? actor))
         {
-            _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
+            // SS220-Add-Languages begin
+            if (_languageSystem.CheckLanguage(actorUid, args.LanguageProto))
+                _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
+            else
+                _netMan.ServerSendMessage(args.ScrambledChatMsg, actor.PlayerSession.Channel);
+            // SS220-Add-Languages end
             if (actorUid != args.MessageSource && TryComp(args.MessageSource, out TTSComponent? _))
             {
                 args.Receivers.Add(actorUid);
