@@ -519,6 +519,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_feldsher.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitInterdyne
+  name: interdyne Paramedic's Uniform
+  description: A standardized form of special-purpose immediate medical assistance units, provided by Interdyne Pharmaceuticals.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/interdyne_jumpsuit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/interdyne_jumpsuit.rsi
+
   # Бригмедик
 - type: entity
   parent: ClothingUniformBase
