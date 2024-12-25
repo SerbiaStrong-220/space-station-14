@@ -12,7 +12,6 @@ public sealed partial class TeslaCoilComponent : Component
     /// <summary>
     /// This bool ensure less usage of plasmas near SM crystal
     /// </summary>
-    [DataField]
     public bool NearSM = false;
 
     [DataField]

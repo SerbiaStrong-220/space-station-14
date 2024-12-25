@@ -93,7 +93,7 @@ public sealed class RadiationCollectorSystem : EntitySystem
             float delta = args.TotalRads * reactantMol * gas.ReactantBreakdownRate;
 
             // SS220 SM-fix-begin
-            var smFactor = component.NearSM ? component.SMNearReactionRateModifier : 1f;
+            var smFactor = component.NearSM ? component.ReactionRateModifierNearSM : 1f;
             delta *= smFactor;
             // SS220 SM-fix-end
 

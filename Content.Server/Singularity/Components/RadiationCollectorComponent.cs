@@ -38,12 +38,11 @@ public sealed partial class RadiationCollectorComponent : Component
     /// <summary>
     /// This bool ensure less usage of plasmas near SM crystal
     /// </summary>
-    [DataField]
     public bool NearSM = false;
 
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public float SMNearReactionRateModifier = 0.2f;
+    public float ReactionRateModifierNearSM = 0.2f;
 
     [DataField]
     public float LookupSMRange = 5f;
