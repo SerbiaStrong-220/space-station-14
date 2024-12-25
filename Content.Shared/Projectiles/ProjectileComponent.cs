@@ -11,7 +11,7 @@ public sealed partial class ProjectileComponent : Component
 {
     // SS220 add barricade begin
     [ViewVariables, AutoNetworkedField]
-    public EntityUid? ShootGtidUid;
+    public EntityUid? ShootGridUid;
 
     [ViewVariables, AutoNetworkedField]
     public Vector2? ShootGridPos;

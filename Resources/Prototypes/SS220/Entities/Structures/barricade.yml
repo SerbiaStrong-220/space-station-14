@@ -374,11 +374,12 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb {}
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,-0.36"
         mask:
-        - FullTileMask
+        - TableMask
         layer:
-        - GlassLayer
+        - WallLayer
   - type: Barricade
   - type: Destructible
     thresholds:

@@ -82,7 +82,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             projectile.DamagedEntity = false;
 
             // SS220 add barricade begin
-            projectile.ShootGtidUid = null;
+            projectile.ShootGridUid = null;
             projectile.ShootGridPos = null;
             projectile.ShootWorldPos = null;
             // SS220 add barricade end
@@ -163,7 +163,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     public void SetShootPositions(EntityUid uid, ProjectileComponent component, EntityUid shooterId)
     {
         var xform = Transform(uid);
-        component.ShootGtidUid = xform.ParentUid;
+        component.ShootGridUid = xform.ParentUid;
         component.ShootGridPos = xform.LocalPosition;
         component.ShootWorldPos = _transform.GetWorldPosition(shooterId);
         Dirty(uid, component);
