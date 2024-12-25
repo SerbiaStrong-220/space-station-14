@@ -25,4 +25,4 @@ ent-ClothingBeltMedicalInterdyne = РПС образца НМП-023
     .suffix = Interdyne, За время в игре, Парамедик
 ent-ClothingBeltMedicalInterdyneFilled = { ent-ClothingBeltMedicalInterdyne }
     .desc = { ent-ClothingBeltMedicalInterdyne }
-    .suffix = Заполненный, Парамедик
+    .suffix = Interdyne, Заполненный, Парамедик
