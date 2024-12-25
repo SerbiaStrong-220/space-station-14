@@ -1,4 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using System.Diagnostics;
+using System.Linq;
+using Content.Server.Singularity.EntitySystems;
 using Content.Shared.Singularity.Components;
 using Content.Shared.SS220.SuperMatter.Emitter;
 using Content.Shared.SS220.SuperMatter.Ui;
@@ -10,6 +13,7 @@ namespace Content.Server.SS220.SuperMatter.Emitter;
 
 public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
 {
+    [Dependency] EmitterSystem _emitter = default!;
     [Dependency] IPrototypeManager _prototypeManager = default!;
     [Dependency] UserInterfaceSystem _userInterface = default!;
 
@@ -19,6 +23,7 @@ public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
 
         SubscribeLocalEvent<SuperMatterEmitterExtensionComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<SuperMatterEmitterExtensionComponent, SuperMatterEmitterExtensionValueMessage>(OnApplyMessage);
+        SubscribeLocalEvent<SuperMatterEmitterExtensionComponent, SuperMatterEmitterExtensionEmitterActivateMessage>(OnEmitterActivateMessage);
     }
 
     private void OnComponentInit(Entity<SuperMatterEmitterExtensionComponent> entity, ref ComponentInit args)
@@ -40,7 +45,21 @@ public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
         Dirty(entity);
         if (emitterComponent != null)
             Dirty(entity.Owner, emitterComponent);
+
+        UpdateBUI(entity);
     }
+
+    /// <summary>
+    /// Updates entities BUI with current parameters
+    /// </summary>
+    /// <param name="entity"></param>
+    public void UpdateBUI(Entity<SuperMatterEmitterExtensionComponent> entity)
+    {
+        var state = new SuperMatterEmitterExtensionUpdate(entity.Comp.PowerConsumption, entity.Comp.EnergyToMatterRatio);
+
+        _userInterface.SetUiState(entity.Owner, SuperMatterEmitterExtensionUiKey.Key, state);
+    }
+
     private void UpdateCorrespondingComponents(EntityUid uid, SuperMatterEmitterExtensionComponent comp, out EmitterComponent? emitterComponent)
     {
         if (!TryComp<EmitterComponent>(uid, out emitterComponent))
@@ -51,10 +70,18 @@ public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
         emitterComponent.PowerUseActive = comp.PowerConsumption;
     }
 
-    private void UpdateBUI(Entity<SuperMatterEmitterExtensionComponent> entity)
+    private void OnEmitterActivateMessage(Entity<SuperMatterEmitterExtensionComponent> entity, ref SuperMatterEmitterExtensionEmitterActivateMessage args)
     {
-        var state = new SuperMatterEmitterExtensionUpdate(entity.Comp.PowerConsumption, entity.Comp.EnergyToMatterRatio);
+        if (!TryComp<EmitterComponent>(entity, out var emitterComponent))
+        {
+            Log.Debug($"SM Emitter Extension exist in entity, but it doesnt have {nameof(EmitterComponent)}");
+            return;
+        }
 
-        _userInterface.SetUiState(entity.Owner, SuperMatterEmitterExtensionUiKey.Key, state);
+        var users = _userInterface.GetActors(entity.Owner, SuperMatterEmitterExtensionUiKey.Key);
+        Debug.Assert(users.Count() == 1);
+
+        _emitter.TryActivate((entity.Owner, emitterComponent), users.First());
+        Dirty<EmitterComponent>((entity.Owner, emitterComponent));
     }
 }

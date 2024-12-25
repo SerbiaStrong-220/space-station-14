@@ -20,7 +20,7 @@ public sealed partial class TeslaCoilComponent : Component
     public float StructureDamageRecoveredNearSM = 0.8f;
 
     [DataField]
-    public float SMLookupRange = 5f;
+    public float LookupSMRange = 5f;
     // SS220-SM-fix-end
 
     /// <summary>

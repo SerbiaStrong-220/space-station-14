@@ -29,3 +29,6 @@ public sealed class SuperMatterEmitterExtensionValueMessage(int power, int ratio
     public int PowerConsumption = power;
     public int EnergyToMatterRatio = ratio;
 }
+
+[Serializable, NetSerializable]
+public sealed class SuperMatterEmitterExtensionEmitterActivateMessage() : BoundUserInterfaceMessage { }

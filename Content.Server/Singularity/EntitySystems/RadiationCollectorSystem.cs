@@ -245,8 +245,8 @@ public sealed class RadiationCollectorSystem : EntitySystem
 
     private void TryFindSMNear(Entity<RadiationCollectorComponent> entity)
     {
-        var sm_queries = _entityLookup.GetEntitiesInRange<SuperMatterComponent>(Transform(entity).Coordinates, entity.Comp.SMLookupRange);
-        entity.Comp.NearSM = !(sm_queries.Count == 0);
+        var smEntitiesInRange = _entityLookup.GetEntitiesInRange<SuperMatterComponent>(Transform(entity).Coordinates, entity.Comp.LookupSMRange);
+        entity.Comp.NearSM = !(smEntitiesInRange.Count == 0);
     }
     //SS220-SM-fix-end
 }

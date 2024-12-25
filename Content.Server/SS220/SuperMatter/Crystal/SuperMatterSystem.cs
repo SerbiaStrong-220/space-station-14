@@ -90,7 +90,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         EjectGases(decayedMatter, crystalTemperature, smState, gasMixture);
         crystal.Comp.Matter -= decayedMatter;
-        crystal.Comp.Temperature -= decayedMatter / crystal.Comp.Matter * crystalTemperature;
+        crystal.Comp.Temperature += releasedEnergyPerFrame / GetHeatCapacity(crystalTemperature, prevMatter) - decayedMatter / crystal.Comp.Matter * crystalTemperature;
 
         _atmosphere.AddHeat(gasMixture, ReleasedEnergyToGasHeat * releasedEnergyPerFrame);
         AddIntegrityDamage(crystal.Comp, GetIntegrityDamage(crystal.Comp) * frameTime);

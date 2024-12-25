@@ -6,6 +6,7 @@ using Content.Server.Lightning;
 using Content.Shared.Damage;
 using Content.Server.SS220.SuperMatterCrystal.Components;
 // SS220-SM-fix-begin
+
 namespace Content.Server.Tesla.EntitySystems;
 
 /// <summary>
@@ -61,8 +62,8 @@ public sealed class TeslaCoilSystem : EntitySystem
 
     private void TryFindSMNear(Entity<TeslaCoilComponent> entity)
     {
-        var sm_queries = _entityLookup.GetEntitiesInRange<SuperMatterComponent>(Transform(entity).Coordinates, entity.Comp.SMLookupRange);
-        entity.Comp.NearSM = !(sm_queries.Count == 0);
+        var smEntitiesInRange = _entityLookup.GetEntitiesInRange<SuperMatterComponent>(Transform(entity).Coordinates, entity.Comp.LookupSMRange);
+        entity.Comp.NearSM = !(smEntitiesInRange.Count == 0);
     }
     //SS220-SM-fix-end
 }
