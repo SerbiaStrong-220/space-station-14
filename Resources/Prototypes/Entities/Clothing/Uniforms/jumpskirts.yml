@@ -174,17 +174,17 @@
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpskirt/hop.rsi
 
-  #ss220 FIX START
-#- type: entity
-#  parent: [ClothingUniformSkirtBase]
-#  id: ClothingUniformJumpskirtHoS
-#  name: head of security's jumpskirt
-#  description: It's bright red and rather crisp, much like security's victims tend to be.
-#  components:
-#  - type: Sprite
-#    sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
-#  - type: Clothing
-#    sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformJumpskirtHoS
+  name: head of security's jumpskirt
+  description: It's bright red and rather crisp, much like security's victims tend to be.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hos.rsi #ss220 fix
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hos.rsi #ss220 fix
+  #ss220 fix start
 #  - type: Item
 #    inhandVisuals:
 #      left:
@@ -199,7 +199,7 @@
 #        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
 #      - state: overlay-inhand-right
 #        sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
-  #ss220 FIX END
+  #ss220 fix end
 
 - type: entity
   parent: [ClothingUniformSkirtBase]
