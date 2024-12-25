@@ -358,12 +358,12 @@ public sealed class MindSlaveSystem : EntitySystem
 
     private void MakeTelepathic(EntityUid master, EntityUid slave)
     {
-        var telepathyChannel = TryComp<TelepathyComponent>(master, out var oldTelepathy)
+        var telepathyChannel = TryComp<TelepathyComponent>(master, out var oldTelepathy) && oldTelepathy.TelepathyChannelPrototype != null
             ? oldTelepathy.TelepathyChannelPrototype
             : _telepathy.TakeUniqueTelepathyChannel("mindslave-telepathy-channel-name", Color.DarkViolet);
 
-        EnsureTelepathy(slave, telepathyChannel);
-        EnsureTelepathy(master, telepathyChannel);
+        EnsureTelepathy(slave, telepathyChannel.Value);
+        EnsureTelepathy(master, telepathyChannel.Value);
     }
 
     private void EnsureTelepathy(EntityUid target, ProtoId<TelepathyChannelPrototype> channelId)
@@ -378,9 +378,10 @@ public sealed class MindSlaveSystem : EntitySystem
         if (!TryComp<MindSlaveMasterComponent>(master, out var mindSlaveMaster)
             || mindSlaveMaster.EnslavedEntities.Count == 1)
         {
-            if (TryComp<TelepathyComponent>(slave, out var telepathyComponent))
+            if (TryComp<TelepathyComponent>(slave, out var telepathyComponent) &&
+                telepathyComponent.TelepathyChannelPrototype is { } telepathyChannel)
             {
-                _telepathy.FreeUniqueTelepathyChannel(telepathyComponent.TelepathyChannelPrototype);
+                _telepathy.FreeUniqueTelepathyChannel(telepathyChannel);
             }
             else
             {

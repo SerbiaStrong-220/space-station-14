@@ -85,6 +85,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
 
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtWaitress
+  name: waitress uniform
+  description: The uniform of an errand girl.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/waitress.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/waitress.rsi
+
   # Шеф повар
 
 - type: entity
@@ -134,6 +145,32 @@
 
 
 # Medical
+
+  # Интерн
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtIntern
+  name: intern's jumpskirt
+  description: Suit for female medical interns.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/intern.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/intern.rsi
+
+ # Главный врач
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtCMOCorporate
+  name: corporate CMO Jumpskirt
+  description: «A beautiful, stylish suit of a real chief medical officer. It emphasises the person's nature and the beauty of his charisma...» Nothing further on the unopened label.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/cmo_corpW.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/cmo_corpW.rsi
 
   # Парамед
 - type: entity
@@ -189,6 +226,19 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi
 
+  # Ассистент
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtTechAssistant
+  name: technical assistant's jumpskirt
+  description: Suit for female technical assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/tech_assist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/tech_assist.rsi
+
 # Синдикат
 
 - type: entity
@@ -219,7 +269,7 @@
 
   #Квартирмейстер
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtWarehouseman
   name: the overalls of the warehouse manager
   description: Practical, comfortable, movement-free and, most importantly, stylish jumpskirt. You have bad memories of your former boss with him.
@@ -234,7 +284,7 @@
 
 # Ассистент
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtBachelor
   name: bachelor's graduation uniform
   description: In vain students wait for a friend in the pub, Science is not without sacrifice.
@@ -245,9 +295,20 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/assistant_bachelor_uniform.rsi
 
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtResearchAssistant
+  name: research assistant's jumpskirt
+  description: Suit for female research assistants.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/science_assist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/science_assist.rsi
+
 # Ученый
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtPhdCandidate
   name: phd candidate uniform
   description: Students, prepare for a lecture.
@@ -260,7 +321,7 @@
 
 # Ведущий учёный
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtAssociateProfessor
   name: assistant professor's uniform
   description:
@@ -273,7 +334,7 @@
 
 # Научрук
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtProfessor
   name: professor's uniform
   description:

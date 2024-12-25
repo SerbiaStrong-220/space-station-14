@@ -57,7 +57,7 @@
 
 # ss220-maps
 
-- files: ["ss220-box.yml"]
+- files: ["frankenstein.yml"]
   authors: ACJM, Emisse, TheArturZh, ZoNeSRuS
 
 - files: ["nox.yml"]

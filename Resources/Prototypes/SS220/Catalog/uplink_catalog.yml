@@ -188,6 +188,19 @@
   - UplinkWearables
 
 - type: listing
+  id: UplinkBorgModuleFlamingAxe
+  name: uplink-borg-module-axe-name
+  description: uplink-borg-module-axe-desc
+  productEntity: BorgModuleFlamingAxe
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkDisruption
+
+- type: listing
   id: ClothingSilentShoes
   name: uplink-silent-shoes-name
   description: uplink-silent-shoes-desc
@@ -248,3 +261,25 @@
 #    Telecrystal: 4
 #  categories:
 #  - UplinkWeaponry
+
+- type: listing
+  id: UplinkBoxFakeOps
+  name: uplink-fake-ops-name
+  description: uplink-fake-ops-desc
+  icon: { sprite: Structures/Storage/Crates/toybox.rsi, state: crate_icon }
+  productEntity: CrateFunToyBoxFakeOps
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 4
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Clown
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle

@@ -45,6 +45,11 @@ public sealed partial class BorgSwitchableTypeComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<RadioChannelPrototype>[] InherentRadioChannels = [];
+
+    //ss220 borg switchable type fix start
+    [DataField]
+    public bool IsNeedToSwitch = true;
+    //ss220 borg switchable type fix end
 }
 
 /// <summary>

@@ -63,14 +63,15 @@
 
 - type: entity
   parent: ClothingOuterStorageBase
-  id: ClothingOuterSRTCoat
-  name: пальто ГСН
-  description: Пальто тёмно-синего цвета. Отличная защита от большинства видов урона.
+  id: ClothingOuterBSOCoat
+  name: the Blue Shield operative's coat
+  description: The coat is blue. Excellent protection against most types of damage.
+  suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/SRTCoat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/blueshield_coat.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Coats/SRTCoat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/blueshield_coat.rsi
   - type: TemperatureProtection
     heatingCoefficient: 0.1
     coolingCoefficient: 0.1
@@ -79,10 +80,10 @@
   - type: Armor
     modifiers:
       coefficients:
-        Heat: 0.7
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
+        Heat: 0.65
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.55
         Caustic: 0.75
 
 # Command

@@ -39,6 +39,7 @@
     - id: DarkReaperSpawn #ss220 darkreaper middle event
     - id: SpiderQueenSpawn #SS220 spider queen midround event
     - id: LoneOpsSpawn
+    - id: DerelictCyborgSpawn
 
 - type: entity
   id: BaseStationEvent
@@ -596,3 +597,24 @@
     - Service
     blacklist:
     - External # don't space everything
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerBorgDerelict
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictCyborg
+      min: 1
+      max: 1
+      pickPlayer: false
