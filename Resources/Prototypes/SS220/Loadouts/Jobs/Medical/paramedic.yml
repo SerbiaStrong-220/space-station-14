@@ -24,7 +24,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobParamedic
-      time: 72000 # 20 hrs
+      time: 234000 # 65 hrs
 
 # Jumpsuit
 - type: loadout
