@@ -226,7 +226,7 @@
   loadouts:
   - GlassesSecurity
   - CyberGlassesSecurity
-#  - GlassesBallistic #ss220 ballistic glasses fix
+  - GlassesBallistic
 
 - type: loadoutGroup
   id: DetectiveSecBackpack

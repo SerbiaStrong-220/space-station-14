@@ -70,7 +70,6 @@
   groups:
   - SecurityPilotHead
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
-  - SecurityPilotGlasses #ss220 ballistic glasses fix
   - SecurityNeck #holster loadout
   - SecurityJumpsuit
   - SecurityBackpack
