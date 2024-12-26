@@ -362,18 +362,6 @@
       raffle:
         settings: short
 
-#SS220 LostSoulsRevive begin
-- type: randomHumanoidSettings
-  id: VisitorTourist
-  parent: VisitorCivilian
-  components:
-    - type: GhostRole
-      name: job-name-tourist
-    - type: Loadout
-      prototypes: [ VisitorTourist ]
-      roleLoadout: [ RoleSurvivalStandard ]
-#SS220 LostSoulsRevive end
-
 - type: randomHumanoidSettings
   id: VisitorBartender
   parent: VisitorCivilian

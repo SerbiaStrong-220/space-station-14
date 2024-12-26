@@ -1,0 +1,9 @@
+- type: randomHumanoidSettings
+  id: VisitorTourist
+  parent: VisitorCivilian
+  components:
+    - type: GhostRole
+      name: job-name-tourist
+    - type: Loadout
+      prototypes: [ VisitorTourist ]
+      roleLoadout: [ RoleSurvivalStandard ]
