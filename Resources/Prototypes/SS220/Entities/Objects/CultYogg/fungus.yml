@@ -74,6 +74,10 @@
     interfaces:
       enum.FungusMachineUiKey.Key:
         type: FungusMachineBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      FungusMachine: !type:Container
+      showEnts: False
 
 - type: fungusMachineInventory
   id: CondimenttInventory

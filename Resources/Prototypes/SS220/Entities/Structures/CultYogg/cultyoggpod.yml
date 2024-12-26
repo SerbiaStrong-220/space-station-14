@@ -67,3 +67,8 @@
         base:
           True: { state: yoggpod-in }
           False: { state: yoggpod }
+  - type: ContainerContainer
+    containers:
+      cultyYoggPod: !type:ContainerSlot
+      showEnts: False
+

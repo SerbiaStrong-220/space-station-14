@@ -50,6 +50,10 @@
   - type: Appearance
   - type: CultYoggBuildingFrame
     eraseTime: 5
+  - type: ContainerContainer
+    containers:
+      cult-yogg-building-frame-storage: !type:Container
+      showEnts: False
 
 - type: entity
   parent: BaseWall
