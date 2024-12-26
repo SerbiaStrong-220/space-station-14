@@ -116,3 +116,19 @@
         acts: ["Destruction"]
   - type: CultYoggBuilding
     eraseTime: 3
+
+- type: entity
+  parent: Bed
+  id: CultYoggBed
+  suffix: CultYogg
+  components:
+  - type: Strap
+    hasSeatbelt: true
+    uncuffTimeModifier: 2.0
+  - type: CultYoggBuilding
+    eraseTime: 3
+    spawnOnErase:
+      - id: CableApcStack1Live
+        stackAmount: 3
+      - id: SheetTokl1
+        stackAmount: 5
