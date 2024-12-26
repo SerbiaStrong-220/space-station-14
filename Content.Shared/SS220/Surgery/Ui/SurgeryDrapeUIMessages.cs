@@ -11,8 +11,8 @@ public sealed class SurgeryStarted : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed class SurgeryDrapeUpdate(EntityUid user, EntityUid target) : BoundUserInterfaceState
+public sealed class SurgeryDrapeUpdate(NetEntity user, NetEntity target) : BoundUserInterfaceState
 {
-    public EntityUid User { get; } = user;
-    public EntityUid Target { get; } = target;
+    public NetEntity User { get; } = user;
+    public NetEntity Target { get; } = target;
 }

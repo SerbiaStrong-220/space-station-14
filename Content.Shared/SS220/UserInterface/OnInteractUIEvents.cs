@@ -26,6 +26,13 @@ public sealed class AfterInteractUIOpenEvent(EntityUid who, EntityUid target, En
     public readonly EntityUid Actor = actor;
 }
 
+public sealed class InteractUITargetUpdate(EntityUid who, EntityUid target, EntityUid actor) : EntityEventArgs
+{
+    public EntityUid User { get; } = who;
+    public EntityUid Target { get; } = target;
+    public readonly EntityUid Actor = actor;
+}
+
 
 public sealed class InteractUIPlayerChangedEvent : EntityEventArgs
 {

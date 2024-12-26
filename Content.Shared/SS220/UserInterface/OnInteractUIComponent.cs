@@ -10,6 +10,9 @@ public sealed partial class OnInteractUIComponent : Component
     [DataField(required: true, customTypeSerializer: typeof(EnumSerializer))]
     public Enum? Key;
 
+    [ViewVariables(VVAccess.ReadWrite)]
+    public EntityUid? Target;
+
     /// <summary>
     /// Whether the item must be held in one of the user's hands to work.
     /// This is ignored unless <see cref="RequiresComplex"/> is true.

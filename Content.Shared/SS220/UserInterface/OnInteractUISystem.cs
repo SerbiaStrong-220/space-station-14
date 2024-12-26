@@ -25,15 +25,26 @@ public sealed class OnInteractUsingSystem : EntitySystem
         args.Handled = InteractUI(args.User, entity, args.Target.Value);
     }
 
+
+    // TODO: make it possible when clicking on other target it will close old ui and open new one
+
     private bool InteractUI(EntityUid user, Entity<OnInteractUIComponent> uiEntity, EntityUid target)
     {
         if (uiEntity.Comp.Key == null || !_userInterface.HasUi(uiEntity.Owner, uiEntity.Comp.Key))
             return false;
 
-        if (_userInterface.IsUiOpen(uiEntity.Owner, uiEntity.Comp.Key, user))
+        if (_userInterface.IsUiOpen(uiEntity.Owner, uiEntity.Comp.Key, user)
+            && uiEntity.Comp.Target == target)
         {
+            uiEntity.Comp.Target = null;
             _userInterface.CloseUi(uiEntity.Owner, uiEntity.Comp.Key, user);
             return true;
+        }
+
+        if (uiEntity.Comp.Target != target)
+        {
+            var updateEvent = new InteractUITargetUpdate(user, target, user);
+            RaiseLocalEvent(uiEntity, updateEvent);
         }
 
         if (!_actionBlocker.CanInteract(user, uiEntity.Owner))
@@ -59,7 +70,7 @@ public sealed class OnInteractUsingSystem : EntitySystem
         //Let the component know a user opened it so it can do whatever it needs to do
         var aie = new AfterInteractUIOpenEvent(user, target, user);
         RaiseLocalEvent(uiEntity, aie);
-
+        uiEntity.Comp.Target = target;
         return true;
     }
 }

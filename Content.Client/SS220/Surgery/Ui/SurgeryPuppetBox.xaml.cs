@@ -84,6 +84,14 @@ public sealed partial class SurgeryPuppetBox : Control
             TexturePath = partTexturePath
         };
 
+        var partButton = new PuppetButton
+        {
+            Part = part,
+            // TODO: make it from enum of PuppetParts
+            SetSize = new Vector2(1f, 2f),
+            Margin = new Thickness(1f, 2f, 3f, 4f)
+        };
+
         bodyPartTexture.Add(part, texture);
 
         return texture;
@@ -208,6 +216,11 @@ public sealed partial class SurgeryPuppetBox : Control
             return null;
         return string.Join('/', [TexturePath, state]);
     }
+}
+
+public sealed class PuppetButton : BaseButton
+{
+    public PuppetParts Part;
 }
 
 

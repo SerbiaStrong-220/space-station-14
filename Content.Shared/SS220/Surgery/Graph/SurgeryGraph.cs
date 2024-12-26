@@ -24,10 +24,10 @@ public sealed partial class SurgeryGraphPrototype : IPrototype, ISerializationHo
     public PuppetParts TargetPuppetPart;
 
     [DataField]
-    public EntityWhitelist? PerformerWhitelist;
+    public List<IAbstractSurgeryGraphAvailabilityCondition> PerformerAvailabilityCondition = new();
 
     [DataField]
-    public EntityWhitelist? TargetWhitelist;
+    public List<IAbstractSurgeryGraphAvailabilityCondition> TargetAvailabilityCondition = new();
 
     [DataField("graph", priority: 0)]
     private List<SurgeryGraphNode> _graph = new();

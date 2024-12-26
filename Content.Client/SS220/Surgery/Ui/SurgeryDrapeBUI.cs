@@ -32,16 +32,35 @@ public sealed class SurgeryDrapeBUI : BoundUserInterface
         switch (state)
         {
             case SurgeryDrapeUpdate update:
-                _menu?.UpdateOperations(GetAvailableOperations(update.User, update.Target));
+                _menu?.UpdateOperations(GetAvailableOperations(EntMan.GetEntity(update.User),
+                                                                EntMan.GetEntity(update.Target)));
                 break;
         }
     }
 
     private List<SurgeryGraphPrototype> GetAvailableOperations(EntityUid user, EntityUid target)
     {
+
+        // soo...
+        // For what it needed: to exclude operations which is role specific (such as mindslavefix)
+        // also think of unavailability of some operation (no mindslave or you cant resurrect alive and etc)
+
+        // we kinda need to check roles of performer and components of target
+        // also also I want to have an advanced operation firstly to cure immobility or blindness <- how to do it in common way?
+        // Maybe I need interface like ISurgeryGraphCondition to make it obvious and adoptable <- true, soo true
+        // for beginning its better to prohibit making invalid operations.
+
+        // Performer shouldnt see surgery if he is not allowed
         var result = _prototypeManager.EnumeratePrototypes<SurgeryGraphPrototype>()
-            .Where(proto => _entityWhitelist.IsWhitelistPass(proto.TargetWhitelist, target)
-                            && _entityWhitelist.IsWhitelistPass(proto.PerformerWhitelist, user))
+            .Where((proto) =>
+            {
+                foreach (var condition in proto.PerformerAvailabilityCondition)
+                {
+                    if (!condition.Condition(user, EntMan, out _))
+                        return false;
+                }
+                return true;
+            })
             .ToList();
 
         return result;
