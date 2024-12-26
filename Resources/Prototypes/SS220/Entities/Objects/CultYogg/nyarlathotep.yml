@@ -32,12 +32,12 @@
     bodyStatus: InAir
     sleepingAllowed: false
   - type: Transform
-    noRot: true
   - type: PointLight
     enabled: true
     radius: 25
     color: "#FF0000"
   - type: Sprite
+    noRot: true
     drawdepth: AboveFovOverlay #above fkng sings
     sprite: SS220/Mobs/CultYogg/nyarlathotep.rsi
     shader: unshaded
@@ -69,8 +69,11 @@
         - AllMask
         layer:
         - AllMask
-  - type: NyarlathotepHorizon
-    colliderFixtureId: NyarlathotepHorizonCollider
+  - type: EventHorizon
+    radius: 4
+    canBreachContainment: true
+  #- type: NyarlathotepHorizon
+  #  colliderFixtureId: NyarlathotepHorizonCollider
   - type: NyarlathotepSearchTargets
     searchRange: 300
   - type: SpamEmitSound

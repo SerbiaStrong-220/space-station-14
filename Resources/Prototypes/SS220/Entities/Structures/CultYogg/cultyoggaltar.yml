@@ -6,6 +6,7 @@
   description: Mysterious altar of the cult.
   components:
   - type: Sprite
+    noRot: true
     sprite: SS220/Structures/CultYogg/yoggaltar.rsi
     state: cultaltar
   - type: Icon
@@ -28,7 +29,6 @@
     position: Down
     rotation: -90
   - type: Transform
-    noRot: true
   - type: Physics
     bodyType: Static
   - type: Fixtures

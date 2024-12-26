@@ -10,7 +10,6 @@
   - type: Physics
     bodyType: Static
   - type: Transform
-    noRot: true
   - type: Fixtures
     fixtures:
       fix1:
@@ -26,6 +25,7 @@
   - type: Rotatable
     rotateWhileAnchored: true
   - type: Sprite
+    noRot: true
     sprite: SS220/Structures/CultYogg/building_frame.rsi
     drawdepth: Objects
     layers:

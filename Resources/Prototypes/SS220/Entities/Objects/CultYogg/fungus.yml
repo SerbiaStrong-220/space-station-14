@@ -25,6 +25,7 @@
   - type: Anchorable
   - type: Pullable
   - type: Sprite
+    noRot: true
     sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi
     layers:
       - sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi
@@ -52,8 +53,6 @@
     damageContainer: Inorganic
     damageModifierSet: Metallic
   - type: Transform
-    noRot: true
-    anchored: true
   - type: PlantHolderVisuals
   - type: Fungus
   - type: FungusMachine

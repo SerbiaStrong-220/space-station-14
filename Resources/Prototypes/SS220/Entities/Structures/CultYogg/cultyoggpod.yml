@@ -20,7 +20,6 @@
     energy: 0.3
   - type: Damageable
   - type: Transform
-    noRot: true
   - type: Destructible
     thresholds:
     - trigger:

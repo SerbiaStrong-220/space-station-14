@@ -37,8 +37,6 @@
     noRot: true
   - type: InteractionOutline
   - type: Transform
-    noRot: true
-    anchored: true
   - type: CultPond
     solutionName: drink
   - type: CultYoggBuilding

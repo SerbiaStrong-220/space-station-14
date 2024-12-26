@@ -22,6 +22,15 @@
   - type: Body
     prototype: MiGoBody
   - type: ComplexInteraction #For UI opening only
+  - type: MeleeWeapon
+    altDisarm: false
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Blunt: 4
+        Slash: 7
+        Structural: 12 #ss220
   - type: Telepathy
     canSend: true
     telepathyChannelPrototype: TelepathyChannelYoggSothothCult
