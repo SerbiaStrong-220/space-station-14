@@ -46,7 +46,7 @@
         - MachineMask
   - type: InteractionOutline
   - type: Artifact
-    bonusProtype:  # SS220-BonusForFullyDiscovered - start
+    bonusPrototype:  # SS220-BonusForFullyDiscovered - start
     - BlueprintBeltChiefEngineer
     - BlueprintSeismicCharge
     - BlueprintFulton
@@ -63,7 +63,7 @@
     - BlueprintWelderIndustrialAdvanced
     - BlueprintSawAdvanced
     - BlueprintGlowstickBlue
-    - BlueprintSyndicateMicrowaveMachineCircuitboard 
+    - BlueprintSyndicateMicrowaveMachineCircuitboard
     - BlueprintPowerCellHyperPrinted
     - ClothingOuterCoatExpensive
     - PowerCellAntiqueProto
@@ -80,7 +80,6 @@
     - Chainsaw
     - EnergyDaggerLoud
     - BorgModuleSyndicateWeapon
-    - ClothingBackpackNuclear
     - WeaponMeleeToolboxRobust
     - PresentRandomUnsafe
     - TeslaToy

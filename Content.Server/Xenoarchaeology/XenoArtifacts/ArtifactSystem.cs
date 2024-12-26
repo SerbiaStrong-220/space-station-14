@@ -207,7 +207,7 @@ public sealed partial class ArtifactSystem : EntitySystem
 
         if (countPassedNode == component.NodeTree.Count && !component.IsBonusIssued)
         {
-            component.IsBonusIssued = false;
+            component.IsBonusIssued = true;
             SpawnBonus(uid, component);
         }
 
@@ -317,24 +317,21 @@ public sealed partial class ArtifactSystem : EntitySystem
     }
 
     // SS220-BonusForFullyDiscovered - start
-    
+
     private void SpawnBonus(EntityUid uid, ArtifactComponent component)
     {
-        if (component.BonusProtype == null)
+        if (component.BonusPrototype == null)
             return;
 
-        TrySpawnNextTo(component.BonusProtype[_random.Next(component.BonusProtype.Count - 1)], uid, out var protoEnt);
-
-        if (protoEnt == null)
+        var protoId = _random.Pick(component.BonusPrototype);
+        if(!TrySpawnNextTo(protoId, uid, out var protoUid))
             return;
 
-        var protoUid = (EntityUid)protoEnt;
-
-        var xform = Transform(protoUid);
+        var xform = Transform(protoUid.Value);
         var throwing = xform.LocalRotation.ToWorldVec() * 5f; // magic number throwing force
         var direction = xform.Coordinates.Offset(throwing);
 
-        _throwing.TryThrow(protoUid, direction);
+        _throwing.TryThrow(protoUid.Value, direction);
     }
 
     // SS220-BonusForFullyDiscovered - end

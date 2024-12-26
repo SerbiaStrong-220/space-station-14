@@ -101,8 +101,8 @@ public sealed partial class ArtifactComponent : Component
     [ViewVariables]
     public bool IsBonusIssued = false;
 
-    [DataField, ViewVariables]
-    public List<string>? BonusProtype;
+    [DataField("bonusPrototype", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>)), ViewVariables]
+    public List<string>? BonusPrototype;
 
     // SS220-BonusForFullyDiscovered - end
 
