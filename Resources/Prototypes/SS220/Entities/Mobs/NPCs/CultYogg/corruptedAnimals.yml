@@ -385,16 +385,9 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: fox
       sprite: SS220/Mobs/CultYogg/fox_corrupted.rsi
-  - type: SpriteMovement
-    movementLayers:
-      movement:
-        state: fox-moving
-    noMovementLayers:
-      movement:
-        state: fox
   - type: DamageStateVisuals
     states:
       Alive:
