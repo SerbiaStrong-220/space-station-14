@@ -1,4 +1,5 @@
-﻿- type: stack
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: stack
   id: Cablelive
   name: живые корни (ЛВ)
   icon: { sprite: SS220/Objects/Tools/CultYogg/cablecoils.rsi, state: coillv-30 }

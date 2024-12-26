@@ -203,6 +203,13 @@
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: chicken
       sprite: SS220/Mobs/CultYogg/chicken_corrupted.rsi
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: chicken-moving
+    noMovementLayers:
+      movement:
+        state: chicken
   - type: DamageStateVisuals
     states:
       Alive:
