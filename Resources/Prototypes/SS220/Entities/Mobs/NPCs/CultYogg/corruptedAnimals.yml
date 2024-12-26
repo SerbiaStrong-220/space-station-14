@@ -200,7 +200,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: chicken
       sprite: SS220/Mobs/CultYogg/chicken_corrupted.rsi
   - type: DamageStateVisuals
@@ -290,7 +290,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: tarantula
       sprite: SS220/Mobs/CultYogg/spider_corrupted.rsi
   - type: MobThresholds
@@ -322,7 +322,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: crab
       sprite: SS220/Mobs/CultYogg/crab_corrupted.rsi
   - type: MeleeWeapon
@@ -425,7 +425,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: frog
       sprite: SS220/Mobs/CultYogg/frog_corrupted.rsi
   - type: DamageStateVisuals
@@ -568,7 +568,7 @@
   - type: Sprite
     drawdepth: Mobs
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: hamster
       sprite: SS220/Mobs/CultYogg/hamster_corrupted.rsi
   - type: DamageStateVisuals

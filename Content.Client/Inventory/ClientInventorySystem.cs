@@ -163,12 +163,12 @@ namespace Content.Client.Inventory
         }
 
         public void UpdateSlot(EntityUid owner, InventorySlotsComponent component, string slotName,
-            bool? blocked = null, bool? highlight = null, bool? stuckOnEquip = null)
+            bool? blocked = null, bool? highlight = null, bool? stuckOnEquip = null)//ss220 StuckOnEquip
         {
             var oldData = component.SlotData[slotName];
             var newHighlight = oldData.Highlighted;
             var newBlocked = oldData.Blocked;
-            var newStuckOnEquip = oldData.StuckOnEquip; // //ss220 StuckOnEquip
+            var newStuckOnEquip = oldData.StuckOnEquip;//ss220 StuckOnEquip
 
             if (blocked != null)
                 newBlocked = blocked.Value;
@@ -275,7 +275,7 @@ namespace Content.Client.Inventory
             public string FullTextureName => SlotDef.FullTextureName;
 
             public SlotData(SlotDefinition slotDef, ContainerSlot? container = null, bool highlighted = false,
-                bool blocked = false, bool stuckOnEquip = false)
+                bool blocked = false, bool stuckOnEquip = false)//ss220 StuckOnEquip
             {
                 SlotDef = slotDef;
                 Highlighted = highlighted;
@@ -284,7 +284,7 @@ namespace Content.Client.Inventory
                 StuckOnEquip = stuckOnEquip; //ss220 StuckOnEquip
             }
 
-            public SlotData(SlotData oldData, bool highlighted = false, bool blocked = false, bool stuckOnEquip = false)
+            public SlotData(SlotData oldData, bool highlighted = false, bool blocked = false, bool stuckOnEquip = false)//ss220 StuckOnEquip
             {
                 SlotDef = oldData.SlotDef;
                 Highlighted = highlighted;
