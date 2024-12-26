@@ -3,7 +3,6 @@
 using System.Linq;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Ui;
-using Content.Shared.Whitelist;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 
@@ -12,7 +11,6 @@ namespace Content.Client.SS220.Surgery.Ui;
 public sealed class SurgeryDrapeBUI : BoundUserInterface
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
 
     [ViewVariables]
     private SurgeryDrapeMenu? _menu;

@@ -6,5 +6,4 @@
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
         <TextureRect Name="Background" Stretch="Keep" MouseFilter="Pass"
             TexturePath="/Textures/SS220/Interface/Surgery/puppet/box.png"/>
-        <surgery:PuppetButton Part="Head"/>
 </surgery:SurgeryPuppetBox>

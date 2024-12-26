@@ -39,8 +39,10 @@ public sealed partial class SurgeryPuppetBox : Control
 
     private SortedDictionary<PuppetParts, TextureRect> _parts = new();
     private SortedDictionary<PuppetParts, TextureRect> _highlightedPart = new();
+    private List<PuppetButton> _partButtons = new();
 
     private const string TexturePath = "/Textures/SS220/Interface/Surgery/puppet";
+    private Vector2 _baseTextureSize = new(42f, 42f);
 
     public SurgeryPuppetBox()
     {
@@ -61,11 +63,16 @@ public sealed partial class SurgeryPuppetBox : Control
 
             textPart = MakePuppetPartButton(part, _highlightedPart, GetPuppetPartSelectedTexturePath);
 
-            if (textPart == null)
-                continue;
+            if (textPart != null)
+            {
+                this.AddChild(textPart);
+                textPart.Visible = false;
+            }
 
-            this.AddChild(textPart);
-            textPart.Visible = false;
+            var button = MakePuppetPartButton(part);
+
+            if (button != null)
+                AddChild(button);
         }
 
         ResizeAll();
@@ -84,17 +91,34 @@ public sealed partial class SurgeryPuppetBox : Control
             TexturePath = partTexturePath
         };
 
-        var partButton = new PuppetButton
-        {
-            Part = part,
-            // TODO: make it from enum of PuppetParts
-            SetSize = new Vector2(1f, 2f),
-            Margin = new Thickness(1f, 2f, 3f, 4f)
-        };
-
         bodyPartTexture.Add(part, texture);
 
         return texture;
+    }
+
+    private Control? MakePuppetPartButton(PuppetParts part)
+    {
+        var offset = GetPartOffset(part);
+        var size = GetPartSize(part);
+
+        if (offset == null || size == null)
+            return null;
+
+        var thickness = GetPartThickness(offset.Value, size.Value, Scale);
+
+        var button = new PuppetButton
+        {
+            Part = part,
+            SetSize = size.Value * Scale,
+            Margin = thickness,
+        };
+
+        button.OnPressed += (_) =>
+        {
+            SelectedPart = part;
+        };
+
+        return button;
     }
 
     private void ResizeAll()
@@ -106,6 +130,17 @@ public sealed partial class SurgeryPuppetBox : Control
         foreach (var texture in _highlightedPart.Values)
         {
             texture.TextureScale = _scale;
+        }
+        foreach (var button in _partButtons)
+        {
+            var size = GetPartSize(button.Part);
+            var offset = GetPartOffset(button.Part);
+
+            if (size == null || offset == null)
+                return;
+
+            button.Margin = GetPartThickness(offset.Value, size.Value, Scale);
+            button.SetSize = size.Value * Scale;
         }
         Background.TextureScale = _scale;
     }
@@ -215,6 +250,55 @@ public sealed partial class SurgeryPuppetBox : Control
         if (state == null)
             return null;
         return string.Join('/', [TexturePath, state]);
+    }
+
+    private Vector2? GetPartSize(PuppetParts part)
+    {
+        return part switch
+        {
+            PuppetParts.Head => new Vector2(9, 7),
+            PuppetParts.Torso => new Vector2(9f, 9f),
+            PuppetParts.RightArm => new Vector2(4f, 6f),
+            PuppetParts.RightHand => new Vector2(4f, 4f),
+            PuppetParts.LeftArm => new Vector2(4f, 6f),
+            PuppetParts.LeftHand => new Vector2(4f, 4f),
+            PuppetParts.LeftLeg => new Vector2(4f, 7f),
+            PuppetParts.LeftFoot => new Vector2(6f, 3f),
+            PuppetParts.RightLeg => new Vector2(4f, 7f),
+            PuppetParts.RightFoot => new Vector2(6f, 3f),
+            PuppetParts.LowerTorso => new Vector2(9f, 4f),
+            _ => null
+        };
+    }
+
+    private Vector2? GetPartOffset(PuppetParts part)
+    {
+        return part switch
+        {
+            PuppetParts.Head => new Vector2(16f, 6f),
+            PuppetParts.Torso => new Vector2(16f, 13f),
+            PuppetParts.RightArm => new Vector2(12f, 15f),
+            PuppetParts.RightHand => new Vector2(12f, 21f),
+            PuppetParts.LeftArm => new Vector2(25f, 15f),
+            PuppetParts.LeftHand => new Vector2(26f, 21f),
+            PuppetParts.LeftLeg => new Vector2(21f, 26f),
+            PuppetParts.LeftFoot => new Vector2(21f, 32f),
+            PuppetParts.RightLeg => new Vector2(16f, 26f),
+            PuppetParts.RightFoot => new Vector2(14f, 32f),
+            PuppetParts.LowerTorso => new Vector2(16f, 22f),
+            _ => null
+        };
+    }
+
+    private Thickness GetPartThickness(Vector2 offset, Vector2 size, Vector2 scale)
+    {
+        var trueTextureSize = _baseTextureSize * scale;
+        Vector2 otherMargin = trueTextureSize - (offset + size) * scale;
+        return new Thickness(offset.X * scale.X, offset.Y * scale.Y, otherMargin.X, otherMargin.Y);
+    }
+    private Thickness GetPartThickness(Vector2 offset, Vector2 size)
+    {
+        return GetPartThickness(offset, size, Scale);
     }
 }
 
