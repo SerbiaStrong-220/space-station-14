@@ -17,7 +17,7 @@ public sealed partial class IntimidatePersonConditionComponent : Component
     public bool ObjectiveIsDone = false;
 
     public IntimidatePersonDescriptionType DescriptionType;
-    // Two descriptions comes to help player differ done object from one which isn't.
+    // Descriptions comes to help player differ done object from one which isn't.
 
     /// <summary>
     /// Description will be applied at start. No params in it

@@ -33,16 +33,15 @@ public sealed class DamageReceivedTrackerSystem : EntitySystem
             && entity.Comp.ResetTimeDamageOwnerTracked < _gameTiming.CurTime)
             return;
 
-        if (entity.Comp.DamageTracker.AllowedState == null
-            || !TryComp<MobStateComponent>(entity.Owner, out var mobState)
-            || !entity.Comp.DamageTracker.AllowedState!.Contains(mobState.CurrentState))
+        if (entity.Comp.DamageTracker.AllowedState != null
+            && (!TryComp<MobStateComponent>(entity.Owner, out var mobState)
+            || entity.Comp.DamageTracker.AllowedState!.Contains(mobState.CurrentState)))
             return;
 
         var damageGroup = _prototype.Index(entity.Comp.DamageTracker.DamageGroup);
         args.DamageDelta.TryGetDamageInGroup(damageGroup, out var trackableDamage);
         entity.Comp.CurrentAmount += trackableDamage;
 
-        if (trackableDamage > 0)
-            entity.Comp.ResetTimeDamageOwnerTracked = _gameTiming.CurTime + TimeSpan.FromSeconds(ResetDamageOwnerDelaySeconds);
+        entity.Comp.ResetTimeDamageOwnerTracked = _gameTiming.CurTime + TimeSpan.FromSeconds(ResetDamageOwnerDelaySeconds);
     }
 }
