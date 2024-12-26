@@ -49,11 +49,10 @@
   packetPrototype: NullificationShroomSeeds
   productPrototypes:
     - FoodNullificationShroomCult
-  harvestRepeat: Repeat
   lifespan: 25
   maturation: 12
-  production: 3
-  yield: 3
+  production: 2
+  yield: 1
   potency: 2
   growthStages: 7
   waterConsumption: 0.60

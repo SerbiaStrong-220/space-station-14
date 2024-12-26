@@ -148,9 +148,9 @@ public sealed partial class MiGoComponent : Component
     public bool ShouldBeCounted = false;
 
     /// <summary>
-    /// How long it takes to unlock another destination once one is taken.
+    /// How long it takes to be able to replace this migo
     /// </summary>
-    public TimeSpan BeforeReplacementCooldown = TimeSpan.FromSeconds(30);
+    public TimeSpan BeforeReplacementCooldown = TimeSpan.FromSeconds(300);
 
     /// <summary>
     /// Buffer to markup when time has come

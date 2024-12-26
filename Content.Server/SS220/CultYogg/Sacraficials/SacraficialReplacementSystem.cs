@@ -18,10 +18,10 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
     private Dictionary<(EntityUid, NetUserId), TimeSpan> _announceSchedule = new();
 
     //Count down the moment when sacraficial will be raplaced
-    private TimeSpan _beforeReplacementCooldown = TimeSpan.FromSeconds(300);//ToDo set timer
+    private TimeSpan _beforeReplacementCooldown = TimeSpan.FromSeconds(900);
 
     //Count down the moment when cultists will get an anounce about replacement
-    private TimeSpan _announceReplacementCooldown = TimeSpan.FromSeconds(30);//ToDo set timer
+    private TimeSpan _announceReplacementCooldown = TimeSpan.FromSeconds(300);
 
     public override void Initialize()
     {

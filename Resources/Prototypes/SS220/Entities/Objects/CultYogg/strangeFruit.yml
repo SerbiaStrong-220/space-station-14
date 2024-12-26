@@ -16,8 +16,6 @@
     seedId: StrangeFruit
   - type: Extractable
     grindableSolutionName: food
-  - type: DesiredFood
-    desireLevel: 1
   - type: Tag
     tags:
     - Omnivorous
@@ -107,7 +105,7 @@
 - type: seed
   id: StrangeFruit
   name: seeds-strange-fruit-name
-  noun: seeds-noun-spores
+  noun: seeds-noun-seeds
   displayName: seeds-strange-fruit-display-name
   plantRsi: SS220/Objects/CultYogg/strangefruit.rsi
   packetPrototype: CultStrangeFruitSeed
@@ -119,8 +117,6 @@
   yield: 1
   potency: 10
   growthStages: 7
-  waterConsumption: 0.60
-  nutrientConsumption: 0.50
   chemicals:
     Amatoxin:
       Min: 1

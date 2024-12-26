@@ -49,15 +49,12 @@
   packetPrototype: MiGomyceteSeeds
   productPrototypes:
     - FoodMiGomyceteCult
-  harvestRepeat: Repeat
   lifespan: 25
   maturation: 12
-  production: 3
-  yield: 3
+  production: 2
+  yield: 1
   potency: 2
   growthStages: 2
-  waterConsumption: 0.60
-  nutrientConsumption: 0.50
   chemicals:
     TheBloodOfYogg:
       Min: 2

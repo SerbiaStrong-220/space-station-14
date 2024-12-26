@@ -64,6 +64,7 @@
     <GuideEntityEmbed Entity="FoodMiGomyceteCult" Caption="Ми-Гомицелий"/>
     <GuideEntityEmbed Entity="ProductStrangeFruitCultYogg" Caption="Странный фрукт"/>
     <GuideEntityEmbed Entity="FoodNullificationShroomCult" Caption="Нулевой гриб"/>
+     <GuideEntityEmbed Entity="FoodSidiousShroomCult" Caption="Сидиус гриб"/>
   </Box>
   - Ми-Гомицелий
   Гриб необходимый для обращения новых лиц, а так же для возвышения в Ми-Го. (для возвышения культисту нужно употребить не менее 3х)
@@ -77,6 +78,9 @@
 
   - Нулевой гриб
   Гриб, позволяющий сбросить приросшие предметы или отменить незапланированное возвышение.
+
+  - Сидиус гриб
+  Невероятно питательный гриб, способен говорят, что древние воины сним держали десятки лет осады.
 
   ##Священник
   Особенную роль по борьбе с культистами имеет священник.

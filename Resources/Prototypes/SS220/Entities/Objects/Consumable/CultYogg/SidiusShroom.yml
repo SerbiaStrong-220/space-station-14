@@ -12,10 +12,12 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 2.0
+        maxVol: 30.0
         reagents:
-        - ReagentId: ElixirOfLiberation
-          Quantity: 2.0
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Water
+          Quantity: 15
   - type: Sprite
     sprite: SS220/Objects/CultYogg/sidious_shroom.rsi
     state: produce
@@ -47,17 +49,18 @@
   packetPrototype: SidiousShroomSeeds
   productPrototypes:
     - FoodSidiousShroomCult
-  harvestRepeat: Repeat
-  lifespan: 25
+  lifespan: 55
   maturation: 12
-  production: 3
-  yield: 3
-  potency: 2
+  production: 2
+  yield: 1
+  potency: 30
   growthStages: 7
-  waterConsumption: 0.60
-  nutrientConsumption: 0.50
   chemicals:
-    ElixirOfLiberation:
-      Min: 2
-      Max: 2
+    Nutriment:
+      Min: 15
+      Max: 15
+      PotencyDivisor: 1
+    Water:
+      Min: 15
+      Max: 15
       PotencyDivisor: 1
