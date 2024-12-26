@@ -16,7 +16,7 @@
 #    prototype: Nyarlathotep
 
 - type: entity
-  id: Nyarlathotep
+  id: MobNyarlathotep
   name: Nyarlathotep
   description: The embodiment of coming chaos, the messenger of the Gods. He has no clear shape. According to Nyarlathotep, he has thousands of forms.
   components:
@@ -38,7 +38,7 @@
     color: "#FF0000"
   - type: Sprite
     noRot: true
-    drawdepth: AboveFovOverlay #above fkng sings
+    drawdepth: Ghosts
     sprite: SS220/Mobs/CultYogg/nyarlathotep.rsi
     shader: unshaded
     layers:
@@ -86,5 +86,5 @@
         variation: 0.05
   - type: WarpPoint
     follow: true
-    location: Nyarlathotep
+    location: NyarlathotepPoint
 
