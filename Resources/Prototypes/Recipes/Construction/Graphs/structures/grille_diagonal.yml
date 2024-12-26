@@ -7,7 +7,7 @@
         - to: grilleDiagonal
           completed:
             - !type:SnapToGrid
-              southRotation: true
+              southRotation: false #ss220 rotation fix
           steps:
             - material: MetalRod
               amount: 2
@@ -16,7 +16,7 @@
         - to: clockworkGrilleDiagonal
           completed:
             - !type:SnapToGrid
-              southRotation: true
+              southRotation: false #ss220 rotation fix
           steps:
             - material: MetalRod
               amount: 2

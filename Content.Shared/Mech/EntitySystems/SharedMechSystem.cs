@@ -61,6 +61,7 @@ public abstract class SharedMechSystem : EntitySystem
         SubscribeLocalEvent<MechPilotComponent, CanAttackFromContainerEvent>(OnCanAttackFromContainer);
         SubscribeLocalEvent<MechPilotComponent, AttackAttemptEvent>(OnAttackAttempt);
     }
+
     //SS220-AddMechToClothing-start
     /// <summary>
     /// Responsible for logic if mech is clothing
@@ -75,20 +76,24 @@ public abstract class SharedMechSystem : EntitySystem
         _actions.AddAction(args.Wearer, ref ent.Comp.MechClothingUiActionEntity, ent.Comp.MechClothingUiAction, ent.Owner);
         _actions.AddAction(args.Wearer, ref ent.Comp.MechClothingGrabActionEntity, ent.Comp.MechClothingGrabAction);
     }
+
     /// <summary>
     /// Responsible for logic if mech is clothing
     /// </summary>
     private void OnUnequip(Entity<MechComponent> ent, ref ClothingGotUnequippedEvent args)
     {
-        if (_net.IsClient)
-            return;
-
         RemComp<MechClothingComponent>(args.Wearer);
 
         _actions.RemoveProvidedActions(args.Wearer, ent.Owner);
+
+        if (ent.Comp.MechClothingGrabActionEntity == null)
+            return;
+
         _actions.RemoveAction(args.Wearer, ent.Comp.MechClothingGrabActionEntity);
+        ent.Comp.MechClothingGrabActionEntity = null;
     }
     //SS220-AddMechToClothing-end
+
     private void OnToggleEquipmentAction(EntityUid uid, MechComponent component, MechToggleEquipmentEvent args)
     {
         if (args.Handled)
@@ -129,7 +134,7 @@ public abstract class SharedMechSystem : EntitySystem
         component.EquipmentContainer = _container.EnsureContainer<Container>(uid, component.EquipmentContainerId);
         component.BatterySlot = _container.EnsureContainer<ContainerSlot>(uid, component.BatterySlotId);
 
-        if (TryComp<MechRobotComponent>(uid, out var _))
+        if (HasComp<MechRobotComponent>(uid))
             component.PilotSlot = _container.EnsureContainer<ContainerSlot>(uid, component.PilotSlotId);
 
         UpdateAppearance(uid, component);
@@ -366,7 +371,7 @@ public abstract class SharedMechSystem : EntitySystem
     //SS220-AddMechToClothing-start
     public bool IsEmpty(MechComponent component, EntityUid uid)
     {
-        if (TryComp<MechRobotComponent>(uid, out var _))
+        if (HasComp<MechRobotComponent>(uid))
             return component.PilotSlot.ContainedEntity == null;
 
         return true;
@@ -498,7 +503,7 @@ public abstract class SharedMechSystem : EntitySystem
         args.Handled = true;
 
         //SS220-AddMechToClothing-start
-        if (!TryComp<MechRobotComponent>(uid, out var _))
+        if (!HasComp<MechRobotComponent>(uid))
             return;
         //SS220-AddMechToClothing-end
 

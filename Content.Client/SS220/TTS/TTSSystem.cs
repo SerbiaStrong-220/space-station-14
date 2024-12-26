@@ -38,11 +38,6 @@ public sealed partial class TTSSystem : EntitySystem
     /// </summary>
     private const float WhisperFade = 4f;
 
-    /// <summary>
-    /// The volume at which the TTS sound will not be heard.
-    /// </summary>
-    private const float MinimalVolume = -10f;
-
     private float _volume = 0.0f;
     private float _radioVolume = 0.0f;
     private int _fileIdx = 0;
@@ -284,7 +279,7 @@ public sealed partial class TTSSystem : EntitySystem
     {
         var volume = isRadio ? _radioVolume : isAnounce ? VolumeAnnounce : _volume;
 
-        volume = MinimalVolume + SharedAudioSystem.GainToVolume(volume);
+        volume = SharedAudioSystem.GainToVolume(volume);
 
         if (isWhisper)
         {

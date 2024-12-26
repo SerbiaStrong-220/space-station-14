@@ -269,11 +269,11 @@
   - Лаврова
 
 
-### GSN
+### Blue Shield Operative
 
 #Временно не используется
 - type: dataset
-  id: NamesFirstGSNLeader
+  id: NamesFirstBSOLeader
   values:
   - Коммандер
   - Полковник
@@ -282,7 +282,7 @@
   - Лейтенант
 
 - type: dataset
-  id: NamesFirstGSNMember
+  id: NamesFirstBSOMember
   values:
   - Прапорщик
   - Старшина
@@ -292,7 +292,7 @@
 
 
 - type: dataset
-  id: NamesLastGSNMember
+  id: NamesLastBSOMember
   values:
   - Антарес
   - Андромеда

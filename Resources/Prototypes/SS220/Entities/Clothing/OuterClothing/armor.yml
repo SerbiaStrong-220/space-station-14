@@ -13,6 +13,52 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Armor/whitecapcarapace.rsi
 
+- type: entity
+  parent: ClothingOuterArmorBasic
+  id: ClothingOuterArmorBlueShieldAssault
+  name: assault vest "Blue Shield"
+  description: Designed for those who value their life and health above all else.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Armor/blueshield_bulletproof.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Armor/blueshield_bulletproof.rsi
+  - type: Armor
+    modifiers:
+      coefficients: # A peculiar mixture of bulletproof vests and riot armor
+        Blunt: 0.4
+        Slash: 0.5
+        Piercing: 0.4
+        Heat: 0.8
+  - type: ExplosionResistance
+    damageCoefficient: 0.60
+
+- type: entity
+  parent: ClothingOuterArmorBasic
+  id: ClothingOuterArmorBlueShieldScale
+  name: blueshield scaly vest
+  description: A body armor of a strange shape, resembling the scales of a dragon. Manufacturers say that the body armor material is able to withstand the dragon's breath.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Armor/blueshield_reflec.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Armor/blueshield_reflec.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.7
+        Piercing: 0.75
+        Heat: 0.4
+  - type: Reflect
+    reflectProb: 0.30
+    reflects:
+      - Energy
+
 # Centcom
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]

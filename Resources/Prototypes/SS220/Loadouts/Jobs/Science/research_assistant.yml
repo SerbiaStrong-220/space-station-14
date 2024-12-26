@@ -19,6 +19,16 @@
 
 # Jumpsuit
 - type: loadout
+  id: ResearchAssistantJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitResearchAssistant
+
+- type: loadout
+  id: ResearchAssistantJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtResearchAssistant
+
+- type: loadout
   id: ResearchAssistantJumpsuitTurtleneck
   effects:
   - !type:GroupLoadoutEffect
