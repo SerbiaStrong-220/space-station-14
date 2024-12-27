@@ -8,8 +8,8 @@
   markingLimits: MobArachnidMarkingLimits
   dollPrototype: MobArachnidDummy
   skinColoration: Hues
-  maleFirstNames: names_arachnid_first
-  femaleFirstNames: names_arachnid_first
+  maleFirstNames: names_arachnid_male #ss220-arachnid-lore-names
+  femaleFirstNames: names_arachnid_female #ss220-arachnid-lore-names
   maleLastNames: names_arachnid_last # Corvax-LastnameGender
   femaleLastNames: names_arachnid_last # Corvax-LastnameGender
 
