@@ -67,7 +67,7 @@
     deleteOnCollide: false
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
-  - type: SpawnOnDespawn
+  - type: SpawnOnTrigger
     prototype: SpitballerExplotionPart
   - type: Tag
     tags:
