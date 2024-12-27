@@ -52,11 +52,11 @@
 - type: entity
   name: explosive bubbles bullets
   id: SpitballerGunBullet
-  parent: BaseBullet
+  parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
-  - type: TimedDespawn
-    lifetime: 3
+  #- type: TimedDespawn
+  #  lifetime: 3
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Ammunition/CultYogg/explosive_bubble.rsi
     layers:
@@ -67,8 +67,15 @@
     deleteOnCollide: false
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
-  - type: SpawnOnTrigger
-    prototype: SpitballerExplotionPart
+  #- type: SpawnOnTrigger
+  #  prototype: SpitballerExplotionPart
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 30
+    intensitySlope: 3
+    maxIntensity: 3.7
+    canCreateVacuum: false
   - type: Tag
     tags:
       - HideContextMenu
