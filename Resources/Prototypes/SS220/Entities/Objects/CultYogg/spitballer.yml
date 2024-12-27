@@ -71,13 +71,13 @@
     layers:
     - state: bubble
       shader: unshaded
-  - type: EmbeddableProjectile
+  #- type: EmbeddableProjectile
   - type: Projectile
     deleteOnCollide: false
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
-  - type: SpawnOnDespawn
-    prototype: SpitballerExplotionPart
+  #- type: SpawnOnDespawn
+  #  prototype: SpitballerExplotionPart
   - type: Tag
     tags:
       - HideContextMenu
