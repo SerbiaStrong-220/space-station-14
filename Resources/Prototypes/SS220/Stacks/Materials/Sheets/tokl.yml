@@ -9,6 +9,6 @@
 - type: material
   id: Tokl
   name: material-tokl
-  stackEntity: SheetTokl
+  stackEntity: SheetTokl1
   icon: { sprite: SS220/Objects/Materials/Sheets/tokl.rsi, state: tokl }
   price: 0.03
