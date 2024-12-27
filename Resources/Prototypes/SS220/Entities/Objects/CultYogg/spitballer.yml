@@ -62,7 +62,7 @@
     layers:
     - state: bubble
       shader: unshaded
-  - type: EmbeddableProjectile
+  #- type: EmbeddableProjectile
   - type: Projectile
     deleteOnCollide: false
     soundHit:
