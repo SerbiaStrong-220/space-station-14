@@ -83,6 +83,9 @@
     base: cult
   - type: CultYoggBuilding
     eraseTime: 3
+  - type: IconSmooth
+    key: walls
+    base: cult
 
 - type: entity
   parent: BaseMaterialDoorNavMap
