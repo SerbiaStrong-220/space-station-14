@@ -10,6 +10,7 @@ using Content.Server.SS220.CultYogg.Sacraficials;
 using Content.Server.SS220.CultYogg.Nyarlathotep;
 using Content.Server.RoundEnd;
 using Content.Server.Zombies;
+using Content.Shared.Audio;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind;
@@ -35,6 +36,8 @@ using Content.Server.SS220.Objectives.Systems;
 using Content.Server.SS220.Objectives.Components;
 using Robust.Shared.Utility;
 using Content.Server.Pinpointer;
+using Content.Server.Audio;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 
@@ -53,6 +56,8 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly SharedRoleSystem _role = default!;
     [Dependency] private readonly NavMapSystem _navMap = default!;
+    [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     private List<List<string>> _sacraficialTiers = [];
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
@@ -412,16 +417,21 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     #region RoundEnding
     private void OnGodSummoned(ref CultYoggSummonedEvent args)
     {
+        GetCultGameRule(out var cultRuleComp);
+
+        if (cultRuleComp == null)
+            return;
+
         foreach (var station in _station.GetStations())
         {
             _chat.DispatchStationAnnouncement(station, Loc.GetString("cult-yogg-shuttle-call", ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString(args.Entity)))), colorOverride: Color.Crimson);
         }
         _roundEnd.RequestRoundEnd(DefaultShuttleArriving, null);
 
-        GetCultGameRule(out var cultRuleComp);
+        var selectedSong = _audio.GetSound(cultRuleComp.SummonMusic);
 
-        if (cultRuleComp == null)
-            return;
+        if (!string.IsNullOrEmpty(selectedSong))
+            _sound.DispatchStationEventMusic(args.Entity, selectedSong, StationEventMusicType.Nuke);//should i rename somehow?
 
         cultRuleComp.Summoned = true;//Win EndText
     }

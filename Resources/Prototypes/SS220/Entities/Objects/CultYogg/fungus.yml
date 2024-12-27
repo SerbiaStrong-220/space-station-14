@@ -77,7 +77,7 @@
   - type: ContainerContainer
     containers:
       FungusMachine: !type:Container
-      showEnts: False
+        showEnts: False
 
 - type: fungusMachineInventory
   id: CondimenttInventory

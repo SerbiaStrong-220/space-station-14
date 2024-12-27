@@ -53,7 +53,7 @@
   - type: ContainerContainer
     containers:
       cult-yogg-building-frame-storage: !type:Container
-      showEnts: False
+        showEnts: False
 
 - type: entity
   parent: BaseWall

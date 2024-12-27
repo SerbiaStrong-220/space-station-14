@@ -4,10 +4,7 @@ using Robust.Shared.Timing;
 using Content.Shared.Mobs.Systems;
 using Robust.Server.GameObjects;
 using Content.Shared.SS220.CultYogg.MiGo;
-using Content.Shared.Audio;
-using Content.Server.Audio;
 using Content.Shared.Humanoid;
-using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.SS220.CultYogg.Nyarlathotep;
 
@@ -21,8 +18,7 @@ public sealed class NyarlathotepTargetSearcherSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -33,9 +29,6 @@ public sealed class NyarlathotepTargetSearcherSystem : EntitySystem
 
     private void OnCompInit(Entity<NyarlathotepSearchTargetsComponent> uid, ref ComponentStartup args)
     {
-        var selectedSong = _audio.GetSound(uid.Comp.SummonMusic);
-        if (!string.IsNullOrEmpty(selectedSong))
-            _sound.DispatchStationEventMusic(uid, selectedSong, StationEventMusicType.Nuke);//ToDo should i rename?
         var ev = new CultYoggSummonedEvent(uid);
         RaiseLocalEvent(uid, ref ev, true);
     }

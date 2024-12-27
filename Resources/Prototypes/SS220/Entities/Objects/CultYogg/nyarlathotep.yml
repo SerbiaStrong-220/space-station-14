@@ -42,7 +42,7 @@
     sprite: SS220/Mobs/CultYogg/nyarlathotep.rsi
     shader: unshaded
     layers:
-    - state: nyarlatoteph
+    - state: nyarlathoteph
   - type: ChasingWalk
     impulseInterval: 1
     minSpeed: 3

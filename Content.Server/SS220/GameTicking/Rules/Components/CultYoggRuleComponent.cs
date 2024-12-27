@@ -73,6 +73,9 @@ public sealed partial class CultYoggRuleComponent : Component
 
     [DataField]
     public bool Summoned = false;
+
+    [DataField("summonMusic")]
+    public SoundSpecifier SummonMusic = new SoundCollectionSpecifier("CultYoggMusic");//ToDo make own
     public enum SelectionState
     {
         WaitingForSpawn = 0,
