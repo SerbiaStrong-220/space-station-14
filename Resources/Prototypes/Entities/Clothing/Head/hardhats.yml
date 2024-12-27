@@ -119,9 +119,9 @@
   description: A hard hat, painted in white, used in dangerous working conditions to protect the head. Comes with a built-in flashlight.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardhats/white.rsi
+    sprite: SS220/Clothing/Head/Hardhats/white.rsi #SS220 XMAS
   - type: Clothing
-    sprite: Clothing/Head/Hardhats/white.rsi
+    sprite: SS220/Clothing/Head/Hardhats/white.rsi #SS220 XMAS
 
 - type: entity
   parent: ClothingHeadHatHardhatBase
@@ -130,9 +130,9 @@
   description: A hard hat, painted in yellow, used in dangerous working conditions to protect the head. Comes with a built-in flashlight.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardhats/yellow.rsi
+    sprite: SS220/Clothing/Head/Hardhats/yellow.rsi #SS220 XMAS
   - type: Clothing
-    sprite: Clothing/Head/Hardhats/yellow.rsi
+    sprite: SS220/Clothing/Head/Hardhats/yellow.rsi #SS220 XMAS
   #ss220 special_sounds start
   - type: SpecialSounds
   - type: Vocal
