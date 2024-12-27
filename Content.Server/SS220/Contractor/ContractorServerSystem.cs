@@ -226,9 +226,9 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         }
     }
 
-    private List<(NetEntity Uid, string Location, FixedPoint2 TcReward, string Difficulty)> GeneratePositionsForTarget()
+    private List<(NetEntity Uid, string Location, FixedPoint2 TcReward, Difficulty Difficulty)> GeneratePositionsForTarget()
     {
-        List<(NetEntity Uid, string Location, FixedPoint2 TcReward, string Difficulty)> allLocations = [];
+        var allLocations = new List<(NetEntity Uid, string Location, FixedPoint2 TcReward, Difficulty Difficulty)>();
 
         var query = EntityQueryEnumerator<ContractorWarpPointComponent>();
 
@@ -237,26 +237,26 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             allLocations.Add((GetNetEntity(uid), comp.LocationName, comp.AmountTc, comp.Difficulty));
         }
 
-        var easyLocations = allLocations.Where(loc => loc.Difficulty == "Easy").ToList();
-        var mediumLocations = allLocations.Where(loc => loc.Difficulty == "Medium").ToList();
-        var hardLocations = allLocations.Where(loc => loc.Difficulty == "Hard").ToList();
+        var easyLocations = allLocations.Where(loc => loc.Difficulty == Difficulty.Easy).ToList();
+        var mediumLocations = allLocations.Where(loc => loc.Difficulty == Difficulty.Medium).ToList();
+        var hardLocations = allLocations.Where(loc => loc.Difficulty == Difficulty.Hard).ToList();
 
         _random.Shuffle(easyLocations);
         _random.Shuffle(mediumLocations);
         _random.Shuffle(hardLocations);
 
-        var result = new List<(NetEntity uid, string Location, FixedPoint2 Value, string Difficulty)>();
+        allLocations.Clear();
 
         if (easyLocations.Count > 0)
-            result.Add(easyLocations[0]);
+            allLocations.Add(easyLocations[0]);
 
         if (mediumLocations.Count > 0)
-            result.Add(mediumLocations[0]);
+            allLocations.Add(mediumLocations[0]);
 
         if (hardLocations.Count > 0)
-            result.Add(hardLocations[0]);
+            allLocations.Add(hardLocations[0]);
 
-        return result;
+        return allLocations;
     }
 
     public bool IsCloseWithPosition(NetEntity playerNet)
@@ -270,12 +270,20 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             contractorComponent.CurrentContractData is null)
             return false;
 
-        var playerPosition = GetNetCoordinates(Transform(player).Coordinates).Position;
+        var targetEntity = GetEntity(contractorComponent.CurrentContractEntity);
 
-        var targetPosition = GetNetCoordinates(Transform(GetEntity(contractorComponent.CurrentContractData!.Value.AmountPositions.First().Uid)).Coordinates).Position;
+        if (!TryComp<ContractorTargetComponent>(targetEntity, out var targetComponent))
+            return false;
 
-        var distance = (playerPosition - targetPosition).Length();
+        var playerPosition = Transform(player).Coordinates.Position;
+        var targetPosition = Transform(targetEntity.Value).Coordinates.Position;
 
-        return distance < 1f; //4 tiles distance
+        var targetPortalPosition = targetComponent.PortalPosition.Position;
+
+
+        var isPlayerCloseToPortal = (playerPosition - targetPortalPosition).Length() < 1f;
+        var isTargetCloseToPortal = (targetPosition - targetPortalPosition).Length() < 1f;
+
+        return isPlayerCloseToPortal && isTargetCloseToPortal; //tile distance
     }
 }

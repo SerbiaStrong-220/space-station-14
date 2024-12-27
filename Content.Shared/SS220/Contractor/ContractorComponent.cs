@@ -48,5 +48,5 @@ public sealed partial class ContractorComponent : Component
 public struct ContractorContract
 {
     public string Job;
-    public List<(NetEntity Uid, string Location, FixedPoint2 TcReward, string Difficulty)> AmountPositions;
+    public List<(NetEntity Uid, string Location, FixedPoint2 TcReward, Difficulty Difficulty)> AmountPositions;
 }

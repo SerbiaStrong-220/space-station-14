@@ -106,9 +106,12 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_contractorComponent == null)
             return;
 
-        _menu.ReputationCountLabel.Text = $"Текущая репутация: " + _contractorComponent.Reputation;
-        _menu.TcAmountLabel.Text = $"Имеется ТК: " + _contractorComponent.AmountTc;
-        _menu.ContractsFinishedAmountLabel.Text = $"Выполнено контрактов: " + _contractorComponent.ContractsCompleted;
+        _menu.ReputationCountLabel.Text =
+            Loc.GetString("contractor-uplink-current-reputation", ("currentReputation", _contractorComponent.Reputation));
+        _menu.TcAmountLabel.Text =
+            Loc.GetString("contractor-uplink-current-tc", ("amountTc", _contractorComponent.AmountTc));
+        _menu.ContractsFinishedAmountLabel.Text =
+            Loc.GetString("contractor-uplink-current-contracts-completed", ("amountContractsCompleted", _contractorComponent.ContractsCompleted));
     }
 
     private void UpdateContracts(EntityUid contractor, EntityUid pda)

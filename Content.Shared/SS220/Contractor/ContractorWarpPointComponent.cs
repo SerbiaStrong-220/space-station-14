@@ -1,6 +1,6 @@
 using Content.Shared.FixedPoint;
 
-namespace Content.Server.SS220.Contractor;
+namespace Content.Shared.SS220.Contractor;
 
 [RegisterComponent]
 public sealed partial class ContractorWarpPointComponent : Component
@@ -12,5 +12,13 @@ public sealed partial class ContractorWarpPointComponent : Component
     public FixedPoint2 AmountTc;
 
     [DataField]
-    public string Difficulty;
+    public Difficulty Difficulty;
+}
+
+[Serializable]
+public enum Difficulty
+{
+    Easy,
+    Medium,
+    Hard
 }

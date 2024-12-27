@@ -1,22 +1,21 @@
-using Content.Shared.DoAfter;
 using Content.Shared.Popups;
-using Robust.Shared.Network;
+using Content.Shared.SS220.Contractor;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
-namespace Content.Shared.SS220.Contractor;
+namespace Content.Server.SS220.Contractor;
 
 /// <summary>
 /// This handles...
 /// </summary>
-public sealed class SharedContractorPortalSystem : EntitySystem
+public sealed class ContractorPortalServerSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly ContractorServerSystem _contractorServer = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<ContractorPortalOnTriggerComponent, StartCollideEvent>(OnEnterPortal);
@@ -65,11 +64,10 @@ public sealed class SharedContractorPortalSystem : EntitySystem
         contractorComponent.AmountTc += targetComponent.AmountTc;
         contractorComponent.ContractsCompleted++;
 
-        if (_net.IsServer)
-        {
-            _uiSystem.ServerSendUiMessage(GetEntity(contractorComponent.PdaEntity)!.Value, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
-            _uiSystem.ServerSendUiMessage(GetEntity(contractorComponent.PdaEntity)!.Value, ContractorPdaKey.Key, new ContractorCompletedContractMessage());
-        }
+        _uiSystem.ServerSendUiMessage(GetEntity(contractorComponent.PdaEntity)!.Value, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
+        _uiSystem.ServerSendUiMessage(GetEntity(contractorComponent.PdaEntity)!.Value, ContractorPdaKey.Key, new ContractorCompletedContractMessage());
+
+        _contractorServer.GenerateContracts((contractorEntity, contractorComponent));
 
         _transformSystem.SetCoordinates(args.OtherEntity, Transform(contractorEntity).Coordinates); // tp target to other map in future
 
