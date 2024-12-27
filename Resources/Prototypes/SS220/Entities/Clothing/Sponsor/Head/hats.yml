@@ -210,8 +210,8 @@
 - type: entity
   parent: ClothingSponsorHeadBase
   id: ClothingHeadHatMoryak
-  name: беретка морячка
-  description: Берет матроса с рыжим помпончиком.
+  name: moryak beret
+  description: Sailor's beret with a orange tampon.
   suffix: Шлёпа
   components:
   - type: Sprite

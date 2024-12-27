@@ -114,7 +114,7 @@
   id: ClothingNeckCloakFloppa
   name: шкура Шлёпы
   description: Это - не то, что вы думаете
-  suffix: Sponsor # А точно ли он спонсор?
+  suffix: Sponsor
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/FloppaCloak.rsi

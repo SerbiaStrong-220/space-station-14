@@ -12,7 +12,7 @@
     sprite: SS220/Clothing/Head/Hardhats/violet.rsi
 
 # Уборщик
- 
+
 - type: entity
   parent: ClothingHeadHatHardhatBase
   id: ClothingHeadHatHardhatJanitorJR

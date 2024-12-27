@@ -13,7 +13,6 @@
     sprite: SS220/Clothing/Head/Hoods/Coat/hoodcentcom.rsi
 
 #Экзокостюм утилизаторов - капюшон
-
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatHoodExosuitSalvage

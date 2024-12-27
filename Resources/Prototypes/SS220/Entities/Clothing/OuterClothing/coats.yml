@@ -204,6 +204,7 @@
         Radiation: 0.9
 
 # Сервис
+# Музыкант
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatDanger
@@ -215,6 +216,104 @@
     sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterApronBard #SS220 bard loadout
+  name: bard cape
+  description: Emphasizes the owner's style.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/apronbard.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/apronbard.rsi
+
+# Шеф повар
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterJacketChefWhite
+  name: белый жакет шеф-повара
+  description: Фартук-жакет, используемый первоклассным шеф-поваром.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_white.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterJacketChefGreen
+  name: зелёный жакет шеф-повара
+  description: Фартук-жакет, используемый первоклассным шеф-поваром.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_green.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterJacketChefBlack
+  name: чёрный жакет шеф-повара
+  description: Фартук-жакет, используемый первоклассным шеф-поваром.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_black.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_black.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterJacketChefNanotrasen
+  name: жакет заслуженного шеф-повара NanoTrasen
+  description: Фартук-жакет, используемый шеф-поваром высочайшего класса - его мастерство неоспоримо.
+  suffix: Не маппить, Сеньор
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_nt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_nt.rsi
+
+# Ботаник
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterApronBotanistGreen
+  name: green apron
+  suffix: Botanical
+  description: A thick green-apron, perfect for insulating your soft flesh from spills, soil and thorns.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/apron-botanist-green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/apron-botanist-green.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterApronBotanistBrown
+  name: brown apron
+  suffix: Botanical
+  description: A thick brown-apron, perfect for insulating your soft flesh from spills, soil and thorns.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/apron-botanist-brown.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/apron-botanist-brown.rsi
+
+# Священник
+
+- type: entity
+  parent: ClothingOuterBaseToggleable
+  id: ClothingOuterHoodieChaplainWhite
+  name: chaplain's white hoodie
+  description: White and strict chaplain hoodie.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/chaplain_hoodiewhite.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/chaplain_hoodiewhite.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodChaplainHoodWhite
 
 # WMT Ebent begin
 - type: entity
