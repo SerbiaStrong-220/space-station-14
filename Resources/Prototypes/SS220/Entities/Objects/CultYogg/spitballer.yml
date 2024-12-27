@@ -13,26 +13,26 @@
       soundEmpty: null
       fireRate: 20
       projectileSpeed: 5
-    - type: ProjectileBatteryAmmoProvider
-      fireCost: 200
-      proto: SpitballerGunBullet
-    - type: Battery
-      maxCharge: 300
-      startingCharge: 300
-    #- type: BasicEntityAmmoProvider
+    #- type: ProjectileBatteryAmmoProvider
+    #  fireCost: 200
     #  proto: SpitballerGunBullet
-    #  capacity: 1
+    #- type: Battery
+    #  maxCharge: 300
+    #  startingCharge: 300
+    #- type: BatterySelfRecharger
+    #  autoRecharge: true
+    #  autoRechargeRate: 25
+    - type: BasicEntityAmmoProvider
+      proto: SpitballerGunBullet
+      capacity: 1
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 10
+      rechargeSound: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_reload.ogg
     - type: Sprite
       sprite: SS220/Objects/Weapons/Guns/cult_yogg_spitballer.rsi
       layers:
         - state: icon
     - type: Appearance
-    #- type: RechargeBasicEntityAmmo
-    #  rechargeCooldown: 10
-    #  rechargeSound: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_reload.ogg
-    - type: BatterySelfRecharger
-      autoRecharge: true
-      autoRechargeRate: 25
     - type: Item
       size: Ginormous
     - type: IncreaseDamageOnWield
@@ -71,7 +71,7 @@
     layers:
     - state: bubble
       shader: unshaded
-  #- type: EmbeddableProjectile
+  - type: EmbeddableProjectile
   - type: Projectile
     deleteOnCollide: false
     soundHit:
