@@ -34,7 +34,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         Dictionary<Gas, float> gasRatios = new();
 
         if (!comp.AccumulatedGasesMoles.TryGetValue(Gas.Oxygen, out _))
-            InitGasMolesAccumulator(crystal.Comp);
+            return;
 
         foreach (var gas in Enum.GetValues<Gas>())
         {
