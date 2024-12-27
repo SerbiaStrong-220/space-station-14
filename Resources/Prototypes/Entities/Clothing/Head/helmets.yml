@@ -34,9 +34,9 @@
       params:
         volume: 2
   - type: Sprite
-    sprite: Clothing/Head/Helmets/security.rsi
+    sprite: SS220/Clothing/Head/Helmets/security.rsi #SS220 XMAS
   - type: Clothing
-    sprite: Clothing/Head/Helmets/security.rsi
+    sprite: SS220/Clothing/Head/Helmets/security.rsi #SS220 XMAS
   - type: Tag
     tags:
     - WhitelistChameleon
