@@ -13,15 +13,6 @@
       soundEmpty: null
       fireRate: 20
       projectileSpeed: 5
-    #- type: ProjectileBatteryAmmoProvider
-    #  fireCost: 200
-    #  proto: SpitballerGunBullet
-    #- type: Battery
-    #  maxCharge: 300
-    #  startingCharge: 300
-    #- type: BatterySelfRecharger
-    #  autoRecharge: true
-    #  autoRechargeRate: 25
     - type: BasicEntityAmmoProvider
       proto: SpitballerGunBullet
       capacity: 1
@@ -76,8 +67,8 @@
     deleteOnCollide: false
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
-  #- type: SpawnOnDespawn
-  #  prototype: SpitballerExplotionPart
+  - type: SpawnOnDespawn
+    prototype: SpitballerExplotionPart
   - type: Tag
     tags:
       - HideContextMenu
