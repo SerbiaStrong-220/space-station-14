@@ -259,6 +259,8 @@
           - NukeOpsUplink
     - !type:ListingStockLimitByTraitorsCondition #amount kit for traitor count / 4
       contractorPercentage: 0.25
+    - !type:BuyTimeForListingCondition #time for buy contractor kit
+      timeAmount: 10
 #ss220 contractor add end
 
 #- type: listing

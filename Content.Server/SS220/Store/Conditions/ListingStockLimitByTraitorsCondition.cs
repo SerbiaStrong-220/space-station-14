@@ -9,7 +9,7 @@ namespace Content.Server.SS220.Store.Conditions;
 /// <summary>
 /// Condition that limits the stock availability of a listing based on the percentage of traitors.
 /// </summary>
-public sealed partial class ListingStockLimitByTraitorsCondition  : ListingCondition
+public sealed partial class ListingStockLimitByTraitorsCondition : ListingCondition
 {
     private GameTicker _gameTicker;
 
@@ -26,17 +26,13 @@ public sealed partial class ListingStockLimitByTraitorsCondition  : ListingCondi
         var totalPurchases = 0;
         var storeCounts = args.EntityManager.EntityQuery<StoreComponent>();
 
-        //count purchases for all stores
         foreach (var store in storeCounts)
         {
-            ListingDataWithCostModifiers first = new();
-            foreach (var x in store.FullListingsCatalog.Where(x => x.ID == args.Listing.ID))
+            var listing = store.FullListingsCatalog.FirstOrDefault(x => x.ID == args.Listing.ID);
+            if (listing != null)
             {
-                first = x;
-                break;
+                totalPurchases += listing.PurchaseAmount;
             }
-
-            totalPurchases += first.PurchaseAmount;
         }
 
         var ruleEntities = _gameTicker.GetAddedGameRules();
