@@ -36,12 +36,12 @@
     heal:
       types:
         Slash: -6
-        Blunt: -6
+        Blunt: -10
         Piercing: -6
         Heat: -4
         Cold: -4
         Shock: -4
-        Airloss: -5
+        Airloss: -10
         Caustic: -4
         Bloodloss: -10
   - type: CultYoggBuilding
