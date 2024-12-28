@@ -15,7 +15,7 @@ entities:
     - type: MetaData
       name: UC-CVPOD
     - type: Transform
-      parent: 1
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:

@@ -23,7 +23,7 @@ entities:
       name: UC-CV "Kebab-Roll"
     - type: Transform
       pos: -0.421875,-0.6875
-      parent: 1
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
