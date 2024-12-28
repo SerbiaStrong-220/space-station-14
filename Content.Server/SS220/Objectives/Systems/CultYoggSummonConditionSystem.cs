@@ -67,7 +67,7 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
         if (ruleComp is null)
             return;
 
-        ent.Comp.reqSacrAmount = ruleComp.ReqAmountOfSacrifices;
+        ent.Comp.reqSacrAmount = ruleComp.AmountOfSacrificesToGodSummon;
     }
     private void SacraficialsUpdate(Entity<CultYoggSummonConditionComponent> ent)
     {

@@ -4,6 +4,7 @@ using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server.SS220.GameTicking.Rules.Components;
 
@@ -14,7 +15,10 @@ public sealed partial class CultYoggRuleComponent : Component
     /// General requirements
     /// </summary>
     [DataField]
-    public int ReqAmountOfSacrifices = 3;
+    public int AmountOfSacrificesToGodSummon = 3;
+
+    [DataField]
+    public int AmountOfSacrificesToWarningAnouncement = 2;
 
     [DataField]
     public int ReqAmountOfMiGo = 3;
@@ -61,6 +65,9 @@ public sealed partial class CultYoggRuleComponent : Component
 
     [ValidatePrototypeId<EntityPrototype>]
     public string MindCultYoggAntagId = "MindRoleCultYogg";
+
+    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    public string GodPrototype = "MobNyarlathotep";
 
     //telephaty channel
     [DataField]

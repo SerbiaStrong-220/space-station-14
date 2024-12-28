@@ -38,6 +38,9 @@ using Robust.Shared.Utility;
 using Content.Server.Pinpointer;
 using Content.Server.Audio;
 using Robust.Shared.Audio.Systems;
+using Content.Server.AlertLevel;
+using Robust.Shared.Player;
+using Robust.Shared.Map;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 
@@ -58,6 +61,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     [Dependency] private readonly NavMapSystem _navMap = default!;
     [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
 
     private List<List<string>> _sacraficialTiers = [];
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
@@ -72,7 +76,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         SubscribeLocalEvent<SacraficialReplacementEvent>(SacraficialReplacement);
 
-        SubscribeLocalEvent<CultYoggSummonedEvent>(OnGodSummoned);
+        SubscribeLocalEvent<CultYoggRuleComponent, CultYoggSacrificedTargetEvent>(OnTargetSacrificed);
 
         SubscribeLocalEvent<CultYoggAnouncementEvent>(SendCultAnounce);
     }
@@ -254,6 +258,25 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     #endregion
 
     #region Sacraficials Events
+    private void OnTargetSacrificed(Entity<CultYoggRuleComponent> entity, ref CultYoggSacrificedTargetEvent args)
+    {
+        var (_, comp) = entity;
+        var (altar, altarComp) = args.Altar;
+        comp.AmountOfSacrifices++;
+
+        if (comp.AmountOfSacrifices == comp.AmountOfSacrificesToWarningAnouncement)
+        {
+            foreach (var station in _station.GetStations())
+            {
+                _chat.DispatchStationAnnouncement(station, Loc.GetString("cult-yogg-cultists-warning"), playSound: false, colorOverride: Color.Red);
+                _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
+                _alertLevel.SetLevel(station, "gamma", true, true, true);
+            }
+        }
+
+        if (comp.AmountOfSacrifices == comp.AmountOfSacrificesToGodSummon)
+            SummonGod(entity, Transform(altar).Coordinates);
+    }
 
     private void SacraficialReplacement(ref SacraficialReplacementEvent args)
     {
@@ -415,27 +438,25 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     #endregion
 
     #region RoundEnding
-    private void OnGodSummoned(ref CultYoggSummonedEvent args)
+    private void SummonGod(Entity<CultYoggRuleComponent> entity, EntityCoordinates coordinates)
     {
-        GetCultGameRule(out var cultRuleComp);
-
-        if (cultRuleComp == null)
-            return;
+        var (_, comp) = entity;
+        var godUid = Spawn(comp.GodPrototype, coordinates);
 
         foreach (var station in _station.GetStations())
         {
-            _chat.DispatchStationAnnouncement(station, Loc.GetString("cult-yogg-shuttle-call", ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString(args.Entity)))), colorOverride: Color.Crimson);
+            _chat.DispatchStationAnnouncement(station, Loc.GetString("cult-yogg-shuttle-call", ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString(godUid)))), colorOverride: Color.Crimson);
+            _alertLevel.SetLevel(station, "delta", true, true, true);
         }
         _roundEnd.RequestRoundEnd(DefaultShuttleArriving, null);
 
-        var selectedSong = _audio.GetSound(cultRuleComp.SummonMusic);
+        var selectedSong = _audio.GetSound(comp.SummonMusic);
 
         if (!string.IsNullOrEmpty(selectedSong))
-            _sound.DispatchStationEventMusic(args.Entity, selectedSong, StationEventMusicType.Nuke);//should i rename somehow?
+            _sound.DispatchStationEventMusic(godUid, selectedSong, StationEventMusicType.Nuke);//should i rename somehow?
 
-        cultRuleComp.Summoned = true;//Win EndText
+        comp.Summoned = true;//Win EndText
     }
-
     #endregion
 
     #region EndText

@@ -21,4 +21,5 @@ objective-cult-yogg-sacrafice-start = Призовите темного бога
 objective-cult-yogg-sacrafice-task-job =  в должности
 objective-condition-cult-yogg-sacrafice-person = {$targetName}, в должности {CAPITALIZE($job)}
 
+cult-yogg-cultists-warning = Внимание! На станции зафиксировано множественное размножение грибов-паразитов. Совокупность данных с сенсоров подтверждает угрозу культа, ликвидируйте её любой ценой!
 cult-yogg-shuttle-call = Датчики станции зафиксировали { $location } гигантский подвижный объект. Аварийный шаттл был отправлен для эвакуации оставшегося персонала.
