@@ -50,13 +50,11 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         switch (message)
         {
-            case ContractorUpdateButtonStateMessage ev:
-                _menu.ExecutionButton.Disabled = !ev.IsEnabled;
-                break;
             case ContractorUpdateStatsMessage:
                 UpdateStats();
                 UpdateContracts(EntMan.GetEntity(_contractorPdaComponent.PdaOwner)!.Value, Owner);
                 break;
+
             case ContractorCompletedContractMessage:
             {
                 foreach (var buttons in _allPositionButtons)
@@ -88,6 +86,17 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         UpdateContracts(_playerManager.LocalSession.AttachedEntity.Value, Owner);
         UpdateHub(_contractorPdaComponent.AvailableItems);
+    }
+
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        if (_menu == null)
+            return;
+
+        if (state is not ContractorExecutionBoundUserInterfaceState cast)
+            return;
+
+        _menu.UpdateExecutionState(cast);
     }
 
     protected override void Dispose(bool disposing)

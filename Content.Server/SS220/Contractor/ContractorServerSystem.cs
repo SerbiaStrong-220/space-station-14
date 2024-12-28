@@ -2,17 +2,21 @@ using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.DoAfter;
 using Content.Server.Hands.Systems;
+using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
 using Content.Server.Stack;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
+using Content.Shared.Mind;
+using Content.Shared.Roles;
 using Content.Shared.SS220.Contractor;
 using Content.Shared.SSDIndicator;
 using Content.Shared.Store;
 using Robust.Server.GameObjects;
-using Robust.Shared.Containers;
+using Robust.Shared.Enums;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Contractor;
@@ -26,13 +30,13 @@ public sealed class ContractorServerSystem : SharedContractorSystem
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly JobSystem _jobs = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedMindSystem _mindSystem = default!;
+    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
 
-    //TODO client system
     public override void Initialize()
     {
         base.Initialize();
@@ -63,10 +67,10 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
             if (_uiSystem.IsUiOpen(GetEntity(comp.PdaEntity)!.Value, ContractorPdaKey.Key))
             {
-                _uiSystem.ServerSendUiMessage(
+                _uiSystem.SetUiState(
                     GetEntity(comp.PdaEntity.Value),
                     ContractorPdaKey.Key,
-                    new ContractorUpdateButtonStateMessage(isEnabled));
+                    new ContractorExecutionBoundUserInterfaceState(isEnabled));
             }
         }
     }
@@ -137,6 +141,8 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             contractorPdaComponent.CurrentContractData = ev.ContractData;
             Dirty(GetEntity(ev.Entity), contractorPdaComponent);
         }
+
+        HandleContractAccepted(ev.ContractEntity, ev.Actor);
     }
 
     // TODO on server //DONE
@@ -189,9 +195,40 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         EnsureComp<ContractorComponent>(ev.Actor);
     }
 
-    public void GenerateContracts(Entity<ContractorComponent> ent)
+    public void HandleContractAccepted(NetEntity acceptedPlayer, EntityUid contractor)
     {
-        var playerPool = _lookup.GetEntitiesInRange(ent.Owner, 10f).ToList();
+        var query = EntityQueryEnumerator<ContractorComponent>();
+
+        while (query.MoveNext(out var uid, out var contractorComp))
+        {
+            if (uid == contractor)
+                continue;
+
+            if (!contractorComp.Contracts.Remove(acceptedPlayer))
+                continue;
+
+            if (contractorComp.Contracts.Count >= 5)
+                continue;
+
+            var newContract = GenerateContractForContractor(uid);
+
+            if (newContract != null)
+            {
+                contractorComp.Contracts[newContract.Value.Target] = newContract.Value.Contract;
+            }
+
+            Dirty(uid, contractorComp);
+
+            _uiSystem.ServerSendUiMessage(GetEntity(contractorComp.PdaEntity!.Value), ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
+        }
+    }
+
+    private (NetEntity Target, ContractorContract Contract)? GenerateContractForContractor(EntityUid contractor)
+    {
+        var playerPool = _playerManager.Sessions
+            .Where(p => p is { Status: SessionStatus.InGame, AttachedEntity: not null })
+            .Select(p => p.AttachedEntity!.Value)
+            .ToList();
 
         _random.Shuffle(playerPool);
 
@@ -199,20 +236,60 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         {
             if (HasComp<GhostComponent>(player) ||
                 HasComp<ContractorComponent>(player) ||
-                HasComp<SSDIndicatorComponent>(player) ||
                 HasComp<ContractorTargetComponent>(player) ||
-                !HasComp<MetaDataComponent>(player))
+                (TryComp<SSDIndicatorComponent>(player, out var ssdIndicatorComponent) && ssdIndicatorComponent.IsSSD))
             {
                 continue;
             }
 
-            if (_container.IsEntityInContainer(player))
+            if (!_mindSystem.TryGetMind(player, out var mindId, out _))
+                continue;
+
+            if (_roleSystem.MindHasRole<TraitorRoleComponent>(mindId))
+                continue;
+
+            _jobs.MindTryGetJobName(mindId, out var jobName);
+
+            return (GetNetEntity(player),
+                new ContractorContract
+                {
+                    Job = jobName,
+                    AmountPositions = GeneratePositionsForTarget(),
+                });
+        }
+
+        return null;
+    }
+
+    public void GenerateContracts(Entity<ContractorComponent> ent)
+    {
+        var playerPool = _playerManager.Sessions
+            .Where(p => p is { Status: SessionStatus.InGame, AttachedEntity: not null })
+            .Select(p => p.AttachedEntity!.Value)
+            .ToList();
+
+        _random.Shuffle(playerPool);
+
+        foreach (var player in playerPool)
+        {
+            if (HasComp<GhostComponent>(player) ||
+                HasComp<ContractorComponent>(player) ||
+                HasComp<ContractorTargetComponent>(player) ||
+                (TryComp<SSDIndicatorComponent>(player, out var ssdIndicatorComponent) && ssdIndicatorComponent.IsSSD))
+            {
+                continue;
+            }
+
+            if (!_mindSystem.TryGetMind(player, out var mindId, out _))
+                continue;
+
+            if (_roleSystem.MindHasRole<TraitorRoleComponent>(mindId))
                 continue;
 
             if (ent.Comp.Contracts.ContainsKey(GetNetEntity(player)))
                 continue;
 
-            _jobs.MindTryGetJobName(player, out var jobName);
+            _jobs.MindTryGetJobName(mindId, out var jobName);
 
             if (ent.Comp.Contracts is { Count: >= 5 })
                 return;

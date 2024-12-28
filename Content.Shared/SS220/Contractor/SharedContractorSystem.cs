@@ -37,8 +37,13 @@ public abstract class SharedContractorSystem : EntitySystem
         if (ent.Comp.PdaOwner != null)
             return;
 
-        if (!HasComp<ContractorComponent>(args.Actor))
+        if (!TryComp<ContractorComponent>(args.Actor, out var contractorComponent))
             return;
+
+        if (contractorComponent.PdaEntity != null)
+            return;
+
+        contractorComponent.PdaEntity = GetNetEntity(ent.Owner);
 
         ent.Comp.PdaOwner = GetNetEntity(args.Actor);
 
@@ -74,7 +79,7 @@ public abstract class SharedContractorSystem : EntitySystem
         return !TryComp<ContractorPdaComponent>(pdaEntity, out var contractorPdaComponent) ? null : contractorPdaComponent.Contracts;
     }
 
-    public void AddContractsToPda(EntityUid contractor, EntityUid pdaEntity)
+    private void AddContractsToPda(EntityUid contractor, EntityUid pdaEntity)
     {
         if (!TryComp<ContractorPdaComponent>(pdaEntity, out var contractorPdaComponent))
             return;

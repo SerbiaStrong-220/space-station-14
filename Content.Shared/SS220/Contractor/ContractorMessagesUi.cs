@@ -4,6 +4,22 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.Contractor;
 
 [Serializable, NetSerializable]
+public sealed class ContractorExecutionBoundUserInterfaceState : BoundUserInterfaceState
+{
+    public bool IsEnabled;
+
+    public ContractorExecutionBoundUserInterfaceState(bool isEnabled)
+    {
+        IsEnabled = isEnabled;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class ContractorUpdateContractsMessage : BoundUserInterfaceMessage
+{
+}
+
+[Serializable, NetSerializable]
 public sealed class ContractorGenerateContractsMessage : BoundUserInterfaceMessage
 {
 }
@@ -21,17 +37,6 @@ public sealed class ContractorCompletedContractMessage : BoundUserInterfaceMessa
 [Serializable, NetSerializable]
 public sealed class ContractorExecutionButtonPressedMessage : BoundUserInterfaceMessage
 {
-}
-
-[Serializable, NetSerializable]
-public sealed class ContractorUpdateButtonStateMessage : BoundUserInterfaceMessage
-{
-    public bool IsEnabled { get; }
-
-    public ContractorUpdateButtonStateMessage(bool isEnabled)
-    {
-        IsEnabled = isEnabled;
-    }
 }
 
 [Serializable, NetSerializable]

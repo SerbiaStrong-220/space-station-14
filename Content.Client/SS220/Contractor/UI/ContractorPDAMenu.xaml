@@ -8,24 +8,22 @@
 
     <Control Name="MainContainer">
         <PanelContainer StyleClasses="ContractorPanel">
-            <Control>
-                <PanelContainer Name="BackgroundPanel" StyleClasses="ContractorFontPanel">
-                    <Label Text="Итог" Margin="55 55 0 0" VerticalAlignment="Top"/>
-                    <Label Name="ReputationCountLabel" Access="Public" Text="Текущая репутация: " Margin="230 55 0 0" VerticalAlignment="Top"/>
+            <PanelContainer Name="BackgroundPanel" StyleClasses="ContractorFontPanel">
+                <Label Text="Итог" Margin="55 55 0 0" VerticalAlignment="Top"/>
+                <Label Name="ReputationCountLabel" Access="Public" Text="Текущая репутация: " Margin="230 55 0 0" VerticalAlignment="Top"/>
 
-                    <Label Name="TcAmountLabel" Text="Имеется ТК:" Access="Public" Margin="55 108 294 0" VerticalAlignment="Top"/>
-                    <Label Name="ContractsFinishedAmountLabel" Text="Выполнено контрактов: " Access="Public" Margin="230 108 0 0" VerticalAlignment="Top"/>
+                <Label Name="TcAmountLabel" Text="Имеется ТК:" Access="Public" Margin="55 108 294 0" VerticalAlignment="Top"/>
+                <Label Name="ContractsFinishedAmountLabel" Text="Выполнено контрактов: " Access="Public" Margin="230 108 0 0" VerticalAlignment="Top"/>
 
-                    <ui220:SpriteButton Name="WithdrawButton" Margin="0 133 255 0" VerticalAlignment="Top" SetSize="138 35" StyleClasses="ContractorWithdrawButton"/>
-                    <ui220:SpriteButton Name="ContractsButton" Margin="0 218 269 0" VerticalAlignment="Top" MaxSize="138 35" StyleClasses="ContractorContractsButton"/>
-                    <ui220:SpriteButton Name="HubButton" Margin="20 218 0 0" VerticalAlignment="Top" MaxSize="138 35" StyleClasses="ContractorHubButton"/>
-                    <ui220:SpriteButton Name="ExecutionButton" Access="Public" Margin="321 184 0 0" VerticalAlignment="Top" MaxSize="138 40" StyleClasses="ContractorExecutionButton"/>
-                    <ScrollContainer Name="ContractsList" Margin="51 260 50 51" VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
-                        <BoxContainer Name="ContractsListPanel" Orientation="Vertical" Access="Public" SeparationOverride="5"  HorizontalExpand="True" VerticalExpand="False"/>
-                        <BoxContainer Name="HubPanel" Visible="False" Orientation="Vertical" Access="Public" SeparationOverride="5"  HorizontalExpand="True" VerticalExpand="False"/>
-                    </ScrollContainer>
-                </PanelContainer>
-            </Control>
+                <ui220:SpriteButton Name="WithdrawButton" Margin="0 133 255 0" VerticalAlignment="Top" SetSize="138 35" StyleClasses="ContractorWithdrawButton"/>
+                <ui220:SpriteButton Name="ContractsButton" Margin="0 218 269 0" VerticalAlignment="Top" MaxSize="138 35" StyleClasses="ContractorContractsButton"/>
+                <ui220:SpriteButton Name="HubButton" Margin="20 218 0 0" VerticalAlignment="Top" MaxSize="138 35" StyleClasses="ContractorHubButton"/>
+                <ui220:SpriteButton Name="ExecutionButton" Access="Public" Margin="321 184 0 0" VerticalAlignment="Top" MaxSize="138 40" StyleClasses="ContractorExecutionButton"/>
+                <ScrollContainer Name="ContractsList" Margin="51 260 50 51" VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
+                    <BoxContainer Name="ContractsListPanel" Orientation="Vertical" Access="Public" SeparationOverride="5"  HorizontalExpand="True" VerticalExpand="False"/>
+                    <BoxContainer Name="HubPanel" Visible="False" Orientation="Vertical" Access="Public" SeparationOverride="5"  HorizontalExpand="True" VerticalExpand="False"/>
+                </ScrollContainer>
+            </PanelContainer>
         </PanelContainer>
 
     </Control >
