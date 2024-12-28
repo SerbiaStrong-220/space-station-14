@@ -181,23 +181,25 @@
   description: It's bright red and rather crisp, much like security's victims tend to be.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hos.rsi #ss220 fix
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-left
-        sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
-      right:
-      - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-right
-        sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hos.rsi #ss220 fix
+  #ss220 fix start
+#  - type: Item
+#    inhandVisuals:
+#      left:
+#      - state: inhand-left
+#        color: "#C12D30"
+#        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+#      - state: overlay-inhand-left
+#        sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
+#      right:
+#      - state: inhand-right
+#        color: "#C12D30"
+#        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+#      - state: overlay-inhand-right
+#        sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
+  #ss220 fix end
 
 - type: entity
   parent: [ClothingUniformSkirtBase]

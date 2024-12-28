@@ -1,0 +1,140 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: spitballer cult yogg
+  parent: [BaseItem, CultYoggRestrictedItem]
+  id: Spitballer
+  suffix: CultYogg
+  components:
+    - type: CultYoggWeapon
+      item: CultYoggCocoonSpitballer
+    - type: Gun
+      soundGunshot: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_shot.ogg
+      soundEmpty: null
+      fireRate: 20
+      projectileSpeed: 5
+    - type: BasicEntityAmmoProvider
+      proto: SpitballerGunBullet
+      capacity: 1
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 10
+      rechargeSound: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_reload.ogg
+    - type: Sprite
+      sprite: SS220/Objects/Weapons/Guns/cult_yogg_spitballer.rsi
+      layers:
+        - state: icon
+    - type: Appearance
+    - type: Item
+      size: Ginormous
+    - type: IncreaseDamageOnWield
+      damage:
+       types:
+          Brute: 30
+          Stamina: 80
+    - type: GenericVisualizer
+      visuals:
+        enum.AmmoVisuals.HasAmmo:
+          sprite:
+            False: {state: "icon_empty"}
+            True: {state: "icon"}
+    - type: GunByHasAmmoVisuals
+      spriteLayer: null
+      inhandVisuals:
+        left:
+        - state: fullammo-inhand-left
+          shader: unshaded
+        right:
+        - state: fullammo-inhand-right
+          shader: unshaded
+    - type: StuckOnEquip
+      inHandItem: true
+
+- type: entity
+  name: explosive bubbles bullets
+  id: SpitballerGunBullet
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  #- type: TimedDespawn
+  #  lifetime: 3
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/CultYogg/explosive_bubble.rsi
+    layers:
+    - state: bubble
+      shader: unshaded
+  #- type: EmbeddableProjectile
+  - type: Projectile
+    deleteOnCollide: false
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  #- type: SpawnOnTrigger
+  #  prototype: SpitballerExplotionPart
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 30
+    intensitySlope: 3
+    maxIntensity: 3.7
+    canCreateVacuum: false
+  - type: Tag
+    tags:
+      - HideContextMenu
+
+- type: entity
+  parent: CollideRune
+  id: SpitballerExplotionPart
+  name: SpitballerExplotionPart
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Explosive
+      explosionType: Default
+      maxIntensity: 3.4
+      intensitySlope: 3
+      totalIntensity: 20
+      canCreateVacuum: false
+    - type: SpamEmitSound
+      minInterval: 1
+      maxInterval: 1.5
+      sound:
+        collection: CultYoggExplosiveBubbleSounds
+        params:
+          maxDistance: 10
+          volume: -3
+    - type: TriggerOnSpawn
+    - type: FlashOnTrigger
+      range: 7
+    - type: Sprite
+      sprite: Structures/Magic/Cult/trap.rsi
+      layers:
+        - state: trap
+          color: '#FF770055'
+    - type: TwoStageTrigger
+      triggerDelay: 0.5
+      components:
+        - type: AmbientSound
+          enabled: true
+          volume: -5
+          range: 14
+          sound:
+            path: /Audio/Effects/Grenades/Supermatter/whitehole_loop.ogg
+        - type: GravityWell
+          maxRange: 7
+          baseRadialAcceleration: -10
+          baseTangentialAcceleration: -5
+          gravPulsePeriod: 0.1
+        - type: SingularityDistortion
+          intensity: -10
+          falloffPower: 1.5
+        - type: PointLight
+          enabled: true
+          color: "#ffffff"
+          energy: 8
+          radius: 6
+          softness: 1
+          offset: "0, 0"
+        - type: ExplodeOnTrigger
+        - type: SoundOnTrigger
+          sound:
+            path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
+            params:
+              volume: 15

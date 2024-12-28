@@ -85,6 +85,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
 
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtWaitress
+  name: waitress uniform
+  description: The uniform of an errand girl.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/waitress.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/waitress.rsi
+
   # Шеф повар
 
 - type: entity

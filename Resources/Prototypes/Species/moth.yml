@@ -18,6 +18,7 @@
 - type: speciesBaseSprites
   id: MobMothSprites
   sprites:
+    Special: MobHumanoidAnyMarking #SS220-CultYogg
     Head: MobMothHead
     Snout: MobHumanoidAnyMarking
     Chest: MobMothTorso

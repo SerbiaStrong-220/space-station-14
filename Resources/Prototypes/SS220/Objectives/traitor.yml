@@ -37,7 +37,7 @@
 
 - type: entity
   parent: BaseTraitorStealObjective
-  id: ClothingOuterReactiveArmorObjective
+  id: ClothingOuterReactiveArmorStealObjective
   components:
   - type: NotJobRequirement
     job: ResearchDirector

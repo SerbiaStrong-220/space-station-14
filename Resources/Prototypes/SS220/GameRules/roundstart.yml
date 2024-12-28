@@ -1,0 +1,27 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: CultYoggRule
+  parent: BaseGameRule
+  components:
+  - type: GameRule
+    minPlayers: 40 #ToDo calculate around min players
+    delay: #ToDo tweak numbers
+      min: 300
+      max: 600
+  - type: CultYoggRule
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ CultYoggProto ]
+      max: 4
+      playerRatio: 10
+      blacklist:
+        components:
+        - BibleUser
+        - CultYoggSacrificial
+      lateJoinAdditional: false
+      mindRoles:
+        - MindRoleCultYogg
+  - type: AntagObjectives
+    objectives:
+    - CultYoggSacraficeObjective

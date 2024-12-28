@@ -16,6 +16,7 @@
 - type: speciesBaseSprites
   id: MobArachnidSprites
   sprites:
+    Special: MobHumanoidAnyMarking #SS220-CultYogg
     Head: MobArachnidHead
     Snout: MobHumanoidAnyMarking
     Chest: MobArachnidTorso

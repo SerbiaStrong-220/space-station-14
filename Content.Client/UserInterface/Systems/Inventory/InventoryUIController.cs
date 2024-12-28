@@ -13,6 +13,7 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
 using Content.Shared.Inventory.VirtualItem;
+using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Storage;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
@@ -447,6 +448,17 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
             button.Blocked = false;
             button.StorageButton.Visible = showStorage;
         }
+        //ss220 StuckOnEquip begin
+        if (_entities.TryGetComponent(entity, out StuckOnEquipComponent? _))
+        {
+            button.SetEntity(entity);
+            button.StuckOnEquip = true;
+        }
+        else if (button.StuckOnEquip)
+        {
+            button.StuckOnEquip = false;
+        }
+        //ss220 StuckOnEquip end
     }
 
     public bool RegisterSlotGroupContainer(ItemSlotButtonContainer slotContainer)

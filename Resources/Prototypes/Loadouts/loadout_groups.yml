@@ -1530,6 +1530,7 @@
   minLimit: 0
   loadouts:
   - ParamedicHead
+  - ParamedInterdyneSoft #ss220-ParamedInterdyne
 
 - type: loadoutGroup
   id: ParamedicJumpsuit
@@ -1540,6 +1541,7 @@
   - ParamedicJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - ParamedicJumpskirtTurtleneck #SS220-MoreTurtleneck-End
   - ParamedicFeldsher #SS220-ParamedFashion
+  - ParamedInterdyneJumpsuit #ss220-ParamedInterdyne
 
 - type: loadoutGroup
   id: ParamedicOuterClothing
