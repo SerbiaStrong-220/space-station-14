@@ -1,0 +1,64 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: NullificationShroom
+  parent: FoodProduceBase
+  id: FoodNullificationShroomCult
+  description: Mysterious substance that calls for absorption and gag reflex.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - menacing
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 2.0
+        reagents:
+        - ReagentId: ElixirOfLiberation
+          Quantity: 2.0
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/nullification_shroom.rsi
+    state: produce
+  - type: Produce
+    seedId: NullificationShroomSpores
+  - type: Extractable
+    grindableSolutionName: food
+  - type: DesiredFood
+    desireLevel: 1
+  - type: Tag
+    tags:
+    - Omnivorous
+
+- type: entity
+  parent: SeedBase
+  name: packet of fly NullificationShroom spores
+  description: "The iconic, extremely deadly mushroom to be used for purely ornamental purposes."
+  id: NullificationShroomSeeds
+  components:
+    - type: Seed
+      seedId: NullificationShroomSpores
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/nullification_shroom.rsi
+
+- type: seed
+  id: NullificationShroomSpores
+  name: seeds-null-shroom-name
+  noun: seeds-noun-spores
+  displayName: seeds-null-shroom-display-name
+  plantRsi: SS220/Objects/CultYogg/nullification_shroom.rsi
+  packetPrototype: NullificationShroomSeeds
+  productPrototypes:
+    - FoodNullificationShroomCult
+  lifespan: 25
+  maturation: 12
+  production: 2
+  yield: 1
+  potency: 2
+  growthStages: 7
+  waterConsumption: 0.60
+  nutrientConsumption: 0.50
+  chemicals:
+    ElixirOfLiberation:
+      Min: 2
+      Max: 2
+      PotencyDivisor: 1

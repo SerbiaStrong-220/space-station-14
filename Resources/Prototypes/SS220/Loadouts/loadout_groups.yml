@@ -456,6 +456,15 @@
   - GlassesChemical
   - CyberRnDVisor
   # Химик (Конец)
+
+  # Парамедик (начало)
+- type: loadoutGroup
+  id: ParamedicBelt
+  name: loadout-group-paramedic-belt
+  loadouts:
+  - ParamedicBaseBelt
+  - ParamedInterdyneBelt
+  # Парамедик (конец)
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)

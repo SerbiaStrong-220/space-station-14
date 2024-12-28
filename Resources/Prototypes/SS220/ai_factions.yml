@@ -1,3 +1,4 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 # SS220 AI Mapping Update Begin
 
 - type: npcFaction
@@ -74,3 +75,14 @@
   - Revolutionary
   - SpiderQueen
   - SimpleHostile
+
+#SS220 CultYogg
+- type: npcFaction
+  id: CultYogg
+  hostile:
+  - SimpleHostile
+  - Syndicate
+  - Xeno
+  - Zombie
+  - Revolutionary
+  - NanoTrasen

@@ -1,3 +1,4 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 - type: gamePreset
   id: DarkReaper
   alias:
@@ -8,4 +9,16 @@
   minPlayers: 30
   rules:
     - DarkReaperSpawnMajor
+    - BasicStationEventScheduler
+
+- type: gamePreset
+  id: CultYoggPreset
+  alias:
+    - cultyogg
+  name: roles-antag-cult-yogg-name
+  description: roles-antag-cult-yogg-objective
+  showInVote: false
+  minPlayers: 2 #ToDo tweak numbers
+  rules:
+    - CultYoggRule
     - BasicStationEventScheduler

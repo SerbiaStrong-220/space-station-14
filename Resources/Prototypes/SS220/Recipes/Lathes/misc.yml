@@ -13,3 +13,50 @@
   completetime: 1
   materials:
     Plastic: 100
+
+- type: latheRecipe
+  id: SuperSynthesizerInstrument
+  result: SuperSynthesizerInstrument
+  completetime: 1
+  materials:
+    Steel: 1500
+    Plastic: 500  
+
+- type: latheRecipe
+  id: ClothingBeltMilitaryWebbing
+  result: ClothingBeltMilitaryWebbing
+  completetime: 1
+  materials:
+    Plastic: 200
+    Cloth: 1000
+
+- type: latheRecipe
+  id: WeaponCrusher
+  result: WeaponCrusher
+  completetime: 3
+  materials:
+    Steel: 2000
+    Gold: 500
+
+- type: latheRecipe
+  id: WeaponCrusherGlaive 
+  result: WeaponCrusherGlaive
+  completetime: 3
+  materials:
+    Steel: 2500
+    Plasma: 1500
+    Gold: 1000   
+
+- type: latheRecipe
+  id: ToySword
+  result: ToySword
+  completetime: 1
+  materials:
+    Plastic: 800
+
+- type: latheRecipe
+  id: DoubleToySword
+  result: DoubleToySword
+  completetime: 1
+  materials:
+    Plastic: 1600

@@ -26,7 +26,7 @@
     energyToMatterRatio: 50
     powerConsumption: 600
   - type: ActivatableUI
-    singleUser: true
+    singleUser: true # this required to activate emitter by smEmitter BUI
     key: enum.SuperMatterEmitterExtensionUiKey.Key
   - type: UserInterface
     interfaces:

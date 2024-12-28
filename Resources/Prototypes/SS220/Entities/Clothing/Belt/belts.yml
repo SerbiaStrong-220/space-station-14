@@ -450,3 +450,29 @@
         amount: 2
       - id: FlashlightLantern
       - id: LightReplacer
+
+- type: entity
+  parent: ClothingBeltMedical
+  id: ClothingBeltMedicalInterdyne
+  name: the interdyne paramedic's RPS
+  description: A third-generation shoulder belt system designed for civilian paramedics. Unlike its military counterpart, issued to field orderlies, it is lighter to wear. In narrow circles, he has the slang nickname "Kangaroo" for two large pockets in the belly area.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/interdyne_belt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/interdyne_belt.rsi
+
+- type: entity
+  id: ClothingBeltMedicalInterdyneFilled
+  parent: ClothingBeltMedicalInterdyne
+  suffix: Paramedic,Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: Brutepack
+    - id: Ointment
+    - id: Bloodpack
+    - id: Gauze
+    - id: EmergencyMedipen
+      amount: 3
