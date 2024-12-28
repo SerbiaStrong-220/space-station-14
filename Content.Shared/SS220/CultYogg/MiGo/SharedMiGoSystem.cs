@@ -32,6 +32,7 @@ using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
+using Content.Shared.Mobs.Components;
 
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
@@ -156,6 +157,12 @@ public abstract class SharedMiGoSystem : EntitySystem
 
         if (!uid.Comp.IsPhysicalForm)
             return;
+
+        if (!HasComp<MobStateComponent>(args.Target))
+        {
+            _popup.PopupClient(Loc.GetString("cult-yogg-cant-heal-this", ("target", args.Target)), args.Target, uid);
+            return;
+        }
 
         //check if effect is already applyed
         if (_statusEffectsSystem.HasStatusEffect(args.Target, uid.Comp.RequiedEffect))
