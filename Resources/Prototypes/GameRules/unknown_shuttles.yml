@@ -55,6 +55,35 @@
   - type: RuleGrids
   - type: LoadMapRule
 
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleCargoLost
+  components:
+  - type: StationEvent
+    maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml
+  - type: LoadMapRule
+    preloadedGrid: ShuttleCargoLost
+
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleTravelingCuisine
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-unknown-shuttle-incoming
+    maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml
+  - type: LoadMapRule
+    preloadedGrid: TravelingCuisine
+
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleDisasterEvacPod
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-unknown-shuttle-incoming
+    maxOccurrences: 3 # should be the same as [copies] in shuttle_incoming_event.yml
+  - type: LoadMapRule
+    preloadedGrid: DisasterEvacPod
+
 # The power of 3 clowns proved too strong for the players and may need to be 1984'ed. Replace this with a more engaging clown shuttle.
 - type: entity
   parent: BaseUnknownShuttleRule
