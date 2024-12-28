@@ -134,7 +134,7 @@
   suffix: Buff
   components:
   - type: Sprite
-    sprite: SS220/Mobs/Animals/buffrat.rsi #SS220 XMAS
+    sprite: Mobs/Animals/buffrat.rsi
     scale: 1.2, 1.2
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
