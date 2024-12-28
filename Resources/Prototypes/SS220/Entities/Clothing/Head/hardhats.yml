@@ -14,7 +14,7 @@
 - type: entity
   parent: ClothingHeadHatHardhatBase
   id: ClothingHeadHatHardhatWhiteXmas
-  name: Новогодняя белая каска
+  name: новогодняя белая каска
   description: Новогоднее настроение на вашей голове и защита в одном! 
   components:
   - type: Sprite
@@ -25,7 +25,7 @@
 - type: entity
   parent: ClothingHeadHatHardhatBase
   id: ClothingHeadHatHardhatYellowXmas
-  name: Новогодняя жёлтая каска
+  name: новогодняя жёлтая каска
   description: Новогоднее настроение на вашей голове и защита в одном! 
   components:
   - type: Sprite
@@ -36,7 +36,7 @@
 - type: entity
   parent: ClothingHeadHatHardhatBase
   id: ClothingHeadHatHardhatVioletXmas
-  name: Новогодняя фиолетовая каска
+  name: новогодняя фиолетовая каска
   description: Новогоднее настроение на вашей голове и защита в одном! 
   components:
   - type: Sprite

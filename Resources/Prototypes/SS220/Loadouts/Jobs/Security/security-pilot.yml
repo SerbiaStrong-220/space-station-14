@@ -3,6 +3,7 @@
   id: PilotCapCap
   equipment:
     head: ClothingHeadPilotCapCap
+
 # Outer
 - type: loadout
   id: SecBomber

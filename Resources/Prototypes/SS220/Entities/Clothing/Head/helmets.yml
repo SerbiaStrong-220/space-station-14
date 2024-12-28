@@ -15,7 +15,7 @@
 - type: entity
   parent: [ClothingHeadHelmetBase]
   id: ClothingHeadHelmetBasicXmas
-  name: Новогодний шлем
+  name: новогодний шлем
   description: Новогоднее настроение на вашей голове и защита в одном! 
   components:
   - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
@@ -27,6 +27,9 @@
     sprite: SS220/Clothing/Head/Helmets/security_xmas.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Helmets/security_xmas.rsi
+  - type: Tag
+    tags:
+    - Kangaroo #SS220-ghost-roles
 
 #Military Police Helmet #by MIXnikita for SS200
 - type: entity
