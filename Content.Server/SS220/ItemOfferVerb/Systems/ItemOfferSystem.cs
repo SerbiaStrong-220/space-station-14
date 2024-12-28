@@ -99,8 +99,7 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
 
         private void AddOfferVerb(EntityUid uid, HandsComponent component, GetVerbsEvent<EquipmentVerb> args)
         {
-            if (!args.CanInteract || !args.CanAccess || args.Hands == null || args.Hands.ActiveHandEntity == null
-                || args.Target == args.User)
+            if (!args.CanInteract || !args.CanAccess || args.Hands == null || args.Hands.ActiveHandEntity == null)
                 return;
 
             EquipmentVerb verb = new EquipmentVerb()
@@ -138,7 +137,7 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                 return;
 
             // (fix https://github.com/SerbiaStrong-220/space-station-14/issues/2054)
-            if (HasComp<BorgChassisComponent>(user) || !FindFreeHand(handsComponent, out _))
+            if (HasComp<BorgChassisComponent>(user) || !FindFreeHand(handsComponent, out _) || target == user)
                 return;
 
             if (!_hands.TryGetActiveItem(user, out var item))
