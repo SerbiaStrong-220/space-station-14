@@ -16,7 +16,7 @@
         type: StationMapBoundUserInterface
         requireInputValidation: false
   - type: Sprite
-    sprite: Objects/Fun/pai.rsi
+    sprite: SS220/Objects/Fun/pai.rsi #XMAS
     layers:
     - state: pai-base
     - state: pai-off-overlay
