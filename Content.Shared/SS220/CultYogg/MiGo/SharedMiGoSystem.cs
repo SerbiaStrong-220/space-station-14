@@ -145,7 +145,22 @@ public abstract class SharedMiGoSystem : EntitySystem
                 }
             };
 
+            //ToDo for a future verb
+            /*
+            var healVerb = new Verb
+            {
+                Text = Loc.GetString("cult-yogg-heal-verb"),
+                Icon = new SpriteSpecifier.Rsi(new ResPath("SS220/Interface/Actions/cult_yogg.rsi"), "heal"),
+                Act = () =>
+                {
+
+                    //MiGoHeal((args.User, miGoComp), args.Target);
+                }
+            };
+
             args.Verbs.Add(enslaveVerb);
+            args.Verbs.Add(healVerb);
+            */
         }
     }
 

@@ -10,6 +10,7 @@ cult-yogg-enslave-should-eat-shroom = Кандидат не имеет спор 
 cult-yogg-enslave-cant-be-a-chaplain = Кандидат слишком свят
 cult-yogg-enslave-is-sacraficial = Существо ценно, как жертва
 
+cult-yogg-heal-verb = [italic]Исцелить[/italic]
 cult-yogg-heal-only-cultists = Оболочка не принадлежит культу
 cult-yogg-cant-heal-this = МиГо не способен вылечить { $target }
 cult-yogg-heal-already-have-effect = Высшие силы уже исцеляют объект
