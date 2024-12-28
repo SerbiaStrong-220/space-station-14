@@ -45,7 +45,7 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
         while (query.MoveNext(out var uid, out _, out var cultRule))
         {
             var ev = new CultYoggSacrificedTargetEvent(ent);
-            RaiseLocalEvent(uid, ref ev);
+            RaiseLocalEvent(uid, ref ev, true);
 
             stage = cultRule.AmountOfSacrifices;
         }
