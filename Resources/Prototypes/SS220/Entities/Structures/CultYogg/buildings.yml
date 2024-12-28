@@ -67,7 +67,6 @@
       - Wall
   - type: Sprite
     sprite: SS220/Structures/Walls/cult_yogg_walls.rsi
-    state: full
   - type: Icon
     sprite: SS220/Structures/Walls/cult_yogg_walls.rsi
   - type: Destructible
@@ -79,7 +78,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
-    key: cultYoggWall
+    key: walls
     base: cult
   - type: CultYoggBuilding
     eraseTime: 3
