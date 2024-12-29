@@ -2,7 +2,7 @@ ghost-role-information-corrupted-mob-cultyogg-name = Искаженное кул
 ghost-role-information-corrupted-mob-cultyogg-description = Слушайтесь членов культа. Уничтожьте любую угрозу культу.
 ghost-role-information-corrupted-mob-cultyogg-rules = Вы животное, зараженное Ми-Гомицелием. Вы теперь всецело повинуетесь членам культа, сокрушите неверующих
 
-# Lost roles begin
+# Lost souls roles begin
 ghost-role-information-lost-cargo-technical-name = Пропавший грузчик
 ghost-role-information-lost-cargo-technical-description = Что-то пошло не так, и ваш грузовой шаттл с грузом был телепо…
 ghost-role-information-lost-cargo-technical-rules = Вы - обычный грузчик с другой станции. Делайте то, что делают обычн…
@@ -18,4 +18,4 @@ ghost-role-information-clown-troupe-rules = Действуют обычные п
 ghost-role-information-traveling-chef-name = Путешествующий шеф-повар
 ghost-role-information-traveling-chef-description = Вы - шеф-повар на странствующем шаттле экзотической кухни. Порадуйт…
 ghost-role-information-traveling-chef-rules = Действуют обычные правила для экипажа станции.
-# Lost roles end
+# Lost souls roles end
