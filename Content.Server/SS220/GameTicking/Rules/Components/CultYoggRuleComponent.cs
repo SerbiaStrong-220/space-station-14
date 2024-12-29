@@ -36,10 +36,7 @@ public sealed partial class CultYoggRuleComponent : Component
     /// <summary>
     /// Storages for an endgame screen title
     /// </summary>
-    [DataField]
-    public Dictionary<string, string> InitialCultistsNames = [];//Who was cultist on the gamestart.
-
-    public readonly List<EntityUid> InitialCultistMinds = [];
+    public readonly List<EntityUid> InitialCultistMinds = []; //Who was cultist on the gamestart.
 
     /// <summary>
     /// Storage for a sacraficials
