@@ -266,9 +266,8 @@ ghost-role-information-gingerbread-description =
     Распространяйте паточную вкуснятину и хорошее настроение.
 ghost-role-information-tomatokiller-name = Томат-убийца
 ghost-role-information-tomatokiller-description = Этот маленький помидор будет служить ботанику до конца своей жизни... то есть пару минут.
-# Corvax-start
+
 ghost-role-information-syndicate-smuggler-name = Контрабандист Синдиката
 ghost-role-information-syndicate-smuggler-description = Вы - специально обученный контрабандист Синдиката. Отправляйтесь на поиски выданной вам цели и отыщите её любыми средствами.
 
-# Corvax-end
 
