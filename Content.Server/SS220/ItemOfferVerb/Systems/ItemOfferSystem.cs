@@ -12,6 +12,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Interaction.Components;
+using Robust.Shared.Input.Binding;
+using Content.Shared.Input;
 
 namespace Content.Server.SS220.ItemOfferVerb.Systems
 {
@@ -30,6 +32,23 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
             base.Initialize();
             SubscribeLocalEvent<HandsComponent, GetVerbsEvent<EquipmentVerb>>(AddOfferVerb);
             SubscribeLocalEvent<ItemReceiverComponent, ItemOfferAlertEvent>(OnItemOffserAlertClicked);
+
+            CommandBinds.Builder
+                .Bind(ContentKeyFunctions.ItemOffer,
+                    new PointerInputCmdHandler(HandleItemOffer))
+                .Register<ItemOfferSystem>();
+        }
+
+        private bool HandleItemOffer(in PointerInputCmdHandler.PointerInputCmdArgs args)
+        {
+            if (!args.EntityUid.IsValid() || !EntityManager.EntityExists(args.EntityUid))
+                return false;
+
+            if (args.Session?.AttachedEntity == null)
+                return false;
+
+            DoItemOffer(args.Session.AttachedEntity.Value, args.EntityUid);
+            return true;
         }
 
         private void OnItemOffserAlertClicked(Entity<ItemReceiverComponent> ent, ref ItemOfferAlertEvent args)
@@ -80,12 +99,7 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
 
         private void AddOfferVerb(EntityUid uid, HandsComponent component, GetVerbsEvent<EquipmentVerb> args)
         {
-            if (!args.CanInteract || !args.CanAccess || args.Hands == null || args.Hands.ActiveHandEntity == null
-                || HasComp<UnremoveableComponent>(args.Hands.ActiveHandEntity) || args.Target == args.User || !FindFreeHand(component, out var freeHand))
-                return;
-
-            // (fix https://github.com/SerbiaStrong-220/space-station-14/issues/2054)
-            if (HasComp<BorgChassisComponent>(args.User))
+            if (!args.CanInteract || !args.CanAccess || args.Hands == null || args.Hands.ActiveHandEntity == null)
                 return;
 
             EquipmentVerb verb = new EquipmentVerb()
@@ -93,11 +107,7 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                 Text = "Передать предмет",
                 Act = () =>
                 {
-                    var itemReceiver = EnsureComp<ItemReceiverComponent>(uid);
-                    itemReceiver.Giver = args.User;
-                    itemReceiver.Item = args.Hands.ActiveHandEntity;
-                    _alerts.ShowAlert(uid, ItemOfferAlert);
-                    _popupSystem.PopupEntity($"{Name(args.User)} протягивает {Name(args.Hands.ActiveHandEntity!.Value)} {Name(uid)}", args.User, PopupType.Small);
+                   DoItemOffer(args.User, uid);
                 },
             };
 
@@ -119,5 +129,27 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
         {
             return (freeHand = component.GetFreeHandNames().Any() ? component.GetFreeHandNames().First() : null) != null;
         }
+
+        private void DoItemOffer(EntityUid user, EntityUid target)
+        {
+            if (!TryComp<HandsComponent>(target, out var handsComponent))
+                return;
+
+            // (fix https://github.com/SerbiaStrong-220/space-station-14/issues/2054)
+            if (HasComp<BorgChassisComponent>(user) || !FindFreeHand(handsComponent, out _) || target == user )
+                return;
+
+            if (!_hands.TryGetActiveItem(user, out var item))
+                return;
+
+            if (HasComp<UnremoveableComponent>(item))
+                return;
+
+            var itemReceiver = EnsureComp<ItemReceiverComponent>(target);
+            itemReceiver.Giver = user;
+            itemReceiver.Item = item;
+            _alerts.ShowAlert(target, ItemOfferAlert);
+            _popupSystem.PopupEntity($"{Name(user)} протягивает {Name(item.Value)} {Name(target)}", user);
+          }
     }
 }

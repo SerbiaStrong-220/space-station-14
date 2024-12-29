@@ -179,6 +179,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.ActivateItemInWorld);
             AddButton(ContentKeyFunctions.AltActivateItemInWorld);
             AddButton(ContentKeyFunctions.Drop);
+            AddButton(ContentKeyFunctions.ItemOffer); // SS220 ItemOffer bind
             AddButton(ContentKeyFunctions.ExamineEntity);
             AddButton(ContentKeyFunctions.SwapHands);
             AddButton(ContentKeyFunctions.MoveStoredItem);
