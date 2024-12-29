@@ -42,12 +42,12 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
         int stage = 0;
 
         var query = EntityQueryEnumerator<GameRuleComponent, CultYoggRuleComponent>();
-        while (query.MoveNext(out _, out var cultRule))
+        while (query.MoveNext(out var uid, out _, out var cultRule))
         {
-            stage = ++cultRule.AmountOfSacrifices;
+            var ev = new CultYoggSacrificedTargetEvent(ent);
+            RaiseLocalEvent(uid, ref ev, true);
 
-            if (cultRule.AmountOfSacrifices == cultRule.ReqAmountOfSacrifices)
-                Spawn(ent.Comp.GodEnt, Transform(ent).Coordinates);
+            stage = cultRule.AmountOfSacrifices;
         }
 
         //sending all cultists updating stage event

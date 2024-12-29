@@ -22,6 +22,8 @@ using System.Linq;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs;
+using Robust.Shared.Network;
+using Content.Shared.SS220.Roles;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
@@ -295,7 +297,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     private bool AvaliableMiGoCheck()
     {
         //Check number of MiGo in gamerule
-        _cultRule.GetCultGameRule(out var ruleComp);
+        var ruleComp = _cultRule.GetCultGameRule();
 
         if (ruleComp is null)
             return false;
@@ -343,23 +345,26 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         return true;
     }
     #endregion
-    private void OnSaintWaterDrinked(Entity<CultYoggComponent> uid, ref OnSaintWaterDrinkEvent args)
-    {
-        EnsureComp<CultYoggCleansedComponent>(uid, out var cleansedComp);
-        cleansedComp.AmountOfHolyWater += args.SaintWaterAmount;
 
-        if (cleansedComp.AmountOfHolyWater >= cleansedComp.AmountToCleance)
+    #region Purifying
+    private void OnSaintWaterDrinked(Entity<CultYoggComponent> entity, ref OnSaintWaterDrinkEvent args)
+    {
+        EnsureComp<CultYoggPurifiedComponent>(entity, out var purifyedComp);
+        purifyedComp.TotalAmountOfHolyWater += args.SaintWaterAmount;
+
+        if (purifyedComp.TotalAmountOfHolyWater >= purifyedComp.AmountToPurify)
         {
-            //After cleansing effect
-            _audio.PlayEntity(cleansedComp.CleansingCollection, uid, uid);
+            //After purifying effect
+            _audio.PlayEntity(purifyedComp.PurifyingCollection, entity, entity);
 
             //Removing stage visuals, cause later component will be removed
             var ev = new CultYoggDeleteVisualsEvent();
-            RaiseLocalEvent(uid, ref ev);
+            RaiseLocalEvent(entity, ref ev);
 
-            RemComp<CultYoggComponent>(uid);
+            RemComp<CultYoggComponent>(entity);
         }
 
-        cleansedComp.CleansingDecayEventTime = _timing.CurTime + cleansedComp.BeforeDeclinesTime; //setting timer, when cleansing will be removed
+        purifyedComp.PurifyingDecayEventTime = _timing.CurTime + purifyedComp.BeforeDeclinesTime; //setting timer, when purifying will be removed
     }
+    #endregion
 }

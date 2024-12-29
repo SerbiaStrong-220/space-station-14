@@ -641,3 +641,14 @@ binds:
   type: State
   key: Delete
 # SS220 Calculator end
+# SS220 ItemOffer bind begin
+- function: ItemOffer
+  type: State
+  key: R
+  mod1: Shift
+# SS220 ItemOffer bind end
+# SS220 resist fire bind begin
+- function: ResistFire
+  type: State
+  key: B
+# SS220 resist fire bind end

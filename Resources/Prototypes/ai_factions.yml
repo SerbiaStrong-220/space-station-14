@@ -9,6 +9,7 @@
     - Zombie
     - Revolutionary
     - SpiderQueen #ss220 spider queen
+    - CultYogg #SS220 CultYogg
 
 - type: npcFaction
   id: NanoTrasen
@@ -47,6 +48,7 @@
   - Zombie
   - Revolutionary
   - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
 
 - type: npcFaction
   id: SimpleNeutral
@@ -61,6 +63,7 @@
   - PetsNT
   - Zombie
   - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
 
 - type: npcFaction
   id: Xeno
@@ -73,6 +76,7 @@
   - Zombie
   - Revolutionary
   - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
 
 - type: npcFaction
   id: Zombie
@@ -86,3 +90,4 @@
   - PetsNT
   - Revolutionary
   - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg

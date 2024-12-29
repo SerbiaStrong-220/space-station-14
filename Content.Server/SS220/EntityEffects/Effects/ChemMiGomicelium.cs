@@ -24,7 +24,7 @@ namespace Content.Server.SS220.EntityEffects.Effects
             {
                 if (entityManager.TryGetComponent<CultYoggComponent>(args.TargetEntity, out var comp))
                 {
-                    entityManager.RemoveComponent<CultYoggCleansedComponent>(args.TargetEntity);
+                    entityManager.RemoveComponent<CultYoggPurifiedComponent>(args.TargetEntity);
 
                     comp.ConsumedAscensionReagent += reagentArgs.Quantity.Float();
                     entityManager.System<CultYoggSystem>().TryStartAscensionByReagent(args.TargetEntity, comp);

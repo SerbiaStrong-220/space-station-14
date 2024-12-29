@@ -19,9 +19,6 @@ public sealed partial class CultYoggAltarComponent : Component
     [DataField]
     public bool Used = false;
 
-    [DataField]
-    public string GodEnt = "Nyarlathotep";
-
     [Serializable, NetSerializable]
     public enum CultYoggAltarVisuals
     {

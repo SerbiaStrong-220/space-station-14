@@ -52,7 +52,7 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
     {
         args.Progress = 0;
 
-        _cultRule.GetCultGameRule(out var ruleComp);
+        var ruleComp = _cultRule.GetCultGameRule();
 
         if (ruleComp is null)
             return;
@@ -62,12 +62,12 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
 
     private void TaskNumberUpdate(Entity<CultYoggSummonConditionComponent> ent)
     {
-        _cultRule.GetCultGameRule(out var ruleComp);
+        var ruleComp = _cultRule.GetCultGameRule();
 
         if (ruleComp is null)
             return;
 
-        ent.Comp.reqSacrAmount = ruleComp.ReqAmountOfSacrifices;
+        ent.Comp.reqSacrAmount = ruleComp.AmountOfSacrificesToGodSummon;
     }
     private void SacraficialsUpdate(Entity<CultYoggSummonConditionComponent> ent)
     {

@@ -25,7 +25,7 @@ public sealed class MiGoAliveConditionSystem : EntitySystem
     //check if gamerule was rewritten
     private void OnInit(Entity<MiGoAliveConditionComponent> ent, ref ComponentInit args)
     {
-        _cultRule.GetCultGameRule(out var ruleComp);
+        var ruleComp = _cultRule.GetCultGameRule();
 
         if (ruleComp is null)
             return;

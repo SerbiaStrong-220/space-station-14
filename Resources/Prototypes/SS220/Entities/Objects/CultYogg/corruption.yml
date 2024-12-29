@@ -204,6 +204,13 @@
     prototypeId: Stunprod
   result: CultYoggCocoonBeach
   corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: RollingPin
+  from:
+    prototypeId: RollingPin
+  result: CultYoggCocoonBeach
+  corruptionReverseEffect: ExorcismUncorruptEffect
 #MeleWeapons end
 
 #SedativeSting beginning
@@ -294,7 +301,7 @@
   emptyStorage: true
 
 - type: corrupted
-  id: ultYoggSatchelParent
+  id: CultYoggSatchelParent
   from:
     parentPrototypeId: ClothingBackpackSatchel
   result: ClothingBackpackSatchelCultYogg

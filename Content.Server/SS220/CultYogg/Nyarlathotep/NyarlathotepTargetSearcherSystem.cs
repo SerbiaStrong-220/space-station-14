@@ -23,14 +23,6 @@ public sealed class NyarlathotepTargetSearcherSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<NyarlathotepSearchTargetsComponent, MapInitEvent>(OnSearchMapInit);
-
-        SubscribeLocalEvent<NyarlathotepSearchTargetsComponent, ComponentStartup>(OnCompInit);
-    }
-
-    private void OnCompInit(Entity<NyarlathotepSearchTargetsComponent> uid, ref ComponentStartup args)
-    {
-        var ev = new CultYoggSummonedEvent(uid);
-        RaiseLocalEvent(uid, ref ev, true);
     }
 
     /// <summary>
@@ -78,19 +70,6 @@ public sealed class NyarlathotepTargetSearcherSystem : EntitySystem
     }
 }
 
-/// <summary>
-///     Raised when god summoned to markup winning
-/// </summary>
-[ByRefEvent, Serializable]
-public sealed class CultYoggSummonedEvent : EntityEventArgs
-{
-    public readonly EntityUid Entity;
-
-    public CultYoggSummonedEvent(EntityUid entity)
-    {
-        Entity = entity;
-    }
-}
 /// <summary>
 /// Component for entities to be attacked by Nyarlathotep.
 /// </summary>

@@ -22,7 +22,7 @@
     - /Audio/SS220/CultYogg/nyarlathotep_voice3.ogg
 
 - type: soundCollection
-  id: CultYoggCleansingSounds
+  id: CultYoggPurifyingSounds
   files:
     - /Audio/SS220/CultYogg/inhale_scream_1.ogg
     - /Audio/SS220/CultYogg/inhale_scream_2.ogg
