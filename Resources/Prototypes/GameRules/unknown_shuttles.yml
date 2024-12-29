@@ -1,6 +1,5 @@
 # Shuttle Game Rule Tables -- If you dont add your rules to these they wont be used by the games schedulers.
 
-#SS220-LostSoulsRevive begin
 - type: entityTable
   id: UnknownShuttlesFriendlyTable
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
@@ -9,7 +8,6 @@
     - id: UnknownShuttleTravelingCuisine
     - id: UnknownShuttleDisasterEvacPod
     - id: UnknownShuttleHonki
-#SS220-LostSoulsRevive end
 #    - id: UnknownShuttleNTQuark
 #    - id: UnknownShuttleCruiser
 #    - id: UnknownShuttleCryptid
@@ -60,7 +58,7 @@
   id: UnknownShuttleCargoLost
   components:
   - type: StationEvent
-    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
+    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml #SS220 Lost Souls Revive
   - type: LoadMapRule
     preloadedGrid: ShuttleCargoLost
 
@@ -70,7 +68,7 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-unknown-shuttle-incoming
-    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
+    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml #SS220 Lost Souls Revive
   - type: LoadMapRule
     preloadedGrid: TravelingCuisine
 
@@ -80,7 +78,7 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-unknown-shuttle-incoming
-    maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml
+    maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml #SS220 Lost Souls Revive
   - type: LoadMapRule
     preloadedGrid: DisasterEvacPod
 
@@ -90,7 +88,7 @@
   id: UnknownShuttleHonki
   components:
   - type: StationEvent
-    startAnnouncement: station-event-unknown-shuttle-incoming #!!
+    startAnnouncement: station-event-unknown-shuttle-incoming #SS220 Lost Souls Revive
     weight: 1
   - type: LoadMapRule
     preloadedGrid: Honki
