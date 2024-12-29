@@ -25,6 +25,3 @@
   - type: AntagObjectives
     objectives:
     - CultYoggSacraficeObjective
-
-- type: entity
-  id:

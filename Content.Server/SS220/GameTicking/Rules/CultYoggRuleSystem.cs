@@ -41,6 +41,9 @@ using Robust.Shared.Audio.Systems;
 using Content.Server.AlertLevel;
 using Robust.Shared.Player;
 using Robust.Shared.Map;
+using Content.Server.EUI;
+using Robust.Server.Player;
+using Content.Server.SS220.CultYogg.DeCultReminder;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 
@@ -62,6 +65,8 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
+    [Dependency] private readonly EuiManager _euiManager = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     private List<List<string>> _sacraficialTiers = [];
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
@@ -425,6 +430,12 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         RemComp<ShowCultYoggIconsComponent>(uid);
         RemComp<ZombieImmuneComponent>(uid);
+
+        if (mindComp.UserId != null &&
+            _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
+        {
+            _euiManager.OpenEui(new DeCultReminderEui(), session);
+        }
     }
     #endregion
 
