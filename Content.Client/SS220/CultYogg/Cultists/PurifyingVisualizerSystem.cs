@@ -6,17 +6,17 @@ namespace Content.Client.SS220.CultYogg.Cultists;
 
 /// <summary>
 /// </summary>
-public sealed class PurifyingVisualizerSystem : VisualizerSystem<CultYoggpPurifiedComponent>
+public sealed class PurifyingVisualizerSystem : VisualizerSystem<CultYoggPurifiedComponent>
 {
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CultYoggpPurifiedComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<CultYoggpPurifiedComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<CultYoggPurifiedComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<CultYoggPurifiedComponent, ComponentShutdown>(OnShutdown);
     }
 
-    private void OnShutdown(Entity<CultYoggpPurifiedComponent> uid, ref ComponentShutdown args)
+    private void OnShutdown(Entity<CultYoggPurifiedComponent> uid, ref ComponentShutdown args)
     {
         // Need LayerMapTryGet because Init fails if there's no existing sprite / appearancecomp
         // which means in some setups (most frequently no AppearanceComp) the layer never exists.
@@ -27,7 +27,7 @@ public sealed class PurifyingVisualizerSystem : VisualizerSystem<CultYoggpPurifi
         }
     }
 
-    private void OnComponentInit(Entity<CultYoggpPurifiedComponent> uid, ref ComponentInit args)
+    private void OnComponentInit(Entity<CultYoggPurifiedComponent> uid, ref ComponentInit args)
     {
         if (!TryComp<SpriteComponent>(uid, out var sprite) || !TryComp(uid, out AppearanceComponent? appearance))
             return;

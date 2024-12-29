@@ -16,13 +16,13 @@ public sealed class CultYoggPurifiedSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<CultYoggpPurifiedComponent>();
+        var query = EntityQueryEnumerator<CultYoggPurifiedComponent>();
         while (query.MoveNext(out var uid, out var cleansedComp))
         {
             if (_timing.CurTime < cleansedComp.PurifyingDecayEventTime)
                 continue;
 
-            RemComp<CultYoggpPurifiedComponent>(uid);
+            RemComp<CultYoggPurifiedComponent>(uid);
         }
     }
 }

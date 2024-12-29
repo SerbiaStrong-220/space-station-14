@@ -349,7 +349,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     #region Purifying
     private void OnSaintWaterDrinked(Entity<CultYoggComponent> entity, ref OnSaintWaterDrinkEvent args)
     {
-        EnsureComp<CultYoggpPurifiedComponent>(entity, out var purifyedComp);
+        EnsureComp<CultYoggPurifiedComponent>(entity, out var purifyedComp);
         purifyedComp.TotalAmountOfHolyWater += args.SaintWaterAmount;
 
         if (purifyedComp.TotalAmountOfHolyWater >= purifyedComp.AmountToPurify)

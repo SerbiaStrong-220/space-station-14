@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.CultYogg.Cultists;
 
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]
-public sealed partial class CultYoggpPurifiedComponent : Component
+public sealed partial class CultYoggPurifiedComponent : Component
 {
     [ViewVariables, AutoNetworkedField]
     public FixedPoint2 TotalAmountOfHolyWater = 0;
