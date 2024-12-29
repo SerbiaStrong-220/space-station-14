@@ -8,7 +8,7 @@
     },
     "states": [
         {
-            "name": "cleansingEffect",
+            "name": "purifyingEffect",
             "delays": [
                 [
                     0.15,

@@ -280,7 +280,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     private void SacraficialReplacement(ref SacraficialReplacementEvent args)
     {
-        GetCultGameRule(out var cultRuleComp);
+        var cultRuleComp = GetCultGameRule();
 
         if (cultRuleComp == null)
             return;
@@ -330,7 +330,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (args.Target == null)
             return;
 
-        GetCultGameRule(out var cultRuleComp);
+        var cultRuleComp = GetCultGameRule();
 
         if (cultRuleComp == null)
             return;
@@ -386,22 +386,29 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     private void DeCult(ref CultYoggDeCultingEvent args)
     {
-        GetCultGameRule(out var cultRuleComp);//ToDo bug potentialy if somebody will make cultist without gamerule, ask head dev
+        var cultRuleComp = GetCultGameRule();//ToDo bug potentialy if somebody will make cultist without gamerule, ask head dev
 
         if (cultRuleComp == null)
             return;
 
         DeMakeCultist(args.Entity, cultRuleComp);
     }
+
     public void DeMakeCultist(EntityUid uid, CultYoggRuleComponent component)
     {
         if (!_mind.TryGetMind(uid, out var mindId, out var mindComp))
             return;
 
-        if (!_role.MindHasRole<CultYoggRoleComponent>(mindId, out var mindSlave))
+        if (!_role.MindHasRole<CultYoggRoleComponent>(mindId, out var cultRoleEnt))
             return;
 
-        // _mind.TryRemoveObjective(mindId, mindComp, objective.Value);
+        foreach (var obj in component.ListofObjectives)
+        {
+            if (!_mind.TryFindObjective(mindId, obj, out var objUid))
+                continue;
+
+            _mind.TryRemoveObjective(mindId, mindComp, objUid.Value);
+        }
 
         _role.MindRemoveRole<CultYoggRoleComponent>(mindId);
 
@@ -528,14 +535,17 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     }
     #endregion
 
-    public void GetCultGameRule(out CultYoggRuleComponent? comp)
+    public CultYoggRuleComponent? GetCultGameRule()
     {
-        comp = null;
-        var query = QueryActiveRules();
-        while (query.MoveNext(out _, out _, out var cultComp, out _))
+        CultYoggRuleComponent? comp = null;
+
+        var query = QueryAllRules();
+        while (query.MoveNext(out _, out var cultComp, out _))
         {
             comp = cultComp;
         }
+
+        return comp;
     }
 }
 

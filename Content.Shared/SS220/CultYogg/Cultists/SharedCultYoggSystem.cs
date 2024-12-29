@@ -131,7 +131,7 @@ public abstract class SharedCultYoggSystem : EntitySystem
 
     protected void OnRemove(Entity<CultYoggComponent> uid, ref ComponentRemove args)
     {
-        RemComp<CultYoggCleansedComponent>(uid);
+        RemComp<CultYoggpPurifiedComponent>(uid);
 
         //remove all actions cause they won't disappear with component
         _actions.RemoveAction(uid.Comp.CorruptItemActionEntity);

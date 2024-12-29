@@ -1,29 +1,28 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Atmos;
 using Content.Shared.SS220.CultYogg.Cultists;
-using Robust.Shared.Map;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
-public sealed class CultYoggCleansedSystem : EntitySystem
+public sealed class CultYoggPurifiedSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     public override void Initialize()
     {
         base.Initialize();
     }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<CultYoggCleansedComponent>();
+        var query = EntityQueryEnumerator<CultYoggpPurifiedComponent>();
         while (query.MoveNext(out var uid, out var cleansedComp))
         {
-            if (_timing.CurTime < cleansedComp.CleansingDecayEventTime)
+            if (_timing.CurTime < cleansedComp.PurifyingDecayEventTime)
                 continue;
 
-            RemComp<CultYoggCleansedComponent>(uid);
+            RemComp<CultYoggpPurifiedComponent>(uid);
         }
     }
 }
