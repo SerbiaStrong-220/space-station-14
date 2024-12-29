@@ -468,12 +468,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     {
         base.AppendRoundEndText(uid, component, gameRule, ref args);
 
-        //ToDo check for summoning
-
-        var query = EntityQueryEnumerator<NyarlathotepSearchTargetsComponent>();//ToDo maybe some altrenative
-        //if (query. != null)
-        //    component.Summoned = true;
-
         if (component.Summoned)
         {
             args.AddLine(Loc.GetString("cult-yogg-round-end-win"));
@@ -491,7 +485,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
                 args.AddLine(Loc.GetString("cult-yogg-round-end-amount-high"));
         }
 
-        args.AddLine(Loc.GetString("cult-yogg-round-end-initial-count", ("initialCount", component.InitialCultistsNames.Count)));
+        args.AddLine(Loc.GetString("cult-yogg-round-end-initial-count", ("initialCount", component.InitialCultistMinds.Count)));
 
         var antags = _antag.GetAntagIdentifiers(uid);
         //args.AddLine(Loc.GetString("zombie-round-end-initial-count", ("initialCount", antags.Count))); // ToDo Should we add this?
