@@ -1,4 +1,5 @@
 using Content.Shared.Input;
+using Content.Shared.SS220.Input;
 using Robust.Shared.Input;
 
 namespace Content.Client.Input
@@ -78,6 +79,7 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.RotateObjectClockwise);
             human.AddFunction(ContentKeyFunctions.RotateObjectCounterclockwise);
             human.AddFunction(ContentKeyFunctions.FlipObject);
+            human.AddFunction(KeyFunctions220.ResistFire); // SS220 resist fire bind
             human.AddFunction(ContentKeyFunctions.ArcadeUp);
             human.AddFunction(ContentKeyFunctions.ArcadeDown);
             human.AddFunction(ContentKeyFunctions.ArcadeLeft);
