@@ -314,7 +314,6 @@
       - !type:NestedSelector
         tableId: SpicyPestEventsTable
 
-#SS220 Lost Souls Revive begin
 - type: entityTable
   id: SpaceTrafficControlTable
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
@@ -325,7 +324,6 @@
 #         tableId: UnknownShuttlesFreelanceTable
 #       - !type:NestedSelector
 #         tableId: UnknownShuttlesHostileTable
-#SS220 Lost Souls Revive end
 
 - type: entity
   id: BasicStationEventScheduler
@@ -356,7 +354,6 @@
 #    scheduledGameRules: !type:NestedSelector
 #      tableId: SpaceTrafficControlTable
 
-#SS220 Lost Souls Revive
 - type: entity
   id: SpaceTrafficControlFriendlyEventScheduler
   parent: BaseGameRule
@@ -368,7 +365,6 @@
       max: 1800 # 30 mins
     scheduledGameRules: !type:NestedSelector
       tableId: UnknownShuttlesFriendlyTable
-#SS220 Lost Souls Revive end
 
 # variation passes
 - type: entity
