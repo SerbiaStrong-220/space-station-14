@@ -120,7 +120,11 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
             _hands.PickupOrDrop(itemReceiver.Giver, itemReceiver.Item!.Value);
             if (_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
             {
-                _popupSystem.PopupEntity($"{Name(itemReceiver.Giver)} передал {Name(itemReceiver.Item!.Value)} {Name(receiver)}!", itemReceiver.Giver, PopupType.Medium);
+                var loc = Loc.GetString("loc-item-offer-transfer",
+                    ("user", itemReceiver.Giver),
+                    ("item", itemReceiver.Item),
+                    ("target", receiver));
+                _popupSystem.PopupEntity(loc, itemReceiver.Giver, PopupType.Medium);
                 _alerts.ClearAlert(receiver, ItemOfferAlert);
                 _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
             };
@@ -149,7 +153,12 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
             itemReceiver.Giver = user;
             itemReceiver.Item = item;
             _alerts.ShowAlert(target, ItemOfferAlert);
-            _popupSystem.PopupEntity($"{Name(user)} протягивает {Name(item.Value)} {Name(target)}", user);
+
+            var loc = Loc.GetString("loc-item-offer-attempt",
+                ("user", user),
+                ("item", item),
+                ("target", target));
+            _popupSystem.PopupEntity(loc, user);
           }
     }
 }
