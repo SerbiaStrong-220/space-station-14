@@ -13,6 +13,7 @@ using System.Linq;
 using Content.Shared.Input;
 using Content.Shared.Silicons.Borgs.Components;
 using Robust.Shared.Input.Binding;
+using Content.Shared.Interaction.Components;
 
 namespace Content.Server.SS220.ItemOfferVerb.Systems
 {
@@ -141,6 +142,9 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                 return;
 
             if (!_hands.TryGetActiveItem(user, out var item))
+                return;
+
+            if (HasComp<UnremoveableComponent>(item))
                 return;
 
             var itemReceiver = EnsureComp<ItemReceiverComponent>(target);
