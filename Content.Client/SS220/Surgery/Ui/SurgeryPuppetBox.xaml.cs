@@ -12,7 +12,10 @@ namespace Content.Client.SS220.Surgery.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class SurgeryPuppetBox : Control
 {
-    // SS220_TODO: if i had time add some properties not to hardcode in xaml
+    /// <summary>
+    /// First argument is current part, second is previous
+    /// </summary>
+    public event Action<PuppetParts?, PuppetParts?>? SelectedPartChanged;
 
     public Vector2 Scale
     {
@@ -181,6 +184,8 @@ public sealed partial class SurgeryPuppetBox : Control
 
         if (newHighlightPart != null)
             MakeHighlighted(newHighlightPart.Value);
+
+        SelectedPartChanged?.Invoke(newHighlightPart, _selectedPart);
 
         return newHighlightPart;
     }
