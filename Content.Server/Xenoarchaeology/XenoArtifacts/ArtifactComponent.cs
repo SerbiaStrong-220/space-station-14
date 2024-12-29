@@ -2,8 +2,6 @@ using Content.Shared.Xenoarchaeology.XenoArtifacts;
 using Robust.Shared.Audio;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Xenoarchaeology.XenoArtifacts;
 
@@ -95,17 +93,6 @@ public sealed partial class ArtifactComponent : Component
     };
 
     [DataField("activateActionEntity")] public EntityUid? ActivateActionEntity;
-
-    // SS220-BonusForFullyDiscovered - start
-
-    [ViewVariables]
-    public bool IsBonusIssued = false;
-
-    [DataField("bonusPrototype", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>)), ViewVariables]
-    public List<string>? BonusPrototype;
-
-    // SS220-BonusForFullyDiscovered - end
-
 }
 
 /// <summary>

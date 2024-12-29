@@ -12,7 +12,6 @@
       - Pill
       - Crayon
       - Paper
-      - Omnivorous #SS220 Сult
   - type: SolutionContainerManager
     solutions:
       stomach:

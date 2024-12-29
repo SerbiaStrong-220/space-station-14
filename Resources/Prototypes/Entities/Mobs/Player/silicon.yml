@@ -146,7 +146,6 @@
   - type: TTS
     randomVoicesList: Borg
   # SS220 Holopad adapt end
-  - type: SetRadioReceiverToStationAiEye # SS220 Silicon TTS fix
 
 - type: entity
   id: AiHeldIntellicard

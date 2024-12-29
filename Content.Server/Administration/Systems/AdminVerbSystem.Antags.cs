@@ -10,7 +10,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Content.Server.SS220.GameTicking.Rules.Components;
 
 namespace Content.Server.Administration.Systems;
 
@@ -36,11 +35,6 @@ public sealed partial class AdminVerbSystem
 
     [ValidatePrototypeId<StartingGearPrototype>]
     private const string PirateGearId = "PirateGear";
-
-    //SS200 CultYogg start
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string DefaultCultYoggRule = "CultYoggRule";
-    //SS220 CultYogg end
 
     // All antag verbs have names so invokeverb works.
     private void AddAntagVerbs(GetVerbsEvent<Verb> args)
@@ -157,21 +151,5 @@ public sealed partial class AdminVerbSystem
             Message = Loc.GetString("admin-verb-make-thief"),
         };
         args.Verbs.Add(thief);
-
-        //SS220 CultYogg start
-        Verb cult_yogg = new()
-        {
-            Text = Loc.GetString("admin-verb-text-make-cult-yogg"),
-            Category = VerbCategory.Antag,
-            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/SS220/Interface/Misc/cult_yogg_icons.rsi"), "cult_make_yogg"),
-            Act = () =>
-            {
-                _antag.ForceMakeAntag<CultYoggRuleComponent>(targetPlayer, DefaultCultYoggRule);
-            },
-            Impact = LogImpact.High,
-            Message = Loc.GetString("admin-verb-make-cult-yogg"),
-        };
-        args.Verbs.Add(cult_yogg);
-        //SS220 CultYogg end
     }
 }

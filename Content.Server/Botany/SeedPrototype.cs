@@ -1,6 +1,5 @@
 using Content.Server.Botany.Components;
 using Content.Server.Botany.Systems;
-using Content.Server.SS220.CultYogg.Fungus;
 using Content.Shared.Atmos;
 using Content.Shared.EntityEffects;
 using Content.Shared.Random;
@@ -82,9 +81,7 @@ public partial struct SeedChemQuantity
 
 // TODO reduce the number of friends to a reasonable level. Requires ECS-ing things like plant holder component.
 [Virtual, DataDefinition]
-[Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(EntityEffect), typeof(MutationSystem),
-    typeof(FungusSystem) //SS220-PartofCultYogg
-    )]
+[Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(EntityEffect), typeof(MutationSystem))]
 public partial class SeedData
 {
     #region Tracking

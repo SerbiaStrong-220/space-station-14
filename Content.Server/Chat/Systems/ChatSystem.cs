@@ -36,7 +36,6 @@ using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
 using Robust.Shared.Timing;
-using Robust.Shared.Map;
 
 namespace Content.Server.Chat.Systems;
 
@@ -1086,29 +1085,12 @@ public sealed class RadioSpokeEvent : EntityEventArgs
 {
     public readonly EntityUid Source;
     public readonly string Message;
-    public readonly RadioEventReceiver[] Receivers; // SS220 Silicon TTS fix
+    public readonly EntityUid[] Receivers;
 
-    public RadioSpokeEvent(EntityUid source, string message, RadioEventReceiver[] receivers)
+    public RadioSpokeEvent(EntityUid source, string message, EntityUid[] receivers)
     {
         Source = source;
         Message = message;
         Receivers = receivers;
     }
 }
-
-// SS220 Silicon TTS fix begin
-public readonly struct RadioEventReceiver
-{
-    public EntityUid Actor { get; }
-    public EntityCoordinates PlayTarget { get; }
-
-    public RadioEventReceiver(EntityUid actor) : this(actor, new EntityCoordinates(actor, 0, 0)) { }
-
-    public RadioEventReceiver(EntityUid actor, EntityCoordinates playTarget)
-    {
-        Actor = actor;
-        PlayTarget = playTarget;
-    }
-}
-// SS220 Silicon TTS fix end
-

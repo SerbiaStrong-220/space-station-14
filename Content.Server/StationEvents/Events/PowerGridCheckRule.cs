@@ -3,7 +3,6 @@ using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.StationEvents.Components;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.SS220.Power.Components;
 using Content.Shared.Station.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
@@ -30,9 +29,7 @@ namespace Content.Server.StationEvents.Events
             var query = AllEntityQuery<ApcComponent, TransformComponent>();
             while (query.MoveNext(out var apcUid ,out var apc, out var transform))
             {
-                //SS220-SM-fix-begin
-                if (apc.MainBreakerEnabled && !HasComp<HighPriorityAPCComponent>(apcUid)
-                    && CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == chosenStation) //SS220-SM-fix-end
+                if (apc.MainBreakerEnabled && CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == chosenStation)
                     component.Powered.Add(apcUid);
             }
 

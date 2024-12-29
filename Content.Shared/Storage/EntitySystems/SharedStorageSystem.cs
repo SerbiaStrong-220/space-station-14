@@ -1423,7 +1423,7 @@ public abstract class SharedStorageSystem : EntitySystem
         if (!canInteract)
             return false;
 
-        var ev = new StorageInteractAttemptEvent(user, silent); // SS220 add user
+        var ev = new StorageInteractAttemptEvent(silent);
         RaiseLocalEvent(storage, ref ev);
 
         return !ev.Cancelled;

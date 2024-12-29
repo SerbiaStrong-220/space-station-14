@@ -1,4 +1,3 @@
-# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 - type: entity
   parent: BaseMindRoleAntag
   id: MindRoleDarkReaper
@@ -26,12 +25,3 @@
   - type: MindRole
     antagPrototype: MindSlave
   - type: MindSlaveRole
-
-- type: entity
-  parent: BaseMindRoleAntag
-  id: MindRoleCultYogg
-  name: CultYoggRole
-  components:
-  - type: MindRole
-    antagPrototype: CultYoggProto
-  - type: CultYoggRole

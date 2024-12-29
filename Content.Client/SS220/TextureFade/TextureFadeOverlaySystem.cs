@@ -16,102 +16,67 @@ public sealed class TextureFadeOverlaySystem : EntitySystem
     public override void FrameUpdate(float frameTime)
     {
         var componentsQuery = EntityQueryEnumerator<TextureFadeOverlayComponent>();
-        while (componentsQuery.MoveNext(out var entity, out var comp))
+        while (componentsQuery.MoveNext(out var comp))
         {
             HandleOverlayActivityUpdate(comp);
-            HandleOverlayProgressUpdate((entity, comp), frameTime);
+            HandleOverlayProgressUpdate(comp, frameTime);
         }
     }
 
     private void OnRemove(Entity<TextureFadeOverlayComponent> entity, ref ComponentRemove args)
     {
-        DeinitializeLayers(entity.Comp);
+        DestroyOverlay(entity.Comp);
     }
 
     private void HandleOverlayActivityUpdate(TextureFadeOverlayComponent component)
     {
-        if (component.IsEnabled && !component.IsOverlayInitialized)
+        if (component.IsEnabled && component.Overlay is null)
         {
-            InitializeLayers(component);
+            component.Overlay = CreateOverlay(component);
             return;
         }
-        if (!component.IsEnabled && component.IsOverlayInitialized)
+        if (!component.IsEnabled && component.Overlay is { })
         {
-            DeinitializeLayers(component);
+            DestroyOverlay(component);
             return;
         }
     }
 
-    private void HandleOverlayProgressUpdate(Entity<TextureFadeOverlayComponent> entity, float frameTime)
+    private void HandleOverlayProgressUpdate(TextureFadeOverlayComponent component, float frameTime)
     {
-        var component = entity.Comp;
-        if (!component.IsOverlayInitialized)
+        if (component.Overlay == null)
             return;
-        var fadedOutCount = 0;
-        for (var i = 0; i < component.Layers.Count; i++)
+        if (component.ProgressSpeed != 0f)
         {
-            var layer = component.Layers[i];
-            if (layer.Overlay is null)
-                continue;
-            if (layer.ProgressSpeed != 0f)
-            {
-                layer.FadeProgress += layer.ProgressSpeed * frameTime;
-                layer.FadeProgress = Math.Clamp(layer.FadeProgress, layer.MinProgress, layer.MaxProgress);
-                component.Layers[i] = layer;
-                if (component.DeleteAfterFadedOut
-                    && layer.ProgressSpeed > 0
-                    && MathHelper.CloseTo(layer.FadeProgress, layer.MaxProgress, 0.01f))
-                {
-                    fadedOutCount++;
-                }
-            }
-            var fadeProgressMod = layer.FadeProgress;
-            fadeProgressMod += (float)Math.Sin(Math.PI * layer.Overlay.Time.TotalSeconds * layer.PulseRate) * layer.PulseMagnitude;
-            fadeProgressMod = Math.Clamp(fadeProgressMod, 0f, 1f);
-            layer.Overlay.FadeProgress = fadeProgressMod;
-            layer.Overlay.Modulate = layer.Modulate;
-            layer.Overlay.ZIndex = layer.ZIndex;
-            if (component.DeleteAfterFadedOut && fadedOutCount == component.Layers.Count)
-            {
-                Del(entity);
-            }
+            component.FadeProgress += component.ProgressSpeed * frameTime;
+            component.FadeProgress = Math.Clamp(component.FadeProgress, component.MinProgress, component.MaxProgress);
         }
+        var fadeProgressMod = component.FadeProgress;
+        fadeProgressMod += (float)Math.Sin(Math.PI * component.Overlay.Time.TotalSeconds * component.PulseRate) * component.PulseMagnitude;
+        fadeProgressMod = Math.Clamp(fadeProgressMod, 0f, 1f);
+        component.Overlay.FadeProgress = fadeProgressMod;
+        component.Overlay.Modulate = component.Modulate;
+        component.Overlay.ZIndex = component.ZIndex;
     }
 
-    private void InitializeLayers(TextureFadeOverlayComponent component)
+    private TextureFadeOverlay CreateOverlay(TextureFadeOverlayComponent component)
     {
-        if (component.IsOverlayInitialized)
-            return;
-        component.IsOverlayInitialized = true;
-        for (var i = 0; i < component.Layers.Count; i++)
+        var overlay = new TextureFadeOverlay()
         {
-            var layer = component.Layers[i];
-            layer.Overlay = new TextureFadeOverlay()
-            {
-                Sprite = layer.Sprite,
-                Modulate = layer.Modulate,
-                ZIndex = layer.ZIndex,
-            };
-            OverlayStack.Get(_overlayManager).AddOverlay(layer.Overlay);
-            component.Layers[i] = layer;
-        }
+            Sprite = component.Sprite,
+            Modulate = component.Modulate,
+            ZIndex = component.ZIndex,
+        };
+        OverlayStack.Get(_overlayManager).AddOverlay(overlay);
+        return overlay;
     }
 
-    private void DeinitializeLayers(TextureFadeOverlayComponent component)
+    private void DestroyOverlay(TextureFadeOverlayComponent component)
     {
-        if (!component.IsOverlayInitialized)
+        if (component.Overlay is null)
             return;
-        component.IsOverlayInitialized = false;
-        for (var i = 0; i < component.Layers.Count; i++)
-        {
-            var layer = component.Layers[i];
-            var overlay = layer.Overlay;
-            if (overlay is null)
-                continue;
-            OverlayStack.Get(_overlayManager).RemoveOverlay(overlay);
-            overlay.Dispose();
-            layer.Overlay = null;
-            component.Layers[i] = layer;
-        }
+        OverlayStack.Get(_overlayManager).RemoveOverlay(component.Overlay);
+        component.Overlay.Dispose();
+        component.Overlay = null;
     }
 }
