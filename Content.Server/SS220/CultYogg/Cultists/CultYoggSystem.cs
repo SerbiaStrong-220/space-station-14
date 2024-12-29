@@ -354,7 +354,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         if (purifyedComp.TotalAmountOfHolyWater >= purifyedComp.AmountToPurify)
         {
-            //After cleansing effect
+            //After purifying effect
             _audio.PlayEntity(purifyedComp.PurifyingCollection, entity, entity);
 
             //Removing stage visuals, cause later component will be removed
@@ -364,7 +364,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             RemComp<CultYoggComponent>(entity);
         }
 
-        purifyedComp.PurifyingDecayEventTime = _timing.CurTime + purifyedComp.BeforeDeclinesTime; //setting timer, when cleansing will be removed
+        purifyedComp.PurifyingDecayEventTime = _timing.CurTime + purifyedComp.BeforeDeclinesTime; //setting timer, when purifying will be removed
     }
     #endregion
 }
