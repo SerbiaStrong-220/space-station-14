@@ -13,7 +13,7 @@ using System.Linq;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Interaction.Components;
 using Robust.Shared.Input.Binding;
-using Content.Shared.Input;
+using Content.Shared.SS220.Input;
 
 namespace Content.Server.SS220.ItemOfferVerb.Systems
 {
@@ -34,12 +34,12 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
             SubscribeLocalEvent<ItemReceiverComponent, ItemOfferAlertEvent>(OnItemOffserAlertClicked);
 
             CommandBinds.Builder
-                .Bind(ContentKeyFunctions.ItemOffer,
-                    new PointerInputCmdHandler(HandleItemOffer))
+                .Bind(KeyFunctions220.ItemOffer,
+                    new PointerInputCmdHandler(HandleItemOfferKey))
                 .Register<ItemOfferSystem>();
         }
 
-        private bool HandleItemOffer(in PointerInputCmdHandler.PointerInputCmdArgs args)
+        private bool HandleItemOfferKey(in PointerInputCmdHandler.PointerInputCmdArgs args)
         {
             if (!args.EntityUid.IsValid() || !EntityManager.EntityExists(args.EntityUid))
                 return false;
