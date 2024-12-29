@@ -89,7 +89,7 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-unknown-shuttle-incoming #SS220 Lost Souls Revive
-    weight: 1
+    weight: 2
   - type: LoadMapRule
     preloadedGrid: Honki
 
