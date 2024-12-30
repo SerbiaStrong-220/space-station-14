@@ -11,13 +11,13 @@
     - type: Gun
       soundGunshot: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_shot.ogg
       soundEmpty: null
-      fireRate: 20
-      projectileSpeed: 5
+      fireRate: 13
+      projectileSpeed: 9
     - type: BasicEntityAmmoProvider
       proto: SpitballerGunBullet
       capacity: 1
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 10
+      rechargeCooldown: 8
       rechargeSound: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_reload.ogg
     - type: Sprite
       sprite: SS220/Objects/Weapons/Guns/cult_yogg_spitballer.rsi
@@ -26,11 +26,6 @@
     - type: Appearance
     - type: Item
       size: Ginormous
-    - type: IncreaseDamageOnWield
-      damage:
-       types:
-          Brute: 30
-          Stamina: 80
     - type: GenericVisualizer
       visuals:
         enum.AmmoVisuals.HasAmmo:
@@ -72,9 +67,9 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    totalIntensity: 30
-    intensitySlope: 3
-    maxIntensity: 3.7
+    totalIntensity: 28
+    intensitySlope: 5
+    maxIntensity: 4
     canCreateVacuum: false
   - type: Tag
     tags:
