@@ -33,7 +33,7 @@ using Content.Shared.Roles;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 using Content.Shared.Mobs.Components;
-
+using Robust.Shared.Audio;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
@@ -57,9 +57,6 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _userInterfaceSystem = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
-
-
-    //[Dependency] private readonly CultYoggRuleSystem _cultYoggRule = default!; //maybe use this for enslavement
 
     public override void Initialize()
     {
@@ -319,7 +316,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             ChangeForm(uid, comp, true);
             if (!comp.AudioPlayed)
             {
-                _audio.PlayPredicted(comp.SoundMaterialize, uid, uid);
+                _audio.PlayPredicted(comp.SoundMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
                 comp.AudioPlayed = true;
             }
             _actions.StartUseDelay(comp.MiGoAstralActionEntity);
@@ -358,7 +355,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             var started = _doAfter.TryStartDoAfter(doafterArgs);
             if (started)
             {
-                _audio.PlayPredicted(uid.Comp.SoundDeMaterialize, uid, uid);
+                _audio.PlayPredicted(uid.Comp.SoundDeMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
             }
         }
     }
@@ -367,7 +364,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         args.Handled = true;
 
         _physics.SetBodyType(uid, BodyType.KinematicController);
-        _audio.PlayPredicted(uid.Comp.SoundMaterialize, uid, uid);
+        _audio.PlayPredicted(uid.Comp.SoundMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
 
         if (!args.Cancelled)
         {
