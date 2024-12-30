@@ -7,7 +7,6 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Server.Station.Systems;
 using Content.Server.SS220.CultYogg.Sacraficials;
-using Content.Server.SS220.CultYogg.Nyarlathotep;
 using Content.Server.RoundEnd;
 using Content.Server.Zombies;
 using Content.Shared.Audio;
