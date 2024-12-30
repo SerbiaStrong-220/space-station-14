@@ -46,10 +46,6 @@
         type: MiGoErectBoundUserInterface
   - type: ShowCultYoggIcons
   - type: NpcFactionMember
-  - type: Temperature
-    heatDamageThreshold: 360
-    coldDamageThreshold: -150
-    currentTemperature: 310.15
     factions:
     - CultYogg
   - type: AntagObjectives
@@ -109,6 +105,10 @@
       - !type:GibBehavior { }
   - type: Stamina
     critThreshold: 200
+  - type: Temperature
+    heatDamageThreshold: 360
+    coldDamageThreshold: -150
+    currentTemperature: 310.15
   - type: Tag
     tags:
     - CannotSuicide
