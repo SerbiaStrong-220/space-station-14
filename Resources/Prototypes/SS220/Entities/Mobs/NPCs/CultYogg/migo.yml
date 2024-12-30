@@ -55,6 +55,7 @@
   #situational for logic
   - type: NoSlip
   - type: Insulated
+  - type: FlashImmunity
   #visual
   - type: Sprite
     drawdepth: Mobs
