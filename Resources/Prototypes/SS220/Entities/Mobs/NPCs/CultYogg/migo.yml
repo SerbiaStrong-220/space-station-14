@@ -36,6 +36,8 @@
     telepathyChannelPrototype: TelepathyChannelYoggSothothCult
   - type: RandomMetadata
     nameSegments: [ cult_yogg_migo ]
+  - type: Speech
+    speechVerb: LargeMob
   - type: TTS
     voice: forester
   - type: UserInterface
