@@ -320,10 +320,12 @@
     children:
       - !type:NestedSelector
         tableId: UnknownShuttlesFriendlyTable
+# SS220-NoUnknownShuttles begin
 #       - !type:NestedSelector
 #         tableId: UnknownShuttlesFreelanceTable
 #       - !type:NestedSelector
 #         tableId: UnknownShuttlesHostileTable
+# SS220-NoUnknownShuttles end
 
 - type: entity
   id: BasicStationEventScheduler
@@ -353,6 +355,7 @@
 #      max: 7200 # 120 mins # you probably arent getting a second visitor shuttle in one round, but it is possible.
 #    scheduledGameRules: !type:NestedSelector
 #      tableId: SpaceTrafficControlTable
+# SS220-NoUnknownShuttles end
 
 - type: entity
   id: SpaceTrafficControlFriendlyEventScheduler
