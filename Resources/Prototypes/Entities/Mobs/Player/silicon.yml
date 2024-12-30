@@ -116,7 +116,7 @@
   - type: CriminalRecordsConsole220
   - type: PowerMonitoringConsole
   - type: AtmosAlertsComputer
-# - type: RoboticsConsole
+  - type: RoboticsConsole
   - type: ResearchConsole
   - type: ResearchClient
   - type: TechnologyDatabase
