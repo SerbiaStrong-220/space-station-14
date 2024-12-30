@@ -17,7 +17,7 @@
       proto: SpitballerGunBullet
       capacity: 1
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 8
+      rechargeCooldown: 10
       rechargeSound: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_reload.ogg
     - type: Sprite
       sprite: SS220/Objects/Weapons/Guns/cult_yogg_spitballer.rsi
@@ -68,7 +68,7 @@
   - type: Explosive
     explosionType: Default
     totalIntensity: 28
-    intensitySlope: 5
+    intensitySlope: 3
     maxIntensity: 4
     canCreateVacuum: false
   - type: Tag

@@ -46,6 +46,10 @@
         type: MiGoErectBoundUserInterface
   - type: ShowCultYoggIcons
   - type: NpcFactionMember
+  - type: Temperature
+    heatDamageThreshold: 360
+    coldDamageThreshold: -150
+    currentTemperature: 310.15
     factions:
     - CultYogg
   - type: AntagObjectives
@@ -56,6 +60,7 @@
   - type: NoSlip
   - type: Insulated
   - type: FlashImmunity
+  - type: IgnoreOnfloorSlowers
   #visual
   - type: Sprite
     drawdepth: Mobs
