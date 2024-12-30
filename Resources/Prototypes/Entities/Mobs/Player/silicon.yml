@@ -67,10 +67,10 @@
         type: ResearchConsoleBoundUserInterface
       enum.ResearchClientUiKey.Key:
         type: ResearchClientBoundUserInterface
-#      enum.SuperMatterObserverUiKey.Key:
-#        type: SuperMatterObserverBUI
-#      enum.RoboticsConsoleUiKey.Key:
-#        type: RoboticsConsoleBoundUserInterface
+      enum.SuperMatterObserverUiKey.Key:
+        type: SuperMatterObserverBUI
+      enum.RoboticsConsoleUiKey.Key:
+        type: RoboticsConsoleBoundUserInterface
       enum.StationMapUiKey.Key:
         type: StationMapBoundUserInterface
       #SS220 Station Ai Actions end
@@ -101,10 +101,10 @@
         toggleAction: ActionAiShowAlertInterface
       enum.ResearchConsoleUiKey.Key:
         toggleAction: ActionAiShowResearchAndDevelopmentInterface
-#      enum.SuperMatterObserverUiKey.Key:
-#        toggleAction: ActionAiShowSMInterface
-#      enum.RoboticsConsoleUiKey.Key:
-#        toggleAction: ActionAiShowRoboticsConsole
+      enum.SuperMatterObserverUiKey.Key:
+        toggleAction: ActionAiShowSMInterface
+      enum.RoboticsConsoleUiKey.Key:
+        toggleAction: ActionAiShowRoboticsConsole
       enum.StationMapUiKey.Key:
         toggleAction: ActionAiStationMapConsole
   #SS220 Station Ai Actions end
@@ -120,12 +120,12 @@
   - type: ResearchConsole
   - type: ResearchClient
   - type: TechnologyDatabase
-#  - type: SuperMatterObserver #SS220_TODO: Добавить отображение СМа Для ИИ
-#  - type: SuperMatterObserverReceiver
+  - type: SuperMatterObserver #SS220_TODO: Добавить отображение СМа Для ИИ
+  - type: SuperMatterObserverReceiver
   - type: ApcPowerReceiver
     needsPower: false
     powerLoad: 0
-  # - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
+  - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
   #SS220 Station Ai Actions end
   - type: DeviceNetwork
     deviceNetId: Wireless
