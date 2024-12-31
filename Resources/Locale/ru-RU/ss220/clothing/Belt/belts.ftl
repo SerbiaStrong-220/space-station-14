@@ -16,8 +16,8 @@ ent-ClothingBeltBlueShieldFilled = { ent-ClothingBeltBlueShield }
 
 ent-ClothingBeltWebbingBlueShield = РПС "Синий Щит"
     .desc = Универсальный разгрузочный жилет с ремнями и поясом. Может вмещать всё что угодно... всё что угодно небольшого размера.
-ent-ClothingBeltWebbingBlueShieldFilled = { ent-ClothingBeltBlueShield }
-    .desc = { ent-ClothingBeltBlueShield.desc }
+ent-ClothingBeltWebbingBlueShieldFilled = { ent-ClothingBeltWebbingBlueShield }
+    .desc = { ent-ClothingBeltWebbingBlueShield.desc }
     .suffix = Заполненный
 
 ent-ClothingBeltMedicalInterdyne = РПС образца НМП-023
