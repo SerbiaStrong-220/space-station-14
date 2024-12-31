@@ -5,5 +5,5 @@
 
 - files: ["homerunbaton.ogg"]
   license: "CC-BY-SA-3.0"
-  copyright: "By EstKemran (Github) for SS220"
-  source: "https://github.com/ss220club/Paradise-SS220/blob/master/sound/weapons/homerun.ogg, https://github.com/ParadiseSS13/Paradise/blob/master/sound/weapons/batonextend.ogg, https://www.freesoundslibrary.com/bonk-sound-effect/"
+  copyright: "https://github.com/ss220club/Paradise-SS220/blob/master/sound/weapons/homerun.ogg, https://github.com/ParadiseSS13/Paradise/blob/master/sound/weapons/batonextend.ogg, https://www.freesoundslibrary.com/bonk-sound-effect/"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/tree/master/Resources/Audio/SS220/Weapons/Melee/homerun/homerunbaton.ogg"

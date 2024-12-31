@@ -48,3 +48,20 @@
           False: {state: telescope_off}
   - type: MeleeThrowOnHit
     lifetime: 0.1
+
+- type: entity
+  parent: NTbaton
+  id: NTbatonStrong
+  suffix: Strong
+  components:
+  - type: MeleeThrowOnHit
+    lifetime: 5
+
+- type: entity
+  parent: NTbaton
+  id: NTbatonPowerful
+  suffix: Powerful
+  components:
+  - type: MeleeThrowOnHit
+    lifetime: 10
+    speed: 20
