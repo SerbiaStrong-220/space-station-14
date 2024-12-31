@@ -27,7 +27,7 @@
       - id: Handcuffs
       - id: Handcuffs
       - id: GrenadeFlashBang
-      - id: GrenadeFlashBang
+      - id: RadioHandheldSecurity
       - id: FlashlightSeclite
 
 - type: entity
@@ -67,7 +67,7 @@
       - id: FlashlightSeclite
       - id: Handcuffs
       - id: GrenadeFlashBang
-      - id: GrenadeFlashBang
+      - id: RadioHandheldSecurity
   - type: ContainerFill
     containers:
      item:
