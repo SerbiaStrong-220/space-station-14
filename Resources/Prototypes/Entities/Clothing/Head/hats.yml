@@ -459,9 +459,9 @@
   description: A festive hat worn by Santa Claus.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/santahat.rsi # ss220 new-years-cap
+    sprite: Clothing/Head/Hats/santahat.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/santahat.rsi # ss220 new-years-cap
+    sprite: Clothing/Head/Hats/santahat.rsi
   #ss220 special_sounds start
   - type: SpecialSounds
   - type: Vocal
