@@ -40,16 +40,18 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: SS220/Mobs/Ghosts/ghost_human.rsi ## ss220-new-years-ghost
-#    color: "#fff8" ss220-new-years-ghost
+#    sprite: Mobs/Ghosts/ghost_human.rsi ## ss220-new-years-cap
+#    color: "#fff8" ss220-new-years-cap
     layers:
     - state: animated
-    ## ss220-new-years-ghost begib
+      shader: unshaded
+    ## ss220-new-years-cap begin
+      sprite: Mobs/Ghosts/ghost_human.rsi
       color: "#fff8"
+    - state: cap-ghost
       shader: unshaded
-    - state: cap
-    ## ss220-new-years-ghost end
-      shader: unshaded
+      sprite: SS220/Clothing/Head/Hats/santahat.rsi
+    ## ss220-new-years-cap end
   - type: ContentEye
     maxZoom: 1.44,1.44
   - type: Eye
