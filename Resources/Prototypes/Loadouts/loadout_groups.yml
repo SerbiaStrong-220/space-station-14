@@ -1222,7 +1222,7 @@
   name: loadout-group-security-head
   minLimit: 0
   loadouts:
-  - SecurityHelmetXmas
+  - SecurityHelmetXmas #SS220 XMAS
   - SecurityHelmet
   - SecurityBeret
   - SecurityHat
