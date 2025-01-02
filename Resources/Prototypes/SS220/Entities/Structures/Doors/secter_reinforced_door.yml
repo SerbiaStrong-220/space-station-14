@@ -45,7 +45,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Construction
-    graph: ReinforcedGirder
+    graph: Girder
     node: reinforcedElectronics
   placement:
     mode: SnapgridCenter
@@ -56,7 +56,7 @@
   parent: BaseSecretDoor
   components:
   - type: Construction
-    graph: ReinforcedGirder
+    graph: Girder
     node: solidSecretReinforcedDoor
     containers:
     - battery-container
