@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.Contractor;
 
 /// <summary>
-/// This is used for...
+/// This is used for marking a portal.
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent]

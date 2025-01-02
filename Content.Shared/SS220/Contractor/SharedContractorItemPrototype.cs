@@ -5,7 +5,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.Contractor;
 
 /// <summary>
-/// This is a prototype for...
+/// This is a prototype for contractor items in uplink.
 /// </summary>
 [Serializable, NetSerializable, Prototype("contractorItems")]
 public sealed partial class SharedContractorItemPrototype : IPrototype

@@ -5,9 +5,6 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Contractor;
 
-/// <summary>
-/// This handles...
-/// </summary>
 public sealed class ContractorPortalServerSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -21,11 +18,14 @@ public sealed class ContractorPortalServerSystem : EntitySystem
         SubscribeLocalEvent<ContractorPortalOnTriggerComponent, StartCollideEvent>(OnEnterPortal);
     }
 
+    /// <summary>
+    /// This is used for what doing when player enter portal
+    /// </summary>
     private void OnEnterPortal(Entity<ContractorPortalOnTriggerComponent> ent, ref StartCollideEvent args)
     {
         if (!TryComp<ContractorTargetComponent>(args.OtherEntity, out var targetComponent))
         {
-            _popup.PopupClient("Портал недоступен для вас", args.OtherEntity, PopupType.Medium);
+            _popup.PopupClient(Loc.GetString("contractor-portal-for-non-target"), args.OtherEntity, PopupType.Medium);
             return;
         }
 
@@ -56,7 +56,7 @@ public sealed class ContractorPortalServerSystem : EntitySystem
 
         if (needsPortalEntity != args.OurEntity)
         {
-            _popup.PopupClient("Этот портал предназначен не для этой цели", args.OtherEntity, PopupType.Medium);
+            _popup.PopupClient(Loc.GetString("contractor-portal-for-another-target"), args.OtherEntity, PopupType.Medium);
             return;
         }
 
@@ -67,9 +67,10 @@ public sealed class ContractorPortalServerSystem : EntitySystem
         _uiSystem.ServerSendUiMessage(GetEntity(contractorComponent.PdaEntity)!.Value, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
         _uiSystem.ServerSendUiMessage(GetEntity(contractorComponent.PdaEntity)!.Value, ContractorPdaKey.Key, new ContractorCompletedContractMessage());
 
-        _contractorServer.GenerateContracts((contractorEntity, contractorComponent));
+        _contractorServer.GenerateContracts((contractorEntity, contractorComponent)); // generate new contracts
 
-        _transformSystem.SetCoordinates(args.OtherEntity, Transform(contractorEntity).Coordinates); // tp target to other map in future
+        // TODO: create new warp point for another map (tajpan???)
+        _transformSystem.SetCoordinates(args.OtherEntity, Transform(contractorEntity).Coordinates);
 
         Dirty(contractorPdaEntity, contractorPdaComponent);
         Dirty(contractorEntity, contractorComponent);

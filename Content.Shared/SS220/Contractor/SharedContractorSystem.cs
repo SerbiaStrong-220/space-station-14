@@ -13,12 +13,17 @@ public abstract class SharedContractorSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<ContractorPdaComponent, ComponentInit>(OnContractorPdaMapInit);
+        SubscribeLocalEvent<ContractorPdaComponent, ComponentInit>(OnContractorPdaCompInit);
         SubscribeLocalEvent<ContractorPdaComponent, BoundUIOpenedEvent>(OnOpenUI);
         SubscribeLocalEvent<ContractorPdaComponent, ContractorHubBuyItemMessage>(OnBuyItem);
     }
 
-    private void OnContractorPdaMapInit(Entity<ContractorPdaComponent> ent, ref ComponentInit args)
+    /// <summary>
+    /// On CompInit pda generate available items
+    /// </summary>
+    /// <param name="ent">Entity pda</param>
+    /// <param name="args">Event</param>
+    private void OnContractorPdaCompInit(Entity<ContractorPdaComponent> ent, ref ComponentInit args)
     {
         if (ent.Comp.AvailableItems.Count > 0)
             return;
@@ -32,6 +37,10 @@ public abstract class SharedContractorSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// Will generate a pda owner once for the person who first opened it
+    /// </summary>
+    /// <param name="ent">PDA entity</param>
     private void OnOpenUI(Entity<ContractorPdaComponent> ent, ref BoundUIOpenedEvent args)
     {
         if (ent.Comp.PdaOwner != null)
@@ -50,6 +59,9 @@ public abstract class SharedContractorSystem : EntitySystem
         Dirty(ent);
     }
 
+    /// <summary>
+    /// Raise event for buying an item, but only if buyer is pda owner
+    /// </summary>
     private void OnBuyItem(Entity<ContractorPdaComponent> ent, ref ContractorHubBuyItemMessage ev)
     {
         if (!TryComp<ContractorComponent>(ev.Actor, out var contractorComponent))
@@ -72,6 +84,10 @@ public abstract class SharedContractorSystem : EntitySystem
         Dirty(ev.Actor, contractorComponent);
     }
 
+    /// <summary>
+    /// Used in bound ui on client, to get contracts for pda
+    /// </summary>
+    /// <returns>Return dictionary of contracts</returns>
     public Dictionary<NetEntity, ContractorContract>? GetContractsForPda(EntityUid contractor, EntityUid pdaEntity)
     {
         AddContractsToPda(contractor, pdaEntity);
@@ -91,6 +107,9 @@ public abstract class SharedContractorSystem : EntitySystem
 
 }
 
+/// <summary>
+/// Event for opening a portal
+/// </summary>
 [Serializable, NetSerializable]
 public sealed partial class OpenPortalContractorEvent : DoAfterEvent
 {

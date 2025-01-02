@@ -75,11 +75,17 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         }
     }
 
+    /// <summary>
+    /// Generate contracts on server, once time while called CompInit event
+    /// </summary>
     private void OnContractorCompInit(Entity<ContractorComponent> ent, ref ComponentInit ev)
     {
         GenerateContracts(ent);
     }
 
+    /// <summary>
+    /// Handle open portal event
+    /// </summary>
     private void OnOpenPortalEvent(Entity<ContractorComponent> ent, ref OpenPortalContractorEvent args)
     {
         if (!TryComp<ContractorTargetComponent>(GetEntity(ent.Comp.CurrentContractEntity), out var target))
@@ -97,6 +103,9 @@ public sealed class ContractorServerSystem : SharedContractorSystem
     }
 
     //TODO server and checks
+    /// <summary>
+    /// Raised when clicked on position button on pda
+    /// </summary>
     private void OnNewContractAccepted(Entity<ContractorPdaComponent> ent, ref ContractorNewContractAcceptedMessage ev)
     {
         if (!TryComp<ContractorComponent>(ev.Actor, out var contractorComponent))
@@ -110,9 +119,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         EnsureComp<ContractorTargetComponent>(GetEntity(ev.ContractEntity), out var target);
 
-        //Only for test
-        /*
-        if (target.AmountTc > 8)
+        if (target.AmountTc > 8 || ev.TcReward > 8)
         {
             _adminLogger.Add(
                 LogType.Action,
@@ -121,7 +128,6 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
             return;
         }
-        */
 
         target.PortalPosition = Transform(GetEntity(ev.WarpPointEntity)).Coordinates;
         target.AmountTc = ev.TcReward;
@@ -131,7 +137,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         contractorComponent.CurrentContractData = ev.ContractData;
         contractorComponent.CurrentContractEntity = ev.ContractEntity;
-        contractorComponent.PdaEntity = ev.Entity;
+        //contractorComponent.PdaEntity = ev.Entity; //why this shit here?
 
         Dirty(ev.Actor, contractorComponent);
 
@@ -145,7 +151,9 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         HandleContractAccepted(ev.ContractEntity, ev.Actor);
     }
 
-    // TODO on server //DONE
+    /// <summary>
+    /// Raised when clicked on execute button, then doAfter, then open portal.
+    /// </summary>
     private void OnExecuteContract(Entity<ContractorPdaComponent> ent, ref ContractorExecutionButtonPressedMessage ev)
     {
         var entity = GetEntity(ent.Comp.CurrentContractEntity);
@@ -195,6 +203,11 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         EnsureComp<ContractorComponent>(ev.Actor);
     }
 
+    /// <summary>
+    /// When contractor accepts new contract, remove this contract from other contractors and generate another contract for them
+    /// </summary>
+    /// <param name="acceptedPlayer">Target, on what contractor accepted</param>
+    /// <param name="contractor">Contractor, who accepted</param>
     public void HandleContractAccepted(NetEntity acceptedPlayer, EntityUid contractor)
     {
         var query = EntityQueryEnumerator<ContractorComponent>();
@@ -210,7 +223,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             if (contractorComp.Contracts.Count >= 5)
                 continue;
 
-            var newContract = GenerateContractForContractor(uid);
+            var newContract = GenerateContractForContractor((uid, contractorComp));
 
             if (newContract != null)
             {
@@ -223,7 +236,12 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         }
     }
 
-    private (NetEntity Target, ContractorContract Contract)? GenerateContractForContractor(EntityUid contractor)
+    /// <summary>
+    /// Generate a new contract or contracts for contractors, if another contractor has accepted their contract
+    /// </summary>
+    /// <param name="contractor"></param>
+    /// <returns></returns>
+    private (NetEntity Target, ContractorContract Contract)? GenerateContractForContractor(Entity<ContractorComponent> contractor)
     {
         var playerPool = _playerManager.Sessions
             .Where(p => p is { Status: SessionStatus.InGame, AttachedEntity: not null })
@@ -241,6 +259,9 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             {
                 continue;
             }
+
+            if (contractor.Comp.Contracts.ContainsKey(GetNetEntity(player)))
+                continue;
 
             if (!_mindSystem.TryGetMind(player, out var mindId, out _))
                 continue;
@@ -336,7 +357,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         return allLocations;
     }
 
-    public bool IsCloseWithPosition(NetEntity playerNet)
+    private bool IsCloseWithPosition(NetEntity playerNet)
     {
         var player = GetEntity(playerNet);
 
@@ -357,10 +378,9 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         var targetPortalPosition = targetComponent.PortalPosition.Position;
 
-
         var isPlayerCloseToPortal = (playerPosition - targetPortalPosition).Length() < 1f;
         var isTargetCloseToPortal = (targetPosition - targetPortalPosition).Length() < 1f;
 
-        return isPlayerCloseToPortal && isTargetCloseToPortal; //tile distance
+        return isPlayerCloseToPortal && isTargetCloseToPortal;
     }
 }

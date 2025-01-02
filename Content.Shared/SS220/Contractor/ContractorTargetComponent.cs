@@ -6,7 +6,7 @@ using Robust.Shared.Map;
 namespace Content.Shared.SS220.Contractor;
 
 /// <summary>
-/// This is used for...
+/// This is used for marking target for contractor.
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent]

@@ -34,7 +34,6 @@
       shape:
         - 0,0,2,2
     - type: Storage
-      maxItemSize: Small
       grid:
         - 0,0,6,4
     - type: Sprite
