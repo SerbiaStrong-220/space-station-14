@@ -59,7 +59,7 @@ ghost-role-information-xeno-name = Ксено
 ghost-role-information-xeno-description = Вы ксено. Скооперируйтесь со своим ульем, чтобы истребить всех членов экипажа!
 ghost-role-information-xeno-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими ксено.
 ghost-role-information-revenant-name = Ревенант
-ghost-role-information-revenant-description = Вы Ревенант. Используйте свои силы, чтобы собирать души и наводить страх на команду. С помощью собранной эссенции открывайте новые способности.
+ghost-role-information-revenant-description = Вы Ревенант. Используйте свои силы, чтобы собирать души и сеять хаос среди экипажа. Открывайте новые способности с помощью собранной эссенции.
 ghost-role-information-revenant-rules = Вы – антагонист. Собирайте души, оскверняйте и сводите с ума экипаж.
 ghost-role-information-kangaroo-name = Кенгуру
 ghost-role-information-kangaroo-description = Вы кенгуру! Делайте всё, что делают кенгуру.
