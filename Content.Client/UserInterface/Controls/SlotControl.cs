@@ -15,6 +15,7 @@ namespace Content.Client.UserInterface.Controls
         public TextureRect ButtonRect { get; }
         public TextureRect BlockedRect { get; }
         public TextureRect HighlightRect { get; }
+        public TextureRect StuckOnEquipRect { get; } //ss220 StuckOnEquip
         public SpriteView HoverSpriteView { get; }
         public TextureButton StorageButton { get; }
         public CooldownGraphic CooldownDisplay { get; }
@@ -51,6 +52,8 @@ namespace Content.Client.UserInterface.Controls
 
         public bool Blocked { get => BlockedRect.Visible; set => BlockedRect.Visible = value;}
 
+        public bool StuckOnEquip { get => StuckOnEquipRect.Visible; set => StuckOnEquipRect.Visible = value;} //ss220 StuckOnEquip
+
         private string? _blockedTexturePath;
         public string? BlockedTexturePath
         {
@@ -61,6 +64,19 @@ namespace Content.Client.UserInterface.Controls
                 BlockedRect.Texture = Theme.ResolveTextureOrNull(_blockedTexturePath)?.Texture;
             }
         }
+
+        //ss220 StuckOnEquip begin
+        private string? _stuckOnEquipTexturePath;
+        public string? StuckOnEquipTexturePath
+        {
+            get => _stuckOnEquipTexturePath;
+            set
+            {
+                _stuckOnEquipTexturePath = value;
+                StuckOnEquipRect.Texture = Theme.ResolveTextureOrNull(_stuckOnEquipTexturePath)?.Texture;
+            }
+        }
+        //ss220 StuckOnEquip end
 
         private string? _buttonTexturePath;
         public string? ButtonTexturePath
@@ -190,6 +206,15 @@ namespace Content.Client.UserInterface.Controls
                 MouseFilter = MouseFilterMode.Stop,
                 Visible = false
             });
+
+            //ss220 StuckOnEquip begin
+            AddChild(StuckOnEquipRect = new TextureRect
+            {
+                TextureScale = new Vector2(2, 2),
+                Visible = false
+            });
+            StuckOnEquipTexturePath = "stuckonequip";
+            //ss220 StuckOnEquip end
 
             HighlightTexturePath = "slot_highlight";
             BlockedTexturePath = "blocked";
