@@ -33,5 +33,5 @@
   name: CultYoggRole
   components:
   - type: MindRole
-    antagPrototype: CultYoggProto
+    antagPrototype: CultistOfYoggSothoth
   - type: CultYoggRole

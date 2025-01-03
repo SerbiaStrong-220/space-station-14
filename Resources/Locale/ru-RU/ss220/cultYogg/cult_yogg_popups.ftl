@@ -30,6 +30,8 @@ cult-yogg-stage-eyes-markups = Глаза горят неестественно 
 
 cult-yogg-resurrected-by-heal = Мистические силы возвращают к жизни {$target}
 
+cult-yogg-cleansing-start = Вы чувствуете, как святая вода внутри вас убивает споры.
+
 cult-yogg-acsending-have-acsending = Один из членов культа в данный момент возносится
 cult-yogg-acsending-migo-full = Достигнуто необходимое количество Ми-Го и все они живы
 cult-yogg-acsending-started = Вы чувствуете, как споры пришли в активность
