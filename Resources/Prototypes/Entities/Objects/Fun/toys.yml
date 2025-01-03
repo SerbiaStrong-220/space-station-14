@@ -137,7 +137,7 @@
     - type: Item
       size: Normal
     - type: Sprite
-      sprite: Mobs/Ghosts/revenant.rsi
+      sprite: SS220/Mobs/Ghosts/revenant.rsi #SS220 revenant-sprite-port
       state: icon
       noRot: true
     - type: Construction

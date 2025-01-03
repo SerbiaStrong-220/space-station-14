@@ -8,7 +8,7 @@
   objectType: Item
   description: A toy to scare the medbay with.
   icon:
-    sprite: Mobs/Ghosts/revenant.rsi
+    sprite: SS220/Mobs/Ghosts/revenant.rsi #SS220 revenant-sprite-port
     state: icon
 
 - type: construction
