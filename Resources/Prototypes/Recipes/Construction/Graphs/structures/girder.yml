@@ -473,7 +473,7 @@
     - node: secretReinforcedWall
       entity: ReinforcedGirder
       actions:
-      - !type:SnapToGrid {}
+      #- !type:SnapToGrid {}
       - !type:SetAnchor {}
       edges:
       - to: reinforcedElectronics
