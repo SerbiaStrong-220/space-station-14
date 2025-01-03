@@ -8,20 +8,16 @@
   "copyright": "by MIXnikita for SS220",
     "states": [
     {
-      "name": "left",
-      "directions": 4
+        "name": "curbwood",
+        "directions": 4
     },
     {
-      "name": "middle",
-      "directions": 4
+        "name": "curbsteel",
+        "directions": 4
     },
     {
-      "name": "right",
-      "directions": 4
-    },
-    {
-      "name": "solo",
-      "directions": 4
+        "name": "curbdarksteel",
+        "directions": 4
     }
   ]
 }
