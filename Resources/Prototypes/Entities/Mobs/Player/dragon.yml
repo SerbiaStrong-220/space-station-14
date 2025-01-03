@@ -139,7 +139,7 @@
     foodPreference: Humanoid
     shouldStoreDevoured: true
     chemical: Ichor
-    healRate: 15.0
+    healRate: 25.0 #SS220 Antag balance
     whitelist:
       components:
       - MobState
