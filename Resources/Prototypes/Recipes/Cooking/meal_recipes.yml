@@ -1627,7 +1627,6 @@
   solids:
     FoodDonkpocketCarp: 1
 
-
 - type: microwaveMealRecipe
   id: RecipeHotChili
   name: hot chili recipe
