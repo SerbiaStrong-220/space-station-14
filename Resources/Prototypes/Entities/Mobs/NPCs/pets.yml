@@ -148,9 +148,11 @@
   - type: NpcFactionMember
     factions:
       - PetsNT
-  - type: HTN
-    rootTask:
-      task: SimpleHostileCompound
+ #ss220 fix start
+#  - type: HTN
+#    rootTask:
+#      task: SimpleHostileCompound
+ #ss220 fix end
   - type: Grammar
     attributes:
       proper: true
