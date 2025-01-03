@@ -27,7 +27,7 @@
   - type: Icon
     sprite: Objects/Devices/pda.rsi
     state: pda-ce_dark
-    
+
 - type: entity
   parent: BasePDA
   id: SeniorServicePDA
@@ -130,3 +130,17 @@
       visible: false
   - type: Icon
     state: pda-rd-alt
+
+- type: entity
+  parent: BasePDA
+  id: ContractorPDA
+  name: contractor PDA
+  components:
+    - type: ActivatableUI
+      key: enum.ContractorPdaKey.Key
+      singleUser: true
+    - type: UserInterface
+      interfaces:
+        enum.ContractorPdaKey.Key:
+          type: ContractorBoundUserInterface
+    - type: ContractorPda
