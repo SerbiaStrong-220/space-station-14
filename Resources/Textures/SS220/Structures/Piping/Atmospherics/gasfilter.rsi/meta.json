@@ -1,0 +1,39 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "by MIXnikita (Github) for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "gasFilter",
+            "directions": 4
+        },
+        {
+            "name": "gasFilterF",
+            "directions": 4
+        },
+        {
+            "name": "gasFilterOn",
+            "directions": 4,
+            "delays": [
+                [ 0.2, 0.2, 0.2, 0.2 ],
+                [ 0.2, 0.2, 0.2, 0.2 ],
+                [ 0.2, 0.2, 0.2, 0.2 ],
+                [ 0.2, 0.2, 0.2, 0.2 ]
+            ]
+        },
+        {
+            "name": "gasFilterFOn",
+            "directions": 4,
+            "delays": [
+                [ 0.2, 0.2, 0.2, 0.2 ],
+                [ 0.2, 0.2, 0.2, 0.2 ],
+                [ 0.2, 0.2, 0.2, 0.2 ],
+                [ 0.2, 0.2, 0.2, 0.2 ]
+            ]
+        }
+    ]
+}
