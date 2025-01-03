@@ -1256,8 +1256,8 @@
   - SecurityJumpskirtTurtleneck #SS220-MoreTurtleneck-End
   - JumpsuitSecBlue #ss220 sec loadout update
   - JumpsuitTacSec #ss220 tacsec update
-  - SeniorOfficerJumpsuit
-  - SeniorOfficerJumpskirt
+  # - SeniorOfficerJumpsuit #SS220 delete-instructor-uniform-officer's
+  # - SeniorOfficerJumpskirt #SS220 delete-instructor-uniform-officer's
   - TrooperUniform
   - JumpsuitSecVaas #ss220 security loadout
 
