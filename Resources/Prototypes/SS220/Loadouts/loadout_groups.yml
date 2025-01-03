@@ -278,6 +278,17 @@
   - VestArmorSec
   - CyberVestSecurity
   # Пилот (Конец)
+
+  # Детектив (Начало)
+- type: loadoutGroup
+  id: DetectiveShoes
+  name: loadout-group-detective-shoes
+  loadouts:
+  - JackBoots
+  - SecurityWinterBoots
+  - BootsJackSec
+  - DetectiveShoesBootsLaceup
+  # Детектив (Конец)
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
