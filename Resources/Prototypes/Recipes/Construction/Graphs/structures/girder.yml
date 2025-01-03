@@ -183,9 +183,6 @@
         - to: secretWall
           conditions:
           - !type:EntityAnchored {}
-          completed:
-          - !type:SetAnchor
-            value: false
           steps:
           - material: Cable
             amount: 4
@@ -196,7 +193,6 @@
     - node: secretWall
       entity: Girder
       actions:
-      - !type:SnapToGrid {}
       - !type:SetAnchor {}
       edges:
       - to: electronics
@@ -460,9 +456,6 @@
         - to: secretReinforcedWall
           conditions:
           - !type:EntityAnchored {}
-          completed:
-          - !type:SetAnchor
-            value: false
           steps:
           - material: Cable
             amount: 4
@@ -473,7 +466,6 @@
     - node: secretReinforcedWall
       entity: ReinforcedGirder
       actions:
-      #- !type:SnapToGrid {}
       - !type:SetAnchor {}
       edges:
       - to: reinforcedElectronics
