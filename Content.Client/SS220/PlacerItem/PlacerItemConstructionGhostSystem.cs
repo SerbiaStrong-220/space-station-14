@@ -38,7 +38,10 @@ public sealed class PlacerItemConstructionGhostSystem : EntitySystem
         if (!TryComp<PlacerItemComponent>(heldEntity, out var comp) || !comp.Active)
         {
             if (placerIsPlacerItem)
+            {
                 _placementManager.Clear();
+                _placementDirection = default;
+            }
 
             return;
         }
@@ -50,13 +53,13 @@ public sealed class PlacerItemConstructionGhostSystem : EntitySystem
             RaiseNetworkEvent(new PlacerItemUpdateDirectionEvent(GetNetEntity(heldEntity.Value), _placementDirection));
         }
 
-        if (heldEntity == placerEntity && placerProto == comp.ProtoId.Id)
+        if (heldEntity == placerEntity && placerProto == comp.SpawnProto.Id)
             return;
 
         var newObjInfo = new PlacementInformation
         {
             MobUid = heldEntity.Value,
-            EntityType = comp.ProtoId.Id,
+            EntityType = comp.ConstructionGhostProto ?? comp.SpawnProto,
             PlacementOption = _placementMode,
             Range = (int)Math.Ceiling(SharedInteractionSystem.InteractionRange),
             IsTile = false,

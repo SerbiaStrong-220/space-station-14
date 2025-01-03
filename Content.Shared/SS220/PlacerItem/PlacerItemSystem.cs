@@ -9,6 +9,7 @@ using Content.Shared.RCD.Systems;
 using Content.Shared.SS220.PlacerItem.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -19,12 +20,14 @@ public sealed partial class PlacerItemSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IComponentFactory _factory = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly RCDSystem _rcdSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _xform = default!;
 
     public override void Initialize()
     {
@@ -32,6 +35,7 @@ public sealed partial class PlacerItemSystem : EntitySystem
 
         SubscribeLocalEvent<PlacerItemComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<PlacerItemComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<PlacerItemComponent, PlacerItemDoAfterEvent>(OnDoAfter);
 
         SubscribeNetworkEvent<PlacerItemUpdateDirectionEvent>(OnUpdateDirection);
     }
@@ -64,7 +68,7 @@ public sealed partial class PlacerItemSystem : EntitySystem
             return;
 
         var doAfterTime = TimeSpan.FromSeconds(comp.DoAfter);
-        var ev = new PlacementOnInteractDoAfterEvent(GetNetCoordinates(mapGridData.Value.Location), comp.ConstructionDirection, comp.ProtoId);
+        var ev = new PlacerItemDoAfterEvent(GetNetCoordinates(mapGridData.Value.Location), comp.ConstructionDirection, comp.SpawnProto);
 
         var doAfterArgs = new DoAfterArgs(EntityManager, user, doAfterTime, ev, uid, args.Target, uid)
         {
@@ -76,8 +80,25 @@ public sealed partial class PlacerItemSystem : EntitySystem
             BlockDuplicate = false
         };
 
-        _doAfter.TryStartDoAfter(doAfterArgs);
-        args.Handled = true;
+        if (_doAfter.TryStartDoAfter(doAfterArgs))
+        {
+            comp.Active = false;
+            args.Handled = true;
+        };
+    }
+
+    private void OnDoAfter(Entity<PlacerItemComponent> entity, ref PlacerItemDoAfterEvent args)
+    {
+        if (args.Cancelled || !_net.IsServer)
+            return;
+
+        if (!_rcdSystem.TryGetMapGridData(GetCoordinates(args.Location), out var mapGridData))
+            return;
+
+        var mapCords = _xform.ToMapCoordinates(_mapSystem.GridTileToLocal(mapGridData.Value.GridUid, mapGridData.Value.Component, mapGridData.Value.Position));
+        Spawn(args.ProtoId.Id, mapCords, rotation: args.Direction.ToAngle());
+
+        QueueDel(entity);
     }
 
     private void OnUpdateDirection(PlacerItemUpdateDirectionEvent ev, EntitySessionEventArgs session)
@@ -105,17 +126,17 @@ public sealed partial class PlacerItemSystem : EntitySystem
         Dirty(entity);
     }
 
-    public bool IsPlacementOperationStillValid(Entity<PlacerItemComponent> entity, MapGridData mapGridData, EntityUid? target, EntityUid user, bool popMsgs = true)
+    public bool IsPlacementOperationStillValid(Entity<PlacerItemComponent> entity, MapGridData mapGridData, EntityUid? target, EntityUid user)
     {
         var (uid, comp) = entity;
         var unobstracted = target == null
-            ? _interaction.InRangeUnobstructed(user, _mapSystem.GridTileToWorld(mapGridData.GridUid, mapGridData.Component, mapGridData.Position), popup: popMsgs)
-            : _interaction.InRangeUnobstructed(user, target.Value, popup: popMsgs);
+            ? _interaction.InRangeUnobstructed(user, _mapSystem.GridTileToWorld(mapGridData.GridUid, mapGridData.Component, mapGridData.Position))
+            : _interaction.InRangeUnobstructed(user, target.Value);
 
         if (!unobstracted)
             return false;
 
-        if (!_prototypeManager.TryIndex<EntityPrototype>(comp.ProtoId.Id, out var prototype))
+        if (!_prototypeManager.TryIndex<EntityPrototype>(comp.SpawnProto.Id, out var prototype))
             return false;
 
         prototype.TryGetComponent<TagComponent>(_factory.GetComponentName<TagComponent>(), out var tagComponent);
@@ -169,17 +190,15 @@ public sealed partial class PlacerItemSystem : EntitySystem
 }
 
 [Serializable, NetSerializable]
-public sealed partial class PlacementOnInteractDoAfterEvent : DoAfterEvent
+public sealed partial class PlacerItemDoAfterEvent : DoAfterEvent
 {
-    public NetCoordinates Coordinates;
-
+    public NetCoordinates Location;
     public Direction Direction;
-
     public EntProtoId ProtoId;
 
-    public PlacementOnInteractDoAfterEvent(NetCoordinates coordinates, Direction direction, EntProtoId protoId)
+    public PlacerItemDoAfterEvent(NetCoordinates location, Direction direction, EntProtoId protoId)
     {
-        Coordinates = coordinates;
+        Location = location;
         Direction = direction;
         ProtoId = protoId;
     }

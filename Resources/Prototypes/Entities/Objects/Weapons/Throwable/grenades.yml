@@ -40,6 +40,11 @@
         enum.ConstructionVisuals.Layer:
           Primed: { state: primed }
           Unprimed: { state: icon }
+  # SS220 add barricades begin
+  - type: Tag
+    tags:
+    - PassBarricade
+  # SS220 add barricades end
 
 - type: entity
   name: explosive grenade

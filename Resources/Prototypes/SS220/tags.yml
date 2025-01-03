@@ -185,3 +185,7 @@
 # SS220 Cult
 - type: Tag
   id: Omnivorous
+
+# Barricades
+- type: Tag
+  id: PassBarricade

@@ -6,13 +6,22 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.PlacerItem.Components;
 
+/// <summary>
+/// A component that allows the user to place a specific entity using a construction ghost
+/// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]
 public sealed partial class PlacerItemComponent : Component
 {
+    /// <summary>
+    /// Is placement by this component active or not
+    /// </summary>
     [ViewVariables, AutoNetworkedField]
     public bool Active = false;
 
+    /// <summary>
+    /// In which direction should the construction be placed
+    /// </summary>
     [ViewVariables, AutoNetworkedField]
     public Direction ConstructionDirection
     {
@@ -29,12 +38,27 @@ public sealed partial class PlacerItemComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public Transform ConstructionTransform { get; private set; } = default!;
 
-    [DataField(required: true)]
-    public EntProtoId ProtoId;
+    /// <summary>
+    /// Id of the prototype used in the construction ghost
+    /// </summary>
+    [DataField]
+    public EntProtoId? ConstructionGhostProto;
 
+    /// <summary>
+    /// Id of the prototype that will be spawned
+    /// </summary>
+    [DataField(required: true)]
+    public EntProtoId SpawnProto;
+
+    /// <summary>
+    /// The time required for the user to place the construction
+    /// </summary>
     [DataField]
     public float DoAfter = 0;
 
+    /// <summary>
+    /// Should the placement toggle when item used in hand
+    /// </summary>
     [DataField]
     public bool ToggleActiveOnUseInHand = false;
 }
