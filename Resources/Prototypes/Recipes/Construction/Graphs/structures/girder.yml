@@ -517,7 +517,7 @@
           emptyAtUser: true
         steps:
         - tool: Prying
-          doAfter: 5
+          doAfter: 12
     # SS220 ReinforcedGirder node add end (SolidSecretReinforcedDoor Recipe Update)
 
     - node: reinforcedWall
