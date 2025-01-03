@@ -141,3 +141,8 @@
   - type: Store
     balance:
       Telecrystal: 99999
+  # SS220-debug-uplink-fix-begin
+  - type: Tag
+    tags:
+    - DebugUplink
+  # SS220-debug-uplink-fix-end

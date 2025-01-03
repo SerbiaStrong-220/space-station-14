@@ -181,6 +181,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink #SS220-uplink-fix
+      - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: UplinkSniperBundle
@@ -244,6 +245,7 @@
        tags:
          - NukeOpsUplink
          - LoneOpsUplink
+         - DebugUplink #SS220-debug-uplink-fix
 # SS220-uplink-fix-end
   - !type:BuyerWhitelistCondition
     blacklist:
@@ -270,6 +272,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - DebugUplink #SS220-debug-uplink-fix
 
 # Explosives
 
@@ -337,6 +340,7 @@
         tags:
           - NukeOpsUplink
           - LoneOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -423,6 +427,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink #SS220-uplink-fix
+      - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: UplinkC4Bundle
@@ -479,6 +484,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - DebugUplink #SS220-debug-uplink-fix
     blacklist:
       components:
       - SurplusBundle
@@ -621,6 +627,7 @@
         tags:
           - NukeOpsUplink
           - LoneOpsUplink #SS220-uplink-fix
+          - DebugUplink #SS220-debug-uplink-fix
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -685,6 +692,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink #SS220-debug-uplink-fix
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -787,6 +795,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -1125,6 +1134,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: UplinkSurplusBundle
@@ -1248,6 +1258,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
       blacklist:
         tags:
           - LoneOpsUplink
@@ -1267,6 +1278,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: UplinkReinforcementRadioSyndicateAncestor
@@ -1306,6 +1318,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: UplinkCarpDehydrated
@@ -1448,6 +1461,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink #SS220-debug-uplink-fix
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -1468,6 +1482,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -1488,6 +1503,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: UplinkUplinkImplanter # uplink uplink real
@@ -1525,6 +1541,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -1739,6 +1756,7 @@
         tags:
         - NukeOpsUplink
         - LoneOpsUplink
+        - DebugUplink #SS220-debug-uplink-fix
 #ss220-fix-uplink-end
 
 - type: listing
@@ -1765,6 +1783,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - DebugUplink #SS220-debug-uplink-fix
 # ss220-fix-uplink-end
 
 #SS220 Syndie visor buff begin
