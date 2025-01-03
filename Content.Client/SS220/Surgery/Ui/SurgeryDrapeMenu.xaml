@@ -1,0 +1,50 @@
+ <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:surgery="clr-namespace:Content.Client.SS220.Surgery.Ui"
+    Title="{Loc 'surgery-observer-title'}"
+    Resizable="True"
+    MinSize="256 106"
+    RectClipContent="False">
+    <Control>
+        <PanelContainer>
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
+            </PanelContainer.PanelOverride>
+        </PanelContainer>
+        <BoxContainer Name="ContentBox" Orientation="Horizontal" MouseFilter="Pass" VerticalAlignment="Center"
+                VerticalExpand="False" HorizontalExpand="False">
+            <BoxContainer Name="PuppetBox" MouseFilter="Pass" Margin="1 1" VerticalAlignment="Bottom">
+                <surgery:SurgeryPuppetBox Name="Puppet" Scale="3 3" MouseFilter="Pass" />
+            </BoxContainer>
+            <BoxContainer Name="DetailedInfoBox" Orientation="Horizontal" VerticalExpand="True" HorizontalExpand="False">
+                <BoxContainer Name="OperationsBox" Orientation="Vertical"  HorizontalExpand="False">
+                    <RichTextLabel Name="OperationsLabel" Text="{Loc 'surgery-list-name'}" HorizontalExpand="True" HorizontalAlignment="Center"/>
+                    <ScrollContainer Name="OperationScroll" HScrollEnabled="False"
+                        HorizontalExpand="True" VerticalExpand="True" MouseFilter="Pass">
+                        <BoxContainer
+                            Name="OperationContainer"
+                            Orientation="Vertical"
+                            SizeFlagsStretchRatio="2"
+                            HorizontalExpand="True"
+                            VerticalExpand="True">
+                            <!--  operations are added here by code  -->
+                        </BoxContainer>
+                    </ScrollContainer>
+                </BoxContainer>
+                <BoxContainer Name="DescriptionBox" Orientation="Vertical"  HorizontalExpand="False"
+                                    VerticalAlignment="Center" VerticalExpand="True" MinSize="300 120" MaxSize="300 120">
+                    <RichTextLabel Name="OperationName"  Text="{Loc 'surgery-operation-name'}" VerticalExpand="True" Margin="4 2"
+                        HorizontalExpand="True" VerticalAlignment="Stretch" HorizontalAlignment="Left" LineHeightScale="0.65"/>
+                    <RichTextLabel Name="OperationDescription"  Text="{Loc 'surgery-operation-desc'}" VerticalExpand="True" Margin="4 2"
+                        VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalExpand="True" LineHeightScale="0.65"/>
+                    <RichTextLabel Name="OperationPostscript"  Text="{Loc 'surgery-operation-postscript'}" VerticalExpand="True" Margin="4 2"
+                        HorizontalExpand="True" VerticalAlignment="Bottom" HorizontalAlignment="Left" LineHeightScale="0.65"/>
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </Control>
+</controls:FancyWindow>
