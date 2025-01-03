@@ -22,7 +22,7 @@
   equipment:
     id: ParamedicPDA
     ears: ClothingHeadsetMedical
-    belt: ClothingBeltMedicalEMTFilled
+#    belt: ClothingBeltMedicalEMTFilled #ss220 paramedicinterdyne
   storage:
     back:
     - EmergencyRollerBedSpawnFolded

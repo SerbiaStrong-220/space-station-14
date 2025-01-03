@@ -29,6 +29,7 @@ using Robust.Server.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
+using Content.Server.SS220.Nutrition;
 
 namespace Content.Server.NPC.Systems;
 
@@ -180,6 +181,11 @@ public sealed class NPCUtilitySystem : EntitySystem
                     return 0f;
 
                 var avoidBadFood = !HasComp<IgnoreBadFoodComponent>(owner);
+
+                //SS220 CultYogg start
+                if (TryComp<DesiredFoodComponent>(targetUid, out var desComp))
+                    return desComp.DesireLevel;
+                //SS220 CultYogg end
 
                 // only eat when hungry or if it will eat anything
                 if (TryComp<HungerComponent>(owner, out var hunger) && hunger.CurrentThreshold > HungerThreshold.Okay && avoidBadFood)

@@ -50,8 +50,13 @@ public sealed class TelepathySystem : EntitySystem
 
     private void OnTelepathySend(Entity<TelepathyComponent> ent, ref TelepathySendEvent args)
     {
-        if (ent.Comp.TelepathyChannelPrototype is { } telepathyChannel)
-            SendMessageToEveryoneWithRightChannel(telepathyChannel, args.Message, ent);
+        if (ent.Comp.TelepathyChannelPrototype is not { } telepathyChannel)
+            return;
+
+        if (!CanSendTelepathy(ent))
+            return;
+
+        SendMessageToEveryoneWithRightChannel(telepathyChannel, args.Message, ent);
     }
 
     /// <summary>
@@ -165,5 +170,12 @@ public sealed class TelepathySystem : EntitySystem
         RaiseLocalEvent(senderUid.Value, nameEv);
         var name = Name(nameEv.Sender);
         return name;
+    }
+
+    private bool CanSendTelepathy(EntityUid sender)
+    {
+        var args = new TelepathySendAttemptEvent(sender, false);
+        RaiseLocalEvent(sender, ref args);
+        return !args.Cancelled;
     }
 }

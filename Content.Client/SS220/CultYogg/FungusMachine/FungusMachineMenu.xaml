@@ -1,0 +1,25 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:style="clr-namespace:Content.Client.Stylesheets">
+    <BoxContainer Orientation="Vertical">
+        <LineEdit Name="SearchBar" PlaceHolder=""
+                  HorizontalExpand="True"  Margin ="4 4" Access="Public"/>
+        <ItemList Name="FungusContents"
+                  SizeFlagsStretchRatio="8"
+                  VerticalExpand="True"
+                  ItemSeparation="2"
+                  Margin="4 0"
+                  SelectMode="Button"
+                  StyleClasses="transparentBackgroundItemList">
+        </ItemList>
+         <!-- Footer -->
+        <BoxContainer Orientation="Vertical">
+            <PanelContainer StyleClasses="LowDivider" />
+            <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>
