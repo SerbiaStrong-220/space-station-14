@@ -363,6 +363,29 @@
         acts: [ "Destruction" ]
 
 - type: entity
+  parent: BaseItem
+  id: PlacementOnInteractTest
+  name: base flatpack
+  description: A flatpack used for constructing something.
+  components:
+  - type: Item
+    size: Large
+  - type: Sprite
+    sprite: Objects/Devices/flatpack.rsi
+    layers:
+    - state: base
+    - state: overlay
+      color: "#cec8ac"
+      map: ["enum.FlatpackVisualLayers.Overlay"]
+    - state: icon-default
+  - type: Appearance
+  - type: PlacerItem
+    protoId: FoldingBarricadePlasteelFloor
+    toggleActiveOnUseInHand: true
+  - type: StaticPrice
+    price: 250
+
+- type: entity
   parent: BarricadePlasteelFloor
   id: FoldingBarricadePlasteelFloor
   name: напольная укреплённая баррикада

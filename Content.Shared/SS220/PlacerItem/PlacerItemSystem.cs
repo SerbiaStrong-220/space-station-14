@@ -1,0 +1,188 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Shared.Construction;
+using Content.Shared.DoAfter;
+using Content.Shared.Hands.Components;
+using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
+using Content.Shared.RCD.Systems;
+using Content.Shared.SS220.PlacerItem.Components;
+using Content.Shared.Tag;
+using Robust.Shared.Map;
+using Robust.Shared.Physics;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared.SS220.PlacerItem.Systems;
+
+public sealed partial class PlacerItemSystem : EntitySystem
+{
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IComponentFactory _factory = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly RCDSystem _rcdSystem = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<PlacerItemComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<PlacerItemComponent, AfterInteractEvent>(OnAfterInteract);
+
+        SubscribeNetworkEvent<PlacerItemUpdateDirectionEvent>(OnUpdateDirection);
+    }
+
+    private void OnUseInHand(Entity<PlacerItemComponent> entity, ref UseInHandEvent args)
+    {
+        if (args.Handled || !entity.Comp.ToggleActiveOnUseInHand)
+            return;
+
+        SetActive(entity, !entity.Comp.Active);
+        args.Handled = true;
+    }
+
+    private void OnAfterInteract(Entity<PlacerItemComponent> entity, ref AfterInteractEvent args)
+    {
+        if (args.Handled || !args.CanReach || !entity.Comp.Active)
+            return;
+
+        var (uid, comp) = entity;
+        var user = args.User;
+        var location = args.ClickLocation;
+
+        if (!location.IsValid(EntityManager))
+            return;
+
+        if (!_rcdSystem.TryGetMapGridData(location, out var mapGridData))
+            return;
+
+        if (!IsPlacementOperationStillValid(entity, mapGridData.Value, args.Target, user))
+            return;
+
+        var doAfterTime = TimeSpan.FromSeconds(comp.DoAfter);
+        var ev = new PlacementOnInteractDoAfterEvent(GetNetCoordinates(mapGridData.Value.Location), comp.ConstructionDirection, comp.ProtoId);
+
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, doAfterTime, ev, uid, args.Target, uid)
+        {
+            BreakOnDamage = true,
+            BreakOnHandChange = true,
+            BreakOnMove = true,
+            AttemptFrequency = AttemptFrequency.EveryTick,
+            CancelDuplicate = false,
+            BlockDuplicate = false
+        };
+
+        _doAfter.TryStartDoAfter(doAfterArgs);
+        args.Handled = true;
+    }
+
+    private void OnUpdateDirection(PlacerItemUpdateDirectionEvent ev, EntitySessionEventArgs session)
+    {
+        var uid = GetEntity(ev.NetEntity);
+        var user = session.SenderSession.AttachedEntity;
+
+        if (user == null)
+            return;
+
+        if (!TryComp<HandsComponent>(user, out var hands) ||
+            uid != hands.ActiveHand?.HeldEntity)
+            return;
+
+        if (!TryComp<PlacerItemComponent>(uid, out var comp))
+            return;
+
+        comp.ConstructionDirection = ev.Direction;
+        Dirty(uid, comp);
+    }
+
+    private void SetActive(Entity<PlacerItemComponent> entity, bool value)
+    {
+        entity.Comp.Active = value;
+        Dirty(entity);
+    }
+
+    public bool IsPlacementOperationStillValid(Entity<PlacerItemComponent> entity, MapGridData mapGridData, EntityUid? target, EntityUid user, bool popMsgs = true)
+    {
+        var (uid, comp) = entity;
+        var unobstracted = target == null
+            ? _interaction.InRangeUnobstructed(user, _mapSystem.GridTileToWorld(mapGridData.GridUid, mapGridData.Component, mapGridData.Position), popup: popMsgs)
+            : _interaction.InRangeUnobstructed(user, target.Value, popup: popMsgs);
+
+        if (!unobstracted)
+            return false;
+
+        if (!_prototypeManager.TryIndex<EntityPrototype>(comp.ProtoId.Id, out var prototype))
+            return false;
+
+        prototype.TryGetComponent<TagComponent>(_factory.GetComponentName<TagComponent>(), out var tagComponent);
+        var isWindow = tagComponent?.Tags != null && tagComponent.Tags.Contains("Window");
+        var isCatwalk = tagComponent?.Tags != null && tagComponent.Tags.Contains("Catwalk");
+
+        var intersectingEntities = _lookup.GetLocalEntitiesIntersecting(mapGridData.GridUid, mapGridData.Position, -0.05f, LookupFlags.Uncontained);
+
+        foreach (var ent in intersectingEntities)
+        {
+            if (isWindow && HasComp<SharedCanBuildWindowOnTopComponent>(ent))
+                continue;
+
+            if (isCatwalk && _tag.HasTag(ent, "Catwalk"))
+            {
+                return false;
+            }
+
+            if (prototype.TryGetComponent<FixturesComponent>(_factory.GetComponentName<FixturesComponent>(), out var protoFixtures) &&
+                TryComp<FixturesComponent>(ent, out var entFixtures) &&
+                IsOurEntWillCollideWithOtherEnt(comp.ConstructionTransform, protoFixtures, ent, entFixtures))
+                return false;
+        }
+
+        return true;
+    }
+
+    private bool IsOurEntWillCollideWithOtherEnt(Transform ourXform, FixturesComponent ourFixtures, EntityUid otherUid, FixturesComponent otherFixtures)
+    {
+        foreach (var ourFixture in ourFixtures.Fixtures.Values)
+        {
+            if (!ourFixture.Hard || ourFixture.CollisionLayer <= 0)
+                continue;
+
+            foreach (var otherFixture in otherFixtures.Fixtures.Values)
+            {
+                if (!otherFixture.Hard || otherFixture.CollisionLayer <= 0 ||
+                    ourFixture.CollisionLayer != otherFixture.CollisionLayer)
+                    continue;
+
+                var otherXformComp = Transform(otherUid);
+                var otherXform = new Transform(new(), otherXformComp.LocalRotation);
+
+                if (ourFixture.Shape.ComputeAABB(ourXform, 0).Intersects(otherFixture.Shape.ComputeAABB(otherXform, 0)))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed partial class PlacementOnInteractDoAfterEvent : DoAfterEvent
+{
+    public NetCoordinates Coordinates;
+
+    public Direction Direction;
+
+    public EntProtoId ProtoId;
+
+    public PlacementOnInteractDoAfterEvent(NetCoordinates coordinates, Direction direction, EntProtoId protoId)
+    {
+        Coordinates = coordinates;
+        Direction = direction;
+        ProtoId = protoId;
+    }
+
+    public override DoAfterEvent Clone() => this;
+}
