@@ -2,12 +2,24 @@ using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using System.Numerics;
 
 namespace Content.Shared.Projectiles;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ProjectileComponent : Component
 {
+    // SS220 add barricade begin
+    [ViewVariables, AutoNetworkedField]
+    public EntityUid? ShootGridUid;
+
+    [ViewVariables, AutoNetworkedField]
+    public Vector2? ShootGridPos;
+
+    [ViewVariables, AutoNetworkedField]
+    public Vector2? ShootWorldPos;
+    // SS220 add barricade end
+
     /// <summary>
     ///     The angle of the fired projectile.
     /// </summary>

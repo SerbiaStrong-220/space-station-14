@@ -22,3 +22,15 @@
   rules:
     - CultYoggRule
     - BasicStationEventScheduler
+
+
+- type: gamePreset
+  id: FractWar
+  alias:
+    - fractwar
+  name: fractwar-preset-name
+  description: fractwar-preset-description
+  showInVote: false
+  rules:
+    - FractWar
+    - BasicRoundstartVariation

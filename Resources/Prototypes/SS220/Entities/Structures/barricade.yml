@@ -24,7 +24,7 @@
         - FullTileMask
         layer:
         - WallLayer
-  
+
 - type: entity
   id: BaseBarricadeDirectional220
   description: A barricade made out of wood planks. It looks like it can take a few solid hits.
@@ -141,7 +141,7 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-        
+
 - type: entity
   id: BarricadePlasteel
   description: Баррикада из листов пластали. Защищает вас от чужих глаз. Способна выдержать взрыв C4.
@@ -174,11 +174,11 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-        
+
 #Направленные баррикады
 - type: entity
   id: BarricadeWoodenDirectional
-  description: Баррикада из уплотнённых деревянных досок. Защищает вас от чужих глаз. 
+  description: Баррикада из уплотнённых деревянных досок. Защищает вас от чужих глаз.
   parent: BaseBarricadeDirectional220
   name: уплотнённая деревянная баррикада
   placement:
@@ -196,7 +196,7 @@
     fireSpread: true
     damage:
       types:
-        Heat: 2 
+        Heat: 2
   - type: FireVisuals
     sprite: Effects/fire.rsi
     normalState: 1
@@ -216,7 +216,7 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-       
+
 - type: entity
   id: BarricadeSteelDirectional
   description: Баррикада из стальных листов. Защищает вас от чужих глаз. Способна выдержать пулю.
@@ -241,7 +241,7 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-        
+
 - type: entity
   id: BarricadePlasteelDirectional
   description: Баррикада из листов пластали. Защищает вас от чужих глаз. Способна выдержать взрыв C4.
@@ -274,7 +274,7 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-        
+
 #Напольные баррикады
 - type: entity
   id: BarricadeWoodenFloor
@@ -296,10 +296,10 @@
     fireSpread: true
     damage:
       types:
-        Heat: 2 
+        Heat: 2
   - type: FireVisuals
     sprite: Effects/fire.rsi
-    normalState: 1 
+    normalState: 1
   - type: Damageable
     damageModifierSet: Wood
     damageContainer: StructuralInorganic
@@ -311,7 +311,7 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-       
+
 - type: entity
   id: BarricadeSteelFloor
   description: Баррикада небольшой высоты из листов стали. Есть шанс защитить от шальной пули.
@@ -336,7 +336,7 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-        
+
 - type: entity
   id: BarricadePlasteelFloor
   description: Баррикада небольшой высоты из листов пластали. Есть шанс защитить от шальной пули.

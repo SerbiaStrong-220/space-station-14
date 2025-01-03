@@ -1,0 +1,135 @@
+# Base
+- type: entity
+  parent: BaseItem
+  id: FractWarFoldedBarricadeBase
+  suffix: Ebent, Shitspawn, FractWar
+  components:
+  - type: Item
+    size: Large
+  - type: Sprite
+    sprite: SS220/Structures/Barricades/fract_war_barricade.rsi
+    state: icon
+  - type: Appearance
+  - type: PlacerItem
+    constructionGhostProto: FractWarBarricadeBase
+    spawnProto: FractWarBarricadeSpawnBase
+    toggleActiveOnUseInHand: true
+  - type: StaticPrice
+    price: 250
+
+- type: entity
+  parent: BaseStructure
+  id: FractWarBarricadeSpawnBase
+  suffix: Ebent, Shitspawn, FractWar
+  placement:
+      mode: SnapgridCenter
+  components:
+  - type: InteractionOutline
+  - type: Appearance
+  - type: AtmosExposed
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Structures/Barricades/fract_war_barricade.rsi
+    state: stand_up
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,-0.25"
+        mask:
+        - FullTileMask
+        layer:
+        - TableLayer
+  - type: Barricade
+    whitelist:
+      tags:
+        - PassBarricade
+  - type: TimedDespawn
+    lifetime: 2.25
+  - type: SpawnOnDespawn
+    prototype: FractWarBarricadeBase
+    inheritRotation: true
+  - type: Damageable
+    damageModifierSet: StructuralMetallic
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: BaseStructure
+  id: FractWarBarricadeBase
+  suffix: Ebent, Shitspawn, FractWar
+  placement:
+      mode: SnapgridCenter
+  components:
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: SS220/Structures/Barricades/fract_war_barricade.rsi
+    drawdepth: Mobs
+    noRot: false
+    state: base
+  - type: Appearance
+  - type: AtmosExposed
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,-0.25"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+  - type: Barricade
+    whitelist:
+      tags:
+        - PassBarricade
+  - type: Damageable
+    damageModifierSet: StructuralMetallic
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# USSP
+- type: entity
+  parent: FractWarFoldedBarricadeBase
+  id: FractWarFoldedBarricadeUssp
+  suffix: Ebent, Shitspawn, FractWar, Ussp
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Barricades/fract_war_barricade_ussp.rsi
+  - type: PlacerItem
+    constructionGhostProto: FractWarBarricadeUssp
+    spawnProto: FractWarBarricadeSpawnUssp
+
+- type: entity
+  parent: FractWarBarricadeSpawnBase
+  id: FractWarBarricadeSpawnUssp
+  suffix: Ebent, Shitspawn, FractWar, Ussp
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Barricades/fract_war_barricade_ussp.rsi
+  - type: SpawnOnDespawn
+    prototype: FractWarBarricadeUssp
+    inheritRotation: true
+
+- type: entity
+  parent: FractWarBarricadeBase
+  id: FractWarBarricadeUssp
+  suffix: Ebent, Shitspawn, FractWar, Ussp
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Barricades/fract_war_barricade_ussp.rsi
