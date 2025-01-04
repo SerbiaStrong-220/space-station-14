@@ -5,11 +5,11 @@
               Margin="5 5 5 5">
     <PanelContainer HorizontalExpand="True">
         <PanelContainer.PanelOverride>
-            <gfx:StyleBoxFlat BorderThickness="1" BorderColor="#777777"/>
+            <gfx:StyleBoxFlat BorderThickness="1.5" BorderColor="#777777"/>
         </PanelContainer.PanelOverride>
         <BoxContainer Orientation="Vertical">
             <PanelContainer Name="NameBackground" HorizontalExpand="True" VerticalExpand="False">
-                <RichTextLabel Name="ProductsLabelTitle" HorizontalAlignment="Center"/>
+                <RichTextLabel Name="RecipeLabelTitle" HorizontalAlignment="Center"/>
             </PanelContainer>
 
             <BoxContainer Name="RecipeContainer" HorizontalExpand="True" Orientation="Vertical">
@@ -19,10 +19,7 @@
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Stretch"
                                 HorizontalExpand="True">
-                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
-                        <RichTextLabel Name="IngredientsLabel"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"/>
+                    <BoxContainer Name="IngredientsContainer" Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
                     </BoxContainer>
                     <BoxContainer Orientation="Vertical"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0">
                         <TextureRect
@@ -32,10 +29,7 @@
                         <RichTextLabel Name="InstrumentName"
                                 HorizontalAlignment="Center"/>
                     </BoxContainer>
-                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
-                        <RichTextLabel Name="ProductsLabel"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"/>
+                    <BoxContainer Name="ProductsContainer" Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
                     </BoxContainer>
                 </BoxContainer>
             </BoxContainer>

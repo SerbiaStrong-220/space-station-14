@@ -89,6 +89,7 @@
   id: RecipeCatBurger
   name: cat burger recipe
   result: FoodBurgerCat
+  instrumentType: oven
   time: 10
   solids:
     FoodBreadBun: 1

@@ -25,8 +25,8 @@ public sealed class CookingRecipePrototype : IPrototype
     [DataField]
     public ProtoId<EntityPrototype> Result { get; } = string.Empty;
 
-    [DataField]
-    public ProtoId<CookingInstrumentTypePrototype> InstrumentType { get; } = string.Empty;
+    [DataField(required: true)]
+    public ProtoId<CookingInstrumentTypePrototype> InstrumentType { get; }
 
     [DataField("time")]
     public uint CookTime { get; } = 5;

@@ -12,6 +12,8 @@ using Content.Shared.SS220.SupaKitchen;
 using Content.Client.Message;
 using Robust.Shared.Utility;
 using Content.Shared.Chemistry.Reagent;
+using Robust.Client.GameObjects;
+using Content.Shared.FixedPoint;
 
 namespace Content.Client.SS220.SupaKitchen.UI.Controls;
 
@@ -22,6 +24,9 @@ namespace Content.Client.SS220.SupaKitchen.UI.Controls;
 public sealed partial class GuideCookingRecipeEmbed : BoxContainer, IDocumentTag, ISearchableControl
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IEntitySystemManager _entSysmMan = default!;
+
+    private readonly SpriteSystem _spriteSystem;
 
     private HashSet<string> _nameSearchCache;
 
@@ -31,6 +36,7 @@ public sealed partial class GuideCookingRecipeEmbed : BoxContainer, IDocumentTag
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        _spriteSystem = _entSysmMan.GetEntitySystem<SpriteSystem>();
 
         MouseFilter = MouseFilterMode.Stop;
         _sawmill = Logger.GetSawmill("KitchenCookbook");
@@ -87,37 +93,18 @@ public sealed partial class GuideCookingRecipeEmbed : BoxContainer, IDocumentTag
             return;
 
         _nameSearchCache.Add(product.Name);
-        ProductsLabelTitle.SetMarkup(product.Name);
-        // RecipeName.Text = recipe.Name;
-
-        // solid ingredients
-        var ingredientsMsg = new FormattedMessage();
-        var solidIngredientsCount = recipe.IngredientsSolids.Count;
-        var i = 0;
-        foreach (var (ingredientId, ingredientAmount) in recipe.IngredientsSolids)
-        {
-            if (!_prototype.TryIndex<EntityPrototype>(ingredientId, out var ingredientProto))
-            {
-                solidIngredientsCount--;
-                continue;
-            }
-
-            var ingredientName = ingredientProto.Name;
-            _nameSearchCache.Add(ingredientName);
-
-            ingredientsMsg.AddMarkupOrThrow(Loc.GetString("guidebook-cooking-recipes-ingredient-display",
-                ("reagent", ingredientName), ("ratio", ingredientAmount)));
-
-            i++;
-            if (i < solidIngredientsCount)
-                ingredientsMsg.PushNewline();
-        }
+        RecipeLabelTitle.SetMarkup(product.Name);
+        //RecipeLabelTitle.SetMarkup(recipe.Name);
 
         // reagents
+        var reagentsMsg = new FormattedMessage();
         var reagentIngredientsCount = recipe.IngredientsReagents.Count;
-        if (reagentIngredientsCount > 0)
-            ingredientsMsg.PushNewline();
         var u = 0;
+        var reagentsLabel = new RichTextLabel()
+        {
+            HorizontalAlignment = HAlignment.Center,
+            VerticalAlignment = VAlignment.Center
+        };
         foreach (var (ingredientId, ingredientAmount) in recipe.IngredientsReagents)
         {
             if (!_prototype.TryIndex<ReagentPrototype>(ingredientId, out var ingredientProto))
@@ -129,20 +116,35 @@ public sealed partial class GuideCookingRecipeEmbed : BoxContainer, IDocumentTag
             var ingredientName = ingredientProto.LocalizedName;
             _nameSearchCache.Add(ingredientName);
 
-            ingredientsMsg.AddMarkupOrThrow(Loc.GetString("guidebook-cooking-recipes-ingredient-display",
+            reagentsMsg.AddMarkupOrThrow(Loc.GetString("guidebook-cooking-recipes-ingredient-display",
                 ("reagent", ingredientName), ("ratio", ingredientAmount)));
 
             u++;
             if (u < reagentIngredientsCount)
-                ingredientsMsg.PushNewline();
+                reagentsMsg.PushNewline();
         }
 
-        ingredientsMsg.Pop();
-        IngredientsLabel.SetMessage(ingredientsMsg);
+        if (!reagentsMsg.IsEmpty)
+        {
+            reagentsMsg.Pop();
+            reagentsLabel.SetMessage(reagentsMsg);
+            IngredientsContainer.AddChild(reagentsLabel);
+        }
+
+        // solid ingredients
+        foreach (var (ingredientId, ingredientAmount) in recipe.IngredientsSolids)
+        {
+            if (!_prototype.TryIndex<EntityPrototype>(ingredientId, out var ingredientProto))
+                continue;
+
+            var ingredientName = ingredientProto.Name;
+            _nameSearchCache.Add(ingredientName);
+
+            IngredientsContainer.AddChild(GetEntContainer(ingredientProto, ingredientAmount));
+        }
 
         // output
-        ProductsLabel.SetMarkup(Loc.GetString("guidebook-cooking-recipes-ingredient-display",
-            ("reagent", product.Name), ("ratio", 1)));
+        ProductsContainer.AddChild(GetEntContainer(product, 1));
 
         if (!_prototype.TryIndex<CookingInstrumentTypePrototype>(recipe.InstrumentType, out var instrumentProto))
             return;
@@ -156,5 +158,30 @@ public sealed partial class GuideCookingRecipeEmbed : BoxContainer, IDocumentTag
 
         if (instrumentProto.IconPath is not null)
             InstrumentIcon.TexturePath = instrumentProto.IconPath;
+    }
+
+    private BoxContainer GetEntContainer(EntityPrototype prototype, FixedPoint2 amount)
+    {
+        var entContainer = new BoxContainer
+        {
+            Orientation = LayoutOrientation.Horizontal,
+            HorizontalExpand = true,
+            HorizontalAlignment = HAlignment.Center,
+        };
+
+        var entView = new EntityPrototypeView();
+        entView.SetPrototype(prototype);
+        entContainer.AddChild(entView);
+
+        var entMsg = new FormattedMessage();
+        entMsg.AddMarkupOrThrow(Loc.GetString("guidebook-cooking-recipes-ingredient-display",
+                ("reagent", prototype.Name), ("ratio", amount)));
+        entMsg.Pop();
+
+        var entLabel = new RichTextLabel();
+        entLabel.SetMessage(entMsg);
+        entContainer.AddChild(entLabel);
+
+        return entContainer;
     }
 }
