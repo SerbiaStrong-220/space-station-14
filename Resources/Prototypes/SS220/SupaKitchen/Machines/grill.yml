@@ -11,6 +11,9 @@
     beginCookingSound: /Audio/Effects/lightburn.ogg
     loopingSound: /Audio/SS220/SupaKitchen/grillsizzle.ogg
     foodDoneSound: /Audio/SS220/SupaKitchen/ring.ogg
+  - type: DeviceLinkSink
+    ports:
+    - On
   - type: ActivatableUI
     key: enum.CookingMachineUiKey.Key
   - type: UserInterface

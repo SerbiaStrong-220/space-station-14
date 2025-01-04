@@ -22,6 +22,9 @@
     loopingSound: "/Audio/SS220/SupaKitchen/oven/oven_loop_mid.ogg"
     foodDoneSound: "/Audio/SS220/SupaKitchen/ring.ogg"
     useEntityStorage: true
+  - type: DeviceLinkSink
+    ports:
+    - On
   - type: ActivatableUI
     key: enum.CookingMachineUiKey.Key
     altentativeVerbOnly: true

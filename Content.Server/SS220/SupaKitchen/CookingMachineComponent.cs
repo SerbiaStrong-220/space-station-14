@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Construction.Prototypes;
+using Content.Shared.DeviceLinking;
 using Content.Shared.SS220.SupaKitchen;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
@@ -72,6 +73,12 @@ public sealed partial class CookingMachineComponent : Component
     public bool UseEntityStorage = false;
 
     public Container Storage = default!;
+
+    #region Sink ports
+    [DataField]
+    public ProtoId<SinkPortPrototype> OnPort = "On";
+    #endregion
+
 }
 
 public sealed class ProcessedInCookingMachineEvent : HandledEntityEventArgs

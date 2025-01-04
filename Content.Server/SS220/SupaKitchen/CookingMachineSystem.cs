@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Construction;
+using Content.Server.DeviceLinking.Events;
 using Content.Server.Hands.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Storage.EntitySystems;
@@ -52,6 +53,7 @@ public sealed class CookingMachineSystem : EntitySystem
         //SubscribeLocalEvent<CookingMachineComponent, UpgradeExamineEvent>(OnUpgradeExamine);
         SubscribeLocalEvent<CookingMachineComponent, StorageAfterOpenEvent>(OnStorageOpen);
         SubscribeLocalEvent<CookingMachineComponent, StorageAfterCloseEvent>(OnStorageClosed);
+        SubscribeLocalEvent<CookingMachineComponent, SignalReceivedEvent>(OnSignalReceived);
 
         // UI event listeners
         SubscribeLocalEvent<CookingMachineComponent, CookingMachineStartCookMessage>((u, c, m) => StartCooking(u, c, m.Actor));
@@ -160,6 +162,12 @@ public sealed class CookingMachineSystem : EntitySystem
     //{
     //    args.AddPercentageUpgrade("cooking-machine-component-upgrade-cook-time", component.CookTimeMultiplier);
     //}
+
+    private void OnSignalReceived(Entity<CookingMachineComponent> entity, ref SignalReceivedEvent args)
+    {
+        if (args.Port == entity.Comp.OnPort.Id)
+            StartCooking(entity, entity, args.Trigger);
+    }
 
     #region ui_messages
     private void OnEjectMessage(EntityUid uid, CookingMachineComponent component, CookingMachineEjectMessage args)
