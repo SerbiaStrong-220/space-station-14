@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.SupaKitchen;
 using Robust.Shared.Containers;
@@ -9,7 +9,7 @@ using System.Linq;
 namespace Content.Server.SS220.SupaKitchen;
 public sealed class CookingInstrumentSystem : EntitySystem
 {
-    [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly SupaRecipeManager _recipeManager = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
 

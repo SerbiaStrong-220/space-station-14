@@ -105,7 +105,7 @@ public sealed partial class GuideCookingRecipeEmbed : BoxContainer, IDocumentTag
             var ingredientName = ingredientProto.Name;
             _nameSearchCache.Add(ingredientName);
 
-            ingredientsMsg.AddMarkup(Loc.GetString("guidebook-cooking-recipes-ingredient-display",
+            ingredientsMsg.AddMarkupOrThrow(Loc.GetString("guidebook-cooking-recipes-ingredient-display",
                 ("reagent", ingredientName), ("ratio", ingredientAmount)));
 
             i++;
@@ -129,7 +129,7 @@ public sealed partial class GuideCookingRecipeEmbed : BoxContainer, IDocumentTag
             var ingredientName = ingredientProto.LocalizedName;
             _nameSearchCache.Add(ingredientName);
 
-            ingredientsMsg.AddMarkup(Loc.GetString("guidebook-cooking-recipes-ingredient-display",
+            ingredientsMsg.AddMarkupOrThrow(Loc.GetString("guidebook-cooking-recipes-ingredient-display",
                 ("reagent", ingredientName), ("ratio", ingredientAmount)));
 
             u++;
@@ -148,9 +148,9 @@ public sealed partial class GuideCookingRecipeEmbed : BoxContainer, IDocumentTag
             return;
 
         var instrumentMsg = new FormattedMessage();
-        instrumentMsg.AddMarkup(instrumentProto.Name);
+        instrumentMsg.AddMarkupOrThrow(instrumentProto.Name);
         instrumentMsg.PushNewline();
-        instrumentMsg.AddMarkup(Loc.GetString("guidebook-cooking-recipes-timer-display", ("time", recipe.CookTime)));
+        instrumentMsg.AddMarkupOrThrow(Loc.GetString("guidebook-cooking-recipes-timer-display", ("time", recipe.CookTime)));
         instrumentMsg.Pop();
         InstrumentName.SetMessage(instrumentMsg);
 

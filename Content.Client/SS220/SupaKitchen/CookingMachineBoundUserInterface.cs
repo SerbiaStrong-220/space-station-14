@@ -52,12 +52,10 @@ namespace Content.Client.SS220.SupaKitchen.UI
             base.Dispose(disposing);
 
             if (!disposing)
-            {
                 return;
-            }
 
             _solids.Clear();
-            _menu?.Dispose();
+            //_menu?.Dispose();
         }
 
 
