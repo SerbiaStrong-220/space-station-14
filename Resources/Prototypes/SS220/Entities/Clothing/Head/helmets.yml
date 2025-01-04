@@ -12,6 +12,25 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Helmets/opscore.rsi
 
+- type: entity
+  parent: [ClothingHeadHelmetBase]
+  id: ClothingHeadHelmetBasicXmas
+  name: новогодний шлем
+  description: Новогоднее настроение на вашей голове и защита в одном! 
+  components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_head_helmedeva.ogg
+      params:
+        volume: 2
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Helmets/security_xmas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Helmets/security_xmas.rsi
+  - type: Tag
+    tags:
+    - Kangaroo #SS220-ghost-roles
+
 #Military Police Helmet #by MIXnikita for SS200
 - type: entity
   parent: ClothingHeadBase

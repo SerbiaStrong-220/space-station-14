@@ -835,6 +835,7 @@
   name: loadout-group-chief-engineer-head
   minLimit: 0
   loadouts:
+  - ChiefEngineerHeadXmas #SS220 XMAS
   - ChiefEngineerHead
   - ChiefEngineerBeret
   - BeretCE #SS220-CEBeret
@@ -908,6 +909,7 @@
   id: StationEngineerHead
   name: loadout-group-station-engineer-head
   loadouts:
+  - StationEngineerHardhatYellowXmas #SS220 XMAS
   - StationEngineerHardhatYellow
   - StationEngineerHardhatOrange
   - StationEngineerHardhatRed
@@ -1220,6 +1222,7 @@
   name: loadout-group-security-head
   minLimit: 0
   loadouts:
+  - SecurityHelmetXmas #SS220 XMAS
   - SecurityHelmet
   - SecurityBeret
   - SecurityHat
@@ -1253,8 +1256,8 @@
   - SecurityJumpskirtTurtleneck #SS220-MoreTurtleneck-End
   - JumpsuitSecBlue #ss220 sec loadout update
   - JumpsuitTacSec #ss220 tacsec update
-  - SeniorOfficerJumpsuit
-  - SeniorOfficerJumpskirt
+  # - SeniorOfficerJumpsuit #SS220 delete-instructor-uniform-officer's
+  # - SeniorOfficerJumpskirt #SS220 delete-instructor-uniform-officer's
   - TrooperUniform
   - JumpsuitSecVaas #ss220 security loadout
 

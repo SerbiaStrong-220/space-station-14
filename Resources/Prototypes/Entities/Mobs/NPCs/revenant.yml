@@ -13,7 +13,7 @@
     baseWalkSpeed: 6
     baseSprintSpeed: 6
   - type: Sprite
-    sprite: Mobs/Ghosts/revenant.rsi
+    sprite: SS220/Mobs/Ghosts/revenant.rsi #SS220 revenant-sprite-port
     layers:
     - state: active
   - type: StatusEffects

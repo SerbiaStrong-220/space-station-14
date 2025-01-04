@@ -382,6 +382,10 @@
   - type: AccessReader
     access: []
   #ss220 wires cut fix end
+#SS220 New years cap Begin \ Убрать после нового года
+  - type: StaticPrice
+    price: 3000
+#SS220 New years cap End \ Убрать после нового года
 
 - type: entity
   parent: VendingMachine
