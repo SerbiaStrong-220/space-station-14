@@ -58,7 +58,7 @@
     - id: NinjaSpawn
     - id: RevenantSpawn
     #- id: SleeperAgents
-    - id: ZombieOutbreak
+    #- id: ZombieOutbreak
     - id: DarkReaperSpawn #ss220 darkreaper middle event
     - id: SpiderQueenSpawn #SS220 spider queen midround event
     - id: LoneOpsSpawn
