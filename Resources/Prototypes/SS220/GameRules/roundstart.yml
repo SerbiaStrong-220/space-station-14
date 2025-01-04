@@ -5,8 +5,8 @@
   parent: BaseGameRule
   components:
   - type: GameRule
-    minPlayers: 40 #ToDo calculate around min players
-    delay: #ToDo tweak numbers
+    minPlayers: 40
+    delay:
       min: 300
       max: 600
   - type: CultYoggRule

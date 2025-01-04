@@ -260,6 +260,7 @@
   name: loadout-group-security-pilot-head
   minLimit: 0
   loadouts:
+  - SecurityHelmetXmas
   - SecurityHelmet
   - SecurityBeret
   - SecurityHat
@@ -576,6 +577,7 @@
   loadouts:
   - ClothingHeadHatSalvage
   - ClothingHeadBandSalvage
+  - ClothingHeadHatHardhatVioletXmas
   - ClothingHeadHatHardhatViolet
   - ClothingHeadBeretSalvageSpecialist
   # Утилизатор (Конец)

@@ -11,6 +11,39 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hardhats/violet.rsi
 
+- type: entity
+  parent: ClothingHeadHatHardhatBase
+  id: ClothingHeadHatHardhatWhiteXmas
+  name: новогодняя белая каска
+  description: Новогоднее настроение на вашей голове и защита в одном! 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardhats/white_xmas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardhats/white_xmas.rsi
+
+- type: entity
+  parent: ClothingHeadHatHardhatBase
+  id: ClothingHeadHatHardhatYellowXmas
+  name: новогодняя жёлтая каска
+  description: Новогоднее настроение на вашей голове и защита в одном! 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardhats/yellow_xmas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardhats/yellow_xmas.rsi
+
+- type: entity
+  parent: ClothingHeadHatHardhatBase
+  id: ClothingHeadHatHardhatVioletXmas
+  name: новогодняя фиолетовая каска
+  description: Новогоднее настроение на вашей голове и защита в одном! 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardhats/violet_xmas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardhats/violet_xmas.rsi
+
 # Уборщик
  
 - type: entity

@@ -18,7 +18,7 @@
   name: roles-antag-cult-yogg-name
   description: roles-antag-cult-yogg-objective
   showInVote: false
-  minPlayers: 2 #ToDo tweak numbers
+  minPlayers: 40
   rules:
     - CultYoggRule
     - BasicStationEventScheduler

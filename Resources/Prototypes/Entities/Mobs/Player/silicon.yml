@@ -421,7 +421,7 @@
   - type: StationAiVision
   - type: InteractionOutline
   - type: Sprite
-    sprite: Mobs/Silicon/station_ai.rsi
+    sprite: SS220/Mobs/Silicon/station_ai.rsi #SS220 XMAS
     layers:
     - state: base
     - state: ai_empty
@@ -468,7 +468,7 @@
     containerId: station_ai_mind_slot
     job: StationAi
   - type: Sprite
-    sprite: Mobs/Silicon/station_ai.rsi
+    sprite: SS220/Mobs/Silicon/station_ai.rsi #SS220 XMAS
     layers:
     - state: base
     - state: ai
@@ -533,7 +533,7 @@
   - type: Visibility
     layer: 2
   - type: Sprite
-    sprite: Mobs/Silicon/station_ai.rsi
+    sprite: SS220/Mobs/Silicon/station_ai.rsi #SS220 XMAS
     layers:
     - state: ai_camera
       shader: unshaded
