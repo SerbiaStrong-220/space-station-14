@@ -1,0 +1,25 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: [ClothingBackpack, CultYoggRestrictedItem]
+  id: ClothingBackpackDuffelCultYogg
+  suffix: CultYogg
+  name: cult duffel bag
+  description: description
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/cultYogg_backpack.rsi
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,13,5
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+  - type: RestrictedStorage
+    whitelist:
+      requireAll: true
+      components:
+      - CultYogg
+  - type: StuckOnEquip

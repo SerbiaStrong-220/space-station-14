@@ -12,7 +12,6 @@
   - type: Transform
     anchored: true
     noRot: true
-  - type: Anchorable
   - type: Fixtures # TODO find masks/layers together
     fixtures:
       fix1:

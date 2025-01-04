@@ -22,7 +22,7 @@
     - SimpleHostile
   - type: Sprite
     drawdepth: SmallMobs
-    sprite: Mobs/Animals/regalrat.rsi
+    sprite: SS220/Mobs/Animals/regalrat.rsi #SS20 XMAS
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: regalrat
@@ -197,7 +197,7 @@
     - SimpleHostile
   - type: Sprite
     drawdepth: SmallMobs
-    sprite: Mobs/Animals/rat.rsi
+    sprite: SS220/Mobs/Animals/rat.rsi #SS220 XMAS
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: rat

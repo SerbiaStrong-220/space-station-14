@@ -18,8 +18,9 @@
 - type: speciesBaseSprites
   id: MobVoxSprites
   sprites:
+    Special: MobHumanoidAnyMarking #SS220-CultYogg
     Head: MobVoxHead
-    Snout: MobHumanoidAnyMarking
+    Snout: MobVoxSnout #SS220-Vox Beak
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
     Chest: MobVoxTorso
@@ -84,6 +85,14 @@
   baseSprite:
     sprite: Mobs/Species/Vox/parts.rsi
     state: head
+
+#SS220-Vox Beak Begin
+- type: humanoidBaseSprite
+  id: MobVoxSnout
+  baseSprite:
+    sprite: Mobs/Species/Vox/parts.rsi
+    state: beak
+#SS220-Vox Beak End
 
 - type: humanoidBaseSprite
   id: MobVoxHeadFemale

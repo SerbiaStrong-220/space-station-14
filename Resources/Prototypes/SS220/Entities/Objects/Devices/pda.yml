@@ -3,6 +3,7 @@
   id: DarkCEPDA
   name: dark chief engineer PDA
   description: A prestigious dark-colored PDA for a Chef Engineer that has put a lot of time into his work.
+  suffix: For playtime
   components:
   - type: Pda
     id: CEIDCard
@@ -54,7 +55,6 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-seniorservice
-
 - type: entity
   parent: BasePDA
   id: MagistratePDA
@@ -86,10 +86,29 @@
     state: pda-magistrate
 
 - type: entity
+  parent: DeathsquadPDA
+  id: DeathsquadCommanderPDA
+  suffix: Death Squad Commander
+  components:
+  - type: Pda
+    id: CentcomIDCardDeathsquadCommander
+    state: pda-deathsquad
+
+- type: entity
+  parent: DeathsquadPDA
+  id: DeathsquadHealerPDA
+  suffix: Death Squad Healer
+  components:
+  - type: Pda
+    id: CentcomIDCardDeathsquadHealer
+    state: pda-deathsquad
+
+- type: entity
   parent: BasePDA
   id: AltRnDDirPDA
   name: alternative research director PDA
   description: He looks a little different than his copy
+  suffix: For playtime
   components:
   - type: Pda
     id: RDIDCard

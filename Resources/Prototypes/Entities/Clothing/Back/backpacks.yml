@@ -53,6 +53,7 @@
   id: ClothingBackpackIan
   name: Ian's backpack
   description: Sometimes he wears it.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Back/Backpacks/ian.rsi
@@ -189,7 +190,7 @@
 - type: entity
   parent: ClothingBackpack
   id: ClothingBackpackMerc
-  name: merc bag
+  name: mercenary bag
   description: A backpack that has been in many dangerous places, a reliable combat backpack.
   components:
     - type: Sprite

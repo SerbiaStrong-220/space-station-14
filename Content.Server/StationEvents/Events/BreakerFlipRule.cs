@@ -2,6 +2,7 @@ using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.StationEvents.Components;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.SS220.Power.Components;
 using Content.Shared.Station.Components;
 using JetBrains.Annotations;
 
@@ -35,7 +36,9 @@ public sealed class BreakerFlipRule : StationEventSystem<BreakerFlipRuleComponen
         var query = EntityQueryEnumerator<ApcComponent, TransformComponent>();
         while (query.MoveNext(out var apcUid, out var apc, out var xform))
         {
-            if (apc.MainBreakerEnabled && CompOrNull<StationMemberComponent>(xform.GridUid)?.Station == chosenStation)
+            //SS220-SM-fix-begin
+            if (apc.MainBreakerEnabled && !HasComp<HighPriorityAPCComponent>(apcUid)
+                && CompOrNull<StationMemberComponent>(xform.GridUid)?.Station == chosenStation) //SS220-SM-fix-end
             {
                 stationApcs.Add((apcUid, apc));
             }

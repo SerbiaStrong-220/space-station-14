@@ -23,8 +23,21 @@
     owner: job-name-hos
 
 - type: entity
+  categories: [ HideSpawnMenu ]
   parent: BaseTraitorStealObjective
-  id: ClothingOuterReactiveArmorObjective
+  id: SecretDocumentsStealObjective
+  components:
+  - type: Objective
+    difficulty: 3
+  - type: NotJobRequirement
+    job: HeadOfSecurity
+  - type: StealCondition
+    stealGroup: BookSecretDocuments
+    owner: job-name-hos
+
+- type: entity
+  parent: BaseTraitorStealObjective
+  id: ClothingOuterReactiveArmorStealObjective
   components:
   - type: NotJobRequirement
     job: ResearchDirector

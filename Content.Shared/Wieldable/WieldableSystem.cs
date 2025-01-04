@@ -3,12 +3,14 @@ using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
+using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
@@ -128,7 +130,7 @@ public sealed class WieldableSystem : EntitySystem
 
     private void OnExamine(EntityUid uid, GunWieldBonusComponent component, ref ExaminedEvent args)
     {
-        if (HasComp<GunRequiresWieldComponent>(uid)) 
+        if (HasComp<GunRequiresWieldComponent>(uid))
             return;
 
         if (component.WieldBonusExamineMessage != null)
@@ -202,6 +204,14 @@ public sealed class WieldableSystem : EntitySystem
             return false;
         //ss220 weild fix end
 
+        //ss220 StuckOnEquip begin
+        foreach (var handEnt in _handsSystem.EnumerateHeld(user, hands))
+        {
+            if (TryComp<StuckOnEquipComponent>(handEnt, out var stuckOnEquipComp) && stuckOnEquipComp.InHandItem)
+                return false;
+        }
+        //ss220 StuckOnEquip end
+
         // Seems legit.
         return true;
     }
@@ -217,6 +227,7 @@ public sealed class WieldableSystem : EntitySystem
 
         var ev = new BeforeWieldEvent();
         RaiseLocalEvent(used, ev);
+        RaiseLocalEvent(user, ev); // SS220-wield-unability
 
         if (ev.Cancelled)
             return false;
@@ -260,7 +271,7 @@ public sealed class WieldableSystem : EntitySystem
             return false;
 
         var selfMessage = Loc.GetString("wieldable-component-successful-wield", ("item", used));
-        var othersMessage = Loc.GetString("wieldable-component-successful-wield-other", ("user", user), ("item", used));
+        var othersMessage = Loc.GetString("wieldable-component-successful-wield-other", ("user", Identity.Entity(user, EntityManager)), ("item", used));
         _popupSystem.PopupPredicted(selfMessage, othersMessage, user, user);
 
         var targEv = new ItemWieldedEvent();
@@ -305,7 +316,7 @@ public sealed class WieldableSystem : EntitySystem
                 _audioSystem.PlayPredicted(component.UnwieldSound, uid, args.User);
 
             var selfMessage = Loc.GetString("wieldable-component-failed-wield", ("item", uid));
-            var othersMessage = Loc.GetString("wieldable-component-failed-wield-other", ("user", args.User.Value), ("item", uid));
+            var othersMessage = Loc.GetString("wieldable-component-failed-wield-other", ("user", Identity.Entity(args.User.Value, EntityManager)), ("item", uid));
             _popupSystem.PopupPredicted(selfMessage, othersMessage, args.User.Value, args.User.Value);
         }
 

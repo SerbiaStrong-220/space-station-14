@@ -9,6 +9,15 @@
       role: JobClown
       time: 180000
 
+- type: loadoutEffectGroup
+  id: ClownClassic
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobClown
+      time: 18000
+
 # Head
 - type: loadout
   id: HeadMuzhik
@@ -83,6 +92,14 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitClownPennywise
 
+- type: loadout
+  id: ClownJumpsuitClassic
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ClownClassic
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitClassicClowns
+
 # Neck
 - type: loadout
   id: ClownPennywiseRuff
@@ -105,7 +122,7 @@
   id: GlovesMuzhik
   effects:
   - !type:GroupLoadoutEffect
-    proto: GoldenShlopaSponsorTier
+    proto: BigShlopaSponsorTier
   equipment:
     gloves: ClothingHandsGlovesMuzhik
 
@@ -114,7 +131,7 @@
   id: ShoesMuzhik
   effects:
   - !type:GroupLoadoutEffect
-    proto: GoldenShlopaSponsorTier
+    proto: BigShlopaSponsorTier
   equipment:
     shoes: ClothingSponsorBootsMuzhik
 

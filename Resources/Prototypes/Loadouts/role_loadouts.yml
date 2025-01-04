@@ -420,6 +420,7 @@
   - SecurityJumpsuit
   - SecurityBackpack
   - SecurityOuterClothing
+  - SecurityGloves #SS220-tacsec loadout
   - SecurityShoes
   - SecurityPDA
   - SecurityBelt
@@ -432,7 +433,6 @@
 - type: roleLoadout
   id: JobDetective
   groups:
-  - GroupTankHarness
   - DetectiveHead
   # - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit
@@ -536,6 +536,7 @@
   - MedicalBackpack
   - ParamedicOuterClothing
   - ParamedicShoes
+  - ParamedicBelt #ss220 ParamedInterdyne
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - SurvivalMedical
   - Trinkets

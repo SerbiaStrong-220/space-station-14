@@ -8,11 +8,12 @@
   components:
   - type: Input
     context: "ghost"
+  - type: Spectral
   - type: MovementSpeedModifier
     baseWalkSpeed: 6
     baseSprintSpeed: 6
   - type: Sprite
-    sprite: Mobs/Ghosts/revenant.rsi
+    sprite: SS220/Mobs/Ghosts/revenant.rsi #SS220 revenant-sprite-port
     layers:
     - state: active
   - type: StatusEffects
@@ -20,7 +21,8 @@
     - Stun
     - Corporeal
   - type: Damageable
-    damageContainer: Biological
+    damageContainer: ManifestedSpirit
+    damageModifierSet: ManifestedSpirit
   - type: NoSlip
   - type: TTS # Corvax-TTS
     voice: twitch
@@ -99,4 +101,7 @@
     requirePower: false
     ignoreInsulation: true
   #ss220 revenant buff end
-          
+  - type: BlockBuckleVerbsInteraction #ss220 revenant unbuckle verbs interaction fix
+  - type: Reactive
+    groups:
+      Acidic: [Touch]

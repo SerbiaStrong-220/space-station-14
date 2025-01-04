@@ -16,20 +16,22 @@
 
 ## Death Squad
 
-- type: entity
-  id: RandomHumanoidSpawnerDeathSquad
-  name: Death Squad Agent
-  suffix: ERTRole, Death Squad
-  components:
-    - type: Sprite
-      sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
-      state: icon
-    - type: RandomMetadata
-      nameSegments:
-        - NamesFirstMilitaryLeader
-        - NamesLastMilitary
-    - type: RandomHumanoidSpawner
-      settings: DeathSquad
+#SS220-Deathsquad-Update-Begin #Outdated spawner, use new ones
+#- type: entity
+#  id: RandomHumanoidSpawnerDeathSquad
+#  name: Death Squad Agent
+#  suffix: ERTRole, Death Squad
+#  components:
+#    - type: Sprite
+#      sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
+#      state: icon
+#    - type: RandomMetadata
+#      nameSegments:
+#        - NamesFirstMilitaryLeader
+#        - NamesLastMilitary
+#    - type: RandomHumanoidSpawner
+#      settings: DeathSquad
+#SS220-Deathsquad-Update-End
 
 - type: randomHumanoidSettings
   id: DeathSquad

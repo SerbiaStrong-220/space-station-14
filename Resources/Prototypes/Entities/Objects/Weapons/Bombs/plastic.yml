@@ -55,9 +55,11 @@
     startOnStick: true
     canToggleStartOnStick: true
   - type: TimerStartOnSignal
+  - type: TriggerOnSignal #ss220 c4-instant-detonation-back
   - type: DeviceLinkSink
     ports:
       - Timer
+      - Trigger #ss220 c4-instant-detonation-back
   - type: Explosive # Powerful explosion in a very small radius. Doesn't break underplating.
     explosionType: DemolitionCharge
     totalIntensity: 60

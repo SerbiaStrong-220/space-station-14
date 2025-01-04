@@ -135,4 +135,4 @@
   - !type:GroupLoadoutEffect
     proto: JanitorJR
   equipment:
-    belt: ClothingBeltJanitorJR
+    belt: ClothingBeltJanitorJRFilled

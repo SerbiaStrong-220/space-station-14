@@ -2,12 +2,14 @@
   id: Dragon
   hostile:
     - NanoTrasen
+    - DeathSquad #SS220 dq update
     - Syndicate
     - Xeno
     - PetsNT
     - Zombie
     - Revolutionary
     - SpiderQueen #ss220 spider queen
+    - CultYogg #SS220 CultYogg
 
 - type: npcFaction
   id: NanoTrasen
@@ -46,6 +48,7 @@
   - Zombie
   - Revolutionary
   - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
 
 - type: npcFaction
   id: SimpleNeutral
@@ -54,27 +57,32 @@
   id: Syndicate
   hostile:
   - NanoTrasen
+  - DeathSquad #SS220 dq update
   - SimpleHostile
   - Xeno
   - PetsNT
   - Zombie
   - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
 
 - type: npcFaction
   id: Xeno
   hostile:
   - NanoTrasen
+  - DeathSquad #SS220 dq update
   - Syndicate
   - Passive
   - PetsNT
   - Zombie
   - Revolutionary
   - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
 
 - type: npcFaction
   id: Zombie
   hostile:
   - NanoTrasen
+  - DeathSquad #SS220 dq update
   - SimpleNeutral
   - SimpleHostile
   - Syndicate
@@ -82,3 +90,4 @@
   - PetsNT
   - Revolutionary
   - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg

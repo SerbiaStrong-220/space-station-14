@@ -77,12 +77,12 @@
 
 - type: entity
   parent: CentcomNewPDA
-  id: CentcomOperativeSRTPDA
-  name: КПК Оперативника ГСН
-  description: КПК Оперативника ГСН. Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
+  id: CentcomOperativeBSOPDA
+  name: КПК Оперативника "Синий Щит"
+  description: КПК Оперативника "Синий Щит". Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
   components:
     - type: Pda
-      id: OperativeSRTIDCard
+      id: OperativeBSOIDCard
 
 
 - type: entity

@@ -28,3 +28,13 @@
     FoodDonutHomer: 12
     FoodBoxDonut: 2
     #box evidence
+  #ss220 emagged SecTech begin
+  emaggedInventory:
+    SyndicateWhistle: 1
+    ClothingHandsGlovesCombat: 1
+    ExGrenade: 1
+    SmokeGrenade: 1
+    EmpGrenade: 1
+    Truncheon: 1
+    ThrowingKnife: 2
+  #ss220 emagged SecTech end

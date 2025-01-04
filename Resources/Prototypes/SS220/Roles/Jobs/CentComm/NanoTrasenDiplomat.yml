@@ -34,7 +34,7 @@
 
 - type: job
   id: CentCommNanoTrasenDiplomat
-  name: job-name-centcomoff
+  name: job-name-nt-politician
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentCommNanoTrasenDiplomatGear
@@ -45,6 +45,11 @@
   radioBold: true
   accessGroups:
   - AllAccess
+  access:
+  - CentralCommand
+  - CentralCommandERT
+  - CentralCommandBSO
+  - CentralCommandCBURN
 
 - type: startingGear
   id: CentCommNanoTrasenDiplomatGear
