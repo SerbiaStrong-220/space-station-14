@@ -64,7 +64,17 @@
   solids:
     FoodBreadPlainSlice: 2
 
-#Italian
+- type: cookingRecipe
+  id: RecipeOnionRings
+  name: onion rings recipe
+  result: FoodOnionRings
+  instrumentType: microwave
+  time: 15
+  solids:
+    FoodOnionSlice: 1
+
+# Italian
+
 - type: cookingRecipe
   id: RecipeBoiledSpaghetti
   name: boiled spaghetti recipe
@@ -199,7 +209,8 @@
   solids:
     FoodNoodles: 2
 
-#Soups & Stew
+# Soups & Stew
+
 - type: cookingRecipe
   id: RecipeBisque
   name: bisque recipe
@@ -333,8 +344,7 @@
     Blood: 10
   solids:
     FoodBowlBig: 1
-    FoodTomato: 2
-  #todo Replace with blood tomato
+    FoodBloodTomato: 2
 
 - type: cookingRecipe
   id: RecipeWingFangChuSoup
@@ -430,6 +440,44 @@
     MonkeyCube: 1
 
 - type: cookingRecipe
+  id: RecipeBungoSoup
+  name: bungo soup recipe
+  result: FoodSoupBungo
+  instrumentType: microwave
+  time: 10
+  reagents:
+    Water: 5
+  solids:
+    FoodBowlBig: 1
+    FoodBungo: 2
+    FoodChiliPepper: 1
+
+- type: cookingRecipe
+  id: RecipeBoiledSnail
+  name: boiled snail recipe
+  result: FoodMeatSnailCooked
+  instrumentType: microwave
+  time: 5
+  reagents:
+    Water: 10
+  solids:
+    FoodMeatSnail: 1
+
+- type: cookingRecipe
+  id: RecipeEscargotSoup
+  name: escargot recipe
+  result: FoodSoupEscargot
+  instrumentType: microwave
+  time: 10
+  reagents:
+    Water: 5
+  solids:
+    FoodBowlBig: 1
+    FoodOnionSlice: 1
+    FoodButter: 1
+    FoodMeatSnailCooked: 1
+
+- type: cookingRecipe
   id: RecipeHotChili
   name: hot chili recipe
   result: FoodSoupChiliHot
@@ -453,7 +501,50 @@
   solids:
     FoodSoupChiliHot: 1
 
-#Other
+- type: cookingRecipe
+  id: RecipeBorsch # SS220 Added to supa kitchen (microwave)
+  name: Borsch recipe
+  result: FoodSoupBeet
+  instrumentType: microwave
+  time: 10
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatCutlet: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    Foodbeet: 1
+
+- type: cookingRecipe
+  id: RecipeShchi
+  name: Shchi recipe
+  result: FoodSoupShchi
+  instrumentType: microwave
+  time: 10
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatCutlet: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    FoodCabbage: 1
+
+- type: cookingRecipe
+  id: RecipeSlimeSoup
+  name: slime soup recipe
+  result: FoodSoupSlime
+  instrumentType: microwave
+  time: 10
+  reagents:
+    Water: 5
+    Slime: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatSlime: 1
+
+# Other
 
 - type: cookingRecipe
   id: RecipeCubanCarp
@@ -532,6 +623,69 @@
   solids:
     FoodCorn: 1
 
+- type: cookingRecipe
+  id: RecipeMeatSalami
+  name: Salami recipe
+  result: FoodMeatSalami
+  instrumentType: microwave
+  time: 30
+  reagents:
+    SodiumHydroxide: 10
+  solids:
+    FoodMeat: 3
+    FoodEgg: 2
+
+- type: cookingRecipe
+  id: RecipeNachos
+  name: nachos recipe
+  result: FoodMealNachos
+  instrumentType: microwave
+  time: 10
+  reagents:
+    Blackpepper: 5
+  solids:
+    FoodDoughTortillaSlice: 2
+    FoodChiliPepper: 1
+
+- type: cookingRecipe
+  id: RecipeNachosCheesy
+  name: nachos cheesy recipe
+  result: FoodMealNachosCheesy
+  instrumentType: microwave
+  time: 15
+  reagents:
+    Blackpepper: 5
+  solids:
+    FoodDoughTortillaSlice: 2
+    FoodChiliPepper: 1
+    FoodCheeseSlice: 2
+
+- type: cookingRecipe
+  id: RecipeNachosCuban
+  name: nachos cuban recipe
+  result: FoodMealNachosCuban
+  instrumentType: microwave
+  time: 15
+  reagents:
+    Hotsauce: 5
+  solids:
+    FoodDoughTortillaSlice: 2
+    FoodChiliPepper: 1
+    FoodCheeseSlice: 1
+
+- type: cookingRecipe
+  id: RecipePelmeni
+  name: pelmeni recipe
+  result: FoodPelmeniBowl
+  instrumentType: microwave
+  time: 10
+  reagents:
+    Water: 20
+  solids:
+    FoodBowlBig: 1
+    FoodMeatMeatball: 1
+    FoodDoughSlice: 3
+
 #Donks i guess
 - type: cookingRecipe
   id: RecipeWarmDonkpocket
@@ -597,6 +751,24 @@
     FoodDonkpocketBerry: 1
 
 - type: cookingRecipe
+  id: RecipeDonkpocketStonk
+  name: warm stonk-pocket recipe
+  result: FoodDonkpocketStonkWarm
+  instrumentType: microwave
+  time: 5
+  solids:
+    FoodDonkpocketStonk: 1
+
+- type: cookingRecipe
+  id: RecipeDonkpocketCarp
+  name: warm carp-pocket recipe
+  result: FoodDonkpocketCarpWarm
+  instrumentType: microwave
+  time: 5
+  solids:
+    FoodDonkpocketCarp: 1
+
+- type: cookingRecipe
   id: RecipeDonkpocketGondola
   name: warm gondola-pocket recipe
   result: FoodDonkpocketGondolaWarm
@@ -612,7 +784,7 @@
   instrumentType: microwave
   time: 15
   reagents:
-    Blackpepper: 5
+    blackpepper: 5
   solids:
     FoodChiliPepper: 1
     FoodCheeseSlice: 2
@@ -736,7 +908,58 @@
     FoodOrange: 1
     FoodAmbrosiaVulgaris: 1
 
+- type: cookingRecipe
+  id: RecipeOkroshka
+  name: Okroshka recipe
+  result: FoodSoupOkroshka
+  instrumentType: microwave
+  time: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChicken: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    FoodEggBoiled: 1
+
+- type: cookingRecipe
+  id: RecipeOkroshkaKvass
+  name: Okroshka witch kvass recipe
+  result: FoodSoupOkroshkaKvass
+  instrumentType: microwave
+  time: 10
+  reagents:
+    Kvass: 10
+  solids:
+    FoodBowlBig: 1
+    FoodMeatChicken: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    FoodEggBoiled: 1
+
+- type: cookingRecipe
+  id: RecipeVinaigrette
+  name: Vinaigrette recipe
+  result: FoodSaladVinaigrette
+  instrumentType: microwave
+  time: 10
+  solids:
+    FoodBowlBig: 1
+    FoodPotato: 1
+    FoodOnionSlice: 1
+    Foodbeet: 1
+    FoodPeaPod: 1
+    FoodCarrot: 1
+
 # NOT ACTUAL FOOD
+
+- type: cookingRecipe
+  id: RecipeDriedTeaLeaves
+  name: dried tea leaves recipe
+  result: LeavesTeaDried
+  instrumentType: microwave
+  time: 10
+  solids:
+    LeavesTea: 1
 
 #TODO: universal recipes for tobacco and cannabis
 - type: cookingRecipe
@@ -757,6 +980,72 @@
   solids:
     LeavesCannabis: 1
 
+- type: cookingRecipe
+  id: RecipeDriedCannabisRainbow
+  name: dried rainbow cannabis leaves recipe
+  result: LeavesCannabisRainbowDried
+  instrumentType: microwave
+  time: 10
+  solids:
+    LeavesCannabisRainbow: 1
+
+- type: cookingRecipe
+  id: RecipeTrashBakedBananaPeel
+  name: baked banana peel recipe
+  result: TrashBakedBananaPeel
+  instrumentType: microwave
+  time: 5
+  solids:
+    TrashBananaPeel: 1
+
+- type: cookingRecipe
+  id: RecipeCannabisButter
+  name: cannabis butter recipe
+  result: FoodCannabisButter
+  instrumentType: microwave
+  time: 15
+  solids:
+    FoodButter: 1
+    LeavesCannabis: 6
+
+- type: cookingRecipe
+  id: RecipeCannabisBrownies
+  name: cannabis brownie recipe
+  result: FoodBakedCannabisBrownieBatch
+  instrumentType: microwave
+  time: 25
+  reagents:
+    Flour: 15
+    Sugar: 30
+    Egg: 18
+  solids:
+    FoodCannabisButter: 2
+    FoodSnackChocolateBar: 2
+
+- type: cookingRecipe
+  id: RecipeCornInButter
+  name: corn in butter recipe
+  result: FoodMealCornInButter
+  instrumentType: microwave
+  time: 10
+  solids:
+    FoodCorn: 1
+    FoodPlate: 1
+    FoodButter: 1
+
+- type: cookingRecipe
+  id: RecipePeaSoup
+  name: pea soup recipe
+  result: FoodSoupPea
+  instrumentType: microwave
+  time: 10
+  solids:
+    FoodPeaPod: 2
+    FoodBowlBig: 1
+  reagents:
+    Water: 10
+
+# Medical recipes
 - type: cookingRecipe
   id: RecipeAloeCream
   name: aloe cream recipe
@@ -794,11 +1083,172 @@
     Sigynate: 50
     Dermaline: 50
 
+# Anomaly
 - type: cookingRecipe
-  id: RecipeCookedSpaceshroom
-  name: cooked spaceshroom recipe
-  result: FoodSpaceshroomCooked
+  id: RecipeInertAnomalyMeat
+  name: inert meat anomaly recipe
+  result: FoodMeatAnomaly
   instrumentType: microwave
   time: 5
   solids:
-    FoodSpaceshroom: 1
+    AnomalyCoreFleshInert: 1
+
+- type: cookingRecipe
+  id: RecipeAnomalyMeat
+  name: meat anomaly recipe
+  result: FoodMeatAnomaly
+  instrumentType: microwave
+  time: 5
+  solids:
+    AnomalyCoreFlesh: 1
+
+- type: cookingRecipe
+  id: RecipeAnomalyMeatCooked
+  name: cooked meat anomaly recipe
+  result: FoodMeatAnomalyCooked
+  instrumentType: microwave
+  time: 5
+  solids:
+    FoodMeatAnomaly: 1
+
+# Caramel cane
+- type: cookingRecipe
+  id: Caramel
+  name: caramelka
+  result: CaramelFood
+  instrumentType: microwave
+  time: 15
+  reagents:
+    Sugar: 10
+    Water: 10
+
+- type: cookingRecipe
+  id: CaramelRed
+  name: red caramelka
+  result: RedCaramelCaneFood
+  instrumentType: microwave
+  time: 15
+  reagents:
+    Grenadine: 5
+  solids:
+    CaramelBasedFood: 1
+
+- type: cookingRecipe
+  id: CaramelGreen
+  name: green caramelka
+  result: GreenCaramelCaneFood
+  instrumentType: microwave
+  time: 15
+  reagents:
+    JuiceLime: 5
+  solids:
+    CaramelBasedFood: 1
+
+- type: cookingRecipe
+  id: CaramelGreenRed
+  name: greenred caramelka
+  result: CaramelCaneGreenRedFood
+  instrumentType: microwave
+  time: 15
+  reagents:
+    Grenadine: 5
+    JuiceLime: 5
+  solids:
+    CaramelBasedFood: 1
+
+- type: cookingRecipe
+  id: double Caramel
+  name: double caramelka
+  result: DoubleCaramelCaneFood
+  instrumentType: microwave
+  time: 20
+  reagents:
+    Grenadine: 10
+    JuiceLime: 10
+  solids:
+    CaramelBasedFood: 2
+
+# Tacos
+
+- type: cookingRecipe
+  id: RecipeTacoShell
+  name: taco shell recipe
+  result: FoodTacoShell
+  instrumentType: microwave
+  time: 5
+  solids:
+    FoodDoughTortillaFlat: 1 # one third of a standard bread dough recipe
+
+- type: cookingRecipe
+  id: RecipeTacoBeef
+  name: beef taco recipe
+  result: FoodTacoBeef
+  instrumentType: microwave
+  time: 10
+  solids:
+    FoodTacoShell: 1
+    FoodMeatCutlet: 1
+    FoodCheeseSlice: 1
+
+- type: cookingRecipe
+  id: RecipeTacoChicken
+  name: chicken taco recipe
+  result: FoodTacoChicken
+  instrumentType: microwave
+  time: 10
+  solids:
+    FoodTacoShell: 1
+    FoodMeatChickenCutlet: 1
+    FoodCheeseSlice: 1
+
+- type: cookingRecipe
+  id: RecipeTacoFish
+  name: fish taco recipe
+  result: FoodTacoFish
+  instrumentType: microwave
+  time: 10
+  solids:
+    FoodTacoShell: 1
+    FoodMeatFish: 1
+    FoodOnionSlice: 2
+    FoodTomato: 1
+    FoodCabbage: 1
+
+- type: cookingRecipe
+  id: RecipeTacoRat
+  name: rat taco recipe
+  result: FoodTacoRat
+  instrumentType: microwave
+  time: 10
+  solids:
+    FoodTacoShell: 1
+    FoodCheeseSlice: 1
+    FoodMeatRat: 1
+
+- type: cookingRecipe
+  id: RecipeTacoBeefSupreme
+  name: beef taco supreme recipe
+  result: FoodTacoBeefSupreme
+  instrumentType: microwave
+  time: 10
+  solids:
+    FoodTacoShell: 1
+    FoodCheeseSlice: 1
+    FoodMeatCutlet: 1
+    FoodTomato: 1
+    FoodCabbage: 1
+    FoodOnionSlice: 2
+
+- type: cookingRecipe
+  id: RecipeTacoChickenSupreme
+  name: beef taco supreme recipe
+  result: FoodTacoChickenSupreme
+  instrumentType: microwave
+  time: 10
+  solids:
+    FoodTacoShell: 1
+    FoodCheeseSlice: 1
+    FoodMeatChickenCutlet: 1
+    FoodTomato: 1
+    FoodCabbage: 1
+    FoodOnionSlice: 2

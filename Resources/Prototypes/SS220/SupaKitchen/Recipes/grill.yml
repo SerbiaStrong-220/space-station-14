@@ -1,4 +1,28 @@
 - type: cookingRecipe
+  id: RecipePancake
+  name: pancake recipe
+  result: FoodBakedPancake
+  instrumentType: grill
+  time: 5
+  reagents:
+    Flour: 5
+    Milk: 5
+    Egg: 6
+
+- type: cookingRecipe
+  id: RecipeBlueberryPancake
+  name: blueberry pancake recipe
+  result: FoodBakedPancakeBb
+  instrumentType: grill
+  time: 5
+  reagents:
+    Flour: 5
+    Milk: 5
+    Egg: 6
+  solids:
+    FoodBerries: 2
+
+- type: cookingRecipe
   id: RecipeWaffles
   name: waffle recipe
   result: FoodBakedWaffle
@@ -21,17 +45,6 @@
     MilkSoy: 5
     Egg: 6
     SodaWater: 5
-
-- type: cookingRecipe
-  id: RecipePancake
-  name: pancake recipe
-  result: FoodBakedPancake
-  instrumentType: grill
-  time: 5
-  reagents:
-    Flour: 5
-    Milk: 5
-    Egg: 6
 
 - type: cookingRecipe
   id: RecipeRibs
@@ -154,3 +167,27 @@
   solids:
     FoodChevreSlice: 1
     FoodBreadBaguetteSlice: 1
+
+- type: cookingRecipe
+  id: RecipeCookedSpaceshroom
+  name: cooked spaceshroom recipe
+  result: FoodSpaceshroomCooked
+  instrumentType: grill
+  time: 5
+  solids:
+    FoodSpaceshroom: 1
+
+- type: cookingRecipe
+  id: RecipeShawarma
+  name: Shawarma recipe
+  result: FoodShawarma
+  instrumentType: grill
+  time: 15
+  reagents:
+    Mayo: 5
+  solids:
+    FoodDough: 1
+    FoodMeatChicken: 1
+    FoodCabbage: 1
+    FoodTomato: 1
+    FoodCheeseSlice: 1

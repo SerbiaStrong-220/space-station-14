@@ -1,5 +1,5 @@
 - type: microwaveMealRecipe
-  id: RecipeBun
+  id: RecipeBun # SS220 Added to supa kitchen (oven)
   name: bun recipe
   result: FoodBreadBun
   time: 5
@@ -8,7 +8,7 @@
 
 #Bagels
 - type: microwaveMealRecipe
-  id: RecipeBagel
+  id: RecipeBagel # SS220 Added to supa kitchen (oven)
   name: bagel recipe
   result: FoodBagel
   time: 5
@@ -16,7 +16,7 @@
     FoodDoughRope: 1 # created by rolling a dough slice.
 
 - type: microwaveMealRecipe
-  id: RecipeBagelPoppy
+  id: RecipeBagelPoppy # SS220 Added to supa kitchen (oven)
   name: poppyseed bagel recipe
   result: FoodBagelPoppy
   time: 5
@@ -27,7 +27,7 @@
 #Burgers
 
 - type: microwaveMealRecipe
-  id: RecipeAppendixBurger
+  id: RecipeAppendixBurger # SS220 Added to supa kitchen (oven)
   name: appendix burger recipe
   result: FoodBurgerAppendix
   time: 10
@@ -36,7 +36,7 @@
     OrganHumanAppendix: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBaconBurger
+  id: RecipeBaconBurger # SS220 Added to supa kitchen (oven)
   name: bacon burger recipe
   result: FoodBurgerBacon
   time: 10
@@ -46,7 +46,7 @@
     FoodCheeseSlice: 2
 
 - type: microwaveMealRecipe
-  id: RecipeBaseballBurger
+  id: RecipeBaseballBurger # SS220 Added to supa kitchen (oven)
   name: baseball burger recipe
   result: FoodBurgerBaseball
   time: 10
@@ -55,7 +55,7 @@
     BaseBallBat: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBearger
+  id: RecipeBearger # SS220 Added to supa kitchen (oven)
   name: bearger recipe
   result: FoodBurgerBear
   time: 10
@@ -64,7 +64,7 @@
     FoodMeatBear: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBigBiteBurger
+  id: RecipeBigBiteBurger # SS220 Added to supa kitchen (oven)
   name: big bite burger recipe
   result: FoodBurgerBig
   time: 15
@@ -76,7 +76,7 @@
     FoodOnionSlice: 2
 
 - type: microwaveMealRecipe #Added to metamorph recipes
-  id: RecipeBrainBurger
+  id: RecipeBrainBurger # SS220 Added to supa kitchen (oven)
   name: brain burger recipe
   result: FoodBurgerBrain
   time: 10
@@ -85,7 +85,7 @@
     OrganHumanBrain: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCatBurger
+  id: RecipeCatBurger # SS220 Added to supa kitchen (oven)s
   name: cat burger recipe
   result: FoodBurgerCat
   time: 10
@@ -95,7 +95,7 @@
     ClothingHeadHatCatEars: 1
 
 - type: microwaveMealRecipe #Added to metamorph recipes
-  id: RecipeCheeseburger
+  id: RecipeCheeseburger # SS220 Added to supa kitchen (oven)
   name: cheeseburger recipe
   result: FoodBurgerCheese
   time: 10
@@ -105,7 +105,7 @@
     FoodCheeseSlice: 1
 
 - type: microwaveMealRecipe #Added to metamorph recipes
-  id: RecipeChickenSandwich
+  id: RecipeChickenSandwich # SS220 Added to supa kitchen (oven)
   name: chicken sandwich recipe
   result: FoodBurgerChicken
   time: 10
@@ -116,7 +116,7 @@
     FoodMeatChicken: 1
 
 - type: microwaveMealRecipe
-  id: RecipeClownBurger
+  id: RecipeClownBurger # SS220 Added to supa kitchen (oven)
   name: clownburger recipe
   result: FoodBurgerClown
   time: 10
@@ -125,7 +125,7 @@
     ClothingMaskClown: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCorgiBurger
+  id: RecipeCorgiBurger # SS220 Added to supa kitchen (oven)
   name: corgi burger recipe
   result: FoodBurgerCorgi
   time: 10
@@ -134,7 +134,7 @@
     FoodMeatCorgi: 1
 
 - type: microwaveMealRecipe #Added to metamorph recipes
-  id: RecipeCrabBurger
+  id: RecipeCrabBurger # SS220 Added to supa kitchen (oven)
   name: crab burger recipe
   result: FoodBurgerCrab
   time: 10
@@ -143,7 +143,7 @@
     FoodMeatCrab: 2
 
 - type: microwaveMealRecipe
-  id: RecipeCrazyHamburger
+  id: RecipeCrazyHamburger # SS220 Added to supa kitchen (oven)
   name: crazy hamburger recipe
   result: FoodBurgerCrazy
   time: 15
@@ -159,7 +159,7 @@
     Flare: 1
 
 - type: microwaveMealRecipe #Added to metamorph recipes
-  id: RecipeDuckBurger
+  id: RecipeDuckBurger # SS220 Added to supa kitchen (oven)
   name: duck sandwich recipe
   result: FoodBurgerDuck
   time: 10
@@ -169,7 +169,7 @@
     FoodCheeseSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeEmpoweredBurger
+  id: RecipeEmpoweredBurger # SS220 Added to supa kitchen (oven)
   name: empowered burger recipe
   result: FoodBurgerEmpowered
   time: 10
@@ -178,7 +178,7 @@
     SheetPlasma1: 2
 
 - type: microwaveMealRecipe
-  id: RecipeCarpBurger
+  id: RecipeCarpBurger # SS220 Added to supa kitchen (oven)
   name: fillet-o-carp burger recipe
   result: FoodBurgerCarp
   time: 10
@@ -188,7 +188,7 @@
     FoodCheeseSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeFiveBurger
+  id: RecipeFiveBurger # SS220 Added to supa kitchen (oven)
   name: five alarm burger recipe
   result: FoodBurgerFive
   time: 10
@@ -198,7 +198,7 @@
     FoodChiliPepper: 3
 
 - type: microwaveMealRecipe
-  id: RecipeGhostBurger
+  id: RecipeGhostBurger # SS220 Added to supa kitchen (oven)
   name: ghost burger recipe
   result: FoodBurgerGhost
   time: 10
@@ -207,7 +207,7 @@
     ClothingOuterGhostSheet: 1 # SS220 Old craft ghostburger
 
 - type: microwaveMealRecipe
-  id: RecipeHumanBurger
+  id: RecipeHumanBurger # SS220 Added to supa kitchen (oven)
   name: human burger recipe
   result: FoodBurgerHuman
   time: 10
@@ -216,7 +216,7 @@
     FoodMeatHuman: 1
 
 - type: microwaveMealRecipe
-  id: RecipeJellyBurger
+  id: RecipeJellyBurger # SS220 Added to supa kitchen (oven)
   name: jelly burger recipe
   result: FoodBurgerJelly
   time: 10
@@ -225,7 +225,7 @@
     FoodJellyAmanita: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBurgerMcguffin
+  id: RecipeBurgerMcguffin # SS220 Added to supa kitchen (oven)
   name: McGuffin recipe
   result: FoodBurgerMcguffin
   time: 10
@@ -235,7 +235,7 @@
     FoodEgg: 2
 
 - type: microwaveMealRecipe
-  id: RecipeBurgerMcrib
+  id: RecipeBurgerMcrib # SS220 Added to supa kitchen (oven)
   name: BBQ rib sandwich recipe
   result: FoodBurgerMcrib
   time: 10
@@ -245,7 +245,7 @@
     FoodOnionSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeMimeBurger
+  id: RecipeMimeBurger # SS220 Added to supa kitchen (oven)
   name: mime burger recipe
   result: FoodBurgerMime
   time: 10
@@ -254,7 +254,7 @@
     ClothingMaskMime: 1
 
 - type: microwaveMealRecipe
-  id: RecipePlainBurger
+  id: RecipePlainBurger # SS220 Added to supa kitchen (oven)
   name: plain burger recipe
   result: FoodBurgerPlain
   time: 10
@@ -263,7 +263,7 @@
     FoodMeat: 1
 
 - type: microwaveMealRecipe
-  id: RecipeRatBurger
+  id: RecipeRatBurger # SS220 Added to supa kitchen (oven)
   name: rat burger recipe
   result: FoodBurgerRat
   time: 10
@@ -272,7 +272,7 @@
     FoodMeatRat: 1
 
 - type: microwaveMealRecipe
-  id: RecipeRobotBurger
+  id: RecipeRobotBurger # SS220 Added to supa kitchen (oven)
   name: roburger recipe
   result: FoodBurgerRobot
   time: 10
@@ -282,7 +282,7 @@
     # i would add steel to this recipe but the microwave explodes
 
 - type: microwaveMealRecipe
-  id: RecipeSoylentBurger
+  id: RecipeSoylentBurger # SS220 Added to supa kitchen (oven)
   name: soylent burger recipe
   result: FoodBurgerSoy
   time: 10
@@ -292,7 +292,7 @@
     FoodSoybeans: 2 #replace with soylent green when those become craftable
 
 - type: microwaveMealRecipe
-  id: RecipeSpellBurger
+  id: RecipeSpellBurger # SS220 Added to supa kitchen (oven)
   name: spell burger recipe
   result: FoodBurgerSpell
   time: 10
@@ -301,7 +301,7 @@
     ClothingHeadHatWizard: 1
 
 - type: microwaveMealRecipe
-  id: RecipeSuperBiteBurger
+  id: RecipeSuperBiteBurger # SS220 Added to supa kitchen (oven)
   name: super bite burger recipe
   result: FoodBurgerSuper
   time: 25
@@ -315,7 +315,7 @@
     FoodEgg: 2
 
 - type: microwaveMealRecipe
-  id: RecipeTofuBurger
+  id: RecipeTofuBurger # SS220 Added to supa kitchen (oven)
   name: tofu burger recipe
   result: FoodBurgerTofu
   time: 10
@@ -324,7 +324,7 @@
     FoodTofuSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeXenoburger
+  id: RecipeXenoburger # SS220 Added to supa kitchen (oven)
   name: xenoburger recipe
   result: FoodBurgerXeno
   time: 10
@@ -333,7 +333,7 @@
     FoodMeatXeno: 1
 
 - type: microwaveMealRecipe
-  id: RecipeMothRoachburger
+  id: RecipeMothRoachburger # SS220 Added to supa kitchen (oven)
   name: mothroachburger recipe
   result: FoodBurgerMothRoach
   solids:
@@ -343,7 +343,7 @@
 #Breads & Sandwiches
 
 - type: microwaveMealRecipe
-  id: RecipeBananaBread
+  id: RecipeBananaBread # SS220 Added to supa kitchen (oven)
   name: banana bread recipe
   result: FoodBreadBanana
   time: 15
@@ -352,7 +352,7 @@
     FoodBanana: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCornbread
+  id: RecipeCornbread # SS220 Added to supa kitchen (oven)
   name: cornbread recipe
   result: FoodBreadCorn
   time: 10
@@ -360,7 +360,7 @@
     FoodDoughCornmeal: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCreamCheeseBread
+  id: RecipeCreamCheeseBread # SS220 Added to supa kitchen (oven)
   name: cream cheese bread recipe
   result: FoodBreadCreamcheese
   time: 15
@@ -371,7 +371,7 @@
     FoodCheeseSlice: 2
 
 - type: microwaveMealRecipe
-  id: RecipeMeatBread
+  id: RecipeMeatBread # SS220 Added to supa kitchen (oven)
   name: meat bread recipe
   result: FoodBreadMeat
   time: 15
@@ -381,7 +381,7 @@
     FoodCheeseSlice: 2
 
 - type: microwaveMealRecipe
-  id: RecipeMimanaBread
+  id: RecipeMimanaBread # SS220 Added to supa kitchen (oven)
   name: mimana bread recipe
   result: FoodBreadMimana
   time: 15
@@ -392,7 +392,7 @@
     FoodMimana: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBread
+  id: RecipeBread # SS220 Added to supa kitchen (oven)
   name: bread recipe
   result: FoodBreadPlain
   time: 10
@@ -400,7 +400,7 @@
     FoodDough: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBreadCotton
+  id: RecipeBreadCotton # SS220 Added to supa kitchen (oven)
   name: cotton bread recipe
   result: FoodBreadCotton
   time: 10
@@ -408,7 +408,7 @@
     FoodDoughCotton: 1
 
 - type: microwaveMealRecipe
-  id: RecipeSausageBread
+  id: RecipeSausageBread # SS220 Added to supa kitchen (oven)
   name: sausage bread recipe
   result: FoodBreadSausage
   time: 15
@@ -417,7 +417,7 @@
     FoodMeat: 1 #replace with sausage
 
 - type: microwaveMealRecipe
-  id: RecipeSpiderMeatBread
+  id: RecipeSpiderMeatBread # SS220 Added to supa kitchen (oven)
   name: spider meat bread recipe
   result: FoodBreadMeatSpider
   time: 15
@@ -427,7 +427,7 @@
     FoodCheeseSlice: 2
 
 - type: microwaveMealRecipe
-  id: RecipeTofuBread
+  id: RecipeTofuBread # SS220 Added to supa kitchen (oven)
   name: tofu bread recipe
   result: FoodBreadTofu
   time: 15
@@ -436,7 +436,7 @@
     FoodTofu: 1
 
 - type: microwaveMealRecipe
-  id: RecipeXenoMeatBread
+  id: RecipeXenoMeatBread # SS220 Added to supa kitchen (oven)
   name: xeno meat bread recipe
   result: FoodBreadMeatXeno
   time: 15
@@ -448,7 +448,7 @@
 #Slices Only
 
 - type: microwaveMealRecipe
-  id: RecipeBaguette
+  id: RecipeBaguette # SS220 Added to supa kitchen (oven)
   name: baguette recipe
   result: FoodBreadBaguette
   time: 15
@@ -472,7 +472,7 @@
     PartRodMetal1: 1
 
 - type: microwaveMealRecipe
-  id: RecipeButteredToast
+  id: RecipeButteredToast # SS220 Added to supa kitchen (microwave)
   name: buttered toast recipe
   result: FoodBreadButteredToast
   time: 5
@@ -481,7 +481,7 @@
     FoodButterSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeFrenchToast
+  id: RecipeFrenchToast # SS220 Added to supa kitchen (microwave)
   name: french toast recipe
   result: FoodBreadFrenchToast
   time: 5
@@ -492,7 +492,7 @@
     FoodBreadPlainSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeGarlicBread
+  id: RecipeGarlicBread # SS220 Added to supa kitchen (microwave)
   name: garlic bread slice recipe
   result: FoodBreadGarlicSlice
   time: 5
@@ -502,7 +502,7 @@
     FoodButterSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeJellyToast
+  id: RecipeJellyToast # SS220 Added to supa kitchen (microwave)
   name: jelly toast recipe
   result: FoodBreadJellySlice
   time: 5
@@ -511,7 +511,7 @@
     FoodJellyAmanita: 1 #replace with jelly
 
 - type: microwaveMealRecipe
-  id: RecipeMoldyBreadSlice
+  id: RecipeMoldyBreadSlice # SS220 Added to supa kitchen (microwave)
   name: moldy bread slice recipe
   result: FoodBreadMoldySlice
   time: 5
@@ -520,7 +520,7 @@
     FoodFlyAmanita: 1
 
 - type: microwaveMealRecipe
-  id: RecipeTwoBreadSlice
+  id: RecipeTwoBreadSlice # SS220 Added to supa kitchen (microwave)
   name: two slice recipe
   result: FoodBreadTwoSlice
   time: 5
@@ -530,7 +530,7 @@
     FoodBreadPlainSlice: 2
 
 - type: microwaveMealRecipe
-  id: RecipeOnionRings
+  id: RecipeOnionRings # SS220 Added to supa kitchen (microwave)
   name: onion rings recipe
   result: FoodOnionRings
   time: 15
@@ -539,7 +539,7 @@
 
 #Pizzas TODO: contruction graph based pizza
 - type: microwaveMealRecipe
-  id: RecipeMargheritaPizza
+  id: RecipeMargheritaPizza # SS220 Added to supa kitchen (oven)
   name: margherita pizza recipe
   result: FoodPizzaMargherita
   time: 30
@@ -549,7 +549,7 @@
     FoodTomato: 4
 
 - type: microwaveMealRecipe
-  id: RecipeMushroomPizza
+  id: RecipeMushroomPizza # SS220 Added to supa kitchen (oven)
   name: mushroom pizza recipe
   result: FoodPizzaMushroom
   time: 30
@@ -558,7 +558,7 @@
     FoodMushroom: 5
 
 - type: microwaveMealRecipe
-  id: RecipeMeatPizza
+  id: RecipeMeatPizza # SS220 Added to supa kitchen (oven)
   name: meat pizza recipe
   result: FoodPizzaMeat
   time: 30
@@ -569,7 +569,7 @@
     FoodTomato: 1
 
 - type: microwaveMealRecipe
-  id: RecipeVegetablePizza
+  id: RecipeVegetablePizza # SS220 Added to supa kitchen (oven)
   name: vegetable pizza recipe
   result: FoodPizzaVegetable
   time: 30
@@ -581,7 +581,7 @@
     FoodTomato: 1
 
 - type: microwaveMealRecipe
-  id: RecipeHawaiianPizza
+  id: RecipeHawaiianPizza # SS220 Added to supa kitchen (oven)
   name: Hawaiian pizza recipe
   result: FoodPizzaPineapple
   time: 30
@@ -591,7 +591,7 @@
     FoodPineappleSlice: 5
 
 - type: microwaveMealRecipe
-  id: RecipeDankPizza
+  id: RecipeDankPizza # SS220 Added to supa kitchen (oven)
   name: dank pizza recipe
   result: FoodPizzaDank
   time: 30
@@ -602,7 +602,7 @@
     FoodTomato: 1
 
 - type: microwaveMealRecipe
-  id: RecipeDonkpocketPizza
+  id: RecipeDonkpocketPizza # SS220 Added to supa kitchen (oven)
   name: donk-pocket pizza recipe
   result: FoodPizzaDonkpocket
   time: 30
@@ -613,7 +613,7 @@
     FoodTomato: 1
 
 - type: microwaveMealRecipe
-  id: RecipeUraniumPizza
+  id: RecipeUraniumPizza # SS220 Added to supa kitchen (oven)
   name: spicy rock pizza recipe
   result: FoodPizzaUranium
   time: 30
@@ -624,7 +624,7 @@
     SheetUranium1: 2
 
 - type: microwaveMealRecipe
-  id: RecipeCottonPizza
+  id: RecipeCottonPizza # SS220 Added to supa kitchen (oven)
   name: cotton pizza recipe
   result: FoodPizzaCotton
   time: 30
@@ -634,7 +634,7 @@
 
 #Italian
 - type: microwaveMealRecipe
-  id: RecipeBoiledSpaghetti
+  id: RecipeBoiledSpaghetti # SS220 Added to supa kitchen (microwave)
   name: boiled spaghetti recipe
   result: FoodNoodlesBoiled
   time: 15
@@ -645,7 +645,7 @@
     FoodButter: 1
 
 - type: microwaveMealRecipe
-  id: RecipePastaTomato
+  id: RecipePastaTomato # SS220 Added to supa kitchen (microwave)
   name: pasta tomato recipe
   result: FoodNoodles
   time: 10
@@ -654,7 +654,7 @@
     FoodTomato: 2
 
 - type: microwaveMealRecipe
-  id: RecipeMeatballSpaghetti
+  id: RecipeMeatballSpaghetti # SS220 Added to supa kitchen (microwave)
   name: spaghetti & meatballs recipe
   result: FoodNoodlesMeatball
   time: 10
@@ -663,7 +663,7 @@
     FoodMeatMeatball: 2
 
 - type: microwaveMealRecipe
-  id: RecipeButterNoodles
+  id: RecipeButterNoodles # SS220 Added to supa kitchen (microwave)
   name: butter noodles recipe
   result: FoodNoodlesButter
   time: 10
@@ -672,7 +672,7 @@
     FoodButter: 1
 
 - type: microwaveMealRecipe
-  id: RecipeChowMein
+  id: RecipeChowMein # SS220 Added to supa kitchen (microwave)
   name: chow mein recipe
   result: FoodNoodlesChowmein
   time: 10
@@ -685,7 +685,7 @@
     FoodCorn: 1
 
 - type: microwaveMealRecipe
-  id: RecipeOatmeal
+  id: RecipeOatmeal # SS220 Added to supa kitchen (microwave)
   name: oatmeal recipe
   result: FoodOatmeal
   time: 15
@@ -696,7 +696,7 @@
     FoodBowlBig: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBoiledRice
+  id: RecipeBoiledRice # SS220 Added to supa kitchen (microwave)
   name: boiled rice recipe
   result: FoodRiceBoiled
   time: 15
@@ -707,7 +707,7 @@
     FoodBowlBig: 1
 
 - type: microwaveMealRecipe
-  id: RecipeRicePudding
+  id: RecipeRicePudding # SS220 Added to supa kitchen (microwave)
   name: rice pudding recipe
   result: FoodRicePudding
   time: 15
@@ -719,7 +719,7 @@
     FoodBowlBig: 1
 
 - type: microwaveMealRecipe
-  id: RecipeRicePork
+  id: RecipeRicePork # SS220 Added to supa kitchen (microwave)
   name: rice and pork recipe
   result: FoodRicePork
   time: 15
@@ -728,7 +728,7 @@
     FoodMeatCutlet: 3
 
 - type: microwaveMealRecipe
-  id: RecipeRiceGumbo
+  id: RecipeRiceGumbo # SS220 Added to supa kitchen (microwave)
   name: black-eyed gumbo recipe
   result: FoodRiceGumbo
   time: 15
@@ -738,7 +738,7 @@
     FoodChiliPepper: 2
 
 - type: microwaveMealRecipe
-  id: RecipeEggRice
+  id: RecipeEggRice # SS220 Added to supa kitchen (microwave)
   name: egg-fried rice recipe
   result: FoodRiceEgg
   time: 15
@@ -749,7 +749,7 @@
     FoodCarrot: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCopypasta
+  id: RecipeCopypasta # SS220 Added to supa kitchen (microwave)
   name: copypasta recipe
   result: FoodNoodlesCopy
   time: 10
@@ -758,7 +758,7 @@
 
 #Soups & Stew
 - type: microwaveMealRecipe
-  id: RecipeBisque
+  id: RecipeBisque # SS220 Added to supa kitchen (microwave)
   name: bisque recipe
   result: FoodSoupBisque
   time: 10
@@ -771,7 +771,7 @@
     FoodMeatFish: 1
 
 - type: microwaveMealRecipe
-  id: RecipeMeatballSoup
+  id: RecipeMeatballSoup # SS220 Added to supa kitchen (microwave)
   name: meatball soup recipe
   result: FoodSoupMeatball
   time: 10
@@ -784,7 +784,7 @@
     FoodPotato: 1
 
 - type: microwaveMealRecipe
-  id: RecipeNettleSoup
+  id: RecipeNettleSoup # SS220 Added to supa kitchen (microwave)
   name: nettle soup recipe
   result: FoodSoupNettle
   time: 10
@@ -797,7 +797,7 @@
     FoodPotato: 1
 
 - type: microwaveMealRecipe
-  id: RecipeEyeballSoup
+  id: RecipeEyeballSoup # SS220 Added to supa kitchen (microwave)
   name: eyeball soup recipe
   result: FoodSoupEyeball
   time: 10
@@ -810,7 +810,7 @@
     FoodPotato: 1
 
 - type: microwaveMealRecipe
-  id: RecipeAmanitaJelly
+  id: RecipeAmanitaJelly # SS220 Added to supa kitchen (microwave)
   name: amanita jelly recipe
   result: FoodJellyAmanita
   time: 10
@@ -821,7 +821,7 @@
     FoodFlyAmanita: 3
 
 - type: microwaveMealRecipe
-  id: RecipeOnionSoup
+  id: RecipeOnionSoup # SS220 Added to supa kitchen (microwave)
   name: onion soup recipe
   result: FoodSoupOnion
   time: 10
@@ -833,7 +833,7 @@
     FoodCheeseSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeMushroomSoup
+  id: RecipeMushroomSoup # SS220 Added to supa kitchen (microwave)
   name: mushroom soup recipe
   result: FoodSoupMushroom
   time: 10
@@ -845,7 +845,7 @@
     FoodMushroom: 2
 
 - type: microwaveMealRecipe
-  id: RecipeStewSoup
+  id: RecipeStewSoup # SS220 Added to supa kitchen (microwave)
   name: stew recipe
   result: FoodSoupStew
   time: 10
@@ -861,7 +861,7 @@
     FoodMushroom: 1
 
 - type: microwaveMealRecipe
-  id: RecipeTomatoSoup
+  id: RecipeTomatoSoup # SS220 Added to supa kitchen (microwave)
   name: tomato soup recipe
   result: FoodSoupTomato
   time: 10
@@ -872,7 +872,7 @@
     FoodTomato: 2
 
 - type: microwaveMealRecipe
-  id: RecipeTomatoBloodSoup
+  id: RecipeTomatoBloodSoup # SS220 Added to supa kitchen (microwave)
   name: tomato blood soup recipe
   result: FoodSoupTomatoBlood
   time: 10
@@ -883,7 +883,7 @@
     FoodBloodTomato: 2
 
 - type: microwaveMealRecipe
-  id: RecipeWingFangChuSoup
+  id: RecipeWingFangChuSoup # SS220 Added to supa kitchen (microwave)
   name: wing fang chu recipe
   result: FoodSoupWingFangChu
   time: 10
@@ -894,7 +894,7 @@
     FoodMeatXenoCutlet: 2
 
 - type: microwaveMealRecipe
-  id: RecipeWingFangChuSoupSpider
+  id: RecipeWingFangChuSoupSpider # SS220 Added to supa kitchen (microwave)
   name: wing fang chu recipe
   result: FoodSoupWingFangChu
   time: 10
@@ -905,7 +905,7 @@
     FoodMeatSpider: 2
 
 - type: microwaveMealRecipe
-  id: RecipeVegetableSoup
+  id: RecipeVegetableSoup # SS220 Added to supa kitchen (microwave)
   name: vegetable soup recipe
   result: FoodSoupVegetable
   time: 10
@@ -919,7 +919,7 @@
     FoodEggplant: 1
 
 - type: microwaveMealRecipe
-  id: RecipeClownTearsSoup
+  id: RecipeClownTearsSoup # SS220 Added to supa kitchen (microwave)
   name: clown tears soup recipe
   result: FoodSoupClown
   time: 10
@@ -932,7 +932,7 @@
     #idk probably replace shard with someting bananium when #14663 merged
 
 - type: microwaveMealRecipe
-  id: RecipeMonkeysDelightSoup
+  id: RecipeMonkeysDelightSoup # SS220 Added to supa kitchen (microwave)
   name: monkeys delight recipe
   result: FoodSoupMonkey
   time: 10
@@ -946,7 +946,7 @@
     MonkeyCube: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBungoSoup
+  id: RecipeBungoSoup # SS220 Added to supa kitchen (microwave)
   name: bungo soup recipe
   result: FoodSoupBungo
   time: 10
@@ -958,7 +958,7 @@
     FoodChiliPepper: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBoiledSnail
+  id: RecipeBoiledSnail # SS220 Added to supa kitchen (microwave)
   name: boiled snail recipe
   result: FoodMeatSnailCooked
   time: 5
@@ -968,7 +968,7 @@
     FoodMeatSnail: 1
 
 - type: microwaveMealRecipe
-  id: RecipeEscargotSoup
+  id: RecipeEscargotSoup # SS220 Added to supa kitchen (microwave)
   name: escargot recipe
   result: FoodSoupEscargot
   time: 10
@@ -983,7 +983,7 @@
 #Pies
 
 - type: microwaveMealRecipe
-  id: RecipeAmanitaPie
+  id: RecipeAmanitaPie # SS220 Added to supa kitchen (oven)
   name: amanita pie recipe
   result: FoodPieAmanita
   time: 15
@@ -993,7 +993,7 @@
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
-  id: RecipeApplePie
+  id: RecipeApplePie # SS220 Added to supa kitchen (oven)
   name: apple pie recipe
   result: FoodPieApple
   time: 15
@@ -1003,7 +1003,7 @@
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBaklava
+  id: RecipeBaklava # SS220 Added to supa kitchen (oven)
   name: baklava recipe
   result: FoodPieBaklava
   time: 15
@@ -1013,7 +1013,7 @@
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBananaCreamPie
+  id: RecipeBananaCreamPie # SS220 Added to supa kitchen (oven)
   name: banana cream pie recipe
   result: FoodPieBananaCream
   time: 15
@@ -1023,7 +1023,7 @@
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBerryClafoutis
+  id: RecipeBerryClafoutis # SS220 Added to supa kitchen (oven)
   name: berry clafoutis recipe
   result: FoodPieClafoutis
   time: 15
@@ -1033,7 +1033,7 @@
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCherryPie
+  id: RecipeCherryPie # SS220 Added to supa kitchen (oven)
   name: cherry pie recipe
   result: FoodPieCherry
   time: 15
@@ -1043,7 +1043,7 @@
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
-  id: RecipeFrostyPie
+  id: RecipeFrostyPie # SS220 Added to supa kitchen (oven)
   name: frosty pie recipe
   result: FoodPieFrosty
   time: 15
@@ -1053,7 +1053,7 @@
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
-  id: RecipeMeatPie
+  id: RecipeMeatPie # SS220 Added to supa kitchen (oven)
   name: meat pie recipe
   result: FoodPieMeat
   time: 15
@@ -1063,7 +1063,7 @@
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
-  id: RecipePumpkinPie
+  id: RecipePumpkinPie # SS220 Added to supa kitchen (oven)
   name: pumpkin pie recipe
   result: FoodPiePumpkin
   time: 15
@@ -1083,7 +1083,7 @@
 #    FoodPlateTin: 1
 
 - type: microwaveMealRecipe
-  id: RecipeXenoPie
+  id: RecipeXenoPie # SS220 Added to supa kitchen (oven)
   name: xeno pie recipe
   result: FoodPieXeno
   time: 15
@@ -1095,7 +1095,7 @@
 #Tarts
 
 - type: microwaveMealRecipe
-  id: RecipeCocoTart
+  id: RecipeCocoTart # SS220 Added to supa kitchen (oven)
   name: chocolate lava tart recipe
   result: FoodTartCoco
   time: 15
@@ -1108,7 +1108,7 @@
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
-  id: RecipeGappleTart
+  id: RecipeGappleTart # SS220 Added to supa kitchen (oven)
   name: golden apple streusel tart recipe
   result: FoodTartGapple
   time: 15
@@ -1122,7 +1122,7 @@
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
-  id: RecipeGrapeTart
+  id: RecipeGrapeTart # SS220 Added to supa kitchen (oven)
   name: grape tart recipe
   result: FoodTartGrape
   time: 15
@@ -1135,7 +1135,7 @@
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
-  id: RecipeMimeTart
+  id: RecipeMimeTart # SS220 Added to supa kitchen (oven)
   name: mime tart recipe
   result: FoodTartMime
   time: 15
@@ -1150,7 +1150,7 @@
 #Other
 
 - type: microwaveMealRecipe
-  id: RecipeCubanCarp
+  id: RecipeCubanCarp # SS220 Added to supa kitchen (microwave)
   name: Cuban carp recipe
   result: FoodMealCubancarp
   time: 15
@@ -1161,7 +1161,7 @@
     FoodMeatFish: 2
 
 - type: microwaveMealRecipe
-  id: RecipeSashimi
+  id: RecipeSashimi # SS220 Added to supa kitchen (microwave)
   name: sashimi recipe
   result: FoodMealSashimi
   time: 15
@@ -1171,7 +1171,7 @@
     FoodMeatFish: 2
 
 - type: microwaveMealRecipe
-  id: RecipeMisoColaSoup
+  id: RecipeMisoColaSoup # SS220 Added to supa kitchen (microwave)
   name: salty sweet misocola soup recipe
   result: DisgustingSweptSoup
   time: 15
@@ -1181,7 +1181,7 @@
     FoodSoupMiso: 1
 
 - type: microwaveMealRecipe
-  id: RecipeLoadedBakedPotato
+  id: RecipeLoadedBakedPotato # SS220 Added to supa kitchen (oven)
   name: loaded baked potato recipe
   result: FoodMealPotatoLoaded
   time: 15
@@ -1190,7 +1190,7 @@
     FoodCheeseSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeFries
+  id: RecipeFries # SS220 Added to supa kitchen (microwave)
   name: space fries recipe
   result: FoodMealFries
   time: 15
@@ -1200,7 +1200,7 @@
     FoodPotato: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCheesyFries
+  id: RecipeCheesyFries # SS220 Added to supa kitchen (microwave)
   name: cheesy fries recipe
   result: FoodMealFriesCheesy
   time: 15
@@ -1211,7 +1211,7 @@
     FoodCheeseSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCarrotFries
+  id: RecipeCarrotFries # SS220 Added to supa kitchen (microwave)
   name: carrot fries recipe
   result: FoodMealFriesCarrot
   time: 15
@@ -1258,7 +1258,7 @@
 # SS220 end
 
 - type: microwaveMealRecipe
-  id: RecipePopcorn
+  id: RecipePopcorn # SS220 Added to supa kitchen (microwave)
   name: popcorn recipe
   result: FoodSnackPopcorn
   time: 20
@@ -1266,7 +1266,7 @@
     FoodCorn: 1
 
 - type: microwaveMealRecipe
-  id: RecipePancake
+  id: RecipePancake # SS220 Added to supa kitchen (grille)
   name: pancake recipe
   result: FoodBakedPancake
   time: 5
@@ -1276,7 +1276,7 @@
     Egg: 6
 
 - type: microwaveMealRecipe
-  id: RecipeBlueberryPancake
+  id: RecipeBlueberryPancake # SS220 Added to supa kitchen (grille)
   name: blueberry pancake recipe
   result: FoodBakedPancakeBb
   time: 5
@@ -1288,7 +1288,7 @@
     FoodBerries: 2
 
 - type: microwaveMealRecipe
-  id: RecipeWaffles
+  id: RecipeWaffles # SS220 Added to supa kitchen (grill)
   name: waffle recipe
   result: FoodBakedWaffle
   time: 10
@@ -1299,7 +1299,7 @@
     SodaWater: 5
 
 - type: microwaveMealRecipe
-  id: RecipeWaffleSoy
+  id: RecipeWaffleSoy # SS220 Added to supa kitchen (grill)
   name: soy waffle recipe
   result: FoodBakedWaffleSoy
   time: 10
@@ -1310,7 +1310,7 @@
     SodaWater: 5
 
 - type: microwaveMealRecipe
-  id: RecipeCookie
+  id: RecipeCookie # SS220 Added to supa kitchen (oven)
   name: cookie recipe
   result: FoodBakedCookie
   time: 5
@@ -1322,7 +1322,7 @@
     FoodSnackChocolateBar: 1
 
 - type: microwaveMealRecipe
-  id: RecipeSugarCookie
+  id: RecipeSugarCookie # SS220 Added to supa kitchen (oven)
   name: sugar cookie recipe
   result: FoodBakedCookieSugar
   time: 5
@@ -1333,7 +1333,7 @@
     FoodButterSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeRaisinCookie
+  id: RecipeRaisinCookie # SS220 Added to supa kitchen (oven)
   name: raisin cookie recipe
   result: FoodBakedCookieRaisin
   time: 5
@@ -1344,7 +1344,7 @@
     FoodSnackRaisins: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCookieOatmeal
+  id: RecipeCookieOatmeal # SS220 Added to supa kitchen (oven)
   name: oatmeal cookie recipe
   result: FoodBakedCookieOatmeal
   time: 5
@@ -1355,7 +1355,7 @@
     FoodButterSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeChocolateChipPancake
+  id: RecipeChocolateChipPancake # SS220 Added to supa kitchen (oven)
   name: chocolate chip pancake recipe
   result: FoodBakedPancakeCc
   time: 5
@@ -1367,7 +1367,7 @@
     FoodSnackChocolateBar: 1
 
 - type: microwaveMealRecipe
-  id: RecipeAppleCake
+  id: RecipeAppleCake # SS220 Added to supa kitchen (oven)
   name: apple cake recipe
   result: FoodCakeApple
   time: 5
@@ -1376,7 +1376,7 @@
     FoodApple: 3
 
 - type: microwaveMealRecipe
-  id: RecipeCarrotCake
+  id: RecipeCarrotCake # SS220 Added to supa kitchen (oven)
   name: carrot cake recipe
   result: FoodCakeCarrot
   time: 5
@@ -1385,7 +1385,7 @@
     FoodCarrot: 3
 
 - type: microwaveMealRecipe
-  id: RecipeLemonCake
+  id: RecipeLemonCake # SS220 Added to supa kitchen (oven)
   name: lemon cake recipe
   result: FoodCakeLemon
   time: 5
@@ -1394,7 +1394,7 @@
     FoodLemon: 3
 
 - type: microwaveMealRecipe
-  id: RecipeLemoonCake
+  id: RecipeLemoonCake # SS220 Added to supa kitchen (oven)
   name: lemoon cake recipe
   result: FoodCakeLemoon
   time: 5
@@ -1404,7 +1404,7 @@
     FoodBerries: 1 #dark colouring
 
 - type: microwaveMealRecipe
-  id: RecipeOrangeCake
+  id: RecipeOrangeCake # SS220 Added to supa kitchen (oven)
   name: orange cake recipe
   result: FoodCakeOrange
   time: 5
@@ -1413,7 +1413,7 @@
     FoodOrange: 3
 
 - type: microwaveMealRecipe
-  id: RecipeBlueberryCake
+  id: RecipeBlueberryCake # SS220 Added to supa kitchen (oven)
   name: blueberry cake recipe
   result: FoodCakeBlueberry
   time: 5
@@ -1422,7 +1422,7 @@
     FoodBerries: 3
 
 - type: microwaveMealRecipe
-  id: RecipeLimeCake
+  id: RecipeLimeCake # SS220 Added to supa kitchen (oven)
   name: lime cake recipe
   result: FoodCakeLime
   time: 5
@@ -1431,7 +1431,7 @@
     FoodLime: 3
 
 - type: microwaveMealRecipe
-  id: RecipeCheeseCake
+  id: RecipeCheeseCake # SS220 Added to supa kitchen (oven)
   name: cheese cake recipe
   result: FoodCakeCheese
   time: 5
@@ -1442,7 +1442,7 @@
     FoodCheeseSlice: 3
 
 - type: microwaveMealRecipe
-  id: RecipePumpkinCake
+  id: RecipePumpkinCake # SS220 Added to supa kitchen (oven)
   name: pumpkin cake recipe
   result: FoodCakePumpkin
   time: 5
@@ -1451,7 +1451,7 @@
     FoodPumpkin: 1
 
 - type: microwaveMealRecipe
-  id: RecipeClownCake
+  id: RecipeClownCake # SS220 Added to supa kitchen (oven)
   name: clown cake recipe
   result: FoodCakeClown
   time: 5
@@ -1460,7 +1460,7 @@
     FoodCakePlain: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCake
+  id: RecipeCake # SS220 Added to supa kitchen (oven)
   name: cake recipe
   result: FoodCakePlain
   time: 15
@@ -1468,7 +1468,7 @@
     FoodCakeBatter: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBirthdayCake
+  id: RecipeBirthdayCake # SS220 Added to supa kitchen (oven)
   name: birthday cake recipe
   result: FoodCakeBirthday
   time: 5
@@ -1478,7 +1478,7 @@
     FoodCakePlain: 1
 
 - type: microwaveMealRecipe
-  id: RecipeChocolateCake
+  id: RecipeChocolateCake # SS220 Added to supa kitchen (oven)
   name: chocolate cake recipe
   result: FoodCakeChocolate
   time: 5
@@ -1487,7 +1487,7 @@
     FoodSnackChocolateBar: 2
 
 - type: microwaveMealRecipe
-  id: RecipeBrainCake
+  id: RecipeBrainCake # SS220 Added to supa kitchen (oven)
   name: brain cake recipe
   result: FoodCakeBrain
   time: 15
@@ -1496,7 +1496,7 @@
     OrganHumanBrain: 1
 
 - type: microwaveMealRecipe
-  id: RecipeSlimeCake
+  id: RecipeSlimeCake # SS220 Added to supa kitchen (oven)
   name: slime cake recipe
   result: FoodCakeSlime
   time: 5
@@ -1506,7 +1506,7 @@
     FoodCakePlain: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCatCake
+  id: RecipeCatCake # SS220 Added to supa kitchen (oven)
   name: cat cake recipe
   result: MobCatCake
   time: 15
@@ -1519,7 +1519,7 @@
     OrganAnimalHeart: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBreadDog
+  id: RecipeBreadDog # SS220 Added to supa kitchen (oven)
   name: bread dog recipe
   result: MobBreadDog
   time: 15
@@ -1531,7 +1531,7 @@
     FoodSpaceshroomCooked: 1
 
 - type: microwaveMealRecipe
-  id: RecipeDumplings
+  id: RecipeDumplings # SS220 Added to supa kitchen (oven)
   name: dumplings recipe
   result: FoodBakedDumplings
   time: 15
@@ -1542,7 +1542,7 @@
     FoodDoughSlice: 3
 
 - type: microwaveMealRecipe
-  id: RecipeBrownies
+  id: RecipeBrownies # SS220 Added to supa kitchen (oven)
   name: brownie recipe
   result: FoodBakedBrownieBatch
   time: 25
@@ -1556,7 +1556,7 @@
 
 #Donks i guess
 - type: microwaveMealRecipe
-  id: RecipeWarmDonkpocket
+  id: RecipeWarmDonkpocket # SS220 Added to supa kitchen (microwave)
   name: warm donk pocket recipe
   result: FoodDonkpocketWarm
   time: 5
@@ -1564,7 +1564,7 @@
     FoodDonkpocket: 1
 
 - type: microwaveMealRecipe
-  id: RecipeWarmDankpocket
+  id: RecipeWarmDankpocket # SS220 Added to supa kitchen (microwave)
   name: warm dank pocket recipe
   result: FoodDonkpocketDankWarm
   time: 5
@@ -1572,7 +1572,7 @@
     FoodDonkpocketDank: 1
 
 - type: microwaveMealRecipe
-  id: RecipeWarmDonkpocketSpicy
+  id: RecipeWarmDonkpocketSpicy # SS220 Added to supa kitchen (microwave)
   name: warm spicy donk-pocket recipe
   result: FoodDonkpocketSpicyWarm
   time: 5
@@ -1580,7 +1580,7 @@
     FoodDonkpocketSpicy: 1
 
 - type: microwaveMealRecipe
-  id: RecipeWarmDonkpocketTeriyaki
+  id: RecipeWarmDonkpocketTeriyaki # SS220 Added to supa kitchen (microwave)
   name: warm teriyaki-pocket recipe
   result: FoodDonkpocketTeriyakiWarm
   time: 5
@@ -1588,7 +1588,7 @@
     FoodDonkpocketTeriyaki: 1
 
 - type: microwaveMealRecipe
-  id: RecipeWarmDonkpocketPizza
+  id: RecipeWarmDonkpocketPizza # SS220 Added to supa kitchen (microwave)
   name: warm pizza-pocket recipe
   result: FoodDonkpocketPizzaWarm
   time: 5
@@ -1596,7 +1596,7 @@
     FoodDonkpocketPizza: 1
 
 - type: microwaveMealRecipe
-  id: RecipeDonkpocketHonk
+  id: RecipeDonkpocketHonk # SS220 Added to supa kitchen (microwave)
   name: warm honk-pocket recipe
   result: FoodDonkpocketHonkWarm
   time: 5
@@ -1604,7 +1604,7 @@
     FoodDonkpocketHonk: 1
 
 - type: microwaveMealRecipe
-  id: RecipeDonkpocketBerry
+  id: RecipeDonkpocketBerry # SS220 Added to supa kitchen (microwave)
   name: warm berry-pocket recipe
   result: FoodDonkpocketBerryWarm
   time: 5
@@ -1612,7 +1612,7 @@
     FoodDonkpocketBerry: 1
 
 - type: microwaveMealRecipe
-  id: RecipeDonkpocketStonk
+  id: RecipeDonkpocketStonk # SS220 Added to supa kitchen (microwave)
   name: warm stonk-pocket recipe
   result: FoodDonkpocketStonkWarm
   time: 5
@@ -1620,7 +1620,7 @@
     FoodDonkpocketStonk: 1
 
 - type: microwaveMealRecipe
-  id: RecipeDonkpocketCarp
+  id: RecipeDonkpocketCarp # SS220 Added to supa kitchen (microwave)
   name: warm carp-pocket recipe
   result: FoodDonkpocketCarpWarm
   time: 5
@@ -1628,7 +1628,7 @@
     FoodDonkpocketCarp: 1
 
 - type: microwaveMealRecipe
-  id: RecipeHotChili
+  id: RecipeHotChili # SS220 Added to supa kitchen (microwave)
   name: hot chili recipe
   result: FoodSoupChiliHot
   time: 20
@@ -1640,7 +1640,7 @@
     FoodTomato: 1
 
 - type: microwaveMealRecipe
-  id: RecipeColdChili
+  id: RecipeColdChili # SS220 Added to supa kitchen (microwave)
   name: cold chili recipe
   result: FoodSoupChiliCold
   time: 5
@@ -1650,7 +1650,7 @@
     FoodSoupChiliHot: 1
 
 - type: microwaveMealRecipe
-  id: RecipeClownTears
+  id: RecipeClownTears # SS220 Added to supa kitchen (microwave)
   name: clown's tears recipe
   result: FoodSoupClown
   time: 15
@@ -1661,7 +1661,7 @@
     BikeHorn: 1
 
 - type: microwaveMealRecipe
-  id: RecipeChiliClown
+  id: RecipeChiliClown # SS220 Added to supa kitchen (microwave)
   name: chili con carnival recipe
   result: FoodSoupChiliClown
   time: 30
@@ -1674,7 +1674,7 @@
     ClothingShoesClown: 1
 
 - type: microwaveMealRecipe
-  id: RecipeQueso
+  id: RecipeQueso # SS220 Added to supa kitchen (microwave)
   name: queso recipe
   result: FoodMealQueso
   time: 15
@@ -1686,7 +1686,7 @@
     FoodCheeseSlice: 2
 
 - type: microwaveMealRecipe
-  id: RecipeRibs
+  id: RecipeRibs # SS220 Added to supa kitchen (grille)
   name: BBQ ribs recipe
   result: FoodMealRibs
   time: 15
@@ -1697,7 +1697,7 @@
     FoodKebabSkewer: 1
 
 - type: microwaveMealRecipe
-  id: RecipeEnchiladas
+  id: RecipeEnchiladas # SS220 Added to supa kitchen (grille)
   name: enchiladas recipe
   result: FoodMealEnchiladas
   time: 20
@@ -1708,7 +1708,7 @@
 
 # SALADS: These should be moved out of the microwave as soon as possible
 - type: microwaveMealRecipe
-  id: RecipeHerbSalad
+  id: RecipeHerbSalad # SS220 Added to supa kitchen (microwave)
   name: herb salad recipe
   result: FoodSaladHerb
   time: 5
@@ -1718,7 +1718,7 @@
     FoodApple: 1
 
 - type: microwaveMealRecipe
-  id: RecipeValidSalad
+  id: RecipeValidSalad # SS220 Added to supa kitchen (microwave)
   name: valid salad recipe
   result: FoodSaladValid
   time: 5
@@ -1729,7 +1729,7 @@
     FoodMeatMeatball: 1
 
 - type: microwaveMealRecipe
-  id: RecipeColeslaw
+  id: RecipeColeslaw # SS220 Added to supa kitchen (microwave)
   name: coleslaw recipe
   result: FoodSaladColeslaw
   time: 5
@@ -1741,7 +1741,7 @@
     FoodCabbage: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCaesarSalad
+  id: RecipeCaesarSalad # SS220 Added to supa kitchen (microwave)
   name: caesar salad recipe
   result: FoodSaladCaesar
   time: 5
@@ -1755,7 +1755,7 @@
     FoodCabbage: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCitrusSalad
+  id: RecipeCitrusSalad # SS220 Added to supa kitchen (microwave)
   name: citrus salad recipe
   result: FoodSaladCitrus
   time: 5
@@ -1766,7 +1766,7 @@
     FoodLime: 1
 
 - type: microwaveMealRecipe
-  id: RecipeKimchiSalad
+  id: RecipeKimchiSalad # SS220 Added to supa kitchen (microwave)
   name: kimchi salad recipe
   result: FoodSaladKimchi
   time: 5
@@ -1779,7 +1779,7 @@
     FoodGarlic: 1
 
 - type: microwaveMealRecipe
-  id: RecipeFruitSalad
+  id: RecipeFruitSalad # SS220 Added to supa kitchen (microwave)
   name: fruit salad recipe
   result: FoodSaladFruit
   time: 5
@@ -1791,7 +1791,7 @@
     FoodWatermelonSlice: 2
 
 - type: microwaveMealRecipe
-  id: RecipeJungleSalad
+  id: RecipeJungleSalad # SS220 Added to supa kitchen (microwave)
   name: jungle salad recipe
   result: FoodSaladJungle
   time: 5
@@ -1803,7 +1803,7 @@
     FoodWatermelonSlice: 2
 
 - type: microwaveMealRecipe
-  id: RecipeWatermelonFruitBowlSalad
+  id: RecipeWatermelonFruitBowlSalad # SS220 Added to supa kitchen (microwave)
   name: watermelon fruit bowl recipe
   result: FoodSaladWatermelonFruitBowl
   time: 5
@@ -1818,7 +1818,7 @@
 # Muffins
 
 - type: microwaveMealRecipe
-  id: RecipeMuffin
+  id: RecipeMuffin # SS220 Added to supa kitchen (oven)
   name: muffin recipe
   result: FoodBakedMuffin
   time: 15
@@ -1829,7 +1829,7 @@
     Sugar: 10
 
 - type: microwaveMealRecipe
-  id: RecipeMuffinChocolate
+  id: RecipeMuffinChocolate # SS220 Added to supa kitchen (oven)
   name: chocolate muffin recipe
   result: FoodBakedMuffinChocolate
   time: 15
@@ -1841,7 +1841,7 @@
     Sugar: 10
 
 - type: microwaveMealRecipe
-  id: RecipeMuffinBerry
+  id: RecipeMuffinBerry # SS220 Added to supa kitchen (oven)
   name: berry muffin recipe
   result: FoodBakedMuffinBerry
   time: 15
@@ -1853,7 +1853,7 @@
     Sugar: 10
 
 - type: microwaveMealRecipe
-  id: RecipeMuffinBanana
+  id: RecipeMuffinBanana # SS220 Added to supa kitchen (oven)
   name: banana muffin recipe
   result: FoodBakedMuffinBanana
   time: 15
@@ -1865,7 +1865,7 @@
     Sugar: 10
 
 - type: microwaveMealRecipe
-  id: RecipeMuffinCherry
+  id: RecipeMuffinCherry # SS220 Added to supa kitchen (oven)
   name: cherry muffin recipe
   result: FoodBakedMuffinCherry
   time: 15
@@ -1879,7 +1879,7 @@
 # NOT ACTUAL FOOD
 
 - type: microwaveMealRecipe
-  id: RecipeDriedTeaLeaves
+  id: RecipeDriedTeaLeaves # SS220 Added to supa kitchen (microwave)
   name: dried tea leaves recipe
   result: LeavesTeaDried
   time: 10
@@ -1887,7 +1887,7 @@
     LeavesTea: 1
 
 - type: microwaveMealRecipe
-  id: RecipeDriedTobacco
+  id: RecipeDriedTobacco # SS220 Added to supa kitchen (microwave)
   name: dried tobacco leaves recipe
   result: LeavesTobaccoDried
   time: 10
@@ -1895,7 +1895,7 @@
     LeavesTobacco: 1
 
 - type: microwaveMealRecipe
-  id: RecipeDriedCannabis
+  id: RecipeDriedCannabis # SS220 Added to supa kitchen (microwave)
   name: dried cannabis leaves recipe
   result: LeavesCannabisDried
   time: 10
@@ -1903,7 +1903,7 @@
     LeavesCannabis: 1
 
 - type: microwaveMealRecipe
-  id: RecipeDriedCannabisRainbow
+  id: RecipeDriedCannabisRainbow # SS220 Added to supa kitchen (microwave)
   name: dried rainbow cannabis leaves recipe
   result: LeavesCannabisRainbowDried
   time: 10
@@ -1911,7 +1911,7 @@
     LeavesCannabisRainbow: 1
 
 - type: microwaveMealRecipe
-  id: RecipeTrashBakedBananaPeel
+  id: RecipeTrashBakedBananaPeel # SS220 Added to supa kitchen (microwave)
   name: baked banana peel recipe
   result: TrashBakedBananaPeel
   time: 5
@@ -1920,7 +1920,7 @@
 
 # Suppermatter
 - type: microwaveMealRecipe
-  id: RecipeSuppermatter
+  id: RecipeSuppermatter # SS220 Added to supa kitchen (oven)
   name: suppermatter recipe
   result: FoodCakeSuppermatter
   time: 30
@@ -1932,7 +1932,7 @@
     Plasma: 10
 
 - type: microwaveMealRecipe
-  id: RecipeFoodBakedChevreChaud
+  id: RecipeFoodBakedChevreChaud # SS220 Added to supa kitchen (grille)
   name: chevre chaud recipe
   result: FoodBakedChevreChaud
   time: 5
@@ -1941,7 +1941,7 @@
     FoodBreadBaguetteSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCannabisButter
+  id: RecipeCannabisButter # SS220 Added to supa kitchen (microwave)
   name: cannabis butter recipe
   result: FoodCannabisButter
   time: 15
@@ -1950,7 +1950,7 @@
     LeavesCannabis: 6
 
 - type: microwaveMealRecipe
-  id: RecipeCannabisBrownies
+  id: RecipeCannabisBrownies # SS220 Added to supa kitchen (microwave)
   name: cannabis brownie recipe
   result: FoodBakedCannabisBrownieBatch
   time: 25
@@ -1963,7 +1963,7 @@
     FoodSnackChocolateBar: 2
 
 - type: microwaveMealRecipe
-  id: RecipeCornInButter
+  id: RecipeCornInButter # SS220 Added to supa kitchen (microwave)
   name: corn in butter recipe
   result: FoodMealCornInButter
   time: 10
@@ -1973,7 +1973,7 @@
     FoodButter: 1
 
 - type: microwaveMealRecipe
-  id: RecipePeaSoup
+  id: RecipePeaSoup # SS220 Added to supa kitchen (microwave)
   name: pea soup recipe
   result: FoodSoupPea
   time: 10
@@ -1984,7 +1984,7 @@
     Water: 10
 
 - type: microwaveMealRecipe
-  id: RecipeTacoShell
+  id: RecipeTacoShell # SS220 Added to supa kitchen (microwave)
   name: taco shell recipe
   result: FoodTacoShell
   time: 5
@@ -1992,7 +1992,7 @@
     FoodDoughTortillaFlat: 1 # one third of a standard bread dough recipe
 
 - type: microwaveMealRecipe
-  id: RecipeTacoBeef
+  id: RecipeTacoBeef # SS220 Added to supa kitchen (microwave)
   name: beef taco recipe
   result: FoodTacoBeef
   time: 10
@@ -2002,7 +2002,7 @@
     FoodCheeseSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeTacoChicken
+  id: RecipeTacoChicken # SS220 Added to supa kitchen (microwave)
   name: chicken taco recipe
   result: FoodTacoChicken
   time: 10
@@ -2012,7 +2012,7 @@
     FoodCheeseSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeTacoFish
+  id: RecipeTacoFish # SS220 Added to supa kitchen (microwave)
   name: fish taco recipe
   result: FoodTacoFish
   time: 10
@@ -2024,7 +2024,7 @@
     FoodCabbage: 1
 
 - type: microwaveMealRecipe
-  id: RecipeTacoRat
+  id: RecipeTacoRat # SS220 Added to supa kitchen (microwave)
   name: rat taco recipe
   result: FoodTacoRat
   time: 10
@@ -2034,7 +2034,7 @@
     FoodMeatRat: 1
 
 - type: microwaveMealRecipe
-  id: RecipeTacoBeefSupreme
+  id: RecipeTacoBeefSupreme # SS220 Added to supa kitchen (microwave)
   name: beef taco supreme recipe
   result: FoodTacoBeefSupreme
   time: 10
@@ -2047,7 +2047,7 @@
     FoodOnionSlice: 2
 
 - type: microwaveMealRecipe
-  id: RecipeTacoChickenSupreme
+  id: RecipeTacoChickenSupreme # SS220 Added to supa kitchen (microwave)
   name: beef taco supreme recipe
   result: FoodTacoChickenSupreme
   time: 10
@@ -2060,7 +2060,7 @@
     FoodOnionSlice: 2
 
 - type: microwaveMealRecipe
-  id: RecipeCroissant
+  id: RecipeCroissant # SS220 Added to supa kitchen (oven)
   name: croissant recipe
   result: FoodBakedCroissant
   time: 5
@@ -2080,7 +2080,7 @@
     ShardGlass: 1
 
 - type: microwaveMealRecipe
-  id: RecipeInertAnomalyMeat
+  id: RecipeInertAnomalyMeat # SS220 Added to supa kitchen (microwave)
   name: inert meat anomaly recipe
   result: FoodMeatAnomaly
   time: 5
@@ -2088,7 +2088,7 @@
     AnomalyCoreFleshInert: 1
 
 - type: microwaveMealRecipe
-  id: RecipeAnomalyMeat
+  id: RecipeAnomalyMeat # SS220 Added to supa kitchen (microwave)
   name: meat anomaly recipe
   result: FoodMeatAnomaly
   time: 5
@@ -2096,7 +2096,7 @@
     AnomalyCoreFlesh: 1
 
 - type: microwaveMealRecipe
-  id: RecipeAnomalyMeatCooked
+  id: RecipeAnomalyMeatCooked # SS220 Added to supa kitchen (microwave)
   name: cooked meat anomaly recipe
   result: FoodMeatAnomalyCooked
   time: 5
