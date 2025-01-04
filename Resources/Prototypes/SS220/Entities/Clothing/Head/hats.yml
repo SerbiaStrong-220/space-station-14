@@ -615,3 +615,14 @@
     - type: Clothing
       sprite: SS220/Clothing/Head/Hats/pith_helmet.rsi
 # WMT Ebent end
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatNewYearsCap
+  name: new year`s cap
+  description: A bright New Year's hat with a fluffy pompom, adding magic and festive mood!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/newyears_cap.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/newyears_cap.rsi

@@ -88,6 +88,11 @@
 
 # Head
 - type: loadout
+  id: SecurityHelmetXmas
+  equipment:
+    head: ClothingHeadHelmetBasicXmas
+
+- type: loadout
   id: HatCowboyBlack
   equipment:
     head: ClothingHeadHatCowboyBlack
