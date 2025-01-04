@@ -405,7 +405,10 @@ public abstract class SharedMiGoSystem : EntitySystem
 
         //full vision during astral
         if (TryComp<EyeComponent>(uid, out var eye))
+        {
             _eye.SetDrawFov(uid, isMaterial, eye);
+            _eye.SetDrawLight((uid, eye), isMaterial);
+        }
     }
 
 

@@ -31,7 +31,7 @@
   components:
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
-      tableId: NoNewCrewAntagsGameRulesTables
+      tableId: NoNewCrewAntagsGameRulesTable
 
 - type: entityTable
   id: NoNewCrewAntagsGameRulesTable
