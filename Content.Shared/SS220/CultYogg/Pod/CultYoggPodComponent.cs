@@ -12,8 +12,6 @@ namespace Content.Shared.SS220.CultYogg.Pod;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class CultYoggPodComponent : Component
 {
-    [DataField]
-    public MiGoHealSpecifier healSpecifier = new();
     /// <summary>
     /// Time between each healing incident
     /// </summary>
