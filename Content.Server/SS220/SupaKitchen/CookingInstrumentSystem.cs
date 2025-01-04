@@ -141,6 +141,20 @@ public sealed class CookingInstrumentSystem : EntitySystem
         uint cookingTimer
         )
     {
+        if (component.AdditionalRecipes.Count > 0)
+        {
+            foreach (var recipeId in component.AdditionalRecipes)
+            {
+                var recipe = _recipeManager.TryGetRecipePrototype(recipeId);
+                if (recipe is null)
+                    continue;
+
+                var satisfiedRecipe = CanSatisfyRecipe(component, recipe, solidsDict, reagentDict, cookingTimer);
+                if (satisfiedRecipe.Item2 > 0)
+                    return satisfiedRecipe;
+            }
+        }
+
         return _recipeManager.Recipes.Select(r =>
             CanSatisfyRecipe(component, r, solidsDict, reagentDict, cookingTimer)).FirstOrDefault(r => r.Item2 > 0);
     }

@@ -16,4 +16,7 @@ public sealed partial class CookingInstrumentComponent : Component
     [ViewVariables]
     [DataField]
     public bool IgnoreTime = false;
+
+    [DataField]
+    public List<ProtoId<CookingRecipePrototype>> AdditionalRecipes = [];
 }

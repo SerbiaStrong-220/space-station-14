@@ -459,7 +459,7 @@
     FoodDough: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBaguetteSword
+  id: RecipeBaguetteSword # SS220 Added to supa kitchen (microwave)
   name: baguette sword recipe
   result: WeaponBaguette
   secretRecipe: true
@@ -2069,7 +2069,7 @@
     FoodButterSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeThrowingCroissant
+  id: RecipeThrowingCroissant # SS220 Added to supa kitchen (microwave)
   name: throwing croissant recipe
   result: WeaponCroissant
   secretRecipe: true

@@ -185,3 +185,10 @@
 # SS220 Cult
 - type: Tag
   id: Omnivorous
+
+# SS220 supa kithen
+- type: Tag
+  id: MicrowaveMachineUnsafe
+
+- type: Tag
+  id: MicrowaveSelfUnsafe

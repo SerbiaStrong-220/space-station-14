@@ -138,13 +138,21 @@
   #   idCardExplosionChance: 0.1 #SS220 Microwave explosion tweak
   #   explosionChance: 0.3
   #SS220 remove default microwave end
+  #SS220 supa kitchen begin
+  - type: CookingInstrument
+    additionalRecipes:
+    - RecipeBaguetteSword
+    - RecipeThrowingCroissant
+  #SS220 supa kitchen end
   - type: Sprite
     sprite: Structures/Machines/microwave_syndie.rsi
     drawdepth: SmallObjects
     snapCardinals: true
   - type: Machine
     board: SyndicateMicrowaveMachineCircuitboard
-  - type: FoodRecipeProvider
-    providedRecipes:
-    - RecipeBaguetteSword
-    - RecipeThrowingCroissant
+  #SS220 remove default microwave begin
+  # - type: FoodRecipeProvider
+  #   providedRecipes:
+  #   - RecipeBaguetteSword
+  #   - RecipeThrowingCroissant
+  #SS220 remove default microwave end

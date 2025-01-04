@@ -29,6 +29,9 @@ public sealed partial class GuideCookingRecipeGroupEmbed : BoxContainer, IDocume
         var prototypes = _prototype.EnumeratePrototypes<CookingRecipePrototype>();
         foreach (var recipe in prototypes)
         {
+            if (recipe.SecretRecipe)
+                continue;
+
             var embed = new GuideCookingRecipeEmbed(recipe);
             GroupContainer.AddChild(embed);
         }
