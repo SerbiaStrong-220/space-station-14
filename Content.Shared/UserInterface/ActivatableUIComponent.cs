@@ -77,6 +77,6 @@ namespace Content.Shared.UserInterface
         // SS220 Alternative-open-verb
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
-        public bool AltentativeOnly = false;
+        public bool AltentativeVerbOnly = false;
     }
 }

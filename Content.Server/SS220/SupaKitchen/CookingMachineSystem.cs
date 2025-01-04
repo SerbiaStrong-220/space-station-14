@@ -284,7 +284,6 @@ public sealed class CookingMachineSystem : EntitySystem
         _audio.PlayPvs(component.BeginCookingSound, uid);
         component.CookTimeRemaining = component.CookingTimer * component.CookTimeMultiplier;
         component.CurrentlyCookingRecipe = portionedRecipe;
-        UpdateUserInterfaceState(uid, component);
 
         SetAppearance(uid, CookingMachineVisualState.Cooking, component);
 
@@ -292,6 +291,7 @@ public sealed class CookingMachineSystem : EntitySystem
         component.PlayingStream = audioStream?.Entity;
 
         component.Active = true;
+        UpdateUserInterfaceState(uid, component);
     }
 
     public void StopCooking(EntityUid uid, CookingMachineComponent component)

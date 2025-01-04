@@ -6,7 +6,6 @@
   components:
   - type: Transform
     noRot: true
-
   # Make it behave like a closet
   - type: EntityStorage
   - type: EntityStorageVisuals
@@ -16,7 +15,6 @@
   - type: PlaceableSurface
     placeCentered: true
     isPlaceable: false
-
   - type: CookingInstrument
     instrumentType: oven
   - type: CookingMachine
@@ -26,7 +24,7 @@
     useEntityStorage: true
   - type: ActivatableUI
     key: enum.CookingMachineUiKey.Key
-    altentativeOnly: true
+    altentativeVerbOnly: true
   - type: UserInterface
     interfaces:
       enum.CookingMachineUiKey.Key:
@@ -57,12 +55,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.3,-0.16,0.3,0.16"
+          bounds: "-0.4,-0.4,0.4,0.4"
         density: 190
         mask:
-        - TabletopMachineMask
+        - MachineMask
         layer:
-        - TabletopMachineLayer
+        - MachineLayer
   - type: Sprite
     sprite: SS220/Structures/Machines/oven.rsi
     offset: 0,-0.5
@@ -75,6 +73,7 @@
     - state: oven_off
       map: ["oven_toggle"]
     - state: oven_on_unshaded
+      visible: false
       map: ["oven_toggle_unshaded"]
       shader: unshaded
   - type: Destructible
