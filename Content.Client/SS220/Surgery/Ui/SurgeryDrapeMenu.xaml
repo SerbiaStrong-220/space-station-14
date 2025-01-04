@@ -37,12 +37,8 @@
                 </BoxContainer>
                 <BoxContainer Name="DescriptionBox" Orientation="Vertical"  HorizontalExpand="False"
                                     VerticalAlignment="Center" VerticalExpand="True" MinSize="300 120" MaxSize="300 120">
-                    <RichTextLabel Name="OperationName"  Text="{Loc 'surgery-operation-name'}" VerticalExpand="True" Margin="4 2"
-                        HorizontalExpand="True" VerticalAlignment="Stretch" HorizontalAlignment="Left" LineHeightScale="0.65"/>
                     <RichTextLabel Name="OperationDescription"  Text="{Loc 'surgery-operation-desc'}" VerticalExpand="True" Margin="4 2"
                         VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalExpand="True" LineHeightScale="0.65"/>
-                    <RichTextLabel Name="OperationPostscript"  Text="{Loc 'surgery-operation-postscript'}" VerticalExpand="True" Margin="4 2"
-                        HorizontalExpand="True" VerticalAlignment="Bottom" HorizontalAlignment="Left" LineHeightScale="0.65"/>
                 </BoxContainer>
             </BoxContainer>
         </BoxContainer>

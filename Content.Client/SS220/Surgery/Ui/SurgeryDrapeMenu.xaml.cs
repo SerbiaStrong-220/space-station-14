@@ -98,11 +98,16 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
 
         button.OnMouseEntered += (_) =>
         {
-            if (surgeryGraph.PostscriptLocPath != null)
-                SetFormattedText(OperationPostscript, surgeryGraph.PostscriptLocPath);
+            var formattedText = FormattedMessage.FromMarkupPermissive(Loc.GetString(surgeryGraph.DescriptionLocPath));
 
-            SetFormattedText(OperationName, surgeryGraph.NameLocPath);
-            SetFormattedText(OperationDescription, surgeryGraph.DescriptionLocPath);
+            if (surgeryGraph.PostscriptLocPath != null)
+            {
+                formattedText.PushNewline();
+                var postscriptMessage = Loc.GetString(surgeryGraph.PostscriptLocPath);
+                formattedText.AddMessage(FormattedMessage.FromMarkupPermissive(postscriptMessage));
+            }
+
+            OperationDescription.SetMessage(formattedText);
         };
 
         if (SharedSurgeryAvaibilityChecks.IsSurgeryGraphAvailableTarget(Target, surgeryGraph, _entityManager, out var reason))
@@ -110,6 +115,10 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
             var tooltip = new Tooltip();
             SetFormattedText(tooltip, reason!);
             button.TooltipSupplier = (_) => tooltip;
+        }
+        else
+        {
+            button.TooltipSupplier = (_) => null;
         }
 
         return button;
