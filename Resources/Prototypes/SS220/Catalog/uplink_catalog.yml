@@ -253,6 +253,8 @@
   conditions:
     - !type:ListingLimitedStockCondition
       stock: 1
+    - !type:BuyBeforeCondition #block buy listing, if any other listing was bought
+      blacklistAll: true
     - !type:StoreWhitelistCondition
       blacklist:
         tags:
