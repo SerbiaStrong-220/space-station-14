@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Client.Guidebook.Richtext;
 using Content.Shared.SS220.SupaKitchen;
 using JetBrains.Annotations;
@@ -23,23 +24,39 @@ public sealed partial class GuideCookingRecipeGroupEmbed : BoxContainer, IDocume
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-
         MouseFilter = MouseFilterMode.Stop;
+    }
 
-        var prototypes = _prototype.EnumeratePrototypes<CookingRecipePrototype>();
-        foreach (var recipe in prototypes)
-        {
-            if (recipe.SecretRecipe)
-                continue;
-
-            var embed = new GuideCookingRecipeEmbed(recipe);
-            GroupContainer.AddChild(embed);
-        }
+    public GuideCookingRecipeGroupEmbed(string? recipeGroup, ProtoId<CookingInstrumentTypePrototype>? instrumentType) : this()
+    {
+        AddCookingRecipes(recipeGroup, instrumentType);
     }
 
     public bool TryParseTag(Dictionary<string, string> args, [NotNullWhen(true)] out Control? control)
     {
+        args.TryGetValue("RecipeGroup", out var recipeGroup);
+        args.TryGetValue("InstrumentType", out var instrumentType);
+
+        AddCookingRecipes(recipeGroup, instrumentType);
+
         control = this;
         return true;
+    }
+
+    private void AddCookingRecipes(string? recipeGroup, ProtoId<CookingInstrumentTypePrototype>? instrumentType)
+    {
+        var prototypes = _prototype.EnumeratePrototypes<CookingRecipePrototype>().Where(r => !r.SecretRecipe);
+
+        if (recipeGroup != null)
+            prototypes = prototypes.Where(r => r.RecipeGroup == recipeGroup);
+
+        if (instrumentType != null)
+            prototypes = prototypes.Where(r => r.InstrumentType == instrumentType);
+
+        foreach (var recipe in prototypes)
+        {
+            var embed = new GuideCookingRecipeEmbed(recipe);
+            GroupContainer.AddChild(embed);
+        }
     }
 }

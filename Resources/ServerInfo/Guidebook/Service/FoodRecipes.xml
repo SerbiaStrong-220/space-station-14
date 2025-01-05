@@ -45,6 +45,57 @@ Buzz! Don't forget about Moth diet!
 - Кусок сыра: Разрежьте головку сыра
 
 ## Рецепты
-<GuideCookingRecipeGroupEmbed/>
+
+## Выпечка
+<GuideCookingRecipeGroupEmbed RecipeGroup="bread"/>
+<GuideCookingRecipeGroupEmbed RecipeGroup="toast"/>
+<GuideCookingRecipeGroupEmbed RecipeGroup="slice"/>
+<GuideCookingRecipeGroupEmbed RecipeGroup="bagel"/>
+
+## Бургеры
+<GuideCookingRecipeGroupEmbed RecipeGroup="burger"/>
+
+## Пицца
+<GuideCookingRecipeGroupEmbed RecipeGroup="pizza"/>
+
+## Тако
+<GuideCookingRecipeGroupEmbed RecipeGroup="taco"/>
+
+## Пироги
+<GuideCookingRecipeGroupEmbed RecipeGroup="pie"/>
+
+## Тарты
+<GuideCookingRecipeGroupEmbed RecipeGroup="tart"/>
+
+## Торты
+<GuideCookingRecipeGroupEmbed RecipeGroup="cake"/>
+
+## Сладости
+<GuideCookingRecipeGroupEmbed RecipeGroup="muffin"/>
+<GuideCookingRecipeGroupEmbed RecipeGroup="cookie"/>
+<GuideCookingRecipeGroupEmbed RecipeGroup="caramel"/>
+
+## Итальянская кухня
+<GuideCookingRecipeGroupEmbed RecipeGroup="italian"/>
+
+## Супы
+<GuideCookingRecipeGroupEmbed RecipeGroup="soup"/>
+
+## Донк-покеты
+<GuideCookingRecipeGroupEmbed RecipeGroup="donk-pocket"/>
+
+## Салаты
+<GuideCookingRecipeGroupEmbed RecipeGroup="salad"/>
+
+## Гриль
+<GuideCookingRecipeGroupEmbed InstrumentType="grill"/>
+
+## Медицинское
+<GuideCookingRecipeGroupEmbed RecipeGroup="medical"/>
+
+## Прочее
+<GuideCookingRecipeGroupEmbed RecipeGroup="other"/>
+<GuideCookingRecipeGroupEmbed RecipeGroup="notfood"/>
+<GuideCookingRecipeGroupEmbed RecipeGroup="anomaly"/>
 
 </Document>

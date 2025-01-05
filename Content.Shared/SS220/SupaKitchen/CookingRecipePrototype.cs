@@ -36,6 +36,9 @@ public sealed class CookingRecipePrototype : IPrototype
     public IReadOnlyDictionary<string, FixedPoint2> IngredientsReagents => _ingsReagents;
     public IReadOnlyDictionary<string, FixedPoint2> IngredientsSolids => _ingsSolids;
 
+    [DataField]
+    public string? RecipeGroup;
+
     /// <summary>
     /// Is this recipe unavailable in normal circumstances?
     /// </summary>
