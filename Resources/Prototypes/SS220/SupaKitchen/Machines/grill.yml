@@ -58,8 +58,8 @@
       - !type:DoActsBehavior
         acts: ["Breakage"]
     - trigger:
-      !type:DamageTrigger
-        damage: 150
+        !type:DamageTrigger
+          damage: 150
       behaviors:
       - !type:PlaySoundBehavior
         sound:
