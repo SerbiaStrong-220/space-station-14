@@ -152,7 +152,7 @@
   components:
     - type: Sprite
       drawdepth: FloorObjects
-      sprite: SS220/Structures/Piping/Atmospherics/ #ss220 engineering-update-atmos
+      sprite: SS220/Structures/Piping/Atmospherics/outletinjector.rsi #ss220 engineering-update-atmos
       layers:
         - state: pipeHalf
           sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos

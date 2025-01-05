@@ -375,7 +375,7 @@
   category: construction-category-structures
   description: Reports on the status of the gas within the attached pipe network. 
   icon:
-    sprite: Structures/Piping/Atmospherics/gas_pipe_sensor.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/gas_pipe_sensor.rsi #ss220 engineering-update-atmos
     state: icon
   placementMode: SnapgridCenter
   objectType: Structure

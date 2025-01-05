@@ -170,7 +170,7 @@
   - type: Sprite
     sprite: SS220/Structures/Piping/Atmospherics/gasmixer.rsi #ss220 engineering-update-atmos
     layers:
-    - sprite: SS220/tructures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
+    - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
       state: pipeTrinaryConnectors
       map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: gasMixerF
