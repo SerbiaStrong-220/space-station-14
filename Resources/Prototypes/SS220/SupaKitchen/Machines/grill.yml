@@ -52,8 +52,22 @@
         !type:DamageTrigger
         damage: 100
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
       - !type:DoActsBehavior
         acts: ["Breakage"]
+    - trigger:
+      !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: ApcPowerReceiver
     powerLoad: 400
   - type: Machine

@@ -44,11 +44,8 @@ public sealed partial class CookingMachineComponent : Component
     [ViewVariables]
     public int CurrentCookTimeButtonIndex;
 
-    [DataField, ViewVariables]
-    public bool Broken = false;
-
-    [DataField, ViewVariables, Access(typeof(CookingMachineSystem), Other = AccessPermissions.Read)]
-    public bool Active = false;
+    [ViewVariables, Access(typeof(CookingMachineSystem), Other = AccessPermissions.Read)]
+    public CookingMachineState CurrentState = CookingMachineState.Idle;
     #endregion
 
     #region  audio

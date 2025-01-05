@@ -55,9 +55,8 @@ namespace Content.Client.SS220.SupaKitchen.UI
                 return;
 
             _solids.Clear();
-            //_menu?.Dispose();
+            _menu?.Dispose();
         }
-
 
         protected override void UpdateState(BoundUserInterfaceState state)
         {
@@ -67,7 +66,11 @@ namespace Content.Client.SS220.SupaKitchen.UI
                 return;
             }
 
-            _menu?.ToggleBusyDisableOverlayPanel(cState.IsMachineBusy);
+            if (cState.MachineState is CookingMachineState.Idle)
+                _menu?.ToggleBusyDisableOverlayPanel(false);
+            else
+                _menu?.ToggleBusyDisableOverlayPanel(true);
+
             RefreshContentsDisplay(_entManager.GetEntityArray(cState.ContainedSolids));
 
             if (_menu == null) return;

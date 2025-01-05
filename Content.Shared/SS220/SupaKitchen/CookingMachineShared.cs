@@ -50,21 +50,29 @@ public sealed class CookingMachineSelectCookTimeMessage : BoundUserInterfaceMess
 public sealed class CookingMachineUpdateUserInterfaceState : BoundUserInterfaceState
 {
     public NetEntity[] ContainedSolids;
-    public bool IsMachineBusy;
+    public CookingMachineState MachineState;
     public int ActiveButtonIndex;
     public uint CurrentCookTime;
     public bool EjectUnavailable;
 
     public CookingMachineUpdateUserInterfaceState(NetEntity[] containedSolids,
-        bool isMachineBusy, int activeButtonIndex, uint currentCookTime, bool ejectUnavailable)
+        CookingMachineState machineState, int activeButtonIndex, uint currentCookTime, bool ejectUnavailable)
     {
         ContainedSolids = containedSolids;
-        IsMachineBusy = isMachineBusy;
+        MachineState = machineState;
         ActiveButtonIndex = activeButtonIndex;
         CurrentCookTime = currentCookTime;
         EjectUnavailable = ejectUnavailable;
     }
+}
 
+[Serializable, NetSerializable]
+public enum CookingMachineState
+{
+    Idle,
+    UnPowered,
+    Cooking,
+    Broken
 }
 
 [Serializable, NetSerializable]

@@ -32,15 +32,34 @@
     interfaces:
       enum.CookingMachineUiKey.Key:
         type: CookingMachineBoundUserInterface
+  - type: Sprite
+    sprite: SS220/Structures/Machines/oven.rsi
+    offset: 0,-0.5
+    snapCardinals: true
+    layers:
+    - state: oven_base
+      map: ["enum.CookingMachineVisualizerLayers.Base"]
+    - state: oven_door_closed
+      map: ["oven_door"]
+    - state: oven_off
+      map: ["oven_toggle"]
+    - state: oven_on_unshaded
+      visible: false
+      map: ["oven_toggle_unshaded"]
+      shader: unshaded
   - type: Appearance
   - type: GenericVisualizer
     visuals:
+      enum.StorageVisuals.Open:
+        oven_door:
+          True: { state: oven_door_open }
+          False: { state: oven_door_closed }
       enum.PowerDeviceVisuals.VisualState:
         enum.CookingMachineVisualizerLayers.Base:
           Idle: { state: "oven_base" }
           Broken: { state: "oven_damaged" }
           Cooking: { state: "oven_base" }
-        enum.StorageVisualLayers.Door:
+        oven_door:
           Idle: { visible: true }
           Broken: { visible: false }
           Cooking: { visible: true }
@@ -64,29 +83,28 @@
         - MachineMask
         layer:
         - MachineLayer
-  - type: Sprite
-    sprite: SS220/Structures/Machines/oven.rsi
-    offset: 0,-0.5
-    snapCardinals: true
-    layers:
-    - state: oven_base
-      map: ["enum.CookingMachineVisualizerLayers.Base"]
-    - state: oven_door_closed
-      map: ["enum.StorageVisualLayers.Door"]
-    - state: oven_off
-      map: ["oven_toggle"]
-    - state: oven_on_unshaded
-      visible: false
-      map: ["oven_toggle_unshaded"]
-      shader: unshaded
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
         damage: 100
       behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
       - !type:DoActsBehavior
         acts: ["Breakage"]
+    - trigger:
+      !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: ApcPowerReceiver
     powerLoad: 400
   - type: Machine
@@ -100,8 +118,6 @@
       machine_parts: !type:Container
       entity_storage: !type:Container
   - type: Construction
-    graph: Machine
-    node: machine
     containers:
     - machine_parts
     - machine_board
