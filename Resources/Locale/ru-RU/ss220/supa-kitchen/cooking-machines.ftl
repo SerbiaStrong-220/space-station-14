@@ -3,6 +3,8 @@ ent-KitchenGrill = гриль
 ent-KitchenStove = духовка
     .desc = Духовой шкаф с электроплитой сверху.
 
+ent-KitchenOven = духовка
+
 ent-StoveMachineCircuitboard = духовка (машинная плата)
     .desc = { ent-BaseMachineCircuitboard.desc }
 ent-GrillMachineCircuitboard = гриль (машинная плата)
