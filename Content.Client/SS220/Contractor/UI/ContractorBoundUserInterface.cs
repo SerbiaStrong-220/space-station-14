@@ -52,7 +52,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         {
             case ContractorUpdateStatsMessage:
                 UpdateStats();
-                UpdateContracts(EntMan.GetEntity(_contractorPdaComponent.PdaOwner)!.Value, Owner);
+                UpdateContracts(EntMan.GetEntity(_contractorPdaComponent.PdaOwner)!.Value);
                 break;
 
             case ContractorCompletedContractMessage:
@@ -84,7 +84,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         UpdateStats();
 
-        UpdateContracts(_playerManager.LocalSession.AttachedEntity.Value, Owner);
+        UpdateContracts(_playerManager.LocalSession.AttachedEntity.Value);
         UpdateHub(_contractorPdaComponent.AvailableItems);
     }
 
@@ -123,16 +123,16 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             Loc.GetString("contractor-uplink-current-contracts-completed", ("amountContractsCompleted", _contractorComponent.ContractsCompleted));
     }
 
-    private void UpdateContracts(EntityUid contractor, EntityUid pda)
+    private void UpdateContracts(EntityUid player)
     {
         if (_menu == null)
             return;
 
         _menu.ContractsListPanel.RemoveAllChildren();
 
-        var contracts = _contractorSystem.GetContractsForPda(contractor, pda);
+        var contracts = _contractorComponent!.Contracts;
 
-        if (contracts is null)
+        if (_contractorPdaComponent.PdaOwner != EntMan.GetNetEntity(player))
             return;
 
         foreach (var contract in contracts)
@@ -223,8 +223,29 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         var isAlreadyAccepted = _contractorPdaComponent.CurrentContractEntity is not null &&
                                 _contractorPdaComponent.CurrentContractData is not null; // todo only on server
 
+        var abortButton = new Button()
+        {
+            VerticalExpand = false,
+            HorizontalExpand = false,
+            Visible = false,
+            MaxSize = new Vector2(100, 30),
+        };
+
+        abortButton.OnPressed += _ =>
+        {
+            SendMessage(new ContractorAbortContractMessage(key));
+            topContainer.RemoveChild(abortButton);
+        };
+
+        topContainer.AddChild(abortButton);
+
         foreach (var amountPosition in contract.AmountPositions)
         {
+            if (_contractorPdaComponent.CurrentContractEntity == key)
+            {
+                abortButton.Visible = true;
+            }
+
             var positionButton = new Button
             {
                 Text = $"{amountPosition.Location} ({amountPosition.TcReward} ТК) ({amountPosition.Difficulty})",
@@ -241,6 +262,8 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
                     contract,
                     amountPosition.TcReward,
                     amountPosition.Uid));
+
+                abortButton.Visible = true;
 
                 foreach (var buttons in _allPositionButtons)
                 {

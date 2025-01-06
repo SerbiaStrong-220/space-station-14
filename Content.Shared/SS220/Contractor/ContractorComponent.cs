@@ -41,6 +41,8 @@ public sealed partial class ContractorComponent : Component
     public int ContractsCompleted = 0;
 
     public readonly int ReputationAward = 2;
+
+    public int MaxAvailableContracts = 5;
 }
 
 [Serializable]

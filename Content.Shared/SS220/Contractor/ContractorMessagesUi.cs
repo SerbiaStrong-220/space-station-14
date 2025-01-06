@@ -57,6 +57,17 @@ public sealed class ContractorNewContractAcceptedMessage : BoundUserInterfaceMes
 }
 
 [Serializable, NetSerializable]
+public sealed class ContractorAbortContractMessage : BoundUserInterfaceMessage
+{
+    public NetEntity ContractEntity;
+
+    public ContractorAbortContractMessage(NetEntity contractEntity)
+    {
+        ContractEntity = contractEntity;
+    }
+}
+
+[Serializable, NetSerializable]
 public sealed class ContractorHubBuyItemMessage : BoundUserInterfaceMessage
 {
     public string Item;

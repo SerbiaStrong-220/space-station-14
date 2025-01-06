@@ -83,28 +83,6 @@ public abstract class SharedContractorSystem : EntitySystem
 
         Dirty(ev.Actor, contractorComponent);
     }
-
-    /// <summary>
-    /// Used in bound ui on client, to get contracts for pda
-    /// </summary>
-    /// <returns>Return dictionary of contracts</returns>
-    public Dictionary<NetEntity, ContractorContract>? GetContractsForPda(EntityUid contractor, EntityUid pdaEntity)
-    {
-        AddContractsToPda(contractor, pdaEntity);
-
-        return !TryComp<ContractorPdaComponent>(pdaEntity, out var contractorPdaComponent) ? null : contractorPdaComponent.Contracts;
-    }
-
-    private void AddContractsToPda(EntityUid contractor, EntityUid pdaEntity)
-    {
-        if (!TryComp<ContractorPdaComponent>(pdaEntity, out var contractorPdaComponent))
-            return;
-        if (!TryComp<ContractorComponent>(contractor, out var contractorComponent))
-            return;
-
-        contractorPdaComponent.Contracts = contractorComponent.Contracts;
-    }
-
 }
 
 /// <summary>

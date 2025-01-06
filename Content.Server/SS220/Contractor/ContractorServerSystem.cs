@@ -47,6 +47,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         SubscribeLocalEvent<ContractorPdaComponent, ContractorNewContractAcceptedMessage>(OnNewContractAccepted);
         SubscribeLocalEvent<ContractorPdaComponent, ContractorWithdrawTcMessage>(OnWithdrawTc);
         SubscribeLocalEvent<ContractorPdaComponent, ContractorExecutionButtonPressedMessage>(OnExecuteContract);
+        SubscribeLocalEvent<ContractorPdaComponent, ContractorAbortContractMessage>(AbortContract);
 
         SubscribeLocalEvent<StoreBuyListingMessage>(OnBuyContractorKit);
     }
@@ -220,7 +221,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             if (!contractorComp.Contracts.Remove(acceptedPlayer))
                 continue;
 
-            if (contractorComp.Contracts.Count >= 5)
+            if (contractorComp.Contracts.Count >= contractorComp.MaxAvailableContracts)
                 continue;
 
             var newContract = GenerateContractForContractor((uid, contractorComp));
@@ -269,7 +270,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             if (_roleSystem.MindHasRole<TraitorRoleComponent>(mindId))
                 continue;
 
-            _jobs.MindTryGetJobName(mindId, out var jobName);
+            _jobs.MindTryGetJobName(mindId, out var jobName); // && jobName == "JobCaptain" - disable for testing
 
             return (GetNetEntity(player),
                 new ContractorContract
@@ -310,9 +311,9 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             if (ent.Comp.Contracts.ContainsKey(GetNetEntity(player)))
                 continue;
 
-            _jobs.MindTryGetJobName(mindId, out var jobName);
+            _jobs.MindTryGetJobName(mindId, out var jobName); // && jobName == "JobCaptain" - disable for testing
 
-            if (ent.Comp.Contracts is { Count: >= 5 })
+            if (ent.Comp.Contracts.Count == ent.Comp.MaxAvailableContracts)
                 return;
 
             ent.Comp.Contracts.Add(GetNetEntity(player),
@@ -382,5 +383,37 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         var isTargetCloseToPortal = (targetPosition - targetPortalPosition).Length() < 1f;
 
         return isPlayerCloseToPortal && isTargetCloseToPortal;
+    }
+
+    private void AbortContract(Entity<ContractorPdaComponent> ent, ref ContractorAbortContractMessage ev)
+    {
+        var pdaOwner = GetEntity(ent.Comp.PdaOwner);
+
+        if (ev.Actor != pdaOwner)
+            return;
+
+        if (!TryComp<ContractorComponent>(pdaOwner, out var contractorComponent))
+            return;
+
+        if (!contractorComponent.Contracts.Remove(ev.ContractEntity))
+            return;
+
+        _adminLogger.Add(
+            LogType.Action,
+            LogImpact.High,
+            $"Contractor {ev.Actor} aborted unknown contract {ev.ContractEntity}");
+
+        contractorComponent.MaxAvailableContracts--;
+        contractorComponent.Reputation--;
+        contractorComponent.CurrentContractEntity = null;
+        contractorComponent.CurrentContractData = null;
+
+        ent.Comp.CurrentContractEntity = null;
+        ent.Comp.CurrentContractData = null;
+
+        _uiSystem.ServerSendUiMessage(ent.Owner, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
+
+        Dirty(ent);
+        Dirty(pdaOwner.Value, contractorComponent);
     }
 }
