@@ -8,45 +8,39 @@
     noRot: true
   # Make it behave like a closet
   - type: EntityStorage
-  - type: EntityStorageVisuals
-    #stateBaseClosed: generic
-    stateDoorOpen: oven_door_open
-    stateDoorClosed: oven_door_closed
+#  - type: EntityStorageVisuals
+#    #stateBaseClosed: generic
+#    stateDoorOpen: oven_door_open
+#    stateDoorClosed: oven_door_closed
   - type: PlaceableSurface
     placeCentered: true
     isPlaceable: false
   - type: CookingInstrument
+    ignoreTime: true
     instrumentType: oven
-  - type: CookingMachine
-    beginCookingSound: "/Audio/SS220/SupaKitchen/oven/oven_loop_start.ogg"
-    loopingSound: "/Audio/SS220/SupaKitchen/oven/oven_loop_mid.ogg"
-    foodDoneSound: "/Audio/SS220/SupaKitchen/ring.ogg"
-    useEntityStorage: true
+#  - type: CookingMachine
+#    beginCookingSound: "/Audio/SS220/SupaKitchen/oven/oven_loop_start.ogg"
+#    loopingSound: "/Audio/SS220/SupaKitchen/oven/oven_loop_mid.ogg"
+#    foodDoneSound: "/Audio/SS220/SupaKitchen/ring.ogg"
+#    useEntityStorage: true
+  - type: CookingConstantly
   - type: DeviceLinkSink
     ports:
     - On
-  - type: ActivatableUI
-    key: enum.CookingMachineUiKey.Key
-    altentativeVerbOnly: true
-  - type: UserInterface
-    interfaces:
-      enum.CookingMachineUiKey.Key:
-        type: CookingMachineBoundUserInterface
   - type: Sprite
     sprite: SS220/Structures/Machines/oven.rsi
     offset: 0,-0.5
     snapCardinals: true
     layers:
     - state: oven_base
-      map: ["enum.CookingMachineVisualizerLayers.Base"]
+      map: ["base"]
     - state: oven_door_closed
       map: ["oven_door"]
-    - state: oven_off
-      map: ["oven_toggle"]
-    - state: oven_on_unshaded
+    - map: ["enum.CookingConstantlyVisuals.Active"]
+      state: oven_off
+    - map: ["enum.CookingConstantlyVisuals.ActiveUnshaded"]
+      state: oven_on_unshaded
       visible: false
-      map: ["oven_toggle_unshaded"]
-      shader: unshaded
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -54,23 +48,17 @@
         oven_door:
           True: { state: oven_door_open }
           False: { state: oven_door_closed }
-      enum.PowerDeviceVisuals.VisualState:
-        enum.CookingMachineVisualizerLayers.Base:
+      enum.CookingConstantlyVisuals.VisualState:
+        base:
+          UnPowered: { state: "oven_base" }
           Idle: { state: "oven_base" }
+          Active: { state: "oven_base" }
           Broken: { state: "oven_damaged" }
-          Cooking: { state: "oven_base" }
         oven_door:
+          UnPowered: { visible: true }
           Idle: { visible: true }
+          Active: { visible: true }
           Broken: { visible: false }
-          Cooking: { visible: true }
-        oven_toggle:
-          Idle: { state: "oven_off" }
-          Broken: { state: "oven_off" }
-          Cooking: { state: "oven_on" }
-        oven_toggle_unshaded:
-          Idle: { visible: false }
-          Broken: { visible: false }
-          Cooking: { visible: true }
   - type: Physics
   - type: Fixtures
     fixtures:
