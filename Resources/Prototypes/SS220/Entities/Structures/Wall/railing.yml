@@ -1,8 +1,6 @@
 - type: entity
   parent: BaseRailing
   id: CurbWood
-  name: деревянный бордюр
-  description: Уступ, возвышающийся над полом.
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -51,8 +49,6 @@
 - type: entity
   parent: CurbWood
   id: CurbWoodCorner
-  name: деревянный бордюр
-  description: Уступ, возвышающийся над полом.
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -87,8 +83,6 @@
 - type: entity
   parent: CurbWood
   id: CurbWoodCornerSmall
-  name: деревянный бордюр
-  description: Уступ, возвышающийся над полом.
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -106,8 +100,6 @@
 - type: entity
   parent: CurbWood
   id: CurbWoodRound
-  name: деревянный бордюр
-  description: Уступ, возвышающийся над полом.
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -152,8 +144,6 @@
 - type: entity
   parent: BaseRailing
   id: CurbSteel
-  name: стальной бордюр
-  description: Уступ, возвышающийся над полом.
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -202,8 +192,6 @@
 - type: entity
   parent: CurbSteel
   id: CurbSteelCorner
-  name: стальной бордюр
-  description: Уступ, возвышающийся над полом.
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -238,8 +226,6 @@
 - type: entity
   parent: CurbSteel
   id: CurbSteelCornerSmall
-  name: стальной бордюр
-  description: Уступ, возвышающийся над полом.
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -257,8 +243,6 @@
 - type: entity
   parent: CurbSteel
   id: CurbSteelRound
-  name: стальной бордюр
-  description: Уступ, возвышающийся над полом.
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -303,8 +287,6 @@
 - type: entity
   parent: BaseRailing
   id: CurbDarckSteel
-  name: тёмный стальной бордюр
-  description: Уступ, возвышающийся над полом.
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -354,8 +336,6 @@
 - type: entity
   parent: CurbDarckSteel
   id: CurbDarckSteelCorner
-  name: тёмный стальной бордюр
-  description: Уступ, возвышающийся над полом.
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -390,8 +370,6 @@
 - type: entity
   parent: CurbDarckSteel
   id: CurbDarckSteelCornerSmall
-  name: тёмный стальной бордюр
-  description: Уступ, возвышающийся над полом.
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -409,8 +387,6 @@
 - type: entity
   parent: CurbDarckSteel
   id: CurbDarckSteelRound
-  name: тёмный стальной бордюр
-  description: Уступ, возвышающийся над полом.
   components:
   - type: Sprite
     drawdepth: FloorTiles
