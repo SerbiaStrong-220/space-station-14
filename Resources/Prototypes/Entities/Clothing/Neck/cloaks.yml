@@ -188,7 +188,7 @@
   description: A rather fetching black pirate cloak, complete with skull motif.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Cloaks/piratecloak220.rsi #ss220 resprite
+    sprite: SS220/Clothing/Neck/Cloaks/piratecap.rsi #ss220 resprite
 
 - type: entity
   parent: ClothingNeckBase
