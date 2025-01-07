@@ -24,12 +24,12 @@ public sealed partial class PaperAutoFormSystem : EntitySystem
 
     private readonly Dictionary<string, ReplacedData> _keyWordsReplace = [];
 
-    private int _spaceYearDelta;
+    private int _gameYearDelta;
 
     public override void Initialize()
     {
         base.Initialize();
-        _spaceYearDelta = _configurationManager.GetCVar(CCVars220.GameYearDelta);
+        _gameYearDelta = _configurationManager.GetCVar(CCVars220.GameYearDelta);
 
         var dataset = _prototypeManager.Index<PaperAutoFormDatasetPrototype>(AutoFormDatasetId);
         foreach (var (key, value) in dataset.KeyWordsReplace)
@@ -64,7 +64,7 @@ public sealed partial class PaperAutoFormSystem : EntitySystem
     {
         var day = DateTime.UtcNow.AddHours(3).Day;
         var month = DateTime.UtcNow.AddHours(3).Month;
-        var year = DateTime.UtcNow.AddHours(3).Year + _spaceYearDelta;
+        var year = DateTime.UtcNow.AddHours(3).Year + _gameYearDelta;
         return $"{day:00}.{month:00}.{year}";
     }
 
