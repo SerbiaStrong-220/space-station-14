@@ -8,3 +8,10 @@
   id: DetectiveNoirSatchel
   equipment:
     back: ClothingBackpackNoirSatchel
+
+# Shoes
+
+- type: loadout
+  id: DetectiveShoesBootsLaceup
+  equipment:
+    shoes: ClothingShoesBootsLaceup

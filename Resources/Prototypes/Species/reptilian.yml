@@ -63,6 +63,11 @@
     Legs:
       points: 2
       required: false
+    # SS220 Add foots marking begin
+    Foots:
+      points: 2
+      required: false
+    # SS220 Add foots marking end
     Arms:
       points: 2
       required: false
