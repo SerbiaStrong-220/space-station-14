@@ -84,14 +84,14 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                 {
                     if (!huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Special))
                     {
-                        huAp.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking("CultStage-Halo", colorCount: 1)]));
+                        huAp.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking(CultDefaultMarking, colorCount: 1)]));
                     }
                     else
                     {
                         _humanoidAppearance.SetMarkingId(entity.Owner,
                             MarkingCategories.Special,
                             0,
-                            "CultStage-Halo",
+                            CultDefaultMarking,
                             huAp);
                     }
                 }
