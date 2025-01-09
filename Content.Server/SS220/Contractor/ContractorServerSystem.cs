@@ -64,7 +64,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             if (comp.PdaEntity == null)
                 continue;
 
-            var isEnabled = IsCloseWithPosition(GetNetEntity(uid));
+            var isEnabled = IsCloseWithPosition(uid);
 
             if (_uiSystem.IsUiOpen(GetEntity(comp.PdaEntity)!.Value, ContractorPdaKey.Key))
             {
@@ -138,7 +138,6 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         contractorComponent.CurrentContractData = ev.ContractData;
         contractorComponent.CurrentContractEntity = ev.ContractEntity;
-        //contractorComponent.PdaEntity = ev.Entity; //why this shit here?
 
         Dirty(ev.Actor, contractorComponent);
 
@@ -358,10 +357,8 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         return allLocations;
     }
 
-    private bool IsCloseWithPosition(NetEntity playerNet)
+    private bool IsCloseWithPosition(EntityUid player)
     {
-        var player = GetEntity(playerNet);
-
         if (!TryComp<ContractorComponent>(player, out var contractorComponent))
             return false;
 
