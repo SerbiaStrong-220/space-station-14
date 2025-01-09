@@ -4,6 +4,7 @@
   id: CultStage-Halo
   bodyPart: Special
   markingCategory: Special
+  hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
     state: halo
@@ -12,6 +13,7 @@
   id: CultStage-Moth
   bodyPart: Special
   markingCategory: Special
+  hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
     state: moth

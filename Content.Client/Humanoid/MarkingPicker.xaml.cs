@@ -215,7 +215,9 @@ public sealed partial class MarkingPicker : Control
         var sortedMarkings = GetMarkings(_selectedMarkingCategory).Values.Where(m =>
             m.ID.ToLower().Contains(filter.ToLower()) ||
             GetMarkingName(m).ToLower().Contains(filter.ToLower())
-        ).OrderBy(p => Loc.GetString(GetMarkingName(p)));
+        )
+            .Where(m => !m.Hidden) // SS220 cult markings fix
+            .OrderBy(p => Loc.GetString(GetMarkingName(p)));
 
         foreach (var marking in sortedMarkings)
         {
