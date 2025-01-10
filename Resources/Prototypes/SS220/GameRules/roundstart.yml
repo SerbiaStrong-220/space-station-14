@@ -12,7 +12,7 @@
   - type: CultYoggRule
   - type: AntagSelection
     definitions:
-    - prefRoles: [ CultYoggProto ]
+    - prefRoles: [ CultistOfYoggSothoth ]
       max: 4
       playerRatio: 10
       blacklist:

@@ -1,0 +1,11 @@
+- type: paperAutoFormDataset
+  id: PaperAutoFormDataset
+  keyWordsReplace:
+    paper_auto_form_date_1: Date
+    paper_auto_form_date_2: Date
+    paper_auto_form_time_1: Time
+    paper_auto_form_time_2: Time
+    paper_auto_form_name_1: Name
+    paper_auto_form_name_2: Name
+    paper_auto_form_job_1: Job
+    paper_auto_form_job_2: Job

@@ -186,6 +186,10 @@
 - type: Tag
   id: Omnivorous
 
+# debug-uplink-fix
+- type: Tag
+  id: DebugUplink
+
 # Barricades
 - type: Tag
   id: PassBarricade

@@ -34,9 +34,8 @@
   - type: MeleeWeapon
     wideAnimationRotation: -135
     angle: 60
-    animation: WeaponArcSlash
-    soundHit:
-      path: /Audio/Weapons/egloves.ogg
+    soundHit: !type:SoundCollectionSpecifier
+      collection: BatonHit
     damage:
       types:
         Blunt: 0

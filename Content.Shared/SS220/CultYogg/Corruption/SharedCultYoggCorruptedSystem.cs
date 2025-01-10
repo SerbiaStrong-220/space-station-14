@@ -237,10 +237,39 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
         var parents = MetaData(uid).EntityPrototype?.Parents;
         if (parents == null)
             return null;
+
         foreach (var parentId in parents)
         {
             if (_recipiesByParentPrototypeId.TryGetValue(parentId, out var recipe))
                 return recipe;
+
+            var parentRecipe = GetRecipeByParentPrototypeId(parentId);
+            if (parentRecipe != null)
+                return parentRecipe;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Overload to see parents
+    /// </summary>
+    private CultYoggCorruptedPrototype? GetRecipeByParentPrototypeId(string id)
+    {
+        if (!_prototypeManager.TryIndex<EntityPrototype>(id, out var entProto))
+            return null;
+
+        var parents = entProto.Parents;
+        if (parents == null)
+            return null;
+
+        foreach (var parentId in parents)
+        {
+            if (_recipiesByParentPrototypeId.TryGetValue(parentId, out var recipe))
+                return recipe;
+
+            var parentRecipe = GetRecipeByParentPrototypeId(parentId);
+            if (parentRecipe != null)
+                return parentRecipe;
         }
         return null;
     }
