@@ -95,7 +95,7 @@ public abstract partial class SharedMoverController : VirtualController
         InitializeRelay();
         Subs.CVar(_configManager, CCVars.RelativeMovement, value => _relativeMovement = value, true);
         Subs.CVar(_configManager, CCVars.StopSpeed, value => _stopSpeed = value, true);
-        Subs.CVar(_configManager, CCVars220Performance.LessSoundSources, value => _lessSound = value, true); // SS220 performance-test
+        Subs.CVar(_configManager, CCVars220.LessSoundSources, value => _lessSound = value, true); // SS220 performance-test
         UpdatesBefore.Add(typeof(TileFrictionController));
     }
 

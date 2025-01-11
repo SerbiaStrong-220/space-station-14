@@ -58,7 +58,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         SubscribeLocalEvent<TelephoneComponent, ListenEvent>(OnListen);
         SubscribeLocalEvent<TelephoneComponent, TelephoneMessageReceivedEvent>(OnTelephoneMessageReceived);
 
-        Subs.CVar(_configManager, CCVars220Performance.LessSoundSources, value => _lessSound = value, true); // SS220 performance-test
+        Subs.CVar(_configManager, CCVars220.LessSoundSources, value => _lessSound = value, true); // SS220 performance-test
     }
 
     #region: Events

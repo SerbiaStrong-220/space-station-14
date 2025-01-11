@@ -26,7 +26,7 @@ public sealed class MovementSoundSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<MovementSoundComponent, MoveInputEvent>(OnMoveInput);
 
-        Subs.CVar(_configManager, CCVars220Performance.LessSoundSources, value => _lessSound = value, true); // SS220 performance-test
+        Subs.CVar(_configManager, CCVars220.LessSoundSources, value => _lessSound = value, true); // SS220 performance-test
     }
 
     private void OnMoveInput(Entity<MovementSoundComponent> ent, ref MoveInputEvent args)

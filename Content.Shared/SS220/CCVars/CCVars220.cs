@@ -3,7 +3,7 @@ using Robust.Shared.Configuration;
 namespace Content.Shared.SS220.CCVars;
 
 [CVarDefs]
-public sealed class CCVars220
+public sealed partial class CCVars220
 {
     /// <summary>
     /// Whether is bloom lighting eanbled or not
