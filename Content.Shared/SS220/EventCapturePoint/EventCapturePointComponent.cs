@@ -20,16 +20,16 @@ public sealed partial class EventCapturePointComponent : Component
     public float FlagRemovalImpulse = 35;
 
     /// <summary>
-    /// How many points does this pedestal give
+    /// How many points does this pedestal give per <see cref="RetentionTimeForWP"/>
     /// </summary>
     [DataField]
     public float WinPoints = 1f;
 
     /// <summary>
-    /// Time to hold a capture point to get win points
+    /// How many seconds need to hold a capture point to get win points
     /// </summary>
     [DataField]
-    public TimeSpan RetentionTimeForWP = TimeSpan.FromSeconds(300);
+    public float RetentionTimeForWP = 60;
 
     [ViewVariables]
     public Dictionary<string, TimeSpan> PointRetentionTime = new();

@@ -10,6 +10,6 @@ ent-EventCaptureFlagSynd = флаг Синдиката
 ent-EventCaptureFlagUssp = флаг СССП
     .desc = { ent-EventCaptureFlagBase.desc }
 
-flag-fraction-NT = [color=#046094]Нанотрейзен[/color]
-flag-fraction-Synd = [color=crimson]Синдикат[/color]
+flag-fraction-NT = [color=#0c82c7]Нанотрейзен[/color]
+flag-fraction-Synd = [color=#8f4a4b]Синдикат[/color]
 flag-fraction-Ussp = [color=#e30000]СССП[/color]

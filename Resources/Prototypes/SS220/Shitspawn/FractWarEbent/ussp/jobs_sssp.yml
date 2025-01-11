@@ -108,9 +108,9 @@
     - id: JetpackVoidFilled
     - id: RCD
     - id: RCDAmmo
-      amount: 3
+      amount: 4
     - id: JobIconChangerUSSP
-
+    - id: ClothingEyesGlassesMeson
 
 - type: startingGear
   id: EbentUSSPEngineerGear
@@ -291,6 +291,7 @@
     back: ClothingBackpackUSSPFilled
     shoes: ClothingShoesBootsMagUssp
     mask: ClothingMaskGasUssp
+    eyes: ClothingEyesHudMedical
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSPCMO
     suitstorage: OxygenTankFilled

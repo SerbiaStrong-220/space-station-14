@@ -63,8 +63,6 @@
     id: SyndiPDAAgentLeader
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltMilitaryWebbingEbent_IronSquad
-    pocket1: FreedomImplanter
-    pocket2: StorageImplanter
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadLeader
@@ -116,25 +114,16 @@
     access: []
   - type: StorageFill
     contents:
-    - id: ClothingHeadHatChameleon
-    - id: ClothingUniformJumpsuitPyjamaSyndicateRed
-    - id: ClothingUniformJumpsuitPyjamaSyndicatePink
-    - id: ClothingUniformJumpskirtSyndieFormalDress
-    - id: ClothingUniformJumpsuitSyndieFormal
-    - id: ClothingOuterCoatSyndieCap
-    - id: ClothingHeadHatSyndie
-    - id: ClothingMaskNeckGaiter
-    - id: ClothingUniformJumpskirtOperative
-    - id: ClothingUniformJumpsuitOperative
     - id: SyndicateJawsOfLife
-    - id: ClothingHeadHatBeretMerc
     - id: ClothingNeckSyndicakePin
-    - id: ClothingNeckCloakHerald
-    - id: ClothingNeckCloakGoliathCloak
-    - id: ClothingNeckScarfStripedSyndieRed
     - id: ClothingBeltChiefEngineerFilled
     - id: JetpackVoidFilled
     - id: JobIconChangerIOT
+    - id: ClothingBackpackChameleonFill
+    - id: RCD
+    - id: RCDAmmo
+      amount: 4
+    - id: ClothingEyesGlassesMeson
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -155,10 +144,6 @@
         amount: 2
       - id: CombatMedipen
       - id: EnergySword
-      - id: RCD
-      - id: EnergyShield
-      - id: RCDAmmo
-        amount: 3
       - id: DnaScramblerImplanter
       - id: ExGrenade
 
@@ -177,8 +162,6 @@
     id: SyndiPDAAgentEngineer
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltMilitaryWebbingEbent_IronSquad
-    pocket1: FreedomImplanter
-    pocket2: StorageImplanter
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadEngineer
@@ -246,6 +229,7 @@
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
     - id: ClothingEyesHudMedSec
+    - id: SyndiHypo
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -264,7 +248,6 @@
       - id: MagazinePistolSubMachineGun
         amount: 2
       - id: EnergySword
-      - id: SyndiHypo
       - id: DnaScramblerImplanter
       - id: ExGrenade
 
@@ -275,7 +258,7 @@
     back: ClothingBackpackNuclearCorpsman
     shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasNuclear
-    gloves: ClothingHandsGlovesNitrile
+    gloves: ClothingHandsGlovesCombat
     neck: ClothingCloakIronSquadMed
     outerClothing: ClothingOuterHardsuitIronMed
     suitstorage: OxygenTankFilled
@@ -360,6 +343,7 @@
       amount: 2
     - id: ClothingEyesHudMedSec
     - id: JobIconChangerIOT
+    - id: SyndiHypo
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -380,9 +364,6 @@
         amount: 2
       - id: CombatMedipen
       - id: EnergySword
-      - id: BoxDeathRattleImplants
-      - id: SyndiHypo
-      - id: EnergyShield
       - id: DnaScramblerImplanter
       - id: ExGrenade
 
@@ -393,15 +374,14 @@
     back: ClothingBackpackNuclearCMO
     shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasNuclear
-    gloves: ClothingHandsGlovesNitrile
+    eyes: ClothingEyesHudMedical
+    gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitIronCMO
     suitstorage: OxygenTankFilled
     neck: ClothingCloakIronSquadCMO
     id: SyndiPDAAgentCMO
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltMilitaryWebbingEbent_IronSquad
-    pocket1: FreedomImplanter
-    pocket2: StorageImplanter
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadCMO

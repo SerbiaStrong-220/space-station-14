@@ -46,7 +46,6 @@
       - id: FlashlightSeclite
       - id: PowerCellHyper
       - id: WeaponBlaster
-      - id: MedicatedSuture
       - id: WeaponPulsePistol
       - id: Stimpack
     - type: ExplosionResistance

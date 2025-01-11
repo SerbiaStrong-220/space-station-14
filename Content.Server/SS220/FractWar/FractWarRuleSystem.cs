@@ -26,13 +26,19 @@ public sealed partial class FractWarRuleSystem : GameRuleSystem<FractWarRuleComp
             }
         }
 
+        if (fractionsWinPoints.Count <= 0)
+            return;
+
+        fractionsWinPoints = fractionsWinPoints.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+
+        args.AddLine("");
         foreach (var (fraction, winPoints) in fractionsWinPoints)
         {
             args.AddLine(Loc.GetString("fractwar-round-end-fraction-points", ("fraction", Loc.GetString(fraction)), ("points", (int)winPoints)));
         }
 
         //Sort by value
-        fractionsWinPoints = fractionsWinPoints.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+        args.AddLine("");
         args.AddLine(Loc.GetString("fractwar-round-end-winner", ("fraction", Loc.GetString(fractionsWinPoints.First().Key))));
     }
 }
