@@ -32,7 +32,7 @@ public sealed partial class EventCapturePointComponent : Component
     public float RetentionTimeForWP = 60;
 
     [ViewVariables]
-    public Dictionary<string, TimeSpan> PointRetentionTime = new();
+    public Dictionary<string, float> PointRetentionTime = new();
 }
 
 [Serializable, NetSerializable]
