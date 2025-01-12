@@ -66,8 +66,6 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
             return;
         }
 
-        var meta = MetaData(ent);
-
         var ev = new CultYoggAnouncementEvent(ent, Loc.GetString("cult-yogg-sacraficial-cant-be-replaced", ("name", MetaData(ent).EntityName)));
         RaiseLocalEvent(ent, ref ev, true);
     }
@@ -89,9 +87,8 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
         if (!TryComp<CultYoggSacrificialComponent>(uid, out var comp))
             return;
 
-        var meta = MetaData(uid);
-
-        var ev = new CultYoggAnouncementEvent(uid, Loc.GetString("cult-yogg-sacraficial-may-be-replaced", ("name", meta.EntityName)));
+        var time = (comp.ReplacementCooldown.TotalSeconds - comp.AnnounceReplacementCooldown.TotalSeconds).ToString();
+        var ev = new CultYoggAnouncementEvent(uid, Loc.GetString("cult-yogg-sacraficial-will-be-replaced", ("name", MetaData(uid).EntityName), ("time", time)));
         RaiseLocalEvent(uid, ref ev, true);
     }
 

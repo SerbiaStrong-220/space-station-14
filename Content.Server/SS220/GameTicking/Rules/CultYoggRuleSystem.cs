@@ -220,7 +220,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (mind.Session.AttachedEntity is null)
             return;
 
-        var meta = MetaData(uid.Value);
+        //var meta = MetaData(uid.Value);
 
         //_adminLogger.Add(LogType.EventRan, LogImpact.High, $"CultYogg person {meta.EntityName} where picked for a tier: {tier}");
 
@@ -295,7 +295,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         RemComp<CultYoggSacrificialComponent>(args.Entity);
 
-        var meta = MetaData(args.Entity);
         var ev = new CultYoggAnouncementEvent(args.Entity, Loc.GetString("cult-yogg-sacraficial-was-replaced", ("name", MetaData(args.Entity).EntityName)));
         RaiseLocalEvent(args.Entity, ref ev, true);
     }

@@ -31,7 +31,7 @@ public sealed partial class CultYoggSacrificialComponent : Component
     /// Time required for announcement
     /// </summary>
     [DataField]
-    public TimeSpan AnnounceReplacementCooldown = TimeSpan.FromSeconds(120);
+    public TimeSpan AnnounceReplacementCooldown = TimeSpan.FromSeconds(60);
     /// <summary>
     /// Time required for replacement
     /// </summary>
