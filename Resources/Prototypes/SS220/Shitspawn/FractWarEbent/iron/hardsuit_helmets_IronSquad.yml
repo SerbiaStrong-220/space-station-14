@@ -67,7 +67,7 @@
 # Heavy
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseIron
-  id: ClothingHeadHelmetHardsuitIronHeavy
+  id: ClothingHeadHelmetHardsuitIronLight
   categories: [ HideSpawnMenu ]
   name: шлем скафандра Aid
   description: Толстый слой металла обеспечивает пассивную защиту от пуль и лазеров, но не от пота.
@@ -80,7 +80,7 @@
 # Heavy
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseIron
-  id: ClothingHeadHelmetHardsuitIronHeavy2
+  id: ClothingHeadHelmetHardsuitIronHeavy
   categories: [ HideSpawnMenu ]
   name: шлем скафандра Aid-2
   description: Огромная защита, стиль и капелька радиации!

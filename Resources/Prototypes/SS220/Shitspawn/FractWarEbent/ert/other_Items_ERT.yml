@@ -48,6 +48,7 @@
       - id: WeaponBlaster
       - id: WeaponPulsePistol
       - id: Stimpack
+      - id: Tourniquet
     - type: ExplosionResistance
       damageCoefficient: 0.0
 

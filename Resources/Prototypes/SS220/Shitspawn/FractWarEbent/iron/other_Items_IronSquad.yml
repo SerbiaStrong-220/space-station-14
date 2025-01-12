@@ -134,3 +134,4 @@
   - type: StorageFill
     contents:
     - id: WeaponRevolverPythonAP
+    - id: Tourniquet

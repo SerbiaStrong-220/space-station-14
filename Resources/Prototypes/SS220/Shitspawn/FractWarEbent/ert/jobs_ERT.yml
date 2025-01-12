@@ -78,6 +78,7 @@
     - id: ClothingNeckMantleERTLeader
     - id: ClothingEyesHudMedSec
     - id: JobIconChangerNT
+    - id: DefibrillatorCompact
 
 - type: entity
   parent: LockerEngineer
@@ -115,7 +116,6 @@
     access: [[ Command ]]
   - type: StorageFill
     contents:
-    - id: ClothingBackpackERTMedical
     - id: BoxBeaker
       amount: 2
     - id: Hypospray

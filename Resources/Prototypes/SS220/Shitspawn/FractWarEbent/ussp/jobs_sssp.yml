@@ -283,6 +283,7 @@
     - id: ClothingOuterCoatUssp
     - id: ClothingEyesHudMedSec
     - id: JobIconChangerUSSP
+    - id: DefibrillatorCompact
 
 - type: startingGear
   id: EbentUSSPCMOGear

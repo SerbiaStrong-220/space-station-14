@@ -27,8 +27,9 @@
   - type: InteractionOutline
   - type: Appearance
   - type: AtmosExposed
+  - type: Climbable
   - type: Sprite
-    drawdepth: Mobs
+    drawdepth: Objects
     sprite: SS220/Structures/Barricades/fract_war_barricade.rsi
     state: stand_up
   - type: Fixtures
@@ -36,15 +37,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,-0.25"
+          bounds: "-0.5,-0.5,0.5,-0.05"
         mask:
-        - FullTileMask
+        - MachineMask
         layer:
-        - TableLayer
+        - MachineLayer
   - type: Barricade
-    whitelist:
-      tags:
-        - PassBarricade
   - type: TimedDespawn
     lifetime: 2.25
   - type: SpawnOnDespawn
@@ -72,25 +70,23 @@
   - type: InteractionOutline
   - type: Sprite
     sprite: SS220/Structures/Barricades/fract_war_barricade.rsi
-    drawdepth: Mobs
+    drawdepth: Objects
     noRot: false
     state: base
   - type: Appearance
   - type: AtmosExposed
+  - type: Climbable
   - type: Fixtures
     fixtures:
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,-0.25"
+          bounds: "-0.5,-0.5,0.5,-0.05"
         mask:
-        - FullTileMask
+        - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Barricade
-    whitelist:
-      tags:
-        - PassBarricade
   - type: Damageable
     damageModifierSet: StructuralMetallic
     damageContainer: StructuralInorganic

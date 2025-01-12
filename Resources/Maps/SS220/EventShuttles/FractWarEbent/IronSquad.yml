@@ -7014,7 +7014,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -2.8652043,-29.284168
       parent: 1
-- proto: ClothingOuterHardsuitIronHeavy
+- proto: ClothingOuterHardsuitIronLight
   entities:
   - uid: 1191
     components:
@@ -7026,7 +7026,7 @@ entities:
     - type: Transform
       pos: 8.288184,-30.359997
       parent: 1
-- proto: ClothingOuterHardsuitIronHeavy2
+- proto: ClothingOuterHardsuitIronHeavy
   entities:
   - uid: 1193
     components:

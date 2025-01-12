@@ -344,6 +344,7 @@
     - id: ClothingEyesHudMedSec
     - id: JobIconChangerIOT
     - id: SyndiHypo
+    - id: DefibrillatorSyndicate
 
 - type: entity
   parent: ClothingBackpackNuclear

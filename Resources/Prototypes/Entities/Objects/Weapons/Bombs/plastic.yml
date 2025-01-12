@@ -34,11 +34,6 @@
         base:
           Primed: { state: primed }
           Unprimed: { state: complete }
-  # SS220 add barricades begin
-  - type: Tag
-    tags:
-    - PassBarricade
-  # SS220 add barricades end
 
 - type: entity
   name: composition C-4

@@ -30,8 +30,6 @@
       amount: 3
     - id: EmergencyRollerBedSpawnFolded
       amount: 10
-    - id: Stimpack
-      amount: 30
     - id: MedicatedSuture
       amount: 50
     - id: RegenerativeMesh
@@ -195,6 +193,16 @@
    - type: StorageFill
      contents:
       - id: ExGrenade
-        amount: 8
+        amount: 16
+
+- type: entity
+  parent: ClothingBackpackDuffelMilitary
+  id: ClothingBackpackFractWarSmokeGrenadeSet
+  suffix: Shitspawn, Ebent, FractWar
+  name: набор дымовых гранат
+  description: Большой вещмешок для хранения любого армейского снаряжения.
+  components:
+   - type: StorageFill
+     contents:
       - id: SmokeGrenade
-        amount: 10
+        amount: 20

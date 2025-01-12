@@ -6690,7 +6690,7 @@ entities:
     - type: Transform
       pos: 2.7086618,-18.531006
       parent: 1
-- proto: ClothingOuterHardsuitERTHeavy
+- proto: ClothingOuterHardsuitERTLight
   entities:
   - uid: 230
     components:
@@ -6702,7 +6702,7 @@ entities:
     - type: Transform
       pos: -9.3467865,2.5917926
       parent: 1
-- proto: ClothingOuterHardsuitERTHeavy2
+- proto: ClothingOuterHardsuitERTHeavy
   entities:
   - uid: 232
     components:
