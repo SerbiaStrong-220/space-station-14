@@ -43,6 +43,9 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
         {
             RaiseLocalEvent(uid, ref ev);
         }
+
+        var ev2 = new CultYoggAnouncementEvent(ent, Loc.GetString("cult-yogg-sacraficial-was-picked", ("name", MetaData(ent).EntityName)));
+        RaiseLocalEvent(ent, ref ev, true);
     }
     private void OnRemove(Entity<CultYoggSacrificialComponent> ent, ref ComponentRemove args)
     {
@@ -56,18 +59,23 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
     private void OnPlayerAttached(Entity<CultYoggSacrificialComponent> ent, ref PlayerAttachedEvent args)
     {
         _replaceSacrSchedule.Remove(ent);
-        _announceSchedule.Remove(ent);
+
+        if(_announceSchedule.ContainsKey(ent))//if the announcement was not sent
+        {
+            _announceSchedule.Remove(ent);
+            return;
+        }
 
         var meta = MetaData(ent);
 
-        var ev = new CultYoggAnouncementEvent(ent, Loc.GetString("cult-yogg-sacraficial-cant-be-replaced", ("name", meta.EntityName)));
+        var ev = new CultYoggAnouncementEvent(ent, Loc.GetString("cult-yogg-sacraficial-cant-be-replaced", ("name", MetaData(ent).EntityName)));
         RaiseLocalEvent(ent, ref ev, true);
     }
 
     private void OnPlayerDetached(Entity<CultYoggSacrificialComponent> ent, ref PlayerDetachedEvent args)
     {
-        _replaceSacrSchedule.Add(ent, _timing.CurTime);
-        _announceSchedule.Add(ent, _timing.CurTime);
+        _replaceSacrSchedule.Add(ent, _timing.CurTime + ent.Comp.ReplacementCooldown);
+        _announceSchedule.Add(ent, _timing.CurTime + ent.Comp.AnnounceReplacementCooldown);
     }
 
     private void OnCryoDeleted(Entity<CultYoggSacrificialComponent> ent, ref BeingCryoDeletedEvent args)
@@ -92,7 +100,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
         base.Update(frameTime);
         foreach (var pair in _replaceSacrSchedule)
         {
-            if (_timing.CurTime < pair.Value + _beforeReplacementCooldown)
+            if (_timing.CurTime < pair.Value)
                 continue;
 
             var ev = new SacraficialReplacementEvent(pair.Key);
@@ -103,7 +111,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
 
         foreach (var pair in _announceSchedule)//it is stupid, but idk how to make it 1 time event without second System :(
         {
-            if (_timing.CurTime < pair.Value + _announceReplacementCooldown)
+            if (_timing.CurTime < pair.Value)
                 continue;
 
             ReplacamantStatusAnnounce(pair.Key);

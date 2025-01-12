@@ -296,7 +296,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         RemComp<CultYoggSacrificialComponent>(args.Entity);
 
         var meta = MetaData(args.Entity);
-        var ev = new CultYoggAnouncementEvent(args.Entity, Loc.GetString("cult-yogg-migo-can-replace", ("name", meta.EntityName)));
+        var ev = new CultYoggAnouncementEvent(args.Entity, Loc.GetString("cult-yogg-sacraficial-was-replaced", ("name", MetaData(args.Entity).EntityName)));
         RaiseLocalEvent(args.Entity, ref ev, true);
     }
     private void SetNewSacraficial(CultYoggRuleComponent comp, int tier)
@@ -428,15 +428,14 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     private void SendCultAnounce(ref CultYoggAnouncementEvent args)
     {
         //ToDo refactor without spam
-        /*
-        GetCultGameRule(out var comp);
 
-        if (comp == null)
+        var ruleComp = GetCultGameRule();
+
+        if (ruleComp == null)
             return;
 
-        var ev = new TelepathyAnnouncementSendEvent(args.Message, comp.TelepathyChannel);
-        RaiseLocalEvent(ref ev);
-        */
+        var ev = new TelepathyAnnouncementSendEvent(args.Message, ruleComp.TelepathyChannel);
+        RaiseLocalEvent(args.Entity, ev, true);
     }
     #endregion
 
