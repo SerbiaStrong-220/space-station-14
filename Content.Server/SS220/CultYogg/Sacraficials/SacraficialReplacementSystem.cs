@@ -6,6 +6,7 @@ using Content.Shared.SS220.CultYogg.Sacraficials;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Content.Server.SS220.Bed.Cryostorage;
 
 namespace Content.Server.SS220.CultYogg.Sacraficials;
 
@@ -13,9 +14,10 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
+
     //dictionary of sacraficials uids and time when they left body by gibbing/ghosting/leaving anything
-    private Dictionary<(EntityUid, NetUserId), TimeSpan> _replaceSacrSchedule = new();
-    private Dictionary<(EntityUid, NetUserId), TimeSpan> _announceSchedule = new();
+    private Dictionary<EntityUid, TimeSpan> _replaceSacrSchedule = [];
+    private Dictionary<EntityUid, TimeSpan> _announceSchedule = [];
 
     //Count down the moment when sacraficial will be raplaced
     private TimeSpan _beforeReplacementCooldown = TimeSpan.FromSeconds(900);
@@ -31,6 +33,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
         SubscribeLocalEvent<CultYoggSacrificialComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<CultYoggSacrificialComponent, PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<CultYoggSacrificialComponent, PlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<CultYoggSacrificialComponent, BeingCryoDeletedEvent>(OnCryoDeleted);
     }
     private void OnInit(Entity<CultYoggSacrificialComponent> ent, ref ComponentInit args)
     {
@@ -40,6 +43,9 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
         {
             RaiseLocalEvent(uid, ref ev);
         }
+
+        var ev2 = new CultYoggAnouncementEvent(ent, Loc.GetString("cult-yogg-sacraficial-was-picked", ("name", MetaData(ent).EntityName)));
+        RaiseLocalEvent(ent, ref ev, true);
     }
     private void OnRemove(Entity<CultYoggSacrificialComponent> ent, ref ComponentRemove args)
     {
@@ -52,19 +58,28 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
     }
     private void OnPlayerAttached(Entity<CultYoggSacrificialComponent> ent, ref PlayerAttachedEvent args)
     {
-        _replaceSacrSchedule.Remove((ent, args.Player.UserId));
-        _announceSchedule.Remove((ent, args.Player.UserId));
+        _replaceSacrSchedule.Remove(ent);
 
-        var meta = MetaData(ent);
+        if(_announceSchedule.ContainsKey(ent))//if the announcement was not sent
+        {
+            _announceSchedule.Remove(ent);
+            return;
+        }
 
-        var ev = new CultYoggAnouncementEvent(ent, Loc.GetString("cult-yogg-sacraficial-cant-be-replaced", ("name", meta.EntityName)));
+        var ev = new CultYoggAnouncementEvent(ent, Loc.GetString("cult-yogg-sacraficial-cant-be-replaced", ("name", MetaData(ent).EntityName)));
         RaiseLocalEvent(ent, ref ev, true);
     }
 
     private void OnPlayerDetached(Entity<CultYoggSacrificialComponent> ent, ref PlayerDetachedEvent args)
     {
-        _replaceSacrSchedule.Add((ent, args.Player.UserId), _timing.CurTime);
-        _announceSchedule.Add((ent, args.Player.UserId), _timing.CurTime);
+        _replaceSacrSchedule.Add(ent, _timing.CurTime + ent.Comp.ReplacementCooldown);
+        _announceSchedule.Add(ent, _timing.CurTime + ent.Comp.AnnounceReplacementCooldown);
+    }
+
+    private void OnCryoDeleted(Entity<CultYoggSacrificialComponent> ent, ref BeingCryoDeletedEvent args)
+    {
+        var ev = new SacraficialReplacementEvent(ent);
+        RaiseLocalEvent(ent, ref ev, true);
     }
 
     private void ReplacamantStatusAnnounce(EntityUid uid)
@@ -72,9 +87,8 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
         if (!TryComp<CultYoggSacrificialComponent>(uid, out var comp))
             return;
 
-        var meta = MetaData(uid);
-
-        var ev = new CultYoggAnouncementEvent(uid, Loc.GetString("cult-yogg-sacraficial-may-be-replaced", ("name", meta.EntityName)));
+        var time = (comp.ReplacementCooldown.TotalSeconds - comp.AnnounceReplacementCooldown.TotalSeconds).ToString();
+        var ev = new CultYoggAnouncementEvent(uid, Loc.GetString("cult-yogg-sacraficial-will-be-replaced", ("name", MetaData(uid).EntityName), ("time", time)));
         RaiseLocalEvent(uid, ref ev, true);
     }
 
@@ -83,21 +97,21 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
         base.Update(frameTime);
         foreach (var pair in _replaceSacrSchedule)
         {
-            if (_timing.CurTime < pair.Value + _beforeReplacementCooldown)
+            if (_timing.CurTime < pair.Value)
                 continue;
 
-            var ev = new SacraficialReplacementEvent(pair.Key.Item1, pair.Key.Item2);
-            RaiseLocalEvent(pair.Key.Item1, ref ev, true);
+            var ev = new SacraficialReplacementEvent(pair.Key);
+            RaiseLocalEvent(pair.Key, ref ev, true);
 
             _replaceSacrSchedule.Remove(pair.Key);
         }
 
         foreach (var pair in _announceSchedule)//it is stupid, but idk how to make it 1 time event without second System :(
         {
-            if (_timing.CurTime < pair.Value + _announceReplacementCooldown)
+            if (_timing.CurTime < pair.Value)
                 continue;
 
-            ReplacamantStatusAnnounce(pair.Key.Item1);
+            ReplacamantStatusAnnounce(pair.Key);
 
             _announceSchedule.Remove(pair.Key);
         }

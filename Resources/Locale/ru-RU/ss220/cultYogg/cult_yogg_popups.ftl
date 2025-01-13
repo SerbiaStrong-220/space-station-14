@@ -1,5 +1,6 @@
 cult-yogg-corrupt-no-proto = Предмет не имеет истинной формы
 cult-yogg-corrupt-already-corrupted = Предмет уже обрел истинную форму
+cult-yogg-corrupt-too-low-tier = Искажения будет доступно при большем числе принесенных жертв
 
 cult-yogg-no-mind = Оболочка не имеет разума
 cult-yogg-enslave-verb = [italic]Поработить[/italic]

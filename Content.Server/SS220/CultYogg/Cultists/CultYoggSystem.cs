@@ -104,7 +104,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
                 if (_prototype.HasIndex<MarkingPrototype>(newMarkingId))
                 {
-                    if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Tail, out var value))
+                    if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
                     {
                         entity.Comp.PreviousTail = value.FirstOrDefault();
                         value.Clear();

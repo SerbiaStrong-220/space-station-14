@@ -12,7 +12,39 @@
       "directions": 4
     },
     {
-      "name": "moth",
+      "name": "antenna_moth",
+      "directions": 4
+    },
+    {
+      "name": "wings_moth",
+      "directions": 4
+    },
+    {
+      "name": "shrooms_moth",
+      "directions": 4
+    },
+    {
+      "name": "back_arachnid",
+      "directions": 4
+    },
+    {
+      "name": "shrooms_arachnid",
+      "directions": 4
+    },
+    {
+      "name": "back_human",
+      "directions": 4
+    },
+    {
+      "name": "shrooms_human",
+      "directions": 4
+    },
+    {
+      "name": "shrooms_diona",
+      "directions": 4
+    },
+    {
+      "name": "shrooms_vox",
       "directions": 4
     }
   ]

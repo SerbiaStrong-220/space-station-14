@@ -271,6 +271,7 @@
      parentPrototypeId: ClothingOuterHardsuitBase
   result: ClothingOuterHardsuitCultYogg
   corruptionReverseEffect: ExorcismUncorruptEffect
+  avaliableOnStage: 2
 # Hardsuit end
 
 # Backpack beginning

@@ -32,7 +32,7 @@ public sealed class TelepathySystem : EntitySystem
         SubscribeLocalEvent<RoundStartedEvent>(OnRoundStart);
 
         SubscribeLocalEvent<TelepathyComponent, TelepathySendEvent>(OnTelepathySend);
-        SubscribeLocalEvent<TelepathyComponent, TelepathyAnnouncementSendEvent>(OnTelepathyAnnouncementSend);
+        SubscribeLocalEvent<TelepathyAnnouncementSendEvent>(OnTelepathyAnnouncementSend);
     }
 
     private void OnRoundStart(RoundStartedEvent args)
@@ -43,7 +43,7 @@ public sealed class TelepathySystem : EntitySystem
         }
     }
 
-    private void OnTelepathyAnnouncementSend(Entity<TelepathyComponent> ent, ref TelepathyAnnouncementSendEvent args)
+    private void OnTelepathyAnnouncementSend(TelepathyAnnouncementSendEvent args)
     {
         SendMessageToEveryoneWithRightChannel(args.TelepathyChannel, args.Message, null);
     }
@@ -151,7 +151,9 @@ public sealed class TelepathySystem : EntitySystem
         {
             return Loc.GetString(
                 "chat-manager-send-telepathy-announce",
-                ("announce", FormattedMessage.EscapeText(messageString))
+                ("announce", FormattedMessage.EscapeText(messageString)),
+                 ("channel", $"\\[{Loc.GetString(telepathyChannelParameters.Name)}\\]"),
+                ("color", telepathyChannelParameters.Color)
             );
         }
 

@@ -19,6 +19,7 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
     [Dependency] private readonly CultYoggRuleSystem _cultRule = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
+    [Dependency] private readonly SharedMindSystem _minds = default!;
 
     public override void Initialize()
     {
@@ -74,18 +75,20 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
         var title = new StringBuilder();
         title.AppendLine(Loc.GetString("objective-cult-yogg-sacrafice-start"));
 
-        var query = EntityQueryEnumerator<CultYoggSacrificialMindComponent>();
+        var query = EntityQueryEnumerator<CultYoggSacrificialComponent>();
         while (query.MoveNext(out var uid, out var _))
         {
             var targetName = "Unknown";
-            if (TryComp<MindComponent>(uid, out var mind) && mind.CharacterName != null)
+            var jobTitle = "Unknown";
+            if (_minds.TryGetMind(uid, out var mindId, out var mind) && mind.CharacterName != null)
             {
                 targetName = mind.CharacterName;
+
+                if (_job.MindTryGetJobName(mindId, out var jobName))
+                    jobTitle = jobName;
             }
 
-            var jobName = _job.MindTryGetJobName(uid);
-
-            title.AppendLine(Loc.GetString("objective-condition-cult-yogg-sacrafice-person", ("targetName", targetName), ("job", jobName)));
+            title.AppendLine(Loc.GetString("objective-condition-cult-yogg-sacrafice-person", ("targetName", targetName), ("job", jobTitle)));
         }
 
         _metaData.SetEntityName(ent, title.ToString());
