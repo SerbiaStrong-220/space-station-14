@@ -111,7 +111,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                         huAp.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
                     }
                 }
-                if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
+                else
                 {
                     // We have species-marking only for the Nians, so this log only leads to unnecessary errors.
                     //Log.Error($"{newMarkingId} marking doesn't exist"); 
