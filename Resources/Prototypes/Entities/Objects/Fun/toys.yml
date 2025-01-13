@@ -1349,6 +1349,16 @@
     delay: 10
   - type: Speech
     speechSounds: Pai
+  - type: TriggerOnActivate
+  - type: TriggerOnSignal
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+    - Trigger
   # ss220 PonderingOrb speak on use end
 
 - type: entity
