@@ -220,8 +220,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (mind.Session.AttachedEntity is null)
             return;
 
-        //var meta = MetaData(uid.Value);
-
         //_adminLogger.Add(LogType.EventRan, LogImpact.High, $"CultYogg person {meta.EntityName} where picked for a tier: {tier}");
 
         var sacrComp = EnsureComp<CultYoggSacrificialComponent>(mind.Session.AttachedEntity.Value);
