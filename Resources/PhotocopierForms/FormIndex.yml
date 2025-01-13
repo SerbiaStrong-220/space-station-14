@@ -97,6 +97,7 @@
     - /PhotocopierForms/nanotrasen_station/security/sec_pmt.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_rep_itg.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_sur.xml
+    - /PhotocopierForms/nanotrasen_station/security/sec_roc.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_swt.xml
     - /PhotocopierForms/nanotrasen_station/security/sup_ord_wep.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_sitrep.xml
