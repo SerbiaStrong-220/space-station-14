@@ -1392,6 +1392,9 @@
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
     rules: ghost-role-information-syndicate-reinforcement-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+        - !type:OverallPlaytimeRequirement
+          time: 72000 #SS220 ghostrole-times (20h overall) end
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -2388,6 +2391,9 @@
       name: ghost-role-information-giant-spider-name
       description: ghost-role-information-giant-spider-description
       rules: ghost-role-information-giant-spider-rules
+      requirements: #SS220 ghostrole-times (20h overall) start
+        - !type:OverallPlaytimeRequirement
+          time: 72000 #SS220 ghostrole-times (20h overall) end
 # SS220-partial-revert-raffle-Begin
 #      raffle:
 #        settings: short
@@ -2981,6 +2987,9 @@
     allowMovement: true
     description: ghost-role-information-SyndiCat-description
     rules: ghost-role-information-SyndiCat-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+      - !type:OverallPlaytimeRequirement
+        time: 72000 #SS220 ghostrole-times (20h overall) end
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
