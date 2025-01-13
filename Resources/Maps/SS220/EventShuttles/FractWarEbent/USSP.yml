@@ -11026,7 +11026,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: ClothingOuterHardsuitUSSPHeavy
+- proto: ClothingOuterHardsuitUSSPLight
   entities:
   - uid: 1559
     components:
@@ -11075,7 +11075,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: ClothingOuterHardsuitUSSPHeavy2
+- proto: ClothingOuterHardsuitUSSPHeavy
   entities:
   - uid: 1549
     components:

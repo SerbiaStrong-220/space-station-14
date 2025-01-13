@@ -39,6 +39,7 @@ public sealed class ReflectSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
+    [Dependency] private readonly SharedProjectileSystem _projectileSystem = default!; // SS220 add barricade
 
     public override void Initialize()
     {
@@ -131,6 +132,7 @@ public sealed class ReflectSystem : EntitySystem
 
             projectileComp.Shooter = user;
             projectileComp.Weapon = user;
+            _projectileSystem.SetShootPositions(projectile, projectileComp, user); // SS220 add barricade
             Dirty(projectile, projectileComp);
         }
         else

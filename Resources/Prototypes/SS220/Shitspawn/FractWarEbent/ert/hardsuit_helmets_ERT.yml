@@ -67,7 +67,7 @@
 # Heavy
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseERT
-  id: ClothingHeadHelmetHardsuitERTHeavy
+  id: ClothingHeadHelmetHardsuitERTLight
   categories: [ HideSpawnMenu ]
   name: шлем скафандра NT-3000
   description: Толстый слой металла обеспечивает пассивную защиту от пуль и лазеров.
@@ -80,7 +80,7 @@
 # Heavy2
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseERT
-  id: ClothingHeadHelmetHardsuitERTHeavy2
+  id: ClothingHeadHelmetHardsuitERTHeavy
   categories: [ HideSpawnMenu ]
   name: шлем скафандра Gladiator
   description: Настощий мир в розовых очках.

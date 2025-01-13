@@ -18,6 +18,21 @@ public sealed partial class EventCapturePointComponent : Component
 
     [ViewVariables, DataField]
     public float FlagRemovalImpulse = 35;
+
+    /// <summary>
+    /// How many points does this pedestal give per <see cref="RetentionTimeForWP"/>
+    /// </summary>
+    [DataField]
+    public float WinPoints = 1f;
+
+    /// <summary>
+    /// How many seconds need to hold a capture point to get win points
+    /// </summary>
+    [DataField]
+    public float RetentionTimeForWP = 60;
+
+    [ViewVariables]
+    public Dictionary<string, float> PointRetentionTime = new();
 }
 
 [Serializable, NetSerializable]

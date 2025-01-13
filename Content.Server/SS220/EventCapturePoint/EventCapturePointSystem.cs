@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Numerics;
+using Content.Server.SS220.FractWar;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
@@ -11,6 +12,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.EventCapturePoint;
 
@@ -22,6 +24,12 @@ public sealed class EventCapturePointSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly FractWarRuleSystem _fractWarRule = default!;
+
+    private const float RefreshWPRate = 60f;
+
+    private TimeSpan _nextRefreshWP = TimeSpan.Zero;
 
     public override void Initialize()
     {
@@ -34,6 +42,33 @@ public sealed class EventCapturePointSystem : EntitySystem
         SubscribeLocalEvent<EventCapturePointFlagComponent, GettingPickedUpAttemptEvent>(OnFlagPickupAttempt);
         SubscribeLocalEvent<EventCapturePointComponent, FlagInstallationFinshedEvent>(OnFlagInstalled);
         SubscribeLocalEvent<EventCapturePointComponent, FlagRemovalFinshedEvent>(OnFlagRemoved);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var gameRule = _fractWarRule.GetActiveGameRule();
+        if (gameRule is null)
+            return;
+
+        var query = EntityQueryEnumerator<EventCapturePointComponent>();
+        while (query.MoveNext(out _, out var component))
+        {
+            if (component.FlagEntity is not { } flagUid ||
+                !TryComp<EventCapturePointFlagComponent>(flagUid, out var flagComp) ||
+                flagComp.Fraction is not { } flagFraction)
+                continue;
+
+            if (!component.PointRetentionTime.TryAdd(flagFraction, 0))
+                component.PointRetentionTime[flagFraction] += frameTime;
+        }
+
+        if (_timing.CurTime >= _nextRefreshWP)
+        {
+            RefreshWP(gameRule);
+            _nextRefreshWP = _timing.CurTime + TimeSpan.FromSeconds(RefreshWPRate);
+        }
     }
 
     #region Listeners
@@ -72,6 +107,8 @@ public sealed class EventCapturePointSystem : EntitySystem
 
     private void OnPointShutdown(Entity<EventCapturePointComponent> entity, ref ComponentShutdown args)
     {
+        RefreshPointWP(entity.Comp);
+
         if (entity.Comp.FlagEntity.HasValue &&
             entity.Comp.FlagEntity.Value.Valid &&
             EntityManager.EntityExists(entity.Comp.FlagEntity.Value))
@@ -177,5 +214,36 @@ public sealed class EventCapturePointSystem : EntitySystem
             RemoveFlag(entity, user);
         else
             AddFlag(entity, user, newFlag);
+    }
+
+    public void RefreshWP(FractWarRuleComponent? gameRule = null)
+    {
+        gameRule ??= _fractWarRule.GetActiveGameRule();
+        if (gameRule is null)
+            return;
+
+        var query = EntityQueryEnumerator<EventCapturePointComponent>();
+        while (query.MoveNext(out _, out var comp))
+        {
+            RefreshPointWP(comp, gameRule);
+        }
+    }
+
+    public void RefreshPointWP(EventCapturePointComponent comp, FractWarRuleComponent? gameRule = null)
+    {
+        gameRule ??= _fractWarRule.GetActiveGameRule();
+
+        if (gameRule is null)
+            return;
+
+        foreach (var (fraction, retTime) in comp.PointRetentionTime)
+        {
+            var wp = retTime / comp.RetentionTimeForWP;
+
+            if (!gameRule.FractionsWP.TryAdd(fraction, wp))
+                gameRule.FractionsWP[fraction] += wp;
+
+            comp.PointRetentionTime[fraction] = 0;
+        }
     }
 }

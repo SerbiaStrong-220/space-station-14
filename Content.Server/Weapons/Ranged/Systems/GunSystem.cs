@@ -22,6 +22,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Containers;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -184,11 +185,22 @@ public sealed partial class GunSystem : SharedGunSystem
                             {
                                 var ray = new CollisionRay(from.Position, dir, hitscan.CollisionMask);
                                 var rayCastResults =
-                                    Physics.IntersectRay(from.MapId, ray, hitscan.MaxLength, lastUser, false).ToList();
+                                    Physics.IntersectRay(from.MapId, ray, hitscan.MaxLength, lastUser, false).ToList().
+                                    Where(x =>  // SS220 add barricade begin
+                                    {
+                                        var attemptEv = new HitscanAttempt(lastUser);
+                                        RaiseLocalEvent(x.HitEntity, ref attemptEv);
+                                        return !attemptEv.Cancelled;
+                                    }); // SS220 add barricade end
                                 if (!rayCastResults.Any())
                                     break;
 
-                                var result = rayCastResults[0];
+                                // SS220 add barricade begin
+                                //var result = rayCastResults[0];
+                                var result = rayCastResults.FirstOrNull();
+                                if (result is null)
+                                    break;
+                                // SS220 add barricade end
 
                                 // Check if laser is shot from in a container
                                 if (!_container.IsEntityOrParentInContainer(lastUser))
@@ -207,10 +219,10 @@ public sealed partial class GunSystem : SharedGunSystem
                                     }
                                 }
 
-                                var hit = result.HitEntity;
+                                var hit = result.Value.HitEntity; // SS220 add barricade
                                 lastHit = hit;
 
-                                FireEffects(fromEffect, result.Distance, dir.Normalized().ToAngle(), hitscan, hit);
+                                FireEffects(fromEffect, result.Value.Distance, dir.Normalized().ToAngle(), hitscan, hit); // SS220 add barricade
 
                                 var ev = new HitScanReflectAttemptEvent(user, gunUid, hitscan.Reflective, dir, false);
                                 RaiseLocalEvent(hit, ref ev);

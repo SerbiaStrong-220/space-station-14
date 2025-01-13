@@ -58,7 +58,7 @@
 # Heavy2
 - type: entity
   parent: ClothingHeadHelmetHardsuitBaseSSSP
-  id: ClothingHeadHelmetHardsuitUSSPHeavy2
+  id: ClothingHeadHelmetHardsuitUSSPHeavy
   categories: [ HideSpawnMenu ]
   name: шлем тяжёлого боевого скафандра СССП 2.0
   components:
