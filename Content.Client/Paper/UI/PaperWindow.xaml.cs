@@ -11,6 +11,7 @@ using Robust.Shared.Utility;
 using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
+using Content.Client.SS220.Paper.UI;
 
 namespace Content.Client.Paper.UI
 {
@@ -19,6 +20,8 @@ namespace Content.Client.Paper.UI
     {
         [Dependency] private readonly IInputManager _inputManager = default!;
         [Dependency] private readonly IResourceCache _resCache = default!;
+
+        private DocumentHelperPopup? _documentHelper; // SS220 Document helper
 
         private static Color DefaultTextColor = new(25, 25, 25);
 
@@ -101,6 +104,19 @@ namespace Content.Client.Paper.UI
 
             SaveButton.Text = Loc.GetString("paper-ui-save-button",
                 ("keybind", _inputManager.GetKeyFunctionButtonString(EngineKeyFunctions.MultilineTextSubmit)));
+
+            // SS220 Document helper begin
+            DocumentHelperButton.OnPressed += _ =>
+            {
+                _documentHelper = new DocumentHelperPopup();
+                _documentHelper.OnButtonPressed += args =>
+                {
+                    Input.InsertAtCursor(args);
+                };
+
+                _documentHelper.OpenCenteredRight();
+            };
+            // SS220 Document helper end
         }
 
         /// <summary>
@@ -345,5 +361,13 @@ namespace Content.Client.Paper.UI
                 SaveButton.Disabled = false;
             }
         }
+
+        // SS220 Document helper begin
+        public override void Close()
+        {
+            _documentHelper?.Close();
+            base.Close();
+        }
+        // SS220 Document helper end
     }
 }

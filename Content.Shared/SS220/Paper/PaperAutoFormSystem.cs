@@ -8,6 +8,7 @@ using Content.Shared.SS220.CCVars;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Content.Shared.SS220.Paper;
@@ -77,10 +78,25 @@ public sealed partial class PaperAutoFormSystem : EntitySystem
     private string? GetWriterName(EntityUid? writer)
     {
         if (writer is null ||
-            !TryComp<MetaDataComponent>(writer.Value, out var metaData))
+            !_inventorySystem.TryGetSlotEntity(writer.Value, "id", out var idUid))
             return null;
 
-        return metaData.EntityName;
+        string? name = null;
+        // PDA
+        if (EntityManager.TryGetComponent(idUid, out PdaComponent? pda) &&
+            TryComp<IdCardComponent>(pda.ContainedId, out var id) &&
+            id.LocalizedJobTitle != null)
+        {
+            name = id.FullName;
+        }
+        // ID Card
+        else if (EntityManager.TryGetComponent(idUid, out id) &&
+            id.LocalizedJobTitle != null)
+        {
+            name = id.FullName;
+        }
+
+        return name;
     }
 
     private string? GetWriterJobByID(EntityUid? writer)
@@ -105,6 +121,18 @@ public sealed partial class PaperAutoFormSystem : EntitySystem
         }
 
         return job;
+    }
+
+    public string[] GetOptionsList(EntityUid? writer)
+    {
+        string[] list = [
+            GetCurrentDate(),
+            GetStationTime(),
+            GetWriterName(writer) ?? string.Empty,
+            GetWriterJobByID(writer) ?? string.Empty
+            ];
+
+        return list.Where(x => x != string.Empty).ToArray();
     }
 }
 

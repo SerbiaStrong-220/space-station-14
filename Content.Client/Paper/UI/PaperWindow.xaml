@@ -1,7 +1,7 @@
 <paper:PaperWindow xmlns="https://spacestation14.io"
-    xmlns:paper="clr-namespace:Content.Client.Paper.UI"
-    MouseFilter="Stop" Resizable="True" MinSize="150 150"
-    SetSize="510 660"> <!-- Provide some reasonable sizes by default. Can be changed by the component -->
+                   xmlns:paper="clr-namespace:Content.Client.Paper.UI"
+                   MouseFilter="Stop" Resizable="True" MinSize="150 150"
+                   SetSize="510 660"> <!-- Provide some reasonable sizes by default. Can be changed by the component -->
 
     <BoxContainer Name="ContentsRoot" Orientation="Vertical">
         <PanelContainer StyleClasses="AngleRect" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="6">
@@ -17,7 +17,7 @@
                         <RichTextLabel StyleClasses="PaperWrittenText" Name="WrittenTextLabel" VerticalAlignment="Top"/>
                         <BoxContainer Name="InputContainer" Orientation="Vertical" VerticalExpand="True" VerticalAlignment="Stretch">
                             <PanelContainer StyleClasses="TransparentBorderedWindowPanel" MinHeight="100"
-                                VerticalAlignment="Stretch" VerticalExpand="True" HorizontalExpand="True">
+                                            VerticalAlignment="Stretch" VerticalExpand="True" HorizontalExpand="True">
                                 <TextEdit Name="Input" StyleClasses="PaperLineEdit" Access="Public" />
                             </PanelContainer>
                             <Label Name="FillStatus" StyleClasses="LabelSecondaryColor"/>
@@ -30,6 +30,7 @@
         </PanelContainer>
         <!-- Bottom buttons for editing -->
         <BoxContainer Name="EditButtons" Orientation="Horizontal" HorizontalAlignment="Right" Margin="6">
+            <Button Name="DocumentHelperButton" Text="Loc document-helper" /> <!-- SS220 Document helper -->
             <Button Name="SaveButton" />
         </BoxContainer>
     </BoxContainer>
