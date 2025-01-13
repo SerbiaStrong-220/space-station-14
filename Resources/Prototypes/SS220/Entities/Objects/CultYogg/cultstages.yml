@@ -57,7 +57,7 @@
     state: shrooms_vox
 
 - type: marking
-  id: CultStage-Slime
+  id: CultStage-SlimePerson
   bodyPart: Special
   markingCategory: Special
   sprites:
@@ -66,16 +66,6 @@
 
 - type: marking
   id: CultStage-Reptilian
-  bodyPart: Special
-  markingCategory: Special
-  sprites:
-  - sprite: SS220/Objects/CultYogg/cultstages.rsi
-    state: back_human
-  - sprite: SS220/Objects/CultYogg/cultstages.rsi
-    state: shrooms_human
-
-- type: marking
-  id: CultStage-Dwarf
   bodyPart: Special
   markingCategory: Special
   sprites:

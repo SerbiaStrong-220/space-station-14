@@ -107,7 +107,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                     return;
                 }
 
-                if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Tail, out var value))
+                if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
                 {
                     entity.Comp.PreviousTail = value.FirstOrDefault();
                     value.Clear();
