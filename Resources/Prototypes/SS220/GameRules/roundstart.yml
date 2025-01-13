@@ -7,8 +7,8 @@
   - type: GameRule
     minPlayers: 40
     delay:
-      min: 300
-      max: 600
+      min: 5
+      max: 10
   - type: CultYoggRule
   - type: AntagSelection
     definitions:
