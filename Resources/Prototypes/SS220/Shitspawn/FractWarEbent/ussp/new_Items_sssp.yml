@@ -52,9 +52,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Mask/ussp-gas-mask.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Mask/ussp-gas-mask.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Mask/ussp-gas-mask.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Mask/ussp-gas-mask.rsi
   - type: FlashImmunity
   - type: EyeProtection
   #ss220 special_sounds start
