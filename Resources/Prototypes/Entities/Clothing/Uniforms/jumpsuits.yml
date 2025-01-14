@@ -286,9 +286,9 @@
   description: Someone who wears this means business.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpsuit/detective.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/detective.rsi #ss220 resprite
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpsuit/detective.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/detective.rsi #ss220 resprite
 
 - type: entity
   parent: ClothingUniformBase
@@ -297,9 +297,9 @@
   description: A hard-boiled private investigator's grey suit, complete with tie clip.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpsuit/detective_grey.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/detective_grey.rsi #ss220 resprite
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpsuit/detective_grey.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/detective_grey.rsi #ss220 resprite
 
 - type: entity
   parent: ClothingUniformBase
