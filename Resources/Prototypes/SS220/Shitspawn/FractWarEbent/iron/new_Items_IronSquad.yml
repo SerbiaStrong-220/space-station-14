@@ -74,7 +74,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/Cloaks/s_cmo.rsi
+      sprite: SS220/Shitspawn/FractWarEbent/Clothing/Neck/Cloaks/s_cmo.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -84,7 +84,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/Cloaks/s_command.rsi
+      sprite: SS220/Shitspawn/FractWarEbent/Clothing/Neck/Cloaks/s_command.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -94,7 +94,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/Cloaks/s_eng.rsi
+      sprite: SS220/Shitspawn/FractWarEbent/Clothing/Neck/Cloaks/s_eng.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -104,4 +104,4 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/Cloaks/s_med.rsi
+      sprite: SS220/Shitspawn/FractWarEbent/Clothing/Neck/Cloaks/s_med.rsi
