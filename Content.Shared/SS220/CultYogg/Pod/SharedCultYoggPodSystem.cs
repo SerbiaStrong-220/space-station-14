@@ -1,12 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Damage;
+using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.CultYogg.Pod;
 
@@ -15,6 +17,7 @@ public abstract class SharedCultYoggPodSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
     public override void Initialize()
     {
@@ -23,6 +26,13 @@ public abstract class SharedCultYoggPodSystem : EntitySystem
         SubscribeLocalEvent<CultYoggPodComponent, ComponentInit>(OnCompInit);
         SubscribeLocalEvent<CultYoggPodComponent, CanDropTargetEvent>(OnPodCanDrop);
         SubscribeLocalEvent<CultYoggPodComponent, GetVerbsEvent<AlternativeVerb>>(AddInsertVerb);
+        SubscribeLocalEvent<CultYoggPodComponent, AfterPodInserted>(OnPodInsert);
+    }
+
+    private void OnPodInsert(Entity<CultYoggPodComponent> ent, ref AfterPodInserted args)
+    {
+        var xform = Transform(args.User);
+        _container.Insert((args.User, xform), ent.Comp.MobContainer);
     }
 
     private void OnPodCanDrop(Entity<CultYoggPodComponent> ent, ref CanDropTargetEvent args)
@@ -86,11 +96,24 @@ public abstract class SharedCultYoggPodSystem : EntitySystem
             return false;
         }
 
-        var xform = Transform(entToEnsert);
+        var insertDoAfter = new DoAfterArgs(
+            EntityManager,
+            entToEnsert,
+            podEnt.Comp.InsertDelay,
+            new AfterPodInserted(),
+            podEnt)
+        {
+            Broadcast = false,
+            BreakOnDamage = true,
+            BreakOnMove = true,
+            NeedHand = false,
 
-        _container.Insert((entToEnsert, xform), podEnt.Comp.MobContainer);
+            BlockDuplicate = true,
+            CancelDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
+        };
 
-        return true;
+        return _doAfter.TryStartDoAfter(insertDoAfter);
     }
 
     public bool TryEject(EntityUid entToEject, Entity<CultYoggPodComponent> podEnt)
@@ -102,4 +125,10 @@ public abstract class SharedCultYoggPodSystem : EntitySystem
 
         return true;
     }
+}
+
+[Serializable, NetSerializable]
+public sealed partial class AfterPodInserted : DoAfterEvent
+{
+    public override DoAfterEvent Clone() => this;
 }
