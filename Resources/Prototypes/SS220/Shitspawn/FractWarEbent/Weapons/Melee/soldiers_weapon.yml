@@ -19,7 +19,7 @@
     colorOptions:
     - "#ff0000"
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/e_hammer.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_hammer.rsi
     layers:
     - state: e_hammer
     - state: e_hammer_blade
@@ -36,7 +36,7 @@
         Blunt: 4.5
   - type: Item
     size: Normal
-    sprite: SS220/Objects/Weapons/Melee/e_hammer.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_hammer.rsi
 
 - type: entity
   name: Энергетический серп
@@ -54,7 +54,7 @@
     colorOptions:
     - "#ffcc00"
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/e_sickle.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_sickle.rsi
     layers:
     - state: e_sickle
     - state: e_sickle_blade
@@ -71,7 +71,7 @@
         Blunt: 4.5
   - type: Item
     size: Normal
-    sprite: SS220/Objects/Weapons/Melee/e_sickle.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_sickle.rsi
 
 # ERT
 - type: entity
@@ -93,7 +93,7 @@
     colorOptions:
     - "#ffcc00"
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/e_saber.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_saber.rsi
     layers:
     - state: e_saber
     - state: e_saber_blade
@@ -109,4 +109,4 @@
       types:
         Blunt: 4.5
   - type: Item
-    sprite: SS220/Objects/Weapons/Melee/e_saber.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_saber.rsi

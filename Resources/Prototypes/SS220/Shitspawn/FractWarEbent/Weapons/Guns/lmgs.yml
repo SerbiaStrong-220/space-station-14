@@ -9,14 +9,14 @@
   description: Советская разработка, что уже более шестиста лет успешно доносит социалистические идеалы даже через самые толстые капиталистические черепа. Гарант качества!
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/ussp_RPK.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/HMGs/ussp_RPK.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Guns/ussp_RPK.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/HMGs/ussp_RPK.rsi
     quickEquip: false
     slots:
     - Back
@@ -53,7 +53,7 @@
   description: Кажется, кто-то просто снял легкий лазерный пулемет производства G&V с истребителя москитного флота, приварив к нему ручку для удобства. Определённо взрывоопасен.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/ert_minigun.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/HMGs/ert_minigun.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -61,7 +61,7 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Guns/ert_minigun.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/HMGs/ert_minigun.rsi
     quickEquip: false
     slots:
     - Back
@@ -97,7 +97,7 @@
   description: Мы что, злодеи? Конечно злодеи! Использует патроны калибра 7.92X57mm
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/iron_MG34.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/HMGs/iron_MG34.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
