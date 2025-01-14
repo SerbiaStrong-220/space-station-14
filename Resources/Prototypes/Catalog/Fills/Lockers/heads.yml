@@ -239,7 +239,6 @@
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: CigPackMED #SS220 Cigarettes
     - id: MedTekCartridge
-    - id: ClothingEyesCMOCorporate #SS220 New CMO Glasses
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
