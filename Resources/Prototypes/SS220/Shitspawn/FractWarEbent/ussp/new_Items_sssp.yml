@@ -98,9 +98,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/shinel.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Coats/shinel.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Coats/shinel.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Coats/shinel.rsi
   - type: TemperatureProtection
     heatingCoefficient: 0.1
     coolingCoefficient: 0.1

@@ -420,9 +420,9 @@
   description: A paramedic's trusty windbreaker, for all the space wind.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/windbreaker_paramedic_220.rsi #ss220 resprite
+    sprite: SS220/Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi #ss220 resprite
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Coats/windbreaker_paramedic_220.rsi #ss220 resprite
+    sprite: SS220/Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi #ss220 resprite
 
 - type: entity
   parent: [ClothingOuterStorageBase]
