@@ -1,7 +1,7 @@
 - type: entity
   parent: BasePlushie
   id: PlushieMigo
-  name: shrine maiden fumomigo
+  name: Plushie migo
   description: Not a single youkai will pass by the lazy gaze of this plush.
   components:
   - type: Sprite
