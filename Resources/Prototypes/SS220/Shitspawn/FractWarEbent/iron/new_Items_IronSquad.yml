@@ -59,7 +59,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Back/Backpacks/nuclear_backpack.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Back/Backpacks/nuclear.rsi
   - type: Storage
     grid:
     - 0,0,12,3
