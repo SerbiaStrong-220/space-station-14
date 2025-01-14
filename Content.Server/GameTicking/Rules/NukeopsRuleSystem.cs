@@ -25,9 +25,11 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.StationEvents.Components;
 using System.Linq;
+using Content.Server.AlertLevel;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
 using Content.Server.Maps;
+using Content.Server.Station.Systems;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -41,6 +43,8 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly AlertLevelSystem _alertLevel = default!; //ss220 nukeops autogamma
+    [Dependency] private readonly StationSystem _station = default!; //ss220 nukeops autogamma
 
     [ValidatePrototypeId<CurrencyPrototype>]
     private const string TelecrystalCurrencyPrototype = "Telecrystal";
@@ -350,6 +354,13 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 ev.DeclaratorEntity.Comp.ShuttleDisabledTime = timeRemain;
 
                 DistributeExtraTc((uid, nukeops));
+
+                //ss220 nukeops autogamma
+                foreach (var station in _station.GetStations())
+                {
+                    _alertLevel.SetLevel(station, "gamma", true, true, true);
+                }
+                //ss220 nukeops autogamma
             }
         }
     }
