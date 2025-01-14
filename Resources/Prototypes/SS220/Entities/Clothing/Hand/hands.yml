@@ -8,9 +8,9 @@
   suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Hands/captain_white.rsi
+    sprite: SS220/Clothing/Hands/Gloves/captain_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Hands/captain_white.rsi
+    sprite: SS220/Clothing/Hands/Gloves/captain_white.rsi
 
 - type: entity
   parent: ClothingHandsBase
