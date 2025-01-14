@@ -36,9 +36,9 @@
     mode: SnapgridCenter
   components:
     - type: Sprite
-      sprite: Structures/Piping/Atmospherics/gasfilter.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/gasfilter.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeTrinaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: gasFilter
@@ -82,9 +82,9 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/gasfilter.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/gasfilter.rsi #ss220 engineering-update-atmos
     layers:
-    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+    - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
       state: pipeTrinaryConnectors
       map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: gasFilterF
@@ -126,9 +126,9 @@
     mode: SnapgridCenter
   components:
     - type: Sprite
-      sprite: Structures/Piping/Atmospherics/gasmixer.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/gasmixer.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeTrinaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: gasMixer
@@ -172,9 +172,9 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/gasmixer.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/gasmixer.rsi #ss220 engineering-update-atmos
     layers:
-    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+    - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
       state: pipeTrinaryConnectors
       map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: gasMixerF
@@ -236,9 +236,9 @@
           nodeGroupID: Pipe
           pipeDirection: South
     - type: Sprite
-      sprite: Structures/Piping/Atmospherics/pneumaticvalve.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/pneumaticvalve.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeTrinaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: off

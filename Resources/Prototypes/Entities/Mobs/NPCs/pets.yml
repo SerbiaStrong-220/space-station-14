@@ -148,6 +148,10 @@
   - type: NpcFactionMember
     factions:
       - PetsNT
+  #ss220 fix start
+    addFriendlyFactions:
+      - SimpleHostile
+  #ss220 fix end
   - type: HTN
     rootTask:
       task: SimpleHostileCompound

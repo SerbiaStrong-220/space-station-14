@@ -22,6 +22,8 @@ using System.Linq;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.CCVars;
+using Robust.Shared.Configuration;
 
 namespace Content.Server.Telephone;
 
@@ -38,6 +40,11 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
 
+    // SS220 performance-test-begin
+    [Dependency] private readonly IConfigurationManager _configManager = default!;
+    private bool _lessSound;
+    // SS220 performance-test-end
+
     // Has set used to prevent telephone feedback loops
     private HashSet<(EntityUid, string, Entity<TelephoneComponent>)> _recentChatMessages = new();
 
@@ -50,6 +57,8 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         SubscribeLocalEvent<TelephoneComponent, ListenAttemptEvent>(OnAttemptListen);
         SubscribeLocalEvent<TelephoneComponent, ListenEvent>(OnListen);
         SubscribeLocalEvent<TelephoneComponent, TelephoneMessageReceivedEvent>(OnTelephoneMessageReceived);
+
+        Subs.CVar(_configManager, CCVars220.LessSoundSources, value => _lessSound = value, true); // SS220 performance-test
     }
 
     #region: Events
@@ -151,6 +160,11 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
                     if (_timing.CurTime > telephone.StateStartTime + TimeSpan.FromSeconds(telephone.RingingTimeout))
                         EndTelephoneCalls(entity);
 
+                    // SS220 performance-test
+                    if (_lessSound)
+                        break;
+                    // SS220 performace-test
+
                     else if (telephone.RingTone != null &&
                         _timing.CurTime > telephone.NextRingToneTime)
                     {
@@ -160,7 +174,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
 
                     break;
 
-                // Try to hang up if their has been no recent in-call activity 
+                // Try to hang up if their has been no recent in-call activity
                 case TelephoneState.InCall:
                     if (_timing.CurTime > telephone.StateStartTime + TimeSpan.FromSeconds(telephone.IdlingTimeout))
                         EndTelephoneCalls(entity);

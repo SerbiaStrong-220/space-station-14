@@ -37,9 +37,9 @@
   description: A special suit that protects against hazardous, low pressure environments. Has thermal shielding.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/atmospherics.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/atmospherics.rsi #ss220-engineering-update-hardsuit
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/atmospherics.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/atmospherics.rsi #ss220-engineering-update-hardsuit
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -74,9 +74,9 @@
   description: A special suit that protects against hazardous, low pressure environments. Has radiation shielding.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/engineering.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/engineering.rsi #ss220-engineering-update-hardsuit
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/engineering.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/engineering.rsi #ss220-engineering-update-hardsuit
   - type: PressureProtection
     highPressureMultiplier: 0.04
     lowPressureMultiplier: 1000
@@ -353,9 +353,9 @@
   description: A special hardsuit that protects against hazardous, low pressure environments, made for the chief engineer of the station.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/engineering-white.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/engineering-white.rsi #ss220-engineering-update-hardsuit
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/engineering-white.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/engineering-white.rsi #ss220-engineering-update-hardsuit
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
