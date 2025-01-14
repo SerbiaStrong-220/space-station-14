@@ -74,9 +74,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Mundir.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Uniforms/Jumpsuit/mundir.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Mundir.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Uniforms/Jumpsuit/mundir.rsi
 
 - type: entity
   parent: UnsensoredClothingUniformBase
@@ -86,9 +86,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/OfficerMundir.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Uniforms/Jumpsuit/officer_mundir.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/OfficerMundir.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Uniforms/Jumpsuit//officer_mundir.rsi
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -218,18 +218,6 @@
   - type: GuideHelp
     guides:
     - Medical Doctor
-
-- type: entity
-  parent: UnsensoredClothingUniformBase
-  id: ClothingUniformJumpsuitUssp
-  name: униформа СССП
-  description: Форма, пропитанная кровью, потом и ненавистью к капитализму.
-  suffix: Shitspawn, Ebent, FractWar
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Uniforms/ussp_uniform.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Uniforms/ussp_uniform.rsi
 
 - type: entity
   parent: ClothingBeltUsspWebbing

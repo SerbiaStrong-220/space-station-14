@@ -878,9 +878,9 @@
   description: Uniform for subpar operative LARPers performing tactical insulated glove theft in deep space.
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Uniforms/Jumpsuit/tacticool.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/syndicate_tacticool.rsi #SS220-tacticool_s-resprite
     - type: Clothing
-      sprite: SS220/Clothing/Uniforms/Jumpsuit/tacticool.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/syndicate_tacticool.rsi #SS220-tacticool_s-resprite
     # Too cool for sensors to be on
     - type: SuitSensor
       randomMode: false
@@ -926,9 +926,9 @@
   description: Might as well relax with a job as easy as yours.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpsuit/atmos_casual.rsi #SS220-AtmosCasualResprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/atmospheric_technician_casual.rsi #SS220-AtmosCasualResprite
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpsuit/atmos_casual.rsi #SS220-AtmosCasualResprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/atmospheric_technician_casual.rsi #SS220-AtmosCasualResprite
 
 - type: entity
   parent: ClothingUniformBase

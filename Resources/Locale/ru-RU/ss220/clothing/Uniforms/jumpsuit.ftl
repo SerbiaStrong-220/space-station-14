@@ -43,3 +43,6 @@ ent-ClothingUniformJumpsuitBlueShieldCombat = боевой комбинезон 
 ent-ClothingUniformJumpsuitInterdyne = форма парамедика Interdyne
     .desc = Стандартизированная форма отрядов немедленной медицинской помощи особого назначения, компании Interdyne Pharmaceutics.
     .suffix = Interdyne, За время в игре
+
+ent-ClothingUniformJumpsuitUssp = униформа СССП
+    .desc = Форма, пропитанная кровью, потом и ненавистью к капитализму.
