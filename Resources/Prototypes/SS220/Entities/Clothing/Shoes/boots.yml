@@ -124,3 +124,15 @@
         type: GasTankBoundUserInterface
   - type: Jetpack
     moleUsage: 0.00085
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesCMOCorporate
+  name: corporate shoes of the chief medical officer
+  description: There was sweat and blood, literally. Nevertheless, they look like new.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/cmocorporateboots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/cmocorporateboots.rsi
