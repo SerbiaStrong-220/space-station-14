@@ -1,32 +1,9 @@
 - type: entity
   parent: BasePlushie
   id: PlushieMigo
-  name: Plushie migo
-  description: Not a single youkai will pass by the lazy gaze of this plush.
+  name: migo plushie
+  description: ЧАВО!?
   components:
   - type: Sprite
     sprite: SS220/Objects/Fun/migo.rsi
     state: migo-plushie
-  - type: EmitSoundOnUse
-    sound:
-      path: /Audio/SS220/Effects/fumo/fumo2.ogg
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/SS220/Effects/fumo/fumocollide.ogg
-  - type: EmitSoundOnCollide
-    sound:
-      path: /Audio/SS220/Effects/fumo/fumocollide.ogg
-  - type: EmitSoundOnActivate
-    sound:
-      path: /Audio/SS220/Effects/fumo/fumo2.ogg
-  - type: EmitSoundOnTrigger
-    sound:
-      path: /Audio/SS220/Effects/fumo/fumo2.ogg
-  - type: Food
-    requiresSpecialDigestion: true
-    useSound:
-      path: /Audio/SS220/Effects/fumo/fumocollide.ogg
-  - type: MeleeWeapon
-    wideAnimationRotation: 180
-    soundHit:
-      collection: ToySqueak
