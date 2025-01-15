@@ -102,10 +102,6 @@
           prob: 0.2
         - id: PlushieSnake
           prob: 0.2
-          #SS220-PlushieMiGo-begin
-        - id: PlushieMigo
-          prob: 0.01
-          #SS220-PlushieMiGo-end
         - id: ClothingShoesSkates
           prob: 0.1
         - id: ClothingHandsGlovesColorYellow
