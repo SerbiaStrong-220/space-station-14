@@ -88,3 +88,15 @@
     sprite: SS220/Clothing/Eyes/blueshield_tactic_glasses.rsi
   - type: Clothing
     sprite: SS220/Clothing/Eyes/blueshield_tactic_glasses.rsi
+
+- type: entity
+  parent: [ClothingEyesBase, ShowMedicalIcons]
+  id: ClothingEyesCMOCorporate
+  name: corporate glasses of chief medical officer
+  description: The dream of one head doctor with -3 in both eyes, later became a ubiquitous phenomenon. Comfortable and stylish.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/cmocorporate_glasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/cmocorporate_glasses.rsi
