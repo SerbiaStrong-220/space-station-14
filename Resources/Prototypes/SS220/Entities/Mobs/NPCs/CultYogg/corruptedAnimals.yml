@@ -737,3 +737,14 @@
       0: Alive
       100: Critical
       120: Dead
+  - type: Thirst
+    startingThirst: 25
+    thresholds:
+      Okay: 25
+      Dead: 0
+    baseDecayRate: 0.000001
+  - type: Hunger
+    thresholds:
+      Okay: 25
+      Dead: 0
+    baseDecayRate: 0.000001
