@@ -10,6 +10,5 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/SS220/CultYogg/migo_astral_in.ogg
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/SS220/CultYogg/migo_astral_out.ogg
+  - type: UseDelay
+    delay: 5.0
