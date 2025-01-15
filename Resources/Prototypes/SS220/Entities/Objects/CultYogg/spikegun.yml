@@ -12,7 +12,7 @@
     - type: Gun
       soundGunshot: /Audio/SS220/Weapons/Guns/CultYogg/spikegun_shot.ogg
       soundEmpty: null
-      fireRate: 20
+      fireRate: 17
       selectedMode: SemiAuto
       availableModes:
       - SemiAuto
@@ -28,7 +28,7 @@
       size: Ginormous
     - type: Appearance
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 1.5
+      rechargeCooldown: 2.5
       rechargeSound: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
     - type: GenericVisualizer
       visuals:
