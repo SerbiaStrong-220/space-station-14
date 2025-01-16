@@ -203,6 +203,7 @@ public sealed class PaperSystem : EntitySystem
 
     public void SetContent(Entity<PaperComponent> entity, string content)
     {
+        entity.Comp.Content = content;
         Dirty(entity);
         UpdateUserInterface(entity);
 
