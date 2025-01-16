@@ -52,6 +52,8 @@ public sealed partial class DocumentHelperWindow : DefaultWindow
                     Orientation = BoxContainer.LayoutOrientation.Horizontal,
                     VerticalAlignment = VAlignment.Center,
                 };
+
+                OptionsContainer.AddChild(container);
             }
 
             var label = new Label
@@ -74,8 +76,6 @@ public sealed partial class DocumentHelperWindow : DefaultWindow
                 buttonsContainer.AddChild(button);
             }
             container.AddChild(buttonsContainer);
-
-            OptionsContainer.AddChild(container);
 
             _optionContainer.Add(option, container);
         }
