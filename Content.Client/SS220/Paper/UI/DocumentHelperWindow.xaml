@@ -2,7 +2,5 @@
                Title="{Loc 'document-helper-title'}"
                MinSize="280 240"
                SetSize="280 240">
-    <BoxContainer Orientation="Vertical">
-        <BoxContainer Name="OptionsContainer" Orientation="Vertical"/>
-    </BoxContainer>
+    <BoxContainer Name="OptionsContainer" Orientation="Vertical"/>
 </DefaultWindow>

@@ -30,7 +30,7 @@ public sealed partial class DocumentHelperSystem : SharedDocumentHelperSystem
                 values = values.Union(_stationSystem.GetStationNames().Select(x => x.Name)).ToList();
                 break;
             default:
-                base.GetValuesByOption(option, uid);
+                values = base.GetValuesByOption(option, uid);
                 break;
         }
 
