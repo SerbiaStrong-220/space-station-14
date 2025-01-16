@@ -214,7 +214,7 @@
   id: cargoLotteryCash
   name: лотерея V&L
   icon: #SS220 fix_cargo begin
-    sprite: SS220/Objects/Fun/Lottery.rsi
+    sprite: SS220/Objects/Fun/lottery.rsi
     state: icon
   #SS220 fix_cargo end
   product: LotteryCash
@@ -243,4 +243,4 @@
   cost: 45000
   category: cargoproduct-category-name-fun
   group: market
-#SS220 Lottery end 
+#SS220 Lottery end

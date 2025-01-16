@@ -53,8 +53,8 @@
       - id: ClothingHeadMirror
       - id: ClothingEyesGlasses
       - id: ClothingOuterWinterCMO
-      - id: ClothingUniformJumpsuitCMOCorporate #SS220-CMOCorporate
-      - id: ClothingUniformJumpskirtCMOCorporate #SS220-CMOCorporate
+#      - id: ClothingUniformJumpsuitCMOCorporate #SS220-CMOCorporate remove only in loadout
+#      - id: ClothingUniformJumpskirtCMOCorporate #SS220-CMOCorporate remove only in loadout
       - id: ClothingOuterCoatCMOFormalDress #SS220-FormalDress
 #     - id: ClothingCloakCmo #SS220-cloak-dress-tweak
 

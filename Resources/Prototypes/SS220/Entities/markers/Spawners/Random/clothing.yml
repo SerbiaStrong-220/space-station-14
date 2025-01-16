@@ -11,7 +11,7 @@
   - type: Sprite
     layers:
       - state: red
-      - sprite: SS220/Clothing/Neck/Cloaks/FloppaCloak.rsi
+      - sprite: SS220/Clothing/Neck/Cloaks/floppa.rsi
         state: icon
   - type: RandomSpawner
     prototypes:

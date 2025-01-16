@@ -8,7 +8,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Grenades/usspnade.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Grenades/usspnade.rsi
   - type: OnUseTimerTrigger
     delay: 5
   - type: ExplodeOnTrigger
