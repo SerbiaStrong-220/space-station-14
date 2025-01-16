@@ -30,7 +30,7 @@
         </PanelContainer>
         <!-- Bottom buttons for editing -->
         <BoxContainer Name="EditButtons" Orientation="Horizontal" HorizontalAlignment="Right" Margin="6">
-            <Button Name="DocumentHelperButton" Text="Loc document-helper" /> <!-- SS220 Document helper -->
+            <Button Name="DocumentHelperButton" Text="{Loc 'document-helper-button'}" /> <!-- SS220 Document helper -->
             <Button Name="SaveButton" />
         </BoxContainer>
     </BoxContainer>

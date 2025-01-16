@@ -21,8 +21,6 @@ namespace Content.Client.Paper.UI
         [Dependency] private readonly IInputManager _inputManager = default!;
         [Dependency] private readonly IResourceCache _resCache = default!;
 
-        private DocumentHelperPopup? _documentHelper; // SS220 Document helper
-
         private static Color DefaultTextColor = new(25, 25, 25);
 
         // <summary>
@@ -52,6 +50,7 @@ namespace Content.Client.Paper.UI
         };
 
         public event Action<string>? OnSaved;
+        public event Action? OnDocumentHelperButtonPressed; // SS220 Document helper
 
         private int _MaxInputLength = -1;
         public int MaxInputLength
@@ -105,18 +104,7 @@ namespace Content.Client.Paper.UI
             SaveButton.Text = Loc.GetString("paper-ui-save-button",
                 ("keybind", _inputManager.GetKeyFunctionButtonString(EngineKeyFunctions.MultilineTextSubmit)));
 
-            // SS220 Document helper begin
-            DocumentHelperButton.OnPressed += _ =>
-            {
-                _documentHelper = new DocumentHelperPopup();
-                _documentHelper.OnButtonPressed += args =>
-                {
-                    Input.InsertAtCursor(args);
-                };
-
-                _documentHelper.OpenCenteredRight();
-            };
-            // SS220 Document helper end
+            DocumentHelperButton.OnPressed += _ => OnDocumentHelperButtonPressed?.Invoke(); // SS220 Document helper
         }
 
         /// <summary>
@@ -363,10 +351,9 @@ namespace Content.Client.Paper.UI
         }
 
         // SS220 Document helper begin
-        public override void Close()
+        public void InsertAtCursor(string value)
         {
-            _documentHelper?.Close();
-            base.Close();
+            Input.InsertAtCursor(value);
         }
         // SS220 Document helper end
     }
