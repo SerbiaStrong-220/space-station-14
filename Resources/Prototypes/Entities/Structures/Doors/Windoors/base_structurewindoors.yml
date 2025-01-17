@@ -194,7 +194,7 @@
       visible: false
       map: [ "enum.ElectrifiedLayers.HUD" ]
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic #SS220-Fix-secure-windoor
     damageModifierSet: RGlass
   - type: Destructible
     thresholds:
