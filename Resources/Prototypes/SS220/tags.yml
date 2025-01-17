@@ -185,3 +185,20 @@
 # SS220 Cult
 - type: Tag
   id: Omnivorous
+
+# debug-uplink-fix
+- type: Tag
+  id: DebugUplink
+
+#SS220 GateDungeon
+- type: Tag
+  id: StartDungeon
+
+- type: Tag
+  id: MediumDungeon
+
+- type: Tag
+  id: EndDungeon
+
+- type: Tag
+  id: EndToStationDungeon
