@@ -8,9 +8,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_admiral.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_admiral.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_admiral.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_admiral.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitIronAdmiral
 
@@ -23,9 +23,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_ce.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_ce.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_ce.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_ce.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitIronCE
 
@@ -38,9 +38,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_cmo.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_cmo.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_cmo.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_cmo.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitIronCMO
 
@@ -53,9 +53,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_soldier.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_soldier.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_soldier.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_soldier.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitIronSoldier
 
@@ -68,9 +68,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_med.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_med.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_med.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_med.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitIronMed
 
@@ -83,9 +83,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_heavy.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_heavy.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_heavy.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_heavy.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitIronHeavy
 
@@ -98,8 +98,8 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_heavy_2.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_heavy_2.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/iron_heavy_2.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_heavy_2.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitIronHeavy2

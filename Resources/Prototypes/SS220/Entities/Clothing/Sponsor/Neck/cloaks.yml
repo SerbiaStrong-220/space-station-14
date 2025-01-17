@@ -117,7 +117,7 @@
   suffix: Sponsor # А точно ли он спонсор?
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Cloaks/FloppaCloak.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/floppa.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatFloppa
     requiredSlot:

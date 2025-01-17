@@ -94,7 +94,7 @@
   id: AtmosphericTech
   name: research-technology-atmospheric-tech
   icon:
-    sprite: Structures/Piping/Atmospherics/thermomachine.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/thermomachine.rsi #ss220-engineering-update-thermomachine
     state: freezerOff
   discipline: Industrial
   tier: 1
