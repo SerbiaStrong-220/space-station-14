@@ -23,6 +23,7 @@ public sealed class PaperSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedDocumentHelperSystem _documentHelper = default!;
 
     public override void Initialize()
     {
@@ -203,7 +204,10 @@ public sealed class PaperSystem : EntitySystem
 
     public void SetContent(Entity<PaperComponent> entity, string content)
     {
-        entity.Comp.Content = content;
+        // SS220 Add document tags begin
+        //entity.Comp.Content = content;
+        entity.Comp.Content = _documentHelper.ParseTags(entity, content);
+        // SS220 Add document tags end
         Dirty(entity);
         UpdateUserInterface(entity);
 

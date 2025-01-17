@@ -2,12 +2,14 @@
 using Content.Shared.Access.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
+using Content.Shared.Paper;
 using Content.Shared.PDA;
 using Content.Shared.SS220.CCVars;
 using Robust.Shared.Configuration;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Content.Shared.SS220.Paper;
 
@@ -19,6 +21,11 @@ public abstract partial class SharedDocumentHelperSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
 
     private int _gameYearDelta;
+    private readonly Dictionary<string, DocumentHelperOptions> _allowedTags = new()
+    {
+        {"%date", DocumentHelperOptions.Date},
+        {"%time", DocumentHelperOptions.Time},
+    };
 
     public override void Initialize()
     {
@@ -26,8 +33,28 @@ public abstract partial class SharedDocumentHelperSystem : EntitySystem
         _gameYearDelta = _configurationManager.GetCVar(CCVars220.GameYearDelta);
     }
 
+    #region Paper
+    public virtual string ParseTags(Entity<PaperComponent> ent, string content)
+    {
+        // GenerateRegexAttribute cause errors on the client side and doesn't work
+        return Regex.Replace(content, "\\u0025\\b(\\w+)\\b", match =>
+        {
+            var word = match.Value.ToLower();
+            if (!_allowedTags.TryGetValue(word, out var replacedData))
+                return word;
+
+            return replacedData switch
+            {
+                DocumentHelperOptions.Date => GetGameDate(),
+                DocumentHelperOptions.Time => GetStationTime(),
+                _ => word
+            };
+        });
+    }
+    #endregion
+
     #region Date
-    public string GetCurrentDate()
+    public string GetGameDate()
     {
         var day = DateTime.UtcNow.AddHours(3).Day;
         var month = DateTime.UtcNow.AddHours(3).Month;
@@ -145,7 +172,7 @@ public abstract partial class SharedDocumentHelperSystem : EntitySystem
         switch (option)
         {
             case DocumentHelperOptions.Date:
-                values.Add(GetCurrentDate());
+                values.Add(GetGameDate());
                 break;
             case DocumentHelperOptions.Time:
                 values.Add(GetStationTime());
