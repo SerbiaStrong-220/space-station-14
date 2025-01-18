@@ -5,7 +5,6 @@ using Content.Shared.Hands.EntitySystems;
 using Robust.Shared.Random;
 using static Content.Shared.Storage.EntitySpawnCollection;
 using Content.Shared.Clothing.Components;
-using Robust.Shared.Containers;
 
 namespace Content.Server.SS220.Clothing
 {
@@ -19,13 +18,10 @@ namespace Content.Server.SS220.Clothing
         {
             base.Initialize();
 
-            SubscribeLocalEvent<SpawnOnUnequippedComponent, GotUnequippedEvent>(OnUseInHand);
-
+            SubscribeLocalEvent<SpawnOnUnequippedComponent, GotUnequippedEvent>(OnGotUnequipped);
         }
-        private void OnUseInHand(Entity<SpawnOnUnequippedComponent> uid, ref GotUnequippedEvent args)
+        private void OnGotUnequipped(Entity<SpawnOnUnequippedComponent> uid, ref GotUnequippedEvent args)
         {
-            // if (args.Handled)
-            //     return;
 
             // If starting with zero or less uses, this component is a no-op
             if (!TryComp<ClothingComponent>(uid, out var clothComp))
@@ -51,15 +47,10 @@ namespace Content.Server.SS220.Clothing
 
             // Delete entity only if component was successfully used
             if (uid.Comp.Uses <= 0)
-            {
-                //args.Handled = true;
-                EntityManager.DeleteEntity(uid);
-            }
+                EntityManager.QueueDeleteEntity(uid);
 
             if (entityToPlaceInHands != null)
-            {
                 _hands.PickupOrDrop(args.Equipee, entityToPlaceInHands.Value);
-            }
         }
     }
 }
