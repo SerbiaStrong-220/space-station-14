@@ -47,6 +47,11 @@
   id: MatchstickSpent
   suffix: spent
   components:
+    #SS220-FixMatchBox-begin
+  - type: Tag
+    tags:
+    - MatchstickSpent
+    #SS220-FixMatchBox-end
   - type: Sprite
     layers:
       - state: match_burnt
