@@ -4,12 +4,19 @@
   name: LubroShroom
   parent: [FoodProduceBase, ClothingShoesBase, CultYoggRestrictedItem]
   id: FoodLubroShroomCult
-  description: Mysterious substance that calls for absorption and gag reflex.
+  description: We didn't understand how to use it, so we just wear it on our feet
   components:
   - type: Food
   - type: Clothing
     sprite: SS220/Objects/CultYogg/lurbo_shroom.rsi
+    equipSound: /Audio/SS220/CultYogg/lurbo_kill.ogg
+    unequipSound: /Audio/SS220/CultYogg/lurbo_unequip.ogg
+    equipDelay: 1
+    unequipDelay: 1
   - type: NoSlip
+  - type: SpawnOnUnequipped
+    items:
+      - id: FoodLubroShroomCultDead
   - type: FlavorProfile
     flavors:
       - menacing
@@ -36,7 +43,7 @@
 - type: entity
   parent: SeedBase
   name: packet of LubroShroom spores
-  description: "The iconic, extremely yammy purposes."
+  description: We didn't understand how to use it, so we just wear it on our feet
   id: LubroShroomSeeds
   components:
     - type: Seed
@@ -54,7 +61,7 @@
   productPrototypes:
     - FoodLubroShroomCult
   lifespan: 55
-  maturation: 12
+  maturation: 40
   production: 2
   yield: 1
   potency: 2
@@ -68,3 +75,31 @@
       Min: 1
       Max: 1
       PotencyDivisor: 1
+
+- type: entity
+  name: LubroShroomDead
+  parent: FoodBase
+  id: FoodLubroShroomCultDead
+  description: Now it's dead and useless.
+  components:
+  - type: Food
+  - type: FlavorProfile
+    flavors:
+      - menacing
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 2.0
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: Water
+          Quantity: 1
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/lurbo_shroom_dead.rsi
+    state: icon
+  - type: Extractable
+    grindableSolutionName: food
+  - type: Tag
+    tags:
+    - Omnivorous
