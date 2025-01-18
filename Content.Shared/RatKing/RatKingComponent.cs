@@ -99,6 +99,12 @@ public sealed partial class RatKingComponent : Component
         { RatKingOrderType.CheeseEm, "RatKingCommandCheeseEm" },
         { RatKingOrderType.Loose, "RatKingCommandLoose" }
     };
+
+    [ViewVariables]
+    public EntityUid? ActionRummageEntity;
+
+    [DataField("actionRummage", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    public string ActionRummage = "ActionRatKingRummage";
 }
 
 [Serializable, NetSerializable]

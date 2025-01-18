@@ -37,6 +37,9 @@ public abstract class SharedRatKingSystem : EntitySystem
 
         SubscribeLocalEvent<RatKingRummageableComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerb);
         SubscribeLocalEvent<RatKingRummageableComponent, RatKingRummageDoAfterEvent>(OnDoAfterComplete);
+        //SS220 stuff here
+        SubscribeLocalEvent<RatKingComponent, RatKingRummageActionEvent>(OnRummageAction);
+        //SS220 curse is OVER
     }
 
     private void OnStartup(EntityUid uid, RatKingComponent component, ComponentStartup args)
@@ -50,6 +53,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         _action.AddAction(uid, ref component.ActionOrderFollowEntity, component.ActionOrderFollow, component: comp);
         _action.AddAction(uid, ref component.ActionOrderCheeseEmEntity, component.ActionOrderCheeseEm, component: comp);
         _action.AddAction(uid, ref component.ActionOrderLooseEntity, component.ActionOrderLoose, component: comp);
+        _action.AddAction(uid, ref component.ActionRummageEntity, component.ActionRummage, component: comp); //SS220 CURSED CHANGE
 
         UpdateActions(uid, component);
     }
@@ -71,6 +75,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         _action.RemoveAction(uid, component.ActionOrderFollowEntity, comp);
         _action.RemoveAction(uid, component.ActionOrderCheeseEmEntity, comp);
         _action.RemoveAction(uid, component.ActionOrderLooseEntity, comp);
+        _action.RemoveAction(uid, component.ActionRummageEntity, comp); //SS220 action
     }
 
     private void OnOrderAction(EntityUid uid, RatKingComponent component, RatKingOrderActionEvent args)
@@ -142,6 +147,25 @@ public abstract class SharedRatKingSystem : EntitySystem
             }
         });
     }
+
+    //SS220 RatKing Changes start here
+    private void OnRummageAction(Entity<RatKingComponent> entity, ref RatKingRummageActionEvent args)
+    {
+        if (args.Handled || !TryComp<RatKingRummageableComponent>(args.Target, out var rumComp) || rumComp.Looted)
+            return;
+        
+        var doAfter = new DoAfterArgs(EntityManager, entity, rumComp.RummageDuration,
+            new RatKingRummageDoAfterEvent(), args.Target, args.Target)
+        {
+            BlockDuplicate = true,
+            BreakOnDamage = true,
+            BreakOnMove = true,
+            DistanceThreshold = 2f
+        };
+        _doAfter.TryStartDoAfter(doAfter);
+        args.Handled = true;
+    }
+    //SS220 Curse is OVER
 
     private void OnDoAfterComplete(EntityUid uid, RatKingRummageableComponent component, RatKingRummageDoAfterEvent args)
     {

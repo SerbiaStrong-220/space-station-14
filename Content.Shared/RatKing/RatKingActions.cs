@@ -20,3 +20,9 @@ public sealed partial class RatKingOrderActionEvent : InstantActionEvent
     [DataField("type")]
     public RatKingOrderType Type;
 }
+
+//SS220 RatKing starts
+public sealed partial class RatKingRummageActionEvent : EntityTargetActionEvent 
+{
+}
+//SS220 Curse is over
