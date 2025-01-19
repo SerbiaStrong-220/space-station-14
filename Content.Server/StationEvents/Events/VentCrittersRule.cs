@@ -24,7 +24,7 @@ public sealed class VentCrittersRule : StationEventSystem<VentCrittersRuleCompon
             return;
         }
 
-        var locations = EntityQueryEnumerator<VentCritterSpawnLocationComponent, TransformComponent>();
+        var locations = EntityQueryEnumerator<VentCritterSpawnLocationComponent, TransformComponent>(); //There it IS!!!
         var validLocations = new List<EntityCoordinates>();
         while (locations.MoveNext(out _, out _, out var transform))
         {

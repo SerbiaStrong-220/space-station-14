@@ -296,8 +296,8 @@
   id: RatKingLoot
   weights:
   # SS220 weight changes begin
-    RandomSpawner100: 30
-    FoodCheeseSlice: 50
+    RandomSpawner100: 40
+    FoodCheeseSlice: 40
     FoodCheese: 15
     FoodCakeCheese: 5
   # Official weights
@@ -314,7 +314,7 @@
   - type: InstantAction
     useDelay: 4
     icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220 resprited
       state: ratKingArmy
     event: !type:RatKingRaiseArmyActionEvent
 
@@ -326,7 +326,7 @@
   - type: InstantAction
     useDelay: 6
     icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220 resprited
       state: ratKingDomain
     event: !type:RatKingDomainActionEvent
 
