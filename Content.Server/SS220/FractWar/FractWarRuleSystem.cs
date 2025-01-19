@@ -15,6 +15,7 @@ public sealed partial class FractWarRuleSystem : GameRuleSystem<FractWarRuleComp
         base.AppendRoundEndText(uid, component, gameRule, ref args);
 
         args.AddLine(Loc.GetString("fractwar-round-end-score-points"));
+        args.AddLine("");
 
         _eventCapturePoint.RefreshWP(component);
         var fractionsWinPoints = component.FractionsWP;
@@ -22,17 +23,46 @@ public sealed partial class FractWarRuleSystem : GameRuleSystem<FractWarRuleComp
         if (fractionsWinPoints.Count <= 0)
             return;
 
-        fractionsWinPoints = fractionsWinPoints.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+        var finalWinPoints = fractionsWinPoints.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => (int)pair.Value);
 
-        args.AddLine("");
-        foreach (var (fraction, winPoints) in fractionsWinPoints)
+        List<string> winners = [];
+        var largestWP = 0;
+        foreach (var (fraction, winPoints) in finalWinPoints)
         {
-            args.AddLine(Loc.GetString("fractwar-round-end-fraction-points", ("fraction", Loc.GetString(fraction)), ("points", (int)winPoints)));
-        }
+            args.AddLine(Loc.GetString("fractwar-round-end-fraction-points", ("fraction", Loc.GetString(fraction)), ("points", winPoints)));
 
-        //Sort by value
+            if (winPoints > largestWP)
+            {
+                winners.Clear();
+                winners.Add(fraction);
+                largestWP = winPoints;
+            }
+            else if (winPoints == largestWP)
+            {
+                winners.Add(fraction);
+            }
+        }
         args.AddLine("");
-        args.AddLine(Loc.GetString("fractwar-round-end-winner", ("fraction", Loc.GetString(fractionsWinPoints.First().Key))));
+
+        if (winners.Count > 1)
+        {
+            var winnersStr = "";
+            var lastWinner = Loc.GetString(winners.Last());
+
+            for (var i = 0; winners.Count > i + 1; i++)
+            {
+                var currentWinner = Loc.GetString(winners[i]);
+                winnersStr += winners.Count != i + 2
+                    ? currentWinner + ","
+                    : currentWinner;
+            }
+
+            args.AddLine(Loc.GetString("fractwar-round-end-draw", ("fractions", winnersStr), ("lastFraction", lastWinner)));
+        }
+        else
+        {
+            args.AddLine(Loc.GetString("fractwar-round-end-winner", ("fraction", Loc.GetString(winners.First()))));
+        }
     }
 
     public FractWarRuleComponent? GetActiveGameRule()

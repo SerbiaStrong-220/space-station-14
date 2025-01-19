@@ -238,7 +238,7 @@ public sealed class EventCapturePointSystem : EntitySystem
 
         foreach (var (fraction, retTime) in comp.PointRetentionTime)
         {
-            var wp = retTime / comp.RetentionTimeForWP;
+            var wp = comp.WinPoints * (retTime / comp.RetentionTimeForWP);
 
             if (!gameRule.FractionsWP.TryAdd(fraction, wp))
                 gameRule.FractionsWP[fraction] += wp;
