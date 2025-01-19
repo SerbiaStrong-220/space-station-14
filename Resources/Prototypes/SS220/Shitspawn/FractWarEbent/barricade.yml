@@ -7,7 +7,7 @@
   - type: Item
     size: Large
   - type: Sprite
-    sprite: SS220/Structures/Barricades/fract_war_barricade.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Structures/Barricades/fract_war_barricade.rsi
     state: icon
   - type: Appearance
   - type: PlacerItem
@@ -30,7 +30,7 @@
   - type: Climbable
   - type: Sprite
     drawdepth: Objects
-    sprite: SS220/Structures/Barricades/fract_war_barricade.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Structures/Barricades/fract_war_barricade.rsi
     state: stand_up
   - type: Fixtures
     fixtures:
@@ -69,7 +69,7 @@
   components:
   - type: InteractionOutline
   - type: Sprite
-    sprite: SS220/Structures/Barricades/fract_war_barricade.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Structures/Barricades/fract_war_barricade.rsi
     drawdepth: Objects
     noRot: false
     state: base
@@ -106,7 +106,7 @@
   suffix: Ebent, Shitspawn, FractWar, Ussp
   components:
   - type: Sprite
-    sprite: SS220/Structures/Barricades/fract_war_barricade_ussp.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Structures/Barricades/fract_war_barricade_ussp.rsi
   - type: PlacerItem
     constructionGhostProto: FractWarBarricadeUssp
     spawnProto: FractWarBarricadeSpawnUssp
@@ -117,7 +117,7 @@
   suffix: Ebent, Shitspawn, FractWar, Ussp
   components:
   - type: Sprite
-    sprite: SS220/Structures/Barricades/fract_war_barricade_ussp.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Structures/Barricades/fract_war_barricade_ussp.rsi
   - type: SpawnOnDespawn
     prototype: FractWarBarricadeUssp
     inheritRotation: true
@@ -128,4 +128,4 @@
   suffix: Ebent, Shitspawn, FractWar, Ussp
   components:
   - type: Sprite
-    sprite: SS220/Structures/Barricades/fract_war_barricade_ussp.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Structures/Barricades/fract_war_barricade_ussp.rsi
