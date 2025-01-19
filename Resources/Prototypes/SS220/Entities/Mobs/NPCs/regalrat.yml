@@ -14,6 +14,6 @@
   - type: EntityTargetAction
     useDelay: 3
     icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
-      state: ratKingDomain
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi
+      state: rummage
     event: !type:RatKingRummageActionEvent
