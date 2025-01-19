@@ -7,7 +7,7 @@
   description: Did you know that Central Committee officers like to play baseball with the heads of the incompetent management of their assets?
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/ntbaton.rsi
+    sprite: SS220/Objects/Weapons/Melee/Stunning/ntbaton.rsi
     layers:
     - state: telescope_off
       map: [ "enum.ToggleVisuals.Layer" ]
@@ -34,7 +34,7 @@
         Blunt: 0
   - type: Item
     size: Normal
-    sprite: SS220/Objects/Weapons/Melee/ntbaton.rsi
+    sprite: SS220/Objects/Weapons/Melee/Stunning/ntbaton.rsi
   - type: UseDelay
     delay: 1.0
   - type: DisarmMalus

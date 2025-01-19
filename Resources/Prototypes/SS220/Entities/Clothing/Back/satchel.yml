@@ -8,7 +8,7 @@
   suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Back/Satchels/whitecapsatchel.rsi
+    sprite: SS220/Clothing/Back/Satchels/captain_white.rsi
 
 - type: entity
   parent: ClothingBackpackSatchel

@@ -1,0 +1,14 @@
+- type: entity
+  parent: BasePlushie
+  id: PlushieMigo
+  name: migo plushie
+  description: And this is the child of the Dark God?
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/migo.rsi
+    state: migo-plushie
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/SS220/CultYogg/migo_astral_in.ogg
+  - type: UseDelay
+    delay: 5.0

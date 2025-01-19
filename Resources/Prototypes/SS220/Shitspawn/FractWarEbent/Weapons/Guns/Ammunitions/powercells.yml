@@ -15,7 +15,7 @@
     startingCharge: 2500
   - type: PowerCell
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/ert_magblaster.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/Ammunition/Magazine/ert_magblaster.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: base

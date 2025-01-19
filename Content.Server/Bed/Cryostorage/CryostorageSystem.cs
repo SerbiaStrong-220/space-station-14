@@ -31,6 +31,7 @@ using Content.Server.Forensics;
 using Robust.Shared.Utility;
 using Content.Shared.Roles; // SS220 Cryostorage ghost role fix
 using Robust.Shared.Prototypes; // SS220 Cryostorage ghost role fix
+using Content.Server.SS220.Bed.Cryostorage; //SS220 Cult_hotfix_4
 
 namespace Content.Server.Bed.Cryostorage;
 
@@ -222,6 +223,10 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         }
 
         comp.AllowReEnteringBody = false;
+        //SS220 start Cult_hotfix_4
+        var ev = new BeingCryoDeletedEvent();
+        RaiseLocalEvent(ent, ref ev);
+        //SS220 end Cult_hotfix_4
         _transform.SetParent(ent, PausedMap.Value);
         cryostorageComponent.StoredPlayers.Add(ent);
         Dirty(ent, comp);

@@ -49,9 +49,9 @@
   suffix: Blue Shield
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Shoes/Boots/jackboots_blueshield.rsi
+    sprite: SS220/Clothing/Shoes/Boots/blueshield_jackboots.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Shoes/Boots/jackboots_blueshield.rsi
+    sprite: SS220/Clothing/Shoes/Boots/blueshield_jackboots.rsi
 
 - type: entity
   parent: ClothingShoesBootsBlueShieldJack
@@ -70,9 +70,9 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Shoes/Boots/bardboots.rsi
+    sprite: SS220/Clothing/Shoes/Boots/musician_bard.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Shoes/Boots/bardboots.rsi
+    sprite: SS220/Clothing/Shoes/Boots/musician_bard.rsi
 
 # Уборщик
 
@@ -124,3 +124,15 @@
         type: GasTankBoundUserInterface
   - type: Jetpack
     moleUsage: 0.00085
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesCMOCorporate
+  name: corporate shoes of the chief medical officer
+  description: There was sweat and blood, literally. Nevertheless, they look like new.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/cmocorporateboots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/cmocorporateboots.rsi

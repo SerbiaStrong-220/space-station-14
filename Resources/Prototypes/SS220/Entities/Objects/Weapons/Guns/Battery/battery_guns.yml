@@ -7,7 +7,7 @@
   description: "An innovative weapon that combines advanced technology and a unique design. It has two shooting modes: normal and enhanced."
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/synergistic_enetgy_gun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/synergistic_enetgy_gun.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -17,7 +17,7 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Guns/synergistic_enetgy_gun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/synergistic_enetgy_gun.rsi
   - type: Gun
   - type: HitscanBatteryAmmoProvider
     proto: RedLightLaser
@@ -140,7 +140,7 @@
   suffix: Death Squad
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/pulse_shotgun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_shotgun.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -148,7 +148,7 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Guns/pulse_shotgun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/pulse_shotgun.rsi
   - type: Battery
     maxCharge: 400
     startingCharge: 400

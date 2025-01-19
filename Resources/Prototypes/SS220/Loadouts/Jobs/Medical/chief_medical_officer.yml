@@ -23,3 +23,21 @@
     proto: CMOCorporate
   equipment:
     jumpsuit: ClothingUniformJumpskirtCMOCorporate
+
+# Glasses
+- type: loadout
+  id: CMOCorpGlasses
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CMOCorporate
+  equipment:
+    eyes: ClothingEyesCMOCorporate
+
+# Shoes
+- type: loadout
+  id: CMOCorpShoes
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CMOCorporate
+  equipment:
+    eyes: ClothingShoesCMOCorporate

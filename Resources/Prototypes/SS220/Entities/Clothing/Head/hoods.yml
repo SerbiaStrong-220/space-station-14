@@ -56,9 +56,9 @@
   description: Maximum piety in this star system.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hoods/chaplainwhite.rsi
+    sprite: SS220/Clothing/Head/Hoods/chaplain_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hoods/chaplainwhite.rsi
+    sprite: SS220/Clothing/Head/Hoods/chaplain_white.rsi
   - type: Tag
     tags:
     - HamsterWearable
@@ -74,9 +74,9 @@
   description: Капюшон.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/HeartHood.rsi
+    sprite: SS220/Clothing/Head/Hoods/heart.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/HeartHood.rsi
+    sprite: SS220/Clothing/Head/Hoods/heart.rsi
 
 # SS220 wintercoats hoods start
 - type: entity
