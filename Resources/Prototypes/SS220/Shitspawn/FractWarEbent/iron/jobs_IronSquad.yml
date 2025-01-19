@@ -48,6 +48,8 @@
       - id: EnergySwordDouble
       - id: DnaScramblerImplanter
       - id: ExGrenade
+      - id: GlowstickRed
+        amount: 2
 
 - type: startingGear
   id: EbentIronSquadLeaderGear
@@ -146,6 +148,8 @@
       - id: EnergySword
       - id: DnaScramblerImplanter
       - id: ExGrenade
+      - id: GlowstickRed
+        amount: 2
 
 - type: startingGear
   id: EbentIronSquadEngineerGear
@@ -250,6 +254,8 @@
       - id: EnergySword
       - id: DnaScramblerImplanter
       - id: ExGrenade
+      - id: GlowstickRed
+        amount: 2
 
 - type: startingGear
   id: EbentIronSquadCorpsmanGear
@@ -367,6 +373,8 @@
       - id: EnergySword
       - id: DnaScramblerImplanter
       - id: ExGrenade
+      - id: GlowstickRed
+        amount: 2
 
 - type: startingGear
   id: EbentIronSquadCMOGear
@@ -466,6 +474,8 @@
       - id: EnergySword
       - id: DnaScramblerImplanter
       - id: ExGrenade
+      - id: GlowstickRed
+        amount: 2
 
 - type: startingGear
   id: EbentIronSquadTrooperGear

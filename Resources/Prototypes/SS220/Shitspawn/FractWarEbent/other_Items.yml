@@ -187,7 +187,7 @@
   parent: ClothingBackpackDuffelMilitary
   id: ClothingBackpackFractWarExGrenadeSet
   suffix: Shitspawn, Ebent, FractWar
-  name: набор смешанных гранат
+  name: набор осколочных гранат
   description: Большой вещмешок для хранения любого армейского снаряжения.
   components:
    - type: StorageFill
@@ -206,3 +206,22 @@
      contents:
       - id: SmokeGrenade
         amount: 20
+
+- type: entity
+  parent: MedkitAdvanced
+  id: MedkitAutoInjectorFractWar
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Storage
+    grid:
+    - 0,0,6,1
+  - type: StorageFill
+    contents:
+      - id: PyraAutoInjector
+        amount: 4
+      - id: CombatMedipen
+        amount: 3
+      - id: PunctAutoInjector
+        amount: 4
+      - id: Stimpack
+        amount: 3

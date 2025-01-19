@@ -244,6 +244,9 @@
     - id: Stimpack
     - id: DnaScramblerImplanter
     - id: ExGrenade
+    - id: WeaponFlareGun
+    - id: ShellShotgunFlare
+      amount: 2
 
 - type: entity
   name: рюкзак СССП

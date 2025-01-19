@@ -135,3 +135,16 @@
     contents:
     - id: WeaponRevolverPythonAP
     - id: Tourniquet
+
+- type: entity
+  name:  red glowstick box
+  parent: BoxCardboard
+  id: BoxGlowstickRed
+  components:
+  - type: StorageFill
+    contents:
+      - id: GlowstickRed
+        amount: 4
+  - type: Sprite
+    layers:
+      - state: box

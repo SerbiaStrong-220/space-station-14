@@ -30,10 +30,6 @@
   parent: BaseGameRule
   id: FractWar
   components:
-  - type: GameRule
-    delay:
-      min: 0
-      max: 0
   - type: LoadMapRule
-    mapPath: /Maps/SS220/EventShuttles/FractWarEbent/NT.yml
+    mapPath: /Maps/SS220/EventMaps/FractWarShuttlesMap.yml
   - type: FractWarRule
