@@ -137,9 +137,9 @@
     - id: Tourniquet
 
 - type: entity
-  name:  red glowstick box
   parent: BoxCardboard
   id: BoxGlowstickRed
+  name: коробка красного химсвета
   components:
   - type: StorageFill
     contents:

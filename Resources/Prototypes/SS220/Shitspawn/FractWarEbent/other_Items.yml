@@ -211,6 +211,8 @@
   parent: MedkitAdvanced
   id: MedkitAutoInjectorFractWar
   suffix: Shitspawn, Ebent, FractWar
+  name: набор автоинжекторов
+  description: Коробка, полная различных автоинжекторов.
   components:
   - type: Storage
     grid:
