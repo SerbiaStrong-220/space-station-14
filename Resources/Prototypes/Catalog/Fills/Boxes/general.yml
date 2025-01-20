@@ -17,6 +17,25 @@
   - type: Tag
     tags:
     - BoxCardboard
+    #SS220 D-D-D-Damageable boxes!!!
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    #SS220 changes end
 
 - type: entity
   name: mousetrap box

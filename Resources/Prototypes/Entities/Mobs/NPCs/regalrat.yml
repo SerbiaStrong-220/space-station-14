@@ -9,6 +9,10 @@
     baseWalkSpeed : 3.00
     baseSprintSpeed : 5.00
   - type: InputMover
+    #SS220 RatKing tail Pull
+  - type: Puller
+    needsHands: false
+    #SS220 changes end here
   - type: MobMover
   - type: HTN
     rootTask:
