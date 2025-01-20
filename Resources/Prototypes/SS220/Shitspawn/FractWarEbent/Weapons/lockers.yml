@@ -38,7 +38,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponPulseCarbine
+    - id: WeaponPulseCarbineFractWar
       amount: 5
 
 #Iron squad

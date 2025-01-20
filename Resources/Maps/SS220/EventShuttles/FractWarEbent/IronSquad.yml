@@ -24,7 +24,6 @@ entities:
       name: SI-NDSP-"Pantelleria"
     - type: Transform
       pos: -0.96845007,1.2623577
-      parent: invalid
     - type: MapGrid
       chunks:
         0,0:

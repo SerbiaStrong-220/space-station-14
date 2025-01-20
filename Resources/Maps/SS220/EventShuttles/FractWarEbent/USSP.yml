@@ -33,7 +33,6 @@ entities:
       name: СССП-БДК-"Бур"
     - type: Transform
       pos: -0.7725687,-1.6382408
-      parent: invalid
     - type: MapGrid
       fTLRange: 1024
       chunks:

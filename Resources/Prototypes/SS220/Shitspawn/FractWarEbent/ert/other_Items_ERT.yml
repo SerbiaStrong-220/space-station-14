@@ -49,6 +49,7 @@
       - id: WeaponPulsePistol
       - id: Stimpack
       - id: Tourniquet
+      - id: PortableRecharger
       - id: Flare
         amount: 2
     - type: ExplosionResistance
