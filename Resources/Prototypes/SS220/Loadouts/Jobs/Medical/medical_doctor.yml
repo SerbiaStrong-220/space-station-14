@@ -9,16 +9,7 @@
       time: 108000 # 30 hrs
 
 - type: loadoutEffectGroup
-  id: ClothingUniformJumpsuitResponsibility
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobMedicalDoctor
-      time: 252000 # 70 hrs
-
-- type: loadoutEffectGroup
-  id: ClothingShoes
+  id: MedicalDoctorResponsibility
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -40,7 +31,7 @@
   id: MedicalDoctorJumpsuitResponsibility
   effects:
   - !type:GroupLoadoutEffect
-    proto: ClothingUniformJumpsuitResponsibility
+    proto: MedicalDoctorResponsibility
   equipment:
     jumpsuit: ClothingUniformJumpsuitResponsibility
 
@@ -81,7 +72,7 @@
   id: MedicalDoctorShoesResponsibility
   effects:
   - !type:GroupLoadoutEffect
-    proto: ClothingShoes
+    proto: MedicalDoctorResponsibility
   equipment:
     shoes: ClothingShoesResponsibility
 
