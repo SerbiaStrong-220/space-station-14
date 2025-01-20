@@ -11,6 +11,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Jobs;
 using Content.Shared.SS220.Contractor;
 using Content.Shared.SSDIndicator;
 using Content.Shared.Store;
@@ -269,12 +270,15 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             if (_roleSystem.MindHasRole<TraitorRoleComponent>(mindId))
                 continue;
 
-            _jobs.MindTryGetJobName(mindId, out var jobName); // && jobName == "JobCaptain" - disable for testing
+            _jobs.MindTryGetJob(mindId, out var jobProto); // && jobName == "JobCaptain" - disable for testing
+
+            if (jobProto == null)
+                continue;
 
             return (GetNetEntity(player),
                 new ContractorContract
                 {
-                    Job = jobName,
+                    Job = jobProto,
                     AmountPositions = GeneratePositionsForTarget(),
                 });
         }
@@ -310,7 +314,10 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             if (ent.Comp.Contracts.ContainsKey(GetNetEntity(player)))
                 continue;
 
-            _jobs.MindTryGetJobName(mindId, out var jobName); // && jobName == "JobCaptain" - disable for testing
+            _jobs.MindTryGetJob(mindId, out var jobProto); // && jobName == "JobCaptain" - disable for testing
+
+            if (jobProto == null)
+                continue;
 
             if (ent.Comp.Contracts.Count == ent.Comp.MaxAvailableContracts)
                 return;
@@ -318,7 +325,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             ent.Comp.Contracts.Add(GetNetEntity(player),
                 new ContractorContract
                 {
-                    Job = jobName,
+                    Job = jobProto,
                     AmountPositions = GeneratePositionsForTarget(),
                 });
         }

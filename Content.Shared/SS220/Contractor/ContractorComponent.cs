@@ -1,5 +1,7 @@
 using Content.Shared.FixedPoint;
+using Content.Shared.Roles;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Contractor;
@@ -30,7 +32,7 @@ public sealed partial class ContractorComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public int Reputation = 0;
+    public int Reputation;
 
     [DataField]
     [AutoNetworkedField]
@@ -38,7 +40,7 @@ public sealed partial class ContractorComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public int ContractsCompleted = 0;
+    public int ContractsCompleted;
 
     public readonly int ReputationAward = 2;
 
@@ -49,6 +51,6 @@ public sealed partial class ContractorComponent : Component
 [NetSerializable]
 public struct ContractorContract
 {
-    public string Job;
+    public ProtoId<JobPrototype> Job;
     public List<(NetEntity Uid, string Location, FixedPoint2 TcReward, Difficulty Difficulty)> AmountPositions;
 }

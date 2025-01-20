@@ -166,7 +166,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         var nameLabel = new RichTextLabel
         {
-            Text = EntMan.GetComponent<MetaDataComponent>(EntMan.GetEntity(key)).EntityName + " - " + contract.Job,
+            Text = EntMan.GetComponent<MetaDataComponent>(EntMan.GetEntity(key)).EntityName + " - " + _prototypeManager.Index(contract.Job).LocalizedName,
             HorizontalExpand = false,
             MaxWidth = 350,
             VerticalAlignment = Control.VAlignment.Center,
@@ -195,6 +195,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
             _photoWindow.OnClose += () => _photoWindow = null;
 
+            // TODO: mb new system for entity photo view, which will work on client
             var iconTarget = new EntityPrototypeView
             {
                 Scale = new Vector2(1.5f, 1.5f),
@@ -202,7 +203,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
                 HorizontalAlignment = Control.HAlignment.Center,
             };
 
-            iconTarget.SetEntity(EntMan.GetEntity(key));
+            iconTarget.SetEntity(key);
 
             _photoWindow.AddChild(iconTarget);
             _photoWindow.OpenCentered();
@@ -223,8 +224,9 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         var isAlreadyAccepted = _contractorPdaComponent.CurrentContractEntity is not null &&
                                 _contractorPdaComponent.CurrentContractData is not null; // todo only on server
 
-        var abortButton = new Button()
+        var abortButton = new Button
         {
+            Text = "Отмена",
             VerticalExpand = false,
             HorizontalExpand = false,
             Visible = false,
