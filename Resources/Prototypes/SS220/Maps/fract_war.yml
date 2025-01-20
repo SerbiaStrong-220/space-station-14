@@ -58,7 +58,7 @@
             ResearchDirector: [ 1, 1 ]
             Scientist: [ 8, 8 ]
             ResearchAssistant: [ 6, 6 ]
-            StationAi: [ 1, 1 ]
+            # StationAi: [ 1, 1 ]
             Borg: [ 3, 3 ]
             SeniorResearcher: [ 1, 1 ]
             #Service
