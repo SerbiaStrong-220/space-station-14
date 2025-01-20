@@ -14,10 +14,10 @@ public sealed class WieldUnabilitySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<WieldUnabilityComponent, BeforeWieldEvent>(OnWieldAttempt);
+        SubscribeLocalEvent<WieldUnabilityComponent, WieldAttemptEvent>(OnWieldAttempt);
     }
 
-    private void OnWieldAttempt(Entity<WieldUnabilityComponent> entity, ref BeforeWieldEvent args)
+    private void OnWieldAttempt(Entity<WieldUnabilityComponent> entity, ref WieldAttemptEvent args)
     {
         if (args.Cancelled)
             return;

@@ -178,7 +178,11 @@
   components:
   - type: Pda
     id: UsspIDCard
-    state: pda-ussp
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-ussp
   - type: PdaBorderColor
     borderColor: "#A91417"
   - type: Icon
@@ -205,7 +209,11 @@
   components:
   - type: Pda
     id: UsspIDCard
-    state: pda-ussp-medical
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-ussp-medical
   - type: PdaBorderColor
     borderColor: "#A91417"
     accentVColor: "#447987"

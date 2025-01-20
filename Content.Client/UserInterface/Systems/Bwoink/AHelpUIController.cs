@@ -43,13 +43,13 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
 
     [Dependency] private readonly IConfigurationManager _configManager = default!;
     private AudioParams _AHelpParams = new();
-    private bool _AHelpSoundsEnabled = true;
     private BwoinkSystem? _bwoinkSystem;
     private MenuButton? GameAHelpButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.AHelpButton;
     private Button? LobbyAHelpButton => (UIManager.ActiveScreen as LobbyGui)?.AHelpButton;
     public IAHelpUIHandler? UIHelper;
     private bool _discordRelayActive;
     private bool _hasUnreadAHelp;
+    private bool _bwoinkSoundEnabled;
     private string? _aHelpSound;
 
     public override void Initialize()
@@ -58,9 +58,7 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
 
         // SS220 Ahelp-Volume begin
         _AHelpParams = new(_configManager.GetCVar(CCVars220.AHelpVolume), 1, 0, 0, 0, false, 0f); // Set AHelp volume on start
-        _AHelpSoundsEnabled = _configManager.GetCVar(CCVars220.AHelpSoundsEnabled);
         _configManager.OnValueChanged(CCVars220.AHelpVolume, AHelpVolumeCVarChanged); // Track AHekp volume change
-        _configManager.OnValueChanged(CCVars220.AHelpSoundsEnabled, AHelpSoundsEnabledCVarChanged); // Track AHekp sound change
         // SS220 Ahelp-Volume end
 
         SubscribeNetworkEvent<BwoinkDiscordRelayUpdated>(DiscordRelayUpdated);
@@ -68,16 +66,12 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
 
         _adminManager.AdminStatusUpdated += OnAdminStatusUpdated;
         _config.OnValueChanged(CCVars.AHelpSound, v => _aHelpSound = v, true);
+        _config.OnValueChanged(CCVars.BwoinkSoundEnabled, v => _bwoinkSoundEnabled = v, true);
     }
 
     private void AHelpVolumeCVarChanged(float volume)
     {
         _AHelpParams.Volume = volume;
-    }
-
-    private void AHelpSoundsEnabledCVarChanged(bool ahelpsounds)
-    {
-        _AHelpSoundsEnabled = ahelpsounds;
     }
 
     public void UnloadButton()
@@ -157,13 +151,14 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
         }
         EnsureUIHelper();
 
-        if (message.PlaySound && (localPlayer.UserId != message.TrueSender) && (_AHelpSoundsEnabled) && // Game icon didn't blink when there is no sound
+        if (message.PlaySound && (localPlayer.UserId != message.TrueSender) && (_bwoinkSoundEnabled) && // Game icon didn't blink when there is no sound
             ((localPlayer.UserId == message.UserId) // SS220
              || (UIHelper!.IsAdmin && !message.IsSenderAdmin) // SS220
              || (!UIHelper!.IsAdmin))) // SS220
         {
-            if (_aHelpSound != null)
-                _audio.PlayGlobal(_aHelpSound, Filter.Local(), false, _AHelpParams);
+            if (_aHelpSound != null && (_bwoinkSoundEnabled || !_adminManager.IsActive()))
+                _audio.PlayGlobal(_aHelpSound, Filter.Local(), false, _AHelpParams); // SS220
+
             _clyde.RequestWindowAttention();
         }
 
