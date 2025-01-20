@@ -1,0 +1,167 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#list of corrupted animals mutations
+- type: corruptedAnimals
+  id: MobCow
+  corruptedAnimal: MobCow
+  result: CultCowCorrupted
+
+- type: corruptedAnimals
+  id: MobMonkey
+  corruptedAnimal: MobMonkey
+  result: CultMonkeyCorrupted
+
+- type: corruptedAnimals
+  id: MobMouse
+  corruptedAnimal: MobMouse
+  result: CultRatCorrupted
+
+- type: corruptedAnimals
+  id: MobMouse1
+  corruptedAnimal: MobMouse1
+  result: CultRatCorrupted
+
+- type: corruptedAnimals
+  id: MobMouse2
+  corruptedAnimal: MobMouse2
+  result: CultRatCorrupted
+
+- type: corruptedAnimals
+  id: MobBat
+  corruptedAnimal: MobBat
+  result: CultBatCorrupted
+
+- type: corruptedAnimals
+  id: MobBatRemilia
+  corruptedAnimal: MobBatRemilia
+  result: CultBatCorrupted
+
+- type: corruptedAnimals
+  id: MobBearSpace
+  corruptedAnimal: MobBearSpace
+  result: CultBearCorrupted
+
+- type: corruptedAnimals
+  id: MobBearSpaceSalvage
+  corruptedAnimal: MobBearSpaceSalvage
+  result: CultBearCorrupted
+
+- type: corruptedAnimals
+  id: MobChicken
+  corruptedAnimal: MobChicken
+  result: CultChickenCorrupted
+
+- type: corruptedAnimals
+  id: MobChicken1
+  corruptedAnimal: MobChicken1
+  result: CultChickenCorrupted
+
+- type: corruptedAnimals
+  id: MobChicken2
+  corruptedAnimal: MobChicken2
+  result: CultChickenCorrupted
+
+- type: corruptedAnimals
+  id: MobPig
+  corruptedAnimal: MobPig
+  result: CultPigCorrupted
+
+- type: corruptedAnimals
+  id: MobAlexander
+  corruptedAnimal: MobAlexander
+  result: CultPigCorrupted
+
+- type: corruptedAnimals
+  id: MobClownSpider
+  corruptedAnimal: MobClownSpider
+  result: CultClownSpiderCorrupted
+
+- type: corruptedAnimals
+  id: MobGiantSpider
+  corruptedAnimal: MobGiantSpider
+  result: CultSpiderCorrupted
+
+- type: corruptedAnimals
+  id: MobGiantSpiderAngry
+  corruptedAnimal: MobGiantSpiderAngry
+  result: CultSpiderCorrupted
+
+- type: corruptedAnimals
+  id: MobGiantSpiderWizard
+  corruptedAnimal: MobGiantSpiderWizard
+  result: CultSpiderCorrupted
+
+- type: corruptedAnimals
+  id: MobSpiderSpace
+  corruptedAnimal: MobSpiderSpace
+  result: CultSpiderCorrupted
+
+- type: corruptedAnimals
+  id: MobSpiderSpaceSalvage
+  corruptedAnimal: MobSpiderSpaceSalvage
+  result: CultSpiderCorrupted
+
+- type: corruptedAnimals
+  id: MobCrab
+  corruptedAnimal: MobCrab
+  result: CultCrabCorrupted
+
+- type: corruptedAnimals
+  id: MobDuckMallard
+  corruptedAnimal: MobDuckMallard
+  result: CultDuckCorrupted
+
+- type: corruptedAnimals
+  id: MobDuckWhite
+  corruptedAnimal: MobDuckWhite
+  result: CultDuckCorrupted
+
+- type: corruptedAnimals
+  id: MobDuckBrown
+  corruptedAnimal: MobDuckBrown
+  result: CultDuckCorrupted
+
+- type: corruptedAnimals
+  id: MobFox
+  corruptedAnimal: MobFox
+  result: CultFoxCorrupted
+
+- type: corruptedAnimals
+  id: MobFrog
+  corruptedAnimal: MobFrog
+  result: CultFrogCorrupted
+
+- type: corruptedAnimals
+  id: MobGoat
+  corruptedAnimal: MobGoat
+  result: CultGoatCorrupted
+
+- type: corruptedAnimals
+  id: MobGoose
+  corruptedAnimal: MobGoose
+  result: CultGooseCorrupted
+
+- type: corruptedAnimals
+  id: MobGorilla
+  corruptedAnimal: MobGorilla
+  result: CultGorillaCorrupted
+
+- type: corruptedAnimals
+  id: MobGorillaLargo #wtf he is not gorilla parent
+  corruptedAnimal: MobGorilla
+  result: CultGorillaCorrupted
+
+- type: corruptedAnimals
+  id: MobHamster
+  corruptedAnimal: MobHamster
+  result: CultHamsterCorrupted
+
+- type: corruptedAnimals
+  id: MobKangarooSpace
+  corruptedAnimal: MobKangarooSpace
+  result: CultKangarooSpaceCorrupted
+
+- type: corruptedAnimals
+  id: MobKangarooSpaceSalvage
+  corruptedAnimal: MobKangarooSpaceSalvage
+  result: CultKangarooSpaceCorrupted

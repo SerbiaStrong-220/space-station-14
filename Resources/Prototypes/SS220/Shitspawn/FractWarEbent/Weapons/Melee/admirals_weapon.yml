@@ -12,7 +12,7 @@
     colorOptions:
     - "#8B0000"
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/e_axe.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_axe.rsi
     layers:
       - state: energyaxe
       - state: energyaexe_blade
@@ -31,7 +31,7 @@
         shader: unshaded
   - type: Item
     size: Small
-    sprite: SS220/Objects/Weapons/Melee/e_axe_inhands.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_axe_inhands.rsi
   - type: Reflect
     reflects: Energy
     reflectProb: .95
@@ -93,7 +93,7 @@
     colorOptions:
     - "#FFFFFF"
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/e_sword_ebent_double.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_sword_ebent_double.rsi
     layers:
       - state: e_sword_double
       - state: e_sword_double_blade
@@ -112,7 +112,7 @@
         shader: unshaded
   - type: Item
     size: Small
-    sprite: SS220/Objects/Weapons/Melee/e_sword_ebent_inhands_double.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_sword_ebent_inhands_double.rsi
   - type: Reflect
     reflects: Energy
     reflectProb: .95

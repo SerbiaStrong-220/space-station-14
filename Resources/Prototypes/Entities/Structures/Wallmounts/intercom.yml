@@ -339,3 +339,16 @@
       - EncryptionKeyCommon
       - EncryptionKeyStationMaster
       - EncryptionKeyLaw #SS220-Law Department
+
+- type: entity
+  id: IntercomFreelance
+  parent: Intercom
+  suffix: Freelance
+  components:
+  - type: ContainerFill
+    containers:
+      board:
+      - IntercomElectronics
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyFreelance

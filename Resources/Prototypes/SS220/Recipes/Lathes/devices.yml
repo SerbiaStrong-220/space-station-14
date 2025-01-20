@@ -25,3 +25,13 @@
   materials:
     Steel: 200
     Plastic: 200
+
+- type: latheRecipe
+  id: JetpackVoid
+  result: JetpackVoid
+  completetime: 4
+  materials:
+    Steel: 1200
+    Glass: 400
+    Plasma: 600
+    Plastic: 400

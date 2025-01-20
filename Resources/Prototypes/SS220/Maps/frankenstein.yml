@@ -39,7 +39,7 @@
             #medical
             ChiefMedicalOfficer: [ 1, 1 ]
             SeniorPhysician: [ 1, 1]
-            Chemist: [ 3, 3 ]
+            Chemist: [ 2, 2 ]
             MedicalDoctor: [ 4, 4 ]
             Paramedic: [ 1, 1 ]
             MedicalIntern: [ 8, 8 ]
@@ -102,5 +102,5 @@
     - type: StationMinimap
       minimapData: !type:StationMinimapData
         mapTexture: SS220/ViewableMaps/Frankenstein.png
-        originOffset: 110, 192
+        originOffset: 110, 181
         mapScale: 6.4

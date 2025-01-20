@@ -6,7 +6,7 @@
   suffix: Death Squad
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/sp-91.rsi
+    sprite: SS220/Objects/Weapons/Guns/SMGs/sp-91.rsi
     layers:
       - state: base
         map: ["enum.GunVisualLayers.Base"]

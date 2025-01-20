@@ -243,15 +243,15 @@ public sealed partial class TTSSystem : EntitySystem
         }
     }
 
-    private async void HandleRadio(EntityUid[] uids, string message, string speaker)
+    private async void HandleRadio(RadioEventReceiver[] receivers, string message, string speaker)
     {
         var soundData = await GenerateTTS(message, speaker, false, true);
         if (soundData is null)
             return;
 
-        foreach (var uid in uids)
+        foreach (var receiver in receivers)
         {
-            RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid), true), Filter.Entities(uid));
+            RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(receiver.PlayTarget.EntityId), true), receiver.Actor);
         }
     }
 

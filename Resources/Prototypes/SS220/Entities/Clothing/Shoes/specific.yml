@@ -20,9 +20,9 @@
   suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi
+    sprite: SS220/Clothing/Shoes/Boots/janitor_orange.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi
+    sprite: SS220/Clothing/Shoes/Boots/janitor_orange.rsi
 
 - type: entity
   parent: ClothingShoesBaseButcherable

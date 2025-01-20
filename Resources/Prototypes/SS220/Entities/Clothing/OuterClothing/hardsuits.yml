@@ -31,6 +31,68 @@
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitBlueshield
 
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitLightBlueshield
+  name: blueshield's light hardsuit
+  description: A special suit designed for the Blue Shield. It is characterized by lightness and maneuverability.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/blueshield_light.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/blueshield_light.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.525
+    lowPressureMultiplier: 10000
+  - type: ClothingSpeedModifier
+    walkModifier: 0.90
+    sprintModifier: 0.90
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.7
+        Piercing: 0.6
+        Heat: 0.8
+        Radiation: 0.4
+        Caustic: 0.6
+        Stamina: 0.35
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitLightBlueshield
+
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitHightBlueshield
+  name: hight hardsuit "Blue Shield"
+  description: A special spacesuit designed for Blue Shield operatives. It will even protect you from a nuclear explosion!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/blueshield_hight.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/blueshield_hight.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.525
+    lowPressureMultiplier: 10000
+  - type: ClothingSpeedModifier
+    walkModifier: 0.80
+    sprintModifier: 0.80
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.3
+        Heat: 0.6
+        Radiation: 0.2
+        Caustic: 0.4
+        Stamina: 0.35
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitLightBlueshield
+
 #Security Pilot Hardsuit
 - type: entity
   parent: ClothingOuterHardsuitBase

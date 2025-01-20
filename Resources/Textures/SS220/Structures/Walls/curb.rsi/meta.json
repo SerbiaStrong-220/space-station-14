@@ -1,0 +1,59 @@
+{
+  "version": 2,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "by MIXnikita for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+    "states": [
+    {
+        "name": "curbdarksteel",
+        "directions": 4
+    },
+    {
+        "name": "curbdarksteel_corner",
+        "directions": 4
+    },
+    {
+        "name": "curbdarksteel_round",
+        "directions": 4
+    },
+    {
+        "name": "curbdarksteel_small",
+        "directions": 4
+    },
+    {
+        "name": "curbsteel",
+        "directions": 4
+    },
+    {
+        "name": "curbsteel_corner",
+        "directions": 4
+    },
+    {
+        "name": "curbsteel_round",
+        "directions": 4
+    },
+    {
+        "name": "curbsteel_small",
+        "directions": 4
+    },
+    {
+        "name": "curbwood",
+        "directions": 4
+    },
+    {
+        "name": "curbwood_corner",
+        "directions": 4
+    },
+    {
+        "name": "curbwood_round",
+        "directions": 4
+    },
+    {
+        "name": "curbwood_small",
+        "directions": 4
+    }
+  ]
+}

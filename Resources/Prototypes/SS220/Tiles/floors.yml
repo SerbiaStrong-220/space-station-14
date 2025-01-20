@@ -1093,3 +1093,28 @@
   footstepSounds:
     collection: FootstepAsteroid
   itemDrop: FloorTileItemSand
+
+- type: tile
+  id: FloorSnowLawn
+  name: snow-lawn-floor
+  sprite: /Textures/Tiles/Planet/Snow/snow.png
+  variants: 13
+  placementVariants:
+  - 0.8
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0116
+  - 0.0116
+  isSubfloor: false
+  footstepSounds:
+    collection: FootstepSnow
+  heatCapacity: 10000
+  indestructible: true

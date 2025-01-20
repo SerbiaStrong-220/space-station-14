@@ -78,3 +78,7 @@
   equipment:
     head: ClothingHeadHatBeretCE
 
+- type: loadout
+  id: ChiefEngineerHeadXmas
+  equipment:
+    head: ClothingHeadHatHardhatWhiteXmas

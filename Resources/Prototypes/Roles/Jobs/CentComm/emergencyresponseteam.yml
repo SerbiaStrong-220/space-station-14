@@ -13,6 +13,7 @@
   - AllAccess
   access:
   - CentralCommand
+  - CentralCommandERT # SS220 centcomm access fix
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
 
@@ -105,6 +106,7 @@
   - AllAccess
   access:
   - CentralCommand
+  - CentralCommandERT # SS220 centcomm access fix
   special:
   - !type:AddComponentSpecial
     components:
@@ -189,6 +191,7 @@
   - AllAccess
   access:
   - CentralCommand
+  - CentralCommandERT # SS220 centcomm access fix
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
 
@@ -263,6 +266,7 @@
   - AllAccess
   access:
   - CentralCommand
+  - CentralCommandERT # SS220 centcomm access fix
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
 
@@ -355,6 +359,7 @@
   - AllAccess
   access:
   - CentralCommand
+  - CentralCommandERT # SS220 centcomm access fix
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
 
@@ -375,7 +380,8 @@
   storage:
     back:
     - Hypospray
-    - MedkitAdvancedFilled
+    - MedkitCombatFilled
+    - MedkitCombatFilled
     - CrowbarRed
     - OmnizineChemistryBottle
     - EpinephrineChemistryBottle
@@ -398,7 +404,8 @@
   storage:
     back:
     - Hypospray
-    - MedkitAdvancedFilled
+    - MedkitCombatFilled
+    - MedkitCombatFilled
     - CrowbarRed
     - OmnizineChemistryBottle
     - EpinephrineChemistryBottle
@@ -419,6 +426,7 @@
   - AllAccess
   access:
   - CentralCommand
+  - CentralCommandERT # SS220 centcomm access fix
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
 

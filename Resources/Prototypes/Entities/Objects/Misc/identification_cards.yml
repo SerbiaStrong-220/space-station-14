@@ -22,6 +22,7 @@
     tags:
     - DoorBumpOpener
     - WhitelistChameleon
+    - WhitelistChameleonIdCard
   - type: StealTarget
     stealGroup: IDCard
 
@@ -128,6 +129,7 @@
     tags:
     - DoorBumpOpener
     - WhitelistChameleon
+    - WhitelistChameleonIdCard
     - HighRiskItem
   - type: StealTarget
     stealGroup: CaptainIDCard
@@ -338,6 +340,9 @@
     - type: PresetIdCard
       job: Bartender
       name: Pun Pun
+    - type: Tag #  Ignore Chameleon tags
+      tags:
+      - DoorBumpOpener
 
 - type: entity
   parent: IDCardStandard
@@ -499,12 +504,13 @@
   - type: IdCard
     jobTitle: job-name-cc-default #SS220 (upstream 65 localization)
     jobIcon: JobIconNanotrasen
-  - type: Access
-    groups:
-    - AllAccess # SS220 Fast fix access
-    tags:
-    - CentralCommand
-    - CentralCommandERT # SS220 New CentComm
+# SS220 centcomm access fix begin
+#  - type: Access
+#    groups:
+#    - AllAccess # SS220 Fast fix access
+#    tags:
+#    - CentralCommand
+# SS220 centcomm access fix end
   - type: PresetIdCard
     job: CentralCommandOfficial
 
@@ -523,12 +529,6 @@
     job: ERTLeader
   - type: Item
     heldPrefix: gold
-  # SS220 new CentComm begin
-  - type: Access
-    groups:
-    - AllAccess # SS220 Fast fix access
-    - CentralCommand
-  # SS220 new CentComm end
 
 - type: entity
   parent: CentcomIDCard # SS220 new CentComm begin
@@ -543,9 +543,11 @@
     job: ERTChaplain
   - type: Item
     heldPrefix: blue
-  - type: Access
-    groups:
-    - AllAccess # SS220 Fast fix access
+# SS220 centcomm access fix begin
+#  - type: Access
+#    groups:
+#    - AllAccess # SS220 Fast fix access
+# SS220 centcomm access fix end
 
 - type: entity
   parent: IDCardStandard
@@ -639,14 +641,6 @@
     heldPrefix: blue
   - type: IdCard
     jobTitle: job-name-cc-agent #SS220 (upstream 65 localization)
-  # SS220 new CentComm begin
-  - type: Access
-    groups:
-    - AllAccess # SS220 Fast fix access
-    tags:
-    - CentralCommandDeathSquad
-    - CentralCommand
-  # SS220 new CentComm end
   - type: PresetIdCard
     job: DeathSquad
 
@@ -676,6 +670,7 @@
   - type: ChameleonClothing
     slot: [idcard]
     default: PassengerIDCard
+    requireTag: WhitelistChameleonIdCard
   - type: UserInterface
     interfaces:
       enum.AgentIDCardUiKey.Key:
@@ -824,12 +819,6 @@
   # SS220 new CentComm begin
   # SS220 CBURN questions changes name 05.07.2024
     jobTitle: job-name-cburn-agent #SS220 (upstream 65 localization)
-  - type: Access
-    groups:
-    - AllAccess # SS220 Fast fix access
-    tags:
-    - CentralCommandCBURN
-    - CentralCommand
   # SS220 new CentComm end
   - type: PresetIdCard
     job: CBURN
@@ -922,3 +911,7 @@
     - CentralCommand
     - NuclearOperative
     - SyndicateAgent
+    - Wizard
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener

@@ -8,9 +8,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_admiral.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_admiral.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_admiral.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_admiral.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTAdmiral
 
@@ -23,9 +23,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_ce.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_ce.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_ce.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_ce.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTCE
 
@@ -38,12 +38,12 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_cmo.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_cmo.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_cmo.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_cmo.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTCMO
-    
+
 # Soldier
 - type: entity
   parent: ClothingOuterHardsuitBaseSoldier
@@ -53,9 +53,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_soldier.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_soldier.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_soldier.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_soldier.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTSoldier
 
@@ -68,9 +68,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_med.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_med.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_med.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_med.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTMed
 
@@ -83,9 +83,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_heavy.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_heavy.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_heavy.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_heavy.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTHeavy
 
@@ -98,8 +98,8 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_heavy_2.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_heavy_2.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/ert_heavy_2.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_heavy_2.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTHeavy2

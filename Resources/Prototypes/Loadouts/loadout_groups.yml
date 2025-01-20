@@ -10,6 +10,7 @@
   - Headphones
   - PlushieLizard
   - PlushieSpaceLizard
+  - ThreeCandles
   - Lighter
   - CigPackGreen
   - CigPackRed
@@ -26,6 +27,7 @@
   - ClothingNeckLesbianPin
   - ClothingNeckNonBinaryPin
   - ClothingNeckPansexualPin
+  - ClothingNeckOmnisexualPin
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
@@ -835,6 +837,7 @@
   name: loadout-group-chief-engineer-head
   minLimit: 0
   loadouts:
+  - ChiefEngineerHeadXmas #SS220 XMAS
   - ChiefEngineerHead
   - ChiefEngineerBeret
   - BeretCE #SS220-CEBeret
@@ -895,6 +898,8 @@
   id: TechnicalAssistantJumpsuit
   name: loadout-group-technical-assistant-jumpsuit
   loadouts:
+  - TechAssistantJumpsuit #SS220 new assistant uniforms
+  - TechAssistantJumpskirt #SS220 new assistant uniforms
   - YellowJumpsuit
   - YellowJumpskirt
   - TechnicalAssistantJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
@@ -906,6 +911,7 @@
   id: StationEngineerHead
   name: loadout-group-station-engineer-head
   loadouts:
+  - StationEngineerHardhatYellowXmas #SS220 XMAS
   - StationEngineerHardhatYellow
   - StationEngineerHardhatOrange
   - StationEngineerHardhatRed
@@ -1132,6 +1138,8 @@
   id: ResearchAssistantJumpsuit
   name: loadout-group-research-assistant-jumpsuit
   loadouts:
+  - ResearchAssistantJumpsuit #SS220 new assistant uniforms
+  - ResearchAssistantJumpskirt #SS220 new assistant uniforms
   - WhiteJumpsuit
   - WhiteJumpskirt
   - ResearchAssistantBachelor #SS220-loadout-academy
@@ -1216,6 +1224,7 @@
   name: loadout-group-security-head
   minLimit: 0
   loadouts:
+  - SecurityHelmetXmas #SS220 XMAS
   - SecurityHelmet
   - SecurityBeret
   - SecurityHat
@@ -1249,8 +1258,8 @@
   - SecurityJumpskirtTurtleneck #SS220-MoreTurtleneck-End
   - JumpsuitSecBlue #ss220 sec loadout update
   - JumpsuitTacSec #ss220 tacsec update
-  - SeniorOfficerJumpsuit
-  - SeniorOfficerJumpskirt
+  # - SeniorOfficerJumpsuit #SS220 delete-instructor-uniform-officer's
+  # - SeniorOfficerJumpskirt #SS220 delete-instructor-uniform-officer's
   - TrooperUniform
   - JumpsuitSecVaas #ss220 security loadout
 
@@ -1324,7 +1333,6 @@
 - type: loadoutGroup
   id: DetectiveOuterClothing
   name: loadout-group-detective-outerclothing
-  minLimit: 0
   loadouts:
   - DetectiveArmorVest
   - DetectiveCoat
@@ -1378,6 +1386,8 @@
   - ChiefMedicalOfficerJumpskirt
   - ChiefMedicalOfficerTurtleneckJumpsuit
   - ChiefMedicalOfficerTurtleneckJumpskirt
+  - CMOCorpJumpsuit #SS220-CMOCorporate
+  - CMOCorpJumpskirt #SS220-CMOCorporate
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerOuterClothing
@@ -1402,6 +1412,7 @@
   loadouts:
   - BrownShoes
   - MedicalWinterBoots
+  - CMOCorpShoes #ss220 new cmo 
 
 - type: loadoutGroup
   id: MedicalDoctorHead
@@ -1483,6 +1494,8 @@
   id: MedicalInternJumpsuit
   name: loadout-group-medical-intern-jumpsuit
   loadouts:
+  - InternJumpsuit #SS220 new assistant uniforms
+  - InternJumpskirt #SS220 new assistant uniforms
   - WhiteJumpsuit
   - WhiteJumpskirt
   - MedicalInternJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
@@ -1523,6 +1536,7 @@
   minLimit: 0
   loadouts:
   - ParamedicHead
+  - ParamedInterdyneSoft #ss220-ParamedInterdyne
 
 - type: loadoutGroup
   id: ParamedicJumpsuit
@@ -1533,6 +1547,7 @@
   - ParamedicJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
   - ParamedicJumpskirtTurtleneck #SS220-MoreTurtleneck-End
   - ParamedicFeldsher #SS220-ParamedFashion
+  - ParamedInterdyneJumpsuit #ss220-ParamedInterdyne
 
 - type: loadoutGroup
   id: ParamedicOuterClothing

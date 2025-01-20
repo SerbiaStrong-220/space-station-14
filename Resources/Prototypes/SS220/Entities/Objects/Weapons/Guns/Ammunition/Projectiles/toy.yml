@@ -1,0 +1,32 @@
+#Svarshik's toy guns!
+#caps
+- type: entity
+  id: PelletShotgunCaps
+  categories: [ HideSpawnMenu ]
+  parent: PelletShotgun
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 0.01
+
+- type: entity
+  id: PelletShotgunSpreadCaps
+  categories: [ HideSpawnMenu ]
+  parent: PelletShotgunCaps
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgunCaps
+    count: 6
+    spread: 22 #ss220lowTTKUpdate
+
+#foam
+- type: entity
+  id: PelletShotgunSpreadFoam
+  categories: [ HideSpawnMenu ]
+  parent: BulletFoam
+  components:
+  - type: ProjectileSpread
+    proto: BulletFoam
+    count: 6
+    spread: 22 #ss220lowTTKUpdate

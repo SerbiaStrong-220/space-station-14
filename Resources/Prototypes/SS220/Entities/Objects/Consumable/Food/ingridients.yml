@@ -1,0 +1,139 @@
+- type: entity
+  name: caramel
+  parent: FoodBakingBase
+  id: CaramelFood
+  description: Mmm... yummy!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel.rsi/
+    state: caramel
+  - type: Construction
+    graph: CandyBased
+    node: start
+    defaultTarget: caramel
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+
+- type: entity
+  name: preparation of a caramel cane
+  parent: FoodBakingBase
+  id: CaramelBasedFood
+  description: Everything will happen, but not immediately
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel.rsi/
+    state: caramel-base
+  - type: Construction
+    graph: CandyBased
+    node: caramel
+  - type: SolutionContainerManager
+
+- type: entity
+  name: red caramel cane
+  parent: FoodBakingBase
+  id: RedCaramelCaneFood
+  description: It definitely won't hold your weight
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel.rsi/
+    state: caramel-red
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: MeleeWeapon
+    wideAnimationRotation: 0
+    damage:
+      types:
+        Piercing: 1
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+
+- type: entity
+  name: green caramel cane
+  parent: FoodBakingBase
+  id: GreenCaramelCaneFood
+  description: Don't even try to lean on it
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel.rsi/
+    state: caramel-green
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: MeleeWeapon
+    wideAnimationRotation: 0
+    damage:
+      types:
+        Piercing: 1
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+
+- type: entity
+  name: red and green caramel cane
+  parent: FoodBakingBase
+  id: CaramelCaneGreenRedFood
+  description: A cane decorated with colored stripes and patterns.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel.rsi/
+    state: caramel-green-red
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: MeleeWeapon
+    wideAnimationRotation: 0
+    damage:
+      types:
+        Piercing: 1
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+
+- type: entity
+  name: double caramel cane
+  parent: FoodBakingBase
+  id: DoubleCaramelCaneFood
+  description: Arrange a duel!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel.rsi/
+    state: double-caramel
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 16
+        - ReagentId: Vitamin
+          Quantity: 4
