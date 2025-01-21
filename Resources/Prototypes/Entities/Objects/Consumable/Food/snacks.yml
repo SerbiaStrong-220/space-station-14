@@ -107,7 +107,6 @@
     tags:
       - FoodSnack
   - type: SpawnItemsOnUse
-    handlessUsable: true
     items:
       - id: FoodPacketChocolateTrash
       - id: FoodSnackChocolateBar

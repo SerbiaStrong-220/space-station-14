@@ -278,14 +278,16 @@
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
-    startAudio:
-      path: /Audio/Announcements/attention.ogg
+    #SS220 audio muted and no announcment, because Central command do not check piles of trash
+    #startAnnouncement: station-event-vent-creatures-start-announcement
+    #startAudio:
+    #  path: /Audio/Announcements/attention.ogg
+    #SS220 changes end here
     earliestStart: 15
     weight: 6
     duration: 50
     minimumPlayers: 30 # Hopefully this is enough for the Rat King's potential Army (it was not, raised from 15 -> 30)
-  - type: VentCrittersRule
+  - type: RegalRatRule #SS220 RegalRat GameRule
     entries:
     - id: MobMouse
       prob: 0.02
