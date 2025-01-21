@@ -367,7 +367,6 @@
       prob: 0.008
 
 - type: entity
-
   id: PowerGridCheck
   parent: BaseStationEventShortDelay
   components:
