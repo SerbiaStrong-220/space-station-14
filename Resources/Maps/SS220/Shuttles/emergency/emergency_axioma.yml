@@ -12756,9 +12756,6 @@ entities:
       pos: 10.5,-9.5
       parent: 1
     - type: UserInterface
-      actors:
-        enum.StorageUiKey.Key:
-        - invalid
     - type: ActiveUserInterface
   - uid: 1163
     components:
