@@ -27,19 +27,19 @@ public sealed class MappingManager : IPostInjectInit
 
     public void PostInject()
     {
-#if !FULL_RELEASE
+//#if !FULL_RELEASE
         _net.RegisterNetMessage<MappingSaveMapMessage>(OnMappingSaveMap);
         _net.RegisterNetMessage<MappingSaveMapErrorMessage>();
         _net.RegisterNetMessage<MappingMapDataMessage>();
 
         _sawmill = _log.GetSawmill("mapping");
         _zstd = new ZStdCompressionContext();
-#endif
+//#endif
     }
 
     private void OnMappingSaveMap(MappingSaveMapMessage message)
     {
-#if !FULL_RELEASE
+//#if !FULL_RELEASE
         try
         {
             if (!_players.TryGetSessionByChannel(message.MsgChannel, out var session) ||
@@ -71,6 +71,6 @@ public sealed class MappingManager : IPostInjectInit
             var msg = new MappingSaveMapErrorMessage();
             _net.ServerSendMessage(msg, message.MsgChannel);
         }
-#endif
+//#endif
     }
 }

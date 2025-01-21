@@ -744,9 +744,9 @@ public sealed class MappingState : GameplayStateBase
 
     private bool HandleSaveMap(in PointerInputCmdArgs args)
     {
-#if FULL_RELEASE
-        return false;
-#endif
+//#if FULL_RELEASE
+//        return false;
+//#endif
         if (!_admin.IsAdmin(true) || !_admin.HasFlag(AdminFlags.Host))
             return false;
 

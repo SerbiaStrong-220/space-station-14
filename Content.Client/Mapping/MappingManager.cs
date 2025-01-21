@@ -36,7 +36,7 @@ public sealed class MappingManager : IPostInjectInit
             return;
         }
 
-        await _saveStream.WriteAsync(Encoding.ASCII.GetBytes(message.Yml));
+        await _saveStream.WriteAsync(Encoding.UTF8.GetBytes(message.Yml));
         await _saveStream.DisposeAsync();
 
         _saveStream = null;
@@ -57,7 +57,7 @@ public sealed class MappingManager : IPostInjectInit
 
         if (_mapData != null)
         {
-            await stream.WriteAsync(Encoding.ASCII.GetBytes(_mapData.Yml));
+            await stream.WriteAsync(Encoding.UTF8.GetBytes(_mapData.Yml));
             _mapData = null;
             await stream.FlushAsync();
             await stream.DisposeAsync();
