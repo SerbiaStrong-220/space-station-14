@@ -1,0 +1,89 @@
+- type: tile
+  id: CP14FloorGrass
+  name: cp14-tiles-grass
+  sprite: /Textures/SS220/Tiles/Grass/grass.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 3
+  edgeSprites:
+    SouthEast: /Textures/SS220/Tiles/Grass/single_edge_SE.png
+    NorthEast: /Textures/SS220/Tiles/Grass/single_edge_NE.png
+    NorthWest: /Textures/SS220/Tiles/Grass/single_edge_NW.png
+    SouthWest: /Textures/SS220/Tiles/Grass/single_edge_SW.png
+    South: /Textures/SS220/Tiles/Grass/double_edge_S.png
+    East: /Textures/SS220/Tiles/Grass/double_edge_E.png
+    North: /Textures/SS220/Tiles/Grass/double_edge_N.png
+    West: /Textures/SS220/Tiles/Grass/double_edge_W.png
+  baseTurf: FloorDirt
+  itemDrop: FloorTileItemGrass
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepGrass
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14FloorGrassLight
+  name: cp14-tiles-grass-light
+  sprite: /Textures/SS220/Tiles/GrassLight/grass.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 4
+  edgeSprites:
+    SouthEast: /Textures/SS220/Tiles/GrassLight/single_edge_SE.png
+    NorthEast: /Textures/SS220/Tiles/GrassLight/single_edge_NE.png
+    NorthWest: /Textures/SS220/Tiles/GrassLight/single_edge_NW.png
+    SouthWest: /Textures/SS220/Tiles/GrassLight/single_edge_SW.png
+    South: /Textures/SS220/Tiles/GrassLight/double_edge_S.png
+    East: /Textures/SS220/Tiles/GrassLight/double_edge_E.png
+    North: /Textures/SS220/Tiles/GrassLight/double_edge_N.png
+    West: /Textures/SS220/Tiles/GrassLight/double_edge_W.png
+  baseTurf: FloorDirt
+  itemDrop: FloorTileItemGrass
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepGrass
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14FloorGrassTall
+  name: cp14-tiles-grass-tall
+  sprite: /Textures/SS220/Tiles/GrassTall/grass.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 5
+  edgeSprites:
+    SouthEast: /Textures/SS220/Tiles/GrassTall/single_edge_SE.png
+    NorthEast: /Textures/SS220/Tiles/GrassTall/single_edge_NE.png
+    NorthWest: /Textures/SS220/Tiles/GrassTall/single_edge_NW.png
+    SouthWest: /Textures/SS220/Tiles/GrassTall/single_edge_SW.png
+    South: /Textures/SS220/Tiles/GrassTall/double_edge_S.png
+    East: /Textures/SS220/Tiles/GrassTall/double_edge_E.png
+    North: /Textures/SS220/Tiles/GrassTall/double_edge_N.png
+    West: /Textures/SS220/Tiles/GrassTall/double_edge_W.png
+  baseTurf: FloorDirt
+  itemDrop: FloorTileItemGrass
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepGrass
+  heatCapacity: 10000
+  weather: true

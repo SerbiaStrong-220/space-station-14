@@ -1,0 +1,108 @@
+# Species
+- type: loadoutEffectGroup
+  id: NitrogenBreatherSponsor
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - SlimePerson
+    - Vox
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Shlopa
+
+- type: loadoutEffectGroup
+  id: OxygenBreatherSponsor
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Arachnid
+    - Diona
+    - Dwarf
+    - Felinid #ss220 box survival loadout felinid fix
+    - Human
+    - Moth
+    - Reptilian
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Shlopa
+
+- type: loadoutEffectGroup
+  id: EffectSpeciesVoxSponsor
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Vox
+
+# Basic
+- type: loadout
+  id: EmergencyOxygenSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherSponsor
+  storage:
+    back:
+    - BoxSurvivalSponsor
+
+- type: loadout
+  id: EmergencyNitrogenSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreatherSponsor
+  storage:
+    back:
+    - BoxSurvivalNitrogenSponsor
+
+# Engineering / Extended
+- type: loadout
+  id: EmergencyOxygenExtendedSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherSponsor
+  storage:
+    back:
+    - BoxSurvivalEngineeringSponsor
+
+- type: loadout
+  id: EmergencyNitrogenExtendedSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreatherSponsor
+  storage:
+    back:
+    - BoxSurvivalEngineeringNitrogenSponsor
+
+# Medical
+- type: loadout
+  id: EmergencyOxygenMedicalSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherSponsor
+  storage:
+    back:
+    - BoxSurvivalMedicalSponsor
+
+- type: loadout
+  id: EmergencyNitrogenMedicalSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreatherSponsor
+  storage:
+    back:
+    - BoxSurvivalMedicalNitrogenSponsor
+
+# Security
+- type: loadout
+  id: EmergencyOxygenSecuritySponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherSponsor
+  storage:
+    back:
+    - BoxSurvivalSecuritySponsor
+
+- type: loadout
+  id: EmergencyNitrogenSecuritySponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreatherSponsor
+  storage:
+    back:
+    - BoxSurvivalSecurityNitrogenSponsor

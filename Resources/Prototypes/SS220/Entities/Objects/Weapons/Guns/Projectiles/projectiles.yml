@@ -37,8 +37,8 @@
       collection: WeakHit
     forceSound: true
   - type: StunOnCollide
-    stunAmount: 4 #weaponBalance
-    knockdownAmount: 4 #weaponBalance
+    stunAmount: 2 #weaponBalance #ss220 fix 4 -> 2
+    knockdownAmount: 2 #weaponBalance
 
 - type: entity
   name: energy crossbow bolt
@@ -56,6 +56,20 @@
     knockdownAmount: 1 #weaponBalance
 
 
+- type: entity
+  id: SMEmitterBolt
+  parent: EmitterBolt
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Power/Generation/Supermatter/smemitter.rsi
+    layers:
+      - state: projectile
+        shader: unshaded
+  - type: SuperMatterEmitterBolt
+  - type: SuperMatterExtraConsumable
+    additionalMatterOnConsumption: 4
+    additionalEnergyOnConsumption: 20
 
 
 ##Made by MIXnikita for SS220
@@ -113,14 +127,14 @@
 
 #Spider queen
 - type: entity
-  id: PoisonousAcid 
+  id: PoisonousAcid
   name: poisonous Spit
   parent: BaseBullet
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Projectile
       damage:
-        types: 
+        types:
           Poison: 6
           Structural: 2
     - type: Sprite
@@ -135,7 +149,7 @@
   parent: BaseBullet
   id: BulletEMP
   name: EMP Bolt
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: TriggerOnCollide
     fixtureID: projectile
@@ -157,3 +171,312 @@
     radius: 3.5
     color: blue
     energy: 0.5
+
+# Death Squad
+- type: entity
+  name: laser bolt
+  id: BulletLaserDestroy
+  parent: BulletLaser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlue
+    damage:
+      types:
+        Heat: 44
+        Structural: 800
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: pulseheavylaser
+      shader: unshaded
+  - type: ProjectileSpread
+    proto: BulletLaserDestroy
+    count: 5
+    spread: 15
+
+- type: entity
+  name: laser bolt
+  id: BulletLaserHeal
+  parent: BulletLaser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
+    layers:
+      - state: greenlaser
+  - type: Projectile
+    impactEffect: BulletImpactEffectGreen
+    damage:
+      types:
+        Blunt: -10
+        Slash: -12
+        Piercing: -20
+        Heat: -14
+        Radiation: 4
+        Poison: -8
+        Asphyxiation: -50
+  - type: ProjectileSpread
+    proto: BulletLaserHeal
+    count: 3
+    spread: 10
+
+- type: entity
+  id: BulletImpactEffectGreen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Sprite
+    drawdepth: Effects
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      state: impact_laser_greyscale
+      color: green
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+#Svarshik's toy guns!
+#grenades for china lake
+- type: entity
+  id: BulletGrenadeBlastToy
+  name: blast grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 2 # a ~2 tile radius
+    intensitySlope: 0.5
+    maxIntensity: 0.01
+    canCreateVacuum: false #extra safety y'know?
+    maxTileBreak: 0
+
+- type: entity
+  id: BulletGrenadeFragToy
+  name: frag grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 2 # about a ~6 tile radius
+    intensitySlope: 0.3
+    maxIntensity: 0.01
+    canCreateVacuum: false
+    maxTileBreak: 0
+
+- type: entity
+  id: BulletGrenadeFlashToy
+  name: flash grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: SpawnOnTrigger
+    proto: GrenadeFlashEffect
+  - type: ActiveTimerTrigger
+    timeRemaining: 0.3
+  - type: DeleteOnTrigger
+
+- type: entity
+  id: BulletGrenadeKaboomToy
+  name: kaboom grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 50 # about a station size
+    intensitySlope: 0.3
+    maxIntensity: 0.01
+    canCreateVacuum: false
+    maxTileBreak: 0
+
+- type: entity
+  id: BulletGrenadeLubeToy
+  name: lube grenade
+  parent: BaseBulletTrigger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+      - state: grenade
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 1.5 # a ~2 tiles
+    intensitySlope: 0.5
+    maxIntensity: 0.01
+    canCreateVacuum: false
+    maxTileBreak: 0
+  - type: SmokeOnTrigger
+    duration: 0.01
+    spreadAmount: 5
+    smokePrototype: Foam
+    solution:
+      reagents:
+      - ReagentId: SpaceLube
+        Quantity: 1500 #not really 1500. Due to short time its about ~800u
+
+#special ammo for hristov
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  id: BulletAntiMaterielToyStun
+  name: bullet (.60 anti-materiel)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 0.01
+        Structural: 10
+        Stamina: 20 #for fun. Cannot really staminacrit someone with this
+    ignoreResistances: true
+  - type: StunOnCollide
+    stunAmount: 1
+    knockdownAmount: 1
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBulletTrigger
+  id: BulletAntiMaterielToyMeme
+  name: bullet (.60 anti-materiel)
+  suffix: Shitspawn
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 0.01
+        Structural: 10
+    soundHit:
+      path: /Audio/SS220/Weapons/Guns/Hits/headshot.ogg
+    forceSound: true
+  - type: StunOnCollide
+    knockdownAmount: 1
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  id: BulletAntiMaterielToyHappiness
+  name: bullet (.60 anti-materiel)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 0.01
+        Structural: 10
+  - type: EmbeddableProjectile
+  - type: SolutionContainerManager
+    solutions:
+      ammo:
+        maxVol: 20
+        reagents:
+        - ReagentId: Happiness
+          Quantity: 20
+  - type: InjectableSolution
+    solution: ammo
+  - type: SolutionInjectOnEmbed
+    transferAmount: 20
+    solution: ammo
+  - type: SolutionTransfer
+    maxTransferAmount: 20
+
+- type: entity
+  name : Blaster bolt
+  id: BulletBlasterAlt
+  parent: BulletDisabler
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
+    layers:
+    - state: redlaser
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlaster
+    damage:
+      types:
+        Heat: 20
+        Piercing: 6
+    soundHit:
+      collection: WeakHit
+    forceSound: true
+
+- type: entity
+  name : Blaster bolt
+  id: BulletBlasterPulse
+  parent: BulletDisabler
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: pulseheavylaser
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlue
+    damage:
+      types:
+        Heat: 48
+        Piercing: 14
+    soundHit:
+      collection: WeakHit
+    forceSound: true
+
+- type: entity
+  id: BulletImpactEffectBlue
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Sprite
+    drawdepth: Effects
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      state: impact_laser_greyscale
+      color: blue
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+#HOCebent
+- type: entity
+  id: BulletUnitarySlug
+  name: unitary slug
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    state: slug
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 120

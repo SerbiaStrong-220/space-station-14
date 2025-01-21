@@ -1,0 +1,42 @@
+- type: job
+  id: SecurityPilot
+  name: пилот СБ
+  description: Ловите преступников на станции, бороздите просторы космоса в поисках... Чего-нибудь.
+  playTimeTracker: JobSecurityPilot
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 54000 # SS220-RoleTime 2
+    - !type:SpeciesRequirement #SS220-jobbans begin
+      inverted: true
+      species:
+      - Felinid #SS220-jobbans end
+  startingGear: SecurityPilotGear
+  icon: "JobIconSecurityPilot"
+  supervisors: job-supervisors-hos
+  canBeAntag: false
+  access:
+  - Security
+  - Brig
+  - Maintenance
+  - Service
+  - External
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+
+- type: startingGear
+  id: SecurityPilotGear
+  equipment:
+#    eyes: ClothingEyesGlassesSecurity #SS220-TwoOne-Floppa-Iteration
+    ears: ClothingHeadsetSecurity
+    belt: ClothingBeltSecurityFilled
+    gloves: ClothingHandsGlovesCombat #SS220 PilotsGloves
+    pocket1: WeaponPistolMk58Nonlethal
+  storage:
+    back:
+    - Flash
+    - MagazinePistolRubber
+    - MagazinePistolRubber
+    - FlashlightSeclite
+    - DrinkRelaxingPeachCan

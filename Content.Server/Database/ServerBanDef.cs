@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using System.Net;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -13,7 +12,7 @@ namespace Content.Server.Database
         public int? Id { get; }
         public NetUserId? UserId { get; }
         public (IPAddress address, int cidrMask)? Address { get; }
-        public ImmutableArray<byte>? HWId { get; }
+        public ImmutableTypedHwid? HWId { get; }
 
         public DateTimeOffset BanTime { get; }
         public DateTimeOffset? ExpirationTime { get; }
@@ -25,12 +24,12 @@ namespace Content.Server.Database
         public ServerUnbanDef? Unban { get; }
         public string? BanningAdminName { get; }
         public int StatedRound { get; }
+        public ServerBanExemptFlags ExemptFlags { get; }
 
-        public ServerBanDef(
-            int? id,
+        public ServerBanDef(int? id,
             NetUserId? userId,
             (IPAddress, int)? address,
-            ImmutableArray<byte>? hwId,
+            TypedHwid? hwId,
             DateTimeOffset banTime,
             DateTimeOffset? expirationTime,
             int? roundId,
@@ -40,7 +39,8 @@ namespace Content.Server.Database
             NetUserId? banningAdmin,
             string? banningAdminName,
             int round,
-            ServerUnbanDef? unban)
+            ServerUnbanDef? unban,
+            ServerBanExemptFlags exemptFlags = default)
         {
             if (userId == null && address == null && hwId ==  null)
             {
@@ -68,6 +68,7 @@ namespace Content.Server.Database
             BanningAdminName = banningAdminName;
             StatedRound = round;
             Unban = unban;
+            ExemptFlags = exemptFlags;
         }
 
         public string FormatBanMessage(IConfigurationManager cfg, ILocalizationManager loc)
@@ -86,6 +87,7 @@ namespace Content.Server.Database
 
             return $"""
                    {loc.GetString("ban-banned-1")}
+                   {loc.GetString("ban-banned-8", ("banId", Id.HasValue ? Id.Value : "-"))}
                    {loc.GetString("ban-banned-4", ("admin", BanningAdminName ?? "Console"))}
                    {loc.GetString("ban-banned-6", ("round", StatedRound != 0 ? StatedRound : loc.GetString("ban-banned-7")))}
                    {loc.GetString("ban-banned-2", ("reason", Reason))}

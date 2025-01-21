@@ -22,6 +22,7 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
 
         _window = this.CreateWindow<VoiceMaskNameChangeWindow>();
         _window.ReloadVerbs(_protomanager);
+        _window.AddVerbs();
 
         _window.OnNameChange += OnNameSelected;
         _window.OnVoiceChange += (value) => SendMessage(new VoiceMaskChangeVoiceMessage(value)); // Corvax-TTS

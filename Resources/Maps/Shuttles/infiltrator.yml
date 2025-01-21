@@ -3771,18 +3771,13 @@ entities:
     - pos: -2.5,-12.5
       parent: 73
       type: Transform
-- proto: NukeCodePaperStation
+- proto: BoxFolderNuclearCodes
   entities:
   - uid: 798
     components:
     - pos: -2.2848654,-11.417734
       parent: 73
       type: Transform
-    - stampState: paper_stamp-syndicate
-      stampedBy:
-      - stampedColor: '#850000FF'
-        stampedName: stamp-component-stamped-name-syndicate
-      type: Paper
 - proto: Ointment
   entities:
   - uid: 575

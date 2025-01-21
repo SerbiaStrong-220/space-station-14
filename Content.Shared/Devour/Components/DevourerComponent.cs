@@ -18,11 +18,25 @@ public sealed partial class DevourerComponent : Component
     [DataField("devourActionEntity")]
     public EntityUid? DevourActionEntity;
 
+    // SS220 dragon devour fix begin
+    //[ViewVariables(VVAccess.ReadWrite), DataField("soundDevour")]
+    //public SoundSpecifier? SoundDevour = new SoundPathSpecifier("/Audio/Effects/demon_consume.ogg")
+    //{
+    //    Params = AudioParams.Default.WithVolume(-3f),
+    //};
+
     [ViewVariables(VVAccess.ReadWrite), DataField("soundDevour")]
-    public SoundSpecifier? SoundDevour = new SoundPathSpecifier("/Audio/Effects/demon_consume.ogg")
+    public SoundSpecifier? SoundDevour = new SoundCollectionSpecifier("MetalSlam")
     {
         Params = AudioParams.Default.WithVolume(-3f),
     };
+
+    [DataField]
+    public SoundSpecifier? SoundDevourMob = new SoundPathSpecifier("/Audio/Effects/demon_consume.ogg")
+    {
+        Params = AudioParams.Default.WithVolume(-3f),
+    };
+    // SS220 dragon devour fix end
 
     [DataField("devourTime")]
     public float DevourTime = 3f;
@@ -58,6 +72,11 @@ public sealed partial class DevourerComponent : Component
             "MobState",
         }
     };
+
+    // SS220 dragon devour fix begin
+    [DataField]
+    public EntityWhitelist? Blacklist;
+    // SS220 dragon devour fix end
 
     /// <summary>
     /// The chemical ID injected upon devouring

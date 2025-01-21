@@ -59,16 +59,6 @@
         reagent: Haloperidol
         amount: -1
       - !type:AdjustReagent
-        reagent: Stimulants
-        amount: -2
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: Stimulants
-          min: 1
-        reagent: Haloperidol
-        amount: -1
-      - !type:AdjustReagent
         reagent: THC
         amount: -2
       - !type:AdjustReagent
@@ -159,3 +149,59 @@
         damage:
           types:
             Poison: 0.5
+
+- type: reagent
+  id: HolyMolyWater
+  name: reagent-name-holymolywater
+  group: Medicine
+  desc: reagent-desc-holymolywater
+  physicalDesc: reagent-physical-desc-holymoly
+  flavor: HolyMoly
+  color: "#e8e8e8"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -10
+            Burn: -10
+            Airloss: -10
+            Toxin: -10
+
+- type: reagent
+  id: Nicotizine
+  name: reagent-name-nicotizine
+  group: Medicine
+  desc: reagent-desc-nicotizine
+  physicalDesc: reagent-physical-desc-viscous
+  flavor: medicine
+  color: "#ff867d"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:HealthChange
+        probability: 0.3
+        damage:
+          types:
+            Heat: 0.2
+      - !type:AdjustTemperature
+        conditions:
+        - !type:Temperature
+          max: 293.15
+        amount: 100000
+      - !type:HealthChange
+        conditions:
+          - !type:ReagentThreshold
+            min: 30
+        damage:
+          types:
+            Poison: 3
+      - !type:ChemVomit
+        probability: 0.15
+        conditions:
+          - !type:ReagentThreshold
+            min: 30
+      - !type:GenericStatusEffect
+        key: PressureImmunity
+        component: PressureImmunity

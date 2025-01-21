@@ -1,3 +1,22 @@
+# Tables --  Add your new event to this Table if you want it to happen via the basic/ramping schedulers.
+
+- type: entityTable
+  id: CargoGiftsTable
+  table: !type:GroupSelector # ~~we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp~~ But we arent doing that shit yet, it picks a random one StationEventComp be damned.
+    children:
+    - id: GiftsEngineering
+    - id: GiftsFireProtection
+    - id: GiftsJanitor
+    - id: GiftsMedical
+    - id: GiftsPizzaPartyLarge
+    - id: GiftsPizzaPartySmall
+    - id: GiftsSecurityGuns
+    - id: GiftsSecurityRiot
+    - id: GiftsSpacingSupplies
+    - id: GiftsVendingRestock
+
+# Game Rules
+    
 - type: entity
   id: CargoGiftsBase
   parent: BaseGameRule
@@ -215,3 +234,24 @@
       ArmorySmg: 3
       ArmoryShotgun: 3
 #ss220-gammaend
+
+#ss220 cooking supplies begin
+- type: entity
+  id: GiftsKitchen
+  parent: CargoGiftsBase
+  components:
+  - type: StationEvent
+    weight: 6
+    duration: 120
+    minimumPlayers: 30
+    earliestStart: 20
+  - type: CargoGiftsRule
+    description: cargo-gift-kitchen
+    dest: cargo-gift-dest-kitchen
+    gifts:
+      MeatCrate: 1
+      ExoticMeatCrate: 1
+      FoodDinnerware: 1
+      FoodCook: 1
+      CrateVendingMachineRestockChefvend: 1
+#ss220 cooking supplies end

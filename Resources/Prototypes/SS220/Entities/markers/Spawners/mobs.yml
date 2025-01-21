@@ -10,3 +10,16 @@
   - type: ConditionalSpawner
     prototypes:
       - MobSecDogRoxi
+
+- type: entity
+  name: the spawner Steven
+  id: SpawnMobStevenCrocodile
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+      - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+      - MobStevenCrocodileGhostRole

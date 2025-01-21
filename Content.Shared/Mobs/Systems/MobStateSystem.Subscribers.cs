@@ -13,6 +13,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Pointing;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Speech;
+using Content.Shared.SS220.Telepathy;
 using Content.Shared.Standing;
 using Content.Shared.Strip.Components;
 using Content.Shared.Throwing;
@@ -32,6 +33,7 @@ public partial class MobStateSystem
         SubscribeLocalEvent<MobStateComponent, ConsciousAttemptEvent>(CheckConcious);
         SubscribeLocalEvent<MobStateComponent, ThrowAttemptEvent>(CheckAct);
         SubscribeLocalEvent<MobStateComponent, SpeakAttemptEvent>(OnSpeakAttempt);
+        SubscribeLocalEvent<MobStateComponent, TelepathySendAttemptEvent>(OnTelepathyAttempt); // SS220 Block telepathy on death
         SubscribeLocalEvent<MobStateComponent, IsEquippingAttemptEvent>(OnEquipAttempt);
         SubscribeLocalEvent<MobStateComponent, EmoteAttemptEvent>(CheckAct);
         SubscribeLocalEvent<MobStateComponent, IsUnequippingAttemptEvent>(OnUnequipAttempt);
@@ -80,11 +82,6 @@ public partial class MobStateSystem
             case MobState.Dead:
                 RemComp<CollisionWakeComponent>(target);
                 _standing.Stand(target);
-                if (!_standing.IsDown(target) && TryComp<PhysicsComponent>(target, out var physics))
-                {
-                    _physics.SetCanCollide(target, true, body: physics);
-                }
-
                 break;
             case MobState.Invalid:
                 //unused
@@ -115,12 +112,6 @@ public partial class MobStateSystem
             case MobState.Dead:
                 EnsureComp<CollisionWakeComponent>(target);
                 _standing.Down(target);
-
-                if (_standing.IsDown(target) && TryComp<PhysicsComponent>(target, out var physics))
-                {
-                    _physics.SetCanCollide(target, false, body: physics);
-                }
-
                 _appearance.SetData(target, MobStateVisuals.State, MobState.Dead);
                 break;
             case MobState.Invalid:
@@ -158,6 +149,19 @@ public partial class MobStateSystem
 
         CheckAct(uid, component, args);
     }
+
+    // SS220 Block telepathy on death begin
+    private void OnTelepathyAttempt(Entity<MobStateComponent> entity, ref TelepathySendAttemptEvent args)
+    {
+        switch (entity.Comp.CurrentState)
+        {
+            case MobState.Dead:
+            case MobState.Critical:
+                args.Cancelled = true;
+                break;
+        }
+    }
+    // SS220 Block telepathy on death end
 
     private void CheckAct(EntityUid target, MobStateComponent component, CancellableEntityEventArgs args)
     {

@@ -18,7 +18,6 @@
   weight: 20
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
-  requireAdminNotify: true
   supervisors: job-supervisors-captain
   radioBold: true
   access:
@@ -44,7 +43,7 @@
   - Salvage
   - Security
   - Brig
-  - Lawyer
+#  - Lawyer #SS220-Law Department
   - Cargo
   - Atmospherics
   - Medical

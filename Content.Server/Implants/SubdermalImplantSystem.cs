@@ -8,6 +8,7 @@ using Content.Server.Store.Components;
 using Content.Server.Store.Systems;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Cuffs.Components;
+using Content.Shared.Forensics;
 using Content.Shared.Humanoid;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
@@ -24,9 +25,12 @@ using System.Numerics;
 using Content.Server.IdentityManagement;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Server.IdentityManagement;
 using Content.Shared.Store.Components;
 using Robust.Shared.Collections;
 using Robust.Shared.Map.Components;
+using Content.Shared.DoAfter;
+using Content.Shared.SS220.Store;
 
 namespace Content.Server.Implants;
 
@@ -46,6 +50,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
     [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private HashSet<Entity<MapGridComponent>> _targetGrids = [];
@@ -103,15 +108,30 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         if (!TryComp<CurrencyComponent>(args.Used, out var currency))
             return;
 
-        // same as store code, but message is only shown to yourself
-        args.Handled = _store.TryAddCurrency(_store.GetCurrencyValue(args.Used, currency), uid, store);
+        //SS220-insert-currency-doafter begin
+        if (store.CurrencyInsertTime != null)
+        {
+            var doAfter = new DoAfterArgs(EntityManager, args.User, store.CurrencyInsertTime.Value,
+                new InsertCurrencyDoAfterEvent(args.Used, (uid, store)),
+                uid)
+            {
+                NeedHand = true,
+                BreakOnDamage = true
+            };
 
-        if (!args.Handled)
+            _doAfter.TryStartDoAfter(doAfter);
+            args.Handled = true;
+            return;
+        }
+        //SS220-insert-currency-doafter end
+
+        // same as store code, but message is only shown to yourself
+        if (!_store.TryAddCurrency((args.Used, currency), (uid, store)))
             return;
 
+        args.Handled = true;
         var msg = Loc.GetString("store-currency-inserted-implant", ("used", args.Used));
         _popup.PopupEntity(msg, args.User, args.User);
-        QueueDel(args.Used);
     }
 
     private void OnFreedomImplant(EntityUid uid, SubdermalImplantComponent component, UseFreedomImplantEvent args)
@@ -140,6 +160,10 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         // This can for example happen when the user is cuffed and being pulled.
         if (TryComp<PullableComponent>(ent, out var pull) && _pullingSystem.IsPulled(ent, pull))
             _pullingSystem.TryStopPull(ent, pull);
+
+        // Check if the user is pulling anything, and drop it if so
+        if (TryComp<PullerComponent>(ent, out var puller) && TryComp<PullableComponent>(puller.Pulling, out var pullable))
+            _pullingSystem.TryStopPull(puller.Pulling.Value, pullable);
 
         var xform = Transform(ent);
         var targetCoords = SelectRandomTileInRange(xform, implant.TeleportRadius);
@@ -239,16 +263,19 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         {
             var newProfile = HumanoidCharacterProfile.RandomWithSpecies(humanoid.Species);
             _humanoidAppearance.LoadProfile(ent, newProfile, humanoid);
-            _metaData.SetEntityName(ent, newProfile.Name);
-            _identity.QueueIdentityUpdate(ent); //ss220 edit
+            _metaData.SetEntityName(ent, newProfile.Name, raiseEvents: false); // raising events would update ID card, station record, etc.
             if (TryComp<DnaComponent>(ent, out var dna))
             {
                 dna.DNA = _forensicsSystem.GenerateDNA();
+
+                var ev = new GenerateDnaEvent { Owner = ent, DNA = dna.DNA };
+                RaiseLocalEvent(ent, ref ev);
             }
             if (TryComp<FingerprintComponent>(ent, out var fingerprint))
             {
                 fingerprint.Fingerprint = _forensicsSystem.GenerateFingerprint();
             }
+            _identity.QueueIdentityUpdate(ent); // manually queue identity update since we don't raise the event
             _popup.PopupEntity(Loc.GetString("scramble-implant-activated-popup"), ent, ent);
         }
 

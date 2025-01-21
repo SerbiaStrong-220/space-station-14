@@ -1,0 +1,10 @@
+- type: entity
+  id: CrateHolyWaterKit
+  parent: CrateGenericSteel
+  name: box of holy water
+  description: Holy water box, in case there is no priest at the station. Contains 3 jugs of holy water.
+  components:
+  - type: StorageFill
+    contents:
+    - id: HolyWaterJug
+      amount: 1

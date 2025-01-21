@@ -24,3 +24,9 @@ ent-LockerMime = шкаф мима
 ent-LockerMimeFilled = { ent-LockerMime }
     .suffix = Заполненный
     .desc = { ent-LockerMime.desc }
+
+ent-LockerMagistrate = шкаф Магистрата
+    .desc = { ent-LockerBaseSecure.desc }
+ent-LockerMagistrateFilled = { ent-LockerMagistrate }
+    .suffix = Заполненный
+    .desc = { ent-LockerBaseSecure.desc }

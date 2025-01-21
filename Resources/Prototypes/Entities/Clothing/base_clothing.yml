@@ -3,6 +3,11 @@
   parent: BaseItem
   id: Clothing
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/clothing_base.ogg
+      params:
+        volume: 2
   - type: Item
     size: Normal
   - type: Sprite
@@ -11,6 +16,9 @@
       - WhitelistChameleon
   - type: StaticPrice
     price: 10
+  - type: FlavorProfile #yes not every peice of clothing is edible, but this way every edible piece of clothing should have the flavor without me having to track down what specific clothing can and cannot be eaten.
+    flavors:
+    - fiber
 
 - type: entity
   abstract: true

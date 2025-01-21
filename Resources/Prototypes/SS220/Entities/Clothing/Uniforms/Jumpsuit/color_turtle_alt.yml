@@ -1,9 +1,12 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 # White Jumpsuit Turtle
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitTurtleAltColorWhite
   name: white turtleneck
   description: Calm and versatile white turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/colorturtle_alt.rsi
@@ -31,6 +34,7 @@
   id: ClothingUniformJumpsuitTurtleAltColorGrey
   name: grey turtleneck
   description: Calm and versatile grey turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/colorturtle_alt.rsi
@@ -62,6 +66,7 @@
   id: ClothingUniformJumpsuitTurtleAltColorBlue
   name: blue turtleneck
   description: Calm and versatile blue turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/colorturtle_alt.rsi
@@ -217,6 +222,7 @@
   id: ClothingUniformJumpsuitTurtleAltColorOrange
   name: orange turtleneck
   description: Calm and versatile orange turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/colorturtle_alt.rsi
@@ -279,6 +285,7 @@
   id: ClothingUniformJumpsuitTurtleAltColorRed
   name: red turtleneck
   description: Calm and versatile red turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/colorturtle_alt.rsi
@@ -310,6 +317,7 @@
   id: ClothingUniformJumpsuitTurtleAltColorYellow
   name: yellow turtleneck
   description: Calm and versatile yellow turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/colorturtle_alt.rsi
@@ -341,6 +349,7 @@
   id: ClothingUniformJumpsuitTurtleAltColorPurple
   name: purple turtleneck
   description: Calm and versatile purple turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/colorturtle_alt.rsi
@@ -372,6 +381,7 @@
   id: ClothingUniformJumpsuitTurtleAltColorLightBrown
   name: light brown turtleneck
   description: Calm and versatile light brown turtleneck will go with any pants or skirt. A great choice for creating a basic look.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/colorturtle_alt.rsi

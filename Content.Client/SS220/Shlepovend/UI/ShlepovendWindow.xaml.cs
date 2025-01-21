@@ -34,6 +34,7 @@ public sealed partial class ShlepovendWindow : FancyWindow
     private string _boostyLink;
     private string _discordLink;
     private int? _lastTokens = null;
+    private SponsorTier[] _sponsorTiers = [];
 
     public ShlepovendWindow()
     {
@@ -42,6 +43,7 @@ public sealed partial class ShlepovendWindow : FancyWindow
 
         _shlepovendSys = _entMan.System<ShlepovendSystem>();
 
+        GetSponsorTiers();
         AddAllGroups();
         UpdateContentData();
 
@@ -69,9 +71,9 @@ public sealed partial class ShlepovendWindow : FancyWindow
             _uri.OpenUri(uri);
     }
 
-    private void AddGroup(ShlepaRewardGroupPrototype groupProto)
+    private void AddGroup(ShlepaRewardGroupPrototype groupProto, bool isAvailable)
     {
-        var group = new ShlepovendGroup() { Group = groupProto };
+        var group = new ShlepovendGroup() { Group = groupProto, IsAvailable = isAvailable };
         RewardGroupList.AddChild(group);
         _groups.Add(group);
 
@@ -95,21 +97,47 @@ public sealed partial class ShlepovendWindow : FancyWindow
         OnPurchase?.Invoke((button.GroupProtoId.Value, button.ItemPrototypeId.Value));
     }
 
+    // We need this to save sponsor tiers for later use.
+    private void GetSponsorTiers()
+    {
+        _sponsorTiers = _discordPlayerInfo.GetSponsorTier();
+    }
+
     private void AddAllGroups()
     {
-        var groupList = new List<ShlepaRewardGroupPrototype>();
+        // We need to check for availability here so we can hide some groups (like developer ones).
+        // For the good sake, we pass the availability down further from here.
+        var groupList = new Dictionary<ShlepaRewardGroupPrototype, bool>();
 
         foreach (var (_, groupProto) in _prototype.GetInstances<ShlepaRewardGroupPrototype>())
         {
-            groupList.Add(groupProto);
+            // check if group is available to player
+            if (groupProto == null)
+                break;
+
+            var isAvailable = false;
+            foreach (var tier in _sponsorTiers)
+            {
+                if (groupProto.RequiredRole == null)
+                    continue;
+
+                isAvailable = groupProto.IsExactRoleRequired ? tier == groupProto.RequiredRole :
+                    (int)tier >= (int)groupProto.RequiredRole;
+
+                if (isAvailable)
+                    break;
+            }
+
+            if (isAvailable || !groupProto.IsHiddenOnInsufficient)
+                groupList.Add(groupProto, isAvailable);
         }
 
         /* no Convert.ToInt32 in sandbox, ya ebal System.Enum */
-        var orderedGroupList = groupList.OrderBy(o => o.RequiredRole == null ? 0 : ((int) (object) o.RequiredRole));
+        var orderedGroupList = groupList.OrderBy(o => o.Key.RequiredRole == null ? 0 : ((int) (object) o.Key.RequiredRole));
 
         foreach (var group in orderedGroupList)
         {
-            AddGroup(group);
+            AddGroup(group.Key, group.Value);
         }
     }
 
@@ -119,12 +147,11 @@ public sealed partial class ShlepovendWindow : FancyWindow
         string? tierText = null;
         NotLinkedLabel.Visible = true;
 
-        var playerTiers = _discordPlayerInfo.GetSponsorTier();
-        if (playerTiers.Length > 0)
+        if (_sponsorTiers.Length > 0)
         {
             NotLinkedLabel.Visible = false;
             // Get highest available player's tier
-            var highestAvailableTier = _shlepovendSys.GetHighestTier(playerTiers);
+            var highestAvailableTier = _shlepovendSys.GetHighestTier(_sponsorTiers);
             tierText = highestAvailableTier?.Name;
         }
 
@@ -145,33 +172,16 @@ public sealed partial class ShlepovendWindow : FancyWindow
     {
         var notAvailableText = Loc.GetString("shlepovend-not-available");
         var notEnoughText = Loc.GetString("shlepovend-not-enough");
-        var playerTiers = _discordPlayerInfo.GetSponsorTier();
 
         foreach (var group in _groups)
         {
-            // check if group is available to player
-            var groupProto = group.Group;
-            var isAvailable = false;
-            if (groupProto != null)
-            {
-                foreach (var tier in playerTiers)
-                {
-                    if (groupProto.RequiredRole is SponsorTier &&
-                    (int) tier >= (int) (SponsorTier) groupProto.RequiredRole)
-                    {
-                        isAvailable = true;
-                        break;
-                    }
-                }
-            }
-
             foreach (var button in group.Buttons)
             {
                 var isEnough = button.Price <= _shlepovendSys.Tokens;
-                button.AvailableLabel.Visible = !(isAvailable && isEnough);
-                button.Disabled = !isAvailable || !isEnough;
+                button.AvailableLabel.Visible = !(group.IsAvailable && isEnough);
+                button.Disabled = !group.IsAvailable || !isEnough;
 
-                if (!isAvailable)
+                if (!group.IsAvailable)
                     button.AvailableLabel.Text = notAvailableText;
                 else if (!isEnough)
                     button.AvailableLabel.Text = notEnoughText;

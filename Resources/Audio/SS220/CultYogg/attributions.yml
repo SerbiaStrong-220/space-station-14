@@ -1,0 +1,29 @@
+- files: ["migo_astral_in.ogg", "migo_astral_out.ogg", "migo_slave.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Original is created by MIXnikita for SS220"
+  source: "https://github.com/SerbiaStrong-22"
+
+- files: ["nyarlathotep_step1.ogg", "nyarlathotep_step2.ogg", "nyarlathotep_voice1.ogg", "nyarlathotep_voice2.ogg", "nyarlathotep_voice3.ogg", "nyarlathotep_start.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Original is created by MIXnikita for SS220"
+  source: "https://github.com/SerbiaStrong-22"
+
+- files: ["its_coming.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Original is created by Haziness Codex for SS220"
+  source: "https://github.com/SerbiaStrong-22"
+
+- files: ["inhale_scream_1.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original is created by jorickhoofd, modified by SkaldetSkaeg for SS22"
+  source: "https://freesound.org/people/jorickhoofd/sounds/179333/"
+
+- files: ["inhale_scream_2.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original is created by jorickhoofd, modified by SkaldetSkaeg for SS22"
+  source: "https://freesound.org/people/jorickhoofd/sounds/180300/"
+
+- files: ["inhale_scream_3.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original is created by jorickhoofd, modified by SkaldetSkaeg for SS220"
+  source: "https://freesound.org/people/jorickhoofd/sounds/180301/"

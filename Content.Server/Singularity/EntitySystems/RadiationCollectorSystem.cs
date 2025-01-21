@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server.Atmos;
+using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Components;
 using Content.Server.Popups;
 using Content.Server.Power.Components;
@@ -14,6 +14,7 @@ using Content.Shared.Singularity.Components;
 using Content.Shared.Timing;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
+using Content.Server.SS220.SuperMatterCrystal.Components; // SS220-SM-fix
 
 namespace Content.Server.Singularity.EntitySystems;
 
@@ -24,13 +25,15 @@ public sealed class RadiationCollectorSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!; //SS220-fix-SM
 
     private const string GasTankContainer = "gas_tank";
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RadiationCollectorComponent, InteractHandEvent>(OnInteractHand);
+        SubscribeLocalEvent<RadiationCollectorComponent, AnchorStateChangedEvent>(OnAnchorChange); // SS220-SM-fix
+        SubscribeLocalEvent<RadiationCollectorComponent, ActivateInWorldEvent>(OnActivate);
         SubscribeLocalEvent<RadiationCollectorComponent, OnIrradiatedEvent>(OnRadiation);
         SubscribeLocalEvent<RadiationCollectorComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<RadiationCollectorComponent, GasAnalyzerScanEvent>(OnAnalyzed);
@@ -56,6 +59,7 @@ public sealed class RadiationCollectorSystem : EntitySystem
     private void OnMapInit(EntityUid uid, RadiationCollectorComponent component, MapInitEvent args)
     {
         TryGetLoadedGasTank(uid, out var gasTank);
+        TryFindSMNear((uid, component)); // SS220-SM-fix;
         UpdateTankAppearance(uid, component, gasTank);
     }
 
@@ -65,7 +69,7 @@ public sealed class RadiationCollectorSystem : EntitySystem
         UpdateTankAppearance(uid, component, gasTank);
     }
 
-    private void OnInteractHand(EntityUid uid, RadiationCollectorComponent component, InteractHandEvent args)
+    private void OnActivate(EntityUid uid, RadiationCollectorComponent component, ActivateInWorldEvent args)
     {
         if (TryComp(uid, out UseDelayComponent? useDelay) && !_useDelay.TryResetDelay((uid, useDelay), true))
             return;
@@ -88,6 +92,11 @@ public sealed class RadiationCollectorSystem : EntitySystem
             float reactantMol = gasTankComponent.Air.GetMoles(gas.ReactantPrototype);
             float delta = args.TotalRads * reactantMol * gas.ReactantBreakdownRate;
 
+            // SS220 SM-fix-begin
+            var smFactor = component.NearSM ? component.ReactionRateModifierNearSM : 1f;
+            delta *= smFactor;
+            // SS220 SM-fix-end
+
             // We need to offset the huge power gains possible when using very cold gases
             // (they allow you to have a much higher molar concentrations of gas in the tank).
             // Hence power output is modified using the Michaelis-Menten equation,
@@ -103,7 +112,7 @@ public sealed class RadiationCollectorSystem : EntitySystem
 
             if (gas.Byproduct != null)
             {
-                gasTankComponent.Air.AdjustMoles((int) gas.Byproduct, delta * gas.MolarRatio);
+                gasTankComponent.Air.AdjustMoles((int)gas.Byproduct, delta * gas.MolarRatio);
             }
         }
 
@@ -137,13 +146,22 @@ public sealed class RadiationCollectorSystem : EntitySystem
 
     private void OnExamined(EntityUid uid, RadiationCollectorComponent component, ExaminedEvent args)
     {
-        if (!TryGetLoadedGasTank(uid, out var gasTank))
+        using (args.PushGroup(nameof(RadiationCollectorComponent)))
         {
-            args.PushMarkup(Loc.GetString("power-radiation-collector-gas-tank-missing"));
-            return;
-        }
+            args.PushMarkup(Loc.GetString("power-radiation-collector-enabled", ("state", component.Enabled)));
 
-        args.PushMarkup(Loc.GetString("power-radiation-collector-gas-tank-present"));
+            if (!TryGetLoadedGasTank(uid, out var gasTank))
+            {
+                args.PushMarkup(Loc.GetString("power-radiation-collector-gas-tank-missing"));
+            }
+            else
+            {
+                _appearance.TryGetData<int>(uid, RadiationCollectorVisuals.PressureState, out var state);
+
+                args.PushMarkup(Loc.GetString("power-radiation-collector-gas-tank-present",
+                    ("fullness", state)));
+            }
+        }
     }
 
     private void OnAnalyzed(EntityUid uid, RadiationCollectorComponent component, GasAnalyzerScanEvent args)
@@ -195,13 +213,14 @@ public sealed class RadiationCollectorSystem : EntitySystem
         if (!Resolve(uid, ref appearance, false))
             return;
 
+        // gas canisters can fill tanks up to 10 atm, so we set the warning level thresholds 1/3 and 2/3 of that
         if (gasTank == null || gasTank.Air.Pressure < 10)
             _appearance.SetData(uid, RadiationCollectorVisuals.PressureState, 0, appearance);
 
-        else if (gasTank.Air.Pressure < Atmospherics.OneAtmosphere)
+        else if (gasTank.Air.Pressure < 3.33f * Atmospherics.OneAtmosphere)
             _appearance.SetData(uid, RadiationCollectorVisuals.PressureState, 1, appearance);
 
-        else if (gasTank.Air.Pressure < 3f * Atmospherics.OneAtmosphere)
+        else if (gasTank.Air.Pressure < 6.66f * Atmospherics.OneAtmosphere)
             _appearance.SetData(uid, RadiationCollectorVisuals.PressureState, 2, appearance);
 
         else
@@ -217,4 +236,17 @@ public sealed class RadiationCollectorSystem : EntitySystem
 
         UpdatePressureIndicatorAppearance(uid, component, gasTank, appearance);
     }
+
+    //SS220-SM-fix-begin
+    private void OnAnchorChange(Entity<RadiationCollectorComponent> entity, ref AnchorStateChangedEvent _)
+    {
+        TryFindSMNear(entity);
+    }
+
+    private void TryFindSMNear(Entity<RadiationCollectorComponent> entity)
+    {
+        var smEntitiesInRange = _entityLookup.GetEntitiesInRange<SuperMatterComponent>(Transform(entity).Coordinates, entity.Comp.LookupSMRange);
+        entity.Comp.NearSM = !(smEntitiesInRange.Count == 0);
+    }
+    //SS220-SM-fix-end
 }

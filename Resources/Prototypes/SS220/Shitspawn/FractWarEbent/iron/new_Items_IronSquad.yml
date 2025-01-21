@@ -8,9 +8,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Mask/nuclear_mask.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Mask/nuclear_mask.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Mask/nuclear_mask.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Mask/nuclear_mask.rsi
   - type: FlashImmunity
   - type: EyeProtection
   #ss220 special_sounds start
@@ -30,10 +30,10 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Shoes/Boots/magsyndieebent.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Shoes/Boots/magsyndieebent.rsi
     state: icon
   - type: Clothing
-    sprite: SS220/Clothing/Shoes/Boots/magsyndieebent.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Shoes/Boots/magsyndieebent.rsi
   - type: Magboots
   - type: ClothingSpeedModifier
     walkModifier: 1.1
@@ -48,8 +48,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
-    icon: { sprite: /Textures/SS220/Clothing/Shoes/Boots/magsyndieebent.rsi, state: icon }
-    iconOn: /Textures/SS220/Clothing/Shoes/Boots/magsyndieebent.rsi/icon-on.png
+    icon: { sprite: /Textures/SS220/Shitspawn/FractWarEbent/Clothing/Shoes/Boots/magsyndieebent.rsi, state: icon }
+    iconOn: /Textures/SS220/Shitspawn/FractWarEbent/Clothing/Shoes/Boots/magsyndieebent.rsi/icon-on.png
 
 - type: entity
   parent: ClothingBackpack
@@ -59,7 +59,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Back/Backpacks/nuclear_backpack.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Back/Backpacks/nuclear.rsi
   - type: Storage
     grid:
     - 0,0,12,3
@@ -74,7 +74,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/Cloaks/s_cmo.rsi
+      sprite: SS220/Shitspawn/FractWarEbent/Clothing/Neck/Cloaks/s_cmo.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -84,7 +84,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/Cloaks/s_command.rsi
+      sprite: SS220/Shitspawn/FractWarEbent/Clothing/Neck/Cloaks/s_command.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -94,7 +94,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/Cloaks/s_eng.rsi
+      sprite: SS220/Shitspawn/FractWarEbent/Clothing/Neck/Cloaks/s_eng.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -104,4 +104,4 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/Cloaks/s_med.rsi
+      sprite: SS220/Shitspawn/FractWarEbent/Clothing/Neck/Cloaks/s_med.rsi

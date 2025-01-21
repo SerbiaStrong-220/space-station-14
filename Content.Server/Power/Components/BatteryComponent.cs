@@ -25,16 +25,20 @@ namespace Content.Server.Power.Components
         public float CurrentCharge;
 
         /// <summary>
-        /// True if the battery is fully charged.
-        /// </summary>
-        [ViewVariables]
-        public bool IsFullyCharged => MathHelper.CloseToPercent(CurrentCharge, MaxCharge);
-
-        /// <summary>
         /// The price per one joule. Default is 1 credit for 10kJ.
         /// </summary>
         [DataField]
         public float PricePerJoule = 0.0001f;
+
+        //SS220-smes-overcharge begin
+        /// <summary>
+        /// Use this if you set current charge more than max charge.
+        /// Will be false if current charge drops below than max charge.
+        /// Also blocks getting more charge when true.
+        /// </summary>
+        [DataField]
+        public bool IsOvercharged = false;
+        //SS220-smes-overcharge end
     }
 
     /// <summary>

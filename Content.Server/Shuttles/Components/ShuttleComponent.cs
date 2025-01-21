@@ -64,5 +64,15 @@ namespace Content.Server.Shuttles.Components
 
         [DataField("angularDamping"), ViewVariables(VVAccess.ReadWrite)]
         public float AngularDamping = 0.05f;
+
+        // SS220 Cruise-Control begin
+        [DataField, ViewVariables(VVAccess.ReadWrite)]
+        public float CruiseControlVelocityMultiplier = 1;
+        // SS220 Cruise-Control end
+
+        // SS220 FTLCooldown outside CVar begin
+        [DataField, ViewVariables(VVAccess.ReadWrite)]
+        public float FTLCooldown = 10f;
+        // SS220 FTLCooldown outside CVar end
     }
 }

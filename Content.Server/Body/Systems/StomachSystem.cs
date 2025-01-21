@@ -1,17 +1,18 @@
 using Content.Server.Body.Components;
-using Content.Server.Chemistry.Containers.EntitySystems;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Body.Organ;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.Chemistry.Reagent;
 
 namespace Content.Server.Body.Systems
 {
     public sealed class StomachSystem : EntitySystem
     {
         [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
         public const string DefaultSolutionName = "stomach";
 
@@ -130,5 +131,23 @@ namespace Content.Server.Body.Systems
 
             return true;
         }
+
+        // SS220 remove reagent from stomach begin
+        public bool TryRemoveReagent(
+            EntityUid uid,
+            ReagentQuantity reagent,
+            StomachComponent? stomach = null,
+            SolutionContainerManagerComponent? solutions = null)
+        {
+            if (!Resolve(uid, ref stomach, ref solutions)
+                || !_solutionContainerSystem.ResolveSolution((uid, solutions), DefaultSolutionName, ref stomach.Solution, out var solution))
+                return false;
+
+            solution.RemoveReagent(reagent);
+            _solutionContainerSystem.UpdateChemicals(stomach.Solution.Value);
+
+            return true;
+        }
+        // SS220 remove reagent from stomach end
     }
 }

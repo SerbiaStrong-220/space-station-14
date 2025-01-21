@@ -21,6 +21,8 @@ public sealed partial class ShlepovendGroup : BoxContainer
     private List<BoxContainer> _rows = new();
     public List<ShlepovendItemButton> Buttons = new();
 
+    public bool IsAvailable = false;
+
     private ShlepaRewardGroupPrototype? _group;
     public ShlepaRewardGroupPrototype? Group
     {

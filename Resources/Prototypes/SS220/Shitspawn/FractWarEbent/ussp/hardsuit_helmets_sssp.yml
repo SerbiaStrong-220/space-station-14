@@ -15,9 +15,9 @@
   name: шлем тяжёлого боевого скафандра Маршала СССП
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_admiral.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ussp_admiral.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_admiral.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ussp_admiral.rsi
 
 # CE
 - type: entity
@@ -27,9 +27,9 @@
   name: шлем инженерного скафандра СССП
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_ce.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ussp_ce.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_ce.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ussp_ce.rsi
 
 # CMO
 - type: entity
@@ -39,9 +39,9 @@
   name: шлем медицинского скафандра СССП
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_cmo.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ussp_cmo.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/ussp_cmo.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/ussp_cmo.rsi
 
 # Soldier
 - type: entity
@@ -51,9 +51,9 @@
   name: шлем красноармейского скафандра СССП
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/sssp_soldier.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/sssp_soldier.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/sssp_soldier.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/sssp_soldier.rsi
 
 # Heavy2
 - type: entity
@@ -63,6 +63,6 @@
   name: шлем тяжёлого боевого скафандра СССП 2.0
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/sssp_heavy_2.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/sssp_heavy_2.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/sssp_heavy_2.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Head/Hardsuits/sssp_heavy_2.rsi

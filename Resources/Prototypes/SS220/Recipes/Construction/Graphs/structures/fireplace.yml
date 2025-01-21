@@ -1,0 +1,51 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: constructionGraph
+  id: FirePlace
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: FirePlaceNode
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: Steel
+              amount: 10
+              doAfter: 10
+            - material: WoodPlank
+              amount: 10
+              doAfter: 10
+            - material: Cable
+              amount: 2
+              doAfter: 5
+
+    - node: FirePlaceNode
+      entity: Fireplace
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+            prototype: MaterialWoodPlank
+            amount: 5
+          - !type:SpawnPrototype
+            prototype: SheetSteel1
+            amount: 8
+          - !type:SpawnPrototype
+              prototype: CableApcStack1
+              amount: 2
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 5
+            - tool: Cutting
+              doAfter: 2
+            - tool: Welding
+              doAfter: 4
+            - tool: Screwing
+              doAfter: 5
+            - tool: Prying
+              doAfter: 5
+            - tool: Welding
+              doAfter: 4

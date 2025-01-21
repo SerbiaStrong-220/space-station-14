@@ -1,0 +1,11 @@
+- type: localizedDataset
+  id: borg_names
+  values:
+    prefix: names-borg-dataset-220-
+    count: 52
+
+- type: localizedDataset
+  id: ai_names
+  values:
+    prefix: names-ai-dataset-220-
+    count: 52

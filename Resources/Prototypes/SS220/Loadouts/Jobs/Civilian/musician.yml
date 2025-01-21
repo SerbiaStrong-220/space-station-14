@@ -1,5 +1,12 @@
 # SS220 bard loadout
-
+- type: loadoutEffectGroup
+  id: DangerCoat
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobMusician
+      time: 144000 # 40 hrs
 # Bard Time
 
 - type: loadoutEffectGroup
@@ -50,3 +57,12 @@
     proto: MusicianBard
   equipment:
     shoes: ClothingShoesBootsBard
+
+# Outer
+- type: loadout
+  id: DangerCoat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: DangerCoat
+  equipment:
+    outerClothing: ClothingOuterCoatDanger

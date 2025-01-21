@@ -9,8 +9,12 @@ using Content.Client.Chat.UI;
 using Content.Client.Examine;
 using Content.Client.Gameplay;
 using Content.Client.Ghost;
+using Content.Client.Mind;
+using Content.Client.Roles;
+using Content.Client.SS220.UserInterface.System.Chat.Controls;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Screens;
+using Content.Client.UserInterface.Systems.Chat.Controls;
 using Content.Client.UserInterface.Systems.Chat.Widgets;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared.Administration;
@@ -21,6 +25,7 @@ using Content.Shared.Decals;
 using Content.Shared.Input;
 using Content.Shared.Radio;
 using Content.Shared.SS220.Telepathy;
+using Content.Shared.Roles.RoleCodeword;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -61,6 +66,8 @@ public sealed class ChatUIController : UIController
     [UISystemDependency] private readonly TypingIndicatorSystem? _typingIndicator = default;
     [UISystemDependency] private readonly ChatSystem? _chatSys = default;
     [UISystemDependency] private readonly TransformSystem? _transform = default;
+    [UISystemDependency] private readonly MindSystem? _mindSystem = default!;
+    [UISystemDependency] private readonly RoleCodewordSystem? _roleCodewordSystem = default!;
 
     [ValidatePrototypeId<ColorPalettePrototype>]
     private const string ChatNamePalette = "ChatNames";
@@ -81,8 +88,7 @@ public sealed class ChatUIController : UIController
         {SharedChatSystem.AdminPrefix, ChatSelectChannel.Admin},
         {SharedChatSystem.RadioCommonPrefix, ChatSelectChannel.Radio},
         {SharedChatSystem.DeadPrefix, ChatSelectChannel.Dead},
-        //ss220-telepathy
-        {SharedChatSystem.TelepathyChannelPrefix, ChatSelectChannel.Telepathy}
+        {SharedChatSystem.TelepathyChannelPrefix, ChatSelectChannel.Telepathy} //ss220-telepathy
     };
 
     public static readonly Dictionary<ChatSelectChannel, char> ChannelPrefixes = new()
@@ -96,8 +102,7 @@ public sealed class ChatUIController : UIController
         {ChatSelectChannel.Admin, SharedChatSystem.AdminPrefix},
         {ChatSelectChannel.Radio, SharedChatSystem.RadioCommonPrefix},
         {ChatSelectChannel.Dead, SharedChatSystem.DeadPrefix},
-        //ss220-telepathy
-        {ChatSelectChannel.Telepathy, SharedChatSystem.TelepathyChannelPrefix}
+        {ChatSelectChannel.Telepathy, SharedChatSystem.TelepathyChannelPrefix} //ss220-telepathy
     };
 
     /// <summary>
@@ -531,6 +536,7 @@ public sealed class ChatUIController : UIController
             FilterableChannels |= ChatChannel.Radio;
             FilterableChannels |= ChatChannel.Emotes;
             FilterableChannels |= ChatChannel.Notifications;
+            FilterableChannels |= ChatChannel.Telepathy; //ss220 telepathy
 
             // Can only send local / radio / emote when attached to a non-ghost entity.
             // TODO: this logic is iffy (checking if controlling something that's NOT a ghost), is there a better way to check this?
@@ -540,6 +546,7 @@ public sealed class ChatUIController : UIController
                 CanSendChannels |= ChatSelectChannel.Whisper;
                 CanSendChannels |= ChatSelectChannel.Radio;
                 CanSendChannels |= ChatSelectChannel.Emotes;
+                CanSendChannels |= ChatSelectChannel.Telepathy; //ss220 telepathy
             }
         }
 
@@ -558,14 +565,6 @@ public sealed class ChatUIController : UIController
             FilterableChannels |= ChatChannel.AdminChat;
             CanSendChannels |= ChatSelectChannel.Admin;
         }
-
-        //ss220-telepathy-begin
-        if (_ent.HasComponent<TelepathyComponent>(_player.LocalEntity))
-        {
-            FilterableChannels |= ChatChannel.Telepathy;
-            CanSendChannels |= ChatSelectChannel.Telepathy;
-        }
-        //ss220-telepathy-end
 
         SelectableChannels = CanSendChannels;
 
@@ -831,6 +830,31 @@ public sealed class ChatUIController : UIController
             if (grammar != null && grammar.ProperNoun == true)
                 msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
         }
+
+        // Color any codewords for minds that have roles that use them
+        if (_player.LocalUser != null && _mindSystem != null && _roleCodewordSystem != null)
+        {
+            if (_mindSystem.TryGetMind(_player.LocalUser.Value, out var mindId) && _ent.TryGetComponent(mindId, out RoleCodewordComponent? codewordComp))
+            {
+                foreach (var (_, codewordData) in codewordComp.RoleCodewords)
+                {
+                    foreach (string codeword in codewordData.Codewords)
+                        msg.WrappedMessage = SharedChatSystem.InjectTagAroundString(msg, codeword, "color", codewordData.Color.ToHex());
+                }
+            }
+        }
+        //ss220 highlight words start
+        var popupHighlight = UIManager.ActiveScreen?.GetWidget<ChatBox>()?.ChatInput.HighlightButton.Popup
+                             ?? UIManager.ActiveScreen?.GetWidget<ResizableChatBox>()?.ChatInput.HighlightButton.Popup;
+
+        if (popupHighlight?.Words != null)
+        {
+            foreach (var word in popupHighlight.Words)
+            {
+                msg.WrappedMessage = SharedChatSystem.InjectTagAroundString(msg, word, "color", popupHighlight.ColorWords.ToHex());
+            }
+        }
+        //ss220 highlight end
 
         // Log all incoming chat to repopulate when filter is un-toggled
         if (!msg.HideChat)

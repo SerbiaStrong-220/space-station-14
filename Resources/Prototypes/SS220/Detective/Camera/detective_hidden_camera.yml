@@ -31,11 +31,10 @@
         - SurveillanceCamera
         - SurveillanceCameraMonitor
         - RadioSpeaker
-        - BodyCameraBase
   - type: ActiveListener
     range: 10
-  - type: DetectiveCamera
   - type: DetectiveCameraAttach
+  - type: StationAiVision
   - type: Tag
     tags:
     - DetectiveCamera

@@ -1,26 +1,41 @@
-spider-roy-name = Паук улья
-spider-roy-desc = Ваша задача — построить максимально большой улей. Защищайте свою королеву всеми возможными способами. Не позволяйте причинить вред потомству. Экипаж - ваша пища. 
+spider-royQueen-name = Королева пауков
+spider-royQueen-desc = Ваша задача — построить максимально большой улей. Не позволяйте причинить вред потомству. Экипаж - ваша пища, устройте большой пир!
 
-ent-MobSpiderSpaceQueen = королева пауков
+spider-royDrone-name = Трутень королевы пауков
+spider-royDrone-desc = Ваша задача — помогать королеве в расширении улья. Вы её основная рабочая сила. Во имя паучей королевы!
+
+spider-royHunter-name = Паучий охотник
+spider-royHunter-desc = Ваша задача — Добыть достаточно еды для своей королевы. Не позволяйте причинить вред потомству. Экипаж - ваша пища.
+
+spider-royGhost-name = Паучий призрак
+spider-royGhost-desc = Ваша задача — защищать свою королеву всеми возможными способами. Вы - невидимы для своих врагов. Не позволяйте причинить вред потомству. Экипаж - ваша пища.
+
+spider-royShooter-name = Паучий стрелок
+spider-royShooter-desc = Ваша задача — Защищать свою королеву всеми возможными способами. Для этого уничтожайте своих врагов на расстоянии. Не позволяйте причинить вред потомству. Экипаж - ваша пища.
+
+spider-royLittle-name = Маленький паучок
+spider-royLittle-desc = Ваша задача — Защищать свою королеву всеми возможными способами. Ваш размер не должен пугать вас, это ваше преимущество. Не позволяйте причинить вред потомству. Экипаж - ваша пища.
+
+ent-MobSpiderQueen = королева пауков
     .desc = Он так светится, что выглядит опасным.
     .suffix = Улей пауков
 
-ent-MobSpiderSpaceDrone = паук охранник
-    .desc = { ent-MobSpiderSpaceQueen.desc }
-    .suffix = { ent-MobSpiderSpaceQueen.suffix }
+ent-MobSpiderDrone = трутень королевы пауков
+    .desc = { ent-MobSpiderQueen.desc }
+    .suffix = { ent-MobSpiderQueen.suffix }
 
-ent-MobSpiderSpaceHunter = паук охотник
-    .desc = { ent-MobSpiderSpaceQueen.desc }
-    .suffix = { ent-MobSpiderSpaceQueen.suffix }
+ent-MobSpiderHunter = паучий охотник
+    .desc = { ent-MobSpiderQueen.desc }
+    .suffix = { ent-MobSpiderQueen.suffix }
 
-ent-MobSpiderSpaceGhost = паук призрак
-    .desc = { ent-MobSpiderSpaceQueen.desc }
-    .suffix = { ent-MobSpiderSpaceQueen.suffix }
+ent-MobSpiderGhost = паучий призрак
+    .desc = { ent-MobSpiderQueen.desc }
+    .suffix = { ent-MobSpiderQueen.suffix }
 
-ent-MobSpiderSpaceShooter = паук стрелок
-    .desc = { ent-MobSpiderSpaceQueen.desc }
-    .suffix = { ent-MobSpiderSpaceQueen.suffix }
+ent-MobSpiderShooter = паучий стрелок
+    .desc = { ent-MobSpiderQueen.desc }
+    .suffix = { ent-MobSpiderQueen.suffix }
 
-ent-MobSpiderSpaceLittle = паучок
-    .desc = { ent-MobSpiderSpaceQueen.desc }
-    .suffix = { ent-MobSpiderSpaceQueen.suffix }
+ent-MobSpiderLittle = маленький паучок
+    .desc = { ent-MobSpiderQueen.desc }
+    .suffix = { ent-MobSpiderQueenn.suffix }

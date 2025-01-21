@@ -4,3 +4,6 @@ ent-DrinkHotArachneGlass = { ent-DrinkGlass }
 ent-DrinkFrench75Glass = { ent-DrinkGlass }
     .suffix = френч-75
     .desc = { ent-DrinkGlass.desc }
+ent-DrinkEggnogGlass = { ent-DrinkGlass }
+    .suffix = гоголь-моголь
+    .desc = { ent-DrinkGlass.desc }

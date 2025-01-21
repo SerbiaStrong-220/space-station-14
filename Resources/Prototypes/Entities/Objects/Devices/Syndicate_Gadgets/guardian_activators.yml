@@ -1,7 +1,7 @@
 - type: entity
   name: holoparasite injector
   id: HoloparasiteInjector
-  parent: BaseItem
+  parent: [BaseItem]
   description: A complex artwork of handheld machinery allowing the user to host a holoparasite guardian.
   components:
   - type: Sprite
@@ -28,6 +28,7 @@
         - Paramedic
         - MedicalDoctor
         - ChiefMedicalOfficer
+        - Brigmedic #SS220 brigmedic implanters fix
 # Corvax-HiddenDesc-End
 
 - type: entity
@@ -39,7 +40,7 @@
   - type: GuardianCreator
     guardianProto: MobHoloClownGuardian
 # Corvax-HiddenDesc-Start
-  - type: HiddenDescription 
+  - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-HoloClownInjector-syndicate
       whitelistMind:
@@ -57,6 +58,7 @@
         - Paramedic
         - MedicalDoctor
         - ChiefMedicalOfficer
+        - Brigmedic #SS220 brigmedic implanters fix
 # Corvax-HiddenDesc-End
 
 - type: entity
@@ -74,7 +76,7 @@
 
 - type: entity
   name: holoparasite box
-  parent: BoxCardboard
+  parent: [BoxCardboard]
   id: BoxHoloparasite
   description: A box containing a holoparasite injector.
   components:
@@ -90,7 +92,7 @@
 
 - type: entity
   name: holoclown box
-  parent: BoxCardboard
+  parent: [BoxCardboard]
   id: BoxHoloclown
   description: A box containing a holoclown injector.
   components:

@@ -62,7 +62,7 @@
     containers:
       disposals: !type:Container
   - type: StaticPrice
-    price: 62
+    price: 70
   - type: PowerSwitch
 
 - type: entity
@@ -85,6 +85,7 @@
         type: DisposalUnitBoundUserInterface
   - type: RatKingRummageable
   - type: RequireProjectileTarget
+  - type: StationAiWhitelist #SS220 Disposal Unit AI interaction fix
 
 # SS220 rnd-transport
 - type: entity
