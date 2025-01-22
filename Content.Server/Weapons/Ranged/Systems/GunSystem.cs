@@ -220,10 +220,10 @@ public sealed partial class GunSystem : SharedGunSystem
                                     }
                                 }
 
-                                var hit = result.Value.HitEntity; // SS220 add barricade
+                                var hit = result.HitEntity;
                                 lastHit = hit;
 
-                                FireEffects(fromEffect, result.Value.Distance, dir.Normalized().ToAngle(), hitscan, hit); // SS220 add barricade
+                                FireEffects(fromEffect, result.Distance, dir.Normalized().ToAngle(), hitscan, hit);
 
                                 var ev = new HitScanReflectAttemptEvent(user, gunUid, hitscan.Reflective, dir, false);
                                 RaiseLocalEvent(hit, ref ev);

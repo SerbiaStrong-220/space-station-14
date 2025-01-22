@@ -8,7 +8,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
+    access: [["SyndicateAgent"], ["NuclearOperative"]]
   - type: StorageFill
     contents:
     - id: ClothingHeadHatChameleon
@@ -100,6 +100,7 @@
   setPreference: false
   canBeAntag: false
   access:
+  - SyndicateAgent
   - NuclearOperative
 
 - type: playTimeTracker
@@ -113,7 +114,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
+    access: [["SyndicateAgent"], ["NuclearOperative"]]
   - type: StorageFill
     contents:
     - id: SyndicateJawsOfLife
@@ -200,13 +201,9 @@
   playTimeTracker: IronSquadEngineer
   setPreference: false
   canBeAntag: false
-  accessGroups:
-  - Command
   access:
-  - Maintenance
-  - External
+  - SyndicateAgent
   - NuclearOperative
-  - Bar
 
 - type: playTimeTracker
   id: IronSquadEngineer
@@ -219,7 +216,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
+    access: [["SyndicateAgent"], ["NuclearOperative"]]
   - type: StorageFill
     contents:
     - id: ClothingUniformJumpsuitPyjamaSyndicateRed
@@ -311,13 +308,9 @@
   playTimeTracker: IronSquadCorpsman
   setPreference: false
   canBeAntag: false
-  accessGroups:
-  - Command
   access:
-  - Maintenance
-  - External
+  - SyndicateAgent
   - NuclearOperative
-  - Bar
 
 - type: playTimeTracker
   id: IronSquadCorpsman
@@ -330,7 +323,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
+    access: [["SyndicateAgent"], ["NuclearOperative"]]
   - type: StorageFill
     contents:
     - id: ClothingHeadHatChameleon
@@ -425,13 +418,9 @@
   playTimeTracker: IronSquadCMO
   setPreference: false
   canBeAntag: false
-  accessGroups:
-  - Command
   access:
-  - Maintenance
-  - External
+  - SyndicateAgent
   - NuclearOperative
-  - Bar
 
 - type: playTimeTracker
   id: IronSquadCMO
@@ -444,7 +433,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
+    access: [["SyndicateAgent"], ["NuclearOperative"]]
   - type: StorageFill
     contents:
     - id: ClothingHeadHatChameleon
@@ -530,13 +519,9 @@
   playTimeTracker: IronSquadFighter
   setPreference: false
   canBeAntag: false
-  accessGroups:
-  - Command
   access:
-  - Maintenance
-  - External
+  - SyndicateAgent
   - NuclearOperative
-  - Bar
 
 - type: playTimeTracker
   id: IronSquadFighter
