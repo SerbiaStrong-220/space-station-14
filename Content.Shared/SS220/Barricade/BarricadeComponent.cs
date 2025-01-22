@@ -25,7 +25,7 @@ public sealed partial class BarricadeComponent : Component
     [DataField]
     public float MinDistance = 1.5f;
     [DataField]
-    public float MaxDistance = 9f;
+    public float MaxDistance = 15f;
 
     /// <summary>
     /// A whitelist of entities that will always pass through the barricade
