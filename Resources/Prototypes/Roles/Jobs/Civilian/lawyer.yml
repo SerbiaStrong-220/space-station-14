@@ -28,5 +28,5 @@
   storage:
     back:
     - RubberStampLawyer
-    - BookSpaceLaw
+    - BookSpaceLaws # SS220 Space Law Replace
     - BoxTapeRecorder #ss220 recorder-for-iaa-and-lawyer
