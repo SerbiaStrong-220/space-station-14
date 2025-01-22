@@ -10,7 +10,7 @@
   - type: CultYoggWeapon
     item: CultYoggCocoonBeach
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/cult_yogg_beach.rsi
+    sprite: SS220/Objects/Weapons/Melee/CultYogg/cult_yogg_beach.rsi
     state: icon
   - type: Item
     size: Ginormous

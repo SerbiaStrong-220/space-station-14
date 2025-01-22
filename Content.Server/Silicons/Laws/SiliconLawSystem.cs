@@ -215,7 +215,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             ghostRole.RoleRules = Loc.GetString("roles-antag-subverted-silicon-objective");
         }
 
-        _roles.MindAddRole(mindId, "MindRoleSubvertedSilicon");
+        _roles.MindAddRole(mindId, "MindRoleSubvertedSilicon", silent: true);
     }
 
     private void RemoveSubvertedSiliconRole(EntityUid mindId)

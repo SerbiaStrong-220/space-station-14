@@ -7,8 +7,11 @@ using Content.Server.Speech;
 using Content.Server.Speech.Components;
 using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Labels.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.Power;
+using Content.Shared.Silicons.StationAi;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Speech;
 using Content.Shared.Telephone;
 using Robust.Server.GameObjects;
@@ -22,6 +25,8 @@ using System.Linq;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.CCVars;
+using Robust.Shared.Configuration;
 
 namespace Content.Server.Telephone;
 
@@ -38,6 +43,11 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
 
+    // SS220 performance-test-begin
+    [Dependency] private readonly IConfigurationManager _configManager = default!;
+    private bool _lessSound;
+    // SS220 performance-test-end
+
     // Has set used to prevent telephone feedback loops
     private HashSet<(EntityUid, string, Entity<TelephoneComponent>)> _recentChatMessages = new();
 
@@ -50,6 +60,8 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         SubscribeLocalEvent<TelephoneComponent, ListenAttemptEvent>(OnAttemptListen);
         SubscribeLocalEvent<TelephoneComponent, ListenEvent>(OnListen);
         SubscribeLocalEvent<TelephoneComponent, TelephoneMessageReceivedEvent>(OnTelephoneMessageReceived);
+
+        Subs.CVar(_configManager, CCVars220.LessSoundSources, value => _lessSound = value, true); // SS220 performance-test
     }
 
     #region: Events
@@ -105,9 +117,8 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         var nameEv = new TransformSpeakerNameEvent(args.MessageSource, Name(args.MessageSource));
         RaiseLocalEvent(args.MessageSource, nameEv);
 
-        var name = Loc.GetString("speech-name-relay",
-            ("speaker", Name(entity)),
-            ("originalName", nameEv.VoiceName));
+        // Determine if speech should be relayed via the telephone itself or a designated speaker
+        var speaker = entity.Comp.Speaker != null ? entity.Comp.Speaker.Value.Owner : entity.Owner;
 
         // SS220 Holopad adapt begin
         if (TryComp<TTSComponent>(args.MessageSource, out var sourceTts))
@@ -117,8 +128,14 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         }
         // SS220 Holopad adapt end
 
+        var name = Loc.GetString("chat-telephone-name-relay",
+            ("originalName", nameEv.VoiceName),
+            ("speaker", Name(speaker)));
+
+        var range = args.TelephoneSource.Comp.LinkedTelephones.Count > 1 ? ChatTransmitRange.HideChat : ChatTransmitRange.GhostRangeLimit;
         var volume = entity.Comp.SpeakerVolume == TelephoneVolume.Speak ? InGameICChatType.Speak : InGameICChatType.Whisper;
-        _chat.TrySendInGameICMessage(entity, args.Message, volume, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false);
+
+        _chat.TrySendInGameICMessage(speaker, args.Message, volume, range, nameOverride: name, checkRadioPrefix: false);
     }
 
     #endregion
@@ -151,6 +168,11 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
                     if (_timing.CurTime > telephone.StateStartTime + TimeSpan.FromSeconds(telephone.RingingTimeout))
                         EndTelephoneCalls(entity);
 
+                    // SS220 performance-test
+                    if (_lessSound)
+                        break;
+                    // SS220 performace-test
+
                     else if (telephone.RingTone != null &&
                         _timing.CurTime > telephone.NextRingToneTime)
                     {
@@ -160,7 +182,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
 
                     break;
 
-                // Try to hang up if their has been no recent in-call activity 
+                // Try to hang up if there has been no recent in-call activity
                 case TelephoneState.InCall:
                     if (_timing.CurTime > telephone.StateStartTime + TimeSpan.FromSeconds(telephone.IdlingTimeout))
                         EndTelephoneCalls(entity);
@@ -223,7 +245,15 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         source.Comp.LinkedTelephones.Add(receiver);
         source.Comp.Muted = options?.MuteSource == true;
 
-        receiver.Comp.LastCallerId = GetNameAndJobOfCallingEntity(user); // This will be networked when the state changes
+        var callerInfo = GetNameAndJobOfCallingEntity(user);
+
+        // Base the name of the device on its label
+        string? deviceName = null;
+
+        if (TryComp<LabelComponent>(source, out var label))
+            deviceName = label.CurrentLabel;
+
+        receiver.Comp.LastCallerId = (callerInfo.Item1, callerInfo.Item2, deviceName); // This will be networked when the state changes
         receiver.Comp.LinkedTelephones.Add(source);
         receiver.Comp.Muted = options?.MuteReceiver == true;
 
@@ -408,6 +438,11 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         {
             RemComp<ActiveListenerComponent>(entity);
         }
+    }
+
+    public void SetSpeakerForTelephone(Entity<TelephoneComponent> entity, Entity<SpeechComponent>? speaker)
+    {
+        entity.Comp.Speaker = speaker;
     }
 
     private (string?, string?) GetNameAndJobOfCallingEntity(EntityUid uid)

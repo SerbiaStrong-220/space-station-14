@@ -34,6 +34,14 @@ namespace Content.Shared.Humanoid.Markings
         [DataField("forcedColoring")]
         public bool ForcedColoring { get; private set; } = false;
 
+        // SS220 cult markings fix begin
+        /// <summary>
+        /// Is the marking hidden from the marking picker
+        /// </summary>
+        [DataField]
+        public bool Hidden = false;
+        // SS220 cult markings fix end
+
         [DataField("coloring")]
         public MarkingColors Coloring { get; private set; } = new();
 

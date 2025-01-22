@@ -3,7 +3,7 @@ using Robust.Shared.Configuration;
 namespace Content.Shared.SS220.CCVars;
 
 [CVarDefs]
-public sealed class CCVars220
+public sealed partial class CCVars220
 {
     /// <summary>
     /// Whether is bloom lighting eanbled or not
@@ -43,12 +43,6 @@ public sealed class CCVars220
     /// </summary>
     public static readonly CVarDef<float> AHelpVolume =
         CVarDef.Create("ahelp.volume", 0.50f, CVar.ARCHIVE | CVar.CLIENTONLY);
-
-    /// <summary>
-    /// (SS220) AHelp Sound on/off.
-    /// </summary>
-    public static readonly CVarDef<bool> AHelpSoundsEnabled =
-        CVarDef.Create("audio.ahelp_sounds_enabled", true, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     /// <summary>
     /// Delay Between raising the networked event <see cref="SuperMatterStateUpdate"/>.

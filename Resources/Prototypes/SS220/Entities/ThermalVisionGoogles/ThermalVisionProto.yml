@@ -56,9 +56,9 @@
     visionRadius: 5
     closeVisionRadius: 2.5
   - type: Sprite
-    sprite: SS220/Clothing/Eyes/secthermalglasses.rsi
+    sprite: SS220/Clothing/Eyes/Glasses/security_thermal.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Eyes/secthermalglasses.rsi
+    sprite: SS220/Clothing/Eyes/Glasses/security_thermal.rsi
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
