@@ -188,17 +188,16 @@ public sealed partial class GunSystem : SharedGunSystem
                                     Physics.IntersectRay(from.MapId, ray, hitscan.MaxLength, lastUser, false).ToList();
 
                                 // SS220 add barricade begin
-                                List<RayCastResults> resultsToRemove = [];
-                                foreach (var rayCastResult in rayCastResults)
+                                for (var r = 0; r < rayCastResults.Count; r++)
                                 {
                                     var attemptEv = new HitscanAttempt(lastUser);
-                                    RaiseLocalEvent(rayCastResult.HitEntity, ref attemptEv);
-
+                                    RaiseLocalEvent(rayCastResults[r].HitEntity, ref attemptEv);
                                     if (attemptEv.Cancelled)
-                                        resultsToRemove.Add(rayCastResult);
+                                    {
+                                        rayCastResults.RemoveAt(r);
+                                        r--;
+                                    }
                                 }
-
-                                rayCastResults.RemoveAll(r => resultsToRemove.Contains(r));
                                 // SS220 add barricade end
 
                                 if (!rayCastResults.Any())

@@ -88,16 +88,31 @@
         - MachineLayer
   - type: Barricade
   - type: Damageable
-    damageModifierSet: StructuralMetallic
+    damageModifierSet: FractWarBarricade
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 500
+        damage: 400
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+
+- type: damageModifierSet
+  id: FractWarBarricade
+  coefficients:
+    Heat: 0.6
+    Blunt: 0.6
+    Slash: 0.6
+    Piercing: 0.6
+    Structural: 0.6
+  flatReductions:
+    Blunt: 5
+    Slash: 5
+    Piercing: 5
+    Heat: 5
+    Structural: 5
 
 # USSP
 - type: entity
