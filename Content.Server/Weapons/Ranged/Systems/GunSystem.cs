@@ -185,22 +185,23 @@ public sealed partial class GunSystem : SharedGunSystem
                             {
                                 var ray = new CollisionRay(from.Position, dir, hitscan.CollisionMask);
                                 var rayCastResults =
-                                    Physics.IntersectRay(from.MapId, ray, hitscan.MaxLength, lastUser, false).ToList().
-                                    Where(x =>  // SS220 add barricade begin
-                                    {
-                                        var attemptEv = new HitscanAttempt(lastUser);
-                                        RaiseLocalEvent(x.HitEntity, ref attemptEv);
-                                        return !attemptEv.Cancelled;
-                                    }); // SS220 add barricade end
+                                    Physics.IntersectRay(from.MapId, ray, hitscan.MaxLength, lastUser, false).ToList();
+
+                                // SS220 add barricade begin
+                                foreach (var rayCastResult in rayCastResults)
+                                {
+                                    var attemptEv = new HitscanAttempt(lastUser);
+                                    RaiseLocalEvent(rayCastResult.HitEntity, ref attemptEv);
+
+                                    if (attemptEv.Cancelled)
+                                        rayCastResults.Remove(rayCastResult);
+                                }
+                                // SS220 add barricade end
+
                                 if (!rayCastResults.Any())
                                     break;
 
-                                // SS220 add barricade begin
-                                //var result = rayCastResults[0];
-                                var result = rayCastResults.FirstOrNull();
-                                if (result is null)
-                                    break;
-                                // SS220 add barricade end
+                                var result = rayCastResults[0];
 
                                 // Check if laser is shot from in a container
                                 if (!_container.IsEntityOrParentInContainer(lastUser))

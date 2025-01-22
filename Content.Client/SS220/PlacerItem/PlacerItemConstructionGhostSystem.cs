@@ -15,7 +15,7 @@ public sealed class PlacerItemConstructionGhostSystem : EntitySystem
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPlacementManager _placementManager = default!;
 
-    private string _placementMode = typeof(AlignPlacerItemConstrucrion).Name;
+    private string _placementMode = typeof(AlignPlacerItemConstruction).Name;
     private Direction _placementDirection = default;
 
     public override void Update(float frameTime)

@@ -54,7 +54,7 @@ public sealed partial class PlacerItemComponent : Component
     /// The time required for the user to place the construction
     /// </summary>
     [DataField]
-    public float DoAfter = 0;
+    public TimeSpan DoAfter = TimeSpan.Zero;
 
     /// <summary>
     /// Should the placement toggle when item used in hand

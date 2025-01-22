@@ -67,10 +67,8 @@ public sealed partial class PlacerItemSystem : EntitySystem
         if (!IsPlacementOperationStillValid(entity, mapGridData.Value, args.Target, user))
             return;
 
-        var doAfterTime = TimeSpan.FromSeconds(comp.DoAfter);
         var ev = new PlacerItemDoAfterEvent(GetNetCoordinates(mapGridData.Value.Location), comp.ConstructionDirection, comp.SpawnProto);
-
-        var doAfterArgs = new DoAfterArgs(EntityManager, user, doAfterTime, ev, uid, args.Target, uid)
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, comp.DoAfter, ev, uid, args.Target, uid)
         {
             BreakOnDamage = true,
             BreakOnHandChange = true,

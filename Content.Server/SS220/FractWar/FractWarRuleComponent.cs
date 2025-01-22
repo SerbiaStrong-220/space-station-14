@@ -5,5 +5,5 @@ namespace Content.Server.SS220.FractWar;
 public sealed partial class FractWarRuleComponent : Component
 {
     [ViewVariables]
-    public Dictionary<string, float> FractionsWP = [];
+    public Dictionary<string, float> FractionsWinPoints = [];
 }

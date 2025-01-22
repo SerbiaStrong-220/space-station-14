@@ -22,19 +22,19 @@ public sealed partial class EventCapturePointComponent : Component
     public float FlagRemovalImpulse = 35;
 
     /// <summary>
-    /// How many points does this pedestal give per <see cref="RetentionTimeForWP"/>
+    /// How many points does this pedestal give per <see cref="RetentionTimeForWinPoint"/>
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float WinPoints = 1f;
+    public float WinPointsCoefficient = 1f;
 
     /// <summary>
     /// How many seconds need to hold a capture point to get win points
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float RetentionTimeForWP = 15;
+    public TimeSpan RetentionTimeForWinPoint = TimeSpan.FromSeconds(15);
 
     [ViewVariables, AutoNetworkedField]
-    public Dictionary<string, float> PointRetentionTime = new();
+    public Dictionary<string, TimeSpan> PointRetentionTime = new();
 }
 
 [Serializable, NetSerializable]

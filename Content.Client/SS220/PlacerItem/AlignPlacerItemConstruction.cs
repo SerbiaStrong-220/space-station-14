@@ -15,7 +15,7 @@ using System.Numerics;
 
 namespace Content.Client.SS220.PlacerItem;
 
-public sealed class AlignPlacerItemConstrucrion : PlacementMode
+public sealed class AlignPlacerItemConstruction : PlacementMode
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -32,7 +32,7 @@ public sealed class AlignPlacerItemConstrucrion : PlacementMode
 
     private EntityCoordinates _unalignedMouseCoords = default;
 
-    public AlignPlacerItemConstrucrion(PlacementManager pMan) : base(pMan)
+    public AlignPlacerItemConstruction(PlacementManager pMan) : base(pMan)
     {
         IoCManager.InjectDependencies(this);
         _rcdSystem = _entityManager.System<RCDSystem>();

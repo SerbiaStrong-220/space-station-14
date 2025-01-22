@@ -27,9 +27,9 @@ public sealed class EventCapturePointSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly FractWarRuleSystem _fractWarRule = default!;
 
-    private const float RefreshWPRate = 60f;
+    private const float RefreshWinPointsRate = 60f;
 
-    private TimeSpan _nextRefreshWP = TimeSpan.Zero;
+    private TimeSpan _nextRefreshWinPoints = TimeSpan.Zero;
 
     public override void Initialize()
     {
@@ -60,14 +60,14 @@ public sealed class EventCapturePointSystem : EntitySystem
                 flagComp.Fraction is not { } flagFraction)
                 continue;
 
-            if (!component.PointRetentionTime.TryAdd(flagFraction, 0))
-                component.PointRetentionTime[flagFraction] += frameTime;
+            if (!component.PointRetentionTime.TryAdd(flagFraction, TimeSpan.Zero))
+                component.PointRetentionTime[flagFraction] += TimeSpan.FromSeconds(frameTime);
         }
 
-        if (_timing.CurTime >= _nextRefreshWP)
+        if (_timing.CurTime >= _nextRefreshWinPoints)
         {
-            RefreshWP(gameRule);
-            _nextRefreshWP = _timing.CurTime + TimeSpan.FromSeconds(RefreshWPRate);
+            RefreshWinPoints(gameRule);
+            _nextRefreshWinPoints = _timing.CurTime + TimeSpan.FromSeconds(RefreshWinPointsRate);
         }
     }
 
@@ -107,7 +107,7 @@ public sealed class EventCapturePointSystem : EntitySystem
 
     private void OnPointShutdown(Entity<EventCapturePointComponent> entity, ref ComponentShutdown args)
     {
-        RefreshPointWP(entity.Comp);
+        RefreshWinPointsFromCapturePoint(entity.Comp);
 
         if (entity.Comp.FlagEntity.HasValue &&
             entity.Comp.FlagEntity.Value.Valid &&
@@ -216,7 +216,7 @@ public sealed class EventCapturePointSystem : EntitySystem
             AddFlag(entity, user, newFlag);
     }
 
-    public void RefreshWP(FractWarRuleComponent? gameRule = null)
+    public void RefreshWinPoints(FractWarRuleComponent? gameRule = null)
     {
         gameRule ??= _fractWarRule.GetActiveGameRule();
         if (gameRule is null)
@@ -225,11 +225,11 @@ public sealed class EventCapturePointSystem : EntitySystem
         var query = EntityQueryEnumerator<EventCapturePointComponent>();
         while (query.MoveNext(out _, out var comp))
         {
-            RefreshPointWP(comp, gameRule);
+            RefreshWinPointsFromCapturePoint(comp, gameRule);
         }
     }
 
-    public void RefreshPointWP(EventCapturePointComponent comp, FractWarRuleComponent? gameRule = null)
+    public void RefreshWinPointsFromCapturePoint(EventCapturePointComponent comp, FractWarRuleComponent? gameRule = null)
     {
         gameRule ??= _fractWarRule.GetActiveGameRule();
 
@@ -238,12 +238,12 @@ public sealed class EventCapturePointSystem : EntitySystem
 
         foreach (var (fraction, retTime) in comp.PointRetentionTime)
         {
-            var wp = comp.WinPoints * (retTime / comp.RetentionTimeForWP);
+            var wp = comp.WinPointsCoefficient * (float)(retTime.TotalSeconds / comp.RetentionTimeForWinPoint.TotalSeconds);
 
-            if (!gameRule.FractionsWP.TryAdd(fraction, wp))
-                gameRule.FractionsWP[fraction] += wp;
+            if (!gameRule.FractionsWinPoints.TryAdd(fraction, wp))
+                gameRule.FractionsWinPoints[fraction] += wp;
 
-            comp.PointRetentionTime[fraction] = 0;
+            comp.PointRetentionTime[fraction] = TimeSpan.Zero;
         }
     }
 }

@@ -17,8 +17,8 @@ public sealed partial class FractWarRuleSystem : GameRuleSystem<FractWarRuleComp
         args.AddLine(Loc.GetString("fractwar-round-end-score-points"));
         args.AddLine("");
 
-        _eventCapturePoint.RefreshWP(component);
-        var fractionsWinPoints = component.FractionsWP;
+        _eventCapturePoint.RefreshWinPoints(component);
+        var fractionsWinPoints = component.FractionsWinPoints;
 
         if (fractionsWinPoints.Count <= 0)
             return;
