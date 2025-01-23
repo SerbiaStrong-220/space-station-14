@@ -87,6 +87,9 @@
     guides:
     - Security
     - Antagonists
+  - type: Tag
+    tags:
+    - GrenadeFlashBang
 
 - type: entity
   id: GrenadeFlashEffect
@@ -491,8 +494,8 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/grenade.rsi
   - type: DeleteOnTrigger
-  - type: SpawnOnTrigger
-    proto: GrenadeFlashEffect
+  #- type: SpawnOnTrigger #ss220 toys
+  #  proto: GrenadeFlashEffect #ss220 toys
   - type: SoundOnTrigger
     sound:
       path: /Audio/Effects/Emotes/parp1.ogg
@@ -500,6 +503,29 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
+  #ss220 toys begin #it will explode like a real one, but zero damage :jokerge:
+  - type: OnUseTimerTrigger
+    delay: 3.5
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 2 # a ~4 tile radius
+    intensitySlope: 0.4
+    maxIntensity: 0.01
+    canCreateVacuum: false #extra safety y'know?
+    maxTileBreak: 0
+  - type: HiddenDescription
+    entries:
+      - label: hidden-desc-toy-weapons-explosive-syndicate
+        whitelistMind:
+          components:
+            - TraitorRole
+            - NukeOperative
+      - label: hidden-desc-toy-weapons-explosive-clown
+        jobRequired:
+          - Clown
+          - Mime
+  #ss220 toys end
 
 - type: entity
   name: syndicate trickybomb
@@ -518,3 +544,12 @@
       path: /Audio/Effects/minibombcountdown.ogg
       params:
         volume: 12
+  #ss220 toys begin #it will explode like a real one, but zero damage :jokerge:
+  - type: OnUseTimerTrigger
+    delay: 5
+  - type: Explosive
+    explosionType: Minibomb
+    totalIntensity: 0.1
+    intensitySlope: 0.01
+    maxIntensity: 1
+  #ss220 toys end

@@ -1,0 +1,142 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/9a7ceec10b463ca05ca29cbc418ea767b2ab2995, and modifed by EstKemran (Github) for SS220, pinpointer-nuclear state sprited by Estkemran (Github) for SS220",
+    "states": [
+        {
+            "name": "pinonalert",
+            "directions": 8,
+            "delays": [
+                [
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "pinonalertdirect",
+            "delays": [
+                [
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "pinonalertnull",
+            "delays": [
+                [
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "pinonclose",
+            "delays": [
+                [
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "pinondirect",
+            "delays": [
+                [
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "pinondirectlarge",
+            "delays": [
+                [
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "pinondirectsmall",
+            "delays": [
+                [
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "pinondirectxtrlarge",
+            "delays": [
+                [
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "pinonfar",
+            "delays": [
+                [
+                    0.6,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "pinonmedium",
+            "delays": [
+                [
+                    0.4,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "pinonnull",
+            "delays": [
+                [
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "pinpointer-nuclear"
+        }
+    ]
+}

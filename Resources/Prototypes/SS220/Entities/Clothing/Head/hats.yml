@@ -26,9 +26,9 @@
   suffix: За время в игре
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Head/Hats/whiteberetcap.rsi
+      sprite: SS220/Clothing/Head/Hats/beret_cap_white.rsi
     - type: Clothing
-      sprite: SS220/Clothing/Head/Hats/whiteberetcap.rsi
+      sprite: SS220/Clothing/Head/Hats/beret_cap_white.rsi
 
 - type: entity
   parent: ClothingHeadBase
@@ -38,9 +38,9 @@
   suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/whitecapcap.rsi
+    sprite: SS220/Clothing/Head/Hats/captain_white_cap.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/whitecapcap.rsi
+    sprite: SS220/Clothing/Head/Hats/captain_white_cap.rsi
 
 - type: entity
   parent: ClothingHeadHatCaptain
@@ -49,9 +49,9 @@
   description: It's good being the white king.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/whitecaptainhat.rsi
+    sprite: SS220/Clothing/Head/Hats/captain_white_hat.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/whitecaptainhat.rsi
+    sprite: SS220/Clothing/Head/Hats/captain_white_hat.rsi
 
 - type: entity
   parent: ClothingHeadBase
@@ -60,9 +60,9 @@
   description: A special white hat made to order for the captain.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/whitecaphat.rsi
+    sprite: SS220/Clothing/Head/Hats/captain_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/whitecaphat.rsi
+    sprite: SS220/Clothing/Head/Hats/captain_white.rsi
   - type: Tag
     tags:
     - Ian
@@ -77,10 +77,20 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/silverheadband.rsi
+    sprite: SS220/Clothing/Head/Hats/hop_silverheadband.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/silverheadband.rsi
+    sprite: SS220/Clothing/Head/Hats/hop_silverheadband.rsi
 
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBeretBlueshield
+  name: beret the "Blue Shield"
+  description: An inexpensive beret favored by the "Blue Shield" officers. It has the shield emblem in blue color on it.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/beret_blueshield.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/beret_blueshield.rsi
 # CentCom
 
   # Берет
@@ -124,9 +134,9 @@
   description: A mandatory element of the uniform for all officers and crew members, emphasizing their belonging to a powerful corporation.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/whitecapcap.rsi
+    sprite: SS220/Clothing/Head/Hats/captain_white_cap.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/whitecapcap.rsi
+    sprite: SS220/Clothing/Head/Hats/captain_white_cap.rsi
 
 - type: entity
   parent: ClothingHeadBigCapHoS
@@ -178,9 +188,9 @@
   description: Большая, стильная голова
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/seniorsercap.rsi
+    sprite: SS220/Clothing/Head/Hats/senior_service_cap.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/seniorsercap.rsi
+    sprite: SS220/Clothing/Head/Hats/senior_service_cap.rsi
   - type: Tag
     tags:
     - ClothMade
@@ -197,9 +207,9 @@
   description: Это колпак, который повара используют, чтобы волосы не попадали в еду. Судя по еде, они не работают.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Head/Hats/chef_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Head/Hats/chef_white.rsi
   - type: Storage
     grid:
     - 0,0,0,0
@@ -223,9 +233,9 @@
   description: Это колпак, который повара используют, чтобы волосы не попадали в еду. Судя по еде, они не работают.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/Chef/chef_green.rsi
+    sprite: SS220/Clothing/Head/Hats/chef_green.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/Chef/chef_green.rsi
+    sprite: SS220/Clothing/Head/Hats/chef_green.rsi
   - type: Storage
     grid:
     - 0,0,0,0
@@ -249,9 +259,9 @@
   description: Это колпак, который повара используют, чтобы волосы не попадали в еду. Судя по еде, они не работают.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/Chef/chef_black.rsi
+    sprite: SS220/Clothing/Head/Hats/chef_black.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/Chef/chef_black.rsi
+    sprite: SS220/Clothing/Head/Hats/chef_black.rsi
   - type: Storage
     grid:
     - 0,0,0,0
@@ -276,9 +286,9 @@
   suffix: За время в игре, Сеньор
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/Chef/chef_nt.rsi
+    sprite: SS220/Clothing/Head/Hats/chef_nt.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/Chef/chef_nt.rsi
+    sprite: SS220/Clothing/Head/Hats/chef_nt.rsi
   - type: Storage
     grid:
     - 0,0,0,0
@@ -374,9 +384,9 @@
   suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/orangejanitor.rsi
+    sprite: SS220/Clothing/Head/Hats/janitor_orange.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/orangejanitor.rsi
+    sprite: SS220/Clothing/Head/Hats/janitor_orange.rsi
   - type: Tag
     tags:
     - HamsterWearable
@@ -394,9 +404,9 @@
   description: Дайте капитану новую голубую фуражку, ведь старая почернела во время стирки.
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Head/Hats/hosbigcap.rsi
+      sprite: SS220/Clothing/Head/Hats/hos_bigcap.rsi
     - type: Clothing
-      sprite: SS220/Clothing/Head/Hats/hosbigcap.rsi
+      sprite: SS220/Clothing/Head/Hats/hos_bigcap.rsi
 
 
   # Пилот
@@ -478,7 +488,7 @@
   suffix: For playtime
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Head/Hats/druid_tiara.rsi
+      sprite: SS220/Clothing/Head/Hats/hydro_druid_tiara.rsi
     - type: Clothing
 
 # Инженерия
@@ -562,9 +572,9 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/beret_bard.rsi
+    sprite: SS220/Clothing/Head/Hats/beret_muscian_bard.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/beret_bard.rsi
+    sprite: SS220/Clothing/Head/Hats/beret_muscian_bard.rsi
 
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
@@ -573,35 +583,17 @@
   description: Шлёпашон
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/FloppaHat.rsi
+    sprite: SS220/Clothing/Head/Hats/floppa.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/FloppaHat.rsi
-
-# WMT Ebent begin
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadKiver
-  name: kiver
-  description: The headdress of a soldier of the Kingdom's great army.
-  suffix: HOCebent
-  components:
-    - type: Sprite
-      sprite: SS220/Clothing/Head/Hats/kiver.rsi
-    - type: Clothing
-      sprite: SS220/Clothing/Head/Hats/kiver.rsi
-    - type: Tag
-      tags:
-      - ClothMade
+    sprite: SS220/Clothing/Head/Hats/floppa.rsi
 
 - type: entity
   parent: ClothingHeadBase
-  id: ClothingHeadPithHelmet
-  name: pith helmet
-  description: Army helmet of the army of the River Republic.
-  suffix: HOCebent
+  id: ClothingHeadHatNewYearsCap
+  name: new year`s cap
+  description: A bright New Year's hat with a fluffy pompom, adding magic and festive mood!
   components:
-    - type: Sprite
-      sprite: SS220/Clothing/Head/Hats/pith_helmet.rsi
-    - type: Clothing
-      sprite: SS220/Clothing/Head/Hats/pith_helmet.rsi
-# WMT Ebent end
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/newyears_cap.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/newyears_cap.rsi

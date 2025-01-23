@@ -38,7 +38,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.35
+          radius: 0.325
         density: 185
         restitution: 0.0
         mask:
@@ -98,7 +98,7 @@
   - type: Sprite # sprite again because we want different layer ordering
     noRot: true
     drawdepth: Mobs
-    scale: 0.8, 0.8 #SS220-change-races-height
+    scale: 0.9, 0.9 #SS220-change-races-height
     layers:
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
       - map: [ "enum.HumanoidVisualLayers.Head" ]
@@ -159,7 +159,7 @@
   components:
 # SS220-change-races-height begin
   - type: Sprite
-    scale: 0.8, 0.8
+    scale: 0.9, 0.9
 # SS220-change-races-height end
   - type: HumanoidAppearance
     species: Moth

@@ -28,6 +28,9 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
+using Robust.Shared.Input.Binding;
+using Content.Shared.SS220.Input;
+using Robust.Shared.Player;
 
 namespace Content.Server.Atmos.EntitySystems
 {
@@ -82,6 +85,11 @@ namespace Content.Server.Atmos.EntitySystems
             SubscribeLocalEvent<ExtinguishOnInteractComponent, ActivateInWorldEvent>(OnExtinguishActivateInWorld);
 
             SubscribeLocalEvent<IgniteOnHeatDamageComponent, DamageChangedEvent>(OnDamageChanged);
+
+            // SS220 resist fire bind
+            CommandBinds.Builder
+                .Bind(KeyFunctions220.ResistFire, InputCmdHandler.FromDelegate(HandleResistFireKey, handle: false))
+                .Register<FlammableSystem>();
         }
 
         private void OnMeleeHit(EntityUid uid, IgniteOnMeleeHitComponent component, MeleeHitEvent args)
@@ -250,6 +258,17 @@ namespace Content.Server.Atmos.EntitySystems
         {
             Extinguish(uid, component);
         }
+
+        // SS220 resist fire bind begin
+        private void HandleResistFireKey(ICommonSession? session)
+        {
+            if (session?.AttachedEntity is not { } uid ||
+                !TryComp<FlammableComponent>(uid, out var comp))
+                return;
+
+            Resist(uid, comp);
+        }
+        // SS220 resist fire bind end
 
         private void OnResistFireAlert(Entity<FlammableComponent> ent, ref ResistFireAlertEvent args)
         {

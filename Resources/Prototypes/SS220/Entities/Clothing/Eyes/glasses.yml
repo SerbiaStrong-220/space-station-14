@@ -7,9 +7,9 @@
   description: Upgraded sunglasses that provide flash immunity and a security HUD.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Eyes/centcom_glasses.rsi
+    sprite: SS220/Clothing/Eyes/Glasses/centcom.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Eyes/centcom_glasses.rsi
+    sprite: SS220/Clothing/Eyes/Glasses/centcom.rsi
 
 - type: entity
   parent: ClothingEyesGlassesCheapSunglasses
@@ -18,9 +18,9 @@
   description: Эксклюзивные очки квартирмейстера, совмещающие в себе защиту ваших, зрящих в корень, глаз от ярких лучей в совокупности со встроенным интерфейсом оценивания груза. Выдержанный стиль отдела снабжения для своего лучшего сотрудника.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Eyes/qmglasses.rsi
+    sprite: SS220/Clothing/Eyes/Glasses/qm.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Eyes/qmglasses.rsi
+    sprite: SS220/Clothing/Eyes/Glasses/qm.rsi
   - type: ShowSupplyPrice
   - type: FlashImmunity
   - type: EyeProtection
@@ -31,3 +31,72 @@
     - HamsterWearable
     - WhitelistChameleon
     - SecDogWearable
+
+- type: entity
+  parent: [ClothingEyesBase, ShowSecurityIcons]
+  id: ClothingEyesGlassesBallistic
+  name: ballistic glasses
+  description: Tactical security element
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/security_ballistic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Glasses/security_ballistic.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: Construction
+    graph: GlassesSecHUD
+    node: glassesSec
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - SecDogWearable # Roxi
+  - type: GuideHelp
+    guides:
+    - Security
+    - Antagonists
+  - type: IdentityBlocker
+    coverage: EYES
+
+- type: entity
+  parent: ClothingEyesGlassesBlueShield
+  id: ClothingEyesBlueShieldGlasses
+  name: blueshield glasses
+  description: Upgraded sunglasses for blue shields.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/blueshield.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Glasses/blueshield.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: ShowJobIcons
+
+- type: entity
+  parent: ClothingEyesBlueShieldGlasses
+  id: ClothingEyesBlueShieldTacticGlasses
+  name: blueshield tactic glasses
+  description: Tactical glasses for combat situations.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/blueshield_tactic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Glasses/blueshield_tactic.rsi
+
+- type: entity
+  parent: [ClothingEyesBase, ShowMedicalIcons]
+  id: ClothingEyesCMOCorporate
+  name: corporate glasses of chief medical officer
+  description: The dream of one head doctor with -3 in both eyes, later became a ubiquitous phenomenon. Comfortable and stylish.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/cmocorporate_glasses.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/cmocorporate_glasses.rsi

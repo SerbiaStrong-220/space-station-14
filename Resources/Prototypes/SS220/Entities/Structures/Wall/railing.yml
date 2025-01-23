@@ -1,0 +1,428 @@
+- type: entity
+  parent: BaseRailing
+  id: CurbWood
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbwood
+  - type: Icon
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbwood
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.4"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: RCDDeconstructable
+    cost: 3
+    delay: 4
+    fx: EffectRCDDeconstruct2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    node: railing
+
+- type: entity
+  parent: CurbWood
+  id: CurbWoodCorner
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbwood_corner
+  - type: Icon
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbwood_corner
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.4"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.49,0.49,0.4,-0.49"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: Construction
+    node: railing
+
+- type: entity
+  parent: CurbWood
+  id: CurbWoodCornerSmall
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbwood_small
+  - type: Icon
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbwood_small
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Construction
+    node: railing
+
+- type: entity
+  parent: CurbWood
+  id: CurbWoodRound
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbwood_round
+  - type: Icon
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbwood_round
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.4"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,-0.4,0.49"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+      fix3:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.4,-0.49,0.49,0.49"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: Construction
+    node: railing
+
+
+- type: entity
+  parent: BaseRailing
+  id: CurbSteel
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbsteel
+  - type: Icon
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbsteel
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.4"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: FlimsyMetallic
+  - type: RCDDeconstructable
+    cost: 3
+    delay: 4
+    fx: EffectRCDDeconstruct2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    node: railing
+
+- type: entity
+  parent: CurbSteel
+  id: CurbSteelCorner
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbsteel_corner
+  - type: Icon
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbsteel_corner
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.4"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.49,0.49,0.4,-0.49"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: Construction
+    node: railing
+
+- type: entity
+  parent: CurbSteel
+  id: CurbSteelCornerSmall
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbsteel_small
+  - type: Icon
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbsteel_small
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Construction
+    node: railing
+
+- type: entity
+  parent: CurbSteel
+  id: CurbSteelRound
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbsteel_round
+  - type: Icon
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbsteel_round
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.4"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,-0.4,0.49"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+      fix3:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.4,-0.49,0.49,0.49"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: Construction
+    node: railing
+
+
+- type: entity
+  parent: BaseRailing
+  id: CurbDarckSteel
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbdarksteel
+  - type: Icon
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbdarksteel
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.4"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: FlimsyMetallic
+  - type: RCDDeconstructable
+    cost: 3
+    delay: 4
+    fx: EffectRCDDeconstruct2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    node: railing
+
+
+- type: entity
+  parent: CurbDarckSteel
+  id: CurbDarckSteelCorner
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbdarksteel_corner
+  - type: Icon
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbdarksteel_corner
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.4"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.49,0.49,0.4,-0.49"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: Construction
+    node: railing
+
+- type: entity
+  parent: CurbDarckSteel
+  id: CurbDarckSteelCornerSmall
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbdarksteel_small
+  - type: Icon
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbdarksteel_small
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Construction
+    node: railing
+
+- type: entity
+  parent: CurbDarckSteel
+  id: CurbDarckSteelRound
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbdarksteel_round
+  - type: Icon
+    sprite: /Textures/SS220/Structures/Walls/curb.rsi
+    state: curbdarksteel_round
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.4"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,-0.4,0.49"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+      fix3:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.4,-0.49,0.49,0.49"
+        density: 1000
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: Construction
+    node: railing

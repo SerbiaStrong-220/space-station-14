@@ -16,6 +16,9 @@
 - files: ["cluster.yml"]
   authors: Scribbles0
 
+- files: ["elkridge.yml"]
+  authors: Deerstop
+
 - files: ["fland.yml"]
   authors: Emisse
 
@@ -57,7 +60,7 @@
 
 # ss220-maps
 
-- files: ["ss220-box.yml"]
+- files: ["frankenstein.yml"]
   authors: ACJM, Emisse, TheArturZh, ZoNeSRuS
 
 - files: ["nox.yml"]

@@ -181,6 +181,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink #SS220-uplink-fix
+      - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: UplinkSniperBundle
@@ -192,7 +193,7 @@
   discountDownTo:
     Telecrystal: 6
   cost:
-    Telecrystal: 12
+    Telecrystal: 14 #ss220TTKUpdate
   categories:
   - UplinkWeaponry
 
@@ -244,6 +245,7 @@
        tags:
          - NukeOpsUplink
          - LoneOpsUplink
+         - DebugUplink #SS220-debug-uplink-fix
 # SS220-uplink-fix-end
   - !type:BuyerWhitelistCondition
     blacklist:
@@ -259,9 +261,9 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledLMG
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 24
+    Telecrystal: 30 #ss220TTKUpdate
   cost:
-    Telecrystal: 30
+    Telecrystal: 40 #ss220TTKUpdate
   categories:
   - UplinkWeaponry
   conditions:
@@ -270,6 +272,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - DebugUplink #SS220-debug-uplink-fix
 
 # Explosives
 
@@ -337,6 +340,7 @@
         tags:
           - NukeOpsUplink
           - LoneOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -423,6 +427,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink #SS220-uplink-fix
+      - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: UplinkC4Bundle
@@ -479,6 +484,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - DebugUplink #SS220-debug-uplink-fix
     blacklist:
       components:
       - SurplusBundle
@@ -580,7 +586,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi, state: icon }
   productEntity: SpeedLoaderMagnumAP
   cost:
-    Telecrystal: 3
+    Telecrystal: 4 #ss220TTKUpdate
   categories:
   - UplinkAmmo
 
@@ -602,7 +608,7 @@
   description: uplink-sniper-ammo-desc
   productEntity: MagazineBoxAntiMateriel
   cost:
-    Telecrystal: 2
+    Telecrystal: 4 #ss220TTKUpdate
   categories:
   - UplinkAmmo
 
@@ -621,6 +627,7 @@
         tags:
           - NukeOpsUplink
           - LoneOpsUplink #SS220-uplink-fix
+          - DebugUplink #SS220-debug-uplink-fix
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -685,6 +692,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink #SS220-debug-uplink-fix
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -777,9 +785,9 @@
   productEntity: ClothingBackpackDuffelSyndicateMedicalBundleFilled
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 12
+    Telecrystal: 16
   cost:
-    Telecrystal: 20
+    Telecrystal: 24
   categories:
   - UplinkChemicals
   conditions:
@@ -787,6 +795,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -1125,6 +1134,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: UplinkSurplusBundle
@@ -1248,6 +1258,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
       blacklist:
         tags:
           - LoneOpsUplink
@@ -1267,6 +1278,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: UplinkReinforcementRadioSyndicateAncestor
@@ -1306,6 +1318,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: UplinkCarpDehydrated
@@ -1448,6 +1461,7 @@
     whitelist:
       tags:
       - NukeOpsUplink
+      - DebugUplink #SS220-debug-uplink-fix
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -1468,6 +1482,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -1488,6 +1503,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: UplinkUplinkImplanter # uplink uplink real
@@ -1525,6 +1541,7 @@
       whitelist:
         tags:
           - NukeOpsUplink
+          - DebugUplink #SS220-debug-uplink-fix
     - !type:BuyerWhitelistCondition
       blacklist:
         components:
@@ -1739,6 +1756,7 @@
         tags:
         - NukeOpsUplink
         - LoneOpsUplink
+        - DebugUplink #SS220-debug-uplink-fix
 #ss220-fix-uplink-end
 
 - type: listing
@@ -1765,6 +1783,7 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+      - DebugUplink #SS220-debug-uplink-fix
 # ss220-fix-uplink-end
 
 #SS220 Syndie visor buff begin
@@ -1928,8 +1947,11 @@
   name: uplink-operative-suit-name
   description: uplink-operative-suit-desc
   productEntity: ClothingUniformJumpsuitOperative
-  cost:
-    Telecrystal: 1
+  #ss220 free-operative-jumpsuit begin
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  #ss220 free-operative-jumpsuit end
   categories:
   - UplinkPointless
 
@@ -1938,8 +1960,11 @@
   name: uplink-operative-skirt-name
   description: uplink-operative-skirt-desc
   productEntity: ClothingUniformJumpskirtOperative
-  cost:
-    Telecrystal: 1
+  #ss220 free-operative-jumpsuit begin
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  #ss220 free-operative-jumpsuit end
   categories:
   - UplinkPointless
 

@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   id: MindSlaveImplanter
   name: mind-slave implanter
@@ -5,4 +7,14 @@
   components:
     - type: Implanter
       implant: MindSlaveImplant
-      implantTime: 40
+      implantTime: 10
+
+- type: entity
+  id: ThermalVisorImplanter
+  name: Thermal-Visor Implanter
+  description: Thermal-Visor right in your brain!
+  parent: BaseImplantOnlyImplanterSyndi
+  components:
+    - type: Implanter
+      implant: ThermalVisionImplant
+

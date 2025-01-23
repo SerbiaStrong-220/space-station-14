@@ -7,6 +7,8 @@ using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
 using Content.Shared.Singularity.Components;
 using Content.Shared.Singularity.EntitySystems;
+using Content.Shared.SS220.CultYogg.Nyarlathotep;
+using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -44,6 +46,8 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
 
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
 
+        SubscribeLocalEvent<NyarlathotepHorizonComponent, EventHorizonAttemptConsumeEntityEvent>(PreventConsume); ///SS220-CultYogg
+        SubscribeLocalEvent<MiGoComponent, EventHorizonAttemptConsumeEntityEvent>(PreventConsume);///SS220-CultYogg
         SubscribeLocalEvent<MapGridComponent, EventHorizonAttemptConsumeEntityEvent>(PreventConsume);
         SubscribeLocalEvent<StationDataComponent, EventHorizonAttemptConsumeEntityEvent>(PreventConsume);
         SubscribeLocalEvent<EventHorizonComponent, MapInitEvent>(OnHorizonMapInit);
@@ -308,7 +312,7 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
         foreach (var grid in grids)
         {
             // TODO: Remover grid.Owner when this iterator returns entityuids as well.
-            AttemptConsumeTiles(uid, grid.Comp.GetTilesIntersecting(circle), grid, grid, eventHorizon);
+            AttemptConsumeTiles(uid, _mapSystem.GetTilesIntersecting(grid.Owner, grid.Comp, circle), grid, grid, eventHorizon);
         }
     }
 

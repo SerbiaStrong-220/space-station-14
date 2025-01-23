@@ -1,0 +1,13 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  abstract: true
+  id: CultYoggRestrictedItem
+  name: abstract cult restricted
+  components:
+    - type: RestrictedItem
+      localizedPopup: "cult-yogg-role-item-popup"
+      whitelist:
+        components:
+        - CultYogg
+

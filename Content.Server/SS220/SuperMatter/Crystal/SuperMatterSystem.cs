@@ -22,9 +22,11 @@ public sealed partial class SuperMatterSystem : EntitySystem
     private const float RadiationPerEnergy = 70f;
 
     private const float IntegrityDamageICAnnounceDelay = 12f;
-    private const float IntegrityDamageStationAnnouncementDelay = 6f;
+    private const float IntegrityDamageStationAnnouncementDelay = 8f;
 
     private const float ReleasedEnergyToGasHeat = 60f;
+
+    private const float MaxRadiationIntensity = 16f;
 
     public override void Initialize()
     {
@@ -88,6 +90,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         EjectGases(decayedMatter, crystalTemperature, smState, gasMixture);
         crystal.Comp.Matter -= decayedMatter;
+        crystal.Comp.Temperature += releasedEnergyPerFrame / GetHeatCapacity(crystalTemperature, prevMatter) - decayedMatter / crystal.Comp.Matter * crystalTemperature;
 
         _atmosphere.AddHeat(gasMixture, ReleasedEnergyToGasHeat * releasedEnergyPerFrame);
         AddIntegrityDamage(crystal.Comp, GetIntegrityDamage(crystal.Comp) * frameTime);
@@ -157,7 +160,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             arcShooterComponent.ShootMaxInterval = MaxTimeBetweenArcs - timeDecreaseBetweenArcs;
         }
 
-        var radiationIntensity = smComp.AccumulatedRadiationEnergy / RadiationPerEnergy;
+        var radiationIntensity = MathF.Min(MaxRadiationIntensity, smComp.AccumulatedRadiationEnergy / RadiationPerEnergy);
         radiationSource.Intensity = radiationIntensity;
     }
     private void EjectGases(float decayedMatter, float crystalTemperature, SuperMatterPhaseState smState, GasMixture gasMixture)

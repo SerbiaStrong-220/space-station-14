@@ -11,7 +11,11 @@ using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Server.Popups;
 using Content.Server.Roles;
+using Content.Server.Speech;
+using Content.Server.SS220.MindSlave.Components;
+using Content.Server.SS220.MindSlave.Systems;
 using Content.Server.SS220.MindSlave.UI;
+using Content.Server.SS220.Telepathy;
 using Content.Shared.Alert;
 using Content.Shared.Cloning;
 using Content.Shared.CombatMode.Pacification;
@@ -22,8 +26,8 @@ using Content.Shared.Mobs;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Objectives.Systems;
-using Content.Shared.Roles;
 using Content.Shared.SS220.MindSlave;
+using Content.Shared.SS220.Telepathy;
 using Content.Shared.Tag;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -35,12 +39,15 @@ public sealed class MindSlaveSystem : EntitySystem
 {
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly MindSlaveStopWordSystem _mindSlaveStopWord = default!;
+    [Dependency] private readonly MindSlaveDisfunctionSystem _mindSlaveDisfunction = default!;
     [Dependency] private readonly RoleSystem _role = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly AntagSelectionSystem _antagSelection = default!;
     [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
+    [Dependency] private readonly TelepathySystem _telepathy = default!;
     [Dependency] private readonly TraitorRuleSystem _traitorRule = default!;
     [Dependency] private readonly AlertsSystem _alert = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -77,10 +84,36 @@ public sealed class MindSlaveSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<MindSlaveComponent, MapInitEvent>(OnInit);
+        SubscribeLocalEvent<MindSlaveComponent, BeforeAccentGetEvent>(OnAccent);
+        SubscribeLocalEvent<MindSlaveComponent, CloningEvent>(OnCloned);
+
         SubscribeLocalEvent<MindSlaveMasterComponent, MobStateChangedEvent>(OnMasterDeadOrCrit);
         SubscribeLocalEvent<MindSlaveMasterComponent, BeingGibbedEvent>(OnMasterGibbed);
-        SubscribeLocalEvent<MindSlaveComponent, CloningEvent>(OnCloned);
+
         SubscribeLocalEvent<SubdermalImplantComponent, MindSlaveRemoved>(OnMindSlaveRemoved);
+    }
+
+    private void OnInit(Entity<MindSlaveComponent> entity, ref MapInitEvent args)
+    {
+        if (TryComp<MindSlaveDisfunctionComponent>(entity.Owner, out var mindSlaveDisfunction))
+        {
+            _mindSlaveDisfunction.UnpauseDisfunction((entity.Owner, mindSlaveDisfunction));
+            return;
+        }
+    }
+
+    private void OnAccent(Entity<MindSlaveComponent> entity, ref BeforeAccentGetEvent args)
+    {
+        var stopWord = entity.Comp.StopWord.ToLower();
+        var message = args.Message;
+        var index = message.ToLower().IndexOf(stopWord);
+        while (index != -1 && !string.IsNullOrEmpty(message))
+        {
+            message = message.Remove(index, stopWord.Length).Insert(index, Loc.GetString("mindslave-stop-word-replacement"));
+            index = message.ToLower().IndexOf(stopWord);
+        }
+        args.Message = message;
     }
 
     private void OnMasterGibbed(Entity<MindSlaveMasterComponent> entity, ref BeingGibbedEvent args)
@@ -118,7 +151,8 @@ public sealed class MindSlaveSystem : EntitySystem
         if (args.Slave == null || !IsEnslaved(args.Slave.Value))
             return;
 
-        TryRemoveSlave(args.Slave.Value);
+        if (TryRemoveSlave(args.Slave.Value))
+            _mindSlaveDisfunction.PauseDisfunction(args.Slave.Value);
     }
 
     //I need all of this for the TraitorMinds list
@@ -193,12 +227,20 @@ public sealed class MindSlaveSystem : EntitySystem
             EnsureComp<RoleBriefingComponent>(slaveRoleVal).Briefing = briefing;
         }
 
-        EnsureComp<MindSlaveComponent>(slave);
+        // Also dont delete Master's telephaty if he have another slave.
+        var mindSlaveComp = EnsureComp<MindSlaveComponent>(slave);
+        RaiseLocalEvent(slave, new AfterEntityMindSlavedEvent(master, slave)); // uh... I wish I made it earlier...
+        // we write it in comp to give more freedom to admins
+        mindSlaveComp.StopWord = _mindSlaveStopWord.StopWord;
+
         _alert.ShowAlert(slave, EnslavedAlert);
 
         var masterComp = EnsureComp<MindSlaveMasterComponent>(master);
+        RaiseLocalEvent(master, new AfterEntityMindSlavedMasterEvent(master, slave));
         masterComp.EnslavedEntities.Add(slave);
         Dirty(master, masterComp);
+
+        MakeTelepathic(master, slave);
 
         _npcFaction.RemoveFaction(slave, NanoTrasenFactionId, false);
         _npcFaction.AddFaction(slave, SyndicateFactionId);
@@ -236,6 +278,8 @@ public sealed class MindSlaveSystem : EntitySystem
         _popup.PopupEntity(briefing, slave, slave, Shared.Popups.PopupType.LargeCaution);
 
         var master = mindSlave.Value.Comp2.masterEntity;
+        // goes here cause we want to have slave in masters slaved list
+        RemoveSlaveTelepathy(master, slave);
         if (master != null && TryComp<MindSlaveMasterComponent>(master.Value, out var masterComponent))
         {
             var briefingMaster = mindComp.CharacterName != null ? Loc.GetString("mindslave-removed-slave-master", ("name", mindComp.CharacterName), ("ent", slave)) :
@@ -287,7 +331,6 @@ public sealed class MindSlaveSystem : EntitySystem
             if (mindslaveImplant != null)
                 _implant.ForceRemove(slave, mindslaveImplant.Value);
         }
-
         return true;
     }
 
@@ -311,5 +354,42 @@ public sealed class MindSlaveSystem : EntitySystem
             return false;
 
         return _role.MindHasRole<MindSlaveRoleComponent>(mindId);
+    }
+
+    private void MakeTelepathic(EntityUid master, EntityUid slave)
+    {
+        var telepathyChannel = TryComp<TelepathyComponent>(master, out var oldTelepathy) && oldTelepathy.TelepathyChannelPrototype != null
+            ? oldTelepathy.TelepathyChannelPrototype
+            : _telepathy.TakeUniqueTelepathyChannel("mindslave-telepathy-channel-name", Color.DarkViolet);
+
+        EnsureTelepathy(slave, telepathyChannel.Value);
+        EnsureTelepathy(master, telepathyChannel.Value);
+    }
+
+    private void EnsureTelepathy(EntityUid target, ProtoId<TelepathyChannelPrototype> channelId)
+    {
+        var slaveTelepathy = EnsureComp<TelepathyComponent>(target);
+        slaveTelepathy.CanSend = true;
+        slaveTelepathy.TelepathyChannelPrototype = channelId;
+    }
+
+    private void RemoveSlaveTelepathy(EntityUid? master, EntityUid slave)
+    {
+        if (!TryComp<MindSlaveMasterComponent>(master, out var mindSlaveMaster)
+            || mindSlaveMaster.EnslavedEntities.Count == 1)
+        {
+            if (TryComp<TelepathyComponent>(slave, out var telepathyComponent) &&
+                telepathyComponent.TelepathyChannelPrototype is { } telepathyChannel)
+            {
+                _telepathy.FreeUniqueTelepathyChannel(telepathyChannel);
+            }
+            else
+            {
+                Log.Warning($"{ToPrettyString(slave)} was freed from mindslave but dont have a {nameof(TelepathyComponent)}");
+            }
+            return;
+        }
+
+        RemComp<TelepathyComponent>(slave);
     }
 }

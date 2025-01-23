@@ -13,8 +13,8 @@
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
-      !type:RoleTimeRequirement
-      role: JobSecurityOfficer
+      !type:DepartmentTimeRequirement
+      department: Security
       time: 360000 # 100 hrs
 
 - type: loadoutEffectGroup
@@ -39,6 +39,14 @@
     proto: BigShlopaSponsorTier
   equipment:
     eyes: ClothingSponsorCyberSecVisor
+
+- type: loadout
+  id: GlassesBallistic
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TacSec
+  equipment:
+    eyes: ClothingEyesGlassesBallistic
 
 # Jumpsuit
 - type: loadout
@@ -80,6 +88,11 @@
 
 # Head
 - type: loadout
+  id: SecurityHelmetXmas
+  equipment:
+    head: ClothingHeadHelmetBasicXmas
+
+- type: loadout
   id: HatCowboyBlack
   equipment:
     head: ClothingHeadHatCowboyBlack
@@ -102,11 +115,6 @@
     mask: ClothingMaskNeckGaiter
 
 # Neck
-- type: loadout
-  id: Headphones
-  equipment:
-    neck: ClothingNeckHeadphones
-
 - type: loadout
   id: ProtectGear
   equipment:
@@ -137,4 +145,11 @@
   equipment:
     shoes: ClothingShoesBootsJackSecFilled
 
-
+# Gloves
+- type: loadout
+  id: GlovesSecTactical
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TacSec
+  equipment:
+    gloves: ClothingHandsGlovesSecTactical

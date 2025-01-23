@@ -26,22 +26,40 @@
   id: UplinkMindSlaveImplanter
   name: uplink-mindslave-implanter-name
   description: uplink-mindslave-implanter-desc
-  icon: { sprite: /Textures/SS220/Alerts/MindSlave.rsi, state: icon }
+  icon: { sprite: /Textures/SS220/Interface/Alerts/mindslave.rsi, state: icon }
   productEntity: MindSlaveImplanter
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 8
   cost:
-    Telecrystal: 14
+    Telecrystal: 10
   categories:
-    - UplinkImplants
+  - UplinkImplants
   conditions:
-    - !type:StoreWhitelistCondition
+  - !type:StoreWhitelistCondition
       blacklist:
         tags:
-          - NukeOpsUplink
-          - LoneOpsUplink # SS220 mindslave fix
+        - NukeOpsUplink
+        - LoneOpsUplink
 
+- type: listing
+  id: UplinkMindslaveSurgeryFixBundle
+  name: uplink-mindslave-fix-surgery-bundle-name
+  description: uplink-mindslave-fix-surgery-bundle-desc
+  icon: { sprite: SS220/Objects/Specific/Medical/implants.rsi, state: mindslave_fixer }
+  productEntity: ClothingBackpackDuffelSyndicateMindslaveFixerSurgery
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkImplants
+  conditions:
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
 # JobItems
 
 - type: listing
@@ -170,6 +188,19 @@
   - UplinkWearables
 
 - type: listing
+  id: UplinkBorgModuleFlamingAxe
+  name: uplink-borg-module-axe-name
+  description: uplink-borg-module-axe-desc
+  productEntity: BorgModuleFlamingAxe
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 3
+  categories:
+  - UplinkDisruption
+
+- type: listing
   id: ClothingSilentShoes
   name: uplink-silent-shoes-name
   description: uplink-silent-shoes-desc
@@ -230,3 +261,25 @@
 #    Telecrystal: 4
 #  categories:
 #  - UplinkWeaponry
+
+- type: listing
+  id: UplinkBoxFakeOps
+  name: uplink-fake-ops-name
+  description: uplink-fake-ops-desc
+  icon: { sprite: Structures/Storage/Crates/toybox.rsi, state: crate_icon }
+  productEntity: CrateFunToyBoxFakeOps
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 4
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Clown
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle

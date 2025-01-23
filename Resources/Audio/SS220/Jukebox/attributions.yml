@@ -32,3 +32,19 @@
   license: "CC-BY-3.0"
   copyright: "Created by Quantum_ (Feat Z.W.E.I.) for SS220"
   source: "https://github.com/SerbiaStrong-220"
+
+- files: ["Pyotr Ilyich Tchaikovsky - Waltz of the Flowers.ogg"]
+  license: "Custom"
+  copyright: "PDM-1.0, European Archive"
+  source: "https://musopen.org"
+
+- files: ["Frédéric Chopin - Nocturne in E flat major, Op. 9 no. 2.ogg"]
+  license: "Custom"
+  copyright: "PDM-1.0, Aya Higuchi"
+  source: "https://musopen.org"
+
+- files: ["Ludwig van Beethoven - Moonlight Sonata, Op. 27 No. 2.ogg"]
+  license: "Custom"
+  copyright: "PDM-1.0, Paul Pitman"
+  source: "https://musopen.org"
+ 

@@ -18,6 +18,7 @@
         layer:
           - MachineLayer
   - type: Lathe
+  - type: StationAiWhitelist #SS220 AI Access
   - type: MaterialStorage
   - type: Destructible
     thresholds:
@@ -153,6 +154,8 @@
       - ExteriorLightTube
       - LightBulb
       - LedLightBulb
+      - DimLightBulb
+      - WarmLightBulb
       - Bucket
       - DrinkMug
       - DrinkMugMetal
@@ -166,6 +169,7 @@
       - FoodPlateSmallPlastic
       - FoodBowlBig
       - FoodPlateTin
+      - FoodPlateMuffinTin
       - FoodKebabSkewer
       - SprayBottle
       - MopItem
@@ -230,6 +234,15 @@
       - RiotShield
       - SpeedLoaderMagnum
       - SpeedLoaderMagnumEmpty
+      #ss220 more recipies begin
+      - SpeedLoaderLightRifle
+      - MagazineBoxCaselessRifle
+      - MagazinePistolCaselessRifle
+      - MagazineMagnumEmpty
+      - MagazineMagnum
+      - MagazinePistolHighCapacityEmpty
+      - MagazinePistolHighCapacity
+      #ss220 more recipies end
   - type: BlueprintReceiver
     whitelist:
       tags:
@@ -404,6 +417,12 @@
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
       - WeaponTaser #SS220 taserback
       - ClothingEyesThermalGlassesSecurity #SS220 Thermals
+      #ss220 more recipies begin
+      - MagazineMagnumIncendiary
+      - MagazineMagnumUranium
+      - MagazinePistolSubMachineGunIncendiary
+      - MagazinePistolSubMachineGunUranium
+      #ss220 more recipies end
 
 - type: entity
   id: ProtolatheHyperConvection
@@ -468,7 +487,6 @@
     - SodaDispenserMachineCircuitboard
     - SpaceHeaterMachineCircuitBoard
     - CutterMachineCircuitboard
-    - StationAnchorCircuitboard
     - SalvageMagnetMachineCircuitboard
     dynamicRecipes:
       - ThermomachineFreezerMachineCircuitBoard
@@ -492,7 +510,6 @@
       - SolarControlComputerCircuitboard
       - SolarTrackerElectronics
       - TurboItemRechargerCircuitboard
-      - PowerComputerCircuitboard
       - SuperMatterObserverCircuitboard  # SS220 superMatter-crystal
       - AutolatheHyperConvectionMachineCircuitboard
       - ProtolatheHyperConvectionMachineCircuitboard
@@ -522,6 +539,12 @@
       - PowerCageRechargerCircuitboard
       - EmitterCircuitboard
       - ThrusterMachineCircuitboard
+      # SS220 engineering-update-thruster begin
+      - ThrusterShuntingMachineCircuitboard
+      - ThrusterBigLeftMachineCircuitboard
+      - ThrusterBigRightMachineCircuitboard
+      - ThrusterBigCenterMachineCircuitboard
+      # SS220 engineering-update-thruster end
       - GyroscopeMachineCircuitboard
       - MiniGravityGeneratorCircuitboard
       - Thermoelectricgenerator #ss220 thermoelectric generator board
@@ -541,6 +564,8 @@
       - MassMediaCircuitboard
       - ReagentGrinderIndustrialMachineCircuitboard
       - JukeboxCircuitBoard
+      - SMESAdvancedMachineCircuitboard
+      - HolopadMachineCircuitboard
   - type: EmagLatheRecipes
     emagDynamicRecipes:
       - ShuttleGunDusterCircuitboard
@@ -594,11 +619,6 @@
     - BorgModuleFireExtinguisher
     - BorgModuleRadiationDetection
     - BorgModuleTool
-    - BorgModuleAppraisal
-    - BorgModuleConstruction
-    - BorgModuleService
-    - BorgModuleTreatment
-    - BorgModuleCleaning
     - CyborgEndoskeleton
     - LeftArmBorg
     - RightArmBorg
@@ -606,51 +626,17 @@
     - RightLegBorg
     - LightHeadBorg
     - TorsoBorg
-    - LeftArmBorgEngineer
-    - RightArmBorgEngineer
-    - LeftLegBorgEngineer
-    - RightLegBorgEngineer
-    - HeadBorgEngineer
-    - TorsoBorgEngineer
-    - LeftLegBorgJanitor
-    - RightLegBorgJanitor
-    - HeadBorgJanitor
-    - TorsoBorgJanitor
-    - LeftArmBorgMedical
-    - RightArmBorgMedical
-    - LeftLegBorgMedical
-    - RightLegBorgMedical
-    - HeadBorgMedical
-    - TorsoBorgMedical
-    - LeftArmBorgMining
-    - RightArmBorgMining
-    - LeftLegBorgMining
-    - RightLegBorgMining
-    - HeadBorgMining
-    - TorsoBorgMining
-    - LeftArmBorgService
-    - RightArmBorgService
-    - LeftLegBorgService
-    - RightLegBorgService
-    - HeadBorgService
-    - TorsoBorgService
     dynamicRecipes:
     - ProximitySensor
-    - BorgModuleLightReplacer
     - BorgModuleAdvancedCleaning
-    - BorgModuleMining
-    - BorgModuleGrapplingGun
     - BorgModuleProtoKineticAccelerator #SS220 Borg Modules
     - BorgModuleAdvancedTool
     - BorgModuleGPS
-    - BorgModuleRCD
+    - BorgModuleFireAxe #SS220 Borg Modules
     - BorgModuleArtifact
     - BorgModuleAnomaly
     - BorgModuleGardening
     - BorgModuleHarvesting
-    - BorgModuleMusique
-    - BorgModuleClowning
-    - BorgModuleDiagnosis
     - BorgModuleDefibrillator
     - BorgModuleAdvancedTreatment
     - RipleyHarness
@@ -800,8 +786,15 @@
       - TargetHuman
       - TargetSyndicate
       - WeaponDisablerPractice
+      - WeaponFlareGunSecurity
       - WeaponLaserCarbinePractice
       - Zipties
+      #ss220 more recipies begin
+      - SpeedLoaderLightRifle
+      - MagazineMagnumEmpty
+      - MagazineMagnum
+      - MagazineMagnumRubber
+      #ss220 more recipies end
     dynamicRecipes:
       - BoxBeanbag
       - BoxShotgunIncendiary
@@ -857,6 +850,12 @@
       - WeaponEnergyCrossbow #SS220 Energy Crossbow
       - WeaponTaser #SS220 taserback
       - ClothingEyesThermalGlassesSecurity #SS220 Thermals
+      #ss220 more recipies begin
+      - MagazineMagnumUranium
+      - MagazineMagnumIncendiary
+      - MagazinePistolSubMachineGunUranium
+      - MagazinePistolSubMachineGunIncendiary
+      #ss220 more recipies end
   - type: MaterialStorage
     whitelist:
       tags:
@@ -923,6 +922,11 @@
         - SpeedLoaderMagnum
         - SpeedLoaderMagnumRubber #SS220 missing rubber fix
         - SpeedLoaderMagnumEmpty
+        #ss220 more recipies begin
+        - MagazinePistolCaselessRifle
+        - MagazineBoxCaselessRifle
+        - SpeedLoaderLightRifle
+        #ss220 more recipies end
     - type: MaterialStorage
       whitelist:
         tags:
@@ -1175,6 +1179,25 @@
       - CarpetPurple
       - CarpetCyan
       - CarpetWhite
+      # Bedsheets
+      - BedsheetBlack
+      - BedsheetBlue
+      - BedsheetBrown
+      - BedsheetGreen
+      - BedsheetGrey
+      - BedsheetOrange
+      - BedsheetPurple
+      - BedsheetRed
+      - BedsheetWhite
+      - BedsheetYellow
+      - BedsheetClown
+      - BedsheetCosmos
+      - BedsheetIan
+      - BedsheetMedical
+      - BedsheetMime
+      - BedsheetNT
+      - BedsheetRainbow
+      - BedsheetBrigmedic
   - type: EmagLatheRecipes
     emagStaticRecipes: #SS220 TODO: Rework recipes what are there after EMAG
 #SS220-Centcom-EmagLatheRecipes-Fix-Begin
@@ -1211,6 +1234,8 @@
       # - ClothingOuterWinterCentcom SS220-Centcom-EmagLatheRecipes-Fix
       - ClothingOuterWinterSyndie
       - ClothingOuterWinterSyndieCap
+      # Bedsheets
+      - BedsheetSyndie
   - type: MaterialStorage
     whitelist:
       tags:
@@ -1312,7 +1337,7 @@
       staticRecipes:
         - SheetSteel
         - SheetGlass1
-        - SheetRGlass
+        - SheetRGlassRaw
         - SheetPlasma1
         - SheetPGlass1
         - SheetRPGlass1
@@ -1338,7 +1363,7 @@
     staticRecipes:
       - SheetSteel
       - SheetGlass1
-      - SheetRGlass
+      - SheetRGlassRaw
       - SheetPlasma1
       - SheetPGlass1
       - SheetRPGlass1

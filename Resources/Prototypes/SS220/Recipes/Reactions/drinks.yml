@@ -87,3 +87,19 @@
       amount: 1
   products:
     ReaperSauce: 4
+
+- type: reaction 
+  id: Bacchus
+  requiredMixerCategories:
+  - Shake
+  reactants: 
+   ManlyDorf:
+    amount: 1
+   Moonshine:
+    amount: 1
+   Absinthe:
+    amount: 1
+   SyndicateBomb: 
+    amount: 1 
+  products: 
+    Bacchus: 4
