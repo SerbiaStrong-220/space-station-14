@@ -59,7 +59,7 @@ entities:
     - type: MetaData
       name: SI-NDSP-"Pantelleria"
     - type: Transform
-      pos: 149.03156,1.2623577
+      pos: -0.96845007,151.26236
       parent: 1
     - type: MapGrid
       chunks:
@@ -551,7 +551,7 @@ entities:
     - type: MetaData
       name: NT-LCH-"Somerset"
     - type: Transform
-      pos: -0.1944418,150.20845
+      pos: -150.19444,0.208457
       parent: 1
     - type: MapGrid
       chunks:
@@ -1410,7 +1410,7 @@ entities:
     - type: MetaData
       name: СССП-БДК-"Бур"
     - type: Transform
-      pos: -0.7725687,-151.63824
+      pos: 149.22743,-1.6382408
       parent: 1
     - type: MapGrid
       chunks:
@@ -52920,7 +52920,7 @@ entities:
   - uid: 2513
     components:
     - type: MetaData
-      desc: 'Изящным шрифтом выгравированы следующие имена:                                                                         Орен Рифф, Ай-Крах, Роман Зубилов.                                                                                  Блейс Бенефисенс,Данила Десоль, Эш Милворд.                             Альт Миамура, Сани Брич, Чарльз Хелман.'
+      desc: 'Изящным шрифтом выгравированы следующие имена:                                                                         Орен Рифф, Ай-Крах, Роман Зубилов.                                                                                  Блейс Бенефисенс,Данила Десоль, Эш Милворд.                             Альт Миамура, Сани Брич, Чарльз Хелман.             Астон Мартов, Сайракс Вирматир, Данила Вайбмен.'
       name: золотая табличка почёта
     - type: Transform
       pos: -2.5,22.5
