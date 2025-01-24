@@ -81,3 +81,8 @@
   id: HeadofSecurityWinterCoat
   equipment:
     outerClothing: ClothingOuterWinterHoS
+
+- type: loadout
+  id: HeadofSecurityBomber
+  equipment:
+    outerClothing: ClothingOuterCoatHoSbomber
