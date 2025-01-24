@@ -326,11 +326,9 @@
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    #SS220 audio muted and no announcment, because Central command do not check piles of trash
-    #startAnnouncement: station-event-vent-creatures-start-announcement
-    #startAudio:
-    #  path: /Audio/Announcements/attention.ogg
-    #SS220 changes end here
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
     earliestStart: 15
     weight: 6
     duration: 50

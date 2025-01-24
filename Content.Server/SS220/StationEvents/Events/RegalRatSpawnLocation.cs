@@ -5,5 +5,4 @@ using Content.Server.StationEvents.Events;
 namespace Content.Server.SS220.StationEvents.Events;
 public sealed partial class RegalRatSpawnLocation : StationEventSystem<RegalRatSpawnLocationComponent>
 {
-
 }

@@ -7,5 +7,4 @@ namespace Content.Server.SS220.StationEvents.Components;
 [RegisterComponent, Access(typeof(RegalRatSpawnLocation))]
 public sealed partial class RegalRatSpawnLocationComponent : Component
 {
-
 }
