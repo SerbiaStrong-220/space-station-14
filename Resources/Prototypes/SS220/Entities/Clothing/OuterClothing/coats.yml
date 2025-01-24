@@ -95,9 +95,9 @@
   suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/whitecapcoat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/captain_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Coats/whitecapcoat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/captain_white.rsi
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -118,9 +118,9 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/hop_purpledress.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Coats/purpledress.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/hop_purpledress.rsi
 
 # Cargo
 - type: entity
@@ -212,7 +212,7 @@
   suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/muscian_danger_coat.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/danger_coat.rsi
 
@@ -253,3 +253,5 @@
     sprite: SS220/Clothing/OuterClothing/Coats/bomberhos.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/bomberhos.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/muscian_danger_coat.rsi
+

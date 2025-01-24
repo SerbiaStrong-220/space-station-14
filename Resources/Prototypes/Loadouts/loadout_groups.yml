@@ -10,6 +10,7 @@
   - Headphones
   - PlushieLizard
   - PlushieSpaceLizard
+  - ThreeCandles
   - Lighter
   - CigPackGreen
   - CigPackRed
@@ -26,6 +27,7 @@
   - ClothingNeckLesbianPin
   - ClothingNeckNonBinaryPin
   - ClothingNeckPansexualPin
+  - ClothingNeckOmnisexualPin
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
@@ -1411,6 +1413,7 @@
   loadouts:
   - BrownShoes
   - MedicalWinterBoots
+  - CMOCorpShoes #ss220 new cmo 
 
 - type: loadoutGroup
   id: MedicalDoctorHead
@@ -1440,6 +1443,7 @@
   - MedicalDoctorJumpsuitTurtleneckAlt
   - MedicalDoctorJumpskirtTurtleneck
   - MedicalDoctorJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - MedicalDoctorJumpsuitResponsibility #SS220-Responsibility
 
 - type: loadoutGroup
   id: MedicalDoctorOuterClothing
@@ -1465,6 +1469,7 @@
   loadouts:
   - WhiteShoes
   - MedicalWinterBoots
+  - MedicalDoctorShoesResponsibility #SS220-Responsibility
 
 - type: loadoutGroup
   id: MedicalDoctorPDA

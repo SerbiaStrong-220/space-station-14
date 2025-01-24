@@ -10,6 +10,7 @@
   - Xeno
   - PetsNT
   - Zombie
+  - AllHostile
 
 - type: npcFaction
   id: EbentNanoTrasen
@@ -21,6 +22,7 @@
   - Xeno
   - Zombie
   - Revolutionary
+  - AllHostile
 
 - type: npcFaction
   id: EbentIronSquad
@@ -32,3 +34,4 @@
   - Xeno
   - PetsNT
   - Zombie
+  - AllHostile

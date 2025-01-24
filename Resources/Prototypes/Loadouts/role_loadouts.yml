@@ -460,7 +460,7 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
-  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
+  - ChiefMedicalOfficerGlasses #SS220-TwoOne-Floppa-Iteration / ss220 cmo new
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
   - MedicalGloves

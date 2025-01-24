@@ -8,11 +8,11 @@
   description: An ancient ceremonial sword.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/jian_sword.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/jian.rsi
     state: icon
   - type: Item
     size: Normal
-    sprite: SS220/Objects/Weapons/Melee/jian_sword.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/jian.rsi
   - type: Tag
     tags:
     - JianSword
@@ -25,7 +25,7 @@
   description: A legendary weapon with extraordinary sharpness and grace.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/centcom_katana.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/centcom_katana.rsi
     state: icon
   - type: MeleeWeapon
     wideAnimationRotation: -45
@@ -34,7 +34,7 @@
         Slash: 27
   - type: Item
     size: Normal
-    sprite: SS220/Objects/Weapons/Melee/centcom_katana.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/centcom_katana.rsi
   - type: Tag
     tags:
     - MinamotoNoYorimitsu
@@ -54,7 +54,7 @@
         volume: 2
   - type: Sharp
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/rapier.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/rapier.rsi
     state: icon
   - type: MeleeWeapon
     wideAnimationRotation: -135
@@ -67,7 +67,7 @@
         path: /Audio/Weapons/bladeslice.ogg
   - type: Item
     size: Normal
-    sprite: SS220/Objects/Weapons/Melee/rapier.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/rapier.rsi
   - type: Tag
     tags:
     - Rapier
@@ -91,7 +91,7 @@
   description: An ornate award-winning weapon, which is the symbol of an officer of the fleet of Mankind.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/officer_cutlass.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/officer_cutlass.rsi
     state: icon
   - type: MeleeWeapon
     wideAnimationRotation: 45
@@ -102,7 +102,7 @@
     angle: 0
   - type: Item
     size: Normal
-    sprite: SS220/Objects/Weapons/Melee/officer_cutlass.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/officer_cutlass.rsi
   - type: Tag
     tags:
     - OfficerCutlass
@@ -122,7 +122,7 @@
         volume: 2
   - type: Sharp
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/chainsword.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/chainsword.rsi
     state: icon
   - type: MeleeWeapon
     autoAttack: true
@@ -139,7 +139,7 @@
         volume: -3
   - type: Item
     size: Small
-    sprite: SS220/Objects/Weapons/Melee/chainsword.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/chainsword.rsi
   - type: Appearance
   - type: DisarmMalus
     malus: 0
@@ -151,36 +151,3 @@
   #   slots:
   #   - Back
   #   - suitStorage
-
-# WMT ebent start
-- type: entity
-  parent: BaseItem
-  id: Broadsword
-  name: broadsword
-  description: Echoes of the past in the service of a new war.
-  suffix: Ebent, HOCebent
-  components:
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/SS220/Effects/Drop/sword.ogg
-      params:
-        volume: 2
-  - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/broadsword.rsi
-    state: icon
-  - type: MeleeWeapon
-    wideAnimationRotation: -135
-    damage:
-      types:
-        Slash: 40
-    soundHit:
-        path: /Audio/Weapons/bladeslice.ogg
-  - type: Item
-    size: Normal
-    sprite: SS220/Objects/Weapons/Melee/broadsword.rsi
-  - type: Clothing
-    sprite: SS220/Objects/Weapons/Melee/broadsword.rsi
-    quickEquip: true
-    slots:
-    - Belt
-# WMT ebent end

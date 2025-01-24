@@ -11,11 +11,11 @@
   - type: Item
   - type: Battery
     pricePerJoule: 0.15
-    maxCharge: 2500
-    startingCharge: 2500
+    maxCharge: 800
+    startingCharge: 800
   - type: PowerCell
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/ert_magblaster.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/Ammunition/Magazine/ert_magblaster.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: base
@@ -44,4 +44,4 @@
   - type: AmmoCounter
   - type: ProjectileBatteryAmmoProvider
     proto: BulletBlaster
-    fireCost: 100
+    fireCost: 32

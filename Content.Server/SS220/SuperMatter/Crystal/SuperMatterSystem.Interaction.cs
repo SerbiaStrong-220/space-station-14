@@ -51,9 +51,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             var spawnedUid = EntityManager.SpawnEntity(smComp.ConsumeResultEntityPrototype, Transform(targetUid).Coordinates);
             if (HasComp<MetaDataComponent>(spawnedUid))
             {
-                var stringBuilder = new StringBuilder();
-                stringBuilder.AppendJoin(" ", [MetaData(spawnedUid).EntityName, Loc.GetString("supermatter-consume-preposition"), MetaData(targetUid).EntityName]);
-                _metaData.SetEntityName(spawnedUid, stringBuilder.ToString());
+                _metaData.SetEntityName(spawnedUid, $"{MetaData(spawnedUid).EntityName} {Loc.GetString("supermatter-consume-preposition")} {MetaData(targetUid).EntityName}");
             }
             else
                 Log.Error($"Spawned Entity {spawnedUid} dont have MetaDataComponent");

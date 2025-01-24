@@ -30,8 +30,6 @@
       amount: 3
     - id: EmergencyRollerBedSpawnFolded
       amount: 10
-    - id: Stimpack
-      amount: 30
     - id: MedicatedSuture
       amount: 50
     - id: RegenerativeMesh
@@ -70,6 +68,10 @@
   components:
   - type: StorageFill
     contents:
+    - id: RCD
+      amount: 5
+    - id: RCDAmmo
+      amount: 20
     - id: Multitool
       amount: 3
     - id: MaterialDurathread
@@ -79,31 +81,31 @@
     - id: HolofanProjector
       amount: 5
     - id: JetpackBlackFilled
-      amount: 10
+      amount: 4
     - id: JawsOfLife
       amount: 10
     - id: GasAnalyzer
       amount: 3
     - id: SheetPlasteel
-      amount: 20
+      amount: 10
     - id: SheetSteel
-      amount: 20
+      amount: 10
     - id: SheetUranium
       amount: 5
     - id: SheetGlass
-      amount: 20
+      amount: 10
     - id: SheetRGlass
-      amount: 20
+      amount: 10
     - id: SheetPlastic
-      amount: 20
+      amount: 10
     - id: SheetPlasma
       amount: 5
     - id: CableHVStack
-      amount: 10
+      amount: 5
     - id: CableMVStack
-      amount: 20
+      amount: 10
     - id: CableApcStack
-      amount: 20
+      amount: 10
     - id: ClothingBackpackDuffelEngineering
       amount: 3
     - id: ClothingBackpackCloningSet
@@ -185,12 +187,43 @@
   parent: ClothingBackpackDuffelMilitary
   id: ClothingBackpackFractWarExGrenadeSet
   suffix: Shitspawn, Ebent, FractWar
-  name: набор смешанных гранат
+  name: набор осколочных гранат
   description: Большой вещмешок для хранения любого армейского снаряжения.
   components:
    - type: StorageFill
      contents:
       - id: ExGrenade
-        amount: 8
+        amount: 16
+
+- type: entity
+  parent: ClothingBackpackDuffelMilitary
+  id: ClothingBackpackFractWarSmokeGrenadeSet
+  suffix: Shitspawn, Ebent, FractWar
+  name: набор дымовых гранат
+  description: Большой вещмешок для хранения любого армейского снаряжения.
+  components:
+   - type: StorageFill
+     contents:
       - id: SmokeGrenade
-        amount: 10
+        amount: 20
+
+- type: entity
+  parent: MedkitAdvanced
+  id: MedkitAutoInjectorFractWar
+  suffix: Shitspawn, Ebent, FractWar
+  name: набор автоинжекторов
+  description: Коробка, полная различных автоинжекторов.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,6,1
+  - type: StorageFill
+    contents:
+      - id: PyraAutoInjector
+        amount: 4
+      - id: CombatMedipen
+        amount: 3
+      - id: PunctAutoInjector
+        amount: 4
+      - id: Stimpack
+        amount: 3
