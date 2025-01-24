@@ -251,6 +251,10 @@ binds:
   type: State
   key: E
   mod1: Shift
+- function: SmartEquipNeck #SS220-SmartEquipNeck begin
+  type: State
+  key: H
+  mod1: Shift #SS220-SmartEquipNeck end
 - function: OpenBackpack
   type: State
   key: V
@@ -269,6 +273,16 @@ binds:
   type: State
   key: MouseMiddle
   canFocus: true
+- function: RotateObjectClockwise
+  type: State
+  key: R
+- function: RotateObjectCounterclockwise
+  type: State
+  key: R
+  mod1: Shift
+- function: FlipObject
+  type: State
+  key: F
 - function: TextCursorLeft
   type: State
   key: Left
@@ -489,15 +503,19 @@ binds:
 - function: ArcadeUp
   type: State
   key: Up
+  priority: -1
 - function: ArcadeDown
   type: State
   key: Down
+  priority: -1
 - function: ArcadeLeft
   type: State
   key: Left
+  priority: -1
 - function: ArcadeRight
   type: State
   key: Right
+  priority: -1
 - function: Arcade1
   type: State
   key: Space
@@ -570,3 +588,67 @@ binds:
   type: State
   key: MouseRight
   canFocus: true
+# SS220 Calculator begin
+- function: CalculatorType0
+  type: State
+  key: NumpadNum0
+- function: CalculatorType1
+  type: State
+  key: NumpadNum1
+- function: CalculatorType2
+  type: State
+  key: NumpadNum2
+- function: CalculatorType3
+  type: State
+  key: NumpadNum3
+- function: CalculatorType4
+  type: State
+  key: NumpadNum4
+- function: CalculatorType5
+  type: State
+  key: NumpadNum5
+- function: CalculatorType6
+  type: State
+  key: NumpadNum6
+- function: CalculatorType7
+  type: State
+  key: NumpadNum7
+- function: CalculatorType8
+  type: State
+  key: NumpadNum8
+- function: CalculatorType9
+  type: State
+  key: NumpadNum9
+- function: CalculatorTypeDot
+  type: State
+  key: NumpadDecimal
+- function: CalculatorTypeAdd
+  type: State
+  key: NumpadAdd
+- function: CalculatorTypeSubtract
+  type: State
+  key: NumpadSubtract
+- function: CalculatorTypeMultiply
+  type: State
+  key: NumpadMultiply
+- function: CalculatorTypeDivide
+  type: State
+  key: NumpadDivide
+- function: CalculatorEnter
+  type: State
+  key: NumpadEnter
+- function: CalculatorClear
+  type: State
+  key: Delete
+# SS220 Calculator end
+# SS220 ItemOffer bind begin
+- function: ItemOffer
+  type: State
+  key: R
+  mod1: Shift
+# SS220 ItemOffer bind end
+# SS220 resist fire bind begin
+- function: ResistFire
+  type: State
+  key: B
+# SS220 resist fire bind end

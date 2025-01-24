@@ -1,0 +1,9 @@
+- type: cargoProduct
+  id: HolyWaterKit
+  icon:
+    sprite: SS220/Objects/Consumable/Drinks/holy_water_jug.rsi
+    state: icon
+  product: CrateHolyWaterKit
+  cost: 15000
+  category: cargoproduct-category-name-service
+  group: market

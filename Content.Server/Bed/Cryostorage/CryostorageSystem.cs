@@ -1,24 +1,24 @@
 using System.Globalization;
-using System.Linq;
 using Content.Server.Chat.Managers;
-using Content.Server.GameTicking;
+using Content.Server.Chat.Systems;
+using Content.Server.Ghost;
 using Content.Server.Hands.Systems;
 using Content.Server.Inventory;
 using Content.Server.Popups;
-using Content.Server.Chat.Systems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
-using Content.Shared.StationRecords;
-using Content.Shared.UserInterface;
 using Content.Shared.Access.Systems;
 using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Chat;
 using Content.Shared.Climbing.Systems;
 using Content.Shared.Database;
+using Content.Shared.GameTicking;
 using Content.Shared.Hands.Components;
 using Content.Shared.Mind.Components;
+using Content.Shared.StationRecords;
+using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -29,6 +29,9 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Content.Server.Forensics;
 using Robust.Shared.Utility;
+using Content.Shared.Roles; // SS220 Cryostorage ghost role fix
+using Robust.Shared.Prototypes; // SS220 Cryostorage ghost role fix
+using Content.Server.SS220.Bed.Cryostorage; //SS220 Cult_hotfix_4
 
 namespace Content.Server.Bed.Cryostorage;
 
@@ -42,7 +45,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly ClimbSystem _climb = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly GhostSystem _ghostSystem = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly ServerInventorySystem _inventory = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
@@ -51,6 +54,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!; // SS220 Cryostorage ghost role fix
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -214,11 +218,15 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             if (userId != null && Mind.TryGetMind(userId.Value, out var mind) &&
                 HasComp<CryostorageContainedComponent>(mind.Value.Comp.CurrentEntity))
             {
-                _gameTicker.OnGhostAttempt(mind.Value, false);
+                _ghostSystem.OnGhostAttempt(mind.Value, false);
             }
         }
 
         comp.AllowReEnteringBody = false;
+        //SS220 start Cult_hotfix_4
+        var ev = new BeingCryoDeletedEvent();
+        RaiseLocalEvent(ent, ref ev);
+        //SS220 end Cult_hotfix_4
         _transform.SetParent(ent, PausedMap.Value);
         cryostorageComponent.StoredPlayers.Add(ent);
         Dirty(ent, comp);
@@ -236,6 +244,15 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             if (_stationRecords.TryGetRecord<GeneralStationRecord>(key, out var entry, stationRecords))
                 jobName = entry.JobTitle;
 
+            // SS220 Cryostorage ghost role fix begin
+            if (!_stationRecords.TryGetRecord<GeneralStationRecord>(key, out var record, stationRecords)
+                || !_prototypeManager.TryIndex<JobPrototype>(record.JobPrototype, out var jobProto)
+                || !jobProto.JoinNotifyCrew)
+            {
+                return;
+            }
+            // SS220 Cryostorage ghost role fix end
+
             // _stationRecords.RemoveRecord(key, stationRecords);
 
             // start 220 cryo department record
@@ -252,6 +269,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             Loc.GetString(
                 "earlyleave-cryo-announcement",
                 ("character", name),
+                ("entity", ent.Owner), // gender things for supporting downstreams with other languages
                 ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))
             ), Loc.GetString("earlyleave-cryo-sender"),
             playSound: false

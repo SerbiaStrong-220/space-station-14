@@ -1,0 +1,103 @@
+# Шлёпы
+- type: loadoutEffectGroup
+  id: ShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Shlopa
+
+- type: loadoutEffectGroup
+  id: BigShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: BigShlopa
+
+- type: loadoutEffectGroup
+  id: HugeShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: HugeShlopa
+
+- type: loadoutEffectGroup
+  id: GoldenShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: GoldenShlopa
+
+- type: loadoutEffectGroup
+  id: CriticalMassShlopaSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: CriticalMassShlopa
+
+# Разработка
+- type: loadoutEffectGroup
+  id: DeveloperSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Developer
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: MapperSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Mapper
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: SpriterSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Spriter
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: QASponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: QA
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: LoreEditSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: LoreEdit
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: WikiEditSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: WikiEdit
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: HeadDeveloperSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: HeadDeveloper
+    isExact: true
+
+# Администрация
+- type: loadoutEffectGroup
+  id: MentorSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Mentor
+    isExact: true
+
+- type: loadoutEffectGroup
+  id: AdministratorSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Administrator
+    isExact: true
+
+# Модерация
+- type: loadoutEffectGroup
+  id: ModeratorSponsorTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: Moderator
+    isExact: true

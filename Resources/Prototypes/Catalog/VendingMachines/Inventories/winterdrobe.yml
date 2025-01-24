@@ -1,6 +1,7 @@
 - type: vendingMachineInventory
   id: WinterDrobeInventory
   startingInventory:
+    ClothingNeckScarfStripedWhite: 3 #SS220-WhiteScarf
     ClothingNeckScarfStripedRed: 3
     ClothingNeckScarfStripedGreen: 3
     ClothingNeckScarfStripedBlue: 3

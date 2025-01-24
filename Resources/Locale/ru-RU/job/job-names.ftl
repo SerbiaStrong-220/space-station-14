@@ -21,6 +21,8 @@ job-name-hop = глава персонала
 job-name-captain = капитан
 job-name-serviceworker = сервисный работник
 job-name-centcomoff = представитель Центком
+#job-name-cburn = агент карантинной службы Центком
+#job-name-deathsquad = агент Центком
 job-name-reporter = репортёр
 job-name-musician = музыкант
 job-name-librarian = библиотекарь
@@ -33,6 +35,7 @@ job-name-botanist = ботаник
 job-name-bartender = бармен
 job-name-passenger = пассажир
 job-name-salvagespec = утилизатор
+job-name-station-ai = станционный ИИ
 job-name-qm = квартирмейстер
 job-name-cargotech = грузчик
 job-name-chef = шеф-повар
@@ -50,6 +53,22 @@ job-name-senior-engineer = ведущий инженер
 job-name-senior-researcher = ведущий учёный
 job-name-senior-physician = ведущий врач
 job-name-senior-officer = инструктор СБ
+job-name-visitor = посетитель
+# unused jobs
+# these are required for the agent ID job icon tooltips
+# I am keeping them for roleplaying opportunities
+job-name-geneticist = генетик
+job-name-no-id = нет ID
+job-name-prisoner = заключённый
+job-name-roboticist = робототехник
+job-name-syndicate = синдикат
+job-name-unknown = неизвестно
+job-name-virologist = вирусолог
+job-name-zombie = зомби
+# Job titles
+job-title-visitor = посетитель
+job-title-cluwne = клувень
+job-title-universal = универсальная
 # Role timers - Make these alphabetical or I cut you
 JobAtmosphericTechnician = атмосферный техник
 JobBartender = бармен
@@ -95,6 +114,7 @@ JobSecurityCadet = кадет СБ
 JobSecurityOfficer = офицер СБ
 JobServiceWorker = сервисный работник
 JobStationEngineer = инженер
+JobStationAi = станционный ИИ
 JobTechnicalAssistant = технический ассистент
 JobWarden = смотритель
 JobBoxer = боксёр

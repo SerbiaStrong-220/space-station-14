@@ -1,0 +1,15 @@
+# Плащи
+- type: loadoutGroup
+  id: SponsorNeck
+  name: loadout-group-sponsor-cloak
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ParadiseNeck
+  - CoderNeck
+  - MapperNeck
+  - SpriterNeck
+  - TrackerExpertNeck
+  - AdministratorNeck
+  - ModeratorNeck
+  - HeadDeveloperNeck

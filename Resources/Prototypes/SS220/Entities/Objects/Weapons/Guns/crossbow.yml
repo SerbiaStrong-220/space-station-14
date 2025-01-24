@@ -6,12 +6,17 @@
   abstract: true
   description: Energy crossbow.
   components:
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+    sound:
+      path: /Audio/SS220/Effects/Drop/smg.ogg
+      params:
+        volume: 2
   - type: AmmoCounter
   - type: UseDelayOnShoot
   - type: UseDelay
-    delay: 4
+    delay: 6 #ss220 fix 4 -> 6
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 4
+    rechargeCooldown: 6 #NerfCrossbow
     rechargeSound:
       path: /Audio/SS220/Weapons/Guns/MagIn/draw_bow2.ogg
   - type: Gun

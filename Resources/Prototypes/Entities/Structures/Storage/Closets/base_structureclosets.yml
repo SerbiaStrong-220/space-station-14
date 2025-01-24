@@ -22,6 +22,7 @@
     - state: paper #SS220-Closet-Resprite-start
       sprite: SS220/Structures/Storage/closet.rsi
       map: ["enum.PaperLabelVisuals.Layer"] #SS220-Closet-Resprite-end
+      visible: false
   - type: MovedByPressure
   - type: PaperLabel
     labelSlot:
@@ -30,18 +31,9 @@
       whitelist:
         components:
         - Paper
-  - type: GenericVisualizer #SS220-Closet-Resprite-start
-    visuals:
-      enum.PaperLabelVisuals.HasLabel:
-        enum.PaperLabelVisuals.Layer:
-          True: { visible: true }
-          False: { visible: false }
-      enum.PaperLabelVisuals.LabelType:
-        enum.PaperLabelVisuals.Layer:
-          Paper: { state: paper }
-          Bounty: { state: bounty }
-          CaptainsPaper: { state: captains_paper }
-          Invoice: { state: invoice } #SS220-Closet-Resprite-end
+      blacklist:
+        tags:
+        - Book
   - type: ItemSlots
   - type: DamageOnHighSpeedImpact
     damage:
@@ -102,13 +94,28 @@
           SheetSteel1:
             min: 1
             max: 1
+  - type: GenericVisualizer
+    visuals:
+      enum.PaperLabelVisuals.HasLabel:
+        enum.PaperLabelVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.StorageVisuals.Open:
+        enum.PaperLabelVisuals.Layer:
+          True: { visible: false }
+      enum.PaperLabelVisuals.LabelType:
+        enum.PaperLabelVisuals.Layer:
+          Paper: { state: paper }
+          Bounty: { state: bounty }
+          CaptainsPaper: { state: captains_paper }
+          Invoice: { state: invoice }
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: generic
     stateDoorOpen: generic_open
     stateDoorClosed: generic_door
   - type: StaticPrice
-    price: 50
+    price: 75
 
 # steel closet base (that can be constructed/deconstructed)
 - type: entity
@@ -137,7 +144,7 @@
   - type: WallMount
     arc: 175
   - type: StaticPrice
-    price: 50
+    price: 75
   - type: Transform
     noRot: false
   - type: Sprite
@@ -153,7 +160,8 @@
       map: ["enum.WeldableLayers.BaseWelded"]
   - type: EntityStorage
     isCollidableWhenOpen: true
-    enteringOffset: 0, -0.75
+    enteringOffset: 0, -0.6
+    enteringRange: 0.03
     closeSound:
       path: /Audio/Items/deconstruct.ogg
     openSound:
@@ -163,7 +171,7 @@
       entity_storage: !type:Container
         ents: []
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic
     damageModifierSet: Metallic
   - type: Destructible
     thresholds:
@@ -277,7 +285,7 @@
     placeCentered: true
     isPlaceable: false
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralInorganic
     damageModifierSet: Metallic
   - type: Destructible
     thresholds:

@@ -39,14 +39,24 @@ public sealed class ToggleClothingSystem : EntitySystem
 
     private void OnGetActions(Entity<ToggleClothingComponent> ent, ref GetItemActionsEvent args)
     {
+        if (args.InHands && ent.Comp.MustEquip)
+            return;
+
         var ev = new ToggleClothingCheckEvent(args.User);
         RaiseLocalEvent(ent, ref ev);
+
         if (!ev.Cancelled)
             args.AddAction(ent.Comp.ActionEntity);
     }
 
     private void OnToggleAction(Entity<ToggleClothingComponent> ent, ref ToggleActionEvent args)
     {
+        //ss220 mag boots internals fix start (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1759)
+        if (args.Action != ent.Comp.ActionEntity)
+        {
+            return;
+        }
+        //ss220 mag boots internals fix end
         args.Handled = _toggle.Toggle(ent.Owner, args.Performer);
     }
 

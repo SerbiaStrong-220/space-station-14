@@ -1,0 +1,90 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# SS220 AI Mapping Update Begin
+
+- type: npcFaction
+  id: BloodCult
+  hostile:
+  - NanoTrasen
+  - DeathSquad #SS220 dq update
+  - Syndicate
+  - Passive
+  - PetsNT
+  - Zombie
+  - Revolutionary
+  - SpiderQueen
+  - CultYogg #SS220 CultYogg
+  - AllHostile
+
+# SS220 AI Mapping Update End
+
+# ss220 reaper passive start
+
+- type: npcFaction
+  id: DarkReaperPassive
+
+# ss220 reaper passive end
+
+# ss220 spider queen Begin
+
+- type: npcFaction
+  id: SpiderQueen
+  hostile:
+  - NanoTrasen
+  - DeathSquad #SS220 dq update
+  - Syndicate
+  - Passive
+  - Zombie
+  - SimpleHostile
+  - Dragon
+  - PetsNT
+  - SimpleNeutral
+  - CultYogg #SS220 CultYogg
+  - AllHostile
+
+- type: npcFaction
+  id: SpiderHostile
+  hostile:
+  - NanoTrasen
+  - DeathSquad #SS220 dq update
+  - Syndicate
+  - Passive
+  - PetsNT
+  - Zombie
+  - Revolutionary
+  - CultYogg #SS220 CultYogg
+  - AllHostile
+
+# ss220 spider queen end
+
+# Death Squad
+- type: npcFaction
+  id: DeathSquad
+  hostile:
+  - NanoTrasen
+  - Syndicate
+  - Xeno
+  - Passive
+  - PetsNT
+  - Mouse
+  - Zombie
+  - Revolutionary
+  - SpiderQueen
+  - SimpleHostile
+  - CultYogg #SS220 CultYogg
+  - AllHostile
+
+#SS220 CultYogg
+- type: npcFaction
+  id: CultYogg
+  hostile:
+  - SimpleHostile
+  - Syndicate
+  - Xeno
+  - Zombie
+  - Revolutionary
+  - NanoTrasen
+  - DeathSquad
+  - Dragon
+  - BloodCult
+  - SpiderQueen
+  - AllHostile

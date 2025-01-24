@@ -4,10 +4,15 @@ using System.Numerics;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.Explosion.Components;
+using Content.Shared.Flash;
+using Content.Shared.Flash.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
@@ -15,6 +20,7 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
+using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
@@ -52,6 +58,9 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private readonly PullingSystem _puller = default!;
+    [Dependency] private readonly SharedFlashSystem _flash = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
 
     public override void Initialize()
     {
@@ -68,6 +77,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         SubscribeLocalEvent<DarkReaperComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<DarkReaperComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<DarkReaperComponent, DamageModifyEvent>(OnDamageModify);
+        SubscribeLocalEvent<DarkReaperComponent, ReaperBloodMistEvent>(OnBloodMistAction);
 
         SubscribeLocalEvent<DarkReaperComponent, AfterMaterialize>(OnAfterMaterialize);
         SubscribeLocalEvent<DarkReaperComponent, AfterDeMaterialize>(OnAfterDeMaterialize);
@@ -80,6 +90,15 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         args.Handled = true;
 
         DoRoflAbility(uid, comp);
+    }
+
+    private void OnBloodMistAction(EntityUid uid, DarkReaperComponent comp, ReaperBloodMistEvent args)
+    {
+        if (!comp.PhysicalForm)
+            return;
+        args.Handled = true;
+        _audio.PlayPredicted(args.BloodMistSound, uid, uid);
+        Spawn(args.BloodMistProto, Transform(uid).Coordinates);
     }
 
     private void OnConsumeAction(EntityUid uid, DarkReaperComponent comp, ReaperConsumeEvent args)
@@ -162,6 +181,13 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         foreach (var entity in entities)
         {
             _stun.TryParalyze(entity, comp.StunDuration, true);
+        }
+
+        var confusedentities = _lookup.GetEntitiesInRange(uid, comp.StunAbilityConfusion);
+        foreach (var entity in confusedentities)
+        {
+            if (!_statusEffectsSystem.TryAddStatusEffect<FlashedComponent>(entity, comp.ConfusionEffectName, comp.ConfusionDuration, true))
+                continue;
         }
     }
 
@@ -369,7 +395,15 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
         if (isMaterial)
         {
+            EnsureComp<PullerComponent>(uid).NeedsHands = false;
             _tag.AddTag(uid, "DoorBumpOpener");
+            _tag.RemoveTag(uid, "HideContextMenu");
+
+            if (TryComp<ExplosionResistanceComponent>(uid, out var explosionResistanceComponent))
+            {
+                explosionResistanceComponent.DamageCoefficient = 1f; //full damage
+            }
+
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
@@ -379,14 +413,26 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         else
         {
             _tag.RemoveTag(uid, "DoorBumpOpener");
+            _tag.AddTag(uid, "HideContextMenu");
             comp.StunScreamStart = null;
             comp.MaterializedStart = null;
+
+            if (TryComp<ExplosionResistanceComponent>(uid, out var explodeComponent))
+            {
+                explodeComponent.DamageCoefficient = 0f; // full resistance
+            }
+
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
                 _npcFaction.AddFaction(uid, "DarkReaperPassive");
             }
             _appearance.SetData(uid, DarkReaperVisual.StunEffect, false);
+
+            if (TryComp(uid, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
+                _puller.TryStopPull(puller.Pulling.Value, pullable);
+            RemComp<PullerComponent>(uid);
+            RemComp<ActivePullerComponent>(uid);
         }
 
         _actions.SetEnabled(comp.StunActionEntity, isMaterial);

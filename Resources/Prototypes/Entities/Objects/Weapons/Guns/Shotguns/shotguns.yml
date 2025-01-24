@@ -5,6 +5,11 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/revolver.ogg
+      params:
+        volume: 2
   - type: Sprite
     layers:
     - state: icon
@@ -50,6 +55,11 @@
   id: WeaponShotgunBulldog
   description: It's a magazine-fed shotgun designed for close quarters combat. Uses .50 shotgun shells.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/rifles.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Guns/Shotguns/bulldog.rsi
     layers:
@@ -228,7 +238,7 @@
 
 - type: entity
   name: handmade pistol
-  parent: BaseWeaponShotgun
+  parent: [BaseWeaponShotgun]
   id: WeaponShotgunHandmade
   description: Looks unreliable. Uses .50 shotgun shells.
   components:
@@ -246,8 +256,8 @@
   - type: BallisticAmmoProvider
     proto: null #ss220 handmade gun buff
     capacity: 1 #ss220 handmade gun buff
-  # ss220 handmade gun buff (Оффы зачем-то сделали крафт обреза из пистолета, я убрал) 
-  #- type: Construction 
+  # ss220 handmade gun buff (Оффы зачем-то сделали крафт обреза из пистолета, я убрал)
+  #- type: Construction
   #  graph: ShotgunSawn
   #  node: shotgunsawn
   # deconstructionTarget: null
@@ -284,6 +294,11 @@
   id: WeaponShotgunImprovised
   description: A shitty, hand-made shotgun that uses .50 shotgun shells. It can only hold one round in the chamber.
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/revolver.ogg
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Guns/Shotguns/improvised_shotgun.rsi
   - type: Clothing

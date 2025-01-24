@@ -10,7 +10,7 @@
     noRot: true
     offset: 0, 0.5
     layers:
-      - sprite: Structures/Piping/Atmospherics/pipe.rsi
+      - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
         state: pipeHalf
         offset: 0, -0.5
         map: [ "enum.PipeVisualLayers.Pipe" ]
@@ -54,8 +54,8 @@
     boardName: wires-board-name-cryopod
     layoutId: CryoPod
   - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -79,6 +79,8 @@
         !type:PortablePipeNode
         nodeGroupID: Pipe
         pipeDirection: South
+  - type: AtmosMonitoringConsoleDevice
+    navMapBlip: Thermoregulator
   - type: ItemSlots
     slots:
       beakerSlot:
@@ -96,7 +98,7 @@
         type: WiresBoundUserInterface
   - type: ActivatableUI
     key: enum.HealthAnalyzerUiKey.Key
-    requireHands: false
+    requiresComplex: false
   - type: ActivatableUIRequiresPower
   - type: PointLight
     color: "#3a807f"

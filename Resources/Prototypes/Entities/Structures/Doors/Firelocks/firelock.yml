@@ -18,8 +18,8 @@
     - type: DeviceNetworkRequiresPower
     - type: InteractionOutline
     - type: Damageable
-      damageContainer: Inorganic
-      damageModifierSet: Metallic
+      damageContainer: StructuralInorganic
+      damageModifierSet: StructuralMetallicStrong
     - type: RCDDeconstructable
       cost: 4
       delay: 6
@@ -105,6 +105,7 @@
       arc: 360
     - type: StaticPrice
       price: 150
+    - type: DoorBolt # SS220 revert "remove fire remote controller"
     - type: AccessReader
       access: [ [ "Engineering" ] ]
     - type: PryUnpowered
@@ -115,11 +116,13 @@
       color: Red
       enabled: false
       castShadows: false
+    - type: NavMapDoor
 
 - type: entity
   id: Firelock
   parent: BaseFirelock
   components:
+  - type: StationAiWhitelist
   - type: ContainerContainer
     containers:
       board: !type:Container
@@ -137,6 +140,7 @@
   parent: Firelock
   name: glass firelock
   components:
+    - type: StationAiWhitelist
     - type: Sprite
       sprite: Structures/Doors/Airlocks/Glass/firelock.rsi
     - type: Occluder
@@ -162,6 +166,7 @@
   parent: Firelock
   name: firelock
   components:
+    - type: StationAiWhitelist
     - type: Sprite
       sprite: Structures/Doors/edge_door_hazard.rsi
       snapCardinals: false

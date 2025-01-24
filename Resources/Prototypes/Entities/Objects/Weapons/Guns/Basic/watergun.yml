@@ -1,8 +1,13 @@
-﻿- type: entity
+- type: entity
   id: WeaponWaterGunBase
   abstract: true
   parent: BaseItem
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/smg.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
   - type: Sprite
     sprite: Objects/Weapons/Guns/Pistols/water_pistol.rsi
   - type: Clothing
@@ -71,7 +76,7 @@
   id: WeaponWaterBlaster
   parent: WeaponWaterGunBase
   name: water blaster
-  description: With this bad boy, you'll be the cooleste kid at the summer barbecue.
+  description: With this bad boy, you'll be the coolest kid at the summer barbecue.
   components:
   - type: Gun
     cameraRecoilScalar: 0 #no recoil

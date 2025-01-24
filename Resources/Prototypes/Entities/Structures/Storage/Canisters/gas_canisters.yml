@@ -9,14 +9,14 @@
     - type: Transform
       noRot: true
     - type: Sprite
-      sprite: Structures/Storage/canister.rsi
+      sprite: SS220/Structures/Storage/canister.rsi #ss220-engineering-update-atmosgase
       noRot: true
       layers:
         - state: grey
     - type: Appearance
     - type: GenericVisualizer
       visuals:
-        enum.GasPortableVisuals.ConnectedState:
+        enum.AnchorVisuals.Anchored:
           connectedToPort:
             False: { state: can-connector, visible: false }
             True: { state: can-connector, visible: true }
@@ -99,7 +99,7 @@
           components:
             - GasTank
     - type: StaticPrice
-      price: 1000
+      price: 200
     - type: AccessReader
       access: [["Atmospherics"], ["Engineering"], ["Research"]]
     - type: Lock
@@ -673,7 +673,7 @@
       damageModifierSet: Metallic
     - type: InteractionOutline
     - type: Sprite
-      sprite: Structures/Storage/canister.rsi
+      sprite: SS220/Structures/Storage/canister.rsi #ss220-engineering-update-atmosgase
       state: grey-1
     - type: Physics
       bodyType: Dynamic
@@ -692,7 +692,7 @@
       materialComposition:
         Steel: 500
     - type: StaticPrice
-      price: 60
+      price: 125
 
 - type: entity
   parent: GasCanisterBrokenBase

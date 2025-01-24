@@ -439,7 +439,7 @@ namespace Content.Client.Lobby.UI
 
             #region TeleportAfkToCryoStorage
 
-            TabContainer.SetTabTitle(5, Loc.GetString("humanoid-profile-edtior-afkPreferences-tab"));
+            TabContainer.SetTabTitle(5, Loc.GetString("humanoid-profile-editor-afkPreferences-tab")); //ss220 loc fix
             CTeleportAfkToCryoStorage.Pressed = Profile?.TeleportAfkToCryoStorage ?? true;
             CTeleportAfkToCryoStorage.OnToggled += args => SetTeleportAfkToCryoStorage(args.Pressed);
 
@@ -664,7 +664,14 @@ namespace Content.Client.Lobby.UI
                 selector.Select(Profile?.AntagPreferences.Contains(antag.ID) == true ? 0 : 1);
 
                 var requirements = _entManager.System<SharedRoleSystem>().GetAntagRequirement(antag);
-                if (!_requirements.CheckRoleRequirements(requirements, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
+                // SS220 Add role-ban check begin
+                if (_requirements.IsRoleBaned(antag.ID, out var banReason))
+                {
+                    selector.LockRequirements(banReason);
+                    Profile = Profile?.WithAntagPreference(antag.ID, false);
+                    SetDirty();
+                } // SS220 Add role-ban check end
+                else if (!_requirements.CheckRoleRequirements(requirements, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason)) // SS220 change 'if' -> 'else if'
                 {
                     selector.LockRequirements(reason);
                     Profile = Profile?.WithAntagPreference(antag.ID, false);
@@ -733,6 +740,9 @@ namespace Content.Client.Lobby.UI
             PreviewDummy = _controller.LoadProfileEntity(Profile, JobOverride, ShowClothes.Pressed);
             SpriteView.SetEntity(PreviewDummy);
             _entManager.System<MetaDataSystem>().SetEntityName(PreviewDummy, Profile.Name);
+
+            // Check and set the dirty flag to enable the save/reset buttons as appropriate.
+            SetDirty();
         }
 
         /// <summary>
@@ -794,6 +804,9 @@ namespace Content.Client.Lobby.UI
                 return;
 
             _entManager.System<HumanoidAppearanceSystem>().LoadProfile(PreviewDummy, Profile);
+
+            // Check and set the dirty flag to enable the save/reset buttons as appropriate.
+            SetDirty();
         }
 
         private void OnSpeciesInfoButtonPressed(BaseButton.ButtonEventArgs args)
@@ -1031,7 +1044,6 @@ namespace Content.Client.Lobby.UI
                 roleLoadout.AddLoadout(loadoutGroup, loadoutProto, _prototypeManager);
                 _loadoutWindow.RefreshLoadouts(roleLoadout, session, collection);
                 Profile = Profile?.WithLoadout(roleLoadout);
-                SetDirty();
                 ReloadPreview();
             };
 
@@ -1040,7 +1052,6 @@ namespace Content.Client.Lobby.UI
                 roleLoadout.RemoveLoadout(loadoutGroup, loadoutProto, _prototypeManager);
                 _loadoutWindow.RefreshLoadouts(roleLoadout, session, collection);
                 Profile = Profile?.WithLoadout(roleLoadout);
-                SetDirty();
                 ReloadPreview();
             };
 
@@ -1050,7 +1061,6 @@ namespace Content.Client.Lobby.UI
             _loadoutWindow.OnClose += () =>
             {
                 JobOverride = null;
-                SetDirty();
                 ReloadPreview();
             };
 
@@ -1075,7 +1085,6 @@ namespace Content.Client.Lobby.UI
                 return;
 
             Profile = Profile.WithCharacterAppearance(Profile.Appearance.WithMarkings(markings.GetForwardEnumerator().ToList()));
-            SetDirty();
             ReloadProfilePreview();
         }
 
@@ -1143,7 +1152,6 @@ namespace Content.Client.Lobby.UI
                 }
             }
 
-            SetDirty();
             ReloadProfilePreview();
         }
 
@@ -1174,7 +1182,6 @@ namespace Content.Client.Lobby.UI
         {
             Profile = Profile?.WithAge(newAge);
             ReloadPreview();
-            SetDirty();
         }
 
         private void SetSex(Sex newSex)
@@ -1198,14 +1205,12 @@ namespace Content.Client.Lobby.UI
             UpdateTTSVoicesControls(); // Corvax-TTS
             Markings.SetSex(newSex);
             ReloadPreview();
-            SetDirty();
         }
 
         private void SetGender(Gender newGender)
         {
             Profile = Profile?.WithGender(newGender);
             ReloadPreview();
-            SetDirty();
         }
 
         // Corvax-TTS-Start
@@ -1227,7 +1232,6 @@ namespace Content.Client.Lobby.UI
             RefreshLoadouts();
             UpdateSexControls(); // update sex for new species
             UpdateSpeciesGuidebookIcon();
-            SetDirty();
             RefreshJobs(); //SS220 Species-Job-Requirement
             ReloadPreview();
         }
@@ -1246,6 +1250,7 @@ namespace Content.Client.Lobby.UI
         private void SetTeleportAfkToCryoStorage(bool newTeleportAfkToCryoStorage)
         {
             Profile = Profile?.WithTeleportAfkToCryoStorage(newTeleportAfkToCryoStorage);
+            SetDirty(); // ss220 cryo button fix
         }
 
         private void SetSpawnPriority(SpawnPriorityPreference newSpawnPriority)

@@ -63,3 +63,35 @@
   - type: Icon
     sprite: SS220/Objects/Consumable/Drinks/french75.rsi
     state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkEggnogGlass
+  suffix: Eggnog
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Eggnog
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/eggnog.rsi
+    state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkBacchusGlass
+  suffix: Bacchus
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Bacchus
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/bacchus_blessing.rsi
+    state: icon

@@ -9,7 +9,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,2,1 #SS220-decrease-survival-box
   - type: Storage
     maxItemSize: Small
     grid:
@@ -43,7 +43,10 @@
     - id: Flare
     - id: FoodSnackNutribrick
     - id: DrinkWaterBottleFull
-  # Intentionally wrong picture on the box. NT did not care enough to change it.
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
   - type: Label
     currentLabel: reagent-name-nitrogen
 
@@ -58,7 +61,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,2,1 #SS220-decrease-survival-box
   - type: Storage
     maxItemSize: Small
     grid:
@@ -92,7 +95,10 @@
     - id: Flare
     - id: FoodSnackNutribrick
     - id: DrinkWaterBottleFull
-  # Intentionally wrong picture on the box. NT did not care enough to change it.
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
   - type: Label
     currentLabel: reagent-name-nitrogen
 
@@ -108,7 +114,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,2,1 #SS220-decrease-survival-box
   - type: Storage
     maxItemSize: Small
     grid:
@@ -139,7 +145,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,2,1 #SS220-decrease-survival-box
   - type: Storage
     maxItemSize: Small
     grid:
@@ -173,7 +179,10 @@
     - id: Flare
     - id: FoodSnackNutribrick
     - id: DrinkWaterBottleFull
-  # Intentionally wrong picture on the box. NT did not care enough to change it.
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
   - type: Label
     currentLabel: reagent-name-nitrogen
 
@@ -189,7 +198,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,2,1 #SS220-decrease-survival-box
   - type: Storage
     maxItemSize: Small
     grid:
@@ -223,7 +232,10 @@
     - id: Flare
     - id: FoodSnackNutribrick
     - id: DrinkWaterBottleFull
-  # Intentionally wrong picture on the box. NT did not care enough to change it.
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
   - type: Label
     currentLabel: reagent-name-nitrogen
 
@@ -246,8 +258,8 @@
     - state: heart
   - type: Item
     size: Large # SS220 Bigger-survival-box begin
-    shape:
-    - 0,0,2,3 # SS220 Bigger-survival-box end
+    shape: #SS220 Bigger-survival-box end
+    - 0,0,2,1 #SS220-decrease-survival-box
     heldPrefix: hug
   - type: StorageFill
     contents:
@@ -280,6 +292,42 @@
     currentLabel: reagent-name-nitrogen
 
 - type: entity
+  parent: BoxSurvival
+  id: BoxMime
+  suffix: Mime, Emergency
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingMaskBreath
+    - id: EmergencyOxygenTankFilled
+    - id: EmergencyMedipen
+    - id: SpaceMedipen # SS220 Revert deleted Medipen
+    - id: Flare
+    - id: FoodBreadBaguette
+    - id: DrinkWaterBottleFull
+
+- type: entity
+  parent: BoxSurvivalNitrogen
+  id: BoxMimeNitrogen
+  suffix: Mime, Emergency N2
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingMaskBreath
+    - id: EmergencyNitrogenTankFilled
+    - id: EmergencyMedipen
+    - id: SpaceMedipen # SS220 Revert deleted Medipen
+    - id: Flare
+    - id: FoodBreadBaguette
+    - id: DrinkWaterBottleFull
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
+  - type: Label
+    currentLabel: reagent-name-nitrogen
+
+- type: entity
   parent: BoxCardboard
   id: BoxSurvivalSyndicate
   name: extended-capacity survival box
@@ -290,7 +338,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,2,3
+    - 0,0,2,1 #SS220-decrease-survival-box
   - type: Storage
     maxItemSize: Small
     grid:
@@ -322,6 +370,9 @@
     - id: SpaceMedipen # SS220 Revert deleted Medipen
     - id: Flare
     - id: FoodSnackNutribrick
-    # Intentionally wrong picture on the box to mimic the NT one
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
   - type: Label
     currentLabel: reagent-name-nitrogen

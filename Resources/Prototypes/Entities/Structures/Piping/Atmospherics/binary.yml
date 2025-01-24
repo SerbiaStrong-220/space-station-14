@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: GasPipeBase
   abstract: true
   id: GasBinaryBase
@@ -31,10 +31,18 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: ExtensionCableReceiver
+  - type: LightningTarget
+    priority: 1
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: Rotatable
+  - type: Transform
+    noRot: false
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/pump.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     layers:
-    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+    - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
       state: pipeStraight
       map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: pumpPressure
@@ -49,20 +57,26 @@
   - type: PipeColorVisuals
   - type: GasPressurePump
     enabled: false
+  - type: ActivatableUI
+    key: enum.GasPressurePumpUiKey.Key
+  - type: ActivatableUIRequiresAnchor
   - type: UserInterface
     interfaces:
-        enum.GasPressurePumpUiKey.Key:
-          type: GasPressurePumpBoundUserInterface
+      enum.GasPressurePumpUiKey.Key:
+        type: GasPressurePumpBoundUserInterface
   - type: Construction
     graph: GasBinary
     node: pressurepump
+  - type: StationAiWhitelist #SS220 AI Access
   - type: AmbientSound
     enabled: false
     volume: -9
     range: 5
     sound:
       path: /Audio/Ambience/Objects/gas_pump.ogg
-
+  - type: AtmosMonitoringConsoleDevice
+    navMapBlip: GasFlowRegulator
+    
 - type: entity
   parent: GasBinaryBase
   id: GasVolumePump
@@ -71,10 +85,18 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: ExtensionCableReceiver
+    - type: LightningTarget
+      priority: 1
+    - type: ApcPowerReceiver
+      powerLoad: 200
+    - type: Rotatable
+    - type: Transform
+      noRot: false
     - type: Sprite
-      sprite: Structures/Piping/Atmospherics/pump.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeStraight
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: pumpVolume
@@ -88,6 +110,7 @@
             Off: { state: pumpVolume }
             Blocked: { state: pumpVolumeBlocked }
     - type: PipeColorVisuals
+    - type: StationAiWhitelist #SS220 AI Access
     - type: GasVolumePump
       enabled: false
     - type: UserInterface
@@ -111,7 +134,9 @@
       examinableAddress: true
       prefix: device-address-prefix-volume-pump
     - type: WiredNetworkConnection
-
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasFlowRegulator
+    
 - type: entity
   parent: GasBinaryBase
   id: GasPassiveGate
@@ -121,9 +146,9 @@
     mode: SnapgridCenter
   components:
     - type: Sprite
-      sprite: Structures/Piping/Atmospherics/pump.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeStraight
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: pumpPassiveGate
@@ -140,7 +165,9 @@
       range: 5
       sound:
         path: /Audio/Ambience/Objects/gas_hiss.ogg
-
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasValve
+      
 - type: entity
   parent: GasBinaryBase
   id: GasValve
@@ -151,9 +178,9 @@
   components:
     # TODO ATMOS: Give unique sprite.
     - type: Sprite
-      sprite: Structures/Piping/Atmospherics/pump.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeStraight
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: pumpManualValve
@@ -188,7 +215,9 @@
       range: 5
       sound:
         path: /Audio/Ambience/Objects/gas_hiss.ogg
-
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasValve
+      
 - type: entity
   parent: GasBinaryBase
   id: SignalControlledValve
@@ -197,10 +226,11 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: StationAiWhitelist
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/pump.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     layers:
-    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+    - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
       state: pipeStraight
       map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: pumpSignalValve
@@ -246,7 +276,9 @@
     range: 5
     sound:
       path: /Audio/Ambience/Objects/gas_hiss.ogg
-
+  - type: AtmosMonitoringConsoleDevice
+    navMapBlip: GasValve
+      
 - type: entity
   parent: GasBinaryBase
   id: GasPort
@@ -256,9 +288,9 @@
     mode: SnapgridCenter
   components:
     - type: Sprite
-      sprite: Structures/Piping/Atmospherics/gascanisterport.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/gascanisterport.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeHalf
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: gasCanisterPort
@@ -275,7 +307,9 @@
     - type: Construction
       graph: GasBinary
       node: port
-
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasVentOpening
+      
 - type: entity
   parent: GasVentPump
   id: GasDualPortVentPump
@@ -286,9 +320,9 @@
   components:
     - type: Sprite
       drawdepth: FloorObjects
-      sprite: Structures/Piping/Atmospherics/vent.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeStraight
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: vent_off
@@ -331,7 +365,9 @@
           pipeDirection: South
     - type: AmbientSound
       enabled: true
-
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasVentOpening
+      
 - type: entity
   parent: [ BaseMachine, ConstructibleMachine ]
   id: GasRecycler
@@ -343,7 +379,7 @@
   - type: Sprite
     sprite: Structures/Machines/gasrecycler.rsi
     layers:
-    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+    - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
       state: pipeStraight
       map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: running
@@ -393,7 +429,9 @@
         acts: ["Destruction"]
   - type: Machine
     board: GasRecyclerMachineCircuitboard
-
+  - type: AtmosMonitoringConsoleDevice
+    navMapBlip: GasValve
+    
 - type: entity
   parent: GasBinaryBase
   id: HeatExchanger
@@ -406,9 +444,9 @@
   - type: Transform
     noRot: false
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/heatexchanger.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/heatexchanger.rsi #ss220 engineering-update-atmos
     layers:
-    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+    - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
       state: pipeStraight
       map: [ "enum.PipeVisualLayers.Pipe" ]
     - state: heStraight
@@ -433,3 +471,31 @@
   - type: Construction
     graph: GasBinary
     node: radiator
+  - type: AtmosMonitoringConsoleDevice
+    navMapBlip: Thermoregulator
+
+- type: entity
+  parent: HeatExchanger
+  id: HeatExchangerBend
+  suffix: Bend
+  components:
+    - type: Sprite
+      layers:
+      - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        state: pipeBend
+        map: [ "enum.PipeVisualLayers.Pipe" ]
+      - state: heBend
+        map: [ "enum.SubfloorLayers.FirstLayer" ]
+    - type: NodeContainer
+      nodes:
+        inlet:
+          !type:PipeNode
+          nodeGroupID: Pipe
+          pipeDirection: South
+        outlet:
+          !type:PipeNode
+          nodeGroupID: Pipe
+          pipeDirection: West
+    - type: Construction
+      graph: GasBinary
+      node: bendradiator

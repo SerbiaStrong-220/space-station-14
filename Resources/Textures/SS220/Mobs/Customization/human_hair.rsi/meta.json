@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "sprited by Dinazewwr (discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bob6",
+      "directions": 4
+    },
+    {
+      "name": "frieren",
+      "directions": 4
+    },
+    {
+      "name": "long5",
+      "directions": 4
+    },
+    {
+      "name": "longwavy",
+      "directions": 4
+    },
+    {
+      "name": "shortwavy",
+      "directions": 4
+    },
+    {
+      "name": "uraraka",
+      "directions": 4
+    }
+  ]
+}

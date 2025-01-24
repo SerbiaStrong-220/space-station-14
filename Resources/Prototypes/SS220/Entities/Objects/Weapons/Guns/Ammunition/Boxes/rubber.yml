@@ -10,12 +10,12 @@
     layers:
     - state: base-b
       map: ["enum.GunVisualLayers.Base"]
-    - state: magb-1
+    - state: magb-2
       map: ["enum.GunVisualLayers.Mag"]
     - state: practice-b
   - type: MagazineVisuals
     magState: magb
-    steps: 2
+    steps: 3
     zeroVisible: false
   - type: Appearance
 
@@ -30,7 +30,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
     - state: rubber
 
@@ -45,7 +45,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
     - state: rubber
 
@@ -60,7 +60,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
     - state: rubber
 
@@ -76,12 +76,12 @@
     layers:
     - state: base-b
       map: ["enum.GunVisualLayers.Base"]
-    - state: magb-1
+    - state: magb-2
       map: ["enum.GunVisualLayers.Mag"]
     - state: rubber-b
   - type: MagazineVisuals
     magState: magb
-    steps: 2
+    steps: 3
     zeroVisible: false
   - type: Appearance
 
@@ -96,7 +96,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
     - state: rubber
 
@@ -111,6 +111,6 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
+    - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
     - state: rubber

@@ -1,0 +1,676 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Ears section
+
+- type: marking
+  id: TajaranEarsPiercing
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_ears.rsi
+    state: ears_piercing_outer
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_ears.rsi
+    state: ears_piercing_inner
+
+- type: marking
+  id: TajaranEars
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_common_outer
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_common_inner
+
+- type: marking
+  id: TajaranEarsNyshka
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_ears.rsi
+    state: ears_nyshka_outer
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_ears.rsi
+    state: ears_nyshka_inner
+
+- type: marking
+  id: TajaranEarsPointy
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_pointy_outer
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_pointy_inner
+
+- type: marking
+  id: TajaranEarsSiberia
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_siberia_outer
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_siberia_inner
+
+- type: marking
+  id: TajaranEarsShort
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_short_outer
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: ears_short_inner
+
+# Tail section
+
+- type: marking
+  id: TajaranTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail
+
+- type: marking
+  id: TajaranTailLines
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: lines_tail
+
+- type: marking
+  id: TajaranTailLeo
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: leo_tail
+
+- type: marking
+  id: TajaranTailPoints
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_tail_up
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_tail_down
+
+  # Animated
+- type: marking
+  id: TajaranTailAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail_wagging
+
+- type: marking
+  id: TajaranTailLinesAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail_wagging
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: lines_tail_wagging
+
+- type: marking
+  id: TajaranTailLeoAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail_wagging
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: leo_tail_wagging
+
+- type: marking
+  id: TajaranTailPointsAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: tajaran_tail_wagging
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_tail_up_wagging
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_tail_down_wagging
+
+# Nose
+
+- type: marking
+  id: TajaranSnout
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: []
+  sprites:
+  - sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+    state: nose
+
+- type: marking
+  id: TajaranSnoutBluish
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: nose_bluish
+
+- type: marking
+  id: TajaranSnoutBlack
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: nose_black
+
+- type: marking
+  id: TajaranSnoutOrange
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: nose_orange
+
+- type: marking
+  id: TajaranSnoutDark
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: nose_dark
+
+- type: marking
+  id: TajaranSnoutPinkBright
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: nose_pink_light
+
+- type: marking
+  id: TajaranSnoutPinkLight
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColoring: true
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
+    state: nose_pink_bright
+
+# Color section
+
+  # Leo
+- type: marking
+  id: TajaranChestLeo
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: leo_body
+
+- type: marking
+  id: TajaranHeadLeo
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: leo_head
+
+- type: marking
+  id: TajaranLArmLeo
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: leo_hand_l
+
+- type: marking
+  id: TajaranRArmLeo
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: leo_hand_r
+
+- type: marking
+  id: TajaranLLegLeo
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: leo_leg_l
+
+- type: marking
+  id: TajaranRLegLeo
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: leo_leg_r
+
+  # Lines
+- type: marking
+  id: TajaranChestLines
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: lines_body
+
+- type: marking
+  id: TajaranHeadLines
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: lines_head
+
+- type: marking
+  id: TajaranLArmLines
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: lines_arm_l
+
+- type: marking
+  id: TajaranRArmLines
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: lines_arm_r
+
+- type: marking
+  id: TajaranLLegLines
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: lines_leg_l
+
+- type: marking
+  id: TajaranRLegLines
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: lines_leg_r
+
+  # Two - tone
+- type: marking
+  id: TajaranChestTwoTone
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_body
+
+- type: marking
+  id: TajaranHeadTwoTone
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      taj_mouth:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_face
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_mouth
+
+- type: marking
+  id: TajaranLArmTwoTone
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      ears_cat_inner:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_arms_l
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_hands_l
+
+- type: marking
+  id: TajaranRArmTwoTone
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      taj_hands:
+        type:
+          !type:SimpleColoring
+          color: "#FFFFFF"
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_arms_r
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_hands_r
+
+- type: marking
+  id: TajaranLLegCommon
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_legs_l
+
+- type: marking
+  id: TajaranRLegCommon
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Tajaran]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: taj_legs_r
+
+  # Points
+- type: marking
+  id: TajaranChestPoints
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_back_1
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_back_2
+
+- type: marking
+  id: TajaranHeadPoints
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_head_1
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_head_2
+
+- type: marking
+  id: TajaranLArmPoints
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_arm_l_1
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_arm_l_2
+
+- type: marking
+  id: TajaranRArmPoints
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_arm_r_1
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_arm_r_2
+
+- type: marking
+  id: TajaranLLegPoints
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_leg_l_1
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_leg_l_2
+
+- type: marking
+  id: TajaranRLegPoints
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Tajaran]
+  coloring:
+    default:
+      type:
+        !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+        - !type:SkinColoring
+    layers:
+      points_2:
+        type:
+          !type:SimpleColoring
+          color: "#ed9041"
+  sprites:
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_leg_r_1
+  - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
+    state: points_leg_r_2

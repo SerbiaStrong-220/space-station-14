@@ -115,7 +115,7 @@
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/sec_tacmap_tabletop.rsi
-    state: tabletop
+    state: tabletop_frank
     noRot: false
     drawdepth: FloorTiles
 

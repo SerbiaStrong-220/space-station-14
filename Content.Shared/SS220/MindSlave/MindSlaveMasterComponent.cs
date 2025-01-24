@@ -19,7 +19,7 @@ public sealed partial class MindSlaveMasterComponent : Component
     [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
     public List<EntityUid> EnslavedEntities = new();
 
-    public ProtoId<StatusIconPrototype> StatusIcon { get; set; } = "MindSlaveMasterIcon";
+    public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "MindSlaveMasterIcon";
 
     public bool IconVisibleToGhost { get; set; } = false;
 }

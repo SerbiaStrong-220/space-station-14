@@ -1,0 +1,66 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: SidiousShroom
+  parent: FoodProduceBase
+  id: FoodSidiousShroomCult
+  description: Mysterious substance that calls for absorption and gag reflex.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - menacing
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30.0
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Water
+          Quantity: 15
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/sidious_shroom.rsi
+    state: produce
+  - type: Produce
+    seedId: SidiousShroomSpores
+  - type: Extractable
+    grindableSolutionName: food
+  - type: Tag
+    tags:
+    - Omnivorous
+
+- type: entity
+  parent: SeedBase
+  name: packet of SidiousShroom spores
+  description: "The iconic, extremely yammy purposes."
+  id: SidiousShroomSeeds
+  components:
+    - type: Seed
+      seedId: SidiousShroomSpores
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/sidious_shroom.rsi
+
+- type: seed
+  id: SidiousShroomSpores
+  name: seeds-sidious-shroom-name
+  noun: seeds-noun-spores
+  displayName: seeds-sidious-shroom-display-name
+  plantRsi: SS220/Objects/CultYogg/sidious_shroom.rsi
+  packetPrototype: SidiousShroomSeeds
+  productPrototypes:
+    - FoodSidiousShroomCult
+  lifespan: 55
+  maturation: 12
+  production: 2
+  yield: 1
+  potency: 30
+  growthStages: 7
+  chemicals:
+    Nutriment:
+      Min: 15
+      Max: 15
+      PotencyDivisor: 1
+    Water:
+      Min: 15
+      Max: 15
+      PotencyDivisor: 1

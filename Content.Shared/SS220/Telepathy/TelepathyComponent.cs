@@ -1,7 +1,7 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Telepathy;
 
@@ -14,17 +14,34 @@ public sealed partial class TelepathyComponent : Component
     [DataField("canSend", required: true)]
     public bool CanSend;
 
-    [DataField("telepathyChannelPrototype", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<TelepathyChannelPrototype>))]
-    public string TelepathyChannelPrototype;
+    [DataField]
+    public ProtoId<TelepathyChannelPrototype>? TelepathyChannelPrototype;
+
+    [DataField]
+    public bool ReceiveAllChannels = false;
 }
 
 public sealed partial class TelepathySendEvent : InstantActionEvent
 {
     public string Message { get; init; }
+
+    public TelepathySendEvent(string message)
+    {
+        Message = message;
+    }
 }
 
 public sealed partial class TelepathyAnnouncementSendEvent : InstantActionEvent
 {
     public string Message { get; init; }
     public string TelepathyChannel { get; init; }
+
+    public TelepathyAnnouncementSendEvent(string message, string telepathyChannel)
+    {
+        Message = message;
+        TelepathyChannel = telepathyChannel;
+    }
 }
+
+[ByRefEvent]
+public record struct TelepathySendAttemptEvent(EntityUid Sender, bool Cancelled);

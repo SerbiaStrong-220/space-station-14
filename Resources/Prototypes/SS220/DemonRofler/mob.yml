@@ -19,6 +19,7 @@
   - type: Tag
     tags:
     - DoorBumpOpener
+    - HideContextMenu
   - type: StatusEffects
     allowed: []
   - type: ContainerContainer
@@ -30,6 +31,7 @@
   - type: AntiRottingContainer
   - type: RadiationBlockingContainer
     resistance: 5
+  - type: ExplosionResistance
 
   # Visuals and appearance
   - type: Sprite

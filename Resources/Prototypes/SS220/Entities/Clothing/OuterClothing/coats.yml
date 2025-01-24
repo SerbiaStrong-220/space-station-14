@@ -30,7 +30,8 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/centcom_officer_coat.rsi
   - type: TemperatureProtection
-    coefficient: 0.1
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
   - type: Armor
     modifiers:
       coefficients:
@@ -50,7 +51,8 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/centcom_field_officer_coat.rsi
   - type: TemperatureProtection
-    coefficient: 0.1
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
   - type: Armor
     modifiers:
       coefficients:
@@ -59,17 +61,43 @@
         Piercing: 0.50
         Heat: 0.80
 
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterBSOCoat
+  name: the Blue Shield operative's coat
+  description: The coat is blue. Excellent protection against most types of damage.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/blueshield_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/blueshield_coat.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.65
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.55
+        Caustic: 0.75
+
 # Command
 - type: entity
   parent: ClothingUniformJumpskirtCapFormalDress
   id: ClothingOuterWhiteCoatCaptain
   name: белое пальто капитана
   description: Белый цвет - символ власти на флоте.
+  suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/whitecapcoat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/captain_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Coats/whitecapcoat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/captain_white.rsi
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -81,6 +109,18 @@
     sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatHoPPurpleDress
+  name: purple dress
+  description: The robe of a real smug snake.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/hop_purpledress.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/hop_purpledress.rsi
 
 # Cargo
 - type: entity
@@ -106,6 +146,7 @@
   id: ClothingOuterCoatQMWarehouseman
   name: the warehouse manager's coat
   description: A coat that perfectly combines a mature style and a working purpose. In fact, it is your old work coat, which is still intact only thanks to the use of durotan and cigarette ash, which has already eaten into the fabric. You've never understood people putting on layers of clothes over coats.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/qm_warehouseman.rsi
@@ -161,3 +202,16 @@
       coefficients:
         Caustic: 0.75
         Radiation: 0.9
+
+# Сервис
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatDanger
+  name: опасная куртка
+  description: Опасный лук, опасного человека.
+  suffix: За время в игре
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/muscian_danger_coat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/muscian_danger_coat.rsi

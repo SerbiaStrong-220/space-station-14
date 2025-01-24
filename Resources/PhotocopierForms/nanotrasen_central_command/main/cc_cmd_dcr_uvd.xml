@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>cc_cmd_dcr_uvd</FormId>
+  <PrototypeId>PaperNtFormCcSecure</PrototypeId>
+  <EntityName>Форма НТ-ЦК-КОМ-УВД</EntityName>
+  <PhotocopierTitle>Уведомление</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-ЦК-КОМ-УВД[/bold]
+[head=2]Уведомление[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД [/italic]
+
+Уважаемый (должность) станции №XXX, (ФИО)!
+От лица Центрального Командования уведомляем Вас о следующем:
+
+Офицер Центрального Командования: (ПОЛНОЕ ИМЯ)
+
+[italic]Место для печати[/italic]]]></Content>
+</Form>

@@ -29,6 +29,7 @@
       - id: ClothingBeltSecurityFilled
       - id: Flash
       - id: ClothingEyesGlassesSecurity
+      - id: BodySecurityCamera #SS220-Bodycam
 #      - id: ClothingHandsGlovesCombat SS220 PilotsGloves
       - id: ClothingShoesBootsJack
       - id: ClothingEyesHudSecurity

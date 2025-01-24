@@ -13,7 +13,7 @@
   name: materials-cardboard
   icon: { sprite: /Textures/Objects/Materials/materials.rsi, state: cardboard }
   color: "#70736c"
-  price: 0.005
+  price: 0.025
 
 - type: material
   id: Cloth
@@ -32,7 +32,7 @@
   unit: materials-unit-sheet
   icon: { sprite: /Textures/Objects/Materials/materials.rsi, state: durathread }
   color: "#8291a1"
-  price: 0.15 # 1-1 mix of plastic and cloth.
+  price: 0.35 # 1-1 mix of plastic and cloth.
 
 - type: material
   id: Paper
@@ -40,7 +40,7 @@
   name: materials-paper
   icon: { sprite: Objects/Materials/Sheets/other.rsi, state: paper }
   color: "#d9d9d9"
-  price: 0.05 #same as wood
+  price: 0.01 # it's paper bro what do you expect?
 
 - type: material
   id: Plasma
@@ -56,7 +56,7 @@
   name: materials-plastic
   icon: { sprite: Objects/Materials/Sheets/other.rsi, state: plastic }
   color: "#d9d9d9"
-  price: 0.1
+  price: 0.20 # $20 for 1 unit
 
 - type: material
   id: Wood
@@ -65,7 +65,7 @@
   unit: materials-unit-plank
   icon: { sprite: Objects/Materials/materials.rsi, state: wood }
   color: "#966F33"
-  price: 0.05
+  price: 0.10 # $10 for 1 unit
 
 - type: material
   id: Uranium
@@ -115,7 +115,7 @@
   unit: materials-unit-piece
   icon: { sprite: Objects/Materials/ore.rsi, state: coal }
   color: "#404040"
-  price: 0
+  price: 0.1 # $10 for 1 unit
 
 - type: material
   id: Gunpowder
@@ -124,3 +124,12 @@
   icon: { sprite: Objects/Misc/reagent_fillings.rsi, state: powderpile }
   color: "#A9A9A9"
   price: 0
+
+- type: material
+  id: Diamond
+  stackEntity: MaterialDiamond1 #SS220 stack fix
+  name: materials-diamond
+  unit: materials-unit-piece
+  icon: { sprite: Objects/Materials/materials.rsi, state: diamond }
+  color: "#80ffff"
+  price: 20 # big diamond gaslit us so hard diamonds actually became extremely rare

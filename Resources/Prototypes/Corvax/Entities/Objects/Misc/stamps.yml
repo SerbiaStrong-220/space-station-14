@@ -1,23 +1,12 @@
 - type: entity
   name: law office's rubber stamp
-  parent: RubberStampMime
+  parent: RubberStampBase #SS220-Law Department
   id: RubberStampIAA
   suffix: DO NOT MAP
   components:
     - type: Stamp
       stampedName: stamp-component-stamped-name-iaa
+      stampedColor: "#293289" #SS220-Law Department
       stampState: "paper_stamp-iaa"
     - type: Sprite
       state: stamp-iaa
-
-- type: entity
-  name: psychologist's rubber stamp
-  parent: RubberStampMime
-  id: RubberStampPsychologist
-  suffix: DO NOT MAP
-  components:
-  - type: Stamp
-    stampedName: stamp-component-stamped-name-psychologist
-    stampState: "paper_stamp-psychologist"
-  - type: Sprite
-    state: stamp-psychologist

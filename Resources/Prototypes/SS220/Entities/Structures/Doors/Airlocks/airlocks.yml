@@ -1,0 +1,47 @@
+- type: entity
+  parent: Airlock
+  id: AirlockLaw
+  suffix: Law
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/Airlocks/Standart/law.rsi
+  - type: PaintableAirlock
+    department: Law
+  - type: Wires
+    layoutId: AirlockSecurity
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockLawGlass
+  suffix: Law
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/Airlocks/Glass/law.rsi
+  - type: PaintableAirlock
+    department: Security
+  - type: Wires
+    layoutId: AirlockSecurity
+
+- type: entity
+  parent: Airlock
+  id: AirlockLawSecurity
+  suffix: Security/Lawyer
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/Airlocks/Standart/law_sec.rsi
+  - type: PaintableAirlock
+    department: Security
+  - type: Wires
+    layoutId: AirlockSecurity
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockLawSecurityGlass
+  suffix: Security/Lawyer
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/Airlocks/Glass/law_sec.rsi
+  - type: PaintableAirlock
+    department: Security
+  - type: Wires
+    layoutId: AirlockSecurity

@@ -1,0 +1,71 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: BaseSecretReinforcedDoorAssembly
+  name: secret reinforced door assembly
+  description: It opens, it closes, and maybe crushes you.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: SS220/Structures/Doors/secter_reinforced_door.rsi
+    state: assembly
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 110
+        mask:
+        - FullTileMask
+        layer:
+        - HumanoidBlockLayer
+  - type: Anchorable
+    delay: 2
+  - type: Pullable
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Rotatable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Construction
+    graph: Girder
+    node: reinforcedElectronics
+  placement:
+    mode: SnapgridCenter
+
+- type: entity
+  id: SolidSecretReinforcedDoor
+  name: reinforced wall
+  parent: BaseSecretDoor
+  components:
+  - type: Construction
+    graph: Girder
+    node: solidSecretReinforcedDoor
+    containers:
+    - battery-container
+  - type: Sprite
+    sprite: SS220/Structures/Doors/secter_reinforced_door.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

@@ -20,19 +20,19 @@
     - id: TrashBananaPeelExplosive
       prob: 0.005
 
-#Temporary in comment
-# - type: entity
-#   id: SpiderMigration
-#   parent: BaseGameRule
-#   noSpawn: true
-#   components:
-#   - type: StationEvent
-#     startDelay: 5
-#     earliestStart: 15
-#     minimumPlayers: 35
-#     weight: 5
-#     duration: 50
-#   - type: VentCrittersRule
-#     specialEntries:
-#     - id: SpawnPointGhostSpaceQueen 
-#       prob: 0.005      
+#Spider queen WIP
+#- type: entity
+#  id: SpiderMigration
+#  parent: BaseGameRule
+#  categories: [ HideSpawnMenu ]
+#  components:
+#  - type: StationEvent
+#    startDelay: 5
+#    earliestStart: 15
+#    minimumPlayers: 35
+#    weight: 5
+#    duration: 50
+#  - type: VentCrittersRule
+#    specialEntries:
+#    - id: SpawnPointGhostSpaceQueen
+#      prob: 0.005

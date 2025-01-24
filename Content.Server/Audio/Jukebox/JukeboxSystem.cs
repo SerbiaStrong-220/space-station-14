@@ -1,6 +1,7 @@
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Audio.Jukebox;
+using Content.Shared.Power;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
@@ -25,6 +26,7 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
         SubscribeLocalEvent<JukeboxComponent, JukeboxPauseMessage>(OnJukeboxPause);
         SubscribeLocalEvent<JukeboxComponent, JukeboxStopMessage>(OnJukeboxStop);
         SubscribeLocalEvent<JukeboxComponent, JukeboxSetTimeMessage>(OnJukeboxSetTime);
+        SubscribeLocalEvent<JukeboxComponent, JukeboxSetGainMessage>(OnJukeboxSetGain); //ss220-jukebox-tweak
         SubscribeLocalEvent<JukeboxComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<JukeboxComponent, ComponentShutdown>(OnComponentShutdown);
 
@@ -55,7 +57,8 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
                 return;
             }
 
-            component.AudioStream = Audio.PlayPvs(jukeboxProto.Path, uid, AudioParams.Default.WithMaxDistance(10f))?.Entity;
+            component.AudioStream = Audio.PlayPvs(jukeboxProto.Path, uid, AudioParams.Default.WithVolume(SharedAudioSystem.GainToVolume(component.Gain)).WithMaxDistance(10f))?.Entity;
+            //SS220-jukebox-tweak я ебать насрал
             Dirty(uid, component);
         }
     }
@@ -73,6 +76,16 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
             Audio.SetPlaybackPosition(component.AudioStream, args.SongTime + offset);
         }
     }
+
+    //SS220-jukebox-tweak-begin
+    private void OnJukeboxSetGain(EntityUid uid, JukeboxComponent component, JukeboxSetGainMessage args)
+    {
+        var gain = Math.Clamp(args.Gain, 0f, 1f);
+        Audio.SetGain(component.AudioStream, gain);
+        component.Gain = gain;
+        Dirty(uid, component);
+    }
+    //SS220-jukebox-tweak-end
 
     private void OnPowerChanged(Entity<JukeboxComponent> entity, ref PowerChangedEvent args)
     {

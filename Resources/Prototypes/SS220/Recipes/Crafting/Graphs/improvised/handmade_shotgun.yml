@@ -8,7 +8,7 @@
       steps:
       - tag: Pipe
         icon:
-          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeStraight
         name: pipe
       - tag: RifleStock
@@ -19,7 +19,7 @@
       - tag: WeaponFlareGun
         icon:
           sprite: Objects/Weapons/Guns/Shotguns/flaregun.rsi
-          state: icon
+          state: base
         name: Flare Gun
         doAfter: 25
   - node: HDpistol

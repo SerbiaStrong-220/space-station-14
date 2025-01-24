@@ -1,0 +1,32 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# "Small"-class maps - Max size square: 7x7, indicated size: 3.5
+
+- type: salvageMap
+  id: Stoneball_SS220
+  mapPath: /Maps/SS220/Salvage/SmallStoneball_SS220.yml
+  sizeString: salvage-map-wreck-size-small
+
+  # "Medium"-class maps - Max size square: 15x15, indicated size: 7.5
+
+- type: salvageMap
+  id: MedbayHall_SS220
+  mapPath: /Maps/SS220/Salvage/MediumMedbayHall_SS220.yml
+  sizeString: salvage-map-wreck-size-medium
+
+- type: salvageMap
+  id: XenoArch_SS220
+  mapPath: /Maps/SS220/Salvage/MediumXenoArch_SS220.yml
+  sizeString: salvage-map-wreck-size-medium
+
+- type: salvageMap
+  id: XenoBio_SS220
+  mapPath: /Maps/SS220/Salvage/MediumXenoBio_SS220.yml
+  sizeString: salvage-map-wreck-size-medium
+
+- type: salvageMap
+  id: JRBarge_SS220
+  mapPath: /Maps/SS220/Salvage/SmallJRBarge_SS220.yml
+  sizeString: salvage-map-wreck-size-medium
+
+  # """Large""" maps

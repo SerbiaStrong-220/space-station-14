@@ -1,5 +1,7 @@
 using Content.Server.Antag.Components;
+using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Objectives;
+using Content.Server.Traitor.Components;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
@@ -25,6 +27,11 @@ public sealed class AntagRandomObjectivesSystem : EntitySystem
 
     private void OnAntagSelected(Entity<AntagRandomObjectivesComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
+        //ss220 reinforcement objective fix begin
+        if (!ent.Comp.Enabled)
+            return;
+        //ss220 reinforcement objective fix end
+
         if (!_mind.TryGetMind(args.Session, out var mindId, out var mind))
         {
             Log.Error($"Antag {ToPrettyString(args.EntityUid):player} was selected by {ToPrettyString(ent):rule} but had no mind attached!");

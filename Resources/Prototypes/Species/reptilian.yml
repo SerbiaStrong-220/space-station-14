@@ -16,6 +16,7 @@
 - type: speciesBaseSprites
   id: MobReptilianSprites
   sprites:
+    Special: MobHumanoidAnyMarking #SS220-CultYogg
     Head: MobReptilianHead
     Snout: MobHumanoidAnyMarking
     Chest: MobReptilianTorso
@@ -57,11 +58,16 @@
       points: 1
       required: false
     Chest:
-      points: 1
+      points: 3
       required: false
     Legs:
       points: 2
       required: false
+    # SS220 Add foots marking begin
+    Foots:
+      points: 2
+      required: false
+    # SS220 Add foots marking end
     Arms:
       points: 2
       required: false

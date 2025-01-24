@@ -6,6 +6,8 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using DrawDepthTag = Robust.Shared.GameObjects.DrawDepth;
 
 namespace Content.Shared.Buckle.Components;
 
@@ -16,7 +18,7 @@ public sealed partial class StrapComponent : Component
     /// <summary>
     /// The entities that are currently buckled to this strap.
     /// </summary>
-    [ViewVariables]
+    [DataField, AutoNetworkedField]
     public HashSet<EntityUid> BuckledEntities = new();
 
     /// <summary>
@@ -50,6 +52,11 @@ public sealed partial class StrapComponent : Component
     [DataField]
     public Angle Rotation;
 
+    //SS220 Change DrawDepth on buckle begin
+    [DataField(customTypeSerializer: typeof(ConstantSerializer<DrawDepthTag>))]
+    public int? DrawDepth;
+    //SS220 Change DrawDepth on buckle end
+
     /// <summary>
     /// The size of the strap which is compared against when buckling entities
     /// </summary>
@@ -71,12 +78,6 @@ public sealed partial class StrapComponent : Component
     public bool Enabled = true;
 
     /// <summary>
-    /// You can specify the offset the entity will have after unbuckling.
-    /// </summary>
-    [DataField]
-    public Vector2 UnbuckleOffset = Vector2.Zero;
-
-    /// <summary>
     /// The sound to be played when a mob is buckled
     /// </summary>
     [DataField]
@@ -93,6 +94,26 @@ public sealed partial class StrapComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<AlertPrototype> BuckledAlertType = "Buckled";
+
+    /// <summary>
+    /// How long it takes to buckle someone else into a chair
+    /// </summary>
+    [DataField]
+    public float BuckleDoafterTime = 2f;
+
+    /// <summary>
+    /// Whether InteractHand will buckle the user to the strap.
+    /// </summary>
+    [DataField]
+    public bool BuckleOnInteractHand = true;
+
+    // SS220 Add uncuff time modifier when buckled begin
+    /// <summary>
+    /// A modifier that affects the time of uncuff when the entity is buckled on the strap.
+    /// </summary>
+    [DataField]
+    public float UncuffTimeModifier = 1f;
+    // SS220 Add uncuff time modifier when buckled end
 }
 
 public enum StrapPosition

@@ -16,6 +16,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
+using Content.Shared.Throwing; ///ss220-BonusForFullyDiscovered
 
 namespace Content.Server.Xenoarchaeology.XenoArtifacts;
 
@@ -27,6 +28,7 @@ public sealed partial class ArtifactSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly ThrowingSystem _throwing = default!; ///ss220-BonusForFullyDiscovered
 
     public override void Initialize()
     {
@@ -140,10 +142,11 @@ public sealed partial class ArtifactSystem : EntitySystem
     /// <param name="uid"></param>
     /// <param name="user"></param>
     /// <param name="component"></param>
+    /// <param name="logMissing">Set this to false if you don't know if the entity is an artifact.</param>
     /// <returns></returns>
-    public bool TryActivateArtifact(EntityUid uid, EntityUid? user = null, ArtifactComponent? component = null)
+    public bool TryActivateArtifact(EntityUid uid, EntityUid? user = null, ArtifactComponent? component = null, bool logMissing = true)
     {
-        if (!Resolve(uid, ref component))
+        if (!Resolve(uid, ref component, logMissing))
             return false;
 
         // check if artifact is under suppression field
@@ -192,6 +195,23 @@ public sealed partial class ArtifactSystem : EntitySystem
             return;
 
         EnterNode(uid, ref newNode, component);
+
+        // SS220-BonusForFullyDiscovered - start
+
+        var countPassedNode = 0;
+        foreach (var node in component.NodeTree)
+        {
+            if (node.Discovered && node.Triggered)
+                countPassedNode++;
+        }
+
+        if (countPassedNode == component.NodeTree.Count && !component.IsBonusIssued)
+        {
+            component.IsBonusIssued = true;
+            SpawnBonus(uid, component);
+        }
+
+        // SS220-BonusForFullyDiscovered - end
     }
 
     private ArtifactNode? GetNewNode(EntityUid uid, ArtifactComponent component)
@@ -295,4 +315,24 @@ public sealed partial class ArtifactSystem : EntitySystem
     {
         return allNodes.First(n => n.Depth == 0);
     }
+
+    // SS220-BonusForFullyDiscovered - start
+
+    private void SpawnBonus(EntityUid uid, ArtifactComponent component)
+    {
+        if (component.BonusPrototype == null)
+            return;
+
+        var protoId = _random.Pick(component.BonusPrototype);
+        if(!TrySpawnNextTo(protoId, uid, out var protoUid))
+            return;
+
+        var xform = Transform(protoUid.Value);
+        var throwing = xform.LocalRotation.ToWorldVec() * 5f; // magic number throwing force
+        var direction = xform.Coordinates.Offset(throwing);
+
+        _throwing.TryThrow(protoUid.Value, direction);
+    }
+
+    // SS220-BonusForFullyDiscovered - end
 }

@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   parent: ClothingHeadHatHardhatBase
   id: ClothingHeadHatHardhatViolet
@@ -8,3 +10,50 @@
     sprite: SS220/Clothing/Head/Hardhats/violet.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hardhats/violet.rsi
+
+- type: entity
+  parent: ClothingHeadHatHardhatBase
+  id: ClothingHeadHatHardhatWhiteXmas
+  name: новогодняя белая каска
+  description: Новогоднее настроение на вашей голове и защита в одном! 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardhats/white_xmas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardhats/white_xmas.rsi
+
+- type: entity
+  parent: ClothingHeadHatHardhatBase
+  id: ClothingHeadHatHardhatYellowXmas
+  name: новогодняя жёлтая каска
+  description: Новогоднее настроение на вашей голове и защита в одном! 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardhats/yellow_xmas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardhats/yellow_xmas.rsi
+
+- type: entity
+  parent: ClothingHeadHatHardhatBase
+  id: ClothingHeadHatHardhatVioletXmas
+  name: новогодняя фиолетовая каска
+  description: Новогоднее настроение на вашей голове и защита в одном! 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardhats/violet_xmas.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardhats/violet_xmas.rsi
+
+# Уборщик
+ 
+- type: entity
+  parent: ClothingHeadHatHardhatBase
+  id: ClothingHeadHatHardhatJanitorJR
+  name: marked green work helmet
+  description: A helmet supplied for Junk Recyclers field workers in the colors of the corporation. It has a built-in flashlight.
+  suffix: JR, For playing time
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardhats/janitor_jk.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardhats/janitor_jk.rsi

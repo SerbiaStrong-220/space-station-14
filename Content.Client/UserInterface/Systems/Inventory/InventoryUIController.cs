@@ -13,6 +13,7 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
 using Content.Shared.Inventory.VirtualItem;
+using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Storage;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
@@ -21,6 +22,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
+using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using static Content.Client.Inventory.ClientInventorySystem;
 
@@ -399,6 +401,9 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
         foreach (var slotData in clientInv.SlotData.Values)
         {
             AddSlot(slotData);
+
+            if (_inventoryButton != null)
+                _inventoryButton.Visible = true;
         }
 
         UpdateInventoryHotbar(_playerInventory);
@@ -406,6 +411,9 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
 
     private void UnloadSlots()
     {
+        if (_inventoryButton != null)
+            _inventoryButton.Visible = false;
+
         _playerUid = null;
         _playerInventory = null;
         foreach (var slotGroup in _slotGroups.Values)
@@ -440,6 +448,17 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
             button.Blocked = false;
             button.StorageButton.Visible = showStorage;
         }
+        //ss220 StuckOnEquip begin
+        if (_entities.TryGetComponent(entity, out StuckOnEquipComponent? _))
+        {
+            button.SetEntity(entity);
+            button.StuckOnEquip = true;
+        }
+        else if (button.StuckOnEquip)
+        {
+            button.StuckOnEquip = false;
+        }
+        //ss220 StuckOnEquip end
     }
 
     public bool RegisterSlotGroupContainer(ItemSlotButtonContainer slotContainer)
