@@ -6,8 +6,8 @@
   suffix: Мусор, Хлам
   components:
   - type: RatKingRummageable
-  - type: RegalRatSpawnLocation
     rummageLoot: RatKingLootTrashPiles
+  - type: RegalRatSpawnLocation
   - type: InteractionOutline
   - type: Sprite
     noRot: true

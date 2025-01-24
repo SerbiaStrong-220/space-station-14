@@ -11,11 +11,6 @@ namespace Content.Server.SS220.StationEvents.Events;
 
 public sealed class RegalRatRule : StationEventSystem<RegalRatRuleComponent>
 {
-    /*
-     * DO NOT COPY PASTE THIS TO MAKE YOUR MOB EVENT.
-     * USE THE PROTOTYPE.
-     */
-
     protected override void Started(EntityUid uid, RegalRatRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
