@@ -23,10 +23,7 @@ public sealed class RegalRatRule : StationEventSystem<RegalRatRuleComponent>
             return;
         }
 
-        var kingRatLocations = EntityQueryEnumerator<RegalRatSpawnLocationComponent, TransformComponent>();
         var mouseLocations = EntityQueryEnumerator<VentCritterSpawnLocationComponent, TransformComponent>();
-
-        var kingRatValidLocations = new List<EntityCoordinates>();
         var mouseVaidLocations = new List<EntityCoordinates>();
 
         while (mouseLocations.MoveNext(out _, out _, out var transform))
@@ -42,6 +39,9 @@ public sealed class RegalRatRule : StationEventSystem<RegalRatRuleComponent>
             }
         }
 
+        var kingRatValidLocations = new List<EntityCoordinates>();
+        var kingRatLocations = EntityQueryEnumerator<RegalRatSpawnLocationComponent, TransformComponent>();
+
         while (kingRatLocations.MoveNext(out _, out _, out var transform))
         {
             if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station &&
@@ -53,7 +53,7 @@ public sealed class RegalRatRule : StationEventSystem<RegalRatRuleComponent>
         
         if (component.SpecialEntries.Count == 0 || kingRatValidLocations.Count == 0)
         {
-            return;
+            return; 
         }
 
         // guaranteed spawn

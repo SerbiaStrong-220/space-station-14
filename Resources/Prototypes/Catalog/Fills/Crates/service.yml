@@ -280,6 +280,11 @@
   parent: CrateTrashCart
   components:
     - type: StorageFill
+    #SS220 RatKingUpdate
+    - type: RatKingRummageable
+      rummageLoot: RatKingLootTrashCans
+    - type: RegalRatSpawnLocation
+    #SS220 Ratking update End
       contents:
           # Creatures
         - id: MobCockroach

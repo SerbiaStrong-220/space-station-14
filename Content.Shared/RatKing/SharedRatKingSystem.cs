@@ -151,7 +151,6 @@ public abstract class SharedRatKingSystem : EntitySystem
     //SS220 RatKing Changes start here
     private void OnRummageAction(Entity<RatKingComponent> entity, ref RatKingRummageActionEvent args)
     {
-        
         if (args.Handled || !TryComp<RatKingRummageableComponent>(args.Target, out var rumComp) || rumComp.Looted)
             return;
         
@@ -200,9 +199,10 @@ public abstract class SharedRatKingSystem : EntitySystem
 
     }
 }
-
+//SS220
 [Serializable, NetSerializable]
 public sealed partial class RatKingRummageDoAfterEvent : SimpleDoAfterEvent
 {
 
 }
+//SS220 changes ending

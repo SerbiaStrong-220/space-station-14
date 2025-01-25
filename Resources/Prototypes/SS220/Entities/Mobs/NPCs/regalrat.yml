@@ -6,13 +6,20 @@
     FoodCheeseSlice: 20
     FoodCheese: 5
 
+- type: weightedRandomEntity
+  id: RatKingLootTrashCans
+  weights:
+    RandomSpawner100: 50
+    MobCockroach: 25
+    FoodTacoRat: 20
+    FoodCheese: 5
+
 - type: entity
   id: ActionRatKingRummage
   name: Rummage
   description: Rummage trash to find some cheesy-cheese.
   components:
   - type: EntityTargetAction
-    useDelay: 3
     icon:
       sprite: SS220/Interface/Actions/actions_rat_king.rsi
       state: rummage
