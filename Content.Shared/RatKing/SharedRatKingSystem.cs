@@ -1,4 +1,4 @@
-﻿using Content.Shared.Actions;
+using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
@@ -12,6 +12,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
+using Content.Shared.Popups;
 
 namespace Content.Shared.RatKing;
 
@@ -24,6 +25,7 @@ public abstract class SharedRatKingSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!; //SS220 popUps
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -151,9 +153,18 @@ public abstract class SharedRatKingSystem : EntitySystem
     //SS220 RatKing Changes start here
     private void OnRummageAction(Entity<RatKingComponent> entity, ref RatKingRummageActionEvent args)
     {
-        if (args.Handled || !TryComp<RatKingRummageableComponent>(args.Target, out var rumComp) || rumComp.Looted)
+        if (args.Handled || !TryComp<RatKingRummageableComponent>(args.Target, out var rumComp))
+        {
+            _popup.PopupPredicted(Loc.GetString("ratking-rummage-failure"), args.Target, entity, PopupType.Small);
             return;
-        
+        }
+
+        if (rumComp.Looted)
+        {
+            _popup.PopupPredicted(Loc.GetString("ratking-rummage-looted-failure"), args.Target, entity, PopupType.Small);
+            return;
+        }
+
         var doAfter = new DoAfterArgs(EntityManager, entity, rumComp.RummageDuration,
             new RatKingRummageDoAfterEvent(), args.Target, args.Target)
         {
@@ -162,6 +173,7 @@ public abstract class SharedRatKingSystem : EntitySystem
             BreakOnMove = true,
             DistanceThreshold = 2f
         };
+        _popup.PopupPredicted(Loc.GetString("ratking-rummage-success"), args.Target, entity, PopupType.Small);
         _doAfter.TryStartDoAfter(doAfter);
         args.Handled = true;
     }

@@ -20,6 +20,7 @@
   description: Rummage trash to find some cheesy-cheese.
   components:
   - type: EntityTargetAction
+    itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/actions_rat_king.rsi
       state: rummage
