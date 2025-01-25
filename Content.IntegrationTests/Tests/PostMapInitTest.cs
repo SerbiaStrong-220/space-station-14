@@ -87,7 +87,7 @@ namespace Content.IntegrationTests.Tests
             // SS220 Event Maps
             "Snout",
             "VoidZone",
-            "NTvsSSSP",
+            "FractWar",
         };
 
         /// <summary>

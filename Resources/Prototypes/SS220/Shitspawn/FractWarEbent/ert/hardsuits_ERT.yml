@@ -76,10 +76,10 @@
 
 # Heavy
 - type: entity
-  parent: ClothingOuterHardsuitBaseHeavy
-  id: ClothingOuterHardsuitERTHeavy
-  name: тяжёлый боевой скафандр NT-3000
-  description: Непроницаемая броня, созданная для защиты от самого современного оружия.
+  parent: ClothingOuterHardsuitBaseLight
+  id: ClothingOuterHardsuitERTLight
+  name: лёгкий боевой скафандр NT-3000
+  description: Облегчённый боевой костюм, созданная для повышения мобильности в боевых условиях.
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
@@ -87,12 +87,12 @@
   - type: Clothing
     sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_heavy.rsi
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitERTHeavy
+    clothingPrototype: ClothingHeadHelmetHardsuitERTLight
 
 # Heavy2
 - type: entity
-  parent: ClothingOuterHardsuitBaseHeavy2
-  id: ClothingOuterHardsuitERTHeavy2
+  parent: ClothingOuterHardsuitBaseHeavy
+  id: ClothingOuterHardsuitERTHeavy
   name: тяжёлый скафандр Gladiator
   description: Тяжёлый боевой костюм, обшитый полимерным кремниевым покрытием.
   suffix: Shitspawn, Ebent, FractWar
@@ -102,4 +102,4 @@
   - type: Clothing
     sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/ert_heavy_2.rsi
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitERTHeavy2
+    clothingPrototype: ClothingHeadHelmetHardsuitERTHeavy
