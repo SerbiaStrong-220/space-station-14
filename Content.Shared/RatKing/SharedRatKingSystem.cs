@@ -210,6 +210,7 @@ public abstract class SharedRatKingSystem : EntitySystem
 
     }
 }
+
 [Serializable, NetSerializable]
 public sealed partial class RatKingRummageDoAfterEvent : SimpleDoAfterEvent
 {
