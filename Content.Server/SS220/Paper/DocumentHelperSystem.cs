@@ -5,6 +5,7 @@ using Content.Shared.Paper;
 using Content.Shared.SS220.Paper;
 using Robust.Server.GameObjects;
 using System.Linq;
+using static Content.Shared.Paper.PaperComponent;
 
 namespace Content.Server.SS220.Paper;
 
@@ -16,8 +17,6 @@ public sealed partial class DocumentHelperSystem : SharedDocumentHelperSystem
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<PaperComponent, DocumentHelperRequestInfoBuiMessage>(OnUIRequestInfo);
     }
 
     #region Ui
@@ -37,11 +36,12 @@ public sealed partial class DocumentHelperSystem : SharedDocumentHelperSystem
         return values;
     }
 
-    private void OnUIRequestInfo(Entity<PaperComponent> entity, ref DocumentHelperRequestInfoBuiMessage args)
+    public override void UpdateUserInterface(Entity<PaperComponent> entity, EntityUid actor)
     {
-        var optionValuesPair = GetOptionValuesPair(args.Options, args.Actor);
-        var state = new DocumentHelperBuiState(optionValuesPair);
-        _ui.SetUiState(entity.Owner, args.UiKey, state);
+        base.UpdateUserInterface(entity, actor);
+        var optionValuesPair = GetOptionValuesPair(DocumentHelperOptions.All, actor);
+        var message = new DocumentHelperOptionsMessage(optionValuesPair);
+        _ui.ServerSendUiMessage(entity.Owner, PaperUiKey.Key, message, actor);
     }
     #endregion
 }

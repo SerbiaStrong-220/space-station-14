@@ -191,6 +191,10 @@ public abstract partial class SharedDocumentHelperSystem : EntitySystem
 
         return values;
     }
+
+    public virtual void UpdateUserInterface(Entity<PaperComponent> entity, EntityUid actor)
+    {
+    }
 }
 
 [Flags]
@@ -211,22 +215,11 @@ public enum DocumentHelperOptions
 }
 
 [Serializable, NetSerializable]
-public sealed class DocumentHelperRequestInfoBuiMessage() : BoundUserInterfaceMessage
-{
-    public DocumentHelperOptions Options;
-
-    public DocumentHelperRequestInfoBuiMessage(DocumentHelperOptions options) : this()
-    {
-        Options = options;
-    }
-}
-
-[Serializable, NetSerializable]
-public sealed class DocumentHelperBuiState : BoundUserInterfaceState
+public sealed class DocumentHelperOptionsMessage : BoundUserInterfaceMessage
 {
     public Dictionary<DocumentHelperOptions, List<string>> OptionValuesPair;
 
-    public DocumentHelperBuiState(Dictionary<DocumentHelperOptions, List<string>> optionValuesPair)
+    public DocumentHelperOptionsMessage(Dictionary<DocumentHelperOptions, List<string>> optionValuesPair)
     {
         OptionValuesPair = optionValuesPair;
     }

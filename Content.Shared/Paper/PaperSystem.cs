@@ -121,6 +121,7 @@ public sealed class PaperSystem : EntitySystem
                 entity.Comp.Mode = PaperAction.Write;
                 _uiSystem.OpenUi(entity.Owner, PaperUiKey.Key, args.User);
                 UpdateUserInterface(entity);
+                _documentHelper.UpdateUserInterface(entity, args.User); // SS220 Document Helper
             }
 
             args.Handled = true;

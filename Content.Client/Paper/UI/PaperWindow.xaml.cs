@@ -104,7 +104,7 @@ namespace Content.Client.Paper.UI
             SaveButton.Text = Loc.GetString("paper-ui-save-button",
                 ("keybind", _inputManager.GetKeyFunctionButtonString(EngineKeyFunctions.MultilineTextSubmit)));
 
-            DocumentHelperButton.OnPressed += _ => OnDocumentHelperButtonPressed?.Invoke(); // SS220 Document helper
+            //DocumentHelperButton.OnPressed += _ => OnDocumentHelperButtonPressed?.Invoke(); // SS220 Document helper
         }
 
         /// <summary>
@@ -252,6 +252,7 @@ namespace Content.Client.Paper.UI
             bool wasEditing = InputContainer.Visible;
             InputContainer.Visible = isEditing;
             EditButtons.Visible = isEditing;
+            DocumentHelper.Visible = isEditing; // SS220 Document helper
 
             var msg = new FormattedMessage();
             msg.AddMarkupPermissive(state.Text);

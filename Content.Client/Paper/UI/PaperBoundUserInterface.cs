@@ -15,8 +15,6 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
     [ViewVariables]
     private PaperWindow? _window;
 
-    private DocumentHelperWindow? _documentHelper; // SS220 Document helper
-
     public PaperBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
@@ -29,23 +27,7 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
         _window.OnSaved += InputOnTextEntered;
 
         // SS220 Document helper begin
-        _window.OnClose += () => _documentHelper?.Close();
-
-        _window.OnDocumentHelperButtonPressed += () =>
-        {
-            var options = DocumentHelperOptions.All;
-            if (_documentHelper != null && _documentHelper.IsOpen)
-                _documentHelper.Close();
-
-            _documentHelper = new DocumentHelperWindow(options);
-            _documentHelper.OnButtonPressed += args => _window.InsertAtCursor(args);
-
-            if (_documentHelper.CheckNeedServerInfo(options))
-                SendMessage(new DocumentHelperRequestInfoBuiMessage(options));
-
-            _documentHelper.OnClose += () => _documentHelper = null;
-            _documentHelper.OpenCenteredRight();
-        };
+        _window.DocumentHelper.OnButtonPressed += args => _window.InsertAtCursor(args);
         // SS220 Document helper end
 
         if (EntMan.TryGetComponent<PaperComponent>(Owner, out var paper))
@@ -61,16 +43,18 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
-        // SS220 Document helper begin
-        //_window?.Populate((PaperBoundUserInterfaceState) state);
-
-        if (state is PaperBoundUserInterfaceState paperState)
-            _window?.Populate(paperState);
-
-        if (state is DocumentHelperBuiState docState)
-            _documentHelper?.UpdateState(docState);
-        // SS220 Document helper end
+        _window?.Populate((PaperBoundUserInterfaceState) state);
     }
+
+    // SS220 Document Helper begin
+    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+    {
+        base.ReceiveMessage(message);
+
+        if (message is DocumentHelperOptionsMessage optionsMessage)
+            _window?.DocumentHelper.UpdateState(optionsMessage);
+    }
+    // SS220 Document Helper end
 
     private void InputOnTextEntered(string text)
     {
