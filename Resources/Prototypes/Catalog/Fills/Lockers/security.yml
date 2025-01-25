@@ -21,7 +21,7 @@
       - id: ClothingOuterHardsuitWarden
       - id: HoloprojectorSecurity
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
-      - id: BookSpaceLaw
+      - id: BookSpaceLaws # SS220 Space Law Replace
       - id: ClothingBackpackElectropack
         amount: 2
       - id: RemoteSignaller
@@ -50,7 +50,7 @@
       - id: DoorRemoteArmory
       - id: HoloprojectorSecurity #SS220 guranteed-holo-projector
 #      - id: ClothingEyesHudSecurity #SS220-MinorTweaks
-      - id: BookSpaceLaw
+      - id: BookSpaceLaws # SS220 Space Law Replace
       - id: ClothingBackpackElectropack
         amount: 2
       - id: RemoteSignaller
@@ -84,7 +84,7 @@
         prob: 0.1
       - id: HoloprojectorSecurity
         #prob: 0.6 # SS220 guranteed-holo-projector
-      - id: BookSpaceLaw
+      - id: BookSpaceLaws # SS220 Space Law Replace
         prob: 0.5
 
 - type: entity

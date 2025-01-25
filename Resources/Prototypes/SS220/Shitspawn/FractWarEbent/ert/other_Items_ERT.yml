@@ -46,9 +46,12 @@
       - id: FlashlightSeclite
       - id: PowerCellHyper
       - id: WeaponBlaster
-      - id: MedicatedSuture
       - id: WeaponPulsePistol
       - id: Stimpack
+      - id: Tourniquet
+      - id: PortableRecharger
+      - id: Flare
+        amount: 2
     - type: ExplosionResistance
       damageCoefficient: 0.0
 

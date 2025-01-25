@@ -80,6 +80,12 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             projectile.Shooter = null;
             projectile.Weapon = null;
             projectile.DamagedEntity = false;
+
+            // SS220 add barricade begin
+            projectile.ShootGridUid = null;
+            projectile.ShootGridPos = null;
+            projectile.ShootWorldPos = null;
+            // SS220 add barricade end
         }
 
         // Land it just coz uhhh yeah
@@ -149,8 +155,20 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             return;
 
         component.Shooter = shooterId;
+        SetShootPositions(id, component, shooterId); // SS220 add barricade
         Dirty(id, component);
     }
+
+    // SS220 add barricade begin
+    public void SetShootPositions(EntityUid uid, ProjectileComponent component, EntityUid shooterId)
+    {
+        var xform = Transform(uid);
+        component.ShootGridUid = xform.ParentUid;
+        component.ShootGridPos = xform.LocalPosition;
+        component.ShootWorldPos = _transform.GetWorldPosition(shooterId);
+        Dirty(uid, component);
+    }
+    // SS220 add barricade end
 
     [Serializable, NetSerializable]
     private sealed partial class RemoveEmbeddedProjectileEvent : DoAfterEvent

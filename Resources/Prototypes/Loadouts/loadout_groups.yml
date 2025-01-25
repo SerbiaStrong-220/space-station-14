@@ -1442,6 +1442,7 @@
   - MedicalDoctorJumpsuitTurtleneckAlt
   - MedicalDoctorJumpskirtTurtleneck
   - MedicalDoctorJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - MedicalDoctorJumpsuitResponsibility #SS220-Responsibility
 
 - type: loadoutGroup
   id: MedicalDoctorOuterClothing
@@ -1467,6 +1468,7 @@
   loadouts:
   - WhiteShoes
   - MedicalWinterBoots
+  - MedicalDoctorShoesResponsibility #SS220-Responsibility
 
 - type: loadoutGroup
   id: MedicalDoctorPDA

@@ -240,6 +240,9 @@
     - id: Stimpack
     - id: DnaScramblerImplanter
     - id: ExGrenade
+    - id: WeaponFlareGun
+    - id: ShellShotgunFlare
+      amount: 2
 
 - type: entity
   name: рюкзак СССП
@@ -258,6 +261,7 @@
       - id: WeaponSubMachineGunUssp_PPSh
       - id: EnergyHammer
       - id: EnergySickle
+      - id: Tourniquet
 
 - type: entity
   id: BedsheetUSSP
