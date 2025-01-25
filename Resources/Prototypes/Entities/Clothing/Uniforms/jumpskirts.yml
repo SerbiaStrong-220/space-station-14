@@ -523,9 +523,9 @@
   description: Uniform for subpar operative LARPers performing tactical insulated glove theft in deep space.
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Uniforms/Jumpskirt/tacticool_s.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_tacticool_s.rsi #SS220-tacticool_s-resprite
     - type: Clothing
-      sprite: SS220/Clothing/Uniforms/Jumpskirt/tacticool_s.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_tacticool_s.rsi #SS220-tacticool_s-resprite
     # Too cool for sensors to be on
     - type: SuitSensor
       randomMode: false

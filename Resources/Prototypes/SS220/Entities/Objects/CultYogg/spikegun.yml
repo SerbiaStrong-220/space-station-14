@@ -20,7 +20,7 @@
       proto: Spike
       capacity: 15
     - type: Sprite
-      sprite: SS220/Objects/Weapons/Guns/cult_yogg_spikegun.rsi
+      sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spikegun.rsi
       layers:
         - state: icon_noammo
           map: ["sprite"]
@@ -62,7 +62,7 @@
       - NonEnergy
   - type: Sprite
     noRot: false
-    sprite: SS220/Objects/Weapons/Guns/cult_yogg_spikegun.rsi
+    sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spikegun.rsi
     layers:
     - state: spike_projectile
       shader: unshaded

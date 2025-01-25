@@ -110,27 +110,30 @@ public sealed class PaperSystem : EntitySystem
     {
         // only allow editing if there are no stamps or when using a cyberpen
         var editable = entity.Comp.StampedBy.Count == 0 || _tagSystem.HasTag(args.Used, "WriteIgnoreStamps") && entity.Comp.Writable; //SS220-upstream-merge
-        if (_tagSystem.HasTag(args.Used, "Write") && editable)
+        if (_tagSystem.HasTag(args.Used, "Write"))
         {
-            if (entity.Comp.EditingDisabled)
+            if (editable)
             {
-                var paperEditingDisabledMessage = Loc.GetString("paper-tamper-proof-modified-message");
-                _popupSystem.PopupEntity(paperEditingDisabledMessage, entity, args.User);
+                if (entity.Comp.EditingDisabled)
+                {
+                    var paperEditingDisabledMessage = Loc.GetString("paper-tamper-proof-modified-message");
+                    _popupSystem.PopupEntity(paperEditingDisabledMessage, entity, args.User);
 
-                args.Handled = true;
-                return;
+                    args.Handled = true;
+                    return;
+                }
+                var writeEvent = new PaperWriteEvent(entity, args.User);
+                RaiseLocalEvent(args.Used, ref writeEvent);
+
+                entity.Comp.Mode = PaperAction.Write;
+                _uiSystem.OpenUi(entity.Owner, PaperUiKey.Key, args.User);
+                UpdateUserInterface(entity);
+
+                //SS220 Add auto form begin
+                entity.Comp.Writer = args.User;
+                Dirty(entity.Owner, entity.Comp);
+                //SS220 Add auto form end
             }
-            var writeEvent = new PaperWriteEvent(entity, args.User);
-            RaiseLocalEvent(args.Used, ref writeEvent);
-
-            entity.Comp.Mode = PaperAction.Write;
-            _uiSystem.OpenUi(entity.Owner, PaperUiKey.Key, args.User);
-            UpdateUserInterface(entity);
-
-            //SS220 Add auto form begin
-            entity.Comp.Writer = args.User;
-            Dirty(entity.Owner, entity.Comp);
-            //SS220 Add auto form end
 
             args.Handled = true;
             return;

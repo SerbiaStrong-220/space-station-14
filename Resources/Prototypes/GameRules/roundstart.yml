@@ -219,7 +219,7 @@
     definitions:
     - prefRoles: [ Traitor ]
       mindRoles:
-      - MindRoleTraitor
+      - MindRoleTraitorReinforcement
   #ss220 reinforcement objective fix begin
   - type: AntagRandomObjectives
     enabled: false

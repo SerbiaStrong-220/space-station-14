@@ -78,6 +78,7 @@
           - /Maps/Ruins/syndicate_dropship.yml
           # - /Maps/Ruins/whiteship_ancient.yml # SS220 Removed with Ruins Update (balance Tweak)
           # - /Maps/Ruins/whiteship_bluespacejumper.yml # SS220 Removed with Ruins Update (balance Tweak)
+          # - /Maps/Ruins/wrecklaimer.yml # SS220 Removed
           # SS220 Ruins Update Map begin
           - /Maps/SS220/Ruins/Arena_SS220.yml
           - /Maps/SS220/Ruins/Broadaxe_SS220.yml

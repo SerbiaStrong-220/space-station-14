@@ -5,7 +5,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: SS220/Objects/Fun/Lottery.rsi
+    sprite: SS220/Objects/Fun/lottery.rsi
     state: icon
   - type: Item
     size: Tiny

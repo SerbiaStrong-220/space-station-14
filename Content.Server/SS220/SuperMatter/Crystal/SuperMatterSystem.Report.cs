@@ -143,10 +143,10 @@ public sealed partial class SuperMatterSystem : EntitySystem
     {
         var stringBuilder = new StringBuilder();
 
-        stringBuilder.AppendJoin("-", ["supermatter", announceType.ToString().ToLower()]);
+        stringBuilder.Append($"supermatter-{announceType.ToString().ToLower()}");
 
         if (smState.HasValue)
-            stringBuilder.AppendJoin("-", ["", smState.Value.ToString().ToLower()]);
+            stringBuilder.Append($"-{smState.Value.ToString().ToLower()}");
 
         return stringBuilder.ToString();
     }
