@@ -13,6 +13,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Content.Shared.Popups;
+using Content.Shared.SS220.RatKing;
 
 namespace Content.Shared.RatKing;
 
@@ -25,7 +26,7 @@ public abstract class SharedRatKingSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!; //SS220 popUps
+    [Dependency] private readonly SharedPopupSystem _popup = default!; //SS220 RatKing tweaks and changes
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -39,9 +40,7 @@ public abstract class SharedRatKingSystem : EntitySystem
 
         SubscribeLocalEvent<RatKingRummageableComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerb);
         SubscribeLocalEvent<RatKingRummageableComponent, RatKingRummageDoAfterEvent>(OnDoAfterComplete);
-        //SS220 stuff here
-        SubscribeLocalEvent<RatKingComponent, RatKingRummageActionEvent>(OnRummageAction);
-        //SS220 curse is OVER
+        SubscribeLocalEvent<RatKingComponent, RatKingRummageActionEvent>(OnRummageAction); //SS220 RatKing Tweaks and Changes
     }
 
     private void OnStartup(EntityUid uid, RatKingComponent component, ComponentStartup args)
@@ -55,7 +54,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         _action.AddAction(uid, ref component.ActionOrderFollowEntity, component.ActionOrderFollow, component: comp);
         _action.AddAction(uid, ref component.ActionOrderCheeseEmEntity, component.ActionOrderCheeseEm, component: comp);
         _action.AddAction(uid, ref component.ActionOrderLooseEntity, component.ActionOrderLoose, component: comp);
-        _action.AddAction(uid, ref component.ActionRummageEntity, component.ActionRummage, component: comp); //SS220 CURSED CHANGE
+        _action.AddAction(uid, ref component.ActionRummageEntity, component.ActionRummage, component: comp); //SS220 RatKing Tweaks and Changes
 
         UpdateActions(uid, component);
     }
@@ -77,7 +76,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         _action.RemoveAction(uid, component.ActionOrderFollowEntity, comp);
         _action.RemoveAction(uid, component.ActionOrderCheeseEmEntity, comp);
         _action.RemoveAction(uid, component.ActionOrderLooseEntity, comp);
-        _action.RemoveAction(uid, component.ActionRummageEntity, comp); //SS220 action
+        _action.RemoveAction(uid, component.ActionRummageEntity, comp); //SS220 RatKing Tweaks and Changes
     }
 
     private void OnOrderAction(EntityUid uid, RatKingComponent component, RatKingOrderActionEvent args)
@@ -150,7 +149,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         });
     }
 
-    //SS220 RatKing Changes start here
+    //SS220 RatKing Tweaks and Changes start
     private void OnRummageAction(Entity<RatKingComponent> entity, ref RatKingRummageActionEvent args)
     {
         if (args.Handled || !TryComp<RatKingRummageableComponent>(args.Target, out var rumComp))
@@ -177,7 +176,7 @@ public abstract class SharedRatKingSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
         args.Handled = true;
     }
-    //SS220 Curse is OVER
+    //SS220 RatKing Tweaks and Changes end
 
     private void OnDoAfterComplete(EntityUid uid, RatKingRummageableComponent component, RatKingRummageDoAfterEvent args)
     {
@@ -211,10 +210,8 @@ public abstract class SharedRatKingSystem : EntitySystem
 
     }
 }
-//SS220
 [Serializable, NetSerializable]
 public sealed partial class RatKingRummageDoAfterEvent : SimpleDoAfterEvent
 {
 
 }
-//SS220 changes ending

@@ -17,7 +17,7 @@
   - type: Tag
     tags:
     - BoxCardboard
-    #SS220 D-D-D-Damageable boxes!!!
+    #SS220 RatKing damageable foodboxes tweaks and Changes start
   - type: Damageable
     damageContainer: StructuralInorganic
   - type: Destructible
@@ -35,7 +35,7 @@
       - !type:EmptyAllContainersBehaviour
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-    #SS220 changes end
+    #SS220 RatKing damageable foodboxes tweaks and Changes end
 
 - type: entity
   name: mousetrap box

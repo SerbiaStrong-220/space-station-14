@@ -11,6 +11,7 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Pointing;
 using Content.Shared.RatKing;
+using Content.Shared.SS220.RatKing;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 

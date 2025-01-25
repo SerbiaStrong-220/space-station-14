@@ -1,4 +1,5 @@
-﻿using Content.Shared.RatKing;
+using Content.Shared.RatKing;
+using Content.Shared.SS220.RatKing;
 
 namespace Content.Client.RatKing;
 

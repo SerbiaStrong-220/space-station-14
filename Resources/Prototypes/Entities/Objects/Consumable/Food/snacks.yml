@@ -116,7 +116,7 @@
       - id: FoodSnackChocolateBar
     sound:
       path: /Audio/Effects/unwrap.ogg
-      #SS220 D-D-D-Destruction
+      #SS220 destructable foodboxes RatKing Tweaks and Changes start
   - type: Damageable
     damageContainer: StructuralInorganic
   - type: Destructible
@@ -141,7 +141,7 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-      #SS220 curse is over
+      #SS220 destructable foodboxes RatKing Tweaks and Changes end
 
 - type: entity
   name: chocolate bar
@@ -455,7 +455,7 @@
       - id: FoodSnackNutribrickOpen
     sound:
       path: /Audio/Effects/unwrap.ogg
-      #SS220 D-D-D-Destruction
+      #SS220 destructable foodboxes RatKing Tweaks and Changes start
   - type: Damageable
     damageContainer: StructuralInorganic
   - type: Destructible
@@ -480,7 +480,7 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-      #SS220 curse is over
+      #SS220 destructable foodboxes RatKing Tweaks and Changes end
 
 - type: entity
   id: FoodSnackNutribrickOpen
@@ -525,7 +525,7 @@
       - id: FoodSnackMREBrownieOpen
     sound:
       path: /Audio/Effects/unwrap.ogg
-      #SS220 D-D-D-Destruction
+      #SS220 destructable foodboxes RatKing Tweaks and Changes start
   - type: Damageable
     damageContainer: StructuralInorganic
   - type: Destructible
@@ -550,7 +550,7 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-      #SS220 curse is over
+      #SS220 destructable foodboxes RatKing Tweaks and Changes end
 
 
 - type: entity
