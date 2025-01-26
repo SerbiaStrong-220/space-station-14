@@ -44,6 +44,6 @@ public sealed partial class RecipeAssemblerSystem : SharedRecipeAssemblerSystem
 
         var spawnCords = Transform(entity).Coordinates;
         Spawn(recipe.Result, spawnCords);
-        _instrumentSystem.SubstructContents(ents, recipe);
+        _instrumentSystem.SubtractContents(ents, recipe);
     }
 }

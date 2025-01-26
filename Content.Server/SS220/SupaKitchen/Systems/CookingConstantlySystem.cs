@@ -200,7 +200,7 @@ public sealed partial class CookingConstantlySystem : SharedCookingConstantlySys
             return;
 
         var container = component.Container;
-        _cookingInstrument.SubstructContents(container, component.CurrentCookingRecipe);
+        _cookingInstrument.SubtractContents(container, component.CurrentCookingRecipe);
         SpawnInContainerOrDrop(component.CurrentCookingRecipe.Result, uid, container.ID);
         CycleCooking(uid, component);
     }

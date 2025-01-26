@@ -404,7 +404,7 @@ public sealed class CookingMachineSystem : EntitySystem
                 var coords = Transform(uid).Coordinates;
                 for (var i = 0; i < component.CurrentlyCookingRecipe.Item2; i++)
                 {
-                    _cookingInstrument.SubstructContents(component.Storage, component.CurrentlyCookingRecipe.Item1);
+                    _cookingInstrument.SubtractContents(component.Storage, component.CurrentlyCookingRecipe.Item1);
                     Spawn(component.CurrentlyCookingRecipe.Item1.Result, coords);
                 }
             }

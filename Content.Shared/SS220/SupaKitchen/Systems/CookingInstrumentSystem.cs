@@ -73,17 +73,17 @@ public sealed class CookingInstrumentSystem : EntitySystem
         return (recipe, portions);
     }
 
-    public void SubstructContents(Container container, CookingRecipePrototype recipe)
+    public void SubtractContents(Container container, CookingRecipePrototype recipe)
     {
-        SubstructContents(container.ContainedEntities, recipe, container);
+        SubtractContents(container.ContainedEntities, recipe, container);
     }
 
-    public void SubstructContents(IEnumerable<EntityUid> entities, CookingRecipePrototype recipe, Container? contaiter = null)
+    public void SubtractContents(IEnumerable<EntityUid> entities, CookingRecipePrototype recipe, Container? contaiter = null)
     {
-        SubstructContents(entities.ToList(), recipe, contaiter);
+        SubtractContents(entities.ToList(), recipe, contaiter);
     }
 
-    public void SubstructContents(List<EntityUid> entities, CookingRecipePrototype recipe, Container? contaiter = null)
+    public void SubtractContents(List<EntityUid> entities, CookingRecipePrototype recipe, Container? contaiter = null)
     {
         var totalReagentsToRemove = new Dictionary<string, FixedPoint2>(recipe.IngredientsReagents);
 
