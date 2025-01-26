@@ -313,7 +313,7 @@
 - type: weightedRandomEntity
   id: RatKingLoot
   weights:
-  # SS220 weight changes begin
+  # SS220 RatKing tweaks and changes rummage weight changes start
     RandomSpawner100: 40
     FoodCheeseSlice: 40
     FoodCheese: 15
@@ -322,7 +322,7 @@
     #RandomSpawner100: 66 #garbage
     #FoodCheese: 28 #food
     #IngotGold1: 5 #loot
-  # SS220 weight changes end
+  # SS220 RatKing tweaks and changes rummage weight changes end
 
 - type: entity
   id: ActionRatKingRaiseArmy
