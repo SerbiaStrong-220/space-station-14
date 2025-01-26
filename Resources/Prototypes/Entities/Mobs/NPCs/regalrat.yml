@@ -9,14 +9,14 @@
     baseWalkSpeed : 3.00
     baseSprintSpeed : 5.00
   - type: InputMover
-    #SS220 RatKing additions
+    #SS220 RatKing tweaks and changes update start
   - type: Puller
     needsHands: false
   - type: KeenHearing
     visionRadius: 14
     highSensitiveVisionRadius: 0
     state: half
-    #SS220 changes end here
+    #SS220 RatKing tweaks and changes update end
   - type: MobMover
   - type: HTN
     rootTask:
