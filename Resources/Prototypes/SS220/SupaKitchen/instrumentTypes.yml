@@ -12,3 +12,8 @@
   id: oven
   name: духовка
   iconPath: /Textures/SS220/SupaKitchen/Interface/InstrumentIcons/oven.png
+
+- type: cookingInstrumentType
+  id: choppingBoard
+  name: разделочная доска
+  iconPath: /Textures/SS220/SupaKitchen/Interface/InstrumentIcons/grill.png

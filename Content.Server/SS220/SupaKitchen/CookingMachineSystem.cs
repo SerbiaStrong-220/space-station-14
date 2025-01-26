@@ -17,6 +17,7 @@ using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.SS220.SupaKitchen;
+using Content.Shared.SS220.SupaKitchen.Systems;
 using Content.Shared.Storage.Components;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
@@ -403,7 +404,7 @@ public sealed class CookingMachineSystem : EntitySystem
                 var coords = Transform(uid).Coordinates;
                 for (var i = 0; i < component.CurrentlyCookingRecipe.Item2; i++)
                 {
-                    _cookingInstrument.SubtractContents(component.Storage, component.CurrentlyCookingRecipe.Item1);
+                    _cookingInstrument.SubstructContents(component.Storage, component.CurrentlyCookingRecipe.Item1);
                     Spawn(component.CurrentlyCookingRecipe.Item1.Result, coords);
                 }
             }

@@ -2,11 +2,10 @@
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
-using Content.Shared.SS220.SupaKitchen;
 using Robust.Shared.Containers;
 using System.Linq;
 
-namespace Content.Server.SS220.SupaKitchen;
+namespace Content.Shared.SS220.SupaKitchen.Systems;
 public sealed class CookingInstrumentSystem : EntitySystem
 {
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
@@ -18,7 +17,7 @@ public sealed class CookingInstrumentSystem : EntitySystem
         base.Initialize();
     }
 
-    public static (CookingRecipePrototype, int) CanSatisfyRecipe(
+    public static (CookingRecipePrototype, int) SatisfyRecipe(
         CookingInstrumentComponent component,
         CookingRecipePrototype recipe,
         Dictionary<string, int> solids,
@@ -48,9 +47,9 @@ public sealed class CookingInstrumentSystem : EntitySystem
             if (solids[solid.Key] < solid.Value)
                 return (recipe, 0);
 
-            portions = portions == 0
-                ? solids[solid.Key] / solid.Value.Int()
-                : Math.Min(portions, solids[solid.Key] / solid.Value.Int());
+            portions = (int)(portions == 0
+                ? solids[solid.Key] / solid.Value
+                : Math.Min(portions, solids[solid.Key] / solid.Value));
         }
 
         foreach (var reagent in recipe.IngredientsReagents)
@@ -68,18 +67,28 @@ public sealed class CookingInstrumentSystem : EntitySystem
 
         //cook only as many of those portions as time allows
         if (!component.IgnoreTime)
-            portions = (int) Math.Min(portions, cookingTimer / recipe.CookTime);
+            portions = (int)Math.Min(portions, cookingTimer / recipe.CookTime);
 
 
         return (recipe, portions);
     }
 
-    public void SubtractContents(Container container, CookingRecipePrototype recipe)
+    public void SubstructContents(Container container, CookingRecipePrototype recipe)
+    {
+        SubstructContents(container.ContainedEntities, recipe, container);
+    }
+
+    public void SubstructContents(IEnumerable<EntityUid> entities, CookingRecipePrototype recipe, Container? contaiter = null)
+    {
+        SubstructContents(entities.ToList(), recipe, contaiter);
+    }
+
+    public void SubstructContents(List<EntityUid> entities, CookingRecipePrototype recipe, Container? contaiter = null)
     {
         var totalReagentsToRemove = new Dictionary<string, FixedPoint2>(recipe.IngredientsReagents);
 
         // this is spaghetti ngl
-        foreach (var item in container.ContainedEntities)
+        foreach (var item in entities)
         {
             if (!TryComp<SolutionContainerManagerComponent>(item, out var solMan))
                 continue;
@@ -113,25 +122,32 @@ public sealed class CookingInstrumentSystem : EntitySystem
 
         foreach (var recipeSolid in recipe.IngredientsSolids)
         {
-            for (var i = 0; i < recipeSolid.Value; i++)
+            var amount = recipeSolid.Value;
+            for (var i = 0; i < entities.Count && amount > 0; i++)
             {
-                foreach (var item in container.ContainedEntities)
-                {
-                    var metaData = MetaData(item);
-                    if (metaData.EntityPrototype == null)
-                    {
-                        continue;
-                    }
+                var currentEnt = entities[i];
+                var proto = Prototype(currentEnt);
 
-                    if (metaData.EntityPrototype.ID == recipeSolid.Key)
-                    {
-                        _container.Remove(item, container);
-                        EntityManager.DeleteEntity(item);
-                        break;
-                    }
+                if (proto?.ID == recipeSolid.Key)
+                {
+                    if (contaiter != null)
+                        _container.Remove(currentEnt, contaiter);
+
+                    EntityManager.DeleteEntity(currentEnt);
+                    entities.RemoveAt(i);
+                    i--;
+                    amount--;
                 }
             }
         }
+    }
+
+    public (CookingRecipePrototype, int) GetSatisfiedPortionedRecipe(
+        CookingInstrumentComponent component,
+        IEnumerable<EntityUid> entities,
+        uint cookingTimer)
+    {
+        return GetSatisfiedPortionedRecipe(component, GetSolids(entities), GetReagents(entities), cookingTimer);
     }
 
     public (CookingRecipePrototype, int) GetSatisfiedPortionedRecipe(
@@ -149,13 +165,73 @@ public sealed class CookingInstrumentSystem : EntitySystem
                 if (recipe is null)
                     continue;
 
-                var satisfiedRecipe = CanSatisfyRecipe(component, recipe, solidsDict, reagentDict, cookingTimer);
+                var satisfiedRecipe = SatisfyRecipe(component, recipe, solidsDict, reagentDict, cookingTimer);
                 if (satisfiedRecipe.Item2 > 0)
                     return satisfiedRecipe;
             }
         }
 
         return _recipeManager.Recipes.Select(r =>
-            CanSatisfyRecipe(component, r, solidsDict, reagentDict, cookingTimer)).FirstOrDefault(r => r.Item2 > 0);
+            SatisfyRecipe(component, r, solidsDict, reagentDict, cookingTimer)).FirstOrDefault(r => r.Item2 > 0);
+    }
+
+    public Dictionary<CookingRecipePrototype, int> GetSatisfiedRecipes(
+    CookingInstrumentComponent component,
+    IEnumerable<EntityUid> entities,
+    uint cookingTimer)
+    {
+        return _recipeManager.Recipes.Select(r =>
+            SatisfyRecipe(component, r, GetSolids(entities), GetReagents(entities), cookingTimer))
+            .Where(r => r.Item2 > 0)
+            .ToDictionary(r => r.Item1, r => r.Item2);
+    }
+
+    public Dictionary<string, int> GetSolids(IEnumerable<EntityUid> entities)
+    {
+        Dictionary<string, int> solids = new();
+        foreach (var entity in entities)
+        {
+            var metaData = MetaData(entity);
+            if (metaData.EntityPrototype is null)
+                continue;
+
+            if (!solids.TryAdd(metaData.EntityPrototype.ID, 1))
+                solids[metaData.EntityPrototype.ID]++;
+        }
+
+        return solids;
+    }
+
+    public Dictionary<string, FixedPoint2> GetReagents(IEnumerable<EntityUid> entities)
+    {
+        Dictionary<string, FixedPoint2> reagents = new();
+        foreach (var entity in entities)
+        {
+            if (!TryComp<SolutionContainerManagerComponent>(entity, out var solMan))
+                continue;
+
+            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions((entity, solMan)))
+            {
+                var solution = soln.Comp.Solution;
+                {
+                    foreach (var (reagent, quantity) in solution.Contents)
+                    {
+                        if (!reagents.TryAdd(reagent.Prototype, quantity))
+                            reagents[reagent.Prototype] += quantity;
+                    }
+                }
+            }
+        }
+
+        return reagents;
+    }
+
+    public bool CanCookRecipe(CookingInstrumentComponent component,
+        CookingRecipePrototype recipe,
+        IEnumerable<EntityUid> entities,
+        uint cookingTimer)
+    {
+        var satisfiedRecipe = SatisfyRecipe(component, recipe, GetSolids(entities), GetReagents(entities), cookingTimer);
+        return satisfiedRecipe.Item2 > 0;
     }
 }

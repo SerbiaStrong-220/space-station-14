@@ -19,8 +19,8 @@ public sealed class CookingRecipePrototype : IPrototype
     [DataField("reagents", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, ReagentPrototype>))]
     private readonly Dictionary<string, FixedPoint2> _ingsReagents = new();
 
-    [DataField("solids", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, EntityPrototype>))]
-    private readonly Dictionary<string, FixedPoint2> _ingsSolids = new();
+    [DataField("solids", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<uint, EntityPrototype>))]
+    private readonly Dictionary<string, uint> _ingsSolids = new();
 
     [DataField]
     public ProtoId<EntityPrototype> Result { get; } = string.Empty;
@@ -34,10 +34,10 @@ public sealed class CookingRecipePrototype : IPrototype
     public string Name => Loc.GetString(_name);
 
     public IReadOnlyDictionary<string, FixedPoint2> IngredientsReagents => _ingsReagents;
-    public IReadOnlyDictionary<string, FixedPoint2> IngredientsSolids => _ingsSolids;
+    public IReadOnlyDictionary<string, uint> IngredientsSolids => _ingsSolids;
 
     [DataField]
-    public string? RecipeGroup;
+    public string RecipeGroup = "without a category";
 
     /// <summary>
     /// Is this recipe unavailable in normal circumstances?

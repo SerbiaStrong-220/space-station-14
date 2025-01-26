@@ -91,6 +91,9 @@ Buzz! Don't forget about Moth diet!
 ## Гриль
 <GuideCookingRecipeGroupEmbed InstrumentType="grill"/>
 
+## Разделочная доска
+<GuideCookingRecipeGroupEmbed InstrumentType="choppingBoard"/>
+
 ## Медицинское
 <GuideCookingRecipeGroupEmbed RecipeGroup="medical"/>
 
@@ -98,5 +101,8 @@ Buzz! Don't forget about Moth diet!
 <GuideCookingRecipeGroupEmbed RecipeGroup="other"/>
 <GuideCookingRecipeGroupEmbed RecipeGroup="notfood"/>
 <GuideCookingRecipeGroupEmbed RecipeGroup="anomaly"/>
+
+## Без категории
+<GuideCookingRecipeGroupEmbed RecipeGroup="without a category"/>
 
 </Document>

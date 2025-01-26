@@ -35,7 +35,6 @@ using Content.Shared.Chat;
 using Content.Shared.Kitchen;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
-using Content.Shared.SS220.SupaKitchen;
 
 namespace Content.Server.IoC
 {
@@ -50,7 +49,6 @@ namespace Content.Server.IoC
             IoCManager.Register<IServerPreferencesManager, ServerPreferencesManager>();
             IoCManager.Register<IServerDbManager, ServerDbManager>();
             IoCManager.Register<RecipeManager, RecipeManager>();
-            IoCManager.Register<SupaRecipeManager, SupaRecipeManager>(); // SS220 Supa Kitchen
             IoCManager.Register<INodeGroupFactory, NodeGroupFactory>();
             IoCManager.Register<IConnectionManager, ConnectionManager>();
             IoCManager.Register<ServerUpdateManager>();
