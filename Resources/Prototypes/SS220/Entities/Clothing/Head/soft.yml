@@ -27,9 +27,9 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Soft/interdyne_cap.rsi
+    sprite: SS220/Clothing/Head/Soft/paramedic_interdyne_cap.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Soft/interdyne_cap.rsi
+    sprite: SS220/Clothing/Head/Soft/paramedic_interdyne_cap.rsi
 
 - type: entity
   parent: [ClothingHeadHeadHatBaseFlipped, ClothingHeadHatInterdyne]

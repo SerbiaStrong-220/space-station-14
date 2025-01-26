@@ -7,6 +7,10 @@
       weight: 0.5
     - id: PlushieRatvar
       weight: 0.5
+      #SS220-PlushieMiGo-begin
+    - id: PlushieMigo #SS220
+      weight: 0.15
+      #SS220-PlushieMiGo-end
     - id: PlushieNuke
     - id: PlushieSlime
     - id: PlushieSnake

@@ -72,6 +72,7 @@
     damageContainers:
       - Biological
   # SS220 ADD GHOST HUD'S END
+  - type: ShowEventRoleIcons # SS220 Add event role icons
   - type: ShowElectrocutionHUD
   - type: IntrinsicRadioReceiver
   - type: ActiveRadio

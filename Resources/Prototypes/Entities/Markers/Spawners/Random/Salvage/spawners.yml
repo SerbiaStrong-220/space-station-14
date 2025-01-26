@@ -388,7 +388,7 @@
   - type: Sprite
     layers:
     - state: pink
-    - sprite: Structures/Storage/canister.rsi
+    - sprite: SS220/Structures/Storage/canister.rsi #ss220-engineering-update-atmosgase
       state: blue
   - type: EntityTableSpawner
     table: !type:GroupSelector

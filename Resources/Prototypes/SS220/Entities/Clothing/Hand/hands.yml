@@ -8,9 +8,9 @@
   suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Hands/whitecapgloves.rsi
+    sprite: SS220/Clothing/Hands/Gloves/captain_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Hands/whitecapgloves.rsi
+    sprite: SS220/Clothing/Hands/Gloves/captain_white.rsi
 
 - type: entity
   parent: ClothingHandsBase
@@ -52,9 +52,9 @@
   suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Hands/Gloves/orangejanitor.rsi
+    sprite: SS220/Clothing/Hands/Gloves/janitor_orange.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Hands/Gloves/orangejanitor.rsi
+    sprite: SS220/Clothing/Hands/Gloves/janitor_orange.rsi
 
 - type: entity
   parent: ClothingHandsGlovesSyntheticBase
@@ -63,12 +63,12 @@
   description: tactical security element
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Hands/Gloves/sectactical.rsi
+    sprite: SS220/Clothing/Hands/Gloves/security_tactical.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Hands/Gloves/sectactical.rsi
+    sprite: SS220/Clothing/Hands/Gloves/security_tactical.rsi
   - type: Fiber
     fiberColor: fibers-black
-    
+
 - type: entity
   parent: ClothingHandsGlovesJanitor
   id: ClothingHandsGlovesJanitorJR

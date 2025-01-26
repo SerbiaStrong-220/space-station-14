@@ -3,8 +3,10 @@
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
 using Content.Shared.Damage;
+using Content.Shared.DoAfter;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
+using Content.Shared.SS220.CultYogg.MiGo;
 
 namespace Content.Shared.SS220.CultYogg.Pod;
 
@@ -16,6 +18,9 @@ public sealed partial class CultYoggPodComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan HealingFreq = TimeSpan.FromSeconds(1);
+
+    [DataField]
+    public TimeSpan InsertDelay = TimeSpan.FromSeconds(6);
 
     /// <summary>
     /// Whitelist of entities that are cultists

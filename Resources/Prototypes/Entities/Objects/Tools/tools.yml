@@ -293,6 +293,7 @@
   - type: RCD
     availablePrototypes:
     - WallSolid
+    - WallReinforced # ss220 rcd upd
     - FloorSteel
     - Plating
     - Catwalk
@@ -311,10 +312,24 @@
     - HVCable
     - CableTerminal
     - Deconstruct
+  # ss220 rcd upd bgn
+    - StraightPipe
+    - PipeFourway
+    - PipeTjunction
+    - PipeBend
+    - PassiveVent
+    - AirVent
+    - Scrubber
+    - DisposalPipe
+    - DisposalTrunk
+    - DisposalJunction
+    - DisposalJunctionFlipped
+    - DisposalYJunction
+    - DisposalBend
+  # ss220 rcd upd end
   - type: LimitedCharges
     maxCharges: 30
     charges: 30
-  - type: UseDelay
   - type: Sprite
     sprite: Objects/Tools/rcd.rsi
     state: icon
@@ -355,10 +370,10 @@
   suffix: AutoRecharge
   components:
   - type: LimitedCharges
-    maxCharges: 20
-    charges: 20
+    maxCharges: 30 # rcd upd
+    charges: 30 # rcd upd
   - type: AutoRecharge
-    rechargeDuration: 10
+    rechargeDuration: 5 # rcd upd
 
 - type: entity
   id: RCDExperimental

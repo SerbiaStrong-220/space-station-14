@@ -24,6 +24,14 @@
     FoodDoughRope: 1
     PoppySeeds: 1
 
+- type: microwaveMealRecipe
+  id: RecipeBagelCotton
+  name: cotton bagel recipe
+  result: FoodBagelCotton
+  time: 5
+  solids:
+    FoodDoughCottonRope: 1
+
 #Burgers
 
 - type: microwaveMealRecipe
@@ -457,6 +465,28 @@
     Blackpepper: 5
   solids:
     FoodDough: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBaguetteCotton
+  name: baguette recipe
+  result: FoodBreadBaguetteCotton
+  time: 15
+  reagents:
+    TableSalt: 5
+    Blackpepper: 5
+  solids:
+    FoodDoughCotton: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBaguetteCotton
+  name: baguette recipe
+  result: FoodBreadBaguetteCotton
+  time: 15
+  reagents:
+    TableSalt: 5
+    Blackpepper: 5
+  solids:
+    FoodDoughCotton: 1
 
 - type: microwaveMealRecipe
   id: RecipeBaguetteSword # SS220 Added to supa kitchen (microwave)
@@ -1941,6 +1971,24 @@
     FoodBreadBaguetteSlice: 1
 
 - type: microwaveMealRecipe
+  id: RecipeFoodBakedChevreChaudCotton
+  name: cotton chevre chaud recipe
+  result: FoodBakedChevreChaudCotton
+  time: 5
+  solids:
+    FoodChevreSlice: 1
+    FoodBreadBaguetteCottonSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodBakedChevreChaudCotton
+  name: cotton chevre chaud recipe
+  result: FoodBakedChevreChaudCotton
+  time: 5
+  solids:
+    FoodChevreSlice: 1
+    FoodBreadBaguetteCottonSlice: 1
+
+- type: microwaveMealRecipe
   id: RecipeCannabisButter # SS220 Added to supa kitchen (microwave)
   name: cannabis butter recipe
   result: FoodCannabisButter
@@ -2066,6 +2114,24 @@
   time: 5
   solids:
     FoodCroissantRaw: 1
+    FoodButterSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCroissantCotton
+  name: cotton croissant recipe
+  result: FoodBakedCroissantCotton
+  time: 5
+  solids:
+    FoodCroissantRawCotton: 1
+    FoodButterSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCroissantCotton
+  name: cotton croissant recipe
+  result: FoodBakedCroissantCotton
+  time: 5
+  solids:
+    FoodCroissantRawCotton: 1
     FoodButterSlice: 1
 
 - type: microwaveMealRecipe

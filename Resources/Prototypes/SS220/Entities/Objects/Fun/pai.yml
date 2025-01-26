@@ -38,6 +38,8 @@
     wipeVerbPopup: pai-system-wiped-device
     stopSearchVerbText: pai-system-stop-searching-verb-text
     stopSearchVerbPopup: pai-system-stopped-searching
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
   - type: Examiner
   - type: IntrinsicRadioReceiver
     channels:
