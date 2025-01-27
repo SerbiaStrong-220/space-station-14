@@ -16,7 +16,9 @@
     visionRadius: 14
     highSensitiveVisionRadius: 0
     state: half
-  - type: Insulated
+- type: RandomInsulation
+    list:
+      - 0.5
     #SS220 RatKing tweaks and changes update end
   - type: MobMover
   - type: HTN
