@@ -23,5 +23,5 @@
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/actions_rat_king.rsi
-      state: rummage
+      state: ratKingRummage
     event: !type:RatKingRummageActionEvent
