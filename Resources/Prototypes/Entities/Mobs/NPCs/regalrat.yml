@@ -16,6 +16,7 @@
     visionRadius: 14
     highSensitiveVisionRadius: 0
     state: half
+  - type: Insulated
     #SS220 RatKing tweaks and changes update end
   - type: MobMover
   - type: HTN
@@ -183,6 +184,7 @@
   categories: [ HideSpawnMenu ] #Must be configured to a King or the AI breaks.
   components:
   - type: CombatMode
+  - type: Insulated
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.5
     baseSprintSpeed : 3.5
