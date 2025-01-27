@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Station.Components;
-using Content.Server.SS220.StationEvents.Events;
 using Content.Server.SS220.StationEvents.Components;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
@@ -14,7 +13,6 @@ namespace Content.Server.SS220.StationEvents.Events;
 
 public sealed class RegalRatRule : StationEventSystem<RegalRatRuleComponent>
 {
-    
     protected override void Started(EntityUid uid, RegalRatRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
@@ -51,10 +49,10 @@ public sealed class RegalRatRule : StationEventSystem<RegalRatRuleComponent>
                 kingRatValidLocations.Add(transform.Coordinates);
             }
         }
-        
+
         if (component.SpecialEntries.Count == 0 || kingRatValidLocations.Count == 0)
         {
-            return; 
+            return;
         }
 
         // guaranteed spawn
