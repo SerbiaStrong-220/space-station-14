@@ -2,16 +2,19 @@ using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.DoAfter;
 using Content.Server.Hands.Systems;
+using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
 using Content.Server.Stack;
+using Content.Server.Station.Systems;
+using Content.Server.StationRecords.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
+using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Content.Shared.Roles.Jobs;
 using Content.Shared.SS220.Contractor;
 using Content.Shared.SSDIndicator;
 using Content.Shared.Store;
@@ -37,6 +40,10 @@ public sealed class ContractorServerSystem : SharedContractorSystem
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
+    [Dependency] private readonly IServerPreferencesManager _pref = default!;
+    [Dependency] private readonly ActorSystem _actor = default!;
+    [Dependency] private readonly StationSystem _stationSystem = default!;
+    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
 
     public override void Initialize()
     {
@@ -328,6 +335,15 @@ public sealed class ContractorServerSystem : SharedContractorSystem
                     Job = jobProto,
                     AmountPositions = GeneratePositionsForTarget(),
                 });
+
+            _playerManager.TryGetSessionByEntity(player, out var session);
+
+            if (session == null)
+                return;
+
+            var pref = (HumanoidCharacterProfile) _pref.GetPreferences(session.UserId).SelectedCharacter;
+
+            RaiseNetworkEvent(new ContractorReceiveHumanoidMessage(GetNetEntity(player), pref, jobProto.ID));
         }
     }
 
@@ -419,5 +435,10 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         Dirty(ent);
         Dirty(pdaOwner.Value, contractorComponent);
+    }
+
+    public HumanoidCharacterProfile GetProfile(EntityUid uid)
+    {
+        return (HumanoidCharacterProfile) _pref.GetPreferences(_actor.GetSession(uid)!.UserId).SelectedCharacter;
     }
 }

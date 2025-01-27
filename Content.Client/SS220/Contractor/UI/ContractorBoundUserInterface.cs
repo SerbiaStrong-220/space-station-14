@@ -1,6 +1,6 @@
 using System.Numerics;
 using Content.Client.SS220.Contractor.Systems;
-using Content.Client.SS220.UserInterface;
+using Content.Client.SS220.CriminalRecords.UI;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Contractor;
 using JetBrains.Annotations;
@@ -82,6 +82,11 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_contractorPdaComponent.PdaOwner == null)
             return;
 
+        var group = new ButtonGroup(false);
+
+        _menu.ContractsButton.Group = group;
+        _menu.HubButton.Group = group;
+
         UpdateStats();
 
         UpdateContracts(_playerManager.LocalSession.AttachedEntity.Value);
@@ -147,13 +152,12 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_menu == null)
             return;
 
-        var contractContainer = new BoxContainer
+        var contractContainer = new PanelContainer()
         {
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
-            SeparationOverride = 5,
+            Margin = new Thickness(0),
             HorizontalExpand = true,
             VerticalAlignment = Control.VAlignment.Top,
-            Margin = new Thickness(5, 20, 5, 60),
+            StyleClasses = { "ContractsPanelFilled" },
         };
 
         var topContainer = new BoxContainer
@@ -164,23 +168,46 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             VerticalAlignment = Control.VAlignment.Top,
         };
 
-        var nameLabel = new RichTextLabel
+        var descriptionLabel = new RichTextLabel
         {
-            Text = EntMan.GetComponent<MetaDataComponent>(EntMan.GetEntity(key)).EntityName + " - " + _prototypeManager.Index(contract.Job).LocalizedName,
-            HorizontalExpand = false,
-            MaxWidth = 350,
-            VerticalAlignment = Control.VAlignment.Center,
+            Text = "Замечен в контакте с вульпой, что вызывает подозрения в утечке информации о передовых технологиях станции.",
+            StyleClasses = { "ContractorRichLabelStyle" },
+            Margin = new Thickness(5, 20, 170, 0),
+            SetSize = new Vector2(147, 93),
+            Modulate = Color.FromHex("#647b88"),
+            RectClipContent = true,
+            VerticalExpand = true,
         };
 
-        var targetButton = new SpriteButton
+        contractContainer.AddChild(descriptionLabel);
+
+        var nameLabel = new Label
+        {
+            Text = EntMan.GetComponent<MetaDataComponent>(EntMan.GetEntity(key)).EntityName + ", " + _prototypeManager.Index(contract.Job).LocalizedName,
+            HorizontalExpand = false,
+            MaxWidth = 350,
+            Margin = new Thickness(5, 0, 0, 0),
+            VerticalAlignment = Control.VAlignment.Center,
+            StyleClasses = { "ContractorLabelStyle" }
+        };
+
+        var targetButton = new Button
         {
             HorizontalExpand = false,
             VerticalExpand = false,
-            MinSize = new Vector2(28, 28),
-            Margin = new Thickness(10, 0, 0, 0),
+            MinSize = new Vector2(32, 22),
+            Margin = new Thickness(0, 0, 0, 0),
             VerticalAlignment = Control.VAlignment.Center,
-            StyleClasses = { "ContractorPhotoButton" },
+            StyleClasses = { "ContractorExecutionButton" },
         };
+
+        var iconTarget = new PanelContainer
+        {
+            MaxSize = new Vector2(16, 14),
+            StyleClasses = { "ContractorPhotoImage" },
+        };
+
+        targetButton.AddChild(iconTarget);
 
         targetButton.OnPressed += _ =>
         {
@@ -189,23 +216,25 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             _photoWindow = new DefaultWindow
             {
                 Title = "Фото цели",
-                MinSize = new Vector2(200, 200),
-                Resizable = false,
             };
+
+            _contractorSystem.SpriteViewsForEntity.TryGetValue(EntMan.GetEntity(key), out var newTargetEntity);
+
+            if (newTargetEntity == null)
+                return;
+
+            var iconTargetSprite = new CharacterVisualisation
+            {
+                SetSize = new Vector2(400, 300),
+                Margin = new Thickness(100, 0, 0, 0),
+            };
+
+            iconTargetSprite.RemoveChild(1);
+            iconTargetSprite.SetupCharacterSpriteView(newTargetEntity, _prototypeManager.Index(contract.Job).ID);
 
             _photoWindow.OnClose += () => _photoWindow = null;
 
-            // TODO: mb new system for entity photo view, which will work on client
-            var iconTarget = new EntityPrototypeView
-            {
-                Scale = new Vector2(1.5f, 1.5f),
-                VerticalAlignment = Control.VAlignment.Center,
-                HorizontalAlignment = Control.HAlignment.Center,
-            };
-
-            iconTarget.SetEntity(key);
-
-            _photoWindow.AddChild(iconTarget);
+            _photoWindow.AddChild(iconTargetSprite);
             _photoWindow.OpenCentered();
         };
 
@@ -215,10 +244,9 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         var positionsContainer = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
-            SeparationOverride = 10,
             HorizontalExpand = true,
             VerticalAlignment = Control.VAlignment.Center,
-            Margin = new Thickness(5, 5, 5, 5),
+            Margin = new Thickness(5, 30, 0, 0),
         };
 
         var isAlreadyAccepted = _contractorPdaComponent.CurrentContractEntity is not null &&
@@ -250,13 +278,25 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
             var positionButton = new Button
             {
-                Text = $"{amountPosition.Location} ({amountPosition.TcReward} ТК) ({amountPosition.Difficulty})",
-                HorizontalExpand = false,
+                HorizontalExpand = true,
                 VerticalExpand = false,
-                StyleClasses = { "OpenBoth" },
-                MinSize = new Vector2(200, 30),
+                HorizontalAlignment = Control.HAlignment.Right,
+                StyleClasses = { "ContractorExecutionButton" },
+                MaxWidth = 180,
+                MaxHeight = 28,
+                Margin = new Thickness(0, 5, 0, 0),
                 Disabled = isAlreadyAccepted,
             };
+
+            var positionLabel = new Label
+            {
+                Text = $"{amountPosition.Location} ({amountPosition.TcReward} ТК)",
+                HorizontalAlignment = Control.HAlignment.Center,
+                VerticalAlignment = Control.VAlignment.Center,
+                StyleClasses = { "ContractorLabelStyle" },
+            };
+
+            positionButton.AddChild(positionLabel);
 
             positionButton.OnPressed += _ =>
             {
@@ -278,16 +318,9 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             positionsContainer.AddChild(positionButton);
         }
 
-        var lowerDivider = new PanelContainer
-        {
-            StyleClasses = { "HighDivider" },
-        };
-
         contractContainer.AddChild(topContainer);
         contractContainer.AddChild(positionsContainer);
 
-
-        _menu.ContractsListPanel.AddChild(lowerDivider);
         _menu.ContractsListPanel.AddChild(contractContainer);
     }
 
@@ -396,6 +429,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_menu == null)
             return;
 
+        _menu.ContractorTopLabel.Text = "Доступные контракты";
         _menu.HubPanel.Visible = false;
         _menu.ContractsListPanel.Visible = true;
 
@@ -406,6 +440,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_menu == null)
             return;
 
+        _menu.ContractorTopLabel.Text = "Доступные товары";
         _menu.HubPanel.Visible = true;
         _menu.ContractsListPanel.Visible = false;
     }

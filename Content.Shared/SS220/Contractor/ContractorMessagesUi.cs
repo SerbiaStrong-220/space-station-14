@@ -1,4 +1,5 @@
 using Content.Shared.FixedPoint;
+using Content.Shared.Preferences;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Contractor;
@@ -88,6 +89,21 @@ public sealed class ContractorWithdrawTcMessage : BoundUserInterfaceMessage
     public ContractorWithdrawTcMessage(FixedPoint2 amount)
     {
         Amount = amount;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class ContractorReceiveHumanoidMessage : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Target;
+    public readonly HumanoidCharacterProfile Profile;
+    public string JobPrototype;
+
+    public ContractorReceiveHumanoidMessage(NetEntity target, HumanoidCharacterProfile profile, string jobPrototype)
+    {
+        Target = target;
+        Profile = profile;
+        JobPrototype = jobPrototype;
     }
 }
 

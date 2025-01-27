@@ -1,31 +1,45 @@
 <controls:ContractorPDAMenu xmlns="https://spacestation14.io"
                     xmlns:controls="clr-namespace:Content.Client.SS220.Contractor.UI"
-                    xmlns:ui220="clr-namespace:Content.Client.SS220.UserInterface"
-                    MinSize="500 606"
                     Resizable="False"
-                    SetSize="500 606"
+                    SetSize="472 696"
                     MouseFilter="Stop">
 
-    <Control Name="MainContainer">
-        <PanelContainer StyleClasses="ContractorPanel">
-            <PanelContainer Name="BackgroundPanel" StyleClasses="ContractorFontPanel">
-                <Label Text="Итог" Margin="55 55 0 0" VerticalAlignment="Top"/>
-                <Label Name="ReputationCountLabel" Access="Public" Text="Текущая репутация: " Margin="230 55 0 0" VerticalAlignment="Top"/>
+    <PanelContainer Name="PanelContainer" Access="Public" Margin="54 75 53 75" StyleClasses="ContractorBackground"/>
 
-                <Label Name="TcAmountLabel" Text="Имеется ТК:" Access="Public" Margin="55 108 294 0" VerticalAlignment="Top"/>
-                <Label Name="ContractsFinishedAmountLabel" Text="Выполнено контрактов: " Access="Public" Margin="230 108 0 0" VerticalAlignment="Top"/>
-
-                <ui220:SpriteButton Name="WithdrawButton" Margin="0 133 255 0" VerticalAlignment="Top" SetSize="138 35" StyleClasses="ContractorWithdrawButton"/>
-                <ui220:SpriteButton Name="ContractsButton" Margin="0 218 269 0" VerticalAlignment="Top" MaxSize="138 35" StyleClasses="ContractorContractsButton"/>
-                <ui220:SpriteButton Name="HubButton" Margin="20 218 0 0" VerticalAlignment="Top" MaxSize="138 35" StyleClasses="ContractorHubButton"/>
-                <ui220:SpriteButton Name="ExecutionButton" Access="Public" Disabled="True" Margin="321 184 0 0" VerticalAlignment="Top" MaxSize="138 40" StyleClasses="ContractorExecutionButton"/>
-                <ScrollContainer Name="ContractsList" Margin="51 260 50 51" VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
-                    <BoxContainer Name="ContractsListPanel" Orientation="Vertical" Access="Public" SeparationOverride="5"  HorizontalExpand="True" VerticalExpand="False"/>
-                    <BoxContainer Name="HubPanel" Visible="False" Orientation="Vertical" Access="Public" SeparationOverride="5"  HorizontalExpand="True" VerticalExpand="False"/>
-                </ScrollContainer>
-            </PanelContainer>
+    <PanelContainer StyleClasses="ContractorPanel">
+        <PanelContainer Margin="70 204 70 114" SetSize="338 380" StyleClasses="ContractorContractsLinePanel" Visible="True">
+            <Label Name="ContractorTopLabel" Access="Public" Text="Доступные контракты" Margin="13 0 0 333" StyleClasses="ContractorLabelStyle"/>
+            <Button Name="ExecutionButton" Access="Public" Disabled="True" Margin="213 0 0 333" SetSize="100 31" StyleClasses="ContractorExecutionButton">
+                <Label Text="Вызвать" VerticalAlignment="Center" Margin="30 0 0 30" StyleClasses="ContractorLabelStyle"/>
+                <PanelContainer SetSize="16 12" VerticalAlignment="Center" Margin="0 0 70 0" StyleClasses="ContractorExecutionImage"/>
+            </Button>
+            <ScrollContainer Name="ContractsList" Margin="0 40 0 0" VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
+                <BoxContainer Name="ContractsListPanel" Orientation="Vertical" Margin="5 0 3 0" VerticalAlignment="Top" Access="Public" SeparationOverride="10">
+                </BoxContainer>
+                <BoxContainer Name="HubPanel" Margin="0 0 0 50" Visible="False" Orientation="Vertical" Access="Public" SeparationOverride="5"  HorizontalExpand="True" VerticalExpand="True"/>
+            </ScrollContainer>
         </PanelContainer>
+        <Button Name="ContractsButton" Access="Public" Margin="102 185 332 494" SetSize="100 20" VerticalAlignment="Top" StyleClasses="ContractorButtonStyle" ToggleMode="True">
+            <PanelContainer SetSize="14 10" Margin="0 3 65 0" VerticalAlignment="Center" StyleClasses="ContractorContractsImage"/>
+            <Label Text="Контракты" Margin="25 0 0 0" VerticalAlignment="Center" StyleClasses="ContractorLabelStyle"/>
+        </Button>
+        <Button Name="HubButton" Access="Public" Margin="224 185 260 494" SetSize="100 20" VerticalAlignment="Top" StyleClasses="ContractorButtonStyle" ToggleMode="True">
+            <PanelContainer SetSize="14 10" Margin="0 3 60 0" VerticalAlignment="Center" StyleClasses="ContractorHubImage"/>
+            <Label Text="Магазин" Margin="30 0 0 0" VerticalAlignment="Center" StyleClasses="ContractorLabelStyle"/>
+        </Button>
 
-    </Control >
+        <Label Text="Итог" VerticalAlignment="Top" Margin="74 94 0 0" StyleClasses="ContractorLabelStyle"/>
+        <PanelContainer SetSize="328 3" Margin="3 0 0 463" StyleClasses="ContractorDividerPanel"/>
+
+        <Label Name="TcAmountLabel" Text="Имеется ТК:" Access="Public" Margin="74 116 294 0" VerticalAlignment="Top" StyleClasses="ContractorLabelStyle"/>
+
+        <Label Name="ContractsFinishedAmountLabel" Text="Выполнено контрактов: " Access="Public" Margin="260 116 0 0" VerticalAlignment="Top" StyleClasses="ContractorLabelStyle"/>
+        <Label Name="ReputationCountLabel" Access="Public" Text="Текущая репутация: " Margin="271 140 0 0" VerticalAlignment="Top" StyleClasses="ContractorLabelStyle"/>
+
+        <Button Name="WithdrawButton" Margin="93 136 332 494" VerticalAlignment="Top" SetSize="85 31" StyleClasses="ContractorExecutionButton">
+            <Label Text="Вывести ТК" VerticalAlignment="Center" HorizontalAlignment="Center" StyleClasses="ContractorLabelStyle"/>
+        </Button>
+
+    </PanelContainer>
 
 </controls:ContractorPDAMenu>
