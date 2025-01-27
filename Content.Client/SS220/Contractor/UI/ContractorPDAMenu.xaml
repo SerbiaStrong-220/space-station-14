@@ -14,8 +14,7 @@
                 <PanelContainer SetSize="16 12" VerticalAlignment="Center" Margin="0 0 70 0" StyleClasses="ContractorExecutionImage"/>
             </Button>
             <ScrollContainer Name="ContractsList" Margin="0 40 0 0" VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
-                <BoxContainer Name="ContractsListPanel" Orientation="Vertical" Margin="5 0 3 0" VerticalAlignment="Top" Access="Public" SeparationOverride="10">
-                </BoxContainer>
+                <BoxContainer Name="ContractsListPanel" Orientation="Vertical" Margin="5 0 3 0" VerticalAlignment="Top" Access="Public" SeparationOverride="10"/>
                 <BoxContainer Name="HubPanel" Margin="0 0 0 50" Visible="False" Orientation="Vertical" Access="Public" SeparationOverride="5"  HorizontalExpand="True" VerticalExpand="True"/>
             </ScrollContainer>
         </PanelContainer>

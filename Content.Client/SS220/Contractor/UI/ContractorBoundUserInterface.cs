@@ -170,10 +170,11 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         var descriptionLabel = new RichTextLabel
         {
-            Text = "Замечен в контакте с вульпой, что вызывает подозрения в утечке информации о передовых технологиях станции.",
+            Text = "Замечен в контакте с вульпой, что вызывает подозрения в утечке информации.",
             StyleClasses = { "ContractorRichLabelStyle" },
-            Margin = new Thickness(5, 20, 170, 0),
-            SetSize = new Vector2(147, 93),
+            HorizontalAlignment = Control.HAlignment.Left,
+            Margin = new Thickness(2, 20, 170, 0),
+            SetSize = new Vector2(137, 93),
             Modulate = Color.FromHex("#647b88"),
             RectClipContent = true,
             VerticalExpand = true,
@@ -278,12 +279,11 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
             var positionButton = new Button
             {
-                HorizontalExpand = true,
+                HorizontalExpand = false,
                 VerticalExpand = false,
                 HorizontalAlignment = Control.HAlignment.Right,
                 StyleClasses = { "ContractorExecutionButton" },
-                MaxWidth = 180,
-                MaxHeight = 28,
+                SetSize = new Vector2(200, 30),
                 Margin = new Thickness(0, 5, 0, 0),
                 Disabled = isAlreadyAccepted,
             };
