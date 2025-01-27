@@ -16,7 +16,7 @@
     visionRadius: 14
     highSensitiveVisionRadius: 0
     state: half
-- type: RandomInsulation
+  - type: RandomInsulated
     list:
       - 0.5
     #SS220 RatKing tweaks and changes update end
