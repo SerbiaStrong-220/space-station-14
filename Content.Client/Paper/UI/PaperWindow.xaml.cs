@@ -11,7 +11,6 @@ using Robust.Shared.Utility;
 using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
-using Content.Client.SS220.Paper.UI;
 
 namespace Content.Client.Paper.UI
 {
@@ -50,7 +49,6 @@ namespace Content.Client.Paper.UI
         };
 
         public event Action<string>? OnSaved;
-        public event Action? OnDocumentHelperButtonPressed; // SS220 Document helper
 
         private int _MaxInputLength = -1;
         public int MaxInputLength
@@ -103,8 +101,6 @@ namespace Content.Client.Paper.UI
 
             SaveButton.Text = Loc.GetString("paper-ui-save-button",
                 ("keybind", _inputManager.GetKeyFunctionButtonString(EngineKeyFunctions.MultilineTextSubmit)));
-
-            //DocumentHelperButton.OnPressed += _ => OnDocumentHelperButtonPressed?.Invoke(); // SS220 Document helper
         }
 
         /// <summary>

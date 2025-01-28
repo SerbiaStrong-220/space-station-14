@@ -47,8 +47,6 @@ public sealed partial class DocumentHelperWindow : Control
 
         _documentHelper = _entityManager.System<DocumentHelperSystem>();
 
-        CheckNeedServerInfo(options);
-
         var optionValuesPair = _documentHelper.GetOptionValuesPair(options, _player.LocalSession?.AttachedEntity);
         GenerateOptions(optionValuesPair);
     }
@@ -101,11 +99,6 @@ public sealed partial class DocumentHelperWindow : Control
 
             _optionContainer[option] = container;
         }
-    }
-
-    public bool CheckNeedServerInfo(DocumentHelperOptions options)
-    {
-        return (options & DocumentHelperOptions.Station) != 0;
     }
 
     public void UpdateState(DocumentHelperOptionsMessage state)

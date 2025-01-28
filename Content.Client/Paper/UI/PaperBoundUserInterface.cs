@@ -4,7 +4,6 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 using Content.Shared.Paper;
 using static Content.Shared.Paper.PaperComponent;
-using Content.Client.SS220.Paper.UI;
 using Content.Shared.SS220.Paper;
 
 namespace Content.Client.Paper.UI;
