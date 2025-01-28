@@ -5,7 +5,7 @@ namespace Content.Client.SS220.Contractor.Systems;
 
 public sealed class ContractorClientSystem : SharedContractorSystem
 {
-    public Dictionary<EntityUid, HumanoidCharacterProfile> SpriteViewsForEntity = [];
+    public Dictionary<EntityUid, HumanoidCharacterProfile> ProfileForTarget = [];
     public override void Initialize()
     {
         base.Initialize();
@@ -14,7 +14,7 @@ public sealed class ContractorClientSystem : SharedContractorSystem
 
     private void OnReceiveHumanoid(ContractorReceiveHumanoidMessage msg)
     {
-        SpriteViewsForEntity.Add(GetEntity(msg.Target), msg.Profile);
+        ProfileForTarget.Add(GetEntity(msg.Target), msg.Profile);
     }
 
 }
