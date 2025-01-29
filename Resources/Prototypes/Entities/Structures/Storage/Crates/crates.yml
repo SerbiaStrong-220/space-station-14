@@ -711,6 +711,22 @@
       offset: "0.0,0.03125"
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Cart #SS220-Cart-system
+#SS220 CollisionTrash bgn
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.29"
+        density: 50
+        mask:
+        - CrateMask
+        layer:
+        - Opaque
+        - BulletImpassable
+        - HighImpassable
+        - MidImpassable
+#SS220 CollisionTrash end
 
 - type: entity
   parent: CrateBaseSecure
