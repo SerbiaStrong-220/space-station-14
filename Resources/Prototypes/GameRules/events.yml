@@ -415,6 +415,7 @@
     weight: 5
     duration: 60
   - type: VentCrittersRule
+    stackAmount: 3
     entries:
     - id: MobGiantSpiderAngry
       prob: 0.05
