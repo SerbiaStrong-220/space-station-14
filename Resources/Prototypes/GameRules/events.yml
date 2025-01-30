@@ -373,6 +373,7 @@
     weight: 5
     duration: 60
   - type: VentCrittersRule
+    stackAmount: 3
     entries:
     - id: MobAdultSlimesBlueAngry
       prob: 0.02

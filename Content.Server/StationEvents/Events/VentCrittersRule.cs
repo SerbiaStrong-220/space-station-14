@@ -31,10 +31,10 @@ public sealed class VentCrittersRule : StationEventSystem<VentCrittersRuleCompon
         //SS220 fauna update
         var locations = EntityQueryEnumerator<VentCritterSpawnLocationComponent, TransformComponent>();
         var validLocations = new List<EntityCoordinates>();
-        var counter = 1;
+        var counter = 1; //SS220 fauna update. Не нашел на чем считать спавны, поэтому добавил каунтер
         while (locations.MoveNext(out _, out _, out var transform))
         {
-            if (counter % component.StackAmount == 0)
+            if (counter % component.StackAmount == 0) //SS220 fauna update. Только в отношении этого if
             {
                 if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station &&
                 HasComp<BecomesStationComponent>(transform.GridUid)) //SS220 Vent critters spawn fix
@@ -44,7 +44,7 @@ public sealed class VentCrittersRule : StationEventSystem<VentCrittersRuleCompon
                     {
                         for (var i = 0; i < component.StackAmount; i++) //SS220 fauna Update for loop
                         {
-                            Spawn(spawn, transform.Coordinates); //This line from offs
+                            Spawn(spawn, transform.Coordinates);
                         }
                     }
                 }
