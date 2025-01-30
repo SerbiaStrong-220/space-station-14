@@ -219,9 +219,9 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
                 Title = "Фото цели",
             };
 
-            _contractorSystem.ProfileForTarget.TryGetValue(EntMan.GetEntity(key), out var profile);
+            _contractorSystem.SpriteViewsForEntity.TryGetValue(EntMan.GetEntity(key), out var newTargetEntity);
 
-            if (profile == null)
+            if (newTargetEntity == null)
                 return;
 
             var iconTargetSprite = new CharacterVisualisation
@@ -230,7 +230,8 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
                 Margin = new Thickness(100, 0, 0, 0),
             };
 
-            iconTargetSprite.SetupCharacterSpriteView(profile, _prototypeManager.Index(contract.Job).ID);
+            iconTargetSprite.RemoveChild(1);
+            iconTargetSprite.SetupCharacterSpriteView(newTargetEntity, _prototypeManager.Index(contract.Job).ID);
 
             _photoWindow.OnClose += () => _photoWindow = null;
 
