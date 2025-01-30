@@ -23,32 +23,20 @@ public sealed class VentCrittersRule : StationEventSystem<VentCrittersRuleCompon
         {
             return;
         }
+
         var locations = EntityQueryEnumerator<VentCritterSpawnLocationComponent, TransformComponent>();
         var validLocations = new List<EntityCoordinates>();
-        //SS220 Fauna update start
-        var counter = 1;
-        var maxAmount = 1;
-        foreach (var entry in component.Entries)
-        {
-            if (maxAmount < entry.MaxAmount)
-            {
-                maxAmount = entry.MaxAmount;
-            }
-        }
-        //SS220 Fauna update end
         while (locations.MoveNext(out _, out _, out var transform))
         {
             if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station &&
-            HasComp<BecomesStationComponent>(transform.GridUid)) //SS220 Vent critters spawn fix
+                HasComp<BecomesStationComponent>(transform.GridUid)) //SS220 Vent critters spawn fix
             {
                 validLocations.Add(transform.Coordinates);
                 foreach (var spawn in EntitySpawnCollection.GetSpawns(component.Entries, RobustRandom))
                 {
-                    if (counter % maxAmount == 0)
-                        Spawn(spawn, transform.Coordinates);
+                    Spawn(spawn, transform.Coordinates);
                 }
             }
-        counter = counter + 1; //SS220 Fauna update addition
         }
 
         if (component.SpecialEntries.Count == 0 || validLocations.Count == 0)

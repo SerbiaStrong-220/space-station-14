@@ -374,16 +374,17 @@
     duration: 60
   - type: VentCrittersRule
     entries:
+  #SS220 fauna update. Each prob was 0.02 on off. Amount and max amout for SS220
     - id: MobAdultSlimesBlueAngry
-      prob: 0.02
+      prob: 0.01
       amount: 3
       maxAmount: 3
     - id: MobAdultSlimesGreenAngry
-      prob: 0.02
+      prob: 0.01
       amount: 3
       maxAmount: 3
     - id: MobAdultSlimesYellowAngry
-      prob: 0.02
+      prob: 0.01
       amount: 3
       maxAmount: 3
 
@@ -423,9 +424,11 @@
   - type: VentCrittersRule
     entries:
     - id: MobGiantSpiderAngry
-      prob: 0.05
-      amount: 3 #SS220 Fauna update
-      maxAmount: 4 #SS220 Fauna update
+  #SS220 Fauna update start. Offs prob is 0.05
+      prob: 0.025
+      amount: 3
+      maxAmount: 4
+  #SS220 Fauna update end.
 
 - type: entity
   id: SpiderClownSpawn
@@ -442,9 +445,11 @@
   - type: VentCrittersRule
     entries:
     - id: MobClownSpider
-      prob: 0.05
+  #SS220 Fauna update start. Offs prob is 0.05
+      prob: 0.04
       amount: 2
       maxAmount: 2
+  #SS220 Fauna update end
 
 - type: entity
   id: ZombieOutbreak
