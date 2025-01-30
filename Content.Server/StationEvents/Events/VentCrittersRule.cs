@@ -27,26 +27,28 @@ public sealed class VentCrittersRule : StationEventSystem<VentCrittersRuleCompon
         var validLocations = new List<EntityCoordinates>();
         //SS220 Fauna update start
         var counter = 1;
+        var maxAmount = 1;
         foreach (var entry in component.Entries)
         {
-            var amount = entry.GetAmount();
-            //SS220 Fauna update end
-            while (locations.MoveNext(out _, out _, out var transform))
+            if (maxAmount < entry.MaxAmount)
             {
-                if (counter % amount == 0) //SS220 this if cycle from Fauna update
-                {
-                    if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station &&
-                    HasComp<BecomesStationComponent>(transform.GridUid)) //SS220 Vent critters spawn fix
-                    {
-                        validLocations.Add(transform.Coordinates);
-                        foreach (var spawn in EntitySpawnCollection.GetSpawns(component.Entries, RobustRandom))
-                        {
-                            Spawn(spawn, transform.Coordinates);
-                        }
-                    }
-                }
-                counter = counter + 1; //SS220 Fauna update addition
+                maxAmount = entry.MaxAmount;
             }
+        }
+        //SS220 Fauna update end
+        while (locations.MoveNext(out _, out _, out var transform))
+        {
+            if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station &&
+            HasComp<BecomesStationComponent>(transform.GridUid)) //SS220 Vent critters spawn fix
+            {
+                validLocations.Add(transform.Coordinates);
+                foreach (var spawn in EntitySpawnCollection.GetSpawns(component.Entries, RobustRandom))
+                {
+                    if (counter % maxAmount == 0)
+                        Spawn(spawn, transform.Coordinates);
+                }
+            }
+        counter = counter + 1; //SS220 Fauna update addition
         }
 
         if (component.SpecialEntries.Count == 0 || validLocations.Count == 0)
