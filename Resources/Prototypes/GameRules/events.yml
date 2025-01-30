@@ -373,7 +373,6 @@
     weight: 5
     duration: 60
   - type: VentCrittersRule
-    stackAmount: 3 #SS220 fauna update
     entries:
     - id: MobAdultSlimesBlueAngry
       prob: 0.02
@@ -416,10 +415,11 @@
     weight: 5
     duration: 60
   - type: VentCrittersRule
-    stackAmount: 3 #SS220 fauna update
     entries:
     - id: MobGiantSpiderAngry
       prob: 0.05
+      amount: 3
+      maxAmount: 3
 
 - type: entity
   id: SpiderClownSpawn

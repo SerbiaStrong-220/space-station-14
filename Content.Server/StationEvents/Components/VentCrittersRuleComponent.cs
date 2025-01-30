@@ -14,9 +14,4 @@ public sealed partial class VentCrittersRuleComponent : Component
     /// </summary>
     [DataField("specialEntries")]
     public List<EntitySpawnEntry> SpecialEntries = new();
-
-    //SS220 fauna Update start
-    [DataField("stackAmount")]
-    public int StackAmount = 1;
-    //SS220 fauna update end
 }

@@ -23,33 +23,30 @@ public sealed class VentCrittersRule : StationEventSystem<VentCrittersRuleCompon
         {
             return;
         }
-        //SS220 fauna update
-        if (component.StackAmount == 0)
-        {
-            return;
-        }
-        //SS220 fauna update
         var locations = EntityQueryEnumerator<VentCritterSpawnLocationComponent, TransformComponent>();
         var validLocations = new List<EntityCoordinates>();
-        var counter = 1; //SS220 fauna update. Не нашел на чем считать спавны, поэтому добавил каунтер
-        while (locations.MoveNext(out _, out _, out var transform))
+        //SS220 Fauna update start
+        var counter = 1;
+        foreach (var entry in component.Entries)
         {
-            if (counter % component.StackAmount == 0) //SS220 fauna update. Только в отношении этого if
+            var amount = entry.GetAmount();
+            //SS220 Fauna update end
+            while (locations.MoveNext(out _, out _, out var transform))
             {
-                if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station &&
-                HasComp<BecomesStationComponent>(transform.GridUid)) //SS220 Vent critters spawn fix
+                if (counter % amount == 0) //SS220 this if cycle from Fauna update
                 {
-                    validLocations.Add(transform.Coordinates);
-                    foreach (var spawn in EntitySpawnCollection.GetSpawns(component.Entries, RobustRandom))
+                    if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station &&
+                    HasComp<BecomesStationComponent>(transform.GridUid)) //SS220 Vent critters spawn fix
                     {
-                        for (var i = 0; i < component.StackAmount; i++) //SS220 fauna Update for loop
+                        validLocations.Add(transform.Coordinates);
+                        foreach (var spawn in EntitySpawnCollection.GetSpawns(component.Entries, RobustRandom))
                         {
                             Spawn(spawn, transform.Coordinates);
                         }
                     }
                 }
+                counter = counter + 1; //SS220 Fauna update addition
             }
-            counter = counter + 1;
         }
 
         if (component.SpecialEntries.Count == 0 || validLocations.Count == 0)
