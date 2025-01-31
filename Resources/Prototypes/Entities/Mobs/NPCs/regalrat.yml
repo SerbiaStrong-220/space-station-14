@@ -68,6 +68,7 @@
       types:
         Slash: 12
         Piercing: 8
+        Structural: 25
   - type: Body
     prototype: Rat
     requiredLegs: 1 # TODO: More than 1 leg
