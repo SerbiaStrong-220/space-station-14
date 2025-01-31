@@ -141,3 +141,34 @@
     stateDoorClosed: armory_gun_door
   - type: AccessReader
     access: [["Armory"]]
+
+# Kitchen
+
+- type: entity
+  id: LockerFreezerDoubleBase
+  parent: LockerDoubleBase
+  name: double freezer
+  suffix: No Access
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: freezer
+    stateDoorOpen: freezer_open
+    stateDoorClosed: freezer_door
+  - type: ExplosionResistance
+    damageCoefficient: 0.50
+  - type: AntiRottingContainer
+  - type: Construction
+    graph: ClosetFreezer
+    node: done
+    containers:
+    - entity_storage
+
+- type: entity
+  id: LockerFreezerDouble
+  parent: LockerFreezerDoubleBase
+  name: double freezer
+  suffix: Kitchen, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "Kitchen" ] ]
