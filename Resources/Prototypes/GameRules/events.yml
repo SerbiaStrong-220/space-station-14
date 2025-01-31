@@ -406,7 +406,7 @@
       prob: 0.02
     - id: MobSmallPurpleSnake
       prob: 0.02
-    - id: MobCobraSpace
+    - id: MobCobraSpaceGhostRole #SS220 Fauna update
       prob: 0.02
 
 - type: entity
@@ -446,7 +446,7 @@
     entries:
     - id: MobClownSpider
   #SS220 Fauna update start. Offs prob is 0.05
-      prob: 0.04
+      prob: 0.03
       amount: 2
       maxAmount: 2
   #SS220 Fauna update end

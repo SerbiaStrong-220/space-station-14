@@ -90,3 +90,21 @@
   suffix: "Salvage Ruleset"
   components:
   - type: SalvageMobRestrictions
+
+- type: entity
+  id: MobCobraSpaceGhostRole
+  parent: MobCobraSpace
+  description: Long fangs and a glowing hood, and the alluring look begs to come closer.
+  components:
+    - type: GhostRole
+      makeSentient: true
+      name: ghost-role-information-giant-spider-name
+      description: ghost-role-information-giant-spider-description
+      rules: ghost-role-information-giant-spider-rules
+      mindRoles:
+        - MindRoleGhostRoleTeamAntagonist
+# SS220-partial-revert-raffle-Begin
+#      raffle:
+#        settings: short
+# SS220-partial-revert-reffle-End
+    - type: GhostTakeoverAvailable
