@@ -430,9 +430,9 @@
     duration: 60
   - type: VentCrittersRule
     entries:
-    - id: MobPurpleSnake
+    - id: MobPurpleSnakeGhostRole #SS220 Fauna update
       prob: 0.02
-    - id: MobSmallPurpleSnake
+    - id: MobSmallPurpleSnakeGhostRole #SS220 Fauna update
       prob: 0.02
     - id: MobCobraSpaceGhostRole #SS220 Fauna update
       prob: 0.02
