@@ -364,7 +364,7 @@
   id: MobPurpleSnake
   description: A menacing purple snake from Kepler-283c.
   components:
-  - type: HTN #SS220 Fauna update
+  - type: NoSlip #SS220 Fauna update
   - type: Sprite
     drawdepth: SmallMobs #SS220 Fauna update
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi

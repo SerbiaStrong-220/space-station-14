@@ -284,7 +284,7 @@
   parent: MobSpaceBasic
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
-    - type: HTN #SS220 Fauna update
+    - type: NoSlip #SS220 Fauna update
     - type: Sprite
       drawdepth: SmallMobs #SS220 Fauna update
       sprite: Mobs/Animals/spacecobra.rsi
