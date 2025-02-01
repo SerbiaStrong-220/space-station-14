@@ -1,0 +1,9 @@
+ent-LockerFreezerDouble = двойной холодильник
+    .desc = Двойной холодильник, больше мяса!
+    .suffix = Кухня, Закрыт
+ent-LockerFreezerDoubleBase = двойной холодильник
+    .suffix = Без доступа
+    .desc = Больше холодильник, больше мяса!
+ent-LockerFreezerMiniBase = мини холодильник
+    .desc = Маленький холодильник, без замка?
+    .suffix = Кухня
