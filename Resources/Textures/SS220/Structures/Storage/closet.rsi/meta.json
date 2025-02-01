@@ -59,9 +59,6 @@
       "name": "freezer"
     },
     {
-      "name": "minifreezer"
-    },
-    {
       "name": "green_steel_locker"
     },
     {
@@ -138,9 +135,6 @@
     },
     {
       "name": "freezer_open"
-    },
-    {
-      "name": "minifreezer_open"
     },
     {
       "name": "generic"
@@ -330,9 +324,6 @@
     },
     {
       "name": "freezer_door"
-    },
-    {
-      "name": "minifreezer_door"
     },
     {
       "name": "generic_army_door"

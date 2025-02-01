@@ -132,23 +132,3 @@
     stateDoorClosed: magistrate_door
   - type: AccessReader
     access: [ [ "Magistrate" ] ]
-
-- type: entity
-  id: LockerFreezerMiniBase
-  parent: ClosetMaintenance
-  name: mini freezer
-  suffix: Kitchen
-  components:
-  - type: Appearance
-  - type: EntityStorageVisuals
-    stateBaseClosed: minifreezer
-    stateDoorOpen: minifreezer_open
-    stateDoorClosed: minifreezer_door
-  - type: ExplosionResistance
-    damageCoefficient: 0.50
-  - type: AntiRottingContainer
-  - type: Construction
-    graph: ClosetFreezer
-    node: done
-    containers:
-    - entity_storage
