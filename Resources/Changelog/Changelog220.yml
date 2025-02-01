@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: MiraHell
-  changes:
-  - message: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0435 \u0443\u0440\u043E\
-      \u043D\u0430 \u043F\u0435\u0440\u0435\u0431\u0438\u0432\u0430\u0435\u0442 \u0441\
-      \u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0432 \u0440\u0430\u0446\u0438\
-      \u044E"
-    type: Tweak
-  id: 285
-  time: '2024-07-16T00:31:16.0000000+00:00'
-  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1374
 - author: Gnomeev
   changes:
   - message: "\u0422\u0435\u043F\u0435\u0440\u044C \u0431\u043E\u043B\u0443 \u043C\
@@ -6141,3 +6131,11 @@
   id: 786
   time: '2025-01-29T17:28:40.0000000+00:00'
   url: https://github.com/SerbiaStrong-220/space-station-14/pull/2516
+- author: stalengd
+  changes:
+  - message: "\u041E\u043F\u0442\u0438\u043C\u0438\u0437\u0438\u0440\u043E\u0432\u0430\
+      \u043D TTS!"
+    type: Fix
+  id: 787
+  time: '2025-02-01T02:13:17.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/2519
