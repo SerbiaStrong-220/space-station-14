@@ -24,6 +24,9 @@
     - id: SpiderClownSpawn
     - id: SpiderSpawn
     - id: VentClog
+    #SS220 Fauna update start
+    - id: SpaceCobraSpawn
+    #SS220 Fauna update end
 
 - type: entityTable
   id: BasicAntagEventsTable
@@ -431,11 +434,35 @@
   - type: VentCrittersRule
     entries:
     - id: MobPurpleSnakeGhostRole #SS220 Fauna update
-      prob: 0.02
+      prob: 0.03
     - id: MobSmallPurpleSnakeGhostRole #SS220 Fauna update
-      prob: 0.02
-    - id: MobCobraSpaceGhostRole #SS220 Fauna update
-      prob: 0.02
+      prob: 0.03
+    #SS220 Fauna update. Making this event just snakes.
+    #- id: MobCobraSpace
+      #prob: 0.02
+
+#SS220 Fauna update start
+- type: entity
+  id: SpaceCobraSpawn
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAudio:
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
+    earliestStart: 20
+    minimumPlayers: 15
+    weight: 5
+    duration: 60
+  - type: VentCrittersRule
+    entries:
+    - id: MobCobraSpace
+      prob: 0.06
+#SS220 Fauna update end
 
 - type: entity
   id: SpiderSpawn
