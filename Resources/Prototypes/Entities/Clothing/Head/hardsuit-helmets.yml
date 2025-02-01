@@ -165,11 +165,11 @@
   description: Armored hardsuit helmet for security needs.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/security.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/security.rsi #ss220-security-hardsuit-resprite
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/security.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/security.rsi #ss220-security-hardsuit-resprite
   - type: PointLight
-    color: "#ffeead"
+    color: "#facb3e" #ss220-security-hardsuit-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
@@ -188,11 +188,11 @@
   components:
   - type: BreathMask #ss-220 fix
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/security-red.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/security-red.rsi #ss220-security-hardsuit-resprite
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/security-red.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/security-red.rsi #ss220-security-hardsuit-resprite
   - type: PointLight
-    color: "#ffeead"
+    color: "#facb3e" #ss220-security-hardsuit-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 10000
@@ -210,11 +210,11 @@
   description: The lightweight helmet of the brigmedic hardsuit. Protects against viruses, and clowns.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/brigmedic.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/brigmedic.rsi #ss220-security-hardsuit-resprite
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/brigmedic.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/brigmedic.rsi #ss220-security-hardsuit-resprite
   - type: PointLight
-    color: "#00FFFF"
+    color: "#39acc6" #ss220-security-hardsuit-resprite
   - type: Armor
     modifiers:
       coefficients:
@@ -235,11 +235,11 @@
   description: A modified riot helmet. Oddly comfortable.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/security-warden.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/security-warden.rsi #ss220-security-hardsuit-resprite
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/security-warden.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/security-warden.rsi #ss220-security-hardsuit-resprite
   - type: PointLight
-    color: "#ffeead"
+    color: "#facb3e" #ss220-security-hardsuit-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000

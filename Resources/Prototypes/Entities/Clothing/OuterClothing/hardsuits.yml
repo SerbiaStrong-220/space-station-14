@@ -224,9 +224,9 @@
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/security.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security.rsi #ss220-security-hardsuit-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/security.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security.rsi #ss220-security-hardsuit-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -255,9 +255,9 @@
   description: Special hardsuit of the guardian angel of the brig. It is the medical version of the security hardsuit.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/brigmedic.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/brigmedic.rsi #ss220-security-hardsuit-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/brigmedic.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/brigmedic.rsi #ss220-security-hardsuit-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
@@ -287,9 +287,9 @@
   description: A specialized riot suit geared to combat low pressure environments.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/security-warden.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security-warden.rsi #ss220-security-hardsuit-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/security-warden.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security-warden.rsi #ss220-security-hardsuit-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -468,9 +468,9 @@
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/security-red.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security-red.rsi #ss220-security-hardsuit-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/security-red.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/security-red.rsi #ss220-security-hardsuit-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 1000
