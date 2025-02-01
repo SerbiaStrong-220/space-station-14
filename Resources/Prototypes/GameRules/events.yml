@@ -448,12 +448,10 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
-  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
       path: /Audio/SS220/Announcements/lifesigns.ogg
       params:
         volume: -4
-  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
