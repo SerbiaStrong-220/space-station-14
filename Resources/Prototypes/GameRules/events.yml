@@ -119,6 +119,12 @@
   parent: BaseGameRule
   components:
   - type: StationEvent
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     weight: 7
     duration: 1
     minimumPlayers: 15
@@ -129,6 +135,13 @@
   parent: BaseGameRule
   components:
   - type: StationEvent
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAnnouncementColor: "#18abf5"
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     startAnnouncement: station-event-bureaucratic-error-announcement
     minimumPlayers: 25
     weight: 3
@@ -143,6 +156,13 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-clerical-error-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAnnouncementColor: "#18abf5"
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     minimumPlayers: 15
     weight: 5
     duration: 1
@@ -366,8 +386,12 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
@@ -387,8 +411,12 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
@@ -408,8 +436,12 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
@@ -425,8 +457,12 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 20
     weight: 1.5
@@ -561,6 +597,14 @@
   id: IonStorm
   components:
   - type: StationEvent
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAnnouncementColor: "#18abf5"
+    startAnnouncement: station-event-ion-storm-start-announcement
+    startAudio:
+      path: /Audio/SS220/Announcements/i-storm1.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     weight: 8
     reoccurrenceDelay: 20
     duration: 1
@@ -582,9 +626,12 @@
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
-    weight: 5
+      path: /Audio/SS220/Announcements/greytide.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end    weight: 5
     minimumPlayers: 25
     reoccurrenceDelay: 20
   - type: GreytideVirusRule
