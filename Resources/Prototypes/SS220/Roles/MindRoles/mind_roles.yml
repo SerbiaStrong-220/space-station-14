@@ -34,4 +34,6 @@
   components:
   - type: MindRole
     antagPrototype: CultistOfYoggSothoth
+    exclusiveAntag: true
+    roleType: TeamAntagonist
   - type: CultYoggRole
