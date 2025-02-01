@@ -279,6 +279,11 @@
   suffix: Filled
   parent: CrateTrashCart
   components:
+    #SS220 RatKing tweaks and changes start here
+    - type: RatKingRummageable
+      rummageLoot: RatKingLootTrashCans
+    - type: RegalRatSpawnLocation
+    #SS220 Ratking tweaks and changes end here
     - type: StorageFill
       contents:
           # Creatures

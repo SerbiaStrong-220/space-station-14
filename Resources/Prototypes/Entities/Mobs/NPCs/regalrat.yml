@@ -9,6 +9,17 @@
     baseWalkSpeed : 3.00
     baseSprintSpeed : 5.00
   - type: InputMover
+    #SS220 RatKing tweaks and changes update start
+  - type: Puller
+    needsHands: false
+  - type: KeenHearing
+    visionRadius: 14
+    highSensitiveVisionRadius: 0
+    state: half
+  - type: RandomInsulation
+    list:
+      - 0.5
+    #SS220 RatKing tweaks and changes update end
   - type: MobMover
   - type: HTN
     rootTask:
@@ -57,6 +68,7 @@
       types:
         Slash: 12
         Piercing: 8
+        Structural: 25
   - type: Body
     prototype: Rat
     requiredLegs: 1 # TODO: More than 1 leg
@@ -208,6 +220,7 @@
       shader: unshaded
   - type: Bloodstream
     bloodMaxVolume: 40 #SS220 RatBlood fix
+  - type: Insulated #SS220 RatKing Tweaks and changes 
 
   - type: SpriteMovement
     movementLayers:
@@ -305,9 +318,16 @@
 - type: weightedRandomEntity
   id: RatKingLoot
   weights:
-    RandomSpawner100: 66 #garbage
-    FoodCheese: 28 #food
-    IngotGold1: 5 #loot
+  # SS220 RatKing tweaks and changes rummage weight changes start
+    RandomSpawner100: 40
+    FoodCheeseSlice: 40
+    FoodCheese: 15
+    FoodCakeCheese: 5
+  # Official weights
+    #RandomSpawner100: 66 #garbage
+    #FoodCheese: 28 #food
+    #IngotGold1: 5 #loot
+  # SS220 RatKing tweaks and changes rummage weight changes end
 
 - type: entity
   id: ActionRatKingRaiseArmy
@@ -317,7 +337,7 @@
   - type: InstantAction
     useDelay: 4
     icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220 resprited
       state: ratKingArmy
     event: !type:RatKingRaiseArmyActionEvent
 
@@ -329,7 +349,7 @@
   - type: InstantAction
     useDelay: 6
     icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220 resprited
       state: ratKingDomain
     event: !type:RatKingDomainActionEvent
 

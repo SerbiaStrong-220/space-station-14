@@ -711,6 +711,11 @@
       offset: "0.0,0.03125"
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Cart #SS220-Cart-system
+#SS220 RatKing tweaks and changes start 
+  - type: RatKingRummageable
+    rummageLoot: RatKingLootTrashCans
+  - type: RegalRatSpawnLocation
+#SS220 RatKing tweaks and changes here
 #SS220 CollisionTrash bgn
   - type: Fixtures
     fixtures:
