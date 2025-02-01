@@ -1449,6 +1449,15 @@
         path: /Audio/Weapons/eblademiss.ogg
         params:
           variation: 0.125
+    #SS220 craftable desword start
+    - type: Tag
+      tags: 
+      - ToyEnergySword
+    - type: Construction
+      deconstructionTarget: null
+      graph: DoubleToySwordGraph
+      node: esword
+    #SS220 craftable desword end
 
 - type: entity
   parent: BasePlushie

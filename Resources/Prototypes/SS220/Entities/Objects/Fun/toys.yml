@@ -73,6 +73,12 @@
         right:
           - state: inhand-right-blade
             shader: unshaded
+    #SS220 craftable desword start
+    - type: Construction
+      deconstructionTarget: null
+      graph: DoubleToySwordGraph
+      node: desword
+    #SS220 craftable desword end
 
 #Svarshik's toy guns!
 
