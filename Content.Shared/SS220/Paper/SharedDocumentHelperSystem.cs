@@ -100,14 +100,14 @@ public abstract partial class SharedDocumentHelperSystem : EntitySystem
         var name = string.Empty;
         // Id
         if (TryComp(idUid, out IdCardComponent? id) &&
-            id.LocalizedJobTitle != null)
+            id.FullName != null)
         {
             name = id.FullName ?? string.Empty;
         }
         // Pda
         else if (TryComp<PdaComponent>(idUid, out var pda) &&
             TryComp(pda.ContainedId, out id) &&
-            id.LocalizedJobTitle != null)
+            id.FullName != null)
         {
             name = id.FullName ?? string.Empty;
         }

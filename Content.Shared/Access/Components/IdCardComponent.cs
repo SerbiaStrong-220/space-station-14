@@ -26,7 +26,6 @@ public sealed partial class IdCardComponent : Component
     private string? _jobTitle;
 
     [Access(typeof(SharedIdCardSystem), typeof(SharedPdaSystem), typeof(SharedAgentIdCardSystem), Other = AccessPermissions.ReadWriteExecute)]
-    [ViewVariables, AutoNetworkedField] // SS220 Fix loc job title
     public string? LocalizedJobTitle { set => _jobTitle = value; get => _jobTitle ?? Loc.GetString(JobTitle ?? string.Empty); }
 
     /// <summary>
