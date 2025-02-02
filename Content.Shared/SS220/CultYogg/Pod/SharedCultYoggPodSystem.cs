@@ -77,7 +77,7 @@ public abstract class SharedCultYoggPodSystem : EntitySystem
             AlternativeVerb verb = new()
             {
                 Act = () => TryInsert(target, target, ent),
-                Text = Loc.GetString("cult-yogg-ensert-pod"),
+                Text = Loc.GetString("cult-yogg-insert-pod"),
                 Priority = 1
             };
 
@@ -85,22 +85,22 @@ public abstract class SharedCultYoggPodSystem : EntitySystem
         }
     }
 
-    public bool TryInsert(EntityUid user, EntityUid entToEnsert, Entity<CultYoggPodComponent> podEnt)
+    public bool TryInsert(EntityUid user, EntityUid entToInsert, Entity<CultYoggPodComponent> podEnt)
     {
         if (podEnt.Comp.MobContainer.ContainedEntity != null)
             return false;
 
-        if (!HasComp<MobStateComponent>(entToEnsert) || !HasComp<DamageableComponent>(entToEnsert))
+        if (!HasComp<MobStateComponent>(entToInsert) || !HasComp<DamageableComponent>(entToInsert))
             return false;
 
-        if (_entityWhitelist.IsWhitelistFail(podEnt.Comp.CultistsWhitelist, entToEnsert))
+        if (_entityWhitelist.IsWhitelistFail(podEnt.Comp.CultistsWhitelist, entToInsert))
         {
-            _popup.PopupClient(Loc.GetString("cult-yogg-heal-only-cultists"), entToEnsert, user);
+            _popup.PopupClient(Loc.GetString("cult-yogg-heal-only-cultists"), entToInsert, user);
 
             return false;
         }
 
-        var insertDoAfter = new DoAfterArgs(EntityManager, user, podEnt.Comp.InsertDelay, new AfterPodInserted(), podEnt, entToEnsert, podEnt)
+        var insertDoAfter = new DoAfterArgs(EntityManager, user, podEnt.Comp.InsertDelay, new AfterPodInserted(), podEnt, entToInsert, podEnt)
         {
             Broadcast = false,
             BreakOnDamage = true,
