@@ -157,12 +157,12 @@
     sprite: SS220/Clothing/Head/Hoods/Coat/hoodsyndiearmored.rsi
 # SS220 wintercoats hoods end
 
+# Капюшон для плаща редакторов вики
 - type: entity
   parent: ClothingHeadHatHoodWinterBase
   id: ClothingHeadHatWikiCloak
   name: «тень редактора»
   categories: [ HideSpawnMenu ]
-  suffix: Chemistry
   description: Плащ, сотканный из теней, придаёт своему обладателю загадочность и мистические способности изменения информации о мире.
   components:
   - type: Sprite
