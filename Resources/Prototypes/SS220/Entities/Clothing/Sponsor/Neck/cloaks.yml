@@ -114,7 +114,7 @@
   id: ClothingSponsorNeckWikiEditors
   name: «тень редактора»
   description: Плащ, сотканный из теней, придаёт своему обладателю загадочность и мистические способности изменения информации о мире
-  suffix: Sponsor Neck
+  suffix: Sponsor Neck, Wikired
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/wikicloak.rsi
