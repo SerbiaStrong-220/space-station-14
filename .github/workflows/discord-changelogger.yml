@@ -1,4 +1,4 @@
-name: "Discord changeloger"
+name: "Discord changelogger"
 
 on:
   pull_request_target:
