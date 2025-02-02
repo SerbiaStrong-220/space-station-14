@@ -401,7 +401,7 @@
     duration: 60
   - type: VentCrittersRule
     entries:
-  #SS220 fauna update. Each prob was 0.02 on off. Amount and max amout for SS220
+  #SS220 fauna update start. Each prob was 0.02 on wizden. Amount and max amout for SS220
     - id: MobAdultSlimesBlueAngry
       prob: 0.01
       amount: 3
@@ -414,6 +414,7 @@
       prob: 0.01
       amount: 3
       maxAmount: 3
+  #SS220 Fauna update end
 
 - type: entity
   id: SnakeSpawn
