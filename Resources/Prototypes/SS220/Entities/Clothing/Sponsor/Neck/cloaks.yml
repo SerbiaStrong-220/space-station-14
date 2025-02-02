@@ -108,7 +108,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/moder.rsi
 
-  # Для викиредов
+ # Для викиредов
 - type: entity
   parent: ClothingSponsorNeckBase
   id: ClothingSponsorNeckWikiEditors
