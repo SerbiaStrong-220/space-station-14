@@ -187,6 +187,24 @@
       offset: 0, 1
 
 - type: entity
+  id: ActionSpawnSpiderWallWebTarantula
+  name: create a wall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 24
+    range: 1.5
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: wall_spawn
+    event: !type:SpiderTargetSpawnEvent
+      prototypes:
+      - id: WallWebSpawn
+        amount: 1
+      offset: 0, 1
+
+- type: entity
   parent: ActionSpawnSpiderWallWeb
   id: ActionSpawnSpiderWallWebDurable
   name: create a durable wall

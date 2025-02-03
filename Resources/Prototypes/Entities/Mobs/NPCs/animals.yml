@@ -2399,7 +2399,7 @@
     #SS220 Fauna update start
     - type: ActionGrant
       actions:
-      - ActionSpawnSpiderWallWeb
+      - ActionSpawnSpiderWallWebTarantula
     #SS220 Fauna update end
     - type: NpcFactionMember
       factions:
