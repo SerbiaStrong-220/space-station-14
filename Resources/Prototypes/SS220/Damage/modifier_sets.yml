@@ -137,3 +137,8 @@
   id: SpiderMob
   coefficients:
     Stamina: 0.4
+
+- type: damageModifierSet
+  id: SnakeMob
+  coefficients:
+    Stamina: 0.6

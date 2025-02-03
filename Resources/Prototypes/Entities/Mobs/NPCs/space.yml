@@ -284,7 +284,12 @@
   parent: MobSpaceBasic
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
-    - type: NoSlip #SS220 Fauna update
+    #SS220 Fauna update start
+    - type: NoSlip
+    - type: Damageable
+      damageContainer: Biological
+      damageModifierSet: SnakeMob
+    #SS220 Fauna update end
     - type: Sprite
       drawdepth: SmallMobs #SS220 Fauna update
       sprite: Mobs/Animals/spacecobra.rsi

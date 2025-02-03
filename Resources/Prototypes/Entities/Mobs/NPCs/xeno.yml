@@ -364,7 +364,12 @@
   id: MobPurpleSnake
   description: A menacing purple snake from Kepler-283c.
   components:
-  - type: NoSlip #SS220 Fauna update
+  #SS220 Fauna update start
+  - type: NoSlip
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SnakeMob
+  #SS220 Fauna update end
   - type: Sprite
     drawdepth: SmallMobs #SS220 Fauna update
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi
@@ -425,7 +430,7 @@
       collection: FootstepSnake
   - type: Tag
     tags:
-    - DoorBumpOpener
+    # - DoorBumpOpener #Muted tag cause of SS220 fauna update
     - FootstepSound
 
 - type: entity
