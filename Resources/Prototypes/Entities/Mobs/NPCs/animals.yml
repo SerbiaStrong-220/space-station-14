@@ -2396,6 +2396,11 @@
   id: MobSpiderAngryBase
   abstract: true
   components:
+    #SS220 Fauna update start
+    - type: ActionGrant
+      actions:
+      - ActionSpawnSpiderWallWeb
+    #SS220 Fauna update end
     - type: NpcFactionMember
       factions:
         - SpiderHostile #ss220 spider queen
