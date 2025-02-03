@@ -1,0 +1,68 @@
+- type: entity
+  name: Веспия
+  parent: 
+  - SimpleMobBase
+  - FlyingMobBase
+  - MobCombat
+  id: MobGiantFly
+  components:
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 3
+    baseSprintSpeed : 5
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: giant_fly
+      sprite: SS220/Mobs/Animals/giant_fly.rsi
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: giant_fly
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: CombatMode
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      90: Critical
+      180: Dead
+  - type: MeleeWeapon
+    altDisarm: false
+    soundHit:
+        path: /Audio/Weapons/Xeno/alien_claw_flesh1.ogg
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Poison: 6
+        Piercing: 12
+    solution: melee
+  - type: ReplacementAccent
+    accent: xeno
+  - type: InteractionPopup
+    successChance: 0.5
+    interactSuccessString: petting-success-tarantula
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/snake_hiss.ogg
+  - type: NoSlip
+  - type: Bloodstream
+    bloodMaxVolume: 150
+    bloodReagent: Slime
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: Prying # Open door from xeno.yml.
+    pryPowered: true
+    force: true
+    speedModifier: 3
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatXeno
+      amount: 3
