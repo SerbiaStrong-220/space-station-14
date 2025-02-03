@@ -5,10 +5,14 @@
   - FlyingMobBase
   - MobCombat
   id: MobGiantFly
+  description: Это Касадор. Он будет ебать.
   components:
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 5
+  - type: NpcFactionMember
+      factions:
+      - SimpleHostile
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -51,7 +55,7 @@
       path: /Audio/Animals/snake_hiss.ogg
   - type: NoSlip
   - type: Bloodstream
-    bloodMaxVolume: 150
+    bloodMaxVolume: 100
     bloodReagent: Slime
   - type: Tag
     tags:
@@ -66,3 +70,20 @@
     spawned:
     - id: FoodMeatXeno
       amount: 3
+
+- type: entity
+  parent: MobGiantFly
+  id: MobGiantFlyGhostRole
+  components:
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: GhostRole
+    makeSentient: true
+    name: ghost-role-information-giant-spider-name
+    description: ghost-role-information-giant-spider-description
+    rules: ghost-role-information-giant-spider-rules
+    mindRoles:
+      - MindRoleGhostRoleTeamAntagonist
