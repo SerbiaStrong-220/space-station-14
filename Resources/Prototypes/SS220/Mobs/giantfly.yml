@@ -60,7 +60,7 @@
     interactFailureString: petting-failure-generic
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
-      path: /Audio/Animals/snake_hiss.ogg
+      path: /Audio/Animals/lizard_happy.ogg
   - type: NoSlip
   - type: Bloodstream
     bloodMaxVolume: 100
