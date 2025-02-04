@@ -2356,6 +2356,7 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderMob
+  - type: Magboots
   #SS220 Fauna update end
     bloodMaxVolume: 150
     bloodReagent: CopperBlood
