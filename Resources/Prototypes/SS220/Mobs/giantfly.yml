@@ -19,9 +19,8 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 5
-  - type: AutoImplant
-    implants:
-    - ThermalVisionImplant
+  - type: ThermalVision
+    state: Half
   - type: Sprite
     drawdepth: Mobs
     layers:
