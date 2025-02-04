@@ -16,6 +16,7 @@ petting-success-dog = Вы гладите { $target } по { POSS-ADJ($target) }
 petting-success-frog = Вы гладите { $target } по { POSS-ADJ($target) } маленькой скользкой голове.
 petting-success-goat = Вы гладите { $target } по { POSS-ADJ($target) } рогатой пушистой голове.
 petting-success-goose = Вопреки всему, вам удаётся погладить { $target } по { POSS-ADJ($target) } маленькой ужасающей голове.
+petting-success-giant-fly = Удивительно, вам удаётся погладить { $target } по { POSS-ADJ($target) } большеглазой осиной головке.
 petting-success-kangaroo = Вы гладите { $target } по { POSS-ADJ($target) } прыгучей голове.
 petting-success-possum = Вы гладите { $target } по { POSS-ADJ($target) } маленькой ужасной голове.
 petting-success-pig = Вы гладите { $target } по { POSS-ADJ($target) } волосатой голове.

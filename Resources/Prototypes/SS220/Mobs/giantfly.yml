@@ -56,7 +56,7 @@
     accent: xeno
   - type: InteractionPopup
     successChance: 0.5
-    interactSuccessString: petting-success-tarantula
+    interactSuccessString: petting-success-giant-fly
     interactFailureString: petting-failure-generic
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
