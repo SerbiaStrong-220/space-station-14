@@ -1,11 +1,12 @@
 - type: entity
-  name: Веспия
+  name: Vespia
   parent: 
   - SimpleMobBase
   - FlyingMobBase
   - MobCombat
   id: MobGiantFly
-  description: Это Касадор. Он будет ебать.
+  suffix: Angry
+  description: This is not a BEE.
   components:
   - type: NpcFactionMember
     factions:
@@ -51,7 +52,6 @@
       types:
         Poison: 6
         Piercing: 12
-    solution: melee
   - type: ReplacementAccent
     accent: xeno
   - type: InteractionPopup
@@ -78,10 +78,21 @@
     spawned:
     - id: FoodMeatXeno
       amount: 3
+  - type: Reactive
+    reactions:
+    - reagents: [ PestKiller ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        damage:
+          groups:
+            Toxin: 10
 
 - type: entity
   parent: MobGiantFly
   id: MobGiantFlyGhostRole
+  suffix: GhostRole
   components:
   - type: GhostRole
     makeSentient: true
