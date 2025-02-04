@@ -2353,6 +2353,9 @@
   - type: IgnoreSpiderWeb
   - type: Bloodstream
   #SS220 Fauna update start
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderMob
