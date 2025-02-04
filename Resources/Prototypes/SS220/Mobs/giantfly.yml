@@ -16,11 +16,11 @@
     rootTask:
       task: SimpleHostileCompound
   - type: MovementSpeedModifier
+    baseWalkSpeed : 3
+    baseSprintSpeed : 5
   - type: AutoImplant
     implants:
     - ThermalVisionImplant
-    baseWalkSpeed : 3
-    baseSprintSpeed : 5
   - type: Sprite
     drawdepth: Mobs
     layers:
