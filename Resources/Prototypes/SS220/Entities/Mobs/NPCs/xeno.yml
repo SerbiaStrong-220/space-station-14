@@ -2,6 +2,7 @@
   name: космическая гадюка
   parent: MobPurpleSnake
   id: MobPurpleSnakeGhostRole
+  suffix: GhostRole
   description: A menacing purple snake from Kepler-283c.
   components:
     - type: GhostRole
@@ -17,6 +18,7 @@
   name: маленькая космическая гадюка
   parent: MobSmallPurpleSnake
   id: MobSmallPurpleSnakeGhostRole
+  suffix: GhostRole
   description: A menacing purple snake from Kepler-283c.
   components:
     - type: GhostRole

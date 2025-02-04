@@ -92,8 +92,9 @@
   - type: SalvageMobRestrictions
 
 - type: entity
-  name: космическая кобра
+  name: Space Cobra
   id: MobCobraSpaceGhostRole
+  suffix: GhostRole
   parent: MobCobraSpace
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
