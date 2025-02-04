@@ -9,7 +9,7 @@
     - type: Transform
       noRot: true
     - type: Sprite
-      sprite: Structures/Storage/canister.rsi
+      sprite: SS220/Structures/Storage/canister.rsi #ss220-engineering-update-atmosgase
       noRot: true
       layers:
         - state: grey
@@ -673,7 +673,7 @@
       damageModifierSet: Metallic
     - type: InteractionOutline
     - type: Sprite
-      sprite: Structures/Storage/canister.rsi
+      sprite: SS220/Structures/Storage/canister.rsi #ss220-engineering-update-atmosgase
       state: grey-1
     - type: Physics
       bodyType: Dynamic

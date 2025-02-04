@@ -8,7 +8,7 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Cloaks/CE_dark/ce_dark.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/ce_dark.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -18,9 +18,9 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Cloaks/CEmantle_dark.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/ce_mantle_dark.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Neck/Cloaks/CEmantle_dark.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/ce_mantle_dark.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -29,6 +29,6 @@
   description: A formal white mantle to drape around the shoulders. Others stand on the shoulders of giants. You're the giant they stand on.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Cloaks/whitecapmantle.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/captain_white_mantle.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Neck/Cloaks/whitecapmantle.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/captain_white_mantle.rsi

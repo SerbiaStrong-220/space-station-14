@@ -8,9 +8,9 @@
   description: Corrupted pile of incomprehensible substane, somehowe prowiding great defence.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/cult_yogg_rig.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/cult_yogg.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/cult_yogg_rig.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/cult_yogg.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -42,9 +42,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/cult_yogg_rig.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/cult_yogg.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Hardsuits/cult_yogg_rig.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/cult_yogg.rsi
   - type: PointLight
     radius: 5
     energy: 3.5

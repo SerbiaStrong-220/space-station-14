@@ -1,0 +1,20 @@
+- type: entity
+  parent: WeaponRifleM90GrenadeLauncher
+  id: WeaponRifleM90FractWar
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: GunWieldBonus
+    minAngle: -19
+    maxAngle: -20
+  - type: Gun
+    fireRate: 6
+    angleIncrease: 2
+    angleDecay: 12
+
+- type: entity
+  parent: WeaponRifleLecter
+  id: WeaponRifleLecterFractWar
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: Gun
+    fireRate: 6

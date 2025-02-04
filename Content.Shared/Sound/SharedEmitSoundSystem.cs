@@ -7,12 +7,14 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Sound.Components;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.Throwing;
 using Content.Shared.UserInterface;
 using Content.Shared.Whitelist;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -39,6 +41,11 @@ public abstract class SharedEmitSoundSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
+    // SS220 performance-test-begin
+    [Dependency] private readonly IConfigurationManager _configManager = default!;
+    private bool _lessSound;
+    // SS220 performance-test-end
+
     public override void Initialize()
     {
         base.Initialize();
@@ -55,6 +62,8 @@ public abstract class SharedEmitSoundSystem : EntitySystem
         SubscribeLocalEvent<EmitSoundOnCollideComponent, StartCollideEvent>(OnEmitSoundOnCollide);
 
         SubscribeLocalEvent<SoundWhileAliveComponent, MobStateChangedEvent>(OnMobState);
+
+        Subs.CVar(_configManager, CCVars220.LessSoundSources, value => _lessSound = value, true); // SS220 performance-test
     }
 
     private void HandleEmitSoundOnUIOpen(EntityUid uid, EmitSoundOnUIOpenComponent component, AfterActivatableUIOpenEvent args)
@@ -143,7 +152,8 @@ public abstract class SharedEmitSoundSystem : EntitySystem
     }
     protected void TryEmitSound(EntityUid uid, BaseEmitSoundComponent component, EntityUid? user=null, bool predict=true)
     {
-        if (component.Sound == null)
+        // if (component.Sound == null) // SS220 performance-test
+        if (component.Sound == null || _lessSound) // SS220 performance-test
             return;
 
         if (component.Positional)
