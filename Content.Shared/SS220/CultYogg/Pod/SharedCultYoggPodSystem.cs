@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Buckle;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
@@ -31,8 +32,11 @@ public abstract class SharedCultYoggPodSystem : EntitySystem
 
     private void OnPodInsert(Entity<CultYoggPodComponent> ent, ref AfterPodInserted args)
     {
-        var xform = Transform(args.User);
-        _container.Insert((args.User, xform), ent.Comp.MobContainer);
+        if (args.Cancelled || args.Handled || args.Target == null || args.Used == null)
+            return;
+
+        var xform = Transform(args.Target.Value);
+        _container.Insert((args.Target.Value, xform), ent.Comp.MobContainer);
     }
 
     private void OnPodCanDrop(Entity<CultYoggPodComponent> ent, ref CanDropTargetEvent args)
@@ -72,8 +76,8 @@ public abstract class SharedCultYoggPodSystem : EntitySystem
         {
             AlternativeVerb verb = new()
             {
-                Act = () => TryInsert(target, ent),
-                Text = Loc.GetString("cult-yogg-ensert-pod"),
+                Act = () => TryInsert(target, target, ent),
+                Text = Loc.GetString("cult-yogg-insert-pod"),
                 Priority = 1
             };
 
@@ -81,27 +85,22 @@ public abstract class SharedCultYoggPodSystem : EntitySystem
         }
     }
 
-    public bool TryInsert(EntityUid entToEnsert, Entity<CultYoggPodComponent> podEnt)
+    public bool TryInsert(EntityUid user, EntityUid entToInsert, Entity<CultYoggPodComponent> podEnt)
     {
         if (podEnt.Comp.MobContainer.ContainedEntity != null)
             return false;
 
-        if (!HasComp<MobStateComponent>(entToEnsert) || !HasComp<DamageableComponent>(entToEnsert))
+        if (!HasComp<MobStateComponent>(entToInsert) || !HasComp<DamageableComponent>(entToInsert))
             return false;
 
-        if (_entityWhitelist.IsWhitelistFail(podEnt.Comp.CultistsWhitelist, entToEnsert))
+        if (_entityWhitelist.IsWhitelistFail(podEnt.Comp.CultistsWhitelist, entToInsert))
         {
-            _popup.PopupClient(Loc.GetString("cult-yogg-heal-only-cultists"), entToEnsert, entToEnsert);
+            _popup.PopupClient(Loc.GetString("cult-yogg-heal-only-cultists"), entToInsert, user);
 
             return false;
         }
 
-        var insertDoAfter = new DoAfterArgs(
-            EntityManager,
-            entToEnsert,
-            podEnt.Comp.InsertDelay,
-            new AfterPodInserted(),
-            podEnt)
+        var insertDoAfter = new DoAfterArgs(EntityManager, user, podEnt.Comp.InsertDelay, new AfterPodInserted(), podEnt, entToInsert, podEnt)
         {
             Broadcast = false,
             BreakOnDamage = true,
@@ -110,7 +109,8 @@ public abstract class SharedCultYoggPodSystem : EntitySystem
 
             BlockDuplicate = true,
             CancelDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            AttemptFrequency = AttemptFrequency.EveryTick
         };
 
         return _doAfter.TryStartDoAfter(insertDoAfter);
@@ -128,7 +128,7 @@ public abstract class SharedCultYoggPodSystem : EntitySystem
 }
 
 [Serializable, NetSerializable]
-public sealed partial class AfterPodInserted : DoAfterEvent
+public sealed partial class AfterPodInserted : SimpleDoAfterEvent
 {
-    public override DoAfterEvent Clone() => this;
+    //public override DoAfterEvent Clone() => this;
 }
