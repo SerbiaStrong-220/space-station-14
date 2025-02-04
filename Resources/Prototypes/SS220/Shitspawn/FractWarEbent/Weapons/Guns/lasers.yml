@@ -1,0 +1,10 @@
+- type: entity
+  parent: WeaponPulseCarbine
+  id: WeaponPulseCarbineFractWar
+  suffix: Shitspawn, Ebent, FractWar
+  components:
+  - type: HitscanBatteryAmmoProvider
+    fireCost: 40
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000

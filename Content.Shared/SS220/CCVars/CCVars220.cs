@@ -45,12 +45,6 @@ public sealed partial class CCVars220
         CVarDef.Create("ahelp.volume", 0.50f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     /// <summary>
-    /// (SS220) AHelp Sound on/off.
-    /// </summary>
-    public static readonly CVarDef<bool> AHelpSoundsEnabled =
-        CVarDef.Create("audio.ahelp_sounds_enabled", true, CVar.ARCHIVE | CVar.CLIENTONLY);
-
-    /// <summary>
     /// Delay Between raising the networked event <see cref="SuperMatterStateUpdate"/>.
     /// </summary>
     public static readonly CVarDef<float> SuperMatterUpdateNetworkDelay =
@@ -112,6 +106,12 @@ public sealed partial class CCVars220
     /// </summary>
     public static readonly CVarDef<string> DiscordLinkApiKey =
         CVarDef.Create("discord_auth.link_key", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    /// Allow enter server with bypass link check.
+    /// </summary>
+    public static readonly CVarDef<bool> ByPassDiscordLinkCheck =
+        CVarDef.Create("discord_auth.bypass_check", false, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     /// How different is the game year from the real one

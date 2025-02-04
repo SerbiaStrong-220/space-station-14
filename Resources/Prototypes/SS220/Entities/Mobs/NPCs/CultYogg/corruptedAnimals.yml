@@ -4,7 +4,7 @@
   name: base corrupted mob
   id: BaseMobCorrupted
   suffix: CultYogg
-  parent: [ MobRespirator, MobAtmosStandard, MobCombat ] #idk if they should breathe
+  parent:  MobCombat #idk if they should breathe
   description: Unspeakable evil
   abstract: true
   components:
@@ -62,6 +62,8 @@
     - type: Speech
       speechVerb: LargeMob
     - type: GhostRole
+      mindRoles:
+      - MindRoleGhostRoleTeamAntagonist
       makeSentient: true
       allowMovement: true
       allowSpeech: false
@@ -70,6 +72,9 @@
       rules: ghost-role-information-corrupted-mob-cultyogg-rules
     - type: GhostTakeoverAvailable
     - type: ShowCultYoggIcons
+    - type: Telepathy
+      canSend: false
+      telepathyChannelPrototype: TelepathyChannelYoggSothothCult
 
 - type: entity
   name: corrupted сow
@@ -737,3 +742,14 @@
       0: Alive
       100: Critical
       120: Dead
+  #- type: Thirst
+  #  startingThirst: 25
+  #  thresholds:
+  #    Okay: 25
+  #    Dead: 0
+  #  baseDecayRate: 0.000001
+  #- type: Hunger
+  #  thresholds:
+  #    Okay: 25
+  #    Dead: 0
+  #  baseDecayRate: 0.000001

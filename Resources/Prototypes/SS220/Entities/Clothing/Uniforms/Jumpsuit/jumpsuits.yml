@@ -434,6 +434,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/intern.rsi
 
+  # Врач
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitResponsibility
+  name: responsible doctor's jumpsuit
+  description: Give the captain painkillers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/medical_responsibility.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/medical_responsibility.rsi
+
   # Парамед
 - type: entity
   parent: ClothingUniformBase

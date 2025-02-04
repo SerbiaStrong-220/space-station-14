@@ -169,6 +169,8 @@
     - type: GhostRole
       description: ghost-role-information-angry-slimes-description
       rules: ghost-role-information-angry-slimes-rules
+      mindRoles:
+        - MindRoleGhostRoleTeamAntagonist
 # SS220-partial-revert-raffle-Begin
 #      raffle:
 #        settings: short
@@ -209,6 +211,8 @@
     - type: GhostRole
       description: ghost-role-information-angry-slimes-description
       rules: ghost-role-information-angry-slimes-rules
+      mindRoles:
+        - MindRoleGhostRoleTeamAntagonist
 # SS220-partial-revert-raffle-Begin
 #      raffle:
 #        settings: short
@@ -248,6 +252,8 @@
     - type: GhostRole
       description: ghost-role-information-angry-slimes-description
       rules: ghost-role-information-angry-slimes-rules
+      mindRoles:
+        - MindRoleGhostRoleTeamAntagonist
 # SS220-partial-revert-raffle-Begin
 #      raffle:
 #        settings: short
