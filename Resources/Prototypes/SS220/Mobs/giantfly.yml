@@ -10,6 +10,11 @@
   - type: NpcFactionMember
     factions:
       - SimpleHostile
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
   - type: MovementSpeedModifier
   - type: AutoImplant
     implants:
@@ -78,11 +83,6 @@
   parent: MobGiantFly
   id: MobGiantFlyGhostRole
   components:
-  - type: HTN
-    rootTask:
-      task: SimpleHostileCompound
-  - type: InputMover
-  - type: MobMover
   - type: GhostRole
     makeSentient: true
     name: ghost-role-information-giant-fly-name
