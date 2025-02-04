@@ -42,9 +42,6 @@ ghost-role-information-snoth-description = Маленькая молитка, к
 ghost-role-information-giant-spider-name = Гигантский паук
 ghost-role-information-giant-spider-description = Обитатели этой станции выглядят очень аппетитно, а ваша липкая паутина идеально подходит для их ловли!
 ghost-role-information-giant-spider-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими гигантскими пауками.
-ghost-role-information-giant-fly-name = Веспия
-ghost-role-information-giant-fly-description = Вы гигантская боевая оса. Ваша задача - уничтожить всех кроме представителей вашего вида.
-ghost-role-information-giant-fly-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими гигантскими осами.
 ghost-role-information-cognizine-description = Приобрело сознание с помощью магии когнизина.
 ghost-role-information-hamster-name = Хомяк
 ghost-role-information-hamster-description = Маленький ворчливый пушистик.
