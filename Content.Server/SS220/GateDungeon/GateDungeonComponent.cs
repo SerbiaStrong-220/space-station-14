@@ -18,8 +18,7 @@ public sealed partial class GateDungeonComponent : Component
     [DataField]
     public List<string>? PathDungeon;
 
-    public List<EntityUid>? GateStart = new();
-    public List<EntityUid>? GateMedium = new();
-    public List<EntityUid>? GateEnd = new();
-    public List<EntityUid>? GateEndToStation = new();
+    [DataField]
+    public GateType GateType;
+
 }

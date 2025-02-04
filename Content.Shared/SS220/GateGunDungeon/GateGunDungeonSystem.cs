@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Station.Components;
 using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Shared.SS220.GateGunDungeon;
@@ -22,12 +21,10 @@ public sealed class GateGunDungeonSystem : EntitySystem
        var gridUid = _transform.GetGrid(ent.Owner);
 
        if(gridUid == null)
-           return;
+           args.Cancel();
 
-       if (!HasComp<StationMemberComponent>(gridUid))
-           return;
-
-       args.Cancel();
+       if (!HasComp<GateDungeonMapComponent>(gridUid))
+           args.Cancel();
     }
 }
 

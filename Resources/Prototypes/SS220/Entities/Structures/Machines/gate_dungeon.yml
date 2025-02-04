@@ -5,11 +5,9 @@
   suffix: Start on station
   components:
   - type: GateDungeon
+    gateType: Start
     pathDungeon:
     - Maps/Shuttles/arrivals.yml #for example, del this later
-  - type: Tag
-    tags:
-    - StartDungeon
 
 - type: entity
   parent: BaseGateway
@@ -17,13 +15,11 @@
   suffix: Start dungeon
   components:
   - type: GateDungeon
+    gateType: Mid
   - type: Sprite
     sprite: SS220/Structures/Machines/gate_dungeon.rsi
     layers:
       - state: framebroken
-  - type: Tag
-    tags:
-    - MediumDungeon
 
 - type: entity
   parent: BaseGateway
@@ -31,9 +27,7 @@
   suffix: End dungeon
   components:
   - type: GateDungeon
-  - type: Tag
-    tags:
-    - EndDungeon
+    gateType: End
 
 - type: entity
   parent: MarkerBase
@@ -41,10 +35,8 @@
   suffix: Teleport on station
   components:
   - type: GateDungeon
+    gateType: ToStation
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
       - state: green
-  - type: Tag
-    tags:
-    - EndToStationDungeon
