@@ -8,11 +8,11 @@
   description: Это Касадор. Он будет ебать.
   components:
   - type: MovementSpeedModifier
+  - type: AutoImplant
+    implants:
+    - ThermalVisionImplant
     baseWalkSpeed : 3
     baseSprintSpeed : 5
-  - type: NpcFactionMember
-      factions:
-      - SimpleHostile
   - type: Sprite
     drawdepth: Mobs
     layers:
@@ -75,15 +75,19 @@
   parent: MobGiantFly
   id: MobGiantFlyGhostRole
   components:
-  - type: InputMover
-  - type: MobMover
+  - type: NpcFactionMember
+    factions:
+      - SimpleHostile
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
+  - type: InputMover
+  - type: MobMover
   - type: GhostRole
     makeSentient: true
-    name: ghost-role-information-giant-spider-name
-    description: ghost-role-information-giant-spider-description
-    rules: ghost-role-information-giant-spider-rules
+    name: ghost-role-information-giant-fly-name
+    description: ghost-role-information-giant-fly-description
+    rules: ghost-role-information-giant-fly-rules
     mindRoles:
       - MindRoleGhostRoleTeamAntagonist
+  - type: GhostTakeoverAvailable
