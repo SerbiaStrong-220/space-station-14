@@ -7,6 +7,9 @@
   id: MobGiantFly
   description: Это Касадор. Он будет ебать.
   components:
+  - type: NpcFactionMember
+    factions:
+      - SimpleHostile
   - type: MovementSpeedModifier
   - type: AutoImplant
     implants:
@@ -75,9 +78,6 @@
   parent: MobGiantFly
   id: MobGiantFlyGhostRole
   components:
-  - type: NpcFactionMember
-    factions:
-      - SimpleHostile
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
