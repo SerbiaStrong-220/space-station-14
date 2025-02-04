@@ -88,6 +88,10 @@
         damage:
           groups:
             Toxin: 10
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: MobVespia
+  - type: Sharp
 
 - type: entity
   parent: MobGiantFly
