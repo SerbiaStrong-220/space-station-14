@@ -198,7 +198,7 @@
       - id: BookMedicalReferenceBook
       - id: BookHowToSurvive
       - id: BookChemicalCompendium
-      - id: BookSpaceLaw
+      - id: BookSpaceLaws # SS220 Space Law Replace
 
 - type: entity
   id: CrateServiceSodaDispenser

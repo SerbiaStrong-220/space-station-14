@@ -8,6 +8,7 @@
       tags:
       - ClothMade
       - Paper
+      - Omnivorous #SS220 Сult
   - type: SolutionContainerManager
     solutions:
       stomach:

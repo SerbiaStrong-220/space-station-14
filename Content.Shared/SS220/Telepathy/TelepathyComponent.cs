@@ -42,3 +42,6 @@ public sealed partial class TelepathyAnnouncementSendEvent : InstantActionEvent
         TelepathyChannel = telepathyChannel;
     }
 }
+
+[ByRefEvent]
+public record struct TelepathySendAttemptEvent(EntityUid Sender, bool Cancelled);

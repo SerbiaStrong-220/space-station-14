@@ -438,7 +438,7 @@
   - DetectiveJumpsuit
   - DetectiveSecBackpack #ss220 backpack noir
   - DetectiveOuterClothing
-  - SecurityShoes
+  - DetectiveShoes #SS220 dec-lux-shoes
   - SurvivalSecurity
   - Trinkets
   - SecurityStar
@@ -460,7 +460,7 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
-  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
+  - ChiefMedicalOfficerGlasses #SS220-TwoOne-Floppa-Iteration / ss220 cmo new
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
   - MedicalGloves
@@ -536,6 +536,7 @@
   - MedicalBackpack
   - ParamedicOuterClothing
   - ParamedicShoes
+  - ParamedicBelt #ss220 ParamedInterdyne
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - SurvivalMedical
   - Trinkets

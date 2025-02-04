@@ -1,0 +1,9 @@
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleCivil
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-unknown-shuttle-incoming #!!
+    weight: 2
+  - type: LoadMapRule
+    preloadedGrid: Civil

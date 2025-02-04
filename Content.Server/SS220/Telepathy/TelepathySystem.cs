@@ -32,7 +32,7 @@ public sealed class TelepathySystem : EntitySystem
         SubscribeLocalEvent<RoundStartedEvent>(OnRoundStart);
 
         SubscribeLocalEvent<TelepathyComponent, TelepathySendEvent>(OnTelepathySend);
-        SubscribeLocalEvent<TelepathyComponent, TelepathyAnnouncementSendEvent>(OnTelepathyAnnouncementSend);
+        SubscribeLocalEvent<TelepathyAnnouncementSendEvent>(OnTelepathyAnnouncementSend);
     }
 
     private void OnRoundStart(RoundStartedEvent args)
@@ -43,15 +43,20 @@ public sealed class TelepathySystem : EntitySystem
         }
     }
 
-    private void OnTelepathyAnnouncementSend(Entity<TelepathyComponent> ent, ref TelepathyAnnouncementSendEvent args)
+    private void OnTelepathyAnnouncementSend(TelepathyAnnouncementSendEvent args)
     {
         SendMessageToEveryoneWithRightChannel(args.TelepathyChannel, args.Message, null);
     }
 
     private void OnTelepathySend(Entity<TelepathyComponent> ent, ref TelepathySendEvent args)
     {
-        if (ent.Comp.TelepathyChannelPrototype is { } telepathyChannel)
-            SendMessageToEveryoneWithRightChannel(telepathyChannel, args.Message, ent);
+        if (ent.Comp.TelepathyChannelPrototype is not { } telepathyChannel)
+            return;
+
+        if (!CanSendTelepathy(ent))
+            return;
+
+        SendMessageToEveryoneWithRightChannel(telepathyChannel, args.Message, ent);
     }
 
     /// <summary>
@@ -146,7 +151,9 @@ public sealed class TelepathySystem : EntitySystem
         {
             return Loc.GetString(
                 "chat-manager-send-telepathy-announce",
-                ("announce", FormattedMessage.EscapeText(messageString))
+                ("announce", FormattedMessage.EscapeText(messageString)),
+                 ("channel", $"\\[{Loc.GetString(telepathyChannelParameters.Name)}\\]"),
+                ("color", telepathyChannelParameters.Color)
             );
         }
 
@@ -165,5 +172,12 @@ public sealed class TelepathySystem : EntitySystem
         RaiseLocalEvent(senderUid.Value, nameEv);
         var name = Name(nameEv.Sender);
         return name;
+    }
+
+    private bool CanSendTelepathy(EntityUid sender)
+    {
+        var args = new TelepathySendAttemptEvent(sender, false);
+        RaiseLocalEvent(sender, ref args);
+        return !args.Cancelled;
     }
 }
