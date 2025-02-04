@@ -51,7 +51,7 @@
       types:
         Poison: 6
         Piercing: 12
-    solution: melee
+      solution: melee
   - type: ReplacementAccent
     accent: xeno
   - type: InteractionPopup
