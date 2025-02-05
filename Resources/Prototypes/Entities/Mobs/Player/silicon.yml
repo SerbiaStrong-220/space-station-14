@@ -116,7 +116,7 @@
   - type: CriminalRecordsConsole220
   - type: PowerMonitoringConsole
   - type: AtmosAlertsComputer
-  - type: RoboticsConsole
+  - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
   - type: ResearchConsole
   - type: ResearchClient
   - type: TechnologyDatabase
@@ -125,7 +125,6 @@
   - type: ApcPowerReceiver
     needsPower: false
     powerLoad: 0
-  #- type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
   #SS220 Station Ai Actions end
   - type: DeviceNetwork
     deviceNetId: Wireless
