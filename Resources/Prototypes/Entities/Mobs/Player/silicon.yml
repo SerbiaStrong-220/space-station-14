@@ -129,6 +129,7 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: CrewMonitor
+    transmitFrequencyId: ShuttleTimer
   - type: StationMap #SS220 Station Ai Actions
   - type: RadarConsole
     followEntity: false
