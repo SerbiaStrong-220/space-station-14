@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Linq;
-using Content.Server.Administration.Commands;
 using Content.Server.Popups;
 using Content.Shared.Gateway;
 using Content.Shared.Interaction;
@@ -37,12 +36,12 @@ public sealed class GateDungeonSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<GateDungeonComponent, ComponentStartup>(OnCreateDungeon);
+        SubscribeLocalEvent<GateDungeonComponent, MapInitEvent>(OnCreateDungeon);
         SubscribeLocalEvent<GateDungeonComponent, InteractHandEvent>(OnInteract);
-        SubscribeLocalEvent<GateDungeonComponent, ComponentRemove>(OnDelete);
+        SubscribeLocalEvent<GateDungeonComponent, ComponentShutdown>(OnDelete);
     }
 
-    private void OnCreateDungeon(Entity<GateDungeonComponent> ent, ref ComponentStartup args)
+    private void OnCreateDungeon(Entity<GateDungeonComponent> ent, ref MapInitEvent args)
     {
         if(ent.Comp.GateType != GateType.Start)
             return;
@@ -152,7 +151,7 @@ public sealed class GateDungeonSystem : EntitySystem
             args.User);
     }
 
-    private void OnDelete(Entity<GateDungeonComponent> ent, ref ComponentRemove args)
+    private void OnDelete(Entity<GateDungeonComponent> ent, ref ComponentShutdown args)
     {
         if (_gateList.TryGetValue(ent.Comp.GateType, out var gateList))
             gateList.Remove(ent.Owner);
