@@ -13,7 +13,8 @@ public sealed partial class GateDungeonComponent : Component
 
     public MapId MapId;
 
-    public TimeSpan ChargingTime = TimeSpan.FromMinutes(5);
+    [DataField]
+    public TimeSpan ChargingTime = TimeSpan.FromSeconds(300);
 
     [DataField]
     public List<string>? PathDungeon;

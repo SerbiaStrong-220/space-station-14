@@ -6,6 +6,7 @@
   components:
   - type: GateDungeon
     gateType: Start
+    chargingTime: 300
     pathDungeon:
     - Maps/Shuttles/arrivals.yml #for example, del this later
 

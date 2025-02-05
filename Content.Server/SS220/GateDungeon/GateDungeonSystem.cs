@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Linq;
+using Content.Server.Administration.Commands;
 using Content.Server.Popups;
 using Content.Shared.Gateway;
 using Content.Shared.Interaction;
@@ -20,13 +21,6 @@ namespace Content.Server.SS220.GateDungeon;
 /// the other must have the gateType: ToStation
 /// </summary>
 
-public enum GateType : byte
-{
-    Start,
-    Mid,
-    End,
-    ToStation
-}
 public sealed class GateDungeonSystem : EntitySystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
@@ -45,6 +39,7 @@ public sealed class GateDungeonSystem : EntitySystem
     {
         SubscribeLocalEvent<GateDungeonComponent, ComponentStartup>(OnCreateDungeon);
         SubscribeLocalEvent<GateDungeonComponent, InteractHandEvent>(OnInteract);
+        SubscribeLocalEvent<GateDungeonComponent, ComponentRemove>(OnDelete);
     }
 
     private void OnCreateDungeon(Entity<GateDungeonComponent> ent, ref ComponentStartup args)
@@ -157,6 +152,12 @@ public sealed class GateDungeonSystem : EntitySystem
             args.User);
     }
 
+    private void OnDelete(Entity<GateDungeonComponent> ent, ref ComponentRemove args)
+    {
+        if (_gateList.TryGetValue(ent.Comp.GateType, out var gateList))
+            gateList.Remove(ent.Owner);
+    }
+
     private T? PickRandom<T>(IReadOnlyList<T>? list)
     {
         if (list == null || list.Count == 0)
@@ -164,4 +165,12 @@ public sealed class GateDungeonSystem : EntitySystem
 
         return _random.Pick(list);
     }
+}
+
+public enum GateType : byte
+{
+    Start,
+    Mid,
+    End,
+    ToStation
 }
