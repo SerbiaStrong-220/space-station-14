@@ -30,8 +30,8 @@ public sealed class GateDungeonSystem : EntitySystem
     [Dependency] private readonly LinkedEntitySystem _linked = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
-    private Dictionary<GateType, List<EntityUid>> _gateList = new();
 
+    private Dictionary<GateType, List<EntityUid>> _gateList = new();
 
     /// <inheritdoc/>
     public override void Initialize()

@@ -20,7 +20,7 @@ public sealed class GateGunDungeonSystem : EntitySystem
     {
        var gridUid = _transform.GetGrid(ent.Owner);
 
-       if(gridUid == null)
+       if (gridUid == null)
            args.Cancel();
 
        if (!HasComp<GateDungeonMapComponent>(gridUid))
