@@ -1,0 +1,23 @@
+- type: constructionGraph
+  id: EnergyDoubleSwordGraph
+  start: esword
+  graph:
+  - node: esword
+    edges:
+      - to: desword
+        steps:
+          - tag: EnergySword
+  - node: desword
+    entity: EnergySwordDouble
+
+- type: constructionGraph
+  id: DoubleToySwordGraph
+  start: esword
+  graph:
+  - node: esword
+    edges:
+      - to: desword
+        steps:
+          - tag: ToyEnergySword
+  - node: desword
+    entity: DoubleToySword

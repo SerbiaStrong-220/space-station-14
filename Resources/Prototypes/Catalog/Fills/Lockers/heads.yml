@@ -338,7 +338,7 @@
     children:
     #- id: WeaponEnergyShotgun #SS220 Energy shotgun removal
     - id: BookSecretDocuments # SS220 mindslave-stop-word
-    - id: BookSpaceLaw
+    - id: BookSpaceLaws # SS220 Space Law Replace
     - id: BoxEncryptionKeySecurity
     - id: CigarGoldCase
       prob: 0.50

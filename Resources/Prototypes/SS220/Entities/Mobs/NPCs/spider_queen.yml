@@ -9,9 +9,9 @@
   description: spider dance
   components:
   - type: Emoting
-  - type: AutoImplant
-    implants:
-    - ThermalVisionImplant
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
   - type: NpcFactionMember
     factions:
     - SpiderQueen

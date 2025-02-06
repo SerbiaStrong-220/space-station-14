@@ -5,11 +5,11 @@
   description: Великолепная трость для самообороны самых важных джентельменов Нанотрейзен.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/expensivestick.rsi
+    sprite: SS220/Objects/Weapons/Melee/Misc/expensivestick.rsi
     state: icon
   - type: Item
     size: Large
-    sprite: SS220/Objects/Weapons/Melee/expensivestick.rsi
+    sprite: SS220/Objects/Weapons/Melee/Misc/expensivestick.rsi
   - type: MeleeWeapon
     damage:
       types:
