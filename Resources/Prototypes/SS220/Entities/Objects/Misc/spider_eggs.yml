@@ -11,6 +11,7 @@
   - type: Sprite
     sprite: Objects/Misc/eggspider.rsi
     state: icon
+    drawdepth: Mobs
   - type: Transform
   - type: Clickable
   - type: InteractionOutline

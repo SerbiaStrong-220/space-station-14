@@ -2406,6 +2406,7 @@
       - ActionSpawnSpiderWallWebTarantula
       - ActionPrying
       - ActionSpawnSpiderEggTarantula
+      - ActionSpawnSingleSpiderWebStandartDelay
     #SS220 Fauna update end
     - type: NpcFactionMember
       factions:

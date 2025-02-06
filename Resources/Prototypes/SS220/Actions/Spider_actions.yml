@@ -68,7 +68,7 @@
         amount: 1
       offset: 0, 1
     startDelay: true
-    useDelay: 4
+    useDelay: 240
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
@@ -291,6 +291,14 @@
   components:
   - type: WorldTargetAction
     useDelay: 2
+
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: ActionSpawnSingleSpiderWebStandartDelay
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 4
 
 - type: entity
   parent: BaseActionSpawnSingleSpiderWeb
