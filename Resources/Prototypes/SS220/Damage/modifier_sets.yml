@@ -121,6 +121,7 @@
     Cellular: 1
     Radiation: 0.5
 
+
 #Fauna update stuff
 - type: damageModifierSet
   id: SlimeMob
@@ -142,3 +143,12 @@
   id: SnakeMob
   coefficients:
     Stamina: 0.6
+
+- type: damageModifierSet
+  id: MobVespia
+  coefficients:
+    Blunt: 0.7
+    Slash: 0.5
+    Radiation: 0.4
+    Stamina: 0.4
+

@@ -19,3 +19,7 @@ ghost-role-information-traveling-chef-name = Путешествующий шеф
 ghost-role-information-traveling-chef-description = Вы - шеф-повар на странствующем шаттле экзотической кухни. Порадуйт…
 ghost-role-information-traveling-chef-rules = Действуют обычные правила для экипажа станции.
 # Lost souls roles end
+
+ghost-role-information-giant-fly-name = Веспия
+ghost-role-information-giant-fly-description = Вы гигантская боевая оса. Ваша задача - уничтожить всех кроме представителей вашего вида.
+ghost-role-information-giant-fly-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими гигантскими осами.

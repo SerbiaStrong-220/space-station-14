@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: UrPrice, AliceValestray, VictorBoum, Checkhole
-  changes:
-  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0442\u043E\u0447\
-      \u043A\u0438 \u0441\u043F\u0430\u0432\u043D\u0430 \u0432\u0435\u0434\u0443\u0449\
-      \u0438\u0445 \u0440\u043E\u043B\u0435\u0439 \u043D\u0430 NSS Frankenstein!"
-    type: Add
-  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u0441\u0442\u0430\u043D\
-      \u0446\u0438\u044F NSS Frankenstein!"
-    type: Tweak
-  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D \u044D\u0432\u0430\u043A\u0443\
-      \u0430\u0446\u0438\u043E\u043D\u043D\u044B\u0439 \u0448\u0430\u0442\u0442\u043B\
-      \ NSS Frankenstein!"
-    type: Tweak
-  id: 293
-  time: '2024-07-20T12:50:59.0000000+00:00'
-  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1389
 - author: UrPrice
   changes:
   - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u0441\u0442\u0430\u043D\
@@ -6146,3 +6130,12 @@
   id: 794
   time: '2025-02-05T09:48:38.0000000+00:00'
   url: https://github.com/SerbiaStrong-220/space-station-14/pull/2398
+- author: Vimenant
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0441\u043B\u043E\
+      \u043C\u0430\u043D\u043D\u044B\u0435 \u0433\u0435\u0439\u0442-\u0432\u0440\u0430\
+      \u0442\u0430"
+    type: Add
+  id: 795
+  time: '2025-02-06T12:10:55.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/2494
