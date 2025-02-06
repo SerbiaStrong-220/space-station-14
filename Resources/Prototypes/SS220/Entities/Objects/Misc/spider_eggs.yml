@@ -64,6 +64,19 @@
 #Spiders
 - type: entity 
   parent: BaseSpiderEgg
+  id: SpiderEggTarantula
+  categories: [ HideSpawnMenu ]
+  name: Tarantula egg
+  description: Is this a gem? Is this an egg? It looks expensive.
+  components:
+  - type: SpiderEgg
+    incubationTime: 30
+    spawnProtos:
+      - id: MobSpiderAngryBase
+        amount: 1
+
+- type: entity 
+  parent: BaseSpiderEgg
   id: SpiderEggDrone
   categories: [ HideSpawnMenu ]
   name: spider hive egg

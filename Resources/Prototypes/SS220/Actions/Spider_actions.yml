@@ -53,6 +53,25 @@
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
+  id: ActionSpawnSpiderEggTarantula
+  name: Tarantula spider egg
+  description: Tarantula
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: hunter_spawn
+    event: !type:SpiderNearbySpawnEvent
+      prototypes:
+      - id: SpiderEggTarantula
+        amount: 1
+      offset: 0, 1
+    startDelay: true
+    useDelay: 240
+
+- type: entity
+  parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggHunterBloodPoints
   name: hunter spider egg
   categories: [ HideSpawnMenu ]
