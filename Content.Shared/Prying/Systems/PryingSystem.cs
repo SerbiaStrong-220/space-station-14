@@ -8,9 +8,9 @@ using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
+using Content.Shared.SS220.Prying; //ss220 fauna update
 using Robust.Shared.Serialization;
 using PryUnpoweredComponent = Content.Shared.Prying.Components.PryUnpoweredComponent;
-
 namespace Content.Shared.Prying.Systems;
 
 /// <summary>
@@ -31,8 +31,22 @@ public sealed class PryingSystem : EntitySystem
         SubscribeLocalEvent<DoorComponent, GetVerbsEvent<AlternativeVerb>>(OnDoorAltVerb);
         SubscribeLocalEvent<DoorComponent, DoorPryDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<DoorComponent, InteractUsingEvent>(TryPryDoor);
+
+        SubscribeLocalEvent<PryingComponent, ActionPryingEvent>(OnPryActionEvent); //ss220 fauna update
     }
 
+    //ss220 fauna update start 
+    private void OnPryActionEvent(Entity<PryingComponent> entity, ref ActionPryingEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryComp(args.Target, out DoorComponent? comp))
+            return;
+
+        args.Handled = TryPry(args.Target, args.Performer, out _, args.Performer);
+    }
+    //ss220 fauna update end
     private void TryPryDoor(EntityUid uid, DoorComponent comp, InteractUsingEvent args)
     {
         if (args.Handled)

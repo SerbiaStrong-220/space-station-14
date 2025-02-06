@@ -29,6 +29,9 @@ ghost-role-information-silicon-rules =
     Вы не помните ничего из своей предыдущей жизни и не помните ничего из того, что узнали, будучи призраком.
     Вам разрешено помнить знания об игре в целом, например, как готовить, как использовать предметы и т. д.
     Вам абсолютно [color=red]НЕ[/color] разрешено помнить, скажем, имя, внешность и т. д. вашего предыдущего персонажа.
+ghost-role-information-space-adder-name = Космическая гадюка
+ghost-role-information-space-adder-description = Обитатели этой станции выглядят очень аппетитно, как раз вам на зубок.
+ghost-role-information-small-space-adder-name = Маленькая космическая гадюка
 ghost-role-information-mouse-name = Мышь
 ghost-role-information-mouse-description = Голодная и озорная мышь.
 ghost-role-information-mothroach-name = Таракамоль
@@ -42,6 +45,9 @@ ghost-role-information-snoth-description = Маленькая молитка, к
 ghost-role-information-giant-spider-name = Гигантский паук
 ghost-role-information-giant-spider-description = Обитатели этой станции выглядят очень аппетитно, а ваша липкая паутина идеально подходит для их ловли!
 ghost-role-information-giant-spider-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими гигантскими пауками.
+ghost-role-information-cobra-space-name = Космическая кобра
+ghost-role-information-cobra-space-description = Обитатели этой станции выглядят очень аппетитно, как раз вам на зубок. Когда вас заметят - будет слишком поздно
+ghost-role-information-snake-overall-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими змеями из далёкого космоса.
 ghost-role-information-cognizine-description = Приобрело сознание с помощью магии когнизина.
 ghost-role-information-hamster-name = Хомяк
 ghost-role-information-hamster-description = Маленький ворчливый пушистик.
