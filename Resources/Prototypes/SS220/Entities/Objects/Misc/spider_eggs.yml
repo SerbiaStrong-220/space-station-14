@@ -72,7 +72,7 @@
   - type: SpiderEgg
     incubationTime: 30
     spawnProtos:
-      - id: MobSpiderAngryBase
+      - id: MobGiantSpiderAngry
         amount: 1
 
 - type: entity 

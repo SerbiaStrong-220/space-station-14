@@ -68,7 +68,7 @@
         amount: 1
       offset: 0, 1
     startDelay: true
-    useDelay: 240
+    useDelay: 4
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
