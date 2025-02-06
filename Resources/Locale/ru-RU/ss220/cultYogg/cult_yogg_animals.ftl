@@ -36,3 +36,7 @@ ent-CultKangarooSpaceCorrupted = оскверненный космический
     .desc = Наверное, будет плохой идеей устроить с ним боксерский поединок.
 ent-CultRatCorrupted = оскверненная мышь
     .desc = Откуда она вообще выползла?!
+ent-FoodEggCorruptedDuckFertilized = проклятое утиное яйцо
+    .desc = Кто знает, быть может есть шанс, что из него что-то вылезет
+ent-FoodEggCorruptedChickenFertilized = проклятое куриное яйцо
+    .desc = Кто знает, быть может есть шанс, что из него что-то вылезет
