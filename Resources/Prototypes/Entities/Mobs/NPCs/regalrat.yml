@@ -57,7 +57,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Dead
+      250: Dead #SS220 Antag balance
   - type: MeleeWeapon
     altDisarm: false
     soundHit:
