@@ -1,7 +1,7 @@
 ent-GatewayDungeonStart = { ent-BaseGateway }
     .desc = { ent-BaseGateway.desc }
 
-ent-GatewayDungeonMedium = { ent-BaseGateway }
+ent-GatewayDungeonMid = { ent-BaseGateway }
     .desc = { ent-BaseGateway.desc }
 
 ent-GatewayDungeonEnd = { ent-BaseGateway }

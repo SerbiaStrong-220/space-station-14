@@ -6,7 +6,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
 using Robust.Server.GameObjects;
-using Robust.Shared.Map;
 using Robust.Shared.Random;
 using Timer = Robust.Shared.Timing.Timer;
 
@@ -23,7 +22,6 @@ namespace Content.Server.SS220.GateDungeon;
 public sealed class GateDungeonSystem : EntitySystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MapLoaderSystem _loader = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -48,63 +46,8 @@ public sealed class GateDungeonSystem : EntitySystem
 
         _appearance.SetData(ent.Owner, GatewayVisuals.Active, false); //should be turned off at the beginning
 
-        if(ent.Comp.PathDungeon == null)
-            return;
-
-        var mapDungeon = _random.Pick(ent.Comp.PathDungeon);
-
-        _map.CreateMap(out var mapId);
-        _loader.TryLoad(mapId, mapDungeon, out _);
-        _mapManager.SetMapPaused(mapId, true);
-
-        var mapUid = _map.GetMapOrInvalid(mapId);
-        _meta.SetEntityName(mapUid, "Gate dungeon"); //just a plug for the name
-
-        ent.Comp.MapId = mapId;
-
         Timer.Spawn(ent.Comp.ChargingTime,() => ChargingDone(ent.Owner));
 
-        var gates = EntityQueryEnumerator<GateDungeonComponent>();
-
-        var entGates = new List<EntityUid>();
-
-        while (gates.MoveNext(out var entDungeon, out _))
-        {
-            entGates.Add(entDungeon);
-        }
-
-        _gateList = Enum.GetValues(typeof(GateType))
-                .Cast<GateType>()
-                .ToDictionary(gateType => gateType, _ => new List<EntityUid>());
-
-
-        foreach (var gate in entGates)
-        {
-            if(!TryComp<GateDungeonComponent>(gate, out var gateComp))
-                continue;
-
-            switch (gateComp.GateType)
-            {
-                case GateType.Start:
-                    _gateList[GateType.Start].Add(gate);
-                    break;
-
-                case GateType.Mid:
-                    _gateList[GateType.Mid].Add(gate);
-                    break;
-
-                case GateType.End:
-                    _gateList[GateType.End].Add(gate);
-                    break;
-
-                case GateType.ToStation:
-                    _gateList[GateType.ToStation].Add(gate);
-                    break;
-
-                default:
-                    continue;
-            }
-        }
     }
 
     private void ChargingDone(EntityUid ent)
@@ -112,9 +55,7 @@ public sealed class GateDungeonSystem : EntitySystem
         if (!TryComp<GateDungeonComponent>(ent, out var gateComp))
             return;
 
-        _mapManager.SetMapPaused(gateComp.MapId, false);
-
-        gateComp.IsCharging = false;
+        CreateMap(gateComp);
 
         var currentGateStart = PickRandom(_gateList[GateType.Start]);
         var currentGateMedium = PickRandom(_gateList[GateType.Mid]);
@@ -128,6 +69,8 @@ public sealed class GateDungeonSystem : EntitySystem
             return;
 
         _appearance.SetData(ent, GatewayVisuals.Active, true);
+
+        gateComp.IsCharging = false;
 
         EnsureComp<PortalComponent>(currentGateStart, out var portalStartComp);
         EnsureComp<PortalComponent>(currentGateEnd, out var portalMediumComp);
@@ -163,6 +106,62 @@ public sealed class GateDungeonSystem : EntitySystem
             return default;
 
         return _random.Pick(list);
+    }
+
+    private void CreateMap(GateDungeonComponent comp)
+    {
+
+        if(comp.PathDungeon == null)
+            return;
+
+        var mapDungeon = _random.Pick(comp.PathDungeon);
+
+        _map.CreateMap(out var mapId);
+        _loader.TryLoad(mapId, mapDungeon, out _);
+
+        _meta.SetEntityName(_map.GetMapOrInvalid(mapId), "Gate dungeon"); //just a plug for the name
+
+        var gates = EntityQueryEnumerator<GateDungeonComponent>();
+
+        var entGates = new List<EntityUid>();
+
+        while (gates.MoveNext(out var entDungeon, out _))
+        {
+            entGates.Add(entDungeon);
+        }
+
+        _gateList = Enum.GetValues(typeof(GateType))
+            .Cast<GateType>()
+            .ToDictionary(gateType => gateType, _ => new List<EntityUid>());
+
+
+        foreach (var gate in entGates)
+        {
+            if(!TryComp<GateDungeonComponent>(gate, out var gateComp))
+                continue;
+
+            switch (gateComp.GateType)
+            {
+                case GateType.Start:
+                    _gateList[GateType.Start].Add(gate);
+                    break;
+
+                case GateType.Mid:
+                    _gateList[GateType.Mid].Add(gate);
+                    break;
+
+                case GateType.End:
+                    _gateList[GateType.End].Add(gate);
+                    break;
+
+                case GateType.ToStation:
+                    _gateList[GateType.ToStation].Add(gate);
+                    break;
+
+                default:
+                    continue;
+            }
+        }
     }
 }
 

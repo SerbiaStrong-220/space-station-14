@@ -11,8 +11,6 @@ public sealed partial class GateDungeonComponent : Component
 {
     public bool IsCharging = true;
 
-    public MapId MapId;
-
     [DataField]
     public TimeSpan ChargingTime = TimeSpan.FromSeconds(300);
 
