@@ -487,6 +487,7 @@
         - CombatKnife
         - Truncheon
         - HolofanProjectorSecurity # SS220 Fix #2009
+        - BlasterPowerCell # SS220 fix-blueshield-belts
       components:
         - Stunbaton
         - FlashOnTrigger
