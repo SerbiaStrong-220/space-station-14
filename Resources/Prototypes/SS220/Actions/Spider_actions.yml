@@ -343,3 +343,17 @@
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/action_spider.rsi, state: cocoon }
     useDelay: 10
+
+#Prying
+- type: entity
+  id: ActionPrying
+  name: Prying
+  description: Pry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi
+      state: ratKingRummage
+    event: !type:ActionPryingEvent

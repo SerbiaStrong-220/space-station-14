@@ -2404,6 +2404,7 @@
     - type: ActionGrant
       actions:
       - ActionSpawnSpiderWallWebTarantula
+      - ActionPrying
     #SS220 Fauna update end
     - type: NpcFactionMember
       factions:
