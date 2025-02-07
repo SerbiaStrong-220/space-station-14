@@ -1,0 +1,27 @@
+- type: entity
+  id: ModularPartWoodenDresserw1h1
+  parent: BaseModularPart
+  name: ModularPartWoodenDresserw1h1
+  description: wooden drawer for dresser
+  components:
+  - type: ModuleFurniturePart
+    size: w1h1
+  # TODO: make sprites!
+
+- type: entity
+  id: ModularPartWoodenDresserw2h1
+  parent: BaseModularPart
+  name: ModularPartWoodenDresserw2h1
+  description: wooden drawer for dresser
+  components:
+  - type: ModuleFurniturePart
+    size: w2h1
+
+- type: entity
+  id: ModularPartWoodenDresserw3h1
+  parent: BaseModularPart
+  name: ModularPartWoodenDresserw3h1
+  description: wooden drawer for dresser
+  components:
+  - type: ModuleFurniturePart
+    size: w3h1

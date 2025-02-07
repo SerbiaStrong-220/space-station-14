@@ -4,6 +4,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.SS220.ModuleFurniture.Components;
 using Content.Shared.SS220.ModuleFurniture.Events;
+using Robust.Shared.Containers;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Linq;
 
 namespace Content.Shared.SS220.ModuleFurniture.Systems;
 
-public abstract partial class SharedModuleFurnitureSystem : EntitySystem
+public abstract partial class SharedModuleFurnitureSystem<T> : EntitySystem where T : SharedModuleFurnitureComponent
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
@@ -21,41 +22,29 @@ public abstract partial class SharedModuleFurnitureSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ModuleFurnitureComponent, InteractUsingEvent>(OnInsertableInteract);
+        SubscribeLocalEvent<T, InteractUsingEvent>(OnInsertableInteract);
     }
 
-    public bool CanInsert(Entity<ModuleFurnitureComponent?> entity, Entity<ModuleFurniturePartComponent?> target, [NotNullWhen(true)] out Vector2i? offset)
+    public bool CanInsert(Entity<SharedModuleFurnitureComponent?> entity, Entity<ModuleFurniturePartComponent?> target, [NotNullWhen(true)] out Vector2i? offset)
     {
         offset = null;
         if (!Resolve(entity.Owner, ref entity.Comp) || !Resolve(target.Owner, ref target.Comp))
             return false;
 
-        var moduleComp = entity.Comp;
-        var partComp = target.Comp;
-        DebugTools.Assert(moduleComp.CachedLayout.Keys.Count == moduleComp.DrawerContainer.Count);
-
-        var lastCacheEntry = moduleComp.DrawerContainer.Count == 0 ? new Vector2i(0, 0) : moduleComp.CachedLayout.Keys.Last();
-        DebugTools.Assert(lastCacheEntry.X < moduleComp.TileLayoutSize.X && lastCacheEntry.Y < moduleComp.TileLayoutSize.Y);
-
-        // TODO: GRAAAAAAAAAAAAAAA
-        // So we need to find offset where to place new part (also it need for server part, so !!!internal shared)
-        // Dont forget to think of (3,1) or even (3,3)
-        if (moduleComp.TileLayoutSize.X - lastCacheEntry.X >= partComp.ContainerSize.X)
+        if (TryGetOffsetForPlacement(entity.Comp, target.Comp, out offset))
         {
-            offset = lastCacheEntry;
             return true;
         }
 
         return false;
     }
 
-    public bool TryInsert(Entity<ModuleFurnitureComponent?> entity, Entity<ModuleFurniturePartComponent?> target, EntityUid user)
+    public bool TryInsert(Entity<SharedModuleFurnitureComponent?> entity, Entity<ModuleFurniturePartComponent?> target, EntityUid user)
     {
         if (!CanInsert(entity, target, out var offset))
             return false;
 
-        var doafterArgs = new DoAfterArgs(
-            EntityManager, user,
+        var doafterArgs = new DoAfterArgs(EntityManager, user,
             TimeSpan.FromSeconds(2), // qol picked number
             new InsertedFurniturePart(offset.Value), entity.Owner, entity.Owner, target.Owner)
         {
@@ -67,7 +56,7 @@ public abstract partial class SharedModuleFurnitureSystem : EntitySystem
         return _doAfter.TryStartDoAfter(doafterArgs);
     }
 
-    private void OnInsertableInteract(Entity<ModuleFurnitureComponent> entity, ref InteractUsingEvent args)
+    private void OnInsertableInteract(Entity<T> entity, ref InteractUsingEvent args)
     {
         if (args.Handled || !HasComp<ModuleFurniturePartComponent>(args.Used))
             return;

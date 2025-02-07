@@ -1,0 +1,78 @@
+- type: entity
+  id: BaseModularFoundation
+  abstract: true
+  parent: BaseStructure
+  name: ModularFoundation
+  description: Wooden dresser, no mod suits but mod dressers are here.
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/furniture.rsi
+    state: dresser
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 3
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ModuleFurniture
+    tileLayoutSize: 3,3
+  - type: ContainerContainer
+    containers:
+      module-furniture: !type:Container
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Tag
+    tags:
+    - Wooden
+  - type: Anchorable
+  - type: Rotatable
+  # - type: Construction # TODO: make it
+  #   graph: Dresser
+  #   node: dresser
+
+- type: entity
+  id: BaseModularPart
+  abstract: true
+  parent: BaseStorageItem
+  name: ModularDresserPart
+  description: wooden drawer for dresser
+  components:
+  - type: ModuleFurniturePart
+    size: w1h1
+  - type: Item
+    size: Huge
+  - type: Sprite
+    sprite: Structures/Furniture/furniture.rsi
+    state: rack # TODO: make it
+  - type: Storage
+    grid:
+    - 0,0,5,5
+    maxItemSize: Huge
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: UseDelay
+    delay: 0.5
+  - type: Tag
+    tags:
+    - Wooden
+  # - type: Construction # TODO: make it
+  #   graph: Dresser
+  #   node: dresser
+
+

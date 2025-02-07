@@ -1,14 +1,18 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Robust.Shared.GameStates;
+
 namespace Content.Shared.SS220.ModuleFurniture.Components;
 
 /// <summary>
 /// Defines if it can be inserted into TiledItemContainers
 /// </summary>
 [RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ModuleFurniturePartComponent : Component
 {
     [DataField("size")]
+    [AutoNetworkedField]
     public ContainerTileSize ContainerSizeType;
 
     public Vector2i ContainerSize

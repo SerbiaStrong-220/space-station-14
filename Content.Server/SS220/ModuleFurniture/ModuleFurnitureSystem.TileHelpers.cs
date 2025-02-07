@@ -4,44 +4,23 @@ using Content.Shared.SS220.ModuleFurniture.Components;
 using Content.Shared.SS220.ModuleFurniture.Systems;
 using Robust.Server.Containers;
 using Robust.Shared.Utility;
+using System.Linq;
 using System.Text;
 
 namespace Content.Server.SS220.ModuleFurniture;
 
-public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem
+public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<ModuleFurnitureComponent>
 {
     [Dependency] private readonly ContainerSystem _container = default!;
 
-    /// <summary>
-    /// Honestly, never use this if you dont have a skill issue 😶‍🌫️
-    /// </summary>
-    private void ForceRebuildOccupation(Entity<ModuleFurnitureComponent> furniture)
+    public override void PrintDebugOccupation(SharedModuleFurnitureComponent furnitureComp)
     {
-        foreach (var layoutEntry in furniture.Comp.CachedLayout)
+        var builder = new StringBuilder($"Occupation of the furniture").AppendLine();
+        for (var height = 0; height < furnitureComp.TileLayoutSize.Y; height++)
         {
-            var (key, value) = layoutEntry;
-            var entrySize = Comp<ModuleFurniturePartComponent>(GetEntity(value)).ContainerSize;
-
-            for (var height = 0; height < entrySize.Y; height++)
+            for (var width = 0; width < furnitureComp.TileLayoutSize.X; width++)
             {
-                for (var width = 0; width < entrySize.X; width++)
-                {
-                    var occupationKey = key + (height, width);
-                    DebugTools.Assert(!furniture.Comp.CachedOccupation[occupationKey]);
-                    furniture.Comp.CachedOccupation[occupationKey] = true;
-                }
-            }
-        }
-    }
-
-    private void PrintDebugOccupation(Entity<ModuleFurnitureComponent> furniture)
-    {
-        var builder = new StringBuilder($"Occupation of the {ToPrettyString(furniture)}").AppendLine();
-        for (var height = 0; height < furniture.Comp.TileLayoutSize.Y; height++)
-        {
-            for (var width = 0; width < furniture.Comp.TileLayoutSize.X; width++)
-            {
-                if (furniture.Comp.CachedOccupation[(width, height)])
+                if (furnitureComp.CachedOccupation[(width, height)])
                     builder.Append('x');
                 else
                     builder.Append('o');
@@ -52,12 +31,67 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem
     }
 
     /// <summary>
+    /// Honestly, never use this if you dont have a skill issue 😶‍🌫️
+    /// </summary>
+    private void ForceRebuildOccupation(ModuleFurnitureComponent furnitureComp)
+    {
+        MakeClearOccupation(furnitureComp);
+
+        foreach (var layoutEntry in furnitureComp.CachedLayout)
+        {
+            var (key, value) = layoutEntry;
+            var entrySize = Comp<ModuleFurniturePartComponent>(GetEntity(value)).ContainerSize;
+
+            for (var height = 0; height < entrySize.Y; height++)
+            {
+                for (var width = 0; width < entrySize.X; width++)
+                {
+                    var occupationKey = key + (height, width);
+                    DebugTools.Assert(!furnitureComp.CachedOccupation[occupationKey]);
+                    furnitureComp.CachedOccupation[occupationKey] = true;
+                }
+            }
+        }
+    }
+
+    private void MakeClearOccupation(ModuleFurnitureComponent furnitureComp)
+    {
+        furnitureComp.CachedOccupation.Clear();
+        for (var height = 0; height < furnitureComp.TileLayoutSize.Y; height++)
+        {
+            for (var width = 0; width < furnitureComp.TileLayoutSize.X; width++)
+            {
+                furnitureComp.CachedOccupation.Add((width, height), false);
+            }
+        }
+    }
+
+    /// <summary>
     /// Force add part to the furniture. Errors when it cant be inserted to container of furniture.
     /// </summary>
-    private void AddToModuleFurniture(Entity<ModuleFurnitureComponent> furniture, Entity<ModuleFurniturePartComponent> part, Vector2i offset)
+    private void AddToModuleFurniture(ModuleFurnitureComponent furnitureComp, Entity<ModuleFurniturePartComponent> part, Vector2i offset)
     {
-        DebugTools.Assert(!furniture.Comp.DrawerContainer.Contains(part));
+        DebugTools.Assert(!furnitureComp.DrawerContainer.Contains(part));
 
+        AddToOccupation(furnitureComp, part, offset);
+#if DEBUG
+        PrintDebugOccupation(furnitureComp);
+#endif
+        if (!_container.Insert(part.Owner, furnitureComp.DrawerContainer))
+        {
+            Log.Error($"Error during inserting {ToPrettyString(part)} to {ToPrettyString(furnitureComp.DrawerContainer.Owner)}");
+        }
+
+        DebugTools.Assert(!furnitureComp.CachedLayout.Values.Contains(GetNetEntity(part)));
+        DebugTools.Assert(!furnitureComp.CachedLayout.ContainsKey(offset));
+
+        AddToLayout(furnitureComp, part, offset);
+
+        DebugTools.Assert(furnitureComp.CachedLayout.Count == furnitureComp.DrawerContainer.Count);
+    }
+
+    private void AddToOccupation(ModuleFurnitureComponent furnitureComp, Entity<ModuleFurniturePartComponent> part, Vector2i offset)
+    {
         var partSize = part.Comp.ContainerSize;
 
         for (var height = 0; height < partSize.Y; height++)
@@ -65,14 +99,14 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem
             for (var width = 0; width < partSize.X; width++)
             {
                 var keyVector = offset + (width, height);
-                DebugTools.Assert(!furniture.Comp.CachedOccupation[keyVector]);
-                furniture.Comp.CachedOccupation[keyVector] = true;
+                DebugTools.Assert(!furnitureComp.CachedOccupation[keyVector]);
+                furnitureComp.CachedOccupation[keyVector] = true;
             }
         }
+    }
 
-        if (!_container.Insert(part.Owner, furniture.Comp.DrawerContainer))
-        {
-            Log.Error($"Error during inserting {ToPrettyString(part)} to {ToPrettyString(furniture)}");
-        }
+    private void AddToLayout(ModuleFurnitureComponent furnitureComp, Entity<ModuleFurniturePartComponent> part, Vector2i offset)
+    {
+        furnitureComp.CachedLayout.Add(offset, GetNetEntity(part));
     }
 }

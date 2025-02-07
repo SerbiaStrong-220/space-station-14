@@ -6,7 +6,12 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.ModuleFurniture.Events;
 
 [Serializable, NetSerializable]
-public sealed partial class InsertedFurniturePart(Vector2i offset) : SimpleDoAfterEvent
+public sealed partial class InsertedFurniturePart : SimpleDoAfterEvent
 {
-    public Vector2i Offset { get; } = offset;
+    public Vector2i Offset { get; }
+
+    public InsertedFurniturePart(Vector2i offset) : base()
+    {
+        Offset = offset;
+    }
 }
