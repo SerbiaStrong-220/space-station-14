@@ -53,25 +53,6 @@
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
-  id: ActionSpawnSpiderEggTarantula
-  name: Tarantula spider egg
-  description: Tarantula
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: InstantAction
-    icon:
-      sprite: SS220/Interface/Actions/action_spider.rsi
-      state: hunter_spawn
-    event: !type:SpiderNearbySpawnEvent
-      prototypes:
-      - id: SpiderEggTarantula
-        amount: 1
-      offset: 0, 1
-    startDelay: true
-    useDelay: 240
-
-- type: entity
-  parent: BaseActionSpawnSpiderEgg
   id: ActionSpawnSpiderEggHunterBloodPoints
   name: hunter spider egg
   categories: [ HideSpawnMenu ]
@@ -198,24 +179,6 @@
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi #SS220-Walss-Sprite-Update-V4
-      state: wall_spawn
-    event: !type:SpiderTargetSpawnEvent
-      prototypes:
-      - id: WallWebSpawn
-        amount: 1
-      offset: 0, 1
-
-- type: entity
-  id: ActionSpawnSpiderWallWebTarantula
-  name: create a wall
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: WorldTargetAction
-    useDelay: 24
-    range: 1.5
-    itemIconStyle: BigAction
-    icon:
-      sprite: SS220/Interface/Actions/action_spider.rsi
       state: wall_spawn
     event: !type:SpiderTargetSpawnEvent
       prototypes:
@@ -370,17 +333,3 @@
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/action_spider.rsi, state: cocoon }
     useDelay: 10
-
-#Prying
-- type: entity
-  id: ActionPrying
-  name: Prying
-  description: Pry
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: EntityTargetAction
-    itemIconStyle: BigAction
-    icon:
-      sprite: SS220/Interface/Actions/actions_rat_king.rsi
-      state: ratKingRummage
-    event: !type:ActionPryingEvent

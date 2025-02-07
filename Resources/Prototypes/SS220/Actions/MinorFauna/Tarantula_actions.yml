@@ -1,0 +1,62 @@
+#Prying
+- type: entity
+  id: ActionPrying
+  name: Prying
+  description: Pry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/MinorFauna/action_tarantula.rsi
+      state: prying
+    event: !type:ActionPryingEvent
+
+#Unique tarantula stuff
+- type: entity
+  id: ActionSpawnSpiderWallWebTarantula
+  name: create a wall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 24
+    range: 1.5
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/MinorFauna/action_tarantula.rsi
+      state: wall_spawn
+    event: !type:SpiderTargetSpawnEvent
+      prototypes:
+      - id: WallWebSpawn
+        amount: 1
+      offset: 0, 1
+
+- type: entity
+  parent: BaseActionSpawnSpiderEgg
+  id: ActionSpawnSpiderEggTarantula
+  name: Tarantula spider egg
+  description: Tarantula
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: SS220/Interface/Actions/MinorFauna/action_tarantula.rsi
+      state: tarantula_spawn
+    event: !type:SpiderNearbySpawnEvent
+      prototypes:
+      - id: SpiderEggTarantula
+        amount: 1
+      offset: 0, 1
+    startDelay: true
+    useDelay: 240
+
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: ActionSpawnSingleSpiderWebTarantula
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    icon:
+      sprite: SS220/Interface/Actions/MinorFauna/action_tarantula.rsi
+      state: web_spawn
+    useDelay: 4
