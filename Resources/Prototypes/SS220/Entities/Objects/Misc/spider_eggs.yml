@@ -62,7 +62,20 @@
   - type: StaticPrice
     price: 500 
 
-#Spiders
+#Fauna update Spiders
+- type: entity 
+  parent: BaseSpiderEgg
+  id: SpiderEggClownSpider
+  categories: [ HideSpawnMenu ]
+  name: Tarantula egg
+  description: Is this a gem? Is this an egg? It looks expensive.
+  components:
+  - type: SpiderEgg
+    incubationTime: 60
+    spawnProtos:
+      - id: MobClownSpider
+        amount: 1
+
 - type: entity 
   parent: BaseSpiderEgg
   id: SpiderEggTarantula
@@ -71,10 +84,11 @@
   description: Is this a gem? Is this an egg? It looks expensive.
   components:
   - type: SpiderEgg
-    incubationTime: 30
+    incubationTime: 60
     spawnProtos:
       - id: MobGiantSpiderAngry
         amount: 1
+#Spiders
 
 - type: entity 
   parent: BaseSpiderEgg

@@ -2400,14 +2400,6 @@
   id: MobSpiderAngryBase
   abstract: true
   components:
-    #SS220 Fauna update start
-    - type: ActionGrant
-      actions:
-      - ActionSpawnSpiderWallWebTarantula
-      - ActionPrying
-      - ActionSpawnSpiderEggTarantula
-      - ActionSpawnSingleSpiderWebTarantula
-    #SS220 Fauna update end
     - type: NpcFactionMember
       factions:
         - SpiderHostile #ss220 spider queen
@@ -2465,6 +2457,14 @@
     damage:
       types:
         Piercing: 6
+    #SS220 Fauna update start
+  - type: ActionGrant
+    actions:
+    - ActionSpawnSpiderWallWebTarantula
+    - ActionPryingTarantula
+    - ActionSpawnSpiderEggTarantula
+    - ActionSpawnSingleSpiderWebTarantula
+    #SS220 Fauna update end
 
 - type: entity
   parent:
@@ -2519,6 +2519,14 @@
     - type: Bloodstream
       bloodMaxVolume: 150
       bloodReagent: Laughter
+    #SS220 Fauna update start
+    - type: ActionGrant
+      actions:
+      - ActionPryingClownSpider
+      - ActionSpawnSpiderWallWebClownSpider
+      - ActionSpawnSpiderEggClownSpider
+      - ActionSpawnSingleSpiderWebClownSpider
+    #SS220 Fauna update end
 
 - type: entity
   name: wizard spider

@@ -121,6 +121,18 @@
   - type: SpawnOnDespawn
     prototype: WallWebDurable
 
+- type: entity
+  parent: WallWebSpawn
+  id: WallWebClownWebSpawn
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Effects/wallwebspawn.rsi
+    state: webwall
+    color: pink
+  - type: SpawnOnDespawn
+    prototype: WallWebClownWeb
+
 #Wall
 - type: entity
   parent: BaseWall
@@ -167,6 +179,66 @@
   - type: Construction
     graph: WebStructures
     node: wall
+
+- type: entity
+  parent: BaseWall
+  id: WallWebClownWeb
+  name: ClownWeb
+  description: web
+  components:
+  - type: Food
+    delay: 4
+    flavors:
+      - sweet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Sugar
+          Quantity: 60
+  - type: FlavorProfile
+    flavors:
+      - sweet
+  - type: Clickable
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/slash.ogg"
+  - type: Damageable
+    damageModifierSet: Web
+  - type: Tag
+    tags:
+      - Wall
+  - type: Sprite
+    sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
+    shader: unshaded
+    color: pink
+  - type: Icon
+    sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWebSugarSilk:
+            min: 1
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+  - type: IconSmooth
+    key: webs
+    base: wall
+  - type: Construction
+    graph: WebStructures
+    node: wall
+
 
 # Cocoon
 - type: entity

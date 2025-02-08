@@ -1,6 +1,6 @@
 #Prying
 - type: entity
-  id: ActionPryingTarantula
+  id: ActionPryingClownSpider
   name: Prying
   description: Pry
   categories: [ HideSpawnMenu ]
@@ -8,13 +8,13 @@
   - type: EntityTargetAction
     itemIconStyle: BigAction
     icon:
-      sprite: SS220/Interface/Actions/MinorFauna/action_tarantula.rsi
+      sprite: SS220/Interface/Actions/MinorFauna/action_clownspider.rsi
       state: prying
     event: !type:ActionPryingEvent
 
-#Unique tarantula stuff
+#Unique clown-spider stuff
 - type: entity
-  id: ActionSpawnSpiderWallWebTarantula
+  id: ActionSpawnSpiderWallWebClownSpider
   name: create a wall
   categories: [ HideSpawnMenu ]
   components:
@@ -23,40 +23,40 @@
     range: 1.5
     itemIconStyle: BigAction
     icon:
-      sprite: SS220/Interface/Actions/MinorFauna/action_tarantula.rsi
+      sprite: SS220/Interface/Actions/MinorFauna/action_clownspider.rsi
       state: wall_spawn
     event: !type:SpiderTargetSpawnEvent
       prototypes:
-      - id: WallWebSpawn
+      - id: WallWebClownWebSpawn
         amount: 1
       offset: 0, 1
 
 - type: entity
   parent: BaseActionSpawnSpiderEgg
-  id: ActionSpawnSpiderEggTarantula
-  name: Tarantula spider egg
-  description: Tarantula
+  id: ActionSpawnSpiderEggClownSpider
+  name: ClownSpider spider egg
+  description: ClownSpider
   categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     icon:
-      sprite: SS220/Interface/Actions/MinorFauna/action_tarantula.rsi
-      state: tarantula_spawn
+      sprite: SS220/Interface/Actions/MinorFauna/action_clownspider.rsi
+      state: clownspider_spawn
     event: !type:SpiderNearbySpawnEvent
       prototypes:
-      - id: SpiderEggTarantula
+      - id: SpiderEggClownSpider
         amount: 1
       offset: 0, 1
     startDelay: true
     useDelay: 240
 
 - type: entity
-  parent: BaseActionSpawnSingleSpiderWeb
-  id: ActionSpawnSingleSpiderWebTarantula
+  parent: ActionSpawnSingleSpiderWebClown
+  id: ActionSpawnSingleSpiderWebClownSpider
   categories: [ HideSpawnMenu ]
   components:
   - type: WorldTargetAction
     icon:
-      sprite: SS220/Interface/Actions/MinorFauna/action_tarantula.rsi
+      sprite: SS220/Interface/Actions/MinorFauna/action_clownspider.rsi
       state: web_spawn
-    useDelay: 4
+    useDelay: 6
