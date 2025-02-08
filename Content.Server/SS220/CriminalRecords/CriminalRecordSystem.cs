@@ -15,7 +15,6 @@ using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.SS220.Ghost;
 using Content.Shared.StationRecords;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -141,7 +140,9 @@ public sealed class CriminalRecordSystem : EntitySystem
         catalog.LastRecordTime = biggest == -1 ? null : biggest;
     }
 
-    public void UpdateIdCards(StationRecordKey key, GeneralStationRecord generalRecord)
+
+    /// <returns>Null if no IDCard was updated or Uid of updated IDCard</returns>
+    public EntityUid? UpdateIdCards(StationRecordKey key, GeneralStationRecord generalRecord)
     {
         CriminalRecord? criminalRecord = null;
         if (generalRecord.CriminalRecords != null)
@@ -167,7 +168,9 @@ public sealed class CriminalRecordSystem : EntitySystem
 
             idCard.CurrentSecurityRecord = criminalRecord;
             EntityManager.Dirty(uid, idCard);
+            return uid;
         }
+        return null;
     }
 
     public bool RemoveCriminalRecordStatus(StationRecordKey key, int time, EntityUid? sender = null)
@@ -185,7 +188,9 @@ public sealed class CriminalRecordSystem : EntitySystem
 
         UpdateLastRecordTime(catalog);
         _stationRecords.Synchronize(key.OriginStation);
-        UpdateIdCards(key, selectedRecord);
+        var cardId = UpdateIdCards(key, selectedRecord);
+        if (cardId.HasValue && TryGetLastRecord(key, out _, out var currentCriminalRecord))
+            RaiseLocalEvent<CriminalStatusEvent>(cardId.Value, new CriminalStatusDeleted(sender, key, ref currentCriminalRecord));
 
         if (sender != null)
         {
@@ -255,7 +260,10 @@ public sealed class CriminalRecordSystem : EntitySystem
 
         catalog.LastRecordTime = currentRoundTime;
         _stationRecords.Synchronize(key.OriginStation);
-        UpdateIdCards(key, selectedRecord);
+        var cardId = UpdateIdCards(key, selectedRecord);
+        if (cardId.HasValue)
+            RaiseLocalEvent<CriminalStatusEvent>(cardId.Value, new CriminalStatusAdded(sender, key, ref criminalRecord));
+
         _sawmill.Debug("Added new criminal record, synchonizing");
 
         if (sender != null)
