@@ -33,7 +33,7 @@
     activatedDamage:
       types:
         Blunt: 0 #ss220 stunprod fix
-        Stamina: 35 #ss220 stunprod fix
+        Stamina: 20 #ss220 stunprod fix
   - type: Stunbaton
     energyPerUse: 120
   - type: MeleeWeapon
