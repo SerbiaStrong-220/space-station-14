@@ -21,7 +21,7 @@ internal sealed partial class ChatManager
     public string DeleteProhibitedCharacters(string message, ICommonSession? player = null)
     {
         string censoredMessage = ProhibitedCharactersRegex().Replace(message, string.Empty);
-        if (message != censoredMessage && player != null)
+        if (message.Length != censoredMessage.Length && player != null)
         {
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{player.Name} tried to send a message with forbidden characters:\n{message}");
             SendAdminAlert(Loc.GetString("chat-manager-founded-prohibited-characters", ("player", player.Name), ("message", message)));
