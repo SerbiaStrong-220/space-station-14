@@ -111,6 +111,9 @@
     follow: true
     location: nuclear bomb
   - type: FTLSmashImmune
+  - type: Tag
+    tags:
+      - CanLockPick
 
 - type: entity
   parent: NuclearBomb
