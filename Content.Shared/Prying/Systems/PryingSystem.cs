@@ -47,6 +47,7 @@ public sealed class PryingSystem : EntitySystem
         args.Handled = TryPry(args.Target, args.Performer, out _, args.Performer);
     }
     //ss220 fauna update end
+
     private void TryPryDoor(EntityUid uid, DoorComponent comp, InteractUsingEvent args)
     {
         if (args.Handled)
