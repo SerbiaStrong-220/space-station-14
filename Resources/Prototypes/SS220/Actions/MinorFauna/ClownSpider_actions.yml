@@ -1,0 +1,62 @@
+#Prying
+- type: entity
+  id: ActionPryingClownSpider
+  name: Prying
+  description: Pry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/MinorFauna/action_clownspider.rsi
+      state: prying
+    event: !type:ActionPryingEvent
+
+#Unique clown-spider stuff
+- type: entity
+  id: ActionSpawnSpiderWallWebClownSpider
+  name: create a wall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 24
+    range: 1.5
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/MinorFauna/action_clownspider.rsi
+      state: wall_spawn
+    event: !type:SpiderTargetSpawnEvent
+      prototypes:
+      - id: WallWebClownWebSpawn
+        amount: 1
+      offset: 0, 1
+
+- type: entity
+  parent: BaseActionSpawnSpiderEgg
+  id: ActionSpawnSpiderEggClownSpider
+  name: ClownSpider spider egg
+  description: ClownSpider
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon:
+      sprite: SS220/Interface/Actions/MinorFauna/action_clownspider.rsi
+      state: clownspider_spawn
+    event: !type:SpiderNearbySpawnEvent
+      prototypes:
+      - id: SpiderEggClownSpider
+        amount: 1
+      offset: 0, 1
+    startDelay: true
+    useDelay: 240
+
+- type: entity
+  parent: ActionSpawnSingleSpiderWebClown
+  id: ActionSpawnSingleSpiderWebClownSpider
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    icon:
+      sprite: SS220/Interface/Actions/MinorFauna/action_clownspider.rsi
+      state: web_spawn
+    useDelay: 6

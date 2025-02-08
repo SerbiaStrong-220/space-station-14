@@ -1,0 +1,43 @@
+- type: entity
+  parent: MaterialBase
+  id: MaterialWebSugarSilk
+  name: sugar silk
+  description: A sugar material.
+  suffix: Full
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      WebSilk: 100
+  - type: Sprite
+    sprite: Objects/Materials/silk.rsi
+    state: icon
+    shader: unshaded
+    color: pink
+  - type: Stack
+    count: 50
+    stackType: WebSilk
+  - type: Food
+    delay: 2
+  - type: FlavorProfile
+    flavors:
+      - sweet
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 2
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 2
+        reagents:
+        - ReagentId: Sugar
+          Quantity: 2
+  - type: Tag
+    tags:
+      - RawMaterial
+  - type: Item
+    sprite: Objects/Materials/silk.rsi
+    heldPrefix: silk
+    shader: unshaded
+    color: pink

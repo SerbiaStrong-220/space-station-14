@@ -18,6 +18,18 @@
     },
     {
       "name": "destroyed_cocoon2"
+    },
+    {
+      "name": "animal_cocoon1"
+    },
+    {
+      "name": "destroyed_animal_cocoon1"
+    },
+    {
+      "name": "animal_cocoon2"
+    },
+    {
+      "name": "destroyed_animal_cocoon2"
     }
   ]
 }

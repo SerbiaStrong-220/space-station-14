@@ -1,5 +1,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Prying.Components;
 
@@ -36,6 +37,12 @@ public sealed partial class PryingComponent : Component
     /// </summary>
     [DataField]
     public bool Enabled = true;
+
+    [ViewVariables]
+    public EntityUid? ActionPryingEntity;
+
+    [DataField("actionPry")]
+    public EntProtoId ActionPrying = "ActionPrying";
 }
 
 /// <summary>
@@ -93,4 +100,5 @@ public record struct GetPryTimeModifierEvent
         User = user;
     }
 }
+
 
