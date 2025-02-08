@@ -239,6 +239,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         bool shouldCapitalizeTheWordI = (!CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Parent.Name == "en")
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en");
 
+        message = _chatManager.DeleteProhibitedCharacters(message, source); // SS220 delete prohibited characters
         message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
 
         // Was there an emote in the message? If so, send it.
@@ -324,6 +325,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (player?.AttachedEntity is not { Valid: true } entity || source != entity)
             return;
 
+        message = _chatManager.DeleteProhibitedCharacters(message, source); // SS220 delete prohibited characters
         message = SanitizeInGameOOCMessage(message);
 
         var sendType = type;
@@ -691,6 +693,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         var clients = GetDeadChatClients();
         var playerName = Name(source);
+        message = _chatManager.DeleteProhibitedCharacters(message, player); // SS220 delete prohibited characters
         string wrappedMessage;
         if (_adminManager.IsAdmin(player))
         {
