@@ -2,7 +2,7 @@
   id: EventCaptureFlagBase
   suffix: Shitspawn, Ebent, FractWar
   name: флаг фракции
-  description: Флаг вашей фракции для захвата постаментов.
+  description: The flag of your faction to capture the pedestals.
   abstract: true
   components:
   - type: Sprite
@@ -50,10 +50,11 @@
 - type: entity
   id: EventCaptureFlagNT
   suffix: Shitspawn, Ebent, FractWar
-  name: флаг НаноТрейзен
-  description: Флаг вашей фракции для захвата постаментов.
+  name: NanoTrazen flag
   parent: EventCaptureFlagBase
   components:
+  - type: EventCapturePointFlag
+    fraction: flag-fraction-NT
   - type: Sprite
     drawdepth: Overdoors
     noRot: true
@@ -70,10 +71,11 @@
 - type: entity
   id: EventCaptureFlagSynd
   suffix: Shitspawn, Ebent, FractWar
-  name: флаг Синдиката
-  description: Флаг вашей фракции для захвата постаментов.
+  name: syndicate flag
   parent: EventCaptureFlagBase
   components:
+  - type: EventCapturePointFlag
+    fraction: flag-fraction-Synd
   - type: Sprite
     drawdepth: Overdoors
     noRot: true
@@ -90,10 +92,11 @@
 - type: entity
   id: EventCaptureFlagUssp
   suffix: Shitspawn, Ebent, FractWar
-  name: флаг СССП
-  description: Флаг вашей фракции для захвата постаментов.
+  name: USSP flag
   parent: EventCaptureFlagBase
   components:
+  - type: EventCapturePointFlag
+    fraction: flag-fraction-Ussp
   - type: Sprite
     drawdepth: Overdoors
     noRot: true

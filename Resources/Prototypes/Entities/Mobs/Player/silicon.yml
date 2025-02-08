@@ -116,25 +116,25 @@
   - type: CriminalRecordsConsole220
   - type: PowerMonitoringConsole
   - type: AtmosAlertsComputer
+  - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
   - type: ResearchConsole
   - type: ResearchClient
   - type: TechnologyDatabase
-  - type: SuperMatterObserver #SS220_TODO: Добавить отоброжение СМа Для ИИ
+  - type: SuperMatterObserver #SS220_TODO: Добавить отображение СМа Для ИИ
   - type: SuperMatterObserverReceiver
   - type: ApcPowerReceiver
     needsPower: false
     powerLoad: 0
-  # - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
   #SS220 Station Ai Actions end
   - type: DeviceNetwork
     deviceNetId: Wireless
-    receiveFrequencyId: CrewMonitor 
+    receiveFrequencyId: CrewMonitor
     transmitFrequencyId: ShuttleTimer
   - type: StationMap #SS220 Station Ai Actions
   - type: RadarConsole
     followEntity: false
   - type: CommunicationsConsole
-    canShuttle: false
+    canShuttle: true
     title: comms-console-announcement-title-station-ai
     color: "#5ed7aa"
   - type: HolographicAvatar

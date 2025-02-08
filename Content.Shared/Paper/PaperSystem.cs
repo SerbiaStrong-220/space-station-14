@@ -23,9 +23,7 @@ public sealed class PaperSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-
-    //SS220 Add auto form
-    [Dependency] private readonly PaperAutoFormSystem _paperAutoFormSystem = default!;
+    [Dependency] private readonly SharedDocumentHelperSystem _documentHelper = default!;
 
     public override void Initialize()
     {
@@ -68,11 +66,6 @@ public sealed class PaperSystem : EntitySystem
     {
         entity.Comp.Mode = PaperAction.Read;
         UpdateUserInterface(entity);
-
-        //SS220 Add auto form begin
-        entity.Comp.Writer = null;
-        Dirty(entity.Owner, entity.Comp);
-        //SS220 Add auto form end
     }
 
     private void OnExamined(Entity<PaperComponent> entity, ref ExaminedEvent args)
@@ -128,11 +121,7 @@ public sealed class PaperSystem : EntitySystem
                 entity.Comp.Mode = PaperAction.Write;
                 _uiSystem.OpenUi(entity.Owner, PaperUiKey.Key, args.User);
                 UpdateUserInterface(entity);
-
-                //SS220 Add auto form begin
-                entity.Comp.Writer = args.User;
-                Dirty(entity.Owner, entity.Comp);
-                //SS220 Add auto form end
+                _documentHelper.UpdateUserInterface(entity, args.User); // SS220 Document Helper
             }
 
             args.Handled = true;
@@ -157,11 +146,6 @@ public sealed class PaperSystem : EntitySystem
             _audio.PlayPredicted(stampComp.Sound, entity, args.User);
 
             UpdateUserInterface(entity);
-
-            //SS220 Add auto form begin
-            entity.Comp.Writer = null;
-            Dirty(entity.Owner, entity.Comp);
-            //SS220 Add auto form end
         }
     }
 
@@ -195,11 +179,6 @@ public sealed class PaperSystem : EntitySystem
 
         entity.Comp.Mode = PaperAction.Read;
         UpdateUserInterface(entity);
-
-        //SS220 Add auto form begin
-        entity.Comp.Writer = null;
-        Dirty(entity.Owner, entity.Comp);
-        //SS220 Add auto form end
     }
 
     private void OnPaperWrite(Entity<ActivateOnPaperOpenedComponent> entity, ref PaperWriteEvent args)
@@ -229,8 +208,10 @@ public sealed class PaperSystem : EntitySystem
 
     public void SetContent(Entity<PaperComponent> entity, string content)
     {
-        var formed = _paperAutoFormSystem.ReplaceKeyWords(entity, content); //SS220 Add auto form begin
-        entity.Comp.Content = formed + '\n';  //SS220 Add auto form end
+        // SS220 Add document tags begin
+        //entity.Comp.Content = content;
+        entity.Comp.Content = _documentHelper.ParseTags(entity, content);
+        // SS220 Add document tags end
         Dirty(entity);
         UpdateUserInterface(entity);
 

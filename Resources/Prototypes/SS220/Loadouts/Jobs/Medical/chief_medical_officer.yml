@@ -40,4 +40,4 @@
   - !type:GroupLoadoutEffect
     proto: CMOCorporate
   equipment:
-    eyes: ClothingShoesCMOCorporate
+    shoes: ClothingShoesCMOCorporate

@@ -12,6 +12,12 @@ public sealed partial class EventCapturePointFlagComponent : Component
 {
     [ViewVariables, DataField, AutoNetworkedField]
     public bool Planted;
+
+    /// <summary>
+    /// The name of the faction to which this flag belongs
+    /// </summary>
+    [DataField]
+    public string? Fraction;
 }
 
 [Serializable, NetSerializable]

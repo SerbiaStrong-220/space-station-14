@@ -1,0 +1,19 @@
+name: "Discord changelogger"
+
+on:
+  pull_request_target:
+    branches:
+      - master
+    types: [closed]
+
+jobs:
+  send_changelog:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    name: Send a changelog to the Discord server
+    steps:
+      - name: Generate and send message
+        uses: SerbiaStrong-220/ss220-DiscordCLAct@main
+        with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}

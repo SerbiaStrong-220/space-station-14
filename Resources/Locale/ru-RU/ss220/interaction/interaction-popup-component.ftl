@@ -1,0 +1,1 @@
+petting-success-giant-fly = Удивительно, вам удаётся погладить { $target } по { POSS-ADJ($target) } большеглазой осиной головке.
