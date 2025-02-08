@@ -326,7 +326,7 @@
       - ChemistryEmptyBottle01
       - AdvMopItem
       - TrashBagAdvanced #SS220 Borg Modules
-      - WeaponSprayNozzle
+      - SprayNozzle
       - ClothingBackpackWaterTank
       - MegaSprayBottle
       - TimerTrigger
