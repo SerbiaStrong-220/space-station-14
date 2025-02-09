@@ -438,6 +438,11 @@
     interfaces:
       enum.MeleeSpeechUiKey.Key:
         type: MeleeSpeechBoundUserInterface
+      enum.ChameleonUiKey.Key:
+        type: ChameleonBoundUserInterface
+  - type: ChameleonClothing
+    slot: [gloves]
+    default: ClothingHandsGlovesNorthStar
   - type: StaticPrice
     price: 0
 
