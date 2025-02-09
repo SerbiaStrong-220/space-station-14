@@ -6,10 +6,9 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.SupaKitchen.Systems;
 
-public abstract partial class SharedRecipeAssemblerSystem : EntitySystem
+public abstract partial class SharedRecipeAssemblerSystem : CookingInstrumentSystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly CookingInstrumentSystem _instrumentSystem = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
@@ -22,15 +21,9 @@ public abstract partial class SharedRecipeAssemblerSystem : EntitySystem
 
     private void OnAlternativeVerb(Entity<RecipeAssemblerComponent> entity, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!TryComp<CookingInstrumentComponent>(entity, out var cookingInstrument))
-        {
-            Log.Error($"{Name(entity.Owner)} doesn't have a CookingInstrumentComponent for selecting recipes");
-            return;
-        }
-
         var user = args.User;
         var ents = _entityLookup.GetEntitiesInRange(entity, entity.Comp.Range);
-        var recipes = _instrumentSystem.GetSatisfiedRecipes(cookingInstrument, ents, 0);
+        var recipes = GetSatisfiedRecipes(entity.Comp, ents, 0);
 
         foreach (var (recipe, count) in recipes)
         {

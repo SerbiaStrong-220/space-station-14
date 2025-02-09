@@ -15,15 +15,14 @@
   - type: PlaceableSurface
     placeCentered: true
     isPlaceable: false
-  - type: CookingInstrument
-    ignoreTime: true
+  - type: Oven
     instrumentType: oven
+    ignoreTime: true
 #  - type: CookingMachine
 #    beginCookingSound: "/Audio/SS220/SupaKitchen/oven/oven_loop_start.ogg"
 #    loopingSound: "/Audio/SS220/SupaKitchen/oven/oven_loop_mid.ogg"
 #    foodDoneSound: "/Audio/SS220/SupaKitchen/ring.ogg"
 #    useEntityStorage: true
-  - type: CookingConstantly
   - type: DeviceLinkSink
     ports:
     - On
@@ -36,9 +35,9 @@
       map: ["base"]
     - state: oven_door_closed
       map: ["oven_door"]
-    - map: ["enum.CookingConstantlyVisuals.Active"]
+    - map: ["enum.OvenVisuals.Active"]
       state: oven_off
-    - map: ["enum.CookingConstantlyVisuals.ActiveUnshaded"]
+    - map: ["enum.OvenVisuals.ActiveUnshaded"]
       state: oven_on_unshaded
       visible: false
   - type: Appearance
@@ -48,7 +47,7 @@
         oven_door:
           True: { state: oven_door_open }
           False: { state: oven_door_closed }
-      enum.CookingConstantlyVisuals.VisualState:
+      enum.OvenVisuals.VisualState:
         base:
           UnPowered: { state: "oven_base" }
           Idle: { state: "oven_base" }

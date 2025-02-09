@@ -8,6 +8,5 @@
     sprite: SS220/Objects/Fun/Tabletop/chessboard.rsi #SS220-Tabletop-Resprite
     state: chessboard
   - type: RecipeAssembler
-  - type: CookingInstrument
     instrumentType: choppingBoard
     ignoreTime: true

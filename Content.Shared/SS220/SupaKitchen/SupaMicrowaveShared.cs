@@ -4,42 +4,41 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.SupaKitchen;
 
 [Serializable, NetSerializable]
-public sealed class CookingMachineStartCookMessage : BoundUserInterfaceMessage
+public sealed class SupaMicrowaveStartCookMessage : BoundUserInterfaceMessage
 {
 }
 
 [Serializable, NetSerializable]
-public sealed class CookingMachineEjectMessage : BoundUserInterfaceMessage
+public sealed class SupaMicrowaveEjectMessage : BoundUserInterfaceMessage
 {
-
 }
 
 [Serializable, NetSerializable]
-public sealed class CookingMachineEjectSolidIndexedMessage : BoundUserInterfaceMessage
+public sealed class SupaMicrowaveEjectSolidIndexedMessage : BoundUserInterfaceMessage
 {
     public NetEntity EntityID;
-    public CookingMachineEjectSolidIndexedMessage(NetEntity entityId)
+    public SupaMicrowaveEjectSolidIndexedMessage(NetEntity entityId)
     {
         EntityID = entityId;
     }
 }
 
 [Serializable, NetSerializable]
-public sealed class CookingMachineVaporizeReagentIndexedMessage : BoundUserInterfaceMessage
+public sealed class SupaMicrowaveVaporizeReagentIndexedMessage : BoundUserInterfaceMessage
 {
     public ReagentQuantity ReagentQuantity;
-    public CookingMachineVaporizeReagentIndexedMessage(ReagentQuantity reagentQuantity)
+    public SupaMicrowaveVaporizeReagentIndexedMessage(ReagentQuantity reagentQuantity)
     {
         ReagentQuantity = reagentQuantity;
     }
 }
 
 [Serializable, NetSerializable]
-public sealed class CookingMachineSelectCookTimeMessage : BoundUserInterfaceMessage
+public sealed class SupaMicrowaveSelectCookTimeMessage : BoundUserInterfaceMessage
 {
     public int ButtonIndex;
     public uint NewCookTime;
-    public CookingMachineSelectCookTimeMessage(int buttonIndex, uint inputTime)
+    public SupaMicrowaveSelectCookTimeMessage(int buttonIndex, uint inputTime)
     {
         ButtonIndex = buttonIndex;
         NewCookTime = inputTime;
@@ -47,19 +46,19 @@ public sealed class CookingMachineSelectCookTimeMessage : BoundUserInterfaceMess
 }
 
 [NetSerializable, Serializable]
-public sealed class CookingMachineUpdateUserInterfaceState : BoundUserInterfaceState
+public sealed class SupaMicrowaveUpdateUserInterfaceState : BoundUserInterfaceState
 {
     public NetEntity[] ContainedSolids;
-    public CookingMachineState MachineState;
+    public SupaMicrowaveState State;
     public int ActiveButtonIndex;
     public uint CurrentCookTime;
     public bool EjectUnavailable;
 
-    public CookingMachineUpdateUserInterfaceState(NetEntity[] containedSolids,
-        CookingMachineState machineState, int activeButtonIndex, uint currentCookTime, bool ejectUnavailable)
+    public SupaMicrowaveUpdateUserInterfaceState(NetEntity[] containedSolids,
+        SupaMicrowaveState state, int activeButtonIndex, uint currentCookTime, bool ejectUnavailable)
     {
         ContainedSolids = containedSolids;
-        MachineState = machineState;
+        State = state;
         ActiveButtonIndex = activeButtonIndex;
         CurrentCookTime = currentCookTime;
         EjectUnavailable = ejectUnavailable;
@@ -67,7 +66,7 @@ public sealed class CookingMachineUpdateUserInterfaceState : BoundUserInterfaceS
 }
 
 [Serializable, NetSerializable]
-public enum CookingMachineState
+public enum SupaMicrowaveState
 {
     Idle,
     UnPowered,
@@ -76,7 +75,7 @@ public enum CookingMachineState
 }
 
 [Serializable, NetSerializable]
-public enum CookingMachineVisualState
+public enum SupaMicrowaveVisualState
 {
     Idle,
     Cooking,
@@ -84,7 +83,7 @@ public enum CookingMachineVisualState
 }
 
 [Serializable, NetSerializable]
-public enum CookingMachineUiKey
+public enum SupaMicrowaveUiKey
 {
     Key
 }

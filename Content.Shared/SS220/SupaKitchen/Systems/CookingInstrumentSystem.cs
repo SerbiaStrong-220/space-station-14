@@ -2,11 +2,13 @@
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.SupaKitchen.Components;
 using Robust.Shared.Containers;
 using System.Linq;
 
 namespace Content.Shared.SS220.SupaKitchen.Systems;
-public sealed class CookingInstrumentSystem : EntitySystem
+
+public abstract partial class CookingInstrumentSystem : EntitySystem
 {
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly SupaRecipeManager _recipeManager = default!;
@@ -18,7 +20,7 @@ public sealed class CookingInstrumentSystem : EntitySystem
     }
 
     public static (CookingRecipePrototype, int) SatisfyRecipe(
-        CookingInstrumentComponent component,
+        BaseCookingInstrumentComponent component,
         CookingRecipePrototype recipe,
         Dictionary<string, int> solids,
         Dictionary<string, FixedPoint2> reagents,
@@ -143,7 +145,7 @@ public sealed class CookingInstrumentSystem : EntitySystem
     }
 
     public (CookingRecipePrototype, int) GetSatisfiedPortionedRecipe(
-        CookingInstrumentComponent component,
+        BaseCookingInstrumentComponent component,
         IEnumerable<EntityUid> entities,
         uint cookingTimer)
     {
@@ -151,7 +153,7 @@ public sealed class CookingInstrumentSystem : EntitySystem
     }
 
     public (CookingRecipePrototype, int) GetSatisfiedPortionedRecipe(
-        CookingInstrumentComponent component,
+        BaseCookingInstrumentComponent component,
         Dictionary<string, int> solidsDict,
         Dictionary<string, FixedPoint2> reagentDict,
         uint cookingTimer
@@ -176,7 +178,7 @@ public sealed class CookingInstrumentSystem : EntitySystem
     }
 
     public Dictionary<CookingRecipePrototype, int> GetSatisfiedRecipes(
-    CookingInstrumentComponent component,
+    BaseCookingInstrumentComponent component,
     IEnumerable<EntityUid> entities,
     uint cookingTimer)
     {
@@ -226,7 +228,7 @@ public sealed class CookingInstrumentSystem : EntitySystem
         return reagents;
     }
 
-    public bool CanCookRecipe(CookingInstrumentComponent component,
+    public bool CanCookRecipe(BaseCookingInstrumentComponent component,
         CookingRecipePrototype recipe,
         IEnumerable<EntityUid> entities,
         uint cookingTimer)

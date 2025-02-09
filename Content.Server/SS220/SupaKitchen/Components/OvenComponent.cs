@@ -10,7 +10,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.SS220.SupaKitchen.Components;
 
 [RegisterComponent]
-public sealed partial class CookingConstantlyComponent : SharedCookingConstantlyComponent
+public sealed partial class OvenComponent : SharedOvenComponent
 {
     [ViewVariables]
     public EntityUid? LastUser;

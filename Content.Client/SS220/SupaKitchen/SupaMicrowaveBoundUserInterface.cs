@@ -9,10 +9,10 @@ using Robust.Client.UserInterface.Controls;
 namespace Content.Client.SS220.SupaKitchen.UI
 {
     [UsedImplicitly]
-    public sealed class CookingMachineBoundUserInterface : BoundUserInterface
+    public sealed class SupaMicrowaveBoundUserInterface : BoundUserInterface
     {
         [ViewVariables]
-        private CookingMachineWindow? _menu;
+        private SupaMicrowaveWindow? _menu;
 
         [ViewVariables]
         private readonly Dictionary<int, EntityUid> _solids = new();
@@ -22,7 +22,7 @@ namespace Content.Client.SS220.SupaKitchen.UI
 
         private IEntityManager _entManager;
 
-        public CookingMachineBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+        public SupaMicrowaveBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
             _entManager = IoCManager.Resolve<IEntityManager>();
         }
@@ -30,20 +30,20 @@ namespace Content.Client.SS220.SupaKitchen.UI
         protected override void Open()
         {
             base.Open();
-            _menu = new CookingMachineWindow(this);
+            _menu = new SupaMicrowaveWindow(this);
             _menu.OpenCentered();
             _menu.OnClose += Close;
-            _menu.StartButton.OnPressed += _ => SendMessage(new CookingMachineStartCookMessage());
-            _menu.EjectButton.OnPressed += _ => SendMessage(new CookingMachineEjectMessage());
+            _menu.StartButton.OnPressed += _ => SendMessage(new SupaMicrowaveStartCookMessage());
+            _menu.EjectButton.OnPressed += _ => SendMessage(new SupaMicrowaveEjectMessage());
             _menu.IngredientsList.OnItemSelected += args =>
             {
-                SendMessage(new CookingMachineEjectSolidIndexedMessage(_entManager.GetNetEntity(_solids[args.ItemIndex])));
+                SendMessage(new SupaMicrowaveEjectSolidIndexedMessage(_entManager.GetNetEntity(_solids[args.ItemIndex])));
             };
 
             _menu.OnCookTimeSelected += (args, buttonIndex) =>
             {
-                var actualButton = (CookingMachineWindow.MicrowaveCookTimeButton) args.Button;
-                SendMessage(new CookingMachineSelectCookTimeMessage(buttonIndex, actualButton.CookTime));
+                var actualButton = (SupaMicrowaveWindow.MicrowaveCookTimeButton) args.Button;
+                SendMessage(new SupaMicrowaveSelectCookTimeMessage(buttonIndex, actualButton.CookTime));
             };
         }
 
@@ -61,12 +61,12 @@ namespace Content.Client.SS220.SupaKitchen.UI
         protected override void UpdateState(BoundUserInterfaceState state)
         {
             base.UpdateState(state);
-            if (state is not CookingMachineUpdateUserInterfaceState cState)
+            if (state is not SupaMicrowaveUpdateUserInterfaceState cState)
             {
                 return;
             }
 
-            if (cState.MachineState is CookingMachineState.Idle)
+            if (cState.State is SupaMicrowaveState.Idle)
                 _menu?.ToggleBusyDisableOverlayPanel(false);
             else
                 _menu?.ToggleBusyDisableOverlayPanel(true);
@@ -78,9 +78,9 @@ namespace Content.Client.SS220.SupaKitchen.UI
             var currentlySelectedTimeButton = (Button) _menu.CookTimeButtonVbox.GetChild(cState.ActiveButtonIndex);
             currentlySelectedTimeButton.Pressed = true;
             var cookTime = cState.ActiveButtonIndex == 0
-                ? Loc.GetString("cooking-machine-menu-instant-button")
+                ? Loc.GetString("supa-microwave-menu-instant-button")
                 : cState.CurrentCookTime.ToString();
-            _menu.CookTimeInfoLabel.Text = Loc.GetString("cooking-machine-bound-user-interface-cook-time-label",
+            _menu.CookTimeInfoLabel.Text = Loc.GetString("supa-microwave-bound-user-interface-cook-time-label",
                                                          ("time", cookTime));
 
             _menu.EjectButton.Visible = !cState.EjectUnavailable;

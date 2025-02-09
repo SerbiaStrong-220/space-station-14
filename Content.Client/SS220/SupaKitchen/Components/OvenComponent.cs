@@ -4,7 +4,7 @@ using Content.Shared.SS220.SupaKitchen.Components;
 namespace Content.Client.SS220.SupaKitchen.Components;
 
 [RegisterComponent]
-public sealed partial class CookingConstantlyComponent : SharedCookingConstantlyComponent
+public sealed partial class OvenComponent : SharedOvenComponent
 {
     [DataField]
     public string ActiveState = "oven_on";

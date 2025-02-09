@@ -7,16 +7,14 @@
 #  - type: Microwave #SS220 remove default microwave
 #    capacity: 10
   #SS220 supa kitchen begin
-  - type: CookingInstrument
-    instrumentType: microwave
-  - type: CookingMachine
   - type: SupaMicrowave
+    instrumentType: microwave
   - type: ActivatableUI
-    key: enum.CookingMachineUiKey.Key
+    key: enum.SupaMicrowaveUiKey.Key
   - type: UserInterface
     interfaces:
-      enum.CookingMachineUiKey.Key:
-        type: CookingMachineBoundUserInterface
+      enum.SupaMicrowaveUiKey.Key:
+        type: SupaMicrowaveBoundUserInterface
   #SS220 supa kitchen end
   - type: Appearance
   - type: GenericVisualizer
@@ -29,11 +27,11 @@
           True: { visible: true }
           False: { visible: false }
       enum.PowerDeviceVisuals.VisualState:
-        enum.CookingMachineVisualizerLayers.Base:
+        enum.SupaMicrowaveVisualizerLayers.Base:
           Idle: { state: "mw" }
           Broken: { state: "mwb" }
           Cooking: { state: "mw" }
-        enum.CookingMachineVisualizerLayers.BaseUnlit:
+        enum.SupaMicrowaveVisualizerLayers.BaseUnlit:
           Idle: { state: "mw_unlit" }
           Broken: { state: "mw_unlit" }
           Cooking: { state: "mw_running_unlit" }
@@ -41,7 +39,7 @@
           Idle: { visible: false }
           Broken: { visible: false }
       enum.PowerDeviceVisuals.Powered:
-        enum.CookingMachineVisualizerLayers.BaseUnlit:
+        enum.SupaMicrowaveVisualizerLayers.BaseUnlit:
           True: { visible: true }
           False: { visible: false }
 #SS220 remove default microwave begin
@@ -80,10 +78,10 @@
     snapCardinals: true
     layers:
     - state: mw0
-      map: ["enum.CookingMachineVisualizerLayers.Base"]
+      map: ["enum.SupaMicrowaveVisualizerLayers.Base"]
     - state: mw_unlit
       shader: unshaded
-      map: ["enum.CookingMachineVisualizerLayers.BaseUnlit"]
+      map: ["enum.SupaMicrowaveVisualizerLayers.BaseUnlit"]
     - state: mwbloody0
       map: ["bloody"]
       visible: false
@@ -139,7 +137,7 @@
   #   explosionChance: 0.3
   #SS220 remove default microwave end
   #SS220 supa kitchen begin
-  - type: CookingInstrument
+  - type: SupaMicrowave
     additionalRecipes:
     - RecipeBaguetteSword
     - RecipeThrowingCroissant
@@ -176,11 +174,11 @@
           True: { visible: true }
           False: { visible: false }
       enum.PowerDeviceVisuals.VisualState:
-        enum.CookingMachineVisualizerLayers.Base:
+        enum.SupaMicrowaveVisualizerLayers.Base:
           Idle: { state: "mw" }
           Broken: { state: "mwb" }
           Cooking: { state: "mw" }
-        enum.CookingMachineVisualizerLayers.BaseUnlit:
+        enum.SupaMicrowaveVisualizerLayers.BaseUnlit:
           Idle: { state: "mw_unlit" }
           Broken: { state: "mw_unlit" }
           Cooking: { state: "mw_running_unlit" }
@@ -188,7 +186,7 @@
           Idle: { visible: false }
           Broken: { visible: false }
       enum.PowerDeviceVisuals.Powered:
-        enum.CookingMachineVisualizerLayers.BaseUnlit:
+        enum.SupaMicrowaveVisualizerLayers.BaseUnlit:
           True: { visible: true }
           False: { visible: false }
   - type: ActivatableUI
@@ -223,10 +221,10 @@
     snapCardinals: true
     layers:
     - state: mw0
-      map: ["enum.CookingMachineVisualizerLayers.Base"]
+      map: ["enum.SupaMicrowaveVisualizerLayers.Base"]
     - state: mw_unlit
       shader: unshaded
-      map: ["enum.CookingMachineVisualizerLayers.BaseUnlit"]
+      map: ["enum.SupaMicrowaveVisualizerLayers.BaseUnlit"]
     - state: mwbloody0
       map: ["bloody"]
       visible: false

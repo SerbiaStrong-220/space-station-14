@@ -1,9 +1,9 @@
 <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
 <DefaultWindow xmlns="https://spacestation14.io"
-            xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-            Title="{Loc 'cooking-machine-menu-title'}"
-            SetSize="512 256"
-            MinSize="512 256">
+               xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+               Title="{Loc 'supa-microwave-menu-title'}"
+               SetSize="512 256"
+               MinSize="512 256">
     <BoxContainer Orientation="Horizontal">
         <ItemList Name="IngredientsList"
                   Access="Public"
@@ -23,12 +23,12 @@
                           SizeFlagsStretchRatio="3">
                 <Button Name="StartButton"
                         Access="Public"
-                        Text="{Loc 'cooking-machine-menu-start-button'}"
+                        Text="{Loc 'supa-microwave-menu-start-button'}"
                         TextAlign="Center" />
                 <Button Name="EjectButton"
                         Access="Public"
-                        Text="{Loc 'cooking-machine-menu-eject-all-text'}"
-                        ToolTip="{Loc 'cooking-machine-menu-eject-all-tooltip'}"
+                        Text="{Loc 'supa-microwave-menu-eject-all-text'}"
+                        ToolTip="{Loc 'supa-microwave-menu-eject-all-tooltip'}"
                         TextAlign="Center" />
             </BoxContainer>
             <Control MinSize="0 15" />
