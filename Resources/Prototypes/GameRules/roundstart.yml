@@ -356,18 +356,19 @@
 #    scheduledGameRules: !type:NestedSelector
 #      tableId: SpaceTrafficControlTable
 
-# - type: entity
-#   id: SpaceTrafficControlFriendlyEventScheduler
-#   parent: BaseGameRule
-#   components:
-#   - type: BasicStationEventScheduler
-#     minimumTimeUntilFirstEvent: 1200 # 20 mins
-#     minMaxEventTiming:
-#       min: 600 # 10 mins
-#       max: 1800 # 30 mins
-#     scheduledGameRules: !type:NestedSelector
-#       tableId: UnknownShuttlesFriendlyTable
-# SS220-NoUnknownShuttles begin end
+#SS220-LostSoulsRevive
+- type: entity
+  id: SpaceTrafficControlFriendlyEventScheduler
+  parent: BaseGameRule
+  components:
+  - type: BasicStationEventScheduler
+    minimumTimeUntilFirstEvent: 2400 # 40 mins
+    minMaxEventTiming:
+      min: 3000 # 40 mins
+      max: 3600 # 60 mins
+    scheduledGameRules: !type:NestedSelector
+      tableId: UnknownShuttlesFriendlyTable
+#SS220-LostSoulsRevive
 
 # variation passes
 - type: entity
