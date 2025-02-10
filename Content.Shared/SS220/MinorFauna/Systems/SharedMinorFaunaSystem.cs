@@ -20,7 +20,6 @@ public abstract class SharedMinorFaunaSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<CocoonerComponent, ActionEntityCocooningEvent>(OnCocooningAction);
-        SubscribeLocalEvent<CocoonerComponent, AfterEntityCocooningEvent>(OnAfterEntityCocooningEvent);
     }
 
     private void OnCocooningAction(Entity<CocoonerComponent> entity, ref ActionEntityCocooningEvent args)
@@ -54,15 +53,6 @@ public abstract class SharedMinorFaunaSystem : EntitySystem
             performer,
             target
         );
-    }
-    private void OnAfterEntityCocooningEvent(Entity<CocoonerComponent> entity, ref AfterEntityCocooningEvent args)
-    {
-        if (args.Cancelled || args.Target is not EntityUid target)
-            return;
-
-        if (!TryComp<TransformComponent>(target, out var transform) || !_mobState.IsDead(target))
-            return;
-
     }
 
 }
