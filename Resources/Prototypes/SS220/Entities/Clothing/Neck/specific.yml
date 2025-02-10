@@ -35,9 +35,9 @@
   suffix: For playtime
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/druid_amulet.rsi
+      sprite: SS220/Clothing/Neck/Misc/hydro_druid_amulet.rsi
     - type: Clothing
-      sprite: SS220/Clothing/Neck/druid_amulet.rsi
+      sprite: SS220/Clothing/Neck/Misc/hydro_druid_amulet.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -47,6 +47,6 @@
   suffix: For playtime
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/Ruffs/whiteruff.rsi
+      sprite: SS220/Clothing/Neck/Misc/whiteruff.rsi
     - type: Clothing
-      sprite: SS220/Clothing/Neck/Ruffs/whiteruff.rsi
+      sprite: SS220/Clothing/Neck/Misc/whiteruff.rsi

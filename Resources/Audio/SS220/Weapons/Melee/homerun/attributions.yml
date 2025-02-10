@@ -1,0 +1,9 @@
+- files: ["homerun.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Is taken from paradise station at commit 5180002295c625876e9fb60f07d08c882c1e443e"
+  source: "https://github.com/ss220club/Paradise-SS220/blob/master/sound/weapons/homerun.ogg"
+
+- files: ["homerunbaton.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "https://github.com/ss220club/Paradise-SS220/blob/master/sound/weapons/homerun.ogg, https://github.com/ParadiseSS13/Paradise/blob/master/sound/weapons/batonextend.ogg, https://www.freesoundslibrary.com/bonk-sound-effect/"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/tree/master/Resources/Audio/SS220/Weapons/Melee/homerun/homerunbaton.ogg"

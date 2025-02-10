@@ -6,7 +6,7 @@
     mode: SnapgridCenter
   components:
     - type: Sprite
-      sprite: Structures/Power/cable_terminal.rsi
+      sprite: SS220/Structures/Power/cable_terminal.rsi #ss220-engineering-update-power
       state: term
       drawdepth: BelowFloor
     - type: Clickable

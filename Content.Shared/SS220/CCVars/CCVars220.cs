@@ -3,7 +3,7 @@ using Robust.Shared.Configuration;
 namespace Content.Shared.SS220.CCVars;
 
 [CVarDefs]
-public sealed class CCVars220
+public sealed partial class CCVars220
 {
     /// <summary>
     /// Whether is bloom lighting eanbled or not
@@ -45,12 +45,6 @@ public sealed class CCVars220
         CVarDef.Create("ahelp.volume", 0.50f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     /// <summary>
-    /// (SS220) AHelp Sound on/off.
-    /// </summary>
-    public static readonly CVarDef<bool> AHelpSoundsEnabled =
-        CVarDef.Create("audio.ahelp_sounds_enabled", true, CVar.ARCHIVE | CVar.CLIENTONLY);
-
-    /// <summary>
     /// Delay Between raising the networked event <see cref="SuperMatterStateUpdate"/>.
     /// </summary>
     public static readonly CVarDef<float> SuperMatterUpdateNetworkDelay =
@@ -79,6 +73,9 @@ public sealed class CCVars220
 
     public static readonly CVarDef<float> AfkTeleportToCryo =
         CVarDef.Create("afk.teleport_to_cryo", 1800f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> AfkActivityMessageInterval =
+        CVarDef.Create("afk.activity_message_interval", 20f, CVar.CLIENTONLY | CVar.CHEAT);
 
     /// <summary>
     ///     Controls whether the server will deny any players that are not whitelisted in the Prime DB.
@@ -109,4 +106,10 @@ public sealed class CCVars220
     /// </summary>
     public static readonly CVarDef<string> DiscordLinkApiKey =
         CVarDef.Create("discord_auth.link_key", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    /// How different is the game year from the real one
+    /// </summary>
+    public static readonly CVarDef<int> GameYearDelta =
+        CVarDef.Create("date.game_year_delta", 544, CVar.SERVER | CVar.REPLICATED);
 }

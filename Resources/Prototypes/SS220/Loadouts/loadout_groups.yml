@@ -260,6 +260,7 @@
   name: loadout-group-security-pilot-head
   minLimit: 0
   loadouts:
+  - SecurityHelmetXmas
   - SecurityHelmet
   - SecurityBeret
   - SecurityHat
@@ -277,6 +278,17 @@
   - VestArmorSec
   - CyberVestSecurity
   # Пилот (Конец)
+
+  # Детектив (Начало)
+- type: loadoutGroup
+  id: DetectiveShoes
+  name: loadout-group-detective-shoes
+  loadouts:
+  - JackBoots
+  - SecurityWinterBoots
+  - BootsJackSec
+  - DetectiveShoesBootsLaceup
+  # Детектив (Конец)
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -465,6 +477,15 @@
   - ParamedicBaseBelt
   - ParamedInterdyneBelt
   # Парамедик (конец)
+
+  # Главный врач (Начало)
+- type: loadoutGroup
+  id: ChiefMedicalOfficerGlasses
+  name: loadout-group-chief-medical-officer-eyes
+  loadouts:
+  - Glasses
+  - CyberMedVisor
+  - CMOCorpGlasses
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -576,6 +597,7 @@
   loadouts:
   - ClothingHeadHatSalvage
   - ClothingHeadBandSalvage
+  - ClothingHeadHatHardhatVioletXmas
   - ClothingHeadHatHardhatViolet
   - ClothingHeadBeretSalvageSpecialist
   # Утилизатор (Конец)

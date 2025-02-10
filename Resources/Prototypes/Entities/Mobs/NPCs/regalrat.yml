@@ -22,7 +22,7 @@
     - SimpleHostile
   - type: Sprite
     drawdepth: SmallMobs
-    sprite: Mobs/Animals/regalrat.rsi
+    sprite: SS220/Mobs/Animals/regalrat.rsi #SS20 XMAS
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: regalrat
@@ -91,6 +91,8 @@
     name: ghost-role-information-rat-king-name
     description: ghost-role-information-rat-king-description
     rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -197,7 +199,7 @@
     - SimpleHostile
   - type: Sprite
     drawdepth: SmallMobs
-    sprite: Mobs/Animals/rat.rsi
+    sprite: SS220/Mobs/Animals/rat.rsi #SS220 XMAS
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: rat
