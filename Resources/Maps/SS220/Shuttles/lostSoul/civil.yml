@@ -1260,6 +1260,54 @@ entities:
 
 
 
+- proto: PaperNtFormCc
+  entities:
+  - uid: 273
+    components:
+    - type: Transform
+      pos: -0.29363596,6.4594717
+      parent: 1
+    - type: Paper
+      stampState: paper_stamp-centcom
+      stampedBy:
+      - stampedColor: '#DCA019FF'
+        stampedName: stamp-component-stamped-name-centcom
+      content: >+
+        [bold]Форма НТ-ЦК-КОМ-УКЗ[/bold]
+
+        [head=2]Дозволительный указ[/head]
+
+
+        [italic]Дата: 11.02.2568 [/italic]
+
+
+        Уважаемое командование станции [bold]NanoTrasen[/bold]!
+
+        От лица [bold]Центрального Командования[/bold] я уведомляю вас о том, что судно, записанное в [bold]дозволительном указе[/bold] получило официальное разрешение на [bold]пребывание и ведение деятельности[/bold] в секторах и станциях [bold]NanoTrasen[/bold].
+
+
+        [bullet][bold]Тип шаттла[/bold]:
+
+        Туристическое судно UC-CV "Visitor" 
+
+        [bullet][bold]Перепись экипажа[/bold]:
+
+        2 Гражданских лица
+
+        [bullet][bold]Тип проводимой работы[/bold]: Туристический визит
+
+        [bullet][bold]Разрешение на деятельность[/bold]:
+
+        Находиться в секторе и на борту станции
+
+
+        [bold]Офицер Центрального Командования[/bold]: Пётр Шахин
+
+
+        [italic]Место для печати[/italic]
+
+
+
 - proto: Pen
   entities:
   - uid: 158
