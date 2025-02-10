@@ -108,6 +108,12 @@ public sealed partial class CCVars220
         CVarDef.Create("discord_auth.link_key", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
     /// <summary>
+    /// Allow enter server with bypass link check.
+    /// </summary>
+    public static readonly CVarDef<bool> ByPassDiscordLinkCheck =
+        CVarDef.Create("discord_auth.bypass_check", false, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
     /// How different is the game year from the real one
     /// </summary>
     public static readonly CVarDef<int> GameYearDelta =

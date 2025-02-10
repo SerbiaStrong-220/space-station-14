@@ -44,7 +44,6 @@ namespace Content.Server.Database
         public DbSet<AdminWatchlist> AdminWatchlists { get; set; } = null!;
         public DbSet<AdminMessage> AdminMessages { get; set; } = null!;
         public DbSet<RoleWhitelist> RoleWhitelists { get; set; } = null!;
-        public DbSet<DiscordPlayer> DiscordPlayers { get; set; } = null!;
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
 
@@ -324,15 +323,6 @@ namespace Content.Server.Database
                 .HasForeignKey(ban => ban.LastEditedById)
                 .HasPrincipalKey(author => author.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
-
-            modelBuilder.Entity<DiscordPlayer>(entity =>
-            {
-                entity.HasIndex(p => p.Id).IsUnique();
-                entity.HasAlternateKey(p => p.SS14Id);
-                entity.Property(p => p.SS14Id).IsUnicode();
-                entity.HasIndex(p => p.DiscordId).IsUnique();
-                entity.Property(p => p.Id).ValueGeneratedOnAdd();
-            });
 
             modelBuilder.Entity<RoleWhitelist>()
                 .HasOne(w => w.Player)
@@ -1214,14 +1204,6 @@ namespace Content.Server.Database
         /// Whether the message has been dismissed permanently by the player.
         /// </summary>
         public bool Dismissed { get; set; }
-    }
-
-    public record DiscordPlayer
-    {
-        public Guid Id { get; set; }
-        public Guid SS14Id { get; set; }
-        public string HashKey { get; set; } = string.Empty;
-        public ulong? DiscordId { get; set; }
     }
 
     [PrimaryKey(nameof(PlayerUserId), nameof(RoleId))]
