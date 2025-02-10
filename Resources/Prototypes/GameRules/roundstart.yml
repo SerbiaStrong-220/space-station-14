@@ -356,7 +356,7 @@
 #    scheduledGameRules: !type:NestedSelector
 #      tableId: SpaceTrafficControlTable
 
-#SS220-LostSoulsRevive
+#SS220-LostSoulsRevive begin
 - type: entity
   id: SpaceTrafficControlFriendlyEventScheduler
   parent: BaseGameRule
@@ -368,7 +368,7 @@
       max: 3600 # 60 mins
     scheduledGameRules: !type:NestedSelector
       tableId: UnknownShuttlesFriendlyTable
-#SS220-LostSoulsRevive
+#SS220-LostSoulsRevive end
 
 # variation passes
 - type: entity
