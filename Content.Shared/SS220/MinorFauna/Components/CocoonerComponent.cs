@@ -1,6 +1,5 @@
-namespace Content.Shared.SS220.MinorFauna;
-
-public sealed partial class MinorFaunaComponent : Component
+namespace Content.Shared.SS220.MinorFauna.Components;
+public sealed partial class CocoonerComponent : Component
 {
     /// <summary>
     /// Minimal distance for cocooning

@@ -37,12 +37,13 @@ public sealed partial class PryingComponent : Component
     /// </summary>
     [DataField]
     public bool Enabled = true;
-
+    //SS220 fauna Update start
     [ViewVariables]
     public EntityUid? ActionPryingEntity;
 
     [DataField("actionPry")]
     public EntProtoId ActionPrying = "ActionPrying";
+    //SS220 fauna Update end
 }
 
 /// <summary>
@@ -100,5 +101,3 @@ public record struct GetPryTimeModifierEvent
         User = user;
     }
 }
-
-

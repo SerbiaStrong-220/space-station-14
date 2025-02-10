@@ -1,8 +1,10 @@
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Content.Shared.SS220.SpiderQueen.Components;
-using Content.Shared.SS220.SpiderQueen;
+using Content.Shared.SS220.MinorFauna.Actions;
+using Content.Shared.SS220.MinorFauna.Events;
+using Content.Shared.SS220.MinorFauna.Components;
+
 
 namespace Content.Shared.SS220.MinorFauna.Systems;
 
@@ -17,10 +19,11 @@ public abstract class SharedMinorFaunaSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MinorFaunaComponent, ActionSpiderCocooningEvent>(OnCocooningAction);
+        SubscribeLocalEvent<CocoonerComponent, ActionEntityCocooningEvent>(OnCocooningAction);
+        SubscribeLocalEvent<CocoonerComponent, AfterEntityCocooningEvent>(OnAfterEntityCocooningEvent);
     }
 
-    private void OnCocooningAction(Entity<MinorFaunaComponent> entity, ref ActionSpiderCocooningEvent args)
+    private void OnCocooningAction(Entity<CocoonerComponent> entity, ref ActionEntityCocooningEvent args)
     {
         if (args.Handled)
             return;
@@ -30,7 +33,7 @@ public abstract class SharedMinorFaunaSystem : EntitySystem
 
         foreach (var entityInRange in _entityLookup.GetEntitiesInRange(target, entity.Comp.CocoonsMinDistance))
         {
-            if (!HasComp<MinorFaunaComponent>(entityInRange))
+            if (!HasComp<CocoonerComponent>(entityInRange))
                 continue;
 
             _popup.PopupEntity(Loc.GetString("cocooning-too-close"), performer, performer);
@@ -47,13 +50,18 @@ public abstract class SharedMinorFaunaSystem : EntitySystem
             EntityManager,
             performer,
             args.CocooningTime,
-            new AfterSpiderCocooningEvent(),
+            new AfterEntityCocooningEvent(),
             performer,
             target
         );
     }
-    AfterSpiderCocooningEvent(Entity<MinorFaunaComponent> entity, ref AfterSpiderCocooningEvent args)
+    private void OnAfterEntityCocooningEvent(Entity<CocoonerComponent> entity, ref AfterEntityCocooningEvent args)
     {
+        if (args.Cancelled || args.Target is not EntityUid target)
+            return;
+
+        if (!TryComp<TransformComponent>(target, out var transform) || !_mobState.IsDead(target))
+            return;
 
     }
 
