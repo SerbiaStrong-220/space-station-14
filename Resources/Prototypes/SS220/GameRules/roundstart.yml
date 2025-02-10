@@ -5,14 +5,14 @@
   parent: BaseGameRule
   components:
   - type: GameRule
-    minPlayers: 40 #ToDo calculate around min players
-    delay: #ToDo tweak numbers
+    minPlayers: 40
+    delay:
       min: 300
       max: 600
   - type: CultYoggRule
   - type: AntagSelection
     definitions:
-    - prefRoles: [ CultYoggProto ]
+    - prefRoles: [ CultistOfYoggSothoth ]
       max: 4
       playerRatio: 10
       blacklist:
@@ -25,3 +25,11 @@
   - type: AntagObjectives
     objectives:
     - CultYoggSacraficeObjective
+
+- type: entity
+  parent: BaseGameRule
+  id: FractWar
+  components:
+  - type: LoadMapRule
+    mapPath: /Maps/SS220/EventMaps/FractWarShuttlesMap.yml
+  - type: FractWarRule

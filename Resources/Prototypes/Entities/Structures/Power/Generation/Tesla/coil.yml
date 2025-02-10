@@ -126,7 +126,7 @@
         layer:
         - MachineLayer
   - type: Sprite
-    sprite: Structures/Power/Generation/Tesla/coil.rsi
+    sprite: SS220/Structures/Power/Generation/Tesla/coil.rsi #ss220-engineering-update-power
     noRot: true
     snapCardinals: true
     layers:

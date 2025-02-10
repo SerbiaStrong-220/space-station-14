@@ -8,7 +8,7 @@
   suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Back/Backpacks/whitecapbackpack.rsi
+    sprite: SS220/Clothing/Back/Backpacks/captain_white.rsi
 
   # Офицер "Синий Щит"
 - type: entity
@@ -40,15 +40,3 @@
   components:
   - type: ToggleableClothing
     clothingPrototype: ClothingOuterHardsuitHightBlueshield
-
-# WMT Ebent begin
-- type: entity
-  parent: ClothingBackpack
-  id: ClothingBackpackArmy
-  name: army backpack
-  description: Solid satchel with sleeping bag. Helps you survive long marches.
-  suffix: Ebent, HOCebent
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Back/Backpacks/armybackpack.rsi
-# WMT Ebent end

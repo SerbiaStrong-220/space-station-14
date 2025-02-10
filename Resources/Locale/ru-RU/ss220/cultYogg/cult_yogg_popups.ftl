@@ -1,5 +1,6 @@
 cult-yogg-corrupt-no-proto = Предмет не имеет истинной формы
 cult-yogg-corrupt-already-corrupted = Предмет уже обрел истинную форму
+cult-yogg-corrupt-too-low-tier = Искажения будет доступно при большем числе принесенных жертв
 
 cult-yogg-no-mind = Оболочка не имеет разума
 cult-yogg-enslave-verb = [italic]Поработить[/italic]
@@ -29,6 +30,8 @@ cult-yogg-shroom-markup = В этом человеке пытаются прор
 cult-yogg-stage-eyes-markups = Глаза горят неестественно зелёным пламенем
 
 cult-yogg-resurrected-by-heal = Мистические силы возвращают к жизни {$target}
+
+cult-yogg-cleansing-start = Вы чувствуете, как святая вода внутри вас убивает споры.
 
 cult-yogg-acsending-have-acsending = Один из членов культа в данный момент возносится
 cult-yogg-acsending-migo-full = Достигнуто необходимое количество Ми-Го и все они живы

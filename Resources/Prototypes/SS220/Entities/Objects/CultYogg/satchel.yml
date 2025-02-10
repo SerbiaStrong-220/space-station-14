@@ -8,7 +8,7 @@
   description: description
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Back/Backpacks/cultYogg_backpack.rsi # спрайта нет
+    sprite: SS220/Clothing/Back/Backpacks/cult_yogg.rsi # спрайта нет
   - type: Storage
     maxItemSize: Huge
     grid:

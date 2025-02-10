@@ -13,19 +13,9 @@
   - Revolutionary
   - SpiderQueen
   - CultYogg #SS220 CultYogg
+  - AllHostile
 
 # SS220 AI Mapping Update End
-
-- type: npcFaction
-  id: Revolutionary
-  hostile:
-  - NanoTrasen
-  - DeathSquad #SS220 dq update
-  - Zombie
-  - SimpleHostile
-  - Dragon
-  - SpiderQueen
-  - CultYogg #SS220 CultYogg
 
 # ss220 reaper passive start
 
@@ -49,6 +39,7 @@
   - PetsNT
   - SimpleNeutral
   - CultYogg #SS220 CultYogg
+  - AllHostile
 
 - type: npcFaction
   id: SpiderHostile
@@ -61,6 +52,7 @@
   - Zombie
   - Revolutionary
   - CultYogg #SS220 CultYogg
+  - AllHostile
 
 # ss220 spider queen end
 
@@ -79,6 +71,7 @@
   - SpiderQueen
   - SimpleHostile
   - CultYogg #SS220 CultYogg
+  - AllHostile
 
 #SS220 CultYogg
 - type: npcFaction
@@ -94,3 +87,4 @@
   - Dragon
   - BloodCult
   - SpiderQueen
+  - AllHostile

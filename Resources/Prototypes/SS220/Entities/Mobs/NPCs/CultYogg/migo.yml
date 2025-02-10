@@ -36,6 +36,8 @@
     telepathyChannelPrototype: TelepathyChannelYoggSothothCult
   - type: RandomMetadata
     nameSegments: [ cult_yogg_migo ]
+  - type: Speech
+    speechVerb: LargeMob
   - type: TTS
     voice: forester
   - type: UserInterface
@@ -53,6 +55,8 @@
   #situational for logic
   - type: NoSlip
   - type: Insulated
+  - type: FlashImmunity
+  - type: IgnoreOnfloorSlowers
   #visual
   - type: Sprite
     drawdepth: Mobs
@@ -101,6 +105,10 @@
       - !type:GibBehavior { }
   - type: Stamina
     critThreshold: 200
+  - type: Temperature
+    heatDamageThreshold: 360
+    coldDamageThreshold: -150
+    currentTemperature: 310.15
   - type: Tag
     tags:
     - CannotSuicide

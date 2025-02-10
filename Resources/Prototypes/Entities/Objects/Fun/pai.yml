@@ -21,7 +21,7 @@
         type: StationMapBoundUserInterface
         requireInputValidation: false
   - type: Sprite
-    sprite: Objects/Fun/pai.rsi
+    sprite: SS220/Objects/Fun/pai.rsi #SS220 XMAS
     layers:
     - state: pai-base
     - state: pai-off-overlay
@@ -39,6 +39,8 @@
     roleName: pai-system-role-name
     roleDescription: pai-system-role-description
     roleRules: ghost-role-information-familiar-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
     wipeVerbText: pai-system-wipe-device-verb-text
     wipeVerbPopup: pai-system-wiped-device
     stopSearchVerbText: pai-system-stop-searching-verb-text
@@ -87,7 +89,7 @@
   description: Your Syndicate pal who's fun to be with!
   components:
   - type: Sprite
-    sprite: Objects/Fun/pai.rsi
+    sprite: SS220/Objects/Fun/pai.rsi #SS220 XMAS
     layers:
     - state: pai-base
     - state: syndicate-pai-off-overlay
@@ -97,6 +99,8 @@
     roleName: pai-system-role-name-syndicate
     roleDescription: pai-system-role-description-syndicate
     roleRules: ghost-role-information-familiar-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
   - type: IntrinsicRadioTransmitter
     channels:
     - Syndicate
@@ -129,7 +133,7 @@
   description: It's a potato. You forced it to be sentient, you monster.
   components:
   - type: Sprite
-    sprite: Objects/Fun/pai.rsi
+    sprite: SS220/Objects/Fun/pai.rsi #SS220 XMAS
     layers:
     - state: potato-base
     - state: potato-off-overlay
@@ -139,6 +143,8 @@
     roleName: pai-system-role-name-potato
     roleDescription: pai-system-role-description-potato
     roleRules: ghost-role-information-familiar-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
   - type: Appearance
   - type: GenericVisualizer
     visuals:

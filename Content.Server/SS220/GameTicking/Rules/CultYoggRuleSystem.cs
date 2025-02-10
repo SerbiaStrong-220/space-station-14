@@ -7,7 +7,6 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Server.Station.Systems;
 using Content.Server.SS220.CultYogg.Sacraficials;
-using Content.Server.SS220.CultYogg.Nyarlathotep;
 using Content.Server.RoundEnd;
 using Content.Server.Zombies;
 using Content.Shared.Audio;
@@ -194,9 +193,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
             if (!_job.MindTryGetJob(mind, out var prototype))
                 continue;
 
-            if (HasComp<CultYoggSacrificialMindComponent>(mind))//shouldn't be already a target
-                continue;
-
             if (_sacraficialTiers[tier].Contains(prototype.ID))
                 allSuitable.Add(mind);
         }
@@ -224,17 +220,11 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (mind.Session.AttachedEntity is null)
             return;
 
-        var meta = MetaData(uid.Value);
-
         //_adminLogger.Add(LogType.EventRan, LogImpact.High, $"CultYogg person {meta.EntityName} where picked for a tier: {tier}");
-
-        EnsureComp<CultYoggSacrificialMindComponent>(uid.Value); //ToDo figure out do i need this?
 
         var sacrComp = EnsureComp<CultYoggSacrificialComponent>(mind.Session.AttachedEntity.Value);
 
         sacrComp.Tier = tier;
-
-        component.SacraficialsList.Add(uid.Value);
     }
 
     private List<EntityUid> GetAliveNoneCultHumans()//maybe add here sacraficials and cultists filter
@@ -251,6 +241,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
                 continue;
 
             if (HasComp<CultYoggComponent>(uid))
+                continue;
+
+            if (HasComp<CultYoggSacrificialComponent>(uid))
                 continue;
 
             // the player has to be alive
@@ -300,19 +293,8 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         RemComp<CultYoggSacrificialComponent>(args.Entity);
 
-        if (!_mind.TryGetMind(args.Player, out var mindUid, out var mind))
-            return;
-
-        if (mindUid == null)
-            return;
-
-        var meta = MetaData(args.Entity);
-        var ev = new CultYoggAnouncementEvent(args.Entity, Loc.GetString("cult-yogg-migo-can-replace", ("name", meta.EntityName)));
+        var ev = new CultYoggAnouncementEvent(args.Entity, Loc.GetString("cult-yogg-sacraficial-was-replaced", ("name", MetaData(args.Entity).EntityName)));
         RaiseLocalEvent(args.Entity, ref ev, true);
-
-        cultRuleComp.SacraficialsList.Remove(mindUid.Value);
-
-        RemComp<CultYoggSacrificialMindComponent>(mindUid.Value);
     }
     private void SetNewSacraficial(CultYoggRuleComponent comp, int tier)
     {
@@ -443,15 +425,14 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     private void SendCultAnounce(ref CultYoggAnouncementEvent args)
     {
         //ToDo refactor without spam
-        /*
-        GetCultGameRule(out var comp);
 
-        if (comp == null)
+        var ruleComp = GetCultGameRule();
+
+        if (ruleComp == null)
             return;
 
-        var ev = new TelepathyAnnouncementSendEvent(args.Message, comp.TelepathyChannel);
-        RaiseLocalEvent(ref ev);
-        */
+        var ev = new TelepathyAnnouncementSendEvent(args.Message, ruleComp.TelepathyChannel);
+        RaiseLocalEvent(args.Entity, ev, true);
     }
     #endregion
 

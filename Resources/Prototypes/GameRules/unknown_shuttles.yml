@@ -8,7 +8,8 @@
     - id: UnknownShuttleTravelingCuisine
     - id: UnknownShuttleDisasterEvacPod
     - id: UnknownShuttleHonki
-#SS220-LostSoulsRevive begin (hide non using shuttles)
+    - id: UnknownShuttleCivil
+#SS220-NoUnknownShuttles begin
 #    - id: UnknownShuttleNTQuark
 #    - id: UnknownShuttleCruiser
 #    - id: UnknownShuttleCryptid
@@ -35,7 +36,8 @@
 #     - id: LoneOpsSpawn
 #     - id: UnknownShuttleManOWar
 #     - id: UnknownShuttleInstigator
-#SS220-LostSoulsRevive end
+#SS220-NoUnknownShuttles end
+
 
 # # Shuttle Game Rules
 
@@ -104,7 +106,7 @@
   - type: LoadMapRule
     preloadedGrid: Honki
 
-# SS220-NoUnknownShuttles-Begin
+#SS220-NoUnknownShuttles begin
 # - type: entity
 #   parent: BaseUnknownShuttleRule
 #   id: UnknownShuttleSyndieEvacPod

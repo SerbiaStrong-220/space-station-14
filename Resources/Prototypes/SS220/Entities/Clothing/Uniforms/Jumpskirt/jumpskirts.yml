@@ -1,9 +1,22 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+# Командование
+
+  # Капитан
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformWhiteJumpskirtCaptain
+  name: captain's white jumpskirt
+  description: It's a white jumpskirt with some gold markings denoting the rank of "Captain".
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/captain_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/captain_white.rsi
+
 # Сервис
 
   # Ведущий сервис
-
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtSeniorService
@@ -35,9 +48,9 @@
   description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydroblue.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydro_blue.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydroblue.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydro_blue.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -46,9 +59,9 @@
   description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydrowhite.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydro_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydrowhite.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hydro_white.rsi
 
   # Бармен
 - type: entity
@@ -92,9 +105,9 @@
   description: The uniform of an errand girl.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/waitress.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/service_worker_waitress.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/waitress.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/service_worker_waitress.rsi
 
   # Шеф повар
 
@@ -105,9 +118,9 @@
   description: Без этого нельзя готовить.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_white.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_white.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_white.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -116,9 +129,9 @@
   description: Без этого нельзя готовить.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_green.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_green.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_green.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_green.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -127,9 +140,9 @@
   description: Без этого нельзя готовить.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_black.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_black.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_black.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_black.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -139,9 +152,9 @@
   suffix: За время в игре, Сеньор
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_nt.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_nt.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Chef/jumpskirt/chef_nt.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_nt.rsi
 
 
 # Medical
@@ -210,9 +223,9 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/CE_dark/jumpskirt/ce_dark.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/ce_dark.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/CE_dark/jumpskirt/ce_dark.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/ce_dark.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -222,9 +235,9 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/ce_dark_turtle.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/CE_dark_turtle/jumpskirt/ce_dark_turtle.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/ce_dark_turtle.rsi
 
   # Ассистент
 
@@ -235,9 +248,9 @@
   description: Suit for female technical assistants.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/tech_assist.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/technical_assistant.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/tech_assist.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/technical_assistant.rsi
 
 # Синдикат
 
@@ -251,19 +264,6 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi
-
-  # Капитан
-
-- type: entity
-  parent: ClothingUniformSkirtBase
-  id: ClothingUniformWhiteJumpskirtCaptain
-  name: captain's white jumpskirt
-  description: It's a white jumpskirt with some gold markings denoting the rank of "Captain".
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/whitecaptain.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/whitecaptain.rsi
 
 # Карго
 
@@ -280,9 +280,9 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/qm_warehouseman_skirt.rsi
 
-  #RND / РНД
+# RND / РНД
 
-# Ассистент
+  # Ассистент
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtBachelor
@@ -291,9 +291,9 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/assistant_bachelor_uniform.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/research_assistant_bachelor.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/assistant_bachelor_uniform.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/research_assistant_bachelor.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -302,11 +302,11 @@
   description: Suit for female research assistants.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/science_assist.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/research_assistant.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/science_assist.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/research_assistant.rsi
 
-# Ученый
+  # Ученый
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtPhdCandidate
@@ -315,11 +315,11 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/phd_candidate.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/scientist_phd_candidate.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/phd_candidate.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/scientist_phd_candidate.rsi
 
-# Ведущий учёный
+  # Ведущий учёный
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtAssociateProfessor
@@ -328,11 +328,11 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/associate_professor.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/senior_rnd_associate_professor.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/associate_professor.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/senior_rnd_associate_professor.rsi
 
-# Научрук
+  # Научрук
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtProfessor
@@ -341,6 +341,23 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/professor.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/rd_professor.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpskirt/professor.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/rd_professor.rsi
+
+# Other
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformMagicianDress
+  name: платье волшебницы
+  description: Наполняет вас магией и скоростью! Или не совсем...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/specific_magiciansdress.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/specific_magiciansdress.rsi
+  - type: Tag
+    tags:
+     - MagicianDress
+     - ClothMade #SS220-pr: FIX CLOTHING TAGS
+     - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS

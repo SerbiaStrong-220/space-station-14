@@ -14,6 +14,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using System.Diagnostics.CodeAnalysis;
+using Robust.Shared.GameObjects;
+using Content.Shared.Popups;
 
 namespace Content.Shared.SS220.CultYogg.Corruption;
 
@@ -33,8 +35,9 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedSoftDeleteSystem _softDeleteSystem = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-    private readonly TimeSpan _corruptionDuration = TimeSpan.FromSeconds(2);
+    private readonly TimeSpan _corruptionDuration = TimeSpan.FromSeconds(1.8);
     private readonly Dictionary<ProtoId<EntityPrototype>, CultYoggCorruptedPrototype> _recipesBySourcePrototypeId = [];
     private readonly Dictionary<ProtoId<StackPrototype>, CultYoggCorruptedPrototype> _recipesBySourceStackType = [];
     private readonly Dictionary<ProtoId<EntityPrototype>, CultYoggCorruptedPrototype> _recipiesByParentPrototypeId = [];
@@ -138,14 +141,20 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
     /// <param name="isInHand">Flag indicating that the target entity is in hand</param>
     /// <param name="callback">Optional callback to fire when finished</param>
     /// <returns><see langword="true"/> if corruption process has been started, otherwise <see langword="false"/></returns>
-    public bool TryCorruptContinuously(EntityUid user, EntityUid entity, bool isInHand, Action<EntityUid?>? callback = null)
+    public bool TryCorruptContinuously(EntityUid user, CultYoggComponent comp, EntityUid entity, bool isInHand, Action<EntityUid?>? callback = null)
     {
         if (!TryGetCorruptionRecipe(entity, out var recipe))
         {
+            _popup.PopupClient(Loc.GetString("cult-yogg-corrupt-no-proto"), entity, user);
+            return false;
+        }
+        if (comp.CurrentStage < recipe.AvaliableOnStage)
+        {
+            _popup.PopupClient(Loc.GetString("cult-yogg-corrupt-too-low-tier"), entity, user);
             return false;
         }
         var e = new CultYoggCorruptDoAfterEvent(recipe, isInHand, callback);
-        var doafterArgs = new DoAfterArgs(EntityManager, user, _corruptionDuration, e, user, entity) //ToDo estimate time for corruption
+        var doafterArgs = new DoAfterArgs(EntityManager, user, _corruptionDuration, e, user, entity)
         {
             Broadcast = false,
             BreakOnDamage = true,
@@ -237,10 +246,39 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
         var parents = MetaData(uid).EntityPrototype?.Parents;
         if (parents == null)
             return null;
+
         foreach (var parentId in parents)
         {
             if (_recipiesByParentPrototypeId.TryGetValue(parentId, out var recipe))
                 return recipe;
+
+            var parentRecipe = GetRecipeByParentPrototypeId(parentId);
+            if (parentRecipe != null)
+                return parentRecipe;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Overload to see parents
+    /// </summary>
+    private CultYoggCorruptedPrototype? GetRecipeByParentPrototypeId(string id)
+    {
+        if (!_prototypeManager.TryIndex<EntityPrototype>(id, out var entProto))
+            return null;
+
+        var parents = entProto.Parents;
+        if (parents == null)
+            return null;
+
+        foreach (var parentId in parents)
+        {
+            if (_recipiesByParentPrototypeId.TryGetValue(parentId, out var recipe))
+                return recipe;
+
+            var parentRecipe = GetRecipeByParentPrototypeId(parentId);
+            if (parentRecipe != null)
+                return parentRecipe;
         }
         return null;
     }

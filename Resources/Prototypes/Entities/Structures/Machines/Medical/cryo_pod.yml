@@ -10,7 +10,7 @@
     noRot: true
     offset: 0, 0.5
     layers:
-      - sprite: Structures/Piping/Atmospherics/pipe.rsi
+      - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
         state: pipeHalf
         offset: 0, -0.5
         map: [ "enum.PipeVisualLayers.Pipe" ]
