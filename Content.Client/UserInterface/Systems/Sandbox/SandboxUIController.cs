@@ -3,6 +3,7 @@ using Content.Client.Administration.Managers;
 using Content.Client.Gameplay;
 using Content.Client.Markers;
 using Content.Client.Sandbox;
+using Content.Client.SS220.MapEditor;
 using Content.Client.SubFloor;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.DecalPlacer;
@@ -45,7 +46,7 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
 
     // TODO hud refactor cache
     private EntitySpawningUIController EntitySpawningController => UIManager.GetUIController<EntitySpawningUIController>();
-    private TileSpawningUIController TileSpawningController => UIManager.GetUIController<TileSpawningUIController>();
+    private TileSpawningUIController220 TileSpawningController => UIManager.GetUIController<TileSpawningUIController220>(); // SS220 Own tile spawning window
     private DecalPlacerUIController DecalPlacerController => UIManager.GetUIController<DecalPlacerUIController>();
 
     private MenuButton? SandboxButton => UIManager.GetActiveUIWidgetOrNull<MenuBar.Widgets.GameTopMenuBar>()?.SandboxButton;
