@@ -49,7 +49,7 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     weight: 10 # 10 default
-    reoccurrenceDelay: 30
+    reoccurrenceDelay: 60
     duration: 1
     maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
   - type: RuleGrids
@@ -60,7 +60,8 @@
   id: UnknownShuttleCargoLost
   components:
   - type: StationEvent
-    maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml
+    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
+    weight: 10
   - type: LoadMapRule
     preloadedGrid: ShuttleCargoLost
 
@@ -70,7 +71,8 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-unknown-shuttle-incoming
-    maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml
+    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
+    weight: 6
   - type: LoadMapRule
     preloadedGrid: TravelingCuisine
 
@@ -80,7 +82,8 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-unknown-shuttle-incoming
-    maxOccurrences: 3 # should be the same as [copies] in shuttle_incoming_event.yml
+    maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml
+    weight: 4
   - type: LoadMapRule
     preloadedGrid: DisasterEvacPod
 
