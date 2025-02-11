@@ -101,7 +101,7 @@
   id: UnknownShuttleHonki
   components:
   - type: StationEvent
-    startAnnouncement: station-event-unknown-shuttle-incoming #!!
+    startAnnouncement: station-event-unknown-shuttle-incoming #SS220 Lost Souls Revive
     weight: 2 #SS220 ReWork Soul Shuttle
   - type: LoadMapRule
     preloadedGrid: Honki
