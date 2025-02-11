@@ -60,3 +60,16 @@
       sprite: SS220/Interface/Actions/MinorFauna/action_tarantula.rsi
       state: web_spawn
     useDelay: 4
+
+- type: entity
+  id: ActionCocoonTarantula
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: BigAction
+    event: !type:ActionEntityCocooningEvent
+    startDelay: true
+    useDelay: 5
+    icon: 
+      sprite: SS220/Interface/Actions/MinorFauna/action_tarantula.rsi
+      state: prying

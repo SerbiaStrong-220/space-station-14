@@ -1,5 +1,36 @@
 #Base
 - type: entity
+  id: BaseEntityCocoon
+  name: cocoon
+  description: сосал?
+  suffix: cocoon
+  abstract: true
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Specific/cocoon.rsi
+  - type: Sprite
+    sprite: SS220/Structures/Specific/cocoon.rsi
+  - type: Transform
+  - type: Physics
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+  - type: Clickable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+  - type: AntiRottingContainer
+  - type: ContainerContainer
+    containers:
+      cocoon: !type:Container
+  - type: EntityCocoon
+    container: cocoon
+
+- type: entity
   id: BaseSpiderCocoon
   name: spider cocoon
   description: description
@@ -331,3 +362,36 @@
   - type: Construction
     graph: SpiderCocoon
     node: cocoonVerticalDestroyed
+
+#Fauna update cocoons
+- type: entity
+  parent: BaseEntityCocoon
+  id: TarantulaCocoon
+  suffix: Tarantula
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    state: cocoon1
+  - type: Sprite
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    layers:
+      - state: cocoon1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:EmptyContainersBehaviour
+        containers:
+          - cocoon
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:ChangeConstructionNodeBehavior
+        node: cocoonHorizontalDestroyed
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: SpiderCocoon
+    node: cocoonHorizontal

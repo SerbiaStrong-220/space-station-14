@@ -15,7 +15,7 @@ public sealed partial class CocoonerComponent : Component
     /// <summary>
     ///  Ids of the cocoon prototype
     /// </summary>
-    [DataField]
+    [DataField("cocoonPrototypes")]
     public List<EntProtoId> CocoonPrototypes = new();
 
     /// <summary>

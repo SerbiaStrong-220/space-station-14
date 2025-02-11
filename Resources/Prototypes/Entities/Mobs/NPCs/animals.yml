@@ -2458,12 +2458,16 @@
       types:
         Piercing: 6
     #SS220 Fauna update start
+  - type: Cocooner
+    cocoonPrototypes:
+    - TarantulaCocoon
   - type: ActionGrant
     actions:
     - ActionSpawnSpiderWallWebTarantula
     - ActionPryingTarantula
     - ActionSpawnSpiderEggTarantula
     - ActionSpawnSingleSpiderWebTarantula
+    - ActionCocoonTarantula
     #SS220 Fauna update end
 
 - type: entity

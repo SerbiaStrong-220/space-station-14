@@ -8,7 +8,7 @@ using Content.Shared.SS220.MinorFauna.Components;
 
 namespace Content.Shared.SS220.MinorFauna.Systems;
 
-public abstract class SharedMinorFaunaSystem : EntitySystem
+public sealed class SharedMinorFaunaSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -53,6 +53,17 @@ public abstract class SharedMinorFaunaSystem : EntitySystem
             performer,
             target
         );
+
+        var started = _doAfter.TryStartDoAfter(doAfterArgs);
+        if (started)
+        {
+            args.Handled = true;
+        }
+        else
+        {
+            Log.Error($"Failed to start DoAfter by {performer}");
+            return;
+        }
     }
 
 }

@@ -8,7 +8,7 @@ using Content.Shared.Mobs.Systems;
 
 namespace Content.Server.SS220.MinorFauna;
 
-public abstract class SharedMinorFaunaSystem : EntitySystem
+public sealed class SharedMinorFaunaSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
