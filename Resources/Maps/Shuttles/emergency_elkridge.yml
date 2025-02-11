@@ -816,6 +816,7 @@ entities:
     - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
+    - type: LoadedMap
 - proto: AirAlarm
   entities:
   - uid: 577

@@ -357,17 +357,19 @@
 #      tableId: SpaceTrafficControlTable
 # SS220-NoUnknownShuttles end
 
+#SS220-LostSoulsRevive begin
 - type: entity
   id: SpaceTrafficControlFriendlyEventScheduler
   parent: BaseGameRule
   components:
   - type: BasicStationEventScheduler
-    minimumTimeUntilFirstEvent: 1200 # 20 mins
+    minimumTimeUntilFirstEvent: 2400 # 40 mins
     minMaxEventTiming:
-      min: 600 # 10 mins
-      max: 1800 # 30 mins
+      min: 3000 # 40 mins
+      max: 3600 # 60 mins
     scheduledGameRules: !type:NestedSelector
       tableId: UnknownShuttlesFriendlyTable
+#SS220-LostSoulsRevive end
 
 # variation passes
 - type: entity

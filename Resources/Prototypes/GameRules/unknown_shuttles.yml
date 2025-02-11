@@ -51,7 +51,7 @@
     startAudio:
       path: /Audio/Announcements/attention.ogg
     weight: 10 # 10 default
-    reoccurrenceDelay: 30
+    reoccurrenceDelay: 60 #SS220 ReWork Soul Shuttle
     duration: 1
     maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
   - type: RuleGrids
@@ -62,7 +62,10 @@
   id: UnknownShuttleCargoLost
   components:
   - type: StationEvent
-    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml #SS220 Lost Souls Revive
+  #SS220 ReWork Soul Shuttle begin
+    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
+    weight: 8 #SS220 ReWork Soul Shuttle
+  #SS220 ReWork Soul Shuttle end
   - type: LoadMapRule
     preloadedGrid: ShuttleCargoLost
 
@@ -72,7 +75,10 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-unknown-shuttle-incoming
-    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml #SS220 Lost Souls Revive
+    #SS220 ReWork Soul Shuttle begin
+    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
+    weight: 6 #SS220 ReWork Soul Shuttle
+    #SS220 ReWork Soul Shuttle end
   - type: LoadMapRule
     preloadedGrid: TravelingCuisine
 
@@ -82,7 +88,10 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-unknown-shuttle-incoming
-    maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml #SS220 Lost Souls Revive
+    #SS220 ReWork Soul Shuttle begin
+    maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml
+    weight: 4 #SS220 ReWork Soul Shuttle
+    #SS220 ReWork Soul Shuttle end
   - type: LoadMapRule
     preloadedGrid: DisasterEvacPod
 
@@ -93,7 +102,7 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-unknown-shuttle-incoming #SS220 Lost Souls Revive
-    weight: 2
+    weight: 2 #SS220 ReWork Soul Shuttle
   - type: LoadMapRule
     preloadedGrid: Honki
 

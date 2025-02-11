@@ -5,11 +5,11 @@ tilemap:
   0: Space
   6: FloorLaundry
   2: FloorSteel
-  8: FloorSteelBurnt
+  8: FloorSteelDamaged
   1: FloorSteelDirty
   3: FloorSteelMono
-  5: FloorTechMaintDrain
   7: FloorTechMaintDrainHorizontal
+  5: FloorTechMaintDrainVertical
   4: FloorTechMaintMono
   168: Lattice
   169: Plating
@@ -23,6 +23,7 @@ entities:
       name: NT-SP "GAZ-220"
     - type: Transform
       pos: -0.578125,-0.515625
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -211,7 +212,8 @@ entities:
         maxVol: 1
         name: food
         reagents:
-        - ReagentId: Fiber
+        - data: []
+          ReagentId: Fiber
           Quantity: 1
     - type: ContainedSolution
       containerName: food
@@ -272,9 +274,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 3.5,-0.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 135
 - proto: CableApcExtension
   entities:
   - uid: 9
@@ -590,18 +589,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 3.5,-0.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 148
   - uid: 69
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 2.5,-0.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 148
 - proto: CrateTrashCartJani
   entities:
   - uid: 70

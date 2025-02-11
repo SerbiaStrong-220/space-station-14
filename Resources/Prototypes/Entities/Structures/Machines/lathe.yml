@@ -1531,8 +1531,6 @@
       - TileSteelReinforced
       - TileWhiteReinforced
       - TileDarkReinforced
-      - TileDutch
-      - TileDutchMini
       - TileKitchenRed #SS220 new kitchen tile
       #SS220-NewWoodTiles-Begin
       - TileWoodParquet
@@ -1553,6 +1551,112 @@
       - TileWoodTileLight
       - TileWoodTileRed
       #SS220-NewWoodTiles-End
+      #SS220-NewTiles-Start
+      - TileFloorDarkCalifornia
+      - TileFloorDarkEightBricks
+      - TileFloorDarkMixedBricks
+      - TileFloorDarkMixedBricksMini
+      - TileFloorDarkMixedPavementHorizontal
+      - TileFloorDarkMixedPavementVertical
+      - TileFloorDarkShiftedEightBricks
+      - TileFloorDarkShiftedMiniHorizontal
+      - TileFloorDarkShiftedMiniVertical
+      - TileFloorFreezerHorizontal
+      - TileFloorFreezerMini
+      - TileFloorFreezerMiniHorizontal
+      - TileFloorFreezerMiniVertical
+      - TileFloorFreezerMono
+      - TileFloorFreezerVertical
+      - TileFloorGratingMaintDrainHorizontal
+      - TileFloorGratingMaintDrainMiddle
+      - TileFloorGratingMaintDrainVertical
+      - TileFloorGratingMaintHorizontal
+      - TileFloorGratingMaintMini
+      - TileFloorGratingMaintMono
+      - TileFloorGratingMaintVertical
+      - TileFloorMiningDarkGratingDirectedHorizontal
+      - TileFloorMiningDarkGratingDirectedVertical
+      - TileFloorMiningDarkGratingHorizontal
+      - TileFloorMiningDarkGratingMiddle
+      - TileFloorMiningDarkGratingVertical
+      - TileFloorMiningDarkMono
+      - TileFloorMiningDarkReinforced
+      - TileFloorMiningGratingDirectedHorizontal
+      - TileFloorMiningGratingDirectedVertical
+      - TileFloorMiningGratingHorizontal
+      - TileFloorMiningGratingMiddle
+      - TileFloorMiningGratingVertical
+      - TileFloorMiningLightGratingDirectedHorizontal
+      - TileFloorMiningLightGratingDirectedVertical
+      - TileFloorMiningLightGratingHorizontal
+      - TileFloorMiningLightGratingMiddle
+      - TileFloorMiningLightGratingVertical
+      - TileFloorMiningLightMono
+      - TileFloorMiningLightReinforced
+      - TileFloorMiningMono
+      - TileFloorMiningReinforced
+      - TileFloorRockVaultHerringbone
+      - TileFloorRockVaultHorizontal
+      - TileFloorRockVaultMini
+      - TileFloorRockVaultMono
+      - TileFloorRockVaultPavementHorizontal
+      - TileFloorRockVaultVertical
+      - TileFloorSanitary
+      - TileFloorSanitaryDark
+      - TileFloorSanitaryDarkHorizontal
+      - TileFloorSanitaryDarkMini
+      - TileFloorSanitaryDarkMiniHorizontal
+      - TileFloorSanitaryDarkMiniVertical
+      - TileFloorSanitaryDarkMono
+      - TileFloorSanitaryDarkVertical
+      - TileFloorSanitaryHorizontal
+      - TileFloorSanitaryMini
+      - TileFloorSanitaryMiniHorizontal
+      - TileFloorSanitaryMiniVertical
+      - TileFloorSanitaryMono
+      - TileFloorSanitaryVertical
+      - TileFloorShowroomHorizontal
+      - TileFloorShowroomMini
+      - TileFloorShowroomMiniHorizontal
+      - TileFloorShowroomMiniVertical
+      - TileFloorShowroomMono
+      - TileFloorShowroomVertical
+      - TileFloorSteelCalifornia
+      - TileFloorSteelEightBricks
+      - TileFloorSteelMaintDrainHorizontal
+      - TileFloorSteelMaintDrainMiddle
+      - TileFloorSteelMaintDrainVertical
+      - TileFloorSteelMaintHorizontal
+      - TileFloorSteelMaintMini
+      - TileFloorSteelMaintVertical
+      - TileFloorSteelMixedBricks
+      - TileFloorSteelMixedBricksMini
+      - TileFloorSteelMixedPavementHorizontal
+      - TileFloorSteelMixedPavementVertical
+      - TileFloorSteelShiftedEightBricks
+      - TileFloorSteelShiftedMiniHorizontal
+      - TileFloorSteelShiftedMiniVertical
+      - TileFloorTechMaintHorizontal
+      - TileFloorTechMaintMini
+      - TileFloorTechMaintMono
+      - TileFloorTechMaintVertical
+      - TileFloorWhiteCalifornia
+      - TileFloorWhiteEightBricks
+      - TileFloorWhiteMixedBricks
+      - TileFloorWhiteMixedBricksMini
+      - TileFloorWhiteMixedPavementHorizontal
+      - TileFloorWhiteMixedPavementVertical
+      - TileFloorWhiteShiftedEightBricks
+      - TileFloorWhiteShiftedMiniHorizontal
+      - TileFloorWhiteShiftedMiniVertical
+      - TileFloorConcretePavementHorizontal
+      - TileFloorConcretePavementVertical
+      - TileFloorGrayconcretePavementHorizontal
+      - TileFloorGrayconcretePavementVertical
+      - TileFloorOldconcretePavementHorizontal
+      - TileFloorOldconcretePavementVertical
+      - TileFloorItemTechMainDrainMiddle
+      #SS220-NewTiles-End
   #SS220-Sheetifier-rework-end
   - type: MaterialStorage
     whitelist:

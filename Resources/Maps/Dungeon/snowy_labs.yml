@@ -48,6 +48,8 @@ entities:
     - type: Transform
     - type: Map
     - type: PhysicsMap
+    - type: GridTree
+    - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
     - type: MapGrid
@@ -2868,8 +2870,6 @@ entities:
     - type: RadiationGridResistance
     - type: LoadedMap
     - type: SpreaderGrid
-    - type: GridTree
-    - type: MovedGrids
     - type: GridPathfinding
 - proto: Airlock
   entities:
@@ -6917,7 +6917,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 44.5,1.5
       parent: 1653
-- proto: chem_master
+- proto: ChemMaster
   entities:
   - uid: 1454
     components:
@@ -7654,35 +7654,29 @@ entities:
       parent: 1653
     - type: Fixtures
       fixtures: {}
-- proto: FloraTreeSnow01
-  entities:
-  - uid: 1133
-    components:
-    - type: Transform
-      pos: 34.488148,39.383087
-      parent: 1653
-- proto: FloraTreeSnow03
+- proto: FloraTreeSnow
   entities:
   - uid: 405
     components:
     - type: Transform
       pos: 0.431108,0.37702036
       parent: 1653
-  - uid: 479
-    components:
-    - type: Transform
-      pos: 16.778654,4.6426454
-      parent: 1653
-- proto: FloraTreeSnow04
-  entities:
   - uid: 420
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 8.352256,20.196136
       parent: 1653
-- proto: FloraTreeSnow05
-  entities:
+  - uid: 479
+    components:
+    - type: Transform
+      pos: 16.778654,4.6426454
+      parent: 1653
+  - uid: 1133
+    components:
+    - type: Transform
+      pos: 34.488148,39.383087
+      parent: 1653
   - uid: 1198
     components:
     - type: Transform
@@ -10649,7 +10643,7 @@ entities:
     - type: Transform
       pos: 21.9839,4.619315
       parent: 1653
-- proto: LightTree05
+- proto: LightTree
   entities:
   - uid: 125
     components:
@@ -12142,25 +12136,16 @@ entities:
     - type: Transform
       pos: 10.5,43.5
       parent: 1653
-    - type: DeviceLinkSink
-      links:
-      - 583
   - uid: 581
     components:
     - type: Transform
       pos: 11.5,43.5
       parent: 1653
-    - type: DeviceLinkSink
-      links:
-      - 583
   - uid: 582
     components:
     - type: Transform
       pos: 12.5,43.5
       parent: 1653
-    - type: DeviceLinkSink
-      links:
-      - 583
 - proto: SignalButton
   entities:
   - uid: 583
@@ -12188,15 +12173,13 @@ entities:
     - type: Transform
       pos: 28.5,9.5
       parent: 1653
-- proto: SignHydro2
+- proto: SignHydro1
   entities:
   - uid: 1059
     components:
     - type: Transform
       pos: 19.5,4.5
       parent: 1653
-- proto: SignHydro3
-  entities:
   - uid: 1060
     components:
     - type: Transform

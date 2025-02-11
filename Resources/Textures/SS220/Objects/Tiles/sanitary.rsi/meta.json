@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by @Kit0vras (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+      {
+        "name":"sanitary-dark-horizontal"
+      },
+      {
+        "name":"sanitary-dark-mini-horizontal"
+      },
+      {
+        "name":"sanitary-dark-mini-vertical"
+      },
+      {
+        "name":"sanitary-dark-mini"
+      },
+      {
+        "name":"sanitary-dark-mono"
+      },
+      {
+        "name":"sanitary-dark-vertical"
+      },
+      {
+        "name":"sanitary-dark"
+      },
+      {
+        "name":"sanitary-horizontal"
+      },
+      {
+        "name":"sanitary-mini-horizontal"
+      },
+      {
+        "name":"sanitary-mini-vertical"
+      },
+      {
+        "name":"sanitary-mini"
+      },
+      {
+        "name":"sanitary-mono"
+      },
+      {
+        "name":"sanitary-vertical"
+      },
+      {
+        "name":"sanitary"
+      }
+   ]
+}
