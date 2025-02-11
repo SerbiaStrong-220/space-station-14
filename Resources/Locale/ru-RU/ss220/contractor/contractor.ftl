@@ -4,3 +4,4 @@ contractor-uplink-current-contracts-completed = Выполнено контра�
 
 contractor-portal-for-non-target = Портал недоступен для вас
 contractor-portal-for-another-target = Этот портал предназначен не для этой цели
+contractor-portal-but-not-in-other-side = Портал на другой стороне недоступен

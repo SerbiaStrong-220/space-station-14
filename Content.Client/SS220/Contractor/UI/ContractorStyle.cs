@@ -181,43 +181,16 @@ public sealed class ContractorStyle : QuickStyle
             .Class("ContractorPhotoImage")
             .Prop(PanelContainer.StylePropertyPanel, StrechedStyleBoxTexture(Tex("/Textures/SS220/Interface/Contractor/contractor-pda-photo-image.png")));
 
-        /*
         Builder
             .Element<PanelContainer>()
-            .Class("ContractorFontPanel")
+            .Class("ContractAcceptedBorder")
             .Prop(PanelContainer.StylePropertyPanel,
-                StrechedStyleBoxTexture(Tex("/Textures/SS220/Interface/Contractor/font-uplink-contractor.png")));
-
-        Builder
-            .Element<SpriteButton>()
-            .Class("ContractorContractsButton")
-            .Prop(SpriteButton.StylePropertySprite,
-                Sprite("/Textures/SS220/Interface/Contractor/buttons.rsi", "contracts"));
-
-        Builder
-            .Element<SpriteButton>()
-            .Class("ContractorHubButton")
-            .Prop(SpriteButton.StylePropertySprite,
-                Sprite("/Textures/SS220/Interface/Contractor/button-hub.rsi", "hub"));
-
-        Builder
-            .Element<SpriteButton>()
-            .Class("ContractorWithdrawButton")
-            .Prop(SpriteButton.StylePropertySprite,
-                Sprite("/Textures/SS220/Interface/Contractor/button-withdraw.rsi", "withdraw"));
-
-        Builder
-            .Element<SpriteButton>()
-            .Class("ContractorExecutionButton")
-            .Prop(SpriteButton.StylePropertySprite,
-                Sprite("/Textures/SS220/Interface/Contractor/button-execution.rsi", "execution"));
-
-        Builder
-            .Element<SpriteButton>()
-            .Class("ContractorPhotoButton")
-            .Prop(SpriteButton.StylePropertySprite,
-                Sprite("/Textures/SS220/Interface/Contractor/button-photo.rsi", "photo"));
-        */
+                new StyleBoxFlat
+                {
+                    BorderColor = Color.FromHex("#43ff4a"),
+                    BorderThickness = new Thickness(2),
+                    BackgroundColor = Color.FromHex("#93abb2"),
+                });
     }
 
 }

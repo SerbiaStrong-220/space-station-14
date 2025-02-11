@@ -1,5 +1,5 @@
+using System.Linq;
 using System.Numerics;
-using Content.Client.SS220.Contractor.Systems;
 using Content.Client.SS220.CriminalRecords.UI;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Contractor;
@@ -23,7 +23,6 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
     private DefaultWindow? _withdrawWindow;
     private DefaultWindow? _photoWindow;
 
-    private readonly ContractorClientSystem _contractorSystem;
     private readonly ContractorPdaComponent _contractorPdaComponent;
     private readonly ContractorComponent? _contractorComponent;
 
@@ -32,7 +31,6 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
     public ContractorBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
-        _contractorSystem = EntMan.System<ContractorClientSystem>();
         _contractorPdaComponent = EntMan.GetComponent<ContractorPdaComponent>(owner);
         EntMan.TryGetComponent<ContractorComponent>(
             EntMan.GetEntity(_contractorPdaComponent.PdaOwner),
@@ -45,7 +43,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
     {
         base.ReceiveMessage(message);
 
-        if(_menu == null)
+        if (_menu == null)
             return;
 
         switch (message)
@@ -152,7 +150,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_menu == null)
             return;
 
-        var contractContainer = new PanelContainer()
+        var contractContainer = new PanelContainer
         {
             Margin = new Thickness(0),
             HorizontalExpand = true,
@@ -173,7 +171,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             Text = "Замечен в контакте с вульпой, что вызывает подозрения в утечке информации.",
             StyleClasses = { "ContractorRichLabelStyle" },
             HorizontalAlignment = Control.HAlignment.Left,
-            Margin = new Thickness(2, 20, 170, 0),
+            Margin = new Thickness(2, 45, 170, 0),
             SetSize = new Vector2(137, 93),
             Modulate = Color.FromHex("#647b88"),
             RectClipContent = true,
@@ -219,18 +217,20 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
                 Title = "Фото цели",
             };
 
-            _contractorSystem.ProfileForTarget.TryGetValue(EntMan.GetEntity(key), out var profile);
-
-            if (profile == null)
+            if (_contractorComponent == null)
                 return;
+
+            var profile = _contractorComponent.Profiles[key];
 
             var iconTargetSprite = new CharacterVisualisation
             {
-                SetSize = new Vector2(400, 300),
-                Margin = new Thickness(100, 0, 0, 0),
+                SetSize = new Vector2(200, 200),
+                VerticalAlignment = Control.VAlignment.Center,
+                HorizontalAlignment = Control.HAlignment.Center,
+                Margin = new Thickness(10, 0, 0, 0),
             };
 
-            iconTargetSprite.SetupCharacterSpriteView(profile, _prototypeManager.Index(contract.Job).ID);
+            iconTargetSprite.SetupCharacterSpriteView(profile, _prototypeManager.Index(contract.Job).ID, true);
 
             _photoWindow.OnClose += () => _photoWindow = null;
 
@@ -245,7 +245,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             HorizontalExpand = true,
-            VerticalAlignment = Control.VAlignment.Center,
+            VerticalAlignment = Control.VAlignment.Top,
             Margin = new Thickness(5, 30, 0, 0),
         };
 
@@ -254,26 +254,42 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         var abortButton = new Button
         {
-            Text = "Отмена",
             VerticalExpand = false,
             HorizontalExpand = false,
             Visible = false,
-            MaxSize = new Vector2(100, 30),
+            HorizontalAlignment = Control.HAlignment.Center,
+            VerticalAlignment = Control.VAlignment.Top,
+            SetSize = new Vector2(80, 30),
+            Margin = new Thickness(0, 18, 2, 0),
+            StyleClasses= { "ContractorExecutionButton" },
+            Modulate = Color.DarkRed,
         };
+
+        var abortLabel = new Label
+        {
+            Text = "Отменить",
+            HorizontalAlignment = Control.HAlignment.Center,
+            VerticalAlignment = Control.VAlignment.Center,
+            StyleClasses = { "ContractorLabelStyle" },
+        };
+
+        abortButton.AddChild(abortLabel);
 
         abortButton.OnPressed += _ =>
         {
             SendMessage(new ContractorAbortContractMessage(key));
-            topContainer.RemoveChild(abortButton);
+            positionsContainer.RemoveChild(abortButton);
         };
 
-        topContainer.AddChild(abortButton);
+        positionsContainer.AddChild(abortButton);
 
         foreach (var amountPosition in contract.AmountPositions)
         {
             if (_contractorPdaComponent.CurrentContractEntity == key)
             {
                 abortButton.Visible = true;
+                contractContainer.AddStyleClass("ContractAcceptedBorder");
+                ClearPositionButtons(positionsContainer);
             }
 
             var positionButton = new Button
@@ -306,12 +322,18 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
                 abortButton.Visible = true;
 
+                contractContainer.AddStyleClass("ContractAcceptedBorder");
+
+                ClearPositionButtons(positionsContainer);
+
+                positionsContainer.AddChild(positionButton);
+                _allPositionButtons.Add(positionButton);
+
                 foreach (var buttons in _allPositionButtons)
                 {
                     buttons.Disabled = true;
                 }
             };
-
 
             _allPositionButtons.Add(positionButton);
             positionsContainer.AddChild(positionButton);
@@ -321,6 +343,17 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         contractContainer.AddChild(positionsContainer);
 
         _menu.ContractsListPanel.AddChild(contractContainer);
+    }
+
+    private void ClearPositionButtons(Control positionsContainer)
+    {
+        foreach (var button in _allPositionButtons.ToList())
+        {
+            if (button.Parent == positionsContainer)
+            {
+                positionsContainer.RemoveChild(button);
+            }
+        }
     }
 
     private void UpdateHub(Dictionary<string, FixedPoint2> shopItems)
@@ -382,11 +415,6 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             buyButton.OnPressed += _ =>
             {
                 SendMessage(new ContractorHubBuyItemMessage(item.Key, item.Value));
-
-                //if (_contractorComponent is not null)
-                    //UpdateStats(_contractorComponent);
-
-
             };
 
             topRow.AddChild(itemIcon);
@@ -480,7 +508,6 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         };
 
         _withdrawWindow.OnClose += () => _withdrawWindow = null;
-
 
         var mainContainer = new BoxContainer
         {

@@ -52,7 +52,7 @@ public abstract class SharedContractorSystem : EntitySystem
         if (contractorComponent.PdaEntity != null)
             return;
 
-        contractorComponent.PdaEntity = GetNetEntity(ent.Owner);
+        contractorComponent.PdaEntity = ent.Owner;
 
         ent.Comp.PdaOwner = GetNetEntity(args.Actor);
 
@@ -90,6 +90,15 @@ public abstract class SharedContractorSystem : EntitySystem
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class OpenPortalContractorEvent : DoAfterEvent
+{
+    public override DoAfterEvent Clone() => this;
+}
+
+/// <summary>
+/// Event for teleporting target to station
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class TeleportTargetToStationEvent : DoAfterEvent
 {
     public override DoAfterEvent Clone() => this;
 }

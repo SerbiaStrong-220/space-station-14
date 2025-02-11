@@ -6,8 +6,6 @@ using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
 using Content.Server.Stack;
-using Content.Server.Station.Systems;
-using Content.Server.StationRecords.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -26,7 +24,9 @@ using Robust.Shared.Random;
 namespace Content.Server.SS220.Contractor;
 
 /// <summary>
-/// This handles...
+/// This handles generation contracts for contractor,
+/// any other stuff with contractor pda, opening portal,
+/// handling any contracts, and buy listing in uplink
 /// </summary>
 public sealed class ContractorServerSystem : SharedContractorSystem
 {
@@ -41,9 +41,6 @@ public sealed class ContractorServerSystem : SharedContractorSystem
     [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly IServerPreferencesManager _pref = default!;
-    [Dependency] private readonly ActorSystem _actor = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
 
     public override void Initialize()
     {
@@ -74,10 +71,10 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
             var isEnabled = IsCloseWithPosition(uid);
 
-            if (_uiSystem.IsUiOpen(GetEntity(comp.PdaEntity)!.Value, ContractorPdaKey.Key))
+            if (_uiSystem.IsUiOpen(comp.PdaEntity.Value, ContractorPdaKey.Key))
             {
                 _uiSystem.SetUiState(
-                    GetEntity(comp.PdaEntity.Value),
+                    comp.PdaEntity.Value,
                     ContractorPdaKey.Key,
                     new ContractorExecutionBoundUserInterfaceState(isEnabled));
             }
@@ -97,18 +94,30 @@ public sealed class ContractorServerSystem : SharedContractorSystem
     /// </summary>
     private void OnOpenPortalEvent(Entity<ContractorComponent> ent, ref OpenPortalContractorEvent args)
     {
-        if (!TryComp<ContractorTargetComponent>(GetEntity(ent.Comp.CurrentContractEntity), out var target))
+        if (!TryComp<ContractorTargetComponent>(GetEntity(ent.Comp.CurrentContractEntity), out var targetComponent))
             return;
 
-        if (args.Cancelled || args.Handled || target.PortalEntity != null)
+        if (args.Cancelled || args.Handled || targetComponent.PortalOnStationEntity != null)
             return;
 
-        target.PortalEntity = SpawnAtPosition("ContractorPortal", Transform(ent.Owner).Coordinates);
-        target.PositionOnStation = Transform(ent.Owner).Coordinates.Position;
+        targetComponent.PortalOnStationEntity = SpawnAtPosition("ContractorPortal", Transform(ent.Owner).Coordinates);
+
+        var query = EntityQueryEnumerator<ContractorTajpanWarpPointComponent>();
+
+        var warpPoints = new List<EntityUid>();
+
+        while (query.MoveNext(out var portalOnTajpan, out _))
+        {
+            warpPoints.Add(portalOnTajpan);
+        }
+
+        if (warpPoints.Count > 0)
+        {
+            var randomIndex = _random.Next(warpPoints.Count);
+            targetComponent.PortalOnTajpanEntity = warpPoints[randomIndex];
+        }
 
         args.Handled = true;
-
-        Dirty(GetEntity(ent.Comp.CurrentContractEntity!.Value), target);
     }
 
     //TODO server and checks
@@ -128,6 +137,8 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         EnsureComp<ContractorTargetComponent>(GetEntity(ev.ContractEntity), out var target);
 
+        target.CanBeAssigned = false;
+
         if (target.AmountTc > 8 || ev.TcReward > 8)
         {
             _adminLogger.Add(
@@ -141,8 +152,6 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         target.PortalPosition = Transform(GetEntity(ev.WarpPointEntity)).Coordinates;
         target.AmountTc = ev.TcReward;
         target.Performer = ev.Actor;
-
-        Dirty(GetEntity(ev.ContractEntity), target);
 
         contractorComponent.CurrentContractData = ev.ContractData;
         contractorComponent.CurrentContractEntity = ev.ContractEntity;
@@ -169,10 +178,10 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         if (!TryComp<ContractorTargetComponent>(entity, out var contractorComponent))
             return;
 
-        if (contractorComponent.PortalEntity != null)
+        if (contractorComponent.PortalOnStationEntity != null)
             return;
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, ev.Actor, 5f, new OpenPortalContractorEvent(), ev.Actor, ev.Actor)
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, ev.Actor, 5f, new OpenPortalContractorEvent(), ev.Actor, entity)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
@@ -216,16 +225,13 @@ public sealed class ContractorServerSystem : SharedContractorSystem
     /// </summary>
     /// <param name="acceptedPlayer">Target, on what contractor accepted</param>
     /// <param name="contractor">Contractor, who accepted</param>
-    public void HandleContractAccepted(NetEntity acceptedPlayer, EntityUid contractor)
+    private void HandleContractAccepted(NetEntity acceptedPlayer, EntityUid contractor)
     {
         var query = EntityQueryEnumerator<ContractorComponent>();
 
         while (query.MoveNext(out var uid, out var contractorComp))
         {
-            if (uid == contractor)
-                continue;
-
-            if (!contractorComp.Contracts.Remove(acceptedPlayer))
+            if (uid == contractor || !contractorComp.Contracts.Remove(acceptedPlayer))
                 continue;
 
             if (contractorComp.Contracts.Count >= contractorComp.MaxAvailableContracts)
@@ -233,14 +239,19 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
             var newContract = GenerateContractForContractor((uid, contractorComp));
 
-            if (newContract != null)
-            {
-                contractorComp.Contracts[newContract.Value.Target] = newContract.Value.Contract;
-            }
+            if (!newContract.HasValue)
+                continue;
 
+            contractorComp.Contracts[newContract.Value.Target] = newContract.Value.Contract;
             Dirty(uid, contractorComp);
 
-            _uiSystem.ServerSendUiMessage(GetEntity(contractorComp.PdaEntity!.Value), ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
+            if (contractorComp.PdaEntity.HasValue)
+            {
+                _uiSystem.ServerSendUiMessage(
+                    contractorComp.PdaEntity.Value,
+                    ContractorPdaKey.Key,
+                    new ContractorUpdateStatsMessage());
+            }
         }
     }
 
@@ -251,36 +262,27 @@ public sealed class ContractorServerSystem : SharedContractorSystem
     /// <returns></returns>
     private (NetEntity Target, ContractorContract Contract)? GenerateContractForContractor(Entity<ContractorComponent> contractor)
     {
-        var playerPool = _playerManager.Sessions
-            .Where(p => p is { Status: SessionStatus.InGame, AttachedEntity: not null })
-            .Select(p => p.AttachedEntity!.Value)
-            .ToList();
-
+        var playerPool = GetPlayerPool(contractor);
         _random.Shuffle(playerPool);
 
         foreach (var player in playerPool)
         {
-            if (HasComp<GhostComponent>(player) ||
-                HasComp<ContractorComponent>(player) ||
-                HasComp<ContractorTargetComponent>(player) ||
-                (TryComp<SSDIndicatorComponent>(player, out var ssdIndicatorComponent) && ssdIndicatorComponent.IsSSD))
-            {
-                continue;
-            }
-
-            if (contractor.Comp.Contracts.ContainsKey(GetNetEntity(player)))
-                continue;
+            if (contractor.Comp.Contracts.Count >= contractor.Comp.MaxAvailableContracts)
+                return null;
 
             if (!_mindSystem.TryGetMind(player, out var mindId, out _))
                 continue;
 
-            if (_roleSystem.MindHasRole<TraitorRoleComponent>(mindId))
+            if (!_jobs.MindTryGetJob(mindId, out var jobProto)) // || jobProto.ID == "Captain" - disabled for testing
                 continue;
 
-            _jobs.MindTryGetJob(mindId, out var jobProto); // && jobName == "JobCaptain" - disable for testing
-
-            if (jobProto == null)
+            if (!_playerManager.TryGetSessionByEntity(player, out var session))
                 continue;
+
+            if (_pref.GetPreferences(session.UserId).SelectedCharacter is HumanoidCharacterProfile pref)
+            {
+                contractor.Comp.Profiles.TryAdd(GetNetEntity(player), pref);
+            }
 
             return (GetNetEntity(player),
                 new ContractorContract
@@ -293,57 +295,35 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         return null;
     }
 
-    public void GenerateContracts(Entity<ContractorComponent> ent)
+    public void GenerateContracts(Entity<ContractorComponent> contractor)
     {
-        var playerPool = _playerManager.Sessions
-            .Where(p => p is { Status: SessionStatus.InGame, AttachedEntity: not null })
-            .Select(p => p.AttachedEntity!.Value)
-            .ToList();
-
+        var playerPool = GetPlayerPool(contractor);
         _random.Shuffle(playerPool);
 
         foreach (var player in playerPool)
         {
-            if (HasComp<GhostComponent>(player) ||
-                HasComp<ContractorComponent>(player) ||
-                HasComp<ContractorTargetComponent>(player) ||
-                (TryComp<SSDIndicatorComponent>(player, out var ssdIndicatorComponent) && ssdIndicatorComponent.IsSSD))
-            {
-                continue;
-            }
+            if (contractor.Comp.Contracts.Count >= contractor.Comp.MaxAvailableContracts)
+                return;
 
             if (!_mindSystem.TryGetMind(player, out var mindId, out _))
                 continue;
 
-            if (_roleSystem.MindHasRole<TraitorRoleComponent>(mindId))
+            if (!_jobs.MindTryGetJob(mindId, out var jobProto)) // || jobProto.ID == "Captain" - disabled for testing
                 continue;
 
-            if (ent.Comp.Contracts.ContainsKey(GetNetEntity(player)))
+            contractor.Comp.Contracts[GetNetEntity(player)] = new ContractorContract
+            {
+                Job = jobProto,
+                AmountPositions = GeneratePositionsForTarget(),
+            };
+
+            if (!_playerManager.TryGetSessionByEntity(player, out var session))
                 continue;
 
-            _jobs.MindTryGetJob(mindId, out var jobProto); // && jobName == "JobCaptain" - disable for testing
-
-            if (jobProto == null)
-                continue;
-
-            if (ent.Comp.Contracts.Count == ent.Comp.MaxAvailableContracts)
-                return;
-
-            ent.Comp.Contracts.Add(GetNetEntity(player),
-                new ContractorContract
-                {
-                    Job = jobProto,
-                    AmountPositions = GeneratePositionsForTarget(),
-                });
-
-            _playerManager.TryGetSessionByEntity(player, out var session);
-
-            if (session == null)
-                return;
-
-            var pref = (HumanoidCharacterProfile) _pref.GetPreferences(session.UserId).SelectedCharacter;
-
-            RaiseNetworkEvent(new ContractorReceiveHumanoidMessage(GetNetEntity(player), pref, jobProto.ID));
+            if (_pref.GetPreferences(session.UserId).SelectedCharacter is HumanoidCharacterProfile pref)
+            {
+                contractor.Comp.Profiles.TryAdd(GetNetEntity(player), pref);
+            }
         }
     }
 
@@ -366,23 +346,19 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         _random.Shuffle(mediumLocations);
         _random.Shuffle(hardLocations);
 
-        allLocations.Clear();
+        var result = new List<(NetEntity, string, FixedPoint2, Difficulty)>
+        {
+            easyLocations.FirstOrDefault(),
+            mediumLocations.FirstOrDefault(),
+            hardLocations.FirstOrDefault()
+        };
 
-        if (easyLocations.Count > 0)
-            allLocations.Add(easyLocations[0]);
-
-        if (mediumLocations.Count > 0)
-            allLocations.Add(mediumLocations[0]);
-
-        if (hardLocations.Count > 0)
-            allLocations.Add(hardLocations[0]);
-
-        return allLocations;
+        return result.Where(loc => loc.Item1.Valid).ToList();
     }
 
-    private bool IsCloseWithPosition(EntityUid player)
+    private bool IsCloseWithPosition(EntityUid contractor)
     {
-        if (!TryComp<ContractorComponent>(player, out var contractorComponent))
+        if (!TryComp<ContractorComponent>(contractor, out var contractorComponent))
             return false;
 
         if (contractorComponent.CurrentContractEntity is null &&
@@ -394,15 +370,16 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         if (!TryComp<ContractorTargetComponent>(targetEntity, out var targetComponent))
             return false;
 
-        var playerPosition = Transform(player).Coordinates.Position;
+        var contractorPosition = Transform(contractor).Coordinates.Position;
         var targetPosition = Transform(targetEntity.Value).Coordinates.Position;
 
         var targetPortalPosition = targetComponent.PortalPosition.Position;
 
-        var isPlayerCloseToPortal = (playerPosition - targetPortalPosition).Length() < 1f;
-        var isTargetCloseToPortal = (targetPosition - targetPortalPosition).Length() < 1f;
+        var isCloseToPortal = (contractorPosition - targetPortalPosition).Length() < 1f &&
+                              (targetPosition - targetPortalPosition).Length() < 1f;
 
-        return isPlayerCloseToPortal && isTargetCloseToPortal;
+
+        return isCloseToPortal;
     }
 
     private void AbortContract(Entity<ContractorPdaComponent> ent, ref ContractorAbortContractMessage ev)
@@ -416,12 +393,14 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             return;
 
         if (!contractorComponent.Contracts.Remove(ev.ContractEntity))
-            return;
+        {
+            _adminLogger.Add(
+                LogType.Action,
+                LogImpact.High,
+                $"Contractor {ev.Actor} aborted unknown contract {ev.ContractEntity}");
 
-        _adminLogger.Add(
-            LogType.Action,
-            LogImpact.High,
-            $"Contractor {ev.Actor} aborted unknown contract {ev.ContractEntity}");
+            return;
+        }
 
         contractorComponent.MaxAvailableContracts--;
         contractorComponent.Reputation--;
@@ -431,14 +410,25 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         ent.Comp.CurrentContractEntity = null;
         ent.Comp.CurrentContractData = null;
 
+        GenerateContracts((pdaOwner.Value, contractorComponent));
         _uiSystem.ServerSendUiMessage(ent.Owner, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
 
         Dirty(ent);
         Dirty(pdaOwner.Value, contractorComponent);
     }
 
-    public HumanoidCharacterProfile GetProfile(EntityUid uid)
+    private List<EntityUid> GetPlayerPool(Entity<ContractorComponent> ent)
     {
-        return (HumanoidCharacterProfile) _pref.GetPreferences(_actor.GetSession(uid)!.UserId).SelectedCharacter;
+        return _playerManager.Sessions
+            .Where(p => p is { Status: SessionStatus.InGame, AttachedEntity: not null })
+            .Select(p => p.AttachedEntity!.Value)
+            .Where(player =>
+                TryComp<SSDIndicatorComponent>(player, out var ssdIndicatorComponent) && !ssdIndicatorComponent.IsSSD &&
+                !HasComp<GhostComponent>(player) &&
+                !HasComp<ContractorComponent>(player) &&
+                (!TryComp<ContractorTargetComponent>(player, out var targetComponent) || targetComponent.CanBeAssigned) &&
+                (!_mindSystem.TryGetMind(player, out var mindId, out _) || !_roleSystem.MindHasRole<TraitorRoleComponent>(mindId)) &&
+                !ent.Comp.Contracts.ContainsKey(GetNetEntity(player)))
+            .ToList();
     }
 }

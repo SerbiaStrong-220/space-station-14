@@ -1,3 +1,5 @@
+using Content.Shared.DoAfter;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Contractor;
 using Robust.Shared.Physics.Events;
@@ -12,6 +14,8 @@ public sealed class ContractorPortalServerSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ContractorServerSystem _contractorServer = default!;
+    [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
     public override void Initialize()
     {
@@ -29,14 +33,11 @@ public sealed class ContractorPortalServerSystem : EntitySystem
             return;
         }
 
-        var needsPortalEntity = targetComponent.PortalEntity;
         var contractorEntity = targetComponent.Performer;
-
         if (!TryComp<ContractorComponent>(contractorEntity, out var contractorComponent))
             return;
 
-        var contractorPdaEntity = GetEntity(contractorComponent.PdaEntity)!.Value;
-
+        var contractorPdaEntity = contractorComponent.PdaEntity;
         if (!TryComp<ContractorPdaComponent>(contractorPdaEntity, out var contractorPdaComponent))
             return;
 
@@ -54,25 +55,50 @@ public sealed class ContractorPortalServerSystem : EntitySystem
         contractorPdaComponent.CurrentContractData = null;
         contractorPdaComponent.Contracts.Remove(GetNetEntity(args.OtherEntity));
 
+        var needsPortalEntity = targetComponent.PortalOnStationEntity;
+
         if (needsPortalEntity != args.OurEntity)
         {
             _popup.PopupClient(Loc.GetString("contractor-portal-for-another-target"), args.OtherEntity, PopupType.Medium);
             return;
         }
 
+        if (targetComponent.PortalOnTajpanEntity == null)
+        {
+            _popup.PopupClient(Loc.GetString("contractor-portal-but-not-in-other-side"), args.OtherEntity, PopupType.Medium);
+            return;
+        }
+
+        if (_mob.IsDead(args.OtherEntity))
+        {
+            targetComponent.AmountTc = MathF.Max(0, targetComponent.AmountTc.Float() * 0.2f);
+            targetComponent.AmountTc = MathF.Ceiling(targetComponent.AmountTc.Float());
+        }
+
         contractorComponent.Reputation += contractorComponent.ReputationAward;
         contractorComponent.AmountTc += targetComponent.AmountTc;
         contractorComponent.ContractsCompleted++;
+        contractorComponent.Profiles.Remove(GetNetEntity(args.OtherEntity));
 
-        _uiSystem.ServerSendUiMessage(GetEntity(contractorComponent.PdaEntity)!.Value, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
-        _uiSystem.ServerSendUiMessage(GetEntity(contractorComponent.PdaEntity)!.Value, ContractorPdaKey.Key, new ContractorCompletedContractMessage());
+        _uiSystem.ServerSendUiMessage(contractorComponent.PdaEntity!.Value, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
+        _uiSystem.ServerSendUiMessage(contractorComponent.PdaEntity!.Value, ContractorPdaKey.Key, new ContractorCompletedContractMessage());
 
         _contractorServer.GenerateContracts((contractorEntity, contractorComponent)); // generate new contracts
 
-        // TODO: create new warp point for another map (tajpan???)
-        _transformSystem.SetCoordinates(args.OtherEntity, Transform(contractorEntity).Coordinates);
+        _transformSystem.SetCoordinates(args.OtherEntity, Transform(targetComponent.PortalOnTajpanEntity.Value).Coordinates);
 
-        Dirty(contractorPdaEntity, contractorPdaComponent);
+        Dirty(contractorComponent.PdaEntity!.Value, contractorPdaComponent);
         Dirty(contractorEntity, contractorComponent);
+
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
+            args.OtherEntity,
+            5f,
+            new TeleportTargetToStationEvent(),
+            args.OtherEntity,
+            args.OtherEntity)
+        {
+            Hidden = true,
+            RequireCanInteract = false,
+        });
     }
 }

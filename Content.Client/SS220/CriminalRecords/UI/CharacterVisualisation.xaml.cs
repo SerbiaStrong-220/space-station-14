@@ -51,7 +51,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
         _entMan.DeleteEntity(_previewDummy);
     }
 
-    public void SetupCharacterSpriteView(HumanoidCharacterProfile profile, string jobPrototype)
+    public void SetupCharacterSpriteView(HumanoidCharacterProfile profile, string jobPrototype, bool onlyFaceSide = false)
     {
         HumanoidAppearanceSystem appearanceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<HumanoidAppearanceSystem>();
 
@@ -63,6 +63,13 @@ public sealed partial class CharacterVisualisation : BoxContainer
         GiveDummyJobClothes(_previewDummy, profile, realjobprototype);
 
         _face.SetEntity(_previewDummy);
+
+        if (onlyFaceSide)
+        {
+            RemoveChild(_side);
+            return;
+        }
+
         _side.SetEntity(_previewDummy);
     }
 

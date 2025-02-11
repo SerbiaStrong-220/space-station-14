@@ -24,6 +24,20 @@
           state: icon
 
 - type: entity
+  parent: MarkerBase
+  id: ContractorTajpanWarpPoint
+  name: warp point
+  suffix: contractor tajpan target point
+  components:
+  - type: ContractorTajpanWarpPoint
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Objects/Weapons/Bombs/spidercharge.rsi #TODO Sprite
+      state: icon
+
+# Contractor box
+- type: entity
   name: cardboard box
   parent: BoxBase
   id: BoxContractor
