@@ -4,6 +4,7 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.MinorFauna.Actions;
 using Content.Shared.SS220.MinorFauna.Events;
 using Content.Shared.SS220.MinorFauna.Components;
+using Content.Shared.Humanoid;
 
 
 namespace Content.Shared.SS220.MinorFauna.Systems;

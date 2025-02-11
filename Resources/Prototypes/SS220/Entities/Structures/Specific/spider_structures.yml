@@ -371,11 +371,75 @@
   components:
   - type: Icon
     sprite: SS220/Structures/Specific/cocoon.rsi
-    state: cocoon1
+    state: animal_cocoon2
   - type: Sprite
     sprite: SS220/Structures/Specific/cocoon.rsi
     layers:
-      - state: cocoon1
+      - state: animal_cocoon2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:EmptyContainersBehaviour
+        containers:
+          - cocoon
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:ChangeConstructionNodeBehavior
+        node: cocoonHorizontalDestroyed
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: SpiderCocoon
+    node: cocoonHorizontal
+
+- type: entity
+  parent: BaseEntityCocoon
+  id: TarantulaAnimalCocoon
+  suffix: Tarantula
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    state: animal_cocoon1
+  - type: Sprite
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    layers:
+      - state: animal_cocoon1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:EmptyContainersBehaviour
+        containers:
+          - cocoon
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:ChangeConstructionNodeBehavior
+        node: cocoonHorizontalDestroyed
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: SpiderCocoon
+    node: cocoonHorizontal
+
+- type: entity
+  parent: BaseEntityCocoon
+  id: TarantulaSmallAnimalCocoon
+  suffix: Tarantula
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    state: small_animal_cocoon1
+  - type: Sprite
+    sprite: SS220/Structures/Specific/cocoon.rsi
+    layers:
+      - state: small_animal_cocoon1
   - type: Destructible
     thresholds:
     - trigger:

@@ -2360,6 +2360,8 @@
     damageContainer: Biological
     damageModifierSet: SpiderMob
   - type: Magboots
+  - type: Puller
+    needsHands: false
   #SS220 Fauna update end
     bloodMaxVolume: 150
     bloodReagent: CopperBlood
@@ -2459,7 +2461,11 @@
         Piercing: 6
     #SS220 Fauna update start
   - type: Cocooner
-    cocoonPrototypes:
+    smallAnimalCocoons:
+    - TarantulaSmallAnimalCocoon
+    animalCocoons:
+    - TarantulaAnimalCocoon
+    humanoidCocoons:
     - TarantulaCocoon
   - type: ActionGrant
     actions:
