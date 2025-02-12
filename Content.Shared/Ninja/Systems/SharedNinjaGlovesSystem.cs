@@ -9,6 +9,7 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Ninja.Components;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
+using Content.Shared.Actions;
 
 namespace Content.Shared.Ninja.Systems;
 
@@ -23,6 +24,7 @@ public abstract class SharedNinjaGlovesSystem : EntitySystem
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSpaceNinjaSystem _ninja = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {
@@ -100,6 +102,14 @@ public abstract class SharedNinjaGlovesSystem : EntitySystem
             EnableGloves(ent, (user, ninja));
         else
             DisableGloves(ent);
+
+        // SS220 ninja gloves toggle on states start
+        if (!TryComp<ToggleClothingComponent>(ent.Owner, out var toggle))
+            return;
+
+        if (toggle.ActionEntity != null)
+            _actions.SetToggled(toggle.ActionEntity.Value, args.Activated);
+        // // SS220 ninja gloves toggle on states end
     }
 
     protected virtual void EnableGloves(Entity<NinjaGlovesComponent> ent, Entity<SpaceNinjaComponent> user)
