@@ -74,8 +74,8 @@
 
 - type: entity
   parent: AirlockGlassCentcomm
-  id: AirlockGlassCentcommLockedGSN
-  suffix: ЦК, Закрыто, ГСН
+  id: AirlockGlassCentcommLockedBlueShieldOperative
+  suffix: ЦК, Закрыто, Оперативник "Синий Щит"
   components:
   - type: ContainerFill
     containers:
@@ -122,8 +122,8 @@
 
 - type: entity
   parent: AirlockCentcomm
-  id: AirlockCentcommLockedGSN
-  suffix: ЦК, Закрыто, ГСН
+  id: AirlockCentcommLockedBSO
+  suffix: ЦК, Закрыто, Оперативник "Синий Щит"
   components:
   - type: ContainerFill
     containers:

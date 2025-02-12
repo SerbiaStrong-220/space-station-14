@@ -1,0 +1,20 @@
+<paper220:DocumentHelperWindow xmlns="https://spacestation14.io"
+               xmlns:paper220="clr-namespace:Content.Client.SS220.Paper.UI"
+               SetSize="280 250">
+    <BoxContainer Name="BodyContainer" Orientation="Horizontal" HorizontalAlignment="Right" MaxWidth="0">
+        <Control Name="Body" SetSize="280 250" HorizontalAlignment="Left" Margin="6">
+            <Control Margin="-22" MouseFilter="Pass">
+                <PanelContainer Name="PaperBackground" StyleClasses="PaperDefaultBorder" VerticalExpand="True" HorizontalExpand="True"/>
+            </Control>
+            <BoxContainer Orientation="Vertical" Margin="0 0 18 0">
+                <RichTextLabel Text="{Loc 'document-helper-prompt'}" Margin="0 0 0 10"/>
+                <ScrollContainer VerticalExpand="True">
+                    <BoxContainer Name="OptionsContainer" Orientation="Vertical"/>
+                </ScrollContainer>
+            </BoxContainer>
+            <ContainerButton Name="ExpandButton" VerticalExpand="True" SetWidth="32" HorizontalAlignment="Right" Margin="0 0 -16 0">
+                <TextureRect Name="ExpandIcon" HorizontalAlignment="Center" StyleClasses="ArrowRight"/>
+            </ContainerButton>
+        </Control>
+    </BoxContainer>
+</paper220:DocumentHelperWindow>

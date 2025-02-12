@@ -65,14 +65,14 @@
 
 - type: entity
   parent: CentcomIDCard
-  id: OperativeSRTIDCard
-  name: ID карта Оперативника ГСН
+  id: OperativeBSOIDCard
+  name: ID карта Оперативника "Синий Щит"
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: job-name-cc-srt-operative #SS220 (upstream 65 localization)
+      jobTitle: job-name-cc-bs-operative #SS220 (upstream 65 localization)
     - type: PresetIdCard
-      job: CentcomOperativeSRT
+      job: CentcomOperativeBSO
 
 - type: entity # SS220 - Security dog Roxi ID card
   parent: IDCardStandard

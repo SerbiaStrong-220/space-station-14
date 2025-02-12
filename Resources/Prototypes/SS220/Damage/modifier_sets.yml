@@ -108,3 +108,23 @@
     Poison: 1
     Cellular: 1
     Radiation: 1
+
+- type: damageModifierSet
+  id: CorruptedAnimal
+  coefficients:
+    Blunt: 0.8
+    Slash: 0.8
+    Piercing: 0.7
+    Shock: 1.0
+    Cold: 0.8
+    Poison: 0.8
+    Cellular: 1
+    Radiation: 0.5
+
+- type: damageModifierSet
+  id: MobVespia
+  coefficients:
+    Blunt: 0.7
+    Slash: 0.5
+    Radiation: 0.4
+    Stamina: 0.4

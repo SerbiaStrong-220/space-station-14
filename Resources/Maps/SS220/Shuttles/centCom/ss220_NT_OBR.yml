@@ -10,9 +10,9 @@ tilemap:
   92: FloorShuttleBlue
   101: FloorSteel
   112: FloorSteelMono
-  120: FloorTechMaintDrain
   121: FloorTechMaintDrainHorizontal
   122: FloorTechMaintDrainMiddle
+  120: FloorTechMaintDrainVertical
   130: FloorWhiteMono
   134: FloorWhitePlastic
   140: Lattice
@@ -1003,8 +1003,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 474
   - uid: 37
     components:
     - type: Transform
@@ -1013,8 +1011,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 475
 - proto: BlastDoorOpen
   entities:
   - uid: 38
@@ -1025,9 +1021,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 39
     components:
     - type: Transform
@@ -1036,9 +1029,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 40
     components:
     - type: Transform
@@ -1047,9 +1037,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 41
     components:
     - type: Transform
@@ -1058,9 +1045,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 42
     components:
     - type: Transform
@@ -1069,9 +1053,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 43
     components:
     - type: Transform
@@ -1080,9 +1061,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 44
     components:
     - type: Transform
@@ -1091,9 +1069,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 45
     components:
     - type: Transform
@@ -1102,9 +1077,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 46
     components:
     - type: Transform
@@ -1113,9 +1085,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 47
     components:
     - type: Transform
@@ -1124,9 +1093,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 2
-      links:
-      - 476
-      - 714
   - uid: 48
     components:
     - type: Transform
@@ -1135,9 +1101,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 49
     components:
     - type: Transform
@@ -1146,9 +1109,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 50
     components:
     - type: Transform
@@ -1157,9 +1117,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 51
     components:
     - type: Transform
@@ -1168,9 +1125,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 52
     components:
     - type: Transform
@@ -1179,9 +1133,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 53
     components:
     - type: Transform
@@ -1190,9 +1141,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 54
     components:
     - type: Transform
@@ -1201,9 +1149,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 55
     components:
     - type: Transform
@@ -1212,9 +1157,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
   - uid: 56
     components:
     - type: Transform
@@ -1223,9 +1165,6 @@ entities:
       parent: 2
     - type: DeviceLinkSink
       invokeCounter: 1
-      links:
-      - 476
-      - 714
 - proto: BoozeDispenser
   entities:
   - uid: 660
@@ -2529,13 +2468,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 3.5,9.5
       parent: 2
-- proto: chem_master
-  entities:
-  - uid: 442
-    components:
-    - type: Transform
-      pos: -0.5,2.5
-      parent: 2
 - proto: ChemDispenser
   entities:
   - uid: 414
@@ -2549,6 +2481,13 @@ entities:
     components:
     - type: Transform
       pos: 1.5,3.5
+      parent: 2
+- proto: ChemMaster
+  entities:
+  - uid: 442
+    components:
+    - type: Transform
+      pos: -0.5,2.5
       parent: 2
 - proto: CleanerDispenser
   entities:
@@ -4047,27 +3986,18 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,0.5
       parent: 2
-    - type: DeviceLinkSink
-      links:
-      - 477
   - uid: 449
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,5.5
       parent: 2
-    - type: DeviceLinkSink
-      links:
-      - 477
   - uid: 734
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -1.5,0.5
       parent: 2
-    - type: DeviceLinkSink
-      links:
-      - 477
 - proto: ShuttleGunMLG
   entities:
   - uid: 451
@@ -4076,18 +4006,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: -5.5,7.5
       parent: 2
-    - type: DeviceLinkSink
-      links:
-      - 472
   - uid: 452
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 6.5,7.5
       parent: 2
-    - type: DeviceLinkSink
-      links:
-      - 473
 - proto: ShuttleWindow
   entities:
   - uid: 453
@@ -4341,7 +4265,7 @@ entities:
         734:
         - On: Toggle
         - Off: Toggle
-- proto: soda_dispenser
+- proto: SodaDispenser
   entities:
   - uid: 659
     components:

@@ -1,17 +1,17 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  name: Оперативник Группы Специального Назначения
-  id: CentCommOperativeSRT
+  name: Оперативник "Синий Щит"
+  id: CentCommOperativeBSO
   components:
     - type: Sprite
       sprite: SS220/Markers/jobs.rsi
-      state: centcommoperativesrt
+      state: centcommoperativebs
     - type: RandomHumanoidSpawner
-      settings: CentCommOperativeSRT
+      settings: CentCommOperativeBSO
 
 - type: randomHumanoidSettings
-  id: CentCommOperativeSRT
+  id: CentCommOperativeBSO
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
   components:
     - type: RandomHumanoidAppearance
@@ -19,26 +19,26 @@
       hair: HairBald
     - type: RandomMetadata
       nameSegments:
-        - NamesFirstGSNMember
-        - NamesLastGSNMember
+        - NamesFirstBSOMember
+        - NamesLastBSOMember
     - type: MindShield
     - type: GhostRole
-      name: ghost-role-information-centcom-SRT-name
-      description: ghost-role-information-centcom-SRT-description
+      name: ghost-role-information-centcom-BSO-name
+      description: ghost-role-information-centcom-BSO-description
     - type: GhostTakeoverAvailable
     - type: Loadout
-      prototypes: [ CentcomOperativeSRTGear ]
+      prototypes: [ CentcomOperativeBSOGear ]
 
 - type: playTimeTracker
-  id: JobCentcommOperativeSRT
+  id: JobCentcommOperativeBSO
 
 - type: job
-  id: CentcomOperativeSRT
-  name: job-name-cc-srt-operative
+  id: CentcomOperativeBSO
+  name: job-name-cc-bs-operative
   description: job-description-centcomoff
   setPreference: false
-  startingGear: CentcomOperativeSRTGear
-  playTimeTracker: JobCentcommOperativeSRT
+  startingGear: CentcomOperativeBSOGear
+  playTimeTracker: JobCentcommOperativeBSO
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -46,21 +46,21 @@
   accessGroups:
   - AllAccess
   access:
-  - CentralCommandGSN
+  - CentralCommandBSO
   - CentralCommand
 
 - type: startingGear
-  id: CentcomOperativeSRTGear
+  id: CentcomOperativeBSOGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitBlueShield2
-    shoes: ClothingShoesSwat
-    head: ClothingHeadHatBeretNanoTrasenOfficer
-    eyes: ClothingEyesGlassesBlueShield
+    jumpsuit: ClothingUniformJumpsuitBlueShieldOperative
+    shoes: ClothingShoesBootsBlueShieldJackFilled
+    head: ClothingHeadBeretBlueshield
+    eyes: ClothingEyesBlueShieldGlasses
     gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterSRTCoat
-    id: CentcomOperativeSRTPDA
+    outerClothing: ClothingOuterBSOCoat
+    id: CentcomOperativeBSOPDA
     ears: ClothingHeadsetAltCentComm
-    pocket1: MagazinePistolSubMachineGun
-    pocket2: MagazinePistolSubMachineGun
-    belt: ClothingBeltWebbingSRTFilled
-    back: ClothingBackSatchelSRTFilled
+    pocket1: WeaponSynergisticEnergyGun
+    pocket2: TelescopicShield
+    belt: ClothingBeltBlueShieldFilled
+    back: ClothingBackpackBlueShieldHightFilled

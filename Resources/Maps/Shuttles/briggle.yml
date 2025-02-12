@@ -715,8 +715,6 @@ entities:
     - type: Transform
       pos: 1.5,0.5
       parent: 1
-    - type: GravityGenerator
-      chargeRate: 0.2
 - proto: Grille
   entities:
   - uid: 119
@@ -797,6 +795,15 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.5,0.5
       parent: 1
+- proto: HandheldRadio
+  entities:
+  - uid: 61
+    components:
+    - type: Transform
+      parent: 56
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: Paper
   entities:
   - uid: 150
@@ -885,15 +892,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 1.5,-0.5
       parent: 1
-- proto: RadioHandheld
-  entities:
-  - uid: 61
-    components:
-    - type: Transform
-      parent: 56
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: SheetPlasma
   entities:
   - uid: 59

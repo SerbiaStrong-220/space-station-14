@@ -70,3 +70,25 @@
 - type: tileAlias
   id: FloorSteelBurnt
   target: FloorSteelDamaged
+
+## SS220 Resprite Tiles bgn
+- type: tileAlias
+  id: FloorTechMaintDrain
+  target: FloorTechMaintDrainVertical
+
+- type: tileAlias
+  id: FloorDutch
+  target: FloorSanitary
+
+- type: tileAlias
+  id: FloorDutchHorizontal
+  target: FloorSanitaryHorizontal
+
+- type: tileAlias
+  id: FloorDutchMini
+  target: FloorSanitaryMini
+
+- type: tileAlias
+  id: FloorDutchMiniHorizontal
+  target: FloorSanitaryMiniHorizontal
+## SS220 Resprite Tiles end

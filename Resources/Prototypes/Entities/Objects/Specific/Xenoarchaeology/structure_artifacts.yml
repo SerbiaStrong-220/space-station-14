@@ -46,6 +46,45 @@
         - MachineMask
   - type: InteractionOutline
   - type: Artifact
+    bonusPrototype:  # SS220-BonusForFullyDiscovered - start
+    - BlueprintBeltChiefEngineer
+    - BlueprintSeismicCharge
+    - BlueprintFulton
+    - BlueprintSuperSynthesizerInstrument
+    - BlueprintFultonBeacon
+    - BlueprintClothingBeltMilitaryWebbing
+    - BlueprintWallmountGeneratorAPUElectronics
+    - BlueprintWeaponCrusher
+    - BlueprintWeaponCrusherGlaive
+    - BlueprintJetpackVoid
+    - BlueprintToySword
+    - BlueprintDoubleToySword
+    - BlueprintWelderIndustrial
+    - BlueprintWelderIndustrialAdvanced
+    - BlueprintSawAdvanced
+    - BlueprintGlowstickBlue
+    - BlueprintSyndicateMicrowaveMachineCircuitboard
+    - BlueprintPowerCellHyperPrinted
+    - ClothingOuterCoatExpensive
+    - PowerCellAntiqueProto
+    - MetalFoamGrenade
+    - WeaponLaserGun
+    - FireAxe
+    - ClothingHeadHatChameleon
+    - UsspPDA
+    - SyndiPDA
+    - SoapOmega
+    - ClothingOuterCoatExpensive
+    - ClothingBackpackERTSecurity
+    - WeaponTeslaGun
+    - Chainsaw
+    - EnergyDaggerLoud
+    - BorgModuleSyndicateWeapon
+    - WeaponMeleeToolboxRobust
+    - PresentRandomUnsafe
+    - TeslaToy
+    - ClothingHeadHatCatEars
+    - DnaScramblerImplanter  # SS220-BonusForFullyDiscovered - end
   - type: RandomArtifactSprite
     maxSprite: 36
   - type: RandomSprite
@@ -91,4 +130,3 @@
   - type: Artifact
     nodesMin: 9
     nodesMax: 13
-

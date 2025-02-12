@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by @Kit0vras (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name":"concrete-mono"
+    },
+    {
+      "name":"concrete-pavement-horizontal"
+    },
+    {
+      "name":"concrete-pavement-vertical"
+    },
+    {
+      "name":"concrete"
+    },
+    {
+      "name":"grayconcrete-mono"
+    },
+    {
+      "name":"grayconcrete-pavement-horizontal"
+    },
+    {
+      "name":"grayconcrete-pavement-vertical"
+    },
+    {
+      "name":"grayconcrete"
+    },
+    {
+      "name":"oldconcrete-mono"
+    },
+    {
+      "name":"oldconcrete-pavement-horizontal"
+    },
+    {
+      "name":"oldconcrete-pavement-vertical"
+    },
+    {
+      "name":"oldconcrete"
+    }
+  ]
+}

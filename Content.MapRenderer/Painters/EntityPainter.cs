@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -62,7 +62,7 @@ public sealed class EntityPainter
         {
             Console.WriteLine(
                 $"{nameof(TransformComponent)} can not be found on entity at ({entity.X}, {entity.Y}) global position, {entity.LocalPosition} local position, " +
-                $"with {entity.Sprite.BaseRSI?.Path} RSI, prototype id '{entity.MetaData.EntityPrototype?.ID}', it is probably already destroyed, skipping.");
+                $"with {entity.Sprite.BaseRSI?.Path} RSI, prototype id '{entity.MetaData?.EntityPrototype?.ID}', it is probably already destroyed, skipping.");
             return;
         }
         var worldRotation = xformSystem.GetWorldRotation(xform);

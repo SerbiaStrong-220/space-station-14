@@ -99,6 +99,14 @@ public sealed partial class RatKingComponent : Component
         { RatKingOrderType.CheeseEm, "RatKingCommandCheeseEm" },
         { RatKingOrderType.Loose, "RatKingCommandLoose" }
     };
+
+    // SS220 RatKing Tweaks and Changes begin
+    [ViewVariables]
+    public EntityUid? ActionRummageEntity;
+
+    [DataField("actionRummage")]
+    public EntProtoId ActionRummage = "ActionRatKingRummage";
+    // SS220 RatKing Tweaks and Changes end
 }
 
 [Serializable, NetSerializable]

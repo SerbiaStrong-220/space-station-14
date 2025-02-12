@@ -414,22 +414,6 @@
     Steel: 50
 
 - type: latheRecipe
-  id: TileDutch
-  result: FloorTileItemDutch
-  category: Plastic
-  completetime: 1
-  materials:
-    Plastic: 50
-
-- type: latheRecipe
-  id: TileDutchMini
-  result: FloorTileItemDutchMini
-  category: Plastic
-  completetime: 1
-  materials:
-    Plastic: 50
-
-- type: latheRecipe
   id: TilePurpleCircuit
   result: FloorTileItemPCircuit
   completetime: 1
@@ -615,3 +599,835 @@
   materials:
     Wood: 50
 #WoodTiles-end
+
+- type: latheRecipe
+  id: TileFloorDarkCalifornia
+  result: FloorItemDarkCalifornia
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkEightBricks
+  result: FloorItemDarkEightBricks
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkMixedBricks
+  result: FloorItemDarkMixedBricks
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkMixedBricksMini
+  result: FloorItemDarkMixedBricksMini
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkMixedPavementHorizontal
+  result: FloorItemDarkMixedPavementHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkMixedPavementVertical
+  result: FloorItemDarkMixedPavementVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkShiftedEightBricks
+  result: FloorItemDarkShiftedEightBricks
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkShiftedMiniHorizontal
+  result: FloorItemDarkShiftedMiniHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkShiftedMiniVertical
+  result: FloorItemDarkShiftedMiniVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorFreezerHorizontal
+  result: FloorItemFreezerHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorFreezerMini
+  result: FloorItemFreezerMini
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorFreezerMiniHorizontal
+  result: FloorItemFreezerMiniHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorFreezerMiniVertical
+  result: FloorItemFreezerMiniVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorFreezerMono
+  result: FloorItemFreezerMono
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorFreezerVertical
+  result: FloorItemFreezerVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintDrainHorizontal
+  result: FloorItemGratingMaintDrainHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintDrainMiddle
+  result: FloorItemGratingMaintDrainMiddle
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintDrainVertical
+  result: FloorItemGratingMaintDrainVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintHorizontal
+  result: FloorItemGratingMaintHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintMini
+  result: FloorItemGratingMaintMini
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintMono
+  result: FloorItemGratingMaintMono
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintVertical
+  result: FloorItemGratingMaintVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkGratingDirectedHorizontal
+  result: FloorItemMiningDarkGratingDirectedHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkGratingDirectedVertical
+  result: FloorItemMiningDarkGratingDirectedVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkGratingHorizontal
+  result: FloorItemMiningDarkGratingHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkGratingMiddle
+  result: FloorItemMiningDarkGratingMiddle
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkGratingVertical
+  result: FloorItemMiningDarkGratingVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkMono
+  result: FloorItemMiningDarkMono
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkReinforced
+  result: FloorItemMiningDarkReinforced
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningGratingDirectedHorizontal
+  result: FloorItemMiningGratingDirectedHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningGratingDirectedVertical
+  result: FloorItemMiningGratingDirectedVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningGratingHorizontal
+  result: FloorItemMiningGratingHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningGratingMiddle
+  result: FloorItemMiningGratingMiddle
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningGratingVertical
+  result: FloorItemMiningGratingVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightGratingDirectedHorizontal
+  result: FloorItemMiningLightGratingDirectedHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightGratingDirectedVertical
+  result: FloorItemMiningLightGratingDirectedVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightGratingHorizontal
+  result: FloorItemMiningLightGratingHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightGratingMiddle
+  result: FloorItemMiningLightGratingMiddle
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightGratingVertical
+  result: FloorItemMiningLightGratingVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightMono
+  result: FloorItemMiningLightMono
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightReinforced
+  result: FloorItemMiningLightReinforced
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningMono
+  result: FloorItemMiningMono
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningReinforced
+  result: FloorItemMiningReinforced
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorRockVaultHerringbone
+  result: FloorItemRockVaultHerringbone
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorRockVaultHorizontal
+  result: FloorItemRockVaultHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorRockVaultMini
+  result: FloorItemRockVaultMini
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorRockVaultMono
+  result: FloorItemRockVaultMono
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorRockVaultPavementHorizontal
+  result: FloorItemRockVaultPavementHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorRockVaultVertical
+  result: FloorItemRockVaultVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitary
+  result: FloorItemSanitary
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDark
+  result: FloorItemSanitaryDark
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDarkHorizontal
+  result: FloorItemSanitaryDarkHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDarkMini
+  result: FloorItemSanitaryDarkMini
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDarkMiniHorizontal
+  result: FloorItemSanitaryDarkMiniHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDarkMiniVertical
+  result: FloorItemSanitaryDarkMiniVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDarkMono
+  result: FloorItemSanitaryDarkMono
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDarkVertical
+  result: FloorItemSanitaryDarkVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryHorizontal
+  result: FloorItemSanitaryHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryMini
+  result: FloorItemSanitaryMini
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryMiniHorizontal
+  result: FloorItemSanitaryMiniHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryMiniVertical
+  result: FloorItemSanitaryMiniVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryMono
+  result: FloorItemSanitaryMono
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryVertical
+  result: FloorItemSanitaryVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorShowroomHorizontal
+  result: FloorItemShowroomHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorShowroomMini
+  result: FloorItemShowroomMini
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorShowroomMiniHorizontal
+  result: FloorItemShowroomMiniHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorShowroomMiniVertical
+  result: FloorItemShowroomMiniVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorShowroomMono
+  result: FloorItemShowroomMono
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorShowroomVertical
+  result: FloorItemShowroomVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelCalifornia
+  result: FloorItemSteelCalifornia
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelEightBricks
+  result: FloorItemSteelEightBricks
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintDrainHorizontal
+  result: FloorItemSteelMaintDrainHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintDrainMiddle
+  result: FloorItemSteelMaintDrainMiddle
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorItemTechMainDrainMiddle
+  result: FloorItemTechMainDrainMiddle
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintDrainVertical
+  result: FloorItemSteelMaintDrainVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintHorizontal
+  result: FloorItemSteelMaintHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintMini
+  result: FloorItemSteelMaintMini
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintVertical
+  result: FloorItemSteelMaintVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMixedBricks
+  result: FloorItemSteelMixedBricks
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMixedBricksMini
+  result: FloorItemSteelMixedBricksMini
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMixedPavementHorizontal
+  result: FloorItemSteelMixedPavementHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMixedPavementVertical
+  result: FloorItemSteelMixedPavementVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelShiftedEightBricks
+  result: FloorItemSteelShiftedEightBricks
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelShiftedMiniHorizontal
+  result: FloorItemSteelShiftedMiniHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelShiftedMiniVertical
+  result: FloorItemSteelShiftedMiniVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorTechMaintHorizontal
+  result: FloorItemTechMaintHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorTechMaintMini
+  result: FloorItemTechMaintMini
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorTechMaintMono
+  result: FloorItemTechMaintMono
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorTechMaintVertical
+  result: FloorItemTechMaintVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteCalifornia
+  result: FloorItemWhiteCalifornia
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteEightBricks
+  result: FloorItemWhiteEightBricks
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteMixedBricks
+  result: FloorItemWhiteMixedBricks
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteMixedBricksMini
+  result: FloorItemWhiteMixedBricksMini
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteMixedPavementHorizontal
+  result: FloorItemWhiteMixedPavementHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteMixedPavementVertical
+  result: FloorItemWhiteMixedPavementVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteShiftedEightBricks
+  result: FloorItemWhiteShiftedEightBricks
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteShiftedMiniHorizontal
+  result: FloorItemWhiteShiftedMiniHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteShiftedMiniVertical
+  result: FloorItemWhiteShiftedMiniVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorConcretePavementHorizontal
+  result: FloorItemConcretePavementHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorConcretePavementVertical
+  result: FloorItemConcretePavementVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGrayconcretePavementHorizontal
+  result: FloorItemGrayconcretePavementHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGrayconcretePavementVertical
+  result: FloorItemGrayconcretePavementVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorOldconcretePavementHorizontal
+  result: FloorItemOldconcretePavementHorizontal
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorOldconcretePavementVertical
+  result: FloorItemOldconcretePavementVertical
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50

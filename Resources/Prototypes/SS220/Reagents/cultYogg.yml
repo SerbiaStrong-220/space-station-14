@@ -1,0 +1,88 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: reagent
+  id: TheBloodOfYogg
+  name: reagent-name-yoggs-blood
+  group: Toxins
+  desc: reagent-desc-yoggs-blood
+  physicalDesc: reagent-physical-desc-putrid
+  flavor: menacing
+  color: "#afdd9a" #change color to a shroom color
+  metabolisms:
+    Poison:
+      effects:
+      - !type:ChemMiGomicelium
+      - !type:GenericStatusEffect
+        key: Rave
+        component: Rave
+        type: Add
+        time: 150
+        refresh: false
+        conditions:
+        - !type:ReagentThreshold
+            reagent: TheBloodOfYogg
+            min: 2
+        - !type:HasComponentsCondition
+            inverted: true
+            components:
+              - CultYogg
+
+- type: reagent
+  id: ElixirOfLiberation
+  name: reagent-name-elixir-of-liberation
+  group: Toxins
+  desc: reagent-desc-elixir-of-liberation
+  physicalDesc: reagent-physical-desc-putrid
+  flavor: menacing
+  color: "#afdd9a" #change color to a shroom color
+  metabolisms:
+    Poison:
+      effects:
+      - !type:ChemElixirOfLiberation
+
+- type: reagent
+  id: CultYoggVenomancerAcid
+  name: reagent-name-cult-yogg-venomancer-acid
+  group: Toxins
+  desc: reagent-desc-cult-yogg-venomancer-acid
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: acid
+  color: "#a1000b"
+  boilingPoint: 78.2 # This isn't a real chemical...
+  meltingPoint: -19.4
+  plantMetabolism:
+  - !type:PlantAdjustToxins
+    amount: 20
+  - !type:PlantAdjustWeeds
+    amount: -4
+  - !type:PlantAdjustHealth
+    amount: -8
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        ignoreResistances: false
+        damage:
+          types:
+            Caustic: 3
+      - !type:Emote
+        emote: Scream
+        probability: 0.3
+  metabolisms:
+    Poison:
+      metabolismRate : 3.00 # High damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Caustic: 10.0
+      - !type:PopupMessage
+        type: Local
+        visualType: Large
+        messages: [ "generic-reagent-effect-burning-insides" ]
+        probability: 0.33
+      - !type:Emote
+        emote: Scream
+        probability: 0.3

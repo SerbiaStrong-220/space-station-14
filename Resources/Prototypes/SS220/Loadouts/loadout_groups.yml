@@ -140,29 +140,63 @@
 
   # Офицер "Синий Щит" (Начало)
 - type: loadoutGroup
+  id: BlueShieldHead
+  name: loadout-group-blueshield-head
+  minLimit: 0
+  loadouts:
+  - BlueshieldBeret
+  - BlueshieldBlueBeret
+
+- type: loadoutGroup
+  id: BlueShieldGlasses
+  name: loadout-group-blueshield-glasses
+  minLimit: 1
+  loadouts:
+  - BlueshieldGlasses
+  - BlueshieldTacticGlasses
+
+- type: loadoutGroup
   id: BlueShieldNeck
   name: loadout-group-blueshield-neck
   minLimit: 0
   loadouts:
   - SecurityHolster
   - Headphones
-  - ProtectGear
+  - ProtectGearBlue
   - BlueShieldNeckCloak
 
 - type: loadoutGroup
   id: BlueShieldJumpsuit
   name: loadout-group-blueshield-jumpsuit
   loadouts:
-  - BlueShieldJumpsuit
-  - BlueShieldJumpsuit2
+  - BlueShieldCombez
+  - BlueShieldJumpsuitOperative
+  - BlueShieldJumpsuitShirt
   - BlueShieldJumpsuitTurtle
+  - BlueShieldJumpsuitTShirt
+  - BlueShieldJumpsuitCombat
 
 - type: loadoutGroup
   id: BlueShieldOuterclothing
   name: loadout-group-blueshield-outerclothing
   loadouts:
-  - BlueShieldArmorBulletproof
-  - BlueShieldSRTCoat
+  - BlueShieldArmorAssault
+  - BlueShieldArmorScale
+  - BlueShieldOperativeCoat
+
+- type: loadoutGroup
+  id: BlueShieldBelt
+  name: loadout-group-blueshield-belt
+  loadouts:
+  - BlueshieldBelt
+  - BlueshieldWebbing
+
+- type: loadoutGroup
+  id: BlueShieldBackpack
+  name: loadout-group-blueshield-backpack
+  hidden: true
+  loadouts:
+  - BlueShieldBackpack
   # Офицер "Синий Щит" (Конец)
 #! Юридический (Конец)
 
@@ -202,7 +236,7 @@
     - SecuritySatchel
     - SecurityDuffel
     - DetectiveNoirSatchel
-  
+
 - type: loadoutGroup
   id: SecurityGloves
   name: loadout-group-security-gloves
@@ -226,6 +260,7 @@
   name: loadout-group-security-pilot-head
   minLimit: 0
   loadouts:
+  - SecurityHelmetXmas
   - SecurityHelmet
   - SecurityBeret
   - SecurityHat
@@ -243,6 +278,17 @@
   - VestArmorSec
   - CyberVestSecurity
   # Пилот (Конец)
+
+  # Детектив (Начало)
+- type: loadoutGroup
+  id: DetectiveShoes
+  name: loadout-group-detective-shoes
+  loadouts:
+  - JackBoots
+  - SecurityWinterBoots
+  - BootsJackSec
+  - DetectiveShoesBootsLaceup
+  # Детектив (Конец)
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -260,6 +306,7 @@
   - TrackerExpertNeck
   - AdministratorNeck
   - HeadDeveloperNeck
+  - WikiEditorsNeck
   # Главный врач (Конец)
 
   # Ведущий врач (Начало)
@@ -422,6 +469,24 @@
   - GlassesChemical
   - CyberRnDVisor
   # Химик (Конец)
+
+  # Парамедик (начало)
+- type: loadoutGroup
+  id: ParamedicBelt
+  name: loadout-group-paramedic-belt
+  loadouts:
+  - ParamedicBaseBelt
+  - ParamedInterdyneBelt
+  # Парамедик (конец)
+
+  # Главный врач (Начало)
+- type: loadoutGroup
+  id: ChiefMedicalOfficerGlasses
+  name: loadout-group-chief-medical-officer-eyes
+  loadouts:
+  - Glasses
+  - CyberMedVisor
+  - CMOCorpGlasses
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -533,6 +598,7 @@
   loadouts:
   - ClothingHeadHatSalvage
   - ClothingHeadBandSalvage
+  - ClothingHeadHatHardhatVioletXmas
   - ClothingHeadHatHardhatViolet
   - ClothingHeadBeretSalvageSpecialist
   # Утилизатор (Конец)
@@ -653,9 +719,10 @@
 - type: loadoutGroup
   id: ServiceWorkerJumpsuit
   name: loadout-group-service-worker-jumpsuit
-  hidden: true
   loadouts:
   - ServiceWorkerWaiter
+  - ServiceWorkerWaitress
+
   # Сервисный работник (Конец)
 
 #! Сервис (Конец)

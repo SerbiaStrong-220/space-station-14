@@ -8,12 +8,16 @@
   components:
     - type: Pda
       id: CentcomDiplomatIDCard
-      state: pda-centcomnew
       penSlot:
         startingItem: CentCommNewPen
         whitelist:
           tags:
           - Write
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-centcomnew
     - type: PdaBorderColor
       borderColor: "#4b474f"
       accentHColor: "#dfac5c"
@@ -21,6 +25,7 @@
       sprite: Objects/Devices/pda.rsi
       layers:
       - map: [ "enum.PdaVisualLayers.Base" ]
+        state: "pda" #ss220 fix
       - state: "screen-nt"
         shader: "unshaded"
       - state: "light_overlay"
@@ -41,12 +46,16 @@
   components:
     - type: Pda
       id: CentcomDiplomatIDCard
-      state: pda-diplomat
       penSlot:
         startingItem: CentCommNewPen
         whitelist:
           tags:
           - Write
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-diplomat
     - type: PdaBorderColor
       borderColor: "#cbcdd1"
       accentHColor: "#dfac5c"
@@ -54,6 +63,7 @@
       sprite: Objects/Devices/pda.rsi
       layers:
       - map: [ "enum.PdaVisualLayers.Base" ]
+        state: "pda" #ss220 fix
       - state: "screen-nt"
         shader: "unshaded"
       - state: "light_overlay"
@@ -77,12 +87,12 @@
 
 - type: entity
   parent: CentcomNewPDA
-  id: CentcomOperativeSRTPDA
-  name: КПК Оперативника ГСН
-  description: КПК Оперативника ГСН. Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
+  id: CentcomOperativeBSOPDA
+  name: КПК Оперативника "Синий Щит"
+  description: КПК Оперативника "Синий Щит". Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
   components:
     - type: Pda
-      id: OperativeSRTIDCard
+      id: OperativeBSOIDCard
 
 
 - type: entity
@@ -102,12 +112,16 @@
   components:
     - type: Pda
       id: NanoTrasenAdmiralIDCard
-      state: pda-admiral
       penSlot:
         startingItem: CentCommNewPen
         whitelist:
           tags:
           - Write
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-admiral
     - type: PdaBorderColor
       borderColor: "#cbcdd1"
       accentHColor: "#dfac5c"
@@ -116,6 +130,7 @@
       sprite: Objects/Devices/pda.rsi
       layers:
       - map: [ "enum.PdaVisualLayers.Base" ]
+        state: "pda" #ss220 fix
       - state: "screen-nt"
         shader: "unshaded"
       - state: "light_overlay"

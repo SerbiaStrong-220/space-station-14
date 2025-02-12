@@ -116,6 +116,32 @@
       - id: FoodSnackChocolateBar
     sound:
       path: /Audio/Effects/unwrap.ogg
+      #SS220 destructable foodboxes RatKing Tweaks and Changes start
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPacketChocolateTrash:
+            min: 1 
+            max: 1
+          FoodSnackChocolateBar:
+            min: 1 
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      #SS220 destructable foodboxes RatKing Tweaks and Changes end
 
 - type: entity
   name: chocolate bar
@@ -429,6 +455,32 @@
       - id: FoodSnackNutribrickOpen
     sound:
       path: /Audio/Effects/unwrap.ogg
+      #SS220 destructable foodboxes RatKing Tweaks and Changes start
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPacketMRETrash:
+            min: 1 
+            max: 1
+          FoodSnackNutribrickOpen:
+            min: 1 
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      #SS220 destructable foodboxes RatKing Tweaks and Changes end
 
 - type: entity
   id: FoodSnackNutribrickOpen
@@ -473,6 +525,32 @@
       - id: FoodSnackMREBrownieOpen
     sound:
       path: /Audio/Effects/unwrap.ogg
+      #SS220 destructable foodboxes RatKing Tweaks and Changes start
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodPacketMRETrash:
+            min: 1 
+            max: 1
+          FoodSnackMREBrownieOpen:
+            min: 1 
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      #SS220 destructable foodboxes RatKing Tweaks and Changes end
 
 
 - type: entity
@@ -684,7 +762,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 30
+        maxVol: 45
         reagents:
         - ReagentId: Fiber
           Quantity: 40

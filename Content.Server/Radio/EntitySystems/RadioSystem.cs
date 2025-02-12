@@ -69,6 +69,13 @@ public sealed class RadioSystem : EntitySystem
     {
         if (TryComp(uid, out ActorComponent? actor))
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
+
+        // SS220 Silicon TTS fix begin
+        if (component.ReceiverEntityOverride is { } receiverOverride && !TerminatingOrDeleted(receiverOverride))
+            args.Receivers.Add(new(uid, new(receiverOverride, 0, 0)));
+        else
+            args.Receivers.Add(new(uid));
+        // SS220 Silicon TTS fix end
     }
 
     /// <summary>

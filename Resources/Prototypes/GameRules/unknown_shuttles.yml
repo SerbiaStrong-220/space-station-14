@@ -1,14 +1,15 @@
 # Shuttle Game Rule Tables -- If you dont add your rules to these they wont be used by the games schedulers.
 
-# SS220-NoUnknownShuttles-Begin
-#- type: entityTable
-#  id: UnknownShuttlesFriendlyTable
-#  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
-#    children:
-#    - id: UnknownShuttleCargoLost
-#    - id: UnknownShuttleTravelingCuisine
-#    - id: UnknownShuttleDisasterEvacPod
-#    - id: UnknownShuttleHonki
+- type: entityTable
+  id: UnknownShuttlesFriendlyTable
+  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+    children:
+    - id: UnknownShuttleCargoLost
+    - id: UnknownShuttleTravelingCuisine
+    - id: UnknownShuttleDisasterEvacPod
+    - id: UnknownShuttleHonki
+    - id: UnknownShuttleCivil
+#SS220-NoUnknownShuttles begin
 #    - id: UnknownShuttleNTQuark
 #    - id: UnknownShuttleCruiser
 #    - id: UnknownShuttleCryptid
@@ -28,70 +29,84 @@
 #     children:
 #     - id: UnknownShuttleSyndieEvacPod
 
-#- type: entityTable
-#  id: UnknownShuttlesHostileTable
-#  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
-#    children:
-#    - id: UnknownShuttleInstigator
+# - type: entityTable
+#   id: UnknownShuttlesHostileTable
+#   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+#     children:
+#     - id: LoneOpsSpawn
+#     - id: UnknownShuttleManOWar
+#     - id: UnknownShuttleInstigator
+#SS220-NoUnknownShuttles end
+
 
 # # Shuttle Game Rules
 
-# - type: entity
-#   abstract: true
-#   parent: BaseGameRule
-#   id: BaseUnknownShuttleRule
-#   components:
-#   - type: StationEvent
-#     startAnnouncement: station-event-unknown-shuttle-incoming
-#     startAudio:
-#       path: /Audio/Announcements/attention.ogg
-#     weight: 10 # 10 default
-#     reoccurrenceDelay: 30
-#     duration: 1
-#     maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
-#   - type: RuleGrids
-#   - type: LoadMapRule
+- type: entity
+  abstract: true
+  parent: BaseGameRule
+  id: BaseUnknownShuttleRule
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-unknown-shuttle-incoming
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    weight: 10 # 10 default
+    reoccurrenceDelay: 60 #SS220 ReWork Soul Shuttle
+    duration: 1
+    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
+  - type: RuleGrids
+  - type: LoadMapRule
 
-# - type: entity
-#   parent: BaseUnknownShuttleRule
-#   id: UnknownShuttleCargoLost
-#   components:
-#   - type: StationEvent
-#     maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml
-#   - type: LoadMapRule
-#     preloadedGrid: ShuttleCargoLost
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleCargoLost
+  components:
+  - type: StationEvent
+  #SS220 ReWork Soul Shuttle begin
+    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
+    weight: 8 #SS220 ReWork Soul Shuttle
+  #SS220 ReWork Soul Shuttle end
+  - type: LoadMapRule
+    preloadedGrid: ShuttleCargoLost
 
-# - type: entity
-#   parent: BaseUnknownShuttleRule
-#   id: UnknownShuttleTravelingCuisine
-#   components:
-#   - type: StationEvent
-#     startAnnouncement: station-event-unknown-shuttle-incoming
-#     maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml
-#   - type: LoadMapRule
-#     preloadedGrid: TravelingCuisine
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleTravelingCuisine
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-unknown-shuttle-incoming
+    #SS220 ReWork Soul Shuttle begin
+    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
+    weight: 6 #SS220 ReWork Soul Shuttle
+    #SS220 ReWork Soul Shuttle end
+  - type: LoadMapRule
+    preloadedGrid: TravelingCuisine
 
-# - type: entity
-#   parent: BaseUnknownShuttleRule
-#   id: UnknownShuttleDisasterEvacPod
-#   components:
-#   - type: StationEvent
-#     startAnnouncement: station-event-unknown-shuttle-incoming
-#     maxOccurrences: 3 # should be the same as [copies] in shuttle_incoming_event.yml
-#   - type: LoadMapRule
-#     preloadedGrid: DisasterEvacPod
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleDisasterEvacPod
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-unknown-shuttle-incoming
+    #SS220 ReWork Soul Shuttle begin
+    maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml
+    weight: 4 #SS220 ReWork Soul Shuttle
+    #SS220 ReWork Soul Shuttle end
+  - type: LoadMapRule
+    preloadedGrid: DisasterEvacPod
 
-# # The power of 3 clowns proved too strong for the players and may need to be 1984'ed. Replace this with a more engaging clown shuttle.
-# - type: entity
-#   parent: BaseUnknownShuttleRule
-#   id: UnknownShuttleHonki
-#   components:
-#   - type: StationEvent
-#     startAnnouncement: station-event-unknown-shuttle-incoming #!!
-#     weight: 2
-#   - type: LoadMapRule
-#     preloadedGrid: Honki
+# The power of 3 clowns proved too strong for the players and may need to be 1984'ed. Replace this with a more engaging clown shuttle.
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleHonki
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-unknown-shuttle-incoming #SS220 Lost Souls Revive
+    weight: 2 #SS220 ReWork Soul Shuttle
+  - type: LoadMapRule
+    preloadedGrid: Honki
 
+#SS220-NoUnknownShuttles begin
 # - type: entity
 #   parent: BaseUnknownShuttleRule
 #   id: UnknownShuttleSyndieEvacPod
@@ -201,6 +216,17 @@
 #     startAnnouncement: station-event-unknown-shuttle-incoming #!!
 #   - type: LoadMapRule
 #     preloadedGrid: Lambordeere
+
+# - type: entity
+#   id: UnknownShuttleManOWar
+#   parent: BaseUnknownShuttleRule
+#   components:
+#   - type: StationEvent
+#     startAnnouncement: station-event-unknown-shuttle-incoming #Leaving this one because theyre like primitives and its funnier
+#     weight: 1 # lower because antags
+#     earliestStart: 50 # late to hopefully have enough ghosts to fill all roles quickly. (4) & antags
+#   - type: LoadMapRule
+#     preloadedGrid: ManOWar
 
 # - type: entity
 #   id: UnknownShuttleMeatZone

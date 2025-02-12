@@ -21,7 +21,7 @@
       - id: BookScientistsGuidebook
       - id: BookSecurity
       - id: BookSpaceEncyclopedia
-      - id: BookSpaceLaw
+      - id: BookSpaceLaws # SS220 Space Law Replace
       - id: BookTheBookOfControl
     # Handwritten books
     - !type:GroupSelector

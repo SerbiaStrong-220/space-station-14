@@ -18,6 +18,7 @@ entities:
       desc: Evacuation pod
       name: SI-CVPOD
     - type: Transform
+      parent: invalid
     - type: MapGrid
       chunks:
         -1,-1:
@@ -788,7 +789,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,-0.5
       parent: 1
-- proto: SyndieDisasterVictimSpawner
+- proto: SyndieVisitorSpawner
   entities:
   - uid: 89
     components:

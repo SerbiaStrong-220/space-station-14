@@ -66,9 +66,9 @@
   description: A campaign hat for the Nanotrasen Troopers, comes with a case too, but you lost it.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hats/security_trooper_hat.rsi
+    sprite: SS220/Clothing/Head/Hats/security_trooper_hat.rsi #SS220-resprite-trooper-uniform
   - type: Clothing
-    sprite: Clothing/Head/Hats/security_trooper_hat.rsi
+    sprite: SS220/Clothing/Head/Hats/security_trooper_hat.rsi #SS220-resprite-trooper-uniform
   - type: Tag
     tags:
     - ClothMade
@@ -201,7 +201,7 @@
     sprite: Clothing/Head/Hats/beret_brigmedic.rsi
 
 - type: entity
-  parent: [ ClothingHeadBase]
+  parent: [ ClothingHeadBase ]
   id: ClothingHeadHatBeretMerc
   name: mercenary beret
   description: Olive beret, the badge depicts a jackal on a rock.

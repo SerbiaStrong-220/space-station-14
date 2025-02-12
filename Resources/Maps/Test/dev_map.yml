@@ -7564,6 +7564,10 @@ entities:
       - ActionVendingThrow
       - ActionVendingThrow
       - ActionVendingThrow
+      - ActionVendingThrow
+      - ActionVendingThrow
+      - ActionVendingThrow
+      - ActionVendingThrow
 - proto: VendingMachineMedical
   entities:
   - uid: 156
@@ -7635,6 +7639,10 @@ entities:
       parent: 179
     - type: ActionGrant
       actions:
+      - ActionVendingThrow
+      - ActionVendingThrow
+      - ActionVendingThrow
+      - ActionVendingThrow
       - ActionVendingThrow
       - ActionVendingThrow
       - ActionVendingThrow
