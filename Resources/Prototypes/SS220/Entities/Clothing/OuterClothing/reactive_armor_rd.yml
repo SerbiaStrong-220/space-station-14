@@ -42,6 +42,8 @@
     canCreateVacuum: false
     deleteAfterExplosion: false
     repeatable: true
+  - type: StealTarget
+    stealGroup: ClothingOuterReactiveArmor
   - type: Tag
     tags:
     - HighRiskItem      

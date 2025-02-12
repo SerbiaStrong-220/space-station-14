@@ -17,6 +17,15 @@
       role: JobParamedic
       time: 162000 # 45 hrs
 
+- type: loadoutEffectGroup
+  id: ParamedInterdyne
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobParamedic
+      time: 234000 # 65 hrs
+
 # Jumpsuit
 - type: loadout
   id: ParamedicJumpsuitTurtleneck
@@ -41,3 +50,32 @@
     proto: Feldsher
   equipment:
     jumpsuit: ClothingUniformJumpsuitFeldsher
+
+- type: loadout
+  id: ParamedInterdyneSoft
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ParamedInterdyne
+  equipment:
+    head: ClothingHeadHatInterdyne
+
+- type: loadout
+  id: ParamedInterdyneJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ParamedInterdyne
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitInterdyne
+
+- type: loadout
+  id: ParamedInterdyneBelt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ParamedInterdyne
+  equipment:
+    belt: ClothingBeltMedicalInterdyneFilled
+
+- type: loadout
+  id: ParamedicBaseBelt
+  equipment:
+    belt: ClothingBeltMedicalEMTFilled

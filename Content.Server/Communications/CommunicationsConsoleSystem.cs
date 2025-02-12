@@ -1,5 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.AlertLevel;
+using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.DeviceNetwork.Components;
 using Content.Server.DeviceNetwork.Systems;
@@ -38,6 +39,7 @@ namespace Content.Server.Communications
         [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+        [Dependency] private readonly IChatManager _chatManager = default!; // SS220 delete prohibited characters
 
         private const float UIUpdateInterval = 5.0f;
 
@@ -268,6 +270,7 @@ namespace Content.Server.Communications
             Loc.TryGetString(comp.Title, out var title);
             title ??= comp.Title;
 
+            msg = _chatManager.DeleteProhibitedCharacters(msg, message.Actor); // SS220 delete prohibited characters
             msg += "\n" + Loc.GetString("comms-console-announcement-sent-by") + " " + author;
             if (comp.Global)
             {

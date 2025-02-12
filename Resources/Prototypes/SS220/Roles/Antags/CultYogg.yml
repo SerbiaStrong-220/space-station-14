@@ -1,0 +1,11 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: antag
+  id: CultistOfYoggSothoth
+  name: roles-antag-cult-yogg-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-cult-yogg-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 18000 # 5h

@@ -354,6 +354,7 @@
 - type: randomHumanoidSettings
   id: VisitorCivilian
   parent: EventHumanoid
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran]
   components:
     - type: GhostRole
       name: ghost-role-information-civilian-name
@@ -426,7 +427,7 @@
     - type: RandomMetadata
       nameSegments:
       - names_clown
-      
+
 - type: randomHumanoidSettings
   id: VisitorJanitor
   parent: VisitorCivilian

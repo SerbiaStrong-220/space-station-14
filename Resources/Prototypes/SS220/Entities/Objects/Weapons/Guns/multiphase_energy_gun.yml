@@ -5,7 +5,7 @@
   description: This is an expensive, modern version of an antique laser pistol. This weapon has several unique fire modes, but there is no way to recharge yourself over time.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/multiphase_energy_gun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/multiphase_energy_gun.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -13,7 +13,7 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Guns/multiphase_energy_gun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/multiphase_energy_gun.rsi
   - type: Gun
   - type: BatteryWeaponFireModes
     fireModes:

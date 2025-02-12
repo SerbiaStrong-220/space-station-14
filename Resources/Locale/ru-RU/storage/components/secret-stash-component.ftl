@@ -22,3 +22,4 @@ comp-secret-stash-verb-open = Открыть
 ### Stash names
 secret-stash-plant = растение
 secret-stash-toilet = туалетный бачок
+secret-stash-plushie = плюшевая игрушка

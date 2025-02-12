@@ -1,0 +1,31 @@
+- type: decal
+  id: Distortion
+  tags: ["station", "dirty"]
+  defaultCleanable: true
+  sprite:
+    sprite: SS220/Decals/dirty.rsi
+    state: Distortion
+
+- type: decal
+  id: Distortion_2
+  tags: ["station", "dirty"]
+  defaultCleanable: true
+  sprite:
+    sprite: SS220/Decals/dirty.rsi
+    state: Distortion_2
+
+- type: decal
+  id: Distortion_3
+  tags: ["station", "dirty"]
+  defaultCleanable: true
+  sprite:
+    sprite: SS220/Decals/dirty.rsi
+    state: Distortion_3
+
+- type: decal
+  id: Distortion_4
+  tags: ["station", "dirty"]
+  defaultCleanable: true
+  sprite:
+    sprite: SS220/Decals/dirty.rsi
+    state: Distortion_4

@@ -2,8 +2,7 @@
 - type: entity
   id: BorgModuleProtoKineticAccelerator
   parent: [ BaseBorgModuleCargo, BaseProviderBorgModule ]
-  name: протокинетический модуль киборга
-  description: Техническая деталь, дающая киборгам новые способности.
+  name: protokinetic cyborg module
   components:
   - type: Sprite
     layers:
@@ -14,3 +13,51 @@
     - WeaponProtoKineticAccelerator
     - JetpackBorgModule
     - HandheldGPSBasic
+
+#Svarshik's cyborg fireaxes
+- type: entity
+  id: BorgModuleFireAxe
+  parent: [ BaseBorgModuleEngineering, BaseProviderBorgModule ]
+  name: fire axe cyborg module
+  description: A piece of tech that gives cyborgs a fire axe!
+  components:
+    - type: Sprite
+      layers:
+        - state: engineering
+        - state: icon-fireaxe
+          sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
+    - type: ItemBorgModule
+      items:
+        - BorgFireAxe
+    - type: BorgModuleIcon
+      icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: fireaxe-module }
+
+- type: entity
+  id: BorgModuleFlamingAxe
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: fire axe cyborg module
+  description: A piece of tech that gives cyborgs a fire axe!
+  components:
+    - type: Sprite
+      layers:
+      - state: syndicate
+      - state: icon-fireaxe-flaming
+        sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
+    - type: ItemBorgModule
+      items:
+        - BorgFireAxeFlaming
+    - type: BorgModuleIcon
+      icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: syndicate-fireaxe-module }
+    - type: HiddenDescription
+      entries:
+      - label: hidden-desc-flaming-axe-module-syndicate
+        whitelistMind:
+          components:
+            - TraitorRole
+            - NukeOperative
+      - label: hidden-desc-flaming-axe-module-research
+        jobRequired:
+          - ResearchAssistant
+          - ResearchDirector
+          - Scientist
+          - Borg

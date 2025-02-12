@@ -9,6 +9,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Utility;
 using Robust.Client.UserInterface.RichText;
+using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 
 namespace Content.Client.Paper.UI
@@ -43,7 +44,8 @@ namespace Content.Client.Paper.UI
             typeof(BulletTag),
             typeof(ColorTag),
             typeof(HeadingTag),
-            typeof(ItalicTag)
+            typeof(ItalicTag),
+            typeof(MonoTag)
         };
 
         public event Action<string>? OnSaved;
@@ -246,6 +248,7 @@ namespace Content.Client.Paper.UI
             bool wasEditing = InputContainer.Visible;
             InputContainer.Visible = isEditing;
             EditButtons.Visible = isEditing;
+            DocumentHelper.Visible = isEditing; // SS220 Document helper
 
             var msg = new FormattedMessage();
             msg.AddMarkupPermissive(state.Text);
@@ -343,5 +346,12 @@ namespace Content.Client.Paper.UI
                 SaveButton.Disabled = false;
             }
         }
+
+        // SS220 Document helper begin
+        public void InsertAtCursor(string value)
+        {
+            Input.InsertAtCursor(value);
+        }
+        // SS220 Document helper end
     }
 }

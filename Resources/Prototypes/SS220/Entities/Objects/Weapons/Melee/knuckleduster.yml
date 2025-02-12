@@ -8,10 +8,10 @@
   description: The quartermaster's engraved knuckleduster, made by special order. It was issued as a means of combating the increased cases of theft of personal belongings and materials from the supply department.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/engraved_knuckleduster.rsi
+    sprite: SS220/Clothing/Hands/Knuckles/engraved_knuckleduster.rsi
     state: icon
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Melee/engraved_knuckleduster.rsi
+    sprite: SS220/Clothing/Hands/Knuckles/engraved_knuckleduster.rsi
     slots: [gloves]
   - type: Item
     size: Small

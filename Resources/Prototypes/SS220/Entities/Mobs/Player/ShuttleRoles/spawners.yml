@@ -1,0 +1,13 @@
+- type: entity
+  name: visiting tourits
+  id: VisitorTouristSpawner
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Structures/Decoration/banner.rsi
+        state: banner
+  - type: RandomSpawner
+    prototypes:
+    - RandomHumanoidVisitorTourist

@@ -316,26 +316,17 @@ entities:
       rot: 3.141592653589793 rad
       pos: 2.5,4.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 238
   - uid: 12
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 3.5,4.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 238
   - uid: 190
     components:
     - type: Transform
       pos: 1.5,4.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 238
 - proto: BoxCardboard
   entities:
   - uid: 14
@@ -2314,18 +2305,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 3.5,3.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 239
   - uid: 307
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 1.5,3.5
       parent: 1
-    - type: DeviceLinkSink
-      links:
-      - 239
 - proto: SignalButton
   entities:
   - uid: 238

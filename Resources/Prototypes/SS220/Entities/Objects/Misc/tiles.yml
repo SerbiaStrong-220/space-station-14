@@ -5,11 +5,11 @@
   id: FloorTileItemSteelReinforced
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tiles/tile.rsi
-    state: steelreinf
+    sprite: SS220/Objects/Tiles/steel.rsi
+    state: steel-reinforced
   - type: Item
-    sprite: SS220/Objects/Tiles/tile.rsi
-    heldPrefix: steelreinf
+    sprite: SS220/Objects/Tiles/steel.rsi
+    heldPrefix: steel-reinforced
   - type: FloorTile
     outputs:
       - Plating
@@ -23,9 +23,11 @@
   id: FloorTileItemWhiteReinforced
   components:
   - type: Sprite
-    state: whitereinf
+    sprite: SS220/Objects/Tiles/white.rsi
+    state: white-reinforced
   - type: Item
-    heldPrefix: whitereinf
+    sprite: SS220/Objects/Tiles/white.rsi
+    heldPrefix: white-reinforced
   - type: FloorTile
     outputs:
       - Plating
@@ -39,9 +41,11 @@
   id: FloorTileItemDarkReinforced
   components:
   - type: Sprite
-    state: darkreinf
+    sprite: SS220/Objects/Tiles/dark.rsi
+    state: dark-reinforced
   - type: Item
-    heldPrefix: darkreinf
+    sprite: SS220/Objects/Tiles/dark.rsi
+    heldPrefix: dark-reinforced
   - type: FloorTile
     outputs:
       - Plating
@@ -50,47 +54,15 @@
     stackType: FloorTileDarkReinforced
 
 - type: entity
-  name: керамическая плитка
-  parent: FloorTileItemBase
-  id: FloorTileItemDutch
-  components:
-  - type: Sprite
-    sprite: SS220/Objects/Tiles/tile.rsi
-    state: dutch
-  - type: Item
-    sprite: SS220/Objects/Tiles/tile.rsi
-    heldPrefix: dutch
-  - type: FloorTile
-    outputs:
-      - Plating
-      - FloorDutch
-  - type: Stack
-    stackType: FloorTileDutch
-
-- type: entity
-  name: керамическая мини-плитка
-  parent: FloorTileItemDutch
-  id: FloorTileItemDutchMini
-  components:
-  - type: Sprite
-    state: dutchmini
-  - type: FloorTile
-    outputs:
-      - Plating
-      - FloorDutchMini
-  - type: Stack
-    stackType: FloorTileDutchMini
-
-- type: entity
   name: плитка фиолетовых микросхем
   parent: FloorTileItemBase
   id: FloorTileItemPCircuit
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tiles/tile.rsi
+    sprite: SS220/Objects/Tiles/other.rsi
     state: pcircuit
   - type: Item
-    sprite: SS220/Objects/Tiles/tile.rsi
+    sprite: SS220/Objects/Tiles/other.rsi
     heldPrefix: pcircuit
   - type: FloorTile
     outputs:
@@ -105,10 +77,10 @@
   id: FloorTileItemYCircuit
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tiles/tile.rsi
+    sprite: SS220/Objects/Tiles/other.rsi
     state: ycircuit
   - type: Item
-    sprite: SS220/Objects/Tiles/tile.rsi
+    sprite: SS220/Objects/Tiles/other.rsi
     heldPrefix: ycircuit
   - type: FloorTile
     outputs:
@@ -123,10 +95,10 @@
   id: FloorTileItemOCircuit
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tiles/tile.rsi
+    sprite: SS220/Objects/Tiles/other.rsi
     state: ocircuit
   - type: Item
-    sprite: SS220/Objects/Tiles/tile.rsi
+    sprite: SS220/Objects/Tiles/other.rsi
     heldPrefix: ocircuit
   - type: FloorTile
     outputs:
@@ -141,10 +113,10 @@
   id: FloorTileItemRCircuit
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tiles/tile.rsi
+    sprite: SS220/Objects/Tiles/other.rsi
     state: rcircuit
   - type: Item
-    sprite: SS220/Objects/Tiles/tile.rsi
+    sprite: SS220/Objects/Tiles/other.rsi
     heldPrefix: rcircuit
   - type: FloorTile
     outputs:
@@ -938,3 +910,1776 @@
       - FloorAstroSnad
   - type: Stack
     stackType: FloorTileSnow
+
+## New tiles
+
+
+- type: entity
+  name: floor-dark-california
+  id: FloorItemDarkCalifornia
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi
+    state: dark-california
+  - type: Item
+    sprite: SS220/Objects/Tiles/dark.rsi
+    heldPrefix: dark-california
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorDarkCalifornia
+  - type: Stack
+    stackType: FloorItemStacksDarkCalifornia
+
+- type: entity
+  name: floor-dark-eight-bricks
+  id: FloorItemDarkEightBricks
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi
+    state: dark-eight-bricks
+  - type: Item
+    sprite: SS220/Objects/Tiles/dark.rsi
+    heldPrefix: dark-eight-bricks
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorDarkEightBricks
+  - type: Stack
+    stackType: FloorItemStacksDarkEightBricks
+
+- type: entity
+  name: floor-dark-mixed-bricks
+  id: FloorItemDarkMixedBricks
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi
+    state: dark-mixed-bricks
+  - type: Item
+    sprite: SS220/Objects/Tiles/dark.rsi
+    heldPrefix: dark-mixed-bricks
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorDarkMixedBricks
+  - type: Stack
+    stackType: FloorItemStacksDarkMixedBricks
+
+- type: entity
+  name: floor-dark-mixed-bricks-mini
+  id: FloorItemDarkMixedBricksMini
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi
+    state: dark-mixed-bricks-mini
+  - type: Item
+    sprite: SS220/Objects/Tiles/dark.rsi
+    heldPrefix: dark-mixed-bricks-mini
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorDarkMixedBricksMini
+  - type: Stack
+    stackType: FloorItemStacksDarkMixedBricksMini
+
+- type: entity
+  name: floor-dark-mixed-pavement-horizontal
+  id: FloorItemDarkMixedPavementHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi
+    state: dark-mixed-pavement-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/dark.rsi
+    heldPrefix: dark-mixed-pavement-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorDarkMixedPavementHorizontal
+  - type: Stack
+    stackType: FloorItemStacksDarkMixedPavementHorizontal
+
+- type: entity
+  name: floor-dark-mixed-pavement-vertical
+  id: FloorItemDarkMixedPavementVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi
+    state: dark-mixed-pavement-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/dark.rsi
+    heldPrefix: dark-mixed-pavement-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorDarkMixedPavementVertical
+  - type: Stack
+    stackType: FloorItemStacksDarkMixedPavementVertical
+
+- type: entity
+  name: floor-dark-shifted-eight-bricks
+  id: FloorItemDarkShiftedEightBricks
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi
+    state: dark-shifted-eight-bricks
+  - type: Item
+    sprite: SS220/Objects/Tiles/dark.rsi
+    heldPrefix: dark-shifted-eight-bricks
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorDarkShiftedEightBricks
+  - type: Stack
+    stackType: FloorItemStacksDarkShiftedEightBricks
+
+- type: entity
+  name: floor-dark-shifted-mini-horizontal
+  id: FloorItemDarkShiftedMiniHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi
+    state: dark-shifted-mini-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/dark.rsi
+    heldPrefix: dark-shifted-mini-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorDarkShiftedMiniHorizontal
+  - type: Stack
+    stackType: FloorItemStacksDarkShiftedMiniHorizontal
+
+
+- type: entity
+  name: floor-dark-shifted-mini-vertical
+  id: FloorItemDarkShiftedMiniVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi
+    state: dark-shifted-mini-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/dark.rsi
+    heldPrefix: dark-shifted-mini-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorDarkShiftedMiniVertical
+  - type: Stack
+    stackType: FloorItemStacksDarkShiftedMiniVertical
+
+- type: entity
+  name: floor-freezer-horizontal
+  id: FloorItemFreezerHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/freezer.rsi
+    state: freezer-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/freezer.rsi
+    heldPrefix: freezer-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorFreezerHorizontal
+  - type: Stack
+    stackType: FloorItemStacksFreezerHorizontal
+
+- type: entity
+  name: floor-freezer-mini
+  id: FloorItemFreezerMini
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/freezer.rsi
+    state: freezer-mini
+  - type: Item
+    sprite: SS220/Objects/Tiles/freezer.rsi
+    heldPrefix: freezer-mini
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorFreezerMini
+  - type: Stack
+    stackType: FloorItemStacksFreezerMini
+
+- type: entity
+  name: floor-freezer-mini-horizontal
+  id: FloorItemFreezerMiniHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/freezer.rsi
+    state: freezer-mini-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/freezer.rsi
+    heldPrefix: freezer-mini-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorFreezerMiniHorizontal
+  - type: Stack
+    stackType: FloorItemStacksFreezerMiniHorizontal
+
+- type: entity
+  name: floor-freezer-mini-vertical
+  id: FloorItemFreezerMiniVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/freezer.rsi
+    state: freezer-mini-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/freezer.rsi
+    heldPrefix: freezer-mini-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorFreezerMiniVertical
+  - type: Stack
+    stackType: FloorItemStacksFreezerMiniVertical
+
+- type: entity
+  name: floor-freezer-mono
+  id: FloorItemFreezerMono
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/freezer.rsi
+    state: freezer-mono
+  - type: Item
+    sprite: SS220/Objects/Tiles/freezer.rsi
+    heldPrefix: freezer-mono
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorFreezerMono
+  - type: Stack
+    stackType: FloorItemStacksFreezerMono
+
+- type: entity
+  name: floor-freezer-vertical
+  id: FloorItemFreezerVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/freezer.rsi
+    state: freezer-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/freezer.rsi
+    heldPrefix: freezer-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorFreezerVertical
+  - type: Stack
+    stackType: FloorItemStacksFreezerVertical
+
+- type: entity
+  name: floor-grating-maint-drain-horizontal
+  id: FloorItemGratingMaintDrainHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/grating.rsi
+    state: grating-maint-drain-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/grating.rsi
+    heldPrefix: grating-maint-drain-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorGratingMaintDrainHorizontal
+  - type: Stack
+    stackType: FloorItemStacksGratingMaintDrainHorizontal
+
+- type: entity
+  name: floor-grating-maint-drain-middle
+  id: FloorItemGratingMaintDrainMiddle
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/grating.rsi
+    state: grating-maint-drain-middle
+  - type: Item
+    sprite: SS220/Objects/Tiles/grating.rsi
+    heldPrefix: grating-maint-drain-middle
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorGratingMaintDrainMiddle
+  - type: Stack
+    stackType: FloorItemStacksGratingMaintDrainMiddle
+
+- type: entity
+  name: floor-grating-maint-drain-vertical
+  id: FloorItemGratingMaintDrainVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/grating.rsi
+    state: grating-maint-drain-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/grating.rsi
+    heldPrefix: grating-maint-drain-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorGratingMaintDrainVertical
+  - type: Stack
+    stackType: FloorItemStacksGratingMaintDrainVertical
+
+- type: entity
+  name: floor-grating-maint-horizontal
+  id: FloorItemGratingMaintHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/grating.rsi
+    state: grating-maint-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/grating.rsi
+    heldPrefix: grating-maint-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorGratingMaintHorizontal
+  - type: Stack
+    stackType: FloorItemStacksGratingMaintHorizontal
+
+- type: entity
+  name: floor-grating-maint-mini
+  id: FloorItemGratingMaintMini
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/grating.rsi
+    state: grating-maint-mini
+  - type: Item
+    sprite: SS220/Objects/Tiles/grating.rsi
+    heldPrefix: grating-maint-mini
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorGratingMaintMini
+  - type: Stack
+    stackType: FloorItemStacksGratingMaintMini
+
+- type: entity
+  name: floor-grating-maint-mono
+  id: FloorItemGratingMaintMono
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/grating.rsi
+    state: grating-maint-mono
+  - type: Item
+    sprite: SS220/Objects/Tiles/grating.rsi
+    heldPrefix: grating-maint-mono
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorGratingMaintMono
+  - type: Stack
+    stackType: FloorItemStacksGratingMaintMono
+
+- type: entity
+  name: floor-grating-maint-vertical
+  id: FloorItemGratingMaintVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/grating.rsi
+    state: grating-maint-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/grating.rsi
+    heldPrefix: grating-maint-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorGratingMaintVertical
+  - type: Stack
+    stackType: FloorItemStacksGratingMaintVertical
+
+- type: entity
+  name: floor-mining-dark-grating-directed-horizontal
+  id: FloorItemMiningDarkGratingDirectedHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-dark-grating-directed-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-dark-grating-directed-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningDarkGratingDirectedHorizontal
+  - type: Stack
+    stackType: FloorItemStacksMiningDarkGratingDirectedHorizontal
+
+- type: entity
+  name: floor-mining-dark-grating-directed-vertical
+  id: FloorItemMiningDarkGratingDirectedVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-dark-grating-directed-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-dark-grating-directed-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningDarkGratingDirectedVertical
+  - type: Stack
+    stackType: FloorItemStacksMiningDarkGratingDirectedVertical
+
+- type: entity
+  name: floor-mining-dark-grating-horizontal
+  id: FloorItemMiningDarkGratingHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-dark-grating-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-dark-grating-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningDarkGratingHorizontal
+  - type: Stack
+    stackType: FloorItemStacksMiningDarkGratingHorizontal
+
+- type: entity
+  name: floor-mining-dark-grating-middle
+  id: FloorItemMiningDarkGratingMiddle
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-dark-grating-middle
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-dark-grating-middle
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningDarkGratingMiddle
+  - type: Stack
+    stackType: FloorItemStacksMiningDarkGratingMiddle
+
+- type: entity
+  name: floor-mining-dark-grating-vertical
+  id: FloorItemMiningDarkGratingVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-dark-grating-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-dark-grating-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningDarkGratingVertical
+  - type: Stack
+    stackType: FloorItemStacksMiningDarkGratingVertical
+
+- type: entity
+  name: floor-mining-dark-mono
+  id: FloorItemMiningDarkMono
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-dark-mono
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-dark-mono
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningDarkMono
+  - type: Stack
+    stackType: FloorItemStacksMiningDarkMono
+
+- type: entity
+  name: floor-mining-dark-reinforced
+  id: FloorItemMiningDarkReinforced
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-dark-reinforced
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-dark-reinforced
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningDarkReinforced
+  - type: Stack
+    stackType: FloorItemStacksMiningDarkReinforced
+
+- type: entity
+  name: floor-mining-grating-directed-horizontal
+  id: FloorItemMiningGratingDirectedHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-grating-directed-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-grating-directed-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningGratingDirectedHorizontal
+  - type: Stack
+    stackType: FloorItemStacksMiningGratingDirectedHorizontal
+
+- type: entity
+  name: floor-mining-grating-directed-vertical
+  id: FloorItemMiningGratingDirectedVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-grating-directed-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-grating-directed-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningGratingDirectedVertical
+  - type: Stack
+    stackType: FloorItemStacksMiningGratingDirectedVertical
+
+- type: entity
+  name: floor-mining-grating-horizontal
+  id: FloorItemMiningGratingHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-grating-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-grating-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningGratingHorizontal
+  - type: Stack
+    stackType: FloorItemStacksMiningGratingHorizontal
+
+- type: entity
+  name: floor-mining-grating-middle
+  id: FloorItemMiningGratingMiddle
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-grating-middle
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-grating-middle
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningGratingMiddle
+  - type: Stack
+    stackType: FloorItemStacksMiningGratingMiddle
+
+- type: entity
+  name: floor-mining-grating-vertical
+  id: FloorItemMiningGratingVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-grating-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-grating-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningGratingVertical
+  - type: Stack
+    stackType: FloorItemStacksMiningGratingVertical
+
+- type: entity
+  name: floor-mining-light-grating-directed-horizontal
+  id: FloorItemMiningLightGratingDirectedHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-light-grating-directed-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-light-grating-directed-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningLightGratingDirectedHorizontal
+  - type: Stack
+    stackType: FloorItemStacksMiningLightGratingDirectedHorizontal
+
+- type: entity
+  name: floor-mining-light-grating-directed-vertical
+  id: FloorItemMiningLightGratingDirectedVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-light-grating-directed-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-light-grating-directed-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningLightGratingDirectedVertical
+  - type: Stack
+    stackType: FloorItemStacksMiningLightGratingDirectedVertical
+
+- type: entity
+  name: floor-mining-light-grating-horizontal
+  id: FloorItemMiningLightGratingHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-light-grating-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-light-grating-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningLightGratingHorizontal
+  - type: Stack
+    stackType: FloorItemStacksMiningLightGratingHorizontal
+
+- type: entity
+  name: floor-mining-light-grating-middle
+  id: FloorItemMiningLightGratingMiddle
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-light-grating-middle
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-light-grating-middle
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningLightGratingMiddle
+  - type: Stack
+    stackType: FloorItemStacksMiningLightGratingMiddle
+
+- type: entity
+  name: floor-mining-light-grating-vertical
+  id: FloorItemMiningLightGratingVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-light-grating-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-light-grating-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningLightGratingVertical
+  - type: Stack
+    stackType: FloorItemStacksMiningLightGratingVertical
+
+- type: entity
+  name: floor-mining-light-mono
+  id: FloorItemMiningLightMono
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-light-mono
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-light-mono
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningLightMono
+  - type: Stack
+    stackType: FloorItemStacksMiningLightMono
+
+- type: entity
+  name: floor-mining-light-reinforced
+  id: FloorItemMiningLightReinforced
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-light-reinforced
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-light-reinforced
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningLightReinforced
+  - type: Stack
+    stackType: FloorItemStacksMiningLightReinforced
+
+- type: entity
+  name: floor-mining-mono
+  id: FloorItemMiningMono
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-mono
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-mono
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningMono
+  - type: Stack
+    stackType: FloorItemStacksMiningMono
+
+- type: entity
+  name: floor-mining-reinforced
+  id: FloorItemMiningReinforced
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi
+    state: mining-reinforced
+  - type: Item
+    sprite: SS220/Objects/Tiles/mining.rsi
+    heldPrefix: mining-reinforced
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorMiningReinforced
+  - type: Stack
+    stackType: FloorItemStacksMiningReinforced
+
+- type: entity
+  name: floor-rock-vault-herringbone
+  id: FloorItemRockVaultHerringbone
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/rock-vault.rsi
+    state: rock-vault-herringbone
+  - type: Item
+    sprite: SS220/Objects/Tiles/rock-vault.rsi
+    heldPrefix: rock-vault-herringbone
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorRockVaultHerringbone
+  - type: Stack
+    stackType: FloorItemStacksRockVaultHerringbone
+
+- type: entity
+  name: floor-rock-vault-horizontal
+  id: FloorItemRockVaultHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/rock-vault.rsi
+    state: rock-vault-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/rock-vault.rsi
+    heldPrefix: rock-vault-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorRockVaultHorizontal
+  - type: Stack
+    stackType: FloorItemStacksRockVaultHorizontal
+
+- type: entity
+  name: floor-rock-vault-mini
+  id: FloorItemRockVaultMini
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/rock-vault.rsi
+    state: rock-vault-mini
+  - type: Item
+    sprite: SS220/Objects/Tiles/rock-vault.rsi
+    heldPrefix: rock-vault-mini
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorRockVaultMini
+  - type: Stack
+    stackType: FloorItemStacksRockVaultMini
+
+- type: entity
+  name: floor-rock-vault-mono
+  id: FloorItemRockVaultMono
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/rock-vault.rsi
+    state: rock-vault-mono
+  - type: Item
+    sprite: SS220/Objects/Tiles/rock-vault.rsi
+    heldPrefix: rock-vault-mono
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorRockVaultMono
+  - type: Stack
+    stackType: FloorItemStacksRockVaultMono
+
+- type: entity
+  name: floor-rock-vault-pavement-horizontal
+  id: FloorItemRockVaultPavementHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/rock-vault.rsi
+    state: rock-vault-pavement
+  - type: Item
+    sprite: SS220/Objects/Tiles/rock-vault.rsi
+    heldPrefix: rock-vault-pavement
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorRockVaultPavementHorizontal
+  - type: Stack
+    stackType: FloorItemStacksRockVaultPavementHorizontal
+
+- type: entity
+  name: floor-rock-vault-vertical
+  id: FloorItemRockVaultVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/rock-vault.rsi
+    state: rock-vault-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/rock-vault.rsi
+    heldPrefix: rock-vault-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorRockVaultVertical
+  - type: Stack
+    stackType: FloorItemStacksRockVaultVertical
+
+- type: entity
+  name: floor-sanitary
+  id: FloorItemSanitary
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitary
+  - type: Stack
+    stackType: FloorItemStacksSanitary
+
+- type: entity
+  name: floor-sanitary-dark
+  id: FloorItemSanitaryDark
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-dark
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-dark
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryDark
+  - type: Stack
+    stackType: FloorItemStacksSanitaryDark
+
+- type: entity
+  name: floor-sanitary-dark-horizontal
+  id: FloorItemSanitaryDarkHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-dark-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-dark-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryDarkHorizontal
+  - type: Stack
+    stackType: FloorItemStacksSanitaryDarkHorizontal
+
+- type: entity
+  name: floor-sanitary-dark-mini
+  id: FloorItemSanitaryDarkMini
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-dark-mini
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-dark-mini
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryDarkMini
+  - type: Stack
+    stackType: FloorItemStacksSanitaryDarkMini
+
+- type: entity
+  name: floor-sanitary-dark-mini-horizontal
+  id: FloorItemSanitaryDarkMiniHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-dark-mini-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-dark-mini-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryDarkMiniHorizontal
+  - type: Stack
+    stackType: FloorItemStacksSanitaryDarkMiniHorizontal
+
+- type: entity
+  name: floor-sanitary-dark-mini-vertical
+  id: FloorItemSanitaryDarkMiniVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-dark-mini-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-dark-mini-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryDarkMiniVertical
+  - type: Stack
+    stackType: FloorItemStacksSanitaryDarkMiniVertical
+
+- type: entity
+  name: floor-sanitary-dark-mono
+  id: FloorItemSanitaryDarkMono
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-dark-mono
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-dark-mono
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryDarkMono
+  - type: Stack
+    stackType: FloorItemStacksSanitaryDarkMono
+
+- type: entity
+  name: floor-sanitary-dark-vertical
+  id: FloorItemSanitaryDarkVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-dark-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-dark-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryDarkVertical
+  - type: Stack
+    stackType: FloorItemStacksSanitaryDarkVertical
+
+- type: entity
+  name: floor-sanitary-horizontal
+  id: FloorItemSanitaryHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryHorizontal
+  - type: Stack
+    stackType: FloorItemStacksSanitaryHorizontal
+
+- type: entity
+  name: floor-sanitary-mini
+  id: FloorItemSanitaryMini
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-mini
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-mini
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryMini
+  - type: Stack
+    stackType: FloorItemStacksSanitaryMini
+
+- type: entity
+  name: floor-sanitary-mini-horizontal
+  id: FloorItemSanitaryMiniHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-mini-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-mini-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryMiniHorizontal
+  - type: Stack
+    stackType: FloorItemStacksSanitaryMiniHorizontal
+
+- type: entity
+  name: floor-sanitary-mini-vertical
+  id: FloorItemSanitaryMiniVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-mini-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-mini-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryMiniVertical
+  - type: Stack
+    stackType: FloorItemStacksSanitaryMiniVertical
+
+- type: entity
+  name: floor-sanitary-mono
+  id: FloorItemSanitaryMono
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-mono
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-mono
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryMono
+  - type: Stack
+    stackType: FloorItemStacksSanitaryMono
+
+- type: entity
+  name: floor-sanitary-vertical
+  id: FloorItemSanitaryVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    state: sanitary-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/sanitary.rsi
+    heldPrefix: sanitary-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSanitaryVertical
+  - type: Stack
+    stackType: FloorItemStacksSanitaryVertical
+
+- type: entity
+  name: floor-showroom-horizontal
+  id: FloorItemShowroomHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/showroom.rsi
+    state: showroom-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/showroom.rsi
+    heldPrefix: showroom-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorShowroomHorizontal
+  - type: Stack
+    stackType: FloorItemStacksShowroomHorizontal
+
+- type: entity
+  name: floor-showroom-mini
+  id: FloorItemShowroomMini
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/showroom.rsi
+    state: showroom-mini
+  - type: Item
+    sprite: SS220/Objects/Tiles/showroom.rsi
+    heldPrefix: showroom-mini
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorShowroomMini
+  - type: Stack
+    stackType: FloorItemStacksShowroomMini
+
+- type: entity
+  name: floor-showroom-mini-horizontal
+  id: FloorItemShowroomMiniHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/showroom.rsi
+    state: showroom-mini-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/showroom.rsi
+    heldPrefix: showroom-mini-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorShowroomMiniHorizontal
+  - type: Stack
+    stackType: FloorItemStacksShowroomMiniHorizontal
+
+- type: entity
+  name: floor-showroom-mini-vertical
+  id: FloorItemShowroomMiniVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/showroom.rsi
+    state: showroom-mini-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/showroom.rsi
+    heldPrefix: showroom-mini-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorShowroomMiniVertical
+  - type: Stack
+    stackType: FloorItemStacksShowroomMiniVertical
+
+- type: entity
+  name: floor-showroom-mono
+  id: FloorItemShowroomMono
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/showroom.rsi
+    state: showroom-mono
+  - type: Item
+    sprite: SS220/Objects/Tiles/showroom.rsi
+    heldPrefix: showroom-mono
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorShowroomMono
+  - type: Stack
+    stackType: FloorItemStacksShowroomMono
+
+- type: entity
+  name: floor-showroom-vertical
+  id: FloorItemShowroomVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/showroom.rsi
+    state: showroom-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/showroom.rsi
+    heldPrefix: showroom-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorShowroomVertical
+  - type: Stack
+    stackType: FloorItemStacksShowroomVertical
+
+- type: entity
+  name: floor-steel-california
+  id: FloorItemSteelCalifornia
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi
+    state: steel-california
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel.rsi
+    heldPrefix: steel-california
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelCalifornia
+  - type: Stack
+    stackType: FloorItemStacksSteelCalifornia
+
+- type: entity
+  name: floor-steel-eight-bricks
+  id: FloorItemSteelEightBricks
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi
+    state: steel-eight-bricks
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel.rsi
+    heldPrefix: steel-eight-bricks
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelEightBricks
+  - type: Stack
+    stackType: FloorItemStacksSteelEightBricks
+
+- type: entity
+  name: floor-steel-maint-drain-horizontal
+  id: FloorItemSteelMaintDrainHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    state: steel-maint-drain-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    heldPrefix: steel-maint-drain-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelMaintDrainHorizontal
+  - type: Stack
+    stackType: FloorItemStacksSteelMaintDrainHorizontal
+
+- type: entity
+  name: floor-steel-maint-drain-middle
+  id: FloorItemSteelMaintDrainMiddle
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    state: steel-maint-drain-middle
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    heldPrefix: steel-maint-drain-middle
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelMaintDrainMiddle
+  - type: Stack
+    stackType: FloorItemStacksSteelMaintDrainMiddle
+
+- type: entity
+  name: floor-steel-maint-drain-vertical
+  id: FloorItemSteelMaintDrainVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    state: steel-maint-drain-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    heldPrefix: steel-maint-drain-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelMaintDrainVertical
+  - type: Stack
+    stackType: FloorItemStacksSteelMaintDrainVertical
+
+- type: entity
+  name: floor-steel-maint-horizontal
+  id: FloorItemSteelMaintHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    state: steel-maint-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    heldPrefix: steel-maint-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelMaintHorizontal
+  - type: Stack
+    stackType: FloorItemStacksSteelMaintHorizontal
+
+- type: entity
+  name: floor-steel-maint-mini
+  id: FloorItemSteelMaintMini
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    state: steel-maint-mini
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    heldPrefix: steel-maint-mini
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelMaintMini
+  - type: Stack
+    stackType: FloorItemStacksSteelMaintMini
+
+- type: entity
+  name: floor-steel-maint-vertical
+  id: FloorItemSteelMaintVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    state: steel-maint-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    heldPrefix: steel-maint-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelMaintVertical
+  - type: Stack
+    stackType: FloorItemStacksSteelMaintVertical
+
+- type: entity
+  name: floor-steel-mixed-bricks
+  id: FloorItemSteelMixedBricks
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi
+    state: steel-mixed-bricks
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel.rsi
+    heldPrefix: steel-mixed-bricks
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelMixedBricks
+  - type: Stack
+    stackType: FloorItemStacksSteelMixedBricks
+
+- type: entity
+  name: floor-steel-mixed-bricks-mini
+  id: FloorItemSteelMixedBricksMini
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi
+    state: steel-mixed-bricks-mini
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel.rsi
+    heldPrefix: steel-mixed-bricks-mini
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelMixedBricksMini
+  - type: Stack
+    stackType: FloorItemStacksSteelMixedBricksMini
+
+- type: entity
+  name: floor-steel-mixed-pavement-horizontal
+  id: FloorItemSteelMixedPavementHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi
+    state: steel-mixed-pavement-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel.rsi
+    heldPrefix: steel-mixed-pavement-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelMixedPavementHorizontal
+  - type: Stack
+    stackType: FloorItemStacksSteelMixedPavementHorizontal
+
+- type: entity
+  name: floor-steel-mixed-pavement-vertical
+  id: FloorItemSteelMixedPavementVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi
+    state: steel-mixed-pavement-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel.rsi
+    heldPrefix: steel-mixed-pavement-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelMixedPavementVertical
+  - type: Stack
+    stackType: FloorItemStacksSteelMixedPavementVertical
+
+- type: entity
+  name: floor-steel-shifted-eight-bricks
+  id: FloorItemSteelShiftedEightBricks
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi
+    state: steel-shifted-eight-bricks
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel.rsi
+    heldPrefix: steel-shifted-eight-bricks
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelShiftedEightBricks
+  - type: Stack
+    stackType: FloorItemStacksSteelShiftedEightBricks
+
+- type: entity
+  name: floor-steel-shifted-mini-horizontal
+  id: FloorItemSteelShiftedMiniHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi
+    state: steel-shifted-mini-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel.rsi
+    heldPrefix: steel-shifted-mini-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelShiftedMiniHorizontal
+  - type: Stack
+    stackType: FloorItemStacksSteelShiftedMiniHorizontal
+
+- type: entity
+  name: floor-steel-shifted-mini-vertical
+  id: FloorItemSteelShiftedMiniVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi
+    state: steel-shifted-mini-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel.rsi
+    heldPrefix: steel-shifted-mini-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelShiftedMiniVertical
+  - type: Stack
+    stackType: FloorItemStacksSteelShiftedMiniVertical
+
+- type: entity
+  name: floor-tech-maint-horizontal
+  id: FloorItemTechMaintHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tech-maint.rsi
+    state: tech-maint-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/tech-maint.rsi
+    heldPrefix: tech-maint-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTechMaintHorizontal
+  - type: Stack
+    stackType: FloorItemStacksTechMaintHorizontal
+
+- type: entity
+  name: floor-tech-maint-mini
+  id: FloorItemTechMaintMini
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tech-maint.rsi
+    state: tech-maint-mini
+  - type: Item
+    sprite: SS220/Objects/Tiles/tech-maint.rsi
+    heldPrefix: tech-maint-mini
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTechMaintMini
+  - type: Stack
+    stackType: FloorItemStacksTechMaintMini
+
+- type: entity
+  name: floor-tech-maint-mono
+  id: FloorItemTechMaintMono
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tech-maint.rsi
+    state: tech-maint-mono
+  - type: Item
+    sprite: SS220/Objects/Tiles/tech-maint.rsi
+    heldPrefix: tech-maint-mono
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTechMaintMono
+  - type: Stack
+    stackType: FloorItemStacksTechMaintMono
+
+- type: entity
+  name: floor-tech-maint-vertical
+  id: FloorItemTechMaintVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tech-maint.rsi
+    state: tech-maint-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/tech-maint.rsi
+    heldPrefix: tech-maint-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTechMaintVertical
+  - type: Stack
+    stackType: FloorItemStacksTechMaintVertical
+
+- type: entity
+  name: floor-tech-maint-drain-middle
+  id: FloorItemTechMainDrainMiddle
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/tech-maint.rsi
+    state: tech-maint-drain-middle
+  - type: Item
+    sprite: SS220/Objects/Tiles/tech-maint.rsi
+    heldPrefix: tech-maint-drain-middle
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorTechMaintDrainMiddle
+  - type: Stack
+    stackType: StackFloorItemTechMainDrainMiddle
+
+- type: entity
+  name: floor-white-california
+  id: FloorItemWhiteCalifornia
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi
+    state: white-california
+  - type: Item
+    sprite: SS220/Objects/Tiles/white.rsi
+    heldPrefix: white-california
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorWhiteCalifornia
+  - type: Stack
+    stackType: FloorItemStacksWhiteCalifornia
+
+- type: entity
+  name: floor-white-eight-bricks
+  id: FloorItemWhiteEightBricks
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi
+    state: white-eight-bricks
+  - type: Item
+    sprite: SS220/Objects/Tiles/white.rsi
+    heldPrefix: white-eight-bricks
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorWhiteEightBricks
+  - type: Stack
+    stackType: FloorItemStacksWhiteEightBricks
+
+- type: entity
+  name: floor-white-mixed-bricks
+  id: FloorItemWhiteMixedBricks
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi
+    state: white-mixed-bricks
+  - type: Item
+    sprite: SS220/Objects/Tiles/white.rsi
+    heldPrefix: white-mixed-bricks
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorWhiteMixedBricks
+  - type: Stack
+    stackType: FloorItemStacksWhiteMixedBricks
+
+- type: entity
+  name: floor-white-mixed-bricks-mini
+  id: FloorItemWhiteMixedBricksMini
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi
+    state: white-mixed-bricks-mini
+  - type: Item
+    sprite: SS220/Objects/Tiles/white.rsi
+    heldPrefix: white-mixed-bricks-mini
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorWhiteMixedBricksMini
+  - type: Stack
+    stackType: FloorItemStacksWhiteMixedBricksMini
+
+- type: entity
+  name: floor-white-mixed-pavement-horizontal
+  id: FloorItemWhiteMixedPavementHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi
+    state: white-mixed-pavement-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/white.rsi
+    heldPrefix: white-mixed-pavement-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorWhiteMixedPavementHorizontal
+  - type: Stack
+    stackType: FloorItemStacksWhiteMixedPavementHorizontal
+
+- type: entity
+  name: floor-white-mixed-pavement-vertical
+  id: FloorItemWhiteMixedPavementVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi
+    state: white-mixed-pavement-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/white.rsi
+    heldPrefix: white-mixed-pavement-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorWhiteMixedPavementVertical
+  - type: Stack
+    stackType: FloorItemStacksWhiteMixedPavementVertical
+
+- type: entity
+  name: floor-white-shifted-eight-bricks
+  id: FloorItemWhiteShiftedEightBricks
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi
+    state: white-shifted-eight-bricks
+  - type: Item
+    sprite: SS220/Objects/Tiles/white.rsi
+    heldPrefix: white-shifted-eight-bricks
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorWhiteShiftedEightBricks
+  - type: Stack
+    stackType: FloorItemStacksWhiteShiftedEightBricks
+
+- type: entity
+  name: floor-white-shifted-mini-horizontal
+  id: FloorItemWhiteShiftedMiniHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi
+    state: white-shifted-mini-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/white.rsi
+    heldPrefix: white-shifted-mini-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorWhiteShiftedMiniHorizontal
+  - type: Stack
+    stackType: FloorItemStacksWhiteShiftedMiniHorizontal
+
+- type: entity
+  name: floor-white-shifted-mini-vertical
+  id: FloorItemWhiteShiftedMiniVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi
+    state: white-shifted-mini-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/white.rsi
+    heldPrefix: white-shifted-mini-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorWhiteShiftedMiniVertical
+  - type: Stack
+    stackType: FloorItemStacksWhiteShiftedMiniVertical
+
+
+- type: entity
+  name: floor-concrete-pavement-horizontal
+  id: FloorItemConcretePavementHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/concrete.rsi
+    state: concrete-pavement-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/concrete.rsi
+    heldPrefix: concrete-pavement-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorConcretePavementHorizontal
+  - type: Stack
+    stackType: FloorItemStacksConcretePavementHorizontal
+
+- type: entity
+  name: floor-concrete-pavement-vertical
+  id: FloorItemConcretePavementVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/concrete.rsi
+    state: concrete-pavement-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/concrete.rsi
+    heldPrefix: concrete-pavement-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorConcretePavementVertical
+  - type: Stack
+    stackType: FloorItemStacksConcretePavementVertical
+
+- type: entity
+  name: floor-grayconcrete-pavement-horizontal
+  id: FloorItemGrayconcretePavementHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/concrete.rsi
+    state: grayconcrete-pavement-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/concrete.rsi
+    heldPrefix: grayconcrete-pavement-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorGrayconcretePavementHorizontal
+  - type: Stack
+    stackType: FloorItemStacksGrayconcretePavementHorizontal
+
+- type: entity
+  name: floor-grayconcrete-pavement-vertical
+  id: FloorItemGrayconcretePavementVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/concrete.rsi
+    state: grayconcrete-pavement-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/concrete.rsi
+    heldPrefix: grayconcrete-pavement-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorGrayconcretePavementVertical
+  - type: Stack
+    stackType: FloorItemStacksGrayconcretePavementVertical
+
+- type: entity
+  name: floor-oldconcrete-pavement-horizontal
+  id: FloorItemOldconcretePavementHorizontal
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/concrete.rsi
+    state: oldconcrete-pavement-horizontal
+  - type: Item
+    sprite: SS220/Objects/Tiles/concrete.rsi
+    heldPrefix: oldconcrete-pavement-horizontal
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorOldconcretePavementHorizontal
+  - type: Stack
+    stackType: FloorItemStacksOldconcretePavementHorizontal
+
+- type: entity
+  name: floor-oldconcrete-pavement-vertical
+  id: FloorItemOldconcretePavementVertical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/concrete.rsi
+    state: oldconcrete-pavement-vertical
+  - type: Item
+    sprite: SS220/Objects/Tiles/concrete.rsi
+    heldPrefix: oldconcrete-pavement-vertical
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorOldconcretePavementVertical
+  - type: Stack
+    stackType: FloorItemStacksOldconcretePavementVertical

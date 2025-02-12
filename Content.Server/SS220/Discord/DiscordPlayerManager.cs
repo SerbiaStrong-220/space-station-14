@@ -10,7 +10,6 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
-using Content.Shared.Corvax.CCCVars;
 using Content.Shared.Players;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.Discord;
@@ -31,18 +30,13 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
     [Dependency] private readonly IServerNetManager _netMgr = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
-
     private ISawmill _sawmill = default!;
     private Timer? _statusRefreshTimer; // We should keep reference or else evil GC will kill our timer
     private volatile SponsorUsers? _cachedSponsorUsers;
     private readonly HttpClient _httpClient = new();
 
-    private string _apiUrl = string.Empty;
-    private bool _isDiscordAuthEnabled = false;
-
     private string _linkApiUrl = string.Empty;
     private bool _isDiscordLinkRequired = false;
-    private string _linkApiKey = string.Empty;
 
     public event EventHandler<ICommonSession>? PlayerVerified;
 
@@ -56,17 +50,13 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
         _netMgr.RegisterNetMessage<MsgRecheckDiscordLink>(CheckDiscordLinked);
         _netMgr.RegisterNetMessage<MsgByPassDiscordCheck>(ByPassDiscordCheck);
 
-        _cfg.OnValueChanged(CCCVars.DiscordAuthApiUrl, v => _apiUrl = v, true);
-        _cfg.OnValueChanged(CCCVars.DiscordAuthEnabled, v => _isDiscordAuthEnabled = v, true);
-        _cfg.OnValueChanged(CCCVars.DiscordAuthApiKey, v =>
+        _cfg.OnValueChanged(CCVars220.DiscordLinkApiUrl, v => _linkApiUrl = v, true);
+        _cfg.OnValueChanged(CCVars220.DiscordLinkRequired, v => _isDiscordLinkRequired = v, true);
+        _cfg.OnValueChanged(CCVars220.DiscordLinkApiKey, v =>
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", v);
         },
         true);
-
-        _cfg.OnValueChanged(CCVars220.DiscordLinkApiUrl, v => _linkApiUrl = v, true);
-        _cfg.OnValueChanged(CCVars220.DiscordLinkRequired, v => _isDiscordLinkRequired = v, true);
-        _cfg.OnValueChanged(CCVars220.DiscordLinkApiKey, v => _linkApiKey = v, true);
 
         _statusRefreshTimer = new Timer(async _ =>
             {
@@ -162,14 +152,14 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
 
     private async Task<DiscordSponsorInfo?> GetSponsorInfo(NetUserId userId)
     {
-        if (string.IsNullOrEmpty(_apiUrl))
+        if (string.IsNullOrEmpty(_linkApiUrl))
         {
             return null;
         }
 
         try
         {
-            var url = $"{_apiUrl}/userinfo/{userId.UserId}";
+            var url = $"{_linkApiUrl}/api/userinfo/{WebUtility.UrlEncode(userId.ToString())}";
             var response = await _httpClient.GetAsync(url);
 
             if (response.StatusCode != HttpStatusCode.OK)
@@ -200,7 +190,7 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
         {
             _sawmill.Debug($"Player {userId} get Discord link");
 
-            var requestUrl = $"{_linkApiUrl}/api/linkAccount/link14/{WebUtility.UrlEncode(userId.ToString())}?apiKey={_linkApiKey}";
+            var requestUrl = $"{_linkApiUrl}/api/linkAccount/link14/{WebUtility.UrlEncode(userId.ToString())}";
             var response = await _httpClient.PostAsync(requestUrl, content: null, CancellationToken.None);
             if (!response.IsSuccessStatusCode)
             {
@@ -226,7 +216,7 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
         {
             _sawmill.Debug($"Player {userId} check Discord link");
 
-            var requestUrl = $"{_linkApiUrl}/api/linkAccount/checkLink14/{WebUtility.UrlEncode(userId.ToString())}?apiKey={_linkApiKey}";
+            var requestUrl = $"{_linkApiUrl}/api/linkAccount/checkLink14/{WebUtility.UrlEncode(userId.ToString())}";
 
             var response = await _httpClient.GetAsync(requestUrl, CancellationToken.None);
 
@@ -261,69 +251,16 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
         return opt;
     }
 
-    /// <summary>
-    /// Проверка, генерация ключа для дискорда.
-    /// </summary>
-    /// <param name="playerData"></param>
-    /// <returns></returns>
-    public async Task<string> CheckAndGenerateKey(SessionData playerData)
-    {
-        try
-        {
-            var userId = playerData.UserId;
-
-            var existing = await _db.GetAccountDiscordLink(playerData.UserId);
-
-            // Привязки не существует, создаём.
-            if (existing is null)
-            {
-                return await CreateKey(userId);
-            }
-
-            // Привязка существует и ключа нет, значит аккаунт уже прошёл привязку.
-            if (string.IsNullOrWhiteSpace(existing.HashKey))
-            {
-                return string.Empty;
-            }
-
-            // Привязка существует и есть ключ, значит пользователь запрашивал привязку, но не использовал ключ.
-            return existing.HashKey;
-        }
-        catch (Exception ex)
-        {
-            _sawmill.Log(LogLevel.Error, ex, "Ошибка во время проверки и генерации ключа");
-            throw;
-        }
-    }
-
-    private async Task<string> CreateKey(Guid userId)
-    {
-        var discordPlayer = new DiscordPlayer
-        {
-            SS14Id = userId,
-            HashKey = CreateSecureRandomString(8)
-        };
-
-        await _db.InsertDiscord(discordPlayer);
-
-        return discordPlayer.HashKey;
-    }
-
-    private static string CreateSecureRandomString(int count = 32)
-    {
-        return Convert.ToBase64String(RandomNumberGenerator.GetBytes(count));
-    }
-
     public async Task<PrimeListUserStatus?> GetUserPrimeListStatus(Guid userId)
     {
-        if (string.IsNullOrEmpty(_apiUrl))
+        if (string.IsNullOrEmpty(_linkApiUrl))
         {
             return null;
         }
 
         try
         {
-            var url = $"{_apiUrl}/checkPrimeAccess/{userId}";
+            var url = $"{_linkApiUrl}/api/checkPrimeAccess/{userId}";
 
             var response = await _httpClient.GetAsync(url);
 
@@ -355,14 +292,14 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
     /// <returns></returns>
     internal async Task<SponsorUsers?> GetSponsorUsers()
     {
-        if (string.IsNullOrWhiteSpace(_apiUrl))
+        if (string.IsNullOrWhiteSpace(_linkApiUrl))
         {
             return null;
         }
 
         try
         {
-            var url = $"{_apiUrl}/userinfo/sponsors";
+            var url = $"{_linkApiUrl}/api/userinfo/sponsors";
             var response = await _httpClient.GetAsync(url);
 
             if (response.StatusCode != HttpStatusCode.OK)
@@ -391,4 +328,3 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
 
     private sealed record DiscordAuthInfoResponse(bool AccountLinked);
 }
-

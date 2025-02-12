@@ -9,6 +9,8 @@
     - Zombie
     - Revolutionary
     - SpiderQueen #ss220 spider queen
+    - CultYogg #SS220 CultYogg
+    - AllHostile
 
 - type: npcFaction
   id: NanoTrasen
@@ -19,11 +21,14 @@
   - Zombie
   - Revolutionary
   - SpiderQueen #ss220 spider queen
+  - Dragon
+  - AllHostile
 
 - type: npcFaction
   id: Mouse
   hostile:
     - PetsNT
+    - AllHostile
 
 - type: npcFaction
   id: Passive
@@ -36,6 +41,7 @@
   - Zombie
   - Xeno
   - SpiderQueen #ss220 spider queen
+  - AllHostile
 
 - type: npcFaction
   id: SimpleHostile
@@ -47,6 +53,8 @@
   - Zombie
   - Revolutionary
   - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
+  - AllHostile
 
 - type: npcFaction
   id: SimpleNeutral
@@ -61,6 +69,9 @@
   - PetsNT
   - Zombie
   - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
+  - Dragon
+  - AllHostile
 
 - type: npcFaction
   id: Xeno
@@ -73,6 +84,8 @@
   - Zombie
   - Revolutionary
   - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
+  - AllHostile
 
 - type: npcFaction
   id: Zombie
@@ -86,3 +99,45 @@
   - PetsNT
   - Revolutionary
   - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
+  - AllHostile
+
+- type: npcFaction
+  id: Revolutionary
+  hostile:
+  - NanoTrasen
+  - DeathSquad #SS220 dq update
+  - Zombie
+  - SimpleHostile
+  - Dragon
+  - SpiderQueen #ss220 spider queen
+  - CultYogg #SS220 CultYogg
+  - AllHostile
+
+- type: npcFaction
+  id: AllHostile
+  hostile:
+  - NanoTrasen
+  - Dragon
+  - Mouse
+  - Passive
+  - PetsNT
+  - SimpleHostile
+  - SimpleNeutral
+  - Syndicate
+  - Xeno
+  - Zombie
+  - Revolutionary
+  # SS220 Fractions begin
+  # Regular:
+  - BloodCult
+  - DarkReaperPassive
+  - SpiderQueen
+  - SpiderHostile
+  - DeathSquad
+  - CultYogg
+  # Ebent:
+  - EbentUssp
+  - EbentNanoTrasen
+  - EbentIronSquad
+  # SS220 Fractions end

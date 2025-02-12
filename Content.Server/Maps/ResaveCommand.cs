@@ -6,6 +6,7 @@ using Robust.Server.Maps;
 using Robust.Shared.Console;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Maps;
@@ -41,6 +42,15 @@ public sealed class ResaveCommand : LocalizedCommands
 
             var mapUid = _mapManager.GetMapEntityId(mapId);
             var mapXform = _entManager.GetComponent<TransformComponent>(mapUid);
+
+            // SS220 Resave Variantize grids add bgn
+            var gridQueryVar = mapXform.ChildEnumerator;
+            while (gridQueryVar.MoveNext(out var gridChild)) {
+                if (_entManager.TryGetComponent(gridChild, out MapGridComponent? gridComp)){
+                    shell.ConsoleHost.ExecuteCommand($"variantize {gridChild}");
+                }
+            }
+            // SS220 Resave Variantize grids add end
 
             if (_entManager.HasComponent<LoadedMapComponent>(mapUid) || mapXform.ChildCount != 1)
             {

@@ -4,6 +4,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 using Content.Shared.Paper;
 using static Content.Shared.Paper.PaperComponent;
+using Content.Shared.SS220.Paper;
 
 namespace Content.Client.Paper.UI;
 
@@ -24,6 +25,10 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
         _window = this.CreateWindow<PaperWindow>();
         _window.OnSaved += InputOnTextEntered;
 
+        // SS220 Document helper begin
+        _window.DocumentHelper.OnButtonPressed += args => _window.InsertAtCursor(args);
+        // SS220 Document helper end
+
         if (EntMan.TryGetComponent<PaperComponent>(Owner, out var paper))
         {
             _window.MaxInputLength = paper.ContentSize;
@@ -39,6 +44,16 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
         base.UpdateState(state);
         _window?.Populate((PaperBoundUserInterfaceState) state);
     }
+
+    // SS220 Document Helper begin
+    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+    {
+        base.ReceiveMessage(message);
+
+        if (message is DocumentHelperOptionsMessage optionsMessage)
+            _window?.DocumentHelper.UpdateState(optionsMessage);
+    }
+    // SS220 Document Helper end
 
     private void InputOnTextEntered(string text)
     {

@@ -281,7 +281,7 @@
     drawdepth: Mobs
     sprite: SS220/Mobs/Animals/crocodile.rsi
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: croc
   - type: DamageStateVisuals
     states:
