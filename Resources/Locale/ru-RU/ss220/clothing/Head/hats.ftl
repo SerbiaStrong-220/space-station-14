@@ -59,5 +59,3 @@ ent-ClothingHeadHatInterdyne = кепка парамедика Interdyne
 ent-ClothingHeadHatInterdyneFlipped = кепка парамедика Interdyne
     .suffix = Interdyne, За время в игре, Flipped
     .desc = { ent-ClothingHeadHatInterdyneFlipped.desc }
-ent-ClothingHeadHatNewYearsCap = новогодний колпак
-    .desc = Яркий новогодний колпак с пушистым помпоном, добавляющий волшебства и праздничного настроения!
