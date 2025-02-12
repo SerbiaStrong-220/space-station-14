@@ -69,7 +69,7 @@ public abstract class SharedActionsSystem : EntitySystem
 
         SubscribeAllEvent<RequestPerformActionEvent>(OnActionRequest);
 
-        SubscribeLocalEvent<ActionsComponent, ToggleActionEvent>(OnToggleEvent);
+        SubscribeLocalEvent<ActionsComponent, ToggleActionEvent>(OnToggleEvent); // SS220 ninja gloves toggle on states start
     }
 
     public override void Update(float frameTime)

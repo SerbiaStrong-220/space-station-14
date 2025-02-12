@@ -100,7 +100,6 @@ public abstract class SharedNinjaGlovesSystem : EntitySystem
             EnableGloves(ent, (user, ninja));
         else
             DisableGloves(ent);
-
     }
 
     protected virtual void EnableGloves(Entity<NinjaGlovesComponent> ent, Entity<SpaceNinjaComponent> user)
