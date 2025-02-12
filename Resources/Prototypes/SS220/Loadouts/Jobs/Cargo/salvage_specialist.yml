@@ -68,11 +68,6 @@
     head: ClothingHeadBandSalvage
 
 - type: loadout
-  id: ClothingHeadHatHardhatVioletXmas
-  equipment:
-    head: ClothingHeadHatHardhatVioletXmas
-
-- type: loadout
   id: ClothingHeadHatHardhatViolet
   equipment:
     head: ClothingHeadHatHardhatViolet
