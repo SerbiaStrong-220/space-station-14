@@ -16,6 +16,7 @@
     # ss220 actions resprites end
     priority: -13
     event: !type:ToggleActionEvent
+      toggleAction: true # ss220 toggle action fix
 
 # suit
 - type: entity
