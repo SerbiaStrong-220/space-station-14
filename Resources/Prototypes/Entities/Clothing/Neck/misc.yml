@@ -5,13 +5,13 @@
   description: Quality headphones from Drunk Masters, with good sound insulation.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Misc/headphones.rsi
+    sprite: SS220/Clothing/Neck/Misc/headphones.rsi #SS220HeadphonesResprite
     layers:
     - state: icon
       map: [ "enum.ToggleVisuals.Layer" ]
   - type: Clothing
     equippedPrefix: off
-    sprite: SS220/Clothing/Neck/Misc/headphones.rsi
+    sprite: SS220/Clothing/Neck/Misc/headphones.rsi #SS220HeadphonesResprite
   - type: ToggleableLightVisuals
     spriteLayer: enum.ToggleVisuals.Layer
     clothingVisuals:
