@@ -109,7 +109,7 @@ public abstract class SharedNinjaGlovesSystem : EntitySystem
 
         if (toggle.ActionEntity != null)
             _actions.SetToggled(toggle.ActionEntity.Value, args.Activated);
-        // // SS220 ninja gloves toggle on states end
+        // SS220 ninja gloves toggle on states end
     }
 
     protected virtual void EnableGloves(Entity<NinjaGlovesComponent> ent, Entity<SpaceNinjaComponent> user)
