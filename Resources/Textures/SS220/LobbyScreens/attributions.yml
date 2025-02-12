@@ -43,6 +43,11 @@
   license: "CC-BY-3.0"
   copyright: "Created by NORKA for SS220"
   source: "https://github.com/SerbiaStrong-220"
+
+- files: ["SyndiLand.png"]
+  license: "CC-BY-3.0"
+  copyright: "Created by Doner2119 for SS220"
+  source: "https://github.com/SerbiaStrong-220"
   
 - files: ["Card-showdown.png"]
   license: "CC-BY-3.0"
