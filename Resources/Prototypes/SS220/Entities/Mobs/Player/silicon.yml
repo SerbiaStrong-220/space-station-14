@@ -153,3 +153,59 @@
     keywords: [ "AI", "console", "interface" ]
     priority: -10
     event: !type:ToggleIntrinsicUIEvent { key: enum.SuperMatterObserverUiKey.Key }    
+
+- type: entity
+  id: PlayerBorgChassisClownMimeBattery
+  parent: BorgChassisClownMime
+  name: CloIme cyborg
+  description: Clown and Mime... CloIme!
+  suffix: Battery, Module, Ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: ClownMime
+    - state: ClownMime_e_r
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: ClownMime_l
+      shader: unshaded
+      map: ["light"]
+      visible: false
+  - type: BorgChassis
+    maxModules: 3
+    moduleWhitelist:
+      tags:
+      - BorgModuleGeneric
+    hasMindState: ClownMime_e
+    noMindState: ClownMime_e_r
+  - type: Construction
+    node: Clownmimecyborg
+  - type: MimePowers
+  - type: ContainerFill
+    containers:
+      borg_brain:
+        - PositronicBrain
+      borg_module:
+        - BorgModuleClown
+        - BorgModuleMime    
+  - type: AccessReader
+    access: [["Command"], ["Research"], ["Theatre"]]
+  - type: InteractionPopup
+    interactSuccessString: petting-success-derelict-cyborg
+    interactFailureString: petting-failure-derelict-cyborg
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: RandomMetadata
+    nameSegments: [names_borg]
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+  - type: GhostRole
+    name: BorgChassisClownMime
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
