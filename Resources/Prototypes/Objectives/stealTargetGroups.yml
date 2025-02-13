@@ -35,6 +35,15 @@
     sprite: Clothing/Shoes/Boots/magboots-advanced.rsi
     state: icon
 
+#SS220 RCD-to-CE begin
+- type: stealTargetGroup
+  id: RCDRecharging
+  name: steal-target-groups-rcd-recharging
+  sprite:
+    sprite: Objects/Tools/rcd.rsi
+    state: icon
+#SS220 RCD-to-CE end
+
 - type: stealTargetGroup
   id: BoxFolderQmClipboard
   name: steal-target-groups-box-folder-qm-clipboard
