@@ -1,7 +1,7 @@
 #Svarshik's toy guns
 #shotgun toy shells dispensers
 - type: entity
-  parent: BaseAmmoProvider
+  parent: AmmoProviderShotgunShell
   id: AmmoProviderShotgunShellToy
   abstract: true
   components:
@@ -25,8 +25,11 @@
       proto: ShellShotgunCaps
     - type: Sprite
       layers:
-        - state: boxwidetoy
-        - state: shelllethal
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-1
+        map: ["enum.GunVisualLayers.Mag"]
+      - state: lethal
 
 - type: entity
   name: shotgun toy slug cartridges dispenser
@@ -37,10 +40,17 @@
   components:
     - type: BallisticAmmoProvider
       proto: ShellShotgunSlugCaps
+    - type: MagazineVisuals
+      magState: mag-slug
+      steps: 5
+      zeroVisible: false
     - type: Sprite
       layers:
-        - state: boxwidetoy
-        - state: shellslug
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-slug-1
+        map: ["enum.GunVisualLayers.Mag"]
+      - state: slug
 
 #foam
 - type: entity
@@ -54,8 +64,11 @@
       proto: ShellShotgunFoam
     - type: Sprite
       layers:
-        - state: boxwidetoy
-        - state: shelllethal
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-1
+        map: ["enum.GunVisualLayers.Mag"]
+      - state: lethal
 
 - type: entity
   name: shotgun toy slug cartridges dispenser
@@ -66,10 +79,17 @@
   components:
     - type: BallisticAmmoProvider
       proto: ShellShotgunSlugFoam
+    - type: MagazineVisuals
+      magState: mag-slug
+      steps: 5
+      zeroVisible: false
     - type: Sprite
       layers:
-        - state: boxwidetoy
-        - state: shellslug
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-slug-1
+        map: ["enum.GunVisualLayers.Mag"]
+      - state: slug
 
 #hristov
 - type: entity

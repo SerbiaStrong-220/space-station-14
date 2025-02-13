@@ -53,5 +53,8 @@
     RroseSeeds: 1
     WroseSeeds: 1
     #ss220 seeds end
+  contrabandInventory:
+    TobaccoSeeds: 2
+    FoodSnackSemki: 2
   emaggedInventory:
     FlyAmanitaSeeds: 1

@@ -31,7 +31,8 @@ using Content.Server.Forensics;
 using Robust.Shared.Utility;
 using Content.Shared.Roles; // SS220 Cryostorage ghost role fix
 using Robust.Shared.Prototypes; // SS220 Cryostorage ghost role fix
-using Content.Server.SS220.Bed.Cryostorage; //SS220 Cult_hotfix_4
+using Content.Server.SS220.Bed.Cryostorage; // SS220 cryo department record
+using Content.Shared.Forensics.Components; //SS220 Cult_hotfix_4
 
 namespace Content.Server.Bed.Cryostorage;
 

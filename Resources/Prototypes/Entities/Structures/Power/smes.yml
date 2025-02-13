@@ -92,6 +92,11 @@
       sendBroadcastAttemptEvent: true
       examinableAddress: true
     - type: WiredNetworkConnection
+    - type: GuideHelp
+      guides:
+      - PowerStorage
+      - VoltageNetworks
+      - Power
     - type: NameIdentifier #SS220 PowerId
       group: PowerId
     - type: ActivatableUI #SS220 smes-ui-fix

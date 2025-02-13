@@ -90,6 +90,8 @@ public sealed class FixRotationsCommand : IConsoleCommand
             valid |= tagSystem.HasTag(child, "ForceFixRotations");
             // override
             valid &= !tagSystem.HasTag(child, "ForceNoFixRotations");
+            // remove diagonal entities as well
+            valid &= !tagSystem.HasTag(child, "Diagonal");
 
             valid &= !_entManager.HasComponent<AirlockComponent>(child); //SS220 airlock-resprite
             valid &= !_entManager.HasComponent<DoorComponent>(child); //SS220 airlock-resprite

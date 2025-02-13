@@ -55,7 +55,12 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
     {
         _netManager.RegisterNetMessage<MsgRoleBans>();
 
-        _db.SubscribeToNotifications(OnDatabaseNotification);
+        _db.SubscribeToJsonNotification<BanNotificationData>(
+            _taskManager,
+            _sawmill,
+            BanNotificationChannel,
+            ProcessBanNotification,
+            OnDatabaseNotificationEarlyFilter);
 
         _userDbData.AddOnLoadPlayer(CachePlayerData);
         _userDbData.AddOnPlayerDisconnect(ClearPlayerData);
@@ -163,7 +168,10 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             statedRound,
             null);
 
-        var banId = await _db.AddServerBanAsync(banDef);
+        // await _db.AddServerBanAsync(banDef);  // SS220 user ban info post
+        var banId = await _db.AddServerBanAsync(banDef); // SS220 user ban info post
+        if (_cfg.GetCVar(CCVars.ServerBanResetLastReadRules) && target != null)
+            await _db.SetLastReadRules(target.Value, null); // Reset their last read rules. They probably need a refresher!
         var adminName = banningAdmin == null
             ? Loc.GetString("system-user")
             : (await _db.GetPlayerRecordByUserId(banningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");

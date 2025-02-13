@@ -195,6 +195,7 @@ namespace Content.Server.RoundEnd
                 ("units", Loc.GetString(units))),
                 Loc.GetString(name),
                 false,
+                null,
                 Color.Gold);
 
             _audio.PlayGlobal("/Audio/Announcements/shuttlecalled.ogg", Filter.Broadcast(), true, AudioParams.Default.AddVolume(-4)); // Corvax-Announcements: Custom sound for auto-called

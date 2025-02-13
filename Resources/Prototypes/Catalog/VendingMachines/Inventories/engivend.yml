@@ -11,3 +11,6 @@
     BoxInflatable: 2
     ClothingHeadHatCone: 4
     CigPackENG: 2 #SS220 Cigarettes
+  contrabandInventory:
+    CowToolboxFilled: 1
+    DrinkBeerCan: 3

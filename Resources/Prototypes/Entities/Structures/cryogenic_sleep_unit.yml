@@ -17,6 +17,7 @@
   - type: ActivatableUI
     key: enum.CryostorageUIKey.Key
   - type: AccessReader
+    breakOnAccessBreaker: false
     breakOnEmag: true # 220 cryo
     access: [["Command"]] # 220 cryo
   - type: InteractionOutline
@@ -25,6 +26,7 @@
     canCollide: false
   - type: DragInsertContainer
     containerId: storage
+    entryDelay: 2
   - type: ExitContainerOnMove
     containerId: storage
   - type: PointLight

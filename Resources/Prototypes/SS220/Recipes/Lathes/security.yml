@@ -103,23 +103,6 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistolSubMachineGunIncendiary
-  result: MagazinePistolSubMachineGunIncendiary
-  materials:
-    Steel: 275
-    Plastic: 25
-
-- type: latheRecipe
-  parent: BaseAmmoRecipe
-  id: MagazinePistolSubMachineGunUranium
-  result: MagazinePistolSubMachineGunUranium
-  materials:
-    Steel: 25
-    Plastic: 300
-    Uranium: 300
-
-- type: latheRecipe
-  parent: BaseAmmoRecipe
   id: MagazineMagnumEmpty
   result: MagazineMagnumEmpty
   materials:

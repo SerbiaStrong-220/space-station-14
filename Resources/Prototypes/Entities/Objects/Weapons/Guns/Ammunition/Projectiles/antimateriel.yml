@@ -7,7 +7,10 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 60 #ss220lowTTKUpdate
-        Structural: 30
-        Stamina: 50 #ss220lowTTKUpdate
-    ignoreResistances: true
+        Piercing: 75
+        Structural: 226
+    penetrationThreshold: 360
+    penetrationDamageTypeRequirement:
+    - Structural
+  - type: StaminaDamageOnCollide
+    damage: 60

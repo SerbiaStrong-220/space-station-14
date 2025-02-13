@@ -19,3 +19,7 @@
     BooksBag: 3
     GameCardsColode: 3 # SS220-GameCard
     GameCardsInHand: 12 # SS220-InHandCards
+  contrabandInventory:
+    Basketball: 1
+    FoodSnackBoritos: 3
+    DrinkSpaceMountainWindCan: 3

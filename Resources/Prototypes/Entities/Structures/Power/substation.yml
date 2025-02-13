@@ -108,6 +108,10 @@
     requirePower: true
     highVoltageNode: input
     mediumVoltageNode: output
+  - type: GuideHelp
+    guides:
+    - VoltageNetworks
+    - Power
   - type: NameIdentifier #SS220 PowerId
     group: PowerId
 
@@ -217,6 +221,10 @@
     totalIntensity: 100
   - type: StationInfiniteBatteryTarget
   - type: WallMount
+  - type: GuideHelp
+    guides:
+    - VoltageNetworks
+    - Power
   - type: NameIdentifier #SS220 PowerId
     group: PowerId
 

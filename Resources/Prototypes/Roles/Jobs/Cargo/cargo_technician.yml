@@ -14,6 +14,10 @@
   - Maintenance
   extendedAccess:
   - Salvage
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: BoxingDay
+    prototype: BoxCardboard
 
 - type: startingGear
   id: CargoTechGear
