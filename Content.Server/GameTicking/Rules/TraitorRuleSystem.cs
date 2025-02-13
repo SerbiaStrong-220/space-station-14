@@ -19,6 +19,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Linq;
 using System.Text;
+using Robust.Shared.Timing;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -37,6 +38,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly UplinkSystem _uplink = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -165,6 +167,10 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             Log.Debug($"MakeTraitor {ToPrettyString(traitor)} - Add traitor briefing components");
             AddComp<RoleBriefingComponent>(traitorRole.Value.Owner);
             Comp<RoleBriefingComponent>(traitorRole.Value.Owner).Briefing = briefing;
+
+            //ss220 time of assignment on traitor for conditions start
+            traitorRole.Value.Comp2.TimeOfAssignment = _timing.CurTime;
+            //ss220 time of assignment on traitor for conditions end
         }
         else
         {
