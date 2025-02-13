@@ -272,6 +272,9 @@
     sprite: SS220/Mobs/Silicon/chassis.rsi
   - type: RotationVisuals
     horizontalRotation: 90
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepClown
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:

@@ -33,8 +33,8 @@
   - type: AccessReader
     access: [["Command"], ["Research"], ["Theatre"]]
   - type: InteractionPopup
-    interactSuccessString: petting-success-derelict-cyborg
-    interactFailureString: petting-failure-derelict-cyborg
+    interactSuccessString: petting-success-honkbot
+    interactFailureString: petting-failure-honkbot
     interactSuccessSound:
       path: /Audio/Ambience/Objects/periodic_beep.ogg
   - type: RandomMetadata
