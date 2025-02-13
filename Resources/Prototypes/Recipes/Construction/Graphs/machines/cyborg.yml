@@ -85,7 +85,7 @@
           doAfter: 2
         - tag: ClothingMaskMime
           name: MimeMask
-          do After: 2
+          doAfter: 2
 #SS220 ClownMimecyborg end
 
   - node: derelictcyborg
