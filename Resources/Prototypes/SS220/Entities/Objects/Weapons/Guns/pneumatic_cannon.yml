@@ -1,0 +1,35 @@
+#SS220 ClownMime borg start
+- type: entity
+  name: pie cannon
+  parent: BaseItem
+  id: LauncherCreamPieCyborg
+  description: Load cream pie for optimal results.
+  components:
+  - type: Item
+    size: Large
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Cannons/pie_cannon.rsi
+    layers:
+      - state: piecannon
+        map: [ "enum.GunVisualLayers.Base" ]
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 0.75
+    rechargeSound:
+      path: /Audio/Weapons/Guns/MagIn/kinetic_reload.ogg
+  - type: BasicEntityAmmoProvider
+    proto: FoodFlapjackBananaCreamSS220
+    capacity: 1
+    count: 1
+  - type: GunWieldBonus
+  - type: AmmoCounter
+  - type: Appearance
+  - type: Gun
+    fireRate: 0.5
+    selectedMode: SemiAuto
+    availableModes:
+     - SemiAuto
+    soundGunshot:
+      path: /Audio/Effects/thunk.ogg
+  - type: UseDelay
+    delay: 1
+#SS220 ClownMime borg end

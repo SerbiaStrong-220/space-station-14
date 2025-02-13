@@ -196,3 +196,7 @@
 # debug-uplink-fix
 - type: Tag
   id: DebugUplink
+
+# SS220 ClownMimeCyborg
+- type: Tag
+  id: ClothingMaskMime
