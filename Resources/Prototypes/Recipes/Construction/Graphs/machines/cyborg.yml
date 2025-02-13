@@ -52,37 +52,37 @@
           doAfter: 2
         - tag: Bread
           name: Baguette
-          do After: 2
+          doAfter: 2
         - tag: Crayon
           name: Crayon
-          do After: 2
+          doAfter: 2
         - tag: Crayon
           name: Crayon
-          do After: 2
+          doAfter: 2
         - tag: Crayon
           name: Crayon
-          do After: 2
+          doAfter: 2
         - tag: Crayon
           name: Crayon
-          do After: 2
+          doAfter: 2
         - tag: Crayon
           name: Crayon
-          do After: 2
+          doAfter: 2
         - tag: Crayon
           name: Crayon
-          do After: 2
+          doAfter: 2
         - tag: Crayon
           name: Crayon
-          do After: 2
+          doAfter: 2
         - tag: Crayon
           name: Crayon
-          do After: 2
+          doAfter: 2
         - tag: ClownMask
           name: ClownMask
-          do After: 2
+          doAfter: 2
         - tag: ClownShoes
           name: ClownShoes
-          do After: 2
+          doAfter: 2
         - tag: ClothingMaskMime
           name: MimeMask
           do After: 2
