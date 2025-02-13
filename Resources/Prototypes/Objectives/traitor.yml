@@ -228,6 +228,18 @@
     stealGroup: ClothingShoesBootsMagAdv
     owner: job-name-ce
 
+#SS220 RCD-to-CE begin
+- type: entity
+  parent: BaseTraitorStealObjective
+  id: RCDRechargingStealObjective
+  components:
+  - type: NotJobRequirement
+    job: ChiefEngineer
+  - type: StealCondition
+    stealGroup: RCDRecharging
+    owner: job-name-ce
+#SS220 RCD-to-CE end
+
 ## qm
 
 - type: entity

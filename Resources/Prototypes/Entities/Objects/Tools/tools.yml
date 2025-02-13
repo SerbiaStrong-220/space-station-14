@@ -374,6 +374,13 @@
     charges: 30 # rcd upd
   - type: AutoRecharge
     rechargeDuration: 5 # rcd upd
+#SS220 RCD-to-CE begin
+  - type: Tag
+    tags:
+    - HighRiskItem
+  - type: StealTarget
+    stealGroup: RCDRecharging
+#SS220 RCD-to-CE end
 
 - type: entity
   id: RCDExperimental
