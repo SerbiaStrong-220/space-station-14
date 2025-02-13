@@ -180,7 +180,7 @@
     hasMindState: ClownMime_e
     noMindState: ClownMime_e_r
   - type: Construction
-    node: Clownmimecyborg
+    node: clownmimecyborg
   - type: MimePowers
   - type: ContainerFill
     containers:
