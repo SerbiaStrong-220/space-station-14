@@ -25,7 +25,7 @@
     damageModifierSet: ManifestedSpirit
   - type: NoSlip
   - type: TTS # Corvax-TTS
-    voice: twitch
+    voice: enigma_dota_2 #SS220 Revenant TTS change
   - type: Eye
     drawFov: false
     visMask:
