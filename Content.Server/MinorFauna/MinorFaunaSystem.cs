@@ -44,19 +44,27 @@ public sealed class SharedMinorFaunaSystem : EntitySystem
 
         if (HasComp<HumanoidAppearanceComponent>(target))
         {
-            cocoonPrototypeID = _random.Pick(entity.Comp.CocoonHumanoidPrototypes);
+            if (entity.Comp.CocoonsProto.TryGetValue(CocoonTypes.Humanoids, out var value))
+            {
+                cocoonPrototypeID = _random.Pick(value);
+            }
+        }
+        else if (TryComp<ItemComponent>(target, out var item) && (item.Size == "Tiny" || item.Size == "Small"))
+        {
+            if (entity.Comp.CocoonsProto.TryGetValue(CocoonTypes.SmallAnimals, out var value))
+            {
+                cocoonPrototypeID = _random.Pick(value);
+            }
         }
         else
         {
-            if (TryComp<ItemComponent>(target, out var item) && (item.Size == "Tiny" || item.Size == "Small"))
+            if (entity.Comp.CocoonsProto.TryGetValue(CocoonTypes.Animals, out var value))
             {
-                cocoonPrototypeID = _random.Pick(entity.Comp.CocoonSmallAnimalPrototypes);
-            }
-            else
-            {
-                cocoonPrototypeID = _random.Pick(entity.Comp.CocoonAnimalPrototypes);
+                cocoonPrototypeID = _random.Pick(value);
             }
         }
+
+
         if (cocoonPrototypeID.Equals("Undefined"))
             return;
 

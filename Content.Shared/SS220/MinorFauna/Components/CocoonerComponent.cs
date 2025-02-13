@@ -13,22 +13,10 @@ public sealed partial class CocoonerComponent : Component
     public float CocoonsMinDistance = 0.5f;
 
     /// <summary>
-    ///  Ids of the cocoon prototype for humanoids
+    ///  Dict for cocoons
     /// </summary>
-    [DataField("humanoidCocoons")]
-    public List<EntProtoId> CocoonHumanoidPrototypes = new();
-
-    /// <summary>
-    ///  Ids of the cocoon prototype for animals
-    /// </summary>
-    [DataField("animalCocoons")]
-    public List<EntProtoId> CocoonAnimalPrototypes = new();
-
-    /// <summary>
-    ///  Ids of the cocoon prototype for small animals aka mouses
-    /// </summary>
-    [DataField("smallAnimalCocoons")]
-    public List<EntProtoId> CocoonSmallAnimalPrototypes = new();
+    [DataField]
+    public Dictionary<CocoonTypes, List<EntProtoId>> CocoonsProto = new();
 
     /// <summary>
     /// List of cocoons created by component owner
@@ -36,4 +24,11 @@ public sealed partial class CocoonerComponent : Component
     [ViewVariables, AutoNetworkedField]
     public List<EntityUid> CocoonsList = new();
 
+}
+
+public enum CocoonTypes
+{
+    Humanoids,
+    Animals,
+    SmallAnimals
 }

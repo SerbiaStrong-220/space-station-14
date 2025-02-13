@@ -2461,12 +2461,13 @@
         Piercing: 6
     #SS220 Fauna update start
   - type: Cocooner
-    smallAnimalCocoons:
-    - TarantulaSmallAnimalCocoon
-    animalCocoons:
-    - TarantulaAnimalCocoon
-    humanoidCocoons:
-    - TarantulaCocoon
+    cocoonsProto:
+      Humanoids:
+      - TarantulaCocoon
+      Animals:
+      - TarantulaAnimalCocoon
+      SmallAnimals:
+      - TarantulaSmallAnimalCocoon
   - type: ActionGrant
     actions:
     - ActionSpawnSpiderWallWebTarantula
