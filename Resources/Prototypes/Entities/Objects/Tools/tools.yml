@@ -385,33 +385,6 @@
   - type: AutoRecharge
     rechargeDuration: 1
 
-#SS220 RCD-to-CE begin
-- type: entity
-  id: RCDCE
-  parent: RCD
-  name: RCD of the Senior Engineer
-  description: A bluespace-enhanced rapid construction device that passively generates its own compressed matter.
-  suffix: AutoRecharge
-  components:
-  - type: Sprite
-    sprite: SS220/Objects/Tools/RCDCE.rsi
-  - type: Clothing
-    sprite: SS220/Objects/Tools/RCDCE.rsi
-    quickEquip: false
-    slots:
-    - Belt
-  - type: LimitedCharges
-    maxCharges: 30
-    charges: 30
-  - type: AutoRecharge
-    rechargeDuration: 10
-  - type: Tag
-    tags:
-    - HighRiskItem
-  - type: StealTarget
-    stealGroup: RCDCE
-#SS220 RCD-to-CE end
-
 - type: entity
   name: compressed matter
   parent: BaseItem
