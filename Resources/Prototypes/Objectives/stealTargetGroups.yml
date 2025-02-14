@@ -37,7 +37,7 @@
 
 #SS220 RCD-to-CE begin
 - type: stealTargetGroup
-  id: RCDRecharging
+  id: RCDCE
   name: steal-target-groups-rcd-ce
   sprite:
     sprite: SS220/Objects/Tools/RCDCE.rsi
