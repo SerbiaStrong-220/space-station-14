@@ -90,8 +90,8 @@
     Wood: 200
 
 - type: latheRecipe
-  id: WeaponSprayNozzle
-  result: WeaponSprayNozzle
+  id: SprayNozzle
+  result: SprayNozzle
   completetime: 5
   materials:
     Steel: 1500
