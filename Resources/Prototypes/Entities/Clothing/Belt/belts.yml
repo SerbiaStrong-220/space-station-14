@@ -36,7 +36,6 @@
         - SprayPainter
         - NetworkConfigurator
         - RCD
-        - RCDCE #RCD-to-CE
         - RCDAmmo
         - Welder
         - PowerCell
@@ -116,7 +115,6 @@
         - SprayPainter
         - NetworkConfigurator
         - RCD
-        - RCDCE #RCD-to-CE
         - RCDAmmo
         - Welder
         - Flash
