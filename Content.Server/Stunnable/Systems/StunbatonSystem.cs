@@ -41,12 +41,6 @@ namespace Content.Server.Stunnable.Systems
         private void MeleeAttackRateEvent(Entity<StunbatonComponent> entity, ref GetHeavyDamageModifierEvent args)
         {
             args.DamageModifier = 1;
-
-            if (!_itemToggle.IsActivated(entity.Owner) ||
-            !TryComp<BatteryComponent>(entity.Owner, out var battery) || !_battery.TryUseCharge(entity.Owner, entity.Comp.EnergyPerUse, battery))
-            {
-                return;
-            }
         }
         // SS220-Stunbaton-rework end
 
