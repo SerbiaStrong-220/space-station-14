@@ -67,12 +67,13 @@ namespace Content.IntegrationTests.Tests
             "Reach",
             "Train",
             "Oasis",
-            "Cog",
             "Gate",
             "Amber",
             "Loop",
             "Plasma",
             "Elkridge",
+            "Convex",
+            "Relic",
 
             // SS220 Maps
             "Frankenstein",

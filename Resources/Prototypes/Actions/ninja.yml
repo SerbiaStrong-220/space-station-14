@@ -5,8 +5,18 @@
   description: Toggles all glove actions on left click. Includes your doorjack, draining power, stunning enemies and hacking certain computers.
   components:
   - type: InstantAction
+    # ss220 actions resprites start
+    icon:
+      sprite: SS220/Interface/Actions/ninja.rsi
+      state: ninjaGlovesOff
+    iconOn:
+      sprite: SS220/Interface/Actions/ninja.rsi
+      state: ninjaGlovesOn
+    itemIconStyle: NoItem
+    # ss220 actions resprites end
     priority: -13
-    event: !type:ToggleActionEvent {}
+    event: !type:ToggleActionEvent
+      toggleAction: true # ss220 toggle action fix
 
 # suit
 - type: entity
@@ -17,8 +27,8 @@
   - type: InstantAction
     useDelay: 0.5
     icon:
-      sprite: Objects/Weapons/Throwable/throwing_star.rsi
-      state: icon
+      sprite: SS220/Interface/Actions/ninja.rsi # ss220 actions resprites
+      state: ninjaThrowingStar # ss220 actions resprites
     itemIconStyle: NoItem
     priority: -10
     event: !type:CreateItemEvent {}
@@ -31,8 +41,8 @@
   - type: InstantAction
     useDelay: 1
     icon:
-      sprite: Objects/Weapons/Melee/energykatana.rsi
-      state: icon
+      sprite: SS220/Interface/Actions/ninja.rsi # ss220 actions resprites
+      state: ninjaTeleport # ss220 actions resprites
     itemIconStyle: NoItem
     priority: -11
     event: !type:RecallKatanaEvent {}
@@ -44,9 +54,9 @@
   components:
   - type: InstantAction
     icon:
-      sprite: Objects/Weapons/Grenades/empgrenade.rsi
-      state: icon
-    itemIconStyle: BigAction
+      sprite: SS220/Interface/Actions/ninja.rsi # ss220 actions resprites
+      state: ninjaEMP # ss220 actions resprites
+    itemIconStyle: NoItem # ss220 actions resprites
     priority: -13
     event: !type:NinjaEmpEvent {}
 
@@ -57,6 +67,10 @@
   components:
   - type: InstantAction
     # have to plan (un)cloaking ahead of time
+    icon: # ss220 actions resprites
+      sprite: SS220/Interface/Actions/ninja.rsi # ss220 actions resprites
+      state: ninjaInvisible # ss220 actions resprites
+    itemIconStyle: NoItem # ss220 actions resprites
     useDelay: 5
     priority: -9
     event: !type:ToggleActionEvent
@@ -69,8 +83,8 @@
   components:
   - type: WorldTargetAction
     icon:
-      sprite: Objects/Magic/magicactions.rsi
-      state: blink
+      sprite: SS220/Interface/Actions/ninja.rsi # ss220 actions resprites
+      state: ninjadash # ss220 actions resprites
     itemIconStyle: NoItem
     sound:
       path: /Audio/Magic/blink.ogg

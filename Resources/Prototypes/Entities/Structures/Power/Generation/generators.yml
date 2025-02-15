@@ -87,6 +87,9 @@
     onBump: false
     requirePower: true
     highVoltageNode: output
+  - type: GuideHelp
+    guides:
+    - ShuttleCraft
 
 # Base Wallmount Generator
 
@@ -142,6 +145,9 @@
     supplyRampRate: 500
     supplyRampTolerance: 500
   - type: WallMount
+  - type: GuideHelp
+    guides:
+    - ShuttleCraft
 
 # Construction Frames
 
@@ -227,6 +233,9 @@
   - type: ContainerContainer
     containers:
       board: !type:Container
+  - type: GuideHelp
+    guides:
+    - ShuttleCraft
 
 # RTG - no fuel requirement
 

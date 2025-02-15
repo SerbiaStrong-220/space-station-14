@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "Made by Kit0vras (Github) for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name":"Distortion"
+        },
+        {
+            "name":"Distortion_2"
+        },
+        {
+            "name":"Distortion_3"
+        },
+        {
+            "name":"Distortion_4"
+        }
+    ]
+}
