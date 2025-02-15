@@ -1,9 +1,10 @@
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.MinorFauna.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class CocoonerComponent : Component
 {
     /// <summary>
@@ -13,22 +14,21 @@ public sealed partial class CocoonerComponent : Component
     public float CocoonsMinDistance = 0.5f;
 
     /// <summary>
-    ///  Dict for cocoons
+    /// list of cocoon lists and their conditions
     /// </summary>
-    [DataField]
-    public Dictionary<CocoonTypes, List<EntProtoId>> CocoonsProto = new();
-
-    /// <summary>
-    /// List of cocoons created by component owner
-    /// </summary>
-    [ViewVariables, AutoNetworkedField]
-    public List<EntityUid> CocoonsList = new();
-
+    [DataField("cocoonTypes", required: true)]
+    public List<CocoonsList> CocoonsList = new();
 }
 
-public enum CocoonTypes
+[DataDefinition]
+public sealed partial class CocoonsList
 {
-    Humanoids,
-    Animals,
-    SmallAnimals
+    [DataField("entityWhiteList")]
+    public EntityWhitelist? Whitelist;
+
+    [DataField("entityBlackList")]
+    public EntityWhitelist? Blacklist;
+
+    [DataField("entityProtoList", required: true)]
+    public List<EntProtoId> Protos = new();
 }

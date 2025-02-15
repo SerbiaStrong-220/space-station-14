@@ -9,6 +9,7 @@ using Content.Shared.Humanoid;
 using Content.Server.Body.Components;
 using Content.Shared.Item;
 using Robust.Shared.Prototypes;
+using Content.Shared.Whitelist;
 
 namespace Content.Server.SS220.MinorFauna;
 
@@ -18,7 +19,7 @@ public sealed class SharedMinorFaunaSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-
+    [Dependency] private readonly EntityWhitelistSystem _whiteList = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -42,28 +43,13 @@ public sealed class SharedMinorFaunaSystem : EntitySystem
         var targetCords = _transform.GetMoverCoordinates(target, transform);
         EntProtoId cocoonPrototypeID = "Undefined";
 
-        if (HasComp<HumanoidAppearanceComponent>(target))
+        foreach (var cocoonWhiteList in entity.Comp.CocoonsList)
         {
-            if (entity.Comp.CocoonsProto.TryGetValue(CocoonTypes.Humanoids, out var value))
+            if (_whiteList.CheckBoth(target, cocoonWhiteList.Blacklist, cocoonWhiteList.Whitelist))
             {
-                cocoonPrototypeID = _random.Pick(value);
+                cocoonPrototypeID = _random.Pick(cocoonWhiteList.Protos);
             }
         }
-        else if (TryComp<ItemComponent>(target, out var item) && (item.Size == "Tiny" || item.Size == "Small"))
-        {
-            if (entity.Comp.CocoonsProto.TryGetValue(CocoonTypes.SmallAnimals, out var value))
-            {
-                cocoonPrototypeID = _random.Pick(value);
-            }
-        }
-        else
-        {
-            if (entity.Comp.CocoonsProto.TryGetValue(CocoonTypes.Animals, out var value))
-            {
-                cocoonPrototypeID = _random.Pick(value);
-            }
-        }
-
 
         if (cocoonPrototypeID.Equals("Undefined"))
             return;

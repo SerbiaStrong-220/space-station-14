@@ -2461,13 +2461,34 @@
         Piercing: 6
     #SS220 Fauna update start
   - type: Cocooner
-    cocoonsProto:
-      Humanoids:
+    cocoonTypes:
+    - CocoonsList:
+      entityWhiteList:
+        components: 
+        - HumanoidAppearance
+      entityProtoList:
       - TarantulaCocoon
-      Animals:
+  
+    - CocoonsList:
+      entityBlackList:
+        components: 
+        - HumanoidAppearance
+      entityProtoList:
       - TarantulaAnimalCocoon
-      SmallAnimals:
+
+    - CocoonsList:
+      entityWhiteList:
+        components: 
+        - Item
+        sizes:
+        - Tiny
+        - Small
+      entityBlackList:
+        components: 
+        - HumanoidAppearance
+      entityProtoList:
       - TarantulaSmallAnimalCocoon
+
   - type: ActionGrant
     actions:
     - ActionSpawnSpiderWallWebTarantula
