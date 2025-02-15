@@ -3,8 +3,8 @@
 - type: entity
   id: RCDCE
   parent: RCD
-  name: RCD of the Senior Engineer
-  description: A bluespace-enhanced rapid construction device that passively generates its own compressed matter.
+  name: Advanced RCD
+  description: A Senior Engineer's bluespace-enhanced rapid construction device that passively generates its own compressed matter.
   suffix: AutoRecharge
   components:
   - type: Sprite
