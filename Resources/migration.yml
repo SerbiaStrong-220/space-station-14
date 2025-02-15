@@ -620,3 +620,11 @@ DrinkIrishCarBomb: DrinkIrishSlammer
 
 #2025-01-20 - SS220 Space Law Raplace
 BookSpaceLaw: BookSpaceLaws
+
+#2025-02-11 - SS220 Christmas present, before season festival requiring not implemented into presents
+PresentBase: null
+PresentRandom: null
+PresentRandomUnsafe: null
+PresentRandomInsange: null
+PresentRandomCash: null
+PresentRandomCoal: null

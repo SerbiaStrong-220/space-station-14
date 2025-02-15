@@ -5,8 +5,8 @@ tilemap:
   0: Space
   38: FloorDarkMono
   101: FloorShuttleBlue
-  130: FloorTechMaintDrain
   131: FloorTechMaintDrainHorizontal
+  130: FloorTechMaintDrainVertical
   168: Lattice
   169: Plating
 entities:

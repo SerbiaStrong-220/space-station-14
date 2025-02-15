@@ -188,10 +188,10 @@ public sealed class TileSpawningUIController220 : UIController
             .Select(def =>
             {
                 string displayTitle = Loc.GetString(def.Name);
-                if (_prototypeManager.TryGetMapping(typeof(ContentTileDefinition), def.ID, out var node)
-                    && node.TryGet("tags", out ValueDataNode? valueNode))
+                if (def is ContentTileDefinition contentTile
+                    && contentTile.Tags is { Length: > 0 })
                 {
-                    displayTitle = $"[{valueNode.Value}] {displayTitle}";
+                    displayTitle = $"[{string.Join(", ", contentTile.Tags.Select(x => Loc.GetString(x)))}] {displayTitle}";
                 }
                 return new TileUIData(def, displayTitle, new ItemList.Item(_window.TileList), new List<Texture>());
             });

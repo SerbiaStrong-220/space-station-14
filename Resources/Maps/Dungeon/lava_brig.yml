@@ -29,6 +29,8 @@ entities:
     - type: Transform
     - type: Map
     - type: PhysicsMap
+    - type: GridTree
+    - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
     - type: MapGrid
@@ -2684,8 +2686,6 @@ entities:
     - type: RadiationGridResistance
     - type: LoadedMap
     - type: SpreaderGrid
-    - type: GridTree
-    - type: MovedGrids
     - type: GridPathfinding
 - proto: AirlockBrigGlassLocked
   entities:
@@ -3157,19 +3157,19 @@ entities:
     - type: Transform
       pos: 15.616387,0.61007345
       parent: 588
-- proto: BookEscalationSecurity
-  entities:
-  - uid: 373
-    components:
-    - type: Transform
-      pos: 19.42657,0.6288943
-      parent: 588
 - proto: BookRandom
   entities:
   - uid: 1835
     components:
     - type: Transform
       pos: 24.420084,44.539436
+      parent: 588
+- proto: BookRandomStory
+  entities:
+  - uid: 373
+    components:
+    - type: Transform
+      pos: 19.42657,0.6288943
       parent: 588
 - proto: BookSecurity
   entities:
@@ -10908,17 +10908,11 @@ entities:
     - type: Transform
       pos: 34.5,27.5
       parent: 588
-    - type: DeviceLinkSink
-      links:
-      - 593
   - uid: 1238
     components:
     - type: Transform
       pos: 32.5,27.5
       parent: 588
-    - type: DeviceLinkSink
-      links:
-      - 593
 - proto: ShuttersWindow
   entities:
   - uid: 1239
@@ -10926,9 +10920,6 @@ entities:
     - type: Transform
       pos: 33.5,27.5
       parent: 588
-    - type: DeviceLinkSink
-      links:
-      - 593
 - proto: SignCloning
   entities:
   - uid: 1484

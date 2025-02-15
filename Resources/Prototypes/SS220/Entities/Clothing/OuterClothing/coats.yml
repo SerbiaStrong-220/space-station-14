@@ -215,3 +215,15 @@
     sprite: SS220/Clothing/OuterClothing/Coats/muscian_danger_coat.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/muscian_danger_coat.rsi
+
+# ГСБ
+- type: entity
+  parent: [ClothingOuterArmorHoS, ClothingOuterStorageBase]
+  id: ClothingOuterCoatHoSbomber
+  name: bomber of the head of the security
+  description: An extremely warm and equally armored bomber, for an equally important officer in command.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Coats/bomberhos.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Coats/bomberhos.rsi

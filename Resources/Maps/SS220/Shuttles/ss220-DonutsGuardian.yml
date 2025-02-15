@@ -82,10 +82,9 @@ tilemap:
   124: FloorSnow
   66: FloorSnowDug
   94: FloorSteel
-  20: FloorSteelBurnt
   96: FloorSteelCheckerDark
   42: FloorSteelCheckerLight
-  21: FloorSteelDamaged
+  20: FloorSteelDamaged
   99: FloorSteelDiagonal
   100: FloorSteelDiagonalMini
   101: FloorSteelDirty
@@ -127,8 +126,7 @@ tilemap:
   126: Lattice
   127: Plating
   119: PlatingAsteroid
-  13: PlatingBurnt
-  131: PlatingDamaged
+  13: PlatingDamaged
   71: PlatingSnow
   40: TrainLattice
 entities:
