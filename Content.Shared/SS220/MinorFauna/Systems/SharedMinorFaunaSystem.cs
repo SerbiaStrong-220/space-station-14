@@ -31,15 +31,6 @@ public sealed class SharedMinorFaunaSystem : EntitySystem
         var performer = args.Performer;
         var target = args.Target;
 
-        foreach (var entityInRange in _entityLookup.GetEntitiesInRange(target, entity.Comp.CocoonsMinDistance))
-        {
-            if (!HasComp<CocoonerComponent>(entityInRange))
-                continue;
-
-            _popup.PopupEntity(Loc.GetString("cocooning-too-close"), performer, performer);
-            return;
-        }
-
         if (!_mobState.IsDead(target))
         {
             _popup.PopupEntity(Loc.GetString("cocooning-target-not-dead"), performer, performer);
