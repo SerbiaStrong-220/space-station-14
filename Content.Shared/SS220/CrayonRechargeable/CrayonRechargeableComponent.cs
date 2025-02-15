@@ -7,8 +7,8 @@ namespace Content.Shared.SS220.CrayonRechargeable
         public int ChargesPerWait { get; set; } = 1;
 
         [DataField, ViewVariables(VVAccess.ReadWrite)]
-        public float WaitingForCharge { get; set; } = 2.3f;
+        public TimeSpan WaitingForCharge { get; set; } = TimeSpan.FromSeconds(2.3f);
 
-        public TimeSpan NextChargeTime = TimeSpan.FromSeconds(0f);
+        public TimeSpan NextChargeTime = TimeSpan.Zero;
     }
 }
