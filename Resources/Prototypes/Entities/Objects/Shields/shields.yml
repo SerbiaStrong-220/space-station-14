@@ -59,6 +59,14 @@
                   max: 2
     - type: StaticPrice
       price: 100
+    #ss220 shelds on back slot start
+    - type: Clothing
+      sprite: Objects/Weapons/Guns/Rifles/ak.rsi
+      quickEquip: false
+      slots:
+      - Back
+      - suitStorage
+    #ss220 shelds on back slot end
 
 #Security Shields
 
