@@ -3,6 +3,7 @@
   id: CrayonRainbowBorg
   name: rainbow crayon
   components:
+  - type: CrayonRechargeable
   - type: Sprite
     state: rainbow
   - type: Item
@@ -10,7 +11,7 @@
   - type: Crayon
     color: Red
     selectableColor: true
-    capacity: 999999
+    deleteEmpty: false
   - type: Tag
     tags:
     - Write
