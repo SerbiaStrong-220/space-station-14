@@ -19,7 +19,7 @@ namespace Content.Server.SS220.CrayonRechargeable
         private void Charge(EntityUid uid, CrayonComponent crayonComp, CrayonRechargeableComponent rechargeableComp, TimeSpan curTime)
         {
             crayonComp.Charges = Math.Clamp(crayonComp.Charges + rechargeableComp.ChargesPerWait, 0, crayonComp.Capacity);
-            rechargeableComp.NextChargeTime = TimeSpan.FromSeconds(rechargeableComp.WaitingForCharge) + curTime;
+            rechargeableComp.NextChargeTime = rechargeableComp.WaitingForCharge + curTime;
 
             Dirty(uid, crayonComp);
         }
