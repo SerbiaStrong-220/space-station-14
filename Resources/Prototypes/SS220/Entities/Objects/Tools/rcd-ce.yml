@@ -15,8 +15,8 @@
     slots:
     - Belt
   - type: LimitedCharges
-    maxCharges: 30
-    charges: 30
+    maxCharges: 20
+    charges: 20
   - type: AutoRecharge
     rechargeDuration: 10
   - type: Tag
