@@ -3,7 +3,7 @@
 # USSP
 - type: entity
   name: Энергетический молот
-  parent: EnergySword
+  parent: BaseMeleeWeaponEnergy
   id: EnergyHammer
   description: Новейшая разработка пытливых советских умов. Незаменимая вещь как в хозяйстве, так и на войне.
   suffix: Shitspawn, Ebent, FractWar
@@ -37,10 +37,18 @@
   - type: Item
     size: Normal
     sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_hammer.rsi
+  - type: Reflect
+    reflectProb: 0.45 #ss220 ttkTweaks
+    reflects:
+      - NonEnergy
+      - Energy #SS220-FixReflects
+    spread: 80
+    reflectProbProjectile: 0.40 #ss220 ttkTweaks
+    spreadProjectile: 180
 
 - type: entity
   name: Энергетический серп
-  parent: EnergySword
+  parent: BaseMeleeWeaponEnergy
   id: EnergySickle
   description: Новейшая разработка пытливых советских умов. Незаменимая вещь как в хозяйстве, так и на войне.
   suffix: Shitspawn, Ebent, FractWar
@@ -72,11 +80,20 @@
   - type: Item
     size: Normal
     sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_sickle.rsi
+    #ss220lowTTKUpdate
+  - type: Reflect
+    reflectProb: 0.45 #ss220 ttkTweaks
+    reflects:
+      - NonEnergy
+      - Energy #SS220-FixReflects
+    spread: 80
+    reflectProbProjectile: 0.40 #ss220 ttkTweaks
+    spreadProjectile: 180
 
 # ERT
 - type: entity
   name: энергетическая сабля
-  parent: EnergySword
+  parent: BaseMeleeWeaponEnergy
   id: EnergySaberNT
   description: Передовое оружие NanoTrasen для ведения ближнего боя.
   suffix: Shitspawn, Ebent, FractWar
@@ -110,3 +127,12 @@
         Blunt: 4.5
   - type: Item
     sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_saber.rsi
+    #ss220lowTTKUpdate
+  - type: Reflect
+    reflectProb: 0.45 #ss220 ttkTweaks
+    reflects:
+      - NonEnergy
+      - Energy #SS220-FixReflects
+    spread: 80
+    reflectProbProjectile: 0.40 #ss220 ttkTweaks
+    spreadProjectile: 180

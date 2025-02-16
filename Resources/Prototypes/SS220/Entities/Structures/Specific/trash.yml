@@ -5,6 +5,9 @@
   description: Среди этой кучи мешков, полных мусора, теряются последние искры надежды на чистоту и порядок.
   suffix: Мусор, Хлам
   components:
+  - type: RatKingRummageable
+    rummageLoot: RatKingLootTrashPiles
+  - type: RegalRatSpawnLocation
   - type: InteractionOutline
   - type: Sprite
     noRot: true
@@ -29,7 +32,6 @@
         - MachineMask
         layer:
         - MidImpassable
-        - LowImpassable
   - type: Damageable
     damageContainer: Box
   - type: Destructible
@@ -134,6 +136,17 @@
     layers:
     - state: trash1
       map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
   - type: RandomSprite
     available:
       - enum.DamageStateVisualLayers.Base:
@@ -180,7 +193,6 @@
         - MachineMask
         layer:
         - MidImpassable
-        - LowImpassable
   - type: Damageable
     damageModifierSet: Metallic
     damageContainer: Inorganic
