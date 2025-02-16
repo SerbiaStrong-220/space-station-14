@@ -57,7 +57,6 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         SubscribeLocalEvent<StoreBuyListingMessage>(OnBuyContractorKit);
     }
 
-    //TODO on client and on server target is closed to position
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -69,16 +68,25 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             if (comp.PdaEntity == null)
                 continue;
 
-            var isEnabled = IsCloseWithPosition(uid);
+            if (comp.BlockUntil >= 0f)
+                comp.BlockUntil -= frameTime;
 
             if (_uiSystem.IsUiOpen(comp.PdaEntity.Value, ContractorPdaKey.Key))
-            {
-                _uiSystem.SetUiState(
-                    comp.PdaEntity.Value,
-                    ContractorPdaKey.Key,
-                    new ContractorExecutionBoundUserInterfaceState(isEnabled));
-            }
+                UpdateState(uid, comp);
         }
+    }
+
+    private void UpdateState(EntityUid contractor, ContractorComponent comp)
+    {
+        _uiSystem.SetUiState(
+            comp.PdaEntity!.Value,
+            ContractorPdaKey.Key,
+            new ContractorExecutionBoundUserInterfaceState(
+                isEnabledExecution: IsCloseWithPosition(contractor) || (comp.BlockUntil > 0),
+                isEnabledPosition: !comp.CurrentContractEntity.HasValue || (comp.BlockUntil > 0),
+                blockExecutionTime: comp.BlockUntil,
+                blockPositionsTime: comp.BlockUntil
+            ));
     }
 
     /// <summary>
@@ -117,7 +125,10 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             targetComponent.PortalOnTajpanEntity = warpPoints[randomIndex];
         }
 
+        ent.Comp.BlockUntil = 15f;
+
         args.Handled = true;
+        Dirty(ent);
     }
 
     //TODO server and checks
@@ -279,6 +290,9 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             if (!_playerManager.TryGetSessionByEntity(player, out var session))
                 continue;
 
+            if (!TryComp(player, out MetaDataComponent? metaDataComponent))
+                continue;
+
             if (_pref.GetPreferences(session.UserId).SelectedCharacter is HumanoidCharacterProfile pref)
             {
                 contractor.Comp.Profiles.TryAdd(GetNetEntity(player), pref);
@@ -287,6 +301,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             return (GetNetEntity(player),
                 new ContractorContract
                 {
+                    Name = metaDataComponent.EntityName,
                     Job = jobProto,
                     AmountPositions = GeneratePositionsForTarget(),
                 });
@@ -311,8 +326,12 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             if (!_jobs.MindTryGetJob(mindId, out var jobProto)) // || jobProto.ID == "Captain" - disabled for testing
                 continue;
 
+            if (!TryComp(player, out MetaDataComponent? metaDataComponent))
+                continue;
+
             contractor.Comp.Contracts[GetNetEntity(player)] = new ContractorContract
             {
+                Name = metaDataComponent.EntityName,
                 Job = jobProto,
                 AmountPositions = GeneratePositionsForTarget(),
             };

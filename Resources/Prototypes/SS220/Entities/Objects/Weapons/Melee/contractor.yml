@@ -1,0 +1,58 @@
+- type: entity
+  name: Дубинка контрактора
+  parent: BaseItem
+  id: ContractorBaton
+  suffix: Contractor
+  components:
+  # TODO: Damage while not activated
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/stunprod.ogg
+      params:
+        volume: 2
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/Contractor/contractor-baton.rsi
+    layers:
+    - state: contractor_baton_off
+      map: [ "enum.ToggleVisuals.Layer" ]
+  - type: Item
+    size: Small
+    sprite: SS220/Objects/Weapons/Melee/Contractor/contractor-baton.rsi
+  - type: UseDelay
+    delay: 5
+  - type: MeleeWeapon
+    attackRate: 0.5
+    wideAnimationRotation: -135
+    angle: 60
+    soundHit: !type:SoundCollectionSpecifier
+      collection: BatonHit
+    damage:
+      types:
+        Blunt: 0
+  - type: SwitchableWeapon
+    openSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
+    closeSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
+    sizeOpened: Large
+    sizeClosed: Small
+  - type: SplitDamage
+    wideDamage:
+      types:
+        Stamina: 70
+    punchDamage:
+      types:
+        Blunt: 25
+  - type: Reflect
+    reflectProb: 0.80 #ss220 ttkTweaks
+    reflects:
+    - NonEnergy
+    - Energy #SS220-FixReflects
+    spread: 45
+    reflectProbProjectile: 0.70 #ss220lowTTKUpdate
+    spreadProjectile: 180
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: contractor_baton_on}
+          False: {state: contractor_baton_off}

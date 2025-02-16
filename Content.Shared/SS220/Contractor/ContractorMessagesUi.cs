@@ -6,19 +6,26 @@ namespace Content.Shared.SS220.Contractor;
 [Serializable, NetSerializable]
 public sealed class ContractorExecutionBoundUserInterfaceState : BoundUserInterfaceState
 {
-    public bool IsEnabled;
+    public bool? IsEnabledExecution;
+    public bool? IsEnabledPosition;
+    public float? BlockExecutionTime;
+    public float? BlockPositionsTime;
 
-    public ContractorExecutionBoundUserInterfaceState(bool isEnabled)
+    public ContractorExecutionBoundUserInterfaceState(
+        bool? isEnabledExecution = null,
+        bool? isEnabledPosition = null,
+        float? blockExecutionTime = null,
+        float? blockPositionsTime = null)
     {
-        IsEnabled = isEnabled;
+        IsEnabledExecution = isEnabledExecution;
+        IsEnabledPosition = isEnabledPosition;
+        BlockExecutionTime = blockExecutionTime;
+        BlockPositionsTime = blockPositionsTime;
     }
 }
 
 [Serializable, NetSerializable]
 public sealed class ContractorUpdateStatsMessage : BoundUserInterfaceMessage;
-
-[Serializable, NetSerializable]
-public sealed class ContractorCompletedContractMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
 public sealed class ContractorExecutionButtonPressedMessage : BoundUserInterfaceMessage;

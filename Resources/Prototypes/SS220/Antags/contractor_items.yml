@@ -2,7 +2,7 @@
 - type: contractorItems
   id: ContractorItems
   items:
-    Stunbaton: 1
+    ContractorBaton: 1
     Crowbar: 3
     CrowbarRed: 2
 
@@ -58,7 +58,7 @@
         - id: AgentIDCard
         - id: ClothingMaskGasVoiceChameleon
         - id: CyberPen
-        #- id: ContractorBaton
+        - id: ContractorBaton
         - id: EncryptionKeySyndie
         - id: CigPackSyndicate
         - id: FlippoLighter

@@ -10,7 +10,7 @@
         <PanelContainer Margin="70 204 70 114" SetSize="338 380" StyleClasses="ContractorContractsLinePanel" Visible="True">
             <Label Name="ContractorTopLabel" Access="Public" Text="Доступные контракты" Margin="13 0 0 333" StyleClasses="ContractorLabelStyle"/>
             <Button Name="ExecutionButton" Access="Public" Disabled="True" Margin="213 0 0 333" SetSize="100 31" StyleClasses="ContractorExecutionButton">
-                <Label Text="Вызвать" VerticalAlignment="Center" Margin="30 0 0 30" StyleClasses="ContractorLabelStyle"/>
+                <Label Name="ExecutionLabel" Access="Public" Text="Вызвать" VerticalAlignment="Center" Margin="30 0 0 30" StyleClasses="ContractorLabelStyle"/>
                 <PanelContainer SetSize="16 12" VerticalAlignment="Center" Margin="0 0 70 0" StyleClasses="ContractorExecutionImage"/>
             </Button>
             <ScrollContainer Name="ContractsList" Margin="0 40 0 0" VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">

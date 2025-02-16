@@ -15,7 +15,7 @@ public sealed partial class ContractorPDAMenu : BaseWindow
     [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private readonly ContractorStyle _style;
-    private ContractorBoundUserInterface? _userInterface;
+    private readonly ContractorBoundUserInterface? _userInterface;
     private readonly ButtonsListenerCollection _buttons = new();
 
     public ContractorPDAMenu()
@@ -36,11 +36,6 @@ public sealed partial class ContractorPDAMenu : BaseWindow
         _buttons.ListenButton(HubButton, _ => _userInterface.OnHubButtonPressed());
         _buttons.ListenButton(ExecutionButton, _ => _userInterface.OnExecutionButtonPressed());
         _buttons.ListenButton(WithdrawButton, _ => _userInterface.OnWithdrawButtonPressed());
-    }
-
-    public void UpdateExecutionState(ContractorExecutionBoundUserInterfaceState state)
-    {
-        ExecutionButton.Disabled = !state.IsEnabled;
     }
 
     protected override DragMode GetDragModeFor(Vector2 relativeMousePos)

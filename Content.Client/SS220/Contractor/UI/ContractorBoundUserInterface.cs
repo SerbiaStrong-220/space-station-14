@@ -52,16 +52,6 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
                 UpdateStats();
                 UpdateContracts(EntMan.GetEntity(_contractorPdaComponent.PdaOwner)!.Value);
                 break;
-
-            case ContractorCompletedContractMessage:
-            {
-                foreach (var buttons in _allPositionButtons)
-                {
-                    buttons.Disabled = false;
-                }
-                _menu.ExecutionButton.Disabled = true;
-                break;
-            }
         }
     }
 
@@ -96,10 +86,34 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_menu == null)
             return;
 
-        if (state is not ContractorExecutionBoundUserInterfaceState cast)
+        if (state is not ContractorExecutionBoundUserInterfaceState castState)
             return;
 
-        _menu.UpdateExecutionState(cast);
+        UpdateButtonState(_menu.ExecutionButton, castState.IsEnabledExecution, castState.BlockExecutionTime);
+
+        foreach (var button in _allPositionButtons)
+        {
+            UpdateButtonState(button, castState.IsEnabledPosition, castState.BlockPositionsTime);
+        }
+
+        UpdateBlockTimer(castState.BlockExecutionTime, _menu.ExecutionLabel);
+    }
+
+    private void UpdateButtonState(Button button, bool? isEnabled, float? blockTime)
+    {
+        button.Disabled = isEnabled != true || blockTime is > 0;
+    }
+
+    private void UpdateBlockTimer(float? blockUntil, Label timerLabel)
+    {
+        if (blockUntil is null or <= 0f)
+        {
+            timerLabel.Text = Loc.GetString("contractor-uplink-execute");
+            return;
+        }
+
+        var remainingTime = TimeSpan.FromSeconds(blockUntil.Value);
+        timerLabel.Text = $"{remainingTime:mm\\:ss}";
     }
 
     protected override void Dispose(bool disposing)
@@ -145,7 +159,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
     }
 
-    private void AddContract(NetEntity key, ContractorContract contract)
+    private void AddContract(NetEntity target, ContractorContract contract)
     {
         if (_menu == null)
             return;
@@ -182,7 +196,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         var nameLabel = new Label
         {
-            Text = EntMan.GetComponent<MetaDataComponent>(EntMan.GetEntity(key)).EntityName + ", " + _prototypeManager.Index(contract.Job).LocalizedName,
+            Text = contract.Name + ", " + _prototypeManager.Index(contract.Job).LocalizedName,
             HorizontalExpand = false,
             MaxWidth = 350,
             Margin = new Thickness(5, 0, 0, 0),
@@ -214,20 +228,20 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
             _photoWindow = new DefaultWindow
             {
-                Title = "Фото цели",
+                Title = Loc.GetString("contractor-uplink-title-photo"),
             };
 
             if (_contractorComponent == null)
                 return;
 
-            var profile = _contractorComponent.Profiles[key];
+            var profile = _contractorComponent.Profiles[target];
 
             var iconTargetSprite = new CharacterVisualisation
             {
-                SetSize = new Vector2(200, 200),
+                SetSize = new Vector2(200, 250),
                 VerticalAlignment = Control.VAlignment.Center,
                 HorizontalAlignment = Control.HAlignment.Center,
-                Margin = new Thickness(10, 0, 0, 0),
+                Margin = new Thickness(30, 0, 0, 0),
             };
 
             iconTargetSprite.SetupCharacterSpriteView(profile, _prototypeManager.Index(contract.Job).ID, true);
@@ -249,9 +263,6 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             Margin = new Thickness(5, 30, 0, 0),
         };
 
-        var isAlreadyAccepted = _contractorPdaComponent.CurrentContractEntity is not null &&
-                                _contractorPdaComponent.CurrentContractData is not null; // todo only on server
-
         var abortButton = new Button
         {
             VerticalExpand = false,
@@ -267,7 +278,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         var abortLabel = new Label
         {
-            Text = "Отменить",
+            Text = Loc.GetString("contractor-uplink-abort"),
             HorizontalAlignment = Control.HAlignment.Center,
             VerticalAlignment = Control.VAlignment.Center,
             StyleClasses = { "ContractorLabelStyle" },
@@ -277,7 +288,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         abortButton.OnPressed += _ =>
         {
-            SendMessage(new ContractorAbortContractMessage(key));
+            SendMessage(new ContractorAbortContractMessage(target));
             positionsContainer.RemoveChild(abortButton);
         };
 
@@ -285,7 +296,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         foreach (var amountPosition in contract.AmountPositions)
         {
-            if (_contractorPdaComponent.CurrentContractEntity == key)
+            if (_contractorPdaComponent.CurrentContractEntity == target)
             {
                 abortButton.Visible = true;
                 contractContainer.AddStyleClass("ContractAcceptedBorder");
@@ -300,7 +311,6 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
                 StyleClasses = { "ContractorExecutionButton" },
                 SetSize = new Vector2(200, 30),
                 Margin = new Thickness(0, 5, 0, 0),
-                Disabled = isAlreadyAccepted,
             };
 
             var positionLabel = new Label
@@ -315,7 +325,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
             positionButton.OnPressed += _ =>
             {
-                SendMessage(new ContractorNewContractAcceptedMessage(key,
+                SendMessage(new ContractorNewContractAcceptedMessage(target,
                     contract,
                     amountPosition.TcReward,
                     amountPosition.Uid));
@@ -405,7 +415,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
             var buyButton = new Button
             {
-                Text = $"Купить ({item.Value} Реп.)",
+                Text = Loc.GetString("contractor-uplink-buy-text", ("price", item.Value)),
                 HorizontalExpand = false,
                 VerticalExpand = false,
                 StyleClasses = { "OpenBoth" },
@@ -456,7 +466,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_menu == null)
             return;
 
-        _menu.ContractorTopLabel.Text = "Доступные контракты";
+        _menu.ContractorTopLabel.Text = Loc.GetString("contractor-uplink-available-contracts");
         _menu.HubPanel.Visible = false;
         _menu.ContractsListPanel.Visible = true;
 
@@ -467,7 +477,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_menu == null)
             return;
 
-        _menu.ContractorTopLabel.Text = "Доступные товары";
+        _menu.ContractorTopLabel.Text = Loc.GetString("contractor-uplink-available-items");
         _menu.HubPanel.Visible = true;
         _menu.ContractsListPanel.Visible = false;
     }
@@ -502,7 +512,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         _withdrawWindow = new DefaultWindow
         {
-            Title = "Вывести",
+            Title = Loc.GetString("contractor-uplink-title-withdraw"),
             MinSize = new Vector2(300, 150),
             Resizable = false,
         };
@@ -528,7 +538,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         var withdrawButton = new Button
         {
-            Text = "Вывести ТК",
+            Text = Loc.GetString("contractor-uplink-withdraw-tc"),
             HorizontalExpand = true,
             MinSize = new Vector2(200, 40),
             StyleClasses = { "OpenBoth" },

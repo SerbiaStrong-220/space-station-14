@@ -66,6 +66,10 @@ public sealed partial class ContractorComponent : Component
     [DataField]
     public EntityUid? PdaEntity;
 
+    [DataField]
+    [AutoNetworkedField]
+    public float? BlockUntil;
+
     public readonly int ReputationAward = 2;
 
     public int MaxAvailableContracts = 5;
@@ -75,6 +79,7 @@ public sealed partial class ContractorComponent : Component
 [NetSerializable]
 public struct ContractorContract
 {
+    public string Name;
     public ProtoId<JobPrototype> Job;
     public List<(NetEntity Uid, string Location, FixedPoint2 TcReward, Difficulty Difficulty)> AmountPositions;
 }

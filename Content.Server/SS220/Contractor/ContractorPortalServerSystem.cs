@@ -81,7 +81,8 @@ public sealed class ContractorPortalServerSystem : EntitySystem
         contractorComponent.Profiles.Remove(GetNetEntity(args.OtherEntity));
 
         _uiSystem.ServerSendUiMessage(contractorComponent.PdaEntity!.Value, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
-        _uiSystem.ServerSendUiMessage(contractorComponent.PdaEntity!.Value, ContractorPdaKey.Key, new ContractorCompletedContractMessage());
+
+        contractorComponent.BlockUntil = 20f;
 
         _contractorServer.GenerateContracts((contractorEntity, contractorComponent)); // generate new contracts
 
