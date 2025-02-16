@@ -75,7 +75,7 @@
     sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
   - type: ItemBorgModule
     items:
-    - CrayonRainbowBorg
+    - BluespaceCrayon
     - Pen
     - CrowbarBaguetteCyborg
     - ToyFigurineMime

@@ -1,2 +1,2 @@
-ent-CrayonRainbowBorg = блюспейс мелок
+ent-BluespaceCrayon = блюспейс мелок
     .desc = бесконечный мелок, о чём ещё можно мечтать?
