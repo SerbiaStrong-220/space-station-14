@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "Made by porteriane (Discord) for SS220",
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from skyrat-tg at https://github.com/Skyrat-SS13/Skyrat-tg/commit/31156a1fcd48d67a717e7b63c11513172b28eeb1 and ammo modified by Swept, sprite made by PorteRiane",
   "size": {
     "x": 32,
     "y": 32
