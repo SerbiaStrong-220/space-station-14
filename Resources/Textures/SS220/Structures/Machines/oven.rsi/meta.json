@@ -1,0 +1,32 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 64
+    },
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "Made by MIXnikita for SS220",
+    "states": [
+		{
+			"name": "oven_base"
+		},
+		{
+			"name": "oven_damaged"
+		},
+		{
+			"name": "oven_door_closed"
+		},
+		{
+			"name": "oven_door_open"
+		},
+		{
+			"name": "oven_off"
+		},
+		{
+			"name": "oven_on"
+		},
+		{
+			"name": "oven_on_unshaded"
+		}
+    ]
+}

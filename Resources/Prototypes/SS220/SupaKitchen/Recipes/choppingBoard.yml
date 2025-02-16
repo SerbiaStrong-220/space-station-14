@@ -1,0 +1,26 @@
+- type: cookingRecipe
+  id: RecipeShawarmaRaw
+  name: Shawarma recipe
+  result: FoodShawarma
+  instrumentType: choppingBoard
+  time: 5
+  reagents:
+    Mayo: 5
+  solids:
+    FoodDough: 1
+    FoodMeatChicken: 1
+    FoodCabbage: 1
+    FoodTomato: 1
+    FoodCheeseSlice: 1
+
+- type: cookingRecipe
+  id: RecipeRibsRaw
+  name: BBQ ribs recipe
+  result: FoodMealRibs
+  instrumentType: choppingBoard
+  time: 8
+  reagents:
+    BbqSauce: 5
+  solids:
+    FoodMeat: 2
+    FoodKebabSkewer: 1
