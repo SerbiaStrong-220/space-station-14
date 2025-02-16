@@ -4,6 +4,7 @@ using System.Linq;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.IoC;
 using Content.Shared.Maps;
+using Content.Shared.SS220.SupaKitchen;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
@@ -46,6 +47,7 @@ namespace Content.Shared.Entry
 
             InitTileDefinitions();
             IoCManager.Resolve<MarkingManager>().Initialize();
+            IoCManager.Resolve<SupaRecipeManager>().Initialize(); //SS220 Supa Kitchen
 
 #if DEBUG
             var configMan = IoCManager.Resolve<IConfigurationManager>();
