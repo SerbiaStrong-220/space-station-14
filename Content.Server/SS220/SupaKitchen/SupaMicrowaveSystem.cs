@@ -1,10 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Server.Administration.Logs;
 using Content.Server.Body.Systems;
+using Content.Server.Construction.Components;
 using Content.Server.DeviceLinking.Events;
+using Content.Server.Explosion.EntitySystems;
 using Content.Server.Hands.Systems;
 using Content.Server.Kitchen.Components;
+using Content.Server.Lightning;
 using Content.Server.Power.Components;
-using Content.Server.Storage.EntitySystems;
 using Content.Server.Temperature.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared.Body.Components;
@@ -12,6 +15,7 @@ using Content.Shared.Body.Part;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Construction.EntitySystems;
+using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
@@ -28,7 +32,10 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Linq;
 
@@ -36,6 +43,8 @@ namespace Content.Server.SS220.SupaKitchen;
 public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly BodySystem _bodySystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
@@ -47,7 +56,11 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly TemperatureSystem _temperature = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly ExplosionSystem _explosion = default!;
+    [Dependency] private readonly LightningSystem _lightning = default!;
+
+    [ValidatePrototypeId<EntityPrototype>]
+    private const string MalfunctionSpark = "Spark";
 
     public override void Initialize()
     {
@@ -66,13 +79,12 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
         SubscribeLocalEvent<SupaMicrowaveComponent, MicrowaveEjectSolidIndexedMessage>(OnEjectIndex);
         SubscribeLocalEvent<SupaMicrowaveComponent, MicrowaveSelectCookTimeMessage>(OnSelectTime);
 
-        SubscribeLocalEvent<SupaMicrowaveComponent, ProcessedInSupaMicrowaveEvent>(OnItemProcessed);
         SubscribeLocalEvent<SupaMicrowaveComponent, SuicideEvent>(OnSuicide);
     }
 
     private void OnInit(Entity<SupaMicrowaveComponent> entity, ref ComponentInit ags)
     {
-        entity.Comp.Storage = _container.EnsureContainer<Container>(entity, "cooking_machine_entity_container");
+        entity.Comp.Storage = _container.EnsureContainer<Container>(entity, entity.Comp.StorageName);
         CheckPowered(entity);
     }
 
@@ -160,8 +172,7 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
         if (!HasContents(entity.Comp) || entity.Comp.CurrentState != SupaMicrowaveState.Idle)
             return;
 
-        if (!entity.Comp.UseEntityStorage)
-            _sharedContainer.EmptyContainer(entity.Comp.Storage);
+        _sharedContainer.EmptyContainer(entity.Comp.Storage);
 
         _audio.PlayPvs(entity.Comp.ClickSound, entity, AudioParams.Default.WithVolume(-2));
         UpdateUserInterfaceState(entity);
@@ -191,33 +202,6 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
         UpdateUserInterfaceState(entity);
     }
     #endregion
-
-    private void OnItemProcessed(Entity<SupaMicrowaveComponent> entity, ref ProcessedInSupaMicrowaveEvent args)
-    {
-        var ev = new BeingMicrowavedEvent(args.Item, args.User);
-        RaiseLocalEvent(args.Item, ev);
-
-        if (ev.Handled)
-        {
-            args.Handled = true;
-            return;
-        }
-
-        // destroy microwave
-        if (_tag.HasTag(args.Item, "MicrowaveMachineUnsafe") || _tag.HasTag(args.Item, "Metal"))
-        {
-            Break(entity);
-            args.Handled = true;
-            return;
-        }
-
-        if (_tag.HasTag(args.Item, "MicrowaveSelfUnsafe") || _tag.HasTag(args.Item, "Plastic"))
-        {
-            var junk = Spawn(entity.Comp.FailureResult, Transform(entity).Coordinates);
-            _sharedContainer.Insert(junk, entity.Comp.Storage);
-            QueueDel(args.Item);
-        }
-    }
 
     private void OnSuicide(Entity<SupaMicrowaveComponent> entity, ref SuicideEvent args)
     {
@@ -339,8 +323,27 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
 
         foreach (var item in component.Storage.ContainedEntities.ToList())
         {
-            var ev = new ProcessedInSupaMicrowaveEvent(uid, item, whoStarted);
-            RaiseLocalEvent(uid, ev);
+            var ev = new BeingMicrowavedEvent(uid, whoStarted);
+            RaiseLocalEvent(item, ev);
+
+            if (_tag.HasTag(item, "Metal"))
+            {
+                EnsureMalfusion((uid, component));
+            }
+
+            // destroy microwave
+            if (_tag.HasTag(item, "MicrowaveMachineUnsafe"))
+            {
+                Break((uid, component));
+                return;
+            }
+
+            if (_tag.HasTag(item, "MicrowaveSelfUnsafe") || _tag.HasTag(item, "Plastic"))
+            {
+                var junk = Spawn(component.FailureResult, Transform(uid).Coordinates);
+                _sharedContainer.Insert(junk, component.Storage);
+                QueueDel(item);
+            }
 
             if (ev.Handled)
             {
@@ -377,7 +380,7 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
 
         // Check recipes
         var portionedRecipe = GetSatisfiedPortionedRecipe(
-            component, solidsDict, reagentDict, component.CookingTimer);
+            component, solidsDict, reagentDict, (uint)(component.CookingTimer * component.CookTimeMultiplier));
 
         _audio.PlayPvs(component.BeginCookingSound, uid);
         component.CookTimeRemaining = component.CookingTimer;
@@ -402,6 +405,7 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
             UpdateAppearance(entity);
         }
 
+        entity.Comp.MalfunctionTime = TimeSpan.Zero;
         UpdateUserInterfaceState(entity);
         _audio.Stop(entity.Comp.PlayingStream);
     }
@@ -421,6 +425,7 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
             if (component.CookTimeRemaining > 0)
                 continue;
 
+            RollMalfunction((uid, component));
             AddTemperature(component, component.CookingTimer);
 
             if (component.CurrentlyCookingRecipe.Item1 != null)
@@ -433,10 +438,7 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
                 }
             }
 
-            if (component.UseEntityStorage)
-                _entityStorage.OpenStorage(uid);
-            else
-                _sharedContainer.EmptyContainer(component.Storage);
+            _sharedContainer.EmptyContainer(component.Storage);
 
             StopCooking((uid, component));
             _audio.PlayPvs(component.FoodDoneSound, uid, AudioParams.Default.WithVolume(-1));
@@ -472,5 +474,48 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
                 _solutionContainer.AddThermalEnergy(soln, heatToAdd);
             }
         }
+    }
+
+    /// <summary>
+    /// Handles the attempted cooking of unsafe objects
+    /// </summary>
+    private void RollMalfunction(Entity<SupaMicrowaveComponent> entity)
+    {
+        if (entity.Comp.MalfunctionTime == TimeSpan.Zero || entity.Comp.MalfunctionTime > _gameTiming.CurTime)
+            return;
+
+        var interval = _random.Next(entity.Comp.MalfunctionInterval.Min, entity.Comp.MalfunctionInterval.Max);
+        entity.Comp.MalfunctionTime = _gameTiming.CurTime + TimeSpan.FromSeconds(interval);
+        if (_random.Prob(entity.Comp.ExplosionChance))
+        {
+            Explode(entity);
+            return;  // microwave is fucked, stop the cooking.
+        }
+
+        if (_random.Prob(entity.Comp.LightningChance))
+            _lightning.ShootRandomLightnings(entity, 1.0f, 2, MalfunctionSpark, triggerLightningEvents: false);
+    }
+
+    /// <summary>
+    /// Explodes the microwave internally, turning it into a broken state, destroying its board, and spitting out its machine parts
+    /// </summary>
+    public void Explode(Entity<SupaMicrowaveComponent> entity)
+    {
+        SetMachineState(entity, SupaMicrowaveState.Broken);
+        _explosion.TriggerExplosive(entity);
+        if (TryComp<MachineComponent>(entity, out var machine))
+        {
+            _container.CleanContainer(machine.BoardContainer);
+            _container.EmptyContainer(machine.PartContainer);
+        }
+
+        _adminLogger.Add(LogType.Action, LogImpact.Medium,
+            $"{ToPrettyString(entity)} exploded from unsafe cooking!");
+    }
+
+    public void EnsureMalfusion(Entity<SupaMicrowaveComponent> entity)
+    {
+        var interval = _random.Next(entity.Comp.MalfunctionInterval.Min, entity.Comp.MalfunctionInterval.Max);
+        entity.Comp.MalfunctionTime = _gameTiming.CurTime + TimeSpan.FromSeconds(interval);
     }
 }
