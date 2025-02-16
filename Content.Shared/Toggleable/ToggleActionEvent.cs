@@ -9,7 +9,13 @@ namespace Content.Shared.Toggleable;
 /// <remarks>
 /// If you are using <c>ItemToggleComponent</c> subscribe to <c>ItemToggledEvent</c> instead.
 /// </remarks>
-public sealed partial class ToggleActionEvent : InstantActionEvent;
+public sealed partial class ToggleActionEvent : InstantActionEvent
+{
+    // SS220 checking the toggle value start
+    [DataField]
+    public bool ToggleAction;
+    // SS220 checking the toggle value end
+}
 
 /// <summary>
 ///     Generic enum keys for toggle-visualizer appearance data & sprite layers.

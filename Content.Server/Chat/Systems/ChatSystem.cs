@@ -6,7 +6,7 @@ using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Players.RateLimiting;
-using Content.Server.Speech.Components;
+using Content.Server.Speech.Prototypes;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
@@ -361,12 +361,12 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <param name="message">The contents of the message</param>
     /// <param name="sender">The sender (Communications Console in Communications Console Announcement)</param>
     /// <param name="playSound">Play the announcement sound</param>
-    /// <param name="announcementSound">Specific announcement sound</param>
     /// <param name="colorOverride">Optional color for the announcement message</param>
     public void DispatchGlobalAnnouncement(
         string message,
         string? sender = null,
         bool playSound = true,
+        SoundSpecifier? announcementSound = null,
         Color? colorOverride = null
         )
     {
@@ -374,18 +374,12 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
         _chatManager.ChatMessageToAll(ChatChannel.Radio, message, wrappedMessage, default, false, true, colorOverride);
-
         if (playSound)
         {
-            SoundSpecifier? announcementSound = null;
-            if (sender == Loc.GetString("admin-announce-announcer-default"))
-            {
-                announcementSound = new SoundPathSpecifier(CentComAnnouncementSound); // Corvax-Announcements: Support custom alert sound from admin panel
-            }
-            announcementSound ??= new SoundPathSpecifier(DefaultAnnouncementSound);
-            var announcementFilename = _audio.GetSound(announcementSound);
-            var announcementEv = new AnnouncementSpokeEvent(Filter.Broadcast(), announcementFilename ?? DefaultAnnouncementSound, announcementSound.Params, message, string.Empty);
-            RaiseLocalEvent(announcementEv);
+            _audio.PlayGlobal(announcementSound == null ? DefaultAnnouncementSound
+                : sender == Loc.GetString("admin-announce-announcer-default") ? CentComAnnouncementSound // Corvax-Announcements: Support custom alert sound from admin panel
+                : _audio.GetSound(announcementSound),
+                Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f));
         }
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Global station announcement from {sender}: {message}");
     }
