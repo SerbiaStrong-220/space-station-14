@@ -14,7 +14,7 @@ public sealed class DamageReceivedTrackerSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    private const float ResetDamageOwnerDelaySeconds = 0.5f;
+    private const float ResetDamageOwnerDelaySeconds = 2.5f;
 
     public override void Initialize()
     {
@@ -31,13 +31,17 @@ public sealed class DamageReceivedTrackerSystem : EntitySystem
 
         if (args.Origin != entity.Comp.WhomDamageTrack
             && entity.Comp.ResetTimeDamageOwnerTracked < _gameTiming.CurTime)
+        {
+            Log.Debug($"Damage from {ToPrettyString(args.Origin)} wasnt counted due to not being {ToPrettyString(entity.Comp.WhomDamageTrack)}");
             return;
+        }
 
         if (entity.Comp.DamageTracker.AllowedState != null
             && (!TryComp<MobStateComponent>(entity.Owner, out var mobState)
-            || entity.Comp.DamageTracker.AllowedState!.Contains(mobState.CurrentState)))
+            || !entity.Comp.DamageTracker.AllowedState!.Contains(mobState.CurrentState)))
             return;
 
+        Log.Debug($"Damage {ToPrettyString(entity)} received is tracked");
         var damageGroup = _prototype.Index(entity.Comp.DamageTracker.DamageGroup);
         args.DamageDelta.TryGetDamageInGroup(damageGroup, out var trackableDamage);
         entity.Comp.CurrentAmount += trackableDamage;
