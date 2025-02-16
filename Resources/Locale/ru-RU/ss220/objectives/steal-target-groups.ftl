@@ -9,3 +9,4 @@ steal-target-groups-expensive-lighter-nanotrasen = { ent-ExpensiveLighterNanotra
 steal-target-groups-expensive-lighter-shield = { ent-ExpensiveLighterShield }
 steal-target-groups-expensive-lighter-detective = { ent-ExpensiveLighterDetective }
 steal-target-groups-reactive-armor = { ent-ClothingOuterReactiveArmor }
+steal-target-groups-rcd-ce = { ent-RCDCE } 
