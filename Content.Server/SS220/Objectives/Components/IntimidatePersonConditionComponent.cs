@@ -20,19 +20,19 @@ public sealed partial class IntimidatePersonConditionComponent : Component
     // Descriptions comes to help player differ done object from one which isn't.
 
     /// <summary>
-    /// Description will be applied at start. No params in it
+    /// Description will be applied at start.
     /// </summary>
     [DataField(required: true)]
     public string? StartDescription;
 
     /// <summary>
-    /// Description will be applied when objective is done. No params in it
+    /// Description will be applied when objective is done.
     /// </summary>
     [DataField(required: true)]
     public string? SuccessDescription;
 
     /// <summary>
-    /// Description will be applied when objective is done. No params in it
+    /// Description will be applied if target gets SSDs.
     /// </summary>
     [DataField(required: true)]
     public string? SSDDescription;
