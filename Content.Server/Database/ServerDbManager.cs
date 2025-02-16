@@ -282,7 +282,7 @@ namespace Content.Server.Database
         #region Rules
 
         Task<DateTimeOffset?> GetLastReadRules(NetUserId player);
-        Task SetLastReadRules(NetUserId player, DateTimeOffset time);
+        Task SetLastReadRules(NetUserId player, DateTimeOffset? time);
 
         #endregion
 
@@ -320,13 +320,6 @@ namespace Content.Server.Database
 
         #endregion
 
-        #region Discord
-
-        Task<DiscordPlayer?> GetAccountDiscordLink(Guid playerId);
-        Task InsertDiscord(DiscordPlayer player);
-
-        #endregion
-
         #region Job Whitelists
 
         Task AddJobWhitelist(Guid player, ProtoId<JobPrototype> job);
@@ -356,6 +349,15 @@ namespace Content.Server.Database
         /// </summary>
         /// <param name="notification">The notification to trigger</param>
         void InjectTestNotification(DatabaseNotification notification);
+
+        /// <summary>
+        /// Send a notification to all other servers connected to the same database.
+        /// </summary>
+        /// <remarks>
+        /// The local server will receive the sent notification itself again.
+        /// </remarks>
+        /// <param name="notification">The notification to send.</param>
+        Task SendNotification(DatabaseNotification notification);
 
         #endregion
     }
@@ -828,7 +830,7 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetLastReadRules(player));
         }
 
-        public Task SetLastReadRules(NetUserId player, DateTimeOffset time)
+        public Task SetLastReadRules(NetUserId player, DateTimeOffset? time)
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.SetLastReadRules(player, time));
@@ -1052,6 +1054,12 @@ namespace Content.Server.Database
             HandleDatabaseNotification(notification);
         }
 
+        public Task SendNotification(DatabaseNotification notification)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SendNotification(notification));
+        }
+
         private async void HandleDatabaseNotification(DatabaseNotification notification)
         {
             lock (_notificationHandlers)
@@ -1116,18 +1124,6 @@ namespace Content.Server.Database
                 return new SyncAsyncEnumerable<T>(enumerable);
 
             return enumerable;
-        }
-
-        public Task<DiscordPlayer?> GetAccountDiscordLink(Guid playerId)
-        {
-            DbReadOpsMetric.Inc();
-            return _db.GetAccountDiscordLink(playerId);
-        }
-
-        public Task InsertDiscord(DiscordPlayer player)
-        {
-            DbWriteOpsMetric.Inc();
-            return _db.InsertDiscord(player);
         }
 
         private (DbContextOptions<PostgresServerDbContext> options, string connectionString) CreatePostgresOptions()

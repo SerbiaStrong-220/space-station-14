@@ -248,6 +248,7 @@ namespace Content.Client.Paper.UI
             bool wasEditing = InputContainer.Visible;
             InputContainer.Visible = isEditing;
             EditButtons.Visible = isEditing;
+            DocumentHelper.Visible = isEditing; // SS220 Document helper
 
             var msg = new FormattedMessage();
             msg.AddMarkupPermissive(state.Text);
@@ -345,5 +346,12 @@ namespace Content.Client.Paper.UI
                 SaveButton.Disabled = false;
             }
         }
+
+        // SS220 Document helper begin
+        public void InsertAtCursor(string value)
+        {
+            Input.InsertAtCursor(value);
+        }
+        // SS220 Document helper end
     }
 }

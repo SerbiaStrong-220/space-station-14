@@ -9,6 +9,7 @@ jobs:
     if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     permissions:
+      actions: write
       pull-requests: write
       contents: write
     steps:

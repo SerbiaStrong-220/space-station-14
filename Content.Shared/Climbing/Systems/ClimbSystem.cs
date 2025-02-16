@@ -242,6 +242,11 @@ public sealed partial class ClimbSystem : VirtualController
         if (args.Handled || args.Cancelled || args.Args.Target == null || args.Args.Used == null)
             return;
 
+        // SS220 Climbing in container fix begin
+        if (!_interactionSystem.InRangeAndAccessible(uid, args.Args.Target.Value))
+            return;
+        // SS220 Climbing in container fix end
+
         Climb(uid, args.Args.User, args.Args.Target.Value, climbing: component);
         args.Handled = true;
     }

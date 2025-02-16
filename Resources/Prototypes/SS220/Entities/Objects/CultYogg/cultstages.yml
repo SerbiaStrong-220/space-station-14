@@ -26,6 +26,7 @@
   id: CultStage-Arachnid
   bodyPart: Special
   markingCategory: Special
+  hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
     state: back_arachnid
@@ -36,6 +37,7 @@
   id: CultStage-Human
   bodyPart: Special
   markingCategory: Special
+  hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
     state: back_human
@@ -46,6 +48,7 @@
   id: CultStage-Diona
   bodyPart: Special
   markingCategory: Special
+  hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
     state: shrooms_diona
@@ -54,6 +57,7 @@
   id: CultStage-Vox
   bodyPart: Special
   markingCategory: Special
+  hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
     state: shrooms_vox
@@ -62,6 +66,7 @@
   id: CultStage-SlimePerson
   bodyPart: Special
   markingCategory: Special
+  hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
     state: shrooms_diona
@@ -70,6 +75,7 @@
   id: CultStage-Reptilian
   bodyPart: Special
   markingCategory: Special
+  hidden: true
   sprites:
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
     state: back_human

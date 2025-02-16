@@ -276,8 +276,6 @@ entities:
     - type: Transform
       pos: 0.53131104,-0.591462
       parent: 1
-    - type: Item
-      heldPrefix: lit
     - type: IgnitionSource
       ignited: True
 - proto: GasPassiveVent
