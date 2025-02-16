@@ -1,6 +1,7 @@
+#BaseBorgChassisSpeech отличается от BaseBorgChassis тем, что у него не имеется компонента UnblockableSpeech, дабы mimesPower работал и борг не мог говорить, пока не снимет обет
 - type: entity
   parent: [BaseMob, StripableInventoryBase]
-  id: BaseBorgChassis_Speech
+  id: BaseBorgChassisSpeech 
   name: cyborg
   description: A man-machine hybrid that assists in station activity. They love being asked to state their laws over and over.
   save: false
@@ -251,42 +252,3 @@
     damageProtection:
       flatReductions:
         Heat: 10 # capable of touching light bulbs and stoves without feeling pain!
-
-- type: entity
-  id: BaseBorgChassisClownMime
-  parent: BaseBorgChassis_Speech
-  abstract: true
-  components:
-  - type: NpcFactionMember
-    factions:
-    - NanoTrasen #The seemingly best fit. It was a regular NT cyborg once, after all.
-  - type: Access
-    enabled: false
-    groups:
-    - AllAccess #Randomized access would be fun. AllAccess is the best i can think of right now that does make it too hard for it to enter the station or navigate it..
-  - type: AccessReader
-    access: [["Command"], ["Research"], ["Theatre"]]
-  - type: ShowJobIcons
-  - type: Sprite
-    sprite: SS220/Mobs/Silicon/chassis.rsi
-  - type: RotationVisuals
-    horizontalRotation: 90
-  - type: FootstepModifier
-    footstepSoundCollection:
-      collection: FootstepClown
-  - type: IntrinsicRadioReceiver
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - Binary
-    - Common
-    - Science
-    - Service
-  - type: ActiveRadio
-    channels:
-    - Binary
-    - Common
-    - Science
-    - Service
-  - type: SiliconLawProvider
-    laws: CloImLawset
-    subverted: true

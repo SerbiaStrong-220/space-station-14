@@ -161,43 +161,6 @@
   description: Clown and Mime... CloIme!
   suffix: Battery, Module, Ghost role
   components:
-  - type: Sprite
-    layers:
-    - state: ClownMime
-    - state: ClownMime_e_r
-      map: ["enum.BorgVisualLayers.Light"]
-      shader: unshaded
-      visible: false
-    - state: ClownMime_l
-      shader: unshaded
-      map: ["light"]
-      visible: false
-  - type: BorgChassis
-    maxModules: 3
-    moduleWhitelist:
-      tags:
-      - BorgModuleGeneric
-    hasMindState: ClownMime_e
-    noMindState: ClownMime_e_r
-  - type: Construction
-    node: clownmimecyborg
-  - type: MimePowers
-  - type: ContainerFill
-    containers:
-      borg_brain:
-        - PositronicBrain
-      borg_module:
-        - BorgModuleClown
-        - BorgModuleMime    
-  - type: AccessReader
-    access: [["Command"], ["Research"], ["Theatre"]]
-  - type: InteractionPopup
-    interactSuccessString: petting-success-honkbot
-    interactFailureString: petting-failure-honkbot
-    interactSuccessSound:
-      path: /Audio/Ambience/Objects/periodic_beep.ogg
-  - type: RandomMetadata
-    nameSegments: [names_borg]
   - type: ItemSlots
     slots:
       cell_slot:
