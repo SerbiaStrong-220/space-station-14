@@ -23,6 +23,7 @@ using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Server.SS220.UnembedProjectile; // SS220
 
 namespace Content.Server.Revenant.EntitySystems;
 
@@ -45,6 +46,7 @@ public sealed partial class RevenantSystem : EntitySystem
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly VisibilitySystem _visibility = default!;
+    [Dependency] private readonly UnembedProjectileSystem _unembedProjectile = default!; // SS220
 
     [ValidatePrototypeId<EntityPrototype>]
     private const string RevenantShopId = "ActionRevenantShop";
@@ -199,6 +201,8 @@ public sealed partial class RevenantSystem : EntitySystem
             {
                 _visibility.AddLayer((uid, vis), (int) VisibilityFlags.Ghost, false);
                 _visibility.RemoveLayer((uid, vis), (int) VisibilityFlags.Normal, false);
+
+                _unembedProjectile.UnembedChildren(uid); // SS220
             }
             _visibility.RefreshVisibility(uid, vis);
         }

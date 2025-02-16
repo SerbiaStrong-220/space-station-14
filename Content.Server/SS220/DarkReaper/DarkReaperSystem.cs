@@ -18,6 +18,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Content.Server.SS220.UnembedProjectile;
 
 namespace Content.Server.SS220.DarkReaper;
 
@@ -39,6 +40,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly BuckleSystem _buckle = default!;
+    [Dependency] private readonly UnembedProjectileSystem _unembedProjectile = default!;
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("DarkReaper");
 
@@ -67,6 +69,8 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
                 QueueDel(comp.ActivePortal);
                 comp.ActivePortal = null;
             }
+
+            _unembedProjectile.UnembedChildren(uid);
         }
     }
 
