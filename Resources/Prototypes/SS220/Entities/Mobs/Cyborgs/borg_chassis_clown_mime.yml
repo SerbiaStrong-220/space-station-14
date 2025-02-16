@@ -1,0 +1,82 @@
+- type: entity
+  id: BaseBorgChassisClownMime
+  parent: BaseBorgChassisSpeech
+  abstract: true
+  components:
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen #The seemingly best fit. It was a regular NT cyborg once, after all.
+  - type: Access
+    enabled: false
+    groups:
+    - AllAccess #Randomized access would be fun. AllAccess is the best i can think of right now that does make it too hard for it to enter the station or navigate it..
+  - type: AccessReader
+    access: [["Command"], ["Research"], ["Theatre"]]
+  - type: ShowJobIcons
+  - type: Sprite
+    sprite: SS220/Mobs/Silicon/chassis.rsi
+  - type: RotationVisuals
+    horizontalRotation: 90
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepClown
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Binary
+    - Common
+    - Science
+    - Service
+  - type: ActiveRadio
+    channels:
+    - Binary
+    - Common
+    - Science
+    - Service
+  - type: SiliconLawProvider
+    laws: CloImLawset
+    subverted: true
+
+- type: entity
+  id: BorgChassisClownMime
+  parent: BaseBorgChassisClownMime
+  name: CloIme cyborg
+  description: Clown and Mime... CloIme!
+  components:
+  - type: Sprite
+    layers:
+    - state: ClownMime
+    - state: ClownMime_e_r
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: ClownMime_l
+      shader: unshaded
+      map: ["light"]
+      visible: false
+  - type: BorgChassis
+    maxModules: 3
+    moduleWhitelist:
+      tags:
+      - BorgModuleGeneric
+    hasMindState: ClownMime_e
+    noMindState: ClownMime_e_r
+  - type: Construction
+    node: clownmimecyborg
+  - type: MimePowers
+  - type: ContainerFill
+    containers:
+      borg_module:
+        - BorgModuleClown
+        - BorgModuleMime    
+  - type: AccessReader
+    access: [["Command"], ["Research"], ["Theatre"]]
+  - type: InteractionPopup
+    interactSuccessString: petting-success-honkbot
+    interactFailureString: petting-failure-honkbot
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: RandomMetadata
+    nameSegments: [names_borg]
+  - type: Input
+    context: "human"
