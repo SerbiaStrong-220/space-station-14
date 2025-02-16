@@ -46,6 +46,7 @@ public class RCDSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private readonly SharedTransformSystem _xform = default!; // SS220 fix rcd rotation
 
     private readonly int _instantConstructionDelay = 0;
     private readonly EntProtoId _instantConstructionFx = "EffectRCDConstruct0";
@@ -515,20 +516,35 @@ public class RCDSystem : EntitySystem
                 break;
 
             case RcdMode.ConstructObject:
-                var ent = Spawn(component.CachedPrototype.Prototype, _mapSystem.GridTileToLocal(mapGridData.GridUid, mapGridData.Component, mapGridData.Position));
+                //var ent = Spawn(component.CachedPrototype.Prototype, _mapSystem.GridTileToLocal(mapGridData.GridUid, mapGridData.Component, mapGridData.Position)); // SS220 fix rcd rotation
 
+                Angle rotation = 0; // SS220 fix rcd rotation
                 switch (component.CachedPrototype.Rotation)
                 {
                     case RcdRotation.Fixed:
-                        Transform(ent).LocalRotation = Angle.Zero;
+                        // SS220 fix rcd rotation begin
+                        //Transform(ent).LocalRotation = Angle.Zero;
+                        rotation = Angle.Zero;
+                        // SS220 fix rcd rotation end
                         break;
                     case RcdRotation.Camera:
-                        Transform(ent).LocalRotation = Transform(uid).LocalRotation;
+                        // SS220 fix rcd rotation begin
+                        //Transform(ent).LocalRotation = Transform(uid).LocalRotation;
+                        rotation = Transform(uid).LocalRotation;
+                        // SS220 fix rcd rotation end
                         break;
                     case RcdRotation.User:
-                        Transform(ent).LocalRotation = direction.ToAngle();
+                        // SS220 fix rcd rotation begin
+                        //Transform(ent).LocalRotation = direction.ToAngle();
+                        rotation = direction.ToAngle();
+                        // SS220 fix rcd rotation end
                         break;
                 }
+
+                // SS220 fix rcd rotation begin
+                var mapcords = _xform.ToMapCoordinates(_mapSystem.GridTileToLocal(mapGridData.GridUid, mapGridData.Component, mapGridData.Position));
+                var ent = Spawn(component.CachedPrototype.Prototype, mapcords, rotation: rotation);
+                // SS220 fix rcd rotation end
 
                 _adminLogger.Add(LogType.RCD, LogImpact.High, $"{ToPrettyString(user):user} used RCD to spawn {ToPrettyString(ent)} at {mapGridData.Position} on grid {mapGridData.GridUid}");
                 break;

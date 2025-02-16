@@ -7,9 +7,9 @@
   description: Улучшенный противогаз, используемый атмосферными техниками. Огнеупорный!
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Mask/atmos_mask.rsi
+    sprite: SS220/Clothing/Mask/atmospheric_technician.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Mask/atmos_mask.rsi
+    sprite: SS220/Clothing/Mask/atmospheric_technician.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -36,9 +36,9 @@
   description: Неоново-синяя маска, используемая для деморализации Грейтайда в дикой природе.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Mask/blue-shield-mask.rsi
+    sprite: SS220/Clothing/Mask/blueshield_alt.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Mask/blue-shield-mask.rsi
+    sprite: SS220/Clothing/Mask/blueshield_alt.rsi
   - type: FlashImmunity
   - type: EyeProtection
 
@@ -49,9 +49,9 @@
   description: An impeccable gas mask for Blue Shield officers. In addition to fire resistance, it also provides eye protection.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Mask/blueshield_mask.rsi
+    sprite: SS220/Clothing/Mask/blueshield.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Mask/blueshield_mask.rsi
+    sprite: SS220/Clothing/Mask/blueshield.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: Armor

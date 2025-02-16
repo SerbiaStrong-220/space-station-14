@@ -32,6 +32,7 @@
             <PanelContainer StyleClasses="LowDivider" Margin="4 4 4 2"/>
             <BoxContainer MaxHeight="30">
                 <Label Name="SubmitDescription" Margin="4 0 0 1" HorizontalExpand="True" HorizontalAlignment="Left"/>
+                <Button Name="EmitterActivationButton" Text="{Loc 'supermatter-emitter-extension-deactivated-emitter'}" HorizontalExpand="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                 <Button Name="SubmitButton" Text="{Loc 'supermatter-emitter-extension-submit'}" HorizontalExpand="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
             </BoxContainer>
         </BoxContainer>

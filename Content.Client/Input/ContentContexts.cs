@@ -1,4 +1,5 @@
 using Content.Shared.Input;
+using Content.Shared.SS220.Input;
 using Robust.Shared.Input;
 
 namespace Content.Client.Input
@@ -57,6 +58,7 @@ namespace Content.Client.Input
             human.AddFunction(EngineKeyFunctions.Walk);
             human.AddFunction(ContentKeyFunctions.SwapHands);
             human.AddFunction(ContentKeyFunctions.Drop);
+            human.AddFunction(KeyFunctions220.ItemOffer); // SS220 ItemOffer bind
             human.AddFunction(ContentKeyFunctions.UseItemInHand);
             human.AddFunction(ContentKeyFunctions.AltUseItemInHand);
             human.AddFunction(ContentKeyFunctions.OpenCharacterMenu);
@@ -78,6 +80,7 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.RotateObjectClockwise);
             human.AddFunction(ContentKeyFunctions.RotateObjectCounterclockwise);
             human.AddFunction(ContentKeyFunctions.FlipObject);
+            human.AddFunction(KeyFunctions220.ResistFire); // SS220 resist fire bind
             human.AddFunction(ContentKeyFunctions.ArcadeUp);
             human.AddFunction(ContentKeyFunctions.ArcadeDown);
             human.AddFunction(ContentKeyFunctions.ArcadeLeft);

@@ -26,7 +26,7 @@
   id: UplinkMindSlaveImplanter
   name: uplink-mindslave-implanter-name
   description: uplink-mindslave-implanter-desc
-  icon: { sprite: /Textures/SS220/Alerts/MindSlave.rsi, state: icon }
+  icon: { sprite: /Textures/SS220/Interface/Alerts/mindslave.rsi, state: icon }
   productEntity: MindSlaveImplanter
   discountCategory: veryRareDiscounts
   discountDownTo:

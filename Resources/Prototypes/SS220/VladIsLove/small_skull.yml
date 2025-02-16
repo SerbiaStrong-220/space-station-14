@@ -7,10 +7,10 @@
   parent: PartSkeleton
   components:
     - type: Sprite
-      sprite: SS220/small_skull.rsi
+      sprite: SS220/Objects/Misc/small_skull.rsi
       state: "skull_icon"
     - type: Icon
-      sprite: SS220/small_skull.rsi
+      sprite: SS220/Objects/Misc/small_skull.rsi
       state: "skull_icon"
     - type: BodyPart
       partType: Head

@@ -1,0 +1,36 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: soundCollection
+  id: CultYoggMusic
+  files:
+    - /Audio/SS220/CultYogg/its_coming.ogg
+
+- type: soundCollection
+  id: NyarlathotepSounds
+  files:
+    - /Audio/SS220/CultYogg/nyarlathotep_step1.ogg
+    - /Audio/SS220/CultYogg/nyarlathotep_step2.ogg
+    - /Audio/SS220/CultYogg/nyarlathotep_voice1.ogg
+    - /Audio/SS220/CultYogg/nyarlathotep_voice2.ogg
+    - /Audio/SS220/CultYogg/nyarlathotep_voice3.ogg
+
+- type: soundCollection
+  id: RaveSounds
+  files:
+    - /Audio/SS220/CultYogg/nyarlathotep_voice1.ogg
+    - /Audio/SS220/CultYogg/nyarlathotep_voice2.ogg
+    - /Audio/SS220/CultYogg/nyarlathotep_voice3.ogg
+
+- type: soundCollection
+  id: CultYoggPurifyingSounds
+  files:
+    - /Audio/SS220/CultYogg/inhale_scream_1.ogg
+    - /Audio/SS220/CultYogg/inhale_scream_2.ogg
+    - /Audio/SS220/CultYogg/inhale_scream_3.ogg
+
+- type: soundCollection
+  id: CultYoggExplosiveBubbleSounds
+  files:
+    - /Audio/SS220/Weapons/Guns/CultYogg/bubble_fly1.ogg
+    - /Audio/SS220/Weapons/Guns/CultYogg/bubble_fly2.ogg
+    - /Audio/SS220/Weapons/Guns/CultYogg/bubble_fly3.ogg

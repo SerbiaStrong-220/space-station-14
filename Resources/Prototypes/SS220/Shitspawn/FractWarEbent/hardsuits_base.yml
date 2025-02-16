@@ -55,15 +55,15 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.2
-        Slash: 0.2
-        Piercing: 0.2
-        Heat: 0.2
-        Radiation: 0.5
-        Caustic: 0
-        Stamina: 0.2
+        Blunt: 0.3
+        Slash: 0.3
+        Piercing: 0.3
+        Heat: 0.3
+        Radiation: 0.6
+        Caustic: 0.2
+        Stamina: 0.3
   - type: ExplosionResistance
-    damageCoefficient: 0.3
+    damageCoefficient: 0.35
 
 # Soldier
 - type: entity
@@ -105,47 +105,47 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.3
-        Slash: 0.3
-        Piercing: 0.3
-        Heat: 0.3
-        Radiation: 0.5
-        Caustic: 0.5
-        Stamina: 0.3
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.4
+        Heat: 0.4
+        Radiation: 0.7
+        Caustic: 0.4
+        Stamina: 0.4
   - type: ExplosionResistance
-    damageCoefficient: 0.3
+    damageCoefficient: 0.4
 
 # Heavy
+- type: entity
+  parent: ClothingOuterHardsuitBaseSoldier
+  id: ClothingOuterHardsuitBaseLight
+  abstract: true
+  components:
+  - type: ClothingSpeedModifier
+    walkModifier: 1.1
+    sprintModifier: 1.1
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.4
+        Heat: 0.4
+        Radiation: 0.7
+        Caustic: 0.7
+        Stamina: 0.4
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+
+# Heavy2
 - type: entity
   parent: ClothingOuterHardsuitBaseSoldier
   id: ClothingOuterHardsuitBaseHeavy
   abstract: true
   components:
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.2
-        Slash: 0.2
-        Piercing: 0.2
-        Heat: 0.2
-        Stamina: 0
-        Radiation: 0.25
-        Caustic: 0.35
-  - type: ExplosionResistance
-    damageCoefficient: 0.2
-
-# Heavy2
-- type: entity
-  parent: ClothingOuterHardsuitBaseSoldier
-  id: ClothingOuterHardsuitBaseHeavy2
-  abstract: true
-  components:
-  - type: ClothingSpeedModifier
-    walkModifier: 0.65
-    sprintModifier: 0.65
+    walkModifier: 0.75
+    sprintModifier: 0.75
   - type: Armor
     modifiers:
       coefficients:

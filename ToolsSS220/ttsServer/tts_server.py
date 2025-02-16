@@ -7,16 +7,20 @@ primary_speaker = 'aidar'
 
 host = "127.0.0.1"
 port = 5000
+tts_module = tts_creator()
 
 #Get request, consume text, make tts, build response, return to sender.
 @api.route('/tts/', methods=['GET'])
 def process_tts():
    text = request.args.get('text')
    original_speaker = request.args.get('speaker')
+   extension = request.args.get('ext')
    print(f'Got request with text "{text}" and speaker: "{original_speaker}"') #Strictly debugging thing, uncomment if uncomfortable.
    speaker = primary_speaker
-   tts_module = tts_creator()
-   payload = tts_module.make_wav(text=text, speaker=speaker, sample_rate=24000)
+   if extension == 'ogg':
+      payload = tts_module.make_ogg(text=text, speaker=speaker, sample_rate=24000)
+   else:
+      payload = tts_module.make_wav(text=text, speaker=speaker, sample_rate=24000)
    return payload
 
 if __name__ == '__main__':

@@ -8,6 +8,15 @@
       role: JobMedicalDoctor
       time: 108000 # 30 hrs
 
+- type: loadoutEffectGroup
+  id: MedicalDoctorResponsibility
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobMedicalDoctor
+      time: 252000 # 70 hrs
+
 # Glasses
 - type: loadout
   id: CyberMedVisor
@@ -18,6 +27,14 @@
     eyes: ClothingSponsorCyberMedVisor
 
 # Jumpsuit
+- type: loadout
+  id: MedicalDoctorJumpsuitResponsibility
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MedicalDoctorResponsibility
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitResponsibility
+
 - type: loadout
   id: MedicalDoctorJumpsuitTurtleneck
   effects:
@@ -49,6 +66,15 @@
     proto: MedicalDoctorTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorBlue
+
+#Shoes
+- type: loadout
+  id: MedicalDoctorShoesResponsibility
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MedicalDoctorResponsibility
+  equipment:
+    shoes: ClothingShoesResponsibility
 
 # Neck
 - type: loadout

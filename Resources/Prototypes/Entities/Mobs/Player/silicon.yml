@@ -116,25 +116,25 @@
   - type: CriminalRecordsConsole220
   - type: PowerMonitoringConsole
   - type: AtmosAlertsComputer
+  - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
   - type: ResearchConsole
   - type: ResearchClient
   - type: TechnologyDatabase
-  - type: SuperMatterObserver #SS220_TODO: Добавить отоброжение СМа Для ИИ
+  - type: SuperMatterObserver #SS220_TODO: Добавить отображение СМа Для ИИ
   - type: SuperMatterObserverReceiver
   - type: ApcPowerReceiver
     needsPower: false
     powerLoad: 0
-  # - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
   #SS220 Station Ai Actions end
   - type: DeviceNetwork
     deviceNetId: Wireless
-    receiveFrequencyId: CrewMonitor 
+    receiveFrequencyId: CrewMonitor
     transmitFrequencyId: ShuttleTimer
   - type: StationMap #SS220 Station Ai Actions
   - type: RadarConsole
     followEntity: false
   - type: CommunicationsConsole
-    canShuttle: false
+    canShuttle: true
     title: comms-console-announcement-title-station-ai
     color: "#5ed7aa"
   - type: HolographicAvatar
@@ -146,6 +146,7 @@
   - type: TTS
     randomVoicesList: Borg
   # SS220 Holopad adapt end
+  - type: SetRadioReceiverToStationAiEye # SS220 Silicon TTS fix
 
 - type: entity
   id: AiHeldIntellicard
@@ -449,7 +450,7 @@
     unlistedNumber: true
     requiresPower: false
   - type: Holopad
-  - type: StationAiWhitelist  
+  - type: StationAiWhitelist
   - type: UserInterface
     interfaces:
         enum.HolopadUiKey.AiRequestWindow:
@@ -495,6 +496,7 @@
     interfaces:
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
+        requireInputValidation: false
   - type: ComplexInteraction
   - type: Actions
   - type: Access
@@ -512,6 +514,9 @@
     - HideContextMenu
     - StationAi
     - NoConsoleSound
+  - type: StartingMindRole
+    mindRole: "MindRoleSiliconBrain"
+    silent: true
 
 # Hologram projection that the AI's eye tracks.
 - type: entity
@@ -569,12 +574,15 @@
   - type: ContainerFill
     containers:
       borg_brain:
-        - MMIFilled
+      - PositronicBrain
   - type: ItemSlots
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellMedium
+  - type: StartingMindRole
+    mindRole: "MindRoleSiliconBrain"
+    silent: true
 
 - type: entity
   id: PlayerBorgSyndicateAssaultBattery

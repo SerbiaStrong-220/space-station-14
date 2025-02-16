@@ -1,0 +1,35 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: CultYoggRule
+  parent: BaseGameRule
+  components:
+  - type: GameRule
+    minPlayers: 40
+    delay:
+      min: 300
+      max: 600
+  - type: CultYoggRule
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ CultistOfYoggSothoth ]
+      max: 4
+      playerRatio: 10
+      blacklist:
+        components:
+        - BibleUser
+        - CultYoggSacrificial
+      lateJoinAdditional: false
+      mindRoles:
+        - MindRoleCultYogg
+  - type: AntagObjectives
+    objectives:
+    - CultYoggSacraficeObjective
+
+- type: entity
+  parent: BaseGameRule
+  id: FractWar
+  components:
+  - type: LoadMapRule
+    mapPath: /Maps/SS220/EventMaps/FractWarShuttlesMap.yml
+  - type: FractWarRule

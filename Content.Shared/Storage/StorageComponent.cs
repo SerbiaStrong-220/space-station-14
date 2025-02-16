@@ -149,6 +149,19 @@ namespace Content.Shared.Storage
     }
 
     [Serializable, NetSerializable]
+    public sealed class OpenNestedStorageEvent : EntityEventArgs
+    {
+        public readonly NetEntity InteractedItemUid;
+        public readonly NetEntity StorageUid;
+
+        public OpenNestedStorageEvent(NetEntity interactedItemUid, NetEntity storageUid)
+        {
+            InteractedItemUid = interactedItemUid;
+            StorageUid = storageUid;
+        }
+    }
+
+    [Serializable, NetSerializable]
     public sealed class StorageInteractWithItemEvent : EntityEventArgs
     {
         public readonly NetEntity InteractedItemUid;
@@ -172,6 +185,26 @@ namespace Content.Shared.Storage
         public readonly ItemStorageLocation Location;
 
         public StorageSetItemLocationEvent(NetEntity itemEnt, NetEntity storageEnt, ItemStorageLocation location)
+        {
+            ItemEnt = itemEnt;
+            StorageEnt = storageEnt;
+            Location = location;
+        }
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class StorageTransferItemEvent : EntityEventArgs
+    {
+        public readonly NetEntity ItemEnt;
+
+        /// <summary>
+        /// Target storage to receive the transfer.
+        /// </summary>
+        public readonly NetEntity StorageEnt;
+
+        public readonly ItemStorageLocation Location;
+
+        public StorageTransferItemEvent(NetEntity itemEnt, NetEntity storageEnt, ItemStorageLocation location)
         {
             ItemEnt = itemEnt;
             StorageEnt = storageEnt;
@@ -232,7 +265,7 @@ namespace Content.Shared.Storage
     }
 
     [ByRefEvent]
-    public record struct StorageInteractAttemptEvent(bool Silent, bool Cancelled = false);
+    public record struct StorageInteractAttemptEvent(EntityUid User, bool Silent, bool Cancelled = false); // SS220 add user
 
     [ByRefEvent]
     public record struct StorageInteractUsingAttemptEvent(bool Cancelled = false);
