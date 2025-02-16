@@ -1,0 +1,170 @@
+- type: entityTable
+  id: rndLootSpawnerTable
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      weight: 70
+      children:
+      - id: BananiumHorn
+        weight: 20
+      - id: ChemicalPayload
+        weight: 30
+      - id: DeviceCalculator
+        weight: 60
+      - id: RCDAmmo
+        weight: 40
+      - id: TrashBananiumPeel
+        weight: 60
+      - id: VariantCubeBox
+        weight: 50
+      - id: VehicleUnicycleFolded
+        weight: 10
+    - !type:GroupSelector
+      weight: 40
+      children:
+      - id: ResearchDisk
+        weight: 80
+      - id: ResearchDisk5000
+        weight: 40
+      - id: ResearchDisk10000
+        weight: 20
+      - id: TechnologyDisk
+        weight: 70
+      - id: TechnologyDiskRare
+        weight: 10
+    - !type:GroupSelector
+      weight: 5
+      children:
+      - id: ClothingEyesGlassesThermal
+        weight: 30
+      - id: PinpointerUniversal
+        weight: 50
+      - id: PortableRecharger
+        weight: 5
+      - id: Intellicard
+        weight: 30
+      - id: DefibrillatorCompact
+        weight: 20
+    - !type:GroupSelector
+      weight: 30
+      children:
+      - id: AstroNavCartridge
+        weight: 70
+      - id: CrewManifestCartridge
+        weight: 90
+      - id: LogProbeCartridge
+        weight: 90
+      - id: NetProbeCartridge
+        weight: 90
+      - id: MedTekCartridge
+        weight: 30
+      - id: NewsReaderCartridge
+        weight: 50
+      - id: SupermatterObserverCartridge
+        weight: 20
+      - id: WantedListCartridge
+        weight: 10
+    - !type:GroupSelector
+      weight: 90
+      children:
+      - id: SheetGlass
+        weight: 80
+      - id: SheetPlasma
+        weight: 20
+      - id: SheetPlastic
+        weight: 50
+      - id: SheetSteel
+        weight: 80
+    - !type:GroupSelector
+      weight: 60
+      children:
+      - id: AutolatheHyperConvectionMachineCircuitboard
+        weight: 10
+      - id: CircuitImprinterHyperConvectionMachineCircuitboard
+        weight: 10
+      - id: CloningPodMachineCircuitboard
+        weight: 40
+      - id: DiagnoserMachineCircuitboard
+        weight: 30
+      - id: GyroscopeMachineCircuitboard
+        weight: 50
+      - id: MedicalScannerMachineCircuitboard
+        weight: 40
+      - id: ProtolatheHyperConvectionMachineCircuitboard
+        weight: 10
+      - id: ResearchComputerCircuitboard
+        weight: 5
+      - id: ArtifactCrusherMachineCircuitboard
+        weight: 30
+    - !type:GroupSelector
+      weight: 20
+      children:
+      - id: BorgModuleAdvancedTreatment
+        weight: 10
+      - id: BorgModuleAnomaly
+        weight: 10
+      - id: BorgModuleArtifact
+        weight: 20
+      - id: BorgModuleCable
+        weight: 40
+      - id: BorgModuleCleaning
+        weight: 30
+      - id: BorgModuleClowning
+        weight: 50
+      - id: BorgModuleDefibrillator
+        weight: 40
+      - id: BorgModuleFireAxe
+        weight: 20
+      - id: BorgModuleGardening
+        weight: 50
+      - id: BorgModuleHarvesting
+        weight: 50
+      - id: BorgModuleLightReplacer
+        weight: 50
+    - !type:GroupSelector
+      weight: 35
+      children:
+      - id: BlueprintClothingBeltMilitaryWebbing
+        weight: 10
+      - id: BlueprintFulton
+        weight: 70
+      - id: BlueprintFultonBeacon
+        weight: 50
+      - id: BlueprintGlowstickBlue
+        weight: 70
+      - id: BlueprintPowerCellHyperPrinted
+        weight: 30
+      - id: BlueprintSyndicateMicrowaveMachineCircuitboard
+        weight: 20
+      - id: BlueprintWeaponCrusher
+        weight: 30
+    - !type:GroupSelector
+      weight: 30
+      children:
+      - id: AnomalyCoreBluespace
+        weight: 20
+      - id: AnomalyCoreFlesh
+        weight: 20
+      - id: AnomalyCoreGravity
+        weight: 20
+      - id: AnomalyCoreIce
+        weight: 20
+      - id: AnomalyCoreRock
+        weight: 20
+      - id: AnomalyCoreShadow
+        weight: 20
+
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnRnDLoot
+  name: Spawn RnD Loot for Gate
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Structures/Decoration/banner.rsi
+      state: banner_science
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: rndLootSpawnerTable
