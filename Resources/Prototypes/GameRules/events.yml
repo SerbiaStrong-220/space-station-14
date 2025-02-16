@@ -224,12 +224,19 @@
   - type: AntagLoadProfileRule
   - type: AntagObjectives
     objectives:
+    - NinjaFrameTargetObjective # SS220 Ninja-target-update | Move it upper
     - StealResearchObjective
     - DoorjackObjective
-    - SpiderChargeObjective
+    # - SpiderChargeObjective # SS220 Ninja-target-update
     - TerrorObjective
-    - MassArrestObjective
+    # - MassArrestObjective # SS220 Ninja-target-update
     - NinjaSurviveObjective
+    # SS220 Ninja-target-update begin
+  - type: AntagRandomObjectives
+    sets:
+    - groups: NinjaObjectiveGroups
+    maxDifficulty: 1.5 # be careful 1.5 is here because one ninjaTarget cost 1.5 and we need only one
+    # SS220 Ninja-target-update end
   - type: AntagSelection
     agentName: ninja-round-end-agent-name
     definitions:

@@ -1217,6 +1217,14 @@
     Steel: 50
 
 - type: latheRecipe
+  id: TileFloorSteelMaintMono
+  result: FloorItemSteelMaintMono
+  category: Steel
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
   id: TileFloorSteelMaintVertical
   result: FloorItemSteelMaintVertical
   category: Steel

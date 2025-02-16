@@ -1981,6 +1981,18 @@
   heatCapacity: 10000
 
 - type: tile
+  id: FloorSteelMaintMono
+  name: floor-steel-maint-mono
+  sprite: /Textures/SS220/Tiles/steel_maint_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelMaintMono
+  heatCapacity: 10000
+
+- type: tile
   id: FloorSteelMaintVertical
   name: floor-steel-maint-vertical
   sprite: /Textures/SS220/Tiles/steel_maint_vertical.png
