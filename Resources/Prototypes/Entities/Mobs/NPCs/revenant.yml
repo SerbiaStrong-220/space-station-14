@@ -25,7 +25,7 @@
     damageModifierSet: ManifestedSpirit
   - type: NoSlip
   - type: TTS # Corvax-TTS
-    voice: enigma_dota_2 #SS220 Revenant TTS change
+    randomVoicesList: Demons
   - type: Eye
     drawFov: false
     visMask:

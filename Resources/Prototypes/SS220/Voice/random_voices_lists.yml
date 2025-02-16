@@ -7,8 +7,8 @@
   - sentrybot
   - fact_core
 
-  - type: randomVoicesList
-    id: Demons
+- type: randomVoicesList
+  id: Demons
   voices:
   - arc_warden_dota_2
   - enigma_dota_2
