@@ -20,6 +20,9 @@ public sealed partial class SupaMicrowaveComponent : BaseCookingInstrumentCompon
 
     [DataField]
     public float HeatPerSecond = 100;
+
+    [DataField]
+    public int Capacity = 15;
     #endregion
 
     #region  state
@@ -53,11 +56,6 @@ public sealed partial class SupaMicrowaveComponent : BaseCookingInstrumentCompon
     [DataField]
     public SoundSpecifier LoopingSound = new SoundPathSpecifier("/Audio/Machines/microwave_loop.ogg");
     #endregion
-
-    [DataField]
-    public bool AltActivationUI = false;
-    [DataField]
-    public bool UseEntityStorage = false;
 
     public Container Storage = default!;
 

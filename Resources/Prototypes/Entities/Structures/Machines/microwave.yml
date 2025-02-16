@@ -14,7 +14,7 @@
   - type: UserInterface
     interfaces:
       enum.SupaMicrowaveUiKey.Key:
-        type: SupaMicrowaveBoundUserInterface
+        type: MicrowaveBoundUserInterface
   #SS220 supa kitchen end
   - type: Appearance
   - type: GenericVisualizer

@@ -17,11 +17,11 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
+using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.SS220.SupaKitchen;
 using Content.Shared.SS220.SupaKitchen.Systems;
-using Content.Shared.Storage.Components;
 using Content.Shared.Tag;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
@@ -29,11 +29,13 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 using System.Linq;
 
 namespace Content.Server.SS220.SupaKitchen;
 public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
 {
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly BodySystem _bodySystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
@@ -56,17 +58,13 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
         SubscribeLocalEvent<SupaMicrowaveComponent, SolutionChangedEvent>(OnSolutionChange);
         SubscribeLocalEvent<SupaMicrowaveComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<SupaMicrowaveComponent, BreakageEventArgs>(OnBreak);
-        SubscribeLocalEvent<SupaMicrowaveComponent, StorageOpenAttemptEvent>(OnStorageOpenAttempt);
-        SubscribeLocalEvent<SupaMicrowaveComponent, StorageCloseAttemptEvent>(OnStorageCloseAttempt);
-        SubscribeLocalEvent<SupaMicrowaveComponent, StorageAfterOpenEvent>(OnStorageOpen);
-        SubscribeLocalEvent<SupaMicrowaveComponent, StorageAfterCloseEvent>(OnStorageClosed);
         SubscribeLocalEvent<SupaMicrowaveComponent, SignalReceivedEvent>(OnSignalReceived);
 
         // UI event listeners
-        SubscribeLocalEvent<SupaMicrowaveComponent, SupaMicrowaveStartCookMessage>((u, c, m) => StartCooking(u, c, m.Actor));
-        SubscribeLocalEvent<SupaMicrowaveComponent, SupaMicrowaveEjectMessage>(OnEjectMessage);
-        SubscribeLocalEvent<SupaMicrowaveComponent, SupaMicrowaveEjectSolidIndexedMessage>(OnEjectIndex);
-        SubscribeLocalEvent<SupaMicrowaveComponent, SupaMicrowaveSelectCookTimeMessage>(OnSelectTime);
+        SubscribeLocalEvent<SupaMicrowaveComponent, MicrowaveStartCookMessage>((u, c, m) => StartCooking(u, c, m.Actor));
+        SubscribeLocalEvent<SupaMicrowaveComponent, MicrowaveEjectMessage>(OnEjectMessage);
+        SubscribeLocalEvent<SupaMicrowaveComponent, MicrowaveEjectSolidIndexedMessage>(OnEjectIndex);
+        SubscribeLocalEvent<SupaMicrowaveComponent, MicrowaveSelectCookTimeMessage>(OnSelectTime);
 
         SubscribeLocalEvent<SupaMicrowaveComponent, ProcessedInSupaMicrowaveEvent>(OnItemProcessed);
         SubscribeLocalEvent<SupaMicrowaveComponent, SuicideEvent>(OnSuicide);
@@ -74,11 +72,7 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
 
     private void OnInit(Entity<SupaMicrowaveComponent> entity, ref ComponentInit ags)
     {
-        if (entity.Comp.UseEntityStorage)
-            entity.Comp.Storage = _container.EnsureContainer<Container>(entity, EntityStorageSystem.ContainerName);
-        else
-            entity.Comp.Storage = _container.EnsureContainer<Container>(entity, "cooking_machine_entity_container");
-
+        entity.Comp.Storage = _container.EnsureContainer<Container>(entity, "cooking_machine_entity_container");
         CheckPowered(entity);
     }
 
@@ -91,8 +85,6 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
         {
             StopCooking(entity);
             SetMachineState(entity, SupaMicrowaveState.UnPowered);
-            if (!entity.Comp.UseEntityStorage)
-                _sharedContainer.EmptyContainer(entity.Comp.Storage);
         }
         else if (entity.Comp.CurrentState is SupaMicrowaveState.UnPowered)
         {
@@ -103,9 +95,6 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
     private void OnInteractUsing(Entity<SupaMicrowaveComponent> entity, ref InteractUsingEvent args)
     {
         if (args.Handled)
-            return;
-
-        if (entity.Comp.UseEntityStorage)
             return;
 
         if (!(TryComp<ApcPowerReceiverComponent>(entity, out var apc) && apc.Powered))
@@ -134,6 +123,12 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
             return;
         }
 
+        if (entity.Comp.Storage.Count >= entity.Comp.Capacity)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("supa-microwave-component-interact-full"), entity, args.User);
+            return;
+        }
+
         args.Handled = true;
         _handsSystem.TryDropIntoContainer(args.User, args.Used, entity.Comp.Storage);
         UpdateUserInterfaceState(entity);
@@ -148,44 +143,10 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
     {
         StopCooking(entity);
 
-        if (entity.Comp.UseEntityStorage)
-            _entityStorage.CloseStorage(entity);
-
         _sharedContainer.EmptyContainer(entity.Comp.Storage);
 
         SetMachineState(entity, SupaMicrowaveState.Broken);
     }
-
-    #region Storage
-    private void OnStorageOpenAttempt(Entity<SupaMicrowaveComponent> entity, ref StorageOpenAttemptEvent args)
-    {
-        if (args.Cancelled || !entity.Comp.UseEntityStorage)
-            return;
-
-        if (entity.Comp.CurrentState is SupaMicrowaveState.Broken)
-            args.Cancelled = true;
-    }
-
-    private void OnStorageCloseAttempt(Entity<SupaMicrowaveComponent> entity, ref StorageCloseAttemptEvent args)
-    {
-        if (args.Cancelled || !entity.Comp.UseEntityStorage)
-            return;
-
-        if (entity.Comp.CurrentState is SupaMicrowaveState.Broken)
-            args.Cancelled = true;
-    }
-
-    private void OnStorageOpen(Entity<SupaMicrowaveComponent> entity, ref StorageAfterOpenEvent args)
-    {
-        StopCooking(entity);
-        UpdateUserInterfaceState(entity);
-    }
-
-    private void OnStorageClosed(Entity<SupaMicrowaveComponent> entity, ref StorageAfterCloseEvent args)
-    {
-        UpdateUserInterfaceState(entity);
-    }
-    #endregion
 
     private void OnSignalReceived(Entity<SupaMicrowaveComponent> entity, ref SignalReceivedEvent args)
     {
@@ -194,7 +155,7 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
     }
 
     #region ui_messages
-    private void OnEjectMessage(Entity<SupaMicrowaveComponent> entity, ref SupaMicrowaveEjectMessage args)
+    private void OnEjectMessage(Entity<SupaMicrowaveComponent> entity, ref MicrowaveEjectMessage args)
     {
         if (!HasContents(entity.Comp) || entity.Comp.CurrentState != SupaMicrowaveState.Idle)
             return;
@@ -206,7 +167,7 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
         UpdateUserInterfaceState(entity);
     }
 
-    private void OnEjectIndex(Entity<SupaMicrowaveComponent> entity, ref SupaMicrowaveEjectSolidIndexedMessage args)
+    private void OnEjectIndex(Entity<SupaMicrowaveComponent> entity, ref MicrowaveEjectSolidIndexedMessage args)
     {
         if (!HasContents(entity.Comp) || entity.Comp.CurrentState != SupaMicrowaveState.Idle)
             return;
@@ -215,7 +176,7 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
         UpdateUserInterfaceState(entity);
     }
 
-    private void OnSelectTime(Entity<SupaMicrowaveComponent> entity, ref SupaMicrowaveSelectCookTimeMessage args)
+    private void OnSelectTime(Entity<SupaMicrowaveComponent> entity, ref MicrowaveSelectCookTimeMessage args)
     {
         if (!HasContents(entity.Comp) || entity.Comp.CurrentState != SupaMicrowaveState.Idle)
             return;
@@ -333,12 +294,17 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
 
     public void UpdateUserInterfaceState(Entity<SupaMicrowaveComponent> entity)
     {
-        _userInterface.SetUiState(entity.Owner, SupaMicrowaveUiKey.Key, new SupaMicrowaveUpdateUserInterfaceState(
+        var isBusy = entity.Comp.CurrentState != SupaMicrowaveState.Idle;
+        var timeEnd = entity.Comp.CookTimeRemaining > 0
+            ? _gameTiming.CurTime + TimeSpan.FromSeconds(entity.Comp.CookTimeRemaining)
+            : TimeSpan.Zero;
+
+        _userInterface.SetUiState(entity.Owner, SupaMicrowaveUiKey.Key, new MicrowaveUpdateUserInterfaceState(
             GetNetEntityArray(entity.Comp.Storage.ContainedEntities.ToArray()),
-            entity.Comp.CurrentState,
+            isBusy,
             entity.Comp.CurrentCookTimeButtonIndex,
             entity.Comp.CookingTimer,
-            entity.Comp.UseEntityStorage
+            timeEnd
         ));
     }
 
