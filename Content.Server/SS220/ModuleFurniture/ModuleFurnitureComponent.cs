@@ -17,8 +17,18 @@ public sealed partial class ModuleFurnitureComponent : SharedModuleFurnitureComp
     public List<EntProtoId> FillingEntity = new();
 
     /// <summary>
-    /// Contains things of which furniture consists
+    /// Contains things of which furniture consists.
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
-    public Container DrawerContainer = new();
+    public Container DrawerContainer;
+
+    /// <summary>
+    /// Starting pixel offset for placing drawers sprite
+    /// </summary>
+    [DataField(required: true)]
+    [ViewVariables(VVAccess.ReadOnly)]
+    public Vector2i StartingDrawerPixelOffset;
+
+    [DataField(required: true)]
+    public Vector2i DrawerPixelInterval;
 }

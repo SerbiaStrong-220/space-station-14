@@ -22,6 +22,7 @@ using Content.Shared.Physics;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Interaction;
+using Content.Shared.SS220.ModuleFurniture.Components;
 using Content.Shared.Storage;
 using Content.Shared.Strip;
 using Content.Shared.Tag;
@@ -1363,6 +1364,11 @@ namespace Content.Shared.Interaction
         /// <inheritdoc cref="CanAccessViaStorage(Robust.Shared.GameObjects.EntityUid,Robust.Shared.GameObjects.EntityUid)"/>
         public bool CanAccessViaStorage(EntityUid user, EntityUid target, BaseContainer container)
         {
+            // TODO: make unique events for storage interaction for SS220
+            // SS220-module-furniture-storage
+            if (SharedModuleFurnitureComponent.ContainerId == container.ID)
+                return true;
+            // SS220-module-furniture-storage
             if (StorageComponent.ContainerId != container.ID)
                 return false;
 

@@ -6,8 +6,8 @@
   description: Wooden dresser, no mod suits but mod dressers are here.
   components:
   - type: Sprite
-    sprite: Structures/Furniture/furniture.rsi
-    state: dresser
+    sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
+    state: dresser-foundation
   - type: Damageable
     damageModifierSet: Wood
     damageContainer: StructuralInorganic
@@ -22,6 +22,7 @@
           MaterialWoodPlank1:
             min: 3
             max: 3
+      - !type:EmptyAllContainersBehaviour
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: ModuleFurniture
@@ -52,8 +53,11 @@
   - type: Item
     size: Huge
   - type: Sprite
-    sprite: Structures/Furniture/furniture.rsi
-    state: rack # TODO: make it
+    sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
+    state: drawer-wood
+    layers:
+    - state: drawer-wood-open
+      map: ["enum.ModuleFurnitureOpenVisuals.Layer"]
   - type: Storage
     grid:
     - 0,0,5,5
@@ -62,6 +66,12 @@
     containers:
       storagebase: !type:Container
         ents: []
+  # - type: GenericVisualizer
+  #   visuals:
+  #     enum.ModuleFurnitureOpenVisuals.Opened:
+  #       enum.ModuleFurnitureOpenVisuals.Layer:
+  #         True: { visible: false }
+  - type: Appearance
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:

@@ -5,10 +5,13 @@
   description: Wooden dresser, now with editable layout!
   components:
   - type: Sprite
-    sprite: Structures/Furniture/furniture.rsi
-    state: dresser
+    sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
+    state: dresser-foundation
   - type: ModuleFurniture
-    tileLayoutSize: 3,3
+    drawerPixelInterval: 1,1
+    startingDrawerPixelOffset: 9,15
+    pixelPerLayoutTile: 14,4
+    tileLayoutSize: 1,3
 
 - type: entity
   id: WoodenModularDresserFilled
@@ -18,10 +21,13 @@
   description: Wooden dresser, now with editable layout!
   components:
   - type: Sprite
-    sprite: Structures/Furniture/furniture.rsi
-    state: dresser
+    sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
+    state: dresser-foundation
   - type: ModuleFurniture
-    tileLayoutSize: 3,3
+    drawerPixelInterval: 1,1
+    startingDrawerPixelOffset: 9,15
+    pixelPerLayoutTile: 14,4
+    tileLayoutSize: 1,3
     filled:
     - ModularPartWoodenDresserw1h1
     - ModularPartWoodenDresserw1h1

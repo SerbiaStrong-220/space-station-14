@@ -1,6 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Numerics;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.ModuleFurniture.Components;
 
@@ -28,4 +30,21 @@ public sealed partial class ModuleFurniturePartComponent : Component
             };
         }
     }
+
+    /// <summary>
+    /// Size of actually sprite. Starting offset is given
+    /// </summary>
+    [DataField(required: true)]
+    public Vector2i SpriteSize;
+
+    [DataField]
+    public string OpenStatePostfix = "opened";
+}
+
+[Serializable, NetSerializable]
+public enum ModuleFurnitureOpenVisuals : byte
+{
+    InFurniture,
+    Opened,
+    Layer
 }

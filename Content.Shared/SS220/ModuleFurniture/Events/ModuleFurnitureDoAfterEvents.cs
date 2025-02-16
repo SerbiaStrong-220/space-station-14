@@ -15,3 +15,9 @@ public sealed partial class InsertedFurniturePart : SimpleDoAfterEvent
         Offset = offset;
     }
 }
+
+[Serializable, NetSerializable]
+public sealed partial class RemoveFurniturePartEvent : SimpleDoAfterEvent { }
+
+[Serializable, NetSerializable]
+public sealed partial class DeconstructFurnitureEvent : SimpleDoAfterEvent { }

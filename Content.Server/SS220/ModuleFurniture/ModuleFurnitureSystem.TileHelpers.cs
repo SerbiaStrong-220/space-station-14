@@ -3,8 +3,10 @@
 using Content.Shared.SS220.ModuleFurniture.Components;
 using Content.Shared.SS220.ModuleFurniture.Systems;
 using Robust.Server.Containers;
+using Robust.Server.GameObjects;
 using Robust.Shared.Utility;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 
 namespace Content.Server.SS220.ModuleFurniture;
@@ -12,6 +14,7 @@ namespace Content.Server.SS220.ModuleFurniture;
 public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<ModuleFurnitureComponent>
 {
     [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
 
     public override void PrintDebugOccupation(SharedModuleFurnitureComponent furnitureComp)
     {
@@ -86,7 +89,7 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
         DebugTools.Assert(!furnitureComp.CachedLayout.ContainsKey(offset));
 
         AddToLayout(furnitureComp, part, offset);
-
+        _appearance.SetData(part.Owner, ModuleFurnitureOpenVisuals.InFurniture, true);
         DebugTools.Assert(furnitureComp.CachedLayout.Count == furnitureComp.DrawerContainer.Count);
     }
 
@@ -105,8 +108,35 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
         }
     }
 
+    private void FreeOccupation(ModuleFurnitureComponent furnitureComp, Vector2i offset, Entity<ModuleFurniturePartComponent?> part)
+    {
+        if (!Resolve(part.Owner, ref part.Comp))
+            return;
+
+        var partSize = part.Comp.ContainerSize;
+
+        for (var height = 0; height < partSize.Y; height++)
+        {
+            for (var width = 0; width < partSize.X; width++)
+            {
+                var keyVector = offset + (width, height);
+                DebugTools.Assert(furnitureComp.CachedOccupation[keyVector]);
+                furnitureComp.CachedOccupation[keyVector] = false;
+            }
+        }
+    }
+
     private void AddToLayout(ModuleFurnitureComponent furnitureComp, Entity<ModuleFurniturePartComponent> part, Vector2i offset)
     {
+        // we need to offset entity only when it in container
+        DebugTools.Assert(furnitureComp.DrawerContainer.Contains(part));
+
+        var spriteOffsetPixels = furnitureComp.StartingDrawerPixelOffset + offset * furnitureComp.PixelPerLayoutTile;
+        var intervalOffsetPixel = offset * furnitureComp.DrawerPixelInterval;
+        var offsetMeters = (spriteOffsetPixels + intervalOffsetPixel) * Vector2i.DownRight / furnitureComp.PixelPerMeter;
+        var roundedOffsetMeters = new Vector2(MathF.Round(offsetMeters.X, 3), MathF.Round(offsetMeters.Y, 3));
+
+        _transform.SetLocalPosition(part, roundedOffsetMeters);
         furnitureComp.CachedLayout.Add(offset, GetNetEntity(part));
     }
 }

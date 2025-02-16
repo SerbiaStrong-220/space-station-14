@@ -5,6 +5,7 @@
   description: wooden drawer for dresser
   components:
   - type: ModuleFurniturePart
+    spriteSize: 14,4
     size: w1h1
   # TODO: make sprites!
 
@@ -15,6 +16,7 @@
   description: wooden drawer for dresser
   components:
   - type: ModuleFurniturePart
+    spriteSize: 14,4
     size: w2h1
 
 - type: entity
@@ -24,4 +26,5 @@
   description: wooden drawer for dresser
   components:
   - type: ModuleFurniturePart
+    spriteSize: 14,4
     size: w3h1

@@ -3,9 +3,10 @@
 using Content.Shared.SS220.ModuleFurniture.Components;
 using Content.Shared.SS220.ModuleFurniture.Events;
 using Content.Shared.SS220.ModuleFurniture.Systems;
+using Content.Shared.Storage;
+using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
 
@@ -13,6 +14,8 @@ namespace Content.Server.SS220.ModuleFurniture;
 
 public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<ModuleFurnitureComponent>
 {
+    [Dependency] private readonly AppearanceSystem _appearance = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -22,7 +25,13 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
         SubscribeLocalEvent<ModuleFurnitureComponent, ComponentRemove>(OnRemove);
 
         SubscribeLocalEvent<ModuleFurnitureComponent, ComponentGetState>(GetCompState);
+
         SubscribeLocalEvent<ModuleFurnitureComponent, InsertedFurniturePart>(OnInsertedFurniturePart);
+        SubscribeLocalEvent<ModuleFurnitureComponent, RemoveFurniturePartEvent>(OnRemoveFurniturePart);
+        SubscribeLocalEvent<ModuleFurnitureComponent, DeconstructFurnitureEvent>(OnDeconstructFurniturePart);
+
+        SubscribeLocalEvent<ModuleFurniturePartComponent, BoundUIOpenedEvent>(OnPartBUIOpened);
+        SubscribeLocalEvent<ModuleFurniturePartComponent, BoundUIClosedEvent>(OnPartBUIClosed);
     }
 
     private void OnMapInit(Entity<ModuleFurnitureComponent> entity, ref MapInitEvent _)
@@ -31,7 +40,7 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
 
         foreach (var protoId in entity.Comp.FillingEntity)
         {
-            var spawnedUid = SpawnInContainerOrDrop(protoId, entity.Owner, entity.Comp.ContainerId);
+            var spawnedUid = SpawnInContainerOrDrop(protoId, entity.Owner, ModuleFurnitureComponent.ContainerId);
             if (!TryComp<ModuleFurniturePartComponent>(spawnedUid, out var partComponent))
             {
                 Log.Error($"Spawned entity which filled {ToPrettyString(entity)} but it doesnt have {nameof(ModuleFurniturePartComponent)}, protoId was {protoId}");
@@ -44,6 +53,7 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
                 continue;
             }
             AddToOccupation(entity.Comp, (spawnedUid, partComponent), offset.Value);
+            _appearance.SetData(spawnedUid, ModuleFurnitureOpenVisuals.InFurniture, true);
             AddToLayout(entity.Comp, (spawnedUid, partComponent), offset.Value);
         }
         Dirty(entity);
@@ -51,7 +61,8 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
 
     private void OnComponentInit(Entity<ModuleFurnitureComponent> entity, ref ComponentInit _)
     {
-        entity.Comp.DrawerContainer = _container.EnsureContainer<Container>(entity.Owner, entity.Comp.ContainerId);
+        entity.Comp.DrawerContainer = _container.EnsureContainer<Container>(entity.Owner, ModuleFurnitureComponent.ContainerId);
+        entity.Comp.DrawerContainer.ShowContents = true;
     }
 
     private void OnRemove(Entity<ModuleFurnitureComponent> entity, ref ComponentRemove _)
@@ -67,6 +78,9 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
 
     private void OnInsertedFurniturePart(Entity<ModuleFurnitureComponent> entity, ref InsertedFurniturePart args)
     {
+        if (args.Cancelled)
+            return;
+
         if (!args.Used.HasValue)
         {
             Log.Error($"Got event {nameof(InsertedFurniturePart)} with null used property. That is incorrect behavior!");
@@ -86,6 +100,59 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
         AddToModuleFurniture(entity, (args.Used.Value, partComponent), args.Offset);
         Dirty(entity);
     }
+
+    private void OnRemoveFurniturePart(Entity<ModuleFurnitureComponent> entity, ref RemoveFurniturePartEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        DebugTools.Assert(entity.Comp.DrawerContainer.Count == entity.Comp.CachedLayout.Values.Count);
+        if (entity.Comp.DrawerContainer.Count == 0)
+        {
+            Log.Warning("Got a remove furniture part event, but there arent any entities in container");
+            return;
+        }
+
+        var (lastKey, netEntityToRemove) = entity.Comp.CachedLayout.Last();
+        var entityToRemove = GetEntity(netEntityToRemove);
+        if (!entity.Comp.DrawerContainer.Contains(entityToRemove))
+        {
+            Log.Error($"Got a remove furniture part event, but container of {ToPrettyString(entity)} do not contain a {ToPrettyString(entityToRemove)} aka last entity in CachedOccupation");
+            return;
+        }
+
+        FreeOccupation(entity.Comp, lastKey, entityToRemove);
+        entity.Comp.CachedLayout.Remove(lastKey);
+        if (!_container.RemoveEntity(entity, entityToRemove))
+        {
+            Log.Error($"Cant remove {ToPrettyString(entityToRemove)} from container of the {ToPrettyString(entity)}");
+            return;
+        }
+
+        _appearance.SetData(entityToRemove, ModuleFurnitureOpenVisuals.InFurniture, false);
+
+        DebugTools.Assert(!entity.Comp.CachedLayout.Values.Contains(netEntityToRemove));
+        DebugTools.Assert(!entity.Comp.DrawerContainer.Contains(entityToRemove));
+        Dirty(entity);
+    }
+
+    private void OnDeconstructFurniturePart(Entity<ModuleFurnitureComponent> entity, ref DeconstructFurnitureEvent args)
+    {
+        // If needed
+    }
+
+    private void OnPartBUIOpened(Entity<ModuleFurniturePartComponent> entity, ref BoundUIOpenedEvent args)
+    {
+        if (args.UiKey is StorageComponent.StorageUiKey)
+            _appearance.SetData(entity.Owner, ModuleFurnitureOpenVisuals.Opened, true);
+    }
+
+    private void OnPartBUIClosed(Entity<ModuleFurniturePartComponent> entity, ref BoundUIClosedEvent args)
+    {
+        if (args.UiKey is StorageComponent.StorageUiKey)
+            _appearance.SetData(entity.Owner, ModuleFurnitureOpenVisuals.Opened, false);
+    }
+
 
     private void ForceRebuildLayout(ModuleFurnitureComponent furnitureComp)
     {
