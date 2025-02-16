@@ -161,7 +161,7 @@
   name: microwave
   description: It's magic.
   components:
-  - type: Microwave #SS220 remove default microwave
+  - type: Microwave
     capacity: 10
   - type: Appearance
   - type: GenericVisualizer
@@ -174,11 +174,11 @@
           True: { visible: true }
           False: { visible: false }
       enum.PowerDeviceVisuals.VisualState:
-        enum.SupaMicrowaveVisualizerLayers.Base:
+        enum.MicrowaveVisualizerLayers.Base:
           Idle: { state: "mw" }
           Broken: { state: "mwb" }
           Cooking: { state: "mw" }
-        enum.SupaMicrowaveVisualizerLayers.BaseUnlit:
+        enum.MicrowaveVisualizerLayers.BaseUnlit:
           Idle: { state: "mw_unlit" }
           Broken: { state: "mw_unlit" }
           Cooking: { state: "mw_running_unlit" }
@@ -186,7 +186,7 @@
           Idle: { visible: false }
           Broken: { visible: false }
       enum.PowerDeviceVisuals.Powered:
-        enum.SupaMicrowaveVisualizerLayers.BaseUnlit:
+        enum.MicrowaveVisualizerLayers.BaseUnlit:
           True: { visible: true }
           False: { visible: false }
   - type: ActivatableUI
@@ -221,10 +221,10 @@
     snapCardinals: true
     layers:
     - state: mw0
-      map: ["enum.SupaMicrowaveVisualizerLayers.Base"]
+      map: ["enum.MicrowaveVisualizerLayers.Base"]
     - state: mw_unlit
       shader: unshaded
-      map: ["enum.SupaMicrowaveVisualizerLayers.BaseUnlit"]
+      map: ["enum.MicrowaveVisualizerLayers.BaseUnlit"]
     - state: mwbloody0
       map: ["bloody"]
       visible: false
@@ -253,8 +253,7 @@
     board: MicrowaveMachineCircuitboard
   - type: ContainerContainer
     containers:
-      # microwave_entity_container: !type:Container
-      cooking_machine_entity_container: !type:Container #SS220 supa kitchen
+      microwave_entity_container: !type:Container
       machine_board: !type:Container
       machine_parts: !type:Container
   - type: EmptyOnMachineDeconstruct
