@@ -6701,13 +6701,6 @@ entities:
     - type: Transform
       pos: 3.5,8.5
       parent: 179
-- proto: SpawnMobCrabAtmos
-  entities:
-  - uid: 729
-    components:
-    - type: Transform
-      pos: 15.5,-10.5
-      parent: 179
 - proto: SpawnMobHuman
   entities:
   - uid: 138
@@ -7564,6 +7557,10 @@ entities:
       - ActionVendingThrow
       - ActionVendingThrow
       - ActionVendingThrow
+      - ActionVendingThrow
+      - ActionVendingThrow
+      - ActionVendingThrow
+      - ActionVendingThrow
 - proto: VendingMachineMedical
   entities:
   - uid: 156
@@ -7635,6 +7632,10 @@ entities:
       parent: 179
     - type: ActionGrant
       actions:
+      - ActionVendingThrow
+      - ActionVendingThrow
+      - ActionVendingThrow
+      - ActionVendingThrow
       - ActionVendingThrow
       - ActionVendingThrow
       - ActionVendingThrow

@@ -47,3 +47,8 @@
   id: HolyMoly
   flavorType: Base
   description: божественно
+
+- type: flavor
+  id: Bacchus
+  flavorType: Complex
+  description: flavor-complex-bacchus

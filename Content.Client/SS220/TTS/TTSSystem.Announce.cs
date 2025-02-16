@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Corvax.CCCVars;
-using Content.Shared.SS220.AnnounceTTS;
+using Content.Shared.SS220.TTS;
 using Robust.Shared.Audio;
 using Robust.Shared.Utility;
 
@@ -16,30 +16,31 @@ public sealed partial class TTSSystem : EntitySystem
     private void InitializeAnnounces()
     {
         _cfg.OnValueChanged(CCCVars.TTSAnnounceVolume, OnTtsAnnounceVolumeChanged, true);
-        SubscribeNetworkEvent<AnnounceTTSEvent>(OnAnnounceTTSPlay);
+        _ttsManager.PlayAnnounceTtsReceived += OnAnnounceTtsPlay;
     }
 
     private void ShutdownAnnounces()
     {
         _cfg.UnsubValueChanged(CCCVars.TTSAnnounceVolume, OnTtsAnnounceVolumeChanged);
+        _ttsManager.PlayAnnounceTtsReceived -= OnAnnounceTtsPlay;
     }
 
-    private void OnAnnounceTTSPlay(AnnounceTTSEvent ev)
+    private void OnAnnounceTtsPlay(MsgPlayAnnounceTts msg)
     {
         // Early creation of entities can lead to crashes, so we postpone it as much as possible
         if (AnnouncementUid == EntityUid.Invalid)
             AnnouncementUid = Spawn(null);
 
-        var volume = AdjustVolume(isRadio: false, isAnounce: true, isWhisper: false);
+        var volume = AdjustVolume(TtsKind.Announce);
 
         var audioParams = AudioParams.Default.WithVolume(volume);
 
         // Play announcement sound
-        var announcementSoundPath = new ResPath(ev.AnnouncementSound);
+        var announcementSoundPath = new ResPath(msg.AnnouncementSound);
         PlaySoundQueued(AnnouncementUid, announcementSoundPath, audioParams, true);
 
         // Play announcement itself
-        PlayTTSBytes(ev.Data, AnnouncementUid, audioParams, true);
+        PlayTtsBytes(msg.Data, AnnouncementUid, audioParams, true);
     }
 
     private void OnTtsAnnounceVolumeChanged(float volume)

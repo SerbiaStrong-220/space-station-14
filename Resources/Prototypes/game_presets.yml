@@ -10,7 +10,7 @@
     - MeteorSwarmScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -26,6 +26,7 @@
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -43,6 +44,7 @@
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -66,7 +68,7 @@
     - MeteorSwarmScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -82,6 +84,7 @@
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
 
 - type: gamePreset
@@ -93,7 +96,7 @@
   showInVote: false #4boring4vote
   description: greenshift-description
   rules:
-  # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+  #- SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls ReWork
   - BasicRoundstartVariation
 
 - type: gamePreset
@@ -118,6 +121,7 @@
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -128,7 +132,7 @@
   showInVote: false #Admin Use
   description: secret-description
   rules:
-  # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler
   - BasicRoundstartVariation
 
 # - type: gamePreset
@@ -156,6 +160,7 @@
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -184,6 +189,7 @@
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
 
 # - type: gamePreset
@@ -219,6 +225,7 @@
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
 
 - type: gamePreset
@@ -235,4 +242,5 @@
   - BasicStationEventScheduler
   - KesslerSyndromeScheduler
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation

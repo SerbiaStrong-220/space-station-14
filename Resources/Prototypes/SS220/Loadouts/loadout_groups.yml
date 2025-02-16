@@ -277,6 +277,17 @@
   - VestArmorSec
   - CyberVestSecurity
   # Пилот (Конец)
+
+  # Детектив (Начало)
+- type: loadoutGroup
+  id: DetectiveShoes
+  name: loadout-group-detective-shoes
+  loadouts:
+  - JackBoots
+  - SecurityWinterBoots
+  - BootsJackSec
+  - DetectiveShoesBootsLaceup
+  # Детектив (Конец)
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -294,6 +305,7 @@
   - TrackerExpertNeck
   - AdministratorNeck
   - HeadDeveloperNeck
+  - WikiEditorsNeck
   # Главный врач (Конец)
 
   # Ведущий врач (Начало)
@@ -456,6 +468,24 @@
   - GlassesChemical
   - CyberRnDVisor
   # Химик (Конец)
+
+  # Парамедик (начало)
+- type: loadoutGroup
+  id: ParamedicBelt
+  name: loadout-group-paramedic-belt
+  loadouts:
+  - ParamedicBaseBelt
+  - ParamedInterdyneBelt
+  # Парамедик (конец)
+
+  # Главный врач (Начало)
+- type: loadoutGroup
+  id: ChiefMedicalOfficerGlasses
+  name: loadout-group-chief-medical-officer-eyes
+  loadouts:
+  - Glasses
+  - CyberMedVisor
+  - CMOCorpGlasses
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)

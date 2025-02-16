@@ -92,6 +92,7 @@
       - id: ClothingMaskGasAtmosBlue    #SS220 Blue Atmos Mask
       - id: ClothingOuterSuitAtmosFire
       - id: ClothingHeadHelmetAtmosFire
+      - id: ClothingHandsGlovesColorYellow # SS220 Atmos-Ruber-Gloves
       - id: GasAnalyzer
       - id: MedkitOxygenFilled
       - id: HolofanProjector
@@ -111,6 +112,7 @@
       - id: ClothingMaskGasAtmosBlue    #SS220 Blue Atmos Mask
       - id: ClothingOuterSuitAtmosFire
       - id: ClothingHeadHelmetAtmosFire
+      - id: ClothingHandsGlovesColorYellow # SS220 Atmos-Ruber-Gloves
       - id: GasAnalyzer
       - id: MedkitOxygenFilled
       - id: HolofanProjector

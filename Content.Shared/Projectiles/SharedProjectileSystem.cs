@@ -67,25 +67,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             return;
         }
 
-        var xform = Transform(uid);
-        TryComp<PhysicsComponent>(uid, out var physics);
-        _physics.SetBodyType(uid, BodyType.Dynamic, body: physics, xform: xform);
-        _transform.AttachToGridOrMap(uid, xform);
-        component.EmbeddedIntoUid = null;
-        Dirty(uid, component);
-
-        // Reset whether the projectile has damaged anything if it successfully was removed
-        if (TryComp<ProjectileComponent>(uid, out var projectile))
-        {
-            projectile.Shooter = null;
-            projectile.Weapon = null;
-            projectile.DamagedEntity = false;
-        }
-
-        // Land it just coz uhhh yeah
-        var landEv = new LandEvent(args.User, true);
-        RaiseLocalEvent(uid, ref landEv);
-        _physics.WakeBody(uid, body: physics);
+        UnEmbed(uid, component, args.User);
 
         // try place it in the user's hand
         _hands.TryPickupAnyHand(args.User, uid);
@@ -135,6 +117,44 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         Dirty(uid, component);
     }
 
+    public void UnEmbed(EntityUid uid, EmbeddableProjectileComponent? component, EntityUid? user = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        var xform = Transform(uid);
+        TryComp<PhysicsComponent>(uid, out var physics);
+        _physics.SetBodyType(uid, BodyType.Dynamic, body: physics, xform: xform);
+        _transform.AttachToGridOrMap(uid, xform);
+        component.EmbeddedIntoUid = null;
+        Dirty(uid, component);
+
+        // Reset whether the projectile has damaged anything if it successfully was removed
+        if (TryComp<ProjectileComponent>(uid, out var projectile))
+        {
+            projectile.Shooter = null;
+            projectile.Weapon = null;
+            projectile.ProjectileSpent = false;
+
+            // SS220 add barricade begin
+            projectile.ShootGridUid = null;
+            projectile.ShootGridPos = null;
+            projectile.ShootWorldPos = null;
+            // SS220 add barricade end
+
+            Dirty(uid, projectile);
+        }
+
+        if (user != null)
+        {
+            // Land it just coz uhhh yeah
+            var landEv = new LandEvent(user, true);
+            RaiseLocalEvent(uid, ref landEv);
+        }
+
+        _physics.WakeBody(uid, body: physics);
+    }
+
     private void PreventCollision(EntityUid uid, ProjectileComponent component, ref PreventCollideEvent args)
     {
         if (component.IgnoreShooter && (args.OtherEntity == component.Shooter || args.OtherEntity == component.Weapon))
@@ -149,8 +169,20 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             return;
 
         component.Shooter = shooterId;
+        SetShootPositions(id, component, shooterId); // SS220 add barricade
         Dirty(id, component);
     }
+
+    // SS220 add barricade begin
+    public void SetShootPositions(EntityUid uid, ProjectileComponent component, EntityUid shooterId)
+    {
+        var xform = Transform(uid);
+        component.ShootGridUid = xform.ParentUid;
+        component.ShootGridPos = xform.LocalPosition;
+        component.ShootWorldPos = _transform.GetWorldPosition(shooterId);
+        Dirty(uid, component);
+    }
+    // SS220 add barricade end
 
     [Serializable, NetSerializable]
     private sealed partial class RemoveEmbeddedProjectileEvent : DoAfterEvent

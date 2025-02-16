@@ -35,6 +35,8 @@ using Robust.Shared.Toolshed;
 using Robust.Shared.Utility;
 using System.Linq;
 using Content.Server.Silicons.Laws;
+using Content.Shared.Buckle;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Silicons.Laws.Components;
 using Robust.Server.Player;
@@ -73,6 +75,8 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly AdminFrozenSystem _freeze = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly SiliconLawSystem _siliconLawSystem = default!;
+        [Dependency] private readonly SharedBuckleSystem _buckle = default!;
+
 
         private readonly Dictionary<ICommonSession, List<EditSolutionsEui>> _openSolutionUis = new();
 
@@ -447,7 +451,20 @@ namespace Content.Server.Administration.Systems
                     Text = Loc.GetString("delete-verb-get-data-text"),
                     Category = VerbCategory.Debug,
                     Icon = new SpriteSpecifier.Texture(new ("/Textures/Interface/VerbIcons/delete_transparent.svg.192dpi.png")),
-                    Act = () => EntityManager.DeleteEntity(args.Target),
+                    //ss220 delete buckled entity with target fix start (issue: #2409)
+                    Act = () =>
+                    {
+                        if (TryComp<StrapComponent>(args.Target, out var strap))
+                        {
+                            foreach (var entity in strap.BuckledEntities)
+                            {
+                                _buckle.Unbuckle(entity, entity);
+                            }
+                        }
+
+                        EntityManager.DeleteEntity(args.Target);
+                    },
+                    //ss220 delete buckled entity with target fix end (issue: #2409)
                     Impact = LogImpact.Medium,
                     ConfirmationPopup = true
                 };

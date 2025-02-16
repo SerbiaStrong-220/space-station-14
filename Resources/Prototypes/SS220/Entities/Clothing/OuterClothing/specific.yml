@@ -8,9 +8,9 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/apronbard.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/muscian_apron_bard.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/apronbard.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/muscian_apron_bard.rsi
 
 #Svarshik's toys
 #BASE for differenet outwear

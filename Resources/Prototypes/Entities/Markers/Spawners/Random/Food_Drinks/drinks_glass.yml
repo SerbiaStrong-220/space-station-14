@@ -59,7 +59,7 @@
       - DrinkIcedBeerGlass
       - DrinkIceCreamGlass
       - IrishBoolGlass
-      - DrinkIrishCarBomb
+      - DrinkIrishSlammer
       - DrinkIrishCoffeeGlass
       - DrinkLemonadeGlass
       - DrinkKiraSpecial
@@ -126,4 +126,5 @@
       - DrinkShakeRobo
       - DrinkHoochGlass
       - DrinkBeepskySmashGlass
+      - DrinkBacchusGlass #SS220 Bacchus' Blessing
     rareChance: 0.05

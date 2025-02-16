@@ -1,6 +1,7 @@
 ﻿- type: tile
   id: Plating
   name: tiles-plating
+  tags: [ tile-tag-musthave ]  # SS220 Tiles Resprite
   sprite: /Textures/Tiles/plating.png
   baseTurf: Lattice
   deconstructTools: [ PlatingCutting ] #SS220 JOL TilePryingng && tools-tile-prying-fix
@@ -30,6 +31,7 @@
 - type: tile
   id: PlatingAsteroid
   name: tiles-asteroid-plating
+  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Asteroid/asteroid_plating.png
   baseTurf: Lattice
   deconstructTools: [ PlatingCutting ] #SS220 JOL TilePryingng && tools-tile-prying-fix
@@ -53,6 +55,7 @@
 - type: tile
   id: PlatingSnow
   name: tiles-snow-plating
+  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/snow_plating.png #Not in the snow planet RSI because it doesn't have any metadata. Should probably be moved to its own folder later.
   baseTurf: Lattice
   deconstructTools: [ PlatingCutting ] #SS220 JOL TilePryingng && tools-tile-prying-fix
@@ -65,6 +68,7 @@
 - type: tile
   id: Lattice
   name: tiles-lattice
+  tags: [ tile-tag-musthave ]  # SS220 Tiles Resprite
   sprite: /Textures/Tiles/lattice.png
   baseTurf: Space
   isSubfloor: true
@@ -80,6 +84,7 @@
 - type: tile
   id: TrainLattice
   name: tiles-lattice-train
+  tags: [ tile-tag-musthave ]  # SS220 Tiles Resprite
   sprite: /Textures/Tiles/latticeTrain.png
   baseTurf: Space
   isSubfloor: true

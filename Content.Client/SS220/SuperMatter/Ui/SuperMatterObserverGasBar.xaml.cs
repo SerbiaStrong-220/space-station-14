@@ -49,10 +49,7 @@ public sealed partial class SuperMatterObserverGasBar : Control
     public void UpdateBar(float ratio)
     {
         FillingBar.SetAsRatio(ratio);
-
-        var builder = new StringBuilder();
-        builder.AppendJoin(" ", [LocalizedGasName, (ratio * 100f).ToString("N2"), "%"]);
-        BarLabel.Text = builder.ToString();
+        BarLabel.Text = $"{LocalizedGasName} {ratio * 100:N2} %";
     }
 
     private string GetTooltip()
