@@ -49,6 +49,16 @@
       toggleable-clothing: !type:ContainerSlot {}
       storagebase: !type:Container
         ents: []
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+      #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
 
 - type: entity
   parent: ClothingOuterWinterCoatToggleable
