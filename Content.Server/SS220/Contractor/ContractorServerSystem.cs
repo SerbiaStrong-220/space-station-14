@@ -42,6 +42,8 @@ public sealed class ContractorServerSystem : SharedContractorSystem
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly IServerPreferencesManager _pref = default!;
 
+    private const float BlockTimeBetweenPortal = 15f; // in seconds
+
     public override void Initialize()
     {
         base.Initialize();
@@ -125,7 +127,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             targetComponent.PortalOnTajpanEntity = warpPoints[randomIndex];
         }
 
-        ent.Comp.BlockUntil = 15f;
+        ent.Comp.BlockUntil = BlockTimeBetweenPortal;
 
         args.Handled = true;
         Dirty(ent);

@@ -17,6 +17,8 @@ public sealed class ContractorPortalServerSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
+    private const float TimeBlockBetweenContract = 20f; // in seconds
+
     public override void Initialize()
     {
         SubscribeLocalEvent<ContractorPortalOnTriggerComponent, StartCollideEvent>(OnEnterPortal);
@@ -82,7 +84,7 @@ public sealed class ContractorPortalServerSystem : EntitySystem
 
         _uiSystem.ServerSendUiMessage(contractorComponent.PdaEntity!.Value, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
 
-        contractorComponent.BlockUntil = 20f;
+        contractorComponent.BlockUntil = TimeBlockBetweenContract;
 
         _contractorServer.GenerateContracts((contractorEntity, contractorComponent)); // generate new contracts
 
