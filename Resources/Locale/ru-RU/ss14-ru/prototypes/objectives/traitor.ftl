@@ -1,4 +1,4 @@
-ent-BaseTraitorObjective = { ent-BaseObjective }
+﻿ent-BaseTraitorObjective = { ent-BaseObjective }
     .desc = { ent-BaseObjective.desc }
 ent-BaseTraitorSocialObjective = { ent-BaseSocialObjective }
     .desc = { ent-BaseSocialObjective.desc }
