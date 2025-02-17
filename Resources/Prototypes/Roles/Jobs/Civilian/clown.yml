@@ -18,6 +18,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RenameStart #SS220-RenameStart
     - type: Clumsy
       gunShootFailDamage:
         types: #literally just picked semi random valus. i tested this once and tweaked it.

@@ -1,5 +1,6 @@
 ent-ClothingShoesBootsMagDQ = магнитные ботинки Эскадрона Смерти
     .suffix = Эскадрон Смерти, dq
     .desc = Самые современные магнитные ботинки в незабываемых цветах.
-
-clothing-outer-radio-handheld = Рация
+ent-ClothingShoesCMOCorporate = корпоративные туфли главного врача
+    .desc = Прошли кровь и пот, буквально. Тем не менее выглядят как новые.
+    .suffix = За время в игре

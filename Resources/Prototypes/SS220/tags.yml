@@ -135,10 +135,68 @@
 - type: Tag
   id: SpiderLittle
 
- #Add Tourniquet to medic's belt 
+ #Add Tourniquet to medic's belt
 - type: Tag
   id: Tourniquet
 
 # SS220 Add lying action
 - type: Tag
   id: Bed
+
+# Svarshik's toy guns
+- type: Tag
+  id: ToyGrenade
+
+- type: Tag
+  id: MagazineLightRifleBoxToy
+
+- type: Tag
+  id: MagazinePistolToy
+
+- type: Tag
+  id: MagazinePistolHighCapacityToy
+
+- type: Tag
+  id: MagazinePistolSubMachineGunToy
+
+- type: Tag
+  id: MagazineShotgunToy
+
+- type: Tag
+  id: CartridgeMagnumFoam
+
+- type: Tag
+  id: ShellShotgunToy
+
+- type: Tag
+  id: CartridgeAntiMaterielToy
+
+- type: Tag
+  id: MagazinePistolCaselessRifleToy
+
+# engineering-update-thruster
+- type: Tag
+  id: ThrusterShuntingMachineCircuitboard
+
+#HOCebent
+- type: Tag
+  id: CartridgeUnitary
+
+#Craftable desword
+- type: Tag
+  id: EnergySword
+
+- type: Tag
+  id: ToyEnergySword
+
+# SS220 Cult
+- type: Tag
+  id: Omnivorous
+
+# debug-uplink-fix
+- type: Tag
+  id: DebugUplink
+
+# SS220 ClownMimeCyborg
+- type: Tag
+  id: ClothingMaskMime

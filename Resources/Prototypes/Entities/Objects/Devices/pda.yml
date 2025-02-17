@@ -6,10 +6,15 @@
   description: Personal Data Assistant.
   components:
   - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda
   - type: Sprite
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-blue" #SS220 PDA-Resprite
       shader: "unshaded" #SS220 PDA-Resprite
     - state: "light_overlay"
@@ -24,7 +29,6 @@
     sprite: Objects/Devices/pda.rsi
     state: pda
   - type: Pda
-    state: pda
     paiSlot:
       priority: -2
       whitelist:
@@ -43,6 +47,7 @@
       whitelist:
         components:
         - IdCard
+  - type: PdaVisuals
   - type: Item
     size: Small
   - type: ContainerContainer
@@ -106,6 +111,8 @@
   - type: Tag
     tags:
     - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
   - type: Input
     context: "human"
   - type: SentienceTarget # sentient PDA = pAI lite
@@ -153,7 +160,6 @@
   components:
   - type: Pda
     id: PassengerIDCard
-    state: pda
   - type: PdaBorderColor
     borderColor: "#a4a3a6" #SS220 PDA-Resprite
 
@@ -165,7 +171,11 @@
   components:
   - type: Pda
     id: TechnicalAssistantIDCard
-    state: pda-interntech
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-interntech
   - type: PdaBorderColor
     borderColor: "#a4a3a6" #SS220 PDA-Resprite
     accentVColor: "#deb63d" #SS220 PDA-Resprite
@@ -173,6 +183,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-engineer"
       shader: "unshaded"
     - state: "light_overlay"
@@ -185,34 +196,6 @@
   - type: Icon
     state: pda-interntech
 
-- type: entity #SS220 PDA-start
-  parent: BasePDA
-  id: BlueShieldPDA
-  name: blue shield PDA
-  description: average style.
-  components:
-  - type: Pda
-    id: BlueShieldIDCard
-    state: pda-bs
-  - type: PdaBorderColor
-    borderColor: "#4b474f" #SS220 PDA-Resprite
-    accentHColor: "#175e99" #SS220 PDA-Resprite
-  - type: Sprite #SS220 PDA-Resprite-Start
-    sprite: Objects/Devices/pda.rsi
-    layers:
-    - map: [ "enum.PdaVisualLayers.Base" ]
-    - state: "screen-shield"
-      shader: "unshaded"
-    - state: "light_overlay"
-      map: [ "enum.PdaVisualLayers.Flashlight" ]
-      shader: "unshaded"
-      visible: false
-    - state: "id_overlay"
-      map: [ "enum.PdaVisualLayers.IdLight" ]
-      visible: false #SS220 PDA-Resprite-End
-  - type: Icon
-    state: pda-bs #SS220 PDA-end
-
 - type: entity
   parent: BaseMedicalPDA
   id: MedicalInternPDA
@@ -221,7 +204,11 @@
   components:
   - type: Pda
     id: MedicalInternIDCard
-    state: pda-internmed
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-internmed
   - type: PdaBorderColor
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentVColor: "#4977a6" #SS220 PDA-Resprite
@@ -230,6 +217,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-medic"
       shader: "unshaded"
     - state: "light_overlay"
@@ -253,14 +241,19 @@
   components:
   - type: Pda
     id: SecurityCadetIDCard
-    state: pda-interncadet
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-interncadet
   - type: PdaBorderColor
-    borderColor: "#a4a3a6" #SS220 PDA-Resprite
-    accentVColor: "#4977a6" #SS220 PDA-Resprite
+    borderColor: "#717059" #SS220 PDA-Resprite
+    accentVColor: "#A32D26" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-security"
       shader: "unshaded"
     - state: "light_overlay"
@@ -281,7 +274,11 @@
   components:
   - type: Pda
     id: ResearchAssistantIDCard
-    state: pda-internsci
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-internsci
   - type: PdaBorderColor
     borderColor: "#a4a3a6" #SS220 PDA-Resprite
     accentVColor: "#542a6c" #SS220 PDA-Resprite
@@ -289,6 +286,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-blue"
       shader: "unshaded"
     - state: "light_overlay"
@@ -309,7 +307,11 @@
   components:
   - type: Pda
     id: ServiceWorkerIDCard
-    state: pda-internservice
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-internservice
   - type: PdaBorderColor
     borderColor: "#a4a3a6" #SS220 PDA-Resprite
     accentVColor: "#44b369" #SS220 PDA-Resprite
@@ -317,6 +319,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-cook"
       shader: "unshaded"
     - state: "light_overlay"
@@ -337,13 +340,18 @@
   components:
   - type: Pda
     id: ChefIDCard
-    state: pda-cook
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-cook
   - type: PdaBorderColor
     borderColor: "#8f1d2c" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-cook"
       shader: "unshaded"
     - state: "light_overlay"
@@ -366,7 +374,11 @@
   components:
   - type: Pda
     id: BotanistIDCard
-    state: pda-hydro
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-hydro
   - type: PdaBorderColor
     borderColor: "#44b369" #SS220 PDA-Resprite
     accentVColor: "#1e4a9c" #SS220 PDA-Resprite
@@ -374,6 +386,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-hydro"
       shader: "unshaded"
     - state: "light_overlay"
@@ -394,7 +407,6 @@
   components:
   - type: Pda
     id: ClownIDCard
-    state: pda-clown
     penSlot:
       startingItem: CrayonOrange # no pink crayon?!?
       # ^ Still unacceptable.
@@ -404,12 +416,18 @@
       whitelist:
         tags:
         - Write
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-clown
   - type: PdaBorderColor
     borderColor: "#e5ace5" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-clown"
       shader: "unshaded"
     - state: "light_overlay"
@@ -451,7 +469,9 @@
   components:
   - type: Pda
     id: VisitorIDCard
-    state: pda-clown
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener
 
 - type: entity
   parent: BasePDA
@@ -461,12 +481,40 @@
   components:
   - type: Pda
     id: MimeIDCard
-    state: pda-mime
-    idSlot: #  rewrite without sound because mime
-      name: ID Card
+    paiSlot:
+      priority: -2
+      ejectSound: null
+      insertSound: null
+      whitelist:
+        components:
+        - PAI
+    idSlot:
+      name: access-id-card-component-default
+      ejectSound: null # mime is silent
+      insertSound: null
       whitelist:
         components:
         - IdCard
+    penSlot:
+      startingItem: Pen
+      priority: -1
+      whitelist:
+        tags:
+        - Write
+      ejectSound: null
+      insertSound: null
+  - type: CartridgeLoader
+    cartridgeSlot:
+      ejectSound: null
+      insertSound: null
+      whitelist:
+        components:
+        - Cartridge
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-mime
   - type: PdaBorderColor
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentHColor: "#414452" #SS220 PDA-Resprite
@@ -474,6 +522,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-white"
       shader: "unshaded"
     - state: "light_overlay"
@@ -495,13 +544,18 @@
   components:
   - type: Pda
     id: ChaplainIDCard
-    state: pda-chaplain
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-chaplain
   - type: PdaBorderColor
     borderColor: "#4b474f" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-chaplain"
       shader: "unshaded"
     - state: "light_overlay"
@@ -521,7 +575,9 @@
   components:
   - type: Pda
     id: VisitorIDCard
-    state: pda-chaplain
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener
 
 - type: entity
   name: quartermaster PDA
@@ -531,7 +587,11 @@
   components:
   - type: Pda
     id: QuartermasterIDCard
-    state: pda-qm
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-qm
   - type: PdaBorderColor
     borderColor: "#4b474f" #SS220 PDA-Resprite
     accentHColor: "#a77937" #SS220 PDA-Resprite
@@ -539,6 +599,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-cargo"
       shader: "unshaded"
     - state: "light_overlay"
@@ -559,13 +620,18 @@
   components:
   - type: Pda
     id: CargoIDCard
-    state: pda-cargo
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-cargo
   - type: PdaBorderColor
     borderColor: "#a77937" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-cargo"
       shader: "unshaded"
     - state: "light_overlay"
@@ -586,7 +652,11 @@
   components:
   - type: Pda
     id: SalvageIDCard
-    state: pda-miner
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-miner
   - type: PdaBorderColor
     borderColor: "#414452" #SS220 PDA-Resprite
     accentHColor: "#6737ab" #SS220 PDA-Resprite
@@ -594,6 +664,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-miner"
       shader: "unshaded"
     - state: "light_overlay"
@@ -622,13 +693,18 @@
   components:
   - type: Pda
     id: BartenderIDCard
-    state: pda-bartender
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-bartender
   - type: PdaBorderColor
     borderColor: "#4b474f" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-white"
       shader: "unshaded"
     - state: "light_overlay"
@@ -649,13 +725,17 @@
   components:
   - type: Pda
     id: LibrarianIDCard
-    state: pda-library
     penSlot:
       startingItem: LuxuryPen
       priority: -1
       whitelist:
         tags:
         - Write
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-library
   - type: PdaBorderColor
     borderColor: "#6c2525" #SS220 PDA-Resprite
     accentHColor: "#b7531e" #SS220 PDA-Resprite
@@ -663,6 +743,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-library"
       shader: "unshaded"
     - state: "light_overlay"
@@ -682,7 +763,9 @@
   components:
   - type: Pda
     id: VisitorIDCard
-    state: pda-library
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener
 
 - type: entity
   parent: BaseSecurityPDA
@@ -692,13 +775,17 @@
   components:
   - type: Pda
     id: LawyerIDCard
-    state: pda-lawyer
     penSlot:
       startingItem: LuxuryPen
       priority: -1
       whitelist:
         tags:
         - Write
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-lawyer
   - type: PdaBorderColor
     borderColor: "#414452" #SS220 PDA-Resprite
     accentVColor: "#262c8a" #SS220-Law Department
@@ -706,6 +793,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-law" #SS220-Law Department
       shader: "unshaded"
     - state: "light_overlay"
@@ -725,7 +813,9 @@
   components:
   - type: Pda
     id: VisitorIDCard
-    state: pda-lawyer
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener
 
 - type: entity
   parent: BasePDA
@@ -735,7 +825,11 @@
   components:
   - type: Pda
     id: JanitorIDCard
-    state: pda-janitor
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-janitor
   - type: PdaBorderColor
     borderColor: "#9738ae" #SS220 PDA-Resprite
     accentVColor: "#8e9093" #SS220 PDA-Resprite
@@ -743,6 +837,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-janitor"
       shader: "unshaded"
     - state: "light_overlay"
@@ -763,19 +858,24 @@
   components:
   - type: Pda
     id: CaptainIDCard
-    state: pda-captain
     penSlot:
       startingItem: PenCap
       priority: -1
       whitelist:
         tags:
         - Write
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-captain
   - type: PdaBorderColor
     borderColor: "#dfac5c" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-nt"
       shader: "unshaded"
     - state: "light_overlay"
@@ -796,13 +896,17 @@
   components:
   - type: Pda
     id: HoPIDCard
-    state: pda-hop
     penSlot:
       startingItem: PenHop
       priority: -1
       whitelist:
         tags:
         - Write
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-hop
   - type: PdaBorderColor
     borderColor: "#374f7e" #SS220 PDA-Resprite
 #    accentHColor: "#447987" #SS220 PDA-Resprite
@@ -810,6 +914,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-nt"
       shader: "unshaded"
     - state: "light_overlay"
@@ -830,7 +935,11 @@
   components:
   - type: Pda
     id: CEIDCard
-    state: pda-ce
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-ce
   - type: PdaBorderColor
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentHColor: "#2a8c32" #SS220 PDA-Resprite
@@ -838,6 +947,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-ce"
       shader: "unshaded"
     - state: "light_overlay"
@@ -858,7 +968,11 @@
   components:
   - type: Pda
     id: EngineeringIDCard
-    state: pda-engineer
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-engineer
   - type: PdaBorderColor
     borderColor: "#d15b1b" #SS220 PDA-Resprite
 #    accentVColor: "#A32D26" #SS220 PDA-Resprite
@@ -866,6 +980,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-engineer"
       shader: "unshaded"
     - state: "light_overlay"
@@ -886,7 +1001,11 @@
   components:
   - type: Pda
     id: CMOIDCard
-    state: pda-cmo
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-cmo
   - type: PdaBorderColor
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentHColor: "#4977a6" #SS220 PDA-Resprite
@@ -894,6 +1013,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-medic"
       shader: "unshaded"
     - state: "light_overlay"
@@ -914,7 +1034,11 @@
   components:
   - type: Pda
     id: MedicalIDCard
-    state: pda-medical
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-medical
   - type: PdaBorderColor
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentHColor: "#4977a6" #SS220 PDA-Resprite
@@ -923,6 +1047,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-medic"
       shader: "unshaded"
     - state: "light_overlay"
@@ -945,7 +1070,9 @@
   components:
   - type: Pda
     id: VisitorIDCard
-    state: pda-medical
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener
 
 - type: entity
   parent: BaseMedicalPDA
@@ -955,7 +1082,11 @@
   components:
   - type: Pda
     id: ParamedicIDCard
-    state: pda-paramedic
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-paramedic
   - type: PdaBorderColor
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentHColor: "#2a4557" #SS220 PDA-Resprite
@@ -964,6 +1095,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-medic"
       shader: "unshaded"
     - state: "light_overlay"
@@ -984,7 +1116,11 @@
   components:
   - type: Pda
     id: ChemistIDCard
-    state: pda-chemistry
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-chemistry
   - type: PdaBorderColor
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentVColor: "#bf5319" #SS220 PDA-Resprite
@@ -992,6 +1128,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-medic"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1012,7 +1149,11 @@
   components:
   - type: Pda
     id: RDIDCard
-    state: pda-rd
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-rd
   - type: PdaBorderColor
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentHColor: "#542a6c" #SS220 PDA-Resprite
@@ -1021,6 +1162,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-pai"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1041,7 +1183,11 @@
   components:
   - type: Pda
     id: ResearchIDCard
-    state: pda-science
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-science
   - type: PdaBorderColor
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentVColor: "#542a6c" #SS220 PDA-Resprite
@@ -1049,6 +1195,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-pai"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1069,7 +1216,11 @@
   components:
   - type: Pda
     id: HoSIDCard
-    state: pda-hos
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-hos
   - type: PdaBorderColor
     borderColor: "#4b474f" #SS220 PDA-Resprite
     accentHColor: "#731611" #SS220 PDA-Resprite
@@ -1077,6 +1228,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-security"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1104,7 +1256,11 @@
   components:
   - type: Pda
     id: WardenIDCard
-    state: pda-warden
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-warden
   - type: PdaBorderColor
     borderColor: "#731611" #SS220 PDA-Resprite
     accentHColor: "#cbcdd1" #SS220 PDA-Resprite
@@ -1112,6 +1268,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-security"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1132,13 +1289,18 @@
   components:
   - type: Pda
     id: SecurityIDCard
-    state: pda-security
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-security
   - type: PdaBorderColor
     borderColor: "#731611" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-security"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1150,33 +1312,6 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-security
-
-- type: entity #SS220-PDA-Start
-  parent: BasePDA
-  id: SecurityPilotPDA
-  name: КПК пилота СБ
-  description: Красный, чтобы скрыть пятна крови ассистента.
-  components:
-  - type: Pda
-    id: SecurityPilotIDCard
-    state: pda-security
-  - type: PdaBorderColor
-    borderColor: "#731611" #SS220 PDA-Resprite
-  - type: Sprite #SS220 PDA-Resprite-Start
-    sprite: Objects/Devices/pda.rsi
-    layers:
-    - map: [ "enum.PdaVisualLayers.Base" ]
-    - state: "screen-security"
-      shader: "unshaded"
-    - state: "light_overlay"
-      map: [ "enum.PdaVisualLayers.Flashlight" ]
-      shader: "unshaded"
-      visible: false
-    - state: "id_overlay"
-      map: [ "enum.PdaVisualLayers.IdLight" ]
-      visible: false #SS220 PDA-Resprite-End
-  - type: Icon
-    state: pda-security #SS220-PDA-End
 
 - type: entity
   parent: BaseSecurityPDA
@@ -1187,18 +1322,23 @@
   components:
   - type: Pda
     id: CentcomIDCard
-    state: pda-centcom
     penSlot:
       startingItem: CentCommNewPen #SS220-CentcomFashion
       whitelist:
         tags:
         - Write
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-centcom
   - type: PdaBorderColor
     borderColor: "#29722e" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-nt"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1230,12 +1370,18 @@
   components:
   - type: Pda
     id: DebugIDCard # SS220 admin memes
-    state: pda-clear #SS220 PDA-Resprite-Start
+  #SS220 PDA-Resprite-Start
     penSlot:
       startingItem: CentCommNewPen #SS220-CentcomFashion
       whitelist:
         tags:
-        - Write #SS220 PDA-Resprite-End
+        - Write 
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-clear
+  #SS220 PDA-Resprite-End
   - type: HealthAnalyzer
     scanDelay: 0
     silent: true
@@ -1243,6 +1389,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-green"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1266,29 +1413,9 @@
       - MessengerCartridgeClient # SS220 Messenger
       - MedTekCartridge
       - AstroNavCartridge
-
-- type: entity
-  parent: CentcomPDA
-  id: CentcomPDAFake
-  categories: [ HideSpawnMenu ] #SS220 New CentCom
-  suffix: Fake
-  components:
-  - type: Pda
-    id: CentcomIDCardSyndie
-    state: pda-centcom
-  - type: Sprite #SS220 PDA-Resprite-Start
-    sprite: Objects/Devices/pda.rsi
-    layers:
-    - map: [ "enum.PdaVisualLayers.Base" ]
-    - state: "screen-blue"
-      shader: "unshaded"
-    - state: "light_overlay"
-      map: [ "enum.PdaVisualLayers.Flashlight" ]
-      shader: "unshaded"
-      visible: false
-    - state: "id_overlay"
-      map: [ "enum.PdaVisualLayers.IdLight" ]
-      visible: false #SS220 PDA-Resprite-End
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener
 
 - type: entity
   parent: BasePDA #SS220 PDA-Resprite
@@ -1297,15 +1424,21 @@
   components:
   - type: Pda
     id: CentcomIDCardDeathsquadOperative #SS220-DeathSquad Update
-    state: pda-deathsquad #SS220 PDA-Resprite
-  - type: PdaBorderColor #SS220 PDA-Resprite
-    borderColor: "#212129" #SS220 PDA-Resprite
-    accentHColor: "#4b0513" #SS220 PDA-Resprite
-    accentVColor: "#50abd9" #SS220 PDA-Resprite
-  - type: Sprite #SS220 PDA-Resprite-Start
+  #SS220 PDA-Resprite-Begin
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-deathsquad
+  - type: PdaBorderColor
+    borderColor: "#212129"
+    accentHColor: "#4b0513"
+    accentVColor: "#50abd9"
+  - type: Sprite
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-security"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1316,7 +1449,11 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false
   - type: Icon
-    state: pda-deathsquad #SS220 PDA-Resprite-End
+    state: pda-deathsquad
+  #SS220 PDA-Resprite-End
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener
 
 - type: entity
   parent: BasePDA
@@ -1326,7 +1463,11 @@
   components:
   - type: Pda
     id: MusicianIDCard
-    state: pda-musician
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-musician
   - type: PdaBorderColor
     borderColor: "#645194" #SS220 PDA-Resprite
   - type: Icon
@@ -1344,7 +1485,9 @@
   components:
   - type: Pda
     id: VisitorIDCard
-    state: pda-musician
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener
 
 - type: entity
   parent: BasePDA
@@ -1354,7 +1497,11 @@
   components:
   - type: Pda
     id: AtmosIDCard
-    state: pda-atmos
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-atmos
   - type: PdaBorderColor
     borderColor: "#1a89ad" #SS220 PDA-Resprite
 #    accentVColor: "#447987" #SS220 PDA-Resprite
@@ -1362,6 +1509,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-atmos"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1382,13 +1530,18 @@
   components:
   - type: Pda
     id: PassengerIDCard
-    state: pda-clear
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-clear
   - type: PdaBorderColor
     borderColor: "#1d6637" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "light_overlay"
       map: [ "enum.PdaVisualLayers.Flashlight" ]
       shader: "unshaded"
@@ -1405,7 +1558,9 @@
   components:
   - type: Pda
     id: VisitorIDCard
-    state: pda
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener
 
 - type: entity
   parent: BasePDA
@@ -1415,7 +1570,11 @@
   components:
   - type: Pda
     id: SyndicateIDCard
-    state: pda-syndi
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-syndi
   - type: PdaBorderColor
     borderColor: "#4b474f" #SS220 PDA-Resprite
     accentHColor: "#730600" #SS220 PDA-Resprite
@@ -1423,6 +1582,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-syndie"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1449,7 +1609,11 @@
   components:
   - type: Pda
     id: ERTLeaderIDCard
-    state: pda-ert
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-ert
   - type: PdaBorderColor
     borderColor: "#1d6bab" #SS220 PDA-Resprite
     accentHColor: "#dfac5c" #SS220 PDA-Resprite
@@ -1458,6 +1622,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-nt"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1493,6 +1658,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-chaplain"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1516,6 +1682,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-engineer"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1539,6 +1706,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-janitor"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1562,6 +1730,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-medic"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1594,6 +1763,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-security"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1612,7 +1782,13 @@
   components:
   - type: Pda
     id: CBURNIDcard
-    state: pda-cburn #SS220 PDA-Resprite
+  #SS220 PDA-Resprite-Begin
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-cburn
+  #SS220 PDA-Resprite-End
   - type: PdaBorderColor
     borderColor: "#7a998d" #SS220 PDA-Resprite
 #    accentHColor: "#447987" #SS220 PDA-Resprite
@@ -1621,6 +1797,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-nt"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1641,7 +1818,11 @@
   components:
   - type: Pda
     id: PsychologistIDCard
-    state: pda-medical
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-medical
   - type: PdaBorderColor
     borderColor: "#d7d7d0"
     accentVColor: "#447987"
@@ -1649,6 +1830,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-medic"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1669,13 +1851,17 @@
   components:
   - type: Pda
     id: ReporterIDCard
-    state: pda-reporter
     penSlot:
       startingItem: LuxuryPen
       priority: -1
       whitelist:
         tags:
         - Write
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-reporter
   - type: PdaBorderColor
     borderColor: "#254a6c" #SS220 PDA-Resprite
   - type: Icon
@@ -1689,7 +1875,11 @@
   components:
   - type: Pda
     id: ZookeeperIDCard
-    state: pda-zookeeper
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-zookeeper
   - type: PdaBorderColor
     borderColor: "#998a50" #SS220 PDA-Resprite
   - type: Icon
@@ -1703,7 +1893,11 @@
   components:
   - type: Pda
     id: BoxerIDCard
-    state: pda-boxer
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-boxer
   - type: PdaBorderColor
     borderColor: "#4b474f" #SS220 PDA-Resprite
     accentHColor: "#4f0c0c" #SS220 PDA-Resprite
@@ -1718,7 +1912,11 @@
   components:
   - type: Pda
     id: DetectiveIDCard
-    state: pda-detective
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-detective
   - type: PdaBorderColor
     borderColor: "#5e321c" #SS220 PDA-Resprite
     accentHColor: "#a77937" #SS220 PDA-Resprite
@@ -1726,6 +1924,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-security"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1753,7 +1952,11 @@
   components:
   - type: Pda
     id: BrigmedicIDCard
-    state: pda-brigmedic
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-brigmedic
   - type: PdaBorderColor
     borderColor: "#731611" #SS220 PDA-Resprite
     accentHColor: "#cbcdd1" #SS220 PDA-Resprite
@@ -1762,6 +1965,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-medic"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1790,13 +1994,18 @@
   components:
   - type: Pda
     id: CluwneIDCard
-    state: pda-cluwne
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-cluwne
   - type: PdaBorderColor
     borderColor: "#8dcccc" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-cluwne"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1825,7 +2034,11 @@
   components:
   - type: Pda
     id: SeniorEngineerIDCard
-    state: pda-seniorengineer
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-seniorengineer
   - type: PdaBorderColor
     borderColor: "#deb63d" #SS220 PDA-Resprite
     accentHColor: "#d15b1b" #SS220 PDA-Resprite
@@ -1833,6 +2046,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-engineer"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1853,7 +2067,11 @@
   components:
   - type: Pda
     id: SeniorResearcherIDCard
-    state: pda-seniorresearcher
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-seniorresearcher
   - type: PdaBorderColor
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentHColor: "#542a6c" #SS220 PDA-Resprite
@@ -1862,6 +2080,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-pai"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1882,7 +2101,11 @@
   components:
   - type: Pda
     id: SeniorPhysicianIDCard
-    state: pda-seniorphysician
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-seniorphysician
   - type: PdaBorderColor
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentHColor: "#4977a6" #SS220 PDA-Resprite
@@ -1891,6 +2114,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-medic"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1911,7 +2135,11 @@
   components:
   - type: Pda
     id: SeniorOfficerIDCard
-    state: pda-seniorofficer
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-seniorofficer
   - type: PdaBorderColor
     borderColor: "#731611" #SS220 PDA-Resprite
     accentHColor: "#cbcdd1" #SS220 PDA-Resprite
@@ -1919,6 +2147,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-security"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1939,13 +2168,14 @@
   components:
   - type: Pda
     id: PirateIDCard
-    state: pda-pirate
-  - type: PdaBorderColor #SS220 PDA-Resprite
-    borderColor: "#4b474f" #SS220 PDA-Resprite
-  - type: Sprite #SS220 PDA-Resprite-Start
+  #SS220 PDA-Resprite-Start
+  - type: PdaBorderColor
+    borderColor: "#4b474f"
+  - type: Sprite
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-pirate"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1954,7 +2184,13 @@
       visible: false
     - state: "id_overlay"
       map: [ "enum.PdaVisualLayers.IdLight" ]
-      visible: false #SS220 PDA-Resprite-End
+      visible: false
+  #SS220 PDA-Resprite-End
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-pirate
   - type: Icon
     state: pda-pirate
 
@@ -1966,7 +2202,11 @@
   components:
   - type: Pda
     id: SyndicateIDCard
-    state: pda-syndi-agent
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-syndi-agent
   - type: PdaBorderColor
     borderColor: "#4b474f" #SS220 PDA-Resprite
     accentHColor: "#730600" #SS220 PDA-Resprite
@@ -1975,6 +2215,7 @@
     sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-syndie"
       shader: "unshaded"
     - state: "light_overlay"
@@ -1992,3 +2233,34 @@
       - NotekeeperCartridge
       - MedTekCartridge
       - MessengerCartridgeClient # SS220 Messenger
+
+- type: entity
+  parent: BasePDA
+  id: ChameleonPDA
+  name: passenger PDA
+  description: Why isn't it gray?
+  suffix: Chameleon
+  components:
+  - type: PdaBorderColor
+    borderColor: "#717059"
+  - type: Tag
+    tags: # ignore "WhitelistChameleon" tag
+    - DoorBumpOpener
+  - type: ChameleonClothing
+    slot: [idcard]
+    default: PassengerPDA
+    requireTag: WhitelistChameleonPDA
+  - type: UserInterface
+    interfaces:
+      enum.PdaUiKey.Key:
+        type: PdaBoundUserInterface
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+      enum.RingerUiKey.Key:
+        type: RingerBoundUserInterface
+      enum.InstrumentUiKey.Key:
+        type: InstrumentBoundUserInterface
+      enum.HealthAnalyzerUiKey.Key:
+        type: HealthAnalyzerBoundUserInterface
+      enum.ChameleonUiKey.Key:
+        type: ChameleonBoundUserInterface

@@ -28,6 +28,7 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SpiderQueenComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<SpiderQueenComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SpiderQueenComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderCocooningActionEvent>(OnCocooningAction);
     }
@@ -35,6 +36,15 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
     private void OnStartup(Entity<SpiderQueenComponent> entity, ref ComponentStartup args)
     {
         UpdateAlert(entity);
+    }
+
+    private void OnShutdown(Entity<SpiderQueenComponent> entity, ref ComponentShutdown args)
+    {
+        foreach (var cocoon in entity.Comp.CocoonsList)
+        {
+            if (TryComp<SpiderCocoonComponent>(cocoon, out var cocoonComp))
+                cocoonComp.CocoonOwner = null;
+        }
     }
 
     private void OnExamine(Entity<SpiderQueenComponent> entity, ref ExaminedEvent args)

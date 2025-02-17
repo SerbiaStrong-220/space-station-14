@@ -1,0 +1,26 @@
+# Ammo for emagged autolathe
+- type: latheRecipePack
+  id: SS220EmagSecurityAmmoStatic
+  recipes:
+  - SpeedLoaderLightRifle
+  - MagazineBoxCaselessRifle
+  - MagazinePistolCaselessRifle
+  - MagazineMagnumEmpty
+  - MagazineMagnum
+  - MagazinePistolHighCapacityEmpty
+  - MagazinePistolHighCapacity
+
+# Rubber ammo/mags
+- type: latheRecipePack
+  id: SecurityAmmoRubberStatic
+  recipes:
+  - MagazineBoxLightRifleRubber
+  - MagazineBoxMagnumRubber
+  - MagazineBoxPistolRubber
+  - MagazineBoxRifleRubber
+  - MagazineLightRifleRubber
+  - MagazinePistolRubber
+  - MagazinePistolSubMachineGunRubber
+  - MagazineRifleRubber
+  - SpeedLoaderMagnumRubber
+  - MagazineMagnumRubber

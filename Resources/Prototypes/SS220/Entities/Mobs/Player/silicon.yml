@@ -1,0 +1,174 @@
+- type: entity
+  id: ActionAiShowCrewMonitoring
+  name: Crew Monitoring Interface
+  description: View a Crew Monitoring Interface.
+  components:
+  - type: InstantAction
+    icon: 
+      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      state: crew_monitor
+    keywords: [ "AI", "console", "interface" ]
+    priority: -21
+    event: !type:ToggleIntrinsicUIEvent { key: enum.CrewMonitoringUIKey.Key }
+
+- type: entity
+  id: ActionAiShowCommunications
+  name: Communications Interface
+  description: View a Communications Interface.
+  components:
+  - type: InstantAction
+    icon: 
+      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      state: comms_console
+    keywords: [ "AI", "console", "interface" ]
+    priority: -20
+    event: !type:ToggleIntrinsicUIEvent { key: enum.CommunicationsConsoleUiKey.Key }
+
+- type: entity
+  id: ActionAiShowCriminalRecords
+  name: Criminal Records Interface
+  description: View a Station Criminal Record
+  components:
+  - type: InstantAction
+    icon: 
+      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      state: criminal_records
+    keywords: [ "AI", "console", "interface" ]
+    priority: -19
+    event: !type:ToggleIntrinsicUIEvent { key: enum.CriminalRecordsUiKey.Key }
+
+- type: entity
+  id: ActionAiShowRoboticsConsole
+  name: Robotics Console Interface
+  description: View a Borg info
+  components:
+  - type: InstantAction
+    icon: 
+      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      state: robotics_console
+    keywords: [ "AI", "console", "interface" ]
+    priority: -18
+    event: !type:ToggleIntrinsicUIEvent { key: enum.RoboticsConsoleUiKey.Key }
+
+- type: entity
+  id: ActionAiStationMapConsole
+  name: Statione Map Interface
+  description: View a Station Map
+  components:
+  - type: InstantAction
+    icon: 
+      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      state: station_map
+    keywords: [ "AI", "console", "interface" ]
+    priority: -17
+    event: !type:ToggleIntrinsicUIEvent { key: enum.StationMapUiKey.Key }
+
+- type: entity
+  id: ActionAiShowPowerMonitoring
+  name: Power Monitoring Interface
+  description: View a Power of Station
+  components:
+  - type: InstantAction
+    icon: 
+      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      state: power_console
+    keywords: [ "AI", "console", "interface" ]
+    priority: -16
+    event: !type:ToggleIntrinsicUIEvent { key: enum.PowerMonitoringConsoleUiKey.Key }
+
+- type: entity
+  id: ActionAiShowAlertInterface
+  name: Alert Interface
+  description: View a Alerts on Station
+  components:
+  - type: InstantAction
+    icon: 
+      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      state: alert_console
+    keywords: [ "AI", "console", "interface" ]
+    priority: -15
+    event: !type:ToggleIntrinsicUIEvent { key: enum.AtmosAlertsComputerUiKey.Key }
+
+- type: entity
+  id: ActionAiShowRadar
+  name: Mass Scanner Interface
+  description: View a Mass Scanner Interface.
+  components:
+  - type: InstantAction
+    icon: 
+      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      state: mass_scanner
+    keywords: [ "AI", "console", "interface" ]
+    priority: -14
+    event: !type:ToggleIntrinsicUIEvent { key: enum.RadarConsoleUiKey.Key }
+
+- type: entity
+  id: ActionAiShowCargo
+  name: Cargo Ordering Interface
+  description: View a Cargo Ordering Interface.
+  components:
+  - type: InstantAction
+    icon: 
+      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      state: cargo_console
+    keywords: [ "AI", "console", "interface" ]
+    priority: -13
+    event: !type:ToggleIntrinsicUIEvent { key: enum.CargoConsoleUiKey.Orders }
+
+- type: entity
+  id: ActionAiShowResearchAndDevelopmentInterface
+  name: RaD Interface
+  description: View a RaD interface
+  components:
+  - type: InstantAction
+    icon: 
+      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      state: rad_console
+    keywords: [ "AI", "console", "interface" ]
+    priority: -12
+    event: !type:ToggleIntrinsicUIEvent { key: enum.ResearchConsoleUiKey.Key }
+
+- type: entity
+  id: ActionAiShowSolar
+  name: Solar Control Interface
+  description: View a Solar Control Interface.
+  components:
+  - type: InstantAction
+    icon: 
+      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      state: solar_console
+    keywords: [ "AI", "console", "interface" ]
+    priority: -11
+    event: !type:ToggleIntrinsicUIEvent { key: enum.SolarControlConsoleUiKey.Key }
+
+- type: entity
+  id: ActionAiShowSMInterface
+  name: Super Matter Observer Interface
+  description: View a SM interface
+  components:
+  - type: InstantAction
+    icon: 
+      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      state: sm_console
+    keywords: [ "AI", "console", "interface" ]
+    priority: -10
+    event: !type:ToggleIntrinsicUIEvent { key: enum.SuperMatterObserverUiKey.Key }    
+
+- type: entity
+  id: PlayerBorgChassisClownMimeBattery
+  parent: BorgChassisClownMime
+  name: CloIme cyborg
+  description: Clown and Mime... CloIme!
+  suffix: Battery, Module, Ghost role
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+  - type: GhostRole
+    name: BorgChassisClownMime
+    rules: ghost-role-information-silicon-rules
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable

@@ -9,14 +9,14 @@
   id: EngravedKnuckleduster
   name: steal-target-groups-engraved-knuckleduster
   sprite:
-    sprite: SS220/Objects/Weapons/Melee/engraved_knuckleduster.rsi
+    sprite: SS220/Clothing/Hands/Knuckles/engraved_knuckleduster.rsi
     state: icon
 
 - type: stealTargetGroup
   id: WeaponMultiPhaseEnergyGun
   name: steal-target-groups-multiphase-energy-gun
   sprite:
-    sprite: SS220/Objects/Weapons/Guns/multiphase_energy_gun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/multiphase_energy_gun.rsi
     state: icon
 
 - type: stealTargetGroup
@@ -75,3 +75,10 @@
   sprite:
     sprite: Objects/Misc/module.rsi
     state: cpuboard
+
+- type: stealTargetGroup
+  id: RCDCE
+  name: steal-target-groups-rcd-ce
+  sprite:
+    sprite: SS220/Objects/Tools/RCDCE.rsi
+    state: icon

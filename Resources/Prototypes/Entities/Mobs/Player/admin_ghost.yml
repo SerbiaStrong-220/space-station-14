@@ -25,7 +25,7 @@
   - type: CombatMode
   - type: Physics
     ignorePaused: true
-    bodyType: Kinematic
+    bodyType: KinematicController # SS220 aghost pusher fix
   - type: Body
     prototype: Aghost
   - type: Access

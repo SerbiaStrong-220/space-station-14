@@ -34,11 +34,20 @@ public sealed class MechClothingSystem : EntitySystem
         SubscribeLocalEvent<MechClothingComponent, MechClothingGrabEvent>(OnInteract);
         SubscribeLocalEvent<MechClothingComponent, ComponentStartup>(OnStartUp);
         SubscribeLocalEvent<MechClothingComponent, GrabberDoAfterEvent>(OnMechGrab);
+        SubscribeLocalEvent<MechClothingComponent, ComponentShutdown>(OnShutdown);
     }
 
     private void OnStartUp(Entity<MechClothingComponent> ent, ref ComponentStartup args)
     {
-        ent.Comp.ItemContainer = _container.EnsureContainer<Container>(ent.Owner, "item-container");
+        ent.Comp.ItemContainer = _container.EnsureContainer<Container>(ent.Owner, ent.Comp.ContainerName);
+    }
+
+    private void OnShutdown(Entity<MechClothingComponent> ent, ref ComponentShutdown args)
+    {
+        if (!_container.TryGetContainer(ent.Owner, ent.Comp.ContainerName, out var container))
+            return;
+
+        _container.ShutdownContainer(container);
     }
 
     private void OnInteract(Entity<MechClothingComponent> ent, ref MechClothingGrabEvent args)

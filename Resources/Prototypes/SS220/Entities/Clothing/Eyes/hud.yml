@@ -7,9 +7,9 @@
   description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Eyes/syndchem.rsi
+    sprite: SS220/Clothing/Eyes/Hud/syndchem.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Eyes/syndchem.rsi
+    sprite: SS220/Clothing/Eyes/Hud/syndchem.rsi
   - type: ShowHealthBars
     damageContainers:
     - Biological
@@ -33,9 +33,9 @@
   components:
   - type: ThermalVisionClothing
   - type: Sprite
-    sprite: SS220/Clothing/Eyes/omni_hud.rsi
+    sprite: SS220/Clothing/Eyes/Hud/omni.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Eyes/omni_hud.rsi
+    sprite: SS220/Clothing/Eyes/Hud/omni.rsi
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
@@ -56,6 +56,6 @@
   components:
   - type: ShowSupplyPrice
   - type: Sprite
-    sprite: SS220/Clothing/Eyes/supply.rsi
+    sprite: SS220/Clothing/Eyes/Hud/supply.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Eyes/supply.rsi
+    sprite: SS220/Clothing/Eyes/Hud/supply.rsi

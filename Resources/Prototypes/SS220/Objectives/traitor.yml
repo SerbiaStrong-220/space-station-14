@@ -37,10 +37,20 @@
 
 - type: entity
   parent: BaseTraitorStealObjective
-  id: ClothingOuterReactiveArmorObjective
+  id: ClothingOuterReactiveArmorStealObjective
   components:
   - type: NotJobRequirement
     job: ResearchDirector
   - type: StealCondition
     stealGroup: ClothingOuterReactiveArmor
     owner: job-name-rd
+
+- type: entity
+  parent: BaseTraitorStealObjective
+  id: RCDCEStealObjective
+  components:
+  - type: NotJobRequirement
+    job: ChiefEngineer
+  - type: StealCondition
+    stealGroup: RCDCE
+    owner: job-name-ce

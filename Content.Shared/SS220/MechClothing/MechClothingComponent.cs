@@ -14,19 +14,19 @@ public sealed partial class MechClothingComponent : Component
     /// <summary>
     /// The change in energy after each grab.
     /// </summary>
-    [DataField("grabEnergyDelta")]
+    [DataField]
     public float GrabEnergyDelta = -30;
 
     /// <summary>
     /// How long does it take to grab something?
     /// </summary>
-    [DataField("grabDelay")]
+    [DataField]
     public float GrabDelay = 2.5f;
 
     /// <summary>
     /// The sound played when a mech is grabbing something
     /// </summary>
-    [DataField("grabSound")]
+    [DataField]
     public SoundSpecifier GrabSound = new SoundPathSpecifier("/Audio/Mecha/sound_mecha_hydraulic.ogg");
 
     public EntityUid? AudioStream;
@@ -43,4 +43,6 @@ public sealed partial class MechClothingComponent : Component
     [ViewVariables, AutoNetworkedField]
     public EntityUid? CurrentEquipmentUid;
 
+    [DataField]
+    public string ContainerName = "item-container";
 }

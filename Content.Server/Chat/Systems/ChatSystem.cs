@@ -6,7 +6,7 @@ using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Players.RateLimiting;
-using Content.Server.Speech.Components;
+using Content.Server.Speech.Prototypes;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
@@ -36,6 +36,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
 using Robust.Shared.Timing;
+using Robust.Shared.Map;
 
 namespace Content.Server.Chat.Systems;
 
@@ -238,6 +239,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         bool shouldCapitalizeTheWordI = (!CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Parent.Name == "en")
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en");
 
+        message = _chatManager.DeleteProhibitedCharacters(message, source); // SS220 delete prohibited characters
         message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
 
         // Was there an emote in the message? If so, send it.
@@ -323,6 +325,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (player?.AttachedEntity is not { Valid: true } entity || source != entity)
             return;
 
+        message = _chatManager.DeleteProhibitedCharacters(message, source); // SS220 delete prohibited characters
         message = SanitizeInGameOOCMessage(message);
 
         var sendType = type;
@@ -358,12 +361,12 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <param name="message">The contents of the message</param>
     /// <param name="sender">The sender (Communications Console in Communications Console Announcement)</param>
     /// <param name="playSound">Play the announcement sound</param>
-    /// <param name="announcementSound">Specific announcement sound</param>
     /// <param name="colorOverride">Optional color for the announcement message</param>
     public void DispatchGlobalAnnouncement(
         string message,
         string? sender = null,
         bool playSound = true,
+        SoundSpecifier? announcementSound = null,
         Color? colorOverride = null
         )
     {
@@ -371,18 +374,12 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
         _chatManager.ChatMessageToAll(ChatChannel.Radio, message, wrappedMessage, default, false, true, colorOverride);
-
         if (playSound)
         {
-            SoundSpecifier? announcementSound = null;
-            if (sender == Loc.GetString("admin-announce-announcer-default"))
-            {
-                announcementSound = new SoundPathSpecifier(CentComAnnouncementSound); // Corvax-Announcements: Support custom alert sound from admin panel
-            }
-            announcementSound ??= new SoundPathSpecifier(DefaultAnnouncementSound);
-            var announcementFilename = _audio.GetSound(announcementSound);
-            var announcementEv = new AnnouncementSpokeEvent(Filter.Broadcast(), announcementFilename ?? DefaultAnnouncementSound, announcementSound.Params, message, string.Empty);
-            RaiseLocalEvent(announcementEv);
+            _audio.PlayGlobal(announcementSound == null ? DefaultAnnouncementSound
+                : sender == Loc.GetString("admin-announce-announcer-default") ? CentComAnnouncementSound // Corvax-Announcements: Support custom alert sound from admin panel
+                : _audio.GetSound(announcementSound),
+                Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f));
         }
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Global station announcement from {sender}: {message}");
     }
@@ -690,6 +687,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         var clients = GetDeadChatClients();
         var playerName = Name(source);
+        message = _chatManager.DeleteProhibitedCharacters(message, player); // SS220 delete prohibited characters
         string wrappedMessage;
         if (_adminManager.IsAdmin(player))
         {
@@ -1085,12 +1083,29 @@ public sealed class RadioSpokeEvent : EntityEventArgs
 {
     public readonly EntityUid Source;
     public readonly string Message;
-    public readonly EntityUid[] Receivers;
+    public readonly RadioEventReceiver[] Receivers; // SS220 Silicon TTS fix
 
-    public RadioSpokeEvent(EntityUid source, string message, EntityUid[] receivers)
+    public RadioSpokeEvent(EntityUid source, string message, RadioEventReceiver[] receivers)
     {
         Source = source;
         Message = message;
         Receivers = receivers;
     }
 }
+
+// SS220 Silicon TTS fix begin
+public readonly struct RadioEventReceiver
+{
+    public EntityUid Actor { get; }
+    public EntityCoordinates PlayTarget { get; }
+
+    public RadioEventReceiver(EntityUid actor) : this(actor, new EntityCoordinates(actor, 0, 0)) { }
+
+    public RadioEventReceiver(EntityUid actor, EntityCoordinates playTarget)
+    {
+        Actor = actor;
+        PlayTarget = playTarget;
+    }
+}
+// SS220 Silicon TTS fix end
+

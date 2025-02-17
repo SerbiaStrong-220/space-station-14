@@ -57,7 +57,7 @@
             - /Maps/SS220/Shuttles/trading_outpost.yml # SS220 shuttle upd
         mining: !type:GridSpawnGroup
           paths:
-          - /Maps/Shuttles/mining.yml # SS220 shuttle upd
+          - /Maps/SS220/Shuttles/mining.yml # SS220 shuttle upd
         # Spawn last
         ruins: !type:GridSpawnGroup
           hide: false #SS2200 IFF and Name Hide Reveal
@@ -75,9 +75,11 @@
           # - /Maps/Ruins/djstation.yml # SS220 Removed with Ruins Update (balance Tweak)
           # - /Maps/Ruins/empty_flagship.yml # SS220 Removed with Ruins Update (balance Tweak)
           - /Maps/Ruins/old_ai_sat.yml
+          - /Maps/Ruins/ruined_prison_ship.yml
           - /Maps/Ruins/syndicate_dropship.yml
           # - /Maps/Ruins/whiteship_ancient.yml # SS220 Removed with Ruins Update (balance Tweak)
           # - /Maps/Ruins/whiteship_bluespacejumper.yml # SS220 Removed with Ruins Update (balance Tweak)
+          # - /Maps/Ruins/wrecklaimer.yml # SS220 Removed
           # SS220 Ruins Update Map begin
           - /Maps/SS220/Ruins/Arena_SS220.yml
           - /Maps/SS220/Ruins/Broadaxe_SS220.yml

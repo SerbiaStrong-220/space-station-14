@@ -45,7 +45,7 @@ namespace Content.Server.Singularity.EntitySystems
 
             SubscribeLocalEvent<EmitterComponent, PowerConsumerReceivedChanged>(ReceivedChanged);
             SubscribeLocalEvent<EmitterComponent, PowerChangedEvent>(OnApcChanged);
-            SubscribeLocalEvent<EmitterComponent, InteractHandEvent>(OnInteractHand);
+            SubscribeLocalEvent<EmitterComponent, ActivateInWorldEvent>(OnActivate);
             SubscribeLocalEvent<EmitterComponent, GetVerbsEvent<Verb>>(OnGetVerb);
             SubscribeLocalEvent<EmitterComponent, ExaminedEvent>(OnExamined);
             SubscribeLocalEvent<EmitterComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
@@ -60,16 +60,23 @@ namespace Content.Server.Singularity.EntitySystems
             SwitchOff(uid, component);
         }
 
-        private void OnInteractHand(EntityUid uid, EmitterComponent component, InteractHandEvent args)
+        private void OnActivate(EntityUid uid, EmitterComponent component, ActivateInWorldEvent args)
         {
             if (args.Handled)
                 return;
-
+            // SS220-SM-smEmitter-fix
+            args.Handled = TryActivate((uid, component), args.User);
+        }
+        public bool TryActivate(Entity<EmitterComponent> entity, EntityUid user)
+        {
+            (EntityUid User, bool Handled) args = (user, false);
+            var (uid, component) = entity;
+            // SS220-SM-smEmitter-fix
             if (TryComp(uid, out LockComponent? lockComp) && lockComp.Locked)
             {
                 _popup.PopupEntity(Loc.GetString("comp-emitter-access-locked",
                     ("target", uid)), uid, args.User);
-                return;
+                return args.Handled; // SS220-SM-smEmitter-fix
             }
 
             if (TryComp(uid, out PhysicsComponent? phys) && phys.BodyType == BodyType.Static)
@@ -97,6 +104,7 @@ namespace Content.Server.Singularity.EntitySystems
                 _popup.PopupEntity(Loc.GetString("comp-emitter-not-anchored",
                     ("target", uid)), uid, args.User);
             }
+            return args.Handled; // SS220-SM-smEmitter-fix
         }
 
         private void OnGetVerb(EntityUid uid, EmitterComponent component, GetVerbsEvent<Verb> args)

@@ -140,3 +140,38 @@
         - id: PinpointerNuclearBomb
         - id: EmergencyMedipenDQ
           amount: 6
+
+- type: entity
+  parent: ClothingBackpackBlueShieldHight
+  id: ClothingBackpackBlueShieldHightFilled
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvivalSecurity
+      - id: WeaponBlasterKRS
+      - id: BlasterPowerCellPulse
+        amount: 3
+      - id: BlasterPowerCellDisabler
+        amount: 2
+      - id: FlashlightSeclite
+      - id: MedkitCombatFilled
+      - id: BlueShieldGasMask
+
+# Svarshik's toys
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: ClothingBackpackSatchelNinjaSetFake
+  name: Ninja costume set
+  description: Contains a full Space Ninja set, made for costume party or cosplay.
+  suffix: Fake, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitNinja
+    - id: ClothingOuterSuitSpaceNinjaFake
+    - id: ClothingMaskNinja
+    - id: EnergyKatanaToy
+    - id: ClothingHandsGlovesSpaceNinja #real ones, but they are anyway usuless if wearer isn't real ninja, so yeah.
+    - id: ThrowingStar
+      amount: 2
+    - id: ClothingFootWrapsBlack

@@ -105,5 +105,5 @@
     - type: StationMinimap
       minimapData: !type:StationMinimapData
         mapTexture: SS220/ViewableMaps/Astro.png
-        originOffset: 103, -109
+        originOffset: 103, -137
         mapScale: 6.4

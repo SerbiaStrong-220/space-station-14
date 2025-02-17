@@ -41,6 +41,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Content.Client.SS220.Discord;
 using Robust.Shared.Timing;
+using Content.Client.SS220.TTS;
 
 namespace Content.Client.Entry
 {
@@ -81,6 +82,7 @@ namespace Content.Client.Entry
         [Dependency] private readonly DiscordPlayerInfoManager _discordPlayerInfoManager = default!; // SS220 discord info manager
         [Dependency] private readonly DebugMonitorManager _debugMonitorManager = default!;
         [Dependency] private readonly TitleWindowManager _titleWindowManager = default!;
+        [Dependency] private readonly TTSManager _ttsManager = default!; // SS220 TTS
 
         public override void Init()
         {
@@ -182,6 +184,7 @@ namespace Content.Client.Entry
             _documentParsingManager.Initialize();
             _discordPlayerInfoManager.Initialize(); // SS220 tier info
             _titleWindowManager.Initialize();
+            _ttsManager.Initialize(); // SS220 TTS
 
             _baseClient.RunLevelChanged += (_, args) =>
             {

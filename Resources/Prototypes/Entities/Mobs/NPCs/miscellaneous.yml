@@ -129,6 +129,10 @@
   - type: NpcFactionMember
     factions:
       - SimpleHostile
+    #ss220 fix start
+    addFriendlyFactions:
+      - PetsNT
+    #ss220 fix end
   - type: HTN
     rootTask:
       task: KillerTomatoCompound

@@ -4,6 +4,7 @@
   markingCategory: HeadTop
   speciesRestriction: [Human]
   sponsorOnly: false # Corvax-Sponsors
+  abstract: true #ss220 no cat tail n ears
   sprites:
   - sprite: Corvax/Mobs/Customization/fox_parts.rsi
     state: ears_fox_outer

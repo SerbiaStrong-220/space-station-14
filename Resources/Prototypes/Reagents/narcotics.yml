@@ -139,6 +139,22 @@
           min: 1
         reagent: ChloralHydrate
         amount: -10
+      #ss220 stumulants buff begin
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Nocturine
+          min: 1
+        reagent: Nocturine
+        amount: -3
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Haloperidol
+          min: 1
+        reagent: Haloperidol
+        amount: -5
+      #ss220 stumulants buff end
       - !type:GenericStatusEffect
         key: Stun
         time: 3
@@ -152,13 +168,6 @@
         component: StaminaModifier
         time: 3
         type: Add
-      - !type:AdjustReagent # SS220 Nuke-Rebalance begin
-        conditions:
-        - !type:ReagentThreshold
-          reagent: ChloralHydrate
-          min: 1
-        reagent: ChloralHydrate
-        amount: -3 # SS220 Nuke-Rebalance end
       - !type:GenericStatusEffect
         key: ForcedSleep
         time: 3

@@ -45,6 +45,11 @@
   radioBold: true
   accessGroups:
   - AllAccess
+  access:
+  - CentralCommand
+  - CentralCommandERT
+  - CentralCommandBSO
+  - CentralCommandCBURN
 
 - type: startingGear
   id: CentCommOfficerGear

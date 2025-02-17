@@ -42,6 +42,27 @@
       - CombatKnife
 
 - type: entity
+  parent: ClothingShoesBootsJack
+  id: ClothingShoesBootsBlueShieldJack
+  name: blueshield jackboots
+  description: Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time.
+  suffix: Blue Shield
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/blueshield_jackboots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/blueshield_jackboots.rsi
+
+- type: entity
+  parent: ClothingShoesBootsBlueShieldJack
+  id: ClothingShoesBootsBlueShieldJackFilled
+  components:
+  - type: ContainerFill
+    containers:
+     item:
+      - CombatKnife
+
+- type: entity
   parent: ClothingShoesBaseButcherable
   id: ClothingShoesBootsBard #SS220 bard loadout
   name: bard shoes
@@ -49,9 +70,9 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Shoes/Boots/bardboots.rsi
+    sprite: SS220/Clothing/Shoes/Boots/musician_bard.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Shoes/Boots/bardboots.rsi
+    sprite: SS220/Clothing/Shoes/Boots/musician_bard.rsi
 
 # Уборщик
 
@@ -66,6 +87,20 @@
     sprite: SS220/Clothing/Shoes/Boots/janitor_jr.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/janitor_jr.rsi
+
+# Врач
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesResponsibility
+  name: responsible doctor's shoes
+  description: For those who believe that moments of weakness do not make monsters out of us.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/medical_shoes_responsibility.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/medical_shoes_responsibility.rsi
 
 # Эскадрон Смерти
 - type: entity
@@ -103,3 +138,15 @@
         type: GasTankBoundUserInterface
   - type: Jetpack
     moleUsage: 0.00085
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesCMOCorporate
+  name: corporate shoes of the chief medical officer
+  description: There was sweat and blood, literally. Nevertheless, they look like new.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/cmocorporateboots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/cmocorporateboots.rsi

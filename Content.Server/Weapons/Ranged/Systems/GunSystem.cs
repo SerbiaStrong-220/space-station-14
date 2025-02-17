@@ -22,6 +22,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Containers;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -185,6 +186,20 @@ public sealed partial class GunSystem : SharedGunSystem
                                 var ray = new CollisionRay(from.Position, dir, hitscan.CollisionMask);
                                 var rayCastResults =
                                     Physics.IntersectRay(from.MapId, ray, hitscan.MaxLength, lastUser, false).ToList();
+
+                                // SS220 add barricade begin
+                                for (var r = 0; r < rayCastResults.Count; r++)
+                                {
+                                    var attemptEv = new HitscanAttempt(lastUser);
+                                    RaiseLocalEvent(rayCastResults[r].HitEntity, ref attemptEv);
+                                    if (attemptEv.Cancelled)
+                                    {
+                                        rayCastResults.RemoveAt(r);
+                                        r--;
+                                    }
+                                }
+                                // SS220 add barricade end
+
                                 if (!rayCastResults.Any())
                                     break;
 

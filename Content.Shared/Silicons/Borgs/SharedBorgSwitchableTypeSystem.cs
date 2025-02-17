@@ -45,6 +45,11 @@ public abstract class SharedBorgSwitchableTypeSystem : EntitySystem
 
     private void OnMapInit(Entity<BorgSwitchableTypeComponent> ent, ref MapInitEvent args)
     {
+        //ss220 borg switchable type fix start
+        if (!ent.Comp.IsNeedToSwitch)
+            return;
+        //ss220 borg switchable type fix start
+
         _actionsSystem.AddAction(ent, ref ent.Comp.SelectTypeAction, ActionId);
         Dirty(ent);
 

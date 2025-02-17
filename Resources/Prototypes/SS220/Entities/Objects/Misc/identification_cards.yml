@@ -38,10 +38,6 @@
     - state: idcentcom
   - type: IdCard
     jobTitle: job-name-nt-politician #SS220 (upstream 65 localization)
-  - type: Access
-    groups:
-    - AllAccess # SS220 Fast fix access
-    - CentralCommand
   - type: PresetIdCard
     job: CentCommNanoTrasenDiplomat
 
@@ -53,10 +49,6 @@
   components:
     - type: IdCard
       jobTitle: job-name-cc-operational-oficier #SS220 (upstream 65 localization)
-    - type: Access
-      groups:
-      - AllAccess # SS220 Fast fix access
-      - CentralCommand
     - type: PresetIdCard
       job: CentcomFieldOfficer
 
@@ -68,29 +60,19 @@
   components:
     - type: IdCard
       jobTitle: job-name-cc-oficier #SS220 (upstream 65 localization)
-    - type: Access
-      groups:
-      - AllAccess # SS220 Fast fix access
-      - CentralCommand
     - type: PresetIdCard
       job: CentcommOfficer
 
 - type: entity
   parent: CentcomIDCard
-  id: OperativeSRTIDCard
-  name: ID карта Оперативника ГСН
+  id: OperativeBSOIDCard
+  name: ID карта Оперативника "Синий Щит"
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: job-name-cc-srt-operative #SS220 (upstream 65 localization)
-    - type: Access
-      groups:
-      - AllAccess # SS220 Fast fix access
-      tags:
-      - CentralCommandGSN
-      - CentralCommand
+      jobTitle: job-name-cc-bs-operative #SS220 (upstream 65 localization)
     - type: PresetIdCard
-      job: CentcomOperativeSRT
+      job: CentcomOperativeBSO
 
 - type: entity # SS220 - Security dog Roxi ID card
   parent: IDCardStandard
@@ -127,10 +109,6 @@
   components:
     - type: IdCard
       jobTitle: job-name-nt-admiral #SS220 (upstream 65 localization)
-    - type: Access
-      groups:
-      - AllAccess # SS220 Fast fix access
-      - CentralCommand
     - type: PresetIdCard
       job: CentComNanoTrasenAdmiral
 

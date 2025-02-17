@@ -38,7 +38,6 @@ public sealed partial class RevenantSystem
 {
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly EmagSystem _emag = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
@@ -46,6 +45,7 @@ public sealed partial class RevenantSystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly PoweredLightSystem _poweredLight = default!; //ss220 revenant buff
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
 
     private void InitializeAbilities()
     {
@@ -232,8 +232,12 @@ public sealed partial class RevenantSystem
         var xform = Transform(uid);
         if (!TryComp<MapGridComponent>(xform.GridUid, out var map))
             return;
-        var tiles = map.GetTilesIntersecting(Box2.CenteredAround(_transformSystem.GetWorldPosition(xform),
-            new Vector2(component.DefileRadius * 2, component.DefileRadius))).ToArray();
+        var tiles = _mapSystem.GetTilesIntersecting(
+            xform.GridUid.Value,
+            map,
+            Box2.CenteredAround(_transformSystem.GetWorldPosition(xform),
+            new Vector2(component.DefileRadius * 2, component.DefileRadius)))
+            .ToArray();
 
         _random.Shuffle(tiles);
 
@@ -356,7 +360,8 @@ public sealed partial class RevenantSystem
                 _whitelistSystem.IsBlacklistPass(component.MalfunctionBlacklist, ent))
                 continue;
 
-            _emag.DoEmagEffect(uid, ent); //it does not emag itself. adorable.
+            var ev = new GotEmaggedEvent(uid, EmagType.Interaction | EmagType.Access);
+            RaiseLocalEvent(ent, ref ev);
         }
     }
 }

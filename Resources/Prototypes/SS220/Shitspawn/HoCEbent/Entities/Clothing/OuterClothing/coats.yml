@@ -1,0 +1,25 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatBluetunic
+  name: blue army jacket
+  description: The jacket of the line infantry of the great army of the Kingdom.
+  suffix: Ebent, HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Shitspawn/HoCEbent/Clothing/OuterClothing/Coats/bluetunic.rsi
+  - type: Clothing
+    sprite: SS220/Shitspawn/HoCEbent/Clothing/OuterClothing/Coats/bluetunic.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatRedtunic
+  name: red army jaket
+  description: The scarlet infantry jacket of the River Republic.
+  suffix: Ebent, HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Shitspawn/HoCEbent/Clothing/OuterClothing/Coats/redtunic.rsi
+  - type: Clothing
+    sprite: SS220/Shitspawn/HoCEbent/Clothing/OuterClothing/Coats/redtunic.rsi

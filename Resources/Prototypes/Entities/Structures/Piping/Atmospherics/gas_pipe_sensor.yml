@@ -2,22 +2,22 @@
   parent: [AirSensorBase, GasPipeBase]
   id: GasPipeSensor
   name: gas pipe sensor
-  description: Reports on the status of the gas in the attached pipe network. 
+  description: Reports on the status of the gas in the attached pipe network.
   placement:
     mode: SnapgridCenter
   components:
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/gas_pipe_sensor.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/gas_pipe_sensor.rsi #ss220 engineering-update-atmos
     drawdepth: BelowFloor
     layers:
-    - sprite: Structures/Piping/Atmospherics/pipe.rsi
+    - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
       map: [ "enum.PipeVisualLayers.Pipe" ]
       state: pipeStraight
     - map: ["base"]
       state: base
     - map: [ "enum.PowerDeviceVisualLayers.Powered" ]
-      state: lights 
-      shader: unshaded      
+      state: lights
+      shader: unshaded
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -27,11 +27,14 @@
           True: { state: lights }
   - type: AtmosMonitor
     monitorsPipeNet: true
+  - type: GasPipeSensor
+  - type: AtmosMonitoringConsoleDevice
+    navMapBlip: GasPipeSensor
   - type: ApcPowerReceiver
   - type: ExtensionCableReceiver
   - type: Construction
     graph: GasPipeSensor
-    node: sensor 
+    node: sensor
   - type: NodeContainer
     nodes:
       monitored:
@@ -41,34 +44,38 @@
   - type: Tag
     tags:
     - AirSensor
-    - Unstackable    
+    - Unstackable
+  - type: GuideHelp
+    guides:
+    - AtmosphericNetworkMonitor
+    - DeviceMonitoringAndControl
 
 - type: entity
-  parent: GasPipeSensor 
-  id: GasPipeSensorDistribution 
+  parent: GasPipeSensor
+  id: GasPipeSensorDistribution
   suffix: Distribution
   components:
   - type: Label
     currentLabel: gas-pipe-sensor-distribution-loop
 
 - type: entity
-  parent: GasPipeSensor 
-  id: GasPipeSensorWaste  
+  parent: GasPipeSensor
+  id: GasPipeSensorWaste
   suffix: Waste
   components:
   - type: Label
     currentLabel: gas-pipe-sensor-waste-loop
 
 - type: entity
-  parent: GasPipeSensor 
-  id: GasPipeSensorMixedAir 
+  parent: GasPipeSensor
+  id: GasPipeSensorMixedAir
   suffix: Mixed air
   components:
   - type: Label
     currentLabel: gas-pipe-sensor-mixed-air
 
 - type: entity
-  parent: GasPipeSensor 
+  parent: GasPipeSensor
   id: GasPipeSensorTEGHot
   suffix: TEG hot
   components:
@@ -76,7 +83,7 @@
     currentLabel: gas-pipe-sensor-teg-hot-loop
 
 - type: entity
-  parent: GasPipeSensor  
+  parent: GasPipeSensor
   id: GasPipeSensorTEGCold
   suffix: TEG cold
   components:

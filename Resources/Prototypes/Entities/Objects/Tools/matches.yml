@@ -85,6 +85,11 @@
   - type: Storage
     grid:
     - 0,0,2,1
+    #SS220-FixMatchBox-begin
+    whitelist:
+      tags:
+        - Matchstick
+    #SS220-FixMatchBox-end
   - type: StorageFill
     contents:
       - id: Matchstick

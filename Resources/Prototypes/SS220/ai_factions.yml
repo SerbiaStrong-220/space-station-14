@@ -1,3 +1,4 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 # SS220 AI Mapping Update Begin
 
 - type: npcFaction
@@ -11,18 +12,10 @@
   - Zombie
   - Revolutionary
   - SpiderQueen
+  - CultYogg #SS220 CultYogg
+  - AllHostile
 
 # SS220 AI Mapping Update End
-
-- type: npcFaction
-  id: Revolutionary
-  hostile:
-  - NanoTrasen
-  - DeathSquad #SS220 dq update
-  - Zombie
-  - SimpleHostile
-  - Dragon
-  - SpiderQueen
 
 # ss220 reaper passive start
 
@@ -45,7 +38,8 @@
   - Dragon
   - PetsNT
   - SimpleNeutral
-  - SimpleHostile
+  - CultYogg #SS220 CultYogg
+  - AllHostile
 
 - type: npcFaction
   id: SpiderHostile
@@ -57,6 +51,8 @@
   - PetsNT
   - Zombie
   - Revolutionary
+  - CultYogg #SS220 CultYogg
+  - AllHostile
 
 # ss220 spider queen end
 
@@ -74,3 +70,21 @@
   - Revolutionary
   - SpiderQueen
   - SimpleHostile
+  - CultYogg #SS220 CultYogg
+  - AllHostile
+
+#SS220 CultYogg
+- type: npcFaction
+  id: CultYogg
+  hostile:
+  - SimpleHostile
+  - Syndicate
+  - Xeno
+  - Zombie
+  - Revolutionary
+  - NanoTrasen
+  - DeathSquad
+  - Dragon
+  - BloodCult
+  - SpiderQueen
+  - AllHostile
