@@ -108,6 +108,27 @@
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/moder.rsi
 
+ # Для викиредов
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckWikiEditors
+  name: «тень редактора»
+  description: Плащ, сотканный из теней, придаёт своему обладателю загадочность и мистические способности изменения информации о мире
+  suffix: Sponsor Neck, Wikired
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/wikicloak.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/wikicloak.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatWikiCloak
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+
 # Разное
 - type: entity
   parent: ClothingNeckBase

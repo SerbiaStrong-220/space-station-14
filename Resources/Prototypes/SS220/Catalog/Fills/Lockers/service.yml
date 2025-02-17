@@ -13,6 +13,7 @@
     - id: ClothingBackpackDuffelClown
     - id: CrayonRainbow
     - id: ClownStampBox #ss220-fake-stump-update
+    - id: ClownMimeCyborgInstruction #ss220-clownmimecyborg-update
     - !type:NestedSelector
       tableId: AllToyWeaponsBundleTable
       prob: 0.075
@@ -45,3 +46,4 @@
     - id: ClothingUniformJumpskirtMime
     - id: CrayonMime
     - id: ClownStampBox #ss220-fake-stump-update
+    - id: ClownMimeCyborgInstruction #ss220-clownmimecyborg-update

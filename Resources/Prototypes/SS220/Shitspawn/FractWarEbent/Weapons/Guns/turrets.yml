@@ -12,29 +12,48 @@
   - type: NpcFactionMember
     factions:
     - EbentUssp
+  - type: Damageable
+    damageModifierSet: FractWarTurret
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 500
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+          - !type:PlaySoundBehavior
+            sound:
+              collection: MetalGlassBreak
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              SheetSteel1:
+                min: 3
+                max: 5
 
 - type: entity
-  parent: BaseWeaponTurret
+  parent: WeaponTurretFractWarUssp
   id: WeaponTurretFractWarNanoTrasen
   suffix: Shitspawn, Ebent, FractWar, NanoTrasen
   name: Баллистическая турель ССО
   description: Автоматическая турель с баллистическим пулемётом.
   components:
-  - type: BallisticAmmoProvider
-    capacity: 250
   - type: NpcFactionMember
     factions:
     - EbentNanoTrasen
 
 - type: entity
-  parent: BaseWeaponTurret
+  parent: WeaponTurretFractWarUssp
   id: WeaponTurretFractWarIronSquad
   suffix: Shitspawn, Ebent, FractWar, IronSquad
   name: Баллистическая турель Железного отряда
   description: Автоматическая турель с баллистическим пулемётом.
   components:
-  - type: BallisticAmmoProvider
-    capacity: 250
   - type: NpcFactionMember
     factions:
     - EbentIronSquad
+
+- type: damageModifierSet
+  id: FractWarTurret
+  coefficients:
+    Piercing: 0.7

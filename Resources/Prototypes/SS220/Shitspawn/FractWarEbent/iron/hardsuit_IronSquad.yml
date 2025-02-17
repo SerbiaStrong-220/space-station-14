@@ -76,10 +76,10 @@
 
 # Heavy
 - type: entity
-  parent: ClothingOuterHardsuitBaseHeavy
-  id: ClothingOuterHardsuitIronHeavy
-  name: тяжёлый боевой скафандр Aid
-  description: Тяжёлый боевой костюм, обеспечивающий большую защиту ценой пониженной мобильности.
+  parent: ClothingOuterHardsuitBaseLight
+  id: ClothingOuterHardsuitIronLight
+  name: лёгкий боевой скафандр Aid
+  description: Лёгкий боевой костюм, обеспечивающий слабую защиту за счет повышенной мобильности.
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
@@ -87,12 +87,12 @@
   - type: Clothing
     sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_heavy.rsi
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitIronHeavy
+    clothingPrototype: ClothingHeadHelmetHardsuitIronLight
 
 # Heavy2
 - type: entity
-  parent: ClothingOuterHardsuitBaseHeavy2
-  id: ClothingOuterHardsuitIronHeavy2
+  parent: ClothingOuterHardsuitBaseHeavy
+  id: ClothingOuterHardsuitIronHeavy
   name: тяжёлый сонариумовый скафандр Aid-2
   description: Тяжёлый боевой костюм, обшитый сонариумовым сплавом. Используется железным отрядом в самых тяжёлых схватках.
   suffix: Shitspawn, Ebent, FractWar
@@ -102,4 +102,4 @@
   - type: Clothing
     sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/iron_heavy_2.rsi
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitIronHeavy2
+    clothingPrototype: ClothingHeadHelmetHardsuitIronHeavy

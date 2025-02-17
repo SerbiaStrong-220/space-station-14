@@ -83,10 +83,10 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: HitscanBatteryAmmoProvider
     proto: PulseErt_Lmg
-    fireCost: 80
+    fireCost: 40
   - type: Battery
-    maxCharge: 6400
-    startingCharge: 6400
+    maxCharge: 3200
+    startingCharge: 3200
 
 #Iron squad
 - type: entity

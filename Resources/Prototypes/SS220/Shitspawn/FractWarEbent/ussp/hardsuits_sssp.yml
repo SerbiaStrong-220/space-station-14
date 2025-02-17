@@ -62,10 +62,10 @@
 
 # Heavy
 - type: entity
-  parent: ClothingOuterHardsuitBaseHeavy
-  id: ClothingOuterHardsuitUSSPHeavy
-  name: тяжёлый боевой скафандр СССП
-  description: Этот тяжёлый костюм выполнен по всем стандартам ГОСТа советского производства. Обеспечивает отличную защиту и путь в светлое будущее.
+  parent: ClothingOuterHardsuitBaseLight
+  id: ClothingOuterHardsuitUSSPLight
+  name: лёгкий боевой скафандр СССП
+  description: Этот дёгкий костюм выполнен по всем стандартам ГОСТа советского производства. Обеспечивает меньшую защиту и путь в светлое будущее.
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
@@ -77,8 +77,8 @@
 
 # Heavy2
 - type: entity
-  parent: ClothingOuterHardsuitBaseHeavy2
-  id: ClothingOuterHardsuitUSSPHeavy2
+  parent: ClothingOuterHardsuitBaseHeavy
+  id: ClothingOuterHardsuitUSSPHeavy
   name: тяжёлый боевой скафандр СССП 2.0
   description: Этот тяжёлый костюм выполнен по всем стандартам ГОСТа советского производства. Обеспечивает отличную защиту и путь в светлое будущее
   suffix: Shitspawn, Ebent, FractWar
@@ -88,4 +88,4 @@
   - type: Clothing
     sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Hardsuits/sssp_heavy_2.rsi
   - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitUSSPHeavy2
+    clothingPrototype: ClothingHeadHelmetHardsuitUSSPHeavy

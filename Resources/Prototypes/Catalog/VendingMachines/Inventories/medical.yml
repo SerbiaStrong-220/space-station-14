@@ -11,4 +11,5 @@
     ClothingEyesHudMedical: 2
     ClothingEyesEyepatchHudMedical: 2
     CigPackMED: 1 #SS220 Cigarettes
-
+  contrabandInventory:
+    FoodApple: 1

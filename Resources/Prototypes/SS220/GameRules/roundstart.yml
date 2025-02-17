@@ -25,3 +25,11 @@
   - type: AntagObjectives
     objectives:
     - CultYoggSacraficeObjective
+
+- type: entity
+  parent: BaseGameRule
+  id: FractWar
+  components:
+  - type: LoadMapRule
+    mapPath: /Maps/SS220/EventMaps/FractWarShuttlesMap.yml
+  - type: FractWarRule

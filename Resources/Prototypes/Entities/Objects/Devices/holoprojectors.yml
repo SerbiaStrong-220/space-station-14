@@ -68,6 +68,11 @@
       - HolofanProjector
   - type: StaticPrice
     price: 80
+  - type: GuideHelp
+    guides:
+    - AtmosTools
+    - Fires
+    - Spacing
 
 - type: entity
   parent: HolofanProjector
