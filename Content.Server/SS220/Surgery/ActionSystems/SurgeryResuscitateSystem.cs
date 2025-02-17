@@ -4,12 +4,12 @@ using Content.Server.Atmos.Rotting;
 using Content.Server.EUI;
 using Content.Server.Ghost;
 using Content.Server.Mind;
-using Content.Server.Traits.Assorted;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Traits.Assorted;
 using Robust.Shared.Player;
 
 namespace Content.Server.Surgery.ActionSystems;

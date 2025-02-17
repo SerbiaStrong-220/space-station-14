@@ -228,7 +228,7 @@ public sealed partial class SurgeryPuppetBox : Control
 
         if (state == null)
             return null;
-        return string.Join('/', [TexturePath, state]);
+        return $"{TexturePath}/{state}";
     }
 
     /// <summary> If you still think why we need newMed to make surgery just look into this method too. </summary>
@@ -254,7 +254,7 @@ public sealed partial class SurgeryPuppetBox : Control
 
         if (state == null)
             return null;
-        return string.Join('/', [TexturePath, state]);
+        return $"{TexturePath}/{state}";
     }
 
     private Vector2? GetPartSize(PuppetParts part)
