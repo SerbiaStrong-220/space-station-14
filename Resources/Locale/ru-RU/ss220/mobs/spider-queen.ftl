@@ -38,4 +38,4 @@ ent-MobSpiderShooter = паучий стрелок
 
 ent-MobSpiderLittle = маленький паучок
     .desc = { ent-MobSpiderQueen.desc }
-    .suffix = { ent-MobSpiderQueenn.suffix }
+    .suffix = { ent-MobSpiderQueen.suffix }
