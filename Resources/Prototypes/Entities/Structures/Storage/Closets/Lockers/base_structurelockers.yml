@@ -54,6 +54,10 @@
     node: done
     containers:
     - entity_storage
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.75 # need to discuss
+  #ss220 lockpick add end
 
 - type: entity
   id: LockerBaseSecure

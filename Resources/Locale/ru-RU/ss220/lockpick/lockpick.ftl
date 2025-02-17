@@ -1,2 +1,3 @@
-nuke-unanchored-with-lockpick = Успешно откреплено с помощью отмычки
-nuke-already-unanchored = Предмет уже откручен
+lockpick-successful = Успешно вскрыто
+lockpick-already-hacked = Предмет уже взломан
+lockpick-failed = Не удалось вскрыть

@@ -1,14 +1,14 @@
 - type: entity
-  parent: IDCardStandard
+  parent: BaseItem
   id: Lockpick
   suffix: Фальшивый
   name: отмычка
-  description: Зачем кому-то портить ID карту? Она вообще работает? Еще и провода из нее торчат... лучше её не трогать.
+  description: Используется для вскрытия шкафов, а также для снятия болтов у ядерной боеголовки
   components:
     - type: Sprite
-      sprite: Objects/Tools/emag.rsi
-      state: icon
+      sprite: SS220/Objects/Tools/lockpick.rsi
+      state: lockpick
     - type: Item
-      sprite: Objects/Tools/emag.rsi
+      sprite: SS220/Objects/Tools/lockpick.rsi
       storedRotation: -90
     - type: Lockpick

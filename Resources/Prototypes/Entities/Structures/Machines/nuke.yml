@@ -111,9 +111,10 @@
     follow: true
     location: nuclear bomb
   - type: FTLSmashImmune
-  - type: Tag
-    tags:
-      - CanLockPick
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.4 # need to discuss # 0.4 == 40%
+  #ss220 lockpick add end
 
 - type: entity
   parent: NuclearBomb
