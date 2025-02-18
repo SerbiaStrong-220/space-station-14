@@ -95,10 +95,10 @@
           Quantity: 5
 
 - type: entity
-  name: cуп Космического Отца
+  name: SpaceDad soup
   id: FoodFatherSoup
   parent: FoodBowlBase
-  description: Суп придает настолько много сил, что его пришлось поместить в чан. Наверное мне стоит его съесть?
+  description: To put so much power out of this soup need to have to put it in cauldron. I think its worth eating it.
   components:
     - type: FlavorProfile
       flavors:
@@ -111,12 +111,12 @@
     - type: SolutionContainerManager
       solutions:
         food:
-          maxVol: 25
+          maxVol: 40
           reagents:
           - ReagentId: Nutriment
-            Quantity: 15
+            Quantity: 20
           - ReagentId: Protein
-            Quantity: 10
+            Quantity: 20
     - type: Food
       trash:
       - FoodCauldron
@@ -125,8 +125,8 @@
       - Meat
 
 - type: entity
-  name: Призрачный чили перец
-  description: Призрачный чили перец? А как мне из него готовить, если я его не вижу?
+  name: ghost chili pepper
+  description: Ghost chili peper? How can i cook from it if i cant see it?
   id: GhostChiliPepper
   parent: FoodProduceBase
   components:
