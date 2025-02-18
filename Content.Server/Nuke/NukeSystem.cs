@@ -81,7 +81,7 @@ public sealed class NukeSystem : EntitySystem
 
         // Doafter events
         SubscribeLocalEvent<NukeComponent, NukeDisarmDoAfterEvent>(OnDoAfter);
-        SubscribeLocalEvent<NukeComponent, LockPickEvent>(OnLockPick);
+        SubscribeLocalEvent<NukeComponent, LockPickSuccessEvent>(OnLockPick);
     }
 
     private void OnInit(EntityUid uid, NukeComponent component, ComponentInit args)
@@ -162,30 +162,12 @@ public sealed class NukeSystem : EntitySystem
     }
 
     //ss220 lockpick add start
-    private void OnLockPick(Entity<NukeComponent> ent, ref LockPickEvent args)
+    private void OnLockPick(Entity<NukeComponent> ent, ref LockPickSuccessEvent args)
     {
-        if (args.Cancelled)
-            return;
-
-        if (!TryComp<TargetLockPickComponent>(ent.Owner, out var targetLockPickComponent))
-            return;
-
-        if (!TryComp<LockpickComponent>(args.Target, out var lockpickComponent))
-            return;
-
-        if (!_random.Prob(targetLockPickComponent.ChanceToLockPick))
-        {
-            _popups.PopupEntity(Loc.GetString("lockpick-failed"), args.User, args.User);
-            return;
-        }
-
         var xform = Transform(ent.Owner);
 
         if (xform.Anchored)
             _transform.Unanchor(ent.Owner, xform);
-
-        _audio.PlayPvs(lockpickComponent.LockPickSound, ent.Owner);
-        _popups.PopupEntity(Loc.GetString("lockpick-successful"), args.User, args.User);
     }
     //ss220 lockpick add end
     #endregion

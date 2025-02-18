@@ -1,8 +1,6 @@
 - type: entity
   parent: BaseItem
   id: Lockpick
-  name: Lockpick
-  description: Используется для вскрытия шкафов, а также для снятия болтов у ядерной боеголовки
   components:
     - type: Sprite
       sprite: SS220/Objects/Tools/lockpick.rsi

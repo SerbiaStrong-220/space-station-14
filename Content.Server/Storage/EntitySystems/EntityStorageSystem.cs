@@ -60,7 +60,7 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
         SubscribeLocalEvent<EntityStorageComponent, WeldableAttemptEvent>(OnWeldableAttempt);
         SubscribeLocalEvent<EntityStorageComponent, BeforeExplodeEvent>(OnExploded);
 
-        SubscribeLocalEvent<EntityStorageComponent, LockPickEvent>(OnLockPick);
+        SubscribeLocalEvent<EntityStorageComponent, LockPickSuccessEvent>(OnLockPick);
 
         SubscribeLocalEvent<InsideEntityStorageComponent, InhaleLocationEvent>(OnInsideInhale);
         SubscribeLocalEvent<InsideEntityStorageComponent, ExhaleLocationEvent>(OnInsideExhale);
@@ -119,28 +119,10 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
     }
 
     //ss220 lockpick add start
-    private void OnLockPick(Entity<EntityStorageComponent> ent, ref LockPickEvent args)
+    private void OnLockPick(Entity<EntityStorageComponent> ent, ref LockPickSuccessEvent args)
     {
-        if (args.Cancelled)
-            return;
-
-        if (!TryComp<TargetLockPickComponent>(ent.Owner, out var targetLockPickComponent))
-            return;
-
-        if (!TryComp<LockpickComponent>(args.Target, out var lockpickComponent))
-            return;
-
-        if (!_random.Prob(targetLockPickComponent.ChanceToLockPick))
-        {
-            _popups.PopupEntity(Loc.GetString("lockpick-failed"), args.User, args.User);
-            return;
-        }
-
         _lockSystem.Unlock(ent.Owner, args.User);
         OpenStorage(ent.Owner);
-
-        _audio.PlayPvs(lockpickComponent.LockPickSound, ent.Owner);
-        _popups.PopupEntity(Loc.GetString("lockpick-successful"), args.User, args.User);
     }
     //ss220 lockpick add end
 
