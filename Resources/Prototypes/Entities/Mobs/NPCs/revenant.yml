@@ -25,7 +25,7 @@
     damageModifierSet: ManifestedSpirit
   - type: NoSlip
   - type: TTS # Corvax-TTS
-    voice: twitch
+    randomVoicesList: Demons
   - type: Eye
     drawFov: false
     visMask:

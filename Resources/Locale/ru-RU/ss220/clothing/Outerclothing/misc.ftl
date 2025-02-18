@@ -9,3 +9,5 @@ ent-ClothingOuterHoodieChaplainWhite = белое одеяние священн�
 ent-ClothingOuterApronBard = накидка барда
     .desc = Подчеркивает стиль владельца.
     .suffix = За время в игре
+
+clothing-outer-radio-handheld = Рация
