@@ -3,6 +3,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
 using Content.Server.Construction;
 using Content.Server.Construction.Components;
+using Content.Server.SS220.LockPick.Components;
 using Content.Server.Storage.Components;
 using Content.Shared.Destructible;
 using Content.Shared.Explosion;
@@ -10,14 +11,18 @@ using Content.Shared.Foldable;
 using Content.Shared.Interaction;
 using Content.Shared.Lock;
 using Content.Shared.Movement.Events;
+using Content.Shared.Popups;
+using Content.Shared.SS220.LockPick;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Random;
 
 namespace Content.Server.Storage.EntitySystems;
 
@@ -27,6 +32,10 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedPopupSystem _popups = default!;
+    [Dependency] private readonly LockSystem _lockSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -50,6 +59,8 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
         SubscribeLocalEvent<EntityStorageComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<EntityStorageComponent, WeldableAttemptEvent>(OnWeldableAttempt);
         SubscribeLocalEvent<EntityStorageComponent, BeforeExplodeEvent>(OnExploded);
+
+        SubscribeLocalEvent<EntityStorageComponent, LockPickEvent>(OnLockPick);
 
         SubscribeLocalEvent<InsideEntityStorageComponent, InhaleLocationEvent>(OnInsideInhale);
         SubscribeLocalEvent<InsideEntityStorageComponent, ExhaleLocationEvent>(OnInsideExhale);
@@ -106,6 +117,32 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
     {
         args.Contents.AddRange(ent.Comp.Contents.ContainedEntities);
     }
+
+    //ss220 lockpick add start
+    private void OnLockPick(Entity<EntityStorageComponent> ent, ref LockPickEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!TryComp<TargetLockPickComponent>(ent.Owner, out var targetLockPickComponent))
+            return;
+
+        if (!TryComp<LockpickComponent>(args.Target, out var lockpickComponent))
+            return;
+
+        if (!_random.Prob(targetLockPickComponent.ChanceToLockPick))
+        {
+            _popups.PopupEntity(Loc.GetString("lockpick-failed"), args.User, args.User);
+            return;
+        }
+
+        _lockSystem.Unlock(ent.Owner, args.User);
+        OpenStorage(ent.Owner);
+
+        _audio.PlayPvs(lockpickComponent.LockPickSound, ent.Owner);
+        _popups.PopupEntity(Loc.GetString("lockpick-successful"), args.User, args.User);
+    }
+    //ss220 lockpick add end
 
     protected override void TakeGas(EntityUid uid, SharedEntityStorageComponent component)
     {
