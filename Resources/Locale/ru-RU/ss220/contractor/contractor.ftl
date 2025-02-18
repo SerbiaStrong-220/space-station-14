@@ -7,6 +7,8 @@ contractor-uplink-buy-text = Купить ({$price} Реп.)
 contractor-uplink-available-contracts = Доступные контракты
 contractor-uplink-available-items = Доступные товары
 contractor-uplink-withdraw-tc = Вывести ТК
+contractor-uplink-in-stock =
+    В наличии: {$quantity}
 
 contractor-uplink-title-photo = Фото цели
 contractor-uplink-title-withdraw = Вывести

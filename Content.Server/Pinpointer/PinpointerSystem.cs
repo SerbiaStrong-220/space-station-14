@@ -5,6 +5,7 @@ using System.Numerics;
 using Robust.Shared.Utility;
 using Content.Server.Shuttles.Events;
 using Content.Shared.IdentityManagement;
+using Content.Shared.SS220.Contractor;
 
 namespace Content.Server.Pinpointer;
 
@@ -53,6 +54,11 @@ public sealed class PinpointerSystem : SharedPinpointerSystem
         if (!component.CanRetarget)
             LocateTarget(uid, component);
 
+        //ss220 contractor pinpointer add start
+        if (component.IsContractorPinpointer)
+            LocateTarget(uid, component, args.User);
+        //ss220 contractor pinpointer add end
+
         args.Handled = true;
     }
 
@@ -73,8 +79,17 @@ public sealed class PinpointerSystem : SharedPinpointerSystem
         }
     }
 
-    private void LocateTarget(EntityUid uid, PinpointerComponent component)
+    private void LocateTarget(EntityUid uid, PinpointerComponent component, EntityUid? user = null) //ss220 contractor pinpointer add
     {
+        //ss220 contractor pinpointer add start
+        if (user != null && TryComp<ContractorComponent>(user, out var contractorComponent))
+        {
+            var target = GetEntity(contractorComponent.CurrentContractEntity);
+            SetTarget(uid, target, component);
+            return;
+        }
+        //ss220 contractor pinpointer add end
+
         // try to find target from whitelist
         if (component.IsActive && component.Component != null)
         {

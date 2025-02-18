@@ -11,8 +11,20 @@ namespace Content.Shared.SS220.Contractor;
 public sealed partial class SharedContractorItemPrototype : IPrototype
 {
     [DataField("items")]
-    public Dictionary<string, FixedPoint2> Items = new();
+    public Dictionary<string, ContractorItemData> Items = new();
 
     [IdDataField]
     public string ID { get; } = default!;
+}
+
+[Serializable]
+[NetSerializable]
+[DataDefinition]
+public sealed partial class ContractorItemData
+{
+    [DataField]
+    public FixedPoint2 Amount;
+
+    [DataField]
+    public int? Quantity;
 }

@@ -51,6 +51,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             case ContractorUpdateStatsMessage:
                 UpdateStats();
                 UpdateContracts(EntMan.GetEntity(_contractorPdaComponent.PdaOwner)!.Value);
+                UpdateHub(_contractorPdaComponent.AvailableItems);
                 break;
         }
     }
@@ -366,7 +367,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         }
     }
 
-    private void UpdateHub(Dictionary<string, FixedPoint2> shopItems)
+    private void UpdateHub(Dictionary<string, ContractorItemData> shopItems)
     {
         if (_menu == null)
             return;
@@ -413,13 +414,17 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
                 VerticalAlignment = Control.VAlignment.Center,
             };
 
+            if (item.Value.Quantity >= 0)
+                itemNameLabel.Text += Loc.GetString("contractor-uplink-in-stock", ("quantity", item.Value.Quantity));
+
             var buyButton = new Button
             {
-                Text = Loc.GetString("contractor-uplink-buy-text", ("price", item.Value)),
+                Text = Loc.GetString("contractor-uplink-buy-text", ("price", item.Value.Amount)),
                 HorizontalExpand = false,
                 VerticalExpand = false,
                 StyleClasses = { "OpenBoth" },
                 MinSize = new Vector2(120, 30),
+                Disabled = item.Value.Quantity <= 0,
             };
 
             buyButton.OnPressed += _ =>

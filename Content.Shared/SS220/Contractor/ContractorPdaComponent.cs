@@ -23,7 +23,7 @@ public sealed partial class ContractorPdaComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public Dictionary<string, FixedPoint2> AvailableItems = new();
+    public Dictionary<string, ContractorItemData> AvailableItems = new();
 
     [DataField]
     [AutoNetworkedField]

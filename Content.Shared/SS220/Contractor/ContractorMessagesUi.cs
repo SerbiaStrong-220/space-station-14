@@ -62,9 +62,9 @@ public sealed class ContractorAbortContractMessage : BoundUserInterfaceMessage
 public sealed class ContractorHubBuyItemMessage : BoundUserInterfaceMessage
 {
     public string Item;
-    public FixedPoint2 Price;
+    public ContractorItemData Price;
 
-    public ContractorHubBuyItemMessage(string item, FixedPoint2 price)
+    public ContractorHubBuyItemMessage(string item, ContractorItemData price)
     {
         Item = item;
         Price = price;

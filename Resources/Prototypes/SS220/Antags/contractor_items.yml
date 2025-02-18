@@ -2,9 +2,12 @@
 - type: contractorItems
   id: ContractorItems
   items:
-    ContractorBaton: 1
-    Crowbar: 3
-    CrowbarRed: 2
+    ContractorBaton:
+      amount: 2.0
+      quantity: 2
+    Crowbar:
+      amount: 4.0
+      quantity: 2
 
 # Contractor warp point
 - type: entity

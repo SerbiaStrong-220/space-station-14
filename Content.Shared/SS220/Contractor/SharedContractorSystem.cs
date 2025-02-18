@@ -70,15 +70,21 @@ public abstract class SharedContractorSystem : EntitySystem
         if (ev.Actor != GetEntity(ent.Comp.PdaOwner))
             return;
 
-        if (contractorComponent.Reputation < ev.Price.Int())
+        if (ev.Price.Quantity is <= 0)
             return;
 
-        contractorComponent.Reputation -= ev.Price.Int();
+        if (contractorComponent.Reputation < ev.Price.Amount)
+            return;
+
+        contractorComponent.Reputation -= ev.Price.Amount.Int();
 
         var coordinates = Transform(ev.Actor).Coordinates;
         var itemToSpawn = Spawn(ev.Item, coordinates);
 
         _hands.PickupOrDrop(ev.Actor, itemToSpawn);
+
+        ent.Comp.AvailableItems[ev.Item].Quantity--;
+        Dirty(ent);
         _uiSystem.ServerSendUiMessage(ent.Owner, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
 
         Dirty(ev.Actor, contractorComponent);
