@@ -32,10 +32,10 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
-    [Dependency] private readonly LockSystem _lockSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IRobustRandom _random = default!; //ss220 lockpick add
+    [Dependency] private readonly SharedPopupSystem _popups = default!; //ss220 lockpick add
+    [Dependency] private readonly LockSystem _lockSystem = default!; //ss220 lockpick add
+    [Dependency] private readonly SharedAudioSystem _audio = default!; //ss220 lockpick add
 
     public override void Initialize()
     {
@@ -60,7 +60,7 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
         SubscribeLocalEvent<EntityStorageComponent, WeldableAttemptEvent>(OnWeldableAttempt);
         SubscribeLocalEvent<EntityStorageComponent, BeforeExplodeEvent>(OnExploded);
 
-        SubscribeLocalEvent<EntityStorageComponent, LockPickSuccessEvent>(OnLockPick);
+        SubscribeLocalEvent<EntityStorageComponent, LockPickSuccessEvent>(OnLockPick); //ss220 lockpick add
 
         SubscribeLocalEvent<InsideEntityStorageComponent, InhaleLocationEvent>(OnInsideInhale);
         SubscribeLocalEvent<InsideEntityStorageComponent, ExhaleLocationEvent>(OnInsideExhale);

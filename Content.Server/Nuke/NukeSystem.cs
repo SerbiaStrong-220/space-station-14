@@ -81,7 +81,7 @@ public sealed class NukeSystem : EntitySystem
 
         // Doafter events
         SubscribeLocalEvent<NukeComponent, NukeDisarmDoAfterEvent>(OnDoAfter);
-        SubscribeLocalEvent<NukeComponent, LockPickSuccessEvent>(OnLockPick);
+        SubscribeLocalEvent<NukeComponent, LockPickSuccessEvent>(OnLockPick); //ss220 lockpick add
     }
 
     private void OnInit(EntityUid uid, NukeComponent component, ComponentInit args)
