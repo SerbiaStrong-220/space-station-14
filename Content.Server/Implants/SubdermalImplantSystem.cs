@@ -28,10 +28,12 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Server.IdentityManagement;
 using Content.Server.DetailExaminable;
+using Content.Shared.Actions;
 using Content.Shared.Store.Components;
 using Robust.Shared.Collections;
 using Robust.Shared.Map.Components;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Store;
 
 namespace Content.Server.Implants;
@@ -53,9 +55,13 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
+    [Dependency] private readonly SharedActionsSystem _actions = default!; //ss220 add adrenal implant
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private HashSet<Entity<MapGridComponent>> _targetGrids = [];
+
+    private const string BeakerSolution = "beaker"; //ss220 add adrenal implant
+    private const string ChemicalSolution = "chemicals"; //ss220 add adrenal implant
 
     public override void Initialize()
     {
@@ -69,6 +75,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         SubscribeLocalEvent<SubdermalImplantComponent, ActivateImplantEvent>(OnActivateImplantEvent);
         SubscribeLocalEvent<SubdermalImplantComponent, UseScramImplantEvent>(OnScramImplant);
         SubscribeLocalEvent<SubdermalImplantComponent, UseDnaScramblerImplantEvent>(OnDnaScramblerImplant);
+        SubscribeLocalEvent<SubdermalImplantComponent, UseAdrenalImplantEvent>(OnAdrenalImplant); //ss220 add adrenal implant
 
     }
 
@@ -277,7 +284,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
             {
                 fingerprint.Fingerprint = _forensicsSystem.GenerateFingerprint();
             }
-            RemComp<DetailExaminableComponent>(ent); // remove MRP+ custom description if one exists 
+            RemComp<DetailExaminableComponent>(ent); // remove MRP+ custom description if one exists
             _identity.QueueIdentityUpdate(ent); // manually queue identity update since we don't raise the event
             _popup.PopupEntity(Loc.GetString("scramble-implant-activated-popup"), ent, ent);
         }
@@ -285,4 +292,27 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         args.Handled = true;
         QueueDel(uid);
     }
+
+    //ss220 add adrenal implant start
+    private void OnAdrenalImplant(Entity<SubdermalImplantComponent> ent, ref UseAdrenalImplantEvent args)
+    {
+        if (!TryComp<SolutionContainerManagerComponent>(ent.Owner, out var solutionImplantComp))
+            return;
+
+        if (!TryComp<SolutionContainerManagerComponent>(args.Performer, out var solutionUserComp))
+            return;
+
+        if (!_solutionContainer.TryGetSolution((ent.Owner, solutionImplantComp), BeakerSolution, out var solutionImplant))
+            return;
+
+        if (!_solutionContainer.TryGetSolution((args.Performer, solutionUserComp), ChemicalSolution, out var solutionUser))
+            return;
+
+        _solutionContainer.TryTransferSolution(solutionUser.Value,
+            solutionImplant.Value.Comp.Solution,
+            solutionImplant.Value.Comp.Solution.Volume / FixedPoint2.New(args.Action.Comp.Charges!.Value));
+
+        args.Handled = true;
+    }
+    //ss220 add adrenal implant end
 }
