@@ -1,8 +1,7 @@
 - type: entity
   parent: BaseItem
   id: Lockpick
-  suffix: Фальшивый
-  name: отмычка
+  name: Lockpick
   description: Используется для вскрытия шкафов, а также для снятия болтов у ядерной боеголовки
   components:
     - type: Sprite
