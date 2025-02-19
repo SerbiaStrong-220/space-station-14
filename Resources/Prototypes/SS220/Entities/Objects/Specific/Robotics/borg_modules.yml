@@ -73,6 +73,9 @@
     - state: ClownMime
     - state: icon-ClownMime
     sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
+  - type: Tag
+    tags:
+    - BorgModuleClown
   - type: ItemBorgModule
     items:
     - BluespaceCrayon
@@ -92,6 +95,9 @@
     - state: ClownMime
     - state: icon-ClownMime
     sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
+  - type: Tag
+    tags:
+    - BorgModuleClown
   - type: ItemBorgModule
     items:
     - BikeHornInstrument
@@ -101,4 +107,4 @@
     - ToyFigurineClown
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: clowning-module }
-#SS220 ClownMime borg end    
+#SS220 ClownMime borg end
