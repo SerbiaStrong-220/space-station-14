@@ -62,6 +62,15 @@
     solutions:
       smokable:
         maxVol: 20
+      food: #SS220-Eat-Cigarettes-begin
+        maxVol: 20
+        reagents:
+        - ReagentId: GastroToxin
+          Quantity: 1
+  - type: Food 
+  - type: FlavorProfile
+    flavors:
+      - punishment #SS220-Eat-Cigarettes-end
   - type: Tag
     tags:
       - Cigarette
