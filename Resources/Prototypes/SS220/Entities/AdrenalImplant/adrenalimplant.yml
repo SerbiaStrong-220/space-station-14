@@ -3,12 +3,12 @@
   components:
   - type: InstantAction
     charges: 3
-    useDelay: 80 #80 seconds delay
+    timeBetweenCharges: 80 #80 seconds delay
     checkCanInteract: false
     checkConsciousness: false
     itemIconStyle: BigAction
     priority: -20
     icon:
-      sprite: /Textures/Mobs/Species/Human/organs.rsi
-      state: heart-off
+      sprite: /Textures/SS220/Objects/Specific/Medical/implant-adrenal.rsi
+      state: adrenal
     event: !type:UseAdrenalImplantEvent

@@ -712,13 +712,18 @@ public abstract class SharedActionsSystem : EntitySystem
 
         action.Cooldown = null;
 
-        //ss220 add adrenal implant start (ВЫ ВООБЩЕ ТЕСТИТЕ СВОИ ГОВНО АПДЕЙТЫ, ОФФЫ?)
-        if (action is { UseDelay: not null, Charges: null or > 0 })
+        //ss220 add time between charges start
+        if (action is { TimeBetweenCharges: not null, Charges: > 0 })
+        {
+            dirty = true;
+            action.Cooldown = (curTime, curTime + action.TimeBetweenCharges.Value);
+        }
+        else if (action is { UseDelay: not null, Charges: null or < 1 })
         {
             dirty = true;
             action.Cooldown = (curTime, curTime + action.UseDelay.Value);
         }
-        //ss220 add adrenal implant end
+        //ss220 add time between charges end
 
         if (dirty)
         {
