@@ -5,7 +5,6 @@ using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Power;
-using Content.Shared.SS220.AirlockVisuals;
 using Content.Shared.Wires;
 using Robust.Shared.Player;
 
@@ -19,20 +18,11 @@ public sealed class AirlockSystem : SharedAirlockSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AirlockVisualsComponent, ComponentInit>(OnComponentInit); //ss220 airlock visuals fix
-
         SubscribeLocalEvent<AirlockComponent, SignalReceivedEvent>(OnSignalReceived);
 
         SubscribeLocalEvent<AirlockComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<AirlockComponent, ActivateInWorldEvent>(OnActivate, before: new[] { typeof(DoorSystem) });
     }
-
-    //ss220 airlock visuals fix start
-    private void OnComponentInit(Entity<AirlockVisualsComponent> ent, ref ComponentInit args)
-    {
-        Appearance.SetData(ent.Owner, DoorVisuals.ClosedLights, true);
-    }
-    //ss220 airlock visuals fix end
 
     private void OnSignalReceived(EntityUid uid, AirlockComponent component, ref SignalReceivedEvent args)
     {
