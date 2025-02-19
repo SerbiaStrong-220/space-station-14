@@ -15,7 +15,7 @@
     randomizeName: false
     hair: HairBald
   - type: Loadout
-    prototypes: [ SyndicateOperativeGearExtremelyBasic ]
+    prototypes: [ SyndicateOperativeGearExtremelyBasic ] #SS220-FixNuke
     roleLoadout: [ RoleSurvivalSyndicate ]
   - type: RandomMetadata
     nameSegments: [corvax_names_death_commando] # Corvax-Localization
@@ -39,7 +39,7 @@
   name: syndicate medic
   components:
   - type: Loadout
-    prototypes: [ SyndicateOperativeMedicFull ]
+    prototypes: [ SyndicateOperativeMedicFull ] #SS220-FixNuke
     roleLoadout: [ RoleSurvivalSyndicate ]
 
 - type: entity
@@ -48,7 +48,7 @@
   name: syndicate spy
   components:
   - type: Loadout
-    prototypes: [ SyndicateReinforcementSpy ]
+    prototypes: [ SyndicateReinforcementSpy ] #SS220-FixNuke
     roleLoadout: [ RoleSurvivalSyndicate ]
 
 - type: entity
@@ -57,7 +57,7 @@
   name: syndicate thief
   components:
   - type: Loadout
-    prototypes: [ SyndicateReinforcementThief ]
+    prototypes: [ SyndicateReinforcementThief ] #SS220-FixNuke
     roleLoadout: [ RoleSurvivalSyndicate ]
 
 - type: entity
@@ -71,7 +71,7 @@
     - nukeops-role-operator
     - SyndicateNamesNormal
   - type: Loadout
-    prototypes: [ SyndicateOperativeGearFullNoUplink ]
+    prototypes: [ SyndicateOperativeGearFullNoUplink ] #SS220-FixNuke
 
 # Nuclear Operative
 - type: entity
