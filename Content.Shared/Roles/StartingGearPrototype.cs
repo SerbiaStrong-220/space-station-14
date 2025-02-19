@@ -38,7 +38,7 @@ public sealed partial class StartingGearPrototype : IPrototype, IInheritingProto
                 Dictionary<string, EntProtoId> newDict = new();
 
                 // Get values from parent
-                // Since parents are the same prototype, this action is essentially recursive.
+                // Since parents are the same prototype this action is essentially recursive.
                 foreach (var parent in Parents)
                 {
                     var parentProto = prototypeManager.Index<StartingGearPrototype>(parent);
