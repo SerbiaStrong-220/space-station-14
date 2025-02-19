@@ -94,6 +94,9 @@ public sealed class AirlockSystem : SharedAirlockSystem
             emergencyLightsVisible = _appearanceSystem.TryGetData<bool>(uid, DoorVisuals.EmergencyLights, out var eaLights, args.Component) && eaLights;
             unlitVisible =
                     (state == DoorState.Closing
+                //ss220 fix visual state for airlocks start
+                ||  state == DoorState.Closed
+                //ss220 fix visual state for airlocks end
                 ||  state == DoorState.Opening
                 ||  state == DoorState.Denying
                 || (state == DoorState.Open && comp.OpenUnlitVisible)
