@@ -3,7 +3,9 @@
   components:
   - type: InstantAction
     charges: 3
-    useDelay: 60 #60 seconds delay
+    useDelay: 80 #80 seconds delay
+    checkCanInteract: false
+    checkConsciousness: false
     itemIconStyle: BigAction
     priority: -20
     icon:

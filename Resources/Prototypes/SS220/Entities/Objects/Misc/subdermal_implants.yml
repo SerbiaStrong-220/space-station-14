@@ -91,12 +91,20 @@
         maxVol: 90
         canReact: false
         reagents:
-        - ReagentId: Bicaridine
-          Quantity: 30
+        - ReagentId: Rororium
+          Quantity: 3
+        - ReagentId: Ephedrine
+          Quantity: 3
         - ReagentId: TranexamicAcid
-          Quantity: 30
+          Quantity: 15
         - ReagentId: Dylovene
-          Quantity: 30
+          Quantity: 15
+        - ReagentId: Bicaridine
+          Quantity: 24
+        - ReagentId: Pyrazine
+          Quantity: 15
+        - ReagentId: Epinephrine
+          Quantity: 15
   - type: TriggerImplantAction
   - type: HiddenDescription
     entries:
