@@ -1,7 +1,0 @@
-- type: entity
-  parent: MaterialBananium
-  id: MaterialBananium2
-  suffix: Double
-  components:
-  - type: Stack
-    count: 2
