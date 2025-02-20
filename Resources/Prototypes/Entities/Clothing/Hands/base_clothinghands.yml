@@ -23,6 +23,15 @@
     tags:
     - ClothMade
     - WhitelistChameleon
+  #SS220 WristWatch on glove begin
+  - type: ItemSlots
+    slots:
+      item_watch:
+        name: часы
+        whitelist:
+          tags:
+          - WristWatch
+  #SS220 WristWatch on glove
   - type: DamageOnInteractProtection
     damageProtection:
       flatReductions:
