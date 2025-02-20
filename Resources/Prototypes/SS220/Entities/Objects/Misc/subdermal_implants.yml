@@ -78,3 +78,52 @@
             - TraitorRole
             - NukeOperative
 
+- type: entity
+  parent: BaseSubdermalImplant
+  id: AdrenalImplant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    implantAction: ActionActivateAdrenalImplant
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 90
+        canReact: false
+        reagents:
+        - ReagentId: Rororium
+          Quantity: 3
+        - ReagentId: Ephedrine
+          Quantity: 3
+        - ReagentId: TranexamicAcid
+          Quantity: 15
+        - ReagentId: Dylovene
+          Quantity: 15
+        - ReagentId: Bicaridine
+          Quantity: 24
+        - ReagentId: Pyrazine
+          Quantity: 15
+        - ReagentId: Epinephrine
+          Quantity: 15
+  - type: TriggerImplantAction
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-AdrenalImplant-medical
+      jobRequired:
+      - Paramedic
+      - MedicalDoctor
+      - SeniorPhysician
+      - ChiefMedicalOfficer
+      - Brigmedic
+    - label: hidden-desc-AdrenalImplant-research
+      jobRequired:
+      - ResearchAssistant
+      - ResearchDirector
+      - Scientist
+      - Borg
+    - label: hidden-desc-AdrenalImplant-syndicate
+      whitelistMind:
+        mindRoles:
+        - TraitorRole
+        - NukeOperative
+

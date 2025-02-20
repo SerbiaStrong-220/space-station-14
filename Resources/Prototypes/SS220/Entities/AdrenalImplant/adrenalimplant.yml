@@ -1,0 +1,14 @@
+- type: entity
+  id: ActionActivateAdrenalImplant
+  components:
+  - type: InstantAction
+    charges: 3
+    timeBetweenCharges: 30 #30 seconds delay
+    checkCanInteract: false
+    checkConsciousness: false
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: /Textures/SS220/Objects/Specific/Medical/implant-adrenal.rsi
+      state: adrenal
+    event: !type:UseAdrenalImplantEvent

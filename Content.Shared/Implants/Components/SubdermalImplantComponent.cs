@@ -99,3 +99,10 @@ public sealed partial class UseDnaScramblerImplantEvent : InstantActionEvent
 {
 
 }
+
+//ss220 add adrenal implant start
+public sealed partial class UseAdrenalImplantEvent : InstantActionEvent
+{
+
+}
+//ss220 add adrenal implant end
