@@ -32,14 +32,14 @@
     sprite: Clothing/Mask/gassecurity.rsi
   - type: Clothing
     sprite: Clothing/Mask/gassecurity.rsi
-  - type: ToggleClothing
+  - type: ToggleClothing #SS220 - Smart gas mask - start
     action: ActionSmartGasMask
   - type: UserInterface
     interfaces:
       enum.SmartGasMaskUiKey.Key:
         type: SmartGasMaskBoundUserInterface
   - type: SmartGasMask
-    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskSupport"]
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskSupport"] #SS220 - Smart gas mask - end
   - type: Armor
     modifiers:
       coefficients:
