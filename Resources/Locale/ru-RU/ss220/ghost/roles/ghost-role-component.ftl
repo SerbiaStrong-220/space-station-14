@@ -20,6 +20,16 @@ ghost-role-information-traveling-chef-description = Вы - шеф-повар н�
 ghost-role-information-traveling-chef-rules = Действуют обычные правила для экипажа станции.
 # Lost souls roles end
 
+#Fauna update start here!!!
 ghost-role-information-giant-fly-name = Веспия
 ghost-role-information-giant-fly-description = Вы гигантская боевая оса. Ваша задача - уничтожить всех кроме представителей вашего вида.
 ghost-role-information-giant-fly-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими гигантскими осами.
+
+ghost-role-information-space-adder-name = Космическая гадюка
+ghost-role-information-space-adder-description = Обитатели этой станции выглядят очень аппетитно, как раз вам на зубок.
+ghost-role-information-small-space-adder-name = Маленькая космическая гадюка
+
+ghost-role-information-cobra-space-name = Космическая кобра
+ghost-role-information-cobra-space-description = Когда вас заметят - будет слишком поздно. Выползайте на охоту!
+ghost-role-information-snake-overall-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими змеями из далёкого космоса.
+#Fauna update end here!!!

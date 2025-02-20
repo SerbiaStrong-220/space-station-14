@@ -11,6 +11,7 @@
   - type: Sprite
     sprite: Objects/Misc/eggspider.rsi
     state: icon
+    drawdepth: Mobs
   - type: Transform
   - type: Clickable
   - type: InteractionOutline
@@ -61,7 +62,34 @@
   - type: StaticPrice
     price: 500 
 
+#Fauna update Spiders
+- type: entity 
+  parent: BaseSpiderEgg
+  id: SpiderEggClownSpider
+  categories: [ HideSpawnMenu ]
+  name: Tarantula egg
+  description: Is this a gem? Is this an egg? It looks expensive.
+  components:
+  - type: SpiderEgg
+    incubationTime: 60
+    spawnProtos:
+      - id: MobClownSpider
+        amount: 1
+
+- type: entity 
+  parent: BaseSpiderEgg
+  id: SpiderEggTarantula
+  categories: [ HideSpawnMenu ]
+  name: Tarantula egg
+  description: Is this a gem? Is this an egg? It looks expensive.
+  components:
+  - type: SpiderEgg
+    incubationTime: 60
+    spawnProtos:
+      - id: MobGiantSpiderAngry
+        amount: 1
 #Spiders
+
 - type: entity 
   parent: BaseSpiderEgg
   id: SpiderEggDrone
