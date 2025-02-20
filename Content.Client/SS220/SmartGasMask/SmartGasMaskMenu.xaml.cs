@@ -1,6 +1,9 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Numerics;
 using Content.Client.UserInterface.Controls;
-using Content.Shared.Ghost.Roles.Components;
+using Content.Shared.SS220.SmartGasMask;
+using Content.Shared.SS220.SmartGasMask.Prototype;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
@@ -9,6 +12,8 @@ namespace Content.Client.SS220.SmartGasMask;
 
 public sealed partial class SmartGasMaskMenu : RadialMenu
 {
+    public event Action<ProtoId<AlertSmartGasMaskPrototype>>? SendAlertSmartGasMaskRadioMessageAction;
+
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
@@ -30,20 +35,20 @@ public sealed partial class SmartGasMaskMenu : RadialMenu
     {
         var main = FindControl<RadialContainer>("Main");
 
-        if (!_entityManager.TryGetComponent<GhostRoleMobSpawnerComponent>(Entity, out var comp))
+        if (!_entityManager.TryGetComponent<SmartGasMaskComponent>(Entity, out var comp))
             return;
 
-        foreach (var ghostRoleProtoString in comp.SelectablePrototypes)
+        foreach (var smartProtoString in comp.SelectablePrototypes)
         {
-            if (!_prototypeManager.TryIndex<GhostRolePrototype>(ghostRoleProtoString, out var ghostRoleProto))
+            if (!_prototypeManager.TryIndex<AlertSmartGasMaskPrototype>(smartProtoString, out var alertProto))
                 continue;
 
-            var button = new GhostRoleRadioMenuButton()
+            var button = new SmartGasMaskMenuButton()
             {
                 StyleClasses = { "RadialMenuButton" },
                 SetSize = new Vector2(64, 64),
-                ToolTip = Loc.GetString(ghostRoleProto.Name),
-                ProtoId = ghostRoleProto.ID,
+                ToolTip = Loc.GetString(alertProto.Name),
+                ProtoId = alertProto.ID,
             };
 
             var entProtoView = new EntityPrototypeView()
@@ -54,18 +59,18 @@ public sealed partial class SmartGasMaskMenu : RadialMenu
                 Stretch = SpriteView.StretchMode.Fill
             };
 
-            if (_prototypeManager.TryIndex(ghostRoleProto.IconPrototype, out var iconProto))
+            if (_prototypeManager.TryIndex(alertProto.IconPrototype, out var iconProto))
                 entProtoView.SetPrototype(iconProto);
             else
-                entProtoView.SetPrototype(ghostRoleProto.EntityPrototype);
+                entProtoView.SetPrototype(alertProto.EntityPrototype);
 
             button.AddChild(entProtoView);
             main.AddChild(button);
-            AddGhostRoleRadioMenuButtonOnClickActions(main);
+            AddSmartGasMaskMenuButtoOnClickActions(main);
         }
     }
 
-    private void AddGhostRoleRadioMenuButtonOnClickActions(Control control)
+    private void AddSmartGasMaskMenuButtoOnClickActions(Control control)
         {
             var mainControl = control as RadialContainer;
 
@@ -74,22 +79,22 @@ public sealed partial class SmartGasMaskMenu : RadialMenu
 
             foreach (var child in mainControl.Children)
             {
-                var castChild = child as GhostRoleRadioMenuButton;
+                var castChild = child as SmartGasMaskMenuButton;
 
                 if (castChild == null)
                     continue;
 
                 castChild.OnButtonUp += _ =>
                 {
-                    SendGhostRoleRadioMessageAction?.Invoke(castChild.ProtoId);
+                    SendAlertSmartGasMaskRadioMessageAction?.Invoke(castChild.ProtoId);
                     Close();
                 };
             }
         }
 }
 
-public sealed class GhostRoleRadioMenuButton : RadialMenuTextureButton
+public sealed class SmartGasMaskMenuButton : RadialMenuTextureButton
 {
-    public ProtoId<GhostRolePrototype> ProtoId { get; set; }
+    public ProtoId<AlertSmartGasMaskPrototype> ProtoId { get; set; }
 }
 

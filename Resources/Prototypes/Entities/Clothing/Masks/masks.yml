@@ -33,7 +33,13 @@
   - type: Clothing
     sprite: Clothing/Mask/gassecurity.rsi
   - type: ToggleClothing
-    action: ActionToggleSmartGasMask
+    action: ActionSmartGasMask
+  - type: UserInterface
+    interfaces:
+      enum.SmartGasMaskUiKey.Key:
+        type: SmartGasMaskBoundUserInterface
+  - type: SmartGasMask
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskSupport"]
   - type: Armor
     modifiers:
       coefficients:
@@ -41,16 +47,6 @@
         Slash: 0.95
         Piercing: 0.95
         Heat: 0.95
-
-- type: entity
-  id: ActionToggleSmartGasMask
-  name: Toggle Reactive armor 
-  description: Toggles the armor on and off. 
-  components:
-  - type: InstantAction
-    priority: -9
-    itemIconStyle: BigItem
-    event: !type:ToggleActionEvent
 
 - type: entity
   parent: [ClothingMaskGas]
