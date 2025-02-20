@@ -86,6 +86,9 @@
         - tag: ClothingMaskMime
           name: MimeMask
           doAfter: 2
+        - tag: BananiumHorn
+          name: BananiumHorn
+          doAfter: 2
 #SS220 ClownMimecyborg end
 
   - node: derelictcyborg
