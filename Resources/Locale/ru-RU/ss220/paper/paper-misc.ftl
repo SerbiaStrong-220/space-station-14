@@ -10,7 +10,7 @@ book-text-clownmime-scribbles =    [color=red]Дорогие дети![/color] [
                                 4. [color=#000000]Францу[/color][bold][color=#808080]зский[/color][/bold] [color=red]багет[/color]
                                 5. [color=red]8 р[/color][color=red]а[/color][color=orange]з[/color][color=#800080]н[/color][color=green]о[/color][color=#800000]ц[/color][color=blue]в[/color][color=purple]е[/color][color=red]т[/color][color=orange]н[/color][color=#800080]ы[/color][color=green]х[/color] мелков
                                 6. [color=red]Маска и туфли [/color][color=green]клоуна[/color], а также маска мима
-                                7. [color=#FFD700]Бананиумовsq клаксон[/color]
+                                7. [color=#FFD700]Бананиумовый клаксон[/color]
 
                                 {"["}bold{"]"}{"["}color=orange{"]"}Подготовка:[/color][/bold]
 
