@@ -89,6 +89,9 @@ namespace Content.Server.Forensics
                 return;
 
             sourceDnaComp.DNA = ent.Comp.DNA;
+
+            var ev = new GenerateDnaEvent { Owner = args.Target, DNA = ent.Comp.DNA };
+            RaiseLocalEvent(args.Target, ref ev);
         }
         //ss220 add cloning entity copy DNA from source end
 
