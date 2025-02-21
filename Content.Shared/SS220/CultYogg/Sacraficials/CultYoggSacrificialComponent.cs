@@ -21,6 +21,23 @@ public sealed partial class CultYoggSacrificialComponent : Component
     [DataField]
     public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "CultYoggSacraficialTargetIcon";
 
+    /// <summary>
+    /// Tier number required for replacement if it needed
+    /// </summary>
+    [DataField]
     public int Tier = 0;//initilize as max possible tier
+
+    /// <summary>
+    /// Time required for announcement
+    /// </summary>
+    [DataField]
+    public TimeSpan AnnounceReplacementCooldown = TimeSpan.FromSeconds(60);
+    /// <summary>
+    /// Time required for replacement
+    /// </summary>
+    [DataField]
+    public TimeSpan ReplacementCooldown = TimeSpan.FromSeconds(300);
+
+
     public bool WasSacraficed = false;
 }

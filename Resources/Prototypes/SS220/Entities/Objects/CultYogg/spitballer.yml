@@ -20,7 +20,7 @@
       rechargeCooldown: 10
       rechargeSound: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_reload.ogg
     - type: Sprite
-      sprite: SS220/Objects/Weapons/Guns/cult_yogg_spitballer.rsi
+      sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spitballer.rsi
       layers:
         - state: icon
     - type: Appearance

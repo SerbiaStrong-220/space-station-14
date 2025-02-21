@@ -1,5 +1,6 @@
 - type: randomHumanoidSettings
   id: VisitorTourist
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran]
   parent: VisitorCivilian
   components:
     - type: GhostRole

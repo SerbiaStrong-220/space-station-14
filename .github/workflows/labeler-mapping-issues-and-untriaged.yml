@@ -41,11 +41,4 @@ jobs:
                 issue_number: context.issue.number,
                 assignees: [selectedOption.assignee]
               }); // added assignee
-            } else {
-              await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                labels: ["Status: Needs Labels"]
-              }); // add "Status: Needs Labels"
             }

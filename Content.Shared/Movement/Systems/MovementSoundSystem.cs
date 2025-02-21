@@ -1,6 +1,8 @@
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
+using Content.Shared.SS220.CCVars;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -14,10 +16,17 @@ public sealed class MovementSoundSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
+    // SS220 performance-test-begin
+    [Dependency] private readonly IConfigurationManager _configManager = default!;
+    private bool _lessSound;
+    // SS220 performance-test-end
+
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<MovementSoundComponent, MoveInputEvent>(OnMoveInput);
+
+        Subs.CVar(_configManager, CCVars220.LessSoundSources, value => _lessSound = value, true); // SS220 performance-test
     }
 
     private void OnMoveInput(Entity<MovementSoundComponent> ent, ref MoveInputEvent args)
@@ -30,6 +39,11 @@ public sealed class MovementSoundSystem : EntitySystem
 
         if (oldMoving == moving)
             return;
+
+        // SS220 performance-test
+        if (_lessSound)
+            return;
+        // SS220 performace-test
 
         if (moving)
         {

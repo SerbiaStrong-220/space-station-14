@@ -10,6 +10,7 @@
   - Headphones
   - PlushieLizard
   - PlushieSpaceLizard
+  - ThreeCandles
   - Lighter
   - CigPackGreen
   - CigPackRed
@@ -18,6 +19,7 @@
   - CigarCase
   - CigarGold
   - ClothingNeckLGBTPin
+  - ClothingNeckAllyPin
   - ClothingNeckAromanticPin
   - ClothingNeckAsexualPin
   - ClothingNeckBisexualPin
@@ -26,6 +28,8 @@
   - ClothingNeckLesbianPin
   - ClothingNeckNonBinaryPin
   - ClothingNeckPansexualPin
+  - ClothingNeckOmnisexualPin
+  - ClothingNeckGenderqueerPin
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
@@ -835,7 +839,6 @@
   name: loadout-group-chief-engineer-head
   minLimit: 0
   loadouts:
-  - ChiefEngineerHeadXmas #SS220 XMAS
   - ChiefEngineerHead
   - ChiefEngineerBeret
   - BeretCE #SS220-CEBeret
@@ -909,7 +912,6 @@
   id: StationEngineerHead
   name: loadout-group-station-engineer-head
   loadouts:
-  - StationEngineerHardhatYellowXmas #SS220 XMAS
   - StationEngineerHardhatYellow
   - StationEngineerHardhatOrange
   - StationEngineerHardhatRed
@@ -1192,6 +1194,7 @@
   - WinterHoSUnarmored #ss220 sec loadout update
   - Outer1984 #SS220-Two Floppa Iteration
   - CyberVestSecurity #SS220-Two Floppa Iteration
+  - HeadofSecurityBomber #SS220 HoSNEWBomber
 
 - type: loadoutGroup
   id: WardenHead
@@ -1222,7 +1225,6 @@
   name: loadout-group-security-head
   minLimit: 0
   loadouts:
-  - SecurityHelmetXmas #SS220 XMAS
   - SecurityHelmet
   - SecurityBeret
   - SecurityHat
@@ -1410,6 +1412,7 @@
   loadouts:
   - BrownShoes
   - MedicalWinterBoots
+  - CMOCorpShoes #ss220 new cmo 
 
 - type: loadoutGroup
   id: MedicalDoctorHead
@@ -1439,6 +1442,7 @@
   - MedicalDoctorJumpsuitTurtleneckAlt
   - MedicalDoctorJumpskirtTurtleneck
   - MedicalDoctorJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
+  - MedicalDoctorJumpsuitResponsibility #SS220-Responsibility
 
 - type: loadoutGroup
   id: MedicalDoctorOuterClothing
@@ -1464,6 +1468,7 @@
   loadouts:
   - WhiteShoes
   - MedicalWinterBoots
+  - MedicalDoctorShoesResponsibility #SS220-Responsibility
 
 - type: loadoutGroup
   id: MedicalDoctorPDA

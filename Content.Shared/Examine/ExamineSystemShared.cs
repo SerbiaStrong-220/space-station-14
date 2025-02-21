@@ -387,6 +387,8 @@ namespace Content.Shared.Examine
                     totalMessage.PushNewline();
             }
 
+            totalMessage.TrimEnd();
+
             return totalMessage;
         }
 

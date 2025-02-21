@@ -26,7 +26,7 @@ public sealed partial class CultYoggPodSystem : SharedCultYoggPodSystem
         if (args.Handled)
             return;
 
-        args.Handled = TryInsert(args.Dragged, ent);
+        args.Handled = TryInsert(args.User, args.Dragged, ent);
     }
 
     private void GotTerminated(Entity<CultYoggPodComponent> ent, ref EntityTerminatingEvent args)

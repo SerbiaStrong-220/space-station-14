@@ -7,7 +7,7 @@
   suffix: USSP
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/door_electronics_ussp.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Misc/door_electronics_ussp.rsi
 
 - type: entity
   parent: DoorElectronicsUssp

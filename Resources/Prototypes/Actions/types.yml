@@ -156,6 +156,10 @@
   name: Scramble DNA
   description:  Randomly changes your name and appearance.
   components:
+  #ss220 add for dna implant confirmable message start
+  - type: ConfirmableAction
+    popup: gera-transformation-popup
+  #ss220 add for dna implant confirmable message end
   - type: InstantAction
     charges: 1
     itemIconStyle: BigAction
@@ -324,8 +328,8 @@
 
 - type: entity
   id: ActionToggleWagging
-  name: action-name-toggle-wagging
-  description: action-description-toggle-wagging
+  name: Wagging Tail
+  description: Start or stop wagging your tail.
   components:
     - type: InstantAction
       icon: { sprite: Mobs/Customization/reptilian_parts.rsi, state: tail_smooth_behind }
@@ -334,6 +338,19 @@
       useDelay: 1 # emote spam
       event: !type:ToggleActionEvent
 
+- type: entity
+  id: FakeMindShieldToggleAction
+  name: '[color=green]Toggle Fake Mindshield[/color]'
+  description: Turn the Fake Mindshield implant's transmission on/off
+  components:
+  - type: InstantAction
+    icon: { sprite: Interface/Actions/actions_fakemindshield.rsi, state: icon }
+    iconOn: { sprite: Interface/Actions/actions_fakemindshield.rsi, state: icon-on }
+    itemIconStyle: NoItem
+    useDelay: 1
+    event: !type:FakeMindShieldToggleEvent
+
+# SS220 Better Vulpkanin begin
 - type: entity
   id: ActionToggleWaggingVulp
   name: action-name-toggle-wagging
@@ -345,3 +362,4 @@
       itemIconStyle: NoItem
       useDelay: 1 # emote spam
       event: !type:ToggleActionEvent
+# SS220 Better Vulpkanin end

@@ -9,7 +9,7 @@
   - type: CultYoggWeapon
     item: CultYoggCocoonSedativeSting
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/cult_yogg_sedativesting.rsi
+    sprite: SS220/Objects/Weapons/Melee/CultYogg/cult_yogg_sedativesting.rsi
     state: icon
   - type: SolutionContainerManager
     solutions:

@@ -116,25 +116,25 @@
   - type: CriminalRecordsConsole220
   - type: PowerMonitoringConsole
   - type: AtmosAlertsComputer
+  - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
   - type: ResearchConsole
   - type: ResearchClient
   - type: TechnologyDatabase
-  - type: SuperMatterObserver #SS220_TODO: Добавить отоброжение СМа Для ИИ
+  - type: SuperMatterObserver #SS220_TODO: Добавить отображение СМа Для ИИ
   - type: SuperMatterObserverReceiver
   - type: ApcPowerReceiver
     needsPower: false
     powerLoad: 0
-  # - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
   #SS220 Station Ai Actions end
   - type: DeviceNetwork
     deviceNetId: Wireless
-    receiveFrequencyId: CrewMonitor 
+    receiveFrequencyId: CrewMonitor
     transmitFrequencyId: ShuttleTimer
   - type: StationMap #SS220 Station Ai Actions
   - type: RadarConsole
     followEntity: false
   - type: CommunicationsConsole
-    canShuttle: false
+    canShuttle: true
     title: comms-console-announcement-title-station-ai
     color: "#5ed7aa"
   - type: HolographicAvatar
@@ -421,7 +421,7 @@
   - type: StationAiVision
   - type: InteractionOutline
   - type: Sprite
-    sprite: SS220/Mobs/Silicon/station_ai.rsi #SS220 XMAS
+    sprite: Mobs/Silicon/station_ai.rsi
     layers:
     - state: base
     - state: ai_empty
@@ -450,7 +450,7 @@
     unlistedNumber: true
     requiresPower: false
   - type: Holopad
-  - type: StationAiWhitelist  
+  - type: StationAiWhitelist
   - type: UserInterface
     interfaces:
         enum.HolopadUiKey.AiRequestWindow:
@@ -468,7 +468,7 @@
     containerId: station_ai_mind_slot
     job: StationAi
   - type: Sprite
-    sprite: SS220/Mobs/Silicon/station_ai.rsi #SS220 XMAS
+    sprite: Mobs/Silicon/station_ai.rsi
     layers:
     - state: base
     - state: ai
@@ -496,6 +496,7 @@
     interfaces:
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
+        requireInputValidation: false
   - type: ComplexInteraction
   - type: Actions
   - type: Access
@@ -513,6 +514,9 @@
     - HideContextMenu
     - StationAi
     - NoConsoleSound
+  - type: StartingMindRole
+    mindRole: "MindRoleSiliconBrain"
+    silent: true
 
 # Hologram projection that the AI's eye tracks.
 - type: entity
@@ -533,7 +537,7 @@
   - type: Visibility
     layer: 2
   - type: Sprite
-    sprite: SS220/Mobs/Silicon/station_ai.rsi #SS220 XMAS
+    sprite: Mobs/Silicon/station_ai.rsi
     layers:
     - state: ai_camera
       shader: unshaded
@@ -570,12 +574,15 @@
   - type: ContainerFill
     containers:
       borg_brain:
-        - MMIFilled
+      - PositronicBrain
   - type: ItemSlots
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellMedium
+  - type: StartingMindRole
+    mindRole: "MindRoleSiliconBrain"
+    silent: true
 
 - type: entity
   id: PlayerBorgSyndicateAssaultBattery

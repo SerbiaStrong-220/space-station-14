@@ -7,9 +7,9 @@
   description: This belt allows you to store everything you need in a convenient and quickly accessible place, and the material from which it is made allows you to look even more stylish.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/blueshieldbelt.rsi
+    sprite: SS220/Clothing/Belt/blueshield.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/blueshieldbelt.rsi
+    sprite: SS220/Clothing/Belt/blueshield.rsi
   - type: Storage
     maxItemSize: Normal
     defaultStorageOrientation: Vertical
@@ -36,9 +36,9 @@
   description: Universal unloading vest with straps and belt. It can accommodate anything... anything of a small size.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/blueshieldwebbing.rsi
+    sprite: SS220/Clothing/Belt/blueshield_webbing.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/blueshieldwebbing.rsi
+    sprite: SS220/Clothing/Belt/blueshield_webbing.rsi
   - type: Storage
     grid:
     - 0,1,0,2
@@ -200,9 +200,9 @@
   suffix: Filled, For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/druid_belt.rsi
+    sprite: SS220/Clothing/Belt/hydro_druid.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/druid_belt.rsi
+    sprite: SS220/Clothing/Belt/hydro_druid.rsi
   - type: Storage
     whitelist:
       tags:
@@ -266,9 +266,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Belt/chef_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Belt/chef_white.rsi
   - type: Storage
     whitelist:
       tags:
@@ -305,9 +305,9 @@
   description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Belt/chef_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Belt/chef_white.rsi
 
 - type: entity
   parent: ClothingBeltChefApronBase
@@ -316,9 +316,9 @@
   description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_green.rsi
+    sprite: SS220/Clothing/Belt/chef_green.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_green.rsi
+    sprite: SS220/Clothing/Belt/chef_green.rsi
 
 - type: entity
   parent: ClothingBeltChefApronBase
@@ -327,9 +327,9 @@
   description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_black.rsi
+    sprite: SS220/Clothing/Belt/chef_black.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_black.rsi
+    sprite: SS220/Clothing/Belt/chef_black.rsi
 
 - type: entity
   parent: ClothingBeltChefApronBase
@@ -338,9 +338,9 @@
   description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_red.rsi
+    sprite: SS220/Clothing/Belt/chef_red.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_red.rsi
+    sprite: SS220/Clothing/Belt/chef_red.rsi
 
 - type: entity
   parent: ClothingBeltChefApronBase
@@ -350,9 +350,9 @@
   suffix: За время в игре, Сеньор
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_nt.rsi
+    sprite: SS220/Clothing/Belt/chef_nt.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_nt.rsi
+    sprite: SS220/Clothing/Belt/chef_nt.rsi
 
 - type: entity
   id: ClothingBeltChefApronWhiteFilled
@@ -459,9 +459,9 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/interdyne_belt.rsi
+    sprite: SS220/Clothing/Belt/paramedic_interdyne.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/interdyne_belt.rsi
+    sprite: SS220/Clothing/Belt/paramedic_interdyne.rsi
 
 - type: entity
   id: ClothingBeltMedicalInterdyneFilled

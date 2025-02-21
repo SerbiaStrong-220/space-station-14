@@ -7,11 +7,9 @@ namespace Content.Server.SS220.CultYogg.Sacraficials;
 public sealed class SacraficialReplacementEvent : EntityEventArgs
 {
     public readonly EntityUid Entity;
-    public readonly NetUserId Player;
 
-    public SacraficialReplacementEvent(EntityUid entity, NetUserId player)
+    public SacraficialReplacementEvent(EntityUid entity)
     {
         Entity = entity;
-        Player = player;
     }
 }

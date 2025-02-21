@@ -89,9 +89,8 @@ public abstract class SharedCultYoggSystem : EntitySystem
             return;
         }
 
-        if (!_cultYoggCorruptedSystem.TryCorruptContinuously(uid, args.Target, false))
+        if (!_cultYoggCorruptedSystem.TryCorruptContinuously(uid, uid.Comp, args.Target, false))
         {
-            _popup.PopupClient(Loc.GetString("cult-yogg-corrupt-no-proto"), args.Target, uid);
             return;
         }
         args.Handled = true;
@@ -120,9 +119,8 @@ public abstract class SharedCultYoggSystem : EntitySystem
             return;
         }
 
-        if (!_cultYoggCorruptedSystem.TryCorruptContinuously(uid, handItem.Value, true))
+        if (!_cultYoggCorruptedSystem.TryCorruptContinuously(uid, uid.Comp, handItem.Value, true))
         {
-            _popup.PopupClient(Loc.GetString("cult-yogg-corrupt-no-proto"), handItem.Value, uid);
             return;
         }
         args.Handled = true;

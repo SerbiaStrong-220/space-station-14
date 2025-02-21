@@ -137,9 +137,9 @@
   description: Someone who wears this means business.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpskirt/detective.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/detective.rsi #ss220 resprite
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpskirt/detective.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/detective.rsi #ss220 resprite
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -148,9 +148,9 @@
   description: A hard-boiled private investigator's grey suit, complete with tie clip.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpskirt/detective_grey.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/detective_grey.rsi #ss220 resprite
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpskirt/detective_grey.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/detective_grey.rsi #ss220 resprite
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -523,9 +523,9 @@
   description: Uniform for subpar operative LARPers performing tactical insulated glove theft in deep space.
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Uniforms/Jumpskirt/tacticool_s.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_tacticool_s.rsi #SS220-tacticool_s-resprite
     - type: Clothing
-      sprite: SS220/Clothing/Uniforms/Jumpskirt/tacticool_s.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_tacticool_s.rsi #SS220-tacticool_s-resprite
     # Too cool for sensors to be on
     - type: SuitSensor
       randomMode: false

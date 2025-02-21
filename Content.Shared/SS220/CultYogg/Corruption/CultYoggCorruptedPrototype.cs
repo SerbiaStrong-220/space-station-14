@@ -43,6 +43,12 @@ namespace Content.Shared.SS220.CultYogg.Corruption
         [DataField("emptyStorage", required: false)]
         public bool EmptyStorage { get; private set; }
 
+        /// <summary>
+        /// At what stage is this corruption result available
+        /// </summary>
+        [DataField("avaliableOnStage", required: false)]
+        public int AvaliableOnStage = 0;
+
     }
 
     [DataDefinition]

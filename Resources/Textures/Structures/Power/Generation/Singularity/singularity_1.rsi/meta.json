@@ -6,6 +6,7 @@
     "x": 32,
     "y": 32
   },
+  "metaAtlas": false,
   "states": [
     {
       "name": "singularity_1",

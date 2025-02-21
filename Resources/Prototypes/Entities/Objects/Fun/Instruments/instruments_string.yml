@@ -9,7 +9,7 @@
   - type: SwappableInstrument
     instrumentList:
       "Clean": {27: 0}
-      "Jazz": {25: 0}
+      "Jazz": {26: 0}
       "Muted": {28: 0}
   - type: Sprite
     sprite: Objects/Fun/Instruments/eguitar.rsi
@@ -189,7 +189,7 @@
     - StringInstrument
   # SS220 fix #1728 begin
   - type: Clothing
-    sprite: SS220/Objects/Fun/Banjo.rsi
+    sprite: SS220/Objects/Fun/banjo.rsi
     slots: suitStorage
   # SS220 fix #1728 end
 - type: entity

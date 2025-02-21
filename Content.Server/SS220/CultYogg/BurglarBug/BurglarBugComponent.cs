@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Access;
 using Content.Shared.Damage;
 using Content.Shared.Doors.Components;
@@ -42,7 +42,7 @@ public sealed partial class BurglarBugComponent : Component
     [DataField("damage", required: true)]
     public DamageSpecifier Damage = default!;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [ViewVariables(VVAccess.ReadWrite)]
     public Entity<DoorComponent>? Door;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]

@@ -9,6 +9,18 @@
   - type: Sprite
     state: icon
   - type: AllowSuitStorage #220 OuterClothing fix
+  #ss220 handheld radio on outer clothing start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+            - Radio
+  #ss220 handheld radio on outer clothing end
 
 - type: entity
   abstract: true
@@ -37,6 +49,16 @@
     containers:
       storagebase: !type:Container
         ents: []
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
@@ -99,6 +121,16 @@
       toggleable-clothing: !type:ContainerSlot {}
       storagebase: !type:Container
         ents: []
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
 
 - type: entity
   abstract: true
@@ -131,6 +163,16 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
   - type: GroupExamine
   - type: Tag
     tags:
@@ -184,6 +226,16 @@
       toggleable-clothing: !type:ContainerSlot {}
       storagebase: !type:Container
         ents: []
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+      #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
 
 - type: entity
   abstract: true

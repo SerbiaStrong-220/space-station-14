@@ -3,7 +3,7 @@ using Robust.Shared.Configuration;
 namespace Content.Shared.SS220.CCVars;
 
 [CVarDefs]
-public sealed class CCVars220
+public sealed partial class CCVars220
 {
     /// <summary>
     /// Whether is bloom lighting eanbled or not
@@ -43,12 +43,6 @@ public sealed class CCVars220
     /// </summary>
     public static readonly CVarDef<float> AHelpVolume =
         CVarDef.Create("ahelp.volume", 0.50f, CVar.ARCHIVE | CVar.CLIENTONLY);
-
-    /// <summary>
-    /// (SS220) AHelp Sound on/off.
-    /// </summary>
-    public static readonly CVarDef<bool> AHelpSoundsEnabled =
-        CVarDef.Create("audio.ahelp_sounds_enabled", true, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     /// <summary>
     /// Delay Between raising the networked event <see cref="SuperMatterStateUpdate"/>.
@@ -114,8 +108,20 @@ public sealed class CCVars220
         CVarDef.Create("discord_auth.link_key", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
     /// <summary>
+    /// Allow enter server with bypass link check.
+    /// </summary>
+    public static readonly CVarDef<bool> ByPassDiscordLinkCheck =
+        CVarDef.Create("discord_auth.bypass_check", false, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
     /// How different is the game year from the real one
     /// </summary>
     public static readonly CVarDef<int> GameYearDelta =
         CVarDef.Create("date.game_year_delta", 544, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// How many sponsors can connect to the server beyond the player limit
+    /// </summary>
+    public static readonly CVarDef<int> MaxSponsorsBypass =
+        CVarDef.Create("game.max_sponsors_bypass", 10, CVar.SERVER);
 }

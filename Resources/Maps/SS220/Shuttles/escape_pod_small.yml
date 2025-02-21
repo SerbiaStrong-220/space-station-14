@@ -22,6 +22,7 @@ entities:
     - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
+    - type: LoadedMap
   - uid: 29
     components:
     - type: MetaData

@@ -59,7 +59,8 @@ namespace Content.Shared.Humanoid.Markings
         /// </remarks>
         /// <returns></returns>
         public IReadOnlyDictionary<string, MarkingPrototype> MarkingsByCategoryAndSpecies(MarkingCategories category,
-            string species)
+            string species,
+            bool showHidden = false) // SS220 cult markings fix
         {
             var speciesProto = _prototypeManager.Index<SpeciesPrototype>(species);
             var onlyWhitelisted = _prototypeManager.Index<MarkingPointsPrototype>(speciesProto.MarkingPoints).OnlyWhitelisted;
@@ -67,6 +68,11 @@ namespace Content.Shared.Humanoid.Markings
 
             foreach (var (key, marking) in MarkingsByCategory(category))
             {
+                // SS220 cult markings fix begin
+                if (!showHidden && marking.Hidden)
+                    continue;
+                // SS220 cult markings fix end
+
                 if (onlyWhitelisted && marking.SpeciesRestrictions == null)
                 {
                     continue;
@@ -93,12 +99,18 @@ namespace Content.Shared.Humanoid.Markings
         /// </remarks>
         /// <returns></returns>
         public IReadOnlyDictionary<string, MarkingPrototype> MarkingsByCategoryAndSex(MarkingCategories category,
-            Sex sex)
+            Sex sex,
+            bool showHidden = false) // SS220 cult markings fix
         {
             var res = new Dictionary<string, MarkingPrototype>();
 
             foreach (var (key, marking) in MarkingsByCategory(category))
             {
+                // SS220 cult markings fix begin
+                if (!showHidden && marking.Hidden)
+                    continue;
+                // SS220 cult markings fix end
+
                 if (marking.SexRestriction != null && marking.SexRestriction != sex)
                 {
                     continue;
@@ -122,7 +134,8 @@ namespace Content.Shared.Humanoid.Markings
         /// </remarks>
         /// <returns></returns>
         public IReadOnlyDictionary<string, MarkingPrototype> MarkingsByCategoryAndSpeciesAndSex(MarkingCategories category,
-            string species, Sex sex)
+            string species, Sex sex,
+            bool showHidden = false) // SS220 cult markings fix
         {
             var speciesProto = _prototypeManager.Index<SpeciesPrototype>(species);
             var onlyWhitelisted = _prototypeManager.Index<MarkingPointsPrototype>(speciesProto.MarkingPoints).OnlyWhitelisted;
@@ -130,6 +143,11 @@ namespace Content.Shared.Humanoid.Markings
 
             foreach (var (key, marking) in MarkingsByCategory(category))
             {
+                // SS220 cult markings fix begin
+                if (!showHidden && marking.Hidden)
+                    continue;
+                // SS220 cult markings fix end
+
                 if (onlyWhitelisted && marking.SpeciesRestrictions == null)
                 {
                     continue;

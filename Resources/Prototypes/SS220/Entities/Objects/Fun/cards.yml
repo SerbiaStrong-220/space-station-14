@@ -23,6 +23,7 @@
   name: Колода Карт
   description: Это твои карты. Помещает до 20 карт
   components:
+  - type: GameCardsColode
   - type: Sprite
     sprite: SS220/Objects/Fun/cards.rsi
     state: InHand
@@ -50,6 +51,7 @@
   name: Упаковка карт
   description: Сыграем в покер?
   components:
+  - type: GameCardsColode
   - type: Sprite
     sprite: SS220/Objects/Fun/cards.rsi
     state: colode
