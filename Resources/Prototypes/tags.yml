@@ -1393,6 +1393,11 @@
 - type: Tag
   id: Wringer
 
+#SS220 watchess on glove begin
+- type: Tag
+  id: WristWatch
+#SS220 watchess on glove end
+
 - type: Tag
   id: Write
 
