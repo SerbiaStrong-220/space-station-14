@@ -96,6 +96,7 @@
   loadouts:
   - EmergencyNitrogen
   - EmergencyOxygen
+  - EmergencyBeerDrinker #ss220 add beer can for dwarf survival kit
   - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
@@ -1412,7 +1413,7 @@
   loadouts:
   - BrownShoes
   - MedicalWinterBoots
-  - CMOCorpShoes #ss220 new cmo 
+  - CMOCorpShoes #ss220 new cmo
 
 - type: loadoutGroup
   id: MedicalDoctorHead
