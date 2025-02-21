@@ -59,6 +59,8 @@
     moduleWhitelist:
       tags:
       - BorgModuleGeneric
+      - BorgModuleClown
+      - BorgModuleMime
     hasMindState: ClownMime_e
     noMindState: ClownMime_e_r
   - type: Construction
@@ -68,7 +70,7 @@
     containers:
       borg_module:
         - BorgModuleClown
-        - BorgModuleMime    
+        - BorgModuleMime
   - type: AccessReader
     access: [["Command"], ["Research"], ["Theatre"]]
   - type: InteractionPopup

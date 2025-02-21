@@ -10,6 +10,7 @@ book-text-clownmime-scribbles =    [color=red]Дорогие дети![/color] [
                                 4. [color=#000000]Францу[/color][bold][color=#808080]зский[/color][/bold] [color=red]багет[/color]
                                 5. [color=red]8 р[/color][color=red]а[/color][color=orange]з[/color][color=#800080]н[/color][color=green]о[/color][color=#800000]ц[/color][color=blue]в[/color][color=purple]е[/color][color=red]т[/color][color=orange]н[/color][color=#800080]ы[/color][color=green]х[/color] мелков
                                 6. [color=red]Маска и туфли [/color][color=green]клоуна[/color], а также маска мима
+                                7. [color=#FFD700]Бананиумовый клаксон[/color]
 
                                 {"["}bold{"]"}{"["}color=orange{"]"}Подготовка:[/color][/bold]
 
@@ -30,7 +31,9 @@ book-text-clownmime-scribbles =    [color=red]Дорогие дети![/color] [
                                 Используйте мелки, чтобы украсить киборга. Дайте волю своей фантазии!
                                 {"["}bold{"]"}6. [color=blue]Финальные штрихи: [/color][/bold]
                                 Наденьте на киборга маски и туфли, чтобы завершить его преображение.
-                                {"["}bold{"]"}7. [color=purple]Возвращение компонентов:[/color][/bold]
+                                {"["}bold{"]"}7. [color=#FFD700]Щепотка магии: [/color][/bold]
+                                Прикоснитесь бананиумовым клаксоном к боргу, и наблюдайте за магией!
+                                {"["}bold{"]"}8. [color=purple]Возвращение компонентов:[/color][/bold]
                                 Вставьте обратно мозг и батарейку. Закройте техническую панель и заблокируйте киборга.
 
                                 {"["}bold{"]"}Завершение:[/bold]
@@ -41,6 +44,7 @@ book-text-clownmime-scribbles =    [color=red]Дорогие дети![/color] [
 
                                 {"["}bold{"]"}{"["}color=#800000{"]"}С любовью,[/color][/bold]
                                 {"["}bold{"]"}{"["}color=red{"]"}Хонко[/color][color=green]мама[/bold][/color] и [bold][color=#808080]хранительница[/color][/bold] тишины!
+
 
 book-text-identity-implant-info =
     Спасибо, что выбрали наш имплант копирования личности!
