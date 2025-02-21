@@ -1,33 +1,43 @@
-using System.Diagnostics.CodeAnalysis;
+using Content.Client.SS220.WristWatch;
 using JetBrains.Annotations;
+using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
+using TerraFX.Interop.Xlib;
 
-namespace Content.Client.Guidebook.RichText;
+namespace Content.Client.SS220.Guidebook.Richtext;
 
 [UsedImplicitly]
-public sealed class TextLinkTag : IMarkupTag
+public sealed class BrowserLinkTag : IMarkupTag
 {
-    public string Name => "textlink";
+    [Dependency] private readonly IUriOpener _uriOpener = default!;
+    [Dependency] private readonly ILogManager _logMan = default!;
 
-    public Control? Control;
+    public string Name => "browserlink";
 
-    /// <inheritdoc/>
+    private ISawmill Log => _log ??= _logMan.GetSawmill("protodata_tag");
+    private ISawmill? _log;
+
     public bool TryGetControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
     {
-        if (!node.Value.TryGetString(out var text)
-            || !node.Attributes.TryGetValue("link", out var linkParameter)
-            || !linkParameter.TryGetString(out var link))
+        if (!node.Attributes.TryGetValue("link", out var linkParametr) ||
+            !linkParametr.TryGetString(out var link))
         {
             control = null;
             return false;
         }
 
+        node.Value.TryGetString(out var text);
+
         var label = new Label();
-        label.Text = text;
+        if (text != null)
+            label.Text = text;
+        else
+            label.Text = link;
 
         label.MouseFilter = Control.MouseFilterMode.Stop;
         label.FontColorOverride = Color.CornflowerBlue;
@@ -38,7 +48,6 @@ public sealed class TextLinkTag : IMarkupTag
         label.OnKeyBindDown += args => OnKeybindDown(args, link);
 
         control = label;
-        Control = label;
         return true;
     }
 
@@ -47,24 +56,13 @@ public sealed class TextLinkTag : IMarkupTag
         if (args.Function != EngineKeyFunctions.UIClick)
             return;
 
-        if (Control == null)
-            return;
-
-        var current = Control;
-        while (current != null)
+        try
         {
-            current = current.Parent;
-
-            if (current is not ILinkClickHandler handler)
-                continue;
-            handler.HandleClick(link);
-            return;
+            _uriOpener.OpenUri(link);
         }
-        Logger.Warning($"Warning! No valid ILinkClickHandler found.");
+        catch (Exception e)
+        {
+            Log.Error(e.Message);
+        }
     }
-}
-
-public interface ILinkClickHandler
-{
-    public void HandleClick(string link);
 }
