@@ -23,6 +23,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using System.Linq;
 using System.Numerics;
+using Content.Shared.SS220.Damage.SplitDamage;
 
 namespace Content.Server.Weapons.Melee;
 
@@ -52,6 +53,15 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
         if (damageSpec.Empty)
             return;
+
+        //ss220 split damage examine start
+        if (TryComp<SplitDamageComponent>(uid, out var splitDamageComponent))
+        {
+            _damageExamine.AddDamageExamine(args.Message, splitDamageComponent.PunchDamage, Loc.GetString("damage-melee-light"));
+            _damageExamine.AddDamageExamine(args.Message, splitDamageComponent.WideDamage, Loc.GetString("damage-melee-heavy"));
+            return;
+        }
+        //ss220 split damage examine end
 
         _damageExamine.AddDamageExamine(args.Message, damageSpec, Loc.GetString("damage-melee"));
     }
