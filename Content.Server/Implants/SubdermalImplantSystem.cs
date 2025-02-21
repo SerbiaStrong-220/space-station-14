@@ -28,10 +28,13 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Server.IdentityManagement;
 using Content.Server.DetailExaminable;
+using Content.Server.Polymorph.Systems;
 using Content.Shared.Store.Components;
 using Robust.Shared.Collections;
 using Robust.Shared.Map.Components;
 using Content.Shared.DoAfter;
+using Content.Shared.Polymorph;
+using Content.Shared.SS220.PenScrambler;
 using Content.Shared.SS220.Store;
 
 namespace Content.Server.Implants;
@@ -53,6 +56,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
+    [Dependency] private readonly PolymorphSystem _polymorph = default!; //ss220 add dna copy implant
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private HashSet<Entity<MapGridComponent>> _targetGrids = [];
@@ -70,6 +74,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         SubscribeLocalEvent<SubdermalImplantComponent, UseScramImplantEvent>(OnScramImplant);
         SubscribeLocalEvent<SubdermalImplantComponent, UseDnaScramblerImplantEvent>(OnDnaScramblerImplant);
 
+        SubscribeLocalEvent<SubdermalImplantComponent, UseDnaCopyImplantEvent>(OnDnaCopyImplant); //ss220 dna copy implant add
     }
 
     // SS220 - chemical-implants start
@@ -285,4 +290,62 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         args.Handled = true;
         QueueDel(uid);
     }
+
+    //ss220 dna copy implant add start
+    private void OnDnaCopyImplant(Entity<SubdermalImplantComponent> ent, ref UseDnaCopyImplantEvent args)
+    {
+        if (!TryComp<TransferIdentityComponent>(ent.Owner, out var transferIdentityComponent))
+            return;
+
+        var target = GetEntity(transferIdentityComponent.Target);
+
+        if (target == null)
+        {
+            QueueDel(ent);
+            return;
+        }
+
+        if (ent.Comp.ImplantedEntity is not { } user)
+            return;
+
+        if (TryComp<HumanoidAppearanceComponent>(user, out var humanoidAppearanceComponent))
+        {
+            if (transferIdentityComponent.AppearanceComponent == null)
+                return;
+
+            var newEntity = _polymorph.PolymorphEntity(user,
+                new PolymorphConfiguration
+                {
+                    Entity = MetaData(target.Value).EntityPrototype!,
+                    Inventory = PolymorphInventoryChange.Transfer,
+                    AllowRepeatedMorphs = true,
+                    Forced = true,
+                });
+
+            _humanoidAppearance.CloneAppearance(target.Value, user, transferIdentityComponent.AppearanceComponent, humanoidAppearanceComponent);
+
+            _metaData.SetEntityName(user, MetaData(target.Value).EntityName, raiseEvents: false);
+
+            if (TryComp<DnaComponent>(user, out var dna)
+                && TryComp<DnaComponent>(target.Value, out var dnaTarget))
+            {
+                dna.DNA = dnaTarget.DNA;
+                var ev = new GenerateDnaEvent { Owner = user, DNA = dna.DNA };
+                RaiseLocalEvent(ent, ref ev);
+            }
+
+            if (TryComp<FingerprintComponent>(newEntity, out var fingerprint)
+                && TryComp<FingerprintComponent>(target.Value, out var fingerprintTarget))
+            {
+                fingerprint.Fingerprint = fingerprintTarget.Fingerprint;
+            }
+
+            _identity.QueueIdentityUpdate(user);
+
+            _popup.PopupEntity(Loc.GetString("pen-scrambler-success-convert-to-identity", ("identity", MetaData(target.Value).EntityName)), user, user);
+        }
+
+        QueueDel(ent);
+    }
+    //ss220 dna copy implant add end
 }
