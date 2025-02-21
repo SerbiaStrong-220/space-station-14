@@ -1,0 +1,31 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: FoodEggCorruptedDuckFertilized
+  parent: FoodEgg
+  suffix: Fertilized, Duck, CultYogg
+  components:
+    - type: Timer
+    - type: TimedSpawner
+      prototypes:
+      - CultDuckCorrupted
+      intervalSeconds: 20
+      minimumEntitiesSpawned: 1
+      maximumEntitiesSpawned: 1
+    - type: TimedDespawn #delete the egg after the chicken spawns
+      lifetime: 21
+
+- type: entity
+  id: FoodEggCorruptedChickenFertilized
+  parent: FoodEgg
+  suffix: Fertilized, Chicken, CultYogg
+  components:
+  - type: Timer
+  - type: TimedSpawner
+    prototypes:
+    - CultChickenCorrupted
+    intervalSeconds: 20
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 1
+  - type: TimedDespawn #delete the egg after the chicken spawns
+    lifetime: 21
