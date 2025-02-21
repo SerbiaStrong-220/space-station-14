@@ -1,13 +1,11 @@
-using Content.Client.SS220.WristWatch;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using JetBrains.Annotations;
-using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
-using TerraFX.Interop.Xlib;
 
 namespace Content.Client.SS220.Guidebook.Richtext;
 
