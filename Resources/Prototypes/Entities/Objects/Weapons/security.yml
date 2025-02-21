@@ -39,7 +39,7 @@
     activatedDamage:
       types:
         Blunt: 0
-        Stamina: 55
+        Stamina: 30 #ss220 staminadmg fix
 #SS220-Stunbatom-rework end
   - type: MeleeWeapon
     wideAnimationRotation: -135

@@ -22,7 +22,7 @@
     damageOpen:
       types:
         Blunt: 1
-        Stamina: 28
+        Stamina: 15 #ss220 staminadmg fix
     damageFolded:
       types:
         Blunt: 0
