@@ -8,6 +8,7 @@ using Content.Shared.Popups;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Cloning;
 using Content.Shared.DoAfter;
 using Content.Shared.Forensics;
 using Content.Shared.Forensics.Components;
@@ -34,6 +35,8 @@ namespace Content.Server.Forensics
             SubscribeLocalEvent<FingerprintComponent, ContactInteractionEvent>(OnInteract);
             SubscribeLocalEvent<FingerprintComponent, MapInitEvent>(OnFingerprintInit);
             SubscribeLocalEvent<DnaComponent, MapInitEvent>(OnDNAInit);
+
+            SubscribeLocalEvent<DnaComponent, CloningEvent>(OnDNACloning); //ss220 add cloning entity copy DNA from source
 
             SubscribeLocalEvent<ForensicsComponent, BeingGibbedEvent>(OnBeingGibbed);
             SubscribeLocalEvent<ForensicsComponent, MeleeHitEvent>(OnMeleeHit);
@@ -78,6 +81,19 @@ namespace Content.Server.Forensics
                 RaiseLocalEvent(uid, ref ev);
             }
         }
+
+        //ss220 add cloning entity copy DNA from source start
+        private void OnDNACloning(Entity<DnaComponent> ent, ref CloningEvent args)
+        {
+            if (!TryComp<DnaComponent>(args.Target, out var sourceDnaComp))
+                return;
+
+            sourceDnaComp.DNA = ent.Comp.DNA;
+
+            var ev = new GenerateDnaEvent { Owner = args.Target, DNA = ent.Comp.DNA };
+            RaiseLocalEvent(args.Target, ref ev);
+        }
+        //ss220 add cloning entity copy DNA from source end
 
         private void OnBeingGibbed(EntityUid uid, ForensicsComponent component, BeingGibbedEvent args)
         {
