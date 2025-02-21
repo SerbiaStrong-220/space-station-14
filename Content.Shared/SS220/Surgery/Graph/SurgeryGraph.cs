@@ -1,6 +1,7 @@
 // Original code from construction graph all edits under © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -13,11 +14,38 @@ public sealed partial class SurgeryGraphPrototype : IPrototype, ISerializationHo
     [IdDataField]
     public string ID { get; private set; } = default!;
 
+    /// <summary>
+    /// Unique name to show in UI. Serves for user comfort orientation.
+    /// </summary>
+    [DataField(required: true)]
+    public string NameLocPath = "";
+
+    /// <summary>
+    /// Detailed description of operation: what it does and etc. Could be lore-boxedish
+    /// </summary>
+    [DataField(required: true)]
+    public string DescriptionLocPath = "";
+
+    /// <summary>
+    /// More gameplay specific information. Like if it needs a special tool or operation exclude other one.
+    /// </summary>
+    [DataField]
+    public string? PostscriptLocPath;
+
     [DataField(required: true)]
     public string Start { get; private set; } = default!;
 
     [DataField(required: true)]
     public string End { get; private set; } = default!;
+
+    [DataField(required: true)]
+    public PuppetParts TargetPuppetPart;
+
+    [DataField]
+    public List<IAbstractSurgeryGraphAvailabilityCondition> PerformerAvailabilityCondition = new();
+
+    [DataField]
+    public List<IAbstractSurgeryGraphAvailabilityCondition> TargetAvailabilityCondition = new();
 
     [DataField("graph", priority: 0)]
     private List<SurgeryGraphNode> _graph = new();
