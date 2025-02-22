@@ -61,8 +61,6 @@ public sealed partial class SmartGasMaskMenu : RadialMenu
 
             if (_prototypeManager.TryIndex(alertProto.IconPrototype, out var iconProto))
                 entProtoView.SetPrototype(iconProto);
-            else
-                entProtoView.SetPrototype(alertProto.EntityPrototype);
 
             button.AddChild(entProtoView);
             main.AddChild(button);

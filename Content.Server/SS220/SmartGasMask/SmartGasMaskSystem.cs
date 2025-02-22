@@ -43,7 +43,20 @@ public sealed class SmartGasMaskSystem : EntitySystem
 
     private void OnChoose(Entity<SmartGasMaskComponent> ent, ref SmartGasMaskMessage args)
     {
-        if (args.ProtoId == "AlertSmartGasMaskSupport" && !ent.Comp.OnCdSupp)
+
+        if (args.ProtoId == ent.Comp.SelectablePrototypes[0] && !ent.Comp.OnCdHalt) //AlertSmartGasMaskHalt
+        {
+            ent.Comp.OnCdHalt = true;
+
+            var haltMes = Loc.GetString(_random.Pick(_haltMes));
+
+            _chatSystem.TrySendInGameICMessage(args.Actor, haltMes, InGameICChatType.Speak, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
+            _audio.PlayPvs(ent.Comp.HaltSound, ent.Owner);
+
+            Timer.Spawn(ent.Comp.CdTimeHalt, () => ent.Comp.OnCdHalt = false);
+        }
+
+        if (args.ProtoId == ent.Comp.SelectablePrototypes[1] && !ent.Comp.OnCdSupp) //AlertSmartGasMaskSupport
         {
             ent.Comp.OnCdSupp = true;
 
@@ -54,18 +67,6 @@ public sealed class SmartGasMaskSystem : EntitySystem
             _chatSystem.TrySendInGameICMessage(args.Actor, helpMess, InGameICChatType.Whisper, ChatTransmitRange.Normal, checkRadioPrefix: true, ignoreActionBlocker: true);
 
             Timer.Spawn(ent.Comp.CdTimeSupp, () => ent.Comp.OnCdSupp = false);
-        }
-
-        if (args.ProtoId == "AlertSmartGasMaskHalt" && !ent.Comp.OnCdHalt)
-        {
-            ent.Comp.OnCdHalt = true;
-
-            var haltMes = Loc.GetString(_random.Pick(_haltMes));
-
-            _chatSystem.TrySendInGameICMessage(args.Actor, haltMes, InGameICChatType.Speak, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
-            _audio.PlayPvs(ent.Comp.HaltSound, ent.Owner);
-
-            Timer.Spawn(ent.Comp.CdTimeHalt, () => ent.Comp.OnCdHalt = false);
         }
     }
 }

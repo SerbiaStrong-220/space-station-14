@@ -1,9 +1,9 @@
 - type: alertSmartGasMask
   id: AlertSmartGasMaskSupport
   name: alert-smart-gas-mask-support
-  entityPrototype: ClothingMaskGasSecurity
+  iconPrototype: ClothingMaskGasSecurity
 
 - type: alertSmartGasMask
   id: AlertSmartGasMaskHalt
   name: alert-smart-gas-mask-halt
-  entityPrototype: ClothingMaskGasSecurity
+  iconPrototype: ClothingMaskGasSecurity

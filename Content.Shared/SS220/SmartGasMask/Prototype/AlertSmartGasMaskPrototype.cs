@@ -17,8 +17,5 @@ public sealed partial class AlertSmartGasMaskPrototype : IPrototype
     public string Name { get; set; } = default!;
 
     [DataField(required: true)]
-    public EntProtoId EntityPrototype;
-
-    [DataField]
-    public EntProtoId? IconPrototype = null;
+    public EntProtoId IconPrototype;
 }
