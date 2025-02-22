@@ -1,0 +1,12 @@
+- type: construction
+  name: тыквенный фонарик
+  id: PumpkinLantern
+  graph: PumpkinLanternCraft
+  startNode: start
+  targetNode: pumpkinLantern
+  category: construction-category-misc
+  objectType: Item
+  description: "Вырезанная тыква, излучающая жутковатое свечение."
+  icon:
+    sprite: Objects/Specific/Hydroponics/pumpkin.rsi
+    state: lantern

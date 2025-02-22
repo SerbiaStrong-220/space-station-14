@@ -1,0 +1,21 @@
+- type: constructionGraph
+  id: PumpkinLanternCraft
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: pumpkinLantern
+          steps:
+            - tag: Candle
+              name: свеча
+              icon:
+                sprite: Objects/Misc/candles.rsi
+                state: loadout
+            - tag: CarvedPumpkin
+              name: вырезанная тыква
+              icon:
+                sprite: Objects/Specific/Hydroponics/pumpkin.rsi
+                state: carved
+              doAfter: 5
+    - node: pumpkinLantern
+      entity: PumpkinLantern
