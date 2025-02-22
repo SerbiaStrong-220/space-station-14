@@ -131,6 +131,9 @@
     openUnlitVisible: true
     # needed so that windoors will close regardless of whether there are people in it; it doesn't crush after all
     safety: false
+  #ss220 airlock visuals fix start
+  - type: AirlockVisuals
+  #ss220 airlock visuals fix end
   - type: NavMapDoor
   - type: DoorBolt
   - type: Electrified
@@ -245,7 +248,7 @@
       # This tag is used to nagivate the Airlock construction graph. It's needed because the construction graph is shared between Airlock, AirlockGlass, and HighSecDoor
       #ss220 windows dmg fix begin
       - Window
-      #ss220 windows dmg fix end      
+      #ss220 windows dmg fix end
 
 
 #Plasma Windoors

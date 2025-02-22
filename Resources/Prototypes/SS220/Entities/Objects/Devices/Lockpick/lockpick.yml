@@ -1,0 +1,11 @@
+- type: entity
+  parent: BaseItem
+  id: Lockpick
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Tools/lockpick.rsi
+      state: lockpick
+    - type: Item
+      sprite: SS220/Objects/Tools/lockpick.rsi
+      storedRotation: -90
+    - type: Lockpick

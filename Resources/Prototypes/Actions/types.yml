@@ -156,6 +156,10 @@
   name: Scramble DNA
   description:  Randomly changes your name and appearance.
   components:
+  #ss220 add for dna implant confirmable message start
+  - type: ConfirmableAction
+    popup: gera-transformation-popup
+  #ss220 add for dna implant confirmable message end
   - type: InstantAction
     charges: 1
     itemIconStyle: BigAction

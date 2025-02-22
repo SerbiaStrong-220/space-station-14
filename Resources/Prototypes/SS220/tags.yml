@@ -197,6 +197,23 @@
 - type: Tag
   id: DebugUplink
 
+# SS220 ClownMimeCyborg
+- type: Tag
+  id: ClothingMaskMime
+
+- type: Tag
+  id: BorgModuleClown
+
+- type: Tag
+  id: BorgModuleMime
+
+- type: Tag
+  id: Baguette
+
+- type: Tag
+  id: BananiumHorn
+
+
 # SS220 supa kithen
 - type: Tag
   id: MicrowaveMachineUnsafe

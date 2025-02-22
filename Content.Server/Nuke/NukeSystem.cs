@@ -4,6 +4,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Pinpointer;
 using Content.Server.Popups;
+using Content.Server.SS220.LockPick.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Audio;
 using Content.Shared.Containers.ItemSlots;
@@ -13,6 +14,7 @@ using Content.Shared.Examine;
 using Content.Shared.Maps;
 using Content.Shared.Nuke;
 using Content.Shared.Popups;
+using Content.Shared.SS220.LockPick;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -79,6 +81,7 @@ public sealed class NukeSystem : EntitySystem
 
         // Doafter events
         SubscribeLocalEvent<NukeComponent, NukeDisarmDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<NukeComponent, LockPickSuccessEvent>(OnLockPick); //ss220 lockpick add
     }
 
     private void OnInit(EntityUid uid, NukeComponent component, ComponentInit args)
@@ -158,6 +161,15 @@ public sealed class NukeSystem : EntitySystem
         UpdateAppearance(uid, component);
     }
 
+    //ss220 lockpick add start
+    private void OnLockPick(Entity<NukeComponent> ent, ref LockPickSuccessEvent args)
+    {
+        var xform = Transform(ent.Owner);
+
+        if (xform.Anchored)
+            _transform.Unanchor(ent.Owner, xform);
+    }
+    //ss220 lockpick add end
     #endregion
 
     #region UI Events
@@ -169,6 +181,7 @@ public sealed class NukeSystem : EntitySystem
             return;
 
         // Nuke has to have the disk in it to be moved
+        // ss220: Add lockpick for unanchoring nuke bomb w/o disk
         if (!component.DiskSlot.HasItem)
         {
             var msg = Loc.GetString("nuke-component-cant-anchor-toggle");

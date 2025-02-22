@@ -171,8 +171,9 @@
     - id: ClothingHandsGlovesColorYellow
     - id: ClothingHeadsetAltEngineering
     - id: DoorRemoteEngineering
-    - id: RCD
-    - id: RCDAmmo
+    - id: RCDCE #SS220 RCD-to-CE begin
+    #- id: RCD
+    - id: RCDAmmo #SS220 RCD-to-CE end
     - id: RubberStampCE
     - id: Telescopichka
     - id: ClothingWristWatchGold # SS220 Wrist Watch
