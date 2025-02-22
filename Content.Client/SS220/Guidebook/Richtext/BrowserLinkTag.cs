@@ -22,41 +22,44 @@ public sealed class BrowserLinkTag : IMarkupTag
 
     public bool TryGetControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
     {
+        var label = new Label();
+        node.Value.TryGetString(out var text);
+        label.Text = text;
+
         if (!node.Attributes.TryGetValue("link", out var linkParametr) ||
             !linkParametr.TryGetString(out var link))
         {
-            control = null;
-            return false;
+            control = label;
+            return true;
         }
 
-        node.Value.TryGetString(out var text);
-
-        var label = new Label();
-        if (text != null)
-            label.Text = text;
-        else
+        if (string.IsNullOrEmpty(label.Text))
             label.Text = link;
 
-        label.MouseFilter = Control.MouseFilterMode.Stop;
-        label.FontColorOverride = Color.CornflowerBlue;
-        label.DefaultCursorShape = Control.CursorShape.Hand;
+        var uri = new Uri(link);
+        if (uri.Scheme == Uri.UriSchemeHttps || uri.Scheme == Uri.UriSchemeHttp)
+        {
+            label.MouseFilter = Control.MouseFilterMode.Stop;
+            label.FontColorOverride = Color.CornflowerBlue;
+            label.DefaultCursorShape = Control.CursorShape.Hand;
 
-        label.OnMouseEntered += _ => label.FontColorOverride = Color.LightSkyBlue;
-        label.OnMouseExited += _ => label.FontColorOverride = Color.CornflowerBlue;
-        label.OnKeyBindDown += args => OnKeybindDown(args, link);
+            label.OnMouseEntered += _ => label.FontColorOverride = Color.LightSkyBlue;
+            label.OnMouseExited += _ => label.FontColorOverride = Color.CornflowerBlue;
+            label.OnKeyBindDown += args => OnKeybindDown(args, uri);
+        }
 
         control = label;
         return true;
     }
 
-    private void OnKeybindDown(GUIBoundKeyEventArgs args, string link)
+    private void OnKeybindDown(GUIBoundKeyEventArgs args, Uri uri)
     {
         if (args.Function != EngineKeyFunctions.UIClick)
             return;
 
         try
         {
-            _uriOpener.OpenUri(link);
+            _uriOpener.OpenUri(uri);
         }
         catch (Exception e)
         {
