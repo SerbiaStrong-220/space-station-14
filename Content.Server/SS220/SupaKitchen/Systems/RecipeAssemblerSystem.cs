@@ -25,9 +25,8 @@ public sealed partial class RecipeAssemblerSystem : SharedRecipeAssemblerSystem
             return;
 
         var recipe = _prototype.Index<CookingRecipePrototype>(args.Event.Recipe);
-        var ents = _entityLookup.GetEntitiesInRange(entity, entity.Comp.Range);
 
-        if (!CanCookRecipe(entity.Comp, recipe, ents, 0))
+        if (!CanCookRecipe(entity.Comp, recipe, entity.Comp.Entities, 0))
             args.Cancel();
     }
 
@@ -37,12 +36,11 @@ public sealed partial class RecipeAssemblerSystem : SharedRecipeAssemblerSystem
             return;
 
         var recipe = _prototype.Index<CookingRecipePrototype>(args.Recipe);
-        var ents = _entityLookup.GetEntitiesInRange(entity, entity.Comp.Range);
-        if (!CanCookRecipe(entity.Comp, recipe, ents, 0))
+        if (!CanCookRecipe(entity.Comp, recipe, entity.Comp.Entities, 0))
             return;
 
         var spawnCords = Transform(entity).Coordinates;
         Spawn(recipe.Result, spawnCords);
-        SubtractContents(ents, recipe);
+        SubtractContents(entity.Comp.Entities, recipe);
     }
 }

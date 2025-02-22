@@ -1,4 +1,5 @@
 using Content.Shared.DoAfter;
+using Content.Shared.Placeable;
 using Content.Shared.SS220.SupaKitchen.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Prototypes;
@@ -17,13 +18,16 @@ public abstract partial class SharedRecipeAssemblerSystem : CookingInstrumentSys
         base.Initialize();
 
         SubscribeLocalEvent<RecipeAssemblerComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
+
+        /// ItemPlacer
+        SubscribeLocalEvent<RecipeAssemblerComponent, ItemPlacedEvent>(OnItemPlaced);
+        SubscribeLocalEvent<RecipeAssemblerComponent, ItemRemovedEvent>(OnItemRemoved);
     }
 
     private void OnAlternativeVerb(Entity<RecipeAssemblerComponent> entity, ref GetVerbsEvent<AlternativeVerb> args)
     {
         var user = args.User;
-        var ents = _entityLookup.GetEntitiesInRange(entity, entity.Comp.Range);
-        var recipes = GetSatisfiedRecipes(entity.Comp, ents, 0);
+        var recipes = GetSatisfiedRecipes(entity.Comp, entity.Comp.Entities, 0);
 
         foreach (var (recipe, count) in recipes)
         {
@@ -58,6 +62,20 @@ public abstract partial class SharedRecipeAssemblerSystem : CookingInstrumentSys
 
         _doAfter.TryStartDoAfter(doAfter);
     }
+
+    #region ItemPlacer
+    private void OnItemPlaced(Entity<RecipeAssemblerComponent> entity, ref ItemPlacedEvent args)
+    {
+        entity.Comp.Entities.Add(args.OtherEntity);
+        Dirty(entity);
+    }
+
+    private void OnItemRemoved(Entity<RecipeAssemblerComponent> entity, ref ItemRemovedEvent args)
+    {
+        entity.Comp.Entities.Remove(args.OtherEntity);
+        Dirty(entity);
+    }
+    #endregion
 }
 
 [Serializable, NetSerializable]
