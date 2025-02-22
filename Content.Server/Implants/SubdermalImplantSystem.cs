@@ -313,15 +313,6 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
             if (transferIdentityComponent.AppearanceComponent == null)
                 return;
 
-            var newEntity = _polymorph.PolymorphEntity(user,
-                new PolymorphConfiguration
-                {
-                    Entity = MetaData(target.Value).EntityPrototype!,
-                    Inventory = PolymorphInventoryChange.Transfer,
-                    AllowRepeatedMorphs = true,
-                    Forced = true,
-                });
-
             _humanoidAppearance.CloneAppearance(target.Value, user, transferIdentityComponent.AppearanceComponent, humanoidAppearanceComponent);
 
             _metaData.SetEntityName(user, MetaData(target.Value).EntityName, raiseEvents: false);
@@ -334,11 +325,19 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
                 RaiseLocalEvent(ent, ref ev);
             }
 
-            if (TryComp<FingerprintComponent>(newEntity, out var fingerprint)
+            if (TryComp<FingerprintComponent>(user, out var fingerprint)
                 && TryComp<FingerprintComponent>(target.Value, out var fingerprintTarget))
             {
                 fingerprint.Fingerprint = fingerprintTarget.Fingerprint;
             }
+
+            var setScale = EnsureComp<SetScaleFromTargetComponent>(user);
+            setScale.Target = GetNetEntity(target);
+
+            Dirty(user, setScale);
+
+            var evEvent = new SetScaleFromTargetEvent(GetNetEntity(user), setScale.Target);
+            RaiseNetworkEvent(evEvent);
 
             _identity.QueueIdentityUpdate(user);
 

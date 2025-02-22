@@ -6,6 +6,7 @@ namespace Content.Server.SS220.PenScrambler;
 public sealed class TransferIdentitySystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<TransferIdentityComponent, CopyDnaFromPenToImplantEvent>(OnCopyIdentityToImplant);
@@ -25,7 +26,8 @@ public sealed class TransferIdentitySystem : EntitySystem
         ent.Comp.Target = GetNetEntity(penComponent.Target.Value);
         ent.Comp.AppearanceComponent = penComponent.AppearanceComponent;
 
-        _popup.PopupEntity(Loc.GetString("pen-scrambler-success-transfer-to-implant", ("identity", MetaData(penComponent.Target.Value).EntityName)), args.User, args.User);
+        _popup.PopupEntity(Loc.GetString("pen-scrambler-success-transfer-to-implant",
+            ("identity", MetaData(penComponent.Target.Value).EntityName)), args.User, args.User);
 
         Dirty(ent);
         QueueDel(args.Target);
