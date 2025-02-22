@@ -160,6 +160,7 @@ public sealed class PacificationSystem : EntitySystem
     //ss220 add clone pacified comp to clone entity start
     private void OnCloning(Entity<PacifiedComponent> ent, ref CloningEvent args)
     {
+        RemComp<PacifiedComponent>(args.Target);
         var newComp = EnsureComp<PacifiedComponent>(args.Target);
         _serialization.CopyTo(ent.Comp, ref newComp, notNullableOverride: true);
     }
