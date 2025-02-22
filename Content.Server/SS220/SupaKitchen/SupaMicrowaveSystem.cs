@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Server.Access.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Body.Systems;
 using Content.Server.Construction.Components;
@@ -72,6 +73,7 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
         SubscribeLocalEvent<SupaMicrowaveComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<SupaMicrowaveComponent, BreakageEventArgs>(OnBreak);
         SubscribeLocalEvent<SupaMicrowaveComponent, SignalReceivedEvent>(OnSignalReceived);
+        SubscribeLocalEvent<SupaMicrowaveComponent, IdCardMicrowavedEvent>(OnIdCardMicrowaved);
 
         // UI event listeners
         SubscribeLocalEvent<SupaMicrowaveComponent, MicrowaveStartCookMessage>((u, c, m) => StartCooking(u, c, m.Actor));
@@ -164,6 +166,17 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
     {
         if (args.Port == entity.Comp.OnPort.Id)
             StartCooking(entity, entity, args.Trigger);
+    }
+
+    private void OnIdCardMicrowaved(Entity<SupaMicrowaveComponent> entity, ref IdCardMicrowavedEvent args)
+    {
+        if (args.Cancelled ||
+            entity.Comp.CanMicrowaveIdsSafely ||
+            !_random.Prob(entity.Comp.IdCardExplosionChance))
+            return;
+
+        Explode(entity);
+        args.Cancel();
     }
 
     #region ui_messages
