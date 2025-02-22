@@ -25,7 +25,7 @@
     PoppySeeds: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBagelCotton
+  id: RecipeBagelCotton # SS220 Added to supa kitchen (oven)
   name: cotton bagel recipe
   result: FoodBagelCotton
   time: 5
@@ -467,18 +467,7 @@
     FoodDough: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBaguetteCotton
-  name: baguette recipe
-  result: FoodBreadBaguetteCotton
-  time: 15
-  reagents:
-    TableSalt: 5
-    Blackpepper: 5
-  solids:
-    FoodDoughCotton: 1
-
-- type: microwaveMealRecipe
-  id: RecipeBaguetteCotton
+  id: RecipeBaguetteCotton # SS220 Added to supa kitchen (oven)
   name: baguette recipe
   result: FoodBreadBaguetteCotton
   time: 15
@@ -1295,7 +1284,7 @@
     FoodCorn: 1
 
 - type: microwaveMealRecipe
-  id: RecipePancake # SS220 Added to supa kitchen (grille)
+  id: RecipePancake # SS220 Added to supa kitchen (oven)
   name: pancake recipe
   result: FoodBakedPancake
   time: 5
@@ -1305,7 +1294,7 @@
     Egg: 6
 
 - type: microwaveMealRecipe
-  id: RecipeBlueberryPancake # SS220 Added to supa kitchen (grille)
+  id: RecipeBlueberryPancake # SS220 Added to supa kitchen (oven)
   name: blueberry pancake recipe
   result: FoodBakedPancakeBb
   time: 5
@@ -1715,7 +1704,7 @@
     FoodCheeseSlice: 2
 
 - type: microwaveMealRecipe
-  id: RecipeRibs # SS220 Added to supa kitchen (grille)
+  id: RecipeRibs # SS220 Added to supa kitchen (chopping board)
   name: BBQ ribs recipe
   result: FoodMealRibs
   time: 15
@@ -1726,7 +1715,7 @@
     FoodKebabSkewer: 1
 
 - type: microwaveMealRecipe
-  id: RecipeEnchiladas # SS220 Added to supa kitchen (grille)
+  id: RecipeEnchiladas # SS220 Added to supa kitchen (chopping board)
   name: enchiladas recipe
   result: FoodMealEnchiladas
   time: 20
@@ -1961,7 +1950,7 @@
     Plasma: 10
 
 - type: microwaveMealRecipe
-  id: RecipeFoodBakedChevreChaud # SS220 Added to supa kitchen (grille)
+  id: RecipeFoodBakedChevreChaud # SS220 Added to supa kitchen (chopping board)
   name: chevre chaud recipe
   result: FoodBakedChevreChaud
   time: 5
@@ -1970,16 +1959,7 @@
     FoodBreadBaguetteSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeFoodBakedChevreChaudCotton
-  name: cotton chevre chaud recipe
-  result: FoodBakedChevreChaudCotton
-  time: 5
-  solids:
-    FoodChevreSlice: 1
-    FoodBreadBaguetteCottonSlice: 1
-
-- type: microwaveMealRecipe
-  id: RecipeFoodBakedChevreChaudCotton
+  id: RecipeFoodBakedChevreChaudCotton # SS220 Added to supa kitchen (chopping board)
   name: cotton chevre chaud recipe
   result: FoodBakedChevreChaudCotton
   time: 5
@@ -2116,16 +2096,7 @@
     FoodButterSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeCroissantCotton
-  name: cotton croissant recipe
-  result: FoodBakedCroissantCotton
-  time: 5
-  solids:
-    FoodCroissantRawCotton: 1
-    FoodButterSlice: 1
-
-- type: microwaveMealRecipe
-  id: RecipeCroissantCotton
+  id: RecipeCroissantCotton # SS220 Added to supa kitchen (oven)
   name: cotton croissant recipe
   result: FoodBakedCroissantCotton
   time: 5

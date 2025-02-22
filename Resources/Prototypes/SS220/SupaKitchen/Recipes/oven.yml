@@ -21,6 +21,16 @@
     FoodDoughRope: 1
     PoppySeeds: 1
 
+- type: cookingRecipe
+  id: RecipeBagelCotton
+  name: cotton bagel recipe
+  result: FoodBagelCotton
+  recipeGroup: bagel
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodDoughCottonRope: 1
+
 # Burgers
 
 - type: cookingRecipe
@@ -566,6 +576,19 @@
   solids:
     FoodDough: 1
 
+- type: cookingRecipe
+  id: RecipeBaguetteCotton
+  name: baguette recipe
+  result: FoodBreadBaguetteCotton
+  recipeGroup: bread
+  instrumentType: oven
+  time: 15
+  reagents:
+    TableSalt: 5
+    Blackpepper: 5
+  solids:
+    FoodDoughCotton: 1
+
 # Pizzas
 
 - type: cookingRecipe
@@ -751,6 +774,32 @@
     FoodButter: 1
 
 - type: cookingRecipe
+  id: RecipeWaffles
+  name: waffle recipe
+  result: FoodBakedWaffle
+  instrumentType: oven
+  time: 10
+  reagents:
+    Flour: 5
+    Milk: 5
+    Egg: 6
+    SodaWater: 5
+
+- type: cookingRecipe
+  id: RecipeWaffleSoy
+  name: soy waffle recipe
+  result: FoodBakedWaffleSoy
+  instrumentType: oven
+  time: 10
+  reagents:
+    Flour: 5
+    MilkSoy: 5
+    Egg: 6
+    SodaWater: 5
+
+# Pancakes
+
+- type: cookingRecipe
   id: RecipeChocolateChipPancake
   name: chocolate chip pancake recipe
   result: FoodBakedPancakeCc
@@ -763,6 +812,30 @@
     Egg: 6
   solids:
     FoodSnackChocolateBar: 1
+
+- type: cookingRecipe
+  id: RecipePancake
+  name: pancake recipe
+  result: FoodBakedPancake
+  instrumentType: oven
+  time: 5
+  reagents:
+    Flour: 5
+    Milk: 5
+    Egg: 6
+
+- type: cookingRecipe
+  id: RecipeBlueberryPancake
+  name: blueberry pancake recipe
+  result: FoodBakedPancakeBb
+  instrumentType: oven
+  time: 5
+  reagents:
+    Flour: 5
+    Milk: 5
+    Egg: 6
+  solids:
+    FoodBerries: 2
 
 # Pies
 
@@ -1255,6 +1328,17 @@
   time: 5
   solids:
     FoodCroissantRaw: 1
+    FoodButterSlice: 1
+
+- type: cookingRecipe
+  id: RecipeCroissantCotton
+  name: cotton croissant recipe
+  result: FoodBakedCroissantCotton
+  recipeGroup: other
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodCroissantRawCotton: 1
     FoodButterSlice: 1
 
 - type: cookingRecipe
