@@ -12,6 +12,9 @@
   - type: Construction
     graph: PumpkinAddLight
     node: start
+  - type: Tag #SS220-PumpkinLantern-Craft begin
+    tags:
+    - CarvedPumpkin #SS220-PumpkinLantern-Craft end
 
 - type: entity
   parent: CarvedPumpkin
@@ -53,6 +56,9 @@
   components:
     - type: Sprite
       scale: 0.75, 0.75
+    - type: Construction #SS220-PumpkinLantern-Craft begin
+      graph: PumpkinLanternCraft
+      node: pumpkinLantern #SS220-PumpkinLantern-Craft end
 
 - type: entity
   parent: PumpkinLantern
