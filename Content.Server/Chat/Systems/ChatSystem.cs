@@ -10,6 +10,7 @@ using Content.Server.Speech.Prototypes;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Access.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -17,8 +18,12 @@ using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
+using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
+using Content.Shared.IdentityManagement.Components;
+using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.PDA;
 using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Radio;
@@ -64,6 +69,8 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!; //ss220 add identity concealment for chat and radio messages
+    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidAppearance = default!; //ss220 add identity concealment for chat and radio messages
 
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
@@ -485,7 +492,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         else
         {
-            var nameEv = new TransformSpeakerNameEvent(source, Name(source));
+            var nameEv = new TransformSpeakerNameEvent(source, GetName(source)); //ss220 add identity concealment for chat and radio messages
             RaiseLocalEvent(source, nameEv);
             name = nameEv.VoiceName;
             // Check for a speech verb override
@@ -559,7 +566,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         else
         {
-            var nameEv = new TransformSpeakerNameEvent(source, Name(source));
+            var nameEv = new TransformSpeakerNameEvent(source, GetName(source)); //ss220 add identity concealment for chat and radio messages
             RaiseLocalEvent(source, nameEv);
             name = nameEv.VoiceName;
         }
@@ -635,7 +642,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         // get the entity's apparent name (if no override provided).
         var ent = Identity.Entity(source, EntityManager);
-        string name = FormattedMessage.EscapeText(nameOverride ?? Name(ent));
+        string name = FormattedMessage.EscapeText(nameOverride ?? GetName(source)); //ss220 add identity concealment for chat and radio messages
 
         // Emotes use Identity.Name, since it doesn't actually involve your voice at all.
         var wrappedMessage = Loc.GetString("chat-manager-entity-me-wrap-message",
@@ -957,6 +964,82 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         return sb.ToString();
     }
+
+    //ss220 add identity concealment for chat and radio messages start
+    public string GetName(EntityUid entity, bool isRadio = false)
+    {
+        if (isRadio)
+        {
+            if (_inventory.TryGetSlotEntity(entity, "id", out var idUid))
+            {
+                if (TryComp<PdaComponent>(idUid, out var pda) && pda.ContainedId != null)
+                {
+                    if (TryComp<IdCardComponent>(pda.ContainedId, out var idComp))
+                    {
+                        return idComp.FullName ?? Loc.GetString("comp-pda-ui-unknown");
+                    }
+                }
+
+                if (TryComp<IdCardComponent>(idUid, out var id))
+                {
+                    return id.FullName ?? Loc.GetString("comp-pda-ui-unknown");
+                }
+            }
+
+            return Loc.GetString("comp-pda-ui-unknown");
+        }
+
+        if (IsIdentityHidden(entity))
+        {
+            if (TryComp<HumanoidAppearanceComponent>(entity, out var humanoid))
+            {
+                var species = _humanoidAppearance.GetSpeciesRepresentation(humanoid.Species);
+                var age = _humanoidAppearance.GetAgeRepresentation(humanoid.Species, humanoid.Age);
+                return Loc.GetString("chat-msg-sender-species-and-age", ("species", species), ("age", age));
+            }
+
+            return Loc.GetString("comp-pda-ui-unknown");
+        }
+
+        return Name(entity);
+    }
+
+    private bool IsIdentityHidden(EntityUid entity)
+    {
+        if (_inventory.TryGetSlotEntity(entity, "id", out var idUid))
+        {
+            if (TryComp<PdaComponent>(idUid, out var pda) && pda.ContainedId != null)
+            {
+                if (TryComp<IdCardComponent>(pda.ContainedId, out var idComp) && !string.IsNullOrEmpty(idComp.FullName))
+                {
+                    return false;
+                }
+            }
+
+            if (TryComp<IdCardComponent>(idUid, out var id) && !string.IsNullOrEmpty(id.FullName))
+            {
+                return false;
+            }
+        }
+
+        if (_inventory.TryGetContainerSlotEnumerator(entity, out var enumerSlot))
+        {
+            while (enumerSlot.MoveNext(out var slot))
+            {
+                if (slot.ContainedEntity == null)
+                    continue;
+
+                if (TryComp<IdentityBlockerComponent>(slot.ContainedEntity.Value, out var blocker)
+                    && blocker is { Enabled: true, Coverage: IdentityBlockerCoverage.FULL })
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+    //ss220 add identity concealment for chat and radio messages end
 
     #endregion
 }
