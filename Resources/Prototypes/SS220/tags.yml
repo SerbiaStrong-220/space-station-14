@@ -200,3 +200,7 @@
 # SS220 ClownMimeCyborg
 - type: Tag
   id: ClothingMaskMime
+
+# SS220-PumpkinLantern-Craft
+- type: Tag
+  id: CarvedPumpkin
