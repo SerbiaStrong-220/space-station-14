@@ -36,16 +36,23 @@ public sealed class BrowserLinkTag : IMarkupTag
         if (string.IsNullOrEmpty(label.Text))
             label.Text = link;
 
-        var uri = new Uri(link);
-        if (uri.Scheme == Uri.UriSchemeHttps || uri.Scheme == Uri.UriSchemeHttp)
+        try
         {
-            label.MouseFilter = Control.MouseFilterMode.Stop;
-            label.FontColorOverride = Color.CornflowerBlue;
-            label.DefaultCursorShape = Control.CursorShape.Hand;
+            var uri = new Uri(link);
+            if (uri.Scheme == Uri.UriSchemeHttps || uri.Scheme == Uri.UriSchemeHttp)
+            {
+                label.MouseFilter = Control.MouseFilterMode.Stop;
+                label.FontColorOverride = Color.CornflowerBlue;
+                label.DefaultCursorShape = Control.CursorShape.Hand;
 
-            label.OnMouseEntered += _ => label.FontColorOverride = Color.LightSkyBlue;
-            label.OnMouseExited += _ => label.FontColorOverride = Color.CornflowerBlue;
-            label.OnKeyBindDown += args => OnKeybindDown(args, uri);
+                label.OnMouseEntered += _ => label.FontColorOverride = Color.LightSkyBlue;
+                label.OnMouseExited += _ => label.FontColorOverride = Color.CornflowerBlue;
+                label.OnKeyBindDown += args => OnKeybindDown(args, uri);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error(e.Message);
         }
 
         control = label;
