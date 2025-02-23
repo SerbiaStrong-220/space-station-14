@@ -968,69 +968,61 @@ public sealed partial class ChatSystem : SharedChatSystem
     //ss220 add identity concealment for chat and radio messages start
     public string GetRadioName(EntityUid entity)
     {
-        var idName = GetIdCardName(entity);
-        return idName ?? Loc.GetString("comp-pda-ui-unknown");
+        return GetIdCardName(entity) ?? Loc.GetString("comp-pda-ui-unknown");
     }
 
     private string GetChatName(EntityUid entity)
     {
         var idName = GetIdCardName(entity);
 
-        if (IsIdentityHidden(entity) && idName != null)
-        {
+        if (!IsIdentityHidden(entity))
+            return Name(entity);
+
+        if (idName != null)
             return idName;
-        }
 
-        if (IsIdentityHidden(entity))
-        {
-            if (TryComp<HumanoidAppearanceComponent>(entity, out var humanoid))
-            {
-                var species = _humanoidAppearance.GetSpeciesRepresentation(humanoid.Species);
-                var age = _humanoidAppearance.GetAgeRepresentation(humanoid.Species, humanoid.Age);
-                return Loc.GetString("chat-msg-sender-species-and-age", ("species", species), ("age", age));
-            }
-
+        if (!TryComp<HumanoidAppearanceComponent>(entity, out var humanoid))
             return Loc.GetString("comp-pda-ui-unknown");
-        }
 
-        return Name(entity);
+        var species = _humanoidAppearance.GetSpeciesRepresentation(humanoid.Species);
+        var age = _humanoidAppearance.GetAgeRepresentation(humanoid.Species, humanoid.Age);
+
+        return Loc.GetString("chat-msg-sender-species-and-age", ("species", species), ("age", age));
     }
 
     private string? GetIdCardName(EntityUid entity)
     {
-        if (_inventory.TryGetSlotEntity(entity, "id", out var idUid))
-        {
-            if (TryComp<PdaComponent>(idUid, out var pda) && pda.ContainedId != null)
-            {
-                if (TryComp<IdCardComponent>(pda.ContainedId, out var idComp) && !string.IsNullOrEmpty(idComp.FullName))
-                {
-                    return idComp.FullName;
-                }
-            }
+        if (!_inventory.TryGetSlotEntity(entity, "id", out var idUid))
+            return null;
 
-            if (TryComp<IdCardComponent>(idUid, out var id) && !string.IsNullOrEmpty(id.FullName))
-            {
-                return id.FullName;
-            }
+        if (TryComp<PdaComponent>(idUid, out var pda) &&
+            pda.ContainedId != null &&
+            TryComp<IdCardComponent>(pda.ContainedId, out var idComp) &&
+            !string.IsNullOrEmpty(idComp.FullName))
+        {
+            return idComp.FullName;
         }
+
+        if (TryComp<IdCardComponent>(pda?.ContainedId ?? idUid, out var id) && !string.IsNullOrEmpty(id.FullName))
+            return id.FullName;
 
         return null;
     }
 
     private bool IsIdentityHidden(EntityUid entity)
     {
-        if (_inventory.TryGetContainerSlotEnumerator(entity, out var enumerSlot))
-        {
-            while (enumerSlot.MoveNext(out var slot))
-            {
-                if (slot.ContainedEntity == null)
-                    continue;
+        if (!_inventory.TryGetContainerSlotEnumerator(entity, out var enumerSlot))
+            return false;
 
-                if (TryComp<IdentityBlockerComponent>(slot.ContainedEntity.Value, out var blocker)
-                    && blocker is { Enabled: true, Coverage: IdentityBlockerCoverage.FULL })
-                {
-                    return true;
-                }
+        while (enumerSlot.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity == null)
+                continue;
+
+            if (TryComp<IdentityBlockerComponent>(slot.ContainedEntity.Value, out var blocker)
+                && blocker is { Enabled: true, Coverage: IdentityBlockerCoverage.FULL })
+            {
+                return true;
             }
         }
 
