@@ -969,7 +969,8 @@ public sealed partial class ChatSystem : SharedChatSystem
     //ss220 add identity concealment for chat and radio messages start
     public string GetRadioName(EntityUid entity)
     {
-        if (HasComp<BorgChassisComponent>(entity))
+        // for borgs(chassis) and ai(brain)
+        if (HasComp<BorgChassisComponent>(entity) || HasComp<BorgBrainComponent>(entity))
             return Name(entity);
 
         return GetIdCardName(entity) ?? Loc.GetString("comp-pda-ui-unknown");
