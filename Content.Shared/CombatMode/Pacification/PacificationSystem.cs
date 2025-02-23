@@ -1,12 +1,14 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
+using Content.Shared.Cloning;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.CombatMode.Pacification;
@@ -18,6 +20,7 @@ public sealed class PacificationSystem : EntitySystem
     [Dependency] private readonly SharedCombatModeSystem _combatSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ISerializationManager _serialization = default!; //ss220 add clone pacified comp to clone entity
 
     public override void Initialize()
     {
@@ -28,6 +31,8 @@ public sealed class PacificationSystem : EntitySystem
         SubscribeLocalEvent<PacifiedComponent, AttackAttemptEvent>(OnAttackAttempt);
         SubscribeLocalEvent<PacifiedComponent, ShotAttemptedEvent>(OnShootAttempt);
         SubscribeLocalEvent<PacifismDangerousAttackComponent, AttemptPacifiedAttackEvent>(OnPacifiedDangerousAttack);
+
+        SubscribeLocalEvent<PacifiedComponent, CloningEvent>(OnCloning); //ss220 add clone pacified comp to clone entity
     }
 
     private bool PacifiedCanAttack(EntityUid user, EntityUid target, [NotNullWhen(false)] out string? reason)
@@ -151,6 +156,15 @@ public sealed class PacificationSystem : EntitySystem
         args.Cancelled = true;
         args.Reason = "pacified-cannot-harm-indirect";
     }
+
+    //ss220 add clone pacified comp to clone entity start
+    private void OnCloning(Entity<PacifiedComponent> ent, ref CloningEvent args)
+    {
+        RemComp<PacifiedComponent>(args.Target);
+        var newComp = EnsureComp<PacifiedComponent>(args.Target);
+        _serialization.CopyTo(ent.Comp, ref newComp, notNullableOverride: true);
+    }
+    //ss220 add clone pacified comp to clone entity end
 }
 
 

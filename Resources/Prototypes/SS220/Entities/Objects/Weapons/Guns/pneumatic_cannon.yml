@@ -13,7 +13,7 @@
       - state: piecannon
         map: [ "enum.GunVisualLayers.Base" ]
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 0.75
+    rechargeCooldown: 5
     rechargeSound:
       path: /Audio/Weapons/Guns/MagIn/kinetic_reload.ogg
   - type: BasicEntityAmmoProvider
