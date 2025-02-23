@@ -28,11 +28,15 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Server.IdentityManagement;
 using Content.Server.DetailExaminable;
+using Content.Server.Polymorph.Systems;
+using Content.Server.SS220.PenScrambler;
 using Content.Shared.Actions;
 using Content.Shared.Store.Components;
 using Robust.Shared.Collections;
 using Robust.Shared.Map.Components;
 using Content.Shared.DoAfter;
+using Content.Shared.Polymorph;
+using Content.Shared.SS220.PenScrambler;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Store;
 
@@ -55,6 +59,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly IdentitySystem _identity = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
+    [Dependency] private readonly PolymorphSystem _polymorph = default!; //ss220 add dna copy implant
     [Dependency] private readonly SharedActionsSystem _actions = default!; //ss220 add adrenal implant
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -77,6 +82,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         SubscribeLocalEvent<SubdermalImplantComponent, UseDnaScramblerImplantEvent>(OnDnaScramblerImplant);
         SubscribeLocalEvent<SubdermalImplantComponent, UseAdrenalImplantEvent>(OnAdrenalImplant); //ss220 add adrenal implant
 
+        SubscribeLocalEvent<SubdermalImplantComponent, UseDnaCopyImplantEvent>(OnDnaCopyImplant); //ss220 dna copy implant add
     }
 
     // SS220 - chemical-implants start
@@ -292,6 +298,63 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         args.Handled = true;
         QueueDel(uid);
     }
+
+    //ss220 dna copy implant add start
+    private void OnDnaCopyImplant(Entity<SubdermalImplantComponent> ent, ref UseDnaCopyImplantEvent args)
+    {
+        if (!TryComp<TransferIdentityComponent>(ent.Owner, out var transferIdentityComponent))
+            return;
+
+        var target = transferIdentityComponent.Target;
+
+        if (target == null)
+        {
+            QueueDel(ent);
+            return;
+        }
+
+        if (ent.Comp.ImplantedEntity is not { } user)
+            return;
+
+        if (TryComp<HumanoidAppearanceComponent>(user, out var humanoidAppearanceComponent))
+        {
+            if (transferIdentityComponent.AppearanceComponent == null)
+                return;
+
+            _humanoidAppearance.CloneAppearance(target.Value, user, transferIdentityComponent.AppearanceComponent, humanoidAppearanceComponent);
+
+            _metaData.SetEntityName(user, MetaData(target.Value).EntityName, raiseEvents: false);
+
+            if (TryComp<DnaComponent>(user, out var dna)
+                && TryComp<DnaComponent>(target.Value, out var dnaTarget))
+            {
+                dna.DNA = dnaTarget.DNA;
+                var ev = new GenerateDnaEvent { Owner = user, DNA = dna.DNA };
+                RaiseLocalEvent(ent, ref ev);
+            }
+
+            if (TryComp<FingerprintComponent>(user, out var fingerprint)
+                && TryComp<FingerprintComponent>(target.Value, out var fingerprintTarget))
+            {
+                fingerprint.Fingerprint = fingerprintTarget.Fingerprint;
+            }
+
+            var setScale = EnsureComp<SetScaleFromTargetComponent>(user);
+            setScale.Target = GetNetEntity(target);
+
+            Dirty(user, setScale);
+
+            var evEvent = new SetScaleFromTargetEvent(GetNetEntity(user), setScale.Target);
+            RaiseNetworkEvent(evEvent);
+
+            _identity.QueueIdentityUpdate(user);
+
+            _popup.PopupEntity(Loc.GetString("pen-scrambler-success-convert-to-identity", ("identity", MetaData(target.Value).EntityName)), user, user);
+        }
+
+        QueueDel(ent);
+    }
+    //ss220 dna copy implant add end
 
     //ss220 add adrenal implant start
     private void OnAdrenalImplant(Entity<SubdermalImplantComponent> ent, ref UseAdrenalImplantEvent args)

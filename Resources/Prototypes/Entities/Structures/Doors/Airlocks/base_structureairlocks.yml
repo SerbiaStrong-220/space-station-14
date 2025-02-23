@@ -129,6 +129,9 @@
         type: WiresBoundUserInterface
   - type: Airtight
     noAirWhenFullyAirBlocked: false
+  #ss220 airlock visuals fix start
+  - type: AirlockVisuals
+  #ss220 airlock visuals fix end
   - type: RadiationBlocker
     resistance: 3
   - type: Occluder

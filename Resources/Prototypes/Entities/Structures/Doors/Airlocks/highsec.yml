@@ -72,6 +72,9 @@
     time: 10
   - type: Airlock
     openUnlitVisible: true # Corvax-Resprite-Airlocks
+  #ss220 airlock visuals fix start
+  - type: AirlockVisuals
+  #ss220 airlock visuals fix end
   - type: NavMapDoor
   - type: DoorBolt
   - type: AccessReader

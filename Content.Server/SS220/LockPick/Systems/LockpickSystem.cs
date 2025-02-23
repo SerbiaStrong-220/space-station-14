@@ -37,6 +37,7 @@ public sealed class LockpickSystem : EntitySystem
             BreakOnDamage = true,
             BreakOnMove = true,
             NeedHand = true,
+            DuplicateCondition = DuplicateConditions.None,
         });
     }
 

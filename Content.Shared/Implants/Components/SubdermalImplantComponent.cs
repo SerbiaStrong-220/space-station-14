@@ -100,6 +100,13 @@ public sealed partial class UseDnaScramblerImplantEvent : InstantActionEvent
 
 }
 
+//ss220 add dna copy implant start
+public sealed partial class UseDnaCopyImplantEvent : InstantActionEvent
+{
+
+}
+//ss220 add dna copy implant end
+
 //ss220 add adrenal implant start
 public sealed partial class UseAdrenalImplantEvent : InstantActionEvent
 {
