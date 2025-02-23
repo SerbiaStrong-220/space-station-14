@@ -23,7 +23,7 @@ public sealed class TransferIdentitySystem : EntitySystem
         if (penComponent.Target == null)
             return;
 
-        ent.Comp.Target = GetNetEntity(penComponent.Target.Value);
+        ent.Comp.Target = penComponent.Target.Value;
         ent.Comp.AppearanceComponent = penComponent.AppearanceComponent;
 
         _popup.PopupEntity(Loc.GetString("pen-scrambler-success-transfer-to-implant",
