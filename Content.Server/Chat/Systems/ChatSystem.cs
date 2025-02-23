@@ -996,17 +996,15 @@ public sealed partial class ChatSystem : SharedChatSystem
             return null;
 
         if (TryComp<PdaComponent>(idUid, out var pda) &&
-            pda.ContainedId != null &&
             TryComp<IdCardComponent>(pda.ContainedId, out var idComp) &&
             !string.IsNullOrEmpty(idComp.FullName))
         {
             return idComp.FullName;
         }
 
-        if (TryComp<IdCardComponent>(pda?.ContainedId ?? idUid, out var id) && !string.IsNullOrEmpty(id.FullName))
-            return id.FullName;
-
-        return null;
+        return TryComp<IdCardComponent>(pda?.ContainedId ?? idUid, out var id) && !string.IsNullOrEmpty(id.FullName)
+            ? id.FullName
+            : null;
     }
 
     private bool IsIdentityHidden(EntityUid entity)
