@@ -492,7 +492,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         else
         {
-            var nameEv = new TransformSpeakerNameEvent(source, GetName(source)); //ss220 add identity concealment for chat and radio messages
+            var nameEv = new TransformSpeakerNameEvent(source, GetChatName(source)); //ss220 add identity concealment for chat and radio messages
             RaiseLocalEvent(source, nameEv);
             name = nameEv.VoiceName;
             // Check for a speech verb override
@@ -566,7 +566,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         else
         {
-            var nameEv = new TransformSpeakerNameEvent(source, GetName(source)); //ss220 add identity concealment for chat and radio messages
+            var nameEv = new TransformSpeakerNameEvent(source, GetChatName(source)); //ss220 add identity concealment for chat and radio messages
             RaiseLocalEvent(source, nameEv);
             name = nameEv.VoiceName;
         }
@@ -642,7 +642,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         // get the entity's apparent name (if no override provided).
         var ent = Identity.Entity(source, EntityManager);
-        string name = FormattedMessage.EscapeText(nameOverride ?? GetName(source)); //ss220 add identity concealment for chat and radio messages
+        string name = FormattedMessage.EscapeText(nameOverride ?? GetChatName(source)); //ss220 add identity concealment for chat and radio messages
 
         // Emotes use Identity.Name, since it doesn't actually involve your voice at all.
         var wrappedMessage = Loc.GetString("chat-manager-entity-me-wrap-message",
@@ -966,27 +966,19 @@ public sealed partial class ChatSystem : SharedChatSystem
     }
 
     //ss220 add identity concealment for chat and radio messages start
-    public string GetName(EntityUid entity, bool isRadio = false)
+    public string GetRadioName(EntityUid entity)
     {
-        if (isRadio)
+        var idName = GetIdCardName(entity);
+        return idName ?? Loc.GetString("comp-pda-ui-unknown");
+    }
+
+    private string GetChatName(EntityUid entity)
+    {
+        var idName = GetIdCardName(entity);
+
+        if (IsIdentityHidden(entity) && idName != null)
         {
-            if (_inventory.TryGetSlotEntity(entity, "id", out var idUid))
-            {
-                if (TryComp<PdaComponent>(idUid, out var pda) && pda.ContainedId != null)
-                {
-                    if (TryComp<IdCardComponent>(pda.ContainedId, out var idComp))
-                    {
-                        return idComp.FullName ?? Loc.GetString("comp-pda-ui-unknown");
-                    }
-                }
-
-                if (TryComp<IdCardComponent>(idUid, out var id))
-                {
-                    return id.FullName ?? Loc.GetString("comp-pda-ui-unknown");
-                }
-            }
-
-            return Loc.GetString("comp-pda-ui-unknown");
+            return idName;
         }
 
         if (IsIdentityHidden(entity))
@@ -1004,7 +996,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         return Name(entity);
     }
 
-    private bool IsIdentityHidden(EntityUid entity)
+    private string? GetIdCardName(EntityUid entity)
     {
         if (_inventory.TryGetSlotEntity(entity, "id", out var idUid))
         {
@@ -1012,16 +1004,21 @@ public sealed partial class ChatSystem : SharedChatSystem
             {
                 if (TryComp<IdCardComponent>(pda.ContainedId, out var idComp) && !string.IsNullOrEmpty(idComp.FullName))
                 {
-                    return false;
+                    return idComp.FullName;
                 }
             }
 
             if (TryComp<IdCardComponent>(idUid, out var id) && !string.IsNullOrEmpty(id.FullName))
             {
-                return false;
+                return id.FullName;
             }
         }
 
+        return null;
+    }
+
+    private bool IsIdentityHidden(EntityUid entity)
+    {
         if (_inventory.TryGetContainerSlotEnumerator(entity, out var enumerSlot))
         {
             while (enumerSlot.MoveNext(out var slot))
