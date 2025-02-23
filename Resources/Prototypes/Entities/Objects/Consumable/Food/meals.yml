@@ -350,7 +350,7 @@
   description: BBQ ribs, slathered in a healthy coating of BBQ sauce. The least vegan thing to ever exist.
   components:
   - type: Food
-    trash: 
+    trash:
     - FoodKebabSkewer
   - type: FlavorProfile
     flavors:
@@ -372,6 +372,11 @@
   - type: Tag
     tags:
     - Meat
+  # SS220 Supa kitchen begin
+  - type: Construction
+    graph: MealRibs
+    node: mealRibs
+  # SS220 Supa kitchen end
 # Tastes like meat, smokey sauce.
 
 - type: entity
@@ -572,6 +577,11 @@
     - type: Tag
       tags:
       - Meat
+    # SS220 Supa kitchen begin
+    - type: Construction
+      graph: MealEnchiladas
+      node: mealEnchiladas
+    # SS220 Supa kitchen end
 # What do Europeans eat instead of enchiladas? 25.4 millimeter-iladas.
 
 - type: entity
@@ -612,7 +622,7 @@
   description: Buttery.
   components:
   - type: Food
-    trash: 
+    trash:
     - FoodPlate
   - type: FlavorProfile
     flavors:
