@@ -1,0 +1,11 @@
+- type: weightedRandom
+  id: NinjaObjectiveGroups
+  weights:
+    NinjaIntimidateTargetGroup: 1
+
+- type: weightedRandom
+  id: NinjaIntimidateTargetGroup
+  weights:
+    NinjaIntimidateBruteTargetObjective: 5 # easiest
+    NinjaIntimidateBurnTargetObjective: 3
+    NinjaIntimidateToxinTargetObjective: 1 # hardest

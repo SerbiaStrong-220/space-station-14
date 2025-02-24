@@ -11,7 +11,7 @@
   - type: Physics
     bodyType: Static
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/tinyfan.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/tinyfan.rsi #ss220-engineering-update-atmos
     state: icon
   - type: Fixtures
     fixtures:

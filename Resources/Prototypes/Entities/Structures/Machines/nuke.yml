@@ -16,9 +16,9 @@
       map: ["enum.NukeVisualLayers.Unlit"]
       shader: unshaded
       visible: false
-    - state: nuclearbomb_gay
-      map: ["pride"]
-      visible: false
+    #- state: nuclearbomb_gay #ss220 remove things begin
+    #  map: ["pride"]
+    #  visible: false #ss220 remove things end
     - state: nukefestive
       map: ["christmas"]
       visible: false
@@ -27,8 +27,8 @@
     holidays:
       festive:
       - FestiveSeason
-      pride:
-      - PrideMonth
+      #pride: #ss220 remove things
+      #- PrideMonth #ss220 remove things
   - type: GenericVisualizer
     visuals:
       enum.HolidayVisuals.Holiday:
@@ -110,6 +110,11 @@
   - type: WarpPoint
     follow: true
     location: nuclear bomb
+  - type: FTLSmashImmune
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.4 # need to discuss # 0.4 == 40%
+  #ss220 lockpick add end
 
 - type: entity
   parent: NuclearBomb
@@ -138,16 +143,16 @@
     - state: nukefestive
       map: ["christmas"]
       visible: false
-    - state: nuclearbomb_gay
-      map: [ "pride" ]
-      visible: false
+    #- state: nuclearbomb_gay #ss220 remove things begin
+    #  map: [ "pride" ]
+    #  visible: false #ss220 remove things end
   - type: Appearance
   - type: HolidayVisuals
     holidays:
       festive:
       - FestiveSeason
-      pride:
-      - PrideMonth
+      #pride: #ss220 remove things
+      #- PrideMonth #ss220 remove things
   - type: GenericVisualizer
     visuals:
       enum.HolidayVisuals.Holiday:

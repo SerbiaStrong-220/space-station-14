@@ -170,9 +170,9 @@
   description: Upgraded sunglasses that provide flash immunity and a security HUD.
   components:
   - type: Sprite
-    sprite: Clothing/Eyes/Glasses/secglasses.rsi
+    sprite: SS220/Clothing/Eyes/Glasses/security.rsi #SS220-updated
   - type: Clothing
-    sprite: Clothing/Eyes/Glasses/secglasses.rsi
+    sprite: SS220/Clothing/Eyes/Glasses/security.rsi #SS220-updated
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5

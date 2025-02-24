@@ -137,9 +137,9 @@
   description: Someone who wears this means business.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpskirt/detective.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/detective.rsi #ss220 resprite
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpskirt/detective.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/detective.rsi #ss220 resprite
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -148,9 +148,9 @@
   description: A hard-boiled private investigator's grey suit, complete with tie clip.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpskirt/detective_grey.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/detective_grey.rsi #ss220 resprite
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpskirt/detective_grey.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/detective_grey.rsi #ss220 resprite
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -181,23 +181,25 @@
   description: It's bright red and rather crisp, much like security's victims tend to be.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hos.rsi #ss220 fix
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-left
-        sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
-      right:
-      - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-right
-        sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hos.rsi #ss220 fix
+  #ss220 fix start
+#  - type: Item
+#    inhandVisuals:
+#      left:
+#      - state: inhand-left
+#        color: "#C12D30"
+#        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+#      - state: overlay-inhand-left
+#        sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
+#      right:
+#      - state: inhand-right
+#        color: "#C12D30"
+#        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+#      - state: overlay-inhand-right
+#        sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
+  #ss220 fix end
 
 - type: entity
   parent: [ClothingUniformSkirtBase]
@@ -439,12 +441,14 @@
   name: librarian jumpskirt
   description: A cosy green jumper fit for a curator of books.
   components:
-  # Corvax-Resprite begin
+#SS220 librarian resprite start
   - type: Sprite
-    sprite: Corvax/Clothing/Uniforms/Jumpskirt/librarian.rsi
+#    sprite: Corvax/Clothing/Uniforms/Jumpskirt/librarian.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/librarian.rsi
   - type: Clothing
-    sprite: Corvax/Clothing/Uniforms/Jumpskirt/librarian.rsi
-  # Corvax-Resprite end
+#    sprite: Corvax/Clothing/Uniforms/Jumpskirt/librarian.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/librarian.rsi
+#SS220 librarian resprite end
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -519,9 +523,9 @@
   description: Uniform for subpar operative LARPers performing tactical insulated glove theft in deep space.
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Uniforms/Jumpskirt/tacticool_s.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_tacticool_s.rsi #SS220-tacticool_s-resprite
     - type: Clothing
-      sprite: SS220/Clothing/Uniforms/Jumpskirt/tacticool_s.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_tacticool_s.rsi #SS220-tacticool_s-resprite
     # Too cool for sensors to be on
     - type: SuitSensor
       randomMode: false

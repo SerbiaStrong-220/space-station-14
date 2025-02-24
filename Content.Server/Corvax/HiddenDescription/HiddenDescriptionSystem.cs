@@ -21,10 +21,18 @@ public sealed partial class HiddenDescriptionSystem : EntitySystem
     }
 
     private void OnExamine(Entity<HiddenDescriptionComponent> hiddenDesc, ref ExaminedEvent args)
+    // SS220-fix-hidden-desc-fix-begin
+    {
+        PushExamineInformation(hiddenDesc.Comp, ref args);
+    }
+
+    public void PushExamineInformation(HiddenDescriptionComponent component, ref ExaminedEvent args)
+    // SS220-fix-hidden-desc-fix-end
     {
         _mind.TryGetMind(args.Examiner, out var mindId, out var mindComponent);
 
-        foreach (var item in hiddenDesc.Comp.Entries)
+        // foreach (var item in hiddenDesc.Comp.Entries) SS220-hidden-desc-fix
+        foreach (var item in component.Entries) // SS220-hidden-desc-fix
         {
             var isJobAllow = false;
             if (_roles.MindHasRole<JobRoleComponent>((mindId, mindComponent), out var jobRole))
@@ -40,7 +48,8 @@ public sealed partial class HiddenDescriptionSystem : EntitySystem
                 : isMindWhitelistPassed || isBodyWhitelistPassed || isJobAllow;
 
             if (passed)
-                args.PushMarkup(Loc.GetString(item.Label), hiddenDesc.Comp.PushPriority);
+                // args.PushMarkup(Loc.GetString(item.Label), hiddenDesc.Comp.PushPriority);
+                args.PushMarkup(Loc.GetString(item.Label), component.PushPriority); // SS220-hidden-desc-fix
         }
     }
 }

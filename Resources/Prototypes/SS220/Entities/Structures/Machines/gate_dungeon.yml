@@ -1,0 +1,43 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: BaseGateway
+  id: GatewayDungeonStart
+  suffix: Start on station
+  components:
+  - type: GateDungeon
+    gateType: Start
+    chargingTime: 300
+    pathDungeon:
+    - Maps/Shuttles/arrivals.yml #for example, del this later
+
+- type: entity
+  parent: BaseGateway
+  id: GatewayDungeonMid
+  suffix: Start dungeon
+  components:
+  - type: GateDungeon
+    gateType: Mid
+  - type: Sprite
+    sprite: SS220/Structures/Machines/gate_dungeon.rsi
+    layers:
+      - state: framebroken
+
+- type: entity
+  parent: BaseGateway
+  id: GatewayDungeonEnd
+  suffix: End dungeon
+  components:
+  - type: GateDungeon
+    gateType: End
+
+- type: entity
+  parent: MarkerBase
+  id: GatewayDungeonEndToStation
+  suffix: Teleport on station
+  components:
+  - type: GateDungeon
+    gateType: ToStation
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+      - state: green

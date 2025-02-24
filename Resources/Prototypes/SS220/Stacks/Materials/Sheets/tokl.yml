@@ -1,0 +1,14 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: stack
+  id: Tokl
+  name: material-tokl
+  icon: { sprite: SS220/Objects/Materials/Sheets/tokl.rsi, state: tokl }
+  spawn: SheetTokl1
+  maxCount: 30
+
+- type: material
+  id: Tokl
+  name: material-tokl
+  stackEntity: SheetTokl1
+  icon: { sprite: SS220/Objects/Materials/Sheets/tokl.rsi, state: tokl }
+  price: 0.03

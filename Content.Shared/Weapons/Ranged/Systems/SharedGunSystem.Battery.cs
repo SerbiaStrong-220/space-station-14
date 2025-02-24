@@ -42,6 +42,8 @@ public abstract partial class SharedGunSystem
         else if (component is HitscanBatteryAmmoProviderComponent hitscanComp)
             hitscanComp.Prototype = state.Prototype;
         //SS220 Add Multifaze gun end
+        
+        UpdateAmmoCount(uid, prediction: false);
     }
 
     private void OnBatteryGetState(EntityUid uid, BatteryAmmoProviderComponent component, ref ComponentGetState args)
@@ -97,7 +99,10 @@ public abstract partial class SharedGunSystem
     /// <summary>
     /// Update the battery (server-only) whenever fired.
     /// </summary>
-    protected virtual void TakeCharge(EntityUid uid, BatteryAmmoProviderComponent component) {}
+    protected virtual void TakeCharge(EntityUid uid, BatteryAmmoProviderComponent component)
+    {
+        UpdateAmmoCount(uid, prediction: false);
+    }
 
     protected void UpdateBatteryAppearance(EntityUid uid, BatteryAmmoProviderComponent component)
     {

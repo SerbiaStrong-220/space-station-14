@@ -137,7 +137,7 @@
     - type: Item
       size: Normal
     - type: Sprite
-      sprite: Mobs/Ghosts/revenant.rsi
+      sprite: SS220/Mobs/Ghosts/revenant.rsi #SS220 revenant-sprite-port
       state: icon
       noRot: true
     - type: Construction
@@ -301,7 +301,10 @@
   description: An adorable stuffed toy that resembles a lizardperson. Made by CentComm as a token initiative to combat speciesism in work environments. "Welcome your new colleagues as you do this plush, with open arms!"
   components:
   - type: Sprite
+    sprite: Objects/Fun/toys.rsi
     state: plushie_lizard
+  - type: Item
+    heldPrefix: plushielizard
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/weh.ogg
@@ -351,6 +354,8 @@
   description: An adorable stuffed toy that resembles a lizardperson of every color. You just might trip while staring at it...
   name: rainbow lizard plushie
   components:
+  - type: Sprite
+    state: rainbowlizardplush
   - type: PointLight
     radius: 1.5
     energy: 2
@@ -361,6 +366,14 @@
       head:
       - state: lizard-equipped-HELMET
         shader: unshaded
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: rainbowlizardplush-inhand-left
+        shader: unshaded
+      right:
+      - state: rainbowlizardplush-inhand-right
+        shader: unshaded
 
 - type: entity
   parent: PlushieLizard
@@ -369,7 +382,8 @@
   - type: Item
     size: Small
   - type: Sprite
-    state: plushie_lizard_mirrored
+    state: plushie_lizard
+    scale: -1, 1
 
 - type: entity
   parent: BasePlushie
@@ -413,6 +427,66 @@
           Quantity: 10
         - ReagentId: JuiceThatMakesYouWeh
           Quantity: 10
+  - type: Clothing
+    slots:
+    - HEAD
+    quickEquip: false
+    clothingVisuals:
+      head:
+      - state: spacelizard-equipped-HELMET
+        offset: "0, 0.03"
+
+- type: entity
+  parent: PlushieLizard
+  id: PlushieLizardInversed #Hew!
+  name: drazil plushie
+  description: An adorable stuffed toy that resembles a lizardperson from an inversed dimension. Hew!
+  components:
+  - type: Sprite
+    state: plushie_lizard_inversed
+  - type: Item
+    heldPrefix: plushielizardinversed
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: Food
+    requiresSpecialDigestion: true
+    useSound:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: MeleeWeapon
+    wideAnimationRotation: 180
+    soundHit:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: JuiceThatMakesYouHew
+        Quantity: 30
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+        - ReagentId: JuiceThatMakesYouHew
+          Quantity: 10
+  - type: Clothing
+    quickEquip: false
+    sprite: Objects/Fun/toys.rsi
+    equippedPrefix: lizard-inversed
+    slots:
+    - HEAD
+
 
 - type: entity
   parent: BasePlushie
@@ -459,6 +533,7 @@
     - type: RefillableSolution
       solution: plushie
     - type: SolutionContainerVisuals
+      solutionName: plushie
       maxFillLevels: 1
       fillBaseName: plushie_diona
       changeColor: false
@@ -498,11 +573,21 @@
   - type: Sprite
     sprite: Objects/Fun/sharkplush.rsi
     state: blue
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/rawr.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Items/Toys/rawr.ogg
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/rawr.ogg
   - type: EmitSoundOnActivate
     sound:
+      path: /Audio/Items/Toys/rawr.ogg
+  - type: MeleeWeapon
+    wideAnimationRotation: 180
+    soundHit:
       path: /Audio/Items/Toys/rawr.ogg
   - type: Item
     heldPrefix: blue
@@ -628,7 +713,6 @@
   - type: RgbLightController
     layers: [ 0 ]
   - type: Item
-    heldPrefix: rainbowcarpplush
     inhandVisuals:
       left:
       - state: rainbowcarpplush-inhand-left
@@ -973,8 +1057,15 @@
   - type: Sprite
     sprite: Objects/Fun/toys.rsi
     state: foamcrossbow
+  #ss220 toys begin
   - type: Item
-    size: Normal
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+  #- type: Item
+  #  size: Normal
+  #ss220 toys end
     sprite: Objects/Fun/toys.rsi
     heldPrefix: foamcrossbow
   - type: Gun
@@ -1269,6 +1360,46 @@
     heldPrefix: orb
   - type: TileFrictionModifier
     modifier: 0.001
+  # ss220 PonderingOrb speak on use begin
+  - type: SpeakOnTrigger
+    pack: PonderingOrbPhrases
+  - type: UseDelay
+    delay: 10
+  - type: Speech
+    speechSounds: Pai
+  - type: TriggerOnActivate
+  - type: TriggerOnSignal
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+    - Trigger
+  # ss220 PonderingOrb speak on use end
+
+- type: entity
+  parent: PonderingOrb
+  id: PonderingOrbWizard
+  name: pondering orb
+  description: Ponderous, man... Really ponderous. Magically shows the station's camera network.
+  suffix: Wizard
+  components:
+  - type: ActivatableUI
+    requireActiveHand: false
+    inHandsOnly: true
+    key: enum.SurveillanceCameraMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SurveillanceCameraMonitorUiKey.Key:
+        type: SurveillanceCameraMonitorBoundUserInterface
+  - type: DeviceNetwork
+    deviceNetId: Wired
+    receiveFrequencyId: SurveillanceCamera
+    transmitFrequencyId: SurveillanceCamera
+  - type: WiredNetworkConnection
+  - type: SurveillanceCameraMonitor
 
 - type: entity
   parent: BaseItem
@@ -1340,6 +1471,15 @@
         path: /Audio/Weapons/eblademiss.ogg
         params:
           variation: 0.125
+    #SS220 craftable desword start
+    - type: Tag
+      tags: 
+      - ToyEnergySword
+    - type: Construction
+      deconstructionTarget: null
+      graph: DoubleToySwordGraph
+      node: esword
+    #SS220 craftable desword end
 
 - type: entity
   parent: BasePlushie

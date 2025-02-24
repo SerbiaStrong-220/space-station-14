@@ -45,6 +45,13 @@
     layers:
     - state: animated
       shader: unshaded
+    ## ss220-new-years-cap begin
+    #   sprite: Mobs/Ghosts/ghost_human.rsi
+    #   color: "#fff8"
+    # - state: cap-ghost
+    #   shader: unshaded
+    #   sprite: SS220/Clothing/Head/Hats/newyears_cap.rsi
+    ## ss220-new-years-cap end
   - type: ContentEye
     maxZoom: 1.44,1.44
   - type: Eye
@@ -65,13 +72,23 @@
     damageContainers:
       - Biological
   # SS220 ADD GHOST HUD'S END
+  - type: ShowEventRoleIcons # SS220 Add event role icons
+  - type: ShowElectrocutionHUD
   - type: IntrinsicRadioReceiver
   - type: ActiveRadio
     receiveAllChannels: true
     globalReceive: true
+  # SS220 telepathy begin
+  - type: Telepathy
+    canSend: false
+    receiveAllChannels: true
+  # SS220 telepathy end
   - type: Tag
     tags:
     - BypassInteractionRangeChecks
+  - type: PointLight
+    radius: 6
+    enabled: false
 
 # proto for player ghosts specifically
 - type: entity
@@ -94,8 +111,8 @@
 
 - type: entity
   id: ActionToggleLighting
-  name: Toggle All Lighting
-  description: Toggle all light rendering to better observe dark areas.
+  name: Toggle Lighting
+  description: Toggle light rendering to better observe dark areas.
   components:
   - type: InstantAction
     icon: Interface/VerbIcons/light.svg.192dpi.png

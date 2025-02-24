@@ -18,6 +18,7 @@
 - type: speciesBaseSprites
   id: MobDionaSprites
   sprites:
+    Special: MobHumanoidAnyMarking #SS220-CultYogg
     Head: MobDionaHead
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking

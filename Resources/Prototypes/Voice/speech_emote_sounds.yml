@@ -52,6 +52,8 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    Hew:
+      collection: Hew
     #Gasp: SS220-emotes
     #  collection: MaleGasp
     #DefaultDeathgasp:
@@ -110,6 +112,8 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    Hew:
+      collection: Hew
     #Gasp: SS220 emotes
     #  collection: FemaleGasp
     #DefaultDeathgasp:
@@ -152,6 +156,8 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    Hew:
+      collection: Hew
     #Gasp: SS220 emotes
     #  collection: MaleGasp
     #DefaultDeathgasp:
@@ -194,6 +200,8 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    Hew:
+      collection: Hew
     Gasp:
       collection: FemaleGasp
     DefaultDeathgasp:
@@ -248,6 +256,8 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    Hew:
+      collection: Hew
     #Gasp: SS220-emotes
     #  collection: MaleGasp
     #DefaultDeathgasp:
@@ -304,6 +314,8 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    Hew:
+      collection: Hew
     #Gasp: SS220 emotes
     #  collection: FemaleGasp
     #DefaultDeathgasp:
@@ -326,6 +338,12 @@
       path: /Audio/Voice/Vox/shriek1.ogg
     Laugh:
       path: /Audio/Voice/Vox/vox_laugh.ogg
+    Honk:
+      collection: BikeHorn
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
   params:
     variation: 0.125
     # We need vox sounds for the other emotes
@@ -337,10 +355,14 @@
       path: /Audio/Voice/Diona/diona_scream.ogg
     Laugh:
       collection: DionaLaugh
+    Chirp:
+      path: /Audio/Animals/nymph_chirp.ogg
     Honk:
       collection: BikeHorn
     Weh:
       collection: Weh
+    Hew:
+      collection: Hew
     Gasp:
       collection: MaleGasp
     DefaultDeathgasp:
@@ -373,6 +395,10 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
     #Gasp: SS220 emotes
     #  collection: MaleGasp
     #DefaultDeathgasp:
@@ -423,6 +449,8 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    Hew:
+      collection: Hew
     #Gasp: SS220 emotes
     #  collection: MaleGasp
     #DefaultDeathgasp:
@@ -467,6 +495,8 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    Hew:
+      collection: Hew
     Gasp:
       collection: FemaleGasp
     DefaultDeathgasp:
@@ -500,6 +530,10 @@
     #SS220 emote sounds end
     Weh:
       collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
     #Gasp: SS220 emotes
     #  collection: MaleGasp
     #DefaultDeathgasp:
@@ -549,6 +583,8 @@
   sounds:
     Clap:
       collection: Claps
+    ClapSingle:
+      collection: ClapSingle
     Snap:
       collection: Snaps
       params:
@@ -561,6 +597,9 @@
   sounds:
     Clap:
       path: /Audio/Voice/Diona/diona_clap.ogg
+    # TODO: Replace this with a similar wood themed single clap
+    ClapSingle:
+      collection: ClapSingle
     Snap:
       path: /Audio/Voice/Diona/diona_snap.ogg
       params:
@@ -569,7 +608,7 @@
       path: /Audio/Voice/Diona/diona_salute.ogg
       params:
        volume: -5
-       
+
 - type: emoteSounds
   id: ReptilianBodyEmotes
   sounds:
@@ -579,6 +618,8 @@
         variation: 0.125
     Clap:
       collection: Claps
+    ClapSingle:
+      collection: ClapSingle
     Snap:
       collection: Snaps
       params:
@@ -646,5 +687,12 @@
   id: Parrot
   sound:
     path: /Audio/Animals/parrot_raught.ogg
+    params:
+      variation: 0.125
+
+- type: emoteSounds
+  id: Goat
+  sound:
+    path: /Audio/Animals/goat_bah.ogg
     params:
       variation: 0.125

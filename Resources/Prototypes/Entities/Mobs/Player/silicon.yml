@@ -32,6 +32,7 @@
   - type: IgnoreUIRange
   - type: StationAiHeld
   - type: StationAiOverlay
+  - type: ShowElectrocutionHUD
   - type: ActionGrant
     actions:
     - ActionJumpToCore
@@ -43,35 +44,109 @@
         type: RadarConsoleBoundUserInterface
       enum.CrewMonitoringUIKey.Key:
         type: CrewMonitoringBoundUserInterface
-      enum.GeneralStationRecordConsoleKey.Key:
-        type: GeneralStationRecordConsoleBoundUserInterface
+#SS220 Station Ai Actions start
+#      enum.GeneralStationRecordConsoleKey.Key:
+#        type: GeneralStationRecordConsoleBoundUserInterface
+#SS220 Station Ai Actions end
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
       enum.CommunicationsConsoleUiKey.Key:
         type: CommunicationsConsoleBoundUserInterface
+      #SS220 Station Ai Actions start
+      enum.SolarControlConsoleUiKey.Key:
+        type: SolarControlConsoleBoundUserInterface
+      enum.CargoConsoleUiKey.Orders:
+        type: CargoOrderConsoleBoundUserInterface
+      enum.CriminalRecordsUiKey.Key:
+        type: CriminalRecordsBoundUserInterface
+      enum.PowerMonitoringConsoleUiKey.Key:
+        type: PowerMonitoringConsoleBoundUserInterface
+      enum.AtmosAlertsComputerUiKey.Key:
+        type: AtmosAlertsComputerBoundUserInterface
+      enum.ResearchConsoleUiKey.Key:
+        type: ResearchConsoleBoundUserInterface
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+      enum.SuperMatterObserverUiKey.Key:
+        type: SuperMatterObserverBUI
+      enum.RoboticsConsoleUiKey.Key:
+        type: RoboticsConsoleBoundUserInterface
+      enum.StationMapUiKey.Key:
+        type: StationMapBoundUserInterface
+      #SS220 Station Ai Actions end
   - type: IntrinsicUI
     uis:
+    #SS220 Station Ai Actions start
       enum.RadarConsoleUiKey.Key:
-        toggleAction: ActionAGhostShowRadar
+        toggleAction: ActionAiShowRadar
       enum.CrewMonitoringUIKey.Key:
-        toggleAction: ActionAGhostShowCrewMonitoring
-      enum.GeneralStationRecordConsoleKey.Key:
-        toggleAction: ActionAGhostShowStationRecords
+        toggleAction: ActionAiShowCrewMonitoring
       enum.CommunicationsConsoleUiKey.Key:
-        toggleAction: ActionAGhostShowCommunications
+        toggleAction: ActionAiShowCommunications
+      enum.SolarControlConsoleUiKey.Key:
+        toggleAction: ActionAiShowSolar
+      enum.CargoConsoleUiKey.Orders:
+        toggleAction: ActionAiShowCargo
+#SS220 Station Ai Actions end
+#SS220 Station Ai Actions start
+      # enum.GeneralStationRecordConsoleKey.Key:
+      #  toggleAction: ActionAiShowStationRecords
+#SS220 Station Ai Actions end
+#SS220 Station Ai Actions start
+      enum.CriminalRecordsUiKey.Key:
+        toggleAction: ActionAiShowCriminalRecords
+      enum.PowerMonitoringConsoleUiKey.Key:
+        toggleAction: ActionAiShowPowerMonitoring
+      enum.AtmosAlertsComputerUiKey.Key:
+        toggleAction: ActionAiShowAlertInterface
+      enum.ResearchConsoleUiKey.Key:
+        toggleAction: ActionAiShowResearchAndDevelopmentInterface
+      enum.SuperMatterObserverUiKey.Key:
+        toggleAction: ActionAiShowSMInterface
+      enum.RoboticsConsoleUiKey.Key:
+        toggleAction: ActionAiShowRoboticsConsole
+      enum.StationMapUiKey.Key:
+        toggleAction: ActionAiStationMapConsole
+  #SS220 Station Ai Actions end
   - type: CrewMonitoringConsole
-  - type: GeneralStationRecordConsole
+  #- type: GeneralStationRecordConsole #SS220 Station Ai Actions
+  #SS220 Station Ai Actions start
+  - type: SolarControlConsole
+  - type: CargoOrderConsole
+  - type: CriminalRecordsConsole220
+  - type: PowerMonitoringConsole
+  - type: AtmosAlertsComputer
+  - type: RoboticsConsole #SS220_TODO:Добавить множественный приём DeviceNetwork
+  - type: ResearchConsole
+  - type: ResearchClient
+  - type: TechnologyDatabase
+  - type: SuperMatterObserver #SS220_TODO: Добавить отображение СМа Для ИИ
+  - type: SuperMatterObserverReceiver
+  - type: ApcPowerReceiver
+    needsPower: false
+    powerLoad: 0
+  #SS220 Station Ai Actions end
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: CrewMonitor
     transmitFrequencyId: ShuttleTimer
+  - type: StationMap #SS220 Station Ai Actions
   - type: RadarConsole
     followEntity: false
   - type: CommunicationsConsole
-    canShuttle: false
+    canShuttle: true
     title: comms-console-announcement-title-station-ai
-    color: "#2ed2fd"
+    color: "#5ed7aa"
+  - type: HolographicAvatar
+    layerData:
+    - sprite: Mobs/Silicon/station_ai.rsi
+      state: default
   - type: ShowJobIcons
+  # SS220 Holopad adapt begin
+  - type: TTS
+    randomVoicesList: Borg
+  # SS220 Holopad adapt end
+  - type: SetRadioReceiverToStationAiEye # SS220 Silicon TTS fix
 
 - type: entity
   id: AiHeldIntellicard
@@ -228,16 +303,16 @@
     laws: OverlordLawset
 
 - type: entity
-  id: DungeonMasterCircuitBoard
+  id: GameMasterCircuitBoard
   parent: BaseElectronics
-  name: law board (Dungeon Master)
-  description: An electronics board containing the Dungeon Master lawset.
+  name: law board (Game Master)
+  description: An electronics board containing the Game Master lawset.
   components:
   - type: Sprite
     sprite: Objects/Misc/module.rsi
     state: std_mod
   - type: SiliconLawProvider
-    laws: DungeonMasterLawset
+    laws: GameMasterLawset
 
 - type: entity
   id: ArtistCircuitBoard
@@ -253,7 +328,7 @@
 
 - type: entity
   id: AntimovCircuitBoard
-  parent: BaseElectronics
+  parent: BaseElectronics # SS220 Remove BaseSyndicateContraband
   name: law board (Antimov)
   description: An electronics board containing the Antimov lawset.
   components:
@@ -303,6 +378,18 @@
         unshaded:
           Empty: { state: empty }
           Occupied: { state: full }
+  - type: Intellicard
+
+- type: entity
+  id: PlayerStationAiPreview
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Mobs/Silicon/station_ai.rsi
+    layers:
+    - state: base
+    - state: ai
+      shader: unshaded
 
 - type: entity
   id: PlayerStationAiEmpty
@@ -341,12 +428,35 @@
       map: ["unshaded"]
       shader: unshaded
   - type: Appearance
+  - type: InteractionPopup
+    interactSuccessString: petting-success-station-ai
+    interactFailureString: petting-failure-station-ai
+    messagePerceivedByOthers: petting-success-station-ai-others # Otherwise AI cannot tell its being pet as It's just a brain inside of the core, not the core itself.
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
   - type: GenericVisualizer
     visuals:
       enum.StationAiVisualState.Key:
         unshaded:
           Empty: { state: ai_empty }
           Occupied: { state: ai }
+  - type: Telephone
+    compatibleRanges:
+    - Grid
+    - Map
+    - Unlimited
+    listeningRange: 0
+    speakerVolume: Speak
+    unlistedNumber: true
+    requiresPower: false
+  - type: Holopad
+  - type: StationAiWhitelist
+  - type: UserInterface
+    interfaces:
+        enum.HolopadUiKey.AiRequestWindow:
+          type: HolopadBoundUserInterface
+        enum.HolopadUiKey.AiActionWindow:
+          type: HolopadBoundUserInterface
 
 # The job-ready version of an AI spawn.
 - type: entity
@@ -386,6 +496,7 @@
     interfaces:
       enum.SiliconLawsUiKey.Key:
         type: SiliconLawBoundUserInterface
+        requireInputValidation: false
   - type: ComplexInteraction
   - type: Actions
   - type: Access
@@ -403,6 +514,9 @@
     - HideContextMenu
     - StationAi
     - NoConsoleSound
+  - type: StartingMindRole
+    mindRole: "MindRoleSiliconBrain"
+    silent: true
 
 # Hologram projection that the AI's eye tracks.
 - type: entity
@@ -429,40 +543,46 @@
       shader: unshaded
       map: ["base"]
 
+# The holographic representation of the AI that is projected from a holopad.
+- type: entity
+  id: StationAiHoloLocal
+  name: AI hologram
+  description: A holographic representation of an AI.
+  categories: [ HideSpawnMenu ]
+  suffix: DO NOT MAP
+  components:
+  - type: Transform
+    anchored: true
+  - type: WarpPoint
+    follow: true
+  - type: Eye
+  - type: ContentEye
+  - type: Examiner
+  - type: Actions
+  - type: Alerts
+  - type: FTLSmashImmune
+  - type: CargoSellBlacklist
+  - type: StationAiVision
+    range: 20
+
 # Borgs
 - type: entity
-  id: PlayerBorgGeneric
-  parent: BorgChassisGeneric
-  suffix: Battery, Tools
-  components:
-  - type: ContainerFill
-    containers:
-      borg_brain:
-        - PositronicBrain
-      borg_module:
-        - BorgModuleTool
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellMedium
-  - type: RandomMetadata
-    nameSegments: [borg_names] # SS220 AI Dataset rework
-
-- type: entity
   id: PlayerBorgBattery
-  parent: BorgChassisGeneric
+  parent: BorgChassisSelectable
   suffix: Battery
   components:
   - type: ContainerFill
     containers:
       borg_brain:
-        - MMIFilled
+      - PositronicBrain
   - type: ItemSlots
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellMedium
+  - type: StartingMindRole
+    mindRole: "MindRoleSiliconBrain"
+    silent: true
 
 - type: entity
   id: PlayerBorgSyndicateAssaultBattery
@@ -545,3 +665,37 @@
     - PlayerBorgSyndicateAssaultGhostRole
     - PlayerBorgSyndicateAssaultGhostRole # Saboteurs are kinda like cyborg medics, we want less.
     - PlayerBorgSyndicateSaboteurGhostRole
+
+- type: entity
+  id: PlayerBorgDerelict
+  parent: BorgChassisDerelict
+  suffix: Battery, Module
+  components:
+  - type: ContainerFill
+    containers:
+      borg_brain:
+        - PositronicBrain
+      borg_module:
+        - BorgModuleTool
+        - BorgModuleFireExtinguisher
+        - BorgModuleGPS
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+  - type: RandomMetadata
+    nameSegments: [names_borg]
+
+- type: entity
+  id: PlayerBorgDerelictGhostRole
+  parent: PlayerBorgDerelict
+  suffix: Ghost role
+  components:
+    - type: GhostRole
+      name: ghost-role-information-derelict-cyborg-name
+      description: ghost-role-information-derelict-cyborg-description
+      rules: ghost-role-information-silicon-rules
+      raffle:
+        settings: default
+    - type: GhostTakeoverAvailable

@@ -24,6 +24,7 @@
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: GlassCaseEngravedKnuckledusterFilled # SS220 New Qm highrisk
     - id: AstroNavCartridge
+    - id: ClothingOuterMechLoaderFull # SS220 AddMechToClothing
     - id: DeviceCalculator # SS220 Calculator
 
 - type: entity
@@ -170,8 +171,9 @@
     - id: ClothingHandsGlovesColorYellow
     - id: ClothingHeadsetAltEngineering
     - id: DoorRemoteEngineering
-    - id: RCD
-    - id: RCDAmmo
+    - id: RCDCE #SS220 RCD-to-CE begin
+    #- id: RCD
+    - id: RCDAmmo #SS220 RCD-to-CE end
     - id: RubberStampCE
     - id: Telescopichka
     - id: ClothingWristWatchGold # SS220 Wrist Watch
@@ -183,7 +185,7 @@
   id: FillChiefEngineerHardsuit
   table: !type:AllSelector
     children:
-    - id: ClothingMaskBreath
+    - id: ClothingMaskGasAtmos
     - id: ClothingOuterHardsuitEngineeringWhite
     - id: ClothingShoesBootsMagAdv
     - id: JetpackVoidFilled
@@ -336,7 +338,8 @@
   table: !type:AllSelector
     children:
     #- id: WeaponEnergyShotgun #SS220 Energy shotgun removal
-    - id: BookSpaceLaw
+    - id: BookSecretDocuments # SS220 mindslave-stop-word
+    - id: BookSpaceLaws # SS220 Space Law Replace
     - id: BoxEncryptionKeySecurity
     - id: CigarGoldCase
       prob: 0.50
@@ -357,6 +360,7 @@
     - id: BodySecurityCamera #SS220-Bodycam
     - id: CigPackSEC #SS220 Cigarettes
     - id: WantedListCartridge
+    - id: DrinkHosFlask
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

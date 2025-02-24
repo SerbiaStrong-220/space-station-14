@@ -70,3 +70,12 @@
   storage:
     back:
     - ClothingSponsorNeckHeadDevelopment
+
+- type: loadout
+  id: WikiEditorsNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WikiEditSponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckWikiEditors

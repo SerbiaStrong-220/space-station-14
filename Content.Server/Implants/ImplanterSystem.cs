@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server.Construction.Conditions;
 using Content.Server.Popups;
 using Content.Server.SS220.MindSlave;
 using Content.Shared.DoAfter;
@@ -8,6 +9,7 @@ using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
+using Content.Shared.Tag; // SS220-mindslave
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
@@ -19,10 +21,14 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly MindSlaveSystem _mindslave = default!;
+    [Dependency] private readonly TagSystem _tag = default!; // SS220-mindslave
 
     //SS220-mindslave begin
     [ValidatePrototypeId<EntityPrototype>]
     private const string MindSlaveImplantProto = "MindSlaveImplant";
+    [ValidatePrototypeId<TagPrototype>]
+    private const string MindShieldImplantTag = "MindShield";
+    private const float MindShieldRemoveTime = 40;
     //SS220-mindslave end
 
     public override void Initialize()
@@ -46,6 +52,15 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
             return;
 
         //SS220-mindslave begin
+        if (component.ImplanterSlot.ContainerSlot != null
+            && component.ImplanterSlot.ContainerSlot.ContainedEntity != null
+            && _tag.HasTag(component.ImplanterSlot.ContainerSlot.ContainedEntity.Value, MindShieldImplantTag)
+            && _mindslave.IsEnslaved(target))
+        {
+            _popup.PopupEntity(Loc.GetString("mindshield-target-mindslaved"), target, args.User);
+            return;
+        }
+
         if (component.Implant == MindSlaveImplantProto)
         {
             if (args.User == target)
@@ -90,17 +105,6 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
                 return;
             }
 
-            // Check if we are trying to implant a implant which is already implanted
-            if (implant.HasValue && !component.AllowMultipleImplants && CheckSameImplant(target, implant.Value))
-            {
-                var name = Identity.Name(target, EntityManager, args.User);
-                var msg = Loc.GetString("implanter-component-implant-already", ("implant", implant), ("target", name));
-                _popup.PopupEntity(msg, target, args.User);
-                args.Handled = true;
-                return;
-            }
-
-
             //Implant self instantly, otherwise try to inject the target.
             if (args.User == target)
                 Implant(target, target, uid, component);
@@ -111,14 +115,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         args.Handled = true;
     }
 
-    public bool CheckSameImplant(EntityUid target, EntityUid implant)
-    {
-        if (!TryComp<ImplantedComponent>(target, out var implanted))
-            return false;
 
-        var implantPrototype = Prototype(implant);
-        return implanted.ImplantContainer.ContainedEntities.Any(entity => Prototype(entity) == implantPrototype);
-    }
 
     /// <summary>
     /// Attempt to implant someone else.
@@ -155,7 +152,26 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     //TODO: Remove when surgery is in
     public void TryDraw(ImplanterComponent component, EntityUid user, EntityUid target, EntityUid implanter)
     {
-        var args = new DoAfterArgs(EntityManager, user, component.DrawTime, new DrawEvent(), implanter, target: target, used: implanter)
+        //SS220-Mindshield-remove-time begin
+        var isMindShield = false;
+
+        if (_container.TryGetContainer(target, ImplanterComponent.ImplantSlotId, out var implantContainer))
+        {
+            foreach (var implant in implantContainer.ContainedEntities)
+            {
+                if (HasComp<SubdermalImplantComponent>(implant) && _container.CanRemove(implant, implantContainer))
+                {
+                    if (_tag.HasTag(implant, MindShieldImplantTag))
+                        isMindShield = true;
+                    break;
+                }
+            }
+        }
+        var delay = isMindShield ? MindShieldRemoveTime : component.DrawTime;
+        var popupPath = isMindShield ? "injector-component-drawing-mind-shield" : "injector-component-drawing-user";
+        var args = new DoAfterArgs(EntityManager, user, delay, new DrawEvent(), implanter, target: target, used: implanter)
+        // var args = new DoAfterArgs(EntityManager, user, component.DrawTime, new DrawEvent(), implanter, target: target, used: implanter)
+        //SS220-Mindshield-remove-time end
         {
             BreakOnDamage = true,
             BreakOnMove = true,
@@ -163,7 +179,9 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         };
 
         if (_doAfter.TryStartDoAfter(args))
-            _popup.PopupEntity(Loc.GetString("injector-component-injecting-user"), target, user);
+            // _popup.PopupEntity(Loc.GetString("injector-component-injecting-user"), target, user); //SS220-Mindshield-remove-time
+            _popup.PopupEntity(Loc.GetString(popupPath), target, user);
+
 
     }
 

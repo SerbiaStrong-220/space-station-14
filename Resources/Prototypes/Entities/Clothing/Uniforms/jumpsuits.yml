@@ -286,9 +286,9 @@
   description: Someone who wears this means business.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpsuit/detective.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/detective.rsi #ss220 resprite
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpsuit/detective.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/detective.rsi #ss220 resprite
 
 - type: entity
   parent: ClothingUniformBase
@@ -297,9 +297,9 @@
   description: A hard-boiled private investigator's grey suit, complete with tie clip.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpsuit/detective_grey.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/detective_grey.rsi #ss220 resprite
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpsuit/detective_grey.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/detective_grey.rsi #ss220 resprite
 
 - type: entity
   parent: ClothingUniformBase
@@ -656,9 +656,9 @@
   description: A formal uniform issued to the Nanotrasen Troopers, usually it comes with a car.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/security_trooper.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/security_trooper.rsi #SS220-resprite-trooper-uniform
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/security_trooper.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/security_trooper.rsi #SS220-resprite-trooper-uniform
 
 - type: entity
   parent: [ClothingUniformBase]
@@ -702,9 +702,13 @@
   description: It's very... sensible. # Corvax-Resprite
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/librarian.rsi
+#SS220 librarian resprite start
+#    sprite: Clothing/Uniforms/Jumpsuit/librarian.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/librarian.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/librarian.rsi
+#    sprite: Clothing/Uniforms/Jumpsuit/librarian.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/librarian.rsi
+#SS220 librarian resprite end
 
 - type: entity
   parent: ClothingUniformBase
@@ -874,16 +878,16 @@
   description: Uniform for subpar operative LARPers performing tactical insulated glove theft in deep space.
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Uniforms/Jumpsuit/tacticool.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/syndicate_tacticool.rsi #SS220-tacticool_s-resprite
     - type: Clothing
-      sprite: SS220/Clothing/Uniforms/Jumpsuit/tacticool.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpsuit/syndicate_tacticool.rsi #SS220-tacticool_s-resprite
     # Too cool for sensors to be on
     - type: SuitSensor
       randomMode: false
       mode: SensorOff
 
 - type: entity
-  parent: [ ClothingUniformBase]
+  parent: [ ClothingUniformBase ]
   id: ClothingUniformJumpsuitMercenary
   name: mercenary jumpsuit
   description: Clothing for real mercenaries who have gone through fire, water and the jungle of planets flooded with dangerous monsters or targets for which a reward has been assigned.
@@ -922,9 +926,9 @@
   description: Might as well relax with a job as easy as yours.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpsuit/atmos_casual.rsi #SS220-AtmosCasualResprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/atmospheric_technician_casual.rsi #SS220-AtmosCasualResprite
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpsuit/atmos_casual.rsi #SS220-AtmosCasualResprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/atmospheric_technician_casual.rsi #SS220-AtmosCasualResprite
 
 - type: entity
   parent: ClothingUniformBase

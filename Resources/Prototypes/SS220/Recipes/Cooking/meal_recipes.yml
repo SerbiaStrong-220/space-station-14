@@ -169,3 +169,56 @@
     FoodCheeseSlice: 1
     FoodTomato: 1
 #SS220 Spicy UPD end
+
+#SS220 caramel cane start
+- type: microwaveMealRecipe
+  id: Caramel
+  name: caramelka
+  result: CaramelFood
+  time: 15
+  reagents:
+    Sugar: 10
+    Water: 10
+
+- type: microwaveMealRecipe
+  id: CaramelRed
+  name: red caramelka
+  result: RedCaramelCaneFood
+  time: 15
+  reagents:
+    Grenadine: 5
+  solids:
+    CaramelBasedFood: 1
+
+- type: microwaveMealRecipe
+  id: CaramelGreen
+  name: green caramelka
+  result: GreenCaramelCaneFood
+  time: 15
+  reagents:
+    JuiceLime: 5
+  solids:
+    CaramelBasedFood: 1
+
+- type: microwaveMealRecipe
+  id: CaramelGreenRed
+  name: greenred caramelka
+  result: CaramelCaneGreenRedFood
+  time: 15
+  reagents:
+    Grenadine: 5
+    JuiceLime: 5
+  solids:
+    CaramelBasedFood: 1
+
+- type: microwaveMealRecipe
+  id: double Caramel
+  name: double caramelka
+  result: DoubleCaramelCaneFood
+  time: 20
+  reagents:
+    Grenadine: 10
+    JuiceLime: 10
+  solids:
+    CaramelBasedFood: 2
+#SS220 caramel cane end

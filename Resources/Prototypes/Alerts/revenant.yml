@@ -10,7 +10,7 @@
 
 - type: alert
   id: Corporeal
-  icons: [ /Textures/Mobs/Ghosts/revenant.rsi/icon.png ]
+  icons: [ /Textures/SS220/Mobs/Ghosts/revenant.rsi/icon.png ] #SS220 revenant-sprite-port
   name: alerts-revenant-corporeal-name
   description: alerts-revenant-corporeal-desc
 

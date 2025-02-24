@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "Made by MIXnikita (Discord) for SS14 (SS220)",
+  "copyright": " CQC Made by MIXnikita (Discord) for SS14 (SS220), Space_law made by Suran1 (Discord)",
   "size": {
     "x": 32,
     "y": 32
@@ -9,6 +9,9 @@
   "states": [
     {
       "name": "cqc"
+    },
+    {
+      "name": "space_law"
     }
   ]
 }

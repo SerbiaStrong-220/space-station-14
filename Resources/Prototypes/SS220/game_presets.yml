@@ -1,3 +1,4 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 - type: gamePreset
   id: DarkReaper
   alias:
@@ -9,3 +10,67 @@
   rules:
     - DarkReaperSpawnMajor
     - BasicStationEventScheduler
+
+- type: gamePreset
+  id: CultYoggPreset
+  alias:
+    - cultyogg
+  name: roles-antag-cult-yogg-name
+  description: roles-antag-cult-yogg-objective
+  showInVote: false
+  minPlayers: 40
+  rules:
+    - CultYoggRule
+    - NoNewCrewAntagsStationEventScheduler
+
+# event schedulers
+
+- type: entity
+  id: NoNewCrewAntagsStationEventScheduler
+  parent: BaseGameRule
+  components:
+  - type: BasicStationEventScheduler
+    scheduledGameRules: !type:NestedSelector
+      tableId: NoNewCrewAntagsGameRulesTable
+
+- type: entityTable
+  id: NoNewCrewAntagsGameRulesTable
+  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+    children:
+      - !type:NestedSelector
+        tableId: BasicCalmEventsTable
+      - !type:NestedSelector
+        tableId: NoNewCrewAntagsEventsTable
+      - !type:NestedSelector
+        tableId: CargoGiftsTable
+      - !type:NestedSelector
+        tableId: CalmPestEventsTable
+      - !type:NestedSelector
+        tableId: SpicyPestEventsTable
+
+- type: entityTable
+  id: NoNewCrewAntagsEventsTable
+  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+    children:
+    # - id: ClosetSkeleton # SS220 No-Closet-Skeletons
+    - id: DragonSpawn
+    - id: KingRatMigration
+    - id: NinjaSpawn
+    - id: RevenantSpawn
+    #- id: SleeperAgents
+    #- id: ZombieOutbreak
+    - id: DarkReaperSpawn #ss220 darkreaper middle event
+    - id: SpiderQueenSpawn #SS220 spider queen midround event
+    - id: LoneOpsSpawn
+    - id: DerelictCyborgSpawn
+
+- type: gamePreset
+  id: FractWar
+  alias:
+    - fractwar
+  name: fractwar-preset-name
+  description: fractwar-preset-description
+  showInVote: false
+  rules:
+    - FractWar
+    - BasicRoundstartVariation

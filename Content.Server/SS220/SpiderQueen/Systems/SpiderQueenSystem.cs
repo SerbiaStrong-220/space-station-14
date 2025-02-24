@@ -1,12 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
+using Content.Server.SS220.SpiderQueen.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.RCD.Systems;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
@@ -27,6 +29,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -36,15 +39,21 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
+    [Dependency] private readonly RCDSystem _rCDSystem = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<SpiderQueenComponent, AfterCocooningEvent>(OnAfterCocooning);
-        SubscribeLocalEvent<SpiderQueenComponent, SpiderTargetSpawnEvent>(OnTargetSpawn);
-        SubscribeLocalEvent<SpiderQueenComponent, SpiderSpawnDoAfterEvent>(OnSpawnDoAfter);
-        SubscribeLocalEvent<SpiderQueenComponent, SpiderNearbySpawnEvent>(OnNearbySpawn);
+
+        SubscribeLocalEvent<SpiderTargetSpawnEvent>(OnTargetSpawn);
+        SubscribeLocalEvent<SpiderNearbySpawnEvent>(OnNearbySpawn);
+        SubscribeLocalEvent<SpiderSpawnDoAfterEvent>(OnSpawnDoAfter);
+
+        SubscribeLocalEvent<SpiderTileSpawnActionEvent>(OnTileSpawnAction);
+        SubscribeLocalEvent<SpiderTileSpawnDoAfterEvent>(OnTileSpawnDoAfter);
     }
 
     public override void Update(float frameTime)
@@ -64,62 +73,66 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         }
     }
 
-    private void OnTargetSpawn(Entity<SpiderQueenComponent> entity, ref SpiderTargetSpawnEvent args)
+    private void OnTargetSpawn(SpiderTargetSpawnEvent args)
     {
-        var spider = entity.Owner;
+        var performer = args.Performer;
         if (args.Handled ||
-            spider != args.Performer ||
-            !CheckEnoughBloodPoints(spider, args.Cost, entity.Comp))
+            !CheckEnoughBloodPoints(performer, args.Cost))
             return;
 
-        if (TryStartSpiderSpawnDoAfter(spider, args.DoAfter, args.Target, args.Prototypes, args.Offset, args.Cost))
+        if (TryStartSpiderSpawnDoAfter(performer, args.DoAfter, args.Target, args.Prototypes, args.Offset, args.SnapToGrid, args.Cost))
         {
             args.Handled = true;
         }
         else
         {
-            Log.Error($"Failed to start DoAfter by {spider}");
+            Log.Error($"Failed to start DoAfter by {performer}");
             return;
         }
     }
 
-    private void OnNearbySpawn(Entity<SpiderQueenComponent> entity, ref SpiderNearbySpawnEvent args)
+    private void OnNearbySpawn(SpiderNearbySpawnEvent args)
     {
-        var spider = entity.Owner;
+        var performer = args.Performer;
         if (args.Handled ||
-            spider != args.Performer ||
-            !TryComp<TransformComponent>(entity.Owner, out var transform) ||
-            !CheckEnoughBloodPoints(spider, args.Cost, entity.Comp))
+            !TryComp<TransformComponent>(performer, out var transform) ||
+            !CheckEnoughBloodPoints(performer, args.Cost))
             return;
 
-        if (TryStartSpiderSpawnDoAfter(spider, args.DoAfter, transform.Coordinates, args.Prototypes, args.Offset, args.Cost))
+        if (TryStartSpiderSpawnDoAfter(performer, args.DoAfter, transform.Coordinates, args.Prototypes, args.Offset, args.SnapToGrid, args.Cost))
         {
             args.Handled = true;
         }
         else
         {
-            Log.Error($"Failed to start DoAfter by {spider}");
+            Log.Error($"Failed to start DoAfter by {performer}");
             return;
         }
     }
 
-    private void OnSpawnDoAfter(Entity<SpiderQueenComponent> entity, ref SpiderSpawnDoAfterEvent args)
+    private void OnSpawnDoAfter(SpiderSpawnDoAfterEvent args)
     {
+        var user = args.User;
         if (args.Cancelled ||
-            !CheckEnoughBloodPoints(entity, args.Cost, entity.Comp))
+            !CheckEnoughBloodPoints(user, args.Cost))
             return;
-
-        entity.Comp.CurrentBloodPoints -= args.Cost;
-        Dirty(entity);
-        UpdateAlert(entity);
 
         var getProtos = EntitySpawnCollection.GetSpawns(args.Prototypes, _random);
         var targetMapCords = GetCoordinates(args.TargetCoordinates);
+        if (args.SnapToGrid)
+            targetMapCords.SnapToGrid(EntityManager, _mapManager);
+
         foreach (var proto in getProtos)
         {
-            Spawn(proto, targetMapCords.SnapToGrid(EntityManager, _mapManager));
+            var ent = Spawn(proto, targetMapCords);
             targetMapCords = targetMapCords.Offset(args.Offset);
+
+            if (TryComp<SpiderEggComponent>(ent, out var spiderEgg))
+                spiderEgg.EggOwner = user;
         }
+
+        if (TryComp<SpiderQueenComponent>(user, out var spiderQueen))
+            ChangeBloodPointsAmount(user, spiderQueen, -args.Cost);
     }
 
     private void OnAfterCocooning(Entity<SpiderQueenComponent> entity, ref AfterCocooningEvent args)
@@ -153,6 +166,61 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         if (entity.Comp.CocoonsCountToAnnouncement is { } value &&
             entity.Comp.CocoonsList.Count >= value)
             DoStationAnnouncement(entity);
+    }
+
+    private void OnTileSpawnAction(SpiderTileSpawnActionEvent args)
+    {
+        var performer = args.Performer;
+        if (args.Handled ||
+            !CheckEnoughBloodPoints(performer, args.Cost))
+            return;
+
+        var netCoordinates = GetNetCoordinates(args.Target);
+        var doAfterArgs = new DoAfterArgs(
+            EntityManager,
+            performer,
+            args.DoAfter,
+            new SpiderTileSpawnDoAfterEvent()
+            {
+                Prototype = args.Prototype,
+                TargetCoordinates = netCoordinates,
+                Cost = args.Cost,
+            },
+            null
+        )
+        {
+            Broadcast = true,
+            BreakOnDamage = false,
+            BreakOnMove = true,
+            NeedHand = false,
+            BlockDuplicate = true,
+            CancelDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfterArgs))
+            args.Handled = true;
+    }
+
+    private void OnTileSpawnDoAfter(SpiderTileSpawnDoAfterEvent args)
+    {
+        var user = args.User;
+        if (args.Cancelled ||
+            !CheckEnoughBloodPoints(user, args.Cost))
+            return;
+
+        var coordinates = GetCoordinates(args.TargetCoordinates);
+        if (!_rCDSystem.TryGetMapGridData(coordinates, out var mapGridData) ||
+            mapGridData is null)
+            return;
+
+        _mapSystem.SetTile(mapGridData.Value.GridUid,
+            mapGridData.Value.Component,
+            mapGridData.Value.Position,
+            new Tile(_tileDefinitionManager[args.Prototype].TileId));
+
+        if (TryComp<SpiderQueenComponent>(user, out var spiderQueen))
+            ChangeBloodPointsAmount(user, spiderQueen, -args.Cost);
     }
 
     /// <summary>
@@ -189,9 +257,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
         var hungerDecreaseValue = -(value / component.HungerConvertCoefficient);
         _hunger.ModifyHunger(uid, hungerDecreaseValue, hunger);
-        component.CurrentBloodPoints += value;
-        Dirty(uid, component);
-        UpdateAlert((uid, component));
+        ChangeBloodPointsAmount(uid, component, value);
     }
 
     private bool TryStartSpiderSpawnDoAfter(EntityUid spider,
@@ -199,6 +265,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         EntityCoordinates coordinates,
         List<EntitySpawnEntry> prototypes,
         Vector2 offset,
+        bool snapToGrid,
         FixedPoint2 cost)
     {
         var netCoordinates = GetNetCoordinates(coordinates);
@@ -211,12 +278,13 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
                 TargetCoordinates = netCoordinates,
                 Prototypes = prototypes,
                 Offset = offset,
+                SnapToGrid = snapToGrid,
                 Cost = cost,
             },
-            spider
+            null
         )
         {
-            Broadcast = false,
+            Broadcast = true,
             BreakOnDamage = false,
             BreakOnMove = true,
             NeedHand = false,

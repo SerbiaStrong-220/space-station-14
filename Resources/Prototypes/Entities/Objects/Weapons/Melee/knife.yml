@@ -90,8 +90,6 @@
     tags:
     - CombatKnife
     - Knife
-  - type: ThrowingAngle # SS220 BetterKnifes Update
-    angle: 225 # SS220 BetterKnifes Update
   - type: Sprite
     sprite: Objects/Weapons/Melee/combat_knife.rsi
     state: icon
@@ -103,6 +101,7 @@
         Slash: 12
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
   - type: LandAtCursor
   - type: DamageOtherOnHit
     damage:
@@ -115,6 +114,8 @@
       sprite: Objects/Weapons/Melee/combat_knife.rsi
   - type: DisarmMalus
     malus: 0.225
+  - type: ThrowingAngle
+    angle: 225
 
 - type: entity
   name: survival knife
@@ -147,6 +148,7 @@
         Slash: 15
   - type: Item
     sprite: Objects/Weapons/Melee/kukri_knife.rsi
+    storedSprite: null
 
 - type: entity
   parent: ClothingHeadHatGreyFlatcap
@@ -281,7 +283,7 @@
   name: throwing knife
   parent: [BaseKnife]
   id: ThrowingKnife
-  description: This bloodred knife is very aerodynamic and easy to throw, but good luck trying to fight someone hand-to-hand.
+  description: This blood-red knife is very aerodynamic and easy to throw, but good luck trying to fight someone hand-to-hand.
   components:
 # SS220 BetterKnifes Update begin
   - type: EmitSoundOnLand
@@ -325,6 +327,7 @@
         Slash: 5
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
   - type: LandAtCursor
   - type: DamageOtherOnHit
     ignoreResistances: true

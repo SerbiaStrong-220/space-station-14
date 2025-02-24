@@ -109,10 +109,12 @@
 
 - type: entity
   name: E-N
-  parent: [BorgChassisGeneric, StripableInventoryBase]
+  parent: [BorgChassisSelectable, StripableInventoryBase]
   id: MobEN
   description: Corgi made of metal with a heart of gold, because a heart of gold is a great guide
   components:
+  - type: BorgSwitchableType
+    isNeedToSwitch: false
   - type: ContainerFill
     containers:
       borg_brain:
@@ -284,7 +286,7 @@
     drawdepth: Mobs
     sprite: SS220/Mobs/Animals/crocodile.rsi
     layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: croc
   - type: DamageStateVisuals
     states:

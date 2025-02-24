@@ -16,3 +16,38 @@
     state: fireplace
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  name: beton wall
+  id: BetonWall
+  graph: Girder
+  startNode: start
+  targetNode: betonWall
+  category: construction-category-structures
+  description: Keeps the air in and the greytide out.
+  icon:
+    sprite: SS220/Structures/Walls/beton.rsi
+    state: full
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  name: solid secret reinforced door
+  id: SolidSecretReinforcedDoor
+  graph: Girder
+  startNode: start
+  targetNode: solidSecretReinforcedDoor
+  category: construction-category-structures
+  description: A secret door for the reinforced wall.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: SS220/Structures/Doors/secter_reinforced_door.rsi
+    state: closed
+  conditions:
+    - !type:TileNotBlocked

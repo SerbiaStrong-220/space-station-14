@@ -32,6 +32,9 @@
       "name": "wall_spawn"
     },
     {
+      "name": "tile_spawn"
+    },
+    {
       "name": "cocoon"
     },
     {

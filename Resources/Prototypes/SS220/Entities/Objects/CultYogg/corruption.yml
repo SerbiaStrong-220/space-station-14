@@ -1,0 +1,368 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#list of corrupted recepies
+
+#Range Weaponds start
+- type: corrupted
+  id: BaseWeaponPistol
+  from:
+    parentPrototypeId: BaseWeaponPistol
+  result: CultYoggCocoonSpikegun
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: BaseWeaponSubMachineGun
+  from:
+    parentPrototypeId: BaseWeaponSubMachineGun
+  result: CultYoggCocoonSpikegun
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: CorruptBaseWeaponRifle
+  from:
+    parentPrototypeId: BaseWeaponRifle
+  result: CultYoggCocoonSpikegun
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: BaseWeaponShotgun
+  from:
+    parentPrototypeId: BaseWeaponShotgun
+  result: CultYoggCocoonVenomancer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: WeaponShotgunBulldog
+  from:
+    prototypeId: WeaponShotgunBulldog
+  result: CultYoggCocoonVenomancer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: WeaponSprayNozzle
+  from:
+    prototypeId: WeaponSprayNozzle
+  result: CultYoggCocoonVenomancer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: WeaponImprovisedPneumaticCannonParent
+  from:
+    parentPrototypeId: WeaponImprovisedPneumaticCannon
+  result: CultYoggCocoonSpitballer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: WeaponImprovisedPneumaticCannon
+  from:
+    prototypeId: WeaponImprovisedPneumaticCannon
+  result: CultYoggCocoonSpitballer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: BaseWeaponBattery
+  from:
+    parentPrototypeId: BaseWeaponBattery
+  result: CultYoggCocoonSpitballer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: BaseWeaponBatterySmall
+  from:
+    parentPrototypeId: BaseWeaponBatterySmall
+  result: CultYoggCocoonSpitballer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: WeaponLaserCarbine
+  from:
+    prototypeId: WeaponLaserCarbine
+  result: CultYoggCocoonSpitballer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+#Range Weaponds end
+
+#Resources start
+- type: corrupted
+  id: SheetTokl
+  from:
+    stackType: Steel
+  result: SheetTokl
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: CableHVlive
+  from:
+    stackType: CableHV
+  result: CableHVStack1Live
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: CableMVlive
+  from:
+    stackType: CableMV
+  result: CableMVStack1Live
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: Cablelive
+  from:
+    stackType: Cable
+  result: CableApcStack1Live
+#Resources end
+
+- type: corrupted
+  id: CultCablecuffsCorrupt
+  from:
+    prototypeId: Cablecuffs
+  result: CultHandcuffs
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: CultZiptiesCorrupt
+  from:
+    prototypeId: Zipties
+  result: CultHandcuffs
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: CultHandcuffsCorrupt
+  from:
+    prototypeId: Handcuffs
+  result: CultHandcuffs
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+#Flash start
+- type: corrupted
+  id: LanternFlashCultYogg
+  from:
+    prototypeId: Lantern
+  result: LanternFlashCultYogg
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: FlashFlashCultYogg
+  from:
+    prototypeId: Flash
+  result: LanternFlashCultYogg
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: BaseLampFlashCultYogg
+  from:
+    parentPrototypeId: BaseLamp
+  result: LanternFlashCultYogg
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: FlashlightLanternFlashCultYogg
+  from:
+    parentPrototypeId: FlashlightLantern
+  result: LanternFlashCultYogg
+  corruptionReverseEffect: ExorcismUncorruptEffect
+#Flash end
+
+#MeleWeapons start
+- type: corrupted
+  id: ClawCultYoggWirecutter
+  from:
+    prototypeId: Wirecutter
+  result: CultYoggCocoonClaw
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: BaseCrowbarCultYoggCocoonBeach
+  from:
+    parentPrototypeId: BaseCrowbar
+  result: CultYoggCocoonBeach
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: BaseBallBatCultYoggCocoonBeach
+  from:
+    prototypeId: BaseBallBat
+  result: CultYoggCocoonBeach
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: StunbatonCultYoggCocoonBeach
+  from:
+    prototypeId: Stunbaton
+  result: CultYoggCocoonBeach
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: Truncheon
+  from:
+    prototypeId: Truncheon
+  result: CultYoggCocoonBeach
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: Telescopichka
+  from:
+    prototypeId: Telescopichka
+  result: CultYoggCocoonBeach
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: Stunprod
+  from:
+    prototypeId: Stunprod
+  result: CultYoggCocoonBeach
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: RollingPin
+  from:
+    prototypeId: RollingPin
+  result: CultYoggCocoonBeach
+  corruptionReverseEffect: ExorcismUncorruptEffect
+#MeleWeapons end
+
+#SedativeSting beginning
+- type: corrupted
+  id: PenSedativestingCultYogg
+  from:
+    tag: Pen
+  result: CultYoggCocoonSedativeSting
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: SyringeSedativestingCultYogg
+  from:
+    parentPrototypeId: BaseSyringe
+  result: CultYoggCocoonSedativeSting
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: ScrewdriverSedativestingCultYogg
+  from:
+    prototypeId: Screwdriver
+  result: CultYoggCocoonSedativeSting
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: ForkPlasticSedativestingCultYogg
+  from:
+    prototypeId: ForkPlastic
+  result: CultYoggCocoonSedativeSting
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: ForkSedativestingCultYogg
+  from:
+    prototypeId: Fork
+  result: CultYoggCocoonSedativeSting
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: KnifePlasticSedativestingCultYogg
+  from:
+    prototypeId: KnifePlastic
+  result: CultYoggCocoonSedativeSting
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: KnifeSedativestingCultYogg
+  from:
+    parentPrototypeId: BaseKnife
+  result: CultYoggCocoonSedativeSting
+  corruptionReverseEffect: ExorcismUncorruptEffect
+#SedativeSting end
+
+# Hardsuit beginning
+- type: corrupted
+  id: ClothingOuterHardsuitBase
+  from:
+     parentPrototypeId: ClothingOuterHardsuitBase
+  result: ClothingOuterHardsuitCultYogg
+  corruptionReverseEffect: ExorcismUncorruptEffect
+  avaliableOnStage: 2
+# Hardsuit end
+
+# Backpack beginning
+- type: corrupted
+  id: BackpackCultYogg
+  from:
+    prototypeId: ClothingBackpack
+  result: ClothingBackpackCultYogg
+  corruptionReverseEffect: ExorcismUncorruptEffect
+  emptyStorage: true
+
+- type: corrupted
+  id: BackpackCultYoggParent
+  from:
+    parentPrototypeId: ClothingBackpack
+  result: ClothingBackpackCultYogg
+  corruptionReverseEffect: ExorcismUncorruptEffect
+  emptyStorage: true
+# Backpack end
+
+# Satchel beginning
+- type: corrupted
+  id: CultYoggSatchel
+  from:
+    prototypeId: ClothingBackpackSatchel
+  result: ClothingBackpackSatchelCultYogg
+  corruptionReverseEffect: ExorcismUncorruptEffect
+  emptyStorage: true
+
+- type: corrupted
+  id: CultYoggSatchelParent
+  from:
+    parentPrototypeId: ClothingBackpackSatchel
+  result: ClothingBackpackSatchelCultYogg
+  corruptionReverseEffect: ExorcismUncorruptEffect
+  emptyStorage: true
+# Satchel end
+
+# Duffel beginning
+- type: corrupted
+  id: BackpackDuffelCultYogg
+  from:
+    prototypeId: ClothingBackpackDuffel
+  result: ClothingBackpackDuffelCultYogg
+  corruptionReverseEffect: ExorcismUncorruptEffect
+  emptyStorage: true
+
+- type: corrupted
+  id: BackpackDuffelCultYoggParent
+  from:
+    parentPrototypeId: ClothingBackpackDuffel
+  result: ClothingBackpackDuffelCultYogg
+  corruptionReverseEffect: ExorcismUncorruptEffect
+  emptyStorage: true
+# Duffel end
+
+# BurglarBug beginning
+- type: corrupted
+  id: Multitool
+  from:
+    prototypeId: Multitool
+  result: BurglarBug
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: NetworkConfigurator
+  from:
+    prototypeId: NetworkConfigurator
+  result: BurglarBug
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: RemoteSignaller
+  from:
+    prototypeId: RemoteSignaller
+  result: BurglarBug
+  corruptionReverseEffect: ExorcismUncorruptEffect
+# BurglarBug end
+
+# Fun begin
+- type: corrupted
+  id: PlushieMigo
+  from:
+    parentPrototypeId: BasePlushie
+  result: PlushieMigo
+  corruptionReverseEffect: ExorcismUncorruptEffect
+# Fun end

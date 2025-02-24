@@ -71,7 +71,7 @@
   category: construction-category-utilities
   description: "Input of devices such as the SMES. The red cables needs to face the device."
   icon:
-    sprite: Structures/Power/cable_terminal.rsi
+    sprite: SS220/Structures/Power/cable_terminal.rsi #ss220-engineering-update-power
     state: term
   objectType: Structure
   placementMode: SnapgridCenter
@@ -366,6 +366,21 @@
   objectType: Structure
   canRotate: true
 
+- type: construction
+  name: gas pipe sensor
+  id: GasPipeSensor
+  graph: GasPipeSensor
+  startNode: start
+  targetNode: sensor
+  category: construction-category-structures
+  description: Reports on the status of the gas within the attached pipe network.
+  icon:
+    sprite: SS220/Structures/Piping/Atmospherics/gas_pipe_sensor.rsi #ss220 engineering-update-atmos
+    state: icon
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canRotate: true
+
 # ATMOS PIPES
 - type: construction
   name: gas pipe half
@@ -378,7 +393,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   icon:
-    sprite: Structures/Piping/Atmospherics/pipe.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeHalf
 
 - type: construction
@@ -392,7 +407,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   icon:
-    sprite: Structures/Piping/Atmospherics/pipe.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeStraight
 
 - type: construction
@@ -406,7 +421,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   icon:
-    sprite: Structures/Piping/Atmospherics/pipe.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeBend
 
 - type: construction
@@ -420,7 +435,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   icon:
-    sprite: Structures/Piping/Atmospherics/pipe.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeTJunction
 
 - type: construction
@@ -434,7 +449,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: true
   icon:
-    sprite: Structures/Piping/Atmospherics/pipe.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeFourway
 
 # ATMOS UNARY
@@ -449,12 +464,12 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/vent.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
     state: vent_off
   layers:
-  - sprite: Structures/Piping/Atmospherics/pipe.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeHalf
-  - sprite: Structures/Piping/Atmospherics/vent.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
     state: vent_off
   conditions:
     - !type:NoUnstackableInTile
@@ -470,12 +485,12 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/vent.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
     state: vent_passive
   layers:
-  - sprite: Structures/Piping/Atmospherics/pipe.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeHalf
-  - sprite: Structures/Piping/Atmospherics/vent.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
     state: vent_passive
   conditions:
     - !type:NoUnstackableInTile
@@ -491,12 +506,12 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/scrubber.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/scrubber.rsi #ss220 engineering-update-atmos
     state: scrub_off
   layers:
-  - sprite: Structures/Piping/Atmospherics/pipe.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeHalf
-  - sprite: Structures/Piping/Atmospherics/scrubber.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/scrubber.rsi #ss220 engineering-update-atmos
     state: scrub_off
   conditions:
     - !type:NoUnstackableInTile
@@ -512,12 +527,12 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/outletinjector.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/outletinjector.rsi #ss220 engineering-update-atmos
     state: injector
   layers:
-  - sprite: Structures/Piping/Atmospherics/pipe.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeHalf
-  - sprite: Structures/Piping/Atmospherics/outletinjector.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/outletinjector.rsi #ss220 engineering-update-atmos
     state: injector
   conditions:
     - !type:NoUnstackableInTile
@@ -534,12 +549,12 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/pump.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     state: pumpPressure
   layers:
-  - sprite: Structures/Piping/Atmospherics/pipe.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeStraight
-  - sprite: Structures/Piping/Atmospherics/pump.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     state: pumpPressure
   conditions:
     - !type:NoUnstackableInTile
@@ -555,12 +570,12 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/pump.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     state: pumpVolume
   layers:
-  - sprite: Structures/Piping/Atmospherics/pipe.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeStraight
-  - sprite: Structures/Piping/Atmospherics/pump.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     state: pumpVolume
   conditions:
     - !type:NoUnstackableInTile
@@ -576,12 +591,12 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/pump.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     state: pumpPassiveGate
   layers:
-  - sprite: Structures/Piping/Atmospherics/pipe.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeStraight
-  - sprite: Structures/Piping/Atmospherics/pump.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     state: pumpPassiveGate
   conditions:
     - !type:NoUnstackableInTile
@@ -597,12 +612,12 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/pump.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     state: pumpManualValve
   layers:
-  - sprite: Structures/Piping/Atmospherics/pipe.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeStraight
-  - sprite: Structures/Piping/Atmospherics/pump.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     state: pumpManualValve
   conditions:
     - !type:NoUnstackableInTile
@@ -618,12 +633,12 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/pump.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     state: pumpSignalValve
   layers:
-  - sprite: Structures/Piping/Atmospherics/pipe.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeStraight
-  - sprite: Structures/Piping/Atmospherics/pump.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     state: pumpSignalValve
   conditions:
   - !type:NoUnstackableInTile
@@ -639,12 +654,12 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/gascanisterport.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/gascanisterport.rsi #ss220 engineering-update-atmos
     state: gasCanisterPort
   layers:
-  - sprite: Structures/Piping/Atmospherics/pipe.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeHalf
-  - sprite: Structures/Piping/Atmospherics/gascanisterport.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/gascanisterport.rsi #ss220 engineering-update-atmos
     state: gasCanisterPort
   conditions:
     - !type:NoUnstackableInTile
@@ -660,12 +675,12 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/vent.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
     state: vent_off
   layers:
-  - sprite: Structures/Piping/Atmospherics/pipe.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
     state: pipeStraight
-  - sprite: Structures/Piping/Atmospherics/vent.rsi
+  - sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
     state: vent_off
 
 - type: construction
@@ -679,8 +694,22 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/heatexchanger.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/heatexchanger.rsi #ss220 engineering-update-atmos
     state: heStraight
+
+- type: construction
+  id: HeatExchangerBend
+  name: radiator bend
+  description: Transfers heat between the pipe and its surroundings.
+  graph: GasBinary
+  startNode: start
+  targetNode: bendradiator
+  category: construction-category-utilities
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: Structures/Piping/Atmospherics/heatexchanger.rsi
+    state: heBend
 
 # ATMOS TRINARY
 - type: construction
@@ -694,7 +723,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/gasfilter.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/gasfilter.rsi #ss220 engineering-update-atmos
     state: gasFilter
   mirror: GasFilterFlipped
   conditions:
@@ -712,7 +741,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/gasfilter.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/gasfilter.rsi #ss220 engineering-update-atmos
     state: gasFilterF
   mirror: GasFilter
   conditions:
@@ -729,7 +758,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/gasmixer.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/gasmixer.rsi #ss220 engineering-update-atmos
     state: gasMixer
   mirror: GasMixerFlipped
   conditions:
@@ -747,7 +776,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/gasmixer.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/gasmixer.rsi #ss220 engineering-update-atmos
     state: gasMixerF
   mirror: GasMixer
   conditions:
@@ -756,7 +785,7 @@
 - type: construction
   id: PressureControlledValve
   name: pneumatic valve
-  description: Valve controlled by pressure.
+  description: A bidirectional valve controlled by pressure. Opens if the output pipe is lower than the pressure of the control pipe by 101.325 kPa.
   graph: GasTrinary
   startNode: start
   targetNode: pneumaticvalve
@@ -764,7 +793,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
   icon:
-    sprite: Structures/Piping/Atmospherics/pneumaticvalve.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/pneumaticvalve.rsi #ss220 engineering-update-atmos
     state: off
   conditions:
     - !type:NoUnstackableInTile

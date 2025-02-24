@@ -1,0 +1,24 @@
+- type: startingGear
+  id: VisitorTourist
+  equipment:
+    jumpsuit: ClothingUniformRandomShirt
+    shoes: ClothingShoesColorYellow
+    head: ClothingHeadHatYellowsoft
+    id: VisitorPDA
+    back: ClothingBackpack
+    ears: ClothingHeadsetGrey
+    eyes: ClothingEyesGlassesSunglasses
+    pocket1: TapeRecorder
+    pocket2: CassetteTape
+
+- type: startingGear
+  id: VisitorTouristAlt
+  equipment:
+    jumpsuit: ClothingUniformRandomStandard
+    shoes: ClothingShoesColorGreen
+    head: ClothingHeadHatGreensoft
+    id: VisitorPDA
+    back: ClothingBackpack
+    ears: ClothingHeadsetGrey
+    pocket1: TapeRecorder
+    pocket2: CassetteTape

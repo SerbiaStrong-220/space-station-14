@@ -1,0 +1,81 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: spikegun cult yogg
+  parent: [BaseItem, CultYoggRestrictedItem]
+  id: SpikegunCultYogg
+  suffix: CultYogg
+  components:
+    - type: CultYoggWeapon
+      item: CultYoggCocoonSpikegun
+    - type: AmmoCounter
+    - type: Gun
+      soundGunshot: /Audio/SS220/Weapons/Guns/CultYogg/spikegun_shot.ogg
+      soundEmpty: null
+      fireRate: 17
+      selectedMode: SemiAuto
+      availableModes:
+      - SemiAuto
+    - type: BasicEntityAmmoProvider
+      proto: Spike
+      capacity: 15
+    - type: Sprite
+      sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spikegun.rsi
+      layers:
+        - state: icon_noammo
+          map: ["sprite"]
+    - type: Item
+      size: Ginormous
+    - type: Appearance
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 2.5
+      rechargeSound: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
+    - type: GenericVisualizer
+      visuals:
+        enum.AmmoVisuals.HasAmmo:
+          sprite:
+            False: {state: "icon_noammo"}
+            True: {state: "icon_fullammo"}
+    - type: GunByHasAmmoVisuals
+      spriteLayer: null
+      inhandVisuals:
+        left:
+        - state: fullammo-inhand-left
+          shader: unshaded
+        right:
+        - state: fullammo-inhand-right
+          shader: unshaded
+    - type: StuckOnEquip
+      inHandItem: true
+
+
+
+- type: entity
+  id: Spike
+  name: spike
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  description: description
+  components:
+  - type: Reflective
+    reflective:
+      - NonEnergy
+  - type: Sprite
+    noRot: false
+    sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spikegun.rsi
+    layers:
+    - state: spike_projectile
+      shader: unshaded
+  - type: Physics
+    bodyType: Dynamic
+    linearDamping: 0.3
+    angularDamping: 0
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Piercing: 15
+        Blunt: 7
+  - type: TimedDespawn
+    lifetime: 0.6
+  - type: GatheringProjectile

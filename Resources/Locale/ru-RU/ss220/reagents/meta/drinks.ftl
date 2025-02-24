@@ -18,3 +18,5 @@ reagent-name-champagnesponsor = элитное шампанское
 reagent-desc-champagnesponsor = Элитный вид шампанского.
 reagent-name-ReaperSauce = соус "Тёмный жнец"
 reagent-desc-ReaperSauce = Этот соус оправдывает своё название. Используйте в блюдах на свой страх и риск.
+reagent-name-bacchus = благословение бахуса
+reagent-desc-bacchus = Ты был предупреждён.

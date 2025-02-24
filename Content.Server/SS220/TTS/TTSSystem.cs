@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Content.Server.Chat.Systems;
@@ -6,11 +8,12 @@ using Content.Shared.Corvax.CCCVars;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.TTS;
 using Content.Shared.GameTicking;
-using Content.Shared.SS220.AnnounceTTS;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Network;
+using Robust.Server.Player;
 
 namespace Content.Server.SS220.TTS;
 
@@ -23,6 +26,11 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly ILogManager _log = default!;
+    [Dependency] private readonly IServerNetManager _netManager = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
+
+    private ISawmill _sawmill = default!;
 
     private const int MaxMessageChars = 100 * 2; // same as SingleBubbleCharLimit * 2
     private bool _isEnabled = false;
@@ -44,6 +52,8 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeLocalEvent<TTSComponent, MapInitEvent>(OnInit);
 
         SubscribeNetworkEvent<RequestGlobalTTSEvent>(OnRequestGlobalTTS);
+
+        _sawmill = _log.GetSawmill("TTSSystem");
     }
 
     private void OnInit(Entity<TTSComponent> ent, ref MapInitEvent args)
@@ -104,17 +114,42 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void OnAnnouncementSpoke(AnnouncementSpokeEvent args)
     {
-        if (!_isEnabled ||
-            args.Message.Length > MaxMessageChars * 2 ||
-            !GetVoicePrototype(_voiceId, out var protoVoice))
+        var voice = args.SpokeVoiceId;
+
+        if (string.IsNullOrWhiteSpace(voice))
         {
-            RaiseNetworkEvent(new AnnounceTTSEvent(new byte[] { }, args.AnnouncementSound, args.AnnouncementSoundParams), args.Source);
-            return;
+            if (GetVoicePrototype(_voiceId, out var protoVoice))
+            {
+                voice = protoVoice.Speaker;
+            }
         }
 
-        var soundData = await GenerateTTS(args.Message, protoVoice.Speaker);
-        soundData ??= new byte[] { };
-        RaiseNetworkEvent(new AnnounceTTSEvent(soundData, args.AnnouncementSound, args.AnnouncementSoundParams), args.Source);
+        ReferenceCounter<TtsAudioData>.Handle? ttsResponse = default;
+
+        if (_isEnabled
+            && args.Message.Length <= MaxMessageChars * 2
+            && !string.IsNullOrWhiteSpace(voice))
+        {
+            ttsResponse = await GenerateTts(args.Message, voice, TtsKind.Announce);
+        }
+
+        var message = new MsgPlayAnnounceTts
+        {
+            AnnouncementSound = args.AnnouncementSound,
+            AnnouncementParams = args.AnnouncementSoundParams,
+        };
+
+        if (ttsResponse.TryGetValue(out var audioData))
+        {
+            message.Data = audioData;
+        }
+
+        foreach (var session in args.Source.Recipients)
+        {
+            _netManager.ServerSendMessage(message, session.Channel);
+        }
+
+        ttsResponse?.Dispose();
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -146,11 +181,11 @@ public sealed partial class TTSSystem : EntitySystem
             !GetVoicePrototype(ev.VoiceId, out var protoVoice))
             return;
 
-        var soundData = await GenerateTTS(ev.Text, protoVoice.Speaker);
-        if (soundData is null)
+        using var ttsResponse = await GenerateTts(ev.Text, protoVoice.Speaker, TtsKind.Default);
+        if (!ttsResponse.TryGetValue(out var audioData))
             return;
 
-        RaiseNetworkEvent(new PlayTTSEvent(soundData), Filter.SinglePlayer(args.SenderSession));
+        _netManager.ServerSendMessage(new MsgPlayTts { Data = audioData }, args.SenderSession.Channel);
     }
 
     private async void OnEntitySpoke(EntityUid uid, TTSComponent component, EntitySpokeEvent args)
@@ -175,7 +210,7 @@ public sealed partial class TTSSystem : EntitySystem
 
         if (args.ObfuscatedMessage != null)
         {
-            HandleWhisper(uid, args.Message, protoVoice.Speaker, args.IsRadio);
+            HandleWhisper(uid, args.Message, args.ObfuscatedMessage, protoVoice.Speaker, args.IsRadio);
             return;
         }
 
@@ -184,82 +219,115 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void HandleSay(EntityUid uid, string message, string speaker)
     {
-        var soundData = await GenerateTTS(message, speaker);
-        if (soundData is null) return;
-        RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid)), Filter.Pvs(uid));
+        using var ttsResponse = await GenerateTts(message, speaker, TtsKind.Default);
+        if (!ttsResponse.TryGetValue(out var audioData)) return;
+        var playTtsMessage = new MsgPlayTts
+        {
+            Data = audioData,
+            SourceUid = GetNetEntity(uid),
+        };
+        foreach (var receiver in Filter.Pvs(uid).Recipients)
+        {
+            _netManager.ServerSendMessage(playTtsMessage, receiver.Channel);
+        }
     }
 
-    private async void HandleWhisper(EntityUid uid, string message, string speaker, bool isRadio)
+    private async void HandleWhisper(EntityUid uid, string message, string obfMessage, string speaker, bool isRadio)
     {
         // If it's a whisper into a radio, generate speech without whisper
         // attributes to prevent an additional speech synthesis event
-        var soundData = await GenerateTTS(message, speaker, isWhisper: !isRadio);
-        if (soundData is null)
+        using var ttsResponse = await GenerateTts(message, speaker, TtsKind.Whisper);
+        if (!ttsResponse.TryGetValue(out var audioData))
+            return;
+
+        using var obfTtsResponse = await GenerateTts(obfMessage, speaker, TtsKind.Whisper);
+        if (!obfTtsResponse.TryGetValue(out var obfAudioData))
             return;
 
         // TODO: Check obstacles
         var xformQuery = GetEntityQuery<TransformComponent>();
         var sourcePos = _xforms.GetWorldPosition(xformQuery.GetComponent(uid), xformQuery);
         var receptions = Filter.Pvs(uid).Recipients;
+
+        var fullTtsMessage = new MsgPlayTts
+        {
+            Data = audioData,
+            SourceUid = GetNetEntity(uid),
+            Kind = TtsKind.Whisper,
+        };
+
+        var obfuscatedTtsMessage = new MsgPlayTts
+        {
+            Data = obfAudioData,
+            SourceUid = GetNetEntity(uid),
+            Kind = TtsKind.Whisper,
+        };
+
         foreach (var session in receptions)
         {
             if (!session.AttachedEntity.HasValue)
                 continue;
 
             var xform = xformQuery.GetComponent(session.AttachedEntity.Value);
-            var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).LengthSquared();
+            var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
 
-            if (distance > WhisperVoiceRange)
+            if (distance > ChatSystem.WhisperMuffledRange)
                 continue;
 
-            var ttsEvent = new PlayTTSEvent(
-                soundData,
-                GetNetEntity(uid),
-                false,
-                WhisperVoiceVolumeModifier * (1f - distance / WhisperVoiceRange));
-            RaiseNetworkEvent(ttsEvent, session);
+            var netMessageToSend = distance > ChatSystem.WhisperClearRange ? obfuscatedTtsMessage : fullTtsMessage;
+
+            _netManager.ServerSendMessage(netMessageToSend, session.Channel);
         }
     }
 
-    private async void HandleRadio(EntityUid[] uids, string message, string speaker)
+    private async void HandleRadio(RadioEventReceiver[] receivers, string message, string speaker)
     {
-        var soundData = await GenerateTTS(message, speaker, false, true);
+        using var soundData = await GenerateTts(message, speaker, TtsKind.Radio);
         if (soundData is null)
             return;
 
-        foreach (var uid in uids)
+        foreach (var receiver in receivers)
         {
-            RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid), true), Filter.Entities(uid));
+            if (!_playerManager.TryGetSessionByEntity(receiver.Actor, out var session)
+                || !soundData.TryGetValue(out var audioData))
+                continue;
+            _netManager.ServerSendMessage(new MsgPlayTts
+            {
+                Data = audioData,
+                SourceUid = GetNetEntity(receiver.PlayTarget.EntityId),
+                Kind = TtsKind.Radio
+            }, session.Channel);
         }
     }
 
-    // ReSharper disable once InconsistentNaming
-    private async Task<byte[]?> GenerateTTS(string text, string speaker, bool isWhisper = false, bool isRadio = false)
+    private async Task<ReferenceCounter<TtsAudioData>.Handle?> GenerateTts(string text, string speaker, TtsKind kind)
     {
         try
         {
             var textSanitized = Sanitize(text);
-            if (textSanitized == "") return null;
+            if (textSanitized == "") return default;
             if (char.IsLetter(textSanitized[^1]))
                 textSanitized += ".";
 
             var ssmlTraits = SoundTraits.RateFast;
-            if (isWhisper)
+            if (kind == TtsKind.Whisper)
                 ssmlTraits |= SoundTraits.PitchVerylow;
 
             var textSsml = ToSsmlText(textSanitized, ssmlTraits);
 
-            return isRadio
-                ? await _ttsManager.ConvertTextToSpeechRadio(speaker, textSanitized)
-                : await _ttsManager.ConvertTextToSpeech(speaker, textSanitized);
+            return await _ttsManager.ConvertTextToSpeech(speaker, textSanitized, kind);
+
+            //return isRadio
+            //    ? await _ttsManager.ConvertTextToSpeechRadio(speaker, textSanitized)
+            //    : await _ttsManager.ConvertTextToSpeech(speaker, textSanitized, isRadio: false);
         }
         catch (Exception e)
         {
             // Catch TTS exceptions to prevent a server crash.
-            Logger.Error($"TTS System error: {e.Message}");
+            _sawmill.Error($"TTS System error: {e.Message}");
         }
 
-        return null;
+        return default;
     }
 }
 

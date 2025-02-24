@@ -29,6 +29,7 @@ public sealed class EventRoleIconsSystem : EntitySystem
         var viewer = _player.LocalSession?.AttachedEntity;
 
         if (viewer != entity &&
+            !HasComp<ShowEventRoleIconsComponent>(viewer) &&
             (!TryComp<EventRoleComponent>(viewer, out var viewerComp) ||
             viewerComp.RoleGroupKey != entity.Comp.RoleGroupKey))
             return;

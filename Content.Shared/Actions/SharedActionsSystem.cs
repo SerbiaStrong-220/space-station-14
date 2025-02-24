@@ -9,6 +9,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mind;
 using Content.Shared.Rejuvenate;
+using Content.Shared.Toggleable;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
@@ -67,6 +68,8 @@ public abstract class SharedActionsSystem : EntitySystem
         SubscribeLocalEvent<EntityWorldTargetActionComponent, GetActionDataEvent>(OnGetActionData);
 
         SubscribeAllEvent<RequestPerformActionEvent>(OnActionRequest);
+
+        SubscribeLocalEvent<ActionsComponent, ToggleActionEvent>(OnToggleEvent); // SS220 ninja gloves toggle on states start
     }
 
     public override void Update(float frameTime)
@@ -679,6 +682,9 @@ public abstract class SharedActionsSystem : EntitySystem
             if (!action.RaiseOnUser && action.Container != null && !HasComp<MindComponent>(action.Container))
                 target = action.Container.Value;
 
+            if (action.RaiseOnAction)
+                target = actionId;
+
             RaiseLocalEvent(target, (object) actionEvent, broadcast: true);
             handled = actionEvent.Handled;
         }
@@ -705,11 +711,19 @@ public abstract class SharedActionsSystem : EntitySystem
         }
 
         action.Cooldown = null;
-        if (action is { UseDelay: not null, Charges: null or < 1 })
+
+        //ss220 add time between charges start
+        if (action is { TimeBetweenCharges: not null, Charges: > 0 })
+        {
+            dirty = true;
+            action.Cooldown = (curTime, curTime + action.TimeBetweenCharges.Value);
+        }
+        else if (action is { UseDelay: not null, Charges: null or < 1 })
         {
             dirty = true;
             action.Cooldown = (curTime, curTime + action.UseDelay.Value);
         }
+        //ss220 add time between charges end
 
         if (dirty)
         {
@@ -1127,4 +1141,15 @@ public abstract class SharedActionsSystem : EntitySystem
     {
         return action is { Charges: < 1, RenewCharges: true };
     }
+
+    // SS220 ninja gloves toggle on states start
+    public void OnToggleEvent(Entity<ActionsComponent> entity, ref ToggleActionEvent args)
+    {
+        if (args.ToggleAction)
+        {
+            args.Toggle = true;
+        }
+    }
+    // SS220 ninja gloves toggle on states end
 }
+

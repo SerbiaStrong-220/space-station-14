@@ -112,6 +112,11 @@ namespace Content.Shared.ActionBlocker
             var ev = new UseAttemptEvent(user, used);
             RaiseLocalEvent(user, ev);
 
+            //ss220 roleitem begin
+            var usedEv = new BeingUsedAttemptEvent(user, used);
+            RaiseLocalEvent(used, usedEv);
+            //ss220 roleitem end
+
             return !ev.Cancelled;
         }
 
@@ -199,7 +204,8 @@ namespace Content.Shared.ActionBlocker
             {
                 var containerEv = new CanAttackFromContainerEvent(uid, target);
                 RaiseLocalEvent(uid, containerEv);
-                return containerEv.CanAttack;
+                if (!containerEv.CanAttack)
+                    return false;
             }
 
             var ev = new AttackAttemptEvent(uid, target, weapon, disarm);

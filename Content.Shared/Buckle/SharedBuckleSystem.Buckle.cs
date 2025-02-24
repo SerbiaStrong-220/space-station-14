@@ -63,6 +63,8 @@ public abstract partial class SharedBuckleSystem
         {
             BuckleDoafterEarly((uid, comp), ev.Event, ev);
         });
+
+        SubscribeLocalEvent<BuckleComponent, ModifyUncuffDurationEvent>(OnBuckleModifyUncuffDuration); // SS220 Add uncuff time modifier when buckled
     }
 
     private void OnBuckleComponentShutdown(Entity<BuckleComponent> ent, ref ComponentShutdown args)
@@ -210,6 +212,20 @@ public abstract partial class SharedBuckleSystem
             !HasComp<VehicleComponent>(component.BuckledTo)) // buckle+vehicle shitcode //SS220 Readd-Vehicles
             args.Cancel();
     }
+
+    // SS220 Add uncuff time modifier when buckled begin
+    private void OnBuckleModifyUncuffDuration(Entity<BuckleComponent> entity, ref ModifyUncuffDurationEvent args)
+    {
+        if (!entity.Comp.Buckled)
+            return;
+
+        var strapUid = entity.Comp.BuckledTo;
+        if (!TryComp<StrapComponent>(strapUid, out var strapComp))
+            return;
+
+        args.Duration *= strapComp.UncuffTimeModifier;
+    }
+    // SS220 Add uncuff time modifier when buckled end
 
     public bool IsBuckled(EntityUid uid, BuckleComponent? component = null)
     {

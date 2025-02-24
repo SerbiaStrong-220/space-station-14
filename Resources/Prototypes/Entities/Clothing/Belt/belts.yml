@@ -33,6 +33,7 @@
         - GPS
         - WeldingMask
       components:
+        - StationMap
         - SprayPainter
         - NetworkConfigurator
         - RCD
@@ -112,6 +113,7 @@
         - Multitool
         - AppraisalTool
       components:
+        - StationMap
         - SprayPainter
         - NetworkConfigurator
         - RCD
@@ -463,7 +465,7 @@
 #  - type: Appearance
 
 - type: entity
-  parent: [ClothingBeltStorageBase]
+  parent: [ClothingBeltStorageBase, ContentsExplosionResistanceBase]
   id: ClothingBeltSecurity
   name: security belt
   description: Can hold security gear like handcuffs and flashes.
@@ -472,6 +474,8 @@
     sprite: Clothing/Belt/security.rsi
   - type: Clothing
     sprite: Clothing/Belt/security.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
   - type: Storage
     whitelist:
       tags:
@@ -548,7 +552,7 @@
 # Belts without visualizers
 
 - type: entity
-  parent: [ClothingBeltAmmoProviderBase]
+  parent: [ClothingBeltStorageBase] #ss220 Bandolier rework
   id: ClothingBeltBandolier
   name: bandolier
   description: A bandolier for holding shotgun ammunition.
@@ -559,11 +563,25 @@
     sprite: Clothing/Belt/bandolier.rsi
   - type: Item
     size: Huge
-  - type: BallisticAmmoProvider
+  #ss220 Bandolier rework begin
+  #- type: BallisticAmmoProvider
+  #  mayTransfer: true
+  #  whitelist:
+  #    tags:
+  #      - ShellShotgun
+  #  capacity: 14
+  - type: Dumpable
+  - type: Storage
+    grid:
+    - 0,0,4,3
+    quickInsert: true
+    areaInsert: true
     whitelist:
       tags:
-        - ShellShotgun
-    capacity: 14
+      - ShellShotgun
+      - CartridgeLightRifle
+      - CartridgeAntiMateriel
+    #ss220 Bandolier rework end
 
 - type: entity
   parent: ClothingBeltBase

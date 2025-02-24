@@ -19,6 +19,7 @@
   - type: Tag
     tags:
     - DoorBumpOpener
+    - HideContextMenu
   - type: StatusEffects
     allowed: []
   - type: ContainerContainer

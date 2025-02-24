@@ -74,5 +74,6 @@ public sealed class RCDConstructionGhostSystem : EntitySystem
 
         _placementManager.Clear();
         _placementManager.BeginPlacing(newObjInfo);
+        _placementManager.Direction = rcd.ConstructionDirection; // SS220 fix rcd rotation
     }
 }

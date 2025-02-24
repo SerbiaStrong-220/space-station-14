@@ -9,6 +9,7 @@ using System.Text;
 using System.Timers;
 using System.Threading.Tasks;
 using System.Text.Json;
+using Content.Shared.SS220.CCVars;
 
 namespace Content.Server.SS220.Discord;
 
@@ -25,8 +26,8 @@ public sealed class DiscordBanPostManager
     {
         _sawmill = Logger.GetSawmill("DiscordPlayerManager");
 
-        _cfg.OnValueChanged(CCCVars.DiscordAuthApiUrl, v => _apiUrl = v, true);
-        _cfg.OnValueChanged(CCCVars.DiscordAuthApiKey, v =>
+        _cfg.OnValueChanged(CCVars220.DiscordLinkApiUrl, v => _apiUrl = v, true);
+        _cfg.OnValueChanged(CCVars220.DiscordLinkApiKey, v =>
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", v);
         },
@@ -42,7 +43,7 @@ public sealed class DiscordBanPostManager
 
         try
         {
-            var url = $"{_apiUrl}/userBan/{banId}";
+            var url = $"{_apiUrl}/api/userBan/{banId}";
 
             var response = await _httpClient.PostAsync(url, content: null);
 

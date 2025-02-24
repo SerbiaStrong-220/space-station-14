@@ -1,0 +1,58 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  name: burglar bug cult yogg
+  description: An insect-like device that breaks open the selected door after activation.
+  parent: BaseItem
+  id: BurglarBug
+  suffix: CultYogg
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/burglarbug.rsi
+      layers:
+        - map: ["base"]
+          state: icon
+        - map: ["stuck"]
+          state: bug_ondoor
+          visible: false
+    - type: Icon
+      sprite: SS220/Objects/CultYogg/burglarbug.rsi
+      state: icon
+    - type: Item
+      size: Small
+    - type: Appearance
+    - type: Sticky
+      rotateFaceToUser: true
+      stickDelay: 3
+      unstickDelay: 3
+      stickPopupSuccess: cult-yogg-burglar-bug-stick-success
+      unstickPopupStart: cult-yogg-burglar-bug-unstick-started
+      unstickPopupSuccess: cult-yogg-burglar-bug-unstick-success
+      whitelist:
+        components:
+        - Door
+    - type: OnUseTimerTrigger
+      delay: 10
+      examinable: false
+    - type: StickyVisualizer
+      stuckNoRotation: true
+    - type: GenericVisualizer
+      visuals:
+        enum.Trigger.TriggerVisuals.VisualState:
+          base:
+            Primed: { state: bug }
+            Unprimed: { state: icon }
+        enum.StickyVisuals.IsStuck:
+          base:
+            True: { visible: false }
+            False: { visible: true }
+          stuck:
+            True: { visible: true }
+            False: { visible: false }
+    - type: BurglarBug
+      timeToOpen: 10
+      notActivatedStickPopupCancellation: cult-yogg-burglar-bug-notactivated-cancellation
+      openedDoorStickPopupCancellation: cult-yogg-burglar-bug-openeddoor-cancellation
+      ignoreResistances: true
+      damage:
+        types:
+          Piercing: 40.5

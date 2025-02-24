@@ -78,6 +78,7 @@
     ClothingHeadHatCorpsoft: 2
     ClothingHeadFishCap: 2
     ClothingHeadRastaHat: 2
+    #ClothingHeadHatNewYearsCap: 5 #SS220 New years cap \ Убрать после нового года
     ClothingBeltStorageWaistbag: 3
     ClothingEyesGlasses: 6
     ClothingHandsGlovesColorBlack: 4
@@ -96,4 +97,8 @@
     ClothingMaskNeckGaiter: 2
     ClothingUniformJumpsuitTacticool: 1
     ClothingUniformJumpskirtTacticool: 1
+    ToyFigurinePassenger: 1
+    ToyFigurineGreytider: 1
   # DO NOT ADD MORE, USE UNIFORM DYING
+  emaggedInventory: # SS220 Scarlet Typhoon add for emag
+    ClothingOuterScarletTyphoon: 1 # SS220 Scarlet Typhoon add for emag

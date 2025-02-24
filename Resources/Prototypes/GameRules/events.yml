@@ -10,6 +10,7 @@
     - id: ClericalError
     - id: CockroachMigration
     - id: GasLeak
+    - id: GreytideVirus
     - id: IonStorm # its calm like 90% of the time smh
     - id: KudzuGrowth
     - id: MassHallucinations
@@ -36,8 +37,9 @@
     - id: SleeperAgents
     - id: ZombieOutbreak
     - id: DarkReaperSpawn #ss220 darkreaper middle event
-    # - id: SpiderQueenSpawn #SS220 spider queen midround event
-    - id: LoneOpsSpawn
+    - id: SpiderQueenSpawn #SS220 spider queen midround event
+    # - id: LoneOpsSpawn # SS220 No-LoneOps
+    - id: DerelictCyborgSpawn
 
 - type: entity
   id: BaseStationEvent
@@ -117,6 +119,12 @@
   parent: BaseGameRule
   components:
   - type: StationEvent
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     weight: 7
     duration: 1
     minimumPlayers: 15
@@ -127,6 +135,13 @@
   parent: BaseGameRule
   components:
   - type: StationEvent
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAnnouncementColor: "#18abf5"
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     startAnnouncement: station-event-bureaucratic-error-announcement
     minimumPlayers: 25
     weight: 3
@@ -141,6 +156,13 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-clerical-error-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAnnouncementColor: "#18abf5"
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     minimumPlayers: 15
     weight: 5
     duration: 1
@@ -202,12 +224,19 @@
   - type: AntagLoadProfileRule
   - type: AntagObjectives
     objectives:
+    - NinjaFrameTargetObjective # SS220 Ninja-target-update | Move it upper
     - StealResearchObjective
     - DoorjackObjective
-    - SpiderChargeObjective
+    # - SpiderChargeObjective # SS220 Ninja-target-update
     - TerrorObjective
-    - MassArrestObjective
+    # - MassArrestObjective # SS220 Ninja-target-update
     - NinjaSurviveObjective
+    # SS220 Ninja-target-update begin
+  - type: AntagRandomObjectives
+    sets:
+    - groups: NinjaObjectiveGroups
+    maxDifficulty: 1.5 # be careful 1.5 is here because one ninjaTarget cost 1.5 and we need only one
+    # SS220 Ninja-target-update end
   - type: AntagSelection
     agentName: ninja-round-end-agent-name
     definitions:
@@ -364,8 +393,12 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
@@ -385,8 +418,12 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
@@ -406,8 +443,12 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
@@ -423,8 +464,12 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 20
     weight: 1.5
@@ -559,6 +604,14 @@
   id: IonStorm
   components:
   - type: StationEvent
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAnnouncementColor: "#18abf5"
+    startAnnouncement: station-event-ion-storm-start-announcement
+    startAudio:
+      path: /Audio/SS220/Announcements/i-storm1.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     weight: 8
     reoccurrenceDelay: 20
     duration: 1
@@ -574,3 +627,48 @@
     maxOccurrences: 1 # this event has diminishing returns on interesting-ness, so we cap it
     weight: 5
   - type: MobReplacementRule
+
+- type: entity
+  id: GreytideVirus
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAudio:
+      path: /Audio/SS220/Announcements/greytide.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end    weight: 5
+    minimumPlayers: 25
+    reoccurrenceDelay: 20
+  - type: GreytideVirusRule
+    accessGroups:
+    - Cargo
+    - Command
+    - Engineering
+    - Research
+    - Security
+    - Service
+    blacklist:
+    - External # don't space everything
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerBorgDerelict
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictCyborg
+      min: 1
+      max: 1
+      pickPlayer: false

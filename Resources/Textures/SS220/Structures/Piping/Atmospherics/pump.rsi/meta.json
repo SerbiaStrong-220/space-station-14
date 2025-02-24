@@ -1,0 +1,77 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "by MIXnikita (Github) for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "pumpDigitalValve",
+            "directions": 4
+        },
+        {
+            "name": "pumpManualValve",
+            "directions": 4
+        },
+        {
+            "name": "pumpManualValveOn",
+            "directions": 4
+        },
+        {
+            "name": "pumpSignalValve",
+            "directions": 4
+        },
+        {
+            "name": "pumpSignalValveOn",
+            "directions": 4
+        },
+        {
+            "name": "pumpPassiveGate",
+            "directions": 4
+        },
+        {
+            "name": "pumpPassiveGateOn",
+            "directions": 4
+        },
+        {
+            "name": "pumpPressure",
+            "directions": 4
+        },
+        {
+            "name": "pumpPressureOn",
+            "directions": 4,
+            "delays": [
+                [ 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16 ],
+                [ 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16 ],
+                [ 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16 ],
+                [ 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16 ]
+            ]
+        },
+        {
+            "name": "pumpVolume",
+            "directions": 4
+        },
+        {
+            "name": "pumpVolumeOn",
+            "directions": 4,
+            "delays": [
+                [ 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08 ],
+                [ 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08 ],
+                [ 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08 ],
+                [ 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08 ]
+            ]
+        },
+        {
+            "name": "pumpVolumeBlocked",
+            "directions": 4,
+            "delays": [
+                [ 1.0, 1.0 ],
+                [ 1.0, 1.0 ],
+                [ 1.0, 1.0 ],
+                [ 1.0, 1.0 ]
+            ]
+        }
+    ]
+}
