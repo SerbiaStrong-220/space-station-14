@@ -20,3 +20,28 @@
   - type: Pinpointer
     component: Nuke
     targetName: ядерная боеголовка
+
+- type: entity
+  parent: PinpointerBase
+  id: PinpointerContractorTarget
+  name: contractor target pinpointer
+  description: A handheld tracking device that leads to the direction of any nearby station.
+  suffix: Contractor Target, Contractor, Target
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Devices/pinpointer.rsi
+    layers:
+    - state: pinpointer-nuclear #need sprite or use anyone
+      map: ["enum.PinpointerLayers.Base"]
+    - state: pinonnull
+      map: ["enum.PinpointerLayers.Screen"]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: SS220/Objects/Devices/pinpointer.rsi
+    state: pinpointer-nuclear #need sprite or use anyone
+  - type: Pinpointer
+    isContractorPinpointer: true
+    reachedDistance: 10
+    closeDistance: 20
+    mediumDistance: 25
