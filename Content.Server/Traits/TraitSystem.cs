@@ -1,6 +1,7 @@
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.SS220.Language; // SS220-Add-Languages 
 using Content.Shared.Roles;
 using Content.Shared.Traits;
 using Content.Shared.Whitelist;
@@ -46,6 +47,13 @@ public sealed class TraitSystem : EntitySystem
 
             // Add all components required by the prototype
             EntityManager.AddComponents(args.Mob, traitPrototype.Components, false);
+            // SS220-Add-Languages begin
+            if (traitPrototype.LearnedLanguage != null)
+            {
+                if (TryComp<LanguageComponent>(args.Mob, out var language) && !language.LearnedLanguages.Contains(traitPrototype.LearnedLanguage))
+                    language.LearnedLanguages.Add(traitPrototype.LearnedLanguage);
+            }
+            // SS220-Add-Languages end
 
             // Add item required by the trait
             if (traitPrototype.TraitGear == null)

@@ -95,5 +95,9 @@ namespace Content.Shared.Verbs
         //SS220-SpecialSound-system  end
 
         public static readonly VerbCategory PowerLevel = new("verb-categories-power-level", null);
+
+        // SS220-Add-Languages  begin
+        public static readonly VerbCategory Languages = new("verb-categories-languages-selector", "/Textures/SS220/Interface/VerbIcons/language_icon.svg.192dpi.png");
+        // SS220-Add-Languages  end
     }
 }

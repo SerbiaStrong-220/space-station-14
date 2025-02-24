@@ -9,6 +9,8 @@ using Content.Shared.Popups;
 using Robust.Shared.Random;
 using System.Text;
 using Robust.Shared.Player;
+using Content.Shared.SS220.Language;
+using Content.Server.SS220.Language; // SS220-Add-Languages
 
 namespace Content.Server.PAI;
 
@@ -19,6 +21,7 @@ public sealed class PAISystem : SharedPAISystem
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ToggleableGhostRoleSystem _toggleableGhostRole = default!;
+    [Dependency] private readonly LanguageSystem _language = default!; // SS220 Languages
 
     /// <summary>
     /// Possible symbols that can be part of a scrambled pai's name.
@@ -55,6 +58,7 @@ public sealed class PAISystem : SharedPAISystem
         // Cause then you could remotely figure out information about the owner's equipped items.
 
         _metaData.SetEntityName(uid, val);
+        _language.AddLanguagesFromSource(component.LastUser.Value, uid); // SS220-Add-Languages
     }
 
     private void OnMindRemoved(EntityUid uid, PAIComponent component, MindRemovedMessage args)
@@ -117,5 +121,13 @@ public sealed class PAISystem : SharedPAISystem
             if (proto != null)
                 _metaData.SetEntityName(uid, proto.Name);
         }
+    // SS220-Add-Languages begin
+        if (TryComp<LanguageComponent>(uid, out var languages))
+        {
+            languages.LearnedLanguages.Clear();
+            _language.AddLanguages(uid, [_language.UniversalLanguage, _language.UniversalLanguage]);
+            languages.CurrentLanguage = languages.LearnedLanguages[0];
+        }
     }
+    // SS220-Add-Languages end
 }
