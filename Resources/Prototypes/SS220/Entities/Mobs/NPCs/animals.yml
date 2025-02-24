@@ -270,6 +270,11 @@
     autoRot: true
     radius: 2
     netsync: false
+  - type: Language
+    learnedLanguages:
+    - Galactic
+    - Binary
+    - Universal
 
 - type: entity
   name: крокодил
