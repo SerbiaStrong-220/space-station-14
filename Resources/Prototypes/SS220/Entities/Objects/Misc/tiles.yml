@@ -917,6 +917,7 @@
 - type: entity
   name: floor-dark-california
   id: FloorItemDarkCalifornia
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/dark.rsi
@@ -934,6 +935,7 @@
 - type: entity
   name: floor-dark-eight-bricks
   id: FloorItemDarkEightBricks
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/dark.rsi
@@ -951,6 +953,7 @@
 - type: entity
   name: floor-dark-mixed-bricks
   id: FloorItemDarkMixedBricks
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/dark.rsi
@@ -968,6 +971,7 @@
 - type: entity
   name: floor-dark-mixed-bricks-mini
   id: FloorItemDarkMixedBricksMini
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/dark.rsi
@@ -985,6 +989,7 @@
 - type: entity
   name: floor-dark-mixed-pavement-horizontal
   id: FloorItemDarkMixedPavementHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/dark.rsi
@@ -1002,6 +1007,7 @@
 - type: entity
   name: floor-dark-mixed-pavement-vertical
   id: FloorItemDarkMixedPavementVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/dark.rsi
@@ -1019,6 +1025,7 @@
 - type: entity
   name: floor-dark-shifted-eight-bricks
   id: FloorItemDarkShiftedEightBricks
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/dark.rsi
@@ -1036,6 +1043,7 @@
 - type: entity
   name: floor-dark-shifted-mini-horizontal
   id: FloorItemDarkShiftedMiniHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/dark.rsi
@@ -1054,6 +1062,7 @@
 - type: entity
   name: floor-dark-shifted-mini-vertical
   id: FloorItemDarkShiftedMiniVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/dark.rsi
@@ -1071,6 +1080,7 @@
 - type: entity
   name: floor-freezer-horizontal
   id: FloorItemFreezerHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/freezer.rsi
@@ -1088,6 +1098,7 @@
 - type: entity
   name: floor-freezer-mini
   id: FloorItemFreezerMini
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/freezer.rsi
@@ -1105,6 +1116,7 @@
 - type: entity
   name: floor-freezer-mini-horizontal
   id: FloorItemFreezerMiniHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/freezer.rsi
@@ -1122,6 +1134,7 @@
 - type: entity
   name: floor-freezer-mini-vertical
   id: FloorItemFreezerMiniVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/freezer.rsi
@@ -1139,6 +1152,7 @@
 - type: entity
   name: floor-freezer-mono
   id: FloorItemFreezerMono
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/freezer.rsi
@@ -1156,6 +1170,7 @@
 - type: entity
   name: floor-freezer-vertical
   id: FloorItemFreezerVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/freezer.rsi
@@ -1173,6 +1188,7 @@
 - type: entity
   name: floor-grating-maint-drain-horizontal
   id: FloorItemGratingMaintDrainHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/grating.rsi
@@ -1190,6 +1206,7 @@
 - type: entity
   name: floor-grating-maint-drain-middle
   id: FloorItemGratingMaintDrainMiddle
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/grating.rsi
@@ -1207,6 +1224,7 @@
 - type: entity
   name: floor-grating-maint-drain-vertical
   id: FloorItemGratingMaintDrainVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/grating.rsi
@@ -1224,6 +1242,7 @@
 - type: entity
   name: floor-grating-maint-horizontal
   id: FloorItemGratingMaintHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/grating.rsi
@@ -1241,6 +1260,7 @@
 - type: entity
   name: floor-grating-maint-mini
   id: FloorItemGratingMaintMini
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/grating.rsi
@@ -1258,6 +1278,7 @@
 - type: entity
   name: floor-grating-maint-mono
   id: FloorItemGratingMaintMono
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/grating.rsi
@@ -1275,6 +1296,7 @@
 - type: entity
   name: floor-grating-maint-vertical
   id: FloorItemGratingMaintVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/grating.rsi
@@ -1292,6 +1314,7 @@
 - type: entity
   name: floor-mining-dark-grating-directed-horizontal
   id: FloorItemMiningDarkGratingDirectedHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1309,6 +1332,7 @@
 - type: entity
   name: floor-mining-dark-grating-directed-vertical
   id: FloorItemMiningDarkGratingDirectedVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1326,6 +1350,7 @@
 - type: entity
   name: floor-mining-dark-grating-horizontal
   id: FloorItemMiningDarkGratingHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1343,6 +1368,7 @@
 - type: entity
   name: floor-mining-dark-grating-middle
   id: FloorItemMiningDarkGratingMiddle
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1360,6 +1386,7 @@
 - type: entity
   name: floor-mining-dark-grating-vertical
   id: FloorItemMiningDarkGratingVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1377,6 +1404,7 @@
 - type: entity
   name: floor-mining-dark-mono
   id: FloorItemMiningDarkMono
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1394,6 +1422,7 @@
 - type: entity
   name: floor-mining-dark-reinforced
   id: FloorItemMiningDarkReinforced
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1411,6 +1440,7 @@
 - type: entity
   name: floor-mining-grating-directed-horizontal
   id: FloorItemMiningGratingDirectedHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1428,6 +1458,7 @@
 - type: entity
   name: floor-mining-grating-directed-vertical
   id: FloorItemMiningGratingDirectedVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1445,6 +1476,7 @@
 - type: entity
   name: floor-mining-grating-horizontal
   id: FloorItemMiningGratingHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1462,6 +1494,7 @@
 - type: entity
   name: floor-mining-grating-middle
   id: FloorItemMiningGratingMiddle
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1479,6 +1512,7 @@
 - type: entity
   name: floor-mining-grating-vertical
   id: FloorItemMiningGratingVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1496,6 +1530,7 @@
 - type: entity
   name: floor-mining-light-grating-directed-horizontal
   id: FloorItemMiningLightGratingDirectedHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1513,6 +1548,7 @@
 - type: entity
   name: floor-mining-light-grating-directed-vertical
   id: FloorItemMiningLightGratingDirectedVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1530,6 +1566,7 @@
 - type: entity
   name: floor-mining-light-grating-horizontal
   id: FloorItemMiningLightGratingHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1547,6 +1584,7 @@
 - type: entity
   name: floor-mining-light-grating-middle
   id: FloorItemMiningLightGratingMiddle
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1564,6 +1602,7 @@
 - type: entity
   name: floor-mining-light-grating-vertical
   id: FloorItemMiningLightGratingVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1581,6 +1620,7 @@
 - type: entity
   name: floor-mining-light-mono
   id: FloorItemMiningLightMono
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1598,6 +1638,7 @@
 - type: entity
   name: floor-mining-light-reinforced
   id: FloorItemMiningLightReinforced
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1615,6 +1656,7 @@
 - type: entity
   name: floor-mining-mono
   id: FloorItemMiningMono
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1632,6 +1674,7 @@
 - type: entity
   name: floor-mining-reinforced
   id: FloorItemMiningReinforced
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/mining.rsi
@@ -1649,6 +1692,7 @@
 - type: entity
   name: floor-rock-vault-herringbone
   id: FloorItemRockVaultHerringbone
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/rock-vault.rsi
@@ -1666,6 +1710,7 @@
 - type: entity
   name: floor-rock-vault-horizontal
   id: FloorItemRockVaultHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/rock-vault.rsi
@@ -1683,6 +1728,7 @@
 - type: entity
   name: floor-rock-vault-mini
   id: FloorItemRockVaultMini
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/rock-vault.rsi
@@ -1700,6 +1746,7 @@
 - type: entity
   name: floor-rock-vault-mono
   id: FloorItemRockVaultMono
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/rock-vault.rsi
@@ -1717,6 +1764,7 @@
 - type: entity
   name: floor-rock-vault-pavement-horizontal
   id: FloorItemRockVaultPavementHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/rock-vault.rsi
@@ -1734,6 +1782,7 @@
 - type: entity
   name: floor-rock-vault-vertical
   id: FloorItemRockVaultVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/rock-vault.rsi
@@ -1751,6 +1800,7 @@
 - type: entity
   name: floor-sanitary
   id: FloorItemSanitary
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1768,6 +1818,7 @@
 - type: entity
   name: floor-sanitary-dark
   id: FloorItemSanitaryDark
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1785,6 +1836,7 @@
 - type: entity
   name: floor-sanitary-dark-horizontal
   id: FloorItemSanitaryDarkHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1802,6 +1854,7 @@
 - type: entity
   name: floor-sanitary-dark-mini
   id: FloorItemSanitaryDarkMini
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1819,6 +1872,7 @@
 - type: entity
   name: floor-sanitary-dark-mini-horizontal
   id: FloorItemSanitaryDarkMiniHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1836,6 +1890,7 @@
 - type: entity
   name: floor-sanitary-dark-mini-vertical
   id: FloorItemSanitaryDarkMiniVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1853,6 +1908,7 @@
 - type: entity
   name: floor-sanitary-dark-mono
   id: FloorItemSanitaryDarkMono
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1870,6 +1926,7 @@
 - type: entity
   name: floor-sanitary-dark-vertical
   id: FloorItemSanitaryDarkVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1887,6 +1944,7 @@
 - type: entity
   name: floor-sanitary-horizontal
   id: FloorItemSanitaryHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1904,6 +1962,7 @@
 - type: entity
   name: floor-sanitary-mini
   id: FloorItemSanitaryMini
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1921,6 +1980,7 @@
 - type: entity
   name: floor-sanitary-mini-horizontal
   id: FloorItemSanitaryMiniHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1938,6 +1998,7 @@
 - type: entity
   name: floor-sanitary-mini-vertical
   id: FloorItemSanitaryMiniVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1955,6 +2016,7 @@
 - type: entity
   name: floor-sanitary-mono
   id: FloorItemSanitaryMono
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1972,6 +2034,7 @@
 - type: entity
   name: floor-sanitary-vertical
   id: FloorItemSanitaryVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/sanitary.rsi
@@ -1989,6 +2052,7 @@
 - type: entity
   name: floor-showroom-horizontal
   id: FloorItemShowroomHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/showroom.rsi
@@ -2006,6 +2070,7 @@
 - type: entity
   name: floor-showroom-mini
   id: FloorItemShowroomMini
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/showroom.rsi
@@ -2023,6 +2088,7 @@
 - type: entity
   name: floor-showroom-mini-horizontal
   id: FloorItemShowroomMiniHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/showroom.rsi
@@ -2040,6 +2106,7 @@
 - type: entity
   name: floor-showroom-mini-vertical
   id: FloorItemShowroomMiniVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/showroom.rsi
@@ -2057,6 +2124,7 @@
 - type: entity
   name: floor-showroom-mono
   id: FloorItemShowroomMono
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/showroom.rsi
@@ -2074,6 +2142,7 @@
 - type: entity
   name: floor-showroom-vertical
   id: FloorItemShowroomVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/showroom.rsi
@@ -2091,6 +2160,7 @@
 - type: entity
   name: floor-steel-california
   id: FloorItemSteelCalifornia
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel.rsi
@@ -2108,6 +2178,7 @@
 - type: entity
   name: floor-steel-eight-bricks
   id: FloorItemSteelEightBricks
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel.rsi
@@ -2125,6 +2196,7 @@
 - type: entity
   name: floor-steel-maint-drain-horizontal
   id: FloorItemSteelMaintDrainHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel-maint.rsi
@@ -2142,6 +2214,7 @@
 - type: entity
   name: floor-steel-maint-drain-middle
   id: FloorItemSteelMaintDrainMiddle
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel-maint.rsi
@@ -2159,6 +2232,7 @@
 - type: entity
   name: floor-steel-maint-drain-vertical
   id: FloorItemSteelMaintDrainVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel-maint.rsi
@@ -2176,6 +2250,7 @@
 - type: entity
   name: floor-steel-maint-horizontal
   id: FloorItemSteelMaintHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel-maint.rsi
@@ -2193,6 +2268,7 @@
 - type: entity
   name: floor-steel-maint-mini
   id: FloorItemSteelMaintMini
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel-maint.rsi
@@ -2208,8 +2284,27 @@
     stackType: FloorItemStacksSteelMaintMini
 
 - type: entity
+  name: floor-steel-maint-mono
+  id: FloorItemSteelMaintMono
+  parent: FloorTileItemBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    state: steel-maint-mono
+  - type: Item
+    sprite: SS220/Objects/Tiles/steel-maint.rsi
+    heldPrefix: steel-maint-mono
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorSteelMaintMono
+  - type: Stack
+    stackType: FloorItemStacksSteelMaintMono
+
+- type: entity
   name: floor-steel-maint-vertical
   id: FloorItemSteelMaintVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel-maint.rsi
@@ -2227,6 +2322,7 @@
 - type: entity
   name: floor-steel-mixed-bricks
   id: FloorItemSteelMixedBricks
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel.rsi
@@ -2244,6 +2340,7 @@
 - type: entity
   name: floor-steel-mixed-bricks-mini
   id: FloorItemSteelMixedBricksMini
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel.rsi
@@ -2261,6 +2358,7 @@
 - type: entity
   name: floor-steel-mixed-pavement-horizontal
   id: FloorItemSteelMixedPavementHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel.rsi
@@ -2278,6 +2376,7 @@
 - type: entity
   name: floor-steel-mixed-pavement-vertical
   id: FloorItemSteelMixedPavementVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel.rsi
@@ -2295,6 +2394,7 @@
 - type: entity
   name: floor-steel-shifted-eight-bricks
   id: FloorItemSteelShiftedEightBricks
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel.rsi
@@ -2312,6 +2412,7 @@
 - type: entity
   name: floor-steel-shifted-mini-horizontal
   id: FloorItemSteelShiftedMiniHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel.rsi
@@ -2329,6 +2430,7 @@
 - type: entity
   name: floor-steel-shifted-mini-vertical
   id: FloorItemSteelShiftedMiniVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/steel.rsi
@@ -2346,6 +2448,7 @@
 - type: entity
   name: floor-tech-maint-horizontal
   id: FloorItemTechMaintHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/tech-maint.rsi
@@ -2363,6 +2466,7 @@
 - type: entity
   name: floor-tech-maint-mini
   id: FloorItemTechMaintMini
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/tech-maint.rsi
@@ -2380,6 +2484,7 @@
 - type: entity
   name: floor-tech-maint-mono
   id: FloorItemTechMaintMono
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/tech-maint.rsi
@@ -2397,6 +2502,7 @@
 - type: entity
   name: floor-tech-maint-vertical
   id: FloorItemTechMaintVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/tech-maint.rsi
@@ -2414,6 +2520,7 @@
 - type: entity
   name: floor-tech-maint-drain-middle
   id: FloorItemTechMainDrainMiddle
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/tech-maint.rsi
@@ -2431,6 +2538,7 @@
 - type: entity
   name: floor-white-california
   id: FloorItemWhiteCalifornia
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/white.rsi
@@ -2448,6 +2556,7 @@
 - type: entity
   name: floor-white-eight-bricks
   id: FloorItemWhiteEightBricks
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/white.rsi
@@ -2465,6 +2574,7 @@
 - type: entity
   name: floor-white-mixed-bricks
   id: FloorItemWhiteMixedBricks
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/white.rsi
@@ -2482,6 +2592,7 @@
 - type: entity
   name: floor-white-mixed-bricks-mini
   id: FloorItemWhiteMixedBricksMini
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/white.rsi
@@ -2499,6 +2610,7 @@
 - type: entity
   name: floor-white-mixed-pavement-horizontal
   id: FloorItemWhiteMixedPavementHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/white.rsi
@@ -2516,6 +2628,7 @@
 - type: entity
   name: floor-white-mixed-pavement-vertical
   id: FloorItemWhiteMixedPavementVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/white.rsi
@@ -2533,6 +2646,7 @@
 - type: entity
   name: floor-white-shifted-eight-bricks
   id: FloorItemWhiteShiftedEightBricks
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/white.rsi
@@ -2550,6 +2664,7 @@
 - type: entity
   name: floor-white-shifted-mini-horizontal
   id: FloorItemWhiteShiftedMiniHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/white.rsi
@@ -2567,6 +2682,7 @@
 - type: entity
   name: floor-white-shifted-mini-vertical
   id: FloorItemWhiteShiftedMiniVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/white.rsi
@@ -2585,6 +2701,7 @@
 - type: entity
   name: floor-concrete-pavement-horizontal
   id: FloorItemConcretePavementHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/concrete.rsi
@@ -2602,6 +2719,7 @@
 - type: entity
   name: floor-concrete-pavement-vertical
   id: FloorItemConcretePavementVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/concrete.rsi
@@ -2619,6 +2737,7 @@
 - type: entity
   name: floor-grayconcrete-pavement-horizontal
   id: FloorItemGrayconcretePavementHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/concrete.rsi
@@ -2636,6 +2755,7 @@
 - type: entity
   name: floor-grayconcrete-pavement-vertical
   id: FloorItemGrayconcretePavementVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/concrete.rsi
@@ -2653,6 +2773,7 @@
 - type: entity
   name: floor-oldconcrete-pavement-horizontal
   id: FloorItemOldconcretePavementHorizontal
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/concrete.rsi
@@ -2670,6 +2791,7 @@
 - type: entity
   name: floor-oldconcrete-pavement-vertical
   id: FloorItemOldconcretePavementVertical
+  parent: FloorTileItemBase
   components:
   - type: Sprite
     sprite: SS220/Objects/Tiles/concrete.rsi

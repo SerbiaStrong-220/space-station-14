@@ -755,6 +755,12 @@
   maxCount: 30
 
 - type: stack
+  id: FloorItemStacksSteelMaintMono
+  name: floor-steel-maint-mono
+  spawn: FloorItemSteelMaintMono
+  maxCount: 30
+
+- type: stack
   id: FloorItemStacksSteelMaintVertical
   name: floor-steel-maint-vertical
   spawn: FloorItemSteelMaintVertical

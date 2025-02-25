@@ -31,6 +31,14 @@
     containers:
       mech-equipment-container: !type:Container
       mech-battery-slot: !type:ContainerSlot
+      item_radio: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
   - type: UserInterface
     interfaces:
       enum.MechUiKey.Key:
