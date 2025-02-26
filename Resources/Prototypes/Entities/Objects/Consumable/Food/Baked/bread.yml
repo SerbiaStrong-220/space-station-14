@@ -685,6 +685,11 @@
           Quantity: 1
         - ReagentId: Blackpepper
           Quantity: 1
+#SS220 tag start
+  - type: Tag
+    tags:
+    - Baguette
+#SS220 tag start
   - type: Clothing
     slots: [ BELT ]
     equippedPrefix: baguette

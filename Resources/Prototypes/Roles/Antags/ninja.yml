@@ -20,7 +20,7 @@
     shoes: ClothingShoesSpaceNinja
     id: AgentIDCard
     ears: ClothingHeadsetGrey
-    pocket1: SpiderCharge
+    # pocket1: SpiderCharge # SS220 Ninja-target-update
     pocket2: PinpointerStation
     belt: EnergyKatana
   inhand:

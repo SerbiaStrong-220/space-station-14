@@ -61,3 +61,50 @@
           - ResearchDirector
           - Scientist
           - Borg
+
+#SS220 ClownMime borg start
+- type: entity
+  id: BorgModuleMime
+  parent: [ BaseBorgModuleService, BaseProviderBorgModule ]
+  name: mime cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: ClownMime
+    - state: icon-ClownMime
+    sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
+  - type: Tag
+    tags:
+    - BorgModuleClown
+  - type: ItemBorgModule
+    items:
+    - BluespaceCrayon
+    - Pen
+    - CrowbarBaguetteCyborg
+    - ToyFigurineMime
+  - type: BorgModuleIcon
+    icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: ClownMime-module }
+
+- type: entity
+  id: BorgModuleClown
+  parent: [ BaseBorgModuleService, BaseProviderBorgModule ]
+  name: clowning cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: ClownMime
+    - state: icon-ClownMime
+    sprite: SS220/Objects/Specific/Robotics/borgmodule.rsi
+  - type: Tag
+    tags:
+    - BorgModuleClown
+  - type: ItemBorgModule
+    items:
+    - BananiumHorn
+    - ClownRecorder
+    - RubberChicken
+    - LauncherCreamPieCyborg
+    - ToyFigurineClown
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: clowning-module }
+#SS220 ClownMime borg end

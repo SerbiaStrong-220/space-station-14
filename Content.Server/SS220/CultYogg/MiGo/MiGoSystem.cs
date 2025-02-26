@@ -56,6 +56,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         {
             //no opening door during astral
             _tag.AddTag(uid, "DoorBumpOpener");
+            _tag.RemoveTag(uid, "MiGoInAstral");
             comp.MaterializationTime = null;
             comp.AlertTime = 0;
 
@@ -82,7 +83,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         {
             comp.AudioPlayed = false;
             _tag.RemoveTag(uid, "DoorBumpOpener");
-
+            _tag.AddTag(uid, "MiGoInAstral");
             _alerts.ShowAlert(uid, comp.AstralAlert);
 
             //no phisyc during astral

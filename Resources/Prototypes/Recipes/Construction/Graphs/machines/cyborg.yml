@@ -32,8 +32,69 @@
       - tool: Screwing
         doAfter: 0.5
 
+#SS220 ClownMimecyborg start
   - node: cyborg
     entity: BorgChassisSelectable
+    edges:
+    - to: clownmimecyborg
+      conditions:
+        - !type:ContainerEmpty
+          container: "borg_brain"
+      steps:
+        - material: Cloth
+          amount: 20
+          doAfter: 10
+        - tag: ClownRecorder
+          name: clown recorder
+          icon:
+            sprite: Objects/Fun/clownrecorder.rsi
+            state: icon
+          doAfter: 2
+        - tag: Baguette
+          name: Baguette
+          doAfter: 2
+        - tag: Crayon
+          name: Crayon
+          doAfter: 2
+        - tag: Crayon
+          name: Crayon
+          doAfter: 2
+        - tag: Crayon
+          name: Crayon
+          doAfter: 2
+        - tag: Crayon
+          name: Crayon
+          doAfter: 2
+        - tag: Crayon
+          name: Crayon
+          doAfter: 2
+        - tag: Crayon
+          name: Crayon
+          doAfter: 2
+        - tag: Crayon
+          name: Crayon
+          doAfter: 2
+        - tag: Crayon
+          name: Crayon
+          doAfter: 2
+        - tag: ClownMask
+          name: ClownMask
+          doAfter: 2
+        - tag: ClownShoes
+          name: ClownShoes
+          doAfter: 2
+        - tag: ClothingMaskMime
+          name: MimeMask
+          doAfter: 2
+        - tag: BananiumHorn
+          name: BananiumHorn
+          doAfter: 2
+#SS220 ClownMimecyborg end
 
   - node: derelictcyborg
     entity: BorgChassisDerelict
+
+#SS220 ClownMimecyborg start
+  - node: clownmimecyborg
+    entity: BorgChassisClownMime
+#SS220 ClownMimecyborg end

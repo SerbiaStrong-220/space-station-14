@@ -47,4 +47,18 @@
   license: "Custom"
   copyright: "PDM-1.0, Paul Pitman"
   source: "https://musopen.org"
- 
+
+- files: ["nrodic.ogg"]
+  license: "Custom"
+  copyright: "Created by e6illa for SS220 with help Suno AI: https://suno.com/terms"
+  source: "https://github.com/SerbiaStrong-220"
+
+- files: ["blues.ogg"]
+  license: "Custom"
+  copyright: "Created by e6illa for SS220 with help Suno AI: https://suno.com/terms"
+  source: "https://github.com/SerbiaStrong-220"
+
+- files: ["since_2569.ogg"]
+  license: "Custom"
+  copyright: "Created by e6illa for SS220 with help Suno AI: https://suno.com/terms"
+  source: "https://github.com/SerbiaStrong-220"
