@@ -88,7 +88,7 @@ public sealed partial class PdaIdPainterBoundUserInterface : BoundUserInterface
             }
         }
 
-        _window.Populate(EntMan.System<PdaIdPainterSystem>()._pdaAndIdProtos, chosenPda, chosenId);
+        _window.Populate(EntMan.System<PdaIdPainterSystem>().PdaAndIdProtos, chosenPda, chosenId);
     }
 
     private void OnPdaPicked(string args)
