@@ -229,12 +229,16 @@
         - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
+  # SS220 Stamina damage begin
+  #- type: StaminaDamageOnCollide
+  #  damage: 33
+  # SS220 Stamina damage end
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
         Heat: 5
-        Stamina: 30
+        Stamina: 30 # SS220 Stamina damage
     soundHit:
       collection: WeakHit
     forceSound: true

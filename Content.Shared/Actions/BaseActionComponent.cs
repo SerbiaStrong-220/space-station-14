@@ -168,6 +168,14 @@ public abstract partial class BaseActionComponent : Component
     public bool RaiseOnUser;
 
     /// <summary>
+    ///     If true, this will cause the the action event to always be raised directed at the action itself instead of the action's container/provider.
+    ///     Takes priority over RaiseOnUser.
+    /// </summary>
+    [DataField]
+    [Obsolete("This datafield will be reworked in an upcoming action refactor")]
+    public bool RaiseOnAction;
+
+    /// <summary>
     ///     Whether or not to automatically add this action to the action bar when it becomes available.
     /// </summary>
     [DataField("autoPopulate")] public bool AutoPopulate = true;
@@ -186,6 +194,11 @@ public abstract partial class BaseActionComponent : Component
     ///     If not null, this sound will be played when performing this action.
     /// </summary>
     [DataField("sound")] public SoundSpecifier? Sound;
+
+    //ss220 add time between charges start
+    [DataField]
+    public TimeSpan? TimeBetweenCharges = null;
+    //ss220 add time between charges end
 }
 
 [Serializable, NetSerializable]
@@ -212,10 +225,12 @@ public abstract class BaseActionComponentState : ComponentState
     public int Priority;
     public NetEntity? AttachedEntity;
     public bool RaiseOnUser;
+    public bool RaiseOnAction;
     public bool AutoPopulate;
     public bool Temporary;
     public ItemActionIconStyle ItemIconStyle;
     public SoundSpecifier? Sound;
+    public TimeSpan? TimeBetweenCharges; //ss220 add time between charges
 
     protected BaseActionComponentState(BaseActionComponent component, IEntityManager entManager)
     {
@@ -223,6 +238,7 @@ public abstract class BaseActionComponentState : ComponentState
         EntityIcon = entManager.GetNetEntity(component.EntIcon);
         AttachedEntity = entManager.GetNetEntity(component.AttachedEntity);
         RaiseOnUser = component.RaiseOnUser;
+        RaiseOnAction = component.RaiseOnAction;
         Icon = component.Icon;
         IconOn = component.IconOn;
         IconColor = component.IconColor;
@@ -244,5 +260,6 @@ public abstract class BaseActionComponentState : ComponentState
         Temporary = component.Temporary;
         ItemIconStyle = component.ItemIconStyle;
         Sound = component.Sound;
+        TimeBetweenCharges = component.TimeBetweenCharges; //ss220 add time between charges
     }
 }

@@ -1,7 +1,6 @@
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Power.Events;
-using Content.Server.Stunnable.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage.Events;
 using Content.Shared.Examine;
@@ -29,7 +28,6 @@ namespace Content.Server.Stunnable.Systems
 
             SubscribeLocalEvent<StunbatonComponent, ExaminedEvent>(OnExamined);
             SubscribeLocalEvent<StunbatonComponent, SolutionContainerChangedEvent>(OnSolutionChange);
-            SubscribeLocalEvent<StunbatonComponent, GetHeavyDamageModifierEvent>(MeleeAttackRateEvent);
             SubscribeLocalEvent<StunbatonComponent, ItemToggleActivateAttemptEvent>(TryTurnOn);
             SubscribeLocalEvent<StunbatonComponent, ItemToggledEvent>(ToggleDone);
             SubscribeLocalEvent<StunbatonComponent, ChargeChangedEvent>(OnChargeChanged);
@@ -37,18 +35,6 @@ namespace Content.Server.Stunnable.Systems
             SubscribeLocalEvent<StunbatonComponent, ThrowDoHitEvent>(OnThrowEnergyDecrease); //ss220 stunbaton decrease energy fix
         }
 
-        // SS220-Stunbaton-rework begin
-        private void MeleeAttackRateEvent(Entity<StunbatonComponent> entity, ref GetHeavyDamageModifierEvent args)
-        {
-            args.DamageModifier = 1;
-
-            if (!_itemToggle.IsActivated(entity.Owner) ||
-            !TryComp<BatteryComponent>(entity.Owner, out var battery) || !_battery.TryUseCharge(entity.Owner, entity.Comp.EnergyPerUse, battery))
-            {
-                return;
-            }
-        }
-        // SS220-Stunbaton-rework end
 
         private void OnExamined(Entity<StunbatonComponent> entity, ref ExaminedEvent args)
         {

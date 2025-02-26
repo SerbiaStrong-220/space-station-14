@@ -2,19 +2,27 @@
 
 on:
   pull_request_review:
-    types: [submitted]
+    types: [submitted, edited, dismissed]
+
+permissions: write-all
 
 jobs:
   remove_label:
-    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
-    permissions:
-      actions: write
-      pull-requests: write
-      contents: write
+    if: github.event.review.state == 'approved'
     steps:
-    - uses: actions-ecosystem/action-remove-labels@v1
-      with:
-        labels: |
-          Status: Needs Review
-          Status: Awaiting Changes
+      - name: check all revs
+        id: check_approvals
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+            });
+
+            const requiredApprovals = context.payload.pull_request.requested_reviewers.length;
+            const approvedReviews = reviews.filter(review => review.state === 'APPROVED').length;
+
+            return approvedReviews >= requiredApprovals;
