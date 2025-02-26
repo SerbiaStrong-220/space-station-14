@@ -123,7 +123,8 @@
   - type: ItemSlots
   - type: ContainerContainer
     containers:
-      board: !type:Container
+      machine_parts: !type:Container
+      machine_board: !type:Container
       id_painter_slot: !type:ContainerSlot
       pda_painter_slot: !type:ContainerSlot
   - type: Appearance
