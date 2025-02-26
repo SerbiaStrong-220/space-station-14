@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -9,7 +11,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server.Administration.Managers;
 using Content.Server.Database;
+using Content.Shared.CCVar;
 using Content.Shared.Players;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.Discord;
@@ -29,6 +33,7 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IServerNetManager _netMgr = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IAdminManager _adminManager = default!;
 
     private ISawmill _sawmill = default!;
     private Timer? _statusRefreshTimer; // We should keep reference or else evil GC will kill our timer
@@ -39,6 +44,16 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
     private bool _isDiscordLinkRequired = false;
 
     public event EventHandler<ICommonSession>? PlayerVerified;
+
+    private volatile Dictionary<NetUserId, DiscordSponsorInfo?> _cachedSponsorInfo = new();
+
+    public List<SponsorTier> PriorityJoinTiers =
+    [
+        SponsorTier.BigShlopa,
+        SponsorTier.HugeShlopa,
+        SponsorTier.GoldenShlopa,
+        SponsorTier.CriticalMassShlopa
+    ];
 
     public void Initialize()
     {
@@ -127,11 +142,17 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
         {
             await UpdateUserDiscordRolesStatus(e);
         }
+
+        if (e.NewStatus == SessionStatus.Disconnected)
+        {
+            _cachedSponsorInfo.Remove(e.Session.UserId);
+        }
     }
 
     private async Task UpdateUserDiscordRolesStatus(SessionStatusEventArgs e)
     {
-        var info = await GetSponsorInfo(e.Session.UserId);
+        await UpdateSponsorInfo(e.Session.UserId);
+        _cachedSponsorInfo.TryGetValue(e.Session.UserId, out var info);
 
         if (info is not null)
         {
@@ -327,4 +348,46 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
     private sealed record AccountLinkResponseParameters(string AccountLinkUrl);
 
     private sealed record DiscordAuthInfoResponse(bool AccountLinked);
+
+    public async Task UpdateSponsorInfo(NetUserId userId)
+    {
+        var sponsorInfo = await GetSponsorInfo(userId);
+        _cachedSponsorInfo[userId] = sponsorInfo;
+    }
+
+    public async Task<bool> HasPriorityJoinTierAsync(NetUserId userId)
+    {
+        await UpdateSponsorInfo(userId);
+        return HasPriorityJoinTier(await GetSponsorInfo(userId));
+    }
+
+    public bool HasPriorityJoinTier(NetUserId userId)
+    {
+        TryGetSponsorTierFromCache(userId, out var info);
+        return HasPriorityJoinTier(info);
+    }
+
+    public bool HasPriorityJoinTier(DiscordSponsorInfo? info)
+    {
+        return info != null && info.Tiers.Any(t => PriorityJoinTiers.Contains(t));
+    }
+
+    public bool TryGetSponsorTierFromCache(NetUserId userId, [NotNullWhen(true)] out DiscordSponsorInfo? info)
+    {
+        return _cachedSponsorInfo.TryGetValue(userId, out info) && info != null;
+    }
+
+    public bool HaveFreeSponsorSlot()
+    {
+        var maxPlayers = _cfg.GetCVar(CCVars.SoftMaxPlayers);
+        var maxLimitExcending = _cfg.GetCVar(CCVars220.MaxSponsorsBypass);
+
+        var playerCount = _playerManager.Sessions.Where(s => s.Status is SessionStatus.InGame).Count();
+        if (!_cfg.GetCVar(CCVars.AdminsCountForMaxPlayers))
+        {
+            playerCount -= _adminManager.ActiveAdmins.Count();
+        }
+
+        return playerCount < maxPlayers + maxLimitExcending;
+    }
 }

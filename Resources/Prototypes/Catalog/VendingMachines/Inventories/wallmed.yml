@@ -6,3 +6,9 @@
     Bloodpack: 3
     EpinephrineChemistryBottle: 3
     Syringe: 3
+  contrabandInventory:
+    PowerCellSmall: 2
+  #ss220 mini stimpack for nanomed start
+  emaggedInventory:
+    StimpackMini: 1
+  #ss220 mini stimpack for nanomed end

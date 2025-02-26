@@ -1,0 +1,23 @@
+- type: entity
+  parent: Crayon
+  id: BluespaceCrayon
+  name: rainbow crayon
+  components:
+  - type: CrayonRechargeable
+  - type: Sprite
+    layers:
+    - state: icon
+    sprite: SS220/Objects/Fun/crayons.rsi
+  - type: Item
+    sprite: SS220/Objects/Fun/crayons.rsi
+    heldPrefix: rainbow
+  - type: Crayon
+    color: Red
+    selectableColor: true
+    deleteEmpty: false
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - Recyclable
+    - Trash

@@ -6,10 +6,11 @@ using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Players.RateLimiting;
-using Content.Server.Speech.Components;
+using Content.Server.Speech.Prototypes;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Access.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -17,11 +18,16 @@ using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
+using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
+using Content.Shared.IdentityManagement.Components;
+using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.PDA;
 using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Radio;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
@@ -64,6 +70,8 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!; //ss220 add identity concealment for chat and radio messages
+    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidAppearance = default!; //ss220 add identity concealment for chat and radio messages
 
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
@@ -361,12 +369,12 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <param name="message">The contents of the message</param>
     /// <param name="sender">The sender (Communications Console in Communications Console Announcement)</param>
     /// <param name="playSound">Play the announcement sound</param>
-    /// <param name="announcementSound">Specific announcement sound</param>
     /// <param name="colorOverride">Optional color for the announcement message</param>
     public void DispatchGlobalAnnouncement(
         string message,
         string? sender = null,
         bool playSound = true,
+        SoundSpecifier? announcementSound = null,
         Color? colorOverride = null
         )
     {
@@ -374,18 +382,12 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
         _chatManager.ChatMessageToAll(ChatChannel.Radio, message, wrappedMessage, default, false, true, colorOverride);
-
         if (playSound)
         {
-            SoundSpecifier? announcementSound = null;
-            if (sender == Loc.GetString("admin-announce-announcer-default"))
-            {
-                announcementSound = new SoundPathSpecifier(CentComAnnouncementSound); // Corvax-Announcements: Support custom alert sound from admin panel
-            }
-            announcementSound ??= new SoundPathSpecifier(DefaultAnnouncementSound);
-            var announcementFilename = _audio.GetSound(announcementSound);
-            var announcementEv = new AnnouncementSpokeEvent(Filter.Broadcast(), announcementFilename ?? DefaultAnnouncementSound, announcementSound.Params, message, string.Empty);
-            RaiseLocalEvent(announcementEv);
+            _audio.PlayGlobal(announcementSound == null ? DefaultAnnouncementSound
+                : sender == Loc.GetString("admin-announce-announcer-default") ? CentComAnnouncementSound // Corvax-Announcements: Support custom alert sound from admin panel
+                : _audio.GetSound(announcementSound),
+                Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f));
         }
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Global station announcement from {sender}: {message}");
     }
@@ -491,7 +493,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         else
         {
-            var nameEv = new TransformSpeakerNameEvent(source, Name(source));
+            var nameEv = new TransformSpeakerNameEvent(source, GetChatName(source)); //ss220 add identity concealment for chat and radio messages
             RaiseLocalEvent(source, nameEv);
             name = nameEv.VoiceName;
             // Check for a speech verb override
@@ -565,7 +567,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         else
         {
-            var nameEv = new TransformSpeakerNameEvent(source, Name(source));
+            var nameEv = new TransformSpeakerNameEvent(source, GetChatName(source)); //ss220 add identity concealment for chat and radio messages
             RaiseLocalEvent(source, nameEv);
             name = nameEv.VoiceName;
         }
@@ -641,7 +643,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         // get the entity's apparent name (if no override provided).
         var ent = Identity.Entity(source, EntityManager);
-        string name = FormattedMessage.EscapeText(nameOverride ?? Name(ent));
+        string name = FormattedMessage.EscapeText(nameOverride ?? GetChatName(source)); //ss220 add identity concealment for chat and radio messages
 
         // Emotes use Identity.Name, since it doesn't actually involve your voice at all.
         var wrappedMessage = Loc.GetString("chat-manager-entity-me-wrap-message",
@@ -963,6 +965,73 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         return sb.ToString();
     }
+
+    //ss220 add identity concealment for chat and radio messages start
+    public string GetRadioName(EntityUid entity)
+    {
+        // for borgs(chassis) and ai(brain)
+        if (HasComp<BorgChassisComponent>(entity) || HasComp<BorgBrainComponent>(entity))
+            return Name(entity);
+
+        return GetIdCardName(entity) ?? Loc.GetString("comp-pda-ui-unknown");
+    }
+
+    private string GetChatName(EntityUid entity)
+    {
+        var idName = GetIdCardName(entity);
+
+        if (!IsIdentityHidden(entity))
+            return Name(entity);
+
+        if (idName != null)
+            return idName;
+
+        if (!TryComp<HumanoidAppearanceComponent>(entity, out var humanoid))
+            return Loc.GetString("comp-pda-ui-unknown");
+
+        var species = _humanoidAppearance.GetSpeciesRepresentation(humanoid.Species);
+        var age = _humanoidAppearance.GetAgeRepresentation(humanoid.Species, humanoid.Age);
+
+        return Loc.GetString("chat-msg-sender-species-and-age", ("species", species), ("age", age));
+    }
+
+    private string? GetIdCardName(EntityUid entity)
+    {
+        if (!_inventory.TryGetSlotEntity(entity, "id", out var idUid))
+            return null;
+
+        if (TryComp<PdaComponent>(idUid, out var pda) &&
+            TryComp<IdCardComponent>(pda.ContainedId, out var idComp) &&
+            !string.IsNullOrEmpty(idComp.FullName))
+        {
+            return idComp.FullName;
+        }
+
+        return TryComp<IdCardComponent>(pda?.ContainedId ?? idUid, out var id) && !string.IsNullOrEmpty(id.FullName)
+            ? id.FullName
+            : null;
+    }
+
+    private bool IsIdentityHidden(EntityUid entity)
+    {
+        if (!_inventory.TryGetContainerSlotEnumerator(entity, out var enumerSlot))
+            return false;
+
+        while (enumerSlot.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity == null)
+                continue;
+
+            if (TryComp<IdentityBlockerComponent>(slot.ContainedEntity.Value, out var blocker)
+                && blocker is { Enabled: true, Coverage: IdentityBlockerCoverage.FULL })
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    //ss220 add identity concealment for chat and radio messages end
 
     #endregion
 }
