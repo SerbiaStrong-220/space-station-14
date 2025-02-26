@@ -192,6 +192,7 @@
   recipeUnlocks:
   - WeaponSprayNozzle
   - ClothingBackpackWaterTank
+  - PdaIdPainterMachineCircuitboard #ss220 add pdaidpainter
 
 - type: technology
   id: BluespaceCargoTransport
