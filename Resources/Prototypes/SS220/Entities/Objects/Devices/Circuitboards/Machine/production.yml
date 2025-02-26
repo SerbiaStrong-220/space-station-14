@@ -80,7 +80,7 @@
   parent: BaseMachineCircuitboard
   components:
   - type: MachineBoard
-    prototype: PdaIdPainter
+    prototype: ComputerPdaIdPainter
     stackRequirements:
       Capacitor: 4
       Manipulator: 3
