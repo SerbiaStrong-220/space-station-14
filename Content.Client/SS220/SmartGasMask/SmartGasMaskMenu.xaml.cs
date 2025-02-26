@@ -3,7 +3,6 @@ using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.SS220.SmartGasMask;
 using Content.Shared.SS220.SmartGasMask.Prototype;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
@@ -48,7 +47,6 @@ public sealed partial class SmartGasMaskMenu : RadialMenu
                 StyleClasses = { "RadialMenuButton" },
                 SetSize = new Vector2(64, 64),
                 ToolTip = Loc.GetString(alertProto.Name),
-                ProtoId = alertProto.ID,
             };
 
             var entProtoView = new EntityPrototypeView()
@@ -64,35 +62,17 @@ public sealed partial class SmartGasMaskMenu : RadialMenu
 
             button.AddChild(entProtoView);
             main.AddChild(button);
-            AddSmartGasMaskMenuButtoOnClickActions(main);
+
+            button.OnButtonUp += _ =>
+            {
+                SendAlertSmartGasMaskRadioMessageAction?.Invoke(alertProto.ID);
+                Close();
+            };
         }
     }
-
-    private void AddSmartGasMaskMenuButtoOnClickActions(Control control)
-        {
-            var mainControl = control as RadialContainer;
-
-            if (mainControl == null)
-                return;
-
-            foreach (var child in mainControl.Children)
-            {
-                var castChild = child as SmartGasMaskMenuButton;
-
-                if (castChild == null)
-                    continue;
-
-                castChild.OnButtonUp += _ =>
-                {
-                    SendAlertSmartGasMaskRadioMessageAction?.Invoke(castChild.ProtoId);
-                    Close();
-                };
-            }
-        }
 }
 
 public sealed class SmartGasMaskMenuButton : RadialMenuTextureButton
 {
-    public ProtoId<AlertSmartGasMaskPrototype> ProtoId { get; set; }
 }
 

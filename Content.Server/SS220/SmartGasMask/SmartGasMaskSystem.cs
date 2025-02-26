@@ -1,6 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
+using Content.Shared.Actions;
+using Content.Shared.Clothing;
 using Content.Shared.SS220.SmartGasMask;
 using Content.Shared.SS220.SmartGasMask.Events;
 using Robust.Shared.Audio.Systems;
@@ -21,16 +23,27 @@ public sealed class SmartGasMaskSystem : EntitySystem
     [Dependency] private readonly NavMapSystem _navMap = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-
-    private readonly List<LocId> _haltMes =
-    ["smartgasmask-halt-message-1", "smartgasmask-halt-message-2", "smartgasmask-halt-message-3"];
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         SubscribeLocalEvent<SmartGasMaskComponent, SmartGasMaskOpenEvent>(OnAction);
         SubscribeLocalEvent<SmartGasMaskComponent, SmartGasMaskMessage>(OnChoose);
+        SubscribeLocalEvent<SmartGasMaskComponent, ClothingGotEquippedEvent>(OnEquipped);
+        SubscribeLocalEvent<SmartGasMaskComponent, ClothingGotUnequippedEvent>(OnUnequipped);
     }
+
+    private void OnEquipped(Entity<SmartGasMaskComponent> ent, ref ClothingGotEquippedEvent args)
+    {
+        _actions.AddAction(args.Wearer, ref ent.Comp.SmartGasMaskActionEntity, ent.Comp.SmartGasMaskAction, ent.Owner);
+    }
+
+    private void OnUnequipped(Entity<SmartGasMaskComponent> ent, ref ClothingGotUnequippedEvent args)
+    {
+        _actions.RemoveProvidedActions(args.Wearer, ent.Owner);
+    }
+
     private void OnAction(Entity<SmartGasMaskComponent> ent, ref SmartGasMaskOpenEvent args)
     {
         if (args.Handled || !TryComp<ActorComponent>(args.Performer, out var actor))
@@ -48,7 +61,7 @@ public sealed class SmartGasMaskSystem : EntitySystem
         {
             ent.Comp.OnCdHalt = true;
 
-            var haltMes = Loc.GetString(_random.Pick(_haltMes));
+            var haltMes = Loc.GetString(_random.Pick(ent.Comp.LocIdHaltMessage));
 
             _chatSystem.TrySendInGameICMessage(args.Actor, haltMes, InGameICChatType.Speak, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
             _audio.PlayPvs(ent.Comp.HaltSound, ent.Owner);
@@ -61,7 +74,7 @@ public sealed class SmartGasMaskSystem : EntitySystem
             ent.Comp.OnCdSupp = true;
 
             var posText = FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString(ent.Owner));
-            var helpMess = Loc.GetString(ent.Comp.SuppMes, ("user", args.Actor), ("position", posText));
+            var helpMess = Loc.GetString(ent.Comp.LocIdSupportMessage, ("user", args.Actor), ("position", posText));
 
             //The message is sent with a prefix ".о". This is necessary so that everyone understands that reinforcements have been called in
             _chatSystem.TrySendInGameICMessage(args.Actor, helpMess, InGameICChatType.Whisper, ChatTransmitRange.Normal, checkRadioPrefix: true, ignoreActionBlocker: true);
