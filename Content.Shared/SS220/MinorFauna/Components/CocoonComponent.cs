@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.MinorFauna.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class EntityCocoonComponent : Component
 {
     /// <summary>
@@ -13,9 +13,5 @@ public sealed partial class EntityCocoonComponent : Component
     [DataField("container", required: true)]
     public string CocoonContainerId = "cocoon";
 
-    /// <summary>
-    /// The entity that created this cocoon
-    /// </summary>
-    [ViewVariables, AutoNetworkedField]
-    public EntityUid? CocoonOwner;
+
 }
