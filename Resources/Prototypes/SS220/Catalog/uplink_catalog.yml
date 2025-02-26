@@ -174,6 +174,34 @@
   - UplinkImplants
 
 - type: listing
+  id: DnaCopyImplanter
+  name: uplink-dna-copy-implanter-name
+  description: uplink-dna-copy-implanter-desc
+  icon: {sprite: /Textures/SS220/Objects/Specific/Medical/implant-dna-copy.rsi, state: dna-copy}
+  productEntity: BoxDnaCopyImplant
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 5
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkImplants
+
+- type: listing
+  id: AdrenalImplanter
+  name: uplink-adrenal-implanter-name
+  description: uplink-adrenal-implanter-desc
+  icon: {sprite: /Textures/SS220/Objects/Specific/Medical/implant-adrenal.rsi, state: adrenal}
+  productEntity: AdrenalImplanter
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 4
+  cost:
+    Telecrystal: 7
+  categories:
+  - UplinkImplants
+
+- type: listing
   id: ClothingHeadHelmetSwatSyndicate
   name: uplink-helmet-swat-syndicate-name
   description: uplink-helmet-swat-syndicate-desc

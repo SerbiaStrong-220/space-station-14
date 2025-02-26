@@ -460,3 +460,5 @@
   components:
     - type: Foldable
       folded: true
+    - type: Item
+      size: Huge

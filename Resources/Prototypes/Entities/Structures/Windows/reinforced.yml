@@ -133,6 +133,9 @@
   - type: RCDDeconstructable
     deconstructable: false
   # ss220 rcd upd end
+  - type: Tag
+    tags:
+    - Diagonal
   - type: IconSmooth
     mode: Diagonal
     key: walls  # Corvax-Resprite
