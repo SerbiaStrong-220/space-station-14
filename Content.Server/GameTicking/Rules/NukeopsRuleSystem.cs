@@ -294,7 +294,6 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     //ss220 autogamma update
     private void OnFaxSendAttemptEvent(ref FaxSendAttemptEvent ev)
     {
-
         var query = EntityQueryEnumerator<GameRuleComponent, NukeopsRuleComponent>();
         while (query.MoveNext(out _, out _, out var nukeops))
         {
@@ -303,7 +302,10 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 var warTime = Timing.CurTime.Subtract(nukeops.WarDeclaredTime.Value);
                 if (warTime < nukeops.WarFaxDisabled)
                 {
-                    ev.Cancelled = true;
+                    var nukeShuttle = Transform(ev.FaxEnt).GridUid;
+                    if (!HasComp<NukeOpsShuttleComponent>(nukeShuttle)) // spam to captain from nukeops shuttle muhaha
+                        ev.Cancelled = true;
+
                     return;
                 }
             }

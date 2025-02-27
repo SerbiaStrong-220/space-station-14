@@ -425,7 +425,7 @@ public sealed class FaxSystem : EntitySystem
         RaiseLocalEvent(ref faxEvent);
         if (faxEvent.Cancelled)
         {
-            _popupSystem.PopupEntity("fax-machine-popup-copy-error", uid, PopupType.SmallCaution);
+            _popupSystem.PopupEntity(Loc.GetString("fax-machine-popup-copy-error"), uid, PopupType.SmallCaution);
             return;
         }
         //ss220 autogamma update
