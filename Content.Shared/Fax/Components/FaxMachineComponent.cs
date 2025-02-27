@@ -166,3 +166,14 @@ public sealed partial class FaxPrintout
         MetaData = metaData;
     }
 }
+
+//ss220 autogamma update
+[ByRefEvent]
+public record struct FaxSendAttemptEvent(EntityUid  FaxEnt, string DestinationFaxAddress, string SenderFaxAddress)
+{
+    public bool Cancelled = false;
+    public EntityUid FaxEnt = FaxEnt;
+    public string DestinationFaxAddress = DestinationFaxAddress;
+    public string SenderFaxAddress = SenderFaxAddress;
+}
+//ss220 autogamma update

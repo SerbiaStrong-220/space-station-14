@@ -30,6 +30,7 @@ using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
 using Content.Server.Maps;
 using Content.Server.Station.Systems;
+using Content.Shared.Fax.Components;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -72,6 +73,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         SubscribeLocalEvent<ConsoleFTLAttemptEvent>(OnShuttleFTLAttempt);
         SubscribeLocalEvent<WarDeclaredEvent>(OnWarDeclared);
         SubscribeLocalEvent<CommunicationConsoleCallShuttleAttemptEvent>(OnShuttleCallAttempt);
+        SubscribeLocalEvent<FaxSendAttemptEvent>(OnFaxSendAttemptEvent); //ss220 autogamma update
 
         SubscribeLocalEvent<NukeopsRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagEntSelected);
         SubscribeLocalEvent<NukeopsRuleComponent, RuleLoadedGridsEvent>(OnRuleLoadedGrids);
@@ -287,6 +289,26 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             }
         }
     }
+
+    //ss220 autogamma update
+    private void OnFaxSendAttemptEvent(ref FaxSendAttemptEvent ev)
+    {
+
+        var query = EntityQueryEnumerator<GameRuleComponent, NukeopsRuleComponent>(); // SS220 Lone-Ops-War
+        while (query.MoveNext(out _, out _, out var nukeops))
+        {
+            if (nukeops is { WarDeclaredTime: not null })
+            {
+                var warTime = Timing.CurTime.Subtract(nukeops.WarDeclaredTime.Value);
+                if (warTime < nukeops.WarFaxDisabled)
+                {
+                    ev.Cancelled = true;
+                    return;
+                }
+            }
+        }
+    }
+    //ss220 autogamma update
 
     private void OnShuttleFTLAttempt(ref ConsoleFTLAttemptEvent ev)
     {

@@ -31,6 +31,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Shared.NameModifier.Components;
+using Content.Shared.Popups;
 using Content.Shared.Power;
 
 namespace Content.Server.Fax;
@@ -419,7 +420,17 @@ public sealed class FaxSystem : EntitySystem
         if (dataToCopy.Count == 0)
             return;
 
-        TryComp<NameModifierComponent>(sendEntity, out var nameMod);
+        //ss220 autogamma update
+        var faxEvent = new FaxSendAttemptEvent(uid, component.DestinationFaxAddress, component.FaxName);
+        RaiseLocalEvent(ref faxEvent);
+        if (faxEvent.Cancelled)
+        {
+            _popupSystem.PopupEntity("fax-machine-popup-copy-error", uid, PopupType.SmallCaution);
+            return;
+        }
+        //ss220 autogamma update
+
+    TryComp<NameModifierComponent>(sendEntity, out var nameMod);
 
         TryComp<LabelComponent>(sendEntity, out var labelComponent);
 
