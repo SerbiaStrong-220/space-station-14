@@ -46,6 +46,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly AlertLevelSystem _alertLevel = default!; //ss220 nukeops autogamma
     [Dependency] private readonly StationSystem _station = default!; //ss220 nukeops autogamma
+    [Dependency] private readonly GameTicker _gameTicker = default!; //ss220 nukeops autogamma
 
     [ValidatePrototypeId<CurrencyPrototype>]
     private const string TelecrystalCurrencyPrototype = "Telecrystal";
@@ -294,7 +295,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     private void OnFaxSendAttemptEvent(ref FaxSendAttemptEvent ev)
     {
 
-        var query = EntityQueryEnumerator<GameRuleComponent, NukeopsRuleComponent>(); // SS220 Lone-Ops-War
+        var query = EntityQueryEnumerator<GameRuleComponent, NukeopsRuleComponent>();
         while (query.MoveNext(out _, out _, out var nukeops))
         {
             if (nukeops is { WarDeclaredTime: not null })
@@ -381,6 +382,12 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 foreach (var station in _station.GetStations())
                 {
                     _alertLevel.SetLevel(station, "gamma", true, true, true);
+                }
+                var shedulerQuery = EntityQueryEnumerator<GameRuleComponent, BasicStationEventSchedulerComponent>();
+                while (shedulerQuery.MoveNext(out var ent, out var gameRuleComp, out _))
+                {
+                    _gameTicker.EndGameRule(ent, gameRuleComp); // shutdown all inappropriate events during the war
+                    //I don't know how to do it any other way, maybe I'm just dumb ^_^
                 }
                 //ss220 nukeops autogamma
             }
