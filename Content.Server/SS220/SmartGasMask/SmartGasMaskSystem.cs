@@ -5,11 +5,13 @@ using Content.Shared.Actions;
 using Content.Shared.Clothing;
 using Content.Shared.SS220.SmartGasMask;
 using Content.Shared.SS220.SmartGasMask.Events;
-using Robust.Shared.Audio.Systems;
+using Content.Shared.SS220.SmartGasMask.Prototype;
+using Robust.Server.Audio;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.SS220.SmartGasMask;
 
@@ -19,13 +21,14 @@ namespace Content.Server.SS220.SmartGasMask;
 public sealed class SmartGasMaskSystem : EntitySystem
 {
     [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly NavMapSystem _navMap = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
-    /// <inheritdoc/>
     public override void Initialize()
     {
         SubscribeLocalEvent<SmartGasMaskComponent, SmartGasMaskOpenEvent>(OnAction);
@@ -56,30 +59,57 @@ public sealed class SmartGasMaskSystem : EntitySystem
 
     private void OnChoose(Entity<SmartGasMaskComponent> ent, ref SmartGasMaskMessage args)
     {
+        var curTime = _timing.CurTime;
 
-        if (args.ProtoId == ent.Comp.SelectablePrototypes[0] && !ent.Comp.OnCdHalt) //AlertSmartGasMaskHalt
+        if (!_prototypeManager.TryIndex(args.ProtoId, out var alertProto))
+                return;
+
+        if (alertProto.NotificationType == NotificationType.Halt && !ent.Comp.HaltInRecharge) //AlertSmartGasMaskHalt
         {
-            ent.Comp.OnCdHalt = true;
+            ent.Comp.HaltInRecharge = true;
 
-            var haltMes = Loc.GetString(_random.Pick(ent.Comp.LocIdHaltMessage));
+            ent.Comp.NextChargeTimeHalt = ent.Comp.WaitingForChargeHalt + curTime;
 
-            _chatSystem.TrySendInGameICMessage(args.Actor, haltMes, InGameICChatType.Speak, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
-            _audio.PlayPvs(ent.Comp.HaltSound, ent.Owner);
+            _audio.PlayPvs(alertProto.AlertSound, ent.Owner);
 
-            Timer.Spawn(ent.Comp.CdTimeHalt, () => ent.Comp.OnCdHalt = false);
+            if(alertProto.LocIdMessage.Count == 0)
+                return;
+
+            var haltMessage = Loc.GetString(_random.Pick(alertProto.LocIdMessage));
+
+            _chatSystem.TrySendInGameICMessage(args.Actor, haltMessage, InGameICChatType.Speak, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
         }
 
-        if (args.ProtoId == ent.Comp.SelectablePrototypes[1] && !ent.Comp.OnCdSupp) //AlertSmartGasMaskSupport
+        if (alertProto.NotificationType == NotificationType.Support && !ent.Comp.SupportInRecharge) //AlertSmartGasMaskSupport
         {
-            ent.Comp.OnCdSupp = true;
+            ent.Comp.SupportInRecharge = true;
 
+            ent.Comp.NextChargeTimeSupport = ent.Comp.WaitingForChargeSupport + curTime;
+
+            if(alertProto.LocIdMessage.Count == 0)
+                return;
+
+            var currentHelpMessage = _random.Pick(alertProto.LocIdMessage);
             var posText = FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString(ent.Owner));
-            var helpMess = Loc.GetString(ent.Comp.LocIdSupportMessage, ("user", args.Actor), ("position", posText));
+            var helpMessage = Loc.GetString(currentHelpMessage, ("user", args.Actor), ("position", posText));
 
             //The message is sent with a prefix ".о". This is necessary so that everyone understands that reinforcements have been called in
-            _chatSystem.TrySendInGameICMessage(args.Actor, helpMess, InGameICChatType.Whisper, ChatTransmitRange.Normal, checkRadioPrefix: true, ignoreActionBlocker: true);
+            _chatSystem.TrySendInGameICMessage(args.Actor, helpMessage, InGameICChatType.Whisper, ChatTransmitRange.Normal, checkRadioPrefix: true, ignoreActionBlocker: true);
+        }
+    }
 
-            Timer.Spawn(ent.Comp.CdTimeSupp, () => ent.Comp.OnCdSupp = false);
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<SmartGasMaskComponent>();
+        var curTime = _timing.CurTime;
+
+        while (query.MoveNext(out var smartGasMaskComp))
+        {
+            if (smartGasMaskComp.HaltInRecharge && curTime >= smartGasMaskComp.NextChargeTimeHalt)
+                smartGasMaskComp.HaltInRecharge = false;
+
+            if (smartGasMaskComp.SupportInRecharge && curTime >= smartGasMaskComp.NextChargeTimeSupport)
+                smartGasMaskComp.SupportInRecharge = false;
         }
     }
 }

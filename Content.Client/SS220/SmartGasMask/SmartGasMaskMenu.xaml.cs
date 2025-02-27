@@ -39,12 +39,11 @@ public sealed partial class SmartGasMaskMenu : RadialMenu
 
         foreach (var smartProtoString in comp.SelectablePrototypes)
         {
-            if (!_prototypeManager.TryIndex<AlertSmartGasMaskPrototype>(smartProtoString, out var alertProto))
+            if (!_prototypeManager.TryIndex(smartProtoString, out var alertProto))
                 continue;
 
             var button = new SmartGasMaskMenuButton()
             {
-                StyleClasses = { "RadialMenuButton" },
                 SetSize = new Vector2(64, 64),
                 ToolTip = Loc.GetString(alertProto.Name),
             };
@@ -72,7 +71,7 @@ public sealed partial class SmartGasMaskMenu : RadialMenu
     }
 }
 
-public sealed class SmartGasMaskMenuButton : RadialMenuTextureButton
+public sealed class SmartGasMaskMenuButton : RadialMenuTextureButtonWithSector
 {
 }
 

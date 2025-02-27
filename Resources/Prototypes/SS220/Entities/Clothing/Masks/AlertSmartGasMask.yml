@@ -2,8 +2,13 @@
   id: AlertSmartGasMaskSupport
   name: alert-smart-gas-mask-support
   iconPrototype: ClothingMaskGasSecurity
+  notificationType: Support
+  locIdMessage: ["smartgasmask-support-message"]
 
 - type: alertSmartGasMask
   id: AlertSmartGasMaskHalt
   name: alert-smart-gas-mask-halt
   iconPrototype: ClothingMaskGasSecurity
+  notificationType: Halt
+  alertSound: /Audio/SS220/Items/SmartGasMask/sound_voice_complionator_halt.ogg
+  locIdMessage: ["smartgasmask-halt-message-1", "smartgasmask-halt-message-2", "smartgasmask-halt-message-3"]
