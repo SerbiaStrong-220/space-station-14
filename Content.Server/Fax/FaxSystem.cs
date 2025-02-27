@@ -430,8 +430,7 @@ public sealed class FaxSystem : EntitySystem
         }
         //ss220 autogamma update
 
-    TryComp<NameModifierComponent>(sendEntity, out var nameMod);
-
+        TryComp<NameModifierComponent>(sendEntity, out var nameMod);
         TryComp<LabelComponent>(sendEntity, out var labelComponent);
 
         var payload = new NetworkPayload()
