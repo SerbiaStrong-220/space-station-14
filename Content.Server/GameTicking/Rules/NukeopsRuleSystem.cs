@@ -31,6 +31,7 @@ using Robust.Shared.Prototypes;
 using Content.Server.Maps;
 using Content.Server.Station.Systems;
 using Content.Shared.Fax.Components;
+using Content.Server.DeviceNetwork.Components;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -292,19 +293,29 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     }
 
     //ss220 autogamma update
-    private void OnFaxSendAttemptEvent(ref FaxSendAttemptEvent ev)
+    private void OnFaxSendAttemptEvent(FaxSendAttemptEvent ev)
     {
-        var query = EntityQueryEnumerator<GameRuleComponent, NukeopsRuleComponent>();
-        while (query.MoveNext(out _, out _, out var nukeops))
+        var faxQuery = EntityQueryEnumerator<FaxMachineComponent, DeviceNetworkComponent>();
+        while (faxQuery.MoveNext(out var uid, out _, out var deviceNetwork))
+        {
+            //we still want to to communicate by fax within the map
+            if (ev.DestinationFaxAddress == deviceNetwork.Address &&
+             Transform(uid).MapUid == Transform(ev.FaxEnt).MapUid)
+                return;
+        }
+
+        var nukeQuery = EntityQueryEnumerator<GameRuleComponent, NukeopsRuleComponent>();
+        while (nukeQuery.MoveNext(out _, out _, out var nukeops))
         {
             if (nukeops is { WarDeclaredTime: not null })
             {
                 var warTime = Timing.CurTime.Subtract(nukeops.WarDeclaredTime.Value);
                 if (warTime < nukeops.WarFaxDisabled)
                 {
+
                     var nukeShuttle = Transform(ev.FaxEnt).GridUid;
                     if (!HasComp<NukeOpsShuttleComponent>(nukeShuttle)) // spam to captain from nukeops shuttle muhaha
-                        ev.Cancelled = true;
+                        ev.Cancel();
 
                     return;
                 }

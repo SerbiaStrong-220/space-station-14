@@ -422,7 +422,7 @@ public sealed class FaxSystem : EntitySystem
 
         //ss220 autogamma update
         var faxEvent = new FaxSendAttemptEvent(uid, component.DestinationFaxAddress, component.FaxName);
-        RaiseLocalEvent(ref faxEvent);
+        RaiseLocalEvent(faxEvent);
         if (faxEvent.Cancelled)
         {
             _popupSystem.PopupEntity(Loc.GetString("fax-machine-popup-copy-error"), uid, PopupType.SmallCaution);
@@ -430,7 +430,7 @@ public sealed class FaxSystem : EntitySystem
         }
         //ss220 autogamma update
 
-        TryComp<NameModifierComponent>(sendEntity, out var nameMod);
+        TryComp<NameModifierComponent>(sendEntity, out var nameMod); //ss220 autogamma update
         TryComp<LabelComponent>(sendEntity, out var labelComponent);
 
         var payload = new NetworkPayload()
