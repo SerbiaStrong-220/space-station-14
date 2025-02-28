@@ -311,3 +311,17 @@
     blacklist:
       components:
       - SurplusBundle
+
+- type: listing
+  id: UplinkBriefCaseDoubleBottom
+  name: uplink-clothing-briefcase-with-double-bottom-name
+  description: uplink-clothing-briefcase-with-double-bottom-desc
+  icon: { sprite: Objects/Storage/Briefcases/briefcase_brown.rsi, state: icon }
+  productEntity: BriefcaseHiddenSlot
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkWearables
