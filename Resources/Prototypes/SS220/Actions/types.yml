@@ -20,5 +20,5 @@
     icon: { sprite: SS220/Interface/Actions/actions_meme.rsi, state: goal }
     event: !type:ShoutActionEvent
       shoutSound:
-        path: /Audio/SS220/Voice/Goal/gooool.ogg
+        collection: WyccGoalShout
       shoutPhrases: goalPhrases
