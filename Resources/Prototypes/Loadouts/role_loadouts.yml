@@ -31,9 +31,15 @@
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 
 # Silicons
+#- type: roleLoadout
+#  id: JobBorg
+#  nameDataset: roleloadout doesn't support both so need to update that first.
+#  canCustomizeName: true
+
 - type: roleLoadout
   id: JobStationAi
   nameDataset: ai_names # SS220 Fix II Dataset
+  canCustomizeName: false
 
 - type: roleLoadout
   id: JobStationBorg
@@ -420,6 +426,7 @@
   - SecurityJumpsuit
   - SecurityBackpack
   - SecurityOuterClothing
+  - SecurityGloves #SS220-tacsec loadout
   - SecurityShoes
   - SecurityPDA
   - SecurityBelt
@@ -432,13 +439,12 @@
 - type: roleLoadout
   id: JobDetective
   groups:
-  - GroupTankHarness
   - DetectiveHead
   # - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit
   - DetectiveSecBackpack #ss220 backpack noir
   - DetectiveOuterClothing
-  - SecurityShoes
+  - DetectiveShoes #SS220 dec-lux-shoes
   - SurvivalSecurity
   - Trinkets
   - SecurityStar
@@ -460,7 +466,7 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
-  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
+  - ChiefMedicalOfficerGlasses #SS220-TwoOne-Floppa-Iteration / ss220 cmo new
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
   - MedicalGloves
@@ -536,6 +542,7 @@
   - MedicalBackpack
   - ParamedicOuterClothing
   - ParamedicShoes
+  - ParamedicBelt #ss220 ParamedInterdyne
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - SurvivalMedical
   - Trinkets

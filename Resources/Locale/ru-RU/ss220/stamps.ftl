@@ -34,4 +34,5 @@ stamp-component-stamped-name-fake-cmo = Главсрач
 
 # Clown Fake Stamped End
 
+stamp-component-stamped-name-DoAP = Департамент защиты активов
 stamp-component-stamped-name-blue-shield = Синий Щит

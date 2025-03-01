@@ -13,6 +13,7 @@
       - Crayon
       - Paper
       - Bread
+      - Omnivorous #SS220 CultYoggs
   - type: SolutionContainerManager
     solutions:
       stomach:

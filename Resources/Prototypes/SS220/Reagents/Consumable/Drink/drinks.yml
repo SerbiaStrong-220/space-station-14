@@ -104,3 +104,43 @@
       effects:
       - !type:SatiateThirst
         factor: 1
+
+#SpicyUPD
+- type: reagent
+  id: ReaperSauce
+  name: reagent-name-ReaperSauce
+  parent: BaseDrink
+  desc: reagent-desc-ReaperSauce
+  physicalDesc: reagent-physical-desc-pungent
+  flavor: savory
+  color: "#790c0c"
+  recognizable: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+      - !type:AdjustReagent
+        reagent: Nutriment
+        amount: 2.0
+    Poison:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: -1
+      - !type:AdjustTemperature
+        conditions:
+        - !type:Temperature
+          max: 359.0
+        amount: 100000
+      - !type:AdjustTemperature
+        conditions:
+        - !type:Temperature 
+          min: 293.15
+        amount: -10000
+      - !type:PopupMessage
+        visualType: MediumCaution   
+        type: Local
+        messages: [ "capsaicin-effect-heavy-burn" ]
+        probability: 0.4

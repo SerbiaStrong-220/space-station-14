@@ -11,7 +11,6 @@
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/secvisor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/secvisor.rsi
-  - type: VisionCorrection
 
 - type: entity
   parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesMeson ]
@@ -23,7 +22,6 @@
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/engivisor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/engivisor.rsi
-  - type: VisionCorrection
 
 - type: entity
   parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesHudMedical ]
@@ -35,7 +33,6 @@
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/medvisor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/medvisor.rsi
-  - type: VisionCorrection
 
 - type: entity
   parent: [ ClothingSponsorEyesBaseUnshaded, ClothingEyesGlassesChemical ]
@@ -47,7 +44,6 @@
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/chemvisor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/chemvisor.rsi
-  - type: VisionCorrection
 
 - type: entity
   parent: ClothingSponsorEyesBaseUnshaded
@@ -59,4 +55,3 @@
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/civvisor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Eyes/Hud/CyberPunk/civvisor.rsi
-  - type: VisionCorrection

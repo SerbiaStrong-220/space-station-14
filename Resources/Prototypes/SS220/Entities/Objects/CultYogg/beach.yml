@@ -1,0 +1,40 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: beach
+  parent: [BaseItem, CultYoggRestrictedItem]
+  id: BeachCultYogg
+  suffix: CultYogg
+  description: description
+  components:
+  - type: CultYoggWeapon
+    item: CultYoggCocoonBeach
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/CultYogg/cult_yogg_beach.rsi
+    state: icon
+  - type: Item
+    size: Ginormous
+    inhandVisuals:
+      left:
+      - state: inhand-left
+#      - state: inhand-left-vox
+      right:
+      - state: inhand-right
+#      - state: inhand-right-vox
+  - type: StuckOnEquip
+    inHandItem: true
+  - type: MeleeWeapon
+    soundHit: /Audio/SS220/Weapons/Melee/CultYogg/beach_hit.ogg
+    soundSwing: /Audio/SS220/Weapons/Melee/CultYogg/beach_swing.ogg
+    wideAnimationRotation: -135
+    attackRate: 1
+    range: 1.5
+    angle: 100
+    damage:
+      types:
+        Poison: 5
+        Blunt: 17
+        Structural: 5
+  - type: DisarmOnAttack
+    chance: 0.6
+    heavyAttackChance: 0.2

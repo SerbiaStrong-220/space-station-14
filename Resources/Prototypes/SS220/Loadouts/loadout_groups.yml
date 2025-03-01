@@ -133,11 +133,28 @@
 - type: loadoutGroup
   id: LawyerOuterclothing
   name: loadout-group-lawyer-outerclothing
+  minLimit: 0
   loadouts:
   - OuterClothingJujutsuShlepa
   # Адвокат (Конец)
 
   # Офицер "Синий Щит" (Начало)
+- type: loadoutGroup
+  id: BlueShieldHead
+  name: loadout-group-blueshield-head
+  minLimit: 0
+  loadouts:
+  - BlueshieldBeret
+  - BlueshieldBlueBeret
+
+- type: loadoutGroup
+  id: BlueShieldGlasses
+  name: loadout-group-blueshield-glasses
+  minLimit: 1
+  loadouts:
+  - BlueshieldGlasses
+  - BlueshieldTacticGlasses
+
 - type: loadoutGroup
   id: BlueShieldNeck
   name: loadout-group-blueshield-neck
@@ -145,23 +162,41 @@
   loadouts:
   - SecurityHolster
   - Headphones
-  - ProtectGear
+  - ProtectGearBlue
   - BlueShieldNeckCloak
 
 - type: loadoutGroup
   id: BlueShieldJumpsuit
   name: loadout-group-blueshield-jumpsuit
   loadouts:
-  - BlueShieldJumpsuit
-  - BlueShieldJumpsuit2
+  - BlueShieldCombez
+  - BlueShieldJumpsuitOperative
+  - BlueShieldJumpsuitShirt
   - BlueShieldJumpsuitTurtle
+  - BlueShieldJumpsuitTShirt
+  - BlueShieldJumpsuitCombat
 
 - type: loadoutGroup
   id: BlueShieldOuterclothing
   name: loadout-group-blueshield-outerclothing
   loadouts:
-  - BlueShieldArmorBulletproof
-  - BlueShieldSRTCoat
+  - BlueShieldArmorAssault
+  - BlueShieldArmorScale
+  - BlueShieldOperativeCoat
+
+- type: loadoutGroup
+  id: BlueShieldBelt
+  name: loadout-group-blueshield-belt
+  loadouts:
+  - BlueshieldBelt
+  - BlueshieldWebbing
+
+- type: loadoutGroup
+  id: BlueShieldBackpack
+  name: loadout-group-blueshield-backpack
+  hidden: true
+  loadouts:
+  - BlueShieldBackpack
   # Офицер "Синий Щит" (Конец)
 #! Юридический (Конец)
 
@@ -191,6 +226,7 @@
   loadouts:
   - GlassesSecurity
   - CyberGlassesSecurity
+  - GlassesBallistic
 
 - type: loadoutGroup
   id: DetectiveSecBackpack
@@ -200,6 +236,13 @@
     - SecuritySatchel
     - SecurityDuffel
     - DetectiveNoirSatchel
+
+- type: loadoutGroup
+  id: SecurityGloves
+  name: loadout-group-security-gloves
+  minLimit: 0
+  loadouts:
+  - GlovesSecTactical
   # Офицер СБ (Конец)
 
   # Инструктор СБ (Начало)
@@ -221,7 +264,30 @@
   - SecurityBeret
   - SecurityHat
   - PilotCapCap
+
+- type: loadoutGroup
+  id: SecurityPilotOuterClothing
+  name: loadout-group-security-pilot-outerclothing
+  loadouts:
+  - ArmorVest
+  - ArmorVestSlim
+  - SecurityOfficerWintercoat
+  - CoatSecurityOvercoat
+  - SecBomber
+  - VestArmorSec
+  - CyberVestSecurity
   # Пилот (Конец)
+
+  # Детектив (Начало)
+- type: loadoutGroup
+  id: DetectiveShoes
+  name: loadout-group-detective-shoes
+  loadouts:
+  - JackBoots
+  - SecurityWinterBoots
+  - BootsJackSec
+  - DetectiveShoesBootsLaceup
+  # Детектив (Конец)
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -239,6 +305,7 @@
   - TrackerExpertNeck
   - AdministratorNeck
   - HeadDeveloperNeck
+  - WikiEditorsNeck
   # Главный врач (Конец)
 
   # Ведущий врач (Начало)
@@ -401,6 +468,24 @@
   - GlassesChemical
   - CyberRnDVisor
   # Химик (Конец)
+
+  # Парамедик (начало)
+- type: loadoutGroup
+  id: ParamedicBelt
+  name: loadout-group-paramedic-belt
+  loadouts:
+  - ParamedicBaseBelt
+  - ParamedInterdyneBelt
+  # Парамедик (конец)
+
+  # Главный врач (Начало)
+- type: loadoutGroup
+  id: ChiefMedicalOfficerGlasses
+  name: loadout-group-chief-medical-officer-eyes
+  loadouts:
+  - Glasses
+  - CyberMedVisor
+  - CMOCorpGlasses
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -468,6 +553,8 @@
   loadouts:
   - SeniorSciensistJumpsuit
   - SeniorSciensistJumpskirt
+  - SeniorSciensistJumpsuitAssociateProfessor #SS220-loadout-academy
+  - SeniorSciensistJumpskirtAssociateProfessor #SS220-loadout-academy
 
 - type: loadoutGroup
   id: SeniorSciensistOuterClothing
@@ -557,7 +644,7 @@
 - type: loadoutGroup
   id: MusicianShoes
   name: loadout-group-musician-shoes
-  minLimit: 0
+  # minLimit: 0
   loadouts:
   - MusicianBootsLaceup
   - BardShoes
@@ -630,9 +717,10 @@
 - type: loadoutGroup
   id: ServiceWorkerJumpsuit
   name: loadout-group-service-worker-jumpsuit
-  hidden: true
   loadouts:
   - ServiceWorkerWaiter
+  - ServiceWorkerWaitress
+
   # Сервисный работник (Конец)
 
 #! Сервис (Конец)

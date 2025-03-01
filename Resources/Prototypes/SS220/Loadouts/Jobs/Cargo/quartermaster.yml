@@ -43,6 +43,14 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitWarehouseman
 
+- type: loadout
+  id: QuartermasterJumpskirtWarehouseman
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Warehouseman
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtWarehouseman
+
 # Outerclothing
 
 - type: loadout

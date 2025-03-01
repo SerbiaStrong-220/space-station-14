@@ -5,7 +5,6 @@
   mapName: 'NSS Eclipse'
   mapPath: /Maps/SS220/eclipse.yml
   minPlayers: 40
-  maxPlayers: 85
   stations:
     Eclipse:
       stationProto: EclipseNanotrasenStation

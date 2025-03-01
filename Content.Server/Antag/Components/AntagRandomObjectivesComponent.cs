@@ -21,6 +21,11 @@ public sealed partial class AntagRandomObjectivesComponent : Component
     /// </summary>
     [DataField(required: true)]
     public float MaxDifficulty;
+
+    // SS220 reinforcement objective fix begin
+    [DataField]
+    public bool Enabled = true;
+    // SS220 reinforcement objective fix end
 }
 
 /// <summary>

@@ -8,3 +8,5 @@ supermatter-emitter-extension-energy-none = Н/Д эрг.
 supermatter-emitter-extension-changes-saved = Конфигурация загружена
 supermatter-emitter-extension-changes-unsaved = Конфигурация изменена
 supermatter-emitter-extension-submit = Применить
+supermatter-emitter-extension-activated-emitter = Включен
+supermatter-emitter-extension-deactivated-emitter = Выключен

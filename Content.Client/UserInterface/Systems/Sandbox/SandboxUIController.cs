@@ -1,15 +1,15 @@
+using System.Numerics;
 using Content.Client.Administration.Managers;
 using Content.Client.Gameplay;
 using Content.Client.Markers;
 using Content.Client.Sandbox;
+using Content.Client.SS220.MapEditor;
 using Content.Client.SubFloor;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.DecalPlacer;
 using Content.Client.UserInterface.Systems.Sandbox.Windows;
 using Content.Shared.Input;
-using Content.Shared.Silicons.StationAi;
 using JetBrains.Annotations;
-using Robust.Client.Console;
 using Robust.Client.Debugging;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -46,7 +46,7 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
 
     // TODO hud refactor cache
     private EntitySpawningUIController EntitySpawningController => UIManager.GetUIController<EntitySpawningUIController>();
-    private TileSpawningUIController TileSpawningController => UIManager.GetUIController<TileSpawningUIController>();
+    private TileSpawningUIController220 TileSpawningController => UIManager.GetUIController<TileSpawningUIController220>(); // SS220 Own tile spawning window
     private DecalPlacerUIController DecalPlacerController => UIManager.GetUIController<DecalPlacerUIController>();
 
     private MenuButton? SandboxButton => UIManager.GetActiveUIWidgetOrNull<MenuBar.Widgets.GameTopMenuBar>()?.SandboxButton;
@@ -109,9 +109,13 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
 
     private void EnsureWindow()
     {
-        if(_window is { Disposed: false })
+        if (_window is { Disposed: false })
             return;
         _window = UIManager.CreateWindow<SandboxWindow>();
+        // Pre-center the window without forcing it to the center every time.
+        _window.OpenCentered();
+        _window.Close();
+
         _window.OnOpen += () => { SandboxButton!.Pressed = true; };
         _window.OnClose += () => { SandboxButton!.Pressed = false; };
         _window.ToggleLightButton.Pressed = !_light.Enabled;
@@ -149,7 +153,6 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
         _window.ToggleSubfloorButton.OnPressed += _ => _sandbox.ToggleSubFloor();
         _window.ShowMarkersButton.OnPressed += _ => _sandbox.ShowMarkers();
         _window.ShowBbButton.OnPressed += _ => _sandbox.ShowBb();
-        _window.MachineLinkingButton.OnPressed += _ => _sandbox.MachineLinking();
     }
 
     private void UpdateFovButtomState()
@@ -180,7 +183,7 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
     {
         if (_window != null)
         {
-            _window.Dispose();
+            _window.Close();
             _window = null;
         }
 
@@ -249,7 +252,7 @@ public sealed class SandboxUIController : UIController, IOnStateChanged<Gameplay
         if (_sandbox.SandboxAllowed && _window.IsOpen != true)
         {
             UIManager.ClickSound();
-            _window.OpenCentered();
+            _window.Open();
         }
         else
         {

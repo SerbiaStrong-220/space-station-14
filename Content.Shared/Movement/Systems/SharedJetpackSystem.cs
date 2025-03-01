@@ -87,7 +87,7 @@ public abstract class SharedJetpackSystem : EntitySystem
     private void OnJetpackUserEntParentChanged(EntityUid uid, JetpackUserComponent component, ref EntParentChangedMessage args)
     {
         if (TryComp<JetpackComponent>(component.Jetpack, out var jetpack) &&
-            !CanEnableOnGrid(args.Transform.GridUid))
+            (!CanEnableOnGrid(args.Transform.GridUid) || !CheckMagboots(uid))) // SS220 Magboots with jet fix
         {
             SetEnabled(component.Jetpack, jetpack, false, uid);
 
@@ -122,18 +122,21 @@ public abstract class SharedJetpackSystem : EntitySystem
         if (args.Handled)
             return;
 
+        //ss220 magboots with jet on gravity fix start
+        if (!TryComp(uid, out TransformComponent? xform))
+            return;
+        //ss220 magboots with jet on gravity fix end
+
         //SS220 Magboots with jet fix begin
+        if (!CheckMagboots(args.Performer))
+        {
+            _popup.PopupClient(Loc.GetString("jetpack-no-magboots-on-grid"), uid, args.Performer);
+            return;
+        }
+
         var slotEnumerator = _inventory.GetSlotEnumerator(args.Performer);
         while (slotEnumerator.NextItem(out var item))
         {
-            if (HasComp<MagbootsComponent>(item) &&
-                TryComp<ItemToggleComponent>(item, out var itemToggle) &&
-                itemToggle.Activated)
-            {
-                _popup.PopupClient(Loc.GetString("jetpack-no-magboots"), uid, args.Performer);
-                return;
-            }
-
             // SS220 FIX JETPACK CAMERA START (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1746)
             if (TryComp<BuckleComponent>(args.Performer, out var buckleComponent) && buckleComponent.BuckledTo != null)
             {
@@ -151,12 +154,14 @@ public abstract class SharedJetpackSystem : EntitySystem
         }
         //SS220 Magboots with jet fix end
 
-        if (TryComp(uid, out TransformComponent? xform) && !CanEnableOnGrid(xform.GridUid))
+        //ss220 magboots with jet on gravity fix start
+        if (!CanEnableOnGrid(xform.GridUid))
         {
             _popup.PopupClient(Loc.GetString("jetpack-no-station"), uid, args.Performer);
 
             return;
         }
+        //ss220 magboots with jet on gravity fix end
 
         SetEnabled(uid, component, !IsEnabled(uid));
     }
@@ -173,6 +178,32 @@ public abstract class SharedJetpackSystem : EntitySystem
         return !comp.Enabled;
         //SS220 Fix jet in zero gravity end
     }
+
+    // SS220 Magboots with jet fix begin
+    /// <summary>
+    ///     Checks whether the entity can use jet with magboots
+    /// </summary>
+    /// <returns>
+    ///     true if entity can use jet with magboots
+    /// </returns>
+    private bool CheckMagboots(EntityUid user)
+    {
+        var xform = Transform(user);
+        if (xform.GridUid is null)
+            return true;
+
+        var slotEnumerator = _inventory.GetSlotEnumerator(user);
+        while (slotEnumerator.NextItem(out var item))
+        {
+            if (HasComp<MagbootsComponent>(item) &&
+                TryComp<ItemToggleComponent>(item, out var itemToggle) &&
+                itemToggle.Activated)
+                return false;
+        }
+
+        return true;
+    }
+    // SS220 Magboots with jet fix end
 
     private void OnJetpackGetAction(EntityUid uid, JetpackComponent component, GetItemActionsEvent args)
     {

@@ -9,7 +9,7 @@
     netsync: false
     noRot: true
     drawdepth: Mobs
-    scale: 0.8, 0.8
+    scale: 0.85, 0.85
     layers:
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
       - map: [ "enum.HumanoidVisualLayers.Head" ]
@@ -67,7 +67,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.30
-        density: 160
+        density: 185
         restitution: 0.0
         mask:
         - MobMask
@@ -124,7 +124,7 @@
     netsync: false
     noRot: true
     drawdepth: Mobs
-    scale: 1, 1
+    scale: 0.85, 0.85
     layers:
       # TODO BODY Turn these into individual body parts?
         - map: [ "enum.HumanoidVisualLayers.Chest" ]

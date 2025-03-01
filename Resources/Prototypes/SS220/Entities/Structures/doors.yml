@@ -74,8 +74,8 @@
 
 - type: entity
   parent: AirlockGlassCentcomm
-  id: AirlockGlassCentcommLockedGSN
-  suffix: ЦК, Закрыто, ГСН
+  id: AirlockGlassCentcommLockedBlueShieldOperative
+  suffix: ЦК, Закрыто, Оперативник "Синий Щит"
   components:
   - type: ContainerFill
     containers:
@@ -110,7 +110,7 @@
     layoutId: AirlockCommand
 
 - type: entity
-  parent: Airlock
+  parent: AirlockCentcomm
   id: AirlockCentcommLocked
   suffix: ЦК, Закрыто, Общий
   components:
@@ -122,8 +122,8 @@
 
 - type: entity
   parent: AirlockCentcomm
-  id: AirlockCentcommLockedGSN
-  suffix: ЦК, Закрыто, ГСН
+  id: AirlockCentcommLockedBSO
+  suffix: ЦК, Закрыто, Оперативник "Синий Щит"
   components:
   - type: ContainerFill
     containers:
@@ -299,3 +299,15 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsUsspLocked ]
+
+# Maintenance
+- type: entity
+  parent: AirlockMaint
+  id: AirlockMaintCentcommLocked
+  suffix: Centcomm, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommand ]
+  - type: Wires
+    layoutId: AirlockCommand

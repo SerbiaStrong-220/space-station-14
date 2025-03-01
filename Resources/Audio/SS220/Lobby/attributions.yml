@@ -7,3 +7,23 @@
   license: "CC-BY-3.0"
   copyright: "Created by Chaemann for SS220"
   source: "https://github.com/SerbiaStrong-220"
+
+- files: ["bog_hole.ogg"]
+  license: "Custom"
+  copyright: "Created by e6illa for SS220 with help Suno AI: https://suno.com/terms"
+  source: "https://github.com/SerbiaStrong-220"
+
+- files: ["silence_and_you.ogg"]
+  license: "Custom"
+  copyright: "Created by e6illa for SS220 with help Suno AI: https://suno.com/terms"
+  source: "https://github.com/SerbiaStrong-220"
+
+- files: ["station_area.ogg"]
+  license: "Custom"
+  copyright: "Created by e6illa for SS220 with help Suno AI: https://suno.com/terms"
+  source: "https://github.com/SerbiaStrong-220"
+
+- files: ["sky_rocket.ogg"]
+  license: "Custom"
+  copyright: "Created by e6illa for SS220 with help Suno AI: https://suno.com/terms"
+  source: "https://github.com/SerbiaStrong-220"

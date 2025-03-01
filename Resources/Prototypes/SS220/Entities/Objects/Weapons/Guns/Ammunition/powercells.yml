@@ -1,0 +1,45 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BlasterPowerCell
+  id: BlasterPowerCellAlt
+  name: blaster power cell
+  description: It contains a lot more pain than you ever dreamed of.
+  suffix:  Laser
+  components:
+  - type: Battery
+    pricePerJoule: 0.15
+    maxCharge: 2000
+    startingCharge: 2000
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletBlasterAlt
+    fireCost: 100
+
+- type: entity
+  parent: BlasterPowerCell
+  id: BlasterPowerCellDisabler
+  name: blaster power cell
+  description: It contains a lot more pain than you ever dreamed of.
+  suffix: Disabler
+  components:
+  - type: Battery
+    pricePerJoule: 0.15
+    maxCharge: 2000
+    startingCharge: 2000
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletDisablerSmg
+    fireCost: 65
+
+- type: entity
+  parent: BlasterPowerCell
+  id: BlasterPowerCellPulse
+  name: blaster power cell
+  description: It contains a lot more pain than you ever dreamed of.
+  components:
+  - type: Battery
+    pricePerJoule: 0.15
+    maxCharge: 3000
+    startingCharge: 3000
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletBlasterPulse
+    fireCost: 120

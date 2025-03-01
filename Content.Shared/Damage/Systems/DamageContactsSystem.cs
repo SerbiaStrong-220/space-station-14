@@ -40,7 +40,7 @@ public sealed class DamageContactsSystem : EntitySystem
             damaged.NextSecond = _timing.CurTime + TimeSpan.FromSeconds(1);
 
             if (damaged.Damage != null)
-                _damageable.TryChangeDamage(ent, damaged.Damage, interruptsDoAfters: false);
+                _damageable.TryChangeDamage(ent, damaged.Damage, ignoreResistances: damaged.IgnoreResistances, interruptsDoAfters: false); //SS220 Add IgnoreResistances param
         }
     }
 
@@ -102,6 +102,7 @@ public sealed class DamageContactsSystem : EntitySystem
         var damagedByContact = EnsureComp<DamagedByContactComponent>(otherUid);
         damagedByContact.Damage = component.Damage;
 
+        damagedByContact.IgnoreResistances = component.IgnoreResistances; //SS220 Add IgnoreResistances param
         //SS220 Add stand still time begin
         damagedByContact.StandStillTime = component.StandStillTime;
         Dirty(otherUid, damagedByContact);

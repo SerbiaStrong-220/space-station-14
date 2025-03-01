@@ -101,7 +101,10 @@
               SheetSteel1:
                 min: 2
                 max: 4
-  #- type: GuideHelp # TODO - add Tesla Guide
+  - type: GuideHelp
+    guides:
+    - TeslaEngine
+    - SingularityTeslaEngine
 
 - type: entity
   id: TeslaGroundingRod
@@ -126,7 +129,7 @@
         layer:
         - MachineLayer
   - type: Sprite
-    sprite: Structures/Power/Generation/Tesla/coil.rsi
+    sprite: SS220/Structures/Power/Generation/Tesla/coil.rsi #ss220-engineering-update-power
     noRot: true
     snapCardinals: true
     layers:
@@ -184,5 +187,7 @@
               SheetSteel1:
                 min: 2
                 max: 4
-  #- type: GuideHelp # TODO - add Tesla Guide
-
+  - type: GuideHelp
+    guides:
+    - TeslaEngine
+    - SingularityTeslaEngine

@@ -71,6 +71,7 @@
     damage:
       types:
         Piercing: 6
+    angle: 0 #SS220-piercing screwdriver
     soundHit:
       path: "/Audio/Weapons/bladeslice.ogg"
   - type: Tool
@@ -127,6 +128,9 @@
       Steel: 100
   - type: StaticPrice
     price: 22
+  - type: GuideHelp
+    guides:
+    - Construction
 
 - type: entity
   name: multitool
@@ -175,6 +179,12 @@
       Plastic: 100
   - type: StaticPrice
     price: 56
+  - type: GuideHelp
+    guides:
+    - Networking
+    - WirePanels
+    - Airlocks
+    - InspectingPower
 
 - type: entity
   name: network configurator
@@ -225,7 +235,7 @@
       price: 56
     - type: GuideHelp
       guides:
-      - NetworkConfigurator
+      - Networking
 
 #Power tools
 #Later on these should switch probably switch damage when changing the tool behavior.
@@ -292,6 +302,7 @@
   - type: RCD
     availablePrototypes:
     - WallSolid
+    - WallReinforced # ss220 rcd upd
     - FloorSteel
     - Plating
     - Catwalk
@@ -310,10 +321,24 @@
     - HVCable
     - CableTerminal
     - Deconstruct
+  # ss220 rcd upd bgn
+    - StraightPipe
+    - PipeFourway
+    - PipeTjunction
+    - PipeBend
+    - PassiveVent
+    - AirVent
+    - Scrubber
+    - DisposalPipe
+    - DisposalTrunk
+    - DisposalJunction
+    - DisposalJunctionFlipped
+    - DisposalYJunction
+    - DisposalBend
+  # ss220 rcd upd end
   - type: LimitedCharges
     maxCharges: 30
     charges: 30
-  - type: UseDelay
   - type: Sprite
     sprite: Objects/Tools/rcd.rsi
     state: icon
@@ -354,10 +379,10 @@
   suffix: AutoRecharge
   components:
   - type: LimitedCharges
-    maxCharges: 20
-    charges: 20
+    maxCharges: 30 # rcd upd
+    charges: 30 # rcd upd
   - type: AutoRecharge
-    rechargeDuration: 10
+    rechargeDuration: 5 # rcd upd
 
 - type: entity
   id: RCDExperimental

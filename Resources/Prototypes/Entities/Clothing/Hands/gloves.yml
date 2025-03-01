@@ -227,6 +227,7 @@
     stealthy: true
   - type: ToggleClothing
     action: ActionToggleNinjaGloves
+    disableOnUnequip: true
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
@@ -297,7 +298,7 @@
     fiberColor: fibers-black
 
 - type: entity
-  parent: ClothingHandsGlovesCombat
+  parent: [ ClothingHandsGlovesCombat ] # SS220 Remove BaseSecurityCargoContraband
   id: ClothingHandsMercGlovesCombat
   name: mercenary combat gloves
   description: High-quality combat gloves to protect hands from mechanical damage during combat.
@@ -437,11 +438,18 @@
     interfaces:
       enum.MeleeSpeechUiKey.Key:
         type: MeleeSpeechBoundUserInterface
+#SS220 Chameleon tweak begin 
+      enum.ChameleonUiKey.Key:
+        type: ChameleonBoundUserInterface
+  - type: ChameleonClothing
+    slot: [gloves]
+    default: ClothingHandsGlovesNorthStar
+#SS220 Chameleon tweak end 
   - type: StaticPrice
     price: 0
 
 - type: entity
-  parent: ClothingHandsBase
+  parent: [ClothingHandsBase] # SS220 Remove BaseRestrictedContraband
   id: ClothingHandsGlovesForensic
   name: forensic gloves
   description: Do not leave fibers or fingerprints. If you work without them, you're A TERRIBLE DETECTIVE.

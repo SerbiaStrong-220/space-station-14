@@ -18,6 +18,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Content.Server.SS220.UnembedProjectile;
 
 namespace Content.Server.SS220.DarkReaper;
 
@@ -39,6 +40,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly BuckleSystem _buckle = default!;
+    [Dependency] private readonly UnembedProjectileSystem _unembedProjectile = default!;
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("DarkReaper");
 
@@ -67,6 +69,8 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
                 QueueDel(comp.ActivePortal);
                 comp.ActivePortal = null;
             }
+
+            _unembedProjectile.UnembedChildren(uid);
         }
     }
 
@@ -210,6 +214,9 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         if (!comp.MaterializeActionEntity.HasValue)
             _actions.AddAction(uid, ref comp.MaterializeActionEntity, comp.MaterializeAction);
 
+        if (!comp.BloodMistActionEntity.HasValue)
+            _actions.AddAction(uid, ref comp.BloodMistActionEntity, comp.BloodMistAction);
+
         UpdateAlert(uid, comp);
     }
 
@@ -221,6 +228,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         _actions.RemoveAction(uid, comp.StunActionEntity);
         _actions.RemoveAction(uid, comp.ConsumeActionEntity);
         _actions.RemoveAction(uid, comp.MaterializeActionEntity);
+        _actions.RemoveAction(uid, comp.BloodMistActionEntity);
     }
 
     protected override void DoStunAbility(EntityUid uid, DarkReaperComponent comp)

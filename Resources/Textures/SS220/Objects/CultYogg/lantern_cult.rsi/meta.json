@@ -1,0 +1,47 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "Made by ci24v3n (Discord) for SS220",
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "states": [
+          {
+            "name": "lantern"
+          },
+          {
+            "name": "lantern-on"
+          },
+          {
+            "name": "burnt"
+          },
+          {
+            "name": "flashing"
+          },
+          {
+            "name": "off-equipped-BELT",
+            "directions": 4
+          },
+          {
+            "name": "on-equipped-BELT",
+            "directions": 4
+          },
+          {
+            "name": "off-inhand-left",
+            "directions": 4
+          },
+          {
+            "name": "off-inhand-right",
+            "directions": 4
+          },
+          {
+            "name": "on-inhand-left",
+            "directions": 4
+          },
+          {
+            "name": "on-inhand-right",
+            "directions": 4
+          }
+        ]
+      }

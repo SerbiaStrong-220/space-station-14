@@ -46,6 +46,11 @@
     tilesPerEntityStdDev: 4
     entities:
     - id: RandomSpawner
+  # SS220 Fix SM garbage begin
+    blacklist:
+      components:
+        - SuperMatter
+  # SS220 Fix SM garbage end
 
 - type: weightedRandomFillSolution
   id: RandomFillTrashPuddle

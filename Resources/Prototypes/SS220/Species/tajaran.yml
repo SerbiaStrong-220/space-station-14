@@ -23,7 +23,7 @@
   id: MobTajaranSprites
   sprites:
     Head: MobTajaranHead
-    Snout: MobTajaranSnout
+    Snout: MobHumanoidAnyMarking
     Chest: MobTajaranTorso
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
@@ -55,8 +55,9 @@
       required: true
       defaultMarkings: [ TajaranTail ]
     Snout:
-      points: 0
-      required: false
+      points: 1
+      required: true
+      defaultMarkings: [ TajaranSnout ]
     HeadTop:
       points: 1
       required: true
@@ -82,12 +83,6 @@
   baseSprite:
     sprite: SS220/Mobs/Species/Tajaran/parts.rsi
     state: head_f
-
-- type: humanoidBaseSprite
-  id: MobTajaranSnout
-  baseSprite:
-    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
-    state: nose
 
 - type: humanoidBaseSprite
   id: MobTajaranTorso

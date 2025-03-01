@@ -450,11 +450,12 @@
     price: 100
   - type: Gun
     fireRate: 2
+    projectileSpeed: 35 # any higher and this causes issues in lag
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: ProjectileBatteryAmmoProvider
     proto: BulletDisablerPractice
-    fireCost: 100
+    fireCost: 50
   - type: Tag
     tags:
     - Taser
@@ -482,7 +483,7 @@
       - Belt
   - type: ProjectileBatteryAmmoProvider
     proto: BulletDisabler
-    fireCost: 100
+    fireCost: 50
   - type: GuideHelp
     guides:
     - Security
@@ -509,7 +510,7 @@
         shader: unshaded
   - type: Gun
     selectedMode: FullAuto
-    fireRate: 4
+    fireRate: 4.5
     availableModes:
       - SemiAuto
       - FullAuto
@@ -517,7 +518,7 @@
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: ProjectileBatteryAmmoProvider
     proto: BulletDisablerSmg
-    fireCost: 33
+    fireCost: 25
   - type: MagazineVisuals
     magState: mag
     steps: 5
@@ -564,7 +565,7 @@
   name: antique laser pistol
   parent: [BaseWeaponBatterySmall]
   id: WeaponAntiqueLaser
-  description: This is an antique laser pistol. All craftsmanship is of the highest quality. It is decorated with assistant leather and chrome. The object menaces with spikes of energy.
+  description: This is an antique laser pistol. All craftsmanship is of the highest quality. It is decorated with a mahogany grip and chrome filigree. The object menaces with spikes of energy. On the item is an image of a captain and a clown. The clown is dead. The captain is striking a heroic pose.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/antiquelasergun.rsi
@@ -666,12 +667,14 @@
     - proto: RedMediumLaser
       name: firemode-name-laser
       fireCost: 100
-      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      gunModifiers:
+        soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
       magState: laser-mag
     - proto: BulletDisabler
       name: firemode-name-disabler
       fireCost: 100
-      soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+      gunModifiers:
+        soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
       magState: disabler-mag
     #ss220 add stun mode end
   - type: MagazineVisuals
@@ -803,15 +806,15 @@
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: ProjectileBatteryAmmoProvider
     proto: BulletLaserSpread
-    fireCost: 100
+    fireCost: 150
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: BulletLaserSpread
-      fireCost: 100
+      fireCost: 150
     - proto: BulletLaserSpreadNarrow
-      fireCost: 100
+      fireCost: 200
     - proto: BulletDisablerSmgSpread
-      fireCost: 100
+      fireCost: 120
   - type: Item
     size: Large
     shape:
@@ -827,5 +830,10 @@
     #SS220 HOS shotgun removal end
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Battery
-    maxCharge: 800
-    startingCharge: 800
+    maxCharge: 1200
+    startingCharge: 1200
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 24
+    autoRechargePause: true
+    autoRechargePauseTime: 30

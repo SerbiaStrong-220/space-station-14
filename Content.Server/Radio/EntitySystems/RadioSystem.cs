@@ -69,6 +69,13 @@ public sealed class RadioSystem : EntitySystem
     {
         if (TryComp(uid, out ActorComponent? actor))
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
+
+        // SS220 Silicon TTS fix begin
+        if (component.ReceiverEntityOverride is { } receiverOverride && !TerminatingOrDeleted(receiverOverride))
+            args.Receivers.Add(new(uid, new(receiverOverride, 0, 0)));
+        else
+            args.Receivers.Add(new(uid));
+        // SS220 Silicon TTS fix end
     }
 
     /// <summary>
@@ -90,7 +97,7 @@ public sealed class RadioSystem : EntitySystem
         if (!_messages.Add(message))
             return;
 
-        var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);
+        var evt = new TransformSpeakerNameEvent(messageSource, _chat.GetRadioName(messageSource)); //ss220 add identity concealment for chat and radio messages
         RaiseLocalEvent(messageSource, evt);
 
         var name = evt.VoiceName;

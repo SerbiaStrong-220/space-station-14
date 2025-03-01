@@ -1,0 +1,49 @@
+- type: surgeryGraph
+  id: MindSlaveFix
+  start: start
+  end: seal wound
+  graph:
+  - node: start
+    nodeText:
+      examineDescription: surgery-mind-slave-fix-examine-description
+      popup: surgery-mind-slave-fix-popup
+      description: surgery-mind-slave-fix-description
+    edges:
+    - to: incision
+      baseEdge: incision
+  - node: incision
+    baseNode: incision
+    edges:
+    - to: retract skin
+      baseEdge: retract skin
+  - node: retract skin
+    baseNode: retract skin
+    edges:
+    - to: saw bone
+      baseEdge: saw bone
+  - node: saw bone
+    baseNode: saw bone
+    edges:
+    - to: clamp bleeders
+      baseEdge: clamp bleeders
+  - node: clamp bleeders
+    baseNode: clamp bleeders
+    edges:
+    - to: fix disfunction
+      delay: 6
+      sound: /Audio/SS220/Surgery/organ.ogg
+      conditions:
+      - !type:SurgeryHaveComponentCondition
+        component: MindSlaveDisfunctionFixer
+      actions:
+      - !type:SurgeryFixMindSlaveDisfunctionAction
+  - node: fix disfunction
+    nodeText:
+      examineDescription: mind-slave-disfunction-fix-surgery-examine-description
+      popup: mind-slave-disfunction-fix-surgery-popup
+      description: mind-slave-disfunction-fix-surgery-description
+    edges:
+    - to: seal wound
+      baseEdge: seal wound
+  - node: seal wound
+    baseNode: seal wound

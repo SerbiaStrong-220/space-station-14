@@ -6,6 +6,4 @@ chat-radio-omega = Омега
 chat-radio-traders = Торговцы
 chat-radio-honk = Хонк-сквад
 
-chat-radio-hive = Улей
-
 chat-radio-law = Юридический

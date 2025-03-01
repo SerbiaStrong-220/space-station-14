@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by vimenant2 (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "leo_body",
+      "directions": 4
+    },
+    {
+      "name": "leo_hand_l",
+      "directions": 4
+    },
+    {
+      "name": "leo_hand_r",
+      "directions": 4
+    },
+    {
+      "name": "leo_head",
+      "directions": 4
+    },
+    {
+      "name": "leo_leg_l",
+      "directions": 4
+    },
+    {
+      "name": "leo_leg_r",
+      "directions": 4
+    },
+    {
+      "name": "lines_arm_l",
+      "directions": 4
+    },
+    {
+      "name": "lines_arm_r",
+      "directions": 4
+    },
+    {
+      "name": "lines_body",
+      "directions": 4
+    },
+    {
+      "name": "lines_head",
+      "directions": 4
+    },
+    {
+      "name": "lines_leg_l",
+      "directions": 4
+    },
+    {
+      "name": "lines_leg_r",
+      "directions": 4
+    },
+    {
+      "name": "points_arm_l_1",
+      "directions": 4
+    },
+    {
+      "name": "points_arm_l_2",
+      "directions": 4
+    },
+    {
+      "name": "points_arm_r_1",
+      "directions": 4
+    },
+    {
+      "name": "points_arm_r_2",
+      "directions": 4
+    },
+    {
+      "name": "points_back_1",
+      "directions": 4
+    },
+    {
+      "name": "points_back_2",
+      "directions": 4
+    },
+    {
+      "name": "points_head_1",
+      "directions": 4
+    },
+    {
+      "name": "points_head_2",
+      "directions": 4
+    },
+    {
+      "name": "points_leg_l_1",
+      "directions": 4
+    },
+    {
+      "name": "points_leg_l_2",
+      "directions": 4
+    },
+    {
+      "name": "points_leg_r_1",
+      "directions": 4
+    },
+    {
+      "name": "points_leg_r_2",
+      "directions": 4
+    },
+    {
+      "name": "taj_arms_l",
+      "directions": 4
+    },
+    {
+      "name": "taj_arms_r",
+      "directions": 4
+    },
+    {
+      "name": "taj_body",
+      "directions": 4
+    },
+    {
+      "name": "taj_face",
+      "directions": 4
+    },
+    {
+      "name": "taj_hands_l",
+      "directions": 4
+    },
+    {
+      "name": "taj_hands_r",
+      "directions": 4
+    },
+    {
+      "name": "taj_legs_l",
+      "directions": 4
+    },
+    {
+      "name": "taj_legs_r",
+      "directions": 4
+    },
+    {
+      "name": "taj_mouth",
+      "directions": 4
+    },
+    {
+      "name": "taj_paws",
+      "directions": 4
+    },
+    {
+      "name": "leo_tail",
+      "directions": 4
+    },
+    {
+      "name": "lines_tail",
+      "directions": 4
+    },
+    {
+      "name": "points_tail_down",
+      "directions": 4
+    },
+    {
+      "name": "points_tail_up",
+      "directions": 4
+    },
+    {
+      "name": "leo_tail_wagging",
+      "directions": 4,
+      "delays": [
+                [0.1, 0.12, 0.15, 0.15, 0.12, 0.12, 0.12, 0.15, 0.15, 0.12, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.15, 0.12, 0.12, 0.12, 0.15, 0.15, 0.12, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.12, 0.15, 0.12, 0.12, 0.15, 0.12, 0.15, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.12, 0.15, 0.12, 0.12, 0.15, 0.12, 0.15, 0.12, 0.1]
+            ]
+    },
+    {
+      "name": "lines_tail_wagging",
+      "directions": 4,
+      "delays": [
+                [0.1, 0.12, 0.15, 0.15, 0.12, 0.12, 0.12, 0.15, 0.15, 0.12, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.15, 0.12, 0.12, 0.12, 0.15, 0.15, 0.12, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.12, 0.15, 0.12, 0.12, 0.15, 0.12, 0.15, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.12, 0.15, 0.12, 0.12, 0.15, 0.12, 0.15, 0.12, 0.1]
+            ]
+    },
+    {
+      "name": "points_tail_down_wagging",
+      "directions": 4,
+      "delays": [
+                [0.1, 0.12, 0.15, 0.15, 0.12, 0.12, 0.12, 0.15, 0.15, 0.12, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.15, 0.12, 0.12, 0.12, 0.15, 0.15, 0.12, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.12, 0.15, 0.12, 0.12, 0.15, 0.12, 0.15, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.12, 0.15, 0.12, 0.12, 0.15, 0.12, 0.15, 0.12, 0.1]
+            ]
+    },
+    {
+      "name": "points_tail_up_wagging",
+      "directions": 4,
+      "delays": [
+                [0.1, 0.12, 0.15, 0.15, 0.12, 0.12, 0.12, 0.15, 0.15, 0.12, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.15, 0.12, 0.12, 0.12, 0.15, 0.15, 0.12, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.12, 0.15, 0.12, 0.12, 0.15, 0.12, 0.15, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.12, 0.15, 0.12, 0.12, 0.15, 0.12, 0.15, 0.12, 0.1]
+            ]
+    }
+  ]
+}

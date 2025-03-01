@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   id: ServiceWorker
   name: job-name-serviceworker
   description: job-description-serviceworker
@@ -9,7 +9,7 @@
   startingGear: ServiceWorkerGear
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service
-  canBeAntag: true
+  canBeAntag: true #SS220 https://github.com/SerbiaStrong-220/space-station-14/pull/564
   access:
   - Service
   - Maintenance

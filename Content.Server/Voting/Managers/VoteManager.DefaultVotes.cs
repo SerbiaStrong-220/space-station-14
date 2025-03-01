@@ -1,7 +1,6 @@
 using System.Linq;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
-using Content.Server.Database;
 using Content.Server.Discord.WebhookMessages;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
@@ -11,7 +10,6 @@ using Content.Server.RoundEnd;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
-using Content.Shared.Ghost;
 using Content.Shared.Players;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Voting;
@@ -27,13 +25,13 @@ namespace Content.Server.Voting.Managers
         [Dependency] private readonly IPlayerLocator _locator = default!;
         [Dependency] private readonly ILogManager _logManager = default!;
         [Dependency] private readonly IBanManager _bans = default!;
-        [Dependency] private readonly IServerDbManager _dbManager = default!;
         [Dependency] private readonly VoteWebhooks _voteWebhooks = default!;
 
         private VotingSystem? _votingSystem;
         private RoleSystem? _roleSystem;
+        private GameTicker? _gameTicker;
 
-        private static readonly Dictionary<StandardVoteType, CVarDef<bool>> _voteTypesToEnableCVars = new()
+        private static readonly Dictionary<StandardVoteType, CVarDef<bool>> VoteTypesToEnableCVars = new()
         {
             {StandardVoteType.Restart, CCVars.VoteRestartEnabled},
             {StandardVoteType.Preset, CCVars.VotePresetEnabled},
@@ -70,8 +68,8 @@ namespace Content.Server.Voting.Managers
                 default:
                     throw new ArgumentOutOfRangeException(nameof(voteType), voteType, null);
             }
-            var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
-            ticker.UpdateInfoText();
+            _gameTicker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
+            _gameTicker.UpdateInfoText();
             if (timeoutVote)
                 TimeoutStandardVote(voteType);
         }
@@ -347,8 +345,14 @@ namespace Content.Server.Voting.Managers
                 return;
             }
 
+
+
+            var voterEligibility = _cfg.GetCVar(CCVars.VotekickVoterGhostRequirement) ? VoterEligibility.GhostMinimumPlaytime : VoterEligibility.MinimumPlaytime;
+            if (_cfg.GetCVar(CCVars.VotekickIgnoreGhostReqInLobby) && _gameTicker!.RunLevel == GameRunLevel.PreRoundLobby)
+                voterEligibility = VoterEligibility.MinimumPlaytime;
+
             var eligibleVoterNumberRequirement = _cfg.GetCVar(CCVars.VotekickEligibleNumberRequirement);
-            var eligibleVoterNumber = _cfg.GetCVar(CCVars.VotekickVoterGhostRequirement) ? CalculateEligibleVoterNumber(VoterEligibility.GhostMinimumPlaytime) : CalculateEligibleVoterNumber(VoterEligibility.MinimumPlaytime);
+            var eligibleVoterNumber = CalculateEligibleVoterNumber(voterEligibility);
 
             string target = args[0];
             string reason = args[1];
@@ -442,7 +446,7 @@ namespace Content.Server.Voting.Managers
                 },
                 Duration = TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VotekickTimer)),
                 InitiatorTimeout = TimeSpan.FromMinutes(_cfg.GetCVar(CCVars.VotekickTimeout)),
-                VoterEligibility = _cfg.GetCVar(CCVars.VotekickVoterGhostRequirement) ? VoterEligibility.GhostMinimumPlaytime : VoterEligibility.MinimumPlaytime,
+                VoterEligibility = voterEligibility,
                 DisplayVotes = false,
                 TargetEntity = targetNetEntity
             };

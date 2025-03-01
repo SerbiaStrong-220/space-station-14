@@ -1,0 +1,387 @@
+#Dark
+- type: decal
+  id: BorderfloorDarkCornerEndNE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_corner_end_ne
+
+- type: decal
+  id: BorderfloorDarkCornerEndNW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_corner_end_nw
+
+- type: decal
+  id: BorderfloorDarkCornerEndSE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_corner_end_se
+
+- type: decal
+  id: BorderfloorDarkCornerEndSW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_corner_end_sw
+
+- type: decal
+  id: BorderfloorDarkCornerNE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_corner_ne
+
+- type: decal
+  id: BorderfloorDarkCornerNW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_corner_nw
+
+- type: decal
+  id: BorderfloorDarkCornerSE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_corner_se
+
+- type: decal
+  id: BorderfloorDarkCornerSW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_corner_sw
+
+- type: decal
+  id: BorderfloorDarkInnerNE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_inner_ne
+
+- type: decal
+  id: BorderfloorDarkInnerNW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_inner_nw
+
+- type: decal
+  id: BorderfloorDarkInnerSE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_inner_se
+
+- type: decal
+  id: BorderfloorDarkInnerSW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_inner_sw
+
+- type: decal
+  id: BorderfloorDarkE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_e
+
+- type: decal
+  id: BorderfloorDarkN
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_n
+
+- type: decal
+  id: BorderfloorDarkS
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_s
+
+- type: decal
+  id: BorderfloorDarkW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_dark_w
+
+#Normal
+- type: decal
+  id: BorderfloorNormalCornerEndNE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_corner_end_ne
+
+- type: decal
+  id: BorderfloorNormalCornerEndNW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_corner_end_nw
+
+- type: decal
+  id: BorderfloorNormalCornerEndSE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_corner_end_se
+
+- type: decal
+  id: BorderfloorNormalCornerEndSW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_corner_end_sw
+
+- type: decal
+  id: BorderfloorNormalCornerNE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_corner_ne
+
+- type: decal
+  id: BorderfloorNormalCornerNW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_corner_nw
+
+- type: decal
+  id: BorderfloorNormalCornerSE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_corner_se
+
+- type: decal
+  id: BorderfloorNormalCornerSW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_corner_sw
+
+- type: decal
+  id: BorderfloorNormalInnerNE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_inner_ne
+
+- type: decal
+  id: BorderfloorNormalInnerNW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_inner_nw
+
+- type: decal
+  id: BorderfloorNormalInnerSE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_inner_se
+
+- type: decal
+  id: BorderfloorNormalInnerSW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_inner_sw
+
+- type: decal
+  id: BorderfloorNormalE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_e
+
+- type: decal
+  id: BorderfloorNormalN
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_n
+
+- type: decal
+  id: BorderfloorNormalS
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_s
+
+- type: decal
+  id: BorderfloorNormalW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_normal_w
+
+#Light
+- type: decal
+  id: BorderfloorLightCornerEndNE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_corner_end_ne
+
+- type: decal
+  id: BorderfloorLightCornerEndNW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_corner_end_nw
+
+- type: decal
+  id: BorderfloorLightCornerEndSE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_corner_end_se
+
+- type: decal
+  id: BorderfloorLightCornerEndSW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_corner_end_sw
+
+- type: decal
+  id: BorderfloorLightCornerNE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_corner_ne
+
+- type: decal
+  id: BorderfloorLightCornerNW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_corner_nw
+
+- type: decal
+  id: BorderfloorLightCornerSE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_corner_se
+
+- type: decal
+  id: BorderfloorLightCornerSW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_corner_sw
+
+- type: decal
+  id: BorderfloorLightInnerNE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_inner_ne
+
+- type: decal
+  id: BorderfloorLightInnerNW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_inner_nw
+
+- type: decal
+  id: BorderfloorLightInnerSE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_inner_se
+
+- type: decal
+  id: BorderfloorLightInnerSW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_inner_sw
+
+- type: decal
+  id: BorderfloorLightE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_e
+
+- type: decal
+  id: BorderfloorLightN
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_n
+
+- type: decal
+  id: BorderfloorLightS
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_s
+
+- type: decal
+  id: BorderfloorLightW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_light_w
+
+#Overlay
+- type: decal
+  id: BorderfloorOverlayCornerEndNE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_corner_end_ne
+
+- type: decal
+  id: BorderfloorOverlayCornerEndNW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_corner_end_nw
+
+- type: decal
+  id: BorderfloorOverlayCornerEndSE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_corner_end_se
+
+- type: decal
+  id: BorderfloorOverlayCornerEndSW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_corner_end_sw
+
+- type: decal
+  id: BorderfloorOverlayCornerNE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_corner_ne
+
+- type: decal
+  id: BorderfloorOverlayCornerNW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_corner_nw
+
+- type: decal
+  id: BorderfloorOverlayCornerSE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_corner_se
+
+- type: decal
+  id: BorderfloorOverlayCornerSW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_corner_sw
+
+- type: decal
+  id: BorderfloorOverlayInnerNE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_inner_ne
+
+- type: decal
+  id: BorderfloorOverlayInnerNW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_inner_nw
+
+- type: decal
+  id: BorderfloorOverlayInnerSE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_inner_se
+
+- type: decal
+  id: BorderfloorOverlayInnerSW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_inner_sw
+
+- type: decal
+  id: BorderfloorOverlayE
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_e
+
+- type: decal
+  id: BorderfloorOverlayN
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_n
+
+- type: decal
+  id: BorderfloorOverlayS
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_s
+
+- type: decal
+  id: BorderfloorOverlayW
+  sprite:
+    sprite: SS220/Decals/borderfloor.rsi
+    state: borderfloor_overlay_w

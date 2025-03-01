@@ -233,6 +233,7 @@ internal sealed partial class ChatManager : IChatManager
         switch (type)
         {
             case OOCChatType.OOC:
+                message = DeleteProhibitedCharacters(message, player); // SS220 delete prohibited characters
                 SendOOC(player, message);
                 break;
             case OOCChatType.Admin:

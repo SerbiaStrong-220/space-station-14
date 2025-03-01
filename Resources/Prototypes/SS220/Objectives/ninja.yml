@@ -1,0 +1,82 @@
+- type: entity
+  parent: BaseNinjaObjective
+  id: NinjaFrameTargetObjective
+  description: This person fall out of NanoTrasen attention, correct it. Security must imprison them.
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/Objectives/frame.rsi
+      state: snake_white
+  - type: TargetObjective
+    title: objective-condition-frame-target-title
+  - type: FramePersonCondition
+    criminalStatusSpecifier:
+      criminalStatusNodes:
+      - !type:CriminalStatusTrackerSpecifierNode
+        allowedStatuses: [wanted, search, execute, suspected]
+        canBeSetByTracker: true
+      - !type:CriminalStatusTrackerSpecifierNode
+        allowedStatuses: [incarcerated]
+        canBeSetByTracker: false # it will be very sad if ninja can just hack its target
+      - !type:CriminalStatusTrackerSpecifierNode
+        allowedStatuses: [discharged]
+        canBeSetByTracker: true
+
+- type: entity
+  parent: BaseNinjaObjective
+  id: NinjaIntimidateBruteTargetObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/Objectives/intimidate.rsi
+      state: brute
+  - type: TargetObjective
+    title: objective-condition-intimidate-target-brute-title
+  - type: IntimidatePersonCondition
+    startDescription: objective-condition-intimidate-target-brute-desc
+    successDescription: objective-condition-intimidate-target-brute-desc-success
+    sSDDescription: objective-condition-intimidate-target-brute-desc-ssd
+    damageTrackerSpecifier:
+      damageGroup: Brute
+      allowedState: [Alive]
+      targetAmount: 280
+
+- type: entity
+  parent: BaseNinjaObjective
+  id: NinjaIntimidateBurnTargetObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/Objectives/intimidate.rsi
+      state: burn
+  - type: TargetObjective
+    title: objective-condition-intimidate-target-burn-title
+  - type: IntimidatePersonCondition
+    startDescription: objective-condition-intimidate-target-burn-desc
+    successDescription: objective-condition-intimidate-target-burn-desc-success
+    sSDDescription: objective-condition-intimidate-target-burn-desc-ssd
+    damageTrackerSpecifier:
+      damageGroup: Burn
+      allowedState: [Alive]
+      targetAmount: 160
+
+- type: entity
+  parent: BaseNinjaObjective
+  id: NinjaIntimidateToxinTargetObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/Objectives/intimidate.rsi
+      state: toxin
+  - type: TargetObjective
+    title: objective-condition-intimidate-target-toxin-title
+  - type: IntimidatePersonCondition
+    startDescription: objective-condition-intimidate-target-toxin-desc
+    successDescription: objective-condition-intimidate-target-toxin-desc-success
+    sSDDescription: objective-condition-intimidate-target-toxin-desc-ssd
+    damageTrackerSpecifier:
+      damageGroup: Toxin
+      allowedState: [Alive]
+      targetAmount: 120
+
+

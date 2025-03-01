@@ -4,6 +4,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Pinpointer;
 using Content.Server.Popups;
+using Content.Server.SS220.LockPick.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Audio;
 using Content.Shared.Containers.ItemSlots;
@@ -13,6 +14,7 @@ using Content.Shared.Examine;
 using Content.Shared.Maps;
 using Content.Shared.Nuke;
 using Content.Shared.Popups;
+using Content.Shared.SS220.LockPick;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -40,6 +42,7 @@ public sealed class NukeSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
@@ -78,6 +81,7 @@ public sealed class NukeSystem : EntitySystem
 
         // Doafter events
         SubscribeLocalEvent<NukeComponent, NukeDisarmDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<NukeComponent, LockPickSuccessEvent>(OnLockPick); //ss220 lockpick add
     }
 
     private void OnInit(EntityUid uid, NukeComponent component, ComponentInit args)
@@ -157,6 +161,15 @@ public sealed class NukeSystem : EntitySystem
         UpdateAppearance(uid, component);
     }
 
+    //ss220 lockpick add start
+    private void OnLockPick(Entity<NukeComponent> ent, ref LockPickSuccessEvent args)
+    {
+        var xform = Transform(ent.Owner);
+
+        if (xform.Anchored)
+            _transform.Unanchor(ent.Owner, xform);
+    }
+    //ss220 lockpick add end
     #endregion
 
     #region UI Events
@@ -168,6 +181,7 @@ public sealed class NukeSystem : EntitySystem
             return;
 
         // Nuke has to have the disk in it to be moved
+        // ss220: Add lockpick for unanchoring nuke bomb w/o disk
         if (!component.DiskSlot.HasItem)
         {
             var msg = Loc.GetString("nuke-component-cant-anchor-toggle");
@@ -190,7 +204,7 @@ public sealed class NukeSystem : EntitySystem
 
             var worldPos = _transform.GetWorldPosition(xform);
 
-            foreach (var tile in grid.GetTilesIntersecting(new Circle(worldPos, component.RequiredFloorRadius), false))
+            foreach (var tile in _map.GetTilesIntersecting(xform.GridUid.Value, grid, new Circle(worldPos, component.RequiredFloorRadius), false))
             {
                 if (!tile.IsSpace(_tileDefManager))
                     continue;
@@ -234,7 +248,7 @@ public sealed class NukeSystem : EntitySystem
 
     private void OnClearButtonPressed(EntityUid uid, NukeComponent component, NukeKeypadClearMessage args)
     {
-        _audio.PlayEntity(component.KeypadPressSound, Filter.Pvs(uid), uid, true);
+        _audio.PlayPvs(component.KeypadPressSound, uid);
 
         if (component.Status != NukeStatus.AWAIT_CODE)
             return;
@@ -350,12 +364,12 @@ public sealed class NukeSystem : EntitySystem
                 {
                     component.Status = NukeStatus.AWAIT_ARM;
                     component.RemainingTime = component.Timer;
-                    _audio.PlayEntity(component.AccessGrantedSound, Filter.Pvs(uid), uid, true);
+                    _audio.PlayPvs(component.AccessGrantedSound, uid);
                 }
                 else
                 {
                     component.EnteredCode = "";
-                    _audio.PlayEntity(component.AccessDeniedSound, Filter.Pvs(uid), uid, true);
+                    _audio.PlayPvs(component.AccessDeniedSound, uid);
                 }
 
                 break;
@@ -424,7 +438,9 @@ public sealed class NukeSystem : EntitySystem
         // Don't double-dip on the octave shifting
         component.LastPlayedKeypadSemitones = number == 0 ? component.LastPlayedKeypadSemitones : semitoneShift;
 
-        _audio.PlayEntity(component.KeypadPressSound, Filter.Pvs(uid), uid, true, AudioHelpers.ShiftSemitone(semitoneShift).WithVolume(-5f));
+        var opts = component.KeypadPressSound.Params;
+        opts = AudioHelpers.ShiftSemitone(opts, semitoneShift).AddVolume(-5f);
+        _audio.PlayPvs(component.KeypadPressSound, uid, opts);
     }
 
     public string GenerateRandomNumberString(int length)
@@ -518,6 +534,9 @@ public sealed class NukeSystem : EntitySystem
         component.PlayedNukeSong = false;
         _sound.PlayGlobalOnStation(uid, _audio.GetSound(component.DisarmSound));
         _sound.StopStationEventMusic(uid, StationEventMusicType.Nuke);
+
+        // reset nuke remaining time to either itself or the minimum time, whichever is higher
+        component.RemainingTime = Math.Max(component.RemainingTime, component.MinimumTime);
 
         // disable sound and reset it
         component.PlayedAlertSound = false;

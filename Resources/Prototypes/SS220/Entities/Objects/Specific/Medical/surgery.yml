@@ -1,0 +1,49 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseToolSurgery
+  id: SurgeryDrapes
+  name: surgery drapes
+  description: drapes which used in surgery
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: drape
+  - type: StaticPrice
+    price: 20
+  - type: Tag
+    tags:
+    - SurgeryTool
+  - type: SurgeryDrape
+
+- type: entity
+  parent: BaseItem
+  id: MindslaveFixerCerebralImplant
+  name : cerebral implant
+  description: weird implant, why it even exists...
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/implants.rsi
+    state: mindslave_fixer
+  - type: MindSlaveDisfunctionFixer
+  - type: SurgeryTool
+    toolType: Specific
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-implant-manipulator-medical
+      jobRequired:
+        - Paramedic
+        - MedicalDoctor
+        - ChiefMedicalOfficer
+        - Brigmedic
+    - label: hidden-desc-implant-manipulator-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+    - label: hidden-desc-implant-mindslave-fixer-manipulator-syndicate
+      whitelistMind:
+        components:
+          - TraitorRole
+          - NukeOperative

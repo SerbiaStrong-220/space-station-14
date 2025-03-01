@@ -19,6 +19,7 @@ entities:
       name: NT-CV "Fast Food"
     - type: Transform
       pos: -0.47916666,-0.5625
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -128,7 +129,8 @@ entities:
         maxVol: 1
         name: food
         reagents:
-        - ReagentId: Fiber
+        - data: []
+          ReagentId: Fiber
           Quantity: 1
     - type: ContainedSolution
       containerName: food
@@ -194,25 +196,16 @@ entities:
     - type: Transform
       pos: 0.5,-2.5
       parent: 2
-    - type: DeviceLinkSink
-      links:
-      - 171
   - uid: 138
     components:
     - type: Transform
       pos: -0.5,-2.5
       parent: 2
-    - type: DeviceLinkSink
-      links:
-      - 171
   - uid: 139
     components:
     - type: Transform
       pos: 2.5,-2.5
       parent: 2
-    - type: DeviceLinkSink
-      links:
-      - 178
 - proto: CableApcExtension
   entities:
   - uid: 95

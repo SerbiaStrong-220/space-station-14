@@ -1,11 +1,12 @@
 # Numbers for armor here largely taken from /tg/.
 # NOTE: Half of the kind of armor you're probably thinking of is in vests.yml. These should probably be merged some day.
 
-#Basic armor vest
+#Basic armor vest for inheritance
 - type: entity
-  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing]
-  id: ClothingOuterArmorBasic
+  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing] # SS220 Remove `BaseRestrictedContraband`
+  id: ClothingOuterArmorBase
   name: armor vest
+  abstract: true
   description: A standard Type I armored vest that provides decent protection against most types of damage.
   components:
   - type: Sprite
@@ -22,6 +23,11 @@
   - type: ExplosionResistance
     damageCoefficient: 0.90
 
+#Standard armor vest, allowed for security and bartenders
+- type: entity
+  parent: [ BaseSecurityBartenderContraband, ClothingOuterArmorBase]
+  id: ClothingOuterArmorBasic
+
 #Alternate / slim basic armor vest
 - type: entity
   parent: ClothingOuterArmorBasic
@@ -31,9 +37,9 @@
   description: A slim Type I armored vest that provides decent protection against most types of damage.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/security_slim.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/security_slim.rsi #SS220-updated
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/security_slim.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/security_slim.rsi #SS220-updated
 
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
@@ -59,7 +65,7 @@
   - type: NeedleProtection # ss220 needleprotection
 
 - type: entity
-  parent: ClothingOuterArmorBasic
+  parent: ClothingOuterArmorBase
   id: ClothingOuterArmorBulletproof
   name: bulletproof vest
   description: A Type III heavy bulletproof vest that excels in protecting the wearer against traditional projectile weaponry and explosives to a minor extent.
@@ -79,7 +85,7 @@
     damageCoefficient: 0.80
 
 - type: entity
-  parent: ClothingOuterArmorBasic
+  parent: ClothingOuterArmorBase
   id: ClothingOuterArmorReflective
   name: reflective vest
   description: An armored vest with advanced shielding to protect against energy weapons.
@@ -131,11 +137,12 @@
         Heat: 0.35
         Caustic: 0.5
         Stamina: 0.3 #SS220 stamina resist fix
+        Radiation: 0.85 #ss220 raid suit rework
   - type: ExplosionResistance
     damageCoefficient: 0.35
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 1 #ss220 raid suit rework
+    sprintModifier: 0.95 #ss220 raid suit rework
   #Shoulder mounted flashlight
   - type: ToggleableLightVisuals
     spriteLayer: light
@@ -179,6 +186,24 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 2
+  #ss220 raid suit rework begin
+  - type: TemperatureProtection
+    heatingCoefficient: 0.15
+    coolingCoefficient: 0.15
+  - type: FireProtection
+    reduction: 0.4
+  - type: NeedleProtection # ss220 needleprotection
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.5
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
+  #ss220 raid suit rework end
 
 - type: entity
   parent: [ ClothingOuterBaseLarge,  AllowSuitStorageClothing ]

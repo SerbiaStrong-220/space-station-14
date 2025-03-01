@@ -1,15 +1,12 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server.Cargo.Systems;
-using Content.Server.Interaction;
 using Content.Server.Power.EntitySystems;
-using Content.Server.Stunnable;
 using Content.Server.Weapons.Ranged.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
-using Content.Shared.Interaction.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged;
@@ -25,6 +22,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Containers;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -33,16 +31,13 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly IComponentFactory _factory = default!;
     [Dependency] private readonly BatterySystem _battery = default!;
     [Dependency] private readonly DamageExamineSystem _damageExamine = default!;
-    [Dependency] private readonly InteractionSystem _interaction = default!;
     [Dependency] private readonly PricingSystem _pricing = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StaminaSystem _stamina = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private const float DamagePitchVariation = 0.05f;
-    public const float GunClumsyChance = 0.5f;
 
     public override void Initialize()
     {
@@ -71,26 +66,14 @@ public sealed partial class GunSystem : SharedGunSystem
     {
         userImpulse = true;
 
-        // Try a clumsy roll
-        // TODO: Who put this here
-        if (TryComp<ClumsyComponent>(user, out var clumsy) && gun.ClumsyProof == false)
+        if (user != null)
         {
-            for (var i = 0; i < ammo.Count; i++)
+            var selfEvent = new SelfBeforeGunShotEvent(user.Value, (gunUid, gun), ammo);
+            RaiseLocalEvent(user.Value, selfEvent);
+            if (selfEvent.Cancelled)
             {
-                if (_interaction.TryRollClumsy(user.Value, GunClumsyChance, clumsy))
-                {
-                    // Wound them
-                    Damageable.TryChangeDamage(user, clumsy.ClumsyDamage, origin: user);
-                    _stun.TryParalyze(user.Value, TimeSpan.FromSeconds(3f), true);
-
-                    // Apply salt to the wound ("Honk!")
-                    Audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/Guns/Gunshots/bang.ogg"), gunUid);
-                    Audio.PlayPvs(clumsy.ClumsySound, gunUid);
-
-                    PopupSystem.PopupEntity(Loc.GetString("gun-clumsy"), user.Value);
-                    userImpulse = false;
-                    return;
-                }
+                userImpulse = false;
+                return;
             }
         }
 
@@ -203,6 +186,20 @@ public sealed partial class GunSystem : SharedGunSystem
                                 var ray = new CollisionRay(from.Position, dir, hitscan.CollisionMask);
                                 var rayCastResults =
                                     Physics.IntersectRay(from.MapId, ray, hitscan.MaxLength, lastUser, false).ToList();
+
+                                // SS220 add barricade begin
+                                for (var r = 0; r < rayCastResults.Count; r++)
+                                {
+                                    var attemptEv = new HitscanAttempt(lastUser);
+                                    RaiseLocalEvent(rayCastResults[r].HitEntity, ref attemptEv);
+                                    if (attemptEv.Cancelled)
+                                    {
+                                        rayCastResults.RemoveAt(r);
+                                        r--;
+                                    }
+                                }
+                                // SS220 add barricade end
+
                                 if (!rayCastResults.Any())
                                     break;
 

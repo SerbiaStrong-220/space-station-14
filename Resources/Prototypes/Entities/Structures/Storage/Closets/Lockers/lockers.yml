@@ -43,6 +43,10 @@
     stateDoorClosed: qm_door
   - type: AccessReader
     access: [["Quartermaster"]]
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.55 # need to discuss
+  #ss220 lockpick add end
 
 - type: entity
   id: LockerSalvageSpecialist
@@ -71,6 +75,10 @@
     stateDoorClosed: captain_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [["Captain"]]
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.55 # need to discuss
+  #ss220 lockpick add end
 
 - type: entity
   id: LockerHeadOfPersonnel
@@ -84,6 +92,10 @@
     stateDoorClosed: hop_door
   - type: AccessReader
     access: [["HeadOfPersonnel"]]
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.55 # need to discuss
+  #ss220 lockpick add end
 
 # CE
 - type: entity
@@ -98,6 +110,10 @@
     stateDoorClosed: ce_door
   - type: AccessReader
     access: [ [ "ChiefEngineer" ] ]
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.55 # need to discuss
+  #ss220 lockpick add end
 
 # Electrical supplies
 - type: entity
@@ -270,6 +286,10 @@
     stateDoorClosed: cmo_door
   - type: AccessReader
     access: [ [ "ChiefMedicalOfficer" ] ]
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.55 # need to discuss
+  #ss220 lockpick add end
 
 # Science
 - type: entity
@@ -284,6 +304,10 @@
     stateDoorClosed: rd_door
   - type: AccessReader
     access: [ [ "ResearchDirector" ] ]
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.55 # need to discuss
+  #ss220 lockpick add end
 
 - type: entity
   id: LockerScientist
@@ -311,6 +335,10 @@
     stateDoorClosed: hos_door
   - type: AccessReader
     access: [["HeadOfSecurity"]]
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.55 # need to discuss
+  #ss220 lockpick add end
 
 # Warden
 - type: entity
@@ -325,6 +353,10 @@
     stateDoorClosed: securitywarden_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [["Armory"]]
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.6 # need to discuss
+  #ss220 lockpick add end
 
 # Brigmedic
 - type: entity
@@ -339,6 +371,10 @@
     stateDoorClosed: brigmedic_door
   - type: AccessReader
     access: [["Medical"]]
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.6 # need to discuss
+  #ss220 lockpick add end
 
 # Security Officer
 - type: entity
@@ -353,6 +389,10 @@
     stateDoorClosed: securityofficer_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [["Security"]]
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.6 # need to discuss
+  #ss220 lockpick add end
 
 - type: entity
   id: GunSafe
@@ -378,6 +418,24 @@
     stateDoorOpen: shotguncase_open
     stateDoorClosed: shotguncase_door
   - type: AccessReader
+  - type: Construction
+    graph: GunSafe
+    node: done
+    containers:
+    - entity_storage
+  - type: StaticPrice
+    price: 660
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.6 # need to discuss
+  #ss220 lockpick add end
+
+- type: entity
+  id: GunSafeBaseSecure
+  parent: GunSafe
+  suffix: Armory, Locked
+  components:
+  - type: AccessReader
     access: [["Armory"]]
 
 # Detective
@@ -389,6 +447,10 @@
   components:
   - type: AccessReader
     access: [["Detective"]]
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.6 # need to discuss
+  #ss220 lockpick add end
 
 - type: entity
   id: LockerEvidence
@@ -403,6 +465,10 @@
     stateDoorClosed: prisoner_door #SS220-Closet-Resprite-end
   - type: AccessReader
     access: [["Security"]]
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.6 # need to discuss
+  #ss220 lockpick add end
 
 # Syndicate
 - type: entity
@@ -425,6 +491,7 @@
   parent: LockerSyndicatePersonal
   description: Advanced locker technology.
   components:
+    - type: ArrivalsBlacklist
     - type: BluespaceLocker
       minBluespaceLinks: 1
       behaviorProperties:

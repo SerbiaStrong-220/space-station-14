@@ -5,7 +5,7 @@
   - type: TimedDespawn
     lifetime: 0.4
   - type: Sprite
-    drawdepth: Effects
+    drawdepth: BelowMobs
     layers:
     - shader: unshaded
       map: ["enum.EffectLayers.Unshaded"]
@@ -229,12 +229,16 @@
         - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
+  # SS220 Stamina damage begin
+  #- type: StaminaDamageOnCollide
+  #  damage: 33
+  # SS220 Stamina damage end
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
         Heat: 5
-        Stamina: 30
+        Stamina: 30 # SS220 Stamina damage
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -779,14 +783,14 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Objects/Fun/toys.rsi
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi #ss220 toys
     layers:
-      - state: capbullet
+      - state: bullet #ss220 toys
   - type: Projectile
     deleteOnCollide: true
     damage:
       types:
-        Piercing: 0
+        Piercing: 0.01 #ss220 toys #harmless, no bleeding
 
 - type: entity
   id: BulletAcid
@@ -982,7 +986,7 @@
       - HideContextMenu
 
 - type: entity
-  name: laser bolt 
+  name: laser bolt
   id: BulletLaser
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
@@ -1028,7 +1032,7 @@
   - type: ProjectileSpread
     proto: BulletLaser
     count: 5 #65 heat damage if you hit all your shots, but wide spread
-    spread: 30 
+    spread: 30
 
 - type: entity
   name: narrow laser barrage
@@ -1050,4 +1054,4 @@
   - type: ProjectileSpread
     proto: BulletDisablerSmg
     count: 3 #bit stronger than a disabler if you hit your shots you goober, still not a 2 hit stun though
-    spread: 9 
+    spread: 9

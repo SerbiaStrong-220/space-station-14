@@ -137,6 +137,8 @@
     - Drowsiness
     - TemporaryWaddle  #SS220 Temporary waddle status effect
     - Adrenaline
+    - Rave #SS220 cult
+    - MiGoHeal  #SS220 cult
   - type: Body
     prototype: Human
     requiredLegs: 2
@@ -282,6 +284,7 @@
         Asphyxiation: -1.0
   - type: FireVisuals
     alternateState: Standing
+  - type: Surgable #SS220 Surgery
 
 - type: entity
   save: false

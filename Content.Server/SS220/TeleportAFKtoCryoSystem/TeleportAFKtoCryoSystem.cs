@@ -1,9 +1,8 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Linq;
 using Content.Server.Preferences.Managers;
 using Content.Shared.Body.Components;
-using Content.Shared.CCVar;
 using Content.Shared.Mind.Components;
 using Content.Shared.Preferences;
 using Robust.Server.Player;
@@ -24,6 +23,7 @@ using Content.Shared.SS220.TeleportAFKtoCryoSystem;
 using Content.Shared.Administration.Logs;
 using Content.Server.Ghost;
 using Content.Server.Mind;
+using Content.Shared.SS220.CCVars;
 
 namespace Content.Server.SS220.TeleportAFKtoCryoSystem;
 
@@ -49,7 +49,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     {
         base.Initialize();
 
-        _cfg.OnValueChanged(CCVars.AfkTeleportToCryo, SetAfkTeleportToCryo, true);
+        _cfg.OnValueChanged(CCVars220.AfkTeleportToCryo, SetAfkTeleportToCryo, true);
         _playerManager.PlayerStatusChanged += OnPlayerChange;
         SubscribeLocalEvent<CryostorageComponent, TeleportToCryoFinished>(HandleTeleportFinished);
     }
@@ -61,7 +61,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     {
         base.Shutdown();
 
-        _cfg.UnsubValueChanged(CCVars.AfkTeleportToCryo, SetAfkTeleportToCryo);
+        _cfg.UnsubValueChanged(CCVars220.AfkTeleportToCryo, SetAfkTeleportToCryo);
         _playerManager.PlayerStatusChanged -= OnPlayerChange;
     }
 

@@ -224,7 +224,7 @@
   id: ShuttleGunDuster
   parent: [ShuttleGunBase, ConstructibleMachine]
   name: EXP-2100g "Duster"
-  description: A powerful stationary grenade launcher. A cartridge is required for use.
+  description: A powerful stationary grenade launcher. A magazine is required for use. #ss220-fix
   suffix: DO NOT MAP
   components:
   - type: Sprite

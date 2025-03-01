@@ -6,9 +6,9 @@
   name: CentCom winter coat
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/WinterCoats/coatcentcom.rsi
+    sprite: SS220/Clothing/OuterClothing/WinterCoats/centcom.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/WinterCoats/coatcentcom.rsi
+    sprite: SS220/Clothing/OuterClothing/WinterCoats/centcom.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodWinterCentcomm
 
@@ -18,6 +18,6 @@
   name: captain's white winter coat
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/WinterCoats/whitecapcoat.rsi
+    sprite: SS220/Clothing/OuterClothing/WinterCoats/captain_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/WinterCoats/whitecapcoat.rsi
+    sprite: SS220/Clothing/OuterClothing/WinterCoats/captain_white.rsi

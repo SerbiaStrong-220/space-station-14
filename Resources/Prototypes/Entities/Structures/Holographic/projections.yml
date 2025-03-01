@@ -32,11 +32,6 @@
   name: holofan
   description: A barrier of hard light that blocks air, but nothing else.
   components:
-  #SS220 atmos holo buff, physics start
-  - type: Physics
-    bodyType: Static
-    canCollide: true
-  #SS220 atmos holo buff, physics end
   - type: Sprite
     sprite: Structures/Holo/holofan.rsi
     state: icon
@@ -46,18 +41,10 @@
         shape:
           !type:PhysShapeAabb
             bounds: "-0.5,-0.5,0.5,0.5"
-        #SS220 Atmos holo buff start
-        mask:
-        - TableMask
-        layer:
-        - TableLayer
-        #SS220 Atmos holo end
   - type: TimedDespawn
-    lifetime: 10800 #3 hours IRL. SS220 Atmos Holo Buff
+    lifetime: 300 #5 minutes IRL. SS220 Atmos Holo Revert
   - type: Airtight
     noAirWhenFullyAirBlocked: false
-  - type: Climbable #SS220 Atmos holo buff
-  - type: Clickable #SS220 Atmos holo buff
 
 - type: entity
   id: HolosignSecurity
