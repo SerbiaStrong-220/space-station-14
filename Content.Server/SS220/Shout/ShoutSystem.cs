@@ -10,6 +10,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Shout;
 
+/// <summary>
+/// Just handler of a ShoutActionEvent.
+/// If there is no sound or phrase it won't do anything.
+/// </summary>
+
 public sealed class ShoutSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -17,11 +22,6 @@ public sealed class ShoutSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-
-    /// <summary>
-    /// Just handler of a ShoutActionEvent.
-    /// If there is no sound or phrase it won't do anything.
-    /// </summary>
 
     public override void Initialize()
     {

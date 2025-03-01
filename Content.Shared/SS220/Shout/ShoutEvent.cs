@@ -6,9 +6,7 @@ using Robust.Shared.Audio;
 using Content.Shared.Dataset;
 
 namespace Content.Shared.SS220.Shout;
-/// <summary>
-/// Event for memes, or is u want to make some kind of alternative scream button
-/// </summary>
+
 /// ToDo maybe add some gender checks if it will be used be anybody except me?
 public sealed partial class ShoutActionEvent : InstantActionEvent
 {
