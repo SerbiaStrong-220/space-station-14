@@ -36,7 +36,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.4
+          radius: 0.375
         density: 185
         restitution: 0.0
         mask:
@@ -91,7 +91,7 @@
 #   SS220-change-races-height begin
     noRot: true
     drawdepth: Mobs
-    scale: 1.16, 1.16
+    scale: 1.1, 1.1
 #   SS220-change-races-height end
     layers:
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
@@ -149,7 +149,7 @@
   components:
 # SS220-change-races-height begin
   - type: Sprite
-    scale: 1.16, 1.16
+    scale: 1.1, 1.1
 # SS220-change-races-height end
   - type: HumanoidAppearance
     species: Arachnid

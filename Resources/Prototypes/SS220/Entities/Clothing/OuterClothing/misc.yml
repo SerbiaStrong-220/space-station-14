@@ -30,9 +30,9 @@
   description: Фартук-жакет, используемый первоклассным шеф-поваром.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_white.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_white.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_white.rsi
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -41,9 +41,9 @@
   description: Фартук-жакет, используемый первоклассным шеф-поваром.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_green.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_green.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_green.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_green.rsi
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -52,9 +52,9 @@
   description: Фартук-жакет, используемый первоклассным шеф-поваром.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_black.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_black.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_black.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_black.rsi
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -64,6 +64,18 @@
   suffix: За время в игре, Сеньор
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_nt.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_nt.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/Chef/chef_nt.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/chef_nt.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterScarletTyphoon
+  name: the scarlet typhoon
+  description: You know, it's kind of awkward for me to introduce myself, but if you insist, then I'm a peaceful hunter chasing a mirage named love.
+  suffix: For emagg clothing vendomat
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/scarlet_typhoon.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/scarlet_typhoon.rsi

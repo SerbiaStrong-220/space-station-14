@@ -1,7 +1,6 @@
 #Base
 - type: entity
   parent:
-  - MobAtmosStandard
   - SimpleMobBase
   - MobCombat
   id: BaseMobSpiderQueen
@@ -9,9 +8,10 @@
   name: Spider queen
   description: spider dance
   components:
-  - type: AutoImplant
-    implants:
-    - ThermalVisionImplant
+  - type: Emoting
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
   - type: NpcFactionMember
     factions:
     - SpiderQueen
@@ -29,12 +29,6 @@
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: midwife-moving
-  - type: MobThresholds #HP
-    thresholds:
-      0: Alive
-      300: Dead
-  - type: Stamina
-    critThreshold: 150
   - type: DamageStateVisuals
     states:
       Alive:
@@ -89,12 +83,19 @@
       true
     useSound:
       path: /Audio/Items/crowbar.ogg
-  - type: Barotrauma #Damage
+  - type: Barotrauma
     damage:
       types:
-        Blunt: 1
-        Heat: 1
-  - type: Temperature #Damage
+        Blunt: 0.3
+        Heat: 0.1
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 1.5
+    damageRecovery:
+      types:
+        Asphyxiation: -1.0
+  - type: Temperature
     heatDamageThreshold: 325
     coldDamageThreshold: 260
     currentTemperature: 310.15
@@ -118,19 +119,20 @@
     energy: 0
     color: "#ff4242"
     castShadows: false
-  - type: IntrinsicRadioReceiver
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - HiveRadio
-  - type: ActiveRadio
-    channels:
-    - HiveRadio
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelHive
 
 - type: entity
   parent: BaseMobSpiderQueen
   id: BaseMobSpiderServant
   abstract: true
   components:
+  - type: Stamina
+    critThreshold: 150
+  - type: HTN
+    rootTask:
+      task: SpiderServantCompound
   - type: Tag
     tags:
       - CannotSuicide
@@ -163,6 +165,7 @@
     - ActionSpawnSpiderLittleBloodPoints
     - ActionSpawnSpiderCrystalBloodPoints
     - ActionSpawnSingleSpiderWebDurableBloodPoints
+    - ActionSpawnWebTileBloodPoints
     - ActionSpawnSpiderWallWebDurableBloodPoints
     - ActionSpiderCoconning
   - type: Hunger
@@ -219,18 +222,26 @@
   - type: LizardAccent
   - type: Puller
     needsHands: false
-  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute.Самолечение
+  - type: Stamina
+    critThreshold: 200
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      360: Dead
+  - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 300
+    damageCap: 350
     damage:
       types:
-        Bloodloss: -1
+        Piercing: -0.30
+        Blunt: -0.15
+        Slash: -0.15
+        Heat: -0.30
+        Cold: -0.15
       groups:
-        Brute: -2
-        Toxin: -5
-        Airloss: -2.5
-        Burn: -2.5
+        Toxin: -4
+        Airloss: -2
 
 #Spiders-servants
 - type: entity
@@ -251,24 +262,27 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      60: Dead   #HP
+      75: Dead
   - type: DamageStateVisuals
     states:
       Alive:
         Base: guard-moving
       Dead:
         Base: guard_dead
-  - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute. Самолечение
+  - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 60
+    damageCap: 75
     damage:
       types:
-        Bloodloss: -3
+        Piercing: -0.33
+        Blunt: -0.33
+        Slash: -0.33
+        Heat: -0.33
+        Cold: -0.15
       groups:
-        Brute: -2
+        Toxin: -4
         Airloss: -2
-        Burn: -2
   - type: MeleeWeapon #Damage
     hidden: true
     soundHit:
@@ -284,6 +298,7 @@
     damageModifierSet: SpiderDrone
   - type: ActionGrant
     actions:
+    - ActionSpawnWebTile
     - ActionSpawnSpiderWallWebDurable
     - ActionSpawnSpiderCrystal
     - ActionSpawnSingleSpiderWebShortDelay
@@ -311,7 +326,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      110: Dead
+      130: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -321,15 +336,17 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 110
+    damageCap: 130
     damage:
       types:
-        Bloodloss: -1.5
+        Piercing: -0.5
+        Blunt: -0.25
+        Slash: -0.25
+        Heat: -0.5
+        Cold: -0.25
       groups:
-        Brute: -1.5
-        Toxin: -5
-        Airloss: -2
-        Burn: -1
+        Toxin: -4
+        Airloss: -2.5
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -371,7 +388,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      90: Dead
+      110: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -381,15 +398,17 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 90
+    damageCap: 110
     damage:
       types:
-        Bloodloss: -1
+        Piercing: -0.5
+        Blunt: -0.25
+        Slash: -0.25
+        Heat: -0.5
+        Cold: -0.25
       groups:
-        Brute: -1.5
-        Toxin: -5
-        Airloss: -2
-        Burn: -1
+        Toxin: -4
+        Airloss: -2.5
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -452,7 +471,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      70: Dead
+      90: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -462,15 +481,17 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 70
+    damageCap: 90
     damage:
       types:
-        Bloodloss: -0.5
+        Piercing: -0.30
+        Blunt: -0.15
+        Slash: -0.15
+        Heat: -0.30
+        Cold: -0.15
       groups:
-        Brute: -1
-        Toxin: -5
+        Toxin: -4
         Airloss: -2
-        Burn: -2
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -529,7 +550,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      30: Dead
+      40: Dead
   - type: DamageStateVisuals
     states:
       Alive:
@@ -539,7 +560,7 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 30
+    damageCap: 40
     damage:
       groups:
         Brute: -0.5
@@ -605,7 +626,7 @@
     - !type:OverallPlaytimeRequirement
       time: 18000 # 5h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
@@ -623,7 +644,7 @@
     - !type:OverallPlaytimeRequirement
       time: 18000 # 5h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
@@ -641,7 +662,7 @@
     - !type:OverallPlaytimeRequirement
       time: 18000 # 5h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
@@ -659,7 +680,7 @@
     - !type:OverallPlaytimeRequirement
       time: 3600 # 5h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
@@ -677,5 +698,5 @@
     - !type:OverallPlaytimeRequirement
       time: 3600 # 1h
     raffle:
-      settings: default
+      settings: short
   - type: GhostTakeoverAvailable #Ghost role

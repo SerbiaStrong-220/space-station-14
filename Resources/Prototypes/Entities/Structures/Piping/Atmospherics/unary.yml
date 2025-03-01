@@ -38,9 +38,9 @@
         - Unstackable
     - type: Sprite
       drawdepth: FloorObjects
-      sprite: Structures/Piping/Atmospherics/vent.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeHalf
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: vent_off
@@ -68,6 +68,12 @@
       sound:
         path: /Audio/Ambience/Objects/gas_vent.ogg
     - type: Weldable
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasVentOpening
+    - type: GuideHelp
+      guides:
+      - AirVent
+      - DeviceMonitoringAndControl
 
 - type: entity
   parent: GasUnaryBase
@@ -79,9 +85,9 @@
   components:
     - type: Sprite
       drawdepth: FloorObjects
-      sprite: Structures/Piping/Atmospherics/vent.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeHalf
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: vent_passive
@@ -92,6 +98,11 @@
     - type: Construction
       graph: GasUnary
       node: passivevent
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasVentOpening
+    - type: GuideHelp
+      guides:
+      - PassiveVent
 
 - type: entity
   parent: [GasUnaryBase, AirSensorBase]
@@ -111,9 +122,9 @@
         - Unstackable
     - type: Sprite
       drawdepth: FloorObjects
-      sprite: Structures/Piping/Atmospherics/scrubber.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/scrubber.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeHalf
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: scrub_off
@@ -141,6 +152,12 @@
       sound:
         path: /Audio/Ambience/Objects/gas_vent.ogg
     - type: Weldable
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasVentScrubber
+    - type: GuideHelp
+      guides:
+      - AirScrubber
+      - DeviceMonitoringAndControl
 
 - type: entity
   parent: GasUnaryBase
@@ -152,10 +169,10 @@
   components:
     - type: Sprite
       drawdepth: FloorObjects
-      sprite: Structures/Piping/Atmospherics/outletinjector.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/outletinjector.rsi #ss220 engineering-update-atmos
       layers:
         - state: pipeHalf
-          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: injector
           map: [ "enum.SubfloorLayers.FirstLayer" ]
@@ -180,6 +197,11 @@
       visibleLayers:
       - enum.SubfloorLayers.FirstLayer
       - enum.LightLayers.Unshaded
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: GasVentOpening
+    - type: GuideHelp
+      guides:
+      - AirInjector
 
 - type: entity
   parent: [ BaseMachinePowered, ConstructibleMachine ]
@@ -190,7 +212,7 @@
     mode: SnapgridCenter
   components:
     - type: Sprite
-      sprite: Structures/Piping/Atmospherics/thermomachine.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/thermomachine.rsi #ss220-engineering-update-thermomachine
       snapCardinals: true
     - type: Appearance
     - type: PipeColorVisuals
@@ -224,6 +246,11 @@
       examinableAddress: true
     - type: WiredNetworkConnection
     - type: PowerSwitch
+    - type: AtmosMonitoringConsoleDevice
+      navMapBlip: Thermoregulator
+    - type: GuideHelp
+      guides:
+      - Thermomachines
 
 - type: entity
   parent: BaseGasThermoMachine
@@ -238,18 +265,25 @@
       granularLayersRendering: true
       layers:
         - state: freezerOff
-          map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+#          map: [ "enum.PowerDeviceVisualLayers.Powered" ] #ss220-engineering-update-thermomachine
         - state: freezerPanelOpen
           map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
         - state: pipe
           map: [ "enum.PipeVisualLayers.Pipe" ]
           renderingStrategy: Default
+          #ss220-engineering-update-thermomachine-begin
+        - state: freezerOn-unshaded
+          shader: unshaded
+          map: ["enum.PowerDeviceVisualLayers.Powered"]
+          #ss220-engineering-update-thermomachine-end
     - type: GenericVisualizer
       visuals:
         enum.PowerDeviceVisuals.Powered:
           enum.PowerDeviceVisualLayers.Powered:
-            True: { state: freezerOn }
-            False: { state: freezerOff }
+          #ss220-engineering-update-thermomachine-begin
+            True: { visible: true }
+            False: { visible: false }
+          #ss220-engineering-update-thermomachine-end
     - type: GasThermoMachine
       coefficientOfPerformance: -3.9
     - type: ApcPowerReceiver
@@ -283,18 +317,25 @@
       granularLayersRendering : true
       layers:
         - state: heaterOff
-          map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+#          map: [ "enum.PowerDeviceVisualLayers.Powered" ] #ss220-engineering-update-thermomachine
         - state: heaterPanelOpen
           map: ["enum.WiresVisualLayers.MaintenancePanel"]
         - state: pipe
           map: [ "enum.PipeVisualLayers.Pipe" ]
           renderingStrategy: Default
+          #ss220-engineering-update-thermomachine-begin
+        - state: heaterOn-unshaded
+          shader: unshaded
+          map: ["enum.PowerDeviceVisualLayers.Powered"]
+          #ss220-engineering-update-thermomachine-end
     - type: GenericVisualizer
       visuals:
         enum.PowerDeviceVisuals.Powered:
           enum.PowerDeviceVisualLayers.Powered:
-            True: { state: heaterOn }
-            False: { state: heaterOff }
+          #ss220-engineering-update-thermomachine-begin
+            True: { visible: true }
+            False: { visible: false }
+          #ss220-engineering-update-thermomachine-end
     - type: GasThermoMachine
       coefficientOfPerformance: 0.95
     - type: ApcPowerReceiver
@@ -322,7 +363,7 @@
   description: An advanced machine that cools gas in connected pipes. Has the side effect of chilling the surrounding area. Cold as Hell!
   components:
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/hellfirethermomachine.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/hellfirethermomachine.rsi #ss220-engineering-update-thermomachine
   - type: GasThermoMachine
     minTemperature: 23.15
     heatCapacity: 40000
@@ -337,7 +378,7 @@
   description: An advanced machine that heats gas in connected pipes. Has the side effect of leaking heat into the surrounding area. Hot as Hell!
   components:
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/hellfirethermomachine.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/hellfirethermomachine.rsi #ss220-engineering-update-thermomachine
   - type: GasThermoMachine
     maxTemperature: 1193.15
     heatCapacity: 40000
@@ -429,3 +470,8 @@
   - type: ExaminableSolution
     solution: tank
   - type: PowerSwitch
+  - type: AtmosMonitoringConsoleDevice
+    navMapBlip: Thermoregulator
+  - type: GuideHelp
+    guides:
+    - GasCondensing

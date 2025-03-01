@@ -1,0 +1,11 @@
+- type: entity
+  id: CrateDecKit
+  parent: CrateSecgear
+  name: detective kit
+  description: A set of standard detective gear, in case the past has been lost. Contains box of forensic pads, box of evidence markers, box of tape recorder and cassettes for it
+  components:
+  - type: StorageFill
+    contents:
+    - id: BoxForensicPad
+    - id: BoxEvidenceMarkers
+    - id: BoxTapeRecorder

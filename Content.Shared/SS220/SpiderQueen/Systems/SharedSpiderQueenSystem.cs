@@ -28,6 +28,7 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SpiderQueenComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<SpiderQueenComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SpiderQueenComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderCocooningActionEvent>(OnCocooningAction);
     }
@@ -35,6 +36,15 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
     private void OnStartup(Entity<SpiderQueenComponent> entity, ref ComponentStartup args)
     {
         UpdateAlert(entity);
+    }
+
+    private void OnShutdown(Entity<SpiderQueenComponent> entity, ref ComponentShutdown args)
+    {
+        foreach (var cocoon in entity.Comp.CocoonsList)
+        {
+            if (TryComp<SpiderCocoonComponent>(cocoon, out var cocoonComp))
+                cocoonComp.CocoonOwner = null;
+        }
     }
 
     private void OnExamine(Entity<SpiderQueenComponent> entity, ref ExaminedEvent args)
@@ -112,6 +122,9 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
     /// </summary>
     public bool CheckEnoughBloodPoints(EntityUid uid, FixedPoint2 cost, SpiderQueenComponent? component = null)
     {
+        if (cost <= 0)
+            return true;
+
         if (!Resolve(uid, ref component))
         {
             if (_net.IsServer)
@@ -127,6 +140,17 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
         }
         else
             return true;
+    }
+
+    public void ChangeBloodPointsAmount(EntityUid uid, SpiderQueenComponent component, FixedPoint2 amount)
+    {
+        var newValue = component.CurrentBloodPoints + amount;
+        component.CurrentBloodPoints = newValue > 0
+            ? MathF.Min((float)newValue, (float)component.MaxBloodPoints)
+            : 0;
+
+        Dirty(uid, component);
+        UpdateAlert((uid, component));
     }
 
     /// <summary>

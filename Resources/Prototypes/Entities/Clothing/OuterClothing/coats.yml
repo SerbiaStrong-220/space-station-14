@@ -4,13 +4,17 @@
   name: bomber jacket
   description: A thick, well-worn WW2 leather bomber jacket.
   components:
+# SS220 resprite begin
   - type: Sprite
-    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+#    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/bomber.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+#    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/bomber.rsi
+# SS220 resprite end
 
 - type: entity
-  parent: [ClothingOuterStorageBase, AllowSuitStorageClothing, ClothingOuterArmorBasic]
+  parent: [ClothingOuterStorageBase, AllowSuitStorageClothing, ClothingOuterArmorBase]
   id: ClothingOuterCoatDetective
   name: detective trenchcoat
   description: An 18th-century multi-purpose trenchcoat. Someone who wears this means serious business.
@@ -37,7 +41,7 @@
   parent: [ClothingOuterCoatDetectiveLoadout]
   id: ClothingOuterCoatDetectiveLoadoutGrey
   name: noir trenchcoat
-  description: Ah, your trusty coat. There's a few tears here and there, giving it a more timely look. Or at least, that's what you told yourself when you found out gettin' it repaired would set you back 200 speos.
+  description: Ah, your trusty coat. There's a few tears here and there, giving it a more timely look. Or at least, that's what you told yourself when you found out gettin' it repaired would set you back 200 spesos.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Coats/detective_grey.rsi
@@ -368,6 +372,16 @@
       toggleable-clothing: !type:ContainerSlot {}
       storagebase: !type:Container
         ents: []
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
 # SS220 new hood end
 
 - type: entity
@@ -393,7 +407,7 @@
     sprite: Clothing/OuterClothing/Coats/clownpriest.rsi
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageBase] # SS220 Remove BaseMajorContraband
   id: ClothingOuterDogi
   name: samurai dogi
   description: Dogi is a type of traditional Japanese clothing. The dogi is made of heavy, durable fabric, it is practical in combat and stylish in appearance. It is decorated with intricate patterns and embroidery on the back.
@@ -416,9 +430,9 @@
   description: A paramedic's trusty windbreaker, for all the space wind.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi #ss220 resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi #ss220 resprite
 
 - type: entity
   parent: [ClothingOuterStorageBase]

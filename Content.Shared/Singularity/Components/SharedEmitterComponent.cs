@@ -9,12 +9,14 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 
 namespace Content.Shared.Singularity.Components;
 
+[AutoGenerateComponentState] // SS220-SM-smEmitter-qol
 [RegisterComponent, NetworkedComponent]
 public sealed partial class EmitterComponent : Component
 {
     public CancellationTokenSource? TimerCancel;
 
     // whether the power switch is in "on"
+    [AutoNetworkedField] // SS220-SM-smEmitter-qol
     [ViewVariables] public bool IsOn;
     // Whether the power switch is on AND the machine has enough power (so is actively firing)
     [ViewVariables] public bool IsPowered;

@@ -1,0 +1,23 @@
+- type: entity
+  name: Crowguette
+  parent: FoodBreadBaguette
+  id: CrowbarBaguetteCyborg
+  suffix: Weapon
+  components:
+  - type: MeleeWeapon
+    wideAnimationRotation: -120
+    damage:
+      types:
+        Slash: 5
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Reflect
+    reflectProb: 0.05
+    spread: 90
+  - type: Tool
+    qualities:
+      - Prying
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: ToolTileCompatible
+  - type: Prying

@@ -1,0 +1,29 @@
+- type: job
+  id: DeathsquadCommander
+  name: job-name-dq-commander
+  description: job-description-deathsquad
+  playTimeTracker: JobDeathSquadCommander
+  setPreference: false
+  startingGear: DeathSquadLeaderGear
+  icon: "JobIconDeathsquadCommander"
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  accessGroups:
+  - AllAccess
+#  access: #SS220-DeathSquad Update
+  - CentralCommand
+
+- type: job
+  id: DeathsquadHealer
+  name: job-name-dq-specialist
+  description: job-description-deathsquad
+  playTimeTracker: JobDeathSquadHealer
+  setPreference: false
+  startingGear: DeathSquadHealerGear
+  icon: "JobIconDeathsquadHealer"
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  accessGroups:
+  - AllAccess
+#  access: #SS220-DeathSquad Update
+  - CentralCommand

@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Body.Systems;
+using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
@@ -9,6 +10,7 @@ namespace Content.Shared.Traits.Assorted;
 
 public sealed class LegsParalyzedSystem : EntitySystem
 {
+    [Dependency] private readonly SharedBuckleSystem _buckle = default!; // SS220-Mindslave-disfunction
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
     [Dependency] private readonly StandingStateSystem _standingSystem = default!;
     [Dependency] private readonly SharedBodySystem _bodySystem = default!;
@@ -27,6 +29,11 @@ public sealed class LegsParalyzedSystem : EntitySystem
     {
         // TODO: In future probably must be surgery related wound
         _movementSpeedModifierSystem.ChangeBaseSpeed(uid, 0, 0, 20);
+
+        //SS220 Mindslave-disfunction begin
+        if (!_buckle.IsBuckled(uid))
+            _standingSystem.Down(uid);
+        //SS220 Mindslave-disfunction end
     }
 
     private void OnShutdown(EntityUid uid, LegsParalyzedComponent component, ComponentShutdown args)

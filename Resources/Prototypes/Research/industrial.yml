@@ -12,8 +12,6 @@
   recipeUnlocks:
   - MiningDrill
   - MineralScannerEmpty
-  - BorgModuleMining
-  - BorgModuleGrapplingGun
   - OreProcessorIndustrialMachineCircuitboard
   - ClothingMaskWeldingGas
   - ClothingEyesHudSupply #ss220 HUD CARGO ADD
@@ -44,6 +42,7 @@
   recipeUnlocks:
   - PowerCellHigh
   - TurboItemRechargerCircuitboard
+  - SMESAdvancedMachineCircuitboard
 
 - type: technology
   id: MechanicalCompression
@@ -85,7 +84,6 @@
   - PortableGeneratorPacmanMachineCircuitboard
   - PortableGeneratorSuperPacmanMachineCircuitboard
   - PortableGeneratorJrPacmanMachineCircuitboard
-  - PowerComputerCircuitboard #the actual solar panel itself should be in here
   - SuperMatterObserverCircuitboard # SS220 superMatter-crystal
   - SolarControlComputerCircuitboard
   - SolarTrackerElectronics
@@ -95,7 +93,7 @@
   id: AtmosphericTech
   name: research-technology-atmospheric-tech
   icon:
-    sprite: Structures/Piping/Atmospherics/thermomachine.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/thermomachine.rsi #ss220-engineering-update-thermomachine
     state: freezerOff
   discipline: Industrial
   tier: 1
@@ -137,6 +135,12 @@
   recipeUnlocks:
   - ShuttleConsoleCircuitboard
   - ThrusterMachineCircuitboard
+  # SS220 engineering-update-thruster begin
+  - ThrusterShuntingMachineCircuitboard
+  - ThrusterBigLeftMachineCircuitboard
+  - ThrusterBigRightMachineCircuitboard
+  - ThrusterBigCenterMachineCircuitboard
+  # SS220 engineering-update-thruster end
   - GyroscopeMachineCircuitboard
   - MiniGravityGeneratorCircuitboard
 
@@ -170,10 +174,12 @@
     - PowerDrill
     - JawsOfLife
     - BorgModuleAdvancedTool
-    - BorgModuleRCD
+    - Fulton
+    - FultonBeacon
     - BorgModuleProtoKineticAccelerator # ss220
-# ss220 start thermoelectric generator
+    - BorgModuleFireAxe #SS220 Borg Modules
 
+# ss220 start thermoelectric generator
 - type: technology
   id: RenewablePower
   name: research-technology-renewable-power

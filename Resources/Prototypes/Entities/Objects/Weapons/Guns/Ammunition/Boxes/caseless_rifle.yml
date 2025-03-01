@@ -20,51 +20,11 @@
     sprite: Objects/Weapons/Guns/Ammunition/Boxes/caseless_rifle.rsi
   - type: MagazineVisuals
     magState: mag
-    steps: 3 #SS220-FixAmmoSprite
+    steps: 4
     zeroVisible: false
   - type: Appearance
 
 # Boxes
-- type: entity
-  parent: BaseMagazineBoxCaselessRifle
-  id: MagazineBoxCaselessRifle10x24
-  name: ammunition box (.25 caseless)
-  components:
-  - type: BallisticAmmoProvider
-    capacity: 200
-    proto: CartridgeCaselessRifle
-  - type: Sprite
-    layers:
-    - state: base-10x24
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag10-2 #SS220-FixAmmoSprite
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag10
-    steps: 3 #SS220-FixAmmoSprite
-    zeroVisible: false
-  - type: Appearance
-
-- type: entity
-  parent: BaseMagazineBoxCaselessRifle
-  id: MagazineBoxCaselessRifleBig
-  name: ammunition box (.25 caseless)
-  components:
-  - type: BallisticAmmoProvider
-    capacity: 200
-    proto: CartridgeCaselessRifle
-  - type: Sprite
-    layers:
-    - state: base-b
-      map: ["enum.GunVisualLayers.Base"]
-    - state: magb-2 #SS220-FixAmmoSprite
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: magb
-    steps: 3 #SS220-FixAmmoSprite
-    zeroVisible: false
-  - type: Appearance
-
 - type: entity
   parent: BaseMagazineBoxCaselessRifle
   id: MagazineBoxCaselessRifle

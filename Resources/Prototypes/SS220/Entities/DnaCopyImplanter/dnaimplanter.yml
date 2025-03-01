@@ -1,0 +1,28 @@
+- type: entity
+  id: BoxDnaCopyImplant
+  parent: BoxCardboard
+  components:
+  - type: StorageFill
+    contents:
+    - id: PenDnaScrambler
+    - id: DnaCopyImplanter
+    - id: PaperDnaCopyImplanter
+
+- type: entity
+  id: PaperDnaCopyImplanter
+  parent: Paper
+  components:
+  - type: Paper
+    content: book-text-identity-implant-info
+
+- type: entity
+  id: ActionActivateDnaCopy
+  name: Dna Copy Implant
+  components:
+  - type: InstantAction
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: /Textures/SS220/Objects/Specific/Medical/implant-dna-copy.rsi
+      state: dna-copy
+    event: !type:UseDnaCopyImplantEvent

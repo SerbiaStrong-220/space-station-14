@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.Localizations; // SS220 Playtime Format Fix
+using Content.Shared.Localizations;
 using Content.Shared.Preferences;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -50,7 +50,7 @@ public sealed partial class DepartmentTimeRequirement : JobRequirement
 
         var deptDiffSpan = Time - playtime;
         var deptDiff = deptDiffSpan.TotalMinutes;
-        var formattedDeptDiff = ContentLocalizationManager.FormatPlaytime(deptDiffSpan); // SS220 Playtime Format Fix
+        var formattedDeptDiff = ContentLocalizationManager.FormatPlaytime(deptDiffSpan);
         var nameDepartment = "role-timer-department-unknown";
 
         if (protoManager.TryIndex(Department, out var departmentIndexed))

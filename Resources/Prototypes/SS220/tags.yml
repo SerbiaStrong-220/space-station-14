@@ -111,6 +111,10 @@
 - type: Tag
   id: EscapePod
 
+# SP-91-RC
+- type: Tag
+  id: MagazineMagnumSubMachineGunSP-91-RC
+
 # SS220 to put lighter in a cigarette pack
 - type: Tag
   id: Lighter
@@ -131,10 +135,84 @@
 - type: Tag
   id: SpiderLittle
 
- #Add Tourniquet to medic's belt 
+ #Add Tourniquet to medic's belt
 - type: Tag
   id: Tourniquet
 
 # SS220 Add lying action
 - type: Tag
   id: Bed
+
+# Svarshik's toy guns
+- type: Tag
+  id: ToyGrenade
+
+- type: Tag
+  id: MagazineLightRifleBoxToy
+
+- type: Tag
+  id: MagazinePistolToy
+
+- type: Tag
+  id: MagazinePistolHighCapacityToy
+
+- type: Tag
+  id: MagazinePistolSubMachineGunToy
+
+- type: Tag
+  id: MagazineShotgunToy
+
+- type: Tag
+  id: CartridgeMagnumFoam
+
+- type: Tag
+  id: ShellShotgunToy
+
+- type: Tag
+  id: CartridgeAntiMaterielToy
+
+- type: Tag
+  id: MagazinePistolCaselessRifleToy
+
+# engineering-update-thruster
+- type: Tag
+  id: ThrusterShuntingMachineCircuitboard
+
+#HOCebent
+- type: Tag
+  id: CartridgeUnitary
+
+#Craftable desword
+- type: Tag
+  id: EnergySword
+
+- type: Tag
+  id: ToyEnergySword
+
+# SS220 Cult
+- type: Tag
+  id: Omnivorous
+
+# debug-uplink-fix
+- type: Tag
+  id: DebugUplink
+
+# SS220 ClownMimeCyborg
+- type: Tag
+  id: ClothingMaskMime
+
+- type: Tag
+  id: BorgModuleClown
+
+- type: Tag
+  id: BorgModuleMime
+
+- type: Tag
+  id: Baguette
+
+- type: Tag
+  id: BananiumHorn
+
+# SS220-PumpkinLantern-Craft
+- type: Tag
+  id: CarvedPumpkin

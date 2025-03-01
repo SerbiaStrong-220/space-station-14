@@ -82,4 +82,9 @@ public sealed partial class InteractionPopupComponent : Component
     /// </summary>
     [DataField]
     public bool OnActivate;
+
+    //ss220 interact w/o hands fix start
+    [DataField]
+    public bool NeedHands;
+    //ss220 interact w/o hands fix end
 }

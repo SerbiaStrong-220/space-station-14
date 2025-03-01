@@ -64,6 +64,16 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
 
 #Prisoner EVA
 - type: entity
@@ -136,3 +146,13 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end

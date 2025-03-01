@@ -3,8 +3,6 @@
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.TTS.Commands;
-using Robust.Client.Audio;
-using Robust.Client.GameObjects;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
@@ -26,12 +24,18 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IDependencyCollection _dependencyCollection = default!;
+    [Dependency] private readonly TTSManager _ttsManager = default!;
 
     private ISawmill _sawmill = default!;
 
     private static readonly MemoryContentRoot ContentRoot = new();
     private static readonly ResPath Prefix = ResPath.Root / "TTS";
     private static bool _rootSetUp = false;
+
+    /// <summary>
+    /// Reducing the volume of the TTS when whispering. Will be converted to logarithm.
+    /// </summary>
+    private const float WhisperFade = 4f;
 
     private float _volume = 0.0f;
     private float _radioVolume = 0.0f;
@@ -57,8 +61,9 @@ public sealed partial class TTSSystem : EntitySystem
         _cfg.OnValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged, true);
         _cfg.OnValueChanged(CCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged, true);
 
-        SubscribeNetworkEvent<PlayTTSEvent>(OnPlayTTS);
         SubscribeNetworkEvent<TtsQueueResetMessage>(OnQueueResetRequest);
+
+        _ttsManager.PlayTtsReceived += OnPlayTts;
 
         InitializeAnnounces();
     }
@@ -71,6 +76,8 @@ public sealed partial class TTSSystem : EntitySystem
 
         // clear virtual files
         ContentRoot.Clear();
+
+        _ttsManager.PlayTtsReceived -= OnPlayTts;
 
         ShutdownAnnounces();
         ResetQueuesAndEndStreams();
@@ -152,7 +159,7 @@ public sealed partial class TTSSystem : EntitySystem
             SoundPathSpecifier soundPath;
             if (request is PlayRequestById requestById)
             {
-                tempFilePath = new ResPath($"{requestById.FileIdx}.wav");
+                tempFilePath = new ResPath($"{requestById.FileIdx}.ogg");
                 soundPath = new SoundPathSpecifier(Prefix / tempFilePath.Value, requestById.Params);
             }
             else if (request is PlayRequestByPath requestByPath)
@@ -224,7 +231,7 @@ public sealed partial class TTSSystem : EntitySystem
         TryQueueRequest(entity, request);
     }
 
-    private void PlayTTSBytes(byte[] data, EntityUid? sourceUid = null, AudioParams? audioParams = null, bool globally = false)
+    private void PlayTtsBytes(TtsAudioData data, EntityUid? sourceUid = null, AudioParams? audioParams = null, bool globally = false)
     {
         _sawmill.Debug($"Play TTS audio {data.Length} bytes from {sourceUid} entity");
         if (data.Length == 0)
@@ -232,8 +239,8 @@ public sealed partial class TTSSystem : EntitySystem
 
         var finalParams = audioParams ?? AudioParams.Default;
 
-        var filePath = new ResPath($"{_fileIdx}.wav");
-        ContentRoot.AddOrUpdateFile(filePath, data);
+        var filePath = new ResPath($"{_fileIdx}.ogg");
+        ContentRoot.AddOrUpdateFile(filePath, data.Buffer);
 
         // Cache does a funny.
         // If we have disconnected and reconnected, the Idx will be reset
@@ -261,12 +268,31 @@ public sealed partial class TTSSystem : EntitySystem
         _fileIdx++;
     }
 
-    private void OnPlayTTS(PlayTTSEvent ev)
+    private void OnPlayTts(MsgPlayTts msg)
     {
-        var volume = (ev.IsRadio ? _radioVolume : _volume) * ev.VolumeModifier;
+        var volume = AdjustVolume(msg.Kind);
         var audioParams = AudioParams.Default.WithVolume(volume);
 
-        PlayTTSBytes(ev.Data, GetEntity(ev.SourceUid), audioParams);
+        PlayTtsBytes(msg.Data, GetEntity(msg.SourceUid), audioParams);
+    }
+
+    private float AdjustVolume(TtsKind kind)
+    {
+        var volume = kind switch
+        {
+            TtsKind.Radio => _radioVolume,
+            TtsKind.Announce => VolumeAnnounce,
+            _ => _volume,
+        };
+
+        volume = SharedAudioSystem.GainToVolume(volume);
+
+        if (kind == TtsKind.Whisper)
+        {
+            volume -= SharedAudioSystem.GainToVolume(WhisperFade);
+        }
+
+        return volume;
     }
 
     // Play requests //

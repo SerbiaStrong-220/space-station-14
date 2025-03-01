@@ -4,7 +4,7 @@
   icon:
     sprite: Clothing/Eyes/Glasses/thermal.rsi
     state: icon
-  discipline: Experimental
+  discipline: Arsenal
   tier: 3
   cost: 10000
   recipeUnlocks:

@@ -1,5 +1,3 @@
-# AT THE BOTTOM IS A TILE MADE OF COBWEBS.
-
 #Base
 - type: entity
   id: BaseSpiderCocoon
@@ -27,6 +25,7 @@
     damageContainer: Inorganic
     damageModifierSet: Wood
   - type: Destructible
+  - type: AntiRottingContainer
   - type: ContainerContainer
     containers:
       cocoon: !type:Container

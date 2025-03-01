@@ -1,4 +1,5 @@
 using Content.Shared.Damage;
+using Content.Shared.Inventory;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Collision.Shapes;
@@ -76,4 +77,13 @@ public sealed partial class BlockingComponent : Component
     /// </summary>
     [DataField("activeBlockFraction"), ViewVariables(VVAccess.ReadWrite)]
     public float ActiveBlockFraction = 1.0f;
+
+    // SS220 equip shield on back begin
+    /// <summary>
+    /// The list of slots that supported a shield protection
+    /// and second arg it's protection efficiency of this slots
+    /// </summary>
+    [DataField]
+    public Dictionary<SlotFlags, float> AvaliableSlots = new();
+    // SS220 equip shield on back end
 }

@@ -78,9 +78,13 @@
     visuals:
       enum.HolidayVisuals.Holiday:
         base:
-          festive: { state: christmaslamp }
+          festive:
+            sprite: SS220/Objects/Misc/Lights/lamp.rsi #SS220 Xmas resprite
+            state: christmaslamp
         light:
-          festive: { state: christmaslamp-on }
+          festive:
+            sprite: SS220/Objects/Misc/Lights/lamp.rsi #SS220 Xmas resprite
+            state: christmaslamp-on
 
 - type: entity
   name: banana lamp
@@ -124,17 +128,17 @@
       enum.HolidayVisuals.Holiday:
         base:
           festive:
-            sprite: Objects/Misc/Lights/lamp.rsi
+            sprite: SS220/Objects/Misc/Lights/lamp.rsi #SS220 Xmas resprite
             state: christmaslamp
         light:
           festive:
-            sprite: Objects/Misc/Lights/lamp.rsi
+            sprite: SS220/Objects/Misc/Lights/lamp.rsi #SS220 Xmas resprite
             state: christmaslamp-on
 
 - type: entity
   name: interrogator lamp
   id: LampInterrogator
-  parent: BaseLamp
+  parent: [ BaseLamp, BaseRestrictedContraband ]
   description: Ultra-bright lamp for the bad cop.
   components:
   - type: Sprite

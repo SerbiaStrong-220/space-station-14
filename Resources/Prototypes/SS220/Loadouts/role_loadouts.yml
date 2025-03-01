@@ -35,11 +35,13 @@
 - type: roleLoadout
   id: JobBlueShield
   groups:
+  - BlueShieldHead
+  - BlueShieldGlasses
   - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
-  - SecurityBelt
-  - CommonBackpack
+  - BlueShieldBelt
+  - BlueShieldBackpack
   - Survival
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
@@ -71,7 +73,7 @@
   - SecurityNeck #holster loadout
   - SecurityJumpsuit
   - SecurityBackpack
-  - SecurityOuterClothing
+  - SecurityPilotOuterClothing
   - SurvivalSecurity
   - SecurityShoes
   - SecurityPDA

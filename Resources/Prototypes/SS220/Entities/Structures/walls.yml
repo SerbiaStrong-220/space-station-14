@@ -85,3 +85,49 @@
     sprite: SS220/Structures/Walls/shuttle_orang.rsi
   - type: Icon
     sprite: SS220/Structures/Walls/shuttle_orang.rsi
+
+- type: entity
+  parent: BaseWall
+  id: WallBeton
+  name: beton wall
+  description: Cold and rough concrete slab.
+  components:
+  - type: Tag
+    tags:
+      - Wall
+  - type: Sprite
+    sprite: SS220/Structures/Walls/beton.rsi
+  - type: Icon
+    sprite: SS220/Structures/Walls/beton.rsi
+  - type: Construction
+    graph: Girder
+    node: betonWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 800
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: IconSmooth
+    key: walls
+    base: beton

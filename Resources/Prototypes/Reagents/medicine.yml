@@ -863,6 +863,7 @@
     Medicine:
       effects:
       - !type:ChemHealEyeDamage
+      - !type:ChemRemoveHallucinationsEffect #SS220 CultYogg
 
 - type: reagent
   id: Cognizine
@@ -1057,6 +1058,9 @@
       effects:
       - !type:SatiateThirst
         factor: 3
+      #SS220 Cult start
+      - !type:SaintWaterDrinkEffect
+      #SS220 Cult end
     Medicine:
       effects:
       - !type:HealthChange
@@ -1075,6 +1079,15 @@
       methods: [ Touch ]
       effects:
       - !type:ExtinguishReaction
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        ignoreResistances: false
+        damage:
+          types:
+            Holy: 0.5
   plantMetabolism:
   - !type:PlantAdjustWater
     amount: 1
