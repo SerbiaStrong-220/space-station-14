@@ -17,15 +17,10 @@ public sealed partial class SmartGasMaskComponent : Component
     [DataField]
     public EntProtoId SmartGasMaskAction = "ActionSmartGasMask";
 
-    [DataField] public EntityUid? SmartGasMaskActionEntity;
-
     [DataField]
-    public TimeSpan WaitingForChargeHalt { get; set; } = TimeSpan.FromSeconds(10);
+    public EntityUid? SmartGasMaskActionEntity;
 
     public TimeSpan NextChargeTimeHalt = TimeSpan.Zero;
-
-    [DataField]
-    public TimeSpan WaitingForChargeSupport { get; set; } = TimeSpan.FromSeconds(60);
 
     public TimeSpan NextChargeTimeSupport = TimeSpan.Zero;
 

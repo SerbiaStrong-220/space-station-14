@@ -2,6 +2,7 @@
 
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.SmartGasMask.Prototype;
 
@@ -16,10 +17,10 @@ public sealed partial class AlertSmartGasMaskPrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     [DataField(required: true)]
-    public string Name { get; set; } = default!;
+    public LocId Name { get; set; } = default!;
 
     [DataField(required: true)]
-    public EntProtoId IconPrototype;
+    public SpriteSpecifier Icon = new SpriteSpecifier.Texture(new("/Textures/SS220/Interface/Actions/alert_smart_gas_mask/securitymask.png"));
 
     //To understand what exactly the player chose
     [DataField(required: true)]
@@ -32,6 +33,10 @@ public sealed partial class AlertSmartGasMaskPrototype : IPrototype
     //Message that will be played when selecting an action
     [DataField]
     public List<LocId> LocIdMessage = new List<LocId>() { };
+
+    [DataField]
+    public TimeSpan CoolDown { get; set; } = TimeSpan.FromSeconds(10);
+
 }
 
 public enum NotificationType : byte

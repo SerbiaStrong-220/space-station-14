@@ -61,6 +61,9 @@ public sealed class SmartGasMaskSystem : EntitySystem
     {
         var curTime = _timing.CurTime;
 
+        if(!ent.Comp.SelectablePrototypes.Contains(args.ProtoId))
+            return;
+
         if (!_prototypeManager.TryIndex(args.ProtoId, out var alertProto))
                 return;
 
@@ -68,7 +71,7 @@ public sealed class SmartGasMaskSystem : EntitySystem
         {
             ent.Comp.HaltInRecharge = true;
 
-            ent.Comp.NextChargeTimeHalt = ent.Comp.WaitingForChargeHalt + curTime;
+            ent.Comp.NextChargeTimeHalt = alertProto.CoolDown + curTime;
 
             _audio.PlayPvs(alertProto.AlertSound, ent.Owner);
 
@@ -84,13 +87,13 @@ public sealed class SmartGasMaskSystem : EntitySystem
         {
             ent.Comp.SupportInRecharge = true;
 
-            ent.Comp.NextChargeTimeSupport = ent.Comp.WaitingForChargeSupport + curTime;
+            ent.Comp.NextChargeTimeSupport = alertProto.CoolDown + curTime;
 
             if(alertProto.LocIdMessage.Count == 0)
                 return;
 
             var currentHelpMessage = _random.Pick(alertProto.LocIdMessage);
-            var posText = FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString(ent.Owner));
+            var posText = FormattedMessage.RemoveMarkupPermissive(_navMap.GetNearestBeaconString(ent.Owner));
             var helpMessage = Loc.GetString(currentHelpMessage, ("user", args.Actor), ("position", posText));
 
             //The message is sent with a prefix ".о". This is necessary so that everyone understands that reinforcements have been called in
