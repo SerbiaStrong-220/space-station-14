@@ -19,14 +19,6 @@ public sealed partial class SmartGasMaskComponent : Component
 
     [DataField]
     public EntityUid? SmartGasMaskActionEntity;
-
-    public TimeSpan NextChargeTimeHalt = TimeSpan.Zero;
-
-    public TimeSpan NextChargeTimeSupport = TimeSpan.Zero;
-
-    public bool HaltInRecharge = false;
-
-    public bool SupportInRecharge = false;
 }
 
 public sealed partial class SmartGasMaskOpenEvent : InstantActionEvent;

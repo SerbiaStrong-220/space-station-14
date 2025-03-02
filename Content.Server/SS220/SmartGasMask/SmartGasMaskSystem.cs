@@ -29,6 +29,8 @@ public sealed class SmartGasMaskSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
+    private Dictionary<ProtoId<AlertSmartGasMaskPrototype>, TimeSpan> _nextChargeTime = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<SmartGasMaskComponent, SmartGasMaskOpenEvent>(OnAction);
@@ -67,12 +69,13 @@ public sealed class SmartGasMaskSystem : EntitySystem
         if (!_prototypeManager.TryIndex(args.ProtoId, out var alertProto))
                 return;
 
-        if (alertProto.NotificationType == NotificationType.Halt && !ent.Comp.HaltInRecharge) //AlertSmartGasMaskHalt
+        if (_nextChargeTime.TryGetValue(args.ProtoId, out var nextChargeTime) && curTime < nextChargeTime)
+            return;
+
+        _nextChargeTime[args.ProtoId] = curTime + alertProto.CoolDown;
+
+        if (alertProto.NotificationType == NotificationType.Halt) //AlertSmartGasMaskHalt
         {
-            ent.Comp.HaltInRecharge = true;
-
-            ent.Comp.NextChargeTimeHalt = alertProto.CoolDown + curTime;
-
             _audio.PlayPvs(alertProto.AlertSound, ent.Owner);
 
             if(alertProto.LocIdMessage.Count == 0)
@@ -83,12 +86,8 @@ public sealed class SmartGasMaskSystem : EntitySystem
             _chatSystem.TrySendInGameICMessage(args.Actor, haltMessage, InGameICChatType.Speak, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
         }
 
-        if (alertProto.NotificationType == NotificationType.Support && !ent.Comp.SupportInRecharge) //AlertSmartGasMaskSupport
+        if (alertProto.NotificationType == NotificationType.Support) //AlertSmartGasMaskSupport
         {
-            ent.Comp.SupportInRecharge = true;
-
-            ent.Comp.NextChargeTimeSupport = alertProto.CoolDown + curTime;
-
             if(alertProto.LocIdMessage.Count == 0)
                 return;
 
@@ -98,21 +97,6 @@ public sealed class SmartGasMaskSystem : EntitySystem
 
             //The message is sent with a prefix ".о". This is necessary so that everyone understands that reinforcements have been called in
             _chatSystem.TrySendInGameICMessage(args.Actor, helpMessage, InGameICChatType.Whisper, ChatTransmitRange.Normal, checkRadioPrefix: true, ignoreActionBlocker: true);
-        }
-    }
-
-    public override void Update(float frameTime)
-    {
-        var query = EntityQueryEnumerator<SmartGasMaskComponent>();
-        var curTime = _timing.CurTime;
-
-        while (query.MoveNext(out var smartGasMaskComp))
-        {
-            if (smartGasMaskComp.HaltInRecharge && curTime >= smartGasMaskComp.NextChargeTimeHalt)
-                smartGasMaskComp.HaltInRecharge = false;
-
-            if (smartGasMaskComp.SupportInRecharge && curTime >= smartGasMaskComp.NextChargeTimeSupport)
-                smartGasMaskComp.SupportInRecharge = false;
         }
     }
 }

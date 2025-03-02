@@ -1,7 +1,9 @@
 - type: alertSmartGasMask
   id: AlertSmartGasMaskSupport
   name: alert-smart-gas-mask-support
-  icon: /Textures/SS220/Interface/Actions/alert_smart_gas_mask/securitymask.png
+  icon: 
+    sprite: Clothing/Mask/gassecurity.rsi
+    state: icon
   notificationType: Support
   locIdMessage: ["smartgasmask-support-message"]
   coolDown: 120
@@ -9,7 +11,9 @@
 - type: alertSmartGasMask
   id: AlertSmartGasMaskHalt
   name: alert-smart-gas-mask-halt
-  icon: /Textures/SS220/Interface/Actions/alert_smart_gas_mask/securitymask.png
+  icon: 
+    sprite: Clothing/Mask/gassecurity.rsi
+    state: icon
   notificationType: Halt
   alertSound: /Audio/SS220/Items/SmartGasMask/sound_voice_complionator_halt.ogg
   locIdMessage: ["smartgasmask-halt-message-1", "smartgasmask-halt-message-2", "smartgasmask-halt-message-3"]
