@@ -81,16 +81,17 @@
     sprite: SS220/Structures/Machines/pda_id_painter.rsi
     snapCardinals: false
     layers:
+    - state: default
     - state: off
-    - state: unlit
-      visible: false
-      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      shader: unshaded
+      map: [ "leds" ]
+      visible: true
   - type: GenericVisualizer
     visuals:
       enum.PowerDeviceVisuals.Powered:
-        enum.PowerDeviceVisualLayers.Powered:
-          True: { visible: true }
-          False: { visible: false }
+        leds:
+          True: { state: on, visible: true }
+          False: { state: off, visible: true }
   - type: PdaIdPainter
     idCardSlot:
       name: pda-id-painter-console-id

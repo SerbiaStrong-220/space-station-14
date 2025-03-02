@@ -10,9 +10,5 @@ public sealed partial class PdaIdPainterTargetComponent : Component
 {
     [DataField]
     [AutoNetworkedField]
-    public NetEntity? NetOwner;
-
-    [DataField]
-    [AutoNetworkedField]
     public EntProtoId? NewProto;
 }

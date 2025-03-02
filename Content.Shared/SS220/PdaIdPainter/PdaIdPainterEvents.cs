@@ -31,24 +31,6 @@ public sealed class PdaIdPainterPickedIdMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed class PdaIdPainterOpenWindowMessage : BoundUserInterfaceMessage
-{
-}
-
-[Serializable, NetSerializable]
-public sealed class PdaIdPainterChangeStateMessage : EntityEventArgs
-{
-    public bool IsActive;
-    public NetEntity Target;
-
-    public PdaIdPainterChangeStateMessage(bool isActive, NetEntity target)
-    {
-        IsActive = isActive;
-        Target = target;
-    }
-}
-
-[Serializable, NetSerializable]
 public sealed class PdaIdPainterBoundState : BoundUserInterfaceState
 {
     public NetEntity? TargetId;

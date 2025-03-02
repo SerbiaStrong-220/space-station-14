@@ -7,11 +7,14 @@
     "y": 32
   },
   "states": [
+  	{
+	  "name": "default"
+	},
     {
       "name": "off"
     },
 	{
-      "name": "unlit"
+      "name": "on"
     }
   ]
 }

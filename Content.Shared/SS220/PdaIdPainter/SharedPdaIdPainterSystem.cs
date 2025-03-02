@@ -27,6 +27,8 @@ public abstract class SharedPdaIdPainterSystem : EntitySystem
     [Dependency] private readonly AccessReaderSystem _access = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
+    public readonly HashSet<EntityPrototype> PdaAndIdProtos = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -80,12 +82,16 @@ public abstract class SharedPdaIdPainterSystem : EntitySystem
         if (!IsAllowed(ent.Owner, args.Actor))
             return;
 
+        if (!_proto.TryIndex(args.Proto, out var prototype))
+            return;
+
         var target = ent.Comp.PdaSlot.Item;
 
         if (target != null && TryComp<PdaIdPainterTargetComponent>(target, out var targetComp))
-        {
             Dirty(target.Value, targetComp);
-        }
+
+        if (!PdaAndIdProtos.Contains(prototype))
+            return;
 
         ent.Comp.PdaChosenProto = args.Proto;
         Dirty(ent);

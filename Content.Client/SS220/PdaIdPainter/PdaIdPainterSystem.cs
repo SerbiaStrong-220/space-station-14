@@ -10,8 +10,6 @@ public sealed class PdaIdPainterSystem : SharedPdaIdPainterSystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IComponentFactory _factory = default!;
 
-    public readonly List<EntityPrototype> PdaAndIdProtos = new();
-
     public override void Initialize()
     {
         base.Initialize();
