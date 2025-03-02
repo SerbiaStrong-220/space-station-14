@@ -100,10 +100,10 @@
   - type: EntityWorldTargetAction
     raiseOnUser: true
     icon:
-      sprite: SS220\Interface\Actions\action_goliath.rsi #SS220-goliathresprite
+      sprite: SS220/Interface/Actions/action_goliath.rsi #SS220-goliathresprite
       state: goliath_tentacles #SS220-goliathresprite
     iconOn:
-      sprite: SS220\Interface\Actions\action_goliath.rsi #SS220-goliathresprite
+      sprite: SS220/Interface/Actions/action_goliath.rsi #SS220-goliathresprite
       state: goliath_tentacles_on #SS220-goliathresprite
     sound:
       path: "/Audio/Weapons/slash.ogg"
