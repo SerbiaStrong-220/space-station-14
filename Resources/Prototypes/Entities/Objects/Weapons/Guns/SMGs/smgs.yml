@@ -21,9 +21,9 @@
     - suitStorage
   - type: AmmoCounter
   - type: Gun
-    minAngle: 2
-    maxAngle: 16
-    fireRate: 8
+    minAngle: 11 #SS220 Update
+    maxAngle: 20 #SS220 Update
+    fireRate: 7.5 #SS220 Update
     burstFireRate: 8
     angleIncrease: 3
     angleDecay: 16
@@ -78,7 +78,7 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Gun
-    fireRate: 10
+    fireRate: 8 #SS220 Update
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
   - type: MagazineVisuals
@@ -105,12 +105,12 @@
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -16
+    minAngle: -2 #SS220 Update
+    maxAngle: -13 #SS220 Update
   - type: Gun
-    minAngle: 21
-    maxAngle: 32
-    shotsPerBurst: 5
+    minAngle: 17 #SS220 Update
+    maxAngle: 29 #SS220 Update
+    shotsPerBurst: 6 #SS220 Update
     availableModes:
     - Burst
     - FullAuto
@@ -143,12 +143,12 @@
     - type: Wieldable
       unwieldOnUse: false
     - type: GunWieldBonus
-      minAngle: -19
-      maxAngle: -16
+      minAngle: -2 #SS220 Update
+      maxAngle: -13 #SS220 Update
     - type: Gun
-      minAngle: 21
-      maxAngle: 32
-      fireRate: 6
+      minAngle: 17 #SS220 Update
+      maxAngle: 29 #SS220 Update
+      fireRate: 6.5 #SS220 Update
       burstFireRate: 12
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
@@ -207,9 +207,9 @@
   - type: ChamberMagazineAmmoProvider
     boltClosed: null
   - type: Gun
-    fireRate: 5.5
-    minAngle: 1
-    maxAngle: 6
+    fireRate: 6.5 #SS220 Update
+    minAngle: 16 #SS220 Update
+    maxAngle: 26 #SS220 Update
     angleIncrease: 1.5
     angleDecay: 6
     selectedMode: FullAuto
