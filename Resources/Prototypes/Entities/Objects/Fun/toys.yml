@@ -1104,12 +1104,12 @@
   components:
   - type: AmmoCounter #SS220-FIX bullet show
   - type: Sprite
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/toy.rsi # ss220 revolvers resprite
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
   - type: Item
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/toy.rsi # ss220 revolvers resprite
     heldPrefix: capgun
   - type: Tag
     tags:
@@ -1473,7 +1473,7 @@
           variation: 0.125
     #SS220 craftable desword start
     - type: Tag
-      tags: 
+      tags:
       - ToyEnergySword
     - type: Construction
       deconstructionTarget: null
