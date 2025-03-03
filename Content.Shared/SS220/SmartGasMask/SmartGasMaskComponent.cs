@@ -19,6 +19,8 @@ public sealed partial class SmartGasMaskComponent : Component
 
     [DataField]
     public EntityUid? SmartGasMaskActionEntity;
+
+    public Dictionary<ProtoId<AlertSmartGasMaskPrototype>, TimeSpan> NextChargeTime = new();
 }
 
 public sealed partial class SmartGasMaskOpenEvent : InstantActionEvent;

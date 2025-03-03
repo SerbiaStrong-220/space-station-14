@@ -29,8 +29,6 @@ public sealed class SmartGasMaskSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
-    private Dictionary<ProtoId<AlertSmartGasMaskPrototype>, TimeSpan> _nextChargeTime = new();
-
     public override void Initialize()
     {
         SubscribeLocalEvent<SmartGasMaskComponent, SmartGasMaskOpenEvent>(OnAction);
@@ -69,10 +67,10 @@ public sealed class SmartGasMaskSystem : EntitySystem
         if (!_prototypeManager.TryIndex(args.ProtoId, out var alertProto))
                 return;
 
-        if (_nextChargeTime.TryGetValue(args.ProtoId, out var nextChargeTime) && curTime < nextChargeTime)
+        if (ent.Comp.NextChargeTime.TryGetValue(args.ProtoId, out var nextChargeTime) && curTime < nextChargeTime)
             return;
 
-        _nextChargeTime[args.ProtoId] = curTime + alertProto.CoolDown;
+        ent.Comp.NextChargeTime[args.ProtoId] = curTime + alertProto.CoolDown;
 
         if (alertProto.NotificationType == NotificationType.Halt) //AlertSmartGasMaskHalt
         {
