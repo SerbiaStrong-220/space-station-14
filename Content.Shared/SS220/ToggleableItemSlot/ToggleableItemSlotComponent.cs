@@ -4,11 +4,11 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.SwitchToggleItemSlots;
+namespace Content.Shared.SS220.ToggleableItemSlot;
 
 [RegisterComponent]
 [NetworkedComponent]
-public sealed partial class SwitchToggleItemSlotsComponent : Component
+public sealed partial class ToggleableItemSlotComponent : Component
 {
     public const string HiddenSlot = "hidden_slot";
 
