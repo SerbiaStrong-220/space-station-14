@@ -208,8 +208,8 @@
     boltClosed: null
   - type: Gun
     fireRate: 6.5 #SS220 Update
-    minAngle: 16 #SS220 Update
-    maxAngle: 26 #SS220 Update
+    minAngle: 17 #SS220 Update
+    maxAngle: 27 #SS220 Update
     angleIncrease: 1.5
     angleDecay: 6
     selectedMode: FullAuto
