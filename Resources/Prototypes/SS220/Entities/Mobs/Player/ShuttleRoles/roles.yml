@@ -7,3 +7,13 @@
       state: passenger
     - type: RandomHumanoidSpawner
       settings: VisitorTourist
+
+- type: entity
+  id: RandomHumanoidVisitorBartenderHelm
+  name: visiting bartender ghost role
+  components:
+    - type: Sprite
+      sprite: SS220/Markers/jobs.rsi
+      state: bartender_helm
+    - type: RandomHumanoidSpawner
+      settings: VisitorBartenderHelm

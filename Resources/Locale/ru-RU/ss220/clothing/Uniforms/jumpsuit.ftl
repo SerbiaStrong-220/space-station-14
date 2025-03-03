@@ -50,3 +50,7 @@ ent-ClothingUniformJumpsuitInterdyne = форма парамедика Interdyne
 
 ent-ClothingUniformJumpsuitUssp = униформа СССП
     .desc = Форма, пропитанная кровью, потом и ненавистью к капитализму.
+
+ent-ClothingUniformJumpsuitBartenderHelmCorp = униформа бармена Helm Corp.
+    .desc = Специальная экипировка для подачи пива.
+    .suffix = Helm Corp.

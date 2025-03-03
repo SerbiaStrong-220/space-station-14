@@ -1,0 +1,7 @@
+- type: reagentDispenserInventory
+  id: BeerDispenserInventory
+  inventory:
+  - DrinkBeerGrowler
+  - DrinkAleBottleFullGrowler
+  - DrinkMeadJug
+  - DrinkSpaceBeerBottleFull

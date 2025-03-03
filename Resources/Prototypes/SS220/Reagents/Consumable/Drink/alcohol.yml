@@ -2,7 +2,7 @@
 
 - type: reagent
   id: Glintwine
-  name: reagent-name-glintwine 
+  name: reagent-name-glintwine
   parent: BaseAlcohol
   desc: reagent-desc-glintwine
   physicalDesc: reagent-physical-desc-piquant
@@ -126,3 +126,31 @@
           types:
             Poison: 2
   fizziness: 0.2
+
+- type: reagent
+  id: SpaceBeer
+  name: reagent-name-spacebeer
+  parent: BaseAlcohol
+  desc: reagent-desc-spacebeer
+  physicalDesc: reagent-physical-desc-bubbly
+  flavor: beer
+  color: "#154e96"
+  recognizable: true
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/beerglass.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: true
+  fizziness: 0.6
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.08
+      - !type:AdjustReagent
+        reagent: Cryoxadone
+        amount: 0.03

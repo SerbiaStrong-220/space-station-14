@@ -61,3 +61,6 @@ ent-ClothingHeadHatInterdyneFlipped = кепка парамедика Interdyne
     .desc = { ent-ClothingHeadHatInterdyneFlipped.desc }
 ent-ClothingHeadHatNewYearsCap = новогодний колпак
     .desc = Яркий новогодний колпак с пушистым помпоном, добавляющий волшебства и праздничного настроения!
+ent-ClothingHeadHatTophatHelmCorp = цилиндр Helm Corp
+    .suffix = Helm Corp
+    .desc = Стильный пивной цилиндр.

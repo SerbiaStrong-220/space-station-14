@@ -22,3 +22,18 @@
     ears: ClothingHeadsetGrey
     pocket1: TapeRecorder
     pocket2: CassetteTape
+
+- type: startingGear
+  id: VisitorBartenderHelm
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBartenderHelmCorp
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadHatTophatHelmCorp
+    id: VisitorPDA
+    back: ClothingBackpack
+    suitstorage: WeaponShotgunDoubleBarreledRubber
+    ears: ClothingHeadsetService
+    eyes: ClothingEyesHudBeer
+    outerClothing: ClothingOuterArmorBasicSlim
+    pocket1: DrinkBeerGrowler
+    pocket2: BarSpoon

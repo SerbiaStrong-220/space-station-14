@@ -95,3 +95,21 @@
   - type: Icon
     sprite: SS220/Objects/Consumable/Drinks/bacchus_blessing.rsi
     state: icon
+
+- type: entity
+  parent: [DrinkBottleVisualsOpenable, DrinkBottleGlassBaseFull]
+  id: DrinkSpaceBeerBottleFull
+  name: space beer bottle
+  description: Great taste of cosmic dust without any additional benefits.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: SpaceBeer
+          Quantity: 100
+  - type: Label
+    currentLabel: reagent-name-spacebeer
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/space_beer.rsi
+  - type: Sealable

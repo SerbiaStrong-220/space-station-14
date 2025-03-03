@@ -597,3 +597,15 @@
     sprite: SS220/Clothing/Head/Hats/newyears_cap.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/newyears_cap.rsi
+
+- type: entity
+  parent: ClothingHeadHatTophat
+  id: ClothingHeadHatTophatHelmCorp
+  name: helm corp tophat
+  description: A stylish beer tophat.
+  suffix: Helm Corp.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/tophat_helm.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/tophat_helm.rsi

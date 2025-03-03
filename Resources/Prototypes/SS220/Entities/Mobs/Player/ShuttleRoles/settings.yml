@@ -8,3 +8,14 @@
     - type: Loadout
       prototypes: [ VisitorTourist ]
       roleLoadout: [ RoleSurvivalStandard ]
+
+- type: randomHumanoidSettings
+  id: VisitorBartenderHelm
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Diona, Moth, Reptilian, Slime, Vox]
+  parent: VisitorCivilian
+  components:
+    - type: GhostRole
+      name: job-name-bartender-helm
+    - type: Loadout
+      prototypes: [ VisitorBartenderHelm ]
+      roleLoadout: [ RoleSurvivalStandard ]

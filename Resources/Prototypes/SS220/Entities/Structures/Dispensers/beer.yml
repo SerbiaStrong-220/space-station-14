@@ -1,0 +1,34 @@
+- type: entity
+  id: BeerDispenser
+  name: beer dispenser
+  suffix: Filled
+  description: A beer dispenser with a single slot for a container to be filled.
+  parent: ReagentDispenserBase
+  components:
+  - type: Rotatable
+  - type: Sprite
+    sprite: Structures/smalldispensers.rsi
+    drawdepth: SmallObjects
+    state: booze
+  - type: ReagentDispenser
+    storageWhitelist:
+      tags:
+      - DrinkBottle
+    pack: BeerDispenserInventory
+  - type: Transform
+    noRot: false
+  - type: GuideHelp
+    guides:
+    - Bartender
+    - Drinks
+
+- type: entity
+  id: BeerDispenserEmpty
+  suffix: Empty
+  parent: BeerDispenser
+  components:
+  - type: ReagentDispenser
+    storageWhitelist:
+      tags:
+      - DrinkBottle
+    pack: EmptyInventory

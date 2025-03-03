@@ -20,3 +20,5 @@ reagent-name-ReaperSauce = соус "Тёмный жнец"
 reagent-desc-ReaperSauce = Этот соус оправдывает своё название. Используйте в блюдах на свой страх и риск.
 reagent-name-bacchus = благословение бахуса
 reagent-desc-bacchus = Ты был предупреждён.
+reagent-name-spacebeer = космическое пиво
+reagent-desc-spacebeer = Вкус — как у Большого взрыва, только хмельнее.
