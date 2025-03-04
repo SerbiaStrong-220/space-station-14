@@ -23,3 +23,642 @@
   - type: ConditionalSpawner
     prototypes:
       - MobStevenCrocodileGhostRole
+
+## Solo Spawners
+
+- type: entity
+  name: Spawner Mob Abomination
+  id: SpawnerMobAbomination
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobAbomination
+
+
+- type: entity
+  name: Spawner Mob ArgocyteBarrier
+  id: SpawnerMobArgocyteBarrier
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobArgocyteBarrier
+
+
+- type: entity
+  name: Spawner Mob ArgocyteCrawler
+  id: SpawnerMobArgocyteCrawler
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobArgocyteCrawler
+
+
+- type: entity
+  name: Spawner Mob ArgocyteEnforcer
+  id: SpawnerMobArgocyteEnforcer
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobArgocyteEnforcer
+
+
+- type: entity
+  name: Spawner Mob ArgocyteGlider
+  id: SpawnerMobArgocyteGlider
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobArgocyteGlider
+
+
+- type: entity
+  name: Spawner Mob ArgocyteHarvester
+  id: SpawnerMobArgocyteHarvester
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobArgocyteHarvester
+
+
+- type: entity
+  name: Spawner Mob ArgocyteMolder
+  id: SpawnerMobArgocyteMolder
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobArgocyteMolder
+
+
+- type: entity
+  name: Spawner Mob ArgocytePouncer
+  id: SpawnerMobArgocytePouncer
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobArgocytePouncer
+
+
+- type: entity
+  name: Spawner Mob ArgocyteSkitter
+  id: SpawnerMobArgocyteSkitter
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobArgocyteSkitter
+
+
+- type: entity
+  name: Spawner Mob ArgocyteSwiper
+  id: SpawnerMobArgocyteSwiper
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobArgocyteSwiper
+
+
+- type: entity
+  name: Spawner Mob CarpRainbow
+  id: SpawnerMobCarpRainbow
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobCarpRainbow
+
+
+- type: entity
+  name: Spawner Mob CrocodileSpace
+  id: SpawnerMobCrocodileSpace
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobCrocodileSpace
+
+
+- type: entity
+  name: Spawner Mob DragonDungeon
+  id: SpawnerMobDragonDungeon
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDragonDungeon
+
+
+- type: entity
+  name: Spawner Mob FleshClamp
+  id: SpawnerMobFleshClamp
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobFleshClamp
+
+
+- type: entity
+  name: Spawner Mob FleshGolem
+  id: SpawnerMobFleshGolem
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobFleshGolem
+
+
+- type: entity
+  name: Spawner Mob FleshJared
+  id: SpawnerMobFleshJared
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobFleshJared
+
+
+- type: entity
+  name: Spawner Mob FleshLover
+  id: SpawnerMobFleshLover
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobFleshLover
+
+
+- type: entity
+  name: Spawner Mob GiantSpider
+  id: SpawnerMobGiantSpider
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobGiantSpider
+
+
+- type: entity
+  name: Spawner Mob WatcherIcewing
+  id: SpawnerMobWatcherIcewing
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobWatcherIcewing
+
+
+- type: entity
+  name: Spawner Mob WatcherLavaland
+  id: SpawnerMobWatcherLavaland
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobWatcherLavaland
+
+
+- type: entity
+  name: Spawner Mob WatcherMagmawing
+  id: SpawnerMobWatcherMagmawing
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobWatcherMagmawing
+
+
+- type: entity
+  name: Spawner Mob WatcherPride
+  id: SpawnerMobWatcherPride
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobWatcherPride
+
+
+- type: entity
+  name: Spawner Mob Xeno
+  id: SpawnerMobXeno
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXeno
+
+
+- type: entity
+  name: Spawner Mob XenoDrone
+  id: SpawnerMobXenoDrone
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoDrone
+
+
+- type: entity
+  name: Spawner Mob XenoPraetorian
+  id: SpawnerMobXenoPraetorian
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoPraetorian
+
+
+- type: entity
+  name: Spawner Mob XenoQueen
+  id: SpawnerMobXenoQueen
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoQueen
+
+
+- type: entity
+  name: Spawner Mob XenoRavager
+  id: SpawnerMobXenoRavager
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoRavager
+
+
+- type: entity
+  name: Spawner Mob XenoRouny
+  id: SpawnerMobXenoRouny
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoRouny
+
+
+- type: entity
+  name: Spawner Mob XenoRunner
+  id: SpawnerMobXenoRunner
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoRunner
+
+
+- type: entity
+  name: Spawner Mob XenoSpitter
+  id: SpawnerMobXenoSpitter
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoSpitter
+
+## Watchers
+- type: entity
+  parent: MarkerBase
+  id: SpawnerWatchers
+  name: Watchers Mob Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MobWatcherIcewing
+        weight: 60
+      - id: MobWatcherLavaland
+        weight: 60
+      - id: MobWatcherPride
+        weight: 10
+      - id: MobWatcherMagmawing
+        weight: 60
+
+## Carps Sharks Dragon
+- type: entity
+  parent: MarkerBase
+  id: SpawnerCarpsSharksDragon
+  name: Carps Sharks Dragon Mob Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MobDragonDungeon
+        weight: 5
+      - id: MobShark
+        weight: 15
+      - id: MobCarpHolo
+        weight: 60
+      - id: MobCarp
+        weight: 80
+      - id: MobCarpMagic
+        weight: 50
+      - id: MobCarpRainbow
+        weight: 40
+
+## Asteroid Demons
+- type: entity
+  parent: MarkerBase
+  id: SpawnerAsteroidDemons
+  name: Asteroid Demons Mob Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MobGoliath
+        weight: 70
+      - id: MobHivelord
+        weight: 30
+
+## Based Fauna
+- type: entity
+  parent: MarkerBase
+  id: SpawnerBasedFauna
+  name: Based Fauna Mob Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MobGiantSpider
+        weight: 70
+      - id: MobClownSpider
+        weight: 30
+      - id: MobPurpleSnake
+        weight: 70
+      - id: MobSmallPurpleSnake
+        weight: 30
+
+## Space Fauna
+- type: entity
+  parent: MarkerBase
+  id: SpawnerSpaceFauna
+  name: Space Fauna Mob Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MobCobraSpace
+        weight: 50
+      - id: MobKangarooSpace
+        weight: 50
+      - id: MobBearSpace
+        weight: 50
+      - id: MobCrocodileSpace
+        weight: 50
+      - id: MobSpiderSpace
+        weight: 50
+
+## Xeno Fauna
+- type: entity
+  parent: MarkerBase
+  id: SpawnerXenoFauna
+  name: Xeno Fauna Mob Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MobXenoQueen
+        weight: 5
+      - id: MobXenoDrone
+        weight: 50
+      - id: MobXenoSpitter
+        weight: 50
+      - id: MobXenoRouny
+        weight: 1
+      - id: MobXenoRunner
+        weight: 50
+      - id: MobXenoPraetorian
+        weight: 5
+      - id: MobXenoRavager
+        weight: 50
+      - id: MobXeno
+        weight: 50
+
+## Argocyte Fauna
+- type: entity
+  parent: MarkerBase
+  id: SpawnerArgocyteFauna
+  name: Argocyte Fauna Mob Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MobArgocyteBarrier
+        weight: 50
+      - id: MobArgocyteCrawler
+        weight: 50
+      - id: MobArgocytePouncer
+        weight: 50
+      - id: MobArgocyteSwiper
+        weight: 50
+      - id: MobArgocyteSkitter
+        weight: 50
+      - id: MobArgocyteEnforcer
+        weight: 50
+      - id: MobArgocyteMolder
+        weight: 50
+      - id: MobArgocyteHarvester
+        weight: 50
+      - id: MobArgocyteGlider
+        weight: 50
+
+## Flesh Demons
+- type: entity
+  parent: MarkerBase
+  id: SpawnerFleshDemons
+  name: Flesh Demons Mob Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MobAbomination
+        weight: 50
+      - id: MobFleshClamp
+        weight: 50
+      - id: MobFleshGolem
+        weight: 50
+      - id: MobFleshLover
+        weight: 50
+      - id: MobFleshJared
+        weight: 50
+
+## Luminous Fauna
+- type: entity
+  parent: MarkerBase
+  id: SpawnerLuminousFauna
+  name: Luminous Fauna Mob Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MobLuminousObject
+        weight: 50
+      - id: MobLuminousEntity
+        weight: 50
+      - id: MobLuminousPerson
+        weight: 50
