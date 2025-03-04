@@ -148,7 +148,7 @@
   - type: StorageFill
     contents:
       - id: BoxSurvivalSecurity
-      - id: WeaponBlasterKRS
+      - id: WeaponBlasterKRV
       - id: BlasterPowerCellPulse
         amount: 3
       - id: BlasterPowerCellDisabler
