@@ -2352,6 +2352,17 @@
   - type: Spider
   - type: IgnoreSpiderWeb
   - type: Bloodstream
+  #SS220 Fauna update start
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SpiderMob
+  - type: Magboots
+  - type: Puller
+    needsHands: false
+  #SS220 Fauna update end
     bloodMaxVolume: 150
     bloodReagent: CopperBlood
   - type: Speech
@@ -2372,7 +2383,7 @@
   - type: Prying # Open door from xeno.yml.
     pryPowered: true
     force: true
-    speedModifier: 1.5
+    speedModifier: 3 #SS220 Fauna update 1.5 -> 3. B A L A N S  Z O N E S A
     useSound:
       path: /Audio/Items/crowbar.ogg
   - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute from base.yml.
@@ -2448,6 +2459,44 @@
     damage:
       types:
         Piercing: 6
+    #SS220 Fauna update start
+  - type: Cocooner
+    cocoonTypes:
+    - CocoonsList:
+      entityWhiteList:
+        components: 
+        - HumanoidAppearance
+      entityProtoList:
+      - TarantulaCocoon
+  
+    - CocoonsList:
+      entityBlackList:
+        components: 
+        - HumanoidAppearance
+      entityProtoList:
+      - TarantulaAnimalCocoon
+
+    - CocoonsList:
+      entityWhiteList:
+        components: 
+        - Item
+        sizes:
+        - Tiny
+        - Small
+      entityBlackList:
+        components: 
+        - HumanoidAppearance
+      entityProtoList:
+      - TarantulaSmallAnimalCocoon
+
+  - type: ActionGrant
+    actions:
+    - ActionSpawnSpiderWallWebTarantula
+    - ActionPryingTarantula
+    - ActionSpawnSpiderEggTarantula
+    - ActionSpawnSingleSpiderWebTarantula
+    - ActionCocoonTarantula
+    #SS220 Fauna update end
 
 - type: entity
   parent:
@@ -2502,6 +2551,14 @@
     - type: Bloodstream
       bloodMaxVolume: 150
       bloodReagent: Laughter
+    #SS220 Fauna update start
+    - type: ActionGrant
+      actions:
+      - ActionPryingClownSpider
+      - ActionSpawnSpiderWallWebClownSpider
+      - ActionSpawnSpiderEggClownSpider
+      - ActionSpawnSingleSpiderWebClownSpider
+    #SS220 Fauna update end
 
 - type: entity
   name: wizard spider
