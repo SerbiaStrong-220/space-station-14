@@ -62,6 +62,11 @@ public sealed partial class PinpointerComponent : Component
 
     [ViewVariables]
     public bool HasTarget => DistanceToTarget != Distance.Unknown;
+
+    //ss220 contractor pinpointer add start
+    [DataField]
+    public bool IsContractorPinpointer = false;
+    //ss220 contractor pinpointer add end
 }
 
 [Serializable, NetSerializable]
