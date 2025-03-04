@@ -252,6 +252,13 @@
     damageProtection:
       flatReductions:
         Heat: 10 # capable of touching light bulbs and stoves without feeling pain!
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Binary
+    - id: Universal
+  # SS220-Add-Languages end
 
 - type: entity
   abstract: true

@@ -1,3 +1,4 @@
+using Content.Shared.SS220.Language.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 
@@ -60,4 +61,7 @@ public sealed partial class TraitPrototype : IPrototype
     /// </summary>
     [DataField]
     public ProtoId<TraitCategoryPrototype>? Category;
+
+    [DataField]
+    public List<LanguageDefinition> LearnedLanguages = new(); // SS220-Add-Languages 
 }

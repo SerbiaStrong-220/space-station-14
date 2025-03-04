@@ -10,3 +10,10 @@
 - type: traitCategory
   id: Quirks
   name: trait-category-quirks
+
+# SS220-Add-Languages begin
+- type: traitCategory
+  id: Languages
+  name: trait-category-languages
+  maxTraitPoints: 1
+# SS220-Add-Languages end

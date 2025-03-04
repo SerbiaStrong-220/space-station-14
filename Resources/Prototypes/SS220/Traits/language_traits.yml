@@ -1,0 +1,35 @@
+- type: trait
+  id: TradebandLanguage
+  name: "language-tradeband-name"
+  description: "language-tradeband-desc"
+  category: Languages
+  cost: 1
+  learnedLanguages:
+  - id: Gutter
+
+- type: trait
+  id: GutterLanguage
+  name: "language-gutter-name"
+  description: "language-gutter-desc"
+  category: Languages
+  cost: 1
+  learnedLanguages:
+  - id: Gutter
+
+- type: trait
+  id: ClownishLanguage
+  name: "language-clownish-name"
+  description: "language-clownish-desc"
+  category: Languages
+  cost: 1
+  learnedLanguages:
+  - id: Gutter
+
+- type: trait
+  id: NeoRusskiyaLanguage
+  name: "language-neorusskiya-name"
+  description: "language-neorusskiya-desc"
+  category: Languages
+  cost: 1
+  learnedLanguages:
+  - id: Gutter
