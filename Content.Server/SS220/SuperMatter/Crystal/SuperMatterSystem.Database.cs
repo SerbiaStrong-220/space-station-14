@@ -33,9 +33,6 @@ public sealed partial class SuperMatterSystem : EntitySystem
         comp.Name ??= MetaData(crystal.Owner).EntityName;
         Dictionary<Gas, float> gasRatios = new();
 
-        if (!comp.AccumulatedGasesMoles.TryGetValue(Gas.Oxygen, out _))
-            return;
-
         foreach (var gas in Enum.GetValues<Gas>())
         {
             gasRatios.Add(gas, comp.AccumulatedGasesMoles[gas] / comp.AccumulatedGasesMoles.Values.Sum());
