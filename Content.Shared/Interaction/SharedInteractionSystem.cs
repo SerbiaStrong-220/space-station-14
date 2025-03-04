@@ -1367,7 +1367,10 @@ namespace Content.Shared.Interaction
             // TODO: make unique events for storage interaction for SS220
             // SS220-module-furniture-storage
             if (SharedModuleFurnitureComponent.ContainerId == container.ID)
+            {
+                Log.Debug($"Override access via storage for container with id {SharedModuleFurnitureComponent.ContainerId} for user - {ToPrettyString(user)} and target - {ToPrettyString(target)}");
                 return true;
+            }
             // SS220-module-furniture-storage
             if (StorageComponent.ContainerId != container.ID)
                 return false;
