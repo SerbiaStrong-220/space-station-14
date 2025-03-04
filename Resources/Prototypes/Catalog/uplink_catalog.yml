@@ -1769,13 +1769,11 @@
     Telecrystal: 8
   categories:
   - UplinkWearables
-#ss220 raid suit rework begin
-#  conditions:
-#  - !type:StoreWhitelistCondition
-#    whitelist:
-#      tags:
-#      - NukeOpsUplink
-#ss220 raid suit rework end
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkHardsuitSyndieElite
