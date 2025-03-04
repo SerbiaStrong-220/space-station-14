@@ -60,4 +60,7 @@ public sealed partial class TraitPrototype : IPrototype
     /// </summary>
     [DataField]
     public ProtoId<TraitCategoryPrototype>? Category;
+
+    [DataField]
+    public string? LearnedLanguage { get; private set; } // SS220-Add-Languages 
 }
