@@ -30,7 +30,7 @@
       - id: FlashlightSeclite
 
 - type: entity
-  parent: [ClothingBeltStorageBase, ClothingSlotBase]
+  parent: ClothingBeltStorageBase
   id: ClothingBeltWebbingBlueShield
   name: the Blue Shield RPS
   description: Universal unloading vest with straps and belt. It can accommodate anything... anything of a small size.
@@ -62,6 +62,16 @@
             - Medkit
           components:
             - Stunbaton
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        showEnts: False
+        occludes: True
+        ents: []
+      item: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
 
 - type: entity
   parent: ClothingBeltWebbingBlueShield
