@@ -3,8 +3,6 @@ ent-ClothingBackpackArmy = армейский ранец
 
 ent-ClothingBackpackBlueShield = рюкзак "Синий Щит"
     .desc = Рюкзак, специально разработанный для "Синий Щит", с уникальной технологией карманного скафандра.
-ent-ClothingBackpackBlueShieldHight = рюкзак "Синий Щит"
-    .desc = Рюкзак, специально разработанный для "Синий Щит", с уникальной технологией карманного скафандра.
     .suffix = Лёгкий скафандр
 
 ent-ClothingBackpackBlueShieldHight = { ent-ClothingBackpackBlueShield }
