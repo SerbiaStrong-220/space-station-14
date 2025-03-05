@@ -5,12 +5,9 @@ using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Projectiles;
 using Content.Shared.Tools.Components;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using Content.Server.Construction.Completions;
-using Content.Shared.Destructible;
 using Content.Shared.SS220.SuperMatter.Ui;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Content.Shared.Humanoid;
+using Content.Shared.Database;
 
 namespace Content.Server.SS220.SuperMatterCrystal;
 
@@ -88,6 +85,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         if (!entity.Comp.Activated)
         {
             SendAdminChatAlert(entity, Loc.GetString("supermatter-admin-alert-activated"), $"{EntityManager.ToPrettyString(args.Target)}");
+            _adminLog.Add(LogType.Action, LogImpact.High, $"Crystal {ToPrettyString(entity):user} was activated by {ToPrettyString(args.Target):target}");
             entity.Comp.Activated = true;
         }
         args.Handled = true;
