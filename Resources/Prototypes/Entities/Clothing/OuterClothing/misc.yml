@@ -138,9 +138,9 @@
   description: This robe commands authority.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Misc/judge.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/judge.rsi #SS220 Law Department Sprite Update
   - type: Clothing
-    sprite: Clothing/OuterClothing/Misc/judge.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/judge.rsi #SS220 Law Department Sprite Update
 
 - type: entity
   parent: ClothingOuterBase

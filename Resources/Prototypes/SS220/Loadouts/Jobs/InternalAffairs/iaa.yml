@@ -20,6 +20,11 @@
 
 # Head
 - type: loadout
+  id: BeretIAA
+  equipment:
+    head: ClothingHeadHatBeretIAA
+
+- type: loadout
   id: DevilHorns
   effects:
   - !type:GroupLoadoutEffect
