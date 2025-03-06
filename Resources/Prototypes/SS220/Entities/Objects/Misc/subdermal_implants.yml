@@ -122,7 +122,6 @@
         maxVol: 90
         canReact: false
         reagents:
-        #SS220 update-adrenalin begin
         - ReagentId: Rororium
           Quantity: 1.5
         - ReagentId: Ephedrine
@@ -131,7 +130,6 @@
           Quantity: 30
         - ReagentId: Epinephrine
           Quantity: 28.5
-        #SS220 update-adrenalin end
   - type: TriggerImplantAction
   - type: HiddenDescription
     entries:
