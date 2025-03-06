@@ -153,6 +153,8 @@
     stateDoorClosed: blueshield_door
   - type: AccessReader
     access: [ [ "Blueshield" ] ]
+  - type: TargetLockPick
+    chanceToLockPick: 0.55 # need to discuss
 
 #Медицинский отдел
 - type: entity
@@ -257,6 +259,8 @@
     stateDoorClosed: securitypilot_door
   - type: AccessReader
     access: [["Security"]]
+  - type: TargetLockPick
+    chanceToLockPick: 0.55 # need to discuss
 
 #Синдикат
 - type: entity

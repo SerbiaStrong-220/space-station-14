@@ -1,0 +1,8 @@
+- type: entity
+  id: ActionSmartGasMask
+  name: Use smart gas mask
+  components:
+  - type: InstantAction
+    itemIconStyle: BigItem
+    event: !type:SmartGasMaskOpenEvent
+    useDelay: 0.5

@@ -19,6 +19,9 @@
 - type: Tag
   id: MagazineGrenadeArta
 
+- type: Tag
+  id: KRSPowerCell
+
 # READD-VEHICLES
 - type: Tag
   id: JanicartKeys
@@ -196,3 +199,26 @@
 # debug-uplink-fix
 - type: Tag
   id: DebugUplink
+
+# SS220 ClownMimeCyborg
+- type: Tag
+  id: ClothingMaskMime
+
+- type: Tag
+  id: BorgModuleClown
+
+- type: Tag
+  id: BorgModuleMime
+
+- type: Tag
+  id: Baguette
+
+- type: Tag
+  id: BananiumHorn
+
+# SS220-PumpkinLantern-Craft
+- type: Tag
+  id: CarvedPumpkin
+
+- type: Tag
+  id: WhitelistPdaIdPainter

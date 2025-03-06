@@ -96,7 +96,7 @@
   showInVote: false #4boring4vote
   description: greenshift-description
   rules:
-  - SpaceTrafficControlFriendlyEventScheduler
+  #- SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls ReWork
   - BasicRoundstartVariation
 
 - type: gamePreset

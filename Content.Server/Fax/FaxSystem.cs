@@ -31,6 +31,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Shared.NameModifier.Components;
+using Content.Shared.Popups;
 using Content.Shared.Power;
 
 namespace Content.Server.Fax;
@@ -53,6 +54,7 @@ public sealed class FaxSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly PhotocopierSystem _photocopierSystem = default!;
     [Dependency] private readonly FaxecuteSystem _faxecute = default!;
+    [Dependency] private readonly EmagSystem _emag = default!;
 
     private const string PaperSlotId = "Paper";
 
@@ -228,7 +230,7 @@ public sealed class FaxSystem : EntitySystem
                 return;
             }
 
-            if (component.KnownFaxes.ContainsValue(newName) && !HasComp<EmaggedComponent>(uid)) // Allow existing names if emagged for fun
+            if (component.KnownFaxes.ContainsValue(newName) && !_emag.CheckFlag(uid, EmagType.Interaction)) // Allow existing names if emagged for fun
             {
                 _popupSystem.PopupEntity(Loc.GetString("fax-machine-popup-name-exist"), uid);
                 return;
@@ -247,7 +249,12 @@ public sealed class FaxSystem : EntitySystem
 
     private void OnEmagged(EntityUid uid, FaxMachineComponent component, ref GotEmaggedEvent args)
     {
-        _audioSystem.PlayPvs(component.EmagSound, uid);
+        if (!_emag.CompareFlag(args.Type, EmagType.Interaction))
+            return;
+
+        if (_emag.CheckFlag(uid, EmagType.Interaction))
+            return;
+
         args.Handled = true;
     }
 
@@ -261,7 +268,7 @@ public sealed class FaxSystem : EntitySystem
             switch (command)
             {
                 case FaxConstants.FaxPingCommand:
-                    var isForSyndie = HasComp<EmaggedComponent>(uid) &&
+                    var isForSyndie = _emag.CheckFlag(uid, EmagType.Interaction) &&
                                       args.Data.ContainsKey(FaxConstants.FaxSyndicateData);
                     if (!isForSyndie && !component.ResponsePings)
                         return;
@@ -382,7 +389,7 @@ public sealed class FaxSystem : EntitySystem
             { DeviceNetworkConstants.Command, FaxConstants.FaxPingCommand }
         };
 
-        if (HasComp<EmaggedComponent>(uid))
+        if (_emag.CheckFlag(uid, EmagType.Interaction))
             payload.Add(FaxConstants.FaxSyndicateData, true);
 
         _deviceNetworkSystem.QueuePacket(uid, null, payload);
@@ -413,8 +420,17 @@ public sealed class FaxSystem : EntitySystem
         if (dataToCopy.Count == 0)
             return;
 
-        TryComp<NameModifierComponent>(sendEntity, out var nameMod);
+        //ss220 autogamma update
+        var faxEvent = new FaxSendAttemptEvent(uid, component.DestinationFaxAddress, component.FaxName);
+        RaiseLocalEvent(faxEvent);
+        if (faxEvent.Cancelled)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("fax-machine-popup-copy-error"), uid, PopupType.SmallCaution);
+            return;
+        }
+        //ss220 autogamma update
 
+        TryComp<NameModifierComponent>(sendEntity, out var nameMod); //ss220 autogamma update
         TryComp<LabelComponent>(sendEntity, out var labelComponent);
 
         var payload = new NetworkPayload()

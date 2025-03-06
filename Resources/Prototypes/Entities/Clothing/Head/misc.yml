@@ -165,9 +165,9 @@
   description: It smells like dead rat. Lets you speak like one!
   components:
   - type: Sprite
-    sprite: Clothing/Head/Misc/fancycrown.rsi
+    sprite: SS220/Clothing/Head/Misc/fancycrown.rsi #SS220 resprited
   - type: Clothing
-    sprite: Clothing/Head/Misc/fancycrown.rsi
+    sprite: SS220/Clothing/Head/Misc/fancycrown.rsi #SS220 resprited
   - type: MobPrice
     price: 3000
   - type: AddAccentClothing

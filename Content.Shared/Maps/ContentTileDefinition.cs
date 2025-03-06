@@ -113,6 +113,10 @@ namespace Content.Shared.Maps
         /// </summary>
         [DataField("indestructible")] public bool Indestructible = false;
 
+        // SS220 Tile tags begin
+        [DataField("tags")] public string[]? Tags;
+        // SS220 Tile tags end
+
         public void AssignTileId(ushort id)
         {
             TileId = id;

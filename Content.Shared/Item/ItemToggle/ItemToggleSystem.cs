@@ -21,7 +21,7 @@ namespace Content.Shared.Item.ItemToggle;
 public sealed class ItemToggleSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly WieldableSystem _wieldable = default!;//SS220 double_esword-fix
+    [Dependency] private readonly SharedWieldableSystem _wieldable = default!; //SS220 double_esword-fix
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;

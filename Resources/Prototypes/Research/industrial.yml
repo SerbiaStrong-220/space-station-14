@@ -43,6 +43,7 @@
   - PowerCellHigh
   - TurboItemRechargerCircuitboard
   - SMESAdvancedMachineCircuitboard
+  - BlasterPowerCellAlt
 
 - type: technology
   id: MechanicalCompression
@@ -174,6 +175,8 @@
     - PowerDrill
     - JawsOfLife
     - BorgModuleAdvancedTool
+    - Fulton
+    - FultonBeacon
     - BorgModuleProtoKineticAccelerator # ss220
     - BorgModuleFireAxe #SS220 Borg Modules
 

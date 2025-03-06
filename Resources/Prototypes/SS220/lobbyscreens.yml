@@ -33,6 +33,10 @@
 - type: lobbyBackground
   id: Sevastopol
   background: /Textures/SS220/LobbyScreens/Sevastopol.png
+
+- type: lobbyBackground
+  id: SyndiLand
+  background: /Textures/SS220/LobbyScreens/SyndiLand.png
   
 - type: lobbyBackground
   id: CardShowdown

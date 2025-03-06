@@ -141,3 +141,6 @@
   - type: Construction
     graph: BananiumHorn
     node: bananiumHorn
+  - type: Tag #SS220 tag
+    tags:
+    - BananiumHorn
