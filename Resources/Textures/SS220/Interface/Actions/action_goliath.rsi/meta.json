@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from Paradise at https://github.com/ss220-space/Paradise/blob/HEAD/icons/mob/actions/actions.dmi",
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "states": [
+      {
+        "name": "goliath_tentacles"
+      },
+      {
+        "name": "goliath_dash"
+      },
+      {
+        "name": "goliath_tentacles_on"
+      },
+      {
+        "name": "goliath_dash_on"
+      }
+    ]
+  }
