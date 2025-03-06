@@ -27,6 +27,7 @@ using Content.Shared.PDA;
 using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Radio;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
@@ -968,6 +969,10 @@ public sealed partial class ChatSystem : SharedChatSystem
     //ss220 add identity concealment for chat and radio messages start
     public string GetRadioName(EntityUid entity)
     {
+        // for borgs(chassis) and ai(brain)
+        if (HasComp<BorgChassisComponent>(entity) || HasComp<BorgBrainComponent>(entity))
+            return Name(entity);
+
         return GetIdCardName(entity) ?? Loc.GetString("comp-pda-ui-unknown");
     }
 

@@ -2024,8 +2024,11 @@
   name: uplink-scarf-syndie-red-name
   description: uplink-scarf-syndie-red-desc
   productEntity: ClothingNeckScarfStripedSyndieRed
-  cost:
-    Telecrystal: 1
+  #SS220 free-scarf begin
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  #ss220 free-scarf end
   categories:
   - UplinkPointless
 
@@ -2034,8 +2037,11 @@
   name: uplink-scarf-syndie-green-name
   description: uplink-scarf-syndie-green-desc
   productEntity: ClothingNeckScarfStripedSyndieGreen
-  cost:
-    Telecrystal: 1
+  #SS220 free-scarf begin
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  #ss220 free-scarf end
   categories:
     - UplinkPointless
 

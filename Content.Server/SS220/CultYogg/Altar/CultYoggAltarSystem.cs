@@ -39,22 +39,10 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
         RemComp<StrapComponent>(ent);
         RemComp<DestructibleComponent>(ent);
 
-        int stage = 0;
-
         var query = EntityQueryEnumerator<GameRuleComponent, CultYoggRuleComponent>();
         while (query.MoveNext(out var uid, out _, out var cultRule))
         {
             var ev = new CultYoggSacrificedTargetEvent(ent);
-            RaiseLocalEvent(uid, ref ev, true);
-
-            stage = cultRule.AmountOfSacrifices;
-        }
-
-        //sending all cultists updating stage event
-        var queryCultists = EntityQueryEnumerator<CultYoggComponent>(); //ToDo ask if this code is ok
-        while (queryCultists.MoveNext(out var uid, out _))
-        {
-            var ev = new ChangeCultYoggStageEvent(stage);
             RaiseLocalEvent(uid, ref ev, true);
         }
 

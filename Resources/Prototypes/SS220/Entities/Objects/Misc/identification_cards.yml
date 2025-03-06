@@ -123,6 +123,14 @@
         - state: idmagistrate
     - type: PresetIdCard
       job: Magistrate
+    #ss220 add pdaidpainter start
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+    #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard

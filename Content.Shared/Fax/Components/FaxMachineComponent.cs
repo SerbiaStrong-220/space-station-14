@@ -166,3 +166,19 @@ public sealed partial class FaxPrintout
         MetaData = metaData;
     }
 }
+
+//ss220 autogamma update
+public sealed class FaxSendAttemptEvent : CancellableEntityEventArgs
+{
+    public EntityUid FaxEnt;
+    public string DestinationFaxAddress;
+    public string SenderFaxAddress;
+
+    public FaxSendAttemptEvent(EntityUid faxEnt, string destinationFaxAddress, string senderFaxAddress)
+    {
+        FaxEnt = faxEnt;
+        DestinationFaxAddress = destinationFaxAddress;
+        SenderFaxAddress = senderFaxAddress;
+    }
+}
+//ss220 autogamma update

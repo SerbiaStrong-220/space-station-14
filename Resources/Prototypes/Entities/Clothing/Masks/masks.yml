@@ -32,6 +32,12 @@
     sprite: Clothing/Mask/gassecurity.rsi
   - type: Clothing
     sprite: Clothing/Mask/gassecurity.rsi
+  - type: UserInterface #SS220 - Smart gas mask - start
+    interfaces:
+      enum.SmartGasMaskUiKey.Key:
+        type: SmartGasMaskBoundUserInterface
+  - type: SmartGasMask
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskSupport"] #SS220 - Smart gas mask - end
   - type: Armor
     modifiers:
       coefficients:

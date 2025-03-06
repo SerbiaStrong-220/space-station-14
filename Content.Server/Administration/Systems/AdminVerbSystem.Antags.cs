@@ -39,7 +39,7 @@ public sealed partial class AdminVerbSystem
 
     //SS200 CultYogg start
     [ValidatePrototypeId<EntityPrototype>]
-    private const string DefaultCultYoggRule = "CultYoggRule";
+    private const string DefaultCultYoggRule = "CultYoggRuleMidPop";
     //SS220 CultYogg end
 
     // All antag verbs have names so invokeverb works.
