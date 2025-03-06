@@ -73,4 +73,4 @@
   name: secure medical crate
   components:
   - type: AccessReader
-    access: [["Engineering"], ["Command"], ["Security"]]
+    access: [["Medical"], ["Command"], ["Security"]]
