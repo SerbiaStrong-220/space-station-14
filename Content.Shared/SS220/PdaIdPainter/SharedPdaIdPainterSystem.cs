@@ -33,6 +33,8 @@ public abstract class SharedPdaIdPainterSystem : EntitySystem
     {
         base.Initialize();
 
+        GetAllVariants();
+
         SubscribeLocalEvent<PdaIdPainterComponent, ComponentInit>(OnCompInit);
         SubscribeLocalEvent<PdaIdPainterComponent, ComponentRemove>(OnCompRemove);
 
@@ -41,6 +43,8 @@ public abstract class SharedPdaIdPainterSystem : EntitySystem
 
         SubscribeLocalEvent<PdaIdPainterComponent, PdaIdPainterPickedPdaMessage>(OnPdaPicked);
         SubscribeLocalEvent<PdaIdPainterComponent, PdaIdPainterPickedIdMessage>(OnIdPicked);
+
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnProtoReloaded);
     }
 
     private void OnCompInit(Entity<PdaIdPainterComponent> ent, ref ComponentInit args)
@@ -104,6 +108,9 @@ public abstract class SharedPdaIdPainterSystem : EntitySystem
         if (!IsAllowed(ent.Owner, args.Actor))
             return;
 
+        if (!_proto.TryIndex(args.Proto, out var prototype))
+            return;
+
         var target = ent.Comp.IdCardSlot.Item;
 
         if (target != null && TryComp<PdaIdPainterTargetComponent>(target, out var targetComp))
@@ -111,10 +118,34 @@ public abstract class SharedPdaIdPainterSystem : EntitySystem
             Dirty(target.Value, targetComp);
         }
 
-        ent.Comp.IdChosenProto = args.Proto;
+        if (!PdaAndIdProtos.Contains(prototype))
+            return;
+
+        ent.Comp.IdChosenProto = prototype;
         Dirty(ent);
 
         UpdateVisuals(ent.Comp.IdChosenProto, target);
+    }
+
+    private void OnProtoReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (args.WasModified<EntityPrototype>())
+            GetAllVariants();
+    }
+
+    private void GetAllVariants()
+    {
+        PdaAndIdProtos.Clear();
+
+        var prototypes = _proto.EnumeratePrototypes<EntityPrototype>();
+
+        foreach (var proto in prototypes)
+        {
+            if (!IsValidTarget(proto))
+                continue;
+
+            PdaAndIdProtos.Add(proto);
+        }
     }
 
     private bool IsAllowed(EntityUid entity, EntityUid owner)
@@ -129,7 +160,7 @@ public abstract class SharedPdaIdPainterSystem : EntitySystem
         return false;
     }
 
-    protected bool IsValidTarget(EntityPrototype proto)
+    private bool IsValidTarget(EntityPrototype proto)
     {
         if (proto.Abstract || proto.HideSpawnMenu)
             return false;
