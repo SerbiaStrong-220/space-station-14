@@ -106,7 +106,7 @@
     sprite: SS220/Clothing/Head/Hats/streetjudge.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/streetjudge.rsi
-  #- type: Tag
+  #- type: Tag Расскоментировать, когда добавять версию шлема для гамлета
     #tags:
     #- HamsterWearable
 
