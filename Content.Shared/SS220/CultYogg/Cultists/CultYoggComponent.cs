@@ -10,6 +10,9 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.CultYogg.Cultists;
 
+/// <summary>
+/// Component of the Cult Yogg cultist.
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedCultYoggSystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]
 public sealed partial class CultYoggComponent : Component
@@ -95,7 +98,7 @@ public sealed partial class CultYoggComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField, AutoNetworkedField]
-    public int CurrentStage = 0;
+    public CultYoggStage CurrentStage = CultYoggStage.Initial;
     #endregion
 
     /// <summary>

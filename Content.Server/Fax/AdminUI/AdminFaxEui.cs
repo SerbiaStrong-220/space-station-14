@@ -10,12 +10,15 @@ using Content.Shared.Follower;
 using Content.Shared.Ghost;
 using Content.Shared.Paper;
 using Content.Shared.SS220.Photocopier;
+using Content.Server.Administration.Logs;
+using Content.Shared.Database;
 
 namespace Content.Server.Fax.AdminUI;
 
 public sealed class AdminFaxEui : BaseEui
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly IAdminLogManager _adminLogManager = default!; // SS220-add-eui-log
     private readonly FaxSystem _faxSystem;
     private readonly FollowerSystem _followerSystem;
 
@@ -75,6 +78,10 @@ public sealed class AdminFaxEui : BaseEui
                     PrototypeId = "PaperNtFormCc"
                 };
 
+                // SS220-add-eui-log
+                _adminLogManager.Add(LogType.Action, LogImpact.Low,
+                    $"Announcement from {Player:user}, title is {sendData.Title}, content {sendData.Content}, stamp state '{sendData.StampState}', stamped by {sendData.From}");
+                // SS220-add-eui-log
                 var printout = new FaxPrintout(dataToCopy, metaData);
                 _faxSystem.Receive(_entityManager.GetEntity(sendData.Target), printout);
                 break;

@@ -1104,12 +1104,12 @@
   components:
   - type: AmmoCounter #SS220-FIX bullet show
   - type: Sprite
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/toy.rsi # ss220 revolvers resprite
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
   - type: Item
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/toy.rsi # ss220 revolvers resprite
     heldPrefix: capgun
   - type: Tag
     tags:

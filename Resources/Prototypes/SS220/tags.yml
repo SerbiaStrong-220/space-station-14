@@ -19,6 +19,9 @@
 - type: Tag
   id: MagazineGrenadeArta
 
+- type: Tag
+  id: KRSPowerCell
+
 # READD-VEHICLES
 - type: Tag
   id: JanicartKeys
@@ -216,3 +219,6 @@
 # SS220-PumpkinLantern-Craft
 - type: Tag
   id: CarvedPumpkin
+
+- type: Tag
+  id: WhitelistPdaIdPainter
