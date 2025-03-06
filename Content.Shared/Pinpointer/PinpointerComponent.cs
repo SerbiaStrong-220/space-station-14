@@ -1,3 +1,4 @@
+using Content.Shared.SS220.Pinpointer;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -8,7 +9,6 @@ namespace Content.Shared.Pinpointer;
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]
-[Access(typeof(SharedPinpointerSystem))]
 public sealed partial class PinpointerComponent : Component
 {
     // TODO: Type serializer oh god
@@ -62,6 +62,24 @@ public sealed partial class PinpointerComponent : Component
 
     [ViewVariables]
     public bool HasTarget => DistanceToTarget != Distance.Unknown;
+
+    [DataField]
+    [AutoNetworkedField]
+    public HashSet<TrackedItem> Sensors = [];
+
+    [DataField]
+    [AutoNetworkedField]
+    public HashSet<TrackedItem> TrackedItems = [];
+
+    [DataField]
+    [AutoNetworkedField]
+    public PinpointerMode Mode = PinpointerMode.Crew;
+
+    public EntityUid? TrackedByDnaEntity;
+    public string? DnaToTrack;
+
+    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(2f);
+    public TimeSpan NextUpdate;
 }
 
 [Serializable, NetSerializable]
