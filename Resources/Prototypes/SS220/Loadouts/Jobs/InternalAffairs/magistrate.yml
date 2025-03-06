@@ -1,8 +1,34 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Job Time
+- type: loadoutEffectGroup
+  id: MagistrateMonocle
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobMagistrate
+      time: 72000 # 20
+
 #Head
 - type: loadout
   id: MagistratePwig
   equipment:
     head: ClothingHeadHatPwig
+
+# Eyes
+- type: loadout
+  id: GlassesCommand
+  equipment:
+    eyes: ClothingEyesGlassesCommand
+
+- type: loadout
+  id: MagistrateMonocle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MagistrateMonocle
+  equipment:
+    eyes: ClothingEyesMonocle
 
 # Outerclothing
 - type: loadout
