@@ -54,7 +54,6 @@ entities:
     - type: MetaData
     - type: Transform
     - type: Map
-      mapPaused: True
     - type: PhysicsMap
     - type: GridTree
     - type: MovedGrids
@@ -8707,6 +8706,8 @@ entities:
     - EnergySword
     - ItemToggleSize
     - UseDelay
+    - Blocking
+    - Reflect
 - proto: ExpensiveLighterSyndicate
   entities:
   - uid: 960
