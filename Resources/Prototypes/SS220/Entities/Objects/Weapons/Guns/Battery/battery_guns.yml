@@ -70,7 +70,7 @@
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
           tags:
-            - BlasterPowerCell
+            - KRSPowerCell
 
 - type: entity
   id: WeaponBlasterKRV
@@ -90,7 +90,7 @@
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
           tags:
-            - BlasterPowerCell
+            - KRSPowerCell
 
 # Новые прототипы пишите выше
 # Death Squad

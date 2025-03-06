@@ -489,6 +489,7 @@
         - CombatKnife
         - Truncheon
         - HolofanProjectorSecurity # SS220 Fix #2009
+        - KRSPowerCell # SS220-BlueShield MinorFix
       components:
         - Stunbaton
         - FlashOnTrigger
