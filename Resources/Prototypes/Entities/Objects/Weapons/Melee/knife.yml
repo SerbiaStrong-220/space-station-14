@@ -89,6 +89,7 @@
   - type: Tag
     tags:
     - CombatKnife
+    - AttachmentSlotMuzzle #SS220-NewAttachables
     - Knife
   - type: Sprite
     sprite: Objects/Weapons/Melee/combat_knife.rsi

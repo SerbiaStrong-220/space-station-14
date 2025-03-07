@@ -25,4 +25,12 @@
   </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\XamlIL.targets" />
+  <ItemGroup>
+    <EmbeddedResource Remove="ss220\attachables\AttachablesContainerMenu.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Update="SS220\Attachables\AttachablesContainerMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AdditionalFiles>
+  </ItemGroup>
 </Project>

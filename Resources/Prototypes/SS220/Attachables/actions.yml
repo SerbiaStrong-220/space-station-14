@@ -1,0 +1,8 @@
+- type: entity
+  id: ActionToggleAttachablesMenu
+  name: Idk
+  components:
+  - type: InstantAction
+    itemIconStyle: BigItem
+    event: !type:AttachablesContainerOpenEvent
+    useDelay: 0.5

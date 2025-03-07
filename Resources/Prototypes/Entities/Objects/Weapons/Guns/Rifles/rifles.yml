@@ -12,22 +12,26 @@
         name: Muzzle
         whitelist:
           tags:
-            - AttachmentMuzzle
+            - AttachmentSlotMuzzle
       attachment_slot_rail:
         name: Rail
         whitelist:
           tags:
-            - AttachmentRail
+            - AttachmentSlotRail
       attachment_slot_underbarrel:
         name: Underbarrel
         whitelist:
           tags:
-            - AttachmentUnderbarrel
+            - AttachmentSlotUnder
       attachment_slot_stock:
         name: Stock
         whitelist:
           tags:
-            - AttachmentStock
+            - AttachmentSlotStock
+  - type: UserInterface
+    interfaces:
+      enum.AttachablesContainerUiKey.Key:
+        type: AttachablesContainerBoundUserInterface
   #SS220-NewAttachables end
   - type: EmitSoundOnLand
     sound:

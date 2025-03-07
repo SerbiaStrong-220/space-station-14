@@ -1,5 +1,7 @@
 
 
+using Robust.Shared.Prototypes;
+
 namespace Content.Shared.SS220.Attachables;
 
 public abstract partial class AttachableComponent : Component

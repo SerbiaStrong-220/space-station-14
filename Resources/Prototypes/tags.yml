@@ -33,6 +33,22 @@
 - type: Tag
   id: ATVKeys
 
+#SS220-NewAttachables begin
+
+- type: Tag
+  id: AttachmentSlotMuzzle
+
+- type: Tag
+  id: AttachmentSlotRail
+
+- type: Tag
+  id: AttachmentSlotStock
+
+- type: Tag
+  id: AttachmentSlotUnder
+
+#SS220-NewAttachables end
+
 - type: Tag
   id: Balloon
 
