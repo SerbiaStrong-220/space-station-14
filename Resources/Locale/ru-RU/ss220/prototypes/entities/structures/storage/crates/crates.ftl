@@ -1,2 +1,2 @@
-ent-CrateMedicalSecureImplant = { ent-CrateBaseSecure. }
+ent-CrateMedicalSecureImplant = { ent-CrateBaseSecure }
     .desc = { ent-CrateBaseSecure.desc }
