@@ -30,6 +30,10 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     private const string MindShieldImplantTag = "MindShield";
     private const float MindShieldRemoveTime = 40;
     //SS220-mindslave end
+    // SS220-fakeMS fix begin
+    [ValidatePrototypeId<EntityPrototype>]
+    private const string FakeMindShieldImplant = "FakeMindShieldImplant";
+    // SS220-fakeMS fix end
 
     public override void Initialize()
     {
@@ -83,6 +87,16 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         }
         //SS220-mindslave end
 
+        // SS220-fakeMSfix begin
+        if (component.Implant == FakeMindShieldImplant)
+        {
+            if (HasComp<MindShieldComponent>(target))
+            {
+                _popup.PopupEntity(Loc.GetString("mindslave-target-mindshielded"), args.User);
+                return;
+            }
+        }
+        // SS220-fakeMSfix end
         //TODO: Rework when surgery is in for implant cases
         if (component.CurrentMode == ImplanterToggleMode.Draw && !component.ImplantOnly)
         {
