@@ -33,9 +33,9 @@
 - type: loadoutGroup
   id: MagistrateHead
   name: loadout-group-magistrate-head
-  hidden: true
   loadouts:
   - MagistratePwig
+  - MagistrateStreetJudge
 
 - type: loadoutGroup
   id: MagistrateEyes
@@ -75,6 +75,7 @@
   name: loadout-group-iaa-head
   minLimit: 0
   loadouts:
+  - BeretIAA
   - DevilHorns
 
 - type: loadoutGroup

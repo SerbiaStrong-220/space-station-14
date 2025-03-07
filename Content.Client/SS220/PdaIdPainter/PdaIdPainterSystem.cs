@@ -7,43 +7,18 @@ namespace Content.Client.SS220.PdaIdPainter;
 
 public sealed class PdaIdPainterSystem : SharedPdaIdPainterSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IComponentFactory _factory = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        GetAllVariants();
-
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnProtoReloaded);
         SubscribeLocalEvent<PdaIdPainterTargetComponent, AfterAutoHandleStateEvent>(HandleState);
     }
 
     private void HandleState(Entity<PdaIdPainterTargetComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         UpdateVisuals(ent.Comp.NewProto, ent.Owner);
-    }
-
-    private void OnProtoReloaded(PrototypesReloadedEventArgs args)
-    {
-        if (args.WasModified<EntityPrototype>())
-            GetAllVariants();
-    }
-
-    private void GetAllVariants()
-    {
-        PdaAndIdProtos.Clear();
-
-        var prototypes = _proto.EnumeratePrototypes<EntityPrototype>();
-
-        foreach (var proto in prototypes)
-        {
-            if (!IsValidTarget(proto))
-                continue;
-
-            PdaAndIdProtos.Add(proto);
-        }
     }
 
     protected override void UpdateSprite(EntityUid uid, EntityPrototype proto)
