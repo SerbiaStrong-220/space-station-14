@@ -37,9 +37,6 @@
     - Wooden
   - type: Anchorable
   - type: Rotatable
-  # - type: Construction # TODO: make it
-  #   graph: Dresser
-  #   node: dresser
 
 - type: entity
   id: BaseModularPart

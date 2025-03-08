@@ -22,7 +22,6 @@ using Content.Shared.Physics;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Interaction;
-using Content.Shared.SS220.ModuleFurniture.Components;
 using Content.Shared.Storage;
 using Content.Shared.Strip;
 using Content.Shared.Tag;
