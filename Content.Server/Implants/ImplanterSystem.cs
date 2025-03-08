@@ -9,6 +9,7 @@ using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
+using Content.Shared.SS220.MindSlave;
 using Content.Shared.Tag; // SS220-mindslave
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -91,6 +92,11 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         if (component.Implant == FakeMindShieldImplant)
         {
             if (HasComp<MindShieldComponent>(target))
+            {
+                _popup.PopupEntity(Loc.GetString("mindslave-target-mindshielded"), args.User);
+                return;
+            }
+            if (HasComp<MindSlaveComponent>(target))
             {
                 _popup.PopupEntity(Loc.GetString("mindslave-target-mindshielded"), args.User);
                 return;
