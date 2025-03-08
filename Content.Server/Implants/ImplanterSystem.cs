@@ -96,9 +96,9 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
                 _popup.PopupEntity(Loc.GetString("mindslave-target-mindshielded"), args.User);
                 return;
             }
-            if (HasComp<MindSlaveComponent>(target))
+            if (_mindslave.IsEnslaved(target))
             {
-                _popup.PopupEntity(Loc.GetString("mindslave-target-mindshielded"), args.User);
+                _popup.PopupEntity(Loc.GetString("mindshield-target-mindslaved"), target, args.User);
                 return;
             }
         }
