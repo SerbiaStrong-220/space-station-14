@@ -87,6 +87,7 @@
   name: syndicate assault cyborg
   description: A lean, mean killing machine with access to a variety of deadly modules.
   components:
+#SS220 languages revive begin
     - type: Language
       availableLanguages:
       - id: Galactic
@@ -118,6 +119,7 @@
         canSpeak: false
       - id: Binary
       - id: Codespeak
+#SS220 languages revive end
     - type: Sprite
       layers:
         - state: synd_sec

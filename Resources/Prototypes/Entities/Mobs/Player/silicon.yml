@@ -486,6 +486,7 @@
     visible: false
   - type: BlockMovement
     blockInteraction: false
+#SS220 languages revive begin
   - type: Language
     availableLanguages:
     - id: Galactic
@@ -503,6 +504,7 @@
     - id: Arati
     - id: Canilunzt
     - id: Binary
+#SS220 languages revive end
   - type: SiliconLawProvider
     laws: Crewsimov
   - type: SiliconLawBound
