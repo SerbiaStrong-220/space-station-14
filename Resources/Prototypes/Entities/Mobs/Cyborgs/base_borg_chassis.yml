@@ -359,6 +359,36 @@
     - AllAccess #Randomized access would be fun. AllAccess is the best i can think of right now that does make it too hard for it to enter the station or navigate it..
   - type: AccessReader
     access: [["Command"], ["Research"]]
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: SolCommon
+      canSpeak: false
+    - id: Tradeband
+      canSpeak: false
+    - id: Gutter
+      canSpeak: false
+    - id: Clownish
+      canSpeak: false
+    - id: NeoRusskiya
+      canSpeak: false
+    - id: Sintaunathi
+      canSpeak: false
+    - id: Siiktajr
+      canSpeak: false
+    - id: VoxPidgin
+      canSpeak: false
+    - id: Rootspeak
+      canSpeak: false
+    - id: Bubblish
+      canSpeak: false
+    - id: Tkachi
+      canSpeak: false
+    - id: Arati
+      canSpeak: false
+    - id: Canilunzt
+      canSpeak: false
+    - id: Binary
   - type: StartIonStormed
     ionStormAmount: 3
   - type: IonStormTarget

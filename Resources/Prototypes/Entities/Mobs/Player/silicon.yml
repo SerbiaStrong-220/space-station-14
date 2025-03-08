@@ -486,6 +486,23 @@
     visible: false
   - type: BlockMovement
     blockInteraction: false
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: SolCommon
+    - id: Tradeband
+    - id: Gutter
+    - id: Clownish
+    - id: NeoRusskiya
+    - id: Sintaunathi
+    - id: Siiktajr
+    - id: VoxPidgin
+    - id: Rootspeak
+    - id: Bubblish
+    - id: Tkachi
+    - id: Arati
+    - id: Canilunzt
+    - id: Binary
   - type: SiliconLawProvider
     laws: Crewsimov
   - type: SiliconLawBound
