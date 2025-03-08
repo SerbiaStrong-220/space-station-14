@@ -1,4 +1,6 @@
-﻿using Content.Shared.Pinpointer;
+﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Shared.Pinpointer;
 using Content.Shared.SS220.Pinpointer;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;

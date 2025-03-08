@@ -9,6 +9,7 @@ namespace Content.Shared.Pinpointer;
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState]
+[Access(typeof(SharedPinpointerSystem))]
 public sealed partial class PinpointerComponent : Component
 {
     // TODO: Type serializer oh god
@@ -63,23 +64,38 @@ public sealed partial class PinpointerComponent : Component
     [ViewVariables]
     public bool HasTarget => DistanceToTarget != Distance.Unknown;
 
+    //ss220 add pinpointer ui start
     [DataField]
     [AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
     public HashSet<TrackedItem> Sensors = [];
 
     [DataField]
     [AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
     public HashSet<TrackedItem> TrackedItems = [];
 
     [DataField]
     [AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
     public PinpointerMode Mode = PinpointerMode.Crew;
 
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
     public EntityUid? TrackedByDnaEntity;
+
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
     public string? DnaToTrack;
 
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
     public TimeSpan UpdateInterval = TimeSpan.FromSeconds(2f);
+
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
     public TimeSpan NextUpdate;
+    //ss220 add pinpointer ui end
 }
 
 [Serializable, NetSerializable]
