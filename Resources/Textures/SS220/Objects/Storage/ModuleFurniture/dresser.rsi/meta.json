@@ -11,10 +11,13 @@
             "name": "dresser-foundation"
         },
 		{
-            "name": "drawer-wood"
+            "name": "drawer"
         },
         {
-            "name": "drawer-wood-open"
+            "name": "drawer-closed"
+        },
+        {
+            "name": "drawer-open"
         }
     ]
 }

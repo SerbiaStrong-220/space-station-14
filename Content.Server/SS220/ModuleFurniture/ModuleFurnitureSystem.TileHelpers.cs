@@ -89,7 +89,7 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
         DebugTools.Assert(!furnitureComp.CachedLayout.ContainsKey(offset));
 
         AddToLayout(furnitureComp, part, offset);
-        _appearance.SetData(part.Owner, ModuleFurnitureOpenVisuals.InFurniture, true);
+        _appearance.SetData(part.Owner, ModuleFurniturePartVisuals.InFurniture, true);
         DebugTools.Assert(furnitureComp.CachedLayout.Count == furnitureComp.DrawerContainer.Count);
     }
 

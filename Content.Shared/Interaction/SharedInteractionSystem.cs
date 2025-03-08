@@ -169,7 +169,7 @@ namespace Content.Shared.Interaction
             // As long as range>0, the UI frame updates should have auto-closed the UI if it is out of range.
             DebugTools.Assert(range <= 0 || UiRangeCheck(ev.Actor, ev.Target, range));
 
-            if (range <= 0 && !IsAccessible(ev.Actor, ev.Target))
+            if (range <= 0 && !IsAccessible<OpenBoundInterfaceMessage>(ev.Actor, ev.Target)) // SS220-interaction-expansion
             {
                 ev.Cancel();
                 return;
@@ -222,7 +222,7 @@ namespace Content.Shared.Interaction
             if (target.Comp.ParentUid == user.Owner)
                 return true;
 
-            return InRangeAndAccessible(user, target, range) || _ignoreUiRangeQuery.HasComp(user);
+            return InRangeAndAccessible<OpenBoundInterfaceMessage>(user, target, range) || _ignoreUiRangeQuery.HasComp(user); //SS220-interaction-extension
         }
 
         /// <summary>
@@ -1194,7 +1194,7 @@ namespace Content.Shared.Interaction
 
             // Check if interacted entity is in the same container, the direct child, or direct parent of the user.
             // This is bypassed IF the interaction happened through an item slot (e.g., backpack UI)
-            if (checkAccess && !IsAccessible(user, used))
+            if (checkAccess && !IsAccessible<ActivateInWorldEvent>(user, used)) // SS220-interaction-expansion
                 return false;
 
             complexInteractions ??= _actionBlockerSystem.CanComplexInteract(user);
@@ -1331,6 +1331,28 @@ namespace Content.Shared.Interaction
             return IsAccessible(user, target) && InRangeUnobstructed(user, target, range, collisionMask, predicate);
         }
 
+        // SS220-interaction-expansion-begin
+        public bool InRangeAndAccessible<T>(
+            Entity<TransformComponent?> user,
+            Entity<TransformComponent?> target,
+            float range = InteractionRange,
+            CollisionGroup collisionMask = InRangeUnobstructedMask,
+            Ignored? predicate = null) where T : EntityEventArgs
+        {
+            if (InRangeAndAccessible(user, target, range, collisionMask, predicate))
+                return true;
+
+            //yep thats ugly
+            if (!Resolve(user, ref user.Comp))
+                return false;
+
+            if (!Resolve(target, ref target.Comp))
+                return false;
+
+            return IsAccessible<T>(user, target) && InRangeUnobstructed(user, target, range, collisionMask, predicate);
+        }
+        // SS220-interaction-expansion-end
+
         /// <summary>
         /// Check if a user can access a target or if they are stored in different containers.
         /// </summary>
@@ -1349,6 +1371,27 @@ namespace Content.Shared.Interaction
             return container != null && CanAccessViaStorage(user, target, container);
         }
 
+        // SS220-interaction-expansion-begin
+        /// <summary>
+        /// Generic method for extension of overriding accessibility
+        /// </summary>
+        /// <typeparam name="T">associated event type</typeparam>
+        public bool IsAccessible<T>(Entity<TransformComponent?> user, Entity<TransformComponent?> target) where T : EntityEventArgs // SS220-interaction-expansion
+        {
+            var ev_exact = new AccessibleOverrideEvent<T>(user, target);
+            RaiseLocalEvent(target, ref ev_exact);
+            RaiseLocalEvent(user, ref ev_exact);
+
+            if (ev_exact.Handled)
+            {
+                Log.Debug($"Accessible Override for user {ToPrettyString(user)} and target {ToPrettyString(target)} for the event type {typeof(T)}");
+                return ev_exact.Accessible;
+            }
+
+            return IsAccessible(user, target);
+        }
+        // SS220-interaction-expansion-end
+
         /// <summary>
         ///     If a target is in range, but not in the same container as the user, it may be inside of a backpack. This
         ///     checks if the user can access the item in these situations.
@@ -1364,14 +1407,6 @@ namespace Content.Shared.Interaction
         /// <inheritdoc cref="CanAccessViaStorage(Robust.Shared.GameObjects.EntityUid,Robust.Shared.GameObjects.EntityUid)"/>
         public bool CanAccessViaStorage(EntityUid user, EntityUid target, BaseContainer container)
         {
-            // TODO: make unique events for storage interaction for SS220
-            // SS220-module-furniture-storage
-            if (SharedModuleFurnitureComponent.ContainerId == container.ID)
-            {
-                Log.Debug($"Override access via storage for container with id {SharedModuleFurnitureComponent.ContainerId} for user - {ToPrettyString(user)} and target - {ToPrettyString(target)}");
-                return true;
-            }
-            // SS220-module-furniture-storage
             if (StorageComponent.ContainerId != container.ID)
                 return false;
 
@@ -1580,6 +1615,24 @@ namespace Content.Shared.Interaction
         public bool Handled;
         public bool Accessible = false;
     }
+
+    // SS220-interaction-extension-begin
+    /// <summary>
+    /// Raised both on target and on user. For overriding exact interaction event.
+    /// If <typeparamref name="T"/> is <see cref="EntityEventArgs"/> it wont raise.
+    /// </summary>
+    /// <typeparam name="T"> event associated with accessible event</typeparam>
+    [ByRefEvent]
+    public record struct AccessibleOverrideEvent<T>(EntityUid User, EntityUid Target) where T : EntityEventArgs
+    {
+        public readonly EntityUid User = User;
+        public readonly EntityUid Target = Target;
+
+        public bool Handled;
+        public bool Accessible = false;
+    }
+
+    // SS220-interaction-extension-end
 
     /// <summary>
     /// Override event raised directed on a user to check InRangeUnoccluded AND InRangeUnobstructed to the target if you require custom logic.

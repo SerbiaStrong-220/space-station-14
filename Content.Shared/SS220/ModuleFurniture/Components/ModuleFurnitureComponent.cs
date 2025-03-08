@@ -21,7 +21,6 @@ public abstract partial class SharedModuleFurnitureComponent : Component
         )
     );
 
-    [DataField]
     public static string ContainerId = "module-furniture";
 
     /// <summary>

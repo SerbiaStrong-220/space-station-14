@@ -26,9 +26,11 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
 
         SubscribeLocalEvent<ModuleFurnitureComponent, ComponentGetState>(GetCompState);
 
-        SubscribeLocalEvent<ModuleFurnitureComponent, InsertedFurniturePart>(OnInsertedFurniturePart);
-        SubscribeLocalEvent<ModuleFurnitureComponent, RemoveFurniturePartEvent>(OnRemoveFurniturePart);
+        // SubscribeLocalEvent<ModuleFurnitureComponent, InsertedFurniturePart>(OnInsertedFurniturePart);
+        // SubscribeLocalEvent<ModuleFurnitureComponent, RemoveFurniturePartEvent>(OnRemoveFurniturePart);
         SubscribeLocalEvent<ModuleFurnitureComponent, DeconstructFurnitureEvent>(OnDeconstructFurniturePart);
+
+        SubscribeLocalEvent<ModuleFurniturePartComponent, EntGotRemovedFromContainerMessage>(OnPartRemovedFromContainer);
 
         SubscribeLocalEvent<ModuleFurniturePartComponent, BoundUIOpenedEvent>(OnPartBUIOpened);
         SubscribeLocalEvent<ModuleFurniturePartComponent, BoundUIClosedEvent>(OnPartBUIClosed);
@@ -53,8 +55,9 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
                 continue;
             }
             AddToOccupation(entity.Comp, (spawnedUid, partComponent), offset.Value);
-            _appearance.SetData(spawnedUid, ModuleFurnitureOpenVisuals.InFurniture, true);
+            _appearance.SetData(spawnedUid, ModuleFurniturePartVisuals.InFurniture, true);
             AddToLayout(entity.Comp, (spawnedUid, partComponent), offset.Value);
+            _appearance.SetData(spawnedUid, ModuleFurniturePartVisuals.Opened, false);
         }
         Dirty(entity);
     }
@@ -129,10 +132,11 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
             return;
         }
 
-        _appearance.SetData(entityToRemove, ModuleFurnitureOpenVisuals.InFurniture, false);
+        _appearance.SetData(entityToRemove, ModuleFurniturePartVisuals.InFurniture, false);
 
         DebugTools.Assert(!entity.Comp.CachedLayout.Values.Contains(netEntityToRemove));
         DebugTools.Assert(!entity.Comp.DrawerContainer.Contains(entityToRemove));
+
         Dirty(entity);
     }
 
@@ -141,16 +145,29 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
         // If needed
     }
 
+    private void OnPartRemovedFromContainer(Entity<ModuleFurniturePartComponent> entity, ref EntGotRemovedFromContainerMessage args)
+    {
+        if (_container.TryGetContainer(entity.Owner, StorageComponent.ContainerId, out var container))
+            _container.EmptyContainer(container);
+
+        EntityManager.QueueDeleteEntity(entity);
+    }
+
     private void OnPartBUIOpened(Entity<ModuleFurniturePartComponent> entity, ref BoundUIOpenedEvent args)
     {
-        if (args.UiKey is StorageComponent.StorageUiKey)
-            _appearance.SetData(entity.Owner, ModuleFurnitureOpenVisuals.Opened, true);
+        if (args.UiKey is not StorageComponent.StorageUiKey)
+            return;
+
+        _appearance.SetData(entity.Owner, ModuleFurniturePartVisuals.Opened, true);
+
+        if (!_container.TryGetContainingContainer((entity.Owner, null, null), out var container))
+            return;
     }
 
     private void OnPartBUIClosed(Entity<ModuleFurniturePartComponent> entity, ref BoundUIClosedEvent args)
     {
         if (args.UiKey is StorageComponent.StorageUiKey)
-            _appearance.SetData(entity.Owner, ModuleFurnitureOpenVisuals.Opened, false);
+            _appearance.SetData(entity.Owner, ModuleFurniturePartVisuals.Opened, false);
     }
 
 

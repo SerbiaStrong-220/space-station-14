@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Numerics;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -37,14 +36,18 @@ public sealed partial class ModuleFurniturePartComponent : Component
     [DataField(required: true)]
     public Vector2i SpriteSize;
 
-    [DataField]
-    public string OpenStatePostfix = "opened";
+    /// <summary>
+    /// Used to correctly change draw depth in client code.
+    /// </summary>
+    public bool Opened;
 }
 
 [Serializable, NetSerializable]
-public enum ModuleFurnitureOpenVisuals : byte
+public enum ModuleFurniturePartVisuals : byte
 {
     InFurniture,
     Opened,
-    Layer
+    LayerOpened,
+    LayerClosed,
+    LayerItem
 }

@@ -54,23 +54,21 @@
     size: Huge
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
-    state: drawer-wood
     layers:
-    - state: drawer-wood-open
-      map: ["enum.ModuleFurnitureOpenVisuals.Layer"]
+    - state: drawer
+      map: ["enum.ModuleFurniturePartVisuals.LayerItem"]
+    - state: drawer-open
+      map: ["enum.ModuleFurniturePartVisuals.LayerOpened"]
+    - state: drawer-closed
+      map: ["enum.ModuleFurniturePartVisuals.LayerClosed"]
   - type: Storage
     grid:
-    - 0,0,5,5
-    maxItemSize: Huge
+    - 0,0,3,6
+    maxItemSize: Normal
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
         ents: []
-  # - type: GenericVisualizer
-  #   visuals:
-  #     enum.ModuleFurnitureOpenVisuals.Opened:
-  #       enum.ModuleFurnitureOpenVisuals.Layer:
-  #         True: { visible: false }
   - type: Appearance
   - type: UserInterface
     interfaces:
@@ -81,8 +79,5 @@
   - type: Tag
     tags:
     - Wooden
-  # - type: Construction # TODO: make it
-  #   graph: Dresser
-  #   node: dresser
 
 

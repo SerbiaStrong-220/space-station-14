@@ -23,6 +23,9 @@ public abstract partial class SharedModuleFurnitureSystem<T> : EntitySystem wher
         base.Initialize();
 
         SubscribeLocalEvent<T, InteractUsingEvent>(OnInteractUsing);
+
+        SubscribeLocalEvent<ModuleFurniturePartComponent, AccessibleOverrideEvent<OpenBoundInterfaceMessage>>(OnAccessingBUI);
+        SubscribeLocalEvent<ModuleFurniturePartComponent, AccessibleOverrideEvent<ActivateInWorldEvent>>(OnAccessingActivateInWorld);
     }
 
     public bool CanInsert(Entity<SharedModuleFurnitureComponent?> entity, Entity<ModuleFurniturePartComponent?> target, [NotNullWhen(true)] out Vector2i? offset, out string reasonLocPath)
@@ -64,22 +67,41 @@ public abstract partial class SharedModuleFurnitureSystem<T> : EntitySystem wher
         return _doAfter.TryStartDoAfter(doafterArgs);
     }
 
+    private void OnAccessingBUI(Entity<ModuleFurniturePartComponent> entity, ref AccessibleOverrideEvent<OpenBoundInterfaceMessage> args)
+    {
+        if (args.Target != entity.Owner)
+            return;
+
+        args.Accessible = true;
+        args.Handled = true;
+    }
+
+    private void OnAccessingActivateInWorld(Entity<ModuleFurniturePartComponent> entity, ref AccessibleOverrideEvent<ActivateInWorldEvent> args)
+    {
+        if (args.Target != entity.Owner)
+            return;
+
+        args.Accessible = true;
+        args.Handled = true;
+    }
+
     private void OnInteractUsing(Entity<T> entity, ref InteractUsingEvent args)
     {
         if (args.Handled)
             return;
 
-        if (HasComp<ModuleFurniturePartComponent>(args.Used))
-            args.Handled = TryInsert((entity.Owner, entity.Comp), args.Used, args.User);
+        // Decided to cut this
+        // if (HasComp<ModuleFurniturePartComponent>(args.Used))
+        //     args.Handled = TryInsert((entity.Owner, entity.Comp), args.Used, args.User);
 
-        if (entity.Comp.CachedLayout.Count == 0)
-            args.Handled = _tool.UseTool(args.Used, args.User, entity.Owner,
-                            entity.Comp.DeconstructDelaySeconds, entity.Comp.DeconstructTool,
-                            new DeconstructFurnitureEvent());
-        else
-            args.Handled = _tool.UseTool(args.Used, args.User, entity.Owner,
-                            entity.Comp.DeconstructDelaySeconds, entity.Comp.DeconstructTool,
-                            new RemoveFurniturePartEvent());
+        // if (entity.Comp.CachedLayout.Count == 0)
+        //     args.Handled = _tool.UseTool(args.Used, args.User, entity.Owner,
+        //                     entity.Comp.DeconstructDelaySeconds, entity.Comp.DeconstructTool,
+        //                     new DeconstructFurnitureEvent());
+        // else
+        //     args.Handled = _tool.UseTool(args.Used, args.User, entity.Owner,
+        //                     entity.Comp.DeconstructDelaySeconds, entity.Comp.DeconstructTool,
+        //                     new RemoveFurniturePartEvent());
     }
 
     private bool EqualWidthPixel(SharedModuleFurnitureComponent furnitureComp, ModuleFurniturePartComponent partComp)

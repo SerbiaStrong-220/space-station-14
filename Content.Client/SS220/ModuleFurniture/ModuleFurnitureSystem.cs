@@ -2,14 +2,12 @@
 
 using Content.Shared.SS220.ModuleFurniture.Components;
 using Content.Shared.SS220.ModuleFurniture.Systems;
-using Robust.Client.Player;
 using Robust.Shared.GameStates;
 
 namespace Content.Client.SS220.ModuleFurniture;
 
 public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<ModuleFurnitureComponent>
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {
