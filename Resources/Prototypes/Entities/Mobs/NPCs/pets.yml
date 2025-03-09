@@ -216,8 +216,8 @@
       - PetsNT
   - type: Grammar
     attributes:
-    proper: true
-    gender: male
+      proper: true
+      gender: male
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
