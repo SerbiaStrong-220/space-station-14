@@ -452,7 +452,7 @@
     maxItemSize: Huge
   #SS220-underused-uplinks-stuff end
 #SS220 Micro_fibers start
-- type: MicroFiber
+  - type: MicroFiber
     microFiberMaterial: micro-fibers-reinforced-textile
     microFiberColor: micro-fibers-black
 #SS220 Micro_fibers end

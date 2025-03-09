@@ -19,7 +19,7 @@
         enum.ChameleonUiKey.Key:
           type: ChameleonBoundUserInterface
 # Corvax-HiddenDesc-Start
-    - type: HiddenDescription 
+    - type: HiddenDescription
       entries:
       - label: corvax-hidden-desc-Chameleon-syndicate
         whitelistMind:
@@ -34,7 +34,7 @@
           - Borg
 # Corvax-HiddenDesc-End
 #SS220 Micro_fibers start
-- type: MicroFiber
+    - type: MicroFiber
       microFiberMaterial: micro-fibers-chameleon
 #SS220 Micro_fibers end
 
@@ -44,7 +44,7 @@
   name: backpack water tank
   description: Holds a large amount of fluids. Supplies to spray nozzles in your hands, and has a slot on the side for said spray nozzles.
   components:
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita 
+  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
     sound:
       path: /Audio/SS220/Effects/Drop/clothing_bag_tank.ogg
       params:
