@@ -5,6 +5,34 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  #SS220-NewAttachables begin
+  - type: AttachablesContainer
+    slots:
+      attachment_slot_muzzle:
+        name: Muzzle
+        whitelist:
+          tags:
+            - AttachmentSlotMuzzle
+      attachment_slot_rail:
+        name: Rail
+        whitelist:
+          tags:
+            - AttachmentSlotRail
+      attachment_slot_underbarrel:
+        name: Underbarrel
+        whitelist:
+          tags:
+            - AttachmentSlotUnder
+      attachment_slot_stock:
+        name: Stock
+        whitelist:
+          tags:
+            - AttachmentSlotStock
+  - type: UserInterface
+    interfaces:
+      enum.AttachablesContainerUiKey.Key:
+        type: AttachablesContainerBoundUserInterface
+  #SS220-NewAttachables end
   - type: EmitSoundOnLand
     sound:
       path: /Audio/SS220/Effects/Drop/rifles.ogg
@@ -55,6 +83,12 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+      #SS220-NewAttachables begin
+      attachment_slot_muzzle: !type:ContainerSlot
+      attachment_slot_rail: !type:ContainerSlot
+      attachment_slot_underbarrel: !type:ContainerSlot
+      attachment_slot_stock: !type:ContainerSlot
+      #SS220-NewAttachables end
   - type: StaticPrice
     price: 500
 
