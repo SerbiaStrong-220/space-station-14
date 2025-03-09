@@ -582,6 +582,9 @@
     sprite: SS220/Clothing/Head/Hats/sflowerhead.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/sflowerhead.rsi
+    slots:
+    - HEAD
+    - neck
   - type: Construction
     graph: Clothingsflowerhead
     node: ClothingSFlowerhead
@@ -596,6 +599,9 @@
     sprite: SS220/Clothing/Head/Hats/wsflowerhead.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/wsflowerhead.rsi
+    slots:
+    - HEAD
+    - neck
   - type: Construction
     graph: Clothingwsflowerhead
     node: ClothingWSFlowerhead
