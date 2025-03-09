@@ -8,9 +8,9 @@
   productEntity: WeaponMiniEnergyCrossbow
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 6
+    Telecrystal: 8 #ss220-uplink-discounts
   cost:
-    Telecrystal: 10
+    Telecrystal: 12 #ss220-uplink-discounts
   categories:
   - UplinkWeaponry
   conditions:
@@ -153,9 +153,9 @@
   productEntity: ThermalVisorChameleon
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 1 #ss220-uplink-discounts
   cost:
-    Telecrystal: 4
+    Telecrystal: 2 #ss220-uplink-discounts
   categories:
   - UplinkWearables
 
@@ -167,9 +167,9 @@
   productEntity: ThermalVisorImplanter
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 2 #ss220-uplink-discounts
   cost:
-    Telecrystal: 6
+    Telecrystal: 5 #ss220-uplink-discounts
   categories:
   - UplinkImplants
 
@@ -209,9 +209,9 @@
   productEntity: ClothingHeadHelmetSwatSyndicate
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 2 #ss220-uplink-discounts
   cost:
-    Telecrystal: 2
+    Telecrystal: 3 #ss220-uplink-discounts
   categories:
   - UplinkWearables
 
@@ -222,7 +222,7 @@
   productEntity: BorgModuleFlamingAxe
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 1 #ss220-uplink-discounts
   cost:
     Telecrystal: 3
   categories:
