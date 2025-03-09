@@ -1,7 +1,6 @@
 # For mantles
 - type: loadoutEffectGroup
   id: MasterCE
-  requireAll: false
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:

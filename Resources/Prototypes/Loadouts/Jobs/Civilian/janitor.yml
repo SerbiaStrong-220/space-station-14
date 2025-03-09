@@ -1,6 +1,5 @@
 - type: loadoutEffectGroup
   id: SeniorJanitorial
-  requireAll: false
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:

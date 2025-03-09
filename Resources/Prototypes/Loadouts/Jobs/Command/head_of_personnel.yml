@@ -1,7 +1,6 @@
 # For mantles
 - type: loadoutEffectGroup
   id: MasterHoP
-  requireAll: false
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -17,7 +16,6 @@
 # Professional HoP Time
 - type: loadoutEffectGroup
   id: ProfessionalHoP
-  requireAll: false
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:

@@ -1,7 +1,6 @@
 # Greytide Time
 - type: loadoutEffectGroup
   id: GreyTider
-  requireAll: false
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -17,7 +16,6 @@
 # Head of Greytide (for grey mantle)
 - type: loadoutEffectGroup
   id: MasterGrey
-  requireAll: false
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:

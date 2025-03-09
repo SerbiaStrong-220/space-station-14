@@ -1,7 +1,6 @@
 # For mantles
 - type: loadoutEffectGroup
   id: MasterQM
-  requireAll: false
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
