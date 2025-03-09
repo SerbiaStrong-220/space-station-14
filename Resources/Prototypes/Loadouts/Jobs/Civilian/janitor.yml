@@ -6,6 +6,11 @@
       !type:RoleTimeRequirement
       role: JobJanitor
       time: 187200 #52 hrs (1 hour per week for 1 year)
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Head
 - type: loadout

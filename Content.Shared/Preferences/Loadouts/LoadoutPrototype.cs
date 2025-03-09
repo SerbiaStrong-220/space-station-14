@@ -33,6 +33,9 @@ public sealed partial class LoadoutPrototype : IPrototype, IEquipmentLoadout
     [DataField]
     public List<LoadoutEffect> Effects = new();
 
+    [DataField]
+    public List<LoadoutEffect>? SponsorTierLoadoutEffects;
+
     /// <inheritdoc />
     [DataField]
     public Dictionary<string, EntProtoId> Equipment { get; set; } = new();

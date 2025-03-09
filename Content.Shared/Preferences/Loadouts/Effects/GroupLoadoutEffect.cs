@@ -26,7 +26,27 @@ public sealed partial class GroupLoadoutEffect : LoadoutEffect
             reasons.Add(reason.ToMarkup());
         }
 
-        reason = reasons.Count == 0 ? null : FormattedMessage.FromMarkupOrThrow(string.Join('\n', reasons));
+        // SS220 loadout sponsor tier override start
+
+        var sponsorsReasons = new List<string>();
+
+        if (effectsProto.SponsorTierLoadoutEffects is not null)
+        {
+            foreach (var effect in effectsProto.SponsorTierLoadoutEffects)
+            {
+                // Спонсорские подписки являются переопределяющими, поэтому наличие хотя бы одного уровня поддержки разрешает использовать вещь.
+                if (effect.Validate(profile, loadout, session, collection, out var sponsorReason))
+                {
+                    reason = null;
+                    return true;
+                }
+
+                sponsorsReasons.Add(sponsorReason.ToMarkup());
+            }
+        }
+
+        reason = reasons.Count == 0 ? null : (sponsorsReasons.Count == 0 ? FormattedMessage.FromMarkupOrThrow(string.Join('\n', reasons)) : FormattedMessage.FromMarkupOrThrow($"{string.Join('\n', reasons)}\n{Loc.GetString("group-requirement-or")}\n{string.Join($"\n{Loc.GetString("group-requirement-or")}\n", sponsorsReasons)}"));
+        // SS220 loadout sponsor tier override end
         return reason == null;
     }
 }

@@ -9,6 +9,11 @@
       !type:RoleTimeRequirement
       role: JobBlueShield
       time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: BlueShieldFive
@@ -18,6 +23,11 @@
       !type:RoleTimeRequirement
       role: JobBlueShield
       time: 18000 # 5 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: BlueShieldTwenty
@@ -27,6 +37,11 @@
       !type:RoleTimeRequirement
       role: JobBlueShield
       time: 72000 # 20 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: BlueShieldFifty
@@ -36,6 +51,11 @@
       !type:RoleTimeRequirement
       role: JobBlueShield
       time: 180000 # 50 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: BlueShieldHundred
@@ -45,6 +65,11 @@
       !type:RoleTimeRequirement
       role: JobBlueShield
       time: 360000 # 100 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Head
 - type: loadout

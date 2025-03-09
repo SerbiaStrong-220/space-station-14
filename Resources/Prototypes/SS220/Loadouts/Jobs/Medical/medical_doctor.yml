@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobMedicalDoctor
       time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: MedicalDoctorResponsibility
@@ -16,6 +21,11 @@
       !type:RoleTimeRequirement
       role: JobMedicalDoctor
       time: 252000 # 70 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Glasses
 - type: loadout

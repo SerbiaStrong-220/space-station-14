@@ -107,7 +107,7 @@ public sealed class TTSManager
         return await StartTtsRequest(new(speaker, text, kind),
             async (request, response) =>
         {
-            _sawmill.Debug($"Generate new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}'");
+            _sawmill.Verbose($"Generate new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}'");
 
             var reqTime = DateTime.UtcNow;
             try
@@ -154,7 +154,7 @@ public sealed class TTSManager
                 memoryStream.Position = 0;
                 memoryStream.ReadExactly(response.Value.Buffer, 0, response.Value.Length);
 
-                _sawmill.Debug($"Generated new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}' ({response.Value.Length} bytes)");
+                _sawmill.Verbose($"Generated new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}' ({response.Value.Length} bytes)");
                 RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
                 return true;
             }

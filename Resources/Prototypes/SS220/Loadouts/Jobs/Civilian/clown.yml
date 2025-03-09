@@ -8,6 +8,11 @@
       !type:RoleTimeRequirement
       role: JobClown
       time: 180000
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: ClownClassic
@@ -17,6 +22,11 @@
       !type:RoleTimeRequirement
       role: JobClown
       time: 18000
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Head
 - type: loadout
