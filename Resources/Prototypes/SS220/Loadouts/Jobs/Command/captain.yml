@@ -1,7 +1,6 @@
 #play-time-loadout
 - type: loadoutEffectGroup
   id: CaptainSenior
-  requireAll: false
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -16,7 +15,6 @@
 
 - type: loadoutEffectGroup
   id: CapOfficerCutlass
-  requireAll: false
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:

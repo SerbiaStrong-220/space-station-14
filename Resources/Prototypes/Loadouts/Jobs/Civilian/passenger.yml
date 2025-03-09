@@ -22,11 +22,11 @@
       !type:RoleTimeRequirement
       role: JobPassenger
       time: 72000 #20 hrs, fun mantle for the most experienced greytiders
-    sponsorTierLoadoutEffects:
-    - !type:GroupLoadoutEffect
-      proto: SeniorDevTeamTier
-    - !type:GroupLoadoutEffect
-      proto: AdministratorSponsorTier
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Face
 - type: loadout
