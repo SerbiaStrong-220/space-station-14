@@ -106,3 +106,37 @@
     sprite: SS220/Clothing/Ears/Headsets/blueshield.rsi
   - type: Clothing
     sprite: SS220/Clothing/Ears/Headsets/blueshield.rsi
+
+- type: entity
+  parent: ClothingHeadsetAlt
+  id: ClothingHeadsetAltExplorer
+  name: full-size headset of the explorer
+  description: It is used by representatives of the law.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyScience
+      - EncryptionKeyCargo
+      - EncryptionKeyCommon
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/explorer.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/explorer.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetExplorer
+  name: headset of the explorer
+  description: It is used by representatives of the law.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyScience
+      - EncryptionKeyCargo
+      - EncryptionKeyCommon
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/explorer.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/explorer.rsi

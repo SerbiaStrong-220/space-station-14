@@ -518,6 +518,23 @@
       Female: FemaleEngineer
       Unsexed: MaleEngineer
 
+# Научный отдел
+
+  # Исследователь
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretExplorer
+  name: beret explorer
+  description: The beret is specially for the explorer.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/beret_explorer.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/beret_explorer.rsi
+    - type: Tag
+      tags:
+      - ClothMade
+      - WhitelistChameleon
 
 # OTHER
 
