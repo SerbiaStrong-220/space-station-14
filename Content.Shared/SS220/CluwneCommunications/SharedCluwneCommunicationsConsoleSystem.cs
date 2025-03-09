@@ -46,15 +46,7 @@ namespace Content.Shared.SS220.CluwneCommunications
 
         private void UpdateUI(EntityUid ent, CluwneCommunicationsConsoleComponent comp)
         {
-            CluwneCommunicationsConsoleInterfaceState newState = new CluwneCommunicationsConsoleInterfaceState(
-                comp.CanAnnounce,
-                PrivilegedIdIsAuthorized(uid, component),
-                currentAccess,
-                possibleAccess,
-                missingAccess,
-                privilegedIdName,
-                targetLabel,
-                targetLabelColor);
+            CluwneCommunicationsConsoleInterfaceState newState = new CluwneCommunicationsConsoleInterfaceState(comp.CanAnnounce);
 
             _uiSystem.SetUiState(ent, CommunicationsConsoleUiKey.Key, newState);
         }

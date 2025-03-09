@@ -1,5 +1,6 @@
 using Content.Server.UserInterface;
 using Content.Shared.Communications;
+using Content.Shared.SS220.CluwneCommunications;
 using Robust.Shared.Audio;
 
 namespace Content.Server.SS220.CluwneCommunications
