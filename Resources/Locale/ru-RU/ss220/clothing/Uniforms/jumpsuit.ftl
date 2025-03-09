@@ -50,3 +50,8 @@ ent-ClothingUniformJumpsuitInterdyne = форма парамедика Interdyne
 
 ent-ClothingUniformJumpsuitUssp = униформа СССП
     .desc = Форма, пропитанная кровью, потом и ненавистью к капитализму.
+
+ent-ClothingUniformJumpsuitExplorer = униформа исследователя
+    .desc = Практичный и функциональный комплект одежды, разработанный для работы в экстремальных условиях.
+ent-ClothingUniformJumpsuitExplorerTie = униформа исследователя
+    .desc = Практичный и функциональный комплект одежды, разработанный для работы в экстремальных условиях.
