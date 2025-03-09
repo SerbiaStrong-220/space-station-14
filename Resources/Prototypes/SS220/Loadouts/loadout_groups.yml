@@ -576,6 +576,36 @@
   - Glasses
   - CyberRnDVisor
   # Учёный (Конец)
+
+  # Исследователь (Начало)
+- type: loadoutGroup
+  id: ExplorerHead
+  name: loadout-group-explorer-head
+  loadouts:
+  - HatExplorer
+
+- type: loadoutGroup
+  id: ExplorerJumpsuit
+  name: loadout-group-explorer-jumpsuit
+  loadouts:
+  - ExplorerJumpsuit
+  - ExplorerTurtleneck
+
+- type: loadoutGroup
+  id: ExplorerOuterClothing
+  name: loadout-group-explorere-outerclothing
+  loadouts:
+  - ExplorerCoat
+
+- type: loadoutGroup
+  id: ExplorerHeadset
+  name: loadout-group-explorer-headset
+  minLimit: 1
+  loadouts:
+  - ExplorerHeadset
+  - ExplorerHeadsetAlt
+  # Исследователь (Конец)
+
 #! Исследовательский отдел (Конец)
 
 #! Отдел снабжения (Начало)

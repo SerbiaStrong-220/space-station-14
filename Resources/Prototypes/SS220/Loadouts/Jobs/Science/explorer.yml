@@ -1,0 +1,46 @@
+# Job Time
+- type: loadoutEffectGroup
+  id: ExplorerTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobExplorer
+      time: 108000 # 30 hrs
+
+# Head
+- type: loadout
+  id: HatExplorer
+  equipment:
+    head: ClothingHeadHatBeretExplorer
+
+# Headset
+- type: loadout
+  id: ExplorerHeadset
+  equipment:
+    ears:  ClothingHeadsetExplorer
+
+- type: loadout
+  id: ExplorerHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltExplorer
+
+# Jumpsuit
+- type: loadout
+  id: ExplorerJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitExplorer
+
+- type: loadout
+  id: ExplorerTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ExplorerTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitExplorerTurtleneck
+
+# Outerclothing
+- type: loadout
+  id: ExplorerCoat
+  equipment:
+    outerClothing: ClothingOuterExplorerCoat

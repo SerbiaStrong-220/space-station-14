@@ -137,6 +137,22 @@
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+
+  # Исследователь
+- type: roleLoadout
+  id: JobExplorer
+  groups:
+  - ExplorerHead
+  - GroupTankHarness
+  - ExplorerJumpsuit
+  - SalvageSpecialistBackpack
+  - ExplorerOuterClothing
+  - SalvageSpecialistShoes
+  - SurvivalExtended
+  - Glasses
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - SponsorNeck
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)
