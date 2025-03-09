@@ -58,3 +58,15 @@
       - state: green
       - state: serviceworker
 #
+- type: entity
+  id: SpawnPointExplorer
+  parent: SpawnPointJobBase
+  name: explorer
+  components:
+  - type: SpawnPoint
+    job_id: Explorer
+  - type: Sprite
+    sprite:
+    layers:
+      - state: green
+      - state: explorer

@@ -1,0 +1,27 @@
+﻿- type: job
+  id: Explorer
+  name: job-name-explorer
+  description: job-description-explorer
+  playTimeTracker: JobExplorer
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 3600
+  # Todo: Добавить после обсуждения
+  startingGear: ExplorerGear
+  icon: "JobIconExplorer"
+  supervisors: job-supervisors-science
+  canBeAntag: true
+  access:
+  - Research
+  - Explorer
+  - Maintenance
+  - Cargo
+  - Salvage
+  - Maintenance
+  - External
+
+- type: startingGear
+  id: ExplorerGear
+  equipment:
+    id: ExplorerPDA
+    ears: ClothingHeadsetScience

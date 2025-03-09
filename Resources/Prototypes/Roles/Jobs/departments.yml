@@ -140,6 +140,7 @@
   roles:
   - ResearchDirector
   - SeniorResearcher #ss220
+  - Explorer #SS220 Add Explorer
   - Scientist
   - ResearchAssistant
 

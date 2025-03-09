@@ -34,6 +34,9 @@
 - type: playTimeTracker
   id: Prisoner
 
+- type: playTimeTracker
+  id: JobExplorer
+
 # Antags
 - type: playTimeTracker
   id: AntagNukeops
