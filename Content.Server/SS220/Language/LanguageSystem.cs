@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.GameTicking.Events;
 using Content.Shared.SS220.Language.Components;
-using Content.Shared.Ghost;
 using Content.Shared.SS220.Language;
 using Robust.Server.Player;
 using Robust.Shared.Random;
@@ -10,6 +9,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Content.Shared.SS220.Language.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Configuration;
+using Content.Shared.SS220.CCVars;
 
 namespace Content.Server.SS220.Language;
 
@@ -19,6 +20,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     [Dependency] private readonly LanguageManager _language = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
 
     // Cached values for one tick
     private static readonly Dictionary<string, string> ScrambleCache = new();
@@ -277,6 +279,27 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         {
             AddLanguage((target, targetComp), language);
         }
+    }
+
+    public bool MessageLanguagesLimit(EntityUid source, string message, [NotNullWhen(true)] out string? reason)
+    {
+        reason = null;
+        if (!HasComp<LanguageComponent>(source))
+            return false;
+
+        var defaultLanguage = GetSelectedLanguage(source);
+        if (defaultLanguage == null)
+            return false;
+
+        var languagesLimit = _config.GetCVar(CCVars220.MaxLanguagesInOneMessage);
+        var languagesStrings = SplitMessageByLanguages(source, message, defaultLanguage);
+        if (languagesStrings.Count > languagesLimit)
+        {
+            reason = Loc.GetString("language-message-languages-limit", ("limit", languagesLimit));
+            return true;
+        }
+
+        return false;
     }
 }
 

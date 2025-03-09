@@ -888,6 +888,14 @@ public sealed partial class ChatSystem : SharedChatSystem
             return false;
         }
 
+        // SS220 languages begin
+        if (_languageSystem.MessageLanguagesLimit(player.AttachedEntity.Value, message, out var reason))
+        {
+            _chatManager.DispatchServerMessage(player, reason);
+            return false;
+        }
+        // SS220 languages end
+
         return !_chatManager.MessageCharacterLimit(player, message);
     }
 
