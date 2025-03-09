@@ -2042,7 +2042,7 @@
     stock: 1
   #ss220 free-scarf end
   categories:
-  - UplinkPointless
+    - UplinkPointless
 
 - type: listing
   id: UplinkScarfSyndieGreen
