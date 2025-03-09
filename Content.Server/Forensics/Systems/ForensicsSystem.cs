@@ -271,7 +271,7 @@ namespace Content.Server.Forensics
                 return;
 
             targetComp.Fibers = new();
-            targetComp.MicroFibers = new();
+            targetComp.MicroFibers = new();//SS220 Micro_fibers
             targetComp.Fingerprints = new();
 
             if (targetComp.CanDnaBeCleaned)
@@ -330,6 +330,7 @@ namespace Content.Server.Forensics
             recipientComp.CanDnaBeCleaned = args.CanDnaBeCleaned;
         }
 
+        //SS220 Micro_fibers start
         private void OnEntInserted(Entity<MicroFiberComponent> ent, ref EntInsertedIntoContainerMessage args)
         {
             if (!TryComp<ForensicsComponent>(args.Entity, out var targetComp))
@@ -337,6 +338,7 @@ namespace Content.Server.Forensics
 
             targetComp.MicroFibers.Add(string.IsNullOrEmpty(ent.Comp.MicroFiberColor) ? Loc.GetString("forensic-fibers", ("material", ent.Comp.MicroFiberMaterial)) : Loc.GetString("forensic-fibers-colored", ("color", ent.Comp.MicroFiberColor), ("material", ent.Comp.MicroFiberMaterial)));
         }
+        //SS220 Micro_fibers end
 
         #region Public API
 

@@ -231,12 +231,14 @@ namespace Content.Server.Forensics
                 text.AppendLine(fiber);
             }
             text.AppendLine();
+            //SS220 Micro_fibers start
             text.AppendLine(Loc.GetString("forensic-scanner-interface-micro-fibers"));
             foreach (var microFiber in component.MicroFibers)
             {
                 text.AppendLine(microFiber);
             }
             text.AppendLine();
+            //SS220 Micro_fibers end
             text.AppendLine(Loc.GetString("forensic-scanner-interface-dnas"));
             foreach (var dna in component.TouchDNAs)
             {
@@ -271,7 +273,7 @@ namespace Content.Server.Forensics
         {
             component.Fingerprints = new();
             component.Fibers = new();
-            component.MicroFibers = new();
+            component.MicroFibers = new();//SS220 Micro_fibers
             component.TouchDNAs = new();
             component.SolutionDNAs = new();
             component.LastScannedName = string.Empty;
