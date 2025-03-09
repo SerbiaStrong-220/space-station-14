@@ -19,6 +19,9 @@
 - type: Tag
   id: MagazineGrenadeArta
 
+- type: Tag
+  id: KRSPowerCell
+
 # READD-VEHICLES
 - type: Tag
   id: JanicartKeys

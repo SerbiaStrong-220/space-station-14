@@ -123,19 +123,13 @@
         canReact: false
         reagents:
         - ReagentId: Rororium
-          Quantity: 3
+          Quantity: 1.5
         - ReagentId: Ephedrine
-          Quantity: 3
-        - ReagentId: TranexamicAcid
           Quantity: 15
-        - ReagentId: Dylovene
-          Quantity: 15
-        - ReagentId: Bicaridine
-          Quantity: 24
-        - ReagentId: Pyrazine
-          Quantity: 15
+        - ReagentId: Ichor
+          Quantity: 30
         - ReagentId: Epinephrine
-          Quantity: 15
+          Quantity: 28.5
   - type: TriggerImplantAction
   - type: HiddenDescription
     entries:

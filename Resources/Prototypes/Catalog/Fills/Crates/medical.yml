@@ -44,7 +44,7 @@
 
 - type: entity
   id: CrateMindShieldImplants
-  parent: CrateMedical
+  parent: [ CrateMedicalSecureImplant ] #SS220 The implants are in new crates
   name: MindShield implant crate
   description: Crate filled with 3 MindShield implants.
   components:

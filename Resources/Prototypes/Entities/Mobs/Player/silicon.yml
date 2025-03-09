@@ -613,6 +613,12 @@
       name: ghost-role-information-syndicate-cyborg-assault-name
       description: ghost-role-information-syndicate-cyborg-description
       rules: ghost-role-information-silicon-rules
+      requirements: #SS220 ghostrole-times (20h overall 10h silicon) start
+        - !type:OverallPlaytimeRequirement
+          time: 72000 
+        - !type:RoleTimeRequirement
+          role: JobBorg
+          time: 36000 #SS220 ghostrole-times (20h overall 10h silicon) end
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
@@ -646,6 +652,12 @@
       name: ghost-role-information-syndicate-cyborg-saboteur-name
       description: ghost-role-information-syndicate-cyborg-description
       rules: ghost-role-information-silicon-rules
+      requirements: #SS220 ghostrole-times (20h overall 10h silicon) start
+        - !type:OverallPlaytimeRequirement
+          time: 72000 
+        - !type:RoleTimeRequirement
+          role: JobBorg
+          time: 36000 #SS220 ghostrole-times (20h overall 10h silicon) end
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
@@ -696,6 +708,12 @@
       name: ghost-role-information-derelict-cyborg-name
       description: ghost-role-information-derelict-cyborg-description
       rules: ghost-role-information-silicon-rules
+      requirements: #SS220 ghostrole-times (20h overall 10h silicon) start
+        - !type:OverallPlaytimeRequirement
+          time: 72000 
+        - !type:RoleTimeRequirement
+          role: JobBorg
+          time: 36000 #SS220 ghostrole-times (20h overall 10h silicon) end
       raffle:
         settings: default
     - type: GhostTakeoverAvailable

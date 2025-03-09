@@ -232,7 +232,7 @@
   - type: SpeakOnUIClosed
     pack: BruiseOMatGoodbyes
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/bruiseomat.rsi
+    sprite: SS220/Structures/Machines/VendingMachines/bruiseomat.rsi #SS220 BukhloMat Resprite
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]

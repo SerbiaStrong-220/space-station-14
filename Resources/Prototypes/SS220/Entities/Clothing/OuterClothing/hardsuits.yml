@@ -272,3 +272,35 @@
       Female: FemaleEngineer
       Unsexed: MaleEngineer
 
+# Centcom's Hardsuit
+- type: entity
+  parent: [ClothingOuterHardsuitBase]
+  id: ClothingOuterHardsuitCentcom
+  name: centcom spacesuit
+  description: A combination of unwavering defense and advanced technology, the epitome of power and strategic superiority.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/centcom.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/centcom.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.02
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.4
+  - type: Armor # Чуть лучше капитанского
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.5
+        Heat: 0.4
+        Radiation: 0.2
+        Caustic: 0.4
+        Stamina: 0.2
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitCentcom

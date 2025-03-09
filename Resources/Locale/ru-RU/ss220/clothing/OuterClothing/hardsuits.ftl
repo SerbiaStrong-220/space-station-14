@@ -9,3 +9,6 @@ ent-ClothingOuterHardsuitDeathsquadCommander = скафандр командир
 ent-ClothingOuterHardsuitDeathsquadAlpha = скафандр специалиста Эскадрона Смерти
     .suffix = Эскадрон Смерти, dq
     .desc = Высокотехнологичный скафандр, предназначенный для специалистов отряда.
+
+ent-ClothingOuterHardsuitCentcom = скафандр Центрального Командования
+    .desc = Сочетание непоколебимой защиты и передовых технологий, воплощение мощи и стратегического превосходства.
