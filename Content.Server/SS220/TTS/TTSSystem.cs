@@ -14,6 +14,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Network;
 using Robust.Server.Player;
+using Robust.Shared.GameObjects;
+using System.Linq;
 
 namespace Content.Server.SS220.TTS;
 
@@ -46,6 +48,7 @@ public sealed partial class TTSSystem : EntitySystem
 
         SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
+        SubscribeLocalEvent<EntitySpokeScrambledEvent>(OnEntitySpokeScrambled);
         SubscribeLocalEvent<RadioSpokeEvent>(OnRadioReceiveEvent);
         SubscribeLocalEvent<AnnouncementSpokeEvent>(OnAnnouncementSpoke);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
@@ -190,13 +193,29 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void OnEntitySpoke(EntityUid uid, TTSComponent component, EntitySpokeEvent args)
     {
-        var voiceId = component.VoicePrototypeId;
+        HandleEntitySpoke(uid, uid, args.Message, args.IsRadio, args.ObfuscatedMessage);
+    }
+
+    private async void OnEntitySpokeScrambled(EntitySpokeScrambledEvent args)
+    {
+        HandleEntitySpoke(args.Source, args.Listeners, args.ColorlessMessage, args.IsRadio, args.ObfuscatedMessage);
+    }
+
+    private async void HandleEntitySpoke(EntityUid source, EntityUid listener, string message, bool isRadio, string? obfuscatedMessage = null)
+    {
+        HandleEntitySpoke(source, [listener], message, isRadio, obfuscatedMessage);
+    }
+
+    private async void HandleEntitySpoke(EntityUid source, IEnumerable<EntityUid> receivers, string message, bool isRadio, string? obfuscatedMessage = null)
+    {
         if (!_isEnabled ||
-            args.Message.Length > MaxMessageChars ||
-            voiceId == null)
+            message.Length > MaxMessageChars ||
+            !TryComp<TTSComponent>(source, out var component) ||
+            component.VoicePrototypeId == null)
             return;
 
-        if (TryGetVoiceMaskUid(uid, out var maskUid))
+        var voiceId = component.VoicePrototypeId;
+        if (TryGetVoiceMaskUid(source, out var maskUid))
         {
             var voiceEv = new TransformSpeakerVoiceEvent(maskUid.Value, voiceId);
             RaiseLocalEvent(maskUid.Value, voiceEv);
@@ -208,75 +227,139 @@ public sealed partial class TTSSystem : EntitySystem
             return;
         }
 
-        if (args.ObfuscatedMessage != null)
+        if (obfuscatedMessage != null)
         {
-            HandleWhisper(uid, args.Message, args.ObfuscatedMessage, protoVoice.Speaker, args.IsRadio);
+            HandleWhisperToMany(source, receivers, message, obfuscatedMessage, protoVoice.Speaker, isRadio);
             return;
         }
 
-        HandleSay(uid, args.Message, protoVoice.Speaker);
+        HandleSayToMany(source, receivers, message, protoVoice.Speaker);
     }
 
-    private async void HandleSay(EntityUid uid, string message, string speaker)
+    private async void HandleSayToMany(EntityUid source, string message, string speaker)
+    {
+        var receivers = Filter.Pvs(source).Recipients;
+        HandleSayToMany(source, receivers, message, speaker);
+    }
+
+    private async void HandleSayToMany(EntityUid source, IEnumerable<EntityUid> entities, string message, string speaker)
+    {
+        List<ICommonSession> receivers = new();
+        foreach (var entity in entities)
+        {
+            if (_playerManager.TryGetSessionByEntity(entity, out var receiver) && receiver != null)
+                receivers.Add(receiver);
+        }
+
+        HandleSayToMany(source, receivers, message, speaker);
+    }
+
+    private async void HandleSayToMany(EntityUid source, IEnumerable<ICommonSession> receivers, string message, string speaker)
     {
         using var ttsResponse = await GenerateTts(message, speaker, TtsKind.Default);
         if (!ttsResponse.TryGetValue(out var audioData)) return;
         var playTtsMessage = new MsgPlayTts
         {
             Data = audioData,
-            SourceUid = GetNetEntity(uid),
+            SourceUid = GetNetEntity(source),
         };
-        foreach (var receiver in Filter.Pvs(uid).Recipients)
+        foreach (var receiver in receivers)
         {
-            _netManager.ServerSendMessage(playTtsMessage, receiver.Channel);
+            HandleSayToOne(source, receiver, message, speaker, playTtsMessage);
         }
     }
 
-    private async void HandleWhisper(EntityUid uid, string message, string obfMessage, string speaker, bool isRadio)
+    private async void HandleSayToOne(EntityUid source, EntityUid target, string message, string speaker, MsgPlayTts? msgPlayTts = null)
     {
-        // If it's a whisper into a radio, generate speech without whisper
-        // attributes to prevent an additional speech synthesis event
-        using var ttsResponse = await GenerateTts(message, speaker, TtsKind.Whisper);
-        if (!ttsResponse.TryGetValue(out var audioData))
+        if (!_playerManager.TryGetSessionByEntity(target, out var receiver))
             return;
 
-        using var obfTtsResponse = await GenerateTts(obfMessage, speaker, TtsKind.Whisper);
-        if (!obfTtsResponse.TryGetValue(out var obfAudioData))
+        HandleSayToOne(source, receiver, message, speaker, msgPlayTts);
+    }
+
+    private async void HandleSayToOne(EntityUid source, ICommonSession receiver, string message, string speaker, MsgPlayTts? msgPlayTts = null)
+    {
+        if (msgPlayTts == null)
+        {
+            using var ttsResponse = await GenerateTts(message, speaker, TtsKind.Default);
+            if (!ttsResponse.TryGetValue(out var audioData)) return;
+            msgPlayTts = new MsgPlayTts
+            {
+                Data = audioData,
+                SourceUid = GetNetEntity(source),
+            };
+        }
+
+        _netManager.ServerSendMessage(msgPlayTts, receiver.Channel);
+    }
+
+    private async void HandleWhisperToMany(EntityUid source, IEnumerable<EntityUid> entities, string message, string obfMessage, string speaker, bool isRadio)
+    {
+        List<ICommonSession> receivers = new();
+        foreach (var entity in entities)
+        {
+            if (_playerManager.TryGetSessionByEntity(entity, out var receiver) && receiver != null)
+                receivers.Add(receiver);
+        }
+
+        HandleWhisperToMany(source, receivers, message, obfMessage, speaker, isRadio);
+    }
+
+    private async void HandleWhisperToMany(EntityUid source, IEnumerable<ICommonSession> receivers, string message, string obfMessage, string speaker, bool isRadio)
+    {
+        var ttsMessage = await GetMsgPlayTts(source, message, speaker, TtsKind.Whisper);
+        var obfTtsMessage = await GetMsgPlayTts(source, obfMessage, speaker, TtsKind.Whisper);
+        if (ttsMessage == null || obfTtsMessage == null)
             return;
 
-        // TODO: Check obstacles
+        foreach (var receiver in receivers)
+        {
+            HandleWhisperToOne(source, receiver, message, obfMessage, speaker, isRadio, ttsMessage, obfTtsMessage);
+        }
+    }
+
+    private async void HandleWhisperToOne(EntityUid uid, EntityUid target, string message, string obfMessage, string speaker, bool isRadio)
+    {
+        if (!_playerManager.TryGetSessionByEntity(target, out var receiver))
+            return;
+
+        HandleWhisperToOne(uid, receiver, message, obfMessage, speaker, isRadio);
+    }
+
+    private async void HandleWhisperToOne(EntityUid source,
+        ICommonSession receiver,
+        string message,
+        string obfMessage,
+        string speaker,
+        bool isRadio,
+        MsgPlayTts? ttsMessage = null,
+        MsgPlayTts? obfTtsMessage = null)
+    {
+        if (!receiver.AttachedEntity.HasValue)
+            return;
+
         var xformQuery = GetEntityQuery<TransformComponent>();
-        var sourcePos = _xforms.GetWorldPosition(xformQuery.GetComponent(uid), xformQuery);
-        var receptions = Filter.Pvs(uid).Recipients;
+        var sourcePos = _xforms.GetWorldPosition(xformQuery.GetComponent(source), xformQuery);
 
-        var fullTtsMessage = new MsgPlayTts
+        var xform = xformQuery.GetComponent(receiver.AttachedEntity.Value);
+        var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
+
+        if (distance > ChatSystem.WhisperMuffledRange)
+            return;
+
+        if (distance > ChatSystem.WhisperClearRange)
         {
-            Data = audioData,
-            SourceUid = GetNetEntity(uid),
-            Kind = TtsKind.Whisper,
-        };
+            ttsMessage ??= await GetMsgPlayTts(source, message, speaker, TtsKind.Whisper);
+            if (ttsMessage == null) return;
 
-        var obfuscatedTtsMessage = new MsgPlayTts
+            _netManager.ServerSendMessage(ttsMessage, receiver.Channel);
+        }
+        else
         {
-            Data = obfAudioData,
-            SourceUid = GetNetEntity(uid),
-            Kind = TtsKind.Whisper,
-        };
+            obfTtsMessage ??= await GetMsgPlayTts(source, obfMessage, speaker, TtsKind.Whisper);
+            if (obfTtsMessage == null) return;
 
-        foreach (var session in receptions)
-        {
-            if (!session.AttachedEntity.HasValue)
-                continue;
-
-            var xform = xformQuery.GetComponent(session.AttachedEntity.Value);
-            var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
-
-            if (distance > ChatSystem.WhisperMuffledRange)
-                continue;
-
-            var netMessageToSend = distance > ChatSystem.WhisperClearRange ? obfuscatedTtsMessage : fullTtsMessage;
-
-            _netManager.ServerSendMessage(netMessageToSend, session.Channel);
+            _netManager.ServerSendMessage(obfTtsMessage, receiver.Channel);
         }
     }
 
@@ -328,6 +411,20 @@ public sealed partial class TTSSystem : EntitySystem
         }
 
         return default;
+    }
+
+    private async Task<MsgPlayTts?> GetMsgPlayTts(EntityUid source, string message, string speaker, TtsKind kind = TtsKind.Default)
+    {
+        using var ttsResponse = await GenerateTts(message, speaker, TtsKind.Whisper);
+        if (!ttsResponse.TryGetValue(out var obfAudioData))
+            return null;
+
+        return new MsgPlayTts
+        {
+            Data = obfAudioData,
+            SourceUid = GetNetEntity(source),
+            Kind = TtsKind.Whisper,
+        };
     }
 }
 

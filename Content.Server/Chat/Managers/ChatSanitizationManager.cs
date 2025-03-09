@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Server.SS220.Language;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
 
@@ -113,6 +114,7 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
 
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!; // SS220 languages
 
     private bool _doSanitize;
 
@@ -175,7 +177,9 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         }
 
         // SS220 no English begin
-        var ntAllowed = sanitized.Replace("NanoTrasen", string.Empty, StringComparison.OrdinalIgnoreCase);
+        var language = _entityManager.System<LanguageSystem>();
+        var checkMessage = language.SanitizeMessage(speaker, speaker, sanitized, out _);
+        var ntAllowed = checkMessage.Replace("NanoTrasen", string.Empty, StringComparison.OrdinalIgnoreCase);
         ntAllowed = ntAllowed.Replace("nt", string.Empty, StringComparison.OrdinalIgnoreCase);
 
         // Remember, no English
