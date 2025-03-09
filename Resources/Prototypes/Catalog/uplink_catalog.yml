@@ -2036,7 +2036,7 @@
   name: uplink-scarf-syndie-red-name
   description: uplink-scarf-syndie-red-desc
   productEntity: ClothingNeckScarfStripedSyndieRed
-  #SS220 free-scarf begin
+  #ss220 free-scarf begin
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
@@ -2049,7 +2049,7 @@
   name: uplink-scarf-syndie-green-name
   description: uplink-scarf-syndie-green-desc
   productEntity: ClothingNeckScarfStripedSyndieGreen
-  #SS220 free-scarf begin
+  #ss220 free-scarf begin
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
