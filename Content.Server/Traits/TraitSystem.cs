@@ -48,7 +48,12 @@ public sealed class TraitSystem : EntitySystem
                 continue;
 
             // Add all components required by the prototype
-            EntityManager.AddComponents(args.Mob, traitPrototype.Components, false);
+            // SS220 fix null components begin
+            if (traitPrototype.Components is { } components)
+                EntityManager.AddComponents(args.Mob, components, false);
+
+            // EntityManager.AddComponents(args.Mob, traitPrototype.Components, false);
+            // SS220 fix null components end
             // SS220-Add-Languages begin
             if (traitPrototype.LearnedLanguages.Count > 0)
             {

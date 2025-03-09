@@ -5,7 +5,7 @@
   category: Languages
   cost: 1
   learnedLanguages:
-  - id: Gutter
+  - id: Tradeband
 
 - type: trait
   id: GutterLanguage
@@ -23,7 +23,7 @@
   category: Languages
   cost: 1
   learnedLanguages:
-  - id: Gutter
+  - id: Clownish
 
 - type: trait
   id: NeoRusskiyaLanguage
@@ -32,4 +32,4 @@
   category: Languages
   cost: 1
   learnedLanguages:
-  - id: Gutter
+  - id: NeoRusskiya
