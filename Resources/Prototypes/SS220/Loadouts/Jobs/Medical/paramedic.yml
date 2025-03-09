@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobParamedic
       time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: Feldsher
@@ -16,6 +21,11 @@
       !type:RoleTimeRequirement
       role: JobParamedic
       time: 162000 # 45 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: ParamedInterdyne
@@ -25,6 +35,11 @@
       !type:RoleTimeRequirement
       role: JobParamedic
       time: 234000 # 65 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
 - type: loadout

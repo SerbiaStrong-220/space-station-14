@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobMagistrate
       time: 360000 # 100 hrs Ахуеть, да?
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Head
 - type: loadout

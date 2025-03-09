@@ -1,12 +1,18 @@
 # For mantles
 - type: loadoutEffectGroup
   id: MasterCap
+  requireAll: false
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
       role: JobCaptain
       time: 72000 #20 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
 - type: loadout

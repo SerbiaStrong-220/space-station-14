@@ -1,21 +1,33 @@
 #play-time-loadout
 - type: loadoutEffectGroup
   id: CaptainSenior
+  requireAll: false
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
       role: JobCaptain
       time: 540000 #250 часов, форма для самых лучших
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: CapOfficerCutlass
+  requireAll: false
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
       role: JobCaptain
       time: 363600 # 101 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
 - type: loadout
