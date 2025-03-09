@@ -2245,7 +2245,6 @@
     blacklist:
      tags:
         - NukeOpsUplink
-        - LoneOpsUplink
   #ss220 holoclown-Nukeops end
 
 - type: listing
