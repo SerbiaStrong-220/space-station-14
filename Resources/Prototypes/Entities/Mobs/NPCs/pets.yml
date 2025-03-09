@@ -215,6 +215,9 @@
     factions:
       - PetsNT
   - type: Grammar
+    attributes:
+    proper: true
+    gender: male
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
@@ -223,9 +226,6 @@
     - id: Siiktajr
       canSpeak: false
   #SS220 languages revive end
-    attributes:
-      proper: true
-      gender: male
   - type: Tag
     tags:
     - CannotSuicide
