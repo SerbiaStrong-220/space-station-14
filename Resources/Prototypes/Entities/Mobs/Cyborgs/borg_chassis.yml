@@ -118,7 +118,7 @@
       - id: Canilunzt
         canSpeak: false
       - id: Binary
-      - id: Codespeak
+#      - id: Codespeak
 #SS220 languages revive end
     - type: Sprite
       layers:
