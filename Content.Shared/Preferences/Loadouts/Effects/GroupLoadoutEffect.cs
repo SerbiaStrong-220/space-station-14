@@ -45,8 +45,23 @@ public sealed partial class GroupLoadoutEffect : LoadoutEffect
             }
         }
 
-        reason = reasons.Count == 0 ? null : (sponsorsReasons.Count == 0 ? FormattedMessage.FromMarkupOrThrow(string.Join('\n', reasons)) : FormattedMessage.FromMarkupOrThrow($"{string.Join('\n', reasons)}\n{Loc.GetString("group-requirement-or")}\n{string.Join($"\n{Loc.GetString("group-requirement-or")}\n", sponsorsReasons)}"));
+        reason = GetReasonFromReasonLists(reasons, sponsorsReasons);
         // SS220 loadout sponsor tier override end
         return reason == null;
+    }
+
+    private static FormattedMessage? GetReasonFromReasonLists(List<string> reasons, List<string> sponsorsReasons)
+    {
+        if (reasons.Count == 0)
+        {
+            return null;
+        }
+
+        if (sponsorsReasons.Count == 0)
+        {
+            return FormattedMessage.FromMarkupOrThrow(string.Join('\n', reasons));
+        }
+
+        return FormattedMessage.FromMarkupOrThrow($"{string.Join('\n', reasons)}\n{Loc.GetString("group-requirement-or")}\n{string.Join($"\n{Loc.GetString("group-requirement-or")}\n", sponsorsReasons)}");
     }
 }
