@@ -146,6 +146,24 @@
     - type: PresetIdCard
       job: Prisoner
 
+- type: entity
+  parent: IDCardStandard
+  id: ExplorerIDCard
+  name: explorer ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: silver
+        - state: idexplorer
+    - type: PresetIdCard
+      job: Explorer
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+
 # Deathsquad
 - type: entity
   parent: IDCardStandard
