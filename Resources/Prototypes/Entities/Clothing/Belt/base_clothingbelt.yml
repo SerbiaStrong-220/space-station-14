@@ -43,6 +43,11 @@
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-leather
+    microFiberColor: micro-fibers-brown
+#SS220 Micro_fibers end
 
 - type: entity
   abstract: true
