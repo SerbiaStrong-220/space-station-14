@@ -83,6 +83,7 @@
   - type: Tag
     tags:
       - SecBeltEquip
+      - AttachmentSlotMuzzle #SS220-NewAttachables
   - type: ItemSlots
     slots:
       cell_slot:
