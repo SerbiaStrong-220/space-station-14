@@ -80,6 +80,12 @@
     speechVerb: Arachnid
     speechSounds: Arachnid
     allowedEmotes: ['Click', 'Chitter', 'Hiss'] #ss-220-emote-fix
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Arati
+  # SS220-Add-Languages end
   - type: Vocal
     sounds:
       Male: UnisexArachnid

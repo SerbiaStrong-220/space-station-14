@@ -125,6 +125,12 @@
       sprite: "Effects/creampie.rsi"
       state: "creampie_vox" # Not default
       visible: false
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: VoxPidgin
+  # SS220-Add-Languages end
   - type: Inventory
     speciesId: vox
     displacements:

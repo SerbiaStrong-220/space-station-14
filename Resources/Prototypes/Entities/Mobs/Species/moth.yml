@@ -140,6 +140,12 @@
         sprite: "Effects/creampie.rsi"
         state: "creampie_moth"
         visible: false
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Tkachi
+  # SS220-Add-Languages end
   - type: Inventory
     femaleDisplacements:
       jumpsuit:

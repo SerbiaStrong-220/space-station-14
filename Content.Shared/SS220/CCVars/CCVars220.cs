@@ -124,4 +124,10 @@ public sealed partial class CCVars220
     /// </summary>
     public static readonly CVarDef<int> MaxSponsorsBypass =
         CVarDef.Create("game.max_sponsors_bypass", 10, CVar.SERVER);
+
+    /// <summary>
+    /// How many languages can be used in one message
+    /// </summary>
+    public static readonly CVarDef<int> MaxLanguagesInOneMessage =
+        CVarDef.Create("chat.max_languages_in_one_message", 3, CVar.SERVER);
 }
