@@ -6,6 +6,11 @@
       !type:RoleTimeRequirement
       role: JobChiefMedicalOfficer
       time: 36000 # 10 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
 - type: loadout

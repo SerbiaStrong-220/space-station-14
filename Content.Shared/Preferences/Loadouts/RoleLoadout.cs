@@ -281,6 +281,21 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             valid = valid && effect.Validate(profile, this, session, collection, out reason);
         }
 
+        // SS220 loadout sponsor tier override start
+        if (!valid && loadoutProto.SponsorTierLoadoutEffects is not null)
+        {
+            foreach (var effect in loadoutProto.SponsorTierLoadoutEffects)
+            {
+                // Спонсорские подписки являются переопределяющими, поэтому наличие хотя бы одного уровня поддержки разрешает использовать вещь.
+                if (effect.Validate(profile, this, session, collection, out var sponsorReason))
+                {
+                    reason = null;
+                    return true;
+                }
+            }
+        }
+        // SS220 loadout sponsor tier override end
+
         return valid;
     }
 

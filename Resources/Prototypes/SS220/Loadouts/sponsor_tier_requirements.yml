@@ -73,6 +73,13 @@
     isExact: true
 
 - type: loadoutEffectGroup
+  id: SeniorDevTeamTier
+  effects:
+  - !type:SponsorTierRequirementLoadoutEffect
+    requirement: SeniorDevTeam
+    isExact: true
+
+- type: loadoutEffectGroup
   id: HeadDeveloperSponsorTier
   effects:
   - !type:SponsorTierRequirementLoadoutEffect

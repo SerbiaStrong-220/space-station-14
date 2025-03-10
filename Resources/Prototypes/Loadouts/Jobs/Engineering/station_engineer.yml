@@ -17,6 +17,12 @@
       !type:DepartmentTimeRequirement
       department: Engineering
       time: 216000 # 60 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
 
 # Head
 - type: startingGear

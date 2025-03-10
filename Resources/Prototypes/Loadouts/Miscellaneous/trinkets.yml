@@ -7,6 +7,11 @@
       !type:DepartmentTimeRequirement
       department: Command
       time: 3600 # 1 hour
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Flowers
 - type: loadout
@@ -201,6 +206,11 @@
   storage:
     back:
     - TowelColorWhite
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorSilver
@@ -212,6 +222,11 @@
   storage:
     back:
     - TowelColorSilver
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorGold
@@ -223,6 +238,11 @@
   storage:
     back:
     - TowelColorGold
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorLightBrown
@@ -235,6 +255,11 @@
   storage:
     back:
     - TowelColorLightBrown
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorGreen
@@ -247,6 +272,11 @@
   storage:
     back:
     - TowelColorGreen
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorDarkBlue
@@ -259,6 +289,11 @@
   storage:
     back:
     - TowelColorDarkBlue
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorOrange
@@ -271,6 +306,11 @@
   storage:
     back:
     - TowelColorOrange
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorLightBlue
@@ -283,6 +323,11 @@
   storage:
     back:
     - TowelColorLightBlue
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorPurple
@@ -295,6 +340,11 @@
   storage:
     back:
     - TowelColorPurple
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorRed
@@ -307,6 +357,11 @@
   storage:
     back:
     - TowelColorRed
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorGray
@@ -319,6 +374,11 @@
   storage:
     back:
     - TowelColorGray
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorBlack
@@ -331,6 +391,11 @@
   storage:
     back:
     - TowelColorBlack
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorDarkGreen
@@ -343,6 +408,11 @@
   storage:
     back:
     - TowelColorDarkGreen
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorMaroon
@@ -355,6 +425,11 @@
   storage:
     back:
     - TowelColorMaroon
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorYellow
@@ -367,6 +442,11 @@
   storage:
     back:
     - TowelColorYellow
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: TowelColorMime
@@ -379,3 +459,8 @@
   storage:
     back:
     - TowelColorMime
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
