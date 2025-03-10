@@ -412,10 +412,12 @@
     layers:
     - state: base
       map: ["enum.StorageVisualLayers.Base"]
-    # - state: unlocked  #SS220 Shelfs Resprite
-    #   shader: unshaded #SS220 Shelfs Resprite
-    #- state: chem-0 #SS220 Shelfs Resprite
-    #- map: ["enum.StorageFillLayers.Fill"] #SS220 Shelfs Resprite
+    #SS220 Shelfs Resprite begin
+    # - state: unlocked  
+    #   shader: unshaded
+    #- state: chem-0
+    #- map: ["enum.StorageFillLayers.Fill"]
+    #SS220 Shelfs Resprite end
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
     - state: unlocked #SS220 Shelfs Resprite
