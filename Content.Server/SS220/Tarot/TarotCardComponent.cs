@@ -13,7 +13,7 @@ public sealed partial class TarotCardComponent : Component
     public bool IsReversed;
 
     [DataField]
-    public TimeSpan? NextUpdate;
+    public bool IsUsed;
 
     [DataField]
     public EntityUid? EntityEffect;

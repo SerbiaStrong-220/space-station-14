@@ -75,6 +75,7 @@ public sealed class TarotCardSystem : EntitySystem
     ];
 
     private const string MedkitCombatFilled = "MedkitCombatFilled";
+    private const string ExGrenade = "ExGrenade";
     private const string SpaceCash500 = "SpaceCash500";
     private const string BlockGameArcade = "BlockGameArcade";
     private const string D20Dice = "d20Dice";
@@ -83,7 +84,7 @@ public sealed class TarotCardSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<TarotCardComponent, ComponentInit>(OnCompInit);
+        SubscribeLocalEvent<TarotCardComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<TarotCardComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<TarotCardComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<TarotCardComponent, ThrowDoHitEvent>(OnThrow);
@@ -104,10 +105,13 @@ public sealed class TarotCardSystem : EntitySystem
         }
     }
 
-    private void OnCompInit(Entity<TarotCardComponent> ent, ref ComponentInit args)
+    private void OnMapInit(Entity<TarotCardComponent> ent, ref MapInitEvent args)
     {
-        ent.Comp.IsReversed = _random.Next(2) == 0;
-        _appearance.SetData(ent.Owner, TarotVisuals.Reversed, ent.Comp.IsReversed);
+        if (!EntityManager.TryGetComponent(ent.Owner, out TarotCardComponent? tarot))
+            return;
+
+        tarot.IsReversed = _random.Next(2) == 0;
+        _appearance.SetData(ent.Owner, TarotVisuals.Reversed, tarot.IsReversed);
     }
 
     private void OnExamined(Entity<TarotCardComponent> ent, ref ExaminedEvent args)
@@ -117,7 +121,7 @@ public sealed class TarotCardSystem : EntitySystem
 
     private void OnUseInHand(Entity<TarotCardComponent> ent, ref UseInHandEvent args)
     {
-        if (_gameTiming.CurTime < ent.Comp.NextUpdate)
+        if (ent.Comp.IsUsed)
         {
             _popup.PopupEntity("Карта пока не готова!", args.User, args.User);
             return;
@@ -132,7 +136,7 @@ public sealed class TarotCardSystem : EntitySystem
 
     private void OnThrow(Entity<TarotCardComponent> ent, ref ThrowDoHitEvent args)
     {
-        if (_gameTiming.CurTime < ent.Comp.NextUpdate)
+        if (ent.Comp.IsUsed)
             return;
 
         if (!HasComp<HumanoidAppearanceComponent>(args.Target))
@@ -161,39 +165,51 @@ public sealed class TarotCardSystem : EntitySystem
             case "TarotFoolCard":
                 ApplyReversedEffect(card, target, ClearInventory, TeleportToArrivals);
                 break;
+            // TODO case TarotMagicianCard
             case "TarotMagicianCard":
-                ApplyReversedEffect(card, target, EnsurePacified, OpenNearestAirlock); //TODO
+                ApplyReversedEffect(card, target, EnsurePacified, OpenNearestAirlock);
                 break;
+            // TODO case TarotHighPriestessCard
             case "TarotEmpressCard":
                 ApplyReversedEffect(card, target, EnsurePacified, TransferSolution);
                 break;
             case "TarotEmperorCard":
                 ApplyReversedEffect(card, target, TeleportToHoD, TeleportToBridge);
                 break;
+            // TODO case TarotHierophantCard
             case "TarotLoversCard":
                 ApplyReversedEffect(card, target, HurtTarget, HealTarget);
                 break;
+            // TODO case TarotChariotCard
             case "TarotChariotCard":
-                ApplyReversedEffect(card, target, HurtTarget, ApplyChariotEffects); //TODO
+                ApplyReversedEffect(card, target, HurtTarget, ApplyChariotEffects);
                 break;
-            case "TarotJusticeCard":
-                ApplyReversedEffect(card, target, HurtTarget, SpawnJusticeItems); //TODO
-                break;
+            // TODO case TarotStrengthCard
             case "TarotHermitCard":
                 ApplyReversedEffect(card, target, TransformGuns, TeleportToVend);
                 break;
             case "TarotWheelOfFortuneCard":
                 ApplyReversedEffect(card, target, RollDieOfFortune, CreateGambling);
                 break;
-            // case Strength
-            // case HangedMan
-            // case Death
+            // TODO case TarotJusticeCard
+            case "TarotJusticeCard":
+                ApplyReversedEffect(card, target, HurtTarget, SpawnJusticeItems);
+                break;
+            // TODO case HangedMan
+            // TODO case Death
             case "TarotTemperanceCard":
                 ApplyReversedEffect(card, target, EatPills, HealLing);
                 break;
+            // TODO case TarotDevilCard
+            // TODO case TarotTowerCard
+            // TODO case TarotStarsCard
+            // TODO case TarotMoonCard
+            // TODO case TarotSunCard
+            // TODO case TarotJudgementCard
+            // TODO case TarotWorldCard
         }
 
-        card.Comp.NextUpdate = _gameTiming.CurTime + card.Comp.Delay;
+        card.Comp.IsUsed = true;
         card.Comp.Target = null;
     }
 
@@ -368,8 +384,9 @@ public sealed class TarotCardSystem : EntitySystem
     private void SpawnJusticeItems(EntityUid target)
     {
         var coords = Transform(target).Coordinates;
-        Spawn(MedkitCombatFilled, coords);
-        Spawn(SpaceCash500, coords);
+        SpawnAtPosition(ExGrenade, coords);
+        SpawnAtPosition(MedkitCombatFilled, coords);
+        SpawnAtPosition(SpaceCash500, coords);
     }
 
     private void TeleportToVend(EntityUid target)
