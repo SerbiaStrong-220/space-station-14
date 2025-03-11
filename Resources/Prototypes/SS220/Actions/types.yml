@@ -21,4 +21,4 @@
     event: !type:ShoutActionEvent
       shoutSound:
         collection: WyccGoalShout
-      shoutPhrases: goalPhrases
+      shoutPhrases: GoalPhrases

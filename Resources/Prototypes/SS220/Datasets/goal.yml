@@ -1,9 +1,5 @@
-﻿- type: dataset
-  id: goalPhrases
+﻿- type: localizedDataset
+  id: GoalPhrases
   values:
-  - восклицает
-  - голосует
-  - бравирует
-  - возглашает
-  - выкрикивает
-  - вскрикивает
+    prefix: goal-
+    count: 6
