@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "license": "",
+  "copyright": "",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "tarot_pack"
+    },
+	{
+		"name": "tarot_the_fool"
+	},
+	{
+		"name": "tarot_the_fool_reversed"
+	},
+	{
+		"name": "tarot_the_magician"
+	},
+	{
+		"name": "tarot_the_magician_reversed"
+	},
+	{
+		"name": "tarot_the_high_priestess"
+	},
+	{
+		"name": "tarot_the_high_priestess_reversed"
+	},
+	{
+		"name": "tarot_the_empress"
+	},
+	{
+		"name": "tarot_the_empress_reversed"
+	},
+	{
+		"name": "tarot_the_hierophant"
+	},
+	{
+		"name": "tarot_the_hierophant_reversed"
+	},
+	{
+		"name": "tarot_the_lovers"
+	},
+	{
+		"name": "tarot_the_lovers_reversed"
+	},
+	{
+		"name": "tarot_the_justice"
+	},
+	{
+		"name": "tarot_the_justice_reversed"
+	},
+	{
+		"name": "tarot_the_hermit"
+	},
+	{
+		"name": "tarot_the_hermit_reversed"
+	},
+	{
+		"name": "tarot_the_wheel_of_fortune"
+	},
+	{
+		"name": "tarot_the_wheel_of_fortune_reversed"
+	},
+	{
+		"name": "tarot_the_strength"
+	},
+	{
+		"name": "tarot_the_strength_reversed"
+	},
+	{
+		"name": "tarot_the_hanged_man"
+	},
+	{
+		"name": "tarot_the_hanged_man_reversed"
+	},
+	{
+		"name": "tarot_the_death"
+	},
+	{
+		"name": "tarot_the_death_reversed"
+	},
+	{
+		"name": "tarot_the_devil"
+	},
+	{
+		"name": "tarot_the_devil_reversed"
+	},
+	{
+		"name": "tarot_the_tower"
+	},
+	{
+		"name": "tarot_the_tower_reversed"
+	},
+	{
+		"name": "tarot_the_stars"
+	},
+	{
+		"name": "tarot_the_stars_reversed"
+	},
+	{
+		"name": "tarot_the_moon"
+	},
+	{
+		"name": "tarot_the_moon_reversed"
+	},
+	{
+		"name": "tarot_the_sun"
+	},
+	{
+		"name": "tarot_the_sun_reversed"
+	},
+	{
+		"name": "tarot_the_judgement"
+	},
+	{
+		"name": "tarot_the_judgement_reversed"
+	},
+	{
+		"name": "tarot_the_world"
+	},
+	{
+		"name": "tarot_the_world_reversed"
+	},
+	{
+		"name": "tarot_the_chariot"
+	},
+	{
+		"name": "tarot_the_chariot_reversed"
+	},
+	{
+		"name": "tarot_the_emperor"
+	},
+	{
+		"name": "tarot_the_emperor_reversed"
+	},
+	{
+		"name": "tarot_the_temperance"
+	},
+	{
+		"name": "tarot_the_temperance_reversed"
+	}
+  ]
+}

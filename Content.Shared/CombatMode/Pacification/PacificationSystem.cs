@@ -35,6 +35,25 @@ public sealed class PacificationSystem : EntitySystem
         SubscribeLocalEvent<PacifiedComponent, CloningEvent>(OnCloning); //ss220 add clone pacified comp to clone entity
     }
 
+    //ss220 add tarot start
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var curTime = _timing.CurTime;
+        var query = EntityQueryEnumerator<PacifiedComponent>();
+
+        while (query.MoveNext(out var uid, out var pacifiedComponent))
+        {
+            if (pacifiedComponent.EndTime == null)
+                continue;
+
+            if (curTime >= pacifiedComponent.EndTime)
+                RemCompDeferred<PacifiedComponent>(uid);
+        }
+    }
+    //ss220 add tarot end
+
     private bool PacifiedCanAttack(EntityUid user, EntityUid target, [NotNullWhen(false)] out string? reason)
     {
         var ev = new AttemptPacifiedAttackEvent(user);
