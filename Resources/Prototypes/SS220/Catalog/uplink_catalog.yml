@@ -325,3 +325,14 @@
     Telecrystal: 2
   categories:
   - UplinkWearables
+
+- type: listing
+  id: UplinkPinpointerSyndie
+  name: uplink-pinpointer-syndie-name
+  description: uplink-pinpointer-syndie-desc
+  icon: { sprite: Objects/Devices/pinpointer.rsi, state: pinpointer-syndicate }
+  productEntity: PinpointerUplink
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkDisruption
