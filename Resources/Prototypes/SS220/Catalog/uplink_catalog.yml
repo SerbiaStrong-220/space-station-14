@@ -273,11 +273,7 @@
     Telecrystal: 3
   categories:
   - UplinkWeaponry
-  - UplinkJob
   conditions:
-  - !type:BuyerJobCondition
-    whitelist:
-    - Chef
 #SS220 SpicyUPD end
 
 #- type: listing
