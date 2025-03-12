@@ -596,6 +596,9 @@
     - HighRiskItem
     - Sidearm
     - WeaponAntiqueLaser
+  #ss220 pinpointer ui add start
+  - type: TrackedItem
+  #ss220 pinpointer ui add end
   - type: StaticPrice
     price: 750
   - type: StealTarget

@@ -22,5 +22,6 @@
   - type: Tag
     tags:
     - HighRiskItem
+  - type: TrackedItem
   - type: StealTarget
     stealGroup: RCDCE
