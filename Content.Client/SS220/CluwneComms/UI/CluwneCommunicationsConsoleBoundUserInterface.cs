@@ -42,6 +42,10 @@ namespace Content.Client.SS220.CluwneComms.UI
             if (state is not CommunicationsConsoleInterfaceState commsState)
                 return;
 
+            if (_menu != null)
+            {
+                _menu.CanAnnounce = commsState.CanAnnounce;
+            }
         }
     }
 }

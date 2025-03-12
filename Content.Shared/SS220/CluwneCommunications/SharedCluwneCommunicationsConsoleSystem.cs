@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace Content.Shared.SS220.CluwneCommunications
 {
-    public sealed class SharedCluwneCommunicationssConsoleSystem : EntitySystem
+    public abstract class SharedCluwneCommunicationssConsoleSystem : EntitySystem
     {
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
@@ -18,9 +18,7 @@ namespace Content.Shared.SS220.CluwneCommunications
         public void OnMapInit(Entity<CluwneCommunicationsConsoleComponent> ent, ref MapInitEvent args)
         {
             ent.Comp.AnnouncementCooldownRemaining = _timing.CurTime + ent.Comp.Delay;
-            ent.Comp.AlertCooldownRemaining = _timing.CurTime + ent.Comp.Delay;
             ent.Comp.CanAnnounce = false;
-            ent.Comp.CanAlert = false;
         }
 
         public override void Update(float frameTime)
@@ -35,12 +33,6 @@ namespace Content.Shared.SS220.CluwneCommunications
                     comp.CanAnnounce = true;
                     UpdateUI(uid, comp);
                 }
-
-                if (!comp.CanAlert && _timing.CurTime >= comp.AlertCooldownRemaining)
-                {
-                    comp.CanAlert = true;
-                    UpdateUI(uid, comp);
-                }
             }
         }
 
@@ -48,7 +40,7 @@ namespace Content.Shared.SS220.CluwneCommunications
         {
             CluwneCommunicationsConsoleInterfaceState newState = new CluwneCommunicationsConsoleInterfaceState(comp.CanAnnounce);
 
-            _uiSystem.SetUiState(ent, CommunicationsConsoleUiKey.Key, newState);
+            _uiSystem.SetUiState(ent, CluwneCommunicationsConsoleUiKey.Key, newState);
         }
     }
 }

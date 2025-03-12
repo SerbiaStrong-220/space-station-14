@@ -1,21 +1,18 @@
-using Content.Server.UserInterface;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Shared.UserInterface;
 using Content.Shared.Communications;
 using Content.Shared.SS220.CluwneCommunications;
+using Robust.Shared.Serialization;
 using Robust.Shared.Audio;
 
-namespace Content.Server.SS220.CluwneCommunications
+namespace Content.Shared.SS220.CluwneCommunications
 {
     [RegisterComponent]
-    public sealed partial class CluwneCommunicationsConsoleComponent : SharedCluwneCommunicationsConsoleComponent
+    public sealed partial class CluwneCommunicationsConsoleComponent : Component
     {
-        public float UIUpdateAccumulator = 0f;
-
-        /// <summary>
-        /// Remaining cooldown between making announcements.
-        /// </summary>
         [ViewVariables]
-        [DataField]
-        public float AnnouncementCooldownRemaining;
+        public bool CanAnnounce;
 
         /// <summary>
         /// Fluent ID for the announcement title
@@ -37,14 +34,20 @@ namespace Content.Server.SS220.CluwneCommunications
         /// </summary>
         [ViewVariables]
         [DataField]
-        public int Delay = 90;
+        public TimeSpan Delay = TimeSpan.FromSeconds(10);
 
         /// <summary>
         /// Time in seconds of announcement cooldown when a new console is created on a per-console basis
         /// </summary>
         [ViewVariables]
         [DataField]
-        public int InitialDelay = 30;
+        public TimeSpan InitialDelay = TimeSpan.FromSeconds(3);
+
+        /// <summary>
+        /// Remaining cooldown between making announcements.
+        /// </summary>
+        [ViewVariables]
+        public TimeSpan AnnouncementCooldownRemaining;
 
         /// <summary>
         /// Announce on all grids (for nukies)
@@ -57,5 +60,23 @@ namespace Content.Server.SS220.CluwneCommunications
         /// </summary>
         [DataField]
         public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Announcements/announce.ogg");
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class CluwneCommunicationsConsoleInterfaceState(bool canAnnounce) : BoundUserInterfaceState
+    {
+        public readonly bool CanAnnounce = canAnnounce;
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class CluwneCommunicationsConsoleAnnounceMessage(string message) : BoundUserInterfaceMessage
+    {
+        public readonly string Message = message;
+    }
+
+    [Serializable, NetSerializable]
+    public enum CluwneCommunicationsConsoleUiKey : byte
+    {
+        Key
     }
 }
