@@ -29,6 +29,9 @@
     - HighRiskItem
   - type: StealTarget
     stealGroup: HandheldCrewMonitor
+  #ss220 pinpointer ui add start
+  - type: TrackedItem
+  #ss220 pinpointer ui add end
 
 - type: entity
   id: HandheldCrewMonitorEmpty
