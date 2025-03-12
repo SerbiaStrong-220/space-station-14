@@ -6,6 +6,7 @@ using Content.Shared.Communications;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
+using Mono.Cecil.Cil;
 
 namespace Content.Client.SS220.CluwneComms.UI
 {
@@ -26,13 +27,24 @@ namespace Content.Client.SS220.CluwneComms.UI
 
             _menu = this.CreateWindow<CluwneCommsConsoleMenu>();
             _menu.OnAnnounce += AnnounceButtonPressed;
+            _menu.OnAlertLevel += AlertLevelSelected;
         }
 
         public void AnnounceButtonPressed(string message)
         {
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var msg = SharedChatSystem.SanitizeAnnouncement(message, maxLength);
-            SendMessage(new CommunicationsConsoleAnnounceMessage(msg));
+            SendMessage(new CluwneCommsConsoleAnnounceMessage(msg));
+        }
+
+        public void AlertLevelSelected(string message)
+        {
+        }
+        public void AlertButtonPressed(string level, string message)
+        {
+            var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
+            var msg = SharedChatSystem.SanitizeAnnouncement(message, maxLength);
+            SendMessage(new CluwneCommsConsoleAlertMessage(level, msg));
         }
 
         protected override void UpdateState(BoundUserInterfaceState state)
@@ -45,6 +57,8 @@ namespace Content.Client.SS220.CluwneComms.UI
             if (_menu != null)
             {
                 _menu.CanAnnounce = commsState.CanAnnounce;
+
+                _menu.AnnounceButton.Disabled = !_menu.CanAnnounce;
             }
         }
     }

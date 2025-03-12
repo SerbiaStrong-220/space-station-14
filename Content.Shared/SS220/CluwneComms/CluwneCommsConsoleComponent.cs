@@ -5,29 +5,15 @@ using Content.Shared.Communications;
 using Content.Shared.SS220.CluwneComms;
 using Robust.Shared.Serialization;
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.CluwneComms
 {
-    [RegisterComponent]
+    [RegisterComponent, NetworkedComponent]
     public sealed partial class CluwneCommsConsoleComponent : Component
     {
         [ViewVariables]
         public bool CanAnnounce;
-
-        /// <summary>
-        /// Fluent ID for the announcement title
-        /// If a Fluent ID isn't found, just uses the raw string
-        /// </summary>
-        [ViewVariables(VVAccess.ReadWrite)]
-        [DataField(required: true)]
-        public LocId Title = "comms-console-announcement-title-station";
-
-        /// <summary>
-        /// Announcement color
-        /// </summary>
-        [ViewVariables]
-        [DataField]
-        public Color Color = Color.Gold;
 
         /// <summary>
         /// Time in seconds between announcement delays on a per-console basis
@@ -49,17 +35,43 @@ namespace Content.Shared.SS220.CluwneComms
         [ViewVariables]
         public TimeSpan AnnouncementCooldownRemaining;
 
+        [ViewVariables]
+        public bool CanSendAlert;
+
         /// <summary>
-        /// Announce on all grids (for nukies)
+        /// Time in seconds between alerts delays on a per-console basis
         /// </summary>
+        [ViewVariables]
         [DataField]
-        public bool Global = false;
+        public TimeSpan AlertDelay = TimeSpan.FromSeconds(10);
+
+        /// <summary>
+        /// Remaining cooldown between making funny codes.
+        /// </summary>
+        [ViewVariables]
+        public TimeSpan AlertCooldownRemaining;
 
         /// <summary>
         /// Announce sound file path
         /// </summary>
         [DataField]
         public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Announcements/announce.ogg");
+
+        /// <summary>
+        /// Fluent ID for the announcement title
+        /// If a Fluent ID isn't found, just uses the raw string
+        /// </summary>
+        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField(required: true)]
+        public LocId Title = "comms-console-announcement-title-station";
+
+        /// <summary>
+        /// Announcement color
+        /// </summary>
+        [ViewVariables]
+        [DataField]
+        public Color Color = Color.Gold;
+
     }
 
     [Serializable, NetSerializable]
@@ -71,6 +83,13 @@ namespace Content.Shared.SS220.CluwneComms
     [Serializable, NetSerializable]
     public sealed class CluwneCommsConsoleAnnounceMessage(string message) : BoundUserInterfaceMessage
     {
+        public readonly string Message = message;
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class CluwneCommsConsoleAlertMessage(string alert, string message) : BoundUserInterfaceMessage
+    {
+        public readonly string Alert = alert;
         public readonly string Message = message;
     }
 
