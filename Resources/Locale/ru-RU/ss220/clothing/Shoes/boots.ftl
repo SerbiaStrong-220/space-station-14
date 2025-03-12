@@ -4,3 +4,5 @@ ent-ClothingShoesBootsMagDQ = магнитные ботинки Эскадрон
 ent-ClothingShoesCMOCorporate = корпоративные туфли главного врача
     .desc = Прошли кровь и пот, буквально. Тем не менее выглядят как новые.
     .suffix = За время в игре
+ent-ClothingShoesColorDarkBrown = тёмно-коричневые туфли
+    .desc = Стильные тёмно-коричневые туфли.
