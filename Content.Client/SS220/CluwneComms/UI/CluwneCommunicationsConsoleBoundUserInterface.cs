@@ -5,7 +5,7 @@ using Content.Shared.Chat;
 using Content.Shared.Communications;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
-using Robust.Shared.Timing;
+using Content.Shared.SS220.CluwneCommunications;
 
 namespace Content.Client.SS220.CluwneComms.UI
 {
@@ -39,7 +39,7 @@ namespace Content.Client.SS220.CluwneComms.UI
         {
             base.UpdateState(state);
 
-            if (state is not CommunicationsConsoleInterfaceState commsState)
+            if (state is not CluwneCommunicationsConsoleInterfaceState commsState)
                 return;
 
             if (_menu != null)
