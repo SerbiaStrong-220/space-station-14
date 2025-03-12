@@ -2,14 +2,14 @@
 
 using Content.Shared.UserInterface;
 using Content.Shared.Communications;
-using Content.Shared.SS220.CluwneCommunications;
+using Content.Shared.SS220.CluwneComms;
 using Robust.Shared.Serialization;
 using Robust.Shared.Audio;
 
-namespace Content.Shared.SS220.CluwneCommunications
+namespace Content.Shared.SS220.CluwneComms
 {
     [RegisterComponent]
-    public sealed partial class CluwneCommunicationsConsoleComponent : Component
+    public sealed partial class CluwneCommsConsoleComponent : Component
     {
         [ViewVariables]
         public bool CanAnnounce;
@@ -63,19 +63,19 @@ namespace Content.Shared.SS220.CluwneCommunications
     }
 
     [Serializable, NetSerializable]
-    public sealed class CluwneCommunicationsConsoleInterfaceState(bool canAnnounce) : BoundUserInterfaceState
+    public sealed class CluwneCommsConsoleInterfaceState(bool canAnnounce) : BoundUserInterfaceState
     {
         public readonly bool CanAnnounce = canAnnounce;
     }
 
     [Serializable, NetSerializable]
-    public sealed class CluwneCommunicationsConsoleAnnounceMessage(string message) : BoundUserInterfaceMessage
+    public sealed class CluwneCommsConsoleAnnounceMessage(string message) : BoundUserInterfaceMessage
     {
         public readonly string Message = message;
     }
 
     [Serializable, NetSerializable]
-    public enum CluwneCommunicationsConsoleUiKey : byte
+    public enum CluwneCommsConsoleUiKey : byte
     {
         Key
     }

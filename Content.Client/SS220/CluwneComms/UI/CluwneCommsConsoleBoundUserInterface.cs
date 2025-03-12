@@ -5,18 +5,18 @@ using Content.Shared.Chat;
 using Content.Shared.Communications;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
-using Content.Shared.SS220.CluwneCommunications;
+using Content.Shared.SS220.CluwneComms;
 
 namespace Content.Client.SS220.CluwneComms.UI
 {
-    public sealed class CluwneCommunicationsConsoleBoundUserInterface : BoundUserInterface
+    public sealed class CluwneCommsConsoleBoundUserInterface : BoundUserInterface
     {
         [Dependency] private readonly IConfigurationManager _cfg = default!;
 
         [ViewVariables]
-        private CluwneCommunicationsConsoleMenu? _menu;
+        private CluwneCommsConsoleMenu? _menu;
 
-        public CluwneCommunicationsConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+        public CluwneCommsConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
         }
 
@@ -24,7 +24,7 @@ namespace Content.Client.SS220.CluwneComms.UI
         {
             base.Open();
 
-            _menu = this.CreateWindow<CluwneCommunicationsConsoleMenu>();
+            _menu = this.CreateWindow<CluwneCommsConsoleMenu>();
             _menu.OnAnnounce += AnnounceButtonPressed;
         }
 
@@ -39,7 +39,7 @@ namespace Content.Client.SS220.CluwneComms.UI
         {
             base.UpdateState(state);
 
-            if (state is not CluwneCommunicationsConsoleInterfaceState commsState)
+            if (state is not CluwneCommsConsoleInterfaceState commsState)
                 return;
 
             if (_menu != null)

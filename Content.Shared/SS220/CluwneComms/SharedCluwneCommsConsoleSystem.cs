@@ -4,18 +4,18 @@ using Robust.Shared.GameObjects;
 using static Content.Shared.Access.Components.AccessOverriderComponent;
 using System.ComponentModel;
 
-namespace Content.Shared.SS220.CluwneCommunications
+namespace Content.Shared.SS220.CluwneComms
 {
-    public abstract class SharedCluwneCommunicationssConsoleSystem : EntitySystem
+    public abstract class SharedCluwneCommsConsoleSystem : EntitySystem
     {
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
         public override void Initialize()
         {
-            SubscribeLocalEvent<CluwneCommunicationsConsoleComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<CluwneCommsConsoleComponent, MapInitEvent>(OnMapInit);
         }
-        public void OnMapInit(Entity<CluwneCommunicationsConsoleComponent> ent, ref MapInitEvent args)
+        public void OnMapInit(Entity<CluwneCommsConsoleComponent> ent, ref MapInitEvent args)
         {
             ent.Comp.AnnouncementCooldownRemaining = _timing.CurTime + ent.Comp.Delay;
             ent.Comp.CanAnnounce = false;
@@ -25,7 +25,7 @@ namespace Content.Shared.SS220.CluwneCommunications
         {
             base.Update(frameTime);
 
-            var query = EntityQueryEnumerator<CluwneCommunicationsConsoleComponent>();
+            var query = EntityQueryEnumerator<CluwneCommsConsoleComponent>();
             while (query.MoveNext(out var uid, out var comp))
             {
                 if (!comp.CanAnnounce && _timing.CurTime >= comp.AnnouncementCooldownRemaining)
@@ -36,11 +36,11 @@ namespace Content.Shared.SS220.CluwneCommunications
             }
         }
 
-        private void UpdateUI(EntityUid ent, CluwneCommunicationsConsoleComponent comp)
+        private void UpdateUI(EntityUid ent, CluwneCommsConsoleComponent comp)
         {
-            CluwneCommunicationsConsoleInterfaceState newState = new CluwneCommunicationsConsoleInterfaceState(comp.CanAnnounce);
+            CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce);
 
-            _uiSystem.SetUiState(ent, CluwneCommunicationsConsoleUiKey.Key, newState);
+            _uiSystem.SetUiState(ent, CluwneCommsConsoleUiKey.Key, newState);
         }
     }
 }

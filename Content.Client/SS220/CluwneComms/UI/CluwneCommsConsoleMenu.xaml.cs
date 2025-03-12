@@ -12,7 +12,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.SS220.CluwneComms.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class CluwneCommunicationsConsoleMenu : FancyWindow
+    public sealed partial class CluwneCommsConsoleMenu : FancyWindow
     {
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
@@ -28,7 +28,7 @@ namespace Content.Client.SS220.CluwneComms.UI
         public event Action? OnEmergencyLevel;
         public event Action<string>? OnAlertLevel;
         public event Action<string>? OnAnnounce;
-        public CluwneCommunicationsConsoleMenu()
+        public CluwneCommsConsoleMenu()
         {
             IoCManager.InjectDependencies(this);
             RobustXamlLoader.Load(this);

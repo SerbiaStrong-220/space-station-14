@@ -155,8 +155,8 @@
   - type: AccessReader
     access: [[ "Theatre" ]]
   - type: ActivatableUI
-    key: enum.CluwneCommunicationsConsoleUiKey.Key
-  - type: CluwneCommunicationsConsole
+    key: enum.CluwneCommsConsoleUiKey.Key
+  - type: CluwneCommsConsole
     title: cluwne-comms-console-announcement-title-station
     sound:
       path: /Audio/SS220/Announcements/cluwne_comm_announce.ogg
@@ -164,8 +164,8 @@
         volume: -4
   - type: UserInterface
     interfaces:
-      enum.CluwneCommunicationsConsoleUiKey.Key:
-        type: CluwneCommunicationsConsoleBoundUserInterface
+      enum.CluwneCommsConsoleUiKey.Key:
+        type: CluwneCommsConsoleBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: Computer
