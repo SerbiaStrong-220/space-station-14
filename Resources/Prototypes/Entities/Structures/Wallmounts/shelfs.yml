@@ -15,7 +15,7 @@
       - Structure
   - type: Sprite
     drawdepth: WallMountedItems
-    sprite: Structures/Storage/Shelfs/wood.rsi
+    sprite: SS220/Structures/Storage/Shelfs/wood.rsi #SS220 Shelfs Resprite
     state: base
   - type: Transform
   - type: Damageable
@@ -57,16 +57,18 @@
   - type: Lock
   - type: LockVisuals
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/wood.rsi
+    sprite: SS220/Structures/Storage/Shelfs/wood.rsi #SS220 Shelfs Resprite
     state: base
     layers:
     - state: rbase
       map: ["enum.StorageVisualLayers.Base"]
-    - state: unlocked
-      shader: unshaded
+    # - state: unlocked  #SS220 Shelfs Resprite
+    #   shader: unshaded #SS220 Shelfs Resprite
       # used to keep the unlocked light visible while open.
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
+    - state: unlocked #SS220 Shelfs Resprite
+      shader: unshaded #SS220 Shelfs Resprite
     - state: locked
       map: ["enum.LockVisualLayers.Lock"]
       shader: unshaded
@@ -115,7 +117,7 @@
   description: A sturdy place to place, well, anything really.
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/metal.rsi
+    sprite: SS220/Structures/Storage/Shelfs/metal.rsi #SS220 Shelfs Resprite
     state: base
   - type: Damageable
     damageModifierSet: Metallic
@@ -150,7 +152,7 @@
   description: A fragile place to place, well, anything really.
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/glass.rsi
+    sprite: SS220/Structures/Storage/Shelfs/glass.rsi #SS220 Shelfs Resprite
     state: base
   - type: Damageable
     damageModifierSet: Glass
@@ -186,7 +188,7 @@
   description: A safe place to put your favorite bottle of whiskey.
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/wood.rsi
+    sprite: SS220/Structures/Storage/Shelfs/wood.rsi #SS220 Shelfs Resprite
     state: base
     layers:
     - state: rbase
@@ -223,7 +225,7 @@
   description: A strong & shiny place to keep all your vials safe.
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/metal.rsi
+    sprite: SS220/Structures/Storage/Shelfs/metal.rsi #SS220 Shelfs Resprite
   - type: Destructible
     thresholds:
     - trigger:
@@ -257,7 +259,7 @@
   description: Crystal clear reinforced glass doors to show off all your fancy bottles you definitely didn't sell a co-worker's favorite mothroach for.
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/glass.rsi
+    sprite: SS220/Structures/Storage/Shelfs/glass.rsi #SS220 Shelfs Resprite
   - type: Destructible
     thresholds:
     - trigger:
@@ -292,7 +294,7 @@
   description: Made out of the finest synthetic wood for all alcohol holding needs.
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/Departments/Service/bar.rsi
+    sprite: SS220/Structures/Storage/Shelfs/Departments/Service/bar.rsi #SS220 Shelfs Resprite
     state: base
     layers:
       - state: base
@@ -340,7 +342,7 @@
   description: Holds knifes, spice, and everything nice!
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/Departments/Service/kitchen.rsi
+    sprite: SS220/Structures/Storage/Shelfs/Departments/Service/kitchen.rsi #SS220 Shelfs Resprite
     state: base
     layers:
       - state: base
@@ -406,22 +408,28 @@
   description: Keeps all your chemicals safe and out of the clow- er, public hands!
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/Departments/Medical/chemistry.rsi
+    sprite: SS220/Structures/Storage/Shelfs/Departments/Medical/chemistry.rsi #SS220 Shelfs Resprite
     layers:
     - state: base
       map: ["enum.StorageVisualLayers.Base"]
-    - state: unlocked
-      shader: unshaded
-    - state: chem-0
-    - map: ["enum.StorageFillLayers.Fill"]
+    #SS220 Shelfs Resprite begin
+    # - state: unlocked  
+    #   shader: unshaded
+    #- state: chem-0
+    #- map: ["enum.StorageFillLayers.Fill"]
+    #SS220 Shelfs Resprite end
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
+    - state: unlocked #SS220 Shelfs Resprite
+      shader: unshaded #SS220 Shelfs Resprite
     - state: locked
       map: ["enum.LockVisualLayers.Lock"]
       shader: unshaded
-  - type: StorageFillVisualizer
-    maxFillLevels: 7
-    fillBaseName: chem
+      #SS220 Shelfs Resprite Begin
+  # - type: StorageFillVisualizer
+  #   maxFillLevels: 7
+  #   fillBaseName: chem
+      #SS220 Shelfs Resprite End
   - type: Destructible
     thresholds:
     - trigger:

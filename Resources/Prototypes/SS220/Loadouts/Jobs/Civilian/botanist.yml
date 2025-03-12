@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobBotanist
       time: 180000 #50 часов
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Head
 - type: loadout

@@ -78,7 +78,7 @@
   startNode: start
   targetNode: ShelfWood
   icon:
-    sprite: Structures/Storage/Shelfs/wood.rsi
+    sprite: SS220/Structures/Storage/Shelfs/wood.rsi #SS220 Shelfs Resprite
     state: base
   objectType: Structure
   placementMode: SnapgridCenter
@@ -94,7 +94,7 @@
   startNode: start
   targetNode: ShelfMetal
   icon:
-    sprite: Structures/Storage/Shelfs/metal.rsi
+    sprite: SS220/Structures/Storage/Shelfs/metal.rsi #SS220 Shelfs Resprite
     state: base
   objectType: Structure
   placementMode: SnapgridCenter
@@ -110,7 +110,7 @@
   startNode: start
   targetNode: ShelfGlass
   icon:
-    sprite: Structures/Storage/Shelfs/glass.rsi
+    sprite: SS220/Structures/Storage/Shelfs/glass.rsi #SS220 Shelfs Resprite
     state: base
   objectType: Structure
   placementMode: SnapgridCenter
@@ -127,7 +127,7 @@
   startNode: start
   targetNode: ShelfRWood
   icon:
-    sprite: Structures/Storage/Shelfs/wood.rsi
+    sprite: SS220/Structures/Storage/Shelfs/wood.rsi #SS220 Shelfs Resprite
     state: rbase
   objectType: Structure
   placementMode: SnapgridCenter
@@ -143,7 +143,7 @@
   startNode: start
   targetNode: ShelfRMetal
   icon:
-    sprite: Structures/Storage/Shelfs/metal.rsi
+    sprite: SS220/Structures/Storage/Shelfs/metal.rsi #SS220 Shelfs Resprite
     state: rbase
   objectType: Structure
   placementMode: SnapgridCenter
@@ -159,7 +159,7 @@
   startNode: start
   targetNode: ShelfRGlass
   icon:
-    sprite: Structures/Storage/Shelfs/glass.rsi
+    sprite: SS220/Structures/Storage/Shelfs/glass.rsi #SS220 Shelfs Resprite
     state: rbase
   objectType: Structure
   placementMode: SnapgridCenter
@@ -176,7 +176,7 @@
   startNode: start
   targetNode: ShelfBar
   icon:
-    sprite: Structures/Storage/Shelfs/Departments/Service/bar.rsi
+    sprite: SS220/Structures/Storage/Shelfs/Departments/Service/bar.rsi #SS220 Shelfs Resprite
     state: base
   objectType: Structure
   placementMode: SnapgridCenter
@@ -192,7 +192,7 @@
   startNode: start
   targetNode: ShelfKitchen
   icon:
-    sprite: Structures/Storage/Shelfs/Departments/Service/kitchen.rsi
+    sprite: SS220/Structures/Storage/Shelfs/Departments/Service/kitchen.rsi #SS220 Shelfs Resprite
     state: base
   objectType: Structure
   placementMode: SnapgridCenter
@@ -208,7 +208,7 @@
   startNode: start
   targetNode: ShelfChemistry
   icon:
-    sprite: Structures/Storage/Shelfs/Departments/Medical/chemistry.rsi
+    sprite: SS220/Structures/Storage/Shelfs/Departments/Medical/chemistry.rsi #SS220 Shelfs Resprite
     state: base
   objectType: Structure
   placementMode: SnapgridCenter
