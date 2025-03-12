@@ -22,9 +22,9 @@
   - type: AmmoCounter
   - type: Gun
     #220 SG Angle Updates begin
-    minAngle: 11 
-    maxAngle: 20 
-    fireRate: 7.5 
+    minAngle: 11
+    maxAngle: 20
+    fireRate: 7.5
     #220 SG Angle Updates end
     burstFireRate: 8
     angleIncrease: 3
@@ -108,12 +108,14 @@
     unwieldOnUse: false
   - type: GunWieldBonus
     #220 SG Angle Updates begin
-    minAngle: -2 
-    maxAngle: -13 
+    minAngle: -2
+    maxAngle: -13
+    #220 SG Angle Updates end
   - type: Gun
-    minAngle: 17 
-    maxAngle: 29 
-    shotsPerBurst: 6 
+    #220 SG Angle Updates begin
+    minAngle: 17
+    maxAngle: 29
+    shotsPerBurst: 6
     #220 SG Angle Updates end
     availableModes:
     - Burst
@@ -148,12 +150,14 @@
       unwieldOnUse: false
     - type: GunWieldBonus
       #220 SG Angle Updates begin
-      minAngle: -2 
-      maxAngle: -13 
+      minAngle: -2
+      maxAngle: -13
+      #220 SG Angle Updates end
     - type: Gun
-      minAngle: 17 
-      maxAngle: 29 
-      fireRate: 6.5 
+      #220 SG Angle Updates begin
+      minAngle: 17
+      maxAngle: 29
+      fireRate: 6.5
       #220 SG Angle Updates end
       burstFireRate: 12
       soundGunshot:
@@ -214,9 +218,9 @@
     boltClosed: null
   - type: Gun
     #220 SG Angle Updates begin
-    fireRate: 6.5 
-    minAngle: 17 
-    maxAngle: 27 
+    fireRate: 6.5
+    minAngle: 17
+    maxAngle: 27
     #220 SG Angle Updates end
     angleIncrease: 1.5
     angleDecay: 6
