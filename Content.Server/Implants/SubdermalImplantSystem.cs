@@ -191,7 +191,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         }
     }
 
-    private EntityCoordinates? SelectRandomTileInRange(TransformComponent userXform, float radius)
+    public EntityCoordinates? SelectRandomTileInRange(TransformComponent userXform, float radius)
     {
         var userCoords = userXform.Coordinates.ToMap(EntityManager, _xform);
         _targetGrids.Clear();
@@ -290,7 +290,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
             {
                 fingerprint.Fingerprint = _forensicsSystem.GenerateFingerprint();
             }
-            RemComp<DetailExaminableComponent>(ent); // remove MRP+ custom description if one exists 
+            RemComp<DetailExaminableComponent>(ent); // remove MRP+ custom description if one exists
             _identity.QueueIdentityUpdate(ent); // manually queue identity update since we don't raise the event
             _popup.PopupEntity(Loc.GetString("scramble-implant-activated-popup", ("identity", newProfile.Name)), ent, ent); //ss220 fix locale
         }
