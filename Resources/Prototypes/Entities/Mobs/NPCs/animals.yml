@@ -1239,6 +1239,14 @@
   - type: Inventory
     templateId: monkeyinventory
     speciesId: monkey
+  #SS220 Monkey Displacement Begin
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Displacement/Animals/monkey.rsi
+            state: jumpsuit
+  #SS220 Monkey Displacement End
   - type: Deathgasp
     prototype: MonkeyDeathgasp
   - type: Cuffable
@@ -1279,6 +1287,13 @@
       state: "creampie_human"
       visible: false
   - type: Hands
+  #SS220 Monkey Displacement Begin
+    handDisplacement:
+      sizeMaps:
+        32:
+          sprite: SS220/Mobs/Displacement/Animals/monkey.rsi
+          state: inHand
+  #SS220 Monkey Displacement End
   - type: ComplexInteraction
   - type: GenericVisualizer
     visuals:
@@ -1403,6 +1418,9 @@
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
     rules: ghost-role-information-syndicate-reinforcement-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+        - !type:OverallPlaytimeRequirement
+          time: 72000 #SS220 ghostrole-times (20h overall) end
     mindRoles:
     # This is for syndicate monkeys that randomly gain sentience, thus have no summoner to team with
     - MindRoleGhostRoleSoloAntagonist
@@ -2999,6 +3017,9 @@
     allowMovement: true
     description: ghost-role-information-SyndiCat-description
     rules: ghost-role-information-SyndiCat-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+      - !type:OverallPlaytimeRequirement
+        time: 72000 #SS220 ghostrole-times (20h overall) end
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     raffle:

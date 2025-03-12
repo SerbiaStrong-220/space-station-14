@@ -74,3 +74,13 @@
     stackRequirements:
       Capacitor: 6
       Steel: 10
+
+- type: entity
+  id: PdaIdPainterMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  components:
+  - type: MachineBoard
+    prototype: ComputerPdaIdPainter
+    stackRequirements:
+      Capacitor: 4
+      Manipulator: 3

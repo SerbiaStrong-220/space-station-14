@@ -1,23 +1,23 @@
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseToggleClothing]
   id: ClothingOuterReactiveArmor
-  name: experimental reactive armor 
+  name: experimental reactive armor
   description: The latest armor prototype based on the anomaly core. There are rumors that NT scientists are developing a more stable and multitasking version.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Armor/reactive_armor.rsi 
+    sprite: SS220/Clothing/OuterClothing/Armor/reactive_armor.rsi
     layers:
     - state: icon
       map: [ "enum.ToggleVisuals.Layer" ]
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Armor/reactive_armor.rsi
-  - type: Appearance      
+  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.ToggleVisuals.Toggled:
         enum.ToggleVisuals.Layer:
           True: {state: icon-on}
-          False: {state: icon}   
+          False: {state: icon}
   - type: Armor
     modifiers:
       coefficients:
@@ -25,7 +25,7 @@
         Slash: 0.5
         Piercing: 0.6
         Heat: 0.5
-        Caustic: 0.9    
+        Caustic: 0.9
   - type: HeldSpeedModifier
   - type: ToggleClothing
     action: ActionToggleReactiveArmor
@@ -33,8 +33,8 @@
     verbToggleOn: toggle-reactivearmor-verb-get-data-text
     verbToggleOff: toggle-reactivearmor-verb-get-data-text
   - type: GroupExamine
-  - type: ReactiveTeleportArmor   
-  - type: Explosive 
+  - type: ReactiveTeleportArmor
+  - type: Explosive
     explosionType: Default
     maxIntensity: 2
     totalIntensity: 1.5
@@ -44,14 +44,15 @@
     repeatable: true
   - type: StealTarget
     stealGroup: ClothingOuterReactiveArmor
+  - type: TrackedItem
   - type: Tag
     tags:
-    - HighRiskItem      
+    - HighRiskItem
 
 - type: entity
   id: ActionToggleReactiveArmor
-  name: Toggle Reactive armor 
-  description: Toggles the armor on and off. 
+  name: Toggle Reactive armor
+  description: Toggles the armor on and off.
   components:
   - type: InstantAction
     useDelay: 5

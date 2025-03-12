@@ -219,7 +219,7 @@
 
 - type: entity
   id: CrateFunSadTromboneImplants
-  parent: CrateGenericSteel
+  parent: [ CrateMedicalSecureImplant ] #SS220 The implants are in new crates
   name: sad trombone implants
   description: Death's never been so fun before! Implant these to make dying a bit more happy.
   components:
@@ -230,7 +230,7 @@
 
 - type: entity
   id: CrateFunLightImplants
-  parent: CrateGenericSteel
+  parent: [ CrateMedicalSecureImplant ] #SS220 The implants are in new crates
   name: light implants
   description: Light up your skin with these implants!
   components:
@@ -348,7 +348,7 @@
 
 - type: entity
   id: CrateFunBikeHornImplants
-  parent: CrateGenericSteel
+  parent: [ CrateMedicalSecureImplant ] #SS220 The implants are in new crates
   name: bike horn implants
   description: A thousand honks a day keeps security officers away!
   components:

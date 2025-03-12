@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobHeadOfPersonnel
       time: 72000 #20 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Professional HoP Time
 - type: loadoutEffectGroup
@@ -17,6 +22,11 @@
       !type:RoleTimeRequirement
       role: JobHeadOfPersonnel
       time: 54000 #15 hrs, special reward for HoP mains
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
 - type: loadout

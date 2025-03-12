@@ -8706,6 +8706,8 @@ entities:
     - EnergySword
     - ItemToggleSize
     - UseDelay
+    - Blocking
+    - Reflect
 - proto: ExpensiveLighterSyndicate
   entities:
   - uid: 960
@@ -13069,16 +13071,13 @@ entities:
     - type: Transform
       pos: -5.5,22.5
       parent: 2
-- proto: VendingMachineBooze
+- proto: VendingMachineBoozeSyndicate
   entities:
   - uid: 1647
     components:
     - type: Transform
       pos: 7.5,-6.5
       parent: 2
-    - type: AccessReader
-      access:
-      - - NuclearOperative
 - proto: VendingMachineChemicalsSyndicate
   entities:
   - uid: 1648

@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by Estkemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base",
+      "directions": 4
+    },
+    {
+      "name": "bar-0",
+      "directions": 4
+    },
+    {
+      "name": "bar-1",
+      "directions": 4
+    },
+    {
+      "name": "bar-2",
+      "directions": 4
+    },
+    {
+      "name": "bar-3",
+      "directions": 4
+    },
+    {
+      "name": "bar-4",
+      "directions": 4
+    },
+    {
+      "name": "bar-5",
+      "directions": 4
+    },
+    {
+      "name": "bar-6",
+      "directions": 4
+    },
+    {
+      "name": "bar-7",
+      "directions": 4
+    },
+    {
+      "name": "bar-8",
+      "directions": 4
+    },
+    {
+      "name": "bar-9",
+      "directions": 4
+    },
+    {
+      "name": "bar-10",
+      "directions": 4
+    },
+    {
+      "name": "bar-11",
+      "directions": 4
+    },
+    {
+      "name": "bar-12",
+      "directions": 4
+    }
+  ]
+}
