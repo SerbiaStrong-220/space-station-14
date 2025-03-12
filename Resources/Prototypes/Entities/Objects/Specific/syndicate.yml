@@ -115,7 +115,7 @@
   suffix: 40 TC, NukeOps
   components:
   - type: Store
-      categories:
+    categories:
 #SS220 NukeOpsUplink begin
     - UplinkWeaponry
     - UplinkAmmo
