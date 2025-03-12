@@ -274,6 +274,9 @@
   categories:
   - UplinkWeaponry
   conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Chef
 #SS220 SpicyUPD end
 
 #- type: listing
