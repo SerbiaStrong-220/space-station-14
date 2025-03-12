@@ -6,13 +6,11 @@
   name: uplink-pistol-viper-name
   description: uplink-pistol-viper-desc
   productEntity: WeaponPistolViper
-#ss220-uplink-discounts bgn
-#  discountCategory: rareDiscounts
-#  discountDownTo:
-#    Telecrystal: 2
-#ss220-uplink-discounts end
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 2
   cost:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 3
   categories:
   - UplinkWeaponry
 
@@ -37,9 +35,9 @@
   productEntity: WeaponPistolCobra
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 2
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 4
   categories:
   - UplinkWeaponry
 
@@ -61,10 +59,10 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword.rsi, state: icon }
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 8 #ss220-uplink-discounts
+    Telecrystal: 4
   productEntity: EnergySword
   cost:
-    Telecrystal: 10 #ss220-uplink-discounts
+    Telecrystal: 8
   categories:
   - UplinkWeaponry
 
@@ -90,9 +88,9 @@
   productEntity: ThrowingKnivesKit
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 2 #ss220-uplink-minor-fixes-and-discounts
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 4 #SS220-underused-uplinks-stuff
   categories:
     - UplinkWeaponry
 
@@ -103,9 +101,9 @@
   productEntity: ClothingHandsGlovesNorthStar
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 8 #ss220-uplink-discounts
+    Telecrystal: 4
   cost:
-    Telecrystal: 10 #ss220-uplink-discounts
+    Telecrystal: 8
   categories:
   - UplinkWeaponry
 
@@ -116,10 +114,12 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword_double.rsi, state: icon }
   productEntity: EnergySwordDouble
   cost:
-    Telecrystal: 18 #ss220-uplink-discounts
+    Telecrystal: 16
+  #ss220-uplink-minor-fixes-and-discounts-begin #Discount added for the reason that on the official build d-esword is only in the nukies uplink, but nukies don't have discounts
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 11 #ss220-uplink-discounts
+    Telecrystal: 9
+  #ss220-uplink-minor-fixes-and-discounts-end
   categories:
   - UplinkWeaponry
   conditions:
@@ -142,9 +142,9 @@
   productEntity: ToolboxElectricalTurretFilled
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 3
   cost:
-    Telecrystal: 4 #ss220-uplink-discounts
+    Telecrystal: 6
   categories:
   - UplinkWeaponry
   conditions:
@@ -316,9 +316,9 @@
   productEntity: SyndieMiniBomb
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 4 #ss220-uplink-discounts
+    Telecrystal: 3
   cost:
-    Telecrystal: 8 #ss220-uplink-discounts
+    Telecrystal: 6
   categories:
     - UplinkExplosives
 
@@ -436,9 +436,9 @@
   productEntity: ClothingBackpackDuffelSyndicateC4tBundle
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 6 #ss220-uplink-discounts
+    Telecrystal: 8
   cost:
-    Telecrystal: 10 #ss220-uplink-discounts
+    Telecrystal: 12 #you're buying bulk so its a 25% discount, so no additional random discount over it
   categories:
   - UplinkExplosives
 
@@ -447,13 +447,11 @@
   name: uplink-emp-grenade-name
   description: uplink-emp-grenade-desc
   productEntity: EmpGrenade
-#ss220-uplink-discounts bgn
-#  discountCategory: usualDiscounts
-#  discountDownTo:
-#    Telecrystal: 1
-#ss220-uplink-discounts end
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
   cost:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 2
   categories:
   - UplinkExplosives
 
@@ -465,9 +463,9 @@
   productEntity: PenExplodingBox
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 2
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 4
   categories:
   - UplinkExplosives
 
@@ -657,13 +655,11 @@
   description: uplink-hypodart-desc
   icon: { sprite: /Textures/Objects/Fun/Darts/dart_red.rsi, state: icon }
   productEntity: HypoDartBox
-#ss220-uplink-discounts bgn
-#  discountCategory: veryRareDiscounts
-#  discountDownTo:
-#    Telecrystal: 1
-#ss220-uplink-discounts end
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 1
   cost:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 2
   categories:
   - UplinkChemicals
 
@@ -675,9 +671,9 @@
   productEntity: ChemicalSynthesisKit
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 3
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 5 # new syndie chemistry update
   categories:
   - UplinkChemicals
 
@@ -709,9 +705,9 @@
   productEntity: NocturineChemistryBottle
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 3
   cost:
-    Telecrystal: 4 #ss220-uplink-discounts
+    Telecrystal: 6
   categories:
   - UplinkChemicals
 
@@ -814,9 +810,9 @@
   productEntity: AgentIDCard
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 1
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 3
   categories:
   - UplinkDeception
 
@@ -827,9 +823,9 @@
   productEntity: StealthBox
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 2
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 5
   categories:
   - UplinkDeception
 
@@ -840,9 +836,9 @@
   productEntity: ChameleonProjector
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 4
   cost:
-    Telecrystal: 5 #ss220-uplink-discounts
+    Telecrystal: 7
   categories:
   - UplinkDeception
 
@@ -911,9 +907,9 @@
   productEntity: BriefcaseSyndieLobbyingBundleFilled
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 2
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 4
   categories:
     - UplinkDeception
 
@@ -975,9 +971,9 @@
   productEntity: AccessBreaker
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 3
   cost:
-    Telecrystal: 4 #ss220-uplink-discounts
+    Telecrystal: 5
   categories:
   - UplinkDisruption
 
@@ -1001,9 +997,9 @@
   productEntity: RadioJammer
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 2
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 3
   categories:
   - UplinkDisruption
 
@@ -1014,9 +1010,9 @@
   productEntity: BorgModuleSyndicateWeapon
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 3
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 5
   categories:
   - UplinkDisruption
 
@@ -1028,9 +1024,9 @@
   icon: { sprite: /Textures/Objects/Specific/Robotics/borgmodule.rsi, state: syndicateborgbomb }
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 2
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 4
   categories:
     - UplinkDisruption
 
@@ -1038,14 +1034,9 @@
   id: UplinkSoapSyndie
   name: uplink-soap-name
   description: uplink-soap-desc
-#ss220-uplink-discounts bgn
   productEntity: SoapSyndie
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 1
-#ss220-uplink-discounts end
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 1
   categories:
   - UplinkDisruption
 
@@ -1056,9 +1047,9 @@
   productEntity: SlipocalypseClusterSoap
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 1
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 2
   categories:
   - UplinkDisruption
 
@@ -1219,7 +1210,7 @@
   description: uplink-cameraBug-desc
   productEntity: CameraBug
   cost:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 4
   categories:
   - UplinkDisruption
 
@@ -1233,9 +1224,9 @@
   productEntity: BoxHoloparasite
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 11 #ss220-uplink-discounts
+    Telecrystal: 8
   cost:
-    Telecrystal: 18 #ss220-uplink-discounts
+    Telecrystal: 14
   categories:
   - UplinkAllies
   conditions:
@@ -1398,9 +1389,9 @@
   productEntity: StorageImplanter
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 4
   cost:
-    Telecrystal: 6 #ss220-uplink-discounts
+    Telecrystal: 8
   categories:
     - UplinkImplants
   conditions:
@@ -1418,9 +1409,9 @@
   productEntity: FreedomImplanter
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 1 #ss220-uplink-minor-fixes-and-discounts
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 3 #SS220-underused-uplinks-stuff
   categories:
     - UplinkImplants
 
@@ -1446,9 +1437,9 @@
   productEntity: DnaScramblerImplanter
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 2
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 5
   categories:
     - UplinkImplants
 
@@ -1464,7 +1455,7 @@
     #Telecrystal: 1
   #ss220 1 tc uplink sales fix end
   cost:
-    Telecrystal: 5 #ss220-uplink-discounts
+    Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
     - UplinkImplants
 
@@ -1569,7 +1560,7 @@
   description: uplink-deathrattle-implant-desc
   productEntity: BoxDeathRattleImplants
   cost:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 4
   categories:
   - UplinkImplants
   conditions:
@@ -1655,7 +1646,7 @@
   discountDownTo:
     Telecrystal: 2
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 4
   categories:
     - UplinkWearables
 
@@ -1666,9 +1657,9 @@
   productEntity: ClothingShoesChameleonNoSlips
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 1
   cost:
-    Telecrystal: 4 #ss220-uplink-discounts
+    Telecrystal: 2
   categories:
   - UplinkWearables
 
@@ -1679,9 +1670,9 @@
   productEntity: ThievingGloves
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 2
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 4
   categories:
   - UplinkWearables
 
@@ -1692,9 +1683,9 @@
   productEntity: ClothingOuterVestWeb
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 1
   cost:
-    Telecrystal: 5 #ss220-uplink-discounts
+    Telecrystal: 3
   categories:
   - UplinkWearables
 
@@ -1749,9 +1740,9 @@
   productEntity: ClothingBackpackDuffelSyndicateHardsuitBundle
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 6 #ss220-uplink-discounts
+    Telecrystal: 4
   cost:
-    Telecrystal: 12 #ss220-uplink-discounts
+    Telecrystal: 8
   categories:
   - UplinkWearables
   conditions:
@@ -1774,20 +1765,17 @@
   # icon: { sprite: /Textures/Clothing/OuterClothing/Armor/syndie-raid.rsi, state: icon }
   icon: { sprite: /Textures/SS220/Clothing/OuterClothing/Armor/syndie-raid.rsi, state: icon } #ss220 raid suit resprite
   productEntity: ClothingBackpackDuffelSyndicateRaidBundle
-#ss220-uplink-discounts bgn
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 6
-#ss220-uplink-discounts end
   cost:
     Telecrystal: 8
   categories:
   - UplinkWearables
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
+#ss220 raid suit rework begin
+#  conditions:
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#      tags:
+#      - NukeOpsUplink
+#ss220 raid suit rework end
 
 - type: listing
   id: UplinkHardsuitSyndieElite
@@ -2230,9 +2218,9 @@
   productEntity: BoxHoloclown
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 8 #ss220-uplink-discounts
+    Telecrystal: 6
   cost:
-    Telecrystal: 14 #ss220-uplink-discounts
+    Telecrystal: 12
   categories:
   - UplinkJob
   conditions:
@@ -2240,12 +2228,6 @@
     whitelist:
     - Clown
     - HeadOfPersonnel
-  #ss220 holoclown-Nukeops begin
-  - !type:StoreWhitelistCondition
-    blacklist:
-     tags:
-        - NukeOpsUplink
-  #ss220 holoclown-Nukeops end
 
 - type: listing
   id: uplinkHotPotato
@@ -2275,9 +2257,9 @@
   productEntity: WeaponPistolCHIMPUpgradeKit
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
+    Telecrystal: 2
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 4
   categories:
   - UplinkJob
   conditions:
