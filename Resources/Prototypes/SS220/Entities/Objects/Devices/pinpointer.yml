@@ -20,3 +20,59 @@
   - type: Pinpointer
     component: Nuke
     targetName: ядерная боеголовка
+
+- type: entity
+  parent: PinpointerBase
+  id: PinpointerCrew
+  name: crew pinpointer
+  description: A handheld tracking device that leads to the direction of any crew member.
+  suffix: Crew, Pinpointer
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/pinpointer.rsi
+    layers:
+    - state: pinpointer-crew
+      map: ["enum.PinpointerLayers.Base"]
+    - state: pinonnull
+      map: ["enum.PinpointerLayers.Screen"]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: Objects/Devices/pinpointer.rsi
+    state: pinpointer-crew
+  - type: Pinpointer
+    mode: Crew
+  - type: ActivatableUI
+    key: enum.PinpointerUIKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.PinpointerUIKey.Key:
+        type: PinpointerBoundUserInterface
+
+- type: entity
+  parent: PinpointerBase
+  id: PinpointerUplink
+  name: uplink pinpointer
+  description: A handheld tracking device that leads to the direction of any crew member.
+  suffix: Crew, Dna, Items, Pinpointer
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/pinpointer.rsi
+    layers:
+    - state: pinpointer-syndicate
+      map: ["enum.PinpointerLayers.Base"]
+    - state: pinonnull
+      map: ["enum.PinpointerLayers.Screen"]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: Objects/Devices/pinpointer.rsi
+    state: pinpointer-syndicate
+  - type: Pinpointer
+    mode: Item
+  - type: ActivatableUI
+    key: enum.PinpointerUIKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.PinpointerUIKey.Key:
+        type: PinpointerBoundUserInterface
