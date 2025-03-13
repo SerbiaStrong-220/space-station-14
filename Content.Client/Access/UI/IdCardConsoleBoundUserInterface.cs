@@ -66,8 +66,8 @@ namespace Content.Client.Access.UI
 
         public void SubmitData(string newFullName, string newJobTitle, List<ProtoId<AccessLevelPrototype>> newAccessList, string newJobPrototype)
         {
-            if (newFullName.Length > MaxFullNameLength)
-                newFullName = newFullName[..MaxFullNameLength];
+            if (newFullName.Length > HumanoidCharacterProfile.MaxNameLength)
+                newFullName = newFullName[..HumanoidCharacterProfile.MaxNameLength];
 
             if (newJobTitle.Length > MaxJobTitleLength)
                 newJobTitle = newJobTitle[..MaxJobTitleLength];
