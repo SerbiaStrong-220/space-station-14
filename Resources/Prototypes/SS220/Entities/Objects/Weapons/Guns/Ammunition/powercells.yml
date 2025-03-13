@@ -66,7 +66,7 @@
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: base
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
-      state: laser-mag-unshaded-1
+      state: o2
       shader: unshaded
       visible: false
   - type: Battery
