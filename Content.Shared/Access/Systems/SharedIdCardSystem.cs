@@ -230,8 +230,8 @@ public abstract class SharedIdCardSystem : EntitySystem
         if (!string.IsNullOrWhiteSpace(fullName))
         {
             fullName = fullName.Trim();
-            if (fullName.Length > HumanoidCharacterProfile.MaxNameLength)
-                fullName = fullName[..HumanoidCharacterProfile.MaxNameLength];
+            if (fullName.Length > IdCardConsoleComponent.MaxFullNameLength)
+                fullName = fullName[..IdCardConsoleComponent.MaxFullNameLength];
         }
         else
         {
