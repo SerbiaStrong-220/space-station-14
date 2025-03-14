@@ -311,6 +311,9 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/Toys/weh.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/Items/Toys/weh.ogg
   - type: EmitSoundOnActivate
     sound:
       path: /Audio/Items/Toys/weh.ogg
@@ -399,6 +402,9 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/Toys/muffled_weh.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/Items/Toys/muffled_weh.ogg
   - type: EmitSoundOnActivate
     sound:
       path: /Audio/Items/Toys/muffled_weh.ogg
@@ -450,6 +456,9 @@
     sound:
       path: /Audio/Items/Toys/hew.ogg
   - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/hew.ogg
+  - type: EmitSoundOnCollide
     sound:
       path: /Audio/Items/Toys/hew.ogg
   - type: EmitSoundOnActivate
