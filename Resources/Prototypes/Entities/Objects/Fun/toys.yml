@@ -189,9 +189,8 @@
     state: plushie_hampter
   - type: EmitSoundOnUse
     sound:
-      path: /Audio/Items/Toys/mousesqueek.ogg
-  # SS220 Custom sound effects are played on Collision instead of Land      
-  - type: EmitSoundOnCollide
+      path: /Audio/Items/Toys/mousesqueek.ogg  
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Items/Toys/mousesqueek.ogg
   - type: EmitSoundOnActivate
@@ -277,8 +276,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
-  # SS220 Custom sound effects are played on Collision instead of Land  
-  - type: EmitSoundOnCollide
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
   - type: EmitSoundOnActivate
@@ -310,8 +308,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/weh.ogg
-  # SS220 Custom sound effects are played on Collision instead of Land    
-  - type: EmitSoundOnCollide
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Items/Toys/weh.ogg
   - type: EmitSoundOnActivate
@@ -397,8 +394,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/muffled_weh.ogg
-  # SS220 Custom sound effects are played on Collision instead of Land    
-  - type: EmitSoundOnCollide
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Items/Toys/muffled_weh.ogg
   - type: EmitSoundOnActivate
@@ -451,8 +447,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/hew.ogg
-  # SS220 Custom sound effects are played on Collision instead of Land        
-  - type: EmitSoundOnCollide
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Items/Toys/hew.ogg
   - type: EmitSoundOnActivate
@@ -506,8 +501,7 @@
     - type: EmitSoundOnUse
       sound:
         path: /Audio/Items/Toys/toy_rustle.ogg
-    # SS220 Custom sound effects are played on Collision instead of Land    
-    - type: EmitSoundOnCollide
+    - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
       sound:
         path: /Audio/Items/Toys/toy_rustle.ogg
     - type: EmitSoundOnActivate
@@ -577,8 +571,7 @@
   - type: Sprite
     sprite: Objects/Fun/sharkplush.rsi
     state: blue
-  # SS220 Custom sound effects are played on Collision instead of Land    
-  - type: EmitSoundOnCollide
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Items/Toys/rawr.ogg
   - type: EmitSoundOnTrigger
@@ -670,8 +663,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Effects/bite.ogg
-  # SS220 Custom sound effects are played on Collision instead of Land    
-  - type: EmitSoundOnCollide
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Effects/bite.ogg
   - type: EmitSoundOnActivate
@@ -838,8 +830,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Voice/Vox/shriek1.ogg
-  # SS220 Custom sound effects are played on Collision instead of Land    
-  - type: EmitSoundOnCollide
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Voice/Vox/shriek1.ogg
   - type: EmitSoundOnTrigger
@@ -876,8 +867,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Weapons/Xeno/alien_spitacid.ogg
-  # SS220 Custom sound effects are played on Collision instead of Land    
-  - type: EmitSoundOnCollide
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Weapons/Xeno/alien_spitacid.ogg
   - type: EmitSoundOnActivate
@@ -914,8 +904,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Voice/Human/malescream_1.ogg
-  # SS220 Custom sound effects are played on Collision instead of Land    
-  - type: EmitSoundOnCollide
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Voice/Human/malescream_2.ogg
   - type: EmitSoundOnActivate
@@ -942,9 +931,8 @@
     state: plushie_moth
   - type: EmitSoundOnUse
     sound:
-      path: /Audio/Voice/Moth/moth_chitter.ogg
-  # SS220 Custom sound effects are played on Collision instead of Land    
-  - type: EmitSoundOnCollide
+      path: /Audio/Voice/Moth/moth_chitter.ogg 
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Voice/Moth/moth_chitter.ogg
   - type: EmitSoundOnActivate
