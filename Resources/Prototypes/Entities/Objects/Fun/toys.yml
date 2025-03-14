@@ -1758,8 +1758,13 @@
       collection: RubberChicken
       params:
         variation: 0.125
+  - type: EmitSoundOnActivate
+    sound:
+      collection: RubberChicken
+      params:
+        variation: 0.125
 # SS220 Commented to reduce sound spam
-#  - type: EmitSoundOnActivate
+#  - type: EmitSoundOnLand
 #    sound:
 #      collection: RubberChicken
 #      params:
