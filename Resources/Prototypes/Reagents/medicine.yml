@@ -986,12 +986,12 @@
   color: "#283332"
   metabolisms:
     Medicine:
-      metabolismRate: 0.05 #ss220 combat medicine be-gone
+      metabolismRate: 0.1 #ss220 combat medicine be-gone
       effects:
       - !type:HealthChange
         damage:
           types:
-            Slash: -3
+            Slash: -1.8
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -1010,12 +1010,12 @@
   color: "#b9bf93"
   metabolisms: 
     Medicine:
-      metabolismRate: 0.05 #ss220 combat medicine be-gone
+      metabolismRate: 0.1 #ss220 combat medicine be-gone
       effects:
       - !type:HealthChange
         damage:
           types:
-            Piercing: -3 # ss 220 p.s why 4 even was here loooool
+            Piercing: -1.8 # ss 220 p.s why 4 even was here loooool
             Blunt: 0.1
       - !type:HealthChange
         conditions:
@@ -1035,12 +1035,12 @@
   color: "#ff3636"
   metabolisms:
     Medicine:
-      metabolismRate: 0.05 #ss220 combat medicine be-gone
+      metabolismRate: 0.1 #ss220 combat medicine be-gone
       effects:
       - !type:HealthChange
         damage:
           types:
-            Blunt: -3.5
+            Blunt: -1.8
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
