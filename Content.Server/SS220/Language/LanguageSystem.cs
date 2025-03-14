@@ -2,13 +2,11 @@
 using Content.Server.GameTicking.Events;
 using Content.Shared.SS220.Language.Components;
 using Content.Shared.SS220.Language;
-using Robust.Server.Player;
 using Robust.Shared.Random;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.RegularExpressions;
 using Content.Shared.SS220.Language.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CCVars;
 
@@ -18,8 +16,6 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly LanguageManager _language = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
 
     // Cached values for one tick
@@ -36,7 +32,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         SubscribeLocalEvent<LanguageComponent, GetLanguageListenerEvent>(OnGetLanguage);
 
         // UI
-        _net.RegisterNetMessage<ClientSelectlanguageMessage>(OnClientSelectLanguage);
+        SubscribeNetworkEvent<ClientSelectLanguageEvent>(OnClientSelectLanguage);
     }
 
     public override void Update(float frameTime)
@@ -67,12 +63,9 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     }
 
     #region Client
-    private void OnClientSelectLanguage(ClientSelectlanguageMessage msg)
+    private void OnClientSelectLanguage(ClientSelectLanguageEvent msg, EntitySessionEventArgs args)
     {
-        if (!_player.TryGetSessionByChannel(msg.MsgChannel, out var player))
-            return;
-
-        var entity = player.AttachedEntity;
+        var entity = args.SenderSession.AttachedEntity;
         if (entity == null || !TryComp<LanguageComponent>(entity, out var comp))
             return;
 
@@ -149,9 +142,10 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     {
         var list = new List<(string, LanguagePrototype)>();
         var p = _language.KeyPrefix;
-        var textWithKeyPattern = $@"^{p}(.*?)\s(?={p}\w+\s)|(?<=\s){p}(.*?)\s(?={p}\w+\s)|(?<=\s){p}(.*)|^{p}(.*)"; // pizdec
+        var textWithKeyRegex = new Regex($@"^{p}(.*?)\s(?={p}\w+\s)|(?<=\s){p}(.*?)\s(?={p}\w+\s)|(?<=\s){p}(.*)|^{p}(.*)",
+            RegexOptions.Compiled);
 
-        var matches = Regex.Matches(message, textWithKeyPattern);
+        var matches = textWithKeyRegex.Matches(message);
         if (matches.Count <= 0)
         {
             list.Add((message, defaultLanguage));
