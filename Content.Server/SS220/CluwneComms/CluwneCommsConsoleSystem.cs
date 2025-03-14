@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Administration.Logs;
 using Content.Server.AlertLevel;
 using Content.Server.Chat.Managers;
@@ -50,6 +52,9 @@ namespace Content.Server.SS220.CluwneComms
         {
             ent.Comp.AnnouncementCooldownRemaining = _timing.CurTime + ent.Comp.Delay;
             ent.Comp.CanAnnounce = false;
+
+            ent.Comp.AlertCooldownRemaining = _timing.CurTime + ent.Comp.Delay;
+            ent.Comp.CanAlert = false;
         }
 
         public override void Update(float frameTime)
@@ -64,12 +69,20 @@ namespace Content.Server.SS220.CluwneComms
                     comp.CanAnnounce = true;
                     UpdateUI(uid, comp);
                 }
+
+                if (!comp.CanAlert && _timing.CurTime >= comp.AlertCooldownRemaining)
+                {
+                    comp.CanAlert = true;
+                    UpdateUI(uid, comp);
+                }
             }
         }
 
         private void UpdateUI(EntityUid ent, CluwneCommsConsoleComponent comp)
         {
-            CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce);
+            List<string>? levels = null; //add here proto
+
+            CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce, comp.CanAlert, levels);
             _uiSystem.SetUiState(ent, CluwneCommsConsoleUiKey.Key, newState);
         }
 

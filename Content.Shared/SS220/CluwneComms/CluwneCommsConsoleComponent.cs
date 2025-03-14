@@ -36,7 +36,7 @@ namespace Content.Shared.SS220.CluwneComms
         public TimeSpan AnnouncementCooldownRemaining;
 
         [ViewVariables]
-        public bool CanSendAlert;
+        public bool CanAlert;
 
         /// <summary>
         /// Time in seconds between alerts delays on a per-console basis
@@ -75,9 +75,11 @@ namespace Content.Shared.SS220.CluwneComms
     }
 
     [Serializable, NetSerializable]
-    public sealed class CluwneCommsConsoleInterfaceState(bool canAnnounce) : BoundUserInterfaceState
+    public sealed class CluwneCommsConsoleInterfaceState(bool canAnnounce, bool canAlert, List<string>? alertLevels) : BoundUserInterfaceState
     {
         public readonly bool CanAnnounce = canAnnounce;
+        public readonly bool CanAlert = canAlert;
+        public List<string>? AlertLevels = alertLevels;
     }
 
     [Serializable, NetSerializable]

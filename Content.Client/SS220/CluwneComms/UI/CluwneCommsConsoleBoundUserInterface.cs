@@ -28,6 +28,7 @@ namespace Content.Client.SS220.CluwneComms.UI
             _menu = this.CreateWindow<CluwneCommsConsoleMenu>();
             _menu.OnAnnounce += AnnounceButtonPressed;
             _menu.OnAlertLevel += AlertLevelSelected;
+            _menu.OnAlert += AlertButtonPressed;
         }
 
         public void AnnounceButtonPressed(string message)
@@ -40,6 +41,7 @@ namespace Content.Client.SS220.CluwneComms.UI
         public void AlertLevelSelected(string message)
         {
         }
+
         public void AlertButtonPressed(string level, string message)
         {
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
@@ -57,8 +59,12 @@ namespace Content.Client.SS220.CluwneComms.UI
             if (_menu != null)
             {
                 _menu.CanAnnounce = commsState.CanAnnounce;
-
                 _menu.AnnounceButton.Disabled = !_menu.CanAnnounce;
+
+                _menu.CanAlert = commsState.CanAlert;
+                _menu.AlertButton.Disabled = !_menu.CanAlert;
+
+                _menu.UpdateAlertLevels(commsState.AlertLevels);
             }
         }
     }
