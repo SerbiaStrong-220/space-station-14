@@ -27,7 +27,7 @@ public sealed class TarotColodeSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (ent.Comp.CardsName.Count == 0)
+        if (ent.Comp.CardsProtoIds.Count == 0)
             return;
 
         if (EntityQuery<TarotCardComponent>().Count() >= MaxCardsInWorld)
@@ -36,7 +36,7 @@ public sealed class TarotColodeSystem : EntitySystem
             return;
         }
 
-        var randomCard = Spawn(_random.Pick(ent.Comp.CardsName), Transform(args.User).Coordinates);
+        var randomCard = Spawn(_random.Pick(ent.Comp.CardsProtoIds), Transform(args.User).Coordinates);
 
         _hands.PickupOrDrop(args.User, randomCard);
         args.Handled = true;

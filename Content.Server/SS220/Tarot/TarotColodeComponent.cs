@@ -6,5 +6,5 @@ namespace Content.Server.SS220.Tarot;
 public sealed partial class TarotColodeComponent : Component
 {
     [DataField]
-    public List<ProtoId<EntityPrototype>> CardsName = [];
+    public List<ProtoId<EntityPrototype>> CardsProtoIds = [];
 }

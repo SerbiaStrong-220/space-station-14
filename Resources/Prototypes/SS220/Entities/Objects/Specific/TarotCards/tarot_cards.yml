@@ -4,7 +4,7 @@
   name: Enchanted Tarot Card Deck
   components:
   - type: TarotColode
-    cardsName:
+    cardsProtoIds:
       - TarotFoolCard
       - TarotMagicianCard
       - TarotHighPriestessCard

@@ -101,6 +101,8 @@ public sealed class TarotCardSystem : EntitySystem
     private const string ArrivalBeaconTag = "station-beacon-arrivals";
     private const string BridgeBeaconTag = "station-beacon-bridge";
     private const string Omnizine = "Omnizine";
+    private const string JusticeItems = "JusticeItems";
+    private const string RandomArcadeSpawner = "RandomArcadeSpawner";
 
     public override void Initialize()
     {
@@ -447,7 +449,7 @@ public sealed class TarotCardSystem : EntitySystem
     private void SpawnJusticeItems(EntityUid target)
     {
         var coords = Transform(target).Coordinates;
-        var items = _proto.Index<DatasetPrototype>("JusticeItems");
+        var items = _proto.Index<DatasetPrototype>(JusticeItems);
 
         foreach (var item in items.Values)
         {
@@ -538,7 +540,7 @@ public sealed class TarotCardSystem : EntitySystem
 
     private void CreateGambling(EntityUid target)
     {
-        var arcadeList = _proto.Index<DatasetPrototype>("RandomArcadeSpawner").Values;
+        var arcadeList = _proto.Index<DatasetPrototype>(RandomArcadeSpawner).Values;
 
         var randomArcade = _random.Pick(arcadeList);
         Spawn(randomArcade, Transform(target).Coordinates);
