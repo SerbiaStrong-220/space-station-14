@@ -18,7 +18,7 @@
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: base
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
-      state: laser-mag-unshaded-1
+      state: o2
       shader: unshaded
   - type: SolutionContainerManager
     solutions:
@@ -66,7 +66,7 @@
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: base
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
-      state: laser-mag-unshaded-1
+      state: o2
       shader: unshaded
       visible: false
   - type: Battery
@@ -81,11 +81,12 @@
   suffix: Disabler
   components:
   - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/krs_magblaster_disabler.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: base
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
-      state: disabler-mag-unshaded-1
+      state: o2
       shader: unshaded
   - type: ProjectileBatteryAmmoProvider
     proto: BulletDisablerSmg
