@@ -3,4 +3,5 @@
 [RegisterComponent]
 public sealed partial class DieOfFateComponent : Component
 {
+    public bool IsUsed = false;
 }

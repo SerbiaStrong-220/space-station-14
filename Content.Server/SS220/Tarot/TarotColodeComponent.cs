@@ -1,8 +1,10 @@
-﻿namespace Content.Server.SS220.Tarot;
+﻿using Robust.Shared.Prototypes;
+
+namespace Content.Server.SS220.Tarot;
 
 [RegisterComponent]
 public sealed partial class TarotColodeComponent : Component
 {
     [DataField]
-    public List<string> CardsName = [];
+    public List<ProtoId<EntityPrototype>> CardsName = [];
 }

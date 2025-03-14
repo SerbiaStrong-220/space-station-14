@@ -1,0 +1,12 @@
+﻿- type: dataset
+  id: JusticeItems
+  values:
+    - ExGrenade
+    - MedkitCombatFilled
+    - SpaceCash500
+
+- type: dataset
+  id: RandomArcadeSpawner
+  values:
+  - BlockGameArcade
+  - SpaceVillainArcadeFilled

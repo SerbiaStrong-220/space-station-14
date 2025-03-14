@@ -11,10 +11,11 @@ namespace Content.Server.SS220.Tarot;
 
 public sealed class TarotColodeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+
+    private const int MaxCardsInWorld = 3; // only n cards in world
 
     public override void Initialize()
     {
@@ -29,7 +30,7 @@ public sealed class TarotColodeSystem : EntitySystem
         if (ent.Comp.CardsName.Count == 0)
             return;
 
-        if (EntityQuery<TarotCardComponent>().Count() >= 3)
+        if (EntityQuery<TarotCardComponent>().Count() >= MaxCardsInWorld)
         {
             _popup.PopupEntity(Loc.GetString("tarot-cards-failed-more-then-three"), args.User, args.User);
             return;

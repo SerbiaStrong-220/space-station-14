@@ -23,5 +23,6 @@ ent-TarotSunCard = XIX - Солнце
 ent-TarotJudgementCard = XX - Суд
 ent-TarotWorldCard = XXI - Мир
 
-tarot-cards-failed-more-then-three = В мире уже 3 карты! Больше нельзя.
+tarot-cards-failed-more-then-three = В мире уже 3 карты! Больше нельзя!
 tarot-cards-failed-already-used = Карта уже была использована!
+tarot-cards-roll-dice = Кубик выпал на {$value}

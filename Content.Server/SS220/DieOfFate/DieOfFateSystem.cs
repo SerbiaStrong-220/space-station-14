@@ -42,14 +42,21 @@ public sealed class DieOfFateSystem : EntitySystem
 
     private void OnUseInHand(Entity<DieOfFateComponent> ent, ref UseInHandEvent args)
     {
+        if (ent.Comp.IsUsed)
+            return;
+
         if (!TryComp<DiceComponent>(ent.Owner, out var diceComponent))
             return;
 
         DoAction(args.User, diceComponent.CurrentValue);
+        args.Handled = true;
+        ent.Comp.IsUsed = true;
     }
 
-    private void DoAction(EntityUid uid, int value)
+    public void DoAction(EntityUid uid, int value)
     {
+        _popup.PopupEntity(Loc.GetString("tarot-cards-roll-dice", ("value", value)), uid, uid);
+
         switch (value)
         {
             case 1:
@@ -122,7 +129,6 @@ public sealed class DieOfFateSystem : EntitySystem
     private void OnRollOne(EntityUid target)
     {
         _body.GibBody(target, true);
-        _popup.PopupEntity("Вас превратило в пепел", target);
     }
 
     private void OnRollTwo(EntityUid target)
