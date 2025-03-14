@@ -22,29 +22,41 @@ public sealed class EntityBlockDamageSystem : EntitySystem
                     continue;
                 case <= 0:
                     RemCompDeferred<EntityBlockDamageComponent>(target);
+                    continue;
+                default:
+                    entityBlockDamageComponent.Duration -= frameTime;
                     break;
             }
-
-            entityBlockDamageComponent.Duration -= frameTime;
         }
     }
 
     private void OnDamageModify(Entity<EntityBlockDamageComponent> ent, ref DamageModifyEvent args)
     {
-        if (ent.Comp.Modifiers != null)
-            args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, ent.Comp.Modifiers);
-
-        if (ent.Comp is not { BlockAllDamage: true, BlockPercent: not null })
-            return;
-
-        Dictionary<string, FixedPoint2> newDictDamage = [];
+        Dictionary<string, FixedPoint2> newDict = [];
 
         foreach (var (type, value) in args.Damage.DamageDict)
         {
-            var reducedValue = value * (1 - ent.Comp.BlockPercent.Value);
-            newDictDamage[type] = reducedValue;
+            var modifiedValue = value;
+
+            if (ent.Comp.BlockAllTypesDamage)
+            {
+                if (ent.Comp.DamageCoefficient > 0)
+                    modifiedValue *= ent.Comp.DamageCoefficient;
+                else
+                {
+                    args.Damage = new DamageSpecifier();
+                    return;
+                }
+            }
+
+            if (ent.Comp.Modifiers?.Coefficients.TryGetValue(type, out var coeff) == true)
+            {
+                modifiedValue *= coeff;
+            }
+
+            newDict[type] = modifiedValue;
         }
 
-        args.Damage.DamageDict = newDictDamage;
+        args.Damage.DamageDict = newDict;
     }
 }

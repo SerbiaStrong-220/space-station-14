@@ -19,12 +19,8 @@ public sealed partial class WalkThroughWallsComponent : Component
     [DataField]
     public int WallsLayer = (int)CollisionGroup.None;
 
-    [DataField]
     public bool IsWalked;
 
-    [DataField]
     public int? PreviousGroupLayer;
-
-    [DataField]
     public int? PreviousGroupMask;
 }

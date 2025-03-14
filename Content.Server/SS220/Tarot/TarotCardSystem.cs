@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Server.Administration.Systems;
 using Content.Server.Body.Systems;
 using Content.Server.EntityEffects.Effects;
 using Content.Server.EntityEffects.Effects.StatusEffects;
@@ -29,13 +30,11 @@ using Content.Shared.Mind;
 using Content.Shared.Physics;
 using Content.Shared.Pinpointer;
 using Content.Shared.Prototypes;
-using Content.Shared.Random;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.SS220.EntityBlockDamage;
-using Content.Shared.SS220.Hallucination;
+using Content.Shared.SS220.EntityEffects;
 using Content.Shared.SS220.HereticAbilities;
-using Content.Shared.SS220.RemoveEffects;
 using Content.Shared.SS220.Tarot;
 using Content.Shared.StatusEffect;
 using Content.Shared.Throwing;
@@ -43,9 +42,7 @@ using Content.Shared.Traits.Assorted;
 using Content.Shared.VendingMachines;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
-using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -77,6 +74,7 @@ public sealed class TarotCardSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly HallucinationSystem _hallucination = default!;
     [Dependency] private readonly SubdermalImplantSystem _implantSystem = default!;
+    [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
 
     private const string TarotCardEffectPrototype = "EffectTarotCard";
 
@@ -136,14 +134,13 @@ public sealed class TarotCardSystem : EntitySystem
     {
         if (ent.Comp.IsUsed)
         {
-            _popup.PopupEntity("Карта пока не готова!", args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("tarot-cards-failed-already-used"), args.User, args.User);
             return;
         }
 
         if (!HasComp<HumanoidAppearanceComponent>(args.User))
             return;
 
-        ent.Comp.User = args.User;
         HandleCardEffect(ent, args.User);
     }
 
@@ -155,8 +152,6 @@ public sealed class TarotCardSystem : EntitySystem
         if (!HasComp<HumanoidAppearanceComponent>(args.Target))
             return;
 
-        ent.Comp.User = null;
-        ent.Comp.Target = args.Target;
         HandleCardEffect(ent, args.Target);
     }
 
@@ -171,69 +166,68 @@ public sealed class TarotCardSystem : EntitySystem
         if (!_transform.IsParentOf(Transform(target), entityEffect))
             _transform.SetParent(entityEffect, target);
 
-        switch (MetaData(card).EntityPrototype!.ID)
+        switch (card.Comp.CardType)
         {
-            case "TarotFoolCard":
+            case TarotCardType.Fool:
                 ApplyReversedEffect(card, target, ClearInventory, TeleportToArrivals);
                 break;
-            case "TarotMagicianCard":
+            case TarotCardType.Magician:
                 ApplyReversedEffect(card, target, PushPlayers, OpenNearestAirlock);
                 break;
-            case "TarotHighPriestessCard":
+            case TarotCardType.HighPriestess:
                 break;
-            case "TarotEmpressCard":
+            case TarotCardType.Empress:
                 ApplyReversedEffect(card, target, EnsurePacified, TransferSolution);
                 break;
-            case "TarotEmperorCard":
+            case TarotCardType.Emperor:
                 ApplyReversedEffect(card, target, TeleportToHoD, TeleportToBridge);
                 break;
-            case "TarotHierophantCard":
+            case TarotCardType.Hierophant:
                 break;
-            case "TarotLoversCard":
+            case TarotCardType.Lovers:
                 ApplyReversedEffect(card, target, HurtTarget, HealTarget);
                 break;
-            // TODO case TarotChariotCard
-            case "TarotChariotCard":
+            case TarotCardType.Chariot:
                 ApplyReversedEffect(card, target, HurtTarget, ApplyChariotEffects);
                 break;
-            case "TarotStrengthCard":
+            case TarotCardType.Strength:
                 ApplyReversedEffect(card, target, MassHallucinations, HealTarget);
                 break;
-            case "TarotHermitCard":
+            case TarotCardType.Hermit:
                 ApplyReversedEffect(card, target, TransformGuns, TeleportToVend);
                 break;
-            case "TarotWheelOfFortuneCard":
+            case TarotCardType.WheelOfFortune:
                 ApplyReversedEffect(card, target, RollDieOfFortune, CreateGambling);
                 break;
-            case "TarotJusticeCard":
+            case TarotCardType.Justice:
                 ApplyReversedEffect(card, target, SpawnRandomCrate, SpawnJusticeItems);
                 break;
-            case "TarotHangedManCard":
+            case TarotCardType.HangedMan:
                 ApplyReversedEffect(card, target, FixturesSet, TeleportToRandomTile);
                 break;
-            case "TarotDeathCard":
+            case TarotCardType.Death:
                 break;
-            case "TarotTemperanceCard":
+            case TarotCardType.Temperance:
                 ApplyReversedEffect(card, target, EatPills, HealLing);
                 break;
-            case "TarotDevilCard":
-                 break;
-            case "TarotTowerCard":
+            case TarotCardType.Devil:
                 break;
-            case "TarotStarsCard":
+            case TarotCardType.Tower:
                 break;
-            case "TarotMoonCard":
+            case TarotCardType.Star:
                 break;
-            case "TarotSunCard":
+            case TarotCardType.Moon:
                 break;
-            case "TarotJudgementCard":
+            case TarotCardType.Sun:
+                //ApplyReversedEffect(card, target, Darkness, Rejuvenate);
                 break;
-            case "TarotWorldCard":
+            case TarotCardType.Judgement:
+                break;
+            case TarotCardType.World:
                 break;
         }
 
         card.Comp.IsUsed = true;
-        card.Comp.Target = null;
     }
 
     private static void ApplyReversedEffect(TarotCardComponent card, EntityUid target, Action<EntityUid> reversedAction, Action<EntityUid> normalAction)
@@ -321,8 +315,7 @@ public sealed class TarotCardSystem : EntitySystem
 
         foreach (var entity in entities.Where(entity => entity.Owner != target))
         {
-            EnsureComp<PacifiedComponent>(entity, out var pacifiedComponent);
-            pacifiedComponent.EndTime = _gameTiming.CurTime + TimeSpan.FromSeconds(40f);
+            _statusEffects.TryAddStatusEffect(entity, "Pacified", TimeSpan.FromSeconds(40f), true);
         }
     }
 
@@ -366,6 +359,9 @@ public sealed class TarotCardSystem : EntitySystem
 
     private void HealTarget(EntityUid target)
     {
+        if (!TryComp<DamageableComponent>(target, out var damageableComponent))
+            return;
+
         var damageSpec = new DamageSpecifier(_proto.Index<DamageGroupPrototype>("Burn"), -40);
         damageSpec += new DamageSpecifier(_proto.Index<DamageTypePrototype>("Blunt"), -20);
         damageSpec += new DamageSpecifier(_proto.Index<DamageTypePrototype>("Asphyxiation"), -40);
@@ -373,48 +369,47 @@ public sealed class TarotCardSystem : EntitySystem
 
         _bloodstream.TryModifyBloodLevel(target, 100f);
         _damageable.TryChangeDamage(target, damageSpec, true);
+
+        Dirty(target, damageableComponent);
     }
 
     private void HurtTarget(EntityUid target)
     {
+        if(!TryComp<DamageableComponent>(target, out var damageableComponent))
+            return;
+
         var damageSpec = new DamageSpecifier(_proto.Index<DamageGroupPrototype>("Burn"), 40);
         _stun.TryParalyze(target, TimeSpan.FromSeconds(4f), false);
         _bloodstream.TryModifyBloodLevel(target, -120f);
         _damageable.TryChangeDamage(target, damageSpec, true);
+
+        Dirty(target, damageableComponent);
     }
 
     private void MassHallucinations(EntityUid target)
     {
-        // TODO THIS SHIT
-        var lookup =
-            _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(Transform(target).Coordinates, 4f);
-
-        var hallu = _proto.Index<WeightedRandomEntityPrototype>("HallucinationSyndicate");
-
-        foreach (var entity in lookup)
-        {
-            var halluSet = new HallucinationSetting(20f, 20f, 20f, 20f, hallu, null, null, false);
-            _hallucination.TryAdd(entity, halluSet);
-
-        }
         // TODO THIS SHIT
     }
 
     private void ApplyChariotEffects(EntityUid target)
     {
         // Pacified in 10 sec after use
-        EnsureComp<PacifiedComponent>(target, out var pacified);
-        pacified.EndTime = _gameTiming.CurTime + TimeSpan.FromSeconds(10f);
+        _statusEffects.TryAddStatusEffect<PacifiedComponent>(target, "Pacified", TimeSpan.FromSeconds(10f), true);
 
-        // Remove all incoming stun and knocked down
-        EnsureComp<RemoveStunComponent>(target, out var removeStun);
-        removeStun.Time = 10f;
+        // Remove all incoming stun and knock down in 10 sec
+        var removeStun = new IgnoreStunEffect
+        {
+            RequiredEffects = ["Stun", "KnockedDown", "SlowedDown"],
+            Duration = 10f,
+        };
+
+        removeStun.Effect(new EntityEffectBaseArgs(target, EntityManager));
 
         // Reduce income damage by 90%
         EnsureComp<EntityBlockDamageComponent>(target, out var blockDamage);
 
-        blockDamage.BlockAllDamage = true;
-        blockDamage.BlockPercent = 0.9;
+        blockDamage.BlockAllTypesDamage = true;
+        blockDamage.DamageCoefficient = 0.1f;
         blockDamage.Duration = 10f;
 
         // Adrenaline effect, not reagents
@@ -468,8 +463,8 @@ public sealed class TarotCardSystem : EntitySystem
 
     private void TeleportToRandomTile(EntityUid target)
     {
-        var randomTile = _implantSystem.SelectRandomTileInRange(Transform(target), 6f);
-        if(randomTile == null)
+        var randomTile = _implantSystem.SelectRandomTileInRange(Transform(target), 60f);
+        if (randomTile == null)
             return;
 
         _transform.SetCoordinates(target, randomTile.Value);
@@ -521,10 +516,10 @@ public sealed class TarotCardSystem : EntitySystem
 
     private void RollDieOfFortune(EntityUid target)
     {
-        var entity = Spawn(D20Dice, MapCoordinates.Nullspace);
+        var entity = SpawnAtPosition(D20Dice, Transform(target).Coordinates);
         EnsureComp<DieOfFateComponent>(entity);
         _interaction.UseInHandInteraction(target, entity, false, false, false);
-        Del(entity);
+        QueueDel(entity);
     }
 
     private void HealLing(EntityUid target)
@@ -550,6 +545,7 @@ public sealed class TarotCardSystem : EntitySystem
         }
 
         _damageable.TryChangeDamage(target, damageSpec);
+        Dirty(target, damageableComponent);
     }
 
     private void EatPills(EntityUid target)
@@ -577,5 +573,10 @@ public sealed class TarotCardSystem : EntitySystem
             _solution.TryTransferSolution(solComp.Value, solutionReagent, solutionReagent.Volume);
             QueueDel(pill);
         }
+    }
+
+    private void Rejuvenate(EntityUid target)
+    {
+        _rejuvenate.PerformRejuvenate(target);
     }
 }

@@ -1,4 +1,6 @@
-﻿ent-TarotFoolCard = 0 - Шут
+﻿ent-TarotColode = Зачарованная колода карт Таро
+
+ent-TarotFoolCard = 0 - Шут
 ent-TarotMagicianCard = I - Маг
 ent-TarotHighPriestessCard = II - Верховная Жрица
 ent-TarotEmpressCard = III - Императрица
@@ -15,8 +17,11 @@ ent-TarotDeathCard = XIII - Смерть
 ent-TarotTemperanceCard = XIV - Умеренность
 ent-TarotDevilCard = XV - Дьявол
 ent-TarotTowerCard = XVI - Башня
-ent-TarotStarsCard = XVII - Звезда
+ent-TarotStarCard = XVII - Звезда
 ent-TarotMoonCard = XVIII - Луна
 ent-TarotSunCard = XIX - Солнце
 ent-TarotJudgementCard = XX - Суд
 ent-TarotWorldCard = XXI - Мир
+
+tarot-cards-failed-more-then-three = В мире уже 3 карты! Больше нельзя.
+tarot-cards-failed-already-used = Карта уже была использована!

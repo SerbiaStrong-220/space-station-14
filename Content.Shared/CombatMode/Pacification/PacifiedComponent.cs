@@ -46,10 +46,4 @@ public sealed partial class PacifiedComponent : Component
 
     [DataField]
     public ProtoId<AlertPrototype> PacifiedAlert = "Pacified";
-
-    //ss220 add tarot start
-    [DataField]
-    [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public TimeSpan? EndTime;
-    //ss220 add tarot end
 }

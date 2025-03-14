@@ -1,10 +1,10 @@
 ﻿using Content.Server.Administration.Systems;
 using Content.Server.Body.Systems;
+using Content.Server.Dice;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
-using Content.Shared.Armor;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -35,37 +35,9 @@ public sealed class DieOfFateSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
-    public DieOfFateSystem()
-    {
-        _diceActions = new Dictionary<int, Action<EntityUid>>
-        {
-            { 1, OnRollOne },
-            { 2, OnRollTwo },
-            { 3, OnRollThree },
-            { 4, OnRollFour },
-            { 5, OnRollFive },
-            { 6, OnRollSix },
-            { 7, OnRollSeven },
-            { 8, OnRollEight },
-            { 9, OnRollNine },
-            { 10, OnRollTen },
-            { 11, OnRollEleven },
-            { 12, OnRollTwelve },
-            { 13, OnRollThirteen },
-            { 14, OnRollFourteen },
-            { 15, OnRollFifteen },
-            { 16, OnRollSixteen },
-            { 17, OnRollSeventeen },
-            { 18, OnRollEighteen },
-            { 19, OnRollNineteen },
-        };
-    }
-
-    private readonly Dictionary<int, Action<EntityUid>> _diceActions;
-
     public override void Initialize()
     {
-        SubscribeLocalEvent<DieOfFateComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<DieOfFateComponent, UseInHandEvent>(OnUseInHand, after: [typeof(DiceSystem)]);
     }
 
     private void OnUseInHand(Entity<DieOfFateComponent> ent, ref UseInHandEvent args)
@@ -73,20 +45,78 @@ public sealed class DieOfFateSystem : EntitySystem
         if (!TryComp<DiceComponent>(ent.Owner, out var diceComponent))
             return;
 
-        if (diceComponent.CurrentValue == 20)
+        DoAction(args.User, diceComponent.CurrentValue);
+    }
+
+    private void DoAction(EntityUid uid, int value)
+    {
+        switch (value)
         {
-            for (var i = 0; i < 3; i++)
-            {
-                var extraRoll = _random.Next(10, 20);
-
-                if (_diceActions.TryGetValue(extraRoll, out var actionExtra))
-                    actionExtra.Invoke(ent.Owner);
-            }
-            return;
+            case 1:
+                OnRollOne(uid);
+                break;
+            case 2:
+                OnRollTwo(uid);
+                break;
+            case 3:
+                OnRollThree(uid);
+                break;
+            case 4:
+                OnRollFour(uid);
+                break;
+            case 5:
+                OnRollFive(uid);
+                break;
+            case 6:
+                OnRollSix(uid);
+                break;
+            case 7:
+                OnRollSeven(uid);
+                break;
+            case 8:
+                OnRollEight(uid);
+                break;
+            case 9:
+                OnRollNine(uid);
+                break;
+            case 10:
+                OnRollTen(uid);
+                break;
+            case 11:
+                OnRollEleven(uid);
+                break;
+            case 12:
+                OnRollTwelve(uid);
+                break;
+            case 13:
+                OnRollThirteen(uid);
+                break;
+            case 14:
+                OnRollFourteen(uid);
+                break;
+            case 15:
+                OnRollFifteen(uid);
+                break;
+            case 16:
+                OnRollSixteen(uid);
+                break;
+            case 17:
+                OnRollSeventeen(uid);
+                break;
+            case 18:
+                OnRollEighteen(uid);
+                break;
+            case 19:
+                OnRollNineteen(uid);
+                break;
+            case 20:
+                for (var i = 0; i < 3; i++)
+                {
+                    var extraRoll = _random.Next(10, 20);
+                    DoAction(uid, extraRoll);
+                }
+                break;
         }
-
-        if (_diceActions.TryGetValue(diceComponent.CurrentValue, out var action))
-            action.Invoke(args.User);
     }
 
     private void OnRollOne(EntityUid target)
@@ -202,8 +232,7 @@ public sealed class DieOfFateSystem : EntitySystem
     private void OnRollNineteen(EntityUid target)
     {
         EnsureComp<EntityBlockDamageComponent>(target, out var blockDamage);
-        blockDamage.BlockAllDamage = true;
-        blockDamage.BlockPercent = 0.5;
-
+        blockDamage.BlockAllTypesDamage = true;
+        blockDamage.DamageCoefficient = 0.5f;
     }
 }

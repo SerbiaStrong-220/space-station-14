@@ -1,0 +1,649 @@
+﻿- type: entity
+  parent: BaseItem
+  id: TarotColode
+  name: Enchanted Tarot Card Deck
+  components:
+  - type: TarotColode
+    cardsName:
+      - TarotFoolCard
+      - TarotMagicianCard
+      - TarotHighPriestessCard
+      - TarotEmpressCard
+      - TarotHierophantCard
+      - TarotLoversCard
+      - TarotJusticeCard
+      - TarotHermitCard
+      - TarotWheelOfFortuneCard
+      - TarotStrengthCard
+      - TarotHangedManCard
+      - TarotDeathCard
+      - TarotTemperanceCard
+      - TarotDevilCard
+      - TarotTowerCard
+      - TarotStarsCard
+      - TarotMoonCard
+      - TarotSunCard
+      - TarotJudgementCard
+      - TarotWorldCard
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_pack
+  - type: UseDelay
+    delay: 25.0
+
+- type: entity
+  parent: BaseItem
+  id: TarotFoolCard
+  name: 0 - The Fool
+  components:
+  - type: TarotCard
+    cardType: Fool
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_fool
+    - state: tarot_the_fool_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_fool_reversed }
+          False: { state: tarot_the_fool }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-fool-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotMagicianCard
+  name: I - The Magician
+  components:
+  - type: TarotCard
+    cardType: Magician
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_magician
+    - state: tarot_the_magician_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_magician_reversed }
+          False: { state: tarot_the_magician }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-magician-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotHighPriestessCard
+  name: II - The High Priestess
+  components:
+  - type: TarotCard
+    cardType: HighPriestess
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_high_priestess
+    - state: tarot_the_high_priestess_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_high_priestess_reversed }
+          False: { state: tarot_the_high_priestess }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-high-priestess-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotEmpressCard
+  name: III - The Empress
+  components:
+  - type: TarotCard
+    cardType: Empress
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_empress
+    - state: tarot_the_empress_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_empress_reversed }
+          False: { state: tarot_the_empress }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-empress-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotEmperorCard
+  name: IV - The Emperor
+  components:
+  - type: TarotCard
+    cardType: Emperor
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_emperor
+    - state: tarot_the_emperor_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_emperor_reversed }
+          False: { state: tarot_the_emperor }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-emperor-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotHierophantCard
+  name: V - The Hierophant
+  components:
+  - type: TarotCard
+    cardType: Hierophant
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_hierophant
+    - state: tarot_the_hierophant_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_hierophant_reversed }
+          False: { state: tarot_the_hierophant }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-hierophant-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotLoversCard
+  name: VI - The Lovers
+  components:
+  - type: TarotCard
+    cardType: Lovers
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_lovers
+    - state: tarot_the_lovers_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_lovers_reversed }
+          False: { state: tarot_the_lovers }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-lovers-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotChariotCard
+  name: VII - The Chariot
+  components:
+  - type: TarotCard
+    cardType: Chariot
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_chariot
+    - state: tarot_the_chariot_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_chariot_reversed }
+          False: { state: tarot_the_chariot }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-chariot-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotStrengthCard
+  name: VIII - The Strength
+  components:
+  - type: TarotCard
+    cardType: Strength
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_strength
+    - state: tarot_the_strength_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_strength_reversed }
+          False: { state: tarot_the_strength }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-strength-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotHermitCard
+  name: IX - The Hermit
+  components:
+  - type: TarotCard
+    cardType: Hermit
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_hermit
+    - state: tarot_the_hermit_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_hermit_reversed }
+          False: { state: tarot_the_hermit }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-hermit-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotWheelOfFortuneCard
+  name: X - The Wheel of Fortune
+  components:
+  - type: TarotCard
+    cardType: WheelOfFortune
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_wheel_of_fortune
+    - state: tarot_the_wheel_of_fortune_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_wheel_of_fortune_reversed }
+          False: { state: tarot_the_wheel_of_fortune }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-wheel-of-fortune-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotJusticeCard
+  name: XI - The Justice
+  components:
+  - type: TarotCard
+    cardType: Justice
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_justice
+    - state: tarot_the_justice_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_justice_reversed }
+          False: { state: tarot_the_justice }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-justice-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotHangedManCard
+  name: XII - The Hanged Man
+  components:
+  - type: TarotCard
+    cardType: HangedMan
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_hanged_man
+    - state: tarot_the_hanged_man_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_hanged_man_reversed }
+          False: { state: tarot_the_hanged_man }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-hanged-man-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotDeathCard
+  name: XIII - The Death
+  components:
+  - type: TarotCard
+    cardType: Death
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_death
+    - state: tarot_the_death_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_death_reversed }
+          False: { state: tarot_the_death }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-death-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotTemperanceCard
+  name: XIV - The Temperance
+  components:
+  - type: TarotCard
+    cardType: Temperance
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_temperance
+    - state: tarot_the_temperance_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_temperance_reversed }
+          False: { state: tarot_the_temperance }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-temperance-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotDevilCard
+  name: XV - The Devil
+  components:
+  - type: TarotCard
+    cardType: Devil
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_devil
+    - state: tarot_the_devil_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_devil_reversed }
+          False: { state: tarot_the_devil }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-devil-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotTowerCard
+  name: XVI - The Tower
+  components:
+  - type: TarotCard
+    cardType: Tower
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_tower
+    - state: tarot_the_tower_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_tower_reversed }
+          False: { state: tarot_the_tower }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-tower-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotStarCard
+  name: XVII - The Star
+  components:
+  - type: TarotCard
+    cardType: Star
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_stars
+    - state: tarot_the_stars_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_stars_reversed }
+          False: { state: tarot_the_stars }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-stars-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotMoonCard
+  name: XVIII - The Moon
+  components:
+  - type: TarotCard
+    cardType: Moon
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_moon
+    - state: tarot_the_moon_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_moon_reversed }
+          False: { state: tarot_the_moon }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-moon-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotSunCard
+  name: XIX - The Sun
+  components:
+  - type: TarotCard
+    cardType: Sun
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_sun
+    - state: tarot_the_sun_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_sun_reversed }
+          False: { state: tarot_the_sun }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-sun-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotJudgementCard
+  name: XX - The Judgement
+  components:
+  - type: TarotCard
+    cardType: Judgement
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_judgement
+    - state: tarot_the_judgement_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_judgement_reversed }
+          False: { state: tarot_the_judgement }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-judgement-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseItem
+  id: TarotWorldCard
+  name: XXI - The World
+  components:
+  - type: TarotCard
+    cardType: World
+  - type: Sprite
+    sprite: SS220/Objects/Specific/tarot_cards.rsi
+    layers:
+    - state: tarot_the_world
+    - state: tarot_the_world_reversed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TarotVisuals.Reversed:
+        reversed:
+          True: { state: tarot_the_world_reversed }
+          False: { state: tarot_the_world }
+  - type: HiddenDescription
+    entries:
+    - label: tarot-card-the-world-syndicate
+      whitelistMind:
+        components:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  id: EffectTarotCard
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+  - type: TimedDespawn
+    lifetime: 1.3
+  - type: Sprite
+    offset: 0,1
+    noRot: true
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: SS220/Effects/tarot_card.rsi
+      state: tarot_animate
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg

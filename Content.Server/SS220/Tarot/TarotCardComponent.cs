@@ -1,26 +1,14 @@
-﻿namespace Content.Server.SS220.Tarot;
+﻿using Content.Shared.SS220.Tarot;
+
+namespace Content.Server.SS220.Tarot;
 
 [RegisterComponent]
 public sealed partial class TarotCardComponent : Component
 {
     [DataField]
-    public EntityUid? User;
+    public TarotCardType CardType { get; set; }
 
-    [DataField]
-    public EntityUid? Target;
-
-    [DataField]
-    public bool IsReversed;
-
-    [DataField]
-    public bool IsUsed;
-
-    [DataField]
     public EntityUid? EntityEffect;
-
-    [DataField]
-    public bool Used;
-
-    [DataField]
-    public TimeSpan Delay = TimeSpan.FromSeconds(25f);
+    public bool IsReversed;
+    public bool IsUsed;
 }

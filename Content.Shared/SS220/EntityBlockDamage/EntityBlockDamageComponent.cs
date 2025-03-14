@@ -9,13 +9,13 @@ namespace Content.Shared.SS220.EntityBlockDamage;
 public sealed partial class EntityBlockDamageComponent : Component
 {
     [DataField]
+    public float DamageCoefficient = 1.0f;
+
+    [DataField]
     public DamageModifierSet? Modifiers;
 
     [DataField]
-    public bool BlockAllDamage;
-
-    [DataField]
-    public FixedPoint2? BlockPercent;
+    public bool BlockAllTypesDamage;
 
     [DataField]
     public float? Duration;
