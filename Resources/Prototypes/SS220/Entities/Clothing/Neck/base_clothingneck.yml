@@ -1,0 +1,39 @@
+- type: entity
+  abstract: true
+  parent: [ClothingNeckBase, BaseFoldable]
+  id: ClothingNeckMirrorBase
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-mirror-verb
+    foldVerbText: fold-mirror-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: mirror
+    foldedHeldPrefix: mirror
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_mirror
+      map: ["foldedLayer"]
+      visible: false
+
+- type: entity
+  abstract: true
+  parent: ClothingNeckMirrorBase
+  id: ClothingNeckMirroredBase
+  suffix: mirror
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: mirror
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon_mirror
+      map: ["foldedLayer"]
+      visible: true
