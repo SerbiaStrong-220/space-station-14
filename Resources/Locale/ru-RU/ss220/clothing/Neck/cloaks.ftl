@@ -1,4 +1,4 @@
-fold-other-shoulder-verb = перекинуть на другое плечо
+fold-other-shoulder-verb = перевесить на другое плечо
 
 ent-ClothingNeckCloakNanotrasenAdmiral = плащ адмирала
     .desc = Плащ с золотым шитьём, который носят адмиралы флота Nanotrasen.
