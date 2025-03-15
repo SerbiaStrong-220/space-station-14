@@ -112,7 +112,7 @@
   id: ClothingSponsorNeckMentorOtherShouldered
   name: плащ наставления
   description: Особенный плащ, вручаемый учителям, неустанно направляющим избранных на их нелегком пути.
-  suffix: Отзеркаленный, Sponsor Neck, Mentor
+  suffix: Другое плечо, Sponsor Neck, Mentor
 
 # Moderator
 - type: entity

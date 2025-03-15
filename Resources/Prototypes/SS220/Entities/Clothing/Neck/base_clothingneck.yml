@@ -1,7 +1,7 @@
 - type: entity
   abstract: true
   parent: [ClothingNeckBase, BaseFoldable]
-  id: ClothingNeckMirrorBase
+  id: ClothingNeckOtherShoulderBase
   components:
   - type: Appearance
   - type: Foldable
@@ -21,9 +21,9 @@
 
 - type: entity
   abstract: true
-  parent: ClothingNeckMirrorBase
-  id: ClothingNeckMirroredBase
-  suffix: mirror
+  parent: ClothingNeckOtherShoulderBase
+  id: ClothingNeckOtherShoulderedBase
+  suffix: OtherShoulder
   components:
   - type: Foldable
     folded: true
