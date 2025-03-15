@@ -26,8 +26,8 @@
     Narcotic:
       effects:
       - !type:MovespeedModifier
-        walkSpeedModifier: 1.08 #ss220 combat medicine be-gone
-        sprintSpeedModifier: 1.08 #ss220 combat medicine be-gone
+        walkSpeedModifier: 1.12 #ss220 combat medicine be-gone
+        sprintSpeedModifier: 1.12 #ss220 combat medicine be-gone
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
@@ -75,8 +75,8 @@
     Narcotic:
       effects:
       - !type:MovespeedModifier
-        walkSpeedModifier: 1.04 #ss220 combat medicine be-gone
-        sprintSpeedModifier: 1.04 #ss220 combat medicine be-gone
+        walkSpeedModifier: 1.08 #ss220 combat medicine be-gone
+        sprintSpeedModifier: 1.08 #ss220 combat medicine be-gone
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
