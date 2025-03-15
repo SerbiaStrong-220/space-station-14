@@ -1239,6 +1239,14 @@
   - type: Inventory
     templateId: monkeyinventory
     speciesId: monkey
+  #SS220 Monkey Displacement Begin
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Displacement/Animals/monkey.rsi
+            state: jumpsuit
+  #SS220 Monkey Displacement End
   - type: Deathgasp
     prototype: MonkeyDeathgasp
   - type: Cuffable
@@ -1279,6 +1287,13 @@
       state: "creampie_human"
       visible: false
   - type: Hands
+  #SS220 Monkey Displacement Begin
+    handDisplacement:
+      sizeMaps:
+        32:
+          sprite: SS220/Mobs/Displacement/Animals/monkey.rsi
+          state: inHand
+  #SS220 Monkey Displacement End
   - type: ComplexInteraction
   - type: GenericVisualizer
     visuals:
@@ -3132,6 +3147,11 @@
     thresholds:
       0: Alive
       25: Dead
+  # ss220 kitten in hands
+  - type: MultiHandedItem
+  - type: Item
+    size: Huge
+  # ss220 kitten in hands
 
 - type: entity
   name: sloth

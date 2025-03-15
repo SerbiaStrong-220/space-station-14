@@ -115,6 +115,20 @@
   suffix: 40 TC, NukeOps
   components:
   - type: Store
+    categories:
+#SS220 NukeOpsUplink begin
+    - UplinkWeaponry
+    - UplinkAmmo
+    - UplinkExplosives
+    - UplinkChemicals
+    - UplinkDeception
+    - UplinkDisruption
+    - UplinkImplants
+    - UplinkChemicalImplants # SS220 - chemical-implants
+    - UplinkAllies
+    - UplinkWearables
+    - UplinkPointless
+#SS220 NukeOpsUplink end
     balance:
       Telecrystal: 40
   - type: Tag
@@ -127,6 +141,20 @@
   suffix: 40 TC, LoneOps # SS220 Lone-Ops-Uplink
   components:
   - type: Store
+    categories:
+#SS220 NukeOpsUplink begin
+    - UplinkWeaponry
+    - UplinkAmmo
+    - UplinkExplosives
+    - UplinkChemicals
+    - UplinkDeception
+    - UplinkDisruption
+    - UplinkImplants
+    - UplinkChemicalImplants # SS220 - chemical-implants
+    - UplinkAllies
+    - UplinkWearables
+    - UplinkPointless
+#SS220 NukeOpsUplink end
     balance:
       Telecrystal: 40 # SS220 Lone-Ops-Uplink
   - type: Tag

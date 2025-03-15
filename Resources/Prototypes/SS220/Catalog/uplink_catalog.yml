@@ -273,7 +273,6 @@
     Telecrystal: 3
   categories:
   - UplinkWeaponry
-  - UplinkJob
   conditions:
   - !type:BuyerJobCondition
     whitelist:

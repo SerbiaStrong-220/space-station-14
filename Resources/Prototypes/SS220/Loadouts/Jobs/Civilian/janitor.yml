@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobJanitor
       time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Janitor Time2
 - type: loadoutEffectGroup
@@ -17,6 +22,11 @@
       !type:RoleTimeRequirement
       role: JobJanitor
       time: 180000 # 50 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
  # Janitor Time3
 - type: loadoutEffectGroup
@@ -27,6 +37,11 @@
       !type:RoleTimeRequirement
       role: JobJanitor
       time: 252000 # 70 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 
 # Jumpsuit

@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobResearchAssistant
       time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: ResearchAssistantBachelor
@@ -16,6 +21,11 @@
       !type:RoleTimeRequirement
       role: JobResearchAssistant
       time: 72000 # 20 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
 - type: loadout

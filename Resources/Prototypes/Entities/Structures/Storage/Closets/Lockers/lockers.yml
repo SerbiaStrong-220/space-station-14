@@ -412,6 +412,13 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"] #SS220-Gun-Safe-Resprite-End
+      #SS220-GunSafe-View-Paper-Fix-Begin
+    - state: paper
+      visible: false
+      sprite: Structures/Storage/closet_labels.rsi
+      offset: "-0.065,0"
+      map: ["enum.PaperLabelVisuals.Layer"]
+      #SS220-GunSafe-View-Paper-Fix-End
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: shotguncase
