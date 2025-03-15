@@ -6,16 +6,16 @@
   - type: Appearance
   - type: Foldable
     canFoldInsideContainer: true
-    unfoldVerbText: fold-mirror-verb
-    foldVerbText: fold-mirror-verb
+    unfoldVerbText: fold-other-shoulder-verb
+    foldVerbText: fold-other-shoulder-verb
   - type: FoldableClothing
-    foldedEquippedPrefix: mirror
-    foldedHeldPrefix: mirror
+    foldedEquippedPrefix: other-shoulder
+    foldedHeldPrefix: other-shoulder
   - type: Sprite
     layers:
     - state: icon
       map: [ "unfoldedLayer" ]
-    - state: icon_mirror
+    - state: icon_other-shoulder
       map: ["foldedLayer"]
       visible: false
 
@@ -28,14 +28,14 @@
   - type: Foldable
     folded: true
   - type: Clothing
-    equippedPrefix: mirror
+    equippedPrefix: other-shoulder
   - type: Item
-    heldPrefix: mirror
+    heldPrefix: other-shoulder
   - type: Sprite
     layers:
     - state: icon
       map: [ "unfoldedLayer" ]
       visible: false
-    - state: icon_mirror
+    - state: icon_other-shoulder
       map: ["foldedLayer"]
       visible: true

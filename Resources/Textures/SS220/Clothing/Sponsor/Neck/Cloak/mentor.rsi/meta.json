@@ -144,7 +144,7 @@
       ]
     },
     {
-      "name": "icon_mirror",
+      "name": "icon_other-shoulder",
       "delays": [
         [
           0.1,
@@ -174,7 +174,7 @@
       ]
     },
     {
-      "name": "mirror-equipped-NECK",
+      "name": "other-shoulder-equipped-NECK",
       "directions": 4,
       "delays": [
         [

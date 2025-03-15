@@ -96,7 +96,7 @@
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/administrator.rsi
 
 - type: entity
-  parent: ClothingSponsorNeckMirrorBase
+  parent: ClothingSponsorNeckOtherShoulderBase
   id: ClothingSponsorNeckMentor
   name: плащ наставления
   description: Особенный плащ, вручаемый учителям, неустанно направляющим избранных на их нелегком пути.
@@ -108,8 +108,8 @@
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/mentor.rsi
 
 - type: entity
-  parent: [ClothingSponsorNeckMirroredBase, ClothingSponsorNeckMentor]
-  id: ClothingSponsorNeckMentorMirrored
+  parent: [ClothingSponsorNeckOtherShoulderedBase, ClothingSponsorNeckMentor]
+  id: ClothingSponsorNeckMentorOtherShouldered
   name: плащ наставления
   description: Особенный плащ, вручаемый учителям, неустанно направляющим избранных на их нелегком пути.
   suffix: Отзеркаленный, Sponsor Neck, Mentor

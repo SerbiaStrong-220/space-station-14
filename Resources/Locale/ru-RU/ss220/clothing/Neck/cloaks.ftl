@@ -1,4 +1,4 @@
-fold-mirror-verb = отзеркалить
+fold-other-shoulder-verb = перекинуть на другое плечо
 
 ent-ClothingNeckCloakNanotrasenAdmiral = плащ адмирала
     .desc = Плащ с золотым шитьём, который носят адмиралы флота Nanotrasen.
