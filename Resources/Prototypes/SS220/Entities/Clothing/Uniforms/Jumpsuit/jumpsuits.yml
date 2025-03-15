@@ -655,6 +655,22 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/rd_alt.rsi
 
+  # Исследователь
+- type: entity
+  parent: ClothingUniformBaseFoldable
+  id: ClothingUniformJumpsuitExplorer
+  name: explorer uniform
+  description: A practical and functional set of clothes designed to work in extreme conditions.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/explorer.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/explorer.rsi
+
+- type: entity
+  parent: [ClothingUniformBaseFoldableTie, ClothingUniformJumpsuitExplorer]
+  id: ClothingUniformJumpsuitExplorerTie
+
 # Служба Безопасности
 
   # Офицер СБ
