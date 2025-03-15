@@ -210,7 +210,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         messageWithoutTags = null;
         language = null;
 
-        var keyPatern = $@"{_language.KeyPrefix}\w+\s+";
+        var keyPatern = $@"{LanguageManager.KeyPrefix}\w+\s+";
 
         var m = Regex.Match(message, keyPatern);
         if (m == null || !_language.TryGetLanguageByKey(m.Value.Trim(), out language))
