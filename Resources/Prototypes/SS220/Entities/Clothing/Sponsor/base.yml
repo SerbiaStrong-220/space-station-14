@@ -213,3 +213,45 @@
     - neck
   - type: Sprite
     state: icon
+
+- type: entity
+  abstract: true
+  parent: [ClothingSponsorNeckBase, BaseFoldable]
+  id: ClothingSponsorNeckOtherShoulderBase
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-other-shoulder-verb
+    foldVerbText: fold-other-shoulder-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: other-shoulder
+    foldedHeldPrefix: other-shoulder
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_other-shoulder
+      map: ["foldedLayer"]
+      visible: false
+
+- type: entity
+  abstract: true
+  parent: ClothingSponsorNeckOtherShoulderBase
+  id: ClothingSponsorNeckOtherShoulderedBase
+  suffix: Отзеркаленный, Шлёпа
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: other-shoulder
+  - type: Item
+    heldPrefix: other-shoulder
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon_other-shoulder
+      map: ["foldedLayer"]
+      visible: true
