@@ -23,6 +23,8 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
     private static int Seed = 0;
 
+    private Regex? _textWithKeyRegex;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -141,11 +143,10 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     private List<(string, LanguagePrototype)> SplitMessageByLanguages(EntityUid source, string message, LanguagePrototype defaultLanguage)
     {
         var list = new List<(string, LanguagePrototype)>();
-        var p = _language.KeyPrefix;
-        var textWithKeyRegex = new Regex($@"^{p}(.*?)\s(?={p}\w+\s)|(?<=\s){p}(.*?)\s(?={p}\w+\s)|(?<=\s){p}(.*)|^{p}(.*)",
-            RegexOptions.Compiled);
+        var p = LanguageManager.KeyPrefix;
+        _textWithKeyRegex ??= new Regex($@"^{p}(.*?)\s(?={p}\w+\s)|(?<=\s){p}(.*?)\s(?={p}\w+\s)|(?<=\s){p}(.*)|^{p}(.*)");
 
-        var matches = textWithKeyRegex.Matches(message);
+        var matches = _textWithKeyRegex.Matches(message);
         if (matches.Count <= 0)
         {
             list.Add((message, defaultLanguage));

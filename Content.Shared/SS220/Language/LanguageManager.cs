@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using System.Diagnostics.CodeAnalysis;
 
@@ -8,11 +7,10 @@ namespace Content.Shared.SS220.Language;
 public sealed class LanguageManager
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly INetManager _net = default!;
 
     public List<LanguagePrototype> Languages { get; private set; } = new();
 
-    public readonly string KeyPrefix = "%";
+    public const string KeyPrefix = "%";
 
     public void Initialize()
     {
