@@ -24,6 +24,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     private static int Seed = 0;
 
     private Regex? _textWithKeyRegex;
+    private TimeSpan _regexTimeout = TimeSpan.FromSeconds(1);
 
     public override void Initialize()
     {
@@ -144,7 +145,10 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     {
         var list = new List<(string, LanguagePrototype)>();
         var p = LanguageManager.KeyPrefix;
-        _textWithKeyRegex ??= new Regex($@"^{p}(.*?)\s(?={p}\w+\s)|(?<=\s){p}(.*?)\s(?={p}\w+\s)|(?<=\s){p}(.*)|^{p}(.*)");
+        _textWithKeyRegex ??= new Regex(
+            $@"^{p}(.*?)\s(?={p}\w+\s)|(?<=\s){p}(.*?)\s(?={p}\w+\s)|(?<=\s){p}(.*)|^{p}(.*)",
+            RegexOptions.Compiled,
+            _regexTimeout);
 
         var matches = _textWithKeyRegex.Matches(message);
         if (matches.Count <= 0)
