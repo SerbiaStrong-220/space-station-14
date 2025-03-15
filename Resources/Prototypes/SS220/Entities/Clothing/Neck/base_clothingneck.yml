@@ -29,6 +29,8 @@
     folded: true
   - type: Clothing
     equippedPrefix: mirror
+  - type: Item
+    heldPrefix: mirror
   - type: Sprite
     layers:
     - state: icon
