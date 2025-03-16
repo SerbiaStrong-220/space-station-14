@@ -528,7 +528,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             if (listener == source)
             {
-                var ev = new EntitySpokeEvent(source, scrambledMessage, originalMessage, null, null);
+                var ev = new EntitySpokeEvent(source, scrambledColorlessMessage, originalMessage, null, null);
                 RaiseLocalEvent(source, ev, true);
             }
             else
@@ -663,7 +663,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             // SS220-Add-Languages begin
             if (listener == source)
             {
-                var ev = new EntitySpokeEvent(source, scrambledMessage, originalMessage, channel, obfuscatedMessage);
+                var ev = new EntitySpokeEvent(source, scrambledColorlessMessage, originalMessage, channel, obfuscatedScrambledMessage);
                 RaiseLocalEvent(source, ev, true);
             }
             else
