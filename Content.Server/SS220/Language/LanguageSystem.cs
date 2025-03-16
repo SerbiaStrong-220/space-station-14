@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using Content.Shared.SS220.Language.Systems;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CCVars;
+using Content.Shared.Chat;
 
 namespace Content.Server.SS220.Language;
 
@@ -115,19 +116,25 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             var curString = languageStrings[i];
             if (CanUnderstand(listener, curString.Item2.ID))
             {
-                sanitizedMessage.Append(curString.Item1);
                 sanitizedColorlessMessage.Append(curString.Item1);
+                var newMessage = curString.Item1;
+                if (i + 1 == languageStrings.Count)
+                    newMessage = newMessage.Trim();
+
+                if (setColor)
+                    newMessage = SetColor(newMessage, curString.Item2);
+
+                sanitizedMessage.Append(newMessage);
             }
             else
             {
                 var scrambledString = ScrambleMessage(message, curString.Item2);
                 sanitizedColorlessMessage.Append(scrambledString);
+                if (i + 1 == languageStrings.Count)
+                    scrambledString = scrambledString.Trim();
+
                 if (setColor)
-                {
-                    if (i + 1 == languageStrings.Count)
-                        scrambledString = scrambledString.Trim();
                     scrambledString = SetColor(scrambledString, curString.Item2);
-                }
 
                 sanitizedMessage.Append(scrambledString);
             }
@@ -242,7 +249,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             newMessage += $"{key} {newLangMessage}";
         }
 
-        return newMessage;
+        return newMessage.Trim();
     }
 
     /// <summary>
