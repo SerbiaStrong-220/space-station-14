@@ -25,6 +25,7 @@
   - ResearchDirector
   - Brig
   - Cryogenics
+  - Explorer #SS220 Explorer
   special:
   - !type:AddComponentSpecial
     components:

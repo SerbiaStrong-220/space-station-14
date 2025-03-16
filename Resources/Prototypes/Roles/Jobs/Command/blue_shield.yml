@@ -43,6 +43,7 @@
   - Cargo
   - Medical
   - Blueshield
+  - Explorer #SS220 Explorer
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

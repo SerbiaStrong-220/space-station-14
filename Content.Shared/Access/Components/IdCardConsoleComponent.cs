@@ -77,6 +77,7 @@ public sealed partial class IdCardConsoleComponent : Component
         "Service",
         "Theatre",
         "Magistrate", //SS220-Magistrate Access Fix
+        "Explorer" //SS220-Explorer
     };
 
     [Serializable, NetSerializable]

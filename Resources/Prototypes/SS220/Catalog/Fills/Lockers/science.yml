@@ -1,0 +1,15 @@
+- type: entity
+  id: LockerExplorerFilled
+  suffix: Filled
+  parent: LockerExplorer
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingHeadsetExplorer
+      - id: ClothingMaskGasExplorerAlt
+      - id: ClothingUniformJumpsuitExplorer
+      - id: SurvivalKnife
+      - id: HandheldRadio
+      - id: HandheldGPSBasic
+      - id: ClothingBeltUtilityFilled
+      - id: ClothingHandsGlovesLatex

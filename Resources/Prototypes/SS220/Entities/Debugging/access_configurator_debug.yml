@@ -48,6 +48,7 @@
       - SyndicateAgent
       - Theatre
       - Magistrate
+      - Explorer #SS220 Explorer
       #New centcomm accesses begin
       - CentralCommand
       - CentralCommandCBURN

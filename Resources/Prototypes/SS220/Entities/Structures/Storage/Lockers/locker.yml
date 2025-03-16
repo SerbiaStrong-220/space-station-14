@@ -291,6 +291,20 @@
   - type: AccessReader
     access: [["SyndicateAgent"]]
 
+# Исследователь
+- type: entity
+  id: LockerExplorer
+  parent: LockerBase
+  name: explorer's locker
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: scientist
+    stateDoorOpen: steellocker_open
+    stateDoorClosed: explorer_door
+  - type: AccessReader
+    access: [ [ "Explorer" ] ]
+
 #Разное
 - type: entity
   id: LockerSleepingGasSecurity
