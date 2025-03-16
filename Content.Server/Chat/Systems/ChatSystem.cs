@@ -627,7 +627,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         var wrappedUnknownMessage = Loc.GetString("chat-manager-entity-whisper-unknown-wrap-message",
             ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
 
-        Dictionary<string, (string, List<EntityUid>)> scrambledMsgReceiversDict = new(); // SS220 languages
+        Dictionary<string, (string, string, List<EntityUid>)> scrambledMsgReceiversDict = new(); // SS220 languages
         foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
         {
             EntityUid listener;
@@ -669,9 +669,9 @@ public sealed partial class ChatSystem : SharedChatSystem
             else
             {
                 if (scrambledMsgReceiversDict.TryGetValue(scrambledMessage, out var entities))
-                    entities.Item2.Add(listener);
+                    entities.Item3.Add(listener);
                 else
-                    scrambledMsgReceiversDict[scrambledMessage] = (scrambledColorlessMessage, [listener]);
+                    scrambledMsgReceiversDict[scrambledMessage] = (scrambledColorlessMessage, obfuscatedScrambledMessage, [listener]);
             }
             // SS220-Add-Languages end
         }
@@ -679,9 +679,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
 
         // SS220 languages begin
-        foreach (var (scrambledMsg, (colorlessMsg, reseivers)) in scrambledMsgReceiversDict)
+        foreach (var (scrambledMsg, (colorlessMsg, obfuscatedScrambledMessage, reseivers)) in scrambledMsgReceiversDict)
         {
-            var scrambledEv = new EntitySpokeScrambledEvent(source, reseivers, scrambledMsg, colorlessMsg, originalMessage, obfuscatedMessage, channel != null);
+            var scrambledEv = new EntitySpokeScrambledEvent(source, reseivers, scrambledMsg, colorlessMsg, originalMessage, obfuscatedScrambledMessage, channel != null);
             RaiseLocalEvent(scrambledEv);
         }
 
