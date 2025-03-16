@@ -9,7 +9,7 @@
 # Galactic common lanaguges region:
 - type: language
   id: Galactic
-  key: gl
+  key: гл
   name: "language-galacticcommon-name"
   description: "language-galacticcommon-desc"
   scrambleMethod: !type:SyllablesScrambleMethod
