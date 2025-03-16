@@ -2,6 +2,7 @@
 using System.Numerics;
 using Content.Server.Administration.Systems;
 using Content.Server.Body.Systems;
+using Content.Server.Chat.Systems;
 using Content.Server.EntityEffects.Effects;
 using Content.Server.EntityEffects.Effects.StatusEffects;
 using Content.Server.Explosion.EntitySystems;
@@ -32,6 +33,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
@@ -88,6 +90,7 @@ public sealed class TarotCardSystem : EntitySystem
     [Dependency] private readonly SmokeSystem _smoke = default!;
     [Dependency] private readonly DieOfFateSystem _dieOfFate = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
 
     private const string TarotCardEffectPrototype = "EffectTarotCard";
 
@@ -107,6 +110,7 @@ public sealed class TarotCardSystem : EntitySystem
     private const string Omnizine = "Omnizine";
     private const string JusticeItems = "JusticeItems";
     private const string RandomArcadeSpawner = "RandomArcadeSpawner";
+    private const string RandomMessageToChat = "RandomMessageToChat";
 
     public override void Initialize()
     {
@@ -228,7 +232,7 @@ public sealed class TarotCardSystem : EntitySystem
                 ApplyReversedEffect(card, target, EatPills, HealLing);
                 break;
             case TarotCardType.Devil:
-                ApplyReversedEffect(card, target, ClusterFlashBang, EatPills);
+                ApplyReversedEffect(card, target, ClusterFlashBang, HelpMessage);
                 break;
             case TarotCardType.Tower:
                 break;
@@ -644,7 +648,7 @@ public sealed class TarotCardSystem : EntitySystem
 
         var targetCoords = Transform(target).Coordinates;
 
-        for (var i = 0; i < 4; i++)
+        for (var i = 0; i < 3; i++)
         {
             var pill = Spawn("StrangePill", targetCoords);
 
@@ -659,6 +663,29 @@ public sealed class TarotCardSystem : EntitySystem
             _solution.TryTransferSolution(solComp.Value, solutionReagent, solutionReagent.Volume);
             QueueDel(pill);
         }
+    }
+
+    private void HelpMessage(EntityUid target)
+    {
+        var targetPos = Transform(target).LocalPosition;
+
+        var allEntities = _lookup.GetEntitiesInRange(target, 50f)
+            .Where(e =>
+            {
+                var entityPos = Transform(e).LocalPosition;
+                var distance = (entityPos - targetPos).Length();
+                return distance >= 30f;
+            })
+            .Where(HasComp<MindContainerComponent>)
+            .ToList();
+
+        if (allEntities.Count == 0)
+            return;
+
+        var caller = _random.Pick(allEntities);
+        var helpMessage = _random.Pick(_proto.Index<DatasetPrototype>(RandomMessageToChat).Values);
+
+        _chat.TrySendInGameICMessage(caller, helpMessage, InGameICChatType.Speak, ChatTransmitRange.Normal);
     }
 
     private void ClusterFlashBang(EntityUid target)
