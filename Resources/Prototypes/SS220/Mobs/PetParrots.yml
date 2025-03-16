@@ -24,11 +24,6 @@
   components:
   - type: InteractionPopup
     successChance: 1
-  - type: Language
-    availableLanguages:
-    - id: Galactic
-    - id: SolCommon
-      canSpeak: false
   - type: Grammar
     attributes:
       proper: true
