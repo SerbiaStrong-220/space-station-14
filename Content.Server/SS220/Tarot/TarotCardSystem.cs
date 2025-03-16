@@ -32,6 +32,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
+using Content.Shared.Mobs;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Pinpointer;
 using Content.Shared.Prototypes;
@@ -85,6 +87,7 @@ public sealed class TarotCardSystem : EntitySystem
     [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly SmokeSystem _smoke = default!;
     [Dependency] private readonly DieOfFateSystem _dieOfFate = default!;
+    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
 
     private const string TarotCardEffectPrototype = "EffectTarotCard";
 
@@ -97,7 +100,8 @@ public sealed class TarotCardSystem : EntitySystem
     ];
 
     private const string SpaceCash500 = "SpaceCash500";
-    private const string D20Dice = "d20Dice";
+    private const string MobCatCake = "MobCatCake";
+    private const string MobCorgiCerberus = "MobCorgiCerberus";
     private const string ArrivalBeaconTag = "station-beacon-arrivals";
     private const string BridgeBeaconTag = "station-beacon-bridge";
     private const string Omnizine = "Omnizine";
@@ -194,12 +198,13 @@ public sealed class TarotCardSystem : EntitySystem
                 ApplyReversedEffect(card, target, TeleportToHoD, TeleportToBridge);
                 break;
             case TarotCardType.Hierophant:
+                ApplyReversedEffect(card, target, SpawnCerberus, SpawnCatCake);
                 break;
             case TarotCardType.Lovers:
                 ApplyReversedEffect(card, target, HurtTarget, HealTarget);
                 break;
             case TarotCardType.Chariot:
-                ApplyReversedEffect(card, target, HurtTarget, ApplyChariotEffects);
+                ApplyReversedEffect(card, target, SpeedUpEntity, ApplyChariotEffects);
                 break;
             case TarotCardType.Strength:
                 ApplyReversedEffect(card, target, MassHallucinations, HealTarget);
@@ -217,7 +222,7 @@ public sealed class TarotCardSystem : EntitySystem
                 ApplyReversedEffect(card, target, FixturesSet, TeleportToRandomTile);
                 break;
             case TarotCardType.Death:
-                ApplyReversedEffect(card, target, EatPills, HurtAnother);
+                ApplyReversedEffect(card, target, ModifyThreshold, HurtAnother);
                 break;
             case TarotCardType.Temperance:
                 ApplyReversedEffect(card, target, EatPills, HealLing);
@@ -370,6 +375,31 @@ public sealed class TarotCardSystem : EntitySystem
         _transform.SetCoordinates(target, Transform(heads.First()).Coordinates);
     }
 
+    private void SpawnCatCake(EntityUid target)
+    {
+        var coords = Transform(target).Coordinates;
+        var catCake = SpawnAtPosition(MobCatCake, coords);
+        var solution = new Solution(Omnizine, FixedPoint2.New(50f));
+
+        if (!TryComp<SolutionContainerManagerComponent>(catCake, out var containerManagerComponent))
+            return;
+
+        if (!_solution.TryGetSolution((catCake, containerManagerComponent), "food", out var solutionEnt))
+            return;
+
+        _solution.SetCapacity(solutionEnt.Value, solutionEnt.Value.Comp.Solution.Volume + solution.Volume);
+
+        _solution.TryTransferSolution(solutionEnt.Value, solution, solution.Volume);
+    }
+
+    private void SpawnCerberus(EntityUid target)
+    {
+        var coords = Transform(target).Coordinates;
+        var cerberus = SpawnAtPosition(MobCorgiCerberus, coords);
+
+        _npcFaction.MakeFriendlyEntities(cerberus, target);
+    }
+
     private void HealTarget(EntityUid target)
     {
         if (!TryComp<DamageableComponent>(target, out var damageableComponent))
@@ -444,6 +474,31 @@ public sealed class TarotCardSystem : EntitySystem
 
         genericStatusEffect.Effect(new EntityEffectBaseArgs(target, EntityManager));
         moveSpeedEffect.Effect(new EntityEffectBaseArgs(target, EntityManager));
+    }
+
+    private void SpeedUpEntity(EntityUid target)
+    {
+        var moveSpeedEffect = new MovespeedModifier()
+        {
+            StatusLifetime = 30f,
+            WalkSpeedModifier = 1.5f,
+            SprintSpeedModifier = 1.5f,
+        };
+        moveSpeedEffect.Effect(new EntityEffectBaseArgs(target, EntityManager));
+    }
+
+    private void ModifyThreshold(EntityUid target)
+    {
+        var modifyThreshold = new ModifyThresholdEffect()
+        {
+            Duration = 500f,
+            NewThresholds = new Dictionary<FixedPoint2, MobState>
+            {
+                { 150, MobState.Critical },
+            },
+        };
+
+        modifyThreshold.Effect(new EntityEffectBaseArgs(target, EntityManager));
     }
 
     private void SpawnJusticeItems(EntityUid target)

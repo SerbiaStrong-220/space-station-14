@@ -137,7 +137,7 @@ public sealed class DieOfFateSystem : EntitySystem
             return;
 
         _suicide.ApplyLethalDamage((target, damageableComponent), "Blunt");
-        _popup.PopupEntity("Вас убило!", target);
+        _popup.PopupEntity(Loc.GetString("tarot-cards-dice-death"), target);
     }
 
     private void OnRollThree(EntityUid target)
