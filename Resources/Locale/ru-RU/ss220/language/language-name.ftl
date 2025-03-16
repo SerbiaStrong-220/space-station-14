@@ -2,7 +2,7 @@
 language-galacticcommon-name = Общегалактический
 language-solcommon-name = Общесолнечный
 language-tradeband-name = Торговый
-language-gutter-name = Гуттэр
+language-gutter-name = Гаттэр
 language-clownish-name = Клоунский
 language-neorusskiya-name = Нео-Русский
 # Languages of race
