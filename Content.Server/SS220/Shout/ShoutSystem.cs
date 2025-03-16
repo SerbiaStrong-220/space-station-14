@@ -46,11 +46,11 @@ public sealed class ShoutSystem : EntitySystem
 
         if (args.ShoutPhrases != null)
         {
-            if (!_proto.TryIndex<DatasetPrototype>(args.ShoutPhrases, out var placeholder))//i dont like nested ifs, but idk how to make it more pretty
+            if (!_proto.TryIndex<LocalizedDatasetPrototype>(args.ShoutPhrases, out var placeholder))//i dont like nested ifs, but idk how to make it more pretty
                 return;
 
-            var emoteType = _random.Pick(placeholder.Values);
-            _chat.TrySendInGameICMessage(args.Performer, emoteType, InGameICChatType.Emote, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
+            var localizedPhrase = Loc.GetString(_random.Pick(placeholder.Values));
+            _chat.TrySendInGameICMessage(args.Performer, localizedPhrase, InGameICChatType.Emote, ChatTransmitRange.Normal, checkRadioPrefix: false, ignoreActionBlocker: true);
         }
     }
 }

@@ -111,6 +111,7 @@
     interactSuccessSound:
       path: /Audio/Animals/sloth_squeak.ogg
   #SS220 Goal start
+  - type: Emoting
   - type: ActionGrant
     actions:
     - ActionGoal
