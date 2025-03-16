@@ -201,6 +201,51 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     }
 
     /// <summary>
+    ///     Get a list of message parts with a language tag
+    ///     <paramref name="skipDefaultLanguageKeyAtTheBeginning"/> will the first key be skipped if it is equal to the default language key.
+    /// </summary>
+    public List<(string, string)> GetMessagesWithLanguageKey(EntityUid source, string message, bool skipDefaultLanguageKeyAtTheBeginning = false)
+    {
+        var list = new List<(string, string)>();
+        var defaultLanguage = GetSelectedLanguage(source);
+        if (defaultLanguage == null)
+        {
+            list.Add((string.Empty, message));
+            return list;
+        }
+
+        var splited = SplitMessageByLanguages(source, message, defaultLanguage);
+        for (var i = 0; i < splited.Count; i++)
+        {
+            var languageMessage = splited[i].Item1;
+            var language = splited[i].Item2;
+            if (skipDefaultLanguageKeyAtTheBeginning && i == 0 && language == defaultLanguage)
+            {
+                // Если в первой части сообщения нет языкового тега, отличного от тега языка по умолчанию, то он пропускается.
+                list.Add((string.Empty, languageMessage));
+                continue;
+            }
+
+            var key = LanguageManager.KeyPrefix + language.Key;
+            list.Add((key, languageMessage));
+        }
+
+        return list;
+    }
+
+    public string ChangeLanguageMessages(EntityUid source, string message, Func<string, string> func, bool skipDefaultLanguageKeyAtTheBeginning = false)
+    {
+        var newMessage = string.Empty;
+        foreach (var (key, languageMessage) in GetMessagesWithLanguageKey(source, message, skipDefaultLanguageKeyAtTheBeginning))
+        {
+            var newLangMessage = func.Invoke(languageMessage);
+            newMessage += $"{key} {newLangMessage}";
+        }
+
+        return newMessage;
+    }
+
+    /// <summary>
     ///     Tries to find the first language tag in the message and extracts it from the message
     /// </summary>
     public bool TryGetLanguageFromString(string message,

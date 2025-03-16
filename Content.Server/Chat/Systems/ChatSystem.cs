@@ -903,12 +903,36 @@ public sealed partial class ChatSystem : SharedChatSystem
     private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true)
     {
         var newMessage = message.Trim();
-        newMessage = ReplaceWords(newMessage); // Corvax-ChatSanitize
-        newMessage = SanitizeMessageReplaceWords(newMessage);
+        // SS220 languages begin
         GetRadioKeycodePrefix(source, newMessage, out newMessage, out var prefix);
 
+        bool findEnglish = false;
+        string? newEmoteStr = null;
+        newMessage = _languageSystem.ChangeLanguageMessages(source, newMessage, msg =>
+        {
+            var newLangMessage = ReplaceWords(msg);
+            newLangMessage = SanitizeMessageReplaceWords(newLangMessage);
+            _sanitizer.TrySanitizeEmoteShorthands(newLangMessage, source, out newLangMessage, out newEmoteStr, false);
+            if (!_sanitizer.CheckNoEnglish(source, newLangMessage))
+                findEnglish = true;
+
+            return newLangMessage;
+        }, true);
+
+        if (findEnglish)
+        {
+            newMessage = string.Empty;
+            newEmoteStr = "кашляет";
+        }
+
+        emoteStr = newEmoteStr;
+        //newMessage = ReplaceWords(newMessage); // Corvax-ChatSanitize
+        //newMessage = SanitizeMessageReplaceWords(newMessage);
+        //GetRadioKeycodePrefix(source, newMessage, out newMessage, out var prefix);
+
         // Sanitize it first as it might change the word order
-        _sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out emoteStr);
+        //_sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out emoteStr);
+        // SS220 languages end
 
         if (capitalize)
             newMessage = SanitizeMessageCapital(newMessage);
@@ -930,10 +954,20 @@ public sealed partial class ChatSystem : SharedChatSystem
 
     public string TransformSpeech(EntityUid sender, string message)
     {
-        var ev = new TransformSpeechEvent(sender, message);
-        RaiseLocalEvent(ev);
+        // SS220 languages begin
+        var newMessage = _languageSystem.ChangeLanguageMessages(sender, message, msg =>
+        {
+            var ev = new TransformSpeechEvent(sender, msg);
+            RaiseLocalEvent(ev);
+            return ev.Message;
+        }, true);
+        //var ev = new TransformSpeechEvent(sender, message);
+        //RaiseLocalEvent(ev);
 
-        return ev.Message;
+        //return ev.Message;
+
+        return newMessage;
+        // SS220 languages end
     }
 
     public bool CheckIgnoreSpeechBlocker(EntityUid sender, bool ignoreBlocker)
