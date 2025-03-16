@@ -11,12 +11,6 @@ namespace Content.Shared.SS220.ModuleFurniture.Components;
 public sealed partial class ModuleFurnitureComponent : SharedModuleFurnitureComponent
 {
     /// <summary>
-    /// List of EntityProtoId, which will be spawned and inserted into furniture
-    /// </summary>
-    [DataField("filled", serverOnly: true)]
-    public List<EntProtoId> FillingEntity = new();
-
-    /// <summary>
     /// Contains things of which furniture consists.
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]

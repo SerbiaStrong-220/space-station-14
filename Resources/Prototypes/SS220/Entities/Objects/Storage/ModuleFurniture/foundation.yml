@@ -1,35 +1,145 @@
+# Cabinets
+
 - type: entity
-  id: WoodenModularDresser
+  id: ModularCabinetFoundation
   parent: BaseModularFoundation
-  name: ModularWoodenDresser
-  description: Wooden dresser, now with editable layout!
+  name: modular cabinet
+  description: cabinet, now with layout!
   components:
   - type: Sprite
-    sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
-    state: dresser-foundation
+    sprite: SS220/Objects/Storage/ModuleFurniture/cabinet.rsi
   - type: ModuleFurniture
-    drawerPixelInterval: 1,1
+    drawerPixelInterval: 1,0
     startingDrawerPixelOffset: 9,15
-    pixelPerLayoutTile: 14,4
+    pixelPerLayoutTile: 11,4
     tileLayoutSize: 1,3
 
 - type: entity
-  id: WoodenModularDresserFilled
+  id: ModularWoodenCabinetFoundation
   parent: BaseModularFoundation
-  name: ModularWoodenDresser
-  suffix: Filled
-  description: Wooden dresser, now with editable layout!
+  name: modular wooden cabinet foundation
+  description: Wooden cabinet, now with layout!
   components:
   - type: Sprite
-    sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
-    state: dresser-foundation
+    sprite: SS220/Objects/Storage/ModuleFurniture/wooden_cabinet.rsi
   - type: ModuleFurniture
-    drawerPixelInterval: 1,1
+    drawerPixelInterval: 1,0
     startingDrawerPixelOffset: 9,15
-    pixelPerLayoutTile: 14,4
+    pixelPerLayoutTile: 13,4
     tileLayoutSize: 1,3
-    filled:
-    - ModularPartWoodenDresserw1h1
-    - ModularPartWoodenDresserw1h1
-    - ModularPartWoodenDresserw1h1
 
+- type: entity
+  id: ModularTallCabinetFoundation
+  parent: BaseModularFoundation
+  name: modular tall cabinet foundation
+  description: Wooden cabinet, now with layout!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/tall_cabinet.rsi
+  - type: ModuleFurniture
+    drawerPixelInterval: 1,0
+    startingDrawerPixelOffset: 12,10
+    pixelPerLayoutTile: 7,4
+    tileLayoutSize: 1,3
+
+- type: entity
+  id: ModularFillingCabinetFoundation
+  parent: BaseModularFoundation
+  name: modular filling cabinet foundation
+  description: Wooden cabinet, now with layout!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/filling_cabinet.rsi
+  - type: ModuleFurniture
+    drawerPixelInterval: 1,0
+    startingDrawerPixelOffset: 12,9
+    pixelPerLayoutTile: 7,6
+    tileLayoutSize: 1,3
+
+# Double cabinets
+
+- type: entity
+  id: ModularDoubleCabinetFoundation
+  parent: BaseModularFoundation
+  name: modular double cabinet foundation
+  description: Wooden cabinet, now with layout!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/double_cabinet.rsi
+  - type: ModuleFurniture
+    drawerPixelInterval: 1,0
+    startingDrawerPixelOffset: 3,15
+    pixelPerLayoutTile: 13,4
+    tileLayoutSize: 2,3
+
+- type: entity
+  id: ModularWoodenDoubleCabinetFoundation
+  parent: BaseModularFoundation
+  name: modular wooden double cabinet foundation
+  description: wooden double cabinet, now with layout!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/wooden_double_cabinet.rsi
+  - type: ModuleFurniture
+    drawerPixelInterval: 1,0
+    startingDrawerPixelOffset: 3,15
+    pixelPerLayoutTile: 13,4
+    tileLayoutSize: 2,3
+
+- type: entity
+  id: ModularTallDoubleCabinetFoundation
+  parent: BaseModularFoundation
+  name: modular tall double cabinet foundation
+  description: tall double cabinet, now with layout!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/tall_double_cabinet.rsi
+  - type: ModuleFurniture
+    drawerPixelInterval: 1,0
+    startingDrawerPixelOffset: 7,10
+    pixelPerLayoutTile: 7,4
+    tileLayoutSize: 2,3
+
+- type: entity
+  id: ModularFillingDoubleCabinetFoundation
+  parent: BaseModularFoundation
+  name: modular filling double cabinet foundation
+  description: filling double cabinet, now with layout!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/filling_double_cabinet.rsi
+  - type: ModuleFurniture
+    drawerPixelInterval: 1,0
+    startingDrawerPixelOffset: 7,9
+    pixelPerLayoutTile: 7,6
+    tileLayoutSize: 2,3
+
+# Triple cabinets
+
+- type: entity
+  id: ModularFillingTripleCabinetFoundation
+  parent: BaseModularFoundation
+  name: modular filling triple cabinet foundation
+  description: filling triple cabinet, now with layout!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/filling_triple_cabinet.rsi
+  - type: ModuleFurniture
+    drawerPixelInterval: 1,0
+    startingDrawerPixelOffset: ??
+    pixelPerLayoutTile: ??
+    tileLayoutSize: 3,3
+
+- type: entity
+  id: ModularTallTripleCabinetFoundation
+  parent: BaseModularFoundation
+  name: modular tall triple cabinet foundation
+  description: tall triple cabinet, now with layout!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/tall_triple_cabinet.rsi
+  - type: ModuleFurniture
+    drawerPixelInterval: 1,0
+    startingDrawerPixelOffset: ??
+    pixelPerLayoutTile: ??
+    tileLayoutSize: 3,3

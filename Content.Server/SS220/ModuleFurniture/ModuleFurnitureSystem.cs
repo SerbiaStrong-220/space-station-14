@@ -40,7 +40,10 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
     {
         MakeClearOccupation(entity.Comp);
 
-        foreach (var protoId in entity.Comp.FillingEntity)
+        if (!TryComp<ModuleFurnitureFillComponent>(entity, out var fillComp))
+            return;
+
+        foreach (var protoId in fillComp.FillingEntity)
         {
             var spawnedUid = SpawnInContainerOrDrop(protoId, entity.Owner, ModuleFurnitureComponent.ContainerId);
             if (!TryComp<ModuleFurniturePartComponent>(spawnedUid, out var partComponent))

@@ -7,7 +7,6 @@
   - type: ModuleFurniturePart
     spriteSize: 14,4
     size: w1h1
-  # TODO: make sprites!
 
 - type: entity
   id: ModularPartWoodenDresserw2h1

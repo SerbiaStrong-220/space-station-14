@@ -1,0 +1,15 @@
+- type: entity
+  id: ModularWoodenFoundationFilled
+  parent: ModularWoodenFoundation
+  name: ModularWoodenDresser
+  suffix: Filled
+  description: Wooden dresser, now with editable layout!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
+    state: dresser-foundation
+  - type: ModuleFurnitureFillComponent
+    filled:
+    - ModularPartWoodenDresserw1h1
+    - ModularPartWoodenDresserw1h1
+    - ModularPartWoodenDresserw1h1
