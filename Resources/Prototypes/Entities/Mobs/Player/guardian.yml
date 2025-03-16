@@ -135,6 +135,10 @@
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
+    - type: Language
+      availableLanguages:
+      - id: Galactic
+        canSpeak: true
     - type: NameIdentifier
       group: Holoparasite
     - type: TypingIndicator
@@ -171,6 +175,10 @@
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
+    - type: Language
+      availableLanguages:
+      - id: Galactic
+        canSpeak: true
     - type: RandomSprite
       available:
         - enum.DamageStateVisualLayers.BaseUnshaded:
@@ -203,6 +211,12 @@
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
+    - type: Language
+      availableLanguages:
+      - id: Galactic
+        canSpeak: true
+      - id: Clownish
+        canSpeak: true
     - type: NameIdentifier
       group: Holoparasite
     - type: FootstepModifier
