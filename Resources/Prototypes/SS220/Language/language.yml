@@ -229,7 +229,7 @@
 
 - type: language
   id: Eldwarf
-  key: El
+  key: el
   name: "language-eldwarf-name"
   description: "language-eldwarf-desc"
   color: "#515d63"
