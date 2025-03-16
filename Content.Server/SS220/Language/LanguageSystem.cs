@@ -128,7 +128,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             }
             else
             {
-                var scrambledString = ScrambleMessage(message, curString.Item2);
+                var scrambledString = ScrambleMessage(curString.Item1, curString.Item2);
                 sanitizedColorlessMessage.Append(scrambledString);
                 if (i + 1 == languageStrings.Count)
                     scrambledString = scrambledString.Trim();
