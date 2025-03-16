@@ -3,8 +3,8 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.CluwneComms;
 
-[Prototype("memeAlertLevels")]
-public sealed partial class MemeAlertLevelPrototype : IPrototype
+[Prototype("memelertLevel")]
+public sealed partial class MemelertLevelPrototype : IPrototype
 {
     [IdDataField] public string ID { get; } = default!;
 
@@ -13,7 +13,7 @@ public sealed partial class MemeAlertLevelPrototype : IPrototype
     /// part here. Visualizers will use this in order to dictate what alert level to show on
     /// client side sprites, and localization uses each key to dictate the alert level name.
     /// </summary>
-    [DataField("levels")] public Dictionary<string, AlertLevelDetail> Levels = new();
+    [DataField("levels")] public Dictionary<string, MemelertLevelDetail> Levels = new();
 
     /// <summary>
     /// Default level that the station is on upon initialization.
@@ -27,7 +27,7 @@ public sealed partial class MemeAlertLevelPrototype : IPrototype
 /// the Levels field in AlertLevelPrototype.
 /// </summary>
 [DataDefinition]
-public sealed partial class AlertLevelDetail
+public sealed partial class MemelertLevelDetail
 {
     /// <summary>
     /// What is announced upon this alert level change. Can be a localized string.

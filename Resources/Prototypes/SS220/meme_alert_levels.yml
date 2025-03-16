@@ -1,9 +1,13 @@
-- type: memeAlertLevels
+- type: memelertLevel
   id: CluwneCommAlerts
   defaultLevel: green
   levels:
     green:
       announcement: alert-level-green-announcement
+      sound:
+        path: /Audio/Misc/gamma.ogg
+        params:
+          volume: -2
       color: Green
     rzhamma:
       announcement: joke-alert-level-rzhamma-announcement
