@@ -194,6 +194,11 @@ public abstract partial class BaseActionComponent : Component
     ///     If not null, this sound will be played when performing this action.
     /// </summary>
     [DataField("sound")] public SoundSpecifier? Sound;
+
+    //ss220 add time between charges start
+    [DataField]
+    public TimeSpan? TimeBetweenCharges = null;
+    //ss220 add time between charges end
 }
 
 [Serializable, NetSerializable]
@@ -225,6 +230,7 @@ public abstract class BaseActionComponentState : ComponentState
     public bool Temporary;
     public ItemActionIconStyle ItemIconStyle;
     public SoundSpecifier? Sound;
+    public TimeSpan? TimeBetweenCharges; //ss220 add time between charges
 
     protected BaseActionComponentState(BaseActionComponent component, IEntityManager entManager)
     {
@@ -254,5 +260,6 @@ public abstract class BaseActionComponentState : ComponentState
         Temporary = component.Temporary;
         ItemIconStyle = component.ItemIconStyle;
         Sound = component.Sound;
+        TimeBetweenCharges = component.TimeBetweenCharges; //ss220 add time between charges
     }
 }

@@ -50,7 +50,7 @@ public abstract class SharedCultYoggSystem : EntitySystem
     #region Stage
     private void OnExamined(EntityUid uid, CultYoggComponent component, ExaminedEvent args)
     {
-        if (component.CurrentStage == 0)
+        if (component.CurrentStage < CultYoggStage.Reveal)
             return;
 
         if (TryComp<InventoryComponent>(uid, out var item)

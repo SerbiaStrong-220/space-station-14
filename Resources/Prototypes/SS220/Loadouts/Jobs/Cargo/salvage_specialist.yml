@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobSalvageSpecialist
       time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: UniformJumpsuitFlannelSalvage
@@ -16,6 +21,11 @@
       !type:RoleTimeRequirement
       role: JobSalvageSpecialist
       time: 180000 # 50 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: UniformExpeditor
@@ -25,6 +35,11 @@
       !type:RoleTimeRequirement
       role: JobSalvageSpecialist
       time: 252000 # 70 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
 - type: loadout

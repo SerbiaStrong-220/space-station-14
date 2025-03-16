@@ -16,3 +16,25 @@
     - id: DrinkWaterBottleFull
   - type: Label
     currentLabel: reagent-name-nitrogen
+
+- type: entity
+  parent: BoxSurvival
+  id: BoxSurvivalBeerDrinker
+  suffix: Standard Beer
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingMaskBreath
+    - id: EmergencyOxygenTankFilled
+    - id: EmergencyMedipen
+    - id: SpaceMedipen # SS220 Revert deleted Medipen
+    - id: Flare
+    - id: FoodSnackNutribrick
+    - id: DrinkWaterBottleFull
+    - id: DrinkBeerCan
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: emergencytank
+  - type: Label
+    currentLabel: reagent-name-beer

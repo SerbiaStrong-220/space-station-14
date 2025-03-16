@@ -475,6 +475,7 @@
     - SurgeryStatic
     dynamicPacks:
     - Chemistry
+    - MedServiceTech #ss220 add pinpointer crew
   - type: Machine
     board: MedicalTechFabCircuitboard
   - type: StealTarget

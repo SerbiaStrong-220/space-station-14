@@ -78,3 +78,77 @@
             - TraitorRole
             - NukeOperative
 
+- type: entity
+  parent: BaseSubdermalImplant
+  id: DnaCopyImplant
+  name: dna copy implant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    implantAction: ActionActivateDnaCopy
+  - type: TriggerImplantAction
+  - type: TransferIdentity
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-DnaCopyImplant-medical
+      jobRequired:
+      - Paramedic
+      - MedicalDoctor
+      - SeniorPhysician
+      - ChiefMedicalOfficer
+      - Brigmedic
+    - label: hidden-desc-DnaCopyImplant-research
+      jobRequired:
+      - ResearchAssistant
+      - ResearchDirector
+      - Scientist
+      - Borg
+    - label: hidden-desc-DnaCopyImplant-syndicate
+      whitelistMind:
+        mindRoles:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: AdrenalImplant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    implantAction: ActionActivateAdrenalImplant
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 90
+        canReact: false
+        reagents:
+        - ReagentId: Rororium
+          Quantity: 1.5
+        - ReagentId: Ephedrine
+          Quantity: 15
+        - ReagentId: Ichor
+          Quantity: 30
+        - ReagentId: Epinephrine
+          Quantity: 28.5
+  - type: TriggerImplantAction
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-AdrenalImplant-medical
+      jobRequired:
+      - Paramedic
+      - MedicalDoctor
+      - SeniorPhysician
+      - ChiefMedicalOfficer
+      - Brigmedic
+    - label: hidden-desc-AdrenalImplant-research
+      jobRequired:
+      - ResearchAssistant
+      - ResearchDirector
+      - Scientist
+      - Borg
+    - label: hidden-desc-AdrenalImplant-syndicate
+      whitelistMind:
+        mindRoles:
+        - TraitorRole
+        - NukeOperative
+

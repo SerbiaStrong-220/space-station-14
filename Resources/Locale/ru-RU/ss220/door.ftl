@@ -73,3 +73,15 @@ ent-AirlockShuttleUsspLocked = { ent-AirlockShuttleUssp }
 ent-AirlockMaintCentcommLocked = { ent-AirlockMaint }
     .desc = { ent-AirlockMaint.desc }
     .suffix = ЦК, Закрыто
+
+ent-AirlockNoPassenger = { ent-AirlockGlass }
+    .desc = { ent-AirlockMaint.desc }
+    .suffix = Без пассажиров, Закрыто
+
+ent-AirlockBlueshield = { ent-AirlockCommand }
+    .desc = { ent-AirlockMaint.desc }
+    .suffix = ОСЩ, Закрыто
+
+ent-AirlockBlueshieldGlass = { ent-AirlockCommandGlass }
+    .desc = { ent-AirlockMaint.desc }
+    .suffix = ОСЩ, Закрыто

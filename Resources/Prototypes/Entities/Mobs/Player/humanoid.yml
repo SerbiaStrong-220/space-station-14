@@ -79,7 +79,7 @@
 
 - type: randomHumanoidSettings
   id: ERTLeader
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
@@ -87,9 +87,13 @@
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
       rules: ghost-role-information-nonantagonist-rules
-      requirements:
-      - !type:OverallPlaytimeRequirement
-        time: 144000 #SS220 ghostrole-times (40h overall)
+      requirements: #SS220 ghostrole-times (20h sec 10h comm) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000 
+        - !type:DepartmentTimeRequirement
+          department: Command
+          time: 36000 #SS220 ghostrole-times (20h sec 10h comm) end
       raffle:
         settings: short
       job: ERTLeader
@@ -115,13 +119,20 @@
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVA
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
       rules: ghost-role-information-nonantagonist-rules
+      requirements: #SS220 ghostrole-times (20h sec 10h comm) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000
+        - !type:DepartmentTimeRequirement
+          department: Command
+          time: 36000 #SS220 ghostrole-times (20h sec 10h comm) end
       raffle:
         settings: short
       job: ERTLeader
@@ -139,13 +150,20 @@
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVALecter
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTLeaderEVA
   components:
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description
       rules: ghost-role-information-nonantagonist-rules
+      requirements: #SS220 ghostrole-times (20h sec 10h comm) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000 
+        - !type:DepartmentTimeRequirement
+          department: Command
+          time: 36000 #SS220 ghostrole-times (20h sec 10h comm) end
       raffle:
         settings: short
       job: ERTLeader
@@ -173,7 +191,7 @@
 
 - type: randomHumanoidSettings
   id: ERTChaplain
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
     - type: BibleUser
@@ -181,6 +199,10 @@
       name: ghost-role-information-ert-chaplain-name
       description: ghost-role-information-ert-chaplain-description
       rules: ghost-role-information-nonantagonist-rules
+      requirements: #SS220 ghostrole-times (20h sec) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000 #SS220 ghostrole-times (20h sec) end
       raffle:
         settings: short
       job: ERTChaplain
@@ -206,13 +228,17 @@
 
 - type: randomHumanoidSettings
   id: ERTChaplainEVA
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTChaplain
   components:
     - type: GhostRole
       name: ghost-role-information-ert-chaplain-name
       description: ghost-role-information-ert-chaplain-description
       rules: ghost-role-information-nonantagonist-rules
+      requirements: #SS220 ghostrole-times (20h sec) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000 #SS220 ghostrole-times (20h sec) end
       raffle:
         settings: short
       job: ERTChaplain
@@ -241,16 +267,17 @@
 
 - type: randomHumanoidSettings
   id: ERTJanitor
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
     - type: GhostRole
       name: ghost-role-information-ert-janitor-name
       description: ghost-role-information-ert-janitor-description
       rules: ghost-role-information-nonantagonist-rules
-      requirements:
-      - !type:OverallPlaytimeRequirement
-        time: 144000 #SS220 ghostrole-times (40h overall)
+      requirements: #SS220 ghostrole-times (20h sec) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000 #SS220 ghostrole-times (20h sec) end
       raffle:
         settings: short
       job: ERTJanitor
@@ -276,13 +303,17 @@
 
 - type: randomHumanoidSettings
   id: ERTJanitorEVA
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTJanitor
   components:
     - type: GhostRole
       name: ghost-role-information-ert-janitor-name
       description: ghost-role-information-ert-janitor-description
       rules: ghost-role-information-nonantagonist-rules
+      requirements: #SS220 ghostrole-times (20h sec) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000 #SS220 ghostrole-times (20h sec) end
       raffle:
         settings: short
       job: ERTJanitor
@@ -310,16 +341,21 @@
 
 - type: randomHumanoidSettings
   id: ERTEngineer
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
     - type: GhostRole
       name: ghost-role-information-ert-engineer-name
       description: ghost-role-information-ert-engineer-description
       rules: ghost-role-information-nonantagonist-rules
-      requirements:
-      - !type:OverallPlaytimeRequirement
-        time: 144000 #SS220 ghostrole-times (40h overall)
+      requirements: #SS220 ghostrole-times (20h sec 10h eng) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000 
+        - !type:DepartmentTimeRequirement
+          department: Engineering
+          time: 36000 #SS220 ghostrole-times (20h sec 10h eng) end
+
       raffle:
         settings: short
       job: ERTEngineer
@@ -345,13 +381,20 @@
 
 - type: randomHumanoidSettings
   id: ERTEngineerEVA
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTEngineer
   components:
     - type: GhostRole
       name: ghost-role-information-ert-engineer-name
       description: ghost-role-information-ert-engineer-description
       rules: ghost-role-information-nonantagonist-rules
+      requirements: #SS220 ghostrole-times (20h sec 10h eng) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000 
+        - !type:DepartmentTimeRequirement
+          department: Engineering
+          time: 36000 #SS220 ghostrole-times (20h sec 10h eng) end
       raffle:
         settings: short
       job: ERTEngineer
@@ -379,16 +422,17 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurity
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
     - type: GhostRole
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
       rules: ghost-role-information-nonantagonist-rules
-      requirements:
-      - !type:OverallPlaytimeRequirement
-        time: 144000 #SS220 ghostrole-times (40h overall)
+      requirements: #SS220 ghostrole-times (20h sec) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000 #SS220 ghostrole-times (20h sec) end
       raffle:
         settings: short
       job: ERTSecurity
@@ -414,13 +458,17 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurityEVA
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTSecurity
   components:
     - type: GhostRole
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
       rules: ghost-role-information-nonantagonist-rules
+      requirements: #SS220 ghostrole-times (20h sec) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000 #SS220 ghostrole-times (20h sec) end
       raffle:
         settings: short
       job: ERTSecurity
@@ -438,13 +486,17 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurityEVALecter
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTSecurityEVA
   components:
     - type: GhostRole
       name: ghost-role-information-ert-security-name
       description: ghost-role-information-ert-security-description
       rules: ghost-role-information-nonantagonist-rules
+      requirements: #SS220 ghostrole-times (20h sec) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000 #SS220 ghostrole-times (20h sec) end
       raffle:
         settings: short
       job: ERTSecurity
@@ -472,16 +524,20 @@
 
 - type: randomHumanoidSettings
   id: ERTMedical
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
       rules: ghost-role-information-nonantagonist-rules
-      requirements:
-      - !type:OverallPlaytimeRequirement
-        time: 144000 #SS220 ghostrole-times (40h overall)
+      requirements: #SS220 ghostrole-times (20h sec 10h med) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000
+        - !type:DepartmentTimeRequirement
+          department: Medical
+          time: 36000 #SS220 ghostrole-times (20h sec 10h med) end
       raffle:
         settings: short
       job: ERTMedical
@@ -507,13 +563,20 @@
 
 - type: randomHumanoidSettings
   id: ERTMedicalEVA
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTMedical
   components:
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
       rules: ghost-role-information-nonantagonist-rules
+      requirements: #SS220 ghostrole-times (20h sec 10h med) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000 
+        - !type:DepartmentTimeRequirement
+          department: Medical
+          time: 36000 #SS220 ghostrole-times (20h sec 10h med) end
       raffle:
         settings: short
       job: ERTMedical
@@ -536,7 +599,7 @@
 
 - type: randomHumanoidSettings
   id: CBURNAgent
-  speciesBlacklist: [ Diona, Skeleton, Vox,  Moth, Felinid] #SS220-centcom-human-preset-fix
+  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: EventHumanoidMindShielded
   components:
     - type: Loadout

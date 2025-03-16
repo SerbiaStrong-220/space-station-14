@@ -15,6 +15,7 @@ using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.StatusEffect;
 using Content.Shared.Tag;
 using Robust.Server.GameObjects;
+using Content.Server.SS220.UnembedProjectile;
 
 
 namespace Content.Server.SS220.CultYogg.MiGo;
@@ -31,6 +32,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly StomachSystem _stomach = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly UnembedProjectileSystem _unembedProjectile = default!;
 
     private const string AscensionReagent = "TheBloodOfYogg";
 
@@ -96,6 +98,8 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             }
             _visibility.AddLayer((uid, vis), (int)VisibilityFlags.Ghost, false);
             _visibility.RemoveLayer((uid, vis), (int)VisibilityFlags.Normal, false);
+
+            _unembedProjectile.UnembedChildren(uid);
 
             _appearance.SetData(uid, MiGoVisual.Astral, false);
             _appearance.RemoveData(uid, MiGoVisual.Base);
