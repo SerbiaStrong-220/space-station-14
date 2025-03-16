@@ -63,7 +63,7 @@ namespace Content.Shared.SS220.CluwneComms
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField(required: true)]
-        public LocId Title = "comms-console-announcement-title-station";
+        public LocId Title = "cluwne-comms-console-announcement-title-station";
 
         /// <summary>
         /// Announcement color

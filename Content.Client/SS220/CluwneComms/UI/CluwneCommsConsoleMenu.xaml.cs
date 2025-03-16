@@ -56,9 +56,41 @@ namespace Content.Client.SS220.CluwneComms.UI
             AnnounceButton.Disabled = !CanAnnounce;
             #endregion
 
-            #region Alert
-            InstructionInput.Edit.Placeholder = new Rope.Leaf(_loc.GetString("cluwne-comms-console-menu-instruction-placeholder"));
+            #region AlertText
+            AlertInput.Edit.Placeholder = new Rope.Leaf(_loc.GetString("cluwne-comms-console-menu-alert-placeholder"));
+            AlertInput.MaxLength = maxAnnounceLength;
+            AlertInput.Edit.OnTextChanged += (args) =>
+            {
+                if (args.Control.TextLength > maxAnnounceLength)
+                {
+                    AlertLevelButton.Disabled = true;
+                    AlertLevelButton.ToolTip = Loc.GetString("comms-console-message-too-long");
+                }
+                else
+                {
+                    AlertLevelButton.Disabled = !CanAlert;
+                    AlertLevelButton.ToolTip = null;
+                }
+            };
 
+            InstructionInput.Edit.Placeholder = new Rope.Leaf(_loc.GetString("cluwne-comms-console-menu-instruction-placeholder"));
+            InstructionInput.MaxLength = maxAnnounceLength;
+            MessageInput.Edit.OnTextChanged += (args) =>
+            {
+                if (args.Control.TextLength > maxAnnounceLength)
+                {
+                    AlertLevelButton.Disabled = true;
+                    AlertLevelButton.ToolTip = Loc.GetString("comms-console-message-too-long");
+                }
+                else
+                {
+                    AlertLevelButton.Disabled = !CanAlert;
+                    AlertLevelButton.ToolTip = null;
+                }
+            };
+            #endregion
+
+            #region Alert
             string code = "";//buffer cause idk
             AlertLevelButton.OnItemSelected += args =>
             {

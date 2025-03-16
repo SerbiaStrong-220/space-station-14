@@ -80,7 +80,7 @@ namespace Content.Server.SS220.CluwneComms
 
         private void UpdateUI(EntityUid ent, CluwneCommsConsoleComponent comp)
         {
-            List<string>? levels = null; //add here proto
+            List<string>? levels = null; //ToDo add here proto
 
             CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce, comp.CanAlert, levels);
             _uiSystem.SetUiState(ent, CluwneCommsConsoleUiKey.Key, newState);
@@ -90,7 +90,7 @@ namespace Content.Server.SS220.CluwneComms
         {
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var msg = SharedChatSystem.SanitizeAnnouncement(message.Message, maxLength);
-            var author = Loc.GetString("comms-console-announcement-unknown-sender");
+            var author = Loc.GetString("cluwne-comms-console-announcement-unknown-sender");
             var voiceId = string.Empty;
             if (message.Actor is { Valid: true } mob)
             {
@@ -99,7 +99,7 @@ namespace Content.Server.SS220.CluwneComms
 
                 if (!CanUse(mob, ent))
                 {
-                    _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), ent, message.Actor);
+                    _popupSystem.PopupEntity(Loc.GetString("cluwne-comms-console-permission-denied"), ent, message.Actor);
                     return;
                 }
 
@@ -122,7 +122,7 @@ namespace Content.Server.SS220.CluwneComms
             title ??= ent.Comp.Title;
 
             msg = _chatManager.DeleteProhibitedCharacters(msg, message.Actor);
-            msg += "\n" + Loc.GetString("comms-console-announcement-sent-by") + " " + author;
+            msg += "\n" + Loc.GetString("cluwne-comms-console-announcement-sent-by") + " " + author;
 
             _chatSystem.DispatchStationAnnouncement(ent, msg, title, colorOverride: ent.Comp.Color, voiceId: voiceId);
 
