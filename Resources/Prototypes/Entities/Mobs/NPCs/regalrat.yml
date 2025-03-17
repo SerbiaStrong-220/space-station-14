@@ -12,7 +12,7 @@
   - type: Language
     availableLanguages:
     - id: Galactic
-      canspeak: true
+      canSpeak: true
 #SS220 languages tweaks end
   - type: InputMover
     #SS220 RatKing tweaks and changes update start

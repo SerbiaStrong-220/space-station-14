@@ -7,7 +7,7 @@
   - type: Language
     availableLanguages:
     - id: Galactic
-      canspeak: false
+      canSpeak: false
   - type: GhostRole
     makeSentient: true
     allowSpeech: true

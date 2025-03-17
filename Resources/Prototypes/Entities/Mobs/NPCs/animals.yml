@@ -1240,7 +1240,7 @@
   - type: Language
     availableLanguages:
     - id: Galactic
-      canspeak: false
+      canSpeak: false
 #SS220 languages tweaks end
   - type: Inventory
     templateId: monkeyinventory

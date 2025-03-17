@@ -953,7 +953,7 @@
   - type: Language
     availableLanguages:
     - id: Galactic
-    canSpeak: true
+      canSpeak: true
 #SS220 languages tweaks end
   - type: SliceableFood
     slice: FoodBreadSausageSlice

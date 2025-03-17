@@ -13,7 +13,7 @@
   - type: Language
     availableLanguages:
     - id: Galactic
-      canspeak: true
+      canSpeak: true
 #SS220 languages tweaks end
   - type: MovementSpeedModifier
     baseWalkSpeed: 6
