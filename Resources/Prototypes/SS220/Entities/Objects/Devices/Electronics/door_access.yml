@@ -56,3 +56,12 @@
   components:
   - type: AccessReader
     access: [["Explorer"]]
+
+# BlueShield access
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsBlueshield
+  suffix: Blushield, Locked
+  components:
+  - type: AccessReader
+    access: [["Blueshield"]]

@@ -36,6 +36,11 @@
         Heat: 0.80
   - type: ExplosionResistance
     damageCoefficient: 1 #its a coat. it doesnt do shit
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-brown
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterCoatDetectiveLoadout]
@@ -47,7 +52,11 @@
     sprite: Clothing/OuterClothing/Coats/detective_grey.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/detective_grey.rsi
-
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-grey
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterCoatDetective
@@ -110,6 +119,11 @@
     sprite: Clothing/OuterClothing/Coats/hos_trenchcoat.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/hos_trenchcoat.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-cotton
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageToggleableBase
@@ -123,6 +137,11 @@
     sprite: Clothing/OuterClothing/Coats/jensencoat.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodChaplainHood
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -150,6 +169,11 @@
         reagents:
         - ReagentId: Fiber
           Quantity: 20
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-brown
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageFoldableBase
@@ -172,6 +196,11 @@
       Male: MaleMedic
       Unsexed: MaleMedic
   #ss220 special_sounds end
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLab]
@@ -199,6 +228,11 @@
       Male: MaleMedic
       Unsexed: MaleMedic
   #ss220 special_sounds end
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabChem]
@@ -226,6 +260,11 @@
       Male: MaleMedic
       Unsexed: MaleMedic
   #ss220 special_sounds end
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabViro]
@@ -253,6 +292,11 @@
       Male: MaleMedic
       Unsexed: MaleMedic
   #ss220 special_sounds end
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabGene]
@@ -275,6 +319,11 @@
         Slash: 0.95
         Heat: 0.95
         Caustic: 0.65
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-blue
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabCmo]
@@ -295,6 +344,11 @@
     modifiers:
       coefficients:
         Caustic: 0.75
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatRnd]
@@ -315,6 +369,11 @@
     modifiers:
       coefficients:
         Caustic: 0.75
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatRobo]
@@ -336,6 +395,11 @@
       coefficients:
         Caustic: 0.75
         Radiation: 0.9
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-demron
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatRD]
@@ -352,6 +416,11 @@
     sprite: Clothing/OuterClothing/Coats/pirate.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/pirate.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-brown
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase]
@@ -383,6 +452,11 @@
           - Radio
   #ss220 handheld radio on outer clothing end
 # SS220 new hood end
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-cotton
+    microFiberColor: micro-fibers-red
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -394,6 +468,11 @@
     sprite: Clothing/OuterClothing/Coats/damedanecoat.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/damedanecoat.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-silver
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -405,6 +484,11 @@
     sprite: Clothing/OuterClothing/Coats/clownpriest.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/clownpriest.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-red
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageBase] # SS220 Remove BaseMajorContraband
@@ -422,6 +506,11 @@
         Blunt: 0.8
         Slash: 0.65
         Piercing: 0.85
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -433,6 +522,11 @@
     sprite: SS220/Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi #ss220 resprite
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi #ss220 resprite
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-blue
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageBase]
@@ -444,6 +538,11 @@
     sprite: Clothing/OuterClothing/Coats/syndicate/coatsyndiecap.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/syndicate/coatsyndiecap.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-red
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterCoatHoSTrench] # BaseSyndicateContraband as first parent so contraband system takes that as priority, yeah I know
@@ -455,6 +554,11 @@
     sprite: Clothing/OuterClothing/Coats/syndicate/coatsyndiecaparmored.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/syndicate/coatsyndiecaparmored.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-cotton
+    microFiberColor: micro-fibers-red
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -474,6 +578,11 @@
         Piercing: 0.65
         Heat: 0.85
         Caustic: 0.75
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-cotton
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -489,6 +598,11 @@
     modifiers:
       coefficients:
         Caustic: 0.75
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -504,6 +618,11 @@
     modifiers:
       coefficients:
         Caustic: 0.75
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -515,6 +634,11 @@
     sprite: Clothing/OuterClothing/Coats/space_asshole.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/space_asshole.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-light-brown
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -526,6 +650,11 @@
     sprite: Clothing/OuterClothing/Coats/expensive_coat.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/expensive_coat.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-fur
+    microFiberColor: micro-fibers-pink
+#SS220 Micro_fibers end
 
 #SS220-DressTweak-Begin
 

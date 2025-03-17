@@ -135,6 +135,12 @@
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
+#SS220 Languages tweaks begin
+    - type: Language
+      availableLanguages:
+      - id: Galactic
+        canSpeak: true
+#SS220 Languages tweaks end
     - type: NameIdentifier
       group: Holoparasite
     - type: TypingIndicator
@@ -171,6 +177,12 @@
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
+#SS220 Languages tweaks begin
+    - type: Language
+      availableLanguages:
+      - id: Galactic
+        canSpeak: true
+#SS220 Languages tweaks end
     - type: RandomSprite
       available:
         - enum.DamageStateVisualLayers.BaseUnshaded:
@@ -203,6 +215,14 @@
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
+#SS220 Languages tweaks begin
+    - type: Language
+      availableLanguages:
+      - id: Galactic
+        canSpeak: true
+      - id: Clownish
+        canSpeak: true
+#SS220 Languages tweaks end
     - type: NameIdentifier
       group: Holoparasite
     - type: FootstepModifier

@@ -48,6 +48,7 @@
     - HighRiskItem
     - Sidearm
     - WeaponMultiPhaseEnergyGun
+  - type: TrackedItem
   - type: StaticPrice
     price: 750
   - type: StealTarget

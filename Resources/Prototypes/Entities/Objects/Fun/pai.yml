@@ -81,6 +81,12 @@
     whitelist:
       components:
         - SecretStash
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Universal
+  # SS220-Add-Languages end
 
 - type: entity
   parent: [ PersonalAI]
