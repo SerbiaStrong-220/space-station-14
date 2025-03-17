@@ -494,6 +494,9 @@
     tags:
     - WhitelistChameleon
     - HighRiskItem
+  #ss220 pinpointer ui add start
+  - type: TrackedItem
+  #ss220 pinpointer ui add end
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitRd
   - type: StaticPrice

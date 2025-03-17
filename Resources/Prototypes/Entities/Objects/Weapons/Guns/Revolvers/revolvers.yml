@@ -21,7 +21,7 @@
     tags:
     - Sidearm
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Revolvers/deckard.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/deckard.rsi # ss220 revolvers resprite
     quickEquip: false
     slots:
     - suitStorage
@@ -62,7 +62,7 @@
   description: A rare, custom-built revolver. Use when there is no time for Voight-Kampff test. Uses .45 magnum ammo.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Revolvers/deckard.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/deckard.rsi # ss220 revolvers resprite
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -90,9 +90,9 @@
   description: A detective's best friend. Uses .45 magnum ammo.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/inspector.rsi # ss220 revolvers resprite
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/inspector.rsi # ss220 revolvers resprite
   - type: RevolverAmmoProvider
     proto: CartridgeMagnumRubber #ss-220 civDec
     capacity: 6
@@ -106,9 +106,9 @@
   description: The iconic sidearm of the dreaded death squads. Uses .45 magnum ammo.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Revolvers/mateba.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/mateba.rsi # ss220 revolvers resprite
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Revolvers/mateba.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/mateba.rsi # ss220 revolvers resprite
   - type: Gun
     fireRate: 3
     soundGunshot:
@@ -129,9 +129,9 @@
   description: A robust revolver favoured by Syndicate agents. Uses .45 magnum ammo.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Revolvers/python.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/python.rsi # ss220 revolvers resprite
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Revolvers/python.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/python.rsi # ss220 revolvers resprite
   - type: Gun
     selectedMode: SemiAuto
     fireRate: 2
@@ -162,9 +162,9 @@
   description: An odd, old-looking revolver, favoured by pirate crews. Uses .45 magnum ammo.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Revolvers/pirate_revolver.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/pirate_revolver.rsi # ss220 revolvers resprite
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Revolvers/pirate_revolver.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/pirate_revolver.rsi # ss220 revolvers resprite
   - type: Gun
     fireRate: 1
   - type: ContainerContainer

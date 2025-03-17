@@ -416,23 +416,25 @@
   description: A formal security suit for officers complete with Nanotrasen belt buckle.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/warden.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/warden.rsi #SS220-WardenSkirtFix
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/warden.rsi
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-left
-        sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
-      right:
-      - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-right
-        sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/warden.rsi #SS220-WardenSkirtFix
+  #SS220-WardenSkirtFix-Begin
+  # - type: Item
+  #   inhandVisuals:
+  #     left:
+  #     - state: inhand-left
+  #       color: "#C12D30"
+  #       sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+  #     - state: overlay-inhand-left
+  #       sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+  #     right:
+  #     - state: inhand-right
+  #       color: "#C12D30"
+  #       sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+  #     - state: overlay-inhand-right
+  #       sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+  #SS220-WardenSkirtFix-End
 
 
 - type: entity

@@ -173,9 +173,9 @@
   description: A hood of a goliath cloak, it is made from the hide of resilient fauna from a distant planet.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hoods/goliathcloak.rsi
+    sprite: SS220/Clothing/Head/Hoods/goliathcloak.rsi #SS220-goliathresprite
   - type: Clothing
-    sprite: Clothing/Head/Hoods/goliathcloak.rsi
+    sprite: SS220/Clothing/Head/Hoods/goliathcloak.rsi #SS220-goliathresprite
   - type: Tag
     tags:
     - WhitelistChameleon

@@ -1,0 +1,50 @@
+<controls:FancyWindow  xmlns="https://spacestation14.io"
+                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                       MinSize="500 300"
+                       SetSize="500 500"
+                       Title="{Loc 'pda-id-painter-window-title'}">
+    <BoxContainer Orientation="Horizontal"
+                  HorizontalExpand="True"
+                  VerticalExpand="True"
+                  SeparationOverride="4"
+                  MinWidth="450">
+        <BoxContainer Orientation="Vertical"
+                      HorizontalExpand="True"
+                      VerticalExpand="True"
+                      SeparationOverride="4"
+                      MinWidth="200">
+            <Button Name="InsertPdaButton"
+                    Access="Public"
+                    StyleClasses="OpenBoth"
+                    Text="{Loc 'pda-id-painter-window-insert-pda-button'}"/>
+            <LineEdit Name="SearchPdaBar"
+                      PlaceHolder="{Loc 'pda-id-painter-window-search-pda-bar'}"
+                      HorizontalExpand="True" />
+            <Label Name="SelectedPdaLabel"
+                   Text="{Loc 'pda-id-painter-window-select-pda-label'}">
+            </Label>
+            <ScrollContainer VerticalExpand="True">
+                <BoxContainer Name="PdaList" Orientation="Vertical"/>
+            </ScrollContainer>
+        </BoxContainer>
+        <BoxContainer Orientation="Vertical"
+                      HorizontalExpand="True"
+                      VerticalExpand="True"
+                      SeparationOverride="4"
+                      MinWidth="200">
+            <Button Name="InsertIdButton"
+                    Access="Public"
+                    StyleClasses="OpenBoth"
+                    Text="{Loc 'pda-id-painter-window-insert-id-card-button'}"/>
+            <LineEdit Name="SearchIdBar"
+                      PlaceHolder="{Loc 'pda-id-painter-window-search-id-card-bar'}"
+                      HorizontalExpand="True" />
+            <Label Name="SelectedIdLabel"
+                   Text="{Loc 'pda-id-painter-window-select-id-card-label'}"/>
+            <ScrollContainer VerticalExpand="True">
+                <BoxContainer Name="IdList" Orientation="Vertical"/>
+            </ScrollContainer>
+        </BoxContainer>
+    </BoxContainer>
+
+</controls:FancyWindow>

@@ -162,6 +162,14 @@
     id: PassengerIDCard
   - type: PdaBorderColor
     borderColor: "#a4a3a6" #SS220 PDA-Resprite
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -195,6 +203,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-interntech
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseMedicalPDA
@@ -232,6 +248,14 @@
   - type: GuideHelp
     guides:
     - Medical Doctor
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseSecurityPDA
@@ -265,6 +289,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-interncadet
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -298,6 +330,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-internsci
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -331,6 +371,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-internservice
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -365,6 +413,14 @@
     state: pda-cook
   - type: ReplacementAccent # for random sentience event
     accent: italian
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -398,6 +454,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-hydro
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -461,6 +525,14 @@
         density: 5
         mask:
         - ItemMask
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: ClownPDA
@@ -535,6 +607,14 @@
   - type: Icon
     state: pda-mime
   - type: Muted # for random sentience event
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   name: chaplain PDA
@@ -567,6 +647,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-chaplain
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: ChaplainPDA
@@ -611,6 +699,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-qm
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -643,6 +739,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-cargo
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -684,6 +788,14 @@
       - NewsReaderCartridge
       - AstroNavCartridge
       - MessengerCartridgeClient # SS220 Messenger
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -716,6 +828,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-bartender
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -755,6 +875,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-library
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: LibrarianPDA
@@ -805,6 +933,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-lawyer
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: LawyerPDA
@@ -849,6 +985,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-janitor
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -887,6 +1031,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-captain
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -926,6 +1078,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-hop
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -959,6 +1119,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-ce
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -992,6 +1160,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-engineer
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseMedicalPDA
@@ -1025,6 +1201,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-cmo
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseMedicalPDA
@@ -1062,6 +1246,14 @@
   - type: GuideHelp
     guides:
     - Medical Doctor
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: MedicalPDA
@@ -1107,6 +1299,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-paramedic
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseMedicalPDA
@@ -1140,6 +1340,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-chemistry
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -1174,6 +1382,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-rd
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -1207,6 +1423,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-science
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseSecurityPDA
@@ -1247,6 +1471,14 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseSecurityPDA
@@ -1280,6 +1512,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-warden
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseSecurityPDA
@@ -1312,6 +1552,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-security
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseSecurityPDA
@@ -1375,7 +1623,7 @@
       startingItem: CentCommNewPen #SS220-CentcomFashion
       whitelist:
         tags:
-        - Write 
+        - Write
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
@@ -1477,6 +1725,14 @@
     handheld: true
     bank: 1
     program: 2
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: MusicianPDA
@@ -1521,6 +1777,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-atmos
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -1551,6 +1815,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-clear
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: ClearPDA
@@ -1842,6 +2114,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-medical
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -1866,6 +2146,14 @@
     borderColor: "#254a6c" #SS220 PDA-Resprite
   - type: Icon
     state: pda-reporter
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -1884,6 +2172,14 @@
     borderColor: "#998a50" #SS220 PDA-Resprite
   - type: Icon
     state: pda-zookeeper
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -1903,6 +2199,14 @@
     accentHColor: "#4f0c0c" #SS220 PDA-Resprite
   - type: Icon
     state: pda-boxer
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseSecurityPDA
@@ -1943,6 +2247,14 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseMedicalPDA
@@ -1984,6 +2296,14 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - MedTekCartridge
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: ClownPDA
@@ -2025,6 +2345,13 @@
         tags:
         - Write
   - type: Unremoveable
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -2058,6 +2385,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-seniorengineer
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -2092,6 +2427,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-seniorresearcher
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseMedicalPDA
@@ -2126,6 +2469,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-seniorphysician
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BaseSecurityPDA
@@ -2159,6 +2510,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-seniorofficer
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: SyndiPDA

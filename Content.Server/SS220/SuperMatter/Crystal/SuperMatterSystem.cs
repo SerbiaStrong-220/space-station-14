@@ -45,12 +45,19 @@ public sealed partial class SuperMatterSystem : EntitySystem
         while (query.MoveNext(out var uid, out var smComp))
         {
             if (!HasComp<MetaDataComponent>(uid)
-                || MetaData(uid).Initialized == false)
+                || MetaData(uid).EntityLifeStage < EntityLifeStage.MapInitialized)
                 continue;
 
             // add here to give admins a way to freeze all logic
             if (HasComp<AdminFrozenComponent>(uid))
                 continue;
+
+            // I kinda fixed it, but in case of another misunderstanding
+            if (!smComp.AccumulatedGasesMoles.TryGetValue(Gas.Oxygen, out _))
+            {
+                Log.Debug($"Dictionary for Supermatter crystal {ToPrettyString(uid)} gas accumulator isn't initialized!");
+                continue;
+            }
 
             var crystal = new Entity<SuperMatterComponent>(uid, smComp);
             UpdateDelayed(crystal, flooredFrameTime);
