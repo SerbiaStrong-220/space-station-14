@@ -9,6 +9,12 @@
   - type: Input
     context: "ghost"
   - type: Spectral
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canspeak: true
+#SS220 languages tweaks end
   - type: MovementSpeedModifier
     baseWalkSpeed: 6
     baseSprintSpeed: 6

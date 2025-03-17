@@ -198,6 +198,12 @@
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
+#SS220 languages tweaks begin
+  - type: language
+    availableLanguages:
+    - id: Galactic
+      canspeak: true
+#SS220 languages tweaks end
   - type: MovementSpeedModifier
     baseWalkSpeed: 0.25
     baseSprintSpeed: 0.5

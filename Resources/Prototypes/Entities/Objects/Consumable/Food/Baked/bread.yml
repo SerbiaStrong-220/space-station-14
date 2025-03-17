@@ -949,6 +949,12 @@
     flavors:
     - meaty
     - bread
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    canSpeak: true
+#SS220 languages tweaks end
   - type: SliceableFood
     slice: FoodBreadSausageSlice
   - type: SolutionContainerManager
