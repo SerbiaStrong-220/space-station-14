@@ -134,7 +134,8 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
     public bool TrySanitizeEmoteShorthands(string message,
         EntityUid speaker,
         out string sanitized,
-        [NotNullWhen(true)] out string? emote)
+        [NotNullWhen(true)] out string? emote,
+        bool trim = true) // SS220 language
     {
         emote = null;
         sanitized = message;
@@ -176,22 +177,26 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
             message = r.Replace(message, string.Empty);
         }
 
-        // SS220 no English begin
-        var language = _entityManager.System<LanguageSystem>();
-        var checkMessage = language.SanitizeMessage(speaker, speaker, sanitized, out _);
-        var ntAllowed = checkMessage.Replace("NanoTrasen", string.Empty, StringComparison.OrdinalIgnoreCase);
-        ntAllowed = ntAllowed.Replace("nt", string.Empty, StringComparison.OrdinalIgnoreCase);
+        // SS220 lagnuages begin
+        if (trim)
+            sanitized = message.Trim();
+        else
+            sanitized = message;
+        // SS220 lagnuages end
 
-        // Remember, no English
-        if (Regex.Matches(ntAllowed, @"[a-zA-Z]").Any())
-        {
-            sanitized = string.Empty;
-            emote = "кашляет";
-            return true;
-        }
-        // SS220 no English end
-
-        sanitized = message.Trim();
         return emote is not null;
     }
+
+    // SS220 no English begin
+    public bool CheckNoEnglish(EntityUid speaker, string message)
+    {
+        var ntAllowed = message.Replace("NanoTrasen", string.Empty, StringComparison.OrdinalIgnoreCase);
+        ntAllowed = ntAllowed.Replace("nt", string.Empty, StringComparison.OrdinalIgnoreCase);
+
+        if (Regex.Matches(ntAllowed, @"[a-zA-Z]").Any())
+            return false;
+
+        return true;
+    }
+    // SS220 no English end
 }

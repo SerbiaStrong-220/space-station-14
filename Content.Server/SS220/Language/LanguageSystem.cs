@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using Content.Shared.SS220.Language.Systems;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CCVars;
+using Content.Shared.Chat;
 
 namespace Content.Server.SS220.Language;
 
@@ -115,19 +116,25 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             var curString = languageStrings[i];
             if (CanUnderstand(listener, curString.Item2.ID))
             {
-                sanitizedMessage.Append(curString.Item1);
                 sanitizedColorlessMessage.Append(curString.Item1);
+                var newMessage = curString.Item1;
+                if (i + 1 == languageStrings.Count)
+                    newMessage = newMessage.Trim();
+
+                if (setColor)
+                    newMessage = SetColor(newMessage, curString.Item2);
+
+                sanitizedMessage.Append(newMessage);
             }
             else
             {
-                var scrambledString = ScrambleMessage(message, curString.Item2);
+                var scrambledString = ScrambleMessage(curString.Item1, curString.Item2);
                 sanitizedColorlessMessage.Append(scrambledString);
+                if (i + 1 == languageStrings.Count)
+                    scrambledString = scrambledString.Trim();
+
                 if (setColor)
-                {
-                    if (i + 1 == languageStrings.Count)
-                        scrambledString = scrambledString.Trim();
                     scrambledString = SetColor(scrambledString, curString.Item2);
-                }
 
                 sanitizedMessage.Append(scrambledString);
             }
@@ -198,6 +205,51 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         }
 
         return list;
+    }
+
+    /// <summary>
+    ///     Get a list of message parts with a language tag
+    ///     <paramref name="skipDefaultLanguageKeyAtTheBeginning"/> will the first key be skipped if it is equal to the default language key.
+    /// </summary>
+    public List<(string, string)> GetMessagesWithLanguageKey(EntityUid source, string message, bool skipDefaultLanguageKeyAtTheBeginning = false)
+    {
+        var list = new List<(string, string)>();
+        var defaultLanguage = GetSelectedLanguage(source);
+        if (defaultLanguage == null)
+        {
+            list.Add((string.Empty, message));
+            return list;
+        }
+
+        var splited = SplitMessageByLanguages(source, message, defaultLanguage);
+        for (var i = 0; i < splited.Count; i++)
+        {
+            var languageMessage = splited[i].Item1;
+            var language = splited[i].Item2;
+            if (skipDefaultLanguageKeyAtTheBeginning && i == 0 && language == defaultLanguage)
+            {
+                // Если в первой части сообщения нет языкового тега, отличного от тега языка по умолчанию, то он пропускается.
+                list.Add((string.Empty, languageMessage));
+                continue;
+            }
+
+            var key = LanguageManager.KeyPrefix + language.Key;
+            list.Add((key, languageMessage));
+        }
+
+        return list;
+    }
+
+    public string ChangeLanguageMessages(EntityUid source, string message, Func<string, string> func, bool skipDefaultLanguageKeyAtTheBeginning = false)
+    {
+        var newMessage = string.Empty;
+        foreach (var (key, languageMessage) in GetMessagesWithLanguageKey(source, message, skipDefaultLanguageKeyAtTheBeginning))
+        {
+            var newLangMessage = func.Invoke(languageMessage);
+            newMessage += $"{key} {newLangMessage}";
+        }
+
+        return newMessage.Trim();
     }
 
     /// <summary>
