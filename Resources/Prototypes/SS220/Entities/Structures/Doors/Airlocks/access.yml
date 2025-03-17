@@ -41,3 +41,21 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsMagistrate ]
+
+- type: entity
+  parent: AirlockScience
+  id: AirlockExplorerLocked
+  suffix: Explorer, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsExplorer ]
+
+- type: entity
+  parent: AirlockScienceGlass
+  id: AirlockExplorerGlassLocked
+  suffix: Explorer, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsExplorer ]

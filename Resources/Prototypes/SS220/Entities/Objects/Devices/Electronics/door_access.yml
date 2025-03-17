@@ -48,3 +48,11 @@
   components:
   - type: AccessReader
     access: [["Magistrate"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsExplorer
+  suffix: Explorer, Locked
+  components:
+  - type: AccessReader
+    access: [["Explorer"]]
