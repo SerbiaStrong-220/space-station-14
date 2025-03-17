@@ -20,5 +20,5 @@ public sealed partial class ShoutActionEvent : InstantActionEvent
     /// Shouted phrase when action button is pressed
     /// </summary>
     [DataField]
-    public ProtoId<DatasetPrototype>? ShoutPhrases;
+    public ProtoId<LocalizedDatasetPrototype>? ShoutPhrases;
 }
