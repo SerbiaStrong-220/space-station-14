@@ -219,6 +219,7 @@
   color: "#215263"
   metabolisms:
     Medicine:
+      metabolismRate: 0.1 #ss220 combat medicine be-gone
       effects:
       - !type:HealthChange
         damage:
@@ -985,11 +986,12 @@
   color: "#283332"
   metabolisms:
     Medicine:
+      metabolismRate: 0.1 #ss220 combat medicine be-gone
       effects:
       - !type:HealthChange
         damage:
           types:
-            Slash: -3
+            Slash: -1.8 #ss220 combat medicine be-gone
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -1006,13 +1008,14 @@
   physicalDesc: reagent-physical-desc-fizzy
   flavor: fizzy
   color: "#b9bf93"
-  metabolisms:
+  metabolisms: 
     Medicine:
+      metabolismRate: 0.1 #ss220 combat medicine be-gone
       effects:
       - !type:HealthChange
         damage:
           types:
-            Piercing: -4
+            Piercing: -1.8 # ss 220 p.s why 4 even was here loooool
             Blunt: 0.1
       - !type:HealthChange
         conditions:
@@ -1032,11 +1035,12 @@
   color: "#ff3636"
   metabolisms:
     Medicine:
+      metabolismRate: 0.1 #ss220 combat medicine be-gone
       effects:
       - !type:HealthChange
         damage:
           types:
-            Blunt: -3.5
+            Blunt: -1.8 #ss220 combat medicine be-gone
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold

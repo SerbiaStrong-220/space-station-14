@@ -8,6 +8,7 @@ using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Content.Server.SS220.Language; // SS220-Add-Languages
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -21,6 +22,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         base.Initialize();
         SubscribeLocalEvent<HeadsetComponent, RadioReceiveEvent>(OnHeadsetReceive);
         SubscribeLocalEvent<HeadsetComponent, EncryptionChannelsChangedEvent>(OnKeysChanged);
+        SubscribeLocalEvent<HeadsetComponent, GetLanguageListenerEvent>(OnGetLanguage); // SS220 languages
 
         SubscribeLocalEvent<WearingHeadsetComponent, EntitySpokeEvent>(OnSpeak);
 
@@ -121,4 +123,13 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
             args.Disabled = true;
         }
     }
+
+    // SS220 languages begin
+    private void OnGetLanguage(Entity<HeadsetComponent> ent, ref GetLanguageListenerEvent args)
+    {
+        var actorUid = Transform(ent).ParentUid;
+        if (HasComp<ActorComponent>(actorUid))
+            RaiseLocalEvent(actorUid, ref args);
+    }
+    // SS220 languages end
 }

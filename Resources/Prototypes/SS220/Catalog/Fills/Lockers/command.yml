@@ -17,6 +17,7 @@
     - id: BlueShieldGasMask
     - id: RubberStampBlueShield #SS220-additional paperwork
     - id: JetpackMiniBlueFilled #SS220 BlueShield Rework
+    - id: PinpointerCrew
 
 - type: entity
   parent: GunSafe
