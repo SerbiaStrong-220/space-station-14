@@ -26,3 +26,18 @@
   - ";ЯО мед"
   - ";Техи меда убивают, помощи"
   - ";Помогите"
+
+- type: dataset
+  id: RandomAnomalyInjectorsSpawn
+  values:
+  - AnomalyTrapPyroclastic
+  - AnomalyTrapElectricity
+  - AnomalyTrapShadow
+  - AnomalyTrapIce
+  - AnomalyTrapFlora
+  - AnomalyTrapBluespace
+  - AnomalyTrapFlesh
+  - AnomalyTrapGravity
+  - AnomalyTrapTech
+  - AnomalyTrapRock
+  - AnomalyTrapSanta

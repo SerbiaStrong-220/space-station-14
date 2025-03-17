@@ -14,6 +14,7 @@ using Content.Server.SS220.DieOfFate;
 using Content.Server.SS220.Hallucination;
 using Content.Server.Storage.Components;
 using Content.Server.Stunnable;
+using Content.Shared.Anomaly.Components;
 using Content.Shared.Cargo.Prototypes;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -52,6 +53,7 @@ using Content.Shared.VendingMachines;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -111,6 +113,7 @@ public sealed class TarotCardSystem : EntitySystem
     private const string JusticeItems = "JusticeItems";
     private const string RandomArcadeSpawner = "RandomArcadeSpawner";
     private const string RandomMessageToChat = "RandomMessageToChat";
+    private const string RandomAnomalyInjectorsSpawn = "RandomAnomalyInjectorsSpawn";
 
     public override void Initialize()
     {
@@ -194,6 +197,7 @@ public sealed class TarotCardSystem : EntitySystem
                 ApplyReversedEffect(card, target, PushPlayers, OpenNearestAirlock);
                 break;
             case TarotCardType.HighPriestess:
+                ApplyReversedEffect(card, target, SpawnRandomAnomaly, Slowdown);
                 break;
             case TarotCardType.Empress:
                 ApplyReversedEffect(card, target, EnsurePacified, TransferSolution);
@@ -319,6 +323,33 @@ public sealed class TarotCardSystem : EntitySystem
             var foo = _transform.GetMapCoordinates(ent, xform: tempXform).Position - _transform.GetMapCoordinates(target, xform: Transform(target)).Position;
             _throwing.TryThrow(ent, foo*2, 4f, target, 0);
         }
+    }
+
+    private void Slowdown(EntityUid target)
+    {
+        var moveSpeedEffect = new MovespeedModifier()
+        {
+            StatusLifetime = 10f,
+            WalkSpeedModifier = 0.15f,
+            SprintSpeedModifier = 0.15f,
+        };
+
+        moveSpeedEffect.Effect(new EntityEffectBaseArgs(target, EntityManager));
+    }
+
+    private void SpawnRandomAnomaly(EntityUid target)
+    {
+        if (HasComp<InnerBodyAnomalyComponent>(target))
+            return;
+
+        var randomAnomaly = _random.Pick(_proto.Index<DatasetPrototype>(RandomAnomalyInjectorsSpawn).Values);
+        var randomEntityAnomaly = Spawn(randomAnomaly, MapCoordinates.Nullspace);
+
+        if (!TryComp<InnerBodyAnomalyInjectorComponent>(randomEntityAnomaly, out var injectorComponent))
+            return;
+
+        EntityManager.AddComponents(target, injectorComponent.InjectionComponents);
+        QueueDel(randomEntityAnomaly);
     }
 
     private void TransferSolution(EntityUid target)
