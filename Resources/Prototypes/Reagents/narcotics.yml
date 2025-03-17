@@ -21,7 +21,7 @@
           min: 30
         damage:
           types:
-            Poison: 1 #ss220 combat medicine be-gone
+            Poison: 1.5 #ss220 combat medicine be-gone
             Asphyxiation: 2
     Narcotic:
       effects:
