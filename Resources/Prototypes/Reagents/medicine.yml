@@ -219,7 +219,6 @@
   color: "#215263"
   metabolisms:
     Medicine:
-      metabolismRate: 0.1 #ss220 combat medicine be-gone
       effects:
       - !type:HealthChange
         damage:
