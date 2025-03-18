@@ -222,6 +222,7 @@
     availableLanguages:
     - id: Galactic
       canSpeak: true
+#SS220 Languages tweaks end
 
 - type: entity
   parent: MobHonkBot
@@ -268,6 +269,7 @@
     availableLanguages:
     - id: Galactic
       canSpeak: true
+#SS220 Languages tweaks end
 
 - type: entity
   parent: MobSiliconBase
@@ -401,6 +403,7 @@
     availableLanguages:
     - id: Galactic
       canSpeak: false
+#SS220 Languages tweaks end
 
 - type: entity
   parent: MobSiliconBase
@@ -473,3 +476,4 @@
     availableLanguages:
     - id: Galactic
       canSpeak: true
+#SS220 Languages tweaks end
