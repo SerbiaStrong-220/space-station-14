@@ -61,6 +61,12 @@
     accent: dwarf
   - type: Speech
     speechSounds: Bass
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Eldwarf
+  # SS220-Add-Languages end
   - type: HumanoidAppearance
     species: Human
     hideLayersOnEquip:

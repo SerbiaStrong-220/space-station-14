@@ -1,8 +1,9 @@
-﻿﻿using Content.Client.Stylesheets;
+using Content.Client.Stylesheets;
 using Content.Client.SS220.UserInterface.System.Chat.Controls;
 using Content.Shared.Chat;
 using Content.Shared.Input;
 using Robust.Client.UserInterface.Controls;
+using Content.Client.SS220.UserInterface.System.Chat.Controls.LanguageSettings;
 
 namespace Content.Client.UserInterface.Systems.Chat.Controls;
 
@@ -13,6 +14,7 @@ public class ChatInputBox : PanelContainer
     public readonly HistoryLineEdit Input;
     public readonly ChannelFilterButton FilterButton;
     public readonly HighlightButton HighlightButton; //ss220 highlight words
+    public readonly LanguageSettingsButton LanguageSettings; // SS220 languages
     protected readonly BoxContainer Container;
     protected ChatChannel ActiveChannel { get; private set; } = ChatChannel.Local;
 
@@ -53,8 +55,16 @@ public class ChatInputBox : PanelContainer
             StyleClasses = {"chatFilterOptionButton"}
         };
         //ss220 highlight words end
+        // SS220 languages begin
+        LanguageSettings = new LanguageSettingsButton()
+        {
+            Name = "LanguageSettings",
+            StyleClasses = { "chatFilterOptionButton" }
+        };
+        // SS220 languages end
         Container.AddChild(FilterButton);
         Container.AddChild(HighlightButton); //ss220 highlight words
+        Container.AddChild(LanguageSettings); // SS220 languages
         AddStyleClass(StyleNano.StyleClassChatSubPanel);
         ChannelSelector.OnChannelSelect += UpdateActiveChannel;
     }

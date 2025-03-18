@@ -119,6 +119,12 @@
     actionPrototype: DionaGibAction
     allowedStates:
     - Dead
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Rootspeak
+  # SS220-Add-Languages end
   - type: Inventory
     templateId: diona
     femaleDisplacements:
