@@ -5,6 +5,12 @@
   description: A strange handheld alien device.
   abstract: true
   components:
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 languages tweaks
   - type: Sprite
     sprite: Objects/Specific/Xenoarchaeology/item_artifacts.rsi
     layers:
