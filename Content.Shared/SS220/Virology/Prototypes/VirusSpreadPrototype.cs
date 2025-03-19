@@ -3,6 +3,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Virology.Prototypes;
 
+[Prototype("virusSpread")]
 public sealed partial class VirusSpreadPrototype : IPrototype
 {
     [IdDataField]

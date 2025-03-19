@@ -14,7 +14,7 @@ public sealed partial class VirusPrototype : IPrototype
     public List<string> Symptoms = new();
 
     [DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<VirusSpreadPrototype>))]
-    public List<string> Spread = new();
+    public List<string> Spreads = new();
 
     [DataField]
     public string DNA = string.Empty;
