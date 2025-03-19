@@ -217,6 +217,12 @@
       path: /Audio/Items/bikehorn.ogg
       params:
         variation: 0.125
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 Languages tweaks end
 
 - type: entity
   parent: MobHonkBot
@@ -258,6 +264,12 @@
     totalIntensity: 10
     intensitySlope: 5
     canCreateVacuum: false
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 Languages tweaks end
 
 - type: entity
   parent: MobSiliconBase
@@ -386,6 +398,12 @@
     interactFailureString: petting-failure-mimebot
   - type: Inventory
     templateId: head
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+#SS220 Languages tweaks end
 
 - type: entity
   parent: MobSiliconBase
@@ -453,3 +471,9 @@
     channels:
     - Common
     - Supply
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 Languages tweaks end
