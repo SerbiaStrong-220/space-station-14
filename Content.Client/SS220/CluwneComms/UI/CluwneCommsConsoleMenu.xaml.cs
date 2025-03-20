@@ -28,7 +28,7 @@ namespace Content.Client.SS220.CluwneComms.UI
         public event Action? OnEmergencyLevel;
         public event Action<string>? OnAlertLevel;
         public event Action<string>? OnAnnounce;
-        public event Action<string, string>? OnAlert;
+        public event Action<string, string, string>? OnAlert;
         public CluwneCommsConsoleMenu()
         {
             IoCManager.InjectDependencies(this);
@@ -88,6 +88,7 @@ namespace Content.Client.SS220.CluwneComms.UI
                     AlertLevelButton.ToolTip = null;
                 }
             };
+
             #endregion
 
             #region Alert
@@ -119,7 +120,7 @@ namespace Content.Client.SS220.CluwneComms.UI
                 }
             };
 
-            AlertButton.OnPressed += _ => OnAlert?.Invoke(code, Rope.Collapse(MessageInput.TextRope));//make here button string
+            AlertButton.OnPressed += _ => OnAlert?.Invoke(code, Rope.Collapse(AlertInput.TextRope), Rope.Collapse(InstructionInput.TextRope));//make here button string
             AlertButton.Disabled = !CanAlert;
         }
         #endregion
@@ -129,11 +130,6 @@ namespace Content.Client.SS220.CluwneComms.UI
             UpdateCountdown();
         }
 
-
-        // The current alert could make levels unselectable, so we need to ensure that the UI reacts properly.
-        // If the current alert is unselectable, the only item in the alerts list will be
-        // the current alert. Otherwise, it will be the list of alerts, with the current alert
-        // selected.
         public void UpdateAlertLevels(List<string>? alerts)
         {
             AlertLevelButton.Clear();

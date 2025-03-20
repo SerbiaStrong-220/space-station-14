@@ -42,11 +42,12 @@ namespace Content.Client.SS220.CluwneComms.UI
         {
         }
 
-        public void AlertButtonPressed(string level, string message)
+        public void AlertButtonPressed(string level, string message, string instructions)
         {
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var msg = SharedChatSystem.SanitizeAnnouncement(message, maxLength);
-            SendMessage(new CluwneCommsConsoleAlertMessage(level, msg));
+            var instr = SharedChatSystem.SanitizeAnnouncement(instructions, maxLength);
+            SendMessage(new CluwneCommsConsoleAlertMessage(level, msg, instr));
         }
 
         protected override void UpdateState(BoundUserInterfaceState state)

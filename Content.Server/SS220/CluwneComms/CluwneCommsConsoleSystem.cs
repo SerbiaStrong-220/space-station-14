@@ -27,6 +27,10 @@ using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
 using Content.Server.Communications;
 using Robust.Shared.Timing;
+using Content.Server.CartridgeLoader.Cartridges;
+using Content.Shared.MassMedia.Systems;
+using Content.Server.GameTicking;
+using Content.Shared.Decals;
 
 namespace Content.Server.SS220.CluwneComms
 {
@@ -40,6 +44,7 @@ namespace Content.Server.SS220.CluwneComms
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+        [Dependency] private readonly GameTicker _ticker = default!;
 
         public override void Initialize()
         {
@@ -47,6 +52,7 @@ namespace Content.Server.SS220.CluwneComms
 
             SubscribeLocalEvent<CluwneCommsConsoleComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<CluwneCommsConsoleComponent, CluwneCommsConsoleAnnounceMessage>(OnAnnounceMessage);
+            SubscribeLocalEvent<CluwneCommsConsoleComponent, CluwneCommsConsoleAlertMessage>(OnAlertMessage);
         }
         public void OnMapInit(Entity<CluwneCommsConsoleComponent> ent, ref MapInitEvent args)
         {
@@ -86,20 +92,20 @@ namespace Content.Server.SS220.CluwneComms
             _uiSystem.SetUiState(ent, CluwneCommsConsoleUiKey.Key, newState);
         }
 
-        private void OnAnnounceMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleAnnounceMessage message)
+        private void OnAnnounceMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleAnnounceMessage args)
         {
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
-            var msg = SharedChatSystem.SanitizeAnnouncement(message.Message, maxLength);
+            var msg = SharedChatSystem.SanitizeAnnouncement(args.Message, maxLength);
             var author = Loc.GetString("cluwne-comms-console-announcement-unknown-sender");
             var voiceId = string.Empty;
-            if (message.Actor is { Valid: true } mob)
+            if (args.Actor is { Valid: true } mob)
             {
                 if (!ent.Comp.CanAnnounce)
                     return;
 
                 if (!CanUse(mob, ent))
                 {
-                    _popupSystem.PopupEntity(Loc.GetString("cluwne-comms-console-permission-denied"), ent, message.Actor);
+                    _popupSystem.PopupEntity(Loc.GetString("cluwne-comms-console-permission-denied"), ent, args.Actor);
                     return;
                 }
 
@@ -121,12 +127,51 @@ namespace Content.Server.SS220.CluwneComms
             Loc.TryGetString(ent.Comp.Title, out var title);
             title ??= ent.Comp.Title;
 
-            msg = _chatManager.DeleteProhibitedCharacters(msg, message.Actor);
+            msg = _chatManager.DeleteProhibitedCharacters(msg, args.Actor);
             msg += "\n" + Loc.GetString("cluwne-comms-console-announcement-sent-by") + " " + author;
 
             _chatSystem.DispatchStationAnnouncement(ent, msg, title, colorOverride: ent.Comp.Color, voiceId: voiceId);
 
-            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(message.Actor):player} has sent the following station announcement: {msg}");
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(args.Actor):player} has sent the following station announcement: {msg}");
+        }
+        private void OnAlertMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleAlertMessage args)
+        {
+            //alert announce from AlertLevelSystem
+
+            var filter = _stationSystem.GetInOwningStation(station);
+            _audio.PlayGlobal(detail.Sound, filter, true, detail.Sound.Params);
+
+            _chatSystem.DispatchStationAnnouncement(station, announcementFull, playSound: playDefault, colorOverride: detail.Color, sender: stationName);
+
+            //Intructions from console
+            //copied from NewsSystem
+            var title = "";//add some naming in component here
+            var content = args.Message.Trim();
+
+            var article = new NewsArticle
+            {
+                //Title = title.Length <= _news.MaxTitleLength ? title : $"{title[..MaxTitleLength]}...",
+                Title = title,
+                //Content = content.Length <= MaxContentLength ? content : $"{content[..MaxContentLength]}...",
+                Content = content,
+                Author = new TryGetIdentityShortInfoEvent(ent, args.Actor).Title,//name of console user
+                ShareTime = _ticker.RoundDuration()
+            };
+
+            _adminLogger.Add(LogType.Chat, LogImpact.Medium, $"{ToPrettyString(args.Actor):actor} created news article {article.Title} by {article.Author}: {article.Content}");
+
+            _chatManager.SendAdminAnnouncement(Loc.GetString("news-publish-admin-announcement",
+                ("actor", args.Actor),
+                ("title", article.Title),
+                ("author", article.Author ?? Loc.GetString("news-read-ui-no-author"))
+                ));
+
+            var ev = new NewsArticlePublishedEvent(article);
+            var query = EntityQueryEnumerator<NewsReaderCartridgeComponent>();
+            while (query.MoveNext(out var readerUid, out _))
+            {
+                RaiseLocalEvent(readerUid, ref ev);
+            }
         }
 
         private bool CanUse(EntityUid user, EntityUid console)

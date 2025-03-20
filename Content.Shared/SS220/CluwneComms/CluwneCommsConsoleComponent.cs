@@ -89,10 +89,11 @@ namespace Content.Shared.SS220.CluwneComms
     }
 
     [Serializable, NetSerializable]
-    public sealed class CluwneCommsConsoleAlertMessage(string alert, string message) : BoundUserInterfaceMessage
+    public sealed class CluwneCommsConsoleAlertMessage(string alert, string message, string instruntions) : BoundUserInterfaceMessage
     {
         public readonly string Alert = alert;
         public readonly string Message = message;
+        public readonly string Instruntions = instruntions;
     }
 
     [Serializable, NetSerializable]
