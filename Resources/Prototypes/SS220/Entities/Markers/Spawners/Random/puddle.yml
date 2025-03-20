@@ -1,0 +1,24 @@
+- type: entity
+  id: RandomPuddleSoda
+  name: random soda puddle spawner
+  parent: MarkerBase
+  placement:
+    mode: AlignTileAny
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Fluids/puddle.rsi
+        state: splat0
+  - type: RandomSpawner
+    prototypes:
+      - PuddleSpaceUp
+      - PuddlePowerGame
+      - PuddleFourteenLoko
+      - PuddleLemonLime
+      - PuddleSolDry
+      - PuddleIcedTea
+      - PuddleRootBeer
+      - PuddleCola
+    chance: 0.8
+    offset: 0.0
