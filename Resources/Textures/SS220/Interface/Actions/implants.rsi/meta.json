@@ -9,6 +9,12 @@
   "states": [
     {
       "name": "adrenal"
+    },
+    {
+      "name": "dna-copy"
+    },
+    {
+      "name": "mindslave_fixer"
     }
   ]
 }
