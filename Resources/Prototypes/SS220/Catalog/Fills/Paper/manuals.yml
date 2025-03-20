@@ -25,3 +25,15 @@
   components:
   - type: Paper
     content: book-text-identity-implant-info
+
+- type: entity
+  parent: PaperNtFormSec
+  id: PilotBriefing
+  name: брифинг пилота
+  components:
+    - type: Paper
+      content: pilot-briefing-text
+      stampState: paper_stamp-centcom
+      stampedBy:
+      - stampedName: Центком
+        stampedColor: "#006000"
