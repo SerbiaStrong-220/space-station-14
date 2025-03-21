@@ -32,6 +32,11 @@
       - Slicing
     useSound:
       path: /Audio/Items/Culinary/chop.ogg
+# Start of SS220 Throwable Changes
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+# End of SS220 Throwable Changes
 
 - type: entity
   name: kitchen knife
@@ -52,6 +57,15 @@
     guides:
     - Chef
     - FoodRecipes
+# Start of SS220 Throwable Changes
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 8
+# End of SS220 Throwable Changes
 
 - type: entity
   name: butcher's cleaver
@@ -79,6 +93,15 @@
     guides:
     - Chef
     - FoodRecipes
+# Start of SS220 Throwable Changes
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 11
+# End of SS220 Throwable Changes
 
 - type: entity
   name: combat knife
@@ -220,6 +243,14 @@
     sprite: Objects/Weapons/Melee/shiv.rsi
   - type: DisarmMalus
     malus: 0.225
+# Start of SS220 Throwable Changes
+  - type: ThrowingAngle
+    angularVelocity: true # spins
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 4.5
+# End of SS220 Throwable Changes
 
 - type: entity
   name: reinforced shiv
@@ -239,6 +270,12 @@
     sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
+# Start of SS220 Throwable Changes
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 6
+# End of SS220 Throwable Changes
 
 - type: entity
   name: plasma shiv
@@ -258,6 +295,12 @@
     sprite: Objects/Weapons/Melee/plasma_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/plasma_shiv.rsi
+# Start of SS220 Throwable Changes
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 7.5
+# End of SS220 Throwable Changes
 
 - type: entity
   name: uranium shiv
@@ -278,6 +321,13 @@
     sprite: Objects/Weapons/Melee/uranium_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/uranium_shiv.rsi
+# Start of SS220 Throwable Changes
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 6
+        Radiation: 3
+# End of SS220 Throwable Changes
 
 - type: entity
   name: throwing knife

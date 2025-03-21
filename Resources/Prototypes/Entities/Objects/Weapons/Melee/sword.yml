@@ -53,6 +53,18 @@
     weight: 0.0002 # 5,000 times less likely than 1 regular animal
   - type: PirateAccent
     # not putting a BlockMovement component here cause that's funny.
+# Start of SS220 Throwable Changes
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 14
+# End of SS220 Throwable Changes
 
 - type: entity
   name: katana
@@ -84,6 +96,18 @@
   - type: Item
     sprite: Objects/Weapons/Melee/katana.rsi
   - type: DisarmMalus
+# Start of SS220 Throwable Changes
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 12.5
+# End of SS220 Throwable Changes
 
 - type: entity
   name: energy katana
@@ -139,6 +163,18 @@
   - type: Item
     sprite: Objects/Weapons/Melee/machete.rsi
   - type: DisarmMalus
+# Start of SS220 Throwable Changes
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 12.5
+# End of SS220 Throwable Changes
 
 - type: entity
   name: claymore
@@ -166,6 +202,12 @@
     slots:
     - back
   - type: DisarmMalus
+# Start of SS220 Throwable Changes
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 6
+# End of SS220 Throwable Changes
 
 - type: entity
   name: cutlass
@@ -192,6 +234,18 @@
   - type: Item
     sprite: Objects/Weapons/Melee/cutlass.rsi
   - type: DisarmMalus
+# Start of SS220 Throwable Changes
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 13.5
+# End of SS220 Throwable Changes
 
 - type: entity
   name: throngler
@@ -223,3 +277,9 @@
     - type: Grammar
       attributes:
         proper: true
+# Start of SS220 Throwable Changes
+    - type: DamageOtherOnHit
+      damage:
+        types:
+          Blunt: 12
+# End of SS220 Throwable Changes

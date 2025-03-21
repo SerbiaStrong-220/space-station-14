@@ -38,6 +38,10 @@
   - type: Tag
     tags:
     - MinamotoNoYorimitsu
+# Start of SS220 Throwable Changes
+  - type: ThrowingAngle
+    angle: 300
+# End of SS220 Throwable Changes
 
 # Рапира
 - type: entity
@@ -72,6 +76,18 @@
     tags:
     - Rapier
   - type: DisarmMalus
+# Start of SS220 Throwable Changes
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 22.5
+# End of SS220 Throwable Changes
 
 - type: entity
   parent: Rapier
@@ -82,6 +98,12 @@
     damage:
       types:
         Piercing: 15
+# Start of SS220 Throwable Changes
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 12.5
+# End of SS220 Throwable Changes
 
 # Офицерский кортик
 - type: entity
@@ -106,6 +128,14 @@
   - type: Tag
     tags:
     - OfficerCutlass
+# Start of SS220 Throwable Changes
+  - type: ThrowingAngle
+    angle: 45
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 11.5
+# End of SS220 Throwable Changes
 
 # Цепная меч-пила
 - type: entity

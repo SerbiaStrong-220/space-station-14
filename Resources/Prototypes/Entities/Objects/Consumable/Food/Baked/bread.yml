@@ -706,6 +706,15 @@
       types:
         Blunt: 1 # bonk
 # Tastes like France.
+# Start of SS220 Throwable Changes
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 1
+# End of SS220 Throwable Changes
 
 - type: entity
   name: cotton baguette

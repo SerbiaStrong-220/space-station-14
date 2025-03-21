@@ -55,6 +55,13 @@
     stealGroup: FireAxe
   - type: IgniteOnMeleeHit
     fireStacks: -4
+# Start of SS220 Throwable Changes
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 12
+# End of SS220 Throwable Changes
+
 
 - type: entity
   id: FireAxeFlaming
