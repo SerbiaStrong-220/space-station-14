@@ -16,6 +16,7 @@ using Robust.Shared.Network;
 using Robust.Server.Player;
 using Robust.Shared.GameObjects;
 using System.Linq;
+using Content.Server.SS220.Language;
 
 namespace Content.Server.SS220.TTS;
 
@@ -31,6 +32,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly IServerNetManager _netManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly LanguageSystem _language = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -48,7 +50,6 @@ public sealed partial class TTSSystem : EntitySystem
 
         SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
-        SubscribeLocalEvent<EntitySpokeScrambledEvent>(OnEntitySpokeScrambled);
         SubscribeLocalEvent<RadioSpokeEvent>(OnRadioReceiveEvent);
         SubscribeLocalEvent<AnnouncementSpokeEvent>(OnAnnouncementSpoke);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
@@ -193,12 +194,37 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void OnEntitySpoke(EntityUid uid, TTSComponent component, EntitySpokeEvent args)
     {
-        HandleEntitySpoke(uid, uid, args.Message, args.IsRadio, args.ObfuscatedMessage);
+        HashSet<EntityUid> receivers = new();
+        foreach (var receiver in Filter.Pvs(uid).Recipients)
+        {
+            if (receiver.AttachedEntity is { } ent)
+                receivers.Add(ent);
+        }
+
+        HandleEntitySpokeWithLanguage(uid, receivers, args.MessageWithLanguageKeys, args.IsRadio, args.ObfuscatedMessage);
     }
 
-    private async void OnEntitySpokeScrambled(EntitySpokeScrambledEvent args)
+    private async void HandleEntitySpokeWithLanguage(EntityUid source, IEnumerable<EntityUid> receivers, string message, bool isRadio, string? obfuscatedMessage = null)
     {
-        HandleEntitySpoke(args.Source, args.Listeners, args.ColorlessMessage, args.IsRadio, args.ObfuscatedMessage);
+        Dictionary<string, (HashSet<EntityUid>, string?)> messageListenersDict = new();
+        foreach (var receiver in receivers)
+        {
+            string sanitizedMessage;
+            if (obfuscatedMessage != null)
+                sanitizedMessage = _language.SanitizeMessage(source, receiver, message, out _, out obfuscatedMessage, false);
+            else
+                sanitizedMessage = _language.SanitizeMessage(source, receiver, message, out _, false);
+
+            if (messageListenersDict.TryGetValue(sanitizedMessage, out var listeners))
+                listeners.Item1.Add(receiver);
+            else
+                messageListenersDict[sanitizedMessage] = ([receiver], obfuscatedMessage);
+        }
+
+        foreach (var (key, value) in messageListenersDict)
+        {
+            HandleEntitySpoke(source, value.Item1, key, isRadio, value.Item2);
+        }
     }
 
     private async void HandleEntitySpoke(EntityUid source, EntityUid listener, string message, bool isRadio, string? obfuscatedMessage = null)

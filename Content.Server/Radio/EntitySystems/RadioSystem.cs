@@ -63,7 +63,7 @@ public sealed class RadioSystem : EntitySystem
         if (args.Channel != null && (component.Channels.Contains(args.Channel.ID) ||
             component.EncryptionKeyChannels.Contains(args.Channel.ID))) //SS220 PAI with encryption keys
         {
-            SendRadioMessage(uid, args.Message, args.Channel, uid);
+            SendRadioMessage(uid, args.Message, args.Channel, uid, messageWithLanguageKeys: args.MessageWithLanguageKeys /* SS220 languages */);
             args.Channel = null; // prevent duplicate messages from other listeners.
         }
     }
@@ -94,7 +94,7 @@ public sealed class RadioSystem : EntitySystem
     /// </summary>
     /// <param name="messageSource">Entity that spoke the message</param>
     /// <param name="radioSource">Entity that picked up the message and will send it, e.g. headset</param>
-    public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true)
+    public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true, string? messageWithLanguageKeys = null)
     {
         // TODO if radios ever garble / modify messages, feedback-prevention needs to be handled better than this.
         if (!_messages.Add(message))
@@ -181,7 +181,8 @@ public sealed class RadioSystem : EntitySystem
             // SS220 languages begin
             if (_languageSystem.SendLanguageMessageAttempt(receiver, out var listener))
             {
-                var scrambledMessage = _languageSystem.SanitizeMessage(messageSource, listener, message, out var colorlessMessage);
+                var unsanitizedMessage = messageWithLanguageKeys ?? message;
+                var scrambledMessage = _languageSystem.SanitizeMessage(messageSource, listener, unsanitizedMessage, out var colorlessMessage);
                 if (messageListenerDict.TryGetValue((scrambledMessage, colorlessMessage), out var lisneners))
                     lisneners.Add(receiver);
                 else

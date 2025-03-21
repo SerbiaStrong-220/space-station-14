@@ -10,6 +10,7 @@ using Content.Shared.SS220.Language.Systems;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.Chat;
+using Content.Server.Chat.Systems;
 
 namespace Content.Server.SS220.Language;
 
@@ -18,6 +19,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly LanguageManager _language = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly ChatSystem _chatSystem = default!;
 
     // Cached values for one tick
     private static readonly Dictionary<string, string> ScrambleCache = new();
@@ -97,10 +99,26 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         return scrambled;
     }
 
+    public string SanitizeMessage(EntityUid source,
+        EntityUid listener,
+        string message,
+        out string colorlessMessage,
+        out string obfuscatedMessage,
+        bool setColor = true)
+    {
+        var sanitizedMessage = SanitizeMessage(source, listener, message, out colorlessMessage, setColor);
+        obfuscatedMessage = _chatSystem.ObfuscateMessageReadability(colorlessMessage, 0.2f);
+        return sanitizedMessage;
+    }
+
     /// <summary>
     ///     Sanitize the <paramref name="message"/> by removing the language tags and scramble it (if necessary) for <paramref name="listener"/>
     /// </summary>
-    public string SanitizeMessage(EntityUid source, EntityUid listener, string message, out string colorlessMessage, bool setColor = true)
+    public string SanitizeMessage(EntityUid source,
+        EntityUid listener,
+        string message,
+        out string colorlessMessage,
+        bool setColor = true)
     {
         colorlessMessage = message;
         var languageProto = GetSelectedLanguage(source);
