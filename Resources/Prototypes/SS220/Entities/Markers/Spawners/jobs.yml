@@ -1,15 +1,20 @@
+# Follow the alphabetical order of.
+# Следуйте алфавитному порядку.
+
+# Адвокат
 - type: entity
-  id: SpawnPointSeniorEngineer
+  id: SpawnPointActualFuckingLawyer
   parent: SpawnPointJobBase
-  name: seniorengineer
+  name: lawyer
   components:
   - type: SpawnPoint
-    job_id: SeniorEngineer
+    job_id: Lawyer
   - type: Sprite
     layers:
       - state: green
-      - state: seniorengineer
-# 
+      - state: lawyer
+
+# Ведущий врач
 - type: entity
   id: SpawnPointSeniorPhysician
   parent: SpawnPointJobBase
@@ -21,7 +26,21 @@
     layers:
       - state: green
       - state: seniorphysician
- #    
+
+# Ведущий инженер
+- type: entity
+  id: SpawnPointSeniorEngineer
+  parent: SpawnPointJobBase
+  name: seniorengineer
+  components:
+  - type: SpawnPoint
+    job_id: SeniorEngineer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: seniorengineer
+
+# Ведущий учёный
 - type: entity
   id: SpawnPointSeniorResearcher
   parent: SpawnPointJobBase
@@ -33,7 +52,8 @@
     layers:
       - state: green
       - state: seniorresearcher
- #    
+
+# Инструктор
 - type: entity
   id: SpawnPointSeniorOfficer
   parent: SpawnPointJobBase
@@ -45,7 +65,21 @@
     layers:
       - state: green
       - state: seniorofficer
- #
+
+# Магистрат
+- type: entity
+  id: SpawnPointMagistrate
+  parent: SpawnPointJobBase
+  name: magistrate
+  components:
+  - type: SpawnPoint
+    job_id: Magistrate
+  - type: Sprite
+    layers:
+      - state: green
+      - state: lawyer
+
+# Сервисный администратор
 - type: entity
   id: SpawnPointServiceOfficer
   parent: SpawnPointJobBase
@@ -57,4 +91,3 @@
     layers:
       - state: green
       - state: serviceworker
-#
