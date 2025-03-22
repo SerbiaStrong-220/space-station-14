@@ -14,7 +14,7 @@
   - type: Reflect
     reflectProb: 0.05
     spread: 90
-# Start of SS220 Throwable Changes
+# SS220 Throwable Changes begin
   - type: LandAtCursor
   - type: ThrowingAngle
     angle: 225
@@ -25,4 +25,4 @@
     damage:
       types:
         Slash: 13.5
-# End of SS220 Throwable Changes
+# SS220 Throwable Changes end
