@@ -88,6 +88,18 @@
       Steel: 100
   - type: StaticPrice
     price: 30
+# SS220 Throwable Changes begin
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 270
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 5
+# SS220 Throwable Changes end
 
 - type: entity
   name: wrench
@@ -506,6 +518,12 @@
   - type: StaticPrice
     price: 25
   - type: Shovel
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 10
+# SS220 Throwable Changes end
 
 - type: entity
   parent: BaseItem
@@ -544,3 +562,10 @@
   - type: Construction
     graph: WoodenRollingPin
     node: rollingpin
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5.5
+        Stamina: 13.5
+# SS220 Throwable Changes end

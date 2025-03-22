@@ -37,6 +37,10 @@
     delay: 1
   - type: IgniteOnMeleeHit
     fireStacks: -4
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 12
 
 - type: entity
   id: BorgFireAxeFlaming
@@ -66,4 +70,8 @@
         - Scientist
         - Borg
 # Corvax-HiddenDesc-End
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 12
 

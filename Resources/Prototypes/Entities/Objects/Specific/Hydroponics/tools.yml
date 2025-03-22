@@ -64,6 +64,13 @@
     - back
   - type: StaticPrice
     price: 40
+# SS220 Throwable Changes begin
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 8
+# SS220 Throwable Changes end
 
 - type: entity
   name: hatchet
@@ -87,6 +94,19 @@
         Piercing: 2
   - type: Item
     sprite: Objects/Tools/Hydroponics/hatchet.rsi
+# SS220 Throwable Changes begin
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 45
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 6.5
+        Piercing: 1.5
+# SS220 Throwable Changes end
 
 - type: entity
   name: spade
@@ -112,6 +132,19 @@
     sprite: Objects/Tools/Hydroponics/spade.rsi
   - type: Shovel
     speedModifier: 0.75 # slower at digging than a full-sized shovel
+# SS220 Throwable Changes begin
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 45
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 6.5
+        Piercing: 1.5
+# SS220 Throwable Changes end
 
 - type: entity
   name: plant bag
