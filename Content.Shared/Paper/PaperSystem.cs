@@ -10,6 +10,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Audio.Systems;
 using static Content.Shared.Paper.PaperComponent;
 using Content.Shared.SS220.Paper;
+using Content.Shared.SS220.Language.Systems;
 
 namespace Content.Shared.Paper;
 
@@ -24,6 +25,7 @@ public sealed class PaperSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDocumentHelperSystem _documentHelper = default!;
+    [Dependency] private readonly SharedLanguageSystem _languageSystem = default!;
 
     public override void Initialize()
     {
@@ -162,7 +164,7 @@ public sealed class PaperSystem : EntitySystem
     {
         if (args.Text.Length <= entity.Comp.ContentSize)
         {
-            SetContent(entity, args.Text);
+            SetContent(entity, args.Text, args.Actor /* SS220 languages */);
 
             if (TryComp<AppearanceComponent>(entity, out var appearance))
                 _appearance.SetData(entity, PaperVisuals.Status, PaperStatus.Written, appearance);
@@ -206,11 +208,14 @@ public sealed class PaperSystem : EntitySystem
         return true;
     }
 
-    public void SetContent(Entity<PaperComponent> entity, string content)
+    public void SetContent(Entity<PaperComponent> entity, string content, EntityUid? writer = null /* SS220 languages */)
     {
         // SS220 Add document tags begin
-        //entity.Comp.Content = content;
-        entity.Comp.Content = _documentHelper.ParseTags(entity, content);
+        content = _documentHelper.ParseTags(entity, content);
+        if (writer != null)
+            content = _languageSystem.ParseLanguageTags(writer.Value, content);
+
+        entity.Comp.Content = content;
         // SS220 Add document tags end
         Dirty(entity);
         UpdateUserInterface(entity);

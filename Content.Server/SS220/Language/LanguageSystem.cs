@@ -9,7 +9,6 @@ using System.Text.RegularExpressions;
 using Content.Shared.SS220.Language.Systems;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CCVars;
-using Content.Shared.Chat;
 using Content.Server.Chat.Systems;
 
 namespace Content.Server.SS220.Language;
@@ -24,8 +23,6 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     // Cached values for one tick
     private static readonly Dictionary<string, string> ScrambleCache = new();
 
-    private static int Seed = 0;
-
     private Regex? _textWithKeyRegex;
     private TimeSpan _regexTimeout = TimeSpan.FromSeconds(1);
 
@@ -37,8 +34,9 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         SubscribeLocalEvent<LanguageComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<LanguageComponent, SendLanguageMessageAttemptEvent>(OnSendLanguageMessageAttemptEvent);
 
-        // UI
+        // Client
         SubscribeNetworkEvent<ClientSelectLanguageEvent>(OnClientSelectLanguage);
+        SubscribeNetworkEvent<ClientAddScrambledMessageEvent>(OnClientAddScrambledMessage);
     }
 
     public override void Update(float frameTime)
@@ -50,7 +48,9 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
     private void OnRoundStart(RoundStartingEvent args)
     {
-        Seed = _random.Next();
+        SetSeed(_random.Next());
+        ScrambledMessages.Clear();
+        UpdateScrambledMessages();
     }
 
     /// <summary>
@@ -75,6 +75,23 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             return;
 
         TrySetLanguage((entity.Value, comp), msg.LanguageId);
+    }
+
+    private void OnClientAddScrambledMessage(ClientAddScrambledMessageEvent ev)
+    {
+        AddScrambledMessage(ev.Message);
+    }
+
+    private void UpdateSeed()
+    {
+        var ev = new UpdateLanguageSeedEvent(Seed);
+        RaiseNetworkEvent(ev);
+    }
+
+    private void UpdateScrambledMessages()
+    {
+        var ev = new UpdateScrambledMessagesEvent(ScrambledMessages);
+        RaiseNetworkEvent(ev);
     }
     #endregion
 
@@ -367,6 +384,18 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         }
 
         return false;
+    }
+
+    private void SetSeed(int seed)
+    {
+        Seed = seed;
+        UpdateSeed();
+    }
+
+    protected override void AddScrambledMessage(LanguageMessage newMsg)
+    {
+        base.AddScrambledMessage(newMsg);
+        UpdateScrambledMessages();
     }
 }
 

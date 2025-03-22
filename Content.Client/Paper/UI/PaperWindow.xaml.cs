@@ -11,6 +11,8 @@ using Robust.Shared.Utility;
 using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
+using Content.Client.SS220.Language;
+using Robust.Client.Player;
 
 namespace Content.Client.Paper.UI
 {
@@ -19,6 +21,10 @@ namespace Content.Client.Paper.UI
     {
         [Dependency] private readonly IInputManager _inputManager = default!;
         [Dependency] private readonly IResourceCache _resCache = default!;
+        [Dependency] private readonly IPlayerManager _player = default!; // SS220 languages
+        [Dependency] private readonly IEntityManager _entityManager = default!; // SS220 languages
+
+        private readonly LanguageSystem _languageSystem; // SS220 languages
 
         private static Color DefaultTextColor = new(25, 25, 25);
 
@@ -68,6 +74,8 @@ namespace Content.Client.Paper.UI
         {
             IoCManager.InjectDependencies(this);
             RobustXamlLoader.Load(this);
+
+            _languageSystem = _entityManager.System<LanguageSystem>(); // SS220 languages
 
             // We can't configure the RichTextLabel contents from xaml, so do it here:
             BlankPaperIndicator.SetMessage(Loc.GetString("paper-ui-blank-page-message"), null, DefaultTextColor);
@@ -262,9 +270,20 @@ namespace Content.Client.Paper.UI
                 // player opens the UI for reading. In this case, don't update the
                 // text input, as this player is currently writing new text and we
                 // don't want to lose any text they already input.
+
+                // SS220 languages begin
+                var inputText = state.Text;
+                var player = _player.LocalEntity;
+                if (player != null)
+                    inputText = _languageSystem.DecryptLanguageMarkups(player.Value, inputText);
+                // SS220 languages end
+
                 Input.TextRope = Rope.Leaf.Empty;
                 Input.CursorPosition = new TextEdit.CursorPos();
-                Input.InsertAtCursor(state.Text);
+                // SS220 languages begin
+                //Input.InsertAtCursor(state.Text);
+                Input.InsertAtCursor(inputText);
+                // SS220 languages end
             }
 
             for (var i = 0; i <= state.StampedBy.Count * 3 + 1; i++)

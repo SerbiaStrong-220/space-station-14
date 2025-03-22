@@ -6,9 +6,34 @@ namespace Content.Client.SS220.Language;
 
 public sealed partial class LanguageSystem : SharedLanguageSystem
 {
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeNetworkEvent<UpdateScrambledMessagesEvent>(OnUpdateScrambledMessages);
+        SubscribeNetworkEvent<UpdateLanguageSeedEvent>(OnUpdateLanguageSeed);
+    }
+
+    private void OnUpdateScrambledMessages(UpdateScrambledMessagesEvent ev)
+    {
+        ScrambledMessages = ev.ScrambledMessages;
+    }
+
+    private void OnUpdateLanguageSeed(UpdateLanguageSeedEvent ev)
+    {
+        Seed = ev.Seed;
+    }
+
     public void SelectLanguage(string languageId)
     {
         var ev = new ClientSelectLanguageEvent(languageId);
+        RaiseNetworkEvent(ev);
+    }
+
+    protected override void AddScrambledMessage(LanguageMessage newMsg)
+    {
+        base.AddScrambledMessage(newMsg);
+        var ev = new ClientAddScrambledMessageEvent(newMsg.ScrambledMessage, newMsg);
         RaiseNetworkEvent(ev);
     }
 }

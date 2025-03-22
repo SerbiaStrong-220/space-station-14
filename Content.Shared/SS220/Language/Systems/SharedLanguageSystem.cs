@@ -4,12 +4,14 @@ using Content.Shared.SS220.Language.Components;
 
 namespace Content.Shared.SS220.Language.Systems;
 
-public abstract class SharedLanguageSystem : EntitySystem
+public abstract partial class SharedLanguageSystem : EntitySystem
 {
     [Dependency] private readonly LanguageManager _language = default!;
 
     public readonly string UniversalLanguage = "Universal";
     public readonly string GalacticLanguage = "Galactic";
+
+    protected int Seed = 0;
 
     #region Component
     /// <summary>
