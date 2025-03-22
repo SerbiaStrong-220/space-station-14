@@ -65,53 +65,54 @@
 
 # Scalpel
 # SS220 BaseScalpel added to separately define the scalpel and the laser scalpel
-- type: entity # SS220 BaseScalpel
+- type: entity
   id: BaseScalpel # SS220 BaseScalpel
-  parent: BaseToolSurgery # SS220 BaseScalpel
+  parent: BaseToolSurgery
   description: A surgical tool used to make incisions into flesh. # SS220 BaseScalpel
   abstract: true # SS220 BaseScalpel
-  components: # SS220 BaseScalpel
-  - type: Sharp # SS220 BaseScalpel
-    butcherDelayModifier: 1.5 # Butchering with a scalpel, regardless of the type, will take 50% longer # SS220 BaseScalpel
-  - type: Tool # SS220 BaseScalpel
-    qualities: # SS220 BaseScalpel
-    - Slicing # SS220 BaseScalpel
-    speedModifier: 0.66 # pretend the sixes go on forever :) # SS220 BaseScalpel
-  - type: Utensil # SS220 BaseScalpel
-    types: # SS220 BaseScalpel
-      - Knife # SS220 BaseScalpel
-  - type: Sprite # SS220 BaseScalpel
-    sprite: Objects/Specific/Medical/Surgery/scalpel.rsi # SS220 BaseScalpel
-    state: scalpel # SS220 BaseScalpel
-  - type: Item # SS220 BaseScalpel
-    sprite: Objects/Specific/Medical/Surgery/scalpel.rsi # SS220 BaseScalpel
-    storedRotation: 90 # SS220 BaseScalpel
-  - type: MeleeWeapon # SS220 BaseScalpel
-    wideAnimationRotation: 90 # SS220 BaseScalpel
-    swingLeft: true # SS220 BaseScalpel
-    attackRate: 1.5 # SS220 BaseScalpel
-    damage: # SS220 BaseScalpel
-      types: # SS220 BaseScalpel
-        Slash: 8 # SS220 BaseScalpel
-    soundHit: # SS220 BaseScalpel
-      path: /Audio/Weapons/bladeslice.ogg # SS220 BaseScalpel
-  # SS220 Edit biomass craft begin # SS220 BaseScalpel
-  - type: Tag # SS220 BaseScalpel
-    tags: # SS220 BaseScalpel
-    - Scalpel # SS220 BaseScalpel
-  # SS220 Edit biomass craft end # SS220 BaseScalpel
-  # SS220 Surgery begin # SS220 BaseScalpel
-  - type: SurgeryTool # SS220 BaseScalpel
-    toolType: Scalpel # SS220 BaseScalpel
-    sound: /Audio/SS220/Surgery/scalpel.ogg # SS220 BaseScalpel
-  # SS220 Surgery end # SS220 BaseScalpel
+  components:
+  - type: Sharp
+    butcherDelayModifier: 1.5 # Butchering with a scalpel, regardless of the type, will take 50% longer
+  - type: Tool
+    qualities:
+    - Slicing
+    speedModifier: 0.66 # pretend the sixes go on forever :)
+  - type: Utensil
+    types:
+      - Knife
+  - type: Sprite
+    sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+    state: scalpel
+  - type: Item
+    sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+    storedRotation: 90
+  - type: MeleeWeapon
+    wideAnimationRotation: 90
+    swingLeft: true
+    attackRate: 1.5
+    damage:
+      types:
+        Slash: 8
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  # SS220 Edit biomass craft begin
+  - type: Tag
+    tags:
+    - Scalpel
+  # SS220 Edit biomass craft end
+  # SS220 Surgery begin
+  - type: SurgeryTool
+    toolType: Scalpel
+    sound: /Audio/SS220/Surgery/scalpel.ogg
+  # SS220 Surgery end
 
-# SS220 Scalpel item moved here 
-- type: entity # SS220 BaseScalpel
-  name: scalpel # SS220 BaseScalpel
-  id: Scalpel # SS220 BaseScalpel
-  parent: BaseScalpel # SS220 BaseScalpel
-  components: # SS220 BaseScalpel
+# SS220 Scalpel item begin
+- type: entity
+  name: scalpel
+  id: Scalpel
+  parent: BaseScalpel
+  components:
+# SS220 Scalpel item end
 # SS220 Throwable Changes begin
   - type: LandAtCursor
   - type: ThrowingAngle
@@ -160,14 +161,14 @@
 - type: entity
   name: laser scalpel
   id: ScalpelLaser
-  parent: BaseScalpel # SS220 Changed from Scalpel to BaseScalpel
+  parent: BaseScalpel # Scalpel # SS220 Throwable Changes
   description: A scalpel which uses a directed laser to slice instead of a blade, for more precise surgery while also cauterizing as it cuts.
   components:
   - type: Sprite
     state: laser
   - type: Item
     heldPrefix: laser
-# Start of SS220 laser scalpel changes
+# SS220 Throwable Changes begin
   - type: MeleeWeapon
     wideAnimationRotation: 90
     swingLeft: true
@@ -178,8 +179,6 @@
         Heat: 8
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
-# End of SS220 laser scalpel changes
-# SS220 Throwable Changes begin
   - type: DamageOtherOnHit
     damage:
       types:
