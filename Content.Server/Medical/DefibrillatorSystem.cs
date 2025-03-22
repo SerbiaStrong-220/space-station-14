@@ -19,6 +19,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.PowerCell;
+using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
 using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
@@ -198,6 +199,14 @@ public sealed class DefibrillatorSystem : EntitySystem
             _chatManager.TrySendInGameICMessage(uid, Loc.GetString(unrevivable.ReasonMessage),
                 InGameICChatType.Speak, true);
         }
+        //SS220 LimitationRevive - start
+        else if (TryComp<LimitationReviveComponent>(target, out var limitRevive) &&
+                 limitRevive.CounterOfDead > limitRevive.MaxRevive)
+        {
+            _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-death-limit-exceeded"),
+                InGameICChatType.Speak, true);
+        }
+        //SS220 LimitationRevive - end
         else
         {
             if (_mobState.IsDead(target, mob))
@@ -207,6 +216,11 @@ public sealed class DefibrillatorSystem : EntitySystem
                 TryComp<DamageableComponent>(target, out var damageableComponent) &&
                 damageableComponent.TotalDamage < threshold)
             {
+                //SS220 LimitationRevive - start
+                if(TryComp<LimitationReviveComponent>(target, out var compLimitRevive))
+                    compLimitRevive.IsAlreadyDead = false;
+                //SS220 LimitationRevive - end
+
                 _mobState.ChangeMobState(target, MobState.Critical, mob, uid);
                 dead = false;
             }
