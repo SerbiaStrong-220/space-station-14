@@ -22,6 +22,10 @@
   - type: Body
     prototype: MiGoBody
   - type: ComplexInteraction #For UI opening only
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
   - type: MeleeWeapon
     altDisarm: false
     soundHit:

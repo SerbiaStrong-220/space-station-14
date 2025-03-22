@@ -8,6 +8,12 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.00
     baseSprintSpeed : 5.00
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 languages tweaks end
   - type: InputMover
     #SS220 RatKing tweaks and changes update start
   - type: Puller
