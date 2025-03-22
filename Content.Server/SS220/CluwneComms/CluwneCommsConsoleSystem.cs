@@ -31,11 +31,14 @@ using Content.Server.CartridgeLoader.Cartridges;
 using Content.Shared.MassMedia.Systems;
 using Content.Server.GameTicking;
 using Content.Shared.Decals;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
 
 namespace Content.Server.SS220.CluwneComms
 {
     public sealed class CluwneCommsConsoleSystem : SharedCluwneCommsConsoleSystem
     {
+        [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
@@ -53,6 +56,7 @@ namespace Content.Server.SS220.CluwneComms
             SubscribeLocalEvent<CluwneCommsConsoleComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<CluwneCommsConsoleComponent, CluwneCommsConsoleAnnounceMessage>(OnAnnounceMessage);
             SubscribeLocalEvent<CluwneCommsConsoleComponent, CluwneCommsConsoleAlertMessage>(OnAlertMessage);
+            SubscribeLocalEvent<CluwneCommsConsoleComponent, CluwneCommsConsoleBoomMessage>(OnBoomMessage);
         }
         public void OnMapInit(Entity<CluwneCommsConsoleComponent> ent, ref MapInitEvent args)
         {
@@ -137,12 +141,10 @@ namespace Content.Server.SS220.CluwneComms
         private void OnAlertMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleAlertMessage args)
         {
             //alert announce from AlertLevelSystem
+            _audio.PlayGlobal(ent.Comp.Sound, Filter.Broadcast(), true);
 
-            var filter = _stationSystem.GetInOwningStation(station);
-            _audio.PlayGlobal(detail.Sound, filter, true, detail.Sound.Params);
-
-            _chatSystem.DispatchStationAnnouncement(station, announcementFull, playSound: playDefault, colorOverride: detail.Color, sender: stationName);
-
+            var voiceId = string.Empty;
+            _chatSystem.DispatchStationAnnouncement(ent, args.Instruntions, colorOverride: ent.Comp.Color, voiceId: voiceId);
             //Intructions from console
             //copied from NewsSystem
             var title = "";//add some naming in component here
@@ -154,7 +156,8 @@ namespace Content.Server.SS220.CluwneComms
                 Title = title,
                 //Content = content.Length <= MaxContentLength ? content : $"{content[..MaxContentLength]}...",
                 Content = content,
-                Author = new TryGetIdentityShortInfoEvent(ent, args.Actor).Title,//name of console user
+                //Author = new TryGetIdentityShortInfoEvent(ent, args.Actor).Title,//name of console user
+                Author = "",
                 ShareTime = _ticker.RoundDuration()
             };
 
@@ -180,6 +183,11 @@ namespace Content.Server.SS220.CluwneComms
                 return _accessReaderSystem.IsAllowed(user, console, accessReaderComponent);
 
             return true;
+        }
+
+        private void OnBoomMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleBoomMessage args)
+        {
+
         }
     }
 }

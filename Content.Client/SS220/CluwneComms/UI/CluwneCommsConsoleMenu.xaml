@@ -20,5 +20,6 @@
                 <Button Name="AnnounceButton" Text="{Loc 'cluwne-comms-console-menu-announcement-button'}" StyleClasses="OpenLeft" Access="Public" />
             </BoxContainer>
         </BoxContainer>
+        <Button Name="BoomButton" Text="{Loc 'cluwne-comms-console-menu-boom-button'}" StyleClasses="Caution" Access="Public" />
     </BoxContainer>
 </controls:FancyWindow>

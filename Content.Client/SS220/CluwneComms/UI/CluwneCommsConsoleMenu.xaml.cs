@@ -29,6 +29,7 @@ namespace Content.Client.SS220.CluwneComms.UI
         public event Action<string>? OnAlertLevel;
         public event Action<string>? OnAnnounce;
         public event Action<string, string, string>? OnAlert;
+        public event Action? OnBoom;
         public CluwneCommsConsoleMenu()
         {
             IoCManager.InjectDependencies(this);

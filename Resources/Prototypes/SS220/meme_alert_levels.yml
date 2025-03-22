@@ -1,4 +1,4 @@
-- type: memelertLevel
+- type: memelertLevels
   id: CluwneCommAlerts
   defaultLevel: green
   levels:

@@ -1,9 +1,9 @@
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.SS220.CluwneComms;
+namespace Content.Shared.SS220.CluwneComms;
 
-[Prototype("memelertLevel")]
+[Prototype("memelertLevels")]
 public sealed partial class MemelertLevelPrototype : IPrototype
 {
     [IdDataField] public string ID { get; } = default!;

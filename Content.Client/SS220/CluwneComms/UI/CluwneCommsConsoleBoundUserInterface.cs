@@ -29,6 +29,7 @@ namespace Content.Client.SS220.CluwneComms.UI
             _menu.OnAnnounce += AnnounceButtonPressed;
             _menu.OnAlertLevel += AlertLevelSelected;
             _menu.OnAlert += AlertButtonPressed;
+            _menu.OnBoom += BoomButtonPressed;
         }
 
         public void AnnounceButtonPressed(string message)
@@ -40,6 +41,11 @@ namespace Content.Client.SS220.CluwneComms.UI
 
         public void AlertLevelSelected(string message)
         {
+        }
+
+        public void BoomButtonPressed()
+        {
+            SendMessage(new CluwneCommsConsoleBoomMessage());
         }
 
         public void AlertButtonPressed(string level, string message, string instructions)

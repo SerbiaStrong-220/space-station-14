@@ -97,6 +97,11 @@ namespace Content.Shared.SS220.CluwneComms
     }
 
     [Serializable, NetSerializable]
+    public sealed class CluwneCommsConsoleBoomMessage() : BoundUserInterfaceMessage
+    {
+    }
+
+    [Serializable, NetSerializable]
     public enum CluwneCommsConsoleUiKey : byte
     {
         Key
