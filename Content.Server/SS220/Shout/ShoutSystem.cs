@@ -7,6 +7,7 @@ using Content.Shared.SS220.Shout;
 using Content.Shared.Dataset;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Audio;
 
 namespace Content.Server.SS220.Shout;
 
@@ -41,7 +42,7 @@ public sealed class ShoutSystem : EntitySystem
 
         if (args.ShoutSound != null)
         {
-            _audio.PlayEntity(args.ShoutSound, args.Performer, args.Performer);
+            _audio.PlayPvs(args.ShoutSound,  args.Performer);
         }
 
         if (args.ShoutPhrases != null)
