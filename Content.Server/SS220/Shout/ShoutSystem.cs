@@ -7,7 +7,6 @@ using Content.Shared.SS220.Shout;
 using Content.Shared.Dataset;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Audio;
 
 namespace Content.Server.SS220.Shout;
 
