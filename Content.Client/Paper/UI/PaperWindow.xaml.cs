@@ -51,7 +51,8 @@ namespace Content.Client.Paper.UI
             typeof(ColorTag),
             typeof(HeadingTag),
             typeof(ItalicTag),
-            typeof(MonoTag)
+            typeof(MonoTag),
+            typeof(LanguageMessageTag) // SS220 language
         };
 
         public event Action<string>? OnSaved;
