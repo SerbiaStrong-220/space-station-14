@@ -3,6 +3,7 @@
   id: NTHS220Shelmet
   name: Шлем NTHS-220-S
   description: Специальная разработка бронескафандра ДСО. Цвет миротворцев - зеленый!
+  suffix: Taipan, Shitspawn
   components:
   - type: Sprite
     sprite: SS220/Shitspawn/Taipan/Clothing/Head/Hardsuits/tnthelmet.rsi
@@ -29,6 +30,7 @@
   id: THS111Shelmet
   name: Шлем THS-111-S
   description: Специальная разработка бронескафандра станции Тайпан. Обеспечивает надёжную защиту носителя.
+  suffix: Taipan, Shitspawn
   components:
   - type: Sprite
     sprite: SS220/Shitspawn/Taipan/Clothing/Head/Hardsuits/tsyndhelmet.rsi

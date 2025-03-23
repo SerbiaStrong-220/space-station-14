@@ -3,6 +3,7 @@
   id: NTHS220S
   name: NTHS-220-S
   description: Специальная разработка бронескафандра ДСО. Цвет миротворцев - зеленый!
+  suffix: Taipan, Shitspawn
   components:
   - type: Sprite
     sprite: SS220/Shitspawn/Taipan/Clothing/OuterClothing/Hardsuits/tnt.rsi
@@ -48,6 +49,7 @@
   id: THS111S
   name: THS-111-S
   description: Специальная разработка бронескафандра станции Тайпан. Обеспечивает надёжную защиту носителя.
+  suffix: Taipan, Shitspawn
   components:
   - type: Sprite
     sprite: SS220/Shitspawn/Taipan/Clothing/OuterClothing/Hardsuits/tsynd.rsi
