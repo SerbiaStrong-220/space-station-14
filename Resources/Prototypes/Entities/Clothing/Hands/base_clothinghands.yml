@@ -27,10 +27,11 @@
   - type: ItemSlots
     slots:
       item_watch:
-        name: часы
+        name:  wrist-watch-slot-ftl-key
         whitelist:
           tags:
           - WristWatch
+  - type: ContainerContainer
   #SS220 WristWatch on glove end
   - type: DamageOnInteractProtection
     damageProtection:
