@@ -16,8 +16,17 @@ public sealed partial class LanguagePrototype : IPrototype
     [DataField]
     public string Description = string.Empty;
 
+    /// <summary>
+    /// Language key.
+    /// When setting the value a <see cref="LanguageManager.KeyPrefix"/> is automatically added.
+    /// </summary>
     [DataField(required: true)]
-    public string Key = string.Empty;
+    public string Key
+    {
+        get => _key;
+        set => _key = LanguageManager.KeyPrefix + value;
+    }
+    private string _key = string.Empty;
 
     /// <summary>
     ///  The color of the language in which messages will be recolored, 

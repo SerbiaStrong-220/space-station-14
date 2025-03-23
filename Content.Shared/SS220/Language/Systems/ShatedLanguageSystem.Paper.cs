@@ -12,27 +12,45 @@ public abstract partial class SharedLanguageSystem
 
     public Dictionary<string, LanguageMessage> ScrambledMessages = new();
 
-    private Regex? _languageTagRegex;
+    private const string TagStartPattern = $@"\[{PaperLanguageTagName}[^\]]*]";
+    private const string TagEndPattern = $@"\[\/{PaperLanguageTagName}\]";
+    private Regex _tagStartRegex = new Regex(TagStartPattern);
+    private Regex _tagEndRegex = new Regex(TagEndPattern);
+
     private Regex? _languageMarkupRegex;
 
     public string ParseLanguageTags(EntityUid source, string message)
     {
-        var pattern = @$"\[{PaperLanguageTagName}[^\]]+\]";
-        _languageTagRegex ??= new Regex(pattern, RegexOptions.Multiline);
-        var matches = _languageTagRegex.Matches(message);
-        foreach (Match m in matches)
+        var tagStartMatches = _tagStartRegex.Matches(message);
+        var tagEndMatches = _tagEndRegex.Matches(message);
+        var inputLeght = message.Length;
+        foreach (Match tagStartMatch in tagStartMatches)
         {
-            if (!TryParseTagArg(m.Value, PaperLanguageTagName, out var languageKey) ||
-                !TryParseTagArg(m.Value, "text", out var text))
-                continue;
+            foreach (Match tagEndMatch in tagEndMatches)
+            {
+                if (tagStartMatch.Index >= tagEndMatch.Index)
+                    continue;
 
-            if (!_language.TryGetLanguageByKey(languageKey, out var language) ||
-                !CanSpeak(source, language.ID))
-                continue;
+                var tagValue = tagStartMatch.Value;
+                if (!TryParseTagArg(tagValue, PaperLanguageTagName, out var languageKey) ||
+                    !_language.TryGetLanguageByKey(languageKey, out var language) ||
+                    !CanSpeak(source, language.ID))
+                    break;
 
-            message = message.Remove(m.Index, m.Length);
-            var markup = GenerateLanguageMsgMarkup(text, language);
-            message = message.Insert(m.Index, markup);
+                var leghtDelta = message.Length - inputLeght;
+                var tagStartIndex = tagStartMatch.Index + leghtDelta;
+                var tagEndIndex = tagEndMatch.Index + leghtDelta;
+
+                var textIndex = tagStartIndex + tagStartMatch.Length;
+                var textLeght = tagEndIndex - textIndex;
+                var text = message.Substring(textIndex, textLeght);
+
+                var nodeLeght = tagEndIndex + tagEndMatch.Length - tagStartIndex;
+                message = message.Remove(tagStartIndex, nodeLeght);
+                var markup = GenerateLanguageMsgMarkup(text, language);
+                message = message.Insert(tagStartIndex, markup);
+                break;
+            }
         }
 
         return message;
@@ -43,18 +61,26 @@ public abstract partial class SharedLanguageSystem
         var pattern = @$"\[{LanguageMsgMarkup}[^\]]+\]";
         _languageMarkupRegex ??= new Regex(pattern, RegexOptions.Multiline);
         var matches = _languageMarkupRegex.Matches(message);
+        var inputLeght = message.Length;
         foreach (Match m in matches)
         {
             if (!TryParseTagArg(m.Value, LanguageMsgMarkup, out var value) ||
                 !ScrambledMessages.TryGetValue(value, out var langmsg))
                 continue;
 
-            if (!CanSpeak(reader, langmsg.Language.ID))
+            if (!CanSpeak(reader, langmsg.LanguageId))
                 continue;
 
-            message = message.Remove(m.Index, m.Length);
+            var leghtDelta = message.Length - inputLeght;
+            var markupIndex = m.Index + leghtDelta;
+            var markupLeght = m.Length;
+
             var langtag = GetLanguageTagFromMessage(langmsg);
-            message = message.Insert(m.Index, langtag);
+            if (langtag != null)
+            {
+                message = message.Remove(markupIndex, markupLeght);
+                message = message.Insert(markupIndex, langtag);
+            }
         }
 
         return message;
@@ -65,16 +91,19 @@ public abstract partial class SharedLanguageSystem
         var scrambledMessage = language.ScrambleMethod.ScrambleMessage(message, Seed);
         if (!ScrambledMessages.ContainsKey(scrambledMessage))
         {
-            var langMsg = new LanguageMessage(message, scrambledMessage, language);
+            var langMsg = new LanguageMessage(message, scrambledMessage, language.ID);
             AddScrambledMessage(langMsg);
         }
 
-        return $"[languagemsg=\"{scrambledMessage}\"]";
+        return $"[{LanguageMsgMarkup}=\"{scrambledMessage}\"]";
     }
 
-    private string GetLanguageTagFromMessage(LanguageMessage languageMessage)
+    private string? GetLanguageTagFromMessage(LanguageMessage languageMessage)
     {
-        return $"[language={languageMessage.Language.Key} text=\"{languageMessage.OriginalMessage}\"]";
+        if (!_language.TryGetLanguageById(languageMessage.LanguageId, out var language))
+            return null;
+
+        return $"[{PaperLanguageTagName}={language.Key}]{languageMessage.OriginalMessage}[/{PaperLanguageTagName}]";
     }
 
     protected virtual void AddScrambledMessage(LanguageMessage newMsg)
@@ -98,9 +127,9 @@ public abstract partial class SharedLanguageSystem
 }
 
 [Serializable, NetSerializable]
-public readonly record struct LanguageMessage(string OriginalMessage, string ScrambledMessage, LanguagePrototype Language)
+public readonly record struct LanguageMessage(string OriginalMessage, string ScrambledMessage, string LanguageId)
 {
     public readonly string OriginalMessage = OriginalMessage;
     public readonly string ScrambledMessage = ScrambledMessage;
-    public readonly LanguagePrototype Language = Language;
+    public readonly string LanguageId = LanguageId;
 }
