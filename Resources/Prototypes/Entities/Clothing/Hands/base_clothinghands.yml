@@ -32,6 +32,8 @@
           tags:
           - WristWatch
   - type: ContainerContainer
+    containers:
+      item_watch: !type:ContainerSlot
   #SS220 WristWatch on glove end
   - type: DamageOnInteractProtection
     damageProtection:
