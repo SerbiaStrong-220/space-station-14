@@ -27,7 +27,7 @@
   - type: ItemSlots
     slots:
       item_watch:
-        name:  wrist-watch-slot-ftl-key
+        name: wrist-watch-slot-component-slot-name
         whitelist:
           tags:
           - WristWatch
