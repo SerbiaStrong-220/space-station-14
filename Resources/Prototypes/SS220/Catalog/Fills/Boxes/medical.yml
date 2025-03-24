@@ -3,6 +3,7 @@
 - type: entity
   name: chief's bottle box
   parent: BoxCardboard
+  suffix: NoMapping
   id: BoxBottleChief
   description: A box full of bottles for  medical chief.
   components:
