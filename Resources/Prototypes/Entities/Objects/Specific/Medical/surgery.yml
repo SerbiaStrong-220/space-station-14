@@ -67,8 +67,9 @@
 # SS220 BaseScalpel added to separately define the scalpel and the laser scalpel
 - type: entity
   id: BaseScalpel # SS220 BaseScalpel
+  name: BaseScalpel # SS220 BaseScalpel
   parent: BaseToolSurgery
-  description: A surgical tool used to make incisions into flesh. # SS220 BaseScalpel
+  description: A surgical tool used to make incisions into flesh.
   abstract: true # SS220 BaseScalpel
   components:
   - type: Sharp
