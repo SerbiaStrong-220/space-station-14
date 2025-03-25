@@ -23,9 +23,6 @@ public sealed partial class BurglarBugComponent : Component
     [AutoNetworkedField]
     public EmagType EmagType = EmagType.Access;
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    public List<HashSet<ProtoId<AccessLevelPrototype>>> AccessLists = new ();
-
     /// <summary>
     ///     Popup message shown when player stuck entity, but forgot to activate it.
     /// </summary>

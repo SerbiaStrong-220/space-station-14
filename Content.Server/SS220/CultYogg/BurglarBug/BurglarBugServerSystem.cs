@@ -59,7 +59,7 @@ public sealed class BurglarBugServerSystem : EntitySystem
             door.ClickOpen = true;
             door.BumpOpen = true;
             Dirty(comp.Door.Value, door);
-            var emaggedEvent = new GotEmaggedEvent(uid, comp.EmagType);
+            var emaggedEvent = new GotEmaggedEvent(uid, comp.EmagType);//maybe we should send here user, but idk
             RaiseLocalEvent(comp.Door.Value, ref emaggedEvent);
         }
         AfterUsed((uid, comp));
