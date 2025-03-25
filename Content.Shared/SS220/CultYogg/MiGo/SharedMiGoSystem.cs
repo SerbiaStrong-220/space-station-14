@@ -395,15 +395,15 @@ public abstract class SharedMiGoSystem : EntitySystem
 
     public virtual void ChangeForm(EntityUid uid, MiGoComponent comp, bool isMaterial)
     {
-        if (TryComp<FixturesComponent>(uid, out var fixturesComp))
+        if (TryComp<FixturesComponent>(uid, out var fixtures) && fixtures.FixtureCount >= 1)
         {
-            if (fixturesComp.Fixtures.TryGetValue("fix1", out var fixture))
-            {
-                var mask = (int)(isMaterial ? CollisionGroup.FlyingMobMask : CollisionGroup.GhostImpassable);
-                var layer = (int)(isMaterial ? CollisionGroup.FlyingMobLayer : CollisionGroup.None);
-                _physics.SetCollisionMask(uid, "fix1", fixture, mask);
-                _physics.SetCollisionLayer(uid, "fix1", fixture, layer);
-            }
+            var fixture = fixtures.Fixtures.First();
+
+            var mask = (int)(isMaterial ? CollisionGroup.FlyingMobMask : CollisionGroup.GhostImpassable);
+            var layer = (int)(isMaterial ? CollisionGroup.FlyingMobLayer : CollisionGroup.None);
+
+            _physics.SetCollisionMask(uid, fixture.Key, fixture.Value, mask, fixtures);
+            _physics.SetCollisionLayer(uid, fixture.Key, fixture.Value, layer, fixtures);
         }
 
         //full vision during astral
