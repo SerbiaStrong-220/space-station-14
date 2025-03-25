@@ -53,7 +53,7 @@
   - type: Language
     availableLanguages:
     - id: Galactic
-	  canSpeak: true
+      canSpeak: true
   #visual
   - type: Sprite
     drawdepth: Mobs
