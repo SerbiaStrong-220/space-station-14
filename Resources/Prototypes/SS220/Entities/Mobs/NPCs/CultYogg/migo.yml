@@ -50,6 +50,10 @@
     speechVerb: LargeMob
   - type: TTS
     voice: forester
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+	  canSpeak: true
   #visual
   - type: Sprite
     drawdepth: Mobs
