@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.SS220.Language;
 using Content.Shared.SS220.Language.Systems;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.RichText;
@@ -16,7 +15,7 @@ public sealed class LanguageMessageTag : IMarkupTag
 
     public string TextBefore(MarkupNode node)
     {
-        if (!node.Value.TryGetString(out var text))
+        if (!node.Value.TryGetString(out var key))
             return string.Empty;
 
         var player = _player.LocalEntity;
@@ -24,15 +23,10 @@ public sealed class LanguageMessageTag : IMarkupTag
             return string.Empty;
 
         var languageSystem = _entityManager.System<LanguageSystem>();
-        if (!languageSystem.ScrambledMessages.TryGetValue(text, out var languageMessage))
+        languageSystem.RequestNodeInfo(key);
+        if (!languageSystem.TryGetPaperMessageFromKey(key, out var message))
             return string.Empty;
 
-        string msg;
-        if (languageSystem.CanUnderstand(player.Value, languageMessage.LanguageId))
-            msg = languageMessage.OriginalMessage;
-        else
-            msg = languageMessage.ScrambledMessage;
-
-        return msg;
+        return message;
     }
 }

@@ -275,8 +275,7 @@ namespace Content.Client.Paper.UI
                 // SS220 languages begin
                 var inputText = state.Text;
                 var player = _player.LocalEntity;
-                if (player != null)
-                    inputText = _languageSystem.DecryptLanguageMarkups(player.Value, inputText);
+                inputText = _languageSystem.DecryptLanguageMarkups(inputText, true, player);
                 // SS220 languages end
 
                 Input.TextRope = Rope.Leaf.Empty;

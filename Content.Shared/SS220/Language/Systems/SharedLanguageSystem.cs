@@ -1,17 +1,20 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Ghost;
 using Content.Shared.SS220.Language.Components;
+using System.Text;
+using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Language.Systems;
 
 public abstract partial class SharedLanguageSystem : EntitySystem
 {
     [Dependency] private readonly LanguageManager _language = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public readonly string UniversalLanguage = "Universal";
     public readonly string GalacticLanguage = "Galactic";
 
-    protected int Seed = 0;
+    public int Seed = 0;
 
     #region Component
     /// <summary>
@@ -173,5 +176,40 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     public bool KnowsAllLanguages(EntityUid uid)
     {
         return HasComp<GhostComponent>(uid);
+    }
+
+    /// <summary>
+    ///     Sets the color of the prototype language to the message 
+    /// </summary>
+    public string SetColor(string message, LanguagePrototype proto)
+    {
+        if (proto.Color == null)
+            return message;
+
+        var color = proto.Color.Value.ToHex();
+        message = $"[color={color}]{message}[/color]";
+        return message;
+    }
+
+    /// <summary>
+    ///     Copy of Content.Server.Chat.Systems.ObfuscateMessageReadability
+    /// </summary>
+    public string ObfuscateMessageReadability(string message, float chance)
+    {
+        for (var i = 0; i < message.Length; i++)
+        {
+            if (char.IsWhiteSpace(message[i]))
+            {
+                continue;
+            }
+
+            if (_random.Prob(1 - chance))
+            {
+                message = message.Remove(i);
+                message = message.Insert(i, "~");
+            }
+        }
+
+        return message;
     }
 }

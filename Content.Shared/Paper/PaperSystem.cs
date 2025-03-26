@@ -211,10 +211,12 @@ public sealed class PaperSystem : EntitySystem
     public void SetContent(Entity<PaperComponent> entity, string content, EntityUid? writer = null /* SS220 languages */)
     {
         // SS220 Add document tags begin
-        content = _documentHelper.ParseTags(entity, content);
-        if (writer != null)
-            content = _languageSystem.ParseLanguageTags(writer.Value, content);
+        var ev = new PaperSetContentAttemptEvent(entity, content, writer);
+        RaiseLocalEvent(entity, ref ev, true);
+        if (ev.Cancelled)
+            return;
 
+        content = ev.TransformedContent;
         entity.Comp.Content = content;
         // SS220 Add document tags end
         Dirty(entity);
@@ -241,3 +243,14 @@ public sealed class PaperSystem : EntitySystem
 /// </summary>
 [ByRefEvent]
 public record struct PaperWriteEvent(EntityUid User, EntityUid Paper);
+
+// SS220 languages begin
+[ByRefEvent]
+public sealed class PaperSetContentAttemptEvent(Entity<PaperComponent> paper, string newContent, EntityUid? writer = null) : CancellableEntityEventArgs()
+{
+    public readonly Entity<PaperComponent> Paper = paper;
+    public readonly EntityUid? Writer = writer;
+    public readonly string NewContent = newContent;
+    public string TransformedContent = newContent;
+}
+// SS220 languages end

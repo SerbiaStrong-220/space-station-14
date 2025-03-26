@@ -1,27 +1,82 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.GameTicking;
 using Content.Shared.SS220.Language;
 using Content.Shared.SS220.Language.Systems;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 
 namespace Content.Client.SS220.Language;
 
 public sealed partial class LanguageSystem : SharedLanguageSystem
 {
+    [Dependency] private readonly LanguageManager _language = default!;
+
+    // Не содержит информации о оригинальном сообщении, а лишь то, что видит кукла
+    private Dictionary<string, string> KnownPaperNodes = new();
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeNetworkEvent<UpdateScrambledMessagesEvent>(OnUpdateScrambledMessages);
+        SubscribeNetworkEvent<RoundEndMessageEvent>(OnRoundEnd);
+
         SubscribeNetworkEvent<UpdateLanguageSeedEvent>(OnUpdateLanguageSeed);
+        SubscribeNetworkEvent<UpdateClientPaperLanguageNodeInfo>(OnUpdateNodeInfo);
     }
 
-    private void OnUpdateScrambledMessages(UpdateScrambledMessagesEvent ev)
+    private void OnRoundEnd(RoundEndMessageEvent ev)
     {
-        ScrambledMessages = ev.ScrambledMessages;
+        KnownPaperNodes.Clear();
     }
 
     private void OnUpdateLanguageSeed(UpdateLanguageSeedEvent ev)
     {
         Seed = ev.Seed;
+    }
+
+    private void OnUpdateNodeInfo(UpdateClientPaperLanguageNodeInfo ev)
+    {
+        if (ev.Info == string.Empty)
+        {
+            KnownPaperNodes.Remove(ev.Key);
+            return;
+        }
+
+        KnownPaperNodes[ev.Key] = ev.Info;
+    }
+
+    public override string DecryptLanguageMarkups(string message, bool checkCanSpeak = true, EntityUid? reader = null)
+    {
+        var matches = FindLanguageMarkups(message);
+        if (matches == null)
+            return message;
+
+        var inputLeght = message.Length;
+        foreach (Match m in matches)
+        {
+            if (!TryParseTagArg(m.Value, LanguageMsgMarkup, out var key) ||
+                !KnownPaperNodes.TryGetValue(key, out var knownMessage))
+                continue;
+
+            var language = GetPrototypeFromKey(key);
+            if (language == null)
+                continue;
+
+            if (checkCanSpeak && (reader == null || !CanSpeak(reader.Value, language.ID)))
+                continue;
+
+            var leghtDelta = message.Length - inputLeght;
+            var markupIndex = m.Index + leghtDelta;
+            var markupLeght = m.Length;
+
+            var langtag = GenerateLanguageTag(knownMessage, language);
+            {
+                message = message.Remove(markupIndex, markupLeght);
+                message = message.Insert(markupIndex, langtag);
+            }
+        }
+
+        return message;
     }
 
     public void SelectLanguage(string languageId)
@@ -30,10 +85,22 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         RaiseNetworkEvent(ev);
     }
 
-    protected override void AddScrambledMessage(LanguageMessage newMsg)
+    private LanguagePrototype? GetPrototypeFromKey(string key)
     {
-        base.AddScrambledMessage(newMsg);
-        var ev = new ClientAddScrambledMessageEvent(newMsg.ScrambledMessage, newMsg);
+        key = ParseCahceKey(key);
+        var languageId = key.Split("/")[0];
+        _language.TryGetLanguageById(languageId, out var language);
+        return language;
+    }
+
+    public void RequestNodeInfo(string key)
+    {
+        var ev = new ClientRequestPaperLanguageNodeInfo(key);
         RaiseNetworkEvent(ev);
+    }
+
+    public bool TryGetPaperMessageFromKey(string key, [NotNullWhen(true)] out string? value)
+    {
+        return KnownPaperNodes.TryGetValue(key, out value);
     }
 }

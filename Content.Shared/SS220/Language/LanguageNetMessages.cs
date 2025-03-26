@@ -5,25 +5,16 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.Language;
 
 [Serializable, NetSerializable]
-public sealed class UpdateLanguageSeedEvent : EntityEventArgs
+public sealed class UpdateLanguageSeedEvent(int seed) : EntityEventArgs
 {
-    public int Seed;
-
-    public UpdateLanguageSeedEvent(int seed)
-    {
-        Seed = seed;
-    }
+    public int Seed = seed;
 }
 
 [Serializable, NetSerializable]
-public sealed class UpdateScrambledMessagesEvent : EntityEventArgs
+public sealed class UpdateClientPaperLanguageNodeInfo(string key, string info) : EntityEventArgs
 {
-    public Dictionary<string, LanguageMessage> ScrambledMessages = new();
-
-    public UpdateScrambledMessagesEvent(Dictionary<string, LanguageMessage> scrambledMessages)
-    {
-        ScrambledMessages = scrambledMessages;
-    }
+    public string Key = key;
+    public string Info = info;
 }
 
 [Serializable, NetSerializable]
@@ -32,25 +23,13 @@ public sealed class ClientRequireLanguageUpdateEvent : EntityEventArgs
 }
 
 [Serializable, NetSerializable]
-public sealed class ClientSelectLanguageEvent : EntityEventArgs
+public sealed class ClientSelectLanguageEvent(string languageId) : EntityEventArgs
 {
-    public string LanguageId = string.Empty;
-
-    public ClientSelectLanguageEvent(string languageId)
-    {
-        LanguageId = languageId;
-    }
+    public string LanguageId = languageId;
 }
 
 [Serializable, NetSerializable]
-public sealed class ClientAddScrambledMessageEvent : EntityEventArgs
+public sealed class ClientRequestPaperLanguageNodeInfo(string key) : EntityEventArgs
 {
-    public string Key;
-    public LanguageMessage Message;
-
-    public ClientAddScrambledMessageEvent(string key, LanguageMessage message)
-    {
-        Key = key;
-        Message = message;
-    }
+    public string Key = key;
 }

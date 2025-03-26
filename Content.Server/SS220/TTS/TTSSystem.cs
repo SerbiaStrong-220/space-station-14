@@ -17,6 +17,7 @@ using Robust.Server.Player;
 using Robust.Shared.GameObjects;
 using System.Linq;
 using Content.Server.SS220.Language;
+using Content.Shared.SS220.Language.Systems;
 
 namespace Content.Server.SS220.TTS;
 
@@ -201,19 +202,20 @@ public sealed partial class TTSSystem : EntitySystem
                 receivers.Add(ent);
         }
 
-        HandleEntitySpokeWithLanguage(uid, receivers, args.MessageWithLanguageKeys, args.IsRadio, args.ObfuscatedMessage);
+        if (args.LanguageMessage is { } languageMessage)
+            HandleEntitySpokeWithLanguage(uid, receivers, languageMessage, args.IsRadio, args.ObfuscatedMessage);
+        else
+            HandleEntitySpoke(uid, receivers, args.Message, args.IsRadio, args.ObfuscatedMessage);
     }
 
-    private async void HandleEntitySpokeWithLanguage(EntityUid source, IEnumerable<EntityUid> receivers, string message, bool isRadio, string? obfuscatedMessage = null)
+    private async void HandleEntitySpokeWithLanguage(EntityUid source, IEnumerable<EntityUid> receivers, LanguageMessage languageMessage, bool isRadio, string? obfuscatedMessage = null)
     {
         Dictionary<string, (HashSet<EntityUid>, string?)> messageListenersDict = new();
         foreach (var receiver in receivers)
         {
-            string sanitizedMessage;
+            string sanitizedMessage = languageMessage.GetMessage(receiver, true, false);
             if (obfuscatedMessage != null)
-                sanitizedMessage = _language.SanitizeMessage(source, receiver, message, out _, out obfuscatedMessage, false);
-            else
-                sanitizedMessage = _language.SanitizeMessage(source, receiver, message, out _, false);
+                obfuscatedMessage = languageMessage.GetObfuscatedMessage(receiver, true);
 
             if (messageListenersDict.TryGetValue(sanitizedMessage, out var listeners))
                 listeners.Item1.Add(receiver);
