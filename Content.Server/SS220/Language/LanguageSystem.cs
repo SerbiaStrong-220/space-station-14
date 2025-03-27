@@ -26,8 +26,6 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         SubscribeLocalEvent<LanguageComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<LanguageComponent, SendLanguageMessageAttemptEvent>(OnSendLanguageMessageAttemptEvent);
 
-        SubscribeLocalEvent<PaperSetContentAttemptEvent>(OnPaperSetContentAttempt, after: [typeof(SharedDocumentHelperSystem)]);
-
         // Client
         SubscribeNetworkEvent<ClientSelectLanguageEvent>(OnClientSelectLanguage);
         SubscribeNetworkEvent<ClientRequestPaperLanguageNodeInfo>(OnClientRequestPaperNodeInfo);

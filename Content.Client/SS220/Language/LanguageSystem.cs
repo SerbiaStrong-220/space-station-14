@@ -3,6 +3,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.SS220.Language;
 using Content.Shared.SS220.Language.Systems;
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Content.Client.SS220.Language;
@@ -45,6 +46,13 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         KnownPaperNodes[ev.Key] = ev.Info;
     }
 
+    public void SelectLanguage(string languageId)
+    {
+        var ev = new ClientSelectLanguageEvent(languageId);
+        RaiseNetworkEvent(ev);
+    }
+
+    #region Paper
     public override string DecryptLanguageMarkups(string message, bool checkCanSpeak = true, EntityUid? reader = null)
     {
         var matches = FindLanguageMarkups(message);
@@ -79,12 +87,6 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         return message;
     }
 
-    public void SelectLanguage(string languageId)
-    {
-        var ev = new ClientSelectLanguageEvent(languageId);
-        RaiseNetworkEvent(ev);
-    }
-
     private LanguagePrototype? GetPrototypeFromKey(string key)
     {
         key = ParseCahceKey(key);
@@ -103,4 +105,16 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     {
         return KnownPaperNodes.TryGetValue(key, out value);
     }
+
+    protected override string GenerateLanguageMsgMarkup(string message, LanguagePrototype language)
+    {
+        uint charSum = 0;
+        foreach (var c in message.ToCharArray())
+            charSum += c;
+
+        var key = GenerateCacheKey(language.ID, message);
+        KnownPaperNodes[key] = message;
+        return $"[{LanguageMsgMarkup}=\"{key}\"]";
+    }
+#endregion
 }

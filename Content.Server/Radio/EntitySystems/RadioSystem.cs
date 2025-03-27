@@ -184,8 +184,8 @@ public sealed class RadioSystem : EntitySystem
             if (_languageSystem.SendLanguageMessageAttempt(receiver, out var listener))
             {
                 RadioReceiveEvent languageRadioEv;
-                var hearedMessage = languageMessage.GetMessage(receiver, true, true);
-                var colorlessMessage = languageMessage.GetMessage(receiver, true, false);
+                var hearedMessage = languageMessage.GetMessage(listener, true, true);
+                var colorlessMessage = languageMessage.GetMessage(listener, true, false);
                 if (languageRadioReceiveEvents.TryGetValue(colorlessMessage, out var value))
                     languageRadioEv = value;
                 else

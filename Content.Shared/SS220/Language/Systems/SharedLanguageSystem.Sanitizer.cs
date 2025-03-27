@@ -2,6 +2,7 @@
 using Content.Shared.SS220.Language.Components;
 using Robust.Shared.Serialization;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Content.Shared.SS220.Language.Systems;
@@ -110,6 +111,7 @@ public abstract partial class SharedLanguageSystem
             list.Add((buffer.Item1, buffer.Item2));
         }
 
+        list = [.. list.Select(x => (x.Item1.Trim(), x.Item2))]; // trim strings
         return list;
     }
 
@@ -129,7 +131,7 @@ public abstract partial class SharedLanguageSystem
         if (m == null || !_language.TryGetLanguageByKey(m.Value.Trim(), out language))
             return false;
 
-        messageWithoutTags = Regex.Replace(message, keyPatern, string.Empty);
+        messageWithoutTags = Regex.Replace(message, keyPatern, string.Empty).Trim();
         return messageWithoutTags != null && language != null;
     }
 
@@ -200,13 +202,18 @@ public sealed class LanguageMessage
         return message;
     }
 
-    public string GetMessageWithLanguageKeys()
+    public string GetMessageWithLanguageKeys(bool withDefault = true)
     {
         string messageWithLanguageTags = "";
         for (var i = 0; i < Nodes.Count; i++)
         {
             if (i == 0)
-                messageWithLanguageTags += Nodes[i].GetMessageWithKey();
+            {
+                if (withDefault)
+                    messageWithLanguageTags += Nodes[i].GetMessageWithKey();
+                else
+                    messageWithLanguageTags += Nodes[i].GetMessage(false, false);
+            }
             else
                 messageWithLanguageTags += " " + Nodes[i].GetMessageWithKey();
         }

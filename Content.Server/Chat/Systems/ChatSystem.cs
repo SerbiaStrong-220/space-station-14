@@ -879,7 +879,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             return newLangMessage;
         });
-        newMessage = languageMessage.GetMessageWithLanguageKeys();
+        newMessage = languageMessage.GetMessageWithLanguageKeys(false);
 
         if (findEnglish)
         {
@@ -924,7 +924,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             RaiseLocalEvent(ev);
             return ev.Message;
         });
-        var newMessage = languageMessage.GetMessageWithLanguageKeys();
+        var newMessage = languageMessage.GetMessageWithLanguageKeys(false);
         //var ev = new TransformSpeechEvent(sender, message);
         //RaiseLocalEvent(ev);
 
