@@ -24,7 +24,7 @@
   - type: UseDelay
   - type: Spray
     sprayedPrototype: BigVapor
-    sprayVelocity: 4
+    sprayVelocity: 2
     sprayDistance: 6
     spraySound:
       path: /Audio/Effects/spray2.ogg
