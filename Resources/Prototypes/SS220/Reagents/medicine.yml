@@ -217,7 +217,7 @@
   worksOnTheDead: true
   metabolisms:
     Medicine:
-      metabolismRate: 0.4
+      metabolismRate: 0.25
       effects:
         - !type:HealthChange
           conditions:
@@ -225,4 +225,4 @@
             max: 213.0
           damage:
             types:
-              Сerebral: -3.2
+              Сerebral: -3.3

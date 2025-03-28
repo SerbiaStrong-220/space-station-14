@@ -1,9 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Cloning;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Random;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Rejuvenate;
+using Content.Shared.Traits;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.SS220.LimitationRevive;
 
@@ -13,11 +18,13 @@ namespace Content.Server.SS220.LimitationRevive;
 public sealed class LimitationReviveSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly EntityManager _entityManager = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {
         SubscribeLocalEvent<LimitationReviveComponent, UpdateMobStateEvent>(OnDeadMobState);
-        SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
         SubscribeLocalEvent<LimitationReviveComponent, RejuvenateEvent>(OnUseAdminCommand);
     }
 
@@ -30,23 +37,43 @@ public sealed class LimitationReviveSystem : EntitySystem
             return;
 
         ent.Comp.IsAlreadyDead = true;
+        ent.Comp.IsDamageTaken = false;
 
-        if(!TryComp<DamageableComponent>(ent.Owner, out var damageComp))
-            return;
-
-        _damageableSystem.TryChangeDamage(ent.Owner, ent.Comp.TypeDamageOnDead, true);
-        ent.Comp.CounterOfDead++;
-    }
-
-    private void OnCloning(Entity<LimitationReviveComponent> ent, ref CloningEvent args)
-    {
-        ent.Comp.IsAlreadyDead = false;
-        ent.Comp.CounterOfDead = 0;
+        Timer.Spawn(ent.Comp.TimeToDamage, () => TryDamageAfterDeath(ent.Owner));
     }
 
     private void OnUseAdminCommand(Entity<LimitationReviveComponent> ent, ref RejuvenateEvent args)
     {
+        ent.Comp.IsDamageTaken = false;
         ent.Comp.IsAlreadyDead = false;
         ent.Comp.CounterOfDead = 0;
+    }
+
+    /// <summary>
+    /// Attempt to damage and add a negative trait after death. Damage and Trait can only be received once per death.
+    /// </summary>
+    public void TryDamageAfterDeath(EntityUid uid)
+    {
+        if(!TryComp<LimitationReviveComponent>(uid, out var reviveComp))
+            return;
+
+        if(reviveComp.IsDamageTaken || reviveComp.IsAlreadyDead == false)
+            return;
+
+        reviveComp.CounterOfDead++;
+        reviveComp.IsDamageTaken = true;
+
+        if(!TryComp<DamageableComponent>(uid, out var damageComp))
+            return;
+
+        _damageableSystem.TryChangeDamage(uid, reviveComp.TypeDamageOnDead, true);
+
+        var traitString = _prototype.Index<WeightedRandomPrototype>(reviveComp.WeightListProto)
+            .Pick(_random);
+
+        var traitProto = _prototype.Index<TraitPrototype>(traitString);
+
+        if (traitProto.Components is not null)
+            _entityManager.AddComponents(uid, traitProto.Components, false);
     }
 }

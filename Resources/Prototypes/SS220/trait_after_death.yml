@@ -1,0 +1,10 @@
+- type: weightedRandom
+  id: TraitAfterDeathList
+  weights:
+    PoorVision: 0.4
+    Paracusia: 0.4
+    PainNumbness: 0.4
+    Blindness: 0.15
+    Muted: 0.15
+    Narcolepsy: 0.1
+    WheelchairBound: 0.05
