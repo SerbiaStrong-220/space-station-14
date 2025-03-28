@@ -143,7 +143,7 @@ public sealed class RadioSystem : EntitySystem
             NetEntity.Invalid,
             null);
         var chatMsg = new MsgChatMessage { Message = chat };
-        var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg, new());
+        var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg, new(), languageMessage);
 
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
         RaiseLocalEvent(ref sendAttemptEv);
@@ -191,7 +191,7 @@ public sealed class RadioSystem : EntitySystem
                 else
                 {
                     var newChatMsg = GetMsgChatMessage(messageSource, hearedMessage);
-                    languageRadioEv = new RadioReceiveEvent(message, messageSource, channel, radioSource, newChatMsg, new());
+                    languageRadioEv = new RadioReceiveEvent(message, messageSource, channel, radioSource, newChatMsg, new(), languageMessage);
                     languageRadioReceiveEvents.Add(colorlessMessage, languageRadioEv);
                 }
 

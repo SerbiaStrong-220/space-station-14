@@ -92,6 +92,9 @@ public sealed partial class TTSSystem : EntitySystem
             return;
         }
 
+        //if (args.LanguageMessage is { } languageMessage)
+        //    HandleLanguageRadio(args.Receivers, languageMessage, protoVoice.Speaker);
+        //else
         HandleRadio(args.Receivers, args.Message, protoVoice.Speaker);
     }
 
@@ -424,6 +427,22 @@ public sealed partial class TTSSystem : EntitySystem
             else
                 _netManager.ServerSendMessage(ttsMessage, receiver.Channel);
         }
+    }
+
+    private async void HandleLanguageRadio(RadioEventReceiver[] receivers, LanguageMessage languageMessage, string speaker)
+    {
+        Dictionary<string, List<RadioEventReceiver>> splitedByHearedMessage = new();
+        foreach (var receiver in receivers)
+        {
+            var hearedMessage = languageMessage.GetMessage(receiver.Actor, true, false);
+            if (splitedByHearedMessage.TryGetValue(hearedMessage, out var value))
+                value.Add(receiver);
+            else
+                splitedByHearedMessage[hearedMessage] = [receiver];
+        }
+
+        foreach (var (message, newReceivers) in splitedByHearedMessage)
+            HandleRadio(receivers, message, speaker);
     }
 
     private async void HandleRadio(RadioEventReceiver[] receivers, string message, string speaker)
