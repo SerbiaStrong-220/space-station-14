@@ -129,6 +129,9 @@ public abstract partial class SharedLanguageSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    /// Gets <see cref="LanguageDefinition"/> from <see cref="LanguageComponent.AvailableLanguages"/> by <paramref name="languageId"/>
+    /// </summary>
     public static LanguageDefinition? GetDefinition(Entity<LanguageComponent> ent, string languageId)
     {
         return ent.Comp.AvailableLanguages.Find(l => l.Id == languageId);

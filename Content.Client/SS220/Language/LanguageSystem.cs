@@ -46,6 +46,9 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         KnownPaperNodes[ev.Key] = ev.Info;
     }
 
+    /// <summary>
+    /// Sets the default language that the entity will speak (if it knows it)
+    /// </summary>
     public void SelectLanguage(string languageId)
     {
         var ev = new ClientSelectLanguageEvent(languageId);
@@ -53,6 +56,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     }
 
     #region Paper
+    /// <inheritdoc/>
     public override string DecryptLanguageMarkups(string message, bool checkCanSpeak = true, EntityUid? reader = null)
     {
         var matches = FindLanguageMarkups(message);
@@ -66,7 +70,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
                 !KnownPaperNodes.TryGetValue(key, out var knownMessage))
                 continue;
 
-            var language = GetPrototypeFromKey(key);
+            var language = GetPrototypeFromChacheKey(key);
             if (language == null)
                 continue;
 
@@ -87,7 +91,10 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         return message;
     }
 
-    private LanguagePrototype? GetPrototypeFromKey(string key)
+    /// <summary>
+    /// Gets the language prototype from the cache key
+    /// </summary>
+    private LanguagePrototype? GetPrototypeFromChacheKey(string key)
     {
         key = ParseCahceKey(key);
         var languageId = key.Split("/")[0];
@@ -95,17 +102,24 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         return language;
     }
 
+    /// <summary>
+    /// Requests information from the server from a hash key
+    /// </summary>
     public void RequestNodeInfo(string key)
     {
         var ev = new ClientRequestPaperLanguageNodeInfo(key);
         RaiseNetworkEvent(ev);
     }
 
+    /// <summary>
+    /// Returns value from <see cref="KnownPaperNodes"/> by key
+    /// </summary>
     public bool TryGetPaperMessageFromKey(string key, [NotNullWhen(true)] out string? value)
     {
         return KnownPaperNodes.TryGetValue(key, out value);
     }
 
+    /// <inheritdoc/>
     public override string GenerateLanguageMsgMarkup(string message, LanguagePrototype language)
     {
         uint charSum = 0;

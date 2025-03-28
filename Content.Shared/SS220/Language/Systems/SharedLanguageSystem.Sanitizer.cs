@@ -16,6 +16,9 @@ public abstract partial class SharedLanguageSystem
     // Cache for 1 tick
     private Dictionary<string, LanguageMessage> _cachedMessages = new();
 
+    /// <summary>
+    /// Sanitize the message by forming <see cref="LanguageMessage"/> by dividing the message into <see cref="LanguageNode"/>
+    /// </summary>
     public LanguageMessage SanitizeMessage(EntityUid source, string message)
     {
         var cacheKey = GetCahceKey(source, message);
@@ -230,6 +233,9 @@ public sealed partial class LanguageMessage
         _languageSystem = languageSystem ?? IoCManager.Resolve<EntityManager>().System<SharedLanguageSystem>();
     }
 
+    /// <summary>
+    /// Gets a united message from <see cref="Nodes"/>
+    /// </summary>
     public string GetMessage(EntityUid? listener, bool sanitize, bool colored = true)
     {
         var message = "";
@@ -249,6 +255,9 @@ public sealed partial class LanguageMessage
         return message;
     }
 
+    /// <summary>
+    /// Gets a united message from <see cref="Nodes"/> with language keys
+    /// </summary>
     public string GetMessageWithLanguageKeys(bool withDefault = true)
     {
         string messageWithLanguageTags = "";
@@ -267,26 +276,27 @@ public sealed partial class LanguageMessage
         return messageWithLanguageTags;
     }
 
+    /// <summary>
+    /// Gets a obfuscated united message from <see cref="Nodes"/>
+    /// </summary>
     public string GetObfuscatedMessage(EntityUid listener, bool sanitize)
     {
         return _languageSystem.ObfuscateMessageReadability(GetMessage(listener, sanitize, false), 0.2f);
     }
 
+    /// <summary>
+    /// Changes the message value of each <see cref="Nodes"/> by function
+    /// </summary>
     public void ChangeInNodeMessage(Func<string, string> func)
     {
         foreach (var node in Nodes)
             node.SetMessage(func.Invoke(node.Message));
     }
-
-    public LanguageNode? GetNode(int index)
-    {
-        if (Nodes.Count <= index)
-            return null;
-
-        return Nodes[index];
-    }
 }
 
+/// <summary>
+/// It contains information about the message, the language in which it was spoken and its scrambled version.
+/// </summary>
 [DataDefinition]
 [Serializable, NetSerializable, Access(Other = AccessPermissions.ReadExecute)]
 public sealed partial class LanguageNode

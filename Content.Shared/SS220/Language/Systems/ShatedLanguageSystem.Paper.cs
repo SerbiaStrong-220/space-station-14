@@ -27,6 +27,10 @@ public abstract partial class SharedLanguageSystem
         args.TransformedContent = ParseLanguageTags(writer, args.TransformedContent);
     }
 
+    /// <summary>
+    /// Decrypts the <see cref="LanguageMsgMarkup"/> tags in the message and replaces them with <see cref="PaperLanguageTagName"/>
+    /// if the entity knows the language in which the original message was spoken.
+    /// </summary>
     public abstract string DecryptLanguageMarkups(string message, bool checkCanSpeak = true, EntityUid? reader = null);
 
     public MatchCollection? FindLanguageMarkups(string message)
@@ -41,6 +45,9 @@ public abstract partial class SharedLanguageSystem
         return $"[{PaperLanguageTagName}={language.KeyWithPrefix}]{message}[/{PaperLanguageTagName}]";
     }
 
+    /// <summary>
+    /// Tries to get the <paramref name="value"/> of the tag argument written according to the pattern `<paramref name="key"/>=<paramref name="value"/>`
+    /// </summary>
     protected bool TryParseTagArg(string input, string key, [NotNullWhen(true)] out string? value)
     {
         value = null;
@@ -55,6 +62,9 @@ public abstract partial class SharedLanguageSystem
         return false;
     }
 
+    /// <summary>
+    /// Finds the <see cref="PaperLanguageTagName"/> tags in the message, and replaces them with the generated <see cref="LanguageMsgMarkup"/> tags.
+    /// </summary>
     public string ParseLanguageTags(EntityUid source, string message)
     {
         var tagStartMatches = _tagStartRegex.Matches(message);
@@ -92,6 +102,9 @@ public abstract partial class SharedLanguageSystem
         return message;
     }
 
+    /// <summary>
+    /// Generates a <see cref="LanguageMsgMarkup"/> tag for <paramref name="message"/>
+    /// </summary>
     public abstract string GenerateLanguageMsgMarkup(string message, LanguagePrototype language);
 
     protected string GenerateCacheKey(string languageId, string message)

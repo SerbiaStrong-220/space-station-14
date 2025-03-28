@@ -26,6 +26,7 @@ public sealed partial class LanguageSystem
         UpdateClientPaperNodeInfo(ev.Key, info, args.SenderSession);
     }
 
+    /// <inheritdoc/>
     public override string DecryptLanguageMarkups(string message, bool checkCanSpeak = true, EntityUid? reader = null)
     {
         var matches = FindLanguageMarkups(message);
@@ -57,6 +58,7 @@ public sealed partial class LanguageSystem
         return message;
     }
 
+    /// <inheritdoc/>
     public override string GenerateLanguageMsgMarkup(string message, LanguagePrototype language)
     {
         uint charSum = 0;
