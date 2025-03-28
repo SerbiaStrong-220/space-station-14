@@ -20,17 +20,39 @@
   - type: Item
     sprite: Objects/Weapons/Guns/Basic/spraynozzle.rsi
     size: Normal
-  - type: Gun
-    cameraRecoilScalar: 0 #no recoil
-    fireRate: 4
-    selectedMode: FullAuto
-    availableModes:
-    - FullAuto
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/water_spray.ogg
+  # SS220 Make nozzle great again begin
+  - type: UseDelay
+  - type: Spray
+    sprayedPrototype: BigVapor
+    sprayVelocity: 4
+    sprayDistance: 6
+    spraySound:
+      path: /Audio/Effects/spray2.ogg
+    transferAmount: 10
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 10
+  - type: SolutionItemStatus
+    solution: spray
   - type: Appearance
-  - type: ClothingSlotAmmoProvider
-    targetSlot: BACK
-    providerWhitelist:
+  - type: ClothingSlotSolutionProvider
+    solutionRequiredSlot: BACK
+    solutionProviderWhitelist:
       tags:
       - NozzleBackTank
+  #- type: Gun
+  #  cameraRecoilScalar: 0 #no recoil
+  #  fireRate: 4
+  #  selectedMode: FullAuto
+  #  availableModes:
+  #  - FullAuto
+  # soundGunshot:
+  #   path: /Audio/Weapons/Guns/Gunshots/water_spray.ogg
+  # - type: Appearance
+  #- type: ClothingSlotAmmoProvider
+  #  targetSlot: BACK
+  #  providerWhitelist:
+  #    tags:
+  #    - NozzleBackTank
+  # SS220 Make nozzle great again end
