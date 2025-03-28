@@ -70,7 +70,7 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
         result.Append(punctuation);
 
         _capitalize = false;
-        return result.ToString();
+        return result.ToString().Trim();
     }
 
     private string ScrambleWord(string word, int seed)

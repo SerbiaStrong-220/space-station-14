@@ -57,7 +57,7 @@ public sealed partial class LanguageSystem
         return message;
     }
 
-    protected override string GenerateLanguageMsgMarkup(string message, LanguagePrototype language)
+    public override string GenerateLanguageMsgMarkup(string message, LanguagePrototype language)
     {
         uint charSum = 0;
         foreach (var c in message.ToCharArray())

@@ -36,7 +36,7 @@ public abstract partial class SharedLanguageSystem
         return _languageMarkupRegex.Matches(message);
     }
 
-    protected string GenerateLanguageTag(string message, LanguagePrototype language)
+    public string GenerateLanguageTag(string message, LanguagePrototype language)
     {
         return $"[{PaperLanguageTagName}={language.Key}]{message}[/{PaperLanguageTagName}]";
     }
@@ -92,7 +92,7 @@ public abstract partial class SharedLanguageSystem
         return message;
     }
 
-    protected abstract string GenerateLanguageMsgMarkup(string message, LanguagePrototype language);
+    public abstract string GenerateLanguageMsgMarkup(string message, LanguagePrototype language);
 
     protected string GenerateCacheKey(string languageId, string message)
     {

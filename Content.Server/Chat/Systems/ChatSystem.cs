@@ -864,22 +864,37 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         var newMessage = message.Trim();
         // SS220 languages begin
-        GetRadioKeycodePrefix(source, newMessage, out newMessage, out var prefix);
+        var languageMessage = _languageSystem.SanitizeMessage(source, newMessage);
 
+        var prefix = string.Empty;
         var findEnglish = false;
         string? newEmoteStr = null;
-        var languageMessage = _languageSystem.SanitizeMessage(source, newMessage);
+        var i = 0;
         languageMessage.ChangeInNodeMessage(msg =>
         {
+            i++;
+            if (i == 1) // only for 1st node
+                GetRadioKeycodePrefix(source, msg, out msg, out prefix);
+
             var newLangMessage = ReplaceWords(msg);
             newLangMessage = SanitizeMessageReplaceWords(newLangMessage);
             _sanitizer.TrySanitizeEmoteShorthands(newLangMessage, source, out newLangMessage, out newEmoteStr, false);
             if (!_sanitizer.CheckNoEnglish(source, newLangMessage))
                 findEnglish = true;
 
+            if (i == 1) // only for 1st node
+            {
+                if (capitalize)
+                    msg = SanitizeMessageCapital(msg);
+            }
+
+            if (capitalizeTheWordI)
+                msg = SanitizeMessageCapitalizeTheWordI(msg, "i");
+            if (punctuate)
+                msg = SanitizeMessagePeriod(msg);
+
             return newLangMessage;
         });
-        newMessage = languageMessage.GetMessageWithLanguageKeys(false);
 
         if (findEnglish)
         {
@@ -894,14 +909,17 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         // Sanitize it first as it might change the word order
         //_sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out emoteStr);
-        // SS220 languages end
 
-        if (capitalize)
-            newMessage = SanitizeMessageCapital(newMessage);
-        if (capitalizeTheWordI)
-            newMessage = SanitizeMessageCapitalizeTheWordI(newMessage, "i");
-        if (punctuate)
-            newMessage = SanitizeMessagePeriod(newMessage);
+
+        //if (capitalize)
+        //    newMessage = SanitizeMessageCapital(newMessage);
+        //if (capitalizeTheWordI)
+        //    newMessage = SanitizeMessageCapitalizeTheWordI(newMessage, "i");
+        //if (punctuate)
+        //    newMessage = SanitizeMessagePeriod(newMessage);
+
+        newMessage = languageMessage.GetMessageWithLanguageKeys();
+        // SS220 languages end
 
         return prefix + newMessage;
     }
@@ -924,7 +942,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             RaiseLocalEvent(ev);
             return ev.Message;
         });
-        var newMessage = languageMessage.GetMessageWithLanguageKeys(false);
+        var newMessage = languageMessage.GetMessageWithLanguageKeys();
         //var ev = new TransformSpeechEvent(sender, message);
         //RaiseLocalEvent(ev);
 

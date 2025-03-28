@@ -27,6 +27,9 @@ public sealed partial class LanguageComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<LanguageDefinition> AvailableLanguages = new();
+
+    [DataField, AutoNetworkedField]
+    public bool KnowAllLLanguages;
 }
 
 [DataDefinition]

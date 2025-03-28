@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Language.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -12,21 +13,63 @@ public abstract partial class SharedLanguageSystem
     private Regex? _textWithKeyRegex;
     private TimeSpan _regexTimeout = TimeSpan.FromSeconds(1);
 
+    // Cache for 1 tick
+    private Dictionary<string, LanguageMessage> _cachedMessages = new();
+
     public LanguageMessage SanitizeMessage(EntityUid source, string message)
     {
+        var cacheKey = GetCahceKey(source, message);
+        if (_cachedMessages.TryGetValue(cacheKey, out var cahcedLanguageMessage))
+            return cahcedLanguageMessage;
+
         List<LanguageNode> nodes = new();
         var defaultLanguage = GetSelectedLanguage(source);
         if (defaultLanguage == null && !_language.TryGetLanguageById(UniversalLanguage, out defaultLanguage))
             return new LanguageMessage(nodes, message, this);
 
         var languageStrings = SplitMessageByLanguages(source, message, defaultLanguage);
-        foreach (var (languageMessage, language) in languageStrings)
+        foreach (var (inStringMessage, language) in languageStrings)
         {
-            var node = new LanguageNode(language, languageMessage, this);
+            var node = new LanguageNode(language, inStringMessage, this);
             nodes.Add(node);
         }
 
-        return new LanguageMessage(nodes, message, this);
+        var languageMessage = new LanguageMessage(nodes, message, this);
+        _cachedMessages.Add(cacheKey, languageMessage);
+        return languageMessage;
+    }
+
+    private string GetCahceKey(EntityUid source, string message)
+    {
+        var avalibleLanguageKeys = string.Empty;
+        if (!TryComp<LanguageComponent>(source, out var languageComponent))
+        {
+            if (_language.TryGetLanguageById(UniversalLanguage, out var UniLanguage))
+                avalibleLanguageKeys = UniLanguage.Key;
+        }
+        else if (languageComponent.KnowAllLLanguages)
+            avalibleLanguageKeys = "knowall";
+        else
+        {
+            foreach (var definition in languageComponent.AvailableLanguages)
+            {
+                if (!definition.CanSpeak)
+                    continue;
+
+                if (_language.TryGetLanguageById(definition.Id, out var language))
+                {
+                    if (avalibleLanguageKeys.Length > 0)
+                        avalibleLanguageKeys += "_";
+
+                    avalibleLanguageKeys += language.Key;
+                }
+            }
+        }
+
+        if (avalibleLanguageKeys == string.Empty)
+            avalibleLanguageKeys = "knownothing";
+
+        return $"{avalibleLanguageKeys}/\"{message}\"";
     }
 
     /// <summary>
@@ -168,10 +211,14 @@ public abstract partial class SharedLanguageSystem
     }
 }
 
+[DataDefinition]
 [Serializable, NetSerializable]
-public sealed class LanguageMessage
+public sealed partial class LanguageMessage
 {
+    [DataField]
     public List<LanguageNode> Nodes;
+
+    [DataField]
     public string OriginalMessage;
 
     private readonly SharedLanguageSystem _languageSystem;
@@ -230,24 +277,68 @@ public sealed class LanguageMessage
         foreach (var node in Nodes)
             node.SetMessage(func.Invoke(node.Message));
     }
+
+    public LanguageNode? GetNode(int index)
+    {
+        if (Nodes.Count <= index)
+            return null;
+
+        return Nodes[index];
+    }
 }
 
+[DataDefinition]
 [Serializable, NetSerializable, Access(Other = AccessPermissions.ReadExecute)]
-public sealed class LanguageNode
+public sealed partial class LanguageNode
 {
+    [DataField]
+    public ProtoId<LanguagePrototype> LanguageId
+    {
+        get => _languageId;
+        set
+        {
+            _languageId = value;
+            Language = IoCManager.Resolve<PrototypeManager>().Index(value);
+        }
+    }
+    private ProtoId<LanguagePrototype> _languageId;
+
     public LanguagePrototype Language;
-    public string Message;
+
+    [DataField]
+    public string Message
+    {
+        get => _message;
+        set
+        {
+            _message = value;
+            UpdateScrambledMessage();
+        }
+    }
+    private string _message = string.Empty;
+
     public string ScrambledMessage = string.Empty;
 
     private readonly SharedLanguageSystem _languageSystem;
 
     public LanguageNode(LanguagePrototype language, string message, SharedLanguageSystem? languageSystem = null)
     {
-        Language = language;
-        Message = message;
         _languageSystem = languageSystem ?? IoCManager.Resolve<EntityManager>().System<SharedLanguageSystem>();
 
-        UpdateScrambledMessage();
+        Language = language;
+        _languageId = language.ID;
+
+        Message = message;
+    }
+
+    public LanguageNode(ProtoId<LanguagePrototype> languageId, string message, SharedLanguageSystem? languageSystem = null)
+    {
+        _languageSystem = languageSystem ?? IoCManager.Resolve<EntityManager>().System<SharedLanguageSystem>();
+
+        _languageId = languageId;
+        Language = IoCManager.Resolve<PrototypeManager>().Index(languageId);
+
+        Message = message;
     }
 
     public string GetMessage(bool scrambled, bool colored)

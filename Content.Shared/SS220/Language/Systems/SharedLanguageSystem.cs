@@ -27,6 +27,13 @@ public abstract partial class SharedLanguageSystem : EntitySystem
         SubscribeLocalEvent<PaperSetContentAttemptEvent>(OnPaperSetContentAttempt, after: [typeof(SharedDocumentHelperSystem)]);
     }
 
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        _cachedMessages.Clear();
+    }
+
     #region Component
     /// <summary>
     /// Adds languages to <see cref="LanguageComponent.AvailableLanguages"/> from <paramref name="languageIds"/>.
@@ -168,6 +175,8 @@ public abstract partial class SharedLanguageSystem : EntitySystem
 
             return false;
         }
+        else if (comp.KnowAllLLanguages)
+            return true;
 
         return ContainsLanguage((uid, comp), languageId, true);
     }
@@ -183,6 +192,8 @@ public abstract partial class SharedLanguageSystem : EntitySystem
 
         if (!TryComp<LanguageComponent>(uid, out var comp))
             return false;
+        else if (comp.KnowAllLLanguages)
+            return true;
 
         return ContainsLanguage((uid, comp), languageId);
     }
