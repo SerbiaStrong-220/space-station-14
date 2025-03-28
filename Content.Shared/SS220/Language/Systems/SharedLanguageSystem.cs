@@ -70,18 +70,24 @@ public abstract partial class SharedLanguageSystem : EntitySystem
             return false;
 
         var newDef = new LanguageDefinition(languageId, canSpeak);
-        AddLanguage(ent, newDef);
-        return true;
+        return AddLanguage(ent, newDef);
     }
 
     /// <summary>
     /// Adds a <see cref="LanguageDefinition"/> to the <see cref="LanguageComponent.AvailableLanguages"/>
     /// </summary>
-    public void AddLanguage(Entity<LanguageComponent> ent, LanguageDefinition definition)
+    public bool AddLanguage(Entity<LanguageComponent> ent, LanguageDefinition definition)
     {
+        foreach (var cur in ent.Comp.AvailableLanguages)
+        {
+            if (cur.IsEqual(definition))
+                return false; // Doesn't add definition with same Id
+        }
+
         ent.Comp.AvailableLanguages.Add(definition);
         ent.Comp.SelectedLanguage ??= definition.Id;
         Dirty(ent);
+        return true;
     }
 
     /// <summary>

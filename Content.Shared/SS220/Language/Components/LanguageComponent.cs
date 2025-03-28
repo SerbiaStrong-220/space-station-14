@@ -47,4 +47,9 @@ public sealed partial class LanguageDefinition
         Id = id;
         CanSpeak = canSpeak;
     }
+
+    public bool IsEqual(LanguageDefinition other)
+    {
+        return Id == other.Id;
+    }
 }
