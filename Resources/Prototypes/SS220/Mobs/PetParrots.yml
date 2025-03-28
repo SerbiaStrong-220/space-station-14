@@ -27,6 +27,7 @@
     - id: Galactic
     - id: SolCommon
       canSpeak: false
+  - type: InteractionPopup
     successChance: 1
   - type: Grammar
     attributes:
