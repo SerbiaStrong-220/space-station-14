@@ -22,7 +22,11 @@
   description: Clown's pet parrot.
   suffix: Роль
   components:
-  - type: InteractionPopup
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: SolCommon
+      canSpeak: false
     successChance: 1
   - type: Grammar
     attributes:
