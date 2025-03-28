@@ -1236,6 +1236,12 @@
   abstract: true
   components:
   - type: CombatMode
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+#SS220 languages tweaks end
   - type: Inventory
     templateId: monkeyinventory
     speciesId: monkey
@@ -3003,6 +3009,12 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: syndicat
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+#SS220 languages tweaks end
   - type: DamageStateVisuals
     states:
       Alive:

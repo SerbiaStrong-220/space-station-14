@@ -179,9 +179,9 @@ public sealed class RadioSystem : EntitySystem
                 continue;
 
             // SS220 languages begin
-            if (_languageSystem.TryGetLanguageListener(receiver, out var listener))
+            if (_languageSystem.SendLanguageMessageAttempt(receiver, out var listener))
             {
-                var scrambledMessage = _languageSystem.SanitizeMessage(messageSource, listener.Value, message, out var colorlessMessage);
+                var scrambledMessage = _languageSystem.SanitizeMessage(messageSource, listener, message, out var colorlessMessage);
                 if (messageListenerDict.TryGetValue((scrambledMessage, colorlessMessage), out var lisneners))
                     lisneners.Add(receiver);
                 else
