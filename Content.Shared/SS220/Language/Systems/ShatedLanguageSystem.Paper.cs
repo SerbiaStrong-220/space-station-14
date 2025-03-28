@@ -38,7 +38,7 @@ public abstract partial class SharedLanguageSystem
 
     public string GenerateLanguageTag(string message, LanguagePrototype language)
     {
-        return $"[{PaperLanguageTagName}={language.Key}]{message}[/{PaperLanguageTagName}]";
+        return $"[{PaperLanguageTagName}={language.KeyWithPrefix}]{message}[/{PaperLanguageTagName}]";
     }
 
     protected bool TryParseTagArg(string input, string key, [NotNullWhen(true)] out string? value)

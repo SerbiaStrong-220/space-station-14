@@ -75,7 +75,7 @@ public sealed partial class LanguageSettingsPopup : Popup
         foreach (var language in availableLanguages)
         {
             var text = Loc.GetString("language-settings-ui-field-name",
-                ("name", Loc.GetString(language.Name)), ("key", language.Key));
+                ("name", Loc.GetString(language.Name)), ("key", language.KeyWithPrefix));
             var button = new Button() { Text = text };
 
             if (language.Description is { } desc)

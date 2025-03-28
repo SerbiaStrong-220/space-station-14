@@ -45,7 +45,7 @@ public abstract partial class SharedLanguageSystem
         if (!TryComp<LanguageComponent>(source, out var languageComponent))
         {
             if (_language.TryGetLanguageById(UniversalLanguage, out var UniLanguage))
-                avalibleLanguageKeys = UniLanguage.Key;
+                avalibleLanguageKeys = UniLanguage.KeyWithPrefix;
         }
         else if (languageComponent.KnowAllLLanguages)
             avalibleLanguageKeys = "knowall";
@@ -61,7 +61,7 @@ public abstract partial class SharedLanguageSystem
                     if (avalibleLanguageKeys.Length > 0)
                         avalibleLanguageKeys += "_";
 
-                    avalibleLanguageKeys += language.Key;
+                    avalibleLanguageKeys += language.KeyWithPrefix;
                 }
             }
         }
@@ -204,7 +204,7 @@ public abstract partial class SharedLanguageSystem
                 continue;
             }
 
-            list.Add((language.Key, languageMessage));
+            list.Add((language.KeyWithPrefix, languageMessage));
         }
 
         return list;
@@ -355,7 +355,7 @@ public sealed partial class LanguageNode
 
     public string GetMessageWithKey()
     {
-        return $"{Language.Key} {Message}";
+        return $"{Language.KeyWithPrefix} {Message}";
     }
 
     public void SetMessage(string value)
