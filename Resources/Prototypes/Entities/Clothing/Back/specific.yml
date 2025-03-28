@@ -71,9 +71,11 @@
           tags:
             - SprayNozzle
   - type: Appearance
+  # SS220 Nozzle Refactor begin
   #- type: SolutionAmmoProvider
   #  solutionId: tank
-    proto: BulletWaterShot
+  # proto: BulletWaterShot
+  # SS220 Nozzle Refactor end
   - type: SolutionContainerManager
     solutions:
       tank:
@@ -87,10 +89,6 @@
     interfaces:
       enum.TransferAmountUiKey.Key:
         type: TransferAmountBoundUserInterface
-      # SS220 Nuzzle refactor begin
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-      # SS220 Nuzzle refactor end
   - type: DrawableSolution
     solution: tank
   - type: RefillableSolution
@@ -99,14 +97,15 @@
     solution: tank
   - type: ExaminableSolution
     solution: tank
-  # SS220 Nuzzle refactor begin
+  # SS220 Nozzle refactor begin
   - type: SolutionProvider
     solutionId: tank
-  - type: Storage
-    grid:
-    - 0,0,1,1
+    tankSlot:
     whitelist:
       components:
       - ClothingSlotSolutionProvider
-  # SS220 Nuzzle refactor begin
+- - type: ContainerContainer
+    containers:
+      NozzleSlot: !type:ContainerSlot {}
+  # SS220 Nozzle refactor begin
 

@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Fluids;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.Spray.Components;
@@ -10,17 +11,28 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.Spray.Systems;
 
-public sealed partial class SharedSpraySystem : EntitySystem
+public abstract class SharedSpraySystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] protected readonly ItemSlotsSystem ItemSlotsSystem = default!;
+    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<ClothingSlotSolutionProviderComponent, SprayAttemptEvent>(OnClothingTakeSolution);
         SubscribeLocalEvent<ClothingSlotSolutionProviderComponent, GetSolutionCountEvent>(OnClothingSolutionCount);
+        SubscribeLocalEvent<SolutionProviderComponent, ComponentInit>(OnComponentInit);
+    }
+
+    protected virtual void OnComponentInit(EntityUid uid, SolutionProviderComponent tank, ComponentInit args)
+    {
+
+        ItemSlotsSystem.AddItemSlot(uid, SolutionProviderComponent.NozzleSlot, tank.TankSlot);
+
+        UpdateTankAppearance(uid, tank);
     }
 
     private void OnClothingTakeSolution(Entity<ClothingSlotSolutionProviderComponent> ent, ref SprayAttemptEvent args)
@@ -67,5 +79,9 @@ public sealed partial class SharedSpraySystem : EntitySystem
         }
 
         return false;
+    }
+    private void UpdateTankAppearance(EntityUid uid, SolutionProviderComponent tank)
+    {
+        Appearance.SetData(uid, TankVisuals.NozzleInserted, tank.ContainedNozzle != null);
     }
 }
