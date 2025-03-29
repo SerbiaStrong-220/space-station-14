@@ -5,7 +5,6 @@ using Robust.Shared.Random;
 using Content.Shared.Paper;
 using Content.Shared.SS220.Paper;
 using System.Text;
-using YamlDotNet.Core.Tokens;
 
 namespace Content.Shared.SS220.Language.Systems;
 
@@ -16,9 +15,6 @@ public abstract partial class SharedLanguageSystem : EntitySystem
 
     public readonly string UniversalLanguage = "Universal";
     public readonly string GalacticLanguage = "Galactic";
-
-    // Максимаьно возможный модификатор для символа и соответсвенно максимальная длина уникального паттерна.
-    private const int MaxCharCoeff = 50;
 
     public int Seed = 0;
 
