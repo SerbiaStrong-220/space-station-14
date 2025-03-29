@@ -33,7 +33,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStart);
         SubscribeLocalEvent<LanguageComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<LanguageComponent, GetLanguageListenerEvent>(OnGetLanguage);
+        SubscribeLocalEvent<LanguageComponent, SendLanguageMessageAttemptEvent>(OnSendLanguageMessageAttemptEvent);
 
         // UI
         SubscribeNetworkEvent<ClientSelectLanguageEvent>(OnClientSelectLanguage);
@@ -60,10 +60,9 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         TrySetLanguage(ent, 0);
     }
 
-    private void OnGetLanguage(Entity<LanguageComponent> ent, ref GetLanguageListenerEvent args)
+    private void OnSendLanguageMessageAttemptEvent(Entity<LanguageComponent> ent, ref SendLanguageMessageAttemptEvent args)
     {
         args.Listener = ent;
-        args.Handled = true;
     }
 
     #region Client
@@ -295,16 +294,15 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     }
 
     /// <summary>
-    ///     Raises event to receive the listener entity.
+    ///     Raises event to receive a response is it possible to send a message in the language
     ///     This is done for the possibility of forwarding
     /// </summary>
-    public bool TryGetLanguageListener(EntityUid uid, [NotNullWhen(true)] out Entity<LanguageComponent>? listener)
+    public bool SendLanguageMessageAttempt(EntityUid uid, out EntityUid listener)
     {
-        var ev = new GetLanguageListenerEvent();
+        var ev = new SendLanguageMessageAttemptEvent();
         RaiseLocalEvent(uid, ref ev);
-        listener = ev.Listener;
-
-        return listener != null;
+        listener = ev.Listener ?? uid;
+        return !ev.Cancelled;
     }
 
     /// <summary>
@@ -355,8 +353,8 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 }
 
 [ByRefEvent]
-public sealed class GetLanguageListenerEvent() : HandledEntityEventArgs
+public sealed class SendLanguageMessageAttemptEvent() : CancellableEntityEventArgs
 {
-    public Entity<LanguageComponent>? Listener = null;
+    public EntityUid? Listener = null;
 }
 
