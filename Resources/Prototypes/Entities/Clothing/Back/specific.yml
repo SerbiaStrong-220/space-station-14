@@ -75,9 +75,11 @@
           tags:
             - SprayNozzle
   - type: Appearance
-  - type: SolutionAmmoProvider
-    solutionId: tank
-    proto: BulletWaterShot
+  # SS220 Nozzle Refactor begin
+  #- type: SolutionAmmoProvider
+  #  solutionId: tank
+  # proto: BulletWaterShot
+  # SS220 Nozzle Refactor end
   - type: SolutionContainerManager
     solutions:
       tank:
@@ -99,3 +101,15 @@
     solution: tank
   - type: ExaminableSolution
     solution: tank
+  # SS220 Nozzle refactor begin
+  - type: SolutionProvider
+    solutionId: tank
+    tankSlot:
+    whitelist:
+      components:
+      - ClothingSlotSolutionProvider
+- - type: ContainerContainer
+    containers:
+      NozzleSlot: !type:ContainerSlot {}
+  # SS220 Nozzle refactor begin
+
