@@ -540,22 +540,22 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (!HasComp<ActorComponent>(source) || hideLog)
             return;
 
-        var defaultLanguageName = _languageSystem.GetSelectedLanguage(source)?.Name ?? "none"; // SS220 languages
+        var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none"; // SS220 languages
         if (originalMessage == message)
         {
             if (name != Name(source))
-                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Say from {ToPrettyString(source):user} as {name}: {originalMessage}, defaultLanguage: {defaultLanguageName}."); // SS220 languages
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Say from {ToPrettyString(source):user} as {name}: {originalMessage}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
             else
-                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Say from {ToPrettyString(source):user}: {originalMessage}, defaultLanguage: {defaultLanguageName}."); // SS220 languages
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Say from {ToPrettyString(source):user}: {originalMessage}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
         }
         else
         {
             if (name != Name(source))
                 _adminLogger.Add(LogType.Chat, LogImpact.Low,
-                    $"Say from {ToPrettyString(source):user} as {name}, original: {originalMessage}, transformed: {message}, defaultLanguage: {defaultLanguageName}."); // SS220 languages
+                    $"Say from {ToPrettyString(source):user} as {name}, original: {originalMessage}, transformed: {message}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
             else
                 _adminLogger.Add(LogType.Chat, LogImpact.Low,
-                    $"Say from {ToPrettyString(source):user}, original: {originalMessage}, transformed: {message}, defaultLanguage: {defaultLanguageName}."); // SS220 languages
+                    $"Say from {ToPrettyString(source):user}, original: {originalMessage}, transformed: {message}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
         }
     }
 
@@ -648,24 +648,24 @@ public sealed partial class ChatSystem : SharedChatSystem
         var ev = new EntitySpokeEvent(source, message, originalMessage, channel, obfuscatedMessage, languageMessage);
         RaiseLocalEvent(source, ev, true);
 
-        var defaultLanguageName = _languageSystem.GetSelectedLanguage(source)?.Name ?? "none";
+        var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none";
         // SS220 languages end
         if (!hideLog)
             if (originalMessage == message)
             {
                 if (name != Name(source))
-                    _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user} as {name}: {originalMessage}, defaultLanguage: {defaultLanguageName}."); // SS220 languages
+                    _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user} as {name}: {originalMessage}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
                 else
-                    _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user}: {originalMessage}, defaultLanguage: {defaultLanguageName}."); // SS220 languages
+                    _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Whisper from {ToPrettyString(source):user}: {originalMessage}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
             }
             else
             {
                 if (name != Name(source))
                     _adminLogger.Add(LogType.Chat, LogImpact.Low,
-                    $"Whisper from {ToPrettyString(source):user} as {name}, original: {originalMessage}, transformed: {message}, defaultLanguage: {defaultLanguageName}."); // SS220 languages
+                    $"Whisper from {ToPrettyString(source):user} as {name}, original: {originalMessage}, transformed: {message}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
                 else
                     _adminLogger.Add(LogType.Chat, LogImpact.Low,
-                    $"Whisper from {ToPrettyString(source):user}, original: {originalMessage}, transformed: {message}, defaultLanguage: {defaultLanguageName}."); // SS220 languages
+                    $"Whisper from {ToPrettyString(source):user}, original: {originalMessage}, transformed: {message}, defaultLanguage: {defaultLanguageId}."); // SS220 languages
             }
     }
 
