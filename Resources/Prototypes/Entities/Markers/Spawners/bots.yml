@@ -6,7 +6,7 @@
   - type: Sprite
     layers:
       - state: green
-      - sprite: Mobs/Silicon/Bots/medibot.rsi
+      - sprite: SS220/Mobs/Silicon/Bots/medibot.rsi #SS220 Clean & Med Bot Resprite
         state: medibot
   - type: ConditionalSpawner
     prototypes:
@@ -20,7 +20,7 @@
   - type: Sprite
     layers:
       - state: green
-      - sprite: Mobs/Silicon/Bots/cleanbot.rsi
+      - sprite: SS220/Mobs/Silicon/Bots/cleanbot.rsi #SS220 Clean & Med Bot Resprite
         state: cleanbot
   - type: ConditionalSpawner
     prototypes:
