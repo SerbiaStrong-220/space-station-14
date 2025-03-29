@@ -284,3 +284,43 @@
     - state: "id_overlay"
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false
+
+- type: entity
+  parent: BasePDA
+  id: ExplorerPDA
+  name: explorer PDA
+  description: Solid as a rock
+  components:
+  - type: Pda
+    id: ExplorerIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-explorer
+  - type: PdaBorderColor
+    borderColor: "#7b6c47"
+    accentVColor: "#8133a8"
+  - type: Sprite
+    sprite: Objects/Devices/pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - state: "screen-pai"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-explorer
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+

@@ -50,6 +50,7 @@
       - Service
       - Theatre
       - Magistrate #SS220-Magistrate Foundation
+      - Explorer #SS220 Explorer
       privilegedIdSlot:
         name: id-card-console-privileged-id
         ejectSound: /Audio/Machines/id_swipe.ogg
@@ -119,6 +120,7 @@
     - Service
     - Theatre
     - Magistrate #SS220-Magistrate Foundation
+    - Explorer #SS220 Explorer
     - CentralCommand
     - NuclearOperative
     - SyndicateAgent
