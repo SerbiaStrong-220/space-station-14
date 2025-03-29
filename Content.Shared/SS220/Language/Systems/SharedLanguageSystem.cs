@@ -4,6 +4,8 @@ using Content.Shared.SS220.Language.Components;
 using Robust.Shared.Random;
 using Content.Shared.Paper;
 using Content.Shared.SS220.Paper;
+using System.Text;
+using YamlDotNet.Core.Tokens;
 
 namespace Content.Shared.SS220.Language.Systems;
 
@@ -251,27 +253,23 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Returns the int value from a string by adding the value of each character of the string (Unicode)
-    ///     multiplied by its position in the string
+    ///     Returns the int value from a string.
     /// </summary>
     public static int GetSeedFromString(string input)
     {
+        var bytes = Encoding.Unicode.GetBytes(input);
         var seed = 0;
-        var charcoeff = 1;
-        foreach (var c in input)
+        var buffer = 0;
+        for (var i = 0; i < bytes.Length; i++)
         {
-            /// Kirus59: Не придумал пока ничего лучше, чем перемножение каждого символа строки на его позицию.
-            /// Однако без ограничения коэффициента позиции символа - выходное значение перегружалось уже при длине строки в 2793 символа.
-            /// Поэтому добавил огранчиение этого значения, что хоть и не гарантирует 100%-ю уникального выходного значения (при повторении паттернов),
-            /// но зато увеличивает максимальную длину входящей строки обратно пропорционально значению ограничения коэффициента.
-            /// При ограничении = 50 - максимальная длина строки составляет 156050 символов. Использование более длинных строк может привести к повтору значений для разных строк
-            if (charcoeff > MaxCharCoeff)
-                charcoeff = 1;
-
-            seed += c * charcoeff;
-            charcoeff++;
+            if (i + 1 % 32 == 0)
+            {
+                buffer += seed;
+                seed = 0;
+            }
+            seed = (seed << 1) ^ bytes[i];
         }
-
+        seed += buffer;
         return seed;
     }
 }
