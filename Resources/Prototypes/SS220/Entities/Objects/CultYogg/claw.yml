@@ -10,7 +10,7 @@
   - type: CultYoggWeapon
     item: CultYoggCocoonClaw
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/cult_yogg_claw.rsi
+    sprite: SS220/Objects/Weapons/Melee/CultYogg/cult_yogg_claw.rsi
     state: icon
   - type: Item
     size: Ginormous

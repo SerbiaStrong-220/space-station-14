@@ -33,12 +33,13 @@
   - type: CollisionWake
     enabled: false
   - type: SinguloFood
-    energy: 10000
+    energy: 5000
   - type: Explosive
     explosionType: Default
-    maxIntensity: 25000
-    intensitySlope: 5
-    totalIntensity: 25000
+    maxIntensity: 60
+    intensitySlope: 10
+    totalIntensity: 100000
+    maxTileBreak: 128
   - type: NameIdentifier
     group: GenericNumber
   - type: TTS

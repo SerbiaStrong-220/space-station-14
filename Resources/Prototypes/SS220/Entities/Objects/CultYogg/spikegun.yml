@@ -12,7 +12,7 @@
     - type: Gun
       soundGunshot: /Audio/SS220/Weapons/Guns/CultYogg/spikegun_shot.ogg
       soundEmpty: null
-      fireRate: 20
+      fireRate: 17
       selectedMode: SemiAuto
       availableModes:
       - SemiAuto
@@ -20,7 +20,7 @@
       proto: Spike
       capacity: 15
     - type: Sprite
-      sprite: SS220/Objects/Weapons/Guns/cult_yogg_spikegun.rsi
+      sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spikegun.rsi
       layers:
         - state: icon_noammo
           map: ["sprite"]
@@ -28,7 +28,7 @@
       size: Ginormous
     - type: Appearance
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 1.5
+      rechargeCooldown: 2.5
       rechargeSound: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
     - type: GenericVisualizer
       visuals:
@@ -62,7 +62,7 @@
       - NonEnergy
   - type: Sprite
     noRot: false
-    sprite: SS220/Objects/Weapons/Guns/cult_yogg_spikegun.rsi
+    sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spikegun.rsi
     layers:
     - state: spike_projectile
       shader: unshaded

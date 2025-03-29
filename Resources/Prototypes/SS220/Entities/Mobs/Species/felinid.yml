@@ -111,6 +111,9 @@
   #MEOW LESS OK THX
   - type: Emoting
     chatEmoteCooldown: 5.0
+  - type: Language
+    availableLanguages:
+    - id: Galactic
 
 - type: entity
   save: false

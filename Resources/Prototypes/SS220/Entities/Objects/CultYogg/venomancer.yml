@@ -33,7 +33,7 @@
           - ReagentId: CultYoggVenomancerAcid
             Quantity: 6
     - type: Sprite
-      sprite: SS220/Objects/Weapons/Guns/cult_yogg_venomancer.rsi
+      sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_venomancer.rsi
       layers:
         - state: icon
           map: ["sprite"]

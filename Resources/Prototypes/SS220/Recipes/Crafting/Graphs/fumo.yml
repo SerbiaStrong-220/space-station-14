@@ -33,7 +33,7 @@
             - tag: MagicianDress
               name: magician's dress
               icon:
-                sprite: SS220/Clothing/Uniforms/magiciansdress.rsi
+                sprite: SS220/Clothing/Uniforms/Jumpskirt/specific_magiciansdress.rsi
                 state: icon
             - tag: MagicianHat
               name: magician's hat

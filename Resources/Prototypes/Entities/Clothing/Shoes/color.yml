@@ -102,24 +102,24 @@
     sprite: Clothing/Shoes/color.rsi
     layers:
     - state: icon
-      color: "#bf7442" #SS220-Gloves-Shoes-Edited
+      color: "#723A02" #SS220-Brown Shoes
     - state: soles-icon
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#bf7442" #SS220-Gloves-Shoes-Edited
+        color: "#723A02" #SS220-Brown Shoes
       - state: soles-inhand-left
       right:
       - state: inhand-right
-        color: "#bf7442" #SS220-Gloves-Shoes-Edited
+        color: "#723A02" #SS220-Brown Shoes
       - state: soles-inhand-right
   - type: Clothing
     sprite: Clothing/Shoes/color.rsi
     clothingVisuals:
       shoes:
       - state: equipped-FEET
-        color: "#bf7442" #SS220-Gloves-Shoes-Edited
+        color: "#723A02" #SS220-Brown Shoes
       - state: soles-equipped-FEET
 
 # Green Shoes

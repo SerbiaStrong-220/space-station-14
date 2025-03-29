@@ -416,23 +416,25 @@
   description: A formal security suit for officers complete with Nanotrasen belt buckle.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/warden.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/warden.rsi #SS220-WardenSkirtFix
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/warden.rsi
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-left
-        sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
-      right:
-      - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-right
-        sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/warden.rsi #SS220-WardenSkirtFix
+  #SS220-WardenSkirtFix-Begin
+  # - type: Item
+  #   inhandVisuals:
+  #     left:
+  #     - state: inhand-left
+  #       color: "#C12D30"
+  #       sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+  #     - state: overlay-inhand-left
+  #       sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+  #     right:
+  #     - state: inhand-right
+  #       color: "#C12D30"
+  #       sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+  #     - state: overlay-inhand-right
+  #       sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+  #SS220-WardenSkirtFix-End
 
 
 - type: entity
@@ -523,9 +525,9 @@
   description: Uniform for subpar operative LARPers performing tactical insulated glove theft in deep space.
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Uniforms/Jumpskirt/tacticool_s.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_tacticool_s.rsi #SS220-tacticool_s-resprite
     - type: Clothing
-      sprite: SS220/Clothing/Uniforms/Jumpskirt/tacticool_s.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_tacticool_s.rsi #SS220-tacticool_s-resprite
     # Too cool for sensors to be on
     - type: SuitSensor
       randomMode: false

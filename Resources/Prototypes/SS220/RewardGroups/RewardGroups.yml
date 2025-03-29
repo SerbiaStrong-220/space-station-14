@@ -117,6 +117,13 @@
   isHiddenOnInsufficient: true
 
 - type: ShlepaRewardGroup
+  id:  SeniorDevTeam
+  name: Старший Разработчик
+  requiredRole:  SeniorDevTeam
+  isExactRoleRequired: true
+  isHiddenOnInsufficient: true
+
+- type: ShlepaRewardGroup
   id:  HeadDeveloper
   name: Ведущий Разработчик
   requiredRole:  HeadDeveloper

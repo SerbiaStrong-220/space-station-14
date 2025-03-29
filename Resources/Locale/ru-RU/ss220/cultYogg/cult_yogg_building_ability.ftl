@@ -6,5 +6,5 @@ cult-yogg-building-tile-blocked-popup = Здесь нельзя размести
 cult-yogg-building-cooldown-popup = Ми-Го ещё не готов возвести следующую постройку
 cult-yogg-migo-erect-menu-title = Возведение
 cult-yogg-migo-erect-menu-erase-button = Разобрать сооружение
-cult-yogg-ensert-pod = Поместить в капсулу
+cult-yogg-insert-pod = Поместить в капсулу
 cult-yogg-eject-pod = Достать из капсулы

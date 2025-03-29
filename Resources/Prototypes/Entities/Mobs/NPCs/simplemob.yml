@@ -109,6 +109,7 @@
     - RadiationProtection
     - Drowsiness
     - Adrenaline
+    - MiGoHeal #SS220 CultYogg
   - type: Bloodstream
     bloodMaxVolume: 150
   - type: MobPrice

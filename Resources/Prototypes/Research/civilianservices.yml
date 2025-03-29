@@ -53,6 +53,7 @@
   - SurveillanceCameraMonitorCircuitboard
   - SurveillanceWirelessCameraMonitorCircuitboard
   - TelecomServerCircuitboard
+  - HolopadMachineCircuitboard
 
 - type: technology
   id: AdvancedEntertainment
@@ -115,6 +116,7 @@
   - FauxTileAstroSnow
   - FauxTileAstroSand #SS220-beachCraftng
 
+  - FauxTileAstroAsteroidSand
 
 - type: technology
   id: BiochemicalStasis
@@ -190,6 +192,7 @@
   recipeUnlocks:
   - WeaponSprayNozzle
   - ClothingBackpackWaterTank
+  - PdaIdPainterMachineCircuitboard #ss220 add pdaidpainter
 
 - type: technology
   id: BluespaceCargoTransport

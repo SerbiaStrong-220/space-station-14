@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobHeadOfSecurity
       time: 72000 #20 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
 - type: loadout
@@ -81,3 +86,10 @@
   id: HeadofSecurityWinterCoat
   equipment:
     outerClothing: ClothingOuterWinterHoS
+
+# SS220 New bomber for HoS begin
+- type: loadout
+  id: HeadofSecurityBomber
+  equipment:
+    outerClothing: ClothingOuterCoatHoSbomber
+# SS220 New bomber for HoS end

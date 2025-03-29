@@ -6,8 +6,13 @@
     weight: 6
     duration: 1
     maxOccurrences: 1 # this event has diminishing returns on interesting-ness, so we cap it
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAnnouncementColor: "#18abf5"
     startAudio:
       path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
   - type: RandomSentienceRule
     minSentiences: 2
     maxSentiences: 5

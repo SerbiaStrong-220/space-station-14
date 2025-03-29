@@ -112,16 +112,23 @@
 #Resources end
 
 - type: corrupted
-  id: CultHandcuffs
+  id: CultCablecuffsCorrupt
   from:
     prototypeId: Cablecuffs
   result: CultHandcuffs
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
-  id: CultHandcuffss
+  id: CultZiptiesCorrupt
   from:
     prototypeId: Zipties
+  result: CultHandcuffs
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: CultHandcuffsCorrupt
+  from:
+    prototypeId: Handcuffs
   result: CultHandcuffs
   corruptionReverseEffect: ExorcismUncorruptEffect
 
@@ -350,3 +357,12 @@
   result: BurglarBug
   corruptionReverseEffect: ExorcismUncorruptEffect
 # BurglarBug end
+
+# Fun begin
+- type: corrupted
+  id: PlushieMigo
+  from:
+    parentPrototypeId: BasePlushie
+  result: PlushieMigo
+  corruptionReverseEffect: ExorcismUncorruptEffect
+# Fun end

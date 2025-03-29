@@ -1,14 +1,14 @@
-#Svarshik's missing mags
 - type: entity
-  id: MagazinePistolSubMachineGunIncendiary
-  name: SMG magazine (.35 auto incendiary)
-  parent: BaseMagazinePistolSubMachineGun
+  id: MagazinePistolHighCapacityRubber
+  name: machine pistol magazine (.35 auto rubber)
+  parent: BaseMagazinePistolHighCapacity
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgePistolIncendiary
+    proto: CartridgePistol
   - type: Sprite
     layers:
-    - state: red
+    - state: rubber
+      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]

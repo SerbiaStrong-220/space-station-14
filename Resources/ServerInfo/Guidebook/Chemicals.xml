@@ -29,6 +29,9 @@
 ## Биологические вещества
 <GuideReagentGroupEmbed Group="Biological"/>
 
+## Особое
+<GuideReagentGroupEmbed Group="Special"/>
+
 ## Разное
 <GuideReagentGroupEmbed Group="Unknown"/>
 </Document>

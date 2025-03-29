@@ -177,6 +177,9 @@ public sealed class DrinkSystem : SharedDrinkSystem
         }
         // SS220-Bag-drinking-bugfix end
 
+        if (!_body.TryGetBodyOrganEntityComps<StomachComponent>(target, out var stomachs))
+            return false;
+
         if (_openable.IsClosed(item, user))
             return true;
 

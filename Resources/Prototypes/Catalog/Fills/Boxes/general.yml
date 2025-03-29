@@ -17,6 +17,25 @@
   - type: Tag
     tags:
     - BoxCardboard
+    #SS220 RatKing damageable foodboxes tweaks and Changes start
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    #SS220 RatKing damageable foodboxes tweaks and Changes end
 
 - type: entity
   name: mousetrap box
@@ -52,6 +71,16 @@
   - type: StorageFill
     contents:
       - id: LightBulb
+        amount: 12
+
+- type: entity
+  name: lightbulb box warm
+  parent: BoxLightbulb
+  id: BoxWarmLightbulb
+  components:
+  - type: StorageFill
+    contents:
+      - id: WarmLightBulb
         amount: 12
 
 - type: entity
@@ -178,7 +207,7 @@
       - id: FoodCondimentPacketKetchup
   - type: Sprite
     layers:
-      - state: box_olive
+      - state: box
       - state: writing
 
 - type: entity

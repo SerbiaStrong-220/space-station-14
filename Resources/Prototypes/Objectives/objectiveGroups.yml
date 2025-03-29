@@ -16,6 +16,7 @@
     RDHardsuitStealObjective: 1
     NukeDiskStealObjective: 1
     MagbootsStealObjective: 1
+    RCDCEStealObjective: 1 #SS220 RCD-to-CE
     CorgiMeatStealObjective: 1
     ClipboardStealObjective: 1
     EngravedKnuckledusterStealObjective: 1  #SS220 New Qm highrisk

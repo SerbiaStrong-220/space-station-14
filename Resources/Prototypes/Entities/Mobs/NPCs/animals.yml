@@ -443,6 +443,8 @@
     name: ghost-role-information-mothroach-name
     description: ghost-role-information-mothroach-description
     rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
   - type: Fixtures
     fixtures:
       fix1:
@@ -998,6 +1000,15 @@
   - type: Grammar
     attributes:
       gender: female # Here because of UdderComponent
+  - type: Speech
+    speechSounds: Goat
+    speechVerb: Goat
+  - type: Vocal
+    sounds:
+      Female: Goat
+      Male: Goat
+      Unsexed: Goat
+  - type: BleatingAccent
   - type: InteractionPopup
     successChance: 0.2
     interactSuccessString: petting-success-goat
@@ -1225,9 +1236,23 @@
   abstract: true
   components:
   - type: CombatMode
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+#SS220 languages tweaks end
   - type: Inventory
     templateId: monkeyinventory
     speciesId: monkey
+  #SS220 Monkey Displacement Begin
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Displacement/Animals/monkey.rsi
+            state: jumpsuit
+  #SS220 Monkey Displacement End
   - type: Deathgasp
     prototype: MonkeyDeathgasp
   - type: Cuffable
@@ -1268,6 +1293,13 @@
       state: "creampie_human"
       visible: false
   - type: Hands
+  #SS220 Monkey Displacement Begin
+    handDisplacement:
+      sizeMaps:
+        32:
+          sprite: SS220/Mobs/Displacement/Animals/monkey.rsi
+          state: inHand
+  #SS220 Monkey Displacement End
   - type: ComplexInteraction
   - type: GenericVisualizer
     visuals:
@@ -1392,6 +1424,12 @@
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
     rules: ghost-role-information-syndicate-reinforcement-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+        - !type:OverallPlaytimeRequirement
+          time: 72000 #SS220 ghostrole-times (20h overall) end
+    mindRoles:
+    # This is for syndicate monkeys that randomly gain sentience, thus have no summoner to team with
+    - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -1551,7 +1589,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      75: Critical
+      100: Critical
       200: Dead
   - type: NpcFactionMember
     factions:
@@ -1599,6 +1637,8 @@
     name: ghost-role-information-mouse-name
     description: ghost-role-information-mouse-description
     rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
   - type: GhostTakeoverAvailable
   - type: Speech
     speechSounds: Squeak
@@ -2388,6 +2428,8 @@
       name: ghost-role-information-giant-spider-name
       description: ghost-role-information-giant-spider-description
       rules: ghost-role-information-giant-spider-rules
+      mindRoles:
+        - MindRoleGhostRoleTeamAntagonist
 # SS220-partial-revert-raffle-Begin
 #      raffle:
 #        settings: short
@@ -2433,8 +2475,8 @@
 
 - type: entity
   parent:
-  - MobGiantSpider
   - MobSpiderAngryBase
+  - MobGiantSpider
   id: MobGiantSpiderAngry
 
 - type: entity
@@ -2967,6 +3009,12 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: syndicat
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+#SS220 languages tweaks end
   - type: DamageStateVisuals
     states:
       Alive:
@@ -2981,6 +3029,11 @@
     allowMovement: true
     description: ghost-role-information-SyndiCat-description
     rules: ghost-role-information-SyndiCat-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+      - !type:OverallPlaytimeRequirement
+        time: 72000 #SS220 ghostrole-times (20h overall) end
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -3106,6 +3159,11 @@
     thresholds:
       0: Alive
       25: Dead
+  # ss220 kitten in hands
+  - type: MultiHandedItem
+  - type: Item
+    size: Huge
+  # ss220 kitten in hands
 
 - type: entity
   name: sloth
@@ -3496,6 +3554,13 @@
       gender: epicene
   - type: Speech
     speechVerb: Plant
+    speechSounds: Alto
+    allowedEmotes: ['Chirp']
+  - type: Vocal
+    sounds:
+      Male: UnisexDiona
+      Female: UnisexDiona
+      Unsexed: UnisexDiona
   - type: Tag
     tags:
     - DoorBumpOpener

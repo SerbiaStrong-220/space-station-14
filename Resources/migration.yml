@@ -336,6 +336,7 @@ BodyBag_Container: BodyBag
 BodyBag_Folded: BodyBagFolded
 
 # 2024-04-26
+# SS220 Bring rubber back begin
 # BaseBulletRubber: null
 # BulletPistolRubber: BulletPistol
 # BulletMagnumRubber: BulletMagnum
@@ -374,8 +375,8 @@ BodyBag_Folded: BodyBagFolded
 # BoxMagazineCaselessRifleRubber: BoxMagazinePistolCaselessRifle
 # BoxMagazineMagnumSubMachineGunRubber: BoxMagazineMagnumSubMachineGun
 # WeaponPistolMk58Nonlethal: WeaponPistolMk58
+# SS220 Bring rubber back end
 WeaponPistolN1984Nonlethal: WeaponPistolN1984
-WeaponSubMachineGunVectorRubber: WeaponSubMachineGunVector
 WeaponSubMachineGunDrozdRubber: WeaponSubMachineGunDrozd
 WeaponRifleLecterRubber: WeaponRifleLecter
 
@@ -614,3 +615,28 @@ LightTree03: LightTree
 LightTree04: LightTree
 LightTree05: LightTree
 LightTree06: LightTree
+
+#2024-12-28
+DrinkIrishCarBomb: DrinkIrishSlammer
+
+#2025-01-06
+ClothingMaskSexyClown: ClothingMaskBlushingClown
+ClothingMaskSexyMime: ClothingMaskBlushingMime
+
+#2025-01-20 - SS220 Space Law Raplace
+BookSpaceLaw: BookSpaceLaws
+
+# 2025-01-27
+FoodCondimentPacketFrostoil: FoodCondimentPacketColdsauce
+
+#2025-02-05
+WeaponSubMachineGunVector: null
+WeaponSubMachineGunVectorRubber: null
+
+#2025-02-11 - SS220 Christmas present, before season festival requiring not implemented into presents
+PresentBase: null
+PresentRandom: null
+PresentRandomUnsafe: null
+PresentRandomInsange: null
+PresentRandomCash: null
+PresentRandomCoal: null

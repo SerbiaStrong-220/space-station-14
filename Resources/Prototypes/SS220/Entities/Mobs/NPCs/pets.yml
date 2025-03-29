@@ -4,6 +4,10 @@
   id: MobSecDogRoxi
   description: Не стоит шутить с ней - в списке её наград есть медаль за отвагу.
   components:
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
   - type: GhostRole
     makeSentient: true
     allowSpeech: true

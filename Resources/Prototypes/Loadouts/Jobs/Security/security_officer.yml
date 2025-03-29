@@ -12,6 +12,11 @@
       !type:DepartmentTimeRequirement
       department: Security
       time: 216000 # 60 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 #Security Star
 - type: loadoutEffectGroup
@@ -22,6 +27,11 @@
         !type:DepartmentTimeRequirement
         department: Security
         time: 360000 #100 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Head
 - type: loadout

@@ -259,7 +259,7 @@ flavor-complex-xeno-basher = like killing bugs
 flavor-complex-budget-insuls-drink = like door hacking
 flavor-complex-watermelon-wakeup = like a sweet wakeup call
 flavor-complex-rubberneck = like synthetics
-flavor-complex-irish-car-bomb = like a spiked cola float
+flavor-complex-irish-slammer = like a spiked cola float
 flavor-complex-themartinez = like violets and lemon vodka
 flavor-complex-cogchamp = like brass
 flavor-complex-white-gilgamesh = like lightly carbonated cream
@@ -301,6 +301,7 @@ flavor-complex-toxins-special = like space exploration
 flavor-complex-vodka-martini = like a spy movie from Russia
 flavor-complex-vodka-tonic = refreshingly bitter
 flavor-complex-coconut-rum = like nutty fermented sugar
+flavor-complex-bacchus = like death and rocks
 
 ### This is exactly what pilk tastes like. I'm not even joking. I might've been a little drunk though
 flavor-complex-pilk = like sweet milk
