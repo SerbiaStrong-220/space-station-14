@@ -33,6 +33,7 @@
       zapHeal:
         types:
           Asphyxiation: -40
+      zapСoeffDamage: 8
     - type: DoAfter
     - type: UseDelay
     - type: StaticPrice

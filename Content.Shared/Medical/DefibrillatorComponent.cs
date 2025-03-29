@@ -27,6 +27,14 @@ public sealed partial class DefibrillatorComponent : Component
     [DataField("zapDamage"), ViewVariables(VVAccess.ReadWrite)]
     public int ZapDamage = 5;
 
+    //SS220 LimitationRevive - start
+    /// <summary>
+    /// Multiplied damage for a failed defibrillator attempt.
+    /// </summary>
+    [DataField]
+    public int ZapСoeffDamage = 8;
+    //SS220 LimitationRevive - end
+
     /// <summary>
     /// How long the victim will be electrocuted after getting zapped.
     /// </summary>
@@ -59,6 +67,14 @@ public sealed partial class DefibrillatorComponent : Component
 
     [DataField]
     public bool CanDefibCrit = true;
+
+    //SS220 LimitationRevive - start
+    /// <summary>
+    /// Chance of a successful shock with a defibrillator to revive a corpse.
+    /// </summary>
+    [DataField]
+    public float ChanceWithoutMedSkill = 0.1f;
+    //SS220 LimitationRevive - end
 
     /// <summary>
     /// The sound when someone is zapped.

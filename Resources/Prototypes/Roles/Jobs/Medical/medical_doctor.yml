@@ -19,6 +19,11 @@
   - !type:GiveItemOnHolidaySpecial
     holiday: DoctorDay
     prototype: WehMedipen
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill 
+  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: DoctorGear

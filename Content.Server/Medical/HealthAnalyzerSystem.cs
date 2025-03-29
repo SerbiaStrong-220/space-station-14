@@ -18,6 +18,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
+using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
 
 namespace Content.Server.Medical;
 
@@ -198,6 +199,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         var bloodAmount = float.NaN;
         var bleeding = false;
         var unrevivable = false;
+        int? counterDeath = null; //SS220 LimitationRevive
 
         if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
             _solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
@@ -210,13 +212,19 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         if (TryComp<UnrevivableComponent>(target, out var unrevivableComp) && unrevivableComp.Analyzable)
             unrevivable = true;
 
+        //SS220 LimitationRevive - start
+        if (TryComp<LimitationReviveComponent>(target, out var reviveComp))
+             counterDeath = reviveComp.CounterOfDead;
+        //SS220 LimitationRevive - end
+
         _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerScannedUserMessage(
             GetNetEntity(target),
             bodyTemperature,
             bloodAmount,
             scanMode,
             bleeding,
-            unrevivable
+            unrevivable,
+            counterDeath //SS220 LimitationRevive
         ));
     }
 }

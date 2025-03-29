@@ -32,6 +32,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.SS220.MindSlave;
+using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
 
 namespace Content.Server.Antag;
 
@@ -342,6 +343,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         // The following is where we apply components, equipment, and other changes to our antagonist entity.
         EntityManager.AddComponents(player, def.Components);
+        EnsureComp<DefibrillatorSkillComponent>(player); //SS220 LimitationRevive
 
         // Equip the entity's RoleLoadout and LoadoutGroup
         List<ProtoId<StartingGearPrototype>> gear = new();
