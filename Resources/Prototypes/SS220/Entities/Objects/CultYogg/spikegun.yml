@@ -12,10 +12,12 @@
     - type: Gun
       soundGunshot: /Audio/SS220/Weapons/Guns/CultYogg/spikegun_shot.ogg
       soundEmpty: null
-      fireRate: 17
-      selectedMode: SemiAuto
+      fireRate: 5
+      angleIncrease: 4
+      angleDecay: 14
+      selectedMode: FullAuto
       availableModes:
-      - SemiAuto
+      - FullAuto
     - type: BasicEntityAmmoProvider
       proto: Spike
       capacity: 15
