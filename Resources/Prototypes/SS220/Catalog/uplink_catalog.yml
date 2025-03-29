@@ -46,7 +46,7 @@
   id: UplinkMindslaveSurgeryFixBundle
   name: uplink-mindslave-fix-surgery-bundle-name
   description: uplink-mindslave-fix-surgery-bundle-desc
-  icon: { sprite: SS220/Objects/Specific/Medical/implants.rsi, state: mindslave_fixer }
+  icon: { sprite: /Textures/SS220/Interface/Actions/implants.rsi, state: mindslave_fixer }
   productEntity: ClothingBackpackDuffelSyndicateMindslaveFixerSurgery
   discountCategory: veryRareDiscounts
   discountDownTo:
