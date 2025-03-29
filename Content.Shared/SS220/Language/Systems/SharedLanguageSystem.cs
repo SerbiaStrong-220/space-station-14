@@ -253,19 +253,15 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     /// </summary>
     public static int GetSeedFromString(string input)
     {
-        var bytes = Encoding.Unicode.GetBytes(input);
-        var seed = 0;
-        var buffer = 0;
-        for (var i = 0; i < bytes.Length; i++)
+        const int p = 31;
+        const int m = 1000000009;
+        int result = 0;
+        int p_pow = 1;
+        foreach (var c in input)
         {
-            if (i + 1 % 32 == 0)
-            {
-                buffer += seed;
-                seed = 0;
-            }
-            seed = (seed << 1) ^ bytes[i];
+            result = (result + (c + 1) * p_pow) % m;
+            p_pow = p_pow * p % m;
         }
-        seed += buffer;
-        return seed;
+        return result;
     }
 }
