@@ -182,3 +182,7 @@
     radius: 1.5
     energy: 1.6
     color: "#b89f25"
+  # SS220 languages begin
+  - type: Language
+    knowAllLLanguages: true # Used an transponder
+  # SS220 languages end

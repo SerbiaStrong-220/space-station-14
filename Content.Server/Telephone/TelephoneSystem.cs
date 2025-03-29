@@ -27,6 +27,7 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.CCVars;
 using Robust.Shared.Configuration;
+using Content.Shared.SS220.Language.Systems;
 
 namespace Content.Server.Telephone;
 
@@ -101,7 +102,16 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         if (!_recentChatMessages.Add((args.Source, args.Message, entity)))
             return;
 
-        SendTelephoneMessage(args.Source, args.Message, entity);
+        // SS220 languages begin
+        string message;
+        if (args.LanguageMessage is { } languageMessage)
+            message = languageMessage.GetMessageWithLanguageKeys();
+        else
+            message = args.Message;
+
+        SendTelephoneMessage(args.Source, message, entity);
+        //SendTelephoneMessage(args.Source, args.Message, entity);
+        // SS220 languages end
     }
 
     private void OnTelephoneMessageReceived(Entity<TelephoneComponent> entity, ref TelephoneMessageReceivedEvent args)
@@ -353,7 +363,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         SetTelephoneMicrophoneState(entity, false);
     }
 
-    private void SendTelephoneMessage(EntityUid messageSource, string message, Entity<TelephoneComponent> source, bool escapeMarkup = true)
+    private void SendTelephoneMessage(EntityUid messageSource, string message, Entity<TelephoneComponent> source, bool escapeMarkup = true, LanguageMessage? languageMessage = null)
     {
         // This method assumes that you've already checked that this
         // telephone is able to transmit messages and that it can
