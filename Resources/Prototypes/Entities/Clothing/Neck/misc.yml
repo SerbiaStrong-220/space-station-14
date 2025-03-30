@@ -10,7 +10,7 @@
     - state: icon
       map: [ "enum.ToggleVisuals.Layer" ]
   - type: Clothing
-    equippedPrefix: off
+    equippedPrefix: on #ss220 fix
     sprite: SS220/Clothing/Neck/Misc/headphones.rsi #SS220HeadphonesResprite
   - type: ToggleableLightVisuals
     spriteLayer: enum.ToggleVisuals.Layer

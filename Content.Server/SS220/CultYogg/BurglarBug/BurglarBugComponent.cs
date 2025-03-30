@@ -3,6 +3,7 @@ using Content.Shared.Access;
 using Content.Shared.Damage;
 using Content.Shared.Doors.Components;
 using Robust.Shared.Prototypes;
+using Content.Shared.Emag.Systems;
 
 namespace Content.Server.SS220.CultYogg.BurglarBug;
 
@@ -15,8 +16,12 @@ public sealed partial class BurglarBugComponent : Component
     [DataField("timeToOpen", required: true), ViewVariables(VVAccess.ReadWrite)]
     public float TimeToOpen;
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    public List<HashSet<ProtoId<AccessLevelPrototype>>> AccessLists = new ();
+    /// <summary>
+    /// What type of emag effect this device will do
+    /// </summary>
+    [DataField]
+    [AutoNetworkedField]
+    public EmagType EmagType = EmagType.Access;
 
     /// <summary>
     ///     Popup message shown when player stuck entity, but forgot to activate it.

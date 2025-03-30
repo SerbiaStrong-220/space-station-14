@@ -10,14 +10,14 @@ namespace Content.Client.SS220.Bible.UI;
 [GenerateTypedNameReferences]
 public sealed partial class ExorcismMenu : FancyWindow
 {
-    private ExorcismBoundUserInterface Owner { get; set; }
+    public int LengthMin { get; set; }
+    public int LengthMax { get; set; }
+    public event Action<string>? ReadClicked;
 
-    public ExorcismMenu(ExorcismBoundUserInterface owner)
+    public ExorcismMenu()
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
-
-        Owner = owner;
 
         var loc = IoCManager.Resolve<ILocalizationManager>();
         MessageInput.Placeholder = new Rope.Leaf(loc.GetString("bible-exorcism-menu-message-placeholder"));
@@ -25,12 +25,12 @@ public sealed partial class ExorcismMenu : FancyWindow
         MessageInput.OnTextChanged += (args) =>
         {
             var len = GetLength();
-            if (len < Owner.LengthMin)
+            if (len < LengthMin)
             {
                 ReadButton.Disabled = true;
                 ReadButton.ToolTip = Loc.GetString("bible-exorcism-message-too-short");
             }
-            else if (len > Owner.LengthMax)
+            else if (len > LengthMax)
             {
                 ReadButton.Disabled = true;
                 ReadButton.ToolTip = Loc.GetString("bible-exorcism-message-too-long");
@@ -45,7 +45,7 @@ public sealed partial class ExorcismMenu : FancyWindow
 
         RefreshLengthCounter();
 
-        ReadButton.OnPressed += _ => Owner.ReadButtonPressed(Rope.Collapse(MessageInput.TextRope));
+        ReadButton.OnPressed += _ => ReadClicked?.Invoke(Rope.Collapse(MessageInput.TextRope));
         ReadButton.Disabled = true;
     }
 
@@ -66,7 +66,7 @@ public sealed partial class ExorcismMenu : FancyWindow
 
     private void RefreshLengthCounter(int length)
     {
-        LengthLabel.Text = $"{length}/{Owner.LengthMin}";
+        LengthLabel.Text = $"{length}/{LengthMin}";
     }
 
     private int GetLength()

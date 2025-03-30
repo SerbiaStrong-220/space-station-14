@@ -62,3 +62,8 @@
   license: "Custom"
   copyright: "Created by e6illa for SS220 with help Suno AI: https://suno.com/terms"
   source: "https://github.com/SerbiaStrong-220"
+
+- files: ["mechanismeight.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Mechanism 8 for Unreal Tournament '99, written by Andrew 'Necros' Sega, Remixed by Rivgane for SS220"
+  source: "https://github.com/SerbiaStrong-220"

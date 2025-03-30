@@ -18,10 +18,13 @@ ent-WeaponBlasterKRV = krv
     .desc = Усовершенствованная бластерная винтовка. Используется особенными оперативниками.
     .suffix = Бластер
 
-ent-BlasterPowerCellAlt= бластерная энергоячейка
+ent-BlasterPowerCellAlt = бластерная энергоячейка
     .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
+ent-BlasterPowerCellAltPrinted = бластерная энергоячейка
+    .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
+    .suffix = Пустой
 
-ent-BlasterPowerCellDisabler= бластерная энергоячейка (disabler)
+ent-BlasterPowerCellDisabler = бластерная энергоячейка (disabler)
     .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
 
 ent-BlasterPowerCellPulse = усовершенствованная бластерная энергоячейка

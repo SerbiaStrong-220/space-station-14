@@ -150,3 +150,34 @@
     sprite: SS220/Clothing/Shoes/Boots/cmocorporateboots.rsi
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/cmocorporateboots.rsi
+
+# Dark brown Shoes
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingShoesColorDarkBrown
+  name: dark brown shoes
+  description: A pair of brown shoes.
+  components:
+  - type: Sprite
+    sprite: Clothing/Shoes/color.rsi
+    layers:
+    - state: icon
+      color: "#401e11"
+    - state: soles-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#401e11"
+      - state: soles-inhand-left
+      right:
+      - state: inhand-right
+        color: "#401e11"
+      - state: soles-inhand-right
+  - type: Clothing
+    sprite: Clothing/Shoes/color.rsi
+    clothingVisuals:
+      shoes:
+      - state: equipped-FEET
+        color: "#401e11"
+      - state: soles-equipped-FEET

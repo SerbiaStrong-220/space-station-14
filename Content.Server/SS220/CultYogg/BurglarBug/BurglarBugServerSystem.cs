@@ -49,22 +49,21 @@ public sealed class BurglarBugServerSystem : EntitySystem
             OpenDoor(uid, bugComponent);
         }
     }
-    private void OpenDoor(EntityUid uid, BurglarBugComponent component)
+    private void OpenDoor(EntityUid uid, BurglarBugComponent comp)
     {
-            if (!HasComp<StickyComponent>(uid))
-                return;
+        if (!HasComp<StickyComponent>(uid))
+            return;
 
-            if (TryComp<DoorComponent>(component.Door, out var door))
-            {
-                door.ClickOpen = true;
-                door.BumpOpen = true;
-                Dirty(component.Door.Value, door);
-                var emaggedEvent = new GotEmaggedEvent();
-                RaiseLocalEvent(component.Door.Value, ref emaggedEvent);
-            }
-
-            AfterUsed((uid, component));
+        if (TryComp<DoorComponent>(comp.Door, out var door))
+        {
+            door.ClickOpen = true;
+            door.BumpOpen = true;
+            Dirty(comp.Door.Value, door);
+            var emaggedEvent = new GotEmaggedEvent(uid, comp.EmagType);//maybe we should send here user, but idk
+            RaiseLocalEvent(comp.Door.Value, ref emaggedEvent);
         }
+        AfterUsed((uid, comp));
+    }
     private void OnBreak(Entity<BurglarBugComponent> entity, ref StickyDoAfterEvent args)
     {
         if (args.Cancelled)

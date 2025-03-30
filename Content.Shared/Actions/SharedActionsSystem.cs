@@ -711,11 +711,19 @@ public abstract class SharedActionsSystem : EntitySystem
         }
 
         action.Cooldown = null;
-        if (action is { UseDelay: not null, Charges: null or < 1 })
+
+        //ss220 add time between charges start
+        if (action is { TimeBetweenCharges: not null, Charges: > 0 })
+        {
+            dirty = true;
+            action.Cooldown = (curTime, curTime + action.TimeBetweenCharges.Value);
+        }
+        else if (action is { UseDelay: not null, Charges: null or < 1 })
         {
             dirty = true;
             action.Cooldown = (curTime, curTime + action.UseDelay.Value);
         }
+        //ss220 add time between charges end
 
         if (dirty)
         {

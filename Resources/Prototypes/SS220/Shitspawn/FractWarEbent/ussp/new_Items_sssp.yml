@@ -226,6 +226,11 @@
   - type: GuideHelp
     guides:
     - Medical Doctor
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: ClothingBeltUsspWebbing
