@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobBrigmedic
       time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: MilitaryFeldsher
@@ -16,6 +21,11 @@
       !type:RoleTimeRequirement
       role: JobBrigmedic
       time: 162000 # 45 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Head
 - type: loadout

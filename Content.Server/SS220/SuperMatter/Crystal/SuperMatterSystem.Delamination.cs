@@ -99,7 +99,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         switch (smState)
         {
             case SuperMatterPhaseState.ResonanceRegion:
-                spawnedUid = Spawn(crystal.Comp.ResonanceSpawnPrototype, Transform(crystal.Owner).Coordinates);
+                _explosion.TriggerExplosive(crystal.Owner);
                 break;
             case SuperMatterPhaseState.SingularityRegion:
                 spawnedUid = Spawn(crystal.Comp.SingularitySpawnPrototype, Transform(crystal.Owner).Coordinates);

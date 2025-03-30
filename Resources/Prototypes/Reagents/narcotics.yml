@@ -21,13 +21,13 @@
           min: 30
         damage:
           types:
-            Poison: 2 # this is added to the base damage of the meth.
+            Poison: 1.5 #ss220 combat medicine be-gone
             Asphyxiation: 2
     Narcotic:
       effects:
       - !type:MovespeedModifier
-        walkSpeedModifier: 1.35
-        sprintSpeedModifier: 1.35
+        walkSpeedModifier: 1.12 #ss220 combat medicine be-gone
+        sprintSpeedModifier: 1.12 #ss220 combat medicine be-gone
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
@@ -40,6 +40,12 @@
         key: KnockedDown
         time: 3
         type: Remove
+#ss220 combat medicine be-gone begin
+      - !type:GenericStatusEffect
+        key: Adrenaline 
+        component: IgnoreSlowOnDamage
+        time: 10
+#ss220 combat medicine be-gone end     
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
@@ -69,8 +75,8 @@
     Narcotic:
       effects:
       - !type:MovespeedModifier
-        walkSpeedModifier: 1.25
-        sprintSpeedModifier: 1.25
+        walkSpeedModifier: 1.08 #ss220 combat medicine be-gone
+        sprintSpeedModifier: 1.08 #ss220 combat medicine be-gone
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -172,6 +178,12 @@
         key: ForcedSleep
         time: 3
         type: Remove
+#ss220 combat medicine be-gone begin      
+      - !type:GenericStatusEffect
+        key: Adrenaline 
+        component: IgnoreSlowOnDamage
+        time: 10
+#ss220 combat medicine be-gone begin      
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold

@@ -189,8 +189,8 @@
     state: plushie_hampter
   - type: EmitSoundOnUse
     sound:
-      path: /Audio/Items/Toys/mousesqueek.ogg
-  - type: EmitSoundOnLand
+      path: /Audio/Items/Toys/mousesqueek.ogg  
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Items/Toys/mousesqueek.ogg
   - type: EmitSoundOnActivate
@@ -276,7 +276,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
-  - type: EmitSoundOnLand
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
   - type: EmitSoundOnActivate
@@ -308,7 +308,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/weh.ogg
-  - type: EmitSoundOnLand
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Items/Toys/weh.ogg
   - type: EmitSoundOnActivate
@@ -379,8 +379,6 @@
   parent: PlushieLizard
   id: PlushieLizardMirrored
   components:
-  - type: Item
-    size: Small
   - type: Sprite
     state: plushie_lizard
     scale: -1, 1
@@ -396,7 +394,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/muffled_weh.ogg
-  - type: EmitSoundOnLand
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Items/Toys/muffled_weh.ogg
   - type: EmitSoundOnActivate
@@ -449,7 +447,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/hew.ogg
-  - type: EmitSoundOnLand
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Items/Toys/hew.ogg
   - type: EmitSoundOnActivate
@@ -503,7 +501,7 @@
     - type: EmitSoundOnUse
       sound:
         path: /Audio/Items/Toys/toy_rustle.ogg
-    - type: EmitSoundOnLand
+    - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
       sound:
         path: /Audio/Items/Toys/toy_rustle.ogg
     - type: EmitSoundOnActivate
@@ -573,7 +571,7 @@
   - type: Sprite
     sprite: Objects/Fun/sharkplush.rsi
     state: blue
-  - type: EmitSoundOnLand
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Items/Toys/rawr.ogg
   - type: EmitSoundOnTrigger
@@ -665,7 +663,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Effects/bite.ogg
-  - type: EmitSoundOnLand
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Effects/bite.ogg
   - type: EmitSoundOnActivate
@@ -832,7 +830,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Voice/Vox/shriek1.ogg
-  - type: EmitSoundOnLand
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Voice/Vox/shriek1.ogg
   - type: EmitSoundOnTrigger
@@ -869,7 +867,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Weapons/Xeno/alien_spitacid.ogg
-  - type: EmitSoundOnLand
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Weapons/Xeno/alien_spitacid.ogg
   - type: EmitSoundOnActivate
@@ -906,7 +904,7 @@
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Voice/Human/malescream_1.ogg
-  - type: EmitSoundOnLand
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Voice/Human/malescream_2.ogg
   - type: EmitSoundOnActivate
@@ -933,8 +931,8 @@
     state: plushie_moth
   - type: EmitSoundOnUse
     sound:
-      path: /Audio/Voice/Moth/moth_chitter.ogg
-  - type: EmitSoundOnLand
+      path: /Audio/Voice/Moth/moth_chitter.ogg 
+  - type: EmitSoundOnCollide # SS220 EmitSoundOnLand -> EmitSoundOnCollide (Custom sound effects are played on Collision instead of Land)
     sound:
       path: /Audio/Voice/Moth/moth_chitter.ogg
   - type: EmitSoundOnActivate
@@ -1104,12 +1102,12 @@
   components:
   - type: AmmoCounter #SS220-FIX bullet show
   - type: Sprite
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/toy.rsi # ss220 revolvers resprite
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
   - type: Item
-    sprite: Objects/Fun/toys.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/toy.rsi # ss220 revolvers resprite
     heldPrefix: capgun
   - type: Tag
     tags:
@@ -1748,16 +1746,17 @@
       collection: RubberChicken
       params:
         variation: 0.125
-  - type: EmitSoundOnLand
-    sound:
-      collection: RubberChicken
-      params:
-        variation: 0.125
   - type: EmitSoundOnActivate
     sound:
       collection: RubberChicken
       params:
         variation: 0.125
+# SS220 Commented to reduce sound spam
+#  - type: EmitSoundOnLand
+#    sound:
+#      collection: RubberChicken
+#      params:
+#        variation: 0.125
   - type: EmitSoundOnCollide
     sound:
       collection: RubberChicken

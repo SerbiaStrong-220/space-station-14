@@ -80,6 +80,11 @@
             - Multitool
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-textile
+    microFiberColor: micro-fibers-brown
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -161,6 +166,11 @@
           - Wrench
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-rubber
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -201,6 +211,11 @@
           - SmokeOnTrigger
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -246,6 +261,11 @@
           - Wrench
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-textile
+    microFiberColor: micro-fibers-dark-purple
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -312,6 +332,11 @@
           - Wrench
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-synthetic
+    microFiberColor: micro-fibers-light-blue
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBeltMedical
@@ -323,6 +348,11 @@
     sprite: Clothing/Belt/emt.rsi
   - type: Clothing
     sprite: Clothing/Belt/emt.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-synthetic
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -380,6 +410,11 @@
           - Bottle
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-floral
+    microFiberColor: micro-fibers-yellow
+#SS220 Micro_fibers end
 
 #- type: entity #SS220 Chef Resprite
 #  parent: ClothingBeltStorageBase
@@ -489,6 +524,7 @@
         - CombatKnife
         - Truncheon
         - HolofanProjectorSecurity # SS220 Fix #2009
+        - KRSPowerCell # SS220-BlueShield MinorFix
       components:
         - Stunbaton
         - FlashOnTrigger
@@ -516,6 +552,11 @@
           - SmokeOnTrigger
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingBeltBase, ClothingSlotBase]
@@ -548,6 +589,11 @@
           tags:
           - CaptainSabre
   - type: Appearance
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-red
+#SS220 Micro_fibers end
 
 # Belts without visualizers
 
@@ -582,6 +628,11 @@
       - CartridgeLightRifle
       - CartridgeAntiMateriel
     #ss220 Bandolier rework end
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBeltBase
@@ -641,6 +692,11 @@
         - Gun
         - BallisticAmmoProvider
         - CartridgeAmmo
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-leather
+    microFiberColor: micro-fibers-red
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBeltSecurity
@@ -652,6 +708,11 @@
     sprite: Clothing/Belt/securitywebbing.rsi
   - type: Clothing
     sprite: Clothing/Belt/securitywebbing.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ ClothingBeltStorageBase]
@@ -663,6 +724,11 @@
     sprite: Clothing/Belt/mercwebbing.rsi
   - type: Clothing
     sprite: Clothing/Belt/mercwebbing.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-moss
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -687,6 +753,11 @@
     sprite: Clothing/Belt/militarywebbing.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.5
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-grey
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBeltMilitaryWebbing
@@ -702,6 +773,11 @@
     size: Huge
   - type: ExplosionResistance
     damageCoefficient: 0.1
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-grey
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBeltBase
@@ -745,3 +821,8 @@
     whitelist:
       tags:
       - WizardWand
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-textile
+    microFiberColor: micro-fibers-dark-purple
+#SS220 Micro_fibers end

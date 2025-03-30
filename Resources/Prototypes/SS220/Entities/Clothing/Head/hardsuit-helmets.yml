@@ -145,3 +145,18 @@
   - type: PressureProtection
     highPressureMultiplier: 0.32
     lowPressureMultiplier: 1000
+
+# Centcom's Hardsuit
+- type: entity
+  parent: ClothingHeadHardsuitWithLightBase
+  id: ClothingHeadHelmetHardsuitCentcom
+  name: centcom hardsuit helmet
+  description: A combination of unwavering defense and advanced technology, the epitome of power and strategic superiority.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/centcom.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/centcom.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.3
+    lowPressureMultiplier: 1000

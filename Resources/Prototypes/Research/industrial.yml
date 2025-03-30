@@ -43,6 +43,7 @@
   - PowerCellHigh
   - TurboItemRechargerCircuitboard
   - SMESAdvancedMachineCircuitboard
+  - BlasterPowerCellAlt
 
 - type: technology
   id: MechanicalCompression

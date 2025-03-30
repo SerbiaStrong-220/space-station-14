@@ -336,10 +336,6 @@ public abstract class SharedMiGoSystem : EntitySystem
             };
 
             var started = _doAfter.TryStartDoAfter(doafterArgs);
-            if (started)
-            {
-                _physics.SetBodyType(uid, BodyType.Static);
-            }
         }
         else
         {
@@ -361,46 +357,53 @@ public abstract class SharedMiGoSystem : EntitySystem
     }
     private void OnAfterMaterialize(Entity<MiGoComponent> uid, ref AfterMaterialize args)
     {
+        if (args.Cancelled)
+            return;
+
+        if (args.Handled)
+            return;
+
         args.Handled = true;
 
         _physics.SetBodyType(uid, BodyType.KinematicController);
         _audio.PlayPredicted(uid.Comp.SoundMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
 
-        if (!args.Cancelled)
-        {
-            ChangeForm(uid, uid.Comp, true);
-
-            _actions.StartUseDelay(uid.Comp.MiGoAstralActionEntity);
-        }
+        ChangeForm(uid, uid.Comp, true);
+        _actions.StartUseDelay(uid.Comp.MiGoAstralActionEntity);
+        Dirty(uid);
     }
 
     private void OnAfterDeMaterialize(Entity<MiGoComponent> uid, ref AfterDeMaterialize args)
     {
+        if (args.Cancelled)
+            return;
+
+        if (args.Handled)
+            return;
+
         args.Handled = true;
+        ChangeForm(uid, uid.Comp, false);
+        uid.Comp.MaterializationTime = _timing.CurTime + uid.Comp.AstralDuration;
 
-        if (!args.Cancelled)
-        {
-            ChangeForm(uid, uid.Comp, false);
-            uid.Comp.MaterializationTime = _timing.CurTime + uid.Comp.AstralDuration;
+        var cooldownStart = _timing.CurTime;
+        var cooldownEnd = cooldownStart + uid.Comp.CooldownAfterDematerialize;
 
-            var cooldownStart = _timing.CurTime;
-            var cooldownEnd = cooldownStart + uid.Comp.CooldownAfterDematerialize;
+        _actions.SetCooldown(uid.Comp.MiGoAstralActionEntity, cooldownStart, cooldownEnd);
 
-            _actions.SetCooldown(uid.Comp.MiGoAstralActionEntity, cooldownStart, cooldownEnd);
-        }
+        Dirty(uid);
     }
 
     public virtual void ChangeForm(EntityUid uid, MiGoComponent comp, bool isMaterial)
     {
-        if (TryComp<FixturesComponent>(uid, out var fixturesComp))
+        if (TryComp<FixturesComponent>(uid, out var fixtures) && fixtures.FixtureCount >= 1)
         {
-            if (fixturesComp.Fixtures.TryGetValue("fix1", out var fixture))
-            {
-                var mask = (int)(isMaterial ? CollisionGroup.FlyingMobMask : CollisionGroup.GhostImpassable);
-                var layer = (int)(isMaterial ? CollisionGroup.FlyingMobLayer : CollisionGroup.None);
-                _physics.SetCollisionMask(uid, "fix1", fixture, mask);
-                _physics.SetCollisionLayer(uid, "fix1", fixture, layer);
-            }
+            var fixture = fixtures.Fixtures.First();
+
+            var mask = (int)(isMaterial ? CollisionGroup.FlyingMobMask : CollisionGroup.GhostImpassable);
+            var layer = (int)(isMaterial ? CollisionGroup.FlyingMobLayer : CollisionGroup.None);
+
+            _physics.SetCollisionMask(uid, fixture.Key, fixture.Value, mask, fixtures);
+            _physics.SetCollisionLayer(uid, fixture.Key, fixture.Value, layer, fixtures);
         }
 
         //full vision during astral

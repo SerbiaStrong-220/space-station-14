@@ -6,3 +6,6 @@ ent-ClothingHeadHelmetHardsuitDeathsquadCommander = шлем командира 
 ent-ClothingHeadHelmetHardsuitDeathsquadAlpha = шлем специалиста Эскадрона Смерти
     .suffix = Эскадрон Смерти, dq
     .desc = Шлем от костюм специалиста Эскадрона Смерти.
+
+ent-ClothingHeadHelmetHardsuitCentcom = шлем скафандра Центрального Командования
+    .desc = Сочетание непоколебимой защиты и передовых технологий, воплощение мощи и стратегического превосходства.

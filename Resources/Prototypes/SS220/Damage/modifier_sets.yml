@@ -11,14 +11,14 @@
   id: Tajaran
   coefficients:
     Cold: 0.8
-    Heat: 1.3 # so about heat, we make them receive more heat cause tajaran Secs > any other species secs
+    Heat: 1.15 # so about heat, we make them receive more heat cause tajaran Secs > any other species secs #SS220 TTK update
 
 - type: damageModifierSet
   id: TomatoKiller
   coefficients:
     Blunt: 1
     Slash: 1.3
-    Piercing: 1.2
+    Piercing: 0.8
     Shock: 1.3
     Cold: 1.5
     Poison: 0.6
@@ -90,7 +90,8 @@
   coefficients:
     Blunt: 1
     Slash: 1.2
-    Piercing: 0.6
+    Piercing: 0.5
+    Heat: 0.5
     Shock: 1
     Cold: 1
     Poison: 1
@@ -102,7 +103,8 @@
   coefficients:
     Blunt: 1
     Slash: 1
-    Piercing: 0.7
+    Piercing: 0.6
+    Heat: 0.6
     Shock: 1.0
     Cold: 1
     Poison: 1

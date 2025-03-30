@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
@@ -47,7 +48,7 @@ namespace Content.Shared.SS220.CultYogg.Corruption
         /// At what stage is this corruption result available
         /// </summary>
         [DataField("avaliableOnStage", required: false)]
-        public int AvaliableOnStage = 0;
+        public CultYoggStage AvaliableOnStage = CultYoggStage.Initial;
 
     }
 
