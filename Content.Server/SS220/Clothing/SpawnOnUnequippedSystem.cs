@@ -8,7 +8,7 @@ using Content.Shared.Clothing.Components;
 
 namespace Content.Server.SS220.Clothing
 {
-    public sealed class SpawnOnUnequippedSystem : EntitySystem
+    public sealed class LimitiedEquipSystem : EntitySystem
     {
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
@@ -18,9 +18,9 @@ namespace Content.Server.SS220.Clothing
         {
             base.Initialize();
 
-            SubscribeLocalEvent<SpawnOnUnequippedComponent, GotUnequippedEvent>(OnGotUnequipped);
+            SubscribeLocalEvent<LimitiedEquipComponent, GotUnequippedEvent>(OnGotUnequipped);
         }
-        private void OnGotUnequipped(Entity<SpawnOnUnequippedComponent> uid, ref GotUnequippedEvent args)
+        private void OnGotUnequipped(Entity<LimitiedEquipComponent> uid, ref GotUnequippedEvent args)
         {
 
             // If starting with zero or less uses, this component is a no-op

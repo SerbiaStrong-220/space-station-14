@@ -14,7 +14,7 @@
     equipDelay: 1
     unequipDelay: 1
   - type: NoSlip
-  - type: SpawnOnUnequipped
+  - type: LimitiedEquip
     items:
       - id: FoodLubroShroomCultDead
   - type: FlavorProfile
