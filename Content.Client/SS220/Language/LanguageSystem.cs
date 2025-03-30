@@ -3,7 +3,6 @@ using Content.Shared.GameTicking;
 using Content.Shared.SS220.Language;
 using Content.Shared.SS220.Language.Systems;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Content.Client.SS220.Language;
@@ -14,6 +13,8 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
     // Не содержит информации о оригинальном сообщении, а лишь то, что видит кукла
     private Dictionary<string, string> KnownPaperNodes = new();
+
+    public Action? OnNodeInfoUpdated;
 
     public override void Initialize()
     {
@@ -44,6 +45,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         }
 
         KnownPaperNodes[ev.Key] = ev.Info;
+        OnNodeInfoUpdated?.Invoke();
     }
 
     /// <summary>
@@ -114,9 +116,12 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     /// <summary>
     /// Returns value from <see cref="KnownPaperNodes"/> by key
     /// </summary>
-    public bool TryGetPaperMessageFromKey(string key, [NotNullWhen(true)] out string? value)
+    public bool TryGetPaperMessageFromKey(string key, [NotNullWhen(true)] out string? value, [NotNullWhen(true)] out LanguagePrototype? language)
     {
-        return KnownPaperNodes.TryGetValue(key, out value);
+        value = null;
+        language = GetPrototypeFromChacheKey(key);
+        KnownPaperNodes.TryGetValue(key, out value);
+        return value != null && language != null;
     }
 
     /// <inheritdoc/>

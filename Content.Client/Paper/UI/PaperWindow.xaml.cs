@@ -76,7 +76,10 @@ namespace Content.Client.Paper.UI
             IoCManager.InjectDependencies(this);
             RobustXamlLoader.Load(this);
 
-            _languageSystem = _entityManager.System<LanguageSystem>(); // SS220 languages
+            // SS220 languages begin
+            _languageSystem = _entityManager.System<LanguageSystem>();
+            _languageSystem.OnNodeInfoUpdated += UpdateWrittenTextMarkups;
+            // SS220 languages end
 
             // We can't configure the RichTextLabel contents from xaml, so do it here:
             BlankPaperIndicator.SetMessage(Loc.GetString("paper-ui-blank-page-message"), null, DefaultTextColor);
@@ -290,6 +293,8 @@ namespace Content.Client.Paper.UI
             {
                 msg.AddMarkupPermissive("\r\n");
             }
+
+            WrittenTextLabel.RemoveAllChildren(); // SS220 Markups control on paper fix
             WrittenTextLabel.SetMessage(msg, _allowedTags, DefaultTextColor);
 
             WrittenTextLabel.Visible = !isEditing && state.Text.Length > 0;
@@ -372,5 +377,23 @@ namespace Content.Client.Paper.UI
             Input.InsertAtCursor(value);
         }
         // SS220 Document helper end
+
+        // SS220 languages begin
+        private void UpdateWrittenTextMarkups()
+        {
+            if (WrittenTextLabel.Disposed)
+                return;
+
+            var text = WrittenTextLabel.GetMessage();
+            if (text == null)
+                return;
+
+            var msg = new FormattedMessage();
+            msg.AddMarkupPermissive(text);
+
+            WrittenTextLabel.RemoveAllChildren();
+            WrittenTextLabel.SetMessage(msg, _allowedTags, DefaultTextColor);
+        }
+        // SS220 languages end
     }
 }
