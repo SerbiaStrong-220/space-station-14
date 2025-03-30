@@ -59,7 +59,7 @@ public sealed class SharedMinorFaunaSystem : EntitySystem
         if (!TryComp<EntityCocoonComponent>(cocoonUid, out var cocoon) ||
             !_container.TryGetContainer(cocoonUid, cocoon.CocoonContainerId, out var container))
         {
-            Log.Error($"{cocoonUid} doesn't have required components to cocooning target");
+            Log.Error($"{cocoonUid} doesn't have required components to cocoon target");
             return;
         }
 

@@ -4,14 +4,12 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.MinorFauna.Actions;
 using Content.Shared.SS220.MinorFauna.Events;
 using Content.Shared.SS220.MinorFauna.Components;
-using Content.Shared.Humanoid;
 
 
 namespace Content.Shared.SS220.MinorFauna.Systems;
 
 public sealed class SharedMinorFaunaSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;

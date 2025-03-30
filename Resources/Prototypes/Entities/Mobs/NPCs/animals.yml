@@ -2459,7 +2459,14 @@
     damage:
       types:
         Piercing: 6
-    #SS220 Fauna update start
+
+- type: entity
+  parent:
+  - MobSpiderAngryBase
+  - MobGiantSpider
+  id: MobGiantSpiderAngry
+  components:
+  #SS220 Fauna update start
   - type: Cocooner
     cocoonTypes:
     - CocoonsList:
@@ -2468,14 +2475,12 @@
         - HumanoidAppearance
       entityProtoList:
       - TarantulaCocoon
-  
     - CocoonsList:
       entityBlackList:
         components: 
         - HumanoidAppearance
       entityProtoList:
       - TarantulaAnimalCocoon
-
     - CocoonsList:
       entityWhiteList:
         components: 
@@ -2488,7 +2493,6 @@
         - HumanoidAppearance
       entityProtoList:
       - TarantulaSmallAnimalCocoon
-
   - type: ActionGrant
     actions:
     - ActionSpawnSpiderWallWebTarantula
@@ -2497,12 +2501,6 @@
     - ActionSpawnSingleSpiderWebTarantula
     - ActionCocoonTarantula
     #SS220 Fauna update end
-
-- type: entity
-  parent:
-  - MobSpiderAngryBase
-  - MobGiantSpider
-  id: MobGiantSpiderAngry
 
 - type: entity
   name: clown spider
