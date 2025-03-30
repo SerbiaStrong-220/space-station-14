@@ -102,3 +102,21 @@
     fiberMaterial: fibers-insulative
   - type: FingerprintMask
 
+- type: entity
+  parent: ClothingHandsGlovesPowerglove
+  id: ClothingHandsGlovesPowergloveDisabler
+  name: power gloves
+  description: Power gloves modified for pinpoint stunning of the opponent.
+  suffix: Operative BlueShield
+  components:
+  - type: MeleeWeapon
+    attackRate: 1.2
+    damage:
+      types:
+        Stamina: 55
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 10
+  - type: Insulated
+
