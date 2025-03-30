@@ -528,7 +528,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             if (listener == source)
             {
-                var ev = new EntitySpokeEvent(source, scrambledMessage, originalMessage, null, null);
+                var ev = new EntitySpokeEvent(source, scrambledColorlessMessage, originalMessage, null, null);
                 RaiseLocalEvent(source, ev, true);
             }
             else
@@ -597,7 +597,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         // SS220 languages begin
         var transformedMessage = message;
-        message = _languageSystem.SanitizeMessage(source, source, message, out _);
+        _languageSystem.SanitizeMessage(source, source, message, out message, false);
         // SS220 languages end
 
         var obfuscatedMessage = ObfuscateMessageReadability(message, 0.2f);
@@ -627,7 +627,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         var wrappedUnknownMessage = Loc.GetString("chat-manager-entity-whisper-unknown-wrap-message",
             ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
 
-        Dictionary<string, (string, List<EntityUid>)> scrambledMsgReceiversDict = new(); // SS220 languages
+        Dictionary<string, (string, string, List<EntityUid>)> scrambledMsgReceiversDict = new(); // SS220 languages
         foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
         {
             EntityUid listener;
@@ -637,7 +637,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             listener = session.AttachedEntity.Value;
 
             // SS220-Add-Languages begin
-            var scrambledMessage = _languageSystem.SanitizeMessage(source, listener, message, out var scrambledColorlessMessage);
+            var scrambledMessage = _languageSystem.SanitizeMessage(source, listener, transformedMessage, out var scrambledColorlessMessage);
             var obfuscatedScrambledMessage = ObfuscateMessageReadability(scrambledColorlessMessage, 0.2f);
 
             wrappedMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
@@ -663,15 +663,15 @@ public sealed partial class ChatSystem : SharedChatSystem
             // SS220-Add-Languages begin
             if (listener == source)
             {
-                var ev = new EntitySpokeEvent(source, scrambledMessage, originalMessage, channel, obfuscatedMessage);
+                var ev = new EntitySpokeEvent(source, scrambledColorlessMessage, originalMessage, channel, obfuscatedScrambledMessage);
                 RaiseLocalEvent(source, ev, true);
             }
             else
             {
                 if (scrambledMsgReceiversDict.TryGetValue(scrambledMessage, out var entities))
-                    entities.Item2.Add(listener);
+                    entities.Item3.Add(listener);
                 else
-                    scrambledMsgReceiversDict[scrambledMessage] = (scrambledColorlessMessage, [listener]);
+                    scrambledMsgReceiversDict[scrambledMessage] = (scrambledColorlessMessage, obfuscatedScrambledMessage, [listener]);
             }
             // SS220-Add-Languages end
         }
@@ -679,9 +679,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
 
         // SS220 languages begin
-        foreach (var (scrambledMsg, (colorlessMsg, reseivers)) in scrambledMsgReceiversDict)
+        foreach (var (scrambledMsg, (colorlessMsg, obfuscatedScrambledMessage, reseivers)) in scrambledMsgReceiversDict)
         {
-            var scrambledEv = new EntitySpokeScrambledEvent(source, reseivers, scrambledMsg, colorlessMsg, originalMessage, obfuscatedMessage, channel != null);
+            var scrambledEv = new EntitySpokeScrambledEvent(source, reseivers, scrambledMsg, colorlessMsg, originalMessage, obfuscatedScrambledMessage, channel != null);
             RaiseLocalEvent(scrambledEv);
         }
 
@@ -903,12 +903,36 @@ public sealed partial class ChatSystem : SharedChatSystem
     private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true)
     {
         var newMessage = message.Trim();
-        newMessage = ReplaceWords(newMessage); // Corvax-ChatSanitize
-        newMessage = SanitizeMessageReplaceWords(newMessage);
+        // SS220 languages begin
         GetRadioKeycodePrefix(source, newMessage, out newMessage, out var prefix);
 
+        bool findEnglish = false;
+        string? newEmoteStr = null;
+        newMessage = _languageSystem.ChangeLanguageMessages(source, newMessage, msg =>
+        {
+            var newLangMessage = ReplaceWords(msg);
+            newLangMessage = SanitizeMessageReplaceWords(newLangMessage);
+            _sanitizer.TrySanitizeEmoteShorthands(newLangMessage, source, out newLangMessage, out newEmoteStr, false);
+            if (!_sanitizer.CheckNoEnglish(source, newLangMessage))
+                findEnglish = true;
+
+            return newLangMessage;
+        }, true);
+
+        if (findEnglish)
+        {
+            newMessage = string.Empty;
+            newEmoteStr = "кашляет";
+        }
+
+        emoteStr = newEmoteStr;
+        //newMessage = ReplaceWords(newMessage); // Corvax-ChatSanitize
+        //newMessage = SanitizeMessageReplaceWords(newMessage);
+        //GetRadioKeycodePrefix(source, newMessage, out newMessage, out var prefix);
+
         // Sanitize it first as it might change the word order
-        _sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out emoteStr);
+        //_sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out emoteStr);
+        // SS220 languages end
 
         if (capitalize)
             newMessage = SanitizeMessageCapital(newMessage);
@@ -930,10 +954,20 @@ public sealed partial class ChatSystem : SharedChatSystem
 
     public string TransformSpeech(EntityUid sender, string message)
     {
-        var ev = new TransformSpeechEvent(sender, message);
-        RaiseLocalEvent(ev);
+        // SS220 languages begin
+        var newMessage = _languageSystem.ChangeLanguageMessages(sender, message, msg =>
+        {
+            var ev = new TransformSpeechEvent(sender, msg);
+            RaiseLocalEvent(ev);
+            return ev.Message;
+        }, true);
+        //var ev = new TransformSpeechEvent(sender, message);
+        //RaiseLocalEvent(ev);
 
-        return ev.Message;
+        //return ev.Message;
+
+        return newMessage;
+        // SS220 languages end
     }
 
     public bool CheckIgnoreSpeechBlocker(EntityUid sender, bool ignoreBlocker)

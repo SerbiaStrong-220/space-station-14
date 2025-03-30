@@ -22,13 +22,13 @@
   description: Clown's pet parrot.
   suffix: Роль
   components:
-  - type: InteractionPopup
-    successChance: 1
   - type: Language
     availableLanguages:
     - id: Galactic
     - id: SolCommon
       canSpeak: false
+  - type: InteractionPopup
+    successChance: 1
   - type: Grammar
     attributes:
       proper: true

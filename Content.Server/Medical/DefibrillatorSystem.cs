@@ -27,6 +27,7 @@ using Robust.Shared.Random;//SS220 LimitationRevive
 using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
 using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
 using Content.Shared.Ghost; //SS220 LimitationRevive
+using Content.Shared.Inventory; // SS220 NewDefib
 
 namespace Content.Server.Medical;
 
@@ -51,6 +52,7 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly IRobustRandom _random = default!; //SS220 LimitationRevive
     [Dependency] private readonly LimitationReviveSystem _reviveSystem = default!; //SS220 LimitationRevive
+    [Dependency] private readonly InventorySystem _inventory = default!; // SS220 NewDefib
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -77,7 +79,13 @@ public sealed class DefibrillatorSystem : EntitySystem
 
         if (!CanZap(uid, target, args.User, component))
             return;
-
+        // SS220 NewDefib begin
+        if (_inventory.TryGetSlotEntity(target, "outerClothing", out var item) && item != null) 
+        {
+             _popup.PopupEntity(Loc.GetString("loc-defib-outer-popup"), target, args.User);
+            return;
+        } 
+        // SS220 NewDefib end
         args.Handled = true;
         Zap(uid, target, args.User, component);
     }

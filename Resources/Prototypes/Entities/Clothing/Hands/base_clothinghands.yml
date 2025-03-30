@@ -23,6 +23,18 @@
     tags:
     - ClothMade
     - WhitelistChameleon
+  #SS220 WristWatch on glove begin
+  - type: ItemSlots
+    slots:
+      item_watch:
+        name: wrist-watch-slot-component-slot-name
+        whitelist:
+          tags:
+          - WristWatch
+  - type: ContainerContainer
+    containers:
+      item_watch: !type:ContainerSlot
+  #SS220 WristWatch on glove end
   - type: DamageOnInteractProtection
     damageProtection:
       flatReductions:

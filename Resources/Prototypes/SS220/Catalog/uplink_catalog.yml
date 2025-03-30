@@ -46,7 +46,7 @@
   id: UplinkMindslaveSurgeryFixBundle
   name: uplink-mindslave-fix-surgery-bundle-name
   description: uplink-mindslave-fix-surgery-bundle-desc
-  icon: { sprite: SS220/Objects/Specific/Medical/implants.rsi, state: mindslave_fixer }
+  icon: { sprite: /Textures/SS220/Interface/Actions/implants.rsi, state: mindslave_fixer }
   productEntity: ClothingBackpackDuffelSyndicateMindslaveFixerSurgery
   discountCategory: veryRareDiscounts
   discountDownTo:
@@ -163,7 +163,7 @@
   id: ThermalVisorImplanter
   name: uplink-thermal-visor-implanter-name
   description: uplink-thermal-visor-implanter-desc
-  icon: {sprite: /Textures/SS220/Misc/ThermalEye.rsi, state: EyeON}
+  icon: {sprite: /Textures/SS220/Interface/Actions/implants_cla.rsi, state: EyeON}
   productEntity: ThermalVisorImplanter
   discountCategory: rareDiscounts
   discountDownTo:
@@ -177,7 +177,7 @@
   id: DnaCopyImplanter
   name: uplink-dna-copy-implanter-name
   description: uplink-dna-copy-implanter-desc
-  icon: {sprite: /Textures/SS220/Objects/Specific/Medical/implant-dna-copy.rsi, state: dna-copy}
+  icon: {sprite: /Textures/SS220/Interface/Actions/implants.rsi, state: dna-copy}
   productEntity: BoxDnaCopyImplant
   discountCategory: rareDiscounts
   discountDownTo:
@@ -191,7 +191,7 @@
   id: AdrenalImplanter
   name: uplink-adrenal-implanter-name
   description: uplink-adrenal-implanter-desc
-  icon: {sprite: /Textures/SS220/Objects/Specific/Medical/implant-adrenal.rsi, state: adrenal}
+  icon: {sprite: /Textures/SS220/Interface/Actions/implants.rsi, state: adrenal}
   productEntity: AdrenalImplanter
   discountCategory: rareDiscounts
   discountDownTo:

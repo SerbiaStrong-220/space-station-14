@@ -2,7 +2,12 @@
 
 - type: entity
   name: MiGo
-  parent: SimpleSpaceMobBase
+  parent: #SimpleSpaceMobBase
+    - BaseMob
+    - FlyingMobBase
+    - MobCombat
+    - BaseSimpleMob
+    #- MobFlammable #Removed cause wierd interactions in astral
   description: The child of the Dark God.
   id: MiGo
   suffix: CultYogg
@@ -22,24 +27,11 @@
   - type: Body
     prototype: MiGoBody
   - type: ComplexInteraction #For UI opening only
-  - type: MeleeWeapon
-    altDisarm: false
-    soundHit:
-      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
-    damage:
-      types:
-        Blunt: 4
-        Slash: 7
-        Structural: 12 #ss220
   - type: Telepathy
     canSend: true
     telepathyChannelPrototype: TelepathyChannelYoggSothothCult
   - type: RandomMetadata
     nameSegments: [ cult_yogg_migo ]
-  - type: Speech
-    speechVerb: LargeMob
-  - type: TTS
-    voice: forester
   - type: UserInterface
     interfaces:
       enum.MiGoUiKey.Erect:
@@ -50,13 +42,18 @@
     - CultYogg
   - type: AntagObjectives
     objectives:
-    - CultYoggAcsendObjective
     - CultYoggSacraficeObjective
   #situational for logic
-  - type: NoSlip
   - type: Insulated
   - type: FlashImmunity
-  - type: IgnoreOnfloorSlowers
+  - type: Speech
+    speechVerb: LargeMob
+  - type: TTS
+    voice: forester
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
   #visual
   - type: Sprite
     drawdepth: Mobs
@@ -74,6 +71,7 @@
         Base: dead
   - type: Visibility
     layer: 1
+  #other
   - type: MovementSpeedModifier
     baseWalkSpeed : 6
     baseSprintSpeed : 6
@@ -105,6 +103,18 @@
       - !type:GibBehavior { }
   - type: Stamina
     critThreshold: 200
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+  - type: MeleeWeapon
+    altDisarm: false
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Blunt: 4
+        Slash: 7
+        Structural: 12 #anti-useless in base
   - type: Temperature
     heatDamageThreshold: 360
     coldDamageThreshold: -150

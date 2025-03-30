@@ -364,23 +364,6 @@ public sealed partial class TTSSystem : EntitySystem
 
         if (distance > ChatSystem.WhisperClearRange)
         {
-            if (ttsMessage == null)
-            {
-                using var ttsResponse = await GenerateTts(message, speaker, TtsKind.Whisper);
-                if (!ttsResponse.TryGetValue(out var audioData)) return;
-                ttsMessage = new MsgPlayTts
-                {
-                    Data = audioData,
-                    SourceUid = GetNetEntity(source),
-                    Kind = TtsKind.Whisper
-                };
-                _netManager.ServerSendMessage(ttsMessage, receiver.Channel);
-            }
-            else
-                _netManager.ServerSendMessage(ttsMessage, receiver.Channel);
-        }
-        else
-        {
             if (obfTtsMessage == null)
             {
                 using var obfTtsResponse = await GenerateTts(obfMessage, speaker, TtsKind.Whisper);
@@ -395,6 +378,23 @@ public sealed partial class TTSSystem : EntitySystem
             }
             else
                 _netManager.ServerSendMessage(obfTtsMessage, receiver.Channel);
+        }
+        else
+        {
+            if (ttsMessage == null)
+            {
+                using var ttsResponse = await GenerateTts(message, speaker, TtsKind.Whisper);
+                if (!ttsResponse.TryGetValue(out var audioData)) return;
+                ttsMessage = new MsgPlayTts
+                {
+                    Data = audioData,
+                    SourceUid = GetNetEntity(source),
+                    Kind = TtsKind.Whisper
+                };
+                _netManager.ServerSendMessage(ttsMessage, receiver.Channel);
+            }
+            else
+                _netManager.ServerSendMessage(ttsMessage, receiver.Channel);
         }
     }
 
