@@ -33,7 +33,7 @@
       zapHeal:
         types:
           Asphyxiation: -40
-      zapСoeffDamage: 8
+      zapСoeffDamage: 8 #SS220 LimitationRevive
     - type: DoAfter
     - type: UseDelay
     - type: StaticPrice
