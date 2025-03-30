@@ -57,7 +57,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         RaiseNetworkEvent(ev);
     }
 
-#region Paper
+    #region Paper
     /// <inheritdoc/>
     public override string DecryptLanguageMarkups(string message, bool checkCanSpeak = true, EntityUid? reader = null)
     {
