@@ -27,7 +27,7 @@ using Robust.Shared.Random;//SS220 LimitationRevive
 using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
 using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
 using Content.Shared.Ghost; //SS220 LimitationRevive
-using Content.Shared.Inventory; // SS220 NewDefib
+using Content.Shared.Inventory;
 
 namespace Content.Server.Medical;
 
