@@ -4,3 +4,6 @@ ent-MagistrateIDCard = ID карта магистрата
 ent-PrisonerIDCard = ID карта заключённого
     .desc = { ent-IDCardStandard.desc }
 
+ent-ExplorerIDCard = ID карта исследователя
+    .desc = { ent-IDCardStandard.desc }
+

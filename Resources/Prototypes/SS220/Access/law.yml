@@ -8,3 +8,8 @@
   tags:
   - Magistrate
   - Lawyer
+
+- type: accessLevel
+  id: Explorer
+  name: id-card-access-level-explorer
+  canBeSwitchableInReader: false
