@@ -363,7 +363,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         SetTelephoneMicrophoneState(entity, false);
     }
 
-    private void SendTelephoneMessage(EntityUid messageSource, string message, Entity<TelephoneComponent> source, bool escapeMarkup = true, LanguageMessage? languageMessage = null)
+    private void SendTelephoneMessage(EntityUid messageSource, string message, Entity<TelephoneComponent> source, bool escapeMarkup = true)
     {
         // This method assumes that you've already checked that this
         // telephone is able to transmit messages and that it can

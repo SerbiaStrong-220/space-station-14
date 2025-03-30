@@ -25,7 +25,7 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly PaperSystem _paper = default!;
     [Dependency] private readonly TTSSystem _ttsSystem = default!; // SS220 Tape recorder TTS
-    [Dependency] private readonly LanguageSystem _languageSystem = default!;
+    [Dependency] private readonly LanguageSystem _languageSystem = default!; // SS220 languages
 
     public override void Initialize()
     {

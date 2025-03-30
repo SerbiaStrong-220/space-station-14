@@ -57,7 +57,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         RaiseNetworkEvent(ev);
     }
 
-    #region Paper
+#region Paper
     /// <inheritdoc/>
     public override string DecryptLanguageMarkups(string message, bool checkCanSpeak = true, EntityUid? reader = null)
     {
@@ -127,13 +127,9 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     /// <inheritdoc/>
     public override string GenerateLanguageMsgMarkup(string message, LanguagePrototype language)
     {
-        uint charSum = 0;
-        foreach (var c in message.ToCharArray())
-            charSum += c;
-
         var key = GenerateCacheKey(language.ID, message);
         KnownPaperNodes[key] = message;
         return $"[{LanguageMsgMarkup}=\"{key}\"]";
     }
-#endregion
+    #endregion
 }

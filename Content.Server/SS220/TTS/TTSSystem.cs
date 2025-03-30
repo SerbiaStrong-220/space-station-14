@@ -92,9 +92,6 @@ public sealed partial class TTSSystem : EntitySystem
             return;
         }
 
-        //if (args.LanguageMessage is { } languageMessage)
-        //    HandleLanguageRadio(args.Receivers, languageMessage, protoVoice.Speaker);
-        //else
         HandleRadio(args.Receivers, args.Message, protoVoice.Speaker);
     }
 
