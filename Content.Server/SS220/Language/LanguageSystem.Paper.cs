@@ -1,10 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Paper;
 using Content.Shared.SS220.Language;
 using Content.Shared.SS220.Language.Systems;
 using Robust.Shared.Player;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Content.Server.SS220.Language;

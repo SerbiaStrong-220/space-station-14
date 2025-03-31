@@ -11,10 +11,12 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 {
     [Dependency] private readonly LanguageManager _language = default!;
 
+    public Action<string>? OnNodeInfoUpdated;
+
     // Не содержит информации о оригинальном сообщении, а лишь то, что видит кукла
     private Dictionary<string, string> KnownPaperNodes = new();
 
-    public Action? OnNodeInfoUpdated;
+    private List<string> _requestedNodeInfo = new();
 
     public override void Initialize()
     {
@@ -38,6 +40,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
     private void OnUpdateNodeInfo(UpdateClientPaperLanguageNodeInfo ev)
     {
+        _requestedNodeInfo.Remove(ev.Key);
         if (ev.Info == string.Empty)
         {
             KnownPaperNodes.Remove(ev.Key);
@@ -45,7 +48,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         }
 
         KnownPaperNodes[ev.Key] = ev.Info;
-        OnNodeInfoUpdated?.Invoke();
+        OnNodeInfoUpdated?.Invoke(ev.Key);
     }
 
     /// <summary>
@@ -98,8 +101,10 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     /// </summary>
     private LanguagePrototype? GetPrototypeFromChacheKey(string key)
     {
-        key = ParseCahceKey(key);
-        var languageId = key.Split("/")[0];
+        if (!TryParseCahceKey(key, out var parsed))
+            return null;
+
+        var languageId = parsed.Split("/")[0];
         _language.TryGetLanguageById(languageId, out var language);
         return language;
     }
@@ -109,8 +114,26 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     /// </summary>
     public void RequestNodeInfo(string key)
     {
+        if (_requestedNodeInfo.Contains(key))
+            return;
+
         var ev = new ClientRequestPaperLanguageNodeInfo(key);
         RaiseNetworkEvent(ev);
+    }
+
+    public void FindAndRequestNodeInfoForMarkups(string message)
+    {
+        var markups = FindLanguageMarkups(message);
+        if (markups == null)
+            return;
+
+        foreach (Match m in markups)
+        {
+            if (!TryParseTagArg(m.Value, LanguageMsgMarkup, out var key))
+                continue;
+
+            RequestNodeInfo(key);
+        }
     }
 
     /// <summary>
@@ -119,8 +142,11 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     public bool TryGetPaperMessageFromKey(string key, [NotNullWhen(true)] out string? value, [NotNullWhen(true)] out LanguagePrototype? language)
     {
         value = null;
+        language = null;
+        if (!KnownPaperNodes.TryGetValue(key, out value))
+            return false;
+
         language = GetPrototypeFromChacheKey(key);
-        KnownPaperNodes.TryGetValue(key, out value);
         return value != null && language != null;
     }
 

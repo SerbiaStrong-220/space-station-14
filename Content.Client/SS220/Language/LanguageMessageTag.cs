@@ -29,7 +29,6 @@ public sealed class LanguageMessageTag : IMarkupTag
             return false;
 
         var languageSystem = _entityManager.System<LanguageSystem>();
-        languageSystem.RequestNodeInfo(key);
         if (!languageSystem.TryGetPaperMessageFromKey(key, out var message, out var language))
             return false;
 

@@ -78,7 +78,7 @@ namespace Content.Client.Paper.UI
 
             // SS220 languages begin
             _languageSystem = _entityManager.System<LanguageSystem>();
-            _languageSystem.OnNodeInfoUpdated += UpdateWrittenTextMarkups;
+            _languageSystem.OnNodeInfoUpdated += _ => UpdateWrittenTextMarkups();
             // SS220 languages end
 
             // We can't configure the RichTextLabel contents from xaml, so do it here:
@@ -294,6 +294,7 @@ namespace Content.Client.Paper.UI
                 msg.AddMarkupPermissive("\r\n");
             }
 
+            _languageSystem.FindAndRequestNodeInfoForMarkups(msg.ToMarkup()); // SS220 languages
             WrittenTextLabel.RemoveAllChildren(); // SS220 Markups control on paper fix
             WrittenTextLabel.SetMessage(msg, _allowedTags, DefaultTextColor);
 

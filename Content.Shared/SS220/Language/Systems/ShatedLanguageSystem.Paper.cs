@@ -115,9 +115,19 @@ public abstract partial class SharedLanguageSystem
         return Convert.ToHexString(bytes);
     }
 
-    protected string ParseCahceKey(string key)
+    protected bool TryParseCahceKey(string key, [NotNullWhen(true)] out string? parsed)
     {
-        var bytes = Convert.FromHexString(key);
-        return Encoding.UTF8.GetString(bytes);
+        parsed = null;
+
+        try
+        {
+            var bytes = Convert.FromHexString(key);
+            parsed = Encoding.UTF8.GetString(bytes);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 }
