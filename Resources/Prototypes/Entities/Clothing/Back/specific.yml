@@ -99,11 +99,7 @@
     solution: tank
   # SS220 Nozzle refactor begin
   - type: SolutionProvider
-    solutionId: tank
-    tankSlot:
-    whitelist:
-      components:
-      - ClothingSlotSolutionProvider
+  - type: TankVisuals
 - - type: ContainerContainer
     containers:
       NozzleSlot: !type:ContainerSlot {}

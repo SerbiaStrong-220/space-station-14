@@ -3,16 +3,15 @@
 namespace Content.Shared.SS220.Spray.Events;
 
 /// <summary>
-/// Raised on a gun when it would like to take the specified amount of ammo.
+/// Raised on a spray when it would like to take the specified amount of ammo.
 /// </summary>
 public sealed class TakeSolutionEvent : EntityEventArgs
 {
     public readonly EntityUid? User;
-    public byte SolutionAmount { get; }
 
     /// <summary>
-    /// If no ammo returned what is the reason for it?
+    /// How much solution u wanna take
     /// </summary>
-    public string? Reason;
+    public byte SolutionAmount { get; }
 
 }

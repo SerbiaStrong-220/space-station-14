@@ -17,22 +17,11 @@ public abstract class SharedSpraySystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] protected readonly ItemSlotsSystem ItemSlotsSystem = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<ClothingSlotSolutionProviderComponent, SprayAttemptEvent>(OnClothingTakeSolution);
         SubscribeLocalEvent<ClothingSlotSolutionProviderComponent, GetSolutionCountEvent>(OnClothingSolutionCount);
-        SubscribeLocalEvent<SolutionProviderComponent, ComponentInit>(OnComponentInit);
-    }
-
-    protected virtual void OnComponentInit(EntityUid uid, SolutionProviderComponent tank, ComponentInit args)
-    {
-
-        ItemSlotsSystem.AddItemSlot(uid, SolutionProviderComponent.NozzleSlot, tank.TankSlot);
-
-        UpdateTankAppearance(uid, tank);
     }
 
     private void OnClothingTakeSolution(Entity<ClothingSlotSolutionProviderComponent> ent, ref SprayAttemptEvent args)
@@ -79,9 +68,5 @@ public abstract class SharedSpraySystem : EntitySystem
         }
 
         return false;
-    }
-    private void UpdateTankAppearance(EntityUid uid, SolutionProviderComponent tank)
-    {
-        Appearance.SetData(uid, TankVisuals.NozzleInserted, tank.ContainedNozzle != null);
     }
 }

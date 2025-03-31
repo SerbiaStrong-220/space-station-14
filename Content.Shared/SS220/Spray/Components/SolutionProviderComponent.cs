@@ -9,12 +9,6 @@ namespace Content.Shared.SS220.Spray.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true), Access(typeof(SharedSpraySystem))]
 public sealed partial class SolutionProviderComponent : Component
 {
-    public const string NozzleSlot = "NozzleSlot";
-
-    [DataField("tankSlot")]
-    public ItemSlot TankSlot = new();
-
-    [ViewVariables] public EntityUid? ContainedNozzle;
     /// <summary>
     /// The solution where reagents are extracted from for the spray.
     /// </summary>
