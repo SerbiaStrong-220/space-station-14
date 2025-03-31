@@ -117,6 +117,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         if (_requestedNodeInfo.Contains(key))
             return;
 
+        _requestedNodeInfo.Add(key);
         var ev = new ClientRequestPaperLanguageNodeInfo(key);
         RaiseNetworkEvent(ev);
     }
