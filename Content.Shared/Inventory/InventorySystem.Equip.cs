@@ -201,7 +201,8 @@ public abstract partial class InventorySystem
             return false;
         }
 
-        if (!silent && clothing != null && !slotDefinition.SlotFlags.HasFlag(SlotFlags.POCKET))//SS220 Cult_update_1
+        if (!silent && clothing != null
+            && !slotDefinition.SlotFlags.HasFlag(SlotFlags.POCKET)) //SS220 Cult_update_1
         {
             _audio.PlayPredicted(clothing.EquipSound, target, actor);
         }
