@@ -38,6 +38,8 @@
   - type: Tag
     tags:
     - MinamotoNoYorimitsu
+  - type: ThrowingAngle
+    angle: 300
 
 # Рапира
 - type: entity
@@ -72,6 +74,16 @@
     tags:
     - Rapier
   - type: DisarmMalus
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 22.5
 
 - type: entity
   parent: Rapier
@@ -82,6 +94,10 @@
     damage:
       types:
         Piercing: 15
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 12.5
 
 # Офицерский кортик
 - type: entity
@@ -106,6 +122,12 @@
   - type: Tag
     tags:
     - OfficerCutlass
+  - type: ThrowingAngle
+    angle: 45
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 11.5
 
 # Цепная меч-пила
 - type: entity

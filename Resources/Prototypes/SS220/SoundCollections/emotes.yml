@@ -295,3 +295,10 @@
   id: FelinidPurrs
   files:
   - /Audio/Voice/Felinid/cat_purr1.ogg
+
+- type: soundCollection
+  id: WyccGoalShout
+  files:
+  - /Audio/SS220/Voice/Goal/wycc_goal1.ogg
+  - /Audio/SS220/Voice/Goal/wycc_goal2.ogg
+  - /Audio/SS220/Voice/Goal/wycc_goal3.ogg
