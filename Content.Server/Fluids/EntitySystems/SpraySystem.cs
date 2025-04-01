@@ -17,6 +17,8 @@ using Robust.Shared.Prototypes;
 using System.Numerics;
 using Content.Server.Disposal.Unit.Components;
 using Robust.Shared.Map;
+using Content.Shared.SS220.Spray.Components;
+using Content.Shared.SS220.Spray.Systems;
 
 namespace Content.Server.Fluids.EntitySystems;
 
@@ -32,6 +34,7 @@ public sealed class SpraySystem : EntitySystem
     [Dependency] private readonly VaporSystem _vapor = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly ClothingSlotSolutionProviderSystem _solutionProvider = default!;
 
     public override void Initialize()
     {
@@ -76,8 +79,14 @@ public sealed class SpraySystem : EntitySystem
 
     public void Spray(Entity<SprayComponent> entity, EntityUid user, MapCoordinates mapcoord)
     {
+        // Nozzle refactor begin
         if (!_solutionContainer.TryGetSolution(entity.Owner, SprayComponent.SolutionName, out var soln, out var solution))
-            return;
+        {
+            if (!TryComp<ClothingSlotSolutionProviderComponent>(entity, out var nozzle)
+                || !_solutionProvider.TryGetClothingSolution((entity, nozzle), out soln, out solution))
+                return;
+        }
+        // Nozzle refactor end
 
         var ev = new SprayAttemptEvent(user);
         RaiseLocalEvent(entity, ref ev);
