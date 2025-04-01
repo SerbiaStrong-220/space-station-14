@@ -597,7 +597,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         // SS220 languages begin
         var transformedMessage = message;
-        message = _languageSystem.SanitizeMessage(source, source, message, out _);
+        _languageSystem.SanitizeMessage(source, source, message, out message, false);
         // SS220 languages end
 
         var obfuscatedMessage = ObfuscateMessageReadability(message, 0.2f);
@@ -637,7 +637,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             listener = session.AttachedEntity.Value;
 
             // SS220-Add-Languages begin
-            var scrambledMessage = _languageSystem.SanitizeMessage(source, listener, message, out var scrambledColorlessMessage);
+            var scrambledMessage = _languageSystem.SanitizeMessage(source, listener, transformedMessage, out var scrambledColorlessMessage);
             var obfuscatedScrambledMessage = ObfuscateMessageReadability(scrambledColorlessMessage, 0.2f);
 
             wrappedMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",

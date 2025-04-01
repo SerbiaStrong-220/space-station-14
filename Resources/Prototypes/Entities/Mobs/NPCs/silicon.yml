@@ -217,6 +217,12 @@
       path: /Audio/Items/bikehorn.ogg
       params:
         variation: 0.125
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 Languages tweaks end
 
 - type: entity
   parent: MobHonkBot
@@ -258,6 +264,12 @@
     totalIntensity: 10
     intensitySlope: 5
     canCreateVacuum: false
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 Languages tweaks end
 
 - type: entity
   parent: MobSiliconBase
@@ -266,7 +278,7 @@
   description: The creep of automation now threatening space janitors.
   components:
   - type: Sprite
-    sprite: Mobs/Silicon/Bots/cleanbot.rsi
+    sprite: SS220/Mobs/Silicon/Bots/cleanbot.rsi #SS220 Clean & Med Bot Resprite
     state: cleanbot
   - type: Construction
     graph: CleanBot
@@ -334,7 +346,7 @@
         reagent: SpaceDrugs
         quantity: 25
   - type: Sprite
-    sprite: Mobs/Silicon/Bots/medibot.rsi
+    sprite: SS220/Mobs/Silicon/Bots/medibot.rsi #SS220 Clean & Med Bot Resprite
     state: medibot
   - type: HTN
     rootTask:
@@ -386,6 +398,12 @@
     interactFailureString: petting-failure-mimebot
   - type: Inventory
     templateId: head
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+#SS220 Languages tweaks end
 
 - type: entity
   parent: MobSiliconBase
@@ -453,3 +471,9 @@
     channels:
     - Common
     - Supply
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 Languages tweaks end
