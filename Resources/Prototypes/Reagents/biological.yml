@@ -193,7 +193,7 @@
           types:
             Bloodloss: -5
       - !type:ModifyBleedAmount
-        amount: -1.5
+        amount: -2 #SS220 Antag balance
   # Just in case you REALLY want to water your plants
   plantMetabolism:
   - !type:PlantAdjustWater

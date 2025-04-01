@@ -19,6 +19,9 @@
 - type: Tag
   id: MagazineGrenadeArta
 
+- type: Tag
+  id: KRSPowerCell
+
 # READD-VEHICLES
 - type: Tag
   id: JanicartKeys
@@ -30,6 +33,9 @@
 # ss220 shlepi
 - type: Tag
   id: ElWyccoAxe
+
+- type: Tag
+  id: WristWatch
 
 - type: Tag
   id: WyccoAxe
@@ -213,6 +219,12 @@
 - type: Tag
   id: BananiumHorn
 
+# SS220-PumpkinLantern-Craft
+- type: Tag
+  id: CarvedPumpkin
+
+- type: Tag
+  id: WhitelistPdaIdPainter
 
 # SS220 supa kithen
 - type: Tag

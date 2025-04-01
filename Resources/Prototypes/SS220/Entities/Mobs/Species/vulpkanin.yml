@@ -69,6 +69,10 @@
     damage:
       types:
         Slash: 5.5
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Canilunzt
 #если будет дальнейшее обсуждение и одобрение, займусь этой рассой для раундстартового состояния. Пока так
 
 

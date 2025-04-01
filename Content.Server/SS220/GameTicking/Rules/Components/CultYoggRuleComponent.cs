@@ -1,6 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.FixedPoint;
 using Content.Shared.NPC.Prototypes;
+using Content.Shared.SS220.CultYogg.Altar;
+using Content.Shared.SS220.CultYogg.Cultists;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -11,17 +14,11 @@ namespace Content.Server.SS220.GameTicking.Rules.Components;
 [RegisterComponent, Access(typeof(CultYoggRuleSystem))]
 public sealed partial class CultYoggRuleComponent : Component
 {
-    /// <summary>
-    /// General requirements
-    /// </summary>
-    [DataField]
-    public int AmountOfSacrificesToGodSummon = 3;
-
-    [DataField]
-    public int AmountOfSacrificesToWarningAnouncement = 2;
-
     [DataField]
     public int ReqAmountOfMiGo = 3;
+
+    [DataField]
+    public Dictionary<CultYoggStage, CultYoggStageDefinition> Stages { get; private set; } = new();
 
     /// <summary>
     /// General requirements
@@ -32,6 +29,14 @@ public sealed partial class CultYoggRuleComponent : Component
     public readonly List<string> BannedDepartaents = ["GhostRoles"];
 
     public bool SacraficialsWerePicked = false;//buffer to prevent multiple generations
+
+    /// <summary>
+    /// Where previous sacrificial were performed
+    /// </summary>
+    public Entity<CultYoggAltarComponent>? LastSacrificialAltar = null;
+
+    public int InitialCrewCount;
+    public int TotalCultistsConverted;
 
     /// <summary>
     /// Storages for an endgame screen title
@@ -91,6 +96,11 @@ public sealed partial class CultYoggRuleComponent : Component
     public SelectionState SelectionStatus = SelectionState.WaitingForSpawn;
 
     /// <summary>
+    /// Current cult gameplay stage
+    /// </summary>
+    public CultYoggStage Stage = CultYoggStage.Initial;
+
+    /// <summary>
     /// When should cultists be selected and the announcement made
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), ViewVariables(VVAccess.ReadWrite)]
@@ -102,3 +112,19 @@ public sealed partial class CultYoggRuleComponent : Component
     [DataField]
     public SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/SS220/Ambience/Antag/cult_yogg_start.ogg");
 }
+
+[DataDefinition]
+public sealed partial class CultYoggStageDefinition
+{
+    /// <summary>
+    /// Amount of sacrifices that will progress cult to this stage.
+    /// </summary>
+    [DataField]
+    public int? SacrificesRequired;
+    /// <summary>
+    /// Fraction of total crew converted to cultists that will progress cult to this stage.
+    /// </summary>
+    [DataField]
+    public FixedPoint2? CultistsFractionRequired;
+}
+

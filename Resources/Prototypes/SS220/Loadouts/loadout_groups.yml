@@ -33,9 +33,16 @@
 - type: loadoutGroup
   id: MagistrateHead
   name: loadout-group-magistrate-head
-  hidden: true
   loadouts:
   - MagistratePwig
+  - MagistrateStreetJudge
+
+- type: loadoutGroup
+  id: MagistrateEyes
+  name: loadout-group-magistrate-eyes
+  loadouts:
+  - GlassesCommand
+  - MagistrateMonocle
 
 - type: loadoutGroup
   id: MagistrateJumpsuit
@@ -68,6 +75,7 @@
   name: loadout-group-iaa-head
   minLimit: 0
   loadouts:
+  - BeretIAA
   - DevilHorns
 
 - type: loadoutGroup
@@ -722,6 +730,18 @@
   - ServiceWorkerWaitress
 
   # Сервисный работник (Конец)
+
+  # Библиотекарь (Начало)
+- type: loadoutGroup
+  id: LibrarianEyes
+  name: loadout-group-librarian-eyes
+  loadouts:
+  - Glasses
+  - GlassesJamjar
+  - GlassesJensen
+  - LibrarianMonocle
+  - GlassesCyber
+  # Библиотекарь (Конец)
 
 #! Сервис (Конец)
 

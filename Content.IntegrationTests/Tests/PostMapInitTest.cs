@@ -89,6 +89,7 @@ namespace Content.IntegrationTests.Tests
             "Snout",
             "VoidZone",
             "FractWar",
+            "CookingEventMap"
         };
 
         /// <summary>

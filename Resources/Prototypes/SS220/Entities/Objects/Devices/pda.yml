@@ -32,7 +32,7 @@
   - type: Icon
     sprite: Objects/Devices/pda.rsi
     state: pda-ce_dark
-    
+
 - type: entity
   parent: BasePDA
   id: SeniorServicePDA
@@ -65,6 +65,15 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-seniorservice
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
+
 - type: entity
   parent: BasePDA
   id: MagistratePDA
@@ -99,6 +108,14 @@
   - type: Icon
     sprite: Objects/Devices/pda.rsi
     state: pda-magistrate
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: DeathsquadPDA
@@ -191,6 +208,14 @@
       visible: false
   - type: Icon
     state: pda-bs
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -223,6 +248,14 @@
       visible: false
   - type: Icon
     state: pda-security
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: CentcomPDA
@@ -251,3 +284,145 @@
     - state: "id_overlay"
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false
+
+- type: entity
+  parent: BasePDA
+  id: CentcomNewPDA
+  name: КПК ЦК нового образца
+  description: КПК ЦК нового образца задают качественно новый взгляд на изысканность и утонченность граней и линий. Хотя многие говорят, что он им что-то напоминает..
+  components:
+    - type: Pda
+      id: CentcomDiplomatIDCard
+      penSlot:
+        startingItem: CentCommNewPen
+        whitelist:
+          tags:
+          - Write
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-centcomnew
+    - type: PdaBorderColor
+      borderColor: "#4b474f"
+      accentHColor: "#dfac5c"
+    - type: Sprite
+      sprite: Objects/Devices/pda.rsi
+      layers:
+      - map: [ "enum.PdaVisualLayers.Base" ]
+        state: "pda" #ss220 fix
+      - state: "screen-nt"
+        shader: "unshaded"
+      - state: "light_overlay"
+        map: [ "enum.PdaVisualLayers.Flashlight" ]
+        shader: "unshaded"
+        visible: false
+      - state: "id_overlay"
+        map: [ "enum.PdaVisualLayers.IdLight" ]
+        visible: false
+    - type: Icon
+      state: pda-centcomnew
+
+- type: entity
+  parent: BasePDA
+  id: CentcomDiplomatPDA
+  name: КПК Дипломата ЦК
+  description: КПК Дипломата Центрального Командования. Его изысканный стиль позволяет более утонченно проводить переговоры. Особым аргументом является ручка, которая находится внутри.
+  components:
+    - type: Pda
+      id: CentcomDiplomatIDCard
+      penSlot:
+        startingItem: CentCommNewPen
+        whitelist:
+          tags:
+          - Write
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-diplomat
+    - type: PdaBorderColor
+      borderColor: "#cbcdd1"
+      accentHColor: "#dfac5c"
+    - type: Sprite
+      sprite: Objects/Devices/pda.rsi
+      layers:
+      - map: [ "enum.PdaVisualLayers.Base" ]
+        state: "pda" #ss220 fix
+      - state: "screen-nt"
+        shader: "unshaded"
+      - state: "light_overlay"
+        map: [ "enum.PdaVisualLayers.Flashlight" ]
+        shader: "unshaded"
+        visible: false
+      - state: "id_overlay"
+        map: [ "enum.PdaVisualLayers.IdLight" ]
+        visible: false
+    - type: Icon
+      state: pda-diplomat
+
+- type: entity
+  parent: CentcomNewPDA
+  id: CentcomFieldOfficerPDA
+  name: КПК Полевого Офицера ЦК
+  description: КПК Полевого Офицера Центрального Командования - главный помощник полевой бюрократической машины
+  components:
+    - type: Pda
+      id: FieldOfficerIDCard
+
+- type: entity
+  parent: CentcomNewPDA
+  id: CentcomOperativeBSOPDA
+  name: КПК Оперативника "Синий Щит"
+  description: КПК Оперативника "Синий Щит". Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
+  components:
+    - type: Pda
+      id: OperativeBSOIDCard
+
+- type: entity
+  parent: CentcomNewPDA
+  id: CentcomOfficerPDA
+  name: КПК Офицера ЦК
+  description: КПК Офицера Центрального Командования. Красиво выполненный дизайн позволяет Офицерам находить, чем заняться во время ожидания ответа от станции.
+  components:
+    - type: Pda
+      id: OfficerCentCommIDCard
+
+- type: entity
+  parent: BasePDA
+  id: CentcomAdmiralPDA
+  name: КПК Адмирала NanoTrasen
+  description: КПК Адмирала NanoTrasen. Покажите, насколько величественен ваш флот.
+  components:
+    - type: Pda
+      id: NanoTrasenAdmiralIDCard
+      penSlot:
+        startingItem: CentCommNewPen
+        whitelist:
+          tags:
+          - Write
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-admiral
+    - type: PdaBorderColor
+      borderColor: "#cbcdd1"
+      accentHColor: "#dfac5c"
+      accentVColor: "#dfac5c"
+    - type: Sprite
+      sprite: Objects/Devices/pda.rsi
+      layers:
+      - map: [ "enum.PdaVisualLayers.Base" ]
+        state: "pda" #ss220 fix
+      - state: "screen-nt"
+        shader: "unshaded"
+      - state: "light_overlay"
+        map: [ "enum.PdaVisualLayers.Flashlight" ]
+        shader: "unshaded"
+        visible: false
+      - state: "id_overlay"
+        map: [ "enum.PdaVisualLayers.IdLight" ]
+        visible: false
+    - type: Icon
+      state: pda-admiral

@@ -8,3 +8,20 @@
         - id: Paper
           amount: 3
         - id: CentCommNewPen #SS220-BriefcaseMagistrate
+
+- type: entity
+  id: BriefcaseHiddenSlot
+  parent: BriefcaseBrown
+  components:
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      hidden_slot: !type:ContainerSlot { }
+  - type: ToggleableItemSlot
+    hiddenItemSlot:
+      name: construction-category-weapons
+      locked: true
+      whitelist:
+        components:
+          - Gun

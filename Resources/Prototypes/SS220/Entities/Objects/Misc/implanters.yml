@@ -18,3 +18,17 @@
     - type: Implanter
       implant: ThermalVisionImplant
 
+- type: entity
+  id: DnaCopyImplanter
+  name: Dna Copy Implanter
+  parent: BaseImplantOnlyImplanterSyndi
+  components:
+    - type: Implanter
+      implant: DnaCopyImplant
+
+- type: entity
+  id: AdrenalImplanter
+  parent: BaseImplantOnlyImplanterSyndi
+  components:
+  - type: Implanter
+    implant: AdrenalImplant

@@ -8,9 +8,9 @@
   productEntity: WeaponMiniEnergyCrossbow
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 6
+    Telecrystal: 8 #ss220-uplink-discounts
   cost:
-    Telecrystal: 10
+    Telecrystal: 12 #ss220-uplink-discounts
   categories:
   - UplinkWeaponry
   conditions:
@@ -46,7 +46,7 @@
   id: UplinkMindslaveSurgeryFixBundle
   name: uplink-mindslave-fix-surgery-bundle-name
   description: uplink-mindslave-fix-surgery-bundle-desc
-  icon: { sprite: SS220/Objects/Specific/Medical/implants.rsi, state: mindslave_fixer }
+  icon: { sprite: /Textures/SS220/Interface/Actions/implants.rsi, state: mindslave_fixer }
   productEntity: ClothingBackpackDuffelSyndicateMindslaveFixerSurgery
   discountCategory: veryRareDiscounts
   discountDownTo:
@@ -153,9 +153,9 @@
   productEntity: ThermalVisorChameleon
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 1 #ss220-uplink-discounts
   cost:
-    Telecrystal: 4
+    Telecrystal: 2 #ss220-uplink-discounts
   categories:
   - UplinkWearables
 
@@ -163,13 +163,41 @@
   id: ThermalVisorImplanter
   name: uplink-thermal-visor-implanter-name
   description: uplink-thermal-visor-implanter-desc
-  icon: {sprite: /Textures/SS220/Misc/ThermalEye.rsi, state: EyeON}
+  icon: {sprite: /Textures/SS220/Interface/Actions/implants_cla.rsi, state: EyeON}
   productEntity: ThermalVisorImplanter
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 2 #ss220-uplink-discounts
   cost:
-    Telecrystal: 6
+    Telecrystal: 5 #ss220-uplink-discounts
+  categories:
+  - UplinkImplants
+
+- type: listing
+  id: DnaCopyImplanter
+  name: uplink-dna-copy-implanter-name
+  description: uplink-dna-copy-implanter-desc
+  icon: {sprite: /Textures/SS220/Interface/Actions/implants.rsi, state: dna-copy}
+  productEntity: BoxDnaCopyImplant
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 5
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkImplants
+
+- type: listing
+  id: AdrenalImplanter
+  name: uplink-adrenal-implanter-name
+  description: uplink-adrenal-implanter-desc
+  icon: {sprite: /Textures/SS220/Interface/Actions/implants.rsi, state: adrenal}
+  productEntity: AdrenalImplanter
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 4
+  cost:
+    Telecrystal: 7
   categories:
   - UplinkImplants
 
@@ -181,9 +209,9 @@
   productEntity: ClothingHeadHelmetSwatSyndicate
   discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 1
+    Telecrystal: 2 #ss220-uplink-discounts
   cost:
-    Telecrystal: 2
+    Telecrystal: 3 #ss220-uplink-discounts
   categories:
   - UplinkWearables
 
@@ -194,7 +222,7 @@
   productEntity: BorgModuleFlamingAxe
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 1 #ss220-uplink-discounts
   cost:
     Telecrystal: 3
   categories:
@@ -245,7 +273,6 @@
     Telecrystal: 3
   categories:
   - UplinkWeaponry
-  - UplinkJob
   conditions:
   - !type:BuyerJobCondition
     whitelist:
@@ -283,3 +310,28 @@
     blacklist:
       components:
       - SurplusBundle
+
+- type: listing
+  id: UplinkBriefCaseDoubleBottom
+  name: uplink-clothing-briefcase-with-double-bottom-name
+  description: uplink-clothing-briefcase-with-double-bottom-desc
+  icon: { sprite: Objects/Storage/Briefcases/briefcase_brown.rsi, state: icon }
+  productEntity: BriefcaseHiddenSlot
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkWearables
+
+- type: listing
+  id: UplinkPinpointerSyndie
+  name: uplink-pinpointer-syndie-name
+  description: uplink-pinpointer-syndie-desc
+  icon: { sprite: Objects/Devices/pinpointer.rsi, state: pinpointer-syndicate }
+  productEntity: PinpointerUplink
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkDisruption

@@ -1,0 +1,10 @@
+- type: construction
+  name: paper airplane
+  id: PaperAirplane
+  graph: PaperAirplane
+  startNode: start
+  targetNode: paperairplane
+  category: construction-category-weapons
+  description: A toy airplane made of paper.
+  icon: { sprite: Objects/Misc/bureaucracy.rsi, state: paper_plane }
+  objectType: Item

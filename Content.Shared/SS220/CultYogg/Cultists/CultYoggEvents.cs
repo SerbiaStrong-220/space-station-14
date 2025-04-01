@@ -9,8 +9,9 @@ namespace Content.Shared.SS220.CultYogg.Cultists;
 [ByRefEvent, Serializable]
 public sealed class ChangeCultYoggStageEvent : EntityEventArgs
 {
-    public int Stage;
-    public ChangeCultYoggStageEvent(int stage)
+    public CultYoggStage Stage;
+
+    public ChangeCultYoggStageEvent(CultYoggStage stage)
     {
         Stage = stage;
     }
