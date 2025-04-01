@@ -41,3 +41,6 @@
     price: 1000
   - type: StealTarget
     stealGroup: EngravedKnuckleduster
+  #ss220 pinpointer pin fix begin
+  - type: TrackedItem
+  #ss220 pinpointer pin fix end
