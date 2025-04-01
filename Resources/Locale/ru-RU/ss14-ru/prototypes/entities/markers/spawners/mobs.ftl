@@ -134,4 +134,3 @@ ent-SpawnMobReindeerBuck = спавнер северный олень самец
     .desc = { ent-MarkerBase.desc }
 ent-SpawnMobReindeerDoe = спавнер северный олень самка
     .desc = { ent-MarkerBase.desc }
-ent-SpawnMobVespia = спавнер веспия злая
