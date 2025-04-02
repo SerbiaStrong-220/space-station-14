@@ -1,106 +1,40 @@
-# - type: entity
-#   id: KitchenGrill
-#   parent: [ BaseMachinePowered, ConstructibleMachine ]
-#   name: grill
-#   description: It's magic.
-#   components:
-#   - type: CookingInstrument
-#     instrumentType: grill
-#   - type: CookingMachine
-#     heatPerSecond: 1500 #Should be strong enough to cook meat in 10s
-#     beginCookingSound: /Audio/Effects/lightburn.ogg
-#     loopingSound: /Audio/SS220/SupaKitchen/grillsizzle.ogg
-#     foodDoneSound: /Audio/SS220/SupaKitchen/ring.ogg
-#   - type: DeviceLinkSink
-#     ports:
-#     - On
-#   - type: ActivatableUI
-#     key: enum.CookingMachineUiKey.Key
-#   - type: UserInterface
-#     interfaces:
-#       enum.CookingMachineUiKey.Key:
-#         type: CookingMachineBoundUserInterface
-#   - type: Appearance
-#   - type: GenericVisualizer
-#     visuals:
-#       enum.PowerDeviceVisuals.VisualState:
-#         enum.CookingMachineVisualizerLayers.Base:
-#           Idle: { state: "grill_idle" }
-#           Broken: { state: "grill_idle" }
-#           Cooking: { state: "grill_cooking" }
-#   - type: Physics
-#   - type: Fixtures
-#     fixtures:
-#       fix1:
-#         shape:
-#           !type:PhysShapeAabb
-#           bounds: "-0.4,-0.4,0.4,0.4"
-#         density: 190
-#         mask:
-#         - MachineMask
-#         layer:
-#         - MachineLayer
-#   - type: Sprite
-#     sprite: SS220/Structures/Machines/grill.rsi
-#     snapCardinals: true
-#     layers:
-#     - state: grill_idle
-#       map: ["enum.CookingMachineVisualizerLayers.Base"]
-#   - type: Destructible
-#     thresholds:
-#     - trigger:
-#         !type:DamageTrigger
-#         damage: 100
-#       behaviors:
-#       - !type:PlaySoundBehavior
-#         sound:
-#           collection: MetalBreak
-#       - !type:DoActsBehavior
-#         acts: ["Breakage"]
-#     - trigger:
-#         !type:DamageTrigger
-#           damage: 150
-#       behaviors:
-#       - !type:PlaySoundBehavior
-#         sound:
-#           collection: MetalBreak
-#       - !type:ChangeConstructionNodeBehavior
-#         node: machineFrame
-#       - !type:DoActsBehavior
-#         acts: ["Destruction"]
-#   - type: ApcPowerReceiver
-#     powerLoad: 400
-#   - type: Machine
-#     board: GrillMachineCircuitboard
-#   - type: EmptyOnMachineDeconstruct
-#     containers:
-#     - cooking_machine_entity_container
-#   - type: ContainerContainer
-#     containers:
-#       cooking_machine_entity_container: !type:Container
-#       machine_board: !type:Container
-#       machine_parts: !type:Container
-#   - type: Construction
-#     graph: Machine
-#     node: machine
-#     containers:
-#     - machine_parts
-#     - machine_board
-#     - entity_storage
-#   - type: GuideHelp
-#     guides:
-#     - Chef
+- type: entity
+  parent: KitchenElectricGrill
+  id: FloorKitchenElectricGrill
+  name: name
+  description: desc
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Machines/floor_electric_grill.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    layers:
+    - state: grill
+    - map: ["enum.EntityHeaterVisuals.Setting"]
+      shader: unshaded
+      visible: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.30,-0.20,0.30,0.35"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Machine
+    board: FloorElectricGrillMachineCircuitboard
 
-# - type: entity
-#   id: GrillMachineCircuitboard
-#   parent: BaseMachineCircuitboard
-#   name: grill machine board
-#   components:
-#     - type: Sprite
-#       state: service
-#     - type: MachineBoard
-#       prototype: KitchenGrill
-#       stackRequirements:
-#         Capacitor: 1
-#         Glass: 2
-#         Cable: 2
+- type: entity
+  id: FloorElectricGrillMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: electric grill machine board
+  description: A machine printed circuit board for an electric grill.
+  components:
+    - type: MachineBoard
+      prototype: FloorKitchenElectricGrill
+      stackRequirements:
+        Capacitor: 4
+        Glass: 2
+        Cable: 5

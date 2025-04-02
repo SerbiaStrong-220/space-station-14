@@ -4,8 +4,8 @@
   description: A chessboard. Pieces included!
   components:
   - type: Sprite
-    sprite: SS220/Objects/Fun/Tabletop/chessboard.rsi #SS220-Tabletop-Resprite
-    state: chessboard
+    sprite: SS220/SupaKitchen/Instruments/chopping_board.rsi #SS220-Tabletop-Resprite
+    state: icon
     drawdepth: SmallObjects
   - type: RecipeAssembler
     instrumentType: choppingBoard
@@ -25,7 +25,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.08,-0.35,0.15,0.25"
+          bounds: "-0.30,-0.15,0.30,0.15"
         mask:
         - TabletopMachineMask
         layer:

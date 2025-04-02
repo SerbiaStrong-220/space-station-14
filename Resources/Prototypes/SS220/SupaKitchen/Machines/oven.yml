@@ -6,12 +6,7 @@
   components:
   - type: Transform
     noRot: true
-  # Make it behave like a closet
   - type: EntityStorage
-#  - type: EntityStorageVisuals
-#    #stateBaseClosed: generic
-#    stateDoorOpen: oven_door_open
-#    stateDoorClosed: oven_door_closed
   - type: PlaceableSurface
     placeCentered: true
     isPlaceable: false
@@ -28,31 +23,28 @@
     - On
   - type: Sprite
     sprite: SS220/Structures/Machines/oven.rsi
-    offset: 0,-0.5
     snapCardinals: true
     layers:
-    - state: oven_base
+    - state: base
       map: ["base"]
-    - state: oven_door_closed
+    - state: door_closed
       map: ["oven_door"]
-    - map: ["enum.OvenVisuals.Active"]
-      state: oven_off
     - map: ["enum.OvenVisuals.ActiveUnshaded"]
-      state: oven_on_unshaded
+      state: on_unshaded
       visible: false
   - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.StorageVisuals.Open:
         oven_door:
-          True: { state: oven_door_open }
-          False: { state: oven_door_closed }
+          True: { state: door_open }
+          False: { state: door_closed }
       enum.OvenVisuals.VisualState:
         base:
-          UnPowered: { state: "oven_base" }
-          Idle: { state: "oven_base" }
-          Active: { state: "oven_base" }
-          Broken: { state: "oven_damaged" }
+          UnPowered: { state: "base" }
+          Idle: { state: "base" }
+          Active: { state: "base" }
+          Broken: { state: "damaged" }
         oven_door:
           UnPowered: { visible: true }
           Idle: { visible: true }
