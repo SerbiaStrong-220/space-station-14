@@ -31,7 +31,7 @@ public sealed partial class OvenComponent : SharedOvenComponent
     public string ContainerName = "oven_entity_container";
 
     [ViewVariables]
-    public Container Container = default;
+    public Container Container = default!;
 
     [DataField]
     public float HeatPerSecond = 100;
