@@ -74,7 +74,6 @@
   # SS220 Nozzle Refactor begin
   #- type: SolutionAmmoProvider
   #  solutionId: tank
-  # proto: BulletWaterShot
   # SS220 Nozzle Refactor end
   - type: SolutionContainerManager
     solutions:
