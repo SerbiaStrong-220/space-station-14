@@ -1,92 +1,46 @@
 <Document>
-## Смешивание:
-- Тесто = 15 муки, 10 воды
-- Кукурузное тесто = 1 яйцо (6 ед.), 10 молока, 15 кукурузной муки
-- Tortila Dough = 15 Cornmeal, 10 Water
-- Тофу = 5 универсального фермента (Catalyst), 30 соевого молока
-- Тесто для пирога = 2 яйца (12 ед.), 15 муки, 5 столовой соли
-- Тесто для торта = 2 яйца(12 ед.), 15 муки, 5 сахара, 5 молока
-- Веганское тесто для торта = 15 соевого молока, 15 муки, 5 сахара
-- Масло = 30 молока, 5 столовой соли (Catalyst)
-- Головка сыра = 5 универсального фермента (Catalyst), 40 молока
-- Chèvre Log = 5 Enzyme (Catalyst), 10 Goat Milk
-- Фрикаделька = 1 яйцо (6 ед.), 5 муки, 5 непрожаренные животные протеины
-- Chocolate = 6 Cocoa Powder, 2 Milk, 2 Sugar
-- Непрожаренные животные протеины: измельчить сырое мясо
-
-Buzz! Don't forget about Moth diet!
-- Fiber: Juice Fabric in a Reagent Grinder, 3 Fiber per Fabric
-- Cotton Dough = 5 Flour, 10 Fiber, 10 Water
-- Cotton bread baked the same as default but with cotton dough instead
-- Cotton Pizza: Microwave 1 Flat Cotton Dough and 4 Cotton Bolls for 30 Seconds
-
-<Box>
-<GuideEntityEmbed Entity="FoodDough"/>
-<GuideEntityEmbed Entity="FoodDoughCornmeal"/>
-<GuideEntityEmbed Entity="FoodDoughCotton"/>
-<GuideEntityEmbed Entity="FoodTofu"/>
-<GuideEntityEmbed Entity="FoodDoughPie"/>
-<GuideEntityEmbed Entity="FoodCakeBatter"/>
-<GuideEntityEmbed Entity="FoodDoughFlat"/>
-<GuideEntityEmbed Entity="FoodDoughTortilla"/>
-</Box>
-
-<Box>
-<GuideEntityEmbed Entity="FoodButter"/>
-<GuideEntityEmbed Entity="FoodMeatMeatball"/>
-<GuideEntityEmbed Entity="FoodCheese"/>
-<GuideEntityEmbed Entity="FoodChevre"/>
-<GuideEntityEmbed Entity="FoodSnackChocolateBar"/>
-</Box>
-
-## Прочее
-
-- Кусок теста: Разрежьте Тесто
-- Сырая котлета: Разрежьте сырое мясо
-- Кусок сыра: Разрежьте головку сыра
-
-## Рецепты
+# Рецепты
 
 ## Выпечка
-<GuideCookingRecipeGroupEmbed RecipeGroup="bread"/>
-<GuideCookingRecipeGroupEmbed RecipeGroup="toast"/>
-<GuideCookingRecipeGroupEmbed RecipeGroup="slice"/>
-<GuideCookingRecipeGroupEmbed RecipeGroup="bagel"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Bread"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Toast"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Slice"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Bagel"/>
 
 ## Бургеры
-<GuideCookingRecipeGroupEmbed RecipeGroup="burger"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Burger"/>
 
 ## Пицца
-<GuideCookingRecipeGroupEmbed RecipeGroup="pizza"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Pizza"/>
 
 ## Тако
-<GuideCookingRecipeGroupEmbed RecipeGroup="taco"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Taco"/>
 
 ## Пироги
-<GuideCookingRecipeGroupEmbed RecipeGroup="pie"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Pie"/>
 
 ## Тарты
-<GuideCookingRecipeGroupEmbed RecipeGroup="tart"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Tart"/>
 
 ## Торты
-<GuideCookingRecipeGroupEmbed RecipeGroup="cake"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Cake"/>
 
 ## Сладости
-<GuideCookingRecipeGroupEmbed RecipeGroup="muffin"/>
-<GuideCookingRecipeGroupEmbed RecipeGroup="cookie"/>
-<GuideCookingRecipeGroupEmbed RecipeGroup="caramel"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Muffin"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Cookie"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Caramel"/>
 
 ## Итальянская кухня
-<GuideCookingRecipeGroupEmbed RecipeGroup="italian"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Italian"/>
 
 ## Супы
-<GuideCookingRecipeGroupEmbed RecipeGroup="soup"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Soup"/>
 
 ## Донк-покеты
-<GuideCookingRecipeGroupEmbed RecipeGroup="donk-pocket"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Donk-pocket"/>
 
 ## Салаты
-<GuideCookingRecipeGroupEmbed RecipeGroup="salad"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Salad"/>
 
 ## Гриль
 <GuideCookingRecipeGroupEmbed InstrumentType="grill"/>
@@ -95,14 +49,11 @@ Buzz! Don't forget about Moth diet!
 <GuideCookingRecipeGroupEmbed InstrumentType="choppingBoard"/>
 
 ## Медицинское
-<GuideCookingRecipeGroupEmbed RecipeGroup="medical"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Medical"/>
 
 ## Прочее
-<GuideCookingRecipeGroupEmbed RecipeGroup="other"/>
-<GuideCookingRecipeGroupEmbed RecipeGroup="notfood"/>
-<GuideCookingRecipeGroupEmbed RecipeGroup="anomaly"/>
-
-## Без категории
-<GuideCookingRecipeGroupEmbed RecipeGroup="without a category"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Other"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Notfood"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Anomaly"/>
 
 </Document>

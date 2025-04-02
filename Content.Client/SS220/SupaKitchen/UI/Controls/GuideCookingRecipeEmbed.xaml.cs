@@ -14,6 +14,7 @@ using Robust.Shared.Utility;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Client.GameObjects;
 using Content.Shared.FixedPoint;
+using Robust.Client.Graphics;
 
 namespace Content.Client.SS220.SupaKitchen.UI.Controls;
 
@@ -93,9 +94,10 @@ public sealed partial class GuideCookingRecipeEmbed : BoxContainer, IDocumentTag
             return;
 
         _nameSearchCache.Add(product.Name);
-        RecipeLabelTitle.SetMarkup(product.Name);
-        //RecipeLabelTitle.SetMarkup(recipe.Name);
+        RecipeLabelTitle.SetMarkup(recipe.LocName);
 
+        if (recipe.Color is { } color)
+            NameBackground.PanelOverride = new StyleBoxFlat{ BackgroundColor = color };
         // reagents
         var reagentsMsg = new FormattedMessage();
         var reagentIngredientsCount = recipe.IngredientsReagents.Count;

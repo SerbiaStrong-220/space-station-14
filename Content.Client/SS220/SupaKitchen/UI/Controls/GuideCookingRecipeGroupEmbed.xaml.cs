@@ -34,21 +34,25 @@ public sealed partial class GuideCookingRecipeGroupEmbed : BoxContainer, IDocume
 
     public bool TryParseTag(Dictionary<string, string> args, [NotNullWhen(true)] out Control? control)
     {
-        args.TryGetValue("RecipeGroup", out var recipeGroup);
+        args.TryGetValue("RecipeTag", out var recipeTag);
         args.TryGetValue("InstrumentType", out var instrumentType);
 
-        AddCookingRecipes(recipeGroup, instrumentType);
+        AddCookingRecipes(recipeTag, instrumentType);
 
         control = this;
         return true;
     }
 
-    private void AddCookingRecipes(string? recipeGroup, ProtoId<CookingInstrumentTypePrototype>? instrumentType)
+    private void AddCookingRecipes(string? recipeTag, ProtoId<CookingInstrumentTypePrototype>? instrumentType)
     {
         var prototypes = _prototype.EnumeratePrototypes<CookingRecipePrototype>().Where(r => !r.SecretRecipe);
 
-        if (recipeGroup != null)
-            prototypes = prototypes.Where(r => r.RecipeGroup == recipeGroup);
+        if (recipeTag != null)
+            prototypes = prototypes.Where(r =>
+        {
+            var contains = r.RecipeTags.Contains(recipeTag);
+            return contains;
+        });
 
         if (instrumentType != null)
             prototypes = prototypes.Where(r => r.InstrumentType == instrumentType);

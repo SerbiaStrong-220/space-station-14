@@ -4,7 +4,7 @@
   id: RecipeBagel
   name: bagel recipe
   result: FoodBagel
-  recipeGroup: bagel
+  recipeTags: [Bagel]
   instrumentType: oven
   time: 5
   solids:
@@ -14,7 +14,7 @@
   id: RecipeBagelPoppy
   name: poppyseed bagel recipe
   result: FoodBagelPoppy
-  recipeGroup: bagel
+  recipeTags: [Bagel]
   instrumentType: oven
   time: 5
   solids:
@@ -25,7 +25,7 @@
   id: RecipeBagelCotton
   name: cotton bagel recipe
   result: FoodBagelCotton
-  recipeGroup: bagel
+  recipeTags: [Bagel]
   instrumentType: oven
   time: 5
   solids:
@@ -37,7 +37,7 @@
   id: RecipeAppendixBurger
   name: appendix burger recipe
   result: FoodBurgerAppendix
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -48,7 +48,7 @@
   id: RecipeBaconBurger
   name: bacon burger recipe
   result: FoodBurgerBacon
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -60,7 +60,7 @@
   id: RecipeBaseballBurger
   name: baseball burger recipe
   result: FoodBurgerBaseball
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -71,7 +71,7 @@
   id: RecipeBearger
   name: bearger recipe
   result: FoodBurgerBear
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -82,7 +82,7 @@
   id: RecipeBigBiteBurger
   name: big bite burger recipe
   result: FoodBurgerBig
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 15
   solids:
@@ -96,7 +96,7 @@
   id: RecipeBrainBurger
   name: brain burger recipe
   result: FoodBurgerBrain
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -107,7 +107,7 @@
   id: RecipeCatBurger
   name: cat burger recipe
   result: FoodBurgerCat
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -119,7 +119,7 @@
   id: RecipeCheeseburger
   name: cheeseburger recipe
   result: FoodBurgerCheese
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -131,7 +131,7 @@
   id: RecipeChickenSandwich
   name: chicken sandwich recipe
   result: FoodBurgerChicken
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   reagents:
@@ -144,7 +144,7 @@
   id: RecipeClownBurger
   name: clownburger recipe
   result: FoodBurgerClown
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -155,7 +155,7 @@
   id: RecipeCorgiBurger
   name: corgi burger recipe
   result: FoodBurgerCorgi
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -166,7 +166,7 @@
   id: RecipeCrabBurger
   name: crab burger recipe
   result: FoodBurgerCrab
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -177,7 +177,7 @@
   id: RecipeCrazyHamburger
   name: crazy hamburger recipe
   result: FoodBurgerCrazy
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 15
   reagents:
@@ -195,7 +195,7 @@
   id: RecipeDuckBurger
   name: duck sandwich recipe
   result: FoodBurgerDuck
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -207,7 +207,7 @@
   id: RecipeEmpoweredBurger
   name: empowered burger recipe
   result: FoodBurgerEmpowered
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -218,7 +218,7 @@
   id: RecipeCarpBurger
   name: fillet-o-carp burger recipe
   result: FoodBurgerCarp
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -230,7 +230,7 @@
   id: RecipeFiveBurger
   name: five alarm burger recipe
   result: FoodBurgerFive
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -242,7 +242,7 @@
   id: RecipeGhostBurger
   name: ghost burger recipe
   result: FoodBurgerGhost
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -253,7 +253,7 @@
   id: RecipeHumanBurger
   name: human burger recipe
   result: FoodBurgerHuman
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -264,7 +264,7 @@
   id: RecipeJellyBurger
   name: jelly burger recipe
   result: FoodBurgerJelly
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -275,7 +275,7 @@
   id: RecipeBurgerMcguffin
   name: McGuffin recipe
   result: FoodBurgerMcguffin
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -287,7 +287,7 @@
   id: RecipeBurgerMcrib
   name: BBQ rib sandwich recipe
   result: FoodBurgerMcrib
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -299,7 +299,7 @@
   id: RecipeMimeBurger
   name: mime burger recipe
   result: FoodBurgerMime
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -310,7 +310,7 @@
   id: RecipePlainBurger
   name: plain burger recipe
   result: FoodBurgerPlain
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -321,7 +321,7 @@
   id: RecipeRatBurger
   name: rat burger recipe
   result: FoodBurgerRat
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -332,7 +332,7 @@
   id: RecipeRobotBurger
   name: roburger recipe
   result: FoodBurgerRobot
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -344,7 +344,7 @@
   id: RecipeSoylentBurger
   name: soylent burger recipe
   result: FoodBurgerSoy
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -356,7 +356,7 @@
   id: RecipeSpellBurger
   name: spell burger recipe
   result: FoodBurgerSpell
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -367,7 +367,7 @@
   id: RecipeSuperBiteBurger
   name: super bite burger recipe
   result: FoodBurgerSuper
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 25
   reagents:
@@ -383,7 +383,7 @@
   id: RecipeTofuBurger
   name: tofu burger recipe
   result: FoodBurgerTofu
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -394,7 +394,7 @@
   id: RecipeXenoburger
   name: xenoburger recipe
   result: FoodBurgerXeno
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 10
   solids:
@@ -405,7 +405,7 @@
   id: RecipeMothRoachburger
   name: mothroachburger recipe
   result: FoodBurgerMothRoach
-  recipeGroup: burger
+  recipeTags: [Burger]
   instrumentType: oven
   time: 5
   solids:
@@ -418,7 +418,7 @@
   id: RecipeBun
   name: bun recipe
   result: FoodBreadBun
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 5
   solids:
@@ -428,7 +428,7 @@
   id: RecipeBananaBread
   name: banana bread recipe
   result: FoodBreadBanana
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 15
   solids:
@@ -439,7 +439,7 @@
   id: RecipeCornbread
   name: cornbread recipe
   result: FoodBreadCorn
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 10
   solids:
@@ -449,7 +449,7 @@
   id: RecipeCreamCheeseBread
   name: cream cheese bread recipe
   result: FoodBreadCreamcheese
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 15
   reagents:
@@ -462,7 +462,7 @@
   id: RecipeMeatBread
   name: meat bread recipe
   result: FoodBreadMeat
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 15
   solids:
@@ -474,7 +474,7 @@
   id: RecipeMimanaBread
   name: mimana bread recipe
   result: FoodBreadMimana
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 15
   reagents:
@@ -487,7 +487,7 @@
   id: RecipeBreadPlain
   name: plain bread recipe
   result: FoodBreadPlain
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 10
   solids:
@@ -497,7 +497,7 @@
   id: RecipeBreadCotton
   name: cotton bread recipe
   result: FoodBreadCotton
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 10
   solids:
@@ -507,7 +507,7 @@
   id: RecipeSausageBread
   name: sausage bread recipe
   result: FoodBreadSausage
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 15
   solids:
@@ -518,7 +518,7 @@
   id: RecipeSpiderMeatBread
   name: spider meat bread recipe
   result: FoodBreadMeatSpider
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 15
   solids:
@@ -530,7 +530,7 @@
   id: RecipeTofuBread
   name: tofu bread recipe
   result: FoodBreadTofu
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 15
   solids:
@@ -541,7 +541,7 @@
   id: RecipeXenoMeatBread
   name: xeno meat bread recipe
   result: FoodBreadMeatXeno
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 15
   solids:
@@ -553,7 +553,7 @@
   id: RecipeBreadDog
   name: bread dog recipe
   result: MobBreadDog
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 15
   reagents:
@@ -567,7 +567,7 @@
   id: RecipeBaguette
   name: baguette recipe
   result: FoodBreadBaguette
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 15
   reagents:
@@ -580,7 +580,7 @@
   id: RecipeBaguetteCotton
   name: baguette recipe
   result: FoodBreadBaguetteCotton
-  recipeGroup: bread
+  recipeTags: [Bread]
   instrumentType: oven
   time: 15
   reagents:
@@ -595,7 +595,7 @@
   id: RecipeMargheritaPizza
   name: margherita pizza recipe
   result: FoodPizzaMargherita
-  recipeGroup: pizza
+  recipeTags: [Pizza]
   instrumentType: oven
   time: 30
   solids:
@@ -607,7 +607,7 @@
   id: RecipeMushroomPizza
   name: mushroom pizza recipe
   result: FoodPizzaMushroom
-  recipeGroup: pizza
+  recipeTags: [Pizza]
   instrumentType: oven
   time: 25
   solids:
@@ -618,7 +618,7 @@
   id: RecipeMeatPizza
   name: meat pizza recipe
   result: FoodPizzaMeat
-  recipeGroup: pizza
+  recipeTags: [Pizza]
   instrumentType: oven
   time: 30
   solids:
@@ -631,7 +631,7 @@
   id: RecipeVegetablePizza
   name: vegetable pizza recipe
   result: FoodPizzaVegetable
-  recipeGroup: pizza
+  recipeTags: [Pizza]
   instrumentType: oven
   time: 30
   solids:
@@ -645,7 +645,7 @@
   id: RecipeHawaiianPizza
   name: Hawaiian pizza recipe
   result: FoodPizzaPineapple
-  recipeGroup: pizza
+  recipeTags: [Pizza]
   instrumentType: oven
   time: 30
   solids:
@@ -657,7 +657,7 @@
   id: RecipeDankPizza
   name: dank pizza recipe
   result: FoodPizzaDank
-  recipeGroup: pizza
+  recipeTags: [Pizza]
   instrumentType: oven
   time: 30
   solids:
@@ -670,7 +670,7 @@
   id: RecipeDonkpocketPizza
   name: donk-pocket pizza recipe
   result: FoodPizzaDonkpocket
-  recipeGroup: pizza
+  recipeTags: [Pizza]
   instrumentType: oven
   time: 30
   solids:
@@ -683,7 +683,7 @@
   id: RecipeUraniumPizza
   name: spicy rock pizza recipe
   result: FoodPizzaUranium
-  recipeGroup: pizza
+  recipeTags: [Pizza]
   instrumentType: oven
   time: 30
   solids:
@@ -696,7 +696,7 @@
   id: RecipeCottonPizza
   name: cotton pizza recipe
   result: FoodPizzaCotton
-  recipeGroup: pizza
+  recipeTags: [Pizza]
   instrumentType: oven
   time: 30
   solids:
@@ -707,7 +707,7 @@
   id: RecipeSpicyPizza
   name: spicy pizza recipe
   result: SpicyPizzaFood
-  recipeGroup: pizza
+  recipeTags: [Pizza]
   instrumentType: oven
   time: 30
   reagents:
@@ -724,7 +724,7 @@
   id: RecipeCookie
   name: cookie recipe
   result: FoodBakedCookie
-  recipeGroup: cookie
+  recipeTags: [Cookie]
   instrumentType: oven
   time: 5
   reagents:
@@ -738,7 +738,7 @@
   id: RecipeSugarCookie
   name: sugar cookie recipe
   result: FoodBakedCookieSugar
-  recipeGroup: cookie
+  recipeTags: [Cookie]
   instrumentType: oven
   time: 5
   reagents:
@@ -751,7 +751,7 @@
   id: RecipeRaisinCookie
   name: raisin cookie recipe
   result: FoodBakedCookieRaisin
-  recipeGroup: cookie
+  recipeTags: [Cookie]
   instrumentType: oven
   time: 5
   reagents:
@@ -764,7 +764,7 @@
   id: RecipeCookieOatmeal
   name: oatmeal cookie recipe
   result: FoodBakedCookieOatmeal
-  recipeGroup: cookie
+  recipeTags: [Cookie]
   instrumentType: oven
   time: 5
   reagents:
@@ -803,7 +803,7 @@
   id: RecipeChocolateChipPancake
   name: chocolate chip pancake recipe
   result: FoodBakedPancakeCc
-  recipeGroup: cookie
+  recipeTags: [Cookie]
   instrumentType: oven
   time: 5
   reagents:
@@ -843,7 +843,7 @@
   id: RecipeAmanitaPie
   name: amanita pie recipe
   result: FoodPieAmanita
-  recipeGroup: pie
+  recipeTags: [Pie]
   instrumentType: oven
   time: 15
   solids:
@@ -855,7 +855,7 @@
   id: RecipeApplePie
   name: apple pie
   result: FoodPieApple
-  recipeGroup: pie
+  recipeTags: [Pie]
   instrumentType: oven
   time: 15
   solids:
@@ -867,7 +867,7 @@
   id: RecipeBaklava
   name: baklava recipe
   result: FoodPieBaklava
-  recipeGroup: pie
+  recipeTags: [Pie]
   instrumentType: oven
   time: 15
   solids:
@@ -879,7 +879,7 @@
   id: RecipeBananaCreamPie
   name: banana cream pie
   result: FoodPieBananaCream
-  recipeGroup: pie
+  recipeTags: [Pie]
   instrumentType: oven
   time: 15
   solids:
@@ -891,7 +891,7 @@
   id: RecipeBerryClafoutis
   name: berry clafoutis recipe
   result: FoodPieClafoutis
-  recipeGroup: pie
+  recipeTags: [Pie]
   instrumentType: oven
   time: 15
   solids:
@@ -903,7 +903,7 @@
   id: RecipeCherryPie
   name: cherry pie recipe
   result: FoodPieCherry
-  recipeGroup: pie
+  recipeTags: [Pie]
   instrumentType: oven
   time: 15
   solids:
@@ -915,7 +915,7 @@
   id: RecipeFrostyPie
   name: frosty pie recipe
   result: FoodPieFrosty
-  recipeGroup: pie
+  recipeTags: [Pie]
   instrumentType: oven
   time: 15
   solids:
@@ -927,7 +927,7 @@
   id: RecipeMeatPie
   name: meat pie recipe
   result: FoodPieMeat
-  recipeGroup: pie
+  recipeTags: [Pie]
   instrumentType: oven
   time: 15
   solids:
@@ -939,7 +939,7 @@
   id: RecipePumpkinPie
   name: pumpkin pie recipe
   result: FoodPiePumpkin
-  recipeGroup: pie
+  recipeTags: [Pie]
   instrumentType: oven
   time: 15
   solids:
@@ -951,7 +951,7 @@
   id: RecipeXenoPie
   name: xeno pie recipe
   result: FoodPieXeno
-  recipeGroup: pie
+  recipeTags: [Pie]
   instrumentType: oven
   time: 15
   solids:
@@ -965,7 +965,7 @@
   id: RecipeCocoTart
   name: chocolate lava tart recipe
   result: FoodTartCoco
-  recipeGroup: tart
+  recipeTags: [Tart]
   instrumentType: oven
   time: 15
   reagents:
@@ -980,7 +980,7 @@
   id: RecipeGappleTart
   name: golden apple streusel tart recipe
   result: FoodTartGapple
-  recipeGroup: tart
+  recipeTags: [Tart]
   instrumentType: oven
   time: 15
   reagents:
@@ -996,7 +996,7 @@
   id: RecipeGrapeTart
   name: grape tart recipe
   result: FoodTartGrape
-  recipeGroup: tart
+  recipeTags: [Tart]
   instrumentType: oven
   time: 15
   reagents:
@@ -1010,7 +1010,7 @@
   id: RecipeMimeTart
   name: mime tart recipe
   result: FoodTartMime
-  recipeGroup: tart
+  recipeTags: [Tart]
   instrumentType: oven
   time: 15
   reagents:
@@ -1027,7 +1027,7 @@
   id: RecipeAppleCake
   name: apple cake recipe
   result: FoodCakeApple
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   solids:
@@ -1038,7 +1038,7 @@
   id: RecipeCarrotCake
   name: carrot cake recipe
   result: FoodCakeCarrot
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   solids:
@@ -1049,7 +1049,7 @@
   id: RecipeLemonCake
   name: lemon cake recipe
   result: FoodCakeLemon
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   solids:
@@ -1060,7 +1060,7 @@
   id: RecipeLemoonCake
   name: lemoon cake recipe
   result: FoodCakeLemoon
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   solids:
@@ -1072,7 +1072,7 @@
   id: RecipeOrangeCake
   name: orange cake recipe
   result: FoodCakeOrange
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   solids:
@@ -1083,7 +1083,7 @@
   id: RecipeBlueberryCake
   name: blueberry cake recipe
   result: FoodCakeBlueberry
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   solids:
@@ -1094,7 +1094,7 @@
   id: RecipeLimeCake
   name: lime cake recipe
   result: FoodCakeLime
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   solids:
@@ -1105,7 +1105,7 @@
   id: RecipeCheeseCake
   name: cheese cake recipe
   result: FoodCakeCheese
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   reagents:
@@ -1118,7 +1118,7 @@
   id: RecipePumpkinCake
   name: pumpkin cake recipe
   result: FoodCakePumpkin
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   solids:
@@ -1129,7 +1129,7 @@
   id: RecipeClownCake
   name: clown cake recipe
   result: FoodCakeClown
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   solids:
@@ -1140,7 +1140,7 @@
   id: RecipeCake
   name: cake recipe
   result: FoodCakePlain
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 15
   solids:
@@ -1150,7 +1150,7 @@
   id: RecipeBirthdayCake
   name: birthday cake recipe
   result: FoodCakeBirthday
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   reagents:
@@ -1162,7 +1162,7 @@
   id: RecipeChocolateCake
   name: chocolate cake recipe
   result: FoodCakeChocolate
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   solids:
@@ -1173,7 +1173,7 @@
   id: RecipeBrainCake
   name: brain cake recipe
   result: FoodCakeBrain
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 15
   solids:
@@ -1184,7 +1184,7 @@
   id: RecipeSlimeCake
   name: slime cake recipe
   result: FoodCakeSlime
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 5
   reagents:
@@ -1196,7 +1196,7 @@
   id: RecipeCatCake
   name: cat cake recipe
   result: MobCatCake
-  recipeGroup: cake
+  recipeTags: [Cake]
   instrumentType: oven
   time: 15
   reagents:
@@ -1213,7 +1213,7 @@
   id: RecipeMuffin
   name: muffin recipe
   result: FoodBakedMuffin
-  recipeGroup: muffin
+  recipeTags: [Muffin]
   instrumentType: oven
   time: 15
   solids:
@@ -1226,7 +1226,7 @@
   id: RecipeMuffinChocolate
   name: chocolate muffin recipe
   result: FoodBakedMuffinChocolate
-  recipeGroup: muffin
+  recipeTags: [Muffin]
   instrumentType: oven
   time: 15
   solids:
@@ -1240,7 +1240,7 @@
   id: RecipeMuffinBerry
   name: berry muffin recipe
   result: FoodBakedMuffinBerry
-  recipeGroup: muffin
+  recipeTags: [Muffin]
   instrumentType: oven
   time: 15
   solids:
@@ -1254,7 +1254,7 @@
   id: RecipeMuffinBanana
   name: banana muffin recipe
   result: FoodBakedMuffinBanana
-  recipeGroup: muffin
+  recipeTags: [Muffin]
   instrumentType: oven
   time: 15
   solids:
@@ -1268,7 +1268,7 @@
   id: RecipeMuffinCherry
   name: cherry muffin recipe
   result: FoodBakedMuffinCherry
-  recipeGroup: muffin
+  recipeTags: [Muffin]
   instrumentType: oven
   time: 15
   solids:
@@ -1284,7 +1284,7 @@
   id: RecipeLoadedBakedPotato
   name: loaded baked potato recipe
   result: FoodMealPotatoLoaded
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: oven
   time: 15
   solids:
@@ -1295,7 +1295,7 @@
   id: RecipeDumplings
   name: dumplings recipe
   result: FoodBakedDumplings
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: oven
   time: 15
   reagents:
@@ -1308,7 +1308,7 @@
   id: RecipeBrownies
   name: brownie recipe
   result: FoodBakedBrownieBatch
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: oven
   time: 25
   reagents:
@@ -1323,7 +1323,7 @@
   id: RecipeCroissant
   name: croissant recipe
   result: FoodBakedCroissant
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: oven
   time: 5
   solids:
@@ -1334,7 +1334,7 @@
   id: RecipeCroissantCotton
   name: cotton croissant recipe
   result: FoodBakedCroissantCotton
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: oven
   time: 5
   solids:
@@ -1345,7 +1345,7 @@
   id: RecipeCheburek
   name: Cheburek recipe
   result: FoodCheburek
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: oven
   time: 15
   reagents:
@@ -1360,7 +1360,7 @@
   id: RecipeSuppermatter
   name: suppermatter recipe
   result: FoodCakeSuppermatter
-  recipeGroup: suppermatter
+  recipeTags: [Suppermatter]
   instrumentType: oven
   time: 30
   solids:

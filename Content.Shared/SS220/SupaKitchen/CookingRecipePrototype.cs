@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.SupaKitchen.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 
@@ -31,19 +32,23 @@ public sealed class CookingRecipePrototype : IPrototype
     [DataField("time")]
     public uint CookTime { get; } = 5;
 
-    public string Name => Loc.GetString(_name);
+    public string Name => _name;
+    public string LocName => Loc.GetString($"cookingRecipe-{ID}");
 
     public IReadOnlyDictionary<string, FixedPoint2> IngredientsReagents => _ingsReagents;
     public IReadOnlyDictionary<string, uint> IngredientsSolids => _ingsSolids;
 
     [DataField]
-    public string RecipeGroup = "without a category";
+    public List<string> RecipeTags = new();
 
     /// <summary>
     /// Is this recipe unavailable in normal circumstances?
     /// </summary>
     [DataField]
     public bool SecretRecipe = false;
+
+    [DataField]
+    public Color? Color;
 
     /// <summary>
     ///    Count the number of ingredients in a recipe for sorting the recipe list.

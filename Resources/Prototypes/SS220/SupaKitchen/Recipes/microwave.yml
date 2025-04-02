@@ -4,7 +4,8 @@
   id: RecipeButteredToast
   name: buttered toast recipe
   result: FoodBreadButteredToast
-  recipeGroup: toast
+  recipeTags: [Toast]
+  color: "#9a6e61"
   instrumentType: microwave
   time: 5
   solids:
@@ -15,7 +16,8 @@
   id: RecipeFrenchToast
   name: french toast recipe
   result: FoodBreadFrenchToast
-  recipeGroup: toast
+  recipeTags: [Toast]
+  color: "#9a6e61"
   instrumentType: microwave
   time: 5
   reagents:
@@ -28,7 +30,7 @@
   id: RecipeGarlicBread
   name: garlic bread slice recipe
   result: FoodBreadGarlicSlice
-  recipeGroup: slice
+  recipeTags: [Slice]
   instrumentType: microwave
   time: 5
   solids:
@@ -40,7 +42,7 @@
   id: RecipeJellyToast
   name: jelly toast recipe
   result: FoodBreadJellySlice
-  recipeGroup: slice
+  recipeTags: [Slice]
   instrumentType: microwave
   time: 5
   solids:
@@ -51,7 +53,7 @@
   id: RecipeMoldyBreadSlice
   name: moldy bread slice recipe
   result: FoodBreadMoldySlice
-  recipeGroup: slice
+  recipeTags: [Slice]
   instrumentType: microwave
   time: 5
   solids:
@@ -62,7 +64,7 @@
   id: RecipeTwoBreadSlice
   name: two slice recipe
   result: FoodBreadTwoSlice
-  recipeGroup: slice
+  recipeTags: [Slice]
   instrumentType: microwave
   time: 5
   reagents:
@@ -74,7 +76,7 @@
   id: RecipeOnionRings
   name: onion rings recipe
   result: FoodOnionRings
-  recipeGroup: slice
+  recipeTags: [Slice]
   instrumentType: microwave
   time: 15
   solids:
@@ -86,7 +88,7 @@
   id: RecipeBoiledSpaghetti
   name: boiled spaghetti recipe
   result: FoodNoodlesBoiled
-  recipeGroup: italian
+  recipeTags: [Italian]
   instrumentType: microwave
   time: 15
   reagents:
@@ -100,7 +102,7 @@
   id: RecipePastaTomato
   name: pasta tomato recipe
   result: FoodNoodles
-  recipeGroup: italian
+  recipeTags: [Italian]
   instrumentType: microwave
   time: 10
   solids:
@@ -111,7 +113,7 @@
   id: RecipeMeatballSpaghetti
   name: spaghetti & meatballs recipe
   result: FoodNoodlesMeatball
-  recipeGroup: italian
+  recipeTags: [Italian]
   instrumentType: microwave
   time: 10
   solids:
@@ -122,7 +124,7 @@
   id: RecipeButterNoodles
   name: butter noodles recipe
   result: FoodNoodlesButter
-  recipeGroup: italian
+  recipeTags: [Italian]
   instrumentType: microwave
   time: 10
   solids:
@@ -133,7 +135,7 @@
   id: RecipeChowMein
   name: chow mein recipe
   result: FoodNoodlesChowmein
-  recipeGroup: italian
+  recipeTags: [Italian]
   instrumentType: microwave
   time: 10
   solids:
@@ -147,7 +149,7 @@
   id: RecipeOatmeal
   name: oatmeal recipe
   result: FoodOatmeal
-  recipeGroup: italian
+  recipeTags: [Italian]
   instrumentType: microwave
   time: 15
   reagents:
@@ -160,7 +162,7 @@
   id: RecipeBoiledRice
   name: boiled rice recipe
   result: FoodRiceBoiled
-  recipeGroup: italian
+  recipeTags: [Italian]
   instrumentType: microwave
   time: 15
   reagents:
@@ -173,7 +175,7 @@
   id: RecipeRicePudding
   name: rice pudding recipe
   result: FoodRicePudding
-  recipeGroup: italian
+  recipeTags: [Italian]
   instrumentType: microwave
   time: 15
   reagents:
@@ -187,7 +189,7 @@
   id: RecipeRicePork
   name: rice and pork recipe
   result: FoodRicePork
-  recipeGroup: italian
+  recipeTags: [Italian]
   instrumentType: microwave
   time: 15
   solids:
@@ -198,7 +200,7 @@
   id: RecipeRiceGumbo
   name: black-eyed gumbo recipe
   result: FoodRiceGumbo
-  recipeGroup: italian
+  recipeTags: [Italian]
   instrumentType: microwave
   time: 15
   solids:
@@ -210,7 +212,7 @@
   id: RecipeEggRice
   name: egg-fried rice recipe
   result: FoodRiceEgg
-  recipeGroup: italian
+  recipeTags: [Italian]
   instrumentType: microwave
   time: 15
   solids:
@@ -222,7 +224,7 @@
   id: RecipeCopypasta
   name: copypasta recipe
   result: FoodNoodlesCopy
-  recipeGroup: italian
+  recipeTags: [Italian]
   instrumentType: microwave
   time: 10
   solids:
@@ -234,7 +236,7 @@
   id: RecipeBisque
   name: bisque recipe
   result: FoodSoupBisque
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -249,7 +251,7 @@
   id: RecipeMeatballSoup
   name: meatball soup recipe
   result: FoodSoupMeatball
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -264,7 +266,7 @@
   id: RecipeNettleSoup
   name: nettle soup recipe
   result: FoodSoupNettle
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -279,7 +281,7 @@
   id: RecipeEyeballSoup
   name: eyeball soup recipe
   result: FoodSoupEyeball
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -294,7 +296,7 @@
   id: RecipeAmanitaJelly
   name: amanita jelly recipe
   result: FoodJellyAmanita
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -307,7 +309,7 @@
   id: RecipeOnionSoup
   name: onion soup recipe
   result: FoodSoupOnion
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -321,7 +323,7 @@
   id: RecipeMushroomSoup
   name: mushroom soup recipe
   result: FoodSoupMushroom
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -335,7 +337,7 @@
   id: RecipeStewSoup
   name: stew recipe
   result: FoodSoupStew
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -353,7 +355,7 @@
   id: RecipeTomatoSoup
   name: tomato soup recipe
   result: FoodSoupTomato
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -366,7 +368,7 @@
   id: RecipeTomatoBloodSoup
   name: tomato blood soup recipe
   result: FoodSoupTomatoBlood
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -379,7 +381,7 @@
   id: RecipeWingFangChuSoup
   name: wing fang chu recipe
   result: FoodSoupWingFangChu
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -392,7 +394,7 @@
   id: RecipeWingFangChuSoupSpider
   name: wing fang chu recipe
   result: FoodSoupWingFangChu
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -405,7 +407,7 @@
   id: RecipeVegetableSoup
   name: vegetable soup recipe
   result: FoodSoupVegetable
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -421,7 +423,7 @@
   id: RecipeClownTearsSoup
   name: clown tears soup recipe
   result: FoodSoupClown
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -435,7 +437,7 @@
   id: RecipeClownTearsSoupAlt
   name: clown's tears recipe
   result: FoodSoupClown
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 15
   solids:
@@ -448,7 +450,7 @@
   id: RecipeChiliClown
   name: chili con carnival recipe
   result: FoodSoupChiliClown
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 30
   solids:
@@ -463,7 +465,7 @@
   id: RecipeMonkeysDelightSoup
   name: monkeys delight recipe
   result: FoodSoupMonkey
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -479,7 +481,7 @@
   id: RecipeBungoSoup
   name: bungo soup recipe
   result: FoodSoupBungo
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -493,7 +495,7 @@
   id: RecipeBoiledSnail
   name: boiled snail recipe
   result: FoodMeatSnailCooked
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 5
   reagents:
@@ -505,7 +507,7 @@
   id: RecipeEscargotSoup
   name: escargot recipe
   result: FoodSoupEscargot
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -520,7 +522,7 @@
   id: RecipeHotChili
   name: hot chili recipe
   result: FoodSoupChiliHot
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 20
   solids:
@@ -534,7 +536,7 @@
   id: RecipeColdChili
   name: cold chili recipe
   result: FoodSoupChiliCold
-  recipeGroup: soups
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 5
   reagents:
@@ -546,7 +548,7 @@
   id: RecipeBorsch
   name: Borsch recipe
   result: FoodSoupBeet
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -562,7 +564,7 @@
   id: RecipeShchi
   name: Shchi recipe
   result: FoodSoupShchi
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -578,7 +580,7 @@
   id: RecipeSlimeSoup
   name: slime soup recipe
   result: FoodSoupSlime
-  recipeGroup: soup
+  recipeTags: [Soup]
   instrumentType: microwave
   time: 10
   reagents:
@@ -594,7 +596,7 @@
   id: RecipeCubanCarp
   name: cuban carp recipe
   result: FoodMealCubancarp
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 15
   solids:
@@ -607,7 +609,7 @@
   id: RecipeSashimi
   name: sashimi recipe
   result: FoodMealSashimi
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 15
   reagents:
@@ -619,7 +621,7 @@
   id: RecipeMisoColaSoup
   name: salty sweet misocola soup recipe
   result: DisgustingSweptSoup
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 15
   reagents:
@@ -631,7 +633,7 @@
   id: RecipeFries
   name: space fries recipe
   result: FoodMealFries
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave #TODO: Implement deep fryer
   time: 15
   reagents:
@@ -643,7 +645,7 @@
   id: RecipeCheesyFries
   name: cheesy fries recipe
   result: FoodMealFriesCheesy
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 15
   reagents:
@@ -656,7 +658,7 @@
   id: RecipeCarrotFries
   name: carrot fries recipe
   result: FoodMealFriesCarrot
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 15
   reagents:
@@ -668,7 +670,7 @@
   id: RecipePopcorn
   name: popcorn recipe
   result: FoodSnackPopcorn
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 5
   solids:
@@ -678,7 +680,7 @@
   id: RecipeMeatSalami
   name: Salami recipe
   result: FoodMeatSalami
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 30
   reagents:
@@ -691,7 +693,7 @@
   id: RecipeNachos
   name: nachos recipe
   result: FoodMealNachos
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 10
   reagents:
@@ -704,7 +706,7 @@
   id: RecipeNachosCheesy
   name: nachos cheesy recipe
   result: FoodMealNachosCheesy
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 15
   reagents:
@@ -718,7 +720,7 @@
   id: RecipeNachosCuban
   name: nachos cuban recipe
   result: FoodMealNachosCuban
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 15
   reagents:
@@ -732,7 +734,7 @@
   id: RecipePelmeni
   name: pelmeni recipe
   result: FoodPelmeniBowl
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 10
   reagents:
@@ -746,7 +748,7 @@
   id: RecipeQueso
   name: queso recipe
   result: FoodMealQueso
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 15
   reagents:
@@ -759,7 +761,7 @@
   id: RecipeCornInButter
   name: corn in butter recipe
   result: FoodMealCornInButter
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 10
   solids:
@@ -771,7 +773,7 @@
   id: RecipePeaSoup
   name: pea soup recipe
   result: FoodSoupPea
-  recipeGroup: other
+  recipeTags: [Other]
   instrumentType: microwave
   time: 10
   solids:
@@ -785,7 +787,7 @@
   id: RecipeWarmDonkpocket
   name: warm donk pocket recipe
   result: FoodDonkpocketWarm
-  recipeGroup: donkpocket
+  recipeTags: [Donkpocket]
   instrumentType: microwave
   time: 5
   solids:
@@ -795,7 +797,7 @@
   id: RecipeWarmDankpocket
   name: warm dank pocket recipe
   result: FoodDonkpocketDankWarm
-  recipeGroup: donkpocket
+  recipeTags: [Donkpocket]
   instrumentType: microwave
   time: 5
   solids:
@@ -805,7 +807,7 @@
   id: RecipeWarmDonkpocketSpicy
   name: warm spicy donk-pocket recipe
   result: FoodDonkpocketSpicyWarm
-  recipeGroup: donkpocket
+  recipeTags: [Donkpocket]
   instrumentType: microwave
   time: 5
   solids:
@@ -815,7 +817,7 @@
   id: RecipeWarmDonkpocketTeriyaki
   name: warm teriyaki-pocket recipe
   result: FoodDonkpocketTeriyakiWarm
-  recipeGroup: donkpocket
+  recipeTags: [Donkpocket]
   instrumentType: microwave
   time: 5
   solids:
@@ -825,7 +827,7 @@
   id: RecipeWarmDonkpocketPizza
   name: warm pizza-pocket recipe
   result: FoodDonkpocketPizzaWarm
-  recipeGroup: donkpocket
+  recipeTags: [Donkpocket]
   instrumentType: microwave
   time: 5
   solids:
@@ -835,7 +837,7 @@
   id: RecipeDonkpocketHonk
   name: warm honk-pocket recipe
   result: FoodDonkpocketHonkWarm
-  recipeGroup: donkpocket
+  recipeTags: [Donkpocket]
   instrumentType: microwave
   time: 5
   solids:
@@ -845,7 +847,7 @@
   id: RecipeDonkpocketBerry
   name: warm berry-pocket recipe
   result: FoodDonkpocketBerryWarm
-  recipeGroup: donkpocket
+  recipeTags: [Donkpocket]
   instrumentType: microwave
   time: 5
   solids:
@@ -855,7 +857,7 @@
   id: RecipeDonkpocketStonk
   name: warm stonk-pocket recipe
   result: FoodDonkpocketStonkWarm
-  recipeGroup: donkpocket
+  recipeTags: [Donkpocket]
   instrumentType: microwave
   time: 5
   solids:
@@ -865,7 +867,7 @@
   id: RecipeDonkpocketCarp
   name: warm carp-pocket recipe
   result: FoodDonkpocketCarpWarm
-  recipeGroup: donkpocket
+  recipeTags: [Donkpocket]
   instrumentType: microwave
   time: 5
   solids:
@@ -875,7 +877,7 @@
   id: RecipeDonkpocketGondola
   name: warm gondola-pocket recipe
   result: FoodDonkpocketGondolaWarm
-  recipeGroup: donkpocket
+  recipeTags: [Donkpocket]
   instrumentType: microwave
   time: 5
   solids:
@@ -887,7 +889,7 @@
   id: RecipeHerbSalad
   name: herb salad recipe
   result: FoodSaladHerb
-  recipeGroup: salad
+  recipeTags: [Salad]
   instrumentType: microwave
   time: 5
   solids:
@@ -899,7 +901,7 @@
   id: RecipeValidSalad
   name: valid salad recipe
   result: FoodSaladValid
-  recipeGroup: salad
+  recipeTags: [Salad]
   instrumentType: microwave
   time: 5
   solids:
@@ -912,7 +914,7 @@
   id: RecipeColeslaw
   name: coleslaw recipe
   result: FoodSaladColeslaw
-  recipeGroup: salad
+  recipeTags: [Salad]
   instrumentType: microwave
   time: 5
   reagents:
@@ -926,7 +928,7 @@
   id: RecipeCaesarSalad
   name: caesar salad recipe
   result: FoodSaladCaesar
-  recipeGroup: salad
+  recipeTags: [Salad]
   instrumentType: microwave
   time: 5
   reagents:
@@ -942,7 +944,7 @@
   id: RecipeCitrusSalad
   name: citrus salad recipe
   result: FoodSaladCitrus
-  recipeGroup: salad
+  recipeTags: [Salad]
   instrumentType: microwave
   time: 5
   solids:
@@ -955,7 +957,7 @@
   id: RecipeKimchiSalad
   name: kimchi salad recipe
   result: FoodSaladKimchi
-  recipeGroup: salad
+  recipeTags: [Salad]
   instrumentType: microwave
   time: 5
   reagents:
@@ -970,7 +972,7 @@
   id: RecipeFruitSalad
   name: fruit salad recipe
   result: FoodSaladFruit
-  recipeGroup: salad
+  recipeTags: [Salad]
   instrumentType: microwave
   time: 5
   solids:
@@ -984,7 +986,7 @@
   id: RecipeJungleSalad
   name: jungle salad recipe
   result: FoodSaladJungle
-  recipeGroup: salad
+  recipeTags: [Salad]
   instrumentType: microwave
   time: 5
   solids:
@@ -998,7 +1000,7 @@
   id: RecipeWatermelonFruitBowlSalad
   name: watermelon fruit bowl recipe
   result: FoodSaladWatermelonFruitBowl
-  recipeGroup: salad
+  recipeTags: [Salad]
   instrumentType: microwave
   time: 5
   solids:
@@ -1013,7 +1015,7 @@
   id: RecipeOkroshka
   name: Okroshka recipe
   result: FoodSoupOkroshka
-  recipeGroup: salad
+  recipeTags: [Salad]
   instrumentType: microwave
   time: 10
   solids:
@@ -1027,7 +1029,7 @@
   id: RecipeOkroshkaKvass
   name: Okroshka witch kvass recipe
   result: FoodSoupOkroshkaKvass
-  recipeGroup: salad
+  recipeTags: [Salad]
   instrumentType: microwave
   time: 10
   reagents:
@@ -1043,7 +1045,7 @@
   id: RecipeVinaigrette
   name: Vinaigrette recipe
   result: FoodSaladVinaigrette
-  recipeGroup: salad
+  recipeTags: [Salad]
   instrumentType: microwave
   time: 10
   solids:
@@ -1060,7 +1062,7 @@
   id: RecipeDriedTeaLeaves
   name: dried tea leaves recipe
   result: LeavesTeaDried
-  recipeGroup: notfood
+  recipeTags: [Notfood]
   instrumentType: microwave
   time: 10
   solids:
@@ -1071,7 +1073,7 @@
   id: RecipeDriedTobaccoMicrowave
   name: dried tobacco leaves recipe
   result: LeavesTobaccoDried
-  recipeGroup: notfood
+  recipeTags: [Notfood]
   instrumentType: microwave
   time: 10
   solids:
@@ -1081,7 +1083,7 @@
   id: RecipeDriedCannabis
   name: dried cannabis leaves recipe
   result: LeavesCannabisDried
-  recipeGroup: notfood
+  recipeTags: [Notfood]
   instrumentType: microwave
   time: 10
   solids:
@@ -1091,7 +1093,7 @@
   id: RecipeDriedCannabisRainbow
   name: dried rainbow cannabis leaves recipe
   result: LeavesCannabisRainbowDried
-  recipeGroup: notfood
+  recipeTags: [Notfood]
   instrumentType: microwave
   time: 10
   solids:
@@ -1101,7 +1103,7 @@
   id: RecipeTrashBakedBananaPeel
   name: baked banana peel recipe
   result: TrashBakedBananaPeel
-  recipeGroup: notfood
+  recipeTags: [Notfood]
   instrumentType: microwave
   time: 5
   solids:
@@ -1111,7 +1113,7 @@
   id: RecipeCannabisButter
   name: cannabis butter recipe
   result: FoodCannabisButter
-  recipeGroup: notfood
+  recipeTags: [Notfood]
   instrumentType: microwave
   time: 15
   solids:
@@ -1122,7 +1124,7 @@
   id: RecipeCannabisBrownies
   name: cannabis brownie recipe
   result: FoodBakedCannabisBrownieBatch
-  recipeGroup: notfood
+  recipeTags: [Notfood]
   instrumentType: microwave
   time: 25
   reagents:
@@ -1138,7 +1140,7 @@
   id: RecipeAloeCream
   name: aloe cream recipe
   result: AloeCream
-  recipeGroup: medical
+  recipeTags: [Medical]
   instrumentType: microwave
   time: 10
   solids:
@@ -1148,7 +1150,7 @@
   id: RecipeMedicatedSuture
   name: medicated suture recipe
   result: MedicatedSuture
-  recipeGroup: medical
+  recipeTags: [Medical]
   instrumentType: microwave
   time: 10
   solids:
@@ -1163,7 +1165,7 @@
   id: RecipeRegenerativeMesh
   name: regenerative mesh recipe
   result: RegenerativeMesh
-  recipeGroup: medical
+  recipeTags: [Medical]
   instrumentType: microwave
   time: 10
   solids:
@@ -1179,7 +1181,7 @@
   id: RecipeInertAnomalyMeat
   name: inert meat anomaly recipe
   result: FoodMeatAnomaly
-  recipeGroup: anomaly
+  recipeTags: [Anomaly]
   instrumentType: microwave
   time: 5
   solids:
@@ -1189,7 +1191,7 @@
   id: RecipeAnomalyMeat
   name: meat anomaly recipe
   result: FoodMeatAnomaly
-  recipeGroup: anomaly
+  recipeTags: [Anomaly]
   instrumentType: microwave
   time: 5
   solids:
@@ -1199,7 +1201,7 @@
   id: RecipeAnomalyMeatCooked
   name: cooked meat anomaly recipe
   result: FoodMeatAnomalyCooked
-  recipeGroup: anomaly
+  recipeTags: [Anomaly]
   instrumentType: microwave
   time: 5
   solids:
@@ -1210,7 +1212,7 @@
   id: Caramel
   name: caramelka
   result: CaramelFood
-  recipeGroup: caramel
+  recipeTags: [Caramel]
   instrumentType: microwave
   time: 15
   reagents:
@@ -1221,7 +1223,7 @@
   id: CaramelRed
   name: red caramelka
   result: RedCaramelCaneFood
-  recipeGroup: caramel
+  recipeTags: [Caramel]
   instrumentType: microwave
   time: 15
   reagents:
@@ -1233,7 +1235,7 @@
   id: CaramelGreen
   name: green caramelka
   result: GreenCaramelCaneFood
-  recipeGroup: caramel
+  recipeTags: [Caramel]
   instrumentType: microwave
   time: 15
   reagents:
@@ -1245,7 +1247,7 @@
   id: CaramelGreenRed
   name: greenred caramelka
   result: CaramelCaneGreenRedFood
-  recipeGroup: caramel
+  recipeTags: [Caramel]
   instrumentType: microwave
   time: 15
   reagents:
@@ -1258,7 +1260,7 @@
   id: double Caramel
   name: double caramelka
   result: DoubleCaramelCaneFood
-  recipeGroup: caramel
+  recipeTags: [Caramel]
   instrumentType: microwave
   time: 20
   reagents:
@@ -1273,7 +1275,7 @@
   id: RecipeTacoShell
   name: taco shell recipe
   result: FoodTacoShell
-  recipeGroup: taco
+  recipeTags: [Taco]
   instrumentType: microwave
   time: 5
   solids:
@@ -1283,7 +1285,7 @@
   id: RecipeTacoBeef
   name: beef taco recipe
   result: FoodTacoBeef
-  recipeGroup: taco
+  recipeTags: [Taco]
   instrumentType: microwave
   time: 10
   solids:
@@ -1295,7 +1297,7 @@
   id: RecipeTacoChicken
   name: chicken taco recipe
   result: FoodTacoChicken
-  recipeGroup: taco
+  recipeTags: [Taco]
   instrumentType: microwave
   time: 10
   solids:
@@ -1307,7 +1309,7 @@
   id: RecipeTacoFish
   name: fish taco recipe
   result: FoodTacoFish
-  recipeGroup: taco
+  recipeTags: [Taco]
   instrumentType: microwave
   time: 10
   solids:
@@ -1321,7 +1323,7 @@
   id: RecipeTacoRat
   name: rat taco recipe
   result: FoodTacoRat
-  recipeGroup: taco
+  recipeTags: [Taco]
   instrumentType: microwave
   time: 10
   solids:
@@ -1333,7 +1335,7 @@
   id: RecipeTacoBeefSupreme
   name: beef taco supreme recipe
   result: FoodTacoBeefSupreme
-  recipeGroup: taco
+  recipeTags: [Taco]
   instrumentType: microwave
   time: 10
   solids:
@@ -1348,7 +1350,7 @@
   id: RecipeTacoChickenSupreme
   name: beef taco supreme recipe
   result: FoodTacoChickenSupreme
-  recipeGroup: taco
+  recipeTags: [Taco]
   instrumentType: microwave
   time: 10
   solids:
