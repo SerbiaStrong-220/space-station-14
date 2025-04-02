@@ -1,8 +1,6 @@
 - type: entity
   parent: KitchenElectricGrill
   id: FloorKitchenElectricGrill
-  name: name
-  description: desc
   components:
   - type: Sprite
     sprite: SS220/Structures/Machines/floor_electric_grill.rsi
@@ -29,8 +27,6 @@
 - type: entity
   id: FloorElectricGrillMachineCircuitboard
   parent: BaseMachineCircuitboard
-  name: electric grill machine board
-  description: A machine printed circuit board for an electric grill.
   components:
     - type: MachineBoard
       prototype: FloorKitchenElectricGrill

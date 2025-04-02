@@ -1,7 +1,5 @@
 - type: entity
   id: ChoppingBoard
-  name: chopping board
-  description: A chessboard. Pieces included!
   components:
   - type: Sprite
     sprite: SS220/SupaKitchen/Instruments/chopping_board.rsi #SS220-Tabletop-Resprite
