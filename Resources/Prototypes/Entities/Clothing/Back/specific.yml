@@ -100,9 +100,5 @@
   # SS220 Nozzle refactor begin
   - type: SolutionProvider
     solutionId: tank
-    tankSlot:
-    whitelist:
-      components:
-      - ClothingSlotSolutionProvider
   # SS220 Nozzle refactor end
 
