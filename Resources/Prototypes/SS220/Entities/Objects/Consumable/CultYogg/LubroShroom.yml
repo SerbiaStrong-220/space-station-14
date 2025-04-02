@@ -11,6 +11,7 @@
     sprite: SS220/Objects/CultYogg/lurbo_shroom.rsi
     equipSound: /Audio/SS220/CultYogg/lurbo_kill.ogg
     unequipSound: /Audio/SS220/CultYogg/lurbo_unequip.ogg
+    soundOnPocketSlot: false
     equipDelay: 1
     unequipDelay: 1
   - type: NoSlip
