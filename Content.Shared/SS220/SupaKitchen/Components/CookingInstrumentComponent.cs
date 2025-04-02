@@ -3,17 +3,14 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.SupaKitchen.Components;
 
-[RegisterComponent]
 public abstract partial class BaseCookingInstrumentComponent : Component
 {
     [DataField(required: true)]
-    [ViewVariables]
     public ProtoId<CookingInstrumentTypePrototype> InstrumentType;
 
     [DataField]
     public EntProtoId FailureResult = "FoodBadRecipe";
 
-    [ViewVariables]
     [DataField]
     public bool IgnoreTime = false;
 

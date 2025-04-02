@@ -24,8 +24,13 @@ public sealed partial class OvenSystem : SharedOvenSystem
         if (!_appearance.TryGetData<bool>(entity, OvenVisuals.Active, out var isActive))
             return;
 
-        var state = isActive ? entity.Comp.ActiveState : entity.Comp.NonActiveState;
-        args.Sprite.LayerSetState(OvenVisuals.Active, state);
-        args.Sprite.LayerSetVisible(OvenVisuals.ActiveUnshaded, isActive);
+        if (args.Sprite.LayerExists(OvenVisuals.Active))
+        {
+            var state = isActive ? entity.Comp.ActiveState : entity.Comp.NonActiveState;
+            args.Sprite.LayerSetState(OvenVisuals.Active, state);
+        }
+
+        if (args.Sprite.LayerExists(OvenVisuals.ActiveUnshaded))
+            args.Sprite.LayerSetVisible(OvenVisuals.ActiveUnshaded, isActive);
     }
 }
