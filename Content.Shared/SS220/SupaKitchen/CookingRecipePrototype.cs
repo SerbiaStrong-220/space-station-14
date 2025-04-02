@@ -4,6 +4,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.SS220.SupaKitchen.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
+using System.Linq;
 
 namespace Content.Shared.SS220.SupaKitchen;
 
@@ -17,11 +18,11 @@ public sealed class CookingRecipePrototype : IPrototype
     [DataField("name")]
     private string _name = string.Empty;
 
-    [DataField("reagents", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, ReagentPrototype>))]
-    private readonly Dictionary<string, FixedPoint2> _ingsReagents = new();
+    [DataField("reagents")]
+    private readonly Dictionary<ProtoId<ReagentPrototype>, FixedPoint2> _ingsReagents = new();
 
-    [DataField("solids", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<uint, EntityPrototype>))]
-    private readonly Dictionary<string, uint> _ingsSolids = new();
+    [DataField("solids")]
+    private readonly Dictionary<ProtoId<EntityPrototype>, uint> _ingsSolids = new();
 
     [DataField]
     public ProtoId<EntityPrototype> Result { get; } = string.Empty;
@@ -35,8 +36,8 @@ public sealed class CookingRecipePrototype : IPrototype
     public string Name => _name;
     public string LocName => Loc.GetString($"cookingRecipe-{ID}");
 
-    public IReadOnlyDictionary<string, FixedPoint2> IngredientsReagents => _ingsReagents;
-    public IReadOnlyDictionary<string, uint> IngredientsSolids => _ingsSolids;
+    public IReadOnlyDictionary<string, FixedPoint2> IngredientsReagents => _ingsReagents.ToDictionary(d => d.Key.Id, d => d.Value);
+    public IReadOnlyDictionary<string, uint> IngredientsSolids => _ingsSolids.ToDictionary(d => d.Key.Id, d => d.Value);
 
     [DataField]
     public List<string> RecipeTags = new();

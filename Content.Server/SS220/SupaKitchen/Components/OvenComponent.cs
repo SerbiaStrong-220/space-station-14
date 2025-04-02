@@ -28,10 +28,16 @@ public sealed partial class OvenComponent : SharedOvenComponent
     public CookingRecipePrototype? CurrentCookingRecipe;
 
     [DataField]
-    public string ContainerName = "cooking_constantly_entity_container";
+    public string ContainerName = "oven_entity_container";
 
     [ViewVariables]
     public Container Container = default;
+
+    [DataField]
+    public float HeatPerSecond = 100;
+
+    [DataField]
+    public float HeatingThreshold = 373.15f;
 
     #region  audio
     [DataField]

@@ -17,7 +17,7 @@ public sealed partial class SupaMicrowaveComponent : BaseCookingInstrumentCompon
     public uint MaxCookingTimer = 30;
 
     [DataField]
-    public float TemperatureUpperThreshold = 373.15f;
+    public float HeatingThreshold = 373.15f;
 
     [DataField]
     public float HeatPerSecond = 100;

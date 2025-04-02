@@ -3,6 +3,8 @@ using Content.Server.DeviceLinking.Events;
 using Content.Server.Power.EntitySystems;
 using Content.Server.SS220.SupaKitchen.Components;
 using Content.Server.Storage.EntitySystems;
+using Content.Server.Temperature.Components;
+using Content.Server.Temperature.Systems;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Destructible;
@@ -29,6 +31,7 @@ public sealed partial class OvenSystem : SharedOvenSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly ApcSystem _apcSystem = default!;
+    [Dependency] private readonly TemperatureSystem _temperature = default!;
 
     public override void Initialize()
     {
@@ -63,6 +66,7 @@ public sealed partial class OvenSystem : SharedOvenSystem
             if (!HasContents(component))
                 continue;
 
+            AddTemperature(component, frameTime);
             component.PackCookingTime += frameTime;
             if (component.CurrentCookingRecipe.CookTime > component.PackCookingTime)
                 continue;
@@ -83,7 +87,7 @@ public sealed partial class OvenSystem : SharedOvenSystem
         if (entity.Comp.UseEntityStorage)
             entity.Comp.Container = _container.EnsureContainer<Container>(entity, EntityStorageSystem.ContainerName);
         else
-            entity.Comp.Container = _container.EnsureContainer<Container>(entity, "cooking_machine_entity_container");
+            entity.Comp.Container = _container.EnsureContainer<Container>(entity, entity.Comp.ContainerName);
     }
 
     private void OnMapInit(Entity<OvenComponent> entity, ref MapInitEvent args)
@@ -195,8 +199,7 @@ public sealed partial class OvenSystem : SharedOvenSystem
             component.CurrentCookingRecipe = null;
         }
 
-        if (component.CurrentCookingRecipe is null)
-            component.CurrentCookingRecipe = GetCookingRecipe(uid, component);
+        component.CurrentCookingRecipe ??= GetCookingRecipe(uid, component);
     }
 
     private void FinalizeCooking(EntityUid uid, OvenComponent component)
@@ -207,6 +210,8 @@ public sealed partial class OvenSystem : SharedOvenSystem
         var container = component.Container;
         SubtractContents(container, component.CurrentCookingRecipe);
         SpawnInContainerOrDrop(component.CurrentCookingRecipe.Result, uid, container.ID);
+        _audio.PlayPvs(component.FoodDoneSound, uid);
+
         CycleCooking(uid, component);
     }
 
@@ -258,34 +263,36 @@ public sealed partial class OvenSystem : SharedOvenSystem
 
     private CookingRecipePrototype? GetCookingRecipe(EntityUid uid, OvenComponent component)
     {
-        var solidsDict = new Dictionary<string, int>();
-        var reagentDict = new Dictionary<string, FixedPoint2>();
+        var entities = component.Container.ContainedEntities;
+        var portionedRecipe = GetSatisfiedPortionedRecipe(component, entities, 0);
+        if (portionedRecipe.Item2 <= 0)
+            return null;
 
-        foreach (var item in component.Container.ContainedEntities.ToList())
+        return portionedRecipe.Item1;
+    }
+
+    private void AddTemperature(OvenComponent component, float modifier = 1)
+    {
+        if (component.HeatPerSecond == 0)
+            return;
+
+        var heatToAdd = component.HeatPerSecond * modifier;
+        foreach (var entity in component.Container.ContainedEntities)
         {
-            var metaData = MetaData(item); //this still begs for cooking refactor
-            if (metaData.EntityPrototype == null)
-                continue;
+            if (!TryComp<TemperatureComponent>(entity, out var temperature))
+                _temperature.ChangeHeat(entity, heatToAdd);
 
-            if (!solidsDict.TryAdd(metaData.EntityPrototype.ID, 1))
-                solidsDict[metaData.EntityPrototype.ID]++;
-
-            if (!TryComp<SolutionContainerManagerComponent>(item, out var solMan))
-                continue;
-
-            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions((item, solMan)))
+            if (TryComp<SolutionContainerManagerComponent>(entity, out var solutions))
             {
-                var solution = soln.Comp.Solution;
+                foreach (var (_, soln) in _solutionContainer.EnumerateSolutions((entity, solutions)))
                 {
-                    foreach (var (reagent, quantity) in solution.Contents)
-                    {
-                        if (!reagentDict.TryAdd(reagent.Prototype, quantity))
-                            reagentDict[reagent.Prototype] += quantity;
-                    }
+                    var solution = soln.Comp.Solution;
+                    if (solution.Temperature > component.HeatingThreshold)
+                        continue;
+
+                    _solutionContainer.AddThermalEnergy(soln, heatToAdd);
                 }
             }
         }
-
-        return GetSatisfiedPortionedRecipe(component, solidsDict, reagentDict, 0).Item1;
     }
 }

@@ -33,7 +33,6 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -481,7 +480,7 @@ public sealed class SupaMicrowaveSystem : CookingInstrumentSystem
             foreach (var (_, soln) in _solutionContainer.EnumerateSolutions((entity, solutions)))
             {
                 var solution = soln.Comp.Solution;
-                if (solution.Temperature > machine.TemperatureUpperThreshold)
+                if (solution.Temperature > machine.HeatingThreshold)
                     continue;
 
                 _solutionContainer.AddThermalEnergy(soln, heatToAdd);

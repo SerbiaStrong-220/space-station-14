@@ -752,7 +752,7 @@
   instrumentType: microwave
   time: 15
   reagents:
-    blackpepper: 5
+    Blackpepper: 5
   solids:
     FoodChiliPepper: 1
     FoodCheeseSlice: 2
