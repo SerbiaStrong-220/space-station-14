@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.DeviceLinking.Events;
 using Content.Server.Power.EntitySystems;
-using Content.Server.SS220.SupaKitchen.Components;
+using Content.Server.Storage.Components;
 using Content.Server.Storage.EntitySystems;
 using Content.Server.Temperature.Components;
 using Content.Server.Temperature.Systems;
@@ -13,13 +13,11 @@ using Content.Shared.Power;
 using Content.Shared.SS220.SupaKitchen;
 using Content.Shared.SS220.SupaKitchen.Components;
 using Content.Shared.SS220.SupaKitchen.Systems;
-using Content.Shared.Storage.Components;
 using Content.Shared.Verbs;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
 using System.Linq;
 
 namespace Content.Server.SS220.SupaKitchen.Systems;
@@ -30,21 +28,14 @@ public sealed partial class OvenSystem : SharedOvenSystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
-    [Dependency] private readonly ApcSystem _apcSystem = default!;
     [Dependency] private readonly TemperatureSystem _temperature = default!;
+    [Dependency] private readonly ApcSystem _apcSystem = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<OvenComponent, ComponentGetState>(OnGetState);
-
-        SubscribeLocalEvent<OvenComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<OvenComponent, MapInitEvent>(OnMapInit);
-
-        SubscribeLocalEvent<OvenComponent, StorageOpenAttemptEvent>(OnStorageOpenAttempt);
-        SubscribeLocalEvent<OvenComponent, StorageCloseAttemptEvent>(OnStorageCloseAttempt);
-        SubscribeLocalEvent<OvenComponent, StorageAfterOpenEvent>(OnStorageOpen);
 
         SubscribeLocalEvent<OvenComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<OvenComponent, BreakageEventArgs>(OnBreak);
@@ -73,21 +64,6 @@ public sealed partial class OvenSystem : SharedOvenSystem
 
             FinalizeCooking(uid, component);
         }
-    }
-
-    private void OnGetState(Entity<OvenComponent> entity, ref ComponentGetState args)
-    {
-        args.State = new OvenComponentState(entity.Comp.LastState,
-            entity.Comp.CurrentState,
-            entity.Comp.PlayingStream);
-    }
-
-    private void OnInit(Entity<OvenComponent> entity, ref ComponentInit args)
-    {
-        if (entity.Comp.UseEntityStorage)
-            entity.Comp.Container = _container.EnsureContainer<Container>(entity, EntityStorageSystem.ContainerName);
-        else
-            entity.Comp.Container = _container.EnsureContainer<Container>(entity, entity.Comp.ContainerName);
     }
 
     private void OnMapInit(Entity<OvenComponent> entity, ref MapInitEvent args)
@@ -176,6 +152,11 @@ public sealed partial class OvenSystem : SharedOvenSystem
 
     public void Activate(EntityUid uid, OvenComponent component, EntityUid? user = null)
     {
+        if (component.UseEntityStorage &&
+            TryComp<EntityStorageComponent>(uid, out var entStorage) &&
+            entStorage.Open)
+            return;
+
         CycleCooking(uid, component);
 
         component.LastUser = user;

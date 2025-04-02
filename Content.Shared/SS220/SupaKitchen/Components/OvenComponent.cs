@@ -1,16 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.DeviceLinking;
 using Content.Shared.FixedPoint;
-using Content.Shared.SS220.SupaKitchen;
-using Content.Shared.SS220.SupaKitchen.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
-namespace Content.Server.SS220.SupaKitchen.Components;
+namespace Content.Shared.SS220.SupaKitchen.Components;
 
-[RegisterComponent]
-public sealed partial class OvenComponent : SharedOvenComponent
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
+public sealed partial class OvenComponent : BaseCookingInstrumentComponent
 {
     [ViewVariables]
     public EntityUid? LastUser;
@@ -30,7 +31,7 @@ public sealed partial class OvenComponent : SharedOvenComponent
     [DataField]
     public string ContainerName = "oven_entity_container";
 
-    [ViewVariables]
+    [ViewVariables(VVAccess.ReadOnly)]
     public Container Container = default!;
 
     [DataField]
@@ -56,4 +57,56 @@ public sealed partial class OvenComponent : SharedOvenComponent
     [DataField]
     public ProtoId<SinkPortPrototype> TogglePort = "Toggle";
     #endregion
+
+    #region State
+    [ViewVariables, AutoNetworkedField]
+    public OvenState LastState = OvenState.Idle;
+
+    [ViewVariables, AutoNetworkedField]
+    public OvenState CurrentState
+    {
+        get => _currentState;
+        set
+        {
+            LastState = _currentState;
+            _currentState = value;
+        }
+
+    }
+
+    [ViewVariables]
+    private OvenState _currentState = OvenState.Idle;
+    #endregion
+
+    [DataField]
+    public bool UseEntityStorage = true;
+
+    #region Audio
+    [ViewVariables, AutoNetworkedField]
+    public NetEntity? PlayingStream { get; set; }
+    #endregion
+
+    #region Sprite
+    [DataField]
+    public string ActiveState = "oven_on";
+    [DataField]
+    public string NonActiveState = "oven_off";
+    #endregion
+}
+
+[Serializable, NetSerializable]
+public enum OvenState
+{
+    UnPowered,
+    Idle,
+    Active,
+    Broken
+}
+
+[Serializable, NetSerializable]
+public enum OvenVisuals
+{
+    VisualState,
+    Active,
+    ActiveUnshaded
 }
