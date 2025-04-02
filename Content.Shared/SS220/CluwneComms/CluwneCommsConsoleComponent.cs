@@ -97,7 +97,7 @@ namespace Content.Shared.SS220.CluwneComms
     }
 
     [Serializable, NetSerializable]
-    public sealed class CluwneCommsConsoleBoomMessage() : BoundUserInterfaceMessage
+    public sealed class CluwneCommsConsoleBoomMessage : BoundUserInterfaceMessage
     {
     }
 

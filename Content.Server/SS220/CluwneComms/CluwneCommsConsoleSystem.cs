@@ -1,36 +1,22 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Administration.Logs;
-using Content.Server.AlertLevel;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
-using Content.Server.DeviceNetwork.Components;
-using Content.Server.DeviceNetwork.Systems;
-using Content.Server.Interaction;
 using Content.Server.Popups;
-using Content.Server.RoundEnd;
-using Content.Server.Screens.Components;
-using Content.Server.Shuttles.Systems;
-using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
-using Content.Shared.Communications;
 using Content.Shared.Database;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Popups;
 using Content.Shared.SS220.TTS;
-using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
-using Content.Server.Communications;
 using Robust.Shared.Timing;
 using Content.Server.CartridgeLoader.Cartridges;
 using Content.Shared.MassMedia.Systems;
 using Content.Server.GameTicking;
-using Content.Shared.Decals;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 
@@ -147,7 +133,7 @@ namespace Content.Server.SS220.CluwneComms
             _chatSystem.DispatchStationAnnouncement(ent, args.Instruntions, colorOverride: ent.Comp.Color, voiceId: voiceId);
             //Intructions from console
             //copied from NewsSystem
-            var title = "";//add some naming in component here
+            var title = "CluwneCommAnnounceLooc";//add some naming in component here
             var content = args.Message.Trim();
 
             var article = new NewsArticle

@@ -123,6 +123,8 @@ namespace Content.Client.SS220.CluwneComms.UI
 
             AlertButton.OnPressed += _ => OnAlert?.Invoke(code, Rope.Collapse(AlertInput.TextRope), Rope.Collapse(InstructionInput.TextRope));//make here button string
             AlertButton.Disabled = !CanAlert;
+
+            BoomButton.OnPressed += _ => OnBoom?.Invoke();
         }
         #endregion
         protected override void FrameUpdate(FrameEventArgs args)

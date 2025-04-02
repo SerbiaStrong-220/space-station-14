@@ -6,7 +6,6 @@ using Content.Shared.Communications;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
-using Mono.Cecil.Cil;
 
 namespace Content.Client.SS220.CluwneComms.UI
 {
@@ -43,7 +42,7 @@ namespace Content.Client.SS220.CluwneComms.UI
         {
         }
 
-        public void BoomButtonPressed()
+        public void BoomButtonPressed()//idk why this shit isnt working
         {
             SendMessage(new CluwneCommsConsoleBoomMessage());
         }
