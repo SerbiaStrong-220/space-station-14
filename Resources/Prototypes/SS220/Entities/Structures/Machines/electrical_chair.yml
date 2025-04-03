@@ -5,10 +5,12 @@
   description: bzzzt.
   components:
   - type: Sprite
-    sprite: Structures/Furniture/chairs.rsi
-    state: wooden
+    sprite: SS220/Structures/Furniture/electrical_chair.rsi
+    state: base
     noRot: true
   - type: Rotatable
+  - type: Transform
+    anchored: true
   - type: InteractionOutline
   - type: Strap
     position: Stand

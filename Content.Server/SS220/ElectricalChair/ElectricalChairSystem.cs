@@ -80,7 +80,6 @@ public sealed partial class ElectricalChairSystem : EntitySystem
             return;
 
         component.Enabled = value;
-        Dirty(uid, component);
     }
 
     private bool CanDoElectrocution(EntityUid uid, ElectricalChairComponent component)
