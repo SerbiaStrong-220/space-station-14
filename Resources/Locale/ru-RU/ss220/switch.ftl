@@ -9,5 +9,5 @@ ent-DirectionalSignalButton = { ent-SignalButton }
 ent-Lightswitch = выключатель света
     .desc = Переключатель для ламп освещения. Имеет индикатор для лучшей видимости в темноте.
 
-ent-KnifeSwinch = ножевой выключатель
+ent-KnifeSwinch = рубильник
     .desc = { ent-SignalSwitch.desc }

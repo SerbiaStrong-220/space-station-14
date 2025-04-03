@@ -29,6 +29,8 @@
   components:
   - type: SignalSwitch
     state: true
+    clickSound:
+      path: /Audio/SS220/Machines/Switch/knife_switch.ogg
   - type: Sprite
     sprite: SS220/Structures/Wallmounts/knife_switch.rsi
     layers:
