@@ -1,6 +1,6 @@
 - type: entity
   id: ElectricalChair
-  parent: BaseStructureDynamic
+  parent: BaseStructure
   name: electrical chair
   description: bzzzt.
   components:
@@ -9,8 +9,7 @@
     state: base
     noRot: true
   - type: Rotatable
-  - type: Transform
-    anchored: true
+  - type: Anchorable
   - type: InteractionOutline
   - type: Strap
     position: Stand
