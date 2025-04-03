@@ -1,0 +1,23 @@
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconDeathsquadOperative
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/job_icons.rsi
+    state: deathsquad
+  jobName: job-name-dq-operative
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconDeathsquadCommander
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/job_icons.rsi
+    state: deathsquadleader
+  jobName: job-name-dq-commander
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconDeathsquadHealer
+  icon:
+    sprite: /Textures/SS220/Interface/Misc/job_icons.rsi
+    state: deathsquadalpha
+  jobName: job-name-dq-specialist

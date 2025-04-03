@@ -4,20 +4,20 @@
   name: shard of blue crystal
   description: A small piece of crystal.
   categories: [ HideSpawnMenu ]
-  components:  
+  components:
+  - type: ItemGasSpawner
+    spawnGas: Oxygen
+    spawnAmount: 5
+    limitedSpawn: true
+    amountToSpawn: 350
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 5
+        damage: 50
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWebSilk:
-            min: 0
-            max: 0
       - !type:PlaySoundBehavior
         sound:
           collection: WoodDestroy  

@@ -54,6 +54,7 @@
     instrumentList:
       "Aah": {52: 0}
       "Ooh": {53: 0}
+      "Kweh": {4: 1}
   - type: Sprite
     sprite: Objects/Fun/Instruments/microphone.rsi
     state: icon
@@ -133,6 +134,7 @@
   id: SuperSynthesizerInstrument
   name: super synthesizer
   description: Blasting the ghetto with Touhou MIDIs since 2020.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Instrument
     allowPercussion: true

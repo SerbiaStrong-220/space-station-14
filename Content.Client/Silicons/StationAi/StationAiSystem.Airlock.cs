@@ -7,8 +7,9 @@ namespace Content.Client.Silicons.StationAi;
 
 public sealed partial class StationAiSystem
 {
-    private readonly ResPath _aiActionsRsi = new ResPath("/Textures/Interface/Actions/actions_ai.rsi");
-
+//    private readonly ResPath _aiActionsRsi = new ResPath("/Textures/Interface/Actions/actions_ai.rsi"); 
+    private readonly ResPath _aiActionsRsi = new ResPath("/Textures/SS220/Interface/Actions/actions_ai.rsi"); //SS220-resprite
+    
     private void InitializeAirlock()
     {
         SubscribeLocalEvent<DoorBoltComponent, GetStationAiRadialEvent>(OnDoorBoltGetRadial);

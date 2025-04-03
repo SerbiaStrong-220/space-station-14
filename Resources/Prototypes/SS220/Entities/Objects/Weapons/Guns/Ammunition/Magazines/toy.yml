@@ -1,0 +1,272 @@
+#BASE
+- type: entity
+  id: BaseMagazineToy
+  abstract: true
+  components:
+    - type: BallisticAmmoProvider
+      whitelist:
+        tags:
+          - CartridgeCap #oh yeah multi caliber guns fr fr
+          - BulletFoam
+    - type: HiddenDescription
+      entries:
+      - label: hidden-desc-toy-weapons-magazine-syndicate
+        whitelistMind:
+          components:
+            - TraitorRole
+            - NukeOperative
+      - label: hidden-desc-toy-weapons-magazine-clown
+        jobRequired:
+          - Clown
+          - Mime
+
+#pistol
+- type: entity
+  id: BaseMagazinePistolToy
+  parent: [ BaseMagazineToy, BaseMagazinePistol ]
+  abstract: true
+  components:
+    - type: Tag
+      tags:
+      - MagazinePistolToy
+
+- type: entity
+  id: BaseMagazinePistolHighCapacityToy
+  parent: [ BaseMagazineToy, BaseMagazinePistolHighCapacity ]
+  abstract: true
+  components:
+    - type: Tag
+      tags:
+      - MagazinePistolToy
+
+- type: entity
+  id: BaseMagazinePistolSubMachineGunToy
+  parent: [ BaseMagazineToy, BaseMagazinePistolSubMachineGun ]
+  abstract: true
+  components:
+    - type: Tag
+      tags:
+      - MagazinePistolSubMachineGunToy
+
+- type: entity
+  id: BaseMagazinePistolCaselessRifleToy
+  parent: [ BaseMagazineToy, BaseMagazinePistolCaselessRifle ]
+  abstract: true
+  components:
+    - type: Tag
+      tags:
+      - MagazinePistolCaselessRifleToy
+
+#shotgun
+- type: entity
+  id: BaseMagazineShotgunToy
+  parent: [ BaseMagazineToy, BaseMagazineShotgun ]
+  abstract: true
+  components:
+    - type: Tag
+      tags:
+      - MagazineShotgunToy
+    - type: BallisticAmmoProvider
+      whitelist:
+        tags:
+          - CartridgeCap
+          - BulletFoam
+          - ShellShotgunToy
+
+#LMG
+- type: entity
+  id: BaseMagazineLightRifleBoxToy
+  parent: [ BaseMagazineToy, MagazineLightRifleBox ]
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - MagazineLightRifleBoxToy
+
+
+#filled mags (with caps) =================
+#BASE cap mag
+- type: entity
+  id: BaseMagazineToyCaps
+  abstract: true
+  suffix: Caps
+  components:
+    - type: BallisticAmmoProvider
+      proto: CartridgeCap
+
+#pistol
+- type: entity
+  id: MagazinePistolCaps
+  parent: [ BaseMagazineToyCaps, BaseMagazinePistolToy ]
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolHighCapacityCaps
+  parent: [ BaseMagazineToyCaps, BaseMagazinePistolHighCapacityToy ]
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolSubMachineGunCaps
+  parent: [ BaseMagazineToyCaps, BaseMagazinePistolSubMachineGunToy ]
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolCaselessRifleCaps
+  parent: [ BaseMagazineToyCaps, BaseMagazinePistolCaselessRifleToy ]
+  components:
+  - type: Sprite
+    slayers:
+    - state: red
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+#LMG
+- type: entity
+  id: MagazineLightRifleBoxCaps
+  parent: [ BaseMagazineToyCaps, BaseMagazineLightRifleBoxToy ]
+
+
+#shotgun
+- type: entity
+  id: MagazineShotgunCaps
+  parent: BaseMagazineShotgunToy #can't parent BaseMagazineToyCaps cuz shotgun uses unique ones
+  suffix: Caps
+  components:
+    - type: BallisticAmmoProvider
+      proto: ShellShotgunCaps
+    - type: Sprite
+      layers:
+        - state: pellets
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-2 #SS220-FixAmmoSprite
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazineShotgunSlugCaps
+  parent: BaseMagazineShotgunToy #can't parent BaseMagazineToyCaps cuz shotgun uses unique ones
+  suffix: Caps
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunSlugCaps
+  - type: Sprite
+    layers:
+    - state: slug
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2 #SS220-FixAmmoSprite
+      map: ["enum.GunVisualLayers.Mag"]
+
+
+#filled mags (with foam) =================
+#BASE foam mag
+- type: entity
+  id: BaseMagazineToyFoam
+  abstract: true
+  suffix: Foam
+  components:
+    - type: BallisticAmmoProvider
+      proto: BulletFoam
+
+#pistol
+- type: entity
+  id: MagazinePistolFoam
+  parent: [ BaseMagazineToyFoam, BaseMagazinePistol ]
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolHighCapacityFoam
+  parent: [ BaseMagazineToyFoam, BaseMagazinePistolHighCapacityToy ]
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolSubMachineGunFoam
+  parent: [ BaseMagazineToyFoam, BaseMagazinePistolSubMachineGunToy ]
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolCaselessRifleFoam
+  parent: [ BaseMagazineToyFoam, BaseMagazinePistolCaselessRifleToy ]
+  components:
+  - type: Sprite
+    slayers:
+    - state: red
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+#shotgun
+- type: entity
+  id: MagazineShotgunFoam
+  parent: BaseMagazineShotgunToy #can't parent BaseMagazineToyFoam cuz shotgun uses unique ones
+  suffix: Foam
+  components:
+    - type: BallisticAmmoProvider
+      proto: ShellShotgunFoam
+    - type: Sprite
+      layers:
+        - state: pellets
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-2 #SS220-FixAmmoSprite
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazineShotgunSlugFoam
+  parent: BaseMagazineShotgunToy #can't parent BaseMagazineToyFoam cuz shotgun uses unique ones
+  suffix: Foam
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunSlugFoam
+  - type: Sprite
+    layers:
+    - state: slug
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2 #SS220-FixAmmoSprite
+      map: ["enum.GunVisualLayers.Mag"]
+
+#revolver
+- type: entity
+  id: SpeedLoaderFoam
+  name: cap gun speedloader
+  parent: [ BaseMagazineToy, BaseSpeedLoaderCap ]
+  suffix: Foam
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeMagnumFoam
+  - type: Sprite
+    sprite: Objects/Fun/caps.rsi

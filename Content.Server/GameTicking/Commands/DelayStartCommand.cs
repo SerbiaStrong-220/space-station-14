@@ -1,6 +1,6 @@
-﻿using Content.Server.Administration;
+using Content.Server.Administration;
 using Content.Shared.Administration;
-using Content.Shared.CCVar;
+using Content.Shared.SS220.CCVars;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 
@@ -27,7 +27,7 @@ namespace Content.Server.GameTicking.Commands
             {
                 var paused = ticker.TogglePause();
                 var cfg = IoCManager.Resolve<IConfigurationManager>();
-                cfg.SetCVar(CCVars.DelayEnabled, paused);
+                cfg.SetCVar(CCVars220.DelayEnabled, paused);
                 shell.WriteLine(paused ? "Paused the countdown." : "Resumed the countdown.");
                 return;
             }

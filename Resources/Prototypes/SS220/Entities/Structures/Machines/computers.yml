@@ -70,3 +70,65 @@
       board: SalvageShuttleConsoleCircuitboard
     - type: StealTarget
       stealGroup: SalvageShuttleConsoleCircuitboard
+
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: ComputerPdaIdPainter
+  name: pda and id painter computer
+  description: pda and id painter computer
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Machines/pda_id_painter.rsi
+    snapCardinals: false
+    layers:
+    - state: default
+    - state: off
+      shader: unshaded
+      map: [ "leds" ]
+      visible: true
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        leds:
+          True: { state: on, visible: true }
+          False: { state: off, visible: true }
+  - type: PdaIdPainter
+    idCardSlot:
+      name: pda-id-painter-console-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - IdCard
+    pdaSlot:
+      name: pda-id-painter-console-pda
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - Pda
+  - type: AccessReader
+    access: [ [ "Command" ] ]
+  - type: ActivatableUI
+    key: enum.PdaIdPainterUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.PdaIdPainterUiKey.Key:
+        type: PdaIdPainterBoundUserInterface
+  - type: Machine
+    board: PdaIdPainterMachineCircuitboard
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      machine_parts: !type:Container
+      machine_board: !type:Container
+      id_painter_slot: !type:ContainerSlot
+      pda_painter_slot: !type:ContainerSlot
+  - type: Appearance
+  - type: ActivatableUIRequiresPower
+  - type: WiresPanel
+  - type: WiresVisuals

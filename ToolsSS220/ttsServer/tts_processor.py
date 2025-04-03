@@ -23,3 +23,11 @@ class tts_creator:
                              sample_rate=sample_rate)
         with open(audio_paths, 'rb') as f:
             return f.read()
+
+    def make_ogg(self, text, speaker, sample_rate):
+        audio_paths = self.model.save_wav(text=text,
+                        speaker=speaker,
+                        sample_rate=sample_rate)
+        AudioSegment.from_wav(audio_paths).export('result.ogg', format='ogg')
+        with open("result.ogg", 'rb') as f:
+            return f.read()

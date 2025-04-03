@@ -142,36 +142,52 @@
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Reptilian]
+# ss220-twocolored-tails-start
   sprites:
-  - sprite: Mobs/Customization/reptilian_parts.rsi
-    state: tail_large
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_large_primary
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_large_secondary
+# ss220-twocolored-tails-end
 
 - type: marking
   id: LizardTailSpikes
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Reptilian]
+# ss220-twocolored-tails-start
   sprites:
-  - sprite: Mobs/Customization/reptilian_parts.rsi
-    state: tail_spikes
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_spikes_primary
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_spikes_secondary
+# ss220-twocolored-tails-end
 
 - type: marking
   id: LizardTailLTiger
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Reptilian]
+# ss220-twocolored-tails-start
   sprites:
-  - sprite: Mobs/Customization/reptilian_parts.rsi
-    state: tail_ltiger
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_ltiger_primary
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_ltiger_secondary
+# ss220-twocolored-tails-end
 
 - type: marking
   id: LizardTailDTiger
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Reptilian]
+# ss220-twocolored-tails-start
   sprites:
-  - sprite: Mobs/Customization/reptilian_parts.rsi
-    state: tail_dtiger
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_dtiger_primary
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_dtiger_secondary
+# ss220-twocolored-tails-end
 
 - type: marking
   id: LizardSnoutRound
@@ -346,34 +362,47 @@
   markingCategory: Tail
   speciesRestriction: []
   sprites:
-    - sprite: Mobs/Customization/reptilian_parts.rsi
-      state: tail_smooth_wagging_primary
-    - sprite: Mobs/Customization/reptilian_parts.rsi
-      state: tail_smooth_wagging_secondary
+  - sprite: Mobs/Customization/reptilian_parts.rsi
+    state: tail_smooth_wagging_primary
+  - sprite: Mobs/Customization/reptilian_parts.rsi
+    state: tail_smooth_wagging_secondary
 
 - type: marking
   id: LizardTailSpikesAnimated
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: []
+# ss220-twocolored-tails-start
   sprites:
-    - sprite: Mobs/Customization/reptilian_parts.rsi
-      state: tail_spikes_wagging
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_spikes_wagging_primary
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_spikes_wagging_secondary
+# ss220-twocolored-tails-end
+
 
 - type: marking
   id: LizardTailLTigerAnimated
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: []
+# ss220-twocolored-tails-start
   sprites:
-    - sprite: Mobs/Customization/reptilian_parts.rsi
-      state: tail_ltiger_wagging
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_ltiger_wagging_primary
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_ltiger_wagging_secondary
+# ss220-twocolored-tails-end
 
 - type: marking
   id: LizardTailDTigerAnimated
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: []
+# ss220-twocolored-tails-start
   sprites:
-    - sprite: Mobs/Customization/reptilian_parts.rsi
-      state: tail_dtiger_wagging
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_dtiger_wagging_primary
+  - sprite: SS220/Mobs/Customization/reptilian.rsi
+    state: tail_dtiger_wagging_secondary
+# ss220-twocolored-tails-end

@@ -1,8 +1,198 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-# neck
+# Job Time
+- type: loadoutEffectGroup
+  id: BlueShieldTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
+- type: loadoutEffectGroup
+  id: BlueShieldFive
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 18000 # 5 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: BlueShieldTwenty
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 72000 # 20 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: BlueShieldFifty
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 180000 # 50 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: BlueShieldHundred
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 360000 # 100 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+# Head
+- type: loadout
+  id: BlueshieldBeret
+  equipment:
+    head: ClothingHeadBeretBlueshield
+
+- type: loadout
+  id: BlueshieldBlueBeret
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFive
+  equipment:
+    head: ClothingHeadHatBeretNavyBlue
+
+# Eyes
+- type: loadout
+  id: BlueshieldGlasses
+  equipment:
+    eyes: ClothingEyesBlueShieldGlasses
+
+- type: loadout
+  id: BlueshieldTacticGlasses
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFive
+  equipment:
+    eyes: ClothingEyesBlueShieldTacticGlasses
+
+# Jumpsuit
+- type: loadout
+  id: BlueShieldCombez
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldCombez
+
+- type: loadout
+  id: BlueShieldJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShield
+
+- type: loadout
+  id: BlueShieldJumpsuitOperative
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFive
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldOperative
+
+- type: loadout
+  id: BlueShieldJumpsuitShirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldTwenty
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldShirt
+
+- type: loadout
+  id: BlueShieldJumpsuitTShirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFifty
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldTShirt
+
+- type: loadout
+  id: BlueShieldJumpsuitCombat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldHundred
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldCombat
+
+- type: loadout
+  id: BlueShieldJumpsuitTurtle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldTurtle
+
+# neck
 - type: loadout
   id: BlueShieldNeckCloak
   equipment:
     neck: ClothingCloakBlueShield
+
+- type: loadout
+  id: ProtectGearBlue
+  equipment:
+    neck: ClothingNeckProtectBundleBlue
+
+# Outer clothing
+- type: loadout
+  id: BlueShieldArmorAssault
+  equipment:
+    outerClothing: ClothingOuterArmorBlueShieldAssault
+
+- type: loadout
+  id: BlueShieldArmorScale
+  equipment:
+    outerClothing: ClothingOuterArmorBlueShieldScale
+
+- type: loadout
+  id: BlueShieldOperativeCoat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFive
+  equipment:
+    outerClothing: ClothingOuterBSOCoat
+
+# Belt
+- type: loadout
+  id: BlueshieldBelt
+  equipment:
+    belt: ClothingBeltBlueShieldFilled
+
+- type: loadout
+  id: BlueshieldWebbing
+  equipment:
+    belt: ClothingBeltWebbingBlueShieldFilled
+
+# Back
+- type: loadout
+  id: BlueShieldBackpack
+  equipment:
+    back: ClothingBackpackBlueShield

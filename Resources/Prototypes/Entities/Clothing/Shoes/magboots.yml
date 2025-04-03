@@ -19,8 +19,7 @@
     sprite: Clothing/Shoes/Boots/magboots.rsi
   - type: ToggleClothing
     action: ActionToggleMagboots
-  - type: ToggleVerb
-    text: toggle-magboots-verb-get-data-text
+    mustEquip: false
   - type: ComponentToggler
     components:
     - type: NoSlip
@@ -63,6 +62,9 @@
     tags:
     - WhitelistChameleon
     - HighRiskItem
+  #ss220 pinpointer ui add start
+  - type: TrackedItem
+  #ss220 pinpointer ui add end
   - type: StaticPrice
     price: 750
   - type: StealTarget

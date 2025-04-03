@@ -1,0 +1,64 @@
+{
+  "copyright": "https://github.com/Aurorastation/Aurora.3/blob/bfc8945cb0f9519b52edbcfaf47778cedc3ac405/icons/obj/item/reagent_containers/food/drinks/soda.dmi, modified & inhand states sprited by Estkemran (Github) for SS220",
+  "license": "CC-BY-SA-3.0",
+  "size":
+  {
+    "x": 32,
+    "y": 32
+  },
+  "states":
+  [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon_open"
+    },
+    {
+      "name": "icon-1"
+    },
+    {
+      "name": "icon-2"
+    },
+    {
+      "name": "icon-3"
+    },
+    {
+      "name": "icon-4"
+    },
+    {
+      "name": "icon-5"
+    },
+    {
+      "name": "icon-6"
+    },
+    {
+      "name": "icon-7"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+	{
+      "name": "inhand-left-fill-1",
+      "directions": 4
+    },
+	{
+      "name": "inhand-left-fill-2",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+	{
+      "name": "inhand-right-fill-1",
+      "directions": 4
+    },
+	{
+      "name": "inhand-right-fill-2",
+      "directions": 4
+    }
+  ],
+  "version": 1
+}

@@ -14,7 +14,7 @@
     species:
     - Arachnid
     - Diona
-    - Dwarf
+    #- Dwarf #ss220 add beer can for dwarf survival kit
     - Felinid #ss220 box survival loadout felinid fix
     - Tajaran #SS220 Tajaran-add
     - Human

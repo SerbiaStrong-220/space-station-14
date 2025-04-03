@@ -5,6 +5,7 @@
   id: ClothingHeadHelmetTactical
   name: тактический шлем СБ
   description: Тактический шлем для самых элитных офицеров службы безопасности НТ.
+  suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Helmets/opscore.rsi

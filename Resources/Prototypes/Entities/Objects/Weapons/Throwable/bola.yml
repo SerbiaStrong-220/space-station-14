@@ -45,7 +45,8 @@
     breakoutTime: 3.5 #all bola should generally be fast to remove
     walkSpeed: 0.4 #SS220 bola buff
     sprintSpeed: 0.4 #SS220 bola buff
-    staminaDamage: 55 # Sudden weight increase sapping stamina
+    staminaDamage: 0 # anything but this is gamebreaking
     canThrowTrigger: true
     canMoveBreakout: true
+    maxEnsnares: 1
   - type: LandAtCursor

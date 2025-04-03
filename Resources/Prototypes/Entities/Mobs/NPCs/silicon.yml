@@ -167,6 +167,8 @@
     maxInterval: 12
     sound:
       collection: BikeHorn
+      params:
+        variation: 0.125
   - type: Sprite
     sprite: Mobs/Silicon/Bots/honkbot.rsi
     state: honkbot
@@ -203,6 +205,8 @@
     name: ghost-role-information-honkbot-name
     description: ghost-role-information-honkbot-description
     rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -211,6 +215,14 @@
     interactFailureString: petting-failure-honkbot
     interactSuccessSound:
       path: /Audio/Items/bikehorn.ogg
+      params:
+        variation: 0.125
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 Languages tweaks end
 
 - type: entity
   parent: MobHonkBot
@@ -221,6 +233,8 @@
   - type: SpamEmitSound
     sound:
       collection: CluwneHorn
+      params:
+        variation: 0.125
   - type: Sprite
     state: jonkbot
   - type: Construction
@@ -231,11 +245,15 @@
     name: ghost-role-information-jonkbot-name
     description: ghost-role-information-jonkbot-description
     rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
     raffle:
       settings: default
   - type: InteractionPopup
     interactSuccessSound:
       path: /Audio/Items/brokenbikehorn.ogg
+      params:
+        variation: 0.125
   - type: Vocal
     sounds:
       Unsexed: Cluwne
@@ -246,6 +264,12 @@
     totalIntensity: 10
     intensitySlope: 5
     canCreateVacuum: false
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 Languages tweaks end
 
 - type: entity
   parent: MobSiliconBase
@@ -254,7 +278,7 @@
   description: The creep of automation now threatening space janitors.
   components:
   - type: Sprite
-    sprite: Mobs/Silicon/Bots/cleanbot.rsi
+    sprite: SS220/Mobs/Silicon/Bots/cleanbot.rsi #SS220 Clean & Med Bot Resprite
     state: cleanbot
   - type: Construction
     graph: CleanBot
@@ -322,7 +346,7 @@
         reagent: SpaceDrugs
         quantity: 25
   - type: Sprite
-    sprite: Mobs/Silicon/Bots/medibot.rsi
+    sprite: SS220/Mobs/Silicon/Bots/medibot.rsi #SS220 Clean & Med Bot Resprite
     state: medibot
   - type: HTN
     rootTask:
@@ -340,6 +364,7 @@
     pack: MedibotAds
   - type: Inventory
     templateId: medibot
+  - type: DoAfter
 
 - type: entity
   parent:
@@ -363,6 +388,8 @@
     name: ghost-role-information-mimebot-name
     description: ghost-role-information-mimebot-description
     rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -371,6 +398,12 @@
     interactFailureString: petting-failure-mimebot
   - type: Inventory
     templateId: head
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+#SS220 Languages tweaks end
 
 - type: entity
   parent: MobSiliconBase
@@ -438,3 +471,9 @@
     channels:
     - Common
     - Supply
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 Languages tweaks end

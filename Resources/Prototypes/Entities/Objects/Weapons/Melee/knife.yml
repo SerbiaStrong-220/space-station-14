@@ -32,6 +32,11 @@
       - Slicing
     useSound:
       path: /Audio/Items/Culinary/chop.ogg
+# SS220 Throwable Changes begin
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+# SS220 Throwable Changes end
 
 - type: entity
   name: kitchen knife
@@ -52,6 +57,15 @@
     guides:
     - Chef
     - FoodRecipes
+# SS220 Throwable Changes begin
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 8
+# SS220 Throwable Changes end
 
 - type: entity
   name: butcher's cleaver
@@ -79,6 +93,15 @@
     guides:
     - Chef
     - FoodRecipes
+# SS220 Throwable Changes begin
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 11
+# SS220 Throwable Changes end
 
 - type: entity
   name: combat knife
@@ -90,8 +113,6 @@
     tags:
     - CombatKnife
     - Knife
-  - type: ThrowingAngle # SS220 BetterKnifes Update
-    angle: 225 # SS220 BetterKnifes Update
   - type: Sprite
     sprite: Objects/Weapons/Melee/combat_knife.rsi
     state: icon
@@ -103,6 +124,7 @@
         Slash: 12
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
   - type: LandAtCursor
   - type: DamageOtherOnHit
     damage:
@@ -110,8 +132,13 @@
         Slash: 10
   - type: Item
     sprite: Objects/Weapons/Melee/combat_knife.rsi
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/combat_knife.rsi
   - type: DisarmMalus
     malus: 0.225
+  - type: ThrowingAngle
+    angle: 225
 
 - type: entity
   name: survival knife
@@ -124,6 +151,9 @@
     state: icon
   - type: Item
     sprite: Objects/Weapons/Melee/survival_knife.rsi
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/survival_knife.rsi
 
 - type: entity
   name: kukri knife
@@ -141,6 +171,7 @@
         Slash: 15
   - type: Item
     sprite: Objects/Weapons/Melee/kukri_knife.rsi
+    storedSprite: null
 
 - type: entity
   parent: ClothingHeadHatGreyFlatcap
@@ -212,6 +243,14 @@
     sprite: Objects/Weapons/Melee/shiv.rsi
   - type: DisarmMalus
     malus: 0.225
+# SS220 Throwable Changes begin
+  - type: ThrowingAngle
+    angularVelocity: true # spins
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 4.5
+# SS220 Throwable Changes end
 
 - type: entity
   name: reinforced shiv
@@ -231,6 +270,12 @@
     sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/reinforced_shiv.rsi
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 6
+# SS220 Throwable Changes end
 
 - type: entity
   name: plasma shiv
@@ -250,6 +295,12 @@
     sprite: Objects/Weapons/Melee/plasma_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/plasma_shiv.rsi
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 7.5
+# SS220 Throwable Changes end
 
 - type: entity
   name: uranium shiv
@@ -270,12 +321,19 @@
     sprite: Objects/Weapons/Melee/uranium_shiv.rsi
   - type: Sprite
     sprite: Objects/Weapons/Melee/uranium_shiv.rsi
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 6
+        Radiation: 3
+# SS220 Throwable Changes end
 
 - type: entity
   name: throwing knife
   parent: [BaseKnife]
   id: ThrowingKnife
-  description: This bloodred knife is very aerodynamic and easy to throw, but good luck trying to fight someone hand-to-hand.
+  description: This blood-red knife is very aerodynamic and easy to throw, but good luck trying to fight someone hand-to-hand.
   components:
 # SS220 BetterKnifes Update begin
   - type: EmitSoundOnLand
@@ -319,6 +377,7 @@
         Slash: 5
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
   - type: LandAtCursor
   - type: DamageOtherOnHit
     ignoreResistances: true

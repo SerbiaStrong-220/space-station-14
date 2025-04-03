@@ -39,7 +39,7 @@
   description: A massive beast that uses long tentacles to ensnare its prey, threatening them is not advised under any conditions.
   components:
   - type: Sprite
-    sprite: Mobs/Aliens/Asteroid/goliath.rsi
+    sprite: SS220/Mobs/Aliens/Asteroid/goliath.rsi #SS220-goliathresprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: goliath
@@ -50,12 +50,12 @@
       Dead:
         Base: goliath_dead
   - type: MovementSpeedModifier
-    baseWalkSpeed : 2.50
-    baseSprintSpeed : 2.50
+    baseWalkSpeed : 2.00
+    baseSprintSpeed : 2.00
   - type: MobThresholds
     thresholds:
       0: Alive
-      300: Dead
+      250: Dead
   - type: MeleeWeapon
     soundHit:
       path: "/Audio/Weapons/smash.ogg"
@@ -64,7 +64,7 @@
     animation: WeaponArcPunch
     damage:
       types:
-        Slash: 15
+        Slash: 10
         Piercing: 10
   - type: NpcFactionMember
     factions:
@@ -90,6 +90,7 @@
     - id: FoodMeatGoliath
       amount: 3
     - id: MaterialGoliathHide1
+      amount: 3
 
 - type: entity
   id: ActionGoliathTentacle
@@ -99,11 +100,11 @@
   - type: EntityWorldTargetAction
     raiseOnUser: true
     icon:
-      sprite: Mobs/Aliens/Asteroid/goliath.rsi
-      state: goliath_tentacle_spawn
+      sprite: SS220/Interface/Actions/action_goliath.rsi #SS220-goliathresprite
+      state: goliath_tentacles #SS220-goliathresprite
     iconOn:
-      sprite: Mobs/Aliens/Asteroid/goliath.rsi
-      state: goliath_tentacle_wiggle
+      sprite: SS220/Interface/Actions/action_goliath.rsi #SS220-goliathresprite
+      state: goliath_tentacles_on #SS220-goliathresprite
     sound:
       path: "/Audio/Weapons/slash.ogg"
     event: !type:GoliathSummonTentacleAction
@@ -121,7 +122,7 @@
     canCollide: true
   - type: InteractionOutline
   - type: Sprite
-    sprite: Mobs/Aliens/Asteroid/goliath.rsi
+    sprite: SS220/Mobs/Aliens/Asteroid/goliath_tentacle.rsi #SS220-goliathresprite
     layers:
     - state: goliath_tentacle_wiggle
   - type: StunOnContact
@@ -156,10 +157,10 @@
     bodyType: Static
     canCollide: false
   - type: Sprite
-    sprite: Mobs/Aliens/Asteroid/goliath.rsi
+    sprite: SS220/Mobs/Aliens/Asteroid/goliath_tentacle.rsi #SS220-goliathresprite
   - type: InteractionOutline
   - type: TimedDespawn
-    lifetime: 0.7
+    lifetime: 0.6 #SS220-goliathresprite
 
 - type: entity
   id: EffectGoliathTentacleSpawn

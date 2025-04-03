@@ -33,6 +33,17 @@
       - id: BoxLightbulb
 
 - type: entity
+  id: CrateServiceHolidayLights
+  parent: CrateGenericSteel
+  name: holiday lights crate
+  description: Deck the halls with these festive holiday lights!
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxLighttubeHoliday
+      - id: BoxLighttubeHoliday
+
+- type: entity
   id: CrateMousetrapBoxes
   parent: CrateGenericSteel
   name: mousetraps crate
@@ -131,6 +142,7 @@
     - id: NewtonCradle
     - id: BoxEnvelope
     - id: DeviceCalculator # SS220 Calculator
+    - id: BrbSign
 
 - type: entity
   id: CrateServiceFaxMachine
@@ -186,7 +198,7 @@
       - id: BookMedicalReferenceBook
       - id: BookHowToSurvive
       - id: BookChemicalCompendium
-      - id: BookSpaceLaw
+      - id: BookSpaceLaws # SS220 Space Law Replace
 
 - type: entity
   id: CrateServiceSodaDispenser
@@ -267,6 +279,11 @@
   suffix: Filled
   parent: CrateTrashCart
   components:
+    #SS220 RatKing tweaks and changes start here
+    - type: RatKingRummageable
+      rummageLoot: RatKingLootTrashCans
+    - type: RegalRatSpawnLocation
+    #SS220 Ratking tweaks and changes end here
     - type: StorageFill
       contents:
           # Creatures

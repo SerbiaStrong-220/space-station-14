@@ -1,12 +1,20 @@
 - type: entity
-  parent: MagazineLightRifleBox # It goes in a saw, its funny.
+  parent: BaseMagazineLightRifleBoxToy #ss220 toys
   id: MagazineFoamBox
-  name: ammunition box (foam)
+  name: L6 SAW magazine box #ss220 toys
+  suffix: Foam #ss220 toys
   components:
   - type: BallisticAmmoProvider
     mayTransfer: true
     whitelist:
       tags:
         - BulletFoam
+        - CartridgeCap #ss220 toys
     proto: BulletFoam
     capacity: 100
+  #ss220 toys begin
+  - type: Tag
+    tags:
+      - MagazineLightRifleBoxToy
+      - MagazineLightRifleBox #idk, ima keep feature so it can fit in real L6
+  #ss220 toys end

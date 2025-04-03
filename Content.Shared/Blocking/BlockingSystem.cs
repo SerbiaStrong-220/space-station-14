@@ -7,6 +7,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
@@ -22,6 +23,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.Weapons.Reflect;
+using Content.Shared.Inventory.Events;
 
 namespace Content.Shared.Blocking;
 
@@ -48,6 +50,11 @@ public sealed partial class BlockingSystem : EntitySystem
         SubscribeLocalEvent<BlockingComponent, GotUnequippedHandEvent>(OnUnequip);
         SubscribeLocalEvent<BlockingComponent, DroppedEvent>(OnDrop);
 
+        // SS220 equip shield on back begin
+        SubscribeLocalEvent<BlockingComponent, GotEquippedEvent>(OnGotEquip);
+        SubscribeLocalEvent<BlockingComponent, GotUnequippedEvent>(OnGotUnequipped);
+        // SS220 equip shield on back end
+
         SubscribeLocalEvent<BlockingComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<BlockingComponent, ToggleActionEvent>(OnToggleAction);
 
@@ -55,7 +62,22 @@ public sealed partial class BlockingSystem : EntitySystem
 
         SubscribeLocalEvent<BlockingComponent, GetVerbsEvent<ExamineVerb>>(OnVerbExamine);
         SubscribeLocalEvent<BlockingComponent, MapInitEvent>(OnMapInit);
+
+        SubscribeLocalEvent<BlockingComponent, ItemToggledEvent>(OnToggleItem);
     }
+
+    //ss220 raise shield activated fix start
+    private void OnToggleItem(Entity<BlockingComponent> ent, ref ItemToggledEvent args)
+    {
+        if (ent.Comp.User == null)
+            return;
+
+        if (!args.Activated)
+        {
+            StopBlocking(ent.Owner, ent.Comp, ent.Comp.User.Value);
+        }
+    }
+    //ss220 raise shield activated fix end
 
     private void OnMapInit(EntityUid uid, BlockingComponent component, MapInitEvent args)
     {
@@ -76,6 +98,30 @@ public sealed partial class BlockingSystem : EntitySystem
             userComp.OriginalBodyType = physicsComponent.BodyType;
         }
     }
+
+    // SS220 equip shield on back begin
+    private void OnGotEquip(EntityUid uid, BlockingComponent component, GotEquippedEvent args)
+    {
+
+        if (!component.AvaliableSlots.ContainsKey(args.SlotFlags))
+            return;
+
+        component.User = args.Equipee;
+        Dirty(uid, component);
+
+        if (TryComp<PhysicsComponent>(args.Equipee, out var physicsComponent) && physicsComponent.BodyType != BodyType.Static)
+        {
+            var userComp = EnsureComp<BlockingUserComponent>(args.Equipee);
+            userComp.BlockingItem = uid;
+            userComp.OriginalBodyType = physicsComponent.BodyType;
+        }
+    }
+
+    private void OnGotUnequipped(EntityUid uid, BlockingComponent component, GotUnequippedEvent args)
+    {
+        StopBlockingHelper(uid, component, args.Equipee);
+    }
+    // SS220 equip shield on back end
 
     private void OnUnequip(EntityUid uid, BlockingComponent component, GotUnequippedHandEvent args)
     {

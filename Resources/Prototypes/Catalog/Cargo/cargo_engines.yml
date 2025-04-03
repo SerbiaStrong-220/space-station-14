@@ -29,9 +29,9 @@
   group: market
 
 - type: cargoProduct
-  name: "emitter crate"
+  #name: "emitter crate" #SS220 Translation // Haven't found a way to translate this without commenting it
   id: EngineSingularityEmitter
-  description: "Contains an emitter. Used only for dangerous applications."
+  #description: "Contains an emitter. Used only for dangerous applications." #SS220 Translation
   icon:
     sprite: Structures/Power/Generation/Singularity/emitter.rsi
     state: emitter # COrvax-Resprite
@@ -66,7 +66,7 @@
     sprite: Objects/Devices/flatpack.rsi
     state: solar-assembly-part
   product: CrateEngineeringSolar
-  cost: 525
+  cost: 1250
   category: cargoproduct-category-name-engineering
   group: market
 
@@ -93,7 +93,7 @@
 - type: cargoProduct
   id: EngineTeslaGroundingRod
   icon:
-    sprite: Structures/Power/Generation/Tesla/coil.rsi
+    sprite: SS220/Structures/Power/Generation/Tesla/coil.rsi #ss220-engineering-update-power
     state: grounding_rod
   product: CrateEngineeringTeslaGroundingRod
   cost: 400

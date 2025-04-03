@@ -5,6 +5,150 @@
   description: lmaoooo
   categories: [ HideSpawnMenu ]
   components:
-   - type: Tag
-     tags:
-       - MindSlave
+    - type: Tag
+      tags:
+      - MindSlave
+    - type: MindSlaveDisfunctionProvider
+      disfunction:
+        disfunction:
+          Initial:
+            - MindSlaveDisfunctionAccent
+          Progressive:
+            - WieldUnability
+          Terminal:
+            - LegsParalyzed
+        deadlyStageDamage:
+          types:
+              Poison: 4
+              Blunt: 6
+              Airloss: 4
+        progressionPopup: "mindslave-disfunction-progress-popup"
+    - type: HiddenDescription
+      entries:
+      - label: hidden-desc-MindSlaveImplant-medical
+        jobRequired:
+        - Paramedic
+        - MedicalDoctor
+        - SeniorPhysician
+        - ChiefMedicalOfficer
+        - Brigmedic
+      - label: hidden-desc-MindSlaveImplant-research
+        jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+      - label: hidden-desc-MindSlaveImplant-syndicate
+        whitelistMind:
+          mindRoles:
+          - TraitorRole
+          - NukeOperative
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: ThermalVisionImplant
+  name: thermal-vision implant
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SubdermalImplant
+      implantAction: ActionActivateThermalVision
+    - type: TriggerImplantAction
+    - type: ThermalVisionImplant
+    - type: Tag
+      tags:
+        - ThermalImplant
+    - type: HiddenDescription
+      entries:
+      - label: corvax-hidden-desc-IllegalImplants-medical
+        jobRequired:
+          - Paramedic
+          - MedicalDoctor
+          - SeniorPhysician
+          - ChiefMedicalOfficer
+          - Brigmedic
+      - label: hidden-desc-ThermalVisorImplanter-research
+        jobRequired:
+          - ResearchAssistant
+          - ResearchDirector
+          - Scientist
+          - Borg
+      - label: hidden-desc-ThermalGoogles-syndicate
+        whitelistMind:
+          mindRoles:
+            - TraitorRole
+            - NukeOperative
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: DnaCopyImplant
+  name: dna copy implant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    implantAction: ActionActivateDnaCopy
+  - type: TriggerImplantAction
+  - type: TransferIdentity
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-DnaCopyImplant-medical
+      jobRequired:
+      - Paramedic
+      - MedicalDoctor
+      - SeniorPhysician
+      - ChiefMedicalOfficer
+      - Brigmedic
+    - label: hidden-desc-DnaCopyImplant-research
+      jobRequired:
+      - ResearchAssistant
+      - ResearchDirector
+      - Scientist
+      - Borg
+    - label: hidden-desc-DnaCopyImplant-syndicate
+      whitelistMind:
+        mindRoles:
+        - TraitorRole
+        - NukeOperative
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: AdrenalImplant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    implantAction: ActionActivateAdrenalImplant
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 90
+        canReact: false
+        reagents:
+        - ReagentId: Rororium
+          Quantity: 1.5
+        - ReagentId: Ephedrine
+          Quantity: 15
+        - ReagentId: Ichor
+          Quantity: 30
+        - ReagentId: Epinephrine
+          Quantity: 28.5
+  - type: TriggerImplantAction
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-AdrenalImplant-medical
+      jobRequired:
+      - Paramedic
+      - MedicalDoctor
+      - SeniorPhysician
+      - ChiefMedicalOfficer
+      - Brigmedic
+    - label: hidden-desc-AdrenalImplant-research
+      jobRequired:
+      - ResearchAssistant
+      - ResearchDirector
+      - Scientist
+      - Borg
+    - label: hidden-desc-AdrenalImplant-syndicate
+      whitelistMind:
+        mindRoles:
+        - TraitorRole
+        - NukeOperative
+

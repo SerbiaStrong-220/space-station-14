@@ -27,6 +27,7 @@
   - BoxShotgunIncendiary
   - MagazineRifleIncendiary
   - MagazinePistolIncendiary
+  - MagazinePistolSubMachineGunIncendiary
   - MagazineLightRifleIncendiary
   - SpeedLoaderMagnumIncendiary
   - MagazineShotgunIncendiary
@@ -34,6 +35,10 @@
   - MagazineBoxMagnumIncendiary
   - MagazineBoxLightRifleIncendiary
   - MagazineBoxRifleIncendiary
+  #ss220 more recipies begin
+  - MagazineMagnumIncendiary
+  - MagazinePistolSubMachineGunIncendiary
+  #ss220 more recipies begin
 
 - type: technology
   id: WeaponizedLaserManipulation
@@ -43,7 +48,7 @@
     state: icon
   discipline: Arsenal
   tier: 1
-  cost: 7500
+  cost: 10000 # ss220ttkUpdate
   recipeUnlocks:
   - WeaponLaserCarbine
 
@@ -74,6 +79,7 @@
   recipeUnlocks:
   - MagazineRifleUranium
   - MagazinePistolUranium
+  - MagazinePistolSubMachineGunUranium
   - MagazineLightRifleUranium
   - SpeedLoaderMagnumUranium
   - MagazineBoxPistolUranium
@@ -81,6 +87,10 @@
   - MagazineBoxLightRifleUranium
   - MagazineBoxRifleUranium
   - BoxShotgunUranium
+  #ss220 more recipies begin
+  - MagazineMagnumUranium
+  - MagazinePistolSubMachineGunUranium
+  #ss220 more recipies end
 
 - type: technology
   id: AdvancedRiotControl

@@ -1,0 +1,59 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: gameMap
+  id: CookingEventMap
+  mapName: 'Cooking Event'
+  mapPath: /Maps/SS220/EventMaps/CookingEventMap.yml
+  minPlayers: 0
+  stations:
+    CookingEventMap:
+      stationProto: StandardCEStation
+      components:
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_axioma.yml
+        - type: StationNameSetup
+          mapNameTemplate: 'Кулинарная битва'
+        - type: StationJobs
+          availableJobs:
+            Passenger: [ -1, -1 ]
+            #Command
+            Captain: [ 1, 1 ]
+            BlueShield: [ 1, 1 ]
+            HeadOfPersonnel: [ 1, 1 ]
+            Magistrate: [ 1, 1 ]
+            #Security
+            HeadOfSecurity: [ 1, 1 ]
+            Warden: [ 1, 1 ]
+            SeniorOfficer: [ 1, 1]
+            SecurityOfficer: [ 8, 8 ]
+            SecurityCadet: [ 2, 2 ]
+            Brigmedic: [ 1, 1 ]
+            #Engineering
+            ChiefEngineer: [ 1, 1 ]
+            StationEngineer: [ 4, 4 ]
+            AtmosphericTechnician: [ 2, 2 ]
+            #Cargo
+            Quartermaster: [ 1, 1 ]
+            #Medical
+            ChiefMedicalOfficer: [ 1, 1 ]
+            SeniorPhysician: [ 1, 1]
+            MedicalDoctor: [ 7, 7 ]
+            Paramedic: [ 1, 1 ]
+            #Science
+            ResearchDirector: [ 1, 1 ]
+            #Service
+            Bartender: [ 2, 2 ]
+            Chef: [ 50, 50 ]
+            Clown: [ 1, 1 ]
+            Janitor: [ 2, 2 ]
+            Mime: [ 1, 1 ]
+            Chaplain: [ 1, 1 ]
+            Musician: [ 1, 1 ]
+            Reporter: [ 5, 5 ]
+
+- type: entity
+  id: StandardCEStation
+  parent:
+    - StandardNanotrasenStation
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Transform

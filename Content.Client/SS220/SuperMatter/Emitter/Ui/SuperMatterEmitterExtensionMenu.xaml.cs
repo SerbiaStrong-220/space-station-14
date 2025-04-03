@@ -13,7 +13,10 @@ namespace Content.Client.SS220.SuperMatter.Emitter.Ui;
 public sealed partial class SuperMatterEmitterExtensionMenu : FancyWindow
 {
     [Dependency] ILocalizationManager _localization = default!;
+
     public event Action<BaseButton.ButtonEventArgs, int, int>? OnSubmitButtonPressed;
+    public event Action<BaseButton.ButtonEventArgs>? OnEmitterActivatePressed;
+
     public SuperMatterEmitterExtensionMenu()
     {
         IoCManager.InjectDependencies(this);
@@ -25,6 +28,11 @@ public sealed partial class SuperMatterEmitterExtensionMenu : FancyWindow
             OnSubmitButtonPressed?.Invoke(args, PowerConsumptionSpinBox.Value, MatterToEnergyRatioSlider.Value);
             ChangeApplyState(ApplyButtonStateEnum.ChangesSaved);
         };
+        EmitterActivationButton.OnPressed += args =>
+        {
+            OnEmitterActivatePressed?.Invoke(args);
+
+        };
     }
     public void SetEmitterParams(int? ratio, int? power)
     {
@@ -33,6 +41,20 @@ public sealed partial class SuperMatterEmitterExtensionMenu : FancyWindow
         if (power != null)
             PowerConsumptionSpinBox.Value = power.Value;
         ChangeApplyState(ApplyButtonStateEnum.ChangesSaved);
+    }
+    public void ChangeActivationState(ActivationStateEnum state)
+    {
+        switch (state)
+        {
+            case ActivationStateEnum.EmitterActivated:
+                ChangeButtonLabelColor(EmitterActivationButton, Color.LimeGreen);
+                EmitterActivationButton.Text = _localization.GetString("supermatter-emitter-extension-activated-emitter");
+                break;
+            case ActivationStateEnum.EmitterDeactivated:
+                ChangeButtonLabelColor(EmitterActivationButton, Color.OrangeRed);
+                EmitterActivationButton.Text = _localization.GetString("supermatter-emitter-extension-deactivated-emitter");
+                break;
+        }
     }
 
     private void InitPowerConsumptionSpinBox()
@@ -43,8 +65,9 @@ public sealed partial class SuperMatterEmitterExtensionMenu : FancyWindow
             if (child.GetType() == typeof(LineEdit))
                 child.MinSize = new Vector2(60, 0);
         }
-        PowerConsumptionSpinBox.AddLeftButton(-100, "-100");
+
         PowerConsumptionSpinBox.AddLeftButton(-500, "-500");
+        PowerConsumptionSpinBox.AddLeftButton(-100, "-100");
         PowerConsumptionSpinBox.AddRightButton(100, "+100");
         PowerConsumptionSpinBox.AddRightButton(500, "+500");
         PowerConsumptionSpinBox.IsValid = PowerConsumptionValidate;
@@ -76,20 +99,20 @@ public sealed partial class SuperMatterEmitterExtensionMenu : FancyWindow
         switch (state)
         {
             case ApplyButtonStateEnum.ChangesSaved:
-                ChangeButtonLabelColor(Color.LightGreen);
+                ChangeButtonLabelColor(SubmitButton, Color.LightGreen);
                 SubmitDescription.Text = _localization.GetString("supermatter-emitter-extension-changes-saved");
                 SubmitDescription.FontColorOverride = Color.LightGreen;
                 break;
             case ApplyButtonStateEnum.ChangesNotSaved:
-                ChangeButtonLabelColor(Color.Orange);
+                ChangeButtonLabelColor(SubmitButton, Color.Orange);
                 SubmitDescription.Text = _localization.GetString("supermatter-emitter-extension-changes-unsaved");
                 SubmitDescription.FontColorOverride = Color.Orange;
                 break;
         }
     }
-    private void ChangeButtonLabelColor(Color color)
+    private void ChangeButtonLabelColor(Button button, Color color)
     {
-        SubmitButton.Label.FontColorOverride = color;
+        button.Label.FontColorOverride = color;
     }
     private void ChangeSliderLabels()
     {
@@ -104,4 +127,10 @@ public sealed partial class SuperMatterEmitterExtensionMenu : FancyWindow
         ChangesSaved,
         ChangesNotSaved
     }
+}
+
+public enum ActivationStateEnum
+{
+    EmitterActivated,
+    EmitterDeactivated
 }

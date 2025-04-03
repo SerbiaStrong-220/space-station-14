@@ -48,9 +48,7 @@
         Blunt: 7
     bluntStaminaDamageFactor: 2.0
     angle: 60
-    animation: WeaponArcSlash
-    soundHit:
-      path: /Audio/Weapons/egloves.ogg
+    animation: WeaponArcThrust
   - type: StaminaDamageOnHit
     damage: 0
     sound: /Audio/Weapons/egloves.ogg
@@ -79,7 +77,13 @@
     damage:
       types:
         Blunt: 7
+        # Stamina: 55 #ss220 stunbaton fix
+  #ss220 stunbaton fix start
+  - type: ItemToggleDamageOtherOnHit
+    activatedDamage:
+      types:
         Stamina: 55
+  #ss220 stunbaton fix end
   - type: LandAtCursor # it deals stamina damage when thrown
   - type: Battery
     maxCharge: 1000

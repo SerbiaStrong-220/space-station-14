@@ -1,0 +1,27 @@
+- type: entity
+  parent: CrateGeneric
+  id: TrashBin
+  name: trash bin
+  description: Beautiful metal trash storage bin.
+  components:
+  - type: Icon
+    sprite: SS220/Structures/Storage/trash_bin.rsi
+  - type: Sprite
+    sprite: SS220/Structures/Storage/trash_bin.rsi
+    offset: 0, 0
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.45,0.22,0.20"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer    

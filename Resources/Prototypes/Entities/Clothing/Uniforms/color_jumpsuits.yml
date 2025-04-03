@@ -496,6 +496,7 @@
   id: ClothingUniformColorRainbow
   name: rainbow jumpsuit
   description: A multi-colored jumpsuit!
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/rainbow.rsi

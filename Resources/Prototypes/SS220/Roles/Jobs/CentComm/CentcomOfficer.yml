@@ -34,7 +34,7 @@
 
 - type: job
   id: CentcommOfficer
-  name: job-name-centcomoff
+  name: job-name-cc-oficier
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentCommOfficerGear
@@ -45,6 +45,11 @@
   radioBold: true
   accessGroups:
   - AllAccess
+  access:
+  - CentralCommand
+  - CentralCommandERT
+  - CentralCommandBSO
+  - CentralCommandCBURN
 
 - type: startingGear
   id: CentCommOfficerGear

@@ -16,6 +16,7 @@
   id: ClothingUniformJumpskirtParamedicTurtleneck
   name: paramedic turtleneck
   description: A reliable and comfortable choice for rescuers, it provides protection from cold and moisture during rescue operations.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/paramedic_turtle.rsi
@@ -27,6 +28,7 @@
   id: ClothingUniformJumpskirtAtmosphericTechnicianTurtleneck
   name: atmospheric technician turtle
   description: Built to withstand high humidity and temperature extremes, ideal for professionals in the atmospheric research industry.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/atmospheric_technician_turtle.rsi
@@ -42,6 +44,7 @@
   id: ClothingUniformJumpskirtChemistTurtleneck
   name: chemist turtle
   description: Specially designed for safe handling of chemicals, provides reliable protection from harmful substances and keeps the user safe.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/chemist_turtle.rsi
@@ -57,6 +60,7 @@
   id: ClothingUniformJumpskirtBrigmedicTurtleneck
   name: brigmedic turtleneck
   description: A brigmedic turtleneck.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_turtle.rsi

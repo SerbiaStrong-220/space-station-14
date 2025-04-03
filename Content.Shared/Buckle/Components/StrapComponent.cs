@@ -106,6 +106,14 @@ public sealed partial class StrapComponent : Component
     /// </summary>
     [DataField]
     public bool BuckleOnInteractHand = true;
+
+    // SS220 Add uncuff time modifier when buckled begin
+    /// <summary>
+    /// A modifier that affects the time of uncuff when the entity is buckled on the strap.
+    /// </summary>
+    [DataField]
+    public float UncuffTimeModifier = 1f;
+    // SS220 Add uncuff time modifier when buckled end
 }
 
 public enum StrapPosition

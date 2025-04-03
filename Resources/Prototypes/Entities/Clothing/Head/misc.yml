@@ -91,6 +91,7 @@
   id: ClothingHeadMirror
   name: head mirror
   description: I doubt even the CMO knows how to use this thing.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Clothing/Head/Misc/head_mirror.rsi
@@ -164,9 +165,9 @@
   description: It smells like dead rat. Lets you speak like one!
   components:
   - type: Sprite
-    sprite: Clothing/Head/Misc/fancycrown.rsi
+    sprite: SS220/Clothing/Head/Misc/fancycrown.rsi #SS220 resprited
   - type: Clothing
-    sprite: Clothing/Head/Misc/fancycrown.rsi
+    sprite: SS220/Clothing/Head/Misc/fancycrown.rsi #SS220 resprited
   - type: MobPrice
     price: 3000
   - type: AddAccentClothing

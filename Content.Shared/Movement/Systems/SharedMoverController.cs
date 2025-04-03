@@ -9,6 +9,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -66,6 +67,7 @@ public abstract partial class SharedMoverController : VirtualController
     private float _stopSpeed;
 
     private bool _relativeMovement;
+    private bool _lessSound; // SS220 Performance-test
 
     /// <summary>
     /// Cache the mob movement calculation to re-use elsewhere.
@@ -93,6 +95,7 @@ public abstract partial class SharedMoverController : VirtualController
         InitializeRelay();
         Subs.CVar(_configManager, CCVars.RelativeMovement, value => _relativeMovement = value, true);
         Subs.CVar(_configManager, CCVars.StopSpeed, value => _stopSpeed = value, true);
+        Subs.CVar(_configManager, CCVars220.LessSoundSources, value => _lessSound = value, true); // SS220 performance-test
         UpdatesBefore.Add(typeof(TileFrictionController));
     }
 
@@ -401,7 +404,8 @@ public abstract partial class SharedMoverController : VirtualController
     {
         sound = null;
 
-        if (!CanSound() || !_tags.HasTag(uid, "FootstepSound"))
+        // if (!CanSound() || !_tags.HasTag(uid, "FootstepSound") // SS220 performance test
+        if (!CanSound() || !_tags.HasTag(uid, "FootstepSound") || _lessSound) // SS220 performance test
             return false;
 
         var coordinates = xform.Coordinates;
@@ -439,14 +443,14 @@ public abstract partial class SharedMoverController : VirtualController
         if (FootstepModifierQuery.TryComp(uid, out var moverModifier))
         {
             sound = moverModifier.FootstepSoundCollection;
-            return true;
+            return sound != null;
         }
 
         if (_inventory.TryGetSlotEntity(uid, "shoes", out var shoes) &&
             FootstepModifierQuery.TryComp(shoes, out var modifier))
         {
             sound = modifier.FootstepSoundCollection;
-            return true;
+            return sound != null;
         }
 
         return TryGetFootstepSound(uid, xform, shoes != null, out sound, tileDef: tileDef);
@@ -467,10 +471,9 @@ public abstract partial class SharedMoverController : VirtualController
             if (FootstepModifierQuery.TryComp(xform.MapUid, out var modifier))
             {
                 sound = modifier.FootstepSoundCollection;
-                return true;
             }
 
-            return false;
+            return sound != null;
         }
 
         var position = grid.LocalToTile(xform.Coordinates);
@@ -493,7 +496,7 @@ public abstract partial class SharedMoverController : VirtualController
             if (FootstepModifierQuery.TryComp(maybeFootstep, out var footstep))
             {
                 sound = footstep.FootstepSoundCollection;
-                return true;
+                return sound != null;
             }
         }
 

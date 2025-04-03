@@ -9,3 +9,57 @@
       itemIconStyle: NoItem
       useDelay: 1 # emote spam
       event: !type:ToggleActionEvent
+
+- type: entity
+  id: ActionGoal
+  name: Goal!
+  description: Gooooooooal!
+  components:
+  - type: InstantAction
+    useDelay: 20
+    icon: { sprite: SS220/Interface/Actions/actions_meme.rsi, state: goal }
+    event: !type:ShoutActionEvent
+      shoutSound:
+        collection: WyccGoalShout
+      shoutPhrases: GoalPhrases
+
+- type: entity
+  id: ActionActivateDnaCopy
+  name: Dna Copy Implant
+  components:
+  - type: InstantAction
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: /Textures/SS220/Interface/Actions/implants.rsi
+      state: dna-copy
+    event: !type:UseDnaCopyImplantEvent
+
+- type: entity
+  id: ActionActivateAdrenalImplant
+  components:
+  - type: InstantAction
+    charges: 3
+    timeBetweenCharges: 30 #30 seconds delay
+    checkCanInteract: false
+    checkConsciousness: false
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: /Textures/SS220/Interface/Actions/implants.rsi
+      state: adrenal
+    event: !type:UseAdrenalImplantEvent
+
+- type: entity
+  id: ActionActivateThermalVision
+  name: Переключить термальные сенсоры
+  description: Переключает термальные сенсоры в импланте владельца, что позволяет видеть живых существ сквозь преграды в ограниченном радиусе.
+  components:
+  - type: InstantAction
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: /Textures/SS220/Interface/Actions/implants_cla.rsi
+      state: EyeON
+    event: !type:UseThermalVisionEvent
+    useDelay: 1

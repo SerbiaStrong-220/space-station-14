@@ -7,7 +7,7 @@
   parent: ClothingSponsorNeckBase
   id: ClothingSponsorNeckParadise
   name: накидка причастия
-  description: Вручается избранным, удостоенных уникального места в этом мире.
+  description: Вручается избранным, удостоенным уникального места в этом мире.
   suffix: Sponsor Neck
   components:
   - type: Sprite
@@ -95,6 +95,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/administrator.rsi
 
+- type: entity
+  parent: ClothingSponsorNeckOtherShoulderBase
+  id: ClothingSponsorNeckMentor
+  name: плащ наставления
+  description: Особенный плащ, вручаемый учителям, неустанно направляющим избранных на их нелегком пути.
+  suffix: Sponsor Neck, Mentor
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/mentor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/mentor.rsi
+
 # Moderator
 - type: entity
   parent: ClothingSponsorNeckBase
@@ -108,6 +120,27 @@
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/moder.rsi
 
+ # Для викиредов
+- type: entity
+  parent: ClothingSponsorNeckBase
+  id: ClothingSponsorNeckWikiEditors
+  name: плащ познания
+  description: Особый плащ, предоставленный первым, кто вообразил и сочинил правила нашего мира.
+  suffix: Sponsor Neck, Wikired
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/wikicloak.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/wikicloak.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatWikiCloak
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+
 # Разное
 - type: entity
   parent: ClothingNeckBase
@@ -117,7 +150,7 @@
   suffix: Sponsor # А точно ли он спонсор?
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Cloaks/FloppaCloak.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/floppa.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatFloppa
     requiredSlot:

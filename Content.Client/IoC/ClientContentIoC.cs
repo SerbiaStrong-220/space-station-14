@@ -8,6 +8,7 @@ using Content.Client.Corvax.Sponsors;
 using Content.Client.DebugMon;
 using Content.Client.Eui;
 using Content.Client.Fullscreen;
+using Content.Client.GameTicking.Managers;
 using Content.Client.GhostKick;
 using Content.Client.Guidebook;
 using Content.Client.Launcher;
@@ -27,6 +28,7 @@ using Content.Client.SS220.Discord;
 using Content.Shared.Chat;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
+using Content.Client.SS220.TTS;
 
 namespace Content.Client.IoC
 {
@@ -65,6 +67,8 @@ namespace Content.Client.IoC
             collection.Register<DebugMonitorManager>();
             collection.Register<PlayerRateLimitManager>();
             collection.Register<SharedPlayerRateLimitManager, PlayerRateLimitManager>();
+            collection.Register<TitleWindowManager>();
+            collection.Register<TTSManager>(); // SS220 TTS
         }
     }
 }

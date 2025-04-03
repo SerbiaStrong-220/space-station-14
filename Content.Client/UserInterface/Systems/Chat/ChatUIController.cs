@@ -844,7 +844,8 @@ public sealed class ChatUIController : UIController
             }
         }
         //ss220 highlight words start
-        var popupHighlight = UIManager.ActiveScreen?.GetWidget<ChatBox>()?.ChatInput.HighlightButton.Popup;
+        var popupHighlight = UIManager.ActiveScreen?.GetWidget<ChatBox>()?.ChatInput.HighlightButton.Popup
+                             ?? UIManager.ActiveScreen?.GetWidget<ResizableChatBox>()?.ChatInput.HighlightButton.Popup;
 
         if (popupHighlight?.Words != null)
         {

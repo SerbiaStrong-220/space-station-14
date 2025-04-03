@@ -8,10 +8,10 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Shoes/Boots/magboots-ussp.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Shoes/Boots/magboots-ussp.rsi
     state: icon
   - type: Clothing
-    sprite: SS220/Clothing/Shoes/Boots/magboots-ussp.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Shoes/Boots/magboots-ussp.rsi
   - type: Magboots
   - type: ClothingSpeedModifier
     walkModifier: 1.1
@@ -26,8 +26,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
-    icon: { sprite: /Textures/SS220/Clothing/Shoes/Boots/magboots-ussp.rsi, state: icon }
-    iconOn: /Textures/SS220/Clothing/Shoes/Boots/magboots-ussp.rsi/icon-on.png
+    icon: { sprite: /Textures/SS220/Shitspawn/FractWarEbent/Clothing/Shoes/Boots/magboots-ussp.rsi, state: icon }
+    iconOn: /Textures/SS220/Shitspawn/FractWarEbent/Clothing/Shoes/Boots/magboots-ussp.rsi/icon-on.png
 
 - type: entity
   parent: ClothingBackpack
@@ -37,7 +37,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Back/Backpacks/ussp.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Back/Backpacks/ussp.rsi
   - type: Storage
     grid:
     - 0,0,12,3
@@ -52,9 +52,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Mask/ussp-gas-mask.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Mask/ussp-gas-mask.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Mask/ussp-gas-mask.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Mask/ussp-gas-mask.rsi
   - type: FlashImmunity
   - type: EyeProtection
   #ss220 special_sounds start
@@ -74,9 +74,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Mundir.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Uniforms/Jumpsuit/mundir.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Mundir.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Uniforms/Jumpsuit/mundir.rsi
 
 - type: entity
   parent: UnsensoredClothingUniformBase
@@ -86,9 +86,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/OfficerMundir.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Uniforms/Jumpsuit/officer_mundir.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/OfficerMundir.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Uniforms/Jumpsuit//officer_mundir.rsi
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -98,9 +98,9 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/shinel.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Coats/shinel.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Coats/shinel.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/OuterClothing/Coats/shinel.rsi
   - type: TemperatureProtection
     heatingCoefficient: 0.1
     coolingCoefficient: 0.1
@@ -120,9 +120,9 @@
     - USSPChannel
     defaultChannel: USSPChannel
   - type: Item
-    sprite: SS220/Objects/Devices/ussp_encrypt_keys.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Devices/ussp_encrypt_keys.rsi
   - type: Sprite
-    sprite: SS220/Objects/Devices/ussp_encrypt_keys.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Devices/ussp_encrypt_keys.rsi
     layers:
     - state: crypt_ussp
     - state: ussp_label
@@ -140,9 +140,9 @@
       - EncryptionKeyUSSP
       - EncryptionKeyCommon
   - type: Sprite
-    sprite: SS220/Clothing/Ears/Headsets/ussp_headset.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Ears/Headsets/ussp_headset.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Ears/Headsets/ussp_headset.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Ears/Headsets/ussp_headset.rsi
 
 - type: entity
   name: гипоспрей СССП
@@ -178,7 +178,11 @@
   components:
   - type: Pda
     id: UsspIDCard
-    state: pda-ussp
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-ussp
   - type: PdaBorderColor
     borderColor: "#A91417"
   - type: Icon
@@ -205,7 +209,11 @@
   components:
   - type: Pda
     id: UsspIDCard
-    state: pda-ussp-medical
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-ussp-medical
   - type: PdaBorderColor
     borderColor: "#A91417"
     accentVColor: "#447987"
@@ -218,18 +226,11 @@
   - type: GuideHelp
     guides:
     - Medical Doctor
-
-- type: entity
-  parent: UnsensoredClothingUniformBase
-  id: ClothingUniformJumpsuitUssp
-  name: униформа СССП
-  description: Форма, пропитанная кровью, потом и ненавистью к капитализму.
-  suffix: Shitspawn, Ebent, FractWar
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Uniforms/ussp_uniform.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Uniforms/ussp_uniform.rsi
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: ClothingBeltUsspWebbing
@@ -244,6 +245,9 @@
     - id: Stimpack
     - id: DnaScramblerImplanter
     - id: ExGrenade
+    - id: WeaponFlareGun
+    - id: ShellShotgunFlare
+      amount: 2
 
 - type: entity
   name: рюкзак СССП
@@ -262,6 +266,7 @@
       - id: WeaponSubMachineGunUssp_PPSh
       - id: EnergyHammer
       - id: EnergySickle
+      - id: Tourniquet
 
 - type: entity
   id: BedsheetUSSP
@@ -273,4 +278,4 @@
   - type: Sprite
     state: sheetUSSP
   - type: Clothing
-    sprite: SS220/Clothing/Neck/Bedsheets/USSP.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Clothing/Neck/Bedsheets/ussp.rsi

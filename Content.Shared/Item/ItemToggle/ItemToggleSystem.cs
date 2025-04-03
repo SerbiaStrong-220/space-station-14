@@ -21,7 +21,7 @@ namespace Content.Shared.Item.ItemToggle;
 public sealed class ItemToggleSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly WieldableSystem _wieldable = default!;//SS220 double_esword-fix
+    [Dependency] private readonly SharedWieldableSystem _wieldable = default!; //SS220 double_esword-fix
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -80,7 +80,7 @@ public sealed class ItemToggleSystem : EntitySystem
 
         args.Verbs.Add(new ActivationVerb()
         {
-            Text = !ent.Comp.Activated ? Loc.GetString("item-toggle-activate") : Loc.GetString("item-toggle-deactivate"),
+            Text = !ent.Comp.Activated ? Loc.GetString(ent.Comp.VerbToggleOn) : Loc.GetString(ent.Comp.VerbToggleOff),
             Act = () =>
             {
                 Toggle((ent.Owner, ent.Comp), user, predicted: ent.Comp.Predictable);

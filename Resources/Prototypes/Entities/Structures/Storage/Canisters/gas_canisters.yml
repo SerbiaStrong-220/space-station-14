@@ -9,14 +9,14 @@
     - type: Transform
       noRot: true
     - type: Sprite
-      sprite: Structures/Storage/canister.rsi
+      sprite: SS220/Structures/Storage/canister.rsi #ss220-engineering-update-atmosgase
       noRot: true
       layers:
         - state: grey
     - type: Appearance
     - type: GenericVisualizer
       visuals:
-        enum.GasPortableVisuals.ConnectedState:
+        enum.AnchorVisuals.Anchored:
           connectedToPort:
             False: { state: can-connector, visible: false }
             True: { state: can-connector, visible: true }
@@ -104,6 +104,9 @@
       access: [["Atmospherics"], ["Engineering"], ["Research"]]
     - type: Lock
       locked: false
+    - type: GuideHelp
+      guides:
+      - GasCanisters
 
 - type: entity
   parent: GasCanister
@@ -673,7 +676,7 @@
       damageModifierSet: Metallic
     - type: InteractionOutline
     - type: Sprite
-      sprite: Structures/Storage/canister.rsi
+      sprite: SS220/Structures/Storage/canister.rsi #ss220-engineering-update-atmosgase
       state: grey-1
     - type: Physics
       bodyType: Dynamic

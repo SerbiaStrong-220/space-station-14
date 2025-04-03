@@ -4,8 +4,7 @@
   id: Axioma
   mapName: 'NSS Axioma'
   mapPath: /Maps/SS220/axioma.yml
-  minPlayers: 30
-  maxPlayers: 85
+  minPlayers: 45
   stations:
     Axioma:
       stationProto: AxiomaNanotrasenStation
@@ -59,6 +58,7 @@
             Scientist: [ 8, 8 ]
             ResearchAssistant: [ 6, 6 ]
             Borg: [ 3, 3 ]
+            StationAi: [ 1, 1 ]
             #Service
             SeniorService: [ 1, 1]
             Bartender: [ 2, 2 ]

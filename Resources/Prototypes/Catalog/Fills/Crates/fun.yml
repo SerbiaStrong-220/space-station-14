@@ -7,6 +7,10 @@
       weight: 0.5
     - id: PlushieRatvar
       weight: 0.5
+      #SS220-PlushieMiGo-begin
+    - id: PlushieMigo #SS220
+      weight: 0.15
+      #SS220-PlushieMiGo-end
     - id: PlushieNuke
     - id: PlushieSlime
     - id: PlushieSnake
@@ -16,6 +20,8 @@
         weight: 9
       - id: PlushieSpaceLizard
         weight: 1
+      - id: PlushieLizardInversed
+        weight: 0.5
     - !type:GroupSelector
       children:
       - id: PlushieCarp
@@ -213,7 +219,7 @@
 
 - type: entity
   id: CrateFunSadTromboneImplants
-  parent: CrateGenericSteel
+  parent: [ CrateMedicalSecureImplant ] #SS220 The implants are in new crates
   name: sad trombone implants
   description: Death's never been so fun before! Implant these to make dying a bit more happy.
   components:
@@ -224,7 +230,7 @@
 
 - type: entity
   id: CrateFunLightImplants
-  parent: CrateGenericSteel
+  parent: [ CrateMedicalSecureImplant ] #SS220 The implants are in new crates
   name: light implants
   description: Light up your skin with these implants!
   components:
@@ -335,10 +341,14 @@
       - id: BeachBall
       - id: ClothingShoesSkates
       - id: RubberChicken
+      #ss220 toys begin
+      - id: BoxCartridgeCap
+      - id: BoxDonkSoftBox
+      #ss220 toys end
 
 - type: entity
   id: CrateFunBikeHornImplants
-  parent: CrateGenericSteel
+  parent: [ CrateMedicalSecureImplant ] #SS220 The implants are in new crates
   name: bike horn implants
   description: A thousand honks a day keeps security officers away!
   components:
