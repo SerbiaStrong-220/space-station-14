@@ -151,7 +151,7 @@
       types:
         Blunt: 7
     bluntStaminaDamageFactor: 2.0
-    angle: 60
+    mustBeEquippedToUse: true
   - type: StaminaDamageOnHit
     damage: 0
     sound: /Audio/Weapons/egloves.ogg
