@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.DeviceLinking;
 using Robust.Shared.Audio;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.ElectricalChair;
 
@@ -29,12 +29,12 @@ public sealed partial class ElectricalChairComponent : Component
     [DataField]
     public float ShockVolume = 20;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
-    public string TogglePort = "Toggle";
+    [DataField]
+    public ProtoId<SinkPortPrototype> TogglePort = "Toggle";
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
-    public string OnPort = "On";
+    [DataField]
+    public ProtoId<SinkPortPrototype> OnPort = "On";
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
-    public string OffPort = "Off";
+    [DataField]
+    public ProtoId<SinkPortPrototype> OffPort = "Off";
 }
