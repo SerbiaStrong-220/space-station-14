@@ -85,11 +85,13 @@ public sealed partial class RevenantSystem : EntitySystem
             _visibility.RefreshVisibility(uid, visibility);
         }
 
-        //ghost vision
-        if (TryComp(uid, out EyeComponent? eye))
-        {
-            _eye.SetVisibilityMask(uid, eye.VisibilityMask | (int) (VisibilityFlags.Ghost), eye);
-        }
+        // SS220-Revenant dont see ghosts-begin
+        // // ghost vision
+        // if (TryComp(uid, out EyeComponent? eye))
+        // {
+        //     _eye.SetVisibilityMask(uid, eye.VisibilityMask | (int) (VisibilityFlags.Ghost), eye);
+        // }
+        // SS220-Revenant dont see ghosts-end
     }
 
     private void OnMapInit(EntityUid uid, RevenantComponent component, MapInitEvent args)

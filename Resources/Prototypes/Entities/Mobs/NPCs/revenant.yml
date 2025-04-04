@@ -34,9 +34,11 @@
     randomVoicesList: Demons
   - type: Eye
     drawFov: false
-    visMask:
-      - Normal
-      - Ghost
+    # SS220-Revenant dont see ghosts-begin
+    # visMask:
+    #   - Normal
+    #   - Ghost
+    # SS220-Revenant dont see ghosts-end
   - type: ContentEye
     maxZoom: 1.2, 1.2
   - type: NameIdentifier
