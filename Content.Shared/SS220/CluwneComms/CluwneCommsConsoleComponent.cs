@@ -72,6 +72,12 @@ namespace Content.Shared.SS220.CluwneComms
         [DataField]
         public Color Color = Color.Gold;
 
+        /// <summary>
+        /// Announcement color
+        /// </summary>
+        [ViewVariables]
+        public Dictionary<string, MemelertLevelPrototype> LevelsDict = new();
+
     }
 
     [Serializable, NetSerializable]

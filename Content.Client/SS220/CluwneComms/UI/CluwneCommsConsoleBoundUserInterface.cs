@@ -69,6 +69,7 @@ namespace Content.Client.SS220.CluwneComms.UI
 
                 _menu.CanAlert = commsState.CanAlert;
                 _menu.AlertButton.Disabled = !_menu.CanAlert;
+                _menu.AlertLevelButton.Disabled = !_menu.CanAlert;
 
                 _menu.UpdateAlertLevels(commsState.AlertLevels);
             }

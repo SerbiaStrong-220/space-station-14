@@ -19,6 +19,8 @@ using Content.Shared.MassMedia.Systems;
 using Content.Server.GameTicking;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
+using Content.Shared.Chemistry.Reagent;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.CluwneComms
 {
@@ -34,6 +36,7 @@ namespace Content.Server.SS220.CluwneComms
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
         [Dependency] private readonly GameTicker _ticker = default!;
+        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
         public override void Initialize()
         {
@@ -51,6 +54,13 @@ namespace Content.Server.SS220.CluwneComms
 
             ent.Comp.AlertCooldownRemaining = _timing.CurTime + ent.Comp.Delay;
             ent.Comp.CanAlert = false;
+
+
+            foreach (var memelert in _prototypeManager.EnumeratePrototypes<MemelertLevelPrototype>())
+            {
+                ent.Comp.LevelsDict.Add(memelert.ID, memelert);
+            }
+            UpdateUI(ent, ent.Comp);
         }
 
         public override void Update(float frameTime)
@@ -76,7 +86,12 @@ namespace Content.Server.SS220.CluwneComms
 
         private void UpdateUI(EntityUid ent, CluwneCommsConsoleComponent comp)
         {
-            List<string>? levels = null; //ToDo add here proto
+            List<string>? levels = new(); //ToDo add here proto
+
+            foreach (var item in comp.LevelsDict)
+            {
+                levels.Add(item.Key);
+            }
 
             CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce, comp.CanAlert, levels);
             _uiSystem.SetUiState(ent, CluwneCommsConsoleUiKey.Key, newState);
@@ -143,7 +158,7 @@ namespace Content.Server.SS220.CluwneComms
                 //Content = content.Length <= MaxContentLength ? content : $"{content[..MaxContentLength]}...",
                 Content = content,
                 //Author = new TryGetIdentityShortInfoEvent(ent, args.Actor).Title,//name of console user
-                Author = "",
+                Author = "дядя",
                 ShareTime = _ticker.RoundDuration()
             };
 
@@ -173,7 +188,7 @@ namespace Content.Server.SS220.CluwneComms
 
         private void OnBoomMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleBoomMessage args)
         {
-
+            //here shoild be an explosion
         }
     }
 }
