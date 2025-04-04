@@ -22,7 +22,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         base.Initialize();
         SubscribeLocalEvent<HeadsetComponent, RadioReceiveEvent>(OnHeadsetReceive);
         SubscribeLocalEvent<HeadsetComponent, EncryptionChannelsChangedEvent>(OnKeysChanged);
-        SubscribeLocalEvent<HeadsetComponent, GetLanguageListenerEvent>(OnGetLanguage); // SS220 languages
+        SubscribeLocalEvent<HeadsetComponent, SendLanguageMessageAttemptEvent>(OnSendLangaugeMessageAttempt); // SS220 languages
 
         SubscribeLocalEvent<WearingHeadsetComponent, EntitySpokeEvent>(OnSpeak);
 
@@ -125,7 +125,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     }
 
     // SS220 languages begin
-    private void OnGetLanguage(Entity<HeadsetComponent> ent, ref GetLanguageListenerEvent args)
+    private void OnSendLangaugeMessageAttempt(Entity<HeadsetComponent> ent, ref SendLanguageMessageAttemptEvent args)
     {
         var actorUid = Transform(ent).ParentUid;
         if (HasComp<ActorComponent>(actorUid))

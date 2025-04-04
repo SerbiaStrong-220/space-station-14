@@ -427,6 +427,19 @@
     - type: RandomMetadata
       nameSegments:
       - names_clown
+#SS220 fix ghost-clown begin
+    - type: RenameStart #SS220-RenameStart
+    - type: Clumsy
+      gunShootFailDamage:
+        types: #literally just picked semi random valus. i tested this once and tweaked it.
+          Blunt: 5
+          Piercing: 4
+        groups:
+          Burn: 3
+    - type: SleepEmitSound
+      snore: /Audio/Voice/Misc/silly_snore.ogg
+      interval: 10
+#SS220 fix ghost-clown end
 
 - type: randomHumanoidSettings
   id: VisitorJanitor

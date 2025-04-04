@@ -240,6 +240,7 @@
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: CigPackMED #SS220 Cigarettes
     - id: MedTekCartridge
+    - id: BoxBottleChief #SS220 Limitation Revive
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

@@ -35,6 +35,9 @@
   id: ElWyccoAxe
 
 - type: Tag
+  id: WristWatch
+
+- type: Tag
   id: WyccoAxe
 
 - type: Tag

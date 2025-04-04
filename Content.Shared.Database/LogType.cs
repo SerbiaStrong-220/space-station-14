@@ -455,4 +455,14 @@ public enum LogType
     /// An atmos networked device (such as a vent or pump) has had its settings changed, usually through an air alarm
     /// </summary>
     AtmosDeviceSetting = 101,
+
+
+    //SS220 log types start
+
+    /// <summary>
+    /// Admin command executed.
+    /// </summary>
+    AdminCommand = 10000,
+
+    //SS220 log types end
 }

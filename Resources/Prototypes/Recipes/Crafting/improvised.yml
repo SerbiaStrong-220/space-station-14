@@ -279,5 +279,5 @@
   objectType: Item
   description: A lightweight hardsuit, adorned with a patchwork of thick, chitinous goliath hide.
   icon:
-    sprite: Clothing/OuterClothing/Hardsuits/goliath.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/goliath.rsi #SS220 Goliath Hardsuit Repsrite
     state: icon
