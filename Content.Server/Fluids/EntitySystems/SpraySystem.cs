@@ -79,8 +79,9 @@ public sealed class SpraySystem : EntitySystem
 
     public void Spray(Entity<SprayComponent> entity, EntityUid user, MapCoordinates mapcoord)
     {
-        // Nozzle refactor begin
         if (!_solutionContainer.TryGetSolution(entity.Owner, SprayComponent.SolutionName, out var soln, out var solution))
+        // SS220 Nozzle refactor begin
+            //return;
         {
             if (!TryComp<ClothingSlotSolutionProviderComponent>(entity, out var nozzle)
                 || !_solutionProvider.TryGetClothingSolution((entity, nozzle), out soln, out solution))
