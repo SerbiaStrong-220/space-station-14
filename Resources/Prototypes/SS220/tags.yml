@@ -225,3 +225,10 @@
 
 - type: Tag
   id: WhitelistPdaIdPainter
+
+# SS220 supa kithen
+- type: Tag
+  id: MicrowaveMachineUnsafe
+
+- type: Tag
+  id: MicrowaveSelfUnsafe

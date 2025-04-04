@@ -1,0 +1,14 @@
+- type: cookingInstrumentType
+  id: microwave
+  name: микроволновка
+  iconPath: /Textures/SS220/SupaKitchen/Interface/InstrumentIcons/mw.png
+
+- type: cookingInstrumentType
+  id: oven
+  name: духовка
+  iconPath: /Textures/SS220/SupaKitchen/Interface/InstrumentIcons/oven.png
+
+- type: cookingInstrumentType
+  id: choppingBoard
+  name: разделочная доска
+  iconPath: /Textures/SS220/SupaKitchen/Interface/InstrumentIcons/grill.png
