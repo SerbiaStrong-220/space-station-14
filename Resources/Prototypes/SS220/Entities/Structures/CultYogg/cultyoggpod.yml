@@ -43,6 +43,7 @@
         Shock: -1
         Airloss: -10
         Caustic: -5
+        Сerebral: -5
   - type: CultYoggBuilding
     eraseTime: 5
     spawnOnErase:
