@@ -87,7 +87,7 @@ public sealed class SpraySystem : EntitySystem
                 || !_solutionProvider.TryGetClothingSolution((entity, nozzle), out soln, out solution))
                 return;
         }
-        // Nozzle refactor end
+        // SS220 Nozzle refactor end
 
         var ev = new SprayAttemptEvent(user);
         RaiseLocalEvent(entity, ref ev);
