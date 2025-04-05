@@ -6,6 +6,7 @@ using Content.Shared.Communications;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
+using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client.SS220.CluwneComms.UI
 {
@@ -26,7 +27,7 @@ namespace Content.Client.SS220.CluwneComms.UI
 
             _menu = this.CreateWindow<CluwneCommsConsoleMenu>();
             _menu.OnAnnounce += AnnounceButtonPressed;
-            _menu.OnAlertLevel += AlertLevelSelected;
+            //_menu.OnAlertLevel += AlertLevelSelected;
             _menu.OnAlert += AlertButtonPressed;
             _menu.OnBoom += BoomButtonPressed;
         }
@@ -37,10 +38,12 @@ namespace Content.Client.SS220.CluwneComms.UI
             var msg = SharedChatSystem.SanitizeAnnouncement(message, maxLength);
             SendMessage(new CluwneCommsConsoleAnnounceMessage(msg));
         }
-
-        public void AlertLevelSelected(string message)
+        /*
+        public void AlertLevelSelected(OptionButton.ItemSelectedEventArgs obj)
         {
+            obj.Button.SelectId(obj.Id);
         }
+        */
 
         public void BoomButtonPressed()//idk why this shit isnt working
         {

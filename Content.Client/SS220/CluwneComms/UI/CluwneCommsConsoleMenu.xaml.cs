@@ -9,6 +9,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using static Robust.Client.UserInterface.Controls.OptionButton;
 
 namespace Content.Client.SS220.CluwneComms.UI
 {
@@ -26,7 +27,7 @@ namespace Content.Client.SS220.CluwneComms.UI
         public TimeSpan? CountdownEnd;
 
         public event Action? OnEmergencyLevel;
-        public event Action<string>? OnAlertLevel;
+        //public event Action<ItemSelectedEventArgs>? OnAlertLevel;
         public event Action<string>? OnAnnounce;
         public event Action<string, string, string>? OnAlert;
         public event Action? OnBoom;
@@ -93,14 +94,19 @@ namespace Content.Client.SS220.CluwneComms.UI
             #endregion
 
             #region Alert
+
             string code = "";//buffer cause idk
             AlertLevelButton.OnItemSelected += args =>
             {
+                AlertLevelButton.SelectId(args.Id);
+
                 var metadata = AlertLevelButton.GetItemMetadata(args.Id);
                 if (metadata != null && metadata is string cast)
                 {
                     code = cast;
-                    OnAlertLevel?.Invoke(cast);
+
+                    AlertInput.TextRope = new Rope.Leaf(_loc.GetString("joke-alert-level-" + code + "-announcement"));
+                    InstructionInput.TextRope = new Rope.Leaf(_loc.GetString("joke-alert-level-" + code + "-announcement"));
                 }
             };
 
@@ -121,7 +127,7 @@ namespace Content.Client.SS220.CluwneComms.UI
                 }
             };
 
-            AlertButton.OnPressed += _ => OnAlert?.Invoke(code, Rope.Collapse(AlertInput.TextRope), Rope.Collapse(InstructionInput.TextRope));//make here button string
+            AlertButton.OnPressed += _ => OnAlert?.Invoke("code", Rope.Collapse(AlertInput.TextRope), Rope.Collapse(InstructionInput.TextRope));//make here button string
             AlertButton.Disabled = !CanAlert;
 
             BoomButton.OnPressed += _ => OnBoom?.Invoke();
