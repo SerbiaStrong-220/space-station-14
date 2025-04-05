@@ -16,6 +16,7 @@ using Content.Shared.SS220.Ghost;
 using Content.Shared.StationRecords;
 using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.CriminalRecords;
@@ -27,6 +28,7 @@ public sealed class CriminalRecordSystem : EntitySystem
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("CriminalRecords");
 
@@ -99,20 +101,30 @@ public sealed class CriminalRecordSystem : EntitySystem
         if (record != null)
         {
             var msg = new FormattedMessage();
+            var since = _gameTiming.CurTime - record.CreatedAt;
 
             if (record.RecordType == null)
             {
-                msg.AddMarkup("[bold]Без статуса: [/bold]");
+                msg.AddMarkupPermissive(
+                    Loc.GetString("criminal-status-examine-no-status",
+                        ("message", FormattedMessage.EscapeText(record.Message)),
+                        ("since", since.Minutes))
+                );
             }
             else
             {
-                if (_prototype.TryIndex<CriminalStatusPrototype>(record.RecordType, out var statusType))
+                if (_prototype.TryIndex(record.RecordType, out var statusType))
                 {
-                    msg.AddMarkup($"[color={statusType.Color.ToHex()}][bold]{statusType.Name}:[/bold][/color] ");
+                    msg.AddMarkupPermissive(
+                        Loc.GetString("criminal-status-examine-default",
+                            ("color", statusType.Color.ToHex()),
+                            ("status", statusType.Name),
+                            ("message", FormattedMessage.EscapeText(record.Message)),
+                            ("since", since.Minutes))
+                    );
                 }
             }
 
-            msg.AddText(record.Message);
             args.PushMessage(msg);
         }
     }
@@ -251,10 +263,11 @@ public sealed class CriminalRecordSystem : EntitySystem
         var criminalRecord = new CriminalRecord()
         {
             Message = message,
-            RecordType = validatedRecordType
+            RecordType = validatedRecordType,
+            CreatedAt = _gameTiming.CurTime,
         };
 
-        var currentRoundTime = (int) _gameTicker.RoundDuration().TotalSeconds;
+        var currentRoundTime = (int)_gameTicker.RoundDuration().TotalSeconds;
         if (!catalog.Records.TryAdd(currentRoundTime, criminalRecord))
             return false;
 

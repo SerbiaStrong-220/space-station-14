@@ -25,3 +25,6 @@ criminal-status-demote-report = {$target} в розыске для увольн�
 criminal-status-suspected-report = {$target} под подозрением! Причина: {$reason}
 
 criminal-status-cooldown-popup = Вы пытаетесь добавлять записи слишком часто.
+
+criminal-status-examine-default = [color={ $color }][bold]{ $status }:[/bold][/color] { $message } [italic][color=gray]{ $since } минут(ы) назад[/color][/italic]
+criminal-status-examine-no-status = [bold]Без статуса: [/bold] { $message } [italic][color=gray]{ $since } минут(ы) назад[/color][/italic]
