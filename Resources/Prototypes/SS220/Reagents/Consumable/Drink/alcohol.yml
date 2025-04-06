@@ -126,3 +126,20 @@
           types:
             Poison: 2
   fizziness: 0.2
+
+#Xlebnuldiesel
+
+- type: reagent
+  id: Xlebnuldiesel
+  name: reagent-name-xlebnuldiesel
+  parent: BaseAlcohol
+  desc: reagent-desc-xlebnuldiesel
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: Xlebnuldiesel
+  color: "#33EE00"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/xlebnuldiesel.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
