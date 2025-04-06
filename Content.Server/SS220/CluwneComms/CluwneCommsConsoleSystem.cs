@@ -21,6 +21,8 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
+using Content.Server.Explosion.EntitySystems;
+using Robust.Shared.GameObjects;
 
 namespace Content.Server.SS220.CluwneComms
 {
@@ -37,6 +39,7 @@ namespace Content.Server.SS220.CluwneComms
         [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
         [Dependency] private readonly GameTicker _ticker = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private readonly ExplosionSystem _explosion = default!;
 
         public override void Initialize()
         {
@@ -49,10 +52,10 @@ namespace Content.Server.SS220.CluwneComms
         }
         public void OnMapInit(Entity<CluwneCommsConsoleComponent> ent, ref MapInitEvent args)
         {
-            ent.Comp.AnnouncementCooldownRemaining = _timing.CurTime + ent.Comp.Delay;
+            ent.Comp.AnnouncementCooldownRemaining = _timing.CurTime + ent.Comp.InitialDelay;
             ent.Comp.CanAnnounce = false;
 
-            ent.Comp.AlertCooldownRemaining = _timing.CurTime + ent.Comp.Delay;
+            ent.Comp.AlertCooldownRemaining = _timing.CurTime + ent.Comp.InitialDelay;
             ent.Comp.CanAlert = false;
 
 
@@ -86,7 +89,7 @@ namespace Content.Server.SS220.CluwneComms
 
         private void UpdateUI(EntityUid ent, CluwneCommsConsoleComponent comp)
         {
-            List<string>? levels = new(); //ToDo add here proto
+            List<string>? levels = new();
 
             foreach (var item in comp.LevelsDict)
             {
@@ -99,6 +102,12 @@ namespace Content.Server.SS220.CluwneComms
 
         private void OnAnnounceMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleAnnounceMessage args)
         {
+            if (args.Message == "")
+            {
+                _audio.PlayEntity(ent.Comp.DenySound, args.Actor, args.Actor);
+                return;
+            }
+
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var msg = SharedChatSystem.SanitizeAnnouncement(args.Message, maxLength);
             var author = Loc.GetString("cluwne-comms-console-announcement-unknown-sender");
@@ -122,12 +131,6 @@ namespace Content.Server.SS220.CluwneComms
                     voiceId = tts.VoicePrototypeId;
             }
 
-            ent.Comp.AnnouncementCooldownRemaining = _timing.CurTime + ent.Comp.Delay;
-            ent.Comp.CanAnnounce = false;
-            Dirty(ent, ent.Comp);
-            UpdateUI(ent, ent.Comp);
-
-
             // allow admemes with vv
             Loc.TryGetString(ent.Comp.Title, out var title);
             title ??= ent.Comp.Title;
@@ -138,14 +141,29 @@ namespace Content.Server.SS220.CluwneComms
             _chatSystem.DispatchStationAnnouncement(ent, msg, title, colorOverride: ent.Comp.Color, voiceId: voiceId);
 
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(args.Actor):player} has sent the following station announcement: {msg}");
+
+            ent.Comp.AnnouncementCooldownRemaining = _timing.CurTime + ent.Comp.Delay;
+            ent.Comp.CanAnnounce = false;
+            UpdateUI(ent, ent.Comp);
         }
         private void OnAlertMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleAlertMessage args)
         {
+            if (args.Message == "" || args.Instruntions == "" || args.Alert == "")
+            {
+                _audio.PlayEntity(ent.Comp.DenySound, args.Actor, args.Actor);
+                return;
+            }
+
+            if (!ent.Comp.LevelsDict.TryGetValue(args.Alert, out var alertInfo))
+                return;
+
             //alert announce from AlertLevelSystem
-            _audio.PlayGlobal(ent.Comp.Sound, Filter.Broadcast(), true);
+            _audio.PlayGlobal(alertInfo.LevelDetails.Sound, Filter.Broadcast(), true);
 
             var voiceId = string.Empty;
-            _chatSystem.DispatchStationAnnouncement(ent, args.Instruntions, colorOverride: ent.Comp.Color, voiceId: voiceId);
+            _chatSystem.DispatchStationAnnouncement(ent, args.Instruntions, colorOverride: alertInfo.LevelDetails.Color, voiceId: voiceId);
+
+
             //Intructions from console
             //copied from NewsSystem
             var title = "CluwneCommAnnounceLooc";//add some naming in component here
@@ -176,6 +194,10 @@ namespace Content.Server.SS220.CluwneComms
             {
                 RaiseLocalEvent(readerUid, ref ev);
             }
+
+            ent.Comp.AlertCooldownRemaining = _timing.CurTime + ent.Comp.AlertDelay;
+            ent.Comp.CanAlert = false;
+            UpdateUI(ent, ent.Comp);
         }
 
         private bool CanUse(EntityUid user, EntityUid console)
@@ -188,7 +210,7 @@ namespace Content.Server.SS220.CluwneComms
 
         private void OnBoomMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleBoomMessage args)
         {
-            //here shoild be an explosion
+            _explosion.QueueExplosion(ent, "Default", 100f, 25f, 50, canCreateVacuum: false);
         }
     }
 }

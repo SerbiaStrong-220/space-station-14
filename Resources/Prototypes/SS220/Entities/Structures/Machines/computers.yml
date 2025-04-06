@@ -177,3 +177,9 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 28
+    intensitySlope: 3
+    maxIntensity: 4
+    canCreateVacuum: false

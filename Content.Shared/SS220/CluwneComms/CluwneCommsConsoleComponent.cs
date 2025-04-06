@@ -57,6 +57,13 @@ namespace Content.Shared.SS220.CluwneComms
         [DataField]
         public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Announcements/announce.ogg");
 
+
+        /// <summary>
+        /// Sound when on of fields is empty
+        /// </summary>
+        [DataField]
+        public SoundSpecifier DenySound = new SoundPathSpecifier("/Audio/SS220/Machines/CluwneComm/ui_cancel.ogg");
+
         /// <summary>
         /// Fluent ID for the announcement title
         /// If a Fluent ID isn't found, just uses the raw string

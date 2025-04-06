@@ -7,6 +7,7 @@ using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Audio;
 
 namespace Content.Client.SS220.CluwneComms.UI
 {
@@ -36,6 +37,7 @@ namespace Content.Client.SS220.CluwneComms.UI
         {
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var msg = SharedChatSystem.SanitizeAnnouncement(message, maxLength);
+
             SendMessage(new CluwneCommsConsoleAnnounceMessage(msg));
         }
         /*
@@ -48,6 +50,7 @@ namespace Content.Client.SS220.CluwneComms.UI
         public void BoomButtonPressed()//idk why this shit isnt working
         {
             SendMessage(new CluwneCommsConsoleBoomMessage());
+            Close();//should be cause user most certanly will be dead
         }
 
         public void AlertButtonPressed(string level, string message, string instructions)
@@ -55,6 +58,7 @@ namespace Content.Client.SS220.CluwneComms.UI
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var msg = SharedChatSystem.SanitizeAnnouncement(message, maxLength);
             var instr = SharedChatSystem.SanitizeAnnouncement(instructions, maxLength);
+
             SendMessage(new CluwneCommsConsoleAlertMessage(level, msg, instr));
         }
 

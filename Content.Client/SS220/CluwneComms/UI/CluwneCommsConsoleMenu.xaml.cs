@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Globalization;
+using System.Xml.Linq;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.CCVar;
 using Microsoft.CodeAnalysis;
@@ -108,6 +109,7 @@ namespace Content.Client.SS220.CluwneComms.UI
                     AlertInput.TextRope = new Rope.Leaf(_loc.GetString("joke-alert-level-" + code + "-announcement"));
                     InstructionInput.TextRope = new Rope.Leaf(_loc.GetString("joke-alert-level-" + code + "-announcement"));
                 }
+                else code = "";
             };
 
             AlertLevelButton.Disabled = !AlertLevelSelectable;
@@ -127,7 +129,7 @@ namespace Content.Client.SS220.CluwneComms.UI
                 }
             };
 
-            AlertButton.OnPressed += _ => OnAlert?.Invoke("code", Rope.Collapse(AlertInput.TextRope), Rope.Collapse(InstructionInput.TextRope));//make here button string
+            AlertButton.OnPressed += _ => OnAlert?.Invoke(code, Rope.Collapse(AlertInput.TextRope), Rope.Collapse(InstructionInput.TextRope));//make here button string
             AlertButton.Disabled = !CanAlert;
 
             BoomButton.OnPressed += _ => OnBoom?.Invoke();
@@ -159,6 +161,9 @@ namespace Content.Client.SS220.CluwneComms.UI
                 AlertLevelButton.AddItem(name);
                 AlertLevelButton.SetItemMetadata(AlertLevelButton.ItemCount - 1, alert);
             }
+
+            AlertLevelButton.AddItem("-");
+            AlertLevelButton.SelectId(AlertLevelButton.ItemCount - 1);
         }
 
         public void UpdateCountdown()
