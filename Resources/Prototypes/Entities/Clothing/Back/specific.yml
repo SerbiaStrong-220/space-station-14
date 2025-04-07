@@ -96,8 +96,4 @@
     solution: tank
   - type: ExaminableSolution
     solution: tank
-  # SS220 Nozzle refactor begin
-  - type: SolutionProvider
-    solutionId: tank
-  # SS220 Nozzle refactor end
 

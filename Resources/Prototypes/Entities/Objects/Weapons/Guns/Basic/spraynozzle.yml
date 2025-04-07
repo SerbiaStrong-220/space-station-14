@@ -29,12 +29,6 @@
     spraySound:
       path: /Audio/Effects/spray2.ogg
     transferAmount: 10
-  #- type: SolutionContainerManager
-  #  solutions:
-  #    spray:
-  #      maxVol: 10
-  #- type: SolutionItemStatus
-  #  solution: spray
   - type: Appearance
   - type: ClothingSlotSolutionProvider
     solutionRequiredSlot: BACK
