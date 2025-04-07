@@ -253,7 +253,7 @@ public sealed partial class TTSSystem : EntitySystem
         res.Load(_dependencyCollection, Prefix / filePath);
         _resourceCache.CacheResource(Prefix / filePath, res);
 
-        if (sourceUid == null)
+        if (sourceUid == null || !Exists(sourceUid))
         {
             var soundPath = new SoundPathSpecifier(Prefix / filePath, finalParams);
             _audio.PlayGlobal(soundPath, Filter.Local(), false);
@@ -261,8 +261,7 @@ public sealed partial class TTSSystem : EntitySystem
         }
         else
         {
-            if (sourceUid.HasValue && sourceUid.Value.IsValid())
-                TryQueuePlayById(sourceUid.Value, _fileIdx, finalParams, globally);
+            TryQueuePlayById(sourceUid.Value, _fileIdx, finalParams, globally);
         }
 
         _fileIdx++;
