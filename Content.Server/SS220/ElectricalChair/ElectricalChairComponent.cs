@@ -11,7 +11,7 @@ public sealed partial class ElectricalChairComponent : Component
     [ViewVariables]
     public TimeSpan NextDamageSecond = TimeSpan.Zero;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool Enabled = false;
 
     [DataField]
