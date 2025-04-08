@@ -23,6 +23,32 @@ using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
 using Content.Server.Explosion.EntitySystems;
 using Robust.Shared.GameObjects;
+using Content.Server.MassMedia.Components;
+using Content.Shared.MassMedia.Components;
+using System.Diagnostics.CodeAnalysis;
+using Content.Server.Administration.Logs;
+using Content.Server.CartridgeLoader;
+using Content.Server.CartridgeLoader.Cartridges;
+using Content.Server.Chat.Managers;
+using Content.Server.GameTicking;
+using Content.Server.MassMedia.Components;
+using Content.Server.Popups;
+using Content.Server.Station.Systems;
+using Content.Shared.Access.Components;
+using Content.Shared.Access.Systems;
+using Content.Shared.CartridgeLoader;
+using Content.Shared.CartridgeLoader.Cartridges;
+using Content.Shared.Database;
+using Content.Shared.MassMedia.Components;
+using Content.Shared.MassMedia.Systems;
+using Content.Shared.CCVar;
+using Robust.Shared.Configuration;
+using Content.Shared.Popups;
+using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
+using Content.Shared.IdentityManagement;
+using Robust.Shared.Timing;
+
 
 namespace Content.Server.SS220.CluwneComms
 {
@@ -40,6 +66,8 @@ namespace Content.Server.SS220.CluwneComms
         [Dependency] private readonly GameTicker _ticker = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly ExplosionSystem _explosion = default!;
+        [Dependency] private readonly UserInterfaceSystem _ui = default!;
+        [Dependency] private readonly StationSystem _station = default!;
 
         public override void Initialize()
         {
@@ -64,6 +92,12 @@ namespace Content.Server.SS220.CluwneComms
                 ent.Comp.LevelsDict.Add(memelert.ID, memelert);
             }
             UpdateUI(ent, ent.Comp);
+
+            var station = _station.GetOwningStation(ent);
+            if (!station.HasValue)
+                return;
+
+            EnsureComp<StationNewsComponent>(station.Value);
         }
 
         public override void Update(float frameTime)
@@ -163,11 +197,13 @@ namespace Content.Server.SS220.CluwneComms
             var voiceId = string.Empty;
             _chatSystem.DispatchStationAnnouncement(ent, args.Instruntions, colorOverride: alertInfo.LevelDetails.Color, voiceId: voiceId);
 
+            if (!TryGetArticles(ent, out var articles))
+                return;
 
             //Intructions from console
             //copied from NewsSystem
             var title = "CluwneCommAnnounceLooc";//add some naming in component here
-            var content = args.Message.Trim();
+            var content = args.Instruntions.Trim();
 
             var article = new NewsArticle
             {
@@ -176,7 +212,7 @@ namespace Content.Server.SS220.CluwneComms
                 //Content = content.Length <= MaxContentLength ? content : $"{content[..MaxContentLength]}...",
                 Content = content,
                 //Author = new TryGetIdentityShortInfoEvent(ent, args.Actor).Title,//name of console user
-                Author = "дядя",
+                Author = args.Actor.ToString(),
                 ShareTime = _ticker.RoundDuration()
             };
 
@@ -188,6 +224,8 @@ namespace Content.Server.SS220.CluwneComms
                 ("author", article.Author ?? Loc.GetString("news-read-ui-no-author"))
                 ));
 
+            articles.Add(article);
+
             var ev = new NewsArticlePublishedEvent(article);
             var query = EntityQueryEnumerator<NewsReaderCartridgeComponent>();
             while (query.MoveNext(out var readerUid, out _))
@@ -198,6 +236,7 @@ namespace Content.Server.SS220.CluwneComms
             ent.Comp.AlertCooldownRemaining = _timing.CurTime + ent.Comp.AlertDelay;
             ent.Comp.CanAlert = false;
             UpdateUI(ent, ent.Comp);
+            UpdateWriterDevices();
         }
 
         private bool CanUse(EntityUid user, EntityUid console)
@@ -211,6 +250,37 @@ namespace Content.Server.SS220.CluwneComms
         private void OnBoomMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleBoomMessage args)
         {
             _explosion.QueueExplosion(ent, "Default", 100f, 25f, 50, canCreateVacuum: false);
+        }
+        private void UpdateWriterUi(Entity<NewsWriterComponent> ent)
+        {
+            if (!_ui.HasUi(ent, NewsWriterUiKey.Key))
+                return;
+
+            if (!TryGetArticles(ent, out var articles))
+                return;
+
+            var state = new NewsWriterBoundUserInterfaceState(articles.ToArray(), ent.Comp.PublishEnabled, ent.Comp.NextPublish, ent.Comp.DraftTitle, ent.Comp.DraftContent);
+            _ui.SetUiState(ent.Owner, NewsWriterUiKey.Key, state);
+        }
+        private bool TryGetArticles(EntityUid uid, [NotNullWhen(true)] out List<NewsArticle>? articles)
+        {
+            if (_station.GetOwningStation(uid) is not { } station ||
+                !TryComp<StationNewsComponent>(station, out var stationNews))
+            {
+                articles = null;
+                return false;
+            }
+
+            articles = stationNews.Articles;
+            return true;
+        }
+        private void UpdateWriterDevices()
+        {
+            var query = EntityQueryEnumerator<NewsWriterComponent>();
+            while (query.MoveNext(out var owner, out var comp))
+            {
+                UpdateWriterUi((owner, comp));
+            }
         }
     }
 }

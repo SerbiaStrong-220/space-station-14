@@ -107,7 +107,7 @@ namespace Content.Client.SS220.CluwneComms.UI
                     code = cast;
 
                     AlertInput.TextRope = new Rope.Leaf(_loc.GetString("joke-alert-level-" + code + "-announcement"));
-                    InstructionInput.TextRope = new Rope.Leaf(_loc.GetString("joke-alert-level-" + code + "-announcement"));
+                    InstructionInput.TextRope = new Rope.Leaf(_loc.GetString("joke-alert-level-" + code + "-instructions"));
                 }
                 else code = "";
             };
@@ -175,7 +175,7 @@ namespace Content.Client.SS220.CluwneComms.UI
                 return;
             }
 
-            var diff = MathHelper.Max((CountdownEnd - _timing.CurTime) ?? TimeSpan.Zero, TimeSpan.Zero);
+            var diff = MathHelper.Max(( - _timing.CurTime) ?? TimeSpan.Zero, TimeSpan.Zero);
 
             var infoText = Loc.GetString($"comms-console-menu-time-remaining",
                 ("time", diff.ToString(@"hh\:mm\:ss", CultureInfo.CurrentCulture)));
