@@ -57,16 +57,14 @@ namespace Content.Shared.SS220.CluwneComms
         [DataField]
         public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Announcements/announce.ogg");
 
-
         /// <summary>
-        /// Sound when on of fields is empty
+        /// Sound when on of required fields is empty
         /// </summary>
         [DataField]
         public SoundSpecifier DenySound = new SoundPathSpecifier("/Audio/SS220/Machines/CluwneComm/ui_cancel.ogg");
 
         /// <summary>
-        /// Fluent ID for the announcement title
-        /// If a Fluent ID isn't found, just uses the raw string
+        /// Console name
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField(required: true)]
@@ -80,11 +78,22 @@ namespace Content.Shared.SS220.CluwneComms
         public Color Color = Color.Gold;
 
         /// <summary>
-        /// Announcement color
+        /// List of alerts
         /// </summary>
         [ViewVariables]
         public Dictionary<string, MemelertLevelPrototype> LevelsDict = new();
 
+        /// <summary>
+        /// Boom variables
+        /// </summary>
+        [DataField]
+        public float TotalIntensity = 250f;
+
+        [DataField]
+        public float Slope = 10f;
+
+        [DataField]
+        public float MaxTileIntensity = 50f;
     }
 
     [Serializable, NetSerializable]
