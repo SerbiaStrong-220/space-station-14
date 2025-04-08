@@ -28,6 +28,6 @@
   description: A computer printed circuit board for a joke communications console.
   components:
     - type: Sprite
-      state: cpu_command
+      state: cpu_wizard
     - type: ComputerBoard
       prototype: ComputerCluwneComms
