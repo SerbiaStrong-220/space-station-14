@@ -2,26 +2,19 @@
 
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
-using Content.Shared.Communications;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
-using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Audio;
 using Content.Shared.MassMedia.Systems;
 
 namespace Content.Client.SS220.CluwneComms.UI
 {
-    public sealed class CluwneCommsConsoleBoundUserInterface : BoundUserInterface
+    public sealed class CluwneCommsConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
     {
         [Dependency] private readonly IConfigurationManager _cfg = default!;
 
         [ViewVariables]
         private CluwneCommsConsoleMenu? _menu;
-
-        public CluwneCommsConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-        {
-        }
 
         protected override void Open()
         {
