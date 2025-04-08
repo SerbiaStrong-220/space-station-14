@@ -9,9 +9,9 @@
     color: PaleVioletRed
 
 - type: memelertLevel
-  id: hechelta
+  id: hehelta
   levelDetails:
-    announcement: joke-alert-level-hechelta-announcement
+    announcement: joke-alert-level-hehelta-announcement
     sound:
       path: /Audio/Misc/delta.ogg
       params:

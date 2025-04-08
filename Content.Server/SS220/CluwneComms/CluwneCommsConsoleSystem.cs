@@ -48,6 +48,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.IdentityManagement;
 using Robust.Shared.Timing;
+using Robust.Shared.Localization;
 
 
 namespace Content.Server.SS220.CluwneComms
@@ -195,24 +196,26 @@ namespace Content.Server.SS220.CluwneComms
             _audio.PlayGlobal(alertInfo.LevelDetails.Sound, Filter.Broadcast(), true);
 
             var voiceId = string.Empty;
-            _chatSystem.DispatchStationAnnouncement(ent, args.Instruntions, colorOverride: alertInfo.LevelDetails.Color, voiceId: voiceId);
-
-            if (!TryGetArticles(ent, out var articles))
-                return;
+            _chatSystem.DispatchStationAnnouncement(ent, args.Message, colorOverride: alertInfo.LevelDetails.Color, voiceId: voiceId);
 
             //Intructions from console
             //copied from NewsSystem
-            var title = "CluwneCommAnnounceLooc";//add some naming in component here
-            var content = args.Instruntions.Trim();
+            if (!TryGetArticles(ent, out var articles))
+                return;
+
+            var author = Loc.GetString("cluwne-comms-console-announcement-unknown-sender");
+            if (args.Actor is { Valid: true } mob)
+            {
+                var tryGetIdentityShortInfoEvent = new TryGetIdentityShortInfoEvent(ent, mob);
+                RaiseLocalEvent(tryGetIdentityShortInfoEvent);
+                author = tryGetIdentityShortInfoEvent.Title;
+            }
 
             var article = new NewsArticle
             {
-                //Title = title.Length <= _news.MaxTitleLength ? title : $"{title[..MaxTitleLength]}...",
-                Title = title,
-                //Content = content.Length <= MaxContentLength ? content : $"{content[..MaxContentLength]}...",
-                Content = content,
-                //Author = new TryGetIdentityShortInfoEvent(ent, args.Actor).Title,//name of console user
-                Author = args.Actor.ToString(),
+                Title = Loc.GetString("joke-alert-level-" + args.Alert + "-news-title"),
+                Content = args.Instruntions.Trim(),
+                Author = author,
                 ShareTime = _ticker.RoundDuration()
             };
 

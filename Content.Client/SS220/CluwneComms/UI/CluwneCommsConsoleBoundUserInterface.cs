@@ -8,6 +8,7 @@ using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Audio;
+using Content.Shared.MassMedia.Systems;
 
 namespace Content.Client.SS220.CluwneComms.UI
 {
@@ -28,26 +29,18 @@ namespace Content.Client.SS220.CluwneComms.UI
 
             _menu = this.CreateWindow<CluwneCommsConsoleMenu>();
             _menu.OnAnnounce += AnnounceButtonPressed;
-            //_menu.OnAlertLevel += AlertLevelSelected;
             _menu.OnAlert += AlertButtonPressed;
             _menu.OnBoom += BoomButtonPressed;
         }
 
         public void AnnounceButtonPressed(string message)
         {
-            var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
-            var msg = SharedChatSystem.SanitizeAnnouncement(message, maxLength);
+            var msg = SharedChatSystem.SanitizeAnnouncement(message, _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength));
 
             SendMessage(new CluwneCommsConsoleAnnounceMessage(msg));
         }
-        /*
-        public void AlertLevelSelected(OptionButton.ItemSelectedEventArgs obj)
-        {
-            obj.Button.SelectId(obj.Id);
-        }
-        */
 
-        public void BoomButtonPressed()//idk why this shit isnt working
+        public void BoomButtonPressed()
         {
             SendMessage(new CluwneCommsConsoleBoomMessage());
             Close();//should be cause user most certanly will be dead
@@ -55,9 +48,8 @@ namespace Content.Client.SS220.CluwneComms.UI
 
         public void AlertButtonPressed(string level, string message, string instructions)
         {
-            var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
-            var msg = SharedChatSystem.SanitizeAnnouncement(message, maxLength);
-            var instr = SharedChatSystem.SanitizeAnnouncement(instructions, maxLength);
+            var msg = SharedChatSystem.SanitizeAnnouncement(message, _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength));
+            var instr = SharedChatSystem.SanitizeAnnouncement(instructions, SharedNewsSystem.MaxContentLength);
 
             SendMessage(new CluwneCommsConsoleAlertMessage(level, msg, instr));
         }
