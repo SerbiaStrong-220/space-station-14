@@ -5,6 +5,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using System.Numerics;
 using Content.Shared.Roles;
+using Content.Client.SS220.UserInterface;
 
 namespace Content.Client.CrewManifest.UI;
 
@@ -35,11 +36,13 @@ public sealed class CrewManifestSection : BoxContainer
 
         foreach (var entry in entries)
         {
-            var name = new RichTextLabel()
+            // SS220-QoL copy name from manifest button-Begin
+            var name = new CopyableRichTextLabel()
             {
                 HorizontalExpand = true,
+                Text = entry.Name,
             };
-            name.SetMessage(entry.Name);
+            // SS220-QoL copy name from manifest button-End
 
             var titleContainer = new BoxContainer()
             {
@@ -47,9 +50,12 @@ public sealed class CrewManifestSection : BoxContainer
                 HorizontalExpand = true
             };
 
-            var title = new RichTextLabel();
-            title.SetMessage(entry.JobTitle);
-
+            // SS220-QoL copy name from manifest button-Begin
+            var title = new CopyableRichTextLabel()
+            {
+                Text = entry.JobTitle,
+            };
+            // SS220-QoL copy name from manifest button-End
 
             if (prototypeManager.TryIndex<JobIconPrototype>(entry.JobIcon, out var jobIcon))
             {
