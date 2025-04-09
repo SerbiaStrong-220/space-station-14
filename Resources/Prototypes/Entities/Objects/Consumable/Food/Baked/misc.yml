@@ -608,6 +608,11 @@
           Quantity: 2
         - ReagentId: Vitamin
           Quantity: 0.5
+  # SS220 Supa kitchen begin
+  - type: Construction
+    graph: BakedChevreChaud
+    node: bakedChevreChaud
+  # SS220 Supa kitchen end
 
 - type: entity
   name: cotton chèvre chaud
@@ -640,6 +645,11 @@
           Quantity: 1
         - ReagentId: Vitamin
           Quantity: 0.5
+  # SS220 Supa kitchen begin
+  - type: Construction
+    graph: BakedChevreChaudCotton
+    node: bakedChevreChaudCotton
+  # SS220 Supa kitchen end
 
 - type: entity
   name: brownies

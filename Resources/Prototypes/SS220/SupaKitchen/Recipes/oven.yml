@@ -1,0 +1,1371 @@
+# Bagels
+
+- type: cookingRecipe
+  id: RecipeBagel
+  name: bagel recipe
+  result: FoodBagel
+  recipeTags: [Bagel]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodDoughRope: 1 # created by rolling a dough slice.
+
+- type: cookingRecipe
+  id: RecipeBagelPoppy
+  name: poppyseed bagel recipe
+  result: FoodBagelPoppy
+  recipeTags: [Bagel]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodDoughRope: 1
+    PoppySeeds: 1
+
+- type: cookingRecipe
+  id: RecipeBagelCotton
+  name: cotton bagel recipe
+  result: FoodBagelCotton
+  recipeTags: [Bagel]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodDoughCottonRope: 1
+
+# Burgers
+
+- type: cookingRecipe
+  id: RecipeAppendixBurger
+  name: appendix burger recipe
+  result: FoodBurgerAppendix
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    OrganHumanAppendix: 1
+
+- type: cookingRecipe
+  id: RecipeBaconBurger
+  name: bacon burger recipe
+  result: FoodBurgerBacon
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeatBacon: 1
+    FoodCheeseSlice: 2
+
+- type: cookingRecipe
+  id: RecipeBaseballBurger
+  name: baseball burger recipe
+  result: FoodBurgerBaseball
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    BaseBallBat: 1
+
+- type: cookingRecipe
+  id: RecipeBearger
+  name: bearger recipe
+  result: FoodBurgerBear
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeatBear: 1
+
+- type: cookingRecipe
+  id: RecipeBigBiteBurger
+  name: big bite burger recipe
+  result: FoodBurgerBig
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodBreadBun: 1
+    FoodMeat: 2
+    FoodCheeseSlice: 1
+    FoodTomato: 1
+    FoodOnionSlice: 2
+
+- type: cookingRecipe #Added to metamorph recipes
+  id: RecipeBrainBurger
+  name: brain burger recipe
+  result: FoodBurgerBrain
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    OrganHumanBrain: 1
+
+- type: cookingRecipe
+  id: RecipeCatBurger
+  name: cat burger recipe
+  result: FoodBurgerCat
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeat: 1
+    ClothingHeadHatCatEars: 1
+
+- type: cookingRecipe #Added to metamorph recipes
+  id: RecipeCheeseburger
+  name: cheeseburger recipe
+  result: FoodBurgerCheese
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeat: 1
+    FoodCheeseSlice: 1
+
+- type: cookingRecipe #Added to metamorph recipes
+  id: RecipeChickenSandwich
+  name: chicken sandwich recipe
+  result: FoodBurgerChicken
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  reagents:
+    Mayo: 5
+  solids:
+    FoodBreadBun: 1
+    FoodMeatChicken: 1
+
+- type: cookingRecipe
+  id: RecipeClownBurger
+  name: clownburger recipe
+  result: FoodBurgerClown
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    ClothingMaskClown: 1
+
+- type: cookingRecipe
+  id: RecipeCorgiBurger
+  name: corgi burger recipe
+  result: FoodBurgerCorgi
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeatCorgi: 1
+
+- type: cookingRecipe #Added to metamorph recipes
+  id: RecipeCrabBurger
+  name: crab burger recipe
+  result: FoodBurgerCrab
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeatCrab: 2
+
+- type: cookingRecipe
+  id: RecipeCrazyHamburger
+  name: crazy hamburger recipe
+  result: FoodBurgerCrazy
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 15
+  reagents:
+    OilOlive: 15
+  solids:
+    FoodBreadBun: 1
+    FoodMeat: 2
+    FoodCheeseSlice: 2
+    FoodChiliPepper: 1
+    FoodCabbage: 1
+    CrayonGreen: 1
+    Flare: 1
+
+- type: cookingRecipe #Added to metamorph recipes
+  id: RecipeDuckBurger
+  name: duck sandwich recipe
+  result: FoodBurgerDuck
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeatDuck: 1
+    FoodCheeseSlice: 1
+
+- type: cookingRecipe
+  id: RecipeEmpoweredBurger
+  name: empowered burger recipe
+  result: FoodBurgerEmpowered
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    SheetPlasma1: 2
+
+- type: cookingRecipe
+  id: RecipeCarpBurger
+  name: fillet-o-carp burger recipe
+  result: FoodBurgerCarp
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeatFish: 1
+    FoodCheeseSlice: 1
+
+- type: cookingRecipe
+  id: RecipeFiveBurger
+  name: five alarm burger recipe
+  result: FoodBurgerFive
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeat: 1
+    FoodChiliPepper: 3
+
+- type: cookingRecipe
+  id: RecipeGhostBurger
+  name: ghost burger recipe
+  result: FoodBurgerGhost
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    ClothingOuterGhostSheet: 1 # SS220 Old craft ghostburger
+
+- type: cookingRecipe
+  id: RecipeHumanBurger
+  name: human burger recipe
+  result: FoodBurgerHuman
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeatHuman: 1
+
+- type: cookingRecipe
+  id: RecipeJellyBurger
+  name: jelly burger recipe
+  result: FoodBurgerJelly
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodJellyAmanita: 1
+
+- type: cookingRecipe
+  id: RecipeBurgerMcguffin
+  name: McGuffin recipe
+  result: FoodBurgerMcguffin
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodCheeseSlice: 1
+    FoodEgg: 2
+
+- type: cookingRecipe
+  id: RecipeBurgerMcrib
+  name: BBQ rib sandwich recipe
+  result: FoodBurgerMcrib
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMealRibs: 1
+    FoodOnionSlice: 1
+
+- type: cookingRecipe
+  id: RecipeMimeBurger
+  name: mime burger recipe
+  result: FoodBurgerMime
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    ClothingMaskMime: 1
+
+- type: cookingRecipe
+  id: RecipePlainBurger
+  name: plain burger recipe
+  result: FoodBurgerPlain
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeat: 1
+
+- type: cookingRecipe
+  id: RecipeRatBurger
+  name: rat burger recipe
+  result: FoodBurgerRat
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeatRat: 1
+
+- type: cookingRecipe
+  id: RecipeRobotBurger
+  name: roburger recipe
+  result: FoodBurgerRobot
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    CapacitorStockPart: 2
+    # i would add steel to this recipe but the microwave explodes
+
+- type: cookingRecipe
+  id: RecipeSoylentBurger
+  name: soylent burger recipe
+  result: FoodBurgerSoy
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodCheeseSlice: 2
+    FoodSoybeans: 2 #replace with soylent green when those become craftable
+
+- type: cookingRecipe
+  id: RecipeSpellBurger
+  name: spell burger recipe
+  result: FoodBurgerSpell
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    ClothingHeadHatWizard: 1
+
+- type: cookingRecipe
+  id: RecipeSuperBiteBurger
+  name: super bite burger recipe
+  result: FoodBurgerSuper
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 25
+  reagents:
+    TableSalt: 5
+  solids:
+    FoodBreadBun: 1
+    FoodMeat: 2
+    FoodCheeseSlice: 2
+    FoodTomato: 2
+    FoodEgg: 2
+
+- type: cookingRecipe
+  id: RecipeTofuBurger
+  name: tofu burger recipe
+  result: FoodBurgerTofu
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodTofuSlice: 1
+
+- type: cookingRecipe
+  id: RecipeXenoburger
+  name: xenoburger recipe
+  result: FoodBurgerXeno
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodBreadBun: 1
+    FoodMeatXeno: 1
+
+- type: cookingRecipe
+  id: RecipeMothRoachburger
+  name: mothroachburger recipe
+  result: FoodBurgerMothRoach
+  recipeTags: [Burger]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodBreadBun: 1
+    MobMothroach: 1
+
+# Breads & Sandwiches
+
+- type: cookingRecipe
+  id: RecipeBun
+  name: bun recipe
+  result: FoodBreadBun
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodDoughSlice: 1
+
+- type: cookingRecipe
+  id: RecipeBananaBread
+  name: banana bread recipe
+  result: FoodBreadBanana
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDough: 1
+    FoodBanana: 1
+
+- type: cookingRecipe
+  id: RecipeCornbread
+  name: cornbread recipe
+  result: FoodBreadCorn
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodDoughCornmeal: 1
+
+- type: cookingRecipe
+  id: RecipeCreamCheeseBread
+  name: cream cheese bread recipe
+  result: FoodBreadCreamcheese
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 15
+  reagents:
+    Milk: 5
+  solids:
+    FoodDough: 1
+    FoodCheeseSlice: 2
+
+- type: cookingRecipe
+  id: RecipeMeatBread
+  name: meat bread recipe
+  result: FoodBreadMeat
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDough: 1
+    FoodMeatCutlet: 2
+    FoodCheeseSlice: 2
+
+- type: cookingRecipe
+  id: RecipeMimanaBread
+  name: mimana bread recipe
+  result: FoodBreadMimana
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 15
+  reagents:
+    Nothing: 5
+  solids:
+    FoodDough: 1
+    FoodTofu: 1
+
+- type: cookingRecipe
+  id: RecipeBreadPlain
+  name: plain bread recipe
+  result: FoodBreadPlain
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodDough: 1
+
+- type: cookingRecipe
+  id: RecipeBreadCotton
+  name: cotton bread recipe
+  result: FoodBreadCotton
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 10
+  solids:
+    FoodDoughCotton: 1
+
+- type: cookingRecipe
+  id: RecipeSausageBread
+  name: sausage bread recipe
+  result: FoodBreadSausage
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDough: 1
+    FoodMeat: 1 #replace with sausage
+
+- type: cookingRecipe
+  id: RecipeSpiderMeatBread
+  name: spider meat bread recipe
+  result: FoodBreadMeatSpider
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDough: 1
+    FoodMeatSpiderCutlet: 2
+    FoodCheeseSlice: 2
+
+- type: cookingRecipe
+  id: RecipeTofuBread
+  name: tofu bread recipe
+  result: FoodBreadTofu
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDough: 1
+    FoodTofu: 1
+
+- type: cookingRecipe
+  id: RecipeXenoMeatBread
+  name: xeno meat bread recipe
+  result: FoodBreadMeatXeno
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDough: 1
+    FoodMeatXenoCutlet: 2
+    FoodCheeseSlice: 2
+
+- type: cookingRecipe
+  id: RecipeBreadDog
+  name: bread dog recipe
+  result: MobBreadDog
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 15
+  reagents:
+    Cognizine: 5
+  solids:
+    FoodBreadSausage: 1
+    OrganAnimalHeart: 1
+    FoodSpaceshroomCooked: 1
+
+- type: cookingRecipe
+  id: RecipeBaguette
+  name: baguette recipe
+  result: FoodBreadBaguette
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 15
+  reagents:
+    TableSalt: 5
+    Blackpepper: 5
+  solids:
+    FoodDough: 1
+
+- type: cookingRecipe
+  id: RecipeBaguetteCotton
+  name: baguette recipe
+  result: FoodBreadBaguetteCotton
+  recipeTags: [Bread]
+  instrumentType: oven
+  time: 15
+  reagents:
+    TableSalt: 5
+    Blackpepper: 5
+  solids:
+    FoodDoughCotton: 1
+
+# Pizzas
+
+- type: cookingRecipe
+  id: RecipeMargheritaPizza
+  name: margherita pizza recipe
+  result: FoodPizzaMargherita
+  recipeTags: [Pizza]
+  instrumentType: oven
+  time: 30
+  solids:
+    FoodDough: 1
+    FoodCheeseSlice: 1
+    FoodTomato: 4
+
+- type: cookingRecipe
+  id: RecipeMushroomPizza
+  name: mushroom pizza recipe
+  result: FoodPizzaMushroom
+  recipeTags: [Pizza]
+  instrumentType: oven
+  time: 25
+  solids:
+    FoodDough: 1
+    FoodMushroom: 5
+
+- type: cookingRecipe
+  id: RecipeMeatPizza
+  name: meat pizza recipe
+  result: FoodPizzaMeat
+  recipeTags: [Pizza]
+  instrumentType: oven
+  time: 30
+  solids:
+    FoodDough: 1
+    FoodMeat: 3
+    FoodCheeseSlice: 1
+    FoodTomato: 1
+
+- type: cookingRecipe
+  id: RecipeVegetablePizza
+  name: vegetable pizza recipe
+  result: FoodPizzaVegetable
+  recipeTags: [Pizza]
+  instrumentType: oven
+  time: 30
+  solids:
+    FoodDough: 1
+    FoodEggplant: 1
+    FoodCarrot: 1
+    FoodCorn: 1
+    FoodTomato: 1
+
+- type: cookingRecipe
+  id: RecipeHawaiianPizza
+  name: Hawaiian pizza recipe
+  result: FoodPizzaPineapple
+  recipeTags: [Pizza]
+  instrumentType: oven
+  time: 30
+  solids:
+    FoodDough: 1
+    FoodMeatChickenCutlet: 3
+    FoodPineappleSlice: 5
+
+- type: cookingRecipe
+  id: RecipeDankPizza
+  name: dank pizza recipe
+  result: FoodPizzaDank
+  recipeTags: [Pizza]
+  instrumentType: oven
+  time: 30
+  solids:
+    FoodDough: 1
+    FoodAmbrosiaVulgaris: 3
+    FoodCheeseSlice: 1
+    FoodTomato: 1
+
+- type: cookingRecipe
+  id: RecipeDonkpocketPizza
+  name: donk-pocket pizza recipe
+  result: FoodPizzaDonkpocket
+  recipeTags: [Pizza]
+  instrumentType: oven
+  time: 30
+  solids:
+    FoodDough: 1
+    FoodDonkpocketWarm: 3
+    FoodCheeseSlice: 1
+    FoodTomato: 1
+
+- type: cookingRecipe
+  id: RecipeUraniumPizza
+  name: spicy rock pizza recipe
+  result: FoodPizzaUranium
+  recipeTags: [Pizza]
+  instrumentType: oven
+  time: 30
+  solids:
+    FoodDoughFlat: 1
+    FoodChiliPepper: 2
+    FoodTomato: 2
+    SheetUranium1: 2
+
+- type: cookingRecipe
+  id: RecipeCottonPizza
+  name: cotton pizza recipe
+  result: FoodPizzaCotton
+  recipeTags: [Pizza]
+  instrumentType: oven
+  time: 30
+  solids:
+    FoodDoughCottonFlat: 1
+    CottonBol: 4
+
+- type: cookingRecipe
+  id: RecipeSpicyPizza
+  name: spicy pizza recipe
+  result: SpicyPizzaFood
+  recipeTags: [Pizza]
+  instrumentType: oven
+  time: 30
+  reagents:
+    ReaperSauce: 40
+  solids:
+    FoodDoughFlat: 1
+    FoodMeat: 3
+    FoodCheeseSlice: 1
+    FoodTomato: 1
+
+# Cookies
+
+- type: cookingRecipe
+  id: RecipeCookie
+  name: cookie recipe
+  result: FoodBakedCookie
+  recipeTags: [Cookie]
+  instrumentType: oven
+  time: 5
+  reagents:
+    Flour: 5
+    Sugar: 5
+  solids:
+    FoodButter: 1
+    FoodSnackChocolateBar: 1
+
+- type: cookingRecipe
+  id: RecipeSugarCookie
+  name: sugar cookie recipe
+  result: FoodBakedCookieSugar
+  recipeTags: [Cookie]
+  instrumentType: oven
+  time: 5
+  reagents:
+    Flour: 5
+    Sugar: 10
+  solids:
+    FoodButter: 1
+
+- type: cookingRecipe
+  id: RecipeRaisinCookie
+  name: raisin cookie recipe
+  result: FoodBakedCookieRaisin
+  recipeTags: [Cookie]
+  instrumentType: oven
+  time: 5
+  reagents:
+    Flour: 5
+    Sugar: 5
+  solids:
+    FoodSnackRaisins: 1
+
+- type: cookingRecipe
+  id: RecipeCookieOatmeal
+  name: oatmeal cookie recipe
+  result: FoodBakedCookieOatmeal
+  recipeTags: [Cookie]
+  instrumentType: oven
+  time: 5
+  reagents:
+    Oats: 5
+    Sugar: 5
+  solids:
+    FoodButter: 1
+
+- type: cookingRecipe
+  id: RecipeWaffles
+  name: waffle recipe
+  result: FoodBakedWaffle
+  instrumentType: oven
+  time: 10
+  reagents:
+    Flour: 5
+    Milk: 5
+    Egg: 6
+    SodaWater: 5
+
+- type: cookingRecipe
+  id: RecipeWaffleSoy
+  name: soy waffle recipe
+  result: FoodBakedWaffleSoy
+  instrumentType: oven
+  time: 10
+  reagents:
+    Flour: 5
+    MilkSoy: 5
+    Egg: 6
+    SodaWater: 5
+
+# Pancakes
+
+- type: cookingRecipe
+  id: RecipeChocolateChipPancake
+  name: chocolate chip pancake recipe
+  result: FoodBakedPancakeCc
+  recipeTags: [Cookie]
+  instrumentType: oven
+  time: 5
+  reagents:
+    Flour: 5
+    Milk: 5
+    Egg: 6
+  solids:
+    FoodSnackChocolateBar: 1
+
+- type: cookingRecipe
+  id: RecipePancake
+  name: pancake recipe
+  result: FoodBakedPancake
+  instrumentType: oven
+  time: 5
+  reagents:
+    Flour: 5
+    Milk: 5
+    Egg: 6
+
+- type: cookingRecipe
+  id: RecipeBlueberryPancake
+  name: blueberry pancake recipe
+  result: FoodBakedPancakeBb
+  instrumentType: oven
+  time: 5
+  reagents:
+    Flour: 5
+    Milk: 5
+    Egg: 6
+  solids:
+    FoodBerries: 2
+
+# Pies
+
+- type: cookingRecipe
+  id: RecipeAmanitaPie
+  name: amanita pie recipe
+  result: FoodPieAmanita
+  recipeTags: [Pie]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDoughPie: 1
+    FoodFlyAmanita: 1
+    FoodPlateTin: 1
+
+- type: cookingRecipe
+  id: RecipeApplePie
+  name: apple pie
+  result: FoodPieApple
+  recipeTags: [Pie]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDoughPie: 1
+    FoodApple: 3
+    FoodPlateTin: 1
+
+- type: cookingRecipe
+  id: RecipeBaklava
+  name: baklava recipe
+  result: FoodPieBaklava
+  recipeTags: [Pie]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDoughPie: 1
+    FoodSnackPistachios: 1 #i'd rather use a botany crop but we don't have nuts yet
+    FoodPlateTin: 1
+
+- type: cookingRecipe
+  id: RecipeBananaCreamPie
+  name: banana cream pie
+  result: FoodPieBananaCream
+  recipeTags: [Pie]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDoughPie: 1
+    FoodBanana: 3
+    FoodPlateTin: 1
+
+- type: cookingRecipe
+  id: RecipeBerryClafoutis
+  name: berry clafoutis recipe
+  result: FoodPieClafoutis
+  recipeTags: [Pie]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDoughPie: 1
+    FoodBerries: 3
+    FoodPlateTin: 1
+
+- type: cookingRecipe
+  id: RecipeCherryPie
+  name: cherry pie recipe
+  result: FoodPieCherry
+  recipeTags: [Pie]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDoughPie: 1
+    FoodCherry: 5
+    FoodPlateTin: 1
+
+- type: cookingRecipe
+  id: RecipeFrostyPie
+  name: frosty pie recipe
+  result: FoodPieFrosty
+  recipeTags: [Pie]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDoughPie: 1
+    FoodChillyPepper: 3
+    FoodPlateTin: 1
+
+- type: cookingRecipe
+  id: RecipeMeatPie
+  name: meat pie recipe
+  result: FoodPieMeat
+  recipeTags: [Pie]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDoughPie: 1
+    FoodMeat: 3
+    FoodPlateTin: 1
+
+- type: cookingRecipe
+  id: RecipePumpkinPie
+  name: pumpkin pie recipe
+  result: FoodPiePumpkin
+  recipeTags: [Pie]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDoughPie: 1
+    FoodPumpkin: 1
+    FoodPlateTin: 1
+
+- type: cookingRecipe
+  id: RecipeXenoPie
+  name: xeno pie recipe
+  result: FoodPieXeno
+  recipeTags: [Pie]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodDoughPie: 1
+    FoodMeatXeno: 3
+    FoodPlateTin: 1
+
+# Tarts
+
+- type: cookingRecipe
+  id: RecipeCocoTart
+  name: chocolate lava tart recipe
+  result: FoodTartCoco
+  recipeTags: [Tart]
+  instrumentType: oven
+  time: 15
+  reagents:
+    Sugar: 5
+    Milk: 5
+  solids:
+    FoodDoughPie: 1
+    FoodSnackChocolateBar: 3
+    FoodPlateTin: 1
+
+- type: cookingRecipe
+  id: RecipeGappleTart
+  name: golden apple streusel tart recipe
+  result: FoodTartGapple
+  recipeTags: [Tart]
+  instrumentType: oven
+  time: 15
+  reagents:
+    Gold: 10
+    Sugar: 5
+    Milk: 5
+  solids:
+    FoodDoughPie: 1
+    FoodApple: 2 #in absence of the real gapple i'm substituting one apple with 10u gold (one ingot)
+    FoodPlateTin: 1
+
+- type: cookingRecipe
+  id: RecipeGrapeTart
+  name: grape tart recipe
+  result: FoodTartGrape
+  recipeTags: [Tart]
+  instrumentType: oven
+  time: 15
+  reagents:
+    Sugar: 5
+    Milk: 5
+  solids:
+    FoodDoughPie: 1
+    FoodGrape: 3
+
+- type: cookingRecipe
+  id: RecipeMimeTart
+  name: mime tart recipe
+  result: FoodTartMime
+  recipeTags: [Tart]
+  instrumentType: oven
+  time: 15
+  reagents:
+    Sugar: 5
+    Milk: 5
+  solids:
+    FoodDoughPie: 1
+    FoodMimana: 3
+    FoodPlateTin: 1
+
+# Cakes
+
+- type: cookingRecipe
+  id: RecipeAppleCake
+  name: apple cake recipe
+  result: FoodCakeApple
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodCakePlain: 1
+    FoodApple: 3
+
+- type: cookingRecipe
+  id: RecipeCarrotCake
+  name: carrot cake recipe
+  result: FoodCakeCarrot
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodCakePlain: 1
+    FoodCarrot: 3
+
+- type: cookingRecipe
+  id: RecipeLemonCake
+  name: lemon cake recipe
+  result: FoodCakeLemon
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodCakePlain: 1
+    FoodLemon: 3
+
+- type: cookingRecipe
+  id: RecipeLemoonCake
+  name: lemoon cake recipe
+  result: FoodCakeLemoon
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodCakePlain: 1
+    FoodLemoon: 2
+    FoodBerries: 1 #dark colouring
+
+- type: cookingRecipe
+  id: RecipeOrangeCake
+  name: orange cake recipe
+  result: FoodCakeOrange
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodCakePlain: 1
+    FoodOrange: 3
+
+- type: cookingRecipe
+  id: RecipeBlueberryCake
+  name: blueberry cake recipe
+  result: FoodCakeBlueberry
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodCakePlain: 1
+    FoodBerries: 3
+
+- type: cookingRecipe
+  id: RecipeLimeCake
+  name: lime cake recipe
+  result: FoodCakeLime
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodCakePlain: 1
+    FoodLime: 3
+
+- type: cookingRecipe
+  id: RecipeCheeseCake
+  name: cheese cake recipe
+  result: FoodCakeCheese
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  reagents:
+    Cream: 10
+  solids:
+    FoodCakePlain: 1
+    FoodCheeseSlice: 3
+
+- type: cookingRecipe
+  id: RecipePumpkinCake
+  name: pumpkin cake recipe
+  result: FoodCakePumpkin
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodCakePlain: 1
+    FoodPumpkin: 1
+
+- type: cookingRecipe
+  id: RecipeClownCake
+  name: clown cake recipe
+  result: FoodCakeClown
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  solids:
+    ClothingMaskClown: 1
+    FoodCakePlain: 1
+
+- type: cookingRecipe
+  id: RecipeCake
+  name: cake recipe
+  result: FoodCakePlain
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodCakeBatter: 1
+
+- type: cookingRecipe
+  id: RecipeBirthdayCake
+  name: birthday cake recipe
+  result: FoodCakeBirthday
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  reagents:
+    Cream: 5
+  solids:
+    FoodCakePlain: 1
+
+- type: cookingRecipe
+  id: RecipeChocolateCake
+  name: chocolate cake recipe
+  result: FoodCakeChocolate
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodCakePlain: 1
+    FoodSnackChocolateBar: 2
+
+- type: cookingRecipe
+  id: RecipeBrainCake
+  name: brain cake recipe
+  result: FoodCakeBrain
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodCakePlain: 1
+    OrganHumanBrain: 1
+
+- type: cookingRecipe
+  id: RecipeSlimeCake
+  name: slime cake recipe
+  result: FoodCakeSlime
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 5
+  reagents:
+    Slime: 15
+  solids:
+    FoodCakePlain: 1
+
+- type: cookingRecipe
+  id: RecipeCatCake
+  name: cat cake recipe
+  result: MobCatCake
+  recipeTags: [Cake]
+  instrumentType: oven
+  time: 15
+  reagents:
+    Milk: 15
+    Cognizine: 5
+  solids:
+    FoodCakePlain: 1
+    FoodSnackRaisins: 1
+    OrganAnimalHeart: 1
+
+# Muffins
+
+- type: cookingRecipe
+  id: RecipeMuffin
+  name: muffin recipe
+  result: FoodBakedMuffin
+  recipeTags: [Muffin]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodPlateMuffinTin: 1
+    FoodDoughSlice: 1
+  reagents:
+    Sugar: 10
+
+- type: cookingRecipe
+  id: RecipeMuffinChocolate
+  name: chocolate muffin recipe
+  result: FoodBakedMuffinChocolate
+  recipeTags: [Muffin]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodPlateMuffinTin: 1
+    FoodDoughSlice: 1
+    FoodSnackChocolateBar: 1
+  reagents:
+    Sugar: 10
+
+- type: cookingRecipe
+  id: RecipeMuffinBerry
+  name: berry muffin recipe
+  result: FoodBakedMuffinBerry
+  recipeTags: [Muffin]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodPlateMuffinTin: 1
+    FoodDoughSlice: 1
+    FoodBerries: 1
+  reagents:
+    Sugar: 10
+
+- type: cookingRecipe
+  id: RecipeMuffinBanana
+  name: banana muffin recipe
+  result: FoodBakedMuffinBanana
+  recipeTags: [Muffin]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodPlateMuffinTin: 1
+    FoodDoughSlice: 1
+    FoodBanana: 1
+  reagents:
+    Sugar: 10
+
+- type: cookingRecipe
+  id: RecipeMuffinCherry
+  name: cherry muffin recipe
+  result: FoodBakedMuffinCherry
+  recipeTags: [Muffin]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodPlateMuffinTin: 1
+    FoodDoughSlice: 1
+    FoodCherry: 3
+  reagents:
+    Sugar: 10
+
+# Other
+
+- type: cookingRecipe
+  id: RecipeLoadedBakedPotato
+  name: loaded baked potato recipe
+  result: FoodMealPotatoLoaded
+  recipeTags: [Other]
+  instrumentType: oven
+  time: 15
+  solids:
+    FoodPotato: 1
+    FoodCheeseSlice: 1
+
+- type: cookingRecipe
+  id: RecipeDumplings
+  name: dumplings recipe
+  result: FoodBakedDumplings
+  recipeTags: [Other]
+  instrumentType: oven
+  time: 15
+  reagents:
+    Water: 10
+    UncookedAnimalProteins: 6
+  solids:
+    FoodDoughSlice: 3
+
+- type: cookingRecipe
+  id: RecipeBrownies
+  name: brownie recipe
+  result: FoodBakedBrownieBatch
+  recipeTags: [Other]
+  instrumentType: oven
+  time: 25
+  reagents:
+    Flour: 15
+    Sugar: 30
+    Egg: 18
+  solids:
+    FoodButter: 2
+    FoodSnackChocolateBar: 2
+
+- type: cookingRecipe
+  id: RecipeCroissant
+  name: croissant recipe
+  result: FoodBakedCroissant
+  recipeTags: [Other]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodCroissantRaw: 1
+    FoodButterSlice: 1
+
+- type: cookingRecipe
+  id: RecipeCroissantCotton
+  name: cotton croissant recipe
+  result: FoodBakedCroissantCotton
+  recipeTags: [Other]
+  instrumentType: oven
+  time: 5
+  solids:
+    FoodCroissantRawCotton: 1
+    FoodButterSlice: 1
+
+- type: cookingRecipe
+  id: RecipeCheburek
+  name: Cheburek recipe
+  result: FoodCheburek
+  recipeTags: [Other]
+  instrumentType: oven
+  time: 15
+  reagents:
+    TableSalt: 5
+  solids:
+    FoodDough: 1
+    FoodMeatCutlet: 1
+    FoodOnionSlice: 1
+
+# Suppermatter
+- type: cookingRecipe
+  id: RecipeSuppermatter
+  name: suppermatter recipe
+  result: FoodCakeSuppermatter
+  recipeTags: [Suppermatter]
+  instrumentType: oven
+  time: 30
+  solids:
+    FoodCakeBatter: 2
+  reagents:
+    Sugar: 30
+    Nitrogen: 10
+    Plasma: 10

@@ -1,0 +1,57 @@
+- type: cookingRecipe
+  id: RecipeShawarmaRaw
+  name: Shawarma recipe
+  result: FoodRawShawarma
+  instrumentType: choppingBoard
+  time: 5
+  reagents:
+    Mayo: 5
+  solids:
+    FoodDough: 1
+    FoodMeatChicken: 1
+    FoodCabbage: 1
+    FoodTomato: 1
+    FoodCheeseSlice: 1
+
+- type: cookingRecipe
+  id: RecipeFoodBakedChevreChaud
+  name: chevre chaud recipe
+  result: FoodRawChevreChaud
+  instrumentType: choppingBoard
+  time: 5
+  solids:
+    FoodChevreSlice: 1
+    FoodBreadBaguetteSlice: 1
+
+- type: cookingRecipe
+  id: RecipeFoodBakedChevreChaudCotton
+  name: cotton chevre chaud recipe
+  result: FoodRawChevreChaudCotton
+  instrumentType: choppingBoard
+  time: 5
+  solids:
+    FoodChevreSlice: 1
+    FoodBreadBaguetteCottonSlice: 1
+
+- type: cookingRecipe
+  id: RecipeRibs
+  name: BBQ ribs recipe
+  result: FoodRawMealRibs
+  instrumentType: choppingBoard
+  time: 5
+  reagents:
+    BbqSauce: 5
+  solids:
+    FoodMeat: 2
+    FoodKebabSkewer: 1
+
+- type: cookingRecipe
+  id: RecipeEnchiladas
+  name: enchiladas recipe
+  result: FoodMealEnchiladas
+  instrumentType: choppingBoard
+  time: 5
+  solids:
+    FoodChiliPepper: 2
+    FoodMeatCutlet: 1
+    FoodCorn: 1

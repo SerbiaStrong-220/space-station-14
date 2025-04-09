@@ -208,7 +208,7 @@ DefaultStationBeaconTeslaEngine: null
 AsteroidRockCrab1: AsteroidRock # SS220 asteroid-migration
 
 # 2024-01-28
-FoodBoxDonkpocketGondola: FoodBoxDonkpocketPizza
+# FoodBoxDonkpocketGondola: FoodBoxDonkpocketPizza # SS220 Return gondola pocket
 
 # 2024-01-31
 SpyCrewMonitor: null

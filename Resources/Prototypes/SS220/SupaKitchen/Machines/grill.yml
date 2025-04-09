@@ -1,0 +1,36 @@
+- type: entity
+  parent: KitchenElectricGrill
+  id: FloorKitchenElectricGrill
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Machines/floor_electric_grill.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    layers:
+    - state: grill
+    - map: ["enum.EntityHeaterVisuals.Setting"]
+      shader: unshaded
+      visible: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.30,-0.20,0.30,0.35"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Machine
+    board: FloorElectricGrillMachineCircuitboard
+
+- type: entity
+  id: FloorElectricGrillMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  components:
+    - type: MachineBoard
+      prototype: FloorKitchenElectricGrill
+      stackRequirements:
+        Capacitor: 4
+        Glass: 2
+        Cable: 5
