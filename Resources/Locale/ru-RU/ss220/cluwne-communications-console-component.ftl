@@ -11,6 +11,7 @@ cluwne-comms-console-menu-alert-placeholder = Текст смешного пре
 cluwne-comms-console-menu-code-button = Выставить смешной код
 cluwne-comms-console-menu-announcement-button = Сделать веселое объявление
 cluwne-comms-console-menu-boom-button = СЛАВА КРАСНОМУ НОСУ!
+cluwne-comms-console-menu-time-remaining = Оставшееся время: { $time }
 # Popup
 cluwne-comms-console-permission-denied = В шутке отказано
 cluwne-comms-console-shuttle-unavailable = В настоящее время шаттл недоступен

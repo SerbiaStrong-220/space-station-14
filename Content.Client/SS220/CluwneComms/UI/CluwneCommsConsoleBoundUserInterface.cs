@@ -64,6 +64,9 @@ namespace Content.Client.SS220.CluwneComms.UI
                 _menu.AlertLevelButton.Disabled = !_menu.CanAlert;
 
                 _menu.UpdateAlertLevels(commsState.AlertLevels);
+
+                _menu.AnnounceCountdownEnd = commsState.AnnouncementCooldownRemaining;
+                _menu.AlertCountdownEnd = commsState.AlertCooldownRemaining;
             }
         }
     }

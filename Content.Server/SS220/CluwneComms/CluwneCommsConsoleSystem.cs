@@ -87,12 +87,14 @@ namespace Content.Server.SS220.CluwneComms
                 if (!comp.CanAnnounce && _timing.CurTime >= comp.AnnouncementCooldownRemaining)
                 {
                     comp.CanAnnounce = true;
+                    comp.AnnouncementCooldownRemaining = null;
                     UpdateUI(uid, comp);
                 }
 
                 if (!comp.CanAlert && _timing.CurTime >= comp.AlertCooldownRemaining)
                 {
                     comp.CanAlert = true;
+                    comp.AlertCooldownRemaining = null;
                     UpdateUI(uid, comp);
                 }
             }
@@ -107,7 +109,7 @@ namespace Content.Server.SS220.CluwneComms
                 levels.Add(item.Key);
             }
 
-            CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce, comp.CanAlert, levels);
+            CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce, comp.CanAlert, levels, comp.AnnouncementCooldownRemaining, comp.AlertCooldownRemaining);
             _uiSystem.SetUiState(ent, CluwneCommsConsoleUiKey.Key, newState);
         }
 

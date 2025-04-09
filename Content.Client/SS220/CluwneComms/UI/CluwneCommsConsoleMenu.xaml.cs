@@ -8,6 +8,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Globalization;
 
 namespace Content.Client.SS220.CluwneComms.UI
 {
@@ -16,12 +17,15 @@ namespace Content.Client.SS220.CluwneComms.UI
     {
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly ILocalizationManager _loc = default!;
+        [Dependency] private readonly IGameTiming _timing = default!;
 
         public bool CanAnnounce;
         public bool CanAlert;
         public bool AlertLevelSelectable;
         public string CurrentLevel = string.Empty;
-        public TimeSpan? CountdownEnd;
+
+        public TimeSpan? AnnounceCountdownEnd;
+        public TimeSpan? AlertCountdownEnd;
 
         public event Action? OnEmergencyLevel;
         public event Action<string>? OnAnnounce;
@@ -175,19 +179,31 @@ namespace Content.Client.SS220.CluwneComms.UI
 
         public void UpdateCountdown()
         {
-            /*
-            if (!CountdownStarted)
+            if (AnnounceCountdownEnd == null)
             {
-                CountdownLabel.SetMessage(string.Empty);
-                return;
+                AnnounceButton.Text = _loc.GetString($"cluwne-comms-console-menu-announcement-button");
+            }
+            else
+            {
+                var diff = MathHelper.Max((AnnounceCountdownEnd - _timing.CurTime) ?? TimeSpan.Zero, TimeSpan.Zero);
+
+                var infoText = Loc.GetString($"cluwne-comms-console-menu-time-remaining",
+                    ("time", diff.ToString(@"mm\:ss", CultureInfo.CurrentCulture)));
+                AnnounceButton.Text = infoText;
             }
 
-            var diff = MathHelper.Max(( - _timing.CurTime) ?? TimeSpan.Zero, TimeSpan.Zero);
+            if (AlertCountdownEnd == null)
+            {
+                AlertButton.Text = _loc.GetString($"cluwne-comms-console-menu-code-button");
+            }
+            else
+            {
+                var diff = MathHelper.Max((AlertCountdownEnd - _timing.CurTime) ?? TimeSpan.Zero, TimeSpan.Zero);
 
-            var infoText = Loc.GetString($"comms-console-menu-time-remaining",
-                ("time", diff.ToString(@"hh\:mm\:ss", CultureInfo.CurrentCulture)));
-            CountdownLabel.SetMessage(infoText);
-            */
+                var infoText = Loc.GetString($"cluwne-comms-console-menu-time-remaining",
+                    ("time", diff.ToString(@"mm\:ss", CultureInfo.CurrentCulture)));
+                AlertButton.Text = infoText;
+            }
         }
     }
 }

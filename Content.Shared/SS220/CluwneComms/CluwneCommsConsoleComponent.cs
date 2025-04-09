@@ -30,7 +30,7 @@ namespace Content.Shared.SS220.CluwneComms
         /// Remaining cooldown between making announcements.
         /// </summary>
         [ViewVariables]
-        public TimeSpan AnnouncementCooldownRemaining;
+        public TimeSpan? AnnouncementCooldownRemaining;
 
         [ViewVariables]
         public bool CanAlert;
@@ -46,7 +46,7 @@ namespace Content.Shared.SS220.CluwneComms
         /// Remaining cooldown between making funny codes.
         /// </summary>
         [ViewVariables]
-        public TimeSpan AlertCooldownRemaining;
+        public TimeSpan? AlertCooldownRemaining;
 
         /// <summary>
         /// Announce sound file path
@@ -94,11 +94,13 @@ namespace Content.Shared.SS220.CluwneComms
     }
 
     [Serializable, NetSerializable]
-    public sealed class CluwneCommsConsoleInterfaceState(bool canAnnounce, bool canAlert, List<string>? alertLevels) : BoundUserInterfaceState
+    public sealed class CluwneCommsConsoleInterfaceState(bool canAnnounce, bool canAlert, List<string>? alertLevels, TimeSpan? announcementCooldownRemaining, TimeSpan? alertCooldownRemaining) : BoundUserInterfaceState
     {
         public readonly bool CanAnnounce = canAnnounce;
         public readonly bool CanAlert = canAlert;
         public List<string>? AlertLevels = alertLevels;
+        public TimeSpan? AnnouncementCooldownRemaining = announcementCooldownRemaining;
+        public TimeSpan? AlertCooldownRemaining = alertCooldownRemaining;
     }
 
     [Serializable, NetSerializable]
