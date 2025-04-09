@@ -31,7 +31,7 @@ public sealed class LanguageManager
     /// </summary>
     public bool TryGetLanguageByKey(string key, [NotNullWhen(true)] out LanguagePrototype? language)
     {
-        language = Languages.Find(l => KeyPrefix + l.Key == key);
+        language = Languages.Find(l => l.KeyWithPrefix == key);
         return language != null;
     }
 }
