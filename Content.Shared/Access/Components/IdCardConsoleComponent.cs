@@ -79,6 +79,46 @@ public sealed partial class IdCardConsoleComponent : Component
         "Magistrate", //SS220-Magistrate Access Fix
     };
 
+    /// <summary>
+    /// All access levels which will be given to ID card when "Extended" button is pressed
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<AccessLevelPrototype>> ExtendedAccessLevels = new()
+    {
+        // "Atmospherics",
+        "Bar",
+        // "Brig",
+        // "Blueshield",
+        // "Detective",
+        // "Captain",
+        "Cargo",
+        "Chapel",
+        "Chemistry",
+        // "ChiefEngineer",
+        // "ChiefMedicalOfficer",
+        "Paramedic",
+        "Command",
+        "Cryogenics",
+        "Engineering",
+        "External",
+        // "HeadOfPersonnel",
+        // "HeadOfSecurity",
+        "Hydroponics",
+        "Janitor",
+        "Kitchen",
+        "Lawyer",
+        "Maintenance",
+        "Medical",
+        // "Quartermaster",
+        "Research",
+        // "ResearchDirector",
+        "Salvage",
+        "Security",
+        "Service",
+        "Theatre",
+        // "Magistrate", //SS220-Magistrate Access Fix
+    };
+
     [Serializable, NetSerializable]
     public sealed class IdCardConsoleBoundUserInterfaceState : BoundUserInterfaceState
     {
