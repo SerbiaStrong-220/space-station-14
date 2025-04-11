@@ -27,10 +27,8 @@
         </GridContainer>
         <Control MinSize="0 8" />
         <GridContainer Columns="2">
-            <BoxContainer>
-                <Label Text="{Loc 'id-card-console-window-job-selection-label'}" />
-                <OptionButton Name="JobPresetOptionButton" />
-            </BoxContainer>
+            <Label Text="{Loc 'id-card-console-window-job-selection-label'}" />
+            <OptionButton Name="JobPresetOptionButton" />
         </GridContainer>
         <Control Name="AccessLevelControlContainer" />
         <!-- SS220-ID console extended access button-Begin -->
