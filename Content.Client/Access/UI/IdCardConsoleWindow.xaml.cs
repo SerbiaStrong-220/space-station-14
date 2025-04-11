@@ -73,6 +73,7 @@ namespace Content.Client.Access.UI
             _accessButtons.Populate(accessLevels, prototypeManager);
             AccessLevelControlContainer.AddChild(_accessButtons);
             ExtendedAccessButton.OnPressed += _ => AddExtendedAccess(); // SS220-ID console extended access button
+            FullAccessButton.OnPressed += _ => AddFullAccess(); // SS220-ID console extended access button
 
             foreach (var (id, button) in _accessButtons.ButtonsList)
             {
@@ -215,6 +216,21 @@ namespace Content.Client.Access.UI
                     button.Pressed = true;
                 }
             }
+            JobTitleLineEdit.Text += Loc.GetString("id-card-console-window-extended-access-job-title-postfix");
+
+            SubmitData();
+        }
+
+        private void AddFullAccess()
+        {
+            foreach (var button in _accessButtons.ButtonsList.Values)
+            {
+                if (button.Disabled)
+                    continue;
+
+                button.Pressed = true;
+            }
+            JobTitleLineEdit.Text += Loc.GetString("id-card-console-window-full-access-job-title-postfix");
 
             SubmitData();
         }

@@ -27,14 +27,19 @@
         </GridContainer>
         <Control MinSize="0 8" />
         <GridContainer Columns="2">
-            <!-- SS220-ID console extended access button-Begin -->
-            <BoxContainer HorizontalExpand="True">
+            <BoxContainer>
                 <Label Text="{Loc 'id-card-console-window-job-selection-label'}" />
                 <OptionButton Name="JobPresetOptionButton" />
             </BoxContainer>
-            <Button Text="{Loc 'id-card-console-window-extended-access-button'}" Name="ExtendedAccessButton" />
-            <!-- SS220-ID console extended access button-End -->
         </GridContainer>
         <Control Name="AccessLevelControlContainer" />
+        <!-- SS220-ID console extended access button-Begin -->
+        <BoxContainer HorizontalExpand="True" HorizontalAlignment="Right">
+            <BoxContainer>
+                <Button Text="{Loc 'id-card-console-window-full-access-button'}" StyleClasses="OpenRight" Name="FullAccessButton" />
+                <Button Text="{Loc 'id-card-console-window-extended-access-button'}" StyleClasses="OpenLeft" Name="ExtendedAccessButton" />
+            </BoxContainer>
+        </BoxContainer>
+        <!-- SS220-ID console extended access button-End -->
     </BoxContainer>
 </DefaultWindow>
