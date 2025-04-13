@@ -89,7 +89,6 @@ public sealed partial class IdCardConsoleComponent : Component
         "Cargo",
         "Chapel",
         "Paramedic",
-        "Command",
         "Cryogenics",
         "Engineering",
         "External",

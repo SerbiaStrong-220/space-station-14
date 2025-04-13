@@ -216,7 +216,10 @@ namespace Content.Client.Access.UI
                     button.Pressed = true;
                 }
             }
-            JobTitleLineEdit.Text += Loc.GetString("id-card-console-window-extended-access-job-title-postfix");
+
+            var postfix = Loc.GetString("id-card-console-window-extended-access-job-title-postfix");
+            if (!JobTitleLineEdit.Text.EndsWith(postfix))
+                JobTitleLineEdit.Text += postfix;
 
             SubmitData();
         }
@@ -230,7 +233,10 @@ namespace Content.Client.Access.UI
 
                 button.Pressed = true;
             }
-            JobTitleLineEdit.Text += Loc.GetString("id-card-console-window-full-access-job-title-postfix");
+
+            var postfix = Loc.GetString("id-card-console-window-full-access-job-title-postfix");
+            if (!JobTitleLineEdit.Text.EndsWith(postfix))
+                JobTitleLineEdit.Text += postfix;
 
             SubmitData();
         }
