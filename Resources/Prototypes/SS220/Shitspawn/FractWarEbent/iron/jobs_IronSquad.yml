@@ -90,6 +90,14 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: IronSquadLeader
@@ -192,6 +200,14 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: IronSquadEngineer
@@ -231,6 +247,7 @@
       amount: 2
     - id: ClothingEyesHudMedSec
     - id: SyndiHypo
+    - id: DefibrillatorSyndicate
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -299,6 +316,14 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: IronSquadCorpsman
@@ -409,6 +434,14 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: IronSquadCMO
@@ -510,6 +543,14 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: IronSquadFighter

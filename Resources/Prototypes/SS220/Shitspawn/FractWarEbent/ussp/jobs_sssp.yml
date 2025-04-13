@@ -66,6 +66,14 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: USSPLeader
@@ -153,6 +161,14 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: USSPEngineer
@@ -195,6 +211,7 @@
     - id: ClothingUniformJumpsuitUssp
     - id: ClothingOuterCoatUssp
     - id: ClothingEyesHudMedSec
+    - id: DefibrillatorCompact
 
 - type: startingGear
   id: EbentUSSPCorpsmanGear
@@ -240,6 +257,14 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: USSPCorpsman
@@ -326,6 +351,14 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: USSPCMO
@@ -407,6 +440,14 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: USSPFighter

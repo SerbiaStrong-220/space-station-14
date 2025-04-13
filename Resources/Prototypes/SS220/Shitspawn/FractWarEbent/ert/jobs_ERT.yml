@@ -122,6 +122,7 @@
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
     - id: ClothingEyesHudMedSec
+    - id: DefibrillatorCompact
 
 #Leader
 - type: startingGear
@@ -166,6 +167,14 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -224,6 +233,14 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -287,6 +304,14 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -347,6 +372,14 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: SpecOpsCMO
@@ -409,6 +442,14 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      timeToDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: SpecOpsFighter
