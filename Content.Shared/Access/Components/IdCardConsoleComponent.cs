@@ -79,6 +79,7 @@ public sealed partial class IdCardConsoleComponent : Component
         "Magistrate", //SS220-Magistrate Access Fix
     };
 
+    // SS220-ID console extended access button-Begin
     /// <summary>
     /// All access levels which will be given to ID card when "Extended" button is pressed
     /// </summary>
@@ -88,6 +89,7 @@ public sealed partial class IdCardConsoleComponent : Component
         "Bar",
         "Cargo",
         "Chapel",
+        "Chemistry",
         "Paramedic",
         "Cryogenics",
         "Engineering",
@@ -103,6 +105,7 @@ public sealed partial class IdCardConsoleComponent : Component
         "Service",
         "Theatre",
     };
+    // SS220-ID console extended access button-End
 
     [Serializable, NetSerializable]
     public sealed class IdCardConsoleBoundUserInterfaceState : BoundUserInterfaceState
