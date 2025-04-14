@@ -112,6 +112,13 @@ public partial class MobStateSystem
         RaiseLocalEvent(target, ev, true);
         _adminLogger.Add(LogType.Damaged, oldState == MobState.Alive ? LogImpact.Low : LogImpact.Medium,
             $"{ToPrettyString(target):user} state changed from {oldState} to {newState}");
+
+        if (oldState == MobState.Dead && newState is MobState.Critical or MobState.Alive)
+        {
+            var evRevive = new RevivingCorpseEvent(target, component, oldState, newState, origin);
+            RaiseLocalEvent(target, evRevive, true);
+        }
+
         Dirty(target, component);
     }
 

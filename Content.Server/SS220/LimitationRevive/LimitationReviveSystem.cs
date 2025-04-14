@@ -4,11 +4,10 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Rejuvenate;
 using Content.Shared.Traits;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Timer = Robust.Shared.Timing.Timer;
+using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.LimitationRevive;
 
@@ -21,11 +20,12 @@ public sealed class LimitationReviveSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {
         SubscribeLocalEvent<LimitationReviveComponent, UpdateMobStateEvent>(OnDeadMobState);
-        SubscribeLocalEvent<LimitationReviveComponent, RejuvenateEvent>(OnUseAdminCommand);
+        SubscribeLocalEvent<LimitationReviveComponent, RevivingCorpseEvent>(OnAlive);
     }
 
     private void OnDeadMobState(Entity<LimitationReviveComponent> ent, ref UpdateMobStateEvent args)
@@ -39,16 +39,14 @@ public sealed class LimitationReviveSystem : EntitySystem
         ent.Comp.IsAlreadyDead = true;
         ent.Comp.IsDamageTaken = false;
 
-        Timer.Spawn(ent.Comp.TimeToDamage, () => TryDamageAfterDeath(ent.Owner));
+        ent.Comp.EndTimeToDamage = _timing.CurTime + ent.Comp.TimeToDamage;
     }
 
-    private void OnUseAdminCommand(Entity<LimitationReviveComponent> ent, ref RejuvenateEvent args)
+    private void OnAlive(Entity<LimitationReviveComponent> ent, ref RevivingCorpseEvent args)
     {
-        ent.Comp.IsDamageTaken = false;
         ent.Comp.IsAlreadyDead = false;
-        ent.Comp.CounterOfDead = 0;
+        ent.Comp.IsDamageTaken = false;
     }
-
     /// <summary>
     /// Attempt to damage and add a negative trait after death. Damage and Trait can only be received once per death.
     /// </summary>
@@ -81,5 +79,17 @@ public sealed class LimitationReviveSystem : EntitySystem
                 _entityManager.AddComponents(uid, traitProto.Components, false);
 
         }
+    }
+
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<LimitationReviveComponent>();
+        var curTime = _timing.CurTime;
+
+        while (query.MoveNext(out var uid, out var limitationRevive))
+            if (curTime >= limitationRevive.EndTimeToDamage &&
+                limitationRevive.EndTimeToDamage != TimeSpan.Zero &&
+                limitationRevive.IsDamageTaken == false)
+                TryDamageAfterDeath(uid);
     }
 }

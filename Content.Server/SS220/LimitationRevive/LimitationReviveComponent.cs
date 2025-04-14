@@ -27,6 +27,8 @@ public sealed partial class LimitationReviveComponent : Component
     [DataField]
     public TimeSpan TimeToDamage = TimeSpan.FromSeconds(60);
 
+    public TimeSpan EndTimeToDamage = TimeSpan.Zero;
+
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";
 
