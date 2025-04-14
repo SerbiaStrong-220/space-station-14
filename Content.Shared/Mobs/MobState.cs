@@ -30,9 +30,6 @@ public enum MobState : byte
 public record struct MobStateChangedEvent(EntityUid Target, MobStateComponent Component, MobState OldMobState,
     MobState NewMobState, EntityUid? Origin = null);
 
-public record struct RevivingCorpseEvent(EntityUid Target, MobStateComponent Component, MobState OldMobState,
-    MobState NewMobState, EntityUid? Origin = null);
-
 public static class A
 {
     //^.^
