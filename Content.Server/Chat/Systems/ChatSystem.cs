@@ -885,13 +885,13 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (i == 1) // only for 1st node
             {
                 if (capitalize)
-                    msg = SanitizeMessageCapital(msg);
+                    newLangMessage = SanitizeMessageCapital(newLangMessage);
             }
 
             if (capitalizeTheWordI)
-                msg = SanitizeMessageCapitalizeTheWordI(msg, "i");
+                newLangMessage = SanitizeMessageCapitalizeTheWordI(newLangMessage, "i");
             if (punctuate)
-                msg = SanitizeMessagePeriod(msg);
+                newLangMessage = SanitizeMessagePeriod(newLangMessage);
 
             return newLangMessage;
         });
@@ -910,7 +910,6 @@ public sealed partial class ChatSystem : SharedChatSystem
         // Sanitize it first as it might change the word order
         //_sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out emoteStr);
 
-
         //if (capitalize)
         //    newMessage = SanitizeMessageCapital(newMessage);
         //if (capitalizeTheWordI)
@@ -918,7 +917,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         //if (punctuate)
         //    newMessage = SanitizeMessagePeriod(newMessage);
 
-        newMessage = languageMessage.GetMessageWithLanguageKeys();
+        newMessage = languageMessage.GetMessageWithLanguageKeys(false);
         // SS220 languages end
 
         return prefix + newMessage;
