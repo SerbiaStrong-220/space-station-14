@@ -174,7 +174,7 @@
       chanceWithMedSkill: 1
     - type: LimitationRevive
       maxRevive: 3
-      timeToDamage: 180
+      delayBeforeDamage: 180
       typeDamageOnDead:
         types:
           Сerebral: 400
@@ -240,7 +240,7 @@
       chanceWithMedSkill: 1
     - type: LimitationRevive
       maxRevive: 3
-      timeToDamage: 180
+      delayBeforeDamage: 180
       typeDamageOnDead:
         types:
           Сerebral: 400
@@ -311,7 +311,7 @@
       chanceWithMedSkill: 1
     - type: LimitationRevive
       maxRevive: 3
-      timeToDamage: 180
+      delayBeforeDamage: 180
       typeDamageOnDead:
         types:
           Сerebral: 400
@@ -379,7 +379,7 @@
       chanceWithMedSkill: 1
     - type: LimitationRevive
       maxRevive: 3
-      timeToDamage: 180
+      delayBeforeDamage: 180
       typeDamageOnDead:
         types:
           Сerebral: 400
@@ -449,7 +449,7 @@
       chanceWithMedSkill: 1
     - type: LimitationRevive
       maxRevive: 3
-      timeToDamage: 180
+      delayBeforeDamage: 180
       typeDamageOnDead:
         types:
           Сerebral: 400
