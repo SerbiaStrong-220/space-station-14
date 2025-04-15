@@ -80,11 +80,11 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (!CanZap(uid, target, args.User, component))
             return;
         // SS220 NewDefib begin
-        if (_inventory.TryGetSlotEntity(target, "outerClothing", out var item) && item != null) 
+        if (_inventory.TryGetSlotEntity(target, "outerClothing", out var item) && item != null)
         {
              _popup.PopupEntity(Loc.GetString("loc-defib-outer-popup"), target, args.User);
             return;
-        } 
+        }
         // SS220 NewDefib end
         args.Handled = true;
         Zap(uid, target, args.User, component);
@@ -255,14 +255,6 @@ public sealed class DefibrillatorSystem : EntitySystem
                 TryComp<DamageableComponent>(target, out var damageableComponent) &&
                 damageableComponent.TotalDamage < threshold)
             {
-                //SS220 LimitationRevive - start
-                if (TryComp<LimitationReviveComponent>(target, out var compLimitRevive))
-                {
-                    compLimitRevive.IsAlreadyDead = false;
-                    compLimitRevive.IsDamageTaken = false;
-                }
-                //SS220 LimitationRevive - end
-
                 _mobState.ChangeMobState(target, MobState.Critical, mob, uid);
                 dead = false;
             }
