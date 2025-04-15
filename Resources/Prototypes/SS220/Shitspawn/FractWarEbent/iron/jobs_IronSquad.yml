@@ -50,6 +50,7 @@
       - id: ExGrenade
       - id: GlowstickRed
         amount: 2
+      - id: Binoculars
 
 - type: startingGear
   id: EbentIronSquadLeaderGear
@@ -159,6 +160,7 @@
       - id: ExGrenade
       - id: GlowstickRed
         amount: 2
+      - id: Binoculars
 
 - type: startingGear
   id: EbentIronSquadEngineerGear
@@ -393,6 +395,7 @@
       - id: ExGrenade
       - id: GlowstickRed
         amount: 2
+      - id: Binoculars
 
 - type: startingGear
   id: EbentIronSquadCMOGear

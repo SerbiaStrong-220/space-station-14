@@ -25,6 +25,7 @@
       amount: 6
     - id: EnergyAxe
     - id: JobIconChangerUSSP
+    - id: Binoculars
 
 - type: startingGear
   id: EbentUSSPLeaderGear
@@ -119,6 +120,7 @@
       amount: 4
     - id: JobIconChangerUSSP
     - id: ClothingEyesGlassesMeson
+    - id: Binoculars
 
 - type: startingGear
   id: EbentUSSPEngineerGear
@@ -309,6 +311,7 @@
     - id: ClothingEyesHudMedSec
     - id: JobIconChangerUSSP
     - id: DefibrillatorCompact
+    - id: Binoculars
 
 - type: startingGear
   id: EbentUSSPCMOGear

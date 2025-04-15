@@ -52,6 +52,7 @@
       amount: 4
     - id: EnergySwordEbentDouble
     - id: JobIconChangerNT
+    - id: Binoculars
 
 - type: entity
   parent: LockerChiefMedicalOfficer
@@ -79,6 +80,7 @@
     - id: ClothingEyesHudMedSec
     - id: JobIconChangerNT
     - id: DefibrillatorCompact
+    - id: Binoculars
 
 - type: entity
   parent: LockerEngineer
@@ -104,6 +106,7 @@
     - id: RCDAmmo
       amount: 4
     - id: JobIconChangerNT
+    - id: Binoculars
 
 - type: entity
   parent: LockerMedical
