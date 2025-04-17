@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Damage;
-using Content.Shared.Random; 
+using Content.Shared.Random;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.LimitationRevive;
@@ -25,8 +25,13 @@ public sealed partial class LimitationReviveComponent : Component
     public DamageSpecifier TypeDamageOnDead;
 
     [DataField]
-    public TimeSpan TimeToDamage = TimeSpan.FromSeconds(60);
+    public TimeSpan DelayBeforeDamage = TimeSpan.FromSeconds(60);
+
+    public TimeSpan TimeToDamage = TimeSpan.Zero;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";
+
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public float ChanceToAddTrait  = 0.6f;
 }
