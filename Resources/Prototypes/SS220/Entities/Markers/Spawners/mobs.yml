@@ -19,7 +19,64 @@
   - type: Sprite
     layers:
       - state: green
-      - state: ai
+      - state: croc
+        sprite: SS220/Mobs/Pets/albino_crocodile.rsi
   - type: ConditionalSpawner
     prototypes:
       - MobStevenCrocodileGhostRole
+
+- type: entity
+  name: the spawner Crocodile
+  id: SpawnMobCrocodile
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: croc
+      sprite: SS220/Mobs/Animals/crocodile.rsi
+  - type: ConditionalSpawner
+    prototypes:
+      - MobCrocodile
+
+- type: entity
+  name: the spawner Crocodile Angry
+  id: SpawnMobCrocodileAngry
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: croc
+      sprite: SS220/Mobs/Animals/crocodile.rsi
+  - type: ConditionalSpawner
+    prototypes:
+      - MobCrocodileAngry
+
+- type: entity
+  name: the spawner Crocodile Space
+  id: SpawnMobCrocodileSpace
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: croc
+      sprite: SS220/Mobs/Animals/cosmocrocodile.rsi
+  - type: ConditionalSpawner
+    prototypes:
+      - MobCrocodileSpace
+
+- type: entity
+  name: the spawner Crocodile SpaceSalvage
+  id: SpawnMobCrocodileSpaceSalvage
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: croc
+      sprite: SS220/Mobs/Animals/cosmocrocodile.rsi
+  - type: ConditionalSpawner
+    prototypes:
+      - MobCrocodileSpaceSalvage
