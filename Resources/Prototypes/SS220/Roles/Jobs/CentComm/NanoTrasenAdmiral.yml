@@ -46,6 +46,10 @@
   accessGroups:
   - AllAccess
   - CentralCommand
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
 
 - type: startingGear
   id: CentComNanoTrasenAdmiralGear

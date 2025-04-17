@@ -1,10 +1,17 @@
 - type: weightedRandom
   id: TraitAfterDeathList
   weights:
+    LightweightDrunk: 0.5
+    Accentless: 0.6
+    CowboyAccent: 0.25
+    ItalianAccent: 0.25
+    Liar: 0.25
+    SocialAnxiety: 0.4
+    FrontalLisp: 0.4
     PoorVision: 0.4
     Paracusia: 0.4
     PainNumbness: 0.4
     Blindness: 0.15
     Muted: 0.15
-    Narcolepsy: 0.1
-    WheelchairBound: 0.05
+    Narcolepsy: 0.3
+    # WheelchairBound: 0.05 # Removed bcz req wheelchair spawnfix

@@ -103,3 +103,15 @@
     amount: 1 
   products: 
     Bacchus: 4
+
+- type: reaction
+  id: Xlebnuldiesel
+  reactants:
+    Beer:
+      amount: 1
+    SpaceMountainWind:
+      amount: 1
+    WeldingFuel:
+      amount: 1
+  products:
+    Xlebnuldiesel: 3

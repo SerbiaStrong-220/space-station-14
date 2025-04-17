@@ -13,5 +13,5 @@ public sealed partial class DefibrillatorSkillComponent : Component
     /// Chance of a successful shock with a defibrillator to revive a corpse.
     /// </summary>
     [DataField]
-    public float ChanceWithMedSkill = 0.85f;
+    public float ChanceWithMedSkill = 0.99f; // Very rare event. Must be other way to fix defibspam
 }
