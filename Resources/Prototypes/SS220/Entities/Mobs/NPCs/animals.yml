@@ -363,6 +363,13 @@
     currentTemperature: 300
   - type: InteractionPopup
     successChance: 0.3
+    interactSuccessString: petting-success-steven
+    interactFailureString: petting-failure-steven
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/snake_hiss.ogg
+    interactFailureSound:
+      path: /Audio/Animals/bear.ogg
   - type: Tag
     tags:
     - CannotSuicide
