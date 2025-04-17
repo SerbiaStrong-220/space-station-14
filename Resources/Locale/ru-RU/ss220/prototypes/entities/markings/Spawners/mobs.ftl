@@ -10,3 +10,5 @@ ent-SpawnMobCrocodileSpace = спавнер космического кроко�
     .desc = { ent-MarkerBase.desc }
 ent-SpawnMobCrocodileSpaceSalvage = спавнер космического крокодила обломков
     .desc = { ent-MarkerBase.desc }
+ent-SpawnMobAlbinoCrocodile = спавнер Альбино
+    .desc = { ent-MarkerBase.desc }
