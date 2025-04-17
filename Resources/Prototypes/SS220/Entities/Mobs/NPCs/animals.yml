@@ -367,8 +367,6 @@
     interactFailureString: petting-failure-steven
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
-      path: /Audio/Animals/snake_hiss.ogg
-    interactFailureSound:
       path: /Audio/Animals/bear.ogg
     interactFailureSound:
       path: /Audio/SS220/Animals/crocodile_fun.ogg
