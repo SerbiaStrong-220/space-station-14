@@ -54,9 +54,10 @@
       - MobCrocodile
 
 - type: entity
-  name: the spawner Crocodile Angry
+  name: the spawner Crocodile
   id: SpawnMobCrocodileAngry
   parent: MarkerBase
+  suffix: Hostile
   components:
   - type: Sprite
     layers:
