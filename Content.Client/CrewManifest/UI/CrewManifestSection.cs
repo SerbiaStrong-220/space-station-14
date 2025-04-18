@@ -48,12 +48,8 @@ public sealed class CrewManifestSection : BoxContainer
                 HorizontalExpand = true
             };
 
-            // SS220-QoL copy name from manifest button-Begin
-            var title = new CopyableRichTextLabel()
-            {
-                Text = entry.JobTitle,
-            };
-            // SS220-QoL copy name from manifest button-End
+            var title = new CopyableRichTextLabel(); // SS220-QoL copy name from manifest button
+            title.SetMessage(entry.JobTitle);
 
             if (prototypeManager.TryIndex<JobIconPrototype>(entry.JobIcon, out var jobIcon))
             {
