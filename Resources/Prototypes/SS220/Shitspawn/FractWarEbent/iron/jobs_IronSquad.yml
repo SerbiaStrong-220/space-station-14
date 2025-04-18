@@ -242,7 +242,6 @@
     - id: ClothingMaskNeckGaiter
     - id: ClothingUniformJumpskirtOperative
     - id: ClothingUniformJumpsuitOperative
-    - id: ClothingBackpackDuffelSyndicateMedicalBundleFilled
     - id: BoxBeaker
       amount: 2
     - id: EmergencyRollerBedSpawnFolded

@@ -2,14 +2,14 @@
   name: космический крокодил
   id: MobCrocodileSpace
   parent: MobSpaceBasic
-  description: Абсолютно обычный крокодил на самой обычной станции. 
+  description: Абсолютно обычный крокодил на самой обычной станции.
   components:
   - type: Sprite
     drawdepth: Mobs
     sprite: SS220/Mobs/Animals/cosmocrocodile.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
-      state: croc 
+      state: croc
     - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
       state: glow
       shader: unshaded
@@ -76,7 +76,14 @@
   - type: Speech
     speechVerb: LargeMob
   - type: InteractionPopup
-    successChance: 0.2
+    successChance: 0.3
+    interactSuccessString: petting-success-steven
+    interactFailureString: petting-failure-steven
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/bear.ogg
+    interactFailureSound:
+      path: /Audio/SS220/Animals/crocodile_fun.ogg
   - type: NoSlip
   - type: Tag
     tags:
