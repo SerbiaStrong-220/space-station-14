@@ -36,13 +36,11 @@ public sealed class CrewManifestSection : BoxContainer
 
         foreach (var entry in entries)
         {
-            // SS220-QoL copy name from manifest button-Begin
-            var name = new CopyableRichTextLabel()
+            var name = new CopyableRichTextLabel() // SS220-QoL copy name from manifest button
             {
                 HorizontalExpand = true,
-                Text = entry.Name,
             };
-            // SS220-QoL copy name from manifest button-End
+            name.SetMessage(entry.Name);
 
             var titleContainer = new BoxContainer()
             {
