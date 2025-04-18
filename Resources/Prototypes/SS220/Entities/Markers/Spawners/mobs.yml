@@ -83,9 +83,10 @@
       - MobCrocodileSpace
 
 - type: entity
-  name: the spawner Crocodile SpaceSalvage
+  name: the spawner Crocodile Space
   id: SpawnMobCrocodileSpaceSalvage
   parent: MarkerBase
+  suffix: Salvage
   components:
   - type: Sprite
     layers:
