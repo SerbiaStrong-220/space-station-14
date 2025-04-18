@@ -1,11 +1,11 @@
 using Content.Shared.Actions;
-using Content.Shared.Clothing;
+using Content.Shared.Blocking;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Inventory;
-using Content.Shared.Item.ItemToggle;
-using Content.Shared.Toggleable;
+using Content.Shared.Hands;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory.Events;
 
-namespace Content.Shared.Clothing.EntitySystems;
+namespace Content.Shared.SS220.Clothing;
 
 /// <summary>
 /// Handles adding and using a toggle action for <see cref="ToggleClothingComponent"/>.
@@ -18,43 +18,48 @@ public sealed class InnerToggleableClothingSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InnerToggleableClothingComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<InnerToggleableClothingComponent, GetItemActionsEvent>(OnGetActions);
-        SubscribeLocalEvent<InnerToggleableClothingComponent, InnerToggleableActionEvent>(OnToggleAction);
-        SubscribeLocalEvent<InnerToggleableClothingComponent, ClothingGotUnequippedEvent>(OnUnequipped);
+        SubscribeLocalEvent<InnerToggleableClothingComponent, GotEquippedEvent>(OnInnerToggleableEquip);
+
+        SubscribeLocalEvent<InnerToggleableClothingComponent, GotUnequippedEvent>(OnInnerToggleableUnequip);
+
+        SubscribeLocalEvent<InnerToggleableClothingComponent, GotEquippedHandEvent>(OnEquip);
+        SubscribeLocalEvent<InnerToggleableClothingComponent, GotUnequippedHandEvent>(OnUnequip);
+        //SubscribeLocalEvent<InnerToggleableClothingComponent, DroppedEvent>(OnDrop);
     }
 
-    private void OnMapInit(Entity<InnerToggleableClothingComponent> ent, ref MapInitEvent args)
+    private void OnInnerToggleableEquip(Entity<InnerToggleableClothingComponent> ent, ref GotEquippedEvent args)
     {
-        var (uid, comp) = ent;
-        // test funny
-        if (string.IsNullOrEmpty(comp.Action))
+        //var innerUser = EnsureComp<InnerToggleableComponent>(args.Equipee);
+    }
+
+    private void OnInnerToggleableUnequip(Entity<InnerToggleableClothingComponent> ent, ref GotUnequippedEvent args)
+    {
+
+    }
+
+    private void OnEquip(Entity<InnerToggleableClothingComponent> ent, ref GotEquippedHandEvent args)
+    {
+        if (args.Handled)
             return;
 
-        _actions.AddAction(uid, ref comp.ActionEntity, comp.Action);
-        //_actions.SetToggled(comp.ActionEntity, _toggle.IsActivated(ent.Owner));
-        Dirty(uid, comp);
+        args.Handled = true;
+
+        //var innerUser = EnsureComp<InnerToggleableComponent>(args.Equipee);
     }
 
-    private void OnGetActions(Entity<InnerToggleableClothingComponent> ent, ref GetItemActionsEvent args)
+    private void OnUnequip(Entity<InnerToggleableClothingComponent> ent, ref GotUnequippedHandEvent args)
     {
-        if (args.InHands && ent.Comp.MustEquip)
+        if (args.Handled)
             return;
 
-        var ev = new ToggleClothingCheckEvent(args.User);
-        RaiseLocalEvent(ent, ref ev);
+        args.Handled = true;
 
-        if (!ev.Cancelled)
-            args.AddAction(ent.Comp.ActionEntity);
     }
 
-    private void OnToggleAction(Entity<InnerToggleableClothingComponent> ent, ref InnerToggleableActionEvent args)
+    /*
+    private void OnDrop(Entity<InnerToggleableClothingComponent> ent, ref DroppedEvent args)
     {
 
     }
-
-    private void OnUnequipped(Entity<InnerToggleableClothingComponent> ent, ref ClothingGotUnequippedEvent args)
-    {
-
-    }
+    */
 }
