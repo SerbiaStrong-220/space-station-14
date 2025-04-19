@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.Language.Systems;
 using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Language.EncryptionMethods;
@@ -59,13 +60,8 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
         var result = new StringBuilder();
         foreach (Match m in matches)
         {
-            seed = _inputSeed;
             var word = m.Value.ToLower();
-            foreach (var c in word.ToCharArray())
-            {
-                seed += c;
-            }
-
+            seed = _inputSeed + SharedLanguageSystem.GetSeedFromString(word);
             var scrambledWord = ScrambleWord(m.Value, seed.Value);
             result.Append(scrambledWord);
         }
@@ -74,7 +70,7 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
         result.Append(punctuation);
 
         _capitalize = false;
-        return result.ToString();
+        return result.ToString().Trim();
     }
 
     private string ScrambleWord(string word, int seed)

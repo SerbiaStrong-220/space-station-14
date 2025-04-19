@@ -4,7 +4,6 @@ using Content.Server.Body.Components;
 using Content.Server.EUI;
 using Content.Server.Ghost;
 using Content.Server.Popups;
-using Content.Server.SS220.LimitationRevive;
 using Content.Shared.Damage;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -79,12 +78,6 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
 
             if (mind.Session != null && mind.CurrentEntity != uid)
                 _euiManager.OpenEui(new ReturnToBodyEui(mind, _mind), mind.Session);
-
-            if(!TryComp<LimitationReviveComponent>(uid, out var limitationRevive))
-                return;
-
-            limitationRevive.IsAlreadyDead = false;
-            limitationRevive.IsDamageTaken = false;
         }
     }
 

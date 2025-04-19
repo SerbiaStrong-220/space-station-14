@@ -50,6 +50,7 @@
       - id: ExGrenade
       - id: GlowstickRed
         amount: 2
+      - id: Binoculars
 
 - type: startingGear
   id: EbentIronSquadLeaderGear
@@ -90,6 +91,14 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      delayBeforeDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: IronSquadLeader
@@ -151,6 +160,7 @@
       - id: ExGrenade
       - id: GlowstickRed
         amount: 2
+      - id: Binoculars
 
 - type: startingGear
   id: EbentIronSquadEngineerGear
@@ -192,6 +202,14 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      delayBeforeDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: IronSquadEngineer
@@ -224,13 +242,13 @@
     - id: ClothingMaskNeckGaiter
     - id: ClothingUniformJumpskirtOperative
     - id: ClothingUniformJumpsuitOperative
-    - id: ClothingBackpackDuffelSyndicateMedicalBundleFilled
     - id: BoxBeaker
       amount: 2
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
     - id: ClothingEyesHudMedSec
     - id: SyndiHypo
+    - id: DefibrillatorSyndicate
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -299,6 +317,14 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      delayBeforeDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: IronSquadCorpsman
@@ -368,6 +394,7 @@
       - id: ExGrenade
       - id: GlowstickRed
         amount: 2
+      - id: Binoculars
 
 - type: startingGear
   id: EbentIronSquadCMOGear
@@ -409,6 +436,14 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      delayBeforeDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: IronSquadCMO
@@ -510,6 +545,14 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      delayBeforeDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: IronSquadFighter
