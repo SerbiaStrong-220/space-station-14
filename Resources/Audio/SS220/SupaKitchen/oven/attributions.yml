@@ -1,0 +1,20 @@
+- files: ["oven_close.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tgstation at commit 8a77f32d273b66d74000fcef78c5661521c8ffd3"
+  source: "https://github.com/tgstation/tgstation/blob/8a77f32d273b66d74000fcef78c5661521c8ffd3/sound/machines/oven/oven_close.ogg"
+- files: ["oven_open.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tgstation at commit 8a77f32d273b66d74000fcef78c5661521c8ffd3"
+  source: "https://github.com/tgstation/tgstation/blob/8a77f32d273b66d74000fcef78c5661521c8ffd3/sound/machines/oven/oven_open.ogg"
+- files: ["oven_loop_start.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tgstation at commit 8a77f32d273b66d74000fcef78c5661521c8ffd3"
+  source: "https://github.com/tgstation/tgstation/blob/8a77f32d273b66d74000fcef78c5661521c8ffd3/sound/machines/oven/oven_loop_start.ogg"
+- files: ["oven_loop_mid.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tgstation at commit 8a77f32d273b66d74000fcef78c5661521c8ffd3"
+  source: "https://github.com/tgstation/tgstation/blob/8a77f32d273b66d74000fcef78c5661521c8ffd3/sound/machines/oven/oven_loop_mid.ogg"
+- files: ["oven_loop_end.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tgstation at commit 8a77f32d273b66d74000fcef78c5661521c8ffd3"
+  source: "https://github.com/tgstation/tgstation/blob/8a77f32d273b66d74000fcef78c5661521c8ffd3/sound/machines/oven/oven_loop_end.ogg"

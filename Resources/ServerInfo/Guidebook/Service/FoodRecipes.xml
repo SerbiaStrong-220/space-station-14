@@ -1,94 +1,59 @@
 <Document>
-## Начало
-Это не все существующие рецепты, этот список предназначен для демонстрации основ.
+# Рецепты
 
-Продукты смешиваются в мензурке, еда готовится в микроволновке. Время готовки обычно указывается в рецепте.
+## Выпечка
+<GuideCookingRecipeGroupEmbed RecipeTag="Bread"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Toast"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Slice"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Bagel"/>
 
-ВНИМАНИЕ: Это не автоматически сгенерированный список, все, что здесь перечислено, может устареть. На Wiki есть гораздо больше, чем перечислено здесь.
+## Бургеры
+<GuideCookingRecipeGroupEmbed RecipeTag="Burger"/>
 
-## Основы: Смешивание
+## Пицца
+<GuideCookingRecipeGroupEmbed RecipeTag="Pizza"/>
 
-- Тесто = 15 муки, 10 воды
-- Кукурузное тесто = 1 яйцо (6 ед.), 10 молока, 15 кукурузной муки
-- Tortila Dough = 15 Cornmeal, 10 Water
-- Тофу = 5 универсального фермента (Catalyst), 30 соевого молока
-- Тесто для пирога = 2 яйца (12 ед.), 15 муки, 5 столовой соли
-- Тесто для торта = 2 яйца(12 ед.), 15 муки, 5 сахара, 5 молока
-- Веганское тесто для торта = 15 соевого молока, 15 муки, 5 сахара
-- Масло = 30 молока, 5 столовой соли (Catalyst)
-- Головка сыра = 5 универсального фермента (Catalyst), 40 молока
-- Chèvre Log = 5 Enzyme (Catalyst), 10 Goat Milk
-- Фрикаделька = 1 яйцо (6 ед.), 5 муки, 5 непрожаренные животные протеины
-- Chocolate = 6 Cocoa Powder, 2 Milk, 2 Sugar
-- Непрожаренные животные протеины: измельчить сырое мясо
+## Тако
+<GuideCookingRecipeGroupEmbed RecipeTag="Taco"/>
 
-Buzz! Don't forget about Moth diet!
-- Fiber: Juice Fabric in a Reagent Grinder, 3 Fiber per Fabric
-- Cotton Dough = 5 Flour, 10 Fiber, 10 Water
-- Cotton bread baked the same as default but with cotton dough instead
-- Cotton Pizza: Microwave 1 Flat Cotton Dough and 4 Cotton Bolls for 30 Seconds
+## Пироги
+<GuideCookingRecipeGroupEmbed RecipeTag="Pie"/>
 
-<Box>
-<GuideEntityEmbed Entity="FoodDough"/>
-<GuideEntityEmbed Entity="FoodDoughCornmeal"/>
-<GuideEntityEmbed Entity="FoodDoughCotton"/>
-<GuideEntityEmbed Entity="FoodTofu"/>
-<GuideEntityEmbed Entity="FoodDoughPie"/>
-<GuideEntityEmbed Entity="FoodCakeBatter"/>
-<GuideEntityEmbed Entity="FoodDoughFlat"/>
-<GuideEntityEmbed Entity="FoodDoughTortilla"/>
-</Box>
+## Тарты
+<GuideCookingRecipeGroupEmbed RecipeTag="Tart"/>
 
-<Box>
-<GuideEntityEmbed Entity="FoodButter"/>
-<GuideEntityEmbed Entity="FoodMeatMeatball"/>
-<GuideEntityEmbed Entity="FoodCheese"/>
-<GuideEntityEmbed Entity="FoodChevre"/>
-<GuideEntityEmbed Entity="FoodSnackChocolateBar"/>
-</Box>
+## Торты
+<GuideCookingRecipeGroupEmbed RecipeTag="Cake"/>
 
-## Второстепенные продукты
+## Сладости
+<GuideCookingRecipeGroupEmbed RecipeTag="Muffin"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Cookie"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Caramel"/>
 
-- Кусочек теста: нарезать тесто
-- Булочка: положить в микроволновку кусочек теста на 5 секунд
-- Сырая котлета: нарезать сырое мясо
-- Сырный ломтик: нарезать головку сыра
-- Плоское тесто: раскатайте тесто скалкой либо другим крыглым объектом (огнетушитель, жестяная банка, бутылка).
-- Tortilla Dough Slice: cut Tortilla Dough
-- Flat Tortilla Dough: Use a rolling pin or a round object (fire extinguisher, soda can, bottle) on Tortilla Dough Slice
-- Taco Shell: Microwave Flat Tortilla Dough for 5 Seconds
+## Итальянская кухня
+<GuideCookingRecipeGroupEmbed RecipeTag="Italian"/>
 
-## Примеры блюд
+## Супы
+<GuideCookingRecipeGroupEmbed RecipeTag="Soup"/>
 
-- Хлеб: положить в микроволновку тесто на 10 секунд
-- Бургер: положить в микроволновку 1 булочку и 1 сырое мясо на 10 секунд
-- Томатный суп: 10 ед. воды, 1 пустая миска и 2 помидора на 10 секунд
-- Цитрусовый салат: 1 пустая миска, 1 лемон, 1 лайм, 1 апельсин на 5 секунд
-- Маргарита: положить в микроволновку 1 плоское тесто, 1 сырный ломтик и 4 помидора на 30 секунд
-- Торт: 1 тесто для торта в микроволновку на 15 секунд
-- Яблочный пирог: 1 тесто для пирога, 3 яблока и 1 формочку для пирога на 15 секунд
-- Beef Taco: Microwave 1 Taco Shell, 1 Raw Meat Cutlet, 1 Cheese Wedge for 10 Seconds
-- Cuban Carp : Microwave 1 Dough, 1 Cheese Wedge, 1 Chili, 1 Carp Meat for 15 Seconds
-- Banana Cream Pie : Microwave 1 Pie Dough, 3 Bananas, and 1 Pie Tin for 15 Seconds
-- Carrot Fries : Microwave 1 Carrot, 15u Salt for 15 Seconds
-- Pancake : Microwave 5u Flour, 5u Milk, 1 Egg (6u) for 5 Seconds
+## Донк-покеты
+<GuideCookingRecipeGroupEmbed RecipeTag="Donk-pocket"/>
 
-<Box>
-<GuideEntityEmbed Entity="FoodBreadPlain"/>
-<GuideEntityEmbed Entity="FoodBurgerPlain"/>
-<GuideEntityEmbed Entity="FoodSoupTomato"/>
-<GuideEntityEmbed Entity="FoodSaladCitrus"/>
-</Box>
-<Box>
-<GuideEntityEmbed Entity="FoodPizzaMargherita"/>
-<GuideEntityEmbed Entity="FoodCakePlain"/>
-<GuideEntityEmbed Entity="FoodPieApple"/>
-</Box>
-<Box>
-<GuideEntityEmbed Entity="FoodMealCubancarp"/>
-<GuideEntityEmbed Entity="FoodPieBananaCream"/>
-<GuideEntityEmbed Entity="FoodMealFriesCarrot"/>
-<GuideEntityEmbed Entity="FoodBakedPancake"/>
-</Box>
+## Салаты
+<GuideCookingRecipeGroupEmbed RecipeTag="Salad"/>
+
+## Гриль
+<GuideCookingRecipeGroupEmbed InstrumentType="grill"/>
+
+## Разделочная доска
+<GuideCookingRecipeGroupEmbed InstrumentType="choppingBoard"/>
+
+## Медицинское
+<GuideCookingRecipeGroupEmbed RecipeTag="Medical"/>
+
+## Прочее
+<GuideCookingRecipeGroupEmbed RecipeTag="Other"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Notfood"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Anomaly"/>
 
 </Document>

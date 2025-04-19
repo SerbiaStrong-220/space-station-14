@@ -30,8 +30,13 @@ public sealed class IdCardSystem : SharedIdCardSystem
 
     private void OnMicrowaved(EntityUid uid, IdCardComponent component, BeingMicrowavedEvent args)
     {
-        if (!component.CanMicrowave || !TryComp<MicrowaveComponent>(args.Microwave, out var micro) || micro.Broken)
-            return;   
+        // SS220 Change Id card explosion begin 
+        //if (!component.CanMicrowave || !TryComp<MicrowaveComponent>(args.Microwave, out var micro) || micro.Broken)
+        //    return;   
+
+        if (!component.CanMicrowave)
+            return;
+        // SS220 Change Id card explosion end
 
         if (TryComp<AccessComponent>(uid, out var access))
         {
@@ -55,11 +60,18 @@ public sealed class IdCardSystem : SharedIdCardSystem
             }
 
             //Explode if the microwave can't handle it
-            if (!micro.CanMicrowaveIdsSafely && _random.Prob(micro.IdCardExplosionChance)) //SS220 Microwave explosion tweak
-            {
-                _microwave.Explode((args.Microwave, micro));
+            // SS220 Change Id card explosion begin 
+            //if (!micro.CanMicrowaveIdsSafely && _random.Prob(micro.IdCardExplosionChance)) //SS220 Microwave explosion tweak
+            //{
+            //    _microwave.Explode((args.Microwave, micro));
+            //    return;
+            //}
+
+            var ev = new IdCardMicrowavedEvent();
+            RaiseLocalEvent(args.Microwave, ev);
+            if (ev.Cancelled)
                 return;
-            }
+            // SS220 Change Id card explosion end
 
             // If they're unlucky, brick their ID
             if (randomPick <= 0.25f)
@@ -89,3 +101,5 @@ public sealed class IdCardSystem : SharedIdCardSystem
         }
     }
 }
+
+public sealed class IdCardMicrowavedEvent : CancellableEntityEventArgs { } // SS220 Change Id card explosion
