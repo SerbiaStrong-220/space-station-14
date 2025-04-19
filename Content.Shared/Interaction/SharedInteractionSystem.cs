@@ -1382,10 +1382,7 @@ namespace Content.Shared.Interaction
             RaiseLocalEvent(user, ref ev_exact);
 
             if (ev_exact.Handled)
-            {
-                Log.Debug($"Accessible Override for user {ToPrettyString(user)} and target {ToPrettyString(target)} for the event type {typeof(T)}");
                 return ev_exact.Accessible;
-            }
 
             return IsAccessible(user, target);
         }
