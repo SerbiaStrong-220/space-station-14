@@ -7,9 +7,11 @@
     - id: ClothingUniformJumpsuitScientist
     - id: ClothingShoesColorWhite
     - id: ClothingBackpackScience
-    - id: ClothingOuterCoatRnd
-    - id: ClothingOuterWinterSci
     - id: ClothingUniformJumpskirtScientist
+    - id: ClothingOuterCoatRnd
+      prob: 0.6
+    - id: ClothingOuterWinterSci
+      prob: 0.3
     - id: ClothingEyesGlasses
       prob: 0.5
     - id: CrowbarRed #The jojoke - hit video game Half-Life # imagine, dev have to make that comment...
@@ -25,9 +27,11 @@
     - id: ClothingUniformJumpsuitEngineering
     - id: ClothingBackpackEngineering
     - id: ClothingShoesBootsWork
-    - id: ClothingOuterVestHazard
-    - id: ClothingOuterWinterEngi
     - id: ClothingUniformJumpskirtEngineering
+    - id: ClothingOuterVestHazard
+      prob: 0.6
+    - id: ClothingOuterWinterEngi
+      prob: 0.3
 
 - type: entity
   id: ModuleFurnitureMedicalClothingFillPart
@@ -38,8 +42,9 @@
     - id: ClothingUniformJumpsuitMedicalDoctor
     - id: ClothingShoesColorWhite
     - id: ClothingOuterCoatLab
-      prob: 0.3
+      prob: 0.6
     - id: ClothingOuterWinterMed
+      prob: 0.3
     - id: ClothingUniformJumpskirtMedicalDoctor
     - id: ClothingEyesGlasses
       prob: 0.3
