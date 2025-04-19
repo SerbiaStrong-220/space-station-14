@@ -47,6 +47,7 @@
     - Toggle
     - On
     - Off
+    - WeaponContolReceiver #SS220 WeaponControl_Console
   - type: AutoShootGun
   - type: GunSignalControl
   - type: StaticPrice
