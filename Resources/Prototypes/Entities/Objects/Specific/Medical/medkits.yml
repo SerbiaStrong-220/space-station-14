@@ -98,5 +98,5 @@
     state: blackkit
   - type: Item
     heldPrefix: blackkit
-    size: Normal
+    size: Large #220 FixNew-Item
 
