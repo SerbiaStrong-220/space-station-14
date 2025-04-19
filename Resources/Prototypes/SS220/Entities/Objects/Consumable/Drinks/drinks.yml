@@ -17,7 +17,7 @@
 
 - type: entity
   parent: DrinkGlassBase
-  id: DrinkBerryCompote
+  id: DrinkBerryСompote
   name: ягодный компот
   description: Аромат ягод напоминает вам сказку о Красной Шапочке.
   components:
@@ -26,7 +26,7 @@
       drink:
         maxVol: 30
         reagents:
-        - ReagentId: BerryCompote
+        - ReagentId: BerryСompote
           Quantity: 30
   - type: Drink
   - type: Sprite
