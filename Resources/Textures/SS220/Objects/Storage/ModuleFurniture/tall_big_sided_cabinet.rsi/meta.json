@@ -8,7 +8,10 @@
     },
     "states": [
         {
-            "name": "foundation"
+            "name": "foundation-left"
+        },
+        {
+            "name": "foundation-right"
         },
 		{
             "name": "drawer"
@@ -18,6 +21,15 @@
         },
         {
             "name": "drawer-open"
+        },
+        {
+            "name": "drawer-big"
+        },
+        {
+            "name": "drawer-big-closed"
+        },
+        {
+            "name": "drawer-big-open"
         }
     ]
 }

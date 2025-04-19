@@ -10,7 +10,7 @@
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/cabinet.rsi
   - type: ModuleFurniture
-    drawerPixelInterval: 1,0
+    drawerPixelInterval: 0,1
     startingDrawerPixelOffset: 9,15
     pixelPerLayoutTile: 11,4
     tileLayoutSize: 1,3
@@ -25,7 +25,7 @@
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/wooden_cabinet.rsi
   - type: ModuleFurniture
-    drawerPixelInterval: 1,0
+    drawerPixelInterval: 0,1
     startingDrawerPixelOffset: 9,15
     pixelPerLayoutTile: 13,4
     tileLayoutSize: 1,3
@@ -40,7 +40,7 @@
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/tall_cabinet.rsi
   - type: ModuleFurniture
-    drawerPixelInterval: 1,0
+    drawerPixelInterval: 0,1
     startingDrawerPixelOffset: 12,10
     pixelPerLayoutTile: 7,4
     tileLayoutSize: 1,3
@@ -55,7 +55,7 @@
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/filling_cabinet.rsi
   - type: ModuleFurniture
-    drawerPixelInterval: 1,0
+    drawerPixelInterval: 0,1
     startingDrawerPixelOffset: 12,9
     pixelPerLayoutTile: 7,6
     tileLayoutSize: 1,3
@@ -72,7 +72,7 @@
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/double_cabinet.rsi
   - type: ModuleFurniture
-    drawerPixelInterval: 1,0
+    drawerPixelInterval: 0,1
     startingDrawerPixelOffset: 3,15
     pixelPerLayoutTile: 13,4
     tileLayoutSize: 2,3
@@ -87,7 +87,7 @@
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/wooden_double_cabinet.rsi
   - type: ModuleFurniture
-    drawerPixelInterval: 1,0
+    drawerPixelInterval: 0,1
     startingDrawerPixelOffset: 3,15
     pixelPerLayoutTile: 13,4
     tileLayoutSize: 2,3
@@ -102,7 +102,7 @@
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/tall_double_cabinet.rsi
   - type: ModuleFurniture
-    drawerPixelInterval: 1,0
+    drawerPixelInterval: 0,1
     startingDrawerPixelOffset: 7,10
     pixelPerLayoutTile: 7,4
     tileLayoutSize: 2,3
@@ -117,7 +117,7 @@
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/filling_double_cabinet.rsi
   - type: ModuleFurniture
-    drawerPixelInterval: 1,0
+    drawerPixelInterval: 0,1
     startingDrawerPixelOffset: 7,9
     pixelPerLayoutTile: 7,6
     tileLayoutSize: 2,3
@@ -134,7 +134,7 @@
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/filling_triple_cabinet.rsi
   - type: ModuleFurniture
-    drawerPixelInterval: 1,0
+    drawerPixelInterval: 0,1
     startingDrawerPixelOffset: 3,9
     pixelPerLayoutTile: 7,6
     tileLayoutSize: 3,3
@@ -148,7 +148,7 @@
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/tall_triple_cabinet.rsi
   - type: ModuleFurniture
-    drawerPixelInterval: 1,0
+    drawerPixelInterval: 0,1
     startingDrawerPixelOffset: 3,10
     pixelPerLayoutTile: 7,4
     tileLayoutSize: 3,3

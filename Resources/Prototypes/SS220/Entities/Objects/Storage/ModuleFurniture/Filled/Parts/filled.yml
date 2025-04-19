@@ -12,7 +12,7 @@
   components:
   - type: EntityTableContainerFill
     containers:
-      entity_storage: !type:NestedSelector
+      storagebase: !type:NestedSelector
         tableId: MaintenanceLockerLoot
 
 # Should thought of changing all to loot tables simultaneous with Wizdens
@@ -43,12 +43,12 @@
 - type: entity
   id: ModularPartCabinetEngineerEquipFilledw1h1
   categories: [ HideSpawnMenu ]
-  parent: [ ModularPartCabinetw1h1, ModuleFurnitureEngineerClothingFillPart]
+  parent: [ ModularPartCabinetw1h1, ModuleFurnitureEngineerEquipmentFillPart]
 
 - type: entity
   id: ModularPartCabinetEngineerClothFilledw1h1
   categories: [ HideSpawnMenu ]
-  parent: [ ModularPartCabinetw1h1, ModuleFurnitureEngineerEquipmentFillPart]
+  parent: [ ModularPartCabinetw1h1, ModuleFurnitureEngineerClothingFillPart]
 
 - type: entity
   id: ModularPartDoubleCabinetEngineerClothFilledw1h1

@@ -62,6 +62,8 @@
     filled:
     - ModularPartDoubleCabinetScienceEquipFilledw1h1
     - ModularPartDoubleCabinetScienceEquipFilledw1h1
+    - ModularPartDoubleCabinetScienceEquipFilledw1h1
+    - ModularPartDoubleCabinetScienceEquipFilledw1h1
     - ModularPartDoubleCabinetScienceClothFilledw1h1
     - ModularPartDoubleCabinetScienceClothFilledw1h1
 
@@ -93,6 +95,8 @@
     state: foundation
   - type: ModuleFurnitureFill
     filled:
+    - ModularPartDoubleCabinetEngineerEquipFilledw1h1
+    - ModularPartDoubleCabinetEngineerEquipFilledw1h1
     - ModularPartDoubleCabinetEngineerEquipFilledw1h1
     - ModularPartDoubleCabinetEngineerEquipFilledw1h1
     - ModularPartDoubleCabinetEngineerClothFilledw1h1
@@ -128,6 +132,8 @@
     filled:
     - ModularPartDoubleCabinetMedicalEquipFilledw1h1
     - ModularPartDoubleCabinetMedicalEquipFilledw1h1
+    - ModularPartDoubleCabinetMedicalEquipFilledw1h1
+    - ModularPartDoubleCabinetMedicalEquipFilledw1h1
     - ModularPartDoubleCabinetMedicalClothFilledw1h1
     - ModularPartDoubleCabinetMedicalClothFilledw1h1
 
@@ -135,9 +141,9 @@
 
 - type: entity
   id: ModularFillingCabinetLawyerFilled
-  parent: ModularCabinetFoundation
+  parent: ModularFillingCabinetFoundation
   name: Filling cabinet
-  suffix: Filled
+  suffix: Filled Lawyer
   components:
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/filling_cabinet.rsi
