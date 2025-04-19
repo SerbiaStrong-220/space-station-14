@@ -1,0 +1,53 @@
+- type: entity
+  id: ModuleFurnitureScienceClothingFillPart
+  abstract: true
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitScientist
+    - id: ClothingShoesColorWhite
+    - id: ClothingBackpackScience
+    - id: ClothingOuterCoatRnd
+    - id: ClothingOuterWinterSci
+    - id: ClothingUniformJumpskirtScientist
+    - id: ClothingEyesGlasses
+      prob: 0.5
+    - id: CrowbarRed #The jojoke - hit video game Half-Life # imagine, dev have to make that comment...
+      prob: 0.1
+
+- type: entity
+  id: ModuleFurnitureEngineerClothingFillPart
+  abstract: true
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingHeadHatHardhatYellow
+    - id: ClothingUniformJumpsuitEngineering
+    - id: ClothingBackpackEngineering
+    - id: ClothingShoesBootsWork
+    - id: ClothingOuterVestHazard
+    - id: ClothingOuterWinterEngi
+    - id: ClothingUniformJumpskirtEngineering
+
+- type: entity
+  id: ModuleFurnitureMedicalClothingFillPart
+  abstract: true
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitMedicalDoctor
+    - id: ClothingShoesColorWhite
+    - id: ClothingOuterCoatLab
+      prob: 0.3
+    - id: ClothingOuterWinterMed
+    - id: ClothingUniformJumpskirtMedicalDoctor
+    - id: ClothingEyesGlasses
+      prob: 0.3
+    - id: HandheldHealthAnalyzer
+      prob: 0.6
+    - id: ClothingHandsGlovesLatex
+    - id: ClothingHeadsetMedical
+    - id: ClothingEyesHudMedical
+    - id: ClothingHeadHatSurgcapGreen
+    - id: ClothingMaskSterile
+      prob: 0.1
