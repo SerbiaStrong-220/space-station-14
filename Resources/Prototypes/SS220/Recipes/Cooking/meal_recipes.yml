@@ -222,3 +222,16 @@
   solids:
     CaramelBasedFood: 2
 #SS220 caramel cane end
+
+#SS220 McQ'Lich start
+- type: microwaveMealRecipe
+  id: RecipeKulich
+  name: kulich
+  result: FoodKulich
+  time: 5
+  reagents:
+    Sugar: 15
+  solids:
+    FoodCakePlain: 1
+    FoodButterSlice: 3
+#SS220 McQ'Lich end
