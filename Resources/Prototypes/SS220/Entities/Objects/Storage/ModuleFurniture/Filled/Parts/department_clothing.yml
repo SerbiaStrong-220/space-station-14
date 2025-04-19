@@ -6,7 +6,6 @@
     contents:
     - id: ClothingUniformJumpsuitScientist
     - id: ClothingShoesColorWhite
-    - id: ClothingBackpackScience
     - id: ClothingUniformJumpskirtScientist
     - id: ClothingOuterCoatRnd
       prob: 0.6
@@ -25,7 +24,6 @@
     contents:
     - id: ClothingHeadHatHardhatYellow
     - id: ClothingUniformJumpsuitEngineering
-    - id: ClothingBackpackEngineering
     - id: ClothingShoesBootsWork
     - id: ClothingUniformJumpskirtEngineering
     - id: ClothingOuterVestHazard

@@ -141,6 +141,7 @@
 
 - type: entity
   id: ModularTallTripleCabinetFoundation
+  categories: [ HideSpawnMenu ]
   parent: BaseModularFoundation
   name: modular tall triple cabinet foundation
   description: tall triple cabinet, now with layout!

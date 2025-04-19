@@ -43,7 +43,6 @@
   - type: StorageFill
     contents:
     - id: ClothingHandsGlovesColorYellow
-    - id: ClothingMaskGas
     - id: trayScanner
     - id: RCD
     - id: RCDAmmo
@@ -61,16 +60,8 @@
       prob: 0.7
     - id: Multitool
       prob: 0.2
-    - id: trayScanner
-      prob: 0.7
     - id: GasAnalyzer
       prob: 0.7
-    - id: ClothingBeltUtility
-      prob: 0.2
-    - id: ClothingHandsGlovesColorYellow
-      prob: 0.05
-    - id: ClothingHeadHatHardhatRed
-      prob: 0.4
     - id: CableApcStack
       prob: 0.3
     - id: CableApcStack

@@ -61,7 +61,9 @@
   - type: Storage
     grid:
     - 0,0,8,3
-    maxItemSize: Normal
+    maxItemSize: Large
+    storageOpenSound: /Audio/Effects/closetopen.ogg
+    storageCloseSound: /Audio/Effects/closetclose.ogg
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -76,5 +78,3 @@
   - type: Tag
     tags:
     - Wooden
-
-

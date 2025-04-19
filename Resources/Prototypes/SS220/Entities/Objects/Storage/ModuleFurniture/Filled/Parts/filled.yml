@@ -2,12 +2,14 @@
 
 - type: entity
   id: ModularPartWoodenCabinetEmptyw1h1
+  categories: [ HideSpawnMenu ]
   parent: ModularPartWoodenCabinetw1h1
 
 # Maintenance
 
 - type: entity
   id: ModularPartCabinetMaintenanceLootw1h1
+  categories: [ HideSpawnMenu ]
   parent: ModularPartCabinetw1h1
   components:
   - type: EntityTableContainerFill
