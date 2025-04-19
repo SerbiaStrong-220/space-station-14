@@ -1,0 +1,29 @@
+- type: memelertLevel
+  id: rzhamma
+  levelDetails:
+    announcement: joke-alert-level-rzhamma-announcement
+    sound:
+      path: /Audio/Misc/gamma.ogg
+      params:
+        volume: -2
+    color: PaleVioletRed
+
+- type: memelertLevel
+  id: hehelta
+  levelDetails:
+    announcement: joke-alert-level-hehelta-announcement
+    sound:
+      path: /Audio/Misc/delta.ogg
+      params:
+        volume: -6
+    color: DarkRed
+
+- type: memelertLevel
+  id: pepsilon
+  levelDetails:
+    announcement: joke-alert-level-pepsilon-announcement
+    sound:
+      path: /Audio/Misc/epsilon.ogg
+      params:
+        volume: -2
+    color: DarkViolet
