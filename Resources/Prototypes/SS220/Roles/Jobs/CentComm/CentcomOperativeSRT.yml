@@ -60,7 +60,7 @@
     shoes: ClothingShoesBootsBlueShieldJackFilled
     head: ClothingHeadBeretBlueshield
     eyes: ClothingEyesBlueShieldGlasses
-    gloves: ClothingHandsGlovesCombat
+    gloves: ClothingHandsGlovesPowergloveDisabler
     outerClothing: ClothingOuterBSOCoat
     id: CentcomOperativeBSOPDA
     ears: ClothingHeadsetAltCentComm
