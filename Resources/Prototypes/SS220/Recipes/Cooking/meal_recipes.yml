@@ -227,7 +227,7 @@
 - type: microwaveMealRecipe
   id: RecipeKulich
   name: kulich
-  result: FoodKulichBase
+  result: FoodKulich
   time: 5
   reagents:
     Sugar: 15
