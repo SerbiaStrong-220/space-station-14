@@ -197,9 +197,9 @@
   description: A lightweight hardsuit, adorned with a patchwork of thick, chitinous goliath hide.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/goliath.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/goliath.rsi #SS220 Goliath Hardsuit Repsrite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/goliath.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/goliath.rsi #SS220 Goliath Hardsuit Repsrite
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -494,6 +494,9 @@
     tags:
     - WhitelistChameleon
     - HighRiskItem
+  #ss220 pinpointer ui add start
+  - type: TrackedItem
+  #ss220 pinpointer ui add end
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitRd
   - type: StaticPrice

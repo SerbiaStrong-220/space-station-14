@@ -8,6 +8,12 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.00
     baseSprintSpeed : 5.00
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 languages tweaks end
   - type: InputMover
     #SS220 RatKing tweaks and changes update start
   - type: Puller
@@ -57,7 +63,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Dead
+      250: Dead #SS220 Antag balance
   - type: MeleeWeapon
     altDisarm: false
     soundHit:
@@ -103,6 +109,9 @@
     name: ghost-role-information-rat-king-name
     description: ghost-role-information-rat-king-description
     rules: ghost-role-information-freeagent-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+      - !type:OverallPlaytimeRequirement
+        time: 72000 #SS220 ghostrole-times (20h overall) end
     mindRoles:
     - MindRoleGhostRoleFreeAgent
     raffle:
@@ -220,8 +229,7 @@
       shader: unshaded
   - type: Bloodstream
     bloodMaxVolume: 40 #SS220 RatBlood fix
-  - type: Insulated #SS220 RatKing Tweaks and changes 
-
+  - type: Insulated #SS220 RatKing Tweaks and changes
   - type: SpriteMovement
     movementLayers:
       movement:

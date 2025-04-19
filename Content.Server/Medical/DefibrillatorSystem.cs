@@ -23,6 +23,11 @@ using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
+using Robust.Shared.Random;//SS220 LimitationRevive
+using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
+using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
+using Content.Shared.Ghost; //SS220 LimitationRevive
+using Content.Shared.Inventory;
 
 namespace Content.Server.Medical;
 
@@ -45,6 +50,9 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly IRobustRandom _random = default!; //SS220 LimitationRevive
+    [Dependency] private readonly LimitationReviveSystem _reviveSystem = default!; //SS220 LimitationRevive
+    [Dependency] private readonly InventorySystem _inventory = default!; // SS220 NewDefib
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -71,7 +79,13 @@ public sealed class DefibrillatorSystem : EntitySystem
 
         if (!CanZap(uid, target, args.User, component))
             return;
-
+        // SS220 NewDefib begin
+        if (_inventory.TryGetSlotEntity(target, "outerClothing", out var item) && item != null)
+        {
+             _popup.PopupEntity(Loc.GetString("loc-defib-outer-popup"), target, args.User);
+            return;
+        }
+        // SS220 NewDefib end
         args.Handled = true;
         Zap(uid, target, args.User, component);
     }
@@ -187,6 +201,23 @@ public sealed class DefibrillatorSystem : EntitySystem
 
         ICommonSession? session = null;
 
+        //SS220 LimitationRevive - start
+        var successZap = false;
+
+        if (TryComp<DefibrillatorSkillComponent>(user, out var defibSkillComp))
+        {
+            if (_random.Prob(defibSkillComp.ChanceWithMedSkill))
+                successZap = true;
+        }
+        else
+        {
+            if (_random.Prob(component.ChanceWithoutMedSkill))
+                successZap = true;
+        }
+
+        if (HasComp<GhostComponent>(user)) //for admins with aghost
+            successZap = true;
+        //SS220 LimitationRevive - end
         var dead = true;
         if (_rotting.IsRotten(target))
         {
@@ -198,6 +229,23 @@ public sealed class DefibrillatorSystem : EntitySystem
             _chatManager.TrySendInGameICMessage(uid, Loc.GetString(unrevivable.ReasonMessage),
                 InGameICChatType.Speak, true);
         }
+        //SS220 LimitationRevive - start
+        else if (TryComp<LimitationReviveComponent>(target, out var limitRevive) &&
+                 limitRevive.CounterOfDead > limitRevive.MaxRevive)
+        {
+            _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-death-no-exceeded"),
+                InGameICChatType.Speak, true);
+        }
+        else if (!successZap)
+        {
+            _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-unsuccessful-zap"),
+                InGameICChatType.Speak, true);
+
+            _reviveSystem.TryDamageAfterDeath(target);
+            _electrocution.TryDoElectrocution(user, null, component.ZapDamage * component.ZapСoeffDamage,
+                component.WritheDuration, true, ignoreInsulation: true);
+        }
+        //SS220 LimitationRevive - end
         else
         {
             if (_mobState.IsDead(target, mob))

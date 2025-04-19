@@ -41,5 +41,5 @@ public sealed partial class CultYoggPurifiedComponent : Component
     /// Amount of time requierd to requied for purifying removal
     /// </summary>
     [DataField]
-    public TimeSpan BeforeDeclinesTime = TimeSpan.FromSeconds(500);
+    public TimeSpan BeforeDeclinesTime = TimeSpan.FromSeconds(120);
 }

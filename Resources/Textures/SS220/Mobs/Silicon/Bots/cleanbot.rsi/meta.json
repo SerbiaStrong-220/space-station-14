@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license" : "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright" : "Sprited by karmag (Discord) from SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cleanbot",
+      "delays": [
+        [
+          0.5,
+          0.2
+        ]
+      ]
+    }
+  ]
+}

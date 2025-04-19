@@ -14,6 +14,9 @@
     name: Тёмный Жнец
     description: "Вы Тёмный Жнец - Демон, слуга Бога Тиндала. Пожирайте существ этой реальности, сводите их с ума и растите, пока не поглотите их всех!"
     rules: "Вы Тёмный Жнец - Демон, слуга Бога Тиндала. Пожирайте существ этой реальности, сводите их с ума и растите, пока не поглотите их всех!"
+    requirements: #SS220 ghostrole-times (20h overall) start
+      - !type:OverallPlaytimeRequirement
+        time: 72000 #SS220 ghostrole-times (20h overall) end
     makeSentient: false
     allowSpeech: false
     raffle:
@@ -48,6 +51,9 @@
     name: Тёмный Жнец
     description: "Вы Тёмный Жнец - Демон, слуга Бога Тиндала. Пожирайте существ этой реальности, сводите их с ума и растите, пока не поглотите их всех!"
     rules: "Вы Тёмный Жнец - Демон, слуга Бога Тиндала. Пожирайте существ этой реальности, сводите их с ума и растите, пока не поглотите их всех!"
+    requirements: #SS220 ghostrole-times (20h overall) start
+      - !type:OverallPlaytimeRequirement
+        time: 72000 #SS220 ghostrole-times (20h overall) end
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:

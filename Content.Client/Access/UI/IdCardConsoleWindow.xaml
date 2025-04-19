@@ -31,5 +31,13 @@
             <OptionButton Name="JobPresetOptionButton" />
         </GridContainer>
         <Control Name="AccessLevelControlContainer" />
+        <!-- SS220-ID console extended access button-Begin -->
+        <BoxContainer HorizontalExpand="True" HorizontalAlignment="Right">
+            <BoxContainer>
+                <Button Text="{Loc 'id-card-console-window-full-access-button'}" StyleClasses="OpenRight" Name="FullAccessButton" />
+                <Button Text="{Loc 'id-card-console-window-extended-access-button'}" StyleClasses="OpenLeft" Name="ExtendedAccessButton" />
+            </BoxContainer>
+        </BoxContainer>
+        <!-- SS220-ID console extended access button-End -->
     </BoxContainer>
 </DefaultWindow>

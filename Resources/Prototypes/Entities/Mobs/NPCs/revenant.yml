@@ -9,6 +9,12 @@
   - type: Input
     context: "ghost"
   - type: Spectral
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 languages tweaks end
   - type: MovementSpeedModifier
     baseWalkSpeed: 6
     baseSprintSpeed: 6
@@ -40,6 +46,9 @@
     name: ghost-role-information-revenant-name
     description: ghost-role-information-revenant-description
     rules: ghost-role-information-antagonist-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+      - !type:OverallPlaytimeRequirement
+        time: 72000 #SS220 ghostrole-times (20h overall) end
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
     raffle:

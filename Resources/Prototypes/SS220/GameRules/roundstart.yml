@@ -7,8 +7,8 @@
   components:
   - type: GameRule
     delay:
-      min: 300
-      max: 600
+      min: 120
+      max: 180
   - type: CultYoggRule
   - type: AntagSelection
     definitions:

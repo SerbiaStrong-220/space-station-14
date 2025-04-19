@@ -7,6 +7,14 @@
   id: MobCorgiIan
   description: Favorite pet corgi.
   components:
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/corgi.rsi
@@ -43,6 +51,13 @@
   id: MobCorgiIanOld
   description: Still the favorite pet corgi. Love his wheels.
   components:
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -68,6 +83,14 @@
   id: MobCorgiLisa
   description: Ian's favorite corgi.
   components:
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -118,6 +141,14 @@
     attributes:
       proper: true
       gender: male
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Butcherable # A puppy? You monster...
     spawned:
     - id: FoodMeatCorgi
@@ -155,6 +186,14 @@
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Siiktajr
+      canSpeak: false
+  #SS220 languages revive end
   - type: Grammar
     attributes:
       proper: true
@@ -179,6 +218,14 @@
     attributes:
       proper: true
       gender: male
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Siiktajr
+      canSpeak: false
+  #SS220 languages revive end
   - type: Tag
     tags:
     - CannotSuicide
@@ -206,6 +253,14 @@
   - type: Grammar
     attributes:
       gender: male
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Siiktajr
+      canSpeak: false
+  #SS220 languages revive end
   - type: Tag
     tags:
     - CannotSuicide
@@ -223,6 +278,14 @@
     attributes:
       proper: true
       gender: male
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Tag
     tags:
     - CannotSuicide
@@ -247,6 +310,14 @@
   - type: LyingDownOnBuckledEntity
     offset: -0.1, 0
     #SS220 Add lying down on entity end
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Siiktajr
+      canSpeak: false
+  #SS220 languages revive end
   - type: Physics
   # 220 cat-emotes start
   - type: Speech
@@ -318,6 +389,14 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: mcgriff
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -385,6 +464,14 @@
         Base: paperwork_dead
       Dead:
         Base: paperwork_dead
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -411,6 +498,14 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: walter
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -475,6 +570,14 @@
     attributes:
       proper: true
       gender: male
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Tag
     tags:
     - CannotSuicide
@@ -511,6 +614,14 @@
     attributes:
       proper: true
       gender: female
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/possum.rsi
@@ -541,6 +652,14 @@
     attributes:
       proper: true
       gender: female
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Tradeband #Cause cargo dep
+      canSpeak: false
+  #SS220 languages revive end
   - type: Tag
     tags:
     - CannotSuicide
@@ -563,6 +682,14 @@
     attributes:
       proper: true
       gender: male
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Tag
     tags:
     - CannotSuicide
@@ -587,6 +714,14 @@
       amount: 3
     - id: Telecrystal5
       amount: 1
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Canilunzt #Vulp gagaga
+      canSpeak: false
+  #SS220 languages revive end
   - type: Grammar
     attributes:
       proper: true
@@ -617,6 +752,14 @@
     noMovementLayers:
       movement:
         state: hamster-0
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: GhostRole
     makeSentient: true
     allowSpeech: true
@@ -664,6 +807,14 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Animals/snake_hiss.ogg
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Arati
+      canSpeak: false
+  #SS220 languages revive end
   - type: NpcFactionMember
     factions:
       - PetsNT
@@ -733,6 +884,14 @@
     attributes:
       proper: true
       gender: female
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Tag
     tags:
     - CannotSuicide
@@ -761,6 +920,14 @@
       state: aslime-_3
       shader: unshaded
     - map: [ "head" ]
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Bubblish
+      canSpeak: false
+  #SS220 languages revive end
   - type: Inventory
     speciesId: slime
     templateId: head
@@ -846,6 +1013,14 @@
     description: ghost-role-information-punpun-description
     rules: ghost-role-information-nonantagonist-rules
   - type: GhostTakeoverAvailable
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -887,6 +1062,14 @@
     tags:
     - VimPilot
     - CannotSuicide
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 languages revive end
   - type: Grammar
     attributes:
       proper: true
@@ -913,6 +1096,14 @@
         - MobMask
         layer:
         - MobLayer
+  #SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Siiktajr
+      canSpeak: false
+  #SS220 languages revive end
   - type: Grammar
     attributes:
       gender: male

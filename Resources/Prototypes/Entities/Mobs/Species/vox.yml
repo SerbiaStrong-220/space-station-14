@@ -125,6 +125,12 @@
       sprite: "Effects/creampie.rsi"
       state: "creampie_vox" # Not default
       visible: false
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: VoxPidgin
+  # SS220-Add-Languages end
   - type: Inventory
     speciesId: vox
     displacements:
@@ -179,6 +185,13 @@
   - type: Emoting
     chatEmoteCooldown: 5.0
   #ss220 emote 5 sec end
+  #SS220 LimitationRevive - start
+  - type: LimitationRevive
+    maxRevive: 100 #has no death limit
+    typeDamageOnDead:
+      types:
+        Сerebral: 400
+  #SS220 LimitationRevive - end
 
 - type: entity
   parent: BaseSpeciesDummy

@@ -95,3 +95,19 @@
   - type: Icon
     sprite: SS220/Objects/Consumable/Drinks/bacchus_blessing.rsi
     state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkXlebnuldieselGlass
+  suffix: Xlebnuldiesel
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Xlebnuldiesel
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/xlebnuldiesel.rsi
+    state: icon

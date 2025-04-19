@@ -1,4 +1,16 @@
 - type: technology
+  id: ServiceMedicalTech
+  name: research-technology-med-tech
+  icon:
+    sprite: Objects/Tools/blueprint.rsi
+    state: icon
+  discipline: CivilianServices
+  tier: 2
+  cost: 7500
+  recipeUnlocks:
+  - PinpointerCrew
+
+- type: technology
   id: CloningPodMachine
   name: research-technology-cloning-technology
   icon:

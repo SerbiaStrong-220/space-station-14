@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobLibrarian
       time: 3600 # 1 hour of being the biggest nerd on the station
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: JensenTimer
@@ -16,6 +21,11 @@
       !type:DepartmentTimeRequirement
       department: Cargo
       time: 36000 #10 hours of being a space trucker
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Basic options
 # Glasses
