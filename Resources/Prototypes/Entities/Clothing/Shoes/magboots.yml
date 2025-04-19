@@ -103,10 +103,10 @@
   - type: Clothing
     sprite: Clothing/Shoes/Boots/magboots-syndicate.rsi
   - type: ClothingSpeedModifier
-    #SS220-underused-uplinks-stuff begin
-    walkModifier: 1
-    sprintModifier: 1
-    #SS220-underused-uplinks-stuff end
+    #220 FixNew-Item begin
+    walkModifier: 0.85
+    sprintModifier: 0.90
+    #220 FixNew-Item end
   - type: GasTank
     outputPressure: 42.6
     air:
