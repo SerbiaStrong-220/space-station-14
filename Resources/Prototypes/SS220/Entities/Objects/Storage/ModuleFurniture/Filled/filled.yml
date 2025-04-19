@@ -1,15 +1,149 @@
+# Blank one
+
 - type: entity
-  id: ModularWoodenFoundationFilled
-  parent: ModularWoodenFoundation
-  name: ModularWoodenDresser
-  suffix: Filled
-  description: Wooden dresser, now with editable layout!
+  id: ModularWoodenCabinetFilled
+  parent: ModularWoodenCabinetFoundation
+  name: Wooden cabinet
+  suffix: Filled Base
   components:
   - type: Sprite
-    sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
-    state: dresser-foundation
-  - type: ModuleFurnitureFillComponent
+    sprite: SS220/Objects/Storage/ModuleFurniture/wooden_cabinet.rsi
+    state: foundation
+  - type: ModuleFurnitureFill
     filled:
-    - ModularPartWoodenDresserw1h1
-    - ModularPartWoodenDresserw1h1
-    - ModularPartWoodenDresserw1h1
+    - ModularPartWoodenCabinetEmptyw1h1
+    - ModularPartWoodenCabinetEmptyw1h1
+    - ModularPartWoodenCabinetEmptyw1h1
+
+# Maintenance
+
+- type: entity
+  id: ModularCabinetMaintenanceFilled
+  parent: ModularCabinetFoundation
+  name: Cabinet
+  suffix: Filled Maintenance
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/cabinet.rsi
+    state: foundation
+  - type: ModuleFurnitureFill
+    filled:
+    - ModularPartCabinetMaintenanceLootw1h1
+    - ModularPartCabinetMaintenanceLootw1h1
+    - ModularPartCabinetMaintenanceLootw1h1
+
+# Science
+
+- type: entity
+  id: ModularCabinetScienceFilled
+  parent: ModularCabinetFoundation
+  name: Cabinet
+  suffix: Filled Science
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/cabinet.rsi
+    state: foundation
+  - type: ModuleFurnitureFill
+    filled:
+    - ModularPartCabinetScienceEquipFilledw1h1
+    - ModularPartCabinetScienceEquipFilledw1h1
+    - ModularPartCabinetScienceClothFilledw1h1
+
+- type: entity
+  id: ModularDoubleCabinetScienceFilled
+  parent: ModularDoubleCabinetFoundation
+  name: Double cabinet
+  suffix: Filled Science
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/double_cabinet.rsi
+    state: foundation
+  - type: ModuleFurnitureFill
+    filled:
+    - ModularPartDoubleCabinetScienceEquipFilledw1h1
+    - ModularPartDoubleCabinetScienceEquipFilledw1h1
+    - ModularPartDoubleCabinetScienceClothFilledw1h1
+    - ModularPartDoubleCabinetScienceClothFilledw1h1
+
+# Engineer
+
+- type: entity
+  id: ModularCabinetEngineerFilled
+  parent: ModularCabinetFoundation
+  name: Cabinet
+  suffix: Filled Engineer
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/cabinet.rsi
+    state: foundation
+  - type: ModuleFurnitureFill
+    filled:
+    - ModularPartCabinetEngineerEquipFilledw1h1
+    - ModularPartCabinetEngineerEquipFilledw1h1
+    - ModularPartCabinetEngineerClothFilledw1h1
+
+- type: entity
+  id: ModularDoubleCabinetEngineerFilled
+  parent: ModularDoubleCabinetFoundation
+  name: Double cabinet
+  suffix: Filled Engineer
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/double_cabinet.rsi
+    state: foundation
+  - type: ModuleFurnitureFill
+    filled:
+    - ModularPartDoubleCabinetEngineerEquipFilledw1h1
+    - ModularPartDoubleCabinetEngineerEquipFilledw1h1
+    - ModularPartDoubleCabinetEngineerClothFilledw1h1
+    - ModularPartDoubleCabinetEngineerClothFilledw1h1
+
+# Medical
+
+- type: entity
+  id: ModularCabinetMedicalFilled
+  parent: ModularCabinetFoundation
+  name: Cabinet
+  suffix: Filled Medical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/cabinet.rsi
+    state: foundation
+  - type: ModuleFurnitureFill
+    filled:
+    - ModularPartCabinetMedicalEquipFilledw1h1
+    - ModularPartCabinetMedicalEquipFilledw1h1
+    - ModularPartCabinetMedicalClothFilledw1h1
+
+- type: entity
+  id: ModularDoubleCabinetMedicalFilled
+  parent: ModularDoubleCabinetFoundation
+  name: Double cabinet
+  suffix: Filled Medical
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/double_cabinet.rsi
+    state: foundation
+  - type: ModuleFurnitureFill
+    filled:
+    - ModularPartDoubleCabinetMedicalEquipFilledw1h1
+    - ModularPartDoubleCabinetMedicalEquipFilledw1h1
+    - ModularPartDoubleCabinetMedicalClothFilledw1h1
+    - ModularPartDoubleCabinetMedicalClothFilledw1h1
+
+# Lawyer
+
+- type: entity
+  id: ModularFillingCabinetLawyerFilled
+  parent: ModularCabinetFoundation
+  name: Filling cabinet
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/ModuleFurniture/filling_cabinet.rsi
+    state: foundation
+  - type: ModuleFurnitureFill
+    filled:
+    - ModularPartFillingCabinetLawyerEquipFilledw1h1
+    - ModularPartFillingCabinetLawyerEquipFilledw1h1
+    - ModularPartFillingCabinetLawyerEquipFilledw1h1

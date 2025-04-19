@@ -12,6 +12,9 @@ namespace Content.Shared.SS220.ModuleFurniture.Components;
 [NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ModuleFurniturePartComponent : Component
 {
+    /// <summary>
+    /// Describes archetype of part size. Needed for correct placing part's spite in foundation sprite
+    /// </summary>
     [DataField("size")]
     [AutoNetworkedField]
     public ContainerTileSize ContainerSizeType;
@@ -31,7 +34,7 @@ public sealed partial class ModuleFurniturePartComponent : Component
     }
 
     /// <summary>
-    /// Size of actually sprite. Starting offset is given
+    /// Size of actually sprite. Starting offset is given by codes
     /// </summary>
     [DataField(required: true)]
     public Vector2i SpriteSize;

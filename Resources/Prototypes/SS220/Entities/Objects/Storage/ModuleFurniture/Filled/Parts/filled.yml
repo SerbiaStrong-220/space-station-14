@@ -1,0 +1,90 @@
+# empty for example
+
+- type: entity
+  id: ModularPartWoodenCabinetEmptyw1h1
+  parent: ModularPartWoodenCabinetw1h1
+
+# Maintenance
+
+- type: entity
+  id: ModularPartCabinetMaintenanceLootw1h1
+  parent: ModularPartCabinetw1h1
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: MaintenanceLockerLoot
+
+# Should thought of changing all to loot tables simultaneous with Wizdens
+# Science
+
+- type: entity
+  id: ModularPartCabinetScienceEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartCabinetw1h1, ModuleFurnitureScienceEquipmentFillPart]
+
+- type: entity
+  id: ModularPartCabinetScienceClothFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartCabinetw1h1, ModuleFurnitureScienceClothingFillPart]
+
+- type: entity
+  id: ModularPartDoubleCabinetScienceEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartDoubleCabinetw1h1, ModuleFurnitureScienceEquipmentFillPart]
+
+- type: entity
+  id: ModularPartDoubleCabinetScienceClothFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartDoubleCabinetw1h1, ModuleFurnitureScienceClothingFillPart]
+
+# Engineer
+
+- type: entity
+  id: ModularPartCabinetEngineerEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartCabinetw1h1, ModuleFurnitureEngineerClothingFillPart]
+
+- type: entity
+  id: ModularPartCabinetEngineerClothFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartCabinetw1h1, ModuleFurnitureEngineerEquipmentFillPart]
+
+- type: entity
+  id: ModularPartDoubleCabinetEngineerClothFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartDoubleCabinetw1h1, ModuleFurnitureEngineerClothingFillPart]
+
+- type: entity
+  id: ModularPartDoubleCabinetEngineerEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartDoubleCabinetw1h1, ModuleFurnitureEngineerEquipmentFillPart]
+
+# Medical
+
+- type: entity
+  id: ModularPartCabinetMedicalEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartCabinetw1h1, ModuleFurnitureMedicalEquipmentFillPart]
+
+- type: entity
+  id: ModularPartCabinetMedicalClothFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartCabinetw1h1, ModuleFurnitureMedicalClothingFillPart]
+
+- type: entity
+  id: ModularPartDoubleCabinetMedicalEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartDoubleCabinetw1h1, ModuleFurnitureMedicalEquipmentFillPart]
+
+- type: entity
+  id: ModularPartDoubleCabinetMedicalClothFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartDoubleCabinetw1h1, ModuleFurnitureMedicalClothingFillPart]
+
+# Lawyer
+
+- type: entity
+  id: ModularPartFillingCabinetLawyerEquipFilledw1h1
+  categories: [ HideSpawnMenu ]
+  parent: [ ModularPartFillingCabinetw1h1, ModuleFurnitureLawyerEquipmentFillPart]

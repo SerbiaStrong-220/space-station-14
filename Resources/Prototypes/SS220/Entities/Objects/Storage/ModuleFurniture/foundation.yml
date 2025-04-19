@@ -2,6 +2,7 @@
 
 - type: entity
   id: ModularCabinetFoundation
+  categories: [ HideSpawnMenu ]
   parent: BaseModularFoundation
   name: modular cabinet
   description: cabinet, now with layout!
@@ -16,6 +17,7 @@
 
 - type: entity
   id: ModularWoodenCabinetFoundation
+  categories: [ HideSpawnMenu ]
   parent: BaseModularFoundation
   name: modular wooden cabinet foundation
   description: Wooden cabinet, now with layout!
@@ -30,6 +32,7 @@
 
 - type: entity
   id: ModularTallCabinetFoundation
+  categories: [ HideSpawnMenu ]
   parent: BaseModularFoundation
   name: modular tall cabinet foundation
   description: Wooden cabinet, now with layout!
@@ -44,6 +47,7 @@
 
 - type: entity
   id: ModularFillingCabinetFoundation
+  categories: [ HideSpawnMenu ]
   parent: BaseModularFoundation
   name: modular filling cabinet foundation
   description: Wooden cabinet, now with layout!
@@ -60,6 +64,7 @@
 
 - type: entity
   id: ModularDoubleCabinetFoundation
+  categories: [ HideSpawnMenu ]
   parent: BaseModularFoundation
   name: modular double cabinet foundation
   description: Wooden cabinet, now with layout!
@@ -74,6 +79,7 @@
 
 - type: entity
   id: ModularWoodenDoubleCabinetFoundation
+  categories: [ HideSpawnMenu ]
   parent: BaseModularFoundation
   name: modular wooden double cabinet foundation
   description: wooden double cabinet, now with layout!
@@ -88,6 +94,7 @@
 
 - type: entity
   id: ModularTallDoubleCabinetFoundation
+  categories: [ HideSpawnMenu ]
   parent: BaseModularFoundation
   name: modular tall double cabinet foundation
   description: tall double cabinet, now with layout!
@@ -102,6 +109,7 @@
 
 - type: entity
   id: ModularFillingDoubleCabinetFoundation
+  categories: [ HideSpawnMenu ]
   parent: BaseModularFoundation
   name: modular filling double cabinet foundation
   description: filling double cabinet, now with layout!
@@ -118,6 +126,7 @@
 
 - type: entity
   id: ModularFillingTripleCabinetFoundation
+  categories: [ HideSpawnMenu ]
   parent: BaseModularFoundation
   name: modular filling triple cabinet foundation
   description: filling triple cabinet, now with layout!
@@ -126,8 +135,8 @@
     sprite: SS220/Objects/Storage/ModuleFurniture/filling_triple_cabinet.rsi
   - type: ModuleFurniture
     drawerPixelInterval: 1,0
-    startingDrawerPixelOffset: ??
-    pixelPerLayoutTile: ??
+    startingDrawerPixelOffset: 3,9
+    pixelPerLayoutTile: 7,6
     tileLayoutSize: 3,3
 
 - type: entity
@@ -140,6 +149,6 @@
     sprite: SS220/Objects/Storage/ModuleFurniture/tall_triple_cabinet.rsi
   - type: ModuleFurniture
     drawerPixelInterval: 1,0
-    startingDrawerPixelOffset: ??
-    pixelPerLayoutTile: ??
+    startingDrawerPixelOffset: 3,10
+    pixelPerLayoutTile: 7,4
     tileLayoutSize: 3,3

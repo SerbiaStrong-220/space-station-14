@@ -3,11 +3,11 @@
   abstract: true
   parent: BaseStructure
   name: ModularFoundation
-  description: Wooden dresser, no mod suits but mod dressers are here.
+  description: you can open the drawers, you can knock on them, and even put things in them!
   components:
   - type: Sprite
     sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
-    state: dresser-foundation
+    state: foundation
   - type: Damageable
     damageModifierSet: Wood
     damageContainer: StructuralInorganic
@@ -42,8 +42,8 @@
   id: BaseModularPart
   abstract: true
   parent: BaseStorageItem
-  name: ModularDresserPart
-  description: wooden drawer for dresser
+  name: ModularCabinetPart
+  description: Drawer for cabinet
   components:
   - type: ModuleFurniturePart
     size: w1h1
