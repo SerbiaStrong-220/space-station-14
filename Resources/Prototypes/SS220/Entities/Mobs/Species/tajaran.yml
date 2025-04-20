@@ -111,6 +111,11 @@
     availableLanguages:
     - id: Galactic
     - id: Siiktajr
+  - type: LimitationRevive
+    maxRevive: 3
+    typeDamageOnDead:
+      types:
+        Сerebral: 400
 
 - type: entity
   id: MobTajaranDummy

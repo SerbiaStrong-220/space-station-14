@@ -259,6 +259,7 @@
     - id: Binary
     - id: Universal
   # SS220-Add-Languages end
+  - type: DefibrillatorSkill #SS220 LimitationRevive
 
 - type: entity
   abstract: true

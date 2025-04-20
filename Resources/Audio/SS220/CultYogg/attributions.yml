@@ -15,15 +15,25 @@
 
 - files: ["inhale_scream_1.ogg"]
   license: "CC-BY-4.0"
-  copyright: "Original is created by jorickhoofd, modified by SkaldetSkaeg for SS22"
+  copyright: "Original is created by jorickhoofd, modified by SkaldetSkaeg for SS220"
   source: "https://freesound.org/people/jorickhoofd/sounds/179333/"
 
 - files: ["inhale_scream_2.ogg"]
   license: "CC-BY-4.0"
-  copyright: "Original is created by jorickhoofd, modified by SkaldetSkaeg for SS22"
+  copyright: "Original is created by jorickhoofd, modified by SkaldetSkaeg for SS220"
   source: "https://freesound.org/people/jorickhoofd/sounds/180300/"
 
 - files: ["inhale_scream_3.ogg"]
   license: "CC-BY-4.0"
   copyright: "Original is created by jorickhoofd, modified by SkaldetSkaeg for SS220"
   source: "https://freesound.org/people/jorickhoofd/sounds/180301/"
+
+- files: ["lurbo_kill.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original is created by FairCashew, modified by SkaldetSkaeg for SS220"
+  source: "https://freesound.org/people/FairCashew/sounds/684867/"
+
+- files: ["lurbo_unequip.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original is created by DrMinky, modified by SkaldetSkaeg for SS220"
+  source: "https://freesound.org/people/DrMinky/sounds/167074/"

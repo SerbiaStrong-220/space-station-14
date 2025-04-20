@@ -105,3 +105,29 @@
     mindRoles:
       - MindRoleGhostRoleTeamAntagonist
   - type: GhostTakeoverAvailable
+
+- type: entity
+  name: Vespia Mob Spawner
+  id: SpawnMobVespia
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ai
+    - type: ConditionalSpawner
+      prototypes:
+        - MobGiantFly
+
+- type: entity
+  name: Vespia Ghost Role Spawner
+  id: SpawnGhostRoleVespia
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ai
+    - type: ConditionalSpawner
+      prototypes:
+        - MobGiantFlyGhostRole
