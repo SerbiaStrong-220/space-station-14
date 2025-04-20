@@ -52,7 +52,7 @@ namespace Content.Shared.SS220.CluwneComms
         /// Announce sound file path
         /// </summary>
         [DataField]
-        public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Announcements/announce.ogg");
+        public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/SS220/Announcements/cluwne_comm_announce.ogg");
 
         /// <summary>
         /// Sound when on of required fields is empty

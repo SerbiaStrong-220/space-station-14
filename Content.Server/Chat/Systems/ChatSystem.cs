@@ -439,6 +439,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         string message,
         string? sender = null,
         bool playSound = true,
+        SoundSpecifier? announcementSound = null,//SS220 CluwneComms
         Color? colorOverride = null,
         string? voiceId = null)
     {
@@ -459,8 +460,10 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source, false, true, colorOverride);
 
+        var a = announcementSound?.ToString();
+
         if (playSound)
-            RaiseLocalEvent(new AnnouncementSpokeEvent(filter, DefaultAnnouncementSound, AudioParams.Default, message, voiceId));
+            RaiseLocalEvent(new AnnouncementSpokeEvent(filter, announcementSound?.ToString() ?? DefaultAnnouncementSound, AudioParams.Default, message, voiceId));//SS220 CluwneComms
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement on {station} from {sender}: {message}");
     }
@@ -549,7 +552,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         message = _languageSystem.SanitizeMessage(source, source, message, out _);
 
-        //SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range); 
+        //SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
         //var ev = new EntitySpokeEvent(source, message, originalMessage, null, null);
         //RaiseLocalEvent(source, ev, true);
         //SS220-Add-Languages end

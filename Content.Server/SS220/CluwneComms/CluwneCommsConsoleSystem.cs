@@ -151,7 +151,8 @@ namespace Content.Server.SS220.CluwneComms
             msg = _chatManager.DeleteProhibitedCharacters(msg, args.Actor);
             msg += "\n" + Loc.GetString("cluwne-comms-console-announcement-sent-by") + " " + author;
 
-            _chatSystem.DispatchStationAnnouncement(ent, msg, title, colorOverride: ent.Comp.Color, voiceId: voiceId);
+            _chatSystem.DispatchStationAnnouncement(ent, msg, title, true, ent.Comp.Sound, colorOverride: ent.Comp.Color, voiceId: voiceId);
+            //_chatSystem.DispatchStationAnnouncement(ent, msg, title, true, null, colorOverride: ent.Comp.Color, voiceId: voiceId);
 
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(args.Actor):player} has sent the following station announcement: {msg}");
 
