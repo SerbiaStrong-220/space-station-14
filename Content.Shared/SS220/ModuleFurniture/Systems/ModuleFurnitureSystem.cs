@@ -2,10 +2,13 @@
 
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Storage;
 using Content.Shared.SS220.ModuleFurniture.Components;
 using Content.Shared.SS220.ModuleFurniture.Events;
 using Content.Shared.Tools.Systems;
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Item;
+using Robust.Shared.Containers;
 
 
 namespace Content.Shared.SS220.ModuleFurniture.Systems;
@@ -13,7 +16,8 @@ namespace Content.Shared.SS220.ModuleFurniture.Systems;
 public abstract partial class SharedModuleFurnitureSystem<T> : EntitySystem where T : SharedModuleFurnitureComponent
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private const float DoAfterMovementThreshold = 0.15f;
 
@@ -22,10 +26,13 @@ public abstract partial class SharedModuleFurnitureSystem<T> : EntitySystem wher
     {
         base.Initialize();
 
-        SubscribeLocalEvent<T, InteractUsingEvent>(OnInteractUsing);
-
+        SubscribeLocalEvent<ModuleFurniturePartComponent, GettingPickedUpAttemptEvent>(OnGettingPickedUpAttempt);
         SubscribeLocalEvent<ModuleFurniturePartComponent, AccessibleOverrideEvent<OpenBoundInterfaceMessage>>(OnAccessingBUI);
         SubscribeLocalEvent<ModuleFurniturePartComponent, AccessibleOverrideEvent<ActivateInWorldEvent>>(OnAccessingActivateInWorld);
+        SubscribeLocalEvent<ModuleFurniturePartComponent, AccessibleOverrideEvent<InteractHandEvent>>(OnAccessingInteractHandEvent);
+
+        SubscribeLocalEvent<ModuleFurniturePartComponent, BoundUIOpenedEvent>(OnPartBUIOpened);
+        SubscribeLocalEvent<ModuleFurniturePartComponent, BoundUIClosedEvent>(OnPartBUIClosed);
     }
 
     public bool CanInsert(Entity<SharedModuleFurnitureComponent?> entity, Entity<ModuleFurniturePartComponent?> target, [NotNullWhen(true)] out Vector2i? offset, out string reasonLocPath)
@@ -67,6 +74,12 @@ public abstract partial class SharedModuleFurnitureSystem<T> : EntitySystem wher
         return _doAfter.TryStartDoAfter(doafterArgs);
     }
 
+    private void OnGettingPickedUpAttempt(Entity<ModuleFurniturePartComponent> entity, ref GettingPickedUpAttemptEvent args)
+    {
+        // We dont want to pick up it for now.
+        args.Cancel();
+    }
+
     private void OnAccessingBUI(Entity<ModuleFurniturePartComponent> entity, ref AccessibleOverrideEvent<OpenBoundInterfaceMessage> args)
     {
         if (args.Target != entity.Owner)
@@ -85,23 +98,27 @@ public abstract partial class SharedModuleFurnitureSystem<T> : EntitySystem wher
         args.Handled = true;
     }
 
-    private void OnInteractUsing(Entity<T> entity, ref InteractUsingEvent args)
+    private void OnAccessingInteractHandEvent(Entity<ModuleFurniturePartComponent> entity, ref AccessibleOverrideEvent<InteractHandEvent> args)
     {
-        if (args.Handled)
+        if (args.Target != entity.Owner)
             return;
 
-        // Decided to cut this
-        // if (HasComp<ModuleFurniturePartComponent>(args.Used))
-        //     args.Handled = TryInsert((entity.Owner, entity.Comp), args.Used, args.User);
+        args.Accessible = true;
+        args.Handled = true;
+    }
 
-        // if (entity.Comp.CachedLayout.Count == 0)
-        //     args.Handled = _tool.UseTool(args.Used, args.User, entity.Owner,
-        //                     entity.Comp.DeconstructDelaySeconds, entity.Comp.DeconstructTool,
-        //                     new DeconstructFurnitureEvent());
-        // else
-        //     args.Handled = _tool.UseTool(args.Used, args.User, entity.Owner,
-        //                     entity.Comp.DeconstructDelaySeconds, entity.Comp.DeconstructTool,
-        //                     new RemoveFurniturePartEvent());
+    private void OnPartBUIOpened(Entity<ModuleFurniturePartComponent> entity, ref BoundUIOpenedEvent args)
+    {
+        if (args.UiKey is not StorageComponent.StorageUiKey)
+            return;
+
+        _appearance.SetData(entity.Owner, ModuleFurniturePartVisuals.Opened, true);
+    }
+
+    private void OnPartBUIClosed(Entity<ModuleFurniturePartComponent> entity, ref BoundUIClosedEvent args)
+    {
+        if (args.UiKey is StorageComponent.StorageUiKey)
+            _appearance.SetData(entity.Owner, ModuleFurniturePartVisuals.Opened, false);
     }
 
     private bool EqualWidthPixel(SharedModuleFurnitureComponent furnitureComp, ModuleFurniturePartComponent partComp)

@@ -447,7 +447,7 @@ namespace Content.Shared.Interaction
 
             // Check if interacted entity is in the same container, the direct child, or direct parent of the user.
             // Also checks if the item is accessible via some storage UI (e.g., open backpack)
-            if (checkAccess && target != null && !IsAccessible(user, target.Value))
+            if (checkAccess && target != null && !IsAccessible<InteractHandEvent>(user, target.Value))  // SS220-interaction-expansion
                 return;
 
 

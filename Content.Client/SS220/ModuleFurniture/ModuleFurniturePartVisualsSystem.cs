@@ -36,11 +36,7 @@ public sealed class StorageContainerVisualsSystem : VisualizerSystem<ModuleFurni
         if (component.Opened != opened)
         {
             //bruh... Convert is prohibited by typecheck
-            var boolToSignedOne = opened switch
-            {
-                true => 1,
-                false => -1,
-            };
+            var boolToSignedOne = opened ? 1 : -1;
             args.Sprite.DrawDepth += DeltaDrawDepth * boolToSignedOne;
         }
 

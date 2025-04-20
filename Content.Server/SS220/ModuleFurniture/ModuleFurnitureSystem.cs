@@ -26,14 +26,9 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
 
         SubscribeLocalEvent<ModuleFurnitureComponent, ComponentGetState>(GetCompState);
 
-        // SubscribeLocalEvent<ModuleFurnitureComponent, InsertedFurniturePart>(OnInsertedFurniturePart);
-        // SubscribeLocalEvent<ModuleFurnitureComponent, RemoveFurniturePartEvent>(OnRemoveFurniturePart);
         SubscribeLocalEvent<ModuleFurnitureComponent, DeconstructFurnitureEvent>(OnDeconstructFurniturePart);
 
         SubscribeLocalEvent<ModuleFurniturePartComponent, EntGotRemovedFromContainerMessage>(OnPartRemovedFromContainer);
-
-        SubscribeLocalEvent<ModuleFurniturePartComponent, BoundUIOpenedEvent>(OnPartBUIOpened);
-        SubscribeLocalEvent<ModuleFurniturePartComponent, BoundUIClosedEvent>(OnPartBUIClosed);
     }
 
     private void OnMapInit(Entity<ModuleFurnitureComponent> entity, ref MapInitEvent _)
@@ -57,6 +52,7 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
                 _container.RemoveEntity(entity.Owner, spawnedUid);
                 continue;
             }
+
             AddToOccupation(entity.Comp, (spawnedUid, partComponent), offset.Value);
             _appearance.SetData(spawnedUid, ModuleFurniturePartVisuals.InFurniture, true);
             AddToLayout(entity.Comp, (spawnedUid, partComponent), offset.Value);
@@ -155,24 +151,6 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
 
         EntityManager.QueueDeleteEntity(entity);
     }
-
-    private void OnPartBUIOpened(Entity<ModuleFurniturePartComponent> entity, ref BoundUIOpenedEvent args)
-    {
-        if (args.UiKey is not StorageComponent.StorageUiKey)
-            return;
-
-        _appearance.SetData(entity.Owner, ModuleFurniturePartVisuals.Opened, true);
-
-        if (!_container.TryGetContainingContainer((entity.Owner, null, null), out var container))
-            return;
-    }
-
-    private void OnPartBUIClosed(Entity<ModuleFurniturePartComponent> entity, ref BoundUIClosedEvent args)
-    {
-        if (args.UiKey is StorageComponent.StorageUiKey)
-            _appearance.SetData(entity.Owner, ModuleFurniturePartVisuals.Opened, false);
-    }
-
 
     private void ForceRebuildLayout(ModuleFurnitureComponent furnitureComp)
     {
