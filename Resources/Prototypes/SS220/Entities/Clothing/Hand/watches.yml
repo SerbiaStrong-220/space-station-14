@@ -17,6 +17,7 @@
   - type: Tag
     tags:
     - WhitelistChameleon
+    - WristWatch
   - type: WristWatch
     style: NTDigital
   - type: UserInterface

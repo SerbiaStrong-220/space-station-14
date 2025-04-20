@@ -109,6 +109,7 @@
       - DrinkMoonshineGlass
       - DrinkHotArachneGlass #SS220 HotArachne cocktail
       - DrinkFrench75Glass #SS220 French 75 cocktail
+      - DrinkXlebnuldieselGlass #SS220 Xlebnuldiesel
     chance: 0.8
     offset: 0.0
     #rare

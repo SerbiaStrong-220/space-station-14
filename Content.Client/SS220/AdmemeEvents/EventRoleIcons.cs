@@ -3,6 +3,7 @@
 using Content.Shared.Antag;
 using Content.Shared.Ghost;
 using Content.Shared.SS220.AdmemeEvents;
+using Content.Shared.SS220.AdmemeEvents.EventRole;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;

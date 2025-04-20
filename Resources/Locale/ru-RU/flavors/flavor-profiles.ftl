@@ -265,6 +265,7 @@ flavor-complex-watermelon-wakeup = как сладкое пробуждение
 flavor-complex-rubberneck = как синтетика
 flavor-complex-irish-car-bomb = как шипучая пенка колы
 flavor-complex-bacchus = как смерть и камни
+flavor-complex-xlebnuldiesel = как химически-сладкое пиво
 
 ### This is exactly what pilk tastes like. I'm not even joking. I might've been a little drunk though
 

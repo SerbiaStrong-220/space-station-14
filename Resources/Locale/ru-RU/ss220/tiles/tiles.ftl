@@ -54,6 +54,7 @@ tiles-mowed-astro-grass = астро-газон
 tiles-jungle-astro-grass = астро-трава джунглей
 tiles-astro-ice = астро-лёд
 tiles-astro-snow = астро-снег
+tiles-astro-asteroid-sand = астро-песок астероида
 
 tiles-green-circuit-floor = микросхемный зелёный пол
 tiles-blue-circuit-floor = микросхемный синий пол
