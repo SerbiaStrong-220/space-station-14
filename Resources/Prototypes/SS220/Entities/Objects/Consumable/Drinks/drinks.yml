@@ -111,3 +111,20 @@
   - type: Icon
     sprite: SS220/Objects/Consumable/Drinks/xlebnuldiesel.rsi
     state: icon
+
+- type: entity
+  parent: DrinkGlassBase
+  id: DrinkBerryCompote
+  name: ягодный компот
+  description: Аромат ягод напоминает вам сказку о Красной Шапочке.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: BerryCompote
+          Quantity: 30
+  - type: Drink
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi
