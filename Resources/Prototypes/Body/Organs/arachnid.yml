@@ -21,9 +21,10 @@
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 5
-  - type: Tag
+  - type: Tag  # SS220-TaRaKaCheCki start
     tags:
       - Meat
+      - Trash  # SS220-TaRaKaCheCki end
 
 - type: entity
   id: OrganArachnidStomach

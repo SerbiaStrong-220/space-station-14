@@ -22,6 +22,7 @@
   - type: Tag
     tags:
       - Meat
+      - Trash #SS220-TaRaKaCheCki
 
 - type: entity
   id: BaseAnimalOrgan
