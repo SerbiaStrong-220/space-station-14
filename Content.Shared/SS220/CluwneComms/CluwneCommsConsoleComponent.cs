@@ -92,13 +92,13 @@ namespace Content.Shared.SS220.CluwneComms
         /// Just made them instakill for memes
         /// </summary>
         [DataField]
-        public float TotalIntensity = 250f;
+        public float ExplosionTotalIntensity = 250f;
 
         [DataField]
-        public float Slope = 10f;
+        public float ExplosionSlope = 10f;
 
         [DataField]
-        public float MaxTileIntensity = 50f;
+        public float ExplosionMaxTileIntensity = 50f;
     }
 
     [Serializable, NetSerializable]

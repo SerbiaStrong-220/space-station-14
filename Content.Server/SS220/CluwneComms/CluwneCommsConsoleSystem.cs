@@ -233,7 +233,7 @@ namespace Content.Server.SS220.CluwneComms
 
         private void OnBoomMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleBoomMessage args)
         {
-            _explosion.QueueExplosion(ent, "Default", ent.Comp.TotalIntensity, ent.Comp.Slope, ent.Comp.MaxTileIntensity, canCreateVacuum: false);
+            _explosion.QueueExplosion(ent, "Default", ent.Comp.ExplosionTotalIntensity, ent.Comp.ExplosionSlope, ent.Comp.ExplosionMaxTileIntensity, canCreateVacuum: false);
         }
 
         #region News copypaste
