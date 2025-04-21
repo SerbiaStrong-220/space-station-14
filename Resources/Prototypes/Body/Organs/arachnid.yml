@@ -21,7 +21,7 @@
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 5
-  - type: Tag  # SS220-TaRaKaCheCki start
+  - type: Tag  
     tags:
       - Meat
       - Trash  # SS220-TaRaKaCheCki end
