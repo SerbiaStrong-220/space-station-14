@@ -37,7 +37,7 @@ namespace Content.Client.SS220.CluwneComms.UI
         public event Action<string>? OnAnnounce;
         public event Action<string, string, string>? OnAlert;
         public event Action? OnBoom;
-        
+
         public CluwneCommsConsoleMenu()
         {
             IoCManager.InjectDependencies(this);
@@ -132,7 +132,6 @@ namespace Content.Client.SS220.CluwneComms.UI
             };
 
             InstructionInput.Edit.OnTextChanged += (args) =>
-            // SS220 Text Edit Limits end
             {
                 if (args.Control.TextLength > maxInstructionLength)
                 {
@@ -153,10 +152,11 @@ namespace Content.Client.SS220.CluwneComms.UI
                 AlertInput.TextRope = new Rope.Leaf("");
                 InstructionInput.TextRope = new Rope.Leaf("");
             };
+            #endregion
 
             BoomButton.OnPressed += _ => OnBoom?.Invoke();
         }
-        #endregion
+
         protected override void FrameUpdate(FrameEventArgs args)
         {
             base.FrameUpdate(args);

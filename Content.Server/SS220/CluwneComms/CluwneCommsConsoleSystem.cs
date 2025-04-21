@@ -114,7 +114,7 @@ namespace Content.Server.SS220.CluwneComms
             CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce, comp.CanAlert, levels, comp.AnnouncementCooldownRemaining, comp.AlertCooldownRemaining);
             _uiSystem.SetUiState(ent, CluwneCommsConsoleUiKey.Key, newState);
         }
-        
+
         private void OnAnnounceMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleAnnounceMessage args)
         {
             if (args.Message == "")
@@ -193,7 +193,7 @@ namespace Content.Server.SS220.CluwneComms
 
             var article = new NewsArticle
             {
-                Title = Loc.GetString("joke-alert-level-" + args.Alert + "-news-title"),
+                Title = Loc.GetString($"joke-alert-level-{args.Alert}-news-title"),
                 Content = args.Instruntions.Trim(),
                 Author = author,
                 ShareTime = _ticker.RoundDuration()
@@ -265,7 +265,7 @@ namespace Content.Server.SS220.CluwneComms
             articles = stationNews.Articles;
             return true;
         }
-        
+
         private void UpdateWriterDevices()
         {
             var query = EntityQueryEnumerator<NewsWriterComponent>();
