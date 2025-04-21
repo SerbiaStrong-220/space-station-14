@@ -265,6 +265,7 @@ namespace Content.Server.SS220.CluwneComms
             articles = stationNews.Articles;
             return true;
         }
+        
         private void UpdateWriterDevices()
         {
             var query = EntityQueryEnumerator<NewsWriterComponent>();
