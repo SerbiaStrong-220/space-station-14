@@ -28,9 +28,9 @@ namespace Content.Client.SS220.CluwneComms.UI
 
         public bool CanAnnounce;
         public bool CanAlert;
-        public bool AlertLevelSelectable;
         public string CurrentLevel = string.Empty;
 
+        //
         public TimeSpan? AnnounceCountdownEnd;
         public TimeSpan? AlertCountdownEnd;
 
@@ -132,8 +132,6 @@ namespace Content.Client.SS220.CluwneComms.UI
                 }
             };
 
-            AlertLevelButton.Disabled = !AlertLevelSelectable;
-
             InstructionInput.Edit.OnTextChanged += (args) =>
             // SS220 Text Edit Limits end
             {
@@ -178,7 +176,7 @@ namespace Content.Client.SS220.CluwneComms.UI
 
             if (alerts == null)
             {
-                AlertLevelButton.AddItem("name");
+                AlertLevelButton.AddItem("-");
                 AlertLevelButton.SetItemMetadata(AlertLevelButton.ItemCount - 1, "currentAlert");
                 return;
             }
