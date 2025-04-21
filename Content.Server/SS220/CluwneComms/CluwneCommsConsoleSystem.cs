@@ -29,7 +29,7 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server.SS220.CluwneComms
 {
-    public sealed class CluwneCommsConsoleSystem : SharedCluwneCommsConsoleSystem
+    public sealed class CluwneCommsConsoleSystem : EntitySystem
     {
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly AccessReaderSystem _accessReaderSystem = default!;
@@ -57,19 +57,21 @@ namespace Content.Server.SS220.CluwneComms
         }
         public void OnMapInit(Entity<CluwneCommsConsoleComponent> ent, ref MapInitEvent args)
         {
+            //we set timers so that it is impossible to abuse the console rebuild
             ent.Comp.AnnouncementCooldownRemaining = _timing.CurTime + ent.Comp.InitialDelay;
             ent.Comp.CanAnnounce = false;
 
             ent.Comp.AlertCooldownRemaining = _timing.CurTime + ent.Comp.InitialDelay;
             ent.Comp.CanAlert = false;
 
-
+            //set memelert from proto
             foreach (var memelert in _prototypeManager.EnumeratePrototypes<MemelertLevelPrototype>())
             {
                 ent.Comp.LevelsDict.Add(memelert.ID, memelert);
             }
             UpdateUI(ent, ent.Comp);
 
+            //create a station component in case it is not present at the station
             var station = _station.GetOwningStation(ent);
             if (!station.HasValue)
                 return;
@@ -112,7 +114,6 @@ namespace Content.Server.SS220.CluwneComms
             CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce, comp.CanAlert, levels, comp.AnnouncementCooldownRemaining, comp.AlertCooldownRemaining);
             _uiSystem.SetUiState(ent, CluwneCommsConsoleUiKey.Key, newState);
         }
-
         private void OnAnnounceMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleAnnounceMessage args)
         {
             if (args.Message == "")
@@ -121,15 +122,16 @@ namespace Content.Server.SS220.CluwneComms
                 return;
             }
 
+            if (!ent.Comp.CanAnnounce)
+                return;
+
             var maxLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             var msg = SharedChatSystem.SanitizeAnnouncement(args.Message, maxLength);
             var author = Loc.GetString("cluwne-comms-console-announcement-unknown-sender");
             var voiceId = string.Empty;
+
             if (args.Actor is { Valid: true } mob)
             {
-                if (!ent.Comp.CanAnnounce)
-                    return;
-
                 if (!CanUse(mob, ent))
                 {
                     _popupSystem.PopupEntity(Loc.GetString("cluwne-comms-console-permission-denied"), ent, args.Actor);
@@ -151,8 +153,7 @@ namespace Content.Server.SS220.CluwneComms
             msg = _chatManager.DeleteProhibitedCharacters(msg, args.Actor);
             msg += "\n" + Loc.GetString("cluwne-comms-console-announcement-sent-by") + " " + author;
 
-            _chatSystem.DispatchStationAnnouncement(ent, msg, title, true, ent.Comp.Sound, colorOverride: ent.Comp.Color, voiceId: voiceId);
-            //_chatSystem.DispatchStationAnnouncement(ent, msg, title, true, null, colorOverride: ent.Comp.Color, voiceId: voiceId);
+            _chatSystem.DispatchStationAnnouncement(ent, msg, title, true, ent.Comp.Sound, colorOverride: ent.Comp.Color, voiceId);
 
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(args.Actor):player} has sent the following station announcement: {msg}");
 
@@ -174,11 +175,10 @@ namespace Content.Server.SS220.CluwneComms
             //alert announce from AlertLevelSystem
             _audio.PlayGlobal(alertInfo.LevelDetails.Sound, Filter.Broadcast(), true);
 
-            var voiceId = string.Empty;
-            _chatSystem.DispatchStationAnnouncement(ent, args.Message, colorOverride: alertInfo.LevelDetails.Color, voiceId: voiceId);
+            _chatSystem.DispatchStationAnnouncement(ent, args.Message, colorOverride: alertInfo.LevelDetails.Color);
 
             //Intructions from console
-            //copied from NewsSystem
+            //partly copied from NewsSystem
             if (!TryGetArticles(ent, out var articles))
                 return;
 
@@ -217,6 +217,7 @@ namespace Content.Server.SS220.CluwneComms
 
             ent.Comp.AlertCooldownRemaining = _timing.CurTime + ent.Comp.AlertDelay;
             ent.Comp.CanAlert = false;
+
             UpdateUI(ent, ent.Comp);
             UpdateWriterDevices();
         }
@@ -233,6 +234,12 @@ namespace Content.Server.SS220.CluwneComms
         {
             _explosion.QueueExplosion(ent, "Default", ent.Comp.TotalIntensity, ent.Comp.Slope, ent.Comp.MaxTileIntensity, canCreateVacuum: false);
         }
+
+        #region News copypaste
+        /// <summary>
+        ///     Copypaste from NewsSystem because original methods are private
+        /// </summary>
+
         private void UpdateWriterUi(Entity<NewsWriterComponent> ent)
         {
             if (!_ui.HasUi(ent, NewsWriterUiKey.Key))
@@ -244,6 +251,7 @@ namespace Content.Server.SS220.CluwneComms
             var state = new NewsWriterBoundUserInterfaceState(articles.ToArray(), ent.Comp.PublishEnabled, ent.Comp.NextPublish, ent.Comp.DraftTitle, ent.Comp.DraftContent);
             _ui.SetUiState(ent.Owner, NewsWriterUiKey.Key, state);
         }
+
         private bool TryGetArticles(EntityUid uid, [NotNullWhen(true)] out List<NewsArticle>? articles)
         {
             if (_station.GetOwningStation(uid) is not { } station ||
@@ -264,5 +272,6 @@ namespace Content.Server.SS220.CluwneComms
                 UpdateWriterUi((owner, comp));
             }
         }
+        #endregion
     }
 }
