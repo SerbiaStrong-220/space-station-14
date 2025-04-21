@@ -170,7 +170,6 @@
       - id: EphedrineChemistryBottle
         amount: 2
       - id: OmnizineChemistryBottle
-      - id: MedkitCombatFilled
 
 - type: entity
   parent: ClothingBeltWand
