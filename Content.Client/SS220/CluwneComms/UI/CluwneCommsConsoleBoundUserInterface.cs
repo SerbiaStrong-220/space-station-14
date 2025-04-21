@@ -35,8 +35,8 @@ namespace Content.Client.SS220.CluwneComms.UI
 
         public void BoomButtonPressed()
         {
-            Close();//should be cause user most certanly will be dead
             SendMessage(new CluwneCommsConsoleBoomMessage());
+            Close();//should be cause user most certanly will be dead
         }
 
         public void AlertButtonPressed(string level, string message, string instructions)
