@@ -30,11 +30,10 @@ namespace Content.Client.SS220.CluwneComms.UI
         public bool CanAlert;
         public string CurrentLevel = string.Empty;
 
-        //
+        //timers buffer
         public TimeSpan? AnnounceCountdownEnd;
         public TimeSpan? AlertCountdownEnd;
 
-        public event Action? OnEmergencyLevel;
         public event Action<string>? OnAnnounce;
         public event Action<string, string, string>? OnAlert;
         public event Action? OnBoom;
@@ -70,7 +69,6 @@ namespace Content.Client.SS220.CluwneComms.UI
             };
 
             AnnounceButton.OnPressed += _ => OnAnnounce?.Invoke(Rope.Collapse(MessageInput.TextRope));
-            AnnounceButton.Disabled = !CanAnnounce;
             #endregion
 
             #region AlertText
@@ -154,7 +152,6 @@ namespace Content.Client.SS220.CluwneComms.UI
                 AlertInput.TextRope = new Rope.Leaf("");
                 InstructionInput.TextRope = new Rope.Leaf("");
             };
-            AlertButton.Disabled = !CanAlert;
 
             BoomButton.OnPressed += _ => OnBoom?.Invoke();
         }
@@ -195,7 +192,8 @@ namespace Content.Client.SS220.CluwneComms.UI
             AlertLevelButton.SelectId(AlertLevelButton.ItemCount - 1);
         }
 
-        public void UpdateCountdown()
+        //was added specifically to the buttons so as not to frustrate the user
+        private void UpdateCountdown()
         {
             if (AnnounceCountdownEnd == null)
             {

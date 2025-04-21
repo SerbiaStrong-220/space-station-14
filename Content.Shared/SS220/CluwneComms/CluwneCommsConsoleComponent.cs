@@ -17,14 +17,14 @@ namespace Content.Shared.SS220.CluwneComms
         /// </summary>
         [ViewVariables]
         [DataField]
-        public TimeSpan Delay = TimeSpan.FromSeconds(10);
+        public TimeSpan AnnounceDelay = TimeSpan.FromSeconds(10);
 
         /// <summary>
         /// Time in seconds of announcement cooldown when a new console is created on a per-console basis
         /// </summary>
         [ViewVariables]
         [DataField]
-        public TimeSpan InitialDelay = TimeSpan.FromSeconds(3);
+        public TimeSpan InitialAnnounceDelay = TimeSpan.FromSeconds(3);
 
         /// <summary>
         /// Remaining cooldown between making announcements.
@@ -43,7 +43,14 @@ namespace Content.Shared.SS220.CluwneComms
         public TimeSpan AlertDelay = TimeSpan.FromSeconds(10);
 
         /// <summary>
-        /// Remaining cooldown between making funny codes.
+        /// Time in seconds of alert cooldown when a new console is created on a per-console basis
+        /// </summary>
+        [ViewVariables]
+        [DataField]
+        public TimeSpan InitialAlertDelay = TimeSpan.FromSeconds(3);
+
+        /// <summary>
+        /// Remaining cooldown between making funny codes
         /// </summary>
         [ViewVariables]
         public TimeSpan? AlertCooldownRemaining;
@@ -61,7 +68,7 @@ namespace Content.Shared.SS220.CluwneComms
         public SoundSpecifier DenySound = new SoundPathSpecifier("/Audio/SS220/Machines/CluwneComm/ui_cancel.ogg");
 
         /// <summary>
-        /// Console name
+        /// Console title
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField(required: true)]
@@ -81,7 +88,8 @@ namespace Content.Shared.SS220.CluwneComms
         public Dictionary<string, MemelertLevelPrototype> LevelsDict = new();
 
         /// <summary>
-        /// Boom variables
+        /// Boom variables idk what they are
+        /// Just made them instakill for memes
         /// </summary>
         [DataField]
         public float TotalIntensity = 250f;
@@ -109,6 +117,12 @@ namespace Content.Shared.SS220.CluwneComms
         public readonly string Message = message;
     }
 
+    /// <summary>
+    ///     Sends a memelert info
+    /// </summary>
+    /// <param name="alert">Name of the alert sent</param>
+    /// <param name="message">The text that will be displayed as a station announcement without TTS</param>
+    /// <param name="instruntions">Text sent as station news to PDA</param>
     [Serializable, NetSerializable]
     public sealed class CluwneCommsConsoleAlertMessage(string alert, string message, string instruntions) : BoundUserInterfaceMessage
     {

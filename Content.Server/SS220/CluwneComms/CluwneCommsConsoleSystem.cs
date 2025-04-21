@@ -58,10 +58,10 @@ namespace Content.Server.SS220.CluwneComms
         public void OnMapInit(Entity<CluwneCommsConsoleComponent> ent, ref MapInitEvent args)
         {
             //we set timers so that it is impossible to abuse the console rebuild
-            ent.Comp.AnnouncementCooldownRemaining = _timing.CurTime + ent.Comp.InitialDelay;
+            ent.Comp.AnnouncementCooldownRemaining = _timing.CurTime + ent.Comp.InitialAnnounceDelay;
             ent.Comp.CanAnnounce = false;
 
-            ent.Comp.AlertCooldownRemaining = _timing.CurTime + ent.Comp.InitialDelay;
+            ent.Comp.AlertCooldownRemaining = _timing.CurTime + ent.Comp.InitialAlertDelay;
             ent.Comp.CanAlert = false;
 
             //set memelert from proto
@@ -157,7 +157,7 @@ namespace Content.Server.SS220.CluwneComms
 
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(args.Actor):player} has sent the following station announcement: {msg}");
 
-            ent.Comp.AnnouncementCooldownRemaining = _timing.CurTime + ent.Comp.Delay;
+            ent.Comp.AnnouncementCooldownRemaining = _timing.CurTime + ent.Comp.AnnounceDelay;
             ent.Comp.CanAnnounce = false;
             UpdateUI(ent, ent.Comp);
         }
