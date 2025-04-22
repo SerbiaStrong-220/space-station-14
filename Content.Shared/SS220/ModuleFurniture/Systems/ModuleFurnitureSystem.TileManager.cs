@@ -82,11 +82,6 @@ public abstract partial class SharedModuleFurnitureSystem<T> : EntitySystem
         || !((placeVector + partSize).Y - 1 < furnitureComp.TileLayoutSize.Y)) // same here
             return false;
 
-#if DEBUG
-        Log.Debug($"Trying to place furniture part. Place vector - {placeVector}, part size - {partComp.ContainerSize}");
-        PrintDebugOccupation(furnitureComp);
-#endif
-
         for (var height = 0; height < partSize.Y; height++)
         {
             for (int width = 0; width < partSize.X; width++)

@@ -6,6 +6,7 @@
   description: you can open the drawers, you can knock on them, and even put things in them!
   components:
   - type: Sprite
+    noRot: true
     sprite: SS220/Objects/Storage/ModuleFurniture/dresser.rsi
     state: foundation
   - type: Damageable
@@ -39,6 +40,42 @@
   - type: Rotatable
 
 - type: entity
+  id: BaseCabinetFoundation
+  abstract: true
+  parent: BaseModularFoundation
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.45,0.2,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+
+- type: entity
+  id: BaseDoubleCabinetFoundation
+  abstract: true
+  parent: BaseModularFoundation
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.45,0.4,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+
+- type: entity
   id: BaseModularPart
   abstract: true
   parent: BaseStorageItem
@@ -46,7 +83,7 @@
   description: Drawer for cabinet
   components:
   - type: ModuleFurniturePart
-    size: w1h1
+    size: 1,1
   - type: Item
     size: Huge
   - type: Sprite

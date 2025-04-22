@@ -7,7 +7,7 @@
     sprite: SS220/Objects/Storage/ModuleFurniture/wooden_cabinet.rsi
   - type: ModuleFurniturePart
     spriteSize: 13,4
-    size: w1h1
+    size: 1,1
 
 - type: entity
   id: ModularPartWoodenDoubleCabinetw1h1
@@ -18,7 +18,7 @@
     sprite: SS220/Objects/Storage/ModuleFurniture/wooden_double_cabinet.rsi
   - type: ModuleFurniturePart
     spriteSize: 13,4
-    size: w1h1
+    size: 1,1
 
 - type: entity
   id: ModularPartCabinetw1h1
@@ -29,7 +29,7 @@
     sprite: SS220/Objects/Storage/ModuleFurniture/cabinet.rsi
   - type: ModuleFurniturePart
     spriteSize: 11,4
-    size: w1h1
+    size: 1,1
 
 - type: entity
   id: ModularPartDoubleCabinetw1h1
@@ -40,7 +40,7 @@
     sprite: SS220/Objects/Storage/ModuleFurniture/double_cabinet.rsi
   - type: ModuleFurniturePart
     spriteSize: 13,4
-    size: w1h1
+    size: 1,1
 
 - type: entity
   id: ModularPartFillingCabinetw1h1
@@ -51,4 +51,4 @@
     sprite: SS220/Objects/Storage/ModuleFurniture/filling_cabinet.rsi
   - type: ModuleFurniturePart
     spriteSize: 7,6
-    size: w1h1
+    size: 1,1

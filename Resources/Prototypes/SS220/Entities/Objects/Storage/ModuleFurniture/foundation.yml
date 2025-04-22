@@ -3,7 +3,7 @@
 - type: entity
   id: ModularCabinetFoundation
   categories: [ HideSpawnMenu ]
-  parent: BaseModularFoundation
+  parent: BaseCabinetFoundation
   name: modular cabinet
   description: cabinet, now with layout!
   components:
@@ -18,7 +18,7 @@
 - type: entity
   id: ModularWoodenCabinetFoundation
   categories: [ HideSpawnMenu ]
-  parent: BaseModularFoundation
+  parent: BaseCabinetFoundation
   name: modular wooden cabinet foundation
   description: Wooden cabinet, now with layout!
   components:
@@ -33,7 +33,7 @@
 - type: entity
   id: ModularTallCabinetFoundation
   categories: [ HideSpawnMenu ]
-  parent: BaseModularFoundation
+  parent: BaseCabinetFoundation
   name: modular tall cabinet foundation
   description: Wooden cabinet, now with layout!
   components:
@@ -48,7 +48,7 @@
 - type: entity
   id: ModularFillingCabinetFoundation
   categories: [ HideSpawnMenu ]
-  parent: BaseModularFoundation
+  parent: BaseCabinetFoundation
   name: modular filling cabinet foundation
   description: Wooden cabinet, now with layout!
   components:
@@ -65,7 +65,7 @@
 - type: entity
   id: ModularDoubleCabinetFoundation
   categories: [ HideSpawnMenu ]
-  parent: BaseModularFoundation
+  parent: BaseDoubleCabinetFoundation
   name: modular double cabinet foundation
   description: Wooden cabinet, now with layout!
   components:
@@ -80,7 +80,7 @@
 - type: entity
   id: ModularWoodenDoubleCabinetFoundation
   categories: [ HideSpawnMenu ]
-  parent: BaseModularFoundation
+  parent: BaseDoubleCabinetFoundation
   name: modular wooden double cabinet foundation
   description: wooden double cabinet, now with layout!
   components:
@@ -95,7 +95,7 @@
 - type: entity
   id: ModularTallDoubleCabinetFoundation
   categories: [ HideSpawnMenu ]
-  parent: BaseModularFoundation
+  parent: BaseDoubleCabinetFoundation
   name: modular tall double cabinet foundation
   description: tall double cabinet, now with layout!
   components:
@@ -110,7 +110,7 @@
 - type: entity
   id: ModularFillingDoubleCabinetFoundation
   categories: [ HideSpawnMenu ]
-  parent: BaseModularFoundation
+  parent: BaseDoubleCabinetFoundation
   name: modular filling double cabinet foundation
   description: filling double cabinet, now with layout!
   components:

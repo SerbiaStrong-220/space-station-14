@@ -1,0 +1,119 @@
+- type: entityTable
+  id: ScienceCabinetDrawerEquipment
+  table: !type:AllSelector
+    children:
+    - id: ClothingHandsGlovesLatex
+    - id: ClothingHeadsetScience
+    - id: ClothingMaskSterile
+    - id: ClothingOuterCoatRnd
+    - id: AnomalyScanner
+    - id: NodeScanner
+    - id: NetworkConfigurator
+      prob: 0.5
+
+- type: entityTable
+  id: EngineerCabinetDrawerEquipment
+  table: !type:AllSelector
+    children:
+    - id: ClothingHandsGlovesColorYellow
+    - id: trayScanner
+    - id: RCD
+    - id: RCDAmmo
+    - id: FlashlightLantern
+      prob: 0.7
+    - id: Screwdriver
+      prob: 0.7
+    - id: Wrench
+      prob: 0.7
+    - id: Welder
+      prob: 0.7
+    - id: Crowbar
+      prob: 0.7
+    - id: Wirecutter
+      prob: 0.7
+    - id: Multitool
+      prob: 0.2
+    - id: GasAnalyzer
+      prob: 0.7
+    - id: CableApcStack
+      prob: 0.3
+    - id: CableApcStack
+      prob: 0.3
+    - id: CableApcStack
+      prob: 0.3
+    - id: SprayPainter
+      prob: 0.7
+
+- type: entityTable
+  id: MedicalCabinetDrawerEquipment
+  table: !type:AllSelector
+    children:
+    - id: BoxSyringe
+    - id: EpinephrineChemistryBottle
+      amount: !type:ConstantNumberSelector
+        value: 1
+    - !type:EntSelector
+      id: Brutepack
+      amount: !type:ConstantNumberSelector
+        value: 2
+    - !type:EntSelector
+      id: Ointment
+      amount: !type:ConstantNumberSelector
+        value: 2
+    - !type:EntSelector
+      id: Bloodpack
+      amount: !type:ConstantNumberSelector
+        value: 2
+    - id: Gauze
+
+- type: entityTable
+  id: LawyerCabinetDrawerEquipment
+  table: !type:AllSelector
+    children:
+    - id: Paper
+    - id: PaperOffice
+    - id: BoxFolderRed
+      prob: 0.4
+    - id: BoxFolderBlue
+      prob: 0.4
+    - id: BoxFolderYellow
+      prob: 0.3
+    - id: BoxFolderBlack
+      prob: 0.3
+    - id: PaperCaptainsThoughts
+      prob: 0.2
+    - id: Pen
+      prob: 0.8
+    - id: LuxuryPen
+      prob: 0.2
+
+- type: entityTable
+  id: MaintenanceCabinetDrawerLoot
+  table: !type:AllSelector
+    children:
+    - id: StrangePill
+      prob: 0.20
+    # Fluff
+    - !type:NestedSelector
+      tableId: MaintFluffTable
+      prob: 0.40
+      rolls: !type:RangeNumberSelector
+        range: 0, 3
+    # Plushies
+    - !type:NestedSelector
+      tableId: AllPlushiesTable
+      prob: 0.15
+      rolls: !type:RangeNumberSelector
+        range: 1, 2
+    # Materials
+    - !type:NestedSelector
+      tableId: RandomMaterialCrateTable
+      prob: 0.2
+      rolls: !type:RangeNumberSelector
+        range: 0, 2
+    # SmokerFun
+    - !type:NestedSelector
+      tableId: SoakedSmokesTable
+      prob: 0.15
+      rolls: !type:RangeNumberSelector
+        range: 0, 3

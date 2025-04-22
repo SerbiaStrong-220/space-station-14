@@ -72,14 +72,3 @@ public sealed class ModuleFurnitureComponentState : ComponentState
         TileLayoutSize = tileLayoutSize;
     }
 }
-
-/// <summary>
-/// This helps to correspond client sprite size and server tiled layout of itemContainers.
-/// </summary>
-public enum ContainerTileSize : int
-{
-    invalid = -1,
-    w1h1 = 1,
-    w2h1 = 2,
-    w3h1 = 3,
-}

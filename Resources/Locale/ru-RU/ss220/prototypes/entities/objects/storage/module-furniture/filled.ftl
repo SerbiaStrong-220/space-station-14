@@ -2,46 +2,46 @@
 
 ent-ModularWoodenCabinetFilled = Деревянный комод
     .desc = Комод — это шкафчик, которому лень стоять вертикально. Вместо этого он решил прилечь горизонтально и хранить ваши вещи.
-    .suffix = Заполнен Пустой
+    .suffix = Пустые ящики
 
 # Maintenance
 
 ent-ModularCabinetMaintenanceFilled = Комод
     .desc = { ent-ModularWoodenCabinetFilled.desc }
-    .suffix = Заполнен Техи
+    .suffix = Заполнен, Техи
 
 # Science
 
 ent-ModularCabinetScienceFilled = Комод
     .desc = { ent-ModularWoodenCabinetFilled.desc }
-    .suffix = Заполнен РНД
+    .suffix = Заполнен, РНД
 
 ent-ModularDoubleCabinetScienceFilled = Двойной комод
     .desc = { ent-ModularWoodenCabinetFilled.desc }
-    .suffix = Заполнен РНД
+    .suffix = Заполнен, РНД
 
 # Engineer
 
 ent-ModularCabinetEngineerFilled = Комод
     .desc = { ent-ModularWoodenCabinetFilled.desc }
-    .suffix = Заполнен Инженерный
+    .suffix = Заполнен, Инженерный
 
 ent-ModularDoubleCabinetEngineerFilled = Двойной комод
     .desc = { ent-ModularWoodenCabinetFilled.desc }
-    .suffix = Заполнен Инженерный
+    .suffix = Заполнен, Инженерный
 
 # Medical
 
 ent-ModularCabinetMedicalFilled = Комод
     .desc = { ent-ModularWoodenCabinetFilled.desc }
-    .suffix = Заполнен Медицинский
+    .suffix = Заполнен, Медицинский
 
 ent-ModularDoubleCabinetMedicalFilled = Двойной комод
     .desc = { ent-ModularWoodenCabinetFilled.desc }
-    .suffix = Заполнен Медицинский
+    .suffix = Заполнен, Медицинский
 
 # Lawyer
 
 ent-ModularFillingCabinetLawyerFilled = Картотека
     .desc = Картотека — это волшебная коробка, в которой прячутся важные бумаги от тех, кто их ищет. Настоящий эксперт по играм в прятки среди канцелярских принадлежностей!
-    .suffix = Заполнен Бюрократия
+    .suffix = Заполнен, Бюрократия

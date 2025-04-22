@@ -17,21 +17,8 @@ public sealed partial class ModuleFurniturePartComponent : Component
     /// </summary>
     [DataField("size")]
     [AutoNetworkedField]
-    public ContainerTileSize ContainerSizeType;
+    public Vector2i ContainerSize;
 
-    public Vector2i ContainerSize
-    {
-        get
-        {
-            return ContainerSizeType switch
-            {
-                ContainerTileSize.w1h1 => new Vector2i(1, 1),
-                ContainerTileSize.w2h1 => new Vector2i(2, 1),
-                ContainerTileSize.w3h1 => new Vector2i(3, 1),
-                _ => throw new Exception("Container size out of range or invalid")
-            };
-        }
-    }
 
     /// <summary>
     /// Size of actually sprite. Starting offset is given by codes

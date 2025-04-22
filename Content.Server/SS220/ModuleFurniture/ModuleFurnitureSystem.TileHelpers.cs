@@ -77,9 +77,7 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
         DebugTools.Assert(!furnitureComp.DrawerContainer.Contains(part));
 
         AddToOccupation(furnitureComp, part, offset);
-#if DEBUG
-        PrintDebugOccupation(furnitureComp);
-#endif
+
         if (!_container.Insert(part.Owner, furnitureComp.DrawerContainer))
         {
             Log.Error($"Error during inserting {ToPrettyString(part)} to {ToPrettyString(furnitureComp.DrawerContainer.Owner)}");

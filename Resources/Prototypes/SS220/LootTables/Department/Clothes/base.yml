@@ -1,9 +1,7 @@
-- type: entity
-  id: ModuleFurnitureScienceClothingFillPart
-  abstract: true
-  components:
-  - type: StorageFill
-    contents:
+- type: entityTable
+  id: ScienceCabinetDrawerClothes
+  table: !type:AllSelector
+    children:
     - id: ClothingUniformJumpsuitScientist
     - id: ClothingShoesColorWhite
     - id: ClothingUniformJumpskirtScientist
@@ -16,12 +14,10 @@
     - id: CrowbarRed #The jojoke - hit video game Half-Life # imagine, dev have to make that comment...
       prob: 0.1
 
-- type: entity
-  id: ModuleFurnitureEngineerClothingFillPart
-  abstract: true
-  components:
-  - type: StorageFill
-    contents:
+- type: entityTable
+  id: EngineerCabinetDrawerClothes
+  table: !type:AllSelector
+    children:
     - id: ClothingHeadHatHardhatYellow
     - id: ClothingUniformJumpsuitEngineering
     - id: ClothingShoesBootsWork
@@ -31,12 +27,10 @@
     - id: ClothingOuterWinterEngi
       prob: 0.3
 
-- type: entity
-  id: ModuleFurnitureMedicalClothingFillPart
-  abstract: true
-  components:
-  - type: StorageFill
-    contents:
+- type: entityTable
+  id: MedicalCabinetDrawerClothes
+  table: !type:AllSelector
+    children:
     - id: ClothingUniformJumpsuitMedicalDoctor
     - id: ClothingShoesColorWhite
     - id: ClothingOuterCoatLab

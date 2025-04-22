@@ -22,7 +22,7 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
 
         SubscribeLocalEvent<ModuleFurnitureComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ModuleFurnitureComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<ModuleFurnitureComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<ModuleFurnitureComponent, ComponentShutdown>(OnFurnitureShutdown);
 
         SubscribeLocalEvent<ModuleFurnitureComponent, ComponentGetState>(GetCompState);
 
@@ -67,7 +67,7 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
         entity.Comp.DrawerContainer.ShowContents = true;
     }
 
-    private void OnRemove(Entity<ModuleFurnitureComponent> entity, ref ComponentRemove _)
+    private void OnFurnitureShutdown(Entity<ModuleFurnitureComponent> entity, ref ComponentShutdown _)
     {
         _container.EmptyContainer(entity.Comp.DrawerContainer);
     }
@@ -95,10 +95,6 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
             return;
         }
 
-#if DEBUG
-        Log.Debug($"Adding to {ToPrettyString(entity)} part {ToPrettyString(args.Used)} in place {args.Offset}");
-        PrintDebugOccupation(entity.Comp);
-#endif
         AddToModuleFurniture(entity, (args.Used.Value, partComponent), args.Offset);
         Dirty(entity);
     }
@@ -146,8 +142,11 @@ public sealed partial class ModuleFurnitureSystem : SharedModuleFurnitureSystem<
 
     private void OnPartRemovedFromContainer(Entity<ModuleFurniturePartComponent> entity, ref EntGotRemovedFromContainerMessage args)
     {
+        if (MetaData(entity).EntityLifeStage == EntityLifeStage.Terminating)
+            return;
+
         if (_container.TryGetContainer(entity.Owner, StorageComponent.ContainerId, out var container))
-            _container.EmptyContainer(container);
+            _container.EmptyContainer(container, true);
 
         EntityManager.QueueDeleteEntity(entity);
     }
