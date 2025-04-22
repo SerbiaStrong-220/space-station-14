@@ -35,3 +35,13 @@
     Glass: 400
     Plasma: 600
     Plastic: 400
+
+- type: latheRecipe
+  id: PinpointerCrew
+  result: PinpointerCrew
+  completetime: 4
+  materials:
+    Steel: 600
+    Glass: 400
+    Gold: 600
+    Plastic: 400

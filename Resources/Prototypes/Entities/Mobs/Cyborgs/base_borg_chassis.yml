@@ -252,6 +252,14 @@
     damageProtection:
       flatReductions:
         Heat: 10 # capable of touching light bulbs and stoves without feeling pain!
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Binary
+    - id: Universal
+  # SS220-Add-Languages end
+  - type: DefibrillatorSkill #SS220 LimitationRevive
 
 - type: entity
   abstract: true
@@ -352,6 +360,38 @@
     - AllAccess #Randomized access would be fun. AllAccess is the best i can think of right now that does make it too hard for it to enter the station or navigate it..
   - type: AccessReader
     access: [["Command"], ["Research"]]
+#SS220 languages revive begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: SolCommon
+      canSpeak: false
+    - id: Tradeband
+      canSpeak: false
+    - id: Gutter
+      canSpeak: false
+    - id: Clownish
+      canSpeak: false
+    - id: NeoRusskiya
+      canSpeak: false
+    - id: Sintaunathi
+      canSpeak: false
+    - id: Siiktajr
+      canSpeak: false
+    - id: VoxPidgin
+      canSpeak: false
+    - id: Rootspeak
+      canSpeak: false
+    - id: Bubblish
+      canSpeak: false
+    - id: Tkachi
+      canSpeak: false
+    - id: Arati
+      canSpeak: false
+    - id: Canilunzt
+      canSpeak: false
+    - id: Binary
+#SS220 languages revive end
   - type: StartIonStormed
     ionStormAmount: 3
   - type: IonStormTarget

@@ -23,3 +23,6 @@ ghost-role-information-traveling-chef-rules = Действуют обычные 
 ghost-role-information-giant-fly-name = Веспия
 ghost-role-information-giant-fly-description = Вы гигантская боевая оса. Ваша задача - уничтожить всех кроме представителей вашего вида.
 ghost-role-information-giant-fly-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими гигантскими осами.
+
+ghost-role-information-clownmime-cyborg-name = МимоКлоунский киборг
+ghost-role-information-clownmime-cyborg-description = Вы киборг, созданный с помощью магии хонка и минуты молчания(аминь), помогите своему создателю нести хонк по станции.

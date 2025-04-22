@@ -99,6 +99,12 @@ namespace Content.Client.HealthAnalyzer.UI
                 ? $"{msg.BloodLevel * 100:F1} %"
                 : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
 
+            //SS220 LimitationRevive - start
+            DeathLabel.Text = msg.CounterDeath != null
+                ? $"{msg.CounterDeath}"
+                : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
+            //SS220 LimitationRevive - end
+
             StatusLabel.Text =
                 _entityManager.TryGetComponent<MobStateComponent>(target.Value, out var mobStateComponent)
                     ? GetStatus(mobStateComponent.CurrentState)

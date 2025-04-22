@@ -16,6 +16,12 @@
   - Brig
   - Maintenance
   - External
+  #SS220 LimitationRevive - start
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill 
+  #SS220 LimitationRevive - end
 
 #SS220-brigmedic-loadout-begin
 - type: startingGear

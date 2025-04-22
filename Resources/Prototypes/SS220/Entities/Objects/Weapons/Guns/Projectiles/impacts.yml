@@ -23,13 +23,13 @@
     types:
       Heat: 38
   muzzleFlash:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_cev.rsi
     state: muzzle_u_laser
   travelFlash:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_cev.rsi
     state: u_laser
   impactFlash:
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_cev.rsi
     state: impact_u_laser
 
 # Death Squad

@@ -107,6 +107,15 @@
     visionRadius: 5
     highSensitiveVisionRadius: 2
     addAction: true
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Siiktajr
+  - type: LimitationRevive
+    maxRevive: 3
+    typeDamageOnDead:
+      types:
+        Сerebral: 400
 
 - type: entity
   id: MobTajaranDummy

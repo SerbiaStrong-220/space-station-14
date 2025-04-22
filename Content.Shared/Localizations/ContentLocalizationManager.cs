@@ -198,7 +198,7 @@ namespace Content.Shared.Localizations
         public static string FormatPlaytime(TimeSpan time)
         {
             var hours = (int)time.TotalHours;
-            var minutes = (int)Math.Ceiling(time.TotalMinutes);
+            var minutes = time.Minutes; //ss220 formatting time in lobby
             return Loc.GetString($"zzzz-fmt-playtime", ("hours", hours), ("minutes", minutes));
         }
 

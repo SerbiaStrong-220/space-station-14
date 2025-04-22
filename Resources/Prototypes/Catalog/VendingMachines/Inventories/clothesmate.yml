@@ -58,6 +58,7 @@
     # DO NOT ADD MORE, USE UNIFORM DYING
     ClothingShoesColorBlack: 8
     ClothingShoesColorBrown: 4
+    ClothingShoesColorDarkBrown: 2 #SS220-Brown Shoed
     ClothingShoesColorWhite: 3
     ClothingShoesColorBlue: 2
     ClothingShoesColorYellow: 2
@@ -100,3 +101,5 @@
     ToyFigurinePassenger: 1
     ToyFigurineGreytider: 1
   # DO NOT ADD MORE, USE UNIFORM DYING
+  emaggedInventory: # SS220 Scarlet Typhoon add for emag
+    ClothingOuterScarletTyphoon: 1 # SS220 Scarlet Typhoon add for emag

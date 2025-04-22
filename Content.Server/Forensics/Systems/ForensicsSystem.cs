@@ -8,6 +8,7 @@ using Content.Shared.Popups;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Cloning;
 using Content.Shared.DoAfter;
 using Content.Shared.Forensics;
 using Content.Shared.Forensics.Components;
@@ -18,6 +19,8 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Random;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
+using Robust.Shared.Containers;
+using Content.Server.SS220.Forensics;
 
 namespace Content.Server.Forensics
 {
@@ -35,6 +38,8 @@ namespace Content.Server.Forensics
             SubscribeLocalEvent<FingerprintComponent, MapInitEvent>(OnFingerprintInit);
             SubscribeLocalEvent<DnaComponent, MapInitEvent>(OnDNAInit);
 
+            SubscribeLocalEvent<DnaComponent, CloningEvent>(OnDNACloning); //ss220 add cloning entity copy DNA from source
+
             SubscribeLocalEvent<ForensicsComponent, BeingGibbedEvent>(OnBeingGibbed);
             SubscribeLocalEvent<ForensicsComponent, MeleeHitEvent>(OnMeleeHit);
             SubscribeLocalEvent<ForensicsComponent, GotRehydratedEvent>(OnRehydrated);
@@ -43,6 +48,7 @@ namespace Content.Server.Forensics
             SubscribeLocalEvent<DnaComponent, TransferDnaEvent>(OnTransferDnaEvent);
             SubscribeLocalEvent<DnaSubstanceTraceComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
             SubscribeLocalEvent<CleansForensicsComponent, GetVerbsEvent<UtilityVerb>>(OnUtilityVerb);
+            SubscribeLocalEvent<MicroFiberComponent, EntInsertedIntoContainerMessage>(OnEntInserted);//SS220 Micro_fibers
         }
 
         private void OnSolutionChanged(Entity<DnaSubstanceTraceComponent> ent, ref SolutionContainerChangedEvent ev)
@@ -78,6 +84,19 @@ namespace Content.Server.Forensics
                 RaiseLocalEvent(uid, ref ev);
             }
         }
+
+        //ss220 add cloning entity copy DNA from source start
+        private void OnDNACloning(Entity<DnaComponent> ent, ref CloningEvent args)
+        {
+            if (!TryComp<DnaComponent>(args.Target, out var sourceDnaComp))
+                return;
+
+            sourceDnaComp.DNA = ent.Comp.DNA;
+
+            var ev = new GenerateDnaEvent { Owner = args.Target, DNA = ent.Comp.DNA };
+            RaiseLocalEvent(args.Target, ref ev);
+        }
+        //ss220 add cloning entity copy DNA from source end
 
         private void OnBeingGibbed(EntityUid uid, ForensicsComponent component, BeingGibbedEvent args)
         {
@@ -130,6 +149,12 @@ namespace Content.Server.Forensics
                 dest.Fibers.Add(fiber);
             }
 
+			//SS220 Micro_fibers start
+            foreach (var microFiber in src.MicroFibers)
+            {
+                dest.MicroFibers.Add(microFiber);
+            }
+			//SS220 Micro_fibers end
             foreach (var print in src.Fingerprints)
             {
                 dest.Fingerprints.Add(print);
@@ -209,7 +234,7 @@ namespace Content.Server.Forensics
                 return false;
             }
 
-            var totalPrintsAndFibers = forensicsComp.Fingerprints.Count + forensicsComp.Fibers.Count;
+            var totalPrintsAndFibers = forensicsComp.Fingerprints.Count + forensicsComp.Fibers.Count + forensicsComp.MicroFibers.Count;//SS220 Micro_fibers
             var hasRemovableDNA = forensicsComp.DNAs.Count > 0 && forensicsComp.CanDnaBeCleaned;
 
             if (hasRemovableDNA || totalPrintsAndFibers > 0)
@@ -247,6 +272,7 @@ namespace Content.Server.Forensics
                 return;
 
             targetComp.Fibers = new();
+            targetComp.MicroFibers = new();//SS220 Micro_fibers
             targetComp.Fingerprints = new();
 
             if (targetComp.CanDnaBeCleaned)
@@ -304,6 +330,15 @@ namespace Content.Server.Forensics
             recipientComp.DNAs.Add(component.DNA);
             recipientComp.CanDnaBeCleaned = args.CanDnaBeCleaned;
         }
+
+        //SS220 Micro_fibers start
+        private void OnEntInserted(Entity<MicroFiberComponent> ent, ref EntInsertedIntoContainerMessage args)
+        {
+            var targetComp = EnsureComp<ForensicsComponent>(args.Entity);
+
+            targetComp.MicroFibers.Add(string.IsNullOrEmpty(ent.Comp.MicroFiberColor) ? Loc.GetString("forensic-fibers", ("material", ent.Comp.MicroFiberMaterial)) : Loc.GetString("forensic-fibers-colored", ("color", ent.Comp.MicroFiberColor), ("material", ent.Comp.MicroFiberMaterial)));
+        }
+        //SS220 Micro_fibers end
 
         #region Public API
 

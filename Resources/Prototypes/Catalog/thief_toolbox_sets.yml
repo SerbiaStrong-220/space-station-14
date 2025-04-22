@@ -19,6 +19,7 @@
   - ChameleonProjector
   - FakeMindShieldImplanter
   - AgentIDCard
+  - Lockpick #ss220 lockpick add
 
 - type: thiefBackpackSet
   id: ToolsSet

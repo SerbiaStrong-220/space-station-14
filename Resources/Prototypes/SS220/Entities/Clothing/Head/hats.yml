@@ -91,6 +91,42 @@
       sprite: SS220/Clothing/Head/Hats/beret_blueshield.rsi
     - type: Clothing
       sprite: SS220/Clothing/Head/Hats/beret_blueshield.rsi
+
+# Юридический департамент
+
+  # Магистрат
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatStreetJudge
+  name: helmet street judge
+  description: Your head should inspire fear and pronounce judgments on the asphalt.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/streetjudge.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/streetjudge.rsi
+  #- type: Tag Расскоментировать, когда добавять версию шлема для гамлета
+    #tags:
+    #- HamsterWearable
+
+  # АВД
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretIAA
+  name: beret iaa
+  description: Beret for the most deserving... but why is it blue?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_iaa.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_iaa.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
 # CentCom
 
   # Берет
@@ -546,6 +582,9 @@
     sprite: SS220/Clothing/Head/Hats/sflowerhead.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/sflowerhead.rsi
+    slots:
+    - HEAD
+    - neck
   - type: Construction
     graph: Clothingsflowerhead
     node: ClothingSFlowerhead
@@ -560,6 +599,9 @@
     sprite: SS220/Clothing/Head/Hats/wsflowerhead.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/wsflowerhead.rsi
+    slots:
+    - HEAD
+    - neck
   - type: Construction
     graph: Clothingwsflowerhead
     node: ClothingWSFlowerhead

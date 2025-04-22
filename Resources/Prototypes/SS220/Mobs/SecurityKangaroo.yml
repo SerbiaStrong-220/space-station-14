@@ -21,6 +21,10 @@
   description: Joe the security kangaroo.
   suffix: Роль
   components:
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
   - type: Inventory
     templateId: kangarooJoe
   - type: InteractionPopup

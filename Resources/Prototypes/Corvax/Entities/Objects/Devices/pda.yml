@@ -31,3 +31,11 @@
         visible: false #SS220 PDA-Resprite-End
     - type: Icon
       state: pda-iaa #SS220 PDA-Resprite
+    #ss220 add pdaidpainter start
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonPDA
+    #ss220 add pdaidpainter end

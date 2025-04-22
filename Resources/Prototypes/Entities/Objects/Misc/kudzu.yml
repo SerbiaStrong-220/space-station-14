@@ -87,6 +87,10 @@
       ignoreWhitelist:
         components:
         - IgnoreKudzu
+        #ss220 fix damage migo in astral start
+        tags:
+        - MiGoInAstral
+        #ss220 fix damage migo in astral end
     - type: Food
       requiredStomachs: 2 # ruminants have 4 stomachs but i dont care to give them literally 4 stomachs. 2 is good
       delay: 0.5
@@ -208,6 +212,7 @@
       ignoreWhitelist:
         tags:
         - Flesh
+        - MiGoInAstral #ss220 fix damage migo in astral
     - type: Kudzu
       growthTickChance: 0.1
       spreadChance: 0.4
@@ -241,6 +246,7 @@
       ignoreWhitelist:
         tags:
         - Flesh
+        - MiGoInAstral #ss220 fix damage migo in astral
     - type: Food # delightfully devilish !
       delay: 0.5
     - type: SolutionContainerManager

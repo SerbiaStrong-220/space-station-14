@@ -65,8 +65,9 @@ public sealed partial class SuperMatterEmitterExtensionMenu : FancyWindow
             if (child.GetType() == typeof(LineEdit))
                 child.MinSize = new Vector2(60, 0);
         }
-        PowerConsumptionSpinBox.AddLeftButton(-100, "-100");
+
         PowerConsumptionSpinBox.AddLeftButton(-500, "-500");
+        PowerConsumptionSpinBox.AddLeftButton(-100, "-100");
         PowerConsumptionSpinBox.AddRightButton(100, "+100");
         PowerConsumptionSpinBox.AddRightButton(500, "+500");
         PowerConsumptionSpinBox.IsValid = PowerConsumptionValidate;
