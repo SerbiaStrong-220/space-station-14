@@ -50,7 +50,15 @@ namespace Content.Client.SS220.CluwneComms.UI
 
             CloseButton.OnPressed += _ => Close();
 
-            #region Announce
+            AnnounceTriggers();
+
+            AlertTriggers();
+
+            BoomButton.OnPressed += _ => OnBoom?.Invoke();
+        }
+
+        private void AnnounceTriggers()
+        {
             MessageInput.Edit.Placeholder = new Rope.Leaf(_loc.GetString("cluwne-comms-console-menu-announcement-placeholder"));
 
             var maxAnnounceLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
@@ -70,9 +78,12 @@ namespace Content.Client.SS220.CluwneComms.UI
             };
 
             AnnounceButton.OnPressed += _ => OnAnnounce?.Invoke(Rope.Collapse(MessageInput.TextRope));
-            #endregion
+        }
 
-            #region AlertText
+        private void AlertTriggers()
+        {
+            var maxAnnounceLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
+
             AlertInput.Edit.Placeholder = new Rope.Leaf(_loc.GetString("cluwne-comms-console-menu-alert-placeholder"));
             AlertInput.MaxLength = maxAnnounceLength;
             AlertInput.Edit.OnTextChanged += (args) =>
@@ -106,9 +117,6 @@ namespace Content.Client.SS220.CluwneComms.UI
                 }
             };
 
-            #endregion
-
-            #region Alert
 
             string code = "";//buffer cause idk how to get option button label on id
             AlertLevelButton.OnItemSelected += args =>
@@ -152,9 +160,6 @@ namespace Content.Client.SS220.CluwneComms.UI
                 AlertInput.TextRope = new Rope.Leaf("");
                 InstructionInput.TextRope = new Rope.Leaf("");
             };
-            #endregion
-
-            BoomButton.OnPressed += _ => OnBoom?.Invoke();
         }
 
         protected override void FrameUpdate(FrameEventArgs args)
