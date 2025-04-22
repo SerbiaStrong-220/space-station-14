@@ -31,6 +31,7 @@
   - type: ContainerContainer
     containers:
       module-furniture: !type:Container
+        showEnts: true
   - type: InteractionOutline
   - type: Clickable
   - type: Tag
