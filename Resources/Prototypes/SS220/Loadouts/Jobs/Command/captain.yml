@@ -155,6 +155,14 @@
     outerClothing: ClothingOuterWhiteCoatCaptain
 
 - type: loadout
+  id: CaptainBlackCoat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    outerClothing: ClothingOuterBlackCoatCaptain
+
+- type: loadout
   id: CaptainWhiteWintercoat
   effects:
   - !type:GroupLoadoutEffect
