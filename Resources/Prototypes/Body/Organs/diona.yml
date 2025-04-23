@@ -24,6 +24,9 @@
   - type: FlavorProfile
     flavors:
       - people
+  - type: Tag # SS220-TaRaKaCheCki start
+    tags:
+      - Trash # SS220-TaRaKaCheCki end
 
 - type: entity
   id: OrganDionaBrain
