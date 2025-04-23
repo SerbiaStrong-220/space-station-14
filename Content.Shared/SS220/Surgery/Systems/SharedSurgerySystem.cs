@@ -1,30 +1,36 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Audio;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Buckle;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Components;
+using Content.Shared.SS220.Surgery.Ui;
+using Content.Shared.Examine;
+using Robust.Shared.Network;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Shared.Buckle;
-using Content.Shared.Examine;
-using Robust.Shared.Network;
+
 
 namespace Content.Server.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem : EntitySystem
 {
     [Dependency] protected readonly SurgeryGraphSystem SurgeryGraph = default!;
+
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedBuckleSystem _buckleSystem = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
+    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
 
     private const float ErrorGettingDelayDelay = 8f;
     private const float DoAfterMovementThreshold = 0.15f;
@@ -42,7 +48,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         });
         SubscribeLocalEvent<OnSurgeryComponent, SurgeryDoAfterEvent>(OnSurgeryDoAfter);
 
-        SubscribeLocalEvent<SurgeryDrapeComponent, AfterInteractEvent>(OnDrapeInteract);
+        SubscribeLocalEvent<SurgeryStarterComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<SurgeryStarterComponent, StartSurgeryEvent>(OnStartSurgeryMessage);
     }
 
     /// <summary>
@@ -75,7 +82,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (args.Target == null || args.Used == null)
             return;
 
-        if (!_buckleSystem.IsBuckled(args.Target.Value))
+        if (!_buckle.IsBuckled(args.Target.Value))
             ev.Cancel();
     }
 
@@ -110,19 +117,66 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         ProceedToNextStep(entity, args.User, args.Used, targetEdge);
     }
 
-    private void OnDrapeInteract(Entity<SurgeryDrapeComponent> entity, ref AfterInteractEvent args)
+    private void OnAfterInteract(Entity<SurgeryStarterComponent> entity, ref AfterInteractEvent args)
     {
-        if (args.Handled || args.Target == null)
+        if (args.Target == null || !args.CanReach || !HasComp<MobStateComponent>(args.Target))
             return;
 
-        if (!IsValidTarget(args.Target.Value, out var reasonLocPath) || !IsValidPerformer(args.User))
+        if (!_userInterface.HasUi(entity, SurgeryDrapeUiKey.Key))
         {
-            _popup.PopupCursor(reasonLocPath != null ? Loc.GetString(reasonLocPath) : null);
+            Log.Debug($"Entity {ToPrettyString(entity)} has SurgeryStartComponent but don't have its UI!");
             return;
         }
-        //SS220_Surgery: here must open UI and from it you should get protoId of surgery
 
-        args.Handled = TryStartSurgery(args.Target.Value, "MindSlaveFix", args.User, args.Used);
+        if (!TryComp<OnSurgeryComponent>(args.Target, out var onSurgeryComponent))
+        {
+            if (!_userInterface.IsUiOpen(entity.Owner, SurgeryDrapeUiKey.Key))
+                _userInterface.OpenUi(entity.Owner, SurgeryDrapeUiKey.Key, predicted: true);
+
+            UpdateUserInterface(entity, args.User, args.Target.Value);
+            return;
+        }
+
+        if (OperationCanBeEnded(args.Target.Value))
+        {
+            _adminLogManager.Add(Shared.Database.LogType.Action, Shared.Database.LogImpact.Medium,
+                $"{ToPrettyString(args.User):user}  stopped surgery (surgery_graph_id: {onSurgeryComponent.SurgeryGraphProtoId}) on {ToPrettyString(args.Target):target}");
+
+            _popup.PopupPredicted(Loc.GetString("surgery-cancelled", ("target", args.Target), ("user", args.User)), args.Target.Value, args.User);
+            EndOperation(args.Target.Value);
+        }
+        else
+        {
+            _popup.PopupCursor(Loc.GetString("surgery-cant-be-cancelled"));
+        }
+    }
+
+    public void UpdateUserInterface(EntityUid drape, EntityUid user, EntityUid target)
+    {
+        var netUser = GetNetEntity(user);
+        var netTarget = GetNetEntity(target);
+
+        var state = new SurgeryDrapeUpdate(netUser, netTarget);
+        _userInterface.SetUiState(drape, SurgeryDrapeUiKey.Key, state);
+    }
+
+    private void OnStartSurgeryMessage(Entity<SurgeryStarterComponent> entity, ref StartSurgeryEvent args)
+    {
+        var target = GetEntity(args.Target);
+        var user = GetEntity(args.User);
+
+        if (!IsValidTarget(target, out var reasonLocPath) || !IsValidPerformer(user))
+        {
+            // TODO more user friendly
+            _popup.PopupClient(reasonLocPath != null ? Loc.GetString(reasonLocPath) : null, user, PopupType.LargeCaution);
+            args.Cancel();
+            return;
+        }
+
+        var result = TryStartSurgery(target, args.SurgeryGraphId, user, entity) ? "success" : "unsuccess";
+
+        _adminLogManager.Add(Shared.Database.LogType.Action, Shared.Database.LogImpact.Medium,
+            $"{ToPrettyString(args.User):user} tried to start surgery(surgery_graph_id: {args.SurgeryGraphId}) on {ToPrettyString(args.Target):target} with result of {result}");
     }
 
     public bool TryStartSurgery(EntityUid target, ProtoId<SurgeryGraphPrototype> surgery, EntityUid performer, EntityUid used)
@@ -158,11 +212,10 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         }
 
         SurgeryGraphEdge? chosenEdge = null;
-        bool isAbleToPerform = false;
         foreach (var edge in currentNode.Edges)
         {
             // id any edges exist make it true
-            isAbleToPerform = true;
+            bool isAbleToPerform = true;
             foreach (var condition in SurgeryGraph.GetConditions(edge))
             {
                 if (!condition.Condition(used, EntityManager))
@@ -198,8 +251,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             };
 
         if (_doAfter.TryStartDoAfter(performerDoAfterEventArgs))
-            _audio.PlayPredicted(used.Comp.UsingSound, entity.Owner, user,
-                                        AudioHelpers.WithVariation(0.125f, _random).WithVolume(1f));
+            _audio.PlayPredicted(used.Comp.UsingSound, entity.Owner, user, audioParams: used.Comp.UsingSound?.Params);
 
         return true;
     }

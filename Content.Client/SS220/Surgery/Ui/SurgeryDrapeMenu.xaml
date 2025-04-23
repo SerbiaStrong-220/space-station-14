@@ -6,8 +6,8 @@
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:surgery="clr-namespace:Content.Client.SS220.Surgery.Ui"
     Title="{Loc 'surgery-observer-title'}"
-    Resizable="True"
-    MinSize="256 106"
+    Resizable="False"
+    MinSize="448 384"
     RectClipContent="False">
     <Control>
         <PanelContainer>
@@ -15,30 +15,41 @@
                 <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
             </PanelContainer.PanelOverride>
         </PanelContainer>
-        <BoxContainer Name="ContentBox" Orientation="Horizontal" MouseFilter="Pass" VerticalAlignment="Center"
-                VerticalExpand="False" HorizontalExpand="False">
-            <BoxContainer Name="PuppetBox" MouseFilter="Pass" Margin="1 1" VerticalAlignment="Bottom">
-                <surgery:SurgeryPuppetBox Name="Puppet" Scale="3 3" MouseFilter="Pass" />
-            </BoxContainer>
-            <BoxContainer Name="DetailedInfoBox" Orientation="Horizontal" VerticalExpand="True" HorizontalExpand="False">
-                <BoxContainer Name="OperationsBox" Orientation="Vertical"  HorizontalExpand="False">
-                    <RichTextLabel Name="OperationsLabel" Text="{Loc 'surgery-list-name'}" HorizontalExpand="True" HorizontalAlignment="Center"/>
-                    <ScrollContainer Name="OperationScroll" HScrollEnabled="False"
-                        HorizontalExpand="True" VerticalExpand="True" MouseFilter="Pass">
-                        <BoxContainer
-                            Name="OperationContainer"
-                            Orientation="Vertical"
-                            SizeFlagsStretchRatio="2"
-                            HorizontalExpand="True"
-                            VerticalExpand="True">
-                            <!--  operations are added here by code  -->
-                        </BoxContainer>
-                    </ScrollContainer>
+        <BoxContainer Name="OuterBox" Orientation="Vertical" MouseFilter="Pass" VerticalAlignment="Stretch"
+            VerticalExpand="True" HorizontalExpand="True">
+            <BoxContainer Name="ContentBox" Orientation="Horizontal" MouseFilter="Pass" VerticalAlignment="Stretch"
+                    VerticalExpand="True" HorizontalExpand="False">
+                <BoxContainer Name="PuppetBox" MouseFilter="Pass" Margin="1 1" VerticalAlignment="Top">
+                    <surgery:SurgeryPuppetBox Name="Puppet" Scale="3 3" MouseFilter="Pass" />
                 </BoxContainer>
-                <BoxContainer Name="DescriptionBox" Orientation="Vertical"  HorizontalExpand="False"
-                                    VerticalAlignment="Center" VerticalExpand="True" MinSize="300 120" MaxSize="300 120">
-                    <RichTextLabel Name="OperationDescription"  Text="{Loc 'surgery-operation-desc'}" VerticalExpand="True" Margin="4 2"
-                        VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalExpand="True" LineHeightScale="0.65"/>
+                <BoxContainer Name="DetailedInfoBox" Orientation="Horizontal" VerticalExpand="True" HorizontalExpand="True">
+                    <BoxContainer Name="OperationsBox" Orientation="Vertical"  HorizontalExpand="True">
+                        <RichTextLabel Name="OperationsLabel" Text="{Loc 'surgery-list-name'}" HorizontalExpand="True" HorizontalAlignment="Center"/>
+                        <ScrollContainer Name="OperationScroll" HScrollEnabled="False"
+                            HorizontalExpand="True" VerticalExpand="True" MouseFilter="Pass">
+                            <BoxContainer
+                                Name="OperationContainer"
+                                Orientation="Vertical"
+                                SizeFlagsStretchRatio="2"
+                                HorizontalExpand="True"
+                                VerticalExpand="True">
+                                <!--  operations are added here by code  -->
+                            </BoxContainer>
+                        </ScrollContainer>
+                    </BoxContainer>
+                </BoxContainer>
+            </BoxContainer>
+            <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
+            <BoxContainer Orientation="Vertical">
+                <PanelContainer StyleClasses="LowDivider" />
+                <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
+                    <!-- TODO: add confirm footer -->
+                    <Label Name="FooterLeft" Text="{Loc 'surgery-footer-idle'}" StyleClasses="WindowFooterText" />
+                    <!-- TODO -->
+                    <Label Text="{Loc 'smObserver-footer-right'}" StyleClasses="WindowFooterText"
+                            HorizontalAlignment="Right" HorizontalExpand="True"  Margin="0 0 5 0" />
+                    <TextureRect StyleClasses="NTLogoDark" Stretch="KeepAspectCentered"
+                            VerticalAlignment="Center" HorizontalAlignment="Right" SetSize="19 19"/>
                 </BoxContainer>
             </BoxContainer>
         </BoxContainer>

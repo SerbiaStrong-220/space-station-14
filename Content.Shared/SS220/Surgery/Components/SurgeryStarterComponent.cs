@@ -6,5 +6,5 @@ namespace Content.Shared.SS220.Surgery.Components;
 /// This component used to define items which can start operations
 /// </summary>
 [RegisterComponent]
-public sealed partial class SurgeryDrapeComponent : Component
+public sealed partial class SurgeryStarterComponent : Component
 { }

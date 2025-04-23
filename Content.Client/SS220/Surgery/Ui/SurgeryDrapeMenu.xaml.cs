@@ -18,13 +18,14 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
-    public event Action<ProtoId<SurgeryGraphPrototype>>? OnSurgeryCLicked;
+    public event Action<ProtoId<SurgeryGraphPrototype>, EntityUid>? OnSurgeryConfirmCLicked;
+
+    public EntityUid Target;
 
     private Dictionary<PuppetParts, HashSet<Control>> _operations = new();
 
-    // maybe I shouldn't keep it here....
-    public EntityUid Target;
-    public EntityUid Performer;
+    private const PuppetParts SelectedOnStartPart = PuppetParts.Torso;
+    private const int ControlsInitAllocateNumber = 8;
 
     public SurgeryDrapeMenu()
     {
@@ -42,8 +43,10 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
         _operations.Clear(); // never knows what coming after all
         foreach (var part in Enum.GetValues<PuppetParts>())
         {
-            _operations.Add(part, new(8));
+            _operations.Add(part, new(ControlsInitAllocateNumber));
         }
+
+        Puppet.SelectedPart = SelectedOnStartPart;
     }
 
     public void UpdateOperations(PuppetParts? currentPart, PuppetParts? previousPart)
@@ -81,19 +84,29 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
         }
     }
 
+    public void UpdateTarget(EntityUid target)
+    {
+        Target = target;
+        // TODO
+        // somehow update Window.
+    }
+
     private SurgeryPerformButton MakeOperationButton(SurgeryGraphPrototype surgeryGraph)
     {
         var button = new SurgeryPerformButton(surgeryGraph.ID)
         {
-            VerticalAlignment = VAlignment.Top,
-            StyleClasses = { "OpenBoth" }
+            StyleClasses = { "OpenBoth" },
         };
-        button.HorizontalExpandAll = false;
-        button.VerticalExpandAll = true;
 
         button.OnPressed += (_) =>
         {
-            OnSurgeryCLicked?.Invoke(button.GraphId);
+            // So wee do something if button was pressed before pressing by player.
+            // Thats why it !Pressed, but meant to be If pressed pressed than
+            if (!button.Pressed)
+                OnSurgeryConfirmCLicked?.Invoke(button.GraphId, Target);
+            else
+                FooterLeft.Text = Loc.GetString("surgery-footer-confirm");
+
         };
 
         button.OnMouseEntered += (_) =>
@@ -107,7 +120,8 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
                 formattedText.AddMessage(FormattedMessage.FromMarkupPermissive(postscriptMessage));
             }
 
-            OperationDescription.SetMessage(formattedText);
+            // TODO:
+            // button.ToolTip = formattedText.ToString();
         };
 
         if (SharedSurgeryAvaibilityChecks.IsSurgeryGraphAvailableTarget(Target, surgeryGraph, _entityManager, out var reason))
@@ -170,6 +184,11 @@ public sealed class SurgeryPerformButton : ContainerButton
             StyleClasses = { StyleClassButton }
         };
         AddChild(RichTextLabel);
+
+        VerticalAlignment = VAlignment.Top;
+        HorizontalExpandAll = false;
+        VerticalExpandAll = true;
+        ToggleMode = true;
     }
 
     public void SetMessage(FormattedMessage msg)

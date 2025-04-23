@@ -14,8 +14,8 @@
   - type: Tag
     tags:
     - SurgeryTool
-  - type: SurgeryDrape
-  - type: OnInteractUI
+  - type: SurgeryStarter
+  - type: ActivatableUI
     key: enum.SurgeryDrapeUiKey.Key
   - type: UserInterface
     interfaces:
