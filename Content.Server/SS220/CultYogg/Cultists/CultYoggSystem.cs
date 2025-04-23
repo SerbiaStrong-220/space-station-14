@@ -357,7 +357,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         if (purifyedComp.TotalAmountOfHolyWater >= purifyedComp.AmountToPurify)
         {
             //After purifying effect
-            _audio.PlayEntity(purifyedComp.PurifyingCollection, entity, entity);
+            _audio.PlayPvs(purifyedComp.PurifyingCollection, entity);
 
             //Removing stage visuals, cause later component will be removed
             var ev = new CultYoggDeleteVisualsEvent();

@@ -201,7 +201,8 @@ public abstract partial class InventorySystem
             return false;
         }
 
-        if (!silent && clothing != null)
+        if (!silent && clothing != null
+            && (!slotDefinition.SlotFlags.HasFlag(SlotFlags.POCKET) || clothing.SoundOnPocketSlot)) //SS220 Cult_update_1
         {
             _audio.PlayPredicted(clothing.EquipSound, target, actor);
         }
@@ -487,7 +488,8 @@ public abstract partial class InventorySystem
         if (!_containerSystem.IsEntityInContainer(removedItem.Value))
             _transform.DropNextTo(removedItem.Value, target);
 
-        if (!silent && Resolve(removedItem.Value, ref clothing, false) && clothing.UnequipSound != null)
+        if (!silent && Resolve(removedItem.Value, ref clothing, false) && clothing.UnequipSound != null
+            && (!slotDefinition.SlotFlags.HasFlag(SlotFlags.POCKET) || clothing.SoundOnPocketSlot))
         {
             _audio.PlayPredicted(clothing.UnequipSound, target, actor);
         }

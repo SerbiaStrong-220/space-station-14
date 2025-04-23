@@ -48,6 +48,10 @@
   access:
   - CentralCommandBSO
   - CentralCommand
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
 
 - type: startingGear
   id: CentcomOperativeBSOGear

@@ -52,6 +52,7 @@
       amount: 4
     - id: EnergySwordEbentDouble
     - id: JobIconChangerNT
+    - id: Binoculars
 
 - type: entity
   parent: LockerChiefMedicalOfficer
@@ -79,6 +80,7 @@
     - id: ClothingEyesHudMedSec
     - id: JobIconChangerNT
     - id: DefibrillatorCompact
+    - id: Binoculars
 
 - type: entity
   parent: LockerEngineer
@@ -104,6 +106,7 @@
     - id: RCDAmmo
       amount: 4
     - id: JobIconChangerNT
+    - id: Binoculars
 
 - type: entity
   parent: LockerMedical
@@ -122,6 +125,7 @@
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
     - id: ClothingEyesHudMedSec
+    - id: DefibrillatorCompact
 
 #Leader
 - type: startingGear
@@ -166,6 +170,14 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      delayBeforeDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -224,6 +236,14 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      delayBeforeDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -287,6 +307,14 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      delayBeforeDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -347,6 +375,14 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      delayBeforeDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: SpecOpsCMO
@@ -409,6 +445,14 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      maxRevive: 3
+      delayBeforeDamage: 180
+      typeDamageOnDead:
+        types:
+          Сerebral: 400
 
 - type: job
   id: SpecOpsFighter

@@ -31,7 +31,7 @@
   - type: ItemSlots
     slots:
       charger_slot:
-        ejectOnInteract: true
+        ejectOnInteract: false # SS220 Alternative interaction for eject
         whitelist:
           components:
           - HitscanBatteryAmmoProvider

@@ -76,6 +76,15 @@ public sealed partial class ClothingComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan StripDelay = TimeSpan.Zero;
+
+    //SS220 Cult_update_1 start
+    /// <summary>
+    /// It is necessary because pockets are also part of the inventory and for some reason it plays "UnequipSound"
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
+    public bool SoundOnPocketSlot = true;
+    //SS220 Cult_update_1 end
 }
 
 [Serializable, NetSerializable]

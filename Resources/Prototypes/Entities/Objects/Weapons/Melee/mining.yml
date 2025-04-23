@@ -40,6 +40,12 @@
       path: /Audio/SS220/Effects/Drop/axe.ogg
       params:
         volume: 2 ##new sound_drop effect, add MIXnikita
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 10
+# SS220 Throwable Changes end
 
 - type: entity
   name: mining drill
@@ -109,6 +115,12 @@
     color: "#ffeead"
     enabled: false
     radius: 4
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 12
+# SS220 Throwable Changes end
 
 - type: entity
   parent: [BaseWeaponCrusher]
@@ -162,7 +174,7 @@
     sprite: Objects/Weapons/Melee/crusher-inhands.rsi
   - type: DisarmMalus
   - type: Prying
-
+  
 - type: entity
   parent: [ BaseWeaponCrusher]
   id: WeaponCrusherDagger
@@ -187,6 +199,18 @@
     types:
       - Knife
 #SS220-knife-cutter-fix-end
+# SS220 Throwable Changes begin
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 12.5
+# SS220 Throwable Changes end
 
 # Like a crusher... but better
 - type: entity
@@ -210,3 +234,4 @@
   - type: Item
     size: Ginormous
     sprite: Objects/Weapons/Melee/crusher_glaive-inhands.rsi
+
