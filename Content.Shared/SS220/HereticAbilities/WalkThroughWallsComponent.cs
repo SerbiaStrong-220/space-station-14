@@ -23,4 +23,6 @@ public sealed partial class WalkThroughWallsComponent : Component
 
     public int? PreviousGroupLayer;
     public int? PreviousGroupMask;
+
+    public string Fixture = "fix1";
 }

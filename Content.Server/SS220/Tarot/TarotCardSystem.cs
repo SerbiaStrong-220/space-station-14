@@ -11,7 +11,6 @@ using Content.Server.Hands.Systems;
 using Content.Server.Implants;
 using Content.Server.Popups;
 using Content.Server.SS220.DieOfFate;
-using Content.Server.SS220.Hallucination;
 using Content.Server.Storage.Components;
 using Content.Server.Stunnable;
 using Content.Shared.Anomaly.Components;
@@ -29,8 +28,8 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands;
 using Content.Shared.Humanoid;
-using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
@@ -40,7 +39,6 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Pinpointer;
 using Content.Shared.Prototypes;
-using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.SS220.EntityBlockDamage;
 using Content.Shared.SS220.EntityEffects;
@@ -57,13 +55,12 @@ using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
+using Robust.Shared.Spawners;
 
 namespace Content.Server.SS220.Tarot;
 
 public sealed class TarotCardSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -76,15 +73,11 @@ public sealed class TarotCardSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedRoleSystem _role = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly HallucinationSystem _hallucination = default!;
     [Dependency] private readonly SubdermalImplantSystem _implantSystem = default!;
     [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
     [Dependency] private readonly TriggerSystem _trigger = default!;
@@ -118,6 +111,7 @@ public sealed class TarotCardSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<TarotCardComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<TarotCardComponent, GotEquippedHandEvent>(OnGotEquipped);
         SubscribeLocalEvent<TarotCardComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<TarotCardComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<TarotCardComponent, ThrowDoHitEvent>(OnThrow);
@@ -143,6 +137,11 @@ public sealed class TarotCardSystem : EntitySystem
 
         tarot.IsReversed = _random.Next(2) == 0;
         _appearance.SetData(ent.Owner, TarotVisuals.Reversed, tarot.IsReversed);
+    }
+
+    private void OnGotEquipped(Entity<TarotCardComponent> ent, ref GotEquippedHandEvent args)
+    {
+        ent.Comp.CardOwner = args.User;
     }
 
     private void OnExamined(Entity<TarotCardComponent> ent, ref ExaminedEvent args)
@@ -241,6 +240,7 @@ public sealed class TarotCardSystem : EntitySystem
             case TarotCardType.Tower:
                 break;
             case TarotCardType.Star:
+                ApplyReversedEffect(card, target, TeleportToUser, GivePinpointer);
                 break;
             case TarotCardType.Moon:
                 break;
@@ -250,25 +250,26 @@ public sealed class TarotCardSystem : EntitySystem
             case TarotCardType.Judgement:
                 break;
             case TarotCardType.World:
+                ApplyReversedEffect(card, target, BlockActionInRange, BlockAction);
                 break;
         }
 
         card.Comp.IsUsed = true;
     }
 
-    private static void ApplyReversedEffect(TarotCardComponent card, EntityUid target, Action<EntityUid> reversedAction, Action<EntityUid> normalAction)
+    private static void ApplyReversedEffect(TarotCardComponent card, EntityUid target, Action<EntityUid, EntityUid?> reversedAction, Action<EntityUid, EntityUid?> normalAction)
     {
         if (card.IsReversed)
         {
-            reversedAction(target);
+            reversedAction(target, card.CardOwner);
         }
         else
         {
-            normalAction(target);
+            normalAction(target, card.CardOwner);
         }
     }
 
-    private void TeleportToArrivals(EntityUid target)
+    private void TeleportToArrivals(EntityUid target, EntityUid? user)
     {
         var query = EntityQueryEnumerator<NavMapBeaconComponent>();
 
@@ -282,9 +283,9 @@ public sealed class TarotCardSystem : EntitySystem
         }
     }
 
-    private void ClearInventory(EntityUid user)
+    private void ClearInventory(EntityUid target, EntityUid? user)
     {
-        if (!TryComp<InventoryComponent>(user, out var inventoryComponent))
+        if (!TryComp<InventoryComponent>(target, out var inventoryComponent))
             return;
 
         foreach (var container in inventoryComponent.Containers)
@@ -296,7 +297,7 @@ public sealed class TarotCardSystem : EntitySystem
         }
     }
 
-    private void OpenNearestAirlock(EntityUid target)
+    private void OpenNearestAirlock(EntityUid target, EntityUid? user)
     {
         var doorHashSet = _lookup.GetEntitiesInRange<AirlockComponent>(Transform(target).Coordinates, 2f);
 
@@ -308,7 +309,7 @@ public sealed class TarotCardSystem : EntitySystem
         _door.StartOpening(doorEntity);
     }
 
-    private void PushPlayers(EntityUid target)
+    private void PushPlayers(EntityUid target, EntityUid? user)
     {
         var lookup = _lookup.GetEntitiesInRange(target, 4f, LookupFlags.Dynamic | LookupFlags.Sundries);
         var physQuery = GetEntityQuery<PhysicsComponent>();
@@ -325,7 +326,7 @@ public sealed class TarotCardSystem : EntitySystem
         }
     }
 
-    private void Slowdown(EntityUid target)
+    private void Slowdown(EntityUid target, EntityUid? user)
     {
         var moveSpeedEffect = new MovespeedModifier()
         {
@@ -337,7 +338,7 @@ public sealed class TarotCardSystem : EntitySystem
         moveSpeedEffect.Effect(new EntityEffectBaseArgs(target, EntityManager));
     }
 
-    private void SpawnRandomAnomaly(EntityUid target)
+    private void SpawnRandomAnomaly(EntityUid target, EntityUid? user)
     {
         if (HasComp<InnerBodyAnomalyComponent>(target))
             return;
@@ -352,7 +353,7 @@ public sealed class TarotCardSystem : EntitySystem
         QueueDel(randomEntityAnomaly);
     }
 
-    private void TransferSolution(EntityUid target)
+    private void TransferSolution(EntityUid target, EntityUid? user)
     {
         if (!TryComp<SolutionContainerManagerComponent>(target, out _) ||
             !_solution.TryGetSolution(target, "chemicals", out var targetSolution))
@@ -361,7 +362,7 @@ public sealed class TarotCardSystem : EntitySystem
         _solution.TryAddReagent(targetSolution.Value, Omnizine, 20f);
     }
 
-    private void EnsurePacified(EntityUid target)
+    private void EnsurePacified(EntityUid target, EntityUid? user)
     {
         var entities =
             _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(Transform(target).Coordinates, 5f);
@@ -372,7 +373,7 @@ public sealed class TarotCardSystem : EntitySystem
         }
     }
 
-    private void TeleportToBridge(EntityUid target)
+    private void TeleportToBridge(EntityUid target, EntityUid? user)
     {
         var query = EntityQueryEnumerator<NavMapBeaconComponent>();
 
@@ -386,7 +387,7 @@ public sealed class TarotCardSystem : EntitySystem
         }
     }
 
-    private void TeleportToHoD(EntityUid target)
+    private void TeleportToHoD(EntityUid target, EntityUid? user)
     {
         List<EntityUid> heads = [];
         var query = EntityQueryEnumerator<HumanoidAppearanceComponent>();
@@ -410,7 +411,7 @@ public sealed class TarotCardSystem : EntitySystem
         _transform.SetCoordinates(target, Transform(heads.First()).Coordinates);
     }
 
-    private void SpawnCatCake(EntityUid target)
+    private void SpawnCatCake(EntityUid target, EntityUid? user)
     {
         var coords = Transform(target).Coordinates;
         var catCake = SpawnAtPosition(MobCatCake, coords);
@@ -427,7 +428,7 @@ public sealed class TarotCardSystem : EntitySystem
         _solution.TryTransferSolution(solutionEnt.Value, solution, solution.Volume);
     }
 
-    private void SpawnCerberus(EntityUid target)
+    private void SpawnCerberus(EntityUid target, EntityUid? user)
     {
         var coords = Transform(target).Coordinates;
         var cerberus = SpawnAtPosition(MobCorgiCerberus, coords);
@@ -435,7 +436,7 @@ public sealed class TarotCardSystem : EntitySystem
         _npcFaction.MakeFriendlyEntities(cerberus, target);
     }
 
-    private void HealTarget(EntityUid target)
+    private void HealTarget(EntityUid target, EntityUid? user)
     {
         if (!TryComp<DamageableComponent>(target, out var damageableComponent))
             return;
@@ -451,7 +452,7 @@ public sealed class TarotCardSystem : EntitySystem
         Dirty(target, damageableComponent);
     }
 
-    private void HurtTarget(EntityUid target)
+    private void HurtTarget(EntityUid target, EntityUid? user)
     {
         if(!TryComp<DamageableComponent>(target, out var damageableComponent))
             return;
@@ -464,12 +465,12 @@ public sealed class TarotCardSystem : EntitySystem
         Dirty(target, damageableComponent);
     }
 
-    private void MassHallucinations(EntityUid target)
+    private void MassHallucinations(EntityUid target, EntityUid? user)
     {
         // TODO THIS SHIT
     }
 
-    private void ApplyChariotEffects(EntityUid target)
+    private void ApplyChariotEffects(EntityUid target, EntityUid? user)
     {
         // Pacified in 10 sec after use
         _statusEffects.TryAddStatusEffect<PacifiedComponent>(target, "Pacified", TimeSpan.FromSeconds(10f), true);
@@ -511,7 +512,7 @@ public sealed class TarotCardSystem : EntitySystem
         moveSpeedEffect.Effect(new EntityEffectBaseArgs(target, EntityManager));
     }
 
-    private void SpeedUpEntity(EntityUid target)
+    private void SpeedUpEntity(EntityUid target, EntityUid? user)
     {
         var moveSpeedEffect = new MovespeedModifier()
         {
@@ -522,7 +523,7 @@ public sealed class TarotCardSystem : EntitySystem
         moveSpeedEffect.Effect(new EntityEffectBaseArgs(target, EntityManager));
     }
 
-    private void ModifyThreshold(EntityUid target)
+    private void ModifyThreshold(EntityUid target, EntityUid? user)
     {
         var modifyThreshold = new ModifyThresholdEffect()
         {
@@ -536,7 +537,7 @@ public sealed class TarotCardSystem : EntitySystem
         modifyThreshold.Effect(new EntityEffectBaseArgs(target, EntityManager));
     }
 
-    private void SpawnJusticeItems(EntityUid target)
+    private void SpawnJusticeItems(EntityUid target, EntityUid? user)
     {
         var coords = Transform(target).Coordinates;
         var items = _proto.Index<DatasetPrototype>(JusticeItems);
@@ -547,7 +548,7 @@ public sealed class TarotCardSystem : EntitySystem
         }
     }
 
-    private void SpawnRandomCrate(EntityUid target)
+    private void SpawnRandomCrate(EntityUid target, EntityUid? user)
     {
         var protos = _proto.EnumeratePrototypes<CargoProductPrototype>();
 
@@ -567,7 +568,7 @@ public sealed class TarotCardSystem : EntitySystem
         SpawnAtPosition(listOfProto.First(), Transform(target).Coordinates);
     }
 
-    private void TeleportToRandomTile(EntityUid target)
+    private void TeleportToRandomTile(EntityUid target, EntityUid? user)
     {
         var randomTile = _implantSystem.SelectRandomTileInRange(Transform(target), 60f);
         if (randomTile == null)
@@ -576,7 +577,7 @@ public sealed class TarotCardSystem : EntitySystem
         _transform.SetCoordinates(target, randomTile.Value);
     }
 
-    private void FixturesSet(EntityUid target)
+    private void FixturesSet(EntityUid target, EntityUid? user)
     {
         EnsureComp<WalkThroughWallsComponent>(target, out var walkThroughWallsComponent);
 
@@ -584,7 +585,7 @@ public sealed class TarotCardSystem : EntitySystem
         Dirty(target, walkThroughWallsComponent);
     }
 
-    private void HurtAnother(EntityUid target)
+    private void HurtAnother(EntityUid target, EntityUid? user)
     {
         var lookup =
             _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(Transform(target).Coordinates, 4f);
@@ -597,7 +598,7 @@ public sealed class TarotCardSystem : EntitySystem
         }
     }
 
-    private void TeleportToVend(EntityUid target)
+    private void TeleportToVend(EntityUid target, EntityUid? user)
     {
         List<EntityUid> vendMach = [];
         var query = EntityQueryEnumerator<VendingMachineComponent>();
@@ -616,7 +617,7 @@ public sealed class TarotCardSystem : EntitySystem
         _transform.SetCoordinates(target, Transform(vendMach.First()).Coordinates);
     }
 
-    private void TransformGuns(EntityUid target)
+    private void TransformGuns(EntityUid target, EntityUid? user)
     {
         var guns = _lookup.GetEntitiesInRange<GunComponent>(Transform(target).Coordinates, 3f);
 
@@ -628,7 +629,7 @@ public sealed class TarotCardSystem : EntitySystem
         }
     }
 
-    private void CreateGambling(EntityUid target)
+    private void CreateGambling(EntityUid target, EntityUid? user)
     {
         var arcadeList = _proto.Index<DatasetPrototype>(RandomArcadeSpawner).Values;
 
@@ -636,14 +637,14 @@ public sealed class TarotCardSystem : EntitySystem
         Spawn(randomArcade, Transform(target).Coordinates);
     }
 
-    private void RollDieOfFortune(EntityUid target)
+    private void RollDieOfFortune(EntityUid target, EntityUid? user)
     {
         var randomValue = _random.Next(1, 21);
 
         _dieOfFate.DoAction(target, randomValue);
     }
 
-    private void HealLing(EntityUid target)
+    private void HealLing(EntityUid target, EntityUid? user)
     {
         RemCompDeferred<BlindableComponent>(target);
         RemCompDeferred<PermanentBlindnessComponent>(target);
@@ -669,7 +670,7 @@ public sealed class TarotCardSystem : EntitySystem
         Dirty(target, damageableComponent);
     }
 
-    private void EatPills(EntityUid target)
+    private void EatPills(EntityUid target, EntityUid? user)
     {
         if (!TryComp<SolutionContainerManagerComponent>(target, out var targetSolutionContainer))
             return;
@@ -696,7 +697,7 @@ public sealed class TarotCardSystem : EntitySystem
         }
     }
 
-    private void HelpMessage(EntityUid target)
+    private void HelpMessage(EntityUid target, EntityUid? user)
     {
         var targetPos = Transform(target).LocalPosition;
 
@@ -719,7 +720,25 @@ public sealed class TarotCardSystem : EntitySystem
         _chat.TrySendInGameICMessage(caller, helpMessage, InGameICChatType.Speak, ChatTransmitRange.Normal);
     }
 
-    private void ClusterFlashBang(EntityUid target)
+    private void GivePinpointer(EntityUid target, EntityUid? user)
+    {
+        var pinpointerProto = _proto.Index("PinpointerUplink");
+        var pinpointerEntity = SpawnAtPosition(pinpointerProto.ID, Transform(target).Coordinates);
+        _hands.PickupOrDrop(target, pinpointerEntity);
+
+        EnsureComp<TimedDespawnComponent>(pinpointerEntity, out var timedDespawnComponent);
+        timedDespawnComponent.Lifetime = 10f; // now only for testing
+    }
+
+    private void TeleportToUser(EntityUid target, EntityUid? user)
+    {
+        if (user == null)
+            return;
+
+        _transform.SetCoordinates(target, Transform(user.Value).Coordinates);
+    }
+
+    private void ClusterFlashBang(EntityUid target, EntityUid? user)
     {
         var cluster = SpawnAtPosition("ClusterBangFull", Transform(target).Coordinates);
         _trigger.Trigger(cluster, target);
@@ -731,7 +750,7 @@ public sealed class TarotCardSystem : EntitySystem
         _physics.ApplyLinearImpulse(cluster, direction, body: physics);
     }
 
-    private void SmokeGrenade(EntityUid target)
+    private void SmokeGrenade(EntityUid target, EntityUid? user)
     {
         var ent = Spawn("Smoke", Transform(target).Coordinates);
 
@@ -741,8 +760,33 @@ public sealed class TarotCardSystem : EntitySystem
         _smoke.StartSmoke(ent, new Solution(), 40f, 50, smokeComponent);
     }
 
-    private void Rejuvenate(EntityUid target)
+    private void Rejuvenate(EntityUid target, EntityUid? user)
     {
         _rejuvenate.PerformRejuvenate(target);
+    }
+
+    private void BlockAction(EntityUid target, EntityUid? user)
+    {
+        var blockMoveEffect = new BlockActionEffect()
+        {
+            Duration = 20f, // test
+        };
+
+        blockMoveEffect.Effect(new EntityEffectBaseArgs(target, EntityManager));
+    }
+
+    private void BlockActionInRange(EntityUid target, EntityUid? user)
+    {
+        var entities = _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(Transform(target).Coordinates, 5f);
+
+        foreach (var entity in entities)
+        {
+            var blockMoveEffect = new BlockActionEffect()
+            {
+                Duration = 10f, // test
+            };
+
+            blockMoveEffect.Effect(new EntityEffectBaseArgs(entity, EntityManager));
+        }
     }
 }

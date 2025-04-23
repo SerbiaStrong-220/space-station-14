@@ -1,5 +1,13 @@
 ﻿- type: entity
   parent: BaseItem
+  id: TarotCard
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Appearance
+
+- type: entity
+  parent: BaseItem
   id: TarotColode
   name: Enchanted Tarot Card Deck
   components:
@@ -33,7 +41,7 @@
     delay: 25.0
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotFoolCard
   name: 0 - The Fool
   components:
@@ -44,7 +52,6 @@
     layers:
     - state: tarot_the_fool
     - state: tarot_the_fool_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -60,7 +67,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotMagicianCard
   name: I - The Magician
   components:
@@ -71,7 +78,6 @@
     layers:
     - state: tarot_the_magician
     - state: tarot_the_magician_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -87,7 +93,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotHighPriestessCard
   name: II - The High Priestess
   components:
@@ -98,7 +104,6 @@
     layers:
     - state: tarot_the_high_priestess
     - state: tarot_the_high_priestess_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -114,7 +119,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotEmpressCard
   name: III - The Empress
   components:
@@ -125,7 +130,6 @@
     layers:
     - state: tarot_the_empress
     - state: tarot_the_empress_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -141,7 +145,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotEmperorCard
   name: IV - The Emperor
   components:
@@ -152,7 +156,6 @@
     layers:
     - state: tarot_the_emperor
     - state: tarot_the_emperor_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -168,7 +171,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotHierophantCard
   name: V - The Hierophant
   components:
@@ -179,7 +182,6 @@
     layers:
     - state: tarot_the_hierophant
     - state: tarot_the_hierophant_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -195,7 +197,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotLoversCard
   name: VI - The Lovers
   components:
@@ -206,7 +208,6 @@
     layers:
     - state: tarot_the_lovers
     - state: tarot_the_lovers_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -222,7 +223,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotChariotCard
   name: VII - The Chariot
   components:
@@ -233,7 +234,6 @@
     layers:
     - state: tarot_the_chariot
     - state: tarot_the_chariot_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -249,7 +249,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotStrengthCard
   name: VIII - The Strength
   components:
@@ -260,7 +260,6 @@
     layers:
     - state: tarot_the_strength
     - state: tarot_the_strength_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -276,7 +275,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotHermitCard
   name: IX - The Hermit
   components:
@@ -287,7 +286,6 @@
     layers:
     - state: tarot_the_hermit
     - state: tarot_the_hermit_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -303,7 +301,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotWheelOfFortuneCard
   name: X - The Wheel of Fortune
   components:
@@ -314,7 +312,6 @@
     layers:
     - state: tarot_the_wheel_of_fortune
     - state: tarot_the_wheel_of_fortune_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -330,7 +327,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotJusticeCard
   name: XI - The Justice
   components:
@@ -341,7 +338,6 @@
     layers:
     - state: tarot_the_justice
     - state: tarot_the_justice_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -357,7 +353,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotHangedManCard
   name: XII - The Hanged Man
   components:
@@ -368,7 +364,6 @@
     layers:
     - state: tarot_the_hanged_man
     - state: tarot_the_hanged_man_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -384,7 +379,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotDeathCard
   name: XIII - The Death
   components:
@@ -395,7 +390,6 @@
     layers:
     - state: tarot_the_death
     - state: tarot_the_death_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -411,7 +405,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotTemperanceCard
   name: XIV - The Temperance
   components:
@@ -422,7 +416,6 @@
     layers:
     - state: tarot_the_temperance
     - state: tarot_the_temperance_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -438,7 +431,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotDevilCard
   name: XV - The Devil
   components:
@@ -449,7 +442,6 @@
     layers:
     - state: tarot_the_devil
     - state: tarot_the_devil_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -465,7 +457,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotTowerCard
   name: XVI - The Tower
   components:
@@ -476,7 +468,6 @@
     layers:
     - state: tarot_the_tower
     - state: tarot_the_tower_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -492,7 +483,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotStarCard
   name: XVII - The Star
   components:
@@ -503,7 +494,6 @@
     layers:
     - state: tarot_the_stars
     - state: tarot_the_stars_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -519,7 +509,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotMoonCard
   name: XVIII - The Moon
   components:
@@ -530,7 +520,6 @@
     layers:
     - state: tarot_the_moon
     - state: tarot_the_moon_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -546,7 +535,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotSunCard
   name: XIX - The Sun
   components:
@@ -557,7 +546,6 @@
     layers:
     - state: tarot_the_sun
     - state: tarot_the_sun_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -573,7 +561,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotJudgementCard
   name: XX - The Judgement
   components:
@@ -584,7 +572,6 @@
     layers:
     - state: tarot_the_judgement
     - state: tarot_the_judgement_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -600,7 +587,7 @@
         - NukeOperative
 
 - type: entity
-  parent: BaseItem
+  parent: TarotCard
   id: TarotWorldCard
   name: XXI - The World
   components:
@@ -611,7 +598,6 @@
     layers:
     - state: tarot_the_world
     - state: tarot_the_world_reversed
-  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.TarotVisuals.Reversed:
@@ -647,3 +633,44 @@
   - type: EmitSoundOnSpawn
     sound:
       path: /Audio/Effects/Lightning/lightningbolt.ogg
+
+- type: entity
+  id: EffectBlockMove
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+  - type: Sprite
+    noRot: true
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: SS220/Effects/tarot_card.rsi
+      state: tarot_animate
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg
+
+# TODO: fix transform
+- type: entity
+  id: BlockMoveEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: Effects/emp.rsi
+      state: emp_pulse
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg
+  - type: AnimationPlayer
