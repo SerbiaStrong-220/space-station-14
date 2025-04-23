@@ -98,6 +98,7 @@
     sprite: SS220/Clothing/OuterClothing/Coats/captain_white.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/captain_white.rsi
+
 - type: entity
   parent: ClothingUniformJumpskirtCapFormalDress
   id: ClothingOuterBlackCoatCaptain
@@ -109,6 +110,7 @@
     sprite: SS220/Clothing/OuterClothing/Coats/captain_blackcoat.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/captain_blackcoat.rsi
+
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatHoPFormalDress
