@@ -305,9 +305,9 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         if (!TryComp<TransferIdentityComponent>(ent.Owner, out var transferIdentityComponent))
             return;
 
-        var target = transferIdentityComponent.Target;
+        var clone = transferIdentityComponent.NullspaceClone;
 
-        if (target == null)
+        if (clone == null)
         {
             QueueDel(ent);
             return;
@@ -316,31 +316,32 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         if (ent.Comp.ImplantedEntity is not { } user)
             return;
 
-        if (TryComp<HumanoidAppearanceComponent>(user, out var humanoidAppearanceComponent))
+        if (TryComp<HumanoidAppearanceComponent>(user, out var userAppearanceComp))
         {
-            if (transferIdentityComponent.AppearanceComponent == null)
+
+            if (!TryComp<HumanoidAppearanceComponent>(clone, out var cloneAppearanceComp))
                 return;
 
-            _humanoidAppearance.CloneAppearance(target.Value, user, transferIdentityComponent.AppearanceComponent, humanoidAppearanceComponent);
+            _humanoidAppearance.CloneAppearance(clone.Value, user, cloneAppearanceComp, userAppearanceComp);
 
-            _metaData.SetEntityName(user, MetaData(target.Value).EntityName, raiseEvents: false);
+            _metaData.SetEntityName(user, MetaData(clone.Value).EntityName, raiseEvents: false);
 
             if (TryComp<DnaComponent>(user, out var dna)
-                && TryComp<DnaComponent>(target.Value, out var dnaTarget))
+                && TryComp<DnaComponent>(clone.Value, out var dnaClone))
             {
-                dna.DNA = dnaTarget.DNA;
+                dna.DNA = dnaClone.DNA;
                 var ev = new GenerateDnaEvent { Owner = user, DNA = dna.DNA };
                 RaiseLocalEvent(ent, ref ev);
             }
 
             if (TryComp<FingerprintComponent>(user, out var fingerprint)
-                && TryComp<FingerprintComponent>(target.Value, out var fingerprintTarget))
+                && TryComp<FingerprintComponent>(clone.Value, out var fingerprintTarget))
             {
                 fingerprint.Fingerprint = fingerprintTarget.Fingerprint;
             }
 
             var setScale = EnsureComp<SetScaleFromTargetComponent>(user);
-            setScale.Target = GetNetEntity(target);
+            setScale.Target = GetNetEntity(clone);
 
             Dirty(user, setScale);
 
@@ -349,9 +350,10 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
 
             _identity.QueueIdentityUpdate(user);
 
-            _popup.PopupEntity(Loc.GetString("pen-scrambler-success-convert-to-identity", ("identity", MetaData(target.Value).EntityName)), user, user);
+            _popup.PopupEntity(Loc.GetString("pen-scrambler-success-convert-to-identity", ("identity", MetaData(clone.Value).EntityName)), user, user);
         }
 
+        QueueDel(clone);
         QueueDel(ent);
     }
     //ss220 dna copy implant add end
