@@ -1,34 +1,41 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Audio;
-using Content.Shared.Mobs.Components;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem
 {
     // TODO
-    protected bool IsValidTarget(EntityUid uid, out string? reasonLocPath)
+    /// <summary>
+    ///
+    /// </summary>
+    protected bool IsValidTarget(EntityUid uid, ProtoId<SurgeryGraphPrototype> id, out string? reasonLocPath)
     {
         reasonLocPath = null;
-        if (!HasComp<MobStateComponent>(uid)
-            || !HasComp<SurgableComponent>(uid))
+
+        if (!_prototype.TryIndex(id, out var surgeryGraphProto))
             return false;
 
-        if (!_buckle.IsBuckled(uid))
-        {
-            reasonLocPath = "surgery-invalid-target-buckle";
-            return false;
-        }
+        var sharedCheck = SharedSurgeryAvaibilityChecks.IsSurgeryGraphAvailableTarget(uid, surgeryGraphProto, EntityManager, out reasonLocPath);
 
-        return true;
+        return sharedCheck;
     }
+
     // TODO
-    protected bool IsValidPerformer(EntityUid uid)
+    /// <summary>
+    /// Here we check for
+    /// </summary>
+    protected bool IsValidPerformer(EntityUid uid, ProtoId<SurgeryGraphPrototype> id)
     {
-        return true;
+        if (!_prototype.TryIndex(id, out var surgeryGraphProto))
+            return false;
+
+        var sharedCheck = SharedSurgeryAvaibilityChecks.IsSurgeryGraphAvailablePerformer(uid, surgeryGraphProto, EntityManager);
+
+        return sharedCheck;
     }
 
     protected virtual void ProceedToNextStep(Entity<OnSurgeryComponent> entity, EntityUid user, EntityUid? used, SurgeryGraphEdge chosenEdge)
@@ -36,7 +43,7 @@ public abstract partial class SharedSurgerySystem
         ChangeSurgeryNode(entity, chosenEdge.Target, user, used);
 
         _audio.PlayPredicted(SurgeryGraph.GetSoundSpecifier(chosenEdge), entity.Owner, user,
-                        AudioHelpers.WithVariation(0.125f, _random).WithVolume(1f));
+                        SurgeryGraph.GetSoundSpecifier(chosenEdge)?.Params.WithVolume(1f));
 
         if (OperationEnded(entity))
             EndOperation(entity);

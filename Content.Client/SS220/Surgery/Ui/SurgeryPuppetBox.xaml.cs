@@ -53,8 +53,6 @@ public sealed partial class SurgeryPuppetBox : Control
         IoCManager.InjectDependencies(this);
     }
 
-    // SS220_TODO: make it working. Add normal buttons to work... God help me...
-    // fuck buttons!
     public void Initialize()
     {
         foreach (var part in Enum.GetValues<PuppetParts>())

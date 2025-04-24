@@ -35,7 +35,10 @@
     edges:
     - to: fix disfunction
       delay: 6
-      sound: /Audio/SS220/Surgery/organ.ogg
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
       conditions:
       - !type:SurgeryHaveComponentCondition
         component: MindSlaveDisfunctionFixer

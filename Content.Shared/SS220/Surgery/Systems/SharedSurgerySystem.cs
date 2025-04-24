@@ -14,6 +14,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Shared.Mobs;
 
 
 namespace Content.Server.SS220.Surgery.Systems;
@@ -29,7 +30,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
 
     private const float ErrorGettingDelayDelay = 8f;
@@ -165,7 +165,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         var target = GetEntity(args.Target);
         var user = GetEntity(args.User);
 
-        if (!IsValidTarget(target, out var reasonLocPath) || !IsValidPerformer(user))
+        if (!IsValidTarget(target, args.SurgeryGraphId, out var reasonLocPath) || !IsValidPerformer(user, args.SurgeryGraphId))
         {
             // TODO more user friendly
             _popup.PopupClient(reasonLocPath != null ? Loc.GetString(reasonLocPath) : null, user, PopupType.LargeCaution);
@@ -251,7 +251,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             };
 
         if (_doAfter.TryStartDoAfter(performerDoAfterEventArgs))
-            _audio.PlayPredicted(used.Comp.UsingSound, entity.Owner, user, audioParams: used.Comp.UsingSound?.Params);
+            _audio.PlayPredicted(used.Comp.UsingSound, entity.Owner, user, audioParams: used.Comp.UsingSound?.Params.WithVolume(1f));
 
         return true;
     }
