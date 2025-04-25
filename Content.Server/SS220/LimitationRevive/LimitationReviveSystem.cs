@@ -27,13 +27,13 @@ public sealed class LimitationReviveSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<LimitationReviveComponent, UpdateMobStateEvent>(OnDeadMobState);
+        SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnDeadMobState);
         SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
     }
 
-    private void OnDeadMobState(Entity<LimitationReviveComponent> ent, ref UpdateMobStateEvent args)
+    private void OnDeadMobState(Entity<LimitationReviveComponent> ent, ref MobStateChangedEvent args)
     {
-        if (args.State == MobState.Dead && ent.Comp.IsAlreadyDead == false)
+        if (args.NewMobState == MobState.Dead && ent.Comp.IsAlreadyDead == false)
         {
             ent.Comp.IsAlreadyDead = true;
             ent.Comp.IsDamageTaken = false;
@@ -41,7 +41,7 @@ public sealed class LimitationReviveSystem : EntitySystem
             ent.Comp.TimeToDamage = _timing.CurTime + ent.Comp.DelayBeforeDamage;
         }
 
-        else if (ent.Comp.IsAlreadyDead && args.State is MobState.Alive or MobState.Critical)
+        else if (ent.Comp.IsAlreadyDead && args.NewMobState is MobState.Alive or MobState.Critical)
         {
             ent.Comp.IsAlreadyDead = false;
             ent.Comp.IsDamageTaken = false;
@@ -100,7 +100,8 @@ public sealed class LimitationReviveSystem : EntitySystem
         while (query.MoveNext(out var uid, out var limitationRevive))
             if (curTime >= limitationRevive.TimeToDamage &&
                 limitationRevive.TimeToDamage != TimeSpan.Zero &&
-                limitationRevive.IsDamageTaken == false)
+                limitationRevive.IsDamageTaken == false &&
+                limitationRevive.IsAlreadyDead)
                 TryDamageAfterDeath(uid);
     }
 }
