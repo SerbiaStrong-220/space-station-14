@@ -1,7 +1,7 @@
 using Content.Shared.Actions;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Toggleable;
+namespace Content.Shared.SS220.Clothing;
 
 /// <summary>
 /// Generic action-event for toggle-able components.

@@ -8,9 +8,8 @@ using Content.Shared.Inventory.Events;
 namespace Content.Shared.SS220.Clothing;
 
 /// <summary>
-/// Handles adding and using a toggle action for <see cref="ToggleClothingComponent"/>.
 /// </summary>
-public sealed class InnerToggleableClothingSystem : EntitySystem
+public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
 
@@ -18,23 +17,9 @@ public sealed class InnerToggleableClothingSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InnerToggleableClothingComponent, GotEquippedEvent>(OnInnerToggleableEquip);
-
-        SubscribeLocalEvent<InnerToggleableClothingComponent, GotUnequippedEvent>(OnInnerToggleableUnequip);
-
-        SubscribeLocalEvent<InnerToggleableClothingComponent, GotEquippedHandEvent>(OnEquip);
-        SubscribeLocalEvent<InnerToggleableClothingComponent, GotUnequippedHandEvent>(OnUnequip);
+        SubscribeLocalEvent<InnerHandToggleProviderSystemComponent, GotEquippedHandEvent>(OnEquip);
+        SubscribeLocalEvent<InnerHandToggleProviderSystemComponent, GotUnequippedHandEvent>(OnUnequip);
         //SubscribeLocalEvent<InnerToggleableClothingComponent, DroppedEvent>(OnDrop);
-    }
-
-    private void OnInnerToggleableEquip(Entity<InnerToggleableClothingComponent> ent, ref GotEquippedEvent args)
-    {
-        //var innerUser = EnsureComp<InnerToggleableComponent>(args.Equipee);
-    }
-
-    private void OnInnerToggleableUnequip(Entity<InnerToggleableClothingComponent> ent, ref GotUnequippedEvent args)
-    {
-
     }
 
     private void OnEquip(Entity<InnerToggleableClothingComponent> ent, ref GotEquippedHandEvent args)

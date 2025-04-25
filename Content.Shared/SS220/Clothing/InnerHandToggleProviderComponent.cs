@@ -8,7 +8,7 @@ namespace Content.Shared.SS220.Clothing;
 ///     This component gives an item an action that will equip or un-equip some clothing e.g. hardsuits and hardsuit helmets.
 /// </summary>
 [RegisterComponent, NetworkedComponent/*, AutoGenerateComponentState*/]
-public sealed partial class InnerToggleableClothingComponent : Component
+public sealed partial class InnerHandToggleProviderComponent : Component
 {
     /*
     [DataField(required: true)]
