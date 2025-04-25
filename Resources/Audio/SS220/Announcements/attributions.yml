@@ -1,4 +1,10 @@
 - files: ["cluwne_comm_announce.ogg"]
   license: "Custom"
-  copyright: "Downloaded from free library, remix created by SkaldetSkaeg"
+  copyright: "Downloaded from free library, remix created by SkaldetSkaeg for SS220"
   source: "https://sound-pack.net/imitaciya-loshadinogo-rzhaniya-na-trube-2-zvuk-mp3"
+
+
+- files: ["rzhamma.ogg"]
+  license: "Custom"
+  copyright: "Remix created by SkaldetSkaeg for SS220"
+  source: "https://github.com/space-wizards/space-station-14/blob/master/Resources/Audio/Items/Toys/rubber_chicken_3.ogg"
