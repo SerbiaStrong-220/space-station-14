@@ -1,0 +1,16 @@
+- type: construction
+  id: TrashBin
+  name: trash bin
+  description: Beautiful metal trash storage bin.
+  graph: TrashBin
+  startNode: start
+  targetNode: TrashBin
+  category: construction-category-storage
+  icon:
+    sprite: SS220/Structures/Storage/trash_bin.rsi
+    state: icon
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
