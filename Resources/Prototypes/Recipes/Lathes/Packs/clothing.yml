@@ -30,7 +30,7 @@
   - ClothingUniformJumpsuitCaptain
   - ClothingUniformJumpskirtCaptain
   - ClothingUniformJumpsuitCapFormal
-  # - ClothingUniformJumpskirtCapFormalDress  #Removed by PandionSM
+  # - ClothingUniformJumpskirtCapFormalDress #SS220 Removing formal dress
   - ClothingHeadBeretCap #SS220 CapBeret
   - ClothingHeadCaptainCap #SS220 Captain's Cap tweak
   # HoP
