@@ -8,6 +8,26 @@
     sprite: SS220/Objects/Specific/Medical/firstaidkits.rsi # ss220 resprite
     state: firstaid
   - type: Storage
+    whitelist:
+      tags:
+        - Bottle
+        - Spray
+        - Brutepack
+        - Bloodpack
+        - Gauze
+        - Ointment
+        - CigPack
+        - PillCanister
+        - Tourniquet #SS220 Add Tourniquet to medic's belt
+        - Radio
+        - DiscreteHealthAnalyzer
+        - SurgeryTool
+        - Dropper
+      components:
+        - Hypospray
+        - Injector
+        - Pill
+        - HandLabeler
     maxItemSize: Small
     grid:
     - 0,0,3,1
@@ -91,7 +111,7 @@
 - type: entity
   name: combat medical kit
   description: "For the big weapons among us."
-  parent: Medkit
+  parent: MedkitCombat
   id: MedkitCombat
   components:
   - type: Sprite
@@ -99,4 +119,3 @@
   - type: Item
     heldPrefix: blackkit
     size: Normal
-

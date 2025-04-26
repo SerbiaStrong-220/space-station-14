@@ -135,6 +135,15 @@
     Plastic: 300
 
 - type: latheRecipe
+  id: MedkitCombat
+  result: MedkitCombat
+  name: lathe-recipe-MedkitCombat-name
+  completetime: 4
+  materials:
+    Plastic: 600
+    Durathread: 400
+
+- type: latheRecipe
   parent: Medkit
   id: MedkitBurn
   result: MedkitBurn
@@ -171,7 +180,7 @@
   name: lathe-recipe-MedkitRadiation-name
 
 - type: latheRecipe
-  parent: Medkit
+  parent: MedkitCombat
   id: MedkitCombat
   result: MedkitCombat
   name: lathe-recipe-MedkitCombat-name
