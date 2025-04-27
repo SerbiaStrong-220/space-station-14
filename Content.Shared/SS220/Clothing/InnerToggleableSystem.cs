@@ -21,37 +21,11 @@ public sealed class InnerToggleableSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<InnerToggleableComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<InnerToggleableComponent, ToggleClothingEvent>(OnToggleItem);
+        //SubscribeLocalEvent<InnerToggleableComponent, ToggleClothingEvent>(OnToggleItem);
     }
 
     private void OnInit(Entity<InnerToggleableComponent> ent, ref ComponentInit args)
     {
-        ent.Comp.Container = _containerSystem.EnsureContainer<ContainerSlot>(ent, ent.Comp.ContainerId);
-    }
-
-    private void OnToggleItem(Entity<InnerToggleableComponent> ent, ref ToggleClothingEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-        ToggleItem(args.Performer, uid, ent.Comp);
-    }
-
-    private void ToggleItem(EntityUid user, EntityUid target, InnerToggleableComponent comp)
-    {
-        if (comp.Container == null || comp.ClothingUid == null)
-            return;
-
-        var parent = Transform(target).ParentUid;
-        if (comp.Container.ContainedEntity == null)
-            _inventorySystem.TryUnequip(user, parent, component.Slot, force: true);
-        else if (_inventorySystem.TryGetSlotEntity(parent, component.Slot, out var existing))
-        {
-            _popupSystem.PopupClient(Loc.GetString("toggleable-clothing-remove-first", ("entity", existing)),
-                user, user);
-        }
-        else
-            _inventorySystem.TryEquip(user, parent, comp.ClothingUid.Value, comp.Slot);
+        //ent.Comp.Container = _containerSystem.EnsureContainer<ContainerSlot>(ent, ent.Comp.ContainerId);
     }
 }

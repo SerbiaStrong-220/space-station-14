@@ -17,22 +17,22 @@ public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InnerHandToggleProviderSystemComponent, GotEquippedHandEvent>(OnEquip);
-        SubscribeLocalEvent<InnerHandToggleProviderSystemComponent, GotUnequippedHandEvent>(OnUnequip);
-        //SubscribeLocalEvent<InnerToggleableClothingComponent, DroppedEvent>(OnDrop);
+        SubscribeLocalEvent<InnerHandToggleProviderComponent, GotEquippedHandEvent>(OnEquip);
+        SubscribeLocalEvent<InnerHandToggleProviderComponent, GotUnequippedHandEvent>(OnUnequip);
+        SubscribeLocalEvent<InnerHandToggleProviderComponent, DroppedEvent>(OnDrop);
     }
 
-    private void OnEquip(Entity<InnerToggleableClothingComponent> ent, ref GotEquippedHandEvent args)
+    private void OnEquip(Entity<InnerHandToggleProviderComponent> ent, ref GotEquippedHandEvent args)
     {
         if (args.Handled)
             return;
 
         args.Handled = true;
 
-        //var innerUser = EnsureComp<InnerToggleableComponent>(args.Equipee);
+        var innerUser = EnsureComp<InnerToggleableComponent>(args.User);
     }
 
-    private void OnUnequip(Entity<InnerToggleableClothingComponent> ent, ref GotUnequippedHandEvent args)
+    private void OnUnequip(Entity<InnerHandToggleProviderComponent> ent, ref GotUnequippedHandEvent args)
     {
         if (args.Handled)
             return;
@@ -41,10 +41,11 @@ public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
 
     }
 
-    /*
-    private void OnDrop(Entity<InnerToggleableClothingComponent> ent, ref DroppedEvent args)
+    private void OnDrop(Entity<InnerHandToggleProviderComponent> ent, ref DroppedEvent args)
     {
+        if (args.Handled)
+            return;
 
+        args.Handled = true;
     }
-    */
 }
