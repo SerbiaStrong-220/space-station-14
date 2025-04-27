@@ -166,8 +166,10 @@ namespace Content.Shared.Damage
                 }
             }
 
+            // SS220 Stamina begin
             if (damage.DamageDict.TryGetValue("Stamina", out var staminavalue))
-                _stamina.TakeStaminaDamage(uid.Value, staminavalue.Float());
+                _stamina.TakeStaminaDamage(uid.Value, staminavalue.Float(), source: origin);
+            // SS220 Stamina end
 
             // TODO DAMAGE PERFORMANCE
             // Consider using a local private field instead of creating a new dictionary here.
