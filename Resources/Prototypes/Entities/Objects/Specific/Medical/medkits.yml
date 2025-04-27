@@ -111,7 +111,7 @@
 - type: entity
   name: combat medical kit
   description: "For the big weapons among us."
-  parent: MedkitCombat
+  parent: Medkit
   id: MedkitCombat
   components:
   - type: Sprite
