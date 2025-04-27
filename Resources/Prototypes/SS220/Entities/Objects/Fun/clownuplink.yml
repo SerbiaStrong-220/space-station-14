@@ -258,7 +258,7 @@
         - ItemMask
   - type: Prayable
     sentMessage: prayer-popup-notify-honkmother-sent
-    notifiactionPrefix: prayer-chat-notify-honkmother
+    notificationPrefix: prayer-chat-notify-honkmother
     verb: prayer-verbs-call
     verbImage: null      
   - type: Store
