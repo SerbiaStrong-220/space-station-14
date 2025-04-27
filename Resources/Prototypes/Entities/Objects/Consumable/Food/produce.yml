@@ -401,6 +401,9 @@
   - type: Extractable
     grindableSolutionName: food
   - type: SpaceGarbage
+  - type: Currency           ##SS220
+    price:
+      TrashBananaPeel: 1
 
 - type: entity
   name: baked banana peel
@@ -423,6 +426,9 @@
           Quantity: 1
         - ReagentId: Carbon
           Quantity: 2
+  - type: Currency        ##SS220
+    price:
+      TrashBananaPeel: 2
 
 - type: entity
   name: mimana peel
@@ -440,6 +446,9 @@
       path: /Audio/Effects/slip.ogg
       params:
         volume: -100
+  - type: Currency    ##SS220
+    price:
+      TrashBananaPeel: 4
 
 - type: entity
   name: bananium peel
@@ -453,6 +462,9 @@
     sprite: Objects/Materials/materials.rsi
     heldPrefix: peel
   - type: Slippery
+  - type: Currency     ##SS220
+    price:
+      TrashBananaPeel: 5
 
 - type: entity
   name: carrot

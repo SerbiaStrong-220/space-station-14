@@ -1,0 +1,273 @@
+﻿- type: entity
+  id: StorePresetUplinkClown
+  abstract: true
+  components:
+  - type: Store
+    name: store-preset-name-uplink
+    categories:
+    - UplinkWearablesClown
+    - AdditionalClown
+    - TrinketsClown
+    currencyWhitelist:
+    - TrashBananaPeel
+    balance:
+      TrashBananaPeel: 0
+      
+- type: listing 
+  id: FoodPieBananaCreamset
+  name: Кремовый банановый пирог
+  description: Самое опасное оружие во всей галактике! ОПАСНОСТЬ 100%
+  productEntity: FoodPieBananaCream
+  cost:
+    TrashBananaPeel: 20
+  categories:
+    - UplinkWearablesClown    
+
+- type: listing 
+  id: HealingToolboxset
+  name: изолированные перчатки 
+  description: Меня наконец-то не будет бить ток в техах.
+  productEntity: ClothingHandsGlovesColorYellow
+  cost:
+    TrashBananaPeel: 50
+  categories:
+    - UplinkWearablesClown
+    
+- type: listing
+  id: magicplushset
+  productEntity: WhoopieCushion 
+  cost:
+    TrashBananaPeel: 3
+  categories:
+    - AdditionalClown  
+
+- type: listing
+  id: UplinkEmpImplanterset 
+  name: Хонк-имплант 
+  productEntity: BikeHornImplanter
+  cost:
+    TrashBananaPeel: 5
+  categories:
+    - AdditionalClown  
+
+- type: listing
+  id: MobHonkBotset
+  name: Абсолютная власть
+  productEntity: MobHonkBot
+  cost:
+    TrashBananaPeel: 100
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: PresentRandomset
+  name: подарок
+  description: там может быть какая-та игрушка или музыкальный инструмент!
+  productEntity: PresentRandom
+  cost:
+    TrashBananaPeel: 2
+  categories:
+    - AdditionalClown  
+    
+- type: listing
+  id: UplinkClothingNoSlipsShoesset
+  productEntity: ToyHammer
+  cost:
+    TrashBananaPeel: 2
+  categories:
+  - AdditionalClown     
+    
+- type: listing
+  id: UplinkToolboxset
+  name: Вещмешок с костюмом клоуна
+  description: Вещмешок, содержащий полный набор клоуна, включая клоунский КПК и карту. Вы можете сделать армию клоунов!
+  productEntity: ClothingBackpackDuffelSyndicateCostumeClown
+  cost:
+    TrashBananaPeel: 10
+  categories:
+  - AdditionalClown  
+  
+- type: listing
+  id: breadset
+  name: Подозрительное мыло
+  description: Мыло. Оно более скользкое, чем его аналоги. После подскальзывания жертва улетает гораздо дальше. Идеально для клоунов, которые могут грамотно пользоваться бананами и мылом.
+  productEntity: SoapSyndie
+  cost:
+    TrashBananaPeel: 30
+  categories:
+  - UplinkWearablesClown  
+
+- type: listing
+  id: CigPackSyndicateset
+  name: Пачка сигарет синдиката
+  description: Тяжелая жизнь клоуна, посиди покури с мимом...
+  productEntity: CigPackSyndicate
+  cost:
+    TrashBananaPeel: 10
+  categories:
+  - AdditionalClown  
+
+- type: listing
+  id: SoapOmegaset 
+  name: ОМЕГА мыло
+  description: Я получил власть, которая и не снилась моей маме!! СЛАВА ХОНК-МАТЕРИ!
+  productEntity: SoapOmega
+  cost:
+    TrashBananaPeel: 110
+  categories:
+  - UplinkWearablesClown       
+
+- type: listing
+  id: FoodBoxDonkpocketTeriyakiset
+  name: Укши!
+  description: Даёт вам в руки косметический предмет - кошачьи ушки. При надевании в слот головы у вас вырастут кошачьи уши и хвост. 
+  productEntity: ClothingHeadHatCatEars
+  cost:
+    TrashBananaPeel: 55
+  categories:
+  - UplinkWearablesClown   
+  
+- type: listing
+  id: DrinkNukieCanset
+  name: Банка нюка-робаст
+  description: Бодрящий напиток... очень бодрящий. Заполнен зелёной жидкостью, после употребления рекомендуется обратиться к врачу.
+  productEntity: DrinkNukieCan
+  cost:
+    TrashBananaPeel: 25
+  categories:
+  - TrinketsClown    
+  
+- type: listing
+  id: SyndicateBombFakeset
+  name: Коробка петард
+  description: Надо испугать Службу безопасности,а то давно они небыли в панике!
+  productEntity: SnapPopBox
+  cost:
+    TrashBananaPeel: 5
+  categories:
+  - UplinkWearablesClown    
+  
+- type: listing
+  id: GoldenBikeHornset
+  productEntity: GoldenBikeHorn
+  cost:
+    TrashBananaPeel: 25
+  categories:
+  - TrinketsClown 
+
+- type: listing
+  id: ClothingShoesBlingset
+  productEntity: ClothingShoesBling
+  cost:
+    TrashBananaPeel: 25
+  categories:
+  - TrinketsClown   
+  
+- type: listing
+  id: FloorTileItemClownset
+  productEntity: FloorTileItemClown
+  cost:
+    TrashBananaPeel: 1
+  categories:
+  - TrinketsClown  
+
+- type: listing
+  id: FloorTileItemCarpetClownset
+  productEntity: FloorTileItemCarpetClown
+  cost:
+    TrashBananaPeel: 1
+  categories:
+  - TrinketsClown  
+
+- type: listing
+  id: ClothingOuterHardsuitClownset 
+  productEntity: ClothingOuterHardsuitClown
+  cost:
+    TrashBananaPeel: 60
+  categories:
+  - AdditionalClown 
+  
+- type: listing
+  id: ToySwordset
+  productEntity: ToySword
+  cost:
+    TrashBananaPeel: 4
+  categories:
+  - AdditionalClown   
+
+
+- type: storeCategory  # категория 
+  id: UplinkWearablesClown
+  name: Основное #categories
+  priority: 1
+  
+- type: storeCategory  # категория 
+  id: AdditionalClown
+  name: Бонус #categories
+  priority: 2
+  
+- type: storeCategory  # категория 
+  id: TrinketsClown
+  name: Безделушки #categories
+  priority: 3  
+  
+  
+- type: entity #Сам аплинк
+  parent: [BaseItem, StorePresetUplinkClown]
+  id: BananaPhoneInstrument2
+  name: бананафон
+  description: Прямая связь с Великой Хонк-Матерью. Ответственный клоун временно отсутствует — оставьте кожуру после сигнала.
+  suffix: Аплинк Клоун
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/Instruments/otherinstruments.rsi
+    state: banana_phone
+  - type: Item
+    sprite: Objects/Devices/communication.rsi
+    heldPrefix: old-radio
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: EmitSoundOnLand
+    sound:
+       path: /Audio/Items/bikehorn.ogg
+  - type: Slippery
+    paralyzeTime: 4
+    launchForwardsMultiplier: 1.5
+  - type: StepTrigger
+  - type: CollisionWake
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.3,0.4,0.3"
+        hard: false
+        layer:
+        - SlipLayer
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.3,0.4,0.3"
+        density: 5
+        mask:
+        - ItemMask
+  - type: Prayable
+    sentMessage: prayer-popup-notify-honkmother-sent
+    notifiactionPrefix: prayer-chat-notify-honkmother
+    verb: prayer-verbs-call
+    verbImage: null      
+  - type: Store
+    balance:
+      TrashBananaPeel: 0
+
+- type: currency
+  id: TrashBananaPeel
+  displayName: "банановая кожура"
+  cash: 
+    1: TrashBananaPeel
+  canWithdraw: false
