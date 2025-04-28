@@ -432,7 +432,11 @@
           Quantity: 2
   - type: Currency        ##SS220
     price:
+  # ss220 clown uplink bgn
+  - type: Currency
+    price:
       TrashBananaPeel: 2
+  # ss220 clown uplink end
 
 - type: entity
   name: mimana peel
