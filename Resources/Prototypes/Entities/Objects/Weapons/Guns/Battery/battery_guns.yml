@@ -440,6 +440,7 @@
     sprite: Objects/Weapons/Guns/Battery/practice_disabler.rsi
     quickEquip: false
     slots:
+    - suitStorage #ss220 disabler practice on suit slot (#2772)
     - Belt
   - type: Appearance
   - type: MagazineVisuals
