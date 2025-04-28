@@ -464,7 +464,11 @@
   - type: Slippery
   - type: Currency     ##SS220
     price:
+  # ss220 clown uplink bgn
+  - type: Currency
+    price:
       TrashBananaPeel: 5
+  # ss220 clown uplink end
 
 - type: entity
   name: carrot
