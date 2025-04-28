@@ -23,6 +23,7 @@
         - DiscreteHealthAnalyzer
         - SurgeryTool
         - Dropper
+        - GasTank
       components:
         - Hypospray
         - Injector
