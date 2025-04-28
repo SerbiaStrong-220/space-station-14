@@ -90,7 +90,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h comm) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000 
+          time: 72000
         - !type:DepartmentTimeRequirement
           department: Command
           time: 36000 #SS220 ghostrole-times (20h sec 10h comm) end
@@ -160,7 +160,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h comm) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000 
+          time: 72000
         - !type:DepartmentTimeRequirement
           department: Command
           time: 36000 #SS220 ghostrole-times (20h sec 10h comm) end
@@ -351,7 +351,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h eng) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000 
+          time: 72000
         - !type:DepartmentTimeRequirement
           department: Engineering
           time: 36000 #SS220 ghostrole-times (20h sec 10h eng) end
@@ -391,7 +391,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h eng) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000 
+          time: 72000
         - !type:DepartmentTimeRequirement
           department: Engineering
           time: 36000 #SS220 ghostrole-times (20h sec 10h eng) end
@@ -527,6 +527,7 @@
   speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
+    - type: DefibrillatorSkill #ss220 ert defib skill (#2787)
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
@@ -566,6 +567,7 @@
   speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTMedical
   components:
+    - type: DefibrillatorSkill #ss220 ert defib skill (#2787)
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
@@ -573,7 +575,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h med) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000 
+          time: 72000
         - !type:DepartmentTimeRequirement
           department: Medical
           time: 36000 #SS220 ghostrole-times (20h sec 10h med) end
