@@ -17,6 +17,7 @@ public sealed partial class PreparationTrapComponent : Component
 }
 
 [Serializable, NetSerializable]
-public sealed partial class SetTrapEvent : SimpleDoAfterEvent
+public sealed partial class SetTrapDoAfterEvent : SimpleDoAfterEvent
 {
+    public EntityUid TrapUid;
 }

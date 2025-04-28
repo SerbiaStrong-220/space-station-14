@@ -16,7 +16,7 @@ public sealed class PreparationTrapSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<PreparationTrapComponent, UseInHandEvent>(OnAfterInteract);
-        SubscribeLocalEvent<PreparationTrapComponent, SetTrapEvent>(OnAfterSetTrap);
+        SubscribeLocalEvent<PreparationTrapComponent, SetTrapDoAfterEvent>(OnAfterSetTrap);
     }
 
     private void OnAfterInteract(Entity<PreparationTrapComponent> ent, ref UseInHandEvent args)
@@ -40,7 +40,7 @@ public sealed class PreparationTrapSystem : EntitySystem
             EntityManager,
             args.User,
             ent.Comp.SetTrapDelay,
-            new SetTrapEvent(),
+            new SetTrapDoAfterEvent(),
             ent.Owner,
             target: args.User,
             used: ent.Owner)
@@ -51,11 +51,14 @@ public sealed class PreparationTrapSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfterArgs);
     }
 
-    private void OnAfterSetTrap(Entity<PreparationTrapComponent> ent, ref SetTrapEvent args)
+    private void OnAfterSetTrap(Entity<PreparationTrapComponent> ent, ref SetTrapDoAfterEvent args)
     {
         if(args.Cancelled)
             return;
 
-        Spawn(ent.Comp.TrapProtoType, _transform.GetMoverCoordinates(args.User));
+        if(!TrySpawnNextTo(ent.Comp.TrapProtoType, args.User, out var trapUid))
+            return;
+
+        args.TrapUid = trapUid.Value;
     }
 }
