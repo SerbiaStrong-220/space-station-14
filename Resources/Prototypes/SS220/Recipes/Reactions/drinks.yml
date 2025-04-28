@@ -25,14 +25,14 @@
     AppleCompote: 3
 
 - type: reaction
-  id: BerryСompote
+  id: BerryCompote
   reactants:
     JuiceBerry:
       amount: 1
     Water:
       amount: 2
   products:
-    BerryСompote: 3
+    BerryCompote: 3
 
 - type: reaction
   id: HotArachne
