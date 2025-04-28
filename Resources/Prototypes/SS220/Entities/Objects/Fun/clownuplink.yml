@@ -13,46 +13,46 @@
     balance:
       TrashBananaPeel: 0
       
-- type: listing 
+- type: listing
   id: FoodPieBananaCreamset
-  name: Кремовый банановый пирог
-  description: Самое опасное оружие во всей галактике! ОПАСНОСТЬ 100%
+  name: uplink-clown-foodpie-name
+  description: uplink-clown-foodpie-desc
   productEntity: FoodPieBananaCream
   cost:
     TrashBananaPeel: 20
   categories:
-    - UplinkWearablesClown    
+    - UplinkWearablesClown
 
-- type: listing 
+- type: listing
   id: HealingToolboxset
-  name: изолированные перчатки 
-  description: Меня наконец-то не будет бить ток в техах.
+  name: uplink-clown-gloves-name
+  description: uplink-clown-gloves-desc
   productEntity: ClothingHandsGlovesColorYellow
   cost:
     TrashBananaPeel: 50
   categories:
     - UplinkWearablesClown
-    
+
 - type: listing
   id: magicplushset
-  productEntity: WhoopieCushion 
+  productEntity: WhoopieCushion
   cost:
     TrashBananaPeel: 3
   categories:
-    - AdditionalClown  
+    - AdditionalClown
 
 - type: listing
-  id: UplinkEmpImplanterset 
-  name: Хонк-имплант 
+  id: UplinkEmpImplanterset
+  name: uplink-clown-implanter-name
   productEntity: BikeHornImplanter
   cost:
     TrashBananaPeel: 5
   categories:
-    - AdditionalClown  
+    - AdditionalClown
 
 - type: listing
   id: MobHonkBotset
-  name: Абсолютная власть
+  name: uplink-clown-honkbot-name
   productEntity: MobHonkBot
   cost:
     TrashBananaPeel: 100
@@ -61,99 +61,99 @@
 
 - type: listing
   id: PresentRandomset
-  name: подарок
-  description: там может быть какая-та игрушка или музыкальный инструмент!
+  name: uplink-clown-present-name
+  description: uplink-clown-present-desc
   productEntity: PresentRandom
   cost:
     TrashBananaPeel: 2
   categories:
-    - AdditionalClown  
-    
+    - AdditionalClown
+
 - type: listing
   id: UplinkClothingNoSlipsShoesset
   productEntity: ToyHammer
   cost:
     TrashBananaPeel: 2
   categories:
-  - AdditionalClown     
-    
+    - AdditionalClown
+
 - type: listing
   id: UplinkToolboxset
-  name: Вещмешок с костюмом клоуна
-  description: Вещмешок, содержащий полный набор клоуна, включая клоунский КПК и карту. Вы можете сделать армию клоунов!
+  name: uplink-clown-duffel-name
+  description: uplink-clown-duffel-desc
   productEntity: ClothingBackpackDuffelSyndicateCostumeClown
   cost:
     TrashBananaPeel: 10
   categories:
-  - AdditionalClown  
-  
+    - AdditionalClown
+
 - type: listing
   id: breadset
-  name: Подозрительное мыло
-  description: Мыло. Оно более скользкое, чем его аналоги. После подскальзывания жертва улетает гораздо дальше. Идеально для клоунов, которые могут грамотно пользоваться бананами и мылом.
+  name: uplink-clown-soap-name
+  description: uplink-clown-soap-desc
   productEntity: SoapSyndie
   cost:
     TrashBananaPeel: 30
   categories:
-  - UplinkWearablesClown  
+    - UplinkWearablesClown
 
 - type: listing
   id: CigPackSyndicateset
-  name: Пачка сигарет синдиката
-  description: Тяжелая жизнь клоуна, посиди покури с мимом...
+  name: uplink-clown-cigpack-name
+  description: uplink-clown-cigpack-desc
   productEntity: CigPackSyndicate
   cost:
     TrashBananaPeel: 10
   categories:
-  - AdditionalClown  
+    - AdditionalClown
 
 - type: listing
-  id: SoapOmegaset 
-  name: ОМЕГА мыло
-  description: Я получил власть, которая и не снилась моей маме!! СЛАВА ХОНК-МАТЕРИ!
+  id: SoapOmegaset
+  name: uplink-clown-omegasoap-name
+  description: uplink-clown-omegasoap-desc
   productEntity: SoapOmega
   cost:
     TrashBananaPeel: 110
   categories:
-  - UplinkWearablesClown       
+    - UplinkWearablesClown
 
 - type: listing
   id: FoodBoxDonkpocketTeriyakiset
-  name: Укши!
-  description: Даёт вам в руки косметический предмет - кошачьи ушки. При надевании в слот головы у вас вырастут кошачьи уши и хвост. 
+  name: uplink-clown-ears-name
+  description: uplink-clown-ears-desc
   productEntity: ClothingHeadHatCatEars
   cost:
     TrashBananaPeel: 55
   categories:
-  - UplinkWearablesClown   
-  
+    - UplinkWearablesClown
+
 - type: listing
   id: DrinkNukieCanset
-  name: Банка нюка-робаст
-  description: Бодрящий напиток... очень бодрящий. Заполнен зелёной жидкостью, после употребления рекомендуется обратиться к врачу.
+  name: uplink-clown-nukiecan-name
+  description: uplink-clown-nukiecan-desc
   productEntity: DrinkNukieCan
   cost:
     TrashBananaPeel: 25
   categories:
-  - TrinketsClown    
-  
+    - TrinketsClown
+
 - type: listing
   id: SyndicateBombFakeset
-  name: Коробка петард
-  description: Надо испугать Службу безопасности,а то давно они небыли в панике!
+  name: uplink-clown-fakebomb-name
+  description: uplink-clown-fakebomb-desc
   productEntity: SnapPopBox
   cost:
     TrashBananaPeel: 5
   categories:
-  - UplinkWearablesClown    
-  
+    - UplinkWearablesClown
+
 - type: listing
   id: GoldenBikeHornset
   productEntity: GoldenBikeHorn
   cost:
     TrashBananaPeel: 25
   categories:
-  - TrinketsClown 
+    - TrinketsClown
 
 - type: listing
   id: ClothingShoesBlingset
@@ -161,15 +161,15 @@
   cost:
     TrashBananaPeel: 25
   categories:
-  - TrinketsClown   
-  
+    - TrinketsClown
+
 - type: listing
   id: FloorTileItemClownset
   productEntity: FloorTileItemClown
   cost:
     TrashBananaPeel: 1
   categories:
-  - TrinketsClown  
+    - TrinketsClown
 
 - type: listing
   id: FloorTileItemCarpetClownset
@@ -177,47 +177,45 @@
   cost:
     TrashBananaPeel: 1
   categories:
-  - TrinketsClown  
+    - TrinketsClown
 
 - type: listing
-  id: ClothingOuterHardsuitClownset 
+  id: ClothingOuterHardsuitClownset
   productEntity: ClothingOuterHardsuitClown
   cost:
     TrashBananaPeel: 60
   categories:
-  - AdditionalClown 
-  
+    - AdditionalClown
+
 - type: listing
   id: ToySwordset
   productEntity: ToySword
   cost:
     TrashBananaPeel: 4
   categories:
-  - AdditionalClown   
+    - AdditionalClown
 
-
-- type: storeCategory  # категория 
+- type: storeCategory
   id: UplinkWearablesClown
-  name: Основное #categories
+  name: uplink-clown-category-main
   priority: 1
-  
-- type: storeCategory  # категория 
+
+- type: storeCategory
   id: AdditionalClown
-  name: Бонус #categories
+  name: uplink-clown-category-bonus
   priority: 2
-  
-- type: storeCategory  # категория 
+
+- type: storeCategory
   id: TrinketsClown
-  name: Безделушки #categories
-  priority: 3  
-  
-  
-- type: entity #Сам аплинк
+  name: uplink-clown-category-trinkets
+  priority: 3
+
+- type: entity
   parent: [BaseItem, StorePresetUplinkClown]
   id: BananaPhoneInstrument2
-  name: бананафон
-  description: Прямая связь с Великой Хонк-Матерью. Ответственный клоун временно отсутствует — оставьте кожуру после сигнала.
-  suffix: Аплинк Клоун
+  name: uplink-clown-bananaphone-name
+  description: uplink-clown-bananaphone-desc
+  suffix: uplink-clown-bananaphone-suffix
   components:
   - type: Sprite
     sprite: Objects/Fun/Instruments/otherinstruments.rsi
@@ -260,14 +258,14 @@
     sentMessage: prayer-popup-notify-honkmother-sent
     notificationPrefix: prayer-chat-notify-honkmother
     verb: prayer-verbs-call
-    verbImage: null      
+    verbImage: null
   - type: Store
     balance:
       TrashBananaPeel: 0
 
 - type: currency
   id: TrashBananaPeel
-  displayName: "банановая кожура"
-  cash: 
+  displayName: uplink-clown-currency
+  cash:
     1: TrashBananaPeel
   canWithdraw: false
