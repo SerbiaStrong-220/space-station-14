@@ -364,6 +364,7 @@
       - id: HandheldHealthAnalyzer
       - id: CombatMedipen
       - id: DeathAcidifierImplanter
+      - id: MedkitCombatFilled #220 FixNew-Item
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateMedicalBundle

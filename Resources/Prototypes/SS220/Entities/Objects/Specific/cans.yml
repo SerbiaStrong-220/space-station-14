@@ -9,7 +9,7 @@
     sprite: SS220/Objects/Specific/jerrycan.rsi
     state: icon
   - type: Item
-    size: Normal
+    size: Ginormous #220 FixNew-Item
     sprite: SS220/Objects/Specific/jerrycan.rsi
   - type: Openable
     sound:
@@ -141,7 +141,7 @@
     maxFillLevels: 5
     fillBaseName: solution-
   - type: Item
-    size: Normal
+    size: Huge #220 FixNew-Item
     sprite: SS220/Objects/Specific/plastic_can.rsi
   - type: Openable
     sound:
