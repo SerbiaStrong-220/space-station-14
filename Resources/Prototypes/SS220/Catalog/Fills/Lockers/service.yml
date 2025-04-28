@@ -17,7 +17,10 @@
     - id: MaterialBananium1 #ss220-clownmimecyborg-update
     - id: MaterialBananium1 #ss220-clownmimecyborg-update
     - id: BananaPhoneInstrument2 #ss220-uplink
+    # ss220 clown uplink bgn
+    - id: BananaPhoneInstrument2
       prob: 0.25 # 25% шанс появления
+    # ss220 clown uplink end
     - !type:NestedSelector
       tableId: AllToyWeaponsBundleTable
       prob: 0.075
