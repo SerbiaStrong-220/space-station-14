@@ -401,8 +401,6 @@
   - type: Extractable
     grindableSolutionName: food
   - type: SpaceGarbage
-  - type: Currency           ##SS220
-    price:
   # ss220 clown uplink bgn
   - type: Currency
     price:
@@ -430,8 +428,6 @@
           Quantity: 1
         - ReagentId: Carbon
           Quantity: 2
-  - type: Currency        ##SS220
-    price:
   # ss220 clown uplink bgn
   - type: Currency
     price:
@@ -454,8 +450,6 @@
       path: /Audio/Effects/slip.ogg
       params:
         volume: -100
-  - type: Currency    ##SS220
-    price:
   # ss220 clown uplink bgn
   - type: Currency
     price:
@@ -474,8 +468,6 @@
     sprite: Objects/Materials/materials.rsi
     heldPrefix: peel
   - type: Slippery
-  - type: Currency     ##SS220
-    price:
   # ss220 clown uplink bgn
   - type: Currency
     price:
