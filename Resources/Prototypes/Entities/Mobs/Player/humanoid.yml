@@ -90,7 +90,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h comm) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000
+          time: 72000 
         - !type:DepartmentTimeRequirement
           department: Command
           time: 36000 #SS220 ghostrole-times (20h sec 10h comm) end
@@ -160,7 +160,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h comm) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000
+          time: 72000 
         - !type:DepartmentTimeRequirement
           department: Command
           time: 36000 #SS220 ghostrole-times (20h sec 10h comm) end
@@ -351,7 +351,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h eng) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000
+          time: 72000 
         - !type:DepartmentTimeRequirement
           department: Engineering
           time: 36000 #SS220 ghostrole-times (20h sec 10h eng) end
@@ -391,7 +391,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h eng) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000
+          time: 72000 
         - !type:DepartmentTimeRequirement
           department: Engineering
           time: 36000 #SS220 ghostrole-times (20h sec 10h eng) end
@@ -575,7 +575,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h med) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000
+          time: 72000 
         - !type:DepartmentTimeRequirement
           department: Medical
           time: 36000 #SS220 ghostrole-times (20h sec 10h med) end
