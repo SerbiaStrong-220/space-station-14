@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    xmlns:surgery="clr-namespace:Content.Client.SS220.Surgery.Ui"
+    xmlns:surgery="clr-namespace:Content.Client.SS220.Surgery.SurgeryStartUi"
     Title="{Loc 'surgery-observer-title'}"
     Resizable="False"
     MinSize="448 384"

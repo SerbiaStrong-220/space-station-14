@@ -18,13 +18,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
 
     private void OnStartSurgeryMessage(Entity<SurgeryStarterComponent> entity, ref StartSurgeryMessage args)
     {
-        if (args.User == null)
-        {
-            Log.Error($"Got {nameof(StartSurgeryMessage)} with user null field!");
-            return;
-        }
-
-        var ev = new StartSurgeryEvent(args.SurgeryGraphId, args.Target, args.User.Value);
+        var ev = new StartSurgeryEvent(args.SurgeryGraphId, args.Target, args.User);
         RaiseLocalEvent(entity, ev);
     }
 

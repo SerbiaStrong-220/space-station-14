@@ -26,7 +26,7 @@ public abstract partial class SharedSurgerySystem
 
     // TODO
     /// <summary>
-    /// Here we check for
+    /// Here we check for...
     /// </summary>
     protected bool IsValidPerformer(EntityUid uid, ProtoId<SurgeryGraphPrototype> id)
     {

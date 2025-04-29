@@ -11,7 +11,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
-namespace Content.Client.SS220.Surgery.Ui;
+namespace Content.Client.SS220.Surgery.SurgeryStartUi;
 
 [GenerateTypedNameReferences]
 public sealed partial class SurgeryDrapeMenu : FancyWindow
@@ -87,8 +87,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
     public void UpdateTarget(EntityUid target)
     {
         Target = target;
-        // TODO
-        // somehow update Window.
+        Title = Loc.GetString("surgery-start-ui-target", ("target", target));
     }
 
     private SurgeryPerformButton MakeOperationButton(SurgeryGraphPrototype surgeryGraph)
@@ -165,57 +164,5 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
     private void SetFormattedText(Tooltip tooltip, string locPath)
     {
         SetFormattedText(tooltip.SetMessage, (x) => tooltip.Text = x, locPath);
-    }
-}
-
-public sealed class SurgeryPerformButton : ContainerButton
-{
-    [ViewVariables]
-    public ProtoId<SurgeryGraphPrototype> GraphId;
-    public RichTextLabel RichTextLabel { get; }
-
-    public SurgeryPerformButton(ProtoId<SurgeryGraphPrototype> graphId)
-    {
-        GraphId = graphId;
-
-        AddStyleClass(StyleClassButton);
-        RichTextLabel = new RichTextLabel
-        {
-            StyleClasses = { StyleClassButton }
-        };
-        AddChild(RichTextLabel);
-
-        VerticalAlignment = VAlignment.Top;
-        HorizontalExpandAll = false;
-        VerticalExpandAll = true;
-        ToggleMode = true;
-    }
-
-    public void SetMessage(FormattedMessage msg)
-    {
-        RichTextLabel.SetMessage(msg);
-    }
-
-    [ViewVariables]
-    public string? Text { get => RichTextLabel.Text; set => RichTextLabel.Text = value; }
-
-    [ViewVariables]
-    public bool HorizontalExpandAll
-    {
-        set
-        {
-            HorizontalExpand = value;
-            RichTextLabel.HorizontalExpand = value;
-        }
-    }
-
-    [ViewVariables]
-    public bool VerticalExpandAll
-    {
-        set
-        {
-            VerticalExpand = value;
-            RichTextLabel.VerticalExpand = value;
-        }
     }
 }

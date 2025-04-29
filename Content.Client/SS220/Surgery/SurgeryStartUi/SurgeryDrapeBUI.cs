@@ -7,7 +7,7 @@ using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client.SS220.Surgery.Ui;
+namespace Content.Client.SS220.Surgery.SurgeryStartUi;
 
 public sealed class SurgeryDrapeBUI : BoundUserInterface
 {
@@ -27,10 +27,11 @@ public sealed class SurgeryDrapeBUI : BoundUserInterface
         _menu.OnSurgeryConfirmCLicked += (id, target) =>
         {
             var user = EntMan.GetNetEntity(_playerManager.LocalEntity);
-            SendMessage(new StartSurgeryMessage(id, EntMan.GetNetEntity(target), user));
 
             if (user == null)
                 return;
+
+            SendMessage(new StartSurgeryMessage(id, EntMan.GetNetEntity(target), user.Value));
 
             var ev = new StartSurgeryEvent(id, EntMan.GetNetEntity(target), user.Value);
             EntMan.EventBus.RaiseLocalEvent(Owner, ev);

@@ -2,7 +2,7 @@
 <surgery:SurgeryPuppetBox
     xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:surgery="clr-namespace:Content.Client.SS220.Surgery.Ui"
+    xmlns:surgery="clr-namespace:Content.Client.SS220.Surgery.SurgeryStartUi"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
         <TextureRect Name="Background" Stretch="Keep" MouseFilter="Pass"
             TexturePath="/Textures/SS220/Interface/Surgery/puppet/box.png"/>

@@ -7,7 +7,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 
-namespace Content.Client.SS220.Surgery.Ui;
+namespace Content.Client.SS220.Surgery.SurgeryStartUi;
 
 [GenerateTypedNameReferences]
 public sealed partial class SurgeryPuppetBox : Control

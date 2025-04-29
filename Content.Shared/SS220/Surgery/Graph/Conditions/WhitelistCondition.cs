@@ -14,8 +14,8 @@ public sealed partial class WhitelistCondition : IAbstractSurgeryGraphAvailabili
     [DataField(required: true)]
     public FlippingCondition<EntityWhitelist> FlippingCondition;
 
-    [DataField]
-    public string FailReasonPath = "surgery-availability-condition-damage-amount";
+    [DataField(required: true)]
+    public string FailReasonPath = "code-issue-condition";
 
     public bool Condition(EntityUid uid, IEntityManager entityManager, [NotNullWhen(false)] out string? reason)
     {

@@ -13,8 +13,6 @@ using Content.Shared.Examine;
 using Robust.Shared.Network;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
-using Content.Shared.Mobs;
 
 
 namespace Content.Server.SS220.Surgery.Systems;

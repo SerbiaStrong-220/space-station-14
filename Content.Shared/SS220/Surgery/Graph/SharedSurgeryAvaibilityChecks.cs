@@ -18,7 +18,7 @@ public static class SharedSurgeryAvaibilityChecks
         }
         return true;
     }
-
+    // TODO:
     public static bool IsSurgeryGraphAvailableTarget(EntityUid target, SurgeryGraphPrototype graph, IEntityManager entityManager, out string? reason)
     {
         reason = null;
