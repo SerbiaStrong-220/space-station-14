@@ -225,3 +225,6 @@
 
 - type: Tag
   id: WhitelistPdaIdPainter
+
+- type: Tag
+  id: CultYoggStealthProvidable

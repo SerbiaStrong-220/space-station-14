@@ -216,6 +216,7 @@
     - DoorBumpOpener
     - ZombifyableByMelee
     - AnomalyHost
+    - CultYoggStealthProvidable
 
 - type: entity
   save: false

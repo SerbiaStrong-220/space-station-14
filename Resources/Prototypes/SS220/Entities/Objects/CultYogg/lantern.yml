@@ -2,7 +2,8 @@
 
 - type: entity
   name: cult lantern
-  parent: [BaseItem, CultYoggRestrictedItem]
+  #parent: [BaseItem, CultYoggRestrictedItem]
+  parent: BaseItem
   id: LanternFlashCultYogg
   suffix: CultYogg
   description: description
@@ -22,13 +23,31 @@
     radius: 3
     energy: 2.5
     color: "#FFC458"
-  - type: Flash
-  - type: LimitedCharges
-    maxCharges: 1
-    charges: 1
-  - type: AutoRecharge
-    rechargeDuration: 120
-  - type: MeleeWeapon
-    damage:
-      types:
-        Blunt: 0 # melee weapon to allow flashing individual targetss
+  - type: Physics
+    bodyType: Dynamic
+    sleepingAllowed: false #ToDo_SS220 did this cause idk how else keep collision
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3  # fite me
+        friction: 0.2
+      StealthProvider:
+        shape:
+          !type:PhysShapeCircle
+            radius: 0.6 #should be same us light
+        hard: false
+        mask:
+        - MachineMask
+        layer:
+          - MachineLayer
+  - type: StealthProvider
+    stealthFixtureId: StealthProvider
+    whitelist:
+      tags:
+      - CultYoggStealthProvidable
