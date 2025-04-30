@@ -148,6 +148,14 @@ public sealed partial class StoreSystem : EntitySystem
 
     private void OnImplantActivate(EntityUid uid, StoreComponent component, OpenUplinkImplantEvent args)
     {
+        //ss220 fix uplink implant start (#2766)
+        if (component.AccountOwner == null)
+        {
+            _mind.TryGetMind(args.Performer, out var mind, out _);
+            component.AccountOwner = mind;
+        }
+        //ss220 fix uplink implant end (#2766)
+
         ToggleUi(args.Performer, uid, component);
     }
 
