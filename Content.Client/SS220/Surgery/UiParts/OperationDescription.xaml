@@ -12,7 +12,20 @@
                 <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
             </PanelContainer.PanelOverride>
         </PanelContainer>
-        <!-- Maybe I need to make it separate UI part -->
-        <RichTextLabel Name="OperationsLabel" Text="operation-description" HorizontalExpand="True" HorizontalAlignment="Center"/>
+        <!-- Kinda overall info to make player feel more confident.
+            It should give the right step order and some description for operation -->
+        <RichTextLabel Name="Header" Text="{Loc 'operation-description-header'}" HorizontalExpand="True" HorizontalAlignment="Left"/>
+        <RichTextLabel Name="OperationName" Text="operation-name" HorizontalExpand="True" HorizontalAlignment="Left" Margin="20 5 5 0"/>
+        <ScrollContainer HScrollEnabled="False" Margin="20 5 5 0"
+            HorizontalExpand="True" VerticalExpand="True" MouseFilter="Pass">
+            <BoxContainer
+                Name="OperationContainer"
+                Orientation="Vertical"
+                SizeFlagsStretchRatio="2"
+                HorizontalExpand="True"
+                VerticalExpand="True">
+                <RichTextLabel Name="OperationDescription" Text="operation-description"/>
+            </BoxContainer>
+        </ScrollContainer>
     </Control>
 </surgeryUiParts:OperationDescription>

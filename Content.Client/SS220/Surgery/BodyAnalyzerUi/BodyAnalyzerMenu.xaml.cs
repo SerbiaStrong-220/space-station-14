@@ -13,5 +13,27 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
+
+        OperationList.OnSurgeryClicked += (id, pressed) =>
+        {
+            OperationDescription.MakeDescription(id);
+            // TODO check it qol
+            OperationDescription.DataLocked = pressed;
+            OperationDescription.Visible = true;
+        };
+
+        OperationList.OnSurgeryHovered += (id) =>
+        {
+            OperationDescription.MakeDescription(id);
+            OperationDescription.Visible = true;
+        };
+
     }
+
+    public void ChangeTarget(EntityUid target)
+    {
+
+    }
+
+
 }

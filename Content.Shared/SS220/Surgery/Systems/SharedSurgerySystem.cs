@@ -163,6 +163,10 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         var target = GetEntity(args.Target);
         var user = GetEntity(args.User);
 
+        // TODO: make opening on yourself unavailable by drapes
+        if (target == user)
+            return;
+
         if (!IsValidTarget(target, args.SurgeryGraphId, out var reasonLocPath) || !IsValidPerformer(user, args.SurgeryGraphId))
         {
             // TODO more user friendly

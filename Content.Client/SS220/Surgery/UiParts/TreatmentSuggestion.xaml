@@ -13,6 +13,8 @@
             </PanelContainer.PanelOverride>
         </PanelContainer>
         <!-- Thing for first meeting to make player familiar  -->
-        <RichTextLabel Name="Treatment-suggestion" Text="Treatment-suggestion" HorizontalExpand="True" HorizontalAlignment="Center"/>
+        <RichTextLabel Name="HeaderText" Text="{Loc 'treatment-suggestion-header'}"/>
+        <RichTextLabel Name="TreatmentSuggestionText" Text="treatment-suggestion" HorizontalExpand="True"
+            HorizontalAlignment="Center" Margin="10 5 0 5"/>
     </Control>
 </surgeryUiParts:TreatmentSuggestion>

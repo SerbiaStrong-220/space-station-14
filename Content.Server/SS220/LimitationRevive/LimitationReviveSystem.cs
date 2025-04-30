@@ -31,21 +31,23 @@ public sealed class LimitationReviveSystem : EntitySystem
         SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
     }
 
-    private void OnDeadMobState(Entity<LimitationReviveComponent> ent, ref MobStateChangedEvent args)
+    private void OnDeadMobState(Entity<LimitationReviveComponent> entity, ref MobStateChangedEvent args)
     {
-        if (args.NewMobState == MobState.Dead && ent.Comp.IsAlreadyDead == false)
+        if (args.NewMobState == MobState.Dead && entity.Comp.IsAlreadyDead == false)
         {
-            ent.Comp.IsAlreadyDead = true;
-            ent.Comp.IsDamageTaken = false;
+            entity.Comp.IsAlreadyDead = true;
+            entity.Comp.IsDamageTaken = false;
 
-            ent.Comp.TimeToDamage = _timing.CurTime + ent.Comp.DelayBeforeDamage;
+            entity.Comp.TimeToDamage = _timing.CurTime + entity.Comp.DelayBeforeDamage;
         }
 
-        else if (ent.Comp.IsAlreadyDead && args.NewMobState is MobState.Alive or MobState.Critical)
+        else if (entity.Comp.IsAlreadyDead && args.NewMobState is MobState.Alive or MobState.Critical)
         {
-            ent.Comp.IsAlreadyDead = false;
-            ent.Comp.IsDamageTaken = false;
+            entity.Comp.IsAlreadyDead = false;
+            entity.Comp.IsDamageTaken = false;
         }
+
+        Dirty(entity);
     }
 
     private void OnCloning(Entity<LimitationReviveComponent> entity, ref CloningEvent args)
@@ -56,6 +58,8 @@ public sealed class LimitationReviveSystem : EntitySystem
         targetComp.IsDamageTaken = false;
         targetComp.IsAlreadyDead = false;
         targetComp.CounterOfDead = 0;
+
+        Dirty(entity);
     }
 
     /// <summary>
@@ -63,24 +67,24 @@ public sealed class LimitationReviveSystem : EntitySystem
     /// </summary>
     public void TryDamageAfterDeath(EntityUid uid)
     {
-        if(!TryComp<LimitationReviveComponent>(uid, out var reviveComp))
+        if (!TryComp<LimitationReviveComponent>(uid, out var reviveComp))
             return;
 
-        if(reviveComp.IsDamageTaken || reviveComp.IsAlreadyDead == false)
+        if (reviveComp.IsDamageTaken || reviveComp.IsAlreadyDead == false)
             return;
 
         reviveComp.CounterOfDead++;
         reviveComp.IsDamageTaken = true;
 
-        if(!TryComp<DamageableComponent>(uid, out var damageComp))
+        if (!TryComp<DamageableComponent>(uid, out var damageComp))
             return;
 
         _damageableSystem.TryChangeDamage(uid, reviveComp.TypeDamageOnDead, true);
 
         var tryAddTraitAfterDeath = _random.NextFloat(0.0f, 1.0f);
 
-        if (tryAddTraitAfterDeath < reviveComp.ChanceToAddTrait ) {
-
+        if (tryAddTraitAfterDeath < reviveComp.ChanceToAddTrait)
+        {
             var traitString = _prototype.Index<WeightedRandomPrototype>(reviveComp.WeightListProto)
                 .Pick(_random);
 
@@ -90,6 +94,8 @@ public sealed class LimitationReviveSystem : EntitySystem
                 _entityManager.AddComponents(uid, traitProto.Components, false);
 
         }
+
+        Dirty(uid, reviveComp);
     }
 
     public override void Update(float frameTime)
@@ -102,6 +108,8 @@ public sealed class LimitationReviveSystem : EntitySystem
                 limitationRevive.TimeToDamage != TimeSpan.Zero &&
                 limitationRevive.IsDamageTaken == false &&
                 limitationRevive.IsAlreadyDead)
+            {
                 TryDamageAfterDeath(uid);
+            }
     }
 }

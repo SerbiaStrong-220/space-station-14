@@ -13,6 +13,17 @@
             </PanelContainer.PanelOverride>
         </PanelContainer>
         <!-- Search label and auto indexing of all available operations -->
-        <RichTextLabel Name="OperationListTExt" Text="Operation-List" HorizontalExpand="True" HorizontalAlignment="Center"/>
+        <RichTextLabel Name="HeaderText" Text="{Loc 'operation-list-header'}"/>
+        <ScrollContainer Name="OperationScroll" HScrollEnabled="False"
+            HorizontalExpand="True" VerticalExpand="True" MouseFilter="Pass">
+            <BoxContainer
+                Name="OperationContainer"
+                Orientation="Vertical"
+                SizeFlagsStretchRatio="2"
+                HorizontalExpand="True"
+                VerticalExpand="True">
+                <!--  operations are added here by code  -->
+            </BoxContainer>
+        </ScrollContainer>
     </Control>
 </surgeryUiParts:OperationList>

@@ -13,6 +13,13 @@
             </PanelContainer.PanelOverride>
         </PanelContainer>
         <!-- Just lines of status like dead/alive/crit. Overall damage / brain damage. Keep it simple -->
-        <RichTextLabel Name="PatientStatusText" Text="Patient-status" HorizontalExpand="True" HorizontalAlignment="Center"/>
+        <RichTextLabel Name="HeaderText" Text="{Loc 'patient-status-header'}"/>
+        <BoxContainer Name="TextDataContainer" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10 5 0 5">
+            <RichTextLabel Name="MobStatus" Text="mob-status" HorizontalExpand="True" />
+            <RichTextLabel Name="OverallDamage" Text="overall-damage" HorizontalExpand="True"/>
+            <RichTextLabel Name="DecayDegree" Text="decay-degree" HorizontalExpand="True"/>
+        <!-- LOOK AT THIS DUUUDE ↓↓↓↓↓↓↓↓ -->
+            <RichTextLabel Name="BrainRotStatus" Text="brain-rot-status" HorizontalExpand="True"/>
+        </BoxContainer>
     </Control>
 </surgeryUiParts:PatientStatus>
