@@ -174,10 +174,12 @@
   id: MedkitCombat
   result: MedkitCombat
   name: lathe-recipe-MedkitCombat-name
+# ss220 medkit fix begin
   completetime: 4
   materials:
     Plastic: 500
     Durathread: 300
+  # ss220 medkit fix end
 
 - type: latheRecipe
   parent: BaseToolRecipe

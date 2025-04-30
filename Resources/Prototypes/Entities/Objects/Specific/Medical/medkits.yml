@@ -8,6 +8,7 @@
     sprite: SS220/Objects/Specific/Medical/firstaidkits.rsi # ss220 resprite
     state: firstaid
   - type: Storage
+# ss220 medkit fix begin
     whitelist:
       tags:
         - Bottle
@@ -24,11 +25,13 @@
         - SurgeryTool
         - Dropper
         - GasTank
+        - MaskBreath
       components:
         - Hypospray
         - Injector
         - Pill
         - HandLabeler
+# ss220 medkit fix end
     maxItemSize: Small
     grid:
     - 0,0,3,1
