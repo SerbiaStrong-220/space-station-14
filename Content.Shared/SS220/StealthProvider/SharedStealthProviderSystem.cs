@@ -3,45 +3,49 @@
 using Robust.Shared.Physics.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Physics;
+using Linguini.Syntax.Ast;
+using Content.Shared.SS220.CultYogg.MiGo;
+using Content.Shared.Inventory;
 
 namespace Content.Shared.SS220.StealthProvider;
-public sealed class SharedStealthProviderSystem : EntitySystem
+public abstract class SharedStealthProviderSystem : EntitySystem
 {
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<StealthProviderComponent, StartCollideEvent>(OnStartCollide);
-        SubscribeLocalEvent<StealthProviderComponent, EndCollideEvent>(OnEndCollide);
     }
 
-    private void OnStartCollide(Entity<StealthProviderComponent> ent, ref StartCollideEvent args)
+    public override void FrameUpdate(float frameTime)
     {
-        if (args.OurFixtureId != ent.Comp.StealthFixtureId)
-            return;
+        base.FrameUpdate(frameTime);
 
-        if (ent.Comp.Whitelist == null)
-            return;
+        var query = EntityQueryEnumerator<StealthProviderComponent>();
 
-        if (!_whitelist.IsValid(ent.Comp.Whitelist, args.OtherEntity))
-            return;
+        while (query.MoveNext(out var ent, out var comp))
+        {
+            if (!comp.Enabled)
+                return;
 
-        EnsureComp<ProvidedStealthComponent>(args.OtherEntity);
+            ProvideStealthInRange((ent, comp));
+        }
     }
 
-    private void OnEndCollide(Entity<StealthProviderComponent> ent, ref EndCollideEvent args)
+    private void ProvideStealthInRange(Entity<StealthProviderComponent> ent)
     {
-        if (args.OurFixtureId != ent.Comp.StealthFixtureId)
-            return;
+        var transform = Transform(ent);
 
-        if (ent.Comp.Whitelist == null)
-            return;
+        foreach (var reciever in _entityLookup.GetEntitiesInRange(transform.Coordinates, ent.Comp.Range))
+        {
+            if (ent.Comp.Whitelist is not null && !_whitelist.IsValid(ent.Comp.Whitelist, reciever))
+                continue;
 
-        if (!_whitelist.IsValid(ent.Comp.Whitelist, args.OtherEntity))
-            return;
-
-        RemComp<ProvidedStealthComponent>(args.OtherEntity);
+            var prov = EnsureComp<ProvidedStealthComponent>(reciever);
+            if (!prov.StealthProviders.Contains(ent))
+                prov.StealthProviders.Add(ent);
+        }
     }
 }

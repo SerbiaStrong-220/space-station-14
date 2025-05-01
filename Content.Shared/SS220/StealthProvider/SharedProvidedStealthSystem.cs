@@ -15,16 +15,37 @@ public sealed class SharedProvidedStealthSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ProvidedStealthComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<ProvidedStealthComponent, ComponentShutdown>(OnShutdown);
+        //SubscribeLocalEvent<ProvidedStealthComponent, ComponentShutdown>(OnShutdown);
     }
 
     private void OnStartup(Entity<ProvidedStealthComponent> ent, ref ComponentStartup args)
     {
         EnsureComp<StealthComponent>(ent);
+        EnsureComp<StealthOnMoveComponent>(ent);
     }
 
     private void OnShutdown(Entity<ProvidedStealthComponent> ent, ref ComponentShutdown args)
     {
-        RemComp<StealthComponent>(ent);
+        //RemComp<StealthComponent>(ent);
+        //RemComp<StealthOnMoveComponent>(ent);
+    }
+
+    public override void FrameUpdate(float frameTime)
+    {
+        base.FrameUpdate(frameTime);
+
+        var query = EntityQueryEnumerator<ProvidedStealthComponent>();
+        while (query.MoveNext(out var ent, out var comp))
+        {
+            CheckProvidersRange(comp);
+        }
+    }
+
+    private void CheckProvidersRange(ProvidedStealthComponent comp)
+    {
+        foreach (var povider in comp.StealthProviders)
+        {
+            //if()
+        }
     }
 }

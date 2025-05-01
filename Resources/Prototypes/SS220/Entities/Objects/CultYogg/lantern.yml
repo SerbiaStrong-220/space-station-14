@@ -3,7 +3,7 @@
 - type: entity
   name: cult lantern
   #parent: [BaseItem, CultYoggRestrictedItem]
-  parent: BaseItem
+  parent: [BaseItem, BaseLamp]
   id: LanternFlashCultYogg
   suffix: CultYogg
   description: description
@@ -11,43 +11,18 @@
   - type: Sprite
     sprite: SS220/Objects/CultYogg/lantern_cult.rsi
     layers:
-    - state: lantern-on
+    - state: lantern
+    - state: lantern_on
       shader: unshaded
+      visible: false
+      map: [ "light" ]
   - type: Clothing
     sprite: Objects/Tools/lantern.rsi
     equippedPrefix: off
     quickEquip: false
     slots:
     - Belt
-  - type: PointLight
-    radius: 3
-    energy: 2.5
-    color: "#FFC458"
-  - type: Physics
-    bodyType: Dynamic
-    sleepingAllowed: false #ToDo_SS220 did this cause idk how else keep collision
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.25,-0.25,0.25,0.25"
-        density: 20
-        mask:
-        - ItemMask
-        restitution: 0.3  # fite me
-        friction: 0.2
-      StealthProvider:
-        shape:
-          !type:PhysShapeCircle
-            radius: 0.6 #should be same us light
-        hard: false
-        mask:
-        - MachineMask
-        layer:
-          - MachineLayer
   - type: StealthProvider
-    stealthFixtureId: StealthProvider
     whitelist:
       tags:
       - CultYoggStealthProvidable

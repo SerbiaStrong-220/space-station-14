@@ -9,5 +9,6 @@ namespace Content.Shared.SS220.StealthProvider;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ProvidedStealthComponent : Component
 {
-
+    [ViewVariables(VVAccess.ReadWrite)]
+    public List<EntityUid>StealthProviders = new List<EntityUid>();
 }
