@@ -15,9 +15,9 @@ public sealed class SharedProvidedStealthSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ProvidedStealthComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<ProvidedStealthComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<ProvidedStealthComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
-        SubscribeLocalEvent<ProvidedStealthComponent, BeingUsedAttemptEvent>(OnUseAttempt);
+        SubscribeLocalEvent<ProvidedStealthComponent, ComponentRemove>(OnRemove);
+        //SubscribeLocalEvent<ProvidedStealthComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
+        //SubscribeLocalEvent<ProvidedStealthComponent, BeingUsedAttemptEvent>(OnUseAttempt);
     }
 
     private void OnInit(Entity<ProvidedStealthComponent> ent, ref ComponentInit args)
@@ -26,10 +26,14 @@ public sealed class SharedProvidedStealthSystem : EntitySystem
         EnsureComp<StealthOnMoveComponent>(ent);
     }
 
-    private void OnShutdown(Entity<ProvidedStealthComponent> ent, ref ComponentShutdown args)
+    private void OnRemove(Entity<ProvidedStealthComponent> ent, ref ComponentRemove args)
     {
-        RemComp<StealthComponent>(ent);
-        RemComp<StealthOnMoveComponent>(ent);
+        //required cause spaming logs
+        if (HasComp<StealthOnMoveComponent>(ent))
+            RemCompDeferred<StealthOnMoveComponent>(ent);
+
+        if (HasComp<StealthComponent>(ent))
+            RemCompDeferred<StealthComponent>(ent);
     }
     private void OnEntInserted(Entity<ProvidedStealthComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
