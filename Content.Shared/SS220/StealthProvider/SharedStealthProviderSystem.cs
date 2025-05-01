@@ -9,7 +9,7 @@ using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.Inventory;
 
 namespace Content.Shared.SS220.StealthProvider;
-public abstract class SharedStealthProviderSystem : EntitySystem
+public sealed class SharedStealthProviderSystem : EntitySystem
 {
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
