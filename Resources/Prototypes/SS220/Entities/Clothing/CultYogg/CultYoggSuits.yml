@@ -33,6 +33,9 @@
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCultYogg
   - type: StuckOnEquip
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase

@@ -55,3 +55,6 @@
         base:
           True: { state: blood }
           False: { state: cultaltar }
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
