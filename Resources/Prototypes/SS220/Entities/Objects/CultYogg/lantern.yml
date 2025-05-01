@@ -3,7 +3,8 @@
 - type: entity
   name: cult lantern
   #parent: [BaseItem, CultYoggRestrictedItem]
-  parent: [BaseItem, BaseLamp]
+  #parent: [BaseItem, BaseLamp]
+  parent: BaseItem
   id: LanternFlashCultYogg
   suffix: CultYogg
   description: description
@@ -16,6 +17,39 @@
       shader: unshaded
       visible: false
       map: [ "light" ]
+  - type: Item
+    sprite: Objects/Misc/Lights/lights.rsi
+    size: Normal
+    heldPrefix: off
+  - type: HandheldLight
+    addPrefix: true
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+        id: radiating
+        maxDuration: 2.0
+        startValue: 3.0
+        endValue: 2.0
+        isLooped: true
+        reverseWhenFinished: true
+      - !type:PulseBehaviour
+        id: blinking
+        interpolate: Nearest
+        maxDuration: 1.0
+        minValue: 0.1
+        maxValue: 2.0
+        isLooped: true
+  - type: PointLight
+    enabled: false
+    radius: 3
+    energy: 2
+    netsync: false
+  - type: ToggleableLightVisuals
+  - type: Appearance
+  - type: Physics
+    canCollide: false
   - type: Clothing
     sprite: Objects/Tools/lantern.rsi
     equippedPrefix: off

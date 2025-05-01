@@ -1,8 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-
 using Robust.Shared.GameStates;
-using Content.Shared.Whitelist;
 
 namespace Content.Shared.SS220.StealthProvider;
 
@@ -10,5 +8,5 @@ namespace Content.Shared.SS220.StealthProvider;
 public sealed partial class ProvidedStealthComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite)]
-    public List<EntityUid>StealthProviders = new List<EntityUid>();
+    public List<Entity<StealthProviderComponent>> StealthProviders = new List<Entity<StealthProviderComponent>>();
 }
