@@ -19,9 +19,9 @@ public sealed class SharedStealthProviderSystem : EntitySystem
         base.Initialize();
     }
 
-    public override void FrameUpdate(float frameTime)
+    public override void Update(float frameTime)
     {
-        base.FrameUpdate(frameTime);
+        base.Update(frameTime);
 
         var query = EntityQueryEnumerator<StealthProviderComponent>();
 

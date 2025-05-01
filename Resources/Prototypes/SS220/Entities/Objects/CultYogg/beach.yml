@@ -38,3 +38,6 @@
   - type: DisarmOnAttack
     chance: 0.6
     heavyAttackChance: 0.2
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable

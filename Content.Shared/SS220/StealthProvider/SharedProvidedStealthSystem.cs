@@ -1,8 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Robust.Shared.Physics.Events;
 using Content.Shared.Whitelist;
-using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
 
 namespace Content.Shared.SS220.StealthProvider;
@@ -14,11 +12,11 @@ public sealed class SharedProvidedStealthSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ProvidedStealthComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<ProvidedStealthComponent, ComponentInit>(OnInit);
         //SubscribeLocalEvent<ProvidedStealthComponent, ComponentShutdown>(OnShutdown);
     }
 
-    private void OnStartup(Entity<ProvidedStealthComponent> ent, ref ComponentStartup args)
+    private void OnInit(Entity<ProvidedStealthComponent> ent, ref ComponentInit args)
     {
         EnsureComp<StealthComponent>(ent);
         EnsureComp<StealthOnMoveComponent>(ent);
@@ -30,9 +28,9 @@ public sealed class SharedProvidedStealthSystem : EntitySystem
         //RemComp<StealthOnMoveComponent>(ent);
     }
 
-    public override void FrameUpdate(float frameTime)
+    public override void Update(float frameTime)
     {
-        base.FrameUpdate(frameTime);
+        base.Update(frameTime);
 
         var query = EntityQueryEnumerator<ProvidedStealthComponent>();
         while (query.MoveNext(out var ent, out var comp))
