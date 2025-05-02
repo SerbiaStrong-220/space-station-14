@@ -21,6 +21,18 @@
     Alexander: 3
 
 - type: reaction
+  id: Daiquiri
+  reactants:
+    Rum:
+      amount: 4
+    JuiceLime:
+      amount: 1
+    Sugar:
+      amount: 1
+  products:
+    Daiquiri: 6
+
+- type: reaction
   id: MojitoAlt
   reactants:
     Daiquiri:
@@ -47,6 +59,18 @@
     Negroni: 6
 
 - type: reaction
+  id: EspressoMartini
+  reactants:
+    BlackRussian:
+      amount: 6
+    Sugar:
+      amount: 1
+    Coffee:
+      amount: 3
+  products:
+    EspressoMartini: 10
+
+- type: reaction
   id: OldFashioned
   reactants:
     Whiskey:
@@ -63,7 +87,7 @@
 - type: reaction
   id: BadTouch
   reactants:
-    Vodka:
+    Vodka: 
       amount: 1
     LemonLime:
       amount: 1
@@ -79,7 +103,7 @@
 - type: reaction
   id: DarkAndStormy
   reactants:
-    Rum:
+    Rum: 
       amount: 1
     Ale: # Must be ginger beer
       amount: 2
@@ -113,6 +137,16 @@
       amount: 1
   products:
     MaiTai: 6
+
+- type: reaction
+  id: MoscowMule
+  reactants:
+    Yorsh: # Must be ginger beer + vodka
+      amount: 5
+    JuiceLime:
+      amount: 1
+  products:
+    MoscowMule: 6
 
 - type: reaction
   id: Paloma

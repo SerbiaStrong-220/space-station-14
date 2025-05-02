@@ -10,12 +10,12 @@ public sealed partial class RestrictedItemSystem : SharedRestrictedItemSystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RestrictedItemComponent, GettingUsedAttemptEvent>(OnUseAttempt);
+        SubscribeLocalEvent<RestrictedItemComponent, BeingUsedAttemptEvent>(OnUseAttempt);
     }
 
-    private void OnUseAttempt(Entity<RestrictedItemComponent> ent, ref GettingUsedAttemptEvent args)
+    private void OnUseAttempt(Entity<RestrictedItemComponent> ent, ref BeingUsedAttemptEvent args)
     {
-        if (!ItemCheck(args.User, ent))
+        if (!ItemCheck(args.Uid, ent))
             args.Cancel();
     }
 }

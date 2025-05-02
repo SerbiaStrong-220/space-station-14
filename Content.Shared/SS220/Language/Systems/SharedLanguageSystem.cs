@@ -1,36 +1,15 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Ghost;
 using Content.Shared.SS220.Language.Components;
-using Robust.Shared.Random;
-using Content.Shared.Paper;
-using Content.Shared.SS220.Paper;
-using System.Text;
 
 namespace Content.Shared.SS220.Language.Systems;
 
-public abstract partial class SharedLanguageSystem : EntitySystem
+public abstract class SharedLanguageSystem : EntitySystem
 {
     [Dependency] private readonly LanguageManager _language = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
 
     public readonly string UniversalLanguage = "Universal";
     public readonly string GalacticLanguage = "Galactic";
-
-    public int Seed = 0;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<PaperSetContentAttemptEvent>(OnPaperSetContentAttempt, after: [typeof(SharedDocumentHelperSystem)]);
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        _cachedMessages.Clear();
-    }
 
     #region Component
     /// <summary>
@@ -68,24 +47,18 @@ public abstract partial class SharedLanguageSystem : EntitySystem
             return false;
 
         var newDef = new LanguageDefinition(languageId, canSpeak);
-        return AddLanguage(ent, newDef);
+        AddLanguage(ent, newDef);
+        return true;
     }
 
     /// <summary>
     /// Adds a <see cref="LanguageDefinition"/> to the <see cref="LanguageComponent.AvailableLanguages"/>
     /// </summary>
-    public bool AddLanguage(Entity<LanguageComponent> ent, LanguageDefinition definition)
+    public void AddLanguage(Entity<LanguageComponent> ent, LanguageDefinition definition)
     {
-        foreach (var cur in ent.Comp.AvailableLanguages)
-        {
-            if (cur.IsEqual(definition))
-                return false; // Doesn't add definition with same Id
-        }
-
         ent.Comp.AvailableLanguages.Add(definition);
         ent.Comp.SelectedLanguage ??= definition.Id;
         Dirty(ent);
-        return true;
     }
 
     /// <summary>
@@ -133,9 +106,6 @@ public abstract partial class SharedLanguageSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    /// Gets <see cref="LanguageDefinition"/> from <see cref="LanguageComponent.AvailableLanguages"/> by <paramref name="languageId"/>
-    /// </summary>
     public static LanguageDefinition? GetDefinition(Entity<LanguageComponent> ent, string languageId)
     {
         return ent.Comp.AvailableLanguages.Find(l => l.Id == languageId);
@@ -175,15 +145,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     public bool CanSpeak(EntityUid uid, string languageId)
     {
         if (!TryComp<LanguageComponent>(uid, out var comp))
-        {
-            // Энтити без компонента языка всегда говорят на универсальном
-            if (languageId == UniversalLanguage)
-                return true;
-
             return false;
-        }
-        else if (comp.KnowAllLLanguages)
-            return true;
 
         return ContainsLanguage((uid, comp), languageId, true);
     }
@@ -199,8 +161,6 @@ public abstract partial class SharedLanguageSystem : EntitySystem
 
         if (!TryComp<LanguageComponent>(uid, out var comp))
             return false;
-        else if (comp.KnowAllLLanguages)
-            return true;
 
         return ContainsLanguage((uid, comp), languageId);
     }
@@ -211,57 +171,5 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     public bool KnowsAllLanguages(EntityUid uid)
     {
         return HasComp<GhostComponent>(uid);
-    }
-
-    /// <summary>
-    ///     Sets the color of the prototype language to the message 
-    /// </summary>
-    public string SetColor(string message, LanguagePrototype proto)
-    {
-        if (proto.Color == null)
-            return message;
-
-        var color = proto.Color.Value.ToHex();
-        message = $"[color={color}]{message}[/color]";
-        return message;
-    }
-
-    /// <summary>
-    ///     Copy of Content.Server.Chat.Systems.ObfuscateMessageReadability
-    /// </summary>
-    public string ObfuscateMessageReadability(string message, float chance)
-    {
-        for (var i = 0; i < message.Length; i++)
-        {
-            if (char.IsWhiteSpace(message[i]))
-            {
-                continue;
-            }
-
-            if (_random.Prob(1 - chance))
-            {
-                message = message.Remove(i);
-                message = message.Insert(i, "~");
-            }
-        }
-
-        return message;
-    }
-
-    /// <summary>
-    ///     Returns the int value from a string.
-    /// </summary>
-    public static int GetSeedFromString(string input)
-    {
-        const int p = 31;
-        const int m = 1000000009;
-        int result = 0;
-        int p_pow = 1;
-        foreach (var c in input)
-        {
-            result = (result + (c + 1) * p_pow) % m;
-            p_pow = p_pow * p % m;
-        }
-        return result;
     }
 }

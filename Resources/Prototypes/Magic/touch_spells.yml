@@ -4,7 +4,7 @@
   description: Instantly gibs a target.
   components:
   - type: EntityTargetAction
-    useDelay: 240 # SS220 Smite Delay from 90 to 240
+    useDelay: 90
     itemIconStyle: BigAction
     whitelist:
       components:
@@ -25,6 +25,8 @@
 - type: entity
   id: ActionSmiteNoReq
   parent: ActionSmite
+  name: Smite
+  description: Instantly gibs a target.
   components:
   - type: Magic
 

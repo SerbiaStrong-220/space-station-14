@@ -106,6 +106,6 @@
 - type: stack
   id: GoliathHide
   name: goliath hide
-  icon: { sprite: /Textures/SS220/Objects/Materials/hide.rsi, state: goliath_hide } #SS220-goliathresprite
+  icon: { sprite: /Textures/Objects/Materials/hide.rsi, state: goliath_hide }
   spawn: MaterialGoliathHide1
   maxCount: 30

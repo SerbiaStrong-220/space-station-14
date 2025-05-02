@@ -35,38 +35,19 @@
     - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
-  parent: Clothing
+  parent: ClothingNeckBase
   id: ClothingNeckStethoscope
   name: stethoscope
   description: An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing.
   components:
-  - type: Item
-    size: Small
   - type: Sprite
     sprite: Clothing/Neck/Misc/stethoscope.rsi
-    state: icon
   - type: Clothing
     sprite: Clothing/Neck/Misc/stethoscope.rsi
-    quickEquip: true
-    slots:
-    - neck
   - type: Stethoscope
   - type: Tag #SS220-pr: FIX CLOTHING TAGS
     tags: #SS220-pr: FIX CLOTHING TAGS
     - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
-
-- type: entity
-  id: ActionStethoscope
-  name: Listen with stethoscope
-  components:
-  - type: EntityTargetAction
-    icon:
-      sprite: Clothing/Neck/Misc/stethoscope.rsi
-      state: icon
-    event: !type:StethoscopeActionEvent
-    checkCanInteract: false
-    priority: -1
-    itemIconStyle: BigAction
 
 - type: entity
   parent: ClothingNeckBase
@@ -77,8 +58,6 @@
   - type: Sprite
     sprite: Clothing/Neck/Misc/bling.rsi
   - type: Clothing
-    sprite: Clothing/Neck/Misc/bling.rsi
-  - type: Item
     sprite: Clothing/Neck/Misc/bling.rsi
   - type: Tag #SS220-pr: FIX CLOTHING TAGS
     tags: #SS220-pr: FIX CLOTHING TAGS
@@ -96,6 +75,21 @@
     sprite: Clothing/Neck/Misc/lawyerbadge.rsi
   - type: TypingIndicatorClothing
     proto: lawyer
+  - type: Tag #SS220-pr: FIX CLOTHING TAGS
+    tags: #SS220-pr: FIX CLOTHING TAGS
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
+
+- type: entity
+  id: ActionStethoscope
+  name: Listen with stethoscope
+  components:
+  - type: EntityTargetAction
+    icon:
+      sprite: Clothing/Neck/Misc/stethoscope.rsi
+      state: icon
+    event: !type:StethoscopeActionEvent
+    checkCanInteract: false
+    priority: -1
 
 - type: entity
   parent: ClothingNeckBase

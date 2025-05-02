@@ -331,9 +331,6 @@
         - DrinkBottle
         - DrinkCan
         - Beer
-        - Wine
-      components:
-        - ReactionMixer
   - type: Construction
     graph: Shelf
     node: ShelfBar
@@ -400,15 +397,6 @@
         - Ingredient
         - Trash
         - Plastic
-        - SaltShaker
-        - PepperShaker
-        - Ketchup
-        - Hotsauce
-        - Coldsauce
-        - BBQsauce
-      components:
-        - Utensil
-        - Bin
   - type: Construction
     graph: Shelf
     node: ShelfKitchen
@@ -474,11 +462,6 @@
         - ChemDispensable
         - GlassBeaker
         - Bottle
-        - Medkit
-        - CentrifugeCompatible
-        - PillCanister
-        - Syringe
-        - Spray
   - type: Construction
     graph: Shelf
     node: ShelfChemistry

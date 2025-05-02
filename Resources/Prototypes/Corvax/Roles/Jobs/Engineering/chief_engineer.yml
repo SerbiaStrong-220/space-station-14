@@ -4,18 +4,6 @@
   description: job-description-ce
   playTimeTracker: JobChiefEngineer
   requirements:
-    # SS220 Role requirements begin
-    # off
-    # - !type:RoleTimeRequirement
-    #   role: JobAtmosphericTechnician
-    #   time: 9000 #2.5 hrs
-    # - !type:RoleTimeRequirement
-    #   role: JobStationEngineer
-    #   time: 18000 #5 hrs
-    # - !type:DepartmentTimeRequirement
-    #   department: Engineering
-    #   time: 36000 #10 hrs
-    # off
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 180000 # SS220-RoleTime
@@ -25,7 +13,6 @@
       inverted: true
       species:
       - Felinid #SS220-jobbans end
-    # SS220 Role requirements end
   weight: 10
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"
@@ -43,7 +30,6 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-      - type: DefibrillatorSkill #SS220 LimitationRevive
 
 - type: startingGear
   id: ChiefEngineerGear

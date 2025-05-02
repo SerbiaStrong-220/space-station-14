@@ -8,7 +8,8 @@
     issuer: objective-issuer-spider-queen
   - type: RoleRequirement
     roles:
-    - SpiderQueenRole
+      mindRoles:
+      - SpiderQueenRole
 
 - type: entity
   parent: BaseSpiderQueenObjective

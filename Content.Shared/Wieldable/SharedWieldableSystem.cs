@@ -24,7 +24,6 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Collections;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -131,12 +130,14 @@ public abstract class SharedWieldableSystem : EntitySystem
 
     private void OnSpeedModifierWielded(EntityUid uid, SpeedModifiedOnWieldComponent component, ItemWieldedEvent args)
     {
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
+        if (args.User != null)
+            _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
     }
 
     private void OnSpeedModifierUnwielded(EntityUid uid, SpeedModifiedOnWieldComponent component, ItemUnwieldedEvent args)
     {
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
+        if (args.User != null)
+            _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
     }
 
     private void OnRefreshSpeedWielded(EntityUid uid, SpeedModifiedOnWieldComponent component, ref HeldRelayedEvent<RefreshMovementSpeedModifiersEvent> args)
@@ -194,9 +195,6 @@ public abstract class SharedWieldableSystem : EntitySystem
             args.Handled = TryWield(uid, component, args.User);
         else if (component.UnwieldOnUse)
             args.Handled = TryUnwield(uid, component, args.User);
-
-        if (HasComp<UseDelayComponent>(uid) && !component.UseDelayOnWield)
-            args.ApplyDelay = false;
     }
 
     public bool CanWield(EntityUid uid, WieldableComponent component, EntityUid user, bool quiet = false)
@@ -253,11 +251,9 @@ public abstract class SharedWieldableSystem : EntitySystem
         if (!CanWield(used, component, user))
             return false;
 
-        if (TryComp(used, out UseDelayComponent? useDelay) && component.UseDelayOnWield)
-        {
-            if (!_delay.TryResetDelay((used, useDelay), true))
-                return false;
-        }
+        if (TryComp(used, out UseDelayComponent? useDelay)
+            && !_delay.TryResetDelay((used, useDelay), true))
+            return false;
 
         var attemptEv = new WieldAttemptEvent(user);
         RaiseLocalEvent(used, ref attemptEv);
@@ -278,21 +274,26 @@ public abstract class SharedWieldableSystem : EntitySystem
             _audio.PlayPredicted(component.WieldSound, used, user);
 
         //This section handles spawning the virtual item(s) to occupy the required additional hand(s).
-        var virtuals = new ValueList<EntityUid>();
-        for (var i = 0; i < component.FreeHandsRequired; i++)
+        //Since the client can't currently predict entity spawning, only do this if this is running serverside.
+        //Remove this check if TrySpawnVirtualItem in SharedVirtualItemSystem is allowed to complete clientside.
+        if (_netManager.IsServer)
         {
-            if (_virtualItem.TrySpawnVirtualItemInHand(used, user, out var virtualItem, true))
+            var virtuals = new List<EntityUid>();
+            for (var i = 0; i < component.FreeHandsRequired; i++)
             {
-                virtuals.Add(virtualItem.Value);
-                continue;
-            }
+                if (_virtualItem.TrySpawnVirtualItemInHand(used, user, out var virtualItem, true))
+                {
+                    virtuals.Add(virtualItem.Value);
+                    continue;
+                }
 
-            foreach (var existingVirtual in virtuals)
-            {
-                QueueDel(existingVirtual);
-            }
+                foreach (var existingVirtual in virtuals)
+                {
+                    QueueDel(existingVirtual);
+                }
 
-            return false;
+                return false;
+            }
         }
 
         var selfMessage = Loc.GetString("wieldable-component-successful-wield", ("item", used));

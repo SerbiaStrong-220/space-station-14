@@ -37,7 +37,6 @@
   - HoloprojectorField
   - SignallerAdvanced
   #- DeviceQuantumSpinInverter #SS220 - Until better times
-  - DeviceDesynchronizer
   - ThermalVisorRND # SS220 Thermals
 
 - type: latheRecipePack
@@ -62,6 +61,7 @@
   recipes:
   - WeaponPistolCHIMP
   - WeaponForceGun
+  - WeaponLaserSvalinn
   - WeaponProtoKineticAccelerator
   - WeaponTetherGun
   - WeaponGauntletGorilla

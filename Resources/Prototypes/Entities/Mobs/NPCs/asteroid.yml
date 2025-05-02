@@ -70,7 +70,6 @@
     factions:
     - SimpleHostile
   - type: HTN
-    constantlyReplan: false
     rootTask:
       task: GoliathCompound
     blackboard:

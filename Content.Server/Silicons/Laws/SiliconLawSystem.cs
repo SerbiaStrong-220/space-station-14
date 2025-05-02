@@ -18,7 +18,6 @@ using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Wires;
 using Robust.Server.GameObjects;
-using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
@@ -38,7 +37,6 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!; // SS220 Antag ban fix
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -178,15 +176,14 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         });
     }
 
-    protected override void EnsureSubvertedSiliconRole(EntityUid mindId)
+    private void EnsureSubvertedSiliconRole(EntityUid mindId)
     {
         if (_roles.MindHasRole<SubvertedSiliconRoleComponent>(mindId))
             return;
 
         // SS220 antag ban
-        if (TryComp<MindComponent>(mindId, out var mind)
-            && mind.CurrentEntity is { } entity
-            && _playerManager.TryGetSessionByEntity(entity, out var session)
+        if (_mind.TryGetSession(mindId, out var session)
+            && session.AttachedEntity is { } entity
             && _banManager.GetJobBans(session.UserId) is { } roleBans
             && roleBans.Contains("SubvertedSilicon"))
         {
@@ -200,16 +197,11 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             ghostRole.RoleRules = Loc.GetString("roles-antag-subverted-silicon-objective");
         }
 
-        base.EnsureSubvertedSiliconRole(mindId);
-
-        if (!_roles.MindHasRole<SubvertedSiliconRoleComponent>(mindId))
-            _roles.MindAddRole(mindId, "MindRoleSubvertedSilicon", silent: true);
+        _roles.MindAddRole(mindId, "MindRoleSubvertedSilicon", silent: true);
     }
 
-    protected override void RemoveSubvertedSiliconRole(EntityUid mindId)
+    private void RemoveSubvertedSiliconRole(EntityUid mindId)
     {
-        base.RemoveSubvertedSiliconRole(mindId);
-
         if (_roles.MindHasRole<SubvertedSiliconRoleComponent>(mindId))
             _roles.MindTryRemoveRole<SubvertedSiliconRoleComponent>(mindId);
     }
@@ -269,10 +261,8 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         return ev.Laws;
     }
 
-    public override void NotifyLawsChanged(EntityUid uid, SoundSpecifier? cue = null)
+    public void NotifyLawsChanged(EntityUid uid, SoundSpecifier? cue = null)
     {
-        base.NotifyLawsChanged(uid, cue);
-
         if (!TryComp<ActorComponent>(uid, out var actor))
             return;
 

@@ -1,23 +1,28 @@
-- type: localizedDataset
+- type: dataset
   id: RatKingCommandStay
   values:
-    prefix: rat-king-command-stay-
-    count: 3
+    - "Сидеть!"
+    - "Стоять!"
+    - "Стоп!"
 
-- type: localizedDataset
+- type: dataset
   id: RatKingCommandFollow
   values:
-    prefix: rat-king-command-follow-
-    count: 2
+    - "К ноге!"
+    - "За мной!"
 
-- type: localizedDataset
+- type: dataset
   id: RatKingCommandCheeseEm
   values:
-    prefix: rat-king-command-cheese-
-    count: 4
+    - "В атаку!"
+    - "Фас!"
+    - "Убить!"
+    - "Убейте его!"
+    - "Рви их!" #SS220-resprite-ratking-action
 
-- type: localizedDataset
+- type: dataset
   id: RatKingCommandLoose
   values:
-    prefix: rat-king-command-loose-
-    count: 2
+    - "Вольно!"
+    - "Врассыпную!"
+

@@ -2,7 +2,6 @@ using Content.Server.Botany.Components;
 using Content.Server.Botany.Systems;
 using Content.Server.SS220.CultYogg.Fungus;
 using Content.Shared.Atmos;
-using Content.Shared.Database;
 using Content.Shared.EntityEffects;
 using Content.Shared.Random;
 using Robust.Shared.Audio;
@@ -13,10 +12,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Botany;
 
-[Prototype]
+[Prototype("seed")]
 public sealed partial class SeedPrototype : SeedData, IPrototype
 {
-    [IdDataField] public string ID { get; private set; } = default!;
+    [IdDataField] public string ID { get; private init; } = default!;
 }
 
 public enum HarvestType : byte
@@ -248,18 +247,6 @@ public partial class SeedData
     /// </summary>
     [DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<SeedPrototype>))]
     public List<string> MutationPrototypes = new();
-
-    /// <summary>
-    ///  Log impact for when the seed is planted.
-    /// </summary>
-    [DataField]
-    public LogImpact? PlantLogImpact = null;
-
-    /// <summary>
-    ///  Log impact for when the seed is harvested.
-    /// </summary>
-    [DataField]
-    public LogImpact? HarvestLogImpact = null;
 
     public SeedData Clone()
     {

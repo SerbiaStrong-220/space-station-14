@@ -22,7 +22,7 @@ public sealed partial class CriminalRecordsHackerComponent : Component
     /// Dataset of random reasons to use.
     /// </summary>
     [DataField]
-    public ProtoId<LocalizedDatasetPrototype> Reasons = "CriminalRecordsWantedReasonPlaceholders";
+    public ProtoId<DatasetPrototype> Reasons = "CriminalRecordsWantedReasonPlaceholders";
 
     // SS220-criminal-console-fix
     /// <summary>

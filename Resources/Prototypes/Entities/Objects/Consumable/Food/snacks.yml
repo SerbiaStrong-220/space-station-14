@@ -748,7 +748,7 @@
     state: fortune
   - type: Item
   - type: RandomMetadata
-    descriptionSegments: [DescriptionsCookieFortune]
+    descriptionSegments: [CookieFortuneDescriptions]
 
 - type: entity
 #  categories: [ HideSpawnMenu ] #SS220-Maints-Update

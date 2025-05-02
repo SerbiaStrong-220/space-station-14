@@ -1,6 +1,6 @@
 - type: entity
   name: stun baton
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem]
   id: Stunbaton
   description: A stun baton for incapacitating people with. Actively harming with this is considered bad tone.
   components:
@@ -30,9 +30,6 @@
       path: /Audio/Machines/button.ogg
       params:
         variation: 0.250
-  - type: ItemTogglePrefix
-    prefixOn: on
-    prefixOff: off
 #SS220-Stunbatom-rework begin
   - type: ItemToggleMeleeWeapon
     activatedSoundOnHit:
@@ -135,7 +132,7 @@
 
 - type: entity
   name: truncheon
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem]
   id: Truncheon
   description: A rigid, steel-studded baton, meant to harm.
   components:
@@ -198,6 +195,7 @@
     - type: Flash
     - type: LimitedCharges
       maxCharges: 5
+      charges: 5
     - type: MeleeWeapon
       wideAnimationRotation: 180
       damage:
@@ -233,10 +231,11 @@
   components:
     - type: LimitedCharges
       maxCharges: 2
+      charges: 2
 
 - type: entity
   name: portable flasher
-  parent: [BaseMachine, BaseSecurityContraband]
+  parent: [BaseMachine]
   id: PortableFlasher
   description: An ultrabright flashbulb with a proximity trigger, useful for making an area security-only.
   components:

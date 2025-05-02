@@ -4,7 +4,6 @@ using Content.Server.DeviceNetwork.Components;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Power.SMES;
-using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.SMES;
 using Robust.Server.GameObjects;
 

@@ -27,7 +27,6 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.CCVars;
 using Robust.Shared.Configuration;
-using Content.Shared.SS220.Language.Systems;
 
 namespace Content.Server.Telephone;
 
@@ -102,16 +101,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         if (!_recentChatMessages.Add((args.Source, args.Message, entity)))
             return;
 
-        // SS220 languages begin
-        string message;
-        if (args.LanguageMessage is { } languageMessage)
-            message = languageMessage.GetMessageWithLanguageKeys();
-        else
-            message = args.Message;
-
-        SendTelephoneMessage(args.Source, message, entity);
-        //SendTelephoneMessage(args.Source, args.Message, entity);
-        // SS220 languages end
+        SendTelephoneMessage(args.Source, args.Message, entity);
     }
 
     private void OnTelephoneMessageReceived(Entity<TelephoneComponent> entity, ref TelephoneMessageReceivedEvent args)

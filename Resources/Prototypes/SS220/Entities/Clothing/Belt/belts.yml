@@ -279,7 +279,7 @@
     - id: HydroponicsToolMiniHoe
     - id: HydroponicsToolSpade
     - id: HydroponicsToolClippers
-    - id: ChemistryBottleRobustHarvest
+    - id: RobustHarvestChemistryBottle
 
 #chief 220
 

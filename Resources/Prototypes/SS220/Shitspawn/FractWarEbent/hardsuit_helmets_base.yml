@@ -2,7 +2,7 @@
 
 # SSSP
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitBaseSSSP
   description: Тяжелый, с маленьким уголом обзора, но очень крепкий и надёжный.
   abstract: true

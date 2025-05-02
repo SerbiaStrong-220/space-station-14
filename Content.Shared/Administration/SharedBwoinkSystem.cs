@@ -1,4 +1,4 @@
-#nullable enable
+﻿#nullable enable
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
@@ -41,9 +41,7 @@ namespace Content.Shared.Administration
 
             public bool PlaySound { get; }
 
-            public readonly bool AdminOnly;
-
-            public BwoinkTextMessage(NetUserId userId, NetUserId trueSender, string text, DateTime? sentAt = default, bool playSound = true, bool adminOnly = false, bool isSenderAdmin = false /* SS220 */)
+            public BwoinkTextMessage(NetUserId userId, NetUserId trueSender, string text, DateTime? sentAt = default, bool isSenderAdmin = false, bool playSound = true)
             {
                 SentAt = sentAt ?? DateTime.Now;
                 UserId = userId;
@@ -51,7 +49,6 @@ namespace Content.Shared.Administration
                 IsSenderAdmin = isSenderAdmin; // SS220
                 Text = text;
                 PlaySound = playSound;
-                AdminOnly = adminOnly;
             }
         }
     }

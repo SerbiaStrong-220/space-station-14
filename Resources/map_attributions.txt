@@ -61,9 +61,6 @@
 - files: ["convex.yml"]
   authors: Spacemann
 
-- file: ["amber.yml"]
-  authors: Southbridge, Flipsie27
-
 # ss220-maps
 
 - files: ["frankenstein.yml"]

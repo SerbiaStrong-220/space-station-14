@@ -24,7 +24,4 @@
         mask:
         - MachineMask
         layer:
-        - MachineLayer
-  - type: Construction
-    graph: TrashBin
-    node: TrashBin
+        - MachineLayer    

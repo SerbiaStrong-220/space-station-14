@@ -14,14 +14,6 @@
     - type: MindShield
     - type: AntagImmune
 
-- type: randomHumanoidSettings
-  id: EventHumanoidCentcomm
-  parent: EventHumanoidMindShielded
-  components:
-  - type: AutoImplant
-    implants:
-    - DeathRattleImplantCentcomm
-
 ## Death Squad
 
 #SS220-Deathsquad-Update-Begin #Outdated spawner, use new ones
@@ -35,8 +27,8 @@
 #      state: icon
 #    - type: RandomMetadata
 #      nameSegments:
-#        - NamesMilitaryFirstLeader
-#        - NamesMilitaryLast
+#        - NamesFirstMilitaryLeader
+#        - NamesLastMilitary
 #    - type: RandomHumanoidSpawner
 #      settings: DeathSquad
 #SS220-Deathsquad-Update-End
@@ -48,7 +40,7 @@
     - Felinid
     - Vox # Спрайт скафандра оффский
 #SS220 Vox Update V1 End
-  parent: EventHumanoidCentcomm
+  parent: EventHumanoidMindShielded
   randomizeName: false
   components:
     - type: GhostRole
@@ -64,9 +56,8 @@
       roleLoadout: [ RoleSurvivalEVA ]
     - type: RandomMetadata
       nameSegments:
-        - NamesMilitaryFirstLeader
-        - NamesMilitaryLast
-      nameFormat: name-format-ert
+        - NamesFirstMilitaryLeader
+        - NamesLastMilitary
 
 
 ## ERT Leader
@@ -81,16 +72,15 @@
       state: ertleader
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirstLeader
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitaryLeader
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTLeader
 
 - type: randomHumanoidSettings
   id: ERTLeader
-  parent: EventHumanoidCentcomm
   speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
+  parent: EventHumanoidMindShielded
   randomizeName: false
   components:
     - type: GhostRole
@@ -100,7 +90,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h comm) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000
+          time: 72000 
         - !type:DepartmentTimeRequirement
           department: Command
           time: 36000 #SS220 ghostrole-times (20h sec 10h comm) end
@@ -112,9 +102,8 @@
       roleLoadout: [ RoleSurvivalExtended ]
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirstLeader
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitaryLeader
+      - NamesLastMilitary
 
 - type: entity
   id: RandomHumanoidSpawnerERTLeaderEVA
@@ -171,7 +160,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h comm) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000
+          time: 72000 
         - !type:DepartmentTimeRequirement
           department: Command
           time: 36000 #SS220 ghostrole-times (20h sec 10h comm) end
@@ -195,9 +184,8 @@
       state: chaplain #needs an ERT variant once a good suit it made.
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirst
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitary
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTChaplain
 
@@ -220,9 +208,8 @@
       job: ERTChaplain
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirst
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitary
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTChaplainGear ]
       roleLoadout: [ RoleSurvivalExtended ]
@@ -273,9 +260,8 @@
       state: ertjanitor
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirst
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitary
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTJanitor
 
@@ -297,9 +283,8 @@
       job: ERTJanitor
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirst
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitary
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTJanitorGear ]
       roleLoadout: [ RoleSurvivalExtended ]
@@ -349,9 +334,8 @@
       state: ertengineer
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirst
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitary
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTEngineer
 
@@ -367,7 +351,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h eng) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000
+          time: 72000 
         - !type:DepartmentTimeRequirement
           department: Engineering
           time: 36000 #SS220 ghostrole-times (20h sec 10h eng) end
@@ -377,9 +361,8 @@
       job: ERTEngineer
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirst
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitary
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTEngineerGear ]
       roleLoadout: [ RoleSurvivalExtended ]
@@ -408,7 +391,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h eng) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000
+          time: 72000 
         - !type:DepartmentTimeRequirement
           department: Engineering
           time: 36000 #SS220 ghostrole-times (20h sec 10h eng) end
@@ -432,9 +415,8 @@
       state: ertsecurity
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirst
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitary
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTSecurity
 
@@ -456,9 +438,8 @@
       job: ERTSecurity
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirst
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitary
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTSecurityGear ]
       roleLoadout: [ RoleSurvivalExtended ]
@@ -536,9 +517,8 @@
       state: ertmedical
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirst
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitary
+      - NamesLastMilitary
     - type: RandomHumanoidSpawner
       settings: ERTMedical
 
@@ -547,7 +527,6 @@
   speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
-    - type: DefibrillatorSkill #ss220 ert defib skill (#2787)
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
@@ -564,9 +543,8 @@
       job: ERTMedical
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirst
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitary
+      - NamesLastMilitary
     - type: Loadout
       prototypes: [ ERTMedicalGear ]
       roleLoadout: [ RoleSurvivalExtended ]
@@ -588,7 +566,6 @@
   speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTMedical
   components:
-    - type: DefibrillatorSkill #ss220 ert defib skill (#2787)
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
@@ -596,7 +573,7 @@
       requirements: #SS220 ghostrole-times (20h sec 10h med) start
         - !type:DepartmentTimeRequirement
           department: Security
-          time: 72000
+          time: 72000 
         - !type:DepartmentTimeRequirement
           department: Medical
           time: 36000 #SS220 ghostrole-times (20h sec 10h med) end
@@ -623,7 +600,7 @@
 - type: randomHumanoidSettings
   id: CBURNAgent
   speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
-  parent: EventHumanoidCentcomm
+  parent: EventHumanoidMindShielded
   components:
     - type: Loadout
       prototypes: [CBURNGear]
@@ -639,9 +616,8 @@
         settings: short
     - type: RandomMetadata
       nameSegments:
-      - NamesMilitaryFirst
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
+      - NamesFirstMilitary
+      - NamesLastMilitary
 
 ## Central Command
 
@@ -663,7 +639,7 @@
     - Felinid
     - Vox # Спрайт скафандра оффский
 #SS220 Vox Update V1 End
-  parent: EventHumanoidCentcomm
+  parent: EventHumanoidMindShielded
   components:
     - type: GhostRole
       name: ghost-role-information-centcom-official-name
@@ -685,7 +661,7 @@
       sprite: Mobs/Species/Human/parts.rsi
       state: full
     - type: RandomMetadata
-      nameSegments: [ NamesDeathCommando ] # Corvax-Localization
+      nameSegments: [ corvax_names_death_commando ] # Corvax-Localization
     - type: RandomHumanoidSpawner
       settings: SyndicateAgent
 
@@ -732,9 +708,8 @@
       settings: Cluwne
     - type: RandomMetadata
       nameSegments:
-      - NamesFirst
-      - NamesLast
-      nameFormat: name-format-standard
+      - names_first
+      - names_last
 
 - type: randomHumanoidSettings
   id: Cluwne

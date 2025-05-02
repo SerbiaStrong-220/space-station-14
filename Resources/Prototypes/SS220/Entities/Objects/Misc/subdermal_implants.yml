@@ -5,7 +5,9 @@
   description: lmaoooo
   categories: [ HideSpawnMenu ]
   components:
-    - type: MindSlaveImplant
+    - type: Tag
+      tags:
+      - MindSlave
     - type: MindSlaveDisfunctionProvider
       disfunction:
         disfunction:

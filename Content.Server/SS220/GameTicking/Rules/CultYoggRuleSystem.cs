@@ -224,15 +224,15 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (!TryComp<MindComponent>(uid, out var mind))
             return;
 
-        if (!_playerManager.TryGetSessionById(mind.UserId, out var session))
+        if (mind.Session is null)
             return;
 
-        if (session.AttachedEntity is null)
+        if (mind.Session.AttachedEntity is null)
             return;
 
         //_adminLogger.Add(LogType.EventRan, LogImpact.High, $"CultYogg person {meta.EntityName} where picked for a tier: {tier}");
 
-        var sacrComp = EnsureComp<CultYoggSacrificialComponent>(session.AttachedEntity.Value);
+        var sacrComp = EnsureComp<CultYoggSacrificialComponent>(mind.Session.AttachedEntity.Value);
 
         sacrComp.Tier = tier;
     }

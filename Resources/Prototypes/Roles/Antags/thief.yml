@@ -17,5 +17,5 @@
   storage:
     back:
     - ThiefBeacon
-    - SatchelThief
+    - ToolboxThief
     - ClothingHandsChameleonThief

@@ -3,8 +3,7 @@
 - type: latheRecipe
   abstract: true
   id: BaseRoboticsRecipe
-  categories:
-  - Robotics
+  category: Robotics
   completetime: 2
 
 - type: latheRecipe
@@ -160,7 +159,7 @@
   parent: BaseGoldBorgModuleRecipe
   id: BorgModuleAdvancedCleaning
   result: BorgModuleAdvancedCleaning
-  categories: [ Robotics ]
+  category: Robotics
   completetime: 3
   materials:
     Steel: 250

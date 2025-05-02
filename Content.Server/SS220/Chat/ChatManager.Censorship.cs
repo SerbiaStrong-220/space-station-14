@@ -1,4 +1,5 @@
 using Content.Shared.Database;
+using Content.Shared.Mind;
 using Robust.Shared.Player;
 using System.Text.RegularExpressions;
 
@@ -11,8 +12,10 @@ internal sealed partial class ChatManager
 
     public string DeleteProhibitedCharacters(string message, EntityUid player)
     {
-        _player.TryGetSessionByEntity(player, out var session);
-        return DeleteProhibitedCharacters(message, session);
+        var mindSystem = _entityManager.System<SharedMindSystem>();
+        mindSystem.TryGetMind(player, out _, out var mind);
+
+        return DeleteProhibitedCharacters(message, mind?.Session);
     }
 
     public string DeleteProhibitedCharacters(string message, ICommonSession? player = null)

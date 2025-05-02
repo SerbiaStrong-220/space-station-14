@@ -58,7 +58,7 @@
       - id: HydroponicsToolHatchet
       - id: ClothingOuterApronBotanist
       - id: ClothingHandsGlovesLeather
-      - id: ChemistryBottleEZNutrient
+      - id: EZNutrientChemistryBottle
         amount: 2
 
 - type: entity
@@ -93,13 +93,24 @@
       - id: PeaSeeds
       - id: CherrySeeds
       - id: BeetSeeds #ss220 seeds
-
+#ss220-flowerupdate-begin
 - type: entity
-  id: CrateHydroponicsTray
+  id: CrateHydroponicsFlowerSeeds
   parent: CrateHydroponics
-  name: hydroponics tray crate
-  description: Contains a hydroponics tray flatpack.
+  name: flower seeds crate
+  description: Big cute things have small beginnings. Contains twelve different flower seeds.
   components:
   - type: StorageFill
     contents:
-    - id: HydroponicsTrayFlatpack
+      - id: WtulipSeeds
+      - id: YtulipSeeds
+      - id: PtulipSeeds
+      - id: RcloveSeeds
+      - id: WcloveSeeds
+      - id: SchamomileSeeds
+      - id: WschamomileSeeds
+      - id: LflowerSeeds
+      - id: SflowerSeeds
+      - id: RroseSeeds
+      - id: WroseSeeds
+#ss220-flowerupdate-end

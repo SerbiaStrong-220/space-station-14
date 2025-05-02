@@ -27,9 +27,6 @@ public sealed partial class LanguageComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<LanguageDefinition> AvailableLanguages = new();
-
-    [DataField, AutoNetworkedField]
-    public bool KnowAllLLanguages;
 }
 
 [DataDefinition]
@@ -46,10 +43,5 @@ public sealed partial class LanguageDefinition
     {
         Id = id;
         CanSpeak = canSpeak;
-    }
-
-    public bool IsEqual(LanguageDefinition other)
-    {
-        return Id == other.Id;
     }
 }

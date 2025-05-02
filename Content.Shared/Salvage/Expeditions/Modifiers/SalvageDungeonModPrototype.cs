@@ -5,10 +5,10 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 
 namespace Content.Shared.Salvage.Expeditions.Modifiers;
 
-[Prototype]
+[Prototype("salvageDungeonMod")]
 public sealed partial class SalvageDungeonModPrototype : IPrototype, IBiomeSpecificMod
 {
-    [IdDataField] public string ID { get; private set; } = default!;
+    [IdDataField] public string ID { get; } = default!;
 
     [DataField("desc")] public LocId Description { get; private set; } = string.Empty;
 

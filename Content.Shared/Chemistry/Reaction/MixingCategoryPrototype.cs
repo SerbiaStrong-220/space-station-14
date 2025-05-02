@@ -6,12 +6,12 @@ namespace Content.Shared.Chemistry.Reaction;
 /// <summary>
 /// This is a prototype for a method of chemical mixing, to be used by <see cref="ReactionMixerComponent"/>
 /// </summary>
-[Prototype]
+[Prototype("mixingCategory")]
 public sealed partial class MixingCategoryPrototype : IPrototype
 {
     /// <inheritdoc/>
     [IdDataField]
-    public string ID { get; private set; } = default!;
+    public string ID { get; } = default!;
 
     /// <summary>
     /// A locale string used in the guidebook to describe this mixing category.

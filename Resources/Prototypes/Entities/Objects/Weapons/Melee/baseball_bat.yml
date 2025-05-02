@@ -64,7 +64,6 @@
     state: icon
   - type: Item
     size: Normal
-    sprite: Objects/Weapons/Melee/incomplete_bat.rsi
   - type: Construction
     graph: WoodenBat
     node: incompleteBat
@@ -74,7 +73,7 @@
   parent: BaseBallBat
   id: WeaponMeleeKnockbackStick
   description: And then he spleefed all over.
-  categories: [ DoNotMap ]
+  suffix: Do not map
   components:
   - type: MeleeThrowOnHit
   - type: MeleeWeapon

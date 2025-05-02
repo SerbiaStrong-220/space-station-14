@@ -100,8 +100,7 @@
     - type: StepTrigger
       intersectRatio: 0.01
     - type: Slippery
-      slipData:
-        paralyzeTime: 0
+      paralyzeTime: 0
       slipSound:
         path: "/Audio/Effects/Fluids/blood2.ogg"
         params:

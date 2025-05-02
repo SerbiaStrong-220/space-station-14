@@ -5,45 +5,64 @@ using Content.Server.Roles;
 using Content.Server.SS220.MindSlave;
 using Content.Shared.Database;
 using Content.Shared.Implants;
+using Content.Shared.Implants.Components;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Revolutionary.Components;
-using Robust.Shared.Containers;
+using Content.Shared.Tag;
 
 namespace Content.Server.Mindshield;
 
 /// <summary>
-/// System used for adding or removing components with a mindshield implant
-/// as well as checking if the implanted is a Rev or Head Rev.
+/// System used for checking if the implanted is a Rev or Head Rev.
 /// </summary>
 public sealed class MindShieldSystem : EntitySystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
     [Dependency] private readonly RoleSystem _roleSystem = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly MindSlaveSystem _mindSlave = default!;
     [Dependency] private readonly SharedSubdermalImplantSystem _sharedSubdermalImplant = default!;
+
+    [ValidatePrototypeId<TagPrototype>]
+    public const string MindShieldTag = "MindShield";
+
+    //SS220-mindslave begin
+    [ValidatePrototypeId<TagPrototype>]
+    public const string MindSlaveTag = "MindSlave";
+    //SS220-mindslave end
+
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<MindShieldImplantComponent, ImplantImplantedEvent>(OnImplantImplanted);
-        SubscribeLocalEvent<MindShieldImplantComponent, EntGotRemovedFromContainerMessage>(OnImplantDraw);
+        SubscribeLocalEvent<SubdermalImplantComponent, ImplantImplantedEvent>(ImplantCheck);
     }
 
-    private void OnImplantImplanted(Entity<MindShieldImplantComponent> ent, ref ImplantImplantedEvent ev)
+    /// <summary>
+    /// Checks if the implant was a mindshield or not
+    /// </summary>
+    public void ImplantCheck(EntityUid uid, SubdermalImplantComponent comp, ref ImplantImplantedEvent ev)
     {
-        if (ev.Implanted == null)
-            return;
+        if (_tag.HasTag(ev.Implant, MindShieldTag) && ev.Implanted != null)
+        {
+            EnsureComp<MindShieldComponent>(ev.Implanted.Value);
+            MindShieldRemovalCheck(ev.Implanted.Value, ev.Implant);
+        }
 
-        EnsureComp<MindShieldComponent>(ev.Implanted.Value);
-        MindShieldRemovalCheck(ev.Implanted.Value, ev.Implant);
+        //SS220-mindslave begin
+        if (_tag.HasTag(ev.Implant, MindSlaveTag) && ev.Implanted != null && comp.user != null)
+        {
+            if (!_mindSlave.TryMakeSlave(ev.Implanted.Value, comp.user.Value))
+                _sharedSubdermalImplant.ForceRemove(ev.Implanted.Value, ev.Implant);
+        }
+        //SS220-mindslave end
     }
 
     /// <summary>
     /// Checks if the implanted person was a Rev or Head Rev and remove role or destroy mindshield respectively.
     /// </summary>
-    private void MindShieldRemovalCheck(EntityUid implanted, EntityUid implant)
+    public void MindShieldRemovalCheck(EntityUid implanted, EntityUid implant)
     {
         if (HasComp<HeadRevolutionaryComponent>(implanted))
         {
@@ -58,10 +77,4 @@ public sealed class MindShieldSystem : EntitySystem
             _adminLogManager.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(implanted)} was deconverted due to being implanted with a Mindshield.");
         }
     }
-
-    private void OnImplantDraw(Entity<MindShieldImplantComponent> ent, ref EntGotRemovedFromContainerMessage args)
-    {
-        RemComp<MindShieldComponent>(args.Container.Owner);
-    }
 }
-

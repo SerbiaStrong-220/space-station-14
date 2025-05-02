@@ -29,7 +29,7 @@ public sealed partial class TechnologyDatabaseComponent : Component
     public List<string> SupportedDisciplines = new();
 
     [DataField("allowUnlimitedTechnoligies"), ViewVariables(VVAccess.ReadWrite)]
-    public bool AllowUnlimitedTechnoligies = false; // SS220 Disable unlimited techs
+    public bool AllowUnlimitedTechnoligies = true;
 
     /// <summary>
     /// The ids of all the technologies which have been unlocked.
@@ -57,7 +57,7 @@ public sealed partial class TechnologyDatabaseComponent : Component
 /// server to all of it's clients.
 /// </remarks>
 [ByRefEvent]
-public readonly record struct TechnologyDatabaseModifiedEvent(List<string>? NewlyUnlockedRecipes);
+public readonly record struct TechnologyDatabaseModifiedEvent;
 
 /// <summary>
 /// Event raised on a database after being synchronized

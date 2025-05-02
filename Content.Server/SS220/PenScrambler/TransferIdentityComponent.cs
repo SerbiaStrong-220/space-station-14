@@ -6,5 +6,8 @@ namespace Content.Server.SS220.PenScrambler;
 public sealed partial class TransferIdentityComponent : Component
 {
     [DataField]
-    public EntityUid? NullspaceClone;
+    public EntityUid? Target;
+
+    [DataField]
+    public HumanoidAppearanceComponent? AppearanceComponent;
 }

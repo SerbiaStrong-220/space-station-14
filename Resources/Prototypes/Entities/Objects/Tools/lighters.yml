@@ -91,7 +91,6 @@
   - type: Tag # SS220 cigarette pack fix beginning
     tags:
       - Lighter # SS220 cigarette pack fix end
-  - type: PhysicalComposition
 
 - type: entity
   name: cheap lighter

@@ -1,7 +1,7 @@
 - type: latheRecipe
   id: BlasterPowerCellAlt
   result: BlasterPowerCellAltPrinted
-  categories: [ Parts ]
+  category: Parts
   completetime: 10
   materials:
     Steel: 300

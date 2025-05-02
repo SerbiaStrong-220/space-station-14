@@ -8,7 +8,7 @@
   objectType: Item
   description: This bot wanders around the station, mopping up any puddles it sees.
   icon:
-    sprite: SS220/Mobs/Silicon/Bots/cleanbot.rsi #SS220 Clean & Med Bot Resprite
+    sprite: Mobs/Silicon/Bots/cleanbot.rsi
     state: cleanbot
 
 - type: construction
@@ -60,7 +60,7 @@
   objectType: Item
   description: This bot can help supply basic healing.
   icon:
-    sprite: SS220/Mobs/Silicon/Bots/medibot.rsi #SS220 Clean & Med Bot Resprite
+    sprite: Mobs/Silicon/Bots/medibot.rsi
     state: medibot
 
 - type: construction

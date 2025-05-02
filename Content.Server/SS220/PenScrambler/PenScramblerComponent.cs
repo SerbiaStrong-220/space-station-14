@@ -6,7 +6,10 @@ namespace Content.Server.SS220.PenScrambler;
 public sealed partial class PenScramblerComponent : Component
 {
     [DataField]
-    public EntityUid? NullspaceClone;
+    public EntityUid? Target;
+
+    [DataField]
+    public HumanoidAppearanceComponent? AppearanceComponent;
 
     [DataField]
     public bool HaveDna = false;

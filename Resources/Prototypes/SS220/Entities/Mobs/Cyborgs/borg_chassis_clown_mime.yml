@@ -110,6 +110,6 @@
     interactSuccessSound:
       path: /Audio/Ambience/Objects/periodic_beep.ogg
   - type: RandomMetadata
-    nameSegments: [NamesBorg]
+    nameSegments: [names_borg]
   - type: Input
     context: "human"

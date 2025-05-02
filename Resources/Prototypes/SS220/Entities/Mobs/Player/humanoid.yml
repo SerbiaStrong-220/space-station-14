@@ -149,8 +149,8 @@
     randomizeName: false
   - type: RandomMetadata
     nameSegments:
-    - NamesMilitaryFirstLeader
-    - NamesMilitaryLast
+    - NamesFirstMilitaryLeader
+    - NamesLastMilitary
   - type: RandomHumanoidSpawner
     settings: DeathSquadLeaderRandom
 
@@ -167,8 +167,8 @@
     randomizeName: false
   - type: RandomMetadata
     nameSegments:
-    - NamesMilitaryFirstLeader
-    - NamesMilitaryLast
+    - NamesFirstMilitaryLeader
+    - NamesLastMilitary
   - type: RandomHumanoidSpawner
     settings: DeathSquadHealerRandom
 
@@ -185,8 +185,8 @@
     randomizeName: false
   - type: RandomMetadata
     nameSegments:
-    - NamesMilitaryFirstLeader
-    - NamesMilitaryLast
+    - NamesFirstMilitaryLeader
+    - NamesLastMilitary
   - type: RandomHumanoidSpawner
     settings: DeathSquadOperativeRandom
 

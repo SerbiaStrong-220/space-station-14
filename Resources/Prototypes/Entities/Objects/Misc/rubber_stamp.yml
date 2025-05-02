@@ -41,7 +41,7 @@
   name: captain's rubber stamp
   parent: [RubberStampBase]
   id: RubberStampCaptain
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-captain
@@ -54,7 +54,8 @@
   name: CentComm rubber stamp
   parent: RubberStampBase
   id: RubberStampCentcom
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
+  categories: [ HideSpawnMenu ] #SS220-CentcomFashion
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-centcom
@@ -67,7 +68,7 @@
   name: chaplain's rubber stamp
   parent: RubberStampBase
   id: RubberStampChaplain
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-chaplain
@@ -80,7 +81,7 @@
   name: lawyer's rubber stamp
   parent: RubberStampBase
   id: RubberStampLawyer
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-lawyer
@@ -93,7 +94,7 @@
   name: clown's rubber stamp
   parent: RubberStampBase
   id: RubberStampClown
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-clown
@@ -109,7 +110,7 @@
   name: chief engineer's rubber stamp
   parent: [RubberStampBase]
   id: RubberStampCE
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-ce
@@ -122,7 +123,7 @@
   name: chief medical officer's rubber stamp
   parent: [RubberStampBase]
   id: RubberStampCMO
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-cmo
@@ -135,7 +136,7 @@
   name: head of personnel's rubber stamp
   parent: [RubberStampBase]
   id: RubberStampHop
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-hop
@@ -148,7 +149,7 @@
   name: head of security's rubber stamp
   parent: [RubberStampBase]
   id: RubberStampHos
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-hos
@@ -161,7 +162,7 @@
   name: mime's rubber stamp
   parent: RubberStampBase
   id: RubberStampMime
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-mime
@@ -175,7 +176,7 @@
   name: quartermaster's rubber stamp
   parent: [RubberStampBase]
   id: RubberStampQm
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-qm
@@ -188,7 +189,7 @@
   name: research director's rubber stamp
   parent: [RubberStampBase]
   id: RubberStampRd
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-rd
@@ -213,7 +214,7 @@
   name: syndicate rubber stamp
   parent: [RubberStampBase]
   id: RubberStampSyndicate
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-syndicate
@@ -224,9 +225,9 @@
 
 - type: entity
   name: warden's rubber stamp
-  parent: [RubberStampBase, BaseSecurityContraband]
+  parent: [RubberStampBase]
   id: RubberStampWarden
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-warden
@@ -261,9 +262,9 @@
 
 - type: entity
   name: detective's rubber stamp
-  parent: [RubberStampBase, BaseSecurityContraband]
+  parent: [RubberStampBase]
   id: RubberStampDetective
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-detective
@@ -289,26 +290,12 @@
   name: psychologist's rubber stamp
   parent: RubberStampBase
   id: RubberStampPsychologist
-  categories: [ DoNotMap ]
+  suffix: DO NOT MAP
   description: A rubber stamp for stamping important documents. Prescribe those treatments!
   components:
   - type: Stamp
-    stampedName: stamp-component-stamped-name-psychologist
+    stampedName: stamp-component-stamped-name-psychologist 
     stampedColor: "#5B97BC"
     stampState: "paper_stamp-psychologist"
   - type: Sprite
     state: stamp-psychologist
-
-- type: entity
-  name: wizard's rubber stamp
-  parent: [RubberStampBase, BaseMagicalContraband]
-  id: RubberStampWizard
-  description: A chaotic wizard stamp for serving unchaotic paperwork, how ironic.
-  categories: [ DoNotMap ]
-  components:
-  - type: Stamp
-    stampedName: Wizard
-    stampedColor: "#881bc1"
-    stampState: "paper_stamp-wizard"
-  - type: Sprite
-    state: stamp-wizard

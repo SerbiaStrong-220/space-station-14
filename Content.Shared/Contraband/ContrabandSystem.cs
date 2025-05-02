@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.Examine;
@@ -56,8 +56,7 @@ public sealed class ContrabandSystem : EntitySystem
         // one, the actual informative 'this is restricted'
         // then, the 'you can/shouldn't carry this around' based on the ID the user is wearing
         var localizedDepartments = component.AllowedDepartments.Select(p => Loc.GetString("contraband-department-plural", ("department", Loc.GetString(_proto.Index(p).Name))));
-        var jobs = component.AllowedJobs.Select(p => _proto.Index(p).LocalizedName).ToArray();
-        var localizedJobs = jobs.Select(p => Loc.GetString("contraband-job-plural", ("job", p)));
+        var localizedJobs = component.AllowedJobs.Select(p => Loc.GetString("contraband-job-plural", ("job", _proto.Index(p).LocalizedName)));
         var severity = _proto.Index(component.Severity);
         String departmentExamineMessage;
         if (severity.ShowDepartmentsAndJobs)
@@ -84,21 +83,26 @@ public sealed class ContrabandSystem : EntitySystem
             }
         }
 
-        // if it is fully restricted, you're department-less, or your department isn't in the allowed list, you cannot carry it. Otherwise, you can.
-        var carryingMessage = Loc.GetString("contraband-examine-text-avoid-carrying-around");
-        var iconTexture = "/Textures/Interface/VerbIcons/lock-red.svg.192dpi.png";
+        String carryingMessage;
+        // either its fully restricted, you have no departments, or your departments dont intersect with the restricted departments
         if (departments.Intersect(component.AllowedDepartments).Any()
-            || jobs.Contains(jobId))
+            || localizedJobs.Contains(jobId))
         {
             carryingMessage = Loc.GetString("contraband-examine-text-in-the-clear");
-            iconTexture = "/Textures/Interface/VerbIcons/unlock-green.svg.192dpi.png";
         }
+        else
+        {
+            // otherwise fine to use :tm:
+            carryingMessage = Loc.GetString("contraband-examine-text-avoid-carrying-around");
+        }
+
         var examineMarkup = GetContrabandExamine(departmentExamineMessage, carryingMessage);
-        _examine.AddHoverExamineVerb(args,
+        _examine.AddDetailedExamineVerb(args,
             component,
+            examineMarkup,
             Loc.GetString("contraband-examinable-verb-text"),
-            examineMarkup.ToMarkup(),
-            iconTexture);
+            "/Textures/Interface/VerbIcons/lock.svg.192dpi.png",
+            Loc.GetString("contraband-examinable-verb-message"));
     }
 
     private FormattedMessage GetContrabandExamine(String deptMessage, String carryMessage)

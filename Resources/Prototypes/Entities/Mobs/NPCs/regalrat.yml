@@ -136,9 +136,8 @@
     price: 2500 # rat wealth
   - type: RandomMetadata
     nameSegments:
-    - NamesRegalratKingdom
-    - NamesRegalratTitle
-    nameFormat: name-format-regal-rat
+    - RegalRatNameKingdom
+    - RegalRatNameTitle
   - type: GuideHelp
     guides:
     - MinorAntagonists

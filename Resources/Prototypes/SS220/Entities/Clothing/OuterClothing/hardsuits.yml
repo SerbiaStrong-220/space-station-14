@@ -28,8 +28,6 @@
         Stamina: 0.35 #SS220-syndifix
   - type: ExplosionResistance
     damageCoefficient: 0.6
-  - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.35
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitBlueshield
 
@@ -61,8 +59,6 @@
         Stamina: 0.35
   - type: ExplosionResistance
     damageCoefficient: 0.6
-  - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.35
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitLightBlueshield
 
@@ -92,8 +88,6 @@
         Radiation: 0.2
         Caustic: 0.4
         Stamina: 0.35
-  - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.35
   - type: ExplosionResistance
     damageCoefficient: 0.3
   - type: ToggleableClothing
@@ -212,8 +206,6 @@
         Radiation: 0.1
         Stamina: 0.1
         Caustic: 0.1
-  - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 1.4
@@ -306,8 +298,6 @@
         Radiation: 0.2
         Caustic: 0.4
         Stamina: 0.2
-  - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.25
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8

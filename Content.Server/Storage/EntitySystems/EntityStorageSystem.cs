@@ -132,9 +132,9 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
             return;
 
         var serverComp = (EntityStorageComponent) component;
-        // var tile = GetOffsetTileRef(uid, serverComp); // SS220-FixEntityStorageAtmosphereMerge
+        var tile = GetOffsetTileRef(uid, serverComp);
 
-        if (_atmos.GetTileMixture(uid, true) is {} environment) // SS220-FixEntityStorageAtmosphereMerge
+        if (tile != null && _atmos.GetTileMixture(tile.Value.GridUid, null, tile.Value.GridIndices, true) is {} environment)
         {
             _atmos.Merge(serverComp.Air, environment.RemoveVolume(serverComp.Air.Volume));
         }
@@ -147,28 +147,26 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
         if (!serverComp.Airtight)
             return;
 
-        // var tile = GetOffsetTileRef(uid, serverComp); // SS220-FixEntityStorageAtmosphereMerge
+        var tile = GetOffsetTileRef(uid, serverComp);
 
-        if (_atmos.GetTileMixture(uid, true) is {} environment) // SS220-FixEntityStorageAtmosphereMerge
+        if (tile != null && _atmos.GetTileMixture(tile.Value.GridUid, null, tile.Value.GridIndices, true) is {} environment)
         {
             _atmos.Merge(environment, serverComp.Air);
             serverComp.Air.Clear();
         }
     }
 
-    // SS220-FixEntityStorageAtmosphereMerge-Begin
-    //private TileRef? GetOffsetTileRef(EntityUid uid, EntityStorageComponent component)
-    //{
-    //    var targetCoordinates = TransformSystem.ToMapCoordinates(new EntityCoordinates(uid, component.EnteringOffset));
-    //
-    //     if (_map.TryFindGridAt(targetCoordinates, out var gridId, out var grid))
-    //     {
-    //         return _mapSystem.GetTileRef(gridId, grid, targetCoordinates);
-    //     }
-    //
-    //     return null;
-    // }
-    // SS220-FixEntityStorageAtmosphereMerge-End
+    private TileRef? GetOffsetTileRef(EntityUid uid, EntityStorageComponent component)
+    {
+        var targetCoordinates = new EntityCoordinates(uid, component.EnteringOffset).ToMap(EntityManager, TransformSystem);
+
+        if (_map.TryFindGridAt(targetCoordinates, out var gridId, out var grid))
+        {
+            return _mapSystem.GetTileRef(gridId, grid, targetCoordinates);
+        }
+
+        return null;
+    }
 
     private void OnRemoved(EntityUid uid, InsideEntityStorageComponent component, EntGotRemovedFromContainerMessage args)
     {

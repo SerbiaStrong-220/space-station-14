@@ -12,10 +12,6 @@
   - AllAccess
 #  access: #SS220-DeathSquad Update
   - CentralCommand
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
 
 - type: job
   id: DeathsquadHealer
@@ -31,7 +27,3 @@
   - AllAccess
 #  access: #SS220-DeathSquad Update
   - CentralCommand
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill

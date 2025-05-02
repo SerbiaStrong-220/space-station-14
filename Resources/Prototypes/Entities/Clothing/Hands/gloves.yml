@@ -168,11 +168,6 @@
     fiberMaterial: fibers-leather
     fiberColor: fibers-brown
   - type: FingerprintMask
-  - type: DamageOnInteractProtection
-    damageProtection:
-      flatReductions:
-        Heat: 10
-        Caustic: 5
 
 - type: entity
   parent: ClothingHandsBase
@@ -272,9 +267,9 @@
   description: These tactical gloves are fireproof and shock resistant.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Hands/Gloves/combat.rsi # SS220-Resprite
+    sprite: Clothing/Hands/Gloves/combat.rsi # Corvax-Resprite
   - type: Clothing
-    sprite: SS220/Clothing/Hands/Gloves/combat.rsi # SS220-Resprite
+    sprite: Clothing/Hands/Gloves/combat.rsi # Corvax-Resprite
   - type: DamageOnInteractProtection
     damageProtection:
       flatReductions:
@@ -443,18 +438,18 @@
     interfaces:
       enum.MeleeSpeechUiKey.Key:
         type: MeleeSpeechBoundUserInterface
-#SS220 Chameleon tweak begin
+#SS220 Chameleon tweak begin 
       enum.ChameleonUiKey.Key:
         type: ChameleonBoundUserInterface
   - type: ChameleonClothing
     slot: [gloves]
     default: ClothingHandsGlovesNorthStar
-#SS220 Chameleon tweak end
+#SS220 Chameleon tweak end 
   - type: StaticPrice
     price: 0
 
 - type: entity
-  parent: [ClothingHandsBase, BaseSecurityContraband]
+  parent: [ClothingHandsBase] # SS220 Remove BaseRestrictedContraband
   id: ClothingHandsGlovesForensic
   name: forensic gloves
   description: Do not leave fibers or fingerprints. If you work without them, you're A TERRIBLE DETECTIVE.

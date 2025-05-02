@@ -8,7 +8,7 @@
   - type: Hunger
   - type: Thirst
   - type: Icon
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: Mobs/Species/Slime/parts.rsi # It was like this beforehand, no idea why.
     state: full
   - type: Respirator
     damage:
@@ -68,7 +68,7 @@
     - id: Eldwarf
   # SS220-Add-Languages end
   - type: HumanoidAppearance
-    species: Dwarf
+    species: Human
     hideLayersOnEquip:
     - Hair
     - Snout
@@ -83,13 +83,6 @@
   - type: Emoting
     chatEmoteCooldown: 5.0
   #ss220 emote 5 sec end
-  #SS220 LimitationRevive - start
-  - type: LimitationRevive
-    typeDamageOnDead:
-      types:
-        Сerebral: 400
-  #SS220 LimitationRevive - end
-
 
 - type: entity
   parent: BaseSpeciesDummy

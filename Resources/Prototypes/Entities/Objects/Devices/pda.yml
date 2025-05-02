@@ -11,7 +11,7 @@
        !type:String
        pda
   - type: Sprite
-    sprite: SS220/Objects/Devices/pda.rsi #SS220 PDA-Resprite
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -26,7 +26,7 @@
 #      shader: "unshaded" #SS220 PDA-Resprite
       visible: false
   - type: Icon
-    sprite: SS220/Objects/Devices/pda.rsi #SS220 PDA-Resprite
+    sprite: Objects/Devices/pda.rsi
     state: pda
   - type: Pda
     paiSlot:
@@ -49,7 +49,6 @@
         - IdCard
   - type: PdaVisuals
   - type: Item
-    sprite: SS220/Objects/Devices/pda.rsi #SS220 PDA-Resprite
     size: Small
   - type: ContainerContainer
     containers:
@@ -60,7 +59,6 @@
       program-container: !type:Container
   - type: ItemSlots
   - type: Clothing
-    sprite: SS220/Objects/Devices/pda.rsi #SS220 PDA-Resprite
     quickEquip: false
     slots:
     - idcard
@@ -72,7 +70,7 @@
     softness: 5
     autoRot: true
   - type: Ringer
-  - type: RingerUplink
+  - type: StationLimitedNetwork
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: Pda
@@ -85,7 +83,6 @@
     preinstalled:
       - CrewManifestCartridge
       - NotekeeperCartridge
-      - NanoTaskCartridge
       - NewsReaderCartridge
       - MessengerCartridgeClient # SS220 Messenger
     cartridgeSlot:
@@ -130,25 +127,6 @@
 
 - type: entity
   parent: BasePDA
-  id: BaseWidePDA
-  abstract: true
-  components:
-  - type: Sprite
-    sprite: Objects/Devices/pda.rsi
-    layers:
-    - map: [ "enum.PdaVisualLayers.Base" ]
-      state: "pda"
-    - state: "light_overlay_wide"
-      map: [ "enum.PdaVisualLayers.Flashlight" ]
-      shader: "unshaded"
-      visible: false
-    - state: "id_overlay_wide"
-      map: [ "enum.PdaVisualLayers.IdLight" ]
-      shader: "unshaded"
-      visible: false
-
-- type: entity
-  parent: BasePDA
   id: BaseSecurityPDA
   abstract: true
   components:
@@ -156,7 +134,6 @@
     preinstalled:
     - CrewManifestCartridge
     - NotekeeperCartridge
-    - NanoTaskCartridge
     - NewsReaderCartridge
     - WantedListCartridge
     - MessengerCartridgeClient # SS220 Messenger
@@ -171,7 +148,6 @@
     preinstalled:
       - CrewManifestCartridge
       - NotekeeperCartridge
-      - NanoTaskCartridge
       - NewsReaderCartridge
       - MedTekCartridge
       - MessengerCartridgeClient # SS220 Messenger
@@ -212,6 +188,7 @@
     borderColor: "#a4a3a6" #SS220 PDA-Resprite
     accentVColor: "#deb63d" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -253,6 +230,7 @@
     accentVColor: "#4977a6" #SS220 PDA-Resprite
     accentHColor: "#4977a6" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -296,6 +274,7 @@
     borderColor: "#717059" #SS220 PDA-Resprite
     accentVColor: "#A32D26" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -336,6 +315,7 @@
     borderColor: "#a4a3a6" #SS220 PDA-Resprite
     accentVColor: "#542a6c" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -376,6 +356,7 @@
     borderColor: "#a4a3a6" #SS220 PDA-Resprite
     accentVColor: "#44b369" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -415,6 +396,7 @@
   - type: PdaBorderColor
     borderColor: "#8f1d2c" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -457,6 +439,7 @@
     borderColor: "#44b369" #SS220 PDA-Resprite
     accentVColor: "#1e4a9c" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -505,6 +488,7 @@
   - type: PdaBorderColor
     borderColor: "#e5ace5" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -607,6 +591,7 @@
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentHColor: "#414452" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -646,7 +631,8 @@
        pda-chaplain
   - type: PdaBorderColor
     borderColor: "#4b474f" #SS220 PDA-Resprite
-  - type: Sprite #SS220 PDA-Resprite-Starti
+  - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -698,6 +684,7 @@
     borderColor: "#4b474f" #SS220 PDA-Resprite
     accentHColor: "#a77937" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -737,6 +724,7 @@
   - type: PdaBorderColor
     borderColor: "#a77937" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -777,6 +765,7 @@
     borderColor: "#414452" #SS220 PDA-Resprite
     accentHColor: "#6737ab" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -796,7 +785,6 @@
     preinstalled:
       - CrewManifestCartridge
       - NotekeeperCartridge
-      - NanoTaskCartridge
       - NewsReaderCartridge
       - AstroNavCartridge
       - MessengerCartridgeClient # SS220 Messenger
@@ -825,6 +813,7 @@
   - type: PdaBorderColor
     borderColor: "#4b474f" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -849,7 +838,7 @@
   #ss220 add pdaidpainter end
 
 - type: entity
-  parent: BaseWidePDA
+  parent: BasePDA
   id: LibrarianPDA
   name: librarian PDA
   description: Smells like books.
@@ -871,7 +860,7 @@
     borderColor: "#6c2525" #SS220 PDA-Resprite
     accentHColor: "#b7531e" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
-    sprite: SS220/Objects/Devices/pda.rsi
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -885,7 +874,6 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
-    sprite: SS220/Objects/Devices/pda.rsi
     state: pda-library
   #ss220 add pdaidpainter start
   - type: Tag
@@ -930,6 +918,7 @@
     borderColor: "#414452" #SS220 PDA-Resprite
     accentVColor: "#262c8a" #SS220-Law Department
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -981,6 +970,7 @@
     borderColor: "#9738ae" #SS220 PDA-Resprite
     accentVColor: "#8e9093" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1026,6 +1016,7 @@
   - type: PdaBorderColor
     borderColor: "#dfac5c" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1072,6 +1063,7 @@
     borderColor: "#374f7e" #SS220 PDA-Resprite
 #    accentHColor: "#447987" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1112,6 +1104,7 @@
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentHColor: "#2a8c32" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1152,6 +1145,7 @@
     borderColor: "#d15b1b" #SS220 PDA-Resprite
 #    accentVColor: "#A32D26" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1192,6 +1186,7 @@
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentHColor: "#4977a6" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1233,6 +1228,7 @@
     accentHColor: "#4977a6" #SS220 PDA-Resprite
     accentVColor: "#4977a6" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1288,6 +1284,7 @@
     accentHColor: "#2a4557" #SS220 PDA-Resprite
     accentVColor: "#2a4557" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1328,6 +1325,7 @@
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentVColor: "#bf5319" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1369,6 +1367,7 @@
     accentHColor: "#542a6c" #SS220 PDA-Resprite
 #    accentVColor: "#8900c9" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1409,6 +1408,7 @@
     borderColor: "#cbcdd1" #SS220 PDA-Resprite
     accentVColor: "#542a6c" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1449,6 +1449,7 @@
     borderColor: "#4b474f" #SS220 PDA-Resprite
     accentHColor: "#731611" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1467,7 +1468,6 @@
     preinstalled:
     - CrewManifestCartridge
     - NotekeeperCartridge
-    - NanoTaskCartridge
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
@@ -1497,6 +1497,7 @@
     borderColor: "#731611" #SS220 PDA-Resprite
     accentHColor: "#cbcdd1" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1536,6 +1537,7 @@
   - type: PdaBorderColor
     borderColor: "#731611" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1581,6 +1583,7 @@
   - type: PdaBorderColor
     borderColor: "#29722e" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1600,7 +1603,6 @@
     preinstalled:
       - CrewManifestCartridge
       - NotekeeperCartridge
-      - NanoTaskCartridge
       - NewsReaderCartridge
       - MedTekCartridge
       - WantedListCartridge
@@ -1629,10 +1631,10 @@
        pda-clear
   #SS220 PDA-Resprite-End
   - type: HealthAnalyzer
-    maxScanRange: null
     scanDelay: 0
     silent: true
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1653,7 +1655,6 @@
     preinstalled:
       - CrewManifestCartridge
       - NotekeeperCartridge
-      - NanoTaskCartridge
       - NewsReaderCartridge
       - LogProbeCartridge
       - WantedListCartridge
@@ -1682,6 +1683,7 @@
     accentHColor: "#4b0513"
     accentVColor: "#50abd9"
   - type: Sprite
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1760,6 +1762,7 @@
     borderColor: "#1a89ad" #SS220 PDA-Resprite
 #    accentVColor: "#447987" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1799,6 +1802,7 @@
   - type: PdaBorderColor
     borderColor: "#1d6637" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1847,6 +1851,7 @@
     borderColor: "#4b474f" #SS220 PDA-Resprite
     accentHColor: "#730600" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1866,7 +1871,6 @@
     preinstalled:
       - NotekeeperCartridge
       - MessengerCartridgeClient # SS220 Messenger
-      - NanoTaskCartridge
 
 - type: entity
   parent: BaseSecurityPDA
@@ -1887,6 +1891,7 @@
     accentHColor: "#dfac5c" #SS220 PDA-Resprite
 #    accentVColor: "#447987" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1906,7 +1911,6 @@
     preinstalled:
       - CrewManifestCartridge
       - NotekeeperCartridge
-      - NanoTaskCartridge
       - NewsReaderCartridge
       - MedTekCartridge
       - WantedListCartridge
@@ -1923,6 +1927,7 @@
   - type: Pda
     id: ERTChaplainIDCard
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1946,6 +1951,7 @@
   - type: Pda
     id: ERTEngineerIDCard
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1969,6 +1975,7 @@
   - type: Pda
     id: ERTJanitorIDCard
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -1992,6 +1999,7 @@
   - type: Pda
     id: ERTMedicIDCard
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2024,6 +2032,7 @@
   - type: Pda
     id: ERTSecurityIDCard
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2057,6 +2066,7 @@
 #    accentHColor: "#447987" #SS220 PDA-Resprite
 #    accentVColor: "#447987" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2089,6 +2099,7 @@
     borderColor: "#d7d7d0"
     accentVColor: "#447987"
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2214,6 +2225,7 @@
     borderColor: "#5e321c" #SS220 PDA-Resprite
     accentHColor: "#a77937" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2232,7 +2244,6 @@
     preinstalled:
     - CrewManifestCartridge
     - NotekeeperCartridge
-    - NanoTaskCartridge
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
@@ -2263,6 +2274,7 @@
     accentHColor: "#cbcdd1" #SS220 PDA-Resprite
     accentVColor: "#cbcdd1" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2281,7 +2293,6 @@
     preinstalled:
     - CrewManifestCartridge
     - NotekeeperCartridge
-    - NanoTaskCartridge
     - NewsReaderCartridge
     - WantedListCartridge
     - MedTekCartridge
@@ -2303,13 +2314,6 @@
   components:
   - type: Pda
     id: CluwneIDCard
-    penSlot:
-      startingItem: CrayonGreen
-      ejectSound: /Audio/Items/bikehorn.ogg
-      priority: -1
-      whitelist:
-        tags:
-        - Write
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
@@ -2318,6 +2322,7 @@
   - type: PdaBorderColor
     borderColor: "#8dcccc" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2332,6 +2337,13 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-cluwne
+    penSlot:
+      startingItem: CrayonGreen
+      ejectSound: /Audio/Items/bikehorn.ogg
+      priority: -1
+      whitelist:
+        tags:
+        - Write
   - type: Unremoveable
   #ss220 add pdaidpainter start
   - type: Tag
@@ -2358,6 +2370,7 @@
     borderColor: "#deb63d" #SS220 PDA-Resprite
     accentHColor: "#d15b1b" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2399,6 +2412,7 @@
     accentHColor: "#542a6c" #SS220 PDA-Resprite
 #    accentVColor: "#8900c9" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2440,6 +2454,7 @@
     accentHColor: "#4977a6" #SS220 PDA-Resprite
     accentVColor: "#bf5319" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2480,6 +2495,7 @@
     borderColor: "#731611" #SS220 PDA-Resprite
     accentHColor: "#cbcdd1" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2515,6 +2531,7 @@
   - type: PdaBorderColor
     borderColor: "#4b474f"
   - type: Sprite
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2539,7 +2556,7 @@
 - type: entity
   parent: BaseMedicalPDA
   id: SyndiAgentPDA
-  name: syndicate corpsman PDA
+  name: syndicate agent PDA
   description: For those days when healing normal syndicates aren't enough, try healing nuclear operatives instead!
   components:
   - type: Pda
@@ -2554,6 +2571,7 @@
     accentHColor: "#730600" #SS220 PDA-Resprite
     accentVColor: "#cbcdd1" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
+    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -2572,7 +2590,6 @@
     uiKey: enum.PdaUiKey.Key
     preinstalled:
       - NotekeeperCartridge
-      - NanoTaskCartridge
       - MedTekCartridge
       - MessengerCartridgeClient # SS220 Messenger
 
@@ -2606,28 +2623,3 @@
         type: HealthAnalyzerBoundUserInterface
       enum.ChameleonUiKey.Key:
         type: ChameleonBoundUserInterface
-
-- type: entity
-  parent: BaseWidePDA
-  id: WizardPDA
-  name: wizard PDA
-  description: You hear faint whispers coming from it.
-  components:
-  - type: Pda
-    id: WizardIDCard
-    penSlot:
-      startingItem: PenWiz
-      priority: -1
-      whitelist:
-        tags:
-        - Write
-  - type: Appearance
-    appearanceDataInit:
-     enum.PdaVisuals.PdaType:
-       !type:String
-       pda-wizard
-  - type: PdaBorderColor
-    borderColor: "#7F3300"
-  - type: Icon
-    sprite: Objects/Devices/pda.rsi
-    state: pda-wizard

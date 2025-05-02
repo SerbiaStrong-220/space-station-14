@@ -41,4 +41,3 @@
     price: 1000
   - type: StealTarget
     stealGroup: EngravedKnuckleduster
-  - type: TrackedItem

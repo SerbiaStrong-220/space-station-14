@@ -1,6 +1,33 @@
 # only used roundstart, names can be changed after
-- type: localizedDataset
-  id: NamesBorg
+- type: dataset
+  id: names_borg
   values:
-    prefix: names-borg-dataset-
-    count: 43
+  - Боб
+  - Джо
+  - Бип
+  - Бип II
+  - Бумбокс
+  - Тур Гайд-о-трон
+  - Тэффи
+  - Буп
+  - Буп II
+  - Базз
+  - Базз II
+  - Тостер
+  - Глава роботов
+  - ЕВА 1
+  - Биперс
+  - Мегабайт
+  - Б.О.Р.Г
+  - Уитли
+  - Вектор
+  - Келлер
+  - Робби
+  - Робобот
+  - Чинила
+  - Сонни
+  - Мегабайт
+  - Ле Борг
+  - Зад-Бот
+  - Мистер Робист
+  - Жестянка

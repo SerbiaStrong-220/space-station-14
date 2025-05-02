@@ -11,6 +11,10 @@ namespace Content.Shared.SS220.Weapons.Melee.Systems;
 
 public sealed class SharedDisarmOnAttackSystem : EntitySystem
 {
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -20,22 +24,23 @@ public sealed class SharedDisarmOnAttackSystem : EntitySystem
 
     private void OnAttackEvent(Entity<DisarmOnAttackComponent> ent, ref WeaponAttackEvent args)
     {
-        float chance = 0;
+        bool chance = false; ;
+
         switch (args.Type)
         {
             case AttackType.HEAVY:
-                chance = ent.Comp.HeavyAttackChance;
+                chance = _random.Prob(ent.Comp.HeavyAttackChance);
                 break;
 
             case AttackType.LIGHT:
-                chance = ent.Comp.Chance;
+                chance = _random.Prob(ent.Comp.Chance);
                 break;
         }
 
-        if (chance <= 0)
+        if (!chance)
             return;
 
-        var ev = new DisarmedEvent(args.Target, args.User, chance);
-        RaiseLocalEvent(args.Target, ref ev);
+        var ev = new DisarmedEvent { Target = args.Target, Source = args.User };
+        RaiseLocalEvent(args.Target, ev);
     }
 }

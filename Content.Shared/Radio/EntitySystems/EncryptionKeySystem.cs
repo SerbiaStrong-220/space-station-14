@@ -55,10 +55,16 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         _container.EmptyContainer(component.KeyContainer, reparent: false);
         foreach (var ent in contained)
         {
-            _hands.PickupOrDrop(args.User, ent, dropNear: true);
+            _hands.PickupOrDrop(args.User, ent);
         }
 
-        _popup.PopupPredicted(Loc.GetString("encryption-keys-all-extracted"), uid, args.User);
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        // TODO add predicted pop-up overrides.
+        if (_net.IsServer)
+            _popup.PopupEntity(Loc.GetString("encryption-keys-all-extracted"), uid, args.User);
+
         _audio.PlayPredicted(component.KeyExtractionSound, uid, args.User);
     }
 

@@ -206,7 +206,7 @@ namespace Content.Client.Ghost
             if (uid != _playerManager.LocalEntity)
                 return;
 
-            ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
+            GhostVisibility = false;
             PlayerRemoved?.Invoke(component);
         }
 
@@ -227,7 +227,7 @@ namespace Content.Client.Ghost
             }
             // SS220 colorful ghost end
 
-            ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
+            GhostVisibility = true;
             PlayerAttached?.Invoke(component);
         }
 
@@ -250,17 +250,9 @@ namespace Content.Client.Ghost
 
         private void OnGhostPlayerDetach(EntityUid uid, GhostComponent component, LocalPlayerDetachedEvent args)
         {
-            ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
+            GhostVisibility = false;
             PlayerDetached?.Invoke();
         }
-
-        // SS220-Fix ghosts visibility for other entities-begin
-        // Just a semantic separation for a better understanding of the logic
-        private void ResetGhostVisibility()
-        {
-            GhostVisibility = true;
-        }
-        // SS220-Fix ghosts visibility for other entities-end
 
         private void OnGhostWarpsResponse(GhostWarpsResponseEvent msg)
         {

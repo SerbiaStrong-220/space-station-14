@@ -16,12 +16,12 @@
     - HamsterWearable
     - WhitelistChameleon
   - type: HideLayerClothing
-    layers:
-      Snout: Mask
+    slots:
+    - Snout
     hideOnToggle: true
 
 - type: entity
-  parent: [ClothingMaskGas, BaseSecurityContraband]
+  parent: [ClothingMaskGas]
   id: ClothingMaskGasSecurity
   name: security gas mask
   description: A standard issue Security gas mask.
@@ -152,10 +152,6 @@
     tags:
     - PetWearable
     - WhitelistChameleon
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 50
-      Plastic: 50
 
 - type: entity
   parent: ClothingMaskBreathMedical
@@ -250,7 +246,7 @@
     node: mask
 
 - type: entity
-  parent: [ClothingMaskClown, BaseSecurityContraband]
+  parent: [ClothingMaskClown]
   id: ClothingMaskClownSecurity
   name: security clown wig and mask
   description: A debatably oxymoronic but protective mask and wig.
@@ -379,7 +375,7 @@
     accent: StutteringAccent
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseSecurityContraband ]
+  parent: [ ClothingMaskGas]
   id: ClothingMaskGasSwat
   name: swat gas mask
   description: A elite issue Security gas mask.
@@ -717,16 +713,3 @@
   - type: Tag
     tags:
     - WhitelistChameleon
-
-# Entity tables
-- type: entityTable
-  id: AnimalMaskTable
-  table: !type:GroupSelector
-    children:
-    - id: ClothingMaskFox
-    - id: ClothingMaskBat
-    - id: ClothingMaskBear
-    - id: ClothingMaskBee
-    - id: ClothingMaskRaven
-    - id: ClothingMaskRat
-    - id: ClothingMaskJackal

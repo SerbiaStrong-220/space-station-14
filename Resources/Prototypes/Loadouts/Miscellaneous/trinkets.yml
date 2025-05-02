@@ -130,12 +130,6 @@
     - ClothingNeckAsexualPin
 
 - type: loadout
-  id: ClothingNeckAroacePin
-  storage:
-    back:
-    - ClothingNeckAroacePin
-
-- type: loadout
   id: ClothingNeckBisexualPin
   storage:
     back:
@@ -170,12 +164,6 @@
   storage:
     back:
     - ClothingNeckPansexualPin
-
-- type: loadout
-  id: ClothingNeckPluralPin
-  storage:
-    back:
-    - ClothingNeckPluralPin
 
 - type: loadout
   id: ClothingNeckOmnisexualPin

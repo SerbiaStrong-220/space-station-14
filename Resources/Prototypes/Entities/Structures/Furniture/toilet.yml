@@ -32,12 +32,13 @@
       components:
       - HumanoidAppearance
   - type: DisposalUnit
+    autoEngageEnabled: false
+    noUI: true
     blacklist:
       components:
       - HumanoidAppearance
       - Plunger
       - SolutionTransfer
-      - EntityStorage
     whitelist:
       components:
       - Item

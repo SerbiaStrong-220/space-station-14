@@ -5,10 +5,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Inventory;
 
-[Prototype]
+[Prototype("inventoryTemplate")]
 public sealed partial class InventoryTemplatePrototype : IPrototype
 {
-    [IdDataField] public string ID { get; private set; } = string.Empty;
+    [IdDataField] public string ID { get; } = string.Empty;
 
     [DataField("slots")] public SlotDefinition[] Slots { get; private set; } = Array.Empty<SlotDefinition>();
 }

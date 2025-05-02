@@ -6,9 +6,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
 using Robust.Server.GameObjects;
-using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.SS220.GateDungeon;
@@ -117,12 +115,9 @@ public sealed class GateDungeonSystem : EntitySystem
             return;
 
         var mapDungeon = _random.Pick(comp.PathDungeon);
-        if (mapDungeon == null)
-            return;
 
-        var path = new ResPath(mapDungeon);
         _map.CreateMap(out var mapId);
-        _loader.TryLoadGrid(mapId, path, out _);
+        _loader.TryLoad(mapId, mapDungeon, out _);
 
         _meta.SetEntityName(_map.GetMapOrInvalid(mapId), "Gate dungeon"); //just a plug for the name
 

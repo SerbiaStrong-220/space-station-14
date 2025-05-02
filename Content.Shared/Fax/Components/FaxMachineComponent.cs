@@ -64,14 +64,9 @@ public sealed partial class FaxMachineComponent : Component
     /// <summary>
     /// Should that fax receive station goal info
     /// </summary>
-    [DataField]
-    public bool ReceiveStationGoal { get; set; }
-
-    /// <summary>
-    /// Should that fax receive station goals from other stations
-    /// </summary>
-    [DataField]
-    public bool ReceiveAllStationGoals { get; set; }
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("receiveStationGoal")]
+    public bool ReceiveStationGoal { get; set; } = false;
     // Corvax-StationGoal-End
 
     /// <summary>
@@ -152,43 +147,23 @@ public sealed partial class FaxMachineComponent : Component
     public EntProtoId PrintOfficePaperId = "PaperOffice";
 }
 
-[DataDefinition, Virtual] // SS220 Make virtual
-public partial class FaxPrintout
+[DataDefinition]
+public sealed partial class FaxPrintout
 {
-    [DataField(required: true)]
-    public string Name { get; private set; } = default!;
+    [DataField("dataToCopy")]
+    public Dictionary<Type, IPhotocopiedComponentData>? DataToCopy { get; private set; }
 
-    [DataField]
-    public string? Label { get; private set; }
+    [DataField("metaData")]
+    public PhotocopyableMetaData? MetaData { get; private set; }
 
-    [DataField(required: true)]
-    public string Content { get; private set; } = default!;
-
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>), required: true)]
-    public string PrototypeId { get; private set; } = default!;
-
-    [DataField("stampState")]
-    public string? StampState { get; private set; }
-
-    [DataField("stampedBy")]
-    public List<StampDisplayInfo> StampedBy { get; private set; } = new();
-
-    [DataField]
-    public bool Locked { get; private set; }
-
-    protected FaxPrintout() // SS220 Make protected
+    private FaxPrintout()
     {
     }
 
-    public FaxPrintout(string content, string name, string? label = null, string? prototypeId = null, string? stampState = null, List<StampDisplayInfo>? stampedBy = null, bool locked = false)
+    public FaxPrintout(Dictionary<Type, IPhotocopiedComponentData>? dataToCopy, PhotocopyableMetaData? metaData)
     {
-        Content = content;
-        Name = name;
-        Label = label;
-        PrototypeId = prototypeId ?? "";
-        StampState = stampState;
-        StampedBy = stampedBy ?? new List<StampDisplayInfo>();
-        Locked = locked;
+        DataToCopy = dataToCopy;
+        MetaData = metaData;
     }
 }
 

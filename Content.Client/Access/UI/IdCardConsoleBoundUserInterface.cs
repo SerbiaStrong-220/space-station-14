@@ -24,21 +24,18 @@ namespace Content.Client.Access.UI
         {
             base.Open();
             List<ProtoId<AccessLevelPrototype>> accessLevels;
-            List<ProtoId<AccessLevelPrototype>> extendedAccessLevels; // SS220-ID console extended access button
 
             if (EntMan.TryGetComponent<IdCardConsoleComponent>(Owner, out var idCard))
             {
                 accessLevels = idCard.AccessLevels;
-                extendedAccessLevels = idCard.ExtendedAccessLevels; // SS220-ID console extended access button
             }
             else
             {
                 accessLevels = new List<ProtoId<AccessLevelPrototype>>();
-                extendedAccessLevels = new List<ProtoId<AccessLevelPrototype>>(); // SS220-ID console extended access button
                 _idCardConsoleSystem.Log.Error($"No IdCardConsole component found for {EntMan.ToPrettyString(Owner)}!");
             }
 
-            _window = new IdCardConsoleWindow(this, _prototypeManager, accessLevels, extendedAccessLevels) // SS220-ID console extended access button | add extendedAccessLevels argument
+            _window = new IdCardConsoleWindow(this, _prototypeManager, accessLevels)
             {
                 Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName
             };

@@ -31,9 +31,6 @@
   - type: NpcFactionMember
     factions:
     - SimpleNeutral
-  - type: Access
-    tags:
-    - BasicSilicon
   - type: IntrinsicRadioReceiver
   - type: ActiveRadio
     channels:
@@ -66,7 +63,6 @@
     tags:
     - DoorBumpOpener
     - Bot
-    - Unimplantable
   - type: MobState
     allowedStates:
       - Alive
@@ -180,8 +176,7 @@
     rootTask:
       task: HonkbotCompound
   - type: Slippery
-    slipData:
-      launchForwardsMultiplier: 2
+    launchForwardsMultiplier: 2
   - type: Speech
     speechVerb: Cluwne
   - type: StepTrigger
@@ -211,7 +206,7 @@
     description: ghost-role-information-honkbot-description
     rules: ghost-role-information-freeagent-rules
     mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+    - MindRoleGhostRoleFreeAgent
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -251,7 +246,7 @@
     description: ghost-role-information-jonkbot-description
     rules: ghost-role-information-freeagent-rules
     mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+    - MindRoleGhostRoleFreeAgent
     raffle:
       settings: default
   - type: InteractionPopup
@@ -283,7 +278,7 @@
   description: The creep of automation now threatening space janitors.
   components:
   - type: Sprite
-    sprite: SS220/Mobs/Silicon/Bots/cleanbot.rsi #SS220 Clean & Med Bot Resprite
+    sprite: Mobs/Silicon/Bots/cleanbot.rsi
     state: cleanbot
   - type: Construction
     graph: CleanBot
@@ -351,7 +346,7 @@
         reagent: SpaceDrugs
         quantity: 25
   - type: Sprite
-    sprite: SS220/Mobs/Silicon/Bots/medibot.rsi #SS220 Clean & Med Bot Resprite
+    sprite: Mobs/Silicon/Bots/medibot.rsi
     state: medibot
   - type: HTN
     rootTask:
@@ -394,7 +389,7 @@
     description: ghost-role-information-mimebot-description
     rules: ghost-role-information-freeagent-rules
     mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+    - MindRoleGhostRoleFreeAgent
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -472,7 +467,6 @@
     - DoorBumpOpener
     - FootstepSound
     - Bot
-    - Unimplantable
   - type: ActiveRadio
     channels:
     - Common

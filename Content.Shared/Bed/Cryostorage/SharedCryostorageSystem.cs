@@ -8,7 +8,6 @@ using Content.Shared.Mobs.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Content.Shared.Actions;
 
@@ -19,15 +18,14 @@ namespace Content.Shared.Bed.Cryostorage;
 /// </summary>
 public abstract class SharedCryostorageSystem : EntitySystem
 {
-    [Dependency] private   readonly IConfigurationManager _configuration = default!;
-    [Dependency] private   readonly IMapManager _mapManager = default!;
-    [Dependency] private   readonly ISharedPlayerManager _player = default!;
-    [Dependency] private   readonly MobStateSystem _mobState = default!;
-    [Dependency] private   readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] protected readonly ISharedAdminLogManager AdminLog = default!;
+    [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] protected readonly SharedMindSystem Mind = default!;
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!; // 220 cryo action
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
 
     protected EntityUid? PausedMap { get; private set; }
 
@@ -131,8 +129,7 @@ public abstract class SharedCryostorageSystem : EntitySystem
         if (args.Dragged == args.User)
             return;
 
-        if (!_player.TryGetSessionByEntity(args.Dragged, out var session) ||
-            session.AttachedEntity != args.Dragged)
+        if (!Mind.TryGetMind(args.Dragged, out _, out var mindComp) || mindComp.Session?.AttachedEntity != args.Dragged)
             return;
 
         args.CanDrop = false;

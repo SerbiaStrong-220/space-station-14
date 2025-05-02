@@ -174,11 +174,7 @@
     canSend: true
     telepathyChannelPrototype: TelepathyChannelSpaceDragon
   # SS220 Telepathy end
-  - type: RandomMetadata
-    nameSegments:
-    - NamesDragon
-    - NamesDragonTitle
-    nameFormat: name-format-dragon
+
 
 - type: entity
   parent: BaseMobDragon
@@ -186,9 +182,6 @@
   components:
   - type: Dragon
     spawnRiftAction: ActionSpawnRift
-  - type: GhostRole
-    mindRoles:
-    - MindRoleDragon
   - type: ActionGun
     action: ActionDragonsBreath
     gunProto: DragonsBreathGun

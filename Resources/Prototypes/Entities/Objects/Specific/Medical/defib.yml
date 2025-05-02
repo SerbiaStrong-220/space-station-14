@@ -33,7 +33,6 @@
       zapHeal:
         types:
           Asphyxiation: -40
-      zapСoeffDamage: 8 #SS220 LimitationRevive
     - type: DoAfter
     - type: UseDelay
     - type: StaticPrice
@@ -49,7 +48,7 @@
   - type: MultiHandedItem
   - type: ToggleCellDraw
   - type: PowerCellDraw
-    useRate: 300 # SS220 Med Changes after Limitation Revive
+    useRate: 100
 
 - type: entity
   id: DefibrillatorEmpty

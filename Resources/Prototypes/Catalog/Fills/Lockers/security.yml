@@ -141,11 +141,10 @@
       - id: Telescopichka
       - id: ClothingEyesHudSecurity
         prob: 0.3
-      - id: ClothingHeadHatDetGadget
+      - id: ClothingHeadHatFedoraBrown
       - id: ClothingNeckTieDet
       - id: ClothingOuterVestDetective
-      - id: ClothingOuterCoatDetectiveLoadout
-      - id: FlippoEngravedLighter
+      - id: ClothingOuterCoatDetective
       - id: FlashlightSeclite
       - id: ForensicScanner
       - id: LogProbeCartridge
@@ -178,7 +177,7 @@
         prob: 0.5
 
 - type: entity
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure]
   id: GunSafeDisabler
   name: disabler safe
   components:
@@ -188,7 +187,7 @@
       amount: 5
 
 - type: entity
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure]
   id: GunSafePistolMk58
   name: mk58 safe
   components:
@@ -200,7 +199,7 @@
       amount: 8
 
 - type: entity
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure]
   id: GunSafeRifleLecter
   name: lecter safe
   components:
@@ -212,7 +211,7 @@
       amount: 4
 
 - type: entity
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure]
   id: GunSafeSubMachineGunDrozd
   name: drozd safe
   components:
@@ -224,7 +223,7 @@
       amount: 4
 
 - type: entity
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure]
   id: GunSafeShotgunEnforcer
   name: enforcer safe
   components:
@@ -236,7 +235,7 @@
       amount: 4
 
 - type: entity
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure]
   id: GunSafeShotgunKammerer
   name: kammerer safe
   components:
@@ -250,7 +249,7 @@
 - type: entity
   id: GunSafeSubMachineGunWt550
   suffix: Wt550
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure]
   name: wt550 safe
   components:
   - type: StorageFill
@@ -261,7 +260,7 @@
       amount: 4
 
 - type: entity
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure] # SS220 Remove BaseRestrictedContraband
   id: GunSafeLaserCarbine
   name: laser safe
   components:

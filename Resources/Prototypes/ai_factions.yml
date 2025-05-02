@@ -1,17 +1,16 @@
 - type: npcFaction
   id: Dragon
   hostile:
-  - NanoTrasen
-  - Syndicate
-  - Xeno
-  - PetsNT
-  - Zombie
-  - Revolutionary
-  - AllHostile
-  - Wizard
-  - DeathSquad #SS220 dq update
-  - SpiderQueen #ss220 spider queen
-  - CultYogg #SS220 CultYogg
+    - NanoTrasen
+    - DeathSquad #SS220 dq update
+    - Syndicate
+    - Xeno
+    - PetsNT
+    - Zombie
+    - Revolutionary
+    - SpiderQueen #ss220 spider queen
+    - CultYogg #SS220 CultYogg
+    - AllHostile
 
 - type: npcFaction
   id: NanoTrasen
@@ -24,14 +23,12 @@
   - SpiderQueen #ss220 spider queen
   - Dragon
   - AllHostile
-  - Wizard
 
 - type: npcFaction
   id: Mouse
   hostile:
-  - PetsNT
-  - AllHostile
-  - Wizard
+    - PetsNT
+    - AllHostile
 
 - type: npcFaction
   id: Passive
@@ -45,8 +42,6 @@
   - Xeno
   - SpiderQueen #ss220 spider queen
   - AllHostile
-  - Wizard
-  - Dragon
 
 - type: npcFaction
   id: SimpleHostile
@@ -57,12 +52,9 @@
   - PetsNT
   - Zombie
   - Revolutionary
-  - Dragon
-  - Xeno
   - SpiderQueen #ss220 spider queen
   - CultYogg #SS220 CultYogg
   - AllHostile
-  - Wizard
 
 - type: npcFaction
   id: SimpleNeutral
@@ -80,7 +72,6 @@
   - CultYogg #SS220 CultYogg
   - Dragon
   - AllHostile
-  - Wizard
 
 - type: npcFaction
   id: Xeno
@@ -95,8 +86,6 @@
   - SpiderQueen #ss220 spider queen
   - CultYogg #SS220 CultYogg
   - AllHostile
-  - Wizard
-  - Dragon
 
 - type: npcFaction
   id: Zombie
@@ -112,8 +101,6 @@
   - SpiderQueen #ss220 spider queen
   - CultYogg #SS220 CultYogg
   - AllHostile
-  - Wizard
-  - Dragon
 
 - type: npcFaction
   id: Revolutionary
@@ -126,7 +113,6 @@
   - SpiderQueen #ss220 spider queen
   - CultYogg #SS220 CultYogg
   - AllHostile
-  - Wizard
 
 - type: npcFaction
   id: AllHostile
@@ -142,7 +128,6 @@
   - Xeno
   - Zombie
   - Revolutionary
-  - Wizard
   # SS220 Fractions begin
   # Regular:
   - BloodCult
@@ -156,19 +141,3 @@
   - EbentNanoTrasen
   - EbentIronSquad
   # SS220 Fractions end
-
-- type: npcFaction
-  id: Wizard
-  hostile:
-  - NanoTrasen
-  - Dragon
-  - Mouse
-  - Passive
-  - PetsNT
-  - SimpleHostile
-  - SimpleNeutral
-  - Syndicate
-  - Xeno
-  - Zombie
-  - Revolutionary
-  - AllHostile

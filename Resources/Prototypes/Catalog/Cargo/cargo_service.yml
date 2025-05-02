@@ -91,7 +91,7 @@
 - type: cargoProduct
   id: ServicePersonnel
   icon:
-    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
+    sprite: Objects/Misc/id_cards.rsi
     state: default
   product: CrateServicePersonnel
   cost: 1000

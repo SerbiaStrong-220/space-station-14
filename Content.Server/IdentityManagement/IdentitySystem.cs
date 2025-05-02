@@ -27,7 +27,6 @@ public sealed class IdentitySystem : SharedIdentitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private readonly CriminalRecordsConsoleSystem _criminalRecordsConsole = default!;
-    [Dependency] private readonly GrammarSystem _grammarSystem = default!;
 
     private HashSet<EntityUid> _queuedIdentityUpdates = new();
 
@@ -103,7 +102,7 @@ public sealed class IdentitySystem : SharedIdentitySystem
 
             // If presumed name is null and we're using that, we set proper noun to be false ("the old woman")
             if (name != representation.TrueName && representation.PresumedName == null)
-                _grammarSystem.SetProperNoun((uid, grammar), false);
+                identityGrammar.ProperNoun = false;
 
             Dirty(ident, identityGrammar);
         }

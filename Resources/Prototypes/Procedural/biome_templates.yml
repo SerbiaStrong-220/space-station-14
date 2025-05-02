@@ -513,9 +513,7 @@
         - CrystalGreen
         - CrystalPink
         - CrystalOrange
-        - CrystalBlack
         - CrystalBlue
-        - CrystalYellow
         - CrystalCyan
     - !type:BiomeEntityLayer
       threshold: 0.95
@@ -563,9 +561,7 @@
         - CrystalGreen
         - CrystalPink
         - CrystalOrange
-        - CrystalBlack
         - CrystalBlue
-        - CrystalYellow
         - CrystalCyan
     - !type:BiomeEntityLayer
       threshold: 0.95

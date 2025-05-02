@@ -18,7 +18,7 @@
     prototypes: [SyndicateOperativeGearExtremelyBasic]
     roleLoadout: [ RoleSurvivalSyndicate ]
   - type: RandomMetadata
-    nameSegments: [NamesDeathCommando] # Corvax-Localization
+    nameSegments: [corvax_names_death_commando] # Corvax-Localization
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -68,8 +68,8 @@
   - type: NukeOperative
   - type: RandomMetadata
     nameSegments:
-    - NamesSyndicateNormal
-    nameFormat: name-format-nukie-operator
+    - nukeops-role-operator
+    - SyndicateNamesNormal
   - type: Loadout
     prototypes: [SyndicateOperativeGearFullNoUplink]
 
@@ -98,21 +98,8 @@
   #   roleLoadout: [ RoleSurvivalSyndicate ]         # SS220 Lone-Ops-Test-Fail-Fix (wasn't me)
   - type: RandomMetadata
     nameSegments:
-    - NamesSyndicatePrefix
-    - NamesSyndicateNormal
-    nameFormat: name-format-nukie-generic
+    - SyndicateNamesPrefix
+    - SyndicateNamesNormal
   - type: NpcFactionMember
     factions:
     - Syndicate
-
-# Wizard
-- type: entity
-  categories: [ HideSpawnMenu ]
-  name: Wizard
-  parent: MobHuman
-  id: MobHumanWizard
-  components:
-  - type: RandomHumanoidAppearance
-  - type: NpcFactionMember
-    factions:
-    - Wizard

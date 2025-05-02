@@ -94,7 +94,7 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: [ClothingBackpackDuffel, BaseSecurityContraband]
+  parent: [ClothingBackpackDuffel]
   id: ClothingBackpackDuffelSecurity
   name: security duffel bag
   description: A large duffel bag for holding extra security related goods.
@@ -108,7 +108,7 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: [ClothingBackpackDuffel, BaseSecurityContraband]
+  parent: [ClothingBackpackDuffel]
   id: ClothingBackpackDuffelBrigmedic
   name: brigmedic duffel bag
   description: A large duffel bag for holding extra medical related goods.

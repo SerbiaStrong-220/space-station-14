@@ -113,17 +113,6 @@
         - Sheet
         - RawMaterial
         - Ingot
-  # SS220 Add access check for material eject begin
-  - type: AccessReader
-    access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
-  # SS220 Add access check for material eject end
-  - type: OreSiloClient
-  # SS220 Add silo linking in mapping begin
-  - type: DeviceNetwork
-    deviceNetId: Private
-    receiveFrequencyId: OreSilo
-    transmitFrequencyId: OreSilo
-  # SS220 Add silo linking in mapping end
   - type: Lathe
     idleState: icon
     runningState: building
@@ -198,17 +187,6 @@
         - Sheet
         - RawMaterial
         - Ingot
-  # SS220 Add access check for material eject begin
-  - type: AccessReader
-    access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
-  # SS220 Add access check for material eject end
-  - type: OreSiloClient
-  # SS220 Add silo linking in mapping begin
-  - type: DeviceNetwork
-    deviceNetId: Private
-    receiveFrequencyId: OreSilo
-    transmitFrequencyId: OreSilo
-  # SS220 Add silo linking in mapping end
   - type: Lathe
     idleState: icon
     runningState: building
@@ -220,7 +198,6 @@
     dynamicPacks:
     - AdvancedTools
     - ScienceEquipment
-    - ScienceExplosives
     - ScienceClothing
     - PowerCells
     - ScienceWeapons
@@ -298,17 +275,6 @@
         - Sheet
         - RawMaterial
         - Ingot
-  # SS220 Add access check for material eject begin
-  - type: AccessReader
-    access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
-  # SS220 Add access check for material eject end
-  - type: OreSiloClient
-  # SS220 Add silo linking in mapping begin
-  - type: DeviceNetwork
-    deviceNetId: Private
-    receiveFrequencyId: OreSilo
-    transmitFrequencyId: OreSilo
-  # SS220 Add silo linking in mapping end
   - type: RequireProjectileTarget
 
 - type: entity
@@ -357,17 +323,6 @@
       - Sheet
       - RawMaterial
       - Ingot
-  # SS220 Add access check for material eject begin
-  - type: AccessReader
-    access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
-  # SS220 Add access check for material eject end
-  - type: OreSiloClient
-  # SS220 Add silo linking in mapping begin
-  - type: DeviceNetwork
-    deviceNetId: Private
-    receiveFrequencyId: OreSilo
-    transmitFrequencyId: OreSilo
-  # SS220 Add silo linking in mapping end
   - type: GuideHelp
     guides:
     - Robotics
@@ -442,33 +397,17 @@
     - SecurityAmmoRubberStatic #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
     - SecurityWeaponsStatic
     dynamicPacks:
-    - SalvageSecurityBoards
-    - SalvageSecurityWeapons
     - SecurityEquipment
     - SecurityBoards
     - SecurityExplosives
     - SecurityAmmo
     - SecurityWeapons
-    - SecurityDisablers
   - type: MaterialStorage
     whitelist:
       tags:
         - Sheet
         - RawMaterial
         - Ingot
-  # SS220 Add access check for material eject begin
-  - type: AccessReader
-    access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
-  # SS220 Add access check for material eject end
-  - type: OreSiloClient
-  # SS220 Add silo linking in mapping begin
-  - type: DeviceNetwork
-    deviceNetId: Private
-    receiveFrequencyId: OreSilo
-    transmitFrequencyId: OreSilo
-  # SS220 Add silo linking in mapping end
-  - type: LatheAnnouncing
-    channels: [Security]
 
 - type: entity
   id: AmmoTechFab
@@ -503,17 +442,6 @@
           - Sheet
           - RawMaterial
           - Ingot
-    # SS220 Add access check for material eject begin
-    - type: AccessReader
-      access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
-    # SS220 Add access check for material eject end
-    - type: OreSiloClient
-    # SS220 Add silo linking in mapping begin
-    - type: DeviceNetwork
-      deviceNetId: Private
-      receiveFrequencyId: OreSilo
-      transmitFrequencyId: OreSilo
-    # SS220 Add silo linking in mapping end
 
 - type: entity
   id: MedicalTechFab
@@ -552,19 +480,6 @@
     board: MedicalTechFabCircuitboard
   - type: StealTarget
     stealGroup: MedicalTechFabCircuitboard
-  # SS220 Add access check for material eject begin
-  - type: AccessReader
-    access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
-  # SS220 Add access check for material eject end
-  - type: OreSiloClient
-  # SS220 Add silo linking in mapping begin
-  - type: DeviceNetwork
-    deviceNetId: Private
-    receiveFrequencyId: OreSilo
-    transmitFrequencyId: OreSilo
-  # SS220 Add silo linking in mapping end
-  - type: LatheAnnouncing
-    channels: [Medical]
 
 - type: entity
   parent: BaseLathe

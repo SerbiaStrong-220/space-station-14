@@ -26,7 +26,6 @@
     - id: AstroNavCartridge
     - id: ClothingOuterMechLoaderFull # SS220 AddMechToClothing
     - id: DeviceCalculator # SS220 Calculator
-    - id: MailTeleporterMachineCircuitboard
 
 - type: entity
   id: LockerQuarterMasterFilled
@@ -139,8 +138,6 @@
     - id: DoorRemoteService
     - id: HoPIDCard
     - id: IDComputerCircuitboard
-    - id: FundingAllocationComputerCircuitboard
-    - id: CargoRequestServiceComputerCircuitboard
     - id: RubberStampApproved
     - id: RubberStampDenied
     - id: RubberStampHop
@@ -174,12 +171,9 @@
     - id: ClothingHandsGlovesColorYellow
     - id: ClothingHeadsetAltEngineering
     - id: DoorRemoteEngineering
-    - id: CargoRequestEngineeringComputerCircuitboard
-    - id: RCDAmmo
-    # SS220 RCD-to-CE begin
-    - id: RCDCE
-    # - id: RCD
-    # SS220 RCD-to-CE end
+    - id: RCDCE #SS220 RCD-to-CE begin
+    #- id: RCD
+    - id: RCDAmmo #SS220 RCD-to-CE end
     - id: RubberStampCE
     - id: Telescopichka
     - id: ClothingWristWatchGold # SS220 Wrist Watch
@@ -240,14 +234,12 @@
     - id: HandheldCrewMonitor
     - id: Hypospray
     - id: MedicalTechFabCircuitboard
-    - id: CargoRequestMedicalComputerCircuitboard
     - id: MedkitFilled
     - id: RubberStampCMO
     - id: Telescopichka # SS220 Telescopic Baton
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: CigPackMED #SS220 Cigarettes
     - id: MedTekCartridge
-    - id: BoxBottleChief #SS220 Limitation Revive
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -298,7 +290,6 @@
     - id: HandTeleporter
     - id: ProtolatheMachineCircuitboard
     - id: ResearchComputerCircuitboard
-    - id: CargoRequestScienceComputerCircuitboard
     - id: RubberStampRd
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: Telescopichka # SS220 Telescopic Baton
@@ -362,7 +353,6 @@
     - id: HoloprojectorSecurity
     - id: RubberStampHos
     - id: SecurityTechFabCircuitboard
-    - id: CargoRequestSecurityComputerCircuitboard
     - id: WeaponDisabler
     - id: BookBusido # Corvax-Books
     - id: ClothingWristWatchGold # SS220 Wrist Watch

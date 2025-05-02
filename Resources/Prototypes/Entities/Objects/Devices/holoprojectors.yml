@@ -120,7 +120,7 @@
   components:
     - type: HolosignProjector
       signProto: HolosignSecurity
-      chargeUse: 90
+      chargeUse: 120
     - type: Sprite
       sprite: Objects/Devices/Holoprojectors/security.rsi
       state: icon

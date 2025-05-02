@@ -1,9 +1,10 @@
-using System.IO;
+﻿using System.IO;
 using Content.Server.Administration.Managers;
 using Content.Shared.Administration;
 using Content.Shared.Mapping;
+using Robust.Server.GameObjects;
 using Robust.Server.Player;
-using Robust.Shared.EntitySerialization.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -16,10 +17,10 @@ public sealed class MappingManager : IPostInjectInit
 {
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly ILogManager _log = default!;
+    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly IServerNetManager _net = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly IEntitySystemManager _systems = default!;
-    [Dependency] private readonly IEntityManager _ent = default!;
 
     private ISawmill _sawmill = default!;
     private ZStdCompressionContext _zstd = default!;
@@ -44,14 +45,14 @@ public sealed class MappingManager : IPostInjectInit
             if (!_players.TryGetSessionByChannel(message.MsgChannel, out var session) ||
                 !_admin.IsAdmin(session, true) ||
                 !_admin.HasAdminFlag(session, AdminFlags.Host) ||
-                !_ent.TryGetComponent(session.AttachedEntity, out TransformComponent? xform) ||
-                xform.MapUid is not {} mapUid)
+                session.AttachedEntity is not { } player)
             {
                 return;
             }
 
-            var sys = _systems.GetEntitySystem<MapLoaderSystem>();
-            var data = sys.SerializeEntitiesRecursive([mapUid]).Node;
+            var mapId = _systems.GetEntitySystem<TransformSystem>().GetMapCoordinates(player).MapId;
+            var mapEntity = _map.GetMapEntityIdOrThrow(mapId);
+            var data = _systems.GetEntitySystem<MapLoaderSystem>().GetSaveData(mapEntity);
             var document = new YamlDocument(data.ToYaml());
             var stream = new YamlStream { document };
             var writer = new StringWriter();

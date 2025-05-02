@@ -35,9 +35,6 @@
   placement:
     mode: SnapgridCenter
   components:
-    - type: SubFloorHide
-      visibleLayers:
-      - enum.SubfloorLayers.FirstLayer
     - type: Sprite
       sprite: SS220/Structures/Piping/Atmospherics/gasfilter.rsi #ss220 engineering-update-atmos
       layers:
@@ -87,9 +84,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: SubFloorHide
-    visibleLayers:
-    - enum.SubfloorLayers.FirstLayer
   - type: Sprite
     sprite: SS220/Structures/Piping/Atmospherics/gasfilter.rsi #ss220 engineering-update-atmos
     layers:
@@ -134,9 +128,6 @@
   placement:
     mode: SnapgridCenter
   components:
-    - type: SubFloorHide
-      visibleLayers:
-      - enum.SubfloorLayers.FirstLayer
     - type: Sprite
       sprite: SS220/Structures/Piping/Atmospherics/gasmixer.rsi #ss220 engineering-update-atmos
       layers:
@@ -236,8 +227,6 @@
     - type: SubFloorHide
       blockInteractions: false
       blockAmbience: false
-      visibleLayers:
-      - enum.SubfloorLayers.FirstLayer
     - type: NodeContainer
       nodes:
         inlet:

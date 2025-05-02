@@ -1,11 +1,8 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-
-# Base
 - type: entity
   parent: EnergySwordDouble
-  id: EnergySwordAdmiralBase
+  id: EnergySwordDoubleIronSquad
   suffix: Shitspawn, Ebent, FractWar
-  abstract: true
   components:
   - type: ItemToggleMeleeWeapon
     activatedDamage:
@@ -19,7 +16,6 @@
     angle: 100
     damage:
       types:
-        Blunt: 4.5
   - type: Reflect
     reflectProb: 0.80 #ss220 ttkTweaks
     reflects:
@@ -29,15 +25,9 @@
     reflectProbProjectile: 0.70 #ss220lowTTKUpdate
     spreadProjectile: 180
 
-# Iron squad
-- type: entity
-  parent: EnergySwordAdmiralBase
-  id: EnergySwordDoubleIronSquad
-  suffix: Shitspawn, Ebent, FractWar
-
 # USSP
 - type: entity
-  parent: EnergySwordAdmiralBase
+  parent: EnergySwordDouble
   id: EnergyAxe
   suffix: Shitspawn, Ebent, FractWar
   name: двуручный энергетический топор
@@ -67,13 +57,30 @@
   - type: Item
     size: Small
     sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_axe_inhands.rsi
+  - type: Reflect
+    reflects: Energy
+    reflectProb: .95
+    spread: 75
   - type: UseDelay
     delay: 1
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+        types:
+            Slash: 12
+            Heat: 12
+            Structural: 15
   - type: ComponentToggler
     components:
     - type: Sharp
     - type: DisarmMalus
       malus: 0.7
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1.5
+    angle: 100
+    damage:
+      types:
+        Blunt: 4.5
   - type: ItemToggleActiveSound
     activeSound:
       path: /Audio/Weapons/ebladehum.ogg
@@ -82,7 +89,7 @@
 
 # ERT
 - type: entity
-  parent: EnergySwordAdmiralBase
+  parent: EnergySwordDouble
   id: EnergySwordEbentDouble
   suffix: Shitspawn, Ebent, FractWar
   name: парные энергетические мечи
@@ -112,13 +119,30 @@
   - type: Item
     size: Small
     sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_sword_ebent_inhands_double.rsi
+  - type: Reflect
+    reflects: Energy
+    reflectProb: .95
+    spread: 75
   - type: UseDelay
     delay: 1
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+        types:
+            Slash: 12
+            Heat: 12
+            Structural: 15
   - type: ComponentToggler
     components:
     - type: Sharp
     - type: DisarmMalus
       malus: 0.7
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1.5
+    angle: 100
+    damage:
+      types:
+        Blunt: 4.5
   - type: ItemToggleActiveSound
     activeSound:
       path: /Audio/Weapons/ebladehum.ogg

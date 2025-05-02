@@ -89,18 +89,6 @@ namespace Content.Shared.Chemistry
         Discard,
     }
 
-    public enum ChemMasterSortingType : byte
-    {
-        None = 0,
-        Alphabetical = 1,
-        Quantity = 2,
-        Latest = 3,
-    }
-
-    [Serializable, NetSerializable]
-    public sealed class ChemMasterSortingTypeCycleMessage : BoundUserInterfaceMessage;
-
-
     public enum ChemMasterReagentAmount
     {
         U1 = 1,
@@ -172,8 +160,6 @@ namespace Content.Shared.Chemistry
 
         public readonly ChemMasterMode Mode;
 
-        public readonly ChemMasterSortingType SortingType;
-
         public readonly FixedPoint2? BufferCurrentVolume;
         public readonly uint SelectedPillType;
 
@@ -182,7 +168,7 @@ namespace Content.Shared.Chemistry
         public readonly bool UpdateLabel;
 
         public ChemMasterBoundUserInterfaceState(
-            ChemMasterMode mode, ChemMasterSortingType sortingType, ContainerInfo? inputContainerInfo, ContainerInfo? outputContainerInfo,
+            ChemMasterMode mode, ContainerInfo? inputContainerInfo, ContainerInfo? outputContainerInfo,
             IReadOnlyList<ReagentQuantity> bufferReagents, FixedPoint2 bufferCurrentVolume,
             uint selectedPillType, uint pillDosageLimit, bool updateLabel)
         {
@@ -190,7 +176,6 @@ namespace Content.Shared.Chemistry
             OutputContainerInfo = outputContainerInfo;
             BufferReagents = bufferReagents;
             Mode = mode;
-            SortingType = sortingType;
             BufferCurrentVolume = bufferCurrentVolume;
             SelectedPillType = selectedPillType;
             PillDosageLimit = pillDosageLimit;

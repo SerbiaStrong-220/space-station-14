@@ -74,7 +74,8 @@ public sealed class TechnologyDiskSystem : EntitySystem
             }
         }
         _popup.PopupClient(Loc.GetString("tech-disk-inserted"), target, args.User);
-        PredictedQueueDel(ent.Owner);
+        if (_net.IsServer)
+            QueueDel(ent);
         args.Handled = true;
     }
 

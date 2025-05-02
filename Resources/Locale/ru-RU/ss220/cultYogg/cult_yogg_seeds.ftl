@@ -6,5 +6,3 @@ seeds-null-shroom-name = нулевой гриб
 seeds-null-shroom-display-name = нулевой гриб
 seeds-sidious-shroom-name = Сидиус гриб
 seeds-sidious-shroom-display-name = Сидиус гриб
-seeds-lurbo-shroom-name = Луброгус
-seeds-lurbo-shroom-display-name = Луброгус

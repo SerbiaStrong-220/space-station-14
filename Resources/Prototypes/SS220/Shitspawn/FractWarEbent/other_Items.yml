@@ -13,7 +13,7 @@
     - id: SheetPlasma
     - id: Screwdriver
     - id: MaterialBiomass
-      amount: 30
+      amount: 4
     - id: BluespaceBeaker
       amount: 10
     - id: Defibrillator

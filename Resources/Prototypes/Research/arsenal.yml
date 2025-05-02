@@ -171,8 +171,8 @@
     sprite: Objects/Weapons/Guns/Battery/taser.rsi
     state: icon
   discipline: Arsenal
-  tier: 3
-  cost: 12500
+  tier: 2
+  cost: 10000
   recipeUnlocks:
   - WeaponTaser
 #SS220 taserback end
@@ -216,16 +216,16 @@
   - PortableRecharger
 
 - type: technology
-  id: ThermalWeaponry
-  name: research-technology-thermal-weaponry
+  id: ExperimentalBatteryAmmo
+  name: research-technology-experimental-battery-ammo
   icon:
-    sprite: Objects/Weapons/Guns/Battery/temp_gun.rsi
+    sprite: Objects/Weapons/Guns/Battery/svalinn.rsi
     state: icon
   discipline: Arsenal
   tier: 3
   cost: 15000
   recipeUnlocks:
-  - WeaponTemperatureGun
+  - WeaponLaserSvalinn
 
 - type: technology
   id: AdvancedShuttleWeapon

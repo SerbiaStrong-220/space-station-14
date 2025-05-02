@@ -17,7 +17,7 @@
     sprite: Structures/Machines/scanner.rsi
     state: open
   discipline: CivilianServices
-  tier: 2
+  tier: 3
   cost: 10000
   recipeUnlocks:
   - MedicalScannerMachineCircuitboard

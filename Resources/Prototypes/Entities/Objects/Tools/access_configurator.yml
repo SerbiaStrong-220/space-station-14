@@ -92,8 +92,6 @@
     - Armory
     - Atmospherics
     - Bar
-    - BasicSilicon
-    - Borg
     - Brig
     - Detective
     - Captain
@@ -103,8 +101,6 @@
     - ChiefEngineer
     - ChiefMedicalOfficer
     - Command
-    - Cryogenics
-    - EmergencyShuttleRepealAll
     - Engineering
     - External
     - HeadOfPersonnel
@@ -121,7 +117,6 @@
     - Salvage
     - Security
     - Service
-    - StationAi
     - Theatre
     - Magistrate #SS220-Magistrate Foundation
     - CentralCommand

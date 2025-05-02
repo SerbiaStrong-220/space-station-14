@@ -1,5 +1,17 @@
-﻿- type: localizedDataset
-  id: NamesHologram
+﻿- type: dataset
+  id: names_hologram
   values:
-    prefix: names-hologram-dataset-
-    count: 14
+  - Аполлон
+  - Дата
+  - ГЛИММЕР
+  - Эль Рой
+  - Гефест
+  - Голо-ИИ
+  - Голо-Друг
+  - Голограмма
+  - Одиссей
+  - Персефона
+  - Петра
+  - Процессор
+  - Прометей
+  - Тесей

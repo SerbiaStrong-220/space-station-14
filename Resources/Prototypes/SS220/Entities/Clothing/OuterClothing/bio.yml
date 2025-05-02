@@ -15,5 +15,3 @@
     modifiers:
       coefficients:
         Caustic: 0.5
-  - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.25

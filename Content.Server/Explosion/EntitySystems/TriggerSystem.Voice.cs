@@ -48,16 +48,11 @@ namespace Content.Server.Explosion.EntitySystems
                 return;
             }
 
-            if (!string.IsNullOrWhiteSpace(component.KeyPhrase) && message.IndexOf(component.KeyPhrase, StringComparison.InvariantCultureIgnoreCase) is var index and >= 0 )
+            if (!string.IsNullOrWhiteSpace(component.KeyPhrase) && message.Contains(component.KeyPhrase, StringComparison.InvariantCultureIgnoreCase))
             {
-                _adminLogger.Add(LogType.Trigger, LogImpact.Medium,
+                _adminLogger.Add(LogType.Trigger, LogImpact.High,
                         $"A voice-trigger on {ToPrettyString(ent):entity} was triggered by {ToPrettyString(args.Source):speaker} speaking the key-phrase {component.KeyPhrase}.");
                 Trigger(ent, args.Source);
-
-                var messageWithoutPhrase = message.Remove(index, component.KeyPhrase.Length).Trim();
-
-                var voice = new VoiceTriggeredEvent(args.Source, message, messageWithoutPhrase);
-                RaiseLocalEvent(ent, ref voice);
             }
         }
 
@@ -142,13 +137,3 @@ namespace Content.Server.Explosion.EntitySystems
         }
     }
 }
-
-
-/// <summary>
-///    Raised when a voice trigger is activated, containing the message that triggered it.
-/// </summary>
-/// <param name="Source"> The EntityUid of the entity sending the message</param>
-/// <param name="Message"> The contents of the message</param>
-/// <param name="MessageWithoutPhrase"> The message without the phrase that triggered it.</param>
-[ByRefEvent]
-public readonly record struct VoiceTriggeredEvent(EntityUid Source, string Message, string MessageWithoutPhrase);

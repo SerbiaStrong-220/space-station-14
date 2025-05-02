@@ -79,7 +79,7 @@ public sealed partial class DockingSystem
             return false;
 
         shuttleDockedAABB = matty.TransformBox(shuttleAABB);
-        gridRotation = offsetAngle.Reduced();
+        gridRotation = (targetGridRotation + offsetAngle).Reduced();
         return true;
     }
 
@@ -125,8 +125,7 @@ public sealed partial class DockingSystem
     public DockingConfig? GetDockingConfigAt(EntityUid shuttleUid,
         EntityUid targetGrid,
         EntityCoordinates coordinates,
-        Angle angle,
-        bool fallback = true)
+        Angle angle)
     {
         var gridDocks = GetDocks(targetGrid);
         var shuttleDocks = GetDocks(shuttleUid);
@@ -139,11 +138,6 @@ public sealed partial class DockingSystem
             {
                 return config;
             }
-        }
-
-        if (fallback && configs.Count > 0)
-        {
-            return configs.First();
         }
 
         return null;
@@ -329,9 +323,7 @@ public sealed partial class DockingSystem
             // If it's a map check no hard collidable anchored entities overlap
             if (isMap)
             {
-                var localTiles = _mapSystem.GetLocalTilesEnumerator(gridEntity.Owner, gridEntity.Comp, aabb);
-
-                while (localTiles.MoveNext(out var tile))
+                foreach (var tile in _mapSystem.GetLocalTilesIntersecting(gridEntity.Owner, gridEntity.Comp, aabb))
                 {
                     var anchoredEnumerator = _mapSystem.GetAnchoredEntitiesEnumerator(gridEntity.Owner, gridEntity.Comp, tile.GridIndices);
 

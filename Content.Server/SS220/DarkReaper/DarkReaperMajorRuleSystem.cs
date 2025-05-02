@@ -12,7 +12,6 @@ using Content.Server.Station.Systems;
 using Content.Shared.Mind;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
-using Robust.Server.Player;
 
 namespace Content.Server.SS220.DarkReaper;
 
@@ -22,7 +21,6 @@ public sealed class DarkReaperMajorRuleSystem : GameRuleSystem<DarkReaperMajorRu
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("DarkReaperMajorRule");
 
@@ -40,9 +38,9 @@ public sealed class DarkReaperMajorRuleSystem : GameRuleSystem<DarkReaperMajorRu
         foreach (var reaperRule in EntityQuery<DarkReaperMajorRuleComponent>())
         {
             var mindId = reaperRule.ReaperMind;
-            if (mindQuery.TryGetComponent(mindId, out var mind) && _playerManager.TryGetSessionById(mind.UserId, out var session))
+            if (mindQuery.TryGetComponent(mindId, out var mind) && mind.Session != null)
             {
-                ev.AddLine(Loc.GetString("darkreaper-roundend-user", ("user", session)));
+                ev.AddLine(Loc.GetString("darkreaper-roundend-user", ("user", mind.Session.Name)));
             }
         }
     }

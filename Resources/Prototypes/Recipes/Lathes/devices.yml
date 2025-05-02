@@ -43,8 +43,7 @@
 - type: latheRecipe
   id: ExplosivePayload
   result: ExplosivePayload
-  categories:
-  - Weapons
+  category: Weapons
   completetime: 4
   materials:
     Steel: 100
@@ -74,8 +73,7 @@
 - type: latheRecipe
   id: AnomalyLocator
   result: AnomalyLocatorEmpty
-  categories:
-  - Tools
+  category: Tools
   completetime: 3
   materials:
     Steel: 400
@@ -84,8 +82,7 @@
 - type: latheRecipe
   id: AnomalyLocatorWide
   result: AnomalyLocatorWideEmpty
-  categories:
-  - Tools
+  category: Tools
   completetime: 3
   materials:
     Steel: 400
@@ -102,8 +99,7 @@
 - type: latheRecipe
   id: WeaponPistolCHIMP
   result: WeaponPistolCHIMP
-  categories:
-  - Tools
+  category: Tools
   completetime: 5
   materials:
     Steel: 500
@@ -112,8 +108,7 @@
 - type: latheRecipe
   id: WeaponGauntletGorilla
   result: WeaponGauntletGorilla
-  categories:
-  - Tools
+  category: Tools
   completetime: 5
   materials:
     Steel: 1500
@@ -158,8 +153,7 @@
 - type: latheRecipe
   id: WeaponForceGun
   result: WeaponForceGun
-  categories:
-  - Tools
+  category: Tools
   completetime: 5
   materials:
     Steel: 500
@@ -178,19 +172,9 @@
 #SS220 - Until better times end
 
 - type: latheRecipe
-  id: DeviceDesynchronizer
-  result: DeviceDesynchronizer
-  completetime: 5
-  materials:
-    Steel: 700
-    Glass: 100
-    Uranium: 200
-
-- type: latheRecipe
   id: WeaponProtoKineticAccelerator
   result: WeaponProtoKineticAccelerator
-  categories:
-  - Weapons
+  category: Weapons
   completetime: 5
   materials:
     Steel: 1000
@@ -200,8 +184,7 @@
 - type: latheRecipe
   id: WeaponTetherGun
   result: WeaponTetherGun
-  categories:
-  - Tools
+  category: Tools
   completetime: 5
   materials:
     Steel: 500
@@ -211,8 +194,7 @@
 - type: latheRecipe
   id: WeaponGrapplingGun
   result: WeaponGrapplingGun
-  categories:
-  - Tools
+  category: Tools
   completetime: 5
   materials:
     Steel: 500

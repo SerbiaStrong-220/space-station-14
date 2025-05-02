@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/d917f4c2a088419d5c3aec7656b7ff8cebd1822e idcluwne made by brainfood1183 (github) for ss14, idbrigmedic made by PuroSlavKing (Github), pirate made by brainfood1183 (github), idadmin made by Arimah (github), idvisitor by IProduceWidgets (Github), idintern-service by spanky-spanky (Github) | service icons darkened by frobnic8 (Discord and Github), wizard and idwizard by ScarKy0",
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by Kit0vras (Github) for SS220, idmagistrate state sprited by Estkemran (Github) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -33,6 +33,9 @@
     },
     {
       "name": "ert_security"
+    },
+    {
+      "name": "deathsquad"
     },
     {
       "name": "gold"
@@ -102,6 +105,12 @@
     },
     {
       "name": "idlawyer"
+    },
+    {
+      "name": "idiaa"
+    },
+    {
+      "name": "idmagistrate"
     },
     {
       "name": "idmedicaldoctor"
@@ -176,6 +185,9 @@
       "name": "idintern-tech"
     },
     {
+      "name": "idblueshield"
+    },
+    {
       "name": "idadmin"
     },
     {
@@ -227,10 +239,7 @@
       "name": "idseniorofficer"
     },
     {
-      "name": "wizard"
-    },
-    {
-      "name": "idwizard"
+      "name": "idpilot"
     },
     {
       "name": "gold-inhand-left",
@@ -273,12 +282,21 @@
       "directions": 4
     },
     {
+      "name": "ussp"
+    },
+    {
+      "name": "ussp_med"
+    },
+    {
       "name": "green-inhand-left",
       "directions": 4
     },
     {
       "name": "green-inhand-right",
       "directions": 4
-    }
+    },
+	{
+	  "name": "idseniorservice"
+	}
   ]
 }
