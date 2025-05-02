@@ -10,10 +10,10 @@
   skinColoration: Hues
   buttScanTexture: /Textures/SS220/Interface/Butts/slime.png
 #SS220-new-species-naming begin
-  maleFirstNames: names_slime_first_male
-  femaleFirstNames: names_slime_first_female
-  maleLastNames: names_slime_last
-  femaleLastNames: names_slime_last
+  maleFirstNames: NamesSlimeFirstMale
+  femaleFirstNames: NamesSlimeFirstFemale
+  maleLastNames: NamesSlimeLast
+  femaleLastNames: NamesSlimeLast
 #SS220-new-species-naming end
 
 - type: speciesBaseSprites
@@ -23,6 +23,8 @@
     Head: MobSlimeHead
     Hair: MobSlimeMarkingFollowSkin
     FacialHair: MobSlimeMarkingFollowSkin
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobSlimeTorso
     HeadTop: MobHumanoidAnyMarking # Corvax Sponsors
     Tail: MobHumanoidAnyMarking # Corvax Sponsors
@@ -64,7 +66,7 @@
 - type: humanoidBaseSprite
   id: MobSlimeMarkingFollowSkin
   markingsMatchSkin: true
-  layerAlpha: 0.5
+  layerAlpha: 0.72
 
 - type: humanoidBaseSprite
   id: MobSlimeHead

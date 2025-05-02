@@ -1,7 +1,7 @@
 - type: entity
   id: BaseMagazineMagnum
   name: pistol magazine (.45 magnum)
-  parent: [ BaseMagazinePistol]
+  parent: [ BaseMagazinePistol, BaseSecurityContraband ]
   abstract: true
   components:
   - type: Tag
@@ -61,6 +61,7 @@
   name: pistol magazine (.45 magnum any)
   suffix: empty
   parent: BaseMagazineMagnum
+  description: 7-round single stack pistol magazine.
   components:
   - type: BallisticAmmoProvider
     proto: null
@@ -68,15 +69,14 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-#SS220-FixAmmoSprite-Begin
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-#SS220-FixAmmoSprite-End
 
 - type: entity
   id: MagazineMagnum
   name: pistol magazine (.45 magnum)
   parent: BaseMagazineMagnum
+  description: 7-round single stack pistol magazine. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnum
@@ -91,6 +91,7 @@
   id: MagazineMagnumPractice
   name: pistol magazine (.45 magnum practice)
   parent: BaseMagazineMagnum
+  description: 7-round single stack pistol magazine. Intended to hold non-harmful chalk ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumPractice
@@ -105,6 +106,7 @@
   id: MagazineMagnumUranium
   name: pistol magazine (.45 magnum uranium)
   parent: BaseMagazineMagnum
+  description: 7-round single stack pistol magazine. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumUranium
@@ -119,6 +121,7 @@
   id: MagazineMagnumAP
   name: pistol magazine (.45 magnum armor-piercing)
   parent: BaseMagazineMagnum
+  description: 7-round single stack pistol magazine. Intended to hold rare armor-piercing ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeMagnumAP
@@ -142,10 +145,8 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-#SS220-FixAmmoSprite-Begin
-    - state: mag-2
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-#SS220-FixAmmoSprite-End
 
 - type: entity
   id: MagazineMagnumSubMachineGun

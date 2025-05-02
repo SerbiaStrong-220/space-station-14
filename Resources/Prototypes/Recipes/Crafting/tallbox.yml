@@ -50,7 +50,7 @@
   targetNode: done
   category: construction-category-storage
   description: A standard-issue Nanotrasen storage unit, now on walls.
-  icon: { sprite: Structures/Storage/wall_locker.rsi, state: generic_icon }
+  icon: { sprite: SS220/Structures/Storage/wall_locker.rsi, state: generic_icon } # SS220 wall lockers resprite
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: true

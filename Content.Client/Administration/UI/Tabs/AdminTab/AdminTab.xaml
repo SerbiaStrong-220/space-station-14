@@ -16,10 +16,13 @@
             <cc:UICommandButton Command="timeto" Text="{Loc admin-player-actions-window-timeto}" WindowType="{x:Type at:TimePanelWindow}" />
             <cc:CommandButton Command="announceui" Text="{Loc admin-player-actions-window-announce}" />
             <cc:UICommandButton Command="callshuttle" Text="{Loc admin-player-actions-window-shuttle}" WindowType="{x:Type at:AdminShuttleWindow}"/>
-            <cc:CommandButton Command="adminlogs" Text="{Loc admin-player-actions-window-admin-logs}" />
-            <cc:CommandButton Command="faxui" Text="{Loc admin-player-actions-window-admin-fax}" />
+            <cc:CommandButton Command="adminlogs" Text="{Loc admin-player-actions-window-admin-logs}"/>
+            <cc:CommandButton Command="faxui" Text="{Loc admin-player-actions-window-admin-fax}"/>
+            <cc:CommandButton Command="achatwindow" Text="{Loc admin-player-actions-window-admin-chat}"/>
+            <!-- SS220 AdminTab buttons begin -->
             <cc:UICommandButton Command="antagonists" Text="{Loc admin-player-actions-window-antagonists}" WindowType="{x:Type SS220at:AntagonistsWindow}" />
             <cc:CommandButton Command="allttsqueuereset" Text="{Loc admin-player-actions-tts-queue-reset}" WithDialog="True" />
+            <!-- SS220 AdminTab buttons end -->
         </GridContainer>
     </BoxContainer>
 </Control>

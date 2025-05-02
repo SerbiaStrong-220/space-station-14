@@ -1,0 +1,75 @@
+- type: entity
+  id: MachineMaterialSilo
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: material silo
+  description: An advanced machine, capable of using bluespace technology to transmit materials to nearby machines.
+  components:
+  # SS220 Add silo linking in mapping begin
+  - type: DeviceNetwork
+    deviceNetId: Private
+    receiveFrequencyId: OreSilo
+    transmitFrequencyId: OreSilo
+  - type: DeviceList
+  # SS220 Add silo linking in mapping end
+  - type: Sprite
+    sprite: Structures/Machines/silo.rsi
+    snapCardinals: true
+    layers:
+    - state: silo
+      map: [ "base" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        base:
+          True: { state: silo_active }
+          False: { state: silo }
+  - type: OreSilo
+    entireGrid: true # SS220 OreSilo works across the entire grid begin
+    synchronizeWithDeviceList: true # SS220 Add silo linking in mapping
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - Ingot
+  # SS220 Add access check for material eject begin
+  - type: AccessReader
+    access: [["Cargo"] , ["Engineering"], ["Medical"], ["Research"], ["Security"], ["Service"]]
+  # SS220 Add access check for material eject end
+  - type: ActivatableUI
+    key: enum.OreSiloUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.OreSiloUiKey.Key:
+        type: OreSiloBoundUserInterface
+  - type: Machine
+    board: MaterialSiloMachineCircuitboard
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: WiresVisuals
+  - type: WiresPanel
+  - type: StaticPrice
+    price: 1500

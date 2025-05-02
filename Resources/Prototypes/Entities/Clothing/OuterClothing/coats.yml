@@ -423,7 +423,7 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase]
+  parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase, BaseSecurityContraband]
   id: ClothingOuterCoatWarden
   name: warden's armored jacket
   description: A sturdy, utilitarian jacket designed to protect a warden from any brig-bound threats.
@@ -585,7 +585,7 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: ClothingOuterStorageFoldableBase
   id: ClothingOuterCoatLabSeniorResearcher
   name: senior researcher lab coat
   description: A suit that protects against minor chemical spills. Has a purple collar and wrist trims.
@@ -605,7 +605,12 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabSeniorResearcher]
+  id: ClothingOuterCoatLabSeniorResearcherOpened
+  name: senior researcher lab coat
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
   id: ClothingOuterCoatLabSeniorPhysician
   name: senior physician lab coat
   description: A suit that protects against minor chemical spills. Has light blue sleeves and an orange waist trim.
@@ -625,6 +630,11 @@
 #SS220 Micro_fibers end
 
 - type: entity
+  parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabSeniorPhysician]
+  id: ClothingOuterCoatLabSeniorPhysicianOpened
+  name: senior physician lab coat
+
+- type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatSpaceAsshole
   name: the coat of space asshole
@@ -641,7 +651,7 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: ClothingOuterStorageFoldableBase
   id: ClothingOuterCoatExpensive
   name: expensive coat
   description: Very fluffy pink coat, made out of very expensive fur (clearly).
@@ -655,6 +665,11 @@
     microFiberMaterial: micro-fibers-fur
     microFiberColor: micro-fibers-pink
 #SS220 Micro_fibers end
+
+- type: entity
+  parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatExpensive]
+  id: ClothingOuterCoatExpensiveOpened
+  name: expensive coat
 
 #SS220-DressTweak-Begin
 
