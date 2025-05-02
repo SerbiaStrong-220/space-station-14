@@ -13,7 +13,10 @@
     sprite: SS220/Objects/CultYogg/lantern_cult.rsi
     layers:
     - state: lantern_off
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "base" ]
+    - state: lantern_on
+      shader: unshaded
+      map: [ "light" ]
   - type: Clothing
     sprite: SS220/Objects/CultYogg/lantern_cult.rsi
     equippedPrefix: off
