@@ -19,6 +19,9 @@
         Slash: 6
   - type: Item
     sprite: Objects/Tools/Hydroponics/hoe.rsi
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
 
 - type: entity
   name: plant clippers
@@ -40,6 +43,9 @@
   - type: Item
     sprite: Objects/Tools/Hydroponics/clippers.rsi
     storedRotation: -90
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
 
 - type: entity
   name: scythe
@@ -71,6 +77,10 @@
       types:
         Slash: 8
 # SS220 Throwable Changes end
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+      Plastic: 100
 
 - type: entity
   name: hatchet
@@ -107,6 +117,9 @@
         Slash: 6.5
         Piercing: 1.5
 # SS220 Throwable Changes end
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
 
 - type: entity
   name: spade
@@ -145,6 +158,9 @@
         Slash: 6.5
         Piercing: 1.5
 # SS220 Throwable Changes end
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
 
 - type: entity
   name: plant bag

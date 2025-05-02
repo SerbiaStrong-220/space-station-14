@@ -6,84 +6,100 @@
   mapPath: /Maps/SS220/EventMaps/FractWar.yml
   minPlayers: 0
   stations:
-    Astro:
-      stationProto: FractWarStationStation
+    Boxstation:
+      stationProto: FractWarStation
       components:
-        - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_astro.yml
         - type: StationNameSetup
-          mapNameTemplate: '{0} Astro {1}'
+          mapNameTemplate: '{0} Frankenstein {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '-SS220'
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_frankenstein.yml
         - type: StationJobs
           availableJobs:
-            Passenger: [ -1, -1 ]
-            #Command
+            #service
             Captain: [ 1, 1 ]
-            BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
-            #Law
-            IAA: [ 2, 2 ]
-            Magistrate: [1, 1]
-            Lawyer: [ 3, 3 ]
-            #Security
-            HeadOfSecurity: [ 1, 1 ]
-            Warden: [ 1, 1 ]
-            Detective: [ 1, 1 ]
-            # SecurityPilot: [ 2, 2 ]
-            SecurityOfficer: [ 6, 6 ]
-            SecurityCadet: [ 4, 4 ]
-            Brigmedic: [ 1, 1 ]
-            SeniorOfficer: [ 1, 1 ]
-            #Engineering
-            ChiefEngineer: [ 1, 1 ]
-            StationEngineer: [ 8, 8 ]
-            AtmosphericTechnician: [ 3, 3 ]
-            TechnicalAssistant: [ 6, 6 ]
-            SeniorEngineer: [ 1, 1 ]
-            #Cargo
-            Quartermaster: [ 1, 1 ]
-            CargoTechnician: [ 6, 6 ]
-            SalvageSpecialist: [ 3, 3 ]
-            #Medical
-            ChiefMedicalOfficer: [ 1, 1 ]
-            MedicalDoctor: [ 7, 7 ]
-            Chemist: [ 2, 2 ]
-            Psychologist: [ 1, 1 ]
-            MedicalIntern: [ 6, 6 ]
-            Paramedic: [ 1, 1 ]
-            SeniorPhysician: [ 1, 1 ]
-            #Science
-            ResearchDirector: [ 1, 1 ]
-            Scientist: [ 8, 8 ]
-            ResearchAssistant: [ 6, 6 ]
-            # StationAi: [ 1, 1 ]
-            Borg: [ 3, 3 ]
-            SeniorResearcher: [ 1, 1 ]
-            #Service
+            SeniorService: [ 1, 1]
             Bartender: [ 2, 2 ]
             Botanist: [ 3, 3 ]
             Chef: [ 2, 2 ]
-            Clown: [ 1, 1 ]
             Janitor: [ 3, 3 ]
+            Chaplain: [ 2, 2 ]
+            Librarian: [ 2, 2 ]
+            ServiceWorker: [ 4, 4 ]
+            #engineering
+            ChiefEngineer: [ 1, 1 ]
+            SeniorEngineer: [ 1, 1]
+            AtmosphericTechnician: [ 3, 3 ]
+            StationEngineer: [ 5, 5 ]
+            TechnicalAssistant: [ 8, 8 ]
+            #medical
+            ChiefMedicalOfficer: [ 1, 1 ]
+            SeniorPhysician: [ 1, 1]
+            Chemist: [ 2, 2 ]
+            MedicalDoctor: [ 4, 4 ]
+            Paramedic: [ 1, 1 ]
+            MedicalIntern: [ 8, 8 ]
+            Psychologist: [ 1, 1 ]
+            #science
+            ResearchDirector: [ 1, 1 ]
+            SeniorResearcher: [ 1, 1]
+            Scientist: [ 5, 5 ]
+            ResearchAssistant: [ 8, 8 ]
+            # StationAi: [ 1, 1 ]
+            Borg: [ 3, 3 ]
+            #security
+            HeadOfSecurity: [ 1, 1 ]
+            Warden: [ 1, 1 ]
+            SeniorOfficer: [ 1, 1]
+            SecurityOfficer: [ 6, 6 ]
+            Detective: [ 1, 1 ]
+            SecurityPilot: [ 2, 2 ]
+            SecurityCadet: [ 4, 4 ]
+            Magistrate: [ 1, 1 ]
+            IAA: [ 2, 2 ] # Corvax-IAA
+            Lawyer: [ 3, 3 ]
+            BlueShield: [ 1, 1 ]
+            Brigmedic: [ 1, 1 ]
+            #supply
+            Quartermaster: [ 1, 1 ]
+            SalvageSpecialist: [ 3, 3 ]
+            CargoTechnician: [ 3, 3 ]
+            #civilian
+            Passenger: [ -1, -1 ]
+            Clown: [ 1, 1 ]
             Mime: [ 1, 1 ]
-            Chaplain: [ 1, 1 ]
-            Librarian: [ 1, 1 ]
             Musician: [ 2, 2 ]
             Reporter: [ 2, 2 ]
-            ServiceWorker: [ 2, 2 ]
-            Zookeeper: [ 1, 1 ]
-            SeniorService: [ 1, 1 ]
-            Boxer: [ 2, 2]
+        - type: StationGoal
+          goals:
+          #Base
+          - Shuttle
+          - Singularity
+          - SolarPanels
+          - Artifacts
+          - Bank
+          - Zoo
+          - MiningOutpost
+          - Tesla
+          #SS220
+          - Saveplanet
+          - Expedition
+          - Guests
+          - PneumaticTubes
+          - Robotisation
+          - Homekeepers
+          - ComplexPVO
 
 - type: entity
-  id: FractWarStationStation
+  id: FractWarStation
   parent: StandardNanotrasenStation
   categories: [ HideSpawnMenu ]
   components:
     - type: StationMinimap
       minimapData: !type:StationMinimapData
-        mapTexture: SS220/ViewableMaps/Astro.png
-        originOffset: 103, -137
+        mapTexture: SS220/ViewableMaps/Frankenstein.png
+        originOffset: 110, 181
         mapScale: 6.4

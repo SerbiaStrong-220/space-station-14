@@ -47,9 +47,6 @@
 - type: Tag
   id: DetectiveCamera
 
-- type: Tag
-  id: MindSlave
-
 # SS220-JianSword
 - type: Tag
   id: JianSword

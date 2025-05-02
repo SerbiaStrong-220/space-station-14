@@ -1,0 +1,468 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by Kit0vras (Github) for SS220, pda-ce_dark sprited by nightmare_stalker (Discord) for SS220, pda-magistrate & screen-law sprited, iaa & lawyer modified,  by Estkemran (Github) for SS220, pda-rd-alt sprited by okroshka59 (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "id_overlay"
+    },
+    {
+      "name": "id_overlay_library"
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "equipped-IDCARD",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "insert_overlay"
+    },
+    {
+      "name": "light_overlay"
+    },
+    {
+      "name": "pda"
+    },
+    {
+      "name": "pda-admiral"
+    },
+    {
+      "name": "pda-atmos"
+    },
+    {
+      "name": "pda-bartender"
+    },
+    {
+      "name": "pda-boxer"
+    },
+    {
+      "name": "pda-captain"
+    },
+    {
+      "name": "pda-cargo"
+    },
+    {
+      "name": "pda-cburn"
+    },
+    {
+      "name": "pda-ce"
+    },
+    {
+      "name": "pda-ce_dark"
+    },
+    {
+      "name": "pda-chaplain"
+    },
+    {
+      "name": "pda-chemistry"
+    },
+    {
+      "name": "pda-clear"
+    },
+    {
+      "name": "pda-clown"
+    },
+    {
+      "name": "pda-cmo"
+    },
+    {
+      "name": "pda-cook"
+    },
+    {
+      "name": "pda-deathsquad"
+    },
+    {
+      "name": "pda-detective"
+    },
+    {
+      "name": "pda-diplomat"
+    },
+    {
+      "name": "pda-engineer"
+    },
+    {
+      "name": "pda-genetics"
+    },
+    {
+      "name": "pda-hop"
+    },
+    {
+      "name": "pda-hos"
+    },
+    {
+      "name": "pda-hydro"
+    },
+    {
+      "name": "pda-iaa"
+    },
+    {
+      "name": "pda-janitor"
+    },
+    {
+      "name": "pda-lawyer"
+    },
+    {
+      "name": "pda-library"
+    },
+    {
+      "name": "pda-magistrate"
+    },
+    {
+      "name": "pda-medical"
+    },
+    {
+      "name": "pda-paramedic"
+    },
+    {
+      "name": "pda-mime"
+    },
+    {
+      "name": "pda-miner"
+    },
+    {
+      "name": "pda-pirate"
+    },
+    {
+      "name": "pda-qm"
+    },
+    {
+      "name": "pda-rd"
+    },
+    {
+      "name": "pda-rd-alt"
+    },
+    {
+      "name": "pda-roboticist"
+    },
+    {
+      "name": "pda-science"
+    },
+    {
+      "name": "pda-security"
+    },
+    {
+      "name": "pda-brigmedic"
+    },
+    {
+      "name": "pda-syndi"
+    },
+    {
+      "name": "pda-syndi-agent"
+    },
+    {
+      "name": "pda-centcom"
+    },
+    {
+      "name": "pda-virology"
+    },
+    {
+      "name": "pda-warden"
+    },
+    {
+      "name": "pda-musician"
+    },
+    {
+      "name": "pda-reporter"
+    },
+    {
+      "name": "pda-interncadet"
+    },
+    {
+      "name": "pda-internmed"
+    },
+    {
+      "name": "pda-internsci"
+    },
+    {
+      "name": "pda-internservice"
+    },
+    {
+      "name": "pda-interntech"
+    },
+    {
+      "name": "pda-bs"
+    },
+    {
+      "name": "pda-zookeeper"
+    },
+    {
+      "name": "pda-ert"
+    },
+    {
+      "name": "pda-centcomnew"
+    },
+    {
+      "name": "pda-cluwne"
+    },
+    {
+      "name": "pda-seniorengineer"
+    },
+    {
+      "name": "pda-seniorresearcher"
+    },
+    {
+      "name": "pda-seniorphysician"
+    },
+    {
+      "name": "pda-seniorofficer"
+    },
+	{
+	  "name": "pda-seniorservice"
+	},
+    {
+      "name": "pda-ussp"
+    },
+    {
+      "name": "pda-ussp-medical"
+    },
+    {
+      "name": "screen-white",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-red",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-green",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-blue",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-atmos",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-cargo",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-ce",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-chaplain",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-clown",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-cluwne",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-cook",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-detective",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-engineer",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-hydro",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-janitor",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-library",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-medic",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-miner",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-nt",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-pai",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-pirate",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-security",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-law",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-shield",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-syndie",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "screen-ussp",
+      "delays": [
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    }
+  ]
+}

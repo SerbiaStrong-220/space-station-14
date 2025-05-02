@@ -1,49 +1,58 @@
 ﻿- type: typingIndicator
   id: default
+  spritePath: /Textures/Corvax/Effects/speech.rsi # Corvax-TypingIndicator
   typingState: default0
   idleState: default3 # Corvax-TypingIndicator
 
 - type: typingIndicator
   id: robot
+  spritePath: /Textures/Corvax/Effects/speech.rsi # Corvax-TypingIndicator
   typingState: robot0
   idleState: robot3 # Corvax-TypingIndicator
 
 - type: typingIndicator
   id: alien
+  spritePath: /Textures/Corvax/Effects/speech.rsi # Corvax-TypingIndicator
   typingState: alien0
   idleState: alien3 # Corvax-TypingIndicator
 
 - type: typingIndicator
   id: guardian
+  spritePath: /Textures/Corvax/Effects/speech.rsi # Corvax-TypingIndicator
   typingState: guardian0
-  idleState: guardian3 # Corvax-TypingIndicator
+  idleState: guardian2 # Corvax-TypingIndicator
 
 - type: typingIndicator
   id: holo
+  spritePath: /Textures/Corvax/Effects/speech.rsi # Corvax-TypingIndicator
   typingState: holo0
   idleState: holo3 # Corvax-TypingIndicator
   offset: 0, 0.0625
 
 - type: typingIndicator
   id: lawyer
+  spritePath: /Textures/Corvax/Effects/speech.rsi # Corvax-TypingIndicator
   typingState: lawyer0
   idleState: lawyer3 # Corvax-TypingIndicator
   offset: 0, 0.125
 
 - type: typingIndicator
   id: moth
+  spritePath: /Textures/Corvax/Effects/speech.rsi # Corvax-TypingIndicator
   typingState: moth0
   idleState: moth3 # Corvax-TypingIndicator
   offset: 0, 0.125
 
 - type: typingIndicator
   id: spider
+  spritePath: /Textures/Corvax/Effects/speech.rsi # Corvax-TypingIndicator
   typingState: spider0
   idleState: spider3 # Corvax-TypingIndicator
   offset: 0, 0.125
 
 - type: typingIndicator
   id: vox
+  spritePath: /Textures/Corvax/Effects/speech.rsi # Corvax-TypingIndicator
   typingState: vox0
   idleState: vox0 # Corvax-TypingIndicator
   offset: -0.125, 0.125
@@ -56,6 +65,19 @@
 
 - type: typingIndicator
   id: slime
+  spritePath: /Textures/Corvax/Effects/speech.rsi # Corvax-TypingIndicator
   typingState: slime0
   idleState: slime3 # Corvax-TypingIndicator
+  offset: 0, 0.125
+
+- type: typingIndicator
+  id: gingerbread
+  typingState: gingerbread0
+  idleState: gingerbread1 # SS220 idle state
+  offset: 0, 0.125
+
+- type: typingIndicator
+  id: diona
+  typingState: diona0
+  idleState: diona1 # SS220 idle state
   offset: 0, 0.125

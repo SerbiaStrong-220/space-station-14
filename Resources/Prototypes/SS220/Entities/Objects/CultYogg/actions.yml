@@ -95,6 +95,7 @@
           Shock: -4
           Radiation: -1
           Stamina: -5
+          Сerebral: -10
         groups:
           Airloss: -5
       bloodlossModifier: -1

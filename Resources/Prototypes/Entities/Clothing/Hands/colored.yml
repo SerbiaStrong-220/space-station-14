@@ -232,7 +232,7 @@
       - state: equipped-HAND
         color: "#bf7442" #SS220-Gloves-Color-Edited
   - type: Fiber
-    fiberColor: fibers-brown
+    fiberColor: fibers-light-brown
 
 # Orange Gloves
 - type: entity

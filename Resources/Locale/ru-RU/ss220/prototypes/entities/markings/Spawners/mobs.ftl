@@ -1,0 +1,16 @@
+ent-SpawnMobVespia = спавнер веспия злая
+    .desc = { ent-MarkerBase.desc }
+ent-SpawnGhostRoleVespia = спавнер веспия злая роль призрак
+    .desc = { ent-MarkerBase.desc }
+ent-SpawnMobCrocodile = спавнер крокодила
+    .desc = { ent-MarkerBase.desc }
+ent-SpawnMobCrocodileAngry = спавнер крокодила
+    .desc = { ent-MarkerBase.desc }
+    .suffix = Враждебный
+ent-SpawnMobCrocodileSpace = спавнер космического крокодила
+    .desc = { ent-MarkerBase.desc }
+ent-SpawnMobCrocodileSpaceSalvage = спавнер космического крокодила
+    .desc = { ent-MarkerBase.desc }
+    .suffix = Обломки
+ent-SpawnMobAlbinoCrocodile = спавнер Альбино
+    .desc = { ent-MarkerBase.desc }

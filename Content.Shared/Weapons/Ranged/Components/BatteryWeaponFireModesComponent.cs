@@ -65,6 +65,12 @@ public sealed partial class BatteryWeaponFireMode
     public float FireCost = 100;
 }
 
+[Serializable, NetSerializable]
+public enum BatteryWeaponFireModeVisuals : byte
+{
+    State
+}
+
 //SS220 Add firemode modificators begin
 /// <summary>
 /// Gun modifiers that can be applied in each fire mode

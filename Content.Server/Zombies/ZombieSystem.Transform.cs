@@ -24,11 +24,11 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Nutrition.AnimalHusbandry;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
-using Content.Shared.Roles;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Zombies;
 using Content.Shared.Cuffs.Components;
@@ -40,6 +40,9 @@ using Content.Server.Administration.Managers;
 using Content.Shared.Humanoid.Markings;
 using Robust.Server.Player;
 using Content.Shared.Ghost.Roles.Components;
+using Content.Shared.Tag;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Content.Server.SS220.Language;
 using Content.Shared.SS220.Language.Components;
 
@@ -64,9 +67,11 @@ public sealed partial class ZombieSystem
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly IBanManager _banManager = default!; // SS220 Antag ban fix
 
+    private static readonly ProtoId<TagPrototype> InvalidForGlobalSpawnSpellTag = "InvalidForGlobalSpawnSpell";
+    private static readonly ProtoId<TagPrototype> CannotSuicideTag = "CannotSuicide";
     /// <summary>
     /// Handles an entity turning into a zombie when they die or go into crit
     /// </summary>
@@ -139,6 +144,16 @@ public sealed partial class ZombieSystem
         melee.Angle = 0.0f;
         melee.HitSound = zombiecomp.BiteSound;
 
+        DirtyFields(target, melee, null, fields:
+        [
+            nameof(MeleeWeaponComponent.Animation),
+            nameof(MeleeWeaponComponent.WideAnimation),
+            nameof(MeleeWeaponComponent.AltDisarm),
+            nameof(MeleeWeaponComponent.Range),
+            nameof(MeleeWeaponComponent.Angle),
+            nameof(MeleeWeaponComponent.HitSound),
+        ]);
+
         if (mobState.CurrentState == MobState.Alive)
         {
             // Groaning when damaged
@@ -179,17 +194,7 @@ public sealed partial class ZombieSystem
             //ss220 - end edit
 
             //This is done here because non-humanoids shouldn't get baller damage
-            //lord forgive me for the hardcoded damage
-            DamageSpecifier dspec = new()
-            {
-                DamageDict = new()
-                {
-                    { "Slash", 13 },
-                    { "Piercing", 7 },
-                    { "Structural", 10 }
-                }
-            };
-            melee.Damage = dspec;
+            melee.Damage = zombiecomp.DamageOnBite;
 
             // humanoid zombies get to pry open doors and shit
             var pryComp = EnsureComp<PryingComponent>(target);
@@ -251,10 +256,10 @@ public sealed partial class ZombieSystem
 
         //He's gotta have a mind
         var hasMind = _mind.TryGetMind(target, out var mindId, out var mind);
-        if (hasMind && _mind.TryGetSession(mindId, out var session))
+        if (hasMind && mind != null && _player.TryGetSessionById(mind.UserId, out var session))
         {
             //Zombie role for player manifest
-            _roles.MindAddRole(mindId, "MindRoleZombie", mind: null, silent: true);
+            _role.MindAddRole(mindId, "MindRoleZombie", mind: null, silent: true);
 
             //Greeting message for new bebe zombers
             _chatMan.DispatchServerMessage(session, Loc.GetString("zombie-infection-greeting"));
@@ -306,5 +311,10 @@ public sealed partial class ZombieSystem
         RaiseLocalEvent(target, ref ev, true);
         //zombies get slowdown once they convert
         _movementSpeedModifier.RefreshMovementSpeedModifiers(target);
+
+        //Need to prevent them from getting an item, they have no hands.
+        // Also prevents them from becoming a Survivor. They're undead.
+        _tag.AddTag(target, InvalidForGlobalSpawnSpellTag);
+        _tag.AddTag(target, CannotSuicideTag);
     }
 }

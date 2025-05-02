@@ -27,8 +27,6 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     //SS220-mindslave begin
     [ValidatePrototypeId<EntityPrototype>]
     private const string MindSlaveImplantProto = "MindSlaveImplant";
-    [ValidatePrototypeId<TagPrototype>]
-    private const string MindShieldImplantTag = "MindShield";
     private const float MindShieldRemoveTime = 40;
     //SS220-mindslave end
     // SS220-fakeMS fix begin
@@ -59,7 +57,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         //SS220-mindslave begin
         if (component.ImplanterSlot.ContainerSlot != null
             && component.ImplanterSlot.ContainerSlot.ContainedEntity != null
-            && _tag.HasTag(component.ImplanterSlot.ContainerSlot.ContainedEntity.Value, MindShieldImplantTag)
+            && HasComp<MindShieldImplantComponent>(component.ImplanterSlot.ContainerSlot.ContainedEntity)
             && _mindslave.IsEnslaved(target))
         {
             _popup.PopupEntity(Loc.GetString("mindshield-target-mindslaved"), target, args.User);
@@ -135,8 +133,6 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         args.Handled = true;
     }
 
-
-
     /// <summary>
     /// Attempt to implant someone else.
     /// </summary>
@@ -179,10 +175,9 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
         {
             foreach (var implant in implantContainer.ContainedEntities)
             {
-                if (HasComp<SubdermalImplantComponent>(implant) && _container.CanRemove(implant, implantContainer))
+                if (HasComp<MindShieldImplantComponent>(implant) && _container.CanRemove(implant, implantContainer))
                 {
-                    if (_tag.HasTag(implant, MindShieldImplantTag))
-                        isMindShield = true;
+                    isMindShield = true;
                     break;
                 }
             }

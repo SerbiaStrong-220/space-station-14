@@ -1,0 +1,25 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: chief's bottle box
+  parent: BoxCardboard
+  suffix: NoMapping
+  id: BoxBottleChief
+  description: A box full of bottles for  medical chief.
+  components:
+  - type: StorageFill
+    contents:
+      - id: ChemistryBottleOmnizine
+        amount: 1
+      - id: ChemistryBottleCognizine
+        amount: 1
+      - id: BicaridineChemistryBottle
+        amount: 1
+      - id: DexalinPlusChemistryBottle
+        amount: 1
+      - id: CerebrinChemistryBottle
+        amount: 2
+  - type: Sprite
+    layers:
+      - state: box
+      - state: bottle

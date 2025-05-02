@@ -52,3 +52,8 @@
   id: Bacchus
   flavorType: Complex
   description: flavor-complex-bacchus
+
+- type: flavor
+  id: Xlebnuldiesel
+  flavorType: Complex
+  description: flavor-complex-xlebnuldiesel

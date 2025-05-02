@@ -48,6 +48,10 @@
   access:
   - CentralCommandBSO
   - CentralCommand
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
 
 - type: startingGear
   id: CentcomOperativeBSOGear
@@ -56,7 +60,7 @@
     shoes: ClothingShoesBootsBlueShieldJackFilled
     head: ClothingHeadBeretBlueshield
     eyes: ClothingEyesBlueShieldGlasses
-    gloves: ClothingHandsGlovesCombat
+    gloves: ClothingHandsGlovesPowergloveDisabler
     outerClothing: ClothingOuterBSOCoat
     id: CentcomOperativeBSOPDA
     ears: ClothingHeadsetAltCentComm
