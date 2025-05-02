@@ -12,6 +12,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Robust.Shared.Timing;
+using Robust.Server.Player;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 
@@ -25,7 +26,8 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
-     [Dependency] private readonly IGameTiming _time = default!;
+    [Dependency] private readonly IGameTiming _time = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {
@@ -73,12 +75,10 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
             _mobState.ChangeMobState(uid, MobState.Critical);
             _popup.PopupEntity(Loc.GetString("cult-yogg-resurrected-by-heal", ("target", uid)), uid, PopupType.Medium);
 
-            if (!_mind.TryGetMind(uid, out var _, out var mind))
-                return;
-
-            if (mind.Session != null && mind.CurrentEntity != uid)
-                _euiManager.OpenEui(new ReturnToBodyEui(mind, _mind), mind.Session);
+            if (_mind.TryGetMind(uid, out var _, out var mind) &&
+                mind.CurrentEntity == uid &&
+                _playerManager.TryGetSessionById(mind.UserId, out var session))
+                _euiManager.OpenEui(new ReturnToBodyEui(mind, _mind, _playerManager), session);
         }
     }
-
 }

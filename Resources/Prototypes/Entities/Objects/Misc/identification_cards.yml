@@ -6,11 +6,11 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
   - type: Clothing
     slots:
     - idcard
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
   - type: Item
     size: Small
     heldPrefix: default
@@ -1240,18 +1240,34 @@
 
 - type: entity
   parent: IDCardStandard
+  id: WizardIDCard
+  name: wizard ID card
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    layers:
+    - state: wizard
+    - state: idwizard
+  - type: Access
+    tags:
+    - Wizard
+    - External
+    - Maintenance
+
+- type: entity
+  parent: IDCardStandard
   id: UniversalIDCard
   name: universal ID card
   suffix: Admin
   description: An ID card that gives you access beyond your wildest dreams.
   components:
   - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
     layers:
     - state: admin
     - state: idadmin
   - type: Clothing
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
   - type: Item
     heldPrefix: green
   - type: IdCard
@@ -1260,6 +1276,7 @@
   - type: Access
     groups:
     - AllAccess
+    - Silicon
     tags:
     - CentralCommand
     - NuclearOperative
@@ -1268,3 +1285,11 @@
   - type: Tag #  Ignore Chameleon tags
     tags:
     - DoorBumpOpener
+  - type: AgentIDCard
+  - type: ActivatableUI
+    key: enum.AgentIDCardUiKey.Key
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.AgentIDCardUiKey.Key:
+        type: AgentIDCardBoundUserInterface

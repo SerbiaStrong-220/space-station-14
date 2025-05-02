@@ -1,7 +1,7 @@
 - type: latheRecipe
   id: MagazinePistolRubber
   result: MagazinePistolRubber
-  category: Ammo
+  categories: [ Ammo ]
   completetime: 5
   materials:
     Steel: 145
@@ -10,7 +10,7 @@
 - type: latheRecipe
   id: MagazineBoxMagnumRubber
   result: MagazineBoxMagnumRubber
-  category: Ammo
+  categories: [ Ammo ]
   completetime: 5
   materials:
     Steel: 350
@@ -19,7 +19,7 @@
 - type: latheRecipe
   id: MagazineRifleRubber
   result: MagazineRifleRubber
-  category: Ammo
+  categories: [ Ammo ]
   completetime: 5
   materials:
     Steel: 175
@@ -28,7 +28,7 @@
 - type: latheRecipe
   id: MagazineLightRifleRubber
   result: MagazineLightRifleRubber
-  category: Ammo
+  categories: [ Ammo ]
   completetime: 5
   materials:
     Steel: 175
@@ -37,7 +37,7 @@
 - type: latheRecipe
   id: MagazineBoxRifleRubber
   result: MagazineBoxRifleRubber
-  category: Ammo
+  categories: [ Ammo ]
   completetime: 5
   materials:
     Steel: 350
@@ -46,7 +46,7 @@
 - type: latheRecipe
   id: MagazineBoxLightRifleRubber
   result: MagazineBoxLightRifleRubber
-  category: Ammo
+  categories: [ Ammo ]
   completetime: 5
   materials:
     Steel: 350
@@ -55,7 +55,7 @@
 - type: latheRecipe
   id: SpeedLoaderMagnumRubber
   result: SpeedLoaderMagnumRubber
-  category: Ammo
+  categories: [ Ammo ]
   completetime: 5
   materials:
     Steel: 175
@@ -64,7 +64,7 @@
 - type: latheRecipe
   id: MagazineBoxPistolRubber
   result: MagazineBoxPistolRubber
-  category: Ammo
+  categories: [ Ammo ]
   completetime: 5
   materials:
     Steel: 350
@@ -73,7 +73,7 @@
 - type: latheRecipe
   id: MagazinePistolSubMachineGunRubber
   result: MagazinePistolSubMachineGunRubber
-  category: Ammo
+  categories: [ Ammo ]
   completetime: 5
   materials:
     Steel: 175
@@ -153,3 +153,13 @@
   result: MagazinePistolHighCapacity
   materials:
     Steel: 240
+
+- type: latheRecipe
+  id: WeaponTaser
+  result: WeaponTaser
+  completetime: 5
+  materials:
+    Steel: 700
+    Plastic: 300
+    Gold: 250
+    Silver: 500

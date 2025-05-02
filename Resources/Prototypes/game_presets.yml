@@ -41,6 +41,7 @@
     - Traitor
     # - Revolutionary
     - Zombie
+    - Wizard
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
@@ -62,6 +63,7 @@
     - Traitor
     - Revolutionary
     - Zombie
+    - Wizard
     - BasicStationEventScheduler
     - KesslerSyndromeScheduler
     - MeteorSwarmMildScheduler
@@ -155,13 +157,14 @@
   description: traitor-description
   showInVote: false
   rules:
-    - Traitor
-    - SubGamemodesRule
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
-    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
-    - BasicRoundstartVariation
+  - DummyNonAntagChance
+  - Traitor
+  - SubGamemodesRule
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - BasicRoundstartVariation
 
 - type: gamePreset
   id: Deathmatch
@@ -185,6 +188,7 @@
   showInVote: false
   rules:
     - Nukeops
+    - DummyNonAntagChance
     # - SubGamemodesRule #SS220 no-thief-on-nukie-round-fix
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
@@ -192,6 +196,7 @@
     - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
 
+# SS220 no rev begin
 # - type: gamePreset
 #   id: Revolutionary
 #   alias:
@@ -202,12 +207,31 @@
 #   description: rev-description
 #   showInVote: false
 #   rules:
-#     - Revolutionary
-#     - SubGamemodesRule
-#     - BasicStationEventScheduler
-#     - MeteorSwarmScheduler
-#     - SpaceTrafficControlEventScheduler
-#     - BasicRoundstartVariation
+#   - DummyNonAntagChance
+#   - Revolutionary
+#   - SubGamemodesRule
+#   - BasicStationEventScheduler
+#   - MeteorSwarmScheduler
+#   - SpaceTrafficControlEventScheduler
+#   - BasicRoundstartVariation
+# SS220 no rev end
+
+- type: gamePreset
+  id: Wizard
+  alias:
+  - wizard
+  name: wizard-title
+  description: wizard-description
+  showInVote: false
+  rules:
+  - Wizard
+  - DummyNonAntagChance
+  - SubGamemodesRuleNoWizard #No Dual Wizards at the start, midround is fine
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - BasicRoundstartVariation
 
 - type: gamePreset
   id: Zombie

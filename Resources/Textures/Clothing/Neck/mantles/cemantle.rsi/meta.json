@@ -1,18 +1,18 @@
 {
-  "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from Skyrat-tg at commit https://github.com/Skyrat-SS13/Skyrat-tg/commit/42bb106e0e78142cad7e6239549b60b18da960ec",
-  "size": {
-    "x": 32,
-    "y": 32
-  },
-  "states": [
-    {
-      "name": "icon"
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "made by augustsun(Discord)/august-sun(GitHub) for SS14",
+    "size": {
+        "x": 32,
+        "y": 32
     },
-    {
-      "name": "equipped-NECK",
-      "directions": 4
-    }
-  ]
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "equipped-NECK",
+            "directions": 4
+        }
+    ]
 }

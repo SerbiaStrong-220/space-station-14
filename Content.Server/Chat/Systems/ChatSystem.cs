@@ -390,7 +390,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         {
             _audio.PlayGlobal(announcementSound == null ? DefaultAnnouncementSound
                 : sender == Loc.GetString("admin-announce-announcer-default") ? CentComAnnouncementSound // Corvax-Announcements: Support custom alert sound from admin panel
-                : _audio.GetSound(announcementSound),
+                : _audio.ResolveSound(announcementSound),
                 Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f));
         }
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Global station announcement from {sender}: {message}");
@@ -898,8 +898,8 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         if (findEnglish)
         {
-            newMessage = string.Empty;
-            newEmoteStr = "кашляет";
+            emoteStr = "кашляет";
+            return string.Empty;
         }
 
         emoteStr = newEmoteStr;

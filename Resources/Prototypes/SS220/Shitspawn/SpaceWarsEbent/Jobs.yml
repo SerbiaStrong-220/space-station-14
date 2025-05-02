@@ -52,7 +52,8 @@
   - type: Loadout
     prototypes: [ EbentSpaceWarsAgentGear ]
   - type: RandomMetadata
-    nameSegments: [ "Агент", SyndicateNamesNormal ]
+    nameSegments: [ NamesSyndicateNormal ]
+    nameFormat: space-wars-ebent-random-metadata-name-format-agent
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -119,7 +120,8 @@
   - type: Loadout
     prototypes: [ EbentSpaceWarsLeaderGear ]
   - type: RandomMetadata
-    nameSegments: [ "Командир", SyndicateNamesElite ]
+    nameSegments: [ NamesSyndicateElite ]
+    nameFormat: space-wars-ebent-random-metadata-name-format-commando
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -185,7 +187,8 @@
   - type: Loadout
     prototypes: [ EbentSpaceWarsOperativeGear ]
   - type: RandomMetadata
-    nameSegments: [ "Оперативник", SyndicateNamesElite ]
+    nameSegments: [ NamesSyndicateElite ]
+    nameFormat: space-wars-ebent-random-metadata-name-format-operative
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -269,7 +272,8 @@
   - type: Loadout
     prototypes: [ EbentSpaceWarsEngineerGear ]
   - type: RandomMetadata
-    nameSegments: [ "Техник", SyndicateNamesNormal ]
+    nameSegments: [ NamesSyndicateNormal ]
+    nameFormat: space-wars-ebent-random-metadata-name-format-technician
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -294,9 +298,9 @@
     - id: DoubleEmergencyOxygenTankFilled
     - id: MedkitAdvancedFilled
     - id: SyndiHypo
-    - id: EpinephrineChemistryBottle
+    - id: ChemistryBottleEpinephrine
       amount: 2
-    - id: OmnizineChemistryBottle
+    - id: ChemistryBottleOmnizine
 
 - type: startingGear
   id: EbentSpaceWarsMedicGear
@@ -332,7 +336,8 @@
   - type: Loadout
     prototypes: [ EbentSpaceWarsMedicGear ]
   - type: RandomMetadata
-    nameSegments: [ "Санитар", SyndicateNamesNormal ]
+    nameSegments: [ NamesSyndicateNormal ]
+    nameFormat: space-wars-ebent-random-metadata-name-format-medic
   - type: NpcFactionMember
     factions:
     - Syndicate
