@@ -204,8 +204,21 @@ public sealed class RadioDeviceSystem : EntitySystem
             return; // no feedback loops please.
 
         var channel = _protoMan.Index<RadioChannelPrototype>(component.BroadcastChannel)!;
-        if (_recentlySent.Add((args.Message, args.Source, channel)))
-            _radio.SendRadioMessage(args.Source, args.Message, channel, uid);
+
+        // SS220 languages begin
+        string message;
+        if (args.LanguageMessage is { } languageMessage)
+            message = languageMessage.GetMessageWithLanguageKeys();
+        else
+            message = args.Message;
+        // SS220 languages end
+
+        if (_recentlySent.Add((message, args.Source, channel)))
+            _radio.SendRadioMessage(args.Source, message, channel, uid);
+
+        //if (_recentlySent.Add((args.Message, args.Source, channel)))
+        //    _radio.SendRadioMessage(args.Source, message, channel, uid);
+        // SS220 languages end
     }
 
     private void OnAttemptListen(EntityUid uid, RadioMicrophoneComponent component, ListenAttemptEvent args)
@@ -229,8 +242,17 @@ public sealed class RadioDeviceSystem : EntitySystem
             ("speaker", Name(uid)),
             ("originalName", nameEv.VoiceName));
 
+        // SS220 languages begin
+        string message;
+        if (args.LanguageMessage is { } languageMessage)
+            message = languageMessage.GetMessageWithLanguageKeys();
+        else
+            message = args.Message;
+
         // log to chat so people can identity the speaker/source, but avoid clogging ghost chat if there are many radios
-        _chat.TrySendInGameICMessage(uid, args.Message, InGameICChatType.Whisper, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false);
+        //_chat.TrySendInGameICMessage(uid, args.Message, InGameICChatType.Whisper, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false);
+        _chat.TrySendInGameICMessage(uid, message, InGameICChatType.Whisper, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false);
+        // SS220 languages end
     }
 
     private void OnIntercomEncryptionChannelsChanged(Entity<IntercomComponent> ent, ref EncryptionChannelsChangedEvent args)

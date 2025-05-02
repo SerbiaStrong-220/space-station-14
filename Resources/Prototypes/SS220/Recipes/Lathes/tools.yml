@@ -1,16 +1,16 @@
 - type: latheRecipe
-  id: ClothingBeltChiefEngineer 
-  result: ClothingBeltChiefEngineer 
-  category: Tools
+  id: ClothingBeltChiefEngineer
+  result: ClothingBeltChiefEngineer
+  categories: [ Tools ]
   completetime: 1
   materials:
     Steel: 200
-    Cloth: 500    
+    Cloth: 500
 
 - type: latheRecipe
   id: WelderIndustrial
   result: WelderIndustrial
-  category: Tools
+  categories: [ Tools ]
   completetime: 1
   materials:
     Steel: 800
@@ -18,7 +18,7 @@
 - type: latheRecipe
   id: WelderIndustrialAdvanced
   result: WelderIndustrialAdvanced
-  category: Tools
+  categories: [ Tools ]
   completetime: 1
   materials:
     Steel: 800
@@ -26,7 +26,7 @@
 - type: latheRecipe
   id: SawAdvanced
   result: SawAdvanced
-  category: Tools
+  categories: [ Tools ]
   completetime: 1
   materials:
     Steel: 1200
@@ -34,7 +34,7 @@
 - type: latheRecipe
   id: GlowstickBlue
   result: GlowstickBlue
-  category: Tools
+  categories: [ Tools ]
   completetime: 1
   materials:
     Steel: 250

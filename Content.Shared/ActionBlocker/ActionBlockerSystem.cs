@@ -109,15 +109,16 @@ namespace Content.Shared.ActionBlocker
         /// </remarks>
         public bool CanUseHeldEntity(EntityUid user, EntityUid used)
         {
-            var ev = new UseAttemptEvent(user, used);
-            RaiseLocalEvent(user, ev);
+            var useEv = new UseAttemptEvent(user, used);
+            RaiseLocalEvent(user, useEv);
 
-            //ss220 roleitem begin
-            var usedEv = new BeingUsedAttemptEvent(user, used);
+            if (useEv.Cancelled)
+                return false;
+
+            var usedEv = new GettingUsedAttemptEvent(user);
             RaiseLocalEvent(used, usedEv);
-            //ss220 roleitem end
 
-            return !ev.Cancelled;
+            return !usedEv.Cancelled;
         }
 
 

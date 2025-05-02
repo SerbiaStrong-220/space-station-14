@@ -1,7 +1,7 @@
 - type: latheRecipe
   id: Thermoelectricgenerator
   result: Thermoelectricgenerator
-  category: Circuitry
+  categories: [ Circuitry ]
   completetime: 6
   materials:
      Steel: 100
@@ -11,7 +11,7 @@
 - type: latheRecipe
   id: ThermoelectricgeneratorTurbine
   result: ThermoelectricgeneratorTurbine
-  category: Circuitry
+  categories: [ Circuitry ]
   completetime: 6
   materials:
      Steel: 100
@@ -54,7 +54,7 @@
 - type: latheRecipe
   id: WallmountGeneratorAPUElectronics
   result: WallmountGeneratorAPUElectronics
-  category: Circuitry
+  categories: [ Circuitry ]
   completetime: 6
   materials:
      Steel: 100
@@ -65,7 +65,7 @@
 - type: latheRecipe
   id: SyndicateMicrowaveMachineCircuitboard
   result: SyndicateMicrowaveMachineCircuitboard
-  category: Circuitry
+  categories: [ Circuitry ]
   completetime: 6
   materials:
      Steel: 100
@@ -76,7 +76,7 @@
 - type: latheRecipe
   id: PowerCellHyperPrinted
   result: PowerCellHyperPrinted
-  category: Circuitry
+  categories: [ Circuitry ]
   completetime: 6
   materials:
      Steel: 1200
@@ -90,6 +90,21 @@
   completetime: 6
   materials:
     Steel: 1000
-    Glass: 450
+    Glass: 500
     Gold: 300
     Uranium: 500
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: MedicalScannerMachineCircuitboard
+  result: MedicalScannerMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: CloningPodMachineCircuitboard
+  result: CloningPodMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: CloningConsoleComputerCircuitboard
+  result: CloningConsoleComputerCircuitboard

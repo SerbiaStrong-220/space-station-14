@@ -140,8 +140,9 @@
     layers:
     - state: snotlet
   - type: Slippery
-    paralyzeTime: 1.5
-    launchForwardsMultiplier: 1.5
+    slipData:
+      paralyzeTime: 1.5
+      launchForwardsMultiplier: 1.5
   - type: SolutionContainerManager
     solutions:
       soap:

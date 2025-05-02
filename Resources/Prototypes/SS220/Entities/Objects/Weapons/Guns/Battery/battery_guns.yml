@@ -7,7 +7,7 @@
   description: "An innovative weapon that combines advanced technology and a unique design. It has two shooting modes: normal and enhanced."
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Battery/synergistic_enetgy_gun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/synergistic_energy_gun.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -17,7 +17,7 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Guns/Battery/synergistic_enetgy_gun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Battery/synergistic_energy_gun.rsi
   - type: Gun
   - type: HitscanBatteryAmmoProvider
     proto: RedLightLaser
@@ -155,6 +155,10 @@
   - type: ProjectileBatteryAmmoProvider
     proto: BulletLaserDestroy
     fireCost: 10
+  - type: MagazineVisuals
+    magState: pulse-mag
+    steps: 5
+  - type: Appearance
   - type: BatteryWeaponFireModes
     fireModes:
     - proto: BulletLaserDestroy

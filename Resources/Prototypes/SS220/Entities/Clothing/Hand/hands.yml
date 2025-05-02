@@ -102,3 +102,102 @@
     fiberMaterial: fibers-insulative
   - type: FingerprintMask
 
+- type: entity
+  parent: ClothingHandsGlovesPowerglove
+  id: ClothingHandsGlovesPowergloveDisabler
+  name: power gloves
+  description: Power gloves modified for pinpoint stunning of the opponent.
+  suffix: Operative BlueShield
+  components:
+  - type: Sprite
+    sprite: Clothing/Hands/Gloves/powerglove.rsi
+    layers:
+    - state: icon
+      map: [ "enum.ToggleVisuals.Layer" ]
+  - type: Clothing
+    equippedPrefix: on
+    sprite: Clothing/Hands/Gloves/powerglove.rsi
+  - type: Item
+    heldPrefix: on
+  - type: Stunbaton
+    energyPerUse: 50
+  - type: ItemToggle
+    predictable: false
+    verbToggleOn: toggle-powergloves-text
+    verbToggleOff: toggle-powergloves-text
+    soundActivate:
+      collection: sparks
+      params:
+        variation: 0.250
+    soundDeactivate:
+      collection: sparks
+      params:
+        variation: 0.250
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.250
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+        path: /Audio/Weapons/egloves.ogg
+        params:
+          variation: 0.250
+    activatedDamage:
+      types:
+        Blunt: 0
+        Stamina: 55
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 7
+    bluntStaminaDamageFactor: 2.0
+    mustBeEquippedToUse: true
+  - type: StaminaDamageOnHit
+    damage: 0
+    sound: /Audio/Weapons/egloves.ogg
+  - type: StaminaDamageOnCollide
+    damage: 0
+    sound: /Audio/Weapons/egloves.ogg
+  - type: DamageOnInteractProtection
+    damageProtection:
+      flatReductions:
+        Heat: 10
+  - type: DisarmMalus
+    malus: 0.5
+  - type: Riggable
+  - type: Insulated
+  - type: SolutionContainerManager
+    solutions:
+      battery:
+        maxVol: 5
+  - type: InjectableSolution
+    solution: battery
+  - type: DrawableSolution
+    solution: battery
+  - type: Explosive
+    explosionType: Default
+    intensitySlope: 3
+    maxIntensity: 300
+  - type: Battery
+    maxCharge: 200
+    startingCharge: 200
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}
+  - type: ToggleClothing
+    action: ActionTogglePowergloveDisabler
+
+
+- type: entity
+  id: ActionTogglePowergloveDisabler
+  name: Toggle Power Glove
+  description: Toggles the power glove on and off.
+  components:
+  - type: InstantAction
+    priority: -9
+    itemIconStyle: BigItem
+    event: !type:ToggleActionEvent

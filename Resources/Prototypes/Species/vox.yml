@@ -8,9 +8,9 @@
   dollPrototype: MobVoxDummy
   skinColoration: VoxFeathers
   defaultSkinTone: "#6c741d"
+  maleFirstNames: NamesVox
+  femaleFirstNames: NamesVox
   buttScanTexture: /Textures/SS220/Interface/Butts/vox.png
-  maleFirstNames: names_vox
-  femaleFirstNames: names_vox
   naming: First
   sexes:
   - Unsexed
@@ -23,6 +23,8 @@
     Snout: MobVoxSnout #SS220-Vox Beak
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobVoxTorso
     Eyes: MobVoxEyes
     LArm: MobVoxLArm
@@ -37,7 +39,6 @@
 
 - type: markingPoints
   id: MobVoxMarkingLimits
-  onlyWhitelisted: true
   points:
     Hair:
       points: 1
@@ -45,28 +46,43 @@
     FacialHair:
       points: 1
       required: false
+      onlyWhitelisted: true
     Head:
       points: 1
       required: true
+      onlyWhitelisted: true
     Snout:
       points: 1
       required: true
       defaultMarkings: [ VoxBeak ]
+      onlyWhitelisted: true
     Arms:
       points: 4
       required: true
       defaultMarkings: [ VoxLArmScales, VoxRArmScales, VoxRHandScales, VoxLHandScales ]
+      onlyWhitelisted: true
     Legs:
       points: 4
       required: true
       defaultMarkings: [ VoxLLegScales, VoxRLegScales, VoxRFootScales, VoxLFootScales ]
+      onlyWhitelisted: true
+    UndergarmentTop:
+      points: 1
+      required: false
+      onlyWhitelisted: true
+    UndergarmentBottom:
+      points: 1
+      required: false
+      onlyWhitelisted: true
     Chest:
       points: 1
       required: false
+      onlyWhitelisted: true
     Tail:
       points: 1
       required: true
       defaultMarkings: [ VoxTail ]
+      onlyWhitelisted: true
 
 - type: humanoidBaseSprite
   id: MobVoxEyes

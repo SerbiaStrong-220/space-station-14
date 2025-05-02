@@ -259,7 +259,7 @@
 
 #Security Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
   id: ClothingOuterHardsuitSecurity
   name: security hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
@@ -290,7 +290,7 @@
 
 #Brigmedic Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
   id: ClothingOuterHardsuitBrigmedic
   name: brigmedic hardsuit
   description: Special hardsuit of the guardian angel of the brig. It is the medical version of the security hardsuit.
@@ -322,7 +322,7 @@
 
 #Warden's Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase]
+  parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
   id: ClothingOuterHardsuitWarden
   name: warden's hardsuit
   description: A specialized riot suit geared to combat low pressure environments.
@@ -542,6 +542,7 @@
   id: ClothingOuterHardsuitLuxury #DO NOT MAP - https://github.com/space-wizards/space-station-14/pull/19738#issuecomment-1703486738
   name: luxury mining hardsuit
   description: A refurbished mining hardsuit, fashioned after the Quartermaster's colors. Graphene lining provides less protection, but is much easier to move.
+  categories: [ DoNotMap ]
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Hardsuits/luxury.rsi #SS220-Salvage Hardsuit Resprite
@@ -593,6 +594,8 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.5
+  #- type: StaminaResistance
+  #  damageCoefficient: 0.75
   - type: Armor
     modifiers:
       coefficients:
@@ -664,7 +667,7 @@
   parent: [ClothingOuterHardsuitBase]
   id: ClothingOuterHardsuitSyndieElite
   name: syndicate elite hardsuit
-  description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders.
+  description: An elite version of the blood-red hardsuit, with improved radiation resistance and fireproofing. Property of Gorlex Marauders.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
@@ -680,6 +683,8 @@
     damageCoefficient: 0.2
   - type: FireProtection
     reduction: 0.8
+  #- type: StaminaResistance
+  #  damageCoefficient: 0.6
   - type: Armor
     modifiers:
       coefficients:
@@ -725,6 +730,8 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.2  #ss-220 armReb
+  #- type: StaminaResistance
+  #  damageCoefficient: 0.6
   - type: Armor
     modifiers:
       coefficients:
@@ -736,8 +743,8 @@
         Caustic: 0.4
         Stamina: 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 0.9 #ss-220 armReb
-    sprintModifier: 0.9 #ss-220 armReb
+    walkModifier: 0.9
+    sprintModifier: 0.9
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieCommander
@@ -769,6 +776,8 @@
     coolingCoefficient: 0.001 #ss220 armReb
   - type: ExplosionResistance
     damageCoefficient: 0.2  #ss-220 armReb
+  #- type: StaminaResistance # Should not have stamina resistance, this is purely so people know it was not forgotten.
+  #  damageCoefficient: 0.99
   - type: Armor
     modifiers:
       coefficients:
@@ -785,6 +794,9 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCybersun
+  - type: Tag
+    tags:
+    - MonkeyWearable
   #ss220 special_sounds start
   - type: SpecialSounds
   - type: Vocal
@@ -796,7 +808,7 @@
 
 #Wizard Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ ClothingOuterHardsuitBase, BaseMagicalContraband ]
   id: ClothingOuterHardsuitWizard
   name: wizard hardsuit
   description: A bizarre gem-encrusted suit that radiates magical energies.
@@ -861,7 +873,7 @@
 #Pirate EVA Suit (Deep Space EVA Suit)
 #Despite visually appearing like a softsuit, it functions exactly like a hardsuit would (parents off of base hardsuit, has resistances and toggleable clothing, etc.) so it goes here.
 - type: entity
-  parent:  ClothingOuterHardsuitBase
+  parent: [ ClothingOuterHardsuitBase, BaseMajorContraband ]
   id:  ClothingOuterHardsuitPirateEVA
   name: deep space EVA suit
   suffix: Pirate
@@ -869,6 +881,8 @@
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
+  - type: Item
+    size: Huge
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
   - type: ExplosionResistance
@@ -893,13 +907,15 @@
 
 #Pirate Captain Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ ClothingOuterHardsuitBase, BaseMajorContraband ]
   id: ClothingOuterHardsuitPirateCap
   name: pirate captain's hardsuit
   description: An ancient armored hardsuit, perfect for defending against space scurvy and toolbox-wielding scallywags.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/piratecaptain.rsi
+  - type: Item
+    size: Huge
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/piratecaptain.rsi
   - type: PressureProtection
@@ -967,6 +983,8 @@
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTEngineer
+  - type: FireProtection
+    reduction: 0.8
 
 #ERT Medic Hardsuit
 - type: entity
@@ -1035,6 +1053,8 @@
     damageCoefficient: 0.2
   - type: FireProtection
     reduction: 0.8
+  - type: StaminaResistance
+    damageCoefficient: 0.15 # Needs 21 hits with a disabler to stun :godo:
   - type: Armor
     modifiers:
       coefficients:
@@ -1102,6 +1122,8 @@
         Radiation: 0.1
         Caustic: 0.1
         Stamina: 0.5
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.25
   - type: ClothingSpeedModifier
     walkModifier: 1.0
     sprintModifier: 1.0
