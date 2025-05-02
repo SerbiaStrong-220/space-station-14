@@ -49,7 +49,7 @@
   table: !type:AllSelector
     children:
     - id: BoxSyringe
-    - id: EpinephrineChemistryBottle
+    - id: ChemistryBottleEpinephrine
       amount: !type:ConstantNumberSelector
         value: 1
     - !type:EntSelector
@@ -96,13 +96,13 @@
     # Fluff
     - !type:NestedSelector
       tableId: MaintFluffTable
-      prob: 0.40
+      prob: 0.45
       rolls: !type:RangeNumberSelector
         range: 0, 3
     # Plushies
     - !type:NestedSelector
       tableId: AllPlushiesTable
-      prob: 0.15
+      prob: 0.3
       rolls: !type:RangeNumberSelector
         range: 1, 2
     # Materials
@@ -114,6 +114,6 @@
     # SmokerFun
     - !type:NestedSelector
       tableId: SoakedSmokesTable
-      prob: 0.15
+      prob: 0.25
       rolls: !type:RangeNumberSelector
         range: 0, 3
