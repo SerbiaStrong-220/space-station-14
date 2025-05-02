@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
+using System.Resources;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.TTS.Commands;
@@ -119,9 +121,6 @@ public sealed partial class TTSSystem : EntitySystem
     private void RemoveFileCursed(ResPath resPath)
     {
         ContentRoot.RemoveFile(resPath);
-
-        // Push old audio out of the cache to save memory. It is cursed, but should work.
-        _resourceCache.CacheResource(Prefix / resPath, EmptyAudioResource);
     }
 
     // Process sound queues on frame update
@@ -182,13 +181,13 @@ public sealed partial class TTSSystem : EntitySystem
 
             if (tempFilePath.HasValue)
             {
-                RemoveFileCursed(Prefix / tempFilePath.Value);
+                RemoveFileCursed(tempFilePath.Value);
 
                 if (_resourceCache.TryGetResource<AudioResource>(Prefix / tempFilePath.Value, out _))
                 {
                     _sawmill.Debug("File is still in cache!");
                 }
-                _resourceCache.ReloadResource<AudioResource>(Prefix / tempFilePath.Value);
+                // _resourceCache.ReloadResource<AudioResource>(Prefix / tempFilePath.Value);
                 if (_resourceCache.TryGetResource<AudioResource>(Prefix / tempFilePath.Value, out _))
                 {
                     _sawmill.Debug("File is still in cache, event after reloading!");
@@ -257,7 +256,7 @@ public sealed partial class TTSSystem : EntitySystem
         {
             var soundPath = new SoundPathSpecifier(Prefix / filePath, finalParams);
             _audio.PlayGlobal(soundPath, Filter.Local(), false);
-            RemoveFileCursed(Prefix / filePath);
+            RemoveFileCursed(filePath);
         }
         else
         {
