@@ -133,31 +133,28 @@ public sealed partial class TTSSystem : EntitySystem
 
             SoundPathSpecifier? soundPath = null;
             AudioStream? audioStream = null;
+            (EntityUid Entity, AudioComponent Component)? stream = null;
 
             switch (request)
             {
                 case PlayRequestByPath requestByPath:
                     soundPath = new SoundPathSpecifier(requestByPath.Path, requestByPath.Params);
+
+                    if (request.PlayGlobal)
+                        stream = _audio.PlayGlobal(soundPath, Filter.Local(), false);
+                    else
+                        stream = _audio.PlayEntity(soundPath, _fakeRecipient, uid);
                     break;
                 case PlayRequestByAudioStream playRequestByAudio:
                     audioStream = playRequestByAudio.AudioStream;
+
+                    if (request.PlayGlobal)
+                        stream = _audio.PlayGlobal(audioStream, null, request.Params);
+                    else
+                        stream = _audio.PlayEntity(audioStream!, uid, null, request.Params);
                     break;
                 default:
                     continue;
-            }
-
-            (EntityUid Entity, AudioComponent Component)? stream = null;
-            if (request.PlayGlobal)
-            {
-                stream = soundPath != null ?
-                    _audio.PlayGlobal(soundPath, Filter.Local(), false) :
-                    _audio.PlayGlobal(audioStream!, null, request.Params);
-            }
-            else
-            {
-                stream = soundPath != null ?
-                    _audio.PlayEntity(soundPath, _fakeRecipient, uid) :
-                    _audio.PlayEntity(audioStream!, uid, null, request.Params);
             }
 
             if (stream.HasValue && stream.Value.Component is not null)
@@ -209,7 +206,7 @@ public sealed partial class TTSSystem : EntitySystem
 
         var finalParams = audioParams ?? AudioParams.Default;
 
-        MemoryStream stream = new(data.Buffer);
+        using MemoryStream stream = new(data.Buffer);
         var audioStream = _audioManager.LoadAudioOggVorbis(stream);
 
         if (sourceUid == null)
