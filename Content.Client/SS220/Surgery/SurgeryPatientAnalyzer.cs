@@ -13,7 +13,7 @@ namespace Content.Client.SS220.Surgery;
 public sealed class SurgeryPatientAnalyzer : EntitySystem
 {
     [Dependency] private readonly RottingSystem _rotting = default!;
-    [Dependency] private readonly GameTiming _gameTiming = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     private const int MaxBrainRotPercentage = 100;
 
