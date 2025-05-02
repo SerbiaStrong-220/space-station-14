@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
-namespace Content.Shared.SS220.CultYogg.CultYoggLamp;
+namespace Content.Shared.SS220.CultYogg.Lamp;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class CultYoggLampComponent : Component

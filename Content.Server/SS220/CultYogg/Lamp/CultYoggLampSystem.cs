@@ -6,9 +6,10 @@ using Content.Shared.Light.Components;
 using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
+using Content.Shared.SS220.CultYogg.Lamp;
 
-namespace Content.Shared.SS220.CultYogg.CultYoggLamp;
-public abstract class SharedCultYoggLampSystem : EntitySystem
+namespace Content.Server.SS220.CultYogg.Lamp;
+public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
