@@ -206,9 +206,11 @@
   description: A bizarre gem-encrusted violet robe that radiates magical energies.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Misc/violetwizard.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_violet.rsi # SS220 Wizard Clothing Resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Misc/violetwizard.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_violet.rsi # SS220 Wizard Clothing Resprite
+  - type: ToggleableClothing # SS220 Wizard Clothing Resprite
+    clothingPrototype: ClothingHeadHatHoodWizardBlue # SS220 Wizard Clothing Resprite
 
 - type: entity
   parent: ClothingOuterWizardBase
@@ -217,9 +219,11 @@
   description: A bizarre gem-encrusted blue robe that radiates magical energies.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Misc/wizard.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_blue.rsi # SS220 Wizard Clothing Resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Misc/wizard.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_blue.rsi # SS220 Wizard Clothing Resprite
+  - type: ToggleableClothing # SS220 Wizard Clothing Resprite
+    clothingPrototype: ClothingHeadHatHoodWizardViolet # SS220 Wizard Clothing Resprite
 
 - type: entity
   parent: ClothingOuterWizardBase
@@ -228,9 +232,11 @@
   description: Strange-looking, red, hat-wear that most certainly belongs to a real magic user.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Misc/redwizard.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_red.rsi # SS220 Wizard Clothing Resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Misc/redwizard.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_red.rsi # SS220 Wizard Clothing Resprite
+  - type: ToggleableClothing # SS220 Wizard Clothing Resprite
+    clothingPrototype: ClothingHeadHatHoodWizardRed # SS220 Wizard Clothing Resprite
 
 - type: entity
   parent: ClothingOuterBase

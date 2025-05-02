@@ -14,3 +14,17 @@ ent-ClothingHeadHatHoodWinterSyndieCapArmored = капюшон куртки си
     .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
 ent-ClothingHeadHatHoodWinterSyndieCap = капюшон куртки синдиката
     .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
+
+# Волшебник
+ent-ClothingHeadHatHoodWizardBlue = капюшон робы волшебника
+    .desc = Копюшон робы волшебника
+ent-ClothingHeadHatHoodWizardViolet = фиолетовый капюшон робы волшебника
+    .desc = { ent-ClothingHeadHatHoodWizardBlue.desc }
+ent-ClothingHeadHatHoodWizardRed = красный капюшон робы волшебника
+    .desc = Копюшон робы волшебника
+ent-ClothingHeadHatHoodWizardWhite = белый капюшон робы волшебника
+    .desc = { ent-ClothingHeadHatHoodWizardBlue.desc }
+ent-ClothingHeadHatHoodWizardBlack = чёрный капюшон робы волшебника
+    .desc = Копюшон робы волшебника
+ent-ClothingHeadHatHoodWizardGreen = зелёный капюшон робы волшебника
+    .desc = { ent-ClothingHeadHatHoodWizardBlue.desc }
