@@ -38,8 +38,8 @@ public sealed partial class TreatmentSuggestion : BoxContainer
 
         foreach (var text in data)
         {
-            builder.AppendLine();
-            builder.AppendJoin(InSectionTextTabulation, text);
+            builder.Append(InSectionTextTabulation);
+            builder.AppendLine(text);
         }
     }
 }

@@ -47,6 +47,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         SubscribeLocalEvent<OnSurgeryComponent, SurgeryDoAfterEvent>(OnSurgeryDoAfter);
 
         SubscribeLocalEvent<SurgeryStarterComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<BodyAnalyzerComponent, AfterInteractEvent>(OnBodyAnalyzerAfterInteract);
         SubscribeLocalEvent<SurgeryStarterComponent, StartSurgeryEvent>(OnStartSurgeryMessage);
     }
 
@@ -122,7 +123,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         if (!_userInterface.HasUi(entity, SurgeryDrapeUiKey.Key))
         {
-            Log.Debug($"Entity {ToPrettyString(entity)} has SurgeryStartComponent but don't have its UI!");
+            Log.Debug($"Entity {ToPrettyString(entity)} has {nameof(SurgeryStarterComponent)} but don't have its UI!");
             return;
         }
 
@@ -147,6 +148,23 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             _popup.PopupCursor(Loc.GetString("surgery-cant-be-cancelled"));
         }
+    }
+
+    private void OnBodyAnalyzerAfterInteract(Entity<BodyAnalyzerComponent> entity, ref AfterInteractEvent args)
+    {
+        if (args.Target == null || !args.CanReach)
+            return;
+
+        if (!_userInterface.HasUi(entity, BodyAnalyzerUiKey.Key))
+        {
+            Log.Debug($"Entity {ToPrettyString(entity)} has {nameof(BodyAnalyzerComponent)} but don't have its UI!");
+            return;
+        }
+
+        var netTarget = GetNetEntity(args.Target.Value);
+
+        var state = new BodyAnalyzerTargetUpdate(netTarget);
+        _userInterface.SetUiState(entity.Owner, BodyAnalyzerUiKey.Key, state);
     }
 
     public void UpdateUserInterface(EntityUid drape, EntityUid user, EntityUid target)

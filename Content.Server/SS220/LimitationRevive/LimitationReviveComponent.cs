@@ -2,6 +2,7 @@
 using Content.Shared.Damage;
 using Content.Shared.Random;
 using Content.Shared.SS220.LimitationRevive;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.LimitationRevive;
@@ -10,6 +11,7 @@ namespace Content.Server.SS220.LimitationRevive;
 /// This is used for limiting the number of defibrillator resurrections
 /// </summary>
 [RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class LimitationReviveComponent : SharedLimitationReviveComponent
 {
     [DataField]

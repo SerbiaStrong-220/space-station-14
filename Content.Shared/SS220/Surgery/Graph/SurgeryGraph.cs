@@ -49,9 +49,6 @@ public sealed partial class SurgeryGraphPrototype : IPrototype, ISerializationHo
     [DataField("graph", priority: 0)]
     private List<SurgeryGraphNode> _graph = new();
 
-    /// <summary>
-    /// For debugging purposes
-    /// </summary>
     public IReadOnlyList<SurgeryGraphNode> Nodes => _graph;
 
 

@@ -14,6 +14,9 @@
         </PanelContainer>
         <!-- Kinda overall info to make player feel more confident.
             It should give the right step order and some description for operation -->
+        <BoxContainer Orientation="Horizontal">
+            <TextureRect Name="LockIcon" Stretch="Keep" TexturePath="/Textures/Interface/VerbIcons/lock.svg" Visible="False"/>
+        </BoxContainer>
         <RichTextLabel Name="Header" Text="{Loc 'operation-description-header'}" HorizontalExpand="True" HorizontalAlignment="Left"/>
         <RichTextLabel Name="OperationName" Text="operation-name" HorizontalExpand="True" HorizontalAlignment="Left" Margin="20 5 5 0"/>
         <ScrollContainer HScrollEnabled="False" Margin="20 5 5 0"
@@ -24,7 +27,7 @@
                 SizeFlagsStretchRatio="2"
                 HorizontalExpand="True"
                 VerticalExpand="True">
-                <RichTextLabel Name="OperationDescription" Text="operation-description"/>
+                <RichTextLabel Name="Description" Text="operation-description"/>
             </BoxContainer>
         </ScrollContainer>
     </Control>

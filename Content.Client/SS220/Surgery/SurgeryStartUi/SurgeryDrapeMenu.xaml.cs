@@ -118,15 +118,13 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
                 var postscriptMessage = Loc.GetString(surgeryGraph.PostscriptLocPath);
                 formattedText.AddMessage(FormattedMessage.FromMarkupPermissive(postscriptMessage));
             }
-
-            // TODO:
-            // button.ToolTip = formattedText.ToString();
         };
 
-        if (SharedSurgeryAvaibilityChecks.IsSurgeryGraphAvailableTarget(Target, surgeryGraph, _entityManager, out var reason))
+        if (SharedSurgeryAvaibilityChecks.IsSurgeryGraphAvailableTarget(Target, surgeryGraph, _entityManager, out var reason)
+            && reason != null)
         {
             var tooltip = new Tooltip();
-            SetFormattedText(tooltip, reason!);
+            SetFormattedText(tooltip, reason);
             button.TooltipSupplier = (_) => tooltip;
         }
         else

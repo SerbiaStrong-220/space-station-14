@@ -12,9 +12,23 @@ namespace Content.Client.SS220.Surgery.UiParts;
 [GenerateTypedNameReferences]
 public sealed partial class OperationDescription : BoxContainer
 {
+    [Dependency] private readonly SurgeryGraphSystem _surgeryGraph = default!;
     [Dependency] private readonly PrototypeManager _prototypeManager = default!;
 
-    public bool DataLocked = false;
+    private bool _dataLocked = false;
+    public bool DataLocked
+    {
+        get => _dataLocked;
+        set
+        {
+            _dataLocked = value;
+            LockIcon.Visible = value;
+        }
+    }
+
+
+    public string NodeDataTabulation = "  ";
+    public string NodeSeparator = "----";
 
     public OperationDescription()
     {
@@ -22,26 +36,66 @@ public sealed partial class OperationDescription : BoxContainer
         IoCManager.InjectDependencies(this);
     }
 
-    public void MakeDescription(ProtoId<SurgeryGraphPrototype> id)
+    public void ShowDescription(ProtoId<SurgeryGraphPrototype> id)
     {
         if (DataLocked)
             return;
 
-        var surgeryProto = _prototypeManager.Index(id);
+        if (!_prototypeManager.TryIndex(id, out var surgeryProto))
+        {
+            OperationName.Text = "#err";
+            Description.Text = null;
+            return;
+        }
 
         OperationName.Text = Loc.GetString(surgeryProto.NameLocPath);
 
         StringBuilder builder = new();
 
-        builder.Append(Loc.GetString(surgeryProto.DescriptionLocPath));
-
+        builder.AppendLine(Loc.GetString(surgeryProto.DescriptionLocPath));
         AddOperationSteps(surgeryProto, builder);
 
-        OperationDescription.Text = builder.ToString();
+        Description.Text = builder.ToString();
     }
 
     private void AddOperationSteps(SurgeryGraphPrototype graph, StringBuilder builder)
     {
-        // TODO
+        var nodes = graph.Nodes;
+
+        foreach (var node in nodes)
+        {
+            AddNodeInfo(node, builder);
+            builder.AppendLine(NodeSeparator);
+        }
+    }
+
+    private void AddNodeInfo(SurgeryGraphNode node, StringBuilder builder)
+    {
+        if (node.Edges.Count == 0)
+            return;
+
+        builder.AppendLine(Loc.GetString("operation-description-node-name", ("name", node.Name)));
+        builder.AppendLine(_surgeryGraph.Description(node));
+
+        foreach (var edge in node.Edges)
+        {
+            builder.AppendLine(Loc.GetString("operation-description-edge-to", ("to", edge.Target)));
+            AddConditionInfo(edge, builder);
+        }
+    }
+
+    private void AddConditionInfo(SurgeryGraphEdge edge, StringBuilder builder)
+    {
+        if (edge.Conditions.Count == 0)
+            return;
+
+        builder.AppendLine("operation-description-condition-section-name");
+
+        foreach (var condition in edge.Conditions)
+        {
+            var info = condition.ConditionDescriptionLocPath();
+            builder.Append(NodeDataTabulation);
+            builder.AppendLine(info);
+        }
     }
 }

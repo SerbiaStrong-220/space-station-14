@@ -23,6 +23,28 @@
         type: SurgeryDrapeBUI
 
 - type: entity
+  parent: BaseToolSurgery
+  id: BodyAnalyzer
+  name: Body analyzer
+  description: modern analyzer. Comes handy to surgeons.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: body-analyzer
+  - type: StaticPrice
+    price: 20
+  - type: Tag
+    tags:
+    - SurgeryTool
+  - type: BodyAnalyzer
+  - type: ActivatableUI
+    key: enum.BodyAnalyzerUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.BodyAnalyzerUiKey.Key:
+        type: BodyAnalyzerBUI
+
+- type: entity
   parent: BaseItem
   id: MindslaveFixerCerebralImplant
   name : cerebral implant

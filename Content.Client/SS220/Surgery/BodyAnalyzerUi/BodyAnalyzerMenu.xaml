@@ -24,7 +24,7 @@
             </BoxContainer>
             <BoxContainer Name="Handbook" Orientation="Vertical">
                 <surgeryUiParts:OperationList Name="OperationList" Orientation="Vertical" VerticalExpand="True"/>
-                <surgeryUiParts:OperationDescription Name="OperationDescription" Orientation="Vertical" Visible ="Off"
+                <surgeryUiParts:OperationDescription Name="OperationDescription" Orientation="Vertical" Visible ="False"
                     VerticalAlignment="Bottom"/>
             </BoxContainer>
         </BoxContainer>
