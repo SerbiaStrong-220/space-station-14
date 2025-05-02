@@ -1,12 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
+using Content.Shared.Interaction;
+using Content.Shared.Light.Components;
 using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 
 namespace Content.Shared.SS220.CultYogg.CultYoggLamp;
-public sealed class SharedCultYoggLampSystem : EntitySystem
+public abstract class SharedCultYoggLampSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
@@ -21,6 +23,7 @@ public sealed class SharedCultYoggLampSystem : EntitySystem
         SubscribeLocalEvent<CultYoggLampComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<CultYoggLampComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<CultYoggLampComponent, ToggleActionEvent>(OnToggleAction);
+        SubscribeLocalEvent<CultYoggLampComponent, ActivateInWorldEvent>(OnActivate);
     }
 
     private void OnMapInit(Entity<CultYoggLampComponent> ent, ref MapInitEvent args)
@@ -29,6 +32,27 @@ public sealed class SharedCultYoggLampSystem : EntitySystem
         _actionContainer.EnsureAction(ent, ref component.ToggleActionEntity, component.ToggleAction);
         _actions.AddAction(ent, ref component.SelfToggleActionEntity, component.ToggleAction);
     }
+
+    /*
+    public void UpdateVisuals(EntityUid uid, HandheldLightComponent? component = null, AppearanceComponent? appearance = null)
+    {
+        if (!Resolve(uid, ref component, ref appearance, false))
+            return;
+
+        if (component.AddPrefix)
+        {
+            var prefix = component.Activated ? "on" : "off";
+            _itemSys.SetHeldPrefix(uid, prefix);
+            _clothingSys.SetEquippedPrefix(uid, prefix);
+        }
+
+        if (component.ToggleActionEntity != null)
+            _actionSystem.SetToggled(component.ToggleActionEntity, component.Activated);
+
+        _appearance.SetData(uid, ToggleableLightVisuals.Enabled, component.Activated, appearance);
+    }
+    */
+
 
     private void OnShutdown(Entity<CultYoggLampComponent> ent, ref ComponentShutdown args)
     {
@@ -54,7 +78,18 @@ public sealed class SharedCultYoggLampSystem : EntitySystem
         args.Handled = true;
     }
 
+    private void OnActivate(Entity<CultYoggLampComponent> ent, ref ActivateInWorldEvent args)
+    {
+        if (args.Handled || !args.Complex || !ent.Comp.ToggleOnInteract)
+            return;
 
+        if (ToggleStatus(args.User, ent))
+            args.Handled = true;
+    }
+    public bool ToggleStatus(EntityUid user, Entity<CultYoggLampComponent> ent)
+    {
+        return ent.Comp.Activated ? TurnOff(ent) : TurnOn(user, ent);
+    }
     public bool TurnOff(Entity<CultYoggLampComponent> ent, bool makeNoise = true)
     {
         if (!ent.Comp.Activated || !_lights.TryGetLight(ent, out var pointLightComponent))

@@ -216,7 +216,6 @@
     - DoorBumpOpener
     - ZombifyableByMelee
     - AnomalyHost
-    - CultYoggStealthProvidable #ToDo_SS220 dont forget to delete this
 
 - type: entity
   save: false

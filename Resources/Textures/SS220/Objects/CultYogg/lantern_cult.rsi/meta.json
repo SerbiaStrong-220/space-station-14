@@ -8,16 +8,10 @@
     },
     "states": [
           {
-            "name": "lantern"
+            "name": "lantern_off"
           },
           {
             "name": "lantern_on"
-          },
-          {
-            "name": "burnt"
-          },
-          {
-            "name": "flashing"
           },
           {
             "name": "off-equipped-BELT",

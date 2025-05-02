@@ -13,6 +13,23 @@ public sealed partial class CultYoggLampComponent : Component
 {
     public bool Activated;
 
+    /// <summary>
+    ///     Whether to automatically set item-prefixes when toggling the flashlight.
+    /// </summary>
+    /// <remarks>
+    ///     Flashlights should probably be using explicit unshaded sprite, in-hand and clothing layers, this is
+    ///     mostly here for backwards compatibility.
+    /// </remarks>
+    [DataField]
+    public bool AddPrefix = false;
+
+    /// <summary>
+    /// Whether or not the light can be toggled via standard interactions
+    /// (alt verbs, using in hand, etc)
+    /// </summary>
+    [DataField]
+    public bool ToggleOnInteract = true;
+
     [DataField]
     public EntityUid? ToggleActionEntity;
 

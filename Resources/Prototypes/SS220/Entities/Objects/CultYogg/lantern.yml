@@ -12,14 +12,15 @@
   - type: Sprite
     sprite: SS220/Objects/CultYogg/lantern_cult.rsi
     layers:
-    - state: lantern
-    - state: lantern_on
-      shader: unshaded
-      visible: false
-      map: [ "light" ]
+    - state: lantern_off
+      map: [ "enum.ToggleVisuals.Layer" ]
+  - type: Clothing
+    sprite: SS220/Objects/CultYogg/lantern_cult.rsi
+    equippedPrefix: off
+    quickEquip: false
+    slots:
+    - Belt
   - type: Item
-    sprite: Objects/Misc/Lights/lights.rsi
-    size: Normal
     heldPrefix: off
   - type: CultYoggLamp
   #- type: HandheldLight
@@ -35,12 +36,6 @@
   - type: Appearance
   - type: Physics
     canCollide: false
-  - type: Clothing
-    sprite: Objects/Tools/lantern.rsi
-    equippedPrefix: off
-    quickEquip: false
-    slots:
-    - Belt
   - type: StealthProvider
     whitelist:
       tags:
