@@ -2,6 +2,7 @@ using Content.Client.Lobby;
 using Content.Server.Preferences.Managers;
 using Content.Shared.Preferences;
 using Robust.Client.State;
+using Robust.Shared.IoC;
 using Robust.Shared.Network;
 
 namespace Content.IntegrationTests.Tests.Lobby
@@ -49,8 +50,8 @@ namespace Content.IntegrationTests.Tests.Lobby
                 });
 
                 profile = HumanoidCharacterProfile.Random();
+                profile.EnsureValid(client.Session, server.ResolveDependency<IDependencyCollection>()); // ss220-text-fix
                 clientPrefManager.CreateCharacter(profile);
-
                 clientCharacters = clientPrefManager.Preferences?.Characters;
 
                 Assert.That(clientCharacters, Is.Not.Null);
@@ -89,6 +90,7 @@ namespace Content.IntegrationTests.Tests.Lobby
             await client.WaitAssertion(() =>
             {
                 profile = HumanoidCharacterProfile.Random();
+                profile.EnsureValid(client.Session, server.ResolveDependency<IDependencyCollection>()); // ss220-text-fix
 
                 clientPrefManager.CreateCharacter(profile);
 
