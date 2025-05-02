@@ -3,7 +3,7 @@
 - type: entity
   name: cult lantern
   #parent: [BaseItem, CultYoggRestrictedItem]
-  #parent: [BaseItem, BaseLamp]
+  #parent: [BaseItem, Lantern]
   parent: BaseItem
   id: LanternFlashCultYogg
   suffix: CultYogg
@@ -12,11 +12,19 @@
   - type: Sprite
     sprite: SS220/Objects/CultYogg/lantern_cult.rsi
     layers:
-    - state: lantern_off
-      map: [ "base" ]
-    - state: lantern_on
-      shader: unshaded
-      map: [ "light" ]
+      - state: lantern_off
+      - state: lantern_on
+        shader: unshaded
+        visible: false
+        map: [ "light" ]
+  #- type: Sprite
+  #  sprite: SS220/Objects/CultYogg/lantern_cult.rsi
+  #  layers:
+  #  - state: lantern_off
+  #    map: [ "base" ]
+    #- state: lantern_on
+    #  shader: unshaded
+    #  map: [ "light" ]
   - type: Clothing
     sprite: SS220/Objects/CultYogg/lantern_cult.rsi
     equippedPrefix: off
@@ -26,6 +34,7 @@
   - type: Item
     heldPrefix: off
   - type: CultYoggLamp
+    addPrefix: true
   #- type: HandheldLight
   #  addPrefix: true
   #  blinkingBehaviourId: blinking
@@ -34,7 +43,8 @@
     enabled: false
     radius: 3
     energy: 2
-    netsync: false
+  #- type: AutoRecharge
+  #  rechargeDuration: 120
   - type: ToggleableLightVisuals
   - type: Appearance
   - type: Physics

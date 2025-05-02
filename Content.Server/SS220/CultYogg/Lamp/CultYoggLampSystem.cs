@@ -34,26 +34,6 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
         _actions.AddAction(ent, ref component.SelfToggleActionEntity, component.ToggleAction);
     }
 
-    /*
-    public void UpdateVisuals(EntityUid uid, HandheldLightComponent? component = null, AppearanceComponent? appearance = null)
-    {
-        if (!Resolve(uid, ref component, ref appearance, false))
-            return;
-
-        if (component.AddPrefix)
-        {
-            var prefix = component.Activated ? "on" : "off";
-            _itemSys.SetHeldPrefix(uid, prefix);
-            _clothingSys.SetEquippedPrefix(uid, prefix);
-        }
-
-        if (component.ToggleActionEntity != null)
-            _actionSystem.SetToggled(component.ToggleActionEntity, component.Activated);
-
-        _appearance.SetData(uid, ToggleableLightVisuals.Enabled, component.Activated, appearance);
-    }
-    */
-
 
     private void OnShutdown(Entity<CultYoggLampComponent> ent, ref ComponentShutdown args)
     {
@@ -91,7 +71,7 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
     {
         return ent.Comp.Activated ? TurnOff(ent) : TurnOn(user, ent);
     }
-    public bool TurnOff(Entity<CultYoggLampComponent> ent, bool makeNoise = true)
+    public override bool TurnOff(Entity<CultYoggLampComponent> ent, bool makeNoise = true)
     {
         if (!ent.Comp.Activated || !_lights.TryGetLight(ent, out var pointLightComponent))
         {
@@ -103,10 +83,9 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
         return true;
     }
 
-    public bool TurnOn(EntityUid user, Entity<CultYoggLampComponent> uid)
+    public override bool TurnOn(EntityUid user, Entity<CultYoggLampComponent> uid)
     {
-        var component = uid.Comp;
-        if (component.Activated || !_lights.TryGetLight(uid, out var pointLightComponent))
+        if (uid.Comp.Activated || !_lights.TryGetLight(uid, out var pointLightComponent))
         {
             return false;
         }

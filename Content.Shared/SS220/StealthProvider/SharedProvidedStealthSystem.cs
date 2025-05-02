@@ -4,6 +4,8 @@ using Content.Shared.Stealth.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Containers;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Light.Components;
+using Content.Shared.Toggleable;
 
 namespace Content.Shared.SS220.StealthProvider;
 public sealed class SharedProvidedStealthSystem : EntitySystem
@@ -17,6 +19,7 @@ public sealed class SharedProvidedStealthSystem : EntitySystem
         SubscribeLocalEvent<ProvidedStealthComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ProvidedStealthComponent, ComponentRemove>(OnRemove);
         //SubscribeLocalEvent<ProvidedStealthComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
+
     }
 
     private void OnInit(Entity<ProvidedStealthComponent> ent, ref ComponentInit args)
@@ -38,7 +41,6 @@ public sealed class SharedProvidedStealthSystem : EntitySystem
     {
         RemComp<ProvidedStealthComponent>(ent);
     }
-
 
     public override void Update(float frameTime)
     {
