@@ -550,9 +550,9 @@
   description: A strange-looking red hat that most certainly belongs to a powerful magic-user.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hats/redwizard.rsi
+    sprite: SS220/Clothing/Head/Hats/wizard_red.rsi # SS220 Wizard Clothing Resprite
   - type: Clothing
-    sprite: Clothing/Head/Hats/redwizard.rsi
+    sprite: SS220/Clothing/Head/Hats/wizard_red.rsi # SS220 Wizard Clothing Resprite
   - type: Tag
     tags:
     - PetWearable
@@ -774,9 +774,9 @@
   description: A strange-looking violet hat that most certainly belongs to a powerful magic-user.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hats/violetwizard.rsi
+    sprite: SS220/Clothing/Head/Hats/wizard_violet.rsi # SS220 Wizard Clothing Resprite
   - type: Clothing
-    sprite: Clothing/Head/Hats/violetwizard.rsi
+    sprite: SS220/Clothing/Head/Hats/wizard_violet.rsi # SS220 Wizard Clothing Resprite
   - type: Tag
     tags:
     - PetWearable
@@ -853,9 +853,9 @@
   description: A strange-looking blue hat that most certainly belongs to a powerful magic-user.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hats/wizardhat.rsi
+    sprite: SS220/Clothing/Head/Hats/wizard_blue.rsi # SS220 Wizard Clothing Resprite
   - type: Clothing
-    sprite: Clothing/Head/Hats/wizardhat.rsi
+    sprite: SS220/Clothing/Head/Hats/wizard_blue.rsi # SS220 Wizard Clothing Resprite
   - type: Tag
     tags:
     - PetWearable
