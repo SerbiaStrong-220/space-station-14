@@ -28,15 +28,18 @@
   parent: [ BaseItem, StorePresetSpellbook, BaseMagicalContraband ]
   components:
     - type: Sprite
-      sprite: Objects/Misc/books.rsi
-      layers:
-      - state: paper_blood
-      - state: cover_strong
-        color: "#645a5a"
-      - state: decor_wingette_flat
-        color: "#4d0303"
-      - state: icon_pentagramm
-        color: "#f7e19f"
+      # SS220 Wizard getting used to Begin
+      sprite: SS220/Objects/Misc/books_goon.rsi
+      state: spellbooks
+      # layers:
+      # - state: paper_blood
+      # - state: cover_strong
+      #   color: "#645a5a"
+      # - state: decor_wingette_flat
+      #   color: "#4d0303"
+      # - state: icon_pentagramm
+      #   color: "#f7e19f"
+      # SS220 Wizard getting used to End
     - type: UserInterface
       interfaces:
         enum.StoreUiKey.Key:

@@ -2,3 +2,5 @@ ent-SeniorServiceIDCard = ID карта сервисного администр�
     .desc = { ent-IDCardStandard.desc }
 ent-SecurityPilotIDCard = ID карта пилота службы безопасности
     .desc = { ent-IDCardStandard.desc }
+ent-WizardIDCard = ID карта волшебника
+    .desc = { ent-IDCardStandard.desc }
