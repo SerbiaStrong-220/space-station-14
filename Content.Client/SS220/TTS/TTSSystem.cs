@@ -283,14 +283,4 @@ public sealed partial class TTSSystem : EntitySystem
             Path = path;
         }
     }
-
-    public sealed class PlayRequestById : PlayRequest
-    {
-        public readonly int FileIdx = 0;
-
-        public PlayRequestById(int fileIdx, AudioParams? audioParams = null, bool playGlobal = false) : base(audioParams, playGlobal)
-        {
-            FileIdx = fileIdx;
-        }
-    }
 }
