@@ -50,3 +50,13 @@
   - ClothingMaskWeldingGas
   - SignallerAdvanced
   - ClothingEyesHudSupply #ss220 hud cargo add
+
+- type: latheRecipePack
+  id: SalvageSecurityBoards
+  recipes:
+  - ShuttleGunKineticCircuitboard
+
+- type: latheRecipePack
+  id: SalvageSecurityWeapons
+  recipes:
+  - WeaponProtoKineticAccelerator

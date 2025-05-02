@@ -26,11 +26,10 @@ using System.Numerics;
 using Content.Server.IdentityManagement;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
-using Content.Server.IdentityManagement;
-using Content.Server.DetailExaminable;
 using Content.Server.Polymorph.Systems;
 using Content.Server.SS220.PenScrambler;
 using Content.Shared.Actions;
+using Content.Shared.DetailExaminable;
 using Content.Shared.Store.Components;
 using Robust.Shared.Collections;
 using Robust.Shared.Map.Components;
@@ -39,6 +38,7 @@ using Content.Shared.Polymorph;
 using Content.Shared.SS220.PenScrambler;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Store;
+using Content.Shared.Charges.Components;
 
 namespace Content.Server.Implants;
 
@@ -193,7 +193,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
 
     private EntityCoordinates? SelectRandomTileInRange(TransformComponent userXform, float radius)
     {
-        var userCoords = userXform.Coordinates.ToMap(EntityManager, _xform);
+        var userCoords = _xform.ToMapCoordinates(userXform.Coordinates);
         _targetGrids.Clear();
         _lookupSystem.GetEntitiesInRange(userCoords, radius, _targetGrids);
         Entity<MapGridComponent>? targetGrid = null;
@@ -279,18 +279,12 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
             var newProfile = HumanoidCharacterProfile.RandomWithSpecies(humanoid.Species);
             _humanoidAppearance.LoadProfile(ent, newProfile, humanoid);
             _metaData.SetEntityName(ent, newProfile.Name, raiseEvents: false); // raising events would update ID card, station record, etc.
-            if (TryComp<DnaComponent>(ent, out var dna))
-            {
-                dna.DNA = _forensicsSystem.GenerateDNA();
 
-                var ev = new GenerateDnaEvent { Owner = ent, DNA = dna.DNA };
-                RaiseLocalEvent(ent, ref ev);
-            }
-            if (TryComp<FingerprintComponent>(ent, out var fingerprint))
-            {
-                fingerprint.Fingerprint = _forensicsSystem.GenerateFingerprint();
-            }
-            RemComp<DetailExaminableComponent>(ent); // remove MRP+ custom description if one exists 
+            // If the entity has the respecive components, then scramble the dna and fingerprint strings
+            _forensicsSystem.RandomizeDNA(ent);
+            _forensicsSystem.RandomizeFingerprint(ent);
+
+            RemComp<DetailExaminableComponent>(ent); // remove MRP+ custom description if one exists
             _identity.QueueIdentityUpdate(ent); // manually queue identity update since we don't raise the event
             _popup.PopupEntity(Loc.GetString("scramble-implant-activated-popup", ("identity", newProfile.Name)), ent, ent); //ss220 fix locale
         }
@@ -305,9 +299,9 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         if (!TryComp<TransferIdentityComponent>(ent.Owner, out var transferIdentityComponent))
             return;
 
-        var target = transferIdentityComponent.Target;
+        var clone = transferIdentityComponent.NullspaceClone;
 
-        if (target == null)
+        if (clone == null)
         {
             QueueDel(ent);
             return;
@@ -316,31 +310,33 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         if (ent.Comp.ImplantedEntity is not { } user)
             return;
 
-        if (TryComp<HumanoidAppearanceComponent>(user, out var humanoidAppearanceComponent))
+        if (TryComp<HumanoidAppearanceComponent>(user, out var userAppearanceComp))
         {
-            if (transferIdentityComponent.AppearanceComponent == null)
+
+            if (!TryComp<HumanoidAppearanceComponent>(clone, out var cloneAppearanceComp))
                 return;
 
-            _humanoidAppearance.CloneAppearance(target.Value, user, transferIdentityComponent.AppearanceComponent, humanoidAppearanceComponent);
+            _humanoidAppearance.CloneAppearance(clone.Value, user, cloneAppearanceComp, userAppearanceComp);
 
-            _metaData.SetEntityName(user, MetaData(target.Value).EntityName, raiseEvents: false);
+            _metaData.SetEntityName(user, MetaData(clone.Value).EntityName, raiseEvents: false);
 
             if (TryComp<DnaComponent>(user, out var dna)
-                && TryComp<DnaComponent>(target.Value, out var dnaTarget))
+                && TryComp<DnaComponent>(clone.Value, out var dnaClone) &&
+                dnaClone.DNA != null)
             {
-                dna.DNA = dnaTarget.DNA;
+                dna.DNA = dnaClone.DNA;
                 var ev = new GenerateDnaEvent { Owner = user, DNA = dna.DNA };
                 RaiseLocalEvent(ent, ref ev);
             }
 
             if (TryComp<FingerprintComponent>(user, out var fingerprint)
-                && TryComp<FingerprintComponent>(target.Value, out var fingerprintTarget))
+                && TryComp<FingerprintComponent>(clone.Value, out var fingerprintTarget))
             {
                 fingerprint.Fingerprint = fingerprintTarget.Fingerprint;
             }
 
             var setScale = EnsureComp<SetScaleFromTargetComponent>(user);
-            setScale.Target = GetNetEntity(target);
+            setScale.Target = GetNetEntity(clone);
 
             Dirty(user, setScale);
 
@@ -349,9 +345,10 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
 
             _identity.QueueIdentityUpdate(user);
 
-            _popup.PopupEntity(Loc.GetString("pen-scrambler-success-convert-to-identity", ("identity", MetaData(target.Value).EntityName)), user, user);
+            _popup.PopupEntity(Loc.GetString("pen-scrambler-success-convert-to-identity", ("identity", MetaData(clone.Value).EntityName)), user, user);
         }
 
+        QueueDel(clone);
         QueueDel(ent);
     }
     //ss220 dna copy implant add end
@@ -371,9 +368,13 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         if (!_solutionContainer.TryGetSolution((args.Performer, solutionUserComp), ChemicalSolution, out var solutionUser))
             return;
 
+        var quantity = solutionImplant.Value.Comp.Solution.Volume;
+        if (TryComp<LimitedChargesComponent>(args.Action, out var actionCharges))
+            quantity /= actionCharges.MaxCharges;
+
         _solutionContainer.TryTransferSolution(solutionUser.Value,
             solutionImplant.Value.Comp.Solution,
-            solutionImplant.Value.Comp.Solution.Volume / FixedPoint2.New(args.Action.Comp.Charges!.Value));
+            quantity);
 
         args.Handled = true;
     }

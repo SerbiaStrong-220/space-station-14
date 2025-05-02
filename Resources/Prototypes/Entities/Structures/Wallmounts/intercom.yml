@@ -4,6 +4,10 @@
   description: An intercom. For when the station just needs to know something.
   abstract: true
   components:
+  # SS220 languages begin
+  - type: Language
+    knowAllLLanguages: true # Used an transponder
+  # SS220 languages end
   - type: StationAiWhitelist
   - type: WallMount
   - type: ApcPowerReceiver
@@ -80,6 +84,9 @@
   - type: Construction
     graph: Intercom
     node: intercom
+    containers:
+    - board
+    - key_slots
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic

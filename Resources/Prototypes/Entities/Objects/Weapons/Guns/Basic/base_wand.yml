@@ -1,7 +1,7 @@
 - type: entity
   id: WeaponWandBase
   abstract: true
-  parent: BaseItem
+  parent: [ BaseItem, BaseMagicalContraband ]
   components:
   - type: EmitSoundOnLand
     sound:

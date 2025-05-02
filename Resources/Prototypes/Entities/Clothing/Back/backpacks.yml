@@ -77,7 +77,7 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: [ClothingBackpack]
+  parent: [ClothingBackpack, BaseSecurityContraband]
   id: ClothingBackpackSecurity
   name: security backpack
   description: It's a very robust backpack.
@@ -91,7 +91,7 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: [ClothingBackpack]
+  parent: [ClothingBackpack, BaseSecurityContraband]
   id: ClothingBackpackBrigmedic
   name: brigmedic backpack
   description: It's a very sterile backpack.

@@ -8,6 +8,7 @@ using Content.Shared.Damage;
 using Content.Shared.Implants;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Robust.Server.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -22,6 +23,7 @@ public sealed class MindSlaveDisfunctionSystem : EntitySystem
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     private const float SecondsBetweenStageDamage = 4f;
 
@@ -111,11 +113,11 @@ public sealed class MindSlaveDisfunctionSystem : EntitySystem
         if (!_mind.TryGetMind(entity, out _, out var mindComponent))
             return;
 
-        if (mindComponent.Session == null)
+        if (!_playerManager.TryGetSessionById(mindComponent.UserId, out var session))
             return;
 
         _chat.ChatMessageToOne(Shared.Chat.ChatChannel.Emotes, progressMessage, progressMessage,
-                                default, false, mindComponent.Session.Channel, colorOverride: Color.Red);
+                                default, false, session.Channel, colorOverride: Color.Red);
     }
 
     public void WeakDisfunction(Entity<MindSlaveDisfunctionComponent?> entity, float delayMinutes, int removeAmount)

@@ -9729,6 +9729,20 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 9.143727,-21.488901
       parent: 104
+- proto: NitrogenCanister
+  entities:
+  - uid: 3340
+    components:
+    - type: Transform
+      pos: 17.5,-15.5
+      parent: 104
+- proto: NitrogenTankFilled
+  entities:
+  - uid: 3341
+    components:
+    - type: Transform
+      pos: -0.64371514,-2.4380567
+      parent: 104
 - proto: NormalHeadSkeleton
   entities:
   - uid: 947
@@ -9748,6 +9762,25 @@ entities:
     components:
     - type: Transform
       pos: 1.5,-12.5
+      parent: 104
+- proto: OxygenCanister
+  entities:
+  - uid: 570
+    components:
+    - type: Transform
+      pos: -0.5,-0.5
+      parent: 104
+  - uid: 3339
+    components:
+    - type: Transform
+      pos: 18.5,-15.5
+      parent: 104
+- proto: OxygenTankFilled
+  entities:
+  - uid: 3342
+    components:
+    - type: Transform
+      pos: -0.39371514,-2.5005567
       parent: 104
 - proto: PaintingMonkey
   entities:
@@ -10530,11 +10563,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 7.5,-17.5
-      parent: 104
-  - uid: 570
-    components:
-    - type: Transform
-      pos: -0.5,-0.5
       parent: 104
   - uid: 659
     components:

@@ -205,3 +205,24 @@
       - !type:GenericStatusEffect
         key: PressureImmunity
         component: PressureImmunity
+
+- type: reagent
+  id: Cerebrin
+  name: reagent-name-cerebrin
+  group: Medicine
+  desc: reagent-desc-cerebrin
+  physicalDesc: reagent-physical-desc-sticky
+  flavor: medicine
+  color: "#e832ff"
+  worksOnTheDead: true
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.25
+      effects:
+        - !type:HealthChange
+          conditions:
+          - !type:Temperature
+            max: 213.0
+          damage:
+            types:
+              Сerebral: -3.4
