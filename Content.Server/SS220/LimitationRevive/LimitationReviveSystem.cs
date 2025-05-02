@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Cloning;
+using Content.Shared.Cloning.Events;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -52,7 +53,7 @@ public sealed class LimitationReviveSystem : EntitySystem
 
     private void OnCloning(Entity<LimitationReviveComponent> entity, ref CloningEvent args)
     {
-        var targetComp = EnsureComp<LimitationReviveComponent>(args.Target);
+        var targetComp = EnsureComp<LimitationReviveComponent>(args.CloneUid);
         _serialization.CopyTo(entity.Comp, ref targetComp, notNullableOverride: true);
 
         targetComp.IsDamageTaken = false;

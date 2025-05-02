@@ -184,14 +184,15 @@
   - type: Item
     size: Normal
     sprite: Objects/Fun/Instruments/banjo.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - back
+    - suitStorage
+    sprite: Objects/Fun/Instruments/banjo.rsi
   - type: Tag
     tags:
     - StringInstrument
-  # SS220 fix #1728 begin
-  - type: Clothing
-    sprite: SS220/Objects/Fun/banjo.rsi
-    slots: suitStorage
-  # SS220 fix #1728 end
 - type: entity
   parent: BaseHandheldInstrument
   id: ViolinInstrument

@@ -69,3 +69,18 @@
   - type: LoadMapRule
     mapPath: /Maps/SS220/EventMaps/FractWarShuttlesMap.yml
   - type: FractWarRule
+
+- type: entity
+  categories: [ GameRules ]
+  parent: BaseGameRule
+  id: SurvivalRule
+  components:
+  - type: GameRule
+    minPlayers: 30
+
+- type: entity
+  id: EmergencyShuttleAutoCall
+  parent: BaseGameRule
+  categories: [ GameRules ]
+  components:
+  - type: EmergencyShuttleAutoCallRule

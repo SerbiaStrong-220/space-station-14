@@ -3,7 +3,8 @@
 - type: latheRecipe
   abstract: true
   id: BaseLightRecipe
-  category: Lights
+  categories:
+  - Lights
   completetime: 2
   materials:
     Steel: 50
@@ -240,11 +241,19 @@
   materials:
     Plastic: 200
 
+- type: latheRecipe
+  id: ClothingOuterVestTank
+  result: ClothingOuterVestTank
+  completetime: 2
+  materials:
+    Cloth: 100
+    Steel: 50
+
 # SS220 Tape Recorder #32234 early merge begin
 - type: latheRecipe
   id: CassetteTape
   result: CassetteTape
-  category: Tools
+  categories: [ Tools ]
   completetime: 2
   materials:
     Steel: 50
@@ -253,7 +262,7 @@
 - type: latheRecipe
   id: TapeRecorder
   result: TapeRecorder
-  category: Tools
+  categories: [ Tools ]
   completetime: 3
   materials:
     Steel: 250

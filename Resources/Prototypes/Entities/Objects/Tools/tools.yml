@@ -350,7 +350,6 @@
   # ss220 rcd upd end
   - type: LimitedCharges
     maxCharges: 30
-    charges: 30
   - type: Sprite
     sprite: Objects/Tools/rcd.rsi
     state: icon
@@ -381,7 +380,7 @@
   suffix: Empty
   components:
   - type: LimitedCharges
-    charges: 0
+    lastCharges: -1
 
 - type: entity
   id: RCDRecharging
@@ -392,7 +391,6 @@
   components:
   - type: LimitedCharges
     maxCharges: 30 # rcd upd
-    charges: 30 # rcd upd
   - type: AutoRecharge
     rechargeDuration: 5 # rcd upd
 

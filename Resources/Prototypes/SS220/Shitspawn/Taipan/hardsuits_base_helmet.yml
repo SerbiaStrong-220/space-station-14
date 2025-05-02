@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: NTHS220Shelmet
   name: Шлем NTHS-220-S
   description: Специальная разработка бронескафандра ДСО. Цвет миротворцев - зеленый!
@@ -24,9 +24,9 @@
         Radiation: 0.5
   - type: FireProtection
     reduction: 0.2
-    
+
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: THS111Shelmet
   name: Шлем THS-111-S
   description: Специальная разработка бронескафандра станции Тайпан. Обеспечивает надёжную защиту носителя.
@@ -51,4 +51,3 @@
         Radiation: 0.5
   - type: FireProtection
     reduction: 0.2
-    

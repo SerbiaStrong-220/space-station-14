@@ -190,6 +190,15 @@
 # ss220-twocolored-tails-end
 
 - type: marking
+  id: LizardTailAquatic
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Reptilian]
+  sprites:
+  - sprite: Mobs/Customization/reptilian_parts.rsi
+    state: tail_aquatic
+
+- type: marking
   id: LizardSnoutRound
   bodyPart: Snout
   markingCategory: Snout
@@ -355,6 +364,15 @@
   - sprite: Mobs/Customization/reptilian_parts.rsi
     state: body_backspikes
 
+- type: marking
+  id: LizardChestFin
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Reptilian]
+  sprites:
+  - sprite: Mobs/Customization/reptilian_parts.rsi
+    state: body_fin
+
 # Animated
 - type: marking
   id: LizardTailSmoothAnimated
@@ -406,3 +424,12 @@
   - sprite: SS220/Mobs/Customization/reptilian.rsi
     state: tail_dtiger_wagging_secondary
 # ss220-twocolored-tails-end
+
+- type: marking
+  id: LizardTailAquaticAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: Mobs/Customization/reptilian_parts.rsi
+      state: tail_aquatic_wagging

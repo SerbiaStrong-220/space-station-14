@@ -12,8 +12,7 @@
     issuer: objective-issuer-cult-yogg
   - type: RoleRequirement
     roles:
-      mindRoles:
-      - CultYoggRole
+    - CultYoggRole
 
 #Objective to win the game by summoning
 - type: entity

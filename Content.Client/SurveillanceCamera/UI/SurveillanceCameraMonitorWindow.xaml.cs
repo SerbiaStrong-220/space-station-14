@@ -144,11 +144,10 @@ public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow
 
     private void PopulateCameraList(Dictionary<string, Dictionary<string, (string, Vector2)>> cameras)
     {
-        SubnetList.Clear();
-
         // SS220 Camera-Map begin
         _camerasCache = cameras;
 
+        var entries = new List<ItemList.Item>();
         foreach (var (subnetFreqId, subnetCameras) in cameras)
         {
             foreach (var (address, (name, _)) in subnetCameras)
@@ -157,12 +156,24 @@ public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow
                     _currentName = name;
 
                 if (subnetFreqId == _subnetFilter)
-                    AddCameraToList(name, address);
+                {
+                    var item = new ItemList.Item(SubnetList)
+                    {
+                        Text = $"{name}: {address}",
+                        Metadata = address
+                    };
+                    entries.Add(item);
+                }
             }
         }
-        // SS220 Camera-Map end
 
-        SubnetList.SortItemsByText();
+        //var entries = cameras.Select(i => new ItemList.Item(SubnetList) {
+        //    Text = $"{i.Value}: {i.Key}",
+        //    Metadata = i.Key
+        //}).ToList();
+        // SS220 Camera-Map end
+        entries.Sort((a, b) => string.Compare(a.Text, b.Text, StringComparison.Ordinal));
+        SubnetList.SetItems(entries, (a,b) => string.Compare(a.Text, b.Text));
     }
 
     private void SetCameraView(IEye? eye)
@@ -218,12 +229,6 @@ public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow
             _subnetFilter = subnet;
 
         return SubnetSelector.ItemCount - 1;
-    }
-
-    private void AddCameraToList(string name, string address)
-    {
-        var item = SubnetList.AddItem($"{name}: {address}");
-        item.Metadata = address;
     }
 
     private void OnSubnetListSelect(ItemList.ItemListSelectedEventArgs args)
