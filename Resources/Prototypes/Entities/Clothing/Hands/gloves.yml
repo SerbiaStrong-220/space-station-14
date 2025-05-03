@@ -237,9 +237,8 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-ThievingGloves-thief
-      whitelistMind:
-        components:
-          - ThiefRole
+      whitelistMindRoles:
+      - ThiefRole
 # Corvax-HiddenDesc-End
   - type: NinjaGloves
     abilities:
@@ -390,14 +389,12 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-ThievingGloves-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-ThievingGloves-thief
-      whitelistMind:
-        components:
-          - ThiefRole
+      whitelistMindRoles:
+      - ThiefRole
 # Corvax-HiddenDesc-End
 
 - type: entity
