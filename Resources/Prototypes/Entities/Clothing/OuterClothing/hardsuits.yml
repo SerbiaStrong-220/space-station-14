@@ -1131,10 +1131,6 @@
         Heat: 0.3
         Radiation: 0.1
         Caustic: 0.1
-  # SS220 add stamina resistance begin
-  - type: StaminaResistance
-    damageCoefficient: 0.1
-  # SS220 add stamina resistance end
   #SS220-Deathsquad-Update-End
   - type: ClothingSpeedModifier
     walkModifier: 1.0
