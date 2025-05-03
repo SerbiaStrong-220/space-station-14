@@ -27,7 +27,7 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
 
             var coordinates = system.EntityManager.GetComponent<TransformComponent>(owner).Coordinates;
 
-            //ss220 fix dupe puddles start
+            //ss220 fix dupe puddles start (delete after merge https://github.com/space-wizards/space-station-14/pull/33231)
             if (Solution == null)
                 return;
 
