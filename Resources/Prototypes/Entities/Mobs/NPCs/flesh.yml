@@ -59,6 +59,11 @@
         Slash: 6
   - type: ReplacementAccent
     accent: genericAggressive
+  # SS220 Add stamina resistence begin
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+    worn: false
+  # SS220 Add stamina resistence end
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Zombie
