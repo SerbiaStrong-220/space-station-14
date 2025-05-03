@@ -151,7 +151,7 @@ public sealed partial class TTSSystem : EntitySystem
                     if (request.PlayGlobal)
                         stream = _audio.PlayGlobal(audioStream, null, request.Params);
                     else
-                        stream = _audio.PlayEntity(audioStream!, uid, null, request.Params);
+                        stream = _audio.PlayEntity(audioStream, uid, null, request.Params);
                     break;
                 default:
                     continue;
