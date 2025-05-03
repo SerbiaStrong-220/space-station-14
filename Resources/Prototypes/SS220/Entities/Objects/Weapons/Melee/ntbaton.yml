@@ -27,6 +27,7 @@
   - type: StaminaDamageOnHit
     damage: 0
   - type: MeleeWeapon
+    wideAnimationRotation: -135
     soundHit: !type:SoundCollectionSpecifier
       collection: HomerunBaton
     damage:
