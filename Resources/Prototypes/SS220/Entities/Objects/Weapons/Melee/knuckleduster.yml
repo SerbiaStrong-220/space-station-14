@@ -22,16 +22,17 @@
     damage:
       types:
        Blunt: 10
-       Stamina: 28
     soundHit:
       collection: GenericHit
     animation: WeaponArcFist
     mustBeEquippedToUse: true
+  - type: StaminaDamageOnCollide
+    damage: 28
   - type: WeaponRandom
     damageBonus:
-        types:
-            Blunt: 10
-            Stamina: 72 # 28 + 72 = 100 => куклу без стаминрезиста сразу ложит в стаминкрит
+      types:
+        Blunt: 10
+    staminaDamage: 72
     randomDamageChance: 0.2
     damageSound: /Audio/SS220/Weapons/brassKnukles/critical-hit.ogg
   - type: Tag

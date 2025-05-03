@@ -8,10 +8,10 @@
   markingLimits: MobArachnidMarkingLimits
   dollPrototype: MobArachnidDummy
   skinColoration: Hues
-  maleFirstNames: names_arachnid_male #ss220-arachnid-lore-names
-  femaleFirstNames: names_arachnid_female #ss220-arachnid-lore-names
-  maleLastNames: names_arachnid_last # Corvax-LastnameGender
-  femaleLastNames: names_arachnid_last # Corvax-LastnameGender
+  maleFirstNames: NamesArachnidMale #ss220-arachnid-lore-names
+  femaleFirstNames: NamesArachnidFemale #ss220-arachnid-lore-names
+  maleLastNames: NamesArachnidLast # Corvax-LastnameGender
+  femaleLastNames: NamesArachnidLast # Corvax-LastnameGender
 
 - type: speciesBaseSprites
   id: MobArachnidSprites
@@ -19,6 +19,8 @@
     Special: MobHumanoidAnyMarking #SS220-CultYogg
     Head: MobArachnidHead
     Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobArachnidTorso
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking

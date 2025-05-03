@@ -15,6 +15,8 @@ using Robust.Shared.Prototypes;
 using System.Runtime.Intrinsics.Arm;
 using Content.Shared.Mining;
 using System.Linq;
+using Content.Shared.Access.Systems;
+using Content.Shared.Access.Components;
 
 namespace Content.Server.Materials;
 
@@ -29,6 +31,7 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StackSystem _stackSystem = default!;
+    [Dependency] private readonly AccessReaderSystem _accessReader = default!; // SS220 Add access check for material eject
 
     public override void Initialize()
     {
@@ -72,6 +75,16 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
         if (!_actionBlocker.CanInteract(player, uid))
             return;
 
+        // SS220 Add access check for material eject begin
+        if (TryComp<AccessReaderComponent>(uid, out var accessReader) &&
+            !_accessReader.IsAllowed(player, uid, accessReader))
+        {
+            _popup.PopupEntity(Loc.GetString("material-storage-eject-access-denied"), uid);
+            _audio.PlayPvs(component.AccessDeniedSound, uid);
+            return;
+        }
+        // SS220 Add access check for material eject end
+
         if (!component.CanEjectStoredMaterials || !_prototypeManager.TryIndex<MaterialPrototype>(msg.Material, out var material))
             return;
 
@@ -79,7 +92,7 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
 
         if (material.StackEntity != null)
         {
-            if (!_prototypeManager.Index<EntityPrototype>(material.StackEntity).TryGetComponent<PhysicalCompositionComponent>(out var composition))
+            if (!_prototypeManager.Index<EntityPrototype>(material.StackEntity).TryGetComponent<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
                 return;
 
             var volumePerSheet = composition.MaterialComposition.FirstOrDefault(kvp => kvp.Key == msg.Material).Value;
@@ -96,6 +109,18 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
         {
             _stackSystem.TryMergeToContacts(mat);
         }
+
+        // SS220 Add logging when user eject materials begin
+        mats = mats.Where(mat => !TerminatingOrDeleted(mat)).ToList();
+        foreach (var mat in mats)
+        {
+            TryComp<StackComponent>(mat, out var stack);
+            var count = stack?.Count ?? 1;
+            _adminLogger.Add(LogType.Action,
+                LogImpact.Low,
+                $"{ToPrettyString(player):player} ejected {count} {ToPrettyString(mat):ejected} from {ToPrettyString(uid):source}");
+        }
+        // SS220 Add logging when user eject materials end
     }
 
     public override bool TryInsertMaterialEntity(EntityUid user,
@@ -112,14 +137,18 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
         if (!base.TryInsertMaterialEntity(user, toInsert, receiver, storage, material, composition))
             return false;
         _audio.PlayPvs(storage.InsertingSound, receiver);
-        _popup.PopupEntity(Loc.GetString("machine-insert-item", ("user", user), ("machine", receiver),
-            ("item", toInsert)), receiver);
+        _popup.PopupEntity(Loc.GetString("machine-insert-item",
+                ("user", user),
+                ("machine", receiver),
+                ("item", toInsert)),
+            receiver);
         QueueDel(toInsert);
 
         // Logging
         TryComp<StackComponent>(toInsert, out var stack);
         var count = stack?.Count ?? 1;
-        _adminLogger.Add(LogType.Action, LogImpact.Low,
+        _adminLogger.Add(LogType.Action,
+            LogImpact.Low,
             $"{ToPrettyString(user):player} inserted {count} {ToPrettyString(toInsert):inserted} into {ToPrettyString(receiver):receiver}");
         return true;
     }
@@ -199,7 +228,7 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
             return new List<EntityUid>();
 
         var entProto = _prototypeManager.Index<EntityPrototype>(materialProto.StackEntity);
-        if (!entProto.TryGetComponent<PhysicalCompositionComponent>(out var composition))
+        if (!entProto.TryGetComponent<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
             return new List<EntityUid>();
 
         var materialPerStack = composition.MaterialComposition[materialProto.ID];

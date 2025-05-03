@@ -29,9 +29,7 @@
   group: market
 
 - type: cargoProduct
-  #name: "emitter crate" #SS220 Translation // Haven't found a way to translate this without commenting it
   id: EngineSingularityEmitter
-  #description: "Contains an emitter. Used only for dangerous applications." #SS220 Translation
   icon:
     sprite: Structures/Power/Generation/Singularity/emitter.rsi
     state: emitter # COrvax-Resprite

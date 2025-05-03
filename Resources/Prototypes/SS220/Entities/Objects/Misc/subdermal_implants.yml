@@ -5,9 +5,7 @@
   description: lmaoooo
   categories: [ HideSpawnMenu ]
   components:
-    - type: Tag
-      tags:
-      - MindSlave
+    - type: MindSlaveImplant
     - type: MindSlaveDisfunctionProvider
       disfunction:
         disfunction:
@@ -39,10 +37,9 @@
         - Scientist
         - Borg
       - label: hidden-desc-MindSlaveImplant-syndicate
-        whitelistMind:
-          mindRoles:
-          - TraitorRole
-          - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -73,10 +70,9 @@
           - Scientist
           - Borg
       - label: hidden-desc-ThermalGoogles-syndicate
-        whitelistMind:
-          mindRoles:
-            - TraitorRole
-            - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -104,10 +100,9 @@
       - Scientist
       - Borg
     - label: hidden-desc-DnaCopyImplant-syndicate
-      whitelistMind:
-        mindRoles:
-        - TraitorRole
-        - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -147,8 +142,7 @@
       - Scientist
       - Borg
     - label: hidden-desc-AdrenalImplant-syndicate
-      whitelistMind:
-        mindRoles:
-        - TraitorRole
-        - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
 

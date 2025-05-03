@@ -3,6 +3,15 @@
 
   Большинство, если не все, второстепенные антагонисты - это управляемые призраками роли, которые дают мертвецам новые способы устроить хаос на станции. Они возникают в результате случайных событий.
 
+ # Paradox Clone
+
+  <Box>
+    <GuideEntityEmbed Entity="ParadoxCloneDummy"/>
+  </Box>
+
+  A perfect copy of a random crewmember that was thrown into our universe by a space-time anomaly. To fix the paradox and survive they have to find and kill their original counterpart. They have no special abilities, but are have identical appearance, DNA, fingerprints, clothing, equipment and IDs, making it hard to figure out who is the orginal and who is the clone, unless you know your fellow crewmembers well.
+
+
   # Ревенант
 
   <Box>

@@ -9,14 +9,17 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.RCD.Systems;
+using Content.Shared.SS220.Photocopier.Forms;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
 using Content.Shared.Storage;
+using Microsoft.CodeAnalysis;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -210,13 +213,15 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             return;
 
         var coordinates = GetCoordinates(args.TargetCoordinates);
-        if (!_rCDSystem.TryGetMapGridData(coordinates, out var mapGridData) ||
-            mapGridData is null)
+        var gridUid = _transform.GetGrid(coordinates);
+        if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
             return;
 
-        _mapSystem.SetTile(mapGridData.Value.GridUid,
-            mapGridData.Value.Component,
-            mapGridData.Value.Position,
+        var position = _mapSystem.TileIndicesFor(gridUid.Value, mapGrid, coordinates);
+
+        _mapSystem.SetTile(gridUid.Value,
+            mapGrid,
+            position,
             new Tile(_tileDefinitionManager[args.Prototype].TileId));
 
         if (TryComp<SpiderQueenComponent>(user, out var spiderQueen))

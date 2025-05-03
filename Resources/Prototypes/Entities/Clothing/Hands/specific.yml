@@ -25,10 +25,9 @@
     - type: HiddenDescription
       entries:
       - label: corvax-hidden-desc-Chameleon-syndicate
-        whitelistMind:
-          components:
-            - TraitorRole
-            - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
       - label: corvax-hidden-desc-Chameleon-research
         jobRequired:
           - ResearchAssistant
@@ -36,7 +35,7 @@
           - Scientist
           - Borg
 # Corvax-HiddenDesc-End
- 
+
 - type: entity
   parent: ClothingHandsChameleon
   id: ClothingHandsChameleonThief
@@ -49,23 +48,19 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-Chameleon-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-ThievingGloves-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-Chameleon-thief
-      whitelistMind:
-        components:
-          - ThiefRole
+      whitelistMindRoles:
+      - ThiefRole
     - label: corvax-hidden-desc-ThievingGloves-thief
-      whitelistMind:
-        components:
-          - ThiefRole
+      whitelistMindRoles:
+      - ThiefRole
     - label: corvax-hidden-desc-Chameleon-research
       jobRequired:
         - ResearchAssistant

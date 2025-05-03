@@ -38,9 +38,9 @@
 - type: entity
   id: ActionActivateAdrenalImplant
   components:
+  - type: LimitedCharges
+    maxCharges: 3
   - type: InstantAction
-    charges: 3
-    timeBetweenCharges: 30 #30 seconds delay
     checkCanInteract: false
     checkConsciousness: false
     itemIconStyle: BigAction
@@ -49,6 +49,7 @@
       sprite: /Textures/SS220/Interface/Actions/implants.rsi
       state: adrenal
     event: !type:UseAdrenalImplantEvent
+    useDelay: 30
 
 - type: entity
   id: ActionActivateThermalVision
@@ -63,3 +64,15 @@
       state: EyeON
     event: !type:UseThermalVisionEvent
     useDelay: 1
+
+- type: entity
+  id: ActionToggleWaggingVulp
+  name: action-name-toggle-wagging
+  description: action-description-toggle-wagging
+  components:
+    - type: InstantAction
+      icon: { sprite: SS220/Mobs/Customization/vulpkanin_parts.rsi, state: Tail_Icon }
+      iconOn: { sprite: SS220/Mobs/Customization/vulpkanin_parts.rsi, state: Tail_Icon }
+      itemIconStyle: NoItem
+      useDelay: 1 # emote spam
+      event: !type:ToggleActionEvent
