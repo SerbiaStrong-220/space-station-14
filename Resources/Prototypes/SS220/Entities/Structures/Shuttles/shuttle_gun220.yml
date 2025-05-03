@@ -321,6 +321,7 @@
     lifetime: 4
   - type: StaminaDamageOnCollide
     damage: 50
+    ignoreResistance: true
   - type: Projectile
     damage:
       types:
