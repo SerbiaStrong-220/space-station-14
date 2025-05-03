@@ -4,7 +4,7 @@ namespace Content.Shared.SS220.TransferItemsInStorage;
 
 [RegisterComponent]
 [NetworkedComponent]
-public sealed partial class TransferItemsInStorageComponent : Component
+public sealed partial class TransferMaterialsInStorageComponent : Component
 {
 
 }
