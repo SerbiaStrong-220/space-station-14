@@ -84,7 +84,7 @@
   id: CrateSecurityTrackingMindshieldImplants
   name: implanter crate
   description: Contains 4 MindShield implants and 4 tracking implant. Requires Security access to open.
-  parent: CrateSecgear
+  parent: CrateMedicalSecureImplant #SS220 The implants are in new crates
   components:
   - type: StorageFill
     contents:
