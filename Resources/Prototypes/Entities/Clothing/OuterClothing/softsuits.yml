@@ -138,7 +138,10 @@
         Heat: 0.90
         Radiation: 0.75
         Caustic: 0.5
-        Stamina: 0.8
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.8
+  # SS220 add stamina resistance end
   - type: GroupExamine
   - type: StealTarget
     stealGroup: ClothingOuterHardsuitVoidParamed

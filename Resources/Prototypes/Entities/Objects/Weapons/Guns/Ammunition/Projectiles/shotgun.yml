@@ -25,7 +25,8 @@
     damage:
       types:
         Blunt: 16 #ss220lowTTKUpdate
-        Stamina: 60 # 2 hits to stun #ss220lowTTKUpdate
+  - type: StaminaDamageOnCollide
+    damage: 60 # 2 hits to stun #ss220lowTTKUpdate
 
 - type: entity
   id: PelletShotgun

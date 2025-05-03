@@ -34,9 +34,6 @@
         params:
           volume: 3
           variation: 0.250
-      activatedDamage:
-          types:
-              Stamina: 5
     - type: ItemToggleActiveSound
       activeSound:
         path: /Audio/Weapons/ebladehum.ogg
@@ -46,6 +43,8 @@
       components:
       - type: DisarmMalus
         malus: 0
+      - type: StaminaDamageOnHit
+        damage: 8
     - type: Wieldable
       wieldSound: null # esword light sound instead
     - type: MeleeWeapon
