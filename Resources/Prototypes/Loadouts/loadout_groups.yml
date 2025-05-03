@@ -1591,6 +1591,7 @@
   - Glasses
   - GlassesJamjar
   - GlassesJensen
+  - CyberMedVisor #SS220 Fix Duplicate Loadout
 
 - type: loadoutGroup
   id: SurvivalMedical

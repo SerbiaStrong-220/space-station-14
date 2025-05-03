@@ -314,6 +314,18 @@
   - AdministratorNeck
   - HeadDeveloperNeck
   - WikiEditorsNeck
+
+- type: loadoutGroup
+  id: ChiefMedicalOfficerGlasses
+  name: loadout-group-chief-medical-officer-eyes
+  loadouts:
+  - MedicalHud
+  - MedicalEyePatchHud
+  - Glasses
+  - GlassesJamjar
+  - GlassesJensen
+  - CyberMedVisor
+  - CMOCorpGlasses
   # Главный врач (Конец)
 
   # Ведущий врач (Начало)
@@ -458,13 +470,6 @@
   loadouts:
   - WhiteScarf
 
-- type: loadoutGroup
-  id: MedicalGlasses
-  name: loadout-group-medical-glasses
-  minLimit: 0
-  loadouts:
-  - Glasses
-  - CyberMedVisor
   # Врач (Конец)
 
   # Химик (Начало)
@@ -486,14 +491,6 @@
   - ParamedInterdyneBelt
   # Парамедик (конец)
 
-  # Главный врач (Начало)
-- type: loadoutGroup
-  id: ChiefMedicalOfficerGlasses
-  name: loadout-group-chief-medical-officer-eyes
-  loadouts:
-  - Glasses
-  - CyberMedVisor
-  - CMOCorpGlasses
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
