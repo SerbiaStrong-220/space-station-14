@@ -5,6 +5,7 @@
   abstract: true
   description: It looks so much like jelly. I wonder what it tastes like?
   components:
+  - type: NoSlip #SS220 Fauna update
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/slimes.rsi
@@ -53,7 +54,7 @@
     maxSaturation: 15
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: Slime
+    damageModifierSet: SlimeMob #SS220 FaunaUpdate
   - type: Bloodstream
     bloodReagent: Slime
     bloodlossDamage:
