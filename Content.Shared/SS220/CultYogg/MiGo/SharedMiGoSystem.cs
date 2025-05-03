@@ -191,6 +191,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         healComponent.ModifyBloodLevel = args.ModifyBloodLevel;
         healComponent.TimeBetweenIncidents = args.TimeBetweenIncidents;
         healComponent.Sprite = args.EffectSprite;
+        healComponent.ModifyStamina = args.ModifyStamina;
         Dirty(args.Target, healComponent);
 
         args.Handled = true;
