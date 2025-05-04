@@ -17,14 +17,14 @@ namespace Content.Shared.SS220.CluwneComms
         /// </summary>
         [ViewVariables]
         [DataField]
-        public TimeSpan AnnounceDelay = TimeSpan.FromSeconds(10);
+        public TimeSpan AnnounceDelay = TimeSpan.FromSeconds(600);
 
         /// <summary>
         /// Time in seconds of announcement cooldown when a new console is created on a per-console basis
         /// </summary>
         [ViewVariables]
         [DataField]
-        public TimeSpan InitialAnnounceDelay = TimeSpan.FromSeconds(3);
+        public TimeSpan InitialAnnounceDelay = TimeSpan.FromSeconds(600);
 
         /// <summary>
         /// Remaining cooldown between making announcements.
@@ -40,14 +40,14 @@ namespace Content.Shared.SS220.CluwneComms
         /// </summary>
         [ViewVariables]
         [DataField]
-        public TimeSpan AlertDelay = TimeSpan.FromSeconds(10);
+        public TimeSpan AlertDelay = TimeSpan.FromSeconds(1200);
 
         /// <summary>
         /// Time in seconds of alert cooldown when a new console is created on a per-console basis
         /// </summary>
         [ViewVariables]
         [DataField]
-        public TimeSpan InitialAlertDelay = TimeSpan.FromSeconds(3);
+        public TimeSpan InitialAlertDelay = TimeSpan.FromSeconds(1200);
 
         /// <summary>
         /// Remaining cooldown between making funny codes
