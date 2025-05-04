@@ -24,11 +24,6 @@ public sealed class LocateAiSystem : SharedLocateAiSystem
 
         while (queryLocate.MoveNext(out var uid, out var locateAiComponent))
         {
-            var detected =
-                _lookup.GetEntitiesInRange<StationAiCoreComponent>(Transform(uid).Coordinates,
-                        locateAiComponent.RangeDetection)
-                    .Count > 0;
-
             if (!locateAiComponent.IsActive)
             {
                 if (locateAiComponent.LastDetected)
@@ -39,6 +34,11 @@ public sealed class LocateAiSystem : SharedLocateAiSystem
 
                 continue;
             }
+            
+            var detected =
+                _lookup.GetEntitiesInRange<StationAiCoreComponent>(Transform(uid).Coordinates,
+                        locateAiComponent.RangeDetection)
+                    .Count > 0;
 
             if (locateAiComponent.LastDetected == detected)
                 continue;
