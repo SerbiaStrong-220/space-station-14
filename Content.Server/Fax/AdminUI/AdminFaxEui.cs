@@ -12,6 +12,7 @@ using Content.Shared.Paper;
 using Content.Shared.SS220.Photocopier;
 using Content.Server.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.Fax.AdminUI;
 
@@ -52,40 +53,44 @@ public sealed class AdminFaxEui : BaseEui
         switch (msg)
         {
             case AdminFaxEuiMsg.Follow followData:
-            {
-                if (Player.AttachedEntity == null ||
-                    !_entityManager.HasComponent<GhostComponent>(Player.AttachedEntity.Value))
-                    return;
+                {
+                    if (Player.AttachedEntity == null ||
+                        !_entityManager.HasComponent<GhostComponent>(Player.AttachedEntity.Value))
+                        return;
 
-                _followerSystem.StartFollowingEntity(Player.AttachedEntity.Value, _entityManager.GetEntity(followData.TargetFax));
-                break;
-            }
+                    _followerSystem.StartFollowingEntity(Player.AttachedEntity.Value, _entityManager.GetEntity(followData.TargetFax));
+                    break;
+                }
             case AdminFaxEuiMsg.Send sendData:
-            {
-                var dataToCopy = new Dictionary<Type, IPhotocopiedComponentData>();
-                var paperDataToCopy = new PaperPhotocopiedData()
                 {
-                    Content = sendData.Content,
-                    StampState = sendData.StampState,
-                    EditingDisabled = sendData.Locked,
-                    StampedBy = new() { new StampDisplayInfo { StampedName = sendData.From, StampedColor = sendData.StampColor } }
-                };
-                dataToCopy.Add(typeof(PaperComponent), paperDataToCopy);
+                    // SS220 Photocopy begin
+                    //var printout = new FaxPrintout(sendData.Content, sendData.Title, null, null, sendData.StampState,
+                    //        new() { new StampDisplayInfo { StampedName = sendData.From, StampedColor = sendData.StampColor } },
+                    //        locked: sendData.Locked);
+                    //_faxSystem.Receive(_entityManager.GetEntity(sendData.Target), printout);
+                    //break;
 
-                var metaData = new PhotocopyableMetaData()
-                {
-                    EntityName = sendData.Title,
-                    PrototypeId = "PaperNtFormCc"
-                };
+                    var dataToCopy = new Dictionary<Type, IPhotocopiedComponentData>();
+                    var paperDataToCopy = new PaperPhotocopiedData()
+                    {
+                        Content = sendData.Content,
+                        StampState = sendData.StampState,
+                        EditingDisabled = sendData.Locked,
+                        StampedBy = new() { new StampDisplayInfo { StampedName = sendData.From, StampedColor = sendData.StampColor } }
+                    };
+                    dataToCopy.Add(typeof(PaperComponent), paperDataToCopy);
 
-                // SS220-add-eui-log
-                _adminLogManager.Add(LogType.Action, LogImpact.Low,
-                    $"Announcement from {Player:user}, title is {sendData.Title}, content {sendData.Content}, stamp state '{sendData.StampState}', stamped by {sendData.From}");
-                // SS220-add-eui-log
-                var printout = new FaxPrintout(dataToCopy, metaData);
-                _faxSystem.Receive(_entityManager.GetEntity(sendData.Target), printout);
-                break;
-            }
+                    var metaData = new PhotocopyableMetaData()
+                    {
+                        EntityName = sendData.Title,
+                        PrototypeId = "PaperNtFormCc"
+                    };
+
+                    var printout = new PhotocopyableFaxPrintout(dataToCopy, metaData);
+                    _faxSystem.Receive(_entityManager.GetEntity(sendData.Target), printout);
+                    break;
+                    // SS220 Photocopy end
+                }
         }
     }
 }

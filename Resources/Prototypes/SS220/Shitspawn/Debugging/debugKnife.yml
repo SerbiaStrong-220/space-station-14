@@ -161,10 +161,9 @@
   id: KnifeStamina
   categories: [ HideSpawnMenu ]
   components:
+  - type: StaminaDamageOnHit
+    damage: 100
   - type: MeleeWeapon
-    damage:
-      types:
-        Stamina: 100
 
 - type: entity
   parent: ClothingBackpackERTSecurity

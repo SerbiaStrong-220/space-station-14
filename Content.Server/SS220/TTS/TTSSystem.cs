@@ -14,10 +14,9 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Network;
 using Robust.Server.Player;
-using Robust.Shared.GameObjects;
-using System.Linq;
 using Content.Server.SS220.Language;
 using Content.Shared.SS220.Language.Systems;
+
 
 namespace Content.Server.SS220.TTS;
 
@@ -337,23 +336,29 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void HandleWhisperToMany(EntityUid source, IEnumerable<ICommonSession> receivers, string message, string obfMessage, string speaker, bool isRadio)
     {
+        MsgPlayTts? ttsMessage = null;
         using var ttsResponse = await GenerateTts(message, speaker, TtsKind.Whisper);
-        if (!ttsResponse.TryGetValue(out var audioData)) return;
-        var ttsMessage = new MsgPlayTts
+        if (ttsResponse.TryGetValue(out var audioData))
         {
-            Data = audioData,
-            SourceUid = GetNetEntity(source),
-            Kind = TtsKind.Whisper
-        };
+            ttsMessage = new MsgPlayTts
+            {
+                Data = audioData,
+                SourceUid = GetNetEntity(source),
+                Kind = TtsKind.Whisper
+            };
+        }
 
+        MsgPlayTts? obfttsMessage = null;
         using var obfTtsResponse = await GenerateTts(obfMessage, speaker, TtsKind.Whisper);
-        if (!obfTtsResponse.TryGetValue(out var obfAudioData)) return;
-        var obfttsMessage = new MsgPlayTts
+        if (obfTtsResponse.TryGetValue(out var obfAudioData))
         {
-            Data = obfAudioData,
-            SourceUid = GetNetEntity(source),
-            Kind = TtsKind.Whisper
-        };
+            obfttsMessage = new MsgPlayTts
+            {
+                Data = obfAudioData,
+                SourceUid = GetNetEntity(source),
+                Kind = TtsKind.Whisper
+            };
+        }
 
         foreach (var receiver in receivers)
         {

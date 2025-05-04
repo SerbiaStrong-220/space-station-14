@@ -4,6 +4,21 @@
   description: job-description-captain
   playTimeTracker: JobCaptain
   requirements:
+    #SS220 requirement begin
+    # off
+    # - !type:DepartmentTimeRequirement
+    #   department: Engineering
+    #   time: 14400 # 4 hours
+    # - !type:DepartmentTimeRequirement
+    #   department: Medical
+    #   time: 14400 # 4 hours
+    # - !type:DepartmentTimeRequirement
+    #   department: Science
+    #   time: 14400 # 4 hours
+    # - !type:DepartmentTimeRequirement
+    #   department: Security
+    #   time: 14400 # 4 hours
+    # off
     - !type:DepartmentTimeRequirement
       department: Command
       time: 288000 # SS220-RoleTime 2
@@ -13,6 +28,7 @@
       inverted: true
       species:
       - Felinid #SS220-jobbans end
+    #SS220 requirement end
   weight: 20
   startingGear: CaptainGear
   icon: "JobIconCaptain"

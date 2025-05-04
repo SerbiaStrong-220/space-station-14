@@ -9,8 +9,8 @@
   dollPrototype: MobDwarfDummy
   skinColoration: HumanToned
 #SS220-new-species-naming begin
-  maleFirstNames: names_dwarf_male
-  femaleFirstNames: names_dwarf_female
-  maleLastNames: names_dwarf_last
-  femaleLastNames: names_dwarf_last
+  maleFirstNames: NamesDwarfMale
+  femaleFirstNames: NamesDwarfFemale
+  maleLastNames: NamesDwarfLast
+  femaleLastNames: NamesDwarfLast
 #SS220-new-species-naming end

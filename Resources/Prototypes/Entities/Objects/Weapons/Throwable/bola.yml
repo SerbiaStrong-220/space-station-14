@@ -1,6 +1,6 @@
 - type: entity
   name: bola
-  parent: [BaseItem]
+  parent: [BaseItem, BaseSecurityContraband]
   id: Bola
   description: Linked together with some spare cuffs and metal.
   components:
@@ -39,7 +39,6 @@
     damage:
       types:
         Blunt: 5
-        Stamina: 80
   - type: Ensnaring
     freeTime: 2.0
     breakoutTime: 3.5 #all bola should generally be fast to remove

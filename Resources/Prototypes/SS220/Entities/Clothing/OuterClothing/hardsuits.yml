@@ -25,9 +25,12 @@
         Heat: 0.8
         Radiation: 0.25
         Caustic: 0.6
-        Stamina: 0.35 #SS220-syndifix
+  - type: StaminaResistance
+    damageCoefficient: 0.35
   - type: ExplosionResistance
     damageCoefficient: 0.6
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.35
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitBlueshield
 
@@ -56,9 +59,12 @@
         Heat: 0.8
         Radiation: 0.4
         Caustic: 0.6
-        Stamina: 0.35
+  - type: StaminaResistance
+    damageCoefficient: 0.35
   - type: ExplosionResistance
     damageCoefficient: 0.6
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.35
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitLightBlueshield
 
@@ -87,7 +93,10 @@
         Heat: 0.6
         Radiation: 0.2
         Caustic: 0.4
-        Stamina: 0.35
+  - type: StaminaResistance
+    damageCoefficient: 0.35
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.35
   - type: ExplosionResistance
     damageCoefficient: 0.3
   - type: ToggleableClothing
@@ -118,7 +127,8 @@
         Heat: 0.7
         Caustic: 0.7
         Radiation: 0.50
-        Stamina: 0.4
+  - type: StaminaResistance
+    damageCoefficient: 0.4
   - type: ClothingSpeedModifier
     walkModifier: 0.80
     sprintModifier: 0.80
@@ -153,8 +163,9 @@
         Piercing: 0.2
         Heat: 0.2
         Radiation: 0.1
-        Stamina: 0.1
         Caustic: 0.1
+  - type: StaminaResistance
+    damageCoefficient: 0.1
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 1.1
@@ -204,8 +215,11 @@
         Piercing: 0.3
         Heat: 0.3
         Radiation: 0.1
-        Stamina: 0.1
         Caustic: 0.1
+  - type: StaminaResistance
+    damageCoefficient: 0.1
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 1.4
@@ -256,7 +270,8 @@
         Heat: 0.4
         Radiation: 0.025
         Caustic: 0.7
-        Stamina: 0.5
+  - type: StaminaResistance
+    damageCoefficient: 0.5
   - type: ClothingSpeedModifier
     walkModifier: 0.7
     sprintModifier: 0.75
@@ -297,7 +312,10 @@
         Heat: 0.4
         Radiation: 0.2
         Caustic: 0.4
-        Stamina: 0.2
+  - type: StaminaResistance
+    damageCoefficient: 0.2
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.25
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8

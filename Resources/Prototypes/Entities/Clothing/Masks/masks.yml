@@ -19,12 +19,12 @@
     - MaskBreath
 # ss220 medkit fix end
   - type: HideLayerClothing
-    slots:
-    - Snout
+    layers:
+      Snout: Mask
     hideOnToggle: true
 
 - type: entity
-  parent: [ClothingMaskGas]
+  parent: [ClothingMaskGas, BaseSecurityContraband]
   id: ClothingMaskGasSecurity
   name: security gas mask
   description: A standard issue Security gas mask.
@@ -158,6 +158,11 @@
 # ss220 medkit fix begin
     - MaskBreath
 # ss220 medkit fix end
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Plastic: 50
+
 
 - type: entity
   parent: ClothingMaskBreathMedical
@@ -255,7 +260,7 @@
     node: mask
 
 - type: entity
-  parent: [ClothingMaskClown]
+  parent: [ClothingMaskClown, BaseSecurityContraband]
   id: ClothingMaskClownSecurity
   name: security clown wig and mask
   description: A debatably oxymoronic but protective mask and wig.
@@ -384,7 +389,7 @@
     accent: StutteringAccent
 
 - type: entity
-  parent: [ ClothingMaskGas]
+  parent: [ ClothingMaskGas, BaseSecurityContraband ]
   id: ClothingMaskGasSwat
   name: swat gas mask
   description: A elite issue Security gas mask.
@@ -722,3 +727,16 @@
   - type: Tag
     tags:
     - WhitelistChameleon
+
+# Entity tables
+- type: entityTable
+  id: AnimalMaskTable
+  table: !type:GroupSelector
+    children:
+    - id: ClothingMaskFox
+    - id: ClothingMaskBat
+    - id: ClothingMaskBear
+    - id: ClothingMaskBee
+    - id: ClothingMaskRaven
+    - id: ClothingMaskRat
+    - id: ClothingMaskJackal

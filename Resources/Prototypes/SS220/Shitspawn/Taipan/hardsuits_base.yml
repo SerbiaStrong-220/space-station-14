@@ -25,7 +25,8 @@
         Heat: 0.1 #ss-220 armReb
         Radiation: 0.7
         Caustic: 0.2
-        Stamina: 0.4 #ss-220 armReb
+  - type: StaminaResistance
+    damageCoefficient: 0.4
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -71,7 +72,8 @@
         Heat: 0.1 #ss-220 armReb
         Radiation: 0.7
         Caustic: 0.2
-        Stamina: 0.4 #ss-220 armReb
+  - type: StaminaResistance
+    damageCoefficient: 0.4
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9

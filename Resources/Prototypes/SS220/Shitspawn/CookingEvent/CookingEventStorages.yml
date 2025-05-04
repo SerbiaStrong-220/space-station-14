@@ -1,7 +1,7 @@
 - type: entity
   parent: CratePlastic
   id: CrateFreezerCookingEvent
-  name: Супер холодильник 
+  name: Супер холодильник
   suffix: Lanc, event.
   components:
   - type: Icon
@@ -25,7 +25,7 @@
   - type: AntiRottingContainer
   - type: ExplosionResistance
     damageCoefficient: 0.50
-  - type: EntityStorage 
+  - type: EntityStorage
     capacity: 5000
   - type: StorageFill
     contents:
@@ -436,7 +436,7 @@
         amount: 1
       - id: ClothingMaskMime
         amount: 1
-      - id: NitrogenChemistryBottle
+      - id: ChemistryBottleNitrogen
         amount: 5
       - id: DrinkCreamCarton
         amount: 3
@@ -444,7 +444,7 @@
         amount: 5
       - id: FoodSnackRaisins
         amount: 5
-      - id: CognizineChemistryBottle
+      - id: ChemistryBottleCognizine
         amount: 5
       - id: DrinkWineBottleFull
         amount: 3
@@ -472,7 +472,7 @@
         amount: 10
       - id: RegenerativeMesh
         amount: 10
-      - id: OmnizineChemistryBottle
+      - id: ChemistryBottleOmnizine
         amount: 2
       - id: Syringe
         amount: 3

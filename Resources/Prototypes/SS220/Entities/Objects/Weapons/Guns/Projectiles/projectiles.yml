@@ -32,10 +32,11 @@
     damage:
       types:
         Poison: 15
-        Stamina: 25 #weaponBalance
     soundHit:
       collection: WeakHit
     forceSound: true
+  - type: StaminaDamageOnCollide
+    damage: 25 #weaponBalance
   - type: StunOnCollide
     stunAmount: 2 #weaponBalance #ss220 fix 4 -> 2
     knockdownAmount: 2 #weaponBalance
@@ -50,7 +51,8 @@
     damage:
       types:
         Poison: 10
-        Stamina: 55 #weaponBalance
+  - type: StaminaDamageOnCollide
+    damage: 55 #weaponBalance
   - type: StunOnCollide
     stunAmount: 1 #weaponBalance
     knockdownAmount: 1 #weaponBalance
@@ -354,8 +356,9 @@
       types:
         Piercing: 0.01
         Structural: 10
-        Stamina: 20 #for fun. Cannot really staminacrit someone with this
     ignoreResistances: true
+  - type: StaminaDamageOnCollide
+    damage: 20 #for fun. Cannot really staminacrit someone with this
   - type: StunOnCollide
     stunAmount: 1
     knockdownAmount: 1

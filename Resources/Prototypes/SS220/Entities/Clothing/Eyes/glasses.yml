@@ -120,10 +120,9 @@
     - type: HiddenDescription
       entries:
       - label: hidden-desc-ThermalGoogles-syndicate
-        whitelistMind:
-          components:
-            - TraitorRole
-            - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
       - label: hidden-desc-ThermalGoogles-research
         jobRequired:
           - ResearchAssistant
