@@ -68,6 +68,12 @@ namespace Content.Shared.SS220.CluwneComms
         public SoundSpecifier DenySound = new SoundPathSpecifier("/Audio/SS220/Machines/CluwneComm/ui_cancel.ogg");
 
         /// <summary>
+        /// Sound when on of required fields is empty
+        /// </summary>
+        [DataField]
+        public SoundSpecifier BoomFailSound = new SoundPathSpecifier("/Audio/SS220/Machines/CluwneComm/boom_button_fail.ogg");
+
+        /// <summary>
         /// Console title
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
@@ -99,16 +105,20 @@ namespace Content.Shared.SS220.CluwneComms
 
         [DataField]
         public float ExplosionMaxTileIntensity = 50f;
+
+        [DataField]
+        public float ExplosionProbability = 0.1f;
     }
 
     [Serializable, NetSerializable]
-    public sealed class CluwneCommsConsoleInterfaceState(bool canAnnounce, bool canAlert, List<string>? alertLevels, TimeSpan? announcementCooldownRemaining, TimeSpan? alertCooldownRemaining) : BoundUserInterfaceState
+    public sealed class CluwneCommsConsoleInterfaceState(bool canAnnounce, bool canAlert, List<string>? alertLevels, TimeSpan? announcementCooldownRemaining, TimeSpan? alertCooldownRemaining, float boomChanсe) : BoundUserInterfaceState
     {
         public readonly bool CanAnnounce = canAnnounce;
         public readonly bool CanAlert = canAlert;
         public List<string>? AlertLevels = alertLevels;
         public TimeSpan? AnnouncementCooldownRemaining = announcementCooldownRemaining;
         public TimeSpan? AlertCooldownRemaining = alertCooldownRemaining;
+        public float BoomChanсe = boomChanсe;
     }
 
     [Serializable, NetSerializable]
@@ -132,8 +142,9 @@ namespace Content.Shared.SS220.CluwneComms
     }
 
     [Serializable, NetSerializable]
-    public sealed class CluwneCommsConsoleBoomMessage : BoundUserInterfaceMessage
+    public sealed class CluwneCommsConsoleBoomMessage(bool booming) : BoundUserInterfaceMessage
     {
+        public readonly bool Booming = booming;
     }
 
     [Serializable, NetSerializable]

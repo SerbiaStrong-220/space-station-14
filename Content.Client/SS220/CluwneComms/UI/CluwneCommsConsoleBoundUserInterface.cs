@@ -6,12 +6,14 @@ using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
 using Content.Shared.MassMedia.Systems;
+using Robust.Shared.Random;
 
 namespace Content.Client.SS220.CluwneComms.UI
 {
     public sealed class CluwneCommsConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
     {
         [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private readonly IRobustRandom _random = default!;
 
         [ViewVariables]
         private CluwneCommsConsoleMenu? _menu;
@@ -33,10 +35,15 @@ namespace Content.Client.SS220.CluwneComms.UI
             SendMessage(new CluwneCommsConsoleAnnounceMessage(msg));
         }
 
-        public void BoomButtonPressed()
+        public void BoomButtonPressed(float boomChance)
         {
-            SendMessage(new CluwneCommsConsoleBoomMessage());
-            Close();//should be cause user most certanly will be dead
+            if (_random.Prob(boomChance))//ьфву
+            {
+                SendMessage(new CluwneCommsConsoleBoomMessage(true));
+                Close();//should be cause user most certanly will be dead, if it isn't here = errors
+            }
+            else
+                SendMessage(new CluwneCommsConsoleBoomMessage(false));
         }
 
         public void AlertButtonPressed(string level, string message, string instructions)
@@ -67,6 +74,7 @@ namespace Content.Client.SS220.CluwneComms.UI
 
                 _menu.AnnounceCountdownEnd = commsState.AnnouncementCooldownRemaining;
                 _menu.AlertCountdownEnd = commsState.AlertCooldownRemaining;
+                _menu.BoomChance = commsState.BoomChanсe;
             }
         }
     }

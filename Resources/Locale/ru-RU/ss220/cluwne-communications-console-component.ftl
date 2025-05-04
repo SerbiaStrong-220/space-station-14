@@ -6,7 +6,7 @@ ent-CluwneCommsComputerCircuitboard = консоль смешной связи (
 # User interface
 cluwne-comms-console-menu-title = Консоль смешной связи
 cluwne-comms-console-menu-os-name = CluwneComms OS v0.6.9
-cluwne-comms-console-menu-close-button = Устал
+cluwne-comms-console-menu-close-button = Закрыть
 cluwne-comms-console-menu-code-tab = Смешной код
 cluwne-comms-console-menu-announcement-tab = Веселое объявление
 cluwne-comms-console-menu-announcement-placeholder = Текст смешного объявления...

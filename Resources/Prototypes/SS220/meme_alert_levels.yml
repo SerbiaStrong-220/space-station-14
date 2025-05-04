@@ -23,7 +23,7 @@
   levelDetails:
     announcement: joke-alert-level-pepsilon-announcement
     sound:
-      path: /Audio/Misc/epsilon.ogg
+      path: /Audio/SS220/Announcements/pepsilon.ogg
       params:
         volume: -2
     color: DarkViolet

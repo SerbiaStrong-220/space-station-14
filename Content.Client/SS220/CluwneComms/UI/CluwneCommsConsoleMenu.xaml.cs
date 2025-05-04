@@ -30,13 +30,15 @@ namespace Content.Client.SS220.CluwneComms.UI
         public bool CanAlert;
         public string CurrentLevel = string.Empty;
 
+        public float BoomChance = 1f;
+
         //timers buffer
         public TimeSpan? AnnounceCountdownEnd;
         public TimeSpan? AlertCountdownEnd;
 
         public event Action<string>? OnAnnounce;
         public event Action<string, string, string>? OnAlert;
-        public event Action? OnBoom;
+        public event Action<float>? OnBoom;
 
         public CluwneCommsConsoleMenu()
         {
@@ -54,7 +56,7 @@ namespace Content.Client.SS220.CluwneComms.UI
 
             AlertTriggers();
 
-            BoomButton.OnPressed += _ => OnBoom?.Invoke();
+            BoomButton.OnPressed += _ => OnBoom?.Invoke(BoomChance);
         }
 
         private void AnnounceTriggers()

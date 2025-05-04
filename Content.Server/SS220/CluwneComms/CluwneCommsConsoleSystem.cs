@@ -26,6 +26,7 @@ using Content.Shared.MassMedia.Components;
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Station.Systems;
 using Robust.Server.GameObjects;
+using Robust.Shared.Random;
 
 namespace Content.Server.SS220.CluwneComms
 {
@@ -45,6 +46,7 @@ namespace Content.Server.SS220.CluwneComms
         [Dependency] private readonly ExplosionSystem _explosion = default!;
         [Dependency] private readonly UserInterfaceSystem _ui = default!;
         [Dependency] private readonly StationSystem _station = default!;
+        [Dependency] private readonly IRobustRandom _random = default!;
 
         public override void Initialize()
         {
@@ -111,7 +113,7 @@ namespace Content.Server.SS220.CluwneComms
                 levels.Add(item.Key);
             }
 
-            CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce, comp.CanAlert, levels, comp.AnnouncementCooldownRemaining, comp.AlertCooldownRemaining);
+            CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce, comp.CanAlert, levels, comp.AnnouncementCooldownRemaining, comp.AlertCooldownRemaining, comp.ExplosionProbability);
             _uiSystem.SetUiState(ent, CluwneCommsConsoleUiKey.Key, newState);
         }
 
@@ -233,7 +235,10 @@ namespace Content.Server.SS220.CluwneComms
 
         private void OnBoomMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleBoomMessage args)
         {
-            _explosion.QueueExplosion(ent, "Default", ent.Comp.ExplosionTotalIntensity, ent.Comp.ExplosionSlope, ent.Comp.ExplosionMaxTileIntensity, canCreateVacuum: false);
+            if (args.Booming)//in case somebody abuse it just as bomb
+                _explosion.QueueExplosion(ent, "Default", ent.Comp.ExplosionTotalIntensity, ent.Comp.ExplosionSlope, ent.Comp.ExplosionMaxTileIntensity, canCreateVacuum: false);
+            else
+                _audio.PlayPvs(ent.Comp.BoomFailSound, ent);
         }
 
         #region News copypaste
