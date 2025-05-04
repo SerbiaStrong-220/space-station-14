@@ -6,7 +6,6 @@ using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.SS220.CultYogg.Lamp;
 using Content.Shared.SS220.StealthProvider;
-using JetBrains.FormatRipper.Elf;
 
 namespace Content.Server.SS220.CultYogg.Lamp;
 public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
