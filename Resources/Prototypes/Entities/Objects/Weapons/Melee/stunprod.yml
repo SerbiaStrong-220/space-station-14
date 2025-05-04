@@ -37,6 +37,8 @@
   #ss220 change stunprod start
   #- type: Stunbaton
     #energyPerUse: 120
+  - type: Stunprod
+    energyPerUse: 120
   #ss220 change stunprod end
   - type: MeleeWeapon
     wideAnimationRotation: -135
