@@ -2,18 +2,17 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Interaction;
-using Content.Shared.Light.Components;
 using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
 using Content.Shared.SS220.CultYogg.Lamp;
+using Content.Shared.SS220.StealthProvider;
+using JetBrains.FormatRipper.Elf;
 
 namespace Content.Server.SS220.CultYogg.Lamp;
 public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPointLightSystem _lights = default!;
     public override void Initialize()
@@ -80,18 +79,25 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
 
         _lights.SetEnabled(ent, false, pointLightComponent);
         SetActivated(ent, false, makeNoise);
+
+        if (TryComp<StealthProviderComponent>(ent, out var provComp))
+            provComp.Enabled = false;
+
         return true;
     }
 
-    public override bool TurnOn(EntityUid user, Entity<CultYoggLampComponent> uid)
+    public override bool TurnOn(EntityUid user, Entity<CultYoggLampComponent> ent)
     {
-        if (uid.Comp.Activated || !_lights.TryGetLight(uid, out var pointLightComponent))
+        if (ent.Comp.Activated || !_lights.TryGetLight(ent, out var pointLightComponent))
         {
             return false;
         }
 
-        _lights.SetEnabled(uid, true, pointLightComponent);
-        SetActivated(uid, true, true);
+        _lights.SetEnabled(ent, true, pointLightComponent);
+        SetActivated(ent, true, true);
+
+        if (TryComp<StealthProviderComponent>(ent, out var provComp))
+            provComp.Enabled = true;
 
         return true;
     }

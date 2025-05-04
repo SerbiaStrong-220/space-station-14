@@ -39,8 +39,8 @@ public sealed partial class CultYoggLampComponent : Component
     public EntityUid? SelfToggleActionEntity;
 
     [DataField("turnOnSound")]
-    public SoundSpecifier TurnOnSound = new SoundPathSpecifier("/Audio/Items/flashlight_on.ogg");
+    public SoundSpecifier TurnOnSound = new SoundPathSpecifier("/Audio/SS220/CultYogg/lamp_on.ogg");
 
     [DataField("turnOffSound")]
-    public SoundSpecifier TurnOffSound = new SoundPathSpecifier("/Audio/Items/flashlight_off.ogg");
+    public SoundSpecifier TurnOffSound = new SoundPathSpecifier("/Audio/SS220/CultYogg/lamp_off.ogg");
 }

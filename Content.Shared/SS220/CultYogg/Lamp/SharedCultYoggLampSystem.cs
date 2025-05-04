@@ -1,29 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
-using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
-using Content.Shared.Interaction;
 using Content.Shared.Item;
-using Content.Shared.Light.Components;
 using Content.Shared.Toggleable;
 using Content.Shared.Verbs;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Utility;
-using System;
-using System.ComponentModel;
-using System.Security.Cryptography;
 
 namespace Content.Shared.SS220.CultYogg.Lamp;
 public abstract class SharedCultYoggLampSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
-
     [Dependency] private readonly SharedItemSystem _itemSys = default!;
     [Dependency] private readonly ClothingSystem _clothingSys = default!;
     public override void Initialize()
