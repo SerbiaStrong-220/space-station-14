@@ -19,6 +19,8 @@
         Slash: 0.95
         Heat: 0.90
     priceMultiplier: 0
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.55
   - type: Food
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
@@ -806,7 +808,7 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable]
+  parent: [ClothingOuterWinterCoatToggleable, BaseSecurityContraband]
   id: ClothingOuterWinterSec
   name: security winter coat
   components:
@@ -870,7 +872,7 @@
 
 ################################################################
 - type: entity
-  parent: [ClothingOuterArmorWarden, ClothingOuterWinterCoatToggleable]
+  parent: [ClothingOuterArmorWarden, ClothingOuterWinterCoatToggleable, BaseSecurityContraband]
   id: ClothingOuterWinterWarden
   name: warden's armored winter coat
   description: A sturdy, utilitarian winter coat designed to protect a warden from any brig-bound threats and hypothermic events.
@@ -889,7 +891,7 @@
 ################################################################
 
 - type: entity
-  parent: [ClothingOuterWinterCoatToggleable]
+  parent: [ClothingOuterWinterCoatToggleable, BaseSecurityContraband]
   id: ClothingOuterWinterWardenUnarmored
   name: warden's winter coat
   description: A sturdy coat, a warm coat, but not an armored coat.

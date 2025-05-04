@@ -302,6 +302,9 @@
   chatTriggers:
     - clap
     - claps their hands together
+    - claps her hands together
+    - claps his hands together
+    - claps its hands together
 
 - type: emote
   id: Snap
@@ -315,7 +318,7 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
-  chatMessages: ["chat-emote-msg-snap"] # snaps <{THEIR($ent)}> fingers?
+  chatMessages: ["chat-emote-msg-snap"]
   chatTriggers:
     - snap
     - snaps
@@ -324,6 +327,9 @@
     - snap fingers
     - snaps fingers
     - snaps their fingers
+    - snaps her fingers
+    - snaps his fingers
+    - snaps its fingers
     - snapping fingers
     - snapped fingers
     # Corvax-Localization-Start
@@ -365,6 +371,20 @@
     - thumps her tail
     - thumps his tail
     - thumps its tail
+    # SS220-localization-begin
+    - стучит хвостом
+    - стучит своим хвостом
+    - стучит её хвостом
+    - стучит его хвостом
+    - бьёт хвостом
+    - бьёт своим хвостом
+    - бьёт её хвостом
+    - бьёт его хвостом
+    - ударяет хвостом
+    - ударяет своим хвостом
+    - ударяет её хвостом
+    - ударяет его хвостом
+    # SS220-localization-end
 
 - type: emote
   id: Salute

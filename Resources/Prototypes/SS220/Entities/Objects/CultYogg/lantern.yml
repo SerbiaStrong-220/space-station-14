@@ -25,7 +25,6 @@
   - type: Flash
   - type: LimitedCharges
     maxCharges: 1
-    charges: 1
   - type: AutoRecharge
     rechargeDuration: 120
   - type: MeleeWeapon

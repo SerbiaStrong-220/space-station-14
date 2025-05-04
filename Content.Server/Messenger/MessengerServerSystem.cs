@@ -12,6 +12,8 @@ using Content.Shared.Access.Systems;
 using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
+using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.GameTicking;
 using Content.Shared.Messenger;
 using Content.Shared.PDA;

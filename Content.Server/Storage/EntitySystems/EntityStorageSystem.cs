@@ -157,15 +157,15 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
     }
 
     // SS220-FixEntityStorageAtmosphereMerge-Begin
-    // private TileRef? GetOffsetTileRef(EntityUid uid, EntityStorageComponent component)
-    // {
-    //     var targetCoordinates = new EntityCoordinates(uid, component.EnteringOffset).ToMap(EntityManager, TransformSystem);
-
+    //private TileRef? GetOffsetTileRef(EntityUid uid, EntityStorageComponent component)
+    //{
+    //    var targetCoordinates = TransformSystem.ToMapCoordinates(new EntityCoordinates(uid, component.EnteringOffset));
+    //
     //     if (_map.TryFindGridAt(targetCoordinates, out var gridId, out var grid))
     //     {
     //         return _mapSystem.GetTileRef(gridId, grid, targetCoordinates);
     //     }
-
+    //
     //     return null;
     // }
     // SS220-FixEntityStorageAtmosphereMerge-End

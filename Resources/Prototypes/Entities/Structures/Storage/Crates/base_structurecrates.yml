@@ -6,6 +6,7 @@
   description: A large container for items.
   components:
   - type: Cart #SS220-Cart-system-fix
+  - type: Animateable
   - type: Transform
     noRot: true
   - type: Icon

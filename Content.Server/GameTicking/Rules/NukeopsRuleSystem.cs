@@ -32,6 +32,7 @@ using Content.Server.Maps;
 using Content.Server.Station.Systems;
 using Content.Shared.Fax.Components;
 using Content.Server.DeviceNetwork.Components;
+using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.GameTicking.Rules;
 

@@ -42,7 +42,7 @@
     sprite: SS220/Clothing/OuterClothing/Armor/security_slim.rsi #SS220-updated
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseSecurityContraband]
   id: ClothingOuterArmorRiot
   name: riot suit
   description: A suit of semi-flexible polycarbonate body armor with heavy padding to protect against melee attacks. Perfect for fighting delinquents around the station.
@@ -136,10 +136,11 @@
         Piercing: 0.35
         Heat: 0.35
         Caustic: 0.5
-        Stamina: 0.3 #SS220 stamina resist fix
         Radiation: 0.85 #ss220 raid suit rework
   - type: ExplosionResistance
     damageCoefficient: 0.35
+  - type: StaminaResistance
+    damageCoefficient: 0.3 #SS220 stamina resist fix
   - type: ClothingSpeedModifier
     walkModifier: 1 #ss220 raid suit rework
     sprintModifier: 0.95 #ss220 raid suit rework
@@ -149,6 +150,9 @@
     clothingVisuals:
       outerClothing:
       - state: equipped-OUTERCLOTHING-light
+        shader: unshaded
+      outerClothing-vox:
+      - state: equipped-OUTERCLOTHING-light-vox
         shader: unshaded
   - type: Appearance
   - type: HandheldLight
@@ -186,6 +190,8 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 2
+  - type: Item
+    size: Normal
   #ss220 raid suit rework begin
   - type: TemperatureProtection
     heatingCoefficient: 0.15

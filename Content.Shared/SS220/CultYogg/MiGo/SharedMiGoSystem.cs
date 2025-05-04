@@ -77,7 +77,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<MiGoComponent, AttackAttemptEvent>(CheckAct);
         SubscribeLocalEvent<MiGoComponent, DropAttemptEvent>(OnDropAttempt);
         SubscribeLocalEvent<MiGoComponent, ThrowAttemptEvent>(OnThrowAttempt);
-        SubscribeLocalEvent<MiGoComponent, BeingUsedAttemptEvent>(OnBeingUsedAttempt);
+        SubscribeLocalEvent<MiGoComponent, GettingUsedAttemptEvent>(OnBeingUsedAttempt);
         SubscribeLocalEvent<MiGoComponent, GettingPickedUpAttemptEvent>(OnGettingPickedUpAttempt);
 
         SubscribeLocalEvent<MiGoComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
@@ -191,6 +191,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         healComponent.ModifyBloodLevel = args.ModifyBloodLevel;
         healComponent.TimeBetweenIncidents = args.TimeBetweenIncidents;
         healComponent.Sprite = args.EffectSprite;
+        healComponent.ModifyStamina = args.ModifyStamina;
         Dirty(args.Target, healComponent);
 
         args.Handled = true;
@@ -434,7 +435,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         if (!uid.Comp.IsPhysicalForm)
             args.Cancel();
     }
-    private void OnBeingUsedAttempt(Entity<MiGoComponent> uid, ref BeingUsedAttemptEvent args)
+    private void OnBeingUsedAttempt(Entity<MiGoComponent> uid, ref GettingUsedAttemptEvent args)
     {
         if (!uid.Comp.IsPhysicalForm)
             args.Cancel();

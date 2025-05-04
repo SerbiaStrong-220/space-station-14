@@ -10,3 +10,4 @@ admin-player-actions-window-admin-logs = Admin Logs
 admin-player-actions-window-admin-notes = Admin Notes
 admin-player-actions-window-admin-fax = Admin Fax
 admin-player-actions-window-antagonists = Antagonists
+admin-player-actions-window-admin-chat = Admin Chat

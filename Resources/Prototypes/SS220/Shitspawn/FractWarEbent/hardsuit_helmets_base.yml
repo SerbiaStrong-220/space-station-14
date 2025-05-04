@@ -2,7 +2,7 @@
 
 # SSSP
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitBaseSSSP
   description: Тяжелый, с маленьким уголом обзора, но очень крепкий и надёжный.
   abstract: true
@@ -18,6 +18,8 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.005
     coolingCoefficient: 0.005
+  - type: StaminaResistance
+    damageCoefficient: 1
   - type: Armor
     modifiers:
       coefficients:
@@ -27,7 +29,6 @@
         Heat: 1
         Radiation: 1
         Caustic: 1
-        Stamina: 1
 
 # Iron
 - type: entity

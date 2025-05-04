@@ -1,50 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-- type: dataset
-  id: tajaran_first_male
+- type: localizedDataset
+  id: NamesTajaranFirstMale
   values:
-  - Абир
-  - Аблир
-  - Адрар
-  - Алиф
-  - Афрасса
-  - Бадр
-  - Ваз
-  - Васаар
-  - Гани
-  - Дак-дар
-  - Дани
-  - Даро-я
-  - Джиджи
-  - Жансудал
-  - Занбанрак
-  - Ид
-  - Ирад
-  - К-хал
-  - Каан
-  - Каган
-  - Каид
-  - Кайс
-  - Кунал
-  - Макин
-  - Маэр
-  - Мин
-  - Моза
-  - Муна
-  - Мунья
-  - Надр
-  - Назр
-  - Нур
-  - Ра Уриг-джо
-  - Рабазда
-  - Саад
-  - Саар
-  - Санар
-  - Сарват
-  - Сиик
-  - Сэлэм
-  - Тураб
-  - Фесар
-  - Фэлхир
-  - Хакар
-  - Шорина
+    prefix: name-tajaran-male-first-
+    count: 45
