@@ -13,6 +13,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Utility;
 using System;
 using System.ComponentModel;
+using System.Security.Cryptography;
 
 namespace Content.Shared.SS220.CultYogg.Lamp;
 public abstract class SharedCultYoggLampSystem : EntitySystem
@@ -35,6 +36,12 @@ public abstract class SharedCultYoggLampSystem : EntitySystem
 
     private void OnInit(Entity<CultYoggLampComponent> ent, ref ComponentInit args)
     {
+        // Want to make sure client has latest data on level so battery displays properly.
+        Dirty(ent, ent.Comp);
+    }
+
+    public void UpdateVisuals(Entity<CultYoggLampComponent> ent)
+    {
         if (ent.Comp.AddPrefix)
         {
             var prefix = ent.Comp.Activated ? "on" : "off";
@@ -45,11 +52,12 @@ public abstract class SharedCultYoggLampSystem : EntitySystem
         if (ent.Comp.ToggleActionEntity != null)
             _action.SetToggled(ent.Comp.ToggleActionEntity, ent.Comp.Activated);
 
-        //_appearance.SetData(ent, ToggleableLightVisuals.Enabled, component.Activated, appearanc
+        //if (!TryComp<AppearanceComponent>(ent, out var appearance))
+        //    return;
 
-        // Want to make sure client has latest data on level so battery displays properly.
-        Dirty(ent, ent.Comp);
+        _appearance.SetData(ent, ToggleableLightVisuals.Enabled, ent.Comp.Activated);
     }
+
     private void AddToggleLightVerb(Entity<CultYoggLampComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || !ent.Comp.ToggleOnInteract)

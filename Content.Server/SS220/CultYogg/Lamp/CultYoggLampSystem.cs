@@ -110,6 +110,6 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
         }
 
         Dirty(ent, ent.Comp);
-        //UpdateVisuals(ent, ent.Comp);
+        UpdateVisuals(ent);
     }
 }

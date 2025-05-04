@@ -49,18 +49,18 @@ public sealed class SharedProvidedStealthSystem : EntitySystem
         var query = EntityQueryEnumerator<ProvidedStealthComponent>();
         while (query.MoveNext(out var ent, out var comp))
         {
-            CheckProvidersRange((ent, comp));
+            CheckProviders((ent, comp));
         }
     }
 
-    private void CheckProvidersRange(Entity<ProvidedStealthComponent> ent)
+    private void CheckProviders(Entity<ProvidedStealthComponent> ent)
     {
         foreach (var povider in ent.Comp.StealthProviders)
         {
             if (!_physics.TryGetDistance(povider, ent, out var distance))
                 return;
 
-            if (distance > povider.Comp.Range)
+            if (distance > povider.Comp.Range || !povider.Comp.Enabled)
             {
                 ent.Comp.StealthProviders.Remove(povider);
                 CheckAmountOfProviders(ent);

@@ -43,6 +43,7 @@
     enabled: false
     radius: 3
     energy: 2
+    netsync: false
   #- type: AutoRecharge
   #  rechargeDuration: 120
   - type: ToggleableLightVisuals
