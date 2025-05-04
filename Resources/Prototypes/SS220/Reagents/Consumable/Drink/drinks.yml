@@ -144,3 +144,23 @@
         type: Local
         messages: [ "capsaicin-effect-heavy-burn" ]
         probability: 0.4
+
+#BrepsiFeature
+- type: reagent
+  id: Brepsi
+  name: reagent-name-brepsi
+  parent: BaseDrink
+  desc: reagent-desc-brepsi
+  physicalDesc: reagent-physical-desc-brepsi
+  flavor: brepsi
+  color: "#9aae07"
+  recognizable: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:ChemVomit
+        probability: 1
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 0.4

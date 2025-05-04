@@ -22,3 +22,5 @@ reagent-name-bacchus = благословение бахуса
 reagent-desc-bacchus = Ты был предупреждён.
 reagent-name-xlebnuldiesel =  хлебнулдизель
 reagent-desc-xlebnuldiesel = Ядрёная смесь сварочного топлива, пива и космического маунтин винда. Распивается с честью.
+reagent-name-brepsi = брепси
+reagent-desc-brepsi = Отвратительный синтетический напиток. Содержит только добавки.

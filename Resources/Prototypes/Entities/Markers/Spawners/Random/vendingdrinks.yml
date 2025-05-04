@@ -24,3 +24,8 @@
       - VendingMachineSpaceUp
       - VendingMachineStarkist
     chance: 1
+# SS220 BERPSI feature
+    rarePrototypes: 
+      - VendingMachineBrepsi
+    rareChance: 0.33
+# SS220 BERPSI feature end

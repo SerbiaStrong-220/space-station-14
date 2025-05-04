@@ -51,3 +51,21 @@
     - 6pack4
     - 6pack5
   - type: Appearance
+
+- type: entity
+  parent: DrinkCanBaseFull
+  id: DrinkBrepsiCan
+  name: банка брепси
+  description: Самый синтетический напиток в самой синтетической ёмкости. Пить на свой страх и риск.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Brepsi
+          Quantity: 30
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/purple_can.rsi
+  - type: Item
+    sprite: Objects/Consumable/Drinks/purple_can.rsi
