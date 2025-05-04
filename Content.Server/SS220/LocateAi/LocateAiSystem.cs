@@ -9,7 +9,7 @@ namespace Content.Server.SS220.LocateAi;
 public sealed class LocateAiSystem : SharedLocateAiSystem
 {
     [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
     public override void Initialize()
     {
@@ -20,39 +20,31 @@ public sealed class LocateAiSystem : SharedLocateAiSystem
 
     public override void Update(float frameTime)
     {
-        var queryAi = EntityQueryEnumerator<StationAiCoreComponent>();
         var queryLocate = EntityQueryEnumerator<LocateAiComponent>();
 
-        while (queryAi.MoveNext(out _, out var component))
+        while (queryLocate.MoveNext(out var uid, out var locateAiComponent))
         {
-            if (component.RemoteEntity == null)
-                continue;
+            var detected =
+                _lookup.GetEntitiesInRange<StationAiCoreComponent>(Transform(uid).Coordinates,
+                        locateAiComponent.RangeDetection)
+                    .Count > 0;
 
-            var remotePosition = _transform.GetWorldPosition(component.RemoteEntity.Value);
-
-            while (queryLocate.MoveNext(out var locate, out var locateAiComponent))
+            if (!locateAiComponent.IsActive)
             {
-                if (!locateAiComponent.IsActive)
+                if (locateAiComponent.LastDetected)
                 {
-                    if (locateAiComponent.LastDetected)
-                    {
-                        locateAiComponent.LastDetected = false;
-                        RaiseNetworkEvent(new LocateAiEvent(GetNetEntity(locate), false));
-                    }
-
-                    continue;
+                    locateAiComponent.LastDetected = false;
+                    RaiseNetworkEvent(new LocateAiEvent(GetNetEntity(uid), false));
                 }
 
-                var distance = (_transform.GetWorldPosition(locate) - remotePosition).Length();
-
-                var detected = distance <= locateAiComponent.RangeDetection;
-
-                if (locateAiComponent.LastDetected == detected)
-                    continue;
-
-                locateAiComponent.LastDetected = detected;
-                RaiseNetworkEvent(new LocateAiEvent(GetNetEntity(locate), detected));
+                continue;
             }
+
+            if (locateAiComponent.LastDetected == detected)
+                continue;
+
+            locateAiComponent.LastDetected = detected;
+            RaiseNetworkEvent(new LocateAiEvent(GetNetEntity(uid), detected));
         }
     }
 
