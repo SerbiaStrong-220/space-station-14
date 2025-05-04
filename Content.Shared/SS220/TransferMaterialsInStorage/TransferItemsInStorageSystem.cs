@@ -3,18 +3,18 @@ using Content.Shared.Interaction;
 using Content.Shared.Materials;
 using Content.Shared.Storage;
 
-namespace Content.Shared.SS220.TransferItemsInStorage;
+namespace Content.Shared.SS220.TransferMaterialsInStorage;
 
-public sealed class TransferItemsInStorageSystem : EntitySystem
+public sealed class TransferMaterialsInStorageSystem : EntitySystem
 {
     [Dependency] private readonly SharedMaterialStorageSystem _material = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<TransferItemsInStorageComponent, AfterInteractEvent>(OnAfterInteract);
+        SubscribeLocalEvent<TransferMaterialsInStorageComponent, AfterInteractEvent>(OnAfterInteract);
     }
 
-    private void OnAfterInteract(Entity<TransferItemsInStorageComponent> ent, ref AfterInteractEvent args)
+    private void OnAfterInteract(Entity<TransferMaterialsInStorageComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Handled || args.Target == null)
             return;

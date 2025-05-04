@@ -153,7 +153,7 @@
   description: A bag for botanists to easily move their huge harvests.
   components:
   #ss220 add transfer items in storage start
-  - type: TransferItemsInStorage
+  - type: TransferMaterialsInStorage
   #ss220 add transfer items in storage end
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/Equipment/plant_bag.rsi
