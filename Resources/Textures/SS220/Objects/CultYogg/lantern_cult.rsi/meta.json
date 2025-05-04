@@ -8,7 +8,7 @@
     },
     "states": [
           {
-            "name": "lantern_off"
+            "name": "lantern"
           },
           {
             "name": "lantern_on"
