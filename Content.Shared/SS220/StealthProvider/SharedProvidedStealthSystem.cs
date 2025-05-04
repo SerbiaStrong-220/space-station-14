@@ -15,7 +15,7 @@ public sealed class SharedProvidedStealthSystem : EntitySystem
 
         SubscribeLocalEvent<ProvidedStealthComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ProvidedStealthComponent, ComponentRemove>(OnRemove);
-        SubscribeLocalEvent<ProvidedStealthComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
+        SubscribeLocalEvent<ProvidedStealthComponent, EntGotInsertedIntoContainerMessage>(OnEntInserted);
     }
 
     private void OnInit(Entity<ProvidedStealthComponent> ent, ref ComponentInit args)
@@ -33,9 +33,9 @@ public sealed class SharedProvidedStealthSystem : EntitySystem
         if (HasComp<StealthComponent>(ent))
             RemCompDeferred<StealthComponent>(ent);
     }
-    private void OnEntInserted(Entity<ProvidedStealthComponent> ent, ref EntInsertedIntoContainerMessage args)
+    private void OnEntInserted(Entity<ProvidedStealthComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
-        RemComp<ProvidedStealthComponent>(ent);
+        RemCompDeferred<ProvidedStealthComponent>(ent);
     }
 
     public override void Update(float frameTime)
