@@ -5,7 +5,6 @@ using Content.Client.SS220.LimitationRevive;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
-
 using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Surgery;
@@ -43,52 +42,46 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
 
     public TreatmentRecommendation GetTreatmentRecommendation(PatientStatusData status)
     {
+        // Okay lets make it quick
+        // This is kinda experimental thing
+        // If it become useful you need to do
+        // 1. Move to prototypes it.
+        // 2. Make ConditionInterface for prototype.
+        // Good luck =) (c) Karamelnay Yasheritsa
         var recommendation = new TreatmentRecommendation();
 
         if (status.OverallDamage > 200)
         {
-            // TODO
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-more-200-damage"));
-            //TODO
-            recommendation.Operations.Add("shitty-operation-to-prototype");
+            recommendation.Operations.Add("treatment-recommendation-more-200-damage-help");
         }
 
         if (status.PatientState == Shared.Mobs.MobState.Dead)
         {
-            // TODO
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-mob-state-dead"));
-            //TODO
-            recommendation.Operations.Add("shitty-operation-to-prototype-2");
+            recommendation.Operations.Add("treatment-recommendation-mob-state-dead-help");
         }
 
         if (status.BodyDecayDegree == 1)
         {
-            // TODO
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-body-near-decay"));
-            //TODO
             recommendation.Suggestions.Add("treatment-recommendation-body-near-decay-help");
         }
 
         if (status.BodyDecayDegree >= 2)
         {
-            // TODO
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-body-decay"));
-            //TODO
             recommendation.Suggestions.Add("treatment-recommendation-body-decay-help");
         }
 
         if (status.BrainRotDegree == 100)
         {
-            // TODO
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-brain-rot"));
-            //TODO
             recommendation.Suggestions.Add("treatment-recommendation-brain-rot-help");
         }
         else if (status.BrainRotDegree > 70)
         {
-            // TODO
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-near-brain-rot"));
-            //TODO
             recommendation.Suggestions.Add("treatment-recommendation-near-brain-rot-help");
         }
 
@@ -102,7 +95,7 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
         if (comp.IsDamageTaken)
             return MaxBrainRotPercentage;
 
-        var result = (MaxBrainRotPercentage * (_gameTiming.CurTime - comp.TimeToDamage).Seconds) / comp.DelayBeforeDamage.Seconds;
+        var result = (MaxBrainRotPercentage * (_gameTiming.CurTime - comp.TimeToDamage).Seconds) / (int)comp.DelayBeforeDamage.TotalSeconds;
 
         return result >= 0 ? result : 0;
     }

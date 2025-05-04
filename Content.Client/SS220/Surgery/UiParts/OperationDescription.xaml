@@ -13,22 +13,27 @@
             </PanelContainer.PanelOverride>
         </PanelContainer>
         <!-- Kinda overall info to make player feel more confident.
-            It should give the right step order and some description for operation -->
-        <BoxContainer Orientation="Horizontal">
-            <TextureRect Name="LockIcon" Stretch="Keep" TexturePath="/Textures/Interface/VerbIcons/lock.svg" Visible="False"/>
-        </BoxContainer>
-        <RichTextLabel Name="Header" Text="{Loc 'operation-description-header'}" HorizontalExpand="True" HorizontalAlignment="Left"/>
-        <RichTextLabel Name="OperationName" Text="operation-name" HorizontalExpand="True" HorizontalAlignment="Left" Margin="20 5 5 0"/>
-        <ScrollContainer HScrollEnabled="False" Margin="20 5 5 0"
-            HorizontalExpand="True" VerticalExpand="True" MouseFilter="Pass">
-            <BoxContainer
-                Name="OperationContainer"
-                Orientation="Vertical"
-                SizeFlagsStretchRatio="2"
-                HorizontalExpand="True"
-                VerticalExpand="True">
-                <RichTextLabel Name="Description" Text="operation-description"/>
+        It should give the right step order and some description for operation -->
+        <BoxContainer Orientation="Vertical">
+            <BoxContainer Orientation="Horizontal">
+                <TextureRect Name="LockIcon" Stretch="Keep" TexturePath="/Textures/Interface/VerbIcons/lock.svg.192dpi.png"
+                    Visible="False" TextureScale="0.25 0.25"/>
             </BoxContainer>
-        </ScrollContainer>
+            <BoxContainer Orientation="Vertical" VerticalExpand="True">
+                <RichTextLabel Name="Header" Text="{Loc 'operation-description-header'}" HorizontalExpand="True" HorizontalAlignment="Left"/>
+                <RichTextLabel Name="OperationName" Text="operation-name" HorizontalExpand="True" HorizontalAlignment="Left" Margin="20 5 5 0"/>
+                <ScrollContainer Name="ScrollOperationContainer" HScrollEnabled="False" Margin="10 5 5 0"
+                    HorizontalExpand="False" VerticalExpand="True" MouseFilter="Pass">
+                    <BoxContainer
+                        Name="OperationContainer"
+                        Orientation="Vertical"
+                        SizeFlagsStretchRatio="1"
+                        HorizontalExpand="False"
+                        VerticalExpand="True">
+                        <RichTextLabel Name="Description" HorizontalExpand="False" Text="operation-description" VerticalExpand="True"/>
+                    </BoxContainer>
+                </ScrollContainer>
+            </BoxContainer>
+        </BoxContainer>
     </Control>
 </surgeryUiParts:OperationDescription>

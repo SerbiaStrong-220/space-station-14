@@ -51,18 +51,18 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
 
     public void UpdateOperations(PuppetParts? currentPart, PuppetParts? previousPart)
     {
-        if (currentPart != null)
-        {
-            foreach (var control in _operations[currentPart.Value])
-            {
-                control.Visible = true;
-            }
-        }
         if (previousPart != null)
         {
             foreach (var control in _operations[previousPart.Value])
             {
                 control.Visible = false;
+            }
+        }
+        if (currentPart != null)
+        {
+            foreach (var control in _operations[currentPart.Value])
+            {
+                control.Visible = true;
             }
         }
     }

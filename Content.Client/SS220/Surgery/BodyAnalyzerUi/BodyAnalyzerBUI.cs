@@ -16,6 +16,8 @@ public sealed class BodyAnalyzerBUI(EntityUid owner, Enum uiKey) : BoundUserInte
         base.Open();
         _menu = this.CreateWindow<BodyAnalyzerMenu>();
 
+        _menu.InjectDependencies(EntMan);
+
         _menu.UpdatePerformer();
     }
 

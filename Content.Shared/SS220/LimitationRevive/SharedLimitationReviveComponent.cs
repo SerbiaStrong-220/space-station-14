@@ -7,7 +7,7 @@ public abstract partial class SharedLimitationReviveComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan DelayBeforeDamage = TimeSpan.FromSeconds(60);
 
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public TimeSpan TimeToDamage = TimeSpan.Zero;
 
     [AutoNetworkedField]

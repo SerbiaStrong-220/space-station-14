@@ -1,4 +1,5 @@
  <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
 <controls:FancyWindow
     xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -23,14 +24,13 @@
                     <surgery:SurgeryPuppetBox Name="Puppet" Scale="3 3" MouseFilter="Pass" />
                 </BoxContainer>
                 <BoxContainer Name="DetailedInfoBox" Orientation="Horizontal" VerticalExpand="True" HorizontalExpand="True">
-                    <BoxContainer Name="OperationsBox" Orientation="Vertical"  HorizontalExpand="True">
+                    <BoxContainer Name="OperationsBox" Orientation="Vertical"  HorizontalExpand="True" VerticalExpand="True">
                         <RichTextLabel Name="OperationsLabel" Text="{Loc 'surgery-list-name'}" HorizontalExpand="True" HorizontalAlignment="Center"/>
-                        <ScrollContainer Name="OperationScroll" HScrollEnabled="False"
-                            HorizontalExpand="True" VerticalExpand="True" MouseFilter="Pass">
+                        <ScrollContainer Name="OperationScroll" HScrollEnabled="False" HorizontalExpand="True"
+                            VerticalExpand="True" MouseFilter="Pass">
                             <BoxContainer
                                 Name="OperationContainer"
                                 Orientation="Vertical"
-                                SizeFlagsStretchRatio="2"
                                 HorizontalExpand="True"
                                 VerticalExpand="True">
                                 <!--  operations are added here by code  -->

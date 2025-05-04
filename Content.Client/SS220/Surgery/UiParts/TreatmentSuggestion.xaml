@@ -12,9 +12,10 @@
                 <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
             </PanelContainer.PanelOverride>
         </PanelContainer>
-        <!-- Thing for first meeting to make player familiar  -->
-        <RichTextLabel Name="HeaderText" Text="{Loc 'treatment-suggestion-header'}"/>
-        <RichTextLabel Name="TreatmentSuggestionText" Text="treatment-suggestion" HorizontalExpand="True"
-            HorizontalAlignment="Center" Margin="10 5 0 5"/>
+        <BoxContainer Orientation="Vertical">
+            <RichTextLabel Name="HeaderText" Text="{Loc 'treatment-suggestion-header'}"/>
+            <RichTextLabel Name="TreatmentSuggestionText" Text="treatment-suggestion" HorizontalExpand="True"
+                HorizontalAlignment="Center" Margin="10 5 0 5"/>
+        </BoxContainer>
     </Control>
 </surgeryUiParts:TreatmentSuggestion>

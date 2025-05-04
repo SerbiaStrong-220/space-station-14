@@ -11,11 +11,10 @@ namespace Content.Client.SS220.Surgery.BodyAnalyzerUi;
 [GenerateTypedNameReferences]
 public sealed partial class BodyAnalyzerMenu : FancyWindow
 {
-    [Dependency] private readonly SurgeryPatientAnalyzer _surgeryPatientAnalyzer = default!;
+    private SurgeryPatientAnalyzer _surgeryPatientAnalyzer = default!;
 
     public BodyAnalyzerMenu()
     {
-        IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
         OperationList.OnSurgeryClicked += (id, pressed) =>
@@ -31,6 +30,13 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
             OperationDescription.ShowDescription(id);
             OperationDescription.Visible = true;
         };
+    }
+
+    public void InjectDependencies(IEntityManager entityManager)
+    {
+        _surgeryPatientAnalyzer = entityManager.System<SurgeryPatientAnalyzer>();
+
+        OperationDescription.InjectDependencies(entityManager);
     }
 
     public void ChangeTarget(EntityUid target, ProtoId<SurgeryGraphPrototype>? id = null)
@@ -53,6 +59,4 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
     {
         OperationList.MakeList(false);
     }
-
-
 }

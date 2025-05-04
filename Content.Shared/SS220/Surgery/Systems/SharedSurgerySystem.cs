@@ -161,6 +161,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
         }
 
+        _userInterface.OpenUi(entity.Owner, BodyAnalyzerUiKey.Key, args.User);
+
         var netTarget = GetNetEntity(args.Target.Value);
 
         var state = new BodyAnalyzerTargetUpdate(netTarget);
