@@ -18,7 +18,7 @@ public sealed class LogSprintChangeSystem : EntitySystem
 
     private void OnSprintChanged(ref SprintChangedEvent args)
     {
-        var action = args.Sprinting ? "spring" : "walk";
+        var action = args.Sprinting ? "sprint" : "walk";
         _adminLog.Add(LogType.Action, $"{ToPrettyString(args.Uid)} changed movement mode to {action}");
     }
 }
