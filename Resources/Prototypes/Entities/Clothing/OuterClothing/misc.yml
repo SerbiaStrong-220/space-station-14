@@ -226,7 +226,7 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Misc/wizard_violet.rsi # SS220 Wizard Clothing Resprite
   - type: ToggleableClothing # SS220 Wizard Clothing Resprite
-    clothingPrototype: ClothingHeadHatHoodWizardBlue # SS220 Wizard Clothing Resprite
+    clothingPrototype: ClothingHeadHatHoodWizardViolet # SS220 Wizard Clothing Resprite
   - type: Tag
     tags:
     - CorgiWearable
@@ -243,7 +243,7 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Misc/wizard_blue.rsi # SS220 Wizard Clothing Resprite
   - type: ToggleableClothing # SS220 Wizard Clothing Resprite
-    clothingPrototype: ClothingHeadHatHoodWizardViolet # SS220 Wizard Clothing Resprite
+    clothingPrototype: ClothingHeadHatHoodWizardBlue # SS220 Wizard Clothing Resprite
   - type: Tag
     tags:
     - CorgiWearable
