@@ -197,6 +197,26 @@
   id: ClothingOuterWizardBase
   components:
   - type: WizardClothes
+  #SS220 Wizard Clothing Resprite Begin
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodWizardBlue
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+      storagebase: !type:Container
+        ents: []
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
+  #SS220 Wizard Clothing Resprite End
 
 # Is this wizard wearing a fanny pack???
 - type: entity
