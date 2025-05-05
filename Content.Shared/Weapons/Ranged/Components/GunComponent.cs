@@ -266,6 +266,7 @@ public sealed partial class GunComponent : Component
 
     ///SS220-new-feature kus start
     [DataField]
+    [AutoNetworkedField]
     public bool CanSuicide = false;
     ///SS220-new-feature kus end
 

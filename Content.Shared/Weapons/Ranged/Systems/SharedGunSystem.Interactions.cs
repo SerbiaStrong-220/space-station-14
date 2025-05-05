@@ -8,6 +8,9 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.DoAfter;
 using Robust.Shared.Map;
 using System.Numerics;
+using Content.Shared.Projectiles;
+using Content.Shared.Damage;
+using System.Linq;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -153,6 +156,9 @@ public abstract partial class SharedGunSystem
         if (!_hands.IsHolding(user, entity, out _))
             return;
 
+        if (!TryComp<GunComponent>(entity, out var guncomp) || !CanShoot(guncomp))
+            return;
+
         Verb verb = new()
         {
             Act = () =>
@@ -204,11 +210,14 @@ public abstract partial class SharedGunSystem
         var ev = new TakeAmmoEvent(1, new List<(EntityUid? Entity, IShootable Shootable)>(), coordsFrom, null);
         RaiseLocalEvent(weapon, ev);
 
+        if (ev.Ammo.Count == 0)
+            return;
+
         Shoot(weapon, guncomp, ev.Ammo, coordsFrom, coordsTo, out _);
 
 //        var damage = new DamageSpecifier();
-//        damage.DamageDict.Add("Blunt", 200);
-//        _damageable.TryChangeDamage(user, damage, true);
+//        damage.DamageDict.Add(damageType, 200);
+//        Damageable.TryChangeDamage(user, damage, true);
 
         PopupSystem.PopupEntity(Loc.GetString("suicide-success-popup"), user, user);
         args.Handled = true;
