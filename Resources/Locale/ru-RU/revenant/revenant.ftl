@@ -16,4 +16,4 @@ revenant-user-interface-essence-amount = [color=plum]{ $amount }[/color] укр�
 revenant-user-interface-cost = { $price } эссенции
 
 #SS220
-revenant-attacked-by-popup = обжигающий холод пронизывает Вас
+revenant-attacked-by-popup = обжигающий холод пронизывает Вас!
