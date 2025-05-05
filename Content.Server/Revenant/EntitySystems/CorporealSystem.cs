@@ -9,6 +9,7 @@ namespace Content.Server.Revenant.EntitySystems;
 
 public sealed class CorporealSystem : SharedCorporealSystem
 {
+    [Dependency] private readonly HallucinationSystem _hallucination = default!;
     [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
     [Dependency] private readonly GameTicker _ticker = default!;
 
@@ -24,8 +25,8 @@ public sealed class CorporealSystem : SharedCorporealSystem
         }
 
         //SS220-make-revenant-hallucinationSource-begin
-        if (TryComp<HallucinationSourceComponent>(uid, out var hallucinationSourceComponent))
-            hallucinationSourceComponent.IsActive = true;
+        if (HasComp<HallucinationSourceComponent>(uid))
+            _hallucination.SetHallucinationSourceActiveFlag(uid, true);
         //SS220-make-revenant-hallucinationSource-end
     }
 
@@ -41,8 +42,8 @@ public sealed class CorporealSystem : SharedCorporealSystem
         }
 
         //SS220-make-revenant-hallucinationSource-begin
-        if (TryComp<HallucinationSourceComponent>(uid, out var hallucinationSourceComponent))
-            hallucinationSourceComponent.IsActive = false;
+        if (HasComp<HallucinationSourceComponent>(uid))
+            _hallucination.SetHallucinationSourceActiveFlag(uid, false);
         //SS220-make-revenant-hallucinationSource-end
     }
 }

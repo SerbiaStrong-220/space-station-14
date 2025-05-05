@@ -67,6 +67,20 @@ public sealed class HallucinationSystem : EntitySystem
                 TryAdd(entity.Owner, hallucinationSource.Hallucination);
         }
     }
+
+    /// <summary>
+    /// Make some additional changes to smoothly switch active status of source
+    /// </summary>
+    public void SetHallucinationSourceActiveFlag(EntityUid source, bool active)
+    {
+        HallucinationSourceComponent? sourceComp = null;
+        if (!Resolve(source, ref sourceComp))
+            return;
+
+        sourceComp.IsActive = active;
+        sourceComp.NextUpdateTime = _gameTiming.CurTime;
+    }
+
     /// <summary>
     /// Check if entity is protected from hallucination and if not.
     /// After that checks if hallucination exist and than renews its timer.

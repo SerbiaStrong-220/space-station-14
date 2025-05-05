@@ -111,6 +111,7 @@
         Cold: 5
   - type: HallucinationImmune
   - type: HallucinationSource
+    range: 5
     isActive: false
     hallucination:
         componentName: MindShield
