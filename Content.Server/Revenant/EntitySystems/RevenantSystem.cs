@@ -25,6 +25,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Server.Projectiles;
 using Content.Shared.Projectiles;
+using Content.Shared.Mindshield.Components;
 
 namespace Content.Server.Revenant.EntitySystems;
 
@@ -130,6 +131,12 @@ public sealed partial class RevenantSystem : EntitySystem
 
         var essenceDamage = args.DamageDelta.GetTotal().Float() * component.DamageToEssenceCoefficient * -1;
         ChangeEssenceAmount(uid, essenceDamage, component);
+        // SS220 revenant-stuns-damage-dealer-begin
+        if (component.StunTime is null || args.Origin is null || HasComp<MindShieldComponent>(args.Origin))
+            return;
+
+        _stun.TryParalyze(args.Origin.Value, component.StunTime.Value, true, null);
+        // SS220 revenant-stuns-damage-dealer-end
     }
 
     public bool ChangeEssenceAmount(EntityUid uid, FixedPoint2 amount, RevenantComponent? component = null, bool allowDeath = true, bool regenCap = false)

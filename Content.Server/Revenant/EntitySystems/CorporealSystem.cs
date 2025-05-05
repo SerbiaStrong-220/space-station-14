@@ -1,4 +1,5 @@
 using Content.Server.GameTicking;
+using Content.Server.SS220.Hallucination;
 using Content.Shared.Eye;
 using Content.Shared.Revenant.Components;
 using Content.Shared.Revenant.EntitySystems;
@@ -21,6 +22,11 @@ public sealed class CorporealSystem : SharedCorporealSystem
             _visibilitySystem.AddLayer((uid, visibility), (int) VisibilityFlags.Normal, false);
             _visibilitySystem.RefreshVisibility(uid, visibility);
         }
+
+        //SS220-make-revenant-hallucinationSource-begin
+        if (TryComp<HallucinationSourceComponent>(uid, out var hallucinationSourceComponent))
+            hallucinationSourceComponent.IsActive = true;
+        //SS220-make-revenant-hallucinationSource-end
     }
 
     public override void OnShutdown(EntityUid uid, CorporealComponent component, ComponentShutdown args)
@@ -33,5 +39,10 @@ public sealed class CorporealSystem : SharedCorporealSystem
             _visibilitySystem.RemoveLayer((uid, visibility), (int) VisibilityFlags.Normal, false);
             _visibilitySystem.RefreshVisibility(uid, visibility);
         }
+
+        //SS220-make-revenant-hallucinationSource-begin
+        if (TryComp<HallucinationSourceComponent>(uid, out var hallucinationSourceComponent))
+            hallucinationSourceComponent.IsActive = false;
+        //SS220-make-revenant-hallucinationSource-end
     }
 }

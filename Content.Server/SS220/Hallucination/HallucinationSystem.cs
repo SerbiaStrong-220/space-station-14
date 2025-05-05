@@ -51,6 +51,9 @@ public sealed class HallucinationSystem : EntitySystem
         var sourceQuery = EntityQueryEnumerator<HallucinationSourceComponent>();
         while (sourceQuery.MoveNext(out var sourceUid, out var hallucinationSource))
         {
+            if (!hallucinationSource.IsActive)
+                continue;
+
             if (_gameTiming.CurTime < hallucinationSource.NextUpdateTime)
                 continue;
 
@@ -213,6 +216,9 @@ public sealed class HallucinationSystem : EntitySystem
 
         if (!TryGetComponentType(protection.ComponentName, out var protectionComponentType))
             return false;
+
+        if (HasComp(mobUid, protectionComponentType))
+            return true;
 
         var inventorySlot = protection.ItemSlot.HasValue ?
                         _inventory.GetSlotEnumerator(mobUid, protection.ItemSlot.Value) :
