@@ -8,7 +8,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Verbs;
 using Robust.Shared.Player;
 
-namespace Content.Server.SS220.SuicideByGun;
+namespace Content.Shared.SS220.SuicideByGun;
 
 public sealed partial class SuicideByGunSystem : EntitySystem
 {
