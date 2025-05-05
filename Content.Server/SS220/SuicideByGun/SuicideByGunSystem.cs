@@ -57,11 +57,11 @@ public sealed partial class SuicideByGunSystem : EntitySystem
 
     private void OnDoAfterComplete(SuicideDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled || args.Target == null)
+        if (args.Cancelled || args.Handled || args.Used == null)
             return;
 
         var user = args.User;
-        var weapon = args.Target.Value;
+        var weapon = args.Used.Value;
 
         if (!_hands.IsHolding(user, weapon, out _))
         {
