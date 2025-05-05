@@ -142,7 +142,7 @@
   parent: BaseSubdermalImplant
   id: TrackingImplant
   name: tracking implant
-  description: This implant has a tracking device attached to the suit sensor network.
+  description: This implant has a tracking device attached to the suit sensor network, as well as a condition monitor for the Security radio channel.
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
@@ -190,6 +190,14 @@
         - TraitorRole
         - NukeOperative
       # hidden-desc-end
+# SS220-Trackers DeathRattle-End
+    - type: TriggerOnMobstateChange
+      mobState:
+      - Critical
+    - type: Rattle
+      radioChannel: "Security"
+# SS220-Trackers DeathRattle-End
+
 #Traitor implants
 
 - type: entity
