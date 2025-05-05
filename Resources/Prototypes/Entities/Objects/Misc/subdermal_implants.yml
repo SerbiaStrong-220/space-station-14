@@ -142,7 +142,7 @@
   parent: BaseSubdermalImplant
   id: TrackingImplant
   name: tracking implant
-  description: This implant has a tracking device attached to the suit sensor network, as well as a condition monitor for the Security radio channel.
+  description: This implant has a tracking device attached to the suit sensor network.
   categories: [ HideSpawnMenu ]
   components:
     - type: SubdermalImplant
