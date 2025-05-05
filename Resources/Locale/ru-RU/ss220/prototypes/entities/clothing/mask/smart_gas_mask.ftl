@@ -6,5 +6,6 @@ smartgasmask-ert-support-message = .ц { $user } запрашивает подк
 
 alert-smart-gas-mask-support = Запросить поддержку
 alert-smart-gas-mask-halt =  Сообщение об остановки
+alert-smart-gas-mask-ert-support = Запросить поддержку
 
 ent-ActionSmartGasMask = Использовать умный противогаз
