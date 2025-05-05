@@ -43,3 +43,23 @@
   - type: HandheldRadio
     lowerBorder: 1582
     upperBorder: 1591
+
+- type: entity
+  name: Centсom radio
+  description: A handy CentCom radio.
+  parent: [ RadioHandheld ]
+  id: RadioHandheldCentcom
+  components:
+  - type: RadioMicrophone
+    broadcastChannel: CentCom
+  - type: RadioSpeaker
+    channels:
+    - CentCom
+  - type: Sprite
+    sprite: SS220/Objects/Devices/ntradio.rsi
+    layers:
+    - state: NTradio
+    state: NTradio
+  - type: Item
+    sprite: SS220/Objects/Devices/ntradio.rsi
+    heldPrefix: walkietalkie

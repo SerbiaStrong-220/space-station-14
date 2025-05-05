@@ -31,3 +31,30 @@
   - !type:SpeciesLoadoutEffect
     species:
     - Dwarf
+
+- type: loadout
+  id: EmergencyOxygenCentcom
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreather
+  storage:
+    back:
+    - BoxSurvivalCentcom
+
+- type: loadout
+  id: EmergencyNitrogenCentcom
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreather
+  storage:
+    back:
+    - BoxSurvivalCentcomNitrogen
+
+- type: loadout
+  id: EmergencyBeerCentcom
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BeerDrinker
+  storage:
+    back:
+    - BoxSurvivalCentcom

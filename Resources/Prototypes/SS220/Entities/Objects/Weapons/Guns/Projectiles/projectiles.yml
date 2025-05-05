@@ -466,6 +466,27 @@
     tags:
     - HideContextMenu
 
+- type: entity
+  name : Laser Carabine bolt
+  id: BulletLaserCarabine
+  parent: BulletDisabler
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
+    layers:
+    - state: redlaser
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlaster
+    damage:
+      types:
+        Heat: 29
+        Piercing: 10
+    soundHit:
+      collection: WeakHit
+    forceSound: true
+
 #HOCebent
 - type: entity
   id: BulletUnitarySlug

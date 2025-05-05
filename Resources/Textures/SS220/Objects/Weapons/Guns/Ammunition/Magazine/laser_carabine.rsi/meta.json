@@ -1,0 +1,76 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "https://github.com/tgstation/tgstation/blob/master/icons/obj/weapons/guns/ammo.dmi, modified by hed77 (Discord) for SS220",
+    "states": [
+        {
+            "name": "base"
+        },
+        {
+            "name": "o1",
+			"delays": [
+				[
+					4,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				]
+			]
+        },
+        {
+            "name": "o2",
+			"delays": [
+				[
+					4,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				]
+			]
+        },
+        {
+            "name": "o3",
+			"delays": [
+				[
+					4,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				]
+			]
+        },
+        {
+            "name": "o4",
+			"delays": [
+				[
+					4,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				]
+			]
+        }
+    ]
+}

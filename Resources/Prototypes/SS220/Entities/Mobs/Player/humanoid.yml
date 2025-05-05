@@ -213,3 +213,282 @@
     id: DeathsquadPDA
     pocket1: EnergySword
     pocket2: EnergyShield
+
+##Ert Gamma                             
+
+#ERT Gamma Leader
+- type: randomHumanoidSettings
+  id: ERTLeaderGamma
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran]
+  parent: EventHumanoidMindShielded
+  randomizeName: false
+  components:
+    - type: DefibrillatorSkill
+    - type: GhostRole
+      name: ghost-role-information-ert-leader-name
+      description: ghost-role-information-ert-leader-description
+      rules: ghost-role-information-nonantagonist-rules      
+      requirements: 
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000
+        - !type:DepartmentTimeRequirement
+          department: Command
+          time: 36000 
+      raffle:
+        settings: short
+      job: ERTLeader
+    - type: AutoImplant
+      implants:
+      - AdrenalImplant
+      - ThermalVisionImplant
+      - DeathRattleImplantCentcomm
+    - type: Loadout
+      roleLoadout: [ RoleSurvivalCentcom ]
+      prototypes: [ ERTLeaderGammaGear ]
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirstLeader
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+
+- type: entity
+  id: RandomHumanoidSpawnerERTLeaderGamma
+  name: ERT leader Gamma
+  suffix: ERTRole, Gamma
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: ertleadereva
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirstLeader
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+    - type: RandomHumanoidSpawner
+      settings: ERTLeaderGamma
+
+- type: startingGear
+  id: ERTLeaderGammaGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitERTLeader
+    back: ClothingBackpackERTLeader
+    shoes: ClothingShoesBootsMagAdv
+    eyes: ClothingEyesHudMedSec
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitERTLeaderGamma
+    neck: ClothingBeltHolster
+    suitstorage: WeaponLaserCarabine
+    id: ERTLeaderPDA
+    ears: ClothingHeadsetAltCentComm
+    belt: ClothingBeltSecurity
+    pocket1: WeaponSubMachineGunSaber
+    pocket2: DoubleEmergencyOxygenTankFilled
+  storage:
+    belt: 
+    - Stunbaton
+    - Flash
+    - GrenadeFlashBang
+    - TearGasGrenade
+    - Handcuffs
+    - Handcuffs
+    back:
+    - MedkitCombatFilled
+    - MagazinePistolSubMachineGunAcp
+    - MagazinePistolSubMachineGunAcp
+    - CrowbarRed
+    - ClothingMaskGasERT
+    - DoorRemoteAll
+    - C4
+    - PinpointerCrew
+    - PinpointerNuclear
+    - WeaponPulsePistol
+    - StimpackMini
+    - LaserCarabinePowerCell
+    - LaserCarabinePowerCell
+    - LaserCarabinePowerCell
+    - LaserCarabinePowerCell
+
+
+#ERT Gamma Security
+
+- type: randomHumanoidSettings
+  id: ERTSecurityGamma
+  parent: ERTLeaderGamma
+  components:
+    - type: GhostRole
+      name: ghost-role-information-ert-security-name
+      description: ghost-role-information-ert-security-description
+      rules: ghost-role-information-nonantagonist-rules 
+      requirements: #SS220 ghostrole-times (20h sec 10h med) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000
+      raffle:
+        settings: short
+      job: ERTSecurity
+    - type: Loadout
+      roleLoadout: [ RoleSurvivalCentcom ]
+      prototypes: [ ERTSecurityGammaGear ]
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirst
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+
+
+- type: entity
+  id: RandomHumanoidSpawnerERTSecurityGamma
+  name: ERT security Gamma
+  suffix: ERTRole, Gamma
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: ertsecurityeva
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirst
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+    - type: RandomHumanoidSpawner
+      settings: ERTSecurityGamma
+
+- type: startingGear
+  id: ERTSecurityGammaGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitERTSecurity
+    back: ClothingBackpackERTSecurity
+    shoes: ClothingShoesBootsMagAdv
+    eyes: ClothingEyesHudMedSec  
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitERTSecurityGamma
+    neck: ClothingBeltHolster
+    suitstorage: WeaponLaserCarabine
+    id: ERTSecurityPDA
+    ears: ClothingHeadsetAltCentComm
+    belt: ClothingBeltSecurity
+    pocket1: WeaponSubMachineGunSaber
+    pocket2: DoubleEmergencyOxygenTankFilled
+  storage:
+    belt: 
+    - Stunbaton
+    - Flash
+    - GrenadeFlashBang
+    - TearGasGrenade
+    - Handcuffs
+    - Handcuffs
+    back:
+    - CrowbarRed
+    - ClothingMaskGasERT
+    - C4
+    - PinpointerNuclear
+    - WeaponPulsePistol
+    - MagazinePistolSubMachineGunAcp
+    - MagazinePistolSubMachineGunAcp
+    - MagazinePistolSubMachineGunAcp
+    - MedkitCombatFilled
+    - StimpackMini   
+    - LaserCarabinePowerCell
+    - LaserCarabinePowerCell
+    - LaserCarabinePowerCell
+    - LaserCarabinePowerCell
+
+
+
+##ERT Gamma Medical
+
+- type: randomHumanoidSettings
+  id: ERTMedicalGamma
+  parent: ERTLeaderGamma
+  randomizeName: false
+  components:
+    - type: GhostRole
+      name: ghost-role-information-ert-medical-name
+      description: ghost-role-information-ert-medical-description
+      rules: ghost-role-information-nonantagonist-rules    
+      requirements: #SS220 ghostrole-times (20h sec 10h med) start
+        - !type:DepartmentTimeRequirement
+          department: Security
+          time: 72000
+        - !type:DepartmentTimeRequirement
+          department: Medical
+          time: 36000 #SS220 ghostrole-times (20h sec 10h med) end
+      raffle:
+        settings: short
+      job: ERTMedical
+    - type: Loadout
+      roleLoadout: [ RoleSurvivalCentcom ]
+      prototypes: [ ERTMedicalGammaGear ]
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirst
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+
+- type: entity
+  id: RandomHumanoidSpawnerERTMedicalGamma
+  name: ERT Medical Gamma
+  suffix: ERTRole, Gamma
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: ertmedicaleva
+    - type: RandomMetadata
+      nameSegments:
+      - NamesMilitaryFirst
+      - NamesMilitaryLast
+      nameFormat: name-format-ert
+    - type: RandomHumanoidSpawner
+      settings: ERTMedicalGamma
+    
+- type: startingGear
+  id: ERTMedicalGammaGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitERTMedic
+    back: ClothingBackpackERTMedical
+    shoes: ClothingShoesBootsMagAdv
+    eyes: ClothingEyesHudMedSec
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitERTMedicalGamma
+    neck: ClothingBeltHolster
+    suitstorage: WeaponLaserCarabine
+    id: ERTMedicPDA
+    ears: ClothingHeadsetAltCentComm
+    belt: ClothingBeltMedical
+    pocket1: WeaponSubMachineGunSaber
+    pocket2: DoubleEmergencyOxygenTankFilled
+  storage:
+    belt: 
+    - CombatMedipen
+    - CombatMedipen
+    - CombatMedipen
+    - CombatMedipen
+    - PunctAutoInjector
+    - PunctAutoInjector
+    - PunctAutoInjector
+    - PunctAutoInjector
+    - PyraAutoInjector
+    - PyraAutoInjector
+    - PyraAutoInjector
+    - PyraAutoInjector
+    - AirlossAutoInjector
+    - AirlossAutoInjector
+    - SyringeSaline
+    - SyringeSaline
+    back:
+    - BoxBodyBag
+    - StimkitCombatFilled
+    - MedicatedSuture
+    - MedicatedSuture
+    - RegenerativeMesh
+    - RegenerativeMesh
+    - CrowbarRed
+    - ClothingMaskGasERT       
+    - PinpointerCrew
+    - DefibrillatorCompact
+    - MagazinePistolSubMachineGunAcp
+    - MagazinePistolSubMachineGunAcp
+    - Hypospray
+    - LaserCarabinePowerCell
+    - LaserCarabinePowerCell
+    - LaserCarabinePowerCell

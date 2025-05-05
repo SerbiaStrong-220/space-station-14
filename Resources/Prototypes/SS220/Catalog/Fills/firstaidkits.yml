@@ -1,0 +1,11 @@
+- type: entity
+  name: боевая аптечка
+  description: Для любителей больших пушек среди нас.
+  id: StimkitCombatFilled
+  suffix: Стимпак, Заполненная
+  parent: MedkitCombat
+  components:
+  - type: StorageFill
+    contents:
+      - id: StimpackMini
+        amount: 6

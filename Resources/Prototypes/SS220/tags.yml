@@ -22,6 +22,9 @@
 - type: Tag
   id: KRSPowerCell
 
+- type: Tag
+  id: LaserCarabinePowerCell
+
 # READD-VEHICLES
 - type: Tag
   id: JanicartKeys
@@ -222,3 +225,10 @@
 
 - type: Tag
   id: WhitelistPdaIdPainter
+
+# SS220 Saber
+- type: Tag
+  id: MagazinePistolSubMachineGunAcp
+
+- type: Tag
+  id: CartridgeAmmoAcp

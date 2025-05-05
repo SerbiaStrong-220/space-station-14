@@ -38,3 +38,59 @@
     - state: emergencytank
   - type: Label
     currentLabel: reagent-name-beer
+
+- type: entity
+  parent: BoxCardboard
+  id: BoxSurvivalCentcom
+  name: extended-capacity survival box
+  description: It's a box with basic internals inside. This one is labelled to contain an extended-capacity tank.
+  suffix: Centcom
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/box.rsi
+    state: centcom
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Storage/box.rsi
+    size: Large
+    shape:
+    - 0,0,2,1 
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,3
+  - type: StorageFill
+    contents:
+    - id: ClothingMaskBreath
+    - id: DoubleEmergencyOxygenTankFilled
+    - id: CombatMedipen
+    - id: FlashlightSeclite
+    - id: FoodSnackNutribrick
+    - id: RadioHandheldCentcom
+    - id: CombatKnife
+    - id: Matchbox
+    - id: DrinkMREFlask
+
+- type: entity
+  parent: BoxSurvivalCentcom
+  id: BoxSurvivalCentcomNitrogen
+  name: extended-capacity survival box
+  description: It's a box with basic internals inside. This one is labelled to contain an extended-capacity tank.
+  suffix: Centcom N2
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingMaskBreath
+    - id: DoubleEmergencyNitrogenTankFilled
+    - id: CombatMedipen
+    - id: FlashlightSeclite
+    - id: FoodSnackNutribrick
+    - id: RadioHandheldCentcom
+    - id: CombatKnife
+    - id: Matchbox
+    - id: DrinkMREFlask
+  - type: Sprite
+    state: centcom
+    layers: [ ]
+  - type: Label
+    currentLabel: reagent-name-nitrogen

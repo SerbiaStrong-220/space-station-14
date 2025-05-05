@@ -314,3 +314,70 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCentcom
+
+#ERT Leader Gamma Hardsuit
+- type: entity
+  parent: [ ClothingOuterHardsuitERTLeader ]
+  id: ClothingOuterHardsuitERTLeaderGamma
+  name: Gamma ERT leader's hardsuit
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.35
+        Slash: 0.35
+        Piercing: 0.25
+        Heat: 0.3
+        Radiation: 0.1  
+        Caustic: 0.4
+        Stamina: 0.1
+  - type: ClothingSpeedModifier
+    walkModifier: 1 
+    sprintModifier: 1 
+
+#ERT Medic Gamma Hardsuit
+- type: entity
+  parent: [ ClothingOuterHardsuitERTMedical ]
+  id: ClothingOuterHardsuitERTMedicalGamma
+  name: Gamma ERT medic's hardsuit
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.4
+        Heat: 0.35
+        Radiation: 0.1  
+        Caustic: 0.5
+        Stamina: 0.1
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+
+
+#ERT Security Gamma Hardsuit
+- type: entity
+  parent: [ ClothingOuterHardsuitERTSecurity ]
+  id: ClothingOuterHardsuitERTSecurityGamma
+  name: Gamma ERT security's hardsuit
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.3
+        Heat: 0.35
+        Radiation: 0.1  
+        Caustic: 0.5
+        Stamina: 0.1
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
