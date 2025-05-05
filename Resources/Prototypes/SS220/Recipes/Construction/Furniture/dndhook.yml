@@ -1,0 +1,31 @@
+- type: constructionGraph
+  id: dndhook
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DeleteEntity {}
+    edges:
+    - to: dndhook
+      completed:
+      - !type:AdminLog
+        message: "Construction"
+        impact: High
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: MaterialWoodPlank
+        amount: 2
+        doAfter: 2
+  - node: dndhook
+    entity: dndhook
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: MaterialWoodPlank
+        amount: 2
+      steps:
+      - tool: Screwing
+        doAfter: 1
+

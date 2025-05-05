@@ -1,0 +1,30 @@
+- type: constructionGraph
+  id: WoodenHook
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DeleteEntity {}
+    edges:
+    - to: WoodenHook
+      completed:
+      - !type:AdminLog
+        message: "Construction"
+        impact: High
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: MaterialWoodPlank
+        amount: 15
+        doAfter: 2
+  - node: WoodenHook
+    entity: WoodenHook
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: MaterialWoodPlank
+        amount: 15
+      steps:
+      - tool: Screwing
+        doAfter: 1
