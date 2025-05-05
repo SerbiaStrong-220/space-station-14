@@ -3,51 +3,52 @@
   id: WoodenHook220
   parent: BaseStructure
   name: деревянный крюк
-  description: Грубый деревянный крюк, собранный на скорую руку, выглядит ненадёжно, но всё ещё справляется со своей задачей.
+  description: Выглядит так, будто вот-вот сломается, но даже в таком состоянии способен удержать того, кому не повезло оказаться рядом.
   suffix: Мусор, Хлам
   components:
-  - type: InteractionOutline
-  - type: Sprite
-    sprite: SS220/Structures/hooks.rsi
-    state: wood
-    layers:
-    - state: wood
-      map: ["base"]
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: Wood
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: WoodDestroy
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWoodPlank:
-            min: 1
-            max: 2
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: Transform
-    noRot: false
-  - type: KitchenSpike
-  - type: Anchorable
-  - type: Pullable
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.KitchenSpikeVisuals.Status:
-        base:
-          Empty: { state: wood }
-          Bloody: { state: woodbloody }
-  - type: Construction
-    graph: woodenhook
-    node: woodenhook
-  - type: GuideHelp
-    guides:
-    - Chef
-    - FoodRecipes
+    - type: InteractionOutline
+    - type: Sprite
+      sprite: SS220/Structures/hooks.rsi
+      state: wood
+      layers:
+        - state: wood
+          map: ["base"]
+    - type: Damageable
+      damageContainer: StructuralInorganic
+      damageModifierSet: Wood
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 100
+          behaviors:
+            - !type:PlaySoundBehavior
+              sound:
+                collection: WoodDestroy
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                MaterialWoodPlank1:
+                  min: 1
+                  max: 2
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+    - type: Transform
+      noRot: false
+    - type: KitchenSpike
+    - type: Anchorable
+    - type: Pullable
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.KitchenSpikeVisuals.Status:
+          base:
+            Empty: { state: wood }
+            Bloody: { state: woodbloody }
+    - type: Construction
+      graph: woodenhook
+      node: woodenhook
+    - type: GuideHelp
+      guides:
+        - Chef
+        - FoodRecipes
+
