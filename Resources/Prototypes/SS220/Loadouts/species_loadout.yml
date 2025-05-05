@@ -1,6 +1,0 @@
-- type: speciesLoadout
-  id: BeerDwarfLoadout
-  species: Dwarf
-  storage:
-    back:
-    - DrinkBeerCan

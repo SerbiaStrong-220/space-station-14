@@ -1,4 +1,5 @@
 using Content.Shared.GameTicking;
+using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Inventory;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Prototypes;
@@ -23,15 +24,15 @@ public sealed class SpeciesLoadoutSystem : EntitySystem
 
         var speciesId = profile.Species;
 
-        foreach (var prototype in _proto.EnumeratePrototypes<SpeciesLoadoutPrototype>())
+        foreach (var prototype in _proto.EnumeratePrototypes<SpeciesPrototype>())
         {
-            if (prototype.Species != speciesId)
+            if (prototype.ID != speciesId)
                 continue;
 
-            if (args.JobId == null || prototype.BlacklistJobs.Contains(args.JobId))
+            if (args.JobId == null || prototype.BlacklistJobsForStartingGear.Contains(args.JobId))
                 continue;
 
-            foreach (var (slot, items) in prototype.Storage)
+            foreach (var (slot, items) in prototype.StartingGear)
             {
                 if (!_inventory.TryGetSlotEntity(args.Mob, slot, out var slotEntity))
                     continue;

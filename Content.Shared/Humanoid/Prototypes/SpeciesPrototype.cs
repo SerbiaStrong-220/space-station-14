@@ -139,6 +139,14 @@ public sealed partial class SpeciesPrototype : IPrototype
     //SS220 Species-Job-Requirement
     [DataField(customTypeSerializer: typeof(DictionarySerializer<string, string[]>))]
     public Dictionary<string, string[]> BlockedJobsByAccessor { get; } = new();
+
+    //ss220 add species loadout start
+    [DataField]
+    public Dictionary<string, List<string>> StartingGear { get; set; } = new();
+
+    [DataField]
+    public List<string> BlacklistJobsForStartingGear = new();
+    //ss220 add species loadout end
 }
 
 public enum SpeciesNaming : byte
