@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Cloning;
+using Content.Shared.Cloning.Events;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
@@ -160,8 +161,8 @@ public sealed class PacificationSystem : EntitySystem
     //ss220 add clone pacified comp to clone entity start
     private void OnCloning(Entity<PacifiedComponent> ent, ref CloningEvent args)
     {
-        RemComp<PacifiedComponent>(args.Target);
-        var newComp = EnsureComp<PacifiedComponent>(args.Target);
+        RemComp<PacifiedComponent>(args.CloneUid);
+        var newComp = EnsureComp<PacifiedComponent>(args.CloneUid);
         _serialization.CopyTo(ent.Comp, ref newComp, notNullableOverride: true);
     }
     //ss220 add clone pacified comp to clone entity end

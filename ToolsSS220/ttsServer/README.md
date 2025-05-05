@@ -28,7 +28,7 @@ Python 3.11.+
 Соберите сервер, откройте server_config.toml в bin/Content.Server
 Впишите туда:
 ```
-[tss]
+[tts]
 enabled = true
 api_url = "http://127.0.0.1:5000/tts/"
 timeout = *зависит от железа*

@@ -17,13 +17,13 @@ public sealed partial class BlockingComponent : Component
     /// <summary>
     /// The entity that's blocking
     /// </summary>
-    [ViewVariables, AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntityUid? User;
 
     /// <summary>
     /// Is it currently blocking?
     /// </summary>
-    [ViewVariables, AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool IsBlocking;
 
     /// <summary>
@@ -34,7 +34,7 @@ public sealed partial class BlockingComponent : Component
     /// <summary>
     /// The shape of the blocking fixture that will be dynamically spawned
     /// </summary>
-    [DataField("shape"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public IPhysShape Shape = new PhysShapeCircle(0.5f);
 
     /// <summary>
@@ -49,8 +49,8 @@ public sealed partial class BlockingComponent : Component
     [DataField("activeBlockModifier", required: true)]
     public DamageModifierSet ActiveBlockDamageModifier = default!;
 
-    [DataField("blockingToggleAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string BlockingToggleAction = "ActionToggleBlock";
+    [DataField]
+    public EntProtoId BlockingToggleAction = "ActionToggleBlock";
 
     [DataField, AutoNetworkedField]
     public EntityUid? BlockingToggleActionEntity;
@@ -58,7 +58,7 @@ public sealed partial class BlockingComponent : Component
     /// <summary>
     /// The sound to be played when you get hit while actively blocking
     /// </summary>
-    [DataField("blockSound")] public SoundSpecifier BlockSound =
+    [DataField] public SoundSpecifier BlockSound =
         new SoundPathSpecifier("/Audio/Weapons/block_metal1.ogg")
         {
             Params = AudioParams.Default.WithVariation(0.25f)
@@ -68,14 +68,14 @@ public sealed partial class BlockingComponent : Component
     /// Fraction of original damage shield will take instead of user
     /// when not blocking
     /// </summary>
-    [DataField("passiveBlockFraction"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float PassiveBlockFraction = 0.5f;
 
     /// <summary>
     /// Fraction of original damage shield will take instead of user
     /// when blocking
     /// </summary>
-    [DataField("activeBlockFraction"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float ActiveBlockFraction = 1.0f;
 
     // SS220 equip shield on back begin

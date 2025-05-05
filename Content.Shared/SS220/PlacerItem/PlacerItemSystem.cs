@@ -5,12 +5,15 @@ using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Physics;
 using Content.Shared.RCD.Systems;
 using Content.Shared.SS220.PlacerItem.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -61,13 +64,15 @@ public sealed partial class PlacerItemSystem : EntitySystem
         if (!location.IsValid(EntityManager))
             return;
 
-        if (!_rcdSystem.TryGetMapGridData(location, out var mapGridData))
+        var gridUid = _xform.GetGrid(location);
+        if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
             return;
 
-        if (!IsPlacementOperationStillValid(entity, mapGridData.Value, args.Target, user))
+        var posVector = _mapSystem.TileIndicesFor(gridUid.Value, mapGrid, location);
+        if (!IsPlacementOperationStillValid(entity, (gridUid.Value, mapGrid), posVector, args.Target, user))
             return;
 
-        var ev = new PlacerItemDoAfterEvent(GetNetCoordinates(mapGridData.Value.Location), comp.ConstructionDirection, comp.SpawnProto);
+        var ev = new PlacerItemDoAfterEvent(GetNetCoordinates(location), comp.ConstructionDirection, comp.SpawnProto);
         var doAfterArgs = new DoAfterArgs(EntityManager, user, comp.DoAfter, ev, uid, args.Target, uid)
         {
             BreakOnDamage = true,
@@ -90,10 +95,12 @@ public sealed partial class PlacerItemSystem : EntitySystem
         if (args.Cancelled || !_net.IsServer)
             return;
 
-        if (!_rcdSystem.TryGetMapGridData(GetCoordinates(args.Location), out var mapGridData))
+        var gridUid = _xform.GetGrid(GetCoordinates(args.Location));
+        if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
             return;
 
-        var mapCords = _xform.ToMapCoordinates(_mapSystem.GridTileToLocal(mapGridData.Value.GridUid, mapGridData.Value.Component, mapGridData.Value.Position));
+        var posVector = _mapSystem.TileIndicesFor(gridUid.Value, mapGrid, GetCoordinates(args.Location));
+        var mapCords = _xform.ToMapCoordinates(_mapSystem.GridTileToLocal(gridUid.Value, mapGrid, posVector));
         Spawn(args.ProtoId.Id, mapCords, rotation: args.Direction.ToAngle());
 
         QueueDel(entity);
@@ -124,11 +131,11 @@ public sealed partial class PlacerItemSystem : EntitySystem
         Dirty(entity);
     }
 
-    public bool IsPlacementOperationStillValid(Entity<PlacerItemComponent> entity, MapGridData mapGridData, EntityUid? target, EntityUid user)
+    public bool IsPlacementOperationStillValid(Entity<PlacerItemComponent> entity, Entity<MapGridComponent> grid, Vector2i position, EntityUid? target, EntityUid user)
     {
         var (uid, comp) = entity;
         var unobstracted = target == null
-            ? _interaction.InRangeUnobstructed(user, _mapSystem.GridTileToWorld(mapGridData.GridUid, mapGridData.Component, mapGridData.Position))
+            ? _interaction.InRangeUnobstructed(user, _mapSystem.GridTileToWorld(grid, grid, position))
             : _interaction.InRangeUnobstructed(user, target.Value);
 
         if (!unobstracted)
@@ -141,7 +148,7 @@ public sealed partial class PlacerItemSystem : EntitySystem
         var isWindow = tagComponent?.Tags != null && tagComponent.Tags.Contains("Window");
         var isCatwalk = tagComponent?.Tags != null && tagComponent.Tags.Contains("Catwalk");
 
-        var intersectingEntities = _lookup.GetLocalEntitiesIntersecting(mapGridData.GridUid, mapGridData.Position, -0.05f, LookupFlags.Uncontained);
+        var intersectingEntities = _lookup.GetLocalEntitiesIntersecting(grid, position, -0.05f, LookupFlags.Uncontained);
 
         foreach (var ent in intersectingEntities)
         {
@@ -172,7 +179,7 @@ public sealed partial class PlacerItemSystem : EntitySystem
             foreach (var otherFixture in otherFixtures.Fixtures.Values)
             {
                 if (!otherFixture.Hard || otherFixture.CollisionLayer <= 0 ||
-                    ourFixture.CollisionLayer != otherFixture.CollisionLayer)
+                    (ourFixture.CollisionLayer & otherFixture.CollisionLayer) == 0)
                     continue;
 
                 var otherXformComp = Transform(otherUid);

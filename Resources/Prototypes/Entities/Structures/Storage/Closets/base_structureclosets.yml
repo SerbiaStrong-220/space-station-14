@@ -5,6 +5,7 @@
   description: A standard-issue Nanotrasen storage unit.
   abstract: true
   components:
+  - type: Animateable
   - type: ResistLocker
   - type: Transform
     noRot: true
@@ -149,7 +150,7 @@
     noRot: false
   - type: Sprite
     noRot: false
-    sprite: Structures/Storage/wall_locker.rsi
+    sprite: SS220/Structures/Storage/wall_locker.rsi # SS220 wall lockers resprite
     layers:
     - state: generic
       map: ["enum.StorageVisualLayers.Base"]
@@ -213,7 +214,7 @@
   - type: Lock
   - type: LockVisuals
   - type: Sprite
-    sprite: Structures/Storage/wall_locker.rsi
+    sprite: SS220/Structures/Storage/wall_locker.rsi # SS220 wall lockers resprite
     layers:
     - state: generic
       map: ["enum.StorageVisualLayers.Base"]
