@@ -190,7 +190,7 @@
         - TraitorRole
         - NukeOperative
       # hidden-desc-end
-# SS220-Trackers DeathRattle-End
+# SS220-Trackers DeathRattle-Start
     - type: TriggerOnMobstateChange
       mobState:
       - Critical
