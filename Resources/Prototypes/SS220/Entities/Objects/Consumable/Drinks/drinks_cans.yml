@@ -55,8 +55,8 @@
 - type: entity
   parent: DrinkCanBaseFull
   id: DrinkBrepsiCan
-  name: банка брепси
-  description: Самый синтетический напиток в самой синтетической ёмкости. Пить на свой страх и риск.
+  name: Brepsi
+  description: The most synthetic drink in the most synthetic container. Drink at your own risk.
   components:
   - type: SolutionContainerManager
     solutions:

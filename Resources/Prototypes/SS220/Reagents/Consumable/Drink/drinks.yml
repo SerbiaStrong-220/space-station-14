@@ -159,7 +159,7 @@
     Drink:
       effects:
       - !type:ChemVomit
-        probability: 1
+        probability: 0.35
       - !type:HealthChange
         damage:
           types:
