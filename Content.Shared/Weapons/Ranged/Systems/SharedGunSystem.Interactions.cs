@@ -4,6 +4,10 @@ using Content.Shared.Hands;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Utility;
+using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.DoAfter;
+using Robust.Shared.Map;
+using System.Numerics;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -138,4 +142,76 @@ public abstract partial class SharedGunSystem
         component.NextFire = minimum;
         Dirty(uid, component);
     }
+
+    ///SS220-new-feature kus start
+    private void OnGetVerbs(Entity<GunComponent> entity, ref GetVerbsEvent<Verb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || !entity.Comp.CanSuicide)
+            return;
+
+        var user = args.User;
+        if (!_hands.IsHolding(user, entity, out _))
+            return;
+
+        Verb verb = new()
+        {
+            Act = () =>
+            {
+                var doAfter = new DoAfterArgs(EntityManager, user, 5f, new SuicideDoAfterEvent(), entity, target: user, used: entity)
+                {
+                    BreakOnMove = true,
+                    BreakOnHandChange = true,
+                    BreakOnDamage = true,
+                    NeedHand = true,
+                    Broadcast = true
+                };
+
+                if (_doAfter.TryStartDoAfter(doAfter))
+                    PopupSystem.PopupEntity(Loc.GetString("suicide-start-popup", ("user", MetaData(user).EntityName), ("weapon", MetaData(entity).EntityName)), user, entity);
+            },
+            Text = Loc.GetString("suicide-verb-name"),
+            Priority = 1
+        };
+
+        args.Verbs.Add(verb);
+    }
+
+    private void OnDoSuicideComplete(SuicideDoAfterEvent args)
+    {
+
+        if (!_netManager.IsServer)
+            return;
+
+        if (args.Cancelled || args.Handled || args.Used == null)
+            return;
+
+        var user = args.User;
+        var weapon = args.Used.Value;
+
+        if (!_hands.IsHolding(user, weapon, out _))
+        {
+            PopupSystem.PopupEntity(Loc.GetString("suicide-failed-popup"), user, user);
+            return;
+        }
+
+        if (!TryComp<GunComponent>(weapon, out var guncomp))
+        {
+            return;
+        }
+
+        var coordsFrom = Transform(weapon).Coordinates;
+        var coordsTo = new EntityCoordinates(user, new Vector2(coordsFrom.X + 1f, coordsFrom.Y));
+        var ev = new TakeAmmoEvent(1, new List<(EntityUid? Entity, IShootable Shootable)>(), coordsFrom, null);
+        RaiseLocalEvent(weapon, ev);
+
+        Shoot(weapon, guncomp, ev.Ammo, coordsFrom, coordsTo, out _);
+
+//        var damage = new DamageSpecifier();
+//        damage.DamageDict.Add("Blunt", 200);
+//        _damageable.TryChangeDamage(user, damage, true);
+
+        PopupSystem.PopupEntity(Loc.GetString("suicide-success-popup"), user, user);
+        args.Handled = true;
+    }
+    ///SS220-new-feature kus end
 }
