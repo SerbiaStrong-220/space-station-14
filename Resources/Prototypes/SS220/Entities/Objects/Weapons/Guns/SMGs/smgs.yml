@@ -81,6 +81,7 @@
             - MagazinePistolSubMachineGunAcp
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
+        startingItem: CartridgeAmmoAcp
         name: Chamber
         priority: 1
         whitelist:
