@@ -439,13 +439,13 @@
     slots:
     - Hair
     - Snout
+    hideOnToggle: true
   - type: UserInterface #SS220 - Smart gas mask - start
     interfaces:
       enum.SmartGasMaskUiKey.Key:
         type: SmartGasMaskBoundUserInterface
   - type: SmartGasMask
     selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskERTSupport"] #SS220 - Smart gas mask - end
-    hideOnToggle: true
   - type: FlashImmunity
   - type: EyeProtection
   - type: Armor
