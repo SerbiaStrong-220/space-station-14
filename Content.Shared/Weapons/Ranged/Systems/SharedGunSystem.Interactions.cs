@@ -187,7 +187,7 @@ public abstract partial class SharedGunSystem
 
                 if (_doAfter.TryStartDoAfter(doAfter))
                 {
-                    PopupSystem.PopupEntity(Loc.GetString("suicide-start-popup-self",
+                    PopupSystem.PopupPredicted(Loc.GetString("suicide-start-popup-self",
                             ("weapon", MetaData(entity).EntityName)), user, user);
 
                     PopupSystem.PopupEntity(Loc.GetString("suicide-start-popup-others",
@@ -211,7 +211,7 @@ public abstract partial class SharedGunSystem
         if (args.Cancelled || args.Handled || args.Used == null)
         {
             var looser = args.User;
-            PopupSystem.PopupEntity(Loc.GetString("suicide-failed-popup"), looser, looser);
+            PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), looser, looser);
             return;
         }
 
@@ -239,7 +239,7 @@ public abstract partial class SharedGunSystem
             return;
 
         /// В текущей реализации можно застрелиться из условново МК с любыми патронами.
-        /// Смерть не случиться если их урон < 3.
+        /// Смерть не случиться если их урон < 4, травматические, учебные...
         /// Для нанесения смертельного урона используеться 1 наибольший тип урона в патроне.
 
         // Магазинн патроны
