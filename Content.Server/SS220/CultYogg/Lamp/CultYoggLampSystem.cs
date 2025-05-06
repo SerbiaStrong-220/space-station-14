@@ -6,6 +6,7 @@ using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.SS220.CultYogg.Lamp;
 using Content.Shared.SS220.StealthProvider;
+using Content.Shared.Materials;
 
 namespace Content.Server.SS220.CultYogg.Lamp;
 public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
@@ -69,7 +70,7 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
     {
         return ent.Comp.Activated ? TurnOff(ent) : TurnOn(user, ent);
     }
-    public override bool TurnOff(Entity<CultYoggLampComponent> ent, bool makeNoise = true)
+    public override bool TurnOff(Entity<CultYoggLampComponent> ent)
     {
         if (!ent.Comp.Activated || !_lights.TryGetLight(ent, out var pointLightComponent))
         {
@@ -77,10 +78,10 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
         }
 
         _lights.SetEnabled(ent, false, pointLightComponent);
-        SetActivated(ent, false, makeNoise);
+        SetActivated(ent, false);
 
-        if (TryComp<StealthProviderComponent>(ent, out var provComp))
-            provComp.Enabled = false;
+        var ev = new ChangeStealthProviderEnability(false);
+        RaiseLocalEvent(ent, ref ev);
 
         return true;
     }
@@ -93,26 +94,23 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
         }
 
         _lights.SetEnabled(ent, true, pointLightComponent);
-        SetActivated(ent, true, true);
+        SetActivated(ent, true);
 
-        if (TryComp<StealthProviderComponent>(ent, out var provComp))
-            provComp.Enabled = true;
+        var ev = new ChangeStealthProviderEnability(true);
+        RaiseLocalEvent(ent, ref ev);
 
         return true;
     }
 
-    public void SetActivated(Entity<CultYoggLampComponent> ent, bool activated, bool makeNoise = true)
+    public void SetActivated(Entity<CultYoggLampComponent> ent, bool activated)
     {
         if (ent.Comp.Activated == activated)
             return;
 
         ent.Comp.Activated = activated;
 
-        if (makeNoise)
-        {
-            var sound = ent.Comp.Activated ? ent.Comp.TurnOnSound : ent.Comp.TurnOffSound;
-            _audio.PlayPvs(sound, ent);
-        }
+        var sound = ent.Comp.Activated ? ent.Comp.TurnOnSound : ent.Comp.TurnOffSound;
+        _audio.PlayPvs(sound, ent);
 
         Dirty(ent, ent.Comp);
         UpdateVisuals(ent);

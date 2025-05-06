@@ -2,6 +2,7 @@
 
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using System.Linq;
 
 namespace Content.Shared.SS220.StealthProvider;
 public sealed class SharedStealthProviderSystem : EntitySystem
@@ -9,10 +10,30 @@ public sealed class SharedStealthProviderSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedProvidedStealthSystem _provided = default!;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<StealthProviderComponent, ChangeStealthProviderEnability>(OnEnabilityChange);
+    }
+
+    private void OnEnabilityChange(Entity<StealthProviderComponent> ent, ref ChangeStealthProviderEnability args)
+    {
+        ent.Comp.Enabled = args.Status;
+
+        if (!ent.Comp.Enabled)
+            DisableAllProvidedStealth(ent);
+    }
+    private void DisableAllProvidedStealth(Entity<StealthProviderComponent> ent)
+    {
+        foreach (var disEnts in ent.Comp.ProvidedEntities)
+        {
+            _provided.ProviderRemove(disEnts, ent);
+        }
+
+        ent.Comp.ProvidedEntities.Clear();
     }
 
     public override void Update(float frameTime)
@@ -34,6 +55,7 @@ public sealed class SharedStealthProviderSystem : EntitySystem
     {
         var transform = Transform(ent);
 
+        var entsToDisable = ent.Comp.ProvidedEntities.ToList();
         foreach (var reciever in _entityLookup.GetEntitiesInRange(transform.Coordinates, ent.Comp.Range))
         {
             if (ent.Comp.Whitelist is not null && !_whitelist.IsValid(ent.Comp.Whitelist, reciever))
@@ -43,8 +65,18 @@ public sealed class SharedStealthProviderSystem : EntitySystem
                 continue;
 
             var prov = EnsureComp<ProvidedStealthComponent>(reciever);
-            if (!prov.StealthProviders.Contains(ent))
+            entsToDisable.Remove((reciever, prov));
+
+            if (!prov.StealthProviders.Contains(ent) && !ent.Comp.ProvidedEntities.Contains((reciever, prov)))
+            {
                 prov.StealthProviders.Add(ent);
+                ent.Comp.ProvidedEntities.Add((reciever, prov));
+            }
+        }
+
+        foreach (var disEnts in entsToDisable)
+        {
+            _provided.ProviderRemove(disEnts, ent);
         }
     }
 }

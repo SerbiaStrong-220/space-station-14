@@ -16,5 +16,13 @@ public sealed partial class StealthProviderComponent : Component
 
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public float Range = 1.5f;
+    public float Range = 2f;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public List<Entity<ProvidedStealthComponent>> ProvidedEntities = new List<Entity<ProvidedStealthComponent>>();
+}
+[ByRefEvent]
+public record struct ChangeStealthProviderEnability(bool Status)
+{
+    public readonly bool Status = Status;
 }

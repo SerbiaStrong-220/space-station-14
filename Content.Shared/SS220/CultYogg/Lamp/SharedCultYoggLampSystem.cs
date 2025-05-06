@@ -60,6 +60,6 @@ public abstract class SharedCultYoggLampSystem : EntitySystem
 
         args.Verbs.Add(verb);
     }
-    public abstract bool TurnOff(Entity<CultYoggLampComponent> ent, bool makeNoise = true);
+    public abstract bool TurnOff(Entity<CultYoggLampComponent> ent);
     public abstract bool TurnOn(EntityUid user, Entity<CultYoggLampComponent> uid);
 }

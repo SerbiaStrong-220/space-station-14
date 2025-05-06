@@ -1,13 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Stealth.Components;
-using Robust.Shared.Physics.Systems;
-using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.StealthProvider;
 public sealed class SharedProvidedStealthSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
     public override void Initialize()
     {
@@ -15,7 +12,6 @@ public sealed class SharedProvidedStealthSystem : EntitySystem
 
         SubscribeLocalEvent<ProvidedStealthComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ProvidedStealthComponent, ComponentRemove>(OnRemove);
-        SubscribeLocalEvent<ProvidedStealthComponent, EntGotInsertedIntoContainerMessage>(OnEntInserted);
     }
 
     private void OnInit(Entity<ProvidedStealthComponent> ent, ref ComponentInit args)
@@ -33,36 +29,11 @@ public sealed class SharedProvidedStealthSystem : EntitySystem
         if (HasComp<StealthComponent>(ent))
             RemCompDeferred<StealthComponent>(ent);
     }
-    private void OnEntInserted(Entity<ProvidedStealthComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+
+    public void ProviderRemove(Entity<ProvidedStealthComponent> ent, Entity<StealthProviderComponent> provider)
     {
-        RemCompDeferred<ProvidedStealthComponent>(ent);
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var query = EntityQueryEnumerator<ProvidedStealthComponent>();
-        while (query.MoveNext(out var ent, out var comp))
-        {
-            CheckProviders((ent, comp));
-        }
-    }
-
-    private void CheckProviders(Entity<ProvidedStealthComponent> ent)
-    {
-        foreach (var povider in ent.Comp.StealthProviders)
-        {
-            if (!_physics.TryGetDistance(povider, ent, out var distance))
-                return;
-
-            if (distance > povider.Comp.Range || !povider.Comp.Enabled)
-            {
-                ent.Comp.StealthProviders.Remove(povider);
-                CheckAmountOfProviders(ent);
-                return;
-            }
-        }
+        ent.Comp.StealthProviders.Remove(provider);
+        CheckAmountOfProviders(ent);
     }
 
     private void CheckAmountOfProviders(Entity<ProvidedStealthComponent> ent)
