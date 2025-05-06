@@ -56,6 +56,7 @@ public sealed class SharedStealthProviderSystem : EntitySystem
         var transform = Transform(ent);
 
         var entsToDisable = ent.Comp.ProvidedEntities.ToList();
+
         foreach (var reciever in _entityLookup.GetEntitiesInRange(transform.Coordinates, ent.Comp.Range))
         {
             if (ent.Comp.Whitelist is not null && !_whitelist.IsValid(ent.Comp.Whitelist, reciever))
@@ -67,7 +68,7 @@ public sealed class SharedStealthProviderSystem : EntitySystem
             var prov = EnsureComp<ProvidedStealthComponent>(reciever);
             entsToDisable.Remove((reciever, prov));
 
-            if (!prov.StealthProviders.Contains(ent) && !ent.Comp.ProvidedEntities.Contains((reciever, prov)))
+            if (!prov.StealthProviders.Contains(ent))
             {
                 prov.StealthProviders.Add(ent);
                 ent.Comp.ProvidedEntities.Add((reciever, prov));
@@ -77,6 +78,7 @@ public sealed class SharedStealthProviderSystem : EntitySystem
         foreach (var disEnts in entsToDisable)
         {
             _provided.ProviderRemove(disEnts, ent);
+            ent.Comp.ProvidedEntities.Remove(disEnts);
         }
     }
 }

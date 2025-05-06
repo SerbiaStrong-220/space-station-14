@@ -16,7 +16,7 @@ public sealed partial class StealthProviderComponent : Component
 
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
-    public float Range = 2f;
+    public float Range = 3f;
 
     [ViewVariables(VVAccess.ReadWrite)]
     public List<Entity<ProvidedStealthComponent>> ProvidedEntities = new List<Entity<ProvidedStealthComponent>>();
