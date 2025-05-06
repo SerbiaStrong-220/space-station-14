@@ -12,7 +12,9 @@ using Content.Shared.Damage;
 using Robust.Shared.Timing;
 using Content.Shared.Item;
 using Robust.Shared.Player;
-using Robust.Shared.GameObjects;
+using Robust.Shared.Prototypes;
+using Content.Shared.Projectiles;
+using System.Linq;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -122,7 +124,7 @@ public abstract partial class SharedGunSystem
     private void OnGunSelected(EntityUid uid, GunComponent component, HandSelectedEvent args)
     {
         if (Timing.ApplyingState)
-             return;
+            return;
 
         if (component.FireRateModified <= 0)
             return;
@@ -151,6 +153,7 @@ public abstract partial class SharedGunSystem
     ///SS220-new-feature kus start
     private void OnGetVerbs(Entity<GunComponent> entity, ref GetVerbsEvent<Verb> args)
     {
+        // Добавляю возможность убиться ко всему маленькому стрелковому оружию
         if (TryComp<ItemComponent>(entity, out var item))
         {
             if (!entity.Comp.CanSuicide && _item.GetSizePrototype(item.Size).Weight <= 3 && !entity.Comp.ClumsyProof)
@@ -230,33 +233,78 @@ public abstract partial class SharedGunSystem
         var ev = new TakeAmmoEvent(1, new List<(EntityUid? Entity, IShootable Shootable)>(), coordsFrom, null);
         RaiseLocalEvent(weapon, ev);
         var damage = new DamageSpecifier();
-        var damageType = "Brute";
+        var damageType = "";
 
         if (ev.Ammo.Count == 0)
             return;
 
-        if (EntityManager.HasComponent<HitscanBatteryAmmoProviderComponent>(weapon))
+        /// В текущей реализации можно застрелиться из условново МК с любыми патронами.
+        /// Смерть не случиться если их урон < 3.
+        /// Для нанесения смертельного урона используеться 1 наибольший тип урона в патроне.
+
+        // Магазинн патроны
+        if (ev.Ammo[0].Entity is { Valid: true } ammoEntity)
+        {
+            if (TryComp<CartridgeAmmoComponent>(ammoEntity, out var cartridge))
+            {
+
+                if (!ProtoManager.TryIndex<EntityPrototype>((cartridge).Prototype.Id, out var protoNamePrototipe))
+                {
+                    return;
+                }
+
+                if (!ProtoManager.TryIndex<EntityPrototype>(protoNamePrototipe, out var protoPrototype))
+                {
+                    return;
+                }
+
+                if (protoPrototype.Components.TryGetValue("Projectile", out var projectileReg)
+                    && projectileReg.Component is ProjectileComponent projectileComponent)
+                {
+                    if (projectileComponent.Damage?.DamageDict != null
+                        && projectileComponent.Damage.DamageDict.Count > 0)
+                    {
+                        damageType = projectileComponent.Damage?.DamageDict?.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key ?? "";
+                    }
+                }
+            }
+            // Револьверы
+            else if (TryComp<RevolverAmmoProviderComponent>(weapon, out var revolver))
+            {
+
+                if (!TryComp<MetaDataComponent>(ammoEntity, out var meta))
+                    return;
+
+                var prototypeId = meta.EntityPrototype?.ID;
+
+                if (string.IsNullOrEmpty(prototypeId) || !ProtoManager.TryIndex<EntityPrototype>(prototypeId, out var proto))
+                {
+                    return;
+                }
+
+                if (proto.Components.TryGetValue("Projectile", out var projectileReg) && projectileReg.Component is ProjectileComponent projectileComponent)
+                {
+                    if (projectileComponent.Damage?.DamageDict != null && projectileComponent.Damage.DamageDict.Count > 0)
+                    {
+                        damageType = projectileComponent.Damage?.DamageDict?.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key ?? "";
+                    }
+                }
+            }
+        }
+        // Лазеры
+        if (TryComp<HitscanBatteryAmmoProviderComponent>(weapon, out _))
         {
             damageType = "Heat";
         }
-        else if (TryComp<RevolverAmmoProviderComponent>(weapon, out var revolver))
+        // Магазин батарейка
+        if (TryComp<MagazineAmmoProviderComponent>(weapon, out var magazineComp))
         {
-            damageType = "Piercing";
-        }
-        else if (ev.Ammo[0].Entity is { Valid: true })
-        {
-            if (EntityManager.HasComponent<CartridgeAmmoComponent>(ev.Ammo[0].Entity))
-            {
-                damageType = "Piercing";
-            }
-            else if (EntityManager.HasComponent<HitscanBatteryAmmoProviderComponent>(ev.Ammo[0].Entity))
-            {
-                damageType = "Heat";
-            }
+            return; // Я тупой, помогите
         }
 
         damage.DamageDict.Add(damageType, 200);
         Shoot(weapon, guncomp, ev.Ammo, coordsFrom, coordsTo, out _);
+        // Мб ещё админлоги добавить
         Timer.Spawn(200, () =>
         {
             Damageable.TryChangeDamage(user, damage, true);
