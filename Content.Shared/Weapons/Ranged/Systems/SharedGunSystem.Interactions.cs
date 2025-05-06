@@ -11,6 +11,9 @@ using System.Numerics;
 using Content.Shared.Projectiles;
 using Content.Shared.Damage;
 using System.Linq;
+using Robust.Shared.Timing;
+using Content.Shared.Item;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -149,6 +152,14 @@ public abstract partial class SharedGunSystem
     ///SS220-new-feature kus start
     private void OnGetVerbs(Entity<GunComponent> entity, ref GetVerbsEvent<Verb> args)
     {
+        if (TryComp<ItemComponent>(entity, out var item))
+        {
+            if (!entity.Comp.CanSuicide && _item.GetSizePrototype(item.Size).Weight <= 3 && !entity.Comp.ClumsyProof)
+            {
+                entity.Comp.CanSuicide = true;
+            }
+        }
+
         if (!args.CanAccess || !args.CanInteract || !entity.Comp.CanSuicide)
             return;
 
@@ -209,17 +220,39 @@ public abstract partial class SharedGunSystem
         var coordsTo = new EntityCoordinates(user, new Vector2(coordsFrom.X + 1f, coordsFrom.Y));
         var ev = new TakeAmmoEvent(1, new List<(EntityUid? Entity, IShootable Shootable)>(), coordsFrom, null);
         RaiseLocalEvent(weapon, ev);
+        var damage = new DamageSpecifier();
+        var damageType = "Brute";
 
         if (ev.Ammo.Count == 0)
             return;
 
+        if (EntityManager.HasComponent<HitscanBatteryAmmoProviderComponent>(weapon))
+        {
+            damageType = "Heat";
+        }
+        else if (TryComp<RevolverAmmoProviderComponent>(weapon, out var revolver))
+        {
+            damageType = "Piercing";
+        }
+        else if (ev.Ammo[0].Entity is { Valid: true })
+        {
+            if (EntityManager.HasComponent<CartridgeAmmoComponent>(ev.Ammo[0].Entity))
+            {
+                damageType = "Piercing";
+            }
+            else if (EntityManager.HasComponent<HitscanBatteryAmmoProviderComponent>(ev.Ammo[0].Entity))
+            {
+                damageType = "Heat";
+            }
+        }
+
+        damage.DamageDict.Add(damageType, 200);
         Shoot(weapon, guncomp, ev.Ammo, coordsFrom, coordsTo, out _);
+        Timer.Spawn(200, () =>
+        {
+            Damageable.TryChangeDamage(user, damage, true);
+        });
 
-//        var damage = new DamageSpecifier();
-//        damage.DamageDict.Add(damageType, 200);
-//        Damageable.TryChangeDamage(user, damage, true);
-
-        PopupSystem.PopupEntity(Loc.GetString("suicide-success-popup"), user, user);
         args.Handled = true;
     }
     ///SS220-new-feature kus end
