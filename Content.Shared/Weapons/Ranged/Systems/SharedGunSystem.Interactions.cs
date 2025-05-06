@@ -8,12 +8,11 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.DoAfter;
 using Robust.Shared.Map;
 using System.Numerics;
-using Content.Shared.Projectiles;
 using Content.Shared.Damage;
-using System.Linq;
 using Robust.Shared.Timing;
 using Content.Shared.Item;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Player;
+using Robust.Shared.GameObjects;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -184,7 +183,14 @@ public abstract partial class SharedGunSystem
                 };
 
                 if (_doAfter.TryStartDoAfter(doAfter))
-                    PopupSystem.PopupEntity(Loc.GetString("suicide-start-popup", ("user", MetaData(user).EntityName), ("weapon", MetaData(entity).EntityName)), user, entity);
+                {
+                    PopupSystem.PopupEntity(Loc.GetString("suicide-start-popup-self",
+                            ("weapon", MetaData(entity).EntityName)), user, user);
+
+                    PopupSystem.PopupEntity(Loc.GetString("suicide-start-popup-others",
+                            ("user", MetaData(user).EntityName),
+                            ("weapon", MetaData(entity).EntityName)), user, Filter.PvsExcept(user), true);
+                }
             },
             Text = Loc.GetString("suicide-verb-name"),
             Priority = 1
@@ -200,14 +206,17 @@ public abstract partial class SharedGunSystem
             return;
 
         if (args.Cancelled || args.Handled || args.Used == null)
+        {
+            var looser = args.User;
+            PopupSystem.PopupEntity(Loc.GetString("suicide-failed-popup"), looser, looser);
             return;
+        }
 
         var user = args.User;
         var weapon = args.Used.Value;
 
         if (!_hands.IsHolding(user, weapon, out _))
         {
-            PopupSystem.PopupEntity(Loc.GetString("suicide-failed-popup"), user, user);
             return;
         }
 
