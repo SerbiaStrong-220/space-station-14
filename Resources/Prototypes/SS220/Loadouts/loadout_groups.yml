@@ -762,19 +762,6 @@
 
 #! Разное (Конец)
 
-#! Центком 
-- type: loadoutGroup
-  id: SurvivalCentcom
-  name: loadout-group-survival-centcom
-  minLimit: 2
-  hidden: true
-  loadouts:
-  - EmergencyNitrogenCentcom
-  - EmergencyOxygenCentcom
-  - LoadoutSpeciesVoxNitrogen
-  - EmergencyBeerCentcom
-#! Центком (Конец)
-
 
 
 

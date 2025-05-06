@@ -26,3 +26,7 @@ ent-ClothingBeltMedicalInterdyne = РПС образца НМП-023
 ent-ClothingBeltMedicalInterdyneFilled = { ent-ClothingBeltMedicalInterdyne }
     .desc = { ent-ClothingBeltMedicalInterdyne }
     .suffix = Interdyne, Заполненный, Парамедик
+
+ent-ClothingBeltERTGammaMedicalFilled = { ent-ClothingBeltSecurityMedical }
+    .desc = { ent-ClothingBeltMedical.desc }
+    .suffix = Заполненный

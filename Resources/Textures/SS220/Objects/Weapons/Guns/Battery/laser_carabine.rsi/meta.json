@@ -1,35 +1,35 @@
 {
-    "version": 1,
-    "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from https://github.com/ss220club/Paradise-SS220/blob/master/icons/obj/guns/projectile.dmi modified by hed77 (Discord) for SS220",
-    "size": {
-        "x": 32,
-        "y": 32
-    },
-    "states": [
-        {
-            "name": "icon"
-        },
-        {
-            "name": "base"
-        },	
+	"version": 1,
+	"license": "CC-BY-SA-3.0",
+	"copyright": "Taken from https://github.com/ss220club/Paradise-SS220/blob/master/icons/obj/guns/projectile.dmi modified by hed77 (Discord) for SS220",
+	"size": {
+		"x": 32,
+		"y": 32
+	},
+	"states": [
 		{
-            "name": "mag-0"
-        },
+			"name": "icon"
+		},
 		{
-            "name": "mag-1"
-        },
-        {
-            "name": "mag-2"
-        },
-        {
-            "name": "mag-3"
-        },
-        {
-            "name": "mag-4"
-        },
+			"name": "base"
+		},
 		{
-		    "name": "mag-unshaded-0",
+			"name": "mag-0"
+		},
+		{
+			"name": "mag-1"
+		},
+		{
+			"name": "mag-2"
+		},
+		{
+			"name": "mag-3"
+		},
+		{
+			"name": "mag-4"
+		},
+		{
+			"name": "mag-unshaded-0",
 			"delays": [
 				[
 					0.2,
@@ -101,17 +101,17 @@
 				]
 			]
 		},
-        {
-            "name": "inhand-left",
-            "directions": 4
-        },
 		{
-            "name": "inhand-right",
-            "directions": 4
-        },
-        {
-            "name": "equipped-SUITSTORAGE",
-            "directions": 4,
+			"name": "inhand-left",
+			"directions": 4
+		},
+		{
+			"name": "inhand-right",
+			"directions": 4
+		},
+		{
+			"name": "equipped-SUITSTORAGE",
+			"directions": 4,
 			"delays": [
 				[
 					4.9
@@ -140,10 +140,10 @@
 					0.15
 				]
 			]
-        },
-        {
-            "name": "equipped-BACKPACK",
-            "directions": 4,
+		},
+		{
+			"name": "equipped-BACKPACK",
+			"directions": 4,
 			"delays": [
 				[
 					4.9
@@ -172,9 +172,9 @@
 					0.15
 				]
 			]
-        },
-        {
-            "name": "wielded-inhand-left",
+		},
+		{
+			"name": "wielded-inhand-left",
 			"directions": 4,
 			"delays": [
 				[
@@ -204,10 +204,10 @@
 					0.15
 				]
 			]
-        },
-        {
-            "name": "wielded-inhand-right",
-            "directions": 4,
+		},
+		{
+			"name": "wielded-inhand-right",
+			"directions": 4,
 			"delays": [
 				[
 					4,
@@ -236,6 +236,6 @@
 					0.15
 				]
 			]
-        }
-    ]
+		}
+	]
 }

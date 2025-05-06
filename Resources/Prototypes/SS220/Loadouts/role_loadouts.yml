@@ -154,12 +154,3 @@
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Сервис (Конец)
-
-#! Центральное командование
-- type: roleLoadout
-  id: RoleSurvivalCentcom
-  groups:
-  - SurvivalCentcom
-  - GroupSpeciesBreathTool
-  - GroupTankHarness
-#! Центральное командование

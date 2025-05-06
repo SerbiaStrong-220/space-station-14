@@ -244,7 +244,6 @@
       - ThermalVisionImplant
       - DeathRattleImplantCentcomm
     - type: Loadout
-      roleLoadout: [ RoleSurvivalCentcom ]
       prototypes: [ ERTLeaderGammaGear ]
     - type: RandomMetadata
       nameSegments:
@@ -272,7 +271,7 @@
   id: ERTLeaderGammaGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTLeader
-    back: ClothingBackpackERTLeader
+    back: ClothingBackpackERTLeaderGammaFilled
     shoes: ClothingShoesBootsMagAdv
     eyes: ClothingEyesHudMedSec
     gloves: ClothingHandsGlovesCombat
@@ -292,23 +291,6 @@
     - TearGasGrenade
     - Handcuffs
     - Handcuffs
-    back:
-    - MedkitCombatFilled
-    - MagazinePistolSubMachineGunAcp
-    - MagazinePistolSubMachineGunAcp
-    - CrowbarRed
-    - ClothingMaskGasERT
-    - DoorRemoteAll
-    - C4
-    - PinpointerCrew
-    - PinpointerNuclear
-    - WeaponPulsePistol
-    - StimpackMini
-    - LaserCarabinePowerCell
-    - LaserCarabinePowerCell
-    - LaserCarabinePowerCell
-    - LaserCarabinePowerCell
-
 
 #ERT Gamma Security
 
@@ -328,14 +310,12 @@
         settings: short
       job: ERTSecurity
     - type: Loadout
-      roleLoadout: [ RoleSurvivalCentcom ]
       prototypes: [ ERTSecurityGammaGear ]
     - type: RandomMetadata
       nameSegments:
       - NamesMilitaryFirst
       - NamesMilitaryLast
       nameFormat: name-format-ert
-
 
 - type: entity
   id: RandomHumanoidSpawnerERTSecurityGamma
@@ -357,7 +337,7 @@
   id: ERTSecurityGammaGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTSecurity
-    back: ClothingBackpackERTSecurity
+    back: ClothingBackpackERTSecurityGammaFilled
     shoes: ClothingShoesBootsMagAdv
     eyes: ClothingEyesHudMedSec  
     gloves: ClothingHandsGlovesCombat
@@ -377,23 +357,6 @@
     - TearGasGrenade
     - Handcuffs
     - Handcuffs
-    back:
-    - CrowbarRed
-    - ClothingMaskGasERT
-    - C4
-    - PinpointerNuclear
-    - WeaponPulsePistol
-    - MagazinePistolSubMachineGunAcp
-    - MagazinePistolSubMachineGunAcp
-    - MagazinePistolSubMachineGunAcp
-    - MedkitCombatFilled
-    - StimpackMini   
-    - LaserCarabinePowerCell
-    - LaserCarabinePowerCell
-    - LaserCarabinePowerCell
-    - LaserCarabinePowerCell
-
-
 
 ##ERT Gamma Medical
 
@@ -406,18 +369,17 @@
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
       rules: ghost-role-information-nonantagonist-rules    
-      requirements: #SS220 ghostrole-times (20h sec 10h med) start
+      requirements: 
         - !type:DepartmentTimeRequirement
           department: Security
           time: 72000
         - !type:DepartmentTimeRequirement
           department: Medical
-          time: 36000 #SS220 ghostrole-times (20h sec 10h med) end
+          time: 36000 
       raffle:
         settings: short
       job: ERTMedical
     - type: Loadout
-      roleLoadout: [ RoleSurvivalCentcom ]
       prototypes: [ ERTMedicalGammaGear ]
     - type: RandomMetadata
       nameSegments:
@@ -445,7 +407,7 @@
   id: ERTMedicalGammaGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTMedic
-    back: ClothingBackpackERTMedical
+    back: ClothingBackpackERTMedicalGammaFilled
     shoes: ClothingShoesBootsMagAdv
     eyes: ClothingEyesHudMedSec
     gloves: ClothingHandsGlovesCombat
@@ -454,41 +416,6 @@
     suitstorage: WeaponLaserCarabine
     id: ERTMedicPDA
     ears: ClothingHeadsetAltCentComm
-    belt: ClothingBeltMedical
+    belt: ClothingBeltERTGammaMedicalFilled
     pocket1: WeaponSubMachineGunSaber
     pocket2: DoubleEmergencyOxygenTankFilled
-  storage:
-    belt: 
-    - CombatMedipen
-    - CombatMedipen
-    - CombatMedipen
-    - CombatMedipen
-    - PunctAutoInjector
-    - PunctAutoInjector
-    - PunctAutoInjector
-    - PunctAutoInjector
-    - PyraAutoInjector
-    - PyraAutoInjector
-    - PyraAutoInjector
-    - PyraAutoInjector
-    - AirlossAutoInjector
-    - AirlossAutoInjector
-    - SyringeSaline
-    - SyringeSaline
-    back:
-    - BoxBodyBag
-    - StimkitCombatFilled
-    - MedicatedSuture
-    - MedicatedSuture
-    - RegenerativeMesh
-    - RegenerativeMesh
-    - CrowbarRed
-    - ClothingMaskGasERT       
-    - PinpointerCrew
-    - DefibrillatorCompact
-    - MagazinePistolSubMachineGunAcp
-    - MagazinePistolSubMachineGunAcp
-    - Hypospray
-    - LaserCarabinePowerCell
-    - LaserCarabinePowerCell
-    - LaserCarabinePowerCell
