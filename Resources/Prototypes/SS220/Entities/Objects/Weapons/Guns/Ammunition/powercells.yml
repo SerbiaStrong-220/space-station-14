@@ -118,23 +118,17 @@
     pricePerJoule: 0.15
     maxCharge: 1200
     startingCharge: 1200
+  - type: PowerCellVisuals
   - type: PowerCell
+    powerCellVisualsLevels: 4
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/laser_carabine.rsi
     layers:
-    - state: base
-    - map: [ "base" ]
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: base
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
       state: o4
       shader: unshaded
-  - type: GenericVisualizer
-    visuals:
-      enum.PowerCellFourVisual.State:
-        base:
-          Base: { state: base }
-          First: { state: o1 }
-          Second: { state: o2 }
-          Third: { state: o3 }
-          Fourth: { state: o4 }
   - type: SolutionContainerManager
     solutions:
       battery:
@@ -152,7 +146,6 @@
     tags:
       - LaserCarabinePowerCell
   - type: Appearance
-  - type: PowerCellFour
   - type: Riggable
   - type: AmmoCounter
   - type: ProjectileBatteryAmmoProvider

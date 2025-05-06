@@ -11,7 +11,10 @@ namespace Content.Shared.PowerCell;
 [RegisterComponent]
 public sealed partial class PowerCellComponent : Component
 {
-    public const int PowerCellVisualsLevels = 2;
+    //ss220 add states for power cells start
+    [DataField]
+    public int PowerCellVisualsLevels = 2;
+    //ss220 add states for power cells end
 }
 
 [Serializable, NetSerializable]
