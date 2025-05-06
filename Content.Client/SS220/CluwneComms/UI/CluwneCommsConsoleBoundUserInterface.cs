@@ -37,7 +37,7 @@ namespace Content.Client.SS220.CluwneComms.UI
 
         public void BoomButtonPressed(float boomChance)
         {
-            if (_random.Prob(boomChance))//ьфву
+            if (_random.Prob(boomChance))
             {
                 SendMessage(new CluwneCommsConsoleBoomMessage(true));
                 Close();//should be cause user most certanly will be dead, if it isn't here = errors
