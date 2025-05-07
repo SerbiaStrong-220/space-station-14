@@ -28,6 +28,7 @@
   description: A computer printed circuit board for a joke communications console.
   components:
     - type: Sprite
-      state: cpu_wizard
+      sprite: SS220/Objects/Misc/module.rsi
+      state: cpu_clown
     - type: ComputerBoard
       prototype: ComputerCluwneComms
