@@ -16,11 +16,11 @@
     - Belt
   - type: LimitedCharges
     maxCharges: 20
-    charges: 20
   - type: AutoRecharge
     rechargeDuration: 10
   - type: Tag
     tags:
     - HighRiskItem
+  - type: TrackedItem
   - type: StealTarget
     stealGroup: RCDCE

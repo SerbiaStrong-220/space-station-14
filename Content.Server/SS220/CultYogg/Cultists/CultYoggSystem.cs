@@ -73,13 +73,13 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         switch (args.Stage)
         {
-            case 0:
+            case CultYoggStage.Initial:
                 return;
-            case 1:
+            case CultYoggStage.Reveal:
                 entity.Comp.PreviousEyeColor = new Color(huAp.EyeColor.R, huAp.EyeColor.G, huAp.EyeColor.B, huAp.EyeColor.A);
                 huAp.EyeColor = Color.Green;
                 break;
-            case 2:
+            case CultYoggStage.Alarm:
                 if (_prototype.HasIndex<MarkingPrototype>(CultDefaultMarking))
                 {
                     if (!huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Special))
@@ -117,7 +117,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                     //Log.Error($"{newMarkingId} marking doesn't exist"); 
                 }
                 break;
-            case 3:
+            case CultYoggStage.God:
                 if (!TryComp<MobStateComponent>(entity, out var mobstate))
                     return;
 
@@ -357,7 +357,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         if (purifyedComp.TotalAmountOfHolyWater >= purifyedComp.AmountToPurify)
         {
             //After purifying effect
-            _audio.PlayEntity(purifyedComp.PurifyingCollection, entity, entity);
+            _audio.PlayPvs(purifyedComp.PurifyingCollection, entity);
 
             //Removing stage visuals, cause later component will be removed
             var ev = new CultYoggDeleteVisualsEvent();

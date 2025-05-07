@@ -9,3 +9,9 @@ id-card-console-window-job-selection-label = Предустановки долж
 access-id-card-console-component-no-hands-error = У вас нет рук.
 id-card-console-privileged-id = Основная ID
 id-card-console-target-id = Целевая ID
+
+# SS220-ID console extended access button
+id-card-console-window-full-access-button = Полный
+id-card-console-window-full-access-job-title-postfix = +
+id-card-console-window-extended-access-button = Расширенный
+id-card-console-window-extended-access-job-title-postfix = +

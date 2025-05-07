@@ -16,7 +16,7 @@
     - id: GiftsVendingRestock
 
 # Game Rules
-    
+
 - type: entity
   id: CargoGiftsBase
   parent: BaseGameRule
@@ -213,45 +213,4 @@
       SecurityRiot: 2
       SecurityRestraints: 2
       SecurityNonLethal: 2
-
-#ss220-gamma
-- type: entity
-  id: GiftsGamma
-  parent: CargoGiftsBase #SS220 GiftsGamma event fix
-  categories: [ GameRules ]
-  components:
-  #SS220 GiftsGamma event fix begin
-  - type: StationEvent
-    cannotStartRandomly: true
-  #SS220 GiftsGamma event fix end
-  - type: CargoGiftsRule
-    description: cargo-gift-dest-gamma
-    sender: cargo-gift-default-sender
-    dest: cargo-gift-dest-all
-    gifts:
-      SecurityArmor: 2
-      SecurityHelmet: 2
-      ArmorySmg: 3
-      ArmoryShotgun: 3
-#ss220-gammaend
-
-#ss220 cooking supplies begin
-- type: entity
-  id: GiftsKitchen
-  parent: CargoGiftsBase
-  components:
-  - type: StationEvent
-    weight: 6
-    duration: 120
-    minimumPlayers: 30
-    earliestStart: 20
-  - type: CargoGiftsRule
-    description: cargo-gift-kitchen
-    dest: cargo-gift-dest-kitchen
-    gifts:
-      MeatCrate: 1
-      ExoticMeatCrate: 1
-      FoodDinnerware: 1
-      FoodCook: 1
-      CrateVendingMachineRestockChefvend: 1
-#ss220 cooking supplies end
+      SecurityNonlethalThrowables: 1

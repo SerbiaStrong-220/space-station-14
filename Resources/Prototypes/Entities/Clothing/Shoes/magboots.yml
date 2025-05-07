@@ -23,6 +23,10 @@
   - type: ComponentToggler
     components:
     - type: NoSlip
+  - type: ItemTogglePrefix
+    prefixOn: on
+  - type: ToggleClothingPrefix
+    prefixOn: on
   - type: Magboots
   - type: ClothingSpeedModifier
     walkModifier: 0.85
@@ -62,6 +66,9 @@
     tags:
     - WhitelistChameleon
     - HighRiskItem
+  #ss220 pinpointer ui add start
+  - type: TrackedItem
+  #ss220 pinpointer ui add end
   - type: StaticPrice
     price: 750
   - type: StealTarget

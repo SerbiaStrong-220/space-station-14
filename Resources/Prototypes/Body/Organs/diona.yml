@@ -24,6 +24,9 @@
   - type: FlavorProfile
     flavors:
       - people
+  - type: Tag # SS220-TaRaKaCheCki start
+    tags:
+      - Trash # SS220-TaRaKaCheCki end
 
 - type: entity
   id: OrganDionaBrain
@@ -170,6 +173,14 @@
   suffix: Brain
   description: Contains the brain of a formerly fully-formed Diona. Killing this would kill the Diona forever. You monster.
   components:
+  #SS220 dionalang begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+    - id: Rootspeak
+      canSpeak: true
+  #ss220 DionaLang end
   - type: IsDeadIC
   - type: Body
     prototype: AnimalNymphBrain

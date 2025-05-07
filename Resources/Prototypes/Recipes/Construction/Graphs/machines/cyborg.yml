@@ -35,7 +35,7 @@
 #SS220 ClownMimecyborg start
   - node: cyborg
     entity: BorgChassisSelectable
-    edges: 
+    edges:
     - to: clownmimecyborg
       conditions:
         - !type:ContainerEmpty
@@ -50,7 +50,7 @@
             sprite: Objects/Fun/clownrecorder.rsi
             state: icon
           doAfter: 2
-        - tag: Bread
+        - tag: Baguette
           name: Baguette
           doAfter: 2
         - tag: Crayon
@@ -85,6 +85,9 @@
           doAfter: 2
         - tag: ClothingMaskMime
           name: MimeMask
+          doAfter: 2
+        - tag: BananiumHorn
+          name: BananiumHorn
           doAfter: 2
 #SS220 ClownMimecyborg end
 

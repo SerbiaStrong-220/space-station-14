@@ -21,6 +21,7 @@ namespace Content.Client.Access.UI
         private readonly IdCardConsoleBoundUserInterface _owner;
 
         private AccessLevelControl _accessButtons = new();
+        private List<ProtoId<AccessLevelPrototype>> _extendedAccess = new(); // SS220-ID console extended access button
         private readonly List<string> _jobPrototypeIds = new();
 
         private string? _lastFullName;
@@ -31,13 +32,14 @@ namespace Content.Client.Access.UI
         private static ProtoId<JobPrototype> _defaultJob = "Passenger";
 
         public IdCardConsoleWindow(IdCardConsoleBoundUserInterface owner, IPrototypeManager prototypeManager,
-            List<ProtoId<AccessLevelPrototype>> accessLevels)
+            List<ProtoId<AccessLevelPrototype>> accessLevels, List<ProtoId<AccessLevelPrototype>> extendedAccess) // SS220-ID console extended access button | Add extendedAccess argument
         {
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
             _logMill = _logManager.GetSawmill(SharedIdCardConsoleSystem.Sawmill);
 
             _owner = owner;
+            _extendedAccess = extendedAccess; // SS220-ID console extended access button
 
             FullNameLineEdit.OnTextEntered += _ => SubmitData();
             FullNameLineEdit.OnTextChanged += _ =>
@@ -70,6 +72,8 @@ namespace Content.Client.Access.UI
             JobPresetOptionButton.OnItemSelected += SelectJobPreset;
             _accessButtons.Populate(accessLevels, prototypeManager);
             AccessLevelControlContainer.AddChild(_accessButtons);
+            ExtendedAccessButton.OnPressed += _ => AddExtendedAccess(); // SS220-ID console extended access button
+            FullAccessButton.OnPressed += _ => AddFullAccess(); // SS220-ID console extended access button
 
             foreach (var (id, button) in _accessButtons.ButtonsList)
             {
@@ -188,7 +192,8 @@ namespace Content.Client.Access.UI
                                        new List<ProtoId<AccessLevelPrototype>>());
 
             var jobIndex = _jobPrototypeIds.IndexOf(state.TargetIdJobPrototype);
-            // If the job index is < 0 that means they don't have a job registered in the station records.
+            // If the job index is < 0 that means they don't have a job registered in the station records
+            // or the IdCardComponent's JobPrototype field.
             // For example, a new ID from a box would have no job index.
             if (jobIndex < 0)
             {
@@ -201,6 +206,42 @@ namespace Content.Client.Access.UI
             _lastJobTitle = state.TargetIdJobTitle;
             _lastJobProto = state.TargetIdJobPrototype;
         }
+
+        // SS220-ID console extended access button-Begin
+        private void AddExtendedAccess()
+        {
+            foreach (var access in _extendedAccess)
+            {
+                if (_accessButtons.ButtonsList.TryGetValue(access, out var button) && !button.Disabled)
+                {
+                    button.Pressed = true;
+                }
+            }
+
+            var postfix = Loc.GetString("id-card-console-window-extended-access-job-title-postfix");
+            if (!JobTitleLineEdit.Text.EndsWith(postfix))
+                JobTitleLineEdit.Text += postfix;
+
+            SubmitData();
+        }
+
+        private void AddFullAccess()
+        {
+            foreach (var button in _accessButtons.ButtonsList.Values)
+            {
+                if (button.Disabled)
+                    continue;
+
+                button.Pressed = true;
+            }
+
+            var postfix = Loc.GetString("id-card-console-window-full-access-job-title-postfix");
+            if (!JobTitleLineEdit.Text.EndsWith(postfix))
+                JobTitleLineEdit.Text += postfix;
+
+            SubmitData();
+        }
+        // SS220-ID console extended access button-End
 
         private void SubmitData()
         {

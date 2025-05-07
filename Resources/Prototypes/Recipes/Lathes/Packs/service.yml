@@ -19,6 +19,7 @@
   - FoodPlateMuffinTin
   - FoodKebabSkewer
   - SprayBottle
+  - LightReplacer
   - MopItem
   - Holoprojector
   - WetFloorSign
@@ -44,6 +45,7 @@
   - ClothingBackpackWaterTank
   - MegaSprayBottle
   - TrashBagAdvanced #SS220 Borg Modules
+  - PdaIdPainterMachineCircuitboard #ss220 add pdaidpainter
 
 - type: latheRecipePack
   id: Instruments

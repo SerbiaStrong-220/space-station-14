@@ -9,6 +9,9 @@
     layers:
     - state: icon
   - type: HandTeleporter
+  #ss220 pinpointer ui add start
+  - type: TrackedItem
+  #ss220 pinpointer ui add end
   - type: Tag
     tags:
     - HighRiskItem
@@ -28,5 +31,7 @@
     - state: icon
       color: green
   - type: HandTeleporter
+    allowPortalsOnDifferentGrids: true
+    allowPortalsOnDifferentMaps: true
     firstPortalPrototype: PortalGatewayBlue
     secondPortalPrototype: PortalGatewayOrange

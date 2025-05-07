@@ -21,9 +21,11 @@
     - suitStorage
   - type: AmmoCounter
   - type: Gun
-    minAngle: 2
-    maxAngle: 16
-    fireRate: 8
+    #220 SG Angle Updates begin
+    minAngle: 11
+    maxAngle: 20
+    fireRate: 7.5
+    #220 SG Angle Updates end
     burstFireRate: 8
     angleIncrease: 3
     angleDecay: 16
@@ -68,7 +70,7 @@
   name: Atreides
   parent: [BaseWeaponSubMachineGun]
   id: WeaponSubMachineGunAtreides
-  description: Pla-ket-ket-ket-ket! Uses .35 auto ammo.
+  description: A rare machine pistol hailing from the Corporate Wars. Its extremely high fire rate and compact profile make it useful in close quarters combat. Despite its age, it is in remarkably good condition. Feeds from .35 SMG magazines.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/atreides.rsi
@@ -78,7 +80,7 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Gun
-    fireRate: 10
+    fireRate: 8 #220 SG Angle Updates
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
   - type: MagazineVisuals
@@ -91,7 +93,7 @@
   name: C-20r submachine gun
   parent: [BaseWeaponSubMachineGun]
   id: WeaponSubMachineGunC20r
-  description: A firearm that is often used by the infamous nuclear operatives. Uses .35 auto ammo.
+  description: A classic and widespread submachine gun, infamous for its use by the Gorlex Marauders. One of the first homegrown Waffle Corp. designs, it remains in service today. Feeds from .35 SMG magazines.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
@@ -105,12 +107,16 @@
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -16
+    #220 SG Angle Updates begin
+    minAngle: -2
+    maxAngle: -13
+    #220 SG Angle Updates end
   - type: Gun
-    minAngle: 21
-    maxAngle: 32
-    shotsPerBurst: 5
+    #220 SG Angle Updates begin
+    minAngle: 17
+    maxAngle: 29
+    shotsPerBurst: 6
+    #220 SG Angle Updates end
     availableModes:
     - Burst
     - FullAuto
@@ -127,9 +133,9 @@
 
 - type: entity
   name: Drozd
-  parent: [BaseWeaponSubMachineGun]
+  parent: [BaseWeaponSubMachineGun, BaseSecurityContraband]
   id: WeaponSubMachineGunDrozd
-  description: An excellent fully automatic Heavy SMG.
+  description: A modern SMG manufactured by Nanotrasen’s Small Arms Division. It features an exceptional rate of fire in burst mode, useful for holding defensive angles or engaging hostiles at longer ranges. Feeds from .35 SMG magazines.
   components:
     - type: Sprite
       sprite: Objects/Weapons/Guns/SMGs/drozd.rsi
@@ -143,12 +149,16 @@
     - type: Wieldable
       unwieldOnUse: false
     - type: GunWieldBonus
-      minAngle: -19
-      maxAngle: -16
+      #220 SG Angle Updates begin
+      minAngle: -2
+      maxAngle: -13
+      #220 SG Angle Updates end
     - type: Gun
-      minAngle: 21
-      maxAngle: 32
-      fireRate: 6
+      #220 SG Angle Updates begin
+      minAngle: 17
+      maxAngle: 29
+      fireRate: 6.5
+      #220 SG Angle Updates end
       burstFireRate: 12
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
@@ -185,9 +195,9 @@
 
 - type: entity
   name: WT550
-  parent: [ BaseWeaponSubMachineGun]
+  parent: [ BaseWeaponSubMachineGun, BaseSecurityContraband ]
   id: WeaponSubMachineGunWt550
-  description: An excellent SMG, produced by NanoTrasen's Small Arms Division. Uses .35 auto ammo.
+  description: A truly unique firearm, the WT550 was designed by Nanotrasen's Small Arms Division as a compact submachine gun fully controllable with one hand. It contains an exotic internal recoil buffer and feeds from special top-mounted .35 magazines.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/wt550.rsi
@@ -207,9 +217,11 @@
   - type: ChamberMagazineAmmoProvider
     boltClosed: null
   - type: Gun
-    fireRate: 5.5
-    minAngle: 1
-    maxAngle: 6
+    #220 SG Angle Updates begin
+    fireRate: 6.5
+    minAngle: 17
+    maxAngle: 27
+    #220 SG Angle Updates end
     angleIncrease: 1.5
     angleDecay: 6
     selectedMode: FullAuto

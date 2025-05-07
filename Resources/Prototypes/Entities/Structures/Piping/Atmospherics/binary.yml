@@ -39,6 +39,9 @@
   - type: Rotatable
   - type: Transform
     noRot: false
+  - type: SubFloorHide
+    visibleLayers:
+    - enum.SubfloorLayers.FirstLayer
   - type: Sprite
     sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     layers:
@@ -96,6 +99,9 @@
     - type: Rotatable
     - type: Transform
       noRot: false
+    - type: SubFloorHide
+      visibleLayers:
+      - enum.SubfloorLayers.FirstLayer
     - type: Sprite
       sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
       layers:
@@ -116,6 +122,9 @@
     - type: StationAiWhitelist #SS220 AI Access
     - type: GasVolumePump
       enabled: false
+    - type: ActivatableUI
+      key: enum.GasVolumePumpUiKey.Key
+    - type: ActivatableUIRequiresAnchor
     - type: UserInterface
       interfaces:
         enum.GasVolumePumpUiKey.Key:
@@ -151,6 +160,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: SubFloorHide
+      visibleLayers:
+      - enum.SubfloorLayers.FirstLayer
     - type: Sprite
       sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
       layers:
@@ -186,6 +198,9 @@
     mode: SnapgridCenter
   components:
     # TODO ATMOS: Give unique sprite.
+    - type: SubFloorHide
+      visibleLayers:
+      - enum.SubfloorLayers.FirstLayer
     - type: Sprite
       sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
       layers:
@@ -239,6 +254,9 @@
     mode: SnapgridCenter
   components:
   - type: StationAiWhitelist
+  - type: SubFloorHide
+    visibleLayers:
+    - enum.SubfloorLayers.FirstLayer
   - type: Sprite
     sprite: SS220/Structures/Piping/Atmospherics/pump.rsi #ss220 engineering-update-atmos
     layers:
@@ -302,6 +320,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: SubFloorHide
+      visibleLayers:
+      - enum.SubfloorLayers.FirstLayer
     - type: Sprite
       sprite: SS220/Structures/Piping/Atmospherics/gascanisterport.rsi #ss220 engineering-update-atmos
       layers:
@@ -336,6 +357,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: SubFloorHide
+      visibleLayers:
+      - enum.SubfloorLayers.FirstLayer
     - type: Sprite
       drawdepth: FloorObjects
       sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
@@ -503,6 +527,9 @@
   id: HeatExchangerBend
   suffix: Bend
   components:
+    - type: SubFloorHide
+      visibleLayers:
+      - enum.SubfloorLayers.FirstLayer
     - type: Sprite
       layers:
       - sprite: Structures/Piping/Atmospherics/pipe.rsi

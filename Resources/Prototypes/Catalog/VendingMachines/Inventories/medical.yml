@@ -5,7 +5,7 @@
     Brutepack: 5
     Ointment: 5
     Bloodpack: 5
-    EpinephrineChemistryBottle: 3
+    ChemistryBottleEpinephrine: 3
     Syringe: 5
     BoxBottle: 3
     ClothingEyesHudMedical: 2
@@ -13,3 +13,7 @@
     CigPackMED: 1 #SS220 Cigarettes
   contrabandInventory:
     FoodApple: 1
+  #ss220 mini stimpack for nanomed start
+  emaggedInventory:
+    StimpackMini: 1
+  #ss220 mini stimpack for nanomed end

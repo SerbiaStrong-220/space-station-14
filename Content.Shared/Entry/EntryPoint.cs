@@ -4,6 +4,7 @@ using System.Linq;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.IoC;
 using Content.Shared.Maps;
+using Content.Shared.SS220.Language;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
@@ -46,6 +47,7 @@ namespace Content.Shared.Entry
 
             InitTileDefinitions();
             IoCManager.Resolve<MarkingManager>().Initialize();
+            IoCManager.Resolve<LanguageManager>().Initialize(); // SS220 languages
 
 #if DEBUG
             var configMan = IoCManager.Resolve<IConfigurationManager>();

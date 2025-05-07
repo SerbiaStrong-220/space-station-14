@@ -22,6 +22,11 @@
   description: Clown's pet parrot.
   suffix: Роль
   components:
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: SolCommon
+      canSpeak: false
   - type: InteractionPopup
     successChance: 1
   - type: Grammar
@@ -58,6 +63,11 @@
       sprite: SS220/Mobs/Animals/cuckadoo.rsi
   - type: InteractionPopup
     successChance: 1
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: SolCommon
+      canSpeak: false
   - type: Grammar
     attributes:
       proper: true

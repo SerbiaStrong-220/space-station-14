@@ -93,8 +93,14 @@
     bloodlossModifier: -4
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
     healingEndSound:
       path: "/Audio/Items/Medical/brutepack_end.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
   - type: Stack
     stackType: Cloth
     baseLayer: base
@@ -762,7 +768,7 @@
   suffix: Full
   components:
   - type: Sprite
-    sprite: Objects/Materials/hide.rsi
+    sprite: SS220/Objects/Materials/hide.rsi #SS220-goliathresprite
     layers:
     - state: goliath_hide
       map: [ "base" ]
@@ -781,7 +787,7 @@
   - type: Item
     size: Large
     heldPrefix: goliathhide
-    sprite: Objects/Materials/hide.rsi
+    sprite: SS220/Objects/Materials/hide.rsi #SS220-goliathresprite
     shape:
     - 0,0,2,2
 

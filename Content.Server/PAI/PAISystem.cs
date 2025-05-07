@@ -8,7 +8,10 @@ using Content.Shared.PAI;
 using Content.Shared.Popups;
 using Robust.Shared.Random;
 using System.Text;
+using Content.Shared.Instruments;
 using Robust.Shared.Player;
+using Content.Server.SS220.Language;
+using Content.Shared.SS220.Language.Components; // SS220-Add-Languages
 
 namespace Content.Server.PAI;
 
@@ -19,6 +22,7 @@ public sealed class PAISystem : SharedPAISystem
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ToggleableGhostRoleSystem _toggleableGhostRole = default!;
+    [Dependency] private readonly LanguageSystem _language = default!; // SS220 Languages
 
     /// <summary>
     /// Possible symbols that can be part of a scrambled pai's name.
@@ -37,6 +41,8 @@ public sealed class PAISystem : SharedPAISystem
 
     private void OnUseInHand(EntityUid uid, PAIComponent component, UseInHandEvent args)
     {
+        // Not checking for Handled because ToggleableGhostRoleSystem already marks it as such.
+
         if (!TryComp<MindContainerComponent>(uid, out var mind) || !mind.HasMind)
             component.LastUser = args.User;
     }
@@ -55,6 +61,11 @@ public sealed class PAISystem : SharedPAISystem
         // Cause then you could remotely figure out information about the owner's equipped items.
 
         _metaData.SetEntityName(uid, val);
+
+        // SS220-Add-Languages begin
+        if (TryComp<LanguageComponent>(component.LastUser.Value, out var languageComp))
+            _language.AddLanguagesFromSource((component.LastUser.Value, languageComp), uid);
+        // SS220-Add-Languages end
     }
 
     private void OnMindRemoved(EntityUid uid, PAIComponent component, MindRemovedMessage args)
@@ -117,5 +128,12 @@ public sealed class PAISystem : SharedPAISystem
             if (proto != null)
                 _metaData.SetEntityName(uid, proto.Name);
         }
+        // SS220-Add-Languages begin
+        if (TryComp<LanguageComponent>(uid, out var languageComp))
+        {
+            _language.ClearLanguages((uid, languageComp));
+            _language.AddLanguages((uid, languageComp), [_language.UniversalLanguage, _language.GalacticLanguage], true);
+        }
+        // SS220-Add-Languages end
     }
 }

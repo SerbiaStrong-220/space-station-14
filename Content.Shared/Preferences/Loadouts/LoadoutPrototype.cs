@@ -11,7 +11,7 @@ namespace Content.Shared.Preferences.Loadouts;
 public sealed partial class LoadoutPrototype : IPrototype, IEquipmentLoadout
 {
     [IdDataField]
-    public string ID { get; } = string.Empty;
+    public string ID { get; private set; } = string.Empty;
 
     /*
      * You can either use an existing StartingGearPrototype or specify it inline to avoid bloating yaml.
@@ -32,6 +32,9 @@ public sealed partial class LoadoutPrototype : IPrototype, IEquipmentLoadout
     /// </summary>
     [DataField]
     public List<LoadoutEffect> Effects = new();
+
+    [DataField]
+    public List<LoadoutEffect>? SponsorTierLoadoutEffects;
 
     /// <inheritdoc />
     [DataField]

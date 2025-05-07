@@ -69,7 +69,7 @@
     energy: 0
   - type: LightBehaviour
     behaviours:
-      - !type:RandomizeBehaviour 
+      - !type:RandomizeBehaviour
         id: exorcism_performance
         interpolate: Linear
         isLooped: true
@@ -110,10 +110,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-BibleNecronomicon-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-BibleNecronomicon-service
       jobRequired:
         - Chaplain

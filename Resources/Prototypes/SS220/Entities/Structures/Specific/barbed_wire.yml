@@ -72,6 +72,9 @@
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
     - type: DamageContacts
+      ignoreWhitelist:
+        tags:
+          - MiGoInAstral
       damage:
         types:
           Slash: 5
@@ -79,6 +82,9 @@
     - type: SpeedModifierContacts
       walkSpeedModifier: 0.2
       sprintSpeedModifier: 0.2
+      ignoreWhitelist:
+        tags:
+          - MiGoInAstral
     - type: Appearance
     - type: GenericVisualizer
       visuals:
@@ -94,7 +100,8 @@
     - type: StepTrigger
       intersectRatio: 0.01
     - type: Slippery
-      paralyzeTime: 0
+      slipData:
+        paralyzeTime: 0
       slipSound:
         path: "/Audio/Effects/Fluids/blood2.ogg"
         params:

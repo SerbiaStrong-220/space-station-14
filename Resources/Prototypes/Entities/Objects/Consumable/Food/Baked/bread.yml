@@ -685,6 +685,11 @@
           Quantity: 1
         - ReagentId: Blackpepper
           Quantity: 1
+#SS220 tag start
+  - type: Tag
+    tags:
+    - Baguette
+#SS220 tag start
   - type: Clothing
     slots: [ BELT ]
     equippedPrefix: baguette
@@ -701,6 +706,15 @@
       types:
         Blunt: 1 # bonk
 # Tastes like France.
+# SS220 Throwable Changes begin
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 1
+# SS220 Throwable Changes end
 
 - type: entity
   name: cotton baguette
@@ -944,6 +958,12 @@
     flavors:
     - meaty
     - bread
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 languages tweaks end
   - type: SliceableFood
     slice: FoodBreadSausageSlice
   - type: SolutionContainerManager
