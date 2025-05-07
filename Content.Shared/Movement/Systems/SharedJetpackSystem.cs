@@ -37,6 +37,8 @@ public abstract class SharedJetpackSystem : EntitySystem
         SubscribeLocalEvent<JetpackComponent, ToggleJetpackEvent>(OnJetpackToggle);
         SubscribeLocalEvent<JetpackComponent, CanWeightlessMoveEvent>(OnJetpackCanWeightlessMove);
 
+        SubscribeLocalEvent<JetpackComponent, EntGotInsertedIntoContainerMessage>(OnInsertInContainer); //ss220 fix activated jetpack in container
+
         SubscribeLocalEvent<JetpackUserComponent, CanWeightlessMoveEvent>(OnJetpackUserCanWeightless);
         SubscribeLocalEvent<JetpackUserComponent, EntParentChangedMessage>(OnJetpackUserEntParentChanged);
         SubscribeLocalEvent<JetpackUserComponent, MagbootsUpdateStateEvent>(OnMagbootsUpdateState); //SS220 Magboots with jet fix
@@ -55,6 +57,14 @@ public abstract class SharedJetpackSystem : EntitySystem
     {
         args.CanMove = true;
     }
+
+    //ss220 fix activated jetpack in container start
+    private void OnInsertInContainer(Entity<JetpackComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    {
+        _popup.PopupClient(Loc.GetString("jetpack-to-grid"), ent.Owner, ent.Comp.User);
+        SetEnabled(ent.Owner, ent.Comp, false, ent.Comp.User);
+    }
+    //ss220 fix activated jetpack in container end
 
     private void OnJetpackUserGravityChanged(ref GravityChangedEvent ev)
     {
@@ -104,10 +114,26 @@ public abstract class SharedJetpackSystem : EntitySystem
             _physics.SetBodyStatus(user, physics, BodyStatus.InAir);
 
         userComp.Jetpack = jetpackUid;
+
+        //ss220 fix activated jetpack in container start
+        if (!TryComp<JetpackComponent>(jetpackUid, out var jetpackComponent))
+            return;
+
+        jetpackComponent.User = user;
+        //ss220 fix activated jetpack in container end
     }
 
     private void RemoveUser(EntityUid uid)
     {
+        //ss220 fix activated jetpack in container start
+        if (!TryComp<JetpackUserComponent>(uid, out var jetpackUser))
+            return;
+
+        if (!TryComp<JetpackComponent>(jetpackUser.Jetpack, out var jetpackComponent))
+            return;
+
+        jetpackComponent.User = null;
+        //ss220 fix activated jetpack in container end
         if (!RemComp<JetpackUserComponent>(uid))
             return;
 
