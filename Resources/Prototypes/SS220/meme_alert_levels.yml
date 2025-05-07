@@ -13,7 +13,7 @@
   levelDetails:
     announcement: joke-alert-level-hehelta-announcement
     sound:
-      path: /Audio/Misc/delta.ogg
+      path: /Audio/SS220/Announcements/hehelta.ogg
       params:
         volume: -6
     color: DarkRed
