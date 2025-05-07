@@ -22,7 +22,7 @@ public sealed partial class StealthProviderComponent : Component
     public List<Entity<ProvidedStealthComponent>> ProvidedEntities = new List<Entity<ProvidedStealthComponent>>();
 }
 [ByRefEvent]
-public record struct ChangeStealthProviderEnability(bool Status)
+public record struct StealthProviderStatusChanged(bool Enabled)
 {
-    public readonly bool Status = Status;
+    public readonly bool Enabled = Enabled;
 }

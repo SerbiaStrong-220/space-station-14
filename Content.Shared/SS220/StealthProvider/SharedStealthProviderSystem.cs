@@ -16,12 +16,12 @@ public sealed class SharedStealthProviderSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<StealthProviderComponent, ChangeStealthProviderEnability>(OnEnabilityChange);
+        SubscribeLocalEvent<StealthProviderComponent, StealthProviderStatusChanged>(OnEnabilityChange);
     }
 
-    private void OnEnabilityChange(Entity<StealthProviderComponent> ent, ref ChangeStealthProviderEnability args)
+    private void OnEnabilityChange(Entity<StealthProviderComponent> ent, ref StealthProviderStatusChanged args)
     {
-        ent.Comp.Enabled = args.Status;
+        ent.Comp.Enabled = args.Enabled;
 
         if (!ent.Comp.Enabled)
             DisableAllProvidedStealth(ent);

@@ -80,7 +80,7 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
         _lights.SetEnabled(ent, false, pointLightComponent);
         SetActivated(ent, false);
 
-        var ev = new ChangeStealthProviderEnability(false);
+        var ev = new StealthProviderStatusChanged(false);
         RaiseLocalEvent(ent, ref ev);
 
         return true;
@@ -96,7 +96,7 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
         _lights.SetEnabled(ent, true, pointLightComponent);
         SetActivated(ent, true);
 
-        var ev = new ChangeStealthProviderEnability(true);
+        var ev = new StealthProviderStatusChanged(true);
         RaiseLocalEvent(ent, ref ev);
 
         return true;
