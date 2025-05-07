@@ -16,8 +16,6 @@ using Robust.Shared.Prototypes;
 using Content.Shared.Projectiles;
 using System.Linq;
 using Content.Shared.Database;
-using Content.Shared.Mobs;
-using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
