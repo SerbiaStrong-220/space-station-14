@@ -16,6 +16,9 @@ using Robust.Shared.Prototypes;
 using Content.Shared.Projectiles;
 using System.Linq;
 using Content.Shared.Database;
+using Content.Shared.Mobs;
+using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Components;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -154,20 +157,16 @@ public abstract partial class SharedGunSystem
     ///SS220-new-feature kus start
     private void OnGetVerbs(Entity<GunComponent> entity, ref GetVerbsEvent<Verb> args)
     {
-        // Добавляю возможность убиться ко всему маленькому стрелковому оружию, кроме игрушек
-        if (TryComp<ItemComponent>(entity, out var item) && (!entity.Comp.CanSuicide && _item.GetSizePrototype(item.Size).Weight <= 3 && !entity.Comp.ClumsyProof))
+        // Добавляю возможность застрелиться ко всему маленькому стрелковому оружию
+        if (TryComp<ItemComponent>(entity, out var item) && (!entity.Comp.CanSuicide && _item.GetSizePrototype(item.Size).Weight <= 3))
             entity.Comp.CanSuicide = true;
-
         if (!args.CanAccess || !args.CanInteract || !entity.Comp.CanSuicide)
             return;
-
         var user = args.User;
         if (!_hands.IsHolding(user, entity, out _))
             return;
-
         if (!TryComp<GunComponent>(entity, out var guncomp) || !CanShoot(guncomp))
             return;
-
         Verb verb = new()
         {
             Act = () =>
@@ -180,12 +179,10 @@ public abstract partial class SharedGunSystem
                     NeedHand = true,
                     Broadcast = true
                 };
-
                 if (_doAfter.TryStartDoAfter(doAfter))
                 {
                     PopupSystem.PopupPredicted(Loc.GetString("suicide-start-popup-self",
                             ("weapon", MetaData(entity).EntityName)), user, user);
-
                     PopupSystem.PopupEntity(Loc.GetString("suicide-start-popup-others",
                             ("user", MetaData(user).EntityName),
                             ("weapon", MetaData(entity).EntityName)), user, Filter.PvsExcept(user), true);
@@ -199,77 +196,72 @@ public abstract partial class SharedGunSystem
 
     private void OnDoSuicideComplete(SuicideDoAfterEvent args)
     {
-
         if (!_netManager.IsServer)
             return;
-
         var user = args.User;
-
         if (args.Cancelled || args.Handled || args.Used == null)
         {
             PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, user);
             return;
         }
-
         var weapon = args.Used.Value;
-
         if (!_hands.IsHolding(user, weapon, out _))
         {
             PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, user);
             return;
         }
-
         if (!TryComp<GunComponent>(weapon, out var guncomp))
         {
             PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, user);
             return;
         }
-
         var coordsFrom = Transform(weapon).Coordinates;
         var coordsTo = new EntityCoordinates(user, new Vector2(coordsFrom.X + 1f, coordsFrom.Y));
         var ev = new TakeAmmoEvent(1, new List<(EntityUid? Entity, IShootable Shootable)>(), coordsFrom, null);
         RaiseLocalEvent(weapon, ev);
         var damage = new DamageSpecifier();
-        var damageType = "";
-
+        var maxHealth = 200;
         if (ev.Ammo.Count == 0)
             return;
-
         /// В текущей реализации можно застрелиться из условново МК с любыми патронами.
         /// Смерть не случиться если их урон < 4, это травматические, учебные...
         /// Для нанесения смертельного урона используеться наибольший тип урона в патроне.
-
-        // Лазеры
-        if (ev.Ammo[0].Shootable is HitscanPrototype hitscan
-            && hitscan.Damage?.DamageDict != null
-            && hitscan.Damage.DamageDict.Count > 0)
-            damageType = hitscan.Damage?.DamageDict?.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key ?? "";
-        // Револьверы
-        else if (ev.Ammo[0].Entity is { } ent
-            && TryComp<ProjectileComponent>(ent, out var projectile)
-            && (projectile.Damage?.DamageDict != null
-            && projectile.Damage.DamageDict.Count > 0))
-            damageType = projectile.Damage?.DamageDict?.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key ?? "";
-        // Патрон в патроннике
-        else if (ev.Ammo[0].Entity is { } ent2
-            && TryComp<CartridgeAmmoComponent>(ent2, out var cartridgeComp)
-            && ProtoManager.TryIndex<EntityPrototype>((cartridgeComp).Prototype.Id, out var protoId)
-            && (ProtoManager.TryIndex<EntityPrototype>(protoId, out var protoPrototype))
-            && protoPrototype.Components.TryGetValue("Projectile", out var projectileReg)
-            && projectileReg.Component is ProjectileComponent projectileComponent
-            && (projectileComponent.Damage?.DamageDict != null
-            && projectileComponent.Damage.DamageDict.Count > 0))
-            damageType = projectileComponent.Damage?.DamageDict?.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key ?? "";
-
-        damage.DamageDict.Add(damageType, 200);
+        var ammo = ev.Ammo[0];
+        string? damageType = null;
+        switch (ammo.Shootable)
+        {
+            case HitscanPrototype hitscan: // Для лазеров/хитсканов
+                if (hitscan.Damage?.DamageDict != null)
+                {
+                    damageType = hitscan.Damage.DamageDict.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key;
+                }
+                break;
+            case CartridgeAmmoComponent cartridge: // Для патронов в магазине
+                if (ProtoManager.TryIndex<EntityPrototype>(cartridge.Prototype.Id, out var prototype)
+                    && prototype.TryGetComponent<ProjectileComponent>(out var projectile, EntityManager.ComponentFactory))
+                {
+                    damageType = projectile.Damage?.DamageDict?.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key;
+                }
+                break;
+            case AmmoComponent ammoComp: // Для револьверов
+                if (ammo.Entity is { } ent && TryComp<ProjectileComponent>(ent, out var projectile2))
+                {
+                    damageType = projectile2.Damage?.DamageDict?.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key;
+                }
+                break;
+        }
+        damageType ??= "";
+        if (TryComp<MobThresholdsComponent>(user, out var thresholds))
+            maxHealth = ((int)thresholds.Thresholds.Last().Key);
         Shoot(weapon, guncomp, ev.Ammo, coordsFrom, coordsTo, out _);
         if (damageType != "")
         {
+            damage.DamageDict.Add(damageType, maxHealth);
             var weaponName = ToPrettyString(weapon);
             var shooter = ToPrettyString(user);
             Logs.Add(LogType.Damaged, $"{shooter: shooter} застрелился из {weaponName:weapon}, нанесено {damage.DamageDict.FirstOrNull(): damage}");
+            Timer.Spawn(200, () => Damageable.TryChangeDamage(user, damage, true));
         }
-        Timer.Spawn(200, () => Damageable.TryChangeDamage(user, damage, true));
         args.Handled = true;
     }
     ///SS220-new-feature kus end
