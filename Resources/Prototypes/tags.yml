@@ -1496,9 +1496,4 @@
   id: MiGoInAstral
 # ss220 migo damage in astral fix end
 
-# ss220 medkit fix begin
-- type: Tag
-  id: MaskBreath
-# ss220 medkit fix end
-
 # ALPHABETICAL
