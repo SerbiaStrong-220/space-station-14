@@ -163,7 +163,6 @@
       Steel: 50
       Plastic: 50
 
-
 - type: entity
   parent: ClothingMaskBreathMedical
   id: ClothingMaskBreathMedicalSecurity
