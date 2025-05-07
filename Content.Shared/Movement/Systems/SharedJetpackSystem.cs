@@ -10,6 +10,7 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
+using Content.Shared.Storage;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -61,6 +62,9 @@ public abstract class SharedJetpackSystem : EntitySystem
     //ss220 fix activated jetpack in container start
     private void OnInsertInContainer(Entity<JetpackComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
+        if(!HasComp<StorageComponent>(args.Container.Owner))
+            return;
+
         _popup.PopupClient(Loc.GetString("jetpack-to-grid"), ent.Owner, ent.Comp.User);
         SetEnabled(ent.Owner, ent.Comp, false, ent.Comp.User);
     }
