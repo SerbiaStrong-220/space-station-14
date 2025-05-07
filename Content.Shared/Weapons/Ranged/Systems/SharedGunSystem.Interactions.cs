@@ -239,67 +239,44 @@ public abstract partial class SharedGunSystem
             return;
 
         /// В текущей реализации можно застрелиться из условново МК с любыми патронами.
-        /// Смерть не случиться если их урон < 4, травматические, учебные...
-        /// Для нанесения смертельного урона используеться 1 наибольший тип урона в патроне.
+        /// Смерть не случиться если их урон < 4, это травматические, учебные...
+        /// Для нанесения смертельного урона используеться наибольший тип урона в патроне.
 
-        // Магазинн патроны
-        if (ev.Ammo[0].Entity is { Valid: true } ammoEntity)
+        var shootableAmmo = ev.Ammo[0].Shootable;
+
+        if (ev.Ammo[0].Shootable is HitscanPrototype hitscan) // лазеры
         {
-            if (TryComp<CartridgeAmmoComponent>(ammoEntity, out var cartridge))
+            if (hitscan.Damage?.DamageDict != null && hitscan.Damage.DamageDict.Count > 0)
             {
-
-                if (!ProtoManager.TryIndex<EntityPrototype>((cartridge).Prototype.Id, out var protoNamePrototipe))
-                {
-                    return;
-                }
-
-                if (!ProtoManager.TryIndex<EntityPrototype>(protoNamePrototipe, out var protoPrototype))
-                {
-                    return;
-                }
-
-                if (protoPrototype.Components.TryGetValue("Projectile", out var projectileReg)
-                    && projectileReg.Component is ProjectileComponent projectileComponent)
-                {
-                    if (projectileComponent.Damage?.DamageDict != null
-                        && projectileComponent.Damage.DamageDict.Count > 0)
-                    {
-                        damageType = projectileComponent.Damage?.DamageDict?.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key ?? "";
-                    }
-                }
-            }
-            // Револьверы
-            else if (TryComp<RevolverAmmoProviderComponent>(weapon, out var revolver))
-            {
-
-                if (!TryComp<MetaDataComponent>(ammoEntity, out var meta))
-                    return;
-
-                var prototypeId = meta.EntityPrototype?.ID;
-
-                if (string.IsNullOrEmpty(prototypeId) || !ProtoManager.TryIndex<EntityPrototype>(prototypeId, out var proto))
-                {
-                    return;
-                }
-
-                if (proto.Components.TryGetValue("Projectile", out var projectileReg) && projectileReg.Component is ProjectileComponent projectileComponent)
-                {
-                    if (projectileComponent.Damage?.DamageDict != null && projectileComponent.Damage.DamageDict.Count > 0)
-                    {
-                        damageType = projectileComponent.Damage?.DamageDict?.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key ?? "";
-                    }
-                }
+                damageType = hitscan.Damage?.DamageDict?.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key ?? "";
             }
         }
-        // Лазеры
-        if (TryComp<HitscanBatteryAmmoProviderComponent>(weapon, out _))
+        else if (ev.Ammo[0].Entity is { } ent && TryComp<ProjectileComponent>(ent, out var projectile)) // револьверы
         {
-            damageType = "Heat";
+            if (projectile.Damage?.DamageDict != null && projectile.Damage.DamageDict.Count > 0)
+            {
+                damageType = projectile.Damage?.DamageDict?.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key ?? "";
+            }
         }
-        // Магазин батарейка
-        if (TryComp<MagazineAmmoProviderComponent>(weapon, out var magazineComp))
+        else if (ev.Ammo[0].Entity is { } ent2 && TryComp<CartridgeAmmoComponent>(ent2, out var cartridgeComp)) // Патрон в патроннике
         {
-            return; // Я тупой, помогите
+            if (!ProtoManager.TryIndex<EntityPrototype>((cartridgeComp).Prototype.Id, out var protoNamePrototipe))
+            {
+                return;
+            }
+            if (!ProtoManager.TryIndex<EntityPrototype>(protoNamePrototipe, out var protoPrototype))
+            {
+                return;
+            }
+            if (protoPrototype.Components.TryGetValue("Projectile", out var projectileReg)
+                && projectileReg.Component is ProjectileComponent projectileComponent)
+            {
+                if (projectileComponent.Damage?.DamageDict != null
+                    && projectileComponent.Damage.DamageDict.Count > 0)
+                {
+                    damageType = projectileComponent.Damage?.DamageDict?.Where(kv => kv.Value > 3).OrderByDescending(kv => kv.Value).FirstOrDefault().Key ?? "";
+                }
+            }
         }
 
         damage.DamageDict.Add(damageType, 200);
