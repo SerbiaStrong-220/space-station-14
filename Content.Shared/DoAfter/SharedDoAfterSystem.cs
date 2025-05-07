@@ -3,9 +3,11 @@ using System.Threading.Tasks;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
+using Content.Shared.SS220.ChangeSpeedDoAfters;
 using Content.Shared.Tag;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -18,6 +20,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly IRobustRandom _random = default!; //ss220 add traits
 
     /// <summary>
     ///     We'll use an excess time so stuff like finishing effects can show.
@@ -195,6 +198,23 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         }
 
         id = new DoAfterId(args.User, comp.NextId++);
+
+        //ss220 add traits start
+        if (TryComp<ChangeSpeedDoAftersComponent>(args.User, out var changeSpeedDoAfters))
+        {
+            args.Delay *= changeSpeedDoAfters.Coefficient;
+
+            if (changeSpeedDoAfters.ChanceToFail != null)
+            {
+                if (_random.Prob(changeSpeedDoAfters.ChanceToFail.Value))
+                {
+                    var cancelTime = TimeSpan.FromSeconds(_random.NextFloat(0, (float)args.Delay.TotalSeconds));
+                    changeSpeedDoAfters.ScheduledCancelTimes[id.Value.Index] = cancelTime;
+                }
+            }
+        }
+        //ss220 add traits start
+
         var doAfter = new DoAfter(id.Value.Index, args, GameTiming.CurTime);
 
         // Networking yay
