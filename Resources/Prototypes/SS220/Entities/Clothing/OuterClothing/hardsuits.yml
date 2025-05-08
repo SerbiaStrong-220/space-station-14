@@ -332,7 +332,8 @@
         Heat: 0.3
         Radiation: 0.1  
         Caustic: 0.4
-        Stamina: 0.1
+  - type: StaminaResistance
+    damageCoefficient: 0.1
   - type: ClothingSpeedModifier
     walkModifier: 1 
     sprintModifier: 1 
@@ -354,7 +355,8 @@
         Heat: 0.35
         Radiation: 0.1  
         Caustic: 0.5
-        Stamina: 0.1
+  - type: StaminaResistance
+    damageCoefficient: 0.1
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 1
@@ -377,7 +379,8 @@
         Heat: 0.35
         Radiation: 0.1  
         Caustic: 0.5
-        Stamina: 0.1
+  - type: StaminaResistance
+    damageCoefficient: 0.1
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
