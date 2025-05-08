@@ -10,17 +10,12 @@ using Robust.Shared.Map;
 using System.Numerics;
 using Content.Shared.Damage;
 using Robust.Shared.Timing;
-using Content.Shared.Item;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Shared.Projectiles;
 using System.Linq;
 using Content.Shared.Database;
 using Content.Shared.Mobs.Components;
-using System.Text.RegularExpressions;
-using System;
-using System.IO;
-using System.Xml.Linq;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -249,7 +244,6 @@ public abstract partial class SharedGunSystem
                 }
                 break;
         }
-        //damageType ??= "";
         Shoot(weapon, guncomp, ev.Ammo, coordsFrom, coordsTo, out _);
         if (damageType != null)
         {

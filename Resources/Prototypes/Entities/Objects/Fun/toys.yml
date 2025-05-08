@@ -1241,6 +1241,7 @@
     - Sidearm
     - ToySidearm
   - type: Gun
+    canSuicide: true ##SS220-new-feature kus
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
