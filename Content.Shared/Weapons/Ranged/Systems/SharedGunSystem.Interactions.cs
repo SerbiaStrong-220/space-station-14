@@ -249,9 +249,9 @@ public abstract partial class SharedGunSystem
                 }
                 break;
         }
-        damageType ??= "";
+        //damageType ??= "";
         Shoot(weapon, guncomp, ev.Ammo, coordsFrom, coordsTo, out _);
-        if (damageType != "")
+        if (damageType != null)
         {
             if (TryComp<MobThresholdsComponent>(user, out var thresholdsComp)
                 && TryComp<DamageableComponent>(user, out var damagebleComp))
