@@ -31,7 +31,7 @@
     - suitStorage
     - Belt
   - type: Gun
-    canSuicide: true
+    canSuicide: true ##SS220-new-feature kus
     fireRate: 6
     selectedMode: SemiAuto
     availableModes:
