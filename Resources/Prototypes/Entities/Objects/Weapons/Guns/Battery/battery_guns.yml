@@ -82,6 +82,8 @@
     shape:
     - 0,0,1,0
     - 0,1,0,1
+  - type: Gun
+    canSuicide: true
   - type: Tag
     tags:
     - Sidearm
@@ -99,6 +101,8 @@
   components:
   - type: Item
     size: Small
+  - type: Gun
+    canSuicide: true
   - type: Tag
     tags:
     - Sidearm

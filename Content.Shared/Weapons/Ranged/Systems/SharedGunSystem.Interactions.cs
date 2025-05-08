@@ -20,7 +20,6 @@ using Content.Shared.Mobs.Components;
 using System.Text.RegularExpressions;
 using System;
 using System.IO;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Xml.Linq;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -160,12 +159,6 @@ public abstract partial class SharedGunSystem
     ///SS220-new-feature kus start
     private void OnGetVerbs(Entity<GunComponent> entity, ref GetVerbsEvent<Verb> args)
     {
-        string[] blackList = ["WeaponGrapplingGun"];
-        if (TryPrototype(entity, out var entityProto) && blackList.Contains(entityProto.ID))
-            return;
-        // Добавляю возможность застрелиться ко всему маленькому стрелковому оружию
-        if (TryComp<ItemComponent>(entity, out var item) && (!entity.Comp.CanSuicide && _item.GetSizePrototype(item.Size).Weight <= 3))
-            entity.Comp.CanSuicide = true;
         if (!args.CanAccess || !args.CanInteract || !entity.Comp.CanSuicide)
             return;
         var user = args.User;

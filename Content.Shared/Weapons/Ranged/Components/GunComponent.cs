@@ -265,8 +265,7 @@ public sealed partial class GunComponent : Component
     public Vector2 DefaultDirection = new Vector2(0, -1);
 
     ///SS220-new-feature kus start
-    [DataField]
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool CanSuicide = false;
     ///SS220-new-feature kus end
 
