@@ -1,0 +1,34 @@
+- type: entity
+  name: green caramel rooster
+  parent:  FoodBakingBase
+  id: GreenCaramelRoosterFood
+  description: There is, a pleasent sourness
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/green_caramel_rooster.rsi
+    state: green_caramel_rooster
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: MeleeWeapon
+    wideAnimationRotation: 0
+    damage:
+      types:
+        Blunt: 2
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/punch1.ogg
+  - type: Item
+    sprite: SS220/Objects/Consumable/Food/green_caramel_rooster.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
