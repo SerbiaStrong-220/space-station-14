@@ -1,10 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using Content.Shared.Messenger;
+using Content.Shared.SS220.Messenger;
 
-namespace Content.Server.Messenger;
+namespace Content.Server.SS220.Messenger;
 
 [RegisterComponent]
 public sealed partial class MessengerServerComponent : Component

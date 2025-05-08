@@ -3,25 +3,24 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Administration.Logs;
-using Content.Server.CartridgeLoader.Cartridges;
-using Content.Server.DeviceNetwork.Components;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Power.Components;
+using Content.Server.SS220.CartridgeLoader.Cartridges;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
-using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.GameTicking;
-using Content.Shared.Messenger;
 using Content.Shared.PDA;
+using Content.Shared.SS220.CartridgeLoader.Cartridges;
+using Content.Shared.SS220.Messenger;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
 
-namespace Content.Server.Messenger;
+namespace Content.Server.SS220.Messenger;
 
 public sealed class MessengerServerSystem : EntitySystem
 {
@@ -319,7 +318,7 @@ public sealed class MessengerServerSystem : EntitySystem
     {
         idCardUid = null;
         idCardComponent = null;
-        
+
         //SS220-messenger-fix begin
         if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out NetEntity? netLoader))
             return GetIdCardComponent(GetEntity(netLoader), out idCardUid, out idCardComponent);

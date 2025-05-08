@@ -5,7 +5,7 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 
-namespace Content.Client.CartridgeLoader.Cartridges.Messenger;
+namespace Content.Client.SS220.Cartridges.Messenger;
 
 [GenerateTypedNameReferences]
 public sealed partial class MessengerUiMessageItem : BoxContainer

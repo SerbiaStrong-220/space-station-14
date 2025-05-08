@@ -3,12 +3,11 @@
 using System.Linq;
 using Content.Client.UserInterface.Fragments;
 using Content.Shared.CartridgeLoader;
-using Content.Shared.CartridgeLoader.Cartridges;
-using Content.Shared.Messenger;
-using Robust.Client.GameObjects;
+using Content.Shared.SS220.CartridgeLoader.Cartridges;
+using Content.Shared.SS220.Messenger;
 using Robust.Client.UserInterface;
 
-namespace Content.Client.CartridgeLoader.Cartridges.Messenger;
+namespace Content.Client.SS220.Cartridges.Messenger;
 
 public sealed partial class MessengerUi : UIFragment
 {
