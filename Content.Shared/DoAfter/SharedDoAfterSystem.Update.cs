@@ -3,8 +3,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
-using Content.Shared.Popups;
-using Content.Shared.SS220.ChangeSpeedDoAfters;
+using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.DoAfter;
@@ -15,7 +14,6 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
     [Dependency] private readonly SharedGravitySystem _gravity = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!; //ss220 add traits start
 
     private DoAfter[] _doAfters = Array.Empty<DoAfter>();
 
@@ -55,23 +53,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
             var doAfter = _doAfters[i];
 
             //ss220 add traits start
-            if (TryComp<ChangeSpeedDoAftersComponent>(doAfter.Args.User, out var changeSpeedDoAfters)
-                && changeSpeedDoAfters.ChanceToFail != null)
-            {
-                if (changeSpeedDoAfters.ScheduledCancelTimes.TryGetValue(doAfter.Index, out var cancelTime))
-                {
-                    if (time - doAfter.StartTime >= cancelTime)
-                    {
-                        comp.DoAfters.Remove(doAfter.Index);
-                        changeSpeedDoAfters.ScheduledCancelTimes.Remove(doAfter.Index);
-
-                        _popup.PopupEntity(Loc.GetString("trait-nervousness-popup"), doAfter.Args.User, doAfter.Args.User);
-
-                        dirty = true;
-                        continue;
-                    }
-                }
-            }
+            RaiseLocalEvent(doAfter.Args.User, new DoAfterUpdateEvent(doAfter.StartTime, doAfter.Index), true);
             //ss220 add traits start
 
             if (doAfter.CancelledTime != null)
