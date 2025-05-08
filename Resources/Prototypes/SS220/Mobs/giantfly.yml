@@ -1,6 +1,6 @@
 - type: entity
   name: Vespia
-  parent: 
+  parent:
   - SimpleMobBase
   - FlyingMobBase
   - MobCombat
@@ -87,6 +87,9 @@
         damage:
           groups:
             Toxin: 10
+  - type: StaminaResistance
+    damageCoefficient: 0.4
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: MobVespia

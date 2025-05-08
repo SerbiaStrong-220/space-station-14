@@ -1,5 +1,6 @@
 using Content.Server.Humanoid.Components;
 using Content.Server.RandomMetadata;
+using Content.Shared.Access.Systems;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Robust.Shared.Map;
@@ -16,6 +17,7 @@ public sealed class RandomHumanoidSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly SharedIdCardSystem _idCard = default!; //ss220 add name for randomHumanoid
 
     [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
 
@@ -57,6 +59,11 @@ public sealed class RandomHumanoidSystem : EntitySystem
         }
 
         EntityManager.InitializeAndStartEntity(humanoid);
+
+        //ss220 add name for randomHumanoid start
+        if (_idCard.TryFindIdCard(humanoid, out var idCard))
+            _idCard.TryChangeFullName(idCard, MetaData(humanoid).EntityName);
+        //ss220 add name for randomHumanoid end
 
         return humanoid;
     }

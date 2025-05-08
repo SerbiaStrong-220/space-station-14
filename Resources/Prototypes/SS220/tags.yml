@@ -232,3 +232,9 @@
 
 - type: Tag
   id: CartridgeAmmoAcp
+# SS220 Saber end
+
+# ss220 medkit fix #2834 begin
+- type: Tag
+  id: MaskBreath
+# ss220 medkit fix #2834  end
