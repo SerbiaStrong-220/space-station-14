@@ -17,6 +17,11 @@ using Content.Shared.Projectiles;
 using System.Linq;
 using Content.Shared.Database;
 using Content.Shared.Mobs.Components;
+using System.Text.RegularExpressions;
+using System;
+using System.IO;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Xml.Linq;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -155,6 +160,9 @@ public abstract partial class SharedGunSystem
     ///SS220-new-feature kus start
     private void OnGetVerbs(Entity<GunComponent> entity, ref GetVerbsEvent<Verb> args)
     {
+        string[] blackList = ["WeaponGrapplingGun"];
+        if (TryPrototype(entity, out var entityProto) && blackList.Contains(entityProto.ID))
+            return;
         // Добавляю возможность застрелиться ко всему маленькому стрелковому оружию
         if (TryComp<ItemComponent>(entity, out var item) && (!entity.Comp.CanSuicide && _item.GetSizePrototype(item.Size).Weight <= 3))
             entity.Comp.CanSuicide = true;
@@ -217,8 +225,8 @@ public abstract partial class SharedGunSystem
         var coordsTo = new EntityCoordinates(user, new Vector2(coordsFrom.X + 1f, coordsFrom.Y));
         var ev = new TakeAmmoEvent(1, new List<(EntityUid? Entity, IShootable Shootable)>(), coordsFrom, null);
         RaiseLocalEvent(weapon, ev);
-        var damage = new DamageSpecifier();
-        var maxHealth = 200;
+        var damageSpec = new DamageSpecifier();
+        var damageVolume = 200;
         if (ev.Ammo.Count == 0)
             return;
         /// В текущей реализации можно застрелиться из условново МК с любыми патронами.
@@ -249,16 +257,17 @@ public abstract partial class SharedGunSystem
                 break;
         }
         damageType ??= "";
-        if (TryComp<MobThresholdsComponent>(user, out var thresholds))
-            maxHealth = ((int)thresholds.Thresholds.Last().Key);
         Shoot(weapon, guncomp, ev.Ammo, coordsFrom, coordsTo, out _);
         if (damageType != "")
         {
-            damage.DamageDict.Add(damageType, maxHealth);
+            if (TryComp<MobThresholdsComponent>(user, out var thresholdsComp)
+                && TryComp<DamageableComponent>(user, out var damagebleComp))
+                damageVolume = ((int)thresholdsComp.Thresholds.Last().Key - (int)damagebleComp.TotalDamage);
+            damageSpec.DamageDict.Add(damageType, damageVolume);
             var weaponName = ToPrettyString(weapon);
             var shooter = ToPrettyString(user);
-            Logs.Add(LogType.Damaged, $"{shooter: shooter} застрелился из {weaponName:weapon}, нанесено {damage.DamageDict.FirstOrNull(): damage}");
-            Timer.Spawn(200, () => Damageable.TryChangeDamage(user, damage, true));
+            Logs.Add(LogType.Damaged, $"{shooter: shooter} застрелился из {weaponName:weapon}, нанесено {damageSpec.DamageDict.FirstOrNull(): damage}");
+            Timer.Spawn(200, () => Damageable.TryChangeDamage(user, damageSpec, true));
         }
         args.Handled = true;
     }
