@@ -4,7 +4,7 @@
   parent: KitchenSpike
   name: Wooden Meat Hook
   description: Looks like it's about to break, but even in this state, it can still hold anyone unlucky enough to end up nearby.
-  suffix: мусор, хлам
+  suffix: trash, junk
   components:
     - type: Transform
       noRot: false
@@ -29,7 +29,7 @@
   parent: KitchenSpike
   name: Wooden Meat Hook
   description: If you don't know what to hang on this hook-don't worry, someone is bound to show up soon!
-  suffix: мусор, хлам
+  suffix: trash, junk
   components:
     - type: Transform
       noRot: false
