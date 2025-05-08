@@ -13,6 +13,7 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Robust.Shared.Timing;
 using Robust.Server.Player;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 
@@ -28,6 +29,7 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly StaminaSystem _stamina = default!;
 
     public override void Initialize()
     {
@@ -66,6 +68,8 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
 
         _bloodstreamSystem.TryModifyBleedAmount(uid, component.BloodlossModifier);
         _bloodstreamSystem.TryModifyBloodLevel(uid, component.ModifyBloodLevel);
+
+        _stamina.TryTakeStamina(uid, component.ModifyStamina);
 
         if (!_mobState.IsDead(uid, mobComp))
             return;

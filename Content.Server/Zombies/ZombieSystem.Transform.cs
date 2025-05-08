@@ -45,6 +45,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Server.SS220.Language;
 using Content.Shared.SS220.Language.Components;
+using Content.Shared.Damage.Components;
 
 namespace Content.Server.Zombies;
 
@@ -119,6 +120,7 @@ public sealed partial class ZombieSystem
         RemComp<LegsParalyzedComponent>(target);
         RemComp<ComplexInteractionComponent>(target);
         RemComp<LanguageComponent>(target); // SS220-Add-Languages
+        EnsureComp<StaminaResistanceComponent>(target).DamageCoefficient = 0.5f; // SS220 Zombie stamina resistance
 
         //funny voice
         var accentType = "zombie";

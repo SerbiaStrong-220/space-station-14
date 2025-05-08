@@ -17,6 +17,9 @@ uplink-pinpointer-syndie-desc = Пинпоинтер, способный отс�
 uplink-syndicate-pen-signaller = Ручка-передатчик
 uplink-syndicate-pen-signaller-desc = Ручка, со встроенным передатчиком, способным отправить сигнал на устройство.
 
+uplink-detector-ai = Детектор ИИ
+uplink-detector-ai-desc = Устройство, позволяющее определить, есть ли в радиусе 10 метров око ИИ.
+
 # Implants
 uplink-mindslave-implanter-name = Имплантер Подчинитель разума
 uplink-mindslave-implanter-desc = { ent-MindSlaveImplant.desc }

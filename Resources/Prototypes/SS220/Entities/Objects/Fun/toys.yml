@@ -34,9 +34,6 @@
         params:
           volume: 3
           variation: 0.250
-      activatedDamage:
-          types:
-              Stamina: 5
     - type: ItemToggleActiveSound
       activeSound:
         path: /Audio/Weapons/ebladehum.ogg
@@ -46,6 +43,8 @@
       components:
       - type: DisarmMalus
         malus: 0
+      - type: StaminaDamageOnHit
+        damage: 8
     - type: Wieldable
       wieldSound: null # esword light sound instead
     - type: MeleeWeapon
@@ -92,10 +91,9 @@
   - type: HiddenDescription
     entries:
     - label: hidden-desc-toy-weapons-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: hidden-desc-toy-weapons-clown
       jobRequired:
         - Clown
@@ -350,10 +348,9 @@
     - type: HiddenDescription
       entries:
       - label: hidden-desc-toy-weapons-syndicate
-        whitelistMind:
-          components:
-            - TraitorRole
-            - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
 
 #katana for some reason
 - type: entity

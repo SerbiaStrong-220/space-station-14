@@ -42,7 +42,10 @@
         Heat: 0.3
         Radiation: 0.5
         Caustic: 0.5
-        Stamina: 0.55 #SS220 stamina resist for elite vest to 45%
+  # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.55 #SS220 stamina resist for elite vest to 45%
+  # SS220 add stamina resistance end
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: FireProtection
