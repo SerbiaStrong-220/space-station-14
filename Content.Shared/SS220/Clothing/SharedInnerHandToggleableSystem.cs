@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.Clothing;
 /// <summary>
 /// Handles adding and using a toggle action for <see cref="ToggleClothingComponent"/>.
 /// </summary>
-public sealed class InnerToggleableSystem : EntitySystem
+public sealed class SharedInnerHandToggleableSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
@@ -20,11 +20,11 @@ public sealed class InnerToggleableSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InnerToggleableComponent, ComponentInit>(OnInit);
-        //SubscribeLocalEvent<InnerToggleableComponent, ToggleClothingEvent>(OnToggleItem);
+        SubscribeLocalEvent<InnerHandToggleableComponent, ComponentInit>(OnInit);
+        //SubscribeLocalEvent<InnerHandToggleableComponent, ToggleClothingEvent>(OnToggleItem);
     }
 
-    private void OnInit(Entity<InnerToggleableComponent> ent, ref ComponentInit args)
+    private void OnInit(Entity<InnerHandToggleableComponent> ent, ref ComponentInit args)
     {
         //ent.Comp.Container = _containerSystem.EnsureContainer<ContainerSlot>(ent, ent.Comp.ContainerId);
     }

@@ -9,11 +9,11 @@ namespace Content.Shared.SS220.Clothing;
 /// <remarks>
 /// If you are using <c>ItemToggleComponent</c> subscribe to <c>ItemToggledEvent</c> instead.
 /// </remarks>
-public sealed partial class InnerToggleableActionEvent : InstantActionEvent
+public sealed partial class InnerHandToggleableActionEvent : InstantActionEvent
 {
     // SS220 checking the toggle value start
     [DataField]
-    public bool InnerToggleableAction;
+    public bool InnerHandToggleableAction;
     // SS220 checking the toggle value end
 }
 
@@ -21,7 +21,7 @@ public sealed partial class InnerToggleableActionEvent : InstantActionEvent
 ///     Generic enum keys for toggle-visualizer appearance data & sprite layers.
 /// </summary>
 [Serializable, NetSerializable]
-public enum InnerToggleableVisuals : byte
+public enum InnerHandToggleableVisuals : byte
 {
     Toggled,
     Layer

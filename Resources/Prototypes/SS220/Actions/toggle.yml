@@ -1,0 +1,21 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: ActionToggleLeftHand
+  name: Toggle Suit Piece
+  description: Remember to equip the important pieces of your suit before going into action.
+  components:
+  - type: InstantAction
+    itemIconStyle: BigItem
+    useDelay: 1 # equip noise spam.
+    event: !type:ToggleClothingEvent
+
+- type: entity
+  id: ActionToggleRightHand
+  name: Toggle Suit Piece
+  description: Remember to equip the important pieces of your suit before going into action.
+  components:
+  - type: InstantAction
+    itemIconStyle: BigItem
+    useDelay: 1 # equip noise spam.
+    event: !type:ToggleClothingEvent
