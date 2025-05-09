@@ -29,7 +29,7 @@ public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
 
         args.Handled = true;
 
-        var innerUser = EnsureComp<InnerToggleableComponent>(args.User);
+        var innerUser = EnsureComp<InnerHandToggleableComponent>(args.User);
     }
 
     private void OnUnequip(Entity<InnerHandToggleProviderComponent> ent, ref GotUnequippedHandEvent args)
