@@ -378,12 +378,18 @@ namespace Content.Server.Lathe
                 }
             }
 
+            var shouldSpeak = false;
             foreach (var chan in ent.Comp.Channels)
             {
                 if (channelToLathe.TryGetValue(chan, out var speakerUid) && speakerUid == ent.Owner)
+                {
+                    shouldSpeak = true;
                     break;
+                }
             }
 
+            if (!shouldSpeak)
+                return;
             //SS220-lathe-announcement-fix end
             if (args.NewlyUnlockedRecipes is null)
                 return;
