@@ -168,12 +168,11 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
                 _ensnareable.ForceFree(containedEntity, ensnaringComponent);
             }
         }
+
+        if (TryComp<CuffableComponent>(component.ImplantedEntity, out var cuffs) && cuffs.Container.ContainedEntities.Count < 1)
+            _cuffable.Uncuff(component.ImplantedEntity.Value, cuffs.LastAddedCuffs, cuffs.LastAddedCuffs);
         //ss220 add freedom from bola end
 
-        if (!TryComp<CuffableComponent>(component.ImplantedEntity, out var cuffs) || cuffs.Container.ContainedEntities.Count < 1)
-            return;
-
-        _cuffable.Uncuff(component.ImplantedEntity.Value, cuffs.LastAddedCuffs, cuffs.LastAddedCuffs);
         args.Handled = true;
     }
 
