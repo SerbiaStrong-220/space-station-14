@@ -289,102 +289,48 @@
 
         - to: TableFancyBlack
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetBlack
               amount: 1
-              #name: black carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-black
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyBlue
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetBlue
               amount: 1
-              #name: blue carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-blue
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyCyan
           steps:
-           #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetCyan
               amount: 1
-              #name: cyan carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-cyan
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyGreen
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetGreen
               amount: 1
-              #name: green carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-green
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyOrange
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetOrange
               amount: 1
-              #name: orange carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-orange
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyPurple
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetPurple
               amount: 1
-              #name: purple carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-purple
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyPink
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetPink
               amount: 1
-              #name: pink carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-pink
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyRed
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetRed
               amount: 1
-              #name: red carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-red
-            #SS220 Curtains and fancy tables recepie fix end
 
         - to: TableFancyWhite
           steps:
-            #SS220 Curtains and fancy tables recepie fix begin
             - material: FloorCarpetWhite
               amount: 1
-              #name: white carpet
-              #icon:
-                #sprite: Objects/Tiles/tile.rsi
-                #state: carpet-white
-            #SS220 Curtains and fancy tables recepie fix end
 
     - node: TableCarpet
       entity: TableCarpet

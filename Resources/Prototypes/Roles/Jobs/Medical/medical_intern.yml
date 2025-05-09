@@ -17,7 +17,7 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: DefibrillatorSkill 
+    - type: DefibrillatorSkill
   #SS220 LimitationRevive - end
 
 - type: startingGear

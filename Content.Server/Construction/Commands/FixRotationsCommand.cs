@@ -6,6 +6,7 @@ using Content.Shared.Doors.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Console;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Construction.Commands;
 
@@ -13,6 +14,10 @@ namespace Content.Server.Construction.Commands;
 public sealed class FixRotationsCommand : IConsoleCommand
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
+
+    private static readonly ProtoId<TagPrototype> ForceFixRotationsTag = "ForceFixRotations";
+    private static readonly ProtoId<TagPrototype> ForceNoFixRotationsTag = "ForceNoFixRotations";
+    private static readonly ProtoId<TagPrototype> DiagonalTag = "Diagonal";
 
     // ReSharper disable once StringLiteralTypo
     public string Command => "fixrotations";
@@ -87,11 +92,11 @@ public sealed class FixRotationsCommand : IConsoleCommand
             // cables
             valid |= _entManager.HasComponent<CableComponent>(child);
             // anything else that might need this forced
-            valid |= tagSystem.HasTag(child, "ForceFixRotations");
+            valid |= tagSystem.HasTag(child, ForceFixRotationsTag);
             // override
-            valid &= !tagSystem.HasTag(child, "ForceNoFixRotations");
+            valid &= !tagSystem.HasTag(child, ForceNoFixRotationsTag);
             // remove diagonal entities as well
-            valid &= !tagSystem.HasTag(child, "Diagonal");
+            valid &= !tagSystem.HasTag(child, DiagonalTag);
 
             valid &= !_entManager.HasComponent<AirlockComponent>(child); //SS220 airlock-resprite
             valid &= !_entManager.HasComponent<DoorComponent>(child); //SS220 airlock-resprite

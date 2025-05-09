@@ -1,0 +1,19 @@
+- type: constructionGraph
+  id: PurpleLight
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: icon
+          steps:
+            - material: Glass
+              amount: 2
+              doAfter: 1
+            - tag: CrystalPurple
+              name: purple crystal shard
+              icon:
+                sprite: Objects/Materials/Shards/crystal.rsi
+                state: shard #SS220-Crystal-resprite
+              doAfter: 1
+    - node: icon
+      entity: LightTubeCrystalPurple

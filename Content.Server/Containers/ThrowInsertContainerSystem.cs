@@ -1,4 +1,5 @@
 using Content.Server.Administration.Logs;
+using Content.Shared.Containers;
 using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
@@ -34,6 +35,12 @@ public sealed class ThrowInsertContainerSystem : EntitySystem
         //SS220 nonitem insert fix end
 
         if (!_containerSystem.CanInsert(args.Thrown, container))
+            return;
+
+        var beforeThrowArgs = new BeforeThrowInsertEvent(args.Thrown);
+        RaiseLocalEvent(ent, ref beforeThrowArgs);
+
+        if (beforeThrowArgs.Cancelled)
             return;
 
         if (_random.Prob(ent.Comp.Probability))

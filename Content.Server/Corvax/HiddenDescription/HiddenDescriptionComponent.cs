@@ -34,7 +34,7 @@ public readonly partial record struct HiddenDescriptionEntry()
     /// A player's mind must pass a whitelist check to receive hidden information
     /// </summary>
     [DataField]
-    public EntityWhitelist WhitelistMind { get; init; } = new();
+    public HashSet<string> WhitelistMindRoles { get; init; } = new();
 
     /// <summary>
     /// A player's body must pass a whitelist check to receive hidden information

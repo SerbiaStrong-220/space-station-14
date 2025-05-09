@@ -75,7 +75,8 @@
 - type: latheRecipe
   id: HandheldHealthAnalyzer
   result: HandheldHealthAnalyzerEmpty
-  category: Tools
+  categories:
+  - Tools
   completetime: 4
   materials:
     Glass: 500
@@ -171,10 +172,16 @@
   name: lathe-recipe-MedkitRadiation-name
 
 - type: latheRecipe
-  parent: Medkit
+#  parent: Medkit ss220 medkit fix
   id: MedkitCombat
   result: MedkitCombat
   name: lathe-recipe-MedkitCombat-name
+# ss220 medkit fix begin
+  completetime: 4
+  materials:
+    Plastic: 500
+    Durathread: 300
+# ss220 medkit fix end
 
 - type: latheRecipe
   parent: BaseToolRecipe

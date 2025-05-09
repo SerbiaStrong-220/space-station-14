@@ -56,3 +56,6 @@
       damage:
         types:
           Piercing: 40.5
+    - type: Tag
+      tags:
+      - CultYoggStealthProvidable

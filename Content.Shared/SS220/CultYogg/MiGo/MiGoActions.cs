@@ -20,6 +20,9 @@ public sealed partial class MiGoHealEvent : EntityTargetActionEvent
     public float ModifyBloodLevel;
 
     [DataField]
+    public float ModifyStamina;
+
+    [DataField]
     public TimeSpan TimeBetweenIncidents = TimeSpan.FromSeconds(2.5); // most balanced value
 
     [DataField]

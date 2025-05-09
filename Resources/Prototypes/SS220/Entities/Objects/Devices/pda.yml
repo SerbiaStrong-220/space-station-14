@@ -16,7 +16,6 @@
     borderColor: "#3b3c3f"
     accentHColor: "#cc6f00"
   - type: Sprite
-    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -30,7 +29,6 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false
   - type: Icon
-    sprite: Objects/Devices/pda.rsi
     state: pda-ce_dark
 
 - type: entity
@@ -50,7 +48,6 @@
     borderColor: "#374f7e" #SS220 PDA-Resprite
 #    accentHColor: "#447987" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
-    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -92,7 +89,6 @@
     accentVColor: "#262c8a"
     accentHColor: "#dfac5c"
   - type: Sprite
-    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -106,7 +102,6 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false
   - type: Icon
-    sprite: Objects/Devices/pda.rsi
     state: pda-magistrate
   #ss220 add pdaidpainter start
   - type: Tag
@@ -160,7 +155,6 @@
   - type: PdaBorderColor
     borderColor: "#98afb8"
     accentHColor: "#542a6c"
-    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -193,7 +187,6 @@
     borderColor: "#4b474f"
     accentHColor: "#175e99"
   - type: Sprite
-    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -233,7 +226,6 @@
   - type: PdaBorderColor
     borderColor: "#731611"
   - type: Sprite
-    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -271,7 +263,6 @@
         !type:String
         pda-centcom
   - type: Sprite
-    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -307,7 +298,6 @@
       borderColor: "#4b474f"
       accentHColor: "#dfac5c"
     - type: Sprite
-      sprite: Objects/Devices/pda.rsi
       layers:
       - map: [ "enum.PdaVisualLayers.Base" ]
         state: "pda" #ss220 fix
@@ -345,7 +335,6 @@
       borderColor: "#cbcdd1"
       accentHColor: "#dfac5c"
     - type: Sprite
-      sprite: Objects/Devices/pda.rsi
       layers:
       - map: [ "enum.PdaVisualLayers.Base" ]
         state: "pda" #ss220 fix
@@ -411,7 +400,6 @@
       accentHColor: "#dfac5c"
       accentVColor: "#dfac5c"
     - type: Sprite
-      sprite: Objects/Devices/pda.rsi
       layers:
       - map: [ "enum.PdaVisualLayers.Base" ]
         state: "pda" #ss220 fix

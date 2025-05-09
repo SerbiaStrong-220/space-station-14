@@ -93,8 +93,9 @@
   name: Break Free
   description: Activating your freedom implant will free you from any hand restraints
   components:
+  - type: LimitedCharges
+    maxCharges: 3
   - type: InstantAction
-    charges: 3
     checkCanInteract: false
     itemIconStyle: BigAction
     priority: -20
@@ -121,10 +122,11 @@
   name: Activate EMP
   description: Triggers a small EMP pulse around you
   components:
+  - type: LimitedCharges
+    maxCharges: 5 #SS220-underused-uplinks-stuff begin
   - type: InstantAction
     checkCanInteract: false
-    charges: 5 #SS220-underused-uplinks-stuff begin
-    timeBetweenCharges: 5 #ss220 add time between charges
+    useDelay: 5
     itemIconStyle: BigAction
     priority: -20
     icon:
@@ -140,10 +142,11 @@
   categories: [ HideSpawnMenu ]
   #SS220-underused-uplinks-stuff end
   components:
+  - type: LimitedCharges
+    maxCharges: 12 #SS220 changed
   - type: InstantAction
     checkCanInteract: false
-    charges: 12 #SS220 changed
-    timeBetweenCharges: 5 #ss220 add time between charges
+    useDelay: 5
     itemIconStyle: BigAction
     priority: -20
     icon:
@@ -156,12 +159,11 @@
   name: Scramble DNA
   description:  Randomly changes your name and appearance.
   components:
-  #ss220 add for dna implant confirmable message start
   - type: ConfirmableAction
-    popup: gera-transformation-popup
-  #ss220 add for dna implant confirmable message end
+    popup: dna-scrambler-action-popup
+  - type: LimitedCharges
+    maxCharges: 1
   - type: InstantAction
-    charges: 1
     itemIconStyle: BigAction
     priority: -20
     icon:
@@ -221,18 +223,6 @@
   - type: InstantAction
     useDelay: 30
     event: !type:VendingMachineSelfDispenseEvent
-
-- type: entity
-  id: ActionArtifactActivate
-  name: Activate Artifact
-  description: Immediately activates your current artifact node.
-  components:
-  - type: InstantAction
-    icon:
-      sprite: Objects/Specific/Xenoarchaeology/xeno_artifacts.rsi
-      state: ano01
-    useDelay: 60
-    event: !type:ArtifactSelfActivateEvent
 
 - type: entity
   id: ActionToggleBlock
@@ -350,16 +340,15 @@
     useDelay: 1
     event: !type:FakeMindShieldToggleEvent
 
-# SS220 Better Vulpkanin begin
 - type: entity
-  id: ActionToggleWaggingVulp
-  name: action-name-toggle-wagging
-  description: action-description-toggle-wagging
+  id: ActionToggleParamedicSiren
+  name: Toggle Paramedic Siren
+  description: Toggles the paramedic siren on and off.
   components:
-    - type: InstantAction
-      icon: { sprite: SS220/Mobs/Customization/vulpkanin_parts.rsi, state: Tail_Icon }
-      iconOn: { sprite: SS220/Mobs/Customization/vulpkanin_parts.rsi, state: Tail_Icon }
-      itemIconStyle: NoItem
-      useDelay: 1 # emote spam
-      event: !type:ToggleActionEvent
-# SS220 Better Vulpkanin end
+  - type: InstantAction
+    icon:
+      sprite: Clothing/OuterClothing/Hardsuits/paramed.rsi
+      state: icon-siren
+    useDelay: 1
+    itemIconStyle: BigAction
+    event: !type:ToggleActionEvent

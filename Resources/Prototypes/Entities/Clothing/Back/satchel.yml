@@ -161,7 +161,7 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: [ClothingBackpackSatchel]
+  parent: [ClothingBackpackSatchel, BaseSecurityContraband]
   id: ClothingBackpackSatchelSecurity
   name: security satchel
   description: A robust satchel for security related needs.
@@ -175,7 +175,7 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: [ClothingBackpackSatchel]
+  parent: [ClothingBackpackSatchel, BaseSecurityContraband]
   id: ClothingBackpackSatchelBrigmedic
   name: brigmedic satchel
   description: A sterile satchel for medical related needs.

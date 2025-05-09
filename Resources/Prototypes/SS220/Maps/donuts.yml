@@ -3,7 +3,7 @@
 - type: gameMap
   id: Donuts
   mapName: 'SCT Donuts'
-  mapPath: /Maps/SS220/Donuts.yml
+  mapPath: /Maps/SS220/donuts.yml
   minPlayers: 0
   maxPlayers: 60
   stations:
