@@ -156,11 +156,14 @@ public abstract partial class SharedGunSystem
     {
         if (!args.CanAccess || !args.CanInteract || !entity.Comp.CanSuicide)
             return;
+
         var user = args.User;
         if (!_hands.IsHolding(user, entity, out _))
             return;
+
         if (!TryComp<GunComponent>(entity, out var guncomp) || !CanShoot(guncomp))
             return;
+
         Verb verb = new()
         {
             Act = () =>
@@ -209,19 +212,23 @@ public abstract partial class SharedGunSystem
             PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, user);
             return;
         }
+
         var coordsFrom = Transform(weapon).Coordinates;
         var coordsTo = new EntityCoordinates(user, new Vector2(coordsFrom.X + 1f, coordsFrom.Y));
         var ev = new TakeAmmoEvent(1, new List<(EntityUid? Entity, IShootable Shootable)>(), coordsFrom, null);
         RaiseLocalEvent(weapon, ev);
-        var damageSpec = new DamageSpecifier();
-        var damageVolume = 200;
         if (ev.Ammo.Count == 0)
             return;
+
         /// В текущей реализации можно застрелиться из условново МК с любыми патронами.
         /// Смерть не случиться если их урон < 4, это травматические, учебные...
         /// Для нанесения смертельного урона используеться наибольший тип урона в патроне.
+
+        var damageSpec = new DamageSpecifier();
+        var damageVolume = 200; // Базовый урон, если не найден в thresholds
         var ammo = ev.Ammo[0];
         string? damageType = null;
+
         switch (ammo.Shootable)
         {
             case HitscanPrototype hitscan: // Для лазеров/хитсканов
@@ -244,6 +251,7 @@ public abstract partial class SharedGunSystem
                 }
                 break;
         }
+
         Shoot(weapon, guncomp, ev.Ammo, coordsFrom, coordsTo, out _);
         if (damageType != null)
         {
@@ -251,11 +259,13 @@ public abstract partial class SharedGunSystem
                 && TryComp<DamageableComponent>(user, out var damagebleComp))
                 damageVolume = ((int)thresholdsComp.Thresholds.Last().Key - (int)damagebleComp.TotalDamage);
             damageSpec.DamageDict.Add(damageType, damageVolume);
+
             var weaponName = ToPrettyString(weapon);
             var shooter = ToPrettyString(user);
-            Logs.Add(LogType.Damaged, $"{shooter: shooter} застрелился из {weaponName:weapon}, нанесено {damageSpec.DamageDict.FirstOrNull(): damage}");
+            Logs.Add(LogType.Damaged, $"{shooter: shooter} shot himself with {weaponName:weapon}, inflicted {damageSpec.DamageDict.FirstOrNull(): damage}");
             Timer.Spawn(200, () => Damageable.TryChangeDamage(user, damageSpec, true));
         }
+
         args.Handled = true;
     }
     ///SS220-new-feature kus end

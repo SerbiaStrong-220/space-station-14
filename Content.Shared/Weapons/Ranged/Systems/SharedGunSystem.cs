@@ -37,7 +37,6 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Item;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -69,8 +68,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected readonly ThrowingSystem ThrowingSystem = default!;
     [Dependency] private   readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!; // ss220-new-feature kus
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
