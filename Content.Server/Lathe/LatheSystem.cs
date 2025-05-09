@@ -62,6 +62,9 @@ namespace Content.Server.Lathe
         /// </summary>
         private readonly List<GasMixture> _environments = new();
 
+        private readonly HashSet<string> _channelsAlreadyAnnounced = new();
+        private bool _pendingClear = false;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -364,28 +367,21 @@ namespace Content.Server.Lathe
         private void OnTechnologyDatabaseModified(Entity<LatheAnnouncingComponent> ent, ref TechnologyDatabaseModifiedEvent args)
         {
             //SS220-lathe-announcement-fix begin
-            var channelToLathe = new Dictionary<string, EntityUid>();
-
-            var lathes = EntityQueryEnumerator<LatheAnnouncingComponent>();
-            while (lathes.MoveNext(out var latheUid, out var latheComp))
+            if (!_pendingClear)
             {
-                foreach (var channel in latheComp.Channels)
+                _pendingClear = true;
+                Timer.Spawn(0, () =>
                 {
-                    if (!channelToLathe.ContainsKey(channel))
-                    {
-                        channelToLathe[channel] = latheUid;
-                    }
-                }
+                    _channelsAlreadyAnnounced.Clear();
+                    _pendingClear = false;
+                });
             }
 
             var shouldSpeak = false;
             foreach (var chan in ent.Comp.Channels)
             {
-                if (channelToLathe.TryGetValue(chan, out var speakerUid) && speakerUid == ent.Owner)
-                {
+                if (_channelsAlreadyAnnounced.Add(chan))
                     shouldSpeak = true;
-                    break;
-                }
             }
 
             if (!shouldSpeak)
