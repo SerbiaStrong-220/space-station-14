@@ -23,12 +23,12 @@ public sealed partial class DoAfterUpdateEvent : EntityEventArgs
 /// This event raised only on start DoAfter
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class DoAfterProccessEvent : EntityEventArgs
+public sealed partial class BeforeDoAfterStartEvent : EntityEventArgs
 {
     public DoAfterArgs Args;
     public ushort Id;
 
-    public DoAfterProccessEvent(DoAfterArgs args, ushort id)
+    public BeforeDoAfterStartEvent(DoAfterArgs args, ushort id)
     {
         Args = args;
         Id = id;

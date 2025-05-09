@@ -199,7 +199,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         id = new DoAfterId(args.User, comp.NextId++);
 
         //ss220 add traits start
-        RaiseLocalEvent(args.User, new DoAfterProccessEvent(args, id.Value.Index), true);
+        RaiseLocalEvent(args.User, new BeforeDoAfterStartEvent(args, id.Value.Index), true);
         //ss220 add traits end
 
         var doAfter = new DoAfter(id.Value.Index, args, GameTiming.CurTime);

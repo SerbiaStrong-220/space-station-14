@@ -15,11 +15,11 @@ public sealed class ChangeSpeedDoAftersSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<ChangeSpeedDoAftersComponent, DoAfterProccessEvent>(OnDoAfterProccess);
+        SubscribeLocalEvent<ChangeSpeedDoAftersComponent, BeforeDoAfterStartEvent>(OnDoAfterProccess);
         SubscribeLocalEvent<ChangeSpeedDoAftersComponent, DoAfterUpdateEvent>(OnDoAfterUpdate);
     }
 
-    private void OnDoAfterProccess(Entity<ChangeSpeedDoAftersComponent> ent, ref DoAfterProccessEvent args)
+    private void OnDoAfterProccess(Entity<ChangeSpeedDoAftersComponent> ent, ref BeforeDoAfterStartEvent args)
     {
         args.Args.Delay *= ent.Comp.Coefficient;
 
