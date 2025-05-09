@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by piotrthetchaikowsky (github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "green_caramel_rooster"
+    },
+    {
+      "name": "inhand-leftg",
+      "directions": 4
+    },
+    {
+      "name": "inhand-rightg",
+      "directions": 4
+    },
+    {
+      "name": "red_caramel_rooster"
+    },
+    {
+      "name": "inhand-leftr",
+      "directions": 4
+    },
+    {
+      "name": "inhand-rightr",
+      "directions": 4
+    },
+    {
+      "name": "yellow_caramel_rooster"
+    },
+    {
+      "name": "inhand-lefty",
+      "directions": 4
+    },
+    {
+      "name": "inhand-righty",
+      "directions": 4
+    }
+  ]
+}
