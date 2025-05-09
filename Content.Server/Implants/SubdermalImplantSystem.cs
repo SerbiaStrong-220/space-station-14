@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Cuffs;
@@ -39,6 +40,8 @@ using Content.Shared.SS220.PenScrambler;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Store;
 using Content.Shared.Charges.Components;
+using Content.Shared.Ensnaring;
+using Content.Shared.Ensnaring.Components;
 
 namespace Content.Server.Implants;
 
@@ -61,6 +64,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
     [Dependency] private readonly PolymorphSystem _polymorph = default!; //ss220 add dna copy implant
     [Dependency] private readonly SharedActionsSystem _actions = default!; //ss220 add adrenal implant
+    [Dependency] private readonly SharedEnsnareableSystem _ensnareable = default!; //ss220 add freedom from bola
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private HashSet<Entity<MapGridComponent>> _targetGrids = [];
@@ -151,6 +155,21 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
 
     private void OnFreedomImplant(EntityUid uid, SubdermalImplantComponent component, UseFreedomImplantEvent args)
     {
+        //ss220 add freedom from bola start
+        if (TryComp<EnsnareableComponent>(component.ImplantedEntity, out var ensnareableComponent))
+        {
+            var list = ensnareableComponent.Container.ContainedEntities.ToList();
+
+            foreach (var containedEntity in list)
+            {
+                if (!TryComp<EnsnaringComponent>(containedEntity, out var ensnaringComponent))
+                    continue;
+
+                _ensnareable.ForceFree(containedEntity, ensnaringComponent);
+            }
+        }
+        //ss220 add freedom from bola end
+
         if (!TryComp<CuffableComponent>(component.ImplantedEntity, out var cuffs) || cuffs.Container.ContainedEntities.Count < 1)
             return;
 
