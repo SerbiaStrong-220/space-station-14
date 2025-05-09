@@ -1,7 +1,7 @@
 #  © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 - type: entity
-  id: BrepsiVendingSpawner
-  name: brepsi vend spawner
+  id: RrrantaVendingSpawner
+  name: rrranta vend spawner
   suffix: Any
   parent: MarkerBase
   components:
@@ -12,5 +12,5 @@
       state: any
   - type: RandomSpawner
     prototypes:
-    - VendingMachineBrepsi
+    - VendingMachineRrranta
     chance: 0.25

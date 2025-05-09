@@ -54,8 +54,8 @@
 
 - type: entity
   parent: DrinkCanBaseFull
-  id: DrinkBrepsiCan
-  name: Brepsi
+  id: DrinkRrrantaCan
+  name: Rrr-anta
   description: The most synthetic drink in the most synthetic container. Drink at your own risk.
   components:
   - type: SolutionContainerManager
@@ -63,9 +63,9 @@
       drink:
         maxVol: 30
         reagents:
-        - ReagentId: Brepsi
+        - ReagentId: Rrranta
           Quantity: 30
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/purple_can.rsi
+    sprite: SS220/Objects/Consumable/Drinks/rrranta.rsi
   - type: Item
-    sprite: Objects/Consumable/Drinks/purple_can.rsi
+    sprite: SS220/Objects/Consumable/Drinks/rrranta.rsi

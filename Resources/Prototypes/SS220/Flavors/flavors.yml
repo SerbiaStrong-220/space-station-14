@@ -59,6 +59,6 @@
   description: flavor-complex-xlebnuldiesel
 
 - type: flavor
-  id: brepsi
-  flavorType: Base
-  description: flavor-complex-brepsi
+  id: rrranta
+  flavorType: Complex
+  description: flavor-complex-rrranta

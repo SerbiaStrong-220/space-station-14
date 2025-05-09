@@ -147,12 +147,12 @@
 
 #BrepsiFeature
 - type: reagent
-  id: Brepsi
-  name: reagent-name-brepsi
+  id: Rrranta
+  name: reagent-name-rrranta
   parent: BaseDrink
-  desc: reagent-desc-brepsi
-  physicalDesc: reagent-physical-desc-brepsi
-  flavor: brepsi
+  desc: reagent-desc-rrranta
+  physicalDesc: reagent-physical-desc-rrranta
+  flavor: rrranta
   color: "#9aae07"
   recognizable: false
   metabolisms:
@@ -164,3 +164,4 @@
         damage:
           types:
             Poison: 0.4
+  fizziness: 0.6

@@ -1,22 +1,22 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 - type: entity
   parent: VendingMachine
-  id: VendingMachineBrepsi
-  name: Vending Machine Brepsi
-  description: Vending machine that dispenses Brepsi drinks.
+  id: VendingMachineRrranta
+  name: Vending Machine Rrr-anta
+  description: Vending machine that dispenses Rrr-anta drinks.
   components:
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/smite.rsi
+    sprite: SS220/Structures/Machines/VendingMachines/rrrantamat.rsi
     layers:
     - state: "off"
-      map: [ "enum.VendingMachineVisualLayers.Base" ]
+      map: ["enum.VendingMachineVisualLayers.Base"]
     - state: "off"
-      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
       shader: unshaded
     - state: panel
-      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: VendingMachine
-    pack: BrepsiInventory
+    pack: RrrantaInventory
     dispenseOnHitChance: 0.25
     dispenseOnHitThreshold: 2
     offState: off
@@ -27,9 +27,9 @@
     ejectDelay: 1.9
     initialStockQuality: 0.33
   - type: Advertise
-    pack: BrepsiAds
+    pack: RrrantaAds
   - type: SpeakOnUIClosed
-    pack: BrepsiGoodbyes
+    pack: RrrantaGoodbyes
   - type: PointLight
     radius: 1.5
     energy: 1.6
