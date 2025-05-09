@@ -145,7 +145,7 @@
         messages: [ "capsaicin-effect-heavy-burn" ]
         probability: 0.4
 
-#BrepsiFeature
+#RrrantaFeature
 - type: reagent
   id: Rrranta
   name: reagent-name-rrranta
