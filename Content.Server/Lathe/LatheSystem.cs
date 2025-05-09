@@ -178,7 +178,7 @@ namespace Content.Server.Lathe
             foreach (var (mat, amount) in recipe.Materials)
             {
                 var adjustedAmount = recipe.ApplyMaterialDiscount
-                    ? (int) (-amount * component.MaterialUseMultiplier)
+                    ? (int)(-amount * component.MaterialUseMultiplier)
                     : -amount;
 
                 _materialStorage.TryChangeMaterialAmount(uid, mat, adjustedAmount);
@@ -363,6 +363,28 @@ namespace Content.Server.Lathe
 
         private void OnTechnologyDatabaseModified(Entity<LatheAnnouncingComponent> ent, ref TechnologyDatabaseModifiedEvent args)
         {
+            //SS220-lathe-announcement-fix begin
+            var channelToLathe = new Dictionary<string, EntityUid>();
+
+            var lathes = EntityQueryEnumerator<LatheAnnouncingComponent>();
+            while (lathes.MoveNext(out var latheUid, out var latheComp))
+            {
+                foreach (var channel in latheComp.Channels)
+                {
+                    if (!channelToLathe.ContainsKey(channel))
+                    {
+                        channelToLathe[channel] = latheUid;
+                    }
+                }
+            }
+
+            foreach (var chan in ent.Comp.Channels)
+            {
+                if (channelToLathe.TryGetValue(chan, out var speakerUid) && speakerUid == ent.Owner)
+                    break;
+            }
+
+            //SS220-lathe-announcement-fix end
             if (args.NewlyUnlockedRecipes is null)
                 return;
 
