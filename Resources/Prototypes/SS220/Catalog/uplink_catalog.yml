@@ -20,6 +20,23 @@
         - NukeOpsUplink
         - LoneOpsUplink
 
+- type: listing
+  id: UplinkOrigami
+  name: uplink-origami-name
+  description: uplink-origami-desc
+  icon: { sprite: Objects/Storage/boxes.rsi, state: box }
+  productEntity: BoxOrigamiKit
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+      - LoneOpsUplink
+
 # Implants
 
 - type: listing
