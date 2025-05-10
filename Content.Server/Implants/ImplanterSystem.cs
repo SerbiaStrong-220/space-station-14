@@ -13,6 +13,7 @@ using Content.Shared.SS220.MindSlave;
 using Content.Shared.Tag; // SS220-mindslave
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Implants;
 
@@ -23,6 +24,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly MindSlaveSystem _mindslave = default!;
     [Dependency] private readonly TagSystem _tag = default!; // SS220-mindslave
+    [Dependency] private readonly IPrototypeManager _proto = default!; //ss220 fix implant draw popup
 
     //SS220-mindslave begin
     [ValidatePrototypeId<EntityPrototype>]
@@ -183,7 +185,20 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
             }
         }
         var delay = isMindShield ? MindShieldRemoveTime : component.DrawTime;
-        var popupPath = isMindShield ? "injector-component-drawing-mind-shield" : "injector-component-drawing-user";
+
+        //ss220 fix implant draw popup start
+        var popupPath = Loc.GetString("injector-component-drawing-implant-no-name");
+
+        if (_proto.TryIndex(component.DeimplantChosen, out var proto))
+        {
+            var locData = Loc.GetEntityData(proto.ID);
+            var name = locData.Attributes.FirstOrNull(x => x.Key == "true-name")?.Value ??
+                       string.Join(" ", proto.Name, locData.Suffix);
+
+            popupPath = Loc.GetString("injector-component-drawing-implant", ("implantName", name));
+        }
+        //ss220 fix implant draw popup end
+
         var args = new DoAfterArgs(EntityManager, user, delay, new DrawEvent(), implanter, target: target, used: implanter)
         // var args = new DoAfterArgs(EntityManager, user, component.DrawTime, new DrawEvent(), implanter, target: target, used: implanter)
         //SS220-Mindshield-remove-time end
