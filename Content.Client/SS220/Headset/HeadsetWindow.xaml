@@ -1,0 +1,10 @@
+<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+                MaxSize="250 500"
+                Title="{Loc headset-ui-title}">
+
+    <PanelContainer>
+        <BoxContainer Access="Public" Name="ChannelsList" MaxSize="130 500" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+    </PanelContainer>
+
+</ui:FancyWindow>
