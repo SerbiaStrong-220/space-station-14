@@ -11,11 +11,17 @@ namespace Content.Server.SS220.LimitationRevive;
 [RegisterComponent]
 public sealed partial class LimitationReviveComponent : Component
 {
+    /// <summary>
+    /// Resurrection limit
+    /// </summary>
     [DataField]
-    public int MaxRevive = 2;
+    public int ReviveLimit = 2;
 
+    /// <summary>
+    /// How many times has the creature already died
+    /// </summary>
     [ViewVariables]
-    public int CounterOfDead = 0;
+    public int DeathCounter = 0;
 
     public bool IsAlreadyDead = false;
 
@@ -24,14 +30,21 @@ public sealed partial class LimitationReviveComponent : Component
     [ViewVariables(VVAccess.ReadWrite), DataField]
     public DamageSpecifier TypeDamageOnDead;
 
+    /// <summary>
+    /// Delay before target takes brain damage
+    /// </summary>
     [DataField]
     public TimeSpan DelayBeforeDamage = TimeSpan.FromSeconds(60);
 
-    public TimeSpan TimeToDamage = TimeSpan.Zero;
+    /// <summary>
+    /// The exact time when the target will take damage
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan? DamageTime;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float ChanceToAddTrait  = 0.6f;
+    public float ChanceToAddTrait = 0.6f;
 }
