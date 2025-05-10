@@ -345,12 +345,14 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
                 dna.DNA = dnaClone.DNA;
                 var ev = new GenerateDnaEvent { Owner = user, DNA = dna.DNA };
                 RaiseLocalEvent(ent, ref ev);
+                Dirty(user, dna);
             }
 
             if (TryComp<FingerprintComponent>(user, out var fingerprint)
                 && TryComp<FingerprintComponent>(clone.Value, out var fingerprintTarget))
             {
                 fingerprint.Fingerprint = fingerprintTarget.Fingerprint;
+                Dirty(user, fingerprint);
             }
 
             var setScale = EnsureComp<SetScaleFromTargetComponent>(user);
