@@ -113,7 +113,7 @@
     - id: Siiktajr
   - type: LimitationRevive
     maxRevive: 3
-    typeDamageOnDead:
+    damage:
       types:
         Сerebral: 400
 

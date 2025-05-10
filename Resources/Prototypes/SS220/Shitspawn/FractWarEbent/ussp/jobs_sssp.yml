@@ -72,7 +72,7 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      typeDamageOnDead:
+      damage:
         types:
           Сerebral: 400
 
@@ -168,7 +168,7 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      typeDamageOnDead:
+      damage:
         types:
           Сerebral: 400
 
@@ -264,7 +264,7 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      typeDamageOnDead:
+      damage:
         types:
           Сerebral: 400
 
@@ -359,7 +359,7 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      typeDamageOnDead:
+      damage:
         types:
           Сerebral: 400
 
@@ -448,7 +448,7 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      typeDamageOnDead:
+      damage:
         types:
           Сerebral: 400
 

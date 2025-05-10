@@ -36,24 +36,29 @@ public sealed class LimitationReviveSystem : EntitySystem
     {
         if (args.NewMobState == MobState.Dead)
         {
-            ent.Comp.DamageTime = _timing.CurTime + ent.Comp.DelayBeforeDamage;
-        }
-        else ent.Comp.DamageTime = null;
-        /*
-        if (args.NewMobState == MobState.Dead && ent.Comp.IsAlreadyDead == false)
-        {
-            ent.Comp.IsAlreadyDead = true;
-            ent.Comp.IsDamageTaken = false;
-
-            ent.Comp.DamageTime = _timing.CurTime + ent.Comp.DelayBeforeDamage;
+            ent.Comp.DamageTime = _timing.CurTime + ent.Comp.BeforeDamageDelay;
         }
 
-        else if (ent.Comp.IsAlreadyDead && args.NewMobState is MobState.Alive or MobState.Critical)
+        if (args.OldMobState == MobState.Dead)
         {
-            ent.Comp.IsAlreadyDead = false;
-            ent.Comp.IsDamageTaken = false;
+            ent.Comp.DamageTime = null;
+            ent.Comp.DeathCounter++;
+            RemComp<DyingBrainComponent>(ent);
+
+            //TODO SS220 redo this one
+            if (_random.Prob(ent.Comp.ChanceToAddTrait))
+            {
+
+                var traitString = _prototype.Index<WeightedRandomPrototype>(ent.Comp.WeightListProto)
+                    .Pick(_random);
+
+                var traitProto = _prototype.Index<TraitPrototype>(traitString);
+
+                if (traitProto.Components is not null)
+                    _entityManager.AddComponents(ent, traitProto.Components, false);
+
+            }
         }
-        */
     }
 
     private void OnCloning(Entity<LimitationReviveComponent> entity, ref CloningEvent args)
@@ -61,43 +66,7 @@ public sealed class LimitationReviveSystem : EntitySystem
         var targetComp = EnsureComp<LimitationReviveComponent>(args.CloneUid);
         _serialization.CopyTo(entity.Comp, ref targetComp, notNullableOverride: true);
 
-        targetComp.IsDamageTaken = false;
-        targetComp.IsAlreadyDead = false;
         targetComp.DeathCounter = 0;
-    }
-
-    /// <summary>
-    /// Attempt to damage and add a negative trait after death. Damage and Trait can only be received once per death.
-    /// </summary>
-    public void TryDamageAfterDeath(EntityUid uid)
-    {
-        if (!TryComp<LimitationReviveComponent>(uid, out var reviveComp))
-            return;
-
-        if (reviveComp.IsDamageTaken || reviveComp.IsAlreadyDead == false)
-            return;
-
-        reviveComp.DeathCounter++;
-        reviveComp.IsDamageTaken = true;
-
-        if (!TryComp<DamageableComponent>(uid, out var damageComp))
-            return;
-
-        _damageableSystem.TryChangeDamage(uid, reviveComp.TypeDamageOnDead, true);
-
-        var tryAddTraitAfterDeath = _random.NextFloat(0.0f, 1.0f);
-
-        if (tryAddTraitAfterDeath < reviveComp.ChanceToAddTrait ) {
-
-            var traitString = _prototype.Index<WeightedRandomPrototype>(reviveComp.WeightListProto)
-                .Pick(_random);
-
-            var traitProto = _prototype.Index<TraitPrototype>(traitString);
-
-            if (traitProto.Components is not null)
-                _entityManager.AddComponents(uid, traitProto.Components, false);
-
-        }
     }
 
     public override void Update(float frameTime)
@@ -112,13 +81,12 @@ public sealed class LimitationReviveSystem : EntitySystem
             if (_timing.CurTime < limitationRevive.DamageTime)
                 return;
 
-            if (!limitationRevive.IsDamageTaken) // ??
-                return;
+            //create ticking damage and update its variables
+            var brain = EnsureComp<DyingBrainComponent>(uid);
+            brain.TimeBetweenIncidents = limitationRevive.TimeBetweenIncidents;
+            brain.Damage = limitationRevive.Damage; 
 
-            if (!limitationRevive.IsAlreadyDead) // ??
-                return;
-
-            TryDamageAfterDeath(uid);
+            limitationRevive.DamageTime = null;
         }
     }
 }

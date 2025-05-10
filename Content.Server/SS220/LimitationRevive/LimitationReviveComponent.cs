@@ -23,24 +23,29 @@ public sealed partial class LimitationReviveComponent : Component
     [ViewVariables]
     public int DeathCounter = 0;
 
-    public bool IsAlreadyDead = false;
-
-    public bool IsDamageTaken = false;
-
-    [ViewVariables(VVAccess.ReadWrite), DataField]
-    public DamageSpecifier TypeDamageOnDead;
-
     /// <summary>
     /// Delay before target takes brain damage
     /// </summary>
     [DataField]
-    public TimeSpan DelayBeforeDamage = TimeSpan.FromSeconds(60);
+    public TimeSpan BeforeDamageDelay = TimeSpan.FromSeconds(60);
 
     /// <summary>
     /// The exact time when the target will take damage
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan? DamageTime;
+
+    /// <summary>
+    /// How much and what type of damage will be dealt
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), DataField]
+    public DamageSpecifier Damage;
+
+    /// <summary>
+    /// Delay before target takes brain damage
+    /// </summary>
+    [DataField]
+    public TimeSpan TimeBetweenIncidents = TimeSpan.FromSeconds(60);
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";

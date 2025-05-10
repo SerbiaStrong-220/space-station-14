@@ -231,6 +231,7 @@ public sealed class DefibrillatorSystem : EntitySystem
                 InGameICChatType.Speak, true);
         }
         //SS220 LimitationRevive - start
+        /*
         else if (TryComp<LimitationReviveComponent>(target, out var limitRevive) &&
                  limitRevive.CounterOfDead > limitRevive.MaxRevive)
         {
@@ -246,6 +247,7 @@ public sealed class DefibrillatorSystem : EntitySystem
             _electrocution.TryDoElectrocution(user, null, component.ZapDamage * component.ZapСoeffDamage,
                 component.WritheDuration, true, ignoreInsulation: true);
         }
+        */
         //SS220 LimitationRevive - end
         else
         {
