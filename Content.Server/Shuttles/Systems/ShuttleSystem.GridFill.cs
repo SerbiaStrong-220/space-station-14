@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Numerics;
 using Content.Server.Shuttles.Components;
 using Content.Server.Station.Components;
@@ -239,68 +238,41 @@ public sealed partial class ShuttleSystem
             return;
         }
 
+        // Spawn on a dummy map and try to dock if possible, otherwise dump it.
         _mapSystem.CreateMap(out var mapId);
         var valid = false;
-        EntityUid? gridUid = null;
 
-        if (_loader.TryLoadMap(component.Path, out var mapEnt, out var grids, offset: Vector2.Zero, rot: Angle.Zero))
+        if (_loader.TryLoadGrid(mapId, component.Path, out var grid))
         {
-            if (grids.Count == 1)
-            {
-                gridUid = grids.First().Owner;
-                valid = true;
-            }
-        }
-
-        else if (_loader.TryLoadGrid(mapId, component.Path, out var gridEnt, offset: Vector2.Zero, rot: Angle.Zero))
-        {
-            gridUid = gridEnt.Value.Owner;
-            valid = true;
-        }
-
-        if (valid && gridUid != null)
-        {
-            var shuttleXform = Transform(gridUid.Value);
-            var escape = GetSingleDock(gridUid.Value);
+            var escape = GetSingleDock(grid.Value);
 
             if (escape != null)
             {
-                var config = _dockSystem.GetDockingConfig(
-                    gridUid.Value,
-                    xform.GridUid.Value,
-                    escape.Value.Entity,
-                    escape.Value.Component,
-                    uid,
-                    dock);
+                var config = _dockSystem.GetDockingConfig(grid.Value, xform.GridUid.Value, escape.Value.Entity, escape.Value.Component, uid, dock);
 
                 if (config != null)
                 {
-                    FTLDock((gridUid.Value, shuttleXform), config);
+                    var shuttleXform = Transform(grid.Value);
+                    FTLDock((grid.Value, shuttleXform), config);
 
                     if (TryComp<StationMemberComponent>(xform.GridUid, out var stationMember))
                     {
-                        _station.AddGridToStation(stationMember.Station, gridUid.Value);
+                        _station.AddGridToStation(stationMember.Station, grid.Value);
                     }
+
+                    valid = true;
                 }
-                else
-                {
-                    valid = false;
-                }
-            }
-            else
-            {
-                valid = false;
             }
 
             foreach (var compReg in component.AddComponents.Values)
             {
                 var compType = compReg.Component.GetType();
 
-                if (HasComp(gridUid.Value, compType))
+                if (HasComp(grid.Value, compType))
                     continue;
 
                 var comp = _factory.GetComponent(compType);
-                AddComp(gridUid.Value, comp, true);
+                AddComp(grid.Value, comp, true);
             }
         }
 
