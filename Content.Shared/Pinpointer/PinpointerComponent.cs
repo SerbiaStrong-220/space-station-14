@@ -96,6 +96,11 @@ public sealed partial class PinpointerComponent : Component
     [Access(Other = AccessPermissions.ReadWriteExecute)]
     public TimeSpan NextUpdate;
     //ss220 add pinpointer ui end
+
+    //ss220 contractor pinpointer add start
+    [DataField]
+    public bool IsContractorPinpointer = false;
+    //ss220 contractor pinpointer add end
 }
 
 [Serializable, NetSerializable]
