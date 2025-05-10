@@ -321,4 +321,3 @@ Resources/MapImages
 
 # Direnv stuff
 .direnv/
-/Content.Server/Properties/launchSettings.json
