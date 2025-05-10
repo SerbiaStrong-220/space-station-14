@@ -20,3 +20,12 @@
       prototype: ComputerShuttleSalvage
     - type: StealTarget
       stealGroup: SalvageShuttleConsoleCircuitboard
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: WeaponContolConsoleCircuitboard
+  name: weapon contol console board
+  description: A computer printed circuit board for a weapon contol console.
+  components:
+    - type: ComputerBoard
+      prototype: ComputerWeaponContol
