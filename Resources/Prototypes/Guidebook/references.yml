@@ -125,7 +125,7 @@
   id: SecretRecipes
   name: guide-entry-secret-recipes
   text: "/ServerInfo/Guidebook/Service/SecretRecipes.xml"
-  filterEnabled: Truer
+  filterEnabled: True
 
 - type: guideEntry
   id: Writing

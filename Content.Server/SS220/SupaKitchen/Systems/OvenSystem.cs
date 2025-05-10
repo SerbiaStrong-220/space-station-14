@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Server.DeviceLinking.Events;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Storage.Components;
 using Content.Server.Storage.EntitySystems;
@@ -8,6 +7,7 @@ using Content.Server.Temperature.Systems;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Destructible;
+using Content.Shared.DeviceLinking.Events;
 using Content.Shared.FixedPoint;
 using Content.Shared.Power;
 using Content.Shared.SS220.SupaKitchen;

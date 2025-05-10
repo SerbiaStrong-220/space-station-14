@@ -13,11 +13,6 @@
   - type: Oven
     instrumentType: oven
     ignoreTime: true
-#  - type: CookingMachine
-#    beginCookingSound: "/Audio/SS220/SupaKitchen/oven/oven_loop_start.ogg"
-#    loopingSound: "/Audio/SS220/SupaKitchen/oven/oven_loop_mid.ogg"
-#    foodDoneSound: "/Audio/SS220/SupaKitchen/ring.ogg"
-#    useEntityStorage: true
   - type: DeviceLinkSink
     ports:
     - On
@@ -25,12 +20,12 @@
     sprite: SS220/Structures/Machines/oven.rsi
     snapCardinals: true
     layers:
-    - state: base
+    - state: oven
       map: ["base"]
     - state: door_closed
       map: ["oven_door"]
     - map: ["enum.OvenVisuals.ActiveUnshaded"]
-      state: on_unshaded
+      state: oven_on_unshaded
       visible: false
   - type: Appearance
   - type: GenericVisualizer
@@ -41,10 +36,10 @@
           False: { state: door_closed }
       enum.OvenVisuals.VisualState:
         base:
-          UnPowered: { state: "base" }
-          Idle: { state: "base" }
-          Active: { state: "base" }
-          Broken: { state: "damaged" }
+          UnPowered: { state: "oven" }
+          Idle: { state: "oven" }
+          Active: { state: "oven" }
+          Broken: { state: "oven_broken" }
         oven_door:
           UnPowered: { visible: true }
           Idle: { visible: true }
