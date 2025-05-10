@@ -1,52 +1,59 @@
 <Document>
+# Рецепты
 
-# Microwave Recipes
+## Выпечка
+<GuideCookingRecipeGroupEmbed RecipeTag="Bread"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Toast"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Slice"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Bagel"/>
 
-This is the latest published version of NanoTrasen Central Command Kitchen de Cuisine's recipe collection for chefs upon NanoTrasen vessels to prepare.
+## Бургеры
+<GuideCookingRecipeGroupEmbed RecipeTag="Burger"/>
 
-## Pizza Pies
-<GuideMicrowaveGroupEmbed Group="Pizza"/>
+## Пицца
+<GuideCookingRecipeGroupEmbed RecipeTag="Pizza"/>
 
-## Savory Cooking
-<GuideMicrowaveGroupEmbed Group="Savory"/>
+## Тако
+<GuideCookingRecipeGroupEmbed RecipeTag="Taco"/>
 
-## Breads
-<GuideMicrowaveGroupEmbed Group="Breads"/>
+## Пироги
+<GuideCookingRecipeGroupEmbed RecipeTag="Pie"/>
 
-## Breakfast Foods
-<GuideMicrowaveGroupEmbed Group="Breakfast"/>
+## Тарты
+<GuideCookingRecipeGroupEmbed RecipeTag="Tart"/>
 
-## Moth Foods
-<GuideMicrowaveGroupEmbed Group="Moth"/>
+## Торты
+<GuideCookingRecipeGroupEmbed RecipeTag="Cake"/>
 
-## Pastas & Noodles
-<GuideMicrowaveGroupEmbed Group="Pasta"/>
+## Сладости
+<GuideCookingRecipeGroupEmbed RecipeTag="Muffin"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Cookie"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Caramel"/>
 
-## Pastries & Desserts
-<GuideMicrowaveGroupEmbed Group="Dessert"/>
+## Итальянская кухня
+<GuideCookingRecipeGroupEmbed RecipeTag="Italian"/>
 
-## Soups & Stews
-<GuideMicrowaveGroupEmbed Group="Soup"/>
+## Супы
+<GuideCookingRecipeGroupEmbed RecipeTag="Soup"/>
 
-## Pies & Tarts
-<GuideMicrowaveGroupEmbed Group="Pie"/>
+## Донк-покеты
+<GuideCookingRecipeGroupEmbed RecipeTag="Donk-pocket"/>
 
-## Bars & Cookies
-<GuideMicrowaveGroupEmbed Group="BarsAndCookies"/>
+## Салаты
+<GuideCookingRecipeGroupEmbed RecipeTag="Salad"/>
 
-## Cakes
-<GuideMicrowaveGroupEmbed Group="Cake"/>
+## Гриль
+<GuideCookingRecipeGroupEmbed InstrumentType="grill"/>
 
-## Salads
-<GuideMicrowaveGroupEmbed Group="Salad"/>
+## Разделочная доска
+<GuideCookingRecipeGroupEmbed InstrumentType="choppingBoard"/>
 
-## Medicinal
-<GuideMicrowaveGroupEmbed Group="Medicinal"/>
+## Медицинское
+<GuideCookingRecipeGroupEmbed RecipeTag="Medical"/>
 
-## Other
-<GuideMicrowaveGroupEmbed Group="Other"/>
-
-## Secret
-<GuideMicrowaveGroupEmbed Group="Secret"/>
+## Прочее
+<GuideCookingRecipeGroupEmbed RecipeTag="Other"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Notfood"/>
+<GuideCookingRecipeGroupEmbed RecipeTag="Anomaly"/>
 
 </Document>

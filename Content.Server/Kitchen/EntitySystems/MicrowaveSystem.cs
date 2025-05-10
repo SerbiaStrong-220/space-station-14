@@ -42,6 +42,7 @@ using Content.Server.Construction.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Robust.Shared.Utility;
+using Content.Server.Access.Systems;
 
 namespace Content.Server.Kitchen.EntitySystems
 {
@@ -93,6 +94,8 @@ namespace Content.Server.Kitchen.EntitySystems
             SubscribeLocalEvent<MicrowaveComponent, SuicideByEnvironmentEvent>(OnSuicideByEnvironment);
 
             SubscribeLocalEvent<MicrowaveComponent, SignalReceivedEvent>(OnSignalReceived);
+
+            SubscribeLocalEvent<MicrowaveComponent, IdCardMicrowavedEvent>(OnIdCardMicrowaved); // SS220 Change Id card explosion
 
             SubscribeLocalEvent<MicrowaveComponent, MicrowaveStartCookMessage>((u, c, m) => Wzhzhzh(u, c, m.Actor));
             SubscribeLocalEvent<MicrowaveComponent, MicrowaveEjectMessage>(OnEjectMessage);
@@ -465,6 +468,19 @@ namespace Content.Server.Kitchen.EntitySystems
 
             Wzhzhzh(ent.Owner, ent.Comp, null);
         }
+
+        // SS220 Change Id card explosion begin
+        private void OnIdCardMicrowaved(Entity<MicrowaveComponent> ent, ref IdCardMicrowavedEvent args)
+        {
+            if (args.Cancelled ||
+                ent.Comp.CanMicrowaveIdsSafely ||
+                !_random.Prob(ent.Comp.IdCardExplosionChance))
+                return;
+
+            Explode(ent);
+            args.Cancel();
+        }
+        // SS220 Change Id card explosion end
 
         public void UpdateUserInterfaceState(EntityUid uid, MicrowaveComponent component)
         {

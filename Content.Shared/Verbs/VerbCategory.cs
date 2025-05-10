@@ -95,5 +95,9 @@ namespace Content.Shared.Verbs
         //SS220-SpecialSound-system  end
 
         public static readonly VerbCategory PowerLevel = new("verb-categories-power-level", null);
+
+        // SS220 Supa kitchen begin
+        public static readonly VerbCategory AvalibleRecipes = new("verb-categories-avalible-recipes", null);
+        // SS220 Supa kitchen end
     }
 }

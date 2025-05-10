@@ -1,0 +1,115 @@
+- type: entity
+  id: KitchenOven
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: oven
+  description: It's magic.
+  components:
+  - type: Transform
+    noRot: true
+  - type: EntityStorage
+  - type: PlaceableSurface
+    placeCentered: true
+    isPlaceable: false
+  - type: Oven
+    instrumentType: oven
+    ignoreTime: true
+  - type: DeviceLinkSink
+    ports:
+    - On
+  - type: Sprite
+    sprite: SS220/Structures/Machines/oven.rsi
+    snapCardinals: true
+    layers:
+    - state: oven
+      map: ["base"]
+    - state: door_closed
+      map: ["oven_door"]
+    - map: ["enum.OvenVisuals.ActiveUnshaded"]
+      state: oven_on_unshaded
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        oven_door:
+          True: { state: door_open }
+          False: { state: door_closed }
+      enum.OvenVisuals.VisualState:
+        base:
+          UnPowered: { state: "oven" }
+          Idle: { state: "oven" }
+          Active: { state: "oven" }
+          Broken: { state: "oven_broken" }
+        oven_door:
+          UnPowered: { visible: true }
+          Idle: { visible: true }
+          Active: { visible: true }
+          Broken: { visible: false }
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Breakage"]
+    - trigger:
+        !type:DamageTrigger
+          damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: ApcPowerReceiver
+    powerLoad: 400
+  - type: Machine
+    board: OvenMachineCircuitboard
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - entity_storage
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      entity_storage: !type:Container
+  - type: Construction
+    containers:
+    - machine_parts
+    - machine_board
+    - entity_storage
+  - type: GuideHelp
+    guides:
+    - Chef
+
+- type: entity
+  id: OvenMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: oven machine board
+  components:
+    - type: Sprite
+      state: service
+    - type: MachineBoard
+      prototype: KitchenOven
+      stackRequirements:
+        Capacitor: 1
+        Glass: 2
+        Cable: 2

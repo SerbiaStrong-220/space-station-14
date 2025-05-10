@@ -4,8 +4,18 @@
   name: microwave
   description: It's magic.
   components:
-  - type: Microwave
-    capacity: 10
+#  - type: Microwave #SS220 remove default microwave
+#    capacity: 10
+  #SS220 supa kitchen begin
+  - type: SupaMicrowave
+    instrumentType: microwave
+  - type: ActivatableUI
+    key: enum.SupaMicrowaveUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SupaMicrowaveUiKey.Key:
+        type: MicrowaveBoundUserInterface
+  #SS220 supa kitchen end
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -17,11 +27,11 @@
           True: { visible: true }
           False: { visible: false }
       enum.PowerDeviceVisuals.VisualState:
-        enum.MicrowaveVisualizerLayers.Base:
+        enum.SupaMicrowaveVisualizerLayers.Base:
           Idle: { state: "mw" }
           Broken: { state: "mwb" }
           Cooking: { state: "mw" }
-        enum.MicrowaveVisualizerLayers.BaseUnlit:
+        enum.SupaMicrowaveVisualizerLayers.BaseUnlit:
           Idle: { state: "mw_unlit" }
           Broken: { state: "mw_unlit" }
           Cooking: { state: "mw_running_unlit" }
@@ -29,11 +39,13 @@
           Idle: { visible: false }
           Broken: { visible: false }
       enum.PowerDeviceVisuals.Powered:
-        enum.MicrowaveVisualizerLayers.BaseUnlit:
+        enum.SupaMicrowaveVisualizerLayers.BaseUnlit:
           True: { visible: true }
           False: { visible: false }
-  - type: ActivatableUI
-    key: enum.MicrowaveUiKey.Key
+#SS220 remove default microwave begin
+#  - type: ActivatableUI
+#    key: enum.MicrowaveUiKey.Key
+#SS220 remove default microwave end
   - type: DeviceLinkSink
     ports:
     - On
@@ -42,10 +54,12 @@
     receiveFrequencyId: BasicDevice
   - type: WirelessNetworkConnection
     range: 200
-  - type: UserInterface
-    interfaces:
-      enum.MicrowaveUiKey.Key:
-        type: MicrowaveBoundUserInterface
+#SS220 remove default microwave begin
+#   - type: UserInterface
+#     interfaces:
+#       enum.MicrowaveUiKey.Key:
+#         type: MicrowaveBoundUserInterface
+#SS220 remove default microwave end
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -64,10 +78,10 @@
     snapCardinals: true
     layers:
     - state: mw0
-      map: ["enum.MicrowaveVisualizerLayers.Base"]
+      map: ["enum.SupaMicrowaveVisualizerLayers.Base"]
     - state: mw_unlit
       shader: unshaded
-      map: ["enum.MicrowaveVisualizerLayers.BaseUnlit"]
+      map: ["enum.SupaMicrowaveVisualizerLayers.BaseUnlit"]
     - state: mwbloody0
       map: ["bloody"]
       visible: false
@@ -96,7 +110,8 @@
     board: MicrowaveMachineCircuitboard
   - type: ContainerContainer
     containers:
-      microwave_entity_container: !type:Container
+      # microwave_entity_container: !type:Container #SS220 supa kitchen
+      supa_microwave_entity_container: !type:Container #SS220 supa kitchen
       machine_board: !type:Container
       machine_parts: !type:Container
   - type: EmptyOnMachineDeconstruct
@@ -113,20 +128,30 @@
   name: donk co. microwave
   description: So advanced, it can cook donk-pockets in a mere 2.5 seconds!
   components:
-  - type: Microwave
-    cookTimeMultiplier: 0.5
-    baseHeatMultiplier: 200
-    capacity: 10
-    canMicrowaveIdsSafely: false
-    idCardExplosionChance: 0.1 #SS220 Microwave explosion tweak
-    explosionChance: 0.3
+  #SS220 remove default microwave begin
+  # - type: Microwave
+  #   cookTimeMultiplier: 0.5
+  #   baseHeatMultiplier: 200
+  #   capacity: 10
+  #   canMicrowaveIdsSafely: false
+  #   idCardExplosionChance: 0.1 #SS220 Microwave explosion tweak
+  #   explosionChance: 0.3
+  #SS220 remove default microwave end
+  #SS220 supa kitchen begin
+  - type: SupaMicrowave
+    additionalRecipes:
+    - RecipeBaguetteSword
+    - RecipeThrowingCroissant
+  #SS220 supa kitchen end
   - type: Sprite
     sprite: Structures/Machines/microwave_syndie.rsi
     drawdepth: SmallObjects
     snapCardinals: true
   - type: Machine
     board: SyndicateMicrowaveMachineCircuitboard
-  - type: FoodRecipeProvider
-    providedRecipes:
-    - RecipeBaguetteSword
-    - RecipeThrowingCroissant
+  #SS220 remove default microwave begin
+  # - type: FoodRecipeProvider
+  #   providedRecipes:
+  #   - RecipeBaguetteSword
+  #   - RecipeThrowingCroissant
+  #SS220 remove default microwave end
