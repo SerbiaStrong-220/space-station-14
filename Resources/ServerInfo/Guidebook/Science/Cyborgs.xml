@@ -41,9 +41,14 @@
 
   [color=#a4885c]Базовые[/color] модули делают киборгов универсальнее. Они могут быть установлены в любое шасси, предоставляя такие полезные инструменты, как монтировки, GPS, и способность взаимодействовать с кабелями. [bold]В обычное шасси киборга можно установить до 6 модулей.[/bold]
   <Box>
+<<<<<<< HEAD
     <GuideEntityEmbed Entity="BorgModuleCable" Caption="Кабельный"/>
     <GuideEntityEmbed Entity="BorgModuleGPS" Caption="GPS"/>
     <GuideEntityEmbed Entity="BorgModuleFireExtinguisher" Caption="Огнетушащий"/>
+=======
+    <GuideEntityEmbed Entity="BorgModuleCable" Caption="Cable"/>
+    <GuideEntityEmbed Entity="BorgModuleFireExtinguisher" Caption="Fire Extinguisher"/>
+>>>>>>> off/master
   </Box>
   <Box>
     [italic]Примеры базовых модулей[/italic]

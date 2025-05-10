@@ -25,6 +25,7 @@
   - type: Hands
   - type: ComplexInteraction
   - type: Puller
+    needsHands: false
   - type: CombatMode
   - type: Physics
     ignorePaused: true
@@ -95,6 +96,7 @@
   - type: SolutionScanner
   - type: IgnoreUIRange
   - type: ShowAntagIcons
+  # - type: ShowContrabandDetails # SS220-useless-info
   - type: Inventory
     templateId: aghost
   - type: Loadout

@@ -74,7 +74,7 @@
   - type: MovementSpeedModifier
     weightlessAcceleration: 1.5 # Move around more easily in space.
     weightlessFriction: 1
-    weightlessModifier: 1
+    baseWeightlessModifier: 1
   - type: Flammable
     damage:
       types:
@@ -149,12 +149,12 @@
     - id: Tkachi
   # SS220-Add-Languages end
   - type: Inventory
-    speciesId: moth 
+    speciesId: moth
     femaleDisplacements:
       jumpsuit:
         sizeMaps:
           32:
-            sprite: Mobs/Species/Human/displacement.rsi
+            sprite: Mobs/Species/Moth/displacement.rsi
             state: jumpsuit-female
   #ss220 emote 5 sec start
   - type: Emoting
@@ -166,6 +166,52 @@
       types:
         Сerebral: 400
   #SS220 LimitationRevive - end
+      back:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: back
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: outerclothing
+      gloves:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: hand
+      shoes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: shoes
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: jumpsuit-male
+      back:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: back
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: outerclothing
+      gloves:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: hand
+      shoes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: shoes
 
 - type: entity
   parent: BaseSpeciesDummy
@@ -179,11 +225,56 @@
   - type: HumanoidAppearance
     species: Moth
   - type: Inventory
-    speciesId: moth 
+    speciesId: moth
     femaleDisplacements:
       jumpsuit:
         sizeMaps:
           32:
-            sprite: Mobs/Species/Human/displacement.rsi
+            sprite: Mobs/Species/Moth/displacement.rsi
             state: jumpsuit-female
-
+      back:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: back
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: outerclothing
+      gloves:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: hand
+      shoes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: shoes
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: jumpsuit-male
+      back:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: back
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: outerclothing
+      gloves:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: hand
+      shoes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Moth/displacement.rsi
+            state: shoes

@@ -17,8 +17,8 @@
 
 #Syndicate EVA
 - type: entity
-  parent: [ ClothingOuterEVASuitBase]
-  id: ClothingOuterHardsuitSyndicate # TODO: rename to ClothingOuterEVASuitSyndicate
+  parent: [ ClothingOuterEVASuitBase, BaseSyndicateContraband ]
+  id: ClothingOuterEVASuitSyndicate
   name: syndicate EVA suit
   description: "Has a tag on the back that reads: 'Totally not property of an enemy corporation, honest!'"
   components:

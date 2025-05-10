@@ -9,6 +9,7 @@
       - ClothMade
       - Paper
       - Omnivorous #SS220 Сult
+      - Pill
   - type: SolutionContainerManager
     solutions:
       stomach:
