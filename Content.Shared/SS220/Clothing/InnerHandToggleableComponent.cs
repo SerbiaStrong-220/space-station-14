@@ -11,10 +11,34 @@ namespace Content.Shared.SS220.Clothing;
 public sealed partial class InnerHandToggleableComponent : Component
 {
     [ViewVariables]
-    public Dictionary<string, ToggleableHandInfoPrototype> HandsContainers = [];
+    public Dictionary<string, ToggleableHandInfo> HandsContainers = [];
 }
 
+public sealed partial class ToggleableHandInfo
+{
+    /// <summary>
+    ///     Action used to toggle the clothing on or off.
+    /// </summary>
+    [DataField(required: true), AutoNetworkedField]
+    public EntProtoId Action = "ActionToggleSuitPiece";
 
+    [DataField, AutoNetworkedField]
+    public EntityUid? ActionEntity;
+
+    /// <summary>
+    ///     The container that the clothing is stored in when not equipped.
+    /// </summary>
+    [DataField(required: true), AutoNetworkedField]
+    public string ContainerId = "toggleable-clothing";
+
+    [ViewVariables]
+    public ContainerSlot? Container;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? InnerItemUid;
+}
+
+/*
 [Prototype, AutoGenerateComponentState]
 public sealed partial class ToggleableHandInfoPrototype : IPrototype
 {
@@ -47,3 +71,4 @@ public sealed partial class ToggleableHandInfoPrototype : IPrototype
     [DataField, AutoNetworkedField]
     public EntityUid? InnerItemUid;
 }
+*/
