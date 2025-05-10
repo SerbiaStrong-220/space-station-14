@@ -377,14 +377,14 @@ namespace Content.Server.Lathe
                 });
             }
 
-            var shouldSpeak = false;
+            var channelsToAnnounce = new List<string>();
             foreach (var chan in ent.Comp.Channels)
             {
-                if (_channelsAlreadyAnnounced.Add(chan))
-                    shouldSpeak = true;
+                if (!_channelsAlreadyAnnounced.Contains(chan))
+                    channelsToAnnounce.Add(chan);
             }
 
-            if (!shouldSpeak)
+            if (channelsToAnnounce.Count == 0)
                 return;
             //SS220-lathe-announcement-fix end
             if (args.NewlyUnlockedRecipes is null)
@@ -414,10 +414,13 @@ namespace Content.Server.Lathe
                 ("items", ContentLocalizationManager.FormatList(recipeNames))
             );
 
-            foreach (var channel in ent.Comp.Channels)
+            //SS220-lathe-announcement-fix start
+            foreach (var channel in channelsToAnnounce)
             {
                 _radio.SendRadioMessage(ent.Owner, message, channel, ent.Owner, escapeMarkup: false);
+                _channelsAlreadyAnnounced.Add(channel);
             }
+            //SS220-lathe-announcement-fix end
         }
 
         private void OnResearchRegistrationChanged(EntityUid uid, LatheComponent component, ref ResearchRegistrationChangedEvent args)
