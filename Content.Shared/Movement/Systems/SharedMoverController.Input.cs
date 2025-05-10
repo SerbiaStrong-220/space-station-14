@@ -5,6 +5,7 @@ using Content.Shared.Follower.Components;
 using Content.Shared.Input;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
+using Content.Shared.SS220.Movement.Events;
 using Robust.Shared.GameStates;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
@@ -90,6 +91,15 @@ namespace Content.Shared.Movement.Systems
         {
             if (entity.Comp.HeldMoveButtons == buttons)
                 return;
+
+            // SS220 Add logs on change spring begin
+            var sprinting = (buttons & MoveButtons.Walk) == 0x0;
+            if (entity.Comp.Sprinting != sprinting)
+            {
+                var sprintChangedEv = new SprintChangedEvent(entity, sprinting);
+                RaiseLocalEvent(entity, ref sprintChangedEv, true);
+            }
+            // SS220 Add logs on change spring end
 
             // Relay the fact we had any movement event.
             // TODO: Ideally we'd do these in a tick instead of out of sim.
