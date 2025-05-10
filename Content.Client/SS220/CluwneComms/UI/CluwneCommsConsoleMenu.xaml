@@ -1,0 +1,35 @@
+<cluwne-comms:CluwneCommsConsoleMenu xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:cluwne-comms="clr-namespace:Content.Client.SS220.CluwneComms.UI"
+    xmlns:ui220="clr-namespace:Content.Client.SS220.UserInterface"
+    MouseFilter="Stop"
+    Resizable="False"
+    MinSize="938 638">
+    <Control Name="MainContainer">
+        <PanelContainer Name="BackgroundPanel" StyleClasses="CluwneCommsPanel" />
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="40 76 40 192">
+            <BoxContainer  Orientation="Horizontal" Margin="0 -6">
+                <Label Text="{Loc 'cluwne-comms-console-menu-title'}" HorizontalExpand="True" />
+                <Label Text="{Loc 'cluwne-comms-console-menu-os-name'}" Margin="0 0 12 0"/>
+                <Button Name="CloseButton" Text="{Loc 'cluwne-comms-console-menu-close-button'}" />
+            </BoxContainer>
+            <TabContainer Name="Tabs">
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" ReturnMeasure="True" MaxHeight="300">
+                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="6">
+                        <OptionButton Name="AlertLevelButton" Access="Public" OptionStyleClasses="button" Margin="0 0 0 6" />
+                        <ui220:ExtendedTextEdit Name="AlertInput" HorizontalExpand="True" VerticalExpand="True" Margin="0 0 0 6" MinHeight="100" />
+                        <ui220:ExtendedTextEdit Name="InstructionInput" HorizontalExpand="True" VerticalExpand="True" Margin="0 0 0 6" MinHeight="100" />
+                        <Button Name="AlertButton" Text="{Loc 'cluwne-comms-console-menu-code-button'}" Access="Public" />
+                    </BoxContainer>
+                </ScrollContainer>
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" ReturnMeasure="True" MaxHeight="300">
+                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="6">
+                        <ui220:ExtendedTextEdit Name="MessageInput" HorizontalExpand="True" VerticalExpand="True" Margin="0 0 0 6" MinHeight="100" />
+                        <Button Name="AnnounceButton" Text="{Loc 'cluwne-comms-console-menu-announcement-button'}" Access="Public" />
+                    </BoxContainer>
+                </ScrollContainer>
+            </TabContainer>
+        </BoxContainer>
+        <ui220:SpriteButton Name="BoomButton" StyleClasses="CluwneBigButton" Access="Public" Margin="402 448 0 0" SpriteScale="2 2" HorizontalAlignment="Left" VerticalAlignment="Top" />
+    </Control>
+</cluwne-comms:CluwneCommsConsoleMenu>

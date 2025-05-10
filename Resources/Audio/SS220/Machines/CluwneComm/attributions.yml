@@ -1,0 +1,9 @@
+- files: ["ui_cancel.ogg"]
+  license: "CC0-1.0"
+  copyright: "Audio is recorded/created by unfa 'FreeSound.org'. The original audio was trimmed and renamed"
+  source: "https://freesound.org/people/unfa/sounds/565133/"
+
+- files: ["boom_button_fail.ogg"]
+  license: "CC0-1.0"
+  copyright: "Audio is recorded/created by Breviceps 'FreeSound.org'"
+  source: "https://freesound.org/people/Breviceps/sounds/468443/"

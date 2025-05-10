@@ -441,6 +441,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         string message,
         string? sender = null,
         bool playSound = true,
+        SoundSpecifier? announcementSound = null,//SS220 CluwneComms
         Color? colorOverride = null,
         string? voiceId = null)
     {
@@ -461,8 +462,16 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source, false, true, colorOverride);
 
+        //SS220 CluwneComms start
+        //made here cause  "announcementSound?.ToString()" returning shit
+        string? key = null;
+
+        if (announcementSound is SoundPathSpecifier path)
+            key = path.Path.ToString();
+        //SS220 CluwneComms end
+
         if (playSound)
-            RaiseLocalEvent(new AnnouncementSpokeEvent(filter, DefaultAnnouncementSound, AudioParams.Default, message, voiceId));
+            RaiseLocalEvent(new AnnouncementSpokeEvent(filter, key?.ToString() ?? DefaultAnnouncementSound, AudioParams.Default, message, voiceId));//SS220 CluwneComms
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement on {station} from {sender}: {message}");
     }
