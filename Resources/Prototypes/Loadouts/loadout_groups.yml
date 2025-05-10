@@ -249,6 +249,7 @@
   - PassengerJumpskirtTurtleneck
   - PassengerJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
   - RainbowJumpsuit
+  - PassengerJumpsuit220 #SS-220 Yellow Jumpsuit with 220 on it
 
 - type: loadoutGroup
   id: PassengerFace
