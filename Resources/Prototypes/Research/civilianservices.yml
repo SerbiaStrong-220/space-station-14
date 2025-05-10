@@ -125,8 +125,8 @@
     sprite: Structures/Machines/stasis_bed.rsi
     state: icon
   discipline: CivilianServices
-  tier: 2
-  cost: 7500
+  tier: 1 # SS220 Cryo to T1 for medical reqs
+  cost: 12500 # SS220 Cryo to T1 for medical reqs
   recipeUnlocks:
   - StasisBedMachineCircuitboard
   - CryoPodMachineCircuitboard

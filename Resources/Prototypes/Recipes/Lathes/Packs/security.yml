@@ -132,10 +132,15 @@
   recipes:
   - Truncheon
   - WeaponAdvancedLaser
-  - WeaponDisabler
-  - WeaponDisablerSMG
   - WeaponLaserCannon
   - WeaponLaserCarbine
   - WeaponXrayCannon
+  - WeaponTemperatureGun
   - WeaponEnergyCrossbow #SS220 Energy Crossbow
   - WeaponTaser #SS220 taserback
+
+- type: latheRecipePack
+  id: SecurityDisablers
+  recipes:
+  - WeaponDisabler
+  - WeaponDisablerSMG

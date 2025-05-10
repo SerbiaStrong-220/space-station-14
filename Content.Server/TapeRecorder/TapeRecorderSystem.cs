@@ -2,6 +2,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Hands.Systems;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
+using Content.Server.SS220.Language;
 using Content.Server.SS220.TTS; // SS220 Tape recorder TTS
 using Content.Shared.Chat;
 using Content.Shared.Paper;
@@ -24,6 +25,7 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly PaperSystem _paper = default!;
     [Dependency] private readonly TTSSystem _ttsSystem = default!; // SS220 Tape recorder TTS
+    [Dependency] private readonly LanguageSystem _languageSystem = default!; // SS220 languages
 
     public override void Initialize()
     {
@@ -60,7 +62,15 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
             }
             // SS220 Tape recorder TTS end
             //Play the message
-            _chat.TrySendInGameICMessage(ent, message.Message, InGameICChatType.Speak, false);
+
+            // SS220 languages begin
+            //_chat.TrySendInGameICMessage(ent, message.Message, InGameICChatType.Speak, false);
+
+            if (message.LanguageMessage is { } languageMessage)
+                _chat.TrySendInGameICMessage(ent, languageMessage.GetMessageWithLanguageKeys(), InGameICChatType.Speak, false);
+            else
+                _chat.TrySendInGameICMessage(ent, message.Message, InGameICChatType.Speak, false);
+            // SS220 languages end
         }
     }
 
@@ -99,7 +109,7 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
             RaiseLocalEvent(maskUid.Value, voiceEv);
             voiceId = voiceEv.VoiceId;
         }
-        cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(cassette.Comp.CurrentPosition, name, verb, args.Message, voiceId));
+        cassette.Comp.Buffer.Add(new TapeCassetteRecordedMessage(cassette.Comp.CurrentPosition, name, verb, args.Message, voiceId, args.LanguageMessage));
         // SS220 Tape recorder TTS end
     }
 
@@ -138,10 +148,27 @@ public sealed class TapeRecorderSystem : SharedTapeRecorderSystem
             var name = message.Name ?? ent.Comp.DefaultName;
             var time = TimeSpan.FromSeconds((double) message.Timestamp);
 
+            // SS220 languages begin
+            var recordedMessage = "";
+            if (message.LanguageMessage is { } languageMessage)
+            {
+                for (var i = 0; i < languageMessage.Nodes.Count; i++)
+                {
+                    var node = languageMessage.Nodes[i];
+                    if (i != 0)
+                        recordedMessage += " ";
+
+                    recordedMessage += _languageSystem.GenerateLanguageMsgMarkup(node.Message, node.Language);
+                }
+            }
+            else
+                recordedMessage = message.Message;
+            // SS220 languages end
+
             text.AppendLine(Loc.GetString("tape-recorder-print-message-text",
                 ("time", time.ToString(@"hh\:mm\:ss")),
                 ("source", name),
-                ("message", message.Message)));
+                ("message", recordedMessage))); // SS220 languages
         }
         text.AppendLine();
         text.Append(Loc.GetString("tape-recorder-print-end-text"));

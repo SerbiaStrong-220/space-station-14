@@ -51,8 +51,9 @@
   name: chemical-implant-action-name
   description: chemical-implant-action-desc
   components:
+  - type: LimitedCharges
+    maxCharges: 1
   - type: InstantAction
-    charges: 1
     checkCanInteract: false
     itemIconStyle: BigAction
     priority: -20

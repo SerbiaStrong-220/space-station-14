@@ -1,7 +1,7 @@
 - type: entity
   id: BaseMagazineCaselessRifle
   name: "magazine (.25 caseless)"
-  parent: [ BaseItem]
+  parent: [ BaseItem, BaseSecurityContraband ]
   abstract: true
   components:
   - type: Tag
@@ -99,7 +99,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
-    steps: 7
+    steps: 8
     zeroVisible: false
 #SS220-FisAmmoSprite-End
 
@@ -108,6 +108,7 @@
   id: MagazinePistolCaselessRifle
   name: "pistol magazine (.25 caseless)"
   parent: BaseMagazinePistolCaselessRifle
+  description: 10-round magazine for the Cobra pistol. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeCaselessRifle
@@ -128,6 +129,7 @@
   id: MagazinePistolCaselessRiflePractice
   name: "pistol magazine (.25 caseless practice)"
   parent: BaseMagazinePistolCaselessRifle
+  description: 10-round magazine for the Cobra pistol. Intended to hold non-harmful chalk ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgeCaselessRiflePractice

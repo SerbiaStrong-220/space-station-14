@@ -31,6 +31,16 @@ public abstract partial class SharedDocumentHelperSystem : EntitySystem
     {
         base.Initialize();
         _gameYearDelta = _configurationManager.GetCVar(CCVars220.GameYearDelta);
+
+        SubscribeLocalEvent<PaperSetContentAttemptEvent>(OnPaperSetContentAttempt);
+    }
+
+    private void OnPaperSetContentAttempt(ref PaperSetContentAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        args.TransformedContent = ParseTags(args.Paper, args.TransformedContent);
     }
 
     #region Paper

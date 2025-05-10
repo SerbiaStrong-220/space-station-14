@@ -10,10 +10,10 @@
   markingLimits: MobTajaranMarkingLimits
   dollPrototype: MobTajaranDummy
   skinColoration: Hues
-  maleFirstNames: tajaran_first_male
-  femaleFirstNames: tajaran_first_female
-  maleLastNames: tajaran_second_unisex
-  femaleLastNames: tajaran_second_unisex
+  maleFirstNames: NamesTajaranFirstMale
+  femaleFirstNames: NamesTajaranFirstFemale
+  maleLastNames: NamesTajaranSecondUnisex
+  femaleLastNames: NamesTajaranSecondUnisex
   buttScanTexture: /Textures/SS220/Interface/Butts/tajaran.png
   youngAge: 25
   oldAge: 55

@@ -131,6 +131,7 @@
   #SS220 remove default microwave begin
   # - type: Microwave
   #   cookTimeMultiplier: 0.5
+  #   baseHeatMultiplier: 200
   #   capacity: 10
   #   canMicrowaveIdsSafely: false
   #   idCardExplosionChance: 0.1 #SS220 Microwave explosion tweak

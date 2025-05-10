@@ -16,7 +16,6 @@
       accentVColor: "#262c8a" #SS220-Law Department
       accentHColor: "#dfac5c" #SS220 PDA-Resprite
     - type: Sprite #SS220 PDA-Resprite-Start
-      sprite: Objects/Devices/pda.rsi
       layers:
       - map: [ "enum.PdaVisualLayers.Base" ]
         state: "pda" #ss220 fix

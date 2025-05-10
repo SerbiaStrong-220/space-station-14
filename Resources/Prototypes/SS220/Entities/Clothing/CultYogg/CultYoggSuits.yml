@@ -25,7 +25,8 @@
         Heat: 0.4
         Radiation: 0.4
         Caustic: 0.1
-        Stamina: 0.35
+  - type: StaminaResistance
+    damageCoefficient: 0.35
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -33,9 +34,12 @@
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCultYogg
   - type: StuckOnEquip
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitCultYogg
   name: Hardsuit helmet corrupted by a Cult
   description: Corrupted pile of incomprehensible substane, somehowe prowiding great defence.

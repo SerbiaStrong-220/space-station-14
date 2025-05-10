@@ -57,7 +57,8 @@
     damage:
       types:
         Slash: 7
-        Stamina: 22
+  - type: StaminaDamageOnHit
+    damage: 22
   - type: SlowOnDamage
     speedModifierThresholds:
       40: 0.70
@@ -363,6 +364,13 @@
     currentTemperature: 300
   - type: InteractionPopup
     successChance: 0.3
+    interactSuccessString: petting-success-steven
+    interactFailureString: petting-failure-steven
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/bear.ogg
+    interactFailureSound:
+      path: /Audio/SS220/Animals/crocodile_fun.ogg
   - type: Tag
     tags:
     - CannotSuicide

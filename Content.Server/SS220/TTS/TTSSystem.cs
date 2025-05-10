@@ -14,8 +14,9 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Network;
 using Robust.Server.Player;
-using Robust.Shared.GameObjects;
-using System.Linq;
+using Content.Server.SS220.Language;
+using Content.Shared.SS220.Language.Systems;
+
 
 namespace Content.Server.SS220.TTS;
 
@@ -31,6 +32,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly IServerNetManager _netManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly LanguageSystem _language = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -48,7 +50,6 @@ public sealed partial class TTSSystem : EntitySystem
 
         SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
-        SubscribeLocalEvent<EntitySpokeScrambledEvent>(OnEntitySpokeScrambled);
         SubscribeLocalEvent<RadioSpokeEvent>(OnRadioReceiveEvent);
         SubscribeLocalEvent<AnnouncementSpokeEvent>(OnAnnouncementSpoke);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
@@ -193,12 +194,38 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void OnEntitySpoke(EntityUid uid, TTSComponent component, EntitySpokeEvent args)
     {
-        HandleEntitySpoke(uid, uid, args.Message, args.IsRadio, args.ObfuscatedMessage);
+        HashSet<EntityUid> receivers = new();
+        foreach (var receiver in Filter.Pvs(uid).Recipients)
+        {
+            if (receiver.AttachedEntity is { } ent)
+                receivers.Add(ent);
+        }
+
+        if (args.LanguageMessage is { } languageMessage)
+            HandleEntitySpokeWithLanguage(uid, receivers, languageMessage, args.IsRadio, args.ObfuscatedMessage);
+        else
+            HandleEntitySpoke(uid, receivers, args.Message, args.IsRadio, args.ObfuscatedMessage);
     }
 
-    private async void OnEntitySpokeScrambled(EntitySpokeScrambledEvent args)
+    private async void HandleEntitySpokeWithLanguage(EntityUid source, IEnumerable<EntityUid> receivers, LanguageMessage languageMessage, bool isRadio, string? obfuscatedMessage = null)
     {
-        HandleEntitySpoke(args.Source, args.Listeners, args.ColorlessMessage, args.IsRadio, args.ObfuscatedMessage);
+        Dictionary<string, (HashSet<EntityUid>, string?)> messageListenersDict = new();
+        foreach (var receiver in receivers)
+        {
+            string sanitizedMessage = languageMessage.GetMessage(receiver, true, false);
+            if (obfuscatedMessage != null)
+                obfuscatedMessage = languageMessage.GetObfuscatedMessage(receiver, true);
+
+            if (messageListenersDict.TryGetValue(sanitizedMessage, out var listeners))
+                listeners.Item1.Add(receiver);
+            else
+                messageListenersDict[sanitizedMessage] = ([receiver], obfuscatedMessage);
+        }
+
+        foreach (var (key, value) in messageListenersDict)
+        {
+            HandleEntitySpoke(source, value.Item1, key, isRadio, value.Item2);
+        }
     }
 
     private async void HandleEntitySpoke(EntityUid source, EntityUid listener, string message, bool isRadio, string? obfuscatedMessage = null)
@@ -309,23 +336,29 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void HandleWhisperToMany(EntityUid source, IEnumerable<ICommonSession> receivers, string message, string obfMessage, string speaker, bool isRadio)
     {
+        MsgPlayTts? ttsMessage = null;
         using var ttsResponse = await GenerateTts(message, speaker, TtsKind.Whisper);
-        if (!ttsResponse.TryGetValue(out var audioData)) return;
-        var ttsMessage = new MsgPlayTts
+        if (ttsResponse.TryGetValue(out var audioData))
         {
-            Data = audioData,
-            SourceUid = GetNetEntity(source),
-            Kind = TtsKind.Whisper
-        };
+            ttsMessage = new MsgPlayTts
+            {
+                Data = audioData,
+                SourceUid = GetNetEntity(source),
+                Kind = TtsKind.Whisper
+            };
+        }
 
+        MsgPlayTts? obfttsMessage = null;
         using var obfTtsResponse = await GenerateTts(obfMessage, speaker, TtsKind.Whisper);
-        if (!obfTtsResponse.TryGetValue(out var obfAudioData)) return;
-        var obfttsMessage = new MsgPlayTts
+        if (obfTtsResponse.TryGetValue(out var obfAudioData))
         {
-            Data = obfAudioData,
-            SourceUid = GetNetEntity(source),
-            Kind = TtsKind.Whisper
-        };
+            obfttsMessage = new MsgPlayTts
+            {
+                Data = obfAudioData,
+                SourceUid = GetNetEntity(source),
+                Kind = TtsKind.Whisper
+            };
+        }
 
         foreach (var receiver in receivers)
         {
@@ -396,6 +429,22 @@ public sealed partial class TTSSystem : EntitySystem
             else
                 _netManager.ServerSendMessage(ttsMessage, receiver.Channel);
         }
+    }
+
+    private async void HandleLanguageRadio(RadioEventReceiver[] receivers, LanguageMessage languageMessage, string speaker)
+    {
+        Dictionary<string, List<RadioEventReceiver>> splitedByHearedMessage = new();
+        foreach (var receiver in receivers)
+        {
+            var hearedMessage = languageMessage.GetMessage(receiver.Actor, true, false);
+            if (splitedByHearedMessage.TryGetValue(hearedMessage, out var value))
+                value.Add(receiver);
+            else
+                splitedByHearedMessage[hearedMessage] = [receiver];
+        }
+
+        foreach (var (message, newReceivers) in splitedByHearedMessage)
+            HandleRadio(receivers, message, speaker);
     }
 
     private async void HandleRadio(RadioEventReceiver[] receivers, string message, string speaker)

@@ -55,7 +55,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
             && TryComp(component.Headset, out EncryptionKeyHolderComponent? keys)
             && keys.Channels.Contains(args.Channel.ID))
         {
-            _radio.SendRadioMessage(uid, args.Message, args.Channel, component.Headset);
+            _radio.SendRadioMessage(uid, args.Message, args.Channel, component.Headset, languageMessage: args.LanguageMessage /* SS220 languages */);
             args.Channel = null; // prevent duplicate messages from other listeners.
         }
     }

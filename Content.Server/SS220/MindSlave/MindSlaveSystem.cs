@@ -17,7 +17,7 @@ using Content.Server.SS220.MindSlave.Systems;
 using Content.Server.SS220.MindSlave.UI;
 using Content.Server.SS220.Telepathy;
 using Content.Shared.Alert;
-using Content.Shared.Cloning;
+using Content.Shared.Cloning.Events;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
@@ -67,9 +67,6 @@ public sealed class MindSlaveSystem : EntitySystem
     [ValidatePrototypeId<NpcFactionPrototype>]
     private const string SyndicateFactionId = "Syndicate";
 
-    [ValidatePrototypeId<TagPrototype>]
-    private const string MindSlaveImplantTag = "MindSlave";
-
     private readonly SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/traitor_start.ogg");
 
     [ValidatePrototypeId<AlertPrototype>]
@@ -90,6 +87,8 @@ public sealed class MindSlaveSystem : EntitySystem
 
         SubscribeLocalEvent<MindSlaveMasterComponent, MobStateChangedEvent>(OnMasterDeadOrCrit);
         SubscribeLocalEvent<MindSlaveMasterComponent, BeingGibbedEvent>(OnMasterGibbed);
+
+        SubscribeLocalEvent<MindSlaveImplantComponent, ImplantImplantedEvent>(OnMindSlaveImplanted);
 
         SubscribeLocalEvent<SubdermalImplantComponent, MindSlaveRemoved>(OnMindSlaveRemoved);
     }
@@ -144,6 +143,17 @@ public sealed class MindSlaveSystem : EntitySystem
     private void OnCloned(Entity<MindSlaveComponent> entity, ref CloningEvent args)
     {
         TryRemoveSlave(entity);
+    }
+
+    private void OnMindSlaveImplanted(Entity<MindSlaveImplantComponent> entity, ref ImplantImplantedEvent args)
+    {
+        if (args.Implanted is not { } target ||
+            !TryComp<SubdermalImplantComponent>(entity, out var implantComponent) ||
+            implantComponent.user is not { } user)
+            return;
+
+        if (!TryMakeSlave(target, user))
+            _implant.ForceRemove(target, args.Implant);
     }
 
     private void OnMindSlaveRemoved(Entity<SubdermalImplantComponent> mind, ref MindSlaveRemoved args)
@@ -322,7 +332,7 @@ public sealed class MindSlaveSystem : EntitySystem
             EntityUid? mindslaveImplant = null;
             foreach (var implant in implants)
             {
-                if (!_tag.HasTag(implant, MindSlaveImplantTag))
+                if (!HasComp<MindSlaveImplantComponent>(implant))
                     continue;
 
                 mindslaveImplant = implant;

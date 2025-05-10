@@ -15,6 +15,14 @@
   - CentralCommandCBURN # SS220 centcomm access fix
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: CBURNGear

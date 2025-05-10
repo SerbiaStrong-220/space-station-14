@@ -4,6 +4,18 @@
   description: job-description-qm
   playTimeTracker: JobQuartermaster
   requirements:
+    #SS220 requirements begin
+    # off
+    # - !type:RoleTimeRequirement
+    #   role: JobCargoTechnician
+    #   time: 18000 #5 hrs
+    # - !type:RoleTimeRequirement
+    #   role: JobSalvageSpecialist
+    #   time: 9000 #2.5 hrs
+    # - !type:DepartmentTimeRequirement
+    #   department: Cargo
+    #   time: 36000 #10 hours
+    # off
     - !type:DepartmentTimeRequirement
       department: Cargo
       time: 108000 # SS220-RoleTime
@@ -18,6 +30,7 @@
       inverted: true
       species:
       - Felinid #SS220-jobbans end
+    #SS220 requirements end
   weight: 10
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"
@@ -35,6 +48,7 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+      - type: DefibrillatorSkill #SS220 LimitationRevive
 
 - type: startingGear
   id: QuartermasterGear

@@ -47,9 +47,6 @@
 - type: Tag
   id: DetectiveCamera
 
-- type: Tag
-  id: MindSlave
-
 # SS220-JianSword
 - type: Tag
   id: JianSword
@@ -226,9 +223,19 @@
 - type: Tag
   id: WhitelistPdaIdPainter
 
+
 # SS220 supa kithen
 - type: Tag
   id: MicrowaveMachineUnsafe
 
 - type: Tag
   id: MicrowaveSelfUnsafe
+
+- type: Tag
+  id: CultYoggStealthProvidable
+  
+# ss220 medkit fix #2834 begin
+- type: Tag
+  id: MaskBreath
+# ss220 medkit fix #2834  end
+

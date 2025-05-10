@@ -130,11 +130,19 @@ public sealed partial class AnomalyComponent : Component
     [DataField]
     public SoundSpecifier? SupercriticalSound = new SoundCollectionSpecifier("Explosion");
 
+    // SS220 anomaly run begin
     /// <summary>
     /// Will the anomaly randomly move with a pulse
     /// </summary>
     [DataField]
-    public Boolean PulseRun = true;
+    public bool PulseRun = true;
+    // SS220 anomaly run end
+
+    /// <summary>
+    /// The sound plays at the start of the animation when an anomaly goes supercritical
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? SupercriticalSoundAtAnimationStart;
     #endregion
 
     /// <summary>

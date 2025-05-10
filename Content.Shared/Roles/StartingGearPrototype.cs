@@ -17,7 +17,7 @@ public sealed partial class StartingGearPrototype : IPrototype, IInheritingProto
 
     /// <inheritdoc/>
     [AbstractDataField]
-    public bool Abstract { get; }
+    public bool Abstract { get; private set; }
 
     // SS220 fix inheritance begin
     /// <inheritdoc />
