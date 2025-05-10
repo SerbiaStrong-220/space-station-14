@@ -24,8 +24,8 @@ public sealed partial class SurgeryToolTypeCondition : ISurgeryGraphCondition
         return true;
     }
 
-    public void DoScanExamine()
+    public string ConditionDescriptionLocPath()
     {
-
+        return "ConditionDescriptionLocPath";
     }
 }
