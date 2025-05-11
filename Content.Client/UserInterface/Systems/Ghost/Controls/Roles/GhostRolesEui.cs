@@ -111,7 +111,6 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
             //}
 
             var groupedRoles = ghostState.GhostRoles.GroupBy(
-            // SS220 fix for merging role begin
             role => (role.Name, role.Description));
 
             // Add a new entry for each role group
