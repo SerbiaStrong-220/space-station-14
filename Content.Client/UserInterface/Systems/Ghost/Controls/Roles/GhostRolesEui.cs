@@ -105,6 +105,10 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
             //        group.Key.Requirements,
             //        null,
             //        out var reason);
+            //
+            //        // Adding a new role
+            //         _window.AddEntry(name, description, hasAccess, reason, group, spriteSystem);
+            //}
 
             var groupedRoles = ghostState.GhostRoles.GroupBy(
             // SS220 fix for merging role begin
