@@ -93,21 +93,20 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
             // TODO: role.Requirements value doesn't work at all as an equality key, this must be fixed
             // Grouping roles
             var groupedRoles = ghostState.GhostRoles.GroupBy(
-                role => (role.Name, role.Description)); // SS220 fix for merging role
+                role => (role.Name, role.Description, role.Requirements));
 
             // Add a new entry for each role group
             foreach (var group in groupedRoles)
             {
-                // SS220 fix for merging role list begin
-                var firstRole = group.First();
+                var name = group.Key.Name;
+                var description = group.Key.Description;
                 var hasAccess = requirementsManager.CheckRoleRequirements(
-                    firstRole.Requirements,
-                // SS220 fix for merging role list end
+                    group.Key.Requirements,
                     null,
                     out var reason);
 
                 // Adding a new role
-                _window.AddEntry(firstRole.Name, firstRole.Description, hasAccess, reason, group, spriteSystem); // SS220 fix for merging role
+                _window.AddEntry(name, description, hasAccess, reason, group, spriteSystem);
             }
 
             // Restore the Collapsible box state if it is saved
