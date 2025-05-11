@@ -4,7 +4,7 @@ ent-OrigamiBook = Книга Искусства Оригами
 ent-BoxOrigamiKit = { ent-BoxCardboard }
     .desc = { ent-BoxCardboard }
 
-origami-book-already-known = Вы уже знакомы с Искусством Оригами
+origami-book-already-known = Вы уже изучили Искусство Оригами
 origami-book-success-learned = Вы постигли Искусство Оригами
 origami-book-failed-learned = Вы постигаете Искусство Оригами. Продолжайте
 
