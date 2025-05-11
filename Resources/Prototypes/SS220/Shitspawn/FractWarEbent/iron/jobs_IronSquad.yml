@@ -94,8 +94,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: IronSquadLeader
@@ -202,8 +202,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: IronSquadEngineer
@@ -314,8 +314,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: IronSquadCorpsman
@@ -430,8 +430,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: IronSquadCMO
@@ -536,7 +536,7 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
+      reviveLimit: 3
       delayBeforeDamage: 180
 
 - type: job

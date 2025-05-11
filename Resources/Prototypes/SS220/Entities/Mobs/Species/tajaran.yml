@@ -112,7 +112,7 @@
     - id: Galactic
     - id: Siiktajr
   - type: LimitationRevive
-    maxRevive: 3
+    reviveLimit: 3
 
 - type: entity
   id: MobTajaranDummy
