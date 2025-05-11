@@ -44,7 +44,7 @@ public sealed partial class LimitationReviveComponent : Component
     {
         DamageDict = new()
         {
-            { "Сerebral", 16 }, //about 2 minutes to reach 400 with 5 second damage delays
+            { "Сerebral", 16 } //about 2 minutes to reach 400 with 5 second damage delays
         }
     };
 
