@@ -12,7 +12,7 @@ namespace Content.Server.Research.Systems;
 public sealed partial class ResearchSystem
 {
     [Dependency] private readonly LatheSystem _lathe = default!; //SS220-lathe-announcement-fix
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!; //SS220-lathe-announcement-fix
 
     private void InitializeServer()
     {
