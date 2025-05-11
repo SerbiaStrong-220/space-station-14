@@ -1,0 +1,88 @@
+- type: constructionGraph
+  id: Shawarma
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: shawarma
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 375
+
+  - node: shawarma
+    entity: FoodShawarmaOnGrill
+
+
+- type: constructionGraph
+  id: BakedChevreChaud
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: bakedChevreChaud
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 375
+
+  - node: bakedChevreChaud
+    entity: FoodBakedChevreChaud
+
+
+- type: constructionGraph
+  id: BakedChevreChaudCotton
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: bakedChevreChaudCotton
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 375
+
+  - node: bakedChevreChaudCotton
+    entity: FoodBakedChevreChaudCotton
+
+
+- type: constructionGraph
+  id: MealRibs
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: mealRibs
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 375
+
+  - node: mealRibs
+    entity: FoodMealRibs
+
+
+- type: constructionGraph
+  id: MealEnchiladas
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: mealEnchiladas
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 375
+
+  - node: mealEnchiladas
+    entity: FoodMealEnchiladas

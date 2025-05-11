@@ -1,0 +1,119 @@
+- type: entity
+  id: FoodRawBase
+  abstract: true
+  components:
+  - type: Construction
+  - type: AtmosExposed
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    thickness: 0.02
+    area: 0.02
+    conductivity: 0.43
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 4
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+
+- type: entity
+  parent: [FoodRawBase, FoodShawarma]
+  id: FoodRawShawarma
+  name: сырая шаурма
+  components:
+  - type: Construction
+    graph: Shawarma
+    node: start
+    defaultTarget: shawarma
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+
+- type: entity
+  parent: [FoodRawBase, FoodBakedChevreChaud]
+  id: FoodRawChevreChaud
+  name: raw chèvre chaud
+  components:
+  - type: Construction
+    graph: BakedChevreChaud
+    node: start
+    defaultTarget: bakedChevreChaud
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 3
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+
+- type: entity
+  parent: [FoodRawBase, FoodBakedChevreChaudCotton]
+  id: FoodRawChevreChaudCotton
+  name: raw cotton chèvre chaud
+  description: A disk of slightly melted chèvre flopped on top of a... cotton crostini, and toasted all-round.
+  components:
+  - type: Construction
+    graph: BakedChevreChaudCotton
+    node: start
+    defaultTarget: bakedChevreChaudCotton
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 3
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 0.5
+        - ReagentId: Fiber
+          Quantity: 0.5
+
+- type: entity
+  parent: [FoodRawBase, FoodMealRibs]
+  id: FoodRawMealRibs
+  name: raw bbq ribs
+  description: BBQ ribs, slathered in a healthy coating of BBQ sauce. The least vegan thing to ever exist.
+  components:
+  - type: Construction
+    graph: MealRibs
+    node: start
+    defaultTarget: mealRibs
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1.5
+        - ReagentId: Protein
+          Quantity: 5
+        - ReagentId: BbqSauce
+          Quantity: 5
+
+- type: entity
+  parent: [FoodRawBase, FoodMealEnchiladas]
+  id: FoodRawMealEnchiladas
+  name: raw enchiladas
+  description: Viva La Mexico!
+  components:
+  - type: Construction
+    graph: MealEnchiladas
+    node: start
+    defaultTarget: mealEnchiladas
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: CapsaicinOil
+          Quantity: 4

@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurorastation at https://github.com/Aurorastation/Aurora.3/blob/HEAD/icons/obj/machinery/cooking_machines.dmi and modifyed by Estkemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "oven"
+    },
+    {
+      "name": "door_open"
+    },
+    {
+      "name": "door_closed"
+    },
+    {
+      "name": "oven_broken"
+    },
+    {
+      "name": "door_open_broken"
+    },
+    {
+      "name": "door_closed_broken"
+    },
+    {
+      "name": "oven_on_unshaded",
+      "delays": [
+      [
+       0.1,
+       0.1,
+       0.1,
+       0.1,
+       0.1,
+       0.1,
+       0.1,
+       0.1
+      ]
+     ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+- files: ["grillsizzle.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tgstation at commit 8a77f32d273b66d74000fcef78c5661521c8ffd3"
+  source: "https://github.com/tgstation/tgstation/blob/8a77f32d273b66d74000fcef78c5661521c8ffd3/sound/machines/grill/grillsizzle.ogg"
+- files: ["ring.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tgstation at commit 8a77f32d273b66d74000fcef78c5661521c8ffd3"
+  source: "https://github.com/tgstation/tgstation/blob/8a77f32d273b66d74000fcef78c5661521c8ffd3/sound/machines/microwave/microwave-end.ogg"

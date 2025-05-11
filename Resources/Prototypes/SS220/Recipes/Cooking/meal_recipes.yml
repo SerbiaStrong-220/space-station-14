@@ -1,22 +1,22 @@
 - type: microwaveMealRecipe
-  id: RecipeCheburek
+  id: RecipeCheburek # SS220 Added to supa kitchen (oven)
   name: Cheburek recipe
   result: FoodCheburek
   time: 15
   reagents:
-    TableSalt: 5  
+    TableSalt: 5
   solids:
     FoodDough: 1
     FoodMeatCutlet: 1
     FoodOnionSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeShawarma
+  id: RecipeShawarma # SS220 Added to supa kitchen (grille)
   name: Shawarma recipe
   result: FoodShawarma
   time: 15
   reagents:
-    Mayo: 5  
+    Mayo: 5
   solids:
     FoodDough: 1
     FoodMeatChicken: 1
@@ -25,7 +25,7 @@
     FoodCheeseSlice: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBorsch
+  id: RecipeBorsch # SS220 Added to supa kitchen (microwave)
   name: Borsch recipe
   result: FoodSoupBeet
   time: 10
@@ -39,7 +39,7 @@
     Foodbeet: 1
 
 - type: microwaveMealRecipe
-  id: RecipeShchi
+  id: RecipeShchi # SS220 Added to supa kitchen (microwave)
   name: Shchi recipe
   result: FoodSoupShchi
   time: 10
@@ -53,7 +53,7 @@
     FoodCabbage: 1
 
 - type: microwaveMealRecipe
-  id: RecipeOkroshka
+  id: RecipeOkroshka # SS220 Added to supa kitchen (microwave)
   name: Okroshka recipe
   result: FoodSoupOkroshka
   time: 10
@@ -65,12 +65,12 @@
     FoodEggBoiled: 1
 
 - type: microwaveMealRecipe
-  id: RecipeOkroshkaKvass
+  id: RecipeOkroshkaKvass # SS220 Added to supa kitchen (microwave)
   name: Okroshka witch kvass recipe
   result: FoodSoupOkroshkaKvass
   time: 10
   reagents:
-    Kvass: 10  
+    Kvass: 10
   solids:
     FoodBowlBig: 1
     FoodMeatChicken: 1
@@ -79,7 +79,7 @@
     FoodEggBoiled: 1
 
 - type: microwaveMealRecipe
-  id: RecipeVinaigrette
+  id: RecipeVinaigrette # SS220 Added to supa kitchen (microwave)
   name: Vinaigrette recipe
   result: FoodSaladVinaigrette
   time: 10
@@ -93,7 +93,7 @@
 
 # SS220-Salami-update begin
 - type: microwaveMealRecipe
-  id: RecipeMeatSalami
+  id: RecipeMeatSalami # SS220 Added to supa kitchen (microwave)
   name: Salami recipe
   result: FoodMeatSalami
   time: 30
@@ -106,7 +106,7 @@
 
 # SS220 Slimesoup-recipe begin
 - type: microwaveMealRecipe
-  id: RecipeSlimeSoup
+  id: RecipeSlimeSoup # SS220 Added to supa kitchen (microwave)
   name: slime soup recipe
   result: FoodSoupSlime
   time: 10
@@ -120,7 +120,7 @@
 
 #SS220 Nachos-recipe begin
 - type: microwaveMealRecipe
-  id: RecipeNachos
+  id: RecipeNachos # SS220 Added to supa kitchen (microwave)
   name: nachos recipe
   result: FoodMealNachos
   time: 10
@@ -131,7 +131,7 @@
     FoodChiliPepper: 1
 
 - type: microwaveMealRecipe
-  id: RecipeNachosCheesy
+  id: RecipeNachosCheesy # SS220 Added to supa kitchen (microwave)
   name: nachos cheesy recipe
   result: FoodMealNachosCheesy
   time: 15
@@ -143,7 +143,7 @@
     FoodCheeseSlice: 2
 
 - type: microwaveMealRecipe
-  id: RecipeNachosCuban
+  id: RecipeNachosCuban # SS220 Added to supa kitchen (microwave)
   name: nachos cuban recipe
   result: FoodMealNachosCuban
   time: 15
@@ -157,7 +157,7 @@
 
 #SS220 Spicy UPD start
 - type: microwaveMealRecipe
-  id: RecipeSpicyPizza
+  id: RecipeSpicyPizza # SS220 Added to supa kitchen (oven)
   name: spicy pizza recipe
   result: SpicyPizzaFood
   time: 30
@@ -172,7 +172,7 @@
 
 #SS220 caramel cane start
 - type: microwaveMealRecipe
-  id: Caramel
+  id: Caramel # SS220 Added to supa kitchen (microwave)
   name: caramelka
   result: CaramelFood
   time: 15
@@ -181,7 +181,7 @@
     Water: 10
 
 - type: microwaveMealRecipe
-  id: CaramelRed
+  id: CaramelRed # SS220 Added to supa kitchen (microwave)
   name: red caramelka
   result: RedCaramelCaneFood
   time: 15
@@ -191,7 +191,7 @@
     CaramelBasedFood: 1
 
 - type: microwaveMealRecipe
-  id: CaramelGreen
+  id: CaramelGreen # SS220 Added to supa kitchen (microwave)
   name: green caramelka
   result: GreenCaramelCaneFood
   time: 15
@@ -201,7 +201,7 @@
     CaramelBasedFood: 1
 
 - type: microwaveMealRecipe
-  id: CaramelGreenRed
+  id: CaramelGreenRed # SS220 Added to supa kitchen (microwave)
   name: greenred caramelka
   result: CaramelCaneGreenRedFood
   time: 15
@@ -212,7 +212,7 @@
     CaramelBasedFood: 1
 
 - type: microwaveMealRecipe
-  id: double Caramel
+  id: double Caramel # SS220 Added to supa kitchen (microwave)
   name: double caramelka
   result: DoubleCaramelCaneFood
   time: 20

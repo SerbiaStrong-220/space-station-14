@@ -44,4 +44,6 @@
   - type: Food
   - type: Sprite
     state: shawarmaGrill
-  
+  - type: Construction
+    graph: Shawarma
+    node: shawarma
