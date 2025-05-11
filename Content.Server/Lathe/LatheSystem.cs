@@ -361,7 +361,7 @@ namespace Content.Server.Lathe
             UpdateUserInterfaceState(uid, component);
         }
 
-        //SS220-lathe-announcement-fix begin
+        //SS220-lathe-announcement-fix begin (Moved to ResearchSystem.Server.cs)
         /*private void OnTechnologyDatabaseModified(Entity<LatheAnnouncingComponent> ent, ref TechnologyDatabaseModifiedEvent args)
         {
             if (args.NewlyUnlockedRecipes is null)
