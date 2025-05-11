@@ -242,9 +242,7 @@ namespace Content.Server.SS220.CluwneComms
         }
 
         #region News copypaste
-        /// <summary>
         ///     Copypaste from NewsSystem because original methods are private
-        /// </summary>
 
         private void UpdateWriterUi(Entity<NewsWriterComponent> ent)
         {
