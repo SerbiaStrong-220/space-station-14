@@ -125,11 +125,11 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
 
                 var name = firstRole.Name;
                 var description = firstRole.Description;
-                // SS220 fix for merging role list end
 
                 // Adding a new role
                 _window.AddEntry(name, description, hasAccess, reason, group, spriteSystem);
             }
+            // SS220 fix for merging role list end
 
             // Restore the Collapsible box state if it is saved
             _window.RestoreCollapsibleBoxesStates();
