@@ -177,7 +177,7 @@
       delayBeforeDamage: 180
       damage:
         types:
-          Сerebral: 400
+          Сerebral: 33
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -243,7 +243,7 @@
       delayBeforeDamage: 180
       damage:
         types:
-          Сerebral: 400
+          Сerebral: 33
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -314,7 +314,7 @@
       delayBeforeDamage: 180
       damage:
         types:
-          Сerebral: 400
+          Сerebral: 33
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -382,7 +382,7 @@
       delayBeforeDamage: 180
       damage:
         types:
-          Сerebral: 400
+          Сerebral: 33
 
 - type: job
   id: SpecOpsCMO
@@ -452,7 +452,7 @@
       delayBeforeDamage: 180
       damage:
         types:
-          Сerebral: 400
+          Сerebral: 33
 
 - type: job
   id: SpecOpsFighter

@@ -74,7 +74,7 @@
       delayBeforeDamage: 180
       damage:
         types:
-          Сerebral: 400
+          Сerebral: 33
 
 - type: job
   id: USSPLeader
@@ -170,7 +170,7 @@
       delayBeforeDamage: 180
       damage:
         types:
-          Сerebral: 400
+          Сerebral: 33
 
 - type: job
   id: USSPEngineer
@@ -266,7 +266,7 @@
       delayBeforeDamage: 180
       damage:
         types:
-          Сerebral: 400
+          Сerebral: 33
 
 - type: job
   id: USSPCorpsman
@@ -361,7 +361,7 @@
       delayBeforeDamage: 180
       damage:
         types:
-          Сerebral: 400
+          Сerebral: 33
 
 - type: job
   id: USSPCMO
@@ -450,7 +450,7 @@
       delayBeforeDamage: 180
       damage:
         types:
-          Сerebral: 400
+          Сerebral: 33
 
 - type: job
   id: USSPFighter

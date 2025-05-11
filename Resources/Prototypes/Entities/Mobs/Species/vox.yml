@@ -200,7 +200,7 @@
     maxRevive: 100 #has no death limit
     damage:
       types:
-        Сerebral: 400
+        Сerebral: 33
   #SS220 LimitationRevive - end
   - type: Hands
     leftHandDisplacement:

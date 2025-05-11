@@ -41,7 +41,7 @@
   - type: LimitationRevive
     damage:
       types:
-        Сerebral: 400
+        Сerebral: 33
   #SS220 LimitationRevive - end
 
 - type: entity

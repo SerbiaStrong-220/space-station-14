@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Damage;
 using Content.Shared.Random;
 using Robust.Shared.Prototypes;
@@ -38,18 +39,30 @@ public sealed partial class LimitationReviveComponent : Component
     /// <summary>
     /// How much and what type of damage will be dealt
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [ViewVariables(VVAccess.ReadWrite), DataField(required: true)]
     public DamageSpecifier Damage;
 
     /// <summary>
     /// Delay before target takes brain damage
     /// </summary>
-    [DataField]
-    public TimeSpan TimeBetweenIncidents = TimeSpan.FromSeconds(60);
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan TimeBetweenIncidents = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    /// Delay before target takes brain damage
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan? NextIncidentTime;
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";
 
+    /// <summary>
+    /// The probability from 0 to 1 that a negative feature will be added in case of unsuccessful use of the defibrillator.
+    /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float ChanceToAddTrait = 0.6f;
 }
+
+[ByRefEvent]
+public readonly record struct AddReviweDebuffsEvent();

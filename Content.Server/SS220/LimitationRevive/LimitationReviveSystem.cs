@@ -1,9 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Cloning;
+
 using Content.Shared.Cloning.Events;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Traits;
@@ -30,6 +29,7 @@ public sealed class LimitationReviveSystem : EntitySystem
     {
         SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
+        SubscribeLocalEvent<LimitationReviveComponent, AddReviweDebuffsEvent>(OnAddReviweDebuffs);
     }
 
     private void OnMobStateChanged(Entity<LimitationReviveComponent> ent, ref MobStateChangedEvent args)
@@ -42,29 +42,29 @@ public sealed class LimitationReviveSystem : EntitySystem
         if (args.OldMobState == MobState.Dead)
         {
             ent.Comp.DamageTime = null;
+            ent.Comp.NextIncidentTime = null;
             ent.Comp.DeathCounter++;
-            RemComp<DyingBrainComponent>(ent);
-
-            //TODO SS220 redo this one
-            if (_random.Prob(ent.Comp.ChanceToAddTrait))
-            {
-
-                var traitString = _prototype.Index<WeightedRandomPrototype>(ent.Comp.WeightListProto)
-                    .Pick(_random);
-
-                var traitProto = _prototype.Index<TraitPrototype>(traitString);
-
-                if (traitProto.Components is not null)
-                    _entityManager.AddComponents(ent, traitProto.Components, false);
-
-            }
         }
     }
 
-    private void OnCloning(Entity<LimitationReviveComponent> entity, ref CloningEvent args)
+    private void OnAddReviweDebuffs(Entity<LimitationReviveComponent> ent, ref AddReviweDebuffsEvent args)
+    {
+        //TODO SS220 redo this one
+        if (!_random.Prob(ent.Comp.ChanceToAddTrait))
+            return;
+
+        var traitString = _prototype.Index<WeightedRandomPrototype>(ent.Comp.WeightListProto).Pick(_random);
+
+        var traitProto = _prototype.Index<TraitPrototype>(traitString);
+
+        if (traitProto.Components is not null)
+            _entityManager.AddComponents(ent, traitProto.Components, false);
+    }
+
+    private void OnCloning(Entity<LimitationReviveComponent> ent, ref CloningEvent args)
     {
         var targetComp = EnsureComp<LimitationReviveComponent>(args.CloneUid);
-        _serialization.CopyTo(entity.Comp, ref targetComp, notNullableOverride: true);
+        _serialization.CopyTo(ent.Comp, ref targetComp, notNullableOverride: true);
 
         targetComp.DeathCounter = 0;
     }
@@ -75,18 +75,36 @@ public sealed class LimitationReviveSystem : EntitySystem
 
         while (query.MoveNext(out var uid, out var limitationRevive))
         {
-            if (limitationRevive.DamageTime is null)
-                return;
-
-            if (_timing.CurTime < limitationRevive.DamageTime)
-                return;
-
-            //create ticking damage and update its variables
-            var brain = EnsureComp<DyingBrainComponent>(uid);
-            brain.TimeBetweenIncidents = limitationRevive.TimeBetweenIncidents;
-            brain.Damage = limitationRevive.Damage; 
-
-            limitationRevive.DamageTime = null;
+            BeforeDamage(limitationRevive);
+            TickingDamage(uid, limitationRevive);
         }
+    }
+
+    private void BeforeDamage(LimitationReviveComponent comp)
+    {
+        if (comp.DamageTime is null)
+            return;
+
+        if (_timing.CurTime < comp.DamageTime)
+            return;
+
+        comp.NextIncidentTime = _timing.CurTime + comp.NextIncidentTime;
+
+        comp.DamageTime = null;
+    }
+
+    private void TickingDamage(EntityUid ent, LimitationReviveComponent comp)
+    {
+        if (comp.NextIncidentTime is null)
+            return;
+
+        //ToDo SS220 not sure if it should be capped
+
+        if (_timing.CurTime < comp.NextIncidentTime)
+            return;
+
+        _damageableSystem.TryChangeDamage(ent, comp.Damage, true);
+
+        comp.NextIncidentTime = _timing.CurTime + comp.TimeBetweenIncidents;
     }
 }

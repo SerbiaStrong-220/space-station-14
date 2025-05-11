@@ -149,7 +149,7 @@
     - id: Tkachi
   # SS220-Add-Languages end
   - type: Inventory
-    speciesId: moth 
+    speciesId: moth
     femaleDisplacements:
       jumpsuit:
         sizeMaps:
@@ -164,7 +164,7 @@
   - type: LimitationRevive
     damage:
       types:
-        Сerebral: 400
+        Сerebral: 33
   #SS220 LimitationRevive - end
 
 - type: entity
@@ -179,7 +179,7 @@
   - type: HumanoidAppearance
     species: Moth
   - type: Inventory
-    speciesId: moth 
+    speciesId: moth
     femaleDisplacements:
       jumpsuit:
         sizeMaps:
