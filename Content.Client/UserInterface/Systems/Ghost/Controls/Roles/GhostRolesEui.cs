@@ -90,6 +90,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
             var spriteSystem = sysManager.GetEntitySystem<SpriteSystem>();
             var requirementsManager = IoCManager.Resolve<JobRequirementsManager>();
 
+            // SS220 fix for merging role begin
             //// TODO: role.Requirements value doesn't work at all as an equality key, this must be fixed
             //// Grouping roles
             //var groupedRoles = ghostState.GhostRoles.GroupBy(
