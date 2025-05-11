@@ -27,7 +27,6 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Server.Station.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Random;
-using System.Text.RegularExpressions;
 
 namespace Content.Server.SS220.CluwneComms
 {
