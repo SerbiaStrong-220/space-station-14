@@ -88,7 +88,7 @@ public sealed class LimitationReviveSystem : EntitySystem
         if (_timing.CurTime < comp.DamageTime)
             return;
 
-        comp.NextIncidentTime = _timing.CurTime + comp.NextIncidentTime;
+        comp.NextIncidentTime = _timing.CurTime + comp.TimeBetweenIncidents;
 
         comp.DamageTime = null;
     }

@@ -40,7 +40,7 @@ public sealed partial class LimitationReviveComponent : Component
     /// How much and what type of damage will be dealt
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField]
-    public DamageSpecifier Damage = new() //I hardcoded the value so that I wouldn't have to write it in every species, but could change it for unusual ones
+    public DamageSpecifier Damage = new() //I hardcoded the base value because it can't be null
     {
         DamageDict = new()
         {
