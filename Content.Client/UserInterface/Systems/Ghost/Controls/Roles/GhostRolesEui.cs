@@ -90,20 +90,37 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
             var spriteSystem = sysManager.GetEntitySystem<SpriteSystem>();
             var requirementsManager = IoCManager.Resolve<JobRequirementsManager>();
 
-            // TODO: role.Requirements value doesn't work at all as an equality key, this must be fixed
-            // Grouping roles
+            //// TODO: role.Requirements value doesn't work at all as an equality key, this must be fixed
+            //// Grouping roles
+            //var groupedRoles = ghostState.GhostRoles.GroupBy(
+            //    role => (role.Name, role.Description, role.Requirements));
+
+            //// Add a new entry for each role group
+            //foreach (var group in groupedRoles)
+            //{
+            //    var name = group.Key.Name;
+            //    var description = group.Key.Description;
+            //    var hasAccess = requirementsManager.CheckRoleRequirements(
+            //        group.Key.Requirements,
+            //        null,
+            //        out var reason);
+
             var groupedRoles = ghostState.GhostRoles.GroupBy(
-                role => (role.Name, role.Description, role.Requirements));
+            // SS220 fix for merging role begin
+            role => (role.Name, role.Description));
 
             // Add a new entry for each role group
             foreach (var group in groupedRoles)
             {
-                var name = group.Key.Name;
-                var description = group.Key.Description;
+                var firstRole = group.First();
                 var hasAccess = requirementsManager.CheckRoleRequirements(
-                    group.Key.Requirements,
+                    firstRole.Requirements,
                     null,
                     out var reason);
+
+                var name = firstRole.Name;
+                var description = firstRole.Description;
+                // SS220 fix for merging role list end
 
                 // Adding a new role
                 _window.AddEntry(name, description, hasAccess, reason, group, spriteSystem);
