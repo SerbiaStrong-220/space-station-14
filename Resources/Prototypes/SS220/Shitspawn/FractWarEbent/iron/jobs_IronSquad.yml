@@ -537,7 +537,7 @@
       chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
-      delayBeforeDamage: 180
+      beforeDamageDelay: 180
 
 - type: job
   id: IronSquadFighter
