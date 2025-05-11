@@ -39,7 +39,7 @@ public sealed partial class LimitationReviveComponent : Component
     /// <summary>
     /// How much and what type of damage will be dealt
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [DataField]
     public DamageSpecifier Damage = new() //I hardcoded the base value because it can't be null
     {
         DamageDict = new()
@@ -51,7 +51,7 @@ public sealed partial class LimitationReviveComponent : Component
     /// <summary>
     /// Delay before target takes brain damage
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public TimeSpan TimeBetweenIncidents = TimeSpan.FromSeconds(5);
 
     /// <summary>
@@ -60,12 +60,12 @@ public sealed partial class LimitationReviveComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan? NextIncidentTime;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";
 
     /// <summary>
     /// The probability from 0 to 1 that a negative feature will be added in case of unsuccessful use of the defibrillator.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float ChanceToAddTrait = 0.6f;
 }
