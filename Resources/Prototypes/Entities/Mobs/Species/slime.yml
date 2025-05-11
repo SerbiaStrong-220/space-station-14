@@ -161,9 +161,6 @@
   #SS220 LimitationRevive - start
   - type: LimitationRevive
     maxRevive: 100 #has no death limit
-    damage:
-      types:
-        Сerebral: 400
   #SS220 LimitationRevive - end
 
 - type: entity

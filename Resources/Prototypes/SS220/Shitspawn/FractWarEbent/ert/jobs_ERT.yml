@@ -175,9 +175,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -241,9 +238,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -312,9 +306,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -380,9 +371,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
 
 - type: job
   id: SpecOpsCMO
@@ -450,9 +438,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
 
 - type: job
   id: SpecOpsFighter

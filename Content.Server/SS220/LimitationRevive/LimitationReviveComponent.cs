@@ -39,8 +39,14 @@ public sealed partial class LimitationReviveComponent : Component
     /// <summary>
     /// How much and what type of damage will be dealt
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField(required: true)]
-    public DamageSpecifier Damage;
+    [ViewVariables(VVAccess.ReadWrite), DataField]
+    public DamageSpecifier Damage = new() //I hardcoded the value so that I wouldn't have to write it in every species, but could change it for unusual ones
+    {
+        DamageDict = new()
+        {
+            { "Сerebral", 16 }, //about 2 minutes to reach 400 with 5 second damage delays
+        }
+    };
 
     /// <summary>
     /// Delay before target takes brain damage
@@ -63,6 +69,3 @@ public sealed partial class LimitationReviveComponent : Component
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float ChanceToAddTrait = 0.6f;
 }
-
-[ByRefEvent]
-public readonly record struct AddReviweDebuffsEvent();

@@ -72,9 +72,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
 
 - type: job
   id: USSPLeader
@@ -168,9 +165,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
 
 - type: job
   id: USSPEngineer
@@ -264,9 +258,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
 
 - type: job
   id: USSPCorpsman
@@ -359,9 +350,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
 
 - type: job
   id: USSPCMO
@@ -448,9 +436,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
 
 - type: job
   id: USSPFighter

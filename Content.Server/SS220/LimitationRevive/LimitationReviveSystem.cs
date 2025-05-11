@@ -49,7 +49,7 @@ public sealed class LimitationReviveSystem : EntitySystem
 
     private void OnAddReviweDebuffs(Entity<LimitationReviveComponent> ent, ref AddReviweDebuffsEvent args)
     {
-        //TODO SS220 redo this one
+        //rn i am too tired to check if this ok
         if (!_random.Prob(ent.Comp.ChanceToAddTrait))
             return;
 
@@ -98,7 +98,7 @@ public sealed class LimitationReviveSystem : EntitySystem
         if (comp.NextIncidentTime is null)
             return;
 
-        //ToDo SS220 not sure if it should be capped
+        //not sure if it should be capped
 
         if (_timing.CurTime < comp.NextIncidentTime)
             return;

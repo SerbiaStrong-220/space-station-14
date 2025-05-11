@@ -198,9 +198,6 @@
   #SS220 LimitationRevive - start
   - type: LimitationRevive
     maxRevive: 100 #has no death limit
-    damage:
-      types:
-        Сerebral: 33
   #SS220 LimitationRevive - end
   - type: Hands
     leftHandDisplacement:

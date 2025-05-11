@@ -113,9 +113,6 @@
     - id: Siiktajr
   - type: LimitationRevive
     maxRevive: 3
-    damage:
-      types:
-        Сerebral: 400
 
 - type: entity
   id: MobTajaranDummy

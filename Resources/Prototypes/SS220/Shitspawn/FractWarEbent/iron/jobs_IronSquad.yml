@@ -96,9 +96,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
 
 - type: job
   id: IronSquadLeader
@@ -207,9 +204,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
 
 - type: job
   id: IronSquadEngineer
@@ -322,9 +316,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
 
 - type: job
   id: IronSquadCorpsman
@@ -441,9 +432,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
 
 - type: job
   id: IronSquadCMO
@@ -550,9 +538,6 @@
     - type: LimitationRevive
       maxRevive: 3
       delayBeforeDamage: 180
-      damage:
-        types:
-          Сerebral: 33
 
 - type: job
   id: IronSquadFighter
