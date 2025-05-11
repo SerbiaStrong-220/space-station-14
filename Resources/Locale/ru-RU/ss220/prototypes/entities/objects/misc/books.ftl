@@ -6,6 +6,6 @@ ent-BoxOrigamiKit = { ent-BoxCardboard }
 
 origami-book-already-known = Вы уже знакомы с Искусством Оригами
 origami-book-success-learned = Вы постигли Искусство Оригами
-origami-book-failed-learned = Вы помалу начинаете постигать Искусство Оригами
+origami-book-failed-learned = Вы постигаете Искусство Оригами. Продолжайте
 
 origami-transform-from-paper = Сложить самолётик
