@@ -164,6 +164,7 @@ namespace Content.Server.SS220.CluwneComms
             ent.Comp.CanAnnounce = false;
             UpdateUI(ent, ent.Comp);
         }
+
         private void OnAlertMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleAlertMessage args)
         {
             if (args.Message == "" || args.Instruntions == "" || args.Alert == "")
@@ -242,7 +243,7 @@ namespace Content.Server.SS220.CluwneComms
         }
 
         #region News copypaste
-        ///     Copypaste from NewsSystem because original methods are private
+        //Copypaste from NewsSystem because original methods are private
 
         private void UpdateWriterUi(Entity<NewsWriterComponent> ent)
         {
