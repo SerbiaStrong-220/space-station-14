@@ -27,6 +27,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Server.Station.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Random;
+using System.Text.RegularExpressions;
 
 namespace Content.Server.SS220.CluwneComms
 {
@@ -113,7 +114,7 @@ namespace Content.Server.SS220.CluwneComms
                 levels.Add(item.Key);
             }
 
-            CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce, comp.CanAlert, levels, comp.AnnouncementCooldownRemaining, comp.AlertCooldownRemaining, comp.ExplosionProbability);
+            CluwneCommsConsoleInterfaceState newState = new CluwneCommsConsoleInterfaceState(comp.CanAnnounce, comp.CanAlert, levels, comp.AnnouncementCooldownRemaining, comp.AlertCooldownRemaining);
             _uiSystem.SetUiState(ent, CluwneCommsConsoleUiKey.Key, newState);
         }
 
@@ -236,8 +237,11 @@ namespace Content.Server.SS220.CluwneComms
 
         private void OnBoomMessage(Entity<CluwneCommsConsoleComponent> ent, ref CluwneCommsConsoleBoomMessage args)
         {
-            if (args.Booming)//in case somebody abuse it just as bomb
+            if (_random.Prob(ent.Comp.ExplosionProbability))//in case somebody abuse it just as bomb
+            {                                                            //={}
+                _uiSystem.CloseUi(ent.Owner, CluwneCommsConsoleUiKey.Key, args.Actor);
                 _explosion.QueueExplosion(ent, "Default", ent.Comp.ExplosionTotalIntensity, ent.Comp.ExplosionSlope, ent.Comp.ExplosionMaxTileIntensity, canCreateVacuum: false);
+            }
             else
                 _audio.PlayPvs(ent.Comp.BoomFailSound, ent);
         }
