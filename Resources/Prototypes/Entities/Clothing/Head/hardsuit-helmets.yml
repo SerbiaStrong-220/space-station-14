@@ -329,14 +329,17 @@
   name: chief engineer's hardsuit helmet
   description: Special hardsuit helmet, made for the chief engineer of the station.
   components:
+#SS220-Chief-Helmet-FIX-Begin
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/engineering-white.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/engineering-white.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/engineering-white.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/engineering-white.rsi
   - type: PointLight
-    color: green
+    color: "#daffad"
+    radius: 6
   - type: PressureProtection
-    highPressureMultiplier: 0.08
+    highPressureMultiplier: 0.72 # До-апстримное значение 3d1dab262bd4bc1a8291c1e99c568805ee3c124d
+#SS220-Chief-Helmet-FIX-End
     lowPressureMultiplier: 1000
   - type: Armor
     modifiers:
