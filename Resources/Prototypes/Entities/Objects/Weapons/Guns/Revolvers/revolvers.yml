@@ -28,6 +28,7 @@
     - Belt
   - type: AmmoCounter
   - type: Gun
+    canSuicide: true ##SS220-new-feature kus
     selectedMode: SemiAuto
     fireRate: 1.5
     availableModes:

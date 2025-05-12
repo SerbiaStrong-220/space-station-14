@@ -82,6 +82,10 @@
     shape:
     - 0,0,1,0
     - 0,1,0,1
+  #SS220-new-feature kus begin
+  - type: Gun
+    canSuicide: true
+  #SS220-new-feature kus end
   - type: Tag
     tags:
     - Sidearm
@@ -99,6 +103,10 @@
   components:
   - type: Item
     size: Small
+  #SS220-new-feature kus begin
+  - type: Gun
+    canSuicide: true
+  #SS220-new-feature kus end
   - type: Tag
     tags:
     - Sidearm

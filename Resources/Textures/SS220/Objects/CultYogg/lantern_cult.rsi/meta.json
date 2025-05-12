@@ -11,13 +11,7 @@
             "name": "lantern"
           },
           {
-            "name": "lantern-on"
-          },
-          {
-            "name": "burnt"
-          },
-          {
-            "name": "flashing"
+            "name": "lantern_on"
           },
           {
             "name": "off-equipped-BELT",

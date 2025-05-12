@@ -35,6 +35,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.DoAfter;
+using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -66,6 +68,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected readonly ThrowingSystem ThrowingSystem = default!;
     [Dependency] private   readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!; // ss220-new-feature kus
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
@@ -98,6 +101,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, CycleModeEvent>(OnCycleMode);
         SubscribeLocalEvent<GunComponent, HandSelectedEvent>(OnGunSelected);
         SubscribeLocalEvent<GunComponent, MapInitEvent>(OnMapInit);
+        // SS220-new-feature kus start
+        SubscribeLocalEvent<GunComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
+        SubscribeLocalEvent<SuicideDoAfterEvent>(OnDoSuicideComplete);
+        // SS220-new-feature kus end
     }
 
     private void OnMapInit(Entity<GunComponent> gun, ref MapInitEvent args)
@@ -642,3 +649,10 @@ public enum AmmoVisuals : byte
     MagLoaded,
     BoltClosed,
 }
+
+///SS220-new-feature kus start
+[Serializable, NetSerializable]
+public sealed partial class SuicideDoAfterEvent : SimpleDoAfterEvent
+{
+}
+///SS220-new-feature kus end
