@@ -116,12 +116,12 @@
   description: A void suit made for paramedics.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/paramed.rsi  #SS220 texture
+    sprite: Clothing/OuterClothing/Hardsuits/paramed.rsi
     layers:
     - state: icon
   - type: Appearance
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/paramed.rsi  #SS220 texture
+    sprite: Clothing/OuterClothing/Hardsuits/paramed.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000

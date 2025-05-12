@@ -71,7 +71,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Hardsuits/paramedhelm.rsi #SS220 texture
+    sprite: Clothing/Head/Hardsuits/paramedhelm.rsi
   - type: HandheldLight
     addPrefix: false
   - type: ToggleableLightVisuals
