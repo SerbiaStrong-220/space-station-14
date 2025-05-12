@@ -14,6 +14,7 @@
     - id: Telescopichka
     - id: BoxEncryptionKeyLaw
     - id: BoxTapeRecorder
+    - id: JudgeGavel
 
 - type: entity
   id: LockerMagistrateFilled
