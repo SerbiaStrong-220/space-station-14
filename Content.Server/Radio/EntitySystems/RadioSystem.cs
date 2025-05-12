@@ -21,7 +21,8 @@ using System.Globalization;
 using Content.Server.Popups;
 using Content.Server.SS220.Language;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.SS220.Language.Systems; // SS220-Add-Languages
+using Content.Shared.SS220.Language.Systems;
+using Content.Shared.Silicons.Borgs.Components; // SS220-Add-Languages
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -278,6 +279,14 @@ public sealed class RadioSystem : EntitySystem
     // SS220 radio-department-tag begin
     private string GetIdCardName(EntityUid senderUid)
     {
+        // SS220 Borg-JobId-fix begin
+        if (HasComp<BorgChassisComponent>(senderUid) && TryPrototype(senderUid, out var borgPototype))
+        {
+            string borJob = borgPototype.Name.ToString();
+            return $"\\[{borJob}\\] ";
+        }
+        // SS220 Borg-JobId-fix end
+
         var idCardTitle = Loc.GetString("chat-radio-no-id");
         idCardTitle = GetIdCard(senderUid)?.LocalizedJobTitle ?? idCardTitle;
 
