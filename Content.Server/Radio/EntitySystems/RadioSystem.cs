@@ -21,8 +21,8 @@ using System.Globalization;
 using Content.Server.Popups;
 using Content.Server.SS220.Language;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.SS220.Language.Systems;
-using Content.Shared.Silicons.Borgs.Components; // SS220-Add-Languages
+using Content.Shared.SS220.Language.Systems;  // SS220-Add-Languages
+using Content.Shared.Silicons.Borgs.Components; // SS220 Borg-JobId-fix
 
 namespace Content.Server.Radio.EntitySystems;
 
