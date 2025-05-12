@@ -255,6 +255,8 @@ public abstract partial class SharedGunSystem
         Shoot(weapon, guncomp, ev.Ammo, coordsFrom, coordsTo, out _);
         if (damageType != null)
         {
+            // Проджектайлу пули нужно время, чтобы долететь до куклы, зарегать попадание и нанести урон.
+            // Без задержки проджектайл просто пролетит над трупом.
             Timer.Spawn(200, () =>
             {
                 if (TryComp<MobThresholdsComponent>(user, out var thresholdsComp)
