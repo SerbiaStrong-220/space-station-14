@@ -754,6 +754,7 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Revolvers/chimp.rsi
   - type: Gun
+    canSuicide: false # SS220-new-feature kus
     projectileSpeed: 10
     fireRate: 1.5
     soundGunshot:
