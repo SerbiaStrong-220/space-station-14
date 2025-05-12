@@ -11,33 +11,33 @@
       "name": "green_caramel_rooster"
     },
     {
-      "name": "inhand-leftg",
+      "name": "inhand-left-green",
       "directions": 4
     },
     {
-      "name": "inhand-rightg",
+      "name": "inhand-right-green",
       "directions": 4
     },
     {
       "name": "red_caramel_rooster"
     },
     {
-      "name": "inhand-leftr",
+      "name": "inhand-left-red",
       "directions": 4
     },
     {
-      "name": "inhand-rightr",
+      "name": "inhand-right-red",
       "directions": 4
     },
     {
       "name": "yellow_caramel_rooster"
     },
     {
-      "name": "inhand-lefty",
+      "name": "inhand-left-yellow",
       "directions": 4
     },
     {
-      "name": "inhand-righty",
+      "name": "inhand-right-yellow",
       "directions": 4
     }
   ]
