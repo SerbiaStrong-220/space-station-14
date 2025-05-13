@@ -57,3 +57,8 @@
   id: Xlebnuldiesel
   flavorType: Complex
   description: flavor-complex-xlebnuldiesel
+
+- type: flavor
+  id: rrranta
+  flavorType: Complex
+  description: flavor-complex-rrranta

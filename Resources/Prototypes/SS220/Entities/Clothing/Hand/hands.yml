@@ -145,7 +145,6 @@
     activatedDamage:
       types:
         Blunt: 0
-        Stamina: 55
   - type: MeleeWeapon
     damage:
       types:
@@ -153,10 +152,7 @@
     bluntStaminaDamageFactor: 2.0
     mustBeEquippedToUse: true
   - type: StaminaDamageOnHit
-    damage: 0
-    sound: /Audio/Weapons/egloves.ogg
-  - type: StaminaDamageOnCollide
-    damage: 0
+    damage: 55
     sound: /Audio/Weapons/egloves.ogg
   - type: DamageOnInteractProtection
     damageProtection:

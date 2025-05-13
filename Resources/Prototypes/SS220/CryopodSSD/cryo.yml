@@ -6,7 +6,7 @@
   name: портал в крио
   components:
     - type: Sprite
-      sprite: /Textures/Effects/portal.rsi
+      sprite: /Textures/SS220/Effects/portal.rsi # SS220 Portal Resprite
       state: portal-blue
     - type: PointLight
       netsync: false

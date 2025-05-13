@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Damage;
 using Content.Shared.Item;
@@ -25,6 +25,14 @@ public sealed partial class SwitchableWeaponComponent : Component
             { "Blunt", 4.0f },
         }
     };
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("staminaDamageFolded")]
+    public float StaminaDamageFolded = 0;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("staminaDamageOpen")]
+    public float StaminaDamageOpen = 28;
 
     [ViewVariables(VVAccess.ReadWrite)][DataField("isOpen")]
     public bool IsOpen = false;
