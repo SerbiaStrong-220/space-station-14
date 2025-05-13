@@ -557,9 +557,22 @@ namespace Content.Client.Lobby.UI
                     var trait = _prototypeManager.Index<TraitPrototype>(traitProto);
                     var selector = new TraitPreferenceSelector(trait);
 
+                    //ss220 add traits start
+                    var isBlocked = trait.MutuallyExclusiveWith?.Any(conflictId =>
+                        Profile?.TraitPreferences.Contains(conflictId) == true) == true;
+                    //ss220 add traits end
+
                     selector.Preference = Profile?.TraitPreferences.Contains(trait.ID) == true;
                     if (selector.Preference)
                         selectionCount += trait.Cost;
+
+                    //ss220 add traits start
+                    if (isBlocked && !selector.Preference)
+                    {
+                        selector.Checkbox.Disabled = true;
+                        selector.Checkbox.Label.FontColorOverride = Color.DarkGray;
+                    }
+                    //ss220 add traits end
 
                     selector.PreferenceChanged += preference =>
                     {

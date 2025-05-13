@@ -222,3 +222,11 @@
 
 - type: Tag
   id: WhitelistPdaIdPainter
+
+- type: Tag
+  id: CultYoggStealthProvidable
+  
+# ss220 medkit fix #2834 begin
+- type: Tag
+  id: MaskBreath
+# ss220 medkit fix #2834  end

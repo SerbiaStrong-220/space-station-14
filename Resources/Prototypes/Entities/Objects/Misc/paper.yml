@@ -632,6 +632,9 @@
     - HighRiskItem
   - type: StealTarget
     stealGroup: BoxFolderQmClipboard
+  #ss220 pinpointer ui add start
+  - type: TrackedItem
+  #ss220 pinpointer ui add end
 
 - type: entity
   parent: [Paper] # eat or burn your damn piece of paper damn thieves

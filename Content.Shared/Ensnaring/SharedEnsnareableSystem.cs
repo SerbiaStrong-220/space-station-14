@@ -328,11 +328,16 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         Container.Remove(ensnare, ensnareable.Container, force: true);
         ensnareable.IsEnsnared = ensnareable.Container.ContainedEntities.Count > 0;
         Dirty(component.Ensnared.Value, ensnareable);
-        component.Ensnared = null;
+        //component.Ensnared = null; //ss220 add freedom from bola
 
         UpdateAlert(target, ensnareable);
         var ev = new EnsnareRemoveEvent(component.WalkSpeed, component.SprintSpeed);
-        RaiseLocalEvent(ensnare, ev);
+        //ss220 add freedom from bola start
+        //RaiseLocalEvent(ensnare, ev); //ss220 why raise event on bola???
+        RaiseLocalEvent(component.Ensnared.Value, ev);
+
+        component.Ensnared = null;
+        //ss220 add freedom from bola end
     }
 
     /// <summary>
