@@ -33,6 +33,7 @@ using Content.Shared.Roles; // SS220 Cryostorage ghost role fix
 using Robust.Shared.Prototypes; // SS220 Cryostorage ghost role fix
 using Content.Server.SS220.Bed.Cryostorage; // SS220 cryo department record
 using Content.Shared.Forensics.Components; //SS220 Cult_hotfix_4
+using Content.Shared.Anomaly.Components; //SS220 Cryo anomaly fix
 
 namespace Content.Server.Bed.Cryostorage;
 
@@ -184,6 +185,9 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
         if (!TryComp<CryostorageComponent>(cryostorageEnt, out var cryostorageComponent))
             return;
+
+        if (TryComp<InnerBodyAnomalyComponent>(ent, out var _))
+            RemComp<InnerBodyAnomalyComponent>(ent.Owner);
 
         // if we have a session, we use that to add back in all the job slots the player had.
         if (userId != null)
