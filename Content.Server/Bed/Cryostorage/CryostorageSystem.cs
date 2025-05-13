@@ -186,8 +186,10 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         if (!TryComp<CryostorageComponent>(cryostorageEnt, out var cryostorageComponent))
             return;
 
+        //SS220 Cryo-anomaly-fix begin
         if (TryComp<InnerBodyAnomalyComponent>(ent, out var _))
             RemComp<InnerBodyAnomalyComponent>(ent.Owner);
+        //SS220 Cryo-anomaly-fix end
 
         // if we have a session, we use that to add back in all the job slots the player had.
         if (userId != null)
