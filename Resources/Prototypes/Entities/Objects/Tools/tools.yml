@@ -350,7 +350,6 @@
   # ss220 rcd upd end
   - type: LimitedCharges
     maxCharges: 30
-    charges: 30
   - type: Sprite
     sprite: Objects/Tools/rcd.rsi
     state: icon
@@ -381,7 +380,7 @@
   suffix: Empty
   components:
   - type: LimitedCharges
-    charges: 0
+    lastCharges: -1
 
 - type: entity
   id: RCDRecharging
@@ -392,7 +391,6 @@
   components:
   - type: LimitedCharges
     maxCharges: 30 # rcd upd
-    charges: 30 # rcd upd
   - type: AutoRecharge
     rechargeDuration: 5 # rcd upd
 
@@ -542,6 +540,10 @@
     quickEquip: false
     slots:
     - Belt
+  # SS220 rolling pin damage and sound tweaks begin
+  - type: StaminaDamageOnHit
+    damage: 16
+  # SS220 rolling pin damage and sound tweaks end
   - type: MeleeWeapon
     soundHit: !type:SoundCollectionSpecifier # SS220 Sounds
       collection: BatonHit
@@ -549,7 +551,6 @@
     damage:
       types:
         Blunt: 7
-        Stamina: 16
   - type: Tool
     qualities:
     - Rolling
@@ -563,9 +564,10 @@
     graph: WoodenRollingPin
     node: rollingpin
 # SS220 Throwable Changes begin
+  - type: StaminaDamageOnCollide
+    damage: 13.5
   - type: DamageOtherOnHit
     damage:
       types:
         Blunt: 5.5
-        Stamina: 13.5
 # SS220 Throwable Changes end

@@ -20,16 +20,14 @@ public sealed class TransferIdentitySystem : EntitySystem
         if (!TryComp<PenScramblerComponent>(args.Target, out var penComponent))
             return;
 
-        if (penComponent.Target == null)
+        if (penComponent.NullspaceClone == null)
             return;
 
-        ent.Comp.Target = penComponent.Target.Value;
-        ent.Comp.AppearanceComponent = penComponent.AppearanceComponent;
+        ent.Comp.NullspaceClone = penComponent.NullspaceClone;
 
         _popup.PopupEntity(Loc.GetString("pen-scrambler-success-transfer-to-implant",
-            ("identity", MetaData(penComponent.Target.Value).EntityName)), args.User, args.User);
+            ("identity", MetaData(penComponent.NullspaceClone.Value).EntityName)), args.User, args.User);
 
-        Dirty(ent);
         QueueDel(args.Target);
     }
 }

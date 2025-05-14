@@ -79,9 +79,7 @@
   group: market
 
 #- type: cargoProduct
-#  name: "water vapor canister"
 #  id: AtmosphericsWaterVapor
-#  description: "Water vapor canister"
 #  icon:
 #    sprite: SS220/Structures/Storage/canister.rsi #ss220-engineering-update-atmosgase
 #    state: water_vapor
@@ -101,9 +99,7 @@
   group: market
 
 #- type: cargoProduct
-#  name: "tritium canister"
 #  id: AtmosphericsTritium
-#  description: "Tritium canister"
 #  icon:
 #    sprite: SS220/Structures/Storage/canister.rsi #ss220-engineering-update-atmosgase
 #    state: green

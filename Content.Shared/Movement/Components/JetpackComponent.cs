@@ -22,4 +22,9 @@ public sealed partial class JetpackComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite), DataField("weightlessModifier")]
     public float WeightlessModifier = 1.2f;
+
+    //ss220 fix activated jetpack in container start
+    [DataField, AutoNetworkedField]
+    public EntityUid? User;
+    //ss220 fix activated jetpack in container end
 }

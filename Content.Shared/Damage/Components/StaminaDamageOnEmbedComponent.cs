@@ -14,4 +14,9 @@ public sealed partial class StaminaDamageOnEmbedComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
     public float Damage = 10f;
+
+    // SS220 Add ingnore resistance begin
+    [DataField, AutoNetworkedField]
+    public bool IgnoreResistance;
+    // SS220 Add ingnore resistance end
 }

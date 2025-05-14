@@ -71,4 +71,6 @@
     containers:
       cultyYoggPod: !type:ContainerSlot
         showEnts: False
-
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable

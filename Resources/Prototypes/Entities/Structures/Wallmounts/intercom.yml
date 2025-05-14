@@ -84,6 +84,9 @@
   - type: Construction
     graph: Intercom
     node: intercom
+    containers:
+    - board
+    - key_slots
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic

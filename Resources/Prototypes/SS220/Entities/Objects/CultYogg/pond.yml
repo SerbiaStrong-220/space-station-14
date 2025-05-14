@@ -46,3 +46,6 @@
         stackAmount: 7
       - id: SheetTokl1
         stackAmount: 12
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
