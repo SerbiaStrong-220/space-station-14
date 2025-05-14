@@ -97,6 +97,13 @@ public sealed class TarotCardSystem : EntitySystem
         "Captain",
     ];
 
+    private const string Chemicals = "chemicals";
+    private const string Food = "food";
+
+    private const string ToxinGroup = "Toxin";
+    private const string BurnGroup = "Burn";
+    private const string BruteGroup = "Brute";
+
     private const string SpaceCash500 = "SpaceCash500";
     private const string MobCatCake = "MobCatCake";
     private const string MobCorgiCerberus = "MobCorgiCerberus";
@@ -107,6 +114,8 @@ public sealed class TarotCardSystem : EntitySystem
     private const string RandomArcadeSpawner = "RandomArcadeSpawner";
     private const string RandomMessageToChat = "RandomMessageToChat";
     private const string RandomAnomalyInjectorsSpawn = "RandomAnomalyInjectorsSpawn";
+    private const string PinpointerProto = "PinpointerUplink";
+    private const string StrangePill = "StrangePill";
 
     public override void Initialize()
     {
@@ -156,9 +165,6 @@ public sealed class TarotCardSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("tarot-cards-failed-already-used"), args.User, args.User);
             return;
         }
-
-        if (!HasComp<HumanoidAppearanceComponent>(args.User))
-            return;
 
         HandleCardEffect(ent, args.User);
         args.Handled = true;
@@ -214,7 +220,7 @@ public sealed class TarotCardSystem : EntitySystem
                 ApplyReversedEffect(card, target, SpeedUpEntity, ApplyChariotEffects);
                 break;
             case TarotCardType.Strength:
-                ApplyReversedEffect(card, target, MassHallucinations, HealTarget);
+                ApplyReversedEffect(card, target, MassHallucinations, HealTarget); // TODO
                 break;
             case TarotCardType.Hermit:
                 ApplyReversedEffect(card, target, TransformGuns, TeleportToVend);
@@ -243,6 +249,7 @@ public sealed class TarotCardSystem : EntitySystem
                 ApplyReversedEffect(card, target, TeleportToUser, GivePinpointer);
                 break;
             case TarotCardType.Moon:
+                ApplyReversedEffect(card, target, RandomTeleportation, RandomTeleportation); // TODO: reverse action
                 break;
             case TarotCardType.Sun:
                 ApplyReversedEffect(card, target, SmokeGrenade, Rejuvenate);
@@ -356,7 +363,7 @@ public sealed class TarotCardSystem : EntitySystem
     private void TransferSolution(EntityUid target, EntityUid? user)
     {
         if (!TryComp<SolutionContainerManagerComponent>(target, out _) ||
-            !_solution.TryGetSolution(target, "chemicals", out var targetSolution))
+            !_solution.TryGetSolution(target, Chemicals, out var targetSolution))
             return;
 
         _solution.TryAddReagent(targetSolution.Value, Omnizine, 20f);
@@ -420,7 +427,7 @@ public sealed class TarotCardSystem : EntitySystem
         if (!TryComp<SolutionContainerManagerComponent>(catCake, out var containerManagerComponent))
             return;
 
-        if (!_solution.TryGetSolution((catCake, containerManagerComponent), "food", out var solutionEnt))
+        if (!_solution.TryGetSolution((catCake, containerManagerComponent), Food, out var solutionEnt))
             return;
 
         _solution.SetCapacity(solutionEnt.Value, solutionEnt.Value.Comp.Solution.Volume + solution.Volume);
@@ -657,7 +664,7 @@ public sealed class TarotCardSystem : EntitySystem
 
         foreach (var (group, value) in damageableComponent.DamagePerGroup)
         {
-            if (group != "Toxin" || value <= 0)
+            if (group != ToxinGroup || value <= 0)
                 continue;
 
             if (!_proto.TryIndex<DamageGroupPrototype>(group, out var damageType))
@@ -675,17 +682,17 @@ public sealed class TarotCardSystem : EntitySystem
         if (!TryComp<SolutionContainerManagerComponent>(target, out var targetSolutionContainer))
             return;
 
-        if (!_solution.TryGetSolution((target, targetSolutionContainer), "chemicals", out var solComp, out _))
+        if (!_solution.TryGetSolution((target, targetSolutionContainer), Chemicals, out var solComp, out _))
             return;
 
         var targetCoords = Transform(target).Coordinates;
 
         for (var i = 0; i < 3; i++)
         {
-            var pill = Spawn("StrangePill", targetCoords);
+            var pill = Spawn(StrangePill, targetCoords);
 
             if (!TryComp<SolutionContainerManagerComponent>(pill, out var solution) ||
-                !_solution.TryGetSolution((pill, solution), "food", out _, out var solutionReagent) ||
+                !_solution.TryGetSolution((pill, solution), Food, out _, out var solutionReagent) ||
                 solutionReagent.Volume == FixedPoint2.Zero)
             {
                 QueueDel(pill);
@@ -722,7 +729,7 @@ public sealed class TarotCardSystem : EntitySystem
 
     private void GivePinpointer(EntityUid target, EntityUid? user)
     {
-        var pinpointerProto = _proto.Index("PinpointerUplink");
+        var pinpointerProto = _proto.Index(PinpointerProto);
         var pinpointerEntity = SpawnAtPosition(pinpointerProto.ID, Transform(target).Coordinates);
         _hands.PickupOrDrop(target, pinpointerEntity);
 
@@ -736,6 +743,31 @@ public sealed class TarotCardSystem : EntitySystem
             return;
 
         _transform.SetCoordinates(target, Transform(user.Value).Coordinates);
+    }
+
+    private void RandomTeleportation(EntityUid target, EntityUid? user)
+    {
+        var lookup = _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(Transform(target).Coordinates, 10f).ToList();
+
+        if (lookup.Count < 2)
+            return;
+
+        _random.Shuffle(lookup);
+
+        var positions = new Dictionary<EntityUid, EntityCoordinates>();
+
+        foreach (var ent in lookup)
+        {
+            positions[ent] = Transform(ent.Owner).Coordinates;
+        }
+
+        for (var i = 0; i < lookup.Count; i++)
+        {
+            var current = lookup[i];
+            var nextIndex = (i + 1) % lookup.Count;
+            var targetCoords = positions[lookup[nextIndex]];
+            _transform.SetCoordinates(current, targetCoords);
+        }
     }
 
     private void ClusterFlashBang(EntityUid target, EntityUid? user)
