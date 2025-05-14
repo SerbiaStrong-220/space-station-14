@@ -5,7 +5,7 @@ using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Hands.Systems;
 using Content.Server.PowerCell;
-using Content.Server.Radio.EntitySystems;
+using Content.Server.SS220.Events;
 using Content.Shared.Alert;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
@@ -31,6 +31,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using System.Globalization;
 
 namespace Content.Server.Silicons.Borgs;
 
@@ -339,9 +340,13 @@ public sealed partial class BorgSystem : SharedBorgSystem
             && _protoManager.TryIndex<BorgTypePrototype>(switchComp.SelectedBorgType, out var borgType))
         {
             args.Name = Loc.GetString(borgType.Name);
+            args.Name = $"\\[{args.Name}\\] ";
         }
         else
+        {
             args.Name = Loc.GetString("borg-type-prototype-generic");
+            args.Name = $"\\[{args.Name}\\] ";
+        }
     }
     // SS220 Borgs-Id-fix end
 }

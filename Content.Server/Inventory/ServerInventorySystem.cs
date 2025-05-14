@@ -1,4 +1,4 @@
-using Content.Server.Radio.EntitySystems;
+using Content.Server.SS220.Events;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Explosion;
