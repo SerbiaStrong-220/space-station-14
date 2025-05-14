@@ -17,7 +17,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System.Linq;
 using Content.Shared.SS220.CultYogg.Buildings;
@@ -33,7 +32,6 @@ using Robust.Shared.Utility;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Audio;
 using Content.Shared.Movement.Pulling.Events;
-using Content.Shared.SS220.Cart.Components;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
@@ -520,38 +518,4 @@ public abstract class SharedMiGoSystem : EntitySystem
         return true;
     }
     #endregion
-}
-
-[Serializable, NetSerializable]
-public sealed partial class MiGoSacrificeDoAfterEvent : SimpleDoAfterEvent { }
-
-[Serializable, NetSerializable]
-public sealed partial class MiGoEnslaveDoAfterEvent : SimpleDoAfterEvent { }
-
-[Serializable, NetSerializable]
-public sealed partial class AfterMaterialize : DoAfterEvent
-{
-    public override DoAfterEvent Clone() => this;
-}
-
-[Serializable, NetSerializable]
-public sealed partial class AfterDeMaterialize : DoAfterEvent
-{
-    public override DoAfterEvent Clone() => this;
-}
-
-[ByRefEvent, Serializable]
-public record struct CultYoggEnslavedEvent(EntityUid? Target);
-
-[NetSerializable, Serializable]
-public enum MiGoTimerVisualLayers : byte
-{
-    Digit1,
-    Digit2
-}
-[Serializable, NetSerializable]
-public enum MiGoVisual
-{
-    Base,
-    Astral
 }
