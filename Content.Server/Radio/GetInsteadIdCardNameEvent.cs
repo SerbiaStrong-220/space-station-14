@@ -1,6 +1,4 @@
-using Content.Shared.Radio.EntitySystems;
-using Robust.Shared.GameObjects;
-
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 namespace Content.Server.Radio.EntitySystems;
 
 public sealed class GetInsteadIdCardNameEvent : EntityEventArgs
