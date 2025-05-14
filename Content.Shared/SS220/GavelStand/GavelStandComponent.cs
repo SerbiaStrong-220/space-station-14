@@ -3,7 +3,7 @@
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 
-namespace Content.Shared.SS220.Misc;
+namespace Content.Shared.SS220.GavelStand;
 
 /// <summary>
 /// Component that apply exclamation to people around when interacted with item from whitelist

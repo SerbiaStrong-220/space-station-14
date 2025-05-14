@@ -8,7 +8,7 @@ using Content.Shared.Timing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 
-namespace Content.Shared.SS220.Misc;
+namespace Content.Shared.SS220.GavelStand;
 
 public sealed class GavelStandSystem : EntitySystem
 {
@@ -26,14 +26,15 @@ public sealed class GavelStandSystem : EntitySystem
 
     private void OnInteractUsing(Entity<GavelStandComponent> entity, ref InteractUsingEvent args)
     {
-        var (user, item) = (args.User, args.Used);
-        var (gavel_stand, gavel_stand_component) = entity;
+        var user = args.User;
+        var item = args.Used;
+        var (gavelStand, gavelStandComponent) = entity;
 
         var isItemWhitelisted = _whitelistSystem.IsWhitelistPass(entity.Comp.Whitelist, item);
         if (isItemWhitelisted && !_delaySystem.IsDelayed(item))
         {
             _delaySystem.TryResetDelay(item);
-            ExclamateAround(gavel_stand, user, gavel_stand_component);
+            ExclamateAround(gavelStand, user, gavelStandComponent);
             args.Handled = true;
         }
     }
@@ -43,12 +44,12 @@ public sealed class GavelStandSystem : EntitySystem
         SpawnAttachedTo(component.Effect, target.ToCoordinates());
     }
 
-    private void ExclamateAround(EntityUid gavel_stand, EntityUid owner, GavelStandComponent component)
+    private void ExclamateAround(EntityUid gavelStand, EntityUid owner, GavelStandComponent component)
     {
         StealthComponent? stealth = null;
-        _audioSystem.PlayPredicted(component.Sound, gavel_stand, owner);
+        _audioSystem.PlayPredicted(component.Sound, gavelStand, owner);
         foreach (var iterator in
-            _entityLookup.GetEntitiesInRange<HumanoidAppearanceComponent>(_transform.GetMapCoordinates(gavel_stand), component.Distance))
+            _entityLookup.GetEntitiesInRange<HumanoidAppearanceComponent>(_transform.GetMapCoordinates(gavelStand), component.Distance))
         {
             //Avoid pinging invisible entities
             if (TryComp(iterator, out stealth) && stealth.Enabled)
