@@ -44,21 +44,9 @@ public sealed partial class LimitationReviveComponent : Component
     {
         DamageDict = new()
         {
-            { "Сerebral", 16 } //about 2 minutes to reach 400 with 5 second damage delays
+            { "Сerebral", 400 }
         }
     };
-
-    /// <summary>
-    /// Delay before target takes brain damage
-    /// </summary>
-    [DataField]
-    public TimeSpan TimeBetweenIncidents = TimeSpan.FromSeconds(5);
-
-    /// <summary>
-    /// Delay before target takes brain damage
-    /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    public TimeSpan? NextIncidentTime;
 
     [DataField]
     public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";

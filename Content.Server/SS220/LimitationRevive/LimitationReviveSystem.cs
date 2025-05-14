@@ -6,6 +6,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Traits;
+using JetBrains.FormatRipper.Elf;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
@@ -42,7 +43,6 @@ public sealed class LimitationReviveSystem : EntitySystem
         if (args.OldMobState == MobState.Dead)
         {
             ent.Comp.DamageTime = null;
-            ent.Comp.NextIncidentTime = null;
             ent.Comp.DeathCounter++;
         }
     }
@@ -71,40 +71,21 @@ public sealed class LimitationReviveSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        base.Update(frameTime);
+
         var query = EntityQueryEnumerator<LimitationReviveComponent>();
 
-        while (query.MoveNext(out var uid, out var limitationRevive))
+        while (query.MoveNext(out var ent, out var limitationRevive))
         {
-            BeforeDamage(limitationRevive);
-            TickingDamage(uid, limitationRevive);
+            if (limitationRevive.DamageTime is null)
+                return;
+
+            if (_timing.CurTime < limitationRevive.DamageTime)
+                return;
+
+            _damageableSystem.TryChangeDamage(ent, limitationRevive.Damage, true);
+
+            limitationRevive.DamageTime = null;
         }
-    }
-
-    private void BeforeDamage(LimitationReviveComponent comp)
-    {
-        if (comp.DamageTime is null)
-            return;
-
-        if (_timing.CurTime < comp.DamageTime)
-            return;
-
-        comp.NextIncidentTime = _timing.CurTime + comp.TimeBetweenIncidents;
-
-        comp.DamageTime = null;
-    }
-
-    private void TickingDamage(EntityUid ent, LimitationReviveComponent comp)
-    {
-        if (comp.NextIncidentTime is null)
-            return;
-
-        //not sure if it should be capped
-
-        if (_timing.CurTime < comp.NextIncidentTime)
-            return;
-
-        _damageableSystem.TryChangeDamage(ent, comp.Damage, true);
-
-        comp.NextIncidentTime = _timing.CurTime + comp.TimeBetweenIncidents;
     }
 }
