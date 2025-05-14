@@ -32,7 +32,7 @@
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Melee/judge_gavel.rsi
-    state: gavel_stand
+    state: gavel-stand
     drawdepth: SmallObjects
     noRot: true
   - type: Appearance
