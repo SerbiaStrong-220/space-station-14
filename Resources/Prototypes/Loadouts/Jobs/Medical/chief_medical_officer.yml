@@ -48,7 +48,7 @@
 - type: loadout
   id: ChiefMedicalOfficerParadeCap
   equipment:
-    neck: ClothingHeadHatCapCMO
+    head: ClothingHeadHatCapCMO
   effects:
   - !type:GroupLoadoutEffect
     proto: CapCMO
