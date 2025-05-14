@@ -61,8 +61,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-fool-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -87,8 +86,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-magician-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -113,8 +111,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-high-priestess-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -139,8 +136,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-empress-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -165,8 +161,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-emperor-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -191,8 +186,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-hierophant-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -217,8 +211,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-lovers-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -243,8 +236,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-chariot-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -269,8 +261,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-strength-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -295,8 +286,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-hermit-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -321,8 +311,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-wheel-of-fortune-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -347,8 +336,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-justice-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -373,8 +361,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-hanged-man-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -399,8 +386,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-death-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -425,8 +411,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-temperance-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -451,8 +436,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-devil-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -477,8 +461,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-tower-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -503,8 +486,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-stars-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -529,8 +511,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-moon-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -555,8 +536,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-sun-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -581,8 +561,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-judgement-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
@@ -607,8 +586,7 @@
   - type: HiddenDescription
     entries:
     - label: tarot-card-the-world-syndicate
-      whitelistMind:
-        components:
+      whitelistMindRoles:
         - TraitorRole
         - NukeOperative
 
