@@ -1,10 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Administration.Logs;
+using Content.Server.Chat.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.Telepathy;
+using Content.Shared.SS220.TTS;
 using Npgsql.Replication.PgOutput.Messages;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -129,15 +131,27 @@ public sealed class TelepathySystem : EntitySystem
             return;
         }
 
+        List<EntityUid> telephatyTTSrecievers = [];
+
         var telepathyQuery = EntityQueryEnumerator<TelepathyComponent>();
         while (telepathyQuery.MoveNext(out var receiverUid, out var receiverTelepathy))
         {
             if (rightTelepathyChannel == receiverTelepathy.TelepathyChannelPrototype || receiverTelepathy.ReceiveAllChannels)
             {
                 SendMessageToChat(receiverUid, message, senderUid, channelParameters);
+                telephatyTTSrecievers.Add(receiverUid);
             }
         }
-        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Say from {ToPrettyString(senderUid):user}: {message}, send in telepathy channel {rightTelepathyChannel.Id}");
+
+        if (senderUid != null)
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Telepathy message were send from {ToPrettyString(senderUid):user}: {message}, telepathy channel: {rightTelepathyChannel.Id}");
+        else
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Announce telepathy message: {message}, were send in telepathy channel: {rightTelepathyChannel.Id}");
+
+        if (senderUid != null && HasComp<TTSComponent>(senderUid))
+        {
+            RaiseLocalEvent(new TelepathySpokeEvent(senderUid.Value, message, [.. telephatyTTSrecievers]));
+        }
     }
 
 

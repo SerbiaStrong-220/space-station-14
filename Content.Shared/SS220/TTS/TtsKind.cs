@@ -8,4 +8,5 @@ public enum TtsKind
     Radio,
     Whisper,
     Announce,
+    Telepathy,
 }
