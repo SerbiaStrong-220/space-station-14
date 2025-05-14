@@ -17,6 +17,8 @@ using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Content.Shared.Projectiles;
 using Content.Server.Projectiles;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 
 
 namespace Content.Server.SS220.CultYogg.MiGo;
@@ -34,6 +36,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly ProjectileSystem _projectile = default!;
+    [Dependency] private readonly PullingSystem _pullingSystem = default!;
 
     private const string AscensionReagent = "TheBloodOfYogg";
 
@@ -102,6 +105,9 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
 
             if (TryComp<EmbeddedContainerComponent>(uid, out var embeddedContainer))
                 _projectile.DetachAllEmbedded((uid, embeddedContainer));
+
+            if (TryComp(uid, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
+                _pullingSystem.TryStopPull(puller.Pulling.Value, pullable);
 
             _appearance.SetData(uid, MiGoVisual.Astral, false);
             _appearance.RemoveData(uid, MiGoVisual.Base);

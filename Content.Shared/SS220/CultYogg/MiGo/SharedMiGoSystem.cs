@@ -32,6 +32,8 @@ using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Audio;
+using Content.Shared.Movement.Pulling.Events;
+using Content.Shared.SS220.Cart.Components;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
@@ -72,6 +74,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<MiGoComponent, AfterDeMaterialize>(OnAfterDeMaterialize);
 
         SubscribeLocalEvent<MiGoComponent, AttackAttemptEvent>(CheckAct);
+        SubscribeLocalEvent<MiGoComponent, PullAttemptEvent>(OnPullAttempt);
 
         SubscribeLocalEvent<MiGoComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
 
@@ -414,6 +417,12 @@ public abstract class SharedMiGoSystem : EntitySystem
     {
         if (!uid.Comp.IsPhysicalForm)
             args.Cancel();
+    }
+
+    private void OnPullAttempt(Entity<MiGoComponent> uid, ref PullAttemptEvent args)
+    {
+        if (!uid.Comp.IsPhysicalForm)
+            args.Cancelled = true;
     }
     #endregion
 
