@@ -289,7 +289,11 @@ public sealed class RCDSystem : EntitySystem
 
         // Play audio and consume charges
         _audio.PlayPredicted(component.SuccessSound, uid, args.User);
-        _sharedCharges.AddCharges(uid, -args.Cost);
+        // SS220 infinity-RCD-building-fix start
+        int cost = args.Cost;
+        int charges = _sharedCharges.GetCurrentCharges(uid);
+        _sharedCharges.SetCharges(uid, charges - cost);
+        // SS220 infinity-RCD-building-fix end
     }
 
     private void OnRCDconstructionGhostRotationEvent(RCDConstructionGhostRotationEvent ev, EntitySessionEventArgs session)
@@ -324,7 +328,7 @@ public sealed class RCDSystem : EntitySystem
         var charges = _sharedCharges.GetCurrentCharges(uid);
 
         // Both of these were messages were suppose to be predicted, but HasInsufficientCharges wasn't being checked on the client for some reason?
-        if (charges == 0)
+        if (charges <= 0) // SS220 infinity-RCD-building-fix
         {
             if (popMsgs)
                 _popup.PopupClient(Loc.GetString("rcd-component-no-ammo-message"), uid, user);
