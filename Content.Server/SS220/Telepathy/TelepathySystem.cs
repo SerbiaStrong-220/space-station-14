@@ -1,12 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Administration.Logs;
 using Content.Shared.Chat;
+using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.Telepathy;
+using Npgsql.Replication.PgOutput.Messages;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using System.Xml.Linq;
 
 namespace Content.Server.SS220.Telepathy;
 
@@ -15,6 +19,7 @@ namespace Content.Server.SS220.Telepathy;
 /// </summary>
 public sealed class TelepathySystem : EntitySystem
 {
+    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -111,10 +116,13 @@ public sealed class TelepathySystem : EntitySystem
     private void SendMessageToEveryoneWithRightChannel(ProtoId<TelepathyChannelPrototype> rightTelepathyChannel, string message, EntityUid? senderUid)
     {
         ChannelParameters? channelParameters = null;
+
         if (_dynamicChannels.TryGetValue(rightTelepathyChannel, out var dynamicParameters))
             channelParameters = dynamicParameters;
+
         if (_prototype.TryIndex(rightTelepathyChannel, out var prototype))
             channelParameters = prototype.ChannelParameters;
+
         if (channelParameters == null)
         {
             Log.Error($"Tried to send message with incorrect {nameof(TelepathyChannelPrototype)} proto id. id was: {rightTelepathyChannel}");
@@ -125,8 +133,11 @@ public sealed class TelepathySystem : EntitySystem
         while (telepathyQuery.MoveNext(out var receiverUid, out var receiverTelepathy))
         {
             if (rightTelepathyChannel == receiverTelepathy.TelepathyChannelPrototype || receiverTelepathy.ReceiveAllChannels)
+            {
                 SendMessageToChat(receiverUid, message, senderUid, channelParameters);
+            }
         }
+        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Say from {ToPrettyString(senderUid):user}: {message}, send in telepathy channel {rightTelepathyChannel.Id}");
     }
 
 
