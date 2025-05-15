@@ -338,15 +338,9 @@ public sealed partial class BorgSystem : SharedBorgSystem
         if (TryComp<BorgSwitchableTypeComponent>(uid, out var switchComp)
             && switchComp.SelectedBorgType is not null
             && _protoManager.TryIndex<BorgTypePrototype>(switchComp.SelectedBorgType, out var borgType))
-        {
-            args.Name = Loc.GetString(borgType.Name);
-            args.Name = $"\\[{args.Name}\\] ";
-        }
+            args.Name = $"\\[{Loc.GetString(borgType.Name)}\\] ";
         else
-        {
-            args.Name = Loc.GetString("borg-type-prototype-generic");
-            args.Name = $"\\[{args.Name}\\] ";
-        }
+            args.Name = $"\\[{Loc.GetString("borg-type-prototype-generic")}\\] ";
     }
     // SS220 Borgs-Id-fix end
 }
