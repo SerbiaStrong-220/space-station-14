@@ -3,6 +3,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
+using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.DoAfter;
@@ -50,6 +51,11 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         for (var i = 0; i < count; i++)
         {
             var doAfter = _doAfters[i];
+
+            //ss220 add traits start
+            RaiseLocalEvent(doAfter.Args.User, new DoAfterUpdateEvent(doAfter.StartTime, doAfter.Index), true);
+            //ss220 add traits start
+
             if (doAfter.CancelledTime != null)
             {
                 if (time - doAfter.CancelledTime.Value > ExcessTime)

@@ -1479,6 +1479,7 @@
   name: loadout-group-medical-doctor-shoes
   loadouts:
   - WhiteShoes
+  - MedicalBlackShoes #ss220 add shoes for med
   - MedicalWinterBoots
   - MedicalDoctorShoesResponsibility #SS220-Responsibility
 

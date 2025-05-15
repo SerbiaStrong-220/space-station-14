@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Form>
-  <FormId>sec_exc</FormId>
-  <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>форма НТ-СБ-УКЗ</EntityName>
+  <FormId>law_exc</FormId>
+  <PrototypeId>PaperNtFormLaw</PrototypeId>
+  <EntityName>форма НТ-ЗКН-УКЗ</EntityName>
   <PhotocopierTitle>Приказ о казни</PhotocopierTitle>
-  <Content><![CDATA[[bold]Форма НТ-СБ-УКЗ[/bold]
+  <Content><![CDATA[[bold]Форма НТ-ЗКН-КЗН[/bold]
 [head=2]Приказ о казни[/head]
 
 [italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]

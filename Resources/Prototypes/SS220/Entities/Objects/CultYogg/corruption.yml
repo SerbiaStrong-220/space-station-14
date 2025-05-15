@@ -134,31 +134,31 @@
 
 #Flash start
 - type: corrupted
-  id: LanternFlashCultYogg
+  id: CultYoggLantern
   from:
     prototypeId: Lantern
-  result: LanternFlashCultYogg
+  result: CultYoggLantern
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
-  id: FlashFlashCultYogg
+  id: LanternFlashCultYoggLantern
   from:
-    prototypeId: Flash
-  result: LanternFlashCultYogg
+    prototypeId: LanternFlash
+  result: CultYoggLantern
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
   id: BaseLampFlashCultYogg
   from:
     parentPrototypeId: BaseLamp
-  result: LanternFlashCultYogg
+  result: CultYoggLantern
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
-  id: FlashlightLanternFlashCultYogg
+  id: FlashlightCultYoggLantern
   from:
     parentPrototypeId: FlashlightLantern
-  result: LanternFlashCultYogg
+  result: CultYoggLantern
   corruptionReverseEffect: ExorcismUncorruptEffect
 #Flash end
 
