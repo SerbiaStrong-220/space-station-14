@@ -50,6 +50,7 @@ public sealed partial class CultYoggPodComponent : Component
             { "Bloodloss", -2.5 },
             { "Radiation", -1 },
             { "Сerebral", -50 },
+            { "Сellular", -10 },
             { "Caustic", -1 },
             { "Poison", -1 }
         }
