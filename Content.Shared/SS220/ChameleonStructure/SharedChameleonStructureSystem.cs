@@ -1,23 +1,18 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Contraband;
 using Content.Shared.Inventory;
-using Content.Shared.Inventory.Events;
-using Content.Shared.Item;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using YamlDotNet.Core.Tokens;
 
 namespace Content.Shared.SS220.ChameleonStructure;
 
 public abstract class SharedChameleonStructureSystem : EntitySystem
 {
-    private static readonly ProtoId<TagPrototype> WhitelistChameleonTag = "WhitelistChameleon";
-
     [Dependency] protected readonly SharedUserInterfaceSystem UI = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
@@ -43,8 +38,20 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         {
             Text = Loc.GetString("chameleon-component-verb-text"),
             Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
-            Act = () => UI.TryToggleUi(ent.Owner, ChameleonUiKey.Key, user)
+            Act = () => UI.TryToggleUi(ent.Owner, ChameleonStructureUiKey.Key, user)
         });
     }
     protected virtual void UpdateSprite(EntityUid uid, EntityPrototype proto) { }
+
+    protected void UpdateVisuals(Entity<ChameleonStructureComponent> ent)
+    {
+    }
+
+    /// <summary>
+    ///     Check if this entity prototype is valid target for chameleon item.
+    /// </summary>
+    public bool IsValidTarget(EntityPrototype proto, string? requiredTag = null)
+    {
+        return true;
+    }
 }
