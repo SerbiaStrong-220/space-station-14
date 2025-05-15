@@ -254,13 +254,6 @@ public abstract class SharedMiGoSystem : EntitySystem
                 currentMiGoAmount++;
         }
 
-        if (currentMiGoAmount < altarComp.RequiredAmountMiGo)
-        {
-            _popup.PopupClient(Loc.GetString("cult-yogg-altar-not-enough-migo"), user, user);
-
-            return false;
-        }
-
         var sacrificeDoAfter = new DoAfterArgs(EntityManager, user, altarComp.RutualTime, new MiGoSacrificeDoAfterEvent(), altarUid, target: targetUid)
         {
             BreakOnDamage = true,
