@@ -5,5 +5,6 @@ namespace Content.Server.SS220.ConditionalEmotes;
 [RegisterComponent]
 public sealed partial class ConditionalEmotesComponent : Component
 {
-
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool IsCold = false;
 }
