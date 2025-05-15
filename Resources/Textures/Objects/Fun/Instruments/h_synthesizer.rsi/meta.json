@@ -4,8 +4,8 @@
     "x": 32,
     "y": 32
   },
-  "license": "CC-BY-SA-3.0",
-  "copyright": "https://github.com/vgstation-coders/vgstation13 at 8d9c91e19cb52713c7f7f1804c2b6f7203f8d331. Supersynth sprite made by moomoobeef.",
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "sprited by octopuswizer (Discord) for SS220",
   "states": [
     {
       "name": "icon"
