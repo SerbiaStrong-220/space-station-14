@@ -45,14 +45,6 @@
   equipment:
     head: ClothingHeadMirror
 
-- type: loadout
-  id: ChiefMedicalOfficerParadeCap
-  equipment:
-    head: ClothingHeadHatCapCMO
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: CapCMO
-
 # Neck
 - type: loadout
   id: ChiefMedicalOfficerCloak
@@ -71,14 +63,6 @@
   id: ChiefMedicalOfficerMantle
   equipment:
     neck: ClothingNeckMantleCMO
-
-- type: loadout
-  id: ChiefMedicalOfficerParadeCloak
-  equipment:
-    neck: ClothingNeckCMOParadeCloak
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: ParadeCloakCMO
 
 # Outer clothing
 - type: loadout

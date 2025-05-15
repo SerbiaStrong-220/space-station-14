@@ -69,7 +69,7 @@
   - !type:GroupLoadoutEffect
     proto: CMOParade
   equipment:
-    head: ChiefMedicalOfficerParadeCap
+    head: ClothingHeadHatCapCMO
 
 # Neck 
 - type: loadout
