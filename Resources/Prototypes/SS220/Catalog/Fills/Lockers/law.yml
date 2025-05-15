@@ -15,6 +15,7 @@
     - id: BoxEncryptionKeyLaw
     - id: BoxTapeRecorder
     - id: JudgeGavel
+    - id: GavelStand
 
 - type: entity
   id: LockerMagistrateFilled
