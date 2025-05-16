@@ -1,7 +1,11 @@
+using Content.Shared.Maps;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
+using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using System.Linq;
+using System.Numerics;
 
 namespace Content.Server.SS220.Zones.Systems;
 
@@ -40,21 +44,39 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         DeleteZone(entity);
     }
 
-    public ZoneData CreateZone(Entity<MapGridComponent> grid,
-        HashSet<Vector2i> tiles,
-        string? name = null,
-        Color? color = null)
+    public ZoneData? CreateZone(Entity<MapGridComponent> grid,
+        EntityCoordinates point1,
+        EntityCoordinates point2)
     {
+        var cords = GetTilesCoordinatesInBox(grid, point1, point2);
+        return CreateZone(grid, cords);
+    }
+
+    public ZoneData? CreateZone(Entity<MapGridComponent> grid, HashSet<EntityCoordinates> cords)
+    {
+        var tiles = cords
+            .Select(c => _map.GetTileRef(grid, c))
+            .Where(t => !t.IsSpace())
+            .Select(t => t.GridIndices)
+            .ToHashSet();
+
+        return CreateZone(grid, tiles);
+    }
+
+    public ZoneData? CreateZone(Entity<MapGridComponent> grid, HashSet<Vector2i> tiles)
+    {
+        if (tiles.Count <= 0)
+            return null;
+
         var zoneData = new ZoneData()
         {
             Tiles = tiles,
-            Name = name ?? string.Empty,
-            Color = color ?? Color.Gray
         };
+
         return CreateZone(grid, zoneData);
     }
 
-    public ZoneData CreateZone(Entity<MapGridComponent> grid, ZoneData zoneData)
+    public ZoneData? CreateZone(Entity<MapGridComponent> grid, ZoneData zoneData)
     {
         var zonesComp = EnsureComp<ZonesDataComponent>(grid);
 
@@ -113,5 +135,37 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
         Dirty(zone, zoneComp);
         Dirty(grid, grid.Comp2);
+    }
+
+    private HashSet<EntityCoordinates> GetTilesCoordinatesInBox(Entity<MapGridComponent> grid, EntityCoordinates point1, EntityCoordinates point2)
+    {
+        return GetTilesCoordinatesInBox(grid, new Vector2(point1.X, point1.Y), new Vector2(point2.X, point2.Y));
+    }
+
+    private HashSet<EntityCoordinates> GetTilesCoordinatesInBox(Entity<MapGridComponent> grid, Vector2 point1, Vector2 point2)
+    {
+        HashSet<Vector2> array = new();
+        var top = Math.Max(point1.Y, point2.Y);
+        var right = Math.Max(point1.X, point2.X);
+        var bottom = Math.Min(point1.Y, point2.Y);
+        var left = Math.Min(point1.X, point2.X);
+
+        var step = grid.Comp.TileSize;
+        var endPoint = new Vector2(right, top);
+        var curPoint = new Vector2(left, bottom);
+        while (curPoint != endPoint)
+        {
+            array.Add(curPoint);
+            if (curPoint.X != right)
+                curPoint.X = Math.Min(curPoint.X + step, right);
+            else if (curPoint.Y != top)
+            {
+                curPoint.Y = Math.Min(curPoint.Y + step, top);
+                curPoint.X = left;
+            }
+        }
+        array.Add(endPoint);
+
+        return array.Select(v => new EntityCoordinates(grid, v)).ToHashSet();
     }
 }

@@ -23,13 +23,18 @@ public sealed partial class ZonesDataComponent : Component
 [Serializable, NetSerializable]
 public sealed class ZoneData()
 {
+    [ViewVariables]
     public string Name = string.Empty;
 
-    public string? EntityId;
+    [ViewVariables]
+    public string EntityId = "BaseZone";
 
+    [ViewVariables(VVAccess.ReadOnly)]
     public NetEntity? ZoneEntity;
 
-    public Color Color = Color.Gray;
+    [ViewVariables]
+    public Color Color = Color.Red;
 
+    [ViewVariables]
     public HashSet<Vector2i> Tiles = new();
 }

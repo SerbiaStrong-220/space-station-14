@@ -68,10 +68,11 @@ public sealed class ZonesOverlay : Overlay
             var (_, _, worldMatrix, invWorldMatrix) = _transformSystem.GetWorldPositionRotationMatrixWithInv(xform, xforms);
 
             var gridBounds = invWorldMatrix.TransformBox(worldBounds).Enlarged(tileSize * 2);
+            drawHandle.SetTransform(worldMatrix);
             if (!gridBounds.Contains(centre))
                 continue;
 
-            var color = new Color(zoneData.Color.R, zoneData.Color.G, zoneData.Color.B, 128);
+            var color = new Color(zoneData.Color.R, zoneData.Color.G, zoneData.Color.B, 0.25f);
             drawHandle.DrawTextureRect(texture, Box2.CenteredAround(centre, new Vector2(tileSize, tileSize)), color);
         }
     }
