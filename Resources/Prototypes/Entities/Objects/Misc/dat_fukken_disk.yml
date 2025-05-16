@@ -17,9 +17,13 @@
   - type: WarpPoint
     follow: true
     location: nuke disk
+    blacklist:
+      tags:
+      - GhostOnlyWarp
   - type: Tag
     tags:
     - HighRiskItem
+    - GhostOnlyWarp
   - type: StealTarget
     stealGroup: NukeDisk
   #ss220 pinpointer ui add start

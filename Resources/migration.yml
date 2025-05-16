@@ -620,6 +620,10 @@ LightTree06: LightTree
 DrinkIrishCarBomb: DrinkIrishSlammer
 
 # 2025-01-06
+BorgModuleRadiationDetection: null
+BorgModuleGPS: null
+BorgModuleLightReplacer: BorgModuleCustodial
+BorgModuleAdvancedTreatment: null
 ClothingMaskSexyClown: ClothingMaskBlushingClown
 ClothingMaskSexyMime: ClothingMaskBlushingMime
 
@@ -643,6 +647,10 @@ PresentRandomCoal: null
 
 # 2025-02-11
 WallShuttleInterior: WallShuttle
+
+# 2025-02-18
+PosterContrabandLustyExomorph: PosterContrabandRealExomorph
+PosterContrabandBustyBackdoorExoBabes6: PosterContrabandRouny
 
 # 2025-02-20
 MagazineBoxAntiMaterielBig: null
@@ -703,3 +711,15 @@ DrinkMoscowMuleGlass: DrinkMoscowMule
 #SS220 delete duplicates corvax drinks end
 WristwatchGold: ClothingWristWatchGold # SS220 wristwatch
 SupermatterGrenade: SingularityGrenade # SS220 fix
+
+# 2025-04-19
+ClothingOuterHardsuitSyndicate: ClothingOuterEVASuitSyndicate
+AirlockMaintCommonLocked: AirlockMaintLocked
+AirlockMaintIntLocked: AirlockMaintLocked
+
+# 2025-04-26
+ComputerCargoShuttle: ComputerShuttleCargo
+CargoShuttleComputerCircuitboard: CargoShuttleConsoleCircuitboard
+
+# 2025-05-13 SS220 mapped old borg modules
+BorgModuleDefibrillator : BorgModuleRescue

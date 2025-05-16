@@ -16,7 +16,7 @@
     - to: thrusterShunting
       steps:
       - tag: ThrusterShuntingMachineCircuitboard
-        name: shunting thruster machine board
+        name: construction-graph-tag-thruster-shunting-machine-circuitboard
         doAfter: 2
     - to: start
       completed:

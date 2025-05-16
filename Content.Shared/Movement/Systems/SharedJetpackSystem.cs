@@ -23,7 +23,6 @@ public abstract class SharedJetpackSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
     [Dependency] protected readonly SharedContainerSystem Container = default!;
-    [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
@@ -36,16 +35,25 @@ public abstract class SharedJetpackSystem : EntitySystem
         SubscribeLocalEvent<JetpackComponent, GetItemActionsEvent>(OnJetpackGetAction);
         SubscribeLocalEvent<JetpackComponent, DroppedEvent>(OnJetpackDropped);
         SubscribeLocalEvent<JetpackComponent, ToggleJetpackEvent>(OnJetpackToggle);
-        SubscribeLocalEvent<JetpackComponent, CanWeightlessMoveEvent>(OnJetpackCanWeightlessMove);
 
-        SubscribeLocalEvent<JetpackComponent, EntGotInsertedIntoContainerMessage>(OnInsertInContainer); //ss220 fix activated jetpack in container
+        SubscribeLocalEvent<JetpackUserComponent, RefreshWeightlessModifiersEvent>(OnJetpackUserWeightlessMovement);
 
         SubscribeLocalEvent<JetpackUserComponent, CanWeightlessMoveEvent>(OnJetpackUserCanWeightless);
         SubscribeLocalEvent<JetpackUserComponent, EntParentChangedMessage>(OnJetpackUserEntParentChanged);
         SubscribeLocalEvent<JetpackUserComponent, MagbootsUpdateStateEvent>(OnMagbootsUpdateState); //SS220 Magboots with jet fix
+        SubscribeLocalEvent<JetpackComponent, EntGotInsertedIntoContainerMessage>(OnJetpackMoved);
 
         SubscribeLocalEvent<GravityChangedEvent>(OnJetpackUserGravityChanged);
         SubscribeLocalEvent<JetpackComponent, MapInitEvent>(OnMapInit);
+    }
+
+    private void OnJetpackUserWeightlessMovement(Entity<JetpackUserComponent> ent, ref RefreshWeightlessModifiersEvent args)
+    {
+        // Yes this bulldozes the values but primarily for backwards compat atm.
+        args.WeightlessAcceleration = ent.Comp.WeightlessAcceleration;
+        args.WeightlessModifier = ent.Comp.WeightlessModifier;
+        args.WeightlessFriction = ent.Comp.WeightlessFriction;
+        args.WeightlessFrictionNoInput = ent.Comp.WeightlessFrictionNoInput;
     }
 
     private void OnMapInit(EntityUid uid, JetpackComponent component, MapInitEvent args)
@@ -53,22 +61,6 @@ public abstract class SharedJetpackSystem : EntitySystem
         _actionContainer.EnsureAction(uid, ref component.ToggleActionEntity, component.ToggleAction);
         Dirty(uid, component);
     }
-
-    private void OnJetpackCanWeightlessMove(EntityUid uid, JetpackComponent component, ref CanWeightlessMoveEvent args)
-    {
-        args.CanMove = true;
-    }
-
-    //ss220 fix activated jetpack in container start
-    private void OnInsertInContainer(Entity<JetpackComponent> ent, ref EntGotInsertedIntoContainerMessage args)
-    {
-        if(!HasComp<StorageComponent>(args.Container.Owner))
-            return;
-
-        _popup.PopupClient(Loc.GetString("jetpack-to-grid"), ent.Owner, ent.Comp.User);
-        SetEnabled(ent.Owner, ent.Comp, false, ent.Comp.User);
-    }
-    //ss220 fix activated jetpack in container end
 
     private void OnJetpackUserGravityChanged(ref GravityChangedEvent ev)
     {
@@ -93,6 +85,12 @@ public abstract class SharedJetpackSystem : EntitySystem
         SetEnabled(uid, component, false, args.User);
     }
 
+    private void OnJetpackMoved(Entity<JetpackComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    {
+        if (args.Container.Owner != ent.Comp.JetpackUser)
+            SetEnabled(ent, ent.Comp, false, ent.Comp.JetpackUser);
+    }
+
     private void OnJetpackUserCanWeightless(EntityUid uid, JetpackUserComponent component, ref CanWeightlessMoveEvent args)
     {
         args.CanMove = true;
@@ -109,16 +107,22 @@ public abstract class SharedJetpackSystem : EntitySystem
         }
     }
 
-    private void SetupUser(EntityUid user, EntityUid jetpackUid)
+    private void SetupUser(EntityUid user, EntityUid jetpackUid, JetpackComponent component)
     {
-        var userComp = EnsureComp<JetpackUserComponent>(user);
-        _mover.SetRelay(user, jetpackUid);
+        EnsureComp<JetpackUserComponent>(user, out var userComp);
+        component.JetpackUser = user;
 
         if (TryComp<PhysicsComponent>(user, out var physics))
             _physics.SetBodyStatus(user, physics, BodyStatus.InAir);
 
         userComp.Jetpack = jetpackUid;
+        userComp.WeightlessAcceleration = component.Acceleration;
+        userComp.WeightlessModifier = component.WeightlessModifier;
+        userComp.WeightlessFriction = component.Friction;
+        userComp.WeightlessFrictionNoInput = component.Friction;
+        _movementSpeedModifier.RefreshWeightlessModifiers(user);
 
+        // TODO_ss220: this could be obsolete
         //ss220 fix activated jetpack in container start
         if (!TryComp<JetpackComponent>(jetpackUid, out var jetpackComponent))
             return;
@@ -127,7 +131,7 @@ public abstract class SharedJetpackSystem : EntitySystem
         //ss220 fix activated jetpack in container end
     }
 
-    private void RemoveUser(EntityUid uid)
+    private void RemoveUser(EntityUid uid, JetpackComponent component)
     {
         //ss220 fix activated jetpack in container start
         if (!TryComp<JetpackUserComponent>(uid, out var jetpackUser))
@@ -141,10 +145,12 @@ public abstract class SharedJetpackSystem : EntitySystem
         if (!RemComp<JetpackUserComponent>(uid))
             return;
 
+        component.JetpackUser = null;
+
         if (TryComp<PhysicsComponent>(uid, out var physics))
             _physics.SetBodyStatus(uid, physics, BodyStatus.OnGround);
 
-        RemComp<RelayInputMoverComponent>(uid);
+        _movementSpeedModifier.RefreshWeightlessModifiers(uid);
     }
 
     private void OnJetpackToggle(EntityUid uid, JetpackComponent component, ToggleJetpackEvent args)
@@ -249,42 +255,26 @@ public abstract class SharedJetpackSystem : EntitySystem
     {
         if (IsEnabled(uid) == enabled ||
             enabled && !CanEnable(uid, component))
-        {
             return;
+
+        if (user == null)
+        {
+            if (!Container.TryGetContainingContainer((uid, null, null), out var container))
+                return;
+            user = container.Owner;
         }
 
         if (enabled)
         {
+            SetupUser(user.Value, uid, component);
             EnsureComp<ActiveJetpackComponent>(uid);
         }
         else
         {
+            RemoveUser(user.Value, component);
             RemComp<ActiveJetpackComponent>(uid);
         }
 
-        if (user == null)
-        {
-            Container.TryGetContainingContainer((uid, null, null), out var container);
-            user = container?.Owner;
-        }
-
-        // Can't activate if no one's using.
-        if (user == null && enabled)
-            return;
-
-        if (user != null)
-        {
-            if (enabled)
-            {
-                SetupUser(user.Value, uid);
-            }
-            else
-            {
-                RemoveUser(user.Value);
-            }
-
-            _movementSpeedModifier.RefreshMovementSpeedModifiers(user.Value);
-        }
 
         Appearance.SetData(uid, JetpackVisuals.Enabled, enabled);
         Dirty(uid, component);

@@ -139,7 +139,7 @@
 
 - type: stack
   id: BloodSalveEbent
-  name: кровоостанавливающая мазь
+  name: stack-blood-salve-ebent
   icon: { sprite: "/Textures/SS220/Objects/Specific/Medical/BloodSalveEbent.rsi", state: BloodSalve }
   spawn: BloodSalveEbent
   maxCount: 10

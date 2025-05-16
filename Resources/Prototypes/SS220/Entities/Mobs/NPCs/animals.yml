@@ -121,7 +121,6 @@
       borg_brain:
         - PositronicBrain
       borg_module:
-        - BorgModuleGPS
         - BorgModuleTool
   - type: ItemSlots
     slots:

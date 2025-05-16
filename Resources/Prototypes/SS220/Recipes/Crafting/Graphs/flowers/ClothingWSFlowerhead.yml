@@ -7,7 +7,7 @@
         - to: ClothingWSFlowerhead
           steps:
           - tag: wschamomile
-            name: белую космическую ромашку
+            name: construction-graph-tag-wschamomile
             icon:
               sprite: SS220/Objects/Consumable/Flowers/wschamomile.rsi
               state: icon

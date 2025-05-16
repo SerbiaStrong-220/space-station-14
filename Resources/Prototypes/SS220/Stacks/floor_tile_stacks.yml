@@ -1,145 +1,145 @@
 ﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 - type: stack
   id: FloorTileSteelReinforced
-  name: стальная шестиугольная плитка
+  name: floor-tile-steel-reinforced
   spawn: FloorTileItemSteelReinforced
   maxCount: 30
 
 - type: stack
   id: FloorTileWhiteReinforced
-  name: белая шестиугольная плитка
+  name: floor-tile-white-reinforced
   spawn: FloorTileItemWhiteReinforced
   maxCount: 30
 
 - type: stack
   id: FloorTileDarkReinforced
-  name: тёмная шестиугольная плитка
+  name: floor-tile-black-reinforced
   spawn: FloorTileItemDarkReinforced
   maxCount: 30
 
 - type: stack
   id: FloorTilePCircuit
-  name: плитка фиолетовых микросхем
+  name: floor-tile-purple-circuit
   spawn: FloorTileItemPCircuit
   maxCount: 30
 
 - type: stack
   id: FloorTileYCircuit
-  name: плитка жёлтых микросхем
+  name: floor-tile-yellow-circuit
   spawn: FloorTileItemYCircuit
   maxCount: 30
 
 - type: stack
   id: FloorTileOCircuit
-  name: плитка оранжевых микросхем
+  name: floor-tile-orange-circuit
   spawn: FloorTileItemOCircuit
   maxCount: 30
 
 - type: stack
   id: FloorTileRCircuit
-  name: плитка красных микросхем
+  name: floor-tile-red-circuit
   spawn: FloorTileItemRCircuit
   maxCount: 30
 
 - type: stack
   id: FloorTileKitchenRed
-  name: красная кухонная плитка
+  name: floor-tile-kitchen-red
   spawn: FloorTileItemKitchenRed
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodBlack
-  name: black wood floor
+  name: floor-tile-item-wood-black
   spawn: FloorTileItemWoodBlack
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodDark
-  name: dark wood floor
+  name: floor-tile-item-wood-dark
   spawn: FloorTileItemWoodDark
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodLight
-  name: light wood floor
+  name: floor-tile-item-wood-light
   spawn: FloorTileItemWoodLight
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodRed
-  name: red wood floor
+  name: floor-tile-item-wood-red
   spawn: FloorTileItemWoodRed
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodLargeBlack
-  name: large black wood floor
+  name: floor-tile-item-wood-large-black
   spawn: FloorTileItemWoodLargeBlack
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodLargeDark
-  name: large dark wood floor
+  name: floor-tile-item-wood-large-dark
   spawn: FloorTileItemWoodLargeDark
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodLargeLight
-  name: large light wood floor
+  name: floor-tile-item-wood-large-light
   spawn: FloorTileItemWoodLargeLight
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodLargeRed
-  name: large red wood floor
+  name: floor-tile-item-wood-large-red
   spawn: FloorTileItemWoodLargeRed
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodParquetBlack
-  name: parquet black wood floor
+  name: floor-tile-item-wood-parquet-black
   spawn: FloorTileItemWoodParquetBlack
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodParquetDark
-  name: parquet dark wood floor
+  name: floor-tile-item-wood-parquet-dark
   spawn: FloorTileItemWoodParquetDark
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodParquetLight
-  name: parquet light wood floor
+  name: floor-tile-item-wood-parquet-light
   spawn: FloorTileItemWoodParquetLight
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodParquetRed
-  name: parquet red wood floor
+  name: floor-tile-item-wood-parquet-red
   spawn: FloorTileItemWoodParquetRed
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodTileBlack
-  name: tile black wood floor
+  name: floor-tile-item-wood-tile-black
   spawn: FloorTileItemWoodTileBlack
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodTileDark
-  name: tile dark wood floor
+  name: floor-tile-item-wood-tile-dark
   spawn: FloorTileItemWoodTileDark
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodTileLight
-  name: tile light wood floor
+  name: floor-tile-item-wood-tile-light
   spawn: FloorTileItemWoodTileLight
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodTileRed
-  name: tile red wood floor
+  name: floor-tile-item-wood-tile-red
   spawn: FloorTileItemWoodTileRed
   maxCount: 30
 
@@ -147,55 +147,55 @@
 
 - type: stack
   id: FloorTileStackCarpetWhite
-  name: white carpet floor
+  name: floor-tile-stack-carpet-white
   spawn: FloorTileItemCarpetWhite
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetBlack
-  name: black carpet floor
+  name: floor-tile-stack-carpet-black
   spawn: FloorTileItemCarpetBlack
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetBlue
-  name: blue carpet floor
+  name: floor-tile-stack-carpet-blue
   spawn: FloorTileItemCarpetBlue
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetOrange
-  name: orange carpet floor
+  name: floor-tile-stack-carpet-orange
   spawn: FloorTileItemCarpetOrange
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetCyan
-  name: cyan carpet floor
+  name: floor-tile-stack-carpet-cyan
   spawn: FloorTileItemCarpetCyan
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetMagenta
-  name: magenta carpet floor
+  name: floor-tile-stack-carpet-magenta
   spawn: FloorTileItemCarpetMagenta
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetGreen
-  name: green carpet floor
+  name: floor-tile-stack-carpet-green
   spawn: FloorTileItemCarpetGreen
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetPurple
-  name: purple carpet floor
+  name: floor-tile-stack-carpet-purple
   spawn: FloorTileItemCarpetPurple
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetRed
-  name: red carpet floor
+  name: floor-tile-stack-carpet-red
   spawn: FloorTileItemCarpetRed
   maxCount: 30
 
@@ -203,97 +203,97 @@
 
 - type: stack
   id: FloorTileItemMarbleBlack
-  name: black marble
+  name: floor-tile-item-marble-black
   spawn: FloorTileItemMarbleBlack
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleWhite
-  name: white marble
+  name: floor-tile-item-marble-white
   spawn: FloorTileItemMarbleWhite
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleBorderWB
-  name: border marble
+  name: floor-tile-item-marble-border-w-b
   spawn: FloorTileItemMarbleBorderWB
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleBorderBW
-  name: border marble
+  name: floor-tile-item-marble-border-b-w
   spawn: FloorTileItemMarbleBorderBW
   maxCount: 30
 
 - type: stack
-  id: FloorTileItemMarbleDiagonalBW
-  name: diagonal marble
-  spawn: FloorTileItemMarbleDiagonalBW
-  maxCount: 30
-
-- type: stack
   id: FloorTileItemMarbleDiagonalWB
-  name: diagonal marble
+  name: floor-tile-item-marble-diagonal-w-b
   spawn: FloorTileItemMarbleDiagonalWB
   maxCount: 30
 
 - type: stack
-  id: FloorTileItemMarbleVerticalBW
-  name: vertical marble
-  spawn: FloorTileItemMarbleVerticalBW
+  id: FloorTileItemMarbleDiagonalBW
+  name: floor-tile-item-marble-diagonal-b-w
+  spawn: FloorTileItemMarbleDiagonalBW
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleVerticalWB
-  name: vertical marble
+  name: floor-tile-item-marble-vertical-w-b
   spawn: FloorTileItemMarbleVerticalWB
   maxCount: 30
 
 - type: stack
+  id: FloorTileItemMarbleVerticalBW
+  name: floor-tile-item-marble-vertical-b-w
+  spawn: FloorTileItemMarbleVerticalBW
+  maxCount: 30
+
+- type: stack
   id: FloorTileItemMarbleCornerNE
-  name: vertical marble
+  name: floor-tile-item-marble-corner-n-e
   spawn: FloorTileItemMarbleCornerNE
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleCornerNW
-  name: vertical marble
+  name: floor-tile-item-marble-corner-n-w
   spawn: FloorTileItemMarbleCornerNW
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleCornerSE
-  name: vertical marble
+  name: floor-tile-item-marble-corner-s-e
   spawn: FloorTileItemMarbleCornerSE
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleCornerSW
-  name: vertical marble
+  name: floor-tile-item-marble-corner-s-w
   spawn: FloorTileItemMarbleCornerSW
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleInnerNE
-  name: inner marble
+  name: floor-tile-item-marble-inner-n-e
   spawn: FloorTileItemMarbleInnerNE
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleInnerNW
-  name: inner marble
+  name: floor-tile-item-marble-inner-n-w
   spawn: FloorTileItemMarbleInnerNW
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleInnerSE
-  name: inner marble
+  name: floor-tile-item-marble-inner-s-e
   spawn: FloorTileItemMarbleInnerSE
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleInnerSW
-  name: inner marble
+  name: floor-tile-item-marble-inner-s-w
   spawn: FloorTileItemMarbleInnerSW
   maxCount: 30
 

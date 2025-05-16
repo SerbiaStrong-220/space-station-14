@@ -7,12 +7,12 @@
         - to: pumpkinLantern
           steps:
             - tag: Candle
-              name: свеча
+              name: construction-graph-tag-candle
               icon:
                 sprite: Objects/Misc/candles.rsi
                 state: loadout
             - tag: CarvedPumpkin
-              name: вырезанная тыква
+              name: construction-graph-tag-carved-pumpkin
               icon:
                 sprite: Objects/Specific/Hydroponics/pumpkin.rsi
                 state: carved

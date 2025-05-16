@@ -225,8 +225,102 @@
 
 - type: Tag
   id: CultYoggStealthProvidable
-  
+
 # ss220 medkit fix #2834 begin
 - type: Tag
   id: MaskBreath
 # ss220 medkit fix #2834  end
+
+
+## UNORDERED SORRY
+
+# SS220 - chemical-implants start
+- type: Tag
+  id: ChemicalImplant
+# SS220- - chemical-implants end
+
+# SS220 no-animal-zombs
+- type: Tag
+  id: ZombifyableByMelee
+
+# SS220 chiefs-belt start
+- type: Tag
+  id:  WaterBottle
+
+- type: Tag
+  id:  Vinegar
+
+- type: Tag
+  id:  OilOlive
+# SS220 chiefs-belt end
+
+# SS220 RPK
+- type: Tag
+  id: MagazineUssp_RPK
+
+# SS220 Edit Biomass craft begin
+- type: Tag
+  id: Scalpel
+# SS220 Edit Biomass craft end
+
+# SS220 Flower update begin
+- type: Tag
+  id: wtulip
+
+- type: Tag
+  id: ytulip
+
+- type: Tag
+  id: ptulip
+
+- type: Tag
+  id: rclove
+
+- type: Tag
+  id: wclove
+
+- type: Tag
+  id: schamomile
+
+- type: Tag
+  id: wschamomile
+
+- type: Tag
+  id: sflower
+
+- type: Tag
+  id: lflower
+
+- type: Tag
+  id: wrose
+
+- type: Tag
+  id: rrose
+# SS220 Flower update end
+
+# SS220-TohaUpdate-Begin
+- type: Tag
+  id: MagicianHat
+
+- type: Tag
+  id: ShrineMaiden
+
+- type: Tag
+  id: Janimaid
+
+- type: Tag
+  id: MagicianDress
+
+- type: Tag
+  id: ShrineMaidenWig
+# SS220-TohaUpdate-End
+
+# SS220 Fix #2009 begin
+- type: Tag
+  id: HolofanProjectorSecurity
+# SS220 Fix #2009 end
+
+# ss220 migo damage in astral fix start
+- type: Tag
+  id: MiGoInAstral
+# ss220 migo damage in astral fix end

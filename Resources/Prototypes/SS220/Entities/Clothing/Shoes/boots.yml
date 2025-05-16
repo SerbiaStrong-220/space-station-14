@@ -109,8 +109,6 @@
   name: Death Squad Magnetic Boots
   description: The most modern magnetic shoes in recognizable colors.
   components:
-  - type: InputMover
-    toParent: true
   - type: MovementSpeedModifier
     weightlessAcceleration: 1.2
     weightlessFriction: 0.5

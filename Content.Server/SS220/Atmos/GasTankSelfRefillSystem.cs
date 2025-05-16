@@ -2,7 +2,7 @@
 
 using Content.Shared.Atmos;
 using Content.Server.Atmos;
-using Content.Server.Atmos.Components;
+using Content.Shared.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 
 namespace Content.Server.SS220.Atmos
