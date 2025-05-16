@@ -5,8 +5,8 @@ namespace Content.Shared.SS220.Surgery.Graph;
 [ImplicitDataDefinitionForInheritors]
 public partial interface ISurgeryGraphCondition
 {
-    bool Condition(EntityUid uid, IEntityManager entityManager);
-    void DoScanExamine(); // surgery_TODO: make it seen in med scanner
+    public bool Condition(EntityUid uid, IEntityManager entityManager);
+    public string ConditionDescriptionLocPath();
 }
 
 [ImplicitDataDefinitionForInheritors]

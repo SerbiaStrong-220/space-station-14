@@ -22,8 +22,8 @@ public sealed partial class SurgeryHaveComponentCondition : ISurgeryGraphConditi
         return false;
     }
 
-    public void DoScanExamine()
+    public string ConditionDescriptionLocPath()
     {
-
+        return "ConditionDescriptionLocPath";
     }
 }

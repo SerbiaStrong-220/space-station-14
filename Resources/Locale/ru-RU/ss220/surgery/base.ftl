@@ -2,6 +2,15 @@
 surgery-null-used = руками
 surgery-invalid-target-buckle = Цель должна быть пристёгнута!
 
+surgery-cancelled = {THE($user)} убирает хирургические простыни с {THE($target)}
+surgery-cant-be-cancelled = Вы не можете завершить операцию, чтобы начать новую. Закончите начатую операцию.
+
+surgery-start-ui-target = Начать операцию на {THE($target)}
+
+surgery-footer-right = Uup
+surgery-footer-idle = Ожидание выбора операции.
+surgery-footer-confirm = Нажмите ещё раз на операцию, чтобы подтвердить.
+
 incision-examine-description = На теле заметен хирургический разрез.
 incision-popup = {THE($user)} делает надрез на теле {THE($target)}, используя {$used}
 incision-description = SS220 REDACTED
