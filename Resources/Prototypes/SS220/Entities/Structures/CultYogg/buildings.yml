@@ -85,6 +85,16 @@
     base: cult
   - type: CultYoggBuilding
     eraseTime: 3
+  - type: ChameleonStructure
+    default: ClothingBackpack
+    userWhitelist:
+      components:
+      - CultYogg
+    requireTag: WhitelistChameleonPDA
+  - type: UserInterface
+    interfaces:
+      enum.ChameleonUiKey.Key:
+        type: ChameleonSctructureBoundUserInterface
 
 - type: entity
   parent: BaseMaterialDoorNavMap

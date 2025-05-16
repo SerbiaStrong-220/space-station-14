@@ -22,7 +22,7 @@ public sealed partial class ChameleonStructureMenu : DefaultWindow
     private readonly SpriteSystem _sprite;
     public event Action<string>? OnIdSelected;
 
-    private IEnumerable<string> _possibleIds = Enumerable.Empty<string>();
+    private IEnumerable<string> _possibleIds = [];
     private string? _selectedId;
     private string _searchFilter = "";
 
