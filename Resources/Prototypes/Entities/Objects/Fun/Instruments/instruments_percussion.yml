@@ -141,9 +141,9 @@
     allowProgramChange: true
     respectMidiLimits: false
   - type: Sprite
-    sprite: SS220/Objects/Fun/Instruments/h_synthesizer.rsi
+    sprite: SS220/Objects/Fun/Instruments/h_synthesizer.rsi # SS220 Synthesizer resprite
     state: supersynth
   - type: Item
     heldPrefix: super
     size: Normal
-    sprite: SS220/Objects/Fun/Instruments/h_synthesizer.rsi
+    sprite: SS220/Objects/Fun/Instruments/h_synthesizer.rsi # SS220 Synthesizer resprite
