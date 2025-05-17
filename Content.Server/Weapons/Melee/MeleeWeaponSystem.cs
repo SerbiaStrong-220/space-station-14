@@ -10,6 +10,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using System.Linq;
 using System.Numerics;
+using Content.Shared.SS220.Damage.SplitDamage;
 
 namespace Content.Server.Weapons.Melee;
 
@@ -38,6 +39,16 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
             return;
 
         _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damageSpec), Loc.GetString("damage-melee"));
+        //ss220 split damage examine start
+        if (TryComp<SplitDamageComponent>(uid, out var splitDamageComponent))
+        {
+            _damageExamine.AddDamageExamine(args.Message, splitDamageComponent.PunchDamage, Loc.GetString("damage-melee-light"));
+            _damageExamine.AddDamageExamine(args.Message, splitDamageComponent.WideDamage, Loc.GetString("damage-melee-heavy"));
+            return;
+        }
+        //ss220 split damage examine end
+
+        _damageExamine.AddDamageExamine(args.Message, damageSpec, Loc.GetString("damage-melee"));
     }
 
     protected override bool ArcRaySuccessful(EntityUid targetUid,
