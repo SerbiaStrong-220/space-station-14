@@ -36,8 +36,4 @@ uplink-clown-category-main = Основное
 uplink-clown-category-bonus = Бонус
 uplink-clown-category-trinkets = Безделушки
 
-uplink-clown-bananaphone-name = Бананафон
-uplink-clown-bananaphone-desc = Прямая связь с Великой Хонк-Матерью. Ответственный клоун временно отсутствует — оставьте кожуру после сигнала.
-uplink-clown-bananaphone-suffix = Аплинк Клоун
-
 uplink-clown-currency = Банановая кожура
