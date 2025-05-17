@@ -1,0 +1,8 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: autoEmote
+  id: LowTempShake
+  emote: LowTempShake
+  interval: 2.0
+  chance: 0.5
+  withChat: true

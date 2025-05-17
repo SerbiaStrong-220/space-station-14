@@ -1,0 +1,13 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: emote
+  id: LowTempShake
+  name: chat-emote-name-lowtemp-shake
+  category: General
+  available: true
+  icon: Interface/Emotes/squeak.png
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI
+  chatMessages: ["chat-emote-msg-lowtemp-shake"]
