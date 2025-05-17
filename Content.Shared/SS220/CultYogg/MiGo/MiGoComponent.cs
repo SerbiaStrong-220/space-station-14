@@ -6,6 +6,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
@@ -158,4 +159,17 @@ public sealed partial class MiGoComponent : Component
     [DataField]
     public TimeSpan? ReplacementEventTime;
     #endregion
+}
+
+[NetSerializable, Serializable]
+public enum MiGoTimerVisualLayers : byte
+{
+    Digit1,
+    Digit2
+}
+[Serializable, NetSerializable]
+public enum MiGoVisual
+{
+    Base,
+    Astral
 }

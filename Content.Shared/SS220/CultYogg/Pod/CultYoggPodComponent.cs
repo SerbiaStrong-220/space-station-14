@@ -48,7 +48,11 @@ public sealed partial class CultYoggPodComponent : Component
             { "Shock", -4},
             { "Asphyxiation", -2.5},
             { "Bloodloss", -2.5 },
-            { "Radiation", -1 }
+            { "Radiation", -1 },
+            { "Сerebral", -50 },
+            { "Сellular", -10 },
+            { "Caustic", -1 },
+            { "Poison", -1 }
         }
     };
 

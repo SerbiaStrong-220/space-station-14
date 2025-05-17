@@ -94,7 +94,11 @@
           Cold: -4
           Shock: -4
           Radiation: -1
-          Сerebral: -10
+          Сerebral: -20
+          Caustic: -3
+          Cellular: -5
+          Poison: -3
+          Asphyxiation: -2
         groups:
           Airloss: -5
       modifyStamina: -5

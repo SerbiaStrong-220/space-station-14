@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Shared.Alert;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -17,7 +17,8 @@ using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Content.Shared.Projectiles;
 using Content.Server.Projectiles;
-
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 
@@ -34,6 +35,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly ProjectileSystem _projectile = default!;
+    [Dependency] private readonly PullingSystem _pullingSystem = default!;
 
     private const string AscensionReagent = "TheBloodOfYogg";
 
@@ -103,6 +105,9 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             if (TryComp<EmbeddedContainerComponent>(uid, out var embeddedContainer))
                 _projectile.DetachAllEmbedded((uid, embeddedContainer));
 
+            if (TryComp(uid, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
+                _pullingSystem.TryStopPull(puller.Pulling.Value, pullable);
+
             _appearance.SetData(uid, MiGoVisual.Astral, false);
             _appearance.RemoveData(uid, MiGoVisual.Base);
         }
@@ -123,7 +128,6 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         var speed = comp.IsPhysicalForm ? comp.MaterialMovementSpeed : comp.UnMaterialMovementSpeed;
         _speedModifier.ChangeBaseSpeed(uid, speed, speed, modifComp.Acceleration, modifComp);
     }
-    // Update loop
 
     #endregion
 

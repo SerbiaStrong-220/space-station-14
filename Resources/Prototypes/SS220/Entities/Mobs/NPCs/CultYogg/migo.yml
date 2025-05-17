@@ -44,6 +44,8 @@
     objectives:
     - CultYoggSacraficeObjective
   #situational for logic
+  - type: Puller
+    needsHands: false
   - type: Insulated
   - type: FlashImmunity
   - type: Speech

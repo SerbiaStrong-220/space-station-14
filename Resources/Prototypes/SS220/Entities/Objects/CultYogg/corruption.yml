@@ -141,14 +141,14 @@
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
-  id: LanternFlashCultYoggLantern
+  id: LanternhCultYoggLantern
   from:
-    prototypeId: LanternFlash
+    parentPrototypeId: Lantern
   result: CultYoggLantern
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
-  id: BaseLampFlashCultYogg
+  id: BaseLampCultYogg
   from:
     parentPrototypeId: BaseLamp
   result: CultYoggLantern
@@ -156,6 +156,13 @@
 
 - type: corrupted
   id: FlashlightCultYoggLantern
+  from:
+    prototypeId: FlashlightLantern
+  result: CultYoggLantern
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: ParentFlashlightCultYoggLantern
   from:
     parentPrototypeId: FlashlightLantern
   result: CultYoggLantern
