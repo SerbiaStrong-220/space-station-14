@@ -157,3 +157,106 @@
     sprite: SS220/Clothing/Head/Hoods/Coat/hoodsyndiearmored.rsi
 # SS220 wintercoats hoods end
 
+# Волшебник
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodWizardBlue
+  name: wizard hood
+  description: Hood of the wizard's robe.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/wizard_blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/wizard_blue.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodWizardViolet
+  name: violet wizard hood
+  description: Hood of the wizard's robe.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/wizard_violet.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/wizard_violet.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodWizardRed
+  name: red wizard hood
+  description: Hood of the wizard's robe.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/wizard_red.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/wizard_red.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodWizardWhite
+  name: white wizard hood
+  description: Hood of the wizard's robe.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/wizard_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/wizard_white.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodWizardBlack
+  name: black wizard hood
+  description: Hood of the wizard's robe.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/wizard_black.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/wizard_black.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodWizardGreen
+  name: green wizard hood
+  description: Hood of the wizard's robe.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/wizard_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/wizard_green.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair

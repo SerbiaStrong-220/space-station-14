@@ -50,3 +50,6 @@ ent-ClothingUniformJumpsuitInterdyne = форма парамедика Interdyne
 
 ent-ClothingUniformJumpsuitUssp = униформа СССП
     .desc = Форма, пропитанная кровью, потом и ненавистью к капитализму.
+
+ent-ClothingUniformJumpsuitWizard = униформа волшебника
+    .desc = Униформа волшебника, но вы не чувствуете от неё ничего волшебного...
