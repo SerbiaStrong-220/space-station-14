@@ -21,10 +21,10 @@
     - type: SolutionContainerManager
       solutions:
         acid:
-          maxVol: 15
+          maxVol: 25
           reagents:
           - ReagentId: CultYoggVenomancerAcid
-            Quantity: 15
+            Quantity: 25
     - type: SolutionRegeneration
       solution: acid
       duration: 3
