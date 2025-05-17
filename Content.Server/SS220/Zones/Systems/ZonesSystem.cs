@@ -1,4 +1,5 @@
 using Content.Shared.Maps;
+using Content.Shared.Physics;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
@@ -13,6 +14,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 {
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
 
     public override void Initialize()
     {
@@ -22,6 +24,24 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         SubscribeLocalEvent<ZonesDataComponent, ComponentShutdown>(OnZoneDataShutdown);
 
         SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnZoneShutdown);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<MapGridComponent, ZonesDataComponent>();
+        while (query.MoveNext(out var uid, out var mapGrid, out var zonesData))
+        {
+            foreach (var (id, zone) in zonesData.Zones)
+            {
+                foreach (var tile in zone.Tiles)
+                {
+                    var ents = TurfHelpers.GetEntitiesInTile(_map.GetTileRef((uid, mapGrid), tile), LookupFlags.All);
+                    var sss = _turf.IsTileBlocked(uid, tile, CollisionGroup.AllMask, mapGrid);
+                }
+            }
+        }
     }
 
     private void OnZonesDataInit(Entity<ZonesDataComponent> entity, ref MapInitEvent args)
