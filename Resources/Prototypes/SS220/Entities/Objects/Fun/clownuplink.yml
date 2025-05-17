@@ -213,9 +213,9 @@
 - type: entity
   parent: [BaseItem, StorePresetUplinkClown]
   id: BananaPhoneInstrument2
-  name: uplink-clown-bananaphone-name
-  description: uplink-clown-bananaphone-desc
-  suffix: uplink-clown-bananaphone-suffix
+  name: Бананафон
+  description: Прямая связь с Великой Хонк-Матерью. Ответственный клоун временно отсутствует — оставьте кожуру после сигнала.
+  suffix: Аплинк Клоун
   components:
   - type: Sprite
     sprite: Objects/Fun/Instruments/otherinstruments.rsi
