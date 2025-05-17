@@ -52,11 +52,11 @@
   meltingPoint: -19.4
   plantMetabolism:
   - !type:PlantAdjustToxins
-    amount: 20
+    amount: 10
   - !type:PlantAdjustWeeds
     amount: -4
   - !type:PlantAdjustHealth
-    amount: -8
+    amount: -5
   reactiveEffects:
     Acidic:
       methods: [ Touch ]
@@ -72,12 +72,13 @@
         probability: 0.3
   metabolisms:
     Poison:
-      metabolismRate : 3.00 # High damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
+      metabolismRate : 3.00
       effects:
       - !type:HealthChange
         damage:
           types:
             Caustic: 10.0
+            Heat: 10.0
       - !type:PopupMessage
         type: Local
         visualType: Large
