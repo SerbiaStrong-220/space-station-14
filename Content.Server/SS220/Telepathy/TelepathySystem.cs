@@ -7,12 +7,10 @@ using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.SS220.TTS;
-using Npgsql.Replication.PgOutput.Messages;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using System.Xml.Linq;
 
 namespace Content.Server.SS220.Telepathy;
 
@@ -131,7 +129,7 @@ public sealed class TelepathySystem : EntitySystem
             return;
         }
 
-        List<EntityUid> telephatyTTSrecievers = [];
+        List<EntityUid> telephatyTtsRecievers = [];
 
         var telepathyQuery = EntityQueryEnumerator<TelepathyComponent>();
         while (telepathyQuery.MoveNext(out var receiverUid, out var receiverTelepathy))
@@ -139,7 +137,7 @@ public sealed class TelepathySystem : EntitySystem
             if (rightTelepathyChannel == receiverTelepathy.TelepathyChannelPrototype || receiverTelepathy.ReceiveAllChannels)
             {
                 SendMessageToChat(receiverUid, message, senderUid, channelParameters);
-                telephatyTTSrecievers.Add(receiverUid);
+                telephatyTtsRecievers.Add(receiverUid);
             }
         }
 
@@ -150,7 +148,7 @@ public sealed class TelepathySystem : EntitySystem
 
         if (senderUid != null && HasComp<TTSComponent>(senderUid))
         {
-            RaiseLocalEvent(new TelepathySpokeEvent(senderUid.Value, message, [.. telephatyTTSrecievers]));
+            RaiseLocalEvent(new TelepathySpokeEvent(senderUid.Value, message, [.. telephatyTtsRecievers]));
         }
     }
 
