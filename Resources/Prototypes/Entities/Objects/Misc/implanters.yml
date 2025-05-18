@@ -37,6 +37,8 @@
       - FreedomImplant
       - UplinkImplant
       - EmpImplant
+      - AdrenalImplant
+      - ThermalVisionImplant
       - ScramImplant
       - DnaScramblerImplant
       - MicroBombImplant
@@ -45,8 +47,8 @@
       - DeathRattleImplant
       - MindShieldImplant
       - FakeMindShieldImplant
-      - RadioImplant
       - MindSlaveImplant
+      - RadioImplant
       deimplantFailureDamage:
         types:
           Cellular: 50
