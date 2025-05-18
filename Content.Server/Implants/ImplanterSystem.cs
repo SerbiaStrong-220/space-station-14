@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Server.Construction.Conditions;
-using Content.Server.Database;
 using Content.Server.Popups;
 using Content.Server.SS220.MindSlave;
 using Content.Shared.DoAfter;
@@ -27,7 +26,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     [Dependency] private readonly MindSlaveSystem _mindslave = default!;
     [Dependency] private readonly TagSystem _tag = default!; // SS220-mindslave
     [Dependency] private readonly IPrototypeManager _proto = default!; //ss220 fix implant draw popup
-    [Dependency] private readonly IPlayerManager _players = default!;
+    [Dependency] private readonly IPlayerManager _players = default!; // SS220 mind-slave-without-mind-fix
 
     //SS220-mindslave begin
     [ValidatePrototypeId<EntityPrototype>]
