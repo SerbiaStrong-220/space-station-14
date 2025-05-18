@@ -131,7 +131,7 @@ public sealed class TTSManager
 
                 if (kind == TtsKind.Telepathy)
                 {
-                    requestUrl += "&effect=ghost";
+                    requestUrl += "&effect=announce";
                 }
 
                 var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestUrl);
