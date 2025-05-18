@@ -3,6 +3,13 @@
 - type: autoEmote
   id: LowTempShake
   emote: LowTempShake
-  interval: 2.0
-  chance: 0.5
+  interval: 5.0
+  chance: 0.2
+  withChat: true
+
+- type: autoEmote
+  id: HighTempSweat
+  emote: HighTempSweat
+  interval: 5.0
+  chance: 0.2
   withChat: true

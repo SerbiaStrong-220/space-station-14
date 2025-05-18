@@ -5,9 +5,21 @@
   name: chat-emote-name-lowtemp-shake
   category: General
   available: true
-  icon: Interface/Emotes/squeak.png
   blacklist:
     components:
     - BorgChassis
     - PAI
   chatMessages: ["chat-emote-msg-lowtemp-shake"]
+  uiAvailable: false
+
+- type: emote
+  id: HighTempSweat
+  name: chat-emote-name-hightemp-sweat
+  category: General
+  available: true
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI
+  chatMessages: ["chat-emote-msg-hightemp-sweat"]
+  uiAvailable: false

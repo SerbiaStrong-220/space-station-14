@@ -7,4 +7,7 @@ public sealed partial class ConditionalEmotesComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite)]
     public bool IsCold = false;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool IsHot = false;
 }

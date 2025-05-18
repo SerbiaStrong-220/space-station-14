@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Body.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Temperature.Components;
 using Content.Shared.Temperature;
@@ -18,23 +19,28 @@ public sealed class ConditionalEmotesSystem : EntitySystem
 
     private void OnTemperatureChanged(Entity<ConditionalEmotesComponent> ent, ref OnTemperatureChangeEvent args)
     {
-        if (!TryComp<TemperatureComponent>(ent, out var comp))
+        if (!TryComp<TemperatureComponent>(ent, out var comp1) || !TryComp<ThermalRegulatorComponent>(ent, out var comp2))
             return;
-        Log.Info($"EVENT TRIGGERED WITH TEMP OF ENTITY: {args.CurrentTemperature} AND TEMP COLD STATUS: ${ent.Comp.IsCold}");
 
-        if (!ent.Comp.IsCold && args.CurrentTemperature < comp.ColdDamageThreshold)
+        if (!ent.Comp.IsCold && args.CurrentTemperature < comp2.NormalBodyTemperature)
         {
             ent.Comp.IsCold = true;
-            Log.Info("temp is lower, sucking");
             _autoEmote.AddEmote(ent.Owner, "LowTempShake");
-            Log.Info($"TEMP EVENT (ADD): temp={args.CurrentTemperature}, threshold={comp.ColdDamageThreshold}, isCold={ent.Comp.IsCold}");
         }
-        else if (ent.Comp.IsCold && args.CurrentTemperature > comp.ColdDamageThreshold)
+        else if (ent.Comp.IsCold && args.CurrentTemperature > comp2.NormalBodyTemperature)
         {
             ent.Comp.IsCold = false;
-            Log.Info("temp is higher, deleting");
-            _autoEmote.RemoveEmote(ent.Owner, "LowTempShake");
-            Log.Info($"TEMP EVENT (REMOVE): temp={args.CurrentTemperature}, threshold={comp.ColdDamageThreshold}, isCold={ent.Comp.IsCold}");
+            _autoEmote.RemoveEmote(ent.Owner, "LowTempShake", null, false);
+        }
+        if (!ent.Comp.IsHot && args.CurrentTemperature > comp2.NormalBodyTemperature)
+        {
+            ent.Comp.IsHot = true;
+            _autoEmote.AddEmote(ent.Owner, "HighTempSweat");
+        }
+        else if (ent.Comp.IsHot && args.CurrentTemperature < comp2.NormalBodyTemperature)
+        {
+            ent.Comp.IsHot = false;
+            _autoEmote.RemoveEmote(ent.Owner, "HighTempSweat", null, false);
         }
     }
 }
