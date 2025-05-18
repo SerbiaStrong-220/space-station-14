@@ -5,8 +5,8 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.Zones.Components;
 
 /// <summary>
-/// The component used to define the zones located on the <see cref="Parent"/>.
-/// A zone can be used to define a certain area on the <see cref="Parent"/>
+/// The component used to determine the zones located on the <see cref="Parent"/>.
+/// A zone can be used to determine a certain area on the <see cref="Parent"/>
 /// in which various events can occur, as well as with entities entering, staying inside, and leaving the zone.
 /// </summary>
 [AutoGenerateComponentState]
