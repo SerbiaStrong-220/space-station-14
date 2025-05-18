@@ -2,7 +2,7 @@
 - type: startingGear
   id: WizardBlueGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitColorDarkBlue
+    jumpsuit: ClothingUniformJumpsuitWizard #SS220 Wizard Clothing Resprite
     head: ClothingHeadHatWizard
     back: ClothingBackpack # Wizard backpack?
     outerClothing: ClothingOuterWizard

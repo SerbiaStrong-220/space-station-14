@@ -639,3 +639,38 @@
     sprite: SS220/Clothing/Head/Hats/newyears_cap.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/newyears_cap.rsi
+
+# Волшебник
+
+- type: entity
+  parent: ClothingHeadHatWizardBase
+  id: ClothingHeadHatWizardWhite
+  name: white wizard hat
+  description: "Strange-looking white hat-wear that most certainly belongs to a real magic user."
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/wizard_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/wizard_white.rsi
+
+- type: entity
+  parent: ClothingHeadHatWizardBase
+  id: ClothingHeadHatWizardBlack
+  name: black wizard hat
+  description: "Strange-looking black hat-wear that most certainly belongs to a real magic user."
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/wizard_black.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/wizard_black.rsi
+
+- type: entity
+  parent: ClothingHeadHatWizardBase
+  id: ClothingHeadHatWizardGreen
+  name: violet wizard hat
+  description: "Strange-looking green hat-wear that most certainly belongs to a real magic user."
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/wizard_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/wizard_green.rsi

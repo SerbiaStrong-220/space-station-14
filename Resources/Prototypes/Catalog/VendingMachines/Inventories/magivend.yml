@@ -8,6 +8,14 @@
     ClothingOuterWizardRed: 3
     ClothingHeadHatVioletwizard: 3
     ClothingOuterWizardViolet: 3
+    #SS220 Wizard Clothing Resprite Begin
+    ClothingHeadHatWizardWhite: 3
+    ClothingOuterWizardWhite: 3
+    ClothingHeadHatWizardBlack: 3
+    ClothingOuterWizardBlack: 3
+    ClothingHeadHatWizardGreen: 3
+    ClothingOuterWizardGreen: 3
+    #SS220 Wizard Clothing Resprite End
     ClothingShoesWizard: 9
     #TODO:
     #only missing staff
