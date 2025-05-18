@@ -397,7 +397,7 @@ public sealed class MindSlaveSystem : EntitySystem
             {
                 Log.Warning($"{ToPrettyString(slave)} was freed from mindslave but dont have a {nameof(TelepathyComponent)}");
             }
-            return;
+            //return; // SS220 removing-telepathy-from-a-slave fix
         }
 
         RemComp<TelepathyComponent>(slave);
