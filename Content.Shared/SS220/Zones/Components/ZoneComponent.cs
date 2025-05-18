@@ -13,7 +13,10 @@ public sealed partial class ZoneComponent : Component
     public NetEntity? Parent;
 
     [ViewVariables, AutoNetworkedField]
-    public Color Color = Color.Red;
+    public Color? CurColor;
+
+    [DataField, AutoNetworkedField]
+    public Color DefaultColor = Color.Red;
 
     [ViewVariables, AutoNetworkedField]
     public HashSet<Box2> Boxes = new();

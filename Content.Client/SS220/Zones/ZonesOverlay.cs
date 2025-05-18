@@ -71,7 +71,8 @@ public sealed class ZonesOverlay : Overlay
 
             var bounds = invWorldMatrix.TransformBox(worldBounds).Enlarged(2);
             drawHandle.SetTransform(worldMatrix);
-            var color = new Color(zone.Comp.Color.R, zone.Comp.Color.G, zone.Comp.Color.B, 0.25f);
+
+            var color = (zone.Comp.CurColor ?? zone.Comp.DefaultColor).WithAlpha(0.125f);
             drawHandle.DrawTextureRect(texture, box, color);
         }
     }

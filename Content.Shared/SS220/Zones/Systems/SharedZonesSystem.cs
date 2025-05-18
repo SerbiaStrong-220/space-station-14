@@ -33,7 +33,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
     public void ProcessZone(Entity<ZoneComponent> zone)
     {
-        var entitiesToLeave = zone.Comp.Entities;
+        var entitiesToLeave = zone.Comp.Entities.ToHashSet();
         var entitiesToEnter = new HashSet<EntityUid>();
         var curEntities = GetEntitiesInZone(zone).ToHashSet();
         foreach (var entity in curEntities)
@@ -46,6 +46,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
         foreach (var entity in entitiesToLeave)
         {
+            zone.Comp.Entities.Remove(entity);
             var ev = new LeavedZoneEvent(zone, entity);
             RaiseLocalEvent(zone, ev);
             RaiseLocalEvent(entity, ev);
@@ -53,12 +54,11 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
         foreach (var entity in entitiesToEnter)
         {
+            zone.Comp.Entities.Add(entity);
             var ev = new EnteredZoneEvent(zone, entity);
             RaiseLocalEvent(zone, ev);
             RaiseLocalEvent(entity, ev);
         }
-
-        zone.Comp.Entities = curEntities;
     }
 
     public IEnumerable<EntityUid> GetEntitiesInZone(Entity<ZoneComponent> zone)
