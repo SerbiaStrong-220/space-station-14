@@ -37,8 +37,8 @@
       - FreedomImplant
       - UplinkImplant
       - EmpImplant
-      - AdrenalImplant
-      - ThermalVisionImplant
+      - AdrenalImplant # SS220 implant-removing fix
+      - ThermalVisionImplant # SS220 implant-removing fix
       - ScramImplant
       - DnaScramblerImplant
       - MicroBombImplant
@@ -47,7 +47,7 @@
       - DeathRattleImplant
       - MindShieldImplant
       - FakeMindShieldImplant
-      - MindSlaveImplant
+      - MindSlaveImplant # SS220 implant-removing fix
       - RadioImplant
       deimplantFailureDamage:
         types:

@@ -30,7 +30,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
 
     //SS220-mindslave begin
     [ValidatePrototypeId<EntityPrototype>]
-    private const string MindSlaveImplantProto = "MindSlaveImplant";
+    //private const string MindSlaveImplantProto = "MindSlaveImplant"; // SS220 mindslave fix
     private const float MindShieldRemoveTime = 40;
     //SS220-mindslave end
     // SS220-fakeMS fix begin
@@ -68,7 +68,10 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
             return;
         }
 
-        if (component.Implant == MindSlaveImplantProto)
+        // SS220 mindslave fix start
+        //if (component.Implant == MindSlaveImplantProto)
+        if (TryComp<MindSlaveImplantComponent>(component.ImplanterSlot.Item, out _))
+        // SS220 mindslave fix end
         {
             if (args.User == target)
             {
@@ -224,7 +227,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
 
         // SS220 mind-slave-without-mind-fix start
         if (component.CurrentMode.ToString() == "Inject"
-            && component.Implant == MindSlaveImplantProto
+            && TryComp<MindSlaveImplantComponent>(component.ImplanterSlot.Item, out _)
             && !_players.TryGetSessionByEntity(args.Target.Value, out _))
             return;
         // SS220 mind-slave-without-mind-fix end
