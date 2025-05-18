@@ -224,7 +224,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
 
         // SS220 mind-slave-without-mind-fix start
         if (component.CurrentMode.ToString() == "Inject"
-            && component.ImplantData.Item1 == Loc.GetString("ent-MindSlaveImplant")
+            && component.Implant == MindSlaveImplantProto
             && !_players.TryGetSessionByEntity(args.Target.Value, out _))
             return;
         // SS220 mind-slave-without-mind-fix end
