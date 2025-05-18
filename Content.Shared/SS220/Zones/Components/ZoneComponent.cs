@@ -8,8 +8,11 @@ namespace Content.Shared.SS220.Zones.Components;
 public sealed partial class ZoneComponent : Component
 {
     [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
-    public NetEntity? AttachedGrid;
+    public NetEntity? Parent;
 
-    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
-    public int GridZoneId;
+    [ViewVariables, AutoNetworkedField]
+    public Color Color = Color.Red;
+
+    [ViewVariables, AutoNetworkedField]
+    public HashSet<Box2> Boxes = new();
 }

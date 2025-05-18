@@ -4,7 +4,6 @@ using Content.Shared.SS220.Zones.Components;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Enums;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using System.Numerics;
 
@@ -35,15 +34,21 @@ public sealed class ZonesOverlay : Overlay
         drawHandle.UseShader(_shader);
 
         var xforms = _entManager.GetEntityQuery<TransformComponent>();
-        var query = _entManager.EntityQueryEnumerator<MapGridComponent, ZonesDataComponent>();
+        var query = _entManager.EntityQueryEnumerator<ZonesDataComponent>();
 
-        while (query.MoveNext(out var uid, out var grid, out var zonesData))
+        while (query.MoveNext(out var uid, out var zonesData))
         {
             if (_transformSystem.GetMapId(uid) != args.MapId)
                 continue;
 
-            foreach (var zone in zonesData.Zones.Values)
-                DrawZone(drawHandle, args.WorldBounds, xforms, (uid, grid, zonesData), zone);
+            foreach (var netZone in zonesData.Zones)
+            {
+                var zone = _entManager.GetEntity(netZone);
+                if (!_entManager.TryGetComponent<ZoneComponent>(zone, out var zoneComp))
+                    continue;
+
+                DrawZone(drawHandle, args.WorldBounds, xforms, uid, (zone, zoneComp));
+            }
         }
 
         drawHandle.SetTransform(Matrix3x2.Identity);
@@ -54,26 +59,20 @@ public sealed class ZonesOverlay : Overlay
         DrawingHandleWorld drawHandle,
         Box2Rotated worldBounds,
         EntityQuery<TransformComponent> xforms,
-        Entity<MapGridComponent, ZonesDataComponent> grid,
-        ZoneData zoneData)
+        EntityUid parent,
+        Entity<ZoneComponent> zone)
     {
-        foreach (var tile in zoneData.Tiles)
+        foreach (var box in zone.Comp.Boxes)
         {
-            var tileSize = grid.Comp1.TileSize;
-            var centre = (tile + Vector2Helpers.Half) * tileSize;
-
             var texture = _cache.GetTexture("/Textures/Interface/Nano/square.png");
 
-            var xform = xforms.GetComponent(grid);
+            var xform = xforms.GetComponent(parent);
             var (_, _, worldMatrix, invWorldMatrix) = _transformSystem.GetWorldPositionRotationMatrixWithInv(xform, xforms);
 
-            var gridBounds = invWorldMatrix.TransformBox(worldBounds).Enlarged(tileSize * 2);
+            var bounds = invWorldMatrix.TransformBox(worldBounds).Enlarged(2);
             drawHandle.SetTransform(worldMatrix);
-            if (!gridBounds.Contains(centre))
-                continue;
-
-            var color = new Color(zoneData.Color.R, zoneData.Color.G, zoneData.Color.B, 0.25f);
-            drawHandle.DrawTextureRect(texture, Box2.CenteredAround(centre, new Vector2(tileSize, tileSize)), color);
+            var color = new Color(zone.Comp.Color.R, zone.Comp.Color.G, zone.Comp.Color.B, 0.25f);
+            drawHandle.DrawTextureRect(texture, box, color);
         }
     }
 }

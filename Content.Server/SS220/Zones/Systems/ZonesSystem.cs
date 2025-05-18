@@ -1,9 +1,10 @@
-using Content.Shared.Maps;
+
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Numerics;
 
@@ -18,154 +19,147 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ZonesDataComponent, MapInitEvent>(OnZonesDataInit);
         SubscribeLocalEvent<ZonesDataComponent, ComponentShutdown>(OnZoneDataShutdown);
 
         SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnZoneShutdown);
     }
 
-    private void OnZonesDataInit(Entity<ZonesDataComponent> entity, ref MapInitEvent args)
+    public override void Update(float frameTime)
     {
-        if (!TryComp<MapGridComponent>(entity, out var gridComponent))
-            return;
+        base.Update(frameTime);
 
-        foreach (var zoneId in entity.Comp.Zones.Keys)
-            InitializeZone((entity, gridComponent, entity), zoneId);
+        var query = EntityQueryEnumerator<ZoneComponent>();
+        while (query.MoveNext(out var uid, out var zoneComp))
+        {
+            var ents = GetEntitiesInZone((uid, zoneComp));
+        }
     }
 
     private void OnZoneDataShutdown(Entity<ZonesDataComponent> entity, ref ComponentShutdown args)
     {
-        foreach (var id in entity.Comp.Zones.Keys)
-            DeleteZone(entity, id);
+        foreach (var zone in entity.Comp.Zones)
+            DeleteZone(GetEntity(zone));
     }
 
     private void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
     {
-        DeleteZone(entity);
+        DeleteZone(entity.Owner);
     }
 
-    public ZoneData? CreateZone(Entity<MapGridComponent> grid,
-        EntityCoordinates point1,
-        EntityCoordinates point2)
+    public Entity<ZoneComponent>? CreateZone(EntityUid parent,
+        IEnumerable<(EntityCoordinates, EntityCoordinates)> boxCoordinates,
+        bool attachToGrid = false,
+        EntProtoId<ZoneComponent>? zoneProto = null)
     {
-        var cords = GetTilesCoordinatesInBox(grid, point1, point2);
-        return CreateZone(grid, cords);
+        var vectors = boxCoordinates.Select(e =>
+        {
+            var p1 = e.Item1;
+            var p2 = e.Item2;
+
+            if (p1.EntityId != parent)
+                throw new ArgumentException($"Entity {parent} doesn't contains coordinate {p1}");
+
+            if (p2.EntityId != parent)
+                throw new ArgumentException($"Entity {parent} doesn't contains coordinate {p2}");
+
+            var v1 = new Vector2(p1.X, p1.Y);
+            var v2 = new Vector2(p2.X, p2.Y);
+            return (v1, v2);
+        });
+
+        return CreateZone(parent, vectors, attachToGrid, zoneProto);
     }
 
-    public ZoneData? CreateZone(Entity<MapGridComponent> grid, HashSet<EntityCoordinates> cords)
+    public Entity<ZoneComponent>? CreateZone(EntityUid parent,
+        IEnumerable<(MapCoordinates, MapCoordinates)> boxCoordinates,
+        bool attachToGrid = false,
+        EntProtoId<ZoneComponent>? zoneProto = null)
     {
-        var tiles = cords
-            .Select(c => _map.GetTileRef(grid, c))
-            .Where(t => !t.IsSpace())
-            .Select(t => t.GridIndices)
-            .ToHashSet();
-
-        return CreateZone(grid, tiles);
-    }
-
-    public ZoneData? CreateZone(Entity<MapGridComponent> grid, HashSet<Vector2i> tiles)
-    {
-        if (tiles.Count <= 0)
+        if (!TryComp<MapComponent>(parent, out var mapComponent))
             return null;
 
-        var zoneData = new ZoneData()
+        var vectors = boxCoordinates.Select(e =>
         {
-            Tiles = tiles,
-        };
+            var p1 = e.Item1;
+            var p2 = e.Item2;
 
-        return CreateZone(grid, zoneData);
+            if (p1.MapId != mapComponent.MapId)
+                throw new ArgumentException($"The coordinate was obtained from map {p1.MapId}, when it should be from map {mapComponent.MapId}");
+
+            if (p2.MapId != mapComponent.MapId)
+                throw new ArgumentException($"The coordinate was obtained from map {p2.MapId}, when it should be from map {mapComponent.MapId}");
+
+            var v1 = new Vector2(p1.X, p1.Y);
+            var v2 = new Vector2(p2.X, p2.Y);
+            return (v1, v2);
+        });
+
+        return CreateZone(parent, vectors, attachToGrid, zoneProto);
     }
 
-    public ZoneData? CreateZone(Entity<MapGridComponent> grid, ZoneData zoneData)
+    public Entity<ZoneComponent>? CreateZone(EntityUid parent,
+        IEnumerable<(Vector2, Vector2)> vectors,
+        bool attachToGrid = false,
+        EntProtoId<ZoneComponent>? zoneProto = null)
     {
-        var zonesComp = EnsureComp<ZonesDataComponent>(grid);
-
-        var zoneId = zonesComp.GetFreeZoneId();
-        zonesComp.Zones.Add(zoneId, zoneData);
-
-        Dirty(grid, zonesComp);
-
-        var mapId = _transform.GetMapId(grid.Owner);
-        if (_map.IsInitialized(mapId))
-            InitializeZone((grid, grid, zonesComp), zoneId);
-
-        return zoneData;
+        if (attachToGrid)
+        {
+            var boxes = vectors.Select(e => GetIntegerBox(e.Item1, e.Item2));
+            return CreateZone(parent, boxes, zoneProto);
+        }
+        else
+        {
+            var boxes = vectors.Select(e => GetBox(e.Item1, e.Item2));
+            return CreateZone(parent, boxes, zoneProto);
+        }
     }
 
-    public void DeleteZone(Entity<ZoneComponent> entity)
+    public Entity<ZoneComponent>? CreateZone(EntityUid parent, IEnumerable<Box2i> boxes, EntProtoId<ZoneComponent>? zoneProto = null)
     {
-        var grid = GetEntity(entity.Comp.AttachedGrid);
-        if (grid == null ||
-            !TryComp<ZonesDataComponent>(grid, out var zonesData))
-            return;
-
-        DeleteZone((grid.Value, zonesData), entity);
+        var array = boxes.Select(b => new Box2(b.BottomLeft, b.TopRight));
+        return CreateZone(parent, array, zoneProto);
     }
 
-    public void DeleteZone(Entity<ZonesDataComponent> grid, Entity<ZoneComponent> entity)
+    public Entity<ZoneComponent>? CreateZone(EntityUid parent, IEnumerable<Box2> boxes, EntProtoId<ZoneComponent>? zoneProto = null)
     {
-        var zoneId = GetZoneId(grid, entity);
-        if (zoneId == null)
-            return;
+        var boxesHash = boxes.ToHashSet();
+        if (boxesHash.Count <= 0)
+            return null;
 
-        DeleteZone(grid, zoneId.Value);
-    }
-
-    public void DeleteZone(Entity<ZonesDataComponent> grid, int zoneId)
-    {
-        if (!grid.Comp.Zones.TryGetValue(zoneId, out var zone))
-            return;
-
-        grid.Comp.Zones.Remove(zoneId);
-        var zoneEnt = GetEntity(zone.ZoneEntity);
-        QueueDel(zoneEnt);
-    }
-
-    private void InitializeZone(Entity<MapGridComponent, ZonesDataComponent> grid, int zoneId)
-    {
-        if (!grid.Comp2.Zones.TryGetValue(zoneId, out var zoneData))
-            return;
-
-        var zone = Spawn(zoneData.EntityId);
-        zoneData.ZoneEntity = GetNetEntity(zone);
+        zoneProto ??= BaseZoneId;
+        var zone = Spawn(zoneProto, Transform(parent).Coordinates);
+        _transform.AttachToGridOrMap(zone);
 
         var zoneComp = EnsureComp<ZoneComponent>(zone);
-        zoneComp.AttachedGrid = GetNetEntity(grid);
-        zoneComp.GridZoneId = zoneId;
-
+        zoneComp.Parent = GetNetEntity(parent);
+        zoneComp.Boxes = boxesHash;
         Dirty(zone, zoneComp);
-        Dirty(grid, grid.Comp2);
+
+        var zonesData = EnsureComp<ZonesDataComponent>(parent);
+        zonesData.Zones.Add(GetNetEntity(zone));
+        Dirty(parent, zonesData);
+
+        return (zone, zoneComp);
     }
 
-    private HashSet<EntityCoordinates> GetTilesCoordinatesInBox(Entity<MapGridComponent> grid, EntityCoordinates point1, EntityCoordinates point2)
+    public void DeleteZone(Entity<ZoneComponent?> zone)
     {
-        return GetTilesCoordinatesInBox(grid, new Vector2(point1.X, point1.Y), new Vector2(point2.X, point2.Y));
+        if (!Resolve(zone, ref zone.Comp))
+            return;
+
+        if (zone.Comp.Parent is not { } parent)
+            return;
+
+        DeleteZone(GetEntity(parent), zone);
     }
 
-    private HashSet<EntityCoordinates> GetTilesCoordinatesInBox(Entity<MapGridComponent> grid, Vector2 point1, Vector2 point2)
+    public void DeleteZone(Entity<ZonesDataComponent?> parent, Entity<ZoneComponent?> zone)
     {
-        HashSet<Vector2> array = new();
-        var top = Math.Max(point1.Y, point2.Y);
-        var right = Math.Max(point1.X, point2.X);
-        var bottom = Math.Min(point1.Y, point2.Y);
-        var left = Math.Min(point1.X, point2.X);
+        if (!Resolve(parent, ref parent.Comp) ||
+            !Resolve(zone, ref zone.Comp))
+            return;
 
-        var step = grid.Comp.TileSize;
-        var endPoint = new Vector2(right, top);
-        var curPoint = new Vector2(left, bottom);
-        while (curPoint != endPoint)
-        {
-            array.Add(curPoint);
-            if (curPoint.X != right)
-                curPoint.X = Math.Min(curPoint.X + step, right);
-            else if (curPoint.Y != top)
-            {
-                curPoint.Y = Math.Min(curPoint.Y + step, top);
-                curPoint.X = left;
-            }
-        }
-        array.Add(endPoint);
-
-        return array.Select(v => new EntityCoordinates(grid, v)).ToHashSet();
+        parent.Comp.Zones.Remove(GetNetEntity(zone));
+        QueueDel(zone);
     }
 }

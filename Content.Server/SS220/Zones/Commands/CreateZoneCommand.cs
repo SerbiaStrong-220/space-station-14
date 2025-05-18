@@ -3,7 +3,6 @@ using Content.Server.SS220.Zones.Systems;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using System.Linq;
 
 namespace Content.Server.SS220.Zones.Commands;
@@ -20,10 +19,7 @@ public sealed partial class CreateZoneCommand : LocalizedCommands
         if (args.Length != 3)
             return;
 
-        if (!EntityUid.TryParse(args[0], out var grid))
-            return;
-
-        if (!_entityManager.TryGetComponent<MapGridComponent>(grid, out var mapGrid))
+        if (!EntityUid.TryParse(args[0], out var parent))
             return;
 
         var strPoint1 = args[1].Split(';').Select(s => s.Trim()).ToArray();
@@ -38,10 +34,10 @@ public sealed partial class CreateZoneCommand : LocalizedCommands
             !float.TryParse(strPoint2[1], out var y2))
             return;
 
-        var point1 = new EntityCoordinates(grid, x1, y1);
-        var point2 = new EntityCoordinates(grid, x2, y2);
+        var point1 = new EntityCoordinates(parent, x1, y1);
+        var point2 = new EntityCoordinates(parent, x2, y2);
 
         var zonesSystem = _entityManager.System<ZonesSystem>();
-        zonesSystem.CreateZone((grid, mapGrid), point1, point2);
+        zonesSystem.CreateZone(parent, [(point1, point2)], true);
     }
 }
