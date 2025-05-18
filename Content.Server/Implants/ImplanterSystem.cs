@@ -28,11 +28,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     [Dependency] private readonly IPrototypeManager _proto = default!; //ss220 fix implant draw popup
     [Dependency] private readonly IPlayerManager _players = default!; // SS220 mind-slave-without-mind-fix
 
-    //SS220-mindslave begin
-    [ValidatePrototypeId<EntityPrototype>]
-    //private const string MindSlaveImplantProto = "MindSlaveImplant"; // SS220 mindslave fix
-    private const float MindShieldRemoveTime = 40;
-    //SS220-mindslave end
+    private const float MindShieldRemoveTime = 40; //SS220-mindslave
     // SS220-fakeMS fix begin
     [ValidatePrototypeId<EntityPrototype>]
     private const string FakeMindShieldImplant = "FakeMindShieldImplant";
@@ -68,10 +64,8 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
             return;
         }
 
-        // SS220 mindslave fix start
-        //if (component.Implant == MindSlaveImplantProto)
-        if (TryComp<MindSlaveImplantComponent>(component.ImplanterSlot.Item, out _))
-        // SS220 mindslave fix end
+
+        if (HasComp<MindSlaveImplantComponent>(component.ImplanterSlot.Item)) // SS220 mindslave fix start
         {
             if (args.User == target)
             {
@@ -227,7 +221,7 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
 
         // SS220 mind-slave-without-mind-fix start
         if (component.CurrentMode.ToString() == "Inject"
-            && TryComp<MindSlaveImplantComponent>(component.ImplanterSlot.Item, out _)
+            && HasComp<MindSlaveImplantComponent>(component.ImplanterSlot.Item)
             && !_players.TryGetSessionByEntity(args.Target.Value, out _))
             return;
         // SS220 mind-slave-without-mind-fix end

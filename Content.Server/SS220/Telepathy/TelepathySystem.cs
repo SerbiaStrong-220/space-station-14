@@ -73,7 +73,7 @@ public sealed class TelepathySystem : EntitySystem
     /// </summary>
     public void FreeUniqueTelepathyChannel(ProtoId<TelepathyChannelPrototype> protoId, bool delete = true)
     {
-        if (_dynamicChannels.TryGetValue(protoId, out var _))
+        if (!_dynamicChannels.TryGetValue(protoId, out var _)) // SS220 removing-telepathy-from-a-slave fix
         {
             Log.Error($"Tried to free unregistered channel, passed id was {protoId}");
             return;
