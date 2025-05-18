@@ -46,6 +46,7 @@
       - MindShieldImplant
       - FakeMindShieldImplant
       - RadioImplant
+      - MindSlaveImplant
       deimplantFailureDamage:
         types:
           Cellular: 50
