@@ -223,7 +223,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
                 Coordinates = coordinates,
                 Disabled = (coordinates == null),
                 HorizontalExpand = true,
-                DotColor = dotColor,
+                DotColor = dotColor, //SS220-colorful-sensors
             };
 
             if (sensor.SuitSensorUid == _trackedEntity)
