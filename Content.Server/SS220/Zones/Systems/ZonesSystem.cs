@@ -1,4 +1,4 @@
-
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
@@ -12,7 +12,6 @@ namespace Content.Server.SS220.Zones.Systems;
 
 public sealed partial class ZonesSystem : SharedZonesSystem
 {
-    [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
     public override void Initialize()
@@ -46,9 +45,13 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         DeleteZone(entity.Owner);
     }
 
+    /// <inheritdoc cref="CreateZone(EntityUid, IEnumerable{Box2}, EntProtoId{ZoneComponent}?)"/>
+    /// <param name="boxCoordinates">Contains the coordinates for which the boxes will be created</param>
+    /// <param name="boundToGrid">Should the coordinates of the box be bound to the grid</param>
+    /// <returns></returns>
     public Entity<ZoneComponent>? CreateZone(EntityUid parent,
         IEnumerable<(EntityCoordinates, EntityCoordinates)> boxCoordinates,
-        bool attachToGrid = false,
+        bool boundToGrid = false,
         EntProtoId<ZoneComponent>? zoneProto = null)
     {
         var vectors = boxCoordinates.Select(e =>
@@ -67,12 +70,16 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             return (v1, v2);
         });
 
-        return CreateZone(parent, vectors, attachToGrid, zoneProto);
+        return CreateZone(parent, vectors, boundToGrid, zoneProto);
     }
 
+    /// <inheritdoc cref="CreateZone(EntityUid, IEnumerable{Box2}, EntProtoId{ZoneComponent}?)"/>
+    /// <param name="boxCoordinates">Contains the coordinates for which the boxes will be created</param>
+    /// <param name="boundToGrid">Should the coordinates of the box be bound to the grid</param>
+    /// <returns></returns>
     public Entity<ZoneComponent>? CreateZone(EntityUid parent,
         IEnumerable<(MapCoordinates, MapCoordinates)> boxCoordinates,
-        bool attachToGrid = false,
+        bool boundToGrid = false,
         EntProtoId<ZoneComponent>? zoneProto = null)
     {
         if (!TryComp<MapComponent>(parent, out var mapComponent))
@@ -94,15 +101,19 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             return (v1, v2);
         });
 
-        return CreateZone(parent, vectors, attachToGrid, zoneProto);
+        return CreateZone(parent, vectors, boundToGrid, zoneProto);
     }
 
+    /// <inheritdoc cref="CreateZone(EntityUid, IEnumerable{Box2}, EntProtoId{ZoneComponent}?)"/>
+    /// <param name="vectors">Contains the coordinates for which the boxes will be created</param>
+    /// <param name="boundToGrid">Should the coordinates of the box be bound to the grid</param>
+    /// <returns></returns>
     public Entity<ZoneComponent>? CreateZone(EntityUid parent,
         IEnumerable<(Vector2, Vector2)> vectors,
-        bool attachToGrid = false,
+        bool boundToGrid = false,
         EntProtoId<ZoneComponent>? zoneProto = null)
     {
-        if (attachToGrid)
+        if (boundToGrid)
         {
             var boxes = vectors.Select(e => GetIntegerBox(e.Item1, e.Item2));
             return CreateZone(parent, boxes, zoneProto);
@@ -114,12 +125,16 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         }
     }
 
+    /// <inheritdoc cref="CreateZone(EntityUid, IEnumerable{Box2}, EntProtoId{ZoneComponent}?)"/>
     public Entity<ZoneComponent>? CreateZone(EntityUid parent, IEnumerable<Box2i> boxes, EntProtoId<ZoneComponent>? zoneProto = null)
     {
         var array = boxes.Select(b => new Box2(b.BottomLeft, b.TopRight));
         return CreateZone(parent, array, zoneProto);
     }
 
+    /// <summary>
+    /// Creates a new zone
+    /// </summary>
     public Entity<ZoneComponent>? CreateZone(EntityUid parent, IEnumerable<Box2> boxes, EntProtoId<ZoneComponent>? zoneProto = null)
     {
         var boxesHash = boxes.ToHashSet();
@@ -142,6 +157,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         return (zone, zoneComp);
     }
 
+    /// <inheritdoc cref="DeleteZone(Entity{ZonesDataComponent?}, Entity{ZoneComponent?})"/>
     public void DeleteZone(Entity<ZoneComponent?> zone)
     {
         if (!Resolve(zone, ref zone.Comp))
@@ -153,6 +169,9 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         DeleteZone(GetEntity(parent), zone);
     }
 
+    /// <summary>
+    /// Deletes the <paramref name="zone"/>
+    /// </summary>
     public void DeleteZone(Entity<ZonesDataComponent?> parent, Entity<ZoneComponent?> zone)
     {
         if (!Resolve(parent, ref parent.Comp) ||

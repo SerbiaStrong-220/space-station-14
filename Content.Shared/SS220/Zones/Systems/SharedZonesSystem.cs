@@ -1,4 +1,4 @@
-
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Zones.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
@@ -31,6 +31,11 @@ public abstract partial class SharedZonesSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// Performs checks on entities located in the <paramref name="zone"/>.
+    /// Raises the <see cref="LeavedZoneEvent"/> if entity was in the <paramref name="zone"/> before, but now it isn't.
+    /// Raises the <see cref="EnteredZoneEvent"/> if entity wasn't in the <paramref name="zone"/> before, but now it is.
+    /// </summary>
     public void ProcessZone(Entity<ZoneComponent> zone)
     {
         var entitiesToLeave = zone.Comp.Entities.ToHashSet();
@@ -61,6 +66,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         }
     }
 
+    /// <inheritdoc cref="GetEntitiesInZone(Entity{BroadphaseComponent}, Entity{ZoneComponent})"/>
     public IEnumerable<EntityUid> GetEntitiesInZone(Entity<ZoneComponent> zone)
     {
         var parent = GetEntity(zone.Comp.Parent);
@@ -70,6 +76,10 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return GetEntitiesInZone((parent.Value, broadphase), zone);
     }
 
+    /// <summary>
+    /// Returns entities located in the <paramref name="zone"/>.
+    /// The check is performed at the <see cref="TransformComponent.Coordinates"/> of the entities.
+    /// </summary>
     public IEnumerable<EntityUid> GetEntitiesInZone(
         Entity<BroadphaseComponent> parent,
         Entity<ZoneComponent> zone)
@@ -104,16 +114,21 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return ZoneQueryCallback(ref state, proxy.Entity);
     }
 
+    /// <inheritdoc cref="GetBox(Vector2, Vector2)"/>
     public static Box2 GetBox(EntityCoordinates point1, EntityCoordinates point2)
     {
         return GetBox(point1.Position, point2.Position);
     }
 
+    /// <inheritdoc cref="GetBox(Vector2, Vector2)"/>
     public static Box2 GetBox(MapCoordinates point1, MapCoordinates point2)
     {
         return GetBox(point1.Position, point2.Position);
     }
 
+    /// <summary>
+    /// Creates a box between two points
+    /// </summary>
     public static Box2 GetBox(Vector2 point1, Vector2 point2)
     {
         var left = Math.Min(point1.X, point2.X);
@@ -126,26 +141,33 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return new Box2(bottomLeft, topRight);
     }
 
+    /// <inheritdoc cref="GetIntegerBox(Vector2, Vector2)"/>
     public static Box2i GetIntegerBox(Box2 box)
     {
         return GetIntegerBox(box.BottomLeft, box.TopRight);
     }
 
+    /// <inheritdoc cref="GetIntegerBox(Vector2, Vector2)"/>
     public static Box2i GetIntegerBox(TileRef tile1, TileRef tile2)
     {
         return GetIntegerBox(tile1.GridIndices, tile2.GridIndices);
     }
 
+    /// <inheritdoc cref="GetIntegerBox(Vector2, Vector2)"/>
     public static Box2i GetIntegerBox(MapCoordinates point1, MapCoordinates point2)
     {
         return GetIntegerBox(point1.Position, point2.Position);
     }
 
+    /// <inheritdoc cref="GetIntegerBox(Vector2, Vector2)"/>
     public static Box2i GetIntegerBox(EntityCoordinates point1, EntityCoordinates point2)
     {
         return GetIntegerBox(point1.Position, point2.Position);
     }
 
+    /// <summary>
+    /// Creates a box between two points with integer coordinates
+    /// </summary>
     public static Box2i GetIntegerBox(Vector2 point1, Vector2 point2)
     {
         var left = (int)Math.Floor(Math.Min(point1.X, point2.X));
@@ -158,11 +180,16 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return new Box2i(bottomLeft, topRight);
     }
 
-    public bool InZone(Entity<ZoneComponent> zone, EntityUid uid)
+    /// <summary>
+    /// Determines whether the <paramref name="entity"/> is located inside the <paramref name="zone"/>.
+    /// The check is performed at the <see cref="TransformComponent.Coordinates"/> of <paramref name="entity"/>
+    /// </summary>
+    public bool InZone(Entity<ZoneComponent> zone, EntityUid entity)
     {
-        return InZone(zone, Transform(uid).Coordinates);
+        return InZone(zone, Transform(entity).Coordinates);
     }
 
+    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, Vector2)"/>
     public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point)
     {
         if (GetEntity(zone.Comp.Parent) != _map.GetMap(point.MapId))
@@ -171,6 +198,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return InZone(zone, point.Position);
     }
 
+    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, Vector2)"/>
     public bool InZone(Entity<ZoneComponent> zone, EntityCoordinates point)
     {
         if (GetEntity(zone.Comp.Parent) != point.EntityId)
@@ -179,6 +207,9 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return InZone(zone, point.Position);
     }
 
+    /// <summary>
+    /// Determines whether the <paramref name="point"/> is located inside the <paramref name="zone"/>.
+    /// </summary>
     public static bool InZone(Entity<ZoneComponent> zone, Vector2 point)
     {
         foreach (var box in zone.Comp.Boxes)
@@ -190,6 +221,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return false;
     }
 
+    /// <inheritdoc cref="GetZonesByPoint(Entity{ZonesDataComponent}, Vector2)"/>
     public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapCoordinates point)
     {
         List<Entity<ZoneComponent>> zones = new();
@@ -200,6 +232,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return GetZonesByPoint((uid, zonesData), point.Position);
     }
 
+    /// <inheritdoc cref="GetZonesByPoint(Entity{ZonesDataComponent}, Vector2)"/>
     public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(EntityCoordinates point)
     {
         List<Entity<ZoneComponent>> zones = new();
@@ -209,6 +242,9 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return GetZonesByPoint((point.EntityId, zonesData), point.Position);
     }
 
+    /// <summary>
+    /// Returns zones containing a <paramref name="point"/>
+    /// </summary>
     public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(Entity<ZonesDataComponent> parent, Vector2 point)
     {
         List<Entity<ZoneComponent>> zones = new();
@@ -226,12 +262,18 @@ public abstract partial class SharedZonesSystem : EntitySystem
     }
 }
 
+/// <summary>
+/// An event that rises when the entity appears in the zone
+/// </summary>
 public sealed partial class EnteredZoneEvent(Entity<ZoneComponent> zone, EntityUid entity) : EntityEventArgs
 {
     public readonly Entity<ZoneComponent> Zone = zone;
     public readonly EntityUid Entity = entity;
 }
 
+/// <summary>
+/// An event that rises when the entity disappears from the zone
+/// </summary>
 public sealed partial class LeavedZoneEvent(Entity<ZoneComponent> zone, EntityUid entity) : EntityEventArgs
 {
     public readonly Entity<ZoneComponent> Zone = zone;
