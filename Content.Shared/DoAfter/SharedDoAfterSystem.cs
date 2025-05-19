@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
+using Content.Shared.SS220.ChangeSpeedDoAfters;
+using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
 using Content.Shared.Tag;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -195,6 +197,11 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         }
 
         id = new DoAfterId(args.User, comp.NextId++);
+
+        //ss220 add traits start
+        RaiseLocalEvent(args.User, new BeforeDoAfterStartEvent(args, id.Value.Index), true);
+        //ss220 add traits end
+
         var doAfter = new DoAfter(id.Value.Index, args, GameTiming.CurTime);
 
         // Networking yay

@@ -1,0 +1,31 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: memelertLevel
+  id: rzhamma
+  levelDetails:
+    announcement: joke-alert-level-rzhamma-announcement
+    sound:
+      path: /Audio/SS220/Announcements/rzhamma.ogg
+      params:
+        volume: -2
+    color: PaleVioletRed
+
+- type: memelertLevel
+  id: hehelta
+  levelDetails:
+    announcement: joke-alert-level-hehelta-announcement
+    sound:
+      path: /Audio/SS220/Announcements/hehelta.ogg
+      params:
+        volume: -6
+    color: DarkRed
+
+- type: memelertLevel
+  id: pepsilon
+  levelDetails:
+    announcement: joke-alert-level-pepsilon-announcement
+    sound:
+      path: /Audio/SS220/Announcements/pepsilon.ogg
+      params:
+        volume: -2
+    color: DarkViolet

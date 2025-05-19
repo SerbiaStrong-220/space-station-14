@@ -751,6 +751,10 @@
 - type: Tag
   id: JawsOfLife
 
+# SS220 JudgeGavel
+- type: Tag
+  id: JudgeGavel
+
 - type: Tag
   id: Kangaroo
 
