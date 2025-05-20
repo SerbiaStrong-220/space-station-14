@@ -77,10 +77,10 @@ public sealed class LimitationReviveSystem : EntitySystem
         while (query.MoveNext(out var ent, out var limitationRevive))
         {
             if (limitationRevive.DamageTime is null)
-                return;
+                continue;
 
             if (_timing.CurTime < limitationRevive.DamageTime)
-                return;
+                continue;
 
             _damageableSystem.TryChangeDamage(ent, limitationRevive.Damage, true);
 
