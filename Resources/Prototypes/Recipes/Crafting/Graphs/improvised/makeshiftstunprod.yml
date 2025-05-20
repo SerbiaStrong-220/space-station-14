@@ -8,11 +8,13 @@
           steps:
             - material: MetalRod
               amount: 1
-            - tag: PowerCellSmall
-              name: power cell small
-              icon:
-                sprite: Objects/Power/power_cells.rsi
-                state: small
+            #ss220 change stunprod start
+            #- tag: PowerCellSmall
+              #name: power cell small
+              #icon:
+                #sprite: Objects/Power/power_cells.rsi
+                #state: small
+            #ss220 change stunprod end
             - tag: Handcuffs
               icon:
                 sprite: Objects/Misc/cablecuffs.rsi
@@ -27,4 +29,4 @@
               doAfter: 15
     - node: msstunprod
       entity: Stunprod
-      
+
