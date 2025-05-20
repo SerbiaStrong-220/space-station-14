@@ -105,7 +105,8 @@
   - type: ZombieImmune
   - type: Repairable
     doAfterDelay: 10
-    allowSelfRepair: false
+    # allowSelfRepair: false
+    # SS220 borg self welding
   - type: BorgChassis
   - type: LockingWhitelist
     blacklist:
