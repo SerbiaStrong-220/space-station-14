@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
@@ -13,6 +14,8 @@ public abstract partial class SharedZonesSystem : EntitySystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    public const string ZoneCommandsPrefix = "zone:";
 
     public static EntProtoId<ZoneComponent> BaseZoneId = "BaseZone";
 
@@ -259,6 +262,17 @@ public abstract partial class SharedZonesSystem : EntitySystem
         }
 
         return zones;
+    }
+
+    /// <summary>
+    /// Removes intersections of boxes and, if possible, unite adjacent boxes (if this does not affect the total area)
+    /// </summary>
+    public void RecalculateZoneBoxes(Entity<ZoneComponent> zone)
+    {
+        var boxes = MathHelperExtensions.GetNonOverlappingBoxes(zone.Comp.Boxes);
+        boxes = MathHelperExtensions.UnionInEqualSizedBoxes(boxes);
+        zone.Comp.Boxes = boxes.ToHashSet();
+        Dirty(zone, zone.Comp);
     }
 }
 

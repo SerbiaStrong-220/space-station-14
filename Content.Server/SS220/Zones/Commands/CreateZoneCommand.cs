@@ -4,7 +4,6 @@ using Content.Server.SS220.Zones.Systems;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
-using System.Linq;
 
 namespace Content.Server.SS220.Zones.Commands;
 
@@ -13,32 +12,43 @@ public sealed partial class CreateZoneCommand : LocalizedCommands
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
-    public override string Command => "zone:create";
+    public override string Command => $"{ZonesSystem.ZoneCommandsPrefix}create";
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        if (args.Length != 3)
+        if (args.Length != 2)
             return;
 
         if (!EntityUid.TryParse(args[0], out var parent))
             return;
 
-        var strPoint1 = args[1].Split(';').Select(s => s.Trim()).ToArray();
-        var strPoint2 = args[2].Split(';').Select(s => s.Trim()).ToArray(); ;
-        if (strPoint1.Length != 2 ||
-            strPoint2.Length != 2)
-            return;
+        var coords = new List<(EntityCoordinates, EntityCoordinates)>();
+        var pairs = args[1].Split(';');
+        for (var i = 0; i < pairs.Length; i++)
+        {
+            var cur = pairs[i];
+            var num = cur.Split(' ');
+            if (num.Length > 4)
+            {
+                shell.WriteLine($"Неверное количество аргументов в координатах бокса {i}");
+                return;
+            }
 
-        if (!float.TryParse(strPoint1[0], out var x1) ||
-            !float.TryParse(strPoint1[1], out var y1) ||
-            !float.TryParse(strPoint2[0], out var x2) ||
-            !float.TryParse(strPoint2[1], out var y2))
-            return;
+            if (!float.TryParse(num[0], out var x1) ||
+                !float.TryParse(num[1], out var y1) ||
+                !float.TryParse(num[2], out var x2) ||
+                !float.TryParse(num[3], out var y2))
+            {
+                shell.WriteLine($"Не удалось получить координаты бокса {i}");
+                return;
+            }
 
-        var point1 = new EntityCoordinates(parent, x1, y1);
-        var point2 = new EntityCoordinates(parent, x2, y2);
+            var point1 = new EntityCoordinates(parent, x1, y1);
+            var point2 = new EntityCoordinates(parent, x2, y2);
+            coords.Add((point1, point2));
+        }
 
         var zonesSystem = _entityManager.System<ZonesSystem>();
-        zonesSystem.CreateZone(parent, [(point1, point2)], true);
+        zonesSystem.CreateZone(parent, coords, true);
     }
 }
