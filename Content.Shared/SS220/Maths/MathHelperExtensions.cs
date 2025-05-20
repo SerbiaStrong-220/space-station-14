@@ -76,12 +76,7 @@ public static partial class MathHelperExtensions
     /// </summary>
     public static bool TryUnionInEqualSizedBox(Box2 box, Box2 toUnion, [NotNullWhen(true)] out Box2? union)
     {
-        var inter = box.Intersect(toUnion);
-        var totalArea = Box2.Area(box) + Box2.Area(toUnion) - Box2.Area(inter);
-
-        var result = Box2.Union(box, toUnion);
-        union = totalArea == Box2.Area(result) ? result : null;
-        return union != null;
+        return TryUnionInEqualSizedBox(box, [toUnion], out union);
     }
 
     /// <summary>
