@@ -49,7 +49,10 @@ public sealed partial class CultYoggPodComponent : Component
             { "Asphyxiation", -2.5},
             { "Bloodloss", -2.5 },
             { "Radiation", -1 },
-            { "Stamina", -5 }
+            { "Сerebral", -50 },
+            { "Сellular", -10 },
+            { "Caustic", -1 },
+            { "Poison", -1 }
         }
     };
 
@@ -61,6 +64,9 @@ public sealed partial class CultYoggPodComponent : Component
     /// </summary>
     [DataField]
     public float ModifyBloodLevel = 2;
+
+    [DataField]
+    public float ModifyStamina = -5;
 
     public ContainerSlot MobContainer = default!;
 

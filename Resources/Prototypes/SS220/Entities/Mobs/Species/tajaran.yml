@@ -111,6 +111,8 @@
     availableLanguages:
     - id: Galactic
     - id: Siiktajr
+  - type: LimitationRevive
+    reviveLimit: 3
 
 - type: entity
   id: MobTajaranDummy

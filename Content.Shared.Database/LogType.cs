@@ -455,4 +455,32 @@ public enum LogType
     /// An atmos networked device (such as a vent or pump) has had its settings changed, usually through an air alarm
     /// </summary>
     AtmosDeviceSetting = 101,
+
+    /// <summary>
+    /// Commands related to admemes. Stuff like config changes, etc.
+    /// </summary>
+    AdminCommands = 102,
+
+    /// <summary>
+    /// A player was selected or assigned antag status
+    /// </summary>
+    AntagSelection = 103,
+
+    /// <summary>
+    /// Logs related to botany, such as planting and harvesting crops
+    /// </summary>
+    Botany = 104,
+    /// <summary>
+    /// Artifact node got activated.
+    /// </summary>
+    ArtifactNode = 105,
+
+    //SS220 log types start
+
+    /// <summary>
+    /// Admin command executed.
+    /// </summary>
+    AdminCommand = 10000,
+
+    //SS220 log types end
 }

@@ -4,8 +4,10 @@ using Content.Client.Gameplay;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.RCD.Systems;
+using Content.Shared.SS220.Photocopier.Forms;
 using Content.Shared.SS220.PlacerItem.Components;
 using Content.Shared.SS220.PlacerItem.Systems;
+using Robust.Client.GameObjects;
 using Robust.Client.Placement;
 using Robust.Client.Player;
 using Robust.Client.State;
@@ -96,8 +98,11 @@ public sealed class AlignPlacerItemConstruction : PlacementMode
         if (!_entityManager.TryGetComponent<PlacerItemComponent>(heldEntity, out var placerItemComp))
             return false;
 
-        if (!_rcdSystem.TryGetMapGridData(position, out var mapGridData))
+        var gridUid = _transformSystem.GetGrid(position);
+        if (!_entityManager.TryGetComponent<MapGridComponent>(gridUid, out var mapGrid))
             return false;
+
+        var posVector = _mapSystem.TileIndicesFor(gridUid.Value, mapGrid, position);
 
         // Determine if the user is hovering over a target
         var currentState = _stateManager.CurrentState;
@@ -107,6 +112,6 @@ public sealed class AlignPlacerItemConstruction : PlacementMode
 
         var target = screen.GetClickedEntity(_transformSystem.ToMapCoordinates(_unalignedMouseCoords));
 
-        return _placerItemSystem.IsPlacementOperationStillValid((heldEntity.Value, placerItemComp), mapGridData.Value, target, player.Value);
+        return _placerItemSystem.IsPlacementOperationStillValid((heldEntity.Value, placerItemComp), (gridUid.Value, mapGrid), posVector, target, player.Value);
     }
 }

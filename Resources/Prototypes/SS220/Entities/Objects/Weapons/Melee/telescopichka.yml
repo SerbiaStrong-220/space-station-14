@@ -22,11 +22,11 @@
     damageOpen:
       types:
         Blunt: 1
-        Stamina: 28
     damageFolded:
       types:
         Blunt: 0
-        Stamina: 0
+    staminaDamageFolded: 0
+    staminaDamageOpen: 28
     sizeOpened: Large
     sizeClosed: Small
   - type: StaminaDamageOnHit

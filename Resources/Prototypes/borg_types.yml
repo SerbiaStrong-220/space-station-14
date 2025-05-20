@@ -1,6 +1,7 @@
-﻿# Generic borg
+# Generic borg
 - type: borgType
   id: generic
+  name: borg-type-prototype-generic # SS220 Borgs-Id-fix
 
   # Description
   dummyPrototype: BorgChassisGeneric
@@ -10,6 +11,7 @@
   moduleWhitelist:
     tags:
     - BorgModuleGeneric
+    - BorgModuleScience #until sciborgs are added
 
   defaultModules:
   - BorgModuleTool
@@ -32,6 +34,7 @@
 # Engineering borg
 - type: borgType
   id: engineering
+  name: borg-type-prototype-engineering # SS220 Borgs-Id-fix
 
   # Description
   dummyPrototype: BorgChassisEngineer
@@ -68,6 +71,7 @@
 # Salvage borg
 - type: borgType
   id: mining
+  name: borg-type-prototype-mining # SS220 Borgs-Id-fix
 
   # Description
   dummyPrototype: BorgChassisMining
@@ -80,9 +84,10 @@
     - BorgModuleCargo
 
   defaultModules:
-  - BorgModuleGrapplingGun
   - BorgModuleMining
+  - BorgModuleGrapplingGun
   - BorgModuleAppraisal
+  - BorgModuleTool
 
   radioChannels:
   - Supply
@@ -104,6 +109,7 @@
 # Janitor borg
 - type: borgType
   id: janitor
+  name: borg-type-prototype-janitor # SS220 Borgs-Id-fix
 
   # Description
   dummyPrototype: BorgChassisJanitor
@@ -139,6 +145,7 @@
 # Medical borg
 - type: borgType
   id: medical
+  name: borg-type-prototype-medical # SS220 Borgs-Id-fix
 
   # Description
   dummyPrototype: BorgChassisMedical
@@ -186,6 +193,7 @@
 # Service borg
 - type: borgType
   id: service
+  name: borg-type-prototype-service # SS220 Borgs-Id-fix
 
   # Description
   dummyPrototype: BorgChassisService

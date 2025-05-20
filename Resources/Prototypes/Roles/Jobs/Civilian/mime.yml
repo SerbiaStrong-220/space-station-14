@@ -8,7 +8,7 @@
       department: Civilian
       time: 36000 # SS220-RoleTime 2
     - !type:OverallPlaytimeRequirement
-       time: 72000 # SS220-RoleTime 2  
+       time: 72000 # SS220-RoleTime 2
   startingGear: MimeGear
   icon: "JobIconMime"
   supervisors: job-supervisors-hop
@@ -19,6 +19,7 @@
   - !type:AddComponentSpecial
     components:
     - type: MimePowers
+      preventWriting: true
     - type: FrenchAccent
     - type: RenameStart #SS220-RenameStart
 
@@ -27,9 +28,8 @@
   equipment:
     gloves: ClothingHandsGlovesColorWhite
 #    shoes: ClothingShoesColorWhite #SS220-Two Floppa Iterarion
-    pocket1: CrayonMime
-    pocket2: Paper
     id: MimePDA
+    pocket1: CrayonMime
     ears: ClothingHeadsetService
   storage:
     back:

@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
@@ -11,17 +12,13 @@ using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Sacraficials;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System.Linq;
-using Content.Shared.Item;
-using Content.Shared.Hands;
 using Content.Shared.SS220.CultYogg.Buildings;
 using Robust.Shared.Prototypes;
 using Content.Shared.Mindshield.Components;
@@ -34,6 +31,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Audio;
+using Content.Shared.Movement.Pulling.Events;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
@@ -46,7 +44,6 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMiGoErectSystem _miGoErectSystem = default!;
-    [Dependency] private readonly SharedMiGoPlantSystem _miGoPlantSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedCultYoggHealSystem _heal = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -75,10 +72,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<MiGoComponent, AfterDeMaterialize>(OnAfterDeMaterialize);
 
         SubscribeLocalEvent<MiGoComponent, AttackAttemptEvent>(CheckAct);
-        SubscribeLocalEvent<MiGoComponent, DropAttemptEvent>(OnDropAttempt);
-        SubscribeLocalEvent<MiGoComponent, ThrowAttemptEvent>(OnThrowAttempt);
-        SubscribeLocalEvent<MiGoComponent, BeingUsedAttemptEvent>(OnBeingUsedAttempt);
-        SubscribeLocalEvent<MiGoComponent, GettingPickedUpAttemptEvent>(OnGettingPickedUpAttempt);
+        SubscribeLocalEvent<MiGoComponent, PullAttemptEvent>(OnPullAttempt);
 
         SubscribeLocalEvent<MiGoComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
 
@@ -191,6 +185,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         healComponent.ModifyBloodLevel = args.ModifyBloodLevel;
         healComponent.TimeBetweenIncidents = args.TimeBetweenIncidents;
         healComponent.Sprite = args.EffectSprite;
+        healComponent.ModifyStamina = args.ModifyStamina;
         Dirty(args.Target, healComponent);
 
         args.Handled = true;
@@ -259,13 +254,6 @@ public abstract class SharedMiGoSystem : EntitySystem
                 currentMiGoAmount++;
         }
 
-        if (currentMiGoAmount < altarComp.RequiredAmountMiGo)
-        {
-            _popup.PopupClient(Loc.GetString("cult-yogg-altar-not-enough-migo"), user, user);
-
-            return false;
-        }
-
         var sacrificeDoAfter = new DoAfterArgs(EntityManager, user, altarComp.RutualTime, new MiGoSacrificeDoAfterEvent(), altarUid, target: targetUid)
         {
             BreakOnDamage = true,
@@ -313,12 +301,13 @@ public abstract class SharedMiGoSystem : EntitySystem
             if (_timing.CurTime <= comp.MaterializationTime.Value)
                 continue;
 
-            ChangeForm(uid, comp, true);
             if (!comp.AudioPlayed)
             {
                 _audio.PlayPredicted(comp.SoundMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
                 comp.AudioPlayed = true;
             }
+            ChangeForm(uid, comp, true);
+
             _actions.StartUseDelay(comp.MiGoAstralActionEntity);
         }
     }
@@ -335,11 +324,7 @@ public abstract class SharedMiGoSystem : EntitySystem
                 CancelDuplicate = false
             };
 
-            var started = _doAfter.TryStartDoAfter(doafterArgs);
-            if (started)
-            {
-                _physics.SetBodyType(uid, BodyType.Static);
-            }
+            _doAfter.TryStartDoAfter(doafterArgs);
         }
         else
         {
@@ -361,46 +346,53 @@ public abstract class SharedMiGoSystem : EntitySystem
     }
     private void OnAfterMaterialize(Entity<MiGoComponent> uid, ref AfterMaterialize args)
     {
+        if (args.Cancelled)
+            return;
+
+        if (args.Handled)
+            return;
+
         args.Handled = true;
 
-        _physics.SetBodyType(uid, BodyType.KinematicController);
         _audio.PlayPredicted(uid.Comp.SoundMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
 
-        if (!args.Cancelled)
-        {
-            ChangeForm(uid, uid.Comp, true);
-
-            _actions.StartUseDelay(uid.Comp.MiGoAstralActionEntity);
-        }
+        ChangeForm(uid, uid.Comp, true);
+        _actions.StartUseDelay(uid.Comp.MiGoAstralActionEntity);
+        Dirty(uid);
     }
 
     private void OnAfterDeMaterialize(Entity<MiGoComponent> uid, ref AfterDeMaterialize args)
     {
+        if (args.Cancelled)
+            return;
+
+        if (args.Handled)
+            return;
+
         args.Handled = true;
 
-        if (!args.Cancelled)
-        {
-            ChangeForm(uid, uid.Comp, false);
-            uid.Comp.MaterializationTime = _timing.CurTime + uid.Comp.AstralDuration;
+        ChangeForm(uid, uid.Comp, false);
+        uid.Comp.MaterializationTime = _timing.CurTime + uid.Comp.AstralDuration;
 
-            var cooldownStart = _timing.CurTime;
-            var cooldownEnd = cooldownStart + uid.Comp.CooldownAfterDematerialize;
+        var cooldownStart = _timing.CurTime;
+        var cooldownEnd = cooldownStart + uid.Comp.CooldownAfterDematerialize;
 
-            _actions.SetCooldown(uid.Comp.MiGoAstralActionEntity, cooldownStart, cooldownEnd);
-        }
+        _actions.SetCooldown(uid.Comp.MiGoAstralActionEntity, cooldownStart, cooldownEnd);
+
+        Dirty(uid);
     }
 
     public virtual void ChangeForm(EntityUid uid, MiGoComponent comp, bool isMaterial)
     {
-        if (TryComp<FixturesComponent>(uid, out var fixturesComp))
+        if (TryComp<FixturesComponent>(uid, out var fixtures) && fixtures.FixtureCount >= 1)
         {
-            if (fixturesComp.Fixtures.TryGetValue("fix1", out var fixture))
-            {
-                var mask = (int)(isMaterial ? CollisionGroup.FlyingMobMask : CollisionGroup.GhostImpassable);
-                var layer = (int)(isMaterial ? CollisionGroup.FlyingMobLayer : CollisionGroup.None);
-                _physics.SetCollisionMask(uid, "fix1", fixture, mask);
-                _physics.SetCollisionLayer(uid, "fix1", fixture, layer);
-            }
+            var fixture = fixtures.Fixtures.First();
+
+            var mask = (int)(isMaterial ? CollisionGroup.FlyingMobMask : CollisionGroup.GhostImpassable);
+            var layer = (int)(isMaterial ? CollisionGroup.FlyingMobLayer : CollisionGroup.None);
+
+            _physics.SetCollisionMask(uid, fixture.Key, fixture.Value, mask, fixtures);
+            _physics.SetCollisionLayer(uid, fixture.Key, fixture.Value, layer, fixtures);
         }
 
         //full vision during astral
@@ -418,28 +410,10 @@ public abstract class SharedMiGoSystem : EntitySystem
             args.Cancel();
     }
 
-    //ToDo check if its required
-
-    private void OnGettingPickedUpAttempt(Entity<MiGoComponent> uid, ref GettingPickedUpAttemptEvent args)
+    private void OnPullAttempt(Entity<MiGoComponent> uid, ref PullAttemptEvent args)
     {
         if (!uid.Comp.IsPhysicalForm)
-            args.Cancel();
-    }
-
-    private void OnDropAttempt(Entity<MiGoComponent> uid, ref DropAttemptEvent args)
-    {
-        if (!uid.Comp.IsPhysicalForm)
-            args.Cancel();
-    }
-    private void OnBeingUsedAttempt(Entity<MiGoComponent> uid, ref BeingUsedAttemptEvent args)
-    {
-        if (!uid.Comp.IsPhysicalForm)
-            args.Cancel();
-    }
-    private void OnThrowAttempt(Entity<MiGoComponent> uid, ref ThrowAttemptEvent args)
-    {
-        if (!uid.Comp.IsPhysicalForm)
-            args.Cancel();
+            args.Cancelled = true;
     }
     #endregion
 
@@ -537,38 +511,4 @@ public abstract class SharedMiGoSystem : EntitySystem
         return true;
     }
     #endregion
-}
-
-[Serializable, NetSerializable]
-public sealed partial class MiGoSacrificeDoAfterEvent : SimpleDoAfterEvent { }
-
-[Serializable, NetSerializable]
-public sealed partial class MiGoEnslaveDoAfterEvent : SimpleDoAfterEvent { }
-
-[Serializable, NetSerializable]
-public sealed partial class AfterMaterialize : DoAfterEvent
-{
-    public override DoAfterEvent Clone() => this;
-}
-
-[Serializable, NetSerializable]
-public sealed partial class AfterDeMaterialize : DoAfterEvent
-{
-    public override DoAfterEvent Clone() => this;
-}
-
-[ByRefEvent, Serializable]
-public record struct CultYoggEnslavedEvent(EntityUid? Target);
-
-[NetSerializable, Serializable]
-public enum MiGoTimerVisualLayers : byte
-{
-    Digit1,
-    Digit2
-}
-[Serializable, NetSerializable]
-public enum MiGoVisual
-{
-    Base,
-    Astral
 }

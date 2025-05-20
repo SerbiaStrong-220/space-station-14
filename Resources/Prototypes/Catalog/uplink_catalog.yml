@@ -323,28 +323,17 @@
     - UplinkExplosives
 
 - type: listing
-  id: UplinkSupermatterGrenade
-  name: uplink-supermatter-grenade-name
-  description: uplink-supermatter-grenade-desc
-  productEntity: SupermatterGrenade
+  id: UplinkSingularityGrenade
+  name: uplink-singularity-grenade-name
+  description: uplink-singularity-grenade-desc
+  productEntity: SingularityGrenade
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 1
   cost:
-    Telecrystal: 10
+    Telecrystal: 2
   categories:
-    - UplinkExplosives
-  conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
-          - LoneOpsUplink
-          - DebugUplink #SS220-debug-uplink-fix
-    - !type:BuyerWhitelistCondition
-      blacklist:
-        components:
-        - SurplusBundle
+    - UplinkDisruption
 
 - type: listing
   id: UplinkWhiteholeGrenade
@@ -355,21 +344,9 @@
   discountDownTo:
     Telecrystal: 1
   cost:
-    Telecrystal: 2 #ss220-WhiteHole_Grenade fix
+    Telecrystal: 2
   categories:
-    - UplinkExplosives
-  conditions:
-# SS220-uplink-fix-begin
-#  - !type:StoreWhitelistCondition
-#    whitelist:
-#        tags:
-#          - NukeOpsUplink
-#          - LoneOpsUplink
-# SS220-uplink-fix-end
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
+    - UplinkDisruption
 
 - type: listing
   id: UplinkGrenadePenguin
@@ -706,7 +683,7 @@
   id: UplinkNocturineChemistryBottle
   name: uplink-nocturine-chemistry-bottle-name
   description: uplink-nocturine-chemistry-bottle-desc
-  productEntity: NocturineChemistryBottle
+  productEntity: ChemistryBottleNocturine
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 2 #ss220-uplink-discounts
@@ -973,11 +950,11 @@
   name: uplink-access-breaker-name
   description: uplink-access-breaker-desc
   productEntity: AccessBreaker
-  discountCategory: veryRareDiscounts
+  discountCategory: rareDiscounts
   discountDownTo:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 2
   cost:
-    Telecrystal: 4 #ss220-uplink-discounts
+    Telecrystal: 4
   categories:
   - UplinkDisruption
 
@@ -986,11 +963,11 @@
   name: uplink-emag-name
   description: uplink-emag-desc
   productEntity: Emag
-  discountCategory: rareDiscounts
+  discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 2
+    Telecrystal: 3
   cost:
-    Telecrystal: 4
+    Telecrystal: 5
   categories:
   - UplinkDisruption
 
@@ -1464,7 +1441,7 @@
     #Telecrystal: 1
   #ss220 1 tc uplink sales fix end
   cost:
-    Telecrystal: 5 #ss220-uplink-discounts
+    Telecrystal: 4 #ss220 change uplink price after usptream 72
   categories:
     - UplinkImplants
 
@@ -1692,9 +1669,22 @@
   productEntity: ClothingOuterVestWeb
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 2 #ss220 change uplink price after usptream 72
   cost:
-    Telecrystal: 5 #ss220-uplink-discounts
+    Telecrystal: 3 #ss220 change uplink price after usptream 72
+  categories:
+  - UplinkWearables
+
+- type: listing
+  id: UplinkClothingOuterVestWebElite
+  name: uplink-clothing-outer-vest-web-elite-name
+  description: uplink-clothing-outer-vest-web-elite-desc
+  productEntity: ClothingOuterVestWebElite
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 3
+  cost:
+    Telecrystal: 5
   categories:
   - UplinkWearables
 
@@ -1771,9 +1761,9 @@
   id: UplinkClothingOuterArmorRaid
   name: uplink-syndie-raid-name
   description: uplink-syndie-raid-desc
-  # icon: { sprite: /Textures/Clothing/OuterClothing/Armor/syndie-raid.rsi, state: icon }
+  # icon: { sprite: /Textures/Clothing/OuterClothing/Armor/syndie-raid.rsi, state: icon } #ss220 raid suit resprite
   icon: { sprite: /Textures/SS220/Clothing/OuterClothing/Armor/syndie-raid.rsi, state: icon } #ss220 raid suit resprite
-  productEntity: ClothingBackpackDuffelSyndicateRaidBundle
+  productEntity: ClothingBackpackSyndicateRaidBundle
 #ss220-uplink-discounts bgn
   discountCategory: veryRareDiscounts
   discountDownTo:
@@ -1795,9 +1785,6 @@
   description: uplink-hardsuit-syndieelite-desc
   icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndieelite.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
-  discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 7
   cost:
     Telecrystal: 12
   categories:
@@ -1818,9 +1805,6 @@
   description: uplink-clothing-outer-hardsuit-juggernaut-desc
   icon: { sprite: /Textures/Structures/Storage/Crates/syndicate.rsi, state: icon }
   productEntity: CrateCybersunJuggernautBundle
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 8
   cost:
     Telecrystal: 12
   categories:
@@ -2362,3 +2346,16 @@
     whitelist:
     - Chef
     - Mime
+
+- type: listing
+  id: UplinkSmugglerSatchel
+  name: uplink-smuggler-satchel-name
+  description: uplink-smuggler-satchel-desc
+  productEntity: ClothingBackpackSatchelSmugglerUnanchored
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkDeception

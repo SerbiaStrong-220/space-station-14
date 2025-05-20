@@ -133,7 +133,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: Structures/Walls/uranium.rsi
+    sprite: SS220/Structures/Walls/uranium.rsi # SS220 Uranuim Wall Resprite
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -224,24 +224,6 @@
   description: Keeps the air in and the greytide out.
   icon:
     sprite: SS220/Structures/Walls/shuttle.rsi #ss220-walls-update
-    state: full
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canRotate: false
-  canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
-
-- type: construction
-  name: interior shuttle wall
-  id: InteriorShuttleWall
-  graph: Girder
-  startNode: start
-  targetNode: shuttleInteriorWall
-  category: construction-category-structures
-  description: Keeps the air in and the greytide out.
-  icon:
-    sprite: SS220/Structures/Walls/shuttleinterior.rsi #ss220-walls-update
     state: full
   objectType: Structure
   placementMode: SnapgridCenter

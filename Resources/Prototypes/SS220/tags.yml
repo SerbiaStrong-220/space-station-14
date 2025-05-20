@@ -35,6 +35,9 @@
   id: ElWyccoAxe
 
 - type: Tag
+  id: WristWatch
+
+- type: Tag
   id: WyccoAxe
 
 - type: Tag
@@ -43,9 +46,6 @@
 # ss220 detective-camera
 - type: Tag
   id: DetectiveCamera
-
-- type: Tag
-  id: MindSlave
 
 # SS220-JianSword
 - type: Tag
@@ -222,3 +222,11 @@
 
 - type: Tag
   id: WhitelistPdaIdPainter
+
+- type: Tag
+  id: CultYoggStealthProvidable
+  
+# ss220 medkit fix #2834 begin
+- type: Tag
+  id: MaskBreath
+# ss220 medkit fix #2834  end

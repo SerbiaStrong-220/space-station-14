@@ -23,7 +23,7 @@
   description: weird implant, why it even exists...
   components:
   - type: Sprite
-    sprite: SS220/Objects/Specific/Medical/implants.rsi
+    sprite: SS220/Interface/Actions/implants.rsi
     state: mindslave_fixer
   - type: MindSlaveDisfunctionFixer
   - type: SurgeryTool
@@ -43,7 +43,6 @@
         - Scientist
         - Borg
     - label: hidden-desc-implant-mindslave-fixer-manipulator-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative

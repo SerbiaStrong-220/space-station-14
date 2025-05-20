@@ -19,11 +19,13 @@
   - type: Tag
     tags:
     - Omnivorous
+    - CultYoggStealthProvidable
   - type: OnUseTimerTrigger
     delay: 5
   - type: TileSpawnInRangeOnTrigger
     kudzuProtoId: StrangeKudzu
   - type: DeleteOnTrigger
+
 
 - type: entity
   id: StrangeKudzu
@@ -38,7 +40,7 @@
     - type: Sprite
       sprite: SS220/Objects/CultYogg/strangefruit.rsi
       state: kudzu_11
-      drawdepth: Overdoors
+      drawdepth: HighFloorObjects
     - type: Clickable
     - type: Kudzu
       growthTickChance: 0.2

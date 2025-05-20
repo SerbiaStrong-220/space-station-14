@@ -2,7 +2,7 @@
 
 #Security Pilot Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSecurityPilot
   name: security pilot hardsuit helmet
   description: Armored spacesuit helmet with a modified flashlight for exploring voids.
@@ -27,7 +27,7 @@
         Piercing: 0.8
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitBlueshield
   categories: [ HideSpawnMenu ]
   name: blueshield's hardsuit helmet
@@ -51,7 +51,7 @@
         Piercing: 0.8
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitLightBlueshield
   name: helmet of the suit "Blue Shield"
   description: The helmet of a spacesuit designed for the Blue Shield.
@@ -75,7 +75,7 @@
 
 # Death Squad Commander Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitDeathsquadCommander
   name: the helmet of the commander of the DQ
   description: The helmet from the Death Squad commander's costume.
@@ -102,7 +102,7 @@
 
 # Death Squad Alpha Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitDeathsquadAlpha
   name: the helmet of the specialist of the DQ
   description: The helmet from the Death Squad specialist's costume.
@@ -129,7 +129,7 @@
 
 #SuperMatter operator's Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitSuperMatterOperator
   name: superMatter operator's hardsuit helmet
   description: Special hardsuit helmet, designed to support the operator in the supermatter crystal chamber.
@@ -148,7 +148,7 @@
 
 # Centcom's Hardsuit
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitCentcom
   name: centcom hardsuit helmet
   description: A combination of unwavering defense and advanced technology, the epitome of power and strategic superiority.

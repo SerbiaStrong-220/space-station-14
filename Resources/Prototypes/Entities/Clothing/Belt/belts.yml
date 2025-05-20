@@ -500,7 +500,7 @@
 #  - type: Appearance
 
 - type: entity
-  parent: [ClothingBeltStorageBase, ContentsExplosionResistanceBase]
+  parent: [ClothingBeltStorageBase, ContentsExplosionResistanceBase, BaseSecurityContraband]
   id: ClothingBeltSecurity
   name: security belt
   description: Can hold security gear like handcuffs and flashes.
@@ -525,6 +525,7 @@
         - Truncheon
         - HolofanProjectorSecurity # SS220 Fix #2009
         - KRSPowerCell # SS220-BlueShield MinorFix
+        - HandGrenade
       components:
         - Stunbaton
         - FlashOnTrigger
@@ -752,7 +753,7 @@
   - type: Clothing
     sprite: Clothing/Belt/militarywebbing.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.1
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-reinforced-textile
@@ -806,7 +807,7 @@
     sprite: Clothing/Belt/suspenders_black.rsi
 
 - type: entity
-  parent: ClothingBeltStorageBase
+  parent: [ ClothingBeltStorageBase, BaseMagicalContraband ]
   id: ClothingBeltWand
   name: wand belt
   description: A belt designed to hold various rods of power. A veritable fanny pack of exotic magic.

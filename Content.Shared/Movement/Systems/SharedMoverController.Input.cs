@@ -5,9 +5,11 @@ using Content.Shared.Follower.Components;
 using Content.Shared.Input;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
+using Content.Shared.SS220.Movement.Events;
 using Robust.Shared.GameStates;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -89,6 +91,15 @@ namespace Content.Shared.Movement.Systems
         {
             if (entity.Comp.HeldMoveButtons == buttons)
                 return;
+
+            // SS220 Add logs on change spring begin
+            var sprinting = (buttons & MoveButtons.Walk) == 0x0;
+            if (entity.Comp.Sprinting != sprinting)
+            {
+                var sprintChangedEv = new SprintChangedEvent(entity, sprinting);
+                RaiseLocalEvent(entity, ref sprintChangedEv, true);
+            }
+            // SS220 Add logs on change spring end
 
             // Relay the fact we had any movement event.
             // TODO: Ideally we'd do these in a tick instead of out of sim.
@@ -207,13 +218,13 @@ namespace Content.Shared.Movement.Systems
             }
 
             // If we went from grid -> map we'll preserve our worldrotation
-            if (relative != null && _mapManager.IsMap(relative.Value))
+            if (relative != null && HasComp<MapComponent>(relative.Value))
             {
                 targetRotation = currentRotation.FlipPositive().Reduced();
             }
             // If we went from grid -> grid OR grid -> map then snap the target to cardinal and lerp there.
             // OR just rotate to zero (depending on cvar)
-            else if (relative != null && _mapManager.IsGrid(relative.Value))
+            else if (relative != null && MapGridQuery.HasComp(relative.Value))
             {
                 if (CameraRotationLocked)
                     targetRotation = Angle.Zero;

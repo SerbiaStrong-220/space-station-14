@@ -37,6 +37,9 @@
   - type: Emoting
     chatEmoteCooldown: 5.0
   #ss220 emote 5 sec end
+  #SS220 LimitationRevive - start
+  - type: LimitationRevive
+  #SS220 LimitationRevive - end
 
 - type: entity
   parent: BaseSpeciesDummy

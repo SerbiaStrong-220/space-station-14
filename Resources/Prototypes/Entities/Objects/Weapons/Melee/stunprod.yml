@@ -33,7 +33,6 @@
     activatedDamage:
       types:
         Blunt: 0 #ss220 stunprod fix
-        Stamina: 35 #ss220 stunprod fix
   - type: Stunbaton
     energyPerUse: 120
   - type: MeleeWeapon
@@ -43,21 +42,17 @@
         Blunt: 9
     angle: 60
     animation: WeaponArcThrust
-  #ss220 stunprod stamina damage fix start
-  #- type: StaminaDamageOnHit
-    #damage: 0
-    #sound: /Audio/Weapons/egloves.ogg
-  #- type: StaminaDamageOnCollide
-    #damage: 0
-    #sound: /Audio/Weapons/egloves.ogg
+  - type: StaminaDamageOnHit
+    damage: 35 #ss220 stunprod stamina damage
+    sound: /Audio/Weapons/egloves.ogg
+  - type: StaminaDamageOnCollide
+    damage: 35 #ss220 stunprod stamina damage
+    sound: /Audio/Weapons/egloves.ogg
+  #ss220 stunprod stamina damage fix begin
   - type: DamageOtherOnHit
     damage:
       types:
         Blunt: 4
-  - type: ItemToggleDamageOtherOnHit
-    activatedDamage:
-      types:
-        Stamina: 35
   #ss220 stunprod stamina damage fix end
   - type: LandAtCursor # it deals stamina damage when thrown
   - type: Battery

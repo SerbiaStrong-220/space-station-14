@@ -702,6 +702,12 @@
   - type: FlavorProfile
     flavors:
     - sweet
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 languages tweaks end
   - type: InjectableSolution
     solution: food
   - type: RefillableSolution
@@ -766,8 +772,8 @@
     speechSounds: Cat
     speechVerb: SmallMob
   - type: MovementSpeedModifier
-    baseWalkSpeed : 5
-    baseSprintSpeed : 3
+    baseWalkSpeed : 3
+    baseSprintSpeed : 5
   - type: Tag
     tags:
     - VimPilot

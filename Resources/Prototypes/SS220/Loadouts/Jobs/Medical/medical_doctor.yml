@@ -86,6 +86,11 @@
   equipment:
     shoes: ClothingShoesResponsibility
 
+- type: loadout
+  id: MedicalBlackShoes
+  equipment:
+    shoes: ClothingShoesColorBlack
+
 # Neck
 - type: loadout
   id: WhiteScarf

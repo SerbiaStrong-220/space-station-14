@@ -7,3 +7,23 @@
     contents:
       - id: EncryptionKeyLaw
         amount: 4
+
+- type: entity
+  id: BoxDnaCopyImplant
+  parent: BoxCardboard
+  components:
+  - type: StorageFill
+    contents:
+    - id: PenDnaScrambler
+    - id: DnaCopyImplanter
+    - id: PaperDnaCopyImplanter
+
+- type: entity
+  id: BoxOrigamiKit
+  parent: BoxCardboard
+  components:
+  - type: StorageFill
+    contents:
+    - id: OrigamiBook
+    - id: Paper
+      amount: 3
