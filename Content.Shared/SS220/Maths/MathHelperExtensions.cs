@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -210,5 +209,46 @@ public static partial class MathHelperExtensions
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// Returns an array of all boxes in the grid that the other <paramref name="box"/> intersects with
+    /// </summary>
+    public static IEnumerable<Box2> GetIntersectsGridBoxes(Box2 box, float gridSize = 1f, bool closedRegion = true)
+    {
+        var minGridX = (int)Math.Floor(box.Left / gridSize);
+        var maxGridX = (int)Math.Ceiling(box.Right / gridSize);
+        var minGridY = (int)Math.Floor(box.Bottom / gridSize);
+        var maxGridY = (int)Math.Ceiling(box.Top / gridSize);
+
+        var result = new List<Box2>();
+        for (var gx = minGridX; gx <= maxGridX; gx++)
+        {
+            for (var gy = minGridY; gy <= maxGridY; gy++)
+            {
+                var left = gx * gridSize;
+                var bottom = gy * gridSize;
+                var right = left + gridSize;
+                var top = bottom + gridSize;
+
+                var gridBox = new Box2(left, bottom, right, top);
+
+                if (ContainsVertex(box, gridBox, closedRegion))
+                    result.Add(gridBox);
+            }
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Checks whether at least one vertex of the <paramref name="inner"/> is inside the <paramref name="box"/>.
+    /// </summary>
+    public static bool ContainsVertex(Box2 box, Box2 inner, bool closedRegion = true)
+    {
+        return box.Contains(inner.BottomLeft, closedRegion) ||
+              box.Contains(inner.TopLeft, closedRegion) ||
+              box.Contains(inner.BottomRight, closedRegion) ||
+              box.Contains(inner.TopRight, closedRegion);
     }
 }
