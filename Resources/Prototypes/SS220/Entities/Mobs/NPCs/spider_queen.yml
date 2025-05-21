@@ -207,6 +207,9 @@
     availableModes:
       - FullAuto
     soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderQueen
@@ -293,6 +296,9 @@
       types:
         Piercing: 5 #Damage
         Structural: 20
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderDrone
@@ -358,6 +364,9 @@
         Piercing: 20
         Poison: 5
         Structural: 10
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderHunter
@@ -420,6 +429,9 @@
         Piercing: 5
         Poison: 10
         Structural: 5
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderGhost
@@ -503,6 +515,9 @@
         Poison: 5
         Piercing: 5
         Structural: 5
+  - type: StaminaResistance
+    damageCoefficient: 0.7
+    worn: false
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: SpiderShooter

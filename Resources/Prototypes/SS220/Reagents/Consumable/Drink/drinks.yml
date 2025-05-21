@@ -144,3 +144,24 @@
         type: Local
         messages: [ "capsaicin-effect-heavy-burn" ]
         probability: 0.4
+
+#RrrantaFeature
+- type: reagent
+  id: Rrranta
+  name: reagent-name-rrranta
+  parent: BaseDrink
+  desc: reagent-desc-rrranta
+  physicalDesc: reagent-physical-desc-rrranta
+  flavor: rrranta
+  color: "#9aae07"
+  recognizable: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:ChemVomit
+        probability: 0.35
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 0.4
+  fizziness: 0.6

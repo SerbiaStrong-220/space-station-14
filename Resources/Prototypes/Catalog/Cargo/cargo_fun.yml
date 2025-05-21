@@ -41,7 +41,7 @@
 - type: cargoProduct
   id: FunInstrumentsKeyedPercussion
   icon:
-    sprite: Objects/Fun/Instruments/h_synthesizer.rsi
+    sprite: SS220/Objects/Fun/Instruments/h_synthesizer.rsi # SS220 Synthesizer resprite
     state: icon
   product: CrateFunInstrumentsKeyedPercussion
   cost: 2500

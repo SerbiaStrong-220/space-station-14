@@ -23,6 +23,9 @@ public sealed partial class CultYoggHealComponent : Component
     [DataField, AutoNetworkedField]
     public float ModifyBloodLevel;
 
+    [DataField, AutoNetworkedField]
+    public float ModifyStamina;
+
     /// <summary>
     /// Time between each healing incident
     /// </summary>

@@ -347,7 +347,7 @@
   components:
   - type: InstantAction
     icon:
-      sprite: Clothing/OuterClothing/Hardsuits/paramed.rsi
+      sprite: SS220/Clothing/OuterClothing/Hardsuits/paramed.rsi #ss220 paramedic softsuit resprite
       state: icon-siren
     useDelay: 1
     itemIconStyle: BigAction

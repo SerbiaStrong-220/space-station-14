@@ -211,6 +211,7 @@
     size: Small
     sprite: Objects/Weapons/Guns/Shotguns/sawn_inhands_64x.rsi
   - type: Gun
+    canSuicide: true ##SS220-new-feature kus
     fireRate: 3
     soundGunshot: # Corvax-Guns
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_sawed.ogg

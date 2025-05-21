@@ -420,11 +420,10 @@
   - type: Sprite
     sprite: SS220/Objects/Sponsor/Toys/wyccaxe.rsi
     state: icon
+  - type: StaminaDamageOnHit
+    damage: 1
   - type: MeleeWeapon
     wideAnimationRotation: -135
-    damage:
-      types:
-        Stamina: 1
     soundHit:
       path: /Audio/Items/Toys/mousesqueek.ogg
   - type: Item

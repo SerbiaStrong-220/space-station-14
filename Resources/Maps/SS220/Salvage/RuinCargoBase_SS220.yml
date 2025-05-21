@@ -524,7 +524,7 @@ entities:
       enabled: True
     - type: Fixtures
       fixtures: {}
-- proto: BorgModuleGrapplingGun
+- proto: BorgModuleTraversal
   entities:
   - uid: 18
     components:

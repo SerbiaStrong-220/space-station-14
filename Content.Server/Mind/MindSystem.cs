@@ -62,14 +62,14 @@ public sealed class MindSystem : SharedMindSystem
         {
             TransferTo(mindId, visiting, mind: mind);
             if (TryComp(visiting, out GhostComponent? ghostComp))
-                _ghosts.SetCanReturnToBody(ghostComp, false);
+                _ghosts.SetCanReturnToBody((visiting, ghostComp), false);
             return;
         }
 
         TransferTo(mindId, null, createGhost: false, mind: mind);
         DebugTools.AssertNull(mind.OwnedEntity);
 
-        if (!component.GhostOnShutdown || _gameTicker.RunLevel == GameRunLevel.PreRoundLobby)
+        if (!component.GhostOnShutdown || !_players.TryGetSessionById(mind.UserId, out _) || _gameTicker.RunLevel == GameRunLevel.PreRoundLobby) // SS220 ghost-del-fix
             return;
 
         var ghost = _ghosts.SpawnGhost((mindId, mind), uid);
@@ -214,7 +214,7 @@ public sealed class MindSystem : SharedMindSystem
             entity = Spawn(GameTicker.ObserverPrototypeName, position);
             component = EnsureComp<MindContainerComponent>(entity.Value);
             var ghostComponent = Comp<GhostComponent>(entity.Value);
-            _ghosts.SetCanReturnToBody(ghostComponent, false);
+            _ghosts.SetCanReturnToBody((entity.Value, ghostComponent), false);
         }
 
         var oldEntity = mind.OwnedEntity;

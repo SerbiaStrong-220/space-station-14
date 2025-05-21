@@ -27,10 +27,11 @@
         Cold: 0.1
         Shock: 0.1
         Radiation: 0.1
-        #ss220 cburn com-hardsuit fix begin
-        Caustic: 0.1
-        Stamina: 0.5
-        #ss220 cburn com-hardsuit fix end
+        Caustic: 0.1 #ss220 cburn com-hardsuit fix
+  #ss220 cburn com-hardsuit fix begin
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  #ss220 cburn com-hardsuit fix end
   - type: ExplosionResistance
     damageCoefficient: 0.7
   - type: ToggleableClothing

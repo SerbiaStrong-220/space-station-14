@@ -444,6 +444,8 @@
   - type: Extractable
     grindableSolutionName: food
   - type: SpaceGarbage
+  - type: Food
+    requiresSpecialDigestion: true
 
 - type: entity
   name: baked banana peel
@@ -1875,10 +1877,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-Gatfruit-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-Gatfruit-botanist
       jobRequired:
         - Botanist
@@ -2595,6 +2596,9 @@
     tags:
     - ClothMade
     - CottonBoll
+  - type: FoodSequenceElement
+    entries:
+      CottonBurger: CottonBol
 
 - type: entity
   name: pyrotton boll
@@ -2628,6 +2632,9 @@
     - CottonBoll
   - type: Extractable
     grindableSolutionName: food
+  - type: FoodSequenceElement
+    entries:
+      CottonBurger: PyrottonBol
 
 - type: entity
   name: cherry

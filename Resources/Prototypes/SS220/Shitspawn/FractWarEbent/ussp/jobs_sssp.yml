@@ -70,11 +70,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
-      typeDamageOnDead:
-        types:
-          Сerebral: 400
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: USSPLeader
@@ -166,11 +163,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
-      typeDamageOnDead:
-        types:
-          Сerebral: 400
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: USSPEngineer
@@ -262,11 +256,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
-      typeDamageOnDead:
-        types:
-          Сerebral: 400
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: USSPCorpsman
@@ -357,11 +348,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
-      typeDamageOnDead:
-        types:
-          Сerebral: 400
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: USSPCMO
@@ -446,11 +434,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
-      typeDamageOnDead:
-        types:
-          Сerebral: 400
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: USSPFighter

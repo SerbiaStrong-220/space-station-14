@@ -2,7 +2,9 @@ using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.UserInterface;
 using Content.Shared.Database;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Popups;
@@ -14,6 +16,9 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.SS220.Paper;
 using Content.Shared.SS220.Language.Systems;
+using Content.Shared.SS220.OrigamiBook;
+using Content.Shared.Verbs;
+using Robust.Shared.Network;
 
 namespace Content.Shared.Paper;
 
@@ -31,9 +36,16 @@ public sealed class PaperSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDocumentHelperSystem _documentHelper = default!;
     [Dependency] private readonly SharedLanguageSystem _languageSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!; //ss220 add origami arts
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //ss220 add origami arts
+    [Dependency] private readonly INetManager _net = default!; //ss220 add origami arts
 
     private static readonly ProtoId<TagPrototype> WriteIgnoreStampsTag = "WriteIgnoreStamps";
     private static readonly ProtoId<TagPrototype> WriteTag = "Write";
+
+    //ss220 add origami arts start
+    private const string PrototypeAirPlane = "PaperAirplane";
+    //ss220 add origami arts end
 
     private EntityQuery<PaperComponent> _paperQuery;
 
@@ -51,6 +63,11 @@ public sealed class PaperSystem : EntitySystem
         SubscribeLocalEvent<RandomPaperContentComponent, MapInitEvent>(OnRandomPaperContentMapInit);
 
         SubscribeLocalEvent<ActivateOnPaperOpenedComponent, PaperWriteEvent>(OnPaperWrite);
+
+        //ss220 add origami arts start
+        SubscribeLocalEvent<PaperComponent, GetVerbsEvent<AlternativeVerb>>(OnVerb);
+        SubscribeLocalEvent<PaperComponent, TransformPaperToAirplaneDoAfter>(OnTransformPaper);
+        //ss220 add origami arts end
 
         _paperQuery = GetEntityQuery<PaperComponent>();
     }
@@ -316,6 +333,50 @@ public sealed class PaperSystem : EntitySystem
     {
         _uiSystem.SetUiState(entity.Owner, PaperUiKey.Key, new PaperBoundUserInterfaceState(entity.Comp.Content, entity.Comp.StampedBy, entity.Comp.Mode));
     }
+
+    //ss220 add origami arts start
+    private void OnVerb(Entity<PaperComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!TryComp<OrigamiUserComponent>(args.User, out var origamiUserComponent)
+            || HasComp<OrigamiWeaponComponent>(ent.Owner))
+            return;
+
+        var user = args.User;
+
+        var altVerb = new AlternativeVerb
+        {
+            Text = Loc.GetString("origami-transform-from-paper"),
+            Act = () =>
+            {
+                var doAfterArgs = new DoAfterArgs(EntityManager,
+                    user,
+                    origamiUserComponent.DelayToTransform,
+                    new TransformPaperToAirplaneDoAfter(),
+                    ent.Owner)
+                {
+                    BlockDuplicate = true,
+                };
+
+                _doAfter.TryStartDoAfter(doAfterArgs);
+            },
+            Priority = 0,
+        };
+
+        args.Verbs.Add(altVerb);
+    }
+
+    private void OnTransformPaper(Entity<PaperComponent> ent, ref TransformPaperToAirplaneDoAfter args)
+    {
+        if (args.Cancelled || _net.IsClient)
+            return;
+
+        var airPlane = Spawn(PrototypeAirPlane, Transform(ent.Owner).Coordinates);
+
+        QueueDel(ent.Owner);
+
+        _hands.TryPickupAnyHand(args.User, airPlane);
+    }
+    //ss220 add origami arts end
 }
 
 /// <summary>

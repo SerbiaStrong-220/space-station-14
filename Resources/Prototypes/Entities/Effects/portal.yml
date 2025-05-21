@@ -11,7 +11,7 @@
   - type: Physics
     bodyType: Static
   - type: Sprite
-    sprite: /Textures/Effects/portal.rsi
+    sprite: /Textures/SS220/Effects/portal.rsi # SS220 Portal Resprite
   - type: Fixtures
     fixtures:
       portalFixture:
