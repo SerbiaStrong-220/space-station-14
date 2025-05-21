@@ -17,17 +17,13 @@ using Content.Shared.Throwing;
 using Content.Shared.UserInterface;
 using Content.Shared.VendingMachines;
 using Content.Shared.Wall;
-using JetBrains.FormatRipper.Elf;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
-using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using static Content.Shared.Fax.AdminFaxEuiMsg;
 
 namespace Content.Server.VendingMachines
 {
