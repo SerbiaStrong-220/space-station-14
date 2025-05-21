@@ -270,17 +270,16 @@ namespace Content.Server.VendingMachines
         public bool TryGetInjectedItem(Entity<VendingMachineComponent> vend, string protoId, [NotNullWhen(true)] out EntityUid? item)
         {
             item = null;
-            var inventory = GetAllInventory(vend, vend).ToList();
-            var entry = inventory.Find(x => x.ID == protoId);
-            var ents = entry?.EntityUids;
-
-            if (ents == null || ents.Count == 0)
-                return false;
-
-            if (!TryGetEntity(ents[0], out item))
-                return false;
-
-            return true;
+            if (_container.TryGetContainer(vend, "VendingMachine", out var vendContainer))
+                foreach (var entity in vendContainer.ContainedEntities)
+                {
+                    if (MetaData(entity).EntityPrototype?.ID == protoId)
+                    {
+                        item = entity;
+                        return true;
+                    }
+                }
+            return false;
         }
         // SS220 vend-dupe-fix end
 
