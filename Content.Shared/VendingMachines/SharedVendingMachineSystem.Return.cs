@@ -3,7 +3,6 @@
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -14,7 +13,6 @@ using Content.Shared.Storage;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
-using System.Linq;
 
 namespace Content.Shared.VendingMachines;
 
