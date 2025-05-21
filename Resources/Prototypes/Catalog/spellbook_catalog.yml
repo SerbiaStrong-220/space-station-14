@@ -279,18 +279,20 @@
     stock: 1
 
 # Event
-- type: listing
-  id: SpellbookEventSummonGhosts
-  name: spellbook-event-summon-ghosts-name
-  description: spellbook-event-summon-ghosts-description
-  productAction: ActionSummonGhosts
-  cost:
-    WizCoin: 0
-  categories:
-  - SpellbookEvents
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
+##SS220-Remove-MagicSpell-SumonGhost-Begin
+# - type: listing
+#   id: SpellbookEventSummonGhosts
+#   name: spellbook-event-summon-ghosts-name
+#   description: spellbook-event-summon-ghosts-description
+#   productAction: ActionSummonGhosts
+#   cost:
+#     WizCoin: 0
+#   categories:
+#   - SpellbookEvents
+#   conditions:
+#   - !type:ListingLimitedStockCondition
+#     stock: 1
+##SS220-Remove-MagicSpell-SumonGhost-End
 
 - type: listing
   id: SpellbookEventSummonGuns
