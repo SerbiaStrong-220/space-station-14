@@ -2627,7 +2627,7 @@
        !type:String
        pda-wizard
   - type: PdaBorderColor
-    borderColor: "#cf7207"
+    borderColor: "#cf7207" # SS220 Wizard getting used to
   - type: Icon
     sprite: SS220/Objects/Devices/pda.rsi # SS220 Wizard getting used to
     state: pda-wizard
