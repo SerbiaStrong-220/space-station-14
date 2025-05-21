@@ -1,14 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Administration.Logs;
+using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Database;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Stacks;
+using Content.Shared.Storage;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared.VendingMachines;
 
@@ -67,10 +70,19 @@ public abstract partial class SharedVendingMachineSystem
         if (vend.Comp.Ejecting || vend.Comp.Broken || !_receiver.IsPowered(vend.Owner))
             return false;
 
+        // Нельзя пополнить торгомат не полным стаком предметов
         if (TryComp<StackComponent>(entityUid, out var stackComp)
             && TryPrototype(entityUid, out var itemProto)
             && itemProto.TryGetComponent<StackComponent>(out var protoStackComp)
             && stackComp.Count != protoStackComp.Count)
+            return false;
+
+        // Нельзя пополнить торгомат контейнерами
+        if (HasComp<StorageComponent>(entityUid))
+            return false;
+
+        // Нельзя пополнить торгомат ёмкостями
+        if (HasComp<SolutionContainerManagerComponent>(entityUid))
             return false;
 
         if (!_handsSystem.TryDropIntoContainer(userUid, entityUid, vendContainer))
