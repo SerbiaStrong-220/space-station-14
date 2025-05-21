@@ -13,7 +13,7 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Robust.Shared.Timing;
 using Robust.Server.Player;
-using Content.Shared.Damage.Systems;
+using Content.Server.Damage.Systems;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 

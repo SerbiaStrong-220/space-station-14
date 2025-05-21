@@ -37,7 +37,7 @@
     head: ClothingHeadHatCentcom
     eyes: ClothingEyesGlassesSecurity #ss-220-GlassesSecurity
     gloves: ClothingHandsGlovesColorBlack
-    outerClothing: ClothingOuterArmorBasic
+    outerClothing: ClothingOuterArmorCentcommCarapace
     id: CentcomPDA
     ears: ClothingHeadsetAltCentCom
     belt: WeaponPistolN1984
