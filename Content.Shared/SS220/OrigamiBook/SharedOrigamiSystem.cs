@@ -45,10 +45,17 @@ public abstract class SharedOrigamiSystem : EntitySystem
         if (_gun.TryGetGun(args.Component.Thrower.Value, out _, out _))
             return;
 
-        var hasEyeProtection =
-            _inventory.TryGetSlotEntity(args.Target, "eyes", out var eyes) && IsEyeBlocker(eyes.Value) ||
-            _inventory.TryGetSlotEntity(args.Target, "mask", out var mask) && IsEyeBlocker(mask.Value) ||
-            _inventory.TryGetSlotEntity(args.Target, "head", out var head) && IsEyeBlocker(head.Value);
+        var hasEyeProtection = false;
+
+        foreach (var slot in ent.Comp.BlockerSlots)
+        {
+            if (!_inventory.TryGetSlotEntity(args.Target, slot, out var slotEntity)
+                || !IsEyeBlocker(slotEntity.Value))
+                continue;
+
+            hasEyeProtection = true;
+            break;
+        }
 
         if (hasEyeProtection)
         {
