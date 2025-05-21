@@ -329,12 +329,15 @@
   name: chief engineer's hardsuit helmet
   description: Special hardsuit helmet, made for the chief engineer of the station.
   components:
+#SS220-Chief-Helmet-FIX-Begin
   - type: Sprite
-    sprite: Clothing/Head/Hardsuits/engineering-white.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/engineering-white.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hardsuits/engineering-white.rsi
+    sprite: SS220/Clothing/Head/Hardsuits/engineering-white.rsi
   - type: PointLight
-    color: green
+    color: "#daffad"
+    radius: 6
+#SS220-Chief-Helmet-FIX-End
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -619,8 +622,25 @@
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
+  - type: ToggleableLightVisuals
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET-light
+        shader: unshaded
+      head-vox:
+      - state: equipped-HELMET-light-vox
+        shader: unshaded
   - type: Clothing
     sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      - state: equipped-HELMET-unshaded
+        shader: unshaded
+      head-vox:
+      - state: equipped-HELMET-vox
+      - state: equipped-HELMET-unshaded-vox
+        shader: unshaded
   - type: PointLight # Color matches visor colors, radius/energy same as mining hardsuit for the big captain.
     color: "#f3ea9c"
     radius: 7

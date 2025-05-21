@@ -6,6 +6,7 @@
   - type: ShowJobIcons
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons
+  # - type: ShowContrabandDetails # SS220-unused-info
 
 - type: entity
   id: ShowMedicalIcons

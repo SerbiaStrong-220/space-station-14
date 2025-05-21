@@ -109,6 +109,7 @@
   categories:
   - UplinkWeaponry
 
+# SS220-double-e-sword-begin
 - type: listing
   id: UplinkEswordDouble
   name: uplink-esword-double-name
@@ -134,6 +135,21 @@
 #          - NukeOpsUplink
 #          - LoneOpsUplink
 # SS220-uplink-fix-end
+# SS220-double-e-sword-end
+
+- type: listing
+  id: UplinkGlovesKnuckleDusters
+  name: uplink-gloves-knuckleduster-name
+  description: uplink-gloves-knuckleduster-desc
+  icon: { sprite: Clothing/Hands/Gloves/KnuckleDusters/syndicateknuckleduster.rsi, state: syndicateknuckleduster }
+  productEntity: ClothingHandsKnuckleDustersSyndicate
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 2 # SS220 knuckleduster-cost
+  cost:
+    Telecrystal: 3 # SS220 knuckleduster-cost
+  categories:
+  - UplinkWeaponry
 
 - type: listing
   id: UplinkDisposableTurret
@@ -749,13 +765,8 @@
   name: uplink-cigarettes-name
   description: uplink-cigarettes-desc
   productEntity: CigPackSyndicate
-  #ss220 1 tc uplink sales fix start
-  #discountCategory: rareDiscounts
-  #discountDownTo:
-    #Telecrystal: 1
-  #ss220 1 tc uplink sales fix end
   cost:
-    Telecrystal: 1 #SS220-underused-uplinks-stuff
+    Telecrystal: 1
   categories:
   - UplinkChemicals
 
@@ -1065,18 +1076,19 @@
   categories:
   - UplinkDisruption
 
-- type: listing
-  id: UplinkDuffelSurgery
-  name: uplink-duffel-surgery-name
-  description: uplink-duffel-surgery-desc
-  productEntity: ClothingBackpackDuffelSyndicateFilledMedical
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 2
-  cost:
-    Telecrystal: 4
-  categories:
-  - UplinkDisruption
+# Note: Removed for the time being until surgery/newmed is added. Considered bloat until then.
+# - type: listing
+#   id: UplinkDuffelSurgery
+#   name: uplink-duffel-surgery-name
+#   description: uplink-duffel-surgery-desc
+#   productEntity: ClothingBackpackDuffelSyndicateFilledMedical
+#   discountCategory: usualDiscounts
+#   discountDownTo:
+#     Telecrystal: 2
+#   cost:
+#     Telecrystal: 4
+#   categories:
+#   - UplinkDisruption
 
 - type: listing
   id: UplinkPowerSink
@@ -1175,19 +1187,38 @@
       components:
       - SurplusBundle
 
+- type: listing
+  id: UplinkStarterKit
+  name: uplink-starter-kit-name
+  description: uplink-starter-kit-desc
+  productEntity: ClothingBackpackDuffelSyndicateFilledStarterKit
+  cost:
+    Telecrystal: 40
+  categories:
+  - UplinkDisruption
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+        - NukeOpsUplink
+    - !type:BuyerWhitelistCondition
+      blacklist:
+        components:
+        - SurplusBundle
+
 #ss220-uplink-fix-begin
-#- type: listing
-#  id: UplinkSingarityBeacon
-#  name: uplink-singularity-beacon-name
-#  description: uplink-singularity-beacon-desc
-#  productEntity: SingularityBeacon
-#  discountCategory: usualDiscounts
-#  discountDownTo:
-#    Telecrystal: 4
-#  cost:
-#    Telecrystal: 12
-#  categories:
-#    - UplinkDisruption
+# - type: listing
+#   id: UplinkSingarityBeacon
+#   name: uplink-singularity-beacon-name
+#   description: uplink-singularity-beacon-desc
+#   productEntity: SingularityBeacon
+#   discountCategory: usualDiscounts
+#   discountDownTo:
+#     Telecrystal: 4
+#   cost:
+#     Telecrystal: 12
+#   categories:
+#     - UplinkDisruption
 #ss220-uplink-fix-end
 
 - type: listing
@@ -1649,11 +1680,12 @@
   categories:
   - UplinkWearables
 
+# TODO: Revert back to normal thieving gloves when clothes dyeing is added
 - type: listing
   id: UplinkgClothingThievingGloves
-  name: uplink-clothing-thieving-gloves-name
-  description: uplink-clothing-thieving-gloves-desc
-  productEntity: ThievingGloves
+  name: uplink-clothing-chameleon-thieving-gloves-name
+  description: uplink-clothing-chameleon-thieving-gloves-desc
+  productEntity: ClothingHandsChameleonThief
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 1 #ss220-uplink-discounts
@@ -2359,3 +2391,21 @@
     Telecrystal: 2
   categories:
   - UplinkDeception
+
+- type: listing
+  id: UplinkSawAdvanced
+  name: uplink-saw-advanced-name
+  description: uplink-saw-advanced-desc
+  icon: { sprite:  Objects/Specific/Medical/Surgery/saw.rsi, state: advanced}
+  productEntity: SawAdvanced
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - MedicalDoctor

@@ -138,7 +138,8 @@ public sealed class AGhostCommand : LocalizedCommands
         }
 
         var comp = _entities.GetComponent<GhostComponent>(ghost);
-        ghostSystem.SetCanReturnToBody(comp, canReturn);
+
+        ghostSystem.SetCanReturnToBody((ghost, comp), canReturn);
 
         //SS220-ghost-hats begin
         var actions = _entities.System<SharedActionsSystem>();

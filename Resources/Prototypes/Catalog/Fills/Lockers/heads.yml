@@ -9,7 +9,6 @@
     - id: CargoBountyComputerCircuitboard
     - id: CargoRequestComputerCircuitboard
     - id: CargoSaleComputerCircuitboard
-    - id: CargoShuttleComputerCircuitboard
     - id: CargoShuttleConsoleCircuitboard
     - id: SalvageMagnetMachineCircuitboard
     - id: CigPackGreen
@@ -26,6 +25,7 @@
     - id: AstroNavCartridge
     - id: ClothingOuterMechLoaderFull # SS220 AddMechToClothing
     - id: DeviceCalculator # SS220 Calculator
+    # - id: ClothingHandsKnuckleDustersQM # SS220-QM-own-knuckle-duster
     - id: MailTeleporterMachineCircuitboard
 
 - type: entity
@@ -61,6 +61,10 @@
     - id: WeaponDisabler
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: ClothingEyesGlassesCommand
+    - id: HeadSkeleton # A skull to accompany your skeleton crew
+      conditions:
+      - !type:PlayerCountCondition
+        max: 15
 
 # No laser table + Laser table
 - type: entityTable

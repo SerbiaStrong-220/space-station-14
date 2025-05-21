@@ -22,8 +22,6 @@
         - MachineMask
         layer:
         - BulletImpassable
-  - type: Anchorable
-  - type: Pullable
   - type: Sprite
     noRot: true
     sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi
