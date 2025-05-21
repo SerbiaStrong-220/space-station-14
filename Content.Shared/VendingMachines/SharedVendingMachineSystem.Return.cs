@@ -2,10 +2,12 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.PowerCell.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Storage;
 using Content.Shared.Whitelist;
@@ -83,6 +85,13 @@ public abstract partial class SharedVendingMachineSystem
 
         // Нельзя пополнить торгомат ёмкостями
         if (HasComp<SolutionContainerManagerComponent>(entityUid))
+            return false;
+
+        // Нельзя пополнить торгомат предметом без батарейки
+        if (TryComp<PowerCellSlotComponent>(entityUid, out var cellComp)
+            && TryComp<ContainerManagerComponent>(entityUid, out var containerManager)
+            && containerManager.Containers.TryGetValue(cellComp.CellSlotId, out var cellContainer)
+            && cellContainer.ContainedEntities.Count == 0)
             return false;
 
         if (!_handsSystem.TryDropIntoContainer(userUid, entityUid, vendContainer))
