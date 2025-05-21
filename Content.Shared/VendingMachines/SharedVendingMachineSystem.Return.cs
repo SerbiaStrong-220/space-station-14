@@ -5,6 +5,7 @@ using Content.Shared.Database;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Stacks;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
@@ -64,6 +65,12 @@ public abstract partial class SharedVendingMachineSystem
             return false;
 
         if (vend.Comp.Ejecting || vend.Comp.Broken || !_receiver.IsPowered(vend.Owner))
+            return false;
+
+        if (TryComp<StackComponent>(entityUid, out var stackComp)
+            && TryPrototype(entityUid, out var itemProto)
+            && itemProto.TryGetComponent<StackComponent>(out var protoStackComp)
+            && stackComp.Count != protoStackComp.Count)
             return false;
 
         if (!_handsSystem.TryDropIntoContainer(userUid, entityUid, vendContainer))
