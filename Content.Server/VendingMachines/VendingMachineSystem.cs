@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
@@ -18,7 +17,6 @@ using Content.Shared.UserInterface;
 using Content.Shared.VendingMachines;
 using Content.Shared.Wall;
 using Robust.Server.Containers;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -33,7 +31,6 @@ namespace Content.Server.VendingMachines
         [Dependency] private readonly PricingSystem _pricing = default!;
         [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly TransformSystem _transform = default!;
         [Dependency] private readonly ContainerSystem _container = default!;
 
         private const float WallVendEjectDistanceFromWall = 1f;
@@ -244,23 +241,25 @@ namespace Content.Server.VendingMachines
             }
 
             // SS220 vend-dupe-fix start
+            EntityUid? ent = null;
+
             // Сначала пытаемся получить предмет из контейнера
             if (TryGetInjectedItem((uid, vendComponent), vendComponent.NextItemToEject, out var existingItem)
                 && _container.RemoveEntity(uid, existingItem.Value))
-            {
-                vendComponent.NextItemToEject = null;
-                vendComponent.ThrowNextItem = false;
-                return;
-            }
-            // SS220 vend-dupe-fix end
+                ent = existingItem.Value;
 
-            var ent = Spawn(vendComponent.NextItemToEject, spawnCoordinates);
+            // var ent = Spawn(vendComponent.NextItemToEject, spawnCoordinates);
+            ent ??= Spawn(vendComponent.NextItemToEject, spawnCoordinates);
+            // SS220 vend-dupe-fix end
 
             if (vendComponent.ThrowNextItem)
             {
                 var range = vendComponent.NonLimitedEjectRange;
                 var direction = new Vector2(_random.NextFloat(-range, range), _random.NextFloat(-range, range));
-                _throwingSystem.TryThrow(ent, direction, vendComponent.NonLimitedEjectForce);
+                // SS220 vend-dupe-fix start
+                //_throwingSystem.TryThrow(ent, direction, vendComponent.NonLimitedEjectForce);
+                _throwingSystem.TryThrow(ent.Value, direction, vendComponent.NonLimitedEjectForce);
+                // SS220 vend-dupe-fix end
             }
 
             vendComponent.NextItemToEject = null;
