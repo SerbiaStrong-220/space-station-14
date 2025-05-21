@@ -1,15 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Administration.Logs;
-using Content.Shared.Chemistry.Components.SolutionManager;
-using Content.Shared.Clothing.Components;
 using Content.Shared.Database;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.PowerCell.Components;
-using Content.Shared.Stacks;
-using Content.Shared.Storage;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
@@ -69,32 +64,6 @@ public abstract partial class SharedVendingMachineSystem
             return false;
 
         if (vend.Comp.Ejecting || vend.Comp.Broken || !_receiver.IsPowered(vend.Owner))
-            return false;
-
-        // Нельзя пополнить торгомат не полным стаком предметов
-        if (TryComp<StackComponent>(entityUid, out var stackComp)
-            && TryPrototype(entityUid, out var itemProto)
-            && itemProto.TryGetComponent<StackComponent>(out var protoStackComp)
-            && stackComp.Count != protoStackComp.Count)
-            return false;
-
-        // Нельзя пополнить торгомат контейнерами, исключение - одежда
-        if (HasComp<StorageComponent>(entityUid) && !HasComp<ClothingComponent>(entityUid))
-            return false;
-
-        // Нельзя пополнить торгомат ёмкостями, исключения - еда (одежда тоже еда)
-        if (TryComp<SolutionContainerManagerComponent>(entityUid, out var solutionManager))
-        {
-            var containers = solutionManager.Containers;
-            if (!containers.Contains("food"))
-                return false;
-        }
-
-        // Нельзя пополнить торгомат предметом без батарейки, если батарейка требуется
-        if (TryComp<PowerCellSlotComponent>(entityUid, out var cellComp)
-            && TryComp<ContainerManagerComponent>(entityUid, out var containerManager)
-            && containerManager.Containers.TryGetValue(cellComp.CellSlotId, out var cellContainer)
-            && cellContainer.ContainedEntities.Count == 0)
             return false;
 
         if (!_handsSystem.TryDropIntoContainer(userUid, entityUid, vendContainer))
