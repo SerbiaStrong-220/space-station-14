@@ -2,6 +2,7 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.Hands.Components;
@@ -79,15 +80,19 @@ public abstract partial class SharedVendingMachineSystem
             && stackComp.Count != protoStackComp.Count)
             return false;
 
-        // Нельзя пополнить торгомат контейнерами
-        if (HasComp<StorageComponent>(entityUid))
+        // Нельзя пополнить торгомат контейнерами, исключение - одежда
+        if (HasComp<StorageComponent>(entityUid) && !HasComp<ClothingComponent>(entityUid))
             return false;
 
-        // Нельзя пополнить торгомат ёмкостями
-        if (HasComp<SolutionContainerManagerComponent>(entityUid))
-            return false;
+        // Нельзя пополнить торгомат ёмкостями, исключения - еда (одежда тоже еда)
+        if (TryComp<SolutionContainerManagerComponent>(entityUid, out var solutionManager))
+        {
+            var containers = solutionManager.Containers;
+            if (!containers.Contains("food"))
+                return false;
+        }
 
-        // Нельзя пополнить торгомат предметом без батарейки
+        // Нельзя пополнить торгомат предметом без батарейки, если батарейка требуется
         if (TryComp<PowerCellSlotComponent>(entityUid, out var cellComp)
             && TryComp<ContainerManagerComponent>(entityUid, out var containerManager)
             && containerManager.Containers.TryGetValue(cellComp.CellSlotId, out var cellContainer)
