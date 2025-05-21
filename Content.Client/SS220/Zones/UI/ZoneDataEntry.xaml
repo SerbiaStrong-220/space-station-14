@@ -1,0 +1,19 @@
+<Collapsible xmlns="https://spacestation14.io"
+             xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+             Orientation="Vertical">
+    <CollapsibleHeading Name="Heading">
+        <ContainerButton Name="ParentButton">
+            <PanelContainer Name="ParentBackgroundPanel">
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                    <Label Name="ParentIDLabel"/>
+                    <customControls:VSeparator/>
+                    <Label Name="ParentNameLabel"  HorizontalExpand="True"/>
+                </BoxContainer>
+            </PanelContainer>
+        </ContainerButton>
+    </CollapsibleHeading>
+    <CollapsibleBody>
+        <BoxContainer Name="ZonesContainer" Orientation="Horizontal">
+        </BoxContainer>
+    </CollapsibleBody>
+</Collapsible>

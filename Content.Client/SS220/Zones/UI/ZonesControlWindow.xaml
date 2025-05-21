@@ -1,0 +1,20 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               Title="{Loc zones-control-window-name}"
+               MinSize="450 250">
+    <BoxContainer Orientation="Horizontal" VerticalExpand="True" HorizontalExpand="True">
+        <BoxContainer Name="MainBox" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <LineEdit Name="SearchLineEdit" PlaceHolder="{Loc zones-control-search-line-placeholder}" HorizontalExpand="True"/>
+                <Button Name="RefreshButton" Text="{Loc zones-control-refresh-button}" Access="Public"/>
+            </BoxContainer>
+            <PanelContainer Name="ZoneDataPanel" VerticalExpand="True" HorizontalExpand="True">
+                <ScrollContainer>
+                    <BoxContainer Name="ZoneDataContainer" Orientation="Vertical"/>
+                </ScrollContainer>
+            </PanelContainer>
+            <Button Name="CreateZoneButton" Text="{Loc zones-control-create-zone-button}" Access="Public"/>
+        </BoxContainer>
+        <BoxContainer Name="OptionsBox" VerticalExpand="True" Visible="False" Margin="5 0 0 0">
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>
