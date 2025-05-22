@@ -88,7 +88,7 @@
   id: WeaponBlasterKRS
   parent: BaseWeaponBlaster
   name: krs
-  description: An old reliable blaster rifle.
+  description: An old reliable blaster rifle. There is only a semi-automatic type of shooting.
   suffix: Blaster
   components:
   - type: Item
