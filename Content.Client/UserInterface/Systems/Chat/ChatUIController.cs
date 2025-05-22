@@ -556,7 +556,9 @@ public sealed class ChatUIController : UIController
         }
 
         //ss220 add hidden channel for telepathy for normal player start
-        var hasTelepathy = EntityManager.HasComponent<TelepathyComponent>(_player.LocalSession!.AttachedEntity);
+        var hasTelepathy = _player.LocalSession?.AttachedEntity is {} entityUid
+                           && EntityManager.HasComponent<TelepathyComponent>(entityUid);
+
         var isAdmin = _admin.HasFlag(AdminFlags.Admin) || _admin.HasFlag(AdminFlags.Adminchat);
 
         if (hasTelepathy || isAdmin)
