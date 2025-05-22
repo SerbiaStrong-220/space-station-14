@@ -209,7 +209,6 @@ namespace Content.Shared.VendingMachines
         #endregion
     }
 
-    // SS220 Injectable vends start
     [Serializable, NetSerializable]
     public sealed class VendingMachineInventoryEntry
     {
@@ -219,13 +218,16 @@ namespace Content.Shared.VendingMachines
         public string ID;
         [ViewVariables(VVAccess.ReadWrite)]
         public uint Amount;
+        // SS220 Injectable vends start
         [ViewVariables(VVAccess.ReadWrite)]
-        public List<NetEntity> EntityUids = new();
-        public VendingMachineInventoryEntry(InventoryType type, string id, uint amount)
+        public List<NetEntity> EntityUids;
+        // SS220 Injectable vends end
+        public VendingMachineInventoryEntry(InventoryType type, string id, uint amount, List<NetEntity>? entityUids = null /* SS220 Injectable vends */)
         {
             Type = type;
             ID = id;
             Amount = amount;
+            EntityUids = entityUids ?? new(); // SS220 Injectable vends
         }
 
         public VendingMachineInventoryEntry(VendingMachineInventoryEntry entry)
@@ -233,9 +235,9 @@ namespace Content.Shared.VendingMachines
             Type = entry.Type;
             ID = entry.ID;
             Amount = entry.Amount;
+            EntityUids = entry.EntityUids; // SS220 Injectable vends
         }
     }
-    // SS220 Injectable vends end
 
     [Serializable, NetSerializable]
     public enum InventoryType : byte
