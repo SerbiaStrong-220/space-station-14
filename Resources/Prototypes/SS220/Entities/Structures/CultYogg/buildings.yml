@@ -54,6 +54,9 @@
     containers:
       cult-yogg-building-frame-storage: !type:Container
         showEnts: False
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
 
 - type: entity
   parent: BaseWall

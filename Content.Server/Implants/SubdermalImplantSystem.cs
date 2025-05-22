@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Cuffs;
@@ -26,11 +27,10 @@ using System.Numerics;
 using Content.Server.IdentityManagement;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
-using Content.Server.IdentityManagement;
-using Content.Server.DetailExaminable;
 using Content.Server.Polymorph.Systems;
 using Content.Server.SS220.PenScrambler;
 using Content.Shared.Actions;
+using Content.Shared.DetailExaminable;
 using Content.Shared.Store.Components;
 using Robust.Shared.Collections;
 using Robust.Shared.Map.Components;
@@ -39,6 +39,9 @@ using Content.Shared.Polymorph;
 using Content.Shared.SS220.PenScrambler;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Store;
+using Content.Shared.Charges.Components;
+using Content.Shared.Ensnaring;
+using Content.Shared.Ensnaring.Components;
 
 namespace Content.Server.Implants;
 
@@ -61,6 +64,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
     [Dependency] private readonly PolymorphSystem _polymorph = default!; //ss220 add dna copy implant
     [Dependency] private readonly SharedActionsSystem _actions = default!; //ss220 add adrenal implant
+    [Dependency] private readonly SharedEnsnareableSystem _ensnareable = default!; //ss220 add freedom from bola
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private HashSet<Entity<MapGridComponent>> _targetGrids = [];
@@ -151,10 +155,24 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
 
     private void OnFreedomImplant(EntityUid uid, SubdermalImplantComponent component, UseFreedomImplantEvent args)
     {
-        if (!TryComp<CuffableComponent>(component.ImplantedEntity, out var cuffs) || cuffs.Container.ContainedEntities.Count < 1)
-            return;
+        //ss220 add freedom from bola start
+        if (TryComp<EnsnareableComponent>(component.ImplantedEntity, out var ensnareableComponent))
+        {
+            var list = ensnareableComponent.Container.ContainedEntities.ToList();
 
-        _cuffable.Uncuff(component.ImplantedEntity.Value, cuffs.LastAddedCuffs, cuffs.LastAddedCuffs);
+            foreach (var containedEntity in list)
+            {
+                if (!TryComp<EnsnaringComponent>(containedEntity, out var ensnaringComponent))
+                    continue;
+
+                _ensnareable.ForceFree(containedEntity, ensnaringComponent);
+            }
+        }
+
+        if (TryComp<CuffableComponent>(component.ImplantedEntity, out var cuffs) && cuffs.Container.ContainedEntities.Count < 1)
+            _cuffable.Uncuff(component.ImplantedEntity.Value, cuffs.LastAddedCuffs, cuffs.LastAddedCuffs);
+        //ss220 add freedom from bola end
+
         args.Handled = true;
     }
 
@@ -193,7 +211,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
 
     private EntityCoordinates? SelectRandomTileInRange(TransformComponent userXform, float radius)
     {
-        var userCoords = userXform.Coordinates.ToMap(EntityManager, _xform);
+        var userCoords = _xform.ToMapCoordinates(userXform.Coordinates);
         _targetGrids.Clear();
         _lookupSystem.GetEntitiesInRange(userCoords, radius, _targetGrids);
         Entity<MapGridComponent>? targetGrid = null;
@@ -279,18 +297,12 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
             var newProfile = HumanoidCharacterProfile.RandomWithSpecies(humanoid.Species);
             _humanoidAppearance.LoadProfile(ent, newProfile, humanoid);
             _metaData.SetEntityName(ent, newProfile.Name, raiseEvents: false); // raising events would update ID card, station record, etc.
-            if (TryComp<DnaComponent>(ent, out var dna))
-            {
-                dna.DNA = _forensicsSystem.GenerateDNA();
 
-                var ev = new GenerateDnaEvent { Owner = ent, DNA = dna.DNA };
-                RaiseLocalEvent(ent, ref ev);
-            }
-            if (TryComp<FingerprintComponent>(ent, out var fingerprint))
-            {
-                fingerprint.Fingerprint = _forensicsSystem.GenerateFingerprint();
-            }
-            RemComp<DetailExaminableComponent>(ent); // remove MRP+ custom description if one exists 
+            // If the entity has the respecive components, then scramble the dna and fingerprint strings
+            _forensicsSystem.RandomizeDNA(ent);
+            _forensicsSystem.RandomizeFingerprint(ent);
+
+            RemComp<DetailExaminableComponent>(ent); // remove MRP+ custom description if one exists
             _identity.QueueIdentityUpdate(ent); // manually queue identity update since we don't raise the event
             _popup.PopupEntity(Loc.GetString("scramble-implant-activated-popup", ("identity", newProfile.Name)), ent, ent); //ss220 fix locale
         }
@@ -327,17 +339,20 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
             _metaData.SetEntityName(user, MetaData(clone.Value).EntityName, raiseEvents: false);
 
             if (TryComp<DnaComponent>(user, out var dna)
-                && TryComp<DnaComponent>(clone.Value, out var dnaClone))
+                && TryComp<DnaComponent>(clone.Value, out var dnaClone) &&
+                dnaClone.DNA != null)
             {
                 dna.DNA = dnaClone.DNA;
                 var ev = new GenerateDnaEvent { Owner = user, DNA = dna.DNA };
                 RaiseLocalEvent(ent, ref ev);
+                Dirty(user, dna);
             }
 
             if (TryComp<FingerprintComponent>(user, out var fingerprint)
                 && TryComp<FingerprintComponent>(clone.Value, out var fingerprintTarget))
             {
                 fingerprint.Fingerprint = fingerprintTarget.Fingerprint;
+                Dirty(user, fingerprint);
             }
 
             var setScale = EnsureComp<SetScaleFromTargetComponent>(user);
@@ -373,9 +388,13 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         if (!_solutionContainer.TryGetSolution((args.Performer, solutionUserComp), ChemicalSolution, out var solutionUser))
             return;
 
+        var quantity = solutionImplant.Value.Comp.Solution.Volume;
+        if (TryComp<LimitedChargesComponent>(args.Action, out var actionCharges))
+            quantity /= actionCharges.MaxCharges;
+
         _solutionContainer.TryTransferSolution(solutionUser.Value,
             solutionImplant.Value.Comp.Solution,
-            solutionImplant.Value.Comp.Solution.Volume / FixedPoint2.New(args.Action.Comp.Charges!.Value));
+            quantity);
 
         args.Handled = true;
     }

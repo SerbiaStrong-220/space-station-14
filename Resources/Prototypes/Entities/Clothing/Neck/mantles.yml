@@ -13,7 +13,7 @@
 - type: entity
   parent: [ClothingNeckBase]
   id: ClothingNeckMantleCE
-  name: chief engineer's mantle
+  name: chief engineer's manica
   description: A bright white and yellow striped mantle. Do not wear around active machinery.  # Corvax-Resprite
   suffix: For playtime #SS220-add-time-loadout-suffix
   components:

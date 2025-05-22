@@ -39,3 +39,24 @@
     - state: icon_other-shoulder
       map: ["foldedLayer"]
       visible: true
+
+- type: entity
+  parent: ClothingHeadEyeBaseFlippableAlt
+  id: ClothingNeckBaseFlippedAlt
+  suffix: flipped
+  abstract: true
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: flipped
+  - type: Item
+    heldPrefix: flipped
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon_flipped
+      map: ["foldedLayer"]
+      visible: true

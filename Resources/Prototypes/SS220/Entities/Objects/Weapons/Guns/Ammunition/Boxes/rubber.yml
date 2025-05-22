@@ -15,7 +15,7 @@
 #    - state: practice-b # Need sprite
   - type: MagazineVisuals
     magState: mag-big
-    steps: 3
+    steps: 4
     zeroVisible: false
   - type: Appearance
 
@@ -81,7 +81,7 @@
 #    - state: rubber-b # Need sprite
   - type: MagazineVisuals
     magState: mag
-    steps: 3
+    steps: 4
     zeroVisible: false
   - type: Appearance
 

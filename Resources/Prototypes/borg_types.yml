@@ -1,6 +1,7 @@
-﻿# Generic borg
+# Generic borg
 - type: borgType
   id: generic
+  name: borg-type-prototype-generic # SS220 Borgs-Id-fix
 
   # Description
   dummyPrototype: BorgChassisGeneric
@@ -10,10 +11,12 @@
   moduleWhitelist:
     tags:
     - BorgModuleGeneric
+    - BorgModuleScience #until sciborgs are added
 
   defaultModules:
   - BorgModuleTool
-
+  - BorgModuleArtifact
+  - BorgModuleAnomaly
   radioChannels:
   - Science
 
@@ -32,6 +35,7 @@
 # Engineering borg
 - type: borgType
   id: engineering
+  name: borg-type-prototype-engineering # SS220 Borgs-Id-fix
 
   # Description
   dummyPrototype: BorgChassisEngineer
@@ -68,6 +72,7 @@
 # Salvage borg
 - type: borgType
   id: mining
+  name: borg-type-prototype-mining # SS220 Borgs-Id-fix
 
   # Description
   dummyPrototype: BorgChassisMining
@@ -80,8 +85,9 @@
     - BorgModuleCargo
 
   defaultModules:
-  - BorgModuleGrapplingGun
+  - BorgModuleTool
   - BorgModuleMining
+  - BorgModuleTraversal
   - BorgModuleAppraisal
 
   radioChannels:
@@ -104,6 +110,7 @@
 # Janitor borg
 - type: borgType
   id: janitor
+  name: borg-type-prototype-janitor # SS220 Borgs-Id-fix
 
   # Description
   dummyPrototype: BorgChassisJanitor
@@ -116,8 +123,9 @@
     - BorgModuleJanitor
 
   defaultModules:
-  - BorgModuleLightReplacer
+  - BorgModuleTool
   - BorgModuleCleaning
+  - BorgModuleCustodial
 
   radioChannels:
   - Science
@@ -139,6 +147,7 @@
 # Medical borg
 - type: borgType
   id: medical
+  name: borg-type-prototype-medical # SS220 Borgs-Id-fix
 
   # Description
   dummyPrototype: BorgChassisMedical
@@ -151,7 +160,10 @@
     - BorgModuleMedical
 
   defaultModules:
-  - BorgModuleTreatment
+  - BorgModuleTool
+  - BorgModuleChemical
+  - BorgModuleTopicals
+  - BorgModuleRescue
 
   radioChannels:
   - Science
@@ -186,6 +198,7 @@
 # Service borg
 - type: borgType
   id: service
+  name: borg-type-prototype-service # SS220 Borgs-Id-fix
 
   # Description
   dummyPrototype: BorgChassisService
@@ -198,10 +211,12 @@
     - BorgModuleService
 
   defaultModules:
+  - BorgModuleTool
   - BorgModuleMusique
   - BorgModuleService
   - BorgModuleClowning
-
+  - BorgModuleGardening
+  - BorgModuleHarvesting
   radioChannels:
   - Science
   - Service

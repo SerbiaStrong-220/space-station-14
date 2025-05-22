@@ -152,22 +152,6 @@
               amount: 2
               doAfter: 2
 
-        - to: shuttleInteriorWall
-          completed:
-            - !type:SnapToGrid
-              southRotation: true
-          conditions:
-            - !type:EntityAnchored { }
-          steps:
-            - material: MetalRod
-              amount: 2
-              doAfter: 1
-            - tool: Screwing
-              doAfter: 1
-            - material: Steel
-              amount: 2
-              doAfter: 1
-
         # SS220 Girder node add begin (SecretSolidDoor Recipe Update)
         - to: secretWall
           conditions:
@@ -187,7 +171,7 @@
       - to: electronics
         steps:
         - component: PowerCell
-          name: power cell
+          name: construction-graph-tag-power-cell
           store: battery-container
           icon:
             sprite: Objects/Power/power_cells.rsi
@@ -334,23 +318,6 @@
             - tool: Prying
               doAfter: 5
 
-    - node: shuttleInteriorWall
-      entity: WallShuttleInterior
-      edges:
-        - to: girder
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:SpawnPrototype
-              prototype: PartRodMetal1
-              amount: 2
-          steps:
-            - tool: Welding
-              doAfter: 10
-            - tool: Screwing
-              doAfter: 1
-
     #SS220-walls-sprite-update-v5-begin
     - node: betonWall
       entity: WallBeton
@@ -401,9 +368,6 @@
               doAfter: 1
 
         - to: diagonalshuttleWall
-          completed:
-            - !type:SnapToGrid
-              southRotation: false
           conditions:
             - !type:EntityAnchored { }
           steps:
@@ -448,7 +412,7 @@
       - to: reinforcedElectronics
         steps:
         - component: PowerCell
-          name: power cell
+          name: construction-graph-tag-power-cell
           store: battery-container
           icon:
             sprite: Objects/Power/power_cells.rsi

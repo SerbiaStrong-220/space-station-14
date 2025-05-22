@@ -73,9 +73,9 @@
       - id: Hypospray
       - id: MedkitAdvancedFilled
       - id: CrowbarRed
-      - id: OmnizineChemistryBottle
-      - id: EpinephrineChemistryBottle
-      - id: EpinephrineChemistryBottle
+      - id: ChemistryBottleOmnizine
+      - id: ChemistryBottleEpinephrine
+      - id: ChemistryBottleEpinephrine
 
 - type: entity
   parent: ClothingBackpackERTJanitor

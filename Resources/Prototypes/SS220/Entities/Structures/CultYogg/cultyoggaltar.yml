@@ -13,8 +13,6 @@
   - type: Icon
     sprite: SS220/Structures/CultYogg/yoggaltar.rsi
     state: cultaltar
-  - type: Anchorable
-  - type: Pullable
   - type: Appearance
   - type: CultYoggAltar
   - type: CultYoggBuilding
@@ -55,3 +53,6 @@
         base:
           True: { state: blood }
           False: { state: cultaltar }
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable

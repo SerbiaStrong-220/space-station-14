@@ -23,12 +23,22 @@
   minValue: 10
   maxValue: 99
 
-# SS20 Fix AI Dataset
-#- type: nameIdentifierGroup
-#  id: Silicon
-#  prefix: Кр # Corvax-Localization
-#  minValue: 1000
-#  maxValue: 9999
+- type: nameIdentifierGroup
+  id: Silicon
+  prefix: Кр # Corvax-Localization
+  minValue: 1000
+  maxValue: 9999
+
+- type: nameIdentifierGroup
+  id: StationAi
+  prefix: ИИ # SS220-I-just-localized-with-zero-reasons
+  minValue: 100
+  maxValue: 999
+
+- type: nameIdentifierGroup
+  id: XenoArtifactNode
+  minValue: 0
+  maxValue: 999
 
 # Used to suffix a number to any mob to identify player controlled mob griefing.
 - type: nameIdentifierGroup

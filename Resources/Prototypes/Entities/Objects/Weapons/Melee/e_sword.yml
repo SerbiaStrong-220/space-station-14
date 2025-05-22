@@ -75,10 +75,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-EnergySword-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-EnergySword-security
       jobRequired:
         - HeadOfSecurity
@@ -120,7 +119,7 @@
     #ss220lowTTKUpdate
   #SS220 craftable desword start
   - type: Tag
-    tags: 
+    tags:
     - EnergySword
   - type: Construction
     deconstructionTarget: null
@@ -264,10 +263,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-EnergyDagger-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-EnergyDagger-research
       jobRequired:
         - ResearchAssistant
@@ -475,3 +473,12 @@
   components: # could add energy-draining like the L6C
   - type: Wieldable
     freeHandsRequired: 0 # because borg has no off-hand to wield with.  Without this, it will be unable to activate the esword
+
+- type: entity
+  parent: [ EnergyDaggerLoud, BaseXenoborgContraband ]
+  id: EnergyDaggerLoudBlue
+  suffix: blue
+  components:
+  - type: EnergySword
+    colorOptions:
+    - "#2288ff" # can only be blue

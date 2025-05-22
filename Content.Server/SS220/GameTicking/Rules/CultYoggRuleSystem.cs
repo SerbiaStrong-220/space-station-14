@@ -224,15 +224,15 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (!TryComp<MindComponent>(uid, out var mind))
             return;
 
-        if (mind.Session is null)
+        if (!_playerManager.TryGetSessionById(mind.UserId, out var session))
             return;
 
-        if (mind.Session.AttachedEntity is null)
+        if (session.AttachedEntity is null)
             return;
 
         //_adminLogger.Add(LogType.EventRan, LogImpact.High, $"CultYogg person {meta.EntityName} where picked for a tier: {tier}");
 
-        var sacrComp = EnsureComp<CultYoggSacrificialComponent>(mind.Session.AttachedEntity.Value);
+        var sacrComp = EnsureComp<CultYoggSacrificialComponent>(session.AttachedEntity.Value);
 
         sacrComp.Tier = tier;
     }
@@ -341,7 +341,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         _antag.SendBriefing(uid, Loc.GetString("cult-yogg-role-greeting"), null, rule.Comp.GreetSoundNotification);
 
-        if (initial)
+        if (initial && !rule.Comp.InitialCultistMinds.Contains (mindId))
             rule.Comp.InitialCultistMinds.Add(mindId);
 
         // Change the faction
@@ -535,7 +535,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         args.AddLine(Loc.GetString("cult-yogg-round-end-initial-count", ("initialCount", component.InitialCultistMinds.Count)));
 
         var antags = _antag.GetAntagIdentifiers(uid);
-        //args.AddLine(Loc.GetString("zombie-round-end-initial-count", ("initialCount", antags.Count))); // ToDo Should we add this?
+
         foreach (var (mind, data, entName) in antags)
         {
             if (!component.InitialCultistMinds.Contains(mind))
