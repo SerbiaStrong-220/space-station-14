@@ -18,12 +18,13 @@ public sealed partial class ZoneEntry : ContainerButton
         RobustXamlLoader.Load(this);
 
         Zone = entity;
+        Refresh();
     }
 
     public void Refresh()
     {
         IDLabel.Text = Zone.Owner.ToString();
-        string name = "Unknown";
+        var name = "Unknown";
         if (_entityManager.TryGetComponent<MetaDataComponent>(Zone, out var meta) &&
             !string.IsNullOrEmpty(meta.EntityName) && !string.IsNullOrWhiteSpace(meta.EntityName))
             name = meta.EntityName;

@@ -79,6 +79,7 @@
     - mapping
     - toggleautosave
     - toggledecals
+    - "zone:control_window" # SS220 Zones
 
 - Flags: QUERY
   Commands:

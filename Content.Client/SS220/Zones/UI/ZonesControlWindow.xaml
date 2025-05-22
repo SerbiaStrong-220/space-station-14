@@ -9,7 +9,7 @@
             </BoxContainer>
             <PanelContainer Name="ZoneDataPanel" VerticalExpand="True" HorizontalExpand="True">
                 <ScrollContainer>
-                    <BoxContainer Name="ZoneDataContainer" Orientation="Vertical"/>
+                    <BoxContainer Name="ZonesContainersContainer" Orientation="Vertical"/>
                 </ScrollContainer>
             </PanelContainer>
             <Button Name="CreateZoneButton" Text="{Loc zones-control-create-zone-button}" Access="Public"/>

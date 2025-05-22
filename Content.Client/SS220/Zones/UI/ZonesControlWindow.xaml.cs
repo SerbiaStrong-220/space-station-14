@@ -17,6 +17,9 @@ public sealed partial class ZonesControlWindow : DefaultWindow
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
+
+        OnOpen += RefreshEntries;
+        RefreshEntries();
     }
 
     public void RefreshEntries()
@@ -31,33 +34,32 @@ public sealed partial class ZonesControlWindow : DefaultWindow
                 continue;
 
             if (!toDelete.Remove(uid))
-                toAdd.Add(uid, GetZoneDataEntry((uid, zoneData));
+                toAdd.Add(uid, GetZoneDataEntry((uid, zoneData)));
         }
 
         foreach (var (key, value) in toDelete)
         {
-            ZoneDataContainer.RemoveChild(value);
+            ZonesContainersContainer.RemoveChild(value);
             _zoneDataEntries.Remove(key);
         }
 
         foreach (var (key, value) in toAdd)
         {
-            ZoneDataContainer.AddChild(value);
+            ZonesContainersContainer.AddChild(value);
             _zoneDataEntries.Add(key, value);
         }
 
         SortEntries();
+        foreach (var entry in _zoneDataEntries.Values)
+            entry.Refresh();
     }
 
     public void SortEntries()
     {
         var sorted = _zoneDataEntries.OrderBy(e => e.Key).ToDictionary();
-        ZoneDataContainer.RemoveAllChildren();
+        ZonesContainersContainer.RemoveAllChildren();
         foreach (var value in sorted.Values)
-        {
-            value.SortEntries();
-            ZoneDataContainer.AddChild(value);
-        }
+            ZonesContainersContainer.AddChild(value);
 
         _zoneDataEntries = sorted;
     }
