@@ -12,7 +12,7 @@ namespace Content.Shared.VendingMachines
     [RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
     public sealed partial class VendingMachineComponent : Component
     {
-        public const string ContainerId = "VendingMachine";
+        public const string ContainerId = "VendingMachine"; // SS220 Injectable vends
 
         /// <summary>
         /// PrototypeID for the vending machine's inventory, see <see cref="VendingMachineInventoryPrototype"/>
@@ -148,10 +148,12 @@ namespace Content.Shared.VendingMachines
         [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
         public TimeSpan NextEmpEject = TimeSpan.Zero;
 
+        // SS220 Injectable vends start
         /// <summary>
         ///     Container of unique entities stored inside this vending machine.
         /// </summary>
         [ViewVariables] public Container Container = default!;
+        // SS220 Injectable vends end
 
         #region Client Visuals
         /// <summary>
@@ -207,6 +209,7 @@ namespace Content.Shared.VendingMachines
         #endregion
     }
 
+    // SS220 Injectable vends start
     [Serializable, NetSerializable]
     public sealed class VendingMachineInventoryEntry
     {
@@ -232,6 +235,7 @@ namespace Content.Shared.VendingMachines
             Amount = entry.Amount;
         }
     }
+    // SS220 Injectable vends end
 
     [Serializable, NetSerializable]
     public enum InventoryType : byte

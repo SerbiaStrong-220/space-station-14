@@ -31,7 +31,7 @@ namespace Content.Server.VendingMachines
         [Dependency] private readonly PricingSystem _pricing = default!;
         [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly ContainerSystem _container = default!;
+        [Dependency] private readonly ContainerSystem _container = default!; // SS220 SS220 vend-dupe-fix
 
         private const float WallVendEjectDistanceFromWall = 1f;
 
