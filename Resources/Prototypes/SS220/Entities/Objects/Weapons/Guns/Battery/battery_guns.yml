@@ -94,7 +94,7 @@
   - type: Item
     size: Large
   - type: Gun
-    fireRate: 4
+    fireRate: 6.5
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -107,7 +107,7 @@
         name: firemode-name-laser
         fireCost: 40
         gunModifiers:
-          fireRate: 4
+          fireRate: 6.5
       - proto: BulletDisablerSmg
         name: firemode-name-disabler
         fireCost: 24
@@ -145,7 +145,7 @@
         name: firemode-name-laser
         fireCost: 48
         gunModifiers:
-          fireRate: 4
+          fireRate: 6.5
       - proto: BulletDisablerSmg
         name: firemode-name-disabler
         fireCost: 24
