@@ -243,9 +243,9 @@ namespace Content.Server.VendingMachines
             // SS220 vend-dupe-fix start
             EntityUid? ent = null;
 
-            // Сначала пытаемся получить предмет из контейнера
-            if (TryGetInjectedItem((uid, vendComponent), vendComponent.NextItemToEject, out var existingItem)
-                && _container.RemoveEntity(uid, existingItem.Value))
+            // Сначала пытаемся получить существующий предмет и выбросить его, если таковой существует
+            if (TryGetInjectedItem((uid, vendComponent), vendComponent.NextItemToEject, out var existingItem, out var entry)
+                && TryEjectInjectedItem((uid, vendComponent), entry, existingItem.Value))
                 ent = existingItem.Value;
 
             // var ent = Spawn(vendComponent.NextItemToEject, spawnCoordinates);
@@ -267,19 +267,36 @@ namespace Content.Server.VendingMachines
         }
 
         // SS220 vend-dupe-fix start
-        public bool TryGetInjectedItem(Entity<VendingMachineComponent> vend, string protoId, [NotNullWhen(true)] out EntityUid? item)
+        public bool TryGetInjectedItem(Entity<VendingMachineComponent> vend, string protoId, [NotNullWhen(true)] out EntityUid? item, [NotNullWhen(true)] out VendingMachineInventoryEntry? entry)
         {
             item = null;
-            if (_container.TryGetContainer(vend, "VendingMachine", out var vendContainer))
-                foreach (var entity in vendContainer.ContainedEntities)
-                {
-                    if (MetaData(entity).EntityPrototype?.ID == protoId)
-                    {
-                        item = entity;
-                        return true;
-                    }
-                }
+            entry = null;
+
+            entry = GetAllInventory(vend, vend).ToList().Find(x => x.ID == protoId);
+            var ents = entry?.EntityUids;
+
+            if (ents == null || ents.Count == 0)
+                return false;
+
+            if (TryGetEntity(ents[0], out item) && entry is not null)
+                return true;
+
             return false;
+        }
+
+        public bool TryEjectInjectedItem(Entity<VendingMachineComponent> vend, VendingMachineInventoryEntry entry, EntityUid item)
+        {
+            try
+            {
+                _container.RemoveEntity(vend, item);
+                entry.EntityUids.Remove(GetNetEntity(item));
+                Dirty(vend, vend.Comp);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         // SS220 vend-dupe-fix end
 
