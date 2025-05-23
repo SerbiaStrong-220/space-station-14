@@ -33,5 +33,17 @@ zzzz-fmt-power-joules =
        *[5] ???
     }
 
+#ss220 particle smes loc start
+zzzz-fmt-energy-watt-hours =
+    { TOSTRING($divided, "F1") } { $places ->
+        [0] Вт·ч
+        [1] кВт·ч
+        [2] МВт·ч
+        [3] ГВт·ч
+        [4] ТВт·ч
+        *[5] ???
+        }
+#ss220 particle smes loc end
+
 # Used internally by the PLAYTIME() function.
 zzzz-fmt-playtime = { $hours }ч { $minutes }м
