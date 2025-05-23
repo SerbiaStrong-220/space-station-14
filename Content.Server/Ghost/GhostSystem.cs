@@ -277,7 +277,9 @@ namespace Content.Server.Ghost
             var time = _gameTiming.CurTime;
             component.TimeOfDeath = time;
 
+            //ss220 add filter tts for ghost start
             EnsureComp<GhostHearingComponent>(uid);
+            //ss220 add filter tts for ghost end
         }
 
         private void OnGhostShutdown(EntityUid uid, GhostComponent component, ComponentShutdown args)
@@ -298,7 +300,9 @@ namespace Content.Server.Ghost
             _eye.RefreshVisibilityMask(uid);
             _actions.RemoveAction(uid, component.BooActionEntity);
 
+            //ss220 add filter tts for ghost start
             RemComp<GhostHearingComponent>(uid);
+            //ss220 add filter tts for ghost end
         }
 
         private void OnMapInit(EntityUid uid, GhostComponent component, MapInitEvent args)
@@ -310,6 +314,7 @@ namespace Content.Server.Ghost
             _actions.AddAction(uid, ref component.ToggleGhostsActionEntity, component.ToggleGhostsAction);
             // SS220 ADD GHOST HUD'S
             _actions.AddAction(uid, ref component.ToggleHudOnOtherActionEntity, component.ToggleHudOnOtherAction);
+            //ss220 add filter tts for ghost
             _actions.AddAction(uid, ref component.ToggleRadioChannelsUIEntity, component.ToggleRadioChannelsUI);
             //SS-220 noDeath
             if (_actions.AddAction(uid, ref component.RespawnActionEntity, out var actResp, component.RespawnAction)

@@ -1274,6 +1274,7 @@ public sealed class AnnouncementSpokeEvent : EntityEventArgs
     }
 }
 
+//ss220 add filter tts for ghost start
 public sealed class RadioSpokeEvent : EntityEventArgs
 {
     public readonly EntityUid Source;
@@ -1289,6 +1290,7 @@ public sealed class RadioSpokeEvent : EntityEventArgs
         Receivers = receivers;
     }
 }
+//ss220 add filter tts for ghost end
 
 // SS220 Silicon TTS fix begin
 public readonly struct RadioEventReceiver
