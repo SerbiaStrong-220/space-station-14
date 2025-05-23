@@ -21,6 +21,7 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Popups;
+using Content.Shared.SS220.GhostHearing;
 using Content.Shared.SS220.Interaction;
 using Content.Shared.Storage;
 using Content.Shared.Strip;
@@ -160,13 +161,15 @@ namespace Content.Shared.Interaction
             if (!_actionBlockerSystem.CanInteract(ev.Actor, ev.Target))
             {
                 // We permit ghosts to open uis unless explicitly blocked
-                if (ev.Message is not OpenBoundInterfaceMessage
+                //ss220 add filter tts for ghost start
+                if (!(ev.Message is OpenBoundInterfaceMessage || _ui.IsUiOpen(ent.Owner, GhostHearingKey.Key))
                     || !HasComp<GhostComponent>(ev.Actor)
                     || aUiComp?.BlockSpectators == true)
                 {
                     ev.Cancel();
                     return;
                 }
+                //ss220 add filter tts for ghost end
             }
 
             var range = _ui.GetUiRange(ev.Target, ev.UiKey);

@@ -1,9 +1,20 @@
-﻿namespace Content.Shared.Ghost;
+﻿using Content.Shared.Radio;
+using Robust.Shared.GameStates;
 
-/// <summary>
-/// This is used for marking entities which should receive all local chat message, even when out of range
-/// </summary>
+namespace Content.Shared.Ghost;
+
+//ss220 add filter tts for ghost start
 [RegisterComponent]
+[NetworkedComponent]
 public sealed partial class GhostHearingComponent : Component
 {
+    [DataField]
+    public bool IsEnabled;
+
+    [DataField]
+    public Dictionary<RadioChannelPrototype, bool> RadioChannels = new();
+
+    [DataField]
+    public Dictionary<RadioChannelPrototype, bool> DisplayChannels = new();
 }
+//ss220 add filter tts for ghost end
