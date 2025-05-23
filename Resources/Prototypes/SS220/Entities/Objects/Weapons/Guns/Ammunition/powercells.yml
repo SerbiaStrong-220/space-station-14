@@ -35,7 +35,7 @@
         Quantity: 5
   - type: Tag
     tags:
-    - KRSPowerCell
+      - KRSPowerCell
   - type: Appearance
   - type: PowerCellVisuals
   - type: Riggable

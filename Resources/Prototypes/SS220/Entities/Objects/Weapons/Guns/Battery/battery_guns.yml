@@ -106,13 +106,9 @@
       - proto: BulletBlasterAlt
         name: firemode-name-blaster
         fireCost: 40
-        gunModifiers:
-          fireRate: 6.5
       - proto: BulletDisablerSmg
         name: firemode-name-disabler
         fireCost: 24
-        gunModifiers:
-          fireRate: 3
   - type: ItemSlots
     slots:
       cell_slot:
@@ -147,13 +143,9 @@
       - proto: BulletBlasterPulse
         name: firemode-name-blaster
         fireCost: 48
-        gunModifiers:
-          fireRate: 6.5
       - proto: BulletDisablerSmg
         name: firemode-name-disabler
         fireCost: 24
-        gunModifiers:
-          fireRate: 3
   - type: ItemSlots
     slots:
       cell_slot:
