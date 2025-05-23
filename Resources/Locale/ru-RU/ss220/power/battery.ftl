@@ -1,7 +1,11 @@
+battery-menu-footer-left = Опасно: высокое напряжение
+battery-menu-footer-right = 7.2 REV 6
+battery-menu-out = ВЫХОД
+battery-menu-in = ВХОД
 battery-menu-charge-header = Контур Зарядки
 battery-menu-discharge-header = Контур Разрядки
-battery-menu-storage-header = Элементы Хранения
-battery-menu-passthrough = Сквозной Режим
+battery-menu-storage-header = Накопительные элементы
+battery-menu-passthrough = Пропускная способность
 battery-menu-max = Макс.:
 battery-menu-current = Текущий:
 battery-menu-stored = Накоплено:
