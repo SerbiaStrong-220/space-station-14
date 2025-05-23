@@ -39,7 +39,6 @@
   - type: Appearance
   - type: PowerCellVisuals
   - type: Riggable
-  - type: AmmoCounter
 
 # Standard 800 charge battery
 - type: entity

@@ -104,7 +104,7 @@
   - type: BatteryWeaponFireModes
     fireModes:
       - proto: BulletBlasterAlt
-        name: firemode-name-laser
+        name: firemode-name-blaster
         fireCost: 40
         gunModifiers:
           fireRate: 6.5
@@ -116,7 +116,10 @@
   - type: ItemSlots
     slots:
       cell_slot:
+        name: Magazine
         startingItem: BlasterPowerCellAlt
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
           tags:
             - KRSPowerCell
@@ -142,7 +145,7 @@
   - type: BatteryWeaponFireModes
     fireModes:
       - proto: BulletBlasterPulse
-        name: firemode-name-laser
+        name: firemode-name-blaster
         fireCost: 48
         gunModifiers:
           fireRate: 6.5
@@ -156,6 +159,8 @@
       cell_slot:
         name: Magazine
         startingItem: BlasterPowerCellPulse
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
           tags:
             - KRSPowerCell

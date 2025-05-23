@@ -24,13 +24,15 @@
         gunModifiers:
           fireRate: 6.5
       - proto: BulletBlaster
-        name: firemode-name-laser
+        name: firemode-name-blaster
         fireCost: 32
   - type: ItemSlots
     slots:
       cell_slot:
         name: Magazine
         startingItem: BlasterPowerCell
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
           tags:
             - BlasterPowerCell
