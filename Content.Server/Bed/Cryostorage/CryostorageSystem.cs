@@ -174,6 +174,10 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         }
     }
 
+    //SS220-cryo-mobs-fix begin
+    private void DropAll
+    //SS220-cryo-mobs-fix end
+
     public void HandleEnterCryostorage(Entity<CryostorageContainedComponent> ent, NetUserId? userId)
     {
         var comp = ent.Comp;
