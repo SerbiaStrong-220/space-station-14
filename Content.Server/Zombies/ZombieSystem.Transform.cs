@@ -35,7 +35,6 @@ using Content.Shared.Cuffs.Components;
 using Content.Shared.Prying.Components;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
-using Content.Shared.Clothing;
 using Content.Server.Administration.Managers;
 using Content.Shared.Humanoid.Markings;
 using Robust.Server.Player;
@@ -46,6 +45,7 @@ using Robust.Shared.Prototypes;
 using Content.Server.SS220.Language;
 using Content.Shared.SS220.Language.Components;
 using Content.Shared.Damage.Components;
+using Content.Shared.Clothing.Components;
 
 namespace Content.Server.Zombies;
 

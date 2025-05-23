@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Reference by discord:𝘽𝙚𝙡𝙖𝙮#7441, resprite from creamy for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon-flash"
+    },
+    {
+      "name": "equipped-head",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-light",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-vox",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-light-vox",
+      "directions": 4
+    }
+  ]
+}

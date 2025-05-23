@@ -32,6 +32,7 @@
   - ClothingNeckPluralPin
   - ClothingNeckOmnisexualPin
   - ClothingNeckGenderqueerPin
+  - ClothingNeckGenderfluidPin
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
@@ -1389,6 +1390,7 @@
   loadouts:
   - ChiefMedicalOfficerBeret
   - CMOMedicalHeadMirror
+  - CapCMO #SS220-CMOParade
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerJumpsuit
@@ -1417,6 +1419,7 @@
   loadouts:
   - ChiefMedicalOfficerCloak
   - ChiefMedicalOfficerMantle
+  - ParadeCloakCMO #SS220-CMOParade
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerShoes

@@ -171,7 +171,7 @@
       - to: electronics
         steps:
         - component: PowerCell
-          name: power cell
+          name: construction-graph-tag-power-cell
           store: battery-container
           icon:
             sprite: Objects/Power/power_cells.rsi
@@ -368,9 +368,6 @@
               doAfter: 1
 
         - to: diagonalshuttleWall
-          completed:
-            - !type:SnapToGrid
-              southRotation: false
           conditions:
             - !type:EntityAnchored { }
           steps:
@@ -415,7 +412,7 @@
       - to: reinforcedElectronics
         steps:
         - component: PowerCell
-          name: power cell
+          name: construction-graph-tag-power-cell
           store: battery-container
           icon:
             sprite: Objects/Power/power_cells.rsi

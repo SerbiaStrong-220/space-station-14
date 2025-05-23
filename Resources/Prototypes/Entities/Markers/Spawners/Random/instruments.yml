@@ -46,7 +46,7 @@
   - type: Sprite
     layers:
       - state: red
-      - sprite: Objects/Fun/Instruments/h_synthesizer.rsi
+      - sprite: SS220/Objects/Fun/Instruments/h_synthesizer.rsi # SS220 Synthesizer resprite
         state: icon
   - type: EntityTableSpawner
     table: !type:NestedSelector

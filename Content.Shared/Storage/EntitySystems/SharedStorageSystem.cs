@@ -347,14 +347,14 @@ public abstract class SharedStorageSystem : EntitySystem
         storage = null;
 
         if (!ContainerSystem.TryGetContainingContainer(itemEnt, out container) ||
+            container.ID != StorageComponent.ContainerId ||
             !TryComp(container.Owner, out storage) ||
             !_itemQuery.Resolve(itemEnt, ref itemEnt.Comp, false))
         {
             return false;
         }
 
-        loc = storage.StoredItems[itemEnt];
-        return true;
+        return storage.StoredItems.TryGetValue(itemEnt, out loc); // SS220 slime-person-get-inventory-fix
     }
 
     public void OpenStorageUI(EntityUid uid, EntityUid actor, StorageComponent? storageComp = null, bool silent = true)

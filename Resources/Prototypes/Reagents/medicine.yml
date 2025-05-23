@@ -426,6 +426,7 @@
   color: "#731024"
   metabolisms:
     Medicine:
+      metabolismRate: 0.1 # Smaller doses stabilize critical people for longer. Gives it a specific usecase as to not be entirely outclassed by dex+
       effects:
       - !type:HealthChange
         conditions:
@@ -434,7 +435,7 @@
           mobstate: Critical
         damage:
           types:
-            Asphyxiation: -5
+            Asphyxiation: -2
       - !type:ModifyBleedAmount
         amount: -0.25
 
@@ -821,13 +822,12 @@
   metabolisms:
     Medicine:
       effects:
-      - !type:HealthChange
+      - !type:EvenHealthChange
         damage:
-          groups:
-            Burn: -2
-            Toxin: -2
-            Airloss: -2
-            Brute: -2
+          Burn: -2
+          Toxin: -2
+          Airloss: -2
+          Brute: -2
 
 - type: reagent
   id: Ultravasculine
@@ -1043,7 +1043,7 @@
   physicalDesc: reagent-physical-desc-fizzy
   flavor: fizzy
   color: "#b9bf93"
-  metabolisms: 
+  metabolisms:
     Medicine:
       metabolismRate: 0.1 #ss220 combat medicine be-gone
       effects:
@@ -1113,6 +1113,7 @@
             Heat: -0.2
             Shock: -0.2
             Cold: -0.2
+
   reactiveEffects:
     Extinguish:
       methods: [ Touch ]
