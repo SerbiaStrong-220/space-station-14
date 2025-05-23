@@ -15,6 +15,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Network;
 using Robust.Server.Player;
 using Content.Server.SS220.Language;
+using Content.Shared.Ghost;
+using Content.Shared.Radio;
 using Content.Shared.SS220.Language.Systems;
 
 
@@ -88,11 +90,33 @@ public sealed partial class TTSSystem : EntitySystem
         }
 
         if (!GetVoicePrototype(voiceId, out var protoVoice))
-        {
             return;
+
+        var receivers = new List<RadioEventReceiver>();
+
+        foreach (var receiver in args.Receivers)
+        {
+            if (!TryComp(receiver.Actor, out GhostHearingComponent? hearing))
+            {
+                receivers.Add(receiver);
+                continue;
+            }
+
+            if (args.Channel != null &&
+                _prototypeManager.TryIndex<RadioChannelPrototype>(args.Channel, out var channelProto))
+            {
+                if (hearing.RadioChannels.TryGetValue(channelProto, out var canHear) && canHear)
+                {
+                    receivers.Add(receiver);
+                }
+            }
+            else
+            {
+                receivers.Add(receiver);
+            }
         }
 
-        HandleRadio(args.Receivers, args.Message, protoVoice.Speaker);
+        HandleRadio(receivers.ToArray(), args.Message, protoVoice.Speaker);
     }
 
     private bool GetVoicePrototype(string voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
