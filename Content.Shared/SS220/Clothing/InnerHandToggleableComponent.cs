@@ -39,7 +39,7 @@ public sealed partial class ToggleableHandInfo
 
 
 [Prototype]
-public sealed partial class ToggleableInnerHandPrototype : IPrototype
+public sealed partial class InnerHandActionPrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = default!;
@@ -48,5 +48,5 @@ public sealed partial class ToggleableInnerHandPrototype : IPrototype
     ///     Action used to toggle the clothing on or off.
     /// </summary
     [DataField(required: true)]
-    public string Action = "ActionToggleSuitPiece";
+    public EntProtoId Action = "ActionToggleSuitPiece";
 }

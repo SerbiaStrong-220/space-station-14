@@ -2,20 +2,30 @@
 
 - type: entity
   id: ActionToggleLeftHand
-  name: Toggle Suit Piece
+  name: Inner Left Hand Toggle
   description: Remember to equip the important pieces of your suit before going into action.
   components:
   - type: InstantAction
     itemIconStyle: BigItem
     useDelay: 1 # equip noise spam.
-    event: !type:ToggleClothingEvent
+    event: !type:ToggleInnerHandEvent
+      hand: left hand_inner
 
 - type: entity
   id: ActionToggleRightHand
-  name: Toggle Suit Piece
+  name: Inner Right Hand Toggle
   description: Remember to equip the important pieces of your suit before going into action.
   components:
   - type: InstantAction
     itemIconStyle: BigItem
     useDelay: 1 # equip noise spam.
-    event: !type:ToggleClothingEvent
+    event: !type:ToggleInnerHandEvent
+      hand: right hand_inner
+
+- type: innerHandAction
+  id: left hand_inner
+  action: ActionToggleLeftHand
+
+- type: innerHandAction
+  id: right hand_inner
+  action: ActionToggleRightHand

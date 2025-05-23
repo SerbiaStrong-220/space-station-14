@@ -4,7 +4,6 @@
 using Content.Shared.Actions;
 using Content.Shared.Body.Systems;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
@@ -23,7 +22,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedHandsSystem _hand = default!;
-    
+
 
     /// <summary>
     /// Postfix for any inner hand.
@@ -45,45 +44,35 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
 
     public void TryCreateInnerHandSpace(Entity<InnerHandToggleableComponent> ent, EntityUid hidable, Hand hand)
     {
-        var name = hand.Name + InnerHandPostfix;//add shit
-        name.Substring(0, SharedBodySystem.PartSlotContainerIdPrefix.Length); //delete shit
+        int unusedPrefix = SharedBodySystem.PartSlotContainerIdPrefix.Length;
+        var name = hand.Name.Substring(unusedPrefix, hand.Name.Length - unusedPrefix); ;//add shit
+        name = name + InnerHandPostfix; //delete shit
 
         if (ent.Comp.HandsContainers.ContainsKey(name))
             return;
 
-        /*
         if (!TryGetInnerHandProto(name, out var proto))
             return;
 
         if (proto is null)//Made this shit cause rn idk how to fix it
             return;
-        */
+
+        var manager = EnsureComp<ContainerManagerComponent>(ent);
 
         var handInfo = new ToggleableHandInfo
         {
-            //Action = proto.Action,
+            Action = proto.Action,
+            Container = _containerSystem.EnsureContainer<ContainerSlot>(ent, name, manager),
             ContainerId = name,
             InnerItemUid = hidable
         };
-
-        var manager = EnsureComp<ContainerManagerComponent>(ent);
-        _containerSystem.EnsureContainer<ContainerSlot>(ent, name, manager);
 
         //some copypaste from ToggleableClothingSystem
         if (!_actionContainer.EnsureAction(ent, ref handInfo.ActionEntity, out var action, handInfo.Action))
             return;
 
         _actionsSystem.SetEntityIcon(handInfo.ActionEntity.Value, handInfo.InnerItemUid, action);
-        _actionsSystem.AddAction(ent, ref handInfo.ActionEntity, handInfo.Action);
-
-        /*
-        _actionsSystem.AddAction(ent, ref handInfo.ActionEntity, handInfo.Action);
-
-        if (handInfo.ActionEntity is null)
-            return;
-
-        _actionsSystem.SetEntityIcon(handInfo.ActionEntity.Value, handInfo.InnerItemUid);
-        */
+        _actionsSystem.AddAction(ent, ref handInfo.ActionEntity, handInfo.Action);//cant add cation without it
 
         ent.Comp.HandsContainers.Add(name, handInfo);
     }
@@ -94,32 +83,34 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
             return;
 
         args.Handled = true;
-        foreach (var item in ent.Comp.HandsContainers.Values)
+
+        if (!ent.Comp.HandsContainers.TryGetValue(args.Hand, out var item))
+            return;
+
+        if (item.Container is null)
+            return;
+
+        if (item.InnerItemUid is null)
+            return;
+
+        if (item.Container.ContainedEntity == null)
         {
-            if (item.Container is null)
-                continue;
-
-            if (item.InnerItemUid is null)
-                continue;
-
-            if (item.Container.ContainedEntity == null)
-            {
-                _hand.TryDrop(ent, item.InnerItemUid.Value);
-            }
-            else
-            {
-                _hand.TryPickup(ent, item.InnerItemUid.Value);
-            }
+            //_hand.TryDrop(ent, item.InnerItemUid.Value);
+            _containerSystem.Insert(item.InnerItemUid.Value, item.Container);
+        }
+        else
+        {
+            _hand.TryPickup(ent, item.InnerItemUid.Value);
         }
     }
 
 
     //i tried to get action based on hand, but idk how to do it rn
-    private bool TryGetInnerHandProto(string handName, out ToggleableInnerHandPrototype? proto)
+    private bool TryGetInnerHandProto(string handName, out InnerHandActionPrototype? proto)
     {
         proto = null;
 
-        foreach (var handProto in _proto.EnumeratePrototypes<ToggleableInnerHandPrototype>())
+        foreach (var handProto in _proto.EnumeratePrototypes<InnerHandActionPrototype>())
         {
             if (handProto.ID != handName)
                 continue;
