@@ -9,7 +9,7 @@
     itemIconStyle: BigItem
     useDelay: 1 # equip noise spam.
     event: !type:ToggleInnerHandEvent
-      hand: left hand_inner
+      hand: inner_left hand
 
 - type: entity
   id: ActionToggleRightHand
@@ -20,12 +20,12 @@
     itemIconStyle: BigItem
     useDelay: 1 # equip noise spam.
     event: !type:ToggleInnerHandEvent
-      hand: right hand_inner
+      hand: inner_right hand
 
 - type: innerHandAction
-  id: left hand_inner
+  id: inner_left hand
   action: ActionToggleLeftHand
 
 - type: innerHandAction
-  id: right hand_inner
+  id: inner_right hand
   action: ActionToggleRightHand

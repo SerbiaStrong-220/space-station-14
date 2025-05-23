@@ -27,7 +27,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
     /// <summary>
     /// Postfix for any inner hand.
     /// </summary>
-    public const string InnerHandPostfix = "_inner";
+    public const string InnerHandPrefix = "inner_";
 
     public override void Initialize()
     {
@@ -45,8 +45,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
     public void TryCreateInnerHandSpace(Entity<InnerHandToggleableComponent> ent, EntityUid hidable, Hand hand)
     {
         int unusedPrefix = SharedBodySystem.PartSlotContainerIdPrefix.Length;
-        var name = hand.Name.Substring(unusedPrefix, hand.Name.Length - unusedPrefix); ;//add shit
-        name = name + InnerHandPostfix; //delete shit
+        var name = InnerHandPrefix + hand.Name.Substring(unusedPrefix); ;//add and delete shit
 
         if (ent.Comp.HandsContainers.ContainsKey(name))
             return;
@@ -100,7 +99,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         }
         else
         {
-            _hand.TryPickup(ent, item.InnerItemUid.Value);
+            _hand.TryPickup(ent, item.InnerItemUid.Value, SharedBodySystem.PartSlotContainerIdPrefix + args.Hand.Substring(InnerHandPrefix.Length));
         }
     }
 
