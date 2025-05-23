@@ -1,10 +1,7 @@
-using Content.Shared.Actions;
-using Content.Shared.Blocking;
-using Content.Shared.Clothing.Components;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Hands;
-using Content.Shared.Hands.Components;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Inventory.Events;
 
 namespace Content.Shared.SS220.Clothing;
 
@@ -12,7 +9,7 @@ namespace Content.Shared.SS220.Clothing;
 /// </summary>
 public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedInnerHandToggleableSystem _innerHand = default!;
 
     public override void Initialize()
     {
@@ -30,9 +27,9 @@ public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
 
         args.Handled = true;
 
-        var innerUser = EnsureComp<InnerHandToggleableComponent>(args.User);
+        var inner = EnsureComp<InnerHandToggleableComponent>(args.User);
 
-        //ToDo_SS220 check if hand id free
+        _innerHand.TryCreateInnerHandSpace((args.User, inner), ent, args.Hand);
     }
 
     private void OnUnequip(Entity<InnerHandToggleProviderComponent> ent, ref GotUnequippedHandEvent args)

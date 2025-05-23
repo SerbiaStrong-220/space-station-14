@@ -1,13 +1,12 @@
-using Content.Shared.Clothing.EntitySystems;
-using Content.Shared.Inventory;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Content.Shared.Clothing.Components;
 
 namespace Content.Shared.SS220.Clothing;
 
-[RegisterComponent, NetworkedComponent/*, AutoGenerateComponentState*/]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class InnerHandToggleableComponent : Component
 {
     [ViewVariables]
@@ -20,7 +19,7 @@ public sealed partial class ToggleableHandInfo
     ///     Action used to toggle the clothing on or off.
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
-    public EntProtoId Action = "ActionToggleSuitPiece";
+    public EntProtoId Action = "ActionToggleInnerHand";// based on ActionToggleSuitPiece
 
     [DataField, AutoNetworkedField]
     public EntityUid? ActionEntity;
@@ -29,7 +28,7 @@ public sealed partial class ToggleableHandInfo
     ///     The container that the clothing is stored in when not equipped.
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
-    public string ContainerId = "toggleable-clothing";
+    public string ContainerId = "inner-toggleable";
 
     [ViewVariables]
     public ContainerSlot? Container;
@@ -39,7 +38,7 @@ public sealed partial class ToggleableHandInfo
 }
 
 
-[Prototype, AutoGenerateComponentState]
+[Prototype]
 public sealed partial class ToggleableInnerHandPrototype : IPrototype
 {
     [IdDataField]
@@ -47,7 +46,7 @@ public sealed partial class ToggleableInnerHandPrototype : IPrototype
 
     /// <summary>
     ///     Action used to toggle the clothing on or off.
-    /// </summary>
-    [DataField(required: true), AutoNetworkedField]
-    public EntProtoId Action = "ActionToggleSuitPiece";
+    /// </summary
+    [DataField(required: true)]
+    public string Action = "ActionToggleSuitPiece";
 }
