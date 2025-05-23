@@ -53,10 +53,12 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-  - type: MagazineAmmoProvider
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLightLaser
+    fireCost: 50
   - type: ItemSlots
     slots:
-      gun_magazine:
+      cell_slot:
         name: Magazine
         startingItem: PowerCellSmall
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
@@ -65,12 +67,14 @@
           tags:
             - PowerCell
             - PowerCellSmall
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
   - type: Appearance
   - type: StaticPrice
     price: 500
   - type: ContainerContainer
     containers:
-      gun_magazine: !type:ContainerSlot
+      cell_slot: !type:ContainerSlot
 
 - type: entity
   id: BaseWeaponBatterySmall
@@ -82,6 +86,10 @@
     shape:
     - 0,0,1,0
     - 0,1,0,1
+  #SS220-new-feature kus begin
+  - type: Gun
+    canSuicide: true
+  #SS220-new-feature kus end
   - type: Tag
     tags:
     - Sidearm
@@ -99,6 +107,10 @@
   components:
   - type: Item
     size: Small
+  #SS220-new-feature kus begin
+  - type: Gun
+    canSuicide: true
+  #SS220-new-feature kus end
   - type: Tag
     tags:
     - Sidearm
@@ -283,7 +295,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: HitscanBatteryAmmoProvider
     proto: Pulse
     fireCost: 200
@@ -319,7 +331,7 @@
       - SemiAuto
       - FullAuto
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: HitscanBatteryAmmoProvider
     proto: Pulse
     fireCost: 200
@@ -746,6 +758,7 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Revolvers/chimp.rsi
   - type: Gun
+    canSuicide: false # SS220-new-feature kus
     projectileSpeed: 10
     fireRate: 1.5
     soundGunshot:
@@ -800,6 +813,7 @@
     - state: base
       map: ["enum.GunVisualLayers.Base"]
   - type: Gun
+    canSuicide: false #SS220-new-feature kus
     fireRate: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_clown.ogg
@@ -914,3 +928,16 @@
     startingCharge: 1000
   - type: StaticPrice
     price: 100
+
+- type: entity
+  name: xenoborg laser gun
+  parent: [ WeaponAdvancedLaser, BaseXenoborgContraband ]
+  id: XenoborgLaserGun
+
+- type: entity
+  name: xenoborg heavy laser gun
+  parent: [ WeaponAdvancedLaser, BaseXenoborgContraband ]
+  id: XenoborgHeavyLaserGun
+  components:
+  - type: HitscanBatteryAmmoProvider
+    proto: RedHeavyLaser

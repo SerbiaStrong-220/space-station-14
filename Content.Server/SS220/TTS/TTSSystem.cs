@@ -52,6 +52,7 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
         SubscribeLocalEvent<RadioSpokeEvent>(OnRadioReceiveEvent);
         SubscribeLocalEvent<AnnouncementSpokeEvent>(OnAnnouncementSpoke);
+        SubscribeLocalEvent<TelepathySpokeEvent>(OnTelepathySpoke);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeLocalEvent<TTSComponent, MapInitEvent>(OnInit);
 
@@ -463,6 +464,48 @@ public sealed partial class TTSSystem : EntitySystem
                 Data = audioData,
                 SourceUid = GetNetEntity(receiver.PlayTarget.EntityId),
                 Kind = TtsKind.Radio
+            }, session.Channel);
+        }
+    }
+
+    private async void OnTelepathySpoke(TelepathySpokeEvent args)
+    {
+        if (args.Receivers.Length == 0)
+            return;
+
+        if (!TryComp(args.Source, out TTSComponent? senderComponent))
+            return;
+
+        var voiceId = senderComponent.VoicePrototypeId;
+        if (voiceId == null)
+            return;
+
+        if (TryGetVoiceMaskUid(args.Source, out var maskUid))
+        {
+            var voiceEv = new TransformSpeakerVoiceEvent(maskUid.Value, voiceId);
+            RaiseLocalEvent(maskUid.Value, voiceEv);
+            voiceId = voiceEv.VoiceId;
+        }
+
+        if (!GetVoicePrototype(voiceId, out var protoVoice))
+        {
+            return;
+        }
+
+        using var soundData = await GenerateTts(args.Message, protoVoice.Speaker, TtsKind.Telepathy);
+        if (soundData is null)
+            return;
+
+        foreach (var receiver in args.Receivers)
+        {
+            if (!_playerManager.TryGetSessionByEntity(receiver, out var session)
+                || !soundData.TryGetValue(out var audioData))
+                continue;
+            _netManager.ServerSendMessage(new MsgPlayTts
+            {
+                Data = audioData,
+                SourceUid = GetNetEntity(receiver),
+                Kind = TtsKind.Telepathy
             }, session.Channel);
         }
     }

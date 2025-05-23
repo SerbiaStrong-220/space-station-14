@@ -160,10 +160,7 @@
   #ss220 emote 5 sec end
   #SS220 LimitationRevive - start
   - type: LimitationRevive
-    maxRevive: 100 #has no death limit
-    typeDamageOnDead:
-      types:
-        Сerebral: 400
+    reviveLimit: 100 #has no death limit
   #SS220 LimitationRevive - end
 
 - type: entity

@@ -22,7 +22,7 @@ public sealed class FoldableSystem : EntitySystem
     [Dependency] private readonly AnchorableSystem _anchorable = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-fold-doafter
- 
+
     public override void Initialize()
     {
         base.Initialize();
@@ -34,6 +34,7 @@ public sealed class FoldableSystem : EntitySystem
         SubscribeLocalEvent<FoldableComponent, ContainerGettingInsertedAttemptEvent>(OnInsertEvent);
         SubscribeLocalEvent<FoldableComponent, StorageOpenAttemptEvent>(OnFoldableOpenAttempt);
         SubscribeLocalEvent<FoldableComponent, SetFoldableStateDoAfterEvent>(OnSetFoldableDoAfter); //SS220-fold-doafter
+        SubscribeLocalEvent<FoldableComponent, EntityStorageInsertedIntoAttemptEvent>(OnEntityStorageAttemptInsert);
 
         SubscribeLocalEvent<FoldableComponent, StrapAttemptEvent>(OnStrapAttempt);
     }
@@ -57,6 +58,13 @@ public sealed class FoldableSystem : EntitySystem
     public void OnStrapAttempt(EntityUid uid, FoldableComponent comp, ref StrapAttemptEvent args)
     {
         if (comp.IsFolded)
+            args.Cancelled = true;
+    }
+
+    private void OnEntityStorageAttemptInsert(Entity<FoldableComponent> entity,
+        ref EntityStorageInsertedIntoAttemptEvent args)
+    {
+        if (entity.Comp.IsFolded)
             args.Cancelled = true;
     }
 

@@ -17,6 +17,7 @@ public sealed class SharedStealthProviderSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<StealthProviderComponent, StealthProviderStatusChanged>(OnEnabilityChange);
+        SubscribeLocalEvent<StealthProviderComponent, ComponentRemove>(OnCompRemove);
     }
 
     private void OnEnabilityChange(Entity<StealthProviderComponent> ent, ref StealthProviderStatusChanged args)
@@ -26,6 +27,12 @@ public sealed class SharedStealthProviderSystem : EntitySystem
         if (!ent.Comp.Enabled)
             DisableAllProvidedStealth(ent);
     }
+
+    private void OnCompRemove(Entity<StealthProviderComponent> ent, ref ComponentRemove args)
+    {
+        DisableAllProvidedStealth(ent);
+    }
+
     private void DisableAllProvidedStealth(Entity<StealthProviderComponent> ent)
     {
         foreach (var disEnts in ent.Comp.ProvidedEntities)

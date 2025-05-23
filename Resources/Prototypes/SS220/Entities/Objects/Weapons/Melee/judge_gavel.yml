@@ -1,0 +1,58 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: judge gavel
+  parent: BaseItem
+  id: JudgeGavel
+  description: Small but powerful, made of polished wood. A symbol of power and order. Every blow is an emphasis on justice.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/judge_gavel.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 1
+    soundHit:
+      collection: MetalThud
+  - type: Item
+  - type: Tag
+    tags:
+    - JudgeGavel
+  - type: UseDelay
+    delay: 2
+
+
+- type: entity
+  id: GavelStand
+  parent: BaseStructureDynamic
+  name: gavel stand
+  description: It's massive, made of polished wood, with a smooth surface for clear sound. Simple, but significant, as the basis of the law.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/judge_gavel.rsi
+    state: gavel-stand
+    drawdepth: SmallObjects
+    noRot: true
+  - type: Appearance
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.10,-0.10,0.10,0.10"
+        density: 500
+        mask:
+          - TabletopMachineMask
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: GavelStand
+    distance: 5
+    whitelist:
+      tags:
+        - JudgeGavel
+    sound:
+      collection: JudgeGavelHits
+      params:
+        variation: 0.125

@@ -998,7 +998,7 @@
   #ss220 add pdaidpainter end
 
 - type: entity
-  parent: IDCardStandard
+  parent: [ IDCardStandard, BaseSyndicateContraband ]
   id: SyndicateIDCard
   name: syndicate ID card
   components:
@@ -1011,7 +1011,7 @@
     - SyndicateAgent
 
 - type: entity
-  parent: IDCardStandard
+  parent: [ IDCardStandard, BaseMajorContraband ]
   id: PirateIDCard
   name: pirate ID card
   components:
@@ -1122,6 +1122,45 @@
     - WhitelistChameleon
     - WhitelistChameleonIdCard
   #ss220 add pdaidpainter end
+
+- type: entity
+  parent: IDCardStandard
+  id: PrisonerIDCard
+  name: prisoner ID card
+  description: A generically printed ID card for scummy prisoners.
+  components:
+  - type: Sprite
+    layers:
+    - state: orange
+    - state: idprisoner # Port SS220-prisoner-id
+  - type: Item
+    heldPrefix: orange
+  - type: Access
+    tags:
+    - GenpopEnter
+  - type: GenpopIdCard
+  - type: IdCard
+    jobTitle: job-name-prisoner
+    jobIcon: JobIconPrisoner
+    canMicrowave: false
+  - type: ExpireIdCard
+    expireMessage: genpop-prisoner-id-expire
+    expiredAccess:
+    - GenpopLeave
+  - type: Speech
+    speechVerb: Robotic
+    #SS220-add-tts-to-prisoner-card-start
+  - type: TTS
+    voice: sentrybot
+    #SS220-add-tts-to-prisoner-card-end
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+    - Recyclable
+  - type: StaticPrice # these are infinitely producible.
+    price: 0
 
 - type: entity
   parent: CentcomIDCard
@@ -1281,6 +1320,7 @@
     - NuclearOperative
     - SyndicateAgent
     - Wizard
+    - Xenoborg
   - type: Tag #  Ignore Chameleon tags
     tags:
     - DoorBumpOpener

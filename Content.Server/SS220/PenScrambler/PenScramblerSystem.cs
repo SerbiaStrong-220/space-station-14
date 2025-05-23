@@ -74,16 +74,21 @@ public sealed class PenScramblerSystem : EntitySystem
     {
         if (!TryComp<HumanoidAppearanceComponent>(target, out var humanoid)
             || !_prototype.TryIndex(humanoid.Species, out var speciesPrototype)
-            || !TryComp<DnaComponent>(target, out var targetDna))
+            || !TryComp<DnaComponent>(target, out var targetDna)
+            || !TryComp<FingerprintComponent>(target, out var targetFingerPrint))
             return null;
 
         var mob = Spawn(speciesPrototype.Prototype, MapCoordinates.Nullspace);
 
         _humanoidSystem.CloneAppearance(target, mob);
 
+        if (!TryComp<FingerprintComponent>(mob, out var fingerPrint))
+            return null;
+
         if (!TryComp<DnaComponent>(mob, out var mobDna))
             return null;
 
+        fingerPrint.Fingerprint = targetFingerPrint.Fingerprint;
         mobDna.DNA = targetDna.DNA;
 
         _metaSystem.SetEntityName(mob, Name(target));

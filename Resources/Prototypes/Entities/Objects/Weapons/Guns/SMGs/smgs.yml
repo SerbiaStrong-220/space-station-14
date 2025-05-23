@@ -138,14 +138,14 @@
   description: A modern SMG manufactured by Nanotrasen’s Small Arms Division. It features an exceptional rate of fire in burst mode, useful for holding defensive angles or engaging hostiles at longer ranges. Feeds from .35 SMG magazines.
   components:
     - type: Sprite
-      sprite: Objects/Weapons/Guns/SMGs/drozd.rsi
+      sprite: SS220/Objects/Weapons/Guns/SMGs/drozd.rsi #SS220 drozd resprite
       layers:
         - state: base
           map: ["enum.GunVisualLayers.Base"]
         - state: mag-0
           map: ["enum.GunVisualLayers.Mag"]
     - type: Clothing
-      sprite: Objects/Weapons/Guns/SMGs/drozd.rsi
+      sprite: SS220/Objects/Weapons/Guns/SMGs/drozd.rsi #SS220 drozd resprite
     - type: Wieldable
       unwieldOnUse: false
     - type: GunWieldBonus
