@@ -11,7 +11,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
-    private Dictionary<EntityUid, ZoneDataEntry> _zoneDataEntries = new();
+    private Dictionary<EntityUid, ZoneContainerEntry> _zoneDataEntries = new();
 
     public ZonesControlWindow()
     {
@@ -25,9 +25,9 @@ public sealed partial class ZonesControlWindow : DefaultWindow
     public void RefreshEntries()
     {
         var toDelete = _zoneDataEntries.ToDictionary();
-        var toAdd = new Dictionary<EntityUid, ZoneDataEntry>();
+        var toAdd = new Dictionary<EntityUid, ZoneContainerEntry>();
 
-        var query = _entityManager.EntityQueryEnumerator<ZonesDataComponent>();
+        var query = _entityManager.EntityQueryEnumerator<ZonesContainerComponent>();
         while (query.MoveNext(out var uid, out var zoneData))
         {
             if (zoneData.Zones.Count <= 0)
@@ -64,8 +64,8 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         _zoneDataEntries = sorted;
     }
 
-    private ZoneDataEntry GetZoneDataEntry(Entity<ZonesDataComponent> entity)
+    private ZoneContainerEntry GetZoneDataEntry(Entity<ZonesContainerComponent> entity)
     {
-        return new ZoneDataEntry(entity);
+        return new ZoneContainerEntry(entity);
     }
 }

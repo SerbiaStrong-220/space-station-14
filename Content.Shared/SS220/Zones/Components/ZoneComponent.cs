@@ -5,8 +5,8 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.Zones.Components;
 
 /// <summary>
-/// The component used to determine the zones located on the <see cref="Parent"/>.
-/// A zone can be used to determine a certain area on the <see cref="Parent"/>
+/// The component used to determine the zones located on the <see cref="Container"/>.
+/// A zone can be used to determine a certain area on the <see cref="Container"/>
 /// in which various events can occur, as well as with entities entering, staying inside, and leaving the zone.
 /// </summary>
 [AutoGenerateComponentState]
@@ -19,7 +19,7 @@ public sealed partial class ZoneComponent : Component
     /// Used to determine local coordinates
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
-    public NetEntity? Parent;
+    public NetEntity? Container;
 
     /// <summary>
     /// Current color of the zone
@@ -34,7 +34,7 @@ public sealed partial class ZoneComponent : Component
     public Color DefaultColor = Color.Red;
 
     /// <summary>
-    /// Boxes in local coordinates (attached to <see cref="Parent"/>) that determine the size of the zone
+    /// Boxes in local coordinates (attached to <see cref="Container"/>) that determine the size of the zone
     /// </summary>
     [ViewVariables, AutoNetworkedField]
     public HashSet<Box2> Boxes = new();

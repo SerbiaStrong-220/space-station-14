@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.Zones.Components;
 [AutoGenerateComponentState]
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(SharedZonesSystem))]
-public sealed partial class ZonesDataComponent : Component
+public sealed partial class ZonesContainerComponent : Component
 {
     [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
     public HashSet<NetEntity> Zones = new();

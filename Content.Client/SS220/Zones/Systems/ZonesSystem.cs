@@ -16,7 +16,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         ControlWindow = new ZonesControlWindow();
 
         SubscribeLocalEvent<ZoneComponent, AfterAutoHandleStateEvent>(OnAfterZoneStateHandled);
-        SubscribeLocalEvent<ZonesDataComponent, AfterAutoHandleStateEvent>(OnAfterZoneDataStateHandled);
+        SubscribeLocalEvent<ZonesContainerComponent, AfterAutoHandleStateEvent>(OnAfterZoneContainerStateHandled);
     }
 
     private void OnAfterZoneStateHandled(Entity<ZoneComponent> entity, ref AfterAutoHandleStateEvent args)
@@ -25,7 +25,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     }
 
 
-    private void OnAfterZoneDataStateHandled(Entity<ZonesDataComponent> entity, ref AfterAutoHandleStateEvent args)
+    private void OnAfterZoneContainerStateHandled(Entity<ZonesContainerComponent> entity, ref AfterAutoHandleStateEvent args)
     {
         ControlWindow.RefreshEntries();
     }

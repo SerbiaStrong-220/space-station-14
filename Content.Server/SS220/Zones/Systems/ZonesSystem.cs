@@ -18,7 +18,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ZonesDataComponent, ComponentShutdown>(OnZoneDataShutdown);
+        SubscribeLocalEvent<ZonesContainerComponent, ComponentShutdown>(OnZonesContainerShutdown);
 
         SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnZoneShutdown);
     }
@@ -34,7 +34,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         }
     }
 
-    private void OnZoneDataShutdown(Entity<ZonesDataComponent> entity, ref ComponentShutdown args)
+    private void OnZonesContainerShutdown(Entity<ZonesContainerComponent> entity, ref ComponentShutdown args)
     {
         foreach (var zone in entity.Comp.Zones)
             DeleteZone(GetEntity(zone));
@@ -49,7 +49,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     /// <param name="boxCoordinates">Contains the coordinates for which the boxes will be created</param>
     /// <param name="boundToGrid">Should the coordinates of the box be bound to the grid</param>
     /// <returns></returns>
-    public Entity<ZoneComponent>? CreateZone(EntityUid parent,
+    public Entity<ZoneComponent>? CreateZone(EntityUid container,
         IEnumerable<(EntityCoordinates, EntityCoordinates)> boxCoordinates,
         bool boundToGrid = false,
         EntProtoId<ZoneComponent>? zoneProto = null)
@@ -59,30 +59,30 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             var p1 = e.Item1;
             var p2 = e.Item2;
 
-            if (p1.EntityId != parent)
-                throw new ArgumentException($"Entity {parent} doesn't contains coordinate {p1}");
+            if (p1.EntityId != container)
+                throw new ArgumentException($"Entity {container} doesn't contains coordinate {p1}");
 
-            if (p2.EntityId != parent)
-                throw new ArgumentException($"Entity {parent} doesn't contains coordinate {p2}");
+            if (p2.EntityId != container)
+                throw new ArgumentException($"Entity {container} doesn't contains coordinate {p2}");
 
             var v1 = new Vector2(p1.X, p1.Y);
             var v2 = new Vector2(p2.X, p2.Y);
             return (v1, v2);
         });
 
-        return CreateZone(parent, vectors, boundToGrid, zoneProto);
+        return CreateZone(container, vectors, boundToGrid, zoneProto);
     }
 
     /// <inheritdoc cref="CreateZone(EntityUid, IEnumerable{Box2}, EntProtoId{ZoneComponent}?)"/>
     /// <param name="boxCoordinates">Contains the coordinates for which the boxes will be created</param>
     /// <param name="boundToGrid">Should the coordinates of the box be bound to the grid</param>
     /// <returns></returns>
-    public Entity<ZoneComponent>? CreateZone(EntityUid parent,
+    public Entity<ZoneComponent>? CreateZone(EntityUid container,
         IEnumerable<(MapCoordinates, MapCoordinates)> boxCoordinates,
         bool boundToGrid = false,
         EntProtoId<ZoneComponent>? zoneProto = null)
     {
-        if (!TryComp<MapComponent>(parent, out var mapComponent))
+        if (!TryComp<MapComponent>(container, out var mapComponent))
             return null;
 
         var vectors = boxCoordinates.Select(e =>
@@ -101,14 +101,14 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             return (v1, v2);
         });
 
-        return CreateZone(parent, vectors, boundToGrid, zoneProto);
+        return CreateZone(container, vectors, boundToGrid, zoneProto);
     }
 
     /// <inheritdoc cref="CreateZone(EntityUid, IEnumerable{Box2}, EntProtoId{ZoneComponent}?)"/>
     /// <param name="vectors">Contains the coordinates for which the boxes will be created</param>
     /// <param name="boundToGrid">Should the coordinates of the box be bound to the grid</param>
     /// <returns></returns>
-    public Entity<ZoneComponent>? CreateZone(EntityUid parent,
+    public Entity<ZoneComponent>? CreateZone(EntityUid container,
         IEnumerable<(Vector2, Vector2)> vectors,
         bool boundToGrid = false,
         EntProtoId<ZoneComponent>? zoneProto = null)
@@ -116,54 +116,54 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (boundToGrid)
         {
             var boxes = vectors.Select(e => GetIntegerBox(e.Item1, e.Item2));
-            return CreateZone(parent, boxes, zoneProto);
+            return CreateZone(container, boxes, zoneProto);
         }
         else
         {
             var boxes = vectors.Select(e => GetBox(e.Item1, e.Item2));
-            return CreateZone(parent, boxes, zoneProto);
+            return CreateZone(container, boxes, zoneProto);
         }
     }
 
     /// <inheritdoc cref="CreateZone(EntityUid, IEnumerable{Box2}, EntProtoId{ZoneComponent}?)"/>
-    public Entity<ZoneComponent>? CreateZone(EntityUid parent, IEnumerable<Box2i> boxes, EntProtoId<ZoneComponent>? zoneProto = null)
+    public Entity<ZoneComponent>? CreateZone(EntityUid container, IEnumerable<Box2i> boxes, EntProtoId<ZoneComponent>? zoneProto = null)
     {
         var array = boxes.Select(b => new Box2(b.BottomLeft, b.TopRight));
-        return CreateZone(parent, array, zoneProto);
+        return CreateZone(container, array, zoneProto);
     }
 
     /// <summary>
     /// Creates a new zone
     /// </summary>
-    public Entity<ZoneComponent>? CreateZone(EntityUid parent, IEnumerable<Box2> boxes, EntProtoId<ZoneComponent>? zoneProto = null)
+    public Entity<ZoneComponent>? CreateZone(EntityUid container, IEnumerable<Box2> boxes, EntProtoId<ZoneComponent>? zoneProto = null)
     {
         var boxesHash = boxes.ToHashSet();
         if (boxesHash.Count <= 0)
             return null;
 
         zoneProto ??= BaseZoneId;
-        var zone = Spawn(zoneProto, Transform(parent).Coordinates);
+        var zone = Spawn(zoneProto, Transform(container).Coordinates);
         _transform.AttachToGridOrMap(zone);
 
         var zoneComp = EnsureComp<ZoneComponent>(zone);
-        zoneComp.Parent = GetNetEntity(parent);
+        zoneComp.Container = GetNetEntity(container);
         zoneComp.Boxes = boxesHash;
         Dirty(zone, zoneComp);
 
-        var zonesData = EnsureComp<ZonesDataComponent>(parent);
-        zonesData.Zones.Add(GetNetEntity(zone));
-        Dirty(parent, zonesData);
+        var zonesContainer = EnsureComp<ZonesContainerComponent>(container);
+        zonesContainer.Zones.Add(GetNetEntity(zone));
+        Dirty(container, zonesContainer);
 
         return (zone, zoneComp);
     }
 
-    /// <inheritdoc cref="DeleteZone(Entity{ZonesDataComponent?}, Entity{ZoneComponent?})"/>
+    /// <inheritdoc cref="DeleteZone(Entity{ZonesContainerComponent?}, Entity{ZoneComponent?})"/>
     public void DeleteZone(Entity<ZoneComponent?> zone)
     {
         if (!Resolve(zone, ref zone.Comp))
             return;
 
-        if (zone.Comp.Parent is not { } parent)
+        if (zone.Comp.Container is not { } parent)
             return;
 
         DeleteZone(GetEntity(parent), zone);
@@ -172,13 +172,13 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     /// <summary>
     /// Deletes the <paramref name="zone"/>
     /// </summary>
-    public void DeleteZone(Entity<ZonesDataComponent?> parent, Entity<ZoneComponent?> zone)
+    public void DeleteZone(Entity<ZonesContainerComponent?> container, Entity<ZoneComponent?> zone)
     {
-        if (!Resolve(parent, ref parent.Comp) ||
+        if (!Resolve(container, ref container.Comp) ||
             !Resolve(zone, ref zone.Comp))
             return;
 
-        parent.Comp.Zones.Remove(GetNetEntity(zone));
+        container.Comp.Zones.Remove(GetNetEntity(zone));
         QueueDel(zone);
     }
 }

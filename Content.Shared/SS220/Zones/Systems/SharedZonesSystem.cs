@@ -72,11 +72,11 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <inheritdoc cref="GetEntitiesInZone(Entity{BroadphaseComponent}, Entity{ZoneComponent})"/>
     public IEnumerable<EntityUid> GetEntitiesInZone(Entity<ZoneComponent> zone)
     {
-        var parent = GetEntity(zone.Comp.Parent);
-        if (!TryComp<BroadphaseComponent>(parent, out var broadphase))
+        var container = GetEntity(zone.Comp.Container);
+        if (!TryComp<BroadphaseComponent>(container, out var broadphase))
             return new HashSet<EntityUid>();
 
-        return GetEntitiesInZone((parent.Value, broadphase), zone);
+        return GetEntitiesInZone((container.Value, broadphase), zone);
     }
 
     /// <summary>
@@ -84,11 +84,11 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// The check is performed at the <see cref="TransformComponent.Coordinates"/> of the entities.
     /// </summary>
     public IEnumerable<EntityUid> GetEntitiesInZone(
-        Entity<BroadphaseComponent> parent,
+        Entity<BroadphaseComponent> container,
         Entity<ZoneComponent> zone)
     {
         HashSet<EntityUid> entities = new();
-        var lookup = parent.Comp;
+        var lookup = container.Comp;
         var state = (entities, zone);
 
         foreach (var box in zone.Comp.Boxes)
@@ -195,7 +195,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <inheritdoc cref="InZone(Entity{ZoneComponent}, Vector2)"/>
     public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point)
     {
-        if (GetEntity(zone.Comp.Parent) != _map.GetMap(point.MapId))
+        if (GetEntity(zone.Comp.Container) != _map.GetMap(point.MapId))
             return false;
 
         return InZone(zone, point.Position);
@@ -204,7 +204,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <inheritdoc cref="InZone(Entity{ZoneComponent}, Vector2)"/>
     public bool InZone(Entity<ZoneComponent> zone, EntityCoordinates point)
     {
-        if (GetEntity(zone.Comp.Parent) != point.EntityId)
+        if (GetEntity(zone.Comp.Container) != point.EntityId)
             return false;
 
         return InZone(zone, point.Position);
@@ -224,34 +224,34 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return false;
     }
 
-    /// <inheritdoc cref="GetZonesByPoint(Entity{ZonesDataComponent}, Vector2)"/>
+    /// <inheritdoc cref="GetZonesByPoint(Entity{ZonesContainerComponent}, Vector2)"/>
     public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapCoordinates point)
     {
         List<Entity<ZoneComponent>> zones = new();
         var uid = _map.GetMap(point.MapId);
-        if (!TryComp<ZonesDataComponent>(uid, out var zonesData))
+        if (!TryComp<ZonesContainerComponent>(uid, out var zonesContainer))
             return zones;
 
-        return GetZonesByPoint((uid, zonesData), point.Position);
+        return GetZonesByPoint((uid, zonesContainer), point.Position);
     }
 
-    /// <inheritdoc cref="GetZonesByPoint(Entity{ZonesDataComponent}, Vector2)"/>
+    /// <inheritdoc cref="GetZonesByPoint(Entity{ZonesContainerComponent}, Vector2)"/>
     public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(EntityCoordinates point)
     {
         List<Entity<ZoneComponent>> zones = new();
-        if (!TryComp<ZonesDataComponent>(point.EntityId, out var zonesData))
+        if (!TryComp<ZonesContainerComponent>(point.EntityId, out var zonesContainer))
             return zones;
 
-        return GetZonesByPoint((point.EntityId, zonesData), point.Position);
+        return GetZonesByPoint((point.EntityId, zonesContainer), point.Position);
     }
 
     /// <summary>
     /// Returns zones containing a <paramref name="point"/>
     /// </summary>
-    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(Entity<ZonesDataComponent> parent, Vector2 point)
+    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(Entity<ZonesContainerComponent> container, Vector2 point)
     {
         List<Entity<ZoneComponent>> zones = new();
-        foreach (var zoneNet in parent.Comp.Zones)
+        foreach (var zoneNet in container.Comp.Zones)
         {
             var zone = GetEntity(zoneNet);
             if (!TryComp<ZoneComponent>(zone, out var zoneComp))

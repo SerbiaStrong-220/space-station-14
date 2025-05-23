@@ -34,7 +34,7 @@ public sealed class ZonesOverlay : Overlay
         drawHandle.UseShader(_shader);
 
         var xforms = _entManager.GetEntityQuery<TransformComponent>();
-        var query = _entManager.EntityQueryEnumerator<ZonesDataComponent>();
+        var query = _entManager.EntityQueryEnumerator<ZonesContainerComponent>();
 
         while (query.MoveNext(out var uid, out var zonesData))
         {
@@ -59,14 +59,14 @@ public sealed class ZonesOverlay : Overlay
         DrawingHandleWorld drawHandle,
         Box2Rotated worldBounds,
         EntityQuery<TransformComponent> xforms,
-        EntityUid parent,
+        EntityUid container,
         Entity<ZoneComponent> zone)
     {
         foreach (var box in zone.Comp.Boxes)
         {
             var texture = _cache.GetTexture("/Textures/Interface/Nano/square.png");
 
-            var xform = xforms.GetComponent(parent);
+            var xform = xforms.GetComponent(container);
             var (_, _, worldMatrix, invWorldMatrix) = _transformSystem.GetWorldPositionRotationMatrixWithInv(xform, xforms);
 
             var bounds = invWorldMatrix.TransformBox(worldBounds).Enlarged(2);

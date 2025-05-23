@@ -9,45 +9,45 @@ using System.Linq;
 namespace Content.Client.SS220.Zones.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class ZoneDataEntry : BoxContainer
+public sealed partial class ZoneContainerEntry : BoxContainer
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
-    public Entity<ZonesDataComponent> ZonesData;
+    public Entity<ZonesContainerComponent> ZonesContainer;
 
     public Dictionary<EntityUid, ZoneEntry> ZoneEntries = new();
 
     private bool _collapsed;
 
-    public ZoneDataEntry(Entity<ZonesDataComponent> entity)
+    public ZoneContainerEntry(Entity<ZonesContainerComponent> entity)
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
-        ZonesData = entity;
+        ZonesContainer = entity;
 
         CollapseButtonTexture.AddStyleClass(OptionButton.StyleClassOptionTriangle);
-        ParentButton.AddStyleClass(ContainerButton.StyleClassButton);
+        ContainerButton.AddStyleClass(ContainerButton.StyleClassButton);
         CollapseButton.OnPressed += _ => ToggleCollapse();
-        ParentBackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(60, 60, 60) };
+        ContainerBackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(60, 60, 60) };
         Refresh();
     }
 
     public void Refresh()
     {
-        ParentIDLabel.Text = ZonesData.Owner.ToString();
+        ContainerIDLabel.Text = ZonesContainer.Owner.ToString();
 
         var name = "Unknown";
-        if (_entityManager.TryGetComponent<MetaDataComponent>(ZonesData, out var meta) &&
+        if (_entityManager.TryGetComponent<MetaDataComponent>(ZonesContainer, out var meta) &&
             !string.IsNullOrEmpty(meta.EntityName) && !string.IsNullOrWhiteSpace(meta.EntityName))
             name = meta.EntityName;
 
-        ParentNameLabel.Text = name;
+        ContainerNameLabel.Text = name;
 
         var toDelete = ZoneEntries.ToDictionary();
         var toAdd = new Dictionary<EntityUid, ZoneEntry>();
 
-        foreach (var netEnt in ZonesData.Comp.Zones)
+        foreach (var netEnt in ZonesContainer.Comp.Zones)
         {
             if (!_entityManager.TryGetEntity(netEnt, out var entity) ||
                 !_entityManager.TryGetComponent<ZoneComponent>(entity, out var zoneComp))
@@ -59,13 +59,13 @@ public sealed partial class ZoneDataEntry : BoxContainer
 
         foreach (var (key, value) in toDelete)
         {
-            ZonesContainer.RemoveChild(value);
+            ZonesBox.RemoveChild(value);
             ZoneEntries.Remove(key);
         }
 
         foreach (var (key, value) in toAdd)
         {
-            ZonesContainer.AddChild(value);
+            ZonesBox.AddChild(value);
             ZoneEntries.Add(key, value);
         }
 
@@ -78,9 +78,9 @@ public sealed partial class ZoneDataEntry : BoxContainer
     public void SortEntries()
     {
         var sorted = ZoneEntries.OrderBy(e => e.Key.Id).ToDictionary();
-        ZonesContainer.RemoveAllChildren();
+        ZonesBox.RemoveAllChildren();
         foreach (var value in sorted.Values)
-            ZonesContainer.AddChild(value);
+            ZonesBox.AddChild(value);
 
         ZoneEntries = sorted;
     }
