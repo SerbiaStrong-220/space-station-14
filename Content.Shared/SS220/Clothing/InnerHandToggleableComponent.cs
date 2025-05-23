@@ -38,9 +38,9 @@ public sealed partial class ToggleableHandInfo
     public EntityUid? InnerItemUid;
 }
 
-/*
+
 [Prototype, AutoGenerateComponentState]
-public sealed partial class ToggleableHandInfoPrototype : IPrototype
+public sealed partial class ToggleableInnerHandPrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = default!;
@@ -50,25 +50,4 @@ public sealed partial class ToggleableHandInfoPrototype : IPrototype
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public EntProtoId Action = "ActionToggleSuitPiece";
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? ActionEntity;
-
-
-    /// <summary>
-    ///     The container that the clothing is stored in when not equipped.
-    /// </summary>
-    [DataField(required: true), AutoNetworkedField]
-    public string ContainerId = "toggleable-clothing";
-
-    [ViewVariables]
-    public ContainerSlot? Container;
-
-    /// <summary>
-    ///     The Id of the piece of clothing that belongs to this component. Required for map-saving if the clothing is
-    ///     currently not inside of the container.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid? InnerItemUid;
 }
-*/

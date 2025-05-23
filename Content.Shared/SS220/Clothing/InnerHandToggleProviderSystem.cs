@@ -2,6 +2,7 @@ using Content.Shared.Actions;
 using Content.Shared.Blocking;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Hands;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 
@@ -30,6 +31,8 @@ public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
         args.Handled = true;
 
         var innerUser = EnsureComp<InnerHandToggleableComponent>(args.User);
+
+        //ToDo_SS220 check if hand id free
     }
 
     private void OnUnequip(Entity<InnerHandToggleProviderComponent> ent, ref GotUnequippedHandEvent args)
