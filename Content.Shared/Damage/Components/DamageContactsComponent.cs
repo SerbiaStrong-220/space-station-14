@@ -34,6 +34,23 @@ public sealed partial class DamageContactsComponent : Component
     public TimeSpan StandStillTime = TimeSpan.Zero;
     //SS220 Add stand still time end
 
+    //SS220 Add check for damager movement begin
+    /// <summary>
+    /// How many seconds entity should stay for starting dealing damage.
+    /// </summary>
+    [DataField]
+    public TimeSpan? StandStillDelay = null;
+
+    public TimeSpan LastMovedTime = TimeSpan.Zero;
+    //SS220 Add check for damager movement end
+
+    //SS220 add stun time
+    /// <summary>
+    /// For how much second we will stun entities which contacted us
+    /// </summary>
+    [DataField]
+    public float? StunTime = null;
+
     //SS220 Add IgnoreResistances datafield begin
     /// <summary>
     /// Should this damage ignore resists
