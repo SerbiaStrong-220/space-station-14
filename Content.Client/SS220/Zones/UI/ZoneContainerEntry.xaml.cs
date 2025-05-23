@@ -17,6 +17,8 @@ public sealed partial class ZoneContainerEntry : BoxContainer
 
     public Dictionary<EntityUid, ZoneEntry> ZoneEntries = new();
 
+    public Action<ZoneEntry>? ZoneEntryToggled;
+
     private bool _collapsed;
 
     public ZoneContainerEntry(Entity<ZonesContainerComponent> entity)
@@ -27,15 +29,15 @@ public sealed partial class ZoneContainerEntry : BoxContainer
         ZonesContainer = entity;
 
         CollapseButtonTexture.AddStyleClass(OptionButton.StyleClassOptionTriangle);
-        ContainerButton.AddStyleClass(ContainerButton.StyleClassButton);
-        CollapseButton.OnPressed += _ => ToggleCollapse();
-        ContainerBackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = new Color(60, 60, 60) };
+        ZoneContainerButton.AddStyleClass(ContainerButton.StyleClassButton);
+        CollapseButton.OnPressed += _ => SetCollapsed(!_collapsed);
+        ContainerBackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#2F2F3B") };
         Refresh();
     }
 
     public void Refresh()
     {
-        ContainerIDLabel.Text = ZonesContainer.Owner.ToString();
+        ContainerIDLabel.Text = _entityManager.GetNetEntity(ZonesContainer).ToString();
 
         var name = "Unknown";
         if (_entityManager.TryGetComponent<MetaDataComponent>(ZonesContainer, out var meta) &&
@@ -54,7 +56,7 @@ public sealed partial class ZoneContainerEntry : BoxContainer
                 continue;
 
             if (!toDelete.Remove(entity.Value))
-                toAdd.Add(entity.Value, new ZoneEntry((entity.Value, zoneComp)));
+                toAdd.Add(entity.Value, GetZoneEntry((entity.Value, zoneComp)));
         }
 
         foreach (var (key, value) in toDelete)
@@ -85,9 +87,63 @@ public sealed partial class ZoneContainerEntry : BoxContainer
         ZoneEntries = sorted;
     }
 
-    public void ToggleCollapse()
+    public void SetCollapsed(bool value)
     {
-        _collapsed = !_collapsed;
-        Collapsible.Visible = !_collapsed;
+        _collapsed = value;
+        CollapsibleBox.Visible = !_collapsed;
+    }
+
+    public void ApplyFilter(string? filter)
+    {
+        if (string.IsNullOrEmpty(filter))
+        {
+            Visible = true;
+            ApplyToZoneEntries(null);
+            return;
+        }
+
+        var containerFiltering = GetFilteringString();
+        if (containerFiltering.Contains(filter))
+        {
+            Visible = true;
+            ApplyToZoneEntries(null);
+            return;
+        }
+
+        Visible = ApplyToZoneEntries(filter);
+
+        bool ApplyToZoneEntries(string? filter)
+        {
+            var isVisible = false;
+            foreach (var entry in ZoneEntries.Values)
+            {
+                if (string.IsNullOrEmpty(filter))
+                {
+                    entry.Visible = true;
+                    continue;
+                }
+
+                var filtering = entry.GetFilteringString();
+                var visible = filtering.Contains(filter);
+                if (visible)
+                    isVisible = true;
+
+                entry.Visible = visible;
+            }
+
+            return isVisible;
+        }
+    }
+
+    public string GetFilteringString()
+    {
+        return $"{ContainerIDLabel.Text} {ContainerNameLabel.Text}";
+    }
+
+    private ZoneEntry GetZoneEntry(Entity<ZoneComponent> entity)
+    {
+        var entry = new ZoneEntry(entity);
+        entry.OnToggled += _ => ZoneEntryToggled?.Invoke(entry);
+        return entry;
     }
 }

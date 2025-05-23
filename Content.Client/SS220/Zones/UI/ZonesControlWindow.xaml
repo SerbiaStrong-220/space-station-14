@@ -6,6 +6,7 @@
             <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                 <LineEdit Name="SearchLineEdit" PlaceHolder="{Loc zones-control-search-line-placeholder}" HorizontalExpand="True"/>
                 <Button Name="RefreshButton" Text="{Loc zones-control-refresh-button}" Access="Public"/>
+                <Button Name="OverlayButton" Text="{Loc zones-control-overlay-button}" Access="Public" ToggleMode="True"/>
             </BoxContainer>
             <PanelContainer Name="ZoneDataPanel" VerticalExpand="True" HorizontalExpand="True">
                 <ScrollContainer>

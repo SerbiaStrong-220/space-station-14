@@ -1,13 +1,12 @@
 <ContainerButton xmlns="https://spacestation14.io"
                  xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
-                 HorizontalExpand="True">
+                 HorizontalExpand="True"
+                 ToggleMode="True">
     <PanelContainer Name="BackgroundPanel" HorizontalExpand="True">
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="5 0">
             <Label Name="IDLabel" MinSize="30 15"/>
-            <customControls:VSeparator Margin="5 0"/>
+            <customControls:VSeparator Margin="10 0"/>
             <Label Name="NameLabel" HorizontalExpand="True" MinSize="50 15"/>
-            <customControls:VSeparator Margin="5 0"/>
-            <Button Name="SelectButton" Text="{Loc zone-entry-select-button}" Access="Public"/>
         </BoxContainer>
     </PanelContainer>
 </ContainerButton>

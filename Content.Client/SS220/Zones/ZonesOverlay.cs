@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.Resources;
+using Content.Client.SS220.Zones.Systems;
 using Content.Shared.SS220.Zones.Components;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
@@ -15,6 +16,7 @@ public sealed class ZonesOverlay : Overlay
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
+    private readonly ZonesSystem _zones;
     private readonly SharedTransformSystem _transformSystem;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
@@ -26,6 +28,7 @@ public sealed class ZonesOverlay : Overlay
         IoCManager.InjectDependencies(this);
         _shader = _proto.Index<ShaderPrototype>("unshaded").Instance();
         _transformSystem = _entManager.System<SharedTransformSystem>();
+        _zones = _entManager.System<ZonesSystem>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -72,7 +75,8 @@ public sealed class ZonesOverlay : Overlay
             var bounds = invWorldMatrix.TransformBox(worldBounds).Enlarged(2);
             drawHandle.SetTransform(worldMatrix);
 
-            var color = (zone.Comp.CurColor ?? zone.Comp.DefaultColor).WithAlpha(0.125f);
+            var alpha = zone == _zones.SelectedZone ? 0.25f : 0.125F;
+            var color = (zone.Comp.CurColor ?? zone.Comp.DefaultColor).WithAlpha(alpha);
             drawHandle.DrawTextureRect(texture, box, color);
         }
     }
