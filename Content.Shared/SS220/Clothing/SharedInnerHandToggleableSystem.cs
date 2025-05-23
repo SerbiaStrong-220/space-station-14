@@ -42,19 +42,19 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         //ent.Comp.Container = _containerSystem.EnsureContainer<ContainerSlot>(ent, ent.Comp.ContainerId);
     }
 
-    public void TryCreateInnerHandSpace(Entity<InnerHandToggleableComponent> ent, EntityUid hidable, Hand hand)
+    public bool TryCreateInnerHandSpace(Entity<InnerHandToggleableComponent> ent, EntityUid hidable, Hand hand)
     {
         int unusedPrefix = SharedBodySystem.PartSlotContainerIdPrefix.Length;
         var name = InnerHandPrefix + hand.Name.Substring(unusedPrefix); ;//add and delete shit
 
         if (ent.Comp.HandsContainers.ContainsKey(name))
-            return;
+            return false;
 
         if (!TryGetInnerHandProto(name, out var proto))
-            return;
+            return false;
 
-        if (proto is null)//Made this shit cause rn idk how to fix it
-            return;
+        if (proto is null)//Made this shit cause rn idk how to be without it
+            return false;
 
         var manager = EnsureComp<ContainerManagerComponent>(ent);
 
@@ -68,12 +68,13 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
 
         //some copypaste from ToggleableClothingSystem
         if (!_actionContainer.EnsureAction(ent, ref handInfo.ActionEntity, out var action, handInfo.Action))
-            return;
+            return false;
 
         _actionsSystem.SetEntityIcon(handInfo.ActionEntity.Value, handInfo.InnerItemUid, action);
         _actionsSystem.AddAction(ent, ref handInfo.ActionEntity, handInfo.Action);//cant add cation without it
 
         ent.Comp.HandsContainers.Add(name, handInfo);
+        return true;
     }
 
     private void OnToggleInnerHand(Entity<InnerHandToggleableComponent> ent, ref ToggleInnerHandEvent args)
@@ -102,7 +103,6 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
             _hand.TryPickup(ent, item.InnerItemUid.Value, SharedBodySystem.PartSlotContainerIdPrefix + args.Hand.Substring(InnerHandPrefix.Length));
         }
     }
-
 
     //i tried to get action based on hand, but idk how to do it rn
     private bool TryGetInnerHandProto(string handName, out InnerHandActionPrototype? proto)
