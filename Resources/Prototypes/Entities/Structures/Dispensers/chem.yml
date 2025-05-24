@@ -11,6 +11,10 @@
     snapCardinals: true
   - type: Storage
     openOnActivate: false
+    #ss220 fix sounds in chem master start
+    storageInsertSound: /Audio/Machines/machine_switch.ogg
+    storageOpenSound: null
+    #ss220 fix sounds in chem master end
     whitelist:
       tags:
       - ChemDispensable

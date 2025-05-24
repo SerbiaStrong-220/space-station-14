@@ -55,6 +55,11 @@ namespace Content.Shared.Chemistry
                 case "50":
                     ReagentDispenserDispenseAmount = ReagentDispenserDispenseAmount.U50;
                     break;
+                //ss220 add 75u for chem master start
+                case "75":
+                    ReagentDispenserDispenseAmount = ReagentDispenserDispenseAmount.U75;
+                    break;
+                //ss220 add 75u for chem master end
                 case "100":
                     ReagentDispenserDispenseAmount = ReagentDispenserDispenseAmount.U100;
                     break;
@@ -105,6 +110,9 @@ namespace Content.Shared.Chemistry
         U25 = 25,
         U30 = 30,
         U50 = 50,
+        //ss220 add 75u for chem master start
+        U75 = 75,
+        //ss220 add 75u for chem master start
         U100 = 100,
     }
 
