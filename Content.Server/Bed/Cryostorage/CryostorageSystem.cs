@@ -33,6 +33,8 @@ using Content.Shared.Roles; // SS220 Cryostorage ghost role fix
 using Robust.Shared.Prototypes; // SS220 Cryostorage ghost role fix
 using Content.Server.SS220.Bed.Cryostorage; // SS220 cryo department record
 using Content.Shared.Forensics.Components; //SS220 Cult_hotfix_4
+using Content.Server.SS220.Containers; //SS220 cryo mobs fix
+
 
 namespace Content.Server.Bed.Cryostorage;
 
@@ -56,6 +58,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!; // SS220 Cryostorage ghost role fix
+    [Dependency] private readonly ContainerEntRemoveSystem _mobEjectSystem = default!; //SS220 Cryo mobs fix
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -174,12 +177,9 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         }
     }
 
-    //SS220-cryo-mobs-fix begin
-    private void DropAll
-    //SS220-cryo-mobs-fix end
-
     public void HandleEnterCryostorage(Entity<CryostorageContainedComponent> ent, NetUserId? userId)
     {
+        _mobEjectSystem.DropAllTargetsFromEntityContainers<MindContainerComponent>(ent.Owner); //SS220-mob-cryo-fix
         var comp = ent.Comp;
         var cryostorageEnt = ent.Comp.Cryostorage;
 
