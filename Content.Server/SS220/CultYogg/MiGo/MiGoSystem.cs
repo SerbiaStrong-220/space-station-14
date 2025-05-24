@@ -47,10 +47,10 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         //actions
         SubscribeLocalEvent<MiGoComponent, MiGoEnslaveDoAfterEvent>(MiGoEnslaveOnDoAfter);
 
-        SubscribeLocalEvent<MiGoComponent, TemperatureDamageIsCancelEvent>(OnTemperatureDamage);
+        SubscribeLocalEvent<MiGoComponent, TemperatureChangeAttemptEvent>(OnTemperatureDamage);
     }
 
-    private void OnTemperatureDamage(Entity<MiGoComponent> ent, ref TemperatureDamageIsCancelEvent args)
+    private void OnTemperatureDamage(Entity<MiGoComponent> ent, ref TemperatureChangeAttemptEvent args)
     {
         if (!ent.Comp.IsPhysicalForm)
             args.Cancel();

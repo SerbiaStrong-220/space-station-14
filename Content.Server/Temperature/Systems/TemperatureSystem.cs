@@ -157,7 +157,7 @@ public sealed class TemperatureSystem : EntitySystem
             return;
 
         //ss220 add resist for temperature start
-        var ev = new TemperatureDamageIsCancelEvent();
+        var ev = new TemperatureChangeAttemptEvent();
         RaiseLocalEvent(uid, ev);
 
         if (ev.Cancelled)
