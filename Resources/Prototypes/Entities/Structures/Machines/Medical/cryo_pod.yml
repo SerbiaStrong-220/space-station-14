@@ -87,7 +87,9 @@
         whitelist:
           components:
             - FitsInDispenser
-  - type: ItemToggle
+  #ss220 fix interact with 'E' start
+  #- type: ItemToggle
+  #ss220 fix interact with 'E' end
   - type: HealthAnalyzer
     scanDelay: 0
   - type: UserInterface

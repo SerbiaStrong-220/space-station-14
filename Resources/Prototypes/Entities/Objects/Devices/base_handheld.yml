@@ -4,8 +4,10 @@
   id: BaseHandheldComputer
   components:
   - type: ActivatableUIRequiresPowerCell
-  - type: ItemToggle
-    onUse: false # above component does the toggling
+  #ss220 fix interact with 'E' start
+  #- type: ItemToggle
+  #  onUse: false # above component does the toggling
+  #ss220 fix interact with 'E' end
   - type: PowerCellDraw
     drawRate: 0
     useRate: 20
