@@ -14,6 +14,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Physics.Events;
 using Content.Shared.Projectiles;
+using Content.Shared.SS220.Temperature;
 
 namespace Content.Server.Temperature.Systems;
 
@@ -154,6 +155,14 @@ public sealed class TemperatureSystem : EntitySystem
 
         if (transform.MapUid == null)
             return;
+
+        //ss220
+        var ev = new TemperatureDamageIsCancelEvent();
+        RaiseLocalEvent(uid, ev);
+
+        if (ev.Cancelled)
+            return;
+        //ss220
 
         var temperatureDelta = args.GasMixture.Temperature - temperature.CurrentTemperature;
         var airHeatCapacity = _atmosphere.GetHeatCapacity(args.GasMixture, false);
