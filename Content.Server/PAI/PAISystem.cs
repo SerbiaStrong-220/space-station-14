@@ -45,7 +45,7 @@ public sealed class PAISystem : SharedPAISystem
         SubscribeLocalEvent<PAIComponent, BeingMicrowavedEvent>(OnMicrowaved);
 
         SubscribeLocalEvent<PAIComponent, PAIShopActionEvent>(OnShop);
-        SubscribeLocalEvent<PAIComponent, GetInsteadIdCardNameEvent>(OnGetPaiName); // SS220 Borgs-Id-fix
+        SubscribeLocalEvent<PAIComponent, GetInsteadIdCardNameEvent>(OnGetPaiName); // SS220 PAI-job-id-fix
     }
 
     private void OnUseInHand(EntityUid uid, PAIComponent component, UseInHandEvent args)
