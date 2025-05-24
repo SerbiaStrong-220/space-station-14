@@ -60,6 +60,9 @@ public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
             return;
 
         args.Handled = true;
+
+        if (!TryRemoveToggle(ent, ""))
+            return;
     }
 
     private bool TryRemoveToggle(Entity<InnerHandToggleProviderComponent> ent, string newContainerName)
