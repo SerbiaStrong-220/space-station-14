@@ -2,7 +2,6 @@
 
 using Robust.Shared.GameStates;
 using Content.Shared.Actions;
-using Content.Shared.Hands.Components;
 
 namespace Content.Shared.SS220.Clothing;
 
@@ -24,7 +23,7 @@ public sealed partial class InnerHandToggleProviderComponent : Component
 public sealed partial class ToggleInnerHandEvent : InstantActionEvent
 {
     [DataField(required: true)]
-    public string Hand = "middle";
+    public string Hand;
 }
 
 public sealed class ProvideToggleInnerHandEvent(Entity<InnerHandToggleProviderComponent> hidable, string hand) : HandledEntityEventArgs

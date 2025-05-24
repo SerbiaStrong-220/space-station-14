@@ -5,7 +5,6 @@ using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Robust.Shared.Containers;
 
-
 namespace Content.Shared.SS220.Clothing;
 
 /// <summary>
@@ -36,36 +35,21 @@ public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
         if (ent.Comp.ContainerName != null)
             return;
 
-        var inner = EnsureComp<InnerHandToggleableComponent>(args.User);
+        EnsureComp<InnerHandToggleableComponent>(args.User);
 
         var ev = new ProvideToggleInnerHandEvent(ent, args.Hand.Name);
         RaiseLocalEvent(args.User, ev);
     }
     private void OnEntInserted(Entity<InnerHandToggleProviderComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
-        var name = args.Container.ID;
-        if (ent.Comp.InnerUser is null)
+        var newContainerName = args.Container.ID;
+
+        if (!TryRemoveToggle(ent, newContainerName))
             return;
 
-        if (ent.Comp.ContainerName is null)
-            return;
-
-        if (ent.Comp.HandName == name)
-            return;
-
-        if (ent.Comp.ContainerName == name)
-            return;
-
-        var remEv = new RemoveToggleInnerHandEvent(ent, ent.Comp.ContainerName);
-        RaiseLocalEvent(ent.Comp.InnerUser.Value, remEv);
-
-        ent.Comp.ContainerName = null;
-        ent.Comp.HandName = null;
-        ent.Comp.InnerUser = null;
-
-        if (name.Contains(SharedBodySystem.PartSlotContainerIdPrefix)) //handle hand to hand movement
+        if (newContainerName.Contains(SharedBodySystem.PartSlotContainerIdPrefix)) //handle hand to hand movement
         {
-            var provEv = new ProvideToggleInnerHandEvent(ent, name);
+            var provEv = new ProvideToggleInnerHandEvent(ent, newContainerName);
             RaiseLocalEvent(args.Container.Owner, provEv);
         }
     }
@@ -76,5 +60,29 @@ public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
             return;
 
         args.Handled = true;
+    }
+
+    private bool TryRemoveToggle(Entity<InnerHandToggleProviderComponent> ent, string newContainerName)
+    {
+        if (ent.Comp.InnerUser is null)
+            return false;
+
+        if (ent.Comp.ContainerName is null)
+            return false;
+
+        if (ent.Comp.HandName == newContainerName)
+            return false;
+
+        if (ent.Comp.ContainerName == newContainerName)
+            return false;
+
+        var remEv = new RemoveToggleInnerHandEvent(ent, ent.Comp.ContainerName);
+        RaiseLocalEvent(ent.Comp.InnerUser.Value, remEv);
+
+        ent.Comp.ContainerName = null;
+        ent.Comp.HandName = null;
+        ent.Comp.InnerUser = null;
+
+        return true;
     }
 }
