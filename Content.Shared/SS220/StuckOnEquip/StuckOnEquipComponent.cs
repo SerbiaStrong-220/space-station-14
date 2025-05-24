@@ -17,4 +17,9 @@ public sealed partial class StuckOnEquipComponent : Component
     /// </summary>
     [DataField]
     public bool ShouldDropOnDeath = true;
+
+    /// <summary>
+    /// </summary>
+    [ViewVariables]
+    public bool IsStuck = false;
 }

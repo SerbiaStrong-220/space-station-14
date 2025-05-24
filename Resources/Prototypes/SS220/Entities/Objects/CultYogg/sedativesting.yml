@@ -3,7 +3,7 @@
 - type: entity
   name: sedative sting
   #parent: [BaseItem, CultYoggRestrictedItem]
-  parent: BaseItem
+  parent: BaseItem #ToDo_SS220 del this after tests
   id: SedativeStingCultYogg
   suffix: CultYogg
   components:
@@ -23,7 +23,7 @@
   - type: SedativeSting
     transferAmount: 10
   - type: StuckOnEquip
-  #  inHandItem: true
+    inHandItem: true
   - type: InnerHandToggleProvider
   - type: Tag
     tags:
