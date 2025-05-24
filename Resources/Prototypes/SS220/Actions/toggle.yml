@@ -7,6 +7,8 @@
   components:
   - type: InstantAction
     itemIconStyle: BigItem
+    icon: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: L_in }
+    iconOn: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: L_out }
     useDelay: 1 # equip noise spam.
     event: !type:ToggleInnerHandEvent
       hand: inner_left hand
@@ -18,6 +20,8 @@
   components:
   - type: InstantAction
     itemIconStyle: BigItem
+    icon: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: R_in }
+    iconOn: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: R_out }
     useDelay: 1 # equip noise spam.
     event: !type:ToggleInnerHandEvent
       hand: inner_right hand

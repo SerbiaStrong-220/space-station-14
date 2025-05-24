@@ -11,8 +11,6 @@ namespace Content.Shared.SS220.Clothing;
 /// </summary>
 public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-
     public override void Initialize()
     {
         base.Initialize();

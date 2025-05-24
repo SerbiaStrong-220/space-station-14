@@ -96,18 +96,19 @@ public sealed class InnerHandToggleableSystem : EntitySystem
 
         args.Handled = true;
 
-        if (!ent.Comp.HandsContainers.TryGetValue(args.Hand, out var item))
+        if (!ent.Comp.HandsContainers.TryGetValue(args.Hand, out var handInfo))
             return;
 
-        if (item.Container is null)
+        if (handInfo.Container is null)
             return;
 
-        if (item.InnerItemUid is null)
+        if (handInfo.InnerItemUid is null)
             return;
 
-        if (item.Container.ContainedEntity != null)
+        if (handInfo.Container.ContainedEntity != null)
         {
-            _hand.TryPickup(ent, item.InnerItemUid.Value, SharedBodySystem.PartSlotContainerIdPrefix + args.Hand.Substring(InnerHandPrefix.Length));
+            _hand.TryPickup(ent, handInfo.InnerItemUid.Value, SharedBodySystem.PartSlotContainerIdPrefix + args.Hand.Substring(InnerHandPrefix.Length));
+            _actionsSystem.SetToggled(handInfo.ActionEntity, false);
             return;
         }
 
@@ -120,7 +121,8 @@ public sealed class InnerHandToggleableSystem : EntitySystem
         }
         else
         */
-        _containerSystem.Insert(item.InnerItemUid.Value, item.Container, force: false);
+        _containerSystem.Insert(handInfo.InnerItemUid.Value, handInfo.Container, force: false);
+        _actionsSystem.SetToggled(handInfo.ActionEntity, true);
 
     }
 

@@ -19,7 +19,7 @@ public sealed partial class ToggleableHandInfo
     ///     Action used to toggle the clothing on or off.
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
-    public EntProtoId Action = "ActionToggleInnerHand";// based on ActionToggleSuitPiece
+    public EntProtoId Action;
 
     [DataField, AutoNetworkedField]
     public EntityUid? ActionEntity;
@@ -48,5 +48,5 @@ public sealed partial class InnerHandActionPrototype : IPrototype
     ///     Action used to toggle the clothing on or off.
     /// </summary
     [DataField(required: true)]
-    public EntProtoId Action = "ActionToggleSuitPiece";
+    public EntProtoId Action;
 }
