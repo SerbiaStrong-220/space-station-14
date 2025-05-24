@@ -157,8 +157,7 @@ public sealed class PAISystem : SharedPAISystem
     // SS220 PAI-job-id-fix start
     public void OnGetPaiName(EntityUid uid, PAIComponent comp, ref GetInsteadIdCardNameEvent args)
     {
-        args.Name = $"\\[{Loc.GetString("pai-system-role-name")}\\] ";
-        return;
+        args.Name = Loc.GetString("pai-system-role-name");
     }
     // SS220 PAI-job-id-fix end
 }

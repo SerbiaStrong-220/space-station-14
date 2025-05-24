@@ -285,7 +285,9 @@ public sealed class RadioSystem : EntitySystem
         RaiseLocalEvent(senderUid, ev);
 
         if (ev.Name != null)
-            return ev.Name;
+        {
+            return $"\\[{Loc.GetString(ev.Name)}\\] ";
+        }
         else
             return string.Empty;
         // SS220 Borgs-Id-fix end
