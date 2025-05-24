@@ -1,8 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Body.Systems;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Robust.Shared.Containers;
+
 
 namespace Content.Shared.SS220.Clothing;
 
@@ -10,7 +12,6 @@ namespace Content.Shared.SS220.Clothing;
 /// </summary>
 public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
 {
-    [Dependency] private readonly SharedInnerHandToggleableSystem _innerHand = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
@@ -37,29 +38,36 @@ public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
 
         var inner = EnsureComp<InnerHandToggleableComponent>(args.User);
 
-        var ev = new ProvideToggleInnerHandEvent(ent, args.Hand);
+        var ev = new ProvideToggleInnerHandEvent(ent, args.Hand.Name);
         RaiseLocalEvent(args.User, ev);
     }
     private void OnEntInserted(Entity<InnerHandToggleProviderComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
+        var name = args.Container.ID;
         if (ent.Comp.InnerUser is null)
             return;
 
         if (ent.Comp.ContainerName is null)
             return;
 
-        if (ent.Comp.HandName == args.Container.ID)
+        if (ent.Comp.HandName == name)
             return;
 
-        if (ent.Comp.ContainerName == args.Container.ID)
+        if (ent.Comp.ContainerName == name)
             return;
 
-        var ev = new RemoveToggleInnerHandEvent(ent, ent.Comp.ContainerName);
-        RaiseLocalEvent(ent.Comp.InnerUser.Value, ev);
+        var remEv = new RemoveToggleInnerHandEvent(ent, ent.Comp.ContainerName);
+        RaiseLocalEvent(ent.Comp.InnerUser.Value, remEv);
 
         ent.Comp.ContainerName = null;
         ent.Comp.HandName = null;
         ent.Comp.InnerUser = null;
+
+        if (name.Contains(SharedBodySystem.PartSlotContainerIdPrefix)) //handle hand to hand movement
+        {
+            var provEv = new ProvideToggleInnerHandEvent(ent, name);
+            RaiseLocalEvent(args.Container.Owner, provEv);
+        }
     }
 
     private void OnDrop(Entity<InnerHandToggleProviderComponent> ent, ref DroppedEvent args)

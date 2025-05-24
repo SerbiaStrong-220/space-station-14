@@ -8,8 +8,9 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
+using Content.Shared.SS220.Clothing;
 
-namespace Content.Shared.SS220.Clothing;
+namespace Content.Server.SS220.Clothing;
 
 /// <summary>
 /// Handles adding and using a toggle action for <see cref="ToggleClothingComponent"/>.
@@ -44,7 +45,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         args.Handled = true;
 
         int unusedPrefix = SharedBodySystem.PartSlotContainerIdPrefix.Length;
-        var name = string.Concat(InnerHandPrefix, args.Hand.Name.AsSpan(unusedPrefix)); ;//add and delete shit
+        var name = string.Concat(InnerHandPrefix, args.Hand.AsSpan(unusedPrefix)); ;//add and delete shit
 
         if (ent.Comp.HandsContainers.ContainsKey(name))
             return;
@@ -76,7 +77,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
 
         args.Hidable.Comp.ContainerName = name;
         args.Hidable.Comp.InnerUser = ent;
-        args.Hidable.Comp.HandName = args.Hand.Name;
+        args.Hidable.Comp.HandName = args.Hand;
     }
 
     private void OnRemoveInnerHand(Entity<InnerHandToggleableComponent> ent, ref RemoveToggleInnerHandEvent args)
@@ -114,6 +115,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
             return;
         }
 
+        /*
         if (TryComp<UnremoveableComponent>(item.InnerItemUid.Value, out var uremovable) && uremovable.LockToHands)//wierd construction idk how to rewrite it
         {
             uremovable.LockToHands = false;
@@ -121,7 +123,8 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
             uremovable.LockToHands = true;
         }
         else
-            _containerSystem.Insert(item.InnerItemUid.Value, item.Container);
+        */
+        _containerSystem.Insert(item.InnerItemUid.Value, item.Container, force: false);
 
     }
 
@@ -140,21 +143,4 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         }
         return false;
     }
-}
-
-public sealed partial class ToggleInnerHandEvent : InstantActionEvent
-{
-    [DataField(required: true)]
-    public string Hand = "middle";
-}
-
-public sealed class ProvideToggleInnerHandEvent(Entity<InnerHandToggleProviderComponent> hidable, Hand hand) : HandledEntityEventArgs
-{
-    public Entity<InnerHandToggleProviderComponent> Hidable = hidable;
-    public Hand Hand = hand;
-}
-public sealed class RemoveToggleInnerHandEvent(Entity<InnerHandToggleProviderComponent> hidable, string handContainer) : HandledEntityEventArgs
-{
-    public Entity<InnerHandToggleProviderComponent> Hidable = hidable;
-    public string HandContainer = handContainer;
 }
