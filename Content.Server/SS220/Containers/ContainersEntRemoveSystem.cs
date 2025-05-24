@@ -44,8 +44,7 @@ public sealed class ContainerEntRemoveSystem : EntitySystem
 
         if (!TryComp<HandsComponent>(uid, out var hands))
             return;
-        if (hands.ActiveHand == null)
-            return;
+
         foreach (var held in _hands.EnumerateHeld(uid, hands))
         {
             if (HasComp<T>(held))
