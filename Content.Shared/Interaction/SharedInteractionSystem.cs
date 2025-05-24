@@ -196,19 +196,19 @@ namespace Content.Shared.Interaction
         //SS220 Unremoveable-No-Hands begin
         private bool IsHeld(EntityUid uid, UnremoveableComponent item)
         {
-            if (!item.LockToHands)
+            if (item.LockToHands)
+                return false;
+
+            if (!_containerSystem.TryGetContainingContainer((uid, null, null), out var container))
+                return false;
+
+            if (!TryComp<HandsComponent>(container.Owner, out var handsComp))
+                return false;
+
+            foreach (var hand in handsComp.Hands.Values)
             {
-                if (_containerSystem.TryGetContainingContainer(uid, out var container))
-                {
-                    if (TryComp<HandsComponent>(container.Owner, out var handsComp))
-                    {
-                        foreach (var hand in handsComp.Hands.Values)
-                        {
-                            if (hand.HeldEntity == uid)
-                                return true;
-                        }
-                    }
-                }
+                if (hand.HeldEntity == uid)
+                    return true;
             }
 
             return false;

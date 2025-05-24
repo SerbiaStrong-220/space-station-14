@@ -1,12 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-
 using Content.Shared.Actions;
 using Content.Shared.Body.Systems;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Inventory;
+using Content.Shared.Interaction.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
@@ -25,7 +24,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
 
 
     /// <summary>
-    /// Postfix for any inner hand.
+    /// Prefix for any inner hand.
     /// </summary>
     public const string InnerHandPrefix = "inner_";
 
@@ -33,28 +32,28 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InnerHandToggleableComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<InnerHandToggleableComponent, ToggleInnerHandEvent>(OnToggleInnerHand);
+        SubscribeLocalEvent<InnerHandToggleableComponent, ProvideToggleInnerHandEvent>(OnProvideInnerHand);
+        SubscribeLocalEvent<InnerHandToggleableComponent, RemoveToggleInnerHandEvent>(OnRemoveInnerHand);
     }
-
-    private void OnInit(Entity<InnerHandToggleableComponent> ent, ref ComponentInit args)
+    private void OnProvideInnerHand(Entity<InnerHandToggleableComponent> ent, ref ProvideToggleInnerHandEvent args)
     {
-        //ent.Comp.Container = _containerSystem.EnsureContainer<ContainerSlot>(ent, ent.Comp.ContainerId);
-    }
+        if (args.Handled)
+            return;
 
-    public bool TryCreateInnerHandSpace(Entity<InnerHandToggleableComponent> ent, EntityUid hidable, Hand hand)
-    {
+        args.Handled = true;
+
         int unusedPrefix = SharedBodySystem.PartSlotContainerIdPrefix.Length;
-        var name = InnerHandPrefix + hand.Name.Substring(unusedPrefix); ;//add and delete shit
+        var name = string.Concat(InnerHandPrefix, args.Hand.Name.AsSpan(unusedPrefix)); ;//add and delete shit
 
         if (ent.Comp.HandsContainers.ContainsKey(name))
-            return false;
+            return;
 
         if (!TryGetInnerHandProto(name, out var proto))
-            return false;
+            return;
 
         if (proto is null)//Made this shit cause rn idk how to be without it
-            return false;
+            return;
 
         var manager = EnsureComp<ContainerManagerComponent>(ent);
 
@@ -63,18 +62,34 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
             Action = proto.Action,
             Container = _containerSystem.EnsureContainer<ContainerSlot>(ent, name, manager),
             ContainerId = name,
-            InnerItemUid = hidable
+            InnerItemUid = args.Hidable
         };
 
         //some copypaste from ToggleableClothingSystem
         if (!_actionContainer.EnsureAction(ent, ref handInfo.ActionEntity, out var action, handInfo.Action))
-            return false;
+            return;
 
         _actionsSystem.SetEntityIcon(handInfo.ActionEntity.Value, handInfo.InnerItemUid, action);
         _actionsSystem.AddAction(ent, ref handInfo.ActionEntity, handInfo.Action);//cant add cation without it
 
         ent.Comp.HandsContainers.Add(name, handInfo);
-        return true;
+
+        args.Hidable.Comp.ContainerName = name;
+        args.Hidable.Comp.InnerUser = ent;
+        args.Hidable.Comp.HandName = args.Hand.Name;
+    }
+
+    private void OnRemoveInnerHand(Entity<InnerHandToggleableComponent> ent, ref RemoveToggleInnerHandEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
+        var handInfo = ent.Comp.HandsContainers[args.HandContainer];
+        _actionsSystem.RemoveAction(handInfo.ActionEntity);
+        ent.Comp.HandsContainers.Remove(args.HandContainer);
+        //I didn't find how to delete containers and I'm not sure if it's necessary
     }
 
     private void OnToggleInnerHand(Entity<InnerHandToggleableComponent> ent, ref ToggleInnerHandEvent args)
@@ -93,15 +108,21 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         if (item.InnerItemUid is null)
             return;
 
-        if (item.Container.ContainedEntity == null)
-        {
-            //_hand.TryDrop(ent, item.InnerItemUid.Value);
-            _containerSystem.Insert(item.InnerItemUid.Value, item.Container);
-        }
-        else
+        if (item.Container.ContainedEntity != null)
         {
             _hand.TryPickup(ent, item.InnerItemUid.Value, SharedBodySystem.PartSlotContainerIdPrefix + args.Hand.Substring(InnerHandPrefix.Length));
+            return;
         }
+
+        if (TryComp<UnremoveableComponent>(item.InnerItemUid.Value, out var uremovable) && uremovable.LockToHands)//wierd construction idk how to rewrite it
+        {
+            uremovable.LockToHands = false;
+            _containerSystem.Insert(item.InnerItemUid.Value, item.Container);
+            uremovable.LockToHands = true;
+        }
+        else
+            _containerSystem.Insert(item.InnerItemUid.Value, item.Container);
+
     }
 
     //i tried to get action based on hand, but idk how to do it rn
@@ -121,9 +142,19 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
     }
 }
 
-
 public sealed partial class ToggleInnerHandEvent : InstantActionEvent
 {
     [DataField(required: true)]
     public string Hand = "middle";
+}
+
+public sealed class ProvideToggleInnerHandEvent(Entity<InnerHandToggleProviderComponent> hidable, Hand hand) : HandledEntityEventArgs
+{
+    public Entity<InnerHandToggleProviderComponent> Hidable = hidable;
+    public Hand Hand = hand;
+}
+public sealed class RemoveToggleInnerHandEvent(Entity<InnerHandToggleProviderComponent> hidable, string handContainer) : HandledEntityEventArgs
+{
+    public Entity<InnerHandToggleProviderComponent> Hidable = hidable;
+    public string HandContainer = handContainer;
 }

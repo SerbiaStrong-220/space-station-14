@@ -2,6 +2,7 @@
 
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
+using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.Clothing;
 
@@ -10,35 +11,55 @@ namespace Content.Shared.SS220.Clothing;
 public sealed class InnerHandToggleProviderSystemSystem : EntitySystem
 {
     [Dependency] private readonly SharedInnerHandToggleableSystem _innerHand = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InnerHandToggleProviderComponent, GotEquippedHandEvent>(OnEquip);
-        SubscribeLocalEvent<InnerHandToggleProviderComponent, GotUnequippedHandEvent>(OnUnequip);
+        SubscribeLocalEvent<InnerHandToggleProviderComponent, GotEquippedHandEvent>(OnHandEquip);
+        SubscribeLocalEvent<InnerHandToggleProviderComponent, EntGotInsertedIntoContainerMessage>(OnEntInserted);
         SubscribeLocalEvent<InnerHandToggleProviderComponent, DroppedEvent>(OnDrop);
     }
 
-    private void OnEquip(Entity<InnerHandToggleProviderComponent> ent, ref GotEquippedHandEvent args)
+    private void OnHandEquip(Entity<InnerHandToggleProviderComponent> ent, ref GotEquippedHandEvent args)
     {
         if (args.Handled)
             return;
 
         args.Handled = true;
+
+        if (ent.Comp.InnerUser != null)
+            return;
+
+        if (ent.Comp.ContainerName != null)
+            return;
 
         var inner = EnsureComp<InnerHandToggleableComponent>(args.User);
 
-        _innerHand.TryCreateInnerHandSpace((args.User, inner), ent, args.Hand);
+        var ev = new ProvideToggleInnerHandEvent(ent, args.Hand);
+        RaiseLocalEvent(args.User, ev);
     }
-
-    private void OnUnequip(Entity<InnerHandToggleProviderComponent> ent, ref GotUnequippedHandEvent args)
+    private void OnEntInserted(Entity<InnerHandToggleProviderComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
-        if (args.Handled)
+        if (ent.Comp.InnerUser is null)
             return;
 
-        args.Handled = true;
+        if (ent.Comp.ContainerName is null)
+            return;
 
+        if (ent.Comp.HandName == args.Container.ID)
+            return;
+
+        if (ent.Comp.ContainerName == args.Container.ID)
+            return;
+
+        var ev = new RemoveToggleInnerHandEvent(ent, ent.Comp.ContainerName);
+        RaiseLocalEvent(ent.Comp.InnerUser.Value, ev);
+
+        ent.Comp.ContainerName = null;
+        ent.Comp.HandName = null;
+        ent.Comp.InnerUser = null;
     }
 
     private void OnDrop(Entity<InnerHandToggleProviderComponent> ent, ref DroppedEvent args)
