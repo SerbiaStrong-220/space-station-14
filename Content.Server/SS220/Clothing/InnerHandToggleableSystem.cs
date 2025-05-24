@@ -17,11 +17,11 @@ public sealed class InnerHandToggleableSystem : SharedInnerHandToggleableSystem
     /// <summary>
     /// Prefix for any inner hand.
     /// </summary>
-    public const string InnerHandPrefix = "inner_";
+
 
     public override void Initialize()
     {
         base.Initialize();
     }
- 
+
 }

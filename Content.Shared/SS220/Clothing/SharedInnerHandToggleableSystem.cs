@@ -110,8 +110,8 @@ public abstract class SharedInnerHandToggleableSystem : EntitySystem
             return;
         }
 
-        if (TryComp<StuckOnEquipComponent>(ent, out var stuckOnEquip))
-            _stuckOnEquip.UnstuckItem((ent, stuckOnEquip));
+        if (TryComp<StuckOnEquipComponent>(handInfo.InnerItemUid.Value, out var stuckOnEquip))
+            _stuckOnEquip.UnstuckItem((handInfo.InnerItemUid.Value, stuckOnEquip));
 
         _containerSystem.Insert(handInfo.InnerItemUid.Value, handInfo.Container, force: false);
         _actionsSystem.SetToggled(handInfo.ActionEntity, true);

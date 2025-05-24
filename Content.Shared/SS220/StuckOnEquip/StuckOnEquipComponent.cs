@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.StuckOnEquip;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class StuckOnEquipComponent : Component
 {
     /// <summary>
@@ -20,6 +20,6 @@ public sealed partial class StuckOnEquipComponent : Component
 
     /// <summary>
     /// </summary>
-    [ViewVariables]
+    [ViewVariables, AutoNetworkedField]
     public bool IsStuck = false;
 }
