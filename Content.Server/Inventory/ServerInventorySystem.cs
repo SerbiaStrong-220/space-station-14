@@ -53,10 +53,8 @@ namespace Content.Server.Inventory
             string idCardName = Loc.GetString("chat-radio-no-id");
             idCardName = textInfo.ToTitleCase(idCardName);
             // Проверка слота
-            if (TryGetSlotEntity(uid, "id", out var idUid))
+            if (TryGetSlotEntity(uid, "id", out var idUid) && _sharedIdCard.TryGetIdCard(idUid.Value, out idCard))
             {
-                _sharedIdCard.TryGetIdCard(idUid.Value, out idCard);
-
                 idCardName = idCard.Comp.LocalizedJobTitle ?? idCardName;
                 idCardName = textInfo.ToTitleCase(idCardName);
                 args.Name = $"\\[{idCardName}\\] ";
