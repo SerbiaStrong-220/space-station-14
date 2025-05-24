@@ -249,8 +249,10 @@ namespace Content.Shared.Interaction
         /// </summary>
         private void OnUnequip(EntityUid uid, UnremoveableComponent item, GotUnequippedEvent args)
         {
+            //SS220 Unremoveable-No-Hands begin
             if (!item.LockToHands)
                 return;
+            //SS220 Unremoveable-No-Hands end
 
             if (!item.DeleteOnDrop)
                 RemCompDeferred<UnremoveableComponent>(uid);
@@ -260,8 +262,10 @@ namespace Content.Shared.Interaction
 
         private void OnUnequipHand(EntityUid uid, UnremoveableComponent item, GotUnequippedHandEvent args)
         {
+            //SS220 Unremoveable-No-Hands begin
             if (!item.LockToHands)
                 return;
+            //SS220 Unremoveable-No-Hands end
 
             if (!item.DeleteOnDrop)
                 RemCompDeferred<UnremoveableComponent>(uid);
@@ -271,8 +275,10 @@ namespace Content.Shared.Interaction
 
         private void OnDropped(EntityUid uid, UnremoveableComponent item, DroppedEvent args)
         {
+            //SS220 Unremoveable-No-Hands begin
             if (!item.LockToHands)
                 return;
+            //SS220 Unremoveable-No-Hands end
 
             if (!item.DeleteOnDrop)
                 RemCompDeferred<UnremoveableComponent>(uid);

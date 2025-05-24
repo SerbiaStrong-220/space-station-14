@@ -18,22 +18,22 @@ public sealed partial class ToggleableHandInfo
     /// <summary>
     ///     Action used to toggle the clothing on or off.
     /// </summary>
-    [DataField(required: true), AutoNetworkedField]
+    [ViewVariables]
     public EntProtoId Action;
 
-    [DataField, AutoNetworkedField]
+    [ViewVariables]
     public EntityUid? ActionEntity;
 
     /// <summary>
     ///     The container that the clothing is stored in when not equipped.
     /// </summary>
-    [DataField(required: true), AutoNetworkedField]
+    [ViewVariables]
     public string ContainerId = "inner-toggleable";
 
     [ViewVariables]
     public ContainerSlot? Container;
 
-    [DataField, AutoNetworkedField]
+    [ViewVariables]
     public EntityUid? InnerItemUid;
 }
 
