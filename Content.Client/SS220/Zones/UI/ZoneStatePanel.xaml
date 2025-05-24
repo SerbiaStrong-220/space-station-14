@@ -1,0 +1,38 @@
+<PanelContainer xmlns="https://spacestation14.io"
+                HorizontalExpand="True"
+                VerticalExpand="True"
+                MinSize="250 200">
+    <BoxContainer Orientation="Vertical" Margin="5" VerticalAlignment="Top" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <Label Text="{Loc zone-state-box-name-label}" />
+            <LineEdit Name="NameLineEdit" HorizontalExpand="True"/>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <Label Text="{Loc zone-state-box-prototype-id-label}" />
+            <LineEdit Name="PrototypeIDLineEdit" HorizontalExpand="True"/>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <Label Text="{Loc zone-state-box-hex-color-label}" />
+            <LineEdit Name="HexColorLineEdit" HorizontalExpand="True"/>
+        </BoxContainer>
+        <Collapsible Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" MaxHeight="160">
+            <CollapsibleHeading Title="{Loc zone-state-box-size-options-heading}" HorizontalExpand="True"/>
+            <CollapsibleBody HorizontalExpand="True" VerticalExpand="True">
+                <PanelContainer Name="SizeOptionsBackground" HorizontalExpand="True" VerticalExpand="True">
+                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                            <Label Text="{Loc zone-state-box-container-net-id-label}" />
+                            <LineEdit Name="ContainerNetIDLineEdit" HorizontalExpand="True"/>
+                        </BoxContainer>
+                        <PanelContainer Name="Box2ListBackground" HorizontalExpand="True" VerticalExpand="True" MinHeight="100">
+                            <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+                                <BoxContainer Name="Box2ListContainer"  Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                                </BoxContainer>
+                            </ScrollContainer>
+                        </PanelContainer>
+                    </BoxContainer>
+                </PanelContainer>
+            </CollapsibleBody>
+        </Collapsible>
+    </BoxContainer>
+</PanelContainer>

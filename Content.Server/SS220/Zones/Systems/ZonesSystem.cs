@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Server.SS220.Zones.Commands;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
@@ -36,8 +37,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     private void OnZonesContainerShutdown(Entity<ZonesContainerComponent> entity, ref ComponentShutdown args)
     {
-        foreach (var zone in entity.Comp.Zones)
-            DeleteZone(GetEntity(zone));
+        ClearZonesContainer(entity);
     }
 
     private void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
@@ -180,5 +180,17 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
         container.Comp.Zones.Remove(GetNetEntity(zone));
         QueueDel(zone);
+    }
+
+    public void ClearZonesContainer(Entity<ZonesContainerComponent> container)
+    {
+        foreach (var zone in container.Comp.Zones)
+            DeleteZone(GetEntity(zone));
+    }
+
+    public void DeleteZonesContaner(Entity<ZonesContainerComponent> container)
+    {
+        ClearZonesContainer(container);
+        RemComp<ZonesContainerComponent>(container);
     }
 }

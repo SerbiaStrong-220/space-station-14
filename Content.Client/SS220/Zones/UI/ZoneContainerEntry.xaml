@@ -1,8 +1,9 @@
 <BoxContainer xmlns="https://spacestation14.io"
-             xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
-             Orientation="Vertical"
-             HorizontalExpand="True"
-             MinSize="60 20">
+              xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              xmlns:ut220="clr-namespace:Content.Client.SS220.UserInterface.Utility"
+              Orientation="Vertical"
+              HorizontalExpand="True"
+              MinSize="60 20">
     <BoxContainer Name="Heading" Orientation="Horizontal" HorizontalExpand="True">
         <ContainerButton Name="CollapseButton">
             <TextureRect Name="CollapseButtonTexture"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2 0"/>
@@ -11,8 +12,10 @@
             <PanelContainer Name="ContainerBackgroundPanel" HorizontalExpand="True">
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="5 0">
                     <Label Name="ContainerIDLabel"/>
-                    <customControls:VSeparator Margin="10 0"/>
+                    <cc:VSeparator Margin="10 0"/>
                     <Label Name="ContainerNameLabel"  HorizontalExpand="True"/>
+                    <cc:VSeparator Margin="10 0"/>
+                    <ut220:ConfirmableButton Name="DeleteContainerButton" Access="Public"/>
                 </BoxContainer>
             </PanelContainer>
         </ContainerButton>

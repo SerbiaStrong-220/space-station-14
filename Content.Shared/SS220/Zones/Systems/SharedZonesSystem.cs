@@ -15,9 +15,10 @@ public abstract partial class SharedZonesSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    public const string ZoneCommandsPrefix = "zone:";
+    public const string ZoneCommandsPrefix = "zones:";
 
     public static EntProtoId<ZoneComponent> BaseZoneId = "BaseZone";
+    public static Color DefaultColor = Color.Gray;
 
     public override void Update(float frameTime)
     {

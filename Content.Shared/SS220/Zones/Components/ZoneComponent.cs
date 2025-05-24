@@ -24,14 +24,8 @@ public sealed partial class ZoneComponent : Component
     /// <summary>
     /// Current color of the zone
     /// </summary>
-    [ViewVariables, AutoNetworkedField]
-    public Color? CurColor;
-
-    /// <summary>
-    /// Default color of the zone
-    /// </summary>
     [DataField, AutoNetworkedField]
-    public Color DefaultColor = Color.Red;
+    public Color? Color;
 
     /// <summary>
     /// Boxes in local coordinates (attached to <see cref="Container"/>) that determine the size of the zone

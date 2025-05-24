@@ -5,6 +5,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using System.Linq;
+using System.Numerics;
 
 namespace Content.Client.SS220.Zones.UI;
 
@@ -17,13 +18,28 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
     private Dictionary<EntityUid, ZoneContainerEntry> _zoneContainerEntries = new();
 
+    public ZoneEntry? SelectedZoneEntry
+    {
+        get => _selectedZoneEntry;
+        set
+        {
+            _selectedZoneEntry = value;
+            SetStateEntity(value?.ZoneEntity);
+        }
+    }
+
     private ZoneEntry? _selectedZoneEntry;
+    private ZoneStatePanel _statePanel;
+
     public ZonesControlWindow()
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
         _zones = _entityManager.System<ZonesSystem>();
+        _statePanel = new ZoneStatePanel(null);
+        OptionsBox.AddChild(_statePanel);
+
         RefreshButton.OnPressed += _ => RefreshEntries();
         OverlayButton.OnToggled += e => _zones.SetOverlay(e.Pressed);
         SearchLineEdit.OnTextChanged += ApplySearchFilter;
@@ -78,12 +94,16 @@ public sealed partial class ZonesControlWindow : DefaultWindow
     {
         var entry = new ZoneContainerEntry(entity);
         entry.ZoneEntryToggled += OnZoneEntryToggled;
+        entry.DeleteContainerButton.OnConfirmed += delegate
+        {
+            _zones.ExecuteDeleteZonesContainer(entity);
+        };
         return entry;
     }
 
     private void OnZoneEntryToggled(ZoneEntry entry)
     {
-        if (_selectedZoneEntry == entry)
+        if (SelectedZoneEntry == entry)
             DeselectEntry();
         else
             SelectEntry(entry);
@@ -91,20 +111,20 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
     private void SelectEntry(ZoneEntry entry)
     {
-        if (_selectedZoneEntry is { } selected && selected != entry)
+        if (SelectedZoneEntry is { } selected && selected != entry)
             selected.Pressed = false;
 
         entry.Pressed = true;
-        _selectedZoneEntry = entry;
+        SelectedZoneEntry = entry;
         _zones.SelectZone(entry.ZoneEntity);
     }
 
     private void DeselectEntry()
     {
-        if (_selectedZoneEntry is { } selected)
+        if (SelectedZoneEntry is { } selected)
             selected.Pressed = false;
 
-        _selectedZoneEntry = null;
+        SelectedZoneEntry = null;
         _zones.SelectZone(null);
     }
 
@@ -112,5 +132,27 @@ public sealed partial class ZonesControlWindow : DefaultWindow
     {
         foreach (var entry in _zoneContainerEntries.Values)
             entry.ApplyFilter(args.Text);
+    }
+
+    private void SetStateEntity(Entity<ZoneComponent>? entity)
+    {
+        var isExtended = _statePanel.ZoneEntity != null;
+        if (entity != null)
+        {
+            if (!isExtended)
+            {
+                OptionsBox.Visible = true;
+                var x = Size.X + MathF.Max(_statePanel.Size.X, _statePanel.MinSize.X);
+                SetSize = new Vector2(x, Size.Y);
+            }
+        }
+        else if (isExtended)
+        {
+            OptionsBox.Visible = false;
+            var x = Size.X - _statePanel.Size.X;
+            SetSize = new Vector2(x, Size.Y);
+        }
+
+        _statePanel.ZoneEntity = entity;
     }
 }

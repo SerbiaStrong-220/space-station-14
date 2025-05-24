@@ -1,6 +1,6 @@
 <DefaultWindow xmlns="https://spacestation14.io"
                Title="{Loc zones-control-window-name}"
-               MinSize="450 250">
+               MinSize="600 300">
     <BoxContainer Orientation="Horizontal" VerticalExpand="True" HorizontalExpand="True">
         <BoxContainer Name="MainBox" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
             <BoxContainer Orientation="Horizontal" HorizontalExpand="True">

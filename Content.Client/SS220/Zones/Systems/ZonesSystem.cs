@@ -4,13 +4,14 @@ using Content.Client.SS220.Zones.UI;
 using Content.Shared.Administration;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
+using Robust.Client.Console;
 using Robust.Client.Graphics;
-using Robust.Client.Player;
 
 namespace Content.Client.SS220.Zones.Systems;
 
 public sealed partial class ZonesSystem : SharedZonesSystem
 {
+    [Dependency] private readonly IClientConsoleHost _clientConsoleHost = default!;
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
     [Dependency] private readonly IClientAdminManager _clientAdmin = default!;
 
@@ -30,8 +31,14 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         _overlay = new ZonesOverlay();
 
         _clientAdmin.AdminStatusUpdated += OnAdminStatusUpdated;
+
+        SubscribeLocalEvent<ZoneComponent, ComponentInit>(OnZoneInit);
+        SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnZoneShutdown);
         SubscribeLocalEvent<ZoneComponent, AfterAutoHandleStateEvent>(OnAfterZoneStateHandled);
-        SubscribeLocalEvent<ZonesContainerComponent, AfterAutoHandleStateEvent>(OnAfterZoneContainerStateHandled);
+
+        SubscribeLocalEvent<ZonesContainerComponent, ComponentInit>(OnContainerInit);
+        SubscribeLocalEvent<ZonesContainerComponent, ComponentShutdown>(OnContainerShutdown);
+        SubscribeLocalEvent<ZonesContainerComponent, AfterAutoHandleStateEvent>(OnAfterContainerStateHandled);
     }
 
     private void OnAdminStatusUpdated()
@@ -39,13 +46,32 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         SetOverlay(_overlayManager.HasOverlay<ZonesOverlay>());
     }
 
+    private void OnZoneInit(Entity<ZoneComponent> entity, ref ComponentInit args)
+    {
+        ControlWindow.RefreshEntries();
+    }
+
+    private void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
+    {
+        ControlWindow.RefreshEntries();
+    }
+
     private void OnAfterZoneStateHandled(Entity<ZoneComponent> entity, ref AfterAutoHandleStateEvent args)
     {
         ControlWindow.RefreshEntries();
     }
 
+    private void OnContainerInit(Entity<ZonesContainerComponent> entity, ref ComponentInit args)
+    {
+        ControlWindow.RefreshEntries();
+    }
 
-    private void OnAfterZoneContainerStateHandled(Entity<ZonesContainerComponent> entity, ref AfterAutoHandleStateEvent args)
+    private void OnContainerShutdown(Entity<ZonesContainerComponent> entity, ref ComponentShutdown args)
+    {
+        ControlWindow.RefreshEntries();
+    }
+
+    private void OnAfterContainerStateHandled(Entity<ZonesContainerComponent> entity, ref AfterAutoHandleStateEvent args)
     {
         ControlWindow.RefreshEntries();
     }
@@ -75,5 +101,15 @@ public sealed partial class ZonesSystem : SharedZonesSystem
                 _overlayManager.RemoveOverlay(_overlay);
                 break;
         }
+    }
+
+    public void ExecuteDeleteZonesContainer(EntityUid container)
+    {
+        _clientConsoleHost.ExecuteCommand($"zones:delete_container {GetNetEntity(container)}");
+    }
+
+    public void ExecuteDeleteZone(EntityUid zone)
+    {
+        _clientConsoleHost.ExecuteCommand($"zones:delete {GetNetEntity(zone)}");
     }
 }

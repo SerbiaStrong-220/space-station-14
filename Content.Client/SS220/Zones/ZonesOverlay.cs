@@ -2,6 +2,7 @@
 using Content.Client.Resources;
 using Content.Client.SS220.Zones.Systems;
 using Content.Shared.SS220.Zones.Components;
+using Content.Shared.SS220.Zones.Systems;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Enums;
@@ -76,7 +77,7 @@ public sealed class ZonesOverlay : Overlay
             drawHandle.SetTransform(worldMatrix);
 
             var alpha = zone == _zones.SelectedZone ? 0.25f : 0.125F;
-            var color = (zone.Comp.CurColor ?? zone.Comp.DefaultColor).WithAlpha(alpha);
+            var color = (zone.Comp.Color ?? SharedZonesSystem.DefaultColor).WithAlpha(alpha);
             drawHandle.DrawTextureRect(texture, box, color);
         }
     }
