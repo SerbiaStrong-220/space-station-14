@@ -2,10 +2,7 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Body.Systems;
-using Content.Shared.Clothing.Components;
-using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Interaction.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Content.Shared.SS220.Clothing;
@@ -13,9 +10,8 @@ using Content.Shared.SS220.Clothing;
 namespace Content.Server.SS220.Clothing;
 
 /// <summary>
-/// Handles adding and using a toggle action for <see cref="ToggleClothingComponent"/>.
 /// </summary>
-public sealed class SharedInnerHandToggleableSystem : EntitySystem
+public sealed class InnerHandToggleableSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
