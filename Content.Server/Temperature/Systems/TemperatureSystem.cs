@@ -156,13 +156,13 @@ public sealed class TemperatureSystem : EntitySystem
         if (transform.MapUid == null)
             return;
 
-        //ss220
+        //ss220 add resist for temperature start
         var ev = new TemperatureDamageIsCancelEvent();
         RaiseLocalEvent(uid, ev);
 
         if (ev.Cancelled)
             return;
-        //ss220
+        //ss220 add resist for temperature end
 
         var temperatureDelta = args.GasMixture.Temperature - temperature.CurrentTemperature;
         var airHeatCapacity = _atmosphere.GetHeatCapacity(args.GasMixture, false);
