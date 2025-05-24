@@ -12,7 +12,7 @@
   - type: Clickable
   - type: Tag
     tags:
-      - Structure
+    - Structure
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: SS220/Structures/Storage/Shelfs/wood.rsi #SS220 Shelfs Resprite
@@ -76,7 +76,6 @@
   - type: EntityStorageVisuals
     stateDoorOpen: open
     stateDoorClosed: closed
-
   - type: AccessReader
 
 # Normal
@@ -138,9 +137,6 @@
             max: 4
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: Tag
-    tags:
-    - Structure
   - type: Construction
     graph: Shelf
     node: ShelfMetal
@@ -173,9 +169,6 @@
             max: 2
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: Tag
-    tags:
-    - Structure
   - type: Construction
     graph: Shelf
     node: ShelfGlass
@@ -324,16 +317,6 @@
     grid:
     - 0,0,5,1
     - 0,3,5,4
-    maxItemSize: Normal
-    whitelist:
-      tags:
-        - DrinkGlass
-        - DrinkBottle
-        - DrinkCan
-        - Beer
-        - Wine
-      components:
-        - ReactionMixer
   - type: Construction
     graph: Shelf
     node: ShelfBar
@@ -381,34 +364,6 @@
     grid:
     - 0,0,5,1
     - 0,3,5,4
-    maxItemSize: Normal
-    whitelist:
-      tags:
-        - DrinkBottle
-        - DrinkCan
-        - DrinkCup
-        - DrinkGlass
-        - BoxCardboard
-        - MonkeyCube
-        - Enzyme
-        - Mayo
-        - Packet
-        - Cleaver
-        - Knife
-        - KitchenKnife
-        - RollingPin
-        - Ingredient
-        - Trash
-        - Plastic
-        - SaltShaker
-        - PepperShaker
-        - Ketchup
-        - Hotsauce
-        - Coldsauce
-        - BBQsauce
-      components:
-        - Utensil
-        - Bin
   - type: Construction
     graph: Shelf
     node: ShelfKitchen
@@ -468,22 +423,9 @@
     grid:
     - 0,0,5,1
     - 0,3,5,4
-    maxItemSize: Normal
-    whitelist:
-      tags:
-        - ChemDispensable
-        - GlassBeaker
-        - Bottle
-        - Medkit
-        - CentrifugeCompatible
-        - PillCanister
-        - Syringe
-        - Spray
   - type: Construction
     graph: Shelf
     node: ShelfChemistry
-
-
 
 # Access presets
 # Try to keep alphabetical sorting if adding more

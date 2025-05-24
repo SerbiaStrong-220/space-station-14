@@ -46,9 +46,47 @@
   - type: StaticPrice
     price: 750
 
+#Base KR
+- type: entity
+  id: BaseWeaponBlaster
+  parent: BaseWeaponPowerCell
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/Battery/ert_blaster.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-5
+        map: ["enum.GunVisualLayers.Mag"]
+      - state: mag-unshaded-5
+        map: ["enum.GunVisualLayers.MagUnshaded"]
+        shader: unshaded
+  - type: Clothing
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/Battery/ert_blaster.rsi
+    quickEquip: false
+    slots:
+      - Back
+      - suitStorage
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: true
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -2
+    maxAngle: -13
+  - type: Gun
+    minAngle: 17
+    maxAngle: 29
+    angleIncrease: 3
+    angleDecay: 16
+    soundGunshot:
+      path: /Audio/SS220/Weapons/Guns/Gunshots/blaster_nt.ogg
+
 - type: entity
   id: WeaponBlasterKRS
-  parent: WeaponBlaster
+  parent: BaseWeaponBlaster
   name: krs
   description: An old reliable blaster rifle. There is only a semi-automatic type of shooting.
   suffix: Blaster
@@ -56,14 +94,24 @@
   - type: Item
     size: Large
   - type: Gun
+    fireRate: 6.5
     selectedMode: SemiAuto
     availableModes:
-    - SemiAuto
-    soundGunshot:
-      path: /Audio/SS220/Weapons/Guns/Gunshots/blaster_nt.ogg
+      - SemiAuto
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletBlasterAlt
+    fireCost: 40
+  - type: BatteryWeaponFireModes
+    fireModes:
+      - proto: BulletBlasterAlt
+        name: firemode-name-blaster
+        fireCost: 40
+      - proto: BulletDisablerSmg
+        name: firemode-name-disabler
+        fireCost: 24
   - type: ItemSlots
     slots:
-      gun_magazine:
+      cell_slot:
         name: Magazine
         startingItem: BlasterPowerCellAlt
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
@@ -74,16 +122,33 @@
 
 - type: entity
   id: WeaponBlasterKRV
-  parent: WeaponBlaster
+  parent: BaseWeaponBlaster
   name: KRV
   description: An advanced blaster rifle. Used by special operatives.
   suffix: Blaster
   components:
   - type: Item
     size: Large
+  - type: Gun
+    fireRate: 6.5
+    selectedMode: FullAuto
+    availableModes:
+      - SemiAuto
+      - FullAuto
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletBlasterPulse
+    fireCost: 48
+  - type: BatteryWeaponFireModes
+    fireModes:
+      - proto: BulletBlasterPulse
+        name: firemode-name-blaster
+        fireCost: 48
+      - proto: BulletDisablerSmg
+        name: firemode-name-disabler
+        fireCost: 24
   - type: ItemSlots
     slots:
-      gun_magazine:
+      cell_slot:
         name: Magazine
         startingItem: BlasterPowerCellPulse
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg

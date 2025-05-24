@@ -17,6 +17,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Content.Server.SS220.Bed.Cryostorage; //SS220 Cryo-anomaly-fix
 
 namespace Content.Server.Anomaly.Effects;
 
@@ -54,6 +55,8 @@ public sealed class InnerBodyAnomalySystem : SharedInnerBodyAnomalySystem
         SubscribeLocalEvent<InnerBodyAnomalyComponent, MobStateChangedEvent>(OnMobStateChanged);
 
         SubscribeLocalEvent<AnomalyComponent, ActionAnomalyPulseEvent>(OnActionPulse);
+
+        SubscribeLocalEvent<InnerBodyAnomalyComponent, BeingCryoDeletedEvent>(OnBeingCryoDeleted); //SS220 Cryo-anomaly-fix
     }
 
     private void OnActionPulse(Entity<AnomalyComponent> ent, ref ActionAnomalyPulseEvent args)
@@ -238,4 +241,11 @@ public sealed class InnerBodyAnomalySystem : SharedInnerBodyAnomalySystem
         ent.Comp.Injected = false;
         RemCompDeferred<AnomalyComponent>(ent);
     }
+
+    //SS220 Cryo-anomaly-fix begin
+    private void OnBeingCryoDeleted(Entity<InnerBodyAnomalyComponent> ent, ref BeingCryoDeletedEvent args)
+    {
+        RemComp<InnerBodyAnomalyComponent>(ent.Owner);
+    }
+    //SS220 Cryo-anomaly-fix end
 }

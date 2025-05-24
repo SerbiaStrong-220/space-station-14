@@ -1,7 +1,7 @@
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Audio.Systems;
-using Content.Shared.Damage.Systems;
+using Content.Server.Damage.Systems;
 
 namespace Content.Server.Weapons.Melee.WeaponRandom;
 

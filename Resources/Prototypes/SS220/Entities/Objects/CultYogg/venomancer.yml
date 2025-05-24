@@ -11,27 +11,27 @@
     - type: Gun
       soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
       cameraRecoilScalar: 1
-      fireRate: 11
+      fireRate: 1
       soundEmpty: null
-      projectileSpeed: 15
+      projectileSpeed: 25
     - type: SolutionAmmoProvider
       solutionId: acid
       proto: AcidSpit
-      fireCost: 6
+      fireCost: 5
     - type: SolutionContainerManager
       solutions:
         acid:
-          maxVol: 6
+          maxVol: 25
           reagents:
           - ReagentId: CultYoggVenomancerAcid
-            Quantity: 6
+            Quantity: 25
     - type: SolutionRegeneration
       solution: acid
       duration: 3
       generated:
         reagents:
           - ReagentId: CultYoggVenomancerAcid
-            Quantity: 6
+            Quantity: 5
     - type: Sprite
       sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_venomancer.rsi
       layers:
@@ -73,8 +73,9 @@
     linearDamping: 1
     angularDamping: 2.5
   - type: TimedDespawn
-    lifetime: 2
+    lifetime: 10
   - type: Projectile
+    impactEffect: AcidImpactEffect
     damage:
       types:
         Burn: 3

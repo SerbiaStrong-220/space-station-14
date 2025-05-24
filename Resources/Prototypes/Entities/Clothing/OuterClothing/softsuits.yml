@@ -17,8 +17,8 @@
 
 #Syndicate EVA
 - type: entity
-  parent: [ ClothingOuterEVASuitBase]
-  id: ClothingOuterHardsuitSyndicate # TODO: rename to ClothingOuterEVASuitSyndicate
+  parent: [ ClothingOuterEVASuitBase, BaseSyndicateContraband ]
+  id: ClothingOuterEVASuitSyndicate
   name: syndicate EVA suit
   description: "Has a tag on the back that reads: 'Totally not property of an enemy corporation, honest!'"
   components:
@@ -116,12 +116,12 @@
   description: A void suit made for paramedics.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/paramed.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/paramed.rsi #ss220 paramedic softsuit resprite
     layers:
     - state: icon
   - type: Appearance
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/paramed.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/paramed.rsi #ss220 paramedic softsuit resprite
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000

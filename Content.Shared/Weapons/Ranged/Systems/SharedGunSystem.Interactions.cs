@@ -255,15 +255,20 @@ public abstract partial class SharedGunSystem
         Shoot(weapon, guncomp, ev.Ammo, coordsFrom, coordsTo, out _);
         if (damageType != null)
         {
-            if (TryComp<MobThresholdsComponent>(user, out var thresholdsComp)
-                && TryComp<DamageableComponent>(user, out var damagebleComp))
-                damageVolume = ((int)thresholdsComp.Thresholds.Last().Key - (int)damagebleComp.TotalDamage);
-            damageSpec.DamageDict.Add(damageType, damageVolume);
+            // Проджектайлу пули нужно время, чтобы долететь до куклы, зарегать попадание и нанести урон.
+            // Без задержки проджектайл просто пролетит над трупом.
+            Timer.Spawn(200, () =>
+            {
+                if (TryComp<MobThresholdsComponent>(user, out var thresholdsComp)
+                    && TryComp<DamageableComponent>(user, out var damagebleComp))
+                    damageVolume = ((int)thresholdsComp.Thresholds.Last().Key - (int)damagebleComp.TotalDamage);
+                damageSpec.DamageDict.Add(damageType, damageVolume);
 
-            var weaponName = ToPrettyString(weapon);
-            var shooter = ToPrettyString(user);
-            Logs.Add(LogType.Damaged, $"{shooter: shooter} shot himself with {weaponName:weapon}, inflicted {damageSpec.DamageDict.FirstOrNull(): damage}");
-            Timer.Spawn(200, () => Damageable.TryChangeDamage(user, damageSpec, true));
+                var weaponName = ToPrettyString(weapon);
+                var shooter = ToPrettyString(user);
+                Logs.Add(LogType.Damaged, $"{shooter: shooter} shot himself with {weaponName:weapon}, inflicted {damageSpec.DamageDict.FirstOrNull(): damage}");
+                Damageable.TryChangeDamage(user, damageSpec, true);
+            });
         }
 
         args.Handled = true;

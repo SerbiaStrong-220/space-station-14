@@ -183,11 +183,11 @@
     size: Normal
     shape:
     - 0,0,4,0
-    sprite: Objects/Weapons/Guns/Shotguns/pump_inhands_64x.rsi
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/pump_inhands_64x.rsi #SS220 kammerer resprite
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/pump.rsi
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/pump.rsi #SS220 kammerer resprite
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/pump.rsi
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/pump.rsi #SS220 kammerer resprite
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
     fireRate: 1
