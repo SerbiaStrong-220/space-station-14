@@ -7,6 +7,18 @@ namespace Content.Shared.SS220.Maths;
 public static partial class MathHelperExtensions
 {
     /// <summary>
+    /// Substracts the <paramref name="cutter"/> from the <paramref name="boxes"/> returning the remaining sections
+    /// </summary>
+    public static IEnumerable<Box2> SubstructBox(IEnumerable<Box2> boxes, Box2 cutter)
+    {
+        var result = new List<Box2>();
+        foreach (var box in boxes)
+            result.AddRange(SubstructBox(box, cutter));
+
+        return result;
+    }
+
+    /// <summary>
     /// Substracts the <paramref name="cutter"/> from the <paramref name="box"/> returning the remaining sections
     /// </summary>
     public static IEnumerable<Box2> SubstructBox(Box2 box, Box2 cutter)

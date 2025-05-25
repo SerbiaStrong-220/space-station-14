@@ -275,6 +275,19 @@ public abstract partial class SharedZonesSystem : EntitySystem
         zone.Comp.Boxes = boxes.ToHashSet();
         Dirty(zone, zone.Comp);
     }
+
+    public ZoneParams GetZoneParams(Entity<ZoneComponent> entity)
+    {
+        var meta = MetaData(entity);
+        return new ZoneParams
+        {
+            Container = entity.Comp.Container ?? NetEntity.Invalid,
+            ProtoId = meta.EntityPrototype?.ID ?? BaseZoneId,
+            Name = meta.EntityName,
+            Color = entity.Comp.Color ?? DefaultColor,
+            Boxes = entity.Comp.Boxes
+        };
+    }
 }
 
 /// <summary>
@@ -293,4 +306,13 @@ public sealed partial class LeavedZoneEvent(Entity<ZoneComponent> zone, EntityUi
 {
     public readonly Entity<ZoneComponent> Zone = zone;
     public readonly EntityUid Entity = entity;
+}
+
+public struct ZoneParams()
+{
+    public NetEntity Container;
+    public string Name = string.Empty;
+    public string ProtoId = string.Empty;
+    public Color Color;
+    public HashSet<Box2> Boxes = new();
 }

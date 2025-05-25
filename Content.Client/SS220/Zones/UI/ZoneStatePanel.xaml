@@ -25,10 +25,13 @@
                             <LineEdit Name="ContainerNetIDLineEdit" HorizontalExpand="True"/>
                         </BoxContainer>
                         <PanelContainer Name="Box2ListBackground" HorizontalExpand="True" VerticalExpand="True" MinHeight="100">
-                            <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                                <BoxContainer Name="Box2ListContainer"  Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-                                </BoxContainer>
-                            </ScrollContainer>
+                            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                                <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+                                    <BoxContainer Name="Box2ListContainer"  Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                                    </BoxContainer>
+                                </ScrollContainer>
+                                <Button Name="AddBoxButton" Text="{Loc zone-state-box-add-box-button}" Access="Public" />
+                            </BoxContainer>
                         </PanelContainer>
                     </BoxContainer>
                 </PanelContainer>

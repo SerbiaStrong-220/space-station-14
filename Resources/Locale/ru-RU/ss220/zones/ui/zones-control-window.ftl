@@ -13,3 +13,4 @@ zone-state-box-prototype-id-label = ID прототипа
 zone-state-box-size-options-heading = Настройки размеров
 zone-state-box-container-net-id-label = UID контейнера
 zone-state-box-hex-color-label = Цвет
+zone-state-box-add-box-button = Добавить новый

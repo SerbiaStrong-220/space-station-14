@@ -15,7 +15,6 @@ public sealed class BoxesOverlay : Overlay
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
-    private readonly SharedTransformSystem _transformSystem;
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
     private ShaderInstance _shader;
@@ -28,7 +27,6 @@ public sealed class BoxesOverlay : Overlay
         IoCManager.InjectDependencies(this);
         _shader = _proto.Index<ShaderPrototype>("unshaded").Instance();
         _texture = _cache.GetTexture("/Textures/Interface/Nano/square.png");
-        _transformSystem = _entManager.System<SharedTransformSystem>();
     }
 
     public static BoxesOverlay GetOverlay()
@@ -65,7 +63,8 @@ public sealed class BoxesOverlay : Overlay
         if (xform.MapID != args.MapId)
             return;
 
-        var (_, _, worldMatrix, _) = _transformSystem.GetWorldPositionRotationMatrixWithInv(xform);
+        var transform = _entManager.System<SharedTransformSystem>();
+        var (_, _, worldMatrix, _) = transform.GetWorldPositionRotationMatrixWithInv(xform);
 
         var drawHandle = args.WorldHandle;
         drawHandle.SetTransform(worldMatrix);
