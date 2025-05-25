@@ -6,7 +6,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs;
 using Robust.Shared.Containers;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.StuckOnEquip;
 
@@ -14,14 +13,12 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<StuckOnEquipComponent, ContainerGettingRemovedAttemptEvent>(OnRemoveAttempt);
-
         SubscribeLocalEvent<StuckOnEquipComponent, GotEquippedEvent>(GotEquipped);
         SubscribeLocalEvent<StuckOnEquipComponent, GotEquippedHandEvent>(GotPickuped);
         SubscribeLocalEvent<MobStateChangedEvent>(OnDeath);

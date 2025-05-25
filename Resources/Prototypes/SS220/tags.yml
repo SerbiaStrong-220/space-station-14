@@ -324,3 +324,8 @@
 - type: Tag
   id: MiGoInAstral
 # ss220 migo damage in astral fix end
+
+# ss220 Cult_update2 start
+- type: Tag
+  id: CultYoggInnerHandToggleable
+# ss220 Cult_update2 end
