@@ -40,8 +40,6 @@ using Content.Shared.SS220.InnerHandToggleable;
 using Content.Shared.SS220.Roles;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.SS220.Telepathy;
-using Content.Shared.Tag;
-using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -384,6 +382,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         {
             ProgressToStage(rule, nextStage);
         }
+        DirtyEntity(uid);
     }
     #endregion
 
@@ -428,6 +427,8 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         //Remove telepathy
         RemComp<TelepathyComponent>(uid);
 
+        RemComp<InnerHandToggleableComponent>(uid);
+
         RemComp<ShowCultYoggIconsComponent>(uid);
         RemComp<ZombieImmuneComponent>(uid);
 
@@ -436,6 +437,8 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         {
             _euiManager.OpenEui(new DeCultReminderEui(), session);
         }
+
+        DirtyEntity(uid);
     }
     #endregion
 

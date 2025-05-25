@@ -8,6 +8,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 
 namespace Content.Shared.SS220.InnerHandToggleable;
 
@@ -30,6 +31,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         SubscribeLocalEvent<InnerHandToggleableComponent, DidUnequipHandEvent>(OnDidUnequipHand);
         SubscribeLocalEvent<InnerHandToggleableComponent, DidSwitchHandEvent>(OnDidSwitchHand);
         SubscribeLocalEvent<InnerHandToggleableComponent, ToggleInnerHandEvent>(OnToggleInnerHand);
+        SubscribeLocalEvent<InnerHandToggleableComponent, ComponentShutdown>(OnComponentShutdown);
     }
 
     private void OnCompInit(Entity<InnerHandToggleableComponent> ent, ref ComponentInit args)
@@ -57,6 +59,20 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
             return;
 
         Dirty(ent, ent.Comp);
+    }
+
+    private void OnComponentShutdown(Entity<InnerHandToggleableComponent> ent, ref ComponentShutdown args)
+    {
+        _actionsSystem.RemoveAction(ent, ent.Comp.ActionEntity);
+        foreach (var hand in ent.Comp.HandsContainers.Values)
+        {
+            if (hand.Container is null)
+                return;
+
+            _containerSystem.EmptyContainer(hand.Container);
+            _containerSystem.ShutdownContainer(hand.Container);
+        }
+        Dirty(ent);
     }
 
     private void OnDidEquipHand(Entity<InnerHandToggleableComponent> ent, ref DidEquipHandEvent args)
