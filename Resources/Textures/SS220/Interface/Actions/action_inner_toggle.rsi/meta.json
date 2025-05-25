@@ -8,16 +8,10 @@
   },
   "states": [
     {
-      "name": "L_in"
+      "name": "in"
     },
     {
-      "name": "L_out"
-    },
-    {
-      "name": "R_in"
-    },
-    {
-      "name": "R_out"
+      "name": "out"
     }
   ]
 }
