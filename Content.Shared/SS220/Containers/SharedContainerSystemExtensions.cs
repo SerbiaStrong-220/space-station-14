@@ -1,24 +1,23 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Linq;
-using Content.Server.Hands.Systems;
 using Content.Shared.Hands.Components;
-using Robust.Server.Containers;
-using Robust.Server.GameObjects;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Mind.Components;
 using Robust.Shared.Containers;
 
-namespace Content.Server.SS220.Containers;
+namespace Content.Shared.SS220.Containers;
 
-public sealed class ContainerEntRemoveSystem : EntitySystem
+public sealed class SharedContainerSystemExtensions : EntitySystem
 {
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     /// <summary>
     ///     Removes all entites with specified component from entity containers, including hands.
     /// </summary>
-    public void DropAllTargetsFromEntityContainers<T>(EntityUid uid) where T : IComponent
+    public void RemoveEntitiesFromAllContainers<T>(EntityUid owner) where T : IComponent
     {
         void EjectRecursive(EntityUid uid)
         {
@@ -40,17 +39,8 @@ public sealed class ContainerEntRemoveSystem : EntitySystem
             }
         }
 
-        EjectRecursive(uid);
+        EjectRecursive(owner);
 
-        if (!TryComp<HandsComponent>(uid, out var hands))
-            return;
-
-        foreach (var held in _hands.EnumerateHeld(uid, hands))
-        {
-            if (HasComp<T>(held))
-            {
-                _hands.TryDrop(uid, handsComp: hands);
-            }
-        }
+        _hands.DropEntitesFromHands<MindContainerComponent>(owner);
     }
 }

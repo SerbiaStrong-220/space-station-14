@@ -63,7 +63,7 @@ public abstract partial class SharedHandsSystem
     /// </summary>
     public bool CanDropHeld(EntityUid uid, Hand hand, bool checkActionBlocker = true)
     {
-        if (hand.Container?.ContainedEntity is not {} held)
+        if (hand.Container?.ContainedEntity is not { } held)
             return false;
 
         if (!ContainerSystem.CanRemove(held, hand.Container))
@@ -131,7 +131,8 @@ public abstract partial class SharedHandsSystem
         var isInContainer = ContainerSystem.IsEntityOrParentInContainer(uid, xform: userXform);
 
         // if the user is in a container, drop the item inside the container
-        if (isInContainer) {
+        if (isInContainer)
+        {
             TransformSystem.DropNextTo((entity, itemXform), (uid, userXform));
             return true;
         }
@@ -232,4 +233,23 @@ public abstract partial class SharedHandsSystem
         if (hand == handsComp.ActiveHand)
             RaiseLocalEvent(entity, new HandDeselectedEvent(uid));
     }
+
+    //SS220-cryo-mob-fix begin
+    /// <summary>
+    ///     Tries to remove entities with specified component from both hands
+    /// </summary>
+    public void DropEntitesFromHands<T>(EntityUid owner) where T : IComponent
+    {
+        if (!TryComp<HandsComponent>(owner, out var hands))
+            return;
+
+        foreach (var held in EnumerateHeld(owner, hands))
+        {
+            if (HasComp<T>(held))
+            {
+                TryDrop(owner, handsComp: hands);
+            }
+        }
+    }
+    //SS220-cryo-mob-fix end
 }
