@@ -179,7 +179,6 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
     public void HandleEnterCryostorage(Entity<CryostorageContainedComponent> ent, NetUserId? userId)
     {
-        _containerSystemExtensions.RemoveEntitiesFromAllContainers<MindContainerComponent>(ent.Owner); //SS220-cryo-mobs-fix
         var comp = ent.Comp;
         var cryostorageEnt = ent.Comp.Cryostorage;
 
@@ -188,6 +187,8 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
         if (!TryComp<CryostorageComponent>(cryostorageEnt, out var cryostorageComponent))
             return;
+
+        _containerSystemExtensions.RemoveEntitiesFromAllContainers<MindContainerComponent>(ent.Owner, ["body_root_part"]); //SS220-cryo-mobs-fix
 
         // if we have a session, we use that to add back in all the job slots the player had.
         if (userId != null)

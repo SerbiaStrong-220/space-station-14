@@ -17,7 +17,7 @@ public sealed class SharedContainerSystemExtensions : EntitySystem
     /// <summary>
     ///     Removes all entites with specified component from entity containers, including hands.
     /// </summary>
-    public void RemoveEntitiesFromAllContainers<T>(EntityUid owner) where T : IComponent
+    public void RemoveEntitiesFromAllContainers<T>(EntityUid owner, List<string>? blacklistedIds = null) where T : IComponent
     {
         void EjectRecursive(EntityUid uid)
         {
@@ -26,6 +26,9 @@ public sealed class SharedContainerSystemExtensions : EntitySystem
 
             foreach (var container in contManager.Containers.Values)
             {
+                if (blacklistedIds != null && blacklistedIds.Contains(container.ID))
+                    continue;
+
                 foreach (var ent in container.ContainedEntities.ToList())
                 {
                     if (HasComp<T>(ent))
