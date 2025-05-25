@@ -292,8 +292,8 @@ public abstract partial class SharedZonesSystem : EntitySystem
         foreach (var box in boxes)
             attachedBoxes.AddRange(MathHelperExtensions.GetIntersectsGridBoxes(box, gridSize));
 
-        attachedBoxes = MathHelperExtensions.GetNonOverlappingBoxes(boxes).ToList();
-        attachedBoxes = MathHelperExtensions.UnionInEqualSizedBoxes(boxes).ToList();
+        attachedBoxes = MathHelperExtensions.GetNonOverlappingBoxes(attachedBoxes).ToList();
+        attachedBoxes = MathHelperExtensions.UnionInEqualSizedBoxes(attachedBoxes).ToList();
         return attachedBoxes;
     }
 

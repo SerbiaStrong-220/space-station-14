@@ -27,12 +27,15 @@ public sealed partial class CreateZoneCommand : LocalizedCommands
         if (!EntityUid.TryParse(args[0], out var container))
             return;
 
-        var @params = new ZoneParamsState();
+        var @params = new ZoneParamsState()
+        {
+            Container = _entityManager.GetNetEntity(container)
+        };
         var pairs = args[1].Split(';');
         pairs = pairs.Select(x => x.Replace("(", string.Empty).Replace(")", string.Empty).Trim()).ToArray();
         for (var i = 0; i < pairs.Length; i++)
         {
-            var num = pairs[i].Split(',');
+            var num = pairs[i].Split(' ');
             if (num.Length > 4)
             {
                 shell.WriteLine($"Неверное количество аргументов в координатах бокса {i + 1}");

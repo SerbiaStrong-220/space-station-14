@@ -129,7 +129,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             if (!string.IsNullOrEmpty(boxes))
                 boxes += "; ";
 
-            boxes += box.ToString();
+            boxes += $"({box.Left} {box.Bottom} {box.Right} {box.Top})";
         }
 
         _clientConsoleHost.ExecuteCommand($"zones:create {@params.Container} \"{boxes}\" name={@params.Name} protoid={@params.ProtoId} color={@params.Color.ToHex()} attachtogrid={@params.AttachToGrid}");

@@ -245,7 +245,7 @@ public static partial class MathHelperExtensions
 
                 var gridBox = new Box2(left, bottom, right, top);
 
-                if (ContainsVertex(box, gridBox, closedRegion))
+                if (gridBox.IntersectPercentage(box) > 0)
                     result.Add(gridBox);
             }
         }
