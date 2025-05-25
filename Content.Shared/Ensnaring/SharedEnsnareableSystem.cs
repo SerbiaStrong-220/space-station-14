@@ -262,7 +262,8 @@ public abstract class SharedEnsnareableSystem : EntitySystem
 
     private void OnStepTrigger(EntityUid uid, EnsnaringComponent component, ref StepTriggeredOffEvent args)
     {
-        TryEnsnare(args.Tripper, uid, component);
+        if (component.CanStepTrigger)
+            TryEnsnare(args.Tripper, uid, component);
     }
 
     private void OnThrowHit(EntityUid uid, EnsnaringComponent component, ThrowDoHitEvent args)
