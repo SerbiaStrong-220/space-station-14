@@ -48,6 +48,7 @@ public sealed partial class InnerContainerInfo
     [ViewVariables]
     public EntityUid? InnerItemUid;
 }
+
 public sealed partial class ToggleInnerHandEvent : InstantActionEvent
 {
 }
