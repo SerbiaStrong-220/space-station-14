@@ -5,6 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.SS220.CultYogg.Corruption;
 
 /// <summary>
+/// Component made only to prevent random pickup and potential hand blocking
 /// </summary>
 
 [RegisterComponent]

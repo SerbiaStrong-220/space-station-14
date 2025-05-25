@@ -24,7 +24,6 @@
     transferAmount: 10
   - type: StuckOnEquip
     inHandItem: true
-  - type: InnerHandToggleProvider
   - type: Tag
     tags:
     - CultYoggStealthProvidable

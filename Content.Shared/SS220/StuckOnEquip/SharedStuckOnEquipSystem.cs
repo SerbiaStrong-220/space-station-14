@@ -1,13 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Hands;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs;
-using Content.Shared.SS220.Clothing;
-using Content.Shared.Wieldable;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 

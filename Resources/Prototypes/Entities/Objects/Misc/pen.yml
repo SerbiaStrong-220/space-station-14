@@ -55,7 +55,6 @@
     state: luxury_pen
   - type: Item
     heldPrefix: luxury_pen
-  - type: InnerHandToggleProvider #TODO_SS220 для тестов -- не забыть удалить
 
 - type: entity
   id: BaseAdvancedPen

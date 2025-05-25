@@ -1,9 +1,9 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  id: ActionToggleLeftHand
-  name: Inner Left Hand Toggle
-  description: Remember to equip the important pieces of your suit before going into action.
+  id: ActionToggleLHand
+  name: Inner Hand Toggle
+  description: desc
   components:
   - type: InstantAction
     itemIconStyle: BigItem
@@ -11,25 +11,3 @@
     iconOn: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: L_out }
     useDelay: 1 # equip noise spam.
     event: !type:ToggleInnerHandEvent
-      hand: inner_left hand
-
-- type: entity
-  id: ActionToggleRightHand
-  name: Inner Right Hand Toggle
-  description: Remember to equip the important pieces of your suit before going into action.
-  components:
-  - type: InstantAction
-    itemIconStyle: BigItem
-    icon: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: R_in }
-    iconOn: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: R_out }
-    useDelay: 1 # equip noise spam.
-    event: !type:ToggleInnerHandEvent
-      hand: inner_right hand
-
-- type: innerHandAction
-  id: inner_left hand
-  action: ActionToggleLeftHand
-
-- type: innerHandAction
-  id: inner_right hand
-  action: ActionToggleRightHand
