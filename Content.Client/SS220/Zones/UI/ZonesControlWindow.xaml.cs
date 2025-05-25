@@ -29,7 +29,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
     }
 
     private ZoneEntry? _selectedZoneEntry;
-    private ZoneStatePanel _statePanel;
+    private ZoneParamsPanel _statePanel;
 
     public ZonesControlWindow()
     {
@@ -37,7 +37,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         RobustXamlLoader.Load(this);
 
         _zones = _entityManager.System<ZonesSystem>();
-        _statePanel = new ZoneStatePanel(null);
+        _statePanel = new ZoneParamsPanel(null);
         OptionsBox.AddChild(_statePanel);
 
         RefreshButton.OnPressed += _ => RefreshEntries();

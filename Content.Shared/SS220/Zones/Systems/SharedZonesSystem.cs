@@ -5,6 +5,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using System.Linq;
 using System.Numerics;
 
@@ -73,7 +74,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <inheritdoc cref="GetEntitiesInZone(Entity{BroadphaseComponent}, Entity{ZoneComponent})"/>
     public IEnumerable<EntityUid> GetEntitiesInZone(Entity<ZoneComponent> zone)
     {
-        var container = GetEntity(zone.Comp.Container);
+        var container = GetEntity(zone.Comp.ZoneParams?.Container);
         if (!TryComp<BroadphaseComponent>(container, out var broadphase))
             return new HashSet<EntityUid>();
 
@@ -89,10 +90,13 @@ public abstract partial class SharedZonesSystem : EntitySystem
         Entity<ZoneComponent> zone)
     {
         HashSet<EntityUid> entities = new();
+        if (zone.Comp.ZoneParams?.Boxes is not { } boxes)
+            return entities;
+
         var lookup = container.Comp;
         var state = (entities, zone);
 
-        foreach (var box in zone.Comp.Boxes)
+        foreach (var box in boxes)
         {
             lookup.DynamicTree.QueryAabb(ref state, ZoneQueryCallback, box, true);
             lookup.StaticTree.QueryAabb(ref state, ZoneQueryCallback, box, true);
@@ -196,7 +200,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <inheritdoc cref="InZone(Entity{ZoneComponent}, Vector2)"/>
     public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point)
     {
-        if (GetEntity(zone.Comp.Container) != _map.GetMap(point.MapId))
+        if (GetEntity(zone.Comp.ZoneParams?.Container) != _map.GetMap(point.MapId))
             return false;
 
         return InZone(zone, point.Position);
@@ -205,7 +209,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <inheritdoc cref="InZone(Entity{ZoneComponent}, Vector2)"/>
     public bool InZone(Entity<ZoneComponent> zone, EntityCoordinates point)
     {
-        if (GetEntity(zone.Comp.Container) != point.EntityId)
+        if (GetEntity(zone.Comp.ZoneParams?.Container) != point.EntityId)
             return false;
 
         return InZone(zone, point.Position);
@@ -216,7 +220,10 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// </summary>
     public static bool InZone(Entity<ZoneComponent> zone, Vector2 point)
     {
-        foreach (var box in zone.Comp.Boxes)
+        if (zone.Comp.ZoneParams?.Boxes is not { } boxes)
+            return false;
+
+        foreach (var box in boxes)
         {
             if (box.Contains(point))
                 return true;
@@ -270,22 +277,48 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// </summary>
     public void RecalculateZoneBoxes(Entity<ZoneComponent> zone)
     {
-        var boxes = MathHelperExtensions.GetNonOverlappingBoxes(zone.Comp.Boxes);
-        boxes = MathHelperExtensions.UnionInEqualSizedBoxes(boxes);
-        zone.Comp.Boxes = boxes.ToHashSet();
+        if (zone.Comp.ZoneParams is not { } @params)
+            return;
+
+        var newboxes = MathHelperExtensions.GetNonOverlappingBoxes(@params.Boxes);
+        newboxes = MathHelperExtensions.UnionInEqualSizedBoxes(newboxes);
+        @params.Boxes = newboxes.ToHashSet();
         Dirty(zone, zone.Comp);
     }
 
-    public ZoneParams GetZoneParams(Entity<ZoneComponent> entity)
+    public IEnumerable<Box2> GetAttachedToGridBoxes(IEnumerable<Box2> boxes, float gridSize = 1f)
     {
-        var meta = MetaData(entity);
-        return new ZoneParams
+        var attachedBoxes = new List<Box2>();
+        foreach (var box in boxes)
+            attachedBoxes.AddRange(MathHelperExtensions.GetIntersectsGridBoxes(box, gridSize));
+
+        attachedBoxes = MathHelperExtensions.GetNonOverlappingBoxes(boxes).ToList();
+        attachedBoxes = MathHelperExtensions.UnionInEqualSizedBoxes(boxes).ToList();
+        return attachedBoxes;
+    }
+
+    public int GetZonesCount()
+    {
+        var result = 0;
+        var query = EntityQueryEnumerator<ZoneComponent>();
+        while (query.MoveNext(out _, out _))
+            result++;
+
+        return result;
+    }
+
+    public ZoneParamsState GetZoneParams(Entity<ZoneComponent> zone)
+    {
+        var @params = zone.Comp.ZoneParams;
+        var meta = MetaData(zone);
+        return new ZoneParamsState
         {
-            Container = entity.Comp.Container ?? NetEntity.Invalid,
-            ProtoId = meta.EntityPrototype?.ID ?? BaseZoneId,
-            Name = meta.EntityName,
-            Color = entity.Comp.Color ?? DefaultColor,
-            Boxes = entity.Comp.Boxes
+            Container = @params?.Container ?? NetEntity.Invalid,
+            ProtoId = @params?.ProtoId ?? BaseZoneId,
+            Name = @params?.Name ?? meta.EntityName,
+            Color = @params?.Color ?? DefaultColor,
+            Boxes = @params?.Boxes ?? new HashSet<Box2>(),
+            AttachToGrid = @params?.AttachToGrid ?? false,
         };
     }
 }
@@ -308,11 +341,28 @@ public sealed partial class LeavedZoneEvent(Entity<ZoneComponent> zone, EntityUi
     public readonly EntityUid Entity = entity;
 }
 
-public struct ZoneParams()
+[Serializable, NetSerializable]
+public partial struct ZoneParamsState()
 {
+    /// <summary>
+    /// The entity that this zone is assigned to.
+    /// Used to determine local coordinates
+    /// </summary>
     public NetEntity Container;
+
     public string Name = string.Empty;
-    public string ProtoId = string.Empty;
-    public Color Color;
+
+    public string ProtoId = SharedZonesSystem.BaseZoneId;
+
+    /// <summary>
+    /// Current color of the zone
+    /// </summary>
+    public Color Color = SharedZonesSystem.DefaultColor;
+
+    public bool AttachToGrid = false;
+
+    /// <summary>
+    /// Boxes in local coordinates (attached to <see cref="Container"/>) that determine the size of the zone
+    /// </summary>
     public HashSet<Box2> Boxes = new();
 }

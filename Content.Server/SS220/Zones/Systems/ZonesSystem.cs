@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
@@ -13,6 +14,7 @@ namespace Content.Server.SS220.Zones.Systems;
 public sealed partial class ZonesSystem : SharedZonesSystem
 {
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly MapSystem _map = default!;
 
     public override void Initialize()
     {
@@ -44,114 +46,142 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         DeleteZone(entity.Owner);
     }
 
-    /// <inheritdoc cref="CreateZone(EntityUid, IEnumerable{Box2}, EntProtoId{ZoneComponent}?)"/>
-    /// <param name="boxCoordinates">Contains the coordinates for which the boxes will be created</param>
-    /// <param name="boundToGrid">Should the coordinates of the box be bound to the grid</param>
-    /// <returns></returns>
-    public Entity<ZoneComponent>? CreateZone(EntityUid container,
+    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
+    public Entity<ZoneComponent>? CreateZone(
         IEnumerable<(EntityCoordinates, EntityCoordinates)> boxCoordinates,
-        bool boundToGrid = false,
-        EntProtoId<ZoneComponent>? zoneProto = null)
+        string? protoId = null,
+        string? name = null,
+        Color? color = null,
+        bool attachToGrid = false)
     {
+        EntityUid? container = null;
         var vectors = boxCoordinates.Select(e =>
         {
             var p1 = e.Item1;
             var p2 = e.Item2;
 
-            if (p1.EntityId != container)
-                throw new ArgumentException($"Entity {container} doesn't contains coordinate {p1}");
-
-            if (p2.EntityId != container)
-                throw new ArgumentException($"Entity {container} doesn't contains coordinate {p2}");
+            container ??= p1.EntityId;
+            if (container != p1.EntityId || container != p2.EntityId)
+                throw new Exception($"An attempt to create a zone for coordinates from different parents. parent1: {p1.EntityId}, parent2: {p2.EntityId}; expected: {container}");
 
             var v1 = new Vector2(p1.X, p1.Y);
             var v2 = new Vector2(p2.X, p2.Y);
             return (v1, v2);
         });
 
-        return CreateZone(container, vectors, boundToGrid, zoneProto);
-    }
-
-    /// <inheritdoc cref="CreateZone(EntityUid, IEnumerable{Box2}, EntProtoId{ZoneComponent}?)"/>
-    /// <param name="boxCoordinates">Contains the coordinates for which the boxes will be created</param>
-    /// <param name="boundToGrid">Should the coordinates of the box be bound to the grid</param>
-    /// <returns></returns>
-    public Entity<ZoneComponent>? CreateZone(EntityUid container,
-        IEnumerable<(MapCoordinates, MapCoordinates)> boxCoordinates,
-        bool boundToGrid = false,
-        EntProtoId<ZoneComponent>? zoneProto = null)
-    {
-        if (!TryComp<MapComponent>(container, out var mapComponent))
+        if (container == null)
             return null;
 
+        return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid);
+    }
+
+    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
+    public Entity<ZoneComponent>? CreateZone(
+        IEnumerable<(MapCoordinates, MapCoordinates)> boxCoordinates,
+        string? protoId = null,
+        string? name = null,
+        Color? color = null,
+        bool attachToGrid = false)
+    {
+        EntityUid? container = null;
         var vectors = boxCoordinates.Select(e =>
         {
             var p1 = e.Item1;
             var p2 = e.Item2;
 
-            if (p1.MapId != mapComponent.MapId)
-                throw new ArgumentException($"The coordinate was obtained from map {p1.MapId}, when it should be from map {mapComponent.MapId}");
+            var map1 = _map.GetMap(p1.MapId);
+            var map2 = _map.GetMap(p2.MapId);
 
-            if (p2.MapId != mapComponent.MapId)
-                throw new ArgumentException($"The coordinate was obtained from map {p2.MapId}, when it should be from map {mapComponent.MapId}");
+            container ??= map1;
+            if (container != map1 || container != map2)
+                throw new Exception($"An attempt to create a zone for coordinates from different maps. map1: {map1}, map2: {map2}; expected: {container}");
 
             var v1 = new Vector2(p1.X, p1.Y);
             var v2 = new Vector2(p2.X, p2.Y);
             return (v1, v2);
         });
 
-        return CreateZone(container, vectors, boundToGrid, zoneProto);
+        if (container == null)
+            return null;
+
+        return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid);
     }
 
-    /// <inheritdoc cref="CreateZone(EntityUid, IEnumerable{Box2}, EntProtoId{ZoneComponent}?)"/>
-    /// <param name="vectors">Contains the coordinates for which the boxes will be created</param>
-    /// <param name="boundToGrid">Should the coordinates of the box be bound to the grid</param>
-    /// <returns></returns>
-    public Entity<ZoneComponent>? CreateZone(EntityUid container,
-        IEnumerable<(Vector2, Vector2)> vectors,
-        bool boundToGrid = false,
-        EntProtoId<ZoneComponent>? zoneProto = null)
+    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
+    public Entity<ZoneComponent>? CreateZone(
+        NetEntity container,
+        IEnumerable<(Vector2,Vector2)> points,
+        string? protoId = null,
+        string? name = null,
+        Color? color = null,
+        bool attachToGrid = false)
     {
-        if (boundToGrid)
-        {
-            var boxes = vectors.Select(e => GetIntegerBox(e.Item1, e.Item2));
-            return CreateZone(container, boxes, zoneProto);
-        }
-        else
-        {
-            var boxes = vectors.Select(e => GetBox(e.Item1, e.Item2));
-            return CreateZone(container, boxes, zoneProto);
-        }
+        var boxes = points.Select(p => Box2.FromTwoPoints(p.Item1, p.Item2));
+        return CreateZone(container, boxes, protoId, name, color, attachToGrid);
     }
 
-    /// <inheritdoc cref="CreateZone(EntityUid, IEnumerable{Box2}, EntProtoId{ZoneComponent}?)"/>
-    public Entity<ZoneComponent>? CreateZone(EntityUid container, IEnumerable<Box2i> boxes, EntProtoId<ZoneComponent>? zoneProto = null)
+    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
+    public Entity<ZoneComponent>? CreateZone(
+        NetEntity container,
+        IEnumerable<Box2> boxes,
+        string? protoId = null,
+        string? name = null,
+        Color? color = null,
+        bool attachToGrid = false)
     {
-        var array = boxes.Select(b => new Box2(b.BottomLeft, b.TopRight));
-        return CreateZone(container, array, zoneProto);
+        return CreateZone(new ZoneParamsState()
+        {
+            Container = container,
+            Boxes = boxes.ToHashSet(),
+            ProtoId = protoId ?? string.Empty,
+            Name = name ?? string.Empty,
+            Color = color ?? DefaultColor,
+            AttachToGrid = attachToGrid
+        });
+    }
+
+    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
+    public Entity<ZoneComponent>? CreateZone(ZoneParamsState @params)
+    {
+        var compParams = new ZoneParams();
+        compParams.WithState(@params);
+        return CreateZone(compParams);
     }
 
     /// <summary>
     /// Creates a new zone
     /// </summary>
-    public Entity<ZoneComponent>? CreateZone(EntityUid container, IEnumerable<Box2> boxes, EntProtoId<ZoneComponent>? zoneProto = null)
+    public Entity<ZoneComponent>? CreateZone(ZoneParams @params)
     {
-        var boxesHash = boxes.ToHashSet();
-        if (boxesHash.Count <= 0)
+        if (@params.Boxes.Count <= 0 || !@params.Container.IsValid())
             return null;
 
-        zoneProto ??= BaseZoneId;
-        var zone = Spawn(zoneProto, Transform(container).Coordinates);
+        if (string.IsNullOrEmpty(@params.Name))
+            @params.Name = $"Zone {GetZonesCount() + 1}";
+
+        if (string.IsNullOrEmpty(@params.ProtoId))
+            @params.ProtoId = BaseZoneId;
+
+        var container = GetEntity(@params.Container);
+        if (@params.AttachToGrid)
+        {
+            var gridSize = 1f;
+            if (TryComp<MapGridComponent>(container, out var mapGrid))
+                gridSize = mapGrid.TileSize;
+
+            @params.Boxes = GetAttachedToGridBoxes(@params.Boxes, gridSize).ToHashSet();
+        }
+
+        var zone = Spawn(@params.ProtoId, Transform(container).Coordinates);
         _transform.AttachToGridOrMap(zone);
 
         var zoneComp = EnsureComp<ZoneComponent>(zone);
-        zoneComp.Container = GetNetEntity(container);
-        zoneComp.Boxes = boxesHash;
+        zoneComp.ZoneParams = @params;
         Dirty(zone, zoneComp);
 
-        var zonesContainer = EnsureComp<ZonesContainerComponent>(container);
-        zonesContainer.Zones.Add(GetNetEntity(zone));
-        Dirty(container, zonesContainer);
+        var zoneContainer = EnsureComp<ZonesContainerComponent>(container);
+        zoneContainer.Zones.Add(GetNetEntity(zone));
+        Dirty(zone, zoneComp);
 
         return (zone, zoneComp);
     }
@@ -162,10 +192,10 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (!Resolve(zone, ref zone.Comp))
             return;
 
-        if (zone.Comp.Container is not { } parent)
+        if (zone.Comp.ZoneParams?.Container is not { } container)
             return;
 
-        DeleteZone(GetEntity(parent), zone);
+        DeleteZone(GetEntity(container), zone);
     }
 
     /// <summary>

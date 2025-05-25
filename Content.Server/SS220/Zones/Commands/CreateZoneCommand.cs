@@ -2,8 +2,13 @@
 using Content.Server.Administration;
 using Content.Server.SS220.Zones.Systems;
 using Content.Shared.Administration;
+using Content.Shared.SS220.Zones.Systems;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Numerics;
 
 namespace Content.Server.SS220.Zones.Commands;
 
@@ -16,24 +21,25 @@ public sealed partial class CreateZoneCommand : LocalizedCommands
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        if (args.Length != 2)
+        if (args.Length < 2)
             return;
 
-        if (!EntityUid.TryParse(args[0], out var parent))
+        if (!EntityUid.TryParse(args[0], out var container))
             return;
 
-        var coords = new List<(EntityCoordinates, EntityCoordinates)>();
+        var @params = new ZoneParamsState();
         var pairs = args[1].Split(';');
+        pairs = pairs.Select(x => x.Replace("(", string.Empty).Replace(")", string.Empty).Trim()).ToArray();
         for (var i = 0; i < pairs.Length; i++)
         {
-            var cur = pairs[i];
-            var num = cur.Split(' ');
+            var num = pairs[i].Split(',');
             if (num.Length > 4)
             {
-                shell.WriteLine($"Неверное количество аргументов в координатах бокса {i}");
+                shell.WriteLine($"Неверное количество аргументов в координатах бокса {i + 1}");
                 return;
             }
 
+            num = num.Select(x => x.Trim()).ToArray();
             if (!float.TryParse(num[0], out var x1) ||
                 !float.TryParse(num[1], out var y1) ||
                 !float.TryParse(num[2], out var x2) ||
@@ -43,12 +49,39 @@ public sealed partial class CreateZoneCommand : LocalizedCommands
                 return;
             }
 
-            var point1 = new EntityCoordinates(parent, x1, y1);
-            var point2 = new EntityCoordinates(parent, x2, y2);
-            coords.Add((point1, point2));
+            var box = Box2.FromTwoPoints(new Vector2(x1, y1), new Vector2(x2, y2));
+            @params.Boxes.Add(box);
         }
+        ParseOptionalsTags(argStr, ref @params);
 
         var zonesSystem = _entityManager.System<ZonesSystem>();
-        zonesSystem.CreateZone(parent, coords, true);
+        zonesSystem.CreateZone(@params);
+    }
+
+    private void ParseOptionalsTags(string input, ref ZoneParamsState zoneParams)
+    {
+        if (TryParseTag(input, "name", out var name))
+            zoneParams.Name = name;
+
+        if (TryParseTag(input, "protoid", out var protoId))
+            zoneParams.ProtoId = protoId;
+
+        if (TryParseTag(input, "color", out var colorHex) && Color.TryParse(colorHex, out var color))
+            zoneParams.Color = color;
+
+        if (TryParseTag(input, "attachtogrid", out var attachStr) && bool.TryParse(attachStr, out var attach))
+            zoneParams.AttachToGrid = attach;
+    }
+
+    private bool TryParseTag(string input, string tag, [NotNullWhen(true)] out string? value)
+    {
+        var pattern = @$"{tag}=([^{{}}()\[\]\s]+)";
+        Match match = Regex.Match(input, pattern);
+        if (match.Success)
+            value = match.Groups[1].Value;
+        else
+            value = null;
+
+        return value != null;
     }
 }

@@ -26,14 +26,15 @@ public sealed partial class ZonesBoxesDatasProvider : BoxesDatasProvider
             foreach (var netZone in container.Zones)
             {
                 var zone = _entityManager.GetEntity(netZone);
-                if (!_entityManager.TryGetComponent<ZoneComponent>(zone, out var zoneComp))
+                if (!_entityManager.TryGetComponent<ZoneComponent>(zone, out var zoneComp) ||
+                    zoneComp.ZoneParams is not { } @params)
                     continue;
 
                 var alpha = zone == _zones.SelectedZone?.Owner ? 0.25f : 0.125F;
-                var color = (zoneComp.Color ?? SharedZonesSystem.DefaultColor).WithAlpha(alpha);
+                var color = @params.Color.WithAlpha(alpha);
                 var data = new BoxesData(parent)
                 {
-                    Boxes = zoneComp.Boxes,
+                    Boxes = @params.Boxes,
                     Color = color,
                 };
 

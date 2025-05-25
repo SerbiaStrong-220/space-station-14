@@ -13,13 +13,13 @@ using System.Numerics;
 namespace Content.Client.SS220.Zones.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class ZoneStatePanel : PanelContainer
+public sealed partial class ZoneParamsPanel : PanelContainer
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IBoxLayoutManager _boxLayoutManager = default!;
     private readonly ZonesSystem _zones = default!;
 
-    public Action<ZoneParams>? ParamsChanged;
+    public Action<ZoneParamsState>? ParamsChanged;
 
     public Entity<ZoneComponent>? ZoneEntity
     {
@@ -29,7 +29,7 @@ public sealed partial class ZoneStatePanel : PanelContainer
 
     private Entity<ZoneComponent>? _zoneEntity;
 
-    public ZoneParams Params
+    public ZoneParamsState Params
     {
         get => GetParams();
         set
@@ -41,10 +41,10 @@ public sealed partial class ZoneStatePanel : PanelContainer
         }
     }
 
-    private ZoneParams _params;
+    private ZoneParamsState _params;
     private BoxLayoutMode _layoutMode = BoxLayoutMode.Adding;
 
-    public ZoneStatePanel(Entity<ZoneComponent>? entity)
+    public ZoneParamsPanel(Entity<ZoneComponent>? entity)
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
@@ -61,7 +61,7 @@ public sealed partial class ZoneStatePanel : PanelContainer
         base.ExitedTree();
     }
 
-    public ZoneStatePanel(ZoneParams @params) : this(null)
+    public ZoneParamsPanel(ZoneParamsState @params) : this(null)
     {
         _params = @params;
         Refresh();
@@ -84,7 +84,7 @@ public sealed partial class ZoneStatePanel : PanelContainer
 
     public void SetZoneEntity(Entity<ZoneComponent>? entity)
     {
-        Params = entity != null ? _zones.GetZoneParams(entity.Value) : new ZoneParams();
+        Params = entity != null ? _zones.GetZoneParams(entity.Value) : new ZoneParamsState();
     }
 
     private void StartLayout(BoxLayoutMode mode)
@@ -162,7 +162,7 @@ public sealed partial class ZoneStatePanel : PanelContainer
             return Box2.FromTwoPoints(new Vector2(x1, y1), new Vector2(x2, y2));
         }).ToList();
 
-        ChangeParams((ref ZoneParams p) =>
+        ChangeParams((ref ZoneParamsState p) =>
         {
             p.Boxes = newBoxes.ToHashSet();
         });
@@ -183,9 +183,9 @@ public sealed partial class ZoneStatePanel : PanelContainer
         Params = newParam;
     }
 
-    private delegate void ActionRefZoneParams(ref ZoneParams param);
+    private delegate void ActionRefZoneParams(ref ZoneParamsState param);
 
-    public ZoneParams GetParams()
+    public ZoneParamsState GetParams()
     {
         return _params;
     }

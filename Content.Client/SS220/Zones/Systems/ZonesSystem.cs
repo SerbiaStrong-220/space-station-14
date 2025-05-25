@@ -8,6 +8,8 @@ using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Client.Console;
 using Robust.Client.Graphics;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 
 namespace Content.Client.SS220.Zones.Systems;
 
@@ -117,5 +119,19 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     public void ExecuteDeleteZone(EntityUid zone)
     {
         _clientConsoleHost.ExecuteCommand($"zones:delete {GetNetEntity(zone)}");
+    }
+
+    public void ExecuteCreateZone(ZoneParamsState @params)
+    {
+        var boxes = string.Empty;
+        foreach (var box in @params.Boxes)
+        {
+            if (!string.IsNullOrEmpty(boxes))
+                boxes += "; ";
+
+            boxes += box.ToString();
+        }
+
+        _clientConsoleHost.ExecuteCommand($"zones:create {@params.Container} \"{boxes}\" name={@params.Name} protoid={@params.ProtoId} color={@params.Color.ToHex()} attachtogrid={@params.AttachToGrid}");
     }
 }
