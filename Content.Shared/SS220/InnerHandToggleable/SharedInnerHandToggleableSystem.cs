@@ -119,14 +119,14 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
 
         if (innerToggle.InnerItemUid != null)//if there is an item inside, then the action gets its icon
         {
-            UpdateToggleAction(ent, innerToggle.InnerItemUid.Value, false);
+            UpdateToggleAction(ent, innerToggle.InnerItemUid.Value, true);
             return;
         }
 
         //if there is an object in the hand, there is nothing inside and it fits -- we update the action
         if (handsComp.ActiveHand.HeldEntity != null && _whitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, handsComp.ActiveHand.HeldEntity.Value))
         {
-            UpdateToggleAction(ent, handsComp.ActiveHand.HeldEntity.Value, true);
+            UpdateToggleAction(ent, handsComp.ActiveHand.HeldEntity.Value, false);
             return;
         }
 

@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.StuckOnEquip;
 public sealed partial class StuckOnEquipComponent : Component
 {
     /// <summary>
-    /// If true, the item will be able be locked in hand, if false, entity will be locked only in the slot
+    /// If true, the item will be able to be locked in hand, if false entity will be locked only in the slot
     /// </summary>
     [DataField]
     public bool InHandItem = false;
