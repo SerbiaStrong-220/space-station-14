@@ -3,7 +3,6 @@
 - type: entity
   name: sedative sting
   parent: [BaseItem, CultYoggRestrictedItem]
-  #parent: BaseItem #ToDo_SS220 del this after tests
   id: SedativeStingCultYogg
   suffix: CultYogg
   components:
