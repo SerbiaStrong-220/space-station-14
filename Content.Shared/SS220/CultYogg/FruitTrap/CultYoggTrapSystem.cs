@@ -10,7 +10,7 @@ using Content.Shared.Stealth.Components;
 namespace Content.Shared.SS220.CultYogg.FruitTrap;
 
 /// <summary>
-/// This handlesModified <see cref="TrapSystem"/> for cult traps. All modifications add additional conditions.
+/// Modified <see cref="TrapSystem"/> for cult traps. All modifications add additional conditions.
 /// </summary>
 public sealed class CultYoggTrapSystem : EntitySystem
 {

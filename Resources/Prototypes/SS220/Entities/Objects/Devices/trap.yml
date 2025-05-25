@@ -35,9 +35,6 @@
       canStepTrigger: false
       maxEnsnares: 10
     - type: Trap
-      damageOnTrapped:
-        types:
-          Blunt: 5
       interactionDelay: 5
     - type: Tag
       tags:

@@ -28,13 +28,13 @@ public sealed partial class TrapComponent : Component
     public EntityWhitelist Blacklist = new();
 
     [ViewVariables(VVAccess.ReadWrite), DataField]
-    public DamageSpecifier DamageOnTrapped;
+    public DamageSpecifier? DamageOnTrapped;
 
     /// <summary>
     /// Reagent to inject into the tripper.
     /// </summary>
     [DataField]
-    public ProtoId<ReagentPrototype> Reagent;
+    public ProtoId<ReagentPrototype>? Reagent;
 
     /// <summary>
     /// How much of the reagent to inject.

@@ -129,15 +129,22 @@ public sealed class TrapSystem : EntitySystem
             _stunSystem.TryKnockdown(args.Tripper, ent.Comp.DurationStun, true, status);
         }
 
-        if (!HasComp<DamageableComponent>(args.Tripper))
-            return;
-        _damageableSystem.TryChangeDamage(args.Tripper, ent.Comp.DamageOnTrapped, true);
+        if (ent.Comp.DamageOnTrapped != null)
+        {
+            if (!HasComp<DamageableComponent>(args.Tripper))
+                return;
+            _damageableSystem.TryChangeDamage(args.Tripper, ent.Comp.DamageOnTrapped, true);
 
-        ChangeStateTrap(ent.Owner, ent.Comp);
+            ChangeStateTrap(ent.Owner, ent.Comp);
+        }
 
-        if (!_solutionContainers.TryGetInjectableSolution(args.Tripper, out var injectable, out _))
-            return;
-        _solutionContainers.TryAddReagent(injectable.Value, ent.Comp.Reagent, ent.Comp.Quantity, out _);
+        if (ent.Comp.Reagent != null)
+        {
+            if (!_solutionContainers.TryGetInjectableSolution(args.Tripper, out var injectable, out _))
+                return;
+
+            _solutionContainers.TryAddReagent(injectable.Value, ent.Comp.Reagent, ent.Comp.Quantity, out _);
+        }
 
         if (!TryComp<EnsnaringComponent>(ent.Owner, out var ensnaring))
             return;
