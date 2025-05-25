@@ -1,5 +1,7 @@
 
 using Content.Client.Administration.Managers;
+using Content.Client.SS220.Overlays;
+using Content.Client.SS220.Zones.Overlays;
 using Content.Client.SS220.Zones.UI;
 using Content.Shared.Administration;
 using Content.Shared.SS220.Zones.Components;
@@ -21,14 +23,18 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     public Action<Entity<ZoneComponent>?>? ZoneSelected;
 
-    private ZonesOverlay _overlay = default!;
+    private BoxesOverlay _overlay = default!;
+    private ZonesBoxesDatasProvider _overlayProvider = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         ControlWindow = new ZonesControlWindow();
-        _overlay = new ZonesOverlay();
+
+        _overlay = BoxesOverlay.GetOverlay();
+
+        _overlayProvider = new ZonesBoxesDatasProvider();
 
         _clientAdmin.AdminStatusUpdated += OnAdminStatusUpdated;
 
@@ -43,7 +49,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     private void OnAdminStatusUpdated()
     {
-        SetOverlay(_overlayManager.HasOverlay<ZonesOverlay>());
+        SetOverlay(_overlay.HasProvider(_overlayProvider));
     }
 
     private void OnZoneInit(Entity<ZoneComponent> entity, ref ComponentInit args)
@@ -94,11 +100,11 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         switch (value)
         {
             case true:
-                _overlayManager.AddOverlay(_overlay);
+                _overlay.AddProvider(_overlayProvider);
                 break;
 
             case false:
-                _overlayManager.RemoveOverlay(_overlay);
+                _overlay.RemoveProvider(_overlayProvider);
                 break;
         }
     }
