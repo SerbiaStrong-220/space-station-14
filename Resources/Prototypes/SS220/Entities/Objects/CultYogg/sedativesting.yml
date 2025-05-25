@@ -7,8 +7,8 @@
   id: SedativeStingCultYogg
   suffix: CultYogg
   components:
-  #- type: CultYoggWeapon
-  #  item: CultYoggCocoonSedativeSting
+  - type: CultYoggWeapon
+    item: CultYoggCocoonSedativeSting
   - type: Sprite
     sprite: SS220/Objects/Weapons/Melee/CultYogg/cult_yogg_sedativesting.rsi
     state: icon
