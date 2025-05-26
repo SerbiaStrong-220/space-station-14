@@ -1,19 +1,56 @@
+# Tail
 - type: marking
   id: ResomiTail
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Resomi]
-#  forcedColoring: true
+  forcedColoring: true
   sprites:
   - sprite: SS220/Mobs/Customization/Resomi/resomi_tail.rsi
     state: tail
 
+# Feathers
 - type: marking
-  id: ResomiFeathers
+  id: ResomiChestFeathers
   bodyPart: Chest
   markingCategory: Chest
   speciesRestriction: [Resomi]
-  # forcedColoring: true
   sprites:
   - sprite: SS220/Mobs/Customization/Resomi/resomi_feathers.rsi
-    state: feathers
+    state: chest_feathers
+
+- type: marking
+  id: ResomiLFootFeathers
+  bodyPart: LFoot
+  markingCategory: Foots
+  speciesRestriction: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_feathers.rsi
+    state: l_foot_feathers
+
+- type: marking
+  id: ResomiRFootFeathers
+  bodyPart: LFoot
+  markingCategory: Foots
+  speciesRestriction: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_feathers.rsi
+    state: r_foot_feathers
+
+- type: marking
+  id: ResomiLHandFeathers
+  bodyPart: LArm
+  markingCategory: Arms # Hands и Hand выдаёт ошибку. Но без них не отображается
+  speciesRestriction: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_feathers.rsi
+    state: l_hand_feathers
+
+- type: marking
+  id: ResomiRHandFeathers
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_feathers.rsi
+    state: r_hand_feathers

@@ -8,7 +8,24 @@
   },
   "states": [
     {
-      "name": "feathers"
+      "name": "chest_feathers",
+            "directions": 4
+    },
+    {
+      "name": "l_foot_feathers",
+            "directions": 4
+    },
+    {
+      "name": "r_foot_feathers",
+            "directions": 4
+    },
+    {
+      "name": "l_hand_feathers",
+            "directions": 4
+    },
+    {
+      "name": "r_hand_feathers",
+            "directions": 4
     }
   ]
 }
