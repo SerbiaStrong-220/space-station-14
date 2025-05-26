@@ -26,7 +26,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InnerHandToggleableComponent, ComponentInit>(OnCompInit);
+        SubscribeLocalEvent<InnerHandToggleableComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<InnerHandToggleableComponent, DidEquipHandEvent>(OnDidEquipHand);
         SubscribeLocalEvent<InnerHandToggleableComponent, DidUnequipHandEvent>(OnDidUnequipHand);
         SubscribeLocalEvent<InnerHandToggleableComponent, DidSwitchHandEvent>(OnDidSwitchHand);
@@ -34,7 +34,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         SubscribeLocalEvent<InnerHandToggleableComponent, ComponentShutdown>(OnComponentShutdown);
     }
 
-    private void OnCompInit(Entity<InnerHandToggleableComponent> ent, ref ComponentInit args)
+    private void OnMapInit(Entity<InnerHandToggleableComponent> ent, ref MapInitEvent args)
     {
         if (!TryComp<HandsComponent>(ent, out var handsComp))
             return;

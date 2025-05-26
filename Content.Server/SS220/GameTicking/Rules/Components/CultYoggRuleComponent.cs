@@ -17,9 +17,6 @@ namespace Content.Server.SS220.GameTicking.Rules.Components;
 public sealed partial class CultYoggRuleComponent : Component
 {
     [DataField]
-    public int ReqAmountOfMiGo = 3;
-
-    [DataField]
     public Dictionary<CultYoggStage, CultYoggStageDefinition> Stages { get; private set; } = new();
 
     /// <summary>
@@ -76,8 +73,10 @@ public sealed partial class CultYoggRuleComponent : Component
     public string TelepathyChannel = "TelepathyChannelYoggSothothCult";
 
     [DataField]
-    public EntityWhitelist WhitelistToggleAble;
-
+    public EntityWhitelist WhitelistToggleable = new EntityWhitelist
+    {
+        Tags = new() { "CultYoggInnerHandToggleable" }
+    };
     /// <summary>
     /// Check for an endgame screen title
     /// </summary>

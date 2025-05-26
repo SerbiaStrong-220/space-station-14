@@ -361,7 +361,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         telepathy.TelepathyChannelPrototype = rule.Comp.TelepathyChannel;
 
         var innerToggle = EnsureComp<InnerHandToggleableComponent>(uid);
-        innerToggle.Whitelist = rule.Comp.WhitelistToggleAble;
+        innerToggle.Whitelist = rule.Comp.WhitelistToggleable;
 
         EnsureComp<ShowCultYoggIconsComponent>(uid);//icons of cultists and sacraficials
         EnsureComp<ZombieImmuneComponent>(uid);//they are practically mushrooms
