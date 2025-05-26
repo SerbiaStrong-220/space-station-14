@@ -66,6 +66,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<MiGoComponent, MiGoErectEvent>(MiGoErect);
         SubscribeLocalEvent<MiGoComponent, MiGoSacrificeEvent>(MiGoSacrifice);
         SubscribeLocalEvent<MiGoComponent, MiGoAstralEvent>(MiGoAstral);
+        SubscribeLocalEvent<MiGoComponent, MiGoTeleportEvent>(MiGoTeleport);
 
         //astral DoAfterEvents
         SubscribeLocalEvent<MiGoComponent, AfterMaterialize>(OnAfterMaterialize);
@@ -88,6 +89,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         _actions.AddAction(uid, ref uid.Comp.MiGoAstralActionEntity, uid.Comp.MiGoAstralAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoErectActionEntity, uid.Comp.MiGoErectAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoSacrificeActionEntity, uid.Comp.MiGoSacrificeAction);
+        _actions.AddAction(uid, ref uid.Comp.MiGoTeleportActionEntity, uid.Comp.MiGoTeleportAction);
     }
 
     private void OnBoundUIOpened(Entity<MiGoComponent> entity, ref BoundUIOpenedEvent args)
@@ -509,6 +511,13 @@ public abstract class SharedMiGoSystem : EntitySystem
         }
 
         return true;
+    }
+    #endregion
+
+    #region Teleport
+    private void OnMiGoTeleport(Entity<MiGoComponent> entity, ref MiGoTeleportEvent args)
+    {
+
     }
     #endregion
 }
