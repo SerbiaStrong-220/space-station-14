@@ -114,7 +114,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                 else
                 {
                     // We have species-marking only for the Nians, so this log only leads to unnecessary errors.
-                    //Log.Error($"{newMarkingId} marking doesn't exist"); 
+                    //Log.Error($"{newMarkingId} marking doesn't exist");
                 }
                 break;
             case CultYoggStage.God:
@@ -261,7 +261,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             return;
         }
 
-        if (!AvaliableMiGoCheck() && !TryReplaceMiGo())//if amount of migo < required amount of migo or have 1 to replace
+        if (!TryReplaceMiGo())//if amount of migo < required amount of migo or have 1 to replace
         {
             _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-migo-full"), uid, uid);
             return;
@@ -295,28 +295,6 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         _popup.PopupEntity(message, uid, uid);
     }
 
-    //Check for avaliable amoiunt of MiGo or gib MiGo to replace
-    private bool AvaliableMiGoCheck()
-    {
-        //Check number of MiGo in gamerule
-        var ruleComp = _cultRule.GetCultGameRule();
-
-        if (ruleComp is null)
-            return false;
-
-        int reqMiGo = ruleComp.ReqAmountOfMiGo;
-
-        var query = EntityQueryEnumerator<MiGoComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            reqMiGo--;
-        }
-
-        if (reqMiGo > 0)
-            return true;
-
-        return false;
-    }
     private bool TryReplaceMiGo()
     {
         //if any MiGo needs to be replaced add here

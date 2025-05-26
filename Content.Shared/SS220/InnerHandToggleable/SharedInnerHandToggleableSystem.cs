@@ -5,10 +5,10 @@ using Content.Shared.Body.Systems;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 
 namespace Content.Shared.SS220.InnerHandToggleable;
 
@@ -20,6 +20,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hand = default!;
     [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public const string InnerHandPrefix = "inner_";
     public override void Initialize()
@@ -169,6 +170,11 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
 
         if (innerToggle.Container == null)
             return;
+
+        if (innerToggle.InnerItemUid != null && !handsComp.ActiveHand.IsEmpty)
+        {
+            _popup.PopupClient(Loc.GetString("action-inner-hand-toggle-activehand-full-popup "), ent, ent);
+        }
 
         if (innerToggle.InnerItemUid != null && handsComp.ActiveHand.IsEmpty)
         {

@@ -26,7 +26,7 @@ public sealed partial class InnerHandToggleableComponent : Component
     ///     Action used to toggle the item in or out.
     /// </summary>
     [ViewVariables, DataField(required: true)]
-    public EntProtoId Action = "ActionToggleLHand";
+    public EntProtoId Action = "ActionToggleHand";
 
     public EntityUid? ActionEntity;
 
