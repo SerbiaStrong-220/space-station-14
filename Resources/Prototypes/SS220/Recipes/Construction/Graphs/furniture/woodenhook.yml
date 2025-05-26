@@ -1,0 +1,38 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: constructionGraph
+  id: dndhook
+  start: dndhook
+  graph:
+    - node: dndhook
+      entity: MeatHookDnd
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+                prototype: MaterialWoodPlank1
+                amount: 2
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 1
+    - node: start
+
+- type: constructionGraph
+  id: woodenhook
+  start: woodenhook
+  graph:
+    - node: woodenhook
+      entity: WoodenMeatHook
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+                prototype: MaterialWoodPlank1
+                amount: 2
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 1
+    - node: start
+
+

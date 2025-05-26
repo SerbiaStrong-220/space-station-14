@@ -3,7 +3,8 @@
 - type: latheRecipe
   abstract: true
   id: BaseLightRecipe
-  category: Lights
+  categories:
+  - Lights
   completetime: 2
   materials:
     Steel: 50
@@ -103,6 +104,15 @@
     Steel: 300
     Plastic: 300
     Glass: 100
+
+- type: latheRecipe
+  id: PushHorn
+  result: PushHorn
+  completetime: 5
+  materials:
+    Steel: 500
+    Plastic: 500
+    Plasma: 200
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -206,6 +216,21 @@
     Silver: 25
 
 - type: latheRecipe
+  parent: BaseFauxTileRecipe
+  id: FauxTileAstroAsteroidSandBorderless
+  result: FloorTileItemAstroAsteroidSandBorderless
+
+- type: latheRecipe
+  id: FloorGreenCircuit
+  result: FloorTileItemGCircuit4
+  completetime: 2
+  materials:
+    Steel: 25
+    Plastic: 25
+    Gold: 25
+    Silver: 25
+
+- type: latheRecipe
   parent: TileGreenCircuit
   id: TileBlueCircuit
   result: FloorTileItemBCircuit
@@ -240,11 +265,19 @@
   materials:
     Plastic: 200
 
+- type: latheRecipe
+  id: ClothingOuterVestTank
+  result: ClothingOuterVestTank
+  completetime: 2
+  materials:
+    Cloth: 100
+    Steel: 50
+
 # SS220 Tape Recorder #32234 early merge begin
 - type: latheRecipe
   id: CassetteTape
   result: CassetteTape
-  category: Tools
+  categories: [ Tools ]
   completetime: 2
   materials:
     Steel: 50
@@ -253,9 +286,16 @@
 - type: latheRecipe
   id: TapeRecorder
   result: TapeRecorder
-  category: Tools
+  categories: [ Tools ]
   completetime: 3
   materials:
     Steel: 250
     Plastic: 250
 # SS220 Tape Recorder #32234 early merge end
+
+- type: latheRecipe
+  id: Ashtray
+  result: Ashtray
+  completetime: 1
+  materials:
+    Steel: 30

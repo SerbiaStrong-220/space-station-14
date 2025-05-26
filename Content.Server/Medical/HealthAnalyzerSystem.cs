@@ -18,6 +18,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
+using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
 
 namespace Content.Server.Medical;
 
@@ -63,8 +64,9 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             component.NextUpdate = _timing.CurTime + component.UpdateInterval;
 
             //Get distance between health analyzer and the scanned entity
+            //null is infinite range
             var patientCoordinates = Transform(patient).Coordinates;
-            if (!_transformSystem.InRange(patientCoordinates, transform.Coordinates, component.MaxScanRange))
+            if (component.MaxScanRange != null && !_transformSystem.InRange(patientCoordinates, transform.Coordinates, component.MaxScanRange.Value))
             {
                 //Range too far, disable updates
                 StopAnalyzingEntity((uid, component), patient);
@@ -198,6 +200,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         var bloodAmount = float.NaN;
         var bleeding = false;
         var unrevivable = false;
+        int? counterDeath = null; //SS220 LimitationRevive
 
         if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
             _solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
@@ -210,13 +213,19 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         if (TryComp<UnrevivableComponent>(target, out var unrevivableComp) && unrevivableComp.Analyzable)
             unrevivable = true;
 
+        //SS220 LimitationRevive - start
+        if (TryComp<LimitationReviveComponent>(target, out var reviveComp))
+             counterDeath = reviveComp.DeathCounter;
+        //SS220 LimitationRevive - end
+
         _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerScannedUserMessage(
             GetNetEntity(target),
             bodyTemperature,
             bloodAmount,
             scanMode,
             bleeding,
-            unrevivable
+            unrevivable,
+            counterDeath //SS220 LimitationRevive
         ));
     }
 }

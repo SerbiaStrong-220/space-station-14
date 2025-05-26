@@ -200,13 +200,15 @@ namespace Content.Client.Ghost
             _actions.RemoveAction(uid, component.ToggleGhostHearingActionEntity);
             // SS220 ADD GHOST HUD'S
             _actions.RemoveAction(uid, component.ToggleHudOnOtherActionEntity);
+            //ss220 add filter tts for ghost
+            _actions.RemoveAction(uid, component.ToggleRadioChannelsUIEntity);
             //SS220-ghost-hats
             _actions.RemoveAction(uid, component.ToggleAGhostBodyVisualsActionEntity);
 
             if (uid != _playerManager.LocalEntity)
                 return;
 
-            GhostVisibility = false;
+            ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
             PlayerRemoved?.Invoke(component);
         }
 
@@ -227,7 +229,7 @@ namespace Content.Client.Ghost
             }
             // SS220 colorful ghost end
 
-            GhostVisibility = true;
+            ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
             PlayerAttached?.Invoke(component);
         }
 
@@ -250,9 +252,17 @@ namespace Content.Client.Ghost
 
         private void OnGhostPlayerDetach(EntityUid uid, GhostComponent component, LocalPlayerDetachedEvent args)
         {
-            GhostVisibility = false;
+            ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
             PlayerDetached?.Invoke();
         }
+
+        // SS220-Fix ghosts visibility for other entities-begin
+        // Just a semantic separation for a better understanding of the logic
+        private void ResetGhostVisibility()
+        {
+            GhostVisibility = true;
+        }
+        // SS220-Fix ghosts visibility for other entities-end
 
         private void OnGhostWarpsResponse(GhostWarpsResponseEvent msg)
         {

@@ -1,52 +1,53 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Administration.Logs;
+using Content.Server.AlertLevel;
 using Content.Server.Antag;
+using Content.Server.Audio;
+using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
+using Content.Server.EUI;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
-using Content.Server.SS220.GameTicking.Rules.Components;
-using Content.Server.Station.Systems;
-using Content.Server.SS220.CultYogg.Sacraficials;
+using Content.Server.Pinpointer;
 using Content.Server.RoundEnd;
+using Content.Server.SS220.CultYogg.DeCultReminder;
+using Content.Server.SS220.CultYogg.Sacraficials;
+using Content.Server.SS220.GameTicking.Rules.Components;
+using Content.Server.SS220.Objectives.Components;
+using Content.Server.SS220.Objectives.Systems;
+using Content.Server.Station.Components;
+using Content.Server.Station.Systems;
 using Content.Server.Zombies;
 using Content.Shared.Audio;
+using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.CultYogg.Sacraficials;
-using Content.Shared.SS220.StuckOnEquip;
+using Content.Shared.SS220.InnerHandToggleable;
 using Content.Shared.SS220.Roles;
+using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.SS220.Telepathy;
+using Robust.Server.Player;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Shared.Database;
-using Content.Server.Administration.Logs;
-using Content.Server.SS220.Objectives.Systems;
-using Content.Server.SS220.Objectives.Components;
 using Robust.Shared.Utility;
-using Content.Server.Pinpointer;
-using Content.Server.Audio;
-using Robust.Shared.Audio.Systems;
-using Content.Server.AlertLevel;
-using Robust.Shared.Player;
-using Robust.Shared.Map;
-using Content.Server.EUI;
-using Robust.Server.Player;
-using Content.Server.SS220.CultYogg.DeCultReminder;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.SS220.CultYogg.Altar;
-using Content.Server.Station.Components;
-using Content.Server.Chat.Managers;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 
@@ -224,15 +225,15 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (!TryComp<MindComponent>(uid, out var mind))
             return;
 
-        if (mind.Session is null)
+        if (!_playerManager.TryGetSessionById(mind.UserId, out var session))
             return;
 
-        if (mind.Session.AttachedEntity is null)
+        if (session.AttachedEntity is null)
             return;
 
         //_adminLogger.Add(LogType.EventRan, LogImpact.High, $"CultYogg person {meta.EntityName} where picked for a tier: {tier}");
 
-        var sacrComp = EnsureComp<CultYoggSacrificialComponent>(mind.Session.AttachedEntity.Value);
+        var sacrComp = EnsureComp<CultYoggSacrificialComponent>(session.AttachedEntity.Value);
 
         sacrComp.Tier = tier;
     }
@@ -341,7 +342,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         _antag.SendBriefing(uid, Loc.GetString("cult-yogg-role-greeting"), null, rule.Comp.GreetSoundNotification);
 
-        if (initial)
+        if (initial && !rule.Comp.InitialCultistMinds.Contains (mindId))
             rule.Comp.InitialCultistMinds.Add(mindId);
 
         // Change the faction
@@ -358,6 +359,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         var telepathy = EnsureComp<TelepathyComponent>(uid);
         telepathy.CanSend = true;//we are allowing it cause testing
         telepathy.TelepathyChannelPrototype = rule.Comp.TelepathyChannel;
+
+        var innerToggle = EnsureComp<InnerHandToggleableComponent>(uid);
+        innerToggle.Whitelist = rule.Comp.WhitelistToggleable;
 
         EnsureComp<ShowCultYoggIconsComponent>(uid);//icons of cultists and sacraficials
         EnsureComp<ZombieImmuneComponent>(uid);//they are practically mushrooms
@@ -378,6 +382,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         {
             ProgressToStage(rule, nextStage);
         }
+        DirtyEntity(uid);
     }
     #endregion
 
@@ -422,6 +427,8 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         //Remove telepathy
         RemComp<TelepathyComponent>(uid);
 
+        RemComp<InnerHandToggleableComponent>(uid);
+
         RemComp<ShowCultYoggIconsComponent>(uid);
         RemComp<ZombieImmuneComponent>(uid);
 
@@ -430,6 +437,8 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         {
             _euiManager.OpenEui(new DeCultReminderEui(), session);
         }
+
+        DirtyEntity(uid);
     }
     #endregion
 
@@ -535,7 +544,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         args.AddLine(Loc.GetString("cult-yogg-round-end-initial-count", ("initialCount", component.InitialCultistMinds.Count)));
 
         var antags = _antag.GetAntagIdentifiers(uid);
-        //args.AddLine(Loc.GetString("zombie-round-end-initial-count", ("initialCount", antags.Count))); // ToDo Should we add this?
+
         foreach (var (mind, data, entName) in antags)
         {
             if (!component.InitialCultistMinds.Contains(mind))

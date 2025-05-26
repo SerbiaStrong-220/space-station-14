@@ -64,12 +64,13 @@
     price: 40
 
 # Scalpel
-
+# SS220 BaseScalpel added to separately define the scalpel and the laser scalpel
 - type: entity
-  name: scalpel
-  id: Scalpel
+  id: BaseScalpel # SS220 BaseScalpel
+  name: BaseScalpel # SS220 BaseScalpel
   parent: BaseToolSurgery
   description: A surgical tool used to make incisions into flesh.
+  abstract: true # SS220 BaseScalpel
   components:
   - type: Sharp
     butcherDelayModifier: 1.5 # Butchering with a scalpel, regardless of the type, will take 50% longer
@@ -106,6 +107,26 @@
     sound: /Audio/SS220/Surgery/scalpel.ogg
   # SS220 Surgery end
 
+# SS220 Scalpel item begin
+- type: entity
+  name: scalpel
+  id: Scalpel
+  parent: BaseScalpel
+  components:
+# SS220 Scalpel item end
+# SS220 Throwable Changes begin
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 90
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 6
+# SS220 Throwable Changes end
+
 - type: entity
   name: shiv
   id: ScalpelShiv
@@ -131,17 +152,40 @@
     damage:
       types:
         Slash: 12
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 8
+# SS220 Throwable Changes end
 
 - type: entity
   name: laser scalpel
   id: ScalpelLaser
-  parent: Scalpel
+  parent: BaseScalpel # Scalpel # SS220 Throwable Changes
   description: A scalpel which uses a directed laser to slice instead of a blade, for more precise surgery while also cauterizing as it cuts.
   components:
   - type: Sprite
     state: laser
   - type: Item
     heldPrefix: laser
+# SS220 Throwable Changes begin
+  - type: MeleeWeapon
+    wideAnimationRotation: 90
+    swingLeft: true
+    attackRate: 1.5
+    damage:
+      types:
+        Slash: 4
+        Heat: 8
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 2
+        Heat: 6
+# SS220 Throwable Changes end
 
 # Scissors
 
@@ -257,8 +301,8 @@
 - type: entity
   name: advanced circular saw
   id: SawAdvanced
-  parent: [ SawElectric]
-  description: You think you can cut anything with it.
+  parent: [ SawElectric, BaseSyndicateContraband ]
+  description: Interdyne's state-of-the-art surgical saw. Guaranteed to stay spotless and sterile, no matter how messy the job.
   components:
   - type: Sprite
     state: advanced

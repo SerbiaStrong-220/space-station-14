@@ -55,11 +55,18 @@
     stealGroup: FireAxe
   - type: IgniteOnMeleeHit
     fireStacks: -4
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 12
+# SS220 Throwable Changes end
+
 
 - type: entity
   id: FireAxeFlaming
   name: fire axe
-  parent: [FireAxe]
+  parent: [ FireAxe ]
   description: Why fight fire with an axe when you can fight with fire and axe? Now featuring rugged rubberized handle!
   components:
   - type: MeleeWeapon
@@ -78,10 +85,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-FireAxeFlaming-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-FireAxeFlaming-research
       jobRequired:
         - ResearchAssistant

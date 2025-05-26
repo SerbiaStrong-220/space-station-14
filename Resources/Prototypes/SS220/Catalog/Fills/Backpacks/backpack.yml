@@ -73,9 +73,9 @@
       - id: Hypospray
       - id: MedkitAdvancedFilled
       - id: CrowbarRed
-      - id: OmnizineChemistryBottle
-      - id: EpinephrineChemistryBottle
-      - id: EpinephrineChemistryBottle
+      - id: ChemistryBottleOmnizine
+      - id: ChemistryBottleEpinephrine
+      - id: ChemistryBottleEpinephrine
 
 - type: entity
   parent: ClothingBackpackERTJanitor
@@ -151,8 +151,6 @@
       - id: WeaponBlasterKRV
       - id: BlasterPowerCellPulse
         amount: 3
-      - id: BlasterPowerCellDisabler
-        amount: 2
       - id: FlashlightSeclite
       - id: MedkitCombatFilled
       - id: BlueShieldGasMask

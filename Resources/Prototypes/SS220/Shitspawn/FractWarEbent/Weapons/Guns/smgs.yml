@@ -19,12 +19,12 @@
     sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/SMGs/ussp_ppsh.rsi
   - type: Wieldable
   - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -16
+    minAngle: -2
+    maxAngle: -13
   - type: Gun
-    minAngle: 21
-    maxAngle: 32
-    shotsPerBurst: 5
+    minAngle: 17
+    maxAngle: 29
+    shotsPerBurst: 6
     availableModes:
     - SemiAuto
     - Burst
@@ -34,10 +34,21 @@
   - type: ItemSlots
     slots:
       gun_magazine:
+        name: Magazine
         startingItem: MagazinePistolSubMachineGunUssp_PPSh
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
         whitelist:
           tags:
             - MagazinePistolSubMachineGunUssp_PPSh
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgePistol
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgePistol
   - type: MagazineVisuals
     magState: mag
     steps: 1

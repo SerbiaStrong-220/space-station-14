@@ -17,6 +17,37 @@
     sprite: SS220/Mobs/Silicon/chassis.rsi
   - type: RotationVisuals
     horizontalRotation: 90
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: SolCommon
+      canSpeak: false
+    - id: Tradeband
+      canSpeak: false
+    - id: Gutter
+      canSpeak: false
+    - id: Clownish
+      canSpeak: true
+    - id: NeoRusskiya
+      canSpeak: false
+    - id: Sintaunathi
+      canSpeak: false
+    - id: Siiktajr
+      canSpeak: false
+    - id: VoxPidgin
+      canSpeak: false
+    - id: Rootspeak
+      canSpeak: false
+    - id: Bubblish
+      canSpeak: false
+    - id: Tkachi
+      canSpeak: false
+    - id: Arati
+      canSpeak: false
+    - id: Canilunzt
+      canSpeak: false
+    - id: Binary
+#     - id: Codespeak
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepClown
@@ -79,6 +110,6 @@
     interactSuccessSound:
       path: /Audio/Ambience/Objects/periodic_beep.ogg
   - type: RandomMetadata
-    nameSegments: [names_borg]
+    nameSegments: [NamesBorg]
   - type: Input
     context: "human"

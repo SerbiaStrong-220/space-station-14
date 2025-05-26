@@ -95,6 +95,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Neck/Cloak/administrator.rsi
 
+- type: entity
+  parent: ClothingSponsorNeckOtherShoulderBase
+  id: ClothingSponsorNeckMentor
+  name: плащ наставления
+  description: Особенный плащ, вручаемый учителям, неустанно направляющим избранных на их нелегком пути.
+  suffix: Sponsor Neck, Mentor
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/mentor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Neck/Cloak/mentor.rsi
+
 # Moderator
 - type: entity
   parent: ClothingSponsorNeckBase
@@ -112,8 +124,8 @@
 - type: entity
   parent: ClothingSponsorNeckBase
   id: ClothingSponsorNeckWikiEditors
-  name: «тень редактора»
-  description: Плащ, сотканный из теней, придаёт своему обладателю загадочность и мистические способности изменения информации о мире
+  name: плащ познания
+  description: Особый плащ, предоставленный первым, кто вообразил и сочинил правила нашего мира.
   suffix: Sponsor Neck, Wikired
   components:
   - type: Sprite

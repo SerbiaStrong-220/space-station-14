@@ -2,33 +2,39 @@
 
 - type: entity
   name: cult lantern
-  parent: [BaseItem, CultYoggRestrictedItem]
-  id: LanternFlashCultYogg
+  parent: BaseItem
+  id: CultYoggLantern
   suffix: CultYogg
   description: description
   components:
   - type: Sprite
     sprite: SS220/Objects/CultYogg/lantern_cult.rsi
     layers:
-    - state: lantern-on
-      shader: unshaded
+      - state: lantern
+      - state: lantern_on
+        shader: unshaded
+        visible: false
+        map: [ "light" ]
   - type: Clothing
-    sprite: Objects/Tools/lantern.rsi
+    sprite: SS220/Objects/CultYogg/lantern_cult.rsi
     equippedPrefix: off
     quickEquip: false
     slots:
     - Belt
+  - type: Item
+    heldPrefix: off
+  - type: CultYoggLamp
+    addPrefix: true
   - type: PointLight
+    enabled: false
     radius: 3
-    energy: 2.5
-    color: "#FFC458"
-  - type: Flash
-  - type: LimitedCharges
-    maxCharges: 1
-    charges: 1
-  - type: AutoRecharge
-    rechargeDuration: 120
-  - type: MeleeWeapon
-    damage:
-      types:
-        Blunt: 0 # melee weapon to allow flashing individual targetss
+    energy: 2
+    netsync: false
+  - type: ToggleableLightVisuals
+  - type: Appearance
+  - type: Physics
+    canCollide: false
+  - type: StealthProvider
+    whitelist:
+      tags:
+      - CultYoggStealthProvidable

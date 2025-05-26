@@ -80,6 +80,12 @@
     speechVerb: Arachnid
     speechSounds: Arachnid
     allowedEmotes: ['Click', 'Chitter', 'Hiss'] #ss-220-emote-fix
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Arati
+  # SS220-Add-Languages end
   - type: Vocal
     sounds:
       Male: UnisexArachnid
@@ -102,6 +108,8 @@
       - map: [ "enum.HumanoidVisualLayers.LArm" ]
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
       - map: ["jumpsuit"]
       - map: ["enum.HumanoidVisualLayers.LFoot"]
       - map: ["enum.HumanoidVisualLayers.RFoot"]
@@ -110,13 +118,13 @@
       - map: [ "gloves" ]
       - map: [ "shoes" ]
       - map: [ "ears" ]
-      - map: [ "outerClothing" ]
       - map: [ "eyes" ]
       - map: [ "belt" ]
       - map: [ "id" ]
+      - map: [ "outerClothing" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ] # Mentioned in moth code: This needs renaming lol.
-      - map: [ "neck" ]
       - map: [ "back" ]
+      - map: [ "neck" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
       - map: [ "enum.HumanoidVisualLayers.Hair" ] # Do these need to be here? (arachnid hair arachnid hair)
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
@@ -136,10 +144,14 @@
         visible: false
   - type: Inventory
     templateId: arachnid
+    speciesId: arachnid
   #ss220 emote 5 sec start
   - type: Emoting
     chatEmoteCooldown: 5.0
   #ss220 emote 5 sec end
+  #SS220 LimitationRevive - start
+  - type: LimitationRevive
+  #SS220 LimitationRevive - end
 
 
 - type: entity
@@ -153,6 +165,8 @@
 # SS220-change-races-height end
   - type: HumanoidAppearance
     species: Arachnid
+  - type: Inventory
+    speciesId: arachnid
 
 
 #>88w88<

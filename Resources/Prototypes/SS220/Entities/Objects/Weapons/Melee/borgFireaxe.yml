@@ -37,6 +37,10 @@
     delay: 1
   - type: IgniteOnMeleeHit
     fireStacks: -4
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 12
 
 - type: entity
   id: BorgFireAxeFlaming
@@ -55,10 +59,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-FireAxeFlaming-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-FireAxeFlaming-research
       jobRequired:
         - ResearchAssistant
@@ -66,4 +69,8 @@
         - Scientist
         - Borg
 # Corvax-HiddenDesc-End
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 12
 

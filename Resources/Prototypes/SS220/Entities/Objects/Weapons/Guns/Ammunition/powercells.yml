@@ -31,30 +31,37 @@
   - type: Extractable
     juiceSolution:
       reagents:
-        - ReagentId: Zinc
-          Quantity: 5
+      - ReagentId: Zinc
+        Quantity: 5
   - type: Tag
     tags:
       - KRSPowerCell
   - type: Appearance
   - type: PowerCellVisuals
   - type: Riggable
-  - type: AmmoCounter
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletBlaster
-    fireCost: 32
 
+# Standard 800 charge battery
 - type: entity
   parent: KRSPowerCell
   id: BlasterPowerCellAlt
   name: blaster power cell
-  description: It contains a lot more pain than you ever dreamed of.
-  suffix:  Laser
-  components:
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletBlasterAlt
-    fireCost: 40
+  description: Standard energy cell for blaster weapons.
+  suffix: Standard
 
+# Powerful 1200 charge battery
+- type: entity
+  parent: KRSPowerCell
+  id: BlasterPowerCellPulse
+  name: blaster power cell
+  description: High-capacity energy cell for advanced blaster weapons.
+  suffix: High-Capacity
+  components:
+  - type: Battery
+    pricePerJoule: 0.15
+    maxCharge: 1200
+    startingCharge: 1200
+
+# Blank version for crafting/printing
 - type: entity
   id: BlasterPowerCellAltPrinted
   suffix: Empty
@@ -72,36 +79,3 @@
   - type: Battery
     maxCharge: 800
     startingCharge: 0
-
-- type: entity
-  parent: KRSPowerCell
-  id: BlasterPowerCellDisabler
-  name: blaster power cell
-  description: It contains a lot more pain than you ever dreamed of.
-  suffix: Disabler
-  components:
-  - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/krs_magblaster_disabler.rsi
-    layers:
-    - map: [ "enum.PowerCellVisualLayers.Base" ]
-      state: base
-    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
-      state: o2
-      shader: unshaded
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletDisablerSmg
-    fireCost: 24
-
-- type: entity
-  parent: KRSPowerCell
-  id: BlasterPowerCellPulse
-  name: blaster power cell
-  description: It contains a lot more pain than you ever dreamed of.
-  components:
-  - type: Battery
-    pricePerJoule: 0.15
-    maxCharge: 1200
-    startingCharge: 1200
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletBlasterPulse
-    fireCost: 48

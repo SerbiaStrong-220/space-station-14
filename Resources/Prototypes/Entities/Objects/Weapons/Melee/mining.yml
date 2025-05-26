@@ -35,11 +35,23 @@
     sprite: Objects/Weapons/Melee/pickaxe.rsi
     storedRotation: -45
   - type: UseDelay
-  - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+      Wood: 100
+# SS220 new sound_drop effect, add MIXnikita
+  - type: EmitSoundOnLand
     sound:
       path: /Audio/SS220/Effects/Drop/axe.ogg
       params:
-        volume: 2 ##new sound_drop effect, add MIXnikita
+        volume: 2
+# SS220 new sound_drop effect, add MIXnikita
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 10
+# SS220 Throwable Changes end
 
 - type: entity
   name: mining drill
@@ -104,11 +116,19 @@
       params:
         volume: 2
   - type: Sharp
+  - type: Execution
+    doAfterDuration: 4.0
   - type: UnpoweredFlashlight
   - type: PointLight
     color: "#ffeead"
     enabled: false
     radius: 4
+# SS220 Throwable Changes begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 12
+# SS220 Throwable Changes end
 
 - type: entity
   parent: [BaseWeaponCrusher]
@@ -120,6 +140,15 @@
   - type: Sprite
     sprite: Objects/Weapons/Melee/crusher.rsi
     state: icon
+  - type: Item
+    size: Ginormous
+    sprite: Objects/Weapons/Melee/crusher-inhands.rsi
+  - type: Clothing
+    sprite: Objects/Weapons/Melee/crusher.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
   - type: AmmoCounter
   - type: UseDelayOnShoot
   - type: UseDelay
@@ -157,14 +186,11 @@
         Slash: 2.5
         Structural: 30
   - type: GunRequiresWield
-  - type: Item
-    size: Ginormous
-    sprite: Objects/Weapons/Melee/crusher-inhands.rsi
   - type: DisarmMalus
   - type: Prying
 
 - type: entity
-  parent: [ BaseWeaponCrusher]
+  parent: [ BaseKnife, BaseWeaponCrusher, BaseSecurityCargoContraband]
   id: WeaponCrusherDagger
   name: crusher dagger
   description: A scaled down version of a proto-kinetic crusher. Uses kinetic energy to vibrate the blade at high speeds.
@@ -178,10 +204,19 @@
     attackRate: 2
     damage:
       types:
-        Slash: 15
-  - type: Tag
-    tags:
-    - Knife
+        Slash: 12
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 12.5 # SS220 Throwable Changes
+  - type: DisarmMalus
+    malus: 0.225
+  - type: ThrowingAngle
+    angle: 225
 #SS220-knife-cutter-fix-begin
   - type: Utensil
     types:
@@ -197,6 +232,16 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Melee/crusher_glaive.rsi
+    state: icon
+  - type: Item
+    size: Ginormous
+    sprite: Objects/Weapons/Melee/crusher_glaive-inhands.rsi
+  - type: Clothing
+    sprite: Objects/Weapons/Melee/crusher_glaive.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
   - type: UseDelay
     delay: 1.9
   - type: LeechOnMarker
@@ -207,6 +252,3 @@
   - type: Tag
     tags:
       - Pickaxe
-  - type: Item
-    size: Ginormous
-    sprite: Objects/Weapons/Melee/crusher_glaive-inhands.rsi

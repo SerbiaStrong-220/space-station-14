@@ -17,16 +17,17 @@
     damageOpen:
       types:
         Blunt: 120
-        Stamina: 0
     damageFolded:
       types:
         Blunt: 28
-        Stamina: 120
+    staminaDamageFolded: 0
+    staminaDamageOpen: 120
     sizeOpened: Large
     sizeClosed: Small
   - type: StaminaDamageOnHit
     damage: 0
   - type: MeleeWeapon
+    wideAnimationRotation: -135
     soundHit: !type:SoundCollectionSpecifier
       collection: HomerunBaton
     damage:
@@ -47,7 +48,7 @@
           True: {state: telescope_on}
           False: {state: telescope_off}
   - type: MeleeThrowOnHit
-    lifetime: 0.1
+    distance: 1
 
 - type: entity
   parent: NTbaton
@@ -55,7 +56,7 @@
   suffix: Strong
   components:
   - type: MeleeThrowOnHit
-    lifetime: 5
+    distance: 10
 
 - type: entity
   parent: NTbaton
@@ -63,5 +64,5 @@
   suffix: Powerful
   components:
   - type: MeleeThrowOnHit
-    lifetime: 10
+    distance: 20
     speed: 20

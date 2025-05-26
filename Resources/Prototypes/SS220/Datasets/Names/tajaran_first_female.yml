@@ -1,42 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-- type: dataset
-  id: tajaran_first_female
+- type: localizedDataset
+  id: NamesTajaranFirstFemale
   values:
-  - Аза
-  - Аиша
-  - Алия
-  - Амина
-  - Асма
-  - Афифа
-  - Бакр
-  - Бараа
-  - Ватин
-  - Виджан
-  - Гадир
-  - Галия
-  - Гусун
-  - Гуюм
-  - Дан-а
-  - Дуа
-  - Заки-я
-  - Захр-а
-  - Кудва
-  - Кэнэс
-  - Лин
-  - Мавия
-  - Мак-ка
-  - Марам
-  - Маша-ра
-  - Рабиа
-  - Рукайа
-  - Са-ра
-  - Сабри-а
-  - Таджвид
-  - Умм
-  - Ха-на
-  - Хадия
-  - Хатун
-  - Хубб
-  - Юмна
-  - Ямин-а
+    prefix: name-tajaran-female-first-
+    count: 37

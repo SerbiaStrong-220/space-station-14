@@ -105,6 +105,15 @@ public abstract class SharedChatSystem : EntitySystem
         if (input.Length <= 2)
             return;
 
+        // SS220 language begin
+        if (input.StartsWith(RadioCommonPrefix))
+        {
+            prefix = input[..1];
+            output = input[1..];
+            return;
+        }
+        // SS220 language end
+
         if (!(input.StartsWith(RadioChannelPrefix) || input.StartsWith(RadioChannelAltPrefix)))
             return;
 

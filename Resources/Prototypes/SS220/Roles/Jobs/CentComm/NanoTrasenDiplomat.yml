@@ -50,6 +50,10 @@
   - CentralCommandERT
   - CentralCommandBSO
   - CentralCommandCBURN
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
 
 - type: startingGear
   id: CentCommNanoTrasenDiplomatGear
