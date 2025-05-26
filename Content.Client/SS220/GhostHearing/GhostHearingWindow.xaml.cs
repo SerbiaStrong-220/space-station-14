@@ -18,7 +18,6 @@ public sealed partial class GhostHearingWindow : FancyWindow
 
     public void SetChannels(List<(string Key, Color Color, string DisplayName, bool Enabled)> channels)
     {
-        ChannelsList.RemoveAllChildren();
         ChannelsList.DisposeAllChildren();
 
         foreach (var (key, color, name, enabled) in channels)

@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared.Ghost;
 using Content.Shared.Radio;
 using Content.Shared.SS220.GhostHearing;
+using Content.Shared.SS220.TTS;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -18,14 +19,16 @@ public sealed class GhostHearingSystem : SharedGhostHearingSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GhostHearingComponent, ComponentStartup>(OnHearingStartup);
+        SubscribeLocalEvent<GhostHearingComponent, MapInitEvent>(OnHearingStartup);
         SubscribeLocalEvent<GhostHearingComponent, BoundUIOpenedEvent>(OnBoundOpen);
         SubscribeLocalEvent<GhostHearingComponent, ToggleGhostRadioChannels>(OnToggleRadioChannelsUI);
 
         SubscribeLocalEvent<GhostHearingComponent, GhostHearingChannelToggledMessage>(OnToggleChannel);
+
+        SubscribeLocalEvent<GhostHearingComponent, RadioTtsSendAttemptEvent>(OnRadioAttempt);
     }
 
-    private void OnHearingStartup(Entity<GhostHearingComponent> ent, ref ComponentStartup args)
+    private void OnHearingStartup(Entity<GhostHearingComponent> ent, ref MapInitEvent args)
     {
         var prototypes = _prototypeManager.EnumeratePrototypes<RadioChannelPrototype>();
         var seenHandheld = false;
@@ -102,5 +105,16 @@ public sealed class GhostHearingSystem : SharedGhostHearingSystem
         }
 
         _ui.CloseUi(ent.Owner, GhostHearingKey.Key);
+    }
+
+    private void OnRadioAttempt(Entity<GhostHearingComponent> ent, ref RadioTtsSendAttemptEvent args)
+    {
+        if (!_prototypeManager.TryIndex<RadioChannelPrototype>(args.Channel, out var channelProto))
+            return;
+
+        if (ent.Comp.RadioChannels.TryGetValue(channelProto, out var canHear) && !canHear)
+        {
+            args.Cancel();
+        }
     }
 }

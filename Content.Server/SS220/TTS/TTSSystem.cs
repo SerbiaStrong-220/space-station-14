@@ -96,24 +96,11 @@ public sealed partial class TTSSystem : EntitySystem
 
         foreach (var receiver in args.Receivers)
         {
-            if (!TryComp(receiver.Actor, out GhostHearingComponent? hearing))
-            {
-                receivers.Add(receiver);
-                continue;
-            }
+            var ev = new RadioTtsSendAttemptEvent(args.Channel);
+            RaiseLocalEvent(receiver.Actor, ev);
 
-            if (args.Channel != null &&
-                _prototypeManager.TryIndex<RadioChannelPrototype>(args.Channel, out var channelProto))
-            {
-                if (hearing.RadioChannels.TryGetValue(channelProto, out var canHear) && canHear)
-                {
-                    receivers.Add(receiver);
-                }
-            }
-            else
-            {
+            if (!ev.Cancelled)
                 receivers.Add(receiver);
-            }
         }
 
         HandleRadio(receivers.ToArray(), args.Message, protoVoice.Speaker);
