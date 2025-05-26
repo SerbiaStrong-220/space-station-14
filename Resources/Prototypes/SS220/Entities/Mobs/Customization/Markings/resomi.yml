@@ -1,0 +1,19 @@
+- type: marking
+  id: ResomiTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Resomi]
+#  forcedColoring: true
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail.rsi
+    state: tail
+
+- type: marking
+  id: ResomiFeathers
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Resomi]
+  # forcedColoring: true
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_feathers.rsi
+    state: feathers

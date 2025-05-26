@@ -1,0 +1,268 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  save: false
+  name: Urist McResomi
+  parent: BaseMobSpeciesOrganic
+  id: BaseMobResomi
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: Resomi
+  - type: Icon
+    sprite: SS220/Mobs/Species/Resomi/parts.rsi
+    state: full
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    scale: 0.9, 0.9    
+    layers:
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+    - map: [ "enum.HumanoidVisualLayers.RArm" ]
+    - map: [ "enum.HumanoidVisualLayers.LArm" ]
+    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    # - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    # - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
+    - map: [ "jumpsuit" ]
+    - map: [ "enum.HumanoidVisualLayers.LFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.RFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.LHand" ]
+    - map: [ "enum.HumanoidVisualLayers.RHand" ]
+    - map: [ "gloves" ]
+    - map: [ "shoes" ]
+    - map: [ "ears" ]
+    - map: [ "eyes" ]
+    - map: [ "belt" ]
+    - map: [ "id" ]
+    - map: [ "outerClothing" ]
+    - map: [ "back" ]
+    - map: [ "neck" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "suitstorage" ]
+    - map: [ "enum.HumanoidVisualLayers.Tail" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: SS220/Objects/Misc/handcuffs.rsi
+      state: body-overlay-2-resomi
+      visible: false
+    - map: [ "clownedon" ]
+      sprite: "SS220/Effects/creampie.rsi"
+      state: "creampie_resomi" # Not default
+      visible: false
+  - type: Body
+    prototype: Resomi
+    requiredLegs: 2
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Resomi
+  # - type: TypingIndicator
+  #   proto: resomi
+#  - type: ResomiAccent
+  # - type: Vocal
+    # sounds:
+    #   Male: Resomi
+    #   Female: Resomi
+    #   Unsexed: Resomi
+  # - type: Speech
+    # speechSounds: Resomi
+    # speechVerb: Resomi
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: SS220/Mobs/Effects/resomi_brute_damage.rsi
+        color: "#ff05ff"
+      Burn:
+        sprite: SS220/Mobs/Effects/resomi_burn_damage.rsi
+  - type: Perishable
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+      - id: FoodMeat
+        amount: 5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 185
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Emoting
+    chatEmoteCooldown: 5.0
+  - type: Thirst
+  - type: Hunger
+  - type: MeleeWeapon
+    soundHit:
+      collection: AlienClaw
+    angle: 30
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Slash: 5
+  - type: Temperature # Пошаманить потом
+    heatDamageThreshold: 320
+    coldDamageThreshold: 230
+    currentTemperature: 310.15
+    specificHeat: 42
+    coldDamage:
+      types:
+        Cold : 0.05 #per second, scales with temperature & other constants
+    heatDamage:
+      types:
+        Heat : 2 #per second, scales with temperature & other constants
+  - type: TemperatureSpeed
+    thresholds:
+      289: 0.8
+      275: 0.6
+      250: 0.4
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    # - id: Язык резоми
+  - type: LimitationRevive
+    reviveLimit: 3
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+          state: hand_r
+  - type: Inventory
+    speciesId: resomi
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: hand
+      head:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: head
+      back:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: shoes
+      belt:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: belt
+      neck:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: neck
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: MobHumanDummy
+  id: MobResomiDummy
+  description: A dummy Resomi meant to be used in character setup.
+  components:
+  - type: Sprite
+    scale: 0.9, 0.9
+  - type: HumanoidAppearance
+    species: Resomi
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+          state: hand_r
+  - type: Inventory
+    speciesId: esomi
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: jumpsuit
+      eyes:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: eyes
+      gloves:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: hand
+      head:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: head
+      back:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: back
+      ears:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: ears
+      shoes:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: shoes
+      belt:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: belt
+      neck:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: neck
+

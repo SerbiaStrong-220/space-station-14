@@ -14,6 +14,13 @@
     Heat: 1.15 # so about heat, we make them receive more heat cause tajaran Secs > any other species secs #SS220 TTK update
 
 - type: damageModifierSet
+  id: Resomi # Ну вроде так ря
+  coefficients:
+    Cold: 0.8
+    Heat: 1.15
+    Poison: 1.2
+
+- type: damageModifierSet
   id: TomatoKiller
   coefficients:
     Blunt: 1
