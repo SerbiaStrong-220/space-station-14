@@ -85,6 +85,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
     public void SetZoneEntity(Entity<ZoneComponent>? entity)
     {
         Params = entity != null ? _zones.GetZoneParams(entity.Value) : new ZoneParamsState();
+        _zoneEntity = entity;
     }
 
     private void StartLayout(BoxLayoutMode mode)
@@ -158,7 +159,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             var x1 = MathF.Round(b.BottomLeft.X, 2);
             var y1 = MathF.Round(b.BottomLeft.Y, 2);
             var x2 = MathF.Round(b.TopRight.X, 2);
-            var y2 = MathF.Round(b.BottomLeft.X, 2);
+            var y2 = MathF.Round(b.TopRight.Y, 2);
             return Box2.FromTwoPoints(new Vector2(x1, y1), new Vector2(x2, y2));
         }).ToList();
 

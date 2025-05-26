@@ -63,7 +63,7 @@ public static partial class MathHelperExtensions
                 var newParts = new List<Box2>();
                 foreach (var part in currentParts)
                 {
-                    if (part.Intersects(existing))
+                    if (part.IntersectPercentage(existing) > 0)
                     {
                         var subParts = SubstructBox(part, existing);
                         newParts.AddRange(subParts);
@@ -139,10 +139,16 @@ public static partial class MathHelperExtensions
 
             for (var i = 0; i < result.Count; i++)
             {
+                if (used[i])
+                    continue;
+
                 var current = result[i];
                 var intersects = GetIntersectedBoxes(i);
                 for (var k = 1; k <= intersects.Count; k++)
                 {
+                    if (used[i])
+                        break;
+
                     var keys = intersects.Keys.Where(e => !used.ElementAt(e)).ToArray();
                     var combinations = GetCombinations(keys, k);
                     foreach (var combination in combinations)
@@ -228,25 +234,25 @@ public static partial class MathHelperExtensions
     /// </summary>
     public static IEnumerable<Box2> GetIntersectsGridBoxes(Box2 box, float gridSize = 1f, bool closedRegion = true)
     {
-        var minGridX = (int)Math.Floor(box.Left / gridSize);
-        var maxGridX = (int)Math.Ceiling(box.Right / gridSize);
-        var minGridY = (int)Math.Floor(box.Bottom / gridSize);
-        var maxGridY = (int)Math.Ceiling(box.Top / gridSize);
+        var startBoxX = (int)Math.Floor(box.Left / gridSize);
+        var endBoxX = (int)Math.Floor(box.Right / gridSize);
+        var startBoxY = (int)Math.Floor(box.Bottom / gridSize);
+        var endBoxY = (int)Math.Floor(box.Top / gridSize);
 
         var result = new List<Box2>();
-        for (var gx = minGridX; gx <= maxGridX; gx++)
+        for (var bx = startBoxX; bx <= endBoxX; bx++)
         {
-            for (var gy = minGridY; gy <= maxGridY; gy++)
+            for (var by = startBoxY; by <= endBoxY; by++)
             {
-                var left = gx * gridSize;
-                var bottom = gy * gridSize;
+                var left = bx * gridSize;
+                var bottom = by * gridSize;
                 var right = left + gridSize;
                 var top = bottom + gridSize;
 
                 var gridBox = new Box2(left, bottom, right, top);
 
-                if (gridBox.IntersectPercentage(box) > 0)
-                    result.Add(gridBox);
+                //if (gridBox.IntersectPercentage(box) > 0)
+                result.Add(gridBox);
             }
         }
 

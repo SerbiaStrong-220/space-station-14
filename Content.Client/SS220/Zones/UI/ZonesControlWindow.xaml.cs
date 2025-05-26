@@ -142,15 +142,15 @@ public sealed partial class ZonesControlWindow : DefaultWindow
             if (!isExtended)
             {
                 OptionsBox.Visible = true;
-                var x = Size.X + MathF.Max(_statePanel.Size.X, _statePanel.MinSize.X);
-                SetSize = new Vector2(x, Size.Y);
+                var x = MainBox.Size.X - MathF.Max(OptionsBox.Size.X, _statePanel.MinSize.X) - OptionsBox.Margin.SumHorizontal;
+                MainBox.SetSize = new Vector2(x, MainBox.Size.Y);
             }
         }
         else if (isExtended)
         {
             OptionsBox.Visible = false;
-            var x = Size.X - _statePanel.Size.X;
-            SetSize = new Vector2(x, Size.Y);
+            var x = MainBox.Size.X + OptionsBox.Size.X + OptionsBox.Margin.SumHorizontal;
+            MainBox.SetSize = new Vector2(x, MainBox.Size.Y);
         }
 
         _statePanel.ZoneEntity = entity;
