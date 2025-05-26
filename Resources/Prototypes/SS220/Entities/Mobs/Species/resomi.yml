@@ -195,6 +195,8 @@
           32:
             sprite: SS220/Mobs/Species/Resomi/displacement.rsi
             state: neck
+  - type: Bloodstream
+    bloodReagent: ResomiBlood
 
 - type: entity
   categories: [ HideSpawnMenu ]
