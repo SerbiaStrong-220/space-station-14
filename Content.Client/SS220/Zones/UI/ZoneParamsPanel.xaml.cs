@@ -163,7 +163,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             return Box2.FromTwoPoints(new Vector2(x1, y1), new Vector2(x2, y2));
         }).ToList();
 
-        ChangeParams((ref ZoneParamsState p) =>
+        Params.ChangeState((ref ZoneParamsState p) =>
         {
             p.Boxes = newBoxes.ToHashSet();
         });
@@ -176,15 +176,6 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         RemoveLayoutReact();
         _boxLayoutManager.SetOverlay(false);
     }
-
-    private void ChangeParams(ActionRefZoneParams action)
-    {
-        var newParam = _params;
-        action.Invoke(ref newParam);
-        Params = newParam;
-    }
-
-    private delegate void ActionRefZoneParams(ref ZoneParamsState param);
 
     public ZoneParamsState GetParams()
     {

@@ -55,36 +55,9 @@ public sealed partial class CreateZoneCommand : LocalizedCommands
             var box = Box2.FromTwoPoints(new Vector2(x1, y1), new Vector2(x2, y2));
             @params.Boxes.Add(box);
         }
-        ParseOptionalsTags(argStr, ref @params);
+        @params.ParseOptionalTags(argStr);
 
         var zonesSystem = _entityManager.System<ZonesSystem>();
         zonesSystem.CreateZone(@params);
-    }
-
-    private void ParseOptionalsTags(string input, ref ZoneParamsState zoneParams)
-    {
-        if (TryParseTag(input, "name", out var name))
-            zoneParams.Name = name;
-
-        if (TryParseTag(input, "protoid", out var protoId))
-            zoneParams.ProtoId = protoId;
-
-        if (TryParseTag(input, "color", out var colorHex) && Color.TryParse(colorHex, out var color))
-            zoneParams.Color = color;
-
-        if (TryParseTag(input, "attachtogrid", out var attachStr) && bool.TryParse(attachStr, out var attach))
-            zoneParams.AttachToGrid = attach;
-    }
-
-    private bool TryParseTag(string input, string tag, [NotNullWhen(true)] out string? value)
-    {
-        var pattern = @$"{tag}=([^{{}}()\[\]\s]+)";
-        Match match = Regex.Match(input, pattern);
-        if (match.Success)
-            value = match.Groups[1].Value;
-        else
-            value = null;
-
-        return value != null;
     }
 }

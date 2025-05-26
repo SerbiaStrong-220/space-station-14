@@ -6,8 +6,10 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using System.Text.RegularExpressions;
 
 namespace Content.Shared.SS220.Zones.Systems;
 
@@ -321,6 +323,18 @@ public abstract partial class SharedZonesSystem : EntitySystem
             AttachToGrid = @params?.AttachToGrid ?? false,
         };
     }
+
+    public static bool TryParseTag(string input, string tag, [NotNullWhen(true)] out string? value)
+    {
+        var pattern = @$"{tag}=([^{{}}()\[\]\s]+)";
+        Match match = Regex.Match(input, pattern);
+        if (match.Success)
+            value = match.Groups[1].Value;
+        else
+            value = null;
+
+        return value != null;
+    }
 }
 
 /// <summary>
@@ -365,4 +379,50 @@ public partial struct ZoneParamsState()
     /// Boxes in local coordinates (attached to <see cref="Container"/>) that determine the size of the zone
     /// </summary>
     public HashSet<Box2> Boxes = new();
+
+    public void ChangeState(ActionRefZoneParams action)
+    {
+        action.Invoke(ref this);
+    }
+
+    public delegate void ActionRefZoneParams(ref ZoneParamsState param);
+
+    public void ParseOptionalTags(string input)
+    {
+        foreach (var field in Enum.GetValues<OptionalTags>())
+        {
+            var tag = field.ToString().ToLower();
+            if (!SharedZonesSystem.TryParseTag(input, tag, out var value))
+                continue;
+
+            switch (field)
+            {
+                case OptionalTags.Name:
+                    Name = value;
+                    break;
+
+                case OptionalTags.ProtoId:
+                    ProtoId = value;
+                    break;
+
+                case OptionalTags.Color:
+                    if (Color.TryParse(value, out var color))
+                        Color = color;
+                    break;
+
+                case OptionalTags.AttachToGrid:
+                    if (bool.TryParse(value, out var attach))
+                        AttachToGrid = attach;
+                    break;
+            }
+        }
+    }
+
+    public enum OptionalTags
+    {
+        Name,
+        ProtoId,
+        Color,
+        AttachToGrid
+    }
 }
