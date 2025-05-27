@@ -1,0 +1,326 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Base (Базовый, Родительский)
+- type: entity
+  parent: ClothingUniformBaseFoldable
+  abstract: true
+  id: ClothingUniformShirtBase
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/white_dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/white_dark.rsi
+
+# White (Белый)
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtWhiteDark
+  name: white shirt with dark trousers
+  description: A neat white shirt with dark trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/white_dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/white_dark.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtWhiteBlue
+  name: white shirt with blue trousers
+  description: A neat white shirt with blue trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/white_blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/white_blue.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtWhiteBlueindigo
+  name: white shirt with blueindigo trousers
+  description: A neat white shirt with blueindigo trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/white_blueindigo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/white_blueindigo.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtWhiteDarkcarp
+  name: white shirt with darkcarp leather trousers
+  description: A stark white shirt accompanied by trousers crafted from Darkcarp leather — a rare material symbolizing power and prestige. The leather's deep, scale-like texture and faint iridescence echo the formidable creature it was taken from, making this outfit a mark of authority.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/white_darkcarp.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/white_darkcarp.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtWhiteGold
+  name: white shirt with gold trousers
+  description: A white shirt and trousers in pure gold. His beauty makes your heart beat faster, just like yours.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/white_gold.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/white_gold.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtWhiteGrey
+  name: white shirt with grey trousers
+  description: A neat white shirt with grey trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/white_grey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/white_grey.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtWhiteAshen
+  name: white shirt with ashen trousers 
+  description: A crisp white shirt paired with trousers in a forbidding ash-grey, the color of unyielding order. Worn by those who enforce the law with cold precision, its muted tone hides neither authority nor the weight of judgment.  
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/white_officialgrey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/white_officialgrey.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtWhiteCrimson
+  name: white shirt with red trousers
+  description: A crisp white shirt contrasted by bold crimson trousers — a color reserved for high-ranking officials and those unafraid to paint their ambitions in blood. The red strikes fear and demands obedience. 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/white_officialred.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/white_officialred.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtWhitePink
+  name: white shirt with pink trousers
+  description: A neat white shirt with pink trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/white_pink.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/white_pink.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtWhiteTrusted
+  name: uniform trusted lawyer NanoTrasen
+  description: A chic suit for those who follow the impeccable execution of the company's laws. They say that you are able to impose your demands even on God himself.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/white_trusted.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/white_trusted.rsi
+
+# Dark (Тёмный)
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtDarkDark
+  name: dark shirt with dark trousers
+  description: A neat dark shirt with dark trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_dark.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtDarkBlue
+  name: dark shirt with blue trousers
+  description: A neat dark shirt with blue trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_blue.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtDarkBlueindigo
+  name: dark shirt with blueindigo trousers
+  description: A neat dark shirt with blueindigo trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_blueindigo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_blueindigo.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtDarkDarkcarp
+  name: dark shirt with darkcarp leather trousers
+  description: A stark dark shirt accompanied by trousers crafted from Darkcarp leather — a rare material symbolizing power and prestige. The leather's deep, scale-like texture and faint iridescence echo the formidable creature it was taken from, making this outfit a mark of authority.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_darkcarp.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_darkcarp.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtDarkGold
+  name: dark shirt with gold trousers
+  description: A dark shirt and trousers in pure gold. His beauty makes your heart beat faster, just like yours.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_gold.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_gold.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtDarkGrey
+  name: dark shirt with grey trousers
+  description: A neat dark shirt with grey trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_grey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_grey.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtDarkOfficialgrey
+  name: dark shirt with ashen trousers 
+  description: A crisp dark shirt paired with trousers in a forbidding ash-grey, the color of unyielding order. Worn by those who enforce the law with cold precision, its muted tone hides neither authority nor the weight of judgment.  
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_officialgrey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_officialgrey.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtDarkCrimson
+  name: dark shirt with red trousers
+  description: A crisp dark shirt contrasted by bold crimson trousers — a color reserved for high-ranking officials and those unafraid to paint their ambitions in blood. The red strikes fear and demands obedience. 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_officialred.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_officialred.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtDarkPink
+  name: dark shirt with pink trousers
+  description: A neat dark shirt with pink trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_pink.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/dark_pink.rsi
+
+# Blue (Синий)
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtBlueDark
+  name: blue shirt with dark trousers
+  description: A neat blue shirt with dark trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_dark.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtBlueBlue
+  name: blue shirt with blue trousers
+  description: A neat blue shirt with blue trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_blue.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtBlueDarkcarp
+  name: blue shirt with darkcarp leather trousers
+  description: A stark blue shirt accompanied by trousers crafted from Darkcarp leather — a rare material symbolizing power and prestige. The leather's deep, scale-like texture and faint iridescence echo the formidable creature it was taken from, making this outfit a mark of authority.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_darkcarp.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_darkcarp.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtBlueGold
+  name: blue shirt with gold trousers
+  description: A blue shirt and trousers in pure gold. His beauty makes your heart beat faster, just like yours.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_gold.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_gold.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtBlueGrey
+  name: blue shirt with grey trousers
+  description: A neat blue shirt with grey trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_grey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_grey.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtBlueOfficialgrey
+  name: blue shirt with ashen trousers 
+  description: A crisp blue shirt paired with trousers in a forbidding ash-grey, the color of unyielding order. Worn by those who enforce the law with cold precision, its muted tone hides neither authority nor the weight of judgment.  
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_officialgrey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_officialgrey.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtBlueCrimson
+  name: blue shirt with red trousers
+  description: A crisp blue shirt contrasted by bold crimson trousers — a color reserved for high-ranking officials and those unafraid to paint their ambitions in blood. The red strikes fear and demands obedience. 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_officialred.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/blue_officialred.rsi
+
+# Full
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtDarkcarp
+  name: darkcarp leather shirt and trousers
+  description: A stark darkcarp leather shirt accompanied by trousers crafted from Darkcarp leather — a rare material symbolizing power and prestige. The leather's deep, scale-like texture and faint iridescence echo the formidable creature it was taken from, making this outfit a mark of authority.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/darkcarp.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/darkcarp.rsi
+
+- type: entity
+  parent: ClothingUniformShirtBase
+  id: ClothingUniformShirtGold
+  name: gold shirt and trousers
+  description: A gold shirt and trousers in pure gold. His beauty makes your heart beat faster, just like yours.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/gold.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/gold.rsi
+    
