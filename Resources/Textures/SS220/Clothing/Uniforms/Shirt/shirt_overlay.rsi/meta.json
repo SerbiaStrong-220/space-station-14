@@ -8,28 +8,46 @@
   },
   "states": [
     {
-      "name": "carp-silver",
+      "name": "carp-silver-equipped-INNERCLOTHING",
       "directions": 4
     },
     {
-      "name": "carp-gold",
+      "name": "carp-gold-equipped-INNERCLOTHING",
       "directions": 4
     },
     {
-      "name": "belt-gold",
+      "name": "belt-gold-equipped-INNERCLOTHING",
       "directions": 4
     },
     {
-      "name": "leather-gold",
+      "name": "leather-gold-equipped-INNERCLOTHING",
       "directions": 4
     },
     {
-      "name": "leather-silver",
+      "name": "leather-silver-equipped-INNERCLOTHING",
       "directions": 4
     },
     {
-      "name": "belt-silver",
+      "name": "belt-silver-equipped-INNERCLOTHING",
       "directions": 4
+    },
+    {
+      "name": "carp-silver"
+    },
+    {
+      "name": "carp-gold"
+    },
+    {
+      "name": "belt-gold"
+    },
+    {
+      "name": "leather-gold"
+    },
+    {
+      "name": "leather-silver"
+    },
+    {
+      "name": "belt-silver"
     }
   ]
 }

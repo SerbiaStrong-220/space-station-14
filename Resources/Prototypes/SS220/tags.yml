@@ -332,3 +332,21 @@
 
 - type: Tag
   id: InShirt
+
+- type: Tag
+  id: BeltGoldBuckle
+
+- type: Tag
+  id: BeltSilverBuckle
+
+- type: Tag
+  id: BeltCarpLeatherGoldBuckle
+
+- type: Tag
+  id: BeltCarpLeatherSilverBuckle
+
+- type: Tag
+  id: BeltLeatherGoldBuckle
+
+- type: Tag
+  id: BeltLeatherSilverBuckle

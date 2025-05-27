@@ -515,7 +515,7 @@
     sprite: SS220/Clothing/Belt/belt_silver_buckle.rsi
   - type: Tag
     tags:
-    - InShirt
+    - BeltSilverBuckle
 
 - type: entity
   parent: ClothingBeltBase
@@ -529,7 +529,7 @@
     sprite: SS220/Clothing/Belt/belt_gold_buckle.rsi
   - type: Tag
     tags:
-    - InShirt
+    - BeltGoldBuckle
 
 - type: entity
   parent: ClothingBeltBase
@@ -544,7 +544,7 @@
     sprite: SS220/Clothing/Belt/belt_leather_silver_buckle.rsi
   - type: Tag
     tags:
-    - InShirt
+    - BeltLeatherSilverBuckle
 
 - type: entity
   parent: ClothingBeltBase
@@ -559,7 +559,7 @@
     sprite: SS220/Clothing/Belt/belt_leather_gold_buckle.rsi
   - type: Tag
     tags:
-    - InShirt
+    - BeltLeatherGoldBuckle
 
 - type: entity
   parent: ClothingBeltBase
@@ -574,7 +574,7 @@
     sprite: SS220/Clothing/Belt/belt_carp_leather_silver_buckle.rsi
   - type: Tag
     tags:
-    - InShirt
+    - BeltCarpLeatherSilverBuckle
 
 - type: entity
   parent: ClothingBeltBase
@@ -589,4 +589,4 @@
     sprite: SS220/Clothing/Belt/belt_carp_leather_gold_buckle.rsi
   - type: Tag
     tags:
-    - InShirt
+    - BeltCarpLeatherGoldBuckle

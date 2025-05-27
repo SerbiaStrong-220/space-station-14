@@ -16,14 +16,12 @@
         name: Надето
         whitelist:
           tags:
-          - InShirt
-          # components:
-          # - ClothingBeltGoldBuckle
-          # - ClothingBeltSilverBuckle
-          # - ClothingBeltCarpLeatherGoldBuckle
-          # - ClothingBeltCarpLeatherSilverBuckle
-          # - ClothingBeltLeatherGoldBuckle
-          # - ClothingBeltLeatherSilverBuckle
+          - BeltGoldBuckle
+          - BeltSilverBuckle
+          - BeltCarpLeatherGoldBuckle
+          - BeltCarpLeatherSilverBuckle
+          - BeltLeatherGoldBuckle
+          - BeltLeatherSilverBuckle
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -31,28 +29,28 @@
     mapLayers:
       belt-gold:
         whitelist:
-          components:
-          - ClothingBeltGoldBuckle
+          tags:
+          - BeltGoldBuckle
       belt-silver:
         whitelist:
-          components:
-          - ClothingBeltSilverBuckle
+          tags:
+          - BeltSilverBuckle
       carp-gold:
         whitelist:
-          components:
-          - ClothingBeltCarpLeatherGoldBuckle
+          tags:
+          - BeltCarpLeatherGoldBuckle
       carp-silver:
         whitelist:
-          components:
-          - ClothingBeltCarpLeatherSilverBuckle
+          tags:
+          - BeltCarpLeatherSilverBuckle
       leather-gold:
         whitelist:
-          components:
-          - ClothingBeltLeatherGoldBuckle
+          tags:
+          - BeltLeatherGoldBuckle
       leather-silver:
         whitelist:
-          components:
-          - ClothingBeltLeatherSilverBuckle
+          tags:
+          - BeltLeatherSilverBuckle
     sprite: SS220/Clothing/Uniforms/Shirt/shirt_overlay.rsi
 
 # White (Белый)
