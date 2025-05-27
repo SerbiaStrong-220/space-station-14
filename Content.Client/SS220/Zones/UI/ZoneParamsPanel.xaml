@@ -39,7 +39,11 @@
                             <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="2">
                                 <BoxContainer Name="Box2ListContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True"/>
                             </ScrollContainer>
-                            <Button Name="AddBoxButton" Text="{Loc zone-state-box-add-box-button}" Access="Public" Margin="0 5 0 2"/>
+                            <BoxContainer Orientation="Horizontal" HorizontalExpand="True"  Margin="0 5 0 2">
+                                <Button Name="AddBoxButton" Text="{Loc zone-state-box-add-box-button}" Access="Public" ToggleMode="True" HorizontalExpand="True"/>
+                                <Button Name="CutBoxButton" Text="{Loc zone-state-box-cut-box-button}" Access="Public" ToggleMode="True" HorizontalExpand="True"/>
+                            </BoxContainer>
+                            <Button Name="ShowChangesButton" Text="{Loc zone-state-box-show-changes-button}" Access="Public" ToggleMode="True" Margin="0 5 0 2" HorizontalExpand="True"/>
                         </BoxContainer>
                     </PanelContainer>
                 </CollapsibleBody>

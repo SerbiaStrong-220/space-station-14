@@ -2,17 +2,16 @@
 using static Content.Client.SS220.Overlays.BoxesOverlay;
 using Content.Shared.SS220.Zones.Components;
 using Content.Client.SS220.Zones.Systems;
-using Content.Shared.SS220.Zones.Systems;
 
 namespace Content.Client.SS220.Zones.Overlays;
 
-public sealed partial class ZonesBoxesDatasProvider : BoxesDatasProvider
+public sealed partial class ZonesBoxesOverlayProvider : BoxesOverlayProvider
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
     private readonly ZonesSystem _zones;
 
-    public ZonesBoxesDatasProvider() : base()
+    public ZonesBoxesOverlayProvider() : base()
     {
         _zones = _entityManager.System<ZonesSystem>();
     }
@@ -30,7 +29,7 @@ public sealed partial class ZonesBoxesDatasProvider : BoxesDatasProvider
                     zoneComp.ZoneParams is not { } @params)
                     continue;
 
-                var alpha = zone == _zones.SelectedZone?.Owner ? 0.25f : 0.125F;
+                var alpha = zone == _zones.ControlWindow.SelectedZoneEntry?.ZoneEntity.Owner ? 0.25f : 0.125F;
                 var color = @params.Color.WithAlpha(alpha);
                 var data = new BoxesData(parent)
                 {

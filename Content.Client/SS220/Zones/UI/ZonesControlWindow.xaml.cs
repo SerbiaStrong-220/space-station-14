@@ -133,7 +133,6 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
         entry.Pressed = true;
         SelectedZoneEntry = entry;
-        _zones.SelectZone(entry.ZoneEntity);
     }
 
     private void DeselectEntry()
@@ -142,7 +141,6 @@ public sealed partial class ZonesControlWindow : DefaultWindow
             selected.Pressed = false;
 
         SelectedZoneEntry = null;
-        _zones.SelectZone(null);
     }
 
     private void ApplySearchFilter(LineEdit.LineEditEventArgs args)

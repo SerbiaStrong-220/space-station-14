@@ -144,7 +144,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     public Entity<ZoneComponent>? CreateZone(ZoneParamsState @params)
     {
         var compParams = new ZoneParams();
-        compParams.WithState(@params);
+        compParams.HandleState(@params);
         return CreateZone(compParams);
     }
 

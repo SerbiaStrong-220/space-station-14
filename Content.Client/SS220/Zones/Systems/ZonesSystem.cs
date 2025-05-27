@@ -8,8 +8,6 @@ using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Client.Console;
 using Robust.Client.Graphics;
-using System.Diagnostics.CodeAnalysis;
-using System.Text.RegularExpressions;
 
 namespace Content.Client.SS220.Zones.Systems;
 
@@ -21,14 +19,8 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     public ZonesControlWindow ControlWindow = default!;
 
-    public Entity<ZoneComponent>? SelectedZone => _selectedZone;
-
-    private Entity<ZoneComponent>? _selectedZone;
-
-    public Action<Entity<ZoneComponent>?>? ZoneSelected;
-
     private BoxesOverlay _overlay = default!;
-    private ZonesBoxesDatasProvider _overlayProvider = default!;
+    private ZonesBoxesOverlayProvider _overlayProvider = default!;
 
     public override void Initialize()
     {
@@ -38,7 +30,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
         _overlay = BoxesOverlay.GetOverlay();
 
-        _overlayProvider = new ZonesBoxesDatasProvider();
+        _overlayProvider = new ZonesBoxesOverlayProvider();
 
         _clientAdmin.AdminStatusUpdated += OnAdminStatusUpdated;
 
@@ -63,9 +55,6 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     private void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
     {
-        if (entity == SelectedZone)
-            SelectZone(null);
-
         ControlWindow.RefreshEntries();
     }
 
@@ -81,29 +70,12 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     private void OnContainerShutdown(Entity<ZonesContainerComponent> entity, ref ComponentShutdown args)
     {
-        if (SelectedZone != null &&
-            entity.Comp.Zones.Contains(GetNetEntity(SelectedZone.Value)))
-            SelectZone(null);
-
         ControlWindow.RefreshEntries();
     }
 
     private void OnAfterContainerStateHandled(Entity<ZonesContainerComponent> entity, ref AfterAutoHandleStateEvent args)
     {
         ControlWindow.RefreshEntries();
-    }
-
-    public void SelectZone(EntityUid? uid)
-    {
-        if (SelectedZone?.Owner == uid)
-            return;
-
-        Entity<ZoneComponent>? entity = null;
-        if (TryComp<ZoneComponent>(uid, out var zoneComponent))
-            entity = (uid.Value, zoneComponent);
-
-        _selectedZone = entity;
-        ZoneSelected?.Invoke(entity);
     }
 
     public void SetOverlay(bool value)

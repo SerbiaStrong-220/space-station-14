@@ -1,5 +1,6 @@
-
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.SS220.BoxLayout;
+using Content.Client.SS220.Overlays;
 using Content.Client.SS220.Zones.Systems;
 using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
@@ -30,25 +31,37 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     private Entity<ZoneComponent>? _zoneEntity;
 
-    public ZoneParamsState Params
+    public ZoneParamsState CurParams
     {
-        get => GetParams();
+        get => _curParams;
         set
         {
-            _params = value;
+            _curParams = value;
             CancelLayout();
             Refresh();
             ParamsChanged?.Invoke(value);
         }
     }
 
-    private ZoneParamsState _params;
+    private ZoneParamsState _curParams;
+
+    public ZoneParamsState OriginalParams => _originalParams;
+    private ZoneParamsState _originalParams;
+
     private BoxLayoutMode _layoutMode = BoxLayoutMode.Adding;
+
+    private BoxesOverlay _overlay;
+    private ZoneParamsBoxesOverlayProvider _overlayProvider;
+
+    public ZoneParamsPanel() : this(null) { }
 
     public ZoneParamsPanel(Entity<ZoneComponent>? entity)
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
+
+        _overlay = BoxesOverlay.GetOverlay();
+        _overlayProvider = new ZoneParamsBoxesOverlayProvider(this);
 
         _zones = _entityManager.System<ZonesSystem>();
         SetZoneEntity(entity);
@@ -60,40 +73,58 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             BorderThickness = new Thickness(2)
         };
 
-        AddBoxButton.OnPressed += _ => StartLayout(BoxLayoutMode.Adding);
+        AddBoxButton.OnToggled += e =>
+        {
+            if (e.Pressed)
+                StartLayout(BoxLayoutMode.Adding);
+            else
+                CancelLayout();
+        };
+        CutBoxButton.OnToggled += e =>
+        {
+            if (e.Pressed)
+                StartLayout(BoxLayoutMode.Cutting);
+            else
+                CancelLayout();
+        };
+        ShowChangesButton.OnToggled += e => SetOverlay(e.Pressed);
     }
 
     protected override void ExitedTree()
     {
         RemoveLayoutReact();
+        SetOverlay(false);
         base.ExitedTree();
     }
 
     public ZoneParamsPanel(ZoneParamsState @params) : this(null)
     {
-        _params = @params;
+        CurParams = @params;
         Refresh();
     }
 
     public void Refresh()
     {
-        NameLineEdit.Text = _params.Name;
-        PrototypeIDLineEdit.Text = _params.ProtoId;
-        HexColorLineEdit.Text = _params.Color.ToHex();
-        ContainerNetIDLineEdit.Text = _params.Container.IsValid() ? _params.Container.ToString() : string.Empty;
+        NameLineEdit.Text = CurParams.Name;
+        PrototypeIDLineEdit.Text = CurParams.ProtoId;
+        HexColorLineEdit.Text = CurParams.Color.ToHex();
+        ContainerNetIDLineEdit.Text = CurParams.Container.IsValid() ? CurParams.Container.ToString() : string.Empty;
 
         Box2ListContainer.RemoveAllChildren();
-        foreach (var box in _params.Boxes)
+        foreach (var box in CurParams.Boxes)
         {
             var entry = new ZoneBoxEntry(box);
             Box2ListContainer.AddChild(entry);
         }
+
+        _overlayProvider.Refresh();
     }
 
     public void SetZoneEntity(Entity<ZoneComponent>? entity)
     {
-        Params = entity != null ? _zones.GetZoneParams(entity.Value) : new ZoneParamsState();
         _zoneEntity = entity;
+        _originalParams = entity?.Comp.ZoneParams?.GetState() ?? new ZoneParamsState();
+        CurParams = _originalParams;
     }
 
     private void StartLayout(BoxLayoutMode mode)
@@ -109,7 +140,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
                 _boxLayoutManager.StartNewBox();
                 break;
 
-            case BoxLayoutMode.Deleting:
+            case BoxLayoutMode.Cutting:
                 _boxLayoutManager.StartNewBox();
                 _boxLayoutManager.SetColor(Color.Red);
                 break;
@@ -126,38 +157,38 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         _boxLayoutManager.Cancel();
         RemoveLayoutReact();
-        _boxLayoutManager.SetOverlay(false);
     }
 
     private void AddLayotReact()
     {
         _boxLayoutManager.Ended += OnLayoutEnded;
         _boxLayoutManager.Cancelled += OnLayoutCancelled;
-
-        AddBoxButton.Disabled = true;
+        _boxLayoutManager.SetOverlay(true);
     }
 
     private void RemoveLayoutReact()
     {
         _boxLayoutManager.Ended -= OnLayoutEnded;
         _boxLayoutManager.Cancelled -= OnLayoutCancelled;
+        _boxLayoutManager.SetOverlay(false);
 
-        AddBoxButton.Disabled = false;
+        AddBoxButton.Pressed = false;
+        CutBoxButton.Pressed = false;
     }
 
     private void OnLayoutEnded(BoxLayoutManager.BoxParams @params)
     {
-        if (@params.Parent != _params.Container)
+        if (@params.Parent != CurParams.Container)
             return;
 
-        var newBoxes = _params.Boxes.ToList();
+        var newBoxes = CurParams.Boxes.ToList();
         switch (_layoutMode)
         {
             case BoxLayoutMode.Adding:
                 newBoxes.Add(@params.Box);
                 break;
 
-            case BoxLayoutMode.Deleting:
+            case BoxLayoutMode.Cutting:
                 newBoxes = MathHelperExtensions.SubstructBox(newBoxes, @params.Box).ToList();
                 break;
         }
@@ -171,12 +202,12 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             return Box2.FromTwoPoints(new Vector2(x1, y1), new Vector2(x2, y2));
         }).ToList();
 
-        var newParams = Params;
+        var newParams = CurParams;
         newParams.ChangeState((ref ZoneParamsState p) =>
         {
             p.Boxes = newBoxes.ToHashSet();
         });
-        Params = newParams;
+        CurParams = newParams;
     }
 
     private void OnLayoutCancelled()
@@ -185,14 +216,89 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         _boxLayoutManager.SetOverlay(false);
     }
 
+    private (EntityUid Parent, List<Box2> Boxes) GetAddedBoxes()
+    {
+        var parent = _entityManager.GetEntity(CurParams.Container);
+        var result = CurParams.Boxes.ToList();
+        if (parent == _entityManager.GetEntity(_originalParams.Container))
+            foreach (var box in _originalParams.Boxes)
+                result = MathHelperExtensions.SubstructBox(result, box).ToList();
+
+        return (parent, result);
+    }
+
+    private (EntityUid Parent, List<Box2> Boxes) GetDeletedBoxes()
+    {
+        var parent = _entityManager.GetEntity(_originalParams.Container);
+        var result = _originalParams.Boxes.ToList();
+        if (parent == _entityManager.GetEntity(CurParams.Container))
+            foreach (var box in CurParams.Boxes)
+                result = MathHelperExtensions.SubstructBox(result, box).ToList();
+
+        return (parent, result);
+    }
+
     public ZoneParamsState GetParams()
     {
-        return _params;
+        return CurParams;
+    }
+
+    public void SetOverlay(bool enabled)
+    {
+        if (enabled)
+            _overlay.AddProvider(_overlayProvider);
+        else
+            _overlay.RemoveProvider(_overlayProvider);
     }
 
     private enum BoxLayoutMode
     {
         Adding,
-        Deleting
+        Cutting
+    }
+
+    private sealed class ZoneParamsBoxesOverlayProvider : BoxesOverlay.BoxesOverlayProvider
+    {
+        [Dependency] private readonly IEntityManager _entityManager = default!;
+
+        private ZoneParamsPanel _panel;
+        private (EntityUid Parent, List<Box2> Boxes) _addedBoxes = new();
+        private (EntityUid Parent, List<Box2> Boxes) _deletedBoxes = new();
+
+        private const float ColorAlpha = 0.5f;
+
+        public ZoneParamsBoxesOverlayProvider(ZoneParamsPanel panel) : base()
+        {
+            _panel = panel;
+        }
+
+        public void Refresh()
+        {
+            _addedBoxes = _panel.GetAddedBoxes();
+            _deletedBoxes = _panel.GetDeletedBoxes();
+        }
+
+        public override List<BoxesOverlay.BoxesData> GetBoxesDatas()
+        {
+            var result = new List<BoxesOverlay.BoxesData>();
+
+            if (_addedBoxes.Boxes.Count > 0 && _addedBoxes.Parent.IsValid())
+            {
+                var data = new BoxesOverlay.BoxesData(_addedBoxes.Parent);
+                data.Boxes = _addedBoxes.Boxes.ToHashSet();
+                data.Color = Color.Green.WithAlpha(ColorAlpha);
+                result.Add(data);
+            }
+
+            if (_deletedBoxes.Boxes.Count > 0 && _deletedBoxes.Parent.IsValid())
+            {
+                var data = new BoxesOverlay.BoxesData(_deletedBoxes.Parent);
+                data.Boxes = _deletedBoxes.Boxes.ToHashSet();
+                data.Color = Color.Red.WithAlpha(ColorAlpha);
+                result.Add(data);
+            }
+
+            return result;
+        }
     }
 }

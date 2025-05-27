@@ -20,7 +20,7 @@ public sealed class BoxesOverlay : Overlay
     private ShaderInstance _shader;
     private Texture _texture;
 
-    private Dictionary<Type, BoxesDatasProvider> _providers = new();
+    private Dictionary<Type, BoxesOverlayProvider> _providers = new();
 
     private BoxesOverlay() : base()
     {
@@ -72,17 +72,17 @@ public sealed class BoxesOverlay : Overlay
             drawHandle.DrawTextureRect(_texture, box, data.Color);
     }
 
-    public bool AddProvider(BoxesDatasProvider provider)
+    public bool AddProvider(BoxesOverlayProvider provider)
     {
         return _providers.TryAdd(provider.GetType(), provider);
     }
 
-    public bool RemoveProvider(BoxesDatasProvider provider)
+    public bool RemoveProvider(BoxesOverlayProvider provider)
     {
         return RemoveProvider(provider.GetType());
     }
 
-    public bool RemoveProvider<T>() where T : BoxesDatasProvider
+    public bool RemoveProvider<T>() where T : BoxesOverlayProvider
     {
         return RemoveProvider(typeof(T));
     }
@@ -92,12 +92,12 @@ public sealed class BoxesOverlay : Overlay
         return _providers.Remove(providerType);
     }
 
-    public bool HasProvider(BoxesDatasProvider provider)
+    public bool HasProvider(BoxesOverlayProvider provider)
     {
         return HasProvider(provider.GetType());
     }
 
-    public bool HasProvider<T>() where T : BoxesDatasProvider
+    public bool HasProvider<T>() where T : BoxesOverlayProvider
     {
         return HasProvider(typeof(T));
     }
@@ -107,19 +107,19 @@ public sealed class BoxesOverlay : Overlay
         return _providers.ContainsKey(providerType);
     }
 
-    public bool TryGetProvider<T>([NotNullWhen(true)] out BoxesDatasProvider? provider) where T : BoxesDatasProvider
+    public bool TryGetProvider<T>([NotNullWhen(true)] out BoxesOverlayProvider? provider) where T : BoxesOverlayProvider
     {
         return TryGetProvider(typeof(T), out provider);
     }
 
-    public bool TryGetProvider(Type providerType, [NotNullWhen(true)] out BoxesDatasProvider? provider)
+    public bool TryGetProvider(Type providerType, [NotNullWhen(true)] out BoxesOverlayProvider? provider)
     {
         return _providers.TryGetValue(providerType, out provider);
     }
 
-    public abstract class BoxesDatasProvider
+    public abstract class BoxesOverlayProvider
     {
-        public BoxesDatasProvider()
+        public BoxesOverlayProvider()
         {
             IoCManager.InjectDependencies(this);
         }

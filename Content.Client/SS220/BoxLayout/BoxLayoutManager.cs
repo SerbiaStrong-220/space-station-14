@@ -37,7 +37,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
     public BoxParams? CurParams => GetBoxParams();
 
     private BoxesOverlay? _overlay;
-    private BoxLayuotBoxesDatasProvider _overlayProvider = default!;
+    private BoxLayoutBoxesOverlayProvider _overlayProvider = default!;
 
     internal EntityUid? Parent;
     internal Vector2? Point1;
@@ -49,7 +49,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         IoCManager.InjectDependencies(this);
         _input.UIKeyBindStateChanged += OnUIKeyBindStateChanged;
         _overlay = BoxesOverlay.GetOverlay();
-        _overlayProvider = new BoxLayuotBoxesDatasProvider(this);
+        _overlayProvider = new BoxLayoutBoxesOverlayProvider(this);
     }
 
     private bool OnUIKeyBindStateChanged(BoundKeyEventArgs args)
@@ -185,7 +185,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         public Box2 Box;
     }
 
-    private sealed class BoxLayuotBoxesDatasProvider(BoxLayoutManager layoutManager) : BoxesOverlay.BoxesDatasProvider()
+    private sealed class BoxLayoutBoxesOverlayProvider(BoxLayoutManager layoutManager) : BoxesOverlay.BoxesOverlayProvider()
     {
         [Dependency] private readonly IEntityManager _entityManager = default!;
 

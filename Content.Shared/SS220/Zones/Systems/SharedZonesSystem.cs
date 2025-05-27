@@ -335,6 +335,22 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
         return value != null;
     }
+
+    public static IEnumerable<Box2> GetSortedBoxes(in IEnumerable<Box2> boxes)
+    {
+        var sorted = boxes.OrderBy(b => Box2.Area(b))
+            .ThenBy(b => b.BottomLeft)
+            .ThenBy(b => b.TopRight);
+
+        return sorted;
+    }
+
+    public static bool IsBoxesEquals(ZoneParamsState state1, ZoneParamsState state2)
+    {
+        var ourBoxes = GetSortedBoxes(state1.Boxes);
+        var otherBoxes = GetSortedBoxes(state2.Boxes);
+        return ourBoxes.SequenceEqual(otherBoxes);
+    }
 }
 
 /// <summary>
@@ -424,5 +440,40 @@ public partial struct ZoneParamsState()
         ProtoId,
         Color,
         AttachToGrid
+    }
+
+    public static bool operator ==(ZoneParamsState left, ZoneParamsState right)
+    {
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(ZoneParamsState left, ZoneParamsState right)
+    {
+        return !left.Equals(right);
+    }
+
+    public override readonly int GetHashCode()
+    {
+        var sorted = SharedZonesSystem.GetSortedBoxes(Boxes);
+        return HashCode.Combine(Container, Name, ProtoId, Color, AttachToGrid, sorted);
+    }
+
+    public override readonly bool Equals([NotNullWhen(true)] object? obj)
+    {
+        if (obj is not ZoneParamsState state)
+            return false;
+
+        return Equals(state);
+    }
+
+    public readonly bool Equals(ZoneParamsState other)
+    {
+        var isFieldsEquals = Container == other.Container &&
+            Name == other.Name &&
+            ProtoId == other.ProtoId &&
+            Color == other.Color &&
+            AttachToGrid == other.AttachToGrid;
+
+        return isFieldsEquals && SharedZonesSystem.IsBoxesEquals(this, other);
     }
 }

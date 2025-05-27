@@ -56,7 +56,7 @@ public sealed partial class ZoneParams
     [ViewVariables(VVAccess.ReadOnly)]
     public HashSet<Box2> Boxes = new();
 
-    public void WithState(ZoneParamsState @params)
+    public void HandleState(ZoneParamsState @params)
     {
         Container = @params.Container;
         Name = @params.Name;
@@ -64,5 +64,18 @@ public sealed partial class ZoneParams
         Color = @params.Color;
         AttachToGrid = @params.AttachToGrid;
         Boxes = @params.Boxes;
+    }
+
+    public ZoneParamsState GetState()
+    {
+        return new ZoneParamsState()
+        {
+            Container = Container,
+            Name = Name,
+            ProtoId = ProtoId,
+            Color = Color,
+            AttachToGrid = AttachToGrid,
+            Boxes = Boxes
+        };
     }
 }
