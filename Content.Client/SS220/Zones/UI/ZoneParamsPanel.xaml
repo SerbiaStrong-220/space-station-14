@@ -1,4 +1,5 @@
 <PanelContainer xmlns="https://spacestation14.io"
+                xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
                 HorizontalExpand="True"
                 VerticalExpand="True"
                 MinSize="300 300">
@@ -25,10 +26,20 @@
                 <CollapsibleBody HorizontalExpand="True" VerticalExpand="True">
                     <PanelContainer Name="SizeOptionsBackground" HorizontalExpand="True" VerticalExpand="True">
                         <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-                            <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+                            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                <Label Text="x1" HorizontalExpand="True" Align="Center" Margin="2"/>
+                                <cc:VSeparator Margin="2 0"/>
+                                <Label Text="y1" HorizontalExpand="True" Align="Center" Margin="2"/>
+                                <cc:VSeparator Margin="2 0"/>
+                                <Label Text="x2" HorizontalExpand="True" Align="Center" Margin="2"/>
+                                <cc:VSeparator Margin="2 0"/>
+                                <Label Text="y2" HorizontalExpand="True" Align="Center" Margin="2"/>
+                            </BoxContainer>
+                            <cc:HSeparator />
+                            <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="2">
                                 <BoxContainer Name="Box2ListContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True"/>
                             </ScrollContainer>
-                            <Button Name="AddBoxButton" Text="{Loc zone-state-box-add-box-button}" Access="Public" Margin="5 5 5 0"/>
+                            <Button Name="AddBoxButton" Text="{Loc zone-state-box-add-box-button}" Access="Public" Margin="0 5 0 2"/>
                         </BoxContainer>
                     </PanelContainer>
                 </CollapsibleBody>

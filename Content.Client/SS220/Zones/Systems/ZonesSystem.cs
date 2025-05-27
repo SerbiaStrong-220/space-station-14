@@ -21,7 +21,9 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     public ZonesControlWindow ControlWindow = default!;
 
-    public Entity<ZoneComponent>? SelectedZone;
+    public Entity<ZoneComponent>? SelectedZone => _selectedZone;
+
+    private Entity<ZoneComponent>? _selectedZone;
 
     public Action<Entity<ZoneComponent>?>? ZoneSelected;
 
@@ -61,6 +63,9 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     private void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
     {
+        if (entity == SelectedZone)
+            SelectZone(null);
+
         ControlWindow.RefreshEntries();
     }
 
@@ -76,6 +81,10 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     private void OnContainerShutdown(Entity<ZonesContainerComponent> entity, ref ComponentShutdown args)
     {
+        if (SelectedZone != null &&
+            entity.Comp.Zones.Contains(GetNetEntity(SelectedZone.Value)))
+            SelectZone(null);
+
         ControlWindow.RefreshEntries();
     }
 
@@ -86,11 +95,14 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     public void SelectZone(EntityUid? uid)
     {
+        if (SelectedZone?.Owner == uid)
+            return;
+
         Entity<ZoneComponent>? entity = null;
         if (TryComp<ZoneComponent>(uid, out var zoneComponent))
             entity = (uid.Value, zoneComponent);
 
-        SelectedZone = entity;
+        _selectedZone = entity;
         ZoneSelected?.Invoke(entity);
     }
 

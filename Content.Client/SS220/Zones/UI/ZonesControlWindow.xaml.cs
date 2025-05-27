@@ -78,6 +78,10 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
         foreach (var (key, value) in toDelete)
         {
+            if (SelectedZoneEntry != null &&
+                value.ZoneEntries.ContainsValue(SelectedZoneEntry))
+                DeselectEntry();
+
             ZonesContainersContainer.RemoveChild(value);
             _zoneContainerEntries.Remove(key);
         }
