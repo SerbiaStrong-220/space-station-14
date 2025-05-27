@@ -47,6 +47,8 @@ public sealed partial class PolymorphSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
 
+    public const string EffectDesynchronizer = "EffectDesynchronizer"; //SS220-cryo-mobs-fix
+
     private const string RevertPolymorphId = "ActionRevertPolymorph";
 
     public override void Initialize()

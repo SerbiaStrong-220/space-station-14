@@ -17,7 +17,7 @@ public sealed class SharedContainerSystemExtensions : EntitySystem
     /// <summary>
     ///     Removes all entites with specified component from entity containers, including hands.
     /// </summary>
-    public void RemoveEntitiesFromAllContainers<T>(EntityUid owner, List<string>? blacklistedIds = null) where T : IComponent
+    public void RemoveEntitiesFromAllContainers<T>(EntityUid owner, List<string>? blacklistedIds = null, bool recursive = true) where T : IComponent
     {
         void EjectRecursive(EntityUid uid)
         {
@@ -37,7 +37,8 @@ public sealed class SharedContainerSystemExtensions : EntitySystem
                         _transform.SetWorldPosition(ent, _transform.GetWorldPosition(uid));
                     }
 
-                    EjectRecursive(ent);
+                    if (recursive)
+                        EjectRecursive(ent);
                 }
             }
         }

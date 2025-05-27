@@ -16,6 +16,8 @@ using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.SS220.Containers; //SS220-cryo-mobs-fix
+using Content.Server.Polymorph.Systems; //SS220-cryo-mobs-fix
+using Content.Shared.Body.Systems; //SS220-cryo-mobs-fix
 
 namespace Content.Server.Mind;
 
@@ -89,8 +91,8 @@ public sealed class MindSystem : SharedMindSystem
     //SS220-cryo-mobs-fix begin
     private void OnPolymorphed(Entity<MindContainerComponent> ent, ref BeforePolymorpedEvent args)
     {
-        if (args.PolymorphConfiguration.EffectProto == "EffectDesynchronizer")
-            _containerSystemExtensions.RemoveEntitiesFromAllContainers<MindContainerComponent>(ent.Owner, ["body_root_part"]);
+        if (args.PolymorphConfiguration.EffectProto == PolymorphSystem.EffectDesynchronizer)
+            _containerSystemExtensions.RemoveEntitiesFromAllContainers<MindContainerComponent>(ent.Owner, [SharedBodySystem.BodyRootContainerId]);
     }
     //SS220-cryo-mobs-fix end
 
@@ -204,8 +206,8 @@ public sealed class MindSystem : SharedMindSystem
             if (TryComp<ActorComponent>(entity.Value, out var actor))
             {
                 // Happens when transferring to your currently visited entity.
-                if (!_players.TryGetSessionByEntity(entity.Value, out var session) ||
-                    mind.UserId == null || actor.PlayerSession != session )
+                if (!_players.TryGetSessionByEntity(entity.Value, out var session ) ||
+                    mind.UserId == null || actor.PlayerSession != session)
                 {
                     throw new ArgumentException("Visit target already has a session.", nameof(entity));
                 }
