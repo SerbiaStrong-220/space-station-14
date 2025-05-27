@@ -197,6 +197,15 @@ public sealed class RCDSystem : EntitySystem
                 {
                     delay = _instantConstructionDelay;
                     effectPrototype = _instantConstructionFx;
+
+                    //SS220 RCD_indestructable start
+                    var def = tile.GetContentTileDefinition(_tileDefMan);
+                    if (def != null && def.Indestructible)
+                    {
+                        _popup.PopupClient(Loc.GetString("rrcd-component-cant-replace-indestructible"), uid, user);
+                        return;
+                    }
+                    //SS220 RCD_indestructable end
                 }
 
                 break;
