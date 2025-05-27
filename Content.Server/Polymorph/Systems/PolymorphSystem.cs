@@ -195,6 +195,11 @@ public sealed partial class PolymorphSystem : EntitySystem
             _gameTiming.CurTime < polymorphableComponent.LastPolymorphEnd + configuration.Cooldown)
             return null;
 
+        //SS220-cryo-mobs-fix begin
+        var beforeEvent = new BeforePolymorpedEvent(uid, configuration);
+        RaiseLocalEvent(uid, ref beforeEvent);
+        //SS220-cryo-mobs-fix end
+
         // mostly just for vehicles
         _buckle.TryUnbuckle(uid, uid, true);
 
