@@ -1,6 +1,6 @@
 <PanelContainer xmlns="https://spacestation14.io"
                 HorizontalExpand="True"
-                MinSize="80 20">
+                MinSize="120 20">
     <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
         <LineEdit Name="X1LineEdit" PlaceHolder="x1" HorizontalExpand="True"/>
         <LineEdit Name="Y1LineEdit" PlaceHolder="y1" HorizontalExpand="True"/>

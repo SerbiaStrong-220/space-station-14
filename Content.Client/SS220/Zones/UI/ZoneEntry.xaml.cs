@@ -28,12 +28,7 @@ public sealed partial class ZoneEntry : ContainerButton
     public void Refresh()
     {
         IDLabel.Text = _entityManager.GetNetEntity(ZoneEntity).ToString();
-        var name = "Unknown";
-        if (_entityManager.TryGetComponent<MetaDataComponent>(ZoneEntity, out var meta) &&
-            !string.IsNullOrEmpty(meta.EntityName) && !string.IsNullOrWhiteSpace(meta.EntityName))
-            name = meta.EntityName;
-
-        NameLabel.Text = name;
+        NameLabel.Text = ZoneEntity.Comp.ZoneParams?.Name ?? "Unknown";
     }
 
     public string GetFilteringString()
