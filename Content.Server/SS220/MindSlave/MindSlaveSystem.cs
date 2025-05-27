@@ -28,9 +28,11 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.SS220.MindSlave;
 using Content.Shared.SS220.Telepathy;
+using Content.Shared.SS220.UpdateChannels;
 using Content.Shared.Tag;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.MindSlave;
@@ -381,6 +383,9 @@ public sealed class MindSlaveSystem : EntitySystem
         var slaveTelepathy = EnsureComp<TelepathyComponent>(target);
         slaveTelepathy.CanSend = true;
         slaveTelepathy.TelepathyChannelPrototype = channelId;
+
+        if (TryComp<ActorComponent>(target, out var actor))
+            RaiseNetworkEvent(new UpdateChannelEvent(), actor.PlayerSession);
     }
 
     private void RemoveSlaveTelepathy(EntityUid? master, EntityUid slave)
@@ -401,5 +406,9 @@ public sealed class MindSlaveSystem : EntitySystem
         }
 
         RemComp<TelepathyComponent>(slave);
+
+        if (TryComp<ActorComponent>(slave, out var actor))
+            RaiseNetworkEvent(new UpdateChannelEvent(), actor.PlayerSession);
+
     }
 }

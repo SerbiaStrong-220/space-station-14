@@ -25,6 +25,7 @@ using Content.Shared.Input;
 using Content.Shared.Radio;
 using Content.Shared.Roles.RoleCodeword;
 using Content.Shared.SS220.Telepathy;
+using Content.Shared.SS220.UpdateChannels;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -188,6 +189,9 @@ public sealed class ChatUIController : UIController
         _net.RegisterNetMessage<MsgChatMessage>(OnChatMessage);
         _net.RegisterNetMessage<MsgDeleteChatMessagesBy>(OnDeleteChatMessagesBy);
         SubscribeNetworkEvent<DamageForceSayEvent>(OnDamageForceSay);
+        //ss220 fix telepathy channel start
+        SubscribeNetworkEvent<UpdateChannelEvent>(OnUpdateChannel);
+        //ss220 fix telepathy channel end
         _config.OnValueChanged(CCVars.ChatEnableColorName, (value) => { _chatNameColorsEnabled = value; });
         _chatNameColorsEnabled = _config.GetCVar(CCVars.ChatEnableColorName);
 
@@ -817,6 +821,13 @@ public sealed class ChatUIController : UIController
         chatBox.ChatInput.Input.SetText(modifiedText);
         chatBox.ChatInput.Input.ForceSubmitText();
     }
+
+    //ss220 fix telepathy channel start
+    private void OnUpdateChannel(UpdateChannelEvent ev, EntitySessionEventArgs _)
+    {
+        UpdateChannelPermissions();
+    }
+    //ss220 fix telepathy channel end
 
     private void OnChatMessage(MsgChatMessage message)
     {
