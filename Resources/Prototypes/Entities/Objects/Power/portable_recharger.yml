@@ -36,3 +36,7 @@
           components:
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
+          # SS220 Added KRSPowerCell tag for charging support begin
+          tags:
+          - KRSPowerCell
+          # SS220 Added KRSPowerCell tag for charging support end
