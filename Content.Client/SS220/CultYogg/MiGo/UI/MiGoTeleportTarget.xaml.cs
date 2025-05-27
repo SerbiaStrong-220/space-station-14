@@ -3,18 +3,20 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client.VendingMachines.UI;
+namespace Content.Client.SS220.CultYogg.MiGo.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class VendingMachineItem : BoxContainer
+public sealed partial class MiGoTeleportTarget : BoxContainer
 {
-    public VendingMachineItem(EntProtoId entProto, string text)
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
+
+    public MiGoTeleportTarget(EntityUid ent)
     {
         RobustXamlLoader.Load(this);
 
-        ItemPrototype.SetPrototype(entProto);
+        //ItemPrototype.SetPrototype(entProto);
 
-        NameLabel.Text = text;
+        //NameLabel.Text = _metaData.;
     }
 
     public void SetText(string text)

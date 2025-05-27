@@ -10,7 +10,7 @@ namespace Content.Client.SS220.CultYogg.MiGo.UI
     public sealed class MiGoTeleportBoundUserInterface : BoundUserInterface
     {
         [ViewVariables]
-        private VendingMachineMenu? _menu;
+        private MiGoTeleportMenu? _menu;
 
         [ViewVariables]
         private List<VendingMachineInventoryEntry> _cachedInventory = new();
@@ -68,7 +68,6 @@ namespace Content.Client.SS220.CultYogg.MiGo.UI
 
             _menu.OnItemSelected -= OnItemSelected;
             _menu.OnClose -= Close;
-            _menu.Dispose();
         }
     }
 }
