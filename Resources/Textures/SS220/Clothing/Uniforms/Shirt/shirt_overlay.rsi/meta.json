@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by Estkemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "carp-silver",
+      "directions": 4
+    },
+    {
+      "name": "carp-gold",
+      "directions": 4
+    },
+    {
+      "name": "belt-gold",
+      "directions": 4
+    },
+    {
+      "name": "leather-gold",
+      "directions": 4
+    },
+    {
+      "name": "leather-silver",
+      "directions": 4
+    },
+    {
+      "name": "belt-silver",
+      "directions": 4
+    }
+  ]
+}

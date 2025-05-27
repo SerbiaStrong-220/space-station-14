@@ -329,3 +329,6 @@
 - type: Tag
   id: CultYoggInnerHandToggleable
 # ss220 Cult_update2 end
+
+- type: Tag
+  id: InShirt

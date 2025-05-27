@@ -26,3 +26,23 @@ ent-ClothingBeltMedicalInterdyne = РПС образца НМП-023
 ent-ClothingBeltMedicalInterdyneFilled = { ent-ClothingBeltMedicalInterdyne }
     .desc = { ent-ClothingBeltMedicalInterdyne }
     .suffix = Interdyne, Заполненный, Парамедик
+
+# Ремни
+ent-ClothingBeltSilverBuckle = ремень с серебряной пряжкой
+    .desc = Классический кожаный ремень с отполированной серебряной пряжкой. Вне времени — для офиса или повседневности. 
+ent-ClothingBeltGoldBuckle = ремень с золотой пряжкой
+    .desc = Строгий ремень с позолоченной пряжкой, излучающей сдержанное богатство. Для ценителей роскоши без лишнего блеска. 
+
+ent-ClothingBeltLeatherSilverBuckle = кожаный ремень с серебряной пряжкой
+    .desc = Мягкий кожаный ремень с пряжкой, украшенной серебром. Лёгкий и удобный — для неформальных выходок.  
+    .suffix = За время в игре
+ent-ClothingBeltLeatherGoldBuckle = кожаный ремень с золотой пряжкой
+    .desc = Гибкая кожа и золотая пряжка. Практичность с налётом бунтарства.  
+    .suffix = За время в игре
+
+ent-ClothingBeltCarpLeatherSilverBuckle = ремень с серебряной пряжкой из кожи карпа  
+    .desc = Из редкой кожи карпа. Серебряная пряжка блестит, как лунный свет на воде.
+    .suffix = За время в игре
+ent-ClothingBeltCarpLeatherGoldBuckle = ремень с золотой пряжкой из кожи карпа  
+    .desc = Золотые детали контрастируют с мерцанием кожи карпа. Ремень элиты, правящей сушей и морем.
+    .suffix = За время в игре

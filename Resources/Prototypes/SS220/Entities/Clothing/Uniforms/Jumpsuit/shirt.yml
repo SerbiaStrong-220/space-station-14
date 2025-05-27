@@ -10,6 +10,50 @@
     sprite: SS220/Clothing/Uniforms/Shirt/white_dark.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Shirt/white_dark.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        name: Надето
+        whitelist:
+          tags:
+          - InShirt
+          # components:
+          # - ClothingBeltGoldBuckle
+          # - ClothingBeltSilverBuckle
+          # - ClothingBeltCarpLeatherGoldBuckle
+          # - ClothingBeltCarpLeatherSilverBuckle
+          # - ClothingBeltLeatherGoldBuckle
+          # - ClothingBeltLeatherSilverBuckle
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: ItemMapper
+    mapLayers:
+      belt-gold:
+        whitelist:
+          components:
+          - ClothingBeltGoldBuckle
+      belt-silver:
+        whitelist:
+          components:
+          - ClothingBeltSilverBuckle
+      carp-gold:
+        whitelist:
+          components:
+          - ClothingBeltCarpLeatherGoldBuckle
+      carp-silver:
+        whitelist:
+          components:
+          - ClothingBeltCarpLeatherSilverBuckle
+      leather-gold:
+        whitelist:
+          components:
+          - ClothingBeltLeatherGoldBuckle
+      leather-silver:
+        whitelist:
+          components:
+          - ClothingBeltLeatherSilverBuckle
+    sprite: SS220/Clothing/Uniforms/Shirt/shirt_overlay.rsi
 
 # White (Белый)
 - type: entity

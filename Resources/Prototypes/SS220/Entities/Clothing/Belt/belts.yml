@@ -501,3 +501,92 @@
     - id: Gauze
     - id: EmergencyMedipen
       amount: 3
+
+# Обычные ремни
+- type: entity
+  parent: ClothingBeltBase
+  id: ClothingBeltSilverBuckle
+  name: belt with silver buckle
+  description: A classic leather belt with a polished silver buckle. Timeless design for formal attire or everyday wear. 
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/belt_silver_buckle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/belt_silver_buckle.rsi
+  - type: Tag
+    tags:
+    - InShirt
+
+- type: entity
+  parent: ClothingBeltBase
+  id: ClothingBeltGoldBuckle
+  name: belt with gold buckle
+  description: A sleek belt featuring a gilded buckle, radiating subtle opulence. Perfect for those who prefer understated luxury.  
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/belt_gold_buckle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/belt_gold_buckle.rsi
+  - type: Tag
+    tags:
+    - InShirt
+
+- type: entity
+  parent: ClothingBeltBase
+  id: ClothingBeltLeatherSilverBuckle
+  name: belt with silver leather buckle
+  description: Soft leather belt with a silver-accented buckle. Lightweight and comfortable — ideal for casual adventures.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/belt_leather_silver_buckle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/belt_leather_silver_buckle.rsi
+  - type: Tag
+    tags:
+    - InShirt
+
+- type: entity
+  parent: ClothingBeltBase
+  id: ClothingBeltLeatherGoldBuckle
+  name: belt with gold leather buckle
+  description: Supple leather meets a golden buckle. Combines practicality with a touch of rebellion.  
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/belt_leather_gold_buckle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/belt_leather_gold_buckle.rsi
+  - type: Tag
+    tags:
+    - InShirt
+
+- type: entity
+  parent: ClothingBeltBase
+  id: ClothingBeltCarpLeatherSilverBuckle
+  name: belt with silver carp leather buckle
+  description: Crafted from rare carp leather, this belt's silver buckle gleams like moonlight on water.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/belt_carp_leather_silver_buckle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/belt_carp_leather_silver_buckle.rsi
+  - type: Tag
+    tags:
+    - InShirt
+
+- type: entity
+  parent: ClothingBeltBase
+  id: ClothingBeltCarpLeatherGoldBuckle
+  name: belt with gold carp leather buckle
+  description: Gold accents contrast with carp leather's eerie shimmer. Worn by elites who command both land and sea.  
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/belt_carp_leather_gold_buckle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/belt_carp_leather_gold_buckle.rsi
+  - type: Tag
+    tags:
+    - InShirt
