@@ -40,7 +40,7 @@ public sealed class MindSystem : SharedMindSystem
 
     private void OnMindShutdown(EntityUid uid, MindComponent mind, ComponentShutdown args)
     {
-        if (mind.UserId is { } user)
+        if (mind.UserId is {} user)
         {
             UserMinds.Remove(user);
             if (_players.TryGetPlayerData(user, out var data) && data.ContentData() is { } oldData)
@@ -60,7 +60,7 @@ public sealed class MindSystem : SharedMindSystem
             return;
 
         // If the player is currently visiting some other entity, simply attach to that entity.
-        if (mind.VisitingEntity is { Valid: true } visiting
+        if (mind.VisitingEntity is {Valid: true} visiting
             && visiting != uid
             && !Deleted(visiting)
             && !Terminating(visiting))
@@ -205,7 +205,7 @@ public sealed class MindSystem : SharedMindSystem
             {
                 // Happens when transferring to your currently visited entity.
                 if (!_players.TryGetSessionByEntity(entity.Value, out var session) ||
-                    mind.UserId == null || actor.PlayerSession != session)
+                    mind.UserId == null || actor.PlayerSession != session )
                 {
                     throw new ArgumentException("Visit target already has a session.", nameof(entity));
                 }
