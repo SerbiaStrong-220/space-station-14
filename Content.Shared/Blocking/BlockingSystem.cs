@@ -64,7 +64,7 @@ public sealed partial class BlockingSystem : EntitySystem
         SubscribeLocalEvent<BlockingComponent, ItemToggledEvent>(OnToggleItem);
 
         //ss220 fix drop shields start
-        SubscribeLocalEvent<BlockingComponent, ThrowItemAttemptEvent>(OnAttemptThrow);
+        SubscribeLocalEvent<BlockingComponent, ThrowItemAttemptEvent>(OnThrowAttempt);
         SubscribeLocalEvent<BlockingComponent, ContainerGettingRemovedAttemptEvent>(OnDropAttempt);
         //ss220 fix drop shields end
     }
@@ -72,17 +72,17 @@ public sealed partial class BlockingSystem : EntitySystem
     //ss220 fix drop shields start
     private void OnDropAttempt(Entity<BlockingComponent> ent, ref ContainerGettingRemovedAttemptEvent args)
     {
-        if (CheckDrop(ent))
+        if (IsDropBlocked(ent))
             args.Cancel();
     }
 
-    private void OnAttemptThrow(Entity<BlockingComponent> ent, ref ThrowItemAttemptEvent args)
+    private void OnThrowAttempt(Entity<BlockingComponent> ent, ref ThrowItemAttemptEvent args)
     {
-        if (CheckDrop(ent))
+        if (IsDropBlocked(ent))
             args.Cancelled = false;
     }
 
-    private bool CheckDrop(Entity<BlockingComponent> ent)
+    private bool IsDropBlocked(Entity<BlockingComponent> ent)
     {
         var action = ent.Comp.BlockingToggleActionEntity;
 
