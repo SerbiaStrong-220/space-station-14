@@ -22,6 +22,9 @@
 - type: Tag
   id: KRSPowerCell
 
+- type: Tag
+  id: WeaponRechargerWhitelist
+
 # READD-VEHICLES
 - type: Tag
   id: JanicartKeys

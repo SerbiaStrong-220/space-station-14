@@ -170,10 +170,10 @@
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
           - Stunbaton
-          # SS220 Added KRSPowerCell tag for charging support begin
+          # SS220 Added WeaponRechargerWhitelist tag for charging support begin
           tags:
-          - KRSPowerCell
-          # SS220 Added KRSPowerCell tag for charging support end
+          - WeaponRechargerWhitelist
+          # SS220 Added WeaponRechargerWhitelist tag for charging support end
 
 - type: entity
   parent: BaseItemRecharger
@@ -234,10 +234,10 @@
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
           - Stunbaton
-          # SS220 Added KRSPowerCell tag for charging support begin
+          # SS220 Added WeaponRechargerWhitelist tag for charging support begin
           tags:
-          - KRSPowerCell
-          # SS220 Added KRSPowerCell tag for charging support end
+          - WeaponRechargerWhitelist
+          # SS220 Added WeaponRechargerWhitelist tag for charging support end
 
 - type: entity
   parent: BaseRecharger
