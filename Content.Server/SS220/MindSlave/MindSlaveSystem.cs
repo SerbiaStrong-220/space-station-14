@@ -383,9 +383,6 @@ public sealed class MindSlaveSystem : EntitySystem
         var slaveTelepathy = EnsureComp<TelepathyComponent>(target);
         slaveTelepathy.CanSend = true;
         slaveTelepathy.TelepathyChannelPrototype = channelId;
-
-        if (TryComp<ActorComponent>(target, out var actor))
-            RaiseNetworkEvent(new UpdateChannelEvent(), actor.PlayerSession);
     }
 
     private void RemoveSlaveTelepathy(EntityUid? master, EntityUid slave)
@@ -406,9 +403,5 @@ public sealed class MindSlaveSystem : EntitySystem
         }
 
         RemComp<TelepathyComponent>(slave);
-
-        if (TryComp<ActorComponent>(slave, out var actor))
-            RaiseNetworkEvent(new UpdateChannelEvent(), actor.PlayerSession);
-
     }
 }
