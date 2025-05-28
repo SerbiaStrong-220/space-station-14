@@ -95,11 +95,20 @@ namespace Content.Server.Traitor.Uplink.Commands
 
             // Finally add uplink
             var uplinkSys = _entManager.System<UplinkSystem>();
+
             //ss220 adduplink command generate code and open uplink start
-            if (!uplinkSys.AddUplink(user, 20, uplinkEntity: uplinkEntity, giveDiscounts: isDiscounted, true))
+
+            uplinkEntity ??= uplinkSys.FindUplinkTarget(user);
+
+            if (uplinkSys.AddUplink(user, 20, uplinkEntity: uplinkEntity, giveDiscounts: isDiscounted))
             {
-                shell.WriteLine(Loc.GetString("add-uplink-command-error-2"));
+                if (uplinkEntity != null)
+                    uplinkSys.GenerateCodeAndOpenUplink(uplinkEntity.Value);
+
+                return;
             }
+
+            shell.WriteLine(Loc.GetString("add-uplink-command-error-2"));
             //ss220 adduplink command generate code and open uplink end
         }
     }

@@ -38,14 +38,12 @@ public sealed class UplinkSystem : EntitySystem
     /// <param name="balance">The amount of currency on the uplink. If null, will just use the amount specified in the preset.</param>
     /// <param name="uplinkEntity">The entity that will actually have the uplink functionality. Defaults to the PDA if null.</param>
     /// <param name="giveDiscounts">Marker that enables discounts for uplink items.</param>
-    /// <param name="isAddUplinkCommand">Marker that enables code generation and opens uplink</param>
     /// <returns>Whether or not the uplink was added successfully</returns>
     public bool AddUplink(
         EntityUid user,
         FixedPoint2 balance,
         EntityUid? uplinkEntity = null,
-        bool giveDiscounts = false,
-        bool isAddUplinkCommand = false) //ss220 adduplink command generate code and open uplink
+        bool giveDiscounts = false) //ss220 adduplink command generate code and open uplink
     {
         // Try to find target item if none passed
 
@@ -55,17 +53,6 @@ public sealed class UplinkSystem : EntitySystem
             return ImplantUplink(user, balance, giveDiscounts);
 
         EnsureComp<UplinkComponent>(uplinkEntity.Value);
-
-        //ss220 adduplink command generate code and open uplink start
-        if (isAddUplinkCommand)
-        {
-            var ev = new GenerateUplinkCodeEvent();
-            RaiseLocalEvent(uplinkEntity.Value, ref ev);
-
-            if (ev.Code != null)
-                _ringer.TryToggleUplink(uplinkEntity.Value, ev.Code);
-        }
-        //ss220 adduplink command generate code and open uplink start
 
         SetUplink(user, uplinkEntity.Value, balance, giveDiscounts);
 
@@ -156,4 +143,15 @@ public sealed class UplinkSystem : EntitySystem
 
         return null;
     }
+
+    //ss220 adduplink command generate code and open uplink start
+    public void GenerateCodeAndOpenUplink(EntityUid uplinkEntity)
+    {
+        var ev = new GenerateUplinkCodeEvent();
+        RaiseLocalEvent(uplinkEntity, ref ev);
+
+        if (ev.Code != null)
+            _ringer.TryToggleUplink(uplinkEntity, ev.Code);
+    }
+    //ss220 adduplink command generate code and open uplink end
 }
