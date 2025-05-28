@@ -23,9 +23,15 @@ public sealed class CultYoggTrapSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
+        SubscribeLocalEvent<CultYoggTrapComponent, ComponentStartup>(OnStartUp);
         SubscribeLocalEvent<CultYoggTrapComponent, DoAfterAttemptEvent<InteractionTrapDoAfterEvent>>(CheckInteract);
         SubscribeLocalEvent<ChangeCultYoggStageEvent>(OnAlarmStage);
         SubscribeLocalEvent<CultYoggTrapComponent, TrapChangedArmedEvent>(OnChangedArmed);
+    }
+
+    private void OnStartUp(Entity<CultYoggTrapComponent> ent, ref ComponentStartup args)
+    {
+        _stealth.SetEnabled(ent.Owner, false);
     }
 
     private void CheckInteract(Entity<CultYoggTrapComponent> ent, ref DoAfterAttemptEvent<InteractionTrapDoAfterEvent> args)
@@ -84,6 +90,7 @@ public sealed class CultYoggTrapSystem : EntitySystem
     private void OnChangedArmed(Entity<CultYoggTrapComponent> ent, ref TrapChangedArmedEvent args)
     {
         var visibility = args.NewIsArmed ? ent.Comp.VisibilityOnArmed : ent.Comp.VisibilityOnUnArmed;
+        _stealth.SetEnabled(ent.Owner, args.NewIsArmed);
         _stealth.SetVisibility(ent.Owner, visibility);
     }
 }

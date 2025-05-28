@@ -1,13 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
-using Content.Shared.Hands.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
@@ -180,19 +178,9 @@ public sealed class TrapSystem : EntitySystem
 
     private bool HandleSetTrap(EntityUid trapEntity, EntityUid user)
     {
-        if (!TryComp<HandsComponent>(user, out var hands))
-            return false;
-
-        //Checking whether the trap is in hand after a successful DoAfter
-        if (hands.Hands.Values.Any(h => h.HeldEntity == trapEntity))
-        {
-            _popup.PopupClient(Loc.GetString("trap-component-trap-in-hand"), user, user);
-            return false;
-        }
-
         //Providing a stuck traps on one tile
         var coordinates = Transform(trapEntity).Coordinates;
-        if (_anchorableSystem.AnyUnstackable(trapEntity, coordinates))
+        if (_anchorableSystem.AnyUnstackable(trapEntity, coordinates) || _transformSystem.GetGrid(coordinates) == null)
         {
             _popup.PopupClient(Loc.GetString("trap-component-no-room"), user, user);
             return false;
