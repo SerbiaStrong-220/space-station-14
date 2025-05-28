@@ -199,12 +199,8 @@ public sealed class RCDSystem : EntitySystem
                     effectPrototype = _instantConstructionFx;
 
                     //SS220 RCD_indestructable start
-                    var def = tile.GetContentTileDefinition(_tileDefMan);
-                    if (def != null && def.Indestructible)
-                    {
-                        _popup.PopupClient(Loc.GetString("rrcd-component-cant-replace-indestructible"), uid, user);
+                    if (!IsDeconstructionStillValid(uid, tile, args.Target, user, true))
                         return;
-                    }
                     //SS220 RCD_indestructable end
                 }
 
