@@ -28,9 +28,9 @@
         components:
         - CultYogg
       durationStun: 1
-      setTrapSound: /Audio/SS220/Items/Trap/sound_trap_set.ogg
-      defuseTrapSound: /Audio/SS220/Items/Trap/sound_trap_defuse.ogg
-      hitTrapSound: /Audio/SS220/Items/Trap/sound_trap_hit.ogg
+      setTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_set.ogg
+      defuseTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_defuse.ogg
+      hitTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_hit.ogg
       reagent: Toxin
       quantity: 3
     - type: Stealth

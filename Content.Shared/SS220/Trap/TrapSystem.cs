@@ -134,8 +134,6 @@ public sealed class TrapSystem : EntitySystem
             if (!HasComp<DamageableComponent>(args.Tripper))
                 return;
             _damageableSystem.TryChangeDamage(args.Tripper, ent.Comp.DamageOnTrapped, true);
-
-            ChangeStateTrap(ent.Owner, ent.Comp);
         }
 
         if (ent.Comp.Reagent != null)
@@ -145,6 +143,8 @@ public sealed class TrapSystem : EntitySystem
 
             _solutionContainers.TryAddReagent(injectable.Value, ent.Comp.Reagent, ent.Comp.Quantity, out _);
         }
+
+        ChangeStateTrap(ent.Owner, ent.Comp); //now, unanchor() does not work in a container.
 
         if (!TryComp<EnsnaringComponent>(ent.Owner, out var ensnaring))
             return;

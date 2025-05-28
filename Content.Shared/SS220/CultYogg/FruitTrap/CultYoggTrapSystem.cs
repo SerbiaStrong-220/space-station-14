@@ -24,7 +24,7 @@ public sealed class CultYoggTrapSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<CultYoggTrapComponent, DoAfterAttemptEvent<InteractionTrapDoAfterEvent>>(CheckInteract);
-        SubscribeLocalEvent<CultYoggTrapComponent, ChangeCultYoggStageEvent>(OnChangeStage);
+        SubscribeLocalEvent<ChangeCultYoggStageEvent>(OnAlarmStage);
         SubscribeLocalEvent<CultYoggTrapComponent, TrapChangedArmedEvent>(OnChangedArmed);
     }
 
@@ -70,7 +70,7 @@ public sealed class CultYoggTrapSystem : EntitySystem
         }
     }
 
-    private void OnChangeStage(Entity<CultYoggTrapComponent> ent, ref ChangeCultYoggStageEvent args)
+    private void OnAlarmStage(ref ChangeCultYoggStageEvent args)
     {
         if (args.Stage != CultYoggStage.Alarm)
             return;
