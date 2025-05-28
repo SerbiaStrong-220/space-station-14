@@ -6,7 +6,7 @@
 - files: ["sound_trap_hit.ogg"]
   license: "Custom"
   copyright: "Sounds from Zvukipro, modified bone breaking sound from Paradise SS13."
-  source: "https://zvukipro.com/predmet/1103-zvuki-kapkana.html, https://github.com/ss220club/Paradise-SS220/commit/36a336b62ca752dd4a0d2ca34d874da9673afca1"
+  source: "https://zvukipro.com/predmet/1103-zvuki-kapkana.html"
 
 - files: ["sound_trap_defuse.ogg"]
   license: "Custom"
