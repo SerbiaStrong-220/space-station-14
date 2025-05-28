@@ -12,3 +12,36 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolSubMachineGunAcp
+  name: SMG magazine (.45 ACP)
+  parent: [ BaseItem, BaseSecurityContraband ]
+  components:
+  - type: Tag
+    tags:
+      - MagazinePistolSubMachineGunAcp
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 25
+    whitelist:
+      tags:
+      - CartridgeAmmoAcp
+    proto: CartridgeAmmoAcp
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/sbr.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-2
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 3
+    zeroVisible: false
+  - type: Appearance
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
