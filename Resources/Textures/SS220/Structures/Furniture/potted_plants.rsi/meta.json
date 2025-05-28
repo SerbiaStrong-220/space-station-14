@@ -8,6 +8,14 @@
   },
   "states": [
     {
+      "name": "random",
+      "delays": [
+        [
+          1.0
+        ]
+      ]
+    },
+    {
         "name": "plant-01",
         "delays": [
           [
