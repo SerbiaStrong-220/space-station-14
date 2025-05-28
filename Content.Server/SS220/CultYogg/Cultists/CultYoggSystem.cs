@@ -296,7 +296,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         _popup.PopupEntity(message, uid, uid);
     }
 
-    private bool TryReplaceMiGo()
+    /*private bool TryReplaceMiGo()
     {
         //if any MiGo needs to be replaced add here
         List<EntityUid> migoOnDelete = [];
@@ -315,7 +315,8 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         }
 
         return false;
-    }
+    }*/
+
     private bool AcsendingCultistCheck()//if anybody else is acsending
     {
         var query = EntityQueryEnumerator<CultYoggComponent, AcsendingComponent>();
