@@ -261,11 +261,12 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             return;
         }
 
-        if (!TryReplaceMiGo())//if amount of migo < required amount of migo or have 1 to replace
+        /*if (!TryReplaceMiGo())//if amount of migo < required amount of migo or have 1 to replace
         {
             _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-migo-full"), uid, uid);
             return;
         }
+        */
 
         //Maybe in later version we will detiriorate the body and add some kind of effects
 
