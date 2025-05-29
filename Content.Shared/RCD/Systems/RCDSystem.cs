@@ -415,7 +415,6 @@ public sealed class RCDSystem : EntitySystem
             }
 
             //SS220 RCD_indestructable_fix start
-
             if (tile.Tile.GetContentTileDefinition().Indestructible)
             {
                 if (popMsgs)
