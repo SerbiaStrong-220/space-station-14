@@ -170,11 +170,6 @@ namespace Content.Shared.Roles
         [DataField]
         public bool DontUseNameForTitles;
         // SS220 Round End Titles end
-
-        // SS220 cryo-manifest-fix begin
-        [DataField]
-        public bool CryoNotifyCrew { get; private set; } = true;
-        // SS220 cryo-manifest-fix end
     }
 
     /// <summary>
