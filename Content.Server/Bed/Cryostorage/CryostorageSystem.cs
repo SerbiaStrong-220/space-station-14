@@ -251,14 +251,14 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             if (_stationRecords.TryGetRecord<GeneralStationRecord>(key, out var entry, stationRecords))
                 jobName = entry.JobTitle;
 
-            // SS220 Cryostorage ghost role fix begin
+            // SS220 cryo-manifest-fix begin
             if (!_stationRecords.TryGetRecord<GeneralStationRecord>(key, out var record, stationRecords)
                 || !_prototypeManager.TryIndex<JobPrototype>(record.JobPrototype, out var jobProto)
-                || !jobProto.JoinNotifyCrew)
+                || !jobProto.CryoNotifyCrew)
             {
                 return;
             }
-            // SS220 Cryostorage ghost role fix end
+            // SS220 cryo-manifest-fix end
 
             // _stationRecords.RemoveRecord(key, stationRecords);
 
