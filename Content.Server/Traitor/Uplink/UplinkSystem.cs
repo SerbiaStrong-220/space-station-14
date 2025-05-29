@@ -43,7 +43,7 @@ public sealed class UplinkSystem : EntitySystem
         EntityUid user,
         FixedPoint2 balance,
         EntityUid? uplinkEntity = null,
-        bool giveDiscounts = false) //ss220 adduplink command generate code and open uplink
+        bool giveDiscounts = false)
     {
         // Try to find target item if none passed
 
