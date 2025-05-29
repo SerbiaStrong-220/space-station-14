@@ -10,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using System.Text.RegularExpressions;
+using YamlDotNet.Core.Tokens;
 
 namespace Content.Shared.SS220.Zones.Systems;
 
@@ -326,12 +327,24 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
     public static bool TryParseTag(string input, string tag, [NotNullWhen(true)] out string? value)
     {
-        var pattern = @$"{tag}=([^{{}}()\[\]\s]+)";
-        Match match = Regex.Match(input, pattern);
-        if (match.Success)
-            value = match.Groups[1].Value;
-        else
-            value = null;
+        value = null;
+
+        if (string.IsNullOrEmpty(input) || string.IsNullOrEmpty(tag))
+            return false;
+
+        var pattern = @$"{Regex.Escape(tag)}=(?:""([^""]*)""|(\S+))";
+        var regex = new Regex(pattern, RegexOptions.Compiled);
+
+        var match = regex.Match(input);
+        if (!match.Success)
+            return false;
+
+        for (var i = 1; i < match.Groups.Count; i++)
+        {
+            var group = match.Groups[i];
+            if (group.Success)
+                value = group.Value;
+        }
 
         return value != null;
     }

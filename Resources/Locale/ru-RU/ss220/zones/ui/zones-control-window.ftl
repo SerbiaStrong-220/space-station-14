@@ -3,8 +3,11 @@ zones-control-are-you-sure = Вы уверены?
 zones-control-window-name = Управление зонами
 zones-control-search-line-placeholder = Поиск...
 zones-control-refresh-button = Обновить
-zones-control-create-zone-button = Создать новую зону
+zones-control-create-new-zone-button = Создать новую зону
 zones-control-overlay-button = Оверлей
+zones-control-create-button = Создать
+zones-control-cancel-button = Отмена
+zones-control-apply-button = Применить
 
 zone-container-entry-delete-container-button = Удалить
 
@@ -16,3 +19,4 @@ zone-state-box-hex-color-label = Цвет
 zone-state-box-add-box-button = Добавить
 zone-state-box-cut-box-button = Вырезать
 zone-state-box-show-changes-button = Показать изменения
+

@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Content.Shared.SS220.Maths;
 
@@ -268,5 +269,31 @@ public static partial class MathHelperExtensions
               box.Contains(inner.TopLeft, closedRegion) ||
               box.Contains(inner.BottomRight, closedRegion) ||
               box.Contains(inner.TopRight, closedRegion);
+    }
+
+    public static bool TryParseBox2(string input, [NotNullWhen(true)] out Box2? box)
+    {
+        box = null;
+        var pattern = @"\d+,\d+";
+        var regex = new Regex(pattern, RegexOptions.Compiled);
+        var matches = regex.Matches(input);
+        if (matches.Count != 4)
+            return false;
+
+        var numbers = new float[4];
+        for (var i = 0; i < matches.Count; i++)
+        {
+            var value = matches[i].Value.Replace(',', '.');
+            if (float.TryParse(value, out var number))
+                numbers[i] = number;
+            else
+                return false;
+        }
+
+        if (numbers.Length != 4)
+            return false;
+
+        box = new Box2(numbers[0], numbers[1], numbers[2], numbers[3]);
+        return true;
     }
 }

@@ -105,7 +105,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     public void Refresh()
     {
-        NameLineEdit.Text = CurParams.Name;
+        NameLineEdit.Text = string.IsNullOrEmpty(CurParams.Name) ? $"Zone {_zones.GetZonesCount()}" : CurParams.Name;
         PrototypeIDLineEdit.Text = CurParams.ProtoId;
         HexColorLineEdit.Text = CurParams.Color.ToHex();
         ContainerNetIDLineEdit.Text = CurParams.Container.IsValid() ? CurParams.Container.ToString() : string.Empty;
@@ -156,7 +156,6 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             return;
 
         _boxLayoutManager.Cancel();
-        RemoveLayoutReact();
     }
 
     private void AddLayotReact()
@@ -178,10 +177,16 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     private void OnLayoutEnded(BoxLayoutManager.BoxParams @params)
     {
-        if (@params.Parent != CurParams.Container)
+        var newParams = CurParams;
+        if (!CurParams.Container.IsValid())
+            newParams.Container = @params.Parent;
+        else if (@params.Parent != CurParams.Container)
+        {
+            CancelLayout();
             return;
+        }
 
-        var newBoxes = CurParams.Boxes.ToList();
+        var newBoxes = CurParams.Boxes.ToHashSet();
         switch (_layoutMode)
         {
             case BoxLayoutMode.Adding:
@@ -189,7 +194,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
                 break;
 
             case BoxLayoutMode.Cutting:
-                newBoxes = MathHelperExtensions.SubstructBox(newBoxes, @params.Box).ToList();
+                newBoxes = MathHelperExtensions.SubstructBox(newBoxes, @params.Box).ToHashSet();
                 break;
         }
 
@@ -200,13 +205,9 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             var x2 = MathF.Round(b.TopRight.X, 2);
             var y2 = MathF.Round(b.TopRight.Y, 2);
             return Box2.FromTwoPoints(new Vector2(x1, y1), new Vector2(x2, y2));
-        }).ToList();
+        }).ToHashSet();
 
-        var newParams = CurParams;
-        newParams.ChangeState((ref ZoneParamsState p) =>
-        {
-            p.Boxes = newBoxes.ToHashSet();
-        });
+        newParams.Boxes = newBoxes.ToHashSet();
         CurParams = newParams;
     }
 

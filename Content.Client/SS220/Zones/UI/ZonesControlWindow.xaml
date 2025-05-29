@@ -1,4 +1,5 @@
 <DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:zc="clr-namespace:Content.Client.SS220.Zones.UI"
                Title="{Loc zones-control-window-name}"
                MinSize="600 300"
                SetSize="700 350">
@@ -14,8 +15,13 @@
                     <BoxContainer Name="ZonesContainersContainer" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True"/>
                 </ScrollContainer>
             </PanelContainer>
-            <Button Name="CreateZoneButton" Text="{Loc zones-control-create-zone-button}" Access="Public" HorizontalExpand="True"/>
+            <Button Name="CreateNewZoneButton" Text="{Loc zones-control-create-new-zone-button}" ToggleMode="True" Access="Public" HorizontalExpand="True"/>
         </BoxContainer>
-        <PanelContainer Name="OptionsPanel" VerticalExpand="True" Visible="False" Margin="5 0 0 0"/>
+        <PanelContainer Name="OptionsPanel" VerticalExpand="True" Visible="False" Margin="5 0 0 0">
+            <BoxContainer Orientation="Vertical" VerticalExpand="True">
+                <zc:ZoneParamsPanel Name="ZoneParams" VerticalExpand="True" HorizontalExpand="True"/>
+                <BoxContainer Name="OptionsButtonsBox" Orientation="Vertical" HorizontalExpand="True" Margin="5"/>
+            </BoxContainer>
+        </PanelContainer>
     </BoxContainer>
 </DefaultWindow>
