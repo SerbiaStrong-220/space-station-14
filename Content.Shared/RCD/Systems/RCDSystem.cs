@@ -197,7 +197,6 @@ public sealed class RCDSystem : EntitySystem
                 {
                     delay = _instantConstructionDelay;
                     effectPrototype = _instantConstructionFx;
-
                 }
 
                 break;
