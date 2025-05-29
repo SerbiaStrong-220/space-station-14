@@ -195,67 +195,85 @@ public sealed class TarotCardSystem : EntitySystem
 
         switch (card.Comp.CardType)
         {
+            // DONE
             case TarotCardType.Fool:
                 ApplyReversedEffect(card, target, ClearInventory, TeleportToArrivals);
                 break;
+            // DONE
             case TarotCardType.Magician:
                 ApplyReversedEffect(card, target, PushPlayers, OpenNearestAirlock);
                 break;
+            // DONE
             case TarotCardType.HighPriestess:
                 ApplyReversedEffect(card, target, SpawnRandomAnomaly, Slowdown);
                 break;
+            // DONE
             case TarotCardType.Empress:
                 ApplyReversedEffect(card, target, EnsurePacified, TransferSolution);
                 break;
+            // DONE
             case TarotCardType.Emperor:
                 ApplyReversedEffect(card, target, TeleportToHoD, TeleportToBridge);
                 break;
+            // DONE
             case TarotCardType.Hierophant:
                 ApplyReversedEffect(card, target, SpawnCerberus, SpawnCatCake);
                 break;
+            // DONE
             case TarotCardType.Lovers:
                 ApplyReversedEffect(card, target, HurtTarget, HealTarget);
                 break;
+            // DONE
             case TarotCardType.Chariot:
                 ApplyReversedEffect(card, target, SpeedUpEntity, ApplyChariotEffects);
                 break;
             case TarotCardType.Strength:
                 ApplyReversedEffect(card, target, MassHallucinations, HealTarget); // TODO
                 break;
+            // DONE
             case TarotCardType.Hermit:
                 ApplyReversedEffect(card, target, TransformGuns, TeleportToVend);
                 break;
+            // DONE
             case TarotCardType.WheelOfFortune:
                 ApplyReversedEffect(card, target, RollDieOfFortune, CreateGambling);
                 break;
+            // DONE
             case TarotCardType.Justice:
                 ApplyReversedEffect(card, target, SpawnRandomCrate, SpawnJusticeItems);
                 break;
+            // DONE
             case TarotCardType.HangedMan:
                 ApplyReversedEffect(card, target, FixturesSet, TeleportToRandomTile);
                 break;
+            // DONE
             case TarotCardType.Death:
                 ApplyReversedEffect(card, target, ModifyThreshold, HurtAnother);
                 break;
+            // DONE
             case TarotCardType.Temperance:
                 ApplyReversedEffect(card, target, EatPills, HealLing);
                 break;
+            // DONE
             case TarotCardType.Devil:
                 ApplyReversedEffect(card, target, ClusterFlashBang, HelpMessage);
                 break;
             case TarotCardType.Tower:
                 break;
+            // DONE
             case TarotCardType.Star:
                 ApplyReversedEffect(card, target, TeleportToUser, GivePinpointer);
                 break;
             case TarotCardType.Moon:
                 ApplyReversedEffect(card, target, RandomTeleportation, RandomTeleportation); // TODO: reverse action
                 break;
+            // DONE
             case TarotCardType.Sun:
                 ApplyReversedEffect(card, target, SmokeGrenade, Rejuvenate);
                 break;
             case TarotCardType.Judgement:
                 break;
+            // DONE
             case TarotCardType.World:
                 ApplyReversedEffect(card, target, BlockActionInRange, BlockAction);
                 break;
@@ -376,7 +394,7 @@ public sealed class TarotCardSystem : EntitySystem
 
         foreach (var entity in entities.Where(entity => entity.Owner != target))
         {
-            _statusEffects.TryAddStatusEffect(entity, "Pacified", TimeSpan.FromSeconds(40f), true);
+            _statusEffects.TryAddStatusEffect<PacifiedComponent>(entity, "Pacified", TimeSpan.FromSeconds(40f), true);
         }
     }
 
