@@ -401,7 +401,7 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RandomPottedPlantsTable
-        rolls: !type:ConstantNubmerSelector
+        rolls: !type:ConstantNumberSelector
           value: 5
 - type: entity
   id: CrateBioLumPottedPlant
@@ -424,7 +424,7 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RandomPottedBioLumPlantsTable
-        rolls: !type:ConstantNubmerSelector
+        rolls: !type:ConstantNumberSelector
           value: 5
 
 - type: entity
@@ -448,7 +448,7 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RandomPottedPlasticPlantsTable
-        rolls: !type:ConstantNubmerSelector
+        rolls: !type:ConstantNumberSelector
           value: 5
 
 - type: entityTable
