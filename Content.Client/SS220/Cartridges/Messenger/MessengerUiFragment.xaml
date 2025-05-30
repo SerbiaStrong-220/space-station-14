@@ -1,4 +1,4 @@
-<messenger:MessengerUiFragment xmlns:messenger="clr-namespace:Content.Client.CartridgeLoader.Cartridges.Messenger"
+<messenger:MessengerUiFragment xmlns:messenger="clr-namespace:Content.Client.SS220.Cartridges.Messenger"
                                xmlns="https://spacestation14.io" Margin="1 0 2 0">
     <PanelContainer StyleClasses="BackgroundDark"></PanelContainer>
     <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
