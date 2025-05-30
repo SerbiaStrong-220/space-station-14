@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Linq;
 using Content.Client.Guidebook.RichText;
+using Content.Client.SS220.UserInterface;
 using Content.Client.UserInterface.ControlExtensions;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Controls.FancyTree;
@@ -40,6 +41,17 @@ public sealed partial class GuidebookWindow : FancyWindow, ILinkClickHandler, IA
             HandleFilter();
         };
     }
+
+    //ss220 add pin for ui start
+    protected override void Opened()
+    {
+        base.Opened();
+
+        var pinnedButton = PinUISystem.CreateButton(this, CloseButton);
+
+        pinnedButton.OnPressed += _ => PinUISystem.SetPinned(this, pinnedButton.Pressed);
+    }
+    //ss220 add pin for ui end
 
     public void HandleClick(string link)
     {

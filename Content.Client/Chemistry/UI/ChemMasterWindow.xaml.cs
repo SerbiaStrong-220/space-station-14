@@ -10,6 +10,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
+using Content.Client.SS220.UserInterface;
 using Content.Shared.FixedPoint;
 using Robust.Client.Graphics;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
@@ -97,6 +98,17 @@ namespace Content.Client.Chemistry.UI
             Tabs.SetTabTitle(0, Loc.GetString("chem-master-window-input-tab"));
             Tabs.SetTabTitle(1, Loc.GetString("chem-master-window-output-tab"));
         }
+
+        //ss220 add pin for ui start
+        protected override void Opened()
+        {
+            base.Opened();
+
+            var pinnedButton = PinUISystem.CreateButton(this, CloseButton);
+
+            pinnedButton.OnPressed += _ => PinUISystem.SetPinned(this, pinnedButton.Pressed);
+        }
+        //ss220 add pin for ui end
 
         private ReagentButton MakeReagentButton(string text, ChemMasterReagentAmount amount, ReagentId id, bool isBuffer, string styleClass)
         {

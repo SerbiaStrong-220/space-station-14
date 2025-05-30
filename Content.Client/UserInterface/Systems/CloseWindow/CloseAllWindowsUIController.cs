@@ -1,5 +1,6 @@
 using Content.Client.Gameplay;
 using Content.Client.Info;
+using Content.Client.SS220.UserInterface;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -24,6 +25,13 @@ public sealed class CloseAllWindowsUIController : UIController
     {
         foreach (var childControl in new List<Control>(_uiManager.WindowRoot.Children)) // Copy children list as it will be modified on Close()
         {
+            //ss220 add pin for ui start
+            if (PinUISystem.GetPinned(childControl))
+            {
+                continue;
+            }
+            //ss220 add pin for ui end
+
             if (childControl is BaseWindow)
             {
                 ((BaseWindow) childControl).Close();

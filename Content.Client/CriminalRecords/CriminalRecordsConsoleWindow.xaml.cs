@@ -15,6 +15,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
+using Content.Client.SS220.UserInterface;
 using Content.Shared.StatusIcon;
 using Robust.Client.GameObjects;
 
@@ -147,6 +148,17 @@ public sealed partial class CriminalRecordsConsoleWindow : FancyWindow
                 OnHistoryUpdated?.Invoke(record, _access, true);
         };
     }
+
+    //ss220 add pin for ui start
+    protected override void Opened()
+    {
+        base.Opened();
+
+        var pinnedButton = PinUISystem.CreateButton(this, CloseButton);
+
+        pinnedButton.OnPressed += _ => PinUISystem.SetPinned(this, pinnedButton.Pressed);
+    }
+    //ss220 add pin for ui end
 
     public void StatusFilterPressed(SecurityStatus statusSelected)
     {

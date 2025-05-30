@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client.SS220.UserInterface;
 using Content.Shared.Access;
 using Content.Shared.Access.Systems;
 using Content.Shared.Roles;
@@ -80,6 +81,17 @@ namespace Content.Client.Access.UI
                 button.OnPressed += _ => SubmitData();
             }
         }
+
+        //ss220 add pin for ui start
+        protected override void Opened()
+        {
+            base.Opened();
+
+            var pinnedButton = PinUISystem.CreateButton(this, CloseButton);
+
+            pinnedButton.OnPressed += _ => PinUISystem.SetPinned(this, pinnedButton.Pressed);
+        }
+        //ss220 add pin for ui end
 
         private void ClearAllAccess()
         {
