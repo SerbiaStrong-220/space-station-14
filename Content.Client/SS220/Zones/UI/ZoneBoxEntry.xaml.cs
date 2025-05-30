@@ -7,27 +7,74 @@ namespace Content.Client.SS220.Zones.UI;
 [GenerateTypedNameReferences]
 public sealed partial class ZoneBoxEntry : PanelContainer
 {
-    public Box2? Box;
+    public Action<Box2>? OnBoxChanged;
 
-    public ZoneBoxEntry()
+    public Box2 Box
+    {
+        get => _box;
+        set
+        {
+            _box = value;
+            OnBoxChanged?.Invoke(value);
+            Refresh();
+        }
+    }
+
+    private Box2 _box;
+
+    public ZoneBoxEntry() : this(null) { }
+
+    public ZoneBoxEntry(Box2? box)
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
-        Refresh();
-    }
+        _box = box ?? Box2.Empty;
+        LeftLineEdit.OnFocusExit += _ => Refresh();
+        LeftLineEdit.OnTextEntered += args =>
+        {
+            if (float.TryParse(args.Text, out var value))
+                ChangeBox((ref Box2 box) => box.Left = value);
+        };
 
-    public ZoneBoxEntry(Box2 box) : this()
-    {
-        Box = box;
+        BottomLineEdit.OnFocusExit += _ => Refresh();
+        BottomLineEdit.OnTextEntered += args =>
+        {
+            if (float.TryParse(args.Text, out var value))
+                ChangeBox((ref Box2 box) => box.Bottom = value);
+        };
+
+        RightLineEdit.OnFocusExit += _ => Refresh();
+        RightLineEdit.OnTextEntered += args =>
+        {
+            if (float.TryParse(args.Text, out var value))
+                ChangeBox((ref Box2 box) => box.Right = value);
+        };
+
+        TopLineEdit.OnFocusExit += _ => Refresh();
+        TopLineEdit.OnTextEntered += args =>
+        {
+            if (float.TryParse(args.Text, out var value))
+                ChangeBox((ref Box2 box) => box.Top = value);
+        };
+
         Refresh();
     }
 
     public void Refresh()
     {
-        X1LineEdit.Text = Box?.BottomLeft.X.ToString() ?? string.Empty;
-        Y1LineEdit.Text = Box?.BottomLeft.Y.ToString() ?? string.Empty;
-        X2LineEdit.Text = Box?.TopRight.X.ToString() ?? string.Empty;
-        Y2LineEdit.Text = Box?.TopRight.Y.ToString() ?? string.Empty;
+        LeftLineEdit.Text = Box.BottomLeft.X.ToString();
+        BottomLineEdit.Text = Box.BottomLeft.Y.ToString();
+        RightLineEdit.Text = Box.TopRight.X.ToString();
+        TopLineEdit.Text = Box.TopRight.Y.ToString();
     }
+
+    private void ChangeBox(ActionRefBox2 action)
+    {
+        var box = Box;
+        action.Invoke(ref box);
+        Box = box;
+    }
+
+    private delegate void ActionRefBox2(ref Box2 box);
 }

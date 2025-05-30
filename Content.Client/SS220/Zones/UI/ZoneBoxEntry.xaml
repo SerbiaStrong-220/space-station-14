@@ -2,9 +2,9 @@
                 HorizontalExpand="True"
                 MinSize="120 20">
     <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-        <LineEdit Name="X1LineEdit" PlaceHolder="x1" HorizontalExpand="True"/>
-        <LineEdit Name="Y1LineEdit" PlaceHolder="y1" HorizontalExpand="True"/>
-        <LineEdit Name="X2LineEdit" PlaceHolder="x2" HorizontalExpand="True"/>
-        <LineEdit Name="Y2LineEdit" PlaceHolder="y2" HorizontalExpand="True"/>
+        <LineEdit Name="LeftLineEdit" PlaceHolder="Left" HorizontalExpand="True" Access="Public"/>
+        <LineEdit Name="BottomLineEdit" PlaceHolder="Bottom" HorizontalExpand="True" Access="Public"/>
+        <LineEdit Name="RightLineEdit" PlaceHolder="Right" HorizontalExpand="True" Access="Public"/>
+        <LineEdit Name="TopLineEdit" PlaceHolder="Top" HorizontalExpand="True" Access="Public"/>
     </BoxContainer>
 </PanelContainer>

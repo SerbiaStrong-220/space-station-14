@@ -1,9 +1,9 @@
 <DefaultWindow xmlns="https://spacestation14.io"
                xmlns:zc="clr-namespace:Content.Client.SS220.Zones.UI"
                Title="{Loc zones-control-window-name}"
-               MinSize="600 300"
-               SetSize="700 350">
-    <BoxContainer Orientation="Horizontal" VerticalExpand="True" HorizontalExpand="True">
+               MinSize="450 300"
+               SetSize="500 350">
+    <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
         <BoxContainer Name="MainBox" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
             <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                 <LineEdit Name="SearchLineEdit" PlaceHolder="{Loc zones-control-search-line-placeholder}" HorizontalExpand="True"/>
@@ -17,11 +17,8 @@
             </PanelContainer>
             <Button Name="CreateNewZoneButton" Text="{Loc zones-control-create-new-zone-button}" ToggleMode="True" Access="Public" HorizontalExpand="True"/>
         </BoxContainer>
-        <PanelContainer Name="OptionsPanel" VerticalExpand="True" Visible="False" Margin="5 0 0 0">
-            <BoxContainer Orientation="Vertical" VerticalExpand="True">
-                <zc:ZoneParamsPanel Name="ZoneParams" VerticalExpand="True" HorizontalExpand="True"/>
-                <BoxContainer Name="OptionsButtonsBox" Orientation="Vertical" HorizontalExpand="True" Margin="5"/>
-            </BoxContainer>
+        <PanelContainer Name="OptionsPanel" Visible="False" Margin="5 0 0 0">
+            <zc:ZoneParamsPanel Name="ZoneParams" HorizontalExpand="True"/>
         </PanelContainer>
     </BoxContainer>
 </DefaultWindow>

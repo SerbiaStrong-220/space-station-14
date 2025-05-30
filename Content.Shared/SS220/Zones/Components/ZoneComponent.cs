@@ -54,7 +54,7 @@ public sealed partial class ZoneParams
     /// Boxes in local coordinates (attached to <see cref="Container"/>) that determine the size of the zone
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
-    public HashSet<Box2> Boxes = new();
+    public List<Box2> Boxes = new();
 
     public void HandleState(ZoneParamsState @params)
     {

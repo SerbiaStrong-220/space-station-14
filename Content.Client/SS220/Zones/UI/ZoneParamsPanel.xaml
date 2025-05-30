@@ -2,26 +2,30 @@
                 xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
                 HorizontalExpand="True"
                 VerticalExpand="True"
-                MinSize="300 300">
-    <BoxContainer Name="MainBox" Orientation="Vertical" Margin="5" HorizontalExpand="True" VerticalExpand="True">
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
-            <Label Text="{Loc zone-state-box-name-label}"/>
-            <LineEdit Name="NameLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
-        </BoxContainer>
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
-            <Label Text="{Loc zone-state-box-prototype-id-label}"/>
-            <LineEdit Name="PrototypeIDLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
-        </BoxContainer>
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
-            <Label Text="{Loc zone-state-box-hex-color-label}"/>
-            <LineEdit Name="HexColorLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
-        </BoxContainer>
-        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
-            <Label Text="{Loc zone-state-box-container-net-id-label}"/>
-            <LineEdit Name="ContainerNetIDLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
+                MinSize="400 200">
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Name="MainBox" Orientation="Vertical" Margin="5" HorizontalExpand="True" VerticalExpand="True" Access="Public">
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
+                    <Label Text="{Loc zone-state-box-name-label}"/>
+                    <LineEdit Name="NameLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
+                    <Label Text="{Loc zone-state-box-prototype-id-label}"/>
+                    <LineEdit Name="PrototypeIDLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
+                    <Label Text="{Loc zone-state-box-hex-color-label}"/>
+                    <LineEdit Name="HexColorLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
+                    <Label Text="{Loc zone-state-box-container-net-id-label}"/>
+                    <LineEdit Name="ContainerNetIDLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
+                </BoxContainer>
+            </BoxContainer>
         </BoxContainer>
         <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin ="5 2">
-            <Collapsible Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+            <Collapsible Name="SizeOptionsCollapsible" BodyVisible="True" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
                 <CollapsibleHeading Title="{Loc zone-state-box-size-options-heading}" HorizontalExpand="True"/>
                 <CollapsibleBody HorizontalExpand="True" VerticalExpand="True">
                     <PanelContainer Name="SizeOptionsBackground" HorizontalExpand="True" VerticalExpand="True">

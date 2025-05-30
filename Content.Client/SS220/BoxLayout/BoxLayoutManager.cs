@@ -209,7 +209,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
 
             var boxesData = new BoxesOverlay.BoxesData(parent)
             {
-                Boxes = new HashSet<Box2> { box },
+                Boxes = new List<Box2> { box },
                 Color = _layoutManager.Color.WithAlpha(0.5f)
             };
             list.Add(boxesData);

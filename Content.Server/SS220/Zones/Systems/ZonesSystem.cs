@@ -132,7 +132,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         return CreateZone(new ZoneParamsState()
         {
             Container = container,
-            Boxes = boxes.ToHashSet(),
+            Boxes = boxes.ToList(),
             ProtoId = protoId ?? string.Empty,
             Name = name ?? string.Empty,
             Color = color ?? DefaultColor,
@@ -169,8 +169,10 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             if (TryComp<MapGridComponent>(container, out var mapGrid))
                 gridSize = mapGrid.TileSize;
 
-            @params.Boxes = GetAttachedToGridBoxes(@params.Boxes, gridSize).ToHashSet();
+            @params.Boxes = GetAttachedToGridBoxes(@params.Boxes, gridSize).ToList();
         }
+        else
+            @params.Boxes = RecalculateZoneBoxes(@params.Boxes).ToList();
 
         var zone = Spawn(@params.ProtoId, Transform(container).Coordinates);
         _transform.AttachToGridOrMap(zone);

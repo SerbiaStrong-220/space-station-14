@@ -53,6 +53,12 @@ public static partial class MathHelperExtensions
     /// </summary>
     public static IEnumerable<Box2> GetNonOverlappingBoxes(IEnumerable<Box2> boxes)
     {
+        GetNonOverlappingBoxes(ref boxes);
+        return boxes;
+    }
+
+    public static void GetNonOverlappingBoxes(ref IEnumerable<Box2> boxes)
+    {
         var result = new List<Box2>();
 
         foreach (var box in boxes)
@@ -80,7 +86,7 @@ public static partial class MathHelperExtensions
             result.AddRange(currentParts);
         }
 
-        return result;
+        boxes = result;
     }
 
     /// <summary>
@@ -128,6 +134,12 @@ public static partial class MathHelperExtensions
     /// Returns a new array of boxes in which, if possibe, the <paramref name="boxes"/> are combined without changing the total area
     /// </summary>
     public static IEnumerable<Box2> UnionInEqualSizedBoxes(IEnumerable<Box2> boxes)
+    {
+        UnionInEqualSizedBoxes(ref boxes);
+        return boxes;
+    }
+
+    public static void UnionInEqualSizedBoxes(ref IEnumerable<Box2> boxes)
     {
         var result = boxes.ToList();
         var united = true;
@@ -177,7 +189,7 @@ public static partial class MathHelperExtensions
             result = newArray;
         }
 
-        return result;
+        boxes = result;
 
         Dictionary<int, Box2> GetIntersectedBoxes(int index)
         {

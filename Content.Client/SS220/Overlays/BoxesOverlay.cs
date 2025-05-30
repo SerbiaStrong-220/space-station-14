@@ -132,7 +132,7 @@ public sealed class BoxesOverlay : Overlay
     {
         public EntityUid Parent = parent;
 
-        public HashSet<Box2> Boxes = new();
+        public List<Box2> Boxes = new();
 
         public Color Color = Color.White;
     }

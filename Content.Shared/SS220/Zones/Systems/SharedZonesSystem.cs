@@ -2,6 +2,7 @@
 using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Prototypes;
@@ -283,10 +284,20 @@ public abstract partial class SharedZonesSystem : EntitySystem
         if (zone.Comp.ZoneParams is not { } @params)
             return;
 
-        var newboxes = MathHelperExtensions.GetNonOverlappingBoxes(@params.Boxes);
-        newboxes = MathHelperExtensions.UnionInEqualSizedBoxes(newboxes);
-        @params.Boxes = newboxes.ToHashSet();
+        @params.Boxes = RecalculateZoneBoxes(@params.Boxes).ToList();
         Dirty(zone, zone.Comp);
+    }
+
+    public void RecalculateZoneBoxes(ref IEnumerable<Box2> boxes)
+    {
+        MathHelperExtensions.GetNonOverlappingBoxes(ref boxes);
+        MathHelperExtensions.UnionInEqualSizedBoxes(ref boxes);
+    }
+
+    public IEnumerable<Box2> RecalculateZoneBoxes(IEnumerable<Box2> boxes)
+    {
+        RecalculateZoneBoxes(ref boxes);
+        return boxes;
     }
 
     public IEnumerable<Box2> GetAttachedToGridBoxes(IEnumerable<Box2> boxes, float gridSize = 1f)
@@ -320,7 +331,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
             ProtoId = @params?.ProtoId ?? BaseZoneId,
             Name = @params?.Name ?? meta.EntityName,
             Color = @params?.Color ?? DefaultColor,
-            Boxes = @params?.Boxes ?? new HashSet<Box2>(),
+            Boxes = @params?.Boxes ?? new List<Box2>(),
             AttachToGrid = @params?.AttachToGrid ?? false,
         };
     }
@@ -364,6 +375,16 @@ public abstract partial class SharedZonesSystem : EntitySystem
         var otherBoxes = GetSortedBoxes(state2.Boxes);
         return ourBoxes.SequenceEqual(otherBoxes);
     }
+
+    public bool IsValidContainer(NetEntity netEntity)
+    {
+        return IsValidContainer(GetEntity(netEntity));
+    }
+
+    public bool IsValidContainer(EntityUid uid)
+    {
+        return HasComp<MapComponent>(uid) || HasComp<MapGridComponent>(uid);
+    }
 }
 
 /// <summary>
@@ -391,7 +412,13 @@ public partial struct ZoneParamsState()
     /// The entity that this zone is assigned to.
     /// Used to determine local coordinates
     /// </summary>
-    public NetEntity Container;
+    public NetEntity Container
+    {
+        get => _container;
+        set => TryChangeContainer(value);
+    }
+
+    private NetEntity _container = NetEntity.Invalid;
 
     public string Name = string.Empty;
 
@@ -407,7 +434,7 @@ public partial struct ZoneParamsState()
     /// <summary>
     /// Boxes in local coordinates (attached to <see cref="Container"/>) that determine the size of the zone
     /// </summary>
-    public HashSet<Box2> Boxes = new();
+    public List<Box2> Boxes = new();
 
     public void ChangeState(ActionRefZoneParams action)
     {
@@ -488,5 +515,15 @@ public partial struct ZoneParamsState()
             AttachToGrid == other.AttachToGrid;
 
         return isFieldsEquals && SharedZonesSystem.IsBoxesEquals(this, other);
+    }
+
+    public bool TryChangeContainer(NetEntity newContainer)
+    {
+        var zonesSys = IoCManager.Resolve<IEntityManager>().System<SharedZonesSystem>();
+        if (!zonesSys.IsValidContainer(newContainer))
+            return false;
+
+        _container = newContainer;
+        return true;
     }
 }
