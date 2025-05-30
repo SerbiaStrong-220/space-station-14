@@ -1,6 +1,6 @@
 ent-ClothingOuterHardsuitKingClown = тело короля королей
     .desc = Он старше вселенной.
-=======
+
 ent-ClothingOuterHardsuitLightBlueshield = лёгкий скафандр "Синий Щит"
     .desc = Специальный скафандр, разработанный для "Синий щит". Он отличается своей легкостью и высокой маневренностью.
 ent-ClothingOuterHardsuitHightBlueshield = тяжелый скафандр "Синий Щит"
