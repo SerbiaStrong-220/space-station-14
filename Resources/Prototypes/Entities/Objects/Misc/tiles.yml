@@ -9,10 +9,13 @@
   - type: Item
     sprite: Objects/Tiles/tile.rsi
     size: Normal
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 5
+# SS220 Throwable Changes begin
+# Damage removed from throwable tiles to avoid gib cannons
+#  - type: DamageOtherOnHit
+#    damage:
+#      types:
+#        Blunt: 5
+# SS220 Throwable Changes end
   - type: Stack
     count: 1
   - type: Damageable
@@ -36,10 +39,16 @@
             volume: -8
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 5
+# SS220 Throwable Changes begin
+# Damage removed from throwable tiles to avoid gib cannons
+#  - type: DamageOnLand
+#    damage:
+#      types:
+#        Blunt: 5
+# SS220 Throwable Changes end
+  - type: GuideHelp
+    guides:
+    - ExpandingRepairingStation
 
 - type: entity
   name: steel dark checker tile
@@ -47,6 +56,7 @@
   id: FloorTileItemSteelCheckerDark
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: checker-dark
   - type: FloorTile
     outputs:
@@ -61,6 +71,7 @@
   id: FloorTileItemSteelCheckerLight
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: checker-light
   - type: FloorTile
     outputs:
@@ -75,6 +86,7 @@
   id: FloorTileItemDark
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi # SS220 Resprite Tiles
     state: dark
   - type: Item
     heldPrefix: dark
@@ -94,6 +106,7 @@
   id: FloorTileItemDarkDiagonalMini
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi # SS220 Resprite Tiles
     state: dark-diagonal-mini
   - type: FloorTile
     outputs:
@@ -108,6 +121,7 @@
   id: FloorTileItemDarkDiagonal
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi # SS220 Resprite Tiles
     state: dark-diagonal
   - type: FloorTile
     outputs:
@@ -122,6 +136,7 @@
   id: FloorTileItemDarkHerringbone
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi # SS220 Resprite Tiles
     state: dark-herringbone
   - type: FloorTile
     outputs:
@@ -136,6 +151,7 @@
   id: FloorTileItemDarkMini
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi # SS220 Resprite Tiles
     state: dark-mini
   - type: FloorTile
     outputs:
@@ -150,6 +166,7 @@
   id: FloorTileItemDarkMono
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi # SS220 Resprite Tiles
     state: dark-mono
   - type: FloorTile
     outputs:
@@ -164,6 +181,7 @@
   id: FloorTileItemDarkPavement
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi # SS220 Resprite Tiles
     state: dark-pavement
   - type: FloorTile
     outputs:
@@ -178,6 +196,7 @@
   id: FloorTileItemDarkPavementVertical
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi # SS220 Resprite Tiles
     state: dark-pavement-vertical
   - type: FloorTile
     outputs:
@@ -192,6 +211,7 @@
   id: FloorTileItemDarkOffset
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/dark.rsi # SS220 Resprite Tiles
     state: dark-offset
   - type: FloorTile
     outputs:
@@ -206,6 +226,7 @@
   id: FloorTileItemSteel
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi # SS220 Resprite Tiles
     state: steel
   - type: Item
     heldPrefix: steel
@@ -225,6 +246,7 @@
   id: FloorTileItemSteelOffset
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi # SS220 Resprite Tiles
     state: steel-offset
   - type: FloorTile
     outputs:
@@ -239,6 +261,7 @@
   id: FloorTileItemSteelDiagonalMini
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi # SS220 Resprite Tiles
     state: steel-diagonal-mini
   - type: FloorTile
     outputs:
@@ -253,6 +276,7 @@
   id: FloorTileItemSteelDiagonal
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi # SS220 Resprite Tiles
     state: steel-diagonal
   - type: FloorTile
     outputs:
@@ -267,6 +291,7 @@
   id: FloorTileItemSteelHerringbone
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi # SS220 Resprite Tiles
     state: steel-herringbone
   - type: FloorTile
     outputs:
@@ -281,6 +306,7 @@
   id: FloorTileItemSteelMini
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi # SS220 Resprite Tiles
     state: steel-mini
   - type: FloorTile
     outputs:
@@ -295,6 +321,7 @@
   id: FloorTileItemSteelMono
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi # SS220 Resprite Tiles
     state: steel-mono
   - type: FloorTile
     outputs:
@@ -309,6 +336,7 @@
   id: FloorTileItemSteelPavement
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi # SS220 Resprite Tiles
     state: steel-pavement
   - type: FloorTile
     outputs:
@@ -323,6 +351,7 @@
   id: FloorTileItemSteelPavementVertical
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/steel.rsi # SS220 Resprite Tiles
     state: steel-pavement-vertical
   - type: FloorTile
     outputs:
@@ -337,6 +366,7 @@
   id: FloorTileItemWhite
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi # SS220 Resprite Tiles
     state: white
   - type: Item
     heldPrefix: white
@@ -356,6 +386,7 @@
   id: FloorTileItemWhiteOffset
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi # SS220 Resprite Tiles
     state: white-offset
   - type: FloorTile
     outputs:
@@ -370,6 +401,7 @@
   id: FloorTileItemWhiteDiagonalMini
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi # SS220 Resprite Tiles
     state: white-diagonal-mini
   - type: FloorTile
     outputs:
@@ -384,6 +416,7 @@
   id: FloorTileItemWhiteDiagonal
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi # SS220 Resprite Tiles
     state: white-diagonal
   - type: FloorTile
     outputs:
@@ -398,6 +431,7 @@
   id: FloorTileItemWhiteHerringbone
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi # SS220 Resprite Tiles
     state: white-herringbone
   - type: FloorTile
     outputs:
@@ -412,6 +446,7 @@
   id: FloorTileItemWhiteMini
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi # SS220 Resprite Tiles
     state: white-mini
   - type: FloorTile
     outputs:
@@ -426,6 +461,7 @@
   id: FloorTileItemWhiteMono
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi # SS220 Resprite Tiles
     state: white-mono
   - type: FloorTile
     outputs:
@@ -440,6 +476,7 @@
   id: FloorTileItemWhitePavement
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi # SS220 Resprite Tiles
     state: white-pavement
   - type: FloorTile
     outputs:
@@ -454,6 +491,7 @@
   id: FloorTileItemWhitePavementVertical
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/white.rsi # SS220 Resprite Tiles
     state: white-pavement-vertical
   - type: FloorTile
     outputs:
@@ -506,7 +544,8 @@
   id: FloorTileItemTechmaint
   components:
   - type: Sprite
-    state: techfloor
+    sprite: SS220/Objects/Tiles/tech-maint.rsi # SS220 Resprite Tiles
+    state: tech-maint
   - type: Item
     heldPrefix: dark
   - type: FloorTile
@@ -524,7 +563,8 @@
   id: FloorTileItemMono
   components:
   - type: Sprite
-    state: monofloor
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
+    state: mono
   - type: Item
     heldPrefix: steel
   - type: FloorTile
@@ -626,6 +666,7 @@
   id: FloorTileItemRockVault
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/rock-vault.rsi # SS220 Resprite Tiles
     state: rockvault
   - type: Item
     heldPrefix: steel
@@ -642,6 +683,7 @@
   id: FloorTileItemBlue
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: blue
   - type: Item
     heldPrefix: carpet-blue
@@ -658,6 +700,7 @@
   id: FloorTileItemLime
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: lime
   - type: Item
     heldPrefix: steel
@@ -674,6 +717,7 @@
   id: FloorTileItemMining
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/mining.rsi # SS220 Resprite Tiles
     state: mining
   - type: Item
     heldPrefix: mining
@@ -690,7 +734,8 @@
   id: FloorTileItemMiningDark
   components:
   - type: Sprite
-    state: miningdark
+    sprite: SS220/Objects/Tiles/mining.rsi # SS220 Resprite Tiles
+    state: mining-dark
   - type: Item
     heldPrefix: miningdark
   - type: FloorTile
@@ -706,7 +751,8 @@
   id: FloorTileItemMiningLight
   components:
   - type: Sprite
-    state: mininglight
+    sprite: SS220/Objects/Tiles/mining.rsi # SS220 Resprite Tiles
+    state: mining-light
   - type: Item
     heldPrefix: mininglight
   - type: FloorTile
@@ -755,6 +801,7 @@
   id: FloorTileItemHydro
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: hydro
   - type: Item
     heldPrefix: hydro
@@ -771,6 +818,7 @@
   id: FloorTileItemBar
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: bar
   - type: Item
     heldPrefix: steel
@@ -787,6 +835,7 @@
   id: FloorTileItemClown
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: clown
   - type: Item
     heldPrefix: steel
@@ -803,6 +852,7 @@
   id: FloorTileItemMime
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: mime
   - type: Item
     heldPrefix: steel
@@ -835,6 +885,7 @@
   id: FloorTileItemLaundry
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: laundry
   - type: Item
     heldPrefix: steel
@@ -852,6 +903,7 @@
   name: concrete tile
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/concrete.rsi # SS220 Resprite Tiles
     state: concrete
   - type: Item
     heldPrefix: generic
@@ -868,6 +920,7 @@
   id: FloorTileItemConcreteMono
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/concrete.rsi # SS220 Resprite Tiles
     state: concrete-mono
   - type: FloorTile
     outputs:
@@ -882,7 +935,8 @@
   id: FloorTileItemConcreteSmooth
   components:
   - type: Sprite
-    state: concrete-smooth
+    sprite: SS220/Objects/Tiles/concrete.rsi # SS220 Resprite Tiles
+    state: concrete-mono
   - type: FloorTile
     outputs:
       - Plating
@@ -896,6 +950,7 @@
   name: gray concrete tile
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/concrete.rsi # SS220 Resprite Tiles
     state: grayconcrete
   - type: Item
     heldPrefix: generic
@@ -912,6 +967,7 @@
   id: FloorTileItemGrayConcreteMono
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/concrete.rsi # SS220 Resprite Tiles
     state: grayconcrete-mono
   - type: FloorTile
     outputs:
@@ -926,7 +982,8 @@
   id: FloorTileItemGrayConcreteSmooth
   components:
   - type: Sprite
-    state: grayconcrete-smooth
+    sprite: SS220/Objects/Tiles/concrete.rsi # SS220 Resprite Tiles
+    state: grayconcrete-mono
   - type: FloorTile
     outputs:
       - Plating
@@ -940,6 +997,7 @@
   name: old concrete tile
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/concrete.rsi # SS220 Resprite Tiles
     state: oldconcrete
   - type: Item
     heldPrefix: generic
@@ -956,6 +1014,7 @@
   id: FloorTileItemOldConcreteMono
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/concrete.rsi # SS220 Resprite Tiles
     state: oldconcrete-mono
   - type: FloorTile
     outputs:
@@ -970,7 +1029,8 @@
   id: FloorTileItemOldConcreteSmooth
   components:
   - type: Sprite
-    state: oldconcrete-smooth
+    sprite: SS220/Objects/Tiles/concrete.rsi # SS220 Resprite Tiles
+    state: oldconcrete-mono
   - type: FloorTile
     outputs:
       - Plating
@@ -1227,6 +1287,7 @@
   id: FloorTileItemGold
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: gold
   - type: Item
     heldPrefix: gold
@@ -1246,6 +1307,7 @@
   id: FloorTileItemSilver
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: silver
   - type: Item
     heldPrefix: silver
@@ -1266,6 +1328,7 @@
   id: FloorTileItemGCircuit
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: gcircuit
   - type: Item
     heldPrefix: gcircuit
@@ -1282,6 +1345,7 @@
   id: FloorTileItemBCircuit
   components:
   - type: Sprite
+    sprite: SS220/Objects/Tiles/other.rsi # SS220 Resprite Tiles
     state: bcircuit
   - type: Item
     heldPrefix: bcircuit
@@ -1424,7 +1488,8 @@
   id: FloorTileItemSteelMaint
   components:
   - type: Sprite
-    state: steelmaintfloor
+    sprite: SS220/Objects/Tiles/steel-maint.rsi # SS220 Resprite Tiles
+    state: steel-maint
   - type: Item
     heldPrefix: steel
   - type: FloorTile
@@ -1440,7 +1505,8 @@
   id: FloorTileItemGratingMaint
   components:
   - type: Sprite
-    state: gratingmaintfloor
+    sprite: SS220/Objects/Tiles/grating.rsi # SS220 Resprite Tiles
+    state: grating-maint
   - type: Item
     heldPrefix: steel
   - type: FloorTile
@@ -1553,6 +1619,40 @@
     - FloorAstroSnow
   - type: Stack
     stackType: FloorTileAstroSnow
+
+- type: entity
+  id: FloorTileItemAstroAsteroidSand
+  parent: FloorTileItemBase
+  name: asteroid astro-sand
+  description: Fake sand. Luckily, it's not as coarse as the real thing.
+  components:
+  - type: Sprite
+    state: astro-asteroid
+  - type: Item
+    heldPrefix: asteroid
+  - type: FloorTile
+    outputs:
+    - Plating
+    - FloorAstroAsteroidSand
+  - type: Stack
+    stackType: FloorTileAstroAsteroidSand
+
+- type: entity
+  id: FloorTileItemAstroAsteroidSandBorderless
+  parent: FloorTileItemBase
+  name: borderless asteroid astro-sand
+  description: Fake sand. Luckily, it's not as coarse as the real thing.
+  components:
+  - type: Sprite
+    state: asteroid
+  - type: Item
+    heldPrefix: asteroid
+  - type: FloorTile
+    outputs:
+    - Plating
+    - FloorAstroAsteroidSandBorderless
+  - type: Stack
+    stackType: FloorTileAstroAsteroidSand
 
 - type: entity
   name: large wood floor

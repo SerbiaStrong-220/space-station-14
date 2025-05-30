@@ -18,6 +18,8 @@ using Robust.Shared.Containers;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Content.Shared.Projectiles;
+using Content.Server.Projectiles;
 
 namespace Content.Server.SS220.DarkReaper;
 
@@ -39,6 +41,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly BuckleSystem _buckle = default!;
+    [Dependency] private readonly ProjectileSystem _projectile = default!;
 
     private readonly ISawmill _sawmill = Logger.GetSawmill("DarkReaper");
 
@@ -67,6 +70,9 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
                 QueueDel(comp.ActivePortal);
                 comp.ActivePortal = null;
             }
+
+            if (TryComp<EmbeddedContainerComponent>(uid, out var embeddedContainer))
+                _projectile.DetachAllEmbedded((uid, embeddedContainer));
         }
     }
 
@@ -141,7 +147,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
 
                     var announcement = Loc.GetString("dark-reaper-component-announcement");
                     var sender = Loc.GetString("comms-console-announcement-title-centcom");
-                    _chat.DispatchStationAnnouncement(stationUid ?? uid, announcement, sender, false, Color.Red);
+                    _chat.DispatchStationAnnouncement(stationUid ?? uid, announcement, sender, false, null, Color.Red);//SS220 CluwneComms
                 }
 
                 // update consoom counter alert

@@ -32,8 +32,14 @@
 
 # Silicons
 - type: roleLoadout
+  id: JobBorg
+  nameDataset: NamesBorg
+  canCustomizeName: true
+
+- type: roleLoadout
   id: JobStationAi
   nameDataset: ai_names # SS220 Fix II Dataset
+  canCustomizeName: false
 
 - type: roleLoadout
   id: JobStationBorg
@@ -101,7 +107,7 @@
   - GroupTankHarness
   - LibrarianJumpsuit
   - CommonBackpack
-  - Glasses
+  - LibrarianEyes #SS220 ADD Monocle
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
@@ -173,6 +179,7 @@
 
 - type: roleLoadout
   id: JobClown
+  canCustomizeName: true
   groups:
   - GroupTankHarness
   - ClownHead
@@ -190,6 +197,7 @@
 
 - type: roleLoadout
   id: JobMime
+  canCustomizeName: true
   groups:
   - GroupTankHarness
   - MimeHead
@@ -420,6 +428,7 @@
   - SecurityJumpsuit
   - SecurityBackpack
   - SecurityOuterClothing
+  - SecurityGloves #SS220-tacsec loadout
   - SecurityShoes
   - SecurityPDA
   - SecurityBelt
@@ -432,13 +441,12 @@
 - type: roleLoadout
   id: JobDetective
   groups:
-  - GroupTankHarness
   - DetectiveHead
   # - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit
   - DetectiveSecBackpack #ss220 backpack noir
   - DetectiveOuterClothing
-  - SecurityShoes
+  - DetectiveShoes #SS220 dec-lux-shoes
   - SurvivalSecurity
   - Trinkets
   - SecurityStar
@@ -460,7 +468,7 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
-  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
+  - ChiefMedicalOfficerGlasses #SS220-TwoOne-Floppa-Iteration / ss220 cmo new
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
   - MedicalGloves
@@ -468,6 +476,7 @@
   - ChiefMedicalOfficerOuterClothing
   - ChiefMedicalOfficerNeck
   - ChiefMedicalOfficerShoes
+  # - MedicalEyewear
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - SurvivalMedical
   - Trinkets
@@ -488,6 +497,7 @@
   - MedicalDoctorOuterClothing
   - MedicalShoes
   - MedicalDoctorPDA
+  - MedicalEyewear
 #  - Glasses #SS220-Two Floppa Iteration
   - SurvivalMedical
   - Trinkets
@@ -501,7 +511,7 @@
   - MedicalNeck #SS220-WhiteScarf
   - MedicalInternJumpsuit
   - MedicalBackpack
-  - Glasses
+  - MedicalEyewear
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
@@ -536,6 +546,8 @@
   - MedicalBackpack
   - ParamedicOuterClothing
   - ParamedicShoes
+  - MedicalEyewear
+  - ParamedicBelt #ss220 ParamedInterdyne
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - SurvivalMedical
   - Trinkets
@@ -611,11 +623,20 @@
 # These loadouts are used for non-crew spawns, like off-station antags and event mobs
 # They will be used without player configuration, thus they will only ever apply what is forced by MinLimit
 
+# gives vox a harness and breathing mask
+# nitrogen tank not included
 - type: roleLoadout
   id: RoleSurvivalVoxSupport
   groups:
   - GroupSpeciesBreathTool
   - GroupTankHarness
+
+# gives vox a nitrogen breathing tank
+# other species get nothing
+- type: roleLoadout
+  id: RoleSurvivalVoxTank
+  groups:
+  - GroupEVATankVox
 
 - type: roleLoadout
   id: RoleSurvivalStandard

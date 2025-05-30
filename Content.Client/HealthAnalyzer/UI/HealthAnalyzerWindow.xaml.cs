@@ -99,6 +99,12 @@ namespace Content.Client.HealthAnalyzer.UI
                 ? $"{msg.BloodLevel * 100:F1} %"
                 : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
 
+            //SS220 LimitationRevive - start
+            DeathLabel.Text = msg.CounterDeath != null
+                ? $"{msg.CounterDeath}"
+                : Loc.GetString("health-analyzer-window-entity-unknown-value-text");
+            //SS220 LimitationRevive - end
+
             StatusLabel.Text =
                 _entityManager.TryGetComponent<MobStateComponent>(target.Value, out var mobStateComponent)
                     ? GetStatus(mobStateComponent.CurrentState)
@@ -110,18 +116,29 @@ namespace Content.Client.HealthAnalyzer.UI
 
             // Alerts
 
-            AlertsDivider.Visible = msg.Bleeding == true;
-            AlertsContainer.Visible = msg.Bleeding == true;
+            var showAlerts = msg.Unrevivable == true || msg.Bleeding == true;
+
+            AlertsDivider.Visible = showAlerts;
+            AlertsContainer.Visible = showAlerts;
+
+            if (showAlerts)
+                AlertsContainer.DisposeAllChildren();
+
+            if (msg.Unrevivable == true)
+                AlertsContainer.AddChild(new RichTextLabel
+                {
+                    Text = Loc.GetString("health-analyzer-window-entity-unrevivable-text"),
+                    Margin = new Thickness(0, 4),
+                    MaxWidth = 300
+                });
 
             if (msg.Bleeding == true)
-            {
-                AlertsContainer.DisposeAllChildren();
-                AlertsContainer.AddChild(new Label
+                AlertsContainer.AddChild(new RichTextLabel
                 {
                     Text = Loc.GetString("health-analyzer-window-entity-bleeding-text"),
-                    FontColorOverride = Color.Red,
+                    Margin = new Thickness(0, 4),
+                    MaxWidth = 300
                 });
-            }
 
             // Damage Groups
 

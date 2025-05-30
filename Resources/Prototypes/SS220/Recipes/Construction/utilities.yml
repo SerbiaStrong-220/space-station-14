@@ -1,0 +1,9 @@
+- type: construction
+  id: ThrusterShunting
+  graph: ThrusterShunting
+  startNode: start
+  targetNode: thrusterShunting
+  category: construction-category-utilities
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true

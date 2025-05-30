@@ -45,6 +45,15 @@
   radioBold: true
   accessGroups:
   - AllAccess
+  access:
+  - CentralCommand
+  - CentralCommandERT
+  - CentralCommandBSO
+  - CentralCommandCBURN
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
 
 - type: startingGear
   id: CentCommNanoTrasenDiplomatGear

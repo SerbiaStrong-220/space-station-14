@@ -1,0 +1,64 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# Base
+- type: entity
+  id: LockerFreezerMiniBase
+  parent: LockerBase
+  name: mini freezer
+  suffix: No Access
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Storage/mini_closet.rsi
+    layers:
+    - state: minifreezer
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: minifreezer_open
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,0.20,0.25,-0.50"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: minifreezer
+    stateDoorOpen: minifreezer_open
+    stateDoorClosed: minifreezer_door
+  - type: AccessReader
+  - type: ExplosionResistance
+    damageCoefficient: 0.50
+  - type: AntiRottingContainer
+  - type: Construction
+    graph: ClosetFreezer
+    node: done
+    containers:
+    - entity_storage
+
+- type: entity
+  id: LockerFreezerMini
+  parent: LockerFreezerMiniBase
+  name: mini freezer
+  suffix: Kitchen, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "Kitchen" ] ]
+
+- type: entity
+  id: LockerFreezerMiniBar
+  parent: LockerFreezerMiniBase
+  name: mini freezer
+  suffix: Kitchen, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "Bar" ] ]

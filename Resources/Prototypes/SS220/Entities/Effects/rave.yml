@@ -1,0 +1,20 @@
+- type: entity
+  id: CultYoggRaveEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TextureFadeOverlay
+    layers:
+    - sprite: { sprite: /Textures/SS220/Effects/TextureFade/tentacles.rsi, state: overlay }
+      minProgress: 0.5
+      maxProgress: 1
+      pulseMagnitude: 0.05
+      pulseRate: 0.5
+      progressSpeed: -0.025
+    - sprite: { sprite: /Textures/SS220/Effects/TextureFade/dithered-radial.rsi, state: overlay }
+      modulate: "#091816dd"
+      zIndex: -1
+      minProgress: 0.5
+      maxProgress: 1
+      pulseMagnitude: 0.02
+      pulseRate: 1.25
+      progressSpeed: -0.025

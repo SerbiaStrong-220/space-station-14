@@ -20,6 +20,7 @@ namespace Content.Client.Ghost
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly SharedActionsSystem _actions = default!;
+        [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
         [Dependency] private readonly ContentEyeSystem _contentEye = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
 
@@ -90,8 +91,27 @@ namespace Content.Client.Ghost
             if (args.Handled)
                 return;
 
-            Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup"), args.Performer);
-            _contentEye.RequestToggleLight(uid, component);
+            TryComp<PointLightComponent>(uid, out var light);
+
+            if (!component.DrawLight)
+            {
+                // normal lighting
+                Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-normal"), args.Performer);
+                _contentEye.RequestEye(component.DrawFov, true);
+            }
+            else if (!light?.Enabled ?? false) // skip this option if we have no PointLightComponent
+            {
+                // enable personal light
+                Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-personal-light"), args.Performer);
+                _pointLightSystem.SetEnabled(uid, true, light);
+            }
+            else
+            {
+                // fullbright mode
+                Popup.PopupEntity(Loc.GetString("ghost-gui-toggle-lighting-manager-popup-fullbright"), args.Performer);
+                _contentEye.RequestEye(component.DrawFov, false);
+                _pointLightSystem.SetEnabled(uid, false, light);
+            }
             args.Handled = true;
         }
 
@@ -180,13 +200,15 @@ namespace Content.Client.Ghost
             _actions.RemoveAction(uid, component.ToggleGhostHearingActionEntity);
             // SS220 ADD GHOST HUD'S
             _actions.RemoveAction(uid, component.ToggleHudOnOtherActionEntity);
+            //ss220 add filter tts for ghost
+            _actions.RemoveAction(uid, component.ToggleRadioChannelsUIEntity);
             //SS220-ghost-hats
             _actions.RemoveAction(uid, component.ToggleAGhostBodyVisualsActionEntity);
 
             if (uid != _playerManager.LocalEntity)
                 return;
 
-            GhostVisibility = false;
+            ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
             PlayerRemoved?.Invoke(component);
         }
 
@@ -207,7 +229,7 @@ namespace Content.Client.Ghost
             }
             // SS220 colorful ghost end
 
-            GhostVisibility = true;
+            ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
             PlayerAttached?.Invoke(component);
         }
 
@@ -230,9 +252,17 @@ namespace Content.Client.Ghost
 
         private void OnGhostPlayerDetach(EntityUid uid, GhostComponent component, LocalPlayerDetachedEvent args)
         {
-            GhostVisibility = false;
+            ResetGhostVisibility(); // SS220-Fix ghosts visibility for other entities
             PlayerDetached?.Invoke();
         }
+
+        // SS220-Fix ghosts visibility for other entities-begin
+        // Just a semantic separation for a better understanding of the logic
+        private void ResetGhostVisibility()
+        {
+            GhostVisibility = true;
+        }
+        // SS220-Fix ghosts visibility for other entities-end
 
         private void OnGhostWarpsResponse(GhostWarpsResponseEvent msg)
         {

@@ -17,7 +17,7 @@
   suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Cloaks/whitecapcloakformal.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/captain_white_formal.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -35,7 +35,7 @@
   description: Используется офицером «Синий Щит», который верно защищает своих глав.
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Neck/Cloaks/Blueshield.rsi
+      sprite: SS220/Clothing/Neck/Cloaks/blueshield.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -48,7 +48,7 @@
       sprite: SS220/Clothing/Neck/Cloaks/shitty-1984.rsi
       scale: 0.125, 0.125
     - type: Clothing
-      clothingVisuals: 
+      clothingVisuals:
         neck:
           - scale: 0.125, 0.125
             sprite: SS220/Clothing/Neck/Cloaks/shitty-1984.rsi
@@ -64,9 +64,26 @@
   description: Огромное доброе сердце, запечатанное в куске ткани.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Cloaks/AlisaCloak.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/alisa.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodHeartFinaly
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakOwl
+  name: the owl hero's cloak
+  description:  Be prepared for night patrols and strange questions about mice.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/owl.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodOwl
     requiredSlot:
     - neck
     slot: head

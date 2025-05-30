@@ -10,6 +10,17 @@ public enum SuperMatterEmitterExtensionUiKey : byte
 }
 
 /// <summary>
+/// This event raise to give users information about server's component values after its flatting.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class SuperMatterEmitterExtensionUpdate(int power, int ratio) : BoundUserInterfaceState
+{
+    public int PowerConsumption { get; } = power;
+    public int EnergyToMatterRatio { get; } = ratio;
+}
+
+
+/// <summary>
 /// This event raised when user applied changes in emitter interface
 /// </summary>
 [Serializable, NetSerializable]
@@ -18,3 +29,6 @@ public sealed class SuperMatterEmitterExtensionValueMessage(int power, int ratio
     public int PowerConsumption = power;
     public int EnergyToMatterRatio = ratio;
 }
+
+[Serializable, NetSerializable]
+public sealed class SuperMatterEmitterExtensionEmitterActivateMessage() : BoundUserInterfaceMessage { }

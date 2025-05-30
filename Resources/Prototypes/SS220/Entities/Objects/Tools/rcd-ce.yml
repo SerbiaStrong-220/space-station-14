@@ -1,0 +1,26 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: RCDCE
+  parent: RCD
+  name: Advanced RCD
+  description: A Senior Engineer's bluespace-enhanced rapid construction device that passively generates its own compressed matter.
+  suffix: AutoRecharge
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/RCDCE.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Tools/RCDCE.rsi
+    quickEquip: false
+    slots:
+    - Belt
+  - type: LimitedCharges
+    maxCharges: 20
+  - type: AutoRecharge
+    rechargeDuration: 10
+  - type: Tag
+    tags:
+    - HighRiskItem
+  - type: TrackedItem
+  - type: StealTarget
+    stealGroup: RCDCE

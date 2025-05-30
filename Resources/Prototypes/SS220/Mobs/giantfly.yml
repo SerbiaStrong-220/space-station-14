@@ -1,0 +1,136 @@
+- type: entity
+  name: Vespia
+  parent:
+  - SimpleMobBase
+  - FlyingMobBase
+  - MobCombat
+  id: MobGiantFly
+  suffix: Angry
+  description: This is not a BEE.
+  components:
+  - type: NpcFactionMember
+    factions:
+      - SimpleHostile
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 3
+    baseSprintSpeed : 5
+  - type: ThermalVision
+    state: Half
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: giant_fly
+      sprite: SS220/Mobs/Animals/giant_fly.rsi
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: giant_fly
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: CombatMode
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      90: Critical
+      180: Dead
+  - type: MeleeWeapon
+    altDisarm: false
+    soundHit:
+        path: /Audio/Weapons/Xeno/alien_claw_flesh1.ogg
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Poison: 6
+        Piercing: 12
+  - type: ReplacementAccent
+    accent: xeno
+  - type: InteractionPopup
+    successChance: 0.5
+    interactSuccessString: petting-success-giant-fly
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/lizard_happy.ogg
+  - type: NoSlip
+  - type: Bloodstream
+    bloodMaxVolume: 100
+    bloodReagent: Slime
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: Prying # Open door from xeno.yml.
+    pryPowered: true
+    force: true
+    speedModifier: 3
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatXeno
+      amount: 3
+  - type: Reactive
+    reactions:
+    - reagents: [ PestKiller ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        damage:
+          groups:
+            Toxin: 10
+  - type: StaminaResistance
+    damageCoefficient: 0.4
+    worn: false
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: MobVespia
+  - type: Sharp
+
+- type: entity
+  parent: MobGiantFly
+  id: MobGiantFlyGhostRole
+  suffix: GhostRole
+  components:
+  - type: GhostRole
+    makeSentient: true
+    name: ghost-role-information-giant-fly-name
+    description: ghost-role-information-giant-fly-description
+    rules: ghost-role-information-giant-fly-rules
+    mindRoles:
+      - MindRoleGhostRoleTeamAntagonist
+  - type: GhostTakeoverAvailable
+
+- type: entity
+  name: Vespia Mob Spawner
+  id: SpawnMobVespia
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ai
+    - type: ConditionalSpawner
+      prototypes:
+        - MobGiantFly
+
+- type: entity
+  name: Vespia Ghost Role Spawner
+  id: SpawnGhostRoleVespia
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ai
+    - type: ConditionalSpawner
+      prototypes:
+        - MobGiantFlyGhostRole

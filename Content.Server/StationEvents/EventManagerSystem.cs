@@ -73,7 +73,10 @@ public sealed class EventManagerSystem : EntitySystem
         }
         // SS220 Проверка на отключенные случаные события в текущем пресете
 
-        if (!TryBuildLimitedEvents(limitedEventsTable, out var limitedEvents))
+        var availableEvents = AvailableEvents(); // handles the player counts and individual event restrictions.
+                                                 // Putting this here only makes any sense in the context of the toolshed commands in BasicStationEventScheduler. Kill me.
+
+        if (!TryBuildLimitedEvents(limitedEventsTable, availableEvents, out var limitedEvents))
         {
             Log.Warning("Provided event table could not build dict!");
             return;
@@ -98,11 +101,13 @@ public sealed class EventManagerSystem : EntitySystem
     /// <summary>
     /// Returns true if the provided EntityTableSelector gives at least one prototype with a StationEvent comp.
     /// </summary>
-    public bool TryBuildLimitedEvents(EntityTableSelector limitedEventsTable, out Dictionary<EntityPrototype, StationEventComponent> limitedEvents)
+    public bool TryBuildLimitedEvents(
+        EntityTableSelector limitedEventsTable,
+        Dictionary<EntityPrototype, StationEventComponent> availableEvents,
+        out Dictionary<EntityPrototype, StationEventComponent> limitedEvents
+        )
     {
         limitedEvents = new Dictionary<EntityPrototype, StationEventComponent>();
-
-        var availableEvents = AvailableEvents(); // handles the player counts and individual event restrictions
 
         if (availableEvents.Count == 0)
         {
@@ -166,21 +171,20 @@ public sealed class EventManagerSystem : EntitySystem
             return null;
         }
 
-
-        var sumOfWeights = 0;
+        var sumOfWeights = 0.0f;
 
         foreach (var stationEvent in availableEvents.Values)
         {
-            sumOfWeights += (int) stationEvent.Weight;
+            sumOfWeights += stationEvent.Weight;
         }
 
-        sumOfWeights = _random.Next(sumOfWeights);
+        sumOfWeights = _random.NextFloat(sumOfWeights);
 
         foreach (var (proto, stationEvent) in availableEvents)
         {
-            sumOfWeights -= (int) stationEvent.Weight;
+            sumOfWeights -= stationEvent.Weight;
 
-            if (sumOfWeights <= 0)
+            if (sumOfWeights <= 0.0f)
             {
                 return proto.ID;
             }
@@ -229,7 +233,7 @@ public sealed class EventManagerSystem : EntitySystem
             if (prototype.Abstract)
                 continue;
 
-            if (!prototype.TryGetComponent<StationEventComponent>(out var stationEvent))
+            if (!prototype.TryGetComponent<StationEventComponent>(out var stationEvent, EntityManager.ComponentFactory))
                 continue;
 
             allEvents.Add(prototype, stationEvent);

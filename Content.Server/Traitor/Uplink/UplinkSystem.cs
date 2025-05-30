@@ -1,10 +1,12 @@
 using System.Linq;
+using Content.Server.PDA.Ringer;
 using Content.Server.Store.Systems;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Implants;
 using Content.Shared.Inventory;
+using Content.Shared.Mind;
 using Content.Shared.PDA;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
@@ -19,6 +21,10 @@ public sealed class UplinkSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    //ss220 adduplink command generate code and open uplink start
+    [Dependency] private readonly RingerSystem _ringer = default!;
+    //ss220 adduplink command generate code and open uplink end
 
     [ValidatePrototypeId<CurrencyPrototype>]
     public const string TelecrystalCurrencyPrototype = "Telecrystal";
@@ -61,8 +67,12 @@ public sealed class UplinkSystem : EntitySystem
     /// </summary>
     private void SetUplink(EntityUid user, EntityUid uplink, FixedPoint2 balance, bool giveDiscounts)
     {
+        if (!_mind.TryGetMind(user, out var mind, out _))
+            return;
+
         var store = EnsureComp<StoreComponent>(uplink);
-        store.AccountOwner = user;
+
+        store.AccountOwner = mind;
 
         store.Balance.Clear();
         _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { TelecrystalCurrencyPrototype, balance } },
@@ -70,10 +80,10 @@ public sealed class UplinkSystem : EntitySystem
             store);
 
         var uplinkInitializedEvent = new StoreInitializedEvent(
-            TargetUser: user,
+            TargetUser: mind,
             Store: uplink,
             UseDiscounts: giveDiscounts,
-            Listings: _store.GetAvailableListings(user, uplink, store)
+            Listings: _store.GetAvailableListings(mind, uplink, store)
                 .ToArray());
         RaiseLocalEvent(ref uplinkInitializedEvent);
     }
@@ -133,4 +143,15 @@ public sealed class UplinkSystem : EntitySystem
 
         return null;
     }
+
+    //ss220 adduplink command generate code and open uplink start
+    public void GenerateCodeAndOpenUplink(EntityUid uplinkEntity)
+    {
+        var ev = new GenerateUplinkCodeEvent();
+        RaiseLocalEvent(uplinkEntity, ref ev);
+
+        if (ev.Code != null)
+            _ringer.TryToggleUplink(uplinkEntity, ev.Code);
+    }
+    //ss220 adduplink command generate code and open uplink end
 }

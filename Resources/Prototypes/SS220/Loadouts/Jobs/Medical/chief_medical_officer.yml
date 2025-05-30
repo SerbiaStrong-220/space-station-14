@@ -1,0 +1,81 @@
+- type: loadoutEffectGroup
+  id: CMOCorporate
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobChiefMedicalOfficer
+      time: 36000 # 10 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: CMOParade
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobChiefMedicalOfficer
+      time: 234000 # 65 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+
+# Jumpsuit
+- type: loadout
+  id: CMOCorpJumpsuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CMOCorporate
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCMOCorporate
+
+- type: loadout
+  id: CMOCorpJumpskirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CMOCorporate
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtCMOCorporate
+
+# Glasses
+- type: loadout
+  id: CMOCorpGlasses
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CMOCorporate
+  equipment:
+    eyes: ClothingEyesCMOCorporate
+
+# Shoes
+- type: loadout
+  id: CMOCorpShoes
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CMOCorporate
+  equipment:
+    shoes: ClothingShoesCMOCorporate
+
+# Head 
+- type: loadout
+  id: CapCMO
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CMOParade
+  equipment:
+    head: ClothingHeadHatCapCMO
+
+# Neck 
+- type: loadout
+  id: ParadeCloakCMO
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CMOParade
+  equipment:
+    neck: ClothingNeckCMOParadeCloak

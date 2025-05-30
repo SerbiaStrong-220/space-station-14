@@ -1,8 +1,43 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-# USSP
+# Base
 - type: entity
   parent: EnergySwordDouble
+  id: EnergySwordAdmiralBase
+  suffix: Shitspawn, Ebent, FractWar
+  abstract: true
+  components:
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+        types:
+            Slash: 12
+            Heat: 12
+            Structural: 15
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1.5
+    angle: 100
+    damage:
+      types:
+        Blunt: 4.5
+  - type: Reflect
+    reflectProb: 0.80 #ss220 ttkTweaks
+    reflects:
+      - NonEnergy
+      - Energy #SS220-FixReflects
+    spread: 45
+    reflectProbProjectile: 0.70 #ss220lowTTKUpdate
+    spreadProjectile: 180
+
+# Iron squad
+- type: entity
+  parent: EnergySwordAdmiralBase
+  id: EnergySwordDoubleIronSquad
+  suffix: Shitspawn, Ebent, FractWar
+
+# USSP
+- type: entity
+  parent: EnergySwordAdmiralBase
   id: EnergyAxe
   suffix: Shitspawn, Ebent, FractWar
   name: двуручный энергетический топор
@@ -12,7 +47,7 @@
     colorOptions:
     - "#8B0000"
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/e_axe.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_axe.rsi
     layers:
       - state: energyaxe
       - state: energyaexe_blade
@@ -31,50 +66,14 @@
         shader: unshaded
   - type: Item
     size: Small
-    sprite: SS220/Objects/Weapons/Melee/e_axe_inhands.rsi
-  - type: Reflect
-    reflects: Energy
-    reflectProb: .95
-    spread: 75
-  - type: Blocking
-    passiveBlockModifier:
-      coefficients:
-        Blunt: 0.3
-        Slash: 0.3
-        Piercing: 0.3
-        Heat: 0.3
-        Stamina: 0.3
-    activeBlockModifier:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-        Stamina: 0.9
-      flatReductions:
-        Heat: 1
-        Piercing: 1
-    activeBlockFraction: 0.75 #ss220-revorkblock
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_axe_inhands.rsi
   - type: UseDelay
     delay: 1
-  - type: ItemToggleMeleeWeapon
-    activatedDamage:
-        types:
-            Slash: 12
-            Heat: 12
-            Structural: 15
   - type: ComponentToggler
     components:
     - type: Sharp
     - type: DisarmMalus
       malus: 0.7
-  - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 1.5
-    angle: 100
-    damage:
-      types:
-        Blunt: 4.5
   - type: ItemToggleActiveSound
     activeSound:
       path: /Audio/Weapons/ebladehum.ogg
@@ -83,7 +82,7 @@
 
 # ERT
 - type: entity
-  parent: EnergySwordDouble
+  parent: EnergySwordAdmiralBase
   id: EnergySwordEbentDouble
   suffix: Shitspawn, Ebent, FractWar
   name: парные энергетические мечи
@@ -93,7 +92,7 @@
     colorOptions:
     - "#FFFFFF"
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/e_sword_ebent_double.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_sword_ebent_double.rsi
     layers:
       - state: e_sword_double
       - state: e_sword_double_blade
@@ -112,50 +111,14 @@
         shader: unshaded
   - type: Item
     size: Small
-    sprite: SS220/Objects/Weapons/Melee/e_sword_ebent_inhands_double.rsi
-  - type: Reflect
-    reflects: Energy
-    reflectProb: .95
-    spread: 75
-  - type: Blocking
-    passiveBlockModifier:
-      coefficients:
-        Blunt: 0.3
-        Slash: 0.3
-        Piercing: 0.3
-        Heat: 0.3
-        Stamina: 0.3
-    activeBlockModifier:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
-        Stamina: 0.9
-      flatReductions:
-        Heat: 1
-        Piercing: 1
-    activeBlockFraction: 0.75 #ss220-revorkblock
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Melee/e_sword_ebent_inhands_double.rsi
   - type: UseDelay
     delay: 1
-  - type: ItemToggleMeleeWeapon
-    activatedDamage:
-        types:
-            Slash: 12
-            Heat: 12
-            Structural: 15
   - type: ComponentToggler
     components:
     - type: Sharp
     - type: DisarmMalus
       malus: 0.7
-  - type: MeleeWeapon
-    wideAnimationRotation: -135
-    attackRate: 1.5
-    angle: 100
-    damage:
-      types:
-        Blunt: 4.5
   - type: ItemToggleActiveSound
     activeSound:
       path: /Audio/Weapons/ebladehum.ogg

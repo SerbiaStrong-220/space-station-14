@@ -12,6 +12,10 @@
     - CanPilot
     - BypassInteractionRangeChecks
     - BypassDropChecks
+    - NoConsoleSound
+    - SilentStorageUser
+    - PreventAccessLogging
+    - AllowBiomeLoading
   - type: Input
     context: "aghost"
   - type: Ghost
@@ -21,21 +25,27 @@
   - type: Hands
   - type: ComplexInteraction
   - type: Puller
+    needsHands: false
   - type: CombatMode
   - type: Physics
     ignorePaused: true
-    bodyType: Kinematic
+    bodyType: KinematicController # SS220 aghost pusher fix
   - type: Body
     prototype: Aghost
   - type: Access
     groups:
     - AllAccess
+    - Silicon
     tags:
     - NuclearOperative
     - SyndicateAgent
     - CentralCommand
   - type: UserInterface
     interfaces:
+      #ss220 add filter tts for ghost start
+      enum.GhostHearingKey.Key:
+        type: GhostHearingBoundUserInterface
+      #ss220 add filter tts for ghost end
       enum.SolarControlConsoleUiKey.Key:
         type: SolarControlConsoleBoundUserInterface
       enum.CommunicationsConsoleUiKey.Key:
@@ -66,11 +76,13 @@
   - type: SolarControlConsole # look ma i AM the computer!
   - type: CommunicationsConsole
     title: comms-console-announcement-title-centcom
-    color: "#228b22"
+    color: "#1d8bad"
+    delay: 10
+    initialDelay: 0
+    global: true
   - type: RadarConsole
     followEntity: true
   - type: CargoOrderConsole
-  - type: BankClient
   - type: CrewMonitoringConsole
   - type: GeneralStationRecordConsole
     canDeleteEntries: true
@@ -88,6 +100,7 @@
   - type: SolutionScanner
   - type: IgnoreUIRange
   - type: ShowAntagIcons
+  # - type: ShowContrabandDetails # SS220-useless-info
   - type: Inventory
     templateId: aghost
   - type: Loadout
@@ -127,7 +140,7 @@
     icon: Corvax/Interface/AdminActions/radar.png # Corvax-Resprite
     iconOn: Corvax/Interface/AdminActions/radar.png # Corvax-Resprite
     keywords: [ "AI", "console", "interface" ]
-    priority: -7
+    priority: -6
     event: !type:ToggleIntrinsicUIEvent { key: enum.RadarConsoleUiKey.Key }
 
 - type: entity
@@ -151,7 +164,7 @@
     icon: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
     iconOn: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
     keywords: [ "AI", "console", "interface" ]
-    priority: -9
+    priority: -8
     event: !type:ToggleIntrinsicUIEvent { key: enum.CrewMonitoringUIKey.Key }
 
 - type: entity
@@ -163,5 +176,5 @@
     icon: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
     iconOn: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
     keywords: [ "AI", "console", "interface" ]
-    priority: -8
+    priority: -7
     event: !type:ToggleIntrinsicUIEvent { key: enum.GeneralStationRecordConsoleKey.Key }

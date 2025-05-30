@@ -45,6 +45,13 @@
     layers:
     - state: animated
       shader: unshaded
+    ## ss220-new-years-cap begin
+    #   sprite: Mobs/Ghosts/ghost_human.rsi
+    #   color: "#fff8"
+    # - state: cap-ghost
+    #   shader: unshaded
+    #   sprite: SS220/Clothing/Head/Hats/newyears_cap.rsi
+    ## ss220-new-years-cap end
   - type: ContentEye
     maxZoom: 1.44,1.44
   - type: Eye
@@ -65,13 +72,31 @@
     damageContainers:
       - Biological
   # SS220 ADD GHOST HUD'S END
+  - type: ShowEventRoleIcons # SS220 Add event role icons
+  - type: ShowElectrocutionHUD
   - type: IntrinsicRadioReceiver
   - type: ActiveRadio
     receiveAllChannels: true
     globalReceive: true
+  # SS220 telepathy begin
+  - type: Telepathy
+    canSend: false
+    receiveAllChannels: true
+  # SS220 telepathy end
   - type: Tag
     tags:
     - BypassInteractionRangeChecks
+  - type: PointLight
+    netsync: false
+    radius: 6
+    castShadows: false
+    enabled: false
+  #ss220 add filter tts for ghost start
+  - type: UserInterface
+    interfaces:
+      enum.GhostHearingKey.Key:
+        type: GhostHearingBoundUserInterface
+  #ss220 add filter tts for ghost end
 
 # proto for player ghosts specifically
 - type: entity
@@ -79,6 +104,9 @@
   id: MobObserver
   components:
   - type: Spectral
+  - type: Tag
+    tags:
+    - AllowGhostShownByEvent
 
 - type: entity
   id: ActionGhostBoo
@@ -89,12 +117,13 @@
     icon: Interface/Actions/scream.png
     checkCanInteract: false
     event: !type:BooActionEvent
+    startDelay: true
     useDelay: 120
 
 - type: entity
   id: ActionToggleLighting
-  name: Toggle All Lighting
-  description: Toggle all light rendering to better observe dark areas.
+  name: Toggle Lighting
+  description: Toggle light rendering to better observe dark areas.
   components:
   - type: InstantAction
     icon: Interface/VerbIcons/light.svg.192dpi.png
@@ -136,3 +165,12 @@
       state: icon
     iconOn: Interface/Actions/ghostHearingToggled.png
     event: !type:ToggleGhostHearingActionEvent
+
+- type: entity
+  id: ActionToggleRadioChannelsUI
+  name: Toggle channel filter
+  components:
+  - type: InstantAction
+    icon: { sprite: SS220/Clothing/Neck/Misc/headphones.rsi, state: icon }
+    checkCanInteract: false
+    event: !type:ToggleGhostRadioChannels

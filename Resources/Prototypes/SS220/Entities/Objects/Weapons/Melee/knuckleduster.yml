@@ -8,10 +8,10 @@
   description: The quartermaster's engraved knuckleduster, made by special order. It was issued as a means of combating the increased cases of theft of personal belongings and materials from the supply department.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/engraved_knuckleduster.rsi
+    sprite: SS220/Clothing/Hands/Knuckles/engraved_knuckleduster.rsi
     state: icon
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Melee/engraved_knuckleduster.rsi
+    sprite: SS220/Clothing/Hands/Knuckles/engraved_knuckleduster.rsi
     slots: [gloves]
   - type: Item
     size: Small
@@ -22,16 +22,17 @@
     damage:
       types:
        Blunt: 10
-       Stamina: 28
     soundHit:
       collection: GenericHit
     animation: WeaponArcFist
     mustBeEquippedToUse: true
+  - type: StaminaDamageOnCollide
+    damage: 28
   - type: WeaponRandom
     damageBonus:
-        types:
-            Blunt: 10
-            Stamina: 72 # 28 + 72 = 100 => куклу без стаминрезиста сразу ложит в стаминкрит
+      types:
+        Blunt: 10
+    staminaDamage: 72
     randomDamageChance: 0.2
     damageSound: /Audio/SS220/Weapons/brassKnukles/critical-hit.ogg
   - type: Tag
@@ -41,3 +42,4 @@
     price: 1000
   - type: StealTarget
     stealGroup: EngravedKnuckleduster
+  - type: TrackedItem

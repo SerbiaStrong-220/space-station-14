@@ -31,8 +31,12 @@
   - type: ItemSlots
     slots:
       charger_slot:
-        ejectOnInteract: true
+        ejectOnInteract: false # SS220 Alternative interaction for eject
         whitelist:
           components:
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
+          # SS220 Added WeaponRechargerWhitelist tag for charging support begin
+          tags:
+          - WeaponRechargerWhitelist
+          # SS220 Added WeaponRechargerWhitelist tag for charging support end

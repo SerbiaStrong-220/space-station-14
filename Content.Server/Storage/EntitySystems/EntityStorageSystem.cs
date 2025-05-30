@@ -3,6 +3,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
 using Content.Server.Construction;
 using Content.Server.Construction.Components;
+using Content.Server.SS220.LockPick.Components;
 using Content.Server.Storage.Components;
 using Content.Shared.Destructible;
 using Content.Shared.Explosion;
@@ -10,14 +11,18 @@ using Content.Shared.Foldable;
 using Content.Shared.Interaction;
 using Content.Shared.Lock;
 using Content.Shared.Movement.Events;
+using Content.Shared.Popups;
+using Content.Shared.SS220.LockPick;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Random;
 
 namespace Content.Server.Storage.EntitySystems;
 
@@ -27,6 +32,10 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly IRobustRandom _random = default!; //ss220 lockpick add
+    [Dependency] private readonly SharedPopupSystem _popups = default!; //ss220 lockpick add
+    [Dependency] private readonly LockSystem _lockSystem = default!; //ss220 lockpick add
+    [Dependency] private readonly SharedAudioSystem _audio = default!; //ss220 lockpick add
 
     public override void Initialize()
     {
@@ -50,6 +59,8 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
         SubscribeLocalEvent<EntityStorageComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<EntityStorageComponent, WeldableAttemptEvent>(OnWeldableAttempt);
         SubscribeLocalEvent<EntityStorageComponent, BeforeExplodeEvent>(OnExploded);
+
+        SubscribeLocalEvent<EntityStorageComponent, LockPickSuccessEvent>(OnLockPick); //ss220 lockpick add
 
         SubscribeLocalEvent<InsideEntityStorageComponent, InhaleLocationEvent>(OnInsideInhale);
         SubscribeLocalEvent<InsideEntityStorageComponent, ExhaleLocationEvent>(OnInsideExhale);
@@ -107,15 +118,23 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
         args.Contents.AddRange(ent.Comp.Contents.ContainedEntities);
     }
 
+    //ss220 lockpick add start
+    private void OnLockPick(Entity<EntityStorageComponent> ent, ref LockPickSuccessEvent args)
+    {
+        _lockSystem.Unlock(ent.Owner, args.User);
+        OpenStorage(ent.Owner);
+    }
+    //ss220 lockpick add end
+
     protected override void TakeGas(EntityUid uid, SharedEntityStorageComponent component)
     {
         if (!component.Airtight)
             return;
 
         var serverComp = (EntityStorageComponent) component;
-        var tile = GetOffsetTileRef(uid, serverComp);
+        // var tile = GetOffsetTileRef(uid, serverComp); // SS220-FixEntityStorageAtmosphereMerge
 
-        if (tile != null && _atmos.GetTileMixture(tile.Value.GridUid, null, tile.Value.GridIndices, true) is {} environment)
+        if (_atmos.GetTileMixture(uid, true) is {} environment) // SS220-FixEntityStorageAtmosphereMerge
         {
             _atmos.Merge(serverComp.Air, environment.RemoveVolume(serverComp.Air.Volume));
         }
@@ -128,26 +147,28 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
         if (!serverComp.Airtight)
             return;
 
-        var tile = GetOffsetTileRef(uid, serverComp);
+        // var tile = GetOffsetTileRef(uid, serverComp); // SS220-FixEntityStorageAtmosphereMerge
 
-        if (tile != null && _atmos.GetTileMixture(tile.Value.GridUid, null, tile.Value.GridIndices, true) is {} environment)
+        if (_atmos.GetTileMixture(uid, true) is {} environment) // SS220-FixEntityStorageAtmosphereMerge
         {
             _atmos.Merge(environment, serverComp.Air);
             serverComp.Air.Clear();
         }
     }
 
-    private TileRef? GetOffsetTileRef(EntityUid uid, EntityStorageComponent component)
-    {
-        var targetCoordinates = new EntityCoordinates(uid, component.EnteringOffset).ToMap(EntityManager, TransformSystem);
-
-        if (_map.TryFindGridAt(targetCoordinates, out var gridId, out var grid))
-        {
-            return _mapSystem.GetTileRef(gridId, grid, targetCoordinates);
-        }
-
-        return null;
-    }
+    // SS220-FixEntityStorageAtmosphereMerge-Begin
+    //private TileRef? GetOffsetTileRef(EntityUid uid, EntityStorageComponent component)
+    //{
+    //    var targetCoordinates = TransformSystem.ToMapCoordinates(new EntityCoordinates(uid, component.EnteringOffset));
+    //
+    //     if (_map.TryFindGridAt(targetCoordinates, out var gridId, out var grid))
+    //     {
+    //         return _mapSystem.GetTileRef(gridId, grid, targetCoordinates);
+    //     }
+    //
+    //     return null;
+    // }
+    // SS220-FixEntityStorageAtmosphereMerge-End
 
     private void OnRemoved(EntityUid uid, InsideEntityStorageComponent component, EntGotRemovedFromContainerMessage args)
     {

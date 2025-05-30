@@ -6,12 +6,16 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Hands.EntitySystems;
 
 public abstract partial class SharedHandsSystem
 {
     [Dependency] private readonly TagSystem _tagSystem = default!;
+
+    private static readonly ProtoId<TagPrototype> BypassDropChecksTag = "BypassDropChecks";
+
     private void InitializeDrop()
     {
         SubscribeLocalEvent<HandsComponent, EntRemovedFromContainerMessage>(HandleEntityRemoved);
@@ -37,7 +41,7 @@ public abstract partial class SharedHandsSystem
     private bool ShouldIgnoreRestrictions(EntityUid user)
     {
         //Checks if the Entity is something that shouldn't care about drop distance or walls ie Aghost
-        return !_tagSystem.HasTag(user, "BypassDropChecks");
+        return !_tagSystem.HasTag(user, BypassDropChecksTag);
     }
 
     /// <summary>
@@ -228,4 +232,23 @@ public abstract partial class SharedHandsSystem
         if (hand == handsComp.ActiveHand)
             RaiseLocalEvent(entity, new HandDeselectedEvent(uid));
     }
+
+    //SS220-cryo-mob-fix begin
+    /// <summary>
+    ///     Tries to remove entities with specified component from both hands
+    /// </summary>
+    public void DropEntitesFromHands<T>(EntityUid owner) where T : IComponent
+    {
+        if (!TryComp<HandsComponent>(owner, out var hands))
+            return;
+
+        foreach (var held in EnumerateHeld(owner, hands))
+        {
+            if (HasComp<T>(held))
+            {
+                TryDrop(owner, handsComp: hands);
+            }
+        }
+    }
+    //SS220-cryo-mob-fix end
 }

@@ -4,7 +4,6 @@ shuttle-pilot-end = Пилотирование прекращено
 shuttle-console-in-ftl = Уже в БСС
 shuttle-console-mass = Слишком большой для БСС
 shuttle-console-prevent = Вы не можете пилотировать этот корабль
-shuttle-console-static = Грид статичный
 
 # NAV
 
@@ -29,6 +28,7 @@ shuttle-console-ftl-state-Available = Доступно
 shuttle-console-ftl-state-Starting = Запуск
 shuttle-console-ftl-state-Travelling = В пути
 shuttle-console-ftl-state-Arriving = Прибытие
+shuttle-console-ftl-state-Invalid = Ошибка
 shuttle-console-ftl-state-Cooldown = Перезарядка
 
 shuttle-console-map-settings = Настройки

@@ -10,6 +10,7 @@
     - id: ClericalError
     - id: CockroachMigration
     - id: GasLeak
+    - id: GreytideVirus
     - id: IonStorm # its calm like 90% of the time smh
     - id: KudzuGrowth
     - id: MassHallucinations
@@ -32,11 +33,15 @@
     - id: DragonSpawn
     - id: KingRatMigration
     - id: NinjaSpawn
+    - id: ParadoxCloneSpawn
     - id: RevenantSpawn
     - id: SleeperAgents
     - id: ZombieOutbreak
     - id: DarkReaperSpawn #ss220 darkreaper middle event
-    # - id: SpiderQueenSpawn #SS220 spider queen midround event
+    - id: SpiderQueenSpawn #SS220 spider queen midround event
+    # - id: LoneOpsSpawn # SS220 No-LoneOps
+    - id: DerelictCyborgSpawn
+    - id: WizardSpawn
 
 - type: entity
   id: BaseStationEvent
@@ -116,6 +121,12 @@
   parent: BaseGameRule
   components:
   - type: StationEvent
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     weight: 7
     duration: 1
     minimumPlayers: 15
@@ -126,6 +137,13 @@
   parent: BaseGameRule
   components:
   - type: StationEvent
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAnnouncementColor: "#18abf5"
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     startAnnouncement: station-event-bureaucratic-error-announcement
     minimumPlayers: 25
     weight: 3
@@ -140,6 +158,13 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-clerical-error-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAnnouncementColor: "#18abf5"
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     minimumPlayers: 15
     weight: 5
     duration: 1
@@ -201,12 +226,19 @@
   - type: AntagLoadProfileRule
   - type: AntagObjectives
     objectives:
+    - NinjaFrameTargetObjective # SS220 Ninja-target-update | Move it upper
     - StealResearchObjective
     - DoorjackObjective
-    - SpiderChargeObjective
+    # - SpiderChargeObjective # SS220 Ninja-target-update
     - TerrorObjective
-    - MassArrestObjective
+    # - MassArrestObjective # SS220 Ninja-target-update
     - NinjaSurviveObjective
+    # SS220 Ninja-target-update begin
+  - type: AntagRandomObjectives
+    sets:
+    - groups: NinjaObjectiveGroups
+    maxDifficulty: 1.5 # be careful 1.5 is here because one ninjaTarget cost 1.5 and we need only one
+    # SS220 Ninja-target-update end
   - type: AntagSelection
     agentName: ninja-round-end-agent-name
     definitions:
@@ -237,10 +269,47 @@
         - DeathAcidifierImplant
       - type: RandomMetadata
         nameSegments:
-        - names_ninja_title
-        - names_ninja
+        - NamesNinjaTitle
+        - NamesNinja
+        nameFormat: name-format-ninja
       mindRoles:
       - MindRoleNinja
+
+- type: entity
+  parent: BaseGameRule
+  id: ParadoxCloneSpawn
+  components:
+  - type: StationEvent
+    weight: 5
+    duration: null
+    earliestStart: 20
+    reoccurrenceDelay: 20
+    minimumPlayers: 15
+  - type: ParadoxCloneRule
+    objectiveBlacklist:
+      tags:
+      - ParadoxCloneObjectiveBlacklist
+  - type: AntagObjectives
+    objectives:
+    - ParadoxCloneKillObjective
+    - ParadoxCloneLivingObjective
+  - type: AntagRandomSpawn # TODO: improve spawning so they only start in maints
+  - type: AntagSelection
+    agentName: paradox-clone-round-end-agent-name
+    definitions:
+    - spawnerPrototype: SpawnPointGhostParadoxClone
+      min: 1
+      max: 1
+      pickPlayer: false
+      startingGear: ParadoxCloneGear
+      roleLoadout:
+      - RoleSurvivalVoxTank # give vox something to breath in case they don't get a copy
+      briefing:
+        text: paradox-clone-role-greeting
+        color: lightblue
+        sound: /Audio/Misc/paradox_clone_greeting.ogg
+      mindRoles:
+      - MindRoleParadoxClone
 
 - type: entity
   parent: BaseGameRule
@@ -253,6 +322,45 @@
     minimumPlayers: 20
   - type: RandomSpawnRule
     prototype: MobRevenant
+
+- type: entity
+  parent: BaseWizardRule
+  id: WizardSpawn
+  components:
+  - type: StationEvent
+    weight: 0.1 # SS 220 0.1 weight wiz spawn midround
+    duration: 1
+    earliestStart: 30
+    reoccurrenceDelay: 60
+    minimumPlayers: 30  # SS 220 MidRound Wiz Req 30 players min
+  - type: AntagSelection
+    agentName: wizard-round-end-name
+    definitions:
+    - spawnerPrototype: SpawnPointGhostWizard
+      min: 1
+      max: 1
+      playerRatio: 1
+      pickPlayer: false
+      startingGear: WizardBlueGear
+      roleLoadout:
+      - RoleSurvivalExtended
+      briefing:
+        text: wizard-role-greeting
+        color: Turquoise
+        # TODO: Need Wizard Start sound
+        #sound: "/Audio/Ambience/Antag/wizard_start.ogg"
+      # TODO: WizardComp as needed
+      components:
+      - type: NpcFactionMember
+        factions:
+        - Wizard
+      - type: RandomMetadata
+        nameSegments:
+        - NamesWizardFirst
+        - NamesWizardLast
+        nameFormat: name-format-wizard
+      mindRoles:
+      - MindRoleWizard
 
 # disabled until event is rewritten to be more interesting
 #- type: entity
@@ -363,8 +471,12 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
@@ -384,8 +496,12 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
@@ -405,8 +521,12 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
@@ -422,8 +542,12 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     earliestStart: 20
     minimumPlayers: 20
     weight: 1.5
@@ -483,7 +607,7 @@
     duration: 1
   - type: RuleGrids
   - type: LoadMapRule
-    preloadedGrid: ShuttleStriker
+    gridPath: /Maps/Shuttles/ShuttleEvent/striker.yml
   - type: NukeopsRule
     roundEndBehavior: Nothing
     warTcAmountPerNukie: 100 # SS220 Lone-Ops-War
@@ -501,8 +625,9 @@
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
-        - SyndicateNamesPrefix
-        - SyndicateNamesNormal
+        - NamesSyndicatePrefix
+        - NamesSyndicateNormal
+        nameFormat: name-format-nukie-generic
       - type: NpcFactionMember
         factions:
         - Syndicate
@@ -558,6 +683,14 @@
   id: IonStorm
   components:
   - type: StationEvent
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAnnouncementColor: "#18abf5"
+    startAnnouncement: station-event-ion-storm-start-announcement
+    startAudio:
+      path: /Audio/SS220/Announcements/i-storm1.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
     weight: 8
     reoccurrenceDelay: 20
     duration: 1
@@ -573,3 +706,61 @@
     maxOccurrences: 1 # this event has diminishing returns on interesting-ness, so we cap it
     weight: 5
   - type: MobReplacementRule
+
+- type: entity
+  id: GreytideVirus
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAudio:
+      path: /Audio/SS220/Announcements/greytide.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end    weight: 5
+    minimumPlayers: 25
+    reoccurrenceDelay: 20
+  - type: GreytideVirusRule
+    accessGroups:
+    - Cargo
+    - Command
+    - Engineering
+    - Research
+    - Security
+    - Service
+    blacklist:
+    - External # don't space everything
+
+- type: entity
+  parent: BaseGameRule
+  id: SmugglerStashVariationPass
+  components:
+  - type: StationEvent
+    earliestStart: 0
+    duration: 1
+    minimumPlayers: 1
+    maxOccurrences: 2
+    weight: 10
+  - type: RandomSpawnRule
+    prototype: RandomSatchelSpawner
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerBorgDerelict
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictCyborg
+      min: 1
+      max: 1
+      pickPlayer: false

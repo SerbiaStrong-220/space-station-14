@@ -29,7 +29,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Mobs
-    scale: 0.9, 0.9
+    scale: 0.95, 0.95
   - type: Body
     prototype: Tajaran
     requiredLegs: 2
@@ -107,6 +107,12 @@
     visionRadius: 5
     highSensitiveVisionRadius: 2
     addAction: true
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Siiktajr
+  - type: LimitationRevive
+    reviveLimit: 3
 
 - type: entity
   id: MobTajaranDummy
@@ -115,7 +121,7 @@
   description: A dummy Tajaran meant to be used in character setup.
   components:
   - type: Sprite
-    scale: 0.9, 0.9
+    scale: 0.95, 0.95
   - type: HumanoidAppearance
     species: Tajaran
   - type: Inventory

@@ -1,0 +1,13 @@
+- type: constructionGraph
+  id: CandyBased
+  start: start
+  graph:
+  - node: start
+    entity: CaramelFood
+    edges:
+    - to: caramel
+      steps:
+      - tool: Rolling
+        doAfter: 1
+  - node: caramel
+    entity: CaramelBasedFood

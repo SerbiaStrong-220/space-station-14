@@ -18,7 +18,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Mobs
-    scale: 0.8, 0.8
+    scale: 0.9, 0.9
 # SS220-change-races-height end
   - type: Body
     prototype: Diona
@@ -94,7 +94,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.35
+          radius: 0.325
         density: 300 #weighs more than humans because wood
         restitution: 0.0
         mask:
@@ -103,11 +103,14 @@
           - MobLayer
   - type: Speech
     speechVerb: Plant
+    allowedEmotes: ['Chirp']
   - type: Vocal
     sounds:
       Male: UnisexDiona
       Female: UnisexDiona
       Unsexed: UnisexDiona
+  - type: TypingIndicator
+    proto: diona
   - type: BodyEmotes
     soundsId: DionaBodyEmotes
   - type: IgnoreKudzu
@@ -118,6 +121,12 @@
     actionPrototype: DionaGibAction
     allowedStates:
     - Dead
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Rootspeak
+  # SS220-Add-Languages end
   - type: Inventory
     templateId: diona
     femaleDisplacements:
@@ -130,6 +139,9 @@
   - type: Emoting
     chatEmoteCooldown: 5.0
   #ss220 emote 5 sec end
+  #SS220 LimitationRevive - start
+  - type: LimitationRevive
+  #SS220 LimitationRevive - end
 
 - type: entity
   parent: BaseSpeciesDummy
@@ -138,7 +150,7 @@
   components:
 # SS220-change-races-height begin
   - type: Sprite
-    scale: 0.8, 0.8
+    scale: 0.9, 0.9
 # SS220-change-races-height end
   - type: HumanoidAppearance
     species: Diona

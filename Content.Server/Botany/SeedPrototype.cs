@@ -1,6 +1,8 @@
 using Content.Server.Botany.Components;
 using Content.Server.Botany.Systems;
+using Content.Server.SS220.CultYogg.Fungus;
 using Content.Shared.Atmos;
+using Content.Shared.Database;
 using Content.Shared.EntityEffects;
 using Content.Shared.Random;
 using Robust.Shared.Audio;
@@ -11,10 +13,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Botany;
 
-[Prototype("seed")]
+[Prototype]
 public sealed partial class SeedPrototype : SeedData, IPrototype
 {
-    [IdDataField] public string ID { get; private init; } = default!;
+    [IdDataField] public string ID { get; private set; } = default!;
 }
 
 public enum HarvestType : byte
@@ -81,7 +83,9 @@ public partial struct SeedChemQuantity
 
 // TODO reduce the number of friends to a reasonable level. Requires ECS-ing things like plant holder component.
 [Virtual, DataDefinition]
-[Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(EntityEffect), typeof(MutationSystem))]
+[Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(EntityEffect), typeof(MutationSystem),
+    typeof(FungusSystem) //SS220-PartofCultYogg
+    )]
 public partial class SeedData
 {
     #region Tracking
@@ -244,6 +248,18 @@ public partial class SeedData
     /// </summary>
     [DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<SeedPrototype>))]
     public List<string> MutationPrototypes = new();
+
+    /// <summary>
+    ///  Log impact for when the seed is planted.
+    /// </summary>
+    [DataField]
+    public LogImpact? PlantLogImpact = null;
+
+    /// <summary>
+    ///  Log impact for when the seed is harvested.
+    /// </summary>
+    [DataField]
+    public LogImpact? HarvestLogImpact = null;
 
     public SeedData Clone()
     {

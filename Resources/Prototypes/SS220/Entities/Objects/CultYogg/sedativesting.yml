@@ -1,0 +1,29 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: sedative sting
+  parent: [BaseItem, CultYoggRestrictedItem]
+  id: SedativeStingCultYogg
+  suffix: CultYogg
+  components:
+  - type: CultYoggWeapon
+    item: CultYoggCocoonSedativeSting
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/CultYogg/cult_yogg_sedativesting.rsi
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      hypospray:
+        maxVol: 10
+  - type: RefillableSolution
+    solution: hypospray
+  - type: UseDelay
+    delay: 2
+  - type: SedativeSting
+    transferAmount: 10
+  - type: StuckOnEquip
+    inHandItem: true
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
+    - CultYoggInnerHandToggleable

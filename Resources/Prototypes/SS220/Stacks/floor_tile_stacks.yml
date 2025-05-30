@@ -1,157 +1,145 @@
 ﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 - type: stack
   id: FloorTileSteelReinforced
-  name: стальная шестиугольная плитка
+  name: floor-tile-steel-reinforced
   spawn: FloorTileItemSteelReinforced
   maxCount: 30
 
 - type: stack
   id: FloorTileWhiteReinforced
-  name: белая шестиугольная плитка
+  name: floor-tile-white-reinforced
   spawn: FloorTileItemWhiteReinforced
   maxCount: 30
 
 - type: stack
   id: FloorTileDarkReinforced
-  name: тёмная шестиугольная плитка
+  name: floor-tile-black-reinforced
   spawn: FloorTileItemDarkReinforced
   maxCount: 30
 
 - type: stack
-  id: FloorTileDutch
-  name: керамическая плитка
-  spawn: FloorTileItemDutch
-  maxCount: 30
-
-- type: stack
-  id: FloorTileDutchMini
-  name: керамическая мини-плитка
-  spawn: FloorTileItemDutchMini
-  maxCount: 30
-
-- type: stack
   id: FloorTilePCircuit
-  name: плитка фиолетовых микросхем
+  name: floor-tile-purple-circuit
   spawn: FloorTileItemPCircuit
   maxCount: 30
 
 - type: stack
   id: FloorTileYCircuit
-  name: плитка жёлтых микросхем
+  name: floor-tile-yellow-circuit
   spawn: FloorTileItemYCircuit
   maxCount: 30
 
 - type: stack
   id: FloorTileOCircuit
-  name: плитка оранжевых микросхем
+  name: floor-tile-orange-circuit
   spawn: FloorTileItemOCircuit
   maxCount: 30
 
 - type: stack
   id: FloorTileRCircuit
-  name: плитка красных микросхем
+  name: floor-tile-red-circuit
   spawn: FloorTileItemRCircuit
   maxCount: 30
 
 - type: stack
   id: FloorTileKitchenRed
-  name: красная кухонная плитка
+  name: floor-tile-kitchen-red
   spawn: FloorTileItemKitchenRed
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodBlack
-  name: black wood floor
+  name: floor-tile-item-wood-black
   spawn: FloorTileItemWoodBlack
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodDark
-  name: dark wood floor
+  name: floor-tile-item-wood-dark
   spawn: FloorTileItemWoodDark
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodLight
-  name: light wood floor
+  name: floor-tile-item-wood-light
   spawn: FloorTileItemWoodLight
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodRed
-  name: red wood floor
+  name: floor-tile-item-wood-red
   spawn: FloorTileItemWoodRed
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodLargeBlack
-  name: large black wood floor
+  name: floor-tile-item-wood-large-black
   spawn: FloorTileItemWoodLargeBlack
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodLargeDark
-  name: large dark wood floor
+  name: floor-tile-item-wood-large-dark
   spawn: FloorTileItemWoodLargeDark
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodLargeLight
-  name: large light wood floor
+  name: floor-tile-item-wood-large-light
   spawn: FloorTileItemWoodLargeLight
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodLargeRed
-  name: large red wood floor
+  name: floor-tile-item-wood-large-red
   spawn: FloorTileItemWoodLargeRed
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodParquetBlack
-  name: parquet black wood floor
+  name: floor-tile-item-wood-parquet-black
   spawn: FloorTileItemWoodParquetBlack
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodParquetDark
-  name: parquet dark wood floor
+  name: floor-tile-item-wood-parquet-dark
   spawn: FloorTileItemWoodParquetDark
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodParquetLight
-  name: parquet light wood floor
+  name: floor-tile-item-wood-parquet-light
   spawn: FloorTileItemWoodParquetLight
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodParquetRed
-  name: parquet red wood floor
+  name: floor-tile-item-wood-parquet-red
   spawn: FloorTileItemWoodParquetRed
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodTileBlack
-  name: tile black wood floor
+  name: floor-tile-item-wood-tile-black
   spawn: FloorTileItemWoodTileBlack
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodTileDark
-  name: tile dark wood floor
+  name: floor-tile-item-wood-tile-dark
   spawn: FloorTileItemWoodTileDark
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodTileLight
-  name: tile light wood floor
+  name: floor-tile-item-wood-tile-light
   spawn: FloorTileItemWoodTileLight
   maxCount: 30
 
 - type: stack
   id: FloorTileItemWoodTileRed
-  name: tile red wood floor
+  name: floor-tile-item-wood-tile-red
   spawn: FloorTileItemWoodTileRed
   maxCount: 30
 
@@ -159,55 +147,55 @@
 
 - type: stack
   id: FloorTileStackCarpetWhite
-  name: white carpet floor
+  name: floor-tile-stack-carpet-white
   spawn: FloorTileItemCarpetWhite
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetBlack
-  name: black carpet floor
+  name: floor-tile-stack-carpet-black
   spawn: FloorTileItemCarpetBlack
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetBlue
-  name: blue carpet floor
+  name: floor-tile-stack-carpet-blue
   spawn: FloorTileItemCarpetBlue
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetOrange
-  name: orange carpet floor
+  name: floor-tile-stack-carpet-orange
   spawn: FloorTileItemCarpetOrange
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetCyan
-  name: cyan carpet floor
+  name: floor-tile-stack-carpet-cyan
   spawn: FloorTileItemCarpetCyan
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetMagenta
-  name: magenta carpet floor
+  name: floor-tile-stack-carpet-magenta
   spawn: FloorTileItemCarpetMagenta
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetGreen
-  name: green carpet floor
+  name: floor-tile-stack-carpet-green
   spawn: FloorTileItemCarpetGreen
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetPurple
-  name: purple carpet floor
+  name: floor-tile-stack-carpet-purple
   spawn: FloorTileItemCarpetPurple
   maxCount: 30
 
 - type: stack
   id: FloorTileStackCarpetRed
-  name: red carpet floor
+  name: floor-tile-stack-carpet-red
   spawn: FloorTileItemCarpetRed
   maxCount: 30
 
@@ -215,96 +203,727 @@
 
 - type: stack
   id: FloorTileItemMarbleBlack
-  name: black marble
+  name: floor-tile-item-marble-black
   spawn: FloorTileItemMarbleBlack
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleWhite
-  name: white marble
+  name: floor-tile-item-marble-white
   spawn: FloorTileItemMarbleWhite
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleBorderWB
-  name: border marble
+  name: floor-tile-item-marble-border-w-b
   spawn: FloorTileItemMarbleBorderWB
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleBorderBW
-  name: border marble
+  name: floor-tile-item-marble-border-b-w
   spawn: FloorTileItemMarbleBorderBW
   maxCount: 30
 
 - type: stack
-  id: FloorTileItemMarbleDiagonalBW
-  name: diagonal marble
-  spawn: FloorTileItemMarbleDiagonalBW
-  maxCount: 30
-
-- type: stack
   id: FloorTileItemMarbleDiagonalWB
-  name: diagonal marble
+  name: floor-tile-item-marble-diagonal-w-b
   spawn: FloorTileItemMarbleDiagonalWB
   maxCount: 30
 
 - type: stack
-  id: FloorTileItemMarbleVerticalBW
-  name: vertical marble
-  spawn: FloorTileItemMarbleVerticalBW
+  id: FloorTileItemMarbleDiagonalBW
+  name: floor-tile-item-marble-diagonal-b-w
+  spawn: FloorTileItemMarbleDiagonalBW
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleVerticalWB
-  name: vertical marble
+  name: floor-tile-item-marble-vertical-w-b
   spawn: FloorTileItemMarbleVerticalWB
   maxCount: 30
 
 - type: stack
+  id: FloorTileItemMarbleVerticalBW
+  name: floor-tile-item-marble-vertical-b-w
+  spawn: FloorTileItemMarbleVerticalBW
+  maxCount: 30
+
+- type: stack
   id: FloorTileItemMarbleCornerNE
-  name: vertical marble
+  name: floor-tile-item-marble-corner-n-e
   spawn: FloorTileItemMarbleCornerNE
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleCornerNW
-  name: vertical marble
+  name: floor-tile-item-marble-corner-n-w
   spawn: FloorTileItemMarbleCornerNW
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleCornerSE
-  name: vertical marble
+  name: floor-tile-item-marble-corner-s-e
   spawn: FloorTileItemMarbleCornerSE
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleCornerSW
-  name: vertical marble
+  name: floor-tile-item-marble-corner-s-w
   spawn: FloorTileItemMarbleCornerSW
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleInnerNE
-  name: inner marble
+  name: floor-tile-item-marble-inner-n-e
   spawn: FloorTileItemMarbleInnerNE
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleInnerNW
-  name: inner marble
+  name: floor-tile-item-marble-inner-n-w
   spawn: FloorTileItemMarbleInnerNW
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleInnerSE
-  name: inner marble
+  name: floor-tile-item-marble-inner-s-e
   spawn: FloorTileItemMarbleInnerSE
   maxCount: 30
 
 - type: stack
   id: FloorTileItemMarbleInnerSW
-  name: inner marble
+  name: floor-tile-item-marble-inner-s-w
   spawn: FloorTileItemMarbleInnerSW
+  maxCount: 30
+
+
+- type: stack
+  id: FloorItemStacksDarkCalifornia
+  name: floor-dark-california
+  spawn: FloorItemDarkCalifornia
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksDarkEightBricks
+  name: floor-dark-eight-bricks
+  spawn: FloorItemDarkEightBricks
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksDarkMixedBricks
+  name: floor-dark-mixed-bricks
+  spawn: FloorItemDarkMixedBricks
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksDarkMixedBricksMini
+  name: floor-dark-mixed-bricks-mini
+  spawn: FloorItemDarkMixedBricksMini
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksDarkMixedPavementHorizontal
+  name: floor-dark-mixed-pavement-horizontal
+  spawn: FloorItemDarkMixedPavementHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksDarkMixedPavementVertical
+  name: floor-dark-mixed-pavement-vertical
+  spawn: FloorItemDarkMixedPavementVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksDarkShiftedEightBricks
+  name: floor-dark-shifted-eight-bricks
+  spawn: FloorItemDarkShiftedEightBricks
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksDarkShiftedMiniHorizontal
+  name: floor-dark-shifted-mini-horizontal
+  spawn: FloorItemDarkShiftedMiniHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksDarkShiftedMiniVertical
+  name: floor-dark-shifted-mini-vertical
+  spawn: FloorItemDarkShiftedMiniVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksFreezerHorizontal
+  name: floor-freezer-horizontal
+  spawn: FloorItemFreezerHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksFreezerMini
+  name: floor-freezer-mini
+  spawn: FloorItemFreezerMini
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksFreezerMiniHorizontal
+  name: floor-freezer-mini-horizontal
+  spawn: FloorItemFreezerMiniHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksFreezerMiniVertical
+  name: floor-freezer-mini-vertical
+  spawn: FloorItemFreezerMiniVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksFreezerMono
+  name: floor-freezer-mono
+  spawn: FloorItemFreezerMono
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksFreezerVertical
+  name: floor-freezer-vertical
+  spawn: FloorItemFreezerVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksGratingMaintDrainHorizontal
+  name: floor-grating-maint-drain-horizontal
+  spawn: FloorItemGratingMaintDrainHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksGratingMaintDrainMiddle
+  name: floor-grating-maint-drain-middle
+  spawn: FloorItemGratingMaintDrainMiddle
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksGratingMaintDrainVertical
+  name: floor-grating-maint-drain-vertical
+  spawn: FloorItemGratingMaintDrainVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksGratingMaintHorizontal
+  name: floor-grating-maint-horizontal
+  spawn: FloorItemGratingMaintHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksGratingMaintMini
+  name: floor-grating-maint-mini
+  spawn: FloorItemGratingMaintMini
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksGratingMaintMono
+  name: floor-grating-maint-mono
+  spawn: FloorItemGratingMaintMono
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksGratingMaintVertical
+  name: floor-grating-maint-vertical
+  spawn: FloorItemGratingMaintVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningDarkGratingDirectedHorizontal
+  name: floor-mining-dark-grating-directed-horizontal
+  spawn: FloorItemMiningDarkGratingDirectedHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningDarkGratingDirectedVertical
+  name: floor-mining-dark-grating-directed-vertical
+  spawn: FloorItemMiningDarkGratingDirectedVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningDarkGratingHorizontal
+  name: floor-mining-dark-grating-horizontal
+  spawn: FloorItemMiningDarkGratingHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningDarkGratingMiddle
+  name: floor-mining-dark-grating-middle
+  spawn: FloorItemMiningDarkGratingMiddle
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningDarkGratingVertical
+  name: floor-mining-dark-grating-vertical
+  spawn: FloorItemMiningDarkGratingVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningDarkMono
+  name: floor-mining-dark-mono
+  spawn: FloorItemMiningDarkMono
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningDarkReinforced
+  name: floor-mining-dark-reinforced
+  spawn: FloorItemMiningDarkReinforced
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningGratingDirectedHorizontal
+  name: floor-mining-grating-directed-horizontal
+  spawn: FloorItemMiningGratingDirectedHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningGratingDirectedVertical
+  name: floor-mining-grating-directed-vertical
+  spawn: FloorItemMiningGratingDirectedVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningGratingHorizontal
+  name: floor-mining-grating-horizontal
+  spawn: FloorItemMiningGratingHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningGratingMiddle
+  name: floor-mining-grating-middle
+  spawn: FloorItemMiningGratingMiddle
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningGratingVertical
+  name: floor-mining-grating-vertical
+  spawn: FloorItemMiningGratingVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningLightGratingDirectedHorizontal
+  name: floor-mining-light-grating-directed-horizontal
+  spawn: FloorItemMiningLightGratingDirectedHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningLightGratingDirectedVertical
+  name: floor-mining-light-grating-directed-vertical
+  spawn: FloorItemMiningLightGratingDirectedVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningLightGratingHorizontal
+  name: floor-mining-light-grating-horizontal
+  spawn: FloorItemMiningLightGratingHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningLightGratingMiddle
+  name: floor-mining-light-grating-middle
+  spawn: FloorItemMiningLightGratingMiddle
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningLightGratingVertical
+  name: floor-mining-light-grating-vertical
+  spawn: FloorItemMiningLightGratingVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningLightMono
+  name: floor-mining-light-mono
+  spawn: FloorItemMiningLightMono
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningLightReinforced
+  name: floor-mining-light-reinforced
+  spawn: FloorItemMiningLightReinforced
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningMono
+  name: floor-mining-mono
+  spawn: FloorItemMiningMono
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksMiningReinforced
+  name: floor-mining-reinforced
+  spawn: FloorItemMiningReinforced
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksRockVaultHerringbone
+  name: floor-rock-vault-herringbone
+  spawn: FloorItemRockVaultHerringbone
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksRockVaultHorizontal
+  name: floor-rock-vault-horizontal
+  spawn: FloorItemRockVaultHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksRockVaultMini
+  name: floor-rock-vault-mini
+  spawn: FloorItemRockVaultMini
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksRockVaultMono
+  name: floor-rock-vault-mono
+  spawn: FloorItemRockVaultMono
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksRockVaultPavementHorizontal
+  name: floor-rock-vault-pavement-horizontal
+  spawn: FloorItemRockVaultPavementHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksRockVaultVertical
+  name: floor-rock-vault-vertical
+  spawn: FloorItemRockVaultVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitary
+  name: floor-sanitary
+  spawn: FloorItemSanitary
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryDark
+  name: floor-sanitary-dark
+  spawn: FloorItemSanitaryDark
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryDarkHorizontal
+  name: floor-sanitary-dark-horizontal
+  spawn: FloorItemSanitaryDarkHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryDarkMini
+  name: floor-sanitary-dark-mini
+  spawn: FloorItemSanitaryDarkMini
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryDarkMiniHorizontal
+  name: floor-sanitary-dark-mini-horizontal
+  spawn: FloorItemSanitaryDarkMiniHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryDarkMiniVertical
+  name: floor-sanitary-dark-mini-vertical
+  spawn: FloorItemSanitaryDarkMiniVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryDarkMono
+  name: floor-sanitary-dark-mono
+  spawn: FloorItemSanitaryDarkMono
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryDarkVertical
+  name: floor-sanitary-dark-vertical
+  spawn: FloorItemSanitaryDarkVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryHorizontal
+  name: floor-sanitary-horizontal
+  spawn: FloorItemSanitaryHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryMini
+  name: floor-sanitary-mini
+  spawn: FloorItemSanitaryMini
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryMiniHorizontal
+  name: floor-sanitary-mini-horizontal
+  spawn: FloorItemSanitaryMiniHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryMiniVertical
+  name: floor-sanitary-mini-vertical
+  spawn: FloorItemSanitaryMiniVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryMono
+  name: floor-sanitary-mono
+  spawn: FloorItemSanitaryMono
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSanitaryVertical
+  name: floor-sanitary-vertical
+  spawn: FloorItemSanitaryVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksShowroomHorizontal
+  name: floor-showroom-horizontal
+  spawn: FloorItemShowroomHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksShowroomMini
+  name: floor-showroom-mini
+  spawn: FloorItemShowroomMini
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksShowroomMiniHorizontal
+  name: floor-showroom-mini-horizontal
+  spawn: FloorItemShowroomMiniHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksShowroomMiniVertical
+  name: floor-showroom-mini-vertical
+  spawn: FloorItemShowroomMiniVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksShowroomMono
+  name: floor-showroom-mono
+  spawn: FloorItemShowroomMono
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksShowroomVertical
+  name: floor-showroom-vertical
+  spawn: FloorItemShowroomVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelCalifornia
+  name: floor-steel-california
+  spawn: FloorItemSteelCalifornia
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelEightBricks
+  name: floor-steel-eight-bricks
+  spawn: FloorItemSteelEightBricks
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelMaintDrainHorizontal
+  name: floor-steel-maint-drain-horizontal
+  spawn: FloorItemSteelMaintDrainHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelMaintDrainMiddle
+  name: floor-steel-maint-drain-middle
+  spawn: FloorItemSteelMaintDrainMiddle
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelMaintDrainVertical
+  name: floor-steel-maint-drain-vertical
+  spawn: FloorItemSteelMaintDrainVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelMaintHorizontal
+  name: floor-steel-maint-horizontal
+  spawn: FloorItemSteelMaintHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelMaintMini
+  name: floor-steel-maint-mini
+  spawn: FloorItemSteelMaintMini
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelMaintMono
+  name: floor-steel-maint-mono
+  spawn: FloorItemSteelMaintMono
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelMaintVertical
+  name: floor-steel-maint-vertical
+  spawn: FloorItemSteelMaintVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelMixedBricks
+  name: floor-steel-mixed-bricks
+  spawn: FloorItemSteelMixedBricks
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelMixedBricksMini
+  name: floor-steel-mixed-bricks-mini
+  spawn: FloorItemSteelMixedBricksMini
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelMixedPavementHorizontal
+  name: floor-steel-mixed-pavement-horizontal
+  spawn: FloorItemSteelMixedPavementHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelMixedPavementVertical
+  name: floor-steel-mixed-pavement-vertical
+  spawn: FloorItemSteelMixedPavementVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelShiftedEightBricks
+  name: floor-steel-shifted-eight-bricks
+  spawn: FloorItemSteelShiftedEightBricks
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelShiftedMiniHorizontal
+  name: floor-steel-shifted-mini-horizontal
+  spawn: FloorItemSteelShiftedMiniHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksSteelShiftedMiniVertical
+  name: floor-steel-shifted-mini-vertical
+  spawn: FloorItemSteelShiftedMiniVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksTechMaintHorizontal
+  name: floor-tech-maint-horizontal
+  spawn: FloorItemTechMaintHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksTechMaintMini
+  name: floor-tech-maint-mini
+  spawn: FloorItemTechMaintMini
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksTechMaintMono
+  name: floor-tech-maint-mono
+  spawn: FloorItemTechMaintMono
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksTechMaintVertical
+  name: floor-tech-maint-vertical
+  spawn: FloorItemTechMaintVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksWhiteCalifornia
+  name: floor-white-california
+  spawn: FloorItemWhiteCalifornia
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksWhiteEightBricks
+  name: floor-white-eight-bricks
+  spawn: FloorItemWhiteEightBricks
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksWhiteMixedBricks
+  name: floor-white-mixed-bricks
+  spawn: FloorItemWhiteMixedBricks
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksWhiteMixedBricksMini
+  name: floor-white-mixed-bricks-mini
+  spawn: FloorItemWhiteMixedBricksMini
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksWhiteMixedPavementHorizontal
+  name: floor-white-mixed-pavement-horizontal
+  spawn: FloorItemWhiteMixedPavementHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksWhiteMixedPavementVertical
+  name: floor-white-mixed-pavement-vertical
+  spawn: FloorItemWhiteMixedPavementVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksWhiteShiftedEightBricks
+  name: floor-white-shifted-eight-bricks
+  spawn: FloorItemWhiteShiftedEightBricks
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksWhiteShiftedMiniHorizontal
+  name: floor-white-shifted-mini-horizontal
+  spawn: FloorItemWhiteShiftedMiniHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksWhiteShiftedMiniVertical
+  name: floor-white-shifted-mini-vertical
+  spawn: FloorItemWhiteShiftedMiniVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksConcretePavementHorizontal
+  name: floor-concrete-pavement-horizontal
+  spawn: FloorItemConcretePavementHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksConcretePavementVertical
+  name: floor-concrete-pavement-vertical
+  spawn: FloorItemConcretePavementVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksGrayconcretePavementHorizontal
+  name: floor-grayconcrete-pavement-horizontal
+  spawn: FloorItemGrayconcretePavementHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksGrayconcretePavementVertical
+  name: floor-grayconcrete-pavement-vertical
+  spawn: FloorItemGrayconcretePavementVertical
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksOldconcretePavementHorizontal
+  name: floor-oldconcrete-pavement-horizontal
+  spawn: FloorItemOldconcretePavementHorizontal
+  maxCount: 30
+
+- type: stack
+  id: FloorItemStacksOldconcretePavementVertical
+  name: floor-oldconcrete-pavement-vertical
+  spawn: FloorItemOldconcretePavementVertical
+  maxCount: 30
+
+- type: stack
+  id: StackFloorItemTechMainDrainMiddle
+  name: floor-tech-maint-drain-middle
+  spawn: FloorItemTechMainDrainMiddle
   maxCount: 30

@@ -7,6 +7,25 @@
       !type:RoleTimeRequirement
       role: JobScientist
       time: 108000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: ScientistPhdCandidate
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobScientist
+      time: 180000 # 50 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Glasses
 - type: loadout
@@ -49,6 +68,22 @@
     proto: ScientistTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorPurple
+
+- type: loadout
+  id: ScientistJumpsuitPhdCandidate
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ScientistPhdCandidate
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPhdCandidate
+
+- type: loadout
+  id: ScientistJumpskirtPhdCandidate
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ScientistPhdCandidate
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtPhdCandidate
 
 # Outerclothing
 - type: loadout

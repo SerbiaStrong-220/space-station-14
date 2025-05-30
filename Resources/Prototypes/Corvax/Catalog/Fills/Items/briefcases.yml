@@ -7,5 +7,6 @@
       contents:
         - id: Paper
           amount: 3
-        - id: CentCommNewPen #SS220-CentcomFashion
         - id: RubberStampIAA
+        - id: BoxTapeRecorder
+        - id: CentCommNewPen #SS220 iaa pen back

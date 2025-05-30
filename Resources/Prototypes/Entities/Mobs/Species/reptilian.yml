@@ -11,6 +11,7 @@
     - Snout
     - HeadTop
     - HeadSide
+    undergarmentBottom: UndergarmentBottomBoxersReptilian
   - type: Hunger
   - type: Puller
     needsHands: false
@@ -22,7 +23,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Mobs
-    scale: 1.13, 1.13
+    scale: 1.1, 1.1
 # SS220-change-races-height end
   - type: Body
     prototype: Reptilian
@@ -38,7 +39,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.40
+          radius: 0.375
         density: 185
         restitution: 0.0
         mask:
@@ -88,6 +89,12 @@
       295: 0.6
       285: 0.4
   - type: Wagging
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Sintaunathi
+  # SS220-Add-Languages end
   - type: Inventory
     speciesId: reptilian
     femaleDisplacements:
@@ -100,6 +107,10 @@
   - type: Emoting
     chatEmoteCooldown: 5.0
   #ss220 emote 5 sec end
+  #SS220 LimitationRevive - start
+  - type: LimitationRevive
+  #SS220 LimitationRevive - end
+
 
 - type: entity
   parent: BaseSpeciesDummy
@@ -109,7 +120,7 @@
   components:
 # SS220-change-races-height begin
   - type: Sprite
-    scale: 1.13, 1.13
+    scale: 1.1, 1.1
 # SS220-change-races-height end
   - type: HumanoidAppearance
     species: Reptilian
@@ -117,6 +128,7 @@
     - Snout
     - HeadTop
     - HeadSide
+    undergarmentBottom: UndergarmentBottomBoxersReptilian
   - type: Inventory
     speciesId: reptilian
     femaleDisplacements:

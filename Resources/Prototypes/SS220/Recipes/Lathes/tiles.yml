@@ -2,7 +2,7 @@
 - type: latheRecipe
   id: TileSteel
   result: FloorTileItemSteel
-  category: Steel
+  categories: [ Steel ]
   completetime: 1
   materials:
     Steel: 50
@@ -10,7 +10,7 @@
 - type: latheRecipe
   id: TileMetalDiamond
   result: FloorTileItemMetalDiamond
-  category: TileTech
+  categories: [ TileTech ]
   completetime: 1
   materials:
     Plasteel: 50
@@ -18,7 +18,7 @@
 - type: latheRecipe
   id: TileWood
   result: FloorTileItemWood
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -26,7 +26,7 @@
 - type: latheRecipe
   id: TileWhite
   result: FloorTileItemWhite
-  category: Steel
+  categories: [ Steel ]
   completetime: 1
   materials:
     Steel: 50
@@ -34,7 +34,7 @@
 - type: latheRecipe
   id: TileDark
   result: FloorTileItemDark
-  category: Steel
+  categories: [ Steel ]
   completetime: 1
   materials:
     Steel: 50
@@ -42,7 +42,7 @@
 - type: latheRecipe
   id: TileTechmaint
   result: FloorTileItemTechmaint
-  category: TileTech
+  categories: [ TileTech ]
   completetime: 1
   materials:
     Steel: 50
@@ -50,7 +50,7 @@
 - type: latheRecipe
   id: TileMono
   result: FloorTileItemMono
-  category: Steel
+  categories: [ Steel ]
   completetime: 1
   materials:
     Steel: 50
@@ -58,7 +58,7 @@
 - type: latheRecipe
   id: TileLino
   result: FloorTileItemLino
-  category: Carpet
+  categories: [ Carpet ]
   completetime: 1
   materials:
     Plastic: 25
@@ -67,7 +67,7 @@
 - type: latheRecipe
   id: TileElevatorShaft
   result: FloorTileItemElevatorShaft
-  category: TileTech
+  categories: [ TileTech ]
   completetime: 1
   materials:
     Steel: 50
@@ -75,7 +75,7 @@
 - type: latheRecipe
   id: TileRockVault
   result: FloorTileItemRockVault
-  category: TileTech
+  categories: [ TileTech ]
   completetime: 1
   materials:
     Steel: 50
@@ -83,7 +83,7 @@
 - type: latheRecipe
   id: TileBlue
   result: FloorTileItemBlue
-  category: Plastic
+  categories: [ Plastic ]
   completetime: 1
   materials:
     Steel: 25
@@ -92,7 +92,7 @@
 - type: latheRecipe
   id: TileLime
   result: FloorTileItemLime
-  category: Plastic
+  categories: [ Plastic ]
   completetime: 1
   materials:
     Steel: 25
@@ -101,7 +101,7 @@
 - type: latheRecipe
   id: TileMining
   result: FloorTileItemMining
-  category: Steel
+  categories: [ Steel ]
   completetime: 1
   materials:
     Steel: 50
@@ -109,7 +109,7 @@
 - type: latheRecipe
   id: TileMiningDark
   result: FloorTileItemMiningDark
-  category: Steel
+  categories: [ Steel ]
   completetime: 1
   materials:
     Steel: 50
@@ -117,7 +117,7 @@
 - type: latheRecipe
   id: TileMiningLight
   result: FloorTileItemMiningLight
-  category: Steel
+  categories: [ Steel ]
   completetime: 1
   materials:
     Steel: 50
@@ -125,7 +125,7 @@
 - type: latheRecipe
   id: TileFreezer
   result: FloorTileItemFreezer
-  category: Steel
+  categories: [ Steel ]
   completetime: 1
   materials:
     Steel: 50
@@ -133,7 +133,7 @@
 - type: latheRecipe
   id: TileShowroom
   result: FloorTileItemShowroom
-  category: Steel
+  categories: [ Steel ]
   completetime: 1
   materials:
     Steel: 50
@@ -141,7 +141,7 @@
 - type: latheRecipe
   id: TileHydro
   result: FloorTileItemHydro
-  category: Plastic
+  categories: [ Plastic ]
   completetime: 1
   materials:
     Steel: 25
@@ -150,7 +150,7 @@
 - type: latheRecipe
   id: TileBar
   result: FloorTileItemBar
-  category: Plastic
+  categories: [ Plastic ]
   completetime: 1
   materials:
     Steel: 25
@@ -159,7 +159,7 @@
 - type: latheRecipe
   id: TileClown
   result: FloorTileItemClown
-  category: Plastic
+  categories: [ Plastic ]
   completetime: 1
   materials:
     Steel: 25
@@ -168,7 +168,7 @@
 - type: latheRecipe
   id: TileMime
   result: FloorTileItemMime
-  category: Plastic
+  categories: [ Plastic ]
   completetime: 1
   materials:
     Steel: 25
@@ -177,7 +177,7 @@
 - type: latheRecipe
   id: TileKitchen
   result: FloorTileItemKitchen
-  category: Plastic
+  categories: [ Plastic ]
   completetime: 1
   materials:
     Steel: 25
@@ -186,7 +186,7 @@
 - type: latheRecipe
   id: TileLaundry
   result: FloorTileItemLaundry
-  category: Plastic
+  categories: [ Plastic ]
   completetime: 1
   materials:
     Steel: 25
@@ -195,7 +195,7 @@
 - type: latheRecipe
   id: TileConcrete
   result: FloorTileItemConcrete
-  category: Concrete
+  categories: [ Concrete ]
   completetime: 1
   materials:
     Steel: 50
@@ -203,7 +203,7 @@
 - type: latheRecipe
   id: TileGrayConcrete
   result: FloorTileItemGrayConcrete
-  category: Concrete
+  categories: [ Concrete ]
   completetime: 1
   materials:
     Steel: 50
@@ -211,7 +211,7 @@
 - type: latheRecipe
   id: TileOldConcrete
   result: FloorTileItemOldConcrete
-  category: Concrete
+  categories: [ Concrete ]
   completetime: 1
   materials:
     Steel: 50
@@ -219,7 +219,7 @@
 - type: latheRecipe
   id: TileArcadeBlue
   result: FloorTileItemArcadeBlue
-  category: Carpet
+  categories: [ Carpet ]
   completetime: 1
   materials:
     Cloth: 50
@@ -227,7 +227,7 @@
 - type: latheRecipe
   id: TileArcadeBlue2
   result: FloorTileItemArcadeBlue2
-  category: Carpet
+  categories: [ Carpet ]
   completetime: 1
   materials:
     Cloth: 50
@@ -235,7 +235,7 @@
 - type: latheRecipe
   id: TileArcadeRed
   result: FloorTileItemArcadeRed
-  category: Carpet
+  categories: [ Carpet ]
   completetime: 1
   materials:
     Cloth: 50
@@ -243,7 +243,7 @@
 - type: latheRecipe
   id: TileEighties
   result: FloorTileItemEighties
-  category: Carpet
+  categories: [ Carpet ]
   completetime: 1
   materials:
     Cloth: 50
@@ -251,7 +251,7 @@
 - type: latheRecipe
   id: TileCarpetClown
   result: FloorTileItemCarpetClown
-  category: Carpet
+  categories: [ Carpet ]
   completetime: 1
   materials:
     Cloth: 50
@@ -259,7 +259,7 @@
 - type: latheRecipe
   id: TileCarpetOffice
   result: FloorTileItemCarpetOffice
-  category: Carpet
+  categories: [ Carpet ]
   completetime: 1
   materials:
     Cloth: 50
@@ -267,7 +267,7 @@
 - type: latheRecipe
   id: TileBoxing
   result: FloorTileItemBoxing
-  category: Carpet
+  categories: [ Carpet ]
   completetime: 1
   materials:
     Cloth: 50
@@ -275,7 +275,7 @@
 - type: latheRecipe
   id: TileGym
   result: FloorTileItemGym
-  category: Carpet
+  categories: [ Carpet ]
   completetime: 1
   materials:
     Cloth: 50
@@ -283,7 +283,7 @@
 - type: latheRecipe
   id: TileShuttleWhite
   result: FloorTileItemShuttleWhite
-  category: Shuttle
+  categories: [ Shuttle ]
   completetime: 1
   materials:
     Plasteel: 50
@@ -291,7 +291,7 @@
 - type: latheRecipe
   id: TileShuttleBlue
   result: FloorTileItemShuttleBlue
-  category: Shuttle
+  categories: [ Shuttle ]
   completetime: 1
   materials:
     Plasteel: 50
@@ -299,7 +299,7 @@
 - type: latheRecipe
   id: TileShuttleOrange
   result: FloorTileItemShuttleOrange
-  category: Shuttle
+  categories: [ Shuttle ]
   completetime: 1
   materials:
     Plasteel: 50
@@ -307,7 +307,7 @@
 - type: latheRecipe
   id: TileShuttlePurple
   result: FloorTileItemShuttlePurple
-  category: Shuttle
+  categories: [ Shuttle ]
   completetime: 1
   materials:
     Plasteel: 50
@@ -315,7 +315,7 @@
 - type: latheRecipe
   id: TileShuttleRed
   result: FloorTileItemShuttleRed
-  category: Shuttle
+  categories: [ Shuttle ]
   completetime: 1
   materials:
     Plasteel: 50
@@ -323,7 +323,7 @@
 - type: latheRecipe
   id: TileShuttleGrey
   result: FloorTileItemShuttleGrey
-  category: Shuttle
+  categories: [ Shuttle ]
   completetime: 1
   materials:
     Plasteel: 50
@@ -331,7 +331,7 @@
 - type: latheRecipe
   id: TileShuttleBlack
   result: FloorTileItemShuttleBlack
-  category: Shuttle
+  categories: [ Shuttle ]
   completetime: 1
   materials:
     Plasteel: 50
@@ -353,7 +353,7 @@
 - type: latheRecipe
   id: TileWoodPattern
   result: FloorTileItemWoodPattern
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -368,7 +368,7 @@
 - type: latheRecipe
   id: TileSteelMaint
   result: FloorTileItemSteelMaint
-  category: TileTech
+  categories: [ TileTech ]
   completetime: 1
   materials:
     Steel: 50
@@ -376,7 +376,7 @@
 - type: latheRecipe
   id: TileGratingMaint
   result: FloorTileItemGratingMaint
-  category: TileTech
+  categories: [ TileTech ]
   completetime: 1
   materials:
     Steel: 50
@@ -384,7 +384,7 @@
 - type: latheRecipe
   id: TileWoodLarge
   result: FloorTileItemWoodLarge
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -392,7 +392,7 @@
 - type: latheRecipe
   id: TileSteelReinforced
   result: FloorTileItemSteelReinforced
-  category: Steel
+  categories: [ Steel ]
   completetime: 1
   materials:
     Steel: 50
@@ -400,7 +400,7 @@
 - type: latheRecipe
   id: TileWhiteReinforced
   result: FloorTileItemWhiteReinforced
-  category: Steel
+  categories: [ Steel ]
   completetime: 1
   materials:
     Steel: 50
@@ -408,26 +408,10 @@
 - type: latheRecipe
   id: TileDarkReinforced
   result: FloorTileItemDarkReinforced
-  category: Steel
+  categories: [ Steel ]
   completetime: 1
   materials:
     Steel: 50
-
-- type: latheRecipe
-  id: TileDutch
-  result: FloorTileItemDutch
-  category: Plastic
-  completetime: 1
-  materials:
-    Plastic: 50
-
-- type: latheRecipe
-  id: TileDutchMini
-  result: FloorTileItemDutchMini
-  category: Plastic
-  completetime: 1
-  materials:
-    Plastic: 50
 
 - type: latheRecipe
   id: TilePurpleCircuit
@@ -472,7 +456,7 @@
 - type: latheRecipe #SS220 new kithen tile
   id: TileKitchenRed
   result: FloorTileItemKitchenRed
-  category: Plastic
+  categories: [ Plastic ]
   completetime: 1
   materials:
     Steel: 25
@@ -482,7 +466,7 @@
 - type: latheRecipe
   id: TileWoodParquet
   result: FloorTileItemWoodParquet
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -490,7 +474,7 @@
 - type: latheRecipe
   id: TileWoodBlack
   result: FloorTileItemWoodBlack
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -498,7 +482,7 @@
 - type: latheRecipe
   id: TileWoodDark
   result: FloorTileItemWoodDark
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -506,7 +490,7 @@
 - type: latheRecipe
   id: TileWoodLight
   result: FloorTileItemWoodLight
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -514,7 +498,7 @@
 - type: latheRecipe
   id: TileWoodRed
   result: FloorTileItemWoodRed
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -522,7 +506,7 @@
 - type: latheRecipe
   id: TileWoodLargeBlack
   result: FloorTileItemWoodLargeBlack
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -530,7 +514,7 @@
 - type: latheRecipe
   id: TileWoodLargeDark
   result: FloorTileItemWoodLargeDark
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -538,7 +522,7 @@
 - type: latheRecipe
   id: TileWoodLargeLight
   result: FloorTileItemWoodLargeLight
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -546,7 +530,7 @@
 - type: latheRecipe
   id: TileWoodLargeRed
   result: FloorTileItemWoodLargeRed
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -554,7 +538,7 @@
 - type: latheRecipe
   id: TileWoodParquetBlack
   result: FloorTileItemWoodParquetBlack
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -562,7 +546,7 @@
 - type: latheRecipe
   id: TileWoodParquetDark
   result: FloorTileItemWoodParquetDark
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -570,7 +554,7 @@
 - type: latheRecipe
   id: TileWoodParquetLight
   result: FloorTileItemWoodParquetLight
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -578,7 +562,7 @@
 - type: latheRecipe
   id: TileWoodParquetRed
   result: FloorTileItemWoodParquetRed
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -586,7 +570,7 @@
 - type: latheRecipe
   id: TileWoodTileBlack
   result: FloorTileItemWoodTileBlack
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -594,7 +578,7 @@
 - type: latheRecipe
   id: TileWoodTileDark
   result: FloorTileItemWoodTileDark
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -602,7 +586,7 @@
 - type: latheRecipe
   id: TileWoodTileLight
   result: FloorTileItemWoodTileLight
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
@@ -610,8 +594,848 @@
 - type: latheRecipe
   id: TileWoodTileRed
   result: FloorTileItemWoodTileRed
-  category: Wood
+  categories: [ Wood ]
   completetime: 1
   materials:
     Wood: 50
 #WoodTiles-end
+
+- type: latheRecipe
+  id: TileFloorDarkCalifornia
+  result: FloorItemDarkCalifornia
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkEightBricks
+  result: FloorItemDarkEightBricks
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkMixedBricks
+  result: FloorItemDarkMixedBricks
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkMixedBricksMini
+  result: FloorItemDarkMixedBricksMini
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkMixedPavementHorizontal
+  result: FloorItemDarkMixedPavementHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkMixedPavementVertical
+  result: FloorItemDarkMixedPavementVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkShiftedEightBricks
+  result: FloorItemDarkShiftedEightBricks
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkShiftedMiniHorizontal
+  result: FloorItemDarkShiftedMiniHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorDarkShiftedMiniVertical
+  result: FloorItemDarkShiftedMiniVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorFreezerHorizontal
+  result: FloorItemFreezerHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorFreezerMini
+  result: FloorItemFreezerMini
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorFreezerMiniHorizontal
+  result: FloorItemFreezerMiniHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorFreezerMiniVertical
+  result: FloorItemFreezerMiniVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorFreezerMono
+  result: FloorItemFreezerMono
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorFreezerVertical
+  result: FloorItemFreezerVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintDrainHorizontal
+  result: FloorItemGratingMaintDrainHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintDrainMiddle
+  result: FloorItemGratingMaintDrainMiddle
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintDrainVertical
+  result: FloorItemGratingMaintDrainVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintHorizontal
+  result: FloorItemGratingMaintHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintMini
+  result: FloorItemGratingMaintMini
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintMono
+  result: FloorItemGratingMaintMono
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGratingMaintVertical
+  result: FloorItemGratingMaintVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkGratingDirectedHorizontal
+  result: FloorItemMiningDarkGratingDirectedHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkGratingDirectedVertical
+  result: FloorItemMiningDarkGratingDirectedVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkGratingHorizontal
+  result: FloorItemMiningDarkGratingHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkGratingMiddle
+  result: FloorItemMiningDarkGratingMiddle
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkGratingVertical
+  result: FloorItemMiningDarkGratingVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkMono
+  result: FloorItemMiningDarkMono
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningDarkReinforced
+  result: FloorItemMiningDarkReinforced
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningGratingDirectedHorizontal
+  result: FloorItemMiningGratingDirectedHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningGratingDirectedVertical
+  result: FloorItemMiningGratingDirectedVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningGratingHorizontal
+  result: FloorItemMiningGratingHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningGratingMiddle
+  result: FloorItemMiningGratingMiddle
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningGratingVertical
+  result: FloorItemMiningGratingVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightGratingDirectedHorizontal
+  result: FloorItemMiningLightGratingDirectedHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightGratingDirectedVertical
+  result: FloorItemMiningLightGratingDirectedVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightGratingHorizontal
+  result: FloorItemMiningLightGratingHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightGratingMiddle
+  result: FloorItemMiningLightGratingMiddle
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightGratingVertical
+  result: FloorItemMiningLightGratingVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightMono
+  result: FloorItemMiningLightMono
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningLightReinforced
+  result: FloorItemMiningLightReinforced
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningMono
+  result: FloorItemMiningMono
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorMiningReinforced
+  result: FloorItemMiningReinforced
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorRockVaultHerringbone
+  result: FloorItemRockVaultHerringbone
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorRockVaultHorizontal
+  result: FloorItemRockVaultHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorRockVaultMini
+  result: FloorItemRockVaultMini
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorRockVaultMono
+  result: FloorItemRockVaultMono
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorRockVaultPavementHorizontal
+  result: FloorItemRockVaultPavementHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorRockVaultVertical
+  result: FloorItemRockVaultVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitary
+  result: FloorItemSanitary
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDark
+  result: FloorItemSanitaryDark
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDarkHorizontal
+  result: FloorItemSanitaryDarkHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDarkMini
+  result: FloorItemSanitaryDarkMini
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDarkMiniHorizontal
+  result: FloorItemSanitaryDarkMiniHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDarkMiniVertical
+  result: FloorItemSanitaryDarkMiniVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDarkMono
+  result: FloorItemSanitaryDarkMono
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryDarkVertical
+  result: FloorItemSanitaryDarkVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryHorizontal
+  result: FloorItemSanitaryHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryMini
+  result: FloorItemSanitaryMini
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryMiniHorizontal
+  result: FloorItemSanitaryMiniHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryMiniVertical
+  result: FloorItemSanitaryMiniVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryMono
+  result: FloorItemSanitaryMono
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSanitaryVertical
+  result: FloorItemSanitaryVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorShowroomHorizontal
+  result: FloorItemShowroomHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorShowroomMini
+  result: FloorItemShowroomMini
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorShowroomMiniHorizontal
+  result: FloorItemShowroomMiniHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorShowroomMiniVertical
+  result: FloorItemShowroomMiniVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorShowroomMono
+  result: FloorItemShowroomMono
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorShowroomVertical
+  result: FloorItemShowroomVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelCalifornia
+  result: FloorItemSteelCalifornia
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelEightBricks
+  result: FloorItemSteelEightBricks
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintDrainHorizontal
+  result: FloorItemSteelMaintDrainHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintDrainMiddle
+  result: FloorItemSteelMaintDrainMiddle
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorItemTechMainDrainMiddle
+  result: FloorItemTechMainDrainMiddle
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintDrainVertical
+  result: FloorItemSteelMaintDrainVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintHorizontal
+  result: FloorItemSteelMaintHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintMini
+  result: FloorItemSteelMaintMini
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintMono
+  result: FloorItemSteelMaintMono
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMaintVertical
+  result: FloorItemSteelMaintVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMixedBricks
+  result: FloorItemSteelMixedBricks
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMixedBricksMini
+  result: FloorItemSteelMixedBricksMini
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMixedPavementHorizontal
+  result: FloorItemSteelMixedPavementHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelMixedPavementVertical
+  result: FloorItemSteelMixedPavementVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelShiftedEightBricks
+  result: FloorItemSteelShiftedEightBricks
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelShiftedMiniHorizontal
+  result: FloorItemSteelShiftedMiniHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorSteelShiftedMiniVertical
+  result: FloorItemSteelShiftedMiniVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorTechMaintHorizontal
+  result: FloorItemTechMaintHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorTechMaintMini
+  result: FloorItemTechMaintMini
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorTechMaintMono
+  result: FloorItemTechMaintMono
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorTechMaintVertical
+  result: FloorItemTechMaintVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteCalifornia
+  result: FloorItemWhiteCalifornia
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteEightBricks
+  result: FloorItemWhiteEightBricks
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteMixedBricks
+  result: FloorItemWhiteMixedBricks
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteMixedBricksMini
+  result: FloorItemWhiteMixedBricksMini
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteMixedPavementHorizontal
+  result: FloorItemWhiteMixedPavementHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteMixedPavementVertical
+  result: FloorItemWhiteMixedPavementVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteShiftedEightBricks
+  result: FloorItemWhiteShiftedEightBricks
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteShiftedMiniHorizontal
+  result: FloorItemWhiteShiftedMiniHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorWhiteShiftedMiniVertical
+  result: FloorItemWhiteShiftedMiniVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorConcretePavementHorizontal
+  result: FloorItemConcretePavementHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorConcretePavementVertical
+  result: FloorItemConcretePavementVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGrayconcretePavementHorizontal
+  result: FloorItemGrayconcretePavementHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorGrayconcretePavementVertical
+  result: FloorItemGrayconcretePavementVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorOldconcretePavementHorizontal
+  result: FloorItemOldconcretePavementHorizontal
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: TileFloorOldconcretePavementVertical
+  result: FloorItemOldconcretePavementVertical
+  categories: [ Steel ]
+  completetime: 1
+  materials:
+    Steel: 50

@@ -11,7 +11,6 @@ using Content.Client.Gameplay;
 using Content.Client.Ghost;
 using Content.Client.Mind;
 using Content.Client.Roles;
-using Content.Client.SS220.UserInterface.System.Chat.Controls;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Screens;
 using Content.Client.UserInterface.Systems.Chat.Controls;
@@ -24,8 +23,9 @@ using Content.Shared.Damage.ForceSay;
 using Content.Shared.Decals;
 using Content.Shared.Input;
 using Content.Shared.Radio;
-using Content.Shared.SS220.Telepathy;
 using Content.Shared.Roles.RoleCodeword;
+using Content.Shared.SS220.Telepathy;
+using Content.Shared.SS220.UpdateChannels;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -189,6 +189,9 @@ public sealed class ChatUIController : UIController
         _net.RegisterNetMessage<MsgChatMessage>(OnChatMessage);
         _net.RegisterNetMessage<MsgDeleteChatMessagesBy>(OnDeleteChatMessagesBy);
         SubscribeNetworkEvent<DamageForceSayEvent>(OnDamageForceSay);
+        //ss220 fix telepathy channel start
+        SubscribeNetworkEvent<UpdateChannelEvent>(OnUpdateChannel);
+        //ss220 fix telepathy channel end
         _config.OnValueChanged(CCVars.ChatEnableColorName, (value) => { _chatNameColorsEnabled = value; });
         _chatNameColorsEnabled = _config.GetCVar(CCVars.ChatEnableColorName);
 
@@ -472,8 +475,9 @@ public sealed class ChatUIController : UIController
 
         if (existing.Count > SpeechBubbleCap)
         {
-            // Get the oldest to start fading fast.
-            var last = existing[0];
+            // Get the next speech bubble to fade
+            // Any speech bubbles before it are already fading
+            var last = existing[^(SpeechBubbleCap + 1)];
             last.FadeNow();
         }
     }
@@ -486,7 +490,7 @@ public sealed class ChatUIController : UIController
     private void EnqueueSpeechBubble(EntityUid entity, ChatMessage message, SpeechBubble.SpeechType speechType)
     {
         // Don't enqueue speech bubbles for other maps. TODO: Support multiple viewports/maps?
-        if (EntityManager.GetComponent<TransformComponent>(entity).MapID != _eye.CurrentMap)
+        if (EntityManager.GetComponent<TransformComponent>(entity).MapID != _eye.CurrentEye.Position.MapId)
             return;
 
         if (!_queuedSpeechBubbles.TryGetValue(entity, out var queueData))
@@ -536,7 +540,6 @@ public sealed class ChatUIController : UIController
             FilterableChannels |= ChatChannel.Radio;
             FilterableChannels |= ChatChannel.Emotes;
             FilterableChannels |= ChatChannel.Notifications;
-            FilterableChannels |= ChatChannel.Telepathy; //ss220 telepathy
 
             // Can only send local / radio / emote when attached to a non-ghost entity.
             // TODO: this logic is iffy (checking if controlling something that's NOT a ghost), is there a better way to check this?
@@ -546,7 +549,6 @@ public sealed class ChatUIController : UIController
                 CanSendChannels |= ChatSelectChannel.Whisper;
                 CanSendChannels |= ChatSelectChannel.Radio;
                 CanSendChannels |= ChatSelectChannel.Emotes;
-                CanSendChannels |= ChatSelectChannel.Telepathy; //ss220 telepathy
             }
         }
 
@@ -557,14 +559,25 @@ public sealed class ChatUIController : UIController
             CanSendChannels |= ChatSelectChannel.Dead;
         }
 
-        // only admins can see / filter asay
-        if (_admin.HasFlag(AdminFlags.Admin) || _admin.HasFlag(AdminFlags.Adminchat))
+        //ss220 add hidden channel for telepathy for normal player start
+        var hasTelepathy = _player.LocalSession?.AttachedEntity is {} entityUid
+                           && EntityManager.HasComponent<TelepathyComponent>(entityUid);
+
+        var isAdmin = _admin.HasFlag(AdminFlags.Admin) || _admin.HasFlag(AdminFlags.Adminchat);
+
+        if (hasTelepathy || isAdmin)
         {
-            FilterableChannels |= ChatChannel.Admin;
-            FilterableChannels |= ChatChannel.AdminAlert;
-            FilterableChannels |= ChatChannel.AdminChat;
+            FilterableChannels |= ChatChannel.Telepathy;
+            CanSendChannels |= ChatSelectChannel.Telepathy;
+        }
+
+        // only admins can see / filter asay
+        if (isAdmin)
+        {
+            FilterableChannels |= ChatChannel.Admin | ChatChannel.AdminAlert | ChatChannel.AdminChat;
             CanSendChannels |= ChatSelectChannel.Admin;
         }
+        //ss220 add hidden channel for telepathy for normal player end
 
         SelectableChannels = CanSendChannels;
 
@@ -809,6 +822,13 @@ public sealed class ChatUIController : UIController
         chatBox.ChatInput.Input.ForceSubmitText();
     }
 
+    //ss220 fix telepathy channel start
+    private void OnUpdateChannel(UpdateChannelEvent ev, EntitySessionEventArgs _)
+    {
+        UpdateChannelPermissions();
+    }
+    //ss220 fix telepathy channel end
+
     private void OnChatMessage(MsgChatMessage message)
     {
         var msg = message.Message;
@@ -936,12 +956,10 @@ public sealed class ChatUIController : UIController
         _typingIndicator?.ClientChangedChatText();
     }
 
-    // Corvax-TypingIndicator-Start
     public void NotifyChatFocus(bool isFocused)
     {
         _typingIndicator?.ClientChangedChatFocus(isFocused);
     }
-    // Corvax-TypingIndicator-End
 
     public void Repopulate()
     {

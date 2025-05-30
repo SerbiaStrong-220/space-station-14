@@ -51,6 +51,19 @@
     cost: 4
     delay: 2
     fx: EffectRCDDeconstruct2
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,0.5,0.4,0.35"
+        density: 190
+        mask:
+        - None
+        layer:
+        - TabletopMachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -279,6 +292,19 @@
       radius: 6
       softness: 1.1
       enabled: true
+    - type: Physics
+      bodyType: Static
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.1,0.5,0.1,0.255"
+          density: 190
+          mask:
+          - None
+          layer:
+          - TabletopMachineLayer
     - type: Damageable
       damageContainer: Inorganic
     - type: Destructible
@@ -373,6 +399,48 @@
     popupText: powered-light-component-burn-hand
 
 - type: entity
+  id: PoweredDimSmallLight
+  suffix: Dim
+  parent: PoweredSmallLightEmpty
+  components:
+  - type: Sprite
+    state: base
+  - type: PointLight
+    enabled: true
+    radius: 5
+    energy: 0.5
+    softness: 3
+    color: "#ba473f"
+  - type: PoweredLight
+    hasLampOnSpawn: DimLightBulb
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 1
+    popupText: powered-light-component-burn-hand
+
+- type: entity
+  id: PoweredWarmSmallLight
+  suffix: Warm
+  parent: PoweredSmallLightEmpty
+  components:
+  - type: Sprite
+    state: base
+  - type: PointLight
+    enabled: true
+    radius: 6
+    energy: 1
+    softness: 3
+    color: "#FF8A0C"
+  - type: PoweredLight
+    hasLampOnSpawn: WarmLightBulb
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
+
+- type: entity
   id: PoweredSmallLight
   suffix: ""
   parent: PoweredSmallLightEmpty
@@ -432,6 +500,37 @@
       shader: "unshaded"
       visible: false
   - type: Appearance
+  - type: Construction
+    graph: LightFixture
+    node: emergencyLight
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors: #excess damage, don't spawn entities.
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 1
+          ShardGlass:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
   placement:
     mode: SnapgridCenter
     snap:
@@ -498,6 +597,35 @@
     color: "#5555ff" #SS220-Mapping-Light-Fix, Неоновый синий
 
 - type: entity
+  id: PoweredlightYellow
+  suffix: Yellow
+  parent: Poweredlight
+  components:
+  - type: PoweredLight
+    hasLampOnSpawn: LightTubeCrystalYellow
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#ffea19" # SS220 color
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
+
+- type: entity
+  id: AlwaysPoweredlightYellow
+  suffix: Always Powered, Yellow
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 3
+    softness: 0.5
+    color: "#ffea19" # SS220 color
+
+- type: entity
   id: PoweredlightPink
   suffix: Pink
   parent: Poweredlight
@@ -554,6 +682,36 @@
     energy: 3
     softness: 0.5
     color: "#ffa420" #SS220-Mapping-Light-Fix, Люминесцентный оранжевый
+
+- type: entity
+  id: PoweredlightBlack
+  suffix: Black
+  parent: Poweredlight
+  description:
+  components:
+  - type: PoweredLight
+    hasLampOnSpawn: LightTubeCrystalBlack
+  - type: PointLight
+    radius: 8
+    energy: 1
+    softness: 0.5
+    color: "#363636"
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
+
+- type: entity
+  id: AlwaysPoweredlightBlack
+  suffix: Always Powered, Black
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 1
+    softness: 0.5
+    color: "#363636"
 
 - type: entity
   id: PoweredlightRed
@@ -614,35 +772,6 @@
     color: "#39ff14" #SS220-Mapping-Light-Fix, Неоновый зелёный
 
 #SS220-New-Crystals-start
-- type: entity
-  id: PoweredlightYellow
-  suffix: Yellow
-  parent: Poweredlight
-  components:
-  - type: PoweredLight
-    hasLampOnSpawn: LightTubeCrystalYellow
-  - type: PointLight
-    radius: 8
-    energy: 3
-    softness: 0.5
-    color: "#ffea19" #Неоновый жёлтый
-  - type: DamageOnInteract
-    damage:
-      types:
-        Heat: 2
-    popupText: powered-light-component-burn-hand
-
-- type: entity
-  id: AlwaysPoweredlightYellow
-  suffix: Always Powered, Yellow
-  parent: AlwaysPoweredWallLight
-  components:
-  - type: PointLight
-    radius: 8
-    energy: 3
-    softness: 0.5
-    color: "#ffea19" #Неоновый жёлтый
-
 - type: entity
   id: PoweredlightPurple
   suffix: Purple

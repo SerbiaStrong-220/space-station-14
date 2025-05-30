@@ -1,6 +1,6 @@
 - type: entity
   name: stun baton
-  parent: [BaseItem]
+  parent: [BaseItem, BaseSecurityContraband]
   id: Stunbaton
   description: A stun baton for incapacitating people with. Actively harming with this is considered bad tone.
   components:
@@ -30,6 +30,9 @@
       path: /Audio/Machines/button.ogg
       params:
         variation: 0.250
+  - type: ItemTogglePrefix
+    prefixOn: on
+    prefixOff: off
 #SS220-Stunbatom-rework begin
   - type: ItemToggleMeleeWeapon
     activatedSoundOnHit:
@@ -39,7 +42,6 @@
     activatedDamage:
       types:
         Blunt: 0
-        Stamina: 55
 #SS220-Stunbatom-rework end
   - type: MeleeWeapon
     wideAnimationRotation: -135
@@ -48,14 +50,12 @@
         Blunt: 7
     bluntStaminaDamageFactor: 2.0
     angle: 60
-    animation: WeaponArcSlash
-    soundHit:
-      path: /Audio/Weapons/egloves.ogg
+    animation: WeaponArcThrust
   - type: StaminaDamageOnHit
-    damage: 0
+    damage: 55 #SS220-Stunbatom-rework
     sound: /Audio/Weapons/egloves.ogg
   - type: StaminaDamageOnCollide
-    damage: 0
+    damage: 55 #SS220-Stunbatom-rework
     sound: /Audio/Weapons/egloves.ogg
     # SS220-Stunbaton-rework throwing angles
   - type: Ensnaring # SS220 stunbaton pacifism fix
@@ -79,13 +79,6 @@
     damage:
       types:
         Blunt: 7
-        # Stamina: 55 #ss220 stunbaton fix
-  #ss220 stunbaton fix start
-  - type: ItemToggleDamageOtherOnHit
-    activatedDamage:
-      types:
-        Stamina: 55
-  #ss220 stunbaton fix end
   - type: LandAtCursor # it deals stamina damage when thrown
   - type: Battery
     maxCharge: 1000
@@ -134,7 +127,7 @@
 
 - type: entity
   name: truncheon
-  parent: [BaseItem]
+  parent: [BaseItem, BaseSecurityContraband]
   id: Truncheon
   description: A rigid, steel-studded baton, meant to harm.
   components:
@@ -197,7 +190,6 @@
     - type: Flash
     - type: LimitedCharges
       maxCharges: 5
-      charges: 5
     - type: MeleeWeapon
       wideAnimationRotation: 180
       damage:
@@ -233,11 +225,10 @@
   components:
     - type: LimitedCharges
       maxCharges: 2
-      charges: 2
 
 - type: entity
   name: portable flasher
-  parent: [BaseMachine]
+  parent: [BaseMachine, BaseSecurityContraband]
   id: PortableFlasher
   description: An ultrabright flashbulb with a proximity trigger, useful for making an area security-only.
   components:

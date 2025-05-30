@@ -104,7 +104,7 @@
     sprite: Clothing/Shoes/Specific/cult.rsi
 
 - type: entity
-  parent: ClothingShoesBase
+  parent: [ ClothingShoesBase, BaseJanitorContraband ]
   id: ClothingShoesGaloshes
   name: galoshes
   description: Rubber boots.
@@ -139,18 +139,12 @@
     # ninja are masters of sneaking around relatively quickly, won't break cloak
     walkModifier: 1.1
     sprintModifier: 1.3
-#ss220 silent shoes begin #ninja should be kinda sneaky, doesn't him?
-  - type: FootstepModifier
-    footstepSoundCollection:
-      collection: null
-#ss220 silent shoes end
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-NoSlip-ninja
-      whitelistMind:
-        components:
-          - NinjaRole
+      whitelistMindRoles:
+      - NinjaRole
     - label: corvax-hidden-desc-NoSlip-research
       jobRequired:
         - ResearchAssistant
@@ -158,6 +152,8 @@
         - Scientist
         - Borg
 # Corvax-HiddenDesc-End
+  - type: FootstepModifier
+    footstepSoundCollection: null
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -224,10 +220,9 @@
     - type: HiddenDescription
       entries:
       - label: corvax-hidden-desc-Chameleon-syndicate
-        whitelistMind:
-          components:
-            - TraitorRole
-            - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
       - label: corvax-hidden-desc-Chameleon-research
         jobRequired:
           - ResearchAssistant
@@ -248,15 +243,13 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-Chameleon-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-NoSlip-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-Chameleon-research
       jobRequired:
         - ResearchAssistant

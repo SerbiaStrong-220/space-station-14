@@ -25,9 +25,9 @@
   - type: StorageFill
     contents:
     - id: WeaponRifleAk
-      amount: 8
+      amount: 5
     - id: BoxMagazineLightRifle
-      amount: 8
+      amount: 5
 
 #ERT
 - type: entity
@@ -38,8 +38,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponPulseCarbine
-      amount: 8
+    - id: WeaponPulseCarbineFractWar
+      amount: 5
 
 #Iron squad
 - type: entity
@@ -53,6 +53,6 @@
   - type: StorageFill
     contents:
     - id: WeaponShotgunBulldog
-      amount: 4
+      amount: 6
     - id: MagazineShotgun
-      amount: 8
+      amount: 12

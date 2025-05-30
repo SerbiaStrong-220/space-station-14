@@ -1,8 +1,7 @@
 {
     "version": 1,
     "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-    "copyright": "SecurityPilot Made by Surani, mindslave Made by ell_good (Discord) For SS220, magistrate sprited by Estkemran (GIthub) for SS220",
-
+    "copyright": "SecurityPilot Made by Surani, mindslave Made by ell_good (Discord) For SS220, magistrate sprited by Estkemran (GIthub) for SS220, deathsquad state sprited by Estkemran (Github) for SS220",
     "size": {
         "x": 8,
         "y": 8
@@ -19,6 +18,15 @@
         },
         {
           "name": "slave"
+        },
+        {
+          "name": "deathsquad"
+        },
+        {
+          "name": "deathsquadalpha"
+        },
+        {
+          "name": "deathsquadleader"
         }
     ]
 }

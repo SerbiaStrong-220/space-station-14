@@ -1,0 +1,113 @@
+# Nodes
+
+- type: abstractSurgeryNode
+  id: incision
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: incision-examine-description
+      popup: incision-popup
+      description: incision-description
+
+- type: abstractSurgeryNode
+  id: retract skin
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: retract-skin-examine-description
+      popup: retract-skin-popup
+      description: retract-skin-description
+
+- type: abstractSurgeryNode
+  id: saw bone
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: saw-bone-examine-description
+      popup: saw-bone-popup
+      description: saw-bone-description
+
+- type: abstractSurgeryNode
+  id: clamp bleeders
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: clamp-bleeders-examine-description
+      popup: clamp-bleeders-popup
+      description: clamp-bleeders-description
+
+- type: abstractSurgeryNode
+  id: seal wound
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: seal-wound-examine-description
+      popup: seal-wound-popup
+      description: seal-wound-description
+
+#Edges
+
+- type: abstractSurgeryEdge
+  id: incision
+  edge:
+    to: abstract
+    delay: 4
+    sound: /Audio/SS220/Surgery/incision.ogg
+    conditions:
+    - !type:SurgeryToolTypeCondition
+      surgeryTool: scalpel
+    actions:
+    - !type:ApplyBleedingSurgeryAction
+      bleedAmount: 2
+
+- type: abstractSurgeryEdge
+  id: retract skin
+  edge:
+    to: abstract
+    delay: 4
+    sound: /Audio/SS220/Surgery/retract_skin.ogg
+    conditions:
+    - !type:SurgeryToolTypeCondition
+      surgeryTool: retractor
+    actions:
+    - !type:ApplyBleedingSurgeryAction
+      bleedAmount: -2
+
+- type: abstractSurgeryEdge
+  id: saw bone
+  edge:
+    to: abstract
+    delay: 12
+    sound:
+    conditions:
+    - !type:SurgeryToolTypeCondition
+      surgeryTool: saw
+    actions:
+    - !type:ApplyBleedingSurgeryAction
+      bleedAmount: 2
+
+- type: abstractSurgeryEdge
+  id: clamp bleeders
+  edge:
+    to: abstract
+    delay: 4
+    sound: /Audio/SS220/Surgery/organ.ogg
+    conditions:
+    - !type:SurgeryToolTypeCondition
+      surgeryTool: hemostat
+    actions:
+    - !type:ApplyBleedingSurgeryAction
+      bleedAmount: -2
+
+- type: abstractSurgeryEdge
+  id: seal wound
+  edge:
+    to: abstract
+    delay: 4
+    sound: /Audio/SS220/Surgery/seal_wound.ogg
+    conditions:
+    - !type:SurgeryToolTypeCondition
+      surgeryTool: cautery
+    actions:
+    - !type:ApplyBleedingSurgeryAction
+      bleedAmount: -2

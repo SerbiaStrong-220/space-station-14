@@ -19,6 +19,10 @@ using Content.Shared.Inventory;
 using Content.Shared.PDA;
 using System.Globalization;
 using Content.Server.Popups;
+using Content.Server.SS220.Language;
+using System.Diagnostics.CodeAnalysis;
+using Content.Shared.SS220.Language.Systems;  // SS220-Add-Languages
+using Content.Server.SS220.Events; // SS220 borg-id-fix
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -35,6 +39,7 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly LanguageSystem _languageSystem = default!; // SS220-Add-Languages
 
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
@@ -60,7 +65,7 @@ public sealed class RadioSystem : EntitySystem
         if (args.Channel != null && (component.Channels.Contains(args.Channel.ID) ||
             component.EncryptionKeyChannels.Contains(args.Channel.ID))) //SS220 PAI with encryption keys
         {
-            SendRadioMessage(uid, args.Message, args.Channel, uid);
+            SendRadioMessage(uid, args.Message, args.Channel, uid, languageMessage: args.LanguageMessage /* SS220 languages */);
             args.Channel = null; // prevent duplicate messages from other listeners.
         }
     }
@@ -69,6 +74,13 @@ public sealed class RadioSystem : EntitySystem
     {
         if (TryComp(uid, out ActorComponent? actor))
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
+
+        // SS220 Silicon TTS fix begin
+        if (component.ReceiverEntityOverride is { } receiverOverride && !TerminatingOrDeleted(receiverOverride))
+            args.Receivers.Add(new(uid, new(receiverOverride, 0, 0)));
+        else
+            args.Receivers.Add(new(uid));
+        // SS220 Silicon TTS fix end
     }
 
     /// <summary>
@@ -84,13 +96,14 @@ public sealed class RadioSystem : EntitySystem
     /// </summary>
     /// <param name="messageSource">Entity that spoke the message</param>
     /// <param name="radioSource">Entity that picked up the message and will send it, e.g. headset</param>
-    public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true)
+    public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true, LanguageMessage? languageMessage = null)
     {
         // TODO if radios ever garble / modify messages, feedback-prevention needs to be handled better than this.
         if (!_messages.Add(message))
             return;
 
-        var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);
+        languageMessage ??= _languageSystem.SanitizeMessage(messageSource, message); // SS220 languages
+        var evt = new TransformSpeakerNameEvent(messageSource, _chat.GetRadioName(messageSource)); //ss220 add identity concealment for chat and radio messages
         RaiseLocalEvent(messageSource, evt);
 
         var name = evt.VoiceName;
@@ -131,7 +144,7 @@ public sealed class RadioSystem : EntitySystem
             NetEntity.Invalid,
             null);
         var chatMsg = new MsgChatMessage { Message = chat };
-        var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg, new());
+        var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg, new(), languageMessage);
 
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
         RaiseLocalEvent(ref sendAttemptEv);
@@ -143,6 +156,7 @@ public sealed class RadioSystem : EntitySystem
         var sourceServerExempt = _exemptQuery.HasComp(radioSource);
 
         var radioQuery = EntityQueryEnumerator<ActiveRadioComponent, TransformComponent>();
+        var languageRadioReceiveEvents = new Dictionary<string, RadioReceiveEvent>(); // SS220 languages
         while (canSend && radioQuery.MoveNext(out var receiver, out var radio, out var transform))
         {
             if (!radio.ReceiveAllChannels)
@@ -167,12 +181,46 @@ public sealed class RadioSystem : EntitySystem
             if (attemptEv.Cancelled)
                 continue;
 
+            // SS220 languages begin
+            if (_languageSystem.SendLanguageMessageAttempt(receiver, out var listener))
+            {
+                RadioReceiveEvent languageRadioEv;
+                var hearedMessage = languageMessage.GetMessage(listener, true, true);
+                var colorlessMessage = languageMessage.GetMessage(listener, true, false);
+                if (languageRadioReceiveEvents.TryGetValue(colorlessMessage, out var value))
+                    languageRadioEv = value;
+                else
+                {
+                    var newChatMsg = GetMsgChatMessage(messageSource, hearedMessage);
+                    languageRadioEv = new RadioReceiveEvent(message, messageSource, channel, radioSource, newChatMsg, new(), languageMessage);
+                    languageRadioReceiveEvents.Add(colorlessMessage, languageRadioEv);
+                }
+
+                RaiseLocalEvent(receiver, ref languageRadioEv);
+            }
+            else
+            {
+                RaiseLocalEvent(receiver, ref ev);
+            }
+
             // send the message
-            RaiseLocalEvent(receiver, ref ev);
+            //RaiseLocalEvent(receiver, ref ev);
+            // SS220 languages end
         }
 
+        // SS220 languages begin
+        foreach (var languageEv in languageRadioReceiveEvents)
+        {
+            //ss220 add filter tts for ghost start
+            RaiseLocalEvent(new RadioSpokeEvent(messageSource, languageEv.Key, channel, languageEv.Value.Receivers.ToArray()));
+            //ss220 add filter tts for ghost end
+        }
+        // SS220 languages end
+
         // Dispatch TTS radio speech event for every receiver
-        RaiseLocalEvent(new RadioSpokeEvent(messageSource, message, ev.Receivers.ToArray()));
+        //ss220 add filter tts for ghost start
+        RaiseLocalEvent(new RadioSpokeEvent(messageSource, message, channel, ev.Receivers.ToArray()));
+        //ss220 add filter tts for ghost end
 
         if (name != Name(messageSource))
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName}: {message}");
@@ -181,6 +229,35 @@ public sealed class RadioSystem : EntitySystem
 
         _replay.RecordServerMessage(chat);
         _messages.Remove(message);
+
+        // SS220 languages begin
+        MsgChatMessage GetMsgChatMessage(EntityUid source, string message)
+        {
+            if (GetIdCardIsBold(source))
+            {
+                content = $"[bold]{content}[/bold]";
+                message = $"[bold]{message}[/bold]";
+            }
+
+            var wrappedScrambledMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
+                ("color", channel.Color),
+                ("fontType", speech.FontId),
+                ("fontSize", speech.FontSize),
+                ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+                ("channel", $"\\[{channel.LocalizedName}\\]"),
+                ("name", formattedName),
+                ("message", message));
+
+            var scrambledChat = new ChatMessage(
+                ChatChannel.Radio,
+                message,
+                wrappedScrambledMessage,
+                NetEntity.Invalid,
+                null);
+
+            return new MsgChatMessage { Message = scrambledChat };
+        }
+        // SS220 languages end
     }
 
     private IdCardComponent? GetIdCard(EntityUid senderUid)
@@ -206,13 +283,18 @@ public sealed class RadioSystem : EntitySystem
     // SS220 radio-department-tag begin
     private string GetIdCardName(EntityUid senderUid)
     {
-        var idCardTitle = Loc.GetString("chat-radio-no-id");
-        idCardTitle = GetIdCard(senderUid)?.LocalizedJobTitle ?? idCardTitle;
+        // SS220 Borgs-Id-fix start
+        // поднимаем ивент для получения имени
+        var ev = new GetInsteadIdCardNameEvent(senderUid);
+        RaiseLocalEvent(senderUid, ev);
 
-        var textInfo = CultureInfo.CurrentCulture.TextInfo;
-        idCardTitle = textInfo.ToTitleCase(idCardTitle);
-
-        return $"\\[{idCardTitle}\\] ";
+        if (ev.Name != null)
+        {
+            return $"\\[{Loc.GetString(ev.Name)}\\] ";
+        }
+        else
+            return string.Empty;
+        // SS220 Borgs-Id-fix end
     }
     // S220 radio-department-tag end
 

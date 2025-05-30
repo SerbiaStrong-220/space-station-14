@@ -7,14 +7,18 @@
   components:
   - type: Pda
     id: CEIDCard
-    state: pda-ce_dark
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-ce_dark
   - type: PdaBorderColor
     borderColor: "#3b3c3f"
     accentHColor: "#cc6f00"
   - type: Sprite
-    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-ce"
       shader: "unshaded"
     - state: "light_overlay"
@@ -25,9 +29,8 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false
   - type: Icon
-    sprite: Objects/Devices/pda.rsi
     state: pda-ce_dark
-    
+
 - type: entity
   parent: BasePDA
   id: SeniorServicePDA
@@ -36,14 +39,18 @@
   components:
   - type: Pda
     id: SeniorServiceIDCard
-    state: pda-seniorservice
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-seniorservice
   - type: PdaBorderColor
     borderColor: "#374f7e" #SS220 PDA-Resprite
 #    accentHColor: "#447987" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
-    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-nt"
       shader: "unshaded"
     - state: "light_overlay"
@@ -55,6 +62,14 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-seniorservice
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: BasePDA
@@ -64,15 +79,19 @@
   components:
   - type: Pda
     id: MagistrateIDCard
-    state: pda-magistrate
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-magistrate
   - type: PdaBorderColor
     borderColor: "#414452"
     accentVColor: "#262c8a"
     accentHColor: "#dfac5c"
   - type: Sprite
-    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-nt"
       shader: "unshaded"
     - state: "light_overlay"
@@ -83,8 +102,41 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false
   - type: Icon
-    sprite: Objects/Devices/pda.rsi
     state: pda-magistrate
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
+
+- type: entity
+  parent: DeathsquadPDA
+  id: DeathsquadCommanderPDA
+  suffix: Death Squad Commander
+  components:
+  - type: Pda
+    id: CentcomIDCardDeathsquadCommander
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-deathsquad
+
+- type: entity
+  parent: DeathsquadPDA
+  id: DeathsquadHealerPDA
+  suffix: Death Squad Healer
+  components:
+  - type: Pda
+    id: CentcomIDCardDeathsquadHealer
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-deathsquad
 
 - type: entity
   parent: BasePDA
@@ -95,13 +147,17 @@
   components:
   - type: Pda
     id: RDIDCard
-    state: pda-rd-alt
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-rd-alt
   - type: PdaBorderColor
     borderColor: "#98afb8"
     accentHColor: "#542a6c"
-    sprite: Objects/Devices/pda.rsi
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
     - state: "screen-nt"
       shader: "unshaded"
     - state: "light_overlay"
@@ -113,3 +169,248 @@
       visible: false
   - type: Icon
     state: pda-rd-alt
+
+- type: entity
+  parent: BasePDA
+  id: BlueShieldPDA
+  name: blue shield PDA
+  description: average style.
+  components:
+  - type: Pda
+    id: BlueShieldIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-bs
+  - type: PdaBorderColor
+    borderColor: "#4b474f"
+    accentHColor: "#175e99"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
+    - state: "screen-shield"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-bs
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
+
+- type: entity
+  parent: BasePDA
+  id: SecurityPilotPDA
+  name: КПК пилота СБ
+  description: Красный, чтобы скрыть пятна крови ассистента.
+  components:
+  - type: Pda
+    id: SecurityPilotIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-security
+  - type: PdaBorderColor
+    borderColor: "#731611"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
+    - state: "screen-security"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-security
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+  #ss220 add pdaidpainter end
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomPDAFake
+  categories: [ HideSpawnMenu ]
+  suffix: Fake
+  components:
+  - type: Pda
+    id: CentcomIDCardSyndie
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-centcom
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
+    - state: "screen-blue"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+
+- type: entity
+  parent: BasePDA
+  id: CentcomNewPDA
+  name: КПК ЦК нового образца
+  description: КПК ЦК нового образца задают качественно новый взгляд на изысканность и утонченность граней и линий. Хотя многие говорят, что он им что-то напоминает..
+  components:
+    - type: Pda
+      id: CentcomDiplomatIDCard
+      penSlot:
+        startingItem: CentCommNewPen
+        whitelist:
+          tags:
+          - Write
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-centcomnew
+    - type: PdaBorderColor
+      borderColor: "#4b474f"
+      accentHColor: "#dfac5c"
+    - type: Sprite
+      layers:
+      - map: [ "enum.PdaVisualLayers.Base" ]
+        state: "pda" #ss220 fix
+      - state: "screen-nt"
+        shader: "unshaded"
+      - state: "light_overlay"
+        map: [ "enum.PdaVisualLayers.Flashlight" ]
+        shader: "unshaded"
+        visible: false
+      - state: "id_overlay"
+        map: [ "enum.PdaVisualLayers.IdLight" ]
+        visible: false
+    - type: Icon
+      state: pda-centcomnew
+
+- type: entity
+  parent: BasePDA
+  id: CentcomDiplomatPDA
+  name: КПК Дипломата ЦК
+  description: КПК Дипломата Центрального Командования. Его изысканный стиль позволяет более утонченно проводить переговоры. Особым аргументом является ручка, которая находится внутри.
+  components:
+    - type: Pda
+      id: CentcomDiplomatIDCard
+      penSlot:
+        startingItem: CentCommNewPen
+        whitelist:
+          tags:
+          - Write
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-diplomat
+    - type: PdaBorderColor
+      borderColor: "#cbcdd1"
+      accentHColor: "#dfac5c"
+    - type: Sprite
+      layers:
+      - map: [ "enum.PdaVisualLayers.Base" ]
+        state: "pda" #ss220 fix
+      - state: "screen-nt"
+        shader: "unshaded"
+      - state: "light_overlay"
+        map: [ "enum.PdaVisualLayers.Flashlight" ]
+        shader: "unshaded"
+        visible: false
+      - state: "id_overlay"
+        map: [ "enum.PdaVisualLayers.IdLight" ]
+        visible: false
+    - type: Icon
+      state: pda-diplomat
+
+- type: entity
+  parent: CentcomNewPDA
+  id: CentcomFieldOfficerPDA
+  name: КПК Полевого Офицера ЦК
+  description: КПК Полевого Офицера Центрального Командования - главный помощник полевой бюрократической машины
+  components:
+    - type: Pda
+      id: FieldOfficerIDCard
+
+- type: entity
+  parent: CentcomNewPDA
+  id: CentcomOperativeBSOPDA
+  name: КПК Оперативника "Синий Щит"
+  description: КПК Оперативника "Синий Щит". Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
+  components:
+    - type: Pda
+      id: OperativeBSOIDCard
+
+- type: entity
+  parent: CentcomNewPDA
+  id: CentcomOfficerPDA
+  name: КПК Офицера ЦК
+  description: КПК Офицера Центрального Командования. Красиво выполненный дизайн позволяет Офицерам находить, чем заняться во время ожидания ответа от станции.
+  components:
+    - type: Pda
+      id: OfficerCentCommIDCard
+
+- type: entity
+  parent: BasePDA
+  id: CentcomAdmiralPDA
+  name: КПК Адмирала NanoTrasen
+  description: КПК Адмирала NanoTrasen. Покажите, насколько величественен ваш флот.
+  components:
+    - type: Pda
+      id: NanoTrasenAdmiralIDCard
+      penSlot:
+        startingItem: CentCommNewPen
+        whitelist:
+          tags:
+          - Write
+    - type: Appearance
+      appearanceDataInit:
+        enum.PdaVisuals.PdaType:
+          !type:String
+          pda-admiral
+    - type: PdaBorderColor
+      borderColor: "#cbcdd1"
+      accentHColor: "#dfac5c"
+      accentVColor: "#dfac5c"
+    - type: Sprite
+      layers:
+      - map: [ "enum.PdaVisualLayers.Base" ]
+        state: "pda" #ss220 fix
+      - state: "screen-nt"
+        shader: "unshaded"
+      - state: "light_overlay"
+        map: [ "enum.PdaVisualLayers.Flashlight" ]
+        shader: "unshaded"
+        visible: false
+      - state: "id_overlay"
+        map: [ "enum.PdaVisualLayers.IdLight" ]
+        visible: false
+    - type: Icon
+      state: pda-admiral

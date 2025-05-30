@@ -1,0 +1,47 @@
+- type: constructionGraph
+  id: ThrusterShunting
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: thrusterShuntingFrame
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+
+  - node: thrusterShuntingFrame
+    entity: ThrusterShuntingFrame
+    edges:
+    - to: thrusterShunting
+      steps:
+      - tag: ThrusterShuntingMachineCircuitboard
+        name: construction-graph-tag-thruster-shunting-machine-circuitboard
+        doAfter: 2
+    - to: start
+      completed:
+      - !type:GivePrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 2
+    - to: thrusterShunting
+      conditions:
+        - !type:EntityAnchored {}
+      steps:
+        - tool: Welding
+          doAfter: 5
+
+  - node: thrusterShunting
+    entity: ThrusterShunting
+    edges:
+    - to: thrusterShuntingFrame
+      completed:
+      - !type:GivePrototype
+        prototype: ThrusterShuntingMachineCircuitboard
+        amount: 1
+      steps:
+        - tool: Prying
+          doAfter: 4

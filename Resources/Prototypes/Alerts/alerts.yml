@@ -14,6 +14,7 @@
     - alertType: Ensnared
     - category: Buckled
     - alertType: Pulling
+    - alertType: Walking
     - category: Piloting
     - alertType: Corporeal
     - alertType: Stun
@@ -25,6 +26,7 @@
     - category: Thirst
     - alertType: Magboots
     - alertType: Pacified
+    - alertType: CountDown #SS220 CultYogg
 
 - type: entity
   id: AlertSpriteView
@@ -126,6 +128,15 @@
   icons: [ /Textures/Interface/Alerts/Weightless/weightless.png ]
   name: alerts-weightless-name
   description: alerts-weightless-desc
+
+- type: alert
+  id: Walking
+  icons:
+  - sprite: /Textures/Interface/Alerts/walking.rsi
+    state: walking
+  name: alerts-walking-name
+  description: alerts-walking-desc
+  clientHandled: true
 
 - type: alert
   id: Stun

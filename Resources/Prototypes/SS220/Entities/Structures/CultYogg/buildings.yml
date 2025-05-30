@@ -1,0 +1,140 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: CultYoggBuildingFrame
+  suffix: CultYogg
+  parent: BaseStructure
+  name: cult building frame
+  description: A frame for the construction of cult structures.
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.35,0.25,0.35"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: InteractionOutline
+  - type: Rotatable
+    rotateWhileAnchored: true
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/CultYogg/building_frame.rsi
+    drawdepth: Objects
+    layers:
+    - state: frame
+      map: [ "enum.ConstructionVisuals.Layer" ]
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Electronic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: monitorBroken
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Appearance
+  - type: CultYoggBuildingFrame
+    eraseTime: 5
+  - type: ContainerContainer
+    containers:
+      cult-yogg-building-frame-storage: !type:Container
+        showEnts: False
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
+
+- type: entity
+  parent: BaseWall
+  id: WallCultYogg
+  suffix: CultYogg
+  name: cursed wall
+  description: It is a wall and it is cursed.
+  components:
+  - type: Tag
+    tags:
+      - Wall
+  - type: Sprite
+    sprite: SS220/Structures/Walls/cult_yogg_walls.rsi
+  - type: Icon
+    sprite: SS220/Structures/Walls/cult_yogg_walls.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: IconSmooth
+    key: walls
+    base: cult
+  - type: CultYoggBuilding
+    eraseTime: 3
+
+- type: entity
+  parent: BaseMaterialDoorNavMap
+  id: CultYoggDoor
+  suffix: CultYogg
+  name: cursed door
+  description: Think twice before opening it.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/cult_yogg_doors.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Door
+    bumpOpen: false
+    clickOpen: true
+    closeTimeOne: 0.2
+    closeTimeTwo: 0.6
+    openTimeOne: 0.6
+    openTimeTwo: 0.2
+    openSound:
+      path: /Audio/Effects/door_open.ogg
+    closeSound:
+      path: /Audio/Effects/door_close.ogg
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: CultYoggBuilding
+    eraseTime: 3
+
+- type: entity
+  parent: Bed
+  id: CultYoggBed
+  suffix: CultYogg
+  components:
+  - type: Strap
+    hasSeatbelt: true
+    uncuffTimeModifier: 2.0
+  - type: CultYoggBuilding
+    eraseTime: 3
+    spawnOnErase:
+      - id: CableApcStack1Live
+        stackAmount: 3
+      - id: SheetTokl1
+        stackAmount: 5

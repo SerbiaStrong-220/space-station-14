@@ -1,6 +1,7 @@
 - type: tile
   id: CP14FloorGrass
   name: cp14-tiles-grass
+  tags: [ tile-tag-nature ]
   sprite: /Textures/SS220/Tiles/Grass/grass.png
   variants: 6
   placementVariants:
@@ -29,8 +30,17 @@
   weather: true
 
 - type: tile
+  id: CP14FloorGrassAstro
+  parent: CP14FloorGrass
+  tags: [ tile-tag-nature-astro ]
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
   id: CP14FloorGrassLight
   name: cp14-tiles-grass-light
+  tags: [ tile-tag-nature ]
   sprite: /Textures/SS220/Tiles/GrassLight/grass.png
   variants: 6
   placementVariants:
@@ -59,8 +69,17 @@
   weather: true
 
 - type: tile
+  id: CP14FloorGrassLightAstro
+  parent: CP14FloorGrassLight
+  tags: [ tile-tag-nature-astro ]
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
   id: CP14FloorGrassTall
   name: cp14-tiles-grass-tall
+  tags: [ tile-tag-nature ]
   sprite: /Textures/SS220/Tiles/GrassTall/grass.png
   variants: 6
   placementVariants:
@@ -87,3 +106,259 @@
     collection: FootstepGrass
   heatCapacity: 10000
   weather: true
+
+- type: tile
+  id: CP14FloorGrassTallAstro
+  parent: CP14FloorGrassTall
+  tags: [ tile-tag-nature-astro ]
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14Cavedrought
+  name: cp14-cavedrought
+  tags: [ tile-tag-nature ]
+  sprite: /Textures/SS220/Tiles/cp14/Dirt/cavedrought.png
+  variants: 16
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/SS220/Tiles/cp14/Dirt/single_edge_SE.png
+    NorthEast: /Textures/SS220/Tiles/cp14/Dirt/single_edge_NE.png
+    NorthWest: /Textures/SS220/Tiles/cp14/Dirt/single_edge_NW.png
+    SouthWest: /Textures/SS220/Tiles/cp14/Dirt/single_edge_SW.png
+    South: /Textures/SS220/Tiles/cp14/Dirt/double_edge_S.png
+    East: /Textures/SS220/Tiles/cp14/Dirt/double_edge_E.png
+    North: /Textures/SS220/Tiles/cp14/Dirt/double_edge_N.png
+    West: /Textures/SS220/Tiles/cp14/Dirt/double_edge_W.png
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14CavedroughtAstro
+  parent: CP14Cavedrought
+  tags: [ tile-tag-nature-astro ]
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14Sand
+  name: cp14-csand
+  tags: [ tile-tag-nature ]
+  sprite: /Textures/SS220/Tiles/cp14/Sand/sand.png
+  variants: 5
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 2
+  edgeSprites:
+    SouthEast: /Textures/SS220/Tiles/cp14/Sand/single_edge_SE.png
+    NorthEast: /Textures/SS220/Tiles/cp14/Sand/single_edge_NE.png
+    NorthWest: /Textures/SS220/Tiles/cp14/Sand/single_edge_NW.png
+    SouthWest: /Textures/SS220/Tiles/cp14/Sand/single_edge_SW.png
+    South: /Textures/SS220/Tiles/cp14/Sand/double_edge_S.png
+    East: /Textures/SS220/Tiles/cp14/Sand/double_edge_E.png
+    North: /Textures/SS220/Tiles/cp14/Sand/double_edge_N.png
+    West: /Textures/SS220/Tiles/cp14/Sand/double_edge_W.png
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14SandAstro
+  parent: CP14Sand
+  tags: [ tile-tag-nature-astro ]
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14Snow
+  name: cp14-snow
+  tags: [ tile-tag-nature ]
+  sprite: /Textures/SS220/Tiles/cp14/Snow/snow.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 5
+  edgeSprites:
+    SouthEast: /Textures/SS220/Tiles/cp14/Snow/single_edge_SE.png
+    NorthEast: /Textures/SS220/Tiles/cp14/Snow/single_edge_NE.png
+    NorthWest: /Textures/SS220/Tiles/cp14/Snow/single_edge_NW.png
+    SouthWest: /Textures/SS220/Tiles/cp14/Snow/single_edge_SW.png
+    South: /Textures/SS220/Tiles/cp14/Snow/double_edge_S.png
+    East: /Textures/SS220/Tiles/cp14/Snow/double_edge_E.png
+    North: /Textures/SS220/Tiles/cp14/Snow/double_edge_N.png
+    West: /Textures/SS220/Tiles/cp14/Snow/double_edge_W.png
+  itemDrop: FloorTileItemAstroSnow
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepSnow
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14SnowAstro
+  parent: CP14Snow
+  tags: [ tile-tag-nature-astro ]
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14SnowDeep
+  name: cp14-snow-deep
+  tags: [ tile-tag-nature ]
+  sprite: /Textures/SS220/Tiles/cp14/SnowDeep/snow.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 4
+  edgeSprites:
+    SouthEast: /Textures/SS220/Tiles/cp14/SnowDeep/single_edge_SE.png
+    NorthEast: /Textures/SS220/Tiles/cp14/SnowDeep/single_edge_NE.png
+    NorthWest: /Textures/SS220/Tiles/cp14/SnowDeep/single_edge_NW.png
+    SouthWest: /Textures/SS220/Tiles/cp14/SnowDeep/single_edge_SW.png
+    South: /Textures/SS220/Tiles/cp14/SnowDeep/double_edge_S.png
+    East: /Textures/SS220/Tiles/cp14/SnowDeep/double_edge_E.png
+    North: /Textures/SS220/Tiles/cp14/SnowDeep/double_edge_N.png
+    West: /Textures/SS220/Tiles/cp14/SnowDeep/double_edge_W.png
+  itemDrop: FloorTileItemAstroSnow
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepSnow
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14SnowDeepAstro
+  parent: CP14SnowDeep
+  tags: [ tile-tag-nature-astro ]
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14SnowDeepDeep
+  name: cp14-snow-deep-deep
+  tags: [ tile-tag-nature ]
+  sprite: /Textures/SS220/Tiles/cp14/SnowDeepDeep/snow.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 3
+  edgeSprites:
+    SouthEast: /Textures/SS220/Tiles/cp14/SnowDeepDeep/single_edge_SE.png
+    NorthEast: /Textures/SS220/Tiles/cp14/SnowDeepDeep/single_edge_NE.png
+    NorthWest: /Textures/SS220/Tiles/cp14/SnowDeepDeep/single_edge_NW.png
+    SouthWest: /Textures/SS220/Tiles/cp14/SnowDeepDeep/single_edge_SW.png
+    South: /Textures/SS220/Tiles/cp14/SnowDeepDeep/double_edge_S.png
+    East: /Textures/SS220/Tiles/cp14/SnowDeepDeep/double_edge_E.png
+    North: /Textures/SS220/Tiles/cp14/SnowDeepDeep/double_edge_N.png
+    West: /Textures/SS220/Tiles/cp14/SnowDeepDeep/double_edge_W.png
+  itemDrop: FloorTileItemAstroSnow
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepSnow
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14SnowDeepDeepAstro
+  parent: CP14SnowDeepDeep
+  tags: [ tile-tag-nature-astro ]
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14Ice
+  name: cp14-ice
+  tags: [ tile-tag-nature ]
+  sprite: /Textures/SS220/Tiles/cp14/ice.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  isSubfloor: true
+  friction: 0.05
+  heatCapacity: 10000
+  weather: true
+  mobFriction: 0.5
+  mobAcceleration: 2
+  indestructible: true
+
+- type: tile
+  id: CP14Cave
+  name: cp14-cave
+  tags: [ tile-tag-nature ]
+  sprite: /Textures/SS220/Tiles/cp14/cave.png
+  variants: 14
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Space
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000

@@ -34,9 +34,6 @@
         params:
           volume: 3
           variation: 0.250
-      activatedDamage:
-          types:
-              Stamina: 5
     - type: ItemToggleActiveSound
       activeSound:
         path: /Audio/Weapons/ebladehum.ogg
@@ -46,6 +43,8 @@
       components:
       - type: DisarmMalus
         malus: 0
+      - type: StaminaDamageOnHit
+        damage: 8
     - type: Wieldable
       wieldSound: null # esword light sound instead
     - type: MeleeWeapon
@@ -73,3 +72,309 @@
         right:
           - state: inhand-right-blade
             shader: unshaded
+    #SS220 craftable desword start
+    - type: Construction
+      deconstructionTarget: null
+      graph: DoubleToySwordGraph
+      node: desword
+    #SS220 craftable desword end
+
+#Svarshik's toy guns!
+
+- type: entity
+  id: BaseGunToy
+  suffix: Toy
+  abstract: true
+  components:
+  - type: Gun
+    clumsyProof: true
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-toy-weapons-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: hidden-desc-toy-weapons-clown
+      jobRequired:
+        - Clown
+        - Mime
+
+- type: entity
+  parent: [ BaseGunToy, WeaponLauncherChinaLake ]
+  id: WeaponLauncherChinaLakeToy
+  description: PLOOP. HONK! Wait, what?
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - ToyGrenade
+    capacity: 3
+    proto: GrenadeFragToy
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+
+- type: entity
+  parent: [ BaseGunToy, WeaponSubMachineGunC20r ]
+  id: WeaponSubMachineGunC20rToy
+  description: A firearm that is often used by the infamous nuclear operatives. Uses ...uhh, foam ammo?
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolSubMachineGunCaps
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistolSubMachineGunToy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeCap
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeCap
+            - BulletFoam
+
+- type: entity
+  parent: [ BaseGunToy, WeaponShotgunBulldog ]
+  id: WeaponShotgunBulldogToy
+  description: It's a magazine-fed shotgun designed for close quarters jokes.
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineShotgunCaps
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineShotgunToy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+
+- type: entity
+  name: L6 SAW
+  id: WeaponLightMachineGunL6Toy
+  parent: [ BaseGunToy, WeaponLightMachineGunL6 ]
+  description: A rather traditionally made LMG with a pleasantly lacquered wooden pistol grip. This one feels light. SHOW THEM REAL DAKKA.
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineLightRifleBoxCaps
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineLightRifleBoxToy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeCap
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeCap
+            - BulletFoam
+  #ss220lowTTKUpdate revert. Toys not heavy bruh
+  - type: HeldSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+    mirrorClothingModifier: false
+
+- type: entity
+  name: viper
+  parent: [ BaseGunToy, WeaponPistolViper ]
+  id: WeaponPistolViperToy
+  description: A small, easily concealable, but somewhat underpowered capgun. Retrofitted with a fully automatic receiver.
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolHighCapacityCaps
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistolToy
+            - MagazinePistolHighCapacityToy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeCap
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeCap
+            - BulletFoam
+  - type: Tag
+    tags:
+    - Sidearm
+    - ToySidearm
+
+- type: entity
+  parent: [ BaseGunToy, WeaponRevolverPython ]
+  id: WeaponRevolverPythonToy
+  description: A robust revolver favoured by Donk Co. agents. Uses .45 bananium ammo.
+  components:
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+        - CartridgeCap
+        - SpeedLoaderCap
+        - CartridgeMagnumFoam
+    proto: CartridgeCap
+  - type: Tag
+    tags:
+    - Sidearm
+    - ToySidearm
+
+- type: entity
+  name: cobra
+  parent: [ BaseGunToy, WeaponPistolCobra ]
+  id: WeaponPistolCobraToy
+  description: A rugged, robust operator handgun with inbuilt silencer. Where does casings come from?!
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolCaselessRifleCaps
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistolCaselessRifleToy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeCap
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeCap
+            - BulletFoam
+
+- type: entity
+  name: Kardashev-Mosin
+  parent: [ BaseGunToy, WeaponSniperMosin ]
+  id: WeaponSniperMosinToy
+  description: A weapon for hunting, or the clown's endless maints warfare against security.
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 10
+    proto: CartridgeCap
+    whitelist:
+      tags:
+        - CartridgeCap
+        - BulletFoam
+
+- type: entity
+  name: Hristov
+  parent: [ BaseGunToy, WeaponSniperHristov ]
+  id: WeaponSniperHristovToy
+  description: A portable anti-materiel rifle. The scope is made from a glass bottle bottom. Go and do Boom! HEADSHOT!
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CartridgeAntiMaterielToy
+      - CartridgeCap
+      - BulletFoam
+    capacity: 5
+    proto: CartridgeAntiMaterielToyStun
+
+- type: entity
+  name: energy shield
+  parent: BaseItem
+  id: EnergyShieldToy
+  description: New Sandy-Cat toy! Become a winner in every sword fight!
+  suffix: Toy
+  components:
+    - type: ItemToggle
+      soundActivate:
+        path: /Audio/Weapons/ebladeon.ogg
+      soundDeactivate:
+        path: /Audio/Weapons/ebladeoff.ogg
+    - type: ItemToggleActiveSound
+      activeSound:
+        path: /Audio/Weapons/ebladehum.ogg
+    - type: ComponentToggler
+      components:
+      - type: DisarmMalus
+        malus: 0.6
+    - type: Sprite
+      sprite: Objects/Weapons/Melee/e_shield.rsi
+      layers:
+        - state: eshield-icon
+        - state: eshield-on
+          color: "#FFFFFF"
+          visible: false
+          shader: unshaded
+          map: [ "shield" ]
+    - type: Item
+      size: Small
+      sprite: Objects/Weapons/Melee/e_shield.rsi
+      heldPrefix: eshield
+    - type: UseDelay
+      delay: 0.5
+    - type: ToggleableLightVisuals
+      spriteLayer: shield
+      inhandVisuals:
+        left:
+          - state: inhand-left-shield
+            shader: unshaded
+        right:
+          - state: inhand-right-shield
+            shader: unshaded
+    - type: PointLight
+      netsync: false
+      enabled: false
+      radius: 1.5
+      energy: 2
+      color: blue
+    - type: ItemTogglePointLight
+    - type: Appearance
+    - type: HiddenDescription
+      entries:
+      - label: hidden-desc-toy-weapons-syndicate
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
+
+#katana for some reason
+- type: entity
+  name: energy katana
+  parent: Katana
+  id: EnergyKatanaToy
+  description: Cool katana! Just like in anime!
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/energykatana.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -60
+    damage:
+      types:
+        Slash: 0.01
+  - type: Item
+    sprite: Objects/Weapons/Melee/energykatana.rsi
+  - type: Clothing
+    sprite: Objects/Weapons/Melee/energykatana.rsi
+    slots:
+    - Back
+    - Belt
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Magic/blink.ogg
+  - type: UseDelay
+    delay: 5

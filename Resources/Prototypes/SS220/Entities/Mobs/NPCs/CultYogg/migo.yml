@@ -1,0 +1,127 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: MiGo
+  parent: #SimpleSpaceMobBase
+    - BaseMob
+    - FlyingMobBase
+    - MobCombat
+    - BaseSimpleMob
+    #- MobFlammable #Removed cause wierd interactions in astral
+  description: The child of the Dark God.
+  id: MiGo
+  suffix: CultYogg
+  components:
+  #cultists comps
+  - type: MiGo
+    # showInHands: false
+    # disableExplosionRecursion: true
+    # canBeStripped: false
+    eraseWhitelist:
+      components:
+      - CultYoggBuilding
+      - CultYoggBuildingFrame
+      - Door
+      tags:
+      - Wall
+  - type: Body
+    prototype: MiGoBody
+  - type: ComplexInteraction #For UI opening only
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelYoggSothothCult
+  - type: RandomMetadata
+    nameSegments: [ cult_yogg_migo ]
+  - type: UserInterface
+    interfaces:
+      enum.MiGoUiKey.Erect:
+        type: MiGoErectBoundUserInterface
+  - type: ShowCultYoggIcons
+  - type: NpcFactionMember
+    factions:
+    - CultYogg
+  - type: AntagObjectives
+    objectives:
+    - CultYoggSacraficeObjective
+  #situational for logic
+  - type: Puller
+    needsHands: false
+  - type: Insulated
+  - type: FlashImmunity
+  - type: Speech
+    speechVerb: LargeMob
+  - type: TTS
+    voice: forester
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+  #visual
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/CultYogg/MiGo.rsi
+    layers:
+      - map: [ "enum.MiGoVisual.Base", "enum.DamageStateVisualLayers.Base"]
+        state: alive
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Visibility
+    layer: 1
+  #other
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 6
+    baseSprintSpeed : 6
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 80
+        mask:
+          - FlyingMobMask
+        layer:
+          - FlyingMobLayer
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Critical
+      250: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 800
+      behaviors:
+      - !type:GibBehavior { }
+  - type: Stamina
+    critThreshold: 200
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+  - type: MeleeWeapon
+    altDisarm: false
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Blunt: 4
+        Slash: 7
+        Structural: 12 #anti-useless in base
+  - type: Temperature
+    heatDamageThreshold: 360
+    coldDamageThreshold: -150
+    currentTemperature: 310.15
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener

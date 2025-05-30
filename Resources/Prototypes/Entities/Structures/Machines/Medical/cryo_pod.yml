@@ -1,16 +1,16 @@
-﻿- type: entity
+- type: entity
   parent: [BaseStructure, ConstructibleMachine] # Not a BaseMachinePowered since we don't want the anchorable component
   id: CryoPod
   name: cryo pod
   description: A special machine intended to create a safe environment for the use of chemicals that react in cold environments.
   components:
   - type: Sprite
-    sprite: Structures/Machines/cryogenics.rsi
+    sprite: Structures/Machines/Medical/cryopod.rsi
     drawdepth: Mobs
     noRot: true
     offset: 0, 0.5
     layers:
-      - sprite: Structures/Piping/Atmospherics/pipe.rsi
+      - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
         state: pipeHalf
         offset: 0, -0.5
         map: [ "enum.PipeVisualLayers.Pipe" ]
@@ -30,7 +30,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.90"
+          bounds: "-0.5,-0.5,0.5,0.5"
         density: 200
         mask:
           - MachineMask
@@ -79,13 +79,17 @@
         !type:PortablePipeNode
         nodeGroupID: Pipe
         pipeDirection: South
+  - type: AtmosMonitoringConsoleDevice
+    navMapBlip: Thermoregulator
   - type: ItemSlots
     slots:
       beakerSlot:
         whitelist:
           components:
             - FitsInDispenser
-  - type: ItemToggle
+  #ss220 fix interact with 'E' start
+  #- type: ItemToggle
+  #ss220 fix interact with 'E' end
   - type: HealthAnalyzer
     scanDelay: 0
   - type: UserInterface

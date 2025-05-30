@@ -5,18 +5,21 @@
   description: Обыкновенная деревянная трость, с которой вы чуть чуть похожи на джентельмена.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/walkingstick.rsi
+    sprite: SS220/Objects/Weapons/Melee/Misc/walkingstick.rsi
     state: icon
   - type: Item
     size: Large
-    sprite: SS220/Objects/Weapons/Melee/walkingstick.rsi
+    sprite: SS220/Objects/Weapons/Melee/Misc/walkingstick.rsi
   - type: MeleeWeapon
     damage:
       types:
         Blunt: 7
   - type: Wieldable
+  - type: ComponentsOnWield
+    components:
+    - type: StaminaDamageOnHit
+      damage:  14
   - type: IncreaseDamageOnWield
     damage:
       types:
         Blunt: -7
-        Stamina: 14

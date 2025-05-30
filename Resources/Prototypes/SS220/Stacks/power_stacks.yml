@@ -1,0 +1,21 @@
+﻿# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: stack
+  id: Cablelive
+  name: stack-cable-live
+  icon: { sprite: SS220/Objects/Tools/CultYogg/cablecoils.rsi, state: coillv-30 }
+  spawn: CableApcStack1Live
+  maxCount: 30
+
+- type: stack
+  id: CableMVlive
+  name: stack-cable-mv-live
+  icon: { sprite: SS220/Objects/Tools/CultYogg/cablecoils.rsi, state: coilmv-30 }
+  spawn: CableMVStack1Live
+  maxCount: 30
+
+- type: stack
+  id: CableHVlive
+  name: stack-cable-hv-live
+  icon: { sprite: SS220/Objects/Tools/CultYogg/cablecoils.rsi, state: coilhv-30 }
+  spawn: CableHVStack1Live
+  maxCount: 30

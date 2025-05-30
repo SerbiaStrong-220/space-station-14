@@ -1,0 +1,63 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: MiGomycelium
+  parent: FoodProduceBase
+  id: FoodMiGomyceteCult
+  description: Mysterious substance that calls for absorption and gag reflex.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - menacing
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 2.0
+        reagents:
+        - ReagentId: TheBloodOfYogg
+          Quantity: 2.0
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/migomycete.rsi
+    state: produce
+  - type: Produce
+    seedId: MiGoSpores
+  - type: Extractable
+    grindableSolutionName: food
+  - type: DesiredFood
+    desireLevel: 1
+  - type: Tag
+    tags:
+    - Omnivorous
+    - CultYoggStealthProvidable
+
+- type: entity
+  parent: SeedBase
+  name: packet of fly MiGo spores
+  description: "The iconic, extremely deadly mushroom to be used for purely ornamental purposes."
+  id: MiGomyceteSeeds
+  components:
+    - type: Seed
+      seedId: MiGoSpores
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/migomycete.rsi
+
+- type: seed
+  id: MiGoSpores
+  name: seeds-migo-name
+  noun: seeds-noun-spores
+  displayName: seeds-migo-display-name
+  plantRsi: SS220/Objects/CultYogg/migomycete.rsi
+  packetPrototype: MiGomyceteSeeds
+  productPrototypes:
+    - FoodMiGomyceteCult
+  lifespan: 25
+  maturation: 12
+  production: 2
+  yield: 1
+  potency: 2
+  growthStages: 2
+  chemicals:
+    TheBloodOfYogg:
+      Min: 2
+      Max: 2
+      PotencyDivisor: 1

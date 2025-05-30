@@ -23,6 +23,8 @@ using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Server.Projectiles;
+using Content.Shared.Projectiles;
 
 namespace Content.Server.Revenant.EntitySystems;
 
@@ -45,6 +47,7 @@ public sealed partial class RevenantSystem : EntitySystem
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly VisibilitySystem _visibility = default!;
+    [Dependency] private readonly ProjectileSystem _projectile = default!; // SS220 fix
 
     [ValidatePrototypeId<EntityPrototype>]
     private const string RevenantShopId = "ActionRevenantShop";
@@ -63,7 +66,14 @@ public sealed partial class RevenantSystem : EntitySystem
         SubscribeLocalEvent<RevenantComponent, StatusEffectEndedEvent>(OnStatusEnded);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
 
+        SubscribeLocalEvent<RevenantComponent, GetVisMaskEvent>(OnRevenantGetVis);
+
         InitializeAbilities();
+    }
+
+    private void OnRevenantGetVis(Entity<RevenantComponent> ent, ref GetVisMaskEvent args)
+    {
+        args.VisibilityMask |= (int)VisibilityFlags.Ghost;
     }
 
     private void OnStartup(EntityUid uid, RevenantComponent component, ComponentStartup args)
@@ -84,10 +94,7 @@ public sealed partial class RevenantSystem : EntitySystem
         }
 
         //ghost vision
-        if (TryComp(uid, out EyeComponent? eye))
-        {
-            _eye.SetVisibilityMask(uid, eye.VisibilityMask | (int) (VisibilityFlags.Ghost), eye);
-        }
+        _eye.RefreshVisibilityMask(uid);
     }
 
     private void OnMapInit(EntityUid uid, RevenantComponent component, MapInitEvent args)
@@ -199,6 +206,11 @@ public sealed partial class RevenantSystem : EntitySystem
             {
                 _visibility.AddLayer((uid, vis), (int) VisibilityFlags.Ghost, false);
                 _visibility.RemoveLayer((uid, vis), (int) VisibilityFlags.Normal, false);
+
+                // SS220 fix begin
+                if (TryComp<EmbeddedContainerComponent>(uid, out var embeddedContainer))
+                    _projectile.DetachAllEmbedded((uid, embeddedContainer));
+                // SS220 fix end
             }
             _visibility.RefreshVisibility(uid, vis);
         }

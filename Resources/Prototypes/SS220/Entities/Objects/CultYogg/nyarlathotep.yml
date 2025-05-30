@@ -1,0 +1,110 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# spawn animation, spawns actual nyarlathotep when it ends
+#- type: entity
+#  id: NyarlathotepSpawn
+#  suffix: Spawn
+#  components:
+#  - type: Sprite
+#    layers:
+#    - state: spawn
+#      shader: unshaded
+#  # spawn animation lasts 3.5 seconds
+#  - type: TimedDespawn
+#    lifetime: 3.5
+#  - type: SpawnOnDespawn
+#    prototype: Nyarlathotep
+
+- type: entity
+  id: MobNyarlathotep
+  name: Nyarlathotep
+  description: The embodiment of coming chaos, the messenger of the Gods. He has no clear shape. According to Nyarlathotep, he has thousands of forms.
+  components:
+  - type: Clickable
+  - type: CargoSellBlacklist
+  - type: InteractionOutline
+  - type: StandingState
+  - type: CanMoveInAir
+  - type: MovementIgnoreGravity
+  - type: Appearance
+  - type: Physics
+    bodyType: Dynamic
+    bodyStatus: InAir
+    sleepingAllowed: false
+  - type: Transform
+  - type: PointLight
+    enabled: true
+    radius: 25
+    color: "#FF0000"
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Mobs/CultYogg/nyarlathotep.rsi
+    shader: unshaded
+    layers:
+    - state: nyarlathoteph
+  - type: ChasingWalk
+    impulseInterval: 1
+    minSpeed: 3
+    maxSpeed: 5
+    changeVectorMinInterval: 120
+    changeVectorMaxInterval: 600
+    chasingComponent:
+    - type: NyarlathotepTarget
+  - type: Fixtures
+    fixtures:
+      EventHorizonCollider:
+        shape:
+          !type:PhysShapeCircle
+            radius: 5
+        hard: false
+        restitution: 0.8
+        density: 99999
+        mask:
+        - SingularityLayer
+        layer:
+        - SingularityLayer
+      EventHorizonConsumer:
+        shape:
+          !type:PhysShapeCircle
+            radius: 5
+        hard: false
+        mask:
+        - SingularityLayer
+        layer:
+        - SingularityLayer
+    #  NyarlathotepHorizonCollider: #ToDo make it at leaslt close to entity
+    #    shape:
+    #      !type:PolygonShape
+    #        vertices:
+    #        - -2.5,-2
+    #        - 2.5,-2
+    #        - 2,1
+    #        - -2,1
+    #        - 1,4
+    #        - -1,4
+    #        - 0,4.5
+    #        - 0,-4.5
+    #    mask:
+    #    - AllMask
+    #    layer:
+    #    - AllMask
+  - type: EventHorizon
+    radius: 4
+    canBreachContainment: true
+  #- type: NyarlathotepHorizon
+  #  colliderFixtureId: NyarlathotepHorizonCollider
+  - type: NyarlathotepSearchTargets
+    searchRange: 300
+  - type: SpamEmitSound
+    minInterval: 5
+    maxInterval: 20
+    sound:
+      collection: NyarlathotepSounds
+      params:
+        maxDistance: 100
+        variation: 0.05
+  - type: WarpPoint
+    follow: true
+    location: NyarlathotepPoint
+

@@ -1,6 +1,17 @@
 meta:
-  format: 6
-  postmapinit: false
+  format: 7
+  category: Grid
+  engineVersion: 254.1.0
+  forkId: "SS220 station 14"
+  forkVersion: "1"
+  time: 05/10/2025 07:43:49
+  entityCount: 32
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
 tilemap:
   0: Space
   81: FloorShuttleBlue
@@ -13,21 +24,9 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: PhysicsMap
-    - type: GridTree
-    - type: MovedGrids
-    - type: Broadphase
-    - type: OccluderTree
-  - uid: 29
-    components:
-    - type: MetaData
       name: NT-CVPOD
     - type: Transform
-      parent: 1
+      parent: invalid
     - type: ProtectedGrid
     - type: EscapePod
     - type: MapGrid
@@ -120,211 +119,211 @@ entities:
     - type: GridPathfinding
 - proto: AirlockGlassShuttle
   entities:
-  - uid: 12
-    components:
-    - type: Transform
-      pos: -0.5,-1.5
-      parent: 29
-- proto: APCBasic
-  entities:
-  - uid: 15
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -1.5,0.5
-      parent: 29
-- proto: AtmosDeviceFanTiny
-  entities:
-  - uid: 9
-    components:
-    - type: Transform
-      pos: -0.5,-1.5
-      parent: 29
-- proto: CableApcExtension
-  entities:
-  - uid: 23
-    components:
-    - type: Transform
-      pos: -1.5,0.5
-      parent: 29
-  - uid: 24
-    components:
-    - type: Transform
-      pos: -0.5,0.5
-      parent: 29
-  - uid: 25
-    components:
-    - type: Transform
-      pos: -0.5,-0.5
-      parent: 29
-- proto: CableHV
-  entities:
-  - uid: 16
-    components:
-    - type: Transform
-      pos: -1.5,-0.5
-      parent: 29
-  - uid: 17
-    components:
-    - type: Transform
-      pos: -0.5,-0.5
-      parent: 29
-  - uid: 18
-    components:
-    - type: Transform
-      pos: 0.5,-0.5
-      parent: 29
-- proto: CableMV
-  entities:
-  - uid: 19
-    components:
-    - type: Transform
-      pos: 0.5,-0.5
-      parent: 29
-  - uid: 20
-    components:
-    - type: Transform
-      pos: -0.5,-0.5
-      parent: 29
-  - uid: 21
-    components:
-    - type: Transform
-      pos: -0.5,0.5
-      parent: 29
-  - uid: 22
-    components:
-    - type: Transform
-      pos: -1.5,0.5
-      parent: 29
-- proto: ChairPilotSeat
-  entities:
-  - uid: 26
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,-0.5
-      parent: 29
-  - uid: 27
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,0.5
-      parent: 29
-- proto: GeneratorWallmountAPU
-  entities:
-  - uid: 31
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -1.5,-0.5
-      parent: 29
-    missingComponents:
-    - Construction
-- proto: Grille
-  entities:
-  - uid: 8
-    components:
-    - type: Transform
-      pos: -0.5,1.5
-      parent: 29
-- proto: IntercomCommon
-  entities:
   - uid: 2
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 0.5,0.5
-      parent: 29
-- proto: PoweredSmallLight
-  entities:
-  - uid: 28
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -0.5,-0.5
-      parent: 29
-    - type: ApcPowerReceiver
-      powerLoad: 0
-- proto: ShuttleWindow
-  entities:
-  - uid: 7
-    components:
-    - type: Transform
-      pos: -0.5,1.5
-      parent: 29
-- proto: SubstationWallBasic
-  entities:
-  - uid: 32
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 0.5,-0.5
-      parent: 29
-    missingComponents:
-    - Construction
-- proto: Thruster
-  entities:
-  - uid: 10
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -1.5,-1.5
-      parent: 29
-  - uid: 11
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,-1.5
-      parent: 29
-- proto: WallShuttleDiagonal
+      pos: -0.5,-1.5
+      parent: 1
+- proto: APCBasic
   entities:
   - uid: 3
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,-1.5
-      parent: 29
-  - uid: 5
-    components:
-    - type: Transform
-      pos: -1.5,1.5
-      parent: 29
-  - uid: 6
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 0.5,1.5
-      parent: 29
-  - uid: 33
-    components:
-    - type: Transform
       rot: 1.5707963267948966 rad
-      pos: -1.5,-1.5
-      parent: 29
-- proto: WallShuttleOrange
+      pos: -1.5,0.5
+      parent: 1
+- proto: AtmosDeviceFanTiny
   entities:
   - uid: 4
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
+      pos: -0.5,-1.5
+      parent: 1
+- proto: CableApcExtension
+  entities:
+  - uid: 5
+    components:
+    - type: Transform
+      pos: -1.5,0.5
+      parent: 1
+  - uid: 6
+    components:
+    - type: Transform
+      pos: -0.5,0.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      pos: -0.5,-0.5
+      parent: 1
+- proto: CableHV
+  entities:
+  - uid: 8
+    components:
+    - type: Transform
       pos: -1.5,-0.5
-      parent: 29
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      pos: -0.5,-0.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 0.5,-0.5
+      parent: 1
+- proto: CableMV
+  entities:
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 0.5,-0.5
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      pos: -0.5,-0.5
+      parent: 1
   - uid: 13
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -1.5,0.5
-      parent: 29
+      pos: -0.5,0.5
+      parent: 1
   - uid: 14
     components:
     - type: Transform
+      pos: -1.5,0.5
+      parent: 1
+- proto: ChairPilotSeat
+  entities:
+  - uid: 15
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,-0.5
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,0.5
+      parent: 1
+- proto: GeneratorWallmountAPU
+  entities:
+  - uid: 17
+    components:
+    - type: Transform
       rot: 1.5707963267948966 rad
+      pos: -1.5,-0.5
+      parent: 1
+    missingComponents:
+    - Construction
+- proto: Grille
+  entities:
+  - uid: 18
+    components:
+    - type: Transform
+      pos: -0.5,1.5
+      parent: 1
+- proto: IntercomCommon
+  entities:
+  - uid: 19
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,0.5
+      parent: 1
+- proto: PoweredSmallLight
+  entities:
+  - uid: 20
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -0.5,-0.5
+      parent: 1
+    - type: ApcPowerReceiver
+      powerLoad: 0
+- proto: ShuttleWindow
+  entities:
+  - uid: 21
+    components:
+    - type: Transform
+      pos: -0.5,1.5
+      parent: 1
+- proto: SubstationWallBasic
+  entities:
+  - uid: 22
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
       pos: 0.5,-0.5
-      parent: 29
+      parent: 1
+    missingComponents:
+    - Construction
+- proto: Thruster
+  entities:
+  - uid: 23
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,-1.5
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,-1.5
+      parent: 1
+- proto: WallShuttleDiagonal
+  entities:
+  - uid: 25
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,-1.5
+      parent: 1
+  - uid: 26
+    components:
+    - type: Transform
+      pos: -1.5,1.5
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,1.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -1.5,-1.5
+      parent: 1
+- proto: WallShuttleOrange
+  entities:
+  - uid: 29
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -1.5,-0.5
+      parent: 1
   - uid: 30
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
+      pos: -1.5,0.5
+      parent: 1
+  - uid: 31
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,-0.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
       pos: 0.5,0.5
-      parent: 29
+      parent: 1
 ...

@@ -11,8 +11,6 @@
   - type: Body
     prototype: Vox
     requiredLegs: 2
-  - type:  HumanoidAppearance
-    species: Vox
     #- type: VoxAccent # Not yet coded
   - type: Speech
     speechVerb: Vox
@@ -36,7 +34,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.30
-        density: 160
+        density: 185
         restitution: 0.0
         mask:
         - MobMask
@@ -47,6 +45,18 @@
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Vox
+  - type: PassiveDamage
+    # Augment normal health regen to be able to tank some Poison damage
+    # This allows Vox to take their mask off temporarily to eat something without needing a trip to medbay afterwards.
+    allowedStates:
+    - Alive
+    damageCap: 20
+    damage:
+      types:
+        Heat: -0.07
+        Poison: -0.2 # needs to be less than the PendingZombieComponent does or they never become zombies by the disease.
+      groups:
+        Brute: -0.07
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:
@@ -68,8 +78,8 @@
 #   SS220-change-races-height begin
     noRot: true
     drawdepth: Mobs
-    scale: 0.7, 0.7
-#   SS220-change-races-height end 
+    scale: 0.85, 0.85
+#   SS220-change-races-height end
     layers:
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
@@ -79,6 +89,8 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.LFoot" ]
     - map: [ "enum.HumanoidVisualLayers.RFoot" ]
@@ -87,13 +99,13 @@
     - map: [ "gloves" ]
     - map: [ "shoes" ]
     - map: [ "ears" ]
-    - map: [ "outerClothing" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ] #SS220-Vox Beak
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "id" ]
-    - map: [ "neck" ]
+    - map: [ "outerClothing" ]
     - map: [ "back" ]
+    - map: [ "neck" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
@@ -113,6 +125,22 @@
       sprite: "Effects/creampie.rsi"
       state: "creampie_vox" # Not default
       visible: false
+  - type: HumanoidAppearance
+    species: Vox
+    undergarmentTop: UndergarmentTopTanktopVox
+    undergarmentBottom: UndergarmentBottomBoxersVox
+    markingsDisplacement:
+      Hair:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: hair
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: VoxPidgin
+  # SS220-Add-Languages end
   - type: Inventory
     speciesId: vox
     displacements:
@@ -167,6 +195,21 @@
   - type: Emoting
     chatEmoteCooldown: 5.0
   #ss220 emote 5 sec end
+  #SS220 LimitationRevive - start
+  - type: LimitationRevive
+    reviveLimit: 100 #has no death limit
+  #SS220 LimitationRevive - end
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: Mobs/Species/Vox/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: Mobs/Species/Vox/displacement.rsi
+          state: hand_r
 
 - type: entity
   parent: BaseSpeciesDummy
@@ -175,10 +218,18 @@
   components:
 # SS220-change-races-height begin
   - type: Sprite
-    scale: 0.7, 0.7
+    scale: 0.85, 0.85
 # SS220-change-races-height end
   - type: HumanoidAppearance
     species: Vox
+    undergarmentTop: UndergarmentTopTanktopVox
+    undergarmentBottom: UndergarmentBottomBoxersVox
+    markingsDisplacement:
+      Hair:
+        sizeMaps:
+          32:
+            sprite: Mobs/Species/Vox/displacement.rsi
+            state: hair
   - type: Body
     prototype: Vox
   - type: Inventory
@@ -231,3 +282,14 @@
             sprite: Mobs/Species/Vox/displacement.rsi
             state: neck
 # SS220 VoxDisplacementMap end
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: Mobs/Species/Vox/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: Mobs/Species/Vox/displacement.rsi
+          state: hand_r

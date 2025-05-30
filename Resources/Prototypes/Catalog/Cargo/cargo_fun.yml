@@ -14,7 +14,7 @@
     sprite: Objects/Fun/Instruments/structureinstruments.rsi
     state: tuba
   product: CrateFunInstrumentsBrass
-  cost: 2500
+  cost: 2000
   category: cargoproduct-category-name-fun
   group: market
 
@@ -34,14 +34,14 @@
     sprite: Objects/Fun/Instruments/harmonica.rsi
     state: icon
   product: CrateFunInstrumentsWoodwind
-  cost: 2500
+  cost: 3000
   category: cargoproduct-category-name-fun
   group: market
 
 - type: cargoProduct
   id: FunInstrumentsKeyedPercussion
   icon:
-    sprite: Objects/Fun/Instruments/h_synthesizer.rsi
+    sprite: SS220/Objects/Fun/Instruments/h_synthesizer.rsi # SS220 Synthesizer resprite
     state: icon
   product: CrateFunInstrumentsKeyedPercussion
   cost: 2500
@@ -89,6 +89,16 @@
   group: market
 
 - type: cargoProduct
+  id: CrateFunFoamGuns
+  icon:
+    sprite: Objects/Weapons/Guns/Rifles/foam_rifle.rsi
+    state: icon
+  product: CrateFunFoamGuns
+  cost: 3000
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
   id: FunPlushies
   icon:
     sprite: Objects/Fun/toys.rsi
@@ -104,6 +114,16 @@
     sprite: Objects/Fun/toys.rsi
     state: plushie_lizard
   product: CrateFunLizardPlushieBulk
+  cost: 500
+  category: cargoproduct-category-name-fun
+  group: market
+  
+- type: cargoProduct
+  id: FunSharkPlushies
+  icon:
+    sprite: Objects/Fun/sharkplush.rsi
+    state: blue
+  product: CrateFunSharkPlushieBulk
   cost: 500
   category: cargoproduct-category-name-fun
   group: market
@@ -214,7 +234,7 @@
   id: cargoLotteryCash
   name: лотерея V&L
   icon: #SS220 fix_cargo begin
-    sprite: SS220/Objects/Fun/Lottery.rsi
+    sprite: SS220/Objects/Fun/lottery.rsi
     state: icon
   #SS220 fix_cargo end
   product: LotteryCash
@@ -243,4 +263,124 @@
   cost: 45000
   category: cargoproduct-category-name-fun
   group: market
-#SS220 Lottery end 
+#SS220 Lottery end
+
+- type: cargoProduct
+  id: ChurchOrganInstrument
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: church-organ
+  product: ChurchOrganInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: PianoInstrument
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: piano
+  product: PianoInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: UprightPianoInstrument
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: piano-upright
+  product: UprightPianoInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: VibraphoneInstrument
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: vibraphone
+  product: VibraphoneInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: MarimbaInstrument
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: marimba
+  product: MarimbaInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: TubaInstrument
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: tuba
+  product: TubaInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: HarpInstrument
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: harp
+  product: HarpInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: TimpaniInstrument
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: timpani
+  product: TimpaniInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: TaikoInstrument
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: taiko
+  product: TaikoInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: ContrabassInstrument
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: contrabass
+  product: ContrabassInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: MinimoogInstrument
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: minimoog
+  product: MinimoogInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: TomDrumsInstrument
+  icon:
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: toms
+  product: TomDrumsInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market

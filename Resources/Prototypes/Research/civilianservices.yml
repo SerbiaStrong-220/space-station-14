@@ -10,8 +10,6 @@
   tier: 1
   cost: 5000
   recipeUnlocks:
-  - BorgModuleGardening
-  - BorgModuleHarvesting
   - SeedExtractorMachineCircuitboard
   - HydroponicsTrayMachineCircuitboard
   - ReagentGrinderIndustrialMachineCircuitboard
@@ -53,6 +51,7 @@
   - SurveillanceCameraMonitorCircuitboard
   - SurveillanceWirelessCameraMonitorCircuitboard
   - TelecomServerCircuitboard
+  - HolopadMachineCircuitboard
 
 - type: technology
   id: AdvancedEntertainment
@@ -66,24 +65,9 @@
   recipeUnlocks:
     - ComputerTelevisionCircuitboard
     - SynthesizerInstrument
-    - BorgModuleMusique
-    - BorgModuleClowning
     - DawInstrumentMachineCircuitboard
     - MassMediaCircuitboard
     - JukeboxCircuitBoard
-
-- type: technology
-  id: RoboticCleanliness
-  name: research-technology-robotic-cleanliness
-  icon:
-    sprite: Mobs/Silicon/chassis.rsi
-    state: janitor
-  discipline: CivilianServices
-  tier: 1
-  cost: 5000
-  recipeUnlocks:
-  - BorgModuleLightReplacer
-  - BorgModuleAdvancedCleaning
 
 - type: technology
   id: MeatManipulation
@@ -118,6 +102,7 @@
   - FauxTileAstroSnow
   - FauxTileAstroSand #SS220-beachCraftng
 
+  - FauxTileAstroAsteroidSand
 
 - type: technology
   id: BiochemicalStasis
@@ -126,15 +111,15 @@
     sprite: Structures/Machines/stasis_bed.rsi
     state: icon
   discipline: CivilianServices
-  tier: 2
-  cost: 7500
+  tier: 1 # SS220 Cryo to T1 for medical reqs
+  cost: 12500 # SS220 Cryo to T1 for medical reqs
   recipeUnlocks:
   - StasisBedMachineCircuitboard
   - CryoPodMachineCircuitboard
   - CryostasisBeaker
   - SyringeCryostasis
 
-- type: technology
+- type: technology # Merge with other T2 medical research if possible!
   id: MechanizedTreatment
   name: research-technology-mechanized-treatment
   icon:
@@ -144,8 +129,7 @@
   tier: 2
   cost: 5000
   recipeUnlocks:
-  - BorgModuleAdvancedTreatment
-  - BorgModuleDefibrillator
+  - BorgModuleAdvancedChemical
 
 - type: technology
   id: AdvancedCleaning
@@ -160,6 +144,7 @@
   - AdvMopItem
   - TrashBagAdvanced #SS220 Borg Modules
   - MegaSprayBottle
+  - BorgModuleAdvancedCleaning
 
 - type: technology
   id: HONKMech
@@ -193,6 +178,7 @@
   recipeUnlocks:
   - WeaponSprayNozzle
   - ClothingBackpackWaterTank
+  - PdaIdPainterMachineCircuitboard #ss220 add pdaidpainter
 
 - type: technology
   id: BluespaceCargoTransport
@@ -205,6 +191,18 @@
   cost: 15000
   recipeUnlocks:
   - CargoTelepadMachineCircuitboard
+
+- type: technology
+  id: PushHorn
+  name: research-technology-clowning-utilities
+  icon:
+    sprite: Objects/Fun/push_horn.rsi
+    state: icon
+  discipline: CivilianServices
+  tier: 2
+  cost: 4000
+  recipeUnlocks:
+  - PushHorn
 
 # Tier 3
 

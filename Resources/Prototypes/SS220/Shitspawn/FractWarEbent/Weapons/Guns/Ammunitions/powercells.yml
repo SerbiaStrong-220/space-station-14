@@ -1,6 +1,5 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-#Base
 - type: entity
   parent: BaseItem
   id: BlasterPowerCell
@@ -11,11 +10,11 @@
   - type: Item
   - type: Battery
     pricePerJoule: 0.15
-    maxCharge: 2500
-    startingCharge: 2500
+    maxCharge: 800
+    startingCharge: 800
   - type: PowerCell
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/ert_magblaster.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/Ammunition/Magazine/ert_magblaster.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: base
@@ -33,15 +32,11 @@
   - type: Extractable
     juiceSolution:
       reagents:
-        - ReagentId: Zinc
-          Quantity: 5
+      - ReagentId: Zinc
+        Quantity: 5
   - type: Tag
     tags:
-      - BlasterPowerCell
+    - BlasterPowerCell
   - type: Appearance
   - type: PowerCellVisuals
   - type: Riggable
-  - type: AmmoCounter
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletBlaster
-    fireCost: 100

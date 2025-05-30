@@ -1,0 +1,76 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  name: storage
+  id: CultYoggPod
+  suffix: CultYogg
+  parent: BaseStructure
+  description: A pod for healing wounds and resurrecting cult members. The sight of her makes you uneasy.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/CultYogg/yoggpod.rsi
+    state: yoggpod
+    map: ["base"]
+  - type: Icon
+    sprite: SS220/Structures/CultYogg/yoggpod.rsi
+    state: yoggpod
+  - type: Appearance
+  - type: PointLight
+    color: Green
+    radius: 1.5
+    energy: 0.3
+  - type: Damageable
+  - type: Transform
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+      - !type:EmptyAllContainersBehaviour
+  - type: CultYoggPod
+    bloodlossModifier: -6
+    healingFreq: 0.6
+    heal:
+      types:
+        Slash: -3
+        Blunt: -3
+        Piercing: -3
+        Heat: -3
+        Cold: -3
+        Shock: -1
+        Airloss: -10
+        Caustic: -5
+        Сerebral: -5
+  - type: CultYoggBuilding
+    eraseTime: 5
+    spawnOnErase:
+      - id: CableHVStack1Live
+        stackAmount: 10
+      - id: SheetTokl1
+        stackAmount: 30
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+  - type: GenericVisualizer
+    visuals:
+      enum.CultPodVisuals.Inserted:
+        base:
+          True: { state: yoggpod-in }
+          False: { state: yoggpod }
+  - type: ContainerContainer
+    containers:
+      cultyYoggPod: !type:ContainerSlot
+        showEnts: False
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable

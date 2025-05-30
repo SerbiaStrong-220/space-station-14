@@ -20,9 +20,9 @@
   suffix: За время в игре
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi
+    sprite: SS220/Clothing/Shoes/Boots/janitor_orange.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Shoes/Boots/orangejanitor.rsi
+    sprite: SS220/Clothing/Shoes/Boots/janitor_orange.rsi
 
 - type: entity
   parent: ClothingShoesBaseButcherable
@@ -268,10 +268,9 @@
   - type: HiddenDescription
     entries:
     - label: hidden-desc-SilentShoes-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: hidden-desc-SilentShoes-research
       jobRequired:
         - ResearchAssistant
@@ -279,10 +278,9 @@
         - Scientist
         - Borg
     - label: corvax-hidden-desc-Chameleon-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-Chameleon-research
       jobRequired:
         - ResearchAssistant

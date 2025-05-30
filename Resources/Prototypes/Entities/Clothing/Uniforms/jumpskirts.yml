@@ -133,24 +133,24 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtDetective
-  name: hard-worn suit
+  name: hard-worn suitskirt
   description: Someone who wears this means business.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpskirt/detective.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/detective.rsi #ss220 resprite
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpskirt/detective.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/detective.rsi #ss220 resprite
 
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtDetectiveGrey
-  name: noir suit
+  name: noir suitskirt
   description: A hard-boiled private investigator's grey suit, complete with tie clip.
   components:
     - type: Sprite
-      sprite: Clothing/Uniforms/Jumpskirt/detective_grey.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/detective_grey.rsi #ss220 resprite
     - type: Clothing
-      sprite: Clothing/Uniforms/Jumpskirt/detective_grey.rsi
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/detective_grey.rsi #ss220 resprite
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -181,23 +181,25 @@
   description: It's bright red and rather crisp, much like security's victims tend to be.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hos.rsi #ss220 fix
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-left
-        sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
-      right:
-      - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-right
-        sprite: Clothing/Uniforms/Jumpsuit/hos.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/hos.rsi #ss220 fix
+  #ss220 fix start
+#  - type: Item
+#    inhandVisuals:
+#      left:
+#      - state: inhand-left
+#        color: "#C12D30"
+#        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+#      - state: overlay-inhand-left
+#        sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
+#      right:
+#      - state: inhand-right
+#        color: "#C12D30"
+#        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+#      - state: overlay-inhand-right
+#        sprite: Clothing/Uniforms/Jumpskirt/hos.rsi
+  #ss220 fix end
 
 - type: entity
   parent: [ClothingUniformSkirtBase]
@@ -220,6 +222,17 @@
     sprite: Clothing/Uniforms/Jumpskirt/hos_parade.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpskirt/hos_parade.rsi
+
+- type: entity
+  parent: [ClothingUniformSkirtBase, BaseCommandContraband]
+  id: ClothingUniformJumpskirtCommandGeneric
+  name: command jumpskirt
+  description: A generic Command-colored jumpsuit not associated with any particular department.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/commandgeneric.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/commandgeneric.rsi
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -291,7 +304,7 @@
   parent: ClothingUniformBase
   id: ClothingUniformJumpskirtPrisoner
   name: prisoner jumpskirt
-  description: Busted.
+  description: A jumpskirt used for prisoners. It has suit sensors automatically enabled at all times.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpskirt/color.rsi
@@ -382,7 +395,7 @@
     sprite: Clothing/Uniforms/Jumpskirt/roboticist.rsi
 
 - type: entity
-  parent: [ClothingUniformSkirtBase]
+  parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtSec
   name: security jumpskirt
   description: A jumpskirt made of strong material, providing robust protection.
@@ -408,29 +421,31 @@
 
 
 - type: entity
-  parent: [ClothingUniformSkirtBase]
+  parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtWarden
   name: warden's uniform
   description: A formal security suit for officers complete with Nanotrasen belt buckle.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/warden.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/warden.rsi #SS220-WardenSkirtFix
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/warden.rsi
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-left
-        sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
-      right:
-      - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: overlay-inhand-right
-        sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/warden.rsi #SS220-WardenSkirtFix
+  #SS220-WardenSkirtFix-Begin
+  # - type: Item
+  #   inhandVisuals:
+  #     left:
+  #     - state: inhand-left
+  #       color: "#C12D30"
+  #       sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+  #     - state: overlay-inhand-left
+  #       sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+  #     right:
+  #     - state: inhand-right
+  #       color: "#C12D30"
+  #       sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+  #     - state: overlay-inhand-right
+  #       sprite: Clothing/Uniforms/Jumpsuit/warden.rsi
+  #SS220-WardenSkirtFix-End
 
 
 - type: entity
@@ -439,12 +454,14 @@
   name: librarian jumpskirt
   description: A cosy green jumper fit for a curator of books.
   components:
-  # Corvax-Resprite begin
+#SS220 librarian resprite start
   - type: Sprite
-    sprite: Corvax/Clothing/Uniforms/Jumpskirt/librarian.rsi
+#    sprite: Corvax/Clothing/Uniforms/Jumpskirt/librarian.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/librarian.rsi
   - type: Clothing
-    sprite: Corvax/Clothing/Uniforms/Jumpskirt/librarian.rsi
-  # Corvax-Resprite end
+#    sprite: Corvax/Clothing/Uniforms/Jumpskirt/librarian.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/librarian.rsi
+#SS220 librarian resprite end
 
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -519,9 +536,9 @@
   description: Uniform for subpar operative LARPers performing tactical insulated glove theft in deep space.
   components:
     - type: Sprite
-      sprite: SS220/Clothing/Uniforms/Jumpskirt/tacticool_s.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_tacticool_s.rsi #SS220-tacticool_s-resprite
     - type: Clothing
-      sprite: SS220/Clothing/Uniforms/Jumpskirt/tacticool_s.rsi #SS220-tacticool_s-resprite
+      sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_tacticool_s.rsi #SS220-tacticool_s-resprite
     # Too cool for sensors to be on
     - type: SuitSensor
       randomMode: false
@@ -621,7 +638,7 @@
       sprite: Clothing/Uniforms/Jumpskirt/lawyergood.rsi
 
 - type: entity
-  parent: ClothingUniformSkirtBase
+  parent: [ ClothingUniformSkirtBase, BaseSyndicateContraband ]
   id: ClothingUniformJumpskirtSyndieFormalDress
   name: syndicate formal dress
   description: "The syndicate's uniform is made in an elegant style, it's even a pity to do dirty tricks in this."
@@ -688,7 +705,7 @@
     sprite: Clothing/Uniforms/Jumpskirt/senior_physician.rsi
 
 - type: entity
-  parent: [ClothingUniformSkirtBase]
+  parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtSeniorOfficer
   name: senior officer jumpskirt
   description: A sign of skill and prestige within the security department.
@@ -700,7 +717,7 @@
     sprite: Clothing/Uniforms/Jumpskirt/senior_officer.rsi
 
 - type: entity
-  parent: [ClothingUniformSkirtBase]
+  parent: [ClothingUniformSkirtBase, BaseSecurityContraband]
   id: ClothingUniformJumpskirtSecGrey
   name: grey security jumpskirt
   description: A tactical relic of years past before Nanotrasen decided it was cheaper to dye the suits red instead of washing out the blood.
@@ -830,6 +847,36 @@
       - state: equipped-INNERCLOTHING-jumpskirt
       - state: equipped-INNERCLOTHING-shirt
         color: "#b30000"
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtCasualGreen
+  name: casual green jumpskirt
+  description: A loose worn green shirt with a grey skirt, perfect for someone looking to relax.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/casual.rsi
+    layers:
+    - state: icon-jumpskirt
+    - state: icon-shirt
+      color: "#00661D"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-jumpskirt
+      - state: inhand-left-shirt
+        color: "#00661D"
+      right:
+      - state: inhand-right-jumpskirt
+      - state: inhand-right-shirt
+        color: "#00661D"
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/casual.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING-jumpskirt
+      - state: equipped-INNERCLOTHING-shirt
+        color: "#00661D"
 
 - type: entity
   parent: ClothingUniformSkirtBase

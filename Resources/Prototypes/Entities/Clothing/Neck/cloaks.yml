@@ -160,7 +160,7 @@
   description: A cloak made from the hide of resilient fauna from a distant planet, though its protective value has faded with its age.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Cloaks/goliathcloak.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/goliathcloak.rsi #SS220-goliathresprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodGoliathCloak
     requiredSlot:
@@ -188,7 +188,7 @@
   description: A rather fetching black pirate cloak, complete with skull motif.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Cloaks/piratecap.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/piratecap.rsi #ss220 resprite
 
 - type: entity
   parent: ClothingNeckBase
@@ -257,6 +257,15 @@
   components:
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/aro.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakAroace
+  name: aeropilot's cloak # thank you happyman442 this was the best name idea ever
+  description: Cloak awarded to Nanotrasen's finest pilots on planets with inhabitable atmospheres.
+  components:
+  - type: Sprite
+    sprite: Clothing/Neck/Cloaks/aroace.rsi
 
 - type: entity
   parent: ClothingNeckBase

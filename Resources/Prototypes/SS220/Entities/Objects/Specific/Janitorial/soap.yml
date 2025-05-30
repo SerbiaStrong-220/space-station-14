@@ -93,13 +93,11 @@
     fillBaseName: snot-
     changeColor: false
   - type: Appearance
-  - type: ClusterGrenade
+  - type: ScatteringGrenade
     fillPrototype: snotlet
-    maxGrenadesCount: 30
-    grenadeTriggerIntervalMax: 0
-    grenadeTriggerIntervalMin: 0
-    baseTriggerDelay: 60
-    randomSpread: true
+    capacity: 30
+    delayBeforeTriggerContents: 60
+    randomDistance: true
     velocity: 3
   - type: Item
     sprite: SS220/Objects/Specific/Janitorial/soap.rsi
@@ -142,8 +140,9 @@
     layers:
     - state: snotlet
   - type: Slippery
-    paralyzeTime: 1.5
-    launchForwardsMultiplier: 1.5
+    slipData:
+      paralyzeTime: 1.5
+      launchForwardsMultiplier: 1.5
   - type: SolutionContainerManager
     solutions:
       soap:

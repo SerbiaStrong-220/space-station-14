@@ -1,11 +1,12 @@
 using Content.Server.DeviceLinking.Components;
 using Content.Server.DeviceNetwork;
 using Content.Server.Doors.Systems;
+using Content.Shared.DeviceLinking;
+using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors;
 using JetBrains.Annotations;
-using SignalReceivedEvent = Content.Server.DeviceLinking.Events.SignalReceivedEvent;
 using Content.Server.Power.Components;
 
 namespace Content.Server.DeviceLinking.Systems
@@ -99,6 +100,8 @@ namespace Content.Server.DeviceLinking.Systems
                 _signalSystem.SendSignal(uid, door.OutOpen, false);
             }
             else if (args.State == DoorState.Open
+                     || args.State == DoorState.Opening
+                     || args.State == DoorState.Closing
                      || args.State == DoorState.Emagging)
             {
                 // say the door is open whenever it would be letting air pass

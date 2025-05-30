@@ -21,13 +21,13 @@
           min: 30
         damage:
           types:
-            Poison: 2 # this is added to the base damage of the meth.
+            Poison: 1.5 #ss220 combat medicine be-gone
             Asphyxiation: 2
     Narcotic:
       effects:
       - !type:MovespeedModifier
-        walkSpeedModifier: 1.35
-        sprintSpeedModifier: 1.35
+        walkSpeedModifier: 1.12 #ss220 combat medicine be-gone
+        sprintSpeedModifier: 1.12 #ss220 combat medicine be-gone
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
@@ -40,6 +40,12 @@
         key: KnockedDown
         time: 3
         type: Remove
+#ss220 combat medicine be-gone begin
+      - !type:GenericStatusEffect
+        key: Adrenaline 
+        component: IgnoreSlowOnDamage
+        time: 10
+#ss220 combat medicine be-gone end     
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
@@ -69,8 +75,8 @@
     Narcotic:
       effects:
       - !type:MovespeedModifier
-        walkSpeedModifier: 1.25
-        sprintSpeedModifier: 1.25
+        walkSpeedModifier: 1.08 #ss220 combat medicine be-gone
+        sprintSpeedModifier: 1.08 #ss220 combat medicine be-gone
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -139,6 +145,22 @@
           min: 1
         reagent: ChloralHydrate
         amount: -10
+      #ss220 stumulants buff begin
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Nocturine
+          min: 1
+        reagent: Nocturine
+        amount: -3
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Haloperidol
+          min: 1
+        reagent: Haloperidol
+        amount: -5
+      #ss220 stumulants buff end
       - !type:GenericStatusEffect
         key: Stun
         time: 3
@@ -152,17 +174,16 @@
         component: StaminaModifier
         time: 3
         type: Add
-      - !type:AdjustReagent # SS220 Nuke-Rebalance begin
-        conditions:
-        - !type:ReagentThreshold
-          reagent: ChloralHydrate
-          min: 1
-        reagent: ChloralHydrate
-        amount: -3 # SS220 Nuke-Rebalance end
       - !type:GenericStatusEffect
         key: ForcedSleep
         time: 3
         type: Remove
+#ss220 combat medicine be-gone begin      
+      - !type:GenericStatusEffect
+        key: Adrenaline 
+        component: IgnoreSlowOnDamage
+        time: 10
+#ss220 combat medicine be-gone begin      
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
@@ -337,6 +358,9 @@
       - !type:GenericStatusEffect
         key: Muted
         component: Muted
+        type: Add
+        time: 10
+        refresh: false
 
 - type: reagent
   id: NorepinephricAcid

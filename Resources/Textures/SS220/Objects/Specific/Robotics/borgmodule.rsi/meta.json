@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created by lexasvarshik (github) modified by burenka._. (discord) for Space Station 14 (SS220). icon-fireaxe-flaming, icon-fireaxe by lexasvarshik(github), icon-ClownMime, ClownMime",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon-fireaxe"
+    },
+    {
+	  "name": "icon-fireaxe-flaming"
+    },
+    {
+      "name": "icon-ClownMime"
+    },
+    {
+      "name": "ClownMime"
+    }
+  ]
+}

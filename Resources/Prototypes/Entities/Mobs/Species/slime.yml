@@ -13,7 +13,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Mobs
-    scale: 0.8, 0.8
+    scale: 0.9, 0.9
 # SS220-change-races-height end
   - type: Body
     prototype: Slime
@@ -21,6 +21,7 @@
   # they like eat it idk lol
   - type: Storage
     clickInsert: false
+    openOnActivate: false
     grid:
     - 0,0,1,2
     maxItemSize: Large
@@ -124,7 +125,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.35
+          radius: 0.325
         density: 185
         restitution: 0.0
         mask:
@@ -140,6 +141,12 @@
       types:
         Asphyxiation: -1.0
     maxSaturation: 15
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Bubblish
+  # SS220-Add-Languages end
   - type: Inventory
     femaleDisplacements:
       jumpsuit:
@@ -151,6 +158,10 @@
   - type: Emoting
     chatEmoteCooldown: 5.0
   #ss220 emote 5 sec end
+  #SS220 LimitationRevive - start
+  - type: LimitationRevive
+    reviveLimit: 100 #has no death limit
+  #SS220 LimitationRevive - end
 
 - type: entity
   parent: MobHumanDummy
@@ -159,7 +170,7 @@
   components:
 # SS220-change-races-height begin
   - type: Sprite
-    scale: 0.8, 0.8
+    scale: 0.9, 0.9
 # SS220-change-races-height end
   - type: HumanoidAppearance
     species: SlimePerson

@@ -6,11 +6,11 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
   - type: Clothing
     slots:
     - idcard
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
   - type: Item
     size: Small
     heldPrefix: default
@@ -22,6 +22,7 @@
     tags:
     - DoorBumpOpener
     - WhitelistChameleon
+    - WhitelistChameleonIdCard
   - type: StealTarget
     stealGroup: IDCard
 
@@ -38,6 +39,14 @@
     - state: idpassenger
   - type: PresetIdCard
     job: Passenger
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: PassengerIDCard
@@ -50,6 +59,14 @@
     layers:
     - state: default
     - state: idintern-tech
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: PassengerIDCard
@@ -62,6 +79,14 @@
     layers:
     - state: silver #SS220 Id Repsrite
     - state: idblueshield
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: PassengerIDCard
@@ -74,6 +99,14 @@
     layers:
     - state: default
     - state: idintern-med
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: PassengerIDCard
@@ -86,6 +119,14 @@
     layers:
     - state: default
     - state: idintern-sci
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: PassengerIDCard
@@ -98,6 +139,14 @@
     layers:
     - state: default
     - state: idintern-cadet
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: PassengerIDCard
@@ -110,6 +159,14 @@
     layers:
     - state: default
     - state: idintern-service
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: [IDCardStandard]
@@ -128,7 +185,9 @@
     tags:
     - DoorBumpOpener
     - WhitelistChameleon
+    - WhitelistChameleonIdCard
     - HighRiskItem
+    - WhitelistPdaIdPainter #ss220 add pdaidpainter
   - type: StealTarget
     stealGroup: CaptainIDCard
 
@@ -143,6 +202,14 @@
     - state: idsecurityofficer
   - type: PresetIdCard
     job: SecurityOfficer
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -155,6 +222,14 @@
     - state: idpilot
   - type: PresetIdCard
     job: SecurityPilot
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -167,6 +242,14 @@
         - state: idwarden
     - type: PresetIdCard
       job: Warden
+    #ss220 add pdaidpainter start
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+    #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -179,6 +262,14 @@
     - state: idstationengineer
   - type: PresetIdCard
     job: StationEngineer
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -191,6 +282,14 @@
     - state: idmedicaldoctor
   - type: PresetIdCard
     job: MedicalDoctor
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -203,6 +302,14 @@
     - state: idparamedic
   - type: PresetIdCard
     job: Paramedic
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -215,6 +322,14 @@
     - state: idchemist
   - type: PresetIdCard
     job: Chemist
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -227,6 +342,14 @@
     - state: idcargotechnician
   - type: PresetIdCard
     job: CargoTechnician
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -239,6 +362,14 @@
     - state: idshaftminer
   - type: PresetIdCard
     job: SalvageSpecialist
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -253,6 +384,14 @@
       heldPrefix: silver
     - type: PresetIdCard
       job: Quartermaster
+    #ss220 add pdaidpainter start
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+    #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -265,6 +404,14 @@
     - state: idscientist
   - type: PresetIdCard
     job: Scientist
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -277,6 +424,14 @@
     - state: idclown
   - type: PresetIdCard
     job: Clown
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -289,6 +444,14 @@
     - state: idmime
   - type: PresetIdCard
     job: Mime
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -301,6 +464,14 @@
         - state: idchaplain
     - type: PresetIdCard
       job: Chaplain
+    #ss220 add pdaidpainter start
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+    #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -313,6 +484,14 @@
     - state: idjanitor
   - type: PresetIdCard
     job: Janitor
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -325,6 +504,14 @@
     - state: idbartender
   - type: PresetIdCard
     job: Bartender
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -338,6 +525,9 @@
     - type: PresetIdCard
       job: Bartender
       name: Pun Pun
+    - type: Tag #  Ignore Chameleon tags
+      tags:
+      - DoorBumpOpener
 
 - type: entity
   parent: IDCardStandard
@@ -350,6 +540,14 @@
     - state: idcook
   - type: PresetIdCard
     job: Chef
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -362,6 +560,14 @@
         - state: idbotanist
     - type: PresetIdCard
       job: Botanist
+    #ss220 add pdaidpainter start
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+    #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -374,6 +580,14 @@
         - state: idcurator
     - type: PresetIdCard
       job: Librarian
+    #ss220 add pdaidpainter start
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+    #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -386,6 +600,14 @@
         - state: idlawyer
     - type: PresetIdCard
       job: Lawyer
+    #ss220 add pdaidpainter start
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+    #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -400,6 +622,14 @@
     heldPrefix: silver
   - type: PresetIdCard
     job: HeadOfPersonnel
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -414,6 +644,14 @@
     heldPrefix: silver
   - type: PresetIdCard
     job: ChiefEngineer
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -428,6 +666,14 @@
     heldPrefix: silver
   - type: PresetIdCard
     job: ChiefMedicalOfficer
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -442,6 +688,14 @@
     heldPrefix: silver
   - type: PresetIdCard
     job: ResearchDirector
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -456,6 +710,14 @@
     heldPrefix: silver
   - type: PresetIdCard
     job: HeadOfSecurity
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -483,6 +745,14 @@
     - state: idbrigmedic
   - type: PresetIdCard
     job: Brigmedic
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -499,12 +769,13 @@
   - type: IdCard
     jobTitle: job-name-cc-default #SS220 (upstream 65 localization)
     jobIcon: JobIconNanotrasen
-  - type: Access
-    groups:
-    - AllAccess # SS220 Fast fix access
-    tags:
-    - CentralCommand
-    - CentralCommandERT # SS220 New CentComm
+# SS220 centcomm access fix begin
+#  - type: Access
+#    groups:
+#    - AllAccess # SS220 Fast fix access
+#    tags:
+#    - CentralCommand
+# SS220 centcomm access fix end
   - type: PresetIdCard
     job: CentralCommandOfficial
 
@@ -523,12 +794,6 @@
     job: ERTLeader
   - type: Item
     heldPrefix: gold
-  # SS220 new CentComm begin
-  - type: Access
-    groups:
-    - AllAccess # SS220 Fast fix access
-    - CentralCommand
-  # SS220 new CentComm end
 
 - type: entity
   parent: CentcomIDCard # SS220 new CentComm begin
@@ -543,9 +808,11 @@
     job: ERTChaplain
   - type: Item
     heldPrefix: blue
-  - type: Access
-    groups:
-    - AllAccess # SS220 Fast fix access
+# SS220 centcomm access fix begin
+#  - type: Access
+#    groups:
+#    - AllAccess # SS220 Fast fix access
+# SS220 centcomm access fix end
 
 - type: entity
   parent: IDCardStandard
@@ -625,6 +892,14 @@
         - state: idmusician
     - type: PresetIdCard
       job: Musician
+    #ss220 add pdaidpainter start
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+    #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -639,14 +914,6 @@
     heldPrefix: blue
   - type: IdCard
     jobTitle: job-name-cc-agent #SS220 (upstream 65 localization)
-  # SS220 new CentComm begin
-  - type: Access
-    groups:
-    - AllAccess # SS220 Fast fix access
-    tags:
-    - CentralCommandDeathSquad
-    - CentralCommand
-  # SS220 new CentComm end
   - type: PresetIdCard
     job: DeathSquad
 
@@ -676,6 +943,7 @@
   - type: ChameleonClothing
     slot: [idcard]
     default: PassengerIDCard
+    requireTag: WhitelistChameleonIdCard
   - type: UserInterface
     interfaces:
       enum.AgentIDCardUiKey.Key:
@@ -686,10 +954,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-AgentIDCard-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-AgentIDCard-research
       jobRequired:
         - ResearchAssistant
@@ -721,9 +988,17 @@
     - state: idatmospherictechnician
   - type: PresetIdCard
     job: AtmosphericTechnician
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
-  parent: IDCardStandard
+  parent: [ IDCardStandard, BaseSyndicateContraband ]
   id: SyndicateIDCard
   name: syndicate ID card
   components:
@@ -736,7 +1011,7 @@
     - SyndicateAgent
 
 - type: entity
-  parent: IDCardStandard
+  parent: [ IDCardStandard, BaseMajorContraband ]
   id: PirateIDCard
   name: pirate ID card
   components:
@@ -759,6 +1034,14 @@
     - state: idpsychologist
   - type: PresetIdCard
     job: Psychologist
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -771,6 +1054,14 @@
     - state: idreporter
   - type: PresetIdCard
     job: Reporter
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -783,6 +1074,14 @@
     - state: idboxer
   - type: PresetIdCard
     job: Boxer
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -795,6 +1094,14 @@
     - state: idzookeeper
   - type: PresetIdCard
     job: Zookeeper
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity
   parent: IDCardStandard
@@ -807,6 +1114,53 @@
     - state: iddetective
   - type: PresetIdCard
     job: Detective
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
+
+- type: entity
+  parent: IDCardStandard
+  id: PrisonerIDCard
+  name: prisoner ID card
+  description: A generically printed ID card for scummy prisoners.
+  components:
+  - type: Sprite
+    layers:
+    - state: orange
+    - state: idprisoner # Port SS220-prisoner-id
+  - type: Item
+    heldPrefix: orange
+  - type: Access
+    tags:
+    - GenpopEnter
+  - type: GenpopIdCard
+  - type: IdCard
+    jobTitle: job-name-prisoner
+    jobIcon: JobIconPrisoner
+    canMicrowave: false
+  - type: ExpireIdCard
+    expireMessage: genpop-prisoner-id-expire
+    expiredAccess:
+    - GenpopLeave
+  - type: Speech
+    speechVerb: Robotic
+    #SS220-add-tts-to-prisoner-card-start
+  - type: TTS
+    voice: sentrybot
+    #SS220-add-tts-to-prisoner-card-end
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+    - Recyclable
+  - type: StaticPrice # these are infinitely producible.
+    price: 0
 
 - type: entity
   parent: CentcomIDCard
@@ -824,12 +1178,6 @@
   # SS220 new CentComm begin
   # SS220 CBURN questions changes name 05.07.2024
     jobTitle: job-name-cburn-agent #SS220 (upstream 65 localization)
-  - type: Access
-    groups:
-    - AllAccess # SS220 Fast fix access
-    tags:
-    - CentralCommandCBURN
-    - CentralCommand
   # SS220 new CentComm end
   - type: PresetIdCard
     job: CBURN
@@ -859,6 +1207,14 @@
     - state: idseniorengineer
   - type: PresetIdCard
     job: SeniorEngineer
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity #ss220
   parent: IDCardStandard
@@ -871,6 +1227,14 @@
     - state: idseniorresearcher
   - type: PresetIdCard
     job: SeniorResearcher
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity #ss220
   parent: IDCardStandard
@@ -883,6 +1247,14 @@
     - state: idseniorphysician
   - type: PresetIdCard
     job: SeniorPhysician
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
 
 - type: entity # SS220
   parent: IDCardStandard
@@ -895,6 +1267,30 @@
     - state: idseniorofficer
   - type: PresetIdCard
     job: SeniorOfficer
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
+
+- type: entity
+  parent: IDCardStandard
+  id: WizardIDCard
+  name: wizard ID card
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    layers:
+    - state: wizard
+    - state: idwizard
+  - type: Access
+    tags:
+    - Wizard
+    - External
+    - Maintenance
 
 - type: entity
   parent: IDCardStandard
@@ -904,12 +1300,12 @@
   description: An ID card that gives you access beyond your wildest dreams.
   components:
   - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
     layers:
     - state: admin
     - state: idadmin
   - type: Clothing
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
   - type: Item
     heldPrefix: green
   - type: IdCard
@@ -918,7 +1314,21 @@
   - type: Access
     groups:
     - AllAccess
+    - Silicon
     tags:
     - CentralCommand
     - NuclearOperative
     - SyndicateAgent
+    - Wizard
+    - Xenoborg
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener
+  - type: AgentIDCard
+  - type: ActivatableUI
+    key: enum.AgentIDCardUiKey.Key
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.AgentIDCardUiKey.Key:
+        type: AgentIDCardBoundUserInterface

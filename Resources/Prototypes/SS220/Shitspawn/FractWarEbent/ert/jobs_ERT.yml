@@ -44,7 +44,6 @@
     - id: WeaponRevolverMatebaSouvenir
     - id: ClothingUniformJumpsuitColorBlack
     - id: ClothingUniformJumpsuitCentcomOfficerBlack
-    - id: ClothingBackpackERTLeader
     - id: ClothingNeckPolarIMedal
       amount: 2
     - id: ClothingNeckPolarIIMedal
@@ -53,6 +52,7 @@
       amount: 4
     - id: EnergySwordEbentDouble
     - id: JobIconChangerNT
+    - id: Binoculars
 
 - type: entity
   parent: LockerChiefMedicalOfficer
@@ -65,7 +65,6 @@
     access: [[ Command ]]
   - type: StorageFill
     contents:
-    - id: WeaponRevolverMatebaSouvenir
     - id: ClothingHeadHatBeretCmo
     - id: BoxBeaker
       amount: 2
@@ -76,11 +75,12 @@
     - id: ClothingOuterCoatLabCmo
     - id: ClothingCloakCmo
     - id: ClothingNeckCloakNanotrasen
-    - id: ClothingBackpackERTMedical
     - id: ClothingUniformJumpsuitColorBlack
     - id: ClothingNeckMantleERTLeader
     - id: ClothingEyesHudMedSec
     - id: JobIconChangerNT
+    - id: DefibrillatorCompact
+    - id: Binoculars
 
 - type: entity
   parent: LockerEngineer
@@ -93,7 +93,6 @@
     access: [[ Command ]]
   - type: StorageFill
     contents:
-    - id: WeaponRevolverMatebaSouvenir
     - id: JetpackVoidFilled
     - id: ClothingNeckMantleERTLeader
     - id: ClothingEyesGlassesMeson
@@ -101,12 +100,13 @@
     - id: ClothingNeckCloakCe
     - id: ClothingNeckCloakNanotrasen
     - id: ClothingBeltChiefEngineerFilled
-    - id: ClothingBackpackERTEngineer
     - id: ClothingUniformJumpsuitColorBlack
     - id: JawsOfLife
     - id: RCD
     - id: RCDAmmo
+      amount: 4
     - id: JobIconChangerNT
+    - id: Binoculars
 
 - type: entity
   parent: LockerMedical
@@ -119,13 +119,13 @@
     access: [[ Command ]]
   - type: StorageFill
     contents:
-    - id: ClothingBackpackERTMedical
     - id: BoxBeaker
       amount: 2
     - id: Hypospray
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
     - id: ClothingEyesHudMedSec
+    - id: DefibrillatorCompact
 
 #Leader
 - type: startingGear
@@ -135,13 +135,13 @@
     back: ClothingBackpackSpecOpsFilled
     shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
-    eyes: ClothingEyesGlassesSecurity
+    eyes: ClothingEyesGlassesMeson
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTAdmiral
     suitstorage: OxygenTankFilled
     neck: ClothingNeckCloakCentcomBlack
     id: SpecOpsPDALeader
-    ears: ClothingHeadsetAltCentCom
+    ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltWebbingSpecOpsFilled
     pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
@@ -170,6 +170,13 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
+    - type: RandomHumanoidAppearance
+      randomizeName: false
 
 - type: job
   id: SpecOpsLeader
@@ -197,7 +204,7 @@
     outerClothing: ClothingOuterHardsuitERTCE
     suitstorage: OxygenTankFilled
     id: SpecOpsPDAEngineer
-    ears: ClothingHeadsetAltCentCom
+    ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltWebbingSpecOpsFilled
     pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
@@ -226,6 +233,13 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
+    - type: RandomHumanoidAppearance
+      randomizeName: false
 
 - type: job
   id: SpecOpsEngineer
@@ -249,11 +263,11 @@
     shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
     eyes: ClothingEyesGlassesSecurity
-    gloves: ClothingHandsGlovesNitrile
+    gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTMed
     suitstorage: OxygenTankFilled
     id: SpecOpsPDACorpsman
-    ears: ClothingHeadsetAltCentCom
+    ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltWebbingSpecOpsFilled
     pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
@@ -279,6 +293,7 @@
     - type: GhostRole
       makeSentient: true
       name: Парамедик Специальных Операций
+      job: SpecOpsCorpsman
     - type: GhostTakeoverAvailable
     - type: EventRole
       roleGroupKey: SpecOps
@@ -286,6 +301,13 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
+    - type: RandomHumanoidAppearance
+      randomizeName: false
 
 - type: job
   id: SpecOpsCorpsman
@@ -309,11 +331,11 @@
     shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
     eyes: ClothingEyesHudMedical
-    gloves: ClothingHandsGlovesNitrile
+    gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTCMO
     suitstorage: OxygenTankFilled
     id: SpecOpsPDACMO
-    ears: ClothingHeadsetAltCentCom
+    ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltWebbingSpecOpsFilled
     pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
@@ -339,9 +361,16 @@
     - type: EventRole
       roleGroupKey: SpecOps
       statusIcon: NTMedicalOfficer
+    - type: RandomHumanoidAppearance
+      randomizeName: false
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: SpecOpsCMO
@@ -364,12 +393,11 @@
     back: ClothingBackpackSpecOpsFilled
     shoes: ClothingShoesBootsMagBlinding
     mask: ClothingMaskGasERT
-    eyes: ClothingEyesHudMedical
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitERTSoldier
     suitstorage: OxygenTankFilled
     id: SpecOpsPDAFigher
-    ears: ClothingHeadsetAltCentCom
+    ears: ClothingHeadsetAltCentComm
     belt: ClothingBeltWebbingSpecOpsFilled
     pocket1: WeaponRevolverDeckardAP
     pocket2: EnergySaberNT
@@ -395,13 +423,21 @@
     - type: GhostRole
       makeSentient: true
       name: Рядовой Специальных Операций
+      job: SpecOpsFighter
     - type: GhostTakeoverAvailable
+    - type: RandomHumanoidAppearance
+      randomizeName: false
     - type: EventRole
       roleGroupKey: SpecOps
       statusIcon: NTCombatant
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: SpecOpsFighter

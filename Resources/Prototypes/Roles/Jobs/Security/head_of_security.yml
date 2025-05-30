@@ -19,7 +19,6 @@
   weight: 10
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"
-  requireAdminNotify: true
   supervisors: job-supervisors-captain
   canBeAntag: false
   radioBold: true
@@ -40,6 +39,7 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+      - type: DefibrillatorSkill #SS220 LimitationRevive
 
 - type: startingGear
   id: HoSGear

@@ -1,0 +1,90 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: fungus hydroponic
+  parent: BaseStructure
+  #parent: SmallConstructibleMachine#ToDo maybe create our own parrent
+  id: CultYoggFungusHydroponic
+  suffix: CultYogg
+  description: desc
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.1"
+        density: 190
+        hard: true
+        mask:
+        - MachineMask
+        layer:
+        - BulletImpassable
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi
+    layers:
+      - sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi
+        state: base
+  - type: Appearance
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: WiresPanel
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Transform
+  - type: PlantHolderVisuals
+  - type: Fungus
+  - type: FungusMachine
+    pack: CondimenttInventory
+  - type: CultYoggBuilding
+    eraseTime: 5
+    spawnOnErase:
+      - id: CableMVStack1Live
+        stackAmount: 5
+      - id: CableHVStack1Live
+        stackAmount: 5
+      - id: SheetTokl1
+        stackAmount: 15
+  - type: ActivatableUI
+    requiresComplex: false
+    blockSpectators: true
+    key: enum.FungusMachineUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.FungusMachineUiKey.Key:
+        type: FungusMachineBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      FungusMachine: !type:Container
+        showEnts: False
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
+
+- type: fungusMachineInventory
+  id: CondimenttInventory
+  startingInventory:
+    MiGomyceteSeeds: 0
+    CultStrangeFruitSeed: 0
+    NullificationShroomSeeds: 0
+    SidiousShroomSeeds: 0
+    LubroShroomSeeds: 0

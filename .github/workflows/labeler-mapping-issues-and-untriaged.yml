@@ -1,0 +1,44 @@
+name: "Mapping issues"
+
+on:
+  issues:
+    type: [opened]
+
+jobs:
+  add-labels-and-assigness:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check option and add label
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issueBody = context.payload.issue.body;
+            const options = {
+              'Frankenstein': {label: 'MI: Frankenstein', assignee: 'UrPrice' },
+              'Axioma': {label: 'MI: Axioma', assignee: 'NightmareStalker'},
+              'Donuts': {label: 'MI: Donuts', assignee: 'spo9k'},
+              'Eclipse': {label: 'MI: Eclipse', assignee: 'AliceValestray'},
+              'Astro': {label: 'MI: Astro', assignee: 'UrPrice'},
+              'Другое': {label: 'MI: Other', assignee: 'UrPrice'}
+            };
+            let selectedOption = null;
+            for (const option in options){
+              if (issueBody.includes(option)) {
+                selectedOption = options[option];
+                break;
+              }
+            }
+            if (selectedOption) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: [selectedOption.label]
+              }); // added label
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                assignees: [selectedOption.assignee]
+              }); // added assignee
+            }

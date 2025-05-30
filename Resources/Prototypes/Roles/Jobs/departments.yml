@@ -60,7 +60,7 @@
   name: department-Command
   sort: 1
   description: department-Command-description
-  color: "#052EED"
+  color: "#2a4ef6" #SS220 changed color
   roles:
   - Captain
 #  - IAA #SS220-Law Department
@@ -173,7 +173,7 @@
   weight: 10
   roles:
   - Boxer
-  - Reporter
+  #- Reporter #ss220 remove reporter from specific department
   - Zookeeper
 #  - Psychologist SS220-psychologist-chat-color-fix
   primary: false

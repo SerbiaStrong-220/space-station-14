@@ -2,20 +2,31 @@ using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.UserInterface;
 using Content.Shared.Database;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Robust.Shared.Player;
 using Robust.Shared.Audio.Systems;
 using static Content.Shared.Paper.PaperComponent;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Content.Shared.SS220.Paper;
+using Content.Shared.SS220.Language.Systems;
+using Content.Shared.SS220.OrigamiBook;
+using Content.Shared.Verbs;
+using Robust.Shared.Network;
 
 namespace Content.Shared.Paper;
 
 public sealed class PaperSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
@@ -23,9 +34,20 @@ public sealed class PaperSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedDocumentHelperSystem _documentHelper = default!;
+    [Dependency] private readonly SharedLanguageSystem _languageSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!; //ss220 add origami arts
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //ss220 add origami arts
+    [Dependency] private readonly INetManager _net = default!; //ss220 add origami arts
 
-    //SS220 Add auto form
-    [Dependency] private readonly PaperAutoFormSystem _paperAutoFormSystem = default!;
+    private static readonly ProtoId<TagPrototype> WriteIgnoreStampsTag = "WriteIgnoreStamps";
+    private static readonly ProtoId<TagPrototype> WriteTag = "Write";
+
+    //ss220 add origami arts start
+    private const string PrototypeAirPlane = "PaperAirplane";
+    //ss220 add origami arts end
+
+    private EntityQuery<PaperComponent> _paperQuery;
 
     public override void Initialize()
     {
@@ -38,7 +60,16 @@ public sealed class PaperSystem : EntitySystem
         SubscribeLocalEvent<PaperComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<PaperComponent, PaperInputTextMessage>(OnInputTextMessage);
 
+        SubscribeLocalEvent<RandomPaperContentComponent, MapInitEvent>(OnRandomPaperContentMapInit);
+
         SubscribeLocalEvent<ActivateOnPaperOpenedComponent, PaperWriteEvent>(OnPaperWrite);
+
+        //ss220 add origami arts start
+        SubscribeLocalEvent<PaperComponent, GetVerbsEvent<AlternativeVerb>>(OnVerb);
+        SubscribeLocalEvent<PaperComponent, TransformPaperToAirplaneDoAfter>(OnTransformPaper);
+        //ss220 add origami arts end
+
+        _paperQuery = GetEntityQuery<PaperComponent>();
     }
 
     private void OnMapInit(Entity<PaperComponent> entity, ref MapInitEvent args)
@@ -68,11 +99,6 @@ public sealed class PaperSystem : EntitySystem
     {
         entity.Comp.Mode = PaperAction.Read;
         UpdateUserInterface(entity);
-
-        //SS220 Add auto form begin
-        entity.Comp.Writer = null;
-        Dirty(entity.Owner, entity.Comp);
-        //SS220 Add auto form end
     }
 
     private void OnExamined(Entity<PaperComponent> entity, ref ExaminedEvent args)
@@ -109,28 +135,42 @@ public sealed class PaperSystem : EntitySystem
     private void OnInteractUsing(Entity<PaperComponent> entity, ref InteractUsingEvent args)
     {
         // only allow editing if there are no stamps or when using a cyberpen
-        var editable = entity.Comp.StampedBy.Count == 0 || _tagSystem.HasTag(args.Used, "WriteIgnoreStamps") && entity.Comp.Writable; //SS220-upstream-merge
-        if (_tagSystem.HasTag(args.Used, "Write") && editable)
+        var editable = entity.Comp.StampedBy.Count == 0 || _tagSystem.HasTag(args.Used, WriteIgnoreStampsTag);
+        if (_tagSystem.HasTag(args.Used, WriteTag))
         {
-            if (entity.Comp.EditingDisabled)
+            if (editable)
             {
-                var paperEditingDisabledMessage = Loc.GetString("paper-tamper-proof-modified-message");
-                _popupSystem.PopupEntity(paperEditingDisabledMessage, entity, args.User);
+                if (entity.Comp.EditingDisabled)
+                {
+                    var paperEditingDisabledMessage = Loc.GetString("paper-tamper-proof-modified-message");
+                    _popupSystem.PopupEntity(paperEditingDisabledMessage, entity, args.User);
 
-                args.Handled = true;
-                return;
+                    args.Handled = true;
+                    return;
+                }
+
+                var ev = new PaperWriteAttemptEvent(entity.Owner);
+                RaiseLocalEvent(args.User, ref ev);
+                if (ev.Cancelled)
+                {
+                    if (ev.FailReason is not null)
+                    {
+                        var fileWriteMessage = Loc.GetString(ev.FailReason);
+                        _popupSystem.PopupClient(fileWriteMessage, entity.Owner, args.User);
+                    }
+
+                    args.Handled = true;
+                    return;
+                }
+
+                var writeEvent = new PaperWriteEvent(args.User, entity);
+                RaiseLocalEvent(args.Used, ref writeEvent);
+
+                entity.Comp.Mode = PaperAction.Write;
+                _uiSystem.OpenUi(entity.Owner, PaperUiKey.Key, args.User);
+                UpdateUserInterface(entity);
+                _documentHelper.UpdateUserInterface(entity, args.User); // SS220 Document Helper
             }
-            var writeEvent = new PaperWriteEvent(entity, args.User);
-            RaiseLocalEvent(args.Used, ref writeEvent);
-
-            entity.Comp.Mode = PaperAction.Write;
-            _uiSystem.OpenUi(entity.Owner, PaperUiKey.Key, args.User);
-            UpdateUserInterface(entity);
-
-            //SS220 Add auto form begin
-            entity.Comp.Writer = args.User;
-            Dirty(entity.Owner, entity.Comp);
-            //SS220 Add auto form end
 
             args.Handled = true;
             return;
@@ -154,11 +194,6 @@ public sealed class PaperSystem : EntitySystem
             _audio.PlayPredicted(stampComp.Sound, entity, args.User);
 
             UpdateUserInterface(entity);
-
-            //SS220 Add auto form begin
-            entity.Comp.Writer = null;
-            Dirty(entity.Owner, entity.Comp);
-            //SS220 Add auto form end
         }
     }
 
@@ -173,12 +208,19 @@ public sealed class PaperSystem : EntitySystem
 
     private void OnInputTextMessage(Entity<PaperComponent> entity, ref PaperInputTextMessage args)
     {
+        var ev = new PaperWriteAttemptEvent(entity.Owner);
+        RaiseLocalEvent(args.Actor, ref ev);
+        if (ev.Cancelled)
+            return;
+
         if (args.Text.Length <= entity.Comp.ContentSize)
         {
-            SetContent(entity, args.Text);
+            SetContent(entity, args.Text, args.Actor /* SS220 languages */);
+
+            var paperStatus = string.IsNullOrWhiteSpace(args.Text) ? PaperStatus.Blank : PaperStatus.Written;
 
             if (TryComp<AppearanceComponent>(entity, out var appearance))
-                _appearance.SetData(entity, PaperVisuals.Status, PaperStatus.Written, appearance);
+                _appearance.SetData(entity, PaperVisuals.Status, paperStatus, appearance);
 
             if (TryComp(entity, out MetaDataComponent? meta))
                 _metaSystem.SetEntityDescription(entity, "", meta);
@@ -192,11 +234,30 @@ public sealed class PaperSystem : EntitySystem
 
         entity.Comp.Mode = PaperAction.Read;
         UpdateUserInterface(entity);
+    }
 
-        //SS220 Add auto form begin
-        entity.Comp.Writer = null;
-        Dirty(entity.Owner, entity.Comp);
-        //SS220 Add auto form end
+    private void OnRandomPaperContentMapInit(Entity<RandomPaperContentComponent> ent, ref MapInitEvent args)
+    {
+        if (!_paperQuery.TryComp(ent, out var paperComp))
+        {
+            Log.Warning($"{EntityManager.ToPrettyString(ent)} has a {nameof(RandomPaperContentComponent)} but no {nameof(PaperComponent)}!");
+            RemCompDeferred(ent, ent.Comp);
+            return;
+        }
+        var dataset = _protoMan.Index(ent.Comp.Dataset);
+        // Intentionally not using the Pick overload that directly takes a LocalizedDataset,
+        // because we want to get multiple attributes from the same pick.
+        var pick = _random.Pick(dataset.Values);
+
+        // Name
+        _metaSystem.SetEntityName(ent, Loc.GetString(pick));
+        // Description
+        _metaSystem.SetEntityDescription(ent, Loc.GetString($"{pick}.desc"));
+        // Content
+        SetContent((ent, paperComp), Loc.GetString($"{pick}.content"));
+
+        // Our work here is done
+        RemCompDeferred(ent, ent.Comp);
     }
 
     private void OnPaperWrite(Entity<ActivateOnPaperOpenedComponent> entity, ref PaperWriteEvent args)
@@ -224,10 +285,37 @@ public sealed class PaperSystem : EntitySystem
         return true;
     }
 
-    public void SetContent(Entity<PaperComponent> entity, string content)
+    /// <summary>
+    ///     Copy any stamp information from one piece of paper to another.
+    /// </summary>
+    public void CopyStamps(Entity<PaperComponent?> source, Entity<PaperComponent?> target)
     {
-        var formed = _paperAutoFormSystem.ReplaceKeyWords(entity, content); //SS220 Add auto form begin
-        entity.Comp.Content = formed + '\n';  //SS220 Add auto form end
+        if (!Resolve(source, ref source.Comp) || !Resolve(target, ref target.Comp))
+            return;
+
+        target.Comp.StampedBy = new List<StampDisplayInfo>(source.Comp.StampedBy);
+        target.Comp.StampState = source.Comp.StampState;
+        Dirty(target);
+
+        if (TryComp<AppearanceComponent>(target, out var appearance))
+        {
+            // delete any stamps if the stamp state is null
+            _appearance.SetData(target, PaperVisuals.Stamp, target.Comp.StampState ?? "", appearance);
+        }
+    }
+
+
+    public void SetContent(Entity<PaperComponent> entity, string content, EntityUid? writer = null /* SS220 languages */)
+    {
+        // SS220 Add document tags begin
+        var ev = new PaperSetContentAttemptEvent(entity, content, writer);
+        RaiseLocalEvent(entity, ref ev, true);
+        if (ev.Cancelled)
+            return;
+
+        content = ev.TransformedContent;
+        entity.Comp.Content = content;
+        // SS220 Add document tags end
         Dirty(entity);
         UpdateUserInterface(entity);
 
@@ -245,6 +333,50 @@ public sealed class PaperSystem : EntitySystem
     {
         _uiSystem.SetUiState(entity.Owner, PaperUiKey.Key, new PaperBoundUserInterfaceState(entity.Comp.Content, entity.Comp.StampedBy, entity.Comp.Mode));
     }
+
+    //ss220 add origami arts start
+    private void OnVerb(Entity<PaperComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!TryComp<OrigamiUserComponent>(args.User, out var origamiUserComponent)
+            || HasComp<OrigamiWeaponComponent>(ent.Owner))
+            return;
+
+        var user = args.User;
+
+        var altVerb = new AlternativeVerb
+        {
+            Text = Loc.GetString("origami-transform-from-paper"),
+            Act = () =>
+            {
+                var doAfterArgs = new DoAfterArgs(EntityManager,
+                    user,
+                    origamiUserComponent.DelayToTransform,
+                    new TransformPaperToAirplaneDoAfter(),
+                    ent.Owner)
+                {
+                    BlockDuplicate = true,
+                };
+
+                _doAfter.TryStartDoAfter(doAfterArgs);
+            },
+            Priority = 0,
+        };
+
+        args.Verbs.Add(altVerb);
+    }
+
+    private void OnTransformPaper(Entity<PaperComponent> ent, ref TransformPaperToAirplaneDoAfter args)
+    {
+        if (args.Cancelled || _net.IsClient)
+            return;
+
+        var airPlane = Spawn(PrototypeAirPlane, Transform(ent.Owner).Coordinates);
+
+        QueueDel(ent.Owner);
+
+        _hands.TryPickupAnyHand(args.User, airPlane);
+    }
+    //ss220 add origami arts end
 }
 
 /// <summary>
@@ -252,3 +384,21 @@ public sealed class PaperSystem : EntitySystem
 /// </summary>
 [ByRefEvent]
 public record struct PaperWriteEvent(EntityUid User, EntityUid Paper);
+
+/// <summary>
+/// Cancellable event for attempting to write on a piece of paper.
+/// </summary>
+/// <param name="paper">The paper that the writing will take place on.</param>
+[ByRefEvent]
+public record struct PaperWriteAttemptEvent(EntityUid Paper, string? FailReason = null, bool Cancelled = false);
+
+// SS220 languages begin
+[ByRefEvent]
+public sealed class PaperSetContentAttemptEvent(Entity<PaperComponent> paper, string newContent, EntityUid? writer = null) : CancellableEntityEventArgs()
+{
+    public readonly Entity<PaperComponent> Paper = paper;
+    public readonly EntityUid? Writer = writer;
+    public readonly string NewContent = newContent;
+    public string TransformedContent = newContent;
+}
+// SS220 languages end

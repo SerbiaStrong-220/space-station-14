@@ -1,7 +1,15 @@
 <paper:PaperWindow xmlns="https://spacestation14.io"
     xmlns:paper="clr-namespace:Content.Client.Paper.UI"
+    xmlns:paper220="clr-namespace:Content.Client.SS220.Paper.UI"
     MouseFilter="Stop" Resizable="True" MinSize="150 150"
     SetSize="510 660"> <!-- Provide some reasonable sizes by default. Can be changed by the component -->
+
+    <!-- SS220 Document helper begin -->
+    <BoxContainer Orientation="Horizontal">
+        <Control HorizontalExpand="True" />
+        <paper220:DocumentHelperWindow Name="DocumentHelper" Access="Public" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0 80"/>
+    </BoxContainer>
+    <!-- SS220 Document helper end -->
 
     <BoxContainer Name="ContentsRoot" Orientation="Vertical">
         <PanelContainer StyleClasses="AngleRect" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="6">
@@ -22,6 +30,7 @@
                             </PanelContainer>
                             <Label Name="FillStatus" StyleClasses="LabelSecondaryColor"/>
                         </BoxContainer>
+                        <TextureButton Name="FooterImage" HorizontalAlignment="Center" VerticalAlignment="Top" MouseFilter="Ignore"/>
                     </BoxContainer>
                     <paper:StampCollection Name="StampDisplay" VerticalAlignment="Bottom" Margin="6"/>
 

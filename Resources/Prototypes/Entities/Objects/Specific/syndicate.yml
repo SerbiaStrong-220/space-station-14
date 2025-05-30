@@ -26,10 +26,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-Telecrystal-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-Telecrystal-cargo
       jobRequired:
         - SalvageSpecialist
@@ -115,6 +114,20 @@
   suffix: 40 TC, NukeOps
   components:
   - type: Store
+    categories:
+#SS220 NukeOpsUplink begin
+    - UplinkWeaponry
+    - UplinkAmmo
+    - UplinkExplosives
+    - UplinkChemicals
+    - UplinkDeception
+    - UplinkDisruption
+    - UplinkImplants
+    - UplinkChemicalImplants # SS220 - chemical-implants
+    - UplinkAllies
+    - UplinkWearables
+    - UplinkPointless
+#SS220 NukeOpsUplink end
     balance:
       Telecrystal: 40
   - type: Tag
@@ -127,6 +140,20 @@
   suffix: 40 TC, LoneOps # SS220 Lone-Ops-Uplink
   components:
   - type: Store
+    categories:
+#SS220 NukeOpsUplink begin
+    - UplinkWeaponry
+    - UplinkAmmo
+    - UplinkExplosives
+    - UplinkChemicals
+    - UplinkDeception
+    - UplinkDisruption
+    - UplinkImplants
+    - UplinkChemicalImplants # SS220 - chemical-implants
+    - UplinkAllies
+    - UplinkWearables
+    - UplinkPointless
+#SS220 NukeOpsUplink end
     balance:
       Telecrystal: 40 # SS220 Lone-Ops-Uplink
   - type: Tag
@@ -141,3 +168,8 @@
   - type: Store
     balance:
       Telecrystal: 99999
+  # SS220-debug-uplink-fix-begin
+  - type: Tag
+    tags:
+    - DebugUplink
+  # SS220-debug-uplink-fix-end

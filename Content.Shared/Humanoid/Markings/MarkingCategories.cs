@@ -13,8 +13,11 @@ namespace Content.Shared.Humanoid.Markings
         HeadSide,
         Snout,
         Chest,
+        UndergarmentTop,
+        UndergarmentBottom,
         Arms,
         Legs,
+        Foots, // SS220 Add foots marking
         Tail,
         Overlay
     }
@@ -33,14 +36,16 @@ namespace Content.Shared.Humanoid.Markings
                 HumanoidVisualLayers.HeadSide => MarkingCategories.HeadSide,
                 HumanoidVisualLayers.Snout => MarkingCategories.Snout,
                 HumanoidVisualLayers.Chest => MarkingCategories.Chest,
+                HumanoidVisualLayers.UndergarmentTop => MarkingCategories.UndergarmentTop,
+                HumanoidVisualLayers.UndergarmentBottom => MarkingCategories.UndergarmentBottom,
                 HumanoidVisualLayers.RArm => MarkingCategories.Arms,
                 HumanoidVisualLayers.LArm => MarkingCategories.Arms,
                 HumanoidVisualLayers.RHand => MarkingCategories.Arms,
                 HumanoidVisualLayers.LHand => MarkingCategories.Arms,
                 HumanoidVisualLayers.LLeg => MarkingCategories.Legs,
                 HumanoidVisualLayers.RLeg => MarkingCategories.Legs,
-                HumanoidVisualLayers.LFoot => MarkingCategories.Legs,
-                HumanoidVisualLayers.RFoot => MarkingCategories.Legs,
+                HumanoidVisualLayers.LFoot => MarkingCategories.Foots, // SS220 Add foots marking
+                HumanoidVisualLayers.RFoot => MarkingCategories.Foots, // SS220 Add foots marking
                 HumanoidVisualLayers.Tail => MarkingCategories.Tail,
                 _ => MarkingCategories.Overlay
             };

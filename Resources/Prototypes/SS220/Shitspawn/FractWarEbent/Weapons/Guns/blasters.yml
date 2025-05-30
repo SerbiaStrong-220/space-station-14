@@ -1,49 +1,34 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   id: WeaponBlaster
-  parent: BaseWeaponPowerCell
+  parent: BaseWeaponBlaster
   name: бластерная энерговинтовка
   description: Штурмовая модификация старой надежной винтовки. Режим оглушения был заменен на автоматический режим стрельбы. Наслаждайтесь.
   suffix: Ebent, Shitspawn, FractWar
   components:
-  - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/ert_blaster.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-5
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: mag-unshaded-5
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: Clothing
-    sprite: SS220/Objects/Weapons/Guns/ert_blaster.rsi
-    quickEquip: false
-    slots:
-    - Back
-    - suitStorage
-  - type: MagazineVisuals
-    magState: mag
-    steps: 6
-    zeroVisible: true
-  - type: Wieldable
-  - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -16
   - type: Gun
-    fireRate: 7
-    minAngle: 21
-    maxAngle: 32
-    angleIncrease: 3
-    angleDecay: 16
+    fireRate: 6.5
     selectedMode: FullAuto
     availableModes:
-    - SemiAuto
-    - FullAuto
-    soundGunshot:
-      path: /Audio/SS220/Weapons/Guns/Gunshots/blaster_nt.ogg
+      - SemiAuto
+      - FullAuto
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletBlasterPulse
+    fireCost: 48
+  - type: BatteryWeaponFireModes
+    fireModes:
+      - proto: BulletBlasterPulse
+        name: firemode-name-enhanced
+        fireCost: 48
+        gunModifiers:
+          fireRate: 6.5
+      - proto: BulletBlaster
+        name: firemode-name-blaster
+        fireCost: 32
   - type: ItemSlots
     slots:
-      gun_magazine:
+      cell_slot:
         name: Magazine
         startingItem: BlasterPowerCell
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
@@ -51,3 +36,4 @@
         whitelist:
           tags:
             - BlasterPowerCell
+

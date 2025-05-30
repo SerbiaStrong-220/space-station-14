@@ -10,7 +10,7 @@
     - MeteorSwarmScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -26,6 +26,7 @@
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -40,9 +41,11 @@
     - Traitor
     # - Revolutionary
     - Zombie
+    - Wizard
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -60,13 +63,14 @@
     - Traitor
     - Revolutionary
     - Zombie
+    - Wizard
     - BasicStationEventScheduler
     - KesslerSyndromeScheduler
     - MeteorSwarmMildScheduler
     - MeteorSwarmScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -82,6 +86,7 @@
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
 
 - type: gamePreset
@@ -92,9 +97,9 @@
   name: greenshift-title
   showInVote: false #4boring4vote
   description: greenshift-description
-  rules:
-  # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
-  - BasicRoundstartVariation
+  # rules: #SS220 NoTrashStation at GreenShift
+  #- SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls ReWork
+  #- BasicRoundstartVariation #SS220 NoTrashStation at GreenShift
 
 - type: gamePreset
   id: Secret
@@ -118,6 +123,7 @@
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
 
 - type: gamePreset
@@ -128,7 +134,7 @@
   showInVote: false #Admin Use
   description: secret-description
   rules:
-  # - SpaceTrafficControlFriendlyEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler
   - BasicRoundstartVariation
 
 # - type: gamePreset
@@ -151,12 +157,14 @@
   description: traitor-description
   showInVote: false
   rules:
-    - Traitor
-    - SubGamemodesRule
-    - BasicStationEventScheduler
-    - MeteorSwarmScheduler
-    # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - BasicRoundstartVariation
+  - DummyNonAntagChance
+  - Traitor
+  - SubGamemodesRule
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - BasicRoundstartVariation
 
 - type: gamePreset
   id: Deathmatch
@@ -180,12 +188,15 @@
   showInVote: false
   rules:
     - Nukeops
+    - DummyNonAntagChance
     # - SubGamemodesRule #SS220 no-thief-on-nukie-round-fix
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
 
+# SS220 no rev begin
 # - type: gamePreset
 #   id: Revolutionary
 #   alias:
@@ -196,12 +207,31 @@
 #   description: rev-description
 #   showInVote: false
 #   rules:
-#     - Revolutionary
-#     - SubGamemodesRule
-#     - BasicStationEventScheduler
-#     - MeteorSwarmScheduler
-#     - SpaceTrafficControlEventScheduler
-#     - BasicRoundstartVariation
+#   - DummyNonAntagChance
+#   - Revolutionary
+#   - SubGamemodesRule
+#   - BasicStationEventScheduler
+#   - MeteorSwarmScheduler
+#   - SpaceTrafficControlEventScheduler
+#   - BasicRoundstartVariation
+# SS220 no rev end
+
+- type: gamePreset
+  id: Wizard
+  alias:
+  - wizard
+  name: wizard-title
+  description: wizard-description
+  showInVote: false
+  rules:
+  - Wizard
+  - DummyNonAntagChance
+  - SubGamemodesRuleNoWizard #No Dual Wizards at the start, midround is fine
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - BasicRoundstartVariation
 
 - type: gamePreset
   id: Zombie
@@ -219,6 +249,7 @@
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
 
 - type: gamePreset
@@ -235,4 +266,5 @@
   - BasicStationEventScheduler
   - KesslerSyndromeScheduler
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation

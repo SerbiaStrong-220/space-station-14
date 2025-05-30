@@ -7,6 +7,7 @@
     ClothingBackpackSatchel: 3
     ClothingBackpackSatchelLeather: 2
     ClothingRandomSpawner: 8
+    ClothingUniformRandomShorts: 4
     ClothingHeadHatBeret: 4
     ClothingHeadBandBlack: 2
     ClothingHeadBandBlue: 2
@@ -53,9 +54,12 @@
     ClothingUniformJumpskirtCasualPurple: 2
     ClothingUniformJumpsuitCasualRed: 2
     ClothingUniformJumpskirtCasualRed: 2
+    ClothingUniformJumpsuitCasualGreen: 2
+    ClothingUniformJumpskirtCasualGreen: 2
     # DO NOT ADD MORE, USE UNIFORM DYING
     ClothingShoesColorBlack: 8
     ClothingShoesColorBrown: 4
+    ClothingShoesColorDarkBrown: 2 #SS220-Brown Shoed
     ClothingShoesColorWhite: 3
     ClothingShoesColorBlue: 2
     ClothingShoesColorYellow: 2
@@ -76,6 +80,7 @@
     ClothingHeadHatCorpsoft: 2
     ClothingHeadFishCap: 2
     ClothingHeadRastaHat: 2
+    #ClothingHeadHatNewYearsCap: 5 #SS220 New years cap \ Убрать после нового года
     ClothingBeltStorageWaistbag: 3
     ClothingEyesGlasses: 6
     ClothingHandsGlovesColorBlack: 4
@@ -94,4 +99,10 @@
     ClothingMaskNeckGaiter: 2
     ClothingUniformJumpsuitTacticool: 1
     ClothingUniformJumpskirtTacticool: 1
+    ToyFigurinePassenger: 1
+    ToyFigurineGreytider: 1
+    ClothingBackpackSatchelSmugglerUnanchored: 1
+    ClothingHeadHatSolidHeadband: 2
   # DO NOT ADD MORE, USE UNIFORM DYING
+  emaggedInventory: # SS220 Scarlet Typhoon add for emag
+    ClothingOuterScarletTyphoon: 1 # SS220 Scarlet Typhoon add for emag

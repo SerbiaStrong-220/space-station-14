@@ -5,7 +5,6 @@ using Content.Server.Afk;
 using Content.Server.Afk.Events;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
-using Content.Server.Mind;
 using Content.Server.Preferences.Managers;
 using Content.Server.Station.Events;
 using Content.Shared.CCVar;
@@ -33,7 +32,6 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly IAfkManager _afk = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly MindSystem _minds = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -47,13 +45,12 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         base.Initialize();
 
         _tracking.CalcTrackers += CalcTrackers;
-        _adminManager.OnPermsChanged += AdminManager_OnPermsChanged;
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundEnd);
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
-        SubscribeLocalEvent<RoleAddedEvent>(OnRoleAdd);
-        SubscribeLocalEvent<RoleRemovedEvent>(OnRoleRemove);
+        SubscribeLocalEvent<RoleAddedEvent>(OnRoleEvent);
+        SubscribeLocalEvent<RoleRemovedEvent>(OnRoleEvent);
         SubscribeLocalEvent<AFKEvent>(OnAFK);
         SubscribeLocalEvent<UnAFKEvent>(OnUnAFK);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
@@ -62,12 +59,6 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         SubscribeLocalEvent<IsJobAllowedEvent>(OnIsJobAllowed);
         SubscribeLocalEvent<GetDisallowedJobsEvent>(OnGetDisallowedJobs);
         _adminManager.OnPermsChanged += AdminPermsChanged;
-    }
-
-    private void AdminManager_OnPermsChanged(Administration.AdminPermsChangedEventArgs obj)
-    {
-        if (_minds.TryGetSession(obj.Player.GetMind(), out var session))
-            _tracking.QueueRefreshTrackers(session);
     }
 
     public override void Shutdown()
@@ -142,15 +133,9 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         return GetTimedRoles(contentData.Mind.Value);
     }
 
-    private void OnRoleRemove(RoleRemovedEvent ev)
+    private void OnRoleEvent(RoleEvent ev)
     {
-        if (_minds.TryGetSession(ev.Mind, out var session))
-            _tracking.QueueRefreshTrackers(session);
-    }
-
-    private void OnRoleAdd(RoleAddedEvent ev)
-    {
-        if (_minds.TryGetSession(ev.Mind, out var session))
+        if (_playerManager.TryGetSessionById(ev.Mind.UserId, out var session))
             _tracking.QueueRefreshTrackers(session);
     }
 

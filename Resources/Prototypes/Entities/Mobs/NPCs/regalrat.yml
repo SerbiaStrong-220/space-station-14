@@ -8,7 +8,24 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.00
     baseSprintSpeed : 5.00
+#SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 languages tweaks end
   - type: InputMover
+    #SS220 RatKing tweaks and changes update start
+  - type: Puller
+    needsHands: false
+  - type: KeenHearing
+    visionRadius: 14
+    highSensitiveVisionRadius: 0
+    state: half
+  - type: RandomInsulation
+    list:
+      - 0.5
+    #SS220 RatKing tweaks and changes update end
   - type: MobMover
   - type: HTN
     rootTask:
@@ -46,7 +63,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Dead
+      250: Dead #SS220 Antag balance
   - type: MeleeWeapon
     altDisarm: false
     soundHit:
@@ -57,6 +74,7 @@
       types:
         Slash: 12
         Piercing: 8
+        Structural: 25
   - type: Body
     prototype: Rat
     requiredLegs: 1 # TODO: More than 1 leg
@@ -91,6 +109,11 @@
     name: ghost-role-information-rat-king-name
     description: ghost-role-information-rat-king-description
     rules: ghost-role-information-freeagent-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+      - !type:OverallPlaytimeRequirement
+        time: 72000 #SS220 ghostrole-times (20h overall) end
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -113,8 +136,9 @@
     price: 2500 # rat wealth
   - type: RandomMetadata
     nameSegments:
-    - RegalRatNameKingdom
-    - RegalRatNameTitle
+    - NamesRegalratKingdom
+    - NamesRegalratTitle
+    nameFormat: name-format-regal-rat
   - type: GuideHelp
     guides:
     - MinorAntagonists
@@ -206,7 +230,7 @@
       shader: unshaded
   - type: Bloodstream
     bloodMaxVolume: 40 #SS220 RatBlood fix
-
+  - type: Insulated #SS220 RatKing Tweaks and changes
   - type: SpriteMovement
     movementLayers:
       movement:
@@ -303,9 +327,16 @@
 - type: weightedRandomEntity
   id: RatKingLoot
   weights:
-    RandomSpawner100: 66 #garbage
-    FoodCheese: 28 #food
-    IngotGold1: 5 #loot
+  # SS220 RatKing tweaks and changes rummage weight changes start
+    RandomSpawner100: 40
+    FoodCheeseSlice: 40
+    FoodCheese: 15
+    FoodCakeCheese: 5
+  # Official weights
+    #RandomSpawner100: 66 #garbage
+    #FoodCheese: 28 #food
+    #IngotGold1: 5 #loot
+  # SS220 RatKing tweaks and changes rummage weight changes end
 
 - type: entity
   id: ActionRatKingRaiseArmy
@@ -315,7 +346,7 @@
   - type: InstantAction
     useDelay: 4
     icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220 resprited
       state: ratKingArmy
     event: !type:RatKingRaiseArmyActionEvent
 
@@ -327,7 +358,7 @@
   - type: InstantAction
     useDelay: 6
     icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220 resprited
       state: ratKingDomain
     event: !type:RatKingDomainActionEvent
 

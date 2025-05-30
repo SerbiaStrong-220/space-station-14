@@ -1,36 +1,95 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-
-  parent: ClothingBeltStorageBase
-  id: ClothingBeltWebbingSRT
-  name: пояс ГСН
-  description: Этот пояс позволяет хранить всё необходимое в удобном и быстродоступном месте, а материал из которого он выполнен, позволяет выглядеть ещё более стильно.
+  parent: ClothingBeltSecurity
+  id: ClothingBeltBlueShield
+  name: the Blue Shield belt
+  description: This belt allows you to store everything you need in a convenient and quickly accessible place, and the material from which it is made allows you to look even more stylish.
   components:
   - type: Sprite
-    sprite: Clothing/Belt/assault.rsi
+    sprite: SS220/Clothing/Belt/blueshield.rsi
   - type: Clothing
-    sprite: Clothing/Belt/assault.rsi
+    sprite: SS220/Clothing/Belt/blueshield.rsi
   - type: Storage
-    blacklist: # SS220 Fix #2009 begin
-      tags:
-        - HolofanProjector
-    # SS220 Fix #2009 end
+    maxItemSize: Normal
+    defaultStorageOrientation: Vertical
+    grid:
+    - 0,0,6,2
 
 - type: entity
-  parent: ClothingBeltWebbingSRT
-  id: ClothingBeltWebbingSRTFilled
-  suffix: Заполненный
+  parent: ClothingBeltBlueShield
+  id: ClothingBeltBlueShieldFilled
+  suffix: Filled
   components:
   - type: StorageFill
     contents:
+      - id: Handcuffs
+      - id: Handcuffs
+      - id: GrenadeFlashBang
+      - id: RadioHandheldSecurity
       - id: FlashlightSeclite
-      - id: CombatKnife
-      - id: Handcuffs
-      - id: Handcuffs
-      - id: GrenadeFlashBang
-      - id: GrenadeFlashBang
 
+- type: entity
+  parent: ClothingBeltStorageBase
+  id: ClothingBeltWebbingBlueShield
+  name: the Blue Shield RPS
+  description: Universal unloading vest with straps and belt. It can accommodate anything... anything of a small size.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/blueshield_webbing.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/blueshield_webbing.rsi
+  - type: Storage
+    grid:
+    - 0,1,0,2
+    - 1,1,1,1
+    - 2,2,2,3
+    - 3,0,3,1
+    - 4,2,4,3
+    - 5,0,5,1
+    - 6,2,6,3
+    - 7,0,7,1
+    - 8,2,8,3
+    - 9,1,9,1
+    - 10,1,10,2
+  - type: ItemSlots
+    slots:
+      item:
+        name: clothing-boots-sidearm
+        whitelist:
+          tags:
+            - Sidearm
+            - Medkit
+          components:
+            - Stunbaton
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        showEnts: False
+        occludes: True
+        ents: []
+      item: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+
+- type: entity
+  parent: ClothingBeltWebbingBlueShield
+  id: ClothingBeltWebbingBlueShieldFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: Handcuffs
+      - id: FlashlightSeclite
+      - id: Handcuffs
+      - id: GrenadeFlashBang
+      - id: GrenadeFlashBang
+      - id: RadioHandheldSecurity
+  - type: ContainerFill
+    containers:
+     item:
+      - Stunbaton
 
 - type: entity
   parent: ClothingBeltSheath
@@ -166,9 +225,9 @@
   suffix: Filled, For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/druid_belt.rsi
+    sprite: SS220/Clothing/Belt/hydro_druid.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/druid_belt.rsi
+    sprite: SS220/Clothing/Belt/hydro_druid.rsi
   - type: Storage
     whitelist:
       tags:
@@ -220,7 +279,7 @@
     - id: HydroponicsToolMiniHoe
     - id: HydroponicsToolSpade
     - id: HydroponicsToolClippers
-    - id: RobustHarvestChemistryBottle
+    - id: ChemistryBottleRobustHarvest
 
 #chief 220
 
@@ -232,9 +291,9 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Belt/chef_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Belt/chef_white.rsi
   - type: Storage
     whitelist:
       tags:
@@ -271,9 +330,9 @@
   description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Belt/chef_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_white.rsi
+    sprite: SS220/Clothing/Belt/chef_white.rsi
 
 - type: entity
   parent: ClothingBeltChefApronBase
@@ -282,9 +341,9 @@
   description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_green.rsi
+    sprite: SS220/Clothing/Belt/chef_green.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_green.rsi
+    sprite: SS220/Clothing/Belt/chef_green.rsi
 
 - type: entity
   parent: ClothingBeltChefApronBase
@@ -293,9 +352,9 @@
   description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_black.rsi
+    sprite: SS220/Clothing/Belt/chef_black.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_black.rsi
+    sprite: SS220/Clothing/Belt/chef_black.rsi
 
 - type: entity
   parent: ClothingBeltChefApronBase
@@ -304,9 +363,9 @@
   description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_red.rsi
+    sprite: SS220/Clothing/Belt/chef_red.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_red.rsi
+    sprite: SS220/Clothing/Belt/chef_red.rsi
 
 - type: entity
   parent: ClothingBeltChefApronBase
@@ -316,9 +375,9 @@
   suffix: За время в игре, Сеньор
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Belt/Chef/chef_nt.rsi
+    sprite: SS220/Clothing/Belt/chef_nt.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Belt/Chef/chef_nt.rsi
+    sprite: SS220/Clothing/Belt/chef_nt.rsi
 
 - type: entity
   id: ClothingBeltChefApronWhiteFilled
@@ -401,7 +460,7 @@
         - LightReplacer
         - SmokeOnTrigger
     maxItemSize: Large
-  - type: Appearance  
+  - type: Appearance
 
 - type: entity
   id: ClothingBeltJanitorJRFilled
@@ -416,3 +475,29 @@
         amount: 2
       - id: FlashlightLantern
       - id: LightReplacer
+
+- type: entity
+  parent: ClothingBeltMedical
+  id: ClothingBeltMedicalInterdyne
+  name: the interdyne paramedic's RPS
+  description: A third-generation shoulder belt system designed for civilian paramedics. Unlike its military counterpart, issued to field orderlies, it is lighter to wear. In narrow circles, he has the slang nickname "Kangaroo" for two large pockets in the belly area.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/paramedic_interdyne.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/paramedic_interdyne.rsi
+
+- type: entity
+  id: ClothingBeltMedicalInterdyneFilled
+  parent: ClothingBeltMedicalInterdyne
+  suffix: Paramedic,Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: Brutepack
+    - id: Ointment
+    - id: Bloodpack
+    - id: Gauze
+    - id: EmergencyMedipen
+      amount: 3
