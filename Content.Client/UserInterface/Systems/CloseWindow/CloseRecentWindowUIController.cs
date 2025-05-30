@@ -1,5 +1,6 @@
 using Content.Client.Gameplay;
 using Content.Client.Info;
+using Content.Client.SS220.UserInterface;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -44,6 +45,13 @@ public sealed class CloseRecentWindowUIController : UIController
             recentlyInteractedWindows.RemoveAt(i); // Should always be removed as either the reference is stale or we're closing it
             if (window.IsOpen)
             {
+                //ss220 add pin for ui start
+                if (PinUISystem.GetPinned(window))
+                {
+                    return;
+                }
+                //ss220 add pin for ui end
+
                 window.Close();
                 return;
             }

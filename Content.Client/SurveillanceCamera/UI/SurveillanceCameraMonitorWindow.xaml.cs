@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Resources;
+using Content.Client.SS220.UserInterface;
 using Content.Client.Viewport;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.SurveillanceCamera;
@@ -103,6 +104,16 @@ public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow
         // SS220 Camera-Map end
     }
 
+    //ss220 add pin for ui start
+    protected override void Opened()
+    {
+        base.Opened();
+
+        var pinnedButton = PinUISystem.CreateButton(this, CloseButton);
+
+        pinnedButton.OnPressed += _ => PinUISystem.SetPinned(this, pinnedButton.Pressed);
+    }
+    //ss220 add pin for ui end
 
     // The UI class should get the eye from the entity, and then
     // pass it here so that the UI can change its view.
