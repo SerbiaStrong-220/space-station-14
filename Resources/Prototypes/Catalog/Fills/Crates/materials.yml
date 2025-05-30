@@ -53,19 +53,6 @@
     contents:
       - id: MaterialWoodPlank
 
-# SS220-wood-and-plants-in-cargo-begin
-- type: entity
-  id: CrateMaterialCargoWood
-  parent: CrateGenericSteel
-  name: wood crate
-  description: Bunch of wood planks.
-  components:
-  - type: StorageFill
-    contents:
-      - id: MaterialWoodPlank
-        amount: 3
-# SS220-wood-and-plants-in-cargo-end
-
 - type: entity
   id: CrateMaterialBrass
   parent: CrateGenericSteel
