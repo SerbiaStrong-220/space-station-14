@@ -1,0 +1,38 @@
+- type: entity
+  parent: BaseStorageItem
+  id: ClownCase
+  name: clown king's suitcase
+  description: It's not a funny joke.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/clowncase.rsi
+    state: icon
+  - type: Item
+    size: Ginormous
+  - type: Storage
+    grid:
+    - 0,0,9,9
+  - type: StorageFill
+    contents:
+      - id: SugarHammer
+      - id: CrossbowKingClown
+      - id: CLPacific
+        amount: 3
+      - id: CLClusterFlash
+        amount: 3
+      - id: CLClusterBomb
+        amount: 3
+      - id: CLSnapPop
+        amount: 3
+      - id: CLClusterClusterBomb
+        amount: 3
+      - id: CLClusterHole
+      - id: CLClusterClusterHole
+      - id: CLClusterClusterClusterHole
+      - id: FoodMeatRotten
+      - id: CluwneHorn
+      - id: ClothingNeckGoldAutismPin
+      - id: ClothingNeckPlasticSpecialMedal
+  - type: Tag
+    tags:
+    - Briefcase
