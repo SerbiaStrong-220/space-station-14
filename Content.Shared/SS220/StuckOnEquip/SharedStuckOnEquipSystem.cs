@@ -76,13 +76,13 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
         // trying to unequip all item's with component
         foreach (var item in _inventory.GetHandOrInventoryEntities(target))
         {
-            if (!TryComp<StuckOnEquipComponent>(item, out var stuckOnEquipComponent))
+            if (!TryComp<StuckOnEquipComponent>(item, out var stuckOnEquipComp))
                 continue;
 
-            if (!stuckOnEquipComponent.ShouldDropOnDeath)
+            if (!stuckOnEquipComp.ShouldDropOnDeath)
                 continue;
 
-            RemComp<UnremoveableComponent>(item);
+            UnstuckItem((item, stuckOnEquipComp));
             _transform.DropNextTo(item, target);
             removedItems.Add(item);
         }
