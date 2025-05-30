@@ -1,0 +1,137 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Base
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterJacketsBase
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi  
+  # - type: ItemSlots
+  #   slots:
+  #     item:
+  #       name: Надето
+  #       whitelist:
+  #         tags:
+  #         - InShirt
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  # - type: ItemMapper
+  #   mapLayers:
+  #     belt-gold:
+  #       whitelist:
+  #         components:
+  #         - ClothingBeltGoldBuckle
+  #   sprite: SS220/Clothing/Uniforms/Shirt/shirt_overlay.rsi
+  - type: Tag
+    tags:
+    - InShirt
+    - WhitelistChameleon
+
+# Jackets (Пиджаки)
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingUniformJacketsDark
+  name: dark jackets
+  description: A dark jacket for formal occasions or shadowy corridors.  
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi  
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingUniformJacketsBlue
+  name: blue jackets
+  description: A crisp blue jacket, reminiscent of clear skies.  
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/blue.rsi
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingUniformJacketsBlueindigo
+  name: blueindigo jackets
+  description: A deep indigo jacket with a hint of twilight mystery.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/blueindigo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/blueindigo.rsi
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingUniformJacketsGrey
+  name: grey jackets
+  description: A neutral grey jacket — practicality over flair.  
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/grey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/grey.rsi
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingUniformJacketsPink
+  name: pink jackets
+  description: A playful pink jacket for those who dare to stand out. 
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/pink.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/pink.rsi
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingUniformJacketsCrimson
+  name: crimson jackets
+  description: Crimson like a warning. This jacket marks those who lead with fire, not words.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/officialred.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/officialred.rsi
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingUniformJacketsAshen
+  name: ashen jackets
+  description: Пепельно-серый пиджак, чья ткань шепчет о холодных приговорах и нерушимых цепях.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/officialgrey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/officialgrey.rsi
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingUniformJacketsDarkcarp
+  name: carp leather jacket
+  description: Crafted from carp leather, its scales shimmer faintly — a trophy from the abyss.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/darkcarp.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/darkcarp.rsi
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingUniformJacketsGold
+  name: gold jacket
+  description: Позолоченный и дерзкий. Для избранных Шлёпой — где богатство и оружие, и доспех.
+  suffix: Sponsor, Floppa
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/gold.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/gold.rsi
