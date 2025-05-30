@@ -4,7 +4,6 @@ using Robust.Client.UserInterface.XAML;
 
 namespace Content.Client.SS220.UserInterface.Controls;
 
-[GenerateTypedNameReferences]
 [Virtual]
 public partial class PinnableDefaultWindow : DefaultWindow
 {
