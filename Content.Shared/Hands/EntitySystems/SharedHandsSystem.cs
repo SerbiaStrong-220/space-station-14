@@ -273,6 +273,8 @@ public abstract partial class SharedHandsSystem
         if (hand.HeldEntity != null)
             RaiseLocalEvent(hand.HeldEntity.Value, new HandSelectedEvent(uid));
 
+        RaiseLocalEvent(uid, new DidSwitchHandEvent(handComp.ActiveHand.Name));//SS220 Cult_update2
+
         Dirty(uid, handComp);
         return true;
     }

@@ -413,6 +413,16 @@ public sealed class RCDSystem : EntitySystem
                 return false;
             }
 
+            //SS220 RCD_indestructable_fix start
+            if (tile.Tile.GetContentTileDefinition().Indestructible)
+            {
+                if (popMsgs)
+                    _popup.PopupClient(Loc.GetString("rcd-component-tile-indestructible-message"), uid, user);
+
+                return false;
+            }
+            //SS220 RCD_indestructable_fix end
+
             // Ensure that all construction rules shared between tiles and object are checked before exiting here
             return true;
         }
