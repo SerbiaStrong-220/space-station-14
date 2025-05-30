@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client.SS220.UserInterface.Controls;
 
 [Virtual]
-public partial class PinnableDefaultWindow : DefaultWindow
+public sealed partial class PinnableDefaultWindow : DefaultWindow
 {
     public PinnableDefaultWindow()
     {
