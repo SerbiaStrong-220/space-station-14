@@ -143,3 +143,15 @@
     event: !type:MiGoSacrificeEvent
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "summon"}
+
+- type: entity
+  id: ActionMiGoTeleport
+  name: Teleport
+  description: While in the astral plane, you can teleport to the selected cultist.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    useDelay: 600
+    event: !type:MiGoTeleportEvent
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "summon"}

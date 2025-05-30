@@ -5,33 +5,34 @@ using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
+using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mind;
+using Content.Shared.Mindshield.Components;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
+using Content.Shared.Revolutionary.Components;
+using Content.Shared.Roles;
 using Content.Shared.SS220.CultYogg.Altar;
+using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.Sacraficials;
+using Content.Shared.StatusEffect;
+using Content.Shared.Verbs;
+using Content.Shared.Zombies;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Timing;
-using System.Linq;
-using Content.Shared.SS220.CultYogg.Buildings;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Content.Shared.Mindshield.Components;
-using Content.Shared.Zombies;
-using Content.Shared.Revolutionary.Components;
-using Content.Shared.Humanoid;
-using Content.Shared.Mind;
-using Content.Shared.Roles;
-using Content.Shared.Verbs;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.Mobs.Components;
-using Robust.Shared.Audio;
-using Content.Shared.Movement.Pulling.Events;
+using System.Linq;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
@@ -66,6 +67,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<MiGoComponent, MiGoErectEvent>(MiGoErect);
         SubscribeLocalEvent<MiGoComponent, MiGoSacrificeEvent>(MiGoSacrifice);
         SubscribeLocalEvent<MiGoComponent, MiGoAstralEvent>(MiGoAstral);
+        SubscribeLocalEvent<MiGoComponent, MiGoTeleportEvent>(OnMiGoTeleport);
 
         //astral DoAfterEvents
         SubscribeLocalEvent<MiGoComponent, AfterMaterialize>(OnAfterMaterialize);
@@ -88,6 +90,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         _actions.AddAction(uid, ref uid.Comp.MiGoAstralActionEntity, uid.Comp.MiGoAstralAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoErectActionEntity, uid.Comp.MiGoErectAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoSacrificeActionEntity, uid.Comp.MiGoSacrificeAction);
+        _actions.AddAction(uid, ref uid.Comp.MiGoTeleportActionEntity, uid.Comp.MiGoTeleportAction);
     }
 
     private void OnBoundUIOpened(Entity<MiGoComponent> entity, ref BoundUIOpenedEvent args)
@@ -509,6 +512,16 @@ public abstract class SharedMiGoSystem : EntitySystem
         }
 
         return true;
+    }
+    #endregion
+
+    #region Teleport
+    private void OnMiGoTeleport(Entity<MiGoComponent> ent, ref MiGoTeleportEvent args)
+    {
+        if (args.Handled || !TryComp<ActorComponent>(ent, out var actor))
+            return;
+
+        _userInterfaceSystem.TryToggleUi(ent.Owner, MiGoUiKey.Teleport, actor.PlayerSession);
     }
     #endregion
 }

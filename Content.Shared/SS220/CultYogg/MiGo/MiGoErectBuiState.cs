@@ -17,7 +17,7 @@ public sealed class MiGoErectBuiState : BoundUserInterfaceState
 public enum MiGoUiKey : byte
 {
     Erect,
-    Plant
+    Teleport
 }
 
 [Serializable, NetSerializable]
