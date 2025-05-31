@@ -8,7 +8,7 @@
       sprite: SS220/Objects/Weapons/Melee/sugar_hammer.rsi
       state: icon
     - type: Item
-      size: Small
+      size: Normal
       sprite: SS220/Objects/Weapons/Melee/sugar_hammer.rsi
     - type: Appearance
     - type: DisarmMalus

@@ -46,9 +46,12 @@
   - type: Sprite
     sprite: Objects/Weapons/Bombs/c4gift.rsi
     state: icon
-  - type: ClusterGrenade
+  - type: ScatteringGrenade
+    whitelist:
+      tags:
+      - GrenadeFlashBang
     fillPrototype: GrenadeFlashBang
-    maxGrenadesCount: 10
+    capacity: 10
     distance: 9
     velocity: 5
   - type: ContainerContainer
@@ -83,9 +86,12 @@
   name: knurla
   description: There's going to be a bombastic prank!
   components:
-  - type: ClusterGrenade
+  - type: ScatteringGrenade
+    whitelist:
+      tags:
+      - SyndieTrickyBomb
     fillPrototype: SyndieTrickyBomb
-    maxGrenadesCount: 20
+    capacity: 20
     distance: 15
     velocity: 7
 
@@ -95,9 +101,12 @@
   name: oi
   description: Wow.
   components:
-  - type: ClusterGrenade
+  - type: ScatteringGrenade
+    whitelist:
+      tags:
+      - CLClusterBomb
     fillPrototype: CLClusterBomb
-    maxGrenadesCount: 5
+    capacity: 5
     distance: 2
     velocity: 10
 
@@ -107,9 +116,12 @@
   name: officer's hole
   description: Does it delay or attract...?
   components:
-  - type: ClusterGrenade
+  - type: ScatteringGrenade
+    whitelist:
+      tags:
+      - WhiteholeGrenade
     fillPrototype: WhiteholeGrenade
-    maxGrenadesCount: 6
+    capacity: 6
     distance: 5
     velocity: 10
 
@@ -120,12 +132,15 @@
   name: clustered cluster hole
   description: AS MUCH AS POSSIBLE!!!
   components:
-  - type: ClusterGrenade
+  - type: ScatteringGrenade
+    whitelist:
+      tags:
+      - CLClusterHole
     fillPrototype: CLClusterHole
-    maxGrenadesCount: 2
+    capacity: 2
     distance: 5
     velocity: 20
-  
+
 - type: entity
   parent: CLClusterHole
   id: CLClusterClusterClusterHole
@@ -133,9 +148,12 @@
   name: clustered clustered cluster hole
   description: It's not funny anymore...
   components:
-  - type: ClusterGrenade
+  - type: ScatteringGrenade
+    whitelist:
+      tags:
+      - CLClusterClusterHole
     fillPrototype: CLClusterClusterHole
-    maxGrenadesCount: 2
+    capacity: 2
     distance: 100
     velocity: 100
 
@@ -145,8 +163,11 @@
   name: gap
   description: Bang!
   components:
-  - type: ClusterGrenade
+  - type: ScatteringGrenade
+    whitelist:
+      tags:
+      - SnapPop
     fillPrototype: SnapPop
-    maxGrenadesCount: 20
+    capacity: 20
     distance: 8
     velocity: 8

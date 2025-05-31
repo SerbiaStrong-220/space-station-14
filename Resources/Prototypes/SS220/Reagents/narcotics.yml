@@ -41,7 +41,8 @@
         showInChat: true
         force: true
         probability: 0.08
-
+        
+- type: reagent
   id: NeoNicotinoid
   name: reagent-name-neonicotinoid
   group: Narcotics
