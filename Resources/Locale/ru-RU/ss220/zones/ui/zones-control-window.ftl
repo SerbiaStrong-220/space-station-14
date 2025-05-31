@@ -19,4 +19,5 @@ zone-state-box-hex-color-label = Цвет
 zone-state-box-add-box-button = Добавить
 zone-state-box-cut-box-button = Вырезать
 zone-state-box-show-changes-button = Показать изменения
-
+zone-state-box-attach-to-grid-check-box = Привязка к сетке
+zone-state-box-cut-space-check-box = Вырезать космос

@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Maps;
 using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
@@ -52,7 +53,8 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         string? protoId = null,
         string? name = null,
         Color? color = null,
-        bool attachToGrid = false)
+        bool attachToGrid = false,
+        bool cropToParentSize = false)
     {
         EntityUid? container = null;
         var vectors = boxCoordinates.Select(e =>
@@ -72,7 +74,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (container == null)
             return null;
 
-        return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid);
+        return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cropToParentSize);
     }
 
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>
@@ -81,7 +83,8 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         string? protoId = null,
         string? name = null,
         Color? color = null,
-        bool attachToGrid = false)
+        bool attachToGrid = false,
+        bool cropToParentSize = false)
     {
         EntityUid? container = null;
         var vectors = boxCoordinates.Select(e =>
@@ -104,7 +107,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (container == null)
             return null;
 
-        return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid);
+        return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cropToParentSize);
     }
 
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>
@@ -114,10 +117,11 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         string? protoId = null,
         string? name = null,
         Color? color = null,
-        bool attachToGrid = false)
+        bool attachToGrid = false,
+        bool cropToParentSize = false)
     {
         var boxes = points.Select(p => Box2.FromTwoPoints(p.Item1, p.Item2));
-        return CreateZone(container, boxes, protoId, name, color, attachToGrid);
+        return CreateZone(container, boxes, protoId, name, color, attachToGrid, cropToParentSize);
     }
 
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>
@@ -127,7 +131,8 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         string? protoId = null,
         string? name = null,
         Color? color = null,
-        bool attachToGrid = false)
+        bool attachToGrid = false,
+        bool cropToParentSize = false)
     {
         return CreateZone(new ZoneParamsState()
         {
@@ -136,7 +141,8 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             ProtoId = protoId ?? string.Empty,
             Name = name ?? string.Empty,
             Color = color ?? DefaultColor,
-            AttachToGrid = attachToGrid
+            AttachToGrid = attachToGrid,
+            CutSpace = cropToParentSize
         });
     }
 
@@ -156,23 +162,17 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (@params.Boxes.Count <= 0 || !@params.Container.IsValid())
             return null;
 
+        var container = GetEntity(@params.Container);
+        if (!IsValidContainer(container))
+            return null;
+
         if (string.IsNullOrEmpty(@params.Name))
             @params.Name = $"Zone {GetZonesCount() + 1}";
 
         if (string.IsNullOrEmpty(@params.ProtoId))
             @params.ProtoId = BaseZoneId;
 
-        var container = GetEntity(@params.Container);
-        if (@params.AttachToGrid)
-        {
-            var gridSize = 1f;
-            if (TryComp<MapGridComponent>(container, out var mapGrid))
-                gridSize = mapGrid.TileSize;
-
-            @params.Boxes = GetAttachedToGridBoxes(@params.Boxes, gridSize).ToList();
-        }
-        else
-            @params.Boxes = RecalculateZoneBoxes(@params.Boxes).ToList();
+        @params.RecalculateBoxes();
 
         var zone = Spawn(@params.ProtoId, Transform(container).Coordinates);
         _transform.AttachToGridOrMap(zone);

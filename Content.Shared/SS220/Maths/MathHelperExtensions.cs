@@ -7,6 +7,15 @@ namespace Content.Shared.SS220.Maths;
 
 public static partial class MathHelperExtensions
 {
+    public static IEnumerable<Box2> SubstructBox(IEnumerable<Box2> boxes, IEnumerable<Box2> cutters)
+    {
+        var result = boxes.AsEnumerable();
+        foreach (var cutter in cutters)
+            result = SubstructBox(result, cutter);
+
+        return result;
+    }
+
     /// <summary>
     /// Substracts the <paramref name="cutter"/> from the <paramref name="boxes"/> returning the remaining sections
     /// </summary>
@@ -242,6 +251,19 @@ public static partial class MathHelperExtensions
         return result;
     }
 
+    public static IEnumerable<Box2> GetIntersectsGridBoxes(IEnumerable<Box2> boxes, float gridSize = 1f, bool closedRegion = true)
+    {
+        var result = new HashSet<Box2>();
+        foreach (var box in boxes)
+        {
+            var gridBoxes = GetIntersectsGridBoxes(box, gridSize, closedRegion);
+            foreach (var gridBox in gridBoxes)
+                result.Add(gridBox);
+        }
+
+        return result;
+    }
+
     /// <summary>
     /// Returns an array of all boxes in the grid that the other <paramref name="box"/> intersects with
     /// </summary>
@@ -251,6 +273,23 @@ public static partial class MathHelperExtensions
         var endBoxX = (int)Math.Floor(box.Right / gridSize);
         var startBoxY = (int)Math.Floor(box.Bottom / gridSize);
         var endBoxY = (int)Math.Floor(box.Top / gridSize);
+
+        if (closedRegion)
+        {
+            if (IsInteger(box.Left))
+                startBoxX--;
+
+            if (IsInteger(box.Bottom))
+                startBoxY--;
+        }
+        else
+        {
+            if (IsInteger(box.Right))
+                endBoxX--;
+
+            if (IsInteger(box.Top))
+                endBoxY--;
+        }
 
         var result = new List<Box2>();
         for (var bx = startBoxX; bx <= endBoxX; bx++)
@@ -270,6 +309,11 @@ public static partial class MathHelperExtensions
         }
 
         return result;
+
+        bool IsInteger(float value)
+        {
+            return value == Math.Floor(value);
+        }
     }
 
     /// <summary>

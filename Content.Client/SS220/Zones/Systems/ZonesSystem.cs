@@ -116,13 +116,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             boxes += $"({box.Left} {box.Bottom} {box.Right} {box.Top})";
         }
 
-        string[] optionals = [
-            $"name={@params.Name}",
-            $"protoid={@params.ProtoId}",
-            $"color={@params.Color.ToHex()}",
-            $"attachtogrid={@params.AttachToGrid}",
-            ];
-        var optionalsStr = string.Join(' ', optionals);
+        var optionalsStr = string.Join(' ', @params.GetOptionalTags());
         _clientConsoleHost.ExecuteCommand($"zones:create {@params.Container} \"{boxes}\" {optionalsStr}");
     }
 }

@@ -22,6 +22,8 @@
                     <Label Text="{Loc zone-state-box-container-net-id-label}"/>
                     <LineEdit Name="ContainerNetIDLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
                 </BoxContainer>
+                <CheckBox Name="AttachToGridCheckbox" Text="{Loc zone-state-box-attach-to-grid-check-box}" LeftAlign="False" />
+                <CheckBox Name="CutSpaceCheckbox" Text="{Loc zone-state-box-cut-space-check-box}" LeftAlign="False" />
             </BoxContainer>
         </BoxContainer>
         <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin ="5 2">

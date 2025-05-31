@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Maps;
 using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Robust.Shared.Map;
@@ -288,26 +289,45 @@ public abstract partial class SharedZonesSystem : EntitySystem
         Dirty(zone, zone.Comp);
     }
 
-    public void RecalculateZoneBoxes(ref IEnumerable<Box2> boxes)
+    public static void RecalculateZoneBoxes(ref IEnumerable<Box2> boxes)
     {
         MathHelperExtensions.GetNonOverlappingBoxes(ref boxes);
         MathHelperExtensions.UnionInEqualSizedBoxes(ref boxes);
     }
 
-    public IEnumerable<Box2> RecalculateZoneBoxes(IEnumerable<Box2> boxes)
+    public static IEnumerable<Box2> RecalculateZoneBoxes(IEnumerable<Box2> boxes)
     {
         RecalculateZoneBoxes(ref boxes);
         return boxes;
     }
 
-    public IEnumerable<Box2> GetAttachedToGridBoxes(IEnumerable<Box2> boxes, float gridSize = 1f)
+    public IEnumerable<Box2> AttachToGrid(NetEntity container, IEnumerable<Box2> boxes)
     {
-        var attachedBoxes = new List<Box2>();
-        foreach (var box in boxes)
-            attachedBoxes.AddRange(MathHelperExtensions.GetIntersectsGridBoxes(box, gridSize));
+        return AttachToGrid(GetEntity(container), boxes);
+    }
 
-        attachedBoxes = MathHelperExtensions.GetNonOverlappingBoxes(attachedBoxes).ToList();
-        attachedBoxes = MathHelperExtensions.UnionInEqualSizedBoxes(attachedBoxes).ToList();
+    public IEnumerable<Box2> AttachToGrid(EntityUid container, IEnumerable<Box2> boxes)
+    {
+        if (TryComp<MapGridComponent>(container, out var mapGrid))
+            return GetAttachedToGridBoxes(boxes, mapGrid.TileSize);
+
+        return GetAttachedToGridBoxes(boxes);
+    }
+
+    public void AttachToGrid(NetEntity container, ref IEnumerable<Box2> boxes)
+    {
+        AttachToGrid(GetEntity(container), ref boxes);
+    }
+
+    public void AttachToGrid(EntityUid container, ref IEnumerable<Box2> boxes)
+    {
+        boxes = AttachToGrid(container, boxes);
+    }
+
+    public static IEnumerable<Box2> GetAttachedToGridBoxes(IEnumerable<Box2> boxes, float gridSize = 1f)
+    {
+        var attachedBoxes = MathHelperExtensions.GetIntersectsGridBoxes(boxes, gridSize, false);
+        RecalculateZoneBoxes(ref attachedBoxes);
         return attachedBoxes;
     }
 
@@ -358,6 +378,55 @@ public abstract partial class SharedZonesSystem : EntitySystem
         }
 
         return value != null;
+    }
+
+    public IEnumerable<Box2> CutSpace(NetEntity parent, IEnumerable<Box2> boxes)
+    {
+        return CutSpace(GetEntity(parent), boxes);
+    }
+
+    public IEnumerable<Box2> CutSpace(EntityUid parent, IEnumerable<Box2> boxes)
+    {
+        if (!TryComp<MapGridComponent>(parent, out var mapGrid))
+            return new List<Box2>();
+
+        return CutSpace((parent, mapGrid), boxes);
+    }
+
+    public IEnumerable<Box2> CutSpace(Entity<MapGridComponent> grid, IEnumerable<Box2> boxes)
+    {
+        var spaceBoxes = new List<Box2>();
+        var gridBoxes = MathHelperExtensions.GetIntersectsGridBoxes(boxes, grid.Comp.TileSize, false);
+        foreach (var gridBox in gridBoxes)
+        {
+            var coords = new EntityCoordinates(grid, gridBox.Center);
+            var tileRef = _map.GetTileRef(grid, coords);
+            if (tileRef.IsSpace())
+                spaceBoxes.Add(gridBox);
+        }
+
+        return MathHelperExtensions.SubstructBox(boxes, spaceBoxes);
+    }
+
+    public void CutSpace(NetEntity parent, ref IEnumerable<Box2> boxes)
+    {
+        CutSpace(GetEntity(parent), ref boxes);
+    }
+
+    public void CutSpace(EntityUid parent, ref IEnumerable<Box2> boxes)
+    {
+        if (!TryComp<MapGridComponent>(parent, out var mapGrid))
+        {
+            boxes = new List<Box2>();
+            return;
+        }
+
+        CutSpace((parent, mapGrid), ref boxes);
+    }
+
+    public void CutSpace(Entity<MapGridComponent> grid, ref IEnumerable<Box2> boxes)
+    {
+        boxes = CutSpace(grid, boxes);
     }
 
     public static IEnumerable<Box2> GetSortedBoxes(in IEnumerable<Box2> boxes)
@@ -431,6 +500,8 @@ public partial struct ZoneParamsState()
 
     public bool AttachToGrid = false;
 
+    public bool CutSpace = false;
+
     /// <summary>
     /// Boxes in local coordinates (attached to <see cref="Container"/>) that determine the size of the zone
     /// </summary>
@@ -470,6 +541,11 @@ public partial struct ZoneParamsState()
                     if (bool.TryParse(value, out var attach))
                         AttachToGrid = attach;
                     break;
+
+                case OptionalTags.CutSpace:
+                    if (bool.TryParse(value, out var crop))
+                        CutSpace = crop;
+                    break;
             }
         }
     }
@@ -479,7 +555,8 @@ public partial struct ZoneParamsState()
         Name,
         ProtoId,
         Color,
-        AttachToGrid
+        AttachToGrid,
+        CutSpace
     }
 
     public static bool operator ==(ZoneParamsState left, ZoneParamsState right)
@@ -525,5 +602,30 @@ public partial struct ZoneParamsState()
 
         _container = newContainer;
         return true;
+    }
+
+    public string[] GetOptionalTags()
+    {
+        return [
+            $"name={Name}",
+            $"protoid={ProtoId}",
+            $"color={Color.ToHex()}",
+            $"attachtogrid={AttachToGrid}",
+            $"cutspace={CutSpace}"
+            ];
+    }
+
+    public void RecalculateBoxes()
+    {
+        var result = Boxes.AsEnumerable();
+        var zoneSys = IoCManager.Resolve<IEntityManager>().System<SharedZonesSystem>();
+        if (CutSpace)
+            zoneSys.CutSpace(Container, ref result);
+
+        if (AttachToGrid)
+            zoneSys.AttachToGrid(Container, ref result);
+
+        SharedZonesSystem.RecalculateZoneBoxes(ref result);
+        Boxes = result.ToList();
     }
 }

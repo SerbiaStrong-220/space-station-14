@@ -112,6 +112,17 @@ public sealed partial class ZoneParamsPanel : PanelContainer
                 _zones.IsValidContainer(_entityManager.GetEntity(netEnt)))
                 ChangeCurrentParams((ref ZoneParamsState p) => p.Container = netEnt);
         };
+
+        AttachToGridCheckbox.OnPressed += _ => ChangeCurrentParams((ref ZoneParamsState s) =>
+        {
+            s.AttachToGrid = AttachToGridCheckbox.Pressed;
+            s.RecalculateBoxes();
+        });
+        CutSpaceCheckbox.OnPressed += _ => ChangeCurrentParams((ref ZoneParamsState s) =>
+        {
+            s.CutSpace = CutSpaceCheckbox.Pressed;
+            s.RecalculateBoxes();
+        });
     }
 
     protected override void ExitedTree()
@@ -133,6 +144,8 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         PrototypeIDLineEdit.Text = CurParams.ProtoId;
         HexColorLineEdit.Text = CurParams.Color.ToHex();
         ContainerNetIDLineEdit.Text = CurParams.Container.IsValid() ? CurParams.Container.ToString() : string.Empty;
+        AttachToGridCheckbox.Pressed = CurParams.AttachToGrid;
+        CutSpaceCheckbox.Pressed = CurParams.CutSpace;
 
         Box2ListContainer.RemoveAllChildren();
         for (var i = 0; i < CurParams.Boxes.Count; i++)
@@ -235,6 +248,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         }).ToList();
 
         newParams.Boxes = newBoxes;
+        newParams.RecalculateBoxes();
         CurParams = newParams;
     }
 
