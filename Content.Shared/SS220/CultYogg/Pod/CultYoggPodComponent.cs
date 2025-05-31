@@ -28,11 +28,11 @@ public sealed partial class CultYoggPodComponent : Component
     [DataField]
     public EntityWhitelist? CultistsWhitelist = new()
     {
-        Components = new[]
-        {
+        Components =
+        [
             "CultYogg",
             "MiGo"
-        }
+        ]
     };
 
     [DataField(required: true)]
