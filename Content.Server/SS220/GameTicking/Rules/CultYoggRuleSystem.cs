@@ -361,6 +361,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         telepathy.CanSend = true;//we are allowing it cause testing
         telepathy.TelepathyChannelPrototype = rule.Comp.TelepathyChannel;
 
+        //allows to hide the sedative sting
         var innerToggle = EnsureComp<InnerHandToggleableComponent>(uid);
         innerToggle.Whitelist = rule.Comp.WhitelistToggleable;
 
@@ -383,6 +384,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         {
             ProgressToStage(rule, nextStage);
         }
+
         DirtyEntity(uid);
     }
     #endregion
