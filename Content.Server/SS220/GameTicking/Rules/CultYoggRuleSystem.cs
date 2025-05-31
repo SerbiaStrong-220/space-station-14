@@ -37,6 +37,7 @@ using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.CultYogg.Sacraficials;
 using Content.Shared.SS220.InnerHandToggleable;
+using Content.Shared.SS220.RestrictedItem;
 using Content.Shared.SS220.Roles;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.SS220.Telepathy;
@@ -423,8 +424,11 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         _role.MindRemoveRole<CultYoggRoleComponent>(mindId);
 
         //Remove all corrupted items
-        var ev = new DropAllStuckOnEquipEvent(uid);
-        RaiseLocalEvent(uid, ref ev, true);
+        var stuckEv = new DropAllStuckOnEquipEvent(uid);
+        RaiseLocalEvent(uid, ref stuckEv, true);
+
+        var restrEv = new DropAllRestrictedEvent(uid);
+        RaiseLocalEvent(uid, ref restrEv, true);
 
         // Change the faction
         _npcFaction.RemoveFaction(uid, component.CultYoggFaction, false);

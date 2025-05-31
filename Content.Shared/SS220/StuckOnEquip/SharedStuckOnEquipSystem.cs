@@ -95,15 +95,9 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
 ///     Raised when we need to remove all StuckOnEquip objects
 /// </summary>
 [ByRefEvent, Serializable]
-public sealed class DropAllStuckOnEquipEvent : EntityEventArgs
+public sealed class DropAllStuckOnEquipEvent(EntityUid target, HashSet<EntityUid>? droppedItems = null) : EntityEventArgs
 {
-    public readonly EntityUid Target;
+    public readonly EntityUid Target = target;
 
-    public HashSet<EntityUid> DroppedItems = new();
-
-    public DropAllStuckOnEquipEvent(EntityUid target, HashSet<EntityUid>? droppedItems = null)
-    {
-        Target = target;
-        DroppedItems = droppedItems ?? new();
-    }
+    public HashSet<EntityUid> DroppedItems = droppedItems ?? [];
 }
