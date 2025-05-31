@@ -168,7 +168,9 @@ namespace Content.Server.Chemistry.EntitySystems
             if (storedContainer == null)
                 return;
 
-            _handsSystem.TryPickupAnyHand(message.Actor, storedContainer);
+            //ss220 fix eject w/o empty hands start
+            _handsSystem.PickupOrDrop(message.Actor, storedContainer);
+            //ss220 fix eject w/o empty hands end
         }
 
         private void OnClearContainerSolutionMessage(Entity<ReagentDispenserComponent> reagentDispenser, ref ReagentDispenserClearContainerSolutionMessage message)

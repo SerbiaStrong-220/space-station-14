@@ -211,12 +211,16 @@ public sealed class RadioSystem : EntitySystem
         // SS220 languages begin
         foreach (var languageEv in languageRadioReceiveEvents)
         {
-            RaiseLocalEvent(new RadioSpokeEvent(messageSource, languageEv.Key, languageEv.Value.Receivers.ToArray()));
+            //ss220 add filter tts for ghost start
+            RaiseLocalEvent(new RadioSpokeEvent(messageSource, languageEv.Key, channel, languageEv.Value.Receivers.ToArray()));
+            //ss220 add filter tts for ghost end
         }
         // SS220 languages end
 
         // Dispatch TTS radio speech event for every receiver
-        RaiseLocalEvent(new RadioSpokeEvent(messageSource, message, ev.Receivers.ToArray()));
+        //ss220 add filter tts for ghost start
+        RaiseLocalEvent(new RadioSpokeEvent(messageSource, message, channel, ev.Receivers.ToArray()));
+        //ss220 add filter tts for ghost end
 
         if (name != Name(messageSource))
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName}: {message}");
@@ -285,7 +289,9 @@ public sealed class RadioSystem : EntitySystem
         RaiseLocalEvent(senderUid, ev);
 
         if (ev.Name != null)
-            return ev.Name;
+        {
+            return $"\\[{Loc.GetString(ev.Name)}\\] ";
+        }
         else
             return string.Empty;
         // SS220 Borgs-Id-fix end

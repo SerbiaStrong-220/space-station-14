@@ -91,6 +91,12 @@
     radius: 6
     castShadows: false
     enabled: false
+  #ss220 add filter tts for ghost start
+  - type: UserInterface
+    interfaces:
+      enum.GhostHearingKey.Key:
+        type: GhostHearingBoundUserInterface
+  #ss220 add filter tts for ghost end
 
 # proto for player ghosts specifically
 - type: entity
@@ -159,3 +165,12 @@
       state: icon
     iconOn: Interface/Actions/ghostHearingToggled.png
     event: !type:ToggleGhostHearingActionEvent
+
+- type: entity
+  id: ActionToggleRadioChannelsUI
+  name: Toggle channel filter
+  components:
+  - type: InstantAction
+    icon: { sprite: SS220/Clothing/Neck/Misc/headphones.rsi, state: icon }
+    checkCanInteract: false
+    event: !type:ToggleGhostRadioChannels

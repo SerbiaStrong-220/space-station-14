@@ -53,9 +53,11 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-  - type: HitscanBatteryAmmoProvider
-    proto: RedLightLaser
-    fireCost: 50
+ # SS220 EDIT START - Remove HitscanBatteryAmmoProvider from base class to fix inheritance conflicts
+#  - type: HitscanBatteryAmmoProvider
+#    proto: RedLightLaser
+#    fireCost: 50
+# SS220 EDIT END
   - type: ItemSlots
     slots:
       cell_slot:
@@ -140,6 +142,11 @@
     magState: mag
     steps: 5
     zeroVisible: true
+ # SS220 EDIT START - Add HitscanBatteryAmmoProvider moved from base class
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLightLaser
+    fireCost: 50
+  # SS220 EDIT END    
 
 - type: entity
   name: retro laser blaster

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using Content.Server.Cargo.Systems;
@@ -15,6 +16,7 @@ using Content.Shared.Throwing;
 using Content.Shared.UserInterface;
 using Content.Shared.VendingMachines;
 using Content.Shared.Wall;
+using Robust.Server.Containers;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -29,6 +31,7 @@ namespace Content.Server.VendingMachines
         [Dependency] private readonly PricingSystem _pricing = default!;
         [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private readonly ContainerSystem _container = default!; // SS220 SS220 vend-dupe-fix
 
         private const float WallVendEjectDistanceFromWall = 1f;
 
@@ -237,18 +240,65 @@ namespace Content.Server.VendingMachines
                 spawnCoordinates = spawnCoordinates.Offset(offset);
             }
 
-            var ent = Spawn(vendComponent.NextItemToEject, spawnCoordinates);
+            // SS220 vend-dupe-fix start
+            EntityUid? ent = null;
+
+            // Сначала пытаемся получить существующий предмет и выбросить его, если таковой существует
+            if (TryGetInjectedItem((uid, vendComponent), vendComponent.NextItemToEject, out var existingItem, out var entry)
+                && TryEjectInjectedItem((uid, vendComponent), entry, existingItem.Value))
+                ent = existingItem.Value;
+
+            // var ent = Spawn(vendComponent.NextItemToEject, spawnCoordinates);
+            ent ??= Spawn(vendComponent.NextItemToEject, spawnCoordinates);
+            // SS220 vend-dupe-fix end
 
             if (vendComponent.ThrowNextItem)
             {
                 var range = vendComponent.NonLimitedEjectRange;
                 var direction = new Vector2(_random.NextFloat(-range, range), _random.NextFloat(-range, range));
-                _throwingSystem.TryThrow(ent, direction, vendComponent.NonLimitedEjectForce);
+                // SS220 vend-dupe-fix start
+                //_throwingSystem.TryThrow(ent, direction, vendComponent.NonLimitedEjectForce);
+                _throwingSystem.TryThrow(ent.Value, direction, vendComponent.NonLimitedEjectForce);
+                // SS220 vend-dupe-fix end
             }
 
             vendComponent.NextItemToEject = null;
             vendComponent.ThrowNextItem = false;
         }
+
+        // SS220 vend-dupe-fix start
+        public bool TryGetInjectedItem(Entity<VendingMachineComponent> vend, string protoId, [NotNullWhen(true)] out EntityUid? item, [NotNullWhen(true)] out VendingMachineInventoryEntry? entry)
+        {
+            item = null;
+            entry = null;
+
+            entry = GetAllInventory(vend, vend).ToList().Find(x => x.ID == protoId);
+            var ents = entry?.EntityUids;
+
+            if (ents == null || ents.Count == 0)
+                return false;
+
+            if (TryGetEntity(ents[0], out item) && entry is not null)
+                return true;
+
+            return false;
+        }
+
+        public bool TryEjectInjectedItem(Entity<VendingMachineComponent> vend, VendingMachineInventoryEntry entry, EntityUid item)
+        {
+            try
+            {
+                _container.RemoveEntity(vend, item);
+                entry.EntityUids.Remove(GetNetEntity(item));
+                Dirty(vend, vend.Comp);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        // SS220 vend-dupe-fix end
 
         public override void Update(float frameTime)
         {

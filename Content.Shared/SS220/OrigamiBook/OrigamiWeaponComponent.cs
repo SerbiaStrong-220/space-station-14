@@ -18,4 +18,12 @@ public sealed partial class OrigamiWeaponComponent : Component
 
     [DataField]
     public float ThrowSpeedIncrease;
+
+    [DataField]
+    public List<string> BlockerSlots = new()
+    {
+        "eyes",
+        "mask",
+        "head",
+    };
 }

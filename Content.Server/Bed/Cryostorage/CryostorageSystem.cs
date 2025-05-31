@@ -33,6 +33,9 @@ using Content.Shared.Roles; // SS220 Cryostorage ghost role fix
 using Robust.Shared.Prototypes; // SS220 Cryostorage ghost role fix
 using Content.Server.SS220.Bed.Cryostorage; // SS220 cryo department record
 using Content.Shared.Forensics.Components; //SS220 Cult_hotfix_4
+using Content.Shared.SS220.Containers; //SS220 cryo mobs fix
+using Content.Shared.Body.Systems; //SS220 cryo mobs fix
+
 
 namespace Content.Server.Bed.Cryostorage;
 
@@ -56,6 +59,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!; // SS220 Cryostorage ghost role fix
+    [Dependency] private readonly SharedContainerSystemExtensions _containerSystemExtensions = default!; //SS220 Cryo mobs fix
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -184,6 +188,8 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
         if (!TryComp<CryostorageComponent>(cryostorageEnt, out var cryostorageComponent))
             return;
+
+        _containerSystemExtensions.RemoveEntitiesFromAllContainers<MindContainerComponent>(ent.Owner, [SharedBodySystem.BodyRootContainerId]); //SS220-cryo-mobs-fix
 
         // if we have a session, we use that to add back in all the job slots the player had.
         if (userId != null)

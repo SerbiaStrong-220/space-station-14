@@ -1,13 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Hands;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs;
-using Content.Shared.Wieldable;
-using Robust.Shared.Timing;
+using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.StuckOnEquip;
 
@@ -15,15 +13,40 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<StuckOnEquipComponent, ContainerGettingRemovedAttemptEvent>(OnRemoveAttempt);
         SubscribeLocalEvent<StuckOnEquipComponent, GotEquippedEvent>(GotEquipped);
         SubscribeLocalEvent<StuckOnEquipComponent, GotEquippedHandEvent>(GotPickuped);
         SubscribeLocalEvent<MobStateChangedEvent>(OnDeath);
         SubscribeLocalEvent<DropAllStuckOnEquipEvent>(OnRemoveAll);
+    }
+    private void OnRemoveAttempt(Entity<StuckOnEquipComponent> ent, ref ContainerGettingRemovedAttemptEvent args)
+    {
+        if (!ent.Comp.IsStuck)
+            return;
+
+        args.Cancel();
+    }
+    private void GotPickuped(Entity<StuckOnEquipComponent> ent, ref GotEquippedHandEvent args)
+    {
+        if (!ent.Comp.InHandItem)
+            return;
+
+        ent.Comp.IsStuck = true;
+        Dirty(ent, ent.Comp);
+    }
+
+    private void GotEquipped(Entity<StuckOnEquipComponent> ent, ref GotEquippedEvent args)
+    {
+        if (args.SlotFlags == SlotFlags.POCKET)
+            return;
+
+        ent.Comp.IsStuck = true;
+        Dirty(ent, ent.Comp);
     }
 
     private void OnDeath(MobStateChangedEvent ev)
@@ -32,34 +55,16 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
             RemoveItems(ev.Target);
     }
 
+    public void UnstuckItem(Entity<StuckOnEquipComponent> ent)
+    {
+        ent.Comp.IsStuck = false;
+        Dirty(ent);
+    }
+
     private void OnRemoveAll(ref DropAllStuckOnEquipEvent ev)
     {
         var removedItems = RemoveItems(ev.Target);
         ev.DroppedItems.UnionWith(removedItems);
-    }
-
-    private void GotPickuped(Entity<StuckOnEquipComponent> entity, ref GotEquippedHandEvent args)
-    {
-        if (_gameTiming.ApplyingState)
-            return;
-
-        if (!entity.Comp.InHandItem)
-            return;
-
-        EnsureComp<UnremoveableComponent>(entity, out var comp);
-        comp.DeleteOnDrop = false;
-    }
-
-    private void GotEquipped(Entity<StuckOnEquipComponent> entity, ref GotEquippedEvent args)
-    {
-        if (_gameTiming.ApplyingState)
-            return;
-
-        if (args.SlotFlags == SlotFlags.POCKET)
-            return; // we don't want to make unremovable pocket item
-
-        EnsureComp<UnremoveableComponent>(entity, out var comp);
-        comp.DeleteOnDrop = false;
     }
 
     private HashSet<EntityUid> RemoveItems(EntityUid target)

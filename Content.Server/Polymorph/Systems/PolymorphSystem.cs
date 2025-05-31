@@ -47,6 +47,8 @@ public sealed partial class PolymorphSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
 
+    public const string EffectDesynchronizer = "EffectDesynchronizer"; //SS220-cryo-mobs-fix
+
     private const string RevertPolymorphId = "ActionRevertPolymorph";
 
     public override void Initialize()
@@ -194,6 +196,11 @@ public sealed partial class PolymorphSystem : EntitySystem
             polymorphableComponent.LastPolymorphEnd != null &&
             _gameTiming.CurTime < polymorphableComponent.LastPolymorphEnd + configuration.Cooldown)
             return null;
+
+        //SS220-cryo-mobs-fix begin
+        var beforeEvent = new BeforePolymorpedEvent(uid, configuration);
+        RaiseLocalEvent(uid, ref beforeEvent);
+        //SS220-cryo-mobs-fix end
 
         // mostly just for vehicles
         _buckle.TryUnbuckle(uid, uid, true);

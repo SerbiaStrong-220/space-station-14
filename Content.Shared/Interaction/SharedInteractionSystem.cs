@@ -21,6 +21,7 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Popups;
+using Content.Shared.SS220.GhostHearing;
 using Content.Shared.SS220.Interaction;
 using Content.Shared.Storage;
 using Content.Shared.Strip;
@@ -160,13 +161,15 @@ namespace Content.Shared.Interaction
             if (!_actionBlockerSystem.CanInteract(ev.Actor, ev.Target))
             {
                 // We permit ghosts to open uis unless explicitly blocked
-                if (ev.Message is not OpenBoundInterfaceMessage
+                //ss220 add filter tts for ghost start
+                if (!(ev.Message is OpenBoundInterfaceMessage || _ui.IsUiOpen(ent.Owner, GhostHearingKey.Key))
                     || !HasComp<GhostComponent>(ev.Actor)
                     || aUiComp?.BlockSpectators == true)
                 {
                     ev.Cancel();
                     return;
                 }
+                //ss220 add filter tts for ghost end
             }
 
             var range = _ui.GetUiRange(ev.Target, ev.UiKey);
@@ -196,19 +199,19 @@ namespace Content.Shared.Interaction
         //SS220 Unremoveable-No-Hands begin
         private bool IsHeld(EntityUid uid, UnremoveableComponent item)
         {
-            if (!item.LockToHands)
+            if (item.LockToHands)
+                return false;
+
+            if (!_containerSystem.TryGetContainingContainer((uid, null, null), out var container))
+                return false;
+
+            if (!TryComp<HandsComponent>(container.Owner, out var handsComp))
+                return false;
+
+            foreach (var hand in handsComp.Hands.Values)
             {
-                if (_containerSystem.TryGetContainingContainer(uid, out var container))
-                {
-                    if (TryComp<HandsComponent>(container.Owner, out var handsComp))
-                    {
-                        foreach (var hand in handsComp.Hands.Values)
-                        {
-                            if (hand.HeldEntity == uid)
-                                return true;
-                        }
-                    }
-                }
+                if (hand.HeldEntity == uid)
+                    return true;
             }
 
             return false;
@@ -249,8 +252,10 @@ namespace Content.Shared.Interaction
         /// </summary>
         private void OnUnequip(EntityUid uid, UnremoveableComponent item, GotUnequippedEvent args)
         {
+            //SS220 Unremoveable-No-Hands begin
             if (!item.LockToHands)
                 return;
+            //SS220 Unremoveable-No-Hands end
 
             if (!item.DeleteOnDrop)
                 RemCompDeferred<UnremoveableComponent>(uid);
@@ -260,8 +265,10 @@ namespace Content.Shared.Interaction
 
         private void OnUnequipHand(EntityUid uid, UnremoveableComponent item, GotUnequippedHandEvent args)
         {
+            //SS220 Unremoveable-No-Hands begin
             if (!item.LockToHands)
                 return;
+            //SS220 Unremoveable-No-Hands end
 
             if (!item.DeleteOnDrop)
                 RemCompDeferred<UnremoveableComponent>(uid);
@@ -271,8 +278,10 @@ namespace Content.Shared.Interaction
 
         private void OnDropped(EntityUid uid, UnremoveableComponent item, DroppedEvent args)
         {
+            //SS220 Unremoveable-No-Hands begin
             if (!item.LockToHands)
                 return;
+            //SS220 Unremoveable-No-Hands end
 
             if (!item.DeleteOnDrop)
                 RemCompDeferred<UnremoveableComponent>(uid);

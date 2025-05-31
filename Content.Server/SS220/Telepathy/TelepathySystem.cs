@@ -7,6 +7,7 @@ using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.SS220.TTS;
+using Content.Shared.SS220.UpdateChannels;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -36,6 +37,9 @@ public sealed class TelepathySystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<RoundStartedEvent>(OnRoundStart);
 
+        SubscribeLocalEvent<TelepathyComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<TelepathyComponent, ComponentRemove>(OnComponentRemove);
+
         SubscribeLocalEvent<TelepathyComponent, TelepathySendEvent>(OnTelepathySend);
         SubscribeLocalEvent<TelepathyAnnouncementSendEvent>(OnTelepathyAnnouncementSend);
     }
@@ -46,6 +50,18 @@ public sealed class TelepathySystem : EntitySystem
         {
             FreeUniqueTelepathyChannel(channel.Key);
         }
+    }
+
+    private void OnComponentInit(Entity<TelepathyComponent> ent, ref ComponentInit args)
+    {
+        if (TryComp<ActorComponent>(ent.Owner, out var actor))
+            RaiseNetworkEvent(new UpdateChannelEvent(), actor.PlayerSession);
+    }
+
+    private void OnComponentRemove(Entity<TelepathyComponent> ent, ref ComponentRemove args)
+    {
+        if (TryComp<ActorComponent>(ent.Owner, out var actor))
+            RaiseNetworkEvent(new UpdateChannelEvent(), actor.PlayerSession);
     }
 
     private void OnTelepathyAnnouncementSend(TelepathyAnnouncementSendEvent args)
