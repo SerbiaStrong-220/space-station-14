@@ -11,6 +11,8 @@ public sealed class ChangeCultYoggStageEvent : EntityEventArgs
 {
     public CultYoggStage Stage;
 
+    public bool Handled = false;
+
     public ChangeCultYoggStageEvent(CultYoggStage stage)
     {
         Stage = stage;
