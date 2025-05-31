@@ -67,11 +67,8 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
 
     private void OnPlayerDetached(Entity<CultYoggSacrificialComponent> ent, ref PlayerDetachedEvent args)
     {
-        if (!_replaceSacrSchedule.ContainsKey(ent))
-            _replaceSacrSchedule.Add(ent, _timing.CurTime + ent.Comp.ReplacementCooldown);
-
-        if (!_announceSchedule.ContainsKey(ent))
-            _announceSchedule.Add(ent, _timing.CurTime + ent.Comp.AnnounceReplacementCooldown);
+        _replaceSacrSchedule.TryAdd(ent, _timing.CurTime + ent.Comp.ReplacementCooldown);
+        _announceSchedule.TryAdd(ent, _timing.CurTime + ent.Comp.AnnounceReplacementCooldown);
     }
 
     private void OnCryoDeleted(Entity<CultYoggSacrificialComponent> ent, ref BeingCryoDeletedEvent args)
