@@ -37,7 +37,6 @@ public sealed partial class CultYoggPodComponent : Component
 
     [DataField(required: true)]
     public DamageSpecifier Heal = new();
-    };
 
     [DataField(required: true)]
     public float BloodlossModifier = -4;
