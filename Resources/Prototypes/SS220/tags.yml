@@ -330,8 +330,21 @@
   id: CultYoggInnerHandToggleable
 # ss220 Cult_update2 end
 
+# Теги для рубашек   Начало 
 - type: Tag
-  id: InShirt
+  id: InShirtBelt
+
+- type: Tag
+  id: InShirtTie
+
+- type: Tag
+  id: InShirtAccessory
+
+- type: Tag
+  id: InShirtVest
+
+- type: Tag
+  id: InShirtJacket
 
 - type: Tag
   id: BeltGoldBuckle
@@ -350,3 +363,67 @@
 
 - type: Tag
   id: BeltLeatherSilverBuckle
+
+- type: Tag
+  id: JacketsVestBlue
+
+- type: Tag
+  id: JacketsVestBlueindigo
+
+- type: Tag
+  id: JacketsVestDark
+
+- type: Tag
+  id: JacketsVestDarkcarp
+
+- type: Tag
+  id: JacketsVestGold
+
+- type: Tag
+  id: JacketsVestGrey
+
+- type: Tag
+  id: JacketsVestOfficialgrey
+
+- type: Tag
+  id: JacketsVestOfficialred
+
+- type: Tag
+  id: JacketsVestPink
+
+- type: Tag
+  id: JacketsVestVictorian
+
+- type: Tag
+  id: JacketsVestVictorianRed
+
+- type: Tag
+  id: JacketBlue
+
+- type: Tag
+  id: JacketBlueindigo
+
+- type: Tag
+  id: JacketDark
+
+- type: Tag
+  id: JacketDarkcarp
+
+- type: Tag
+  id: JacketGold
+
+- type: Tag
+  id: JacketGrey
+
+- type: Tag
+  id: JacketOfficialgrey
+
+- type: Tag
+  id: JacketOfficialred
+
+- type: Tag
+  id: JacketPink
+
+- type: Tag
+  id: JacketTrusted
+# Теги для рубашек   Конец

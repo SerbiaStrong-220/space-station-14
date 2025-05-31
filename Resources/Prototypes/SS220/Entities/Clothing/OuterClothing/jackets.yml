@@ -9,28 +9,17 @@
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi  
-  # - type: ItemSlots
-  #   slots:
-  #     item:
-  #       name: Надето
-  #       whitelist:
-  #         tags:
-  #         - InShirt
+    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi
+  - type: ItemSlots
+    slots:
+      accessory:
+        name: clothing-slot-accessory
+        whitelist:
+          tags:
+          - InShirtAccessory
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
-  # - type: ItemMapper
-  #   mapLayers:
-  #     belt-gold:
-  #       whitelist:
-  #         components:
-  #         - ClothingBeltGoldBuckle
-  #   sprite: SS220/Clothing/Uniforms/Shirt/shirt_overlay.rsi
-  - type: Tag
-    tags:
-    - InShirt
-    - WhitelistChameleon
 
 - type: entity
   parent: ClothingOuterBase
@@ -40,28 +29,17 @@
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/dark.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/dark.rsi  
-  # - type: ItemSlots
-  #   slots:
-  #     item:
-  #       name: Надето
-  #       whitelist:
-  #         tags:
-  #         - InShirt
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/dark.rsi
+  - type: ItemSlots
+    slots:
+      accessory:
+        name: clothing-slot-accessory
+        whitelist:
+          tags:
+          - InShirtAccessory
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
-  # - type: ItemMapper
-  #   mapLayers:
-  #     belt-gold:
-  #       whitelist:
-  #         components:
-  #         - ClothingBeltGoldBuckle
-  #   sprite: SS220/Clothing/Uniforms/Shirt/shirt_overlay.rsi
-  - type: Tag
-    tags:
-    - InShirt
-    - WhitelistChameleon
 
 # Jackets (Пиджаки)
 - type: entity
@@ -71,9 +49,14 @@
   description: A dark jacket for formal occasions or shadowy corridors.  
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi  
+    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketDark
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -85,6 +68,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/blue.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/blue.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketBlue
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -96,6 +84,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/blueindigo.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/blueindigo.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketBlueindigo
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -107,6 +100,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/grey.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/grey.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketGrey
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -119,6 +117,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/pink.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/pink.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketPink
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -131,6 +134,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/officialred.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/officialred.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketOfficialred
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -143,6 +151,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/officialgrey.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/officialgrey.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketOfficialgrey
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -155,6 +168,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/darkcarp.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/darkcarp.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketDarkcarp
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -167,6 +185,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/gold.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/gold.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketGold
 
 # Vests (Желеты под пиджак)
 - type: entity
@@ -179,6 +202,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/dark.rsi  
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/dark.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestDark
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -190,6 +218,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/blue.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/blue.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestBlue
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -201,6 +234,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/blueindigo.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/blueindigo.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestBlueindigo
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -212,6 +250,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/grey.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/grey.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestGrey
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -224,6 +267,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/pink.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/pink.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestPink
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -236,6 +284,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/officialred.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/officialred.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestOfficialred
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -248,6 +301,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/officialgrey.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/officialgrey.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestOfficialfrey
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -260,6 +318,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/victorian.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/victorian.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestVictorian
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -272,6 +335,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/victorian_red.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/victorian_red.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestVictorianRed
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -284,6 +352,11 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/darkcarp.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/darkcarp.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestDarkcarp
 
 - type: entity
   parent: ClothingOuterJacketsBase
@@ -296,3 +369,8 @@
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/gold.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Jackets/Vest/gold.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestGold

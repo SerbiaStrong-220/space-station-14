@@ -41,3 +41,164 @@
     - state: icon_tie
       map: ["foldedLayer"]
       visible: true
+
+- type: entity
+  parent: [ClothingUniformBase, BaseFoldable]
+  abstract: true
+  id: ClothingUniformShirtBase
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-tie-verb
+    foldVerbText: fold-untie-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: tie
+    foldedHeldPrefix: tie
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Shirt/white_dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Shirt/white_dark.rsi
+  - type: ItemSlots
+    slots:
+      belt:
+        name: clothing-slot-belt
+        whitelist:
+          tags:
+          - InShirtBelt
+      # tie:
+      #   name: clothing-slot-tie
+      #   whitelist:
+      # accessory:
+      #   name: clothing-slot-accessory
+      #   whitelist:
+      vest:
+        name: clothing-slot-vest
+        whitelist:
+          tags:
+          - InShirtVest
+      jacket:
+        name: clothing-slot-jacket
+        whitelist:
+          tags:
+          - InShirtJacket
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: ItemMapper
+    mapLayers:
+      # Ремни
+      belt-gold:
+        whitelist:
+          tags:
+          - BeltGoldBuckle
+      belt-silver:
+        whitelist:
+          tags:
+          - BeltSilverBuckle
+      carp-gold:
+        whitelist:
+          tags:
+          - BeltCarpLeatherGoldBuckle
+      carp-silver:
+        whitelist:
+          tags:
+          - BeltCarpLeatherSilverBuckle
+      leather-gold:
+        whitelist:
+          tags:
+          - BeltLeatherGoldBuckle
+      leather-silver:
+        whitelist:
+          tags:
+          - BeltLeatherSilverBuckle
+      # Аксессуары
+      # Галстуки
+      # Жилеты
+      vest-blue:
+        whitelist:
+          tags:
+          - JacketsVestBlue
+      vest-blueindigo:
+        whitelist:
+          tags:
+          - JacketsVestBlueindigo
+      vest-dark:
+        whitelist:
+          tags:
+          - JacketsVestDark
+      vest-darkcarp:
+        whitelist:
+          tags:
+          - JacketsVestDarkcarp
+      vest-gold:
+        whitelist:
+          tags:
+          - JacketsVestGold
+      vest-grey:
+        whitelist:
+          tags:
+          - JacketsVestGrey
+      vest-officialgrey:
+        whitelist:
+          tags:
+          - JacketsVestOfficialgrey
+      vest-officialred:
+        whitelist:
+          tags:
+          - JacketsVestOfficialred
+      vest-pink:
+        whitelist:
+          tags:
+          - JacketsVestPink
+      vest-victorian:
+        whitelist:
+          tags:
+          - JacketsVestVictorian
+      vest-victorian-red:
+        whitelist:
+          tags:
+          - JacketsVestVictorianRed
+      # Пиджаки
+      jacket-blue:
+        whitelist:
+          tags:
+          - JacketBlue
+      jacket-blueindigo:
+        whitelist:
+          tags:
+          - JacketBlueindigo
+      jacket-dark:
+        whitelist:
+          tags:
+          - JacketDark
+      jacket-darkcarp:
+        whitelist:
+          tags:
+          - JacketDarkcarp
+      jacket-gold:
+        whitelist:
+          tags:
+          - JacketGold
+      jacket-grey:
+        whitelist:
+          tags:
+          - JacketGrey
+      jacket-officialgrey:
+        whitelist:
+          tags:
+          - JacketOfficialgrey
+      jacket-officialred:
+        whitelist:
+          tags:
+          - JacketOfficialred
+      jacket-pink:
+        whitelist:
+          tags:
+          - JacketPink
+      jacket-trusted:
+        whitelist:
+          tags:
+          - JacketTrusted
+    sprite: SS220/Clothing/Uniforms/Shirt/shirt_overlay.rsi
+

@@ -8,46 +8,193 @@
   },
   "states": [
     {
-      "name": "carp-silver-equipped-INNERCLOTHING",
-      "directions": 4
-    },
-    {
-      "name": "carp-gold-equipped-INNERCLOTHING",
-      "directions": 4
+      "name": "belt-gold"
     },
     {
       "name": "belt-gold-equipped-INNERCLOTHING",
       "directions": 4
     },
     {
-      "name": "leather-gold-equipped-INNERCLOTHING",
-      "directions": 4
-    },
-    {
-      "name": "leather-silver-equipped-INNERCLOTHING",
-      "directions": 4
+      "name": "belt-silver"
     },
     {
       "name": "belt-silver-equipped-INNERCLOTHING",
       "directions": 4
     },
     {
-      "name": "carp-silver"
-    },
-    {
       "name": "carp-gold"
     },
     {
-      "name": "belt-gold"
+      "name": "carp-gold-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "carp-silver"
+    },
+    {
+      "name": "carp-silver-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-blue"
+    },
+    {
+      "name": "jacket-blue-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-blueindigo"
+    },
+    {
+      "name": "jacket-blueindigo-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-dark"
+    },
+    {
+      "name": "jacket-darkcarp"
+    },
+    {
+      "name": "jacket-darkcarp-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-dark-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-gold"
+    },
+    {
+      "name": "jacket-gold-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-grey"
+    },
+    {
+      "name": "jacket-grey-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-officialgrey"
+    },
+    {
+      "name": "jacket-officialgrey-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-officialred"
+    },
+    {
+      "name": "jacket-officialred-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-pink"
+    },
+    {
+      "name": "jacket-pink-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-trusted"
+    },
+    {
+      "name": "jacket-trusted-equipped-INNERCLOTHING",
+      "directions": 4
     },
     {
       "name": "leather-gold"
     },
     {
+      "name": "leather-gold-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
       "name": "leather-silver"
     },
     {
-      "name": "belt-silver"
+      "name": "leather-silver-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "vest-blue"
+    },
+    {
+      "name": "vest-blue-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "vest-blueindigo"
+    },
+    {
+      "name": "vest-blueindigo-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "vest-dark"
+    },
+    {
+      "name": "vest-darkcarp"
+    },
+    {
+      "name": "vest-darkcarp-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "vest-dark-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "vest-gold"
+    },
+    {
+      "name": "vest-gold-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "vest-grey"
+    },
+    {
+      "name": "vest-grey-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "vest-officialgrey"
+    },
+    {
+      "name": "vest-officialgrey-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "vest-officialred"
+    },
+    {
+      "name": "vest-officialred-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "vest-pink"
+    },
+    {
+      "name": "vest-pink-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "vest-victorian"
+    },
+    {
+      "name": "vest-victorian-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "vest-victorian-red"
+    },
+    {
+      "name": "vest-victorian-red-equipped-INNERCLOTHING",
+      "directions": 4
     }
   ]
 }
