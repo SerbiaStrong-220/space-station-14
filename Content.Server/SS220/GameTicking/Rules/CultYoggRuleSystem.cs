@@ -332,10 +332,10 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     #region Cultists making
     private void AfterEntitySelected(Entity<CultYoggRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
-        MakeCultist(args.EntityUid, ent);
+        MakeCultist(args.EntityUid, ent, true);
     }
 
-    public void MakeCultist(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = true)
+    public void MakeCultist(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false)
     {
         //Grab the mind if it wasnt provided
         if (!_mind.TryGetMind(uid, out var mindId, out var mindComp))
