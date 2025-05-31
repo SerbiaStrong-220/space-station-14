@@ -36,9 +36,7 @@ public sealed partial class CultYoggPodComponent : Component
     };
 
     [DataField(required: true)]
-    public DamageSpecifier Heal = new DamageSpecifier
-    {
-        DamageDict = new()
+    public DamageSpecifier Heal = new();
     };
 
     [DataField(required: true)]
