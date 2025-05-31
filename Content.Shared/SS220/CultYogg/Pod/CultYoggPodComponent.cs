@@ -16,7 +16,7 @@ public sealed partial class CultYoggPodComponent : Component
     /// <summary>
     /// Time between each healing incident
     /// </summary>
-    [DataField]
+    [DataField(required: true)]
     public TimeSpan HealingFreq = TimeSpan.FromSeconds(1);
 
     [DataField]
@@ -35,28 +35,13 @@ public sealed partial class CultYoggPodComponent : Component
         }
     };
 
-    [DataField]
-    public DamageSpecifier Heal = new DamageSpecifier // god forgive me for hardcoding values
+    [DataField(required: true)]
+    public DamageSpecifier Heal = new DamageSpecifier
     {
         DamageDict = new()
-        {
-            { "Slash", -6 },
-            { "Blunt", -6 },
-            { "Piercing", -6},
-            { "Heat", -4},
-            { "Cold", -4},
-            { "Shock", -4},
-            { "Asphyxiation", -2.5},
-            { "Bloodloss", -2.5 },
-            { "Radiation", -1 },
-            { "Сerebral", -50 },
-            { "Сellular", -10 },
-            { "Caustic", -1 },
-            { "Poison", -1 }
-        }
     };
 
-    [DataField]
+    [DataField(required: true)]
     public float BloodlossModifier = -4;
 
     /// <summary>
