@@ -1,9 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.SS220.GameTicking.Rules;
 using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Objectives.Systems;
 using Content.Shared.SS220.CultYogg.Sacraficials;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Content.Server.SS220.Bed.Cryostorage;
@@ -15,16 +15,9 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
-
     //dictionary of sacraficials uids and time when they left body by gibbing/ghosting/leaving anything
     private Dictionary<EntityUid, TimeSpan> _replaceSacrSchedule = [];
     private Dictionary<EntityUid, TimeSpan> _announceSchedule = [];
-
-    //Count down the moment when sacraficial will be raplaced
-    private TimeSpan _beforeReplacementCooldown = TimeSpan.FromSeconds(900);
-
-    //Count down the moment when cultists will get an anounce about replacement
-    private TimeSpan _announceReplacementCooldown = TimeSpan.FromSeconds(300);
 
     public override void Initialize()
     {
