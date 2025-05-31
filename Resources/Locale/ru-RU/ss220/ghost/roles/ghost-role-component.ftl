@@ -26,6 +26,3 @@ ghost-role-information-giant-fly-rules = Вы [color=red][bold]Командны�
 
 ghost-role-information-clownmime-cyborg-name = МимоКлоунский киборг
 ghost-role-information-clownmime-cyborg-description = Вы киборг, созданный с помощью магии хонка и минуты молчания(аминь), помогите своему создателю нести хонк по станции.
-
-ghost-role-information-moproach-name = Тараканомоль
-ghost-role-information-moproach-description = Милая тараканомоль с милыми ботинками из швабр.

@@ -1,5 +1,3 @@
-alerts-breathing-name = Переключить дыхание
-alerts-breathing-desc = Синий - дышите, красный - не дышите.
 alerts-low-oxygen-name = [color=red]Низкий уровень кислорода[/color]
 alerts-low-oxygen-desc = В воздухе, которым вы дышите, [color=red]недостаточно кислорода[/color]. Используйте [color=green]дыхательную маску и баллон[/color].
 alerts-low-nitrogen-name = [color=red]Низкий уровень азота[/color]

@@ -1,4 +1,3 @@
 - type: roundAnnouncement
   id: Welcome
-  sound:
-    collection: RoundStart
+  sound: /Audio/Announcements/welcome.ogg

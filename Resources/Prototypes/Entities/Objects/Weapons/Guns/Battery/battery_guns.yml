@@ -495,7 +495,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: FoodFlapjackBananaCreamSS220
+    proto: BulletDisablerPractice
     fireCost: 50
   - type: Tag
     tags:
@@ -523,7 +523,7 @@
       - suitStorage
       - Belt
   - type: ProjectileBatteryAmmoProvider
-    proto: FoodFlapjackBananaCreamSS220
+    proto: BulletDisabler
     fireCost: 50
   - type: GuideHelp
     guides:
@@ -558,7 +558,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: FoodFlapjackBananaCreamSS220
+    proto: BulletDisablerSmg
     fireCost: 25
   - type: MagazineVisuals
     magState: mag

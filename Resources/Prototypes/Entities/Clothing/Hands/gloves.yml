@@ -46,30 +46,6 @@
     fiberColor: fibers-blue
   - type: FingerprintMask
 
-# April Fools: Vox boxing gloves, given to all Vox. A bit dangerous.
-- type: entity
-  parent: ClothingHandsGlovesBoxingRed
-  id: ClothingHandsGlovesBoxingVox
-  name: бойцовские перчатки воксов
-  description: С этим вы будете в ударе! Вы больше никогда не проиграете в техах! СКРААААУ!!
-  components:
-  - type: Sprite
-    sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi
-    state: icon
-  - type: Clothing
-    sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi
-  - type: Fiber
-    fiberMaterial: fibers-leather
-    fiberColor: fibers-blue
-  - type: FingerprintMask
-  - type: MeleeWeapon
-    attackRate: 2
-    animation: WeaponArcBox
-    damage:
-      types:
-        Blunt: 6 # Double Vox unarmed attack
-    mustBeEquippedToUse: true
-
 - type: entity
   parent: ClothingHandsGlovesBoxingRed
   id: ClothingHandsGlovesBoxingGreen

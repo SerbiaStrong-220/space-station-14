@@ -9,7 +9,10 @@
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAnnouncementColor: "#18abf5"
     startAudio:
-      collection: InternAlert
+      path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
   - type: RandomSentienceRule
     minSentiences: 2
     maxSentiences: 5

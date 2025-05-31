@@ -740,31 +740,24 @@
     stealGroup: AnimalRenault
 
 - type: entity
-  name: nuclear authentication disk
+  name: Hamlet
   parent: MobHamster
   id: MobHamsterHamlet
-  description: A nuclear auth disk, capable of arming a nuke if used along with a code. Note from nanotrasen reads "THIS IS YOUR MOST IMPORTANT POSESSION, SECURE DAT FUKKEN DISK!"
+  description: A grumpy, cute and fluffy hamster.
   components:
   - type: Sprite
-    sprite: Objects/Misc/nukedisk.rsi
+    drawdepth: SmallMobs
+    sprite: Mobs/Pets/hamlet.rsi
     layers:
-    - map: ["movement"]
-      state: icon
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
+      state: hamster-0
   - type: SpriteMovement
     movementLayers:
       movement:
-        state: icon
+        state: hamster-moving-0
     noMovementLayers:
       movement:
-        state: icon
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: icon
-      Critical:
-        Base: icon
-      Dead:
-        Base: icon
+        state: hamster-0
   #SS220 languages revive begin
   - type: Language
     availableLanguages:

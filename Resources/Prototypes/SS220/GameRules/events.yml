@@ -6,10 +6,11 @@
   - type: StationEvent
     startAnnouncement: station-event-banana-rain-announcement
     startAudio:
-      collection: InternAlert
+      path: /Audio/Announcements/attention.ogg
+    reoccurrenceDelay: 10
     earliestStart: 20
     minimumPlayers: 15
-    weight: 5
+    weight: 0
     duration: 60
   - type: CableRandomSpawnRule
     entries:

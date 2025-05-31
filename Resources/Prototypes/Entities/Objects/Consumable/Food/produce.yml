@@ -350,7 +350,11 @@
   - type: Tag
     tags:
     - Fruit
-    - banana #SS220 fulls_day
+    - Banana
+  - type: FoodSequenceElement
+    entries:
+      Burger: Banana
+      Taco: Banana
 
 - type: entity
   name: mimana

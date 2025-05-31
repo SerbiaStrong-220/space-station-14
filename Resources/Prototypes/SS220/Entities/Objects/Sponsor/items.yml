@@ -313,7 +313,7 @@
   parent: DrinkBeerCan
   id: DrinkBeerCanSponsor
   name: банка пива "Tracker"
-  description: Банка пива "Tracker", особенный напиток для эльфов "Трекероведов".
+  description: Банка пива "Tracker", особенный напиток для дворфов "Трекероведов".
   components:
   - type: SolutionContainerManager
     solutions:

@@ -11,7 +11,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Rounding;
-using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
@@ -176,15 +175,13 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
         foreach (var (ent, comp) in toHit)
         {
-            TakeStaminaDamage(ent, damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, ignoreResist: component.IgnoreResistance /* SS220 Add ingnore resistance */);
+            var oldDamage = comp.StaminaDamage;
+            TakeStaminaDamage(ent, damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound);
+            if (comp.StaminaDamage.Equals(oldDamage))
+            {
+                _popup.PopupClient(Loc.GetString("stamina-resist"), ent, args.User);// PopupClient Сообщение о том что человек уже в крите по стамине, нужно его перести в  TakeStaminaDamage 242
+            }
         }
-    }
-
-
-    private void OnFallOver(EntityUid uid, BoxingComponent component, DownedEvent args)
-    {
-        if (_net.IsServer)
-            _audio.PlayPvs(component.Sound, uid);
     }
 
     private void OnProjectileHit(EntityUid uid, StaminaDamageOnCollideComponent component, ref ProjectileHitEvent args)

@@ -16,7 +16,7 @@
       shuttleTime: 600
     violet:
       announcement: alert-level-violet-announcement
-      sound: /Audio/SS220/Announcements/Intern/events/outbreak7.ogg
+      sound: /Audio/Misc/notice1.ogg
       color: Violet
       emergencyLightColor: Violet
       forceEnableEmergencyLights: true
@@ -57,7 +57,7 @@
       color: DarkRed
       emergencyLightColor: Orange
       forceEnableEmergencyLights: true
-      shuttleTime: 300 #ss220
+      shuttleTime: 300 #ss220 
     epsilon:
       announcement: alert-level-epsilon-announcement
       selectable: false
