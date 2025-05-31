@@ -1,16 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Damage;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
-using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
-using Content.Shared.Roles;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.RestrictedItem;
 
@@ -21,6 +19,8 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -29,6 +29,7 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
         SubscribeLocalEvent<RestrictedItemComponent, BeingEquippedAttemptEvent>(OnEquipAttempt);
         SubscribeLocalEvent<RestrictedItemComponent, BeingPulledAttemptEvent>(OnPullAttempt);
         SubscribeLocalEvent<RestrictedItemComponent, GettingPickedUpAttemptEvent>(OnPickupAttempt);
+        SubscribeLocalEvent<DropAllRestrictedEvent>(OnDropAll);
     }
 
     private void OnPickupAttempt(Entity<RestrictedItemComponent> ent, ref GettingPickedUpAttemptEvent args)
@@ -39,7 +40,7 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
 
     private void OnPullAttempt(Entity<RestrictedItemComponent> ent, ref BeingPulledAttemptEvent args)
     {
-        if(ent.Comp.CanBePulled)
+        if (ent.Comp.CanBePulled)
             return;
 
         if (!ItemCheck(args.Puller, ent))
@@ -69,4 +70,40 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
 
         return true;
     }
+
+    private void OnDropAll(ref DropAllRestrictedEvent ev)
+    {
+        var removedItems = RemoveItems(ev.Target);
+        ev.DroppedItems.UnionWith(removedItems);
+    }
+
+    private HashSet<EntityUid> RemoveItems(EntityUid target)
+    {
+        HashSet<EntityUid> removedItems = [];
+        if (!_inventory.TryGetSlots(target, out _))
+            return removedItems;
+
+        // trying to unequip all item's with component
+        foreach (var item in _inventory.GetHandOrInventoryEntities(target))
+        {
+            if (!TryComp<RestrictedItemComponent>(item, out var restrictedComp)) //ToDo_SS220 make check for a whitelist
+                continue;
+
+            _transform.DropNextTo(item, target);
+            removedItems.Add(item);
+        }
+
+        return removedItems;
+    }
+}
+
+/// <summary>
+///     Raised when we need to remove all Restricted objects
+/// </summary>
+[ByRefEvent, Serializable]
+public sealed class DropAllRestrictedEvent(EntityUid target, HashSet<EntityUid>? droppedItems = null) : EntityEventArgs
+{
+    public readonly EntityUid Target = target;
+
+    public HashSet<EntityUid> DroppedItems = droppedItems ?? new();
 }

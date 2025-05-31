@@ -45,7 +45,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
-    useDelay: 600
+    useDelay: 450
     event: !type:CultYoggDigestEvent
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: IconMycosis}

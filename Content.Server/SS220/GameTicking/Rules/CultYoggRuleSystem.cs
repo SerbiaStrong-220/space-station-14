@@ -37,9 +37,11 @@ using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.CultYogg.Sacraficials;
 using Content.Shared.SS220.InnerHandToggleable;
+using Content.Shared.SS220.RestrictedItem;
 using Content.Shared.SS220.Roles;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.SS220.Telepathy;
+using Content.Shared.SS220.UpdateChannels;
 using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -48,7 +50,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.SS220.UpdateChannels;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 
@@ -332,10 +333,10 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     #region Cultists making
     private void AfterEntitySelected(Entity<CultYoggRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
-        MakeCultist(args.EntityUid, ent);
+        MakeCultist(args.EntityUid, ent, true);
     }
 
-    public void MakeCultist(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = true)
+    public void MakeCultist(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false)
     {
         //Grab the mind if it wasnt provided
         if (!_mind.TryGetMind(uid, out var mindId, out var mindComp))
@@ -360,7 +361,11 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         var telepathy = EnsureComp<TelepathyComponent>(uid);
         telepathy.CanSend = true;//we are allowing it cause testing
         telepathy.TelepathyChannelPrototype = rule.Comp.TelepathyChannel;
+        //trying to fix telepathy
+        if (TryComp<ActorComponent>(uid, out var actor))
+            RaiseNetworkEvent(new UpdateChannelEvent(), actor.PlayerSession);
 
+        //allows to hide the sedative sting
         var innerToggle = EnsureComp<InnerHandToggleableComponent>(uid);
         innerToggle.Whitelist = rule.Comp.WhitelistToggleable;
 
@@ -383,6 +388,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         {
             ProgressToStage(rule, nextStage);
         }
+
         DirtyEntity(uid);
     }
     #endregion
@@ -418,8 +424,11 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         _role.MindRemoveRole<CultYoggRoleComponent>(mindId);
 
         //Remove all corrupted items
-        var ev = new DropAllStuckOnEquipEvent(uid);
-        RaiseLocalEvent(uid, ref ev, true);
+        var stuckEv = new DropAllStuckOnEquipEvent(uid);
+        RaiseLocalEvent(uid, ref stuckEv, true);
+
+        var restrEv = new DropAllRestrictedEvent(uid);
+        RaiseLocalEvent(uid, ref restrEv, true);
 
         // Change the faction
         _npcFaction.RemoveFaction(uid, component.CultYoggFaction, false);

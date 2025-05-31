@@ -81,3 +81,14 @@
     state: back_human
   - sprite: SS220/Objects/CultYogg/cultstages.rsi
     state: shrooms_human
+
+- type: marking
+  id: CultStage-Tajaran
+  bodyPart: Special
+  markingCategory: Special
+  hidden: true
+  sprites:
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: back_human
+  - sprite: SS220/Objects/CultYogg/cultstages.rsi
+    state: shrooms_human
