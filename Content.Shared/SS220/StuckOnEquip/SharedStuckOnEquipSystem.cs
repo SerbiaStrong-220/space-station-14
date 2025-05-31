@@ -69,8 +69,8 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
 
     private HashSet<EntityUid> RemoveItems(EntityUid target)
     {
-        HashSet<EntityUid> removedItems = new();
-        if (!_inventory.TryGetSlots(target, out var slots))
+        HashSet<EntityUid> removedItems = [];
+        if (!_inventory.TryGetSlots(target, out var _))
             return removedItems;
 
         // trying to unequip all item's with component
