@@ -1,5 +1,6 @@
 
 using Content.Client.SS220.Overlays;
+using Content.Shared.SS220.Maths;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -7,6 +8,7 @@ using Robust.Client.Player;
 using Robust.Shared.Console;
 using Robust.Shared.Input;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Utility;
 using System.Numerics;
 
@@ -27,12 +29,15 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
     public event Action<BoxParams>? Ended;
     public event Action? Cancelled;
 
-    public bool Active
-    {
-        get => _active;
-        set => _active = value;
-    }
+    public bool Active => _active;
     private bool _active;
+
+    public bool AttachToGrid
+    {
+        get => _attachToGrid;
+        set => _attachToGrid = value;
+    }
+    private bool _attachToGrid;
 
     public BoxParams? CurParams => GetBoxParams();
 
@@ -99,7 +104,6 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
                 return false;
             }
 
-
             var coords = transform.ToCoordinates(Parent.Value, mapCoords);
             Point2 = coords.Position;
         }
@@ -114,7 +118,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         if (@params != null)
         {
             Ended?.Invoke(@params.Value);
-            Active = false;
+            _active = false;
         }
     }
 
@@ -127,6 +131,15 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         if (box == Box2.Empty)
             return null;
 
+        if (AttachToGrid)
+        {
+            var gridSize = 1f;
+            if (_entity.TryGetComponent<MapGridComponent>(parent, out var mapGrid))
+                gridSize = mapGrid.TileSize;
+
+            MathHelperExtensions.AttachToGrid(ref box, gridSize);
+        }
+
         return new BoxParams()
         {
             Parent = _entity.GetNetEntity(parent),
@@ -137,7 +150,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
     public void Cancel()
     {
         Clear();
-        Active = false;
+        _active = false;
         Cancelled?.Invoke();
     }
 
@@ -148,7 +161,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         else
             Clear();
 
-        Active = true;
+        _active = true;
         Started?.Invoke();
     }
 
@@ -158,6 +171,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         Point2 = null;
         Parent = null;
         SetColor(null);
+        AttachToGrid = false;
     }
 
     public void SetColor(Color? newColor)
@@ -201,11 +215,20 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
 
             var transform = _entityManager.System<TransformSystem>();
             var mapCoords = _layoutManager.GetMouseMapCoordinates();
-            if (mapCoords == null || transform.GetMapId(parent) != mapCoords.MapId)
+            if (transform.GetMapId(parent) != mapCoords.MapId)
                 return list;
 
             var point2 = transform.ToCoordinates(parent, mapCoords).Position;
             var box = Box2.FromTwoPoints(point1, point2);
+
+            if (_layoutManager.AttachToGrid)
+            {
+                var gridSize = 1f;
+                if (_entityManager.TryGetComponent<MapGridComponent>(parent, out var mapGrid))
+                    gridSize = mapGrid.TileSize;
+
+                MathHelperExtensions.AttachToGrid(ref box, gridSize);
+            }
 
             var boxesData = new BoxesOverlay.BoxesData(parent)
             {

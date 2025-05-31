@@ -16,7 +16,7 @@ namespace Content.Shared.SS220.Zones.Components;
 public sealed partial class ZoneComponent : Component
 {
     [ViewVariables, AutoNetworkedField]
-    public ZoneParams? ZoneParams;
+    public ZoneParams ZoneParams = new();
 
     /// <summary>
     /// An array of entities located in the zone

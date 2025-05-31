@@ -12,6 +12,8 @@ public interface IBoxLayoutManager
     event Action? Cancelled;
 
     bool Active { get; }
+
+    bool AttachToGrid { get; set; }
     BoxParams? CurParams { get; }
 
     void Initialize();

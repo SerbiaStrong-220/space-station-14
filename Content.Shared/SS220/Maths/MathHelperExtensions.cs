@@ -251,12 +251,12 @@ public static partial class MathHelperExtensions
         return result;
     }
 
-    public static IEnumerable<Box2> GetIntersectsGridBoxes(IEnumerable<Box2> boxes, float gridSize = 1f, bool closedRegion = true)
+    public static IEnumerable<Box2> GetIntersectsGridBoxes(IEnumerable<Box2> boxes, float gridSize = 1f)
     {
         var result = new HashSet<Box2>();
         foreach (var box in boxes)
         {
-            var gridBoxes = GetIntersectsGridBoxes(box, gridSize, closedRegion);
+            var gridBoxes = GetIntersectsGridBoxes(box, gridSize);
             foreach (var gridBox in gridBoxes)
                 result.Add(gridBox);
         }
@@ -267,53 +267,24 @@ public static partial class MathHelperExtensions
     /// <summary>
     /// Returns an array of all boxes in the grid that the other <paramref name="box"/> intersects with
     /// </summary>
-    public static IEnumerable<Box2> GetIntersectsGridBoxes(Box2 box, float gridSize = 1f, bool closedRegion = true)
+    public static IEnumerable<Box2> GetIntersectsGridBoxes(Box2 box, float gridSize = 1f)
     {
-        var startBoxX = (int)Math.Floor(box.Left / gridSize);
-        var endBoxX = (int)Math.Floor(box.Right / gridSize);
-        var startBoxY = (int)Math.Floor(box.Bottom / gridSize);
-        var endBoxY = (int)Math.Floor(box.Top / gridSize);
-
-        if (closedRegion)
+        var result = new HashSet<Box2>();
+        var attachedBox = AttachToGrid(box, gridSize);
+        var y = attachedBox.Bottom;
+        while (y < attachedBox.Top)
         {
-            if (IsInteger(box.Left))
-                startBoxX--;
-
-            if (IsInteger(box.Bottom))
-                startBoxY--;
-        }
-        else
-        {
-            if (IsInteger(box.Right))
-                endBoxX--;
-
-            if (IsInteger(box.Top))
-                endBoxY--;
-        }
-
-        var result = new List<Box2>();
-        for (var bx = startBoxX; bx <= endBoxX; bx++)
-        {
-            for (var by = startBoxY; by <= endBoxY; by++)
+            var x = attachedBox.Left;
+            while (x < attachedBox.Right)
             {
-                var left = bx * gridSize;
-                var bottom = by * gridSize;
-                var right = left + gridSize;
-                var top = bottom + gridSize;
-
-                var gridBox = new Box2(left, bottom, right, top);
-
-                //if (gridBox.IntersectPercentage(box) > 0)
+                var gridBox = new Box2(x, y, x + gridSize, y + gridSize);
                 result.Add(gridBox);
+                x += gridSize;
             }
+            y += gridSize;
         }
 
         return result;
-
-        bool IsInteger(float value)
-        {
-            return value == Math.Floor(value);
-        }
     }
 
     /// <summary>
@@ -330,7 +301,7 @@ public static partial class MathHelperExtensions
     public static bool TryParseBox2(string input, [NotNullWhen(true)] out Box2? box)
     {
         box = null;
-        var pattern = @"\d+,\d+";
+        var pattern = @"-?\d+(?:[.,]\d+)?";
         var regex = new Regex(pattern, RegexOptions.Compiled);
         var matches = regex.Matches(input);
         if (matches.Count != 4)
@@ -351,5 +322,40 @@ public static partial class MathHelperExtensions
 
         box = new Box2(numbers[0], numbers[1], numbers[2], numbers[3]);
         return true;
+    }
+
+    public static Box2 AttachToGrid(Box2 box, float gridSize = 1f)
+    {
+        var left = (float)Math.Floor(box.Left / gridSize) * gridSize;
+        var bottom = (float)Math.Floor(box.Bottom / gridSize) * gridSize;
+        var right = (float)Math.Ceiling(box.Right / gridSize) * gridSize;
+        var top = (float)Math.Ceiling(box.Top / gridSize) * gridSize;
+
+        if (right == left)
+            right += gridSize;
+
+        if (top == bottom)
+            top += gridSize;
+
+        return new Box2(left, bottom, right, top);
+    }
+
+    public static void AttachToGrid(ref Box2 box, float gridSize = 1f)
+    {
+        box = AttachToGrid(box, gridSize);
+    }
+
+    public static IEnumerable<Box2> AttachToGrid(IEnumerable<Box2> boxes, float gridSize = 1f)
+    {
+        var result = new HashSet<Box2>();
+        foreach (var box in boxes)
+            result.Add(AttachToGrid(box, gridSize));
+
+        return result;
+    }
+
+    public static void AttachToGrid(ref IEnumerable<Box2> boxes, float gridSize = 1f)
+    {
+        boxes = AttachToGrid(boxes, gridSize);
     }
 }

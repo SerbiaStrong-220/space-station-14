@@ -301,6 +301,29 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return boxes;
     }
 
+    public Box2 AttachToGrid(NetEntity container, Box2 box)
+    {
+        return AttachToGrid(GetEntity(container), box);
+    }
+
+    public Box2 AttachToGrid(EntityUid container, Box2 box)
+    {
+        if (TryComp<MapGridComponent>(container, out var mapGrid))
+            return MathHelperExtensions.AttachToGrid(box, mapGrid.TileSize);
+
+        return MathHelperExtensions.AttachToGrid(box);
+    }
+
+    public void AttachToGrid(NetEntity container, ref Box2 box)
+    {
+        AttachToGrid(GetEntity(container), ref box);
+    }
+
+    public void AttachToGrid(EntityUid container, ref Box2 box)
+    {
+        box = AttachToGrid(container, box);
+    }
+
     public IEnumerable<Box2> AttachToGrid(NetEntity container, IEnumerable<Box2> boxes)
     {
         return AttachToGrid(GetEntity(container), boxes);
@@ -309,9 +332,9 @@ public abstract partial class SharedZonesSystem : EntitySystem
     public IEnumerable<Box2> AttachToGrid(EntityUid container, IEnumerable<Box2> boxes)
     {
         if (TryComp<MapGridComponent>(container, out var mapGrid))
-            return GetAttachedToGridBoxes(boxes, mapGrid.TileSize);
+            return MathHelperExtensions.AttachToGrid(boxes, mapGrid.TileSize);
 
-        return GetAttachedToGridBoxes(boxes);
+        return MathHelperExtensions.AttachToGrid(boxes);
     }
 
     public void AttachToGrid(NetEntity container, ref IEnumerable<Box2> boxes)
@@ -324,13 +347,6 @@ public abstract partial class SharedZonesSystem : EntitySystem
         boxes = AttachToGrid(container, boxes);
     }
 
-    public static IEnumerable<Box2> GetAttachedToGridBoxes(IEnumerable<Box2> boxes, float gridSize = 1f)
-    {
-        var attachedBoxes = MathHelperExtensions.GetIntersectsGridBoxes(boxes, gridSize, false);
-        RecalculateZoneBoxes(ref attachedBoxes);
-        return attachedBoxes;
-    }
-
     public int GetZonesCount()
     {
         var result = 0;
@@ -339,21 +355,6 @@ public abstract partial class SharedZonesSystem : EntitySystem
             result++;
 
         return result;
-    }
-
-    public ZoneParamsState GetZoneParams(Entity<ZoneComponent> zone)
-    {
-        var @params = zone.Comp.ZoneParams;
-        var meta = MetaData(zone);
-        return new ZoneParamsState
-        {
-            Container = @params?.Container ?? NetEntity.Invalid,
-            ProtoId = @params?.ProtoId ?? BaseZoneId,
-            Name = @params?.Name ?? meta.EntityName,
-            Color = @params?.Color ?? DefaultColor,
-            Boxes = @params?.Boxes ?? new List<Box2>(),
-            AttachToGrid = @params?.AttachToGrid ?? false,
-        };
     }
 
     public static bool TryParseTag(string input, string tag, [NotNullWhen(true)] out string? value)
@@ -396,7 +397,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     public IEnumerable<Box2> CutSpace(Entity<MapGridComponent> grid, IEnumerable<Box2> boxes)
     {
         var spaceBoxes = new List<Box2>();
-        var gridBoxes = MathHelperExtensions.GetIntersectsGridBoxes(boxes, grid.Comp.TileSize, false);
+        var gridBoxes = MathHelperExtensions.GetIntersectsGridBoxes(boxes, grid.Comp.TileSize);
         foreach (var gridBox in gridBoxes)
         {
             var coords = new EntityCoordinates(grid, gridBox.Center);
@@ -483,7 +484,7 @@ public partial struct ZoneParamsState()
     /// </summary>
     public NetEntity Container
     {
-        get => _container;
+        readonly get => _container;
         set => TryChangeContainer(value);
     }
 
@@ -514,49 +515,43 @@ public partial struct ZoneParamsState()
 
     public delegate void ActionRefZoneParams(ref ZoneParamsState param);
 
-    public void ParseOptionalTags(string input)
+    public void ParseTags(string input)
     {
-        foreach (var field in Enum.GetValues<OptionalTags>())
+        // Cursed because GetFields() doesn't accesible on the client side
+
+        if (SharedZonesSystem.TryParseTag(input, nameof(Container).ToLower(), out var value) &&
+            NetEntity.TryParse(value, out var container))
+            Container = container;
+
+        if (SharedZonesSystem.TryParseTag(input, nameof(Boxes).ToLower(), out value))
         {
-            var tag = field.ToString().ToLower();
-            if (!SharedZonesSystem.TryParseTag(input, tag, out var value))
-                continue;
-
-            switch (field)
+            var boxesStrings = value.Split(";");
+            var list = new List<Box2>();
+            foreach (var str in boxesStrings)
             {
-                case OptionalTags.Name:
-                    Name = value;
-                    break;
-
-                case OptionalTags.ProtoId:
-                    ProtoId = value;
-                    break;
-
-                case OptionalTags.Color:
-                    if (Color.TryParse(value, out var color))
-                        Color = color;
-                    break;
-
-                case OptionalTags.AttachToGrid:
-                    if (bool.TryParse(value, out var attach))
-                        AttachToGrid = attach;
-                    break;
-
-                case OptionalTags.CutSpace:
-                    if (bool.TryParse(value, out var crop))
-                        CutSpace = crop;
-                    break;
+                if (MathHelperExtensions.TryParseBox2(str, out var box))
+                    list.Add(box.Value);
             }
+            Boxes = list;
         }
-    }
 
-    public enum OptionalTags
-    {
-        Name,
-        ProtoId,
-        Color,
-        AttachToGrid,
-        CutSpace
+        if (SharedZonesSystem.TryParseTag(input, nameof(Name).ToLower(), out value))
+            Name = value;
+
+        if (SharedZonesSystem.TryParseTag(input, nameof(ProtoId).ToLower(), out value))
+            ProtoId = value;
+
+        if (SharedZonesSystem.TryParseTag(input, nameof(Color).ToLower(), out value) &&
+            Color.TryParse(value, out var color))
+            Color = color;
+
+        if (SharedZonesSystem.TryParseTag(input, nameof(AttachToGrid).ToLower(), out value) &&
+            bool.TryParse(value, out var attach))
+            AttachToGrid = attach;
+
+        if (SharedZonesSystem.TryParseTag(input, nameof(CutSpace).ToLower(), out value) &&
+            bool.TryParse(value, out var cutSpace))
+            CutSpace = cutSpace;
     }
 
     public static bool operator ==(ZoneParamsState left, ZoneParamsState right)
@@ -604,14 +599,21 @@ public partial struct ZoneParamsState()
         return true;
     }
 
-    public string[] GetOptionalTags()
+    public readonly string[] GetTags()
     {
+        // Cursed because GetFields() doesn't accesible on the client side
+
+        var boxes = Boxes.Select(b => b.ToString());
+        var boxesStr = string.Join("; ", boxes);
+
         return [
-            $"name={Name}",
-            $"protoid={ProtoId}",
-            $"color={Color.ToHex()}",
-            $"attachtogrid={AttachToGrid}",
-            $"cutspace={CutSpace}"
+            $"{nameof(Container).ToLower()}={Container}",
+            $"{nameof(Boxes).ToLower()}=\"{boxesStr}\"",
+            $"{nameof(Name).ToLower()}=\"{Name}\"",
+            $"{nameof(ProtoId).ToLower()}=\"{ProtoId}\"",
+            $"{nameof(Color).ToLower()}={Color.ToHex()}",
+            $"{nameof(AttachToGrid).ToLower()}={AttachToGrid}",
+            $"{nameof(CutSpace).ToLower()}={CutSpace}"
             ];
     }
 

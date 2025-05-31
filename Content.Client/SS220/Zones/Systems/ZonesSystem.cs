@@ -107,16 +107,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     public void ExecuteCreateZone(ZoneParamsState @params)
     {
-        var boxes = string.Empty;
-        foreach (var box in @params.Boxes)
-        {
-            if (!string.IsNullOrEmpty(boxes))
-                boxes += "; ";
-
-            boxes += $"({box.Left} {box.Bottom} {box.Right} {box.Top})";
-        }
-
-        var optionalsStr = string.Join(' ', @params.GetOptionalTags());
-        _clientConsoleHost.ExecuteCommand($"zones:create {@params.Container} \"{boxes}\" {optionalsStr}");
+        var tags = string.Join(' ', @params.GetTags());
+        _clientConsoleHost.ExecuteCommand($"zones:create {tags}");
     }
 }

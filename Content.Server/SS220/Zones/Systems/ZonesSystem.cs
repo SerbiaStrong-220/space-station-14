@@ -1,12 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Maps;
-using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
-using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Numerics;
 
@@ -47,7 +43,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         DeleteZone(entity.Owner);
     }
 
-    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
+    /// <inheritdoc cref="CreateZone(ZoneParamsState)"/>
     public Entity<ZoneComponent>? CreateZone(
         IEnumerable<(EntityCoordinates, EntityCoordinates)> boxCoordinates,
         string? protoId = null,
@@ -77,7 +73,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cropToParentSize);
     }
 
-    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
+    /// <inheritdoc cref="CreateZone(ZoneParamsState)"/>
     public Entity<ZoneComponent>? CreateZone(
         IEnumerable<(MapCoordinates, MapCoordinates)> boxCoordinates,
         string? protoId = null,
@@ -110,7 +106,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cropToParentSize);
     }
 
-    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
+    /// <inheritdoc cref="CreateZone(ZoneParamsState)"/>
     public Entity<ZoneComponent>? CreateZone(
         NetEntity container,
         IEnumerable<(Vector2,Vector2)> points,
@@ -124,7 +120,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         return CreateZone(container, boxes, protoId, name, color, attachToGrid, cropToParentSize);
     }
 
-    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
+    /// <inheritdoc cref="CreateZone(ZoneParamsState)"/>
     public Entity<ZoneComponent>? CreateZone(
         NetEntity container,
         IEnumerable<Box2> boxes,
@@ -146,18 +142,8 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         });
     }
 
-    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
+    /// Creates new zone
     public Entity<ZoneComponent>? CreateZone(ZoneParamsState @params)
-    {
-        var compParams = new ZoneParams();
-        compParams.HandleState(@params);
-        return CreateZone(compParams);
-    }
-
-    /// <summary>
-    /// Creates a new zone
-    /// </summary>
-    public Entity<ZoneComponent>? CreateZone(ZoneParams @params)
     {
         if (@params.Boxes.Count <= 0 || !@params.Container.IsValid())
             return null;
@@ -178,14 +164,31 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         _transform.AttachToGridOrMap(zone);
 
         var zoneComp = EnsureComp<ZoneComponent>(zone);
-        zoneComp.ZoneParams = @params;
+        zoneComp.ZoneParams.HandleState(@params);
         Dirty(zone, zoneComp);
 
         var zoneContainer = EnsureComp<ZonesContainerComponent>(container);
         zoneContainer.Zones.Add(GetNetEntity(zone));
-        Dirty(zone, zoneComp);
+        Dirty(container, zoneContainer);
 
         return (zone, zoneComp);
+    }
+
+    public void ChangeZone(Entity<ZoneComponent> zone, ZoneParamsState newParams)
+    {
+        if (!newParams.Container.IsValid())
+            return;
+
+        if (zone.Comp.ZoneParams?.Container != newParams.Container ||
+            zone.Comp.ZoneParams?.ProtoId != newParams.ProtoId)
+        {
+            DeleteZone((zone, zone));
+            CreateZone(newParams);
+            return;
+        }
+
+        zone.Comp.ZoneParams.HandleState(newParams);
+        Dirty(zone);
     }
 
     /// <inheritdoc cref="DeleteZone(Entity{ZonesContainerComponent?}, Entity{ZoneComponent?})"/>
@@ -210,6 +213,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             return;
 
         container.Comp.Zones.Remove(GetNetEntity(zone));
+        Dirty(container);
         QueueDel(zone);
     }
 

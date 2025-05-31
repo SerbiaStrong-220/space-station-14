@@ -18,41 +18,11 @@ public sealed partial class CreateZoneCommand : LocalizedCommands
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        if (args.Length < 2)
+        if (args.Length < 1)
             return;
 
-        if (!EntityUid.TryParse(args[0], out var container))
-            return;
-
-        var @params = new ZoneParamsState()
-        {
-            Container = _entityManager.GetNetEntity(container)
-        };
-        var pairs = args[1].Split(';');
-        pairs = pairs.Select(x => x.Replace("(", string.Empty).Replace(")", string.Empty).Trim()).ToArray();
-        for (var i = 0; i < pairs.Length; i++)
-        {
-            var num = pairs[i].Split(' ');
-            if (num.Length > 4)
-            {
-                shell.WriteLine($"Неверное количество аргументов в координатах бокса {i + 1}");
-                return;
-            }
-
-            num = num.Select(x => x.Trim()).ToArray();
-            if (!float.TryParse(num[0], out var x1) ||
-                !float.TryParse(num[1], out var y1) ||
-                !float.TryParse(num[2], out var x2) ||
-                !float.TryParse(num[3], out var y2))
-            {
-                shell.WriteLine($"Не удалось получить координаты бокса {i}");
-                return;
-            }
-
-            var box = Box2.FromTwoPoints(new Vector2(x1, y1), new Vector2(x2, y2));
-            @params.Boxes.Add(box);
-        }
-        @params.ParseOptionalTags(argStr);
+        var @params = new ZoneParamsState();
+        @params.ParseTags(argStr);
 
         var zonesSystem = _entityManager.System<ZonesSystem>();
         zonesSystem.CreateZone(@params);
