@@ -7,6 +7,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Content.Server.SS220.Bed.Cryostorage;
+using Content.Shared.Interaction.Events;
 
 namespace Content.Server.SS220.CultYogg.Sacraficials;
 
@@ -34,6 +35,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
         SubscribeLocalEvent<CultYoggSacrificialComponent, PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<CultYoggSacrificialComponent, PlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<CultYoggSacrificialComponent, BeingCryoDeletedEvent>(OnCryoDeleted);
+        SubscribeLocalEvent<CultYoggSacrificialComponent, SuicideEvent>(OnSuicide);
     }
     private void OnInit(Entity<CultYoggSacrificialComponent> ent, ref ComponentInit args)
     {
@@ -45,7 +47,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
         }
 
         var ev2 = new CultYoggAnouncementEvent(ent, Loc.GetString("cult-yogg-sacraficial-was-picked", ("name", MetaData(ent).EntityName)));
-        RaiseLocalEvent(ent, ref ev, true);
+        RaiseLocalEvent(ent, ref ev2, true);
     }
     private void OnRemove(Entity<CultYoggSacrificialComponent> ent, ref ComponentRemove args)
     {
@@ -60,7 +62,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
     {
         _replaceSacrSchedule.Remove(ent);
 
-        if(_announceSchedule.ContainsKey(ent))//if the announcement was not sent
+        if (_announceSchedule.ContainsKey(ent))//if the announcement was not sent
         {
             _announceSchedule.Remove(ent);
             return;
@@ -72,8 +74,11 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
 
     private void OnPlayerDetached(Entity<CultYoggSacrificialComponent> ent, ref PlayerDetachedEvent args)
     {
-        _replaceSacrSchedule.Add(ent, _timing.CurTime + ent.Comp.ReplacementCooldown);
-        _announceSchedule.Add(ent, _timing.CurTime + ent.Comp.AnnounceReplacementCooldown);
+        if (!_replaceSacrSchedule.ContainsKey(ent))
+            _replaceSacrSchedule.Add(ent, _timing.CurTime + ent.Comp.ReplacementCooldown);
+
+        if (!_announceSchedule.ContainsKey(ent))
+            _announceSchedule.Add(ent, _timing.CurTime + ent.Comp.AnnounceReplacementCooldown);
     }
 
     private void OnCryoDeleted(Entity<CultYoggSacrificialComponent> ent, ref BeingCryoDeletedEvent args)
@@ -115,5 +120,13 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
 
             _announceSchedule.Remove(pair.Key);
         }
+    }
+
+    private void OnSuicide(Entity<CultYoggSacrificialComponent> ent, ref SuicideEvent args)
+    {
+        if (_replaceSacrSchedule.TryGetValue(ent, out var time))
+            _replaceSacrSchedule[ent] = time + ent.Comp.SuicidePenaltyTime;
+        else
+            _replaceSacrSchedule.Add(ent, _timing.CurTime + ent.Comp.ReplacementCooldown + ent.Comp.SuicidePenaltyTime);
     }
 }

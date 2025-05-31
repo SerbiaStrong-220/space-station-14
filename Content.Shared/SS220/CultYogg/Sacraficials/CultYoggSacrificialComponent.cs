@@ -16,7 +16,7 @@ public sealed partial class CultYoggSacrificialComponent : Component
     /// Icon
     /// </summary>
     [DataField]
-    public bool IconVisibleToGhost { get; set; } = true;
+    public bool IconVisibleToGhost = true;
 
     [DataField]
     public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "CultYoggSacraficialTargetIcon";
@@ -32,12 +32,18 @@ public sealed partial class CultYoggSacrificialComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan AnnounceReplacementCooldown = TimeSpan.FromSeconds(60);
+
     /// <summary>
     /// Time required for replacement
     /// </summary>
     [DataField]
     public TimeSpan ReplacementCooldown = TimeSpan.FromSeconds(300);
 
+    /// <summary>
+    /// Time penalty if sacrificial decides to commit suicide
+    /// </summary>
+    [DataField]
+    public TimeSpan SuicidePenaltyTime = TimeSpan.FromSeconds(300);
 
     public bool WasSacraficed = false;
 }
