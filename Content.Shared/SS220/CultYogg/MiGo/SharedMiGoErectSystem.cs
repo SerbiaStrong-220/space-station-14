@@ -114,7 +114,10 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
         var buildingUid = EntityManager.GetEntity(args.BuildingFrame);
         if (_whitelistSystem.IsWhitelistFail(entity.Comp.EraseWhitelist, buildingUid))
+        {
+            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-cant-erase-non-cultists-buildings"), entity, entity);
             return;
+        }
 
         var doAfterTime = TimeSpan.Zero;
         if (TryComp<CultYoggBuildingFrameComponent>(buildingUid, out var frameComponent) &&

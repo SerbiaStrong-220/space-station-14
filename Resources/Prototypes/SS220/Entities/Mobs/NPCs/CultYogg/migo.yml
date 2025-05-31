@@ -21,9 +21,6 @@
       components:
       - CultYoggBuilding
       - CultYoggBuildingFrame
-      - Door
-      tags:
-      - Wall
   - type: Body
     prototype: MiGoBody
   - type: ComplexInteraction #For UI opening only
