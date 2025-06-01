@@ -1,3 +1,6 @@
+fold-rolling-up-verb = Закатать рукава
+fold-unrolling-up-verb = Откатать рукава
+
 clothing-slot-belt = Ремень
 clothing-slot-tie = Галстук
 clothing-slot-accessory = Аксессуар
@@ -86,5 +89,6 @@ ent-ClothingUniformShirtGold = рубашка и брюки из золота
     .suffix = Спонсор, шлёпа
 
 # Different
-ent-ClothingUniformShirtRedBlack = красная рубашка с темными брюками
+ent-ClothingUniformShirtRedDark = красная рубашка с темными брюками
     .desc = Аккуратная красная рубашка с темными брюками.
+    .suffix = За время в игре

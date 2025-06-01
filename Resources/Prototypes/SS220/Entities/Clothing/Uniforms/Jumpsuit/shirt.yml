@@ -344,7 +344,7 @@
 # Different
 - type: entity
   parent: ClothingUniformShirtBase
-  id: ClothingUniformShirtRedBlack
+  id: ClothingUniformShirtRedDark
   name: red shirt with dark trousers
   description: A neat red shirt with dark trousers.
   suffix: For playtime

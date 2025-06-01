@@ -50,8 +50,8 @@
   - type: Appearance
   - type: Foldable
     canFoldInsideContainer: true
-    unfoldVerbText: fold-tie-verb
-    foldVerbText: fold-untie-verb
+    unfoldVerbText: fold-rolling-up-verb
+    foldVerbText: fold-unrolling-up-verb
   - type: FoldableClothing
     foldedEquippedPrefix: tie
     foldedHeldPrefix: tie
@@ -63,6 +63,7 @@
     slots:
       belt:
         name: clothing-slot-belt
+        insertSound: /Audio/Items/belt_equip.ogg
         whitelist:
           tags:
           - InShirtBelt
