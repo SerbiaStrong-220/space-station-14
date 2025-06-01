@@ -67,9 +67,11 @@
         whitelist:
           tags:
           - InShirtBelt
-      # tie:
-      #   name: clothing-slot-tie
-      #   whitelist:
+      tie:
+        name: clothing-slot-tie
+        whitelist:
+          tags:
+          - InShirtTie
       # accessory:
       #   name: clothing-slot-accessory
       #   whitelist:
@@ -115,6 +117,50 @@
           - BeltLeatherSilverBuckle
       # Аксессуары
       # Галстуки
+      tie-blue:
+        whitelist:
+          tags:
+          - TieBlue
+      tie-blueindigo:
+        whitelist:
+          tags:
+          - TieBlueindigo
+      tie-dark:
+        whitelist:
+          tags:
+          - TieDark
+      tie-deepdark:
+        whitelist:
+          tags:
+          - TieDeepdark
+      tie-scarlet:
+        whitelist:
+          tags:
+          - TieScarlet
+      tie-grey:
+        whitelist:
+          tags:
+          - TieGrey
+      tie-nanotrasen:
+        whitelist:
+          tags:
+          - TieNanotrasen
+      tie-orange:
+        whitelist:
+          tags:
+          - TieOrange
+      tie-white:
+        whitelist:
+          tags:
+          - TieWhite
+      tie-sci:
+        whitelist:
+          tags:
+          - TieSci
+      tie-red:
+        whitelist:
+          tags:
+          - TieRed
       # Жилеты
       vest-blue:
         whitelist:

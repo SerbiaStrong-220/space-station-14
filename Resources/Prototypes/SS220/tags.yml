@@ -426,4 +426,37 @@
 
 - type: Tag
   id: JacketTrusted
+
+- type: Tag
+  id: TieBlue
+
+- type: Tag
+  id: TieBlueindigo
+
+- type: Tag
+  id: TieDark
+
+- type: Tag
+  id: TieDeepdark
+
+- type: Tag
+  id: TieScarlet
+
+- type: Tag
+  id: TieGrey
+
+- type: Tag
+  id: TieNanotrasen
+
+- type: Tag
+  id: TieOrange
+
+- type: Tag
+  id: TieWhite
+
+- type: Tag
+  id: TieSci
+
+- type: Tag
+  id: TieRed
 # Теги для рубашек   Конец

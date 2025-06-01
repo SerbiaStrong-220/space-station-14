@@ -60,3 +60,19 @@
     - state: icon_flipped
       map: ["foldedLayer"]
       visible: true
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckTieBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Ties/red.rsi #SS220 Law Department Fashion
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Ties/red.rsi #SS220 Law Department Fashion
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - ClothMade
+    - InShirtTie #SS220 Law Department Fashion
