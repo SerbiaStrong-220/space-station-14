@@ -51,7 +51,7 @@ public sealed partial class MiGoComponent : Component
     #endregion
 
     /// <summary>
-    ///Enlsavement variables
+    /// The effect necessary for enslavement
     /// <summary>
     [ViewVariables]
     public string RequiedEffect = "Rave";//Required effect for enslavement
@@ -66,13 +66,13 @@ public sealed partial class MiGoComponent : Component
     public TimeSpan EnslaveTime = TimeSpan.FromSeconds(3);
 
     /// <summary>
-    /// How long heal effect will occure
+    /// How long healing effect will occure
     /// <summary>
     [ViewVariables]
     public TimeSpan HealingEffectTime = TimeSpan.FromSeconds(15);
 
     /// <summary>
-    /// Erect variable
+    /// How long does it take to erect a building
     /// <summary>
     [ViewVariables, DataField]
     public TimeSpan ErectDoAfterSeconds = TimeSpan.FromSeconds(3);
@@ -92,7 +92,7 @@ public sealed partial class MiGoComponent : Component
 
     #region Astral
     /// <summary>
-    ///Astral variables
+    /// Flag to check if the target is in the astral plane
     /// <summary>
     [ViewVariables, AutoNetworkedField]
     public bool IsPhysicalForm = true;//Is MiGo in phisycal form?
