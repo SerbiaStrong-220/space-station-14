@@ -13,7 +13,12 @@ public sealed class PinButton : TextureButton
 
     private readonly PinUISystem _pinUISystem;
 
-    public Control? AttachedControl;
+    public Control? LinkedControl
+    {
+        get => _linkedControl;
+        set => SetLinkedControl(value);
+    }
+    private Control? _linkedControl;
 
     public PinButton()
     {
@@ -43,7 +48,7 @@ public sealed class PinButton : TextureButton
 
     private void OnPinStateChanged(PinStateChangedArgs args)
     {
-        if (AttachedControl != args.Control)
+        if (LinkedControl != args.Control)
             return;
 
         Pressed = args.Pinned;
@@ -52,26 +57,21 @@ public sealed class PinButton : TextureButton
 
     private void SetPinned(bool pinned)
     {
-        if (AttachedControl is { } control)
+        if (LinkedControl is { } control)
             _pinUISystem.SetPinned(control, Pressed);
     }
 
     public PinButton(Control attachedControl) : this()
     {
-        AttachedControl = attachedControl;
+        SetLinkedControl(attachedControl);
     }
 
-    public void AttachControl(Control control)
+    public void SetLinkedControl(Control? control, bool unpinCurrent = true)
     {
-        AttachedControl = control;
-    }
-
-    public void DeattachControl(bool unpin = true)
-    {
-        if (unpin)
+        if (unpinCurrent)
             SetPinned(false);
 
-        AttachedControl = null;
+        _linkedControl = control;
     }
 }
 

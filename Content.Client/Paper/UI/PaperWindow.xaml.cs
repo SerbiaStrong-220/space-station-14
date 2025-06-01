@@ -116,7 +116,7 @@ namespace Content.Client.Paper.UI
             SaveButton.Text = Loc.GetString("paper-ui-save-button",
                 ("keybind", _inputManager.GetKeyFunctionButtonString(EngineKeyFunctions.MultilineTextSubmit)));
 
-            PinButton.AttachControl(this); // SS220 pin button
+            PinButton.LinkedControl = this; // SS220 pin button
         }
 
         /// <summary>

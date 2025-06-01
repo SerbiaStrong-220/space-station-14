@@ -11,9 +11,9 @@ public sealed class PinUISystem : EntitySystem
 
     public readonly HashSet<Control> PinnedControls = new();
 
-    public static TextureButton AddPinButtonBeforeTarget(Control attachedControl, Control target)
+    public static TextureButton AddPinButtonBeforeTarget(Control linkedControl, Control target)
     {
-        var button = new PinButton(attachedControl);
+        var button = new PinButton(linkedControl);
         var parent = target.Parent;
         if (parent == null)
             return button;
