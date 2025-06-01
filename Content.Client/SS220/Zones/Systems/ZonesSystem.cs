@@ -110,4 +110,10 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         var tags = string.Join(' ', @params.GetTags());
         _clientConsoleHost.ExecuteCommand($"zones:create {tags}");
     }
+
+    public void ExecuteChangeZone(Entity<ZoneComponent> zone, ZoneParamsState newParams)
+    {
+        var tags = string.Join(' ', newParams.GetTags());
+        _clientConsoleHost.ExecuteCommand($"zones:change {GetNetEntity(zone)} {tags}");
+    }
 }

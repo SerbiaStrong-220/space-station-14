@@ -114,10 +114,6 @@ public sealed partial class ZonesControlWindow : DefaultWindow
     {
         var entry = new ZoneContainerEntry(entity);
         entry.ZoneEntryToggled += OnZoneEntryToggled;
-        entry.DeleteContainerButton.OnConfirmed += delegate
-        {
-            _zones.ExecuteDeleteZonesContainer(entity);
-        };
         return entry;
     }
 
@@ -274,6 +270,16 @@ public sealed partial class ZonesControlWindow : DefaultWindow
             Text = Loc.GetString("zones-control-apply-button"),
             HorizontalExpand = true,
         };
+        applyButton.OnPressed += _ =>
+        {
+            if (SelectedZoneEntry?.ZoneEntity is { } zone)
+            {
+                var newParams = ZoneParams.GetParams();
+                _zones.ExecuteChangeZone(zone, newParams);
+            }
+
+            SetOptions(ZoneOptions.None);
+        };
         box.AddChild(applyButton);
 
         var cancelButton = new Button()
@@ -281,6 +287,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
             Text = Loc.GetString("zones-control-cancel-button"),
             HorizontalExpand = true
         };
+        cancelButton.OnPressed += _ => SetOptions(ZoneOptions.None);
         box.AddChild(cancelButton);
 
         return box;

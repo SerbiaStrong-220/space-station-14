@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -311,7 +312,7 @@ public static partial class MathHelperExtensions
         for (var i = 0; i < matches.Count; i++)
         {
             var value = matches[i].Value.Replace(',', '.');
-            if (float.TryParse(value, out var number))
+            if (float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var number))
                 numbers[i] = number;
             else
                 return false;

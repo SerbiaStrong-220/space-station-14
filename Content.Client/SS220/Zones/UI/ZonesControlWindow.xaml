@@ -17,7 +17,7 @@
             </PanelContainer>
             <Button Name="CreateNewZoneButton" Text="{Loc zones-control-create-new-zone-button}" ToggleMode="True" Access="Public" HorizontalExpand="True"/>
         </BoxContainer>
-        <PanelContainer Name="OptionsPanel" Visible="False" Margin="10 0 0 0">
+        <PanelContainer Name="OptionsPanel" Visible="False" Margin="0 10 0 0">
             <zc:ZoneParamsPanel Name="ZoneParams" HorizontalExpand="True"/>
         </PanelContainer>
     </BoxContainer>

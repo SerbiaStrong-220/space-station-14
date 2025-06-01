@@ -1,12 +1,15 @@
 <ContainerButton xmlns="https://spacestation14.io"
-                 xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                 xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                 xmlns:ut220="clr-namespace:Content.Client.SS220.UserInterface.Utility"
                  HorizontalExpand="True"
                  ToggleMode="True">
     <PanelContainer Name="BackgroundPanel" HorizontalExpand="True">
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="5 0">
             <Label Name="IDLabel" MinSize="30 15"/>
-            <customControls:VSeparator Margin="10 0"/>
-            <Label Name="NameLabel" HorizontalExpand="True" MinSize="50 15"/>
+            <cc:VSeparator Margin="10 0"/>
+            <Label Name="NameLabel" HorizontalExpand="True" />
+            <cc:VSeparator Margin="10 0"/>
+            <ut220:ConfirmableButton Name="DeleteZoneButton" Access="Public"/>
         </BoxContainer>
     </PanelContainer>
 </ContainerButton>

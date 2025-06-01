@@ -2,6 +2,7 @@
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
+using Robust.Server.GameStates;
 using Robust.Shared.Map;
 using System.Linq;
 using System.Numerics;
@@ -12,6 +13,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 {
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly MapSystem _map = default!;
+    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
 
     public override void Initialize()
     {
@@ -161,6 +163,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         @params.RecalculateBoxes();
 
         var zone = Spawn(@params.ProtoId, Transform(container).Coordinates);
+        _pvsOverride.AddGlobalOverride(zone);
         _transform.AttachToGridOrMap(zone);
 
         var zoneComp = EnsureComp<ZoneComponent>(zone);
@@ -191,29 +194,33 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         Dirty(zone);
     }
 
-    /// <inheritdoc cref="DeleteZone(Entity{ZonesContainerComponent?}, Entity{ZoneComponent?})"/>
-    public void DeleteZone(Entity<ZoneComponent?> zone)
+    /// <inheritdoc cref="DeleteZone(Entity{ZoneComponent})"/>
+    public void DeleteZone(NetEntity zone)
     {
-        if (!Resolve(zone, ref zone.Comp))
+        DeleteZone(GetEntity(zone));
+    }
+
+    /// <inheritdoc cref="DeleteZone(Entity{ZoneComponent})"/>
+    public void DeleteZone(EntityUid zone)
+    {
+        if (!TryComp<ZoneComponent>(zone, out var zoneComp))
             return;
 
-        if (zone.Comp.ZoneParams?.Container is not { } container)
-            return;
-
-        DeleteZone(GetEntity(container), zone);
+        DeleteZone((zone, zoneComp));
     }
 
     /// <summary>
     /// Deletes the <paramref name="zone"/>
     /// </summary>
-    public void DeleteZone(Entity<ZonesContainerComponent?> container, Entity<ZoneComponent?> zone)
+    public void DeleteZone(Entity<ZoneComponent> zone)
     {
-        if (!Resolve(container, ref container.Comp) ||
-            !Resolve(zone, ref zone.Comp))
-            return;
+        var container = GetEntity(zone.Comp.ZoneParams.Container);
+        if (TryComp<ZonesContainerComponent>(container, out var containerComp))
+        {
+            containerComp.Zones.Remove(GetNetEntity(zone));
+            Dirty(container, containerComp);
+        }
 
-        container.Comp.Zones.Remove(GetNetEntity(zone));
-        Dirty(container);
         QueueDel(zone);
     }
 
@@ -225,7 +232,6 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     public void DeleteZonesContaner(Entity<ZonesContainerComponent> container)
     {
-        ClearZonesContainer(container);
         RemComp<ZonesContainerComponent>(container);
     }
 }
