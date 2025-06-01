@@ -66,13 +66,13 @@ public sealed partial class MiGoComponent : Component
     public TimeSpan EnslaveTime = TimeSpan.FromSeconds(3);
 
     /// <summary>
-    ///Erect variables
+    /// How long heal effect will occure
     /// <summary>
     [ViewVariables]
-    public TimeSpan HealingEffectTime = TimeSpan.FromSeconds(15);//How long heal effect will occure
+    public TimeSpan HealingEffectTime = TimeSpan.FromSeconds(15);
 
     /// <summary>
-    ///Erect variables
+    /// Erect variable
     /// <summary>
     [ViewVariables, DataField]
     public TimeSpan ErectDoAfterSeconds = TimeSpan.FromSeconds(3);
@@ -89,6 +89,7 @@ public sealed partial class MiGoComponent : Component
     /// </summary>
     [DataField(required: true)]
     public EntityWhitelist? EraseWhitelist = new();
+
     #region Astral
     /// <summary>
     ///Astral variables
