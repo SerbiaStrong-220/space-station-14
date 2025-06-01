@@ -57,17 +57,6 @@ public partial class PdaWindow : BaseWindow
         // SS220 add pin button end
     }
 
-    ////ss220 add pin for ui start
-    //protected override void Opened()
-    //{
-    //    base.Opened();
-
-    //    var pinnedButton = PinUISystem.CreateButton(this, CloseButton);
-
-    //    pinnedButton.OnPressed += _ => PinUISystem.SetPinned(this, pinnedButton.Pressed);
-    //}
-    ////ss220 add pin for ui end
-
     protected override DragMode GetDragModeFor(Vector2 relativeMousePos)
     {
         return DragMode.Move;
