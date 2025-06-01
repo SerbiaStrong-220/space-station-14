@@ -114,9 +114,6 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
 
     private void OnSuicide(Entity<CultYoggSacrificialComponent> ent, ref SuicideEvent args)
     {
-        if (_replaceSacrSchedule.TryGetValue(ent, out var time))
-            _replaceSacrSchedule[ent] = time + ent.Comp.SuicidePenaltyTime;
-        else
-            _replaceSacrSchedule.Add(ent, _timing.CurTime + ent.Comp.ReplacementCooldown + ent.Comp.SuicidePenaltyTime);
+        _replaceSacrSchedule.TryAdd(ent, _timing.CurTime + ent.Comp.ReplacementCooldown + ent.Comp.SuicidePenaltyTime);
     }
 }
