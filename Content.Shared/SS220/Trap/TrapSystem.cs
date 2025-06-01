@@ -87,12 +87,6 @@ public sealed class TrapSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (!ent.Comp.IsArmed) //ignore check during defuse since it is meaningless and causes errors
-        {
-            if (!HandleSetTrap(ent.Owner, args.User))
-                return;
-        }
-
         var xform = Transform(ent.Owner).Coordinates;
         _audio.PlayPredicted(ent.Comp.IsArmed ? ent.Comp.SetTrapSound : ent.Comp.DefuseTrapSound, xform, args.User);
 

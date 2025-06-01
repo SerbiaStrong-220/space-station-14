@@ -31,7 +31,6 @@
       staminaDamage: 0 
       canThrowTrigger: false
       canMoveBreakout: true
-      canStepTrigger: false
       maxEnsnares: 10
     - type: Trap
       interactionDelay: 5
