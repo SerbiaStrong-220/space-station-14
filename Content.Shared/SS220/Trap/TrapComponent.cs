@@ -1,13 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
-using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Trap;
@@ -29,18 +26,6 @@ public sealed partial class TrapComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite), DataField]
     public DamageSpecifier? DamageOnTrapped;
-
-    /// <summary>
-    /// Reagent to inject into the tripper.
-    /// </summary>
-    [DataField]
-    public ProtoId<ReagentPrototype>? Reagent;
-
-    /// <summary>
-    /// How much of the reagent to inject.
-    /// </summary>
-    [DataField]
-    public FixedPoint2 Quantity;
 
     /// <summary>
     /// Delay time when interacting with a trap, be it set or defuse
@@ -65,16 +50,16 @@ public sealed partial class TrapComponent : Component
 }
 
 [Serializable, NetSerializable]
-public sealed partial class InteractionTrapDoAfterEvent : SimpleDoAfterEvent
+public sealed partial class TrapInteractionDoAfterEvent : SimpleDoAfterEvent
 {
 
 }
-public sealed class TrapChangedArmedEvent : EntityEventArgs
+public sealed class TrapToggledEvent : EntityEventArgs
 {
-    public readonly bool NewIsArmed;
+    public readonly bool IsArmed;
 
-    public TrapChangedArmedEvent(bool newIsArmed)
+    public TrapToggledEvent(bool isArmed)
     {
-        NewIsArmed = newIsArmed;
+        IsArmed = isArmed;
     }
 }

@@ -20,9 +20,9 @@
             Armed: { state: trap-armed }
             Unarmed: { state: produce }
     - type: CultYoggTrap
-      maxTrap: 6
-      visibilityOnArmed: 0.3
-      visibilityOnUnArmed: 1
+      trapsLimit: 6
+      armedVisibility: 0.3
+      unArmedVisibility: 1
     - type: Trap
       blacklist:
         components:
@@ -31,8 +31,6 @@
       setTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_set.ogg
       defuseTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_defuse.ogg
       hitTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_hit.ogg
-      reagent: Toxin
-      quantity: 3
     - type: Stealth
       minVisibility: -0.2
       maxVisibility: 2
@@ -48,6 +46,9 @@
             Quantity: 1
           - ReagentId: Water
             Quantity: 1
+    - type: InjectionOnTrigger
+      reagent: Toxin
+      quantity: 3
     - type: Produce
       seedId: MikoTrapShroomSpores
     - type: Extractable

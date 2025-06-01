@@ -23,7 +23,6 @@
           density: 30
           mask:
             - ItemMask
-    - type: StepTrigger
     - type: Ensnaring
       freeTime: 2.0
       breakoutTime: 3.5 
@@ -60,8 +59,12 @@
           base:
             Armed: { state: trap-armed }
             Unarmed: { state: trap-unarmed }
-    - type: Trap
-      damageOnTrapped:
+    - type: DamageOnTrigger
+      damage:
         types:
           Blunt: 15
+    - type: Trap
       durationStun: 0
+      setTrapSound: /Audio/SS220/Items/Trap/sound_trap_set.ogg
+      defuseTrapSound: /Audio/SS220/Items/Trap/sound_trap_defuse.ogg
+      hitTrapSound: /Audio/SS220/Items/Trap/sound_trap_hit.ogg

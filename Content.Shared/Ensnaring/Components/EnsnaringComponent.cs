@@ -50,14 +50,6 @@ public sealed partial class EnsnaringComponent : Component
     [DataField]
     public bool CanThrowTrigger;
 
-    // SS220 - check-step-trigger-start
-    /// <summary>
-    /// Is it possible to activate by stepping with your foot?
-    /// </summary>
-    [DataField]
-    public bool CanStepTrigger = true;
-    // SS220 - check-step-trigger-end
-
     /// <summary>
     /// What is ensnared?
     /// </summary>

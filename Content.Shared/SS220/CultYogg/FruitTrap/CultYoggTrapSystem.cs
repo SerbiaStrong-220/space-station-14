@@ -23,18 +23,18 @@ public sealed class CultYoggTrapSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<CultYoggTrapComponent, ComponentStartup>(OnStartUp);
-        SubscribeLocalEvent<CultYoggTrapComponent, DoAfterAttemptEvent<InteractionTrapDoAfterEvent>>(CheckInteract);
+        SubscribeLocalEvent<CultYoggTrapComponent, MapInitEvent>(OnStartUp);
+        SubscribeLocalEvent<CultYoggTrapComponent, DoAfterAttemptEvent<TrapInteractionDoAfterEvent>>(CheckInteract);
         SubscribeLocalEvent<ChangeCultYoggStageEvent>(OnAlarmStage);
-        SubscribeLocalEvent<CultYoggTrapComponent, TrapChangedArmedEvent>(OnChangedArmed);
+        SubscribeLocalEvent<CultYoggTrapComponent, TrapToggledEvent>(OnChangedArmed);
     }
 
-    private void OnStartUp(Entity<CultYoggTrapComponent> ent, ref ComponentStartup args)
+    private void OnStartUp(Entity<CultYoggTrapComponent> ent, ref MapInitEvent args)
     {
         _stealth.SetEnabled(ent.Owner, false);
     }
 
-    private void CheckInteract(Entity<CultYoggTrapComponent> ent, ref DoAfterAttemptEvent<InteractionTrapDoAfterEvent> args)
+    private void CheckInteract(Entity<CultYoggTrapComponent> ent, ref DoAfterAttemptEvent<TrapInteractionDoAfterEvent> args)
     {
         if (!TryComp<TrapComponent>(ent.Owner, out var trapComp))
             return;
@@ -51,14 +51,11 @@ public sealed class CultYoggTrapSystem : EntitySystem
         }
 
         _trapYoggList.Clear();
-        var query = AllEntityQuery<CultYoggTrapComponent>();
+        var query = AllEntityQuery<CultYoggTrapComponent, TrapComponent>();
 
-        while (query.MoveNext(out var fruitTrap, out _))
+        while (query.MoveNext(out var fruitTrap, out _, out var queryTrapComp))
         {
-            if(!TryComp<TrapComponent>(fruitTrap, out var trapCompForEchFruit))
-                continue;
-
-            if(trapCompForEchFruit.IsArmed)
+            if(queryTrapComp.IsArmed)
                 _trapYoggList.Add(fruitTrap);
         }
 
@@ -67,8 +64,8 @@ public sealed class CultYoggTrapSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cult-yogg-trap-component-alarm-stage"), args.DoAfter.Args.User, args.DoAfter.Args.User);
             args.Cancel();
         }
-        else if (_trapYoggList.Count >= ent.Comp.MaxTrap
-            && ent.Comp.MaxTrap != 0)
+        else if (_trapYoggList.Count >= ent.Comp.TrapsLimit
+            && ent.Comp.TrapsLimit > 0)
         {
 
             _popup.PopupClient(Loc.GetString("cult-yogg-trap-component-max-value"), args.DoAfter.Args.User, args.DoAfter.Args.User);
@@ -87,10 +84,10 @@ public sealed class CultYoggTrapSystem : EntitySystem
         }
     }
 
-    private void OnChangedArmed(Entity<CultYoggTrapComponent> ent, ref TrapChangedArmedEvent args)
+    private void OnChangedArmed(Entity<CultYoggTrapComponent> ent, ref TrapToggledEvent args)
     {
-        var visibility = args.NewIsArmed ? ent.Comp.VisibilityOnArmed : ent.Comp.VisibilityOnUnArmed;
-        _stealth.SetEnabled(ent.Owner, args.NewIsArmed);
+        var visibility = args.IsArmed ? ent.Comp.ArmedVisibility : ent.Comp.UnArmedVisibility;
+        _stealth.SetEnabled(ent.Owner, args.IsArmed);
         _stealth.SetVisibility(ent.Owner, visibility);
     }
 }

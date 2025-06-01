@@ -1,20 +1,19 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Construction.EntitySystems;
-using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.SS220.SharedTriggers.SharedTriggerEvent;
 using Content.Shared.StatusEffect;
-using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
 
 namespace Content.Shared.SS220.Trap;
 
@@ -26,7 +25,6 @@ public sealed class TrapSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedStunSystem _stunSystem = default!;
     [Dependency] private readonly SharedEnsnareableSystem _ensnareableSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly OpenableSystem _openable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
@@ -35,17 +33,16 @@ public sealed class TrapSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AnchorableSystem _anchorableSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<TrapComponent, GetVerbsEvent<AlternativeVerb>>(VerbsTrap);
-        SubscribeLocalEvent<TrapComponent, InteractionTrapDoAfterEvent>(OnTrapDoAfter);
-        SubscribeLocalEvent<TrapComponent, StepTriggerAttemptEvent>(EnsnareableOnStep);
+        SubscribeLocalEvent<TrapComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
+        SubscribeLocalEvent<TrapComponent, TrapInteractionDoAfterEvent>(OnTrapDoAfter);
+        SubscribeLocalEvent<TrapComponent, StartCollideEvent>(OnStepTriggerAttempt);
     }
 
-    private void VerbsTrap(Entity<TrapComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    private void OnAlternativeVerb(Entity<TrapComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
             return;
@@ -53,21 +50,12 @@ public sealed class TrapSystem : EntitySystem
         if (_openable.IsClosed(args.Target))
             return;
 
-        AlternativeVerb setTrap = new()
-        {
-            Text = Loc.GetString("trap-component-set-trap"),
-        };
-
-        AlternativeVerb defuseTrap = new()
-        {
-            Text = Loc.GetString("trap-component-defuse-trap"),
-        };
-
+        var verb = new AlternativeVerb();
         var doAfterArgs = new DoAfterArgs(
             EntityManager,
             args.User,
             ent.Comp.InteractionDelay,
-            new InteractionTrapDoAfterEvent(),
+            new TrapInteractionDoAfterEvent(),
             ent.Owner,
             target: ent.Owner,
             used: args.User)
@@ -79,21 +67,22 @@ public sealed class TrapSystem : EntitySystem
         var localUser = args.User;
         if (ent.Comp.IsArmed)
         {
-            defuseTrap.Act = () => _doAfter.TryStartDoAfter(doAfterArgs);
-            args.Verbs.Add(defuseTrap);
+            verb.Text = Loc.GetString("trap-component-defuse-trap");
+            verb.Act = () => _doAfter.TryStartDoAfter(doAfterArgs);
         }
         else
         {
-            setTrap.Act = () =>
+            verb.Text = Loc.GetString("trap-component-set-trap");
+            verb.Act = () =>
             {
                 if (HandleSetTrap(ent.Owner, localUser))
                     _doAfter.TryStartDoAfter(doAfterArgs);
             };
-            args.Verbs.Add(setTrap);
         }
-    }
 
-    private void OnTrapDoAfter(Entity<TrapComponent> ent, ref InteractionTrapDoAfterEvent args)
+        args.Verbs.Add(verb);
+    }
+    private void OnTrapDoAfter(Entity<TrapComponent> ent, ref TrapInteractionDoAfterEvent args)
     {
         if (args.Cancelled)
             return;
@@ -107,46 +96,32 @@ public sealed class TrapSystem : EntitySystem
         var xform = Transform(ent.Owner).Coordinates;
         _audio.PlayPredicted(ent.Comp.IsArmed ? ent.Comp.SetTrapSound : ent.Comp.DefuseTrapSound, xform, args.User);
 
-        ChangeStateTrap(ent.Owner, ent.Comp);
+        ToggleTrap(ent.Owner, ent.Comp);
     }
 
-    private void EnsnareableOnStep(Entity<TrapComponent> ent, ref StepTriggerAttemptEvent args)
+    private void OnStepTriggerAttempt(Entity<TrapComponent> ent, ref StartCollideEvent args)
     {
-        if (!ent.Comp.IsArmed)
+        if(!ent.Comp.IsArmed)
             return;
 
-        if (_entityWhitelist.IsBlacklistPass(ent.Comp.Blacklist, args.Tripper))
+        if (_entityWhitelist.IsBlacklistPass(ent.Comp.Blacklist, args.OtherEntity))
             return;
-
-        if (!TryComp<StatusEffectsComponent>(args.Tripper, out var status))
-            return;
-
-        if (ent.Comp.DurationStun != TimeSpan.Zero)
-        {
-            _stunSystem.TryStun(args.Tripper, ent.Comp.DurationStun, true, status);
-            _stunSystem.TryKnockdown(args.Tripper, ent.Comp.DurationStun, true, status);
-        }
-
-        if (ent.Comp.DamageOnTrapped != null)
-        {
-            if (!HasComp<DamageableComponent>(args.Tripper))
-                return;
-            _damageableSystem.TryChangeDamage(args.Tripper, ent.Comp.DamageOnTrapped, true);
-        }
-
-        if (ent.Comp.Reagent != null)
-        {
-            if (!_solutionContainers.TryGetInjectableSolution(args.Tripper, out var injectable, out _))
-                return;
-
-            _solutionContainers.TryAddReagent(injectable.Value, ent.Comp.Reagent, ent.Comp.Quantity, out _);
-        }
-
-        ChangeStateTrap(ent.Owner, ent.Comp); //now, unanchor() does not work in a container.
 
         if (!TryComp<EnsnaringComponent>(ent.Owner, out var ensnaring))
             return;
-        _ensnareableSystem.TryEnsnare(args.Tripper, ent.Owner, ensnaring);
+
+        if (ent.Comp.DurationStun != TimeSpan.Zero && TryComp<StatusEffectsComponent>(args.OtherEntity, out var status))
+        {
+            _stunSystem.TryStun(args.OtherEntity, ent.Comp.DurationStun, true, status);
+            _stunSystem.TryKnockdown(args.OtherEntity, ent.Comp.DurationStun, true, status);
+        }
+
+        var ev = new SharedTriggerEvent(ent.Owner, args.OtherEntity);
+        RaiseLocalEvent(ent.Owner, ev);
+
+        ToggleTrap(ent.Owner, ent.Comp);
+
+        _ensnareableSystem.TryEnsnare(args.OtherEntity, ent.Owner, ensnaring);
 
         if(_net.IsServer)
             _audio.PlayPvs(ent.Comp.HitTrapSound, ent.Owner);
@@ -161,18 +136,20 @@ public sealed class TrapSystem : EntitySystem
             trapComp.IsArmed ? TrapVisuals.Armed : TrapVisuals.Unarmed, appearance);
     }
 
-    private void ChangeStateTrap(EntityUid uid, TrapComponent comp)
+    private void ToggleTrap(EntityUid uid, TrapComponent comp)
     {
         comp.IsArmed = !comp.IsArmed;
         Dirty(uid,comp);
         UpdateVisuals(uid);
 
         if (comp.IsArmed)
+        {
             _transformSystem.AnchorEntity(uid); //клиентский баг
+        }
         else
             _transformSystem.Unanchor(uid);
 
-        var ev = new TrapChangedArmedEvent(comp.IsArmed);
+        var ev = new TrapToggledEvent(comp.IsArmed);
         RaiseLocalEvent(uid, ev);
     }
 

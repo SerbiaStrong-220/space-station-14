@@ -13,19 +13,19 @@ public sealed partial class CultYoggTrapComponent : Component
 {
     /// <summary>
     /// Maximum number of simultaneously armed traps.
-    /// If 0, there will be no limit on the number of traps.
+    /// If -1, there will be no limit on the number of traps.
     /// </summary>
     [DataField]
-    public int MaxTrap = 0;
+    public int TrapsLimit = -1;
 
     /// <summary>
     /// Value visibility <see cref="StealthComponent"/> on armed trap
     /// </summary>
     [DataField]
-    public float VisibilityOnArmed;
+    public float ArmedVisibility;
     /// <summary>
     /// Value visibility <see cref="StealthComponent"/> on un armed trap
     /// </summary>
     [DataField]
-    public float VisibilityOnUnArmed;
+    public float UnArmedVisibility;
 }
