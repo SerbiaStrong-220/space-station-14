@@ -1,7 +1,7 @@
 using System.Numerics;
 using Content.Client.Humanoid;
 using Content.Client.Inventory;
-using Content.Client.SS220.UserInterface;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
@@ -81,18 +81,12 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
             StationRecordsFiltersValue.Text = "";
             FilterListingOfRecords();
         };
+
+        // SS220 add pin button begin
+        var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+        pinButton.Margin = new Thickness(0, 0, 5, 0);
+        // SS220 add pin button end
     }
-
-    //ss220 add pin for ui start
-    protected override void Opened()
-    {
-        base.Opened();
-
-        var pinnedButton = PinUISystem.CreateButton(this, CloseButton);
-
-        pinnedButton.OnPressed += _ => PinUISystem.SetPinned(this, pinnedButton.Pressed);
-    }
-    //ss220 add pin for ui end
 
     public void UpdateState(GeneralStationRecordConsoleState state)
     {
