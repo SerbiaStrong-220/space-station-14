@@ -90,7 +90,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             return;
         }
 
-        _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, entity, TimeSpan.FromSeconds(entity.Comp.ErectDoAfterSeconds),
+        _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, entity, entity.Comp.ErectDoAfterSeconds,
             new MiGoErectDoAfterEvent()
             {
                 BuildingId = args.BuildingId,

@@ -53,6 +53,7 @@ public sealed partial class MiGoComponent : Component
     /// <summary>
     ///Enlsavement variables
     /// <summary>
+    [ViewVariables]
     public string RequiedEffect = "Rave";//Required effect for enslavement
 
     [DataField]
@@ -61,19 +62,20 @@ public sealed partial class MiGoComponent : Component
     /// <summary>
     /// The time it takes to enslave the target
     /// </summary>
-    [DataField]
+    [ViewVariables]
     public TimeSpan EnslaveTime = TimeSpan.FromSeconds(3);
 
     /// <summary>
     ///Erect variables
     /// <summary>
+    [ViewVariables]
     public TimeSpan HealingEffectTime = TimeSpan.FromSeconds(15);//How long heal effect will occure
 
     /// <summary>
     ///Erect variables
     /// <summary>
     [ViewVariables, DataField]
-    public float ErectDoAfterSeconds = 3f;
+    public TimeSpan ErectDoAfterSeconds = TimeSpan.FromSeconds(3);
 
     /// <summary>
     /// Base time to erase buildings.
@@ -85,15 +87,8 @@ public sealed partial class MiGoComponent : Component
     /// <summary>
     /// Which entities can be erased by MiGo
     /// </summary>
-    [DataField]
-    public EntityWhitelist? EraseWhitelist = new()
-    {
-        Components =
-        [
-            "CultYoggBuilding",
-            "CultYoggBuildingFrame"
-        ]
-    };
+    [DataField(required: true)]
+    public EntityWhitelist? EraseWhitelist = new();
     #region Astral
     /// <summary>
     ///Astral variables
@@ -151,6 +146,7 @@ public sealed partial class MiGoComponent : Component
     /// <summary>
     /// How long it takes to be able to replace this migo
     /// </summary>
+    [ViewVariables]
     public TimeSpan BeforeReplacementCooldown = TimeSpan.FromSeconds(300);
 
     /// <summary>
