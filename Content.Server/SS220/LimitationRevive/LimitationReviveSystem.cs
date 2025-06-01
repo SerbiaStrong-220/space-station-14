@@ -6,7 +6,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Traits;
-using Content.Shared.Zombies;
+using Content.Server.Zombies;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
@@ -28,14 +28,14 @@ public sealed class LimitationReviveSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnMobStateChanged, before: [typeof(ZombieSystem)]);
         SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
         SubscribeLocalEvent<LimitationReviveComponent, AddReviweDebuffsEvent>(OnAddReviweDebuffs);
     }
 
     private void OnMobStateChanged(Entity<LimitationReviveComponent> ent, ref MobStateChangedEvent args)
     {
-        if (args.NewMobState == MobState.Dead && !HasComp<ZombieComponent>(ent))
+        if (args.NewMobState == MobState.Dead)
         {
             ent.Comp.DamageTime = _timing.CurTime + ent.Comp.BeforeDamageDelay;
         }
