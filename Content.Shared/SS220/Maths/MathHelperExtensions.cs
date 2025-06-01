@@ -37,7 +37,7 @@ public static partial class MathHelperExtensions
         var result = new List<Box2>();
 
         var inter = box.Intersect(cutter);
-        if (inter == Box2.Empty)
+        if (Box2.Area(inter) <= 0)
         {
             result.Add(box);
             return result;

@@ -402,7 +402,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         {
             var coords = new EntityCoordinates(grid, gridBox.Center);
             var tileRef = _map.GetTileRef(grid, coords);
-            if (tileRef.IsSpace())
+            if (tileRef.Tile.IsEmpty)
                 spaceBoxes.Add(gridBox);
         }
 

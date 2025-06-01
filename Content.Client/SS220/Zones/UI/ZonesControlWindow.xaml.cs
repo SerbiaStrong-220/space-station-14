@@ -40,13 +40,6 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
         _zones = _entityManager.System<ZonesSystem>();
 
-        OptionsPanel.PanelOverride = new StyleBoxFlat()
-        {
-            BackgroundColor = new Color(64, 64, 64),
-            BorderColor = new Color(128, 128, 128),
-            BorderThickness = new Thickness(2)
-        };
-
         RefreshButton.OnPressed += _ => RefreshEntries();
         OverlayButton.OnToggled += e => _zones.SetOverlay(e.Pressed);
         SearchLineEdit.OnTextChanged += ApplySearchFilter;
@@ -59,6 +52,12 @@ public sealed partial class ZonesControlWindow : DefaultWindow
                 SetOptions(ZoneOptions.None);
         };
 
+        OptionsPanel.PanelOverride = new StyleBoxFlat()
+        {
+            BorderColor = new Color(96, 96, 96),
+            BorderThickness = new Thickness(2)
+        };
+
         OnOpen += RefreshEntries;
         OnClose += () => SetOptions(ZoneOptions.None);
         RefreshEntries();
@@ -66,6 +65,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
     public void RefreshEntries()
     {
+
         var toDelete = _zoneContainerEntries.ToDictionary();
         var toAdd = new Dictionary<EntityUid, ZoneContainerEntry>();
 

@@ -51,7 +51,7 @@ public sealed partial class ZoneParams
     public bool AttachToGrid = false;
 
     [ViewVariables]
-    public bool CropToParentSize = false;
+    public bool CutSpace = false;
 
     /// <summary>
     /// Boxes in local coordinates (attached to <see cref="Container"/>) that determine the size of the zone
@@ -67,7 +67,7 @@ public sealed partial class ZoneParams
         Color = @params.Color;
         AttachToGrid = @params.AttachToGrid;
         Boxes = @params.Boxes;
-        CropToParentSize = @params.CutSpace;
+        CutSpace = @params.CutSpace;
     }
 
     public ZoneParamsState GetState()
@@ -79,7 +79,8 @@ public sealed partial class ZoneParams
             ProtoId = ProtoId,
             Color = Color,
             AttachToGrid = AttachToGrid,
-            Boxes = Boxes
+            Boxes = Boxes,
+            CutSpace = CutSpace
         };
     }
 
