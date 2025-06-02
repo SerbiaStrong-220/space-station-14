@@ -361,9 +361,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         var telepathy = EnsureComp<TelepathyComponent>(uid);
         telepathy.CanSend = true;//we are allowing it cause testing
         telepathy.TelepathyChannelPrototype = rule.Comp.TelepathyChannel;
-        //trying to fix telepathy
-        if (TryComp<ActorComponent>(uid, out var actor))
-            RaiseNetworkEvent(new UpdateChannelEvent(), actor.PlayerSession);
 
         //allows to hide the sedative sting
         var innerToggle = EnsureComp<InnerHandToggleableComponent>(uid);
