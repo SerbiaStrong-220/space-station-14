@@ -9,7 +9,7 @@ public sealed class SS220SharedTriggerSystem : EntitySystem
 {
     public void SendTrigger(EntityUid uid, EntityUid user)
     {
-        var ev = new SS220SharedTriggerEvent(uid, user);
+        var ev = new SharedTriggerEvent(uid, user);
         RaiseLocalEvent(uid, ev);
     }
 }
