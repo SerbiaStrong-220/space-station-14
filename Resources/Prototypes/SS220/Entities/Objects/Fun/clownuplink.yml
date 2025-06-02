@@ -212,7 +212,7 @@
 
 - type: entity
   parent: [BaseItem, StorePresetUplinkClown]
-  id: BananaPhoneInstrument2
+  id: ClownUplink
   name: banana phone
   description: Direct connection with the Glorious Honkmother.
   suffix: Clown Uplink
