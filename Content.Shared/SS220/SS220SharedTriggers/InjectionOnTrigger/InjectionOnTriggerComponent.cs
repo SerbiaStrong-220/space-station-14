@@ -4,7 +4,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.SharedTriggers.InjectionOnTrigger;
+namespace Content.Shared.SS220.SS220SharedTriggers.InjectionOnTrigger;
 
 /// <summary>
 /// This is used for injects reagents when a trigger is activated

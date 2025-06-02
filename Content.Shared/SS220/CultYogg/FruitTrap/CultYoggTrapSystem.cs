@@ -19,7 +19,6 @@ public sealed class CultYoggTrapSystem : EntitySystem
 
     private readonly HashSet<EntityUid> _trapYoggList = new();
 
-
     /// <inheritdoc/>
     public override void Initialize()
     {

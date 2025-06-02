@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "By hed77 for SS220",
+  "license": "CC-BY-NC-SA",
+  "copyright": "Taken from https://github.com/goonstation/goonstation/blob/HEAD/icons/obj/items/weapons.dmi, Resprited by discord hed77",
   "size": {
     "x": 32,
     "y": 32

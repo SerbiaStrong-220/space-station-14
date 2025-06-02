@@ -6,7 +6,7 @@ using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
-using Content.Shared.SS220.SharedTriggers.SS220SharedTriggerEvent;
+using Content.Shared.SS220.SS220SharedTriggers.System;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
@@ -33,7 +33,7 @@ public sealed class TrapSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AnchorableSystem _anchorableSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SS220SharedTriggerSystem _trigger = default!;
+    [Dependency] private readonly TriggerSystem _trigger = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -111,7 +111,7 @@ public sealed class TrapSystem : EntitySystem
             _stunSystem.TryKnockdown(args.OtherEntity, ent.Comp.DurationStun, true, status);
         }
 
-        _trigger.SendTrigger(ent.Owner, args.OtherEntity);
+        _trigger.TriggerTarget(ent.Owner);
         ToggleTrap(ent.Owner, ent.Comp);
 
         _ensnareableSystem.TryEnsnare(args.OtherEntity, ent.Owner, ensnaring);
