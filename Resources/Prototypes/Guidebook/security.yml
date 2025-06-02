@@ -6,10 +6,10 @@
   - Forensics
   - Defusal
   - CriminalRecords
- # SS220 space-law begin
- # - SpaceLaw
+  # SS220 space-law begin
+  # - SpaceLaw
   - SS220SpaceLaw
- # SS220 space-law end
+  # SS220 space-law end
 
 - type: guideEntry
   id: Forensics
