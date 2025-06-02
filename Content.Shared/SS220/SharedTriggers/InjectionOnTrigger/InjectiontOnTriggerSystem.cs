@@ -14,10 +14,10 @@ public sealed class InjectionOnTriggerSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<InjectionOnTriggerComponent, SharedTriggerEvent.SharedTriggerEvent>(OnTriggers);
+        SubscribeLocalEvent<InjectionOnTriggerComponent, SS220SharedTriggerEvent.SS220SharedTriggerEvent>(OnTriggered);
     }
 
-    private void OnTriggers(Entity<InjectionOnTriggerComponent> ent, ref SharedTriggerEvent.SharedTriggerEvent args)
+    private void OnTriggered(Entity<InjectionOnTriggerComponent> ent, ref SS220SharedTriggerEvent.SS220SharedTriggerEvent args)
     {
         if(!ent.Comp.Reagent.HasValue)
             return;

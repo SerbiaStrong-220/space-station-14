@@ -50,15 +50,6 @@ public sealed class CultYoggTrapSystem : EntitySystem
             return;
         }
 
-        _trapYoggList.Clear();
-        var query = AllEntityQuery<CultYoggTrapComponent, TrapComponent>();
-
-        while (query.MoveNext(out var fruitTrap, out _, out var queryTrapComp))
-        {
-            if(queryTrapComp.IsArmed)
-                _trapYoggList.Add(fruitTrap);
-        }
-
         if (cultYoggComp.CurrentStage == CultYoggStage.Alarm)
         {
             _popup.PopupClient(Loc.GetString("cult-yogg-trap-component-alarm-stage"), args.DoAfter.Args.User, args.DoAfter.Args.User);
@@ -67,7 +58,6 @@ public sealed class CultYoggTrapSystem : EntitySystem
         else if (_trapYoggList.Count >= ent.Comp.TrapsLimit
             && ent.Comp.TrapsLimit > 0)
         {
-
             _popup.PopupClient(Loc.GetString("cult-yogg-trap-component-max-value"), args.DoAfter.Args.User, args.DoAfter.Args.User);
             args.Cancel();
         }
@@ -89,5 +79,10 @@ public sealed class CultYoggTrapSystem : EntitySystem
         var visibility = args.IsArmed ? ent.Comp.ArmedVisibility : ent.Comp.UnArmedVisibility;
         _stealth.SetEnabled(ent.Owner, args.IsArmed);
         _stealth.SetVisibility(ent.Owner, visibility);
+
+        if (args.IsArmed)
+            _trapYoggList.Add(ent.Owner);
+        else
+            _trapYoggList.Remove(ent.Owner);
     }
 }

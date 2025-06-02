@@ -1,8 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-namespace Content.Shared.SS220.SharedTriggers.SharedTriggerEvent;
+namespace Content.Shared.SS220.SharedTriggers.SS220SharedTriggerEvent;
 
-public sealed class SharedTriggerEvent : EntityEventArgs
+public sealed class SS220SharedTriggerEvent : EntityEventArgs
 {
     /// <summary>
     /// The item on which the event is triggered
@@ -14,7 +14,7 @@ public sealed class SharedTriggerEvent : EntityEventArgs
     /// </summary>
     public readonly EntityUid User;
 
-    public SharedTriggerEvent(EntityUid triggeredItem, EntityUid user)
+    public SS220SharedTriggerEvent(EntityUid triggeredItem, EntityUid user)
     {
         TriggeredItem = triggeredItem;
         User = user;

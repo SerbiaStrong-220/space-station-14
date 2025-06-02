@@ -6,7 +6,7 @@ using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
-using Content.Shared.SS220.SharedTriggers.SharedTriggerEvent;
+using Content.Shared.SS220.SharedTriggers.SS220SharedTriggerEvent;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
@@ -33,6 +33,7 @@ public sealed class TrapSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AnchorableSystem _anchorableSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SS220SharedTriggerSystem _trigger = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -75,7 +76,7 @@ public sealed class TrapSystem : EntitySystem
             verb.Text = Loc.GetString("trap-component-set-trap");
             verb.Act = () =>
             {
-                if (HandleSetTrap(ent.Owner, localUser))
+                if (CanArmTrap(ent.Owner, localUser))
                     _doAfter.TryStartDoAfter(doAfterArgs);
             };
         }
@@ -110,9 +111,7 @@ public sealed class TrapSystem : EntitySystem
             _stunSystem.TryKnockdown(args.OtherEntity, ent.Comp.DurationStun, true, status);
         }
 
-        var ev = new SharedTriggerEvent(ent.Owner, args.OtherEntity);
-        RaiseLocalEvent(ent.Owner, ev);
-
+        _trigger.SendTrigger(ent.Owner, args.OtherEntity);
         ToggleTrap(ent.Owner, ent.Comp);
 
         _ensnareableSystem.TryEnsnare(args.OtherEntity, ent.Owner, ensnaring);
@@ -147,7 +146,7 @@ public sealed class TrapSystem : EntitySystem
         RaiseLocalEvent(uid, ev);
     }
 
-    private bool HandleSetTrap(EntityUid trapEntity, EntityUid user)
+    private bool CanArmTrap(EntityUid trapEntity, EntityUid user)
     {
         //Providing a stuck traps on one tile
         var coordinates = Transform(trapEntity).Coordinates;

@@ -14,10 +14,10 @@ public sealed class DamageOnTriggerSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<DamageOnTriggerComponent, SharedTriggerEvent.SharedTriggerEvent>(OnCollide);
+        SubscribeLocalEvent<DamageOnTriggerComponent, SS220SharedTriggerEvent.SS220SharedTriggerEvent>(OnTriggered);
     }
 
-    private void OnCollide(Entity<DamageOnTriggerComponent> ent, ref SharedTriggerEvent.SharedTriggerEvent args)
+    private void OnTriggered(Entity<DamageOnTriggerComponent> ent, ref SS220SharedTriggerEvent.SS220SharedTriggerEvent args)
     {
         if (ent.Comp.Damage == null)
             return;
