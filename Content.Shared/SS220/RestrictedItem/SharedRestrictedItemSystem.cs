@@ -29,7 +29,6 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
         SubscribeLocalEvent<RestrictedItemComponent, BeingEquippedAttemptEvent>(OnEquipAttempt);
         SubscribeLocalEvent<RestrictedItemComponent, BeingPulledAttemptEvent>(OnPullAttempt);
         SubscribeLocalEvent<RestrictedItemComponent, GettingPickedUpAttemptEvent>(OnPickupAttempt);
-        SubscribeLocalEvent<DropAllRestrictedEvent>(OnDropAll);
     }
 
     private void OnPickupAttempt(Entity<RestrictedItemComponent> ent, ref GettingPickedUpAttemptEvent args)
@@ -70,40 +69,18 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
 
         return true;
     }
-
-    private void OnDropAll(ref DropAllRestrictedEvent ev)
+    public void DropAllRestrictedItems(EntityUid ent)
     {
-        var removedItems = RemoveItems(ev.Target);
-        ev.DroppedItems.UnionWith(removedItems);
-    }
-
-    private HashSet<EntityUid> RemoveItems(EntityUid target)
-    {
-        HashSet<EntityUid> removedItems = [];
-        if (!_inventory.TryGetSlots(target, out _))
-            return removedItems;
+        if (!_inventory.TryGetSlots(ent, out _))
+            return;
 
         // trying to unequip all item's with component
-        foreach (var item in _inventory.GetHandOrInventoryEntities(target))
+        foreach (var item in _inventory.GetHandOrInventoryEntities(ent))
         {
             if (!TryComp<RestrictedItemComponent>(item, out var restrictedComp)) //ToDo_SS220 make check for a whitelist
                 continue;
 
-            _transform.DropNextTo(item, target);
-            removedItems.Add(item);
+            _transform.DropNextTo(item, ent);
         }
-
-        return removedItems;
     }
-}
-
-/// <summary>
-///     Raised when we need to remove all Restricted objects
-/// </summary>
-[ByRefEvent, Serializable]
-public sealed class DropAllRestrictedEvent(EntityUid target, HashSet<EntityUid>? droppedItems = null) : EntityEventArgs
-{
-    public readonly EntityUid Target = target;
-
-    public HashSet<EntityUid> DroppedItems = droppedItems ?? new();
 }

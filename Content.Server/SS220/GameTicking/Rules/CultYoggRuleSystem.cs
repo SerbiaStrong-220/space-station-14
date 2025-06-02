@@ -74,6 +74,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
     [Dependency] private readonly EuiManager _euiManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly SharedRestrictedItemSystem _sharedRestrictedItemSystem = default!;
 
     private List<List<string>> _sacraficialTiers = [];
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
@@ -424,8 +425,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         var stuckEv = new DropAllStuckOnEquipEvent(uid);
         RaiseLocalEvent(uid, ref stuckEv, true);
 
-        var restrEv = new DropAllRestrictedEvent(uid);
-        RaiseLocalEvent(uid, ref restrEv, true);
+        _sharedRestrictedItemSystem.DropAllRestrictedItems(uid);
 
         // Change the faction
         _npcFaction.RemoveFaction(uid, component.CultYoggFaction, false);
