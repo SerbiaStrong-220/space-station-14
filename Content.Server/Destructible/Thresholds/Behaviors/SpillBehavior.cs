@@ -27,16 +27,21 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
 
             var coordinates = system.EntityManager.GetComponent<TransformComponent>(owner).Coordinates;
 
-            if (system.EntityManager.TryGetComponent(owner, out SpillableComponent? spillableComponent) &&
-                solutionContainerSystem.TryGetSolution(owner, spillableComponent.SolutionName, out _, out var compSolution))
+            //ss220 fix dupe puddles start (delete after merge https://github.com/space-wizards/space-station-14/pull/33231)
+            if (Solution == null)
+                return;
+
+            if (system.EntityManager.TryGetComponent(owner, out SpillableComponent? spill) &&
+                spill.SolutionName == Solution)
             {
-                spillableSystem.TrySplashSpillAt(owner, coordinates, compSolution, out _, false, user: cause);
+                return;
             }
-            else if (Solution != null &&
-                     solutionContainerSystem.TryGetSolution(owner, Solution, out _, out var behaviorSolution))
+
+            if (solutionContainerSystem.TryGetSolution(owner, Solution, out _, out var behaviorSolution))
             {
                 spillableSystem.TrySplashSpillAt(owner, coordinates, behaviorSolution, out _, user: cause);
             }
+            //ss220 fix dupe puddles end
         }
     }
 }

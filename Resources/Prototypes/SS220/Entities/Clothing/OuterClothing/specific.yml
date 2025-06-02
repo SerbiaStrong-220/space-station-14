@@ -23,10 +23,9 @@
   - type: HiddenDescription
     entries:
     - label: hidden-desc-toy-armour-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: hidden-desc-toy-armour-clown
       jobRequired:
         - Clown

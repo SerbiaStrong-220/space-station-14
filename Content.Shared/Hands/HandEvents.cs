@@ -330,4 +330,20 @@ namespace Content.Shared.Hands
             Args = args;
         }
     }
+
+    //SS220 Cult_update2 start
+    /// <summary>
+    ///     Event raised by a client when they want to switch active hand
+    /// </summary>
+    [Serializable, NetSerializable]
+    public sealed class DidSwitchHandEvent : EntityEventArgs
+    {
+        public string HandName { get; }
+
+        public DidSwitchHandEvent(string handName)
+        {
+            HandName = handName;
+        }
+    }
+    //SS220 Cult_update2 end
 }

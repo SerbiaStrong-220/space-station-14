@@ -161,7 +161,6 @@
     Piercing: 1.2
     Cold: 1.5
     Poison: 0.8
-    Cellular: 0.2
 
 - type: damageModifierSet
   id: Infernal
@@ -208,7 +207,6 @@
     Heat: 0.9 #SS220 lowTTKUpdate
     Poison: 0.0
     Radiation: 0.0
-    Stamina: 0.5
 
 # immune to everything except physical and heat damage
 - type: damageModifierSet
@@ -254,6 +252,7 @@
     Bloodloss: 0.0 # no double dipping
     Cellular: 0.0
     Caustic: 0.0
+    Сerebral: 0.0 #SS220 Limitation revive
 
 - type: damageModifierSet
   id: SlimePet # Very survivable slimes

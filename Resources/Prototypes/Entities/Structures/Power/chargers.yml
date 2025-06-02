@@ -170,6 +170,10 @@
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
           - Stunbaton
+          # SS220 Added WeaponRechargerWhitelist tag for charging support begin
+          tags:
+          - WeaponRechargerWhitelist
+          # SS220 Added WeaponRechargerWhitelist tag for charging support end
 
 - type: entity
   parent: BaseItemRecharger
@@ -230,6 +234,10 @@
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
           - Stunbaton
+          # SS220 Added WeaponRechargerWhitelist tag for charging support begin
+          tags:
+          - WeaponRechargerWhitelist
+          # SS220 Added WeaponRechargerWhitelist tag for charging support end
 
 - type: entity
   parent: BaseRecharger

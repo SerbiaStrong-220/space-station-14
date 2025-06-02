@@ -19,13 +19,14 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.45
-        Slash: 0.6
-        Piercing: 0.45
-        Heat: 0.4
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.6
         Radiation: 0.4
-        Caustic: 0.1
-        Stamina: 0.35
+        Caustic: 0.4
+  - type: StaminaResistance
+    damageCoefficient: 0.35
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -33,9 +34,12 @@
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCultYogg
   - type: StuckOnEquip
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
 
 - type: entity
-  parent: ClothingHeadHardsuitWithLightBase
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitCultYogg
   name: Hardsuit helmet corrupted by a Cult
   description: Corrupted pile of incomprehensible substane, somehowe prowiding great defence.

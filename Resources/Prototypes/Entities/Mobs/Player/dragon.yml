@@ -44,7 +44,7 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 3
     baseSprintSpeed: 5
-    weightlessModifier: 1.5
+    baseWeightlessModifier: 1.5
   - type: RandomSprite
     available:
     - enum.DamageStateVisualLayers.Base:
@@ -174,7 +174,17 @@
     canSend: true
     telepathyChannelPrototype: TelepathyChannelSpaceDragon
   # SS220 Telepathy end
-
+  - type: RandomMetadata
+    nameSegments:
+    - NamesDragon
+    - NamesDragonTitle
+    nameFormat: name-format-dragon
+  - type: Prying
+    pryPowered: true
+    force: true
+    speedModifier: 2.5 # fast because dragon strong
+    useSound:
+      path: /Audio/Items/crowbar.ogg
 
 - type: entity
   parent: BaseMobDragon
@@ -182,6 +192,9 @@
   components:
   - type: Dragon
     spawnRiftAction: ActionSpawnRift
+  - type: GhostRole
+    mindRoles:
+    - MindRoleDragon
   - type: ActionGun
     action: ActionDragonsBreath
     gunProto: DragonsBreathGun

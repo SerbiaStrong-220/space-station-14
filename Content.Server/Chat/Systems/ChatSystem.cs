@@ -390,7 +390,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         {
             _audio.PlayGlobal(announcementSound == null ? DefaultAnnouncementSound
                 : sender == Loc.GetString("admin-announce-announcer-default") ? CentComAnnouncementSound // Corvax-Announcements: Support custom alert sound from admin panel
-                : _audio.GetSound(announcementSound),
+                : _audio.ResolveSound(announcementSound),
                 Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f));
         }
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Global station announcement from {sender}: {message}");
@@ -419,6 +419,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source ?? default, false, true, colorOverride);
+        RaiseLocalEvent(new AnnouncementSpokeEvent(filter, DefaultAnnouncementSound, AudioParams.Default, message, null)); // ss220-tts-announcement
         if (playSound)
         {
             _audio.PlayGlobal(announcementSound?.ToString() ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
@@ -440,6 +441,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         string message,
         string? sender = null,
         bool playSound = true,
+        SoundSpecifier? announcementSound = null,//SS220 CluwneComms
         Color? colorOverride = null,
         string? voiceId = null)
     {
@@ -460,8 +462,16 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source, false, true, colorOverride);
 
+        //SS220 CluwneComms start
+        //made here cause  "announcementSound?.ToString()" returning shit
+        string? key = null;
+
+        if (announcementSound is SoundPathSpecifier path)
+            key = path.Path.ToString();
+        //SS220 CluwneComms end
+
         if (playSound)
-            RaiseLocalEvent(new AnnouncementSpokeEvent(filter, DefaultAnnouncementSound, AudioParams.Default, message, voiceId));
+            RaiseLocalEvent(new AnnouncementSpokeEvent(filter, key?.ToString() ?? DefaultAnnouncementSound, AudioParams.Default, message, voiceId));//SS220 CluwneComms
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement on {station} from {sender}: {message}");
     }
@@ -530,7 +540,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         //SS220-Add-Languages begin
         message = languageMessage.GetMessage(source, false);
 
-        //SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range); 
+        //SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
         var ev = new EntitySpokeEvent(source, message, originalMessage, null, null, languageMessage);
         RaiseLocalEvent(source, ev, true);
         //SS220-Add-Languages end
@@ -898,8 +908,8 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         if (findEnglish)
         {
-            newMessage = string.Empty;
-            newEmoteStr = "кашляет";
+            emoteStr = "кашляет";
+            return string.Empty;
         }
 
         emoteStr = newEmoteStr;
@@ -1020,7 +1030,10 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (transformEntity.MapID != sourceMapId)
                 continue;
 
-            var observer = ghostHearing.HasComponent(playerEntity);
+            //ss220 add filter tts for ghost start
+            var observer = ghostHearing.TryGetComponent(playerEntity, out var ghostComp)
+                           && ghostComp.IsEnabled;
+            //ss220 add filter tts for ghost end
 
             // even if they are a ghost hearer, in some situations we still need the range
             if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceGetRange)
@@ -1261,19 +1274,23 @@ public sealed class AnnouncementSpokeEvent : EntityEventArgs
     }
 }
 
+//ss220 add filter tts for ghost start
 public sealed class RadioSpokeEvent : EntityEventArgs
 {
     public readonly EntityUid Source;
     public readonly string Message;
+    public readonly RadioChannelPrototype Channel;
     public readonly RadioEventReceiver[] Receivers; // SS220 Silicon TTS fix
 
-    public RadioSpokeEvent(EntityUid source, string message, RadioEventReceiver[] receivers)
+    public RadioSpokeEvent(EntityUid source, string message, RadioChannelPrototype channel, RadioEventReceiver[] receivers)
     {
         Source = source;
         Message = message;
+        Channel = channel;
         Receivers = receivers;
     }
 }
+//ss220 add filter tts for ghost end
 
 // SS220 Silicon TTS fix begin
 public readonly struct RadioEventReceiver

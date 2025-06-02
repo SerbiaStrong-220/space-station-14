@@ -3,14 +3,17 @@
   name: guide-entry-species
   text: "/ServerInfo/Guidebook/Mobs/Species.xml"
   children:
+  # SS220 guidebook-species-translation begin
     - Arachnid
-    - Diona
-    - Dwarf
-    - Human
-    - Moth
-    - Reptilian
-    - SlimePerson
     - Vox
+    - Dwarf
+    - Diona
+    - Moth
+    - SlimePerson
+    - Tajaran
+    - Reptilian
+    - Human
+  # SS220 guidebook-species-translation end
 
 - type: guideEntry
   id: Arachnid

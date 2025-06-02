@@ -4,6 +4,8 @@ using Content.Shared.FixedPoint;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Cultists;
+using Content.Shared.Tag;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -14,9 +16,6 @@ namespace Content.Server.SS220.GameTicking.Rules.Components;
 [RegisterComponent, Access(typeof(CultYoggRuleSystem))]
 public sealed partial class CultYoggRuleComponent : Component
 {
-    [DataField]
-    public int ReqAmountOfMiGo = 3;
-
     [DataField]
     public Dictionary<CultYoggStage, CultYoggStageDefinition> Stages { get; private set; } = new();
 
@@ -72,6 +71,12 @@ public sealed partial class CultYoggRuleComponent : Component
     //telephaty channel
     [DataField]
     public string TelepathyChannel = "TelepathyChannelYoggSothothCult";
+
+    [DataField]
+    public EntityWhitelist WhitelistToggleable = new EntityWhitelist
+    {
+        Tags = new() { "CultYoggInnerHandToggleable" }
+    };
     /// <summary>
     /// Check for an endgame screen title
     /// </summary>
@@ -81,7 +86,7 @@ public sealed partial class CultYoggRuleComponent : Component
     [DataField]
     public bool Summoned = false;
 
-    [DataField("summonMusic")]
+    [DataField]
     public SoundSpecifier SummonMusic = new SoundCollectionSpecifier("CultYoggMusic");//ToDo make own
     public enum SelectionState
     {

@@ -26,8 +26,11 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Overlays;
 using Content.Shared.SS220.Ghost;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
+using Content.Shared.Tag;
+using Content.Shared.Warps;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -54,7 +57,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly MindSystem _minds = default!;
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
+        [Dependency] private readonly ISharedPlayerManager _player = default!;
         [Dependency] private readonly TransformSystem _transformSystem = default!;
         [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
         [Dependency] private readonly MetaDataSystem _metaData = default!;
@@ -67,9 +70,13 @@ namespace Content.Server.Ghost
         [Dependency] private readonly DamageableSystem _damageable = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private readonly TagSystem _tag = default!;
+        [Dependency] private readonly NameModifierSystem _nameMod = default!;
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
+
+        private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
 
         public override void Initialize()
         {
@@ -104,6 +111,17 @@ namespace Content.Server.Ghost
 
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
+
+            SubscribeLocalEvent<GhostComponent, GetVisMaskEvent>(OnGhostVis);
+        }
+
+        private void OnGhostVis(Entity<GhostComponent> ent, ref GetVisMaskEvent args)
+        {
+            // If component not deleting they can see ghosts.
+            if (ent.Comp.LifeStage <= ComponentLifeStage.Running)
+            {
+                args.VisibilityMask |= (int)VisibilityFlags.Ghost;
+            }
         }
 
         // SS220 ADD GHOST HUD'S START
@@ -141,20 +159,25 @@ namespace Content.Server.Ghost
         {
             args.Handled = true;
 
-            if (HasComp<GhostHearingComponent>(uid))
+            //ss220 add filter tts for ghost start
+            if (!TryComp<GhostHearingComponent>(uid, out var ghostHearingComponent))
+                return;
+
+            if (ghostHearingComponent.IsEnabled)
             {
-                RemComp<GhostHearingComponent>(uid);
                 _actions.SetToggled(component.ToggleGhostHearingActionEntity, true);
+                ghostHearingComponent.IsEnabled = false;
             }
             else
             {
-                AddComp<GhostHearingComponent>(uid);
                 _actions.SetToggled(component.ToggleGhostHearingActionEntity, false);
+                ghostHearingComponent.IsEnabled = true;
             }
 
-            var str = HasComp<GhostHearingComponent>(uid)
+            var str = ghostHearingComponent.IsEnabled
                 ? Loc.GetString("ghost-gui-toggle-hearing-popup-on")
                 : Loc.GetString("ghost-gui-toggle-hearing-popup-off");
+            //ss220 add filter tts for ghost end
 
             Popup.PopupEntity(str, uid, uid);
             Dirty(uid, component);
@@ -250,10 +273,13 @@ namespace Content.Server.Ghost
                 _visibilitySystem.RefreshVisibility(uid, visibilityComponent: visibility);
             }
 
-            SetCanSeeGhosts(uid, true);
-
+            _eye.RefreshVisibilityMask(uid);
             var time = _gameTiming.CurTime;
             component.TimeOfDeath = time;
+
+            //ss220 add filter tts for ghost start
+            EnsureComp<GhostHearingComponent>(uid);
+            //ss220 add filter tts for ghost end
         }
 
         private void OnGhostShutdown(EntityUid uid, GhostComponent component, ComponentShutdown args)
@@ -271,19 +297,12 @@ namespace Content.Server.Ghost
             }
 
             // Entity can't see ghosts anymore.
-            SetCanSeeGhosts(uid, false);
+            _eye.RefreshVisibilityMask(uid);
             _actions.RemoveAction(uid, component.BooActionEntity);
-        }
 
-        private void SetCanSeeGhosts(EntityUid uid, bool canSee, EyeComponent? eyeComponent = null)
-        {
-            if (!Resolve(uid, ref eyeComponent, false))
-                return;
-
-            if (canSee)
-                _eye.SetVisibilityMask(uid, eyeComponent.VisibilityMask | (int) VisibilityFlags.Ghost, eyeComponent);
-            else
-                _eye.SetVisibilityMask(uid, eyeComponent.VisibilityMask & ~(int) VisibilityFlags.Ghost, eyeComponent);
+            //ss220 add filter tts for ghost start
+            RemComp<GhostHearingComponent>(uid);
+            //ss220 add filter tts for ghost end
         }
 
         private void OnMapInit(EntityUid uid, GhostComponent component, MapInitEvent args)
@@ -295,6 +314,8 @@ namespace Content.Server.Ghost
             _actions.AddAction(uid, ref component.ToggleGhostsActionEntity, component.ToggleGhostsAction);
             // SS220 ADD GHOST HUD'S
             _actions.AddAction(uid, ref component.ToggleHudOnOtherActionEntity, component.ToggleHudOnOtherAction);
+            //ss220 add filter tts for ghost
+            _actions.AddAction(uid, ref component.ToggleRadioChannelsUIEntity, component.ToggleRadioChannelsUI);
             //SS-220 noDeath
             if (_actions.AddAction(uid, ref component.RespawnActionEntity, out var actResp, component.RespawnAction)
                 && actResp.UseDelay != null)
@@ -436,7 +457,7 @@ namespace Content.Server.Ghost
 
         private IEnumerable<GhostWarp> GetPlayerWarps(EntityUid except)
         {
-            foreach (var player in _playerManager.Sessions)
+            foreach (var player in _player.Sessions)
             {
                 if (player.AttachedEntity is not {Valid: true} attached)
                     continue;
@@ -475,8 +496,11 @@ namespace Content.Server.Ghost
         public void MakeVisible(bool visible)
         {
             var entityQuery = EntityQueryEnumerator<GhostComponent, VisibilityComponent>();
-            while (entityQuery.MoveNext(out var uid, out _, out var vis))
+            while (entityQuery.MoveNext(out var uid, out var _, out var vis))
             {
+                if (!_tag.HasTag(uid, AllowGhostShownByEventTag))
+                    continue;
+
                 if (visible)
                 {
                     _visibilitySystem.AddLayer((uid, vis), (int) VisibilityFlags.Normal, false);
@@ -511,7 +535,7 @@ namespace Content.Server.Ghost
             if (spawnPosition?.IsValid(EntityManager) != true)
                 return false;
 
-            var mapUid = spawnPosition?.GetMapUid(EntityManager);
+            var mapUid = _transformSystem.GetMap(spawnPosition.Value);
             var gridUid = spawnPosition?.EntityId;
             // Test if the map is being deleted
             if (mapUid == null || TerminatingOrDeleted(mapUid.Value))
@@ -553,25 +577,29 @@ namespace Content.Server.Ghost
             // However, that should rarely happen.
             if (!string.IsNullOrWhiteSpace(mind.Comp.CharacterName))
                 _metaData.SetEntityName(ghost, mind.Comp.CharacterName);
-            else if (!string.IsNullOrWhiteSpace(mind.Comp.Session?.Name))
-                _metaData.SetEntityName(ghost, mind.Comp.Session.Name);
+            else if (mind.Comp.UserId is { } userId && _player.TryGetSessionById(userId, out var session))
+                _metaData.SetEntityName(ghost, session.Name);
 
             if (mind.Comp.TimeOfDeath.HasValue)
             {
-                SetTimeOfDeath(ghost, mind.Comp.TimeOfDeath!.Value, ghostComponent);
+                SetTimeOfDeath((ghost, ghostComponent), mind.Comp.TimeOfDeath!.Value);
             }
 
-            SetCanReturnToBody(ghostComponent, canReturn);
+            SetCanReturnToBody((ghost, ghostComponent), canReturn);
 
             if (canReturn)
                 _minds.Visit(mind.Owner, ghost, mind.Comp);
             else
                 _minds.TransferTo(mind.Owner, ghost, mind: mind.Comp);
             Log.Debug($"Spawned ghost \"{ToPrettyString(ghost)}\" for {mind.Comp.CharacterName}.");
+
+            // we changed the entity name above
+            // we have to call this after the mind has been transferred since some mind roles modify the ghost's name
+            _nameMod.RefreshNameModifiers(ghost);
             return ghost;
         }
 
-        public bool OnGhostAttempt(EntityUid mindId, bool canReturnGlobal, bool viaCommand = false, MindComponent? mind = null)
+        public bool OnGhostAttempt(EntityUid mindId, bool canReturnGlobal, bool viaCommand = false, bool forced = false, MindComponent? mind = null)
         {
             if (!Resolve(mindId, ref mind))
                 return false;
@@ -579,7 +607,12 @@ namespace Content.Server.Ghost
             var playerEntity = mind.CurrentEntity;
 
             if (playerEntity != null && viaCommand)
-                _adminLog.Add(LogType.Mind, $"{EntityManager.ToPrettyString(playerEntity.Value):player} is attempting to ghost via command");
+            {
+                if (forced)
+                    _adminLog.Add(LogType.Mind, $"{EntityManager.ToPrettyString(playerEntity.Value):player} was forced to ghost via command");
+                else
+                    _adminLog.Add(LogType.Mind, $"{EntityManager.ToPrettyString(playerEntity.Value):player} is attempting to ghost via command");
+            }
 
             var handleEv = new GhostAttemptHandleEvent(mind, canReturnGlobal);
             RaiseLocalEvent(handleEv);
@@ -588,11 +621,11 @@ namespace Content.Server.Ghost
             if (handleEv.Handled)
                 return handleEv.Result;
 
-            if (mind.PreventGhosting)
+            if (mind.PreventGhosting && !forced)
             {
-                if (mind.Session != null) // Logging is suppressed to prevent spam from ghost attempts caused by movement attempts
+                if (_player.TryGetSessionById(mind.UserId, out var session)) // Logging is suppressed to prevent spam from ghost attempts caused by movement attempts
                 {
-                    _chatManager.DispatchServerMessage(mind.Session, Loc.GetString("comp-mind-ghosting-prevented"),
+                    _chatManager.DispatchServerMessage(session, Loc.GetString("comp-mind-ghosting-prevented"),
                         true);
                 }
 

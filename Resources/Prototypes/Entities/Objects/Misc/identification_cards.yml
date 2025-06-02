@@ -6,11 +6,11 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
   - type: Clothing
     slots:
     - idcard
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
   - type: Item
     size: Small
     heldPrefix: default
@@ -954,10 +954,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-AgentIDCard-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-AgentIDCard-research
       jobRequired:
         - ResearchAssistant
@@ -999,7 +998,7 @@
   #ss220 add pdaidpainter end
 
 - type: entity
-  parent: IDCardStandard
+  parent: [ IDCardStandard, BaseSyndicateContraband ]
   id: SyndicateIDCard
   name: syndicate ID card
   components:
@@ -1012,7 +1011,7 @@
     - SyndicateAgent
 
 - type: entity
-  parent: IDCardStandard
+  parent: [ IDCardStandard, BaseMajorContraband ]
   id: PirateIDCard
   name: pirate ID card
   components:
@@ -1123,6 +1122,45 @@
     - WhitelistChameleon
     - WhitelistChameleonIdCard
   #ss220 add pdaidpainter end
+
+- type: entity
+  parent: IDCardStandard
+  id: PrisonerIDCard
+  name: prisoner ID card
+  description: A generically printed ID card for scummy prisoners.
+  components:
+  - type: Sprite
+    layers:
+    - state: orange
+    - state: idprisoner # Port SS220-prisoner-id
+  - type: Item
+    heldPrefix: orange
+  - type: Access
+    tags:
+    - GenpopEnter
+  - type: GenpopIdCard
+  - type: IdCard
+    jobTitle: job-name-prisoner
+    jobIcon: JobIconPrisoner
+    canMicrowave: false
+  - type: ExpireIdCard
+    expireMessage: genpop-prisoner-id-expire
+    expiredAccess:
+    - GenpopLeave
+  - type: Speech
+    speechVerb: Robotic
+    #SS220-add-tts-to-prisoner-card-start
+  - type: TTS
+    voice: sentrybot
+    #SS220-add-tts-to-prisoner-card-end
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+    - Recyclable
+  - type: StaticPrice # these are infinitely producible.
+    price: 0
 
 - type: entity
   parent: CentcomIDCard
@@ -1240,18 +1278,34 @@
 
 - type: entity
   parent: IDCardStandard
+  id: WizardIDCard
+  name: wizard ID card
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    layers:
+    - state: wizard
+    - state: idwizard
+  - type: Access
+    tags:
+    - Wizard
+    - External
+    - Maintenance
+
+- type: entity
+  parent: IDCardStandard
   id: UniversalIDCard
   name: universal ID card
   suffix: Admin
   description: An ID card that gives you access beyond your wildest dreams.
   components:
   - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
     layers:
     - state: admin
     - state: idadmin
   - type: Clothing
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 id cards resprite
   - type: Item
     heldPrefix: green
   - type: IdCard
@@ -1260,11 +1314,21 @@
   - type: Access
     groups:
     - AllAccess
+    - Silicon
     tags:
     - CentralCommand
     - NuclearOperative
     - SyndicateAgent
     - Wizard
+    - Xenoborg
   - type: Tag #  Ignore Chameleon tags
     tags:
     - DoorBumpOpener
+  - type: AgentIDCard
+  - type: ActivatableUI
+    key: enum.AgentIDCardUiKey.Key
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.AgentIDCardUiKey.Key:
+        type: AgentIDCardBoundUserInterface

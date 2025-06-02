@@ -1,15 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-- type: dataset
+- type: localizedDataset
   id: cult_yogg_migo
   values:
-  - Пх'нглуи
-  - Сихах
-  - Шугг
-  - Эбумна
-  - Н’гхфт
-  - Нв’нутх
-  - Мглв'нафх
-  - Ахорнах
-  - Сиха'хнах
-  - Лв'нафх'дрн
+    prefix: names-cult-yogg-migo-
+    count: 10

@@ -2,15 +2,21 @@ using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Instruments;
 using Content.Server.Kitchen.Components;
+using Content.Server.Store.Systems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mind.Components;
 using Content.Shared.PAI;
 using Content.Shared.Popups;
-using Robust.Shared.Random;
-using System.Text;
+using Content.Shared.Store;
+using Content.Shared.Store.Components;
+using Content.Shared.Instruments;
 using Robust.Shared.Player;
 using Content.Server.SS220.Language;
 using Content.Shared.SS220.Language.Components; // SS220-Add-Languages
+using Robust.Shared.Random;
+using Robust.Shared.Prototypes;
+using System.Text;
+using Content.Server.SS220.Events;
 
 namespace Content.Server.PAI;
 
@@ -20,13 +26,14 @@ public sealed class PAISystem : SharedPAISystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly ToggleableGhostRoleSystem _toggleableGhostRole = default!;
     [Dependency] private readonly LanguageSystem _language = default!; // SS220 Languages
 
     /// <summary>
     /// Possible symbols that can be part of a scrambled pai's name.
     /// </summary>
-    private static readonly char[] SYMBOLS = new[] { '#', '~', '-', '@', '&', '^', '%', '$', '*', ' '};
+    private static readonly char[] SYMBOLS = new[] { '#', '~', '-', '@', '&', '^', '%', '$', '*', ' ' };
 
     public override void Initialize()
     {
@@ -36,10 +43,15 @@ public sealed class PAISystem : SharedPAISystem
         SubscribeLocalEvent<PAIComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<PAIComponent, MindRemovedMessage>(OnMindRemoved);
         SubscribeLocalEvent<PAIComponent, BeingMicrowavedEvent>(OnMicrowaved);
+
+        SubscribeLocalEvent<PAIComponent, PAIShopActionEvent>(OnShop);
+        SubscribeLocalEvent<PAIComponent, GetInsteadIdCardNameEvent>(OnGetPaiName); // SS220 PAI-job-id-fix
     }
 
     private void OnUseInHand(EntityUid uid, PAIComponent component, UseInHandEvent args)
     {
+        // Not checking for Handled because ToggleableGhostRoleSystem already marks it as such.
+
         if (!TryComp<MindContainerComponent>(uid, out var mind) || !mind.HasMind)
             component.LastUser = args.User;
     }
@@ -106,6 +118,14 @@ public sealed class PAISystem : SharedPAISystem
         _metaData.SetEntityName(uid, val);
     }
 
+    private void OnShop(Entity<PAIComponent> ent, ref PAIShopActionEvent args)
+    {
+        if (!TryComp<StoreComponent>(ent, out var store))
+            return;
+
+        _store.ToggleUi(args.Performer, ent, store);
+    }
+
     public void PAITurningOff(EntityUid uid)
     {
         //  Close the instrument interface if it was open
@@ -133,4 +153,11 @@ public sealed class PAISystem : SharedPAISystem
         }
         // SS220-Add-Languages end
     }
+
+    // SS220 PAI-job-id-fix start
+    public void OnGetPaiName(EntityUid uid, PAIComponent comp, ref GetInsteadIdCardNameEvent args)
+    {
+        args.Name = Loc.GetString("pai-system-role-name");
+    }
+    // SS220 PAI-job-id-fix end
 }

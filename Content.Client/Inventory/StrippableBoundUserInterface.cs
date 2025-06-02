@@ -64,11 +64,9 @@ namespace Content.Client.Inventory
         {
             base.Open();
 
-            _strippingMenu = this.CreateWindow<StrippingMenu>();
+            _strippingMenu = this.CreateWindowCenteredLeft<StrippingMenu>();
             _strippingMenu.OnDirty += UpdateMenu;
             _strippingMenu.Title = Loc.GetString("strippable-bound-user-interface-stripping-menu-title", ("ownerName", Identity.Name(Owner, EntMan)));
-
-            _strippingMenu?.OpenCenteredLeft();
         }
 
         protected override void Dispose(bool disposing)
@@ -219,12 +217,14 @@ namespace Content.Client.Inventory
 
             _strippingMenu!.InventoryContainer.AddChild(button);
 
-            UpdateEntityIcon(button, entity);
+            //ss220 add fully hidden pockets start
+            UpdateEntityIcon(button, entity, slotDef.FullyHidden);
+            //ss220 add fully hidden pockets end
 
             LayoutContainer.SetPosition(button, slotDef.StrippingWindowPos * (SlotControl.DefaultButtonSize + ButtonSeparation));
         }
 
-        private void UpdateEntityIcon(SlotControl button, EntityUid? entity)
+        private void UpdateEntityIcon(SlotControl button, EntityUid? entity, bool isFullyHidden = false) //ss220 add fully hidden pockets
         {
             // Hovering, highlighting & storage are features of general hands & inv GUIs. This UI just re-uses these because I'm lazy.
             button.ClearHover();
@@ -243,6 +243,11 @@ namespace Content.Client.Inventory
                 viewEnt = entity;
             else
                 return;
+
+            //ss220 add fully hidden pockets start
+            if (isFullyHidden)
+                viewEnt = null;
+            //ss220 add fully hidden pockets end
 
             button.SetEntity(viewEnt);
         }

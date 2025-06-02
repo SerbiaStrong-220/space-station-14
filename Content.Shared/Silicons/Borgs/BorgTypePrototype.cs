@@ -1,4 +1,4 @@
-﻿using Content.Shared.Interaction.Components;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Radio;
 using Content.Shared.Silicons.Borgs.Components;
@@ -19,7 +19,7 @@ public sealed partial class BorgTypePrototype : IPrototype
     private static readonly ProtoId<SoundCollectionPrototype> DefaultFootsteps = new("FootstepBorg");
 
     [IdDataField]
-    public required string ID { get; init; }
+    public required string ID { get; set; }
 
     //
     // Description info (name/desc) is configured via localization strings directly.
@@ -29,7 +29,7 @@ public sealed partial class BorgTypePrototype : IPrototype
     /// The prototype displayed in the selection menu for this type.
     /// </summary>
     [DataField]
-    public required EntProtoId DummyPrototype { get; init; }
+    public required EntProtoId DummyPrototype;
 
     //
     // Functional information
@@ -152,4 +152,9 @@ public sealed partial class BorgTypePrototype : IPrototype
     /// </summary>
     [DataField]
     public SoundSpecifier FootstepCollection { get; set; } = new SoundCollectionSpecifier(DefaultFootsteps);
+
+    // SS220 Borgs-Id-fix start
+    [DataField]
+    public string Name = string.Empty;
+    // SS220 Borgs-Id-fix end
 }

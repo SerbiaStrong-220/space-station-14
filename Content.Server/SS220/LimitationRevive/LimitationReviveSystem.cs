@@ -1,11 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Cloning;
+
+using Content.Shared.Cloning.Events;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Traits;
+using Content.Server.Zombies;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
@@ -24,84 +25,67 @@ public sealed class LimitationReviveSystem : EntitySystem
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
-    /// <inheritdoc/>
+
     public override void Initialize()
     {
-        SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnDeadMobState);
+        SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnMobStateChanged, before: [typeof(ZombieSystem)]);
         SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
+        SubscribeLocalEvent<LimitationReviveComponent, AddReviweDebuffsEvent>(OnAddReviweDebuffs);
     }
 
-    private void OnDeadMobState(Entity<LimitationReviveComponent> ent, ref MobStateChangedEvent args)
+    private void OnMobStateChanged(Entity<LimitationReviveComponent> ent, ref MobStateChangedEvent args)
     {
-        if (args.NewMobState == MobState.Dead && ent.Comp.IsAlreadyDead == false)
+        if (args.NewMobState == MobState.Dead)
         {
-            ent.Comp.IsAlreadyDead = true;
-            ent.Comp.IsDamageTaken = false;
-
-            ent.Comp.TimeToDamage = _timing.CurTime + ent.Comp.DelayBeforeDamage;
+            ent.Comp.DamageTime = _timing.CurTime + ent.Comp.BeforeDamageDelay;
         }
 
-        else if (ent.Comp.IsAlreadyDead && args.NewMobState is MobState.Alive or MobState.Critical)
+        if (args.OldMobState == MobState.Dead)
         {
-            ent.Comp.IsAlreadyDead = false;
-            ent.Comp.IsDamageTaken = false;
+            ent.Comp.DamageTime = null;
+            ent.Comp.DeathCounter++;
         }
     }
 
-    private void OnCloning(Entity<LimitationReviveComponent> entity, ref CloningEvent args)
+    private void OnAddReviweDebuffs(Entity<LimitationReviveComponent> ent, ref AddReviweDebuffsEvent args)
     {
-        var targetComp = EnsureComp<LimitationReviveComponent>(args.Target);
-        _serialization.CopyTo(entity.Comp, ref targetComp, notNullableOverride: true);
+        //rn i am too tired to check if this ok
+        if (!_random.Prob(ent.Comp.ChanceToAddTrait))
+            return;
 
-        targetComp.IsDamageTaken = false;
-        targetComp.IsAlreadyDead = false;
-        targetComp.CounterOfDead = 0;
+        var traitString = _prototype.Index<WeightedRandomPrototype>(ent.Comp.WeightListProto).Pick(_random);
+
+        var traitProto = _prototype.Index<TraitPrototype>(traitString);
+
+        if (traitProto.Components is not null)
+            _entityManager.AddComponents(ent, traitProto.Components, false);
     }
 
-    /// <summary>
-    /// Attempt to damage and add a negative trait after death. Damage and Trait can only be received once per death.
-    /// </summary>
-    public void TryDamageAfterDeath(EntityUid uid)
+    private void OnCloning(Entity<LimitationReviveComponent> ent, ref CloningEvent args)
     {
-        if(!TryComp<LimitationReviveComponent>(uid, out var reviveComp))
-            return;
+        var targetComp = EnsureComp<LimitationReviveComponent>(args.CloneUid);
+        _serialization.CopyTo(ent.Comp, ref targetComp, notNullableOverride: true);
 
-        if(reviveComp.IsDamageTaken || reviveComp.IsAlreadyDead == false)
-            return;
-
-        reviveComp.CounterOfDead++;
-        reviveComp.IsDamageTaken = true;
-
-        if(!TryComp<DamageableComponent>(uid, out var damageComp))
-            return;
-
-        _damageableSystem.TryChangeDamage(uid, reviveComp.TypeDamageOnDead, true);
-
-        var tryAddTraitAfterDeath = _random.NextFloat(0.0f, 1.0f);
-
-        if (tryAddTraitAfterDeath < reviveComp.ChanceToAddTrait ) {
-
-            var traitString = _prototype.Index<WeightedRandomPrototype>(reviveComp.WeightListProto)
-                .Pick(_random);
-
-            var traitProto = _prototype.Index<TraitPrototype>(traitString);
-
-            if (traitProto.Components is not null)
-                _entityManager.AddComponents(uid, traitProto.Components, false);
-
-        }
+        targetComp.DeathCounter = 0;
     }
 
     public override void Update(float frameTime)
     {
-        var query = EntityQueryEnumerator<LimitationReviveComponent>();
-        var curTime = _timing.CurTime;
+        base.Update(frameTime);
 
-        while (query.MoveNext(out var uid, out var limitationRevive))
-            if (curTime >= limitationRevive.TimeToDamage &&
-                limitationRevive.TimeToDamage != TimeSpan.Zero &&
-                limitationRevive.IsDamageTaken == false &&
-                limitationRevive.IsAlreadyDead)
-                TryDamageAfterDeath(uid);
+        var query = EntityQueryEnumerator<LimitationReviveComponent>();
+
+        while (query.MoveNext(out var ent, out var limitationRevive))
+        {
+            if (limitationRevive.DamageTime is null)
+                continue;
+
+            if (_timing.CurTime < limitationRevive.DamageTime)
+                continue;
+
+            _damageableSystem.TryChangeDamage(ent, limitationRevive.Damage, true);
+
+            limitationRevive.DamageTime = null;
+        }
     }
 }

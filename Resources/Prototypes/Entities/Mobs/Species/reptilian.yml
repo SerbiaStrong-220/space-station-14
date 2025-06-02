@@ -11,6 +11,7 @@
     - Snout
     - HeadTop
     - HeadSide
+    undergarmentBottom: UndergarmentBottomBoxersReptilian
   - type: Hunger
   - type: Puller
     needsHands: false
@@ -108,9 +109,6 @@
   #ss220 emote 5 sec end
   #SS220 LimitationRevive - start
   - type: LimitationRevive
-    typeDamageOnDead:
-      types:
-        Сerebral: 400
   #SS220 LimitationRevive - end
 
 
@@ -130,6 +128,7 @@
     - Snout
     - HeadTop
     - HeadSide
+    undergarmentBottom: UndergarmentBottomBoxersReptilian
   - type: Inventory
     speciesId: reptilian
     femaleDisplacements:

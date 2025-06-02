@@ -1,0 +1,80 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  name: green caramel rooster
+  parent:  FoodBakingBase
+  id: GreenCaramelRoosterFood
+  description: There is, a pleasent sourness
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel_rooster.rsi
+    state: green_caramel_rooster
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: MeleeWeapon
+    wideAnimationRotation: 0
+    damage:
+      types:
+        Blunt: 2
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/punch1.ogg
+  - type: Item
+    sprite: SS220/Objects/Consumable/Food/caramel_rooster.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left-green
+      right:
+      - state: inhand-right-green
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - sour
+
+- type: entity
+  name: red caramel rooster
+  parent:  GreenCaramelRoosterFood
+  id: RedCaramelRoosterFood
+  description: Taste, like sweet berries
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel_rooster.rsi
+    state: red_caramel_rooster
+  - type: Item
+    sprite: SS220/Objects/Consumable/Food/caramel_rooster.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left-red
+      right:
+      - state: inhand-right-red
+  - type: FlavorProfile
+    flavors:
+    - sweet
+
+- type: entity
+  name: yellow caramel rooster
+  parent:  GreenCaramelRoosterFood
+  id: YellowCaramelRoosterFood
+  description: Taste, not like chicken
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/caramel_rooster.rsi
+    state: yellow_caramel_rooster
+  - type: Item
+    sprite: SS220/Objects/Consumable/Food/caramel_rooster.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left-yellow
+      right:
+      - state: inhand-right-yellow
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - bitter

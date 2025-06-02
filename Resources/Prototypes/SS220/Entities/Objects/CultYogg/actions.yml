@@ -45,7 +45,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
-    useDelay: 600
+    useDelay: 450
     event: !type:CultYoggDigestEvent
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: IconMycosis}
@@ -94,10 +94,14 @@
           Cold: -4
           Shock: -4
           Radiation: -1
-          Stamina: -5
-          Сerebral: -10
+          Сerebral: -20
+          Caustic: -3
+          Cellular: -5
+          Poison: -3
+          Asphyxiation: -2
         groups:
           Airloss: -5
+      modifyStamina: -5
       bloodlossModifier: -1
       modifyBloodLevel: 2
     itemIconStyle: NoItem

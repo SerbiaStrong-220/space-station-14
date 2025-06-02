@@ -9,9 +9,9 @@
   components:
   - type: StorageFill
     contents:
-      - id: OmnizineChemistryBottle
+      - id: ChemistryBottleOmnizine
         amount: 1
-      - id: CognizineChemistryBottle
+      - id: ChemistryBottleCognizine
         amount: 1
       - id: BicaridineChemistryBottle
         amount: 1

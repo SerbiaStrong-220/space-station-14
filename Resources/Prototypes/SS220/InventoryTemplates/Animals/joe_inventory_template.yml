@@ -61,3 +61,4 @@
     strippingWindowPos: 1,4
     displayName: Pouch
     stripHidden: true
+    fullyHidden: true
