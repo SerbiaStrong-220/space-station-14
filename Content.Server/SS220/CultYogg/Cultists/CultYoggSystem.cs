@@ -344,7 +344,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             _audio.PlayPvs(purifyedComp.PurifyingCollection, entity);
 
             //Removing stage visuals, cause later component will be removed
-            var ev = new CultYoggDeleteVisualsEvent();
+            var ev = new CultYoggDeleteVisualsEvent();//ToDo_SS220 make it function
             RaiseLocalEvent(entity, ref ev);
 
             RemComp<CultYoggComponent>(entity);

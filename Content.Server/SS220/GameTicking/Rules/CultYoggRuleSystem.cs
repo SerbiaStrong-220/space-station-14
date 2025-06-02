@@ -355,7 +355,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         EnsureComp<CultYoggComponent>(uid);
 
         //update stage cause it might be midstage
-        var ev = new ChangeCultYoggStageEvent(rule.Comp.Stage);
+        var ev = new ChangeCultYoggStageEvent(rule.Comp.Stage);//ToDo_SS220 make it function
         RaiseLocalEvent(uid, ref ev);
 
         //Add telepathy
@@ -422,7 +422,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         _role.MindRemoveRole<CultYoggRoleComponent>(mindId);
 
         //Remove all corrupted items
-        var stuckEv = new DropAllStuckOnEquipEvent(uid);
+        var stuckEv = new DropAllStuckOnEquipEvent(uid);//ToDo_SS220 make it function
         RaiseLocalEvent(uid, ref stuckEv, true);
 
         _sharedRestrictedItemSystem.DropAllRestrictedItems(uid);
