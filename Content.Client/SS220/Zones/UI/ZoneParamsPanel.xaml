@@ -17,6 +17,9 @@
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
                     <Label Text="{Loc zone-state-box-hex-color-label}"/>
                     <LineEdit Name="HexColorLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
+                    <Button Name="ColorSelectorButton">
+						<TextureRect Stretch="KeepAspectCentered" TexturePath="/Textures/SS220/Interface/Zones/palette.svg.192dpi.png" SetSize="24 24"/>
+                    </Button>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
                     <Label Text="{Loc zone-state-box-container-net-id-label}"/>
