@@ -69,20 +69,20 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
 
     private HashSet<EntityUid> RemoveItems(EntityUid target)
     {
-        HashSet<EntityUid> removedItems = new();
-        if (!_inventory.TryGetSlots(target, out var slots))
+        HashSet<EntityUid> removedItems = [];
+        if (!_inventory.TryGetSlots(target, out var _))
             return removedItems;
 
         // trying to unequip all item's with component
         foreach (var item in _inventory.GetHandOrInventoryEntities(target))
         {
-            if (!TryComp<StuckOnEquipComponent>(item, out var stuckOnEquipComponent))
+            if (!TryComp<StuckOnEquipComponent>(item, out var stuckOnEquipComp))
                 continue;
 
-            if (!stuckOnEquipComponent.ShouldDropOnDeath)
+            if (!stuckOnEquipComp.ShouldDropOnDeath)
                 continue;
 
-            RemComp<UnremoveableComponent>(item);
+            UnstuckItem((item, stuckOnEquipComp));
             _transform.DropNextTo(item, target);
             removedItems.Add(item);
         }
@@ -95,15 +95,9 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
 ///     Raised when we need to remove all StuckOnEquip objects
 /// </summary>
 [ByRefEvent, Serializable]
-public sealed class DropAllStuckOnEquipEvent : EntityEventArgs
+public sealed class DropAllStuckOnEquipEvent(EntityUid target, HashSet<EntityUid>? droppedItems = null) : EntityEventArgs
 {
-    public readonly EntityUid Target;
+    public readonly EntityUid Target = target;
 
-    public HashSet<EntityUid> DroppedItems = new();
-
-    public DropAllStuckOnEquipEvent(EntityUid target, HashSet<EntityUid>? droppedItems = null)
-    {
-        Target = target;
-        DroppedItems = droppedItems ?? new();
-    }
+    public HashSet<EntityUid> DroppedItems = droppedItems ?? [];
 }

@@ -63,6 +63,11 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     #region StageUpdating
     private void UpdateStage(Entity<CultYoggComponent> entity, ref ChangeCultYoggStageEvent args)
     {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
         if (!TryComp<HumanoidAppearanceComponent>(entity, out var huAp))
             return;
 
@@ -80,42 +85,41 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                 huAp.EyeColor = Color.Green;
                 break;
             case CultYoggStage.Alarm:
-                if (_prototype.HasIndex<MarkingPrototype>(CultDefaultMarking))
+                if (!_prototype.HasIndex<MarkingPrototype>(CultDefaultMarking))
                 {
-                    if (!huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Special))
-                    {
-                        huAp.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking(CultDefaultMarking, colorCount: 1)]));
-                    }
-                    else
-                    {
-                        _humanoidAppearance.SetMarkingId(entity.Owner,
-                            MarkingCategories.Special,
-                            0,
-                            CultDefaultMarking,
-                            huAp);
-                    }
+                    Log.Error($"{CultDefaultMarking} marking doesn't exist");
+                    return;
+                }
+
+                if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
+                {
+                    entity.Comp.PreviousTail = value.FirstOrDefault();
+                    value.Clear();
+                }
+
+                if (!huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Special))
+                {
+                    huAp.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking(CultDefaultMarking, colorCount: 1)]));
                 }
                 else
                 {
-                    Log.Error($"{CultDefaultMarking} marking doesn't exist");
+                    _humanoidAppearance.SetMarkingId(entity.Owner,
+                    MarkingCategories.Special,
+                    0,
+                    CultDefaultMarking,
+                    huAp);
                 }
 
                 var newMarkingId = $"CultStage-{huAp.Species}";
 
-                if (_prototype.HasIndex<MarkingPrototype>(newMarkingId))
-                {
-                    if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
-                    {
-                        entity.Comp.PreviousTail = value.FirstOrDefault();
-                        value.Clear();
-                        huAp.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
-                    }
-                }
-                else
+                if (!_prototype.HasIndex<MarkingPrototype>(newMarkingId))
                 {
                     // We have species-marking only for the Nians, so this log only leads to unnecessary errors.
                     //Log.Error($"{newMarkingId} marking doesn't exist");
+                    return;
                 }
+
+                huAp.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
                 break;
             case CultYoggStage.God:
                 if (!TryComp<MobStateComponent>(entity, out var mobstate))
@@ -340,7 +344,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             _audio.PlayPvs(purifyedComp.PurifyingCollection, entity);
 
             //Removing stage visuals, cause later component will be removed
-            var ev = new CultYoggDeleteVisualsEvent();
+            var ev = new CultYoggDeleteVisualsEvent();//ToDo_SS220 make it function
             RaiseLocalEvent(entity, ref ev);
 
             RemComp<CultYoggComponent>(entity);

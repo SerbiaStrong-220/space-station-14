@@ -8,4 +8,4 @@
   objective: roles-antag-cult-yogg-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 18000 # 5h
+    time: 144000 # 40h
