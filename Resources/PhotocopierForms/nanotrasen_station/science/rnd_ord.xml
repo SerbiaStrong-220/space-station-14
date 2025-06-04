@@ -2,7 +2,7 @@
 <Form>
   <FormId>rnd_ord</FormId>
   <PrototypeId>PaperNtFormSci</PrototypeId>
-  <EntityName>форма НТ-ИСЛ-ЗАК</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Заказ на производство продукта</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ИСЛ-ЗАК[/bold]
 [head=2]Заказ на производство продукта[/head]

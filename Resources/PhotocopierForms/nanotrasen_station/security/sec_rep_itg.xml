@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_rep_itg</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>форма НТ-СБ-ОТЧ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Отчёт о расследовании</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-ОТЧ[/bold]
 [head=2]Отчет о расследовании[/head]

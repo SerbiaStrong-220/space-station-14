@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_ssl</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>Форма НТ-СБ-ЗНЗ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Заявление о нарушении космического закона</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-ЗНЗ[/bold]
 [head=2]Заявление о нарушении Космического Закона[/head]
@@ -13,9 +13,9 @@
 Должность:
 
 Нарушенные статьи:
-Обстоятельства нарушения: 
+Обстоятельства нарушения:
 
-Свидетели и доказательства: 
+Свидетели и доказательства:
 
 [italic]Место для печатей[/italic]]]></Content>
 </Form>

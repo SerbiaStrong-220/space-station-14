@@ -2,7 +2,7 @@
 <Form>
   <FormId>law_anonymousdenunciation</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
-  <EntityName>форма НТ-ЗКН-ДНС</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Донос</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЗКН-ДНС[/bold]
 [head=2]Анонимный донос[/head]

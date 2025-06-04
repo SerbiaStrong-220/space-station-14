@@ -2,7 +2,7 @@
 <Form>
   <FormId>med_sitrep</FormId>
   <PrototypeId>PaperNtFormMed</PrototypeId>
-  <EntityName>форма НТ-МЕД-ОТЧ-СИТ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Отчёт о работе медицинского отдела</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-МЕД-ОТЧ-СИТ[/bold]
 [head=2]Отчёт о работе медицинского отдела[/head]

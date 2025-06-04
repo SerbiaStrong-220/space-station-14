@@ -2,7 +2,7 @@
 <Form>
   <FormId>blank_law</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
-  <EntityName>бумага</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Свободный бланк юридического отдела</PhotocopierTitle>
   <Content></Content>
 </Form>

@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_swt</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>форма НТ-СБ-ОБСК</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Ордер на обыск</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-ОБСК[/bold]
 [head=2]Ордер на обыск[/head]

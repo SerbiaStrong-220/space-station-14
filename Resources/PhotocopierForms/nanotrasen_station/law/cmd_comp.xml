@@ -2,7 +2,7 @@
 <Form>
   <FormId>cmd_comp</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
-  <EntityName>форма НТ-КОМ-ЖАЛ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Жалоба</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ЖАЛ[/bold]
 [head=2]Жалоба[/head]

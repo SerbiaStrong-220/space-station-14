@@ -2,7 +2,7 @@
 <Form>
   <FormId>med_eut</FormId>
   <PrototypeId>PaperNtFormMed</PrototypeId>
-  <EntityName>форма НТ-МЕД-ЭВТ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Запрос на проведение эвтаназии</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-МЕД-ЭВТ[/bold]
 [head=2]Запрос на проведение эвтаназии[/head]

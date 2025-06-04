@@ -2,7 +2,7 @@
 <Form>
   <FormId>cc_cmd_dcr_uvd</FormId>
   <PrototypeId>PaperNtFormCcSecure</PrototypeId>
-  <EntityName>Форма НТ-ЦК-КОМ-УВД</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Уведомление</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЦК-КОМ-УВД[/bold]
 [head=2]Уведомление[/head]

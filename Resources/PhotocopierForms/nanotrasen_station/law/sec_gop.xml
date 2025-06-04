@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_gop</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
-  <EntityName>форма НТ-СБ-УДО</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Запрос на УДО для заключенного</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-УДО[/bold]
 [head=2]Запрос на УДО для заключенного[/head]

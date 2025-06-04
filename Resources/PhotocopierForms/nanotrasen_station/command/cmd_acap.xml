@@ -2,7 +2,7 @@
 <Form>
   <FormId>cmd_acap</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>форма НТ-КОМ-ВКПТ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Заявление о назначении ВрИО Капитана</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ВКПТ[/bold]
 [head=2]Заявление о назначении ВрИО Капитана[/head]

@@ -2,7 +2,7 @@
 <Form>
   <FormId>cmd_acwt</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>форма НТ-КОМ-ОПД</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Ордер на повышение доступа</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ОПД[/bold]
 [head=2]Ордер на повышение доступа[/head]

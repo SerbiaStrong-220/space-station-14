@@ -2,7 +2,7 @@
 <Form>
   <FormId>med_rcp</FormId>
   <PrototypeId>PaperNtFormMed</PrototypeId>
-  <EntityName>форма НТ-МЕД-РЦП</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Рецепт</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-МЕД-РЦП[/bold]
 [head=2]Рецепт[/head]

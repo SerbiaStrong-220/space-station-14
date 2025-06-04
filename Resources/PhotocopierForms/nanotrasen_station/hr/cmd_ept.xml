@@ -2,7 +2,7 @@
 <Form>
   <FormId>cmd_ept</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>форма НТ-КОМ-СМД</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Заявление о смене должности</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-СМД[/bold]
 [head=2]Заявление о смене должности[/head]

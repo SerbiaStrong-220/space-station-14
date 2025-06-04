@@ -2,7 +2,7 @@
 <Form>
   <FormId>cc_cmd_dcr_exec</FormId>
   <PrototypeId>PaperNtFormCc</PrototypeId>
-  <EntityName>форма НТ-ЦК-КОМ-УКЗ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Постановление о проведении публичной казни</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЦК-КОМ-УКЗ[/bold]
 [head=2]Постановление о проведении публичной казни[/head]

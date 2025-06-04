@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_prig</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>Форма НТ-СБ-ПРИГ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Приговор</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-ПРИГ[/bold]
 [head=2]Приговор[/head]

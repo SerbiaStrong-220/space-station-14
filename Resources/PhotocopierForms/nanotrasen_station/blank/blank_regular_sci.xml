@@ -2,7 +2,7 @@
 <Form>
   <FormId>blank_sci</FormId>
   <PrototypeId>PaperNtFormSci</PrototypeId>
-  <EntityName>бумага</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Свободный бланк исследовательского отдела</PhotocopierTitle>
   <Content></Content>
 </Form>

@@ -2,7 +2,7 @@
 <Form>
   <FormId>rnd_rar</FormId>
   <PrototypeId>PaperNtFormSci</PrototypeId>
-  <EntityName>форма НТ-ИСЛ-ОА</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Отчёт об артефакте</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ИСЛ-ОА[/bold]
 [head=2]Отчёт об артефакте[/head]

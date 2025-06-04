@@ -2,7 +2,7 @@
 <Form>
   <FormId>cmd_dcr_award</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>форма НТ-КОМ-УКЗ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Приказ о награждении</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-УКЗ[/bold]
 [head=2]Приказ о награждении[/head]

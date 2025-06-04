@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_sur</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>форма НТ-СБ-ПВН</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Явка с повинной</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-ПВН[/bold]
 [head=2]Явка с повинной[/head]

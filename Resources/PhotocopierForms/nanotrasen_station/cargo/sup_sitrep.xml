@@ -2,7 +2,7 @@
 <Form>
   <FormId>sup_sitrep</FormId>
   <PrototypeId>PaperNtFormCargo</PrototypeId>
-  <EntityName>форма НТ-СНБ-ОТЧ-СИТ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Отчёт о работе отдела снабжения</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СНБ-ОТЧ-СИТ[/bold]
 [head=2]Отчёт о работе отдела снабжения[/head]

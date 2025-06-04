@@ -2,7 +2,7 @@
 <Form>
   <FormId>sup_ord</FormId>
   <PrototypeId>PaperNtFormCargo</PrototypeId>
-  <EntityName>форма НТ-СНБ-ЗАК</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Заказ товара</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СНБ-ЗАК[/bold]
 [head=2]Заказ товара[/head]

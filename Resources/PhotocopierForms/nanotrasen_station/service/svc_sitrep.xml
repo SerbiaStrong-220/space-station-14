@@ -2,7 +2,7 @@
 <Form>
   <FormId>svc_sitrep</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>форма НТ-СРВ-ОТЧ-СИТ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Отчёт о работе сервисного отдела</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СРВ-ОТЧ-СИТ[/bold]
 [head=2]Отчёт о работе сервисного отдела[/head]

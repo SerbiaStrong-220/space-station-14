@@ -2,7 +2,7 @@
 <Form>
   <FormId>rnd_rnt</FormId>
   <PrototypeId>PaperNtFormSci</PrototypeId>
-  <EntityName>форма НТ-ИСЛ-ПРС</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Признание разумности существа</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ИСЛ-ПРС[/bold]
 [head=2]Признание разумности существа[/head]

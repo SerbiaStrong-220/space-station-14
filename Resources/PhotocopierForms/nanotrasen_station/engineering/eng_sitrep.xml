@@ -2,7 +2,7 @@
 <Form>
   <FormId>eng_sitrep</FormId>
   <PrototypeId>PaperNtFormEng</PrototypeId>
-  <EntityName>форма НТ-ИНЖ-ОТЧ-СИТ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Отчёт о работе инженерного отдела</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ИНЖ-ОТЧ-СИТ[/bold]
 [head=2]Отчёт о работе инженерного отдела[/head]

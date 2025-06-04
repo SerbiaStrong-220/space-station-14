@@ -2,7 +2,7 @@
 <Form>
   <FormId>cmd_req_pda</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>форма НТ-КОМ-ЗАП</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Заявление на получение КПК</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ЗАП[/bold]
 [head=2]Заявление на получение КПК[/head]

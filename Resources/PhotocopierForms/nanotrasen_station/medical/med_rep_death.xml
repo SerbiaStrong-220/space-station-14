@@ -2,7 +2,7 @@
 <Form>
   <FormId>med_rep_death</FormId>
   <PrototypeId>PaperNtFormMed</PrototypeId>
-  <EntityName>форма НТ-МЕД-СВД</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Свидетельство о смерти</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-МЕД-СВД[/bold]
 [head=2]Свидетельство о смерти[/head]

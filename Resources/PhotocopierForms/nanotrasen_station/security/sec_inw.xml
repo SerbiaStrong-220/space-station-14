@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_inw</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>форма НТ-СБ-ПКЗ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Показания</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма: НТ-СБ-ПКЗ[/bold]
 [head=2]Показания[/head]

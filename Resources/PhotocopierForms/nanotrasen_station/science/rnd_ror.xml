@@ -2,7 +2,7 @@
 <Form>
   <FormId>rnd_ror</FormId>
   <PrototypeId>PaperNtFormSci</PrototypeId>
-  <EntityName>форма НТ-ИСЛ-ОИП</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Отчёт об изучении предмета</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ИСЛ-ОИП[/bold]
 [head=2]Отчет об изучении предмета[/head]

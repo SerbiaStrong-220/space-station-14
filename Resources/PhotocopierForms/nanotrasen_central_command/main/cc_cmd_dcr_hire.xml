@@ -2,7 +2,7 @@
 <Form>
   <FormId>cc_cmd_dcr_hire</FormId>
   <PrototypeId>PaperNtFormCc</PrototypeId>
-  <EntityName>форма НТ-ЦК-КОМ-УКЗ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Приказ о трудоустройстве члена экипажа</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЦК-КОМ-УКЗ[/bold]
 [head=2]Приказ о трудоустройстве члена экипажа[/head]

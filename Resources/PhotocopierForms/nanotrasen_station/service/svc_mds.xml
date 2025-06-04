@@ -2,7 +2,7 @@
 <Form>
   <FormId>svc_mds</FormId>
   <PrototypeId>PaperNtForm</PrototypeId>
-  <EntityName>форма НТ-СРБ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Свидетельство о расторжении брака</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СРБ[/bold]
 [head=2]Свидетельство о расторжении брака[/head]

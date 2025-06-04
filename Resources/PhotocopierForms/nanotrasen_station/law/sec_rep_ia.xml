@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_rep_ia</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
-  <EntityName>форма НТ-КОМ-ЦК-ОТЧ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Отчёт Агента Внутренних Дел</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ЦК-ОТЧ[/bold]
 [head=2]Отчёт Агента Внутренних Дел[/head]

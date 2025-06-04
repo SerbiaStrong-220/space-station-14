@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_itg</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>форма НТ-СБ-РОЗ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Постановление о розыске</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-РОЗ[/bold]
 [head=2]Постановление о розыске[/head]

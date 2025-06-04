@@ -2,7 +2,7 @@
 <Form>
   <FormId>law_pic</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
-  <EntityName>форма НТ-ЗКН-УКЗ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Запрет на реанимацию</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЗКН-УКЗ[/bold]
 [head=2]Запрет на реанимацию[/head]

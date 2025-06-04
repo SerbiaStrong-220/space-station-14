@@ -2,7 +2,7 @@
 <Form>
   <FormId>eng_req_tw</FormId>
   <PrototypeId>PaperNtFormEng</PrototypeId>
-  <EntityName>форма НТ-ИНЖ-ЗАП</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Запрос на проведение технических работ в отделе</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ИНЖ-ЗАП[/bold]
 [head=2]Запрос на проведение технических работ в отделе[/head]

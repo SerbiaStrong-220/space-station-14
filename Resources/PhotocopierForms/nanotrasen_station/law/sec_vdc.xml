@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_vdc</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
-  <EntityName>форма НТ-СБ-СУД-ЗАКЛ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Заключение суда</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-СУД-ЗАКЛ[/bold]
 [head=2]Заключение суда[/head]

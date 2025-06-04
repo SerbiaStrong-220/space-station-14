@@ -2,7 +2,7 @@
 <Form>
   <FormId>cmd_cc_frs</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>форма НТ-КОМ-ЦК-ЗОБР</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Запрос на вызов ОБР</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ЦК-ЗОБР[/bold]
 [head=2]Запрос на вызов ОБР[/head]

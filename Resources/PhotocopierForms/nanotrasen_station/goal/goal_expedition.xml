@@ -2,7 +2,7 @@
 <Form>
   <FormId>goal_expedition</FormId>
   <PrototypeId>PaperNtFormGoal</PrototypeId>
-  <EntityName>форма НТ-СНБ-ОТЧ-Э</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Отчёт об экспедиции</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СНБ-ОТЧ-Э[/bold]
 [head=2]Отчёт об экспедиции[/head]

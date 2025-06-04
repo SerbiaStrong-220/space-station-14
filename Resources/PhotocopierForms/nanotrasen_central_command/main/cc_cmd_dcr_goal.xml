@@ -2,7 +2,7 @@
 <Form>
   <FormId>cc_cmd_dcr_goal</FormId>
   <PrototypeId>PaperNtFormCc</PrototypeId>
-  <EntityName>форма НТ-ЦК-КОМ-УКЗ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Приказ о назначении цели станции</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЦК-КОМ-УКЗ[/bold]
 [head=2]Приказ о назначении цели станции[/head]

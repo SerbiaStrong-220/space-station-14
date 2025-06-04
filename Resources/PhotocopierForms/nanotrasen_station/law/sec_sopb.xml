@@ -2,7 +2,7 @@
 <Form>
   <FormId>cmd_sopb</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
-  <EntityName>форма НТ-СБ-НСРП</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Заявление о нарушении СРП членом экипажа</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-НСРП[/bold]
 [head=2]Заявление о нарушении СРП членом экипажа[/head]

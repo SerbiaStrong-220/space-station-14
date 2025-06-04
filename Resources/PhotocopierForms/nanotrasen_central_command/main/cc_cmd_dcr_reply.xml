@@ -2,7 +2,7 @@
 <Form>
   <FormId>cc_cmd_dcr_reply</FormId>
   <PrototypeId>PaperNtFormCc</PrototypeId>
-  <EntityName>Форма НТ-ЦК-КОМ-ОТВ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Ответ на запрос</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЦК-КОМ-ОТВ[/bold]
 [head=2]Ответ на запрос[/head]

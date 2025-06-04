@@ -2,7 +2,7 @@
 <Form>
   <FormId>blank_cmd</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>бумага</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Свободный бланк командования</PhotocopierTitle>
   <Content></Content>
 </Form>

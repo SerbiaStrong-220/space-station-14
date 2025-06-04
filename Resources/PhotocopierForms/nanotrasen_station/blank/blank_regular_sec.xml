@@ -2,7 +2,7 @@
 <Form>
   <FormId>blank_sec</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>бумага</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Свободный бланк службы безопасности</PhotocopierTitle>
   <Content></Content>
 </Form>

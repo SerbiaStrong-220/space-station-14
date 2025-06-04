@@ -2,7 +2,7 @@
 <Form>
   <FormId>eng_permit</FormId>
   <PrototypeId>PaperNtFormEng</PrototypeId>
-  <EntityName>форма НТ-ИНЖ-РАЗР-01</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Разрешение на строительство</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ИНЖ-РАЗР-01[/bold]
 [head=2]Разрешение на строительство[/head]

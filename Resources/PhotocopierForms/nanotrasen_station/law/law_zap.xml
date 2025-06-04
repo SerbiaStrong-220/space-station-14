@@ -2,7 +2,7 @@
 <Form>
   <FormId>law_zap</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
-  <EntityName>форма НТ-КОМ-ЗВК</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Запрос на признание врагом корпорации</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЗКН-ЦК-ЗАП[/bold]
 [head=2]Запрос на признание врагом корпорации[/head]

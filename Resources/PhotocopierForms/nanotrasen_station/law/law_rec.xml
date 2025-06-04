@@ -2,7 +2,7 @@
 <Form>
   <FormId>law_rec</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
-  <EntityName>форма НТ-ЗКН-ПВК</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Постановление о признании врагом корпорации</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЗКН-ПВК[/bold]
 [head=2]Постановление о признании врагом корпорации[/head]

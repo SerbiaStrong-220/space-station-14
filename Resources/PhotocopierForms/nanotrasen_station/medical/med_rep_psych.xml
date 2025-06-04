@@ -2,7 +2,7 @@
 <Form>
   <FormId>med_rep_psych</FormId>
   <PrototypeId>PaperNtFormMed</PrototypeId>
-  <EntityName>форма НТ-МЕД-ПЗКЛ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Заключение о психологическом здоровье</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-МЕД-ПЗКЛ[/bold]
 [head=2]Заключение о психологическом здоровье[/head]

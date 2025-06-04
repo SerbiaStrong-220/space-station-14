@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_dty</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>форма НТ-СБ-ПОД</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Приказ о дежурствах</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-ПОД[/bold]
 [head=2]Приказ о дежурствах[/head]

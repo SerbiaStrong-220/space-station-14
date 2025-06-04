@@ -2,7 +2,7 @@
 <Form>
   <FormId>cmd_acr</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>форма НТ-КОМ-ЛД</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Приказ о лишении доступа</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ЛД[/bold]
 [head=2]Приказ о лишении доступа[/head]

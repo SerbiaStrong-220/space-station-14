@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_awt</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>форма НТ-СБ-АРСТ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Ордер на арест</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-АРСТ[/bold]
 [head=2]Ордер на арест[/head]

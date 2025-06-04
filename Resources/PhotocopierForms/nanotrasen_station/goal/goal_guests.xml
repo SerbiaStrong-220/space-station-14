@@ -2,7 +2,7 @@
 <Form>
   <FormId>goal_guests</FormId>
   <PrototypeId>PaperNtFormGoal</PrototypeId>
-  <EntityName>форма НТ-СРВ-ОТЧ-МСО</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Отчёт о модификации сервисного отдела</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СРВ-ОТЧ-МСО[/bold]
 [head=2]Отчёт о модификации сервисного отдела[/head]

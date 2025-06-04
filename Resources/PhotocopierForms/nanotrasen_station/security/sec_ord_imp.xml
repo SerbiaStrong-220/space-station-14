@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_ord_imp</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>форма НТ-СБ-ЗАК</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Постановление об установке отслеживающего импланта</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-ЗАК[/bold]
 [head=2]Постановление об установке отслеживающего импланта[/head]

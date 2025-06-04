@@ -2,7 +2,7 @@
 <Form>
   <FormId>cmd_cc_inv</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>форма НТ-КОМ-ЦК-ЗПЦК</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Запрос на вызов ПЦК</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ЦК-ЗПЦК[/bold]
 [head=2]Запрос на вызов ПЦК[/head]

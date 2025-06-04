@@ -2,7 +2,7 @@
 <Form>
   <FormId>sup_ord_dng</FormId>
   <PrototypeId>PaperNtFormCargo</PrototypeId>
-  <EntityName>форма НТ-СНБ-ЗАК-О</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Заказ потенциально опасного товара</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СНБ-ЗАК-О[/bold]
 [head=2]Заказ потенциально опасного товара[/head]

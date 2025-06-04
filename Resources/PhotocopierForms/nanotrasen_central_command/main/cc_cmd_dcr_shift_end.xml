@@ -2,7 +2,7 @@
 <Form>
   <FormId>cc_cmd_dcr_shift_end</FormId>
   <PrototypeId>PaperNtFormCc</PrototypeId>
-  <EntityName>форма НТ-ЦК-КОМ-УКЗ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Приказ о начале замены текущего экипажа станции</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЦК-КОМ-УКЗ[/bold]
 [head=2]Приказ о начале замены текущего экипажа станции[/head]

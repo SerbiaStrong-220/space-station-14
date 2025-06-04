@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_sitrep</FormId>
   <PrototypeId>PaperNtFormSec</PrototypeId>
-  <EntityName>форма НТ-СБ-ОТЧ-СИТ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Отчёт о работе службы безопасности</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-ОТЧ-СИТ[/bold]
 [head=2]Отчёт о работе службы безопасности[/head]

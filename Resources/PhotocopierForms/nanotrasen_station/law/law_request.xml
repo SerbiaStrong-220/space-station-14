@@ -2,7 +2,7 @@
 <Form>
   <FormId>law_request</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
-  <EntityName>форма НТ-КОМ-ЗАП</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Запрос на предоставления документов</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ЗАП[/bold]
 [head=2]Запрос на предоставления документов[/head]

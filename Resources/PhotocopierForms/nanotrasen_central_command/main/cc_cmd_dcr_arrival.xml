@@ -2,7 +2,7 @@
 <Form>
   <FormId>cc_cmd_dcr_arrival</FormId>
   <PrototypeId>PaperNtFormCcSecure</PrototypeId>
-  <EntityName>Форма НТ-ЦК-КОМ-ППОЦК</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Прибытие офицера Центрального Командования</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЦК-КОМ-ППОЦК[/bold]
 [head=2]Прибытие офицера Центрального Командования[/head]

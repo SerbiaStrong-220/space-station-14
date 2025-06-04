@@ -2,7 +2,7 @@
 <Form>
   <FormId>cmd_acom</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>форма НТ-КОМ-ВКОМ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Заявление о назначении ВрИО Главы отдела</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ВКОМ[/bold]
 [head=2]Заявление о назначении ВрИО Главы отдела[/head]

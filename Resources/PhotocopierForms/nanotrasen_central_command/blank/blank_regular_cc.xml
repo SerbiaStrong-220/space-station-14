@@ -2,7 +2,7 @@
 <Form>
   <FormId>blank_cc</FormId>
   <PrototypeId>PaperNtFormCc</PrototypeId>
-  <EntityName>бумага</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Свободный бланк ЦентКома 01</PhotocopierTitle>
   <Content></Content>
 </Form>

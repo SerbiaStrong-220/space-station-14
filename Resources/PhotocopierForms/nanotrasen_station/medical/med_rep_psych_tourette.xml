@@ -2,7 +2,7 @@
 <Form>
   <FormId>med_rep_psych_tourette</FormId>
   <PrototypeId>PaperNtFormMed</PrototypeId>
-  <EntityName>форма НТ-МЕД-ТРТТ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Справка о синдроме Туретта</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-МЕД-ТРТТ[/bold]
 [head=2]Справка о синдроме Туретта[/head]

@@ -2,7 +2,7 @@
 <Form>
   <FormId>cc_cmd_dcr_hhc</FormId>
   <PrototypeId>PaperNtFormCcSecure</PrototypeId>
-  <EntityName>Форма НТ-ЦК-КОМ-УСЗК</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Указ об отчётности по здоровью командования</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЦК-КОМ-УСЗК[/bold]
 [head=2]Указ о предоставлении отчётности касательно состояния здоровья командования[/head]

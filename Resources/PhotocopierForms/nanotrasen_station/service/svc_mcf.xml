@@ -2,7 +2,7 @@
 <Form>
   <FormId>svc_mcf</FormId>
   <PrototypeId>PaperNtForm</PrototypeId>
-  <EntityName>форма НТ-СЗБ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Свидетельство о заключении брака</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СЗБ[/bold]
 [head=2]Свидетельство о заключении брака[/head]

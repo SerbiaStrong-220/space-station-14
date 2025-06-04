@@ -2,7 +2,7 @@
 <Form>
   <FormId>goal_capsule</FormId>
   <PrototypeId>PaperNtFormGoal</PrototypeId>
-  <EntityName>форма НТ-КМД-ОПС-ЭП</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Опись отправляемой экстренной помощи</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КМД-ОПС-ЭП[/bold]
 [head=2]Опись отправляемой экстренной помощи[/head]

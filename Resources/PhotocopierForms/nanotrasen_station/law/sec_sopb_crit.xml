@@ -2,7 +2,7 @@
 <Form>
   <FormId>sec_sopb_crit</FormId>
   <PrototypeId>PaperNtFormLaw</PrototypeId>
-  <EntityName>форма НТ-СБ-КНСРП</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Сообщение о критическом нарушении</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-СБ-КНСРП[/bold]
 [head=2]Сообщение о критическом нарушении[/head]

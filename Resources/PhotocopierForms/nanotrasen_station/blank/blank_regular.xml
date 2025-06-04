@@ -2,7 +2,7 @@
 <Form>
   <FormId>blank</FormId>
   <PrototypeId>PaperNtForm</PrototypeId>
-  <EntityName>бумага</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Свободный бланк</PhotocopierTitle>
   <Content></Content>
 </Form>

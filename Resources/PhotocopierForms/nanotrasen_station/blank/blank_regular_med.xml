@@ -2,7 +2,7 @@
 <Form>
   <FormId>blank_med</FormId>
   <PrototypeId>PaperNtFormMed</PrototypeId>
-  <EntityName>бумага</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Свободный бланк медицинского отдела</PhotocopierTitle>
   <Content></Content>
 </Form>

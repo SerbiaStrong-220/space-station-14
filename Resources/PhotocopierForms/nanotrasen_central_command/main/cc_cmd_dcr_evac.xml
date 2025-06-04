@@ -2,7 +2,7 @@
 <Form>
   <FormId>cc_cmd_dcr_evac</FormId>
   <PrototypeId>PaperNtFormCcSecure</PrototypeId>
-  <EntityName>форма НТ-ЦК-КОМ-УКЗ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Приказ запуска протоколов экстренной эвакуации</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-ЦК-КОМ-УКЗ[/bold]
 [head=2]Приказ о запуске протоколов экстренной эвакуации[/head]

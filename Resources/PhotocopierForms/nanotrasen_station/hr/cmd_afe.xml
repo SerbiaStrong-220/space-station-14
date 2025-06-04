@@ -2,7 +2,7 @@
 <Form>
   <FormId>cmd_afe</FormId>
   <PrototypeId>PaperNtFormCmd</PrototypeId>
-  <EntityName>форма НТ-КОМ-ВАК</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>(!) Заявление о трудоустройстве пассажира</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ВАК[/bold]
 [head=2]Заявление о трудоустройстве пассажира[/head]

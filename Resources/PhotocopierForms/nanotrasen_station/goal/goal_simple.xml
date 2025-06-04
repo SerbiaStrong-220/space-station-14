@@ -2,7 +2,7 @@
 <Form>
   <FormId>goal_simple</FormId>
   <PrototypeId>PaperNtFormGoal</PrototypeId>
-  <EntityName>форма НТ-КОМ-ЦК-ОВЦ</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Отчёт о выполнении цели</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-КОМ-ЦК-ОВЦ[/bold]
 [head=2]Отчет о выполнении цели[/head]

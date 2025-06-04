@@ -2,7 +2,7 @@
 <Form>
   <FormId>med_ord_chem</FormId>
   <PrototypeId>PaperNtFormMed</PrototypeId>
-  <EntityName>форма НТ-МЕД-ЗАК</EntityName>
+  <EntityName>документ</EntityName>
   <PhotocopierTitle>Заказ на химические вещества</PhotocopierTitle>
   <Content><![CDATA[[bold]Форма НТ-МЕД-ЗАК[/bold]
 [head=2]Заказ на химические вещества[/head]
