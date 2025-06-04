@@ -17,8 +17,6 @@ public sealed class CultYoggTrapSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStealthSystem _stealth = default!;
 
-    private readonly HashSet<EntityUid> _trapYoggList = new();
-
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -41,6 +39,14 @@ public sealed class CultYoggTrapSystem : EntitySystem
         if (trapComp.IsArmed)
             return; //further logic is only needed to set the trap
 
+        HashSet<EntityUid> trapYoggList = new();
+        var query = AllEntityQuery<CultYoggTrapComponent, TrapComponent>();
+
+        while (query.MoveNext(out var yoggTrap, out _, out var queryTrapComp))
+        {
+            if(queryTrapComp.IsArmed)
+                trapYoggList.Add(yoggTrap);
+        }
 
         if (!TryComp<CultYoggComponent>(args.DoAfter.Args.User, out var cultYoggComp))
         {
@@ -54,11 +60,11 @@ public sealed class CultYoggTrapSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cult-yogg-trap-component-alarm-stage"), args.DoAfter.Args.User, args.DoAfter.Args.User);
             args.Cancel();
         }
-        else if (_trapYoggList.Count >= ent.Comp.TrapsLimit
+        else if (trapYoggList.Count >= ent.Comp.TrapsLimit
             && ent.Comp.TrapsLimit > 0)
         {
             _popup.PopupClient(Loc.GetString("cult-yogg-trap-component-max-value"), args.DoAfter.Args.User, args.DoAfter.Args.User);
-            args.Cancel();
+                args.Cancel();
         }
     }
 
@@ -67,9 +73,12 @@ public sealed class CultYoggTrapSystem : EntitySystem
         if (args.Stage != CultYoggStage.Alarm)
             return;
 
-        foreach (var currentTrap in _trapYoggList) //only for already installed
+        var query = AllEntityQuery<CultYoggTrapComponent, TrapComponent>();
+
+        while (query.MoveNext(out var yoggTrap, out _, out var queryTrapComp))
         {
-            RemComp<StealthComponent>(currentTrap);
+            if(queryTrapComp.IsArmed)
+                RemComp<StealthComponent>(yoggTrap);
         }
     }
 
@@ -78,10 +87,5 @@ public sealed class CultYoggTrapSystem : EntitySystem
         var visibility = args.IsArmed ? ent.Comp.ArmedVisibility : ent.Comp.UnArmedVisibility;
         _stealth.SetEnabled(ent.Owner, args.IsArmed);
         _stealth.SetVisibility(ent.Owner, visibility);
-
-        if (args.IsArmed)
-            _trapYoggList.Add(ent.Owner);
-        else
-            _trapYoggList.Remove(ent.Owner);
     }
 }

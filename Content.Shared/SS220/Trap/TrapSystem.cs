@@ -88,6 +88,12 @@ public sealed class TrapSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        if (!ent.Comp.IsArmed) //ignore check during defuse since it is meaningless and causes errors
+        {
+            if (!CanArmTrap(ent.Owner, args.User))
+                return;
+        }
+
         var xform = Transform(ent.Owner).Coordinates;
         _audio.PlayPredicted(ent.Comp.IsArmed ? ent.Comp.SetTrapSound : ent.Comp.DefuseTrapSound, xform, args.User);
 
@@ -111,7 +117,7 @@ public sealed class TrapSystem : EntitySystem
             _stunSystem.TryKnockdown(args.OtherEntity, ent.Comp.DurationStun, true, status);
         }
 
-        _trigger.TriggerTarget(ent.Owner);
+        _trigger.TriggerTarget(ent.Owner, args.OtherEntity);
         ToggleTrap(ent.Owner, ent.Comp);
 
         _ensnareableSystem.TryEnsnare(args.OtherEntity, ent.Owner, ensnaring);
@@ -137,7 +143,7 @@ public sealed class TrapSystem : EntitySystem
 
         if (comp.IsArmed)
         {
-            _transformSystem.AnchorEntity(uid); //клиентский баг
+            _transformSystem.AnchorEntity(uid);
         }
         else
             _transformSystem.Unanchor(uid);
