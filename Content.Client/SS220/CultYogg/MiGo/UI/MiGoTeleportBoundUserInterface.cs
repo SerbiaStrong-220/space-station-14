@@ -1,23 +1,14 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.UserInterface.Controls;
-using Content.Client.VendingMachines.UI;
-using Content.Shared.VendingMachines;
 using Robust.Client.UserInterface;
-using Robust.Shared.Input;
-using System.Linq;
 
 namespace Content.Client.SS220.CultYogg.MiGo.UI
 {
-    public sealed class MiGoTeleportBoundUserInterface : BoundUserInterface
+    public sealed class MiGoTeleportBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
     {
         [ViewVariables]
         private MiGoTeleportMenu? _menu;
-
-        [ViewVariables]
-        private List<VendingMachineInventoryEntry> _cachedInventory = new();
-
-        public MiGoTeleportBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-        {
-        }
 
         protected override void Open()
         {
@@ -43,18 +34,6 @@ namespace Content.Client.SS220.CultYogg.MiGo.UI
 
         private void OnItemSelected(GUIBoundKeyEventArgs args, ListData data)
         {
-            if (args.Function != EngineKeyFunctions.UIClick)
-                return;
-
-            if (data is not VendorItemsListData { ItemIndex: var itemIndex })
-                return;
-
-            var selectedItem = _cachedInventory.ElementAtOrDefault(itemIndex);
-
-            if (selectedItem == null)
-                return;
-
-            SendPredictedMessage(new VendingMachineEjectMessage(selectedItem.Type, selectedItem.ID));
         }
 
         protected override void Dispose(bool disposing)

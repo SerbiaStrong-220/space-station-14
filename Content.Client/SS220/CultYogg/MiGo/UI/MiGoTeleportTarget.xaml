@@ -2,12 +2,13 @@
             Orientation="Horizontal"
             HorizontalExpand="True"
             SeparationOverride="4">
-    <EntityPrototypeView
-            Name="ItemPrototype"
+    <SpriteView
+            Name="DollView"
             Margin="4 0 0 0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            MinSize="32 32"
+            Stretch="Fill"
+            SetSize="64 64"
             />
     <Label Name="NameLabel"
             SizeFlagsStretchRatio="3"
