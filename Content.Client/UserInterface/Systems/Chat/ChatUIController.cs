@@ -24,6 +24,8 @@ using Content.Shared.Decals;
 using Content.Shared.Input;
 using Content.Shared.Radio;
 using Content.Shared.Roles.RoleCodeword;
+using Content.Shared.SS220.Telepathy;
+using Content.Shared.SS220.UpdateChannels;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -187,6 +189,9 @@ public sealed class ChatUIController : UIController
         _net.RegisterNetMessage<MsgChatMessage>(OnChatMessage);
         _net.RegisterNetMessage<MsgDeleteChatMessagesBy>(OnDeleteChatMessagesBy);
         SubscribeNetworkEvent<DamageForceSayEvent>(OnDamageForceSay);
+        //ss220 fix telepathy channel start
+        SubscribeNetworkEvent<UpdateChannelEvent>(OnUpdateChannel);
+        //ss220 fix telepathy channel end
         _config.OnValueChanged(CCVars.ChatEnableColorName, (value) => { _chatNameColorsEnabled = value; });
         _chatNameColorsEnabled = _config.GetCVar(CCVars.ChatEnableColorName);
 
@@ -535,7 +540,6 @@ public sealed class ChatUIController : UIController
             FilterableChannels |= ChatChannel.Radio;
             FilterableChannels |= ChatChannel.Emotes;
             FilterableChannels |= ChatChannel.Notifications;
-            FilterableChannels |= ChatChannel.Telepathy; //ss220 telepathy
 
             // Can only send local / radio / emote when attached to a non-ghost entity.
             // TODO: this logic is iffy (checking if controlling something that's NOT a ghost), is there a better way to check this?
@@ -545,7 +549,6 @@ public sealed class ChatUIController : UIController
                 CanSendChannels |= ChatSelectChannel.Whisper;
                 CanSendChannels |= ChatSelectChannel.Radio;
                 CanSendChannels |= ChatSelectChannel.Emotes;
-                CanSendChannels |= ChatSelectChannel.Telepathy; //ss220 telepathy
             }
         }
 
@@ -556,14 +559,25 @@ public sealed class ChatUIController : UIController
             CanSendChannels |= ChatSelectChannel.Dead;
         }
 
-        // only admins can see / filter asay
-        if (_admin.HasFlag(AdminFlags.Admin) || _admin.HasFlag(AdminFlags.Adminchat))
+        //ss220 add hidden channel for telepathy for normal player start
+        var hasTelepathy = _player.LocalSession?.AttachedEntity is {} entityUid
+                           && EntityManager.HasComponent<TelepathyComponent>(entityUid);
+
+        var isAdmin = _admin.HasFlag(AdminFlags.Admin) || _admin.HasFlag(AdminFlags.Adminchat);
+
+        if (hasTelepathy || isAdmin)
         {
-            FilterableChannels |= ChatChannel.Admin;
-            FilterableChannels |= ChatChannel.AdminAlert;
-            FilterableChannels |= ChatChannel.AdminChat;
+            FilterableChannels |= ChatChannel.Telepathy;
+            CanSendChannels |= ChatSelectChannel.Telepathy;
+        }
+
+        // only admins can see / filter asay
+        if (isAdmin)
+        {
+            FilterableChannels |= ChatChannel.Admin | ChatChannel.AdminAlert | ChatChannel.AdminChat;
             CanSendChannels |= ChatSelectChannel.Admin;
         }
+        //ss220 add hidden channel for telepathy for normal player end
 
         SelectableChannels = CanSendChannels;
 
@@ -807,6 +821,13 @@ public sealed class ChatUIController : UIController
         chatBox.ChatInput.Input.SetText(modifiedText);
         chatBox.ChatInput.Input.ForceSubmitText();
     }
+
+    //ss220 fix telepathy channel start
+    private void OnUpdateChannel(UpdateChannelEvent ev, EntitySessionEventArgs _)
+    {
+        UpdateChannelPermissions();
+    }
+    //ss220 fix telepathy channel end
 
     private void OnChatMessage(MsgChatMessage message)
     {

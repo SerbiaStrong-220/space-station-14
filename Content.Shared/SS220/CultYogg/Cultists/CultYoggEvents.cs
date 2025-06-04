@@ -7,14 +7,11 @@ namespace Content.Shared.SS220.CultYogg.Cultists;
 ///     Event raised on entities when the stage of the cult is changed.
 /// </summary>
 [ByRefEvent, Serializable]
-public sealed class ChangeCultYoggStageEvent : EntityEventArgs
+public sealed class ChangeCultYoggStageEvent(CultYoggStage stage) : EntityEventArgs
 {
-    public CultYoggStage Stage;
+    public CultYoggStage Stage = stage;
 
-    public ChangeCultYoggStageEvent(CultYoggStage stage)
-    {
-        Stage = stage;
-    }
+    public bool Handled = false;
 }
 
 [ByRefEvent, Serializable]
@@ -22,14 +19,9 @@ public record struct CultYoggDeleteVisualsEvent;
 
 
 [ByRefEvent, Serializable]
-public sealed class CultYoggDeCultingEvent : EntityEventArgs
+public sealed class CultYoggDeCultingEvent(EntityUid entity) : EntityEventArgs
 {
-    public readonly EntityUid Entity;
-
-    public CultYoggDeCultingEvent(EntityUid entity)
-    {
-        Entity = entity;
-    }
+    public readonly EntityUid Entity = entity;
 }
 
 [ByRefEvent, Serializable]

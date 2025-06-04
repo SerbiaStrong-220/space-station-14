@@ -1030,7 +1030,10 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (transformEntity.MapID != sourceMapId)
                 continue;
 
-            var observer = ghostHearing.HasComponent(playerEntity);
+            //ss220 add filter tts for ghost start
+            var observer = ghostHearing.TryGetComponent(playerEntity, out var ghostComp)
+                           && ghostComp.IsEnabled;
+            //ss220 add filter tts for ghost end
 
             // even if they are a ghost hearer, in some situations we still need the range
             if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceGetRange)
@@ -1271,19 +1274,23 @@ public sealed class AnnouncementSpokeEvent : EntityEventArgs
     }
 }
 
+//ss220 add filter tts for ghost start
 public sealed class RadioSpokeEvent : EntityEventArgs
 {
     public readonly EntityUid Source;
     public readonly string Message;
+    public readonly RadioChannelPrototype Channel;
     public readonly RadioEventReceiver[] Receivers; // SS220 Silicon TTS fix
 
-    public RadioSpokeEvent(EntityUid source, string message, RadioEventReceiver[] receivers)
+    public RadioSpokeEvent(EntityUid source, string message, RadioChannelPrototype channel, RadioEventReceiver[] receivers)
     {
         Source = source;
         Message = message;
+        Channel = channel;
         Receivers = receivers;
     }
 }
+//ss220 add filter tts for ghost end
 
 // SS220 Silicon TTS fix begin
 public readonly struct RadioEventReceiver

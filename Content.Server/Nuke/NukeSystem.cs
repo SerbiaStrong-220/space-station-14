@@ -657,6 +657,11 @@ public sealed class NukeSystem : EntitySystem
             args.PushMarkup(Loc.GetString("examinable-anchored"));
         else
             args.PushMarkup(Loc.GetString("examinable-unanchored"));
+
+        //ss220 add examined time for nuke start
+        if (component.Status == NukeStatus.ARMED)
+            args.PushMarkup(Loc.GetString("nuke-comp-time-remaining", ("time", (int)component.RemainingTime)));
+        //ss220 add examine time for nuke end
     }
 }
 
