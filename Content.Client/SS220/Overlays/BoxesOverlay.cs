@@ -18,7 +18,7 @@ public sealed class BoxesOverlay : Overlay
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
     private ShaderInstance _shader;
-    private Texture _texture;
+    private Texture _defaultTexture;
 
     private Dictionary<Type, BoxesOverlayProvider> _providers = new();
 
@@ -26,7 +26,7 @@ public sealed class BoxesOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
         _shader = _proto.Index<ShaderPrototype>("unshaded").Instance();
-        _texture = _cache.GetTexture("/Textures/Interface/Nano/square.png");
+        _defaultTexture = _cache.GetTexture("/Textures/Interface/Nano/square.png");
     }
 
     public static BoxesOverlay GetOverlay()
@@ -57,7 +57,7 @@ public sealed class BoxesOverlay : Overlay
         drawHandle.UseShader(_shader);
     }
 
-    private void DrawBoxes(in OverlayDrawArgs args, BoxesData data)
+    private void DrawBoxes(in OverlayDrawArgs args, BoxesOverlayData data)
     {
         var xform = _entManager.GetComponent<TransformComponent>(data.Parent);
         if (xform.MapID != args.MapId)
@@ -68,8 +68,9 @@ public sealed class BoxesOverlay : Overlay
 
         var drawHandle = args.WorldHandle;
         drawHandle.SetTransform(worldMatrix);
+
         foreach (var box in data.Boxes)
-            drawHandle.DrawTextureRect(_texture, box, data.Color);
+            drawHandle.DrawTextureRect(_defaultTexture, box, data.Color);
     }
 
     public bool AddProvider(BoxesOverlayProvider provider)
@@ -124,16 +125,18 @@ public sealed class BoxesOverlay : Overlay
             IoCManager.InjectDependencies(this);
         }
 
-        public abstract List<BoxesData> GetBoxesDatas();
+        public abstract List<BoxesOverlayData> GetBoxesDatas();
     }
 
     [Virtual]
-    public class BoxesData(EntityUid parent)
+    public class BoxesOverlayData(EntityUid parent)
     {
         public EntityUid Parent = parent;
 
         public List<Box2> Boxes = new();
 
         public Color Color = Color.White;
+
+        public Texture? Texture;
     }
 }

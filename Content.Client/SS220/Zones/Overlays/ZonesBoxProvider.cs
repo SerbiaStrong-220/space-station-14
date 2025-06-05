@@ -2,12 +2,15 @@
 using static Content.Client.SS220.Overlays.BoxesOverlay;
 using Content.Shared.SS220.Zones.Components;
 using Content.Client.SS220.Zones.Systems;
+using Robust.Client.ResourceManagement;
+using Content.Client.Resources;
 
 namespace Content.Client.SS220.Zones.Overlays;
 
 public sealed partial class ZonesBoxesOverlayProvider : BoxesOverlayProvider
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly IResourceCache _cache = default!;
 
     private readonly ZonesSystem _zones;
 
@@ -16,31 +19,39 @@ public sealed partial class ZonesBoxesOverlayProvider : BoxesOverlayProvider
         _zones = _entityManager.System<ZonesSystem>();
     }
 
-    public override List<BoxesData> GetBoxesDatas()
+    public override List<BoxesOverlayData> GetBoxesDatas()
     {
-        List<BoxesData> boxes = [];
+        List<BoxesOverlayData> overlayData = [];
         var query = _entityManager.EntityQueryEnumerator<ZonesContainerComponent>();
         while (query.MoveNext(out var parent, out var container))
         {
             foreach (var netZone in container.Zones)
             {
                 var zone = _entityManager.GetEntity(netZone);
-                if (!_entityManager.TryGetComponent<ZoneComponent>(zone, out var zoneComp) ||
-                    zoneComp.ZoneParams is not { } @params)
+                if (!_entityManager.TryGetComponent<ZoneComponent>(zone, out var zoneComp))
                     continue;
 
+                var @params = zoneComp.ZoneParams;
                 var alpha = zone == _zones.ControlWindow.SelectedZoneEntry?.ZoneEntity.Owner ? 0.25f : 0.125F;
                 var color = @params.Color.WithAlpha(alpha);
-                var data = new BoxesData(parent)
+                var currentData = new BoxesOverlayData(parent)
                 {
-                    Boxes = @params.Boxes,
+                    Boxes = @params.CurrentSize,
                     Color = color,
                 };
+                overlayData.Add(currentData);
 
-                boxes.Add(data);
+                var cutedTexture = _cache.GetTexture("/Textures/SS220/Interface/Zones/stripes.svg.192dpi.png");
+                var cutedData = new BoxesOverlayData(parent)
+                {
+                    Boxes = @params.CutOutSize,
+                    Color = color,
+                    Texture = cutedTexture
+                };
+                overlayData.Add(cutedData);
             }
         }
 
-        return boxes;
+        return overlayData;
     }
 }

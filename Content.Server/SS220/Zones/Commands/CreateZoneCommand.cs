@@ -19,7 +19,7 @@ public sealed partial class CreateZoneCommand : LocalizedCommands
         if (args.Length < 1)
             return;
 
-        var @params = new ZoneParamsState();
+        var @params = new ZoneParams();
         @params.ParseTags(argStr);
 
         var zonesSystem = _entityManager.System<ZonesSystem>();

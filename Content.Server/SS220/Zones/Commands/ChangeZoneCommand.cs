@@ -26,7 +26,7 @@ public sealed class ChangeZoneCommand : LocalizedCommands
         if (!_entityManager.TryGetComponent<ZoneComponent>(zone, out var zoneComp))
             return;
 
-        var @params = new ZoneParamsState();
+        var @params = new ZoneParams();
         @params.ParseTags(argStr);
 
         var zonesSystem = _entityManager.System<ZonesSystem>();

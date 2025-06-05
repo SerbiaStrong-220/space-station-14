@@ -45,7 +45,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         DeleteZone(entity.Owner);
     }
 
-    /// <inheritdoc cref="CreateZone(ZoneParamsState)"/>
+    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
     public Entity<ZoneComponent>? CreateZone(
         IEnumerable<(EntityCoordinates, EntityCoordinates)> boxCoordinates,
         string? protoId = null,
@@ -75,7 +75,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cropToParentSize);
     }
 
-    /// <inheritdoc cref="CreateZone(ZoneParamsState)"/>
+    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
     public Entity<ZoneComponent>? CreateZone(
         IEnumerable<(MapCoordinates, MapCoordinates)> boxCoordinates,
         string? protoId = null,
@@ -108,7 +108,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cropToParentSize);
     }
 
-    /// <inheritdoc cref="CreateZone(ZoneParamsState)"/>
+    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
     public Entity<ZoneComponent>? CreateZone(
         NetEntity container,
         IEnumerable<(Vector2,Vector2)> points,
@@ -122,7 +122,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         return CreateZone(container, boxes, protoId, name, color, attachToGrid, cropToParentSize);
     }
 
-    /// <inheritdoc cref="CreateZone(ZoneParamsState)"/>
+    /// <inheritdoc cref="CreateZone(ZoneParams)"/>
     public Entity<ZoneComponent>? CreateZone(
         NetEntity container,
         IEnumerable<Box2> boxes,
@@ -132,7 +132,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         bool attachToGrid = false,
         bool cropToParentSize = false)
     {
-        return CreateZone(new ZoneParamsState()
+        return CreateZone(new ZoneParams()
         {
             Container = container,
             Boxes = boxes.ToList(),
@@ -145,7 +145,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     }
 
     /// Creates new zone
-    public Entity<ZoneComponent>? CreateZone(ZoneParamsState @params)
+    public Entity<ZoneComponent>? CreateZone(ZoneParams @params)
     {
         if (@params.Boxes.Count <= 0 || !@params.Container.IsValid())
             return null;
@@ -160,7 +160,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (string.IsNullOrEmpty(@params.ProtoId))
             @params.ProtoId = BaseZoneId;
 
-        @params.RecalculateBoxes();
+        @params.RecalculateSize();
 
         var zone = Spawn(@params.ProtoId, Transform(container).Coordinates);
         _pvsOverride.AddGlobalOverride(zone);
@@ -177,7 +177,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         return (zone, zoneComp);
     }
 
-    public void ChangeZone(Entity<ZoneComponent> zone, ZoneParamsState newParams)
+    public void ChangeZone(Entity<ZoneComponent> zone, ZoneParams newParams)
     {
         if (!newParams.Container.IsValid())
             return;

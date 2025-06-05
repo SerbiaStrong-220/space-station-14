@@ -16,7 +16,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
 using System.Linq;
 using System.Numerics;
-using static Content.Shared.SS220.Zones.Systems.ZoneParamsState;
+using static Content.Shared.SS220.Zones.Systems.ZoneParams;
 
 namespace Content.Client.SS220.Zones.UI;
 
@@ -30,7 +30,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     private readonly ZonesSystem _zones = default!;
 
-    public Action<ZoneParamsState>? ParamsChanged;
+    public Action<ZoneParams>? ParamsChanged;
 
     public Entity<ZoneComponent>? ZoneEntity
     {
@@ -40,7 +40,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     private Entity<ZoneComponent>? _zoneEntity;
 
-    public ZoneParamsState CurParams
+    public ZoneParams CurParams
     {
         get => _curParams;
         set
@@ -52,10 +52,10 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         }
     }
 
-    private ZoneParamsState _curParams;
+    private ZoneParams _curParams;
 
-    public ZoneParamsState OriginalParams => _originalParams;
-    private ZoneParamsState _originalParams;
+    public ZoneParams OriginalParams => _originalParams;
+    private ZoneParams _originalParams;
 
     private BoxLayoutMode _layoutMode = BoxLayoutMode.Adding;
 
@@ -101,16 +101,16 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         ShowChangesButton.OnToggled += e => SetOverlay(e.Pressed);
 
         NameLineEdit.OnFocusExit += _ => Refresh();
-        NameLineEdit.OnTextEntered += args => ChangeCurrentParams((ref ZoneParamsState p) => p.Name = args.Text);
+        NameLineEdit.OnTextEntered += args => ChangeCurrentParams((ref ZoneParams p) => p.Name = args.Text);
 
         PrototypeIDLineEdit.OnFocusExit += _ => Refresh();
-        PrototypeIDLineEdit.OnTextEntered += args => ChangeCurrentParams((ref ZoneParamsState p) => p.ProtoId = args.Text);
+        PrototypeIDLineEdit.OnTextEntered += args => ChangeCurrentParams((ref ZoneParams p) => p.ProtoId = args.Text);
 
         HexColorLineEdit.OnFocusExit += _ => Refresh();
         HexColorLineEdit.OnTextEntered += args =>
         {
             if (Color.TryParse(args.Text, out var color))
-                ChangeCurrentParams((ref ZoneParamsState p) => p.Color = color);
+                ChangeCurrentParams((ref ZoneParams p) => p.Color = color);
         };
 
         ContainerNetIDLineEdit.OnFocusExit += _ => Refresh();
@@ -118,18 +118,13 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         {
             if (NetEntity.TryParse(args.Text, out var netEnt) &&
                 _zones.IsValidContainer(_entityManager.GetEntity(netEnt)))
-                ChangeCurrentParams((ref ZoneParamsState p) => p.Container = netEnt);
+                ChangeCurrentParams((ref ZoneParams p) => p.Container = netEnt);
         };
 
-        AttachToGridCheckbox.OnPressed += _ => ChangeCurrentParams((ref ZoneParamsState s) =>
+        AttachToGridCheckbox.OnPressed += _ => ChangeCurrentParams((ref ZoneParams s) =>
         {
             s.AttachToGrid = AttachToGridCheckbox.Pressed;
-            s.RecalculateBoxes();
-        });
-        CutSpaceCheckbox.OnPressed += _ => ChangeCurrentParams((ref ZoneParamsState s) =>
-        {
-            s.CutSpace = CutSpaceCheckbox.Pressed;
-            s.RecalculateBoxes();
+            s.RecalculateSize();
         });
 
         ColorSelectorButton.AddStyleClass(StyleNano.StyleClassChatFilterOptionButton);
@@ -142,8 +137,17 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             _selectorPopup.Open(box);
         };
 
-        _selectorPopup.OnColorSelected += color => ChangeCurrentParams((ref ZoneParamsState s) => s.Color = color);
+        _selectorPopup.OnColorSelected += color => ChangeCurrentParams((ref ZoneParams s) => s.Color = color);
         _selectorPopup.OnVisibilityChanged += args => ColorSelectorButton.Pressed = args.Visible;
+
+        foreach (var value in Enum.GetValues<CutSpaceOptions>())
+            CutSpaceOptionSelector.AddItem(Loc.GetString($"zone-cut-space-option-{value}"), (int)value);
+
+        CutSpaceOptionSelector.OnItemSelected += args => ChangeCurrentParams((ref ZoneParams s) =>
+        {
+            s.CutSpaceOption = (CutSpaceOptions)args.Id;
+            s.RecalculateSize();
+        });
     }
 
     protected override void ExitedTree()
@@ -154,7 +158,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         base.ExitedTree();
     }
 
-    public ZoneParamsPanel(ZoneParamsState @params) : this(null)
+    public ZoneParamsPanel(ZoneParams @params) : this(null)
     {
         _curParams = @params;
         Refresh();
@@ -169,15 +173,20 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         HexColorLineEdit.Text = CurParams.Color.ToHex();
         ContainerNetIDLineEdit.Text = CurParams.Container.IsValid() ? CurParams.Container.ToString() : string.Empty;
         AttachToGridCheckbox.Pressed = CurParams.AttachToGrid;
-        CutSpaceCheckbox.Pressed = CurParams.CutSpace;
+        CutSpaceOptionSelector.SelectId((int)CurParams.CutSpaceOption);
 
         Box2ListContainer.RemoveAllChildren();
-        for (var i = 0; i < CurParams.Boxes.Count; i++)
+        for (var i = 0; i < CurParams.OriginalSize.Count; i++)
         {
-            var box = CurParams.Boxes[i];
+            var box = CurParams.OriginalSize[i];
             var entry = new ZoneBoxEntry(box);
             var index = i;
-            entry.OnBoxChanged += newBox => ChangeCurrentParams((ref ZoneParamsState s) => s.Boxes[index] = newBox);
+            entry.OnBoxChanged += newBox => ChangeCurrentParams((ref ZoneParams s) =>
+            {
+                var newSize = s.OriginalSize.ToList();
+                newSize[index] = newBox;
+                s.SetOriginalSize(newSize);
+            });
             Box2ListContainer.AddChild(entry);
         }
 
@@ -187,7 +196,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
     public void SetZoneEntity(Entity<ZoneComponent>? entity)
     {
         _zoneEntity = entity;
-        _originalParams = entity?.Comp.ZoneParams?.GetState() ?? new ZoneParamsState();
+        _originalParams = entity?.Comp.ZoneParams?.GetState() ?? new ZoneParams();
         if (string.IsNullOrEmpty(_originalParams.Name))
             _originalParams.Name = $"Zone {_zones.GetZonesCount() + 1}";
 
@@ -255,11 +264,11 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             return;
         }
 
-        var newBoxes = CurParams.Boxes.ToList();
+        var newSize = CurParams.CurrentSize.ToList();
         switch (_layoutMode)
         {
             case BoxLayoutMode.Adding:
-                newBoxes.Add(@params.Box);
+                newSize.Add(@params.Box);
                 break;
 
             case BoxLayoutMode.Cutting:
@@ -267,11 +276,11 @@ public sealed partial class ZoneParamsPanel : PanelContainer
                 if (CurParams.AttachToGrid)
                     _zones.AttachToGrid(CurParams.Container, ref cutter);
 
-                newBoxes = MathHelperExtensions.SubstructBox(newBoxes, cutter).ToList();
+                newSize = MathHelperExtensions.SubstructBox(newSize, cutter).ToList();
                 break;
         }
 
-        newBoxes = newBoxes.Select(b =>
+        newSize = newSize.Select(b =>
         {
             var x1 = MathF.Round(b.BottomLeft.X, 2);
             var y1 = MathF.Round(b.BottomLeft.Y, 2);
@@ -280,8 +289,8 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             return Box2.FromTwoPoints(new Vector2(x1, y1), new Vector2(x2, y2));
         }).ToList();
 
-        newParams.Boxes = newBoxes;
-        newParams.RecalculateBoxes();
+        newParams.SetOriginalSize(newSize);
+        newParams.RecalculateSize();
         CurParams = newParams;
     }
 
@@ -294,9 +303,9 @@ public sealed partial class ZoneParamsPanel : PanelContainer
     private (EntityUid Parent, List<Box2> Boxes) GetAddedBoxes()
     {
         var parent = _entityManager.GetEntity(CurParams.Container);
-        var result = CurParams.Boxes.ToList();
+        var result = CurParams.OriginalSize.ToList();
         if (parent == _entityManager.GetEntity(_originalParams.Container))
-            foreach (var box in _originalParams.Boxes)
+            foreach (var box in _originalParams.OriginalSize)
                 result = MathHelperExtensions.SubstructBox(result, box).ToList();
 
         return (parent, result);
@@ -305,15 +314,15 @@ public sealed partial class ZoneParamsPanel : PanelContainer
     private (EntityUid Parent, List<Box2> Boxes) GetDeletedBoxes()
     {
         var parent = _entityManager.GetEntity(_originalParams.Container);
-        var result = _originalParams.Boxes.ToList();
+        var result = _originalParams.OriginalSize.ToList();
         if (parent == _entityManager.GetEntity(CurParams.Container))
-            foreach (var box in CurParams.Boxes)
+            foreach (var box in CurParams.OriginalSize)
                 result = MathHelperExtensions.SubstructBox(result, box).ToList();
 
         return (parent, result);
     }
 
-    public ZoneParamsState GetParams()
+    public ZoneParams GetParams()
     {
         return CurParams;
     }
@@ -361,13 +370,13 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             _deletedBoxes = _panel.GetDeletedBoxes();
         }
 
-        public override List<BoxesOverlay.BoxesData> GetBoxesDatas()
+        public override List<BoxesOverlay.BoxesOverlayData> GetBoxesDatas()
         {
-            var result = new List<BoxesOverlay.BoxesData>();
+            var result = new List<BoxesOverlay.BoxesOverlayData>();
 
             if (_addedBoxes.Boxes.Count > 0 && _addedBoxes.Parent.IsValid())
             {
-                var data = new BoxesOverlay.BoxesData(_addedBoxes.Parent);
+                var data = new BoxesOverlay.BoxesOverlayData(_addedBoxes.Parent);
                 data.Boxes = _addedBoxes.Boxes;
                 data.Color = Color.Green.WithAlpha(ColorAlpha);
                 result.Add(data);
@@ -375,7 +384,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
             if (_deletedBoxes.Boxes.Count > 0 && _deletedBoxes.Parent.IsValid())
             {
-                var data = new BoxesOverlay.BoxesData(_deletedBoxes.Parent);
+                var data = new BoxesOverlay.BoxesOverlayData(_deletedBoxes.Parent);
                 data.Boxes = _deletedBoxes.Boxes;
                 data.Color = Color.Red.WithAlpha(ColorAlpha);
                 result.Add(data);

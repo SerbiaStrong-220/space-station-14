@@ -61,13 +61,13 @@ public static partial class MathHelperExtensions
     /// <summary>
     /// Returns a new array of boxes in which all intersections in <paramref name="boxes"/> has removed
     /// </summary>
-    public static IEnumerable<Box2> GetNonOverlappingBoxes(IEnumerable<Box2> boxes)
+    public static IEnumerable<Box2> GetNonOverlappingBoxes<T>(T boxes) where T : IEnumerable<Box2>
     {
         GetNonOverlappingBoxes(ref boxes);
         return boxes;
     }
 
-    public static void GetNonOverlappingBoxes(ref IEnumerable<Box2> boxes)
+    public static void GetNonOverlappingBoxes<T>(ref T boxes) where T : IEnumerable<Box2>
     {
         var result = new List<Box2>();
 
@@ -96,7 +96,7 @@ public static partial class MathHelperExtensions
             result.AddRange(currentParts);
         }
 
-        boxes = result;
+        boxes = (T)(object)result;
     }
 
     /// <summary>
@@ -143,13 +143,13 @@ public static partial class MathHelperExtensions
     /// <summary>
     /// Returns a new array of boxes in which, if possibe, the <paramref name="boxes"/> are combined without changing the total area
     /// </summary>
-    public static IEnumerable<Box2> UnionInEqualSizedBoxes(IEnumerable<Box2> boxes)
+    public static IEnumerable<Box2> UnionInEqualSizedBoxes<T>(T boxes) where T : IEnumerable<Box2>
     {
         UnionInEqualSizedBoxes(ref boxes);
         return boxes;
     }
 
-    public static void UnionInEqualSizedBoxes(ref IEnumerable<Box2> boxes)
+    public static void UnionInEqualSizedBoxes<T>(ref T boxes) where T : IEnumerable<Box2>
     {
         var result = boxes.ToList();
         var united = true;
@@ -199,7 +199,7 @@ public static partial class MathHelperExtensions
             result = newArray;
         }
 
-        boxes = result;
+        boxes = (T)(object)result;
 
         Dictionary<int, Box2> GetIntersectedBoxes(int index)
         {
@@ -346,7 +346,7 @@ public static partial class MathHelperExtensions
         box = AttachToGrid(box, gridSize);
     }
 
-    public static IEnumerable<Box2> AttachToGrid(IEnumerable<Box2> boxes, float gridSize = 1f)
+    public static IEnumerable<Box2> AttachToGrid<T>(T boxes, float gridSize = 1f) where T : IEnumerable<Box2>
     {
         var result = new HashSet<Box2>();
         foreach (var box in boxes)
@@ -355,8 +355,8 @@ public static partial class MathHelperExtensions
         return result;
     }
 
-    public static void AttachToGrid(ref IEnumerable<Box2> boxes, float gridSize = 1f)
+    public static void AttachToGrid<T>(ref T boxes, float gridSize = 1f) where T : IEnumerable<Box2>
     {
-        boxes = AttachToGrid(boxes, gridSize);
+        boxes = (T)(object)AttachToGrid(boxes, gridSize);
     }
 }

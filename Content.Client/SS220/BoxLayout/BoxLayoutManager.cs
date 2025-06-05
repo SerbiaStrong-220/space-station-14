@@ -205,9 +205,9 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
 
         private readonly BoxLayoutManager _layoutManager = layoutManager;
 
-        public override List<BoxesOverlay.BoxesData> GetBoxesDatas()
+        public override List<BoxesOverlay.BoxesOverlayData> GetBoxesDatas()
         {
-            var list = new List<BoxesOverlay.BoxesData>();
+            var list = new List<BoxesOverlay.BoxesOverlayData>();
             if (!_layoutManager.Active ||
                 _layoutManager.Point1 is not { } point1 ||
                 _layoutManager.Parent is not { } parent)
@@ -230,7 +230,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
                 MathHelperExtensions.AttachToGrid(ref box, gridSize);
             }
 
-            var boxesData = new BoxesOverlay.BoxesData(parent)
+            var boxesData = new BoxesOverlay.BoxesOverlayData(parent)
             {
                 Boxes = new List<Box2> { box },
                 Color = _layoutManager.Color.WithAlpha(0.5f)

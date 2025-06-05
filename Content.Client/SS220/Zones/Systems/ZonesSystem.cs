@@ -105,13 +105,13 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         _clientConsoleHost.ExecuteCommand($"zones:delete {GetNetEntity(zone)}");
     }
 
-    public void ExecuteCreateZone(ZoneParamsState @params)
+    public void ExecuteCreateZone(ZoneParams @params)
     {
         var tags = string.Join(' ', @params.GetTags());
         _clientConsoleHost.ExecuteCommand($"zones:create {tags}");
     }
 
-    public void ExecuteChangeZone(Entity<ZoneComponent> zone, ZoneParamsState newParams)
+    public void ExecuteChangeZone(Entity<ZoneComponent> zone, ZoneParams newParams)
     {
         var tags = string.Join(' ', newParams.GetTags());
         _clientConsoleHost.ExecuteCommand($"zones:change {GetNetEntity(zone)} {tags}");
