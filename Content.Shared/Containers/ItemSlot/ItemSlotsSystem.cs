@@ -14,7 +14,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
-using Content.Shared.Storage.EntitySystems; //SS220-dispensers-popup-fix
 using Content.Shared.Storage; //SS220-dispensers-popup-fix
 
 namespace Content.Shared.Containers.ItemSlots
@@ -35,7 +34,6 @@ namespace Content.Shared.Containers.ItemSlots
         [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
         [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
         [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-        [Dependency] private readonly SharedStorageSystem _storageSystem = default!; //SS220-dispensers-popup-fix
 
         public override void Initialize()
         {
@@ -209,16 +207,6 @@ namespace Content.Shared.Containers.ItemSlots
             if (args.Handled)
                 return;
 
-            //SS220-dispensers-popup-fix begin
-            if (TryComp<StorageComponent>(args.Target, out var storage))
-            {
-                if (_storageSystem.CanInsert(args.Target, args.Used, out _))
-                    return;
-
-                args.Handled = true;
-            }
-            //SS220-dispensers-popup-fix end
-
             if (!EntityManager.TryGetComponent(args.User, out HandsComponent? hands))
                 return;
 
@@ -260,10 +248,13 @@ namespace Content.Shared.Containers.ItemSlots
                 // the popup messages will just all be the same, so it's probably fine.
                 //
                 // doing a check to make sure that they're all the same or something is probably frivolous
-                if (lockedFailPopup != null)
-                    _popupSystem.PopupClient(Loc.GetString(lockedFailPopup), uid, args.User);
-                else if (whitelistFailPopup != null)
-                    _popupSystem.PopupClient(Loc.GetString(whitelistFailPopup), uid, args.User);
+                if (!TryComp<StorageComponent>(args.Target, out var storageComponent))
+                {
+                    if (lockedFailPopup != null)
+                        _popupSystem.PopupClient(Loc.GetString(lockedFailPopup), uid, args.User);
+                    else if (whitelistFailPopup != null)
+                        _popupSystem.PopupClient(Loc.GetString(whitelistFailPopup), uid, args.User);
+                }
                 return;
             }
 
