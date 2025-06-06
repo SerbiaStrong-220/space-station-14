@@ -414,6 +414,8 @@
   parent: BulletDisabler
   categories: [ HideSpawnMenu ]
   components:
+  - type: StaminaDamageOnCollide
+    damage: 0 # krs stamina-damage-fix
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
     layers:
@@ -435,6 +437,8 @@
   parent: BulletDisabler
   categories: [ HideSpawnMenu ]
   components:
+  - type: StaminaDamageOnCollide
+    damage: 0 # krs stamina-damage-fix
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
