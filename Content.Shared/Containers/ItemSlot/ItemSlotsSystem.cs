@@ -14,6 +14,8 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
+using Content.Shared.Storage.EntitySystems; //SS220-dispensers-popup-fix
+using Content.Shared.Storage; //SS220-dispensers-popup-fix
 
 namespace Content.Shared.Containers.ItemSlots
 {
@@ -33,6 +35,7 @@ namespace Content.Shared.Containers.ItemSlots
         [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
         [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
         [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+        [Dependency] private readonly SharedStorageSystem _storageSystem = default!; //SS220-dispensers-popup-fix
 
         public override void Initialize()
         {
@@ -72,7 +75,7 @@ namespace Content.Shared.Containers.ItemSlots
                     continue;
 
                 var item = Spawn(slot.StartingItem, Transform(uid).Coordinates);
-                    
+
                 if (slot.ContainerSlot != null)
                     _containers.Insert(item, slot.ContainerSlot);
             }
@@ -205,6 +208,18 @@ namespace Content.Shared.Containers.ItemSlots
         {
             if (args.Handled)
                 return;
+
+            //SS220-dispensers-popup-fix begin
+            var canInsertIntoStorage = _storageSystem.CanInsert(args.Target, args.Used, out var _);
+            if (TryComp<StorageComponent>(args.Target, out var comp) && canInsertIntoStorage)
+            {
+                return;
+            }
+            else if (comp != null && !canInsertIntoStorage)
+            {
+                args.Handled = true;
+            }
+            //SS220-dispensers-popup-fix end
 
             if (!EntityManager.TryGetComponent(args.User, out HandsComponent? hands))
                 return;
