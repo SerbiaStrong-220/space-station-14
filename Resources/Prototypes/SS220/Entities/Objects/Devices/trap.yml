@@ -33,7 +33,8 @@
       canMoveBreakout: true
       maxEnsnares: 10
     - type: Trap
-      interactionDelay: 5
+      setTrapDelay: 5
+      defuseTrapDelay: 5
     - type: Tag
       tags:
         - Unstackable

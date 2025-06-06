@@ -24,14 +24,17 @@ public sealed partial class TrapComponent : Component
     [DataField]
     public EntityWhitelist Blacklist = new();
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
-    public DamageSpecifier? DamageOnTrapped;
-
     /// <summary>
-    /// Delay time when interacting with a trap, be it set or defuse
+    /// Delay time for setting trap
     /// </summary>
     [DataField]
-    public TimeSpan InteractionDelay = TimeSpan.FromSeconds(5);
+    public TimeSpan SetTrapDelay = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    /// Delay time for defuse trap
+    /// </summary>
+    [DataField]
+    public TimeSpan DefuseTrapDelay = TimeSpan.FromSeconds(5);
 
     /// <summary>
     /// Is trap ready?
@@ -50,7 +53,13 @@ public sealed partial class TrapComponent : Component
 }
 
 [Serializable, NetSerializable]
-public sealed partial class TrapInteractionDoAfterEvent : SimpleDoAfterEvent
+public sealed partial class TrapSetDoAfterEvent : SimpleDoAfterEvent
+{
+
+}
+
+[Serializable, NetSerializable]
+public sealed partial class TrapDefuseDoAfterEvent : SimpleDoAfterEvent
 {
 
 }
