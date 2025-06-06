@@ -248,7 +248,7 @@ namespace Content.Shared.Containers.ItemSlots
                 // the popup messages will just all be the same, so it's probably fine.
                 //
                 // doing a check to make sure that they're all the same or something is probably frivolous
-                if (!TryComp<StorageComponent>(args.Target, out var storageComponent))
+                if (!TryComp<StorageComponent>(args.Target, out _)) //SS220-dispensers-popup-fix
                 {
                     if (lockedFailPopup != null)
                         _popupSystem.PopupClient(Loc.GetString(lockedFailPopup), uid, args.User);
