@@ -210,13 +210,11 @@ namespace Content.Shared.Containers.ItemSlots
                 return;
 
             //SS220-dispensers-popup-fix begin
-            var canInsertIntoStorage = _storageSystem.CanInsert(args.Target, args.Used, out var _);
-            if (TryComp<StorageComponent>(args.Target, out var comp) && canInsertIntoStorage)
+            if (TryComp<StorageComponent>(args.Target, out var storage))
             {
-                return;
-            }
-            else if (comp != null && !canInsertIntoStorage)
-            {
+                if (_storageSystem.CanInsert(args.Target, args.Used, out _))
+                    return;
+
                 args.Handled = true;
             }
             //SS220-dispensers-popup-fix end
