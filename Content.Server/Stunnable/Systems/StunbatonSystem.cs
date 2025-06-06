@@ -29,8 +29,6 @@ namespace Content.Server.Stunnable.Systems
             SubscribeLocalEvent<StunbatonComponent, StaminaDamageOnHitAttemptEvent>(OnStaminaHitAttempt);
             SubscribeLocalEvent<StunbatonComponent, ItemToggleActivateAttemptEvent>(TryTurnOn);
             SubscribeLocalEvent<StunbatonComponent, ChargeChangedEvent>(OnChargeChanged);
-            SubscribeLocalEvent<StunbatonComponent, MeleeHitEvent>(OnEnergyDecrease); //ss220 stunbaton decrease energy fix
-            SubscribeLocalEvent<StunbatonComponent, ThrowDoHitEvent>(OnThrowEnergyDecrease); //ss220 stunbaton decrease energy fix
         }
 
         private void OnStaminaHitAttempt(Entity<StunbatonComponent> entity, ref StaminaDamageOnHitAttemptEvent args)
@@ -103,25 +101,5 @@ namespace Content.Server.Stunnable.Systems
                 _itemToggle.TryDeactivate(entity.Owner, predicted: false);
             }
         }
-
-        //ss220 stunbaton decrease energy fix start
-        private void OnEnergyDecrease(Entity<StunbatonComponent> entity, ref MeleeHitEvent args)
-        {
-            if (TryComp<BatteryComponent>(entity.Owner, out var batteryComponent) && _itemToggle.IsActivated(entity.Owner))
-            {
-                _battery.TryUseCharge(entity.Owner, entity.Comp.EnergyPerUse, batteryComponent);
-            }
-
-        }
-
-        private void OnThrowEnergyDecrease(Entity<StunbatonComponent> entity, ref ThrowDoHitEvent args)
-        {
-            if (TryComp<BatteryComponent>(entity.Owner, out var batteryComponent) && _itemToggle.IsActivated(entity.Owner))
-            {
-                _battery.TryUseCharge(entity.Owner, entity.Comp.EnergyPerUse, batteryComponent);
-            }
-        }
-        //ss220 stunbaton decrease energy fix end
-
     }
 }
