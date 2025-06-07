@@ -90,11 +90,11 @@
   id: xrenoid
 
 - type: ttsVoice
-  name: Валтос
-  description: Голос начинающего диктора Валтоса
-  sex: Female
-  speaker: valtos
-  id: valtos
+  name: PlayBoyzTV
+  description: Голос канала PlayBoyzTV
+  sex: Male
+  speaker: playboyztv
+  id: playboyztv
 
 - type: ttsVoice
   name: Уоллес Брин
@@ -256,6 +256,20 @@
   sex: Male
   speaker: colin_moriarty_fl3
   id: colin_moriarty_fl3
+
+- type: ttsVoice
+  name: Джон Генри Эдем
+  description: Голос персонажа Джон Генри Эдем из Fallout 3
+  sex: Male
+  speaker: john_henry_eden_fl3
+  id: john_henry_eden_fl3
+
+- type: ttsVoice
+  name: Супер-Мутант
+  description: Голос персонажа Супер-Мутант из Fallout 3
+  sex: Male
+  speaker: super_mutant_fl3
+  id: super_mutant_fl3
 
 - type: ttsVoice
   name: Полина Морозова
@@ -508,6 +522,48 @@
   sex: Male
   speaker: zoltan_chivay
   id: zoltan_chivay
+
+- type: ttsVoice
+  name: Весемир
+  description: Голос персонажа Весемир из игры The Witcher 3
+  sex: Male
+  speaker: vesemir
+  id: vesemir
+
+- type: ttsVoice
+  name: Гильом де Лонфаль
+  description: Голос персонажа Гильом де Лонфаль из игры The Witcher 3
+  sex: Male
+  speaker: guillaume_de_launfal
+  id: guillaume_de_launfal
+
+- type: ttsVoice
+  name: Филиппа Эйльхарт
+  description: Голос персонажа Филиппа Эйльхарт из игры The Witcher 3
+  sex: Female
+  speaker: philippa_eilhart
+  id: philippa_eilhart
+
+- type: ttsVoice
+  name: Эвальд Борсоди
+  description: Голос персонажа Эвальд Борсоди из игры The Witcher 3
+  sex: Male
+  speaker: ewald_borsodi
+  id: ewald_borsodi
+
+- type: ttsVoice
+  name: Лютик
+  description: Голос персонажа Лютик из игры The Witcher 3
+  sex: Male
+  speaker: dandelion
+  id: dandelion
+
+- type: ttsVoice
+  name: Шани
+  description: Голос персонажа Шани из игры The Witcher 3
+  sex: Female
+  speaker: shani
+  id: shani
 
 - type: ttsVoice
   name: Азир
@@ -1049,6 +1105,27 @@
   id: sophronia_franklin
 
 - type: ttsVoice
+  name: Эверетт Клоптон
+  description: Голос персонажа Эверетт Клоптон из игры Hogwarts Legacy
+  sex: Male
+  speaker: everett_clopton
+  id: everett_clopton
+
+- type: ttsVoice
+  name: Гоблин Б
+  description: Голос персонажа Гоблин Б из игры Hogwarts Legacy
+  sex: Male
+  speaker: generic_goblin_b
+  id: generic_goblin_b
+
+- type: ttsVoice
+  name: Домовой эльф из святилища
+  description: Голос персонажа Домовой эльф из святилища из игры Hogwarts Legacy
+  sex: Male
+  speaker: sanctuary_house_elf
+  id: sanctuary_house_elf
+
+- type: ttsVoice
   name: Abaddon
   description: Голос персонажа Abaddon из игры Dota 2
   sex: Male
@@ -1537,3 +1614,38 @@
   sex: Male
   speaker: zeus_dota_2
   id: zeus_dota_2
+
+- type: ttsVoice
+  name: Мита
+  description: Голос персонажа Мита из игры MiSide
+  sex: Female
+  speaker: mita
+  id: mita
+
+- type: ttsVoice
+  name: Сонная Мита
+  description: Голос персонажа Сонная Мита из игры MiSide
+  sex: Female
+  speaker: mitadream
+  id: mitadream
+
+- type: ttsVoice
+  name: Мита Призрак
+  description: Голос персонажа Мита Призрак из игры MiSide
+  sex: Female
+  speaker: mitaghost
+  id: mitaghost
+
+- type: ttsVoice
+  name: Добрая Мита
+  description: Голос персонажа Добрая Мита из игры MiSide
+  sex: Female
+  speaker: mitakind
+  id: mitakind
+
+- type: ttsVoice
+  name: Коротковолосая Мита
+  description: Голос персонажа Коротковолосая Мита из игры MiSide
+  sex: Female
+  speaker: mitashorthairs
+  id: mitashorthairs
