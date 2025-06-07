@@ -39,6 +39,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
@@ -89,6 +90,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-tile-blocked-popup"), entity, entity);
             return;
         }
+
+        if (!_interaction.InRangeUnobstructed(args.Actor, location, popup: true))
+            return;
 
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, entity, entity.Comp.ErectDoAfterSeconds,
             new MiGoErectDoAfterEvent()
