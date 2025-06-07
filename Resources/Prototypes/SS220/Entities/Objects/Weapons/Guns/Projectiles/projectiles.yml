@@ -384,43 +384,19 @@
 # Base blaster bullet prototype
 - type: entity
   id: BaseBlasterBullet
-  parent: BaseBullet
+  parent: BulletDisabler
   categories: [ HideSpawnMenu ]
   components:
   - type: Reflective
     reflective:
     - Energy
-  - type: FlyBySound
-    sound:
-      collection: EnergyMiss
-      params:
-        volume: 5
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
     - state: omnilaser
       shader: unshaded
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.15,-0.3,0.15,0.3"
-        hard: false
-        mask:
-        - Impassable
-        - BulletImpassable
-      fly-by: &flybyfixture
-  - type: Ammo
-  - type: Projectile
-    impactEffect: BulletImpactEffectDisabler
-    damage:
-      types:
-        Heat: 0
-    soundHit:
-      collection: WeakHit
-    forceSound: true
+  - type: StaminaDamageOnCollide
+    damage: 0
 
 - type: entity
   categories: [ HideSpawnMenu ]
