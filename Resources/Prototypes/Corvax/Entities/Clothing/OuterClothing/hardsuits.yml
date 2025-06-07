@@ -32,6 +32,8 @@
   - type: StaminaResistance
     damageCoefficient: 0.5
   #ss220 cburn com-hardsuit fix end
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.1
   - type: ExplosionResistance
     damageCoefficient: 0.7
   - type: ToggleableClothing
