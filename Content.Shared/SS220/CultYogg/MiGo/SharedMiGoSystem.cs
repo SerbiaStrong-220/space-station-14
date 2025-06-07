@@ -528,10 +528,11 @@ public abstract class SharedMiGoSystem : EntitySystem
         if (args.Handled || !TryComp<ActorComponent>(ent, out var actor))
             return;
 
-        var response = new GhostWarpsResponseEvent([.. GetPlayerWarps(ent), .. GetLocationWarps()]);
-        RaiseNetworkEvent(response, actor.PlayerSession.Channel);
+        //var response = new GhostWarpsResponseEvent([.. GetPlayerWarps(ent), .. GetLocationWarps()]);
+        //RaiseNetworkEvent(response, actor.PlayerSession.Channel);
 
         _userInterfaceSystem.TryToggleUi(ent.Owner, MiGoUiKey.Teleport, actor.PlayerSession);
+        // _uiSystem.SetUiState(uid, SharedCrayonComponent.CrayonUiKey.Key, new CrayonBoundUserInterfaceState(component.SelectedState, component.SelectableColor, component.Color));
     }
 
     private IEnumerable<GhostWarp> GetLocationWarps()
