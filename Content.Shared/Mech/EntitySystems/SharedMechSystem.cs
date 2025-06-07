@@ -134,8 +134,8 @@ public abstract class SharedMechSystem : EntitySystem
         component.EquipmentContainer = _container.EnsureContainer<Container>(uid, component.EquipmentContainerId);
         component.BatterySlot = _container.EnsureContainer<ContainerSlot>(uid, component.BatterySlotId);
 
-        if (HasComp<MechRobotComponent>(uid))
-            component.PilotSlot = _container.EnsureContainer<ContainerSlot>(uid, component.PilotSlotId);
+        //SS220-MechClothingInHandsFix
+        component.PilotSlot = _container.EnsureContainer<ContainerSlot>(uid, component.PilotSlotId);
 
         UpdateAppearance(uid, component);
     }
@@ -147,12 +147,6 @@ public abstract class SharedMechSystem : EntitySystem
 
     private void OnGetAdditionalAccess(EntityUid uid, MechComponent component, ref GetAdditionalAccessEvent args)
     {
-        //SS220-MechClothingInHandsFix-start
-        // If it's not a proper mech, then skip additional access gathering
-        if (!HasComp<MechRobotComponent>(uid))
-            return;
-        //SS220-MechClothingInHandsFix-end
-
         var pilot = component.PilotSlot.ContainedEntity;
         if (pilot == null)
             return;
