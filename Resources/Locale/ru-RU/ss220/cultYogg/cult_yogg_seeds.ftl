@@ -8,3 +8,5 @@ seeds-sidious-shroom-name = Сидиус гриб
 seeds-sidious-shroom-display-name = Сидиус гриб
 seeds-lurbo-shroom-name = Луброгус
 seeds-lurbo-shroom-display-name = Луброгус
+seeds-miko-trap-shroom-name = Миколовушка
+seeds-miko-trap-shroom-display-name = Миколовушка
