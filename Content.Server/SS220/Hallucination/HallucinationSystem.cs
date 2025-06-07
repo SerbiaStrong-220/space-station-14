@@ -51,6 +51,9 @@ public sealed class HallucinationSystem : EntitySystem
         var sourceQuery = EntityQueryEnumerator<HallucinationSourceComponent>();
         while (sourceQuery.MoveNext(out var sourceUid, out var hallucinationSource))
         {
+            if (!hallucinationSource.IsActive)
+                continue;
+
             if (_gameTiming.CurTime < hallucinationSource.NextUpdateTime)
                 continue;
 
@@ -64,6 +67,20 @@ public sealed class HallucinationSystem : EntitySystem
                 TryAdd(entity.Owner, hallucinationSource.Hallucination);
         }
     }
+
+    /// <summary>
+    /// Make some additional changes to smoothly switch active status of source
+    /// </summary>
+    public void SetHallucinationSourceActiveFlag(EntityUid source, bool active)
+    {
+        HallucinationSourceComponent? sourceComp = null;
+        if (!Resolve(source, ref sourceComp))
+            return;
+
+        sourceComp.IsActive = active;
+        sourceComp.NextUpdateTime = _gameTiming.CurTime;
+    }
+
     /// <summary>
     /// Check if entity is protected from hallucination and if not.
     /// After that checks if hallucination exist and than renews its timer.
@@ -213,6 +230,9 @@ public sealed class HallucinationSystem : EntitySystem
 
         if (!TryGetComponentType(protection.ComponentName, out var protectionComponentType))
             return false;
+
+        if (HasComp(mobUid, protectionComponentType))
+            return true;
 
         var inventorySlot = protection.ItemSlot.HasValue ?
                         _inventory.GetSlotEnumerator(mobUid, protection.ItemSlot.Value) :
