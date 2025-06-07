@@ -37,6 +37,9 @@ public sealed class SwitchableWeaponSystem : EntitySystem
     //Non-stamina damage
     private void OnGetMeleeDamage(EntityUid uid, SwitchableWeaponComponent component, ref GetMeleeDamageEvent args)
     {
+        if (component.DamageOpen == null || component.DamageFolded == null)
+            return;
+
         args.Damage = component.IsOpen ? component.DamageOpen : component.DamageFolded;
     }
 
