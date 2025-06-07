@@ -5,33 +5,39 @@ using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
+using Content.Shared.Ghost;
+using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
+using Content.Shared.Mindshield.Components;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
+using Content.Shared.Revolutionary.Components;
+using Content.Shared.Roles;
+using Content.Shared.Roles.Jobs;
 using Content.Shared.SS220.CultYogg.Altar;
+using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.Sacraficials;
+using Content.Shared.StatusEffect;
+using Content.Shared.Verbs;
+using Content.Shared.Warps;
+using Content.Shared.Zombies;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Timing;
-using System.Linq;
-using Content.Shared.SS220.CultYogg.Buildings;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Content.Shared.Mindshield.Components;
-using Content.Shared.Zombies;
-using Content.Shared.Revolutionary.Components;
-using Content.Shared.Humanoid;
-using Content.Shared.Mind;
-using Content.Shared.Roles;
-using Content.Shared.Verbs;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.Mobs.Components;
-using Robust.Shared.Audio;
-using Content.Shared.Movement.Pulling.Events;
+using System.Linq;
+using System.Reflection.PortableExecutable;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
@@ -54,6 +60,8 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _userInterfaceSystem = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedJobSystem _jobs = default!;
 
     public override void Initialize()
     {
@@ -88,6 +96,8 @@ public abstract class SharedMiGoSystem : EntitySystem
         _actions.AddAction(uid, ref uid.Comp.MiGoAstralActionEntity, uid.Comp.MiGoAstralAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoErectActionEntity, uid.Comp.MiGoErectAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoSacrificeActionEntity, uid.Comp.MiGoSacrificeAction);
+        _actions.AddAction(uid, ref uid.Comp.MiGoTeleportActionEntity, uid.Comp.MiGoTeleportAction);
+        _actions.AddAction(uid, ref uid.Comp.MiGoTeleportActionEntity, uid.Comp.MiGoTeleportAction);
     }
 
     private void OnBoundUIOpened(Entity<MiGoComponent> entity, ref BoundUIOpenedEvent args)
@@ -509,6 +519,49 @@ public abstract class SharedMiGoSystem : EntitySystem
         }
 
         return true;
+    }
+    #endregion
+
+    #region Teleport
+    private void OnMiGoTeleport(Entity<MiGoComponent> ent, ref MiGoTeleportEvent args)
+    {
+        if (args.Handled || !TryComp<ActorComponent>(ent, out var actor))
+            return;
+
+        //var response = new GhostWarpsResponseEvent([.. GetPlayerWarps(ent), .. GetLocationWarps()]);
+        //RaiseNetworkEvent(response, actor.PlayerSession.Channel);
+
+        _userInterfaceSystem.TryToggleUi(ent.Owner, MiGoUiKey.Teleport, actor.PlayerSession);
+        // _uiSystem.SetUiState(uid, SharedCrayonComponent.CrayonUiKey.Key, new CrayonBoundUserInterfaceState(component.SelectedState, component.SelectableColor, component.Color));
+    }
+
+    private IEnumerable<GhostWarp> GetLocationWarps()
+    {
+        var allQuery = AllEntityQuery<WarpPointComponent>();
+
+        while (allQuery.MoveNext(out var uid, out var warp))
+        {
+            yield return new GhostWarp(GetNetEntity(uid), warp.Location ?? Name(uid), true);
+        }
+    }
+
+    private IEnumerable<GhostWarp> GetPlayerWarps(EntityUid except)
+    {
+        foreach (var player in _player.Sessions)
+        {
+            if (player.AttachedEntity is not { Valid: true } attached)
+                continue;
+
+            if (attached == except) continue;
+
+            TryComp<MindContainerComponent>(attached, out var mind);
+
+            var jobName = _jobs.MindTryGetJobName(mind?.Mind);
+            var playerInfo = $"{Comp<MetaDataComponent>(attached).EntityName} ({jobName})";
+
+            if (_mobState.IsAlive(attached) || _mobState.IsCritical(attached))
+                yield return new GhostWarp(GetNetEntity(attached), playerInfo, false);
+        }
     }
     #endregion
 }
