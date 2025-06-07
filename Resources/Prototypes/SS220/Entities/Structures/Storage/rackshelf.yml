@@ -161,13 +161,13 @@
         - id: null
           prob: 0.60
           orGroup: part
-        - id: CapacitorStockPart
+        - id: MicroManipulatorStockPart
           prob: 0.2
           orGroup: part
         - id: MicroManipulatorStockPart
           prob: 0.2
           orGroup: part
-        - id: MatterBinStockPart
+        - id: MicroManipulatorStockPart
           prob: 0.2
           orGroup: part
         # Syndicate loot

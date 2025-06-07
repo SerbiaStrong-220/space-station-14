@@ -21,25 +21,24 @@ namespace Content.Client.Administration.UI.Tabs.RoundTab
             Delay.OnPressed += ButtonClicked;
         }
 
+        //SS220-Delay-button-admin-panel-begin
         private void StateChanged(bool value)
         {
             Delay.Pressed = value;
         }
 
-        // Extra check
         private void ButtonClicked(BaseButton.ButtonEventArgs args)
         {
             Delay.Pressed = _config.GetCVar(CCVars220.DelayEnabled);
         }
 
-        protected override void Dispose(bool disposing)
+        protected override void Deparented()
         {
-            base.Dispose(disposing);
+            base.Deparented();
 
-            if (disposing)
-            {
-                _config.UnsubValueChanged(CCVars.OocEnabled, StateChanged);
-            }
+
+            _config.UnsubValueChanged(CCVars.OocEnabled, StateChanged);
         }
+        //SS220-Delay-button-admin-panel-end
     }
 }

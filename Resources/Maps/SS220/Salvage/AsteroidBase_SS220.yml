@@ -557,14 +557,6 @@ entities:
     - type: GasTileOverlay
     - type: SpreaderGrid
     - type: GridPathfinding
-- proto: ActionToggleLight
-  entities:
-  - uid: 668
-    components:
-    - type: Transform
-      parent: 667
-    - type: InstantAction
-      container: 667
 - proto: AirlockEngineeringLocked
   entities:
   - uid: 332
@@ -3710,22 +3702,14 @@ entities:
     components:
     - type: Transform
       parent: 665
-    - type: HandheldLight
-      toggleActionEntity: 668
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 668
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
 - proto: FoodBakedCannabisBrownie
   entities:
   - uid: 334

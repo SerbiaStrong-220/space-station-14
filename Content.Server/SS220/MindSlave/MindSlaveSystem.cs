@@ -312,7 +312,7 @@ public sealed class MindSlaveSystem : EntitySystem
         if (objective != null)
             _mind.TryRemoveObjective(mindId, mindComp, objective.Value);
         else
-            _role.MindTryRemoveRole<RoleBriefingComponent>(mindId);
+            _role.MindRemoveRole<RoleBriefingComponent>(mindId);
 
         RemComp<MindSlaveComponent>(slave);
         _alert.ClearAlert(slave, EnslavedAlert);

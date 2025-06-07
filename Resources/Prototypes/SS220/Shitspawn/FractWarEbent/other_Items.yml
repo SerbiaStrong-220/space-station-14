@@ -160,11 +160,8 @@
       - id: MedicalScannerMachineCircuitboard
       - id: CloningConsoleComputerCircuitboard
       - id: BiomassReclaimerMachineCircuitboard
-      - id: CapacitorStockPart
-      - id: MatterBinStockPart
-        amount: 4
       - id: MicroManipulatorStockPart
-        amount: 3
+        amount: 8
       - id: Scalpel
         amount: 2
       - id: NetworkConfigurator

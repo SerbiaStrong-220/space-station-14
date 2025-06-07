@@ -39,3 +39,14 @@
     - MagazinePistolRubber
     - FlashlightSeclite
     - DrinkRelaxingPeachCan #SS220-DeleteSecurityLetal-End
+
+- type: chameleonOutfit
+  id: SecurityOfficerChameleonOutfit
+  job: SecurityOfficer
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatBeretSecurity
+    mask: ClothingMaskGasSecurity
+    # neck: Dinkystar # SS220-more-robust-sec
+    neck: ClothingBeltHolster # SS220-more-robust-sec
+    gloves: ClothingHandsGlovesColorBlack

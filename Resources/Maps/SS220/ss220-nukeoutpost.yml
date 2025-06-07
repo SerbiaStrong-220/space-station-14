@@ -3208,9 +3208,7 @@ entities:
     - type: MetaData
     - type: Transform
     - type: Map
-    - type: PhysicsMap
     - type: GridTree
-    - type: MovedGrids
     - type: FTLDestination
       whitelist:
         tags:
@@ -3239,14 +3237,6 @@ entities:
         - 0
         - 0
     - type: LoadedMap
-- proto: ActionToggleBlock
-  entities:
-  - uid: 2070
-    components:
-    - type: Transform
-      parent: 2069
-    - type: InstantAction
-      container: 2069
 - proto: Airlock
   entities:
   - uid: 446
@@ -8620,12 +8610,6 @@ entities:
       fibers: []
       fingerprints:
       - 96C2E0021CB2354F0408466B39F8CE4F
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 2070
     missingComponents:
     - ItemToggle
     - ItemToggleMeleeWeapon

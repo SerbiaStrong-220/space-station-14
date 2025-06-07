@@ -12,7 +12,7 @@
       - material: Cable
         amount: 5
         doAfter: 5
-      - material: Capacitor
+      - material: Manipulator
         amount: 2
         doAfter: 10
       - tag: PowerCellHigh

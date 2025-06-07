@@ -2,6 +2,7 @@
 
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -73,7 +74,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
         var erectAction = entity.Comp.MiGoErectActionEntity;
 
-        if (erectAction == null || !TryComp<InstantActionComponent>(erectAction, out var actionComponent))
+        if (erectAction == null || !TryComp<ActionComponent>(erectAction, out var actionComponent))
             return;
 
         if (actionComponent.Cooldown.HasValue && actionComponent.Cooldown.Value.End > _gameTiming.CurTime)
@@ -172,7 +173,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         }
 
         var erectAction = entity.Comp.MiGoErectActionEntity;
-        if (erectAction == null || !TryComp<InstantActionComponent>(erectAction, out var actionComponent))
+        if (erectAction == null || !TryComp<ActionComponent>(erectAction, out var actionComponent))
             return;
 
         var cooldown = buildingPrototype.CooldownOverride ?? actionComponent.UseDelay ?? TimeSpan.FromSeconds(1);

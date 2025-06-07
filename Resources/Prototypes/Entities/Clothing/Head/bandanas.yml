@@ -28,7 +28,8 @@
     tags:
     - Bandana
     - ClothMade
-    - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
+    - Recyclable
+    - WhitelistChameleon
 
 - type: entity
   parent: [ClothingHeadBandBase, ClothingMaskBandBlack]

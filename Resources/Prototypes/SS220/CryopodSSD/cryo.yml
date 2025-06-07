@@ -22,6 +22,7 @@
   name: action-name-cryo-ghost
   description: action-desc-cryo-ghost
   components:
-    - type: InstantAction
+    - type: Action
       checkCanInteract: false
+    - type: InstantAction
       event: !type:CryopodGhostActionEvent

@@ -23,6 +23,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Throwing;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
+using Content.Shared.Actions.Components;
 
 namespace Content.Shared.Blocking;
 
@@ -86,7 +87,7 @@ public sealed partial class BlockingSystem : EntitySystem
     {
         var action = ent.Comp.BlockingToggleActionEntity;
 
-        if (action == null || !TryComp<InstantActionComponent>(action.Value, out var actionComponent))
+        if (action == null || !TryComp<ActionComponent>(action.Value, out var actionComponent))
             return false;
 
         return _gameTiming.CurTime <= actionComponent.Cooldown?.End;

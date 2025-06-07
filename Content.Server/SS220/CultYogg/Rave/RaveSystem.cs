@@ -3,13 +3,13 @@ using Content.Server.Chat.Systems;
 using Content.Shared.Dataset;
 using Content.Shared.StatusEffect;
 using Content.Shared.SS220.CultYogg.Rave;
-using Content.Server.SS220.DarkForces.Saint.Reagent.Events;
 using Content.Shared.Examine;
 using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared.SS220.EntityEffects;
 
 namespace Content.Server.SS220.CultYogg.Rave;
 

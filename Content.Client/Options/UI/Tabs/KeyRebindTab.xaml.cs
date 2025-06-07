@@ -183,6 +183,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(KeyFunctions220.ItemOffer); // SS220 ItemOffer bind
             AddButton(ContentKeyFunctions.ExamineEntity);
             AddButton(ContentKeyFunctions.SwapHands);
+            AddButton(ContentKeyFunctions.SwapHandsReverse);
             AddButton(ContentKeyFunctions.MoveStoredItem);
             AddButton(ContentKeyFunctions.RotateStoredItem);
             AddButton(ContentKeyFunctions.SaveItemLocation);

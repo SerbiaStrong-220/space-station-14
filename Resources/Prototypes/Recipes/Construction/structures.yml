@@ -1254,43 +1254,15 @@
   conditions:
     - !type:TileNotBlocked
 
-#SS220-craft-start
-- type: construction
-  id: ShuttleWindowDiagonal
-  graph: WindowDiagonal
-  startNode: start
-  targetNode: shuttleWindowDiagonal
-  category: construction-category-structures
-  canBuildInImpassable: true
-  conditions:
-    - !type:EmptyOrWindowValidInTile
-    - !type:NoWindowsInTile
-  objectType: Structure
-  placementMode: SnapgridCenter
 
 - type: construction
-  id: UraniumWindowDirectional
-  graph: WindowDirectional
+  id: FungalSoil
+  graph: Soil
   startNode: start
-  targetNode: uraniumWindowDirectional
+  targetNode: fungalSoil
   category: construction-category-structures
-  canBuildInImpassable: true
-  conditions:
-    - !type:EmptyOrWindowValidInTile
-    - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
-
-- type: construction
-  id: UraniumReinforcedWindowDirectional
-  graph: WindowDirectional
-  startNode: start
-  targetNode: uraniumReinforcedWindowDirectional
-  category: construction-category-structures
-  canBuildInImpassable: true
+  canBuildInImpassable: false
   conditions:
-    - !type:EmptyOrWindowValidInTile
-    - !type:NoWindowsInTile
-  objectType: Structure
-  placementMode: SnapgridCenter
-#SS220-craft-end
+    - !type:TileNotBlocked

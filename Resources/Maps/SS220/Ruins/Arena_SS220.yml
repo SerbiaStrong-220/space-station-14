@@ -1388,20 +1388,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-- proto: ActionToggleBlock
-  entities:
-  - uid: 3
-    components:
-    - type: Transform
-      parent: 2
-    - type: InstantAction
-      container: 2
-  - uid: 5
-    components:
-    - type: Transform
-      parent: 4
-    - type: InstantAction
-      container: 4
 - proto: AirAlarm
   entities:
   - uid: 6
@@ -5716,14 +5702,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 1.7150406,-7.92233
       parent: 1
-    - type: Blocking
-      blockingToggleActionEntity: 3
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 3
 - proto: ClosetEmergencyFilledRandom
   entities:
   - uid: 785
@@ -11646,14 +11624,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 1.6629572,-7.3077464
       parent: 1
-    - type: Blocking
-      blockingToggleActionEntity: 5
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 5
 - proto: Matchbox
   entities:
   - uid: 1566

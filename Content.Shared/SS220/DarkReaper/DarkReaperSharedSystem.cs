@@ -33,6 +33,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.Actions.Components;
 
 namespace Content.Shared.SS220.DarkReaper;
 
@@ -109,14 +110,14 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         // Only consume dead
         if (!_mobState.IsDead(args.Target))
         {
-            if (_net.IsClient)
+            if (_net.IsClient && _timing.IsFirstTimePredicted)
                 _popup.PopupEntity("Цель должна быть мертва!", uid, PopupType.MediumCaution);
             return;
         }
 
         if (!TryComp<HumanoidAppearanceComponent>(args.Target, out _))
         {
-            if (_net.IsClient)
+            if (_net.IsClient && _timing.IsFirstTimePredicted)
                 _popup.PopupEntity("Цель должна быть гуманоидом!", uid, PopupType.MediumCaution);
             return;
         }
@@ -124,7 +125,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         //Dark Reaper consume fix begin
         if (HasComp<CannotBeConsumedComponent>(args.Target))
         {
-            if (_net.IsClient)
+            if (_net.IsClient && _timing.IsFirstTimePredicted)
                 _popup.PopupEntity("Невозможно поглотить", uid, PopupType.MediumCaution);
             return;
         }
@@ -315,7 +316,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             if (IsPaused(uid))
                 continue;
 
-            if (_net.IsServer && _actions.TryGetActionData(comp.MaterializeActionEntity, out var materializeData, false))
+            if (_net.IsServer && TryComp<ActionComponent>(comp.MaterializeActionEntity, out var materializeData))
             {
                 var visibleEyes = materializeData.Cooldown.HasValue &&
                 materializeData.Cooldown.Value.End > _timing.CurTime &&

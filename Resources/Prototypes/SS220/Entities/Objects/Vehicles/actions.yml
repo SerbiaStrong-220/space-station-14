@@ -3,7 +3,8 @@
   name: Honk
   description: Honk!
   components:
-  - type: InstantAction
+  - type: Action
     useDelay: 3.4
     icon: Objects/Fun/bikehorn.rsi/icon.png
+  - type: InstantAction
     event: !type:HonkActionEvent

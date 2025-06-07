@@ -425,14 +425,6 @@ entities:
     - type: RadiationGridResistance
     - type: IFF
       color: '#107C10FF'
-- proto: ActionToggleLight
-  entities:
-  - uid: 476
-    components:
-    - type: Transform
-      parent: 385
-    - type: InstantAction
-      container: 385
 - proto: AirAlarm
   entities:
   - uid: 299
@@ -3116,22 +3108,14 @@ entities:
     - type: Transform
       pos: -2.6257913,9.027536
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 476
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 476
     - type: Physics
       canCollide: True
-    - type: ActionsContainer
 - proto: LampGold
   entities:
   - uid: 442

@@ -26,7 +26,7 @@ public sealed class AddSleepActionSystem : EntitySystem
 
     private void OnUnbuckled(EntityUid uid, AddSleepActionComponent component, UnstrappedEvent args)
     {
-        _actionsSystem.RemoveAction(args.Buckle, component.SleepAction);
+        _actionsSystem.RemoveAction(component.SleepAction);
         if (TryComp<SleepingComponent>(args.Buckle, out var sleepingComponent))
             _sleepingSystem.TryWaking((args.Buckle.Owner, sleepingComponent));
     }

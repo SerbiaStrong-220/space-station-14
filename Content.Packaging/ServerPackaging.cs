@@ -47,6 +47,7 @@ public static class ServerPackaging
         // Python script had Npgsql. though we want Npgsql.dll as well soooo
         "Npgsql",
         "Microsoft",
+        "Discord",
 
         // SS220 extra assemblies begin
         "FFMpegCore",
