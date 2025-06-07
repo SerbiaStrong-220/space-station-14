@@ -1,0 +1,376 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Base
+- type: entity
+  parent: ClothingOuterBase
+  abstract: true
+  id: ClothingOuterJacketsBase
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi
+  - type: ItemSlots
+    slots:
+      accessory:
+        name: clothing-slot-accessory
+        whitelist:
+          tags:
+          - InShirtAccessory
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+
+- type: entity
+  parent: ClothingOuterBase
+  abstract: true
+  id: ClothingOuterJacketsVestBase
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/dark.rsi
+  - type: ItemSlots
+    slots:
+      accessory:
+        name: clothing-slot-accessory
+        whitelist:
+          tags:
+          - InShirtAccessory
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+
+# Jackets (Пиджаки)
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsDark
+  name: dark jackets
+  description: A dark jacket for formal occasions or shadowy corridors.  
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketDark
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsBlue
+  name: blue jackets
+  description: A crisp blue jacket, reminiscent of clear skies.  
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/blue.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketBlue
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsBlueindigo
+  name: blueindigo jackets
+  description: A deep indigo jacket with a hint of twilight mystery.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/blueindigo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/blueindigo.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketBlueindigo
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsGrey
+  name: grey jackets
+  description: A neutral grey jacket — practicality over flair.  
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/grey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/grey.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketGrey
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsPink
+  name: pink jackets
+  description: A playful pink jacket for those who dare to stand out. 
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/pink.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/pink.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketPink
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsCrimson
+  name: crimson jackets
+  description: Crimson like a warning. This jacket marks those who lead with fire, not words.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/officialred.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/officialred.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketOfficialred
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsAshen
+  name: ashen jackets
+  description: A jacket in ash-grey, its fabric whispers of cold verdicts and unbroken chains. 
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/officialgrey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/officialgrey.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketOfficialgrey
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsDarkcarp
+  name: carp leather jacket
+  description: Crafted from carp leather, its scales shimmer faintly — a trophy from the abyss.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/darkcarp.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/darkcarp.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketDarkcarp
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsGold
+  name: gold jacket
+  description: Gilded and audacious. Worn by Floppa's chosen — where wealth is both armor and weapon.  
+  suffix: Sponsor, Floppa
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/gold.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/gold.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtJacket
+    - JacketGold
+
+# Vests (Желеты под пиджак)
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsVestDark
+  name: dark formal vest
+  description: A sleek black vest for polished professional looks.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/dark.rsi  
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/dark.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestDark
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsVestBlue
+  name: navy blue vest
+  description: Classic navy vest that pairs well with any formal attire.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/blue.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestBlue
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsVestBlueindigo
+  name: indigo vest
+  description: A deep indigo vest with subtle sophisticated charm.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/blueindigo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/blueindigo.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestBlueindigo
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsVestGrey
+  name: grey vest
+  description: Versatile grey vest for business casual occasions.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/grey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/grey.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestGrey
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsVestPink
+  name: playful pink vest
+  description: A vibrant pink vest for bold fashion statements.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/pink.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/pink.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestPink
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsVestCrimson
+  name: crimson authority vest
+  description: This blood-red vest marks its wearer as someone not to be trifled with.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/officialred.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/officialred.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestOfficialred
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsVestAshen
+  name: ashen judjment vest
+  description: The pale grey vest of those who dispense cold, impartial justice.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/officialgrey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/officialgrey.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestOfficialfrey
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsVestVictorian
+  name: victorian elegance vest
+  description: A vintage-inspired vest with intricate detailing and old-world charm.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/victorian.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/victorian.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestVictorian
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsVestVictorianRed
+  name: crimson victorian vest
+  description: A rich red victorian vest for those who appreciate dramatic flair.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/victorian_red.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/victorian_red.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestVictorianRed
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsVestDarkcarp
+  name: carp leather vest
+  description: Crafted from rare carp hide, this vest shimmers with aquatic menace.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/darkcarp.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/darkcarp.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestDarkcarp
+
+- type: entity
+  parent: ClothingOuterJacketsBase
+  id: ClothingOuterJacketsVestGold
+  name: gilded floppa vest
+  description: This ostentatious gold vest is reserved for Floppa's most valued associates.
+  suffix: Sponsor, Floppa
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/gold.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/Vest/gold.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - InShirtVest
+    - JacketsVestGold

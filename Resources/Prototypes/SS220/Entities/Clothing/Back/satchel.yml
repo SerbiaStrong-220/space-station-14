@@ -24,6 +24,7 @@
   id: ClothingBackpackCentCommFilled
   name: кожаная сумка
   description: Слегка обветшалая сумка, которую не меняли на ЦК уже много лет - бюджета, говорят, не выделили.
+  suffix: ЦК
   components:
     - type: StorageFill
       contents:
@@ -37,3 +38,21 @@
         - id: BoxFolderBlue
         - id: RubberStampApproved
         - id: RubberStampDenied
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: ClothingBackpackDarkSatchel
+  name: classic leather satchel
+  description: Strict business satchel made of high-quality black leather. Perfect accessory for business meetings and formal events.
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Back/Satchels/leather-dark.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: ClothingBackpackVinousSatchel
+  name: vintage vinous satchel
+  description: A classic leather satchel in deep vinous hue. The rich vinous color exudes timeless elegance, walking the fine line between professional austerity and subdued passion
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Back/Satchels/leather-vinous.rsi
