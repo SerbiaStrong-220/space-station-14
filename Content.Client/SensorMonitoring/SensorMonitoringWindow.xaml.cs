@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Numerics;
 using Content.Client.Computer;
+using Content.Client.SS220.UserInterface;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.SensorMonitoring;
@@ -30,6 +31,17 @@ public sealed partial class SensorMonitoringWindow : FancyWindow, IComputerWindo
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
     }
+
+    //ss220 add pin for ui start
+    protected override void Opened()
+    {
+        base.Opened();
+
+        var pinnedButton = PinUISystem.CreateButton(this, CloseButton);
+
+        pinnedButton.OnPressed += _ => PinUISystem.SetPinned(this, pinnedButton.Pressed);
+    }
+    //ss220 add pin for ui end
 
     public void UpdateState(ConsoleUIState state)
     {

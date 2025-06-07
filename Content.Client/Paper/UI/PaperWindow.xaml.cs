@@ -12,6 +12,7 @@ using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 using Content.Client.SS220.Language;
+using Content.Client.SS220.UserInterface;
 using Robust.Client.Player;
 
 namespace Content.Client.Paper.UI
@@ -114,6 +115,17 @@ namespace Content.Client.Paper.UI
             SaveButton.Text = Loc.GetString("paper-ui-save-button",
                 ("keybind", _inputManager.GetKeyFunctionButtonString(EngineKeyFunctions.MultilineTextSubmit)));
         }
+
+        //ss220 add pin for ui start
+        protected override void Opened()
+        {
+            base.Opened();
+
+            var pinnedButton = PinUISystem.CreateButton(this, CloseButton);
+
+            pinnedButton.OnPressed += _ => PinUISystem.SetPinned(this, pinnedButton.Pressed);
+        }
+        //ss220 add pin for ui end
 
         /// <summary>
         ///     Initialize this UI according to <code>visuals</code> Initializes
