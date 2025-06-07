@@ -411,11 +411,9 @@
 - type: entity
   name : Blaster bolt
   id: BulletBlasterAlt
-  parent: BulletDisabler
+  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
-  - type: StaminaDamageOnCollide
-    damage: 0 # krs stamina-damage-fix
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
     layers:
@@ -434,11 +432,9 @@
 - type: entity
   name : Blaster bolt
   id: BulletBlasterPulse
-  parent: BulletDisabler
+  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
-  - type: StaminaDamageOnCollide
-    damage: 0 # krs stamina-damage-fix
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
     layers:
