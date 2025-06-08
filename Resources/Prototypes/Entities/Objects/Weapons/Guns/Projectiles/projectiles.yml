@@ -1225,7 +1225,7 @@
 
 # #SS220 Base blaster bullet prototype
 - type: entity
-  name : disabler bolt
+  name : Bullet bolt
   id: BaseBlasterBullet
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
