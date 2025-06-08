@@ -60,27 +60,32 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     }
 
     #region StageUpdating
-    private void UpdateStage(Entity<CultYoggComponent> entity, ref ChangeCultYoggStageEvent args)
+    private void UpdateStage(Entity<CultYoggComponent> ent, ref ChangeCultYoggStageEvent args)
     {
         if (args.Handled)
             return;
 
         args.Handled = true;
 
-        if (!TryComp<HumanoidAppearanceComponent>(entity, out var huAp))
+        ApplyCultVisuals(ent, args.Stage);
+    }
+
+    public void ApplyCultVisuals(Entity<CultYoggComponent> ent, CultYoggStage stage)
+    {
+        if (!TryComp<HumanoidAppearanceComponent>(ent, out var huAp))
             return;
 
-        if (entity.Comp.CurrentStage == args.Stage)
+        if (ent.Comp.CurrentStage == stage)
             return;
 
-        entity.Comp.CurrentStage = args.Stage;//Upgating stage in component
+        ent.Comp.CurrentStage = stage;//Upgating stage in component
 
-        switch (args.Stage)
+        switch (stage)
         {
             case CultYoggStage.Initial:
                 return;
             case CultYoggStage.Reveal:
-                entity.Comp.PreviousEyeColor = new Color(huAp.EyeColor.R, huAp.EyeColor.G, huAp.EyeColor.B, huAp.EyeColor.A);
+                ent.Comp.PreviousEyeColor = new Color(huAp.EyeColor.R, huAp.EyeColor.G, huAp.EyeColor.B, huAp.EyeColor.A);
                 huAp.EyeColor = Color.Green;
                 break;
             case CultYoggStage.Alarm:
@@ -92,7 +97,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
                 if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
                 {
-                    entity.Comp.PreviousTail = value.FirstOrDefault();
+                    ent.Comp.PreviousTail = value.FirstOrDefault();
                     value.Clear();
                 }
 
@@ -102,7 +107,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                 }
                 else
                 {
-                    _humanoidAppearance.SetMarkingId(entity.Owner,
+                    _humanoidAppearance.SetMarkingId(ent.Owner,
                     MarkingCategories.Special,
                     0,
                     CultDefaultMarking,
@@ -121,182 +126,173 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                 huAp.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
                 break;
             case CultYoggStage.God:
-                if (!TryComp<MobStateComponent>(entity, out var mobstate))
+                if (!TryComp<MobStateComponent>(ent, out var mobstate))
                     return;
 
                 if (mobstate.CurrentState != MobState.Dead) //if he is dead we skip him
                 {
                     var ev = new CultYoggForceAscendingEvent();//making cultist MiGo
-                    RaiseLocalEvent(entity, ref ev);
+                    RaiseLocalEvent(ent, ref ev);
                 }
                 break;
             default:
                 Log.Error("Something went wrong with CultYogg stages");
                 break;
         }
-        Dirty(entity.Owner, huAp);
+        Dirty(ent.Owner, huAp);
     }
 
-    public void DeleteVisuals(Entity<CultYoggComponent> entity)
+    public void DeleteVisuals(Entity<CultYoggComponent> ent)
     {
-        if (!TryComp<HumanoidAppearanceComponent>(entity, out var huAp))
+        if (!TryComp<HumanoidAppearanceComponent>(ent, out var huAp))
             return;
 
-        if (entity.Comp.PreviousEyeColor != null)
-            huAp.EyeColor = entity.Comp.PreviousEyeColor.Value;
+        if (ent.Comp.PreviousEyeColor != null)
+            huAp.EyeColor = ent.Comp.PreviousEyeColor.Value;
 
         huAp.MarkingSet.Markings.Remove(MarkingCategories.Special);
 
         if (huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Tail) &&
-            entity.Comp.PreviousTail != null)
+            ent.Comp.PreviousTail != null)
         {
-            huAp.MarkingSet.Markings[MarkingCategories.Tail].Add(entity.Comp.PreviousTail);
+            huAp.MarkingSet.Markings[MarkingCategories.Tail].Add(ent.Comp.PreviousTail);
         }
-        Dirty(entity.Owner, huAp);
+        Dirty(ent.Owner, huAp);
     }
     #endregion
 
     #region Puke
-    private void PukeAction(Entity<CultYoggComponent> uid, ref CultYoggPukeShroomEvent args)
+    private void PukeAction(Entity<CultYoggComponent> ent, ref CultYoggPukeShroomEvent args)
     {
         if (args.Handled)
             return;
 
         args.Handled = true;
 
-        _vomitSystem.Vomit(uid);
-        var shroom = _entityManager.SpawnEntity(uid.Comp.PukedEntity, Transform(uid).Coordinates);
+        _vomitSystem.Vomit(ent);
+        var shroom = _entityManager.SpawnEntity(ent.Comp.PukedEntity, Transform(ent).Coordinates);
 
-        _actions.RemoveAction(uid, uid.Comp.PukeShroomActionEntity);
-        _actions.AddAction(uid, ref uid.Comp.DigestActionEntity, uid.Comp.DigestAction);
+        _actions.RemoveAction(ent, ent.Comp.PukeShroomActionEntity);
+        _actions.AddAction(ent, ref ent.Comp.DigestActionEntity, ent.Comp.DigestAction);
     }
-    private void DigestAction(Entity<CultYoggComponent> uid, ref CultYoggDigestEvent args)
+
+    private void DigestAction(Entity<CultYoggComponent> ent, ref CultYoggDigestEvent args)
     {
-        if (!TryComp<HungerComponent>(uid, out var hungerComp))
+        if (!TryComp<HungerComponent>(ent, out var hungerComp))
             return;
 
-        if (!TryComp<ThirstComponent>(uid, out var thirstComp))
+        if (!TryComp<ThirstComponent>(ent, out var thirstComp))
             return;
 
         var currentHunger = _hungerSystem.GetHunger(hungerComp);
-        if (currentHunger <= uid.Comp.HungerCost || hungerComp.CurrentThreshold == uid.Comp.MinHungerThreshold)
+        if (currentHunger <= ent.Comp.HungerCost || hungerComp.CurrentThreshold == ent.Comp.MinHungerThreshold)
         {
-            _popup.PopupEntity(Loc.GetString("cult-yogg-digest-no-nutritions"), uid);
-            //_popup.PopupClient(Loc.GetString("cult-yogg-digest-no-nutritions"), uid, uid);//idk if it isn't working, but OnSericultureStart is an ok
+            _popup.PopupEntity(Loc.GetString("cult-yogg-digest-no-nutritions"), ent);
+            //_popup.PopupClient(Loc.GetString("cult-yogg-digest-no-nutritions"), ent, ent);//idk if it isn't working, but OnSericultureStart is an ok
             return;
         }
 
-        if (thirstComp.CurrentThirst <= uid.Comp.ThirstCost || thirstComp.CurrentThirstThreshold == uid.Comp.MinThirstThreshold)
+        if (thirstComp.CurrentThirst <= ent.Comp.ThirstCost || thirstComp.CurrentThirstThreshold == ent.Comp.MinThirstThreshold)
         {
-            _popup.PopupEntity(Loc.GetString("cult-yogg-digest-no-water"), uid);
+            _popup.PopupEntity(Loc.GetString("cult-yogg-digest-no-water"), ent);
             return;
         }
 
-        _hungerSystem.ModifyHunger(uid, -uid.Comp.HungerCost);
+        _hungerSystem.ModifyHunger(ent, -ent.Comp.HungerCost);
 
-        _thirstSystem.ModifyThirst(uid, thirstComp, -uid.Comp.ThirstCost);
+        _thirstSystem.ModifyThirst(ent, thirstComp, -ent.Comp.ThirstCost);
 
-        _actions.RemoveAction(uid, uid.Comp.DigestActionEntity);//if we digested, we should puke after
+        _actions.RemoveAction(ent, ent.Comp.DigestActionEntity);//if we digested, we should puke after
 
-        if (_actions.AddAction(uid, ref uid.Comp.PukeShroomActionEntity, out var act, uid.Comp.PukeShroomAction) && act.UseDelay != null) //useDelay when added
+        if (_actions.AddAction(ent, ref ent.Comp.PukeShroomActionEntity, out var act, ent.Comp.PukeShroomAction) && act.UseDelay != null) //useDelay when added
         {
             var start = _timing.CurTime;
             var end = start + act.UseDelay.Value;
-            _actions.SetCooldown(uid.Comp.PukeShroomActionEntity.Value, start, end);
+            _actions.SetCooldown(ent.Comp.PukeShroomActionEntity.Value, start, end);
         }
     }
     #endregion
 
     #region Ascending
-    private void AscendingAction(Entity<CultYoggComponent> uid, ref CultYoggAscendingEvent args)
+    private void AscendingAction(Entity<CultYoggComponent> ent, ref CultYoggAscendingEvent args)
     {
-        if (TerminatingOrDeleted(uid))
+        if (TerminatingOrDeleted(ent))
             return;
 
-        if (HasComp<AcsendingComponent>(uid))
+        if (HasComp<AcsendingComponent>(ent))
             return;
 
         // Get original body position and spawn MiGo here
-        var migo = _entityManager.SpawnAtPosition(uid.Comp.AscendedEntity, Transform(uid).Coordinates);
+        var migo = _entityManager.SpawnAtPosition(ent.Comp.AscendedEntity, Transform(ent).Coordinates);
 
         // Move the mind if there is one and it's supposed to be transferred
-        if (_mind.TryGetMind(uid, out var mindId, out var mind))
+        if (_mind.TryGetMind(ent, out var mindId, out var mind))
             _mind.TransferTo(mindId, migo, mind: mind);
 
         //Gib original body
-        if (TryComp<BodyComponent>(uid, out var body))
-            _body.GibBody(uid, body: body);
+        if (TryComp<BodyComponent>(ent, out var body))
+            _body.GibBody(ent, body: body);
     }
-    private void ForcedAcsending(Entity<CultYoggComponent> uid, ref CultYoggForceAscendingEvent args)
+
+    private void ForcedAcsending(Entity<CultYoggComponent> ent, ref CultYoggForceAscendingEvent args)
     {
-        if (TerminatingOrDeleted(uid))
+        if (TerminatingOrDeleted(ent))
             return;
 
         // Get original body position and spawn MiGo here
-        var migo = _entityManager.SpawnAtPosition(uid.Comp.AscendedEntity, Transform(uid).Coordinates);
+        var migo = _entityManager.SpawnAtPosition(ent.Comp.AscendedEntity, Transform(ent).Coordinates);
 
         // Move the mind if there is one and it's supposed to be transferred
-        if (_mind.TryGetMind(uid, out var mindId, out var mind))
+        if (_mind.TryGetMind(ent, out var mindId, out var mind))
             _mind.TransferTo(mindId, migo, mind: mind);
 
         //Gib original body
-        if (TryComp<BodyComponent>(uid, out var body))
-            _body.GibBody(uid, body: body);
+        if (TryComp<BodyComponent>(ent, out var body))
+            _body.GibBody(ent, body: body);
     }
 
-    public bool TryStartAscensionByReagent(EntityUid uid, CultYoggComponent comp)
+    public bool TryStartAscensionByReagent(EntityUid ent, CultYoggComponent comp)
     {
         if (comp.ConsumedAscensionReagent < comp.AmountAscensionReagentAscend)
             return false;
 
-        StartAscension(uid, comp);
+        StartAscension(ent, comp);
         return true;
     }
 
-    public void StartAscension(EntityUid uid, CultYoggComponent comp)//idk if it is canser or no, will be like that for a time
+    public void StartAscension(EntityUid ent, CultYoggComponent comp)//idk if it is canser or no, will be like that for a time
     {
-        if (HasComp<AcsendingComponent>(uid))
+        if (HasComp<AcsendingComponent>(ent))
             return;
 
         if (!AcsendingCultistCheck())//to prevent becaming MiGo at the same time
         {
-            _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-have-acsending"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-have-acsending"), ent, ent);
             return;
         }
-
-        /*if (!TryReplaceMiGo())//if amount of migo < required amount of migo or have 1 to replace
-        {
-            _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-migo-full"), uid, uid);
-            return;
-        }
-        */
-
-        //Maybe in later version we will detiriorate the body and add some kind of effects
-
-        //IDK how to check if he already has this action, so i did this markup
-        _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-started"), uid, uid);
-        EnsureComp<AcsendingComponent>(uid);
+        _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-started"), ent, ent);
+        EnsureComp<AcsendingComponent>(ent);
     }
 
-    public void NullifyShroomEffect(EntityUid uid, CultYoggComponent comp)//idk if it is canser or no, will be like that for a time
+    public void NullifyShroomEffect(EntityUid ent, CultYoggComponent comp)//idk if it is canser or no, will be like that for a time
     {
         string? message = null;
-        if (RemComp<AcsendingComponent>(uid) ||
+        if (RemComp<AcsendingComponent>(ent) ||
             comp.ConsumedAscensionReagent > 0)
             message += Loc.GetString("cult-yogg-acsending-stopped");
 
         comp.ConsumedAscensionReagent = 0;
 
         //Remove all corrupted items
-        var ev = new DropAllStuckOnEquipEvent(uid);
-        RaiseLocalEvent(uid, ref ev, true);
+        var ev = new DropAllStuckOnEquipEvent(ent);
+        RaiseLocalEvent(ent, ref ev, true);
 
         if (ev.DroppedItems.Count > 0)
             message += message is null
                 ? Loc.GetString("cult-yogg-dropped-items")
                 : " " + Loc.GetString("cult-yogg-dropped-items-not-first");
 
-        _popup.PopupEntity(message, uid, uid);
+        _popup.PopupEntity(message, ent, ent);
     }
 
     /*private bool TryReplaceMiGo()
@@ -305,10 +301,10 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         List<EntityUid> migoOnDelete = [];
 
         var query = EntityQueryEnumerator<MiGoComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        while (query.MoveNext(out var ent, out var comp))
         {
             if (comp.MayBeReplaced)
-                migoOnDelete.Add(uid);
+                migoOnDelete.Add(ent);
         }
 
         if (migoOnDelete.Count != 0 && TryComp<BodyComponent>(migoOnDelete[0], out var body)) //ToDo check for cancer coding
@@ -323,7 +319,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     private bool AcsendingCultistCheck()//if anybody else is acsending
     {
         var query = EntityQueryEnumerator<CultYoggComponent, AcsendingComponent>();
-        while (query.MoveNext(out var uid, out _, out _))
+        while (query.MoveNext(out var ent, out _, out _))
         {
             return false;
         }
