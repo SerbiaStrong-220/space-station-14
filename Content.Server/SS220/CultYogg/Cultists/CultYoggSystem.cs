@@ -295,27 +295,6 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         _popup.PopupEntity(message, ent, ent);
     }
 
-    /*private bool TryReplaceMiGo()
-    {
-        //if any MiGo needs to be replaced add here
-        List<EntityUid> migoOnDelete = [];
-
-        var query = EntityQueryEnumerator<MiGoComponent>();
-        while (query.MoveNext(out var ent, out var comp))
-        {
-            if (comp.MayBeReplaced)
-                migoOnDelete.Add(ent);
-        }
-
-        if (migoOnDelete.Count != 0 && TryComp<BodyComponent>(migoOnDelete[0], out var body)) //ToDo check for cancer coding
-        {
-            _body.GibBody(migoOnDelete[0], body: body);
-            return true;
-        }
-
-        return false;
-    }*/
-
     private bool AcsendingCultistCheck()//if anybody else is acsending
     {
         var query = EntityQueryEnumerator<CultYoggComponent, AcsendingComponent>();
