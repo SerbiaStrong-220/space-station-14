@@ -381,23 +381,6 @@
   - type: StunOnCollide
     knockdownAmount: 1
 
-# Base blaster bullet prototype
-- type: entity
-  id: BaseBlasterBullet
-  parent: BulletDisabler
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Reflective
-    reflective:
-    - Energy
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
-    layers:
-    - state: omnilaser
-      shader: unshaded
-  - type: StaminaDamageOnCollide
-    damage: 0
-
 - type: entity
   categories: [ HideSpawnMenu ]
   parent: BaseBullet
