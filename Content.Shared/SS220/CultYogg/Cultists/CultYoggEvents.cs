@@ -15,10 +15,6 @@ public sealed class ChangeCultYoggStageEvent(CultYoggStage stage) : EntityEventA
 }
 
 [ByRefEvent, Serializable]
-public record struct CultYoggDeleteVisualsEvent;
-
-
-[ByRefEvent, Serializable]
 public sealed class CultYoggDeCultingEvent(EntityUid entity) : EntityEventArgs
 {
     public readonly EntityUid Entity = entity;

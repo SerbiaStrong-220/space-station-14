@@ -57,7 +57,6 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         SubscribeLocalEvent<CultYoggComponent, OnSaintWaterDrinkEvent>(OnSaintWaterDrinked);
         SubscribeLocalEvent<CultYoggComponent, CultYoggForceAscendingEvent>(ForcedAcsending);
         SubscribeLocalEvent<CultYoggComponent, ChangeCultYoggStageEvent>(UpdateStage);
-        SubscribeLocalEvent<CultYoggComponent, CultYoggDeleteVisualsEvent>(DeleteVisuals);
     }
 
     #region StageUpdating
@@ -138,7 +137,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         Dirty(entity.Owner, huAp);
     }
 
-    private void DeleteVisuals(Entity<CultYoggComponent> entity, ref CultYoggDeleteVisualsEvent args)
+    public void DeleteVisuals(Entity<CultYoggComponent> entity)
     {
         if (!TryComp<HumanoidAppearanceComponent>(entity, out var huAp))
             return;
@@ -324,7 +323,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     private bool AcsendingCultistCheck()//if anybody else is acsending
     {
         var query = EntityQueryEnumerator<CultYoggComponent, AcsendingComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var acsComp))
+        while (query.MoveNext(out var uid, out _, out _))
         {
             return false;
         }
@@ -333,21 +332,19 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     #endregion
 
     #region Purifying
-    private void OnSaintWaterDrinked(Entity<CultYoggComponent> entity, ref OnSaintWaterDrinkEvent args)
+    private void OnSaintWaterDrinked(Entity<CultYoggComponent> ent, ref OnSaintWaterDrinkEvent args)
     {
-        EnsureComp<CultYoggPurifiedComponent>(entity, out var purifyedComp);
+        EnsureComp<CultYoggPurifiedComponent>(ent, out var purifyedComp);
         purifyedComp.TotalAmountOfHolyWater += args.SaintWaterAmount;
 
         if (purifyedComp.TotalAmountOfHolyWater >= purifyedComp.AmountToPurify)
         {
             //After purifying effect
-            _audio.PlayPvs(purifyedComp.PurifyingCollection, entity);
+            _audio.PlayPvs(purifyedComp.PurifyingCollection, ent);
 
-            //Removing stage visuals, cause later component will be removed
-            var ev = new CultYoggDeleteVisualsEvent();//ToDo_SS220 make it function
-            RaiseLocalEvent(entity, ref ev);
+            DeleteVisuals(ent);
 
-            RemComp<CultYoggComponent>(entity);
+            RemComp<CultYoggComponent>(ent);
         }
 
         purifyedComp.PurifyingDecayEventTime = _timing.CurTime + purifyedComp.BeforeDeclinesTime; //setting timer, when purifying will be removed
