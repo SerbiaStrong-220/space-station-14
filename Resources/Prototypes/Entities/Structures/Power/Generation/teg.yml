@@ -23,7 +23,7 @@
           shader: unshaded
           visible: false
           map: [ "enum.TegVisualLayers.PowerOutput" ]
-    - type: GenericVisualizer 
+    - type: GenericVisualizer
       visuals:
         enum.PowerDeviceVisuals.Powered:
           enum.PowerDeviceVisualLayers.Powered:
@@ -68,6 +68,7 @@
     # It fires processing on behalf of its connected circulators.
     - type: AtmosDevice
     - type: TegGenerator
+      thermalEfficiency: 0.1
 
     - type: DeviceNetwork
       deviceNetId: AtmosDevices

@@ -28,5 +28,16 @@
   storage:
     back:
     - RubberStampLawyer
-    - BookSpaceLaws # SS220 Space Law Replace
+    - BookSpaceLaw
     - BoxTapeRecorder #ss220 recorder-for-iaa-and-lawyer
+
+- type: chameleonOutfit
+  id: LawyerChameleonOutfit
+  job: Lawyer
+  equipment:
+    head: ClothingHeadHatBowlerHat
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskBreath
+    neck: ClothingNeckLawyerbadge
+    outerClothing: ClothingOuterWinterColorBlack
+    gloves: ClothingHandsGlovesColorBlack

@@ -2,7 +2,6 @@
 
 using Content.Server.Humanoid;
 using Content.Server.Medical;
-using Content.Server.SS220.DarkForces.Saint.Reagent.Events;
 using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
@@ -24,6 +23,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs;
 using Robust.Shared.Network;
 using Content.Shared.SS220.Roles;
+using Content.Shared.SS220.EntityEffects;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
@@ -168,7 +168,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         _vomitSystem.Vomit(uid);
         var shroom = _entityManager.SpawnEntity(uid.Comp.PukedEntity, Transform(uid).Coordinates);
 
-        _actions.RemoveAction(uid, uid.Comp.PukeShroomActionEntity);
+        _actions.RemoveAction(uid.Comp.PukeShroomActionEntity);
         _actions.AddAction(uid, ref uid.Comp.DigestActionEntity, uid.Comp.DigestAction);
     }
     private void DigestAction(Entity<CultYoggComponent> uid, ref CultYoggDigestEvent args)
@@ -197,7 +197,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         _thirstSystem.ModifyThirst(uid, thirstComp, -uid.Comp.ThirstCost);
 
-        _actions.RemoveAction(uid, uid.Comp.DigestActionEntity);//if we digested, we should puke after
+        _actions.RemoveAction(uid.Comp.DigestActionEntity);//if we digested, we should puke after
 
         if (_actions.AddAction(uid, ref uid.Comp.PukeShroomActionEntity, out var act, uid.Comp.PukeShroomAction) && act.UseDelay != null) //useDelay when added
         {

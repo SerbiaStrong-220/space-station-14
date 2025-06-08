@@ -7,11 +7,13 @@
   description: Alter the form of an item to match the creator's vision.
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityTargetAction
-    event: !type:CultYoggCorruptItemEvent
+  - type: Action
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: touch}
     useDelay: 15
+  - type: TargetAction
+  - type: EntityTargetAction
+    event: !type:CultYoggCorruptItemEvent
 
 - type: entity
   id: ActionCultYoggCorruptItemInHand
@@ -19,11 +21,12 @@
   description: Alter the form of an item to match the creator's vision.
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     useDelay: 15
-    event: !type:CultYoggCorruptItemInHandEvent
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: corrupt}
+  - type: InstantAction
+    event: !type:CultYoggCorruptItemInHandEvent
 
 - type: entity
   id: ActionCultYoggPukeShroom
@@ -31,12 +34,13 @@
   description: Take out a mushroom that has grown in your stomach.
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     useDelay: 60
-    event: !type:CultYoggPukeShroomEvent
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: migopuke}
     checkCanInteract: false
+  - type: InstantAction
+    event: !type:CultYoggPukeShroomEvent
 
 - type: entity
   id: ActionCultYoggDigest
@@ -44,12 +48,13 @@
   description: Burn some of the calories to digest new mushroom.
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     useDelay: 450
-    event: !type:CultYoggDigestEvent
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: IconMycosis}
     checkCanInteract: false
+  - type: InstantAction
+    event: !type:CultYoggDigestEvent
 
 - type: entity
   id: ActionCultYoggAscending
@@ -57,11 +62,12 @@
   description: Reveal your true nature.
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     useDelay: 30
-    event: !type:CultYoggAscendingEvent
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: ascend}
+  - type: InstantAction
+    event: !type:CultYoggAscendingEvent
 
 #Mi'Go actions
 - type: entity
@@ -70,11 +76,13 @@
   description: Plunge the flesh into the flow of your thoughts and feelings.
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityTargetAction
+  - type: Action
     useDelay: 15
-    event: !type:MiGoEnslavementActionEvent
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: enslavement }
+  - type: TargetAction
+  - type: EntityTargetAction
+    event: !type:MiGoEnslavementActionEvent
 
 - type: entity
   id: ActionMiGoHeal
@@ -82,8 +90,12 @@
   description: Accelerate the recovery process of the proponent.
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityTargetAction
+  - type: Action
     useDelay: 15
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: heal}
+  - type: TargetAction
+  - type: EntityTargetAction
     event: !type:MiGoHealEvent
       heal:
         types:
@@ -104,8 +116,6 @@
       modifyStamina: -5
       bloodlossModifier: -1
       modifyBloodLevel: 2
-    itemIconStyle: NoItem
-    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: heal}
 
 - type: entity
   id: ActionMiGoAstral
@@ -113,12 +123,12 @@
   description: Step into the interdimensional realm.
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     useDelay: 15
-    event: !type:MiGoAstralEvent
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: migoastral}
-
+  - type: InstantAction
+    event: !type:MiGoAstralEvent
 
 - type: entity
   id: ActionMiGoErect
@@ -126,11 +136,12 @@
   description: Erect the foundation of the great altars.
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     useDelay: 15
-    event: !type:MiGoErectEvent
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: build}
+  - type: InstantAction
+    event: !type:MiGoErectEvent
 
 - type: entity
   id: ActionMiGoSacrifice
@@ -138,8 +149,9 @@
   description: Gather with the other MiGo at the altar to make a sacrifice.
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     useDelay: 600
-    event: !type:MiGoSacrificeEvent
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "summon"}
+  - type: InstantAction
+    event: !type:MiGoSacrificeEvent

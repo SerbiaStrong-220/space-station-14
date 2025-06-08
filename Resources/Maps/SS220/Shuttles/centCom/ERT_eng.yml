@@ -502,44 +502,6 @@ entities:
     - type: RadiationGridResistance
     - type: IFF
       color: '#0000FFFF'
-- proto: ActionBorgSwapModule
-  entities:
-  - uid: 3
-    components:
-    - type: Transform
-      parent: 2
-    - type: InstantAction
-      container: 2
-      entIcon: 2
-  - uid: 5
-    components:
-    - type: Transform
-      parent: 4
-    - type: InstantAction
-      container: 4
-      entIcon: 4
-  - uid: 7
-    components:
-    - type: Transform
-      parent: 6
-    - type: InstantAction
-      container: 6
-      entIcon: 6
-  - uid: 13
-    components:
-    - type: Transform
-      parent: 12
-    - type: InstantAction
-      container: 12
-      entIcon: 12
-- proto: ActionToggleInternals
-  entities:
-  - uid: 16
-    components:
-    - type: Transform
-      parent: 15
-    - type: InstantAction
-      container: 15
 - proto: AirAlarm
   entities:
   - uid: 19
@@ -784,20 +746,12 @@ entities:
     - type: Transform
       pos: 6.443294,-10.349086
       parent: 1
-    - type: SelectableBorgModule
-      moduleSwapActionEntity: 3
     - type: ContainerContainer
       containers:
         provided_container: !type:Container
           showEnts: False
           occludes: True
           ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 3
-    - type: ActionsContainer
 - proto: BorgModuleConstruction
   entities:
   - uid: 6
@@ -808,8 +762,6 @@ entities:
     - type: ItemBorgModule
       itemsCrated: True
       handCounter: 8
-    - type: SelectableBorgModule
-      moduleSwapActionEntity: 7
     - type: ContainerContainer
       containers:
         provided_container: !type:Container
@@ -820,12 +772,6 @@ entities:
           - 10
           - 9
           - 8
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 7
-    - type: ActionsContainer
 - proto: BorgModuleGPS
   entities:
   - uid: 12
@@ -833,20 +779,12 @@ entities:
     - type: Transform
       pos: 6.4525533,-10.2518635
       parent: 1
-    - type: SelectableBorgModule
-      moduleSwapActionEntity: 13
     - type: ContainerContainer
       containers:
         provided_container: !type:Container
           showEnts: False
           occludes: True
           ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 13
-    - type: ActionsContainer
 - proto: BorgModuleRCD
   entities:
   - uid: 4
@@ -854,20 +792,12 @@ entities:
     - type: Transform
       pos: 6.4525533,-10.1639
       parent: 1
-    - type: SelectableBorgModule
-      moduleSwapActionEntity: 5
     - type: ContainerContainer
       containers:
         provided_container: !type:Container
           showEnts: False
           occludes: True
           ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 5
-    - type: ActionsContainer
 - proto: CableApcExtension
   entities:
   - uid: 48
@@ -2980,16 +2910,8 @@ entities:
     components:
     - type: Transform
       parent: 14
-    - type: GasTank
-      toggleActionEntity: 16
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 16
     - type: InsideEntityStorage
   - uid: 213
     components:

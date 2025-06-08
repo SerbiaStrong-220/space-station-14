@@ -2,3 +2,4 @@ price-gun-pricing-result = Прибор показывает, что { $object }
 price-gun-verb-text = Оценить
 price-gun-verb-message = { CAPITALIZE($object) } оценивается.
 price-gun-bounty-complete = Прибор подтверждает, что товары по запросу были собраны.
+price-gun-salvjob-complete = Устройство подтверждает, что задание по спасению имущества, содержащегося внутри, выполнено.

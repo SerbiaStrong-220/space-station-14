@@ -433,14 +433,14 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <param name="source">The entity making the announcement (used to determine the station)</param>
     /// <param name="message">The contents of the message</param>
     /// <param name="sender">The sender (Communications Console in Communications Console Announcement)</param>
-    /// <param name="playSound">Play the announcement sound</param>
+    /// <param name="playDefaultSound">Play the announcement sound</param>
     /// <param name="announcementSound">Specific announcement sound</param>
     /// <param name="colorOverride">Optional color for the announcement message</param>
     public void DispatchStationAnnouncement(
         EntityUid source,
         string message,
         string? sender = null,
-        bool playSound = true,
+        bool playDefaultSound = true,
         SoundSpecifier? announcementSound = null,//SS220 CluwneComms
         Color? colorOverride = null,
         string? voiceId = null)
@@ -470,7 +470,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             key = path.Path.ToString();
         //SS220 CluwneComms end
 
-        if (playSound)
+        if (playDefaultSound)
             RaiseLocalEvent(new AnnouncementSpokeEvent(filter, key?.ToString() ?? DefaultAnnouncementSound, AudioParams.Default, message, voiceId));//SS220 CluwneComms
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement on {station} from {sender}: {message}");
