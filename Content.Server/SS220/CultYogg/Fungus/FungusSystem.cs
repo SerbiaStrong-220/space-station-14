@@ -66,7 +66,7 @@ public sealed class FungusSystem : EntitySystem
         if (component.Seed == null)
             return 0;
 
-        var result = Math.Max(1, (int) (component.Age * component.Seed.GrowthStages / component.Seed.Maturation));
+        var result = Math.Max(1, (int)(component.Age * component.Seed.GrowthStages / component.Seed.Maturation));
         return result > component.Seed.GrowthStages ? component.Seed.GrowthStages : result;
     }
 
@@ -77,9 +77,32 @@ public sealed class FungusSystem : EntitySystem
 
         using (args.PushGroup(nameof(FungusComponent)))
         {
-            args.PushMarkup(entity.Comp.Seed == null
-                ? Loc.GetString("plant-holder-component-nothing-planted-message")
-                : Loc.GetString("plant-holder-component-dead-plant-matter-message"));
+            var seed = entity.Comp.Seed;
+            if (seed != null)
+            {
+                args.PushMarkup(Loc.GetString("plant-holder-component-something-already-growing-message", ("seedName", Loc.GetString(seed.DisplayName))));
+                var currentStage = GetCurrentGrowthStage(entity);
+                if (currentStage <= Math.Floor((double)seed.GrowthStages / 3))
+                {
+                    args.PushMarkup(Loc.GetString("cult-yogg-fungus-stage-1"));
+                }
+                else if (currentStage <= Math.Floor(seed.GrowthStages / 1.5))
+                {
+                    args.PushMarkup(Loc.GetString("cult-yogg-fungus-stage-2"));
+                }
+                else if (currentStage < seed.GrowthStages)
+                {
+                    args.PushMarkup(Loc.GetString("cult-yogg-fungus-stage-3"));
+                }
+                else
+                {
+                    args.PushMarkup(Loc.GetString("cult-yogg-fungus-stage-4"));
+                }
+            }
+            else
+            {
+                args.PushMarkup(Loc.GetString("plant-holder-component-nothing-planted-message"));
+            }
         }
     }
 
@@ -223,7 +246,7 @@ public sealed class FungusSystem : EntitySystem
                     return;
 
                 _popup.PopupEntity(Loc.GetString("plant-holder-component-plant-success-message",
-                        ("seedName",  Loc.GetString(seed.Name)),
+                        ("seedName", Loc.GetString(seed.Name)),
                         ("seedNoun", Loc.GetString(seed.Noun))),
                         uid,
                         PopupType.Medium);

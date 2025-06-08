@@ -42,7 +42,6 @@
           collection: MetalGlassBreak
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: WiresPanel
   - type: Clickable
   - type: InteractionOutline
   - type: Physics
