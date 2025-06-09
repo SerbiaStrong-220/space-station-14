@@ -4,12 +4,11 @@
 	MIT License
 */
 
-uniform highp float shake_power = 0.2;
-uniform highp float shake_rate = 1.0;
-uniform highp float shake_speed = 3.0;
-uniform highp float shake_block_size = 100.5;
-uniform highp float shake_color_rate = 0.1;
-
+uniform highp float shake_power;
+uniform highp float shake_rate;
+uniform highp float shake_speed;Add commentMore actions
+uniform highp float shake_block_size;
+uniform highp float shake_color_rate;
 
 highp float random(highp float seed)
 {
