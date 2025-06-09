@@ -165,7 +165,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         args.Handled = true;
 
         _vomitSystem.Vomit(ent);
-        var shroom = _entityManager.SpawnEntity(ent.Comp.PukedEntity, Transform(ent).Coordinates);
+        _entityManager.SpawnEntity(ent.Comp.PukedEntity, Transform(ent).Coordinates);
 
         _actions.RemoveAction(ent.Owner, ent.Comp.PukeShroomActionEntity);
         _actions.AddAction(ent, ref ent.Comp.DigestActionEntity, ent.Comp.DigestAction);
@@ -260,7 +260,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         if (HasComp<AcsendingComponent>(ent))
             return;
 
-        if (!AcsendingCultistCheck())//to prevent becaming MiGo at the same time
+        if (!AnyAcsendingCultists())//to prevent becaming MiGo at the same time
         {
             _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-have-acsending"), ent, ent);
             return;
@@ -280,10 +280,10 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             _popup.PopupEntity(Loc.GetString("cult-yogg-dropped-items"), ent, ent);//and now i dont see any :(
     }
 
-    private bool AcsendingCultistCheck()//if anybody else is acsending
+    private bool AnyAcsendingCultists()//if anybody else is acsending
     {
-        var query = EntityQueryEnumerator<CultYoggComponent, AcsendingComponent>();
-        while (query.MoveNext(out _, out _, out _))
+        var query = EntityQueryEnumerator<AcsendingComponent>();
+        while (query.MoveNext(out _, out _))
         {
             return false;
         }
