@@ -22,7 +22,6 @@ namespace Content.Shared.VendingMachines;
 public abstract partial class SharedVendingMachineSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private   readonly INetManager _net = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] private   readonly AccessReaderSystem _accessReader = default!;
     [Dependency] private   readonly SharedAppearanceSystem _appearanceSystem = default!;
@@ -49,6 +48,8 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
         {
             subs.Event<VendingMachineEjectMessage>(OnInventoryEjectMessage);
         });
+
+        ReturnInitialize(); // SS220-return-item-tweak
     }
 
     private void OnVendingGetState(Entity<VendingMachineComponent> entity, ref ComponentGetState args)

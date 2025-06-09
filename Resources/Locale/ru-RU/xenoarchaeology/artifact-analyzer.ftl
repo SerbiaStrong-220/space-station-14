@@ -17,8 +17,8 @@ analysis-console-info-id = ID_УЗЛА: { $id }
 analysis-console-info-depth = ГЛУБИНА: { $depth }
 analysis-console-info-triggered-true = АКТИВИРОВАН: ДА
 analysis-console-info-triggered-false = АКТИВИРОВАН: НЕТ
-analysis-console-info-effect = РЕАКЦИЯ: { $effect }
-analysis-console-info-trigger = СТИМУЛЯТОР: { $trigger }
+analysis-console-info-effect = [font="Monospace" size=11]РЕАКЦИЯ:[/font]
+analysis-console-info-trigger = [font="Monospace" size=11]СТИМУЛЯТОР:[/font]
 analysis-console-info-edges = СОЕДИНЕНИЯ: { $edges }
 analysis-console-info-value = НЕИЗВЛЕЧЁННЫЕ_О.И.: { $value }
 analysis-console-info-scanner = Сканирование...

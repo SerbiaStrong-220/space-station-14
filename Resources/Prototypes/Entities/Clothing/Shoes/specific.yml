@@ -58,11 +58,12 @@
     sprite: Clothing/Shoes/Specific/clown_banana.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Specific/clown_banana.rsi
-  - type: FootstepModifier
-    footstepSoundCollection:
-      collection: FootstepSlip
-      params:
-        variation: 0.10
+  #- type: FootstepModifier You can add a sound effect when you make one that doesn't sound like a dog dying. -emo
+  #  footstepSoundCollection:
+  #    collection: FootstepSlip
+  #    params:
+  #      volume: -10
+  #      variation: 0.10
   - type: Construction
     graph: BananaClownShoes
     node: shoes
@@ -143,9 +144,8 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-NoSlip-ninja
-      whitelistMind:
-        components:
-          - NinjaRole
+      whitelistMindRoles:
+      - NinjaRole
     - label: corvax-hidden-desc-NoSlip-research
       jobRequired:
         - ResearchAssistant
@@ -221,10 +221,9 @@
     - type: HiddenDescription
       entries:
       - label: corvax-hidden-desc-Chameleon-syndicate
-        whitelistMind:
-          components:
-            - TraitorRole
-            - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
       - label: corvax-hidden-desc-Chameleon-research
         jobRequired:
           - ResearchAssistant
@@ -245,15 +244,13 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-Chameleon-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-NoSlip-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-Chameleon-research
       jobRequired:
         - ResearchAssistant

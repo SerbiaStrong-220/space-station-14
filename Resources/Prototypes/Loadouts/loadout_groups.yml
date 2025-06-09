@@ -32,6 +32,7 @@
   - ClothingNeckPluralPin
   - ClothingNeckOmnisexualPin
   - ClothingNeckGenderqueerPin
+  - ClothingNeckGenderfluidPin
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
@@ -98,7 +99,6 @@
   loadouts:
   - EmergencyNitrogen
   - EmergencyOxygen
-  - EmergencyBeerDrinker #ss220 add beer can for dwarf survival kit
   - LoadoutSpeciesVoxNitrogen
 
 # nitrogen or oxygen tank, depending on what your species needs
@@ -250,6 +250,7 @@
   - PassengerJumpskirtTurtleneck
   - PassengerJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
   - RainbowJumpsuit
+  - RainbowJumpskirt
 
 - type: loadoutGroup
   id: PassengerFace
@@ -682,6 +683,7 @@
   loadouts:
   - EmergencyNitrogenMime
   - EmergencyOxygenMime
+  - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
@@ -1390,6 +1392,7 @@
   loadouts:
   - ChiefMedicalOfficerBeret
   - CMOMedicalHeadMirror
+  - CapCMO #SS220-CMOParade
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerJumpsuit
@@ -1418,6 +1421,7 @@
   loadouts:
   - ChiefMedicalOfficerCloak
   - ChiefMedicalOfficerMantle
+  - ParadeCloakCMO #SS220-CMOParade
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerShoes
@@ -1425,7 +1429,7 @@
   loadouts:
   - BrownShoes
   - MedicalWinterBoots
-  - CMOCorpShoes #ss220 new cmo 
+  - CMOCorpShoes #ss220 new cmo
 
 - type: loadoutGroup
   id: MedicalDoctorHead
@@ -1480,6 +1484,7 @@
   name: loadout-group-medical-doctor-shoes
   loadouts:
   - WhiteShoes
+  - MedicalBlackShoes #ss220 add shoes for med
   - MedicalWinterBoots
   - MedicalDoctorShoesResponsibility #SS220-Responsibility
 

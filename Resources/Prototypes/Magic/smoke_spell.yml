@@ -1,9 +1,10 @@
-﻿- type: entity
+- type: entity
+  parent: BaseAction
   id: ActionSmoke
   name: Smoke
   description: Summons smoke around the user.
   components:
-  - type: InstantAction
+  - type: Action
     useDelay: 10
     itemIconStyle: BigAction
     icon:
@@ -11,6 +12,9 @@
       sprite: SS220/Interface/Actions/magic_spells_other.rsi
       state: smoke
       # SS220 Wizard getting used to End
+      sprite: Actions/smokeaction.rsi
+      state: smokeaction
+  - type: InstantAction
     event: !type:InstantSpawnSpellEvent
       prototype: WizardSmoke
       posData: !type:TargetInFront

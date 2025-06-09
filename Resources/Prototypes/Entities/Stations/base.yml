@@ -77,16 +77,20 @@
           paths:
           # - /Maps/Ruins/chunked_tcomms.yml # SS220 Removed with Ruins Update (balance Tweak)
           - /Maps/Ruins/abandoned_outpost.yml
+          - /Maps/Ruins/atmos_interchange.yml
+          # - /Maps/Ruins/chunked_tcomms.yml # SS220 Removed with Ruins Update (balance Tweak)
           - /Maps/Ruins/biodome_satellite.yml
           - /Maps/Ruins/derelict.yml
           # - /Maps/Ruins/djstation.yml # SS220 Removed with Ruins Update (balance Tweak)
           # - /Maps/Ruins/empty_flagship.yml # SS220 Removed with Ruins Update (balance Tweak)
+          - /Maps/Ruins/hydro_outpost.yml
           - /Maps/Ruins/old_ai_sat.yml
           - /Maps/Ruins/ruined_prison_ship.yml
           - /Maps/Ruins/syndicate_dropship.yml
           # - /Maps/Ruins/whiteship_ancient.yml # SS220 Removed with Ruins Update (balance Tweak)
           # - /Maps/Ruins/whiteship_bluespacejumper.yml # SS220 Removed with Ruins Update (balance Tweak)
-          # - /Maps/Ruins/wrecklaimer.yml # SS220 Removed
+          # - /Maps/Ruins/wrecklaimer.yml # SS220 Removed with Ruins Update (balance Tweak)
+          - /Maps/Ruins/displaced_telescience.yml
           # SS220 Ruins Update Map begin
           - /Maps/SS220/Ruins/Arena_SS220.yml
           - /Maps/SS220/Ruins/Broadaxe_SS220.yml
@@ -94,6 +98,25 @@
           - /Maps/SS220/Ruins/Prison_SS220.yml
           - /Maps/SS220/Ruins/WarshuttleWreck_SS220.yml
           # SS220 Ruins Update Map End
+        wrecks: !type:DungeonSpawnGroup
+          minimumDistance: 150
+          maximumDistance: 300
+          stationGrid: false
+          minCount: 12
+          maxCount: 16
+          addComponents:
+          - type: Gravity
+            enabled: true
+            inherent: true
+          - type: IFF
+            flags: HideLabel
+            color: "#88b0d1"
+          protos:
+          - ChunkDebrisSmall
+          - ChunkDebrisSmall
+          - ChunkDebrisSmall
+          - ChunkDebrisSmall
+          - ChunkDebris
         vgroid: !type:DungeonSpawnGroup
           minimumDistance: 900 # SS220 VGroid distance
           maximumDistance: 1350 # SS220 VGroid distance
@@ -136,6 +159,27 @@
   abstract: true
   components:
     - type: SalvageMagnetData
+
+- type: entity
+  id: BaseStationSalvageJobs
+  abstract: true
+  components:
+  - type: SalvageJobsData
+    rankThresholds:
+      0:
+        title: salvage-job-rank-title-0
+        bountyGroup: SalvageJobTier1
+      3:
+        title: salvage-job-rank-title-1
+        bountyGroup: SalvageJobTier2
+        unlockedMarket: SalvageJobReward2
+      6:
+        title: salvage-job-rank-title-2
+        bountyGroup: SalvageJobTier3
+        unlockedMarket: SalvageJobReward3
+    maxRank:
+      title: salvage-job-rank-title-MAX
+      unlockedMarket: SalvageJobRewardMAX
 
 - type: entity
   id: BaseStationSiliconLawCrewsimov

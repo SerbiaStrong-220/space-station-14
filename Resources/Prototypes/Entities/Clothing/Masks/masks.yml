@@ -15,6 +15,9 @@
     tags:
     - HamsterWearable
     - WhitelistChameleon
+# ss220 medkit fix begin
+    - MaskBreath
+# ss220 medkit fix end
   - type: HideLayerClothing
     layers:
       Snout: Mask
@@ -152,6 +155,9 @@
     tags:
     - PetWearable
     - WhitelistChameleon
+# ss220 medkit fix begin
+    - MaskBreath
+# ss220 medkit fix end
   - type: PhysicalComposition
     materialComposition:
       Steel: 50
@@ -195,6 +201,9 @@
     tags:
     - PetWearable
     - WhitelistChameleon
+# ss220 medkit fix begin
+    - MaskBreath
+# ss220 medkit fix end
   - type: PhysicalComposition
     materialComposition:
       Steel: 50
@@ -395,6 +404,8 @@
     slots:
     - Hair
     - Snout
+    - HeadTop
+    - HeadSide
     hideOnToggle: true
   - type: Armor
     modifiers:
@@ -460,6 +471,11 @@
     sprite: Clothing/Mask/squadron.rsi
   - type: Clothing
     sprite: Clothing/Mask/squadron.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
   - type: Armor
     modifiers:
       coefficients:

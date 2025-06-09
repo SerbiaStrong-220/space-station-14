@@ -20,7 +20,7 @@
     - бурлит
     - бурлит.
     - бурлит!
-#SS220 Howls for vulps
+
 - type: emote
   id: Howl
   name: chat-emote-name-howl
@@ -56,7 +56,7 @@
   - завывает
   - завывает.
   - завывает!
-  - завывает? 
+  - завывает?
 
 - type: emote
   id: Growl
@@ -119,9 +119,8 @@
   - гавкает
   - гавкает.
   - гавкает!
-  - гавкает? 
+  - гавкает?
 
-## spo9k vocal emotes start
 - type: emote
   id: Meow
   name: chat-emote-name-meow
@@ -184,5 +183,3 @@
     - мурчит
     - мурчит.
     - мурчит!
-
-  ## spo9k vocal emotes end

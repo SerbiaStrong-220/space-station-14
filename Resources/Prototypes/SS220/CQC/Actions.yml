@@ -3,45 +3,49 @@
   name: action-cqc-blowback
   description: action-cqc-blowback-desc
   components:
-  - type: EntityTargetAction
+  - type: Action
     icon: SS220/Interface/Actions/CQCCombat/blowback.png
-    event: !type:CQCBlowbackEvent
     useDelay: 7
-    checkCanInteract: false
     priority: -10
+  - type: TargetAction
+  - type: EntityTargetAction
+    event: !type:CQCBlowbackEvent
 
 - type: entity
   id: CQCPunch
   name: action-cqc-punch
   description: action-cqc-punch-desc
   components:
-  - type: EntityTargetAction
+  - type: Action
     icon: SS220/Interface/Actions/CQCCombat/punch.png
-    event: !type:CQCPunchEvent
     useDelay: 2
-    checkCanInteract: false
     priority: -10
+  - type: TargetAction
+  - type: EntityTargetAction
+    event: !type:CQCPunchEvent
 
 - type: entity
   id: CQCDisarm
   name: action-cqc-disarm
   description: action-cqc-disarm-desc
   components:
-  - type: EntityTargetAction
+  - type: Action
     icon: SS220/Interface/Actions/CQCCombat/disarm.png
-    event: !type:CQCDisarmEvent
     useDelay: 4
     checkCanInteract: false
     priority: -10
+  - type: TargetAction
+  - type: EntityTargetAction
+    event: !type:CQCDisarmEvent
 
 - type: entity
   id: CQCLongSleep
   name: action-cqc-longsleep
   description: action-cqc-longsleep-desc
   components:
-  - type: InstantAction
+  - type: Action
     icon: SS220/Interface/Actions/CQCCombat/longsleep.png
-    event: !type:CQCLongSleepEvent
     useDelay: 40
-    checkCanInteract: false
     priority: -10
+  - type: InstantAction
+    event: !type:CQCLongSleepEvent

@@ -1,4 +1,5 @@
-﻿- type: entity
+- type: entity
+  parent: BaseAction
   id: ActionRepulse
   name: Repulse
   description: Pushes entities away from the user.
@@ -10,7 +11,7 @@
       components:
       - MobMover
       - Item
-  - type: InstantAction
+  - type: Action
     useDelay: 40
     raiseOnAction: true
     itemIconStyle: BigAction
@@ -19,4 +20,5 @@
       sprite: SS220/Interface/Actions/magic_spells_other.rsi
       state: repulse
       # SS220 Wizard getting used to End
+  - type: InstantAction
     event: !type:RepulseAttractActionEvent

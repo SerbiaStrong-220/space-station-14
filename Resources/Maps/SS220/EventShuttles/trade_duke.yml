@@ -488,26 +488,6 @@ entities:
     - type: ContainedSolution
       containerName: food
       container: 546
-- proto: ActionToggleMagboots
-  entities:
-  - uid: 527
-    components:
-    - type: Transform
-      parent: 526
-    - type: InstantAction
-      container: 526
-  - uid: 530
-    components:
-    - type: Transform
-      parent: 529
-    - type: InstantAction
-      container: 529
-  - uid: 547
-    components:
-    - type: Transform
-      parent: 546
-    - type: InstantAction
-      container: 546
 - proto: AirCanister
   entities:
   - uid: 2
@@ -1521,16 +1501,10 @@ entities:
       solutions: null
       containers:
       - food
-    - type: ActionsContainer
     - type: ContainerContainer
       containers:
-        actions: !type:Container
-          ents:
-          - 527
         solution@food: !type:ContainerSlot
           ent: 528
-    - type: Actions
-      actions: []
   - uid: 529
     components:
     - type: Transform
@@ -1540,16 +1514,10 @@ entities:
       solutions: null
       containers:
       - food
-    - type: ActionsContainer
     - type: ContainerContainer
       containers:
-        actions: !type:Container
-          ents:
-          - 530
         solution@food: !type:ContainerSlot
           ent: 531
-    - type: Actions
-      actions: []
   - uid: 546
     components:
     - type: Transform
@@ -1559,16 +1527,10 @@ entities:
       solutions: null
       containers:
       - food
-    - type: ActionsContainer
     - type: ContainerContainer
       containers:
-        actions: !type:Container
-          ents:
-          - 547
         solution@food: !type:ContainerSlot
           ent: 548
-    - type: Actions
-      actions: []
 - proto: CombatKnife
   entities:
   - uid: 166

@@ -1,6 +1,5 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-#Base
 - type: entity
   parent: BaseItem
   id: BlasterPowerCell
@@ -33,15 +32,11 @@
   - type: Extractable
     juiceSolution:
       reagents:
-        - ReagentId: Zinc
-          Quantity: 5
+      - ReagentId: Zinc
+        Quantity: 5
   - type: Tag
     tags:
-      - BlasterPowerCell
+    - BlasterPowerCell
   - type: Appearance
   - type: PowerCellVisuals
   - type: Riggable
-  - type: AmmoCounter
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletBlaster
-    fireCost: 32
