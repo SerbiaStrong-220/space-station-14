@@ -105,14 +105,12 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                 {
                     huAp.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking(CultDefaultMarking, colorCount: 1)]));
                 }
-                else
-                {
-                    _humanoidAppearance.SetMarkingId(ent.Owner,
+
+                _humanoidAppearance.SetMarkingId(ent.Owner,
                     MarkingCategories.Special,
                     0,
                     CultDefaultMarking,
                     huAp);
-                }
 
                 var newMarkingId = $"CultStage-{huAp.Species}";
 
@@ -172,10 +170,9 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         _vomitSystem.Vomit(ent);
         var shroom = _entityManager.SpawnEntity(ent.Comp.PukedEntity, Transform(ent).Coordinates);
 
-
-
-        _actions.RemoveAction(ent, ent.Comp.PukeShroomActionEntity);
-        _actions.AddAction(ent, ref ent.Comp.DigestActionEntity, ent.Comp.DigestAction);    }
+        _actions.RemoveAction(ent.Owner, ent.Comp.PukeShroomActionEntity);
+        _actions.AddAction(ent, ref ent.Comp.DigestActionEntity, ent.Comp.DigestAction);
+    }
 
     private void DigestAction(Entity<CultYoggComponent> ent, ref CultYoggDigestEvent args)
     {
@@ -203,7 +200,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         _thirstSystem.ModifyThirst(ent, thirstComp, -ent.Comp.ThirstCost);
 
-		_actions.RemoveAction(ent, ent.Comp.DigestActionEntity);//if we digested, we should puke after
+        _actions.RemoveAction(ent.Owner, ent.Comp.DigestActionEntity);//if we digested, we should puke after
 
         if (_actions.AddAction(ent, ref ent.Comp.PukeShroomActionEntity, out var act, ent.Comp.PukeShroomAction) && act.UseDelay != null) //useDelay when added
         {
@@ -261,8 +258,8 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         return true;
     }
 
-    public void StartAscension(EntityUid ent, CultYoggComponent comp)//idk if it is canser or no, will be like that for a time
-
+    public void StartAscension(EntityUid ent, CultYoggComponent comp)
+    { //idk if it is canser or no, will be like that for a time
         if (HasComp<AcsendingComponent>(ent))
             return;
 
