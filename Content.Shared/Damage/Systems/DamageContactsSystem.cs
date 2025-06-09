@@ -5,9 +5,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Content.Shared.SS220.Buckle; // ss220-flesh-kudzu-damage-fix
-using Content.Shared.SS220.Vehicle.Components;
-using Robust.Shared.Utility;
-using System.Diagnostics; // ss220-flesh-kudzu-damage-fix
+using Content.Shared.SS220.Vehicle.Components; // ss220-flesh-kudzu-damage-fix
 
 namespace Content.Shared.Damage.Systems;
 
