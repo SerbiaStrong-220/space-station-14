@@ -35,8 +35,10 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly HungerSystem _hungerSystem = default!;
+    [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
     [Dependency] private readonly ThirstSystem _thirstSystem = default!;
     [Dependency] private readonly VomitSystem _vomitSystem = default!;
+
 
     private const string CultDefaultMarking = "CultStage-Halo";
 
@@ -269,23 +271,14 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
     public void NullifyShroomEffect(EntityUid ent, CultYoggComponent comp)//idk if it is canser or no, will be like that for a time
     {
-        string? message = null;
-        if (RemComp<AcsendingComponent>(ent) ||
-            comp.ConsumedAscensionReagent > 0)
-            message += Loc.GetString("cult-yogg-acsending-stopped");
+        if (RemComp<AcsendingComponent>(ent))
+            _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-stopped"), ent, ent);
 
         comp.ConsumedAscensionReagent = 0;
 
-        //Remove all corrupted items
-        var ev = new DropAllStuckOnEquipEvent(ent);
-        RaiseLocalEvent(ent, ref ev, true);
+        _stuckOnEquip.RemoveAllStuckItems(ent);
 
-        if (ev.DroppedItems.Count > 0)
-            message += message is null
-                ? Loc.GetString("cult-yogg-dropped-items")
-                : " " + Loc.GetString("cult-yogg-dropped-items-not-first");
-
-        _popup.PopupEntity(message, ent, ent);
+        _popup.PopupEntity(Loc.GetString("cult-yogg-dropped-items"), ent, ent);
     }
 
     private bool AcsendingCultistCheck()//if anybody else is acsending

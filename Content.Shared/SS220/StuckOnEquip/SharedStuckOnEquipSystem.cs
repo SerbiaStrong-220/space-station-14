@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Hands;
-using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs;
@@ -22,7 +21,6 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
         SubscribeLocalEvent<StuckOnEquipComponent, GotEquippedEvent>(GotEquipped);
         SubscribeLocalEvent<StuckOnEquipComponent, GotEquippedHandEvent>(GotPickuped);
         SubscribeLocalEvent<MobStateChangedEvent>(OnDeath);
-        SubscribeLocalEvent<DropAllStuckOnEquipEvent>(OnRemoveAll);
     }
     private void OnRemoveAttempt(Entity<StuckOnEquipComponent> ent, ref ContainerGettingRemovedAttemptEvent args)
     {
@@ -61,35 +59,6 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
         Dirty(ent);
     }
 
-    private void OnRemoveAll(ref DropAllStuckOnEquipEvent ev)
-    {
-        var removedItems = RemoveItems(ev.Target);
-        ev.DroppedItems.UnionWith(removedItems);
-    }
-
-    private HashSet<EntityUid> RemoveItems(EntityUid target)
-    {
-        HashSet<EntityUid> removedItems = [];
-        if (!_inventory.TryGetSlots(target, out var _))
-            return removedItems;
-
-        // trying to unequip all item's with component
-        foreach (var item in _inventory.GetHandOrInventoryEntities(target))
-        {
-            if (!TryComp<StuckOnEquipComponent>(item, out var stuckOnEquipComp))
-                continue;
-
-            if (!stuckOnEquipComp.ShouldDropOnDeath)
-                continue;
-
-            UnstuckItem((item, stuckOnEquipComp));
-            _transform.DropNextTo(item, target);
-            removedItems.Add(item);
-        }
-
-        return removedItems;
-    }
-
     public void RemoveAllStuckItems(EntityUid target)
     {
         if (!_inventory.TryGetSlots(target, out var _))
@@ -122,15 +91,4 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
             _transform.DropNextTo(item, target);
         }
     }
-}
-
-/// <summary>
-///     Raised when we need to remove all StuckOnEquip objects
-/// </summary>
-[ByRefEvent, Serializable]
-public sealed class DropAllStuckOnEquipEvent(EntityUid target, HashSet<EntityUid>? droppedItems = null) : EntityEventArgs
-{
-    public readonly EntityUid Target = target;
-
-    public HashSet<EntityUid> DroppedItems = droppedItems ?? [];
 }

@@ -75,6 +75,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     [Dependency] private readonly EuiManager _euiManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedRestrictedItemSystem _sharedRestrictedItemSystem = default!;
+    [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
 
     private List<List<string>> _sacraficialTiers = [];
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
@@ -408,7 +409,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (!_mind.TryGetMind(uid, out var mindId, out var mindComp))
             return;
 
-        if (!_role.MindHasRole<CultYoggRoleComponent>(mindId, out var cultRoleEnt))
+        if (!_role.MindHasRole<CultYoggRoleComponent>(mindId, out var _))
             return;
 
         foreach (var obj in component.ListofObjectives)
@@ -422,8 +423,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         _role.MindRemoveRole<CultYoggRoleComponent>(mindId);
 
         //Remove all corrupted items
-        var stuckEv = new DropAllStuckOnEquipEvent(uid);//ToDo_SS220 make it function
-        RaiseLocalEvent(uid, ref stuckEv, true);
+        _stuckOnEquip.RemoveAllStuckItems(uid);
 
         _sharedRestrictedItemSystem.DropAllRestrictedItems(uid);
 
