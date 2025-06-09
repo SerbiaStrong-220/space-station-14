@@ -103,12 +103,17 @@
       types:
         Cold: 10
     ignoreResistances: true
-  - type: DamageContacts
-    stunTime: 2
-    standStillDelay: 1
+  - type: DamageOnStunContact
     damage:
       types:
-        Cold: 5
+        Cold: 11
+    specialDamageComp: MindShield
+    specialDamage:
+      types:
+        Cold: 26
+  - type: StunsContacts
+    stunTime: 2
+    standStillDelay: 1
   - type: HallucinationImmune
   - type: HallucinationSource
     range: 5
