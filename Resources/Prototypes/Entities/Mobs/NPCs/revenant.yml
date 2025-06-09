@@ -113,7 +113,7 @@
         Cold: 26
   - type: StunsContacts
     stunTime: 2
-    standStillDelay: 1
+    StunDelayTime: 1
   - type: HallucinationImmune
   - type: HallucinationSource
     range: 5
