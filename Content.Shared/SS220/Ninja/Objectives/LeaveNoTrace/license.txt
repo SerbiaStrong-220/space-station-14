@@ -1,0 +1,2 @@
+license: This content is under ICLA. Copyright holders: orix0689 (discord) and pocchitsu (discord) (Read more on: https://wiki.imperialspace.net/ru/icla)
+copyright: "orix0689 (discord) and pocchitsu (discord)"
