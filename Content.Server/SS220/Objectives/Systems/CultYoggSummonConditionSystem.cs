@@ -30,6 +30,7 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
         SubscribeLocalEvent<CultYoggSummonConditionComponent, CultYoggReinitObjEvent>(OnReInit);
         SubscribeLocalEvent<CultYoggSummonConditionComponent, CultYoggUpdateSacrObjEvent>(OnSacrUpdate);
     }
+
     //check if gamerule was rewritten
     private void OnInit(Entity<CultYoggSummonConditionComponent> ent, ref ComponentInit args)
     {
@@ -40,14 +41,17 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
     {
         SacraficialsUpdate(ent);
     }
+
     private void OnSacrUpdate(Entity<CultYoggSummonConditionComponent> ent, ref CultYoggUpdateSacrObjEvent args)
     {
         SacraficialsUpdate(ent);
     }
+
     private void OnReInit(Entity<CultYoggSummonConditionComponent> ent, ref CultYoggReinitObjEvent args)
     {
         SacraficialsUpdate(ent);
     }
+
     private void OnGetProgress(Entity<CultYoggSummonConditionComponent> ent, ref ObjectiveGetProgressEvent args)
     {
         args.Progress = 0;
@@ -55,7 +59,7 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
         if (!_cultRule.TryGetCultGameRule(out var rule))
             return;
 
-        args.Progress = rule.Comp.AmountOfSacrifices / ent.Comp.ReqSacrAmount;
+        args.Progress = (float)rule.Comp.AmountOfSacrifices / (float)ent.Comp.ReqSacrAmount;
     }
 
     private void ObjNumberUpdate(Entity<CultYoggSummonConditionComponent> ent)
@@ -97,6 +101,7 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
         _metaData.SetEntityName(ent, title.ToString());
     }
 }
+
 [ByRefEvent, Serializable]
 public sealed class CultYoggReinitObjEvent : EntityEventArgs
 {
