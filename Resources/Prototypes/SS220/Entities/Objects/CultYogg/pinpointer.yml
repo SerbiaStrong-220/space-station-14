@@ -1,0 +1,28 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: UniversalPinpointer
+  name: universal pinpointer
+  description: A handheld tracking device that leads to the direction of any crew member.
+  suffix: Pinpointer
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/pinpointer.rsi
+    layers:
+    - state: pinpointer-crew
+      map: ["enum.PinpointerLayers.Base"]
+    - state: pinonnull
+      map: ["enum.PinpointerLayers.Screen"]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: Objects/Devices/pinpointer.rsi
+    state: pinpointer-crew
+  #- type: Pinpointer
+  #  mode: Crew
+  - type: ActivatableUI
+    key: enum.PinpointerUIKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.PinpointerUIKey.Key:
+        type: PinpointerBoundUserInterface
