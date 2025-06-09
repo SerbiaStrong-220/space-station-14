@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: spo9k, Persia
-  changes:
-  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0430 \u043A\u0430\
-      \u0440\u0442\u0430 Donuts."
-    type: Fix
-  id: 531
-  time: '2024-09-28T09:44:05.0000000+00:00'
-  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1823
 - author: waryt, stalengd
   changes:
   - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E 1984!"
@@ -6810,3 +6802,13 @@
   id: 1030
   time: '2025-06-07T19:38:47.0000000+00:00'
   url: https://github.com/SerbiaStrong-220/space-station-14/pull/3019
+- author: R-R0S
+  changes:
+  - message: "\u0422\u0435\u043F\u0435\u0440\u044C \u0441\u0442\u0430\u043D\u0431\u0430\
+      \u0442\u043E\u043D \u0438 \u0441\u0442\u0430\u043D\u043F\u0440\u043E\u0434 \u043F\
+      \u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u0440\u0430\u0441\u0445\u043E\
+      \u0434\u0443\u044E\u0442 \u0437\u0430\u0440\u044F\u0434."
+    type: Fix
+  id: 1031
+  time: '2025-06-08T08:45:57.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/3018

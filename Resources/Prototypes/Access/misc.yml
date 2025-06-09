@@ -37,3 +37,8 @@
   - Magistrate #SS220 Law Department
   - GenpopEnter
   - GenpopLeave
+
+- type: accessGroup
+  id: General
+  tags:
+  - Maintenance

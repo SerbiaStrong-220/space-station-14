@@ -25,7 +25,7 @@
     selectedMode: FullAuto
     availableModes:
       - FullAuto
-      - SemiAuto #ss220 gunmodes
+      - SemiAuto
       - Burst    #ss220 gunmodes
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
@@ -223,7 +223,7 @@
       gun_chamber: !type:ContainerSlot
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 1 # SS220-fix-for-our-sprites
     zeroVisible: true
   - type: Appearance
 

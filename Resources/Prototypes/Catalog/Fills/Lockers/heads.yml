@@ -11,6 +11,7 @@
     - id: CargoSaleComputerCircuitboard
     - id: CargoShuttleConsoleCircuitboard
     - id: SalvageMagnetMachineCircuitboard
+    - id: SalvageJobBoardComputerCircuitboard
     - id: CigPackGreen
       prob: 0.50
     - id: ClothingHeadsetAltCargo
@@ -185,10 +186,11 @@
     # - id: RCD
     # SS220 RCD-to-CE end
     - id: RubberStampCE
-    - id: Telescopichka
+    - id: Telescopichka # SS220
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: CigPackENG #SS220 Cigarettes
     - id: DeviceCalculator # SS220 Calculator
+    - id: MetalFoamGrenade
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -422,7 +424,6 @@
   - type: StorageFill
     contents:
     - id: WeaponRevolverDeckard
-    - id: ClothingOuterHardsuitBasic
     - id: JetpackBlue
     - id: SpaceCash1000
     - id: BeachBall

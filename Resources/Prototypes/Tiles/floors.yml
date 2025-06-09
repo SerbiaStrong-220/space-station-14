@@ -654,6 +654,14 @@
   id: FloorSteelDirty
   name: tiles-dirty-steel-floor
   sprite: /Textures/Tiles/steel_dirty.png
+  #SS220-our-tiles-begin
+  # variants: 4
+  # placementVariants:
+  # - 1.0
+  # - 1.0
+  # - 1.0
+  # - 1.0
+  #SS220-our-tiles-end
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]

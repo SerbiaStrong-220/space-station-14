@@ -3,9 +3,10 @@
   id: ActionStandUp
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: BigAction
     icon:
       sprite: Mobs/Pets/cat.rsi
       state: cat
+  - type: InstantAction
     event: !type:StandUpActionEvent

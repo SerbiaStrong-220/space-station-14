@@ -2,7 +2,6 @@
 
 using Content.Server.Humanoid;
 using Content.Server.Medical;
-using Content.Server.SS220.DarkForces.Saint.Reagent.Events;
 using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
@@ -24,6 +23,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs;
 using Robust.Shared.Network;
 using Content.Shared.SS220.Roles;
+using Content.Shared.SS220.EntityEffects;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
@@ -172,9 +172,10 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         _vomitSystem.Vomit(ent);
         var shroom = _entityManager.SpawnEntity(ent.Comp.PukedEntity, Transform(ent).Coordinates);
 
+
+
         _actions.RemoveAction(ent, ent.Comp.PukeShroomActionEntity);
-        _actions.AddAction(ent, ref ent.Comp.DigestActionEntity, ent.Comp.DigestAction);
-    }
+        _actions.AddAction(ent, ref ent.Comp.DigestActionEntity, ent.Comp.DigestAction);    }
 
     private void DigestAction(Entity<CultYoggComponent> ent, ref CultYoggDigestEvent args)
     {
@@ -202,7 +203,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         _thirstSystem.ModifyThirst(ent, thirstComp, -ent.Comp.ThirstCost);
 
-        _actions.RemoveAction(ent, ent.Comp.DigestActionEntity);//if we digested, we should puke after
+		_actions.RemoveAction(ent, ent.Comp.DigestActionEntity);//if we digested, we should puke after
 
         if (_actions.AddAction(ent, ref ent.Comp.PukeShroomActionEntity, out var act, ent.Comp.PukeShroomAction) && act.UseDelay != null) //useDelay when added
         {
@@ -261,7 +262,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     }
 
     public void StartAscension(EntityUid ent, CultYoggComponent comp)//idk if it is canser or no, will be like that for a time
-    {
+
         if (HasComp<AcsendingComponent>(ent))
             return;
 
