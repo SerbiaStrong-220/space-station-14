@@ -2,7 +2,6 @@
 
 using Content.Server.Humanoid;
 using Content.Server.Medical;
-using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -13,7 +12,6 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
-using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.StuckOnEquip;
 using Robust.Shared.Timing;
 using Robust.Shared.Prototypes;
@@ -21,8 +19,6 @@ using System.Linq;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs;
-using Robust.Shared.Network;
-using Content.Shared.SS220.Roles;
 using Content.Shared.SS220.EntityEffects;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
@@ -32,7 +28,6 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly CultYoggRuleSystem _cultRule = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly HumanoidAppearanceSystem _humanoidAppearance = default!;
@@ -296,7 +291,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     private bool AcsendingCultistCheck()//if anybody else is acsending
     {
         var query = EntityQueryEnumerator<CultYoggComponent, AcsendingComponent>();
-        while (query.MoveNext(out var ent, out _, out _))
+        while (query.MoveNext(out _, out _, out _))
         {
             return false;
         }

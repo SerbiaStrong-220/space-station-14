@@ -52,7 +52,7 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
     private void OnDeath(MobStateChangedEvent ev)
     {
         if (ev.NewMobState == MobState.Dead)
-            RemoveItems(ev.Target);
+            RemoveAllStuckItemsByDeath(ev.Target);
     }
 
     public void UnstuckItem(Entity<StuckOnEquipComponent> ent)
@@ -88,6 +88,39 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
         }
 
         return removedItems;
+    }
+
+    public void RemoveAllStuckItems(EntityUid target)
+    {
+        if (!_inventory.TryGetSlots(target, out var _))
+            return;
+
+        foreach (var item in _inventory.GetHandOrInventoryEntities(target))
+        {
+            if (!TryComp<StuckOnEquipComponent>(item, out var stuckOnEquipComp))
+                continue;
+
+            UnstuckItem((item, stuckOnEquipComp));
+            _transform.DropNextTo(item, target);
+        }
+    }
+
+    public void RemoveAllStuckItemsByDeath(EntityUid target)
+    {
+        if (!_inventory.TryGetSlots(target, out var _))
+            return;
+
+        foreach (var item in _inventory.GetHandOrInventoryEntities(target))
+        {
+            if (!TryComp<StuckOnEquipComponent>(item, out var stuckOnEquipComp))
+                continue;
+
+            if (!stuckOnEquipComp.ShouldDropOnDeath)
+                continue;
+
+            UnstuckItem((item, stuckOnEquipComp));
+            _transform.DropNextTo(item, target);
+        }
     }
 }
 
