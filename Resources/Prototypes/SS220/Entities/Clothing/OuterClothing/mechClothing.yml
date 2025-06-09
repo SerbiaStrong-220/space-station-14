@@ -29,6 +29,7 @@
   - type: GroupExamine
   - type: ContainerContainer
     containers:
+      mech-pilot-slot: !type:ContainerSlot
       mech-equipment-container: !type:Container
       mech-battery-slot: !type:ContainerSlot
       item_radio: !type:ContainerSlot
