@@ -37,11 +37,12 @@ using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.CultYogg.Sacraficials;
 using Content.Shared.SS220.InnerHandToggleable;
+using Content.Shared.SS220.Photocopier.Forms;
 using Content.Shared.SS220.RestrictedItem;
 using Content.Shared.SS220.Roles;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.SS220.Telepathy;
-using Content.Shared.SS220.UpdateChannels;
+using JetBrains.FormatRipper.Elf;
 using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -158,7 +159,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
             if (departament.ID == comp.SecondTierDepartament)
                 continue;
 
-            foreach (ProtoId<JobPrototype> role in departament.Roles)
+            foreach (var role in departament.Roles)
             {
                 if (firstTier.Contains(role.Id))
                     continue;
@@ -245,6 +246,10 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         var mindQuery = EntityQuery<MindComponent>();
 
         var allHumans = new List<EntityUid>();
+
+        if (!TryGetRandomStation(out var station))//IDK how to get station so i took this realization
+            return allHumans;
+
         // HumanoidAppearanceComponent is used to prevent mice, pAIs, etc from being chosen
         var query = EntityQueryEnumerator<MindContainerComponent, MobStateComponent, HumanoidAppearanceComponent>();
         while (query.MoveNext(out var uid, out var mc, out var mobState, out _))
@@ -257,6 +262,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
                 continue;
 
             if (HasComp<CultYoggSacrificialComponent>(uid))
+                continue;
+
+            if (_station.GetOwningStation(uid) != station)
                 continue;
 
             // the player has to be alive
