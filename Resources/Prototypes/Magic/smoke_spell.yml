@@ -12,8 +12,6 @@
       sprite: SS220/Interface/Actions/magic_spells_other.rsi
       state: smoke
       # SS220 Wizard getting used to End
-      sprite: Actions/smokeaction.rsi
-      state: smokeaction
   - type: InstantAction
     event: !type:InstantSpawnSpellEvent
       prototype: WizardSmoke

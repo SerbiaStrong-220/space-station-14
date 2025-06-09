@@ -68,5 +68,5 @@
       event: !type:ProjectileSpellEvent
         prototype: ProjectileFireball
         speech: action-speech-spell-fireball
-  - type: Action
-    useDelay: 8
+    - type: Action
+      useDelay: 8
