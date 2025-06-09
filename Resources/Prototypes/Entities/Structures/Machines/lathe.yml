@@ -610,6 +610,7 @@
         - Sheet
         - RawMaterial
         - Ingot
+  - type: OreSiloClient
 
 - type: entity
   id: Biogenerator
@@ -731,6 +732,7 @@
       - Ingot
       - Raw
       - Wooden
+      - Boll
   - type: Lathe
     idleState: base_machine
     runningState: base_machine_processing
@@ -774,3 +776,4 @@
         - RawMaterial
         - Plastic
         - Ingot
+  - type: OreSiloClient

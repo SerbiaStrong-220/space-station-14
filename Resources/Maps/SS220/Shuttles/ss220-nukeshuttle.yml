@@ -690,32 +690,6 @@ entities:
     - type: GasTileOverlay
     - type: SpreaderGrid
     - type: GridPathfinding
-- proto: ActionToggleInternals
-  entities:
-  - uid: 3
-    components:
-    - type: Transform
-      parent: 2
-    - type: InstantAction
-      container: 2
-  - uid: 5
-    components:
-    - type: Transform
-      parent: 4
-    - type: InstantAction
-      container: 4
-  - uid: 7
-    components:
-    - type: Transform
-      parent: 6
-    - type: InstantAction
-      container: 6
-  - uid: 9
-    components:
-    - type: Transform
-      parent: 8
-    - type: InstantAction
-      container: 8
 - proto: AirAlarm
   entities:
   - uid: 10
@@ -2718,14 +2692,6 @@ entities:
     - type: Transform
       pos: -0.4468552,-6.5019293
       parent: 1
-    - type: GasTank
-      toggleActionEntity: 5
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 5
   - uid: 354
     components:
     - type: Transform
@@ -2738,27 +2704,11 @@ entities:
     - type: Transform
       pos: -0.68296623,-6.3144293
       parent: 1
-    - type: GasTank
-      toggleActionEntity: 3
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 3
   - uid: 8
     components:
     - type: Transform
       pos: 6.592623,-3.5917587
       parent: 1
-    - type: GasTank
-      toggleActionEntity: 9
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 9
   - uid: 355
     components:
     - type: Transform
@@ -4034,14 +3984,6 @@ entities:
     - type: Transform
       pos: 6.29054,-3.4355087
       parent: 1
-    - type: GasTank
-      toggleActionEntity: 7
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 7
   - uid: 518
     components:
     - type: Transform

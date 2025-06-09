@@ -3,12 +3,13 @@
   id: BaseActionSpawnSpiderEgg
   abstract: true
   components:
-  - type: InstantAction
+  - type: Action
     useDelay: 2
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: guard_spawn
+  - type: InstantAction
     event: !type:SpiderNearbySpawnEvent
       prototypes:
       - id: SpiderEggDrone
@@ -21,13 +22,15 @@
   description: Creates a web that slows down your prey.
   abstract: true
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 4
-    range: 1.5
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: web_spawn
+  - type: TargetAction
+    range: 1.5
+  - type: WorldTargetAction
     event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: SpiderWebFragile
@@ -57,10 +60,11 @@
   name: hunter spider egg
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: hunter_spawn
+  - type: InstantAction
     event: !type:SpiderNearbySpawnEvent
       prototypes:
       - id: SpiderEggHunter
@@ -75,10 +79,11 @@
   name: ghost spider egg
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: nurse_spawn
+  - type: InstantAction
     event: !type:SpiderNearbySpawnEvent
       prototypes:
       - id: SpiderEggGhost
@@ -93,10 +98,11 @@
   name: shooter  spider egg
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: viper_spawn
+  - type: InstantAction
     event: !type:SpiderNearbySpawnEvent
       prototypes:
       - id: SpiderEggShooter
@@ -112,12 +118,13 @@
   description: Releases three small spiders that attack your prey. The spiders disappear after 20 seconds.
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     useDelay: 40
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: little_spider_spawn
+  - type: InstantAction
     event: !type:SpiderNearbySpawnEvent
       prototypes:
       - id: MobSpiderLittle
@@ -132,13 +139,15 @@
   description: A shard that serves as a backlight for spiders.
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 30
-    range: 1
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: crystal_spawn
+  - type: TargetAction
+    range: 1
+  - type: WorldTargetAction
     event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: ShardCrystalBlueXeno
@@ -152,13 +161,15 @@
   description: A shard that serves as a backlight for spiders.
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 5
-    range: 1
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: crystal_spawn
+  - type: TargetAction
+    range: 1
+  - type: WorldTargetAction
     event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: ShardCrystalBlueXeno
@@ -173,13 +184,15 @@
   name: create a wall
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 12
-    range: 1.5
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi #SS220-Walss-Sprite-Update-V4
       state: wall_spawn
+  - type: TargetAction
+    range: 1.5
+  - type: WorldTargetAction
     event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: WallWebSpawn
@@ -192,8 +205,10 @@
   name: create a durable wall
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 16
+  - type: TargetAction
+  - type: WorldTargetAction
     event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: WallWebDurableSpawn
@@ -207,8 +222,10 @@
   name: create a durable wall
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 6
+  - type: TargetAction
+  - type: WorldTargetAction
     event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: WallWebDurableSpawn
@@ -222,13 +239,15 @@
   name: create a web tile
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 16
-    range: 1.5
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi #SS220-Walss-Sprite-Update-V4
       state: tile_spawn
+  - type: TargetAction
+    range: 1.5
+  - type: WorldTargetAction
     event: !type:SpiderTileSpawnActionEvent
       prototype: FloorWebTile
       doAfter: 6
@@ -238,9 +257,11 @@
   id: ActionSpawnWebTileBloodPoints
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 6
-    range: 1.5
+  - type: TargetAction
+    range: 1
+  - type: WorldTargetAction
     event: !type:SpiderTileSpawnActionEvent
       prototype: FloorWebTile
       cost: 10
@@ -252,7 +273,7 @@
   id: ActionSpawnSingleSpiderWebShortDelay
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 2
 
 - type: entity
@@ -260,7 +281,7 @@
   id: ActionSpawnSingleSpiderWebLongDelay
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 6
 
 - type: entity
@@ -269,8 +290,10 @@
   name: spin a durable web
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 4
+  - type: TargetAction
+  - type: WorldTargetAction
     event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: SpiderWebDurable
@@ -283,8 +306,10 @@
   name: spin a durable web
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 2
+  - type: TargetAction
+  - type: WorldTargetAction
     event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: SpiderWebDurable
@@ -299,13 +324,15 @@
   description: Creates a web that slows down your prey.
   categories: [ HideSpawnMenu ]
   components:
-  - type: WorldTargetAction
+  - type: Action
     useDelay: 30 #КД
-    range: 1.3
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
       state: clown_web_spawn
+  - type: TargetAction
+    range: 1.3
+  - type: WorldTargetAction
     event: !type:SpiderTargetSpawnEvent
       prototypes:
       - id: SpiderWebClown
@@ -319,9 +346,11 @@
   description: Wraps the victim in a web! After fully clothed in silk, you can drink blood from it.
   categories: [ HideSpawnMenu ]
   components:
-  - type: EntityTargetAction
-    event: !type:SpiderCocooningActionEvent
-      cocooningTime: 15
+  - type: Action
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/action_spider.rsi, state: cocoon }
     useDelay: 10
+  - type: TargetAction
+  - type: EntityTargetAction
+    event: !type:SpiderCocooningActionEvent
+      cocooningTime: 15

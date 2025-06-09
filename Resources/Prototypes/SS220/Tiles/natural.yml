@@ -333,7 +333,6 @@
   heatCapacity: 10000
   weather: true
   mobFriction: 0.5
-  mobFrictionNoInput: 0.05
   mobAcceleration: 2
   indestructible: true
 

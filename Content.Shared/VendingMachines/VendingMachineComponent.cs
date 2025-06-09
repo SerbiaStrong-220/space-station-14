@@ -12,7 +12,7 @@ namespace Content.Shared.VendingMachines
     [RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
     public sealed partial class VendingMachineComponent : Component
     {
-        public const string ContainerId = "VendingMachine";
+        public const string ContainerId = "VendingMachine"; // SS220 Injectable vends
 
         /// <summary>
         /// PrototypeID for the vending machine's inventory, see <see cref="VendingMachineInventoryPrototype"/>
@@ -148,10 +148,12 @@ namespace Content.Shared.VendingMachines
         [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
         public TimeSpan NextEmpEject = TimeSpan.Zero;
 
+        // SS220 Injectable vends start
         /// <summary>
         ///     Container of unique entities stored inside this vending machine.
         /// </summary>
         [ViewVariables] public Container Container = default!;
+        // SS220 Injectable vends end
 
         #region Client Visuals
         /// <summary>
@@ -216,13 +218,16 @@ namespace Content.Shared.VendingMachines
         public string ID;
         [ViewVariables(VVAccess.ReadWrite)]
         public uint Amount;
+        // SS220 Injectable vends start
         [ViewVariables(VVAccess.ReadWrite)]
-        public List<NetEntity> EntityUids = new();
-        public VendingMachineInventoryEntry(InventoryType type, string id, uint amount)
+        public List<NetEntity> EntityUids;
+        // SS220 Injectable vends end
+        public VendingMachineInventoryEntry(InventoryType type, string id, uint amount, List<NetEntity>? entityUids = null /* SS220 Injectable vends */)
         {
             Type = type;
             ID = id;
             Amount = amount;
+            EntityUids = entityUids ?? new(); // SS220 Injectable vends
         }
 
         public VendingMachineInventoryEntry(VendingMachineInventoryEntry entry)
@@ -230,6 +235,7 @@ namespace Content.Shared.VendingMachines
             Type = entry.Type;
             ID = entry.ID;
             Amount = entry.Amount;
+            EntityUids = entry.EntityUids; // SS220 Injectable vends
         }
     }
 

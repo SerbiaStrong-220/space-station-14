@@ -394,7 +394,7 @@
         amount: 5
       - id: FoodCondimentPacketAstrotame
         amount: 5
-      - id: CapacitorStockPart
+      - id: MicroManipulatorStockPart
         amount: 10
       - id: FoodDonkpocket
         amount: 10

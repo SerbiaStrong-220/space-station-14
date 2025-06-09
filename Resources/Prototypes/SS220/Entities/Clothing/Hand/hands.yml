@@ -113,7 +113,7 @@
     sprite: Clothing/Hands/Gloves/powerglove.rsi
     layers:
     - state: icon
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: Clothing
     equippedPrefix: on
     sprite: Clothing/Hands/Gloves/powerglove.rsi
@@ -180,8 +180,8 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: {state: icon-on}
           False: {state: icon}
   - type: ToggleClothing
@@ -193,7 +193,8 @@
   name: Toggle Power Glove
   description: Toggles the power glove on and off.
   components:
-  - type: InstantAction
+  - type: Action
     priority: -9
     itemIconStyle: BigItem
+  - type: InstantAction
     event: !type:ToggleActionEvent

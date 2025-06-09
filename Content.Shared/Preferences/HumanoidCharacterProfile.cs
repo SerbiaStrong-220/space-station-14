@@ -29,10 +29,6 @@ namespace Content.Shared.Preferences
         private static readonly Regex RestrictedNameRegex = new(@"[^А-Яа-яёЁ0-9' -]"); // Corvax: Only cyrillic names
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
-        public const int MaxNameLength = 32;
-        public const int MaxLoadoutNameLength = 32;
-        public const int MaxDescLength = 512;
-
         /// <summary>
         /// Job preferences for initial spawn.
         /// </summary>
@@ -543,13 +539,14 @@ namespace Content.Shared.Preferences
             };
 
             string name;
+            var maxNameLength = configManager.GetCVar(CCVars.MaxNameLength);
             if (string.IsNullOrEmpty(Name))
             {
                 name = GetName(Species, gender);
             }
-            else if (Name.Length > MaxNameLength)
+            else if (Name.Length > maxNameLength)
             {
-                name = Name[..MaxNameLength];
+                name = Name[..maxNameLength];
             }
             else
             {
@@ -575,9 +572,10 @@ namespace Content.Shared.Preferences
             }
 
             string flavortext;
-            if (FlavorText.Length > MaxDescLength)
+            var maxFlavorTextLength = configManager.GetCVar(CCVars.MaxFlavorTextLength);
+            if (FlavorText.Length > maxFlavorTextLength)
             {
-                flavortext = FormattedMessage.RemoveMarkupOrThrow(FlavorText)[..MaxDescLength];
+                flavortext = FormattedMessage.RemoveMarkupOrThrow(FlavorText)[..maxFlavorTextLength];
             }
             else
             {
@@ -695,16 +693,38 @@ namespace Content.Shared.Preferences
             // Track points count for each group.
             var groups = new Dictionary<string, int>();
             var result = new List<ProtoId<TraitPrototype>>();
+            var selectedTraits = new HashSet<ProtoId<TraitPrototype>>(); //ss220 add traits
 
             foreach (var trait in traits)
             {
                 if (!protoManager.TryIndex(trait, out var traitProto))
                     continue;
 
+                //ss220 add traits start
+                var isExcluded = false;
+                if (traitProto.MutuallyExclusiveWith != null)
+                {
+                    foreach (var excluded in traitProto.MutuallyExclusiveWith)
+                    {
+                        var proto = protoManager.Index<TraitPrototype>(excluded);
+
+                        if (!selectedTraits.Contains(proto))
+                            continue;
+
+                        isExcluded = true;
+                        break;
+                    }
+                }
+
+                if (isExcluded)
+                    continue;
+                //ss220 add traits end
+
                 // Always valid.
                 if (traitProto.Category == null)
                 {
                     result.Add(trait);
+                    selectedTraits.Add(trait); //ss220 add traits
                     continue;
                 }
 
@@ -721,6 +741,7 @@ namespace Content.Shared.Preferences
 
                 groups[category.ID] = existing;
                 result.Add(trait);
+                selectedTraits.Add(trait); //ss220 add traits
             }
 
             return result;

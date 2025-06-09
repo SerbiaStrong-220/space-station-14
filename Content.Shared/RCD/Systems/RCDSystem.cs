@@ -396,7 +396,7 @@ public sealed class RCDSystem : EntitySystem
         if (prototype.Mode == RcdMode.ConstructTile)
         {
             // Check rule: Tile placement is valid
-            if (!_floors.CanPlaceTile(gridUid, mapGrid, out var reason))
+            if (!_floors.CanPlaceTile(gridUid, mapGrid, tile.GridIndices, out var reason))
             {
                 if (popMsgs)
                     _popup.PopupClient(reason, uid, user);
@@ -412,6 +412,16 @@ public sealed class RCDSystem : EntitySystem
 
                 return false;
             }
+
+            //SS220 RCD_indestructable_fix start
+            if (tile.Tile.GetContentTileDefinition().Indestructible)
+            {
+                if (popMsgs)
+                    _popup.PopupClient(Loc.GetString("rcd-component-tile-indestructible-message"), uid, user);
+
+                return false;
+            }
+            //SS220 RCD_indestructable_fix end
 
             // Ensure that all construction rules shared between tiles and object are checked before exiting here
             return true;

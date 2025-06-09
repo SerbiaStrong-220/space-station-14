@@ -9,6 +9,7 @@ using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 
 namespace Content.Server.SS220.CultYogg.Altar;
 
@@ -55,7 +56,7 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
             if (comp.MiGoErectActionEntity == null)
                 continue;
 
-            if (!TryComp<InstantActionComponent>(sacrAction, out var actionComponent))
+            if (!TryComp<ActionComponent>(sacrAction, out var actionComponent))
                 continue;
 
             if (actionComponent.UseDelay == null)

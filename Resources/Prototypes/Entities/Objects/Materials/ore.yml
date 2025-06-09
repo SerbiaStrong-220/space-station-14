@@ -48,6 +48,10 @@
           Quantity: 10
   - type: Item
     heldPrefix: gold
+  - type: Tag
+    tags:
+    - Ore
+    - OreGold
 
 - type: entity
   parent: GoldOre
@@ -156,6 +160,10 @@
           Quantity: 10
   - type: Item
     heldPrefix: plasma
+  - type: Tag
+    tags:
+    - Ore
+    - OrePlasma
 
 - type: entity
   parent: PlasmaOre
@@ -189,6 +197,10 @@
           Quantity: 10
   - type: Item
     heldPrefix: silver
+  - type: Tag
+    tags:
+    - Ore
+    - OreSilver
 
 - type: entity
   parent: SilverOre
@@ -263,6 +275,10 @@
         canReact: false
   - type: Item
     heldPrefix: uranium
+  - type: Tag
+    tags:
+    - Ore
+    - OreUranium
 
 - type: entity
   parent: UraniumOre
@@ -305,6 +321,10 @@
           Quantity: 5
   - type: Item
     heldPrefix: bananium
+  - type: Tag
+    tags:
+    - Ore
+    - OreBananium
 
 - type: entity
   parent: BananiumOre
@@ -413,3 +433,4 @@
   components:
   - type: Stack
     count: 1
+

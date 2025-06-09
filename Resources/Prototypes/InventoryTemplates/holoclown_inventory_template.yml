@@ -11,6 +11,9 @@
       strippingWindowPos: 0,4
       displayName: Pocket 1
       stripHidden: true
+      #ss220 add fully hidden pockets start
+      fullyHidden: true
+      #ss220 add fully hidden pockets end
     - name: pocket2
       slotTexture: pocket
       fullTextureName: template_small
@@ -21,4 +24,7 @@
       strippingWindowPos: 1,4
       displayName: Pocket 2
       stripHidden: true
+      #ss220 add fully hidden pockets start
+      fullyHidden: true
+      #ss220 add fully hidden pockets end
 

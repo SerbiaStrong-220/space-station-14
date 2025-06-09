@@ -11,6 +11,9 @@
     sprite: SS220/Objects/CultYogg/cocoon.rsi
     layers:
       - state: icon
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
 
 - type: entity
   id: CultYoggCocoonSpikegun

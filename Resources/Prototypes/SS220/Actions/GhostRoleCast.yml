@@ -3,40 +3,45 @@
   name: action-toggle-ghostrole-cast-settings-name
   description: action-toggle-ghostrole-cast-settings-desc
   components:
-  - type: InstantAction
+  - type: Action
     icon: SS220/Interface/Actions/GhostRoleSettings.png
-    event: !type:ToggleGhostRoleCastSettingsEvent
     useDelay: 1
     clientExclusive: true
     checkCanInteract: false
     priority: -7
+  - type: InstantAction
+    event: !type:ToggleGhostRoleCastSettingsEvent
 
 - type: entity
   id: ActionToggleGhostRoleCast
   name: action-toggle-ghostrole-cast-name
   description: action-toggle-ghostrole-cast-desc
   components:
-  - type: EntityTargetAction
+  - type: Action
     icon: SS220/Interface/Actions/GhostRoleCast.png
-    event: !type:ToggleGhostRoleCastActionEvent
     useDelay: 1
     clientExclusive: true
     checkCanInteract: false
-    repeat: true
-    deselectOnMiss: false
     priority: -8
+  - type: TargetAction
+    deselectOnMiss: false
+    repeat: true
+  - type: EntityTargetAction
+    event: !type:ToggleGhostRoleCastActionEvent
 
 - type: entity
   id: ActionToggleGhostRoleRemove
   name: action-toggle-ghostrole-remove-name
   description: action-toggle-ghostrole-remove-desc
   components:
-  - type: EntityTargetAction
+  - type: Action
     icon: SS220/Interface/Actions/GhostRoleRemove.png
-    event: !type:ToggleGhostRoleRemoveActionEvent
     useDelay: 1
     clientExclusive: true
     checkCanInteract: false
-    repeat: true
-    deselectOnMiss: false
     priority: -9
+  - type: TargetAction
+    deselectOnMiss: false
+    repeat: true
+  - type: EntityTargetAction
+    event: !type:ToggleGhostRoleRemoveActionEvent
