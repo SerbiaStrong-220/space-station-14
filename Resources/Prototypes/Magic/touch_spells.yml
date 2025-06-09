@@ -85,6 +85,7 @@
     icon:
       sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
       state: slippery # SS220 Wizard getting used to
+  - type: EntityTargetAction
     event: !type:ChangeComponentsSpellEvent
       toAdd:
       - type: Slippery

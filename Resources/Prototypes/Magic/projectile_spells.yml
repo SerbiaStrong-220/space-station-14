@@ -33,19 +33,6 @@
   name: Fireball II
   description: Fires a fireball, but faster!
   components:
-  - type: WorldTargetAction
-    itemIconStyle: BigAction
-    checkCanAccess: false
-    raiseOnUser: true
-    range: 60
-    sound: !type:SoundPathSpecifier
-      path: /Audio/Magic/fireball.ogg
-    icon:
-      sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
-      state: fireball
-    event: !type:ProjectileSpellEvent
-      prototype: ProjectileFireball
-      speech: action-speech-spell-fireball
   - type: Action
     useDelay: 10
 
@@ -55,18 +42,5 @@
   name: Fireball III
   description: The fastest fireball in the west!
   components:
-    - type: WorldTargetAction
-      itemIconStyle: BigAction
-      checkCanAccess: false
-      raiseOnUser: true
-      range: 60
-      sound: !type:SoundPathSpecifier
-        path: /Audio/Magic/fireball.ogg
-      icon:
-        sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
-        state: fireball
-      event: !type:ProjectileSpellEvent
-        prototype: ProjectileFireball
-        speech: action-speech-spell-fireball
     - type: Action
       useDelay: 8

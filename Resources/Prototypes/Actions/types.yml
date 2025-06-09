@@ -118,12 +118,6 @@
     priority: -20
     icon:
       sprite: Objects/Magic/magicactions.rsi
-      # SS220 Wizard getting used to Begin
-      layers:
-      - state: base_red
-      - state: nullrod
-        sprite: SS220/Interface/Actions/magic_spells_other.rsi
-      # SS220 Wizard getting used to End
       state: gib
 
 - type: entity
