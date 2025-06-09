@@ -91,8 +91,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         SubscribeLocalEvent<SacraficialReplacementEvent>(SacraficialReplacement);
 
         SubscribeLocalEvent<CultYoggRuleComponent, CultYoggSacrificedTargetEvent>(OnTargetSacrificed);
-
-        SubscribeLocalEvent<CultYoggAnouncementEvent>(SendCultAnounce);
     }
 
     #region Sacreficials picking
@@ -286,9 +284,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     private void SacraficialReplacement(ref SacraficialReplacementEvent args)
     {
-        var cultRuleComp = GetCultGameRule();
-
-        if (cultRuleComp == null)
+        if (!TryGetCultGameRule(out var rule))
             return;
 
         if (!TryComp<CultYoggSacrificialComponent>(args.Entity, out var sacrComp))
@@ -297,13 +293,13 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (sacrComp.WasSacraficed)
             return;
 
-        SetNewSacraficial(cultRuleComp, sacrComp.Tier);
+        SetNewSacraficial(rule.Comp, sacrComp.Tier);
 
         RemComp<CultYoggSacrificialComponent>(args.Entity);
 
-        var ev = new CultYoggAnouncementEvent(args.Entity, Loc.GetString("cult-yogg-sacraficial-was-replaced", ("name", MetaData(args.Entity).EntityName)));
-        RaiseLocalEvent(args.Entity, ref ev, true);
+        SendCultAnounce(Loc.GetString("cult-yogg-sacraficial-was-replaced", ("name", MetaData(args.Entity).EntityName)));
     }
+
     private void SetNewSacraficial(CultYoggRuleComponent comp, int tier)
     {
         var allHumans = GetAliveNoneCultHumans();
@@ -396,12 +392,10 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     private void DeCult(ref CultYoggDeCultingEvent args)
     {
-        var cultRuleComp = GetCultGameRule();//ToDo bug potentialy if somebody will make cultist without gamerule, ask head dev
-
-        if (cultRuleComp == null)
+        if (!TryGetCultGameRule(out var rule))
             return;
 
-        DeMakeCultist(args.Entity, cultRuleComp);
+        DeMakeCultist(args.Entity, rule.Comp);
     }
 
     public void DeMakeCultist(EntityUid uid, CultYoggRuleComponent component)
@@ -450,17 +444,15 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     #endregion
 
     #region Anounce
-    private void SendCultAnounce(ref CultYoggAnouncementEvent args)
+    public void SendCultAnounce(string message)
     {
         //ToDo refactor without spam
 
-        var ruleComp = GetCultGameRule();
-
-        if (ruleComp == null)
+        if (!TryGetCultGameRule(out var rule))
             return;
 
-        var ev = new TelepathyAnnouncementSendEvent(args.Message, ruleComp.TelepathyChannel);
-        RaiseLocalEvent(args.Entity, ev, true);
+        var ev = new TelepathyAnnouncementSendEvent(message, rule.Comp.TelepathyChannel);
+        RaiseLocalEvent(rule, ev, true);
     }
     #endregion
 
@@ -637,13 +629,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     }
     #endregion
 
-    public CultYoggRuleComponent? GetCultGameRule()
-    {
-        if (TryGetCultGameRule(out var rule))
-            return rule.Comp;
-        return null;
-    }
-
     public bool TryGetCultGameRule(out Entity<CultYoggRuleComponent> rule)
     {
         rule = default;
@@ -657,14 +642,4 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         return false;
     }
-}
-
-/// <summary>
-///     Raised when we need announce smth to all cultists and we dont have their channel
-/// </summary>
-[ByRefEvent, Serializable]
-public sealed class CultYoggAnouncementEvent(EntityUid entity, string message) : EntityEventArgs
-{
-    public readonly EntityUid Entity = entity;
-    public readonly string Message = message;
 }

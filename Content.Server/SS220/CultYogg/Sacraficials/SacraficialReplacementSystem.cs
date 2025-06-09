@@ -14,6 +14,7 @@ namespace Content.Server.SS220.CultYogg.Sacraficials;
 public sealed partial class SacraficialReplacementSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly CultYoggRuleSystem _cultRule = default!;
 
     //dictionary of sacraficials uids and time when they left body by gibbing/ghosting/leaving anything
     private Dictionary<EntityUid, TimeSpan> _replaceSacrSchedule = [];
@@ -39,8 +40,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
             RaiseLocalEvent(uid, ref ev);
         }
 
-        var ev2 = new CultYoggAnouncementEvent(ent, Loc.GetString("cult-yogg-sacraficial-was-picked", ("name", MetaData(ent).EntityName)));
-        RaiseLocalEvent(ent, ref ev2, true);
+        _cultRule.SendCultAnounce(Loc.GetString("cult-yogg-sacraficial-was-picked", ("name", MetaData(ent).EntityName)));
     }
     private void OnRemove(Entity<CultYoggSacrificialComponent> ent, ref ComponentRemove args)
     {
@@ -61,8 +61,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
             return;
         }
 
-        var ev = new CultYoggAnouncementEvent(ent, Loc.GetString("cult-yogg-sacraficial-cant-be-replaced", ("name", MetaData(ent).EntityName)));
-        RaiseLocalEvent(ent, ref ev, true);
+        _cultRule.SendCultAnounce(Loc.GetString("cult-yogg-sacraficial-cant-be-replaced", ("name", MetaData(ent).EntityName)));
     }
 
     private void OnPlayerDetached(Entity<CultYoggSacrificialComponent> ent, ref PlayerDetachedEvent args)
@@ -83,8 +82,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
             return;
 
         var time = (comp.ReplacementCooldown.TotalSeconds - comp.AnnounceReplacementCooldown.TotalSeconds).ToString();
-        var ev = new CultYoggAnouncementEvent(uid, Loc.GetString("cult-yogg-sacraficial-will-be-replaced", ("name", MetaData(uid).EntityName), ("time", time)));
-        RaiseLocalEvent(uid, ref ev, true);
+        _cultRule.SendCultAnounce(Loc.GetString("cult-yogg-sacraficial-will-be-replaced", ("name", MetaData(uid).EntityName), ("time", time)));
     }
 
     public override void Update(float frameTime)
