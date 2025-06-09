@@ -79,11 +79,11 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <inheritdoc cref="GetEntitiesInZone(Entity{BroadphaseComponent}, Entity{ZoneComponent})"/>
     public IEnumerable<EntityUid> GetEntitiesInZone(Entity<ZoneComponent> zone)
     {
-        var container = GetEntity(zone.Comp.ZoneParams?.Container);
+        var container = GetEntity(zone.Comp.ZoneParams.Container);
         if (!TryComp<BroadphaseComponent>(container, out var broadphase))
             return new HashSet<EntityUid>();
 
-        return GetEntitiesInZone((container.Value, broadphase), zone);
+        return GetEntitiesInZone((container, broadphase), zone);
     }
 
     /// <summary>
@@ -95,13 +95,11 @@ public abstract partial class SharedZonesSystem : EntitySystem
         Entity<ZoneComponent> zone)
     {
         HashSet<EntityUid> entities = new();
-        if (zone.Comp.ZoneParams?.Boxes is not { } boxes)
-            return entities;
 
         var lookup = container.Comp;
         var state = (entities, zone);
 
-        foreach (var box in boxes)
+        foreach (var box in zone.Comp.ZoneParams.CurrentSize)
         {
             lookup.DynamicTree.QueryAabb(ref state, ZoneQueryCallback, box, true);
             lookup.StaticTree.QueryAabb(ref state, ZoneQueryCallback, box, true);
@@ -205,7 +203,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <inheritdoc cref="InZone(Entity{ZoneComponent}, Vector2)"/>
     public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point)
     {
-        if (GetEntity(zone.Comp.ZoneParams?.Container) != _map.GetMap(point.MapId))
+        if (GetEntity(zone.Comp.ZoneParams.Container) != _map.GetMap(point.MapId))
             return false;
 
         return InZone(zone, point.Position);
@@ -214,7 +212,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <inheritdoc cref="InZone(Entity{ZoneComponent}, Vector2)"/>
     public bool InZone(Entity<ZoneComponent> zone, EntityCoordinates point)
     {
-        if (GetEntity(zone.Comp.ZoneParams?.Container) != point.EntityId)
+        if (GetEntity(zone.Comp.ZoneParams.Container) != point.EntityId)
             return false;
 
         return InZone(zone, point.Position);
@@ -225,10 +223,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// </summary>
     public static bool InZone(Entity<ZoneComponent> zone, Vector2 point)
     {
-        if (zone.Comp.ZoneParams?.Boxes is not { } boxes)
-            return false;
-
-        foreach (var box in boxes)
+        foreach (var box in zone.Comp.ZoneParams.CurrentSize)
         {
             if (box.Contains(point))
                 return true;
@@ -282,20 +277,17 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// </summary>
     public void RecalculateZoneBoxes(Entity<ZoneComponent> zone)
     {
-        if (zone.Comp.ZoneParams is not { } @params)
-            return;
-
-        @params.Boxes = RecalculateZoneBoxes(@params.Boxes).ToList();
+        zone.Comp.ZoneParams.RecalculateSize();
         Dirty(zone, zone.Comp);
     }
 
-    public static void RecalculateZoneBoxes<T>(ref T boxes) where T : IEnumerable<Box2>
+    public static void RecalculateZoneBoxes(ref IEnumerable<Box2> boxes)
     {
         MathHelperExtensions.GetNonOverlappingBoxes(ref boxes);
         MathHelperExtensions.UnionInEqualSizedBoxes(ref boxes);
     }
 
-    public static T RecalculateZoneBoxes<T>(T boxes) where T : IEnumerable<Box2>
+    public static IEnumerable<Box2> RecalculateZoneBoxes(IEnumerable<Box2> boxes)
     {
         RecalculateZoneBoxes(ref boxes);
         return boxes;
@@ -324,12 +316,12 @@ public abstract partial class SharedZonesSystem : EntitySystem
         box = AttachToGrid(container, box);
     }
 
-    public IEnumerable<Box2> AttachToGrid<T>(NetEntity container, T boxes) where T : IEnumerable<Box2>
+    public IEnumerable<Box2> AttachToGrid(NetEntity container, IEnumerable<Box2> boxes)
     {
         return AttachToGrid(GetEntity(container), boxes);
     }
 
-    public IEnumerable<Box2> AttachToGrid<T>(EntityUid container, T boxes) where T : IEnumerable<Box2>
+    public IEnumerable<Box2> AttachToGrid(EntityUid container, IEnumerable<Box2> boxes)
     {
         if (TryComp<MapGridComponent>(container, out var mapGrid))
             return MathHelperExtensions.AttachToGrid(boxes, mapGrid.TileSize);
@@ -337,14 +329,14 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return MathHelperExtensions.AttachToGrid(boxes);
     }
 
-    public void AttachToGrid<T>(NetEntity container, ref T boxes) where T : IEnumerable<Box2>
+    public void AttachToGrid(NetEntity container, ref IEnumerable<Box2> boxes)
     {
         AttachToGrid(GetEntity(container), ref boxes);
     }
 
-    public void AttachToGrid<T>(EntityUid container, ref T boxes) where T : IEnumerable<Box2>
+    public void AttachToGrid(EntityUid container, ref IEnumerable<Box2> boxes)
     {
-        boxes = (T)(object)AttachToGrid(container, boxes);
+        boxes = AttachToGrid(container, boxes);
     }
 
     public int GetZonesCount()
@@ -381,12 +373,12 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return value != null;
     }
 
-    public IEnumerable<Box2> CutSpace<T>(NetEntity parent, T boxes, out IEnumerable<Box2> spaceBoxes) where T : IEnumerable<Box2>
+    public IEnumerable<Box2> CutSpace(NetEntity parent, IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
     {
         return CutSpace(GetEntity(parent), boxes, out spaceBoxes);
     }
 
-    public IEnumerable<Box2> CutSpace<T>(EntityUid parent, T boxes, out IEnumerable<Box2> spaceBoxes) where T : IEnumerable<Box2>
+    public IEnumerable<Box2> CutSpace(EntityUid parent, IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
     {
         spaceBoxes = [];
         if (!TryComp<MapGridComponent>(parent, out var mapGrid))
@@ -395,32 +387,32 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return CutSpace((parent, mapGrid), boxes, out spaceBoxes);
     }
 
-    public IEnumerable<Box2> CutSpace<T>(Entity<MapGridComponent> grid, T boxes, out IEnumerable<Box2> spaceBoxes) where T : IEnumerable<Box2>
+    public IEnumerable<Box2> CutSpace(Entity<MapGridComponent> grid, IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
     {
         spaceBoxes = GetSpaceBoxes(grid, boxes);
         return MathHelperExtensions.SubstructBox(boxes, spaceBoxes);
     }
 
-    public void CutSpace<T>(NetEntity parent, ref T boxes, out IEnumerable<Box2> spaceBoxes) where T : IEnumerable<Box2>
+    public void CutSpace(NetEntity parent, ref IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
     {
         CutSpace(GetEntity(parent), ref boxes, out spaceBoxes);
     }
 
-    public void CutSpace<T>(EntityUid parent, ref T boxes, out IEnumerable<Box2> spaceBoxes) where T : IEnumerable<Box2>
+    public void CutSpace(EntityUid parent, ref IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes) 
     {
-        spaceBoxes = new List<Box2>();
+        spaceBoxes = [];
         if (!TryComp<MapGridComponent>(parent, out var mapGrid))
         {
-            boxes = (T)(object)(new List<Box2>());
+            boxes = [];
             return;
         }
 
         CutSpace((parent, mapGrid), ref boxes, out spaceBoxes);
     }
 
-    public void CutSpace<T>(Entity<MapGridComponent> grid, ref T boxes, out IEnumerable<Box2> spaceBoxes) where T : IEnumerable<Box2>
+    public void CutSpace(Entity<MapGridComponent> grid, ref IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
     {
-        boxes = (T)(object)CutSpace(grid, boxes, out spaceBoxes);
+        boxes = CutSpace(grid, boxes, out spaceBoxes);
     }
 
     public IEnumerable<Box2> GetSpaceBoxes(NetEntity parent, IEnumerable<Box2> boxes)
@@ -649,13 +641,13 @@ public partial struct ZoneParams()
 
     public void RecalculateSize()
     {
-        var original = OriginalSize.ToList();
+        var original = OriginalSize.AsEnumerable();
         var zoneSys = IoCManager.Resolve<IEntityManager>().System<SharedZonesSystem>();
 
         if (AttachToGrid)
             zoneSys.AttachToGrid(Container, ref original);
 
-        var cutOut = new List<Box2>();
+        IEnumerable<Box2> cutOut = [];
         switch (CutSpaceOption)
         {
             case CutSpaceOptions.Dinamic:
@@ -668,19 +660,19 @@ public partial struct ZoneParams()
         }
 
         SharedZonesSystem.RecalculateZoneBoxes(ref cutOut);
-        CutOutSize = cutOut;
+        CutOutSize = cutOut.ToList();
 
         SharedZonesSystem.RecalculateZoneBoxes(ref original);
-        OriginalSize = original;
+        OriginalSize = original.ToList();
 
         var current = MathHelperExtensions.SubstructBox(original, cutOut);
         SharedZonesSystem.RecalculateZoneBoxes(ref current);
         CurrentSize = current.ToList();
     }
 
-    public void SetOriginalSize(List<Box2> newSize)
+    public void SetOriginalSize(IEnumerable<Box2> newSize)
     {
-        OriginalSize = newSize;
+        OriginalSize = newSize.ToList();
         RecalculateSize();
     }
 

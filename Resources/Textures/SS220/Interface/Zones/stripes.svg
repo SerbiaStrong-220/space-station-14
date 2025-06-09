@@ -1,1 +1,12 @@
-<svg id="stripes-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><pattern id="svg-stripes-pattern-14460" patternTransform="rotate(45)" width="100%" height="8" x="0" y="0" patternUnits="userSpaceOnUse"><g><rect x="0" y="0" width="100%" height="4" fill="rgba(80, 80, 80, 1)"></rect><rect x="0" y="4" width="100%" height="4" fill="rgba(255, 255, 255, 0)"></rect></g></pattern></defs><rect x="0" y="0" width="100%" height="100%" fill="url(#svg-stripes-pattern-14460)"></rect></svg>
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" style="background:none;">
+
+  <line x1="-200" y1="0" x2="200" y2="400" stroke="white" stroke-width="20"/>
+  <line x1="-150" y1="0" x2="200" y2="350" stroke="white" stroke-width="20"/>
+  <line x1="-100" y1="0" x2="200" y2="300" stroke="white" stroke-width="20"/>
+  <line x1="-50" y1="0" x2="200" y2="250" stroke="white" stroke-width="20"/>
+  <line x1="0" y1="0" x2="200" y2="200" stroke="white" stroke-width="20"/>
+  <line x1="0" y1="-50" x2="250" y2="200" stroke="white" stroke-width="20"/>
+  <line x1="0" y1="-100" x2="300" y2="200" stroke="white" stroke-width="20"/>
+  <line x1="0" y1="-150" x2="350" y2="200" stroke="white" stroke-width="20"/>
+  <line x1="0" y1="-200" x2="400" y2="200" stroke="white" stroke-width="20"/>
+</svg>

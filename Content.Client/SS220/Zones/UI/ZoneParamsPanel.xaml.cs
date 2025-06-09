@@ -75,7 +75,6 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         _overlayProvider = new ZoneParamsBoxesOverlayProvider(this);
 
         _zones = _entityManager.System<ZonesSystem>();
-        SetZoneEntity(entity);
 
         SizeOptionsBackground.PanelOverride = new StyleBoxFlat()
         {
@@ -148,6 +147,8 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             s.CutSpaceOption = (CutSpaceOptions)args.Id;
             s.RecalculateSize();
         });
+
+        SetZoneEntity(entity);
     }
 
     protected override void ExitedTree()
@@ -196,7 +197,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
     public void SetZoneEntity(Entity<ZoneComponent>? entity)
     {
         _zoneEntity = entity;
-        _originalParams = entity?.Comp.ZoneParams?.GetState() ?? new ZoneParams();
+        _originalParams = entity?.Comp.ZoneParams ?? new ZoneParams();
         if (string.IsNullOrEmpty(_originalParams.Name))
             _originalParams.Name = $"Zone {_zones.GetZonesCount() + 1}";
 
@@ -370,24 +371,20 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             _deletedBoxes = _panel.GetDeletedBoxes();
         }
 
-        public override List<BoxesOverlay.BoxesOverlayData> GetBoxesDatas()
+        public override List<BoxesOverlay.BoxOverlayData> GetBoxesDatas()
         {
-            var result = new List<BoxesOverlay.BoxesOverlayData>();
+            var result = new List<BoxesOverlay.BoxOverlayData>();
 
             if (_addedBoxes.Boxes.Count > 0 && _addedBoxes.Parent.IsValid())
             {
-                var data = new BoxesOverlay.BoxesOverlayData(_addedBoxes.Parent);
-                data.Boxes = _addedBoxes.Boxes;
-                data.Color = Color.Green.WithAlpha(ColorAlpha);
-                result.Add(data);
+                foreach (var box in _addedBoxes.Boxes)
+                    result.Add(new BoxesOverlay.BoxOverlayData(_addedBoxes.Parent, box, Color.Green.WithAlpha(ColorAlpha)));
             }
 
             if (_deletedBoxes.Boxes.Count > 0 && _deletedBoxes.Parent.IsValid())
             {
-                var data = new BoxesOverlay.BoxesOverlayData(_deletedBoxes.Parent);
-                data.Boxes = _deletedBoxes.Boxes;
-                data.Color = Color.Red.WithAlpha(ColorAlpha);
-                result.Add(data);
+                foreach (var box in _deletedBoxes.Boxes)
+                    result.Add(new BoxesOverlay.BoxOverlayData(_deletedBoxes.Parent, box, Color.Red.WithAlpha(ColorAlpha)));
             }
 
             return result;

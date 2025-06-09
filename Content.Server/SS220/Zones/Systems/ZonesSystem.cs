@@ -6,6 +6,7 @@ using Robust.Server.GameStates;
 using Robust.Shared.Map;
 using System.Linq;
 using System.Numerics;
+using static Content.Shared.SS220.Zones.Systems.ZoneParams;
 
 namespace Content.Server.SS220.Zones.Systems;
 
@@ -52,7 +53,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         string? name = null,
         Color? color = null,
         bool attachToGrid = false,
-        bool cropToParentSize = false)
+        CutSpaceOptions cutSpaceOption = CutSpaceOptions.None)
     {
         EntityUid? container = null;
         var vectors = boxCoordinates.Select(e =>
@@ -68,11 +69,10 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             var v2 = new Vector2(p2.X, p2.Y);
             return (v1, v2);
         });
-
         if (container == null)
             return null;
 
-        return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cropToParentSize);
+        return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cutSpaceOption);
     }
 
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>
@@ -82,7 +82,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         string? name = null,
         Color? color = null,
         bool attachToGrid = false,
-        bool cropToParentSize = false)
+        CutSpaceOptions cutSpaceOption = CutSpaceOptions.None)
     {
         EntityUid? container = null;
         var vectors = boxCoordinates.Select(e =>
@@ -105,7 +105,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (container == null)
             return null;
 
-        return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cropToParentSize);
+        return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cutSpaceOption);
     }
 
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>
@@ -116,38 +116,39 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         string? name = null,
         Color? color = null,
         bool attachToGrid = false,
-        bool cropToParentSize = false)
+        CutSpaceOptions cutSpaceOption = CutSpaceOptions.None)
     {
-        var boxes = points.Select(p => Box2.FromTwoPoints(p.Item1, p.Item2));
-        return CreateZone(container, boxes, protoId, name, color, attachToGrid, cropToParentSize);
+        var size = points.Select(p => Box2.FromTwoPoints(p.Item1, p.Item2));
+        return CreateZone(container, size, protoId, name, color, attachToGrid, cutSpaceOption);
     }
 
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>
     public Entity<ZoneComponent>? CreateZone(
         NetEntity container,
-        IEnumerable<Box2> boxes,
+        IEnumerable<Box2> originalSize,
         string? protoId = null,
         string? name = null,
         Color? color = null,
         bool attachToGrid = false,
-        bool cropToParentSize = false)
+        CutSpaceOptions cutSpaceOption = CutSpaceOptions.None)
     {
-        return CreateZone(new ZoneParams()
+        var @params = new ZoneParams()
         {
             Container = container,
-            Boxes = boxes.ToList(),
             ProtoId = protoId ?? string.Empty,
             Name = name ?? string.Empty,
             Color = color ?? DefaultColor,
             AttachToGrid = attachToGrid,
-            CutSpace = cropToParentSize
-        });
+            CutSpaceOption = cutSpaceOption
+        };
+        @params.SetOriginalSize(originalSize);
+        return CreateZone(@params);
     }
 
     /// Creates new zone
     public Entity<ZoneComponent>? CreateZone(ZoneParams @params)
     {
-        if (@params.Boxes.Count <= 0 || !@params.Container.IsValid())
+        if (@params.OriginalSize.Count <= 0 || !@params.Container.IsValid())
             return null;
 
         var container = GetEntity(@params.Container);
@@ -167,7 +168,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         _transform.AttachToGridOrMap(zone);
 
         var zoneComp = EnsureComp<ZoneComponent>(zone);
-        zoneComp.ZoneParams.HandleState(@params);
+        zoneComp.ZoneParams = @params;
         Dirty(zone, zoneComp);
 
         var zoneContainer = EnsureComp<ZonesContainerComponent>(container);
@@ -182,15 +183,15 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (!newParams.Container.IsValid())
             return;
 
-        if (zone.Comp.ZoneParams?.Container != newParams.Container ||
-            zone.Comp.ZoneParams?.ProtoId != newParams.ProtoId)
+        if (zone.Comp.ZoneParams.Container != newParams.Container ||
+            zone.Comp.ZoneParams.ProtoId != newParams.ProtoId)
         {
             DeleteZone((zone, zone));
             CreateZone(newParams);
             return;
         }
 
-        zone.Comp.ZoneParams.HandleState(newParams);
+        zone.Comp.ZoneParams = newParams;
         Dirty(zone);
     }
 

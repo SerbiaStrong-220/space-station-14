@@ -1,2 +1,2 @@
 palette.png, palette.svg: Public Domain, taken from www.svgrepo.com
-stripes.png: Public Domain, generated with https://toolcool.org/svg-stripes-maker-react/
+stripes.png: CC-BY-SA-3.0, made by Kirus59 for SS220

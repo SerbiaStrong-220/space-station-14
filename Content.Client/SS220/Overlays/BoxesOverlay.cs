@@ -50,14 +50,14 @@ public sealed class BoxesOverlay : Overlay
         foreach (var provider in _providers.Values)
         {
             foreach (var data in provider.GetBoxesDatas())
-                DrawBoxes(args, data);
+                DrawBox(args, data);
         }
 
         drawHandle.SetTransform(Matrix3x2.Identity);
         drawHandle.UseShader(_shader);
     }
 
-    private void DrawBoxes(in OverlayDrawArgs args, BoxesOverlayData data)
+    private void DrawBox(in OverlayDrawArgs args, BoxOverlayData data)
     {
         var xform = _entManager.GetComponent<TransformComponent>(data.Parent);
         if (xform.MapID != args.MapId)
@@ -69,8 +69,8 @@ public sealed class BoxesOverlay : Overlay
         var drawHandle = args.WorldHandle;
         drawHandle.SetTransform(worldMatrix);
 
-        foreach (var box in data.Boxes)
-            drawHandle.DrawTextureRect(_defaultTexture, box, data.Color);
+        var texture = data.Texture ?? _defaultTexture;
+        drawHandle.DrawTextureRect(texture, data.Box, data.Color);
     }
 
     public bool AddProvider(BoxesOverlayProvider provider)
@@ -125,18 +125,18 @@ public sealed class BoxesOverlay : Overlay
             IoCManager.InjectDependencies(this);
         }
 
-        public abstract List<BoxesOverlayData> GetBoxesDatas();
+        public abstract List<BoxOverlayData> GetBoxesDatas();
     }
 
     [Virtual]
-    public class BoxesOverlayData(EntityUid parent)
+    public class BoxOverlayData(EntityUid parent, Box2? box = null, Color? color = null, Texture? texture = null)
     {
         public EntityUid Parent = parent;
 
-        public List<Box2> Boxes = new();
+        public Box2 Box = box ?? new();
 
-        public Color Color = Color.White;
+        public Color Color = color ?? Color.White;
 
-        public Texture? Texture;
+        public Texture? Texture = texture;
     }
 }
