@@ -91,4 +91,24 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
             _transform.DropNextTo(item, target);
         }
     }
+
+    public bool TryRemoveStuckItems(EntityUid target)
+    {
+        if (!_inventory.TryGetSlots(target, out var _))
+            return false;
+
+        bool isRemoved = false;
+
+        foreach (var item in _inventory.GetHandOrInventoryEntities(target))
+        {
+            if (!TryComp<StuckOnEquipComponent>(item, out var stuckOnEquipComp))
+                continue;
+
+            UnstuckItem((item, stuckOnEquipComp));
+            _transform.DropNextTo(item, target);
+            isRemoved = true;
+        }
+
+        return isRemoved;
+    }
 }

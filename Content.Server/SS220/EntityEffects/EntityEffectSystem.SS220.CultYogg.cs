@@ -42,7 +42,6 @@ public sealed partial class EntityEffectSystem : EntitySystem
     {
         if (TryComp<CultYoggComponent>(args.Args.TargetEntity, out var comp))
             _cultYogg.NullifyShroomEffect(args.Args.TargetEntity, comp);
-
     }
 
     private void OnExecuteChemRemoveHallucination(ref ExecuteEntityEffectEvent<ChemRemoveHallucinationsEffect> args)

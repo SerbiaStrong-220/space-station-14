@@ -276,9 +276,8 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         comp.ConsumedAscensionReagent = 0;
 
-        _stuckOnEquip.RemoveAllStuckItems(ent);
-
-        _popup.PopupEntity(Loc.GetString("cult-yogg-dropped-items"), ent, ent);
+        if (_stuckOnEquip.TryRemoveStuckItems(ent))//Idk how to deal with popup spamming
+            _popup.PopupEntity(Loc.GetString("cult-yogg-dropped-items"), ent, ent);//and now i dont see any :(
     }
 
     private bool AcsendingCultistCheck()//if anybody else is acsending

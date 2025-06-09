@@ -663,14 +663,8 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 ///     Raised when we need announce smth to all cultists and we dont have their channel
 /// </summary>
 [ByRefEvent, Serializable]
-public sealed class CultYoggAnouncementEvent : EntityEventArgs
+public sealed class CultYoggAnouncementEvent(EntityUid entity, string message) : EntityEventArgs
 {
-    public readonly EntityUid Entity;
-    public readonly string Message;
-
-    public CultYoggAnouncementEvent(EntityUid entity, string message)
-    {
-        Entity = entity;
-        Message = message;
-    }
+    public readonly EntityUid Entity = entity;
+    public readonly string Message = message;
 }
