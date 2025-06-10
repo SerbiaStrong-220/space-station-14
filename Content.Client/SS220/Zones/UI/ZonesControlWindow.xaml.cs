@@ -194,22 +194,24 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
         void UpdateVisible()
         {
-            var wasVisible = OptionsPanel.Visible;
+            var visible = OptionsPanel.Visible;
             switch (option)
             {
-                case ZoneOptions.None:
-                    if (wasVisible)
-                        MinHeight = _baseMinSize.Y;
-                    break;
-
                 case ZoneOptions.Creating:
                 case ZoneOptions.Editing:
-                    if (!wasVisible)
-                        MinHeight = Math.Max(MinHeight, 500);
+                    if (!visible)
+                        MinHeight += ZoneParams.MinHeight;
+
+                    OptionsPanel.Visible = true;
+                    break;
+
+                default:
+                    if (visible)
+                        MinHeight = _baseMinSize.Y;
+
+                    OptionsPanel.Visible = false;
                     break;
             }
-
-            OptionsPanel.Visible = option != ZoneOptions.None;
         }
 
         void AddAditionalButtons(BoxContainer box)

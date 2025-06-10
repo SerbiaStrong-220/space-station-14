@@ -2,7 +2,7 @@
                 xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
                 HorizontalExpand="True"
                 VerticalExpand="True"
-                MinSize="400 250">
+                MinSize="500 250">
     <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
         <BoxContainer Name="MainBox" Orientation="Vertical" Margin="5" HorizontalExpand="True" VerticalExpand="True" Access="Public">
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
@@ -25,41 +25,36 @@
                     <Label Text="{Loc zone-state-box-container-net-id-label}"/>
                     <LineEdit Name="ContainerNetIDLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
                 </BoxContainer>
-                <CheckBox Name="AttachToGridCheckbox" Text="{Loc zone-state-box-attach-to-grid-check-box}" LeftAlign="False" />
+                <CheckBox Name="AttachToGridCheckbox" Text="{Loc zone-state-box-attach-to-grid-check-box}" LeftAlign="False" Margin ="5 2" />
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
                     <Label Text="{Loc zone-state-box-cut-space-option-label}" HorizontalExpand="True"/>
                     <OptionButton Name="CutSpaceOptionSelector" Margin="10 0 0 0"/>
                 </BoxContainer>
             </BoxContainer>
         </BoxContainer>
-        <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin ="5 2">
-            <Collapsible Name="SizeOptionsCollapsible" BodyVisible="True" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-                <CollapsibleHeading Title="{Loc zone-state-box-size-options-heading}" HorizontalExpand="True"/>
-                <CollapsibleBody HorizontalExpand="True" VerticalExpand="True">
-                    <PanelContainer Name="SizeOptionsBackground" HorizontalExpand="True" VerticalExpand="True">
-                        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-                            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-                                <Label Text="x1" HorizontalExpand="True" Align="Center" Margin="2"/>
-                                <cc:VSeparator Margin="2 0"/>
-                                <Label Text="y1" HorizontalExpand="True" Align="Center" Margin="2"/>
-                                <cc:VSeparator Margin="2 0"/>
-                                <Label Text="x2" HorizontalExpand="True" Align="Center" Margin="2"/>
-                                <cc:VSeparator Margin="2 0"/>
-                                <Label Text="y2" HorizontalExpand="True" Align="Center" Margin="2"/>
-                            </BoxContainer>
-                            <cc:HSeparator />
-                            <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="2">
-                                <BoxContainer Name="Box2ListContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True"/>
-                            </ScrollContainer>
-                            <BoxContainer Orientation="Horizontal" HorizontalExpand="True"  Margin="0 2 0 0">
-                                <Button Name="AddBoxButton" Text="{Loc zone-state-box-add-box-button}" Access="Public" ToggleMode="True" HorizontalExpand="True"/>
-                                <Button Name="CutBoxButton" Text="{Loc zone-state-box-cut-box-button}" Access="Public" ToggleMode="True" HorizontalExpand="True"/>
-                            </BoxContainer>
-                            <Button Name="ShowChangesButton" Text="{Loc zone-state-box-show-changes-button}" Access="Public" ToggleMode="True" Margin="0 2 0 2" HorizontalExpand="True"/>
-                        </BoxContainer>
-                    </PanelContainer>
-                </CollapsibleBody>
-            </Collapsible>
+        <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin ="5 5" MinSize="250 250">
+            <PanelContainer Name="SizeOptionsBackground" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                        <Label Text="x1" HorizontalExpand="True" Align="Center" Margin="2"/>
+                        <cc:VSeparator Margin="2 0"/>
+                        <Label Text="y1" HorizontalExpand="True" Align="Center" Margin="2"/>
+                        <cc:VSeparator Margin="2 0"/>
+                        <Label Text="x2" HorizontalExpand="True" Align="Center" Margin="2"/>
+                        <cc:VSeparator Margin="2 0"/>
+                        <Label Text="y2" HorizontalExpand="True" Align="Center" Margin="2"/>
+                    </BoxContainer>
+                    <cc:HSeparator />
+                    <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="2">
+                        <BoxContainer Name="Box2ListContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True"/>
+                    </ScrollContainer>
+                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True"  Margin="0 2 0 0">
+                        <Button Name="AddBoxButton" Text="{Loc zone-state-box-add-box-button}" Access="Public" ToggleMode="True" HorizontalExpand="True"/>
+                        <Button Name="CutBoxButton" Text="{Loc zone-state-box-cut-box-button}" Access="Public" ToggleMode="True" HorizontalExpand="True"/>
+                    </BoxContainer>
+                    <Button Name="ShowChangesButton" Text="{Loc zone-state-box-show-changes-button}" Access="Public" ToggleMode="True" Margin="0 2 0 2" HorizontalExpand="True"/>
+                </BoxContainer>
+            </PanelContainer>
         </BoxContainer>
     </BoxContainer>
 </PanelContainer>
