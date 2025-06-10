@@ -40,8 +40,7 @@ public sealed class TrapSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<TrapComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeSetTrap);
-        SubscribeLocalEvent<TrapComponent, TrapDefuseDoAfterEvent>(OnDefuseDoAfter);
-        SubscribeLocalEvent<TrapComponent, TrapSetDoAfterEvent>(OnSetDoAfter);
+        SubscribeLocalEvent<TrapComponent, TrapInteractionDoAfterEvent>(OnTrapInteractionDoAfter);
         SubscribeLocalEvent<TrapComponent, StartCollideEvent>(OnStepTriggerAttempt);
         SubscribeLocalEvent<TrapComponent, SharedTriggerEvent>(OnTrigger);
     }
@@ -54,79 +53,127 @@ public sealed class TrapSystem : EntitySystem
         if (_openable.IsClosed(args.Target))
             return;
 
+        var doAfterEv = new TrapInteractionDoAfterEvent();
         var verb = new AlternativeVerb();
-        var localUser = args.User;
-        if (ent.Comp.IsArmed)
+        var user = args.User;
+
+        if (ent.Comp.State == TrapArmedState.Armed)
         {
-            var defuseDoAfter = new DoAfterArgs(
-                EntityManager,
-                args.User,
-                ent.Comp.DefuseTrapDelay,
-                new TrapDefuseDoAfterEvent(),
-                ent.Owner,
-                target: ent.Owner,
-                used: args.User)
-            {
-                BreakOnMove = true,
-                AttemptFrequency = AttemptFrequency.StartAndEnd,
-            };
+            if (!CanDefuseTrap(ent, user))
+                return;
 
             verb.Text = Loc.GetString("trap-component-defuse-trap");
-            verb.Act = () => _doAfter.TryStartDoAfter(defuseDoAfter);
+            doAfterEv.ArmAction = false;
         }
         else
         {
-            var setDoAfter = new DoAfterArgs(
-                EntityManager,
-                args.User,
-                ent.Comp.SetTrapDelay,
-                new TrapSetDoAfterEvent(),
-                ent.Owner,
-                target: ent.Owner,
-                used: args.User)
-            {
-                BreakOnMove = true,
-                AttemptFrequency = AttemptFrequency.StartAndEnd,
-            };
+            if (!CanArmTrap(ent, user))
+                return;
 
             verb.Text = Loc.GetString("trap-component-set-trap");
-            verb.Act = () =>
-            {
-                if (CanArmTrap(ent.Owner, localUser))
-                    _doAfter.TryStartDoAfter(setDoAfter);
-            };
+            doAfterEv.ArmAction = true;
         }
+
+        var doAfter = new DoAfterArgs(
+            EntityManager,
+            args.User,
+            ent.Comp.State == TrapArmedState.Armed ? ent.Comp.DefuseTrapDelay : ent.Comp.SetTrapDelay,
+            doAfterEv,
+            ent.Owner,
+            target: ent.Owner,
+            used: args.User)
+        {
+            BreakOnMove = true,
+            AttemptFrequency = AttemptFrequency.StartAndEnd,
+        };
+
+        verb.Act = () => _doAfter.TryStartDoAfter(doAfter);
         args.Verbs.Add(verb);
     }
 
-    private void OnSetDoAfter(Entity<TrapComponent> ent, ref TrapSetDoAfterEvent args)
-    {
-        if (args.Cancelled || !CanArmTrap(ent.Owner, args.User))
-            return;
-
-        StartTrapToggle(ent, args.User);
-    }
-
-    private void OnDefuseDoAfter(Entity<TrapComponent> ent, ref TrapDefuseDoAfterEvent args)
+    private void OnTrapInteractionDoAfter(Entity<TrapComponent> ent, ref TrapInteractionDoAfterEvent args)
     {
         if (args.Cancelled)
             return;
 
-        StartTrapToggle(ent, args.User);
+        if (args.ArmAction)
+            ArmTrap(ent, args.User);
+        else
+            DefuseTrap(ent, args.User);
+    }
+
+    public void ArmTrap(Entity<TrapComponent> ent, EntityUid? user, bool withSound = true)
+    {
+        if (!CanArmTrap(ent, user))
+            return;
+
+        ToggleTrap(ent, user, withSound);
+        _transformSystem.AnchorEntity(ent.Owner);
+
+        var ev = new TrapArmedEvent();
+        RaiseLocalEvent(ent, ev);
+    }
+
+    public void DefuseTrap(Entity<TrapComponent> ent, EntityUid? user, bool withSound = true)
+    {
+        if (!CanDefuseTrap(ent, user))
+            return;
+
+        ToggleTrap(ent, user, withSound);
+        _transformSystem.Unanchor(ent.Owner);
+
+        var ev = new TrapDefusedEvent();
+        RaiseLocalEvent(ent, ev);
+    }
+
+    private void ToggleTrap(Entity<TrapComponent> ent, EntityUid? user, bool withSound = true)
+    {
+        var xform = Transform(ent.Owner).Coordinates;
+        if (user != null && withSound)
+            _audio.PlayPredicted(ent.Comp.State == TrapArmedState.Unarmed ? ent.Comp.SetTrapSound : ent.Comp.DefuseTrapSound, xform, user);
+
+        ent.Comp.State = ent.Comp.State == TrapArmedState.Unarmed ? TrapArmedState.Armed : TrapArmedState.Unarmed;
+        Dirty(ent);
+        UpdateVisuals(ent.Owner, ent.Comp);
+    }
+
+    public bool CanArmTrap(Entity<TrapComponent> ent, EntityUid? user)
+    {
+        // Providing a stuck traps on one tile
+        var coordinates = Transform(ent.Owner).Coordinates;
+        if (_anchorableSystem.AnyUnstackable(ent.Owner, coordinates) || _transformSystem.GetGrid(coordinates) == null)
+        {
+            if (user != null)
+                _popup.PopupClient(Loc.GetString("trap-component-no-room"), user.Value, user.Value);
+            return false;
+        }
+
+        var ev = new TrapArmAttemptEvent(user);
+        RaiseLocalEvent(ent, ev);
+
+        return !ev.Cancelled;
+    }
+
+    public bool CanDefuseTrap(Entity<TrapComponent> ent, EntityUid? user)
+    {
+        var ev = new TrapDefuseAttemptEvent(user);
+        RaiseLocalEvent(ent, ev);
+
+        return !ev.Cancelled;
     }
 
     private void OnStepTriggerAttempt(Entity<TrapComponent> ent, ref StartCollideEvent args)
     {
-        if(!ent.Comp.IsArmed)
+        if (ent.Comp.State == TrapArmedState.Unarmed)
             return;
 
         if (_entityWhitelist.IsBlacklistPass(ent.Comp.Blacklist, args.OtherEntity))
             return;
 
-        ToggleTrap(ent.Owner, ent.Comp);
+        DefuseTrap(ent, args.OtherEntity, false);
         _trigger.TriggerTarget(ent.Owner, args.OtherEntity);
 
-        if(_net.IsServer)
+        if (_net.IsServer)
             _audio.PlayPvs(ent.Comp.HitTrapSound, ent.Owner);
     }
 
@@ -147,46 +194,13 @@ public sealed class TrapSystem : EntitySystem
         _ensnareableSystem.TryEnsnare(args.Activator.Value, ent.Owner, ensnaring);
     }
 
-    private void UpdateVisuals(EntityUid uid,TrapComponent? trapComp = null, AppearanceComponent? appearance = null)
+    private void UpdateVisuals(EntityUid uid, TrapComponent? trapComp = null, AppearanceComponent? appearance = null)
     {
         if (!Resolve(uid, ref trapComp, ref appearance, false))
             return;
 
         _appearance.SetData(uid, TrapVisuals.Visual,
-            trapComp.IsArmed ? TrapVisuals.Armed : TrapVisuals.Unarmed, appearance);
-    }
-
-    private void StartTrapToggle(Entity<TrapComponent> ent, EntityUid user)
-    {
-        var xform = Transform(ent.Owner).Coordinates;
-        _audio.PlayPredicted(ent.Comp.IsArmed ? ent.Comp.SetTrapSound : ent.Comp.DefuseTrapSound, xform, user);
-        ToggleTrap(ent.Owner, ent.Comp);
-    }
-
-    private void ToggleTrap(EntityUid uid, TrapComponent comp)
-    {
-        comp.IsArmed = !comp.IsArmed;
-        Dirty(uid,comp);
-        UpdateVisuals(uid);
-
-        if (comp.IsArmed)
-            _transformSystem.AnchorEntity(uid);
-        else
-            _transformSystem.Unanchor(uid);
-
-        var ev = new TrapToggledEvent(comp.IsArmed);
-        RaiseLocalEvent(uid, ev);
-    }
-
-    private bool CanArmTrap(EntityUid trapEntity, EntityUid user)
-    {
-        //Providing a stuck traps on one tile
-        var coordinates = Transform(trapEntity).Coordinates;
-        if (_anchorableSystem.AnyUnstackable(trapEntity, coordinates) || _transformSystem.GetGrid(coordinates) == null)
-        {
-            _popup.PopupClient(Loc.GetString("trap-component-no-room"), user, user);
-            return false;
-        }
-        return true;
+            trapComp.State == TrapArmedState.Unarmed ? TrapVisuals.Unarmed : TrapVisuals.Armed, appearance);
     }
 }
+

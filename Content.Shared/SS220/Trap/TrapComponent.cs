@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
@@ -40,7 +39,7 @@ public sealed partial class TrapComponent : Component
     /// Is trap ready?
     /// </summary>
     [AutoNetworkedField, ViewVariables]
-    public bool IsArmed = false;
+    public TrapArmedState State = TrapArmedState.Unarmed;
 
     [DataField]
     public SoundSpecifier SetTrapSound = new SoundPathSpecifier("/Audio/SS220/Items/Trap/sound_trap_set.ogg");
@@ -53,15 +52,56 @@ public sealed partial class TrapComponent : Component
 }
 
 [Serializable, NetSerializable]
-public sealed partial class TrapSetDoAfterEvent : SimpleDoAfterEvent
+public enum TrapArmedState : byte
 {
-
+    Unarmed,
+    Armed
 }
 
+/// <summary>
+/// Event raised when a trap is successfully armed.
+/// </summary>
 [Serializable, NetSerializable]
-public sealed partial class TrapDefuseDoAfterEvent : SimpleDoAfterEvent
+public sealed class TrapArmedEvent : EntityEventArgs
 {
+}
 
+/// <summary>
+/// Event raised when a trap is successfully defused.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class TrapDefusedEvent : EntityEventArgs
+{
+}
+/// <summary>
+/// Event raised when attempting to defuse a trap to check if it can be defused.
+/// </summary>
+public sealed partial class TrapDefuseAttemptEvent : CancellableEntityEventArgs
+{
+    public EntityUid? User;
+    public TrapDefuseAttemptEvent(EntityUid? user)
+    {
+        User = user;
+    }
+}
+/// <summary>
+/// Event raised when attempting to arm a trap to check if it can be armed.
+/// </summary>
+public sealed partial class TrapArmAttemptEvent : CancellableEntityEventArgs
+{
+    public EntityUid? User;
+    public TrapArmAttemptEvent(EntityUid? user)
+    {
+        User = user;
+    }
+}
+/// <summary>
+/// Event DoAfter when interacting with traps.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class TrapInteractionDoAfterEvent : SimpleDoAfterEvent
+{
+    public bool ArmAction { get; set; }
 }
 public sealed class TrapToggledEvent : EntityEventArgs
 {
