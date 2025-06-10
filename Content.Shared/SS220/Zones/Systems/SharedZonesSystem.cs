@@ -12,7 +12,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using System.Text.RegularExpressions;
-using YamlDotNet.Core.Tokens;
+using static Content.Shared.SS220.Zones.Systems.ZoneParams;
 
 namespace Content.Shared.SS220.Zones.Systems;
 
@@ -99,7 +99,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         var lookup = container.Comp;
         var state = (entities, zone);
 
-        foreach (var box in zone.Comp.ZoneParams.CurrentSize)
+        foreach (var box in zone.Comp.ZoneParams.ActiveRegion)
         {
             lookup.DynamicTree.QueryAabb(ref state, ZoneQueryCallback, box, true);
             lookup.StaticTree.QueryAabb(ref state, ZoneQueryCallback, box, true);
@@ -195,35 +195,35 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// Determines whether the <paramref name="entity"/> is located inside the <paramref name="zone"/>.
     /// The check is performed at the <see cref="TransformComponent.Coordinates"/> of <paramref name="entity"/>
     /// </summary>
-    public bool InZone(Entity<ZoneComponent> zone, EntityUid entity)
+    public bool InZone(Entity<ZoneComponent> zone, EntityUid entity, RegionTypes regionType = RegionTypes.Active)
     {
-        return InZone(zone, Transform(entity).Coordinates);
+        return InZone(zone, Transform(entity).Coordinates, regionType);
     }
 
     /// <inheritdoc cref="InZone(Entity{ZoneComponent}, Vector2)"/>
-    public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point)
+    public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point, RegionTypes regionType = RegionTypes.Active)
     {
         if (GetEntity(zone.Comp.ZoneParams.Container) != _map.GetMap(point.MapId))
             return false;
 
-        return InZone(zone, point.Position);
+        return InZone(zone, point.Position, regionType);
     }
 
     /// <inheritdoc cref="InZone(Entity{ZoneComponent}, Vector2)"/>
-    public bool InZone(Entity<ZoneComponent> zone, EntityCoordinates point)
+    public bool InZone(Entity<ZoneComponent> zone, EntityCoordinates point, RegionTypes regionType = RegionTypes.Active)
     {
         if (GetEntity(zone.Comp.ZoneParams.Container) != point.EntityId)
             return false;
 
-        return InZone(zone, point.Position);
+        return InZone(zone, point.Position, regionType);
     }
 
     /// <summary>
     /// Determines whether the <paramref name="point"/> is located inside the <paramref name="zone"/>.
     /// </summary>
-    public static bool InZone(Entity<ZoneComponent> zone, Vector2 point)
+    public static bool InZone(Entity<ZoneComponent> zone, Vector2 point, RegionTypes regionType = RegionTypes.Active)
     {
-        foreach (var box in zone.Comp.ZoneParams.CurrentSize)
+        foreach (var box in zone.Comp.ZoneParams.GetRegion(regionType))
         {
             if (box.Contains(point))
                 return true;
@@ -233,30 +233,30 @@ public abstract partial class SharedZonesSystem : EntitySystem
     }
 
     /// <inheritdoc cref="GetZonesByPoint(Entity{ZonesContainerComponent}, Vector2)"/>
-    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapCoordinates point)
+    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapCoordinates point, RegionTypes regionType = RegionTypes.Active)
     {
         List<Entity<ZoneComponent>> zones = new();
         var uid = _map.GetMap(point.MapId);
         if (!TryComp<ZonesContainerComponent>(uid, out var zonesContainer))
             return zones;
 
-        return GetZonesByPoint((uid, zonesContainer), point.Position);
+        return GetZonesByPoint((uid, zonesContainer), point.Position, regionType);
     }
 
     /// <inheritdoc cref="GetZonesByPoint(Entity{ZonesContainerComponent}, Vector2)"/>
-    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(EntityCoordinates point)
+    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(EntityCoordinates point, RegionTypes regionType = RegionTypes.Active)
     {
         List<Entity<ZoneComponent>> zones = new();
         if (!TryComp<ZonesContainerComponent>(point.EntityId, out var zonesContainer))
             return zones;
 
-        return GetZonesByPoint((point.EntityId, zonesContainer), point.Position);
+        return GetZonesByPoint((point.EntityId, zonesContainer), point.Position, regionType);
     }
 
     /// <summary>
     /// Returns zones containing a <paramref name="point"/>
     /// </summary>
-    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(Entity<ZonesContainerComponent> container, Vector2 point)
+    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(Entity<ZonesContainerComponent> container, Vector2 point, RegionTypes regionType = RegionTypes.Active)
     {
         List<Entity<ZoneComponent>> zones = new();
         foreach (var zoneNet in container.Comp.Zones)
@@ -265,7 +265,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
             if (!TryComp<ZoneComponent>(zone, out var zoneComp))
                 continue;
 
-            if (InZone((zone, zoneComp), point))
+            if (InZone((zone, zoneComp), point, regionType))
                 zones.Add((zone, zoneComp));
         }
 
@@ -450,8 +450,8 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
     public static bool IsBoxesEquals(ZoneParams state1, ZoneParams state2)
     {
-        var ourBoxes = GetSortedBoxes(state1.CurrentSize);
-        var otherBoxes = GetSortedBoxes(state2.CurrentSize);
+        var ourBoxes = GetSortedBoxes(state1.ActiveRegion);
+        var otherBoxes = GetSortedBoxes(state2.ActiveRegion);
         return ourBoxes.SequenceEqual(otherBoxes);
     }
 
@@ -539,15 +539,15 @@ public sealed partial class ZoneParams()
 
     [ViewVariables(VVAccess.ReadOnly)]
     [Access(Other = AccessPermissions.Read)]
-    public List<Box2> OriginalSize = new();
+    public List<Box2> OriginalRegion = new();
 
     [ViewVariables(VVAccess.ReadOnly)]
     [Access(Other = AccessPermissions.Read)]
-    public List<Box2> CurrentSize = new();
+    public List<Box2> ActiveRegion = new();
 
     [ViewVariables(VVAccess.ReadOnly)]
     [Access(Other = AccessPermissions.Read)]
-    public List<Box2> CutOutSize = new();
+    public List<Box2> DisabledRegion = new();
 
     public ZoneParams(ZoneParams @params) : this()
     {
@@ -562,7 +562,7 @@ public sealed partial class ZoneParams()
             NetEntity.TryParse(value, out var container))
             Container = container;
 
-        if (SharedZonesSystem.TryParseTag(input, nameof(OriginalSize).ToLower(), out value))
+        if (SharedZonesSystem.TryParseTag(input, nameof(OriginalRegion).ToLower(), out value))
         {
             var boxesStrings = value.Split(";");
             var list = new List<Box2>();
@@ -571,7 +571,7 @@ public sealed partial class ZoneParams()
                 if (MathHelperExtensions.TryParseBox2(str, out var box))
                     list.Add(box.Value);
             }
-            OriginalSize = list;
+            OriginalRegion = list;
         }
 
         if (SharedZonesSystem.TryParseTag(input, nameof(Name).ToLower(), out value))
@@ -605,7 +605,7 @@ public sealed partial class ZoneParams()
 
     public override int GetHashCode()
     {
-        var sorted = SharedZonesSystem.GetSortedBoxes(CurrentSize);
+        var sorted = SharedZonesSystem.GetSortedBoxes(ActiveRegion);
         return HashCode.Combine(Container, Name, ProtoId, Color, AttachToGrid, sorted);
     }
 
@@ -642,12 +642,12 @@ public sealed partial class ZoneParams()
     {
         // Cursed because GetFields() doesn't accesible on the client side
 
-        var original = OriginalSize.Select(b => b.ToString());
+        var original = OriginalRegion.Select(b => b.ToString());
         var originalStr = string.Join("; ", original);
 
         return [
             $"{nameof(Container).ToLower()}={Container}",
-            $"{nameof(OriginalSize).ToLower()}=\"{originalStr}\"",
+            $"{nameof(OriginalRegion).ToLower()}=\"{originalStr}\"",
             $"{nameof(Name).ToLower()}=\"{Name}\"",
             $"{nameof(ProtoId).ToLower()}=\"{ProtoId}\"",
             $"{nameof(Color).ToLower()}={Color.ToHex()}",
@@ -658,17 +658,17 @@ public sealed partial class ZoneParams()
 
     public void RecalculateSize()
     {
-        var original = OriginalSize.AsEnumerable();
+        var original = OriginalRegion.AsEnumerable();
         var zoneSys = IoCManager.Resolve<IEntityManager>().System<SharedZonesSystem>();
 
         if (AttachToGrid)
             zoneSys.AttachToGrid(Container, ref original);
 
-        IEnumerable<Box2> cutOut = [];
+        IEnumerable<Box2> disabled = [];
         switch (CutSpaceOption)
         {
             case CutSpaceOptions.Dinamic:
-                cutOut = zoneSys.GetSpaceBoxes(Container, original).ToList();
+                disabled = zoneSys.GetSpaceBoxes(Container, original).ToList();
                 break;
 
             case CutSpaceOptions.Forever:
@@ -676,20 +676,20 @@ public sealed partial class ZoneParams()
                 break;
         }
 
-        SharedZonesSystem.RecalculateZoneBoxes(ref cutOut);
-        CutOutSize = cutOut.ToList();
+        SharedZonesSystem.RecalculateZoneBoxes(ref disabled);
+        DisabledRegion = disabled.ToList();
 
         SharedZonesSystem.RecalculateZoneBoxes(ref original);
-        OriginalSize = original.ToList();
+        OriginalRegion = original.ToList();
 
-        var current = MathHelperExtensions.SubstructBox(original, cutOut);
-        SharedZonesSystem.RecalculateZoneBoxes(ref current);
-        CurrentSize = current.ToList();
+        var active = MathHelperExtensions.SubstructBox(original, disabled);
+        SharedZonesSystem.RecalculateZoneBoxes(ref active);
+        ActiveRegion = active.ToList();
     }
 
     public void SetOriginalSize(IEnumerable<Box2> newSize)
     {
-        OriginalSize = newSize.ToList();
+        OriginalRegion = newSize.ToList();
         RecalculateSize();
     }
 
@@ -706,9 +706,20 @@ public sealed partial class ZoneParams()
         Color = @params.Color;
         _attachToGrid = @params.AttachToGrid;
         _cutSpaceOption = @params.CutSpaceOption;
-        OriginalSize = @params.OriginalSize;
-        CurrentSize = @params.CurrentSize;
-        CutOutSize = @params.CutOutSize;
+        OriginalRegion = @params.OriginalRegion;
+        ActiveRegion = @params.ActiveRegion;
+        DisabledRegion = @params.DisabledRegion;
+    }
+
+    public List<Box2> GetRegion(RegionTypes type)
+    {
+        return type switch
+        {
+            RegionTypes.Original => OriginalRegion,
+            RegionTypes.Active => ActiveRegion,
+            RegionTypes.Disabled => DisabledRegion,
+            _ => ActiveRegion
+        };
     }
 
     public enum CutSpaceOptions
@@ -716,5 +727,12 @@ public sealed partial class ZoneParams()
         None,
         Dinamic,
         Forever
+    }
+
+    public enum RegionTypes
+    {
+        Original,
+        Active,
+        Disabled
     }
 }

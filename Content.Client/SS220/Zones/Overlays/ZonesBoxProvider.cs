@@ -37,11 +37,11 @@ public sealed partial class ZonesBoxesOverlayProvider : BoxesOverlayProvider
                 var @params = zoneComp.ZoneParams;
                 var alpha = zone == _zones.ControlWindow.SelectedZoneEntry?.ZoneEntity.Owner ? 0.25f : 0.125F;
                 var color = @params.Color.WithAlpha(alpha);
-                foreach (var box in @params.CurrentSize)
+                foreach (var box in @params.ActiveRegion)
                     overlayData.Add(new BoxOverlayData(parent, box, color));
 
                 var cutedTexture = _cache.GetTexture("/Textures/SS220/Interface/Zones/stripes.svg.192dpi.png");
-                foreach (var box in @params.CutOutSize)
+                foreach (var box in @params.DisabledRegion)
                     foreach (var atlasedData in GetAtlases(box, cutedTexture))
                         overlayData.Add(new BoxOverlayData(parent, atlasedData.Box, color, atlasedData.Atlas));
             }

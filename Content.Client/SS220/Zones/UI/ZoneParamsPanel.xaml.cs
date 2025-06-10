@@ -192,14 +192,14 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         CutSpaceOptionSelector.SelectId((int)CurParams.CutSpaceOption);
 
         Box2ListContainer.RemoveAllChildren();
-        for (var i = 0; i < CurParams.OriginalSize.Count; i++)
+        for (var i = 0; i < CurParams.OriginalRegion.Count; i++)
         {
-            var box = CurParams.OriginalSize[i];
+            var box = CurParams.OriginalRegion[i];
             var entry = new ZoneBoxEntry(box);
             var index = i;
             entry.OnBoxChanged += newBox =>
             {
-                var newSize = CurParams.OriginalSize.ToList();
+                var newSize = CurParams.OriginalRegion.ToList();
                 newSize[index] = newBox;
                 CurParams.SetOriginalSize(newSize);
             };
@@ -280,7 +280,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             return;
         }
 
-        var newSize = CurParams.CurrentSize.ToList();
+        var newSize = CurParams.ActiveRegion.ToList();
         switch (_layoutMode)
         {
             case BoxLayoutMode.Adding:
@@ -314,28 +314,6 @@ public sealed partial class ZoneParamsPanel : PanelContainer
     {
         RemoveLayoutReact();
         _boxLayoutManager.SetOverlay(false);
-    }
-
-    private (EntityUid Parent, List<Box2> Boxes) GetAddedBoxes()
-    {
-        var parent = _entityManager.GetEntity(CurParams.Container);
-        var result = CurParams.OriginalSize.ToList();
-        if (parent == _entityManager.GetEntity(_originalParams.Container))
-            foreach (var box in _originalParams.OriginalSize)
-                result = MathHelperExtensions.SubstructBox(result, box).ToList();
-
-        return (parent, result);
-    }
-
-    private (EntityUid Parent, List<Box2> Boxes) GetDeletedBoxes()
-    {
-        var parent = _entityManager.GetEntity(_originalParams.Container);
-        var result = _originalParams.OriginalSize.ToList();
-        if (parent == _entityManager.GetEntity(CurParams.Container))
-            foreach (var box in CurParams.OriginalSize)
-                result = MathHelperExtensions.SubstructBox(result, box).ToList();
-
-        return (parent, result);
     }
 
     public ZoneParams GetParams()
@@ -375,8 +353,8 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         public void Refresh()
         {
-            _addedBoxes = _panel.GetAddedBoxes();
-            _deletedBoxes = _panel.GetDeletedBoxes();
+            _addedBoxes = GetAddedBoxes();
+            _deletedBoxes = GetDeletedBoxes();
         }
 
         public override List<BoxesOverlay.BoxOverlayData> GetBoxesDatas()
@@ -396,6 +374,28 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             }
 
             return result;
+        }
+
+        private (EntityUid Parent, List<Box2> Boxes) GetAddedBoxes()
+        {
+            var parent = _entityManager.GetEntity(_panel.CurParams.Container);
+            var result = _panel.CurParams.OriginalRegion.ToList();
+            if (parent == _entityManager.GetEntity(_panel.OriginalParams.Container))
+                foreach (var box in _panel.OriginalParams.OriginalRegion)
+                    result = MathHelperExtensions.SubstructBox(result, box).ToList();
+
+            return (parent, result);
+        }
+
+        private (EntityUid Parent, List<Box2> Boxes) GetDeletedBoxes()
+        {
+            var parent = _entityManager.GetEntity(_panel.OriginalParams.Container);
+            var result = _panel.OriginalParams.OriginalRegion.ToList();
+            if (parent == _entityManager.GetEntity(_panel.CurParams.Container))
+                foreach (var box in _panel.CurParams.OriginalRegion)
+                    result = MathHelperExtensions.SubstructBox(result, box).ToList();
+
+            return (parent, result);
         }
     }
 }

@@ -4,7 +4,6 @@ using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using System.Linq;
 using System.Numerics;
 using static Content.Shared.SS220.Zones.Systems.ZoneParams;
@@ -55,7 +54,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             return;
 
         var coords = _map.GridTileToLocal(args.Entity, args.Entity, args.NewTile.GridIndices);
-        var zones = GetZonesByPoint(coords);
+        var zones = GetZonesByPoint(coords, RegionTypes.Original);
         foreach (var zone in zones)
             RecalculateZoneBoxes(zone);
     }
@@ -162,7 +161,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     /// Creates new zone
     public Entity<ZoneComponent>? CreateZone(ZoneParams @params)
     {
-        if (@params.OriginalSize.Count <= 0 || !@params.Container.IsValid())
+        if (@params.OriginalRegion.Count <= 0 || !@params.Container.IsValid())
             return null;
 
         var container = GetEntity(@params.Container);
