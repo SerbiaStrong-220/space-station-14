@@ -25,10 +25,10 @@
             - ItemMask
     - type: Ensnaring
       freeTime: 2.0
-      breakoutTime: 3.5 
-      walkSpeed: 0.4 
-      sprintSpeed: 0.4 
-      staminaDamage: 0 
+      breakoutTime: 3.5
+      walkSpeed: 0.4
+      sprintSpeed: 0.4
+      staminaDamage: 0
       canThrowTrigger: false
       canMoveBreakout: true
       maxEnsnares: 10
@@ -68,3 +68,4 @@
       setTrapSound: /Audio/SS220/Items/Trap/sound_trap_set.ogg
       defuseTrapSound: /Audio/SS220/Items/Trap/sound_trap_defuse.ogg
       hitTrapSound: /Audio/SS220/Items/Trap/sound_trap_hit.ogg
+      
