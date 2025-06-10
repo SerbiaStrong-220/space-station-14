@@ -485,16 +485,17 @@ public sealed partial class LeavedZoneEvent(Entity<ZoneComponent> zone, EntityUi
 }
 
 [Serializable, NetSerializable]
-public partial struct ZoneParams()
+[DataDefinition]
+public sealed partial class ZoneParams()
 {
     /// <summary>
     /// The entity that this zone is assigned to.
     /// Used to determine local coordinates
     /// </summary>
-    [ViewVariables]
+    [ViewVariables(VVAccess.ReadOnly)]
     public NetEntity Container
     {
-        readonly get => _container;
+        get => _container;
         set => TryChangeContainer(value);
     }
 
@@ -503,7 +504,7 @@ public partial struct ZoneParams()
     [ViewVariables]
     public string Name = string.Empty;
 
-    [ViewVariables]
+    [ViewVariables(VVAccess.ReadOnly)]
     public string ProtoId = SharedZonesSystem.BaseZoneId;
 
     /// <summary>
@@ -513,29 +514,45 @@ public partial struct ZoneParams()
     public Color Color = SharedZonesSystem.DefaultColor;
 
     [ViewVariables]
-    public bool AttachToGrid = false;
+    public bool AttachToGrid
+    {
+        get => _attachToGrid;
+        set
+        {
+            _attachToGrid = value;
+            RecalculateSize();
+        }
+    }
+    private bool _attachToGrid = false;
 
     [ViewVariables]
-    public CutSpaceOptions CutSpaceOption = CutSpaceOptions.None;
+    public CutSpaceOptions CutSpaceOption
+    {
+        get => _cutSpaceOption;
+        set
+        {
+            _cutSpaceOption = value;
+            RecalculateSize();
+        }
+    }
+    private CutSpaceOptions _cutSpaceOption = CutSpaceOptions.None;
 
-    [ViewVariables]
+    [ViewVariables(VVAccess.ReadOnly)]
     [Access(Other = AccessPermissions.Read)]
     public List<Box2> OriginalSize = new();
 
-    [ViewVariables]
+    [ViewVariables(VVAccess.ReadOnly)]
     [Access(Other = AccessPermissions.Read)]
     public List<Box2> CurrentSize = new();
 
-    [ViewVariables]
+    [ViewVariables(VVAccess.ReadOnly)]
     [Access(Other = AccessPermissions.Read)]
     public List<Box2> CutOutSize = new();
 
-    public void ChangeState(ActionRefZoneParams action)
+    public ZoneParams(ZoneParams @params) : this()
     {
-        action.Invoke(ref this);
+        CopyFrom(@params);
     }
-
-    public delegate void ActionRefZoneParams(ref ZoneParams param);
 
     public void ParseTags(string input)
     {
@@ -586,13 +603,13 @@ public partial struct ZoneParams()
         return !left.Equals(right);
     }
 
-    public override readonly int GetHashCode()
+    public override int GetHashCode()
     {
         var sorted = SharedZonesSystem.GetSortedBoxes(CurrentSize);
         return HashCode.Combine(Container, Name, ProtoId, Color, AttachToGrid, sorted);
     }
 
-    public override readonly bool Equals([NotNullWhen(true)] object? obj)
+    public override bool Equals([NotNullWhen(true)] object? obj)
     {
         if (obj is not ZoneParams state)
             return false;
@@ -600,7 +617,7 @@ public partial struct ZoneParams()
         return Equals(state);
     }
 
-    public readonly bool Equals(ZoneParams other)
+    public bool Equals(ZoneParams other)
     {
         var isFieldsEquals = Container == other.Container &&
             Name == other.Name &&
@@ -621,7 +638,7 @@ public partial struct ZoneParams()
         return true;
     }
 
-    public readonly string[] GetTags()
+    public string[] GetTags()
     {
         // Cursed because GetFields() doesn't accesible on the client side
 
@@ -674,6 +691,24 @@ public partial struct ZoneParams()
     {
         OriginalSize = newSize.ToList();
         RecalculateSize();
+    }
+
+    public ZoneParams GetCopy()
+    {
+        return new ZoneParams(this);
+    }
+
+    public void CopyFrom(ZoneParams @params)
+    {
+        _container = @params.Container;
+        Name = @params.Name;
+        ProtoId = @params.ProtoId;
+        Color = @params.Color;
+        _attachToGrid = @params.AttachToGrid;
+        _cutSpaceOption = @params.CutSpaceOption;
+        OriginalSize = @params.OriginalSize;
+        CurrentSize = @params.CurrentSize;
+        CutOutSize = @params.CutOutSize;
     }
 
     public enum CutSpaceOptions

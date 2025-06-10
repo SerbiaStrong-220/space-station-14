@@ -4,6 +4,7 @@ using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using System.Linq;
 using System.Numerics;
 using static Content.Shared.SS220.Zones.Systems.ZoneParams;
@@ -23,6 +24,8 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         SubscribeLocalEvent<ZonesContainerComponent, ComponentShutdown>(OnZonesContainerShutdown);
 
         SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnZoneShutdown);
+
+        SubscribeLocalEvent<TileChangedEvent>(OnTileChanged);
     }
 
     public override void Update(float frameTime)
@@ -44,6 +47,17 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     private void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
     {
         DeleteZone(entity.Owner);
+    }
+
+    private void OnTileChanged(ref TileChangedEvent args)
+    {
+        if (!args.OldTile.IsEmpty && !args.NewTile.Tile.IsEmpty)
+            return;
+
+        var coords = _map.GridTileToLocal(args.Entity, args.Entity, args.NewTile.GridIndices);
+        var zones = GetZonesByPoint(coords);
+        foreach (var zone in zones)
+            RecalculateZoneBoxes(zone);
     }
 
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>

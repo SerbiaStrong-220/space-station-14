@@ -13,7 +13,6 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Shared.Input;
 using System.Linq;
 using System.Numerics;
 using static Content.Shared.SS220.Zones.Systems.ZoneParams;
@@ -52,10 +51,10 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         }
     }
 
-    private ZoneParams _curParams;
+    private ZoneParams _curParams = default!;
 
     public ZoneParams OriginalParams => _originalParams;
-    private ZoneParams _originalParams;
+    private ZoneParams _originalParams = default!;
 
     private BoxLayoutMode _layoutMode = BoxLayoutMode.Adding;
 
@@ -100,16 +99,27 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         ShowChangesButton.OnToggled += e => SetOverlay(e.Pressed);
 
         NameLineEdit.OnFocusExit += _ => Refresh();
-        NameLineEdit.OnTextEntered += args => ChangeCurrentParams((ref ZoneParams p) => p.Name = args.Text);
+        NameLineEdit.OnTextEntered += args =>
+        {
+            CurParams.Name = args.Text;
+            Refresh();
+        };
 
         PrototypeIDLineEdit.OnFocusExit += _ => Refresh();
-        PrototypeIDLineEdit.OnTextEntered += args => ChangeCurrentParams((ref ZoneParams p) => p.ProtoId = args.Text);
+        PrototypeIDLineEdit.OnTextEntered += args =>
+        {
+            CurParams.ProtoId = args.Text;
+            Refresh();
+        };
 
         HexColorLineEdit.OnFocusExit += _ => Refresh();
         HexColorLineEdit.OnTextEntered += args =>
         {
             if (Color.TryParse(args.Text, out var color))
-                ChangeCurrentParams((ref ZoneParams p) => p.Color = color);
+            {
+                CurParams.Color = color;
+                Refresh();
+            };
         };
 
         ContainerNetIDLineEdit.OnFocusExit += _ => Refresh();
@@ -117,14 +127,17 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         {
             if (NetEntity.TryParse(args.Text, out var netEnt) &&
                 _zones.IsValidContainer(_entityManager.GetEntity(netEnt)))
-                ChangeCurrentParams((ref ZoneParams p) => p.Container = netEnt);
+            {
+                CurParams.Container = netEnt;
+                Refresh();
+            }
         };
 
-        AttachToGridCheckbox.OnPressed += _ => ChangeCurrentParams((ref ZoneParams s) =>
+        AttachToGridCheckbox.OnPressed += _ =>
         {
-            s.AttachToGrid = AttachToGridCheckbox.Pressed;
-            s.RecalculateSize();
-        });
+            CurParams.AttachToGrid = AttachToGridCheckbox.Pressed;
+            Refresh();
+        };
 
         ColorSelectorButton.AddStyleClass(StyleNano.StyleClassChatFilterOptionButton);
         ColorSelectorButton.OnPressed += _ =>
@@ -136,17 +149,25 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             _selectorPopup.Open(box);
         };
 
-        _selectorPopup.OnColorSelected += color => ChangeCurrentParams((ref ZoneParams s) => s.Color = color);
-        _selectorPopup.OnVisibilityChanged += args => ColorSelectorButton.Pressed = args.Visible;
+        _selectorPopup.OnColorSelected += color =>
+        {
+            CurParams.Color = color;
+            Refresh();
+        };
+        _selectorPopup.OnVisibilityChanged += args =>
+        {
+            ColorSelectorButton.Pressed = args.Visible;
+            Refresh();
+        };
 
         foreach (var value in Enum.GetValues<CutSpaceOptions>())
             CutSpaceOptionSelector.AddItem(Loc.GetString($"zone-cut-space-option-{value}"), (int)value);
 
-        CutSpaceOptionSelector.OnItemSelected += args => ChangeCurrentParams((ref ZoneParams s) =>
+        CutSpaceOptionSelector.OnItemSelected += args =>
         {
-            s.CutSpaceOption = (CutSpaceOptions)args.Id;
-            s.RecalculateSize();
-        });
+            CurParams.CutSpaceOption = (CutSpaceOptions)args.Id;
+            Refresh();
+        };
 
         SetZoneEntity(entity);
     }
@@ -157,12 +178,6 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         RemoveLayoutReact();
         SetOverlay(false);
         base.ExitedTree();
-    }
-
-    public ZoneParamsPanel(ZoneParams @params) : this(null)
-    {
-        _curParams = @params;
-        Refresh();
     }
 
     public void Refresh()
@@ -182,12 +197,12 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             var box = CurParams.OriginalSize[i];
             var entry = new ZoneBoxEntry(box);
             var index = i;
-            entry.OnBoxChanged += newBox => ChangeCurrentParams((ref ZoneParams s) =>
+            entry.OnBoxChanged += newBox =>
             {
-                var newSize = s.OriginalSize.ToList();
+                var newSize = CurParams.OriginalSize.ToList();
                 newSize[index] = newBox;
-                s.SetOriginalSize(newSize);
-            });
+                CurParams.SetOriginalSize(newSize);
+            };
             Box2ListContainer.AddChild(entry);
         }
 
@@ -201,7 +216,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         if (string.IsNullOrEmpty(_originalParams.Name))
             _originalParams.Name = $"Zone {_zones.GetZonesCount() + 1}";
 
-        CurParams = _originalParams;
+        CurParams = _originalParams.GetCopy();
     }
 
     private void StartLayout(BoxLayoutMode mode)
@@ -335,13 +350,6 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             _overlay.AddProvider(_overlayProvider);
         else
             _overlay.RemoveProvider(_overlayProvider);
-    }
-
-    private void ChangeCurrentParams(ActionRefZoneParams action)
-    {
-        var @params = CurParams;
-        action.Invoke(ref @params);
-        CurParams = @params;
     }
 
     private enum BoxLayoutMode
