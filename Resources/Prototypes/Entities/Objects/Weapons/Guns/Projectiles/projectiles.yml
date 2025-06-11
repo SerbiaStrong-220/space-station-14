@@ -1272,3 +1272,47 @@
     proto: BulletDisablerSmg
     count: 3 #bit stronger than a disabler if you hit your shots you goober, still not a 2 hit stun though
     spread: 9
+
+# #SS220 Base blaster bullet prototype
+- type: entity
+  name : Bullet bolt
+  id: BaseBlasterBullet
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Reflective
+    reflective:
+    - Energy
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: omnilaser
+      shader: unshaded
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.3,0.15,0.3"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+      fly-by: *flybyfixture
+  - type: Ammo
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlaster
+    damage:
+      types:
+        Heat: 20
+        Piercing: 6
+    soundHit:
+      collection: WeakHit
+    forceSound: true
+# #SS220 Base blaster bullet prototype

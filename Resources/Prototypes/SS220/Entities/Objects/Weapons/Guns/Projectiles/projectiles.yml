@@ -411,7 +411,7 @@
 - type: entity
   name : Blaster bolt
   id: BulletBlasterAlt
-  parent: BulletDisabler
+  parent: BaseBlasterBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -432,7 +432,7 @@
 - type: entity
   name : Blaster bolt
   id: BulletBlasterPulse
-  parent: BulletDisabler
+  parent: BaseBlasterBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite

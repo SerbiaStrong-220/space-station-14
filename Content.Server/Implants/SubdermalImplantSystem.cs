@@ -169,8 +169,15 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
             }
         }
 
-        if (TryComp<CuffableComponent>(component.ImplantedEntity, out var cuffs) && cuffs.Container.ContainedEntities.Count < 1)
-            _cuffable.Uncuff(component.ImplantedEntity.Value, cuffs.LastAddedCuffs, cuffs.LastAddedCuffs);
+        if (TryComp<CuffableComponent>(component.ImplantedEntity, out var cuffs))
+        {
+            var cuffsList = cuffs.Container.ContainedEntities.ToList();
+
+            foreach (var cuff in cuffsList)
+            {
+                _cuffable.Uncuff(component.ImplantedEntity.Value, null, cuff);
+            }
+        }
         //ss220 add freedom from bola end
 
         args.Handled = true;
