@@ -29,8 +29,8 @@ public abstract class SharedCultYoggSystem : EntitySystem
 
         SubscribeLocalEvent<CultYoggComponent, ExaminedEvent>(OnExamined);
 
-        SubscribeLocalEvent<CultYoggComponent, CultYoggCorruptItemEvent>(CorruptItemAction);
-        SubscribeLocalEvent<CultYoggComponent, CultYoggCorruptItemInHandEvent>(CorruptItemInHandAction);
+        SubscribeLocalEvent<CultYoggComponent, CultYoggCorruptItemActionEvent>(CorruptItemAction);
+        SubscribeLocalEvent<CultYoggComponent, CultYoggCorruptItemInHandActionEvent>(CorruptItemInHandAction);
 
         SubscribeLocalEvent<CultYoggComponent, ComponentRemove>(OnRemove);
     }
@@ -78,7 +78,7 @@ public abstract class SharedCultYoggSystem : EntitySystem
     #endregion
 
     #region Corruption
-    private void CorruptItemAction(Entity<CultYoggComponent> uid, ref CultYoggCorruptItemEvent args)
+    private void CorruptItemAction(Entity<CultYoggComponent> uid, ref CultYoggCorruptItemActionEvent args)
     {
         if (args.Handled)
             return;
@@ -98,7 +98,7 @@ public abstract class SharedCultYoggSystem : EntitySystem
         Spawn(uid.Comp.CorruptionEffect, Transform(args.Target).Coordinates);
     }
 
-    private void CorruptItemInHandAction(Entity<CultYoggComponent> uid, ref CultYoggCorruptItemInHandEvent args)
+    private void CorruptItemInHandAction(Entity<CultYoggComponent> uid, ref CultYoggCorruptItemInHandActionEvent args)
     {
         if (args.Handled)
             return;

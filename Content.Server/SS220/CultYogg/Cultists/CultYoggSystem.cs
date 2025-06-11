@@ -47,17 +47,17 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         base.Initialize();
 
         // actions
-        SubscribeLocalEvent<CultYoggComponent, CultYoggPukeShroomEvent>(PukeAction);
-        SubscribeLocalEvent<CultYoggComponent, CultYoggDigestEvent>(DigestAction);
-        SubscribeLocalEvent<CultYoggComponent, CultYoggAscendingEvent>(AscendingAction);
+        SubscribeLocalEvent<CultYoggComponent, CultYoggPukeShroomActionEvent>(OnPukeAction);
+        SubscribeLocalEvent<CultYoggComponent, CultYoggDigestActionEvent>(OnDigestAction);
+        SubscribeLocalEvent<CultYoggComponent, CultYoggAscendingEvent>(OnAscending);
 
         SubscribeLocalEvent<CultYoggComponent, OnSaintWaterDrinkEvent>(OnSaintWaterDrinked);
-        SubscribeLocalEvent<CultYoggComponent, CultYoggForceAscendingEvent>(ForcedAcsending);
-        SubscribeLocalEvent<CultYoggComponent, ChangeCultYoggStageEvent>(UpdateStage);
+        SubscribeLocalEvent<CultYoggComponent, CultYoggForceAscendingEvent>(OnForcedAcsending);
+        SubscribeLocalEvent<CultYoggComponent, ChangeCultYoggStageEvent>(OnUpdateStage);
     }
 
     #region StageUpdating
-    private void UpdateStage(Entity<CultYoggComponent> ent, ref ChangeCultYoggStageEvent args)
+    private void OnUpdateStage(Entity<CultYoggComponent> ent, ref ChangeCultYoggStageEvent args)
     {
         if (args.Handled)
             return;
@@ -157,7 +157,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     #endregion
 
     #region Puke
-    private void PukeAction(Entity<CultYoggComponent> ent, ref CultYoggPukeShroomEvent args)
+    private void OnPukeAction(Entity<CultYoggComponent> ent, ref CultYoggPukeShroomActionEvent args)
     {
         if (args.Handled)
             return;
@@ -171,7 +171,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         _actions.AddAction(ent, ref ent.Comp.DigestActionEntity, ent.Comp.DigestAction);
     }
 
-    private void DigestAction(Entity<CultYoggComponent> ent, ref CultYoggDigestEvent args)
+    private void OnDigestAction(Entity<CultYoggComponent> ent, ref CultYoggDigestActionEvent args)
     {
         if (!TryComp<HungerComponent>(ent, out var hungerComp))
             return;
@@ -209,7 +209,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     #endregion
 
     #region Ascending
-    private void AscendingAction(Entity<CultYoggComponent> ent, ref CultYoggAscendingEvent args)
+    private void OnAscending(Entity<CultYoggComponent> ent, ref CultYoggAscendingEvent _)
     {
         if (TerminatingOrDeleted(ent))
             return;
@@ -229,7 +229,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             _body.GibBody(ent, body: body);
     }
 
-    private void ForcedAcsending(Entity<CultYoggComponent> ent, ref CultYoggForceAscendingEvent args)
+    private void OnForcedAcsending(Entity<CultYoggComponent> ent, ref CultYoggForceAscendingEvent _)
     {
         if (TerminatingOrDeleted(ent))
             return;
@@ -251,16 +251,16 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         if (comp.ConsumedAscensionReagent < comp.AmountAscensionReagentAscend)
             return false;
 
-        StartAscension(ent, comp);
+        StartAscension(ent);
         return true;
     }
 
-    public void StartAscension(EntityUid ent, CultYoggComponent comp)
+    public void StartAscension(EntityUid ent)
     { //idk if it is canser or no, will be like that for a time
         if (HasComp<AcsendingComponent>(ent))
             return;
 
-        if (!AnyAcsendingCultists())//to prevent becaming MiGo at the same time
+        if (!NoAcsendingCultists())//to prevent becaming MiGo at the same time
         {
             _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-have-acsending"), ent, ent);
             return;
@@ -269,18 +269,18 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         EnsureComp<AcsendingComponent>(ent);
     }
 
-    public void NullifyShroomEffect(EntityUid ent, CultYoggComponent comp)//idk if it is canser or no, will be like that for a time
+    public void ResetCultist(Entity<CultYoggComponent> ent)//idk if it is canser or no, will be like that for a time
     {
         if (RemComp<AcsendingComponent>(ent))
             _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-stopped"), ent, ent);
 
-        comp.ConsumedAscensionReagent = 0;
+        ent.Comp.ConsumedAscensionReagent = 0;
 
         if (_stuckOnEquip.TryRemoveStuckItems(ent))//Idk how to deal with popup spamming
             _popup.PopupEntity(Loc.GetString("cult-yogg-dropped-items"), ent, ent);//and now i dont see any :(
     }
 
-    private bool AnyAcsendingCultists()//if anybody else is acsending
+    private bool NoAcsendingCultists()//if anybody else is acsending
     {
         var query = EntityQueryEnumerator<AcsendingComponent>();
         while (query.MoveNext(out _, out _))
