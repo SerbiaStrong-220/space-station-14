@@ -129,6 +129,17 @@ public sealed class PinpointerSystem : EntitySystem
 
             comp.Targets.Add(new TrackedItem(GetNetEntity(ent), MetaData(ent).EntityName));
         }
+
+        /*
+         var query = AllEntityQueryEnumerator<T>();
+            var comps = new EntityUid[Count<T>()];
+            var i = 0;
+
+            while (query.MoveNext(out var uid, out _))
+            {
+                comps[i++] = uid;
+            }
+         */
     }
 
     private bool IsTargetValid(PinpointerComponent comp)
