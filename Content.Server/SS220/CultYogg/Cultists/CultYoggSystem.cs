@@ -64,20 +64,20 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         args.Handled = true;
 
-        ApplyCultVisuals(ent, args.Stage);
+        if (ent.Comp.CurrentStage == args.Stage)
+            return;
+
+        ent.Comp.CurrentStage = args.Stage;//Upgating stage in component
+
+        UpdateCultVisuals(ent);
     }
 
-    public void ApplyCultVisuals(Entity<CultYoggComponent> ent, CultYoggStage stage)
+    public void UpdateCultVisuals(Entity<CultYoggComponent> ent)
     {
         if (!TryComp<HumanoidAppearanceComponent>(ent, out var huAp))
             return;
 
-        if (ent.Comp.CurrentStage == stage)
-            return;
-
-        ent.Comp.CurrentStage = stage;//Upgating stage in component
-
-        switch (stage)
+        switch (ent.Comp.CurrentStage)
         {
             case CultYoggStage.Initial:
                 return;
