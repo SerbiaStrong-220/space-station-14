@@ -70,6 +70,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         ent.Comp.CurrentStage = args.Stage;//Upgating stage in component
 
         UpdateCultVisuals(ent);
+        Dirty(ent.Owner);
     }
 
     public void UpdateCultVisuals(Entity<CultYoggComponent> ent)
@@ -134,7 +135,6 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                 Log.Error("Something went wrong with CultYogg stages");
                 break;
         }
-        Dirty(ent.Owner, huAp);
     }
 
     public void DeleteVisuals(Entity<CultYoggComponent> ent)
