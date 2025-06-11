@@ -7,6 +7,7 @@
   icon: "JobIconChaplain"
   supervisors: job-supervisors-hop
   access:
+  - Service # SS220-add-chaplain-service-worker
   - Chapel
   - Maintenance
   special:
