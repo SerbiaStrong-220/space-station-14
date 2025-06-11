@@ -1,4 +1,5 @@
 using Content.Shared.SS220.Pinpointer;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -78,6 +79,11 @@ public sealed partial class PinpointerComponent : Component
     [DataField]
     [AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public HashSet<TrackedItem> Targets = [];
+
+    [DataField]
+    [AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
     public PinpointerMode Mode = PinpointerMode.Crew;
 
     [DataField]
@@ -95,6 +101,10 @@ public sealed partial class PinpointerComponent : Component
     [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
     public TimeSpan NextUpdate;
+
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public EntityWhitelist? Whitelist;
     //ss220 add pinpointer ui end
 }
 

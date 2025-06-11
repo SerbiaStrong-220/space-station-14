@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Robust.Shared.Serialization;
 
@@ -12,68 +12,50 @@ public enum PinpointerUIKey
 
 [Serializable]
 [NetSerializable]
-public sealed partial class PinpointerTargetPick : BoundUserInterfaceMessage
+public sealed partial class PinpointerTargetPick(NetEntity target) : BoundUserInterfaceMessage
 {
-    public NetEntity Target;
-
-    public PinpointerTargetPick(NetEntity target)
-    {
-        Target = target;
-    }
+    public NetEntity Target = target;
 }
 
 [Serializable]
 [NetSerializable]
-public sealed partial class PinpointerDnaPick : BoundUserInterfaceMessage
+public sealed partial class PinpointerDnaPick(string? dna) : BoundUserInterfaceMessage
 {
-    public string? Dna;
-
-    public PinpointerDnaPick(string? dna)
-    {
-        Dna = dna;
-    }
+    public string? Dna = dna;
 }
 
 [Serializable]
 [NetSerializable]
-public sealed partial class PinpointerCrewUIState : BoundUserInterfaceState
+public sealed partial class PinpointerComponentUIState(HashSet<TrackedItem> targets) : BoundUserInterfaceState
 {
-    public HashSet<TrackedItem> Sensors;
-
-    public PinpointerCrewUIState(HashSet<TrackedItem> sensors)
-    {
-        Sensors = sensors;
-    }
+    public HashSet<TrackedItem> Targets = targets;
 }
 
 [Serializable]
 [NetSerializable]
-public sealed partial class PinpointerItemUIState : BoundUserInterfaceState
+public sealed partial class PinpointerCrewUIState(HashSet<TrackedItem> sensors) : BoundUserInterfaceState
 {
-    public HashSet<TrackedItem> Items;
-
-    public PinpointerItemUIState(HashSet<TrackedItem> items)
-    {
-        Items = items;
-    }
+    public HashSet<TrackedItem> Sensors = sensors;
 }
 
 [Serializable]
 [NetSerializable]
-public struct TrackedItem
+public sealed partial class PinpointerItemUIState(HashSet<TrackedItem> items) : BoundUserInterfaceState
 {
-    public NetEntity Entity { get; }
-    public string Name { get; }
+    public HashSet<TrackedItem> Items = items;
+}
 
-    public TrackedItem(NetEntity entity, string name)
-    {
-        Entity = entity;
-        Name = name;
-    }
+[Serializable]
+[NetSerializable]
+public readonly struct TrackedItem(NetEntity entity, string name)
+{
+    public NetEntity Entity { get; } = entity;
+    public string Name { get; } = name;
 }
 
 public enum PinpointerMode
 {
     Crew,
     Item,
+    Component
 }

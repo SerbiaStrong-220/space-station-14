@@ -1,14 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
 using Content.Server.DeviceNetwork.Components;
 using Content.Server.Medical.SuitSensors;
+using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Pinpointer;
 using Content.Shared.SS220.Pinpointer;
+using Content.Shared.Whitelist;
 using Robust.Shared.Timing;
+using System.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Content.Server.SS220.Pinpointer;
 
@@ -18,6 +21,8 @@ public sealed class PinpointerSystem : EntitySystem
     [Dependency] private readonly SharedPinpointerSystem _pinpointer = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SuitSensorSystem _suit = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {
@@ -53,6 +58,10 @@ public sealed class PinpointerSystem : EntitySystem
 
             case PinpointerMode.Item:
                 UpdateItemTrackers(uid, comp);
+                break;
+
+            case PinpointerMode.Component:
+                UpdateTargetsTrackers(uid, comp);
                 break;
         }
 
@@ -108,12 +117,29 @@ public sealed class PinpointerSystem : EntitySystem
         comp.TrackedItems.Add(new TrackedItem(GetNetEntity(comp.TrackedByDnaEntity.Value), comp.DnaToTrack));
     }
 
+    private void UpdateTargetsTrackers(EntityUid uid, PinpointerComponent comp)
+    {
+        comp.Targets.Clear();
+
+        if (comp.Whitelist is null)
+            return;
+
+        foreach (var ent in _lookup.GetEntitiesInRange(Transform(uid).Coordinates, 32f))//ToDo_SS220 idk mak distance
+        {
+            if (_whitelistSystem.IsWhitelistFail(comp.Whitelist, ent))
+                continue;
+
+            comp.Targets.Add(new TrackedItem(GetNetEntity(ent), MetaData(ent).EntityName));
+        }
+    }
+
     private bool IsTargetValid(PinpointerComponent comp)
     {
         return comp.Mode switch
         {
             PinpointerMode.Crew => comp.Sensors.Any(sensor => GetEntity(sensor.Entity) == comp.Target),
             PinpointerMode.Item => comp.TrackedItems.Any(item => item.Entity == GetNetEntity(comp.Target!.Value)),
+            PinpointerMode.Component => comp.Sensors.Any(target => GetEntity(target.Entity) == comp.Target),
             _ => false,
         };
     }
@@ -156,6 +182,10 @@ public sealed class PinpointerSystem : EntitySystem
 
             case PinpointerMode.Item:
                 _uiSystem.SetUiState(ent.Owner, PinpointerUIKey.Key, new PinpointerItemUIState(ent.Comp.TrackedItems));
+                break;
+
+            case PinpointerMode.Component:
+                _uiSystem.SetUiState(ent.Owner, PinpointerUIKey.Key, new PinpointerComponentUIState(ent.Comp.TrackedItems));
                 break;
         }
     }
