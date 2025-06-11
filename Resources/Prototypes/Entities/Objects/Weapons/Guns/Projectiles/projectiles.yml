@@ -442,6 +442,45 @@
     heat: 100000 #This may be a bit underpowered, but in testing, 130000 was RIDICULOUS and killed in seconds.
 
 - type: entity
+  parent: BaseBullet
+  id: BasiliskRay
+  name: basilisk ray
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: ice
+      shader: unshaded
+  - type: Ammo
+    muzzleFlash: null
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        hard: false
+        mask:
+        - Opaque
+      fly-by: *flybyfixture
+  - type: Projectile
+    impactEffect: BulletImpactEffectDisabler
+    damage:
+      types:
+        Cold: 5
+  - type: TimedDespawn
+    lifetime: 3
+  - type: ChangeTemperatureOnCollide
+    heat: -50000
+
+- type: entity
   id: BulletKinetic
   name: kinetic bolt
   parent: BaseBullet
@@ -465,7 +504,7 @@
         Structural: 30
   # Short lifespan
   - type: TimedDespawn
-    lifetime: 0.4
+    lifetime: 0.22 # roughly 5.5 tiles
   - type: GatheringProjectile
 
 - type: entity
@@ -945,6 +984,17 @@
   - type: VaporVisuals
 
 - type: entity
+  id: BulletHivebot
+  name: hivebot bullet
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 10
+
+- type: entity
   id: BulletCannonBall
   name: cannonball
   parent: BaseBulletTrigger
@@ -1222,3 +1272,47 @@
     proto: BulletDisablerSmg
     count: 3 #bit stronger than a disabler if you hit your shots you goober, still not a 2 hit stun though
     spread: 9
+
+# #SS220 Base blaster bullet prototype
+- type: entity
+  name : Bullet bolt
+  id: BaseBlasterBullet
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Reflective
+    reflective:
+    - Energy
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: omnilaser
+      shader: unshaded
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.3,0.15,0.3"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+      fly-by: *flybyfixture
+  - type: Ammo
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlaster
+    damage:
+      types:
+        Heat: 20
+        Piercing: 6
+    soundHit:
+      collection: WeakHit
+    forceSound: true
+# #SS220 Base blaster bullet prototype

@@ -610,6 +610,13 @@
         - Sheet
         - RawMaterial
         - Ingot
+  - type: OreSiloClient
+  # SS220 Add silo linking in mapping begin
+  - type: DeviceNetwork
+    deviceNetId: Private
+    receiveFrequencyId: OreSilo
+    transmitFrequencyId: OreSilo
+  # SS220 Add silo linking in mapping end
 
 - type: entity
   id: Biogenerator
@@ -731,6 +738,7 @@
       - Ingot
       - Raw
       - Wooden
+      - Boll
   - type: Lathe
     idleState: base_machine
     runningState: base_machine_processing
@@ -774,3 +782,4 @@
         - RawMaterial
         - Plastic
         - Ingot
+  - type: OreSiloClient

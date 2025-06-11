@@ -32,6 +32,4 @@
 #      amount: 1 #SS220-MinorTweaks
     - id: WeaponBlasterKRS #SS220-BlueShield Rework
     - id: BlasterPowerCellAlt
-      amount: 2
-    - id: BlasterPowerCellDisabler
-      amount: 2
+      amount: 3

@@ -32,7 +32,7 @@
       - !type:EmptyAllContainersBehaviour
   - type: CultYoggPod
     bloodlossModifier: -6
-    healingFreq: 0.6
+    healingFreq: 1
     heal:
       types:
         Slash: -3
@@ -41,9 +41,13 @@
         Heat: -3
         Cold: -3
         Shock: -1
-        Airloss: -10
+        Asphyxiation: -10
+        Bloodloss: -2.5
+        Radiation: -2.5
+        Сerebral: -50
+        Сellular: -10
         Caustic: -5
-        Сerebral: -5
+        Poison: -1
   - type: CultYoggBuilding
     eraseTime: 5
     spawnOnErase:

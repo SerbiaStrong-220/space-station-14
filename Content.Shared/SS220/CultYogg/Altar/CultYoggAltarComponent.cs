@@ -8,9 +8,6 @@ namespace Content.Shared.SS220.CultYogg.Altar;
 public sealed partial class CultYoggAltarComponent : Component
 {
     [DataField]
-    public int RequiredAmountMiGo = 1;//ToDo after tests set it to 3
-
-    [DataField]
     public float RitualStartRange = 6f;
 
     [DataField]

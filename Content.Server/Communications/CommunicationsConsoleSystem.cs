@@ -269,7 +269,10 @@ namespace Content.Server.Communications
             title ??= comp.Title;
 
             msg = _chatManager.DeleteProhibitedCharacters(msg, message.Actor); // SS220 delete prohibited characters
-            msg += "\n" + Loc.GetString("comms-console-announcement-sent-by") + " " + author;
+
+            if (comp.AnnounceSentBy)
+                msg += "\n" + Loc.GetString("comms-console-announcement-sent-by") + " " + author;
+
             if (comp.Global)
             {
                 _chatSystem.DispatchGlobalAnnouncement(msg, title, colorOverride: comp.Color);

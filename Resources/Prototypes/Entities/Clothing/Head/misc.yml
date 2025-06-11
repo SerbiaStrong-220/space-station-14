@@ -32,6 +32,11 @@
     sprite: Clothing/Head/Misc/chickenhead.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
 
 - type: entity
   parent: ClothingHeadBase
@@ -74,6 +79,12 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - FacialHair
 
 - type: entity
   parent: ClothingHeadBase
@@ -85,6 +96,9 @@
     sprite: Clothing/Head/Misc/pwig.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/pwig.rsi
+  - type: HideLayerClothing
+    slots:
+    - HeadTop
 
 - type: entity
   parent: ClothingHeadBase
@@ -110,6 +124,12 @@
     sprite: Clothing/Head/Misc/richard.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - FacialHair
 
 - type: entity
   parent: ClothingHeadBase
@@ -123,6 +143,11 @@
     sprite: Clothing/Head/Misc/skubhead.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
 
 - type: entity
   parent: ClothingHeadBase
@@ -139,6 +164,11 @@
     - HamsterWearable
     - WhitelistChameleon
     - ShrineMaidenWig #SS220 tohoUpdate
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
 
 - type: entity
   parent: ClothingHeadBase
@@ -168,6 +198,8 @@
     sprite: SS220/Clothing/Head/Misc/fancycrown.rsi #SS220 resprited
   - type: Clothing
     sprite: SS220/Clothing/Head/Misc/fancycrown.rsi #SS220 resprited
+  - type: TypingIndicatorClothing
+    proto: regal
   - type: MobPrice
     price: 3000
   - type: AddAccentClothing
@@ -226,13 +258,10 @@
     accent: OwOAccent
 
 - type: entity
-  categories: [ Actions, HideSpawnMenu ]
+  parent: BaseToggleAction
   id: ActionBecomeValid
   name: Become Valid
   description: "*notices your killsign* owo whats this"
-  components:
-  - type: InstantAction
-    event: !type:ToggleActionEvent
 
 - type: entity
   parent: ClothingHeadBase
@@ -260,6 +289,12 @@
     sprite: Clothing/Head/Misc/squiddy.rsi
   - type: IngestionBlocker
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - FacialHair
 
 - type: entity
   parent: ClothingHeadBase
@@ -271,6 +306,12 @@
     sprite: Clothing/Head/Misc/red_racoon.rsi
   - type: Clothing
     sprite: Clothing/Head/Misc/red_racoon.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - FacialHair
 
 - type: entity
   parent: Clothing
@@ -354,3 +395,5 @@
   - type: HideLayerClothing
     slots:
     - Hair
+    - HeadTop
+    - HeadSide

@@ -2,7 +2,6 @@
 
 using Content.Server.Humanoid;
 using Content.Server.Medical;
-using Content.Server.SS220.DarkForces.Saint.Reagent.Events;
 using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
@@ -24,6 +23,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs;
 using Robust.Shared.Network;
 using Content.Shared.SS220.Roles;
+using Content.Shared.SS220.EntityEffects;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
@@ -63,6 +63,11 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     #region StageUpdating
     private void UpdateStage(Entity<CultYoggComponent> entity, ref ChangeCultYoggStageEvent args)
     {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
         if (!TryComp<HumanoidAppearanceComponent>(entity, out var huAp))
             return;
 
@@ -80,42 +85,41 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                 huAp.EyeColor = Color.Green;
                 break;
             case CultYoggStage.Alarm:
-                if (_prototype.HasIndex<MarkingPrototype>(CultDefaultMarking))
+                if (!_prototype.HasIndex<MarkingPrototype>(CultDefaultMarking))
                 {
-                    if (!huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Special))
-                    {
-                        huAp.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking(CultDefaultMarking, colorCount: 1)]));
-                    }
-                    else
-                    {
-                        _humanoidAppearance.SetMarkingId(entity.Owner,
-                            MarkingCategories.Special,
-                            0,
-                            CultDefaultMarking,
-                            huAp);
-                    }
+                    Log.Error($"{CultDefaultMarking} marking doesn't exist");
+                    return;
+                }
+
+                if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
+                {
+                    entity.Comp.PreviousTail = value.FirstOrDefault();
+                    value.Clear();
+                }
+
+                if (!huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Special))
+                {
+                    huAp.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking(CultDefaultMarking, colorCount: 1)]));
                 }
                 else
                 {
-                    Log.Error($"{CultDefaultMarking} marking doesn't exist");
+                    _humanoidAppearance.SetMarkingId(entity.Owner,
+                    MarkingCategories.Special,
+                    0,
+                    CultDefaultMarking,
+                    huAp);
                 }
 
                 var newMarkingId = $"CultStage-{huAp.Species}";
 
-                if (_prototype.HasIndex<MarkingPrototype>(newMarkingId))
-                {
-                    if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
-                    {
-                        entity.Comp.PreviousTail = value.FirstOrDefault();
-                        value.Clear();
-                        huAp.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
-                    }
-                }
-                else
+                if (!_prototype.HasIndex<MarkingPrototype>(newMarkingId))
                 {
                     // We have species-marking only for the Nians, so this log only leads to unnecessary errors.
-                    //Log.Error($"{newMarkingId} marking doesn't exist"); 
+                    //Log.Error($"{newMarkingId} marking doesn't exist");
+                    return;
                 }
+
+                huAp.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
                 break;
             case CultYoggStage.God:
                 if (!TryComp<MobStateComponent>(entity, out var mobstate))
@@ -164,7 +168,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         _vomitSystem.Vomit(uid);
         var shroom = _entityManager.SpawnEntity(uid.Comp.PukedEntity, Transform(uid).Coordinates);
 
-        _actions.RemoveAction(uid, uid.Comp.PukeShroomActionEntity);
+        _actions.RemoveAction(uid.Comp.PukeShroomActionEntity);
         _actions.AddAction(uid, ref uid.Comp.DigestActionEntity, uid.Comp.DigestAction);
     }
     private void DigestAction(Entity<CultYoggComponent> uid, ref CultYoggDigestEvent args)
@@ -193,7 +197,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         _thirstSystem.ModifyThirst(uid, thirstComp, -uid.Comp.ThirstCost);
 
-        _actions.RemoveAction(uid, uid.Comp.DigestActionEntity);//if we digested, we should puke after
+        _actions.RemoveAction(uid.Comp.DigestActionEntity);//if we digested, we should puke after
 
         if (_actions.AddAction(uid, ref uid.Comp.PukeShroomActionEntity, out var act, uid.Comp.PukeShroomAction) && act.UseDelay != null) //useDelay when added
         {
@@ -261,11 +265,12 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             return;
         }
 
-        if (!AvaliableMiGoCheck() && !TryReplaceMiGo())//if amount of migo < required amount of migo or have 1 to replace
+        /*if (!TryReplaceMiGo())//if amount of migo < required amount of migo or have 1 to replace
         {
             _popup.PopupEntity(Loc.GetString("cult-yogg-acsending-migo-full"), uid, uid);
             return;
         }
+        */
 
         //Maybe in later version we will detiriorate the body and add some kind of effects
 
@@ -295,29 +300,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         _popup.PopupEntity(message, uid, uid);
     }
 
-    //Check for avaliable amoiunt of MiGo or gib MiGo to replace
-    private bool AvaliableMiGoCheck()
-    {
-        //Check number of MiGo in gamerule
-        var ruleComp = _cultRule.GetCultGameRule();
-
-        if (ruleComp is null)
-            return false;
-
-        int reqMiGo = ruleComp.ReqAmountOfMiGo;
-
-        var query = EntityQueryEnumerator<MiGoComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            reqMiGo--;
-        }
-
-        if (reqMiGo > 0)
-            return true;
-
-        return false;
-    }
-    private bool TryReplaceMiGo()
+    /*private bool TryReplaceMiGo()
     {
         //if any MiGo needs to be replaced add here
         List<EntityUid> migoOnDelete = [];
@@ -336,7 +319,8 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         }
 
         return false;
-    }
+    }*/
+
     private bool AcsendingCultistCheck()//if anybody else is acsending
     {
         var query = EntityQueryEnumerator<CultYoggComponent, AcsendingComponent>();
@@ -360,7 +344,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             _audio.PlayPvs(purifyedComp.PurifyingCollection, entity);
 
             //Removing stage visuals, cause later component will be removed
-            var ev = new CultYoggDeleteVisualsEvent();
+            var ev = new CultYoggDeleteVisualsEvent();//ToDo_SS220 make it function
             RaiseLocalEvent(entity, ref ev);
 
             RemComp<CultYoggComponent>(entity);

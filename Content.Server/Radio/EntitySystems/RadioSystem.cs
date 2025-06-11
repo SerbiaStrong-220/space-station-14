@@ -21,7 +21,8 @@ using System.Globalization;
 using Content.Server.Popups;
 using Content.Server.SS220.Language;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.SS220.Language.Systems; // SS220-Add-Languages
+using Content.Shared.SS220.Language.Systems;  // SS220-Add-Languages
+using Content.Server.SS220.Events; // SS220 borg-id-fix
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -210,12 +211,16 @@ public sealed class RadioSystem : EntitySystem
         // SS220 languages begin
         foreach (var languageEv in languageRadioReceiveEvents)
         {
-            RaiseLocalEvent(new RadioSpokeEvent(messageSource, languageEv.Key, languageEv.Value.Receivers.ToArray()));
+            //ss220 add filter tts for ghost start
+            RaiseLocalEvent(new RadioSpokeEvent(messageSource, languageEv.Key, channel, languageEv.Value.Receivers.ToArray()));
+            //ss220 add filter tts for ghost end
         }
         // SS220 languages end
 
         // Dispatch TTS radio speech event for every receiver
-        RaiseLocalEvent(new RadioSpokeEvent(messageSource, message, ev.Receivers.ToArray()));
+        //ss220 add filter tts for ghost start
+        RaiseLocalEvent(new RadioSpokeEvent(messageSource, message, channel, ev.Receivers.ToArray()));
+        //ss220 add filter tts for ghost end
 
         if (name != Name(messageSource))
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName}: {message}");
@@ -278,13 +283,18 @@ public sealed class RadioSystem : EntitySystem
     // SS220 radio-department-tag begin
     private string GetIdCardName(EntityUid senderUid)
     {
-        var idCardTitle = Loc.GetString("chat-radio-no-id");
-        idCardTitle = GetIdCard(senderUid)?.LocalizedJobTitle ?? idCardTitle;
+        // SS220 Borgs-Id-fix start
+        // поднимаем ивент для получения имени
+        var ev = new GetInsteadIdCardNameEvent(senderUid);
+        RaiseLocalEvent(senderUid, ev);
 
-        var textInfo = CultureInfo.CurrentCulture.TextInfo;
-        idCardTitle = textInfo.ToTitleCase(idCardTitle);
-
-        return $"\\[{idCardTitle}\\] ";
+        if (ev.Name != null)
+        {
+            return $"\\[{Loc.GetString(ev.Name)}\\] ";
+        }
+        else
+            return string.Empty;
+        // SS220 Borgs-Id-fix end
     }
     // S220 radio-department-tag end
 

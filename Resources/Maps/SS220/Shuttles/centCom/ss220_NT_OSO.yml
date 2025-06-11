@@ -454,20 +454,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-- proto: ActionToggleLight
-  entities:
-  - uid: 3
-    components:
-    - type: Transform
-      parent: 2
-    - type: InstantAction
-      container: 2
-  - uid: 6
-    components:
-    - type: Transform
-      parent: 5
-    - type: InstantAction
-      container: 5
 - proto: AirAlarm
   entities:
   - uid: 16
@@ -1726,16 +1712,8 @@ entities:
           showEnts: False
           occludes: True
           ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 6
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 6
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
 - proto: ChairOfficeLight
   entities:
   - uid: 222
@@ -3241,22 +3219,14 @@ entities:
       rot: 4.71238898038469 rad
       pos: 1.6867893,0.6869805
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 3
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 3
     - type: Physics
       canCollide: True
-    - type: ActionsContainer
 - proto: LiquidNitrogenCanister
   entities:
   - uid: 412

@@ -10,6 +10,7 @@ using Content.Server.Preferences.Managers;
 using Content.Server.ServerUpdates;
 using Content.Server.Station.Systems;
 using Content.Server.Voting.Managers;
+using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
@@ -56,7 +57,7 @@ namespace Content.Server.GameTicking
         [Dependency] private readonly SharedMindSystem _mind = default!;
         [Dependency] private readonly PlayTimeTrackingSystem _playTimeTrackings = default!;
         [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
-        [Dependency] private readonly IVoteManager _voteManager = default!;
+        [Dependency] private readonly IVoteManager _voteManager = default!; // SS220-add-auto-map-vote
         [Dependency] private readonly ServerUpdateManager _serverUpdates = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly StationJobsSystem _stationJobs = default!;
@@ -74,6 +75,8 @@ namespace Content.Server.GameTicking
 
         private ISawmill _sawmill = default!;
 
+        private bool _randomizeCharacters;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -83,6 +86,8 @@ namespace Content.Server.GameTicking
 
             _sawmill = _logManager.GetSawmill("ticker");
             _sawmillReplays = _logManager.GetSawmill("ticker.replays");
+
+            Subs.CVar(_cfg, CCVars.ICRandomCharacters, e => _randomizeCharacters = e, true);
 
             // Initialize the other parts of the game ticker.
             InitializeStatusShell();

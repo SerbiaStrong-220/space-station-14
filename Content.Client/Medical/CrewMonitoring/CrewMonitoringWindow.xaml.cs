@@ -185,12 +185,45 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
             // Add a button that will hold a username and other details
             NavMap.LocalizedNames.TryAdd(sensor.SuitSensorUid, sensor.Name + ", " + sensor.Job);
 
+            //SS220-colorful-sensors begin
+            var specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "alive");
+            var dotColor = Color.LightGray;
+
+            if (!sensor.IsAlive)
+            {
+                specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "dead");
+                dotColor = Color.Violet;
+            }
+            else if (sensor.DamagePercentage != null)
+            {
+                var index = MathF.Round(4f * sensor.DamagePercentage.Value);
+
+                if (index >= 5)
+                {
+                    specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "critical");
+                    dotColor = Color.Red;
+                }
+                else
+                {
+                    specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "health" + index);
+                    dotColor = index switch
+                    {
+                        0 or 1 => Color.LimeGreen,
+                        2 => Color.Gold,
+                        3 or 4 => Color.Crimson,
+                        _ => Color.LightGray
+                    };
+                }
+            }
+            //SS220-colorful-sensors end
+
             var sensorButton = new CrewMonitoringButton()
             {
                 SuitSensorUid = sensor.SuitSensorUid,
                 Coordinates = coordinates,
                 Disabled = (coordinates == null),
                 HorizontalExpand = true,
+                DotColor = dotColor, //SS220-colorful-sensors
             };
 
             if (sensor.SuitSensorUid == _trackedEntity)
@@ -229,8 +262,9 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
 
             statusContainer.AddChild(suitCoordsIndicator);
 
+            //SS220-colorful-sensors begin (moved up to pass dot color to update later)
             // Specify texture for the user status icon
-            var specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "alive");
+            /*var specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "alive");
 
             if (!sensor.IsAlive)
             {
@@ -246,7 +280,8 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
 
                 else
                     specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "health" + index);
-            }
+            }*/
+            //SS220-colorful-sensors end
 
             // Status icon
             var statusIcon = new AnimatedTextureRect
@@ -311,7 +346,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
                     new NavMapBlip
                     (CoordinatesToLocal(coordinates.Value),
                     _blipTexture,
-                    (_trackedEntity == null || sensor.SuitSensorUid == _trackedEntity) ? Color.LimeGreen : Color.LimeGreen * Color.DimGray,
+                    (_trackedEntity == null || sensor.SuitSensorUid == _trackedEntity) ? dotColor : dotColor * Color.DimGray, //SS220-colorful-sensors
                     sensor.SuitSensorUid == _trackedEntity));
 
                 NavMap.Focus = _trackedEntity;
@@ -324,12 +359,14 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
                     if (_trackedEntity == sensor.SuitSensorUid)
                     {
                         _trackedEntity = null;
+                        UpdateSensorsTable(_trackedEntity, sensor.SuitSensorUid); //SS220-colorful-sensors
                     }
 
                     else
                     {
                         _trackedEntity = sensor.SuitSensorUid;
                         NavMap.CenterToCoordinates(coordinates.Value);
+                        UpdateSensorsTable(_trackedEntity, null); //SS220-colorful-sensors
                     }
 
                     NavMap.Focus = _trackedEntity;
@@ -361,7 +398,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
             if (sensor is not CrewMonitoringButton)
                 continue;
 
-            var castSensor = (CrewMonitoringButton) sensor;
+            var castSensor = (CrewMonitoringButton)sensor;
 
             if (castSensor.SuitSensorUid == prevTrackedEntity)
                 castSensor.RemoveStyleClass(StyleNano.StyleClassButtonColorGreen);
@@ -377,7 +414,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
                 data = new NavMapBlip
                     (CoordinatesToLocal(data.Coordinates),
                     data.Texture,
-                    (currTrackedEntity == null || castSensor.SuitSensorUid == currTrackedEntity) ? Color.LimeGreen : Color.LimeGreen * Color.DimGray,
+                    (currTrackedEntity == null || castSensor.SuitSensorUid == currTrackedEntity) ? castSensor.DotColor : castSensor.DotColor * Color.DimGray, //SS220-colorful-sensors
                     castSensor.SuitSensorUid == currTrackedEntity);
 
                 NavMap.TrackedEntities[castSensor.SuitSensorUid] = data;
@@ -409,7 +446,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
         foreach (var sensor in SensorsTable.Children)
         {
             if (sensor is CrewMonitoringButton &&
-                ((CrewMonitoringButton) sensor).SuitSensorUid == _trackedEntity)
+                ((CrewMonitoringButton)sensor).SuitSensorUid == _trackedEntity)
                 return true;
 
             nextScrollPosition += sensor.Height;
@@ -455,4 +492,5 @@ public sealed class CrewMonitoringButton : Button
     public int IndexInTable;
     public NetEntity SuitSensorUid;
     public EntityCoordinates? Coordinates;
+    public Color DotColor; //SS220-colorful-sensors
 }

@@ -37,3 +37,8 @@ preload_grids = false
 
 [admin]
 see_own_notes = true
+
+[ic]
+# random_characters = false # SS220
+random_species_weights = ""
+ssd_sleep_time = 3600

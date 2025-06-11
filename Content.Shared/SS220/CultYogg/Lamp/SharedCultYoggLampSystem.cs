@@ -40,7 +40,7 @@ public abstract class SharedCultYoggLampSystem : EntitySystem
         if (ent.Comp.ToggleActionEntity != null)
             _action.SetToggled(ent.Comp.ToggleActionEntity, ent.Comp.Activated);
 
-        _appearance.SetData(ent, ToggleableLightVisuals.Enabled, ent.Comp.Activated);
+        _appearance.SetData(ent, ToggleableVisuals.Enabled, ent.Comp.Activated);
     }
 
     private void AddToggleLightVerb(Entity<CultYoggLampComponent> ent, ref GetVerbsEvent<ActivationVerb> args)

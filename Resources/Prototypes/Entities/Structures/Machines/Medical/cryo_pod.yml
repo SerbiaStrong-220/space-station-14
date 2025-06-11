@@ -30,7 +30,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.90"
+          bounds: "-0.5,-0.5,0.5,0.5"
         density: 200
         mask:
           - MachineMask
@@ -87,7 +87,9 @@
         whitelist:
           components:
             - FitsInDispenser
-  - type: ItemToggle
+  #ss220 fix interact with 'E' start
+  #- type: ItemToggle
+  #ss220 fix interact with 'E' end
   - type: HealthAnalyzer
     scanDelay: 0
   - type: UserInterface

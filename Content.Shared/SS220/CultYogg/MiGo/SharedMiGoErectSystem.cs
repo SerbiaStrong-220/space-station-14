@@ -2,6 +2,7 @@
 
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -73,7 +74,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
         var erectAction = entity.Comp.MiGoErectActionEntity;
 
-        if (erectAction == null || !TryComp<InstantActionComponent>(erectAction, out var actionComponent))
+        if (erectAction == null || !TryComp<ActionComponent>(erectAction, out var actionComponent))
             return;
 
         if (actionComponent.Cooldown.HasValue && actionComponent.Cooldown.Value.End > _gameTiming.CurTime)
@@ -90,7 +91,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             return;
         }
 
-        _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, entity, TimeSpan.FromSeconds(entity.Comp.ErectDoAfterSeconds),
+        _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, entity, entity.Comp.ErectDoAfterSeconds,
             new MiGoErectDoAfterEvent()
             {
                 BuildingId = args.BuildingId,
@@ -114,7 +115,10 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
         var buildingUid = EntityManager.GetEntity(args.BuildingFrame);
         if (_whitelistSystem.IsWhitelistFail(entity.Comp.EraseWhitelist, buildingUid))
+        {
+            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-cant-erase-non-cultists-buildings"), entity, entity);
             return;
+        }
 
         var doAfterTime = TimeSpan.Zero;
         if (TryComp<CultYoggBuildingFrameComponent>(buildingUid, out var frameComponent) &&
@@ -169,7 +173,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         }
 
         var erectAction = entity.Comp.MiGoErectActionEntity;
-        if (erectAction == null || !TryComp<InstantActionComponent>(erectAction, out var actionComponent))
+        if (erectAction == null || !TryComp<ActionComponent>(erectAction, out var actionComponent))
             return;
 
         var cooldown = buildingPrototype.CooldownOverride ?? actionComponent.UseDelay ?? TimeSpan.FromSeconds(1);
