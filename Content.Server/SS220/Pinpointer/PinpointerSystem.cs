@@ -2,7 +2,6 @@
 
 using Content.Server.DeviceNetwork.Components;
 using Content.Server.Medical.SuitSensors;
-using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Medical.SuitSensor;
@@ -11,7 +10,6 @@ using Content.Shared.SS220.Pinpointer;
 using Content.Shared.Whitelist;
 using Robust.Shared.Timing;
 using System.Linq;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Content.Server.SS220.Pinpointer;
 

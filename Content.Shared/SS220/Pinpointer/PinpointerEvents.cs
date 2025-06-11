@@ -47,7 +47,7 @@ public sealed partial class PinpointerItemUIState(HashSet<TrackedItem> items) : 
 
 [Serializable]
 [NetSerializable]
-public readonly struct TrackedItem(NetEntity entity, string name)
+public struct TrackedItem(NetEntity entity, string name)
 {
     public NetEntity Entity { get; } = entity;
     public string Name { get; } = name;
