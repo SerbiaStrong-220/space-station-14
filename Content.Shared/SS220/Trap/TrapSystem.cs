@@ -39,13 +39,13 @@ public sealed class TrapSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<TrapComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeSetTrap);
+        SubscribeLocalEvent<TrapComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<TrapComponent, TrapInteractionDoAfterEvent>(OnTrapInteractionDoAfter);
-        SubscribeLocalEvent<TrapComponent, StartCollideEvent>(OnStepTriggerAttempt);
+        SubscribeLocalEvent<TrapComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<TrapComponent, SharedTriggerEvent>(OnTrigger);
     }
 
-    private void OnAlternativeSetTrap(Entity<TrapComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    private void OnAlternativeVerb(Entity<TrapComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
             return;
@@ -162,7 +162,7 @@ public sealed class TrapSystem : EntitySystem
         return !ev.Cancelled;
     }
 
-    private void OnStepTriggerAttempt(Entity<TrapComponent> ent, ref StartCollideEvent args)
+    private void OnStartCollide(Entity<TrapComponent> ent, ref StartCollideEvent args)
     {
         if (ent.Comp.State == TrapArmedState.Unarmed)
             return;

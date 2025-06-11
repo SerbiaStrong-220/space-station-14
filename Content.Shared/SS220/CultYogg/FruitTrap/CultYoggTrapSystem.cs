@@ -19,14 +19,14 @@ public sealed class CultYoggTrapSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<CultYoggTrapComponent, MapInitEvent>(OnStartUp);
+        SubscribeLocalEvent<CultYoggTrapComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CultYoggTrapComponent, TrapArmAttemptEvent>(OnTrapArmAttempt);
         SubscribeLocalEvent<ChangeCultYoggStageEvent>(OnStageChanged);
-        SubscribeLocalEvent<CultYoggTrapComponent, TrapArmedEvent>(OnArmedTrap);
-        SubscribeLocalEvent<CultYoggTrapComponent, TrapDefusedEvent>(OnDefuseTrap);
+        SubscribeLocalEvent<CultYoggTrapComponent, TrapArmedEvent>(OnTrapArmed);
+        SubscribeLocalEvent<CultYoggTrapComponent, TrapDefusedEvent>(OnTrapDefused);
     }
 
-    private void OnStartUp(Entity<CultYoggTrapComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<CultYoggTrapComponent> ent, ref MapInitEvent args)
     {
         _stealth.SetEnabled(ent.Owner, false);
     }
@@ -77,12 +77,12 @@ public sealed class CultYoggTrapSystem : EntitySystem
         }
     }
 
-    private void OnArmedTrap(Entity<CultYoggTrapComponent> ent, ref TrapArmedEvent args)
+    private void OnTrapArmed(Entity<CultYoggTrapComponent> ent, ref TrapArmedEvent args)
     {
         SetStealthTrap(ent, true);
     }
 
-    private void OnDefuseTrap(Entity<CultYoggTrapComponent> ent, ref TrapDefusedEvent args)
+    private void OnTrapDefused(Entity<CultYoggTrapComponent> ent, ref TrapDefusedEvent args)
     {
         SetStealthTrap(ent, false);
     }
