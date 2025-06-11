@@ -54,6 +54,9 @@
     availableLanguages:
     - id: Galactic
       canSpeak: true
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
   #visual
   - type: Sprite
     drawdepth: Mobs
