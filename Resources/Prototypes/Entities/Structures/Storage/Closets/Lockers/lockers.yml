@@ -493,6 +493,17 @@
     removedMasks: 20
   - type: PlaceableSurface
     isPlaceable: True
+  # SS220 LockerPrisoner Resprite Begin
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitPrisoner
+      amount: 2
+    - id: ClothingUniformJumpskirtPrisoner
+      amount: 2
+    - id: ClothingShoesColorOrange
+      amount: 2
+    - id: ClothingMaskMuzzle
+  # SS220 LockerPrisoner Resprite End
 
 - type: entity
   id: LockerPrisoner2
