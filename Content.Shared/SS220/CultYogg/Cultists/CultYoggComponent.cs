@@ -22,9 +22,6 @@ public sealed partial class CultYoggComponent : Component
     public EntProtoId DigestAction = "ActionCultYoggDigest";
 
     [DataField]
-    public EntProtoId AscendingAction = "ActionCultYoggAscending";
-
-    [DataField]
     public EntProtoId CorruptItemAction = "ActionCultYoggCorruptItem";
 
     [DataField]
@@ -41,9 +38,6 @@ public sealed partial class CultYoggComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? CorruptItemInHandActionEntity;
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? AscendingActionEntity;
     #endregion
 
     #region puke
@@ -73,7 +67,7 @@ public sealed partial class CultYoggComponent : Component
     public ThirstThreshold MinThirstThreshold = ThirstThreshold.Parched;
     #endregion
 
-    #region acsencion
+    #region ascension
     /// <summary>
     /// Entity the cultist will ascend into
     /// </summary>
