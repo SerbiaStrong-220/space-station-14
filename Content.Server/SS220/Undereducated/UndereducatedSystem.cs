@@ -46,16 +46,14 @@ public sealed class UndereducatedSystem : EntitySystem
 
     private void OnMapInit(Entity<UndereducatedComponent> ent, ref MapInitEvent _)
     {
-        if (ent.Comp.Language.Length > 0)
-            return;
-
-        // Ставим defaultLanguage, если компонент инициализировался пустым.
         if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
             && _defaultLanguage.TryGetValue(apperance.Species, out var language)
             && _proto.TryIndex<LanguagePrototype>(language, out var languagePrototype))
         {
             ent.Comp.Language = languagePrototype.ID;
         }
+        else
+            ent.Comp.Language = "Galactic";
     }
 
     private bool TryGetLanguageTag(Entity<UndereducatedComponent> ent, [NotNullWhen(true)] out string? tag)
@@ -63,7 +61,7 @@ public sealed class UndereducatedSystem : EntitySystem
         tag = null;
         var languagePrototype = new LanguagePrototype();
 
-        // По компоненту, будет работать и с клоунским и с любым другим.
+        // По компоненту
         if (ent.Comp.Language.Length > 0
             && _languageSystem.CanSpeak(ent, ent.Comp.Language)
             && _proto.TryIndex<LanguagePrototype>(ent.Comp.Language, out languagePrototype))
