@@ -880,8 +880,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         var findEnglish = false;
         string? newEmoteStr = null;
         var i = 0;
-        languageMessage.ChangeInNodeMessage(msg =>
+        languageMessage.ChangeNodes(node =>
         {
+            var msg = node.Message;
             i++;
             if (i == 1) // only for 1st node
                 GetRadioKeycodePrefix(source, msg, out msg, out prefix);
@@ -903,7 +904,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (punctuate)
                 newLangMessage = SanitizeMessagePeriod(newLangMessage);
 
-            return newLangMessage;
+            node.SetMessage(newLangMessage);
         });
 
         if (findEnglish)
@@ -945,11 +946,12 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         // SS220 languages begin
         var languageMessage = _languageSystem.SanitizeMessage(sender, message);
-        languageMessage.ChangeInNodeMessage(msg =>
+        languageMessage.ChangeNodes(node =>
         {
+            var msg = node.Message;
             var ev = new TransformSpeechEvent(sender, msg);
             RaiseLocalEvent(ev);
-            return ev.Message;
+            node.SetMessage(ev.Message);
         });
         var newMessage = languageMessage.GetMessageWithLanguageKeys();
         //var ev = new TransformSpeechEvent(sender, message);

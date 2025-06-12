@@ -1,10 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.Language.Systems;
+using Content.Shared.SS220.Undereducated;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Content.Shared.Random.Helpers;
-using Content.Shared.SS220.Language.Systems;
-using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Language.EncryptionMethods;
 
@@ -38,6 +40,9 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
     /// </summary>
     [DataField]
     public List<SyllablesSpecialCharacter> SpecialCharacters = new();
+
+    [DataField]
+    public string ReplaceDictonary;
 
     private int _inputSeed;
     private bool _capitalize = false;
@@ -75,6 +80,11 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
 
     private string ScrambleWord(string word, int seed)
     {
+        var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
+        if (prototypeManager.TryIndex<LanguageReplacementsPrototype>(ReplaceDictonary, out var prototype)
+            && prototype.Replacements.TryGetValue(word.ToLower(), out var replacedWord))
+            return replacedWord + " ";
+
         var random = new System.Random(seed);
         var scrambledMessage = new StringBuilder();
         var scrambledLength = word.Length * ScrambledLengthCoefficient;

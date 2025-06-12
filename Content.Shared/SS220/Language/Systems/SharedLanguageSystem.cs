@@ -218,7 +218,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     /// </summary>
     public string SetColor(string message, LanguagePrototype proto)
     {
-        if (proto.Color == null)
+        if (proto.Color == null || message.Length <= 0) // SS220 space-betwen-words fix
             return message;
 
         var color = proto.Color.Value.ToHex();
