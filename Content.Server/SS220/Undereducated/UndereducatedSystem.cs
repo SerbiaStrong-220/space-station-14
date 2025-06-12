@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Speech;
+using Content.Server.Chat.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.SS220.Language;
 using Content.Shared.SS220.Language.Systems;
@@ -18,16 +18,10 @@ public sealed partial class UndereducatedSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedLanguageSystem _languageSystem = default!;
 
-    [GeneratedRegex(@"\b\w+\b", RegexOptions.Compiled)]
-    private static partial Regex WordBoundaryRegex();
+    [GeneratedRegex(@"\s+", RegexOptions.Compiled)]
+    private static partial Regex SpaceRegex();
 
-    [GeneratedRegex(@"(\w+|\W+)", RegexOptions.Compiled)]
-    private static partial Regex WordTokenRegex();
-
-    [GeneratedRegex(@"^\w+$", RegexOptions.Compiled)]
-    private static partial Regex IsWordRegex();
-
-    private Dictionary<string, ProtoId<LanguagePrototype>> _defaultLanguage = new()
+    private readonly Dictionary<string, ProtoId<LanguagePrototype>> _defaultLanguage = new()
     {
         ["Human"] = "SolCommon", // %sl
         ["Reptilian"] = "Sintaunathi", // %sin
@@ -41,11 +35,11 @@ public sealed partial class UndereducatedSystem : EntitySystem
         ["Vulpkanin"] = "Canilunzt", // %cani
     };
 
-public override void Initialize()
+    public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<UndereducatedComponent, BeforeAccentGetEvent>(OnBeforeAccent);
+        SubscribeLocalEvent<UndereducatedComponent, TransformOriginalEvent>(OnBeforeAccent);
         SubscribeLocalEvent<UndereducatedComponent, MapInitEvent>(OnMapInit);
     }
 
@@ -54,8 +48,22 @@ public override void Initialize()
         if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
             && _defaultLanguage.TryGetValue(apperance.Species, out var language)
             && _proto.TryIndex<LanguagePrototype>(language, out var languagePrototype))
+        {
             ent.Comp.Language = languagePrototype.ID;
-        else
+            return;
+        }
+
+        // Для малограмотных боргов
+        if (_languageSystem.CanSpeak(ent, "Binary"))
+        {
+            ent.Comp.Language = "Binary";
+            return;
+        }
+
+        // Для малограмотных торгоматов
+        if (_languageSystem.CanSpeak(ent, _languageSystem.UniversalLanguage))
+            ent.Comp.Language = _languageSystem.UniversalLanguage;
+        else if (_languageSystem.CanSpeak(ent, _languageSystem.GalacticLanguage))
             ent.Comp.Language = _languageSystem.GalacticLanguage;
     }
 
@@ -85,46 +93,42 @@ public override void Initialize()
         return false;
     }
 
-    private void OnBeforeAccent(Entity<UndereducatedComponent> ent, ref BeforeAccentGetEvent args)
+    private void OnBeforeAccent(Entity<UndereducatedComponent> ent, ref TransformOriginalEvent args)
     {
-        if (args.Message.Length <= 0 || !TryGetLanguageTag(ent, out var tagByRace))
+        if (string.IsNullOrEmpty(args.Message) || !TryGetLanguageTag(ent, out var tagByRace))
             return;
-
-        var wordsTotal = WordBoundaryRegex().Matches(args.Message).Count;
-        var wordsReplaced = 0;
 
         var newMessage = new StringBuilder();
         var languageMessage = _languageSystem.SanitizeMessage(ent, args.Message);
+        var nodesCount = languageMessage.Nodes.Count;
+
         languageMessage.ChangeNodes(node =>
         {
+            nodesCount--;
             newMessage.Clear();
-            var tokenMatches = WordTokenRegex().Matches(node.Message);
-            var tokenCount = tokenMatches.Count;
+            var words = SpaceRegex().Split(node.Message);
+            var wordsCount = words.Length;
+            newMessage.Append(node.Language.KeyWithPrefix + ' ');
 
-            for (int i = 0; i < tokenCount; i++)
+            foreach (var word in words)
             {
-                var word = tokenMatches[i].Value;
-                var isWordRegex = IsWordRegex();
-
-                if (!isWordRegex.IsMatch(word))
+                wordsCount--;
+                if (string.IsNullOrWhiteSpace(word) || node.Language.KeyWithPrefix == tagByRace)
                 {
                     newMessage.Append(word);
-                    continue;
                 }
-
-                if (_random.Prob(ent.Comp.ChanseToReplace))
+                else if (_random.Prob(ent.Comp.ChanseToReplace))
                 {
-                    newMessage.Append(tagByRace + " " + word);
-
-                    if (i < tokenCount - 1)
-                        newMessage.Append(" " + node.Language.KeyWithPrefix + " ");
-
-                    wordsReplaced++;
+                    newMessage.Append(tagByRace).Append(' ').Append(word);
+                    if (nodesCount != 0 || wordsCount != 0)
+                        newMessage.Append(' ').Append(node.Language.KeyWithPrefix);
                 }
                 else
+                {
                     newMessage.Append(word);
+                }
+                newMessage.Append(' ');
             }
-
             node.SetMessage(newMessage.ToString().Trim());
         });
 
