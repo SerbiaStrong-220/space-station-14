@@ -70,7 +70,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         ent.Comp.CurrentStage = args.Stage;//Upgating stage in component
 
         UpdateCultVisuals(ent);
-        Dirty(ent.Owner);
+        Dirty(ent);
     }
 
     public void UpdateCultVisuals(Entity<CultYoggComponent> ent)
