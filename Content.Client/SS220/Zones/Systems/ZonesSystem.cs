@@ -1,4 +1,4 @@
-
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.Administration.Managers;
 using Content.Client.SS220.Overlays;
 using Content.Client.SS220.Zones.Overlays;
@@ -7,14 +7,12 @@ using Content.Shared.Administration;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Client.Console;
-using Robust.Client.Graphics;
 
 namespace Content.Client.SS220.Zones.Systems;
 
 public sealed partial class ZonesSystem : SharedZonesSystem
 {
     [Dependency] private readonly IClientConsoleHost _clientConsoleHost = default!;
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
     [Dependency] private readonly IClientAdminManager _clientAdmin = default!;
 
     public ZonesControlWindow ControlWindow = default!;
@@ -83,16 +81,10 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (!_clientAdmin.HasFlag(AdminFlags.Mapping))
             value = false;
 
-        switch (value)
-        {
-            case true:
-                _overlay.AddProvider(_overlayProvider);
-                break;
-
-            case false:
-                _overlay.RemoveProvider(_overlayProvider);
-                break;
-        }
+        if (value)
+            _overlay.AddProvider(_overlayProvider);
+        else
+            _overlay.RemoveProvider(_overlayProvider);
     }
 
     public void ExecuteDeleteZonesContainer(EntityUid container)

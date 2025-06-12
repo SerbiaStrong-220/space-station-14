@@ -9,6 +9,9 @@ namespace Content.Shared.SS220.Maths;
 
 public static partial class MathHelperExtensions
 {
+    /// <summary>
+    /// Substracts the <paramref name="cutters"/> from the <paramref name="boxes"/> returning the remaining sections
+    /// </summary>
     public static IEnumerable<Box2> SubstructBox(IEnumerable<Box2> boxes, IEnumerable<Box2> cutters)
     {
         var result = boxes.ToList().AsEnumerable();
@@ -94,6 +97,9 @@ public static partial class MathHelperExtensions
         return result;
     }
 
+    /// <summary>
+    /// Returns a new array of boxes in which all intersections in <paramref name="boxes"/> has removed
+    /// </summary>
     public static void GetNonOverlappingBoxes(ref IEnumerable<Box2> boxes)
     {
         boxes = GetNonOverlappingBoxes(boxes);
@@ -213,6 +219,9 @@ public static partial class MathHelperExtensions
         }
     }
 
+    /// <summary>
+    /// Returns a new array of boxes in which, if possibe, the <paramref name="boxes"/> are combined without changing the total area
+    /// </summary>
     public static void UnionInEqualSizedBoxes(ref IEnumerable<Box2> boxes)
     {
         boxes = UnionInEqualSizedBoxes(boxes);
@@ -251,7 +260,18 @@ public static partial class MathHelperExtensions
         return result;
     }
 
+    /// <summary>
+    /// Returns an array of all boxes in the grid that the other <paramref name="boxes"/> intersects with
+    /// </summary>
     public static IEnumerable<Box2> GetIntersectsGridBoxes(IEnumerable<Box2> boxes, float gridSize = 1f)
+    {
+        return GetIntersectsGridBoxes(boxes, new Vector2(gridSize, gridSize));
+    }
+
+    /// <summary>
+    /// Returns an array of all boxes in the grid that the other <paramref name="boxes"/> intersects with
+    /// </summary>
+    public static IEnumerable<Box2> GetIntersectsGridBoxes(IEnumerable<Box2> boxes, Vector2 gridSize)
     {
         var result = new HashSet<Box2>();
         foreach (var box in boxes)
@@ -264,6 +284,9 @@ public static partial class MathHelperExtensions
         return result;
     }
 
+    /// <summary>
+    /// Returns an array of all boxes in the grid that the other <paramref name="box"/> intersects with
+    /// </summary>
     public static IEnumerable<Box2> GetIntersectsGridBoxes(Box2 box, float gridSize = 1f)
     {
         return GetIntersectsGridBoxes(box, new Vector2(gridSize, gridSize));
@@ -303,6 +326,15 @@ public static partial class MathHelperExtensions
               box.Contains(inner.TopRight, closedRegion);
     }
 
+    /// <summary>
+    /// Trying to get <see cref="Box2"/> from <paramref name="input"/>
+    /// </summary>
+    /// <remarks>
+    /// For successful parsing, the string must look like this:
+    /// <code>"{<paramref name="left"/>}, {<paramref name="bottom"/>}, {<paramref name="right"/>}, {<paramref name="top"/>}"</code>
+    /// Where <paramref name="left"/>, <paramref name="bottom"/>, <paramref name="right"/>, <paramref name="top"/>
+    /// - is <see langword="float"/> number
+    /// </remarks>
     public static bool TryParseBox2(string input, [NotNullWhen(true)] out Box2? box)
     {
         box = null;
@@ -329,11 +361,16 @@ public static partial class MathHelperExtensions
         return true;
     }
 
+    /// <inheritdoc cref="AttachToGrid(Box2, Vector2)"/>
     public static Box2 AttachToGrid(Box2 box, float gridSize = 1f)
     {
         return AttachToGrid(box, new Vector2(gridSize, gridSize));
     }
 
+    /// <summary>
+    /// Creates a new <see cref="Box2"/> based on the <paramref name="box"/> and the specified <paramref name="gridSize"/>
+    /// It aligns the original box to fit within the grid.
+    /// </summary>
     public static Box2 AttachToGrid(Box2 box, Vector2 gridSize)
     {
         var left = (float)Math.Floor(box.Left / gridSize.X) * gridSize.X;
@@ -350,12 +387,33 @@ public static partial class MathHelperExtensions
         return new Box2(left, bottom, right, top);
     }
 
+    /// <inheritdoc cref="AttachToGrid(ref Box2, Vector2)"/>
     public static void AttachToGrid(ref Box2 box, float gridSize = 1f)
+    {
+        AttachToGrid(ref box, new Vector2(gridSize, gridSize));
+    }
+
+    /// <summary>
+    /// Changes the input <paramref name="box"/> by creating a new <see cref="Box2"/> based on the <paramref name="box"/>
+    /// and the specified <paramref name="gridSize"/>.
+    /// It aligns the original box to fit within the grid.
+    /// </summary>
+    public static void AttachToGrid(ref Box2 box, Vector2 gridSize)
     {
         box = AttachToGrid(box, gridSize);
     }
 
-    public static IEnumerable<Box2> AttachToGrid(IEnumerable<Box2> boxes, float gridSize = 1f) 
+    /// <inheritdoc cref="AttachToGrid(IEnumerable{Box2}, Vector2)"/>
+    public static IEnumerable<Box2> AttachToGrid(IEnumerable<Box2> boxes, float gridSize = 1f)
+    {
+        return AttachToGrid(boxes, new Vector2(gridSize, gridSize));
+    }
+
+    /// <summary>
+    /// Creates a new array of <see cref="Box2"/> based on the <paramref name="box"/> and the specified <paramref name="gridSize"/>.
+    /// It aligns the original box to fit within the grid.
+    /// </summary>
+    public static IEnumerable<Box2> AttachToGrid(IEnumerable<Box2> boxes, Vector2 gridSize)
     {
         var result = new HashSet<Box2>();
         foreach (var box in boxes)
@@ -364,7 +422,18 @@ public static partial class MathHelperExtensions
         return result;
     }
 
-    public static void AttachToGrid(ref IEnumerable<Box2> boxes, float gridSize = 1f) 
+    /// <inheritdoc cref="AttachToGrid(ref IEnumerable{Box2}, Vector2)"/>
+    public static void AttachToGrid(ref IEnumerable<Box2> boxes, float gridSize = 1f)
+    {
+        AttachToGrid(ref boxes, new Vector2(gridSize, gridSize));
+    }
+
+    /// <summary>
+    /// Changes the input <paramref name="boxes"/> by creating a new array of <see cref="Box2"/> based on the <paramref name="boxes"/>
+    /// and the specified <paramref name="gridSize"/>.
+    /// It aligns the original box to fit within the grid.
+    /// </summary>
+    public static void AttachToGrid(ref IEnumerable<Box2> boxes, Vector2 gridSize)
     {
         boxes = AttachToGrid(boxes, gridSize);
     }

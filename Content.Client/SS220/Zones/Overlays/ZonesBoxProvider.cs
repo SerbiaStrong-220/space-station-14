@@ -68,9 +68,8 @@ public sealed partial class ZonesBoxesOverlayProvider : BoxesOverlayProvider
                 left += texture.Size.X;
 
             if (top < 0)
-                top += texture.Size.Y;
-
-            if (top != 0)
+                top = Math.Abs(top);
+            else if (top > 0)
                 top = texture.Size.Y - top;
 
             var atlas = new AtlasTexture(texture, UIBox2.FromDimensions(new Vector2(left, top), rect.Size));

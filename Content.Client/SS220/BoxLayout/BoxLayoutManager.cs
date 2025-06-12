@@ -1,10 +1,9 @@
-
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.SS220.Overlays;
 using Content.Shared.SS220.Maths;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
-using Robust.Client.Player;
 using Robust.Shared.Console;
 using Robust.Shared.Input;
 using Robust.Shared.Map;
@@ -18,7 +17,6 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
 {
     [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly IConsoleHost _console = default!;
@@ -97,9 +95,8 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
             if (mapCoords.MapId != map)
             {
                 var error = $"The coordinate was obtained from map {mapCoords.MapId}, when it should be from map {map}";
-#if DEBUG
-                throw new Exception(error);
-#endif
+                DebugTools.Assert(error);
+
                 _console.LocalShell.WriteError(error);
                 return false;
             }
@@ -147,14 +144,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         };
     }
 
-    public void Cancel()
-    {
-        Clear();
-        _active = false;
-        Cancelled?.Invoke();
-    }
-
-    public void StartNewBox()
+    public void StartNew()
     {
         if (Active)
             Cancel();
@@ -163,6 +153,13 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
 
         _active = true;
         Started?.Invoke();
+    }
+
+    public void Cancel()
+    {
+        Clear();
+        _active = false;
+        Cancelled?.Invoke();
     }
 
     private void Clear()

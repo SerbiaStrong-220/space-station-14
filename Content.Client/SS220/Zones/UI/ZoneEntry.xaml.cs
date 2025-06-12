@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.SS220.UserInterface.Utility;
 using Content.Client.SS220.Zones.Systems;
 using Content.Client.Stylesheets;
@@ -18,7 +19,7 @@ public sealed partial class ZoneEntry : ContainerButton
 
     public Entity<ZoneComponent> ZoneEntity;
 
-    private Dictionary<uint, ConfirmableButtonState> _confirmableButtonStates = new()
+    private readonly Dictionary<uint, ConfirmableButtonState> _confirmableButtonStates = new()
     {
         [0] = new ConfirmableButtonState(Loc.GetString("zone-container-entry-delete-container-button"), null),
         [1] = new ConfirmableButtonState(Loc.GetString("zones-control-are-you-sure"), StyleNano.ButtonColorCautionDefault)

@@ -5,8 +5,8 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.Zones.Components;
 
 /// <summary>
-/// The component used to determine the zones located on the <see cref="Container"/>.
-/// A zone can be used to determine a certain area on the <see cref="Container"/>
+/// The component used to determine the zones located on the <see cref="ZoneParams.Container"/>.
+/// A zone can be used to determine a certain area on the <see cref="ZoneParams.Container"/>
 /// in which various events can occur, as well as with entities entering, staying inside, and leaving the zone.
 /// </summary>
 [AutoGenerateComponentState]
@@ -23,70 +23,3 @@ public sealed partial class ZoneComponent : Component
     [ViewVariables]
     public HashSet<EntityUid> Entities = new();
 }
-
-//[Serializable, NetSerializable]
-//public sealed partial class ZoneParams
-//{
-//    /// <summary>
-//    /// The entity that this zone is assigned to.
-//    /// Used to determine local coordinates
-//    /// </summary>
-//    [ViewVariables(VVAccess.ReadOnly)]
-//    public NetEntity Container;
-
-//    [ViewVariables]
-//    public string Name = string.Empty;
-
-//    [ViewVariables(VVAccess.ReadOnly)]
-//    public string ProtoId = SharedZonesSystem.BaseZoneId;
-
-//    /// <summary>
-//    /// Current color of the zone
-//    /// </summary>
-//    [ViewVariables]
-//    public Color Color = SharedZonesSystem.DefaultColor;
-
-//    [ViewVariables]
-//    public bool AttachToGrid = false;
-
-//    [ViewVariables]
-//    public bool CutSpace = false;
-
-//    /// <summary>
-//    /// Boxes in local coordinates (attached to <see cref="Container"/>) that determine the size of the zone
-//    /// </summary>
-//    [ViewVariables(VVAccess.ReadOnly)]
-//    public List<Box2> Boxes = new();
-
-//    public void HandleState(ZoneParamsState @params)
-//    {
-//        Container = @params.Container;
-//        Name = @params.Name;
-//        ProtoId = @params.ProtoId;
-//        Color = @params.Color;
-//        AttachToGrid = @params.AttachToGrid;
-//        Boxes = @params.Boxes;
-//        CutSpace = @params.CutSpace;
-//    }
-
-//    public ZoneParamsState GetState()
-//    {
-//        return new ZoneParamsState()
-//        {
-//            Container = Container,
-//            Name = Name,
-//            ProtoId = ProtoId,
-//            Color = Color,
-//            AttachToGrid = AttachToGrid,
-//            Boxes = Boxes,
-//            CutSpace = CutSpace
-//        };
-//    }
-
-//    public void RecalculateBoxes()
-//    {
-//        var state = GetState();
-//        state.RecalculateSize();
-//        HandleState(state);
-//    }
-//}

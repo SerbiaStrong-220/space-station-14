@@ -27,17 +27,6 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         SubscribeLocalEvent<TileChangedEvent>(OnTileChanged);
     }
 
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var query = EntityQueryEnumerator<ZoneComponent>();
-        while (query.MoveNext(out var uid, out var zoneComp))
-        {
-            var ents = GetEntitiesInZone((uid, zoneComp));
-        }
-    }
-
     private void OnZonesContainerShutdown(Entity<ZonesContainerComponent> entity, ref ComponentShutdown args)
     {
         ClearZonesContainer(entity);
@@ -50,13 +39,16 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     private void OnTileChanged(ref TileChangedEvent args)
     {
-        if (!args.OldTile.IsEmpty && !args.NewTile.Tile.IsEmpty)
-            return;
+        foreach (var entry in args.Changes)
+        {
+            if (!entry.OldTile.IsEmpty && !entry.NewTile.IsEmpty)
+                continue;
 
-        var coords = _map.GridTileToLocal(args.Entity, args.Entity, args.NewTile.GridIndices);
-        var zones = GetZonesByPoint(coords, RegionTypes.Original);
-        foreach (var zone in zones)
-            RecalculateZoneBoxes(zone);
+            var coords = _map.GridTileToLocal(args.Entity, args.Entity, entry.GridIndices);
+            var zones = GetZonesByPoint(coords, RegionTypes.Original);
+            foreach (var zone in zones)
+                RecalculateZoneRegions(zone);
+        }
     }
 
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>
@@ -124,7 +116,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>
     public Entity<ZoneComponent>? CreateZone(
         NetEntity container,
-        IEnumerable<(Vector2,Vector2)> points,
+        IEnumerable<(Vector2, Vector2)> points,
         string? protoId = null,
         string? name = null,
         Color? color = null,
@@ -148,7 +140,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         var @params = new ZoneParams()
         {
             Container = container,
-            ProtoId = protoId ?? string.Empty,
+            ProtoID = protoId ?? string.Empty,
             Name = name ?? string.Empty,
             Color = color ?? DefaultColor,
             AttachToGrid = attachToGrid,
@@ -158,7 +150,9 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         return CreateZone(@params);
     }
 
+    /// <summary>
     /// Creates new zone
+    /// </summary>
     public Entity<ZoneComponent>? CreateZone(ZoneParams @params)
     {
         if (@params.OriginalRegion.Count <= 0 || !@params.Container.IsValid())
@@ -171,12 +165,12 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (string.IsNullOrEmpty(@params.Name))
             @params.Name = $"Zone {GetZonesCount() + 1}";
 
-        if (string.IsNullOrEmpty(@params.ProtoId))
-            @params.ProtoId = BaseZoneId;
+        if (string.IsNullOrEmpty(@params.ProtoID))
+            @params.ProtoID = BaseZoneId;
 
-        @params.RecalculateSize();
+        @params.RecalculateRegions();
 
-        var zone = Spawn(@params.ProtoId, Transform(container).Coordinates);
+        var zone = Spawn(@params.ProtoID, Transform(container).Coordinates);
         _pvsOverride.AddGlobalOverride(zone);
         _transform.AttachToGridOrMap(zone);
 
@@ -193,11 +187,11 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     public void ChangeZone(Entity<ZoneComponent> zone, ZoneParams newParams)
     {
-        if (!newParams.Container.IsValid())
+        if (!IsValidContainer(newParams.Container))
             return;
 
         if (zone.Comp.ZoneParams.Container != newParams.Container ||
-            zone.Comp.ZoneParams.ProtoId != newParams.ProtoId)
+            zone.Comp.ZoneParams.ProtoID != newParams.ProtoID)
         {
             DeleteZone((zone, zone));
             CreateZone(newParams);

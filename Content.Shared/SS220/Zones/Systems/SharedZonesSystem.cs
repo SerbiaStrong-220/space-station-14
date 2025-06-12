@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Maps;
 using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Robust.Shared.Map;
@@ -23,8 +22,8 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
     public const string ZoneCommandsPrefix = "zones:";
 
-    public static EntProtoId<ZoneComponent> BaseZoneId = "BaseZone";
-    public static Color DefaultColor = Color.Gray;
+    public static readonly EntProtoId<ZoneComponent> BaseZoneId = "BaseZone";
+    public static readonly Color DefaultColor = Color.Gray;
 
     public override void Update(float frameTime)
     {
@@ -33,11 +32,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         var query = EntityQueryEnumerator<ZoneComponent>();
         while (query.MoveNext(out var uid, out var zoneComp))
         {
-            var map = _transform.GetMap(uid);
-            if (!_map.IsInitialized(map))
-                continue;
-
-            ProcessZone((uid, zoneComp));
+            UpdateInZoneEntities((uid, zoneComp));
         }
     }
 
@@ -46,8 +41,13 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// Raises the <see cref="LeavedZoneEvent"/> if entity was in the <paramref name="zone"/> before, but now it isn't.
     /// Raises the <see cref="EnteredZoneEvent"/> if entity wasn't in the <paramref name="zone"/> before, but now it is.
     /// </summary>
-    public void ProcessZone(Entity<ZoneComponent> zone)
+    public void UpdateInZoneEntities(Entity<ZoneComponent> zone)
     {
+        // shouldn't work on an noninitialized map.
+        var map = _transform.GetMap(zone.Owner);
+        if (!_map.IsInitialized(map))
+            return;
+
         var entitiesToLeave = zone.Comp.Entities.ToHashSet();
         var entitiesToEnter = new HashSet<EntityUid>();
         var curEntities = GetEntitiesInZone(zone).ToHashSet();
@@ -152,49 +152,12 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return new Box2(bottomLeft, topRight);
     }
 
-    /// <inheritdoc cref="GetIntegerBox(Vector2, Vector2)"/>
-    public static Box2i GetIntegerBox(Box2 box)
-    {
-        return GetIntegerBox(box.BottomLeft, box.TopRight);
-    }
-
-    /// <inheritdoc cref="GetIntegerBox(Vector2, Vector2)"/>
-    public static Box2i GetIntegerBox(TileRef tile1, TileRef tile2)
-    {
-        return GetIntegerBox(tile1.GridIndices, tile2.GridIndices);
-    }
-
-    /// <inheritdoc cref="GetIntegerBox(Vector2, Vector2)"/>
-    public static Box2i GetIntegerBox(MapCoordinates point1, MapCoordinates point2)
-    {
-        return GetIntegerBox(point1.Position, point2.Position);
-    }
-
-    /// <inheritdoc cref="GetIntegerBox(Vector2, Vector2)"/>
-    public static Box2i GetIntegerBox(EntityCoordinates point1, EntityCoordinates point2)
-    {
-        return GetIntegerBox(point1.Position, point2.Position);
-    }
-
-    /// <summary>
-    /// Creates a box between two points with integer coordinates
-    /// </summary>
-    public static Box2i GetIntegerBox(Vector2 point1, Vector2 point2)
-    {
-        var left = (int)Math.Floor(Math.Min(point1.X, point2.X));
-        var bottom = (int)Math.Floor(Math.Min(point1.Y, point2.Y));
-        var right = (int)Math.Floor(Math.Max(point1.X, point2.X)) + 1;
-        var top = (int)Math.Floor(Math.Max(point1.Y, point2.Y)) + 1;
-
-        var bottomLeft = new Vector2i(left, bottom);
-        var topRight = new Vector2i(right, top);
-        return new Box2i(bottomLeft, topRight);
-    }
-
     /// <summary>
     /// Determines whether the <paramref name="entity"/> is located inside the <paramref name="zone"/>.
-    /// The check is performed at the <see cref="TransformComponent.Coordinates"/> of <paramref name="entity"/>
     /// </summary>
+    /// <remarks>
+    /// The check is performed at the <see cref="TransformComponent.Coordinates"/> of the <paramref name="entity"/>
+    /// </remarks>
     public bool InZone(Entity<ZoneComponent> zone, EntityUid entity, RegionTypes regionType = RegionTypes.Active)
     {
         return InZone(zone, Transform(entity).Coordinates, regionType);
@@ -275,29 +238,34 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <summary>
     /// Removes intersections of boxes and, if possible, unite adjacent boxes (if this does not affect the total area)
     /// </summary>
-    public void RecalculateZoneBoxes(Entity<ZoneComponent> zone)
+    public void RecalculateZoneRegions(Entity<ZoneComponent> zone)
     {
-        zone.Comp.ZoneParams.RecalculateSize();
+        zone.Comp.ZoneParams.RecalculateRegions();
         Dirty(zone, zone.Comp);
     }
 
-    public static void RecalculateZoneBoxes(ref IEnumerable<Box2> boxes)
+    public static void RecalculateZoneRegions(ref IEnumerable<Box2> boxes)
     {
         MathHelperExtensions.GetNonOverlappingBoxes(ref boxes);
         MathHelperExtensions.UnionInEqualSizedBoxes(ref boxes);
     }
 
-    public static IEnumerable<Box2> RecalculateZoneBoxes(IEnumerable<Box2> boxes)
+    public static IEnumerable<Box2> RecalculateZoneRegions(IEnumerable<Box2> boxes)
     {
-        RecalculateZoneBoxes(ref boxes);
+        RecalculateZoneRegions(ref boxes);
         return boxes;
     }
 
+    /// <inheritdoc cref="AttachToGrid(EntityUid, Box2)"/>
     public Box2 AttachToGrid(NetEntity container, Box2 box)
     {
         return AttachToGrid(GetEntity(container), box);
     }
 
+    /// <summary>
+    /// Creates a new <see cref="Box2"/> based on the <paramref name="box"/>.
+    /// It aligns the original box to fit within the grid.
+    /// </summary>
     public Box2 AttachToGrid(EntityUid container, Box2 box)
     {
         if (TryComp<MapGridComponent>(container, out var mapGrid))
@@ -306,21 +274,31 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return MathHelperExtensions.AttachToGrid(box);
     }
 
+    /// <inheritdoc cref="AttachToGrid(EntityUid, ref Box2)"/>
     public void AttachToGrid(NetEntity container, ref Box2 box)
     {
         AttachToGrid(GetEntity(container), ref box);
     }
 
+    /// <summary>
+    /// Changes the input <paramref name="box"/> by creating a new <see cref="Box2"/> based on the <paramref name="box"/>.
+    /// It aligns the original box to fit within the grid.
+    /// </summary>
     public void AttachToGrid(EntityUid container, ref Box2 box)
     {
         box = AttachToGrid(container, box);
     }
 
+    /// <inheritdoc cref="AttachToGrid(EntityUid, IEnumerable{Box2})"/>
     public IEnumerable<Box2> AttachToGrid(NetEntity container, IEnumerable<Box2> boxes)
     {
         return AttachToGrid(GetEntity(container), boxes);
     }
 
+    /// <summary>
+    /// Creates a new array of <see cref="Box2"/> based on the <paramref name="boxes"/>.
+    /// It aligns the original box to fit within the grid.
+    /// </summary>
     public IEnumerable<Box2> AttachToGrid(EntityUid container, IEnumerable<Box2> boxes)
     {
         if (TryComp<MapGridComponent>(container, out var mapGrid))
@@ -329,11 +307,16 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return MathHelperExtensions.AttachToGrid(boxes);
     }
 
+    /// <inheritdoc cref="AttachToGrid(EntityUid, ref IEnumerable{Box2})"/>
     public void AttachToGrid(NetEntity container, ref IEnumerable<Box2> boxes)
     {
         AttachToGrid(GetEntity(container), ref boxes);
     }
 
+    /// <summary>
+    /// Changes the input <paramref name="boxes"/> by creating a new array of <see cref="Box2"/> based on the <paramref name="boxes"/>.
+    /// It aligns the original box to fit within the grid.
+    /// </summary>
     public void AttachToGrid(EntityUid container, ref IEnumerable<Box2> boxes)
     {
         boxes = AttachToGrid(container, boxes);
@@ -373,11 +356,13 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return value != null;
     }
 
+    /// <inheritdoc cref="CutSpace(Entity{MapGridComponent}, IEnumerable{Box2}, out IEnumerable{Box2})"/>
     public IEnumerable<Box2> CutSpace(NetEntity parent, IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
     {
         return CutSpace(GetEntity(parent), boxes, out spaceBoxes);
     }
 
+    /// <inheritdoc cref="CutSpace(Entity{MapGridComponent}, IEnumerable{Box2}, out IEnumerable{Box2})"/>
     public IEnumerable<Box2> CutSpace(EntityUid parent, IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
     {
         spaceBoxes = [];
@@ -387,17 +372,22 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return CutSpace((parent, mapGrid), boxes, out spaceBoxes);
     }
 
+    /// <summary>
+    /// Cuts out the area located in space from the input <paramref name="boxes"/>
+    /// </summary>
     public IEnumerable<Box2> CutSpace(Entity<MapGridComponent> grid, IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
     {
         spaceBoxes = GetSpaceBoxes(grid, boxes);
         return MathHelperExtensions.SubstructBox(boxes, spaceBoxes);
     }
 
+    /// <inheritdoc cref="CutSpace(Entity{MapGridComponent}, IEnumerable{Box2}, out IEnumerable{Box2})"/>
     public void CutSpace(NetEntity parent, ref IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
     {
         CutSpace(GetEntity(parent), ref boxes, out spaceBoxes);
     }
 
+    /// <inheritdoc cref="CutSpace(Entity{MapGridComponent}, IEnumerable{Box2}, out IEnumerable{Box2})"/>
     public void CutSpace(EntityUid parent, ref IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes) 
     {
         spaceBoxes = [];
@@ -410,16 +400,21 @@ public abstract partial class SharedZonesSystem : EntitySystem
         CutSpace((parent, mapGrid), ref boxes, out spaceBoxes);
     }
 
+    /// <inheritdoc cref="CutSpace(Entity{MapGridComponent}, IEnumerable{Box2}, out IEnumerable{Box2})"/>
     public void CutSpace(Entity<MapGridComponent> grid, ref IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
     {
         boxes = CutSpace(grid, boxes, out spaceBoxes);
     }
 
+    /// <inheritdoc cref="GetSpaceBoxes(EntityUid, IEnumerable{Box2})"/>
     public IEnumerable<Box2> GetSpaceBoxes(NetEntity parent, IEnumerable<Box2> boxes)
     {
         return GetSpaceBoxes(GetEntity(parent), boxes);
     }
 
+    /// <summary>
+    /// Returns the area located in space from the input <paramref name="boxes"/>
+    /// </summary>
     public IEnumerable<Box2> GetSpaceBoxes(EntityUid parent, IEnumerable<Box2> boxes)
     {
         if (!TryComp<MapGridComponent>(parent, out var mapGrid))
@@ -439,22 +434,6 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return MathHelperExtensions.SubstructBox(result, excess);
     }
 
-    public static IEnumerable<Box2> GetSortedBoxes(in IEnumerable<Box2> boxes)
-    {
-        var sorted = boxes.OrderBy(b => Box2.Area(b))
-            .ThenBy(b => b.BottomLeft)
-            .ThenBy(b => b.TopRight);
-
-        return sorted;
-    }
-
-    public static bool IsBoxesEquals(ZoneParams state1, ZoneParams state2)
-    {
-        var ourBoxes = GetSortedBoxes(state1.ActiveRegion);
-        var otherBoxes = GetSortedBoxes(state2.ActiveRegion);
-        return ourBoxes.SequenceEqual(otherBoxes);
-    }
-
     public bool IsValidContainer(NetEntity netEntity)
     {
         return IsValidContainer(GetEntity(netEntity));
@@ -462,7 +441,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
     public bool IsValidContainer(EntityUid uid)
     {
-        return HasComp<MapComponent>(uid) || HasComp<MapGridComponent>(uid);
+        return uid.IsValid() && (HasComp<MapComponent>(uid) || HasComp<MapGridComponent>(uid));
     }
 }
 
@@ -501,11 +480,17 @@ public sealed partial class ZoneParams()
 
     private NetEntity _container = NetEntity.Invalid;
 
+    /// <summary>
+    /// Name of the zone
+    /// </summary>
     [ViewVariables]
     public string Name = string.Empty;
 
+    /// <summary>
+    /// ID of the zone's entity prototype
+    /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
-    public string ProtoId = SharedZonesSystem.BaseZoneId;
+    public EntProtoId<ZoneComponent> ProtoID = SharedZonesSystem.BaseZoneId;
 
     /// <summary>
     /// Current color of the zone
@@ -513,6 +498,9 @@ public sealed partial class ZoneParams()
     [ViewVariables]
     public Color Color = SharedZonesSystem.DefaultColor;
 
+    /// <summary>
+    /// Should the size of the zone be attached to the grid
+    /// </summary>
     [ViewVariables]
     public bool AttachToGrid
     {
@@ -520,11 +508,15 @@ public sealed partial class ZoneParams()
         set
         {
             _attachToGrid = value;
-            RecalculateSize();
+            RecalculateRegions();
         }
     }
     private bool _attachToGrid = false;
 
+    /// <summary>
+    /// Space cutting option.
+    /// It only works if the <see cref="Container"/> is a grid
+    /// </summary>
     [ViewVariables]
     public CutSpaceOptions CutSpaceOption
     {
@@ -532,22 +524,31 @@ public sealed partial class ZoneParams()
         set
         {
             _cutSpaceOption = value;
-            RecalculateSize();
+            RecalculateRegions();
         }
     }
     private CutSpaceOptions _cutSpaceOption = CutSpaceOptions.None;
 
+    /// <summary>
+    /// Original size of the zone
+    /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
     [Access(Other = AccessPermissions.Read)]
     public List<Box2> OriginalRegion = new();
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    [Access(Other = AccessPermissions.Read)]
-    public List<Box2> ActiveRegion = new();
-
+    /// <summary>
+    /// Disabled zone size
+    /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
     [Access(Other = AccessPermissions.Read)]
     public List<Box2> DisabledRegion = new();
+
+    /// <summary>
+    /// The <see cref="OriginalRegion"/> with the cut-out <see cref="DisabledRegion"/>
+    /// </summary>
+    [ViewVariables(VVAccess.ReadOnly)]
+    [Access(Other = AccessPermissions.Read)]
+    public List<Box2> ActiveRegion = new();
 
     public ZoneParams(ZoneParams @params) : this()
     {
@@ -577,8 +578,8 @@ public sealed partial class ZoneParams()
         if (SharedZonesSystem.TryParseTag(input, nameof(Name).ToLower(), out value))
             Name = value;
 
-        if (SharedZonesSystem.TryParseTag(input, nameof(ProtoId).ToLower(), out value))
-            ProtoId = value;
+        if (SharedZonesSystem.TryParseTag(input, nameof(ProtoID).ToLower(), out value))
+            ProtoID = value;
 
         if (SharedZonesSystem.TryParseTag(input, nameof(Color).ToLower(), out value) &&
             Color.TryParse(value, out var color))
@@ -605,27 +606,30 @@ public sealed partial class ZoneParams()
 
     public override int GetHashCode()
     {
-        var sorted = SharedZonesSystem.GetSortedBoxes(ActiveRegion);
-        return HashCode.Combine(Container, Name, ProtoId, Color, AttachToGrid, sorted);
+        var sorted = GetSortedBoxes(OriginalRegion);
+        return HashCode.Combine(Container, Name, ProtoID, Color, AttachToGrid, sorted);
     }
 
     public override bool Equals([NotNullWhen(true)] object? obj)
     {
-        if (obj is not ZoneParams state)
+        if (obj is not ZoneParams @params)
             return false;
 
-        return Equals(state);
+        return Equals(@params);
     }
 
     public bool Equals(ZoneParams other)
     {
         var isFieldsEquals = Container == other.Container &&
             Name == other.Name &&
-            ProtoId == other.ProtoId &&
+            ProtoID == other.ProtoID &&
             Color == other.Color &&
             AttachToGrid == other.AttachToGrid;
 
-        return isFieldsEquals && SharedZonesSystem.IsBoxesEquals(this, other);
+        if (!isFieldsEquals)
+            return false;
+
+        return IsRegionEquals(this, other, RegionTypes.Original);
     }
 
     public bool TryChangeContainer(NetEntity newContainer)
@@ -649,14 +653,14 @@ public sealed partial class ZoneParams()
             $"{nameof(Container).ToLower()}={Container}",
             $"{nameof(OriginalRegion).ToLower()}=\"{originalStr}\"",
             $"{nameof(Name).ToLower()}=\"{Name}\"",
-            $"{nameof(ProtoId).ToLower()}=\"{ProtoId}\"",
+            $"{nameof(ProtoID).ToLower()}=\"{ProtoID}\"",
             $"{nameof(Color).ToLower()}={Color.ToHex()}",
             $"{nameof(AttachToGrid).ToLower()}={AttachToGrid}",
             $"{nameof(CutSpaceOption).ToLower()}={CutSpaceOption}"
             ];
     }
 
-    public void RecalculateSize()
+    public void RecalculateRegions()
     {
         var original = OriginalRegion.AsEnumerable();
         var zoneSys = IoCManager.Resolve<IEntityManager>().System<SharedZonesSystem>();
@@ -676,21 +680,21 @@ public sealed partial class ZoneParams()
                 break;
         }
 
-        SharedZonesSystem.RecalculateZoneBoxes(ref disabled);
-        DisabledRegion = disabled.ToList();
+        SharedZonesSystem.RecalculateZoneRegions(ref disabled);
+        DisabledRegion = [.. disabled];
 
-        SharedZonesSystem.RecalculateZoneBoxes(ref original);
-        OriginalRegion = original.ToList();
+        SharedZonesSystem.RecalculateZoneRegions(ref original);
+        OriginalRegion = [.. original];
 
         var active = MathHelperExtensions.SubstructBox(original, disabled);
-        SharedZonesSystem.RecalculateZoneBoxes(ref active);
-        ActiveRegion = active.ToList();
+        SharedZonesSystem.RecalculateZoneRegions(ref active);
+        ActiveRegion = [.. active];
     }
 
     public void SetOriginalSize(IEnumerable<Box2> newSize)
     {
-        OriginalRegion = newSize.ToList();
-        RecalculateSize();
+        OriginalRegion = [.. newSize];
+        RecalculateRegions();
     }
 
     public ZoneParams GetCopy()
@@ -702,7 +706,7 @@ public sealed partial class ZoneParams()
     {
         _container = @params.Container;
         Name = @params.Name;
-        ProtoId = @params.ProtoId;
+        ProtoID = @params.ProtoID;
         Color = @params.Color;
         _attachToGrid = @params.AttachToGrid;
         _cutSpaceOption = @params.CutSpaceOption;
@@ -734,5 +738,26 @@ public sealed partial class ZoneParams()
         Original,
         Active,
         Disabled
+    }
+
+    public static bool IsRegionEquals(ZoneParams left, ZoneParams right, RegionTypes region = RegionTypes.Original)
+    {
+        return IsRegionEquals(left, right, region, region);
+    }
+
+    public static bool IsRegionEquals(ZoneParams left, ZoneParams right, RegionTypes leftRegion, RegionTypes rightRegion)
+    {
+        var ourBoxes = GetSortedBoxes(left.GetRegion(leftRegion));
+        var otherBoxes = GetSortedBoxes(right.GetRegion(rightRegion));
+        return ourBoxes.SequenceEqual(otherBoxes);
+    }
+
+    public static IEnumerable<Box2> GetSortedBoxes(in IEnumerable<Box2> boxes)
+    {
+        var sorted = boxes.OrderBy(b => Box2.Area(b))
+            .ThenBy(b => b.BottomLeft)
+            .ThenBy(b => b.TopRight);
+
+        return sorted;
     }
 }

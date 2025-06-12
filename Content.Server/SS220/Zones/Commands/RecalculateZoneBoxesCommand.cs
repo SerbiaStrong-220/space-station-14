@@ -27,6 +27,6 @@ public sealed partial class RecalculateZoneBoxesCommand : LocalizedCommands
             return;
 
         var zoneSys = _entityManager.System<ZonesSystem>();
-        zoneSys.RecalculateZoneBoxes((zoneUid, zoneComp));
+        zoneSys.RecalculateZoneRegions((zoneUid, zoneComp));
     }
 }
