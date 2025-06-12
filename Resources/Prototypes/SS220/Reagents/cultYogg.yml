@@ -11,7 +11,7 @@
   metabolisms:
     Poison:
       effects:
-      - !type:ChemMiGomicelium
+      - !type:ChemMiGomiceliumEffect
       - !type:GenericStatusEffect
         key: Rave
         component: Rave
@@ -38,7 +38,7 @@
   metabolisms:
     Poison:
       effects:
-      - !type:ChemElixirOfLiberation
+      - !type:ChemElixirOfLiberationEffect
 
 - type: reagent
   id: CultYoggVenomancerAcid

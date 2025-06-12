@@ -134,8 +134,8 @@ public abstract class SharedMechSystem : EntitySystem
         component.EquipmentContainer = _container.EnsureContainer<Container>(uid, component.EquipmentContainerId);
         component.BatterySlot = _container.EnsureContainer<ContainerSlot>(uid, component.BatterySlotId);
 
-        if (HasComp<MechRobotComponent>(uid))
-            component.PilotSlot = _container.EnsureContainer<ContainerSlot>(uid, component.PilotSlotId);
+        //SS220-MechClothingInHandsFix
+        component.PilotSlot = _container.EnsureContainer<ContainerSlot>(uid, component.PilotSlotId);
 
         UpdateAppearance(uid, component);
     }

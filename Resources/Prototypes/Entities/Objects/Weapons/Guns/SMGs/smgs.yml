@@ -159,15 +159,16 @@
       maxAngle: 29
       fireRate: 6.5
       #220 SG Angle Updates end
-      burstFireRate: 12
+      burstFireRate: 18
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
+      selectedMode: Burst
       availableModes:
       - Burst
       - FullAuto
       - SemiAuto
       shotsPerBurst: 3
-      burstCooldown: 0.25
+      burstCooldown: 0.375
     - type: ItemSlots
       slots:
         gun_magazine:
@@ -189,7 +190,7 @@
               - CartridgePistol
     - type: MagazineVisuals
       magState: mag
-      steps: 1
+      steps: 1 # SS220-fix-for-our-sprites
       zeroVisible: true
     - type: Appearance
 

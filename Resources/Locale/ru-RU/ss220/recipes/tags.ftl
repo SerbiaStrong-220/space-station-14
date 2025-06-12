@@ -68,6 +68,7 @@ construction-graph-tag-match-stick = спичка
 construction-graph-tag-potat = картофель
 construction-graph-tag-wheat-bushel = бушель пшеницы
 construction-graph-tag-corgi-hide = шкура корги
+soil-construction-graph-any-mushroom = любой гриб
 
 # toys
 construction-graph-tag-rubber-ducky = резиновая уточка

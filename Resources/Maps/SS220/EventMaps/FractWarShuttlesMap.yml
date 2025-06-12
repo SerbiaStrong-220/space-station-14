@@ -49,9 +49,7 @@ entities:
     - type: Transform
     - type: Map
       mapPaused: True
-    - type: PhysicsMap
     - type: GridTree
-    - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
     - type: LoadedMap
@@ -3482,30 +3480,6 @@ entities:
       color: '#32CD32FF'
       flags: Hide
     - type: IgnoreFTLMassLimit
-- proto: ActionToggleInternals
-  entities:
-  - uid: 6205
-    components:
-    - type: Transform
-      parent: 6204
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 6204
-  - uid: 6215
-    components:
-    - type: Transform
-      parent: 6214
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 6214
-- proto: ActionToggleLight
-  entities:
-  - uid: 4
-    components:
-    - type: Transform
-      parent: 3
-    - type: InstantAction
-      container: 3
 - proto: AdvMopItem
   entities:
   - uid: 3338
@@ -43708,22 +43682,14 @@ entities:
     - type: Transform
       pos: -6.242511,16.774467
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 4
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 4
     - type: Physics
       canCollide: True
-    - type: ActionsContainer
   - uid: 5146
     components:
     - type: Transform
@@ -48096,16 +48062,8 @@ entities:
     components:
     - type: Transform
       parent: 6203
-    - type: GasTank
-      toggleActionEntity: 6205
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 6205
     - type: InsideEntityStorage
   - uid: 6210
     components:
@@ -48311,16 +48269,8 @@ entities:
     components:
     - type: Transform
       parent: 6213
-    - type: GasTank
-      toggleActionEntity: 6215
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 6215
     - type: InsideEntityStorage
   - uid: 7762
     components:

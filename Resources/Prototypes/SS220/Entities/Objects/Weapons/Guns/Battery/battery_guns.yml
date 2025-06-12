@@ -71,7 +71,7 @@
   - type: MagazineVisuals
     magState: mag
     steps: 6
-    zeroVisible: true
+    zeroVisible: false
   - type: Wieldable
   - type: GunWieldBonus
     minAngle: -2

@@ -1,63 +1,70 @@
 - type: entity
+  parent: BaseAction
   id: ActionRevenantShop
   name: Shop
   description: Opens the ability shop.
   components:
-  - type: InstantAction
+  - type: Action
     icon: Interface/Actions/shop.png
+  - type: InstantAction
     event: !type:RevenantShopActionEvent
 
 - type: entity
+  parent: BaseAction
   id: ActionRevenantDefile
   name: Defile
   description: Costs 30 Essence.
   components:
-  - type: InstantAction
-    #SS220 revenant-sprite-port begin
-    itemIconStyle: BigAction
+  - type: Action
+    useDelay: 15
     icon:
       sprite: SS220/Interface/Actions/actions_revenant.rsi
       state: defile
-    #SS220 revenant-sprite-port end
+  - type: InstantAction
     event: !type:RevenantDefileActionEvent
-    useDelay: 15
 
 - type: entity
+  parent: BaseAction
   id: ActionRevenantOverloadLights
   name: Overload Lights
   description: Costs 40 Essence.
   components:
-  - type: InstantAction
+  - type: Action
     #SS220 revenant-sprite-port begin
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/actions_revenant.rsi
       state: overloadlight
     #SS220 revenant-sprite-port end
-    event: !type:RevenantOverloadLightsActionEvent
     useDelay: 20
+  - type: InstantAction
+    event: !type:RevenantOverloadLightsActionEvent
 
 #- type: entity
+#  parent: BaseAction
 #  id: ActionRevenantBlight
 #  name: Blight
 #  description: Costs 50 Essence.
 #  components:
-#  - type: InstantAction
+#  - type: Action
 #    icon: Interface/Actions/blight.png
-#    event: !type:RevenantBlightActionEvent
 #    useDelay: 20
+#  - type: InstantAction
+#    event: !type:RevenantBlightActionEvent
 
 - type: entity
+  parent: BaseAction
   id: ActionRevenantMalfunction
   name: Malfunction
   description: Costs 60 Essence.
   components:
-  - type: InstantAction
+  - type: Action
     #SS220 revenant-sprite-port begin
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/actions_revenant.rsi
       state: malfunction
     #SS220 revenant-sprite-port end
-    event: !type:RevenantMalfunctionActionEvent
     useDelay: 20
+  - type: InstantAction
+    event: !type:RevenantMalfunctionActionEvent

@@ -280,7 +280,7 @@ namespace Content.Server.GameTicking
 
             _mind.TransferTo(newMind, mob);
 
-            _roles.MindAddJobRole(newMind, silent: silent, jobPrototype:jobId);
+            _roles.MindAddJobRole(newMind, silent: silent, jobPrototype: jobId);
             var jobName = _jobs.MindTryGetJobName(newMind);
             _admin.UpdatePlayerList(player);
 
@@ -294,7 +294,7 @@ namespace Content.Server.GameTicking
                             ("gender", character.Gender), //SS220-upstream-merge
                             ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
                         Loc.GetString("latejoin-arrival-sender"),
-                        playSound: false,
+                        playDefaultSound: false,
                         colorOverride: Color.Gold);
                 }
                 else
@@ -305,7 +305,7 @@ namespace Content.Server.GameTicking
                         ("gender", character.Gender), // Corvax-LastnameGender
                         ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
                     Loc.GetString("latejoin-arrival-sender"),
-                    playSound: false);
+                    playDefaultSound: false);
                 }
             }
 
@@ -480,17 +480,17 @@ namespace Content.Server.GameTicking
                 return spawn;
             }
 
-            if (_mapManager.MapExists(DefaultMap))
+            if (_map.MapExists(DefaultMap))
             {
-                var mapUid = _mapManager.GetMapEntityId(DefaultMap);
+                var mapUid = _map.GetMapOrInvalid(DefaultMap);
                 if (!TerminatingOrDeleted(mapUid))
                     return new EntityCoordinates(mapUid, Vector2.Zero);
             }
 
             // Just pick a point at this point I guess.
-            foreach (var map in _mapManager.GetAllMapIds())
+            foreach (var map in _map.GetAllMapIds())
             {
-                var mapUid = _mapManager.GetMapEntityId(map);
+                var mapUid = _map.GetMapOrInvalid(map);
 
                 if (!metaQuery.TryGetComponent(mapUid, out var meta)
                     || meta.EntityPaused

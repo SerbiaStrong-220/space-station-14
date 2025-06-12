@@ -15,6 +15,7 @@
     - ClothMade
     - InShirtTie #SS220 Law Department Fashion
     - TieRed #SS220 Law Department Fashion
+    - Recyclable
 
 - type: entity
   parent: ClothingNeckBase
@@ -34,6 +35,7 @@
     - ClothMade
     - InShirtTie
     - TieDark
+    - Recyclable
   #SS220 Law Department Fashion End
 
 - type: entity
@@ -49,6 +51,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
     - InShirtTie #SS220 Law Department Fashion

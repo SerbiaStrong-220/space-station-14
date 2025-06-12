@@ -36,6 +36,7 @@
   - type: Tag
     tags:
       - KRSPowerCell
+      - WeaponRechargerWhitelist
   - type: Appearance
   - type: PowerCellVisuals
   - type: Riggable
