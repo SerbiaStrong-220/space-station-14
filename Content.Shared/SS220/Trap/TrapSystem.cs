@@ -137,11 +137,6 @@ public sealed class TrapSystem : EntitySystem
         RaiseLocalEvent(ent, ev);
     }
 
-    private void ToggleTrap(Entity<TrapComponent> ent, EntityUid? user, bool withSound = true)
-    {
-
-    }
-
     public bool CanArmTrap(Entity<TrapComponent> ent, EntityUid? user)
     {
         // Providing a stuck traps on one tile
