@@ -57,7 +57,7 @@ public sealed partial class PinpointerBoundUserInterface(EntityUid owner, Enum u
             case PinpointerMode.Crew:
                 {
                     _crewMenu = this.CreateWindow<PinpointerMenu>();
-                    _crewMenu.OnTargetPicked = OnTargetPicked;
+                    _crewMenu.OnTargetPicked = OnCrewTargetPicked;
                     _crewMenu.PopulateList();
                     break;
                 }
@@ -89,6 +89,10 @@ public sealed partial class PinpointerBoundUserInterface(EntityUid owner, Enum u
         _itemMenu?.DnaWindow?.Close();
     }
 
+    private void OnCrewTargetPicked(NetEntity target)
+    {
+        SendMessage(new PinpointerCrewTargetPick(target));
+    }
     private void OnTargetPicked(NetEntity target)
     {
         SendMessage(new PinpointerTargetPick(target));

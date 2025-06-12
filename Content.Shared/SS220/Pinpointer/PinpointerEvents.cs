@@ -19,6 +19,14 @@ public sealed partial class PinpointerTargetPick(NetEntity target) : BoundUserIn
 
 [Serializable]
 [NetSerializable]
+public sealed partial class PinpointerCrewTargetPick(NetEntity target) : BoundUserInterfaceMessage
+{
+    public NetEntity Target = target;
+}
+
+
+[Serializable]
+[NetSerializable]
 public sealed partial class PinpointerDnaPick(string? dna) : BoundUserInterfaceMessage
 {
     public string? Dna = dna;

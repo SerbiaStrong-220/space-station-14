@@ -24,7 +24,8 @@ public sealed class PinpointerSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<PinpointerComponent, PinpointerTargetPick>(OnPickCrew);
+        SubscribeLocalEvent<PinpointerComponent, PinpointerTargetPick>(OnPickTarget);
+        SubscribeLocalEvent<PinpointerComponent, PinpointerCrewTargetPick>(OnPickCrew);
         SubscribeLocalEvent<PinpointerComponent, PinpointerDnaPick>(OnDnaPicked);
     }
 
@@ -148,12 +149,18 @@ public sealed class PinpointerSystem : EntitySystem
         {
             PinpointerMode.Crew => comp.Sensors.Any(sensor => GetEntity(sensor.Entity) == comp.Target),
             PinpointerMode.Item => comp.TrackedItems.Any(item => item.Entity == GetNetEntity(comp.Target!.Value)),
-            PinpointerMode.Component => comp.Sensors.Any(target => GetEntity(target.Entity) == comp.Target),
+            PinpointerMode.Component => comp.Targets.Any(target => GetEntity(target.Entity) == comp.Target),
             _ => false,
         };
     }
 
-    private void OnPickCrew(Entity<PinpointerComponent> ent, ref PinpointerTargetPick args)
+    private void OnPickCrew(Entity<PinpointerComponent> ent, ref PinpointerCrewTargetPick args)
+    {
+        _pinpointer.SetTarget(ent.Owner, GetEntity(args.Target));
+        _pinpointer.SetActive(ent.Owner, true);
+    }
+
+    private void OnPickTarget(Entity<PinpointerComponent> ent, ref PinpointerTargetPick args)
     {
         _pinpointer.SetTarget(ent.Owner, GetEntity(args.Target));
         _pinpointer.SetActive(ent.Owner, true);
@@ -194,7 +201,7 @@ public sealed class PinpointerSystem : EntitySystem
                 break;
 
             case PinpointerMode.Component:
-                _uiSystem.SetUiState(ent.Owner, PinpointerUIKey.Key, new PinpointerComponentUIState(ent.Comp.TrackedItems));
+                _uiSystem.SetUiState(ent.Owner, PinpointerUIKey.Key, new PinpointerComponentUIState(ent.Comp.Targets));
                 break;
         }
     }

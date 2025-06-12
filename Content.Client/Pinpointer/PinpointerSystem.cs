@@ -1,6 +1,7 @@
 using Content.Shared.Pinpointer;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using System.Numerics;
 
 namespace Content.Client.Pinpointer;
 

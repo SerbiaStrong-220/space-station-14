@@ -5,20 +5,21 @@
   id: CultPinpointer
   name: cult pinpointer
   description: A handheld tracking device that leads to the direction of any crew member.
-  suffix: Crew, Pinpointer
+  suffix: CultYogg, Pinpointer
   components:
   - type: Sprite
-    sprite: Objects/Devices/pinpointer.rsi
+    sprite: SS220/Objects/CultYogg/pinpointer.rsi
     layers:
-    - state: pinpointer-crew
+    - state: bug
       map: ["enum.PinpointerLayers.Base"]
-    - state: pinonnull
+    - state: bug_null
       map: ["enum.PinpointerLayers.Screen"]
       shader: unshaded
       visible: false
+      offset: "-0.0125,0.28125"
   - type: Icon
-    sprite: Objects/Devices/pinpointer.rsi
-    state: pinpointer-crew
+    sprite: SS220/Objects/CultYogg/pinpointer.rsi
+    state: bug
   - type: Pinpointer
     mode: Component
     whitelist:
@@ -30,3 +31,16 @@
     interfaces:
       enum.PinpointerUIKey.Key:
         type: PinpointerBoundUserInterface
+  - type: GenericVisualizer
+    visuals:
+      enum.PinpointerVisuals.IsActive:
+        enum.PinpointerLayers.Screen:
+          True: { visible: True }
+          False: { visible: False }
+      enum.PinpointerVisuals.TargetDistance:
+        enum.PinpointerLayers.Screen:
+          Unknown: { state: bug_null }
+          Reached: { state: pinondirect }
+          Close: { state: eye_close }
+          Medium: { state: eye_close }
+          Far: { state: eye_close }
