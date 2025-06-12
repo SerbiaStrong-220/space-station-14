@@ -12,36 +12,41 @@ using System.Text.RegularExpressions;
 
 namespace Content.Server.SS220.Undereducated;
 
-public sealed class UndereducatedSystem : EntitySystem
+public sealed partial class UndereducatedSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedLanguageSystem _languageSystem = default!;
-    private Dictionary<string, string> _defaultLanguage = default!;
-    private static readonly Regex WordBoundaryRegex = new(@"\b\w+\b", RegexOptions.Compiled);
-    private static readonly Regex WordTokenRegex = new(@"(\w+|\W+)", RegexOptions.Compiled);
-    private static readonly Regex IsWordRegex = new(@"^\w+$", RegexOptions.Compiled);
 
-    public override void Initialize()
+    [GeneratedRegex(@"\b\w+\b", RegexOptions.Compiled)]
+    private static partial Regex WordBoundaryRegex();
+
+    [GeneratedRegex(@"(\w+|\W+)", RegexOptions.Compiled)]
+    private static partial Regex WordTokenRegex();
+
+    [GeneratedRegex(@"^\w+$", RegexOptions.Compiled)]
+    private static partial Regex IsWordRegex();
+
+    private Dictionary<string, ProtoId<LanguagePrototype>> _defaultLanguage = new()
+    {
+        ["Human"] = "SolCommon", // %sl
+        ["Reptilian"] = "Sintaunathi", // %sin
+        ["Tajaran"] = "Siiktajr", // %sii
+        ["Vox"] = "VoxPidgin", // %vox
+        ["Diona"] = "Rootspeak", // %rt
+        ["SlimePerson"] = "Bubblish", // %bbl
+        ["Moth"] = "Tkachi", // %tch
+        ["Dwarf"] = "Eldwarf", // %el
+        ["Arachnid"] = "Arati", // %ara
+        ["Vulpkanin"] = "Canilunzt", // %cani
+    };
+
+public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<UndereducatedComponent, BeforeAccentGetEvent>(OnBeforeAccent);
         SubscribeLocalEvent<UndereducatedComponent, MapInitEvent>(OnMapInit);
-
-        _defaultLanguage = new Dictionary<string, string>()
-        {
-            ["Human"] = "SolCommon", // %sl
-            ["Reptilian"] = "Sintaunathi", // %sin
-            ["Tajaran"] = "Siiktajr", // %sii
-            ["Vox"] = "VoxPidgin", // %vox
-            ["Diona"] = "Rootspeak", // %rt
-            ["SlimePerson"] = "Bubblish", // %bbl
-            ["Moth"] = "Tkachi", // %tch
-            ["Dwarf"] = "Eldwarf", // %el
-            ["Arachnid"] = "Arati", // %ara
-            ["Vulpkanin"] = "Canilunzt", // %cani
-        };
     }
 
     private void OnMapInit(Entity<UndereducatedComponent> ent, ref MapInitEvent _)
@@ -49,17 +54,15 @@ public sealed class UndereducatedSystem : EntitySystem
         if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
             && _defaultLanguage.TryGetValue(apperance.Species, out var language)
             && _proto.TryIndex<LanguagePrototype>(language, out var languagePrototype))
-        {
             ent.Comp.Language = languagePrototype.ID;
-        }
         else
-            ent.Comp.Language = "Galactic";
+            ent.Comp.Language = _languageSystem.GalacticLanguage;
     }
 
     private bool TryGetLanguageTag(Entity<UndereducatedComponent> ent, [NotNullWhen(true)] out string? tag)
     {
         tag = null;
-        var languagePrototype = new LanguagePrototype();
+        LanguagePrototype? languagePrototype;
 
         // По компоненту
         if (ent.Comp.Language.Length > 0
@@ -87,7 +90,7 @@ public sealed class UndereducatedSystem : EntitySystem
         if (args.Message.Length <= 0 || !TryGetLanguageTag(ent, out var tagByRace))
             return;
 
-        var wordsTotal = WordBoundaryRegex.Matches(args.Message).Count;
+        var wordsTotal = WordBoundaryRegex().Matches(args.Message).Count;
         var wordsReplaced = 0;
 
         var newMessage = new StringBuilder();
@@ -95,15 +98,15 @@ public sealed class UndereducatedSystem : EntitySystem
         languageMessage.ChangeNodes(node =>
         {
             newMessage.Clear();
-            var tokenMatches = WordTokenRegex.Matches(node.Message);
+            var tokenMatches = WordTokenRegex().Matches(node.Message);
             var tokenCount = tokenMatches.Count;
 
             for (int i = 0; i < tokenCount; i++)
             {
                 var word = tokenMatches[i].Value;
-                bool isWord = IsWordRegex.IsMatch(word);
+                var isWordRegex = IsWordRegex();
 
-                if (!isWord)
+                if (!isWordRegex.IsMatch(word))
                 {
                     newMessage.Append(word);
                     continue;
