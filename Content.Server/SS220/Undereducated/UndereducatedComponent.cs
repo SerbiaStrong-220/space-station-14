@@ -9,8 +9,8 @@ namespace Content.Server.SS220.Undereducated;
 public sealed partial class UndereducatedComponent : Component
 {
     [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<LanguageReplacementsPrototype>), required: false)]
-    public string Language = "";
+    public string Language = default!;
 
     [DataField]
-    public float ChanseToReplace = 0.1f;
+    public float ChanseToReplace = 0.05f;
 }

@@ -130,3 +130,4 @@
   cost: 2
   components:
   - type: Undereducated
+    id: ""

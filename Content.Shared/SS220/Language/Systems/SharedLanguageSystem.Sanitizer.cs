@@ -177,7 +177,7 @@ public abstract partial class SharedLanguageSystem
         if (m == null || !_language.TryGetLanguageByKey(m.Value.Trim(), out language))
             return false;
 
-        messageWithoutTags = Regex.Replace(message, keyPatern, string.Empty).TrimStart(); // SS220 space-betwen-words fix
+        messageWithoutTags = Regex.Replace(message, keyPatern, string.Empty).Trim();
         return messageWithoutTags != null && language != null;
     }
 
