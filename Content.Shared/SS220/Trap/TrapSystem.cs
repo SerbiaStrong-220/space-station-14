@@ -106,8 +106,13 @@ public sealed class TrapSystem : EntitySystem
     {
         if (!CanArmTrap(ent, user))
             return;
+        var xform = Transform(ent.Owner).Coordinates;
+        if (user != null && withSound)
+            _audio.PlayPredicted(ent.Comp.SetTrapSound, xform, user);
 
-        ToggleTrap(ent, user, withSound);
+        ent.Comp.State =TrapArmedState.Armed;
+        Dirty(ent);
+        UpdateVisuals(ent.Owner, ent.Comp);
         _transformSystem.AnchorEntity(ent.Owner);
 
         var ev = new TrapArmedEvent();
@@ -119,7 +124,13 @@ public sealed class TrapSystem : EntitySystem
         if (!CanDefuseTrap(ent, user))
             return;
 
-        ToggleTrap(ent, user, withSound);
+        var xform = Transform(ent.Owner).Coordinates;
+        if (user != null && withSound)
+            _audio.PlayPredicted(ent.Comp.DefuseTrapSound, xform, user);
+
+        ent.Comp.State = TrapArmedState.Unarmed;
+        Dirty(ent);
+        UpdateVisuals(ent.Owner, ent.Comp);
         _transformSystem.Unanchor(ent.Owner);
 
         var ev = new TrapDefusedEvent();
@@ -128,13 +139,7 @@ public sealed class TrapSystem : EntitySystem
 
     private void ToggleTrap(Entity<TrapComponent> ent, EntityUid? user, bool withSound = true)
     {
-        var xform = Transform(ent.Owner).Coordinates;
-        if (user != null && withSound)
-            _audio.PlayPredicted(ent.Comp.State == TrapArmedState.Unarmed ? ent.Comp.SetTrapSound : ent.Comp.DefuseTrapSound, xform, user);
 
-        ent.Comp.State = ent.Comp.State == TrapArmedState.Unarmed ? TrapArmedState.Armed : TrapArmedState.Unarmed;
-        Dirty(ent);
-        UpdateVisuals(ent.Owner, ent.Comp);
     }
 
     public bool CanArmTrap(Entity<TrapComponent> ent, EntityUid? user)
