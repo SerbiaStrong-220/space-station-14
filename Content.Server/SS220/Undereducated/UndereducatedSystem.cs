@@ -21,7 +21,8 @@ public sealed partial class UndereducatedSystem : EntitySystem
     [GeneratedRegex(@"\s+", RegexOptions.Compiled)]
     private static partial Regex SpaceRegex();
 
-    private readonly Dictionary<string, ProtoId<LanguagePrototype>> _defaultLanguage = new()
+    private static readonly string BorgLanguage = "Binary";
+    private static readonly Dictionary<string, ProtoId<LanguagePrototype>> DefaultLanguage = new()
     {
         ["Human"] = "SolCommon", // %sl
         ["Reptilian"] = "Sintaunathi", // %sin
@@ -46,7 +47,7 @@ public sealed partial class UndereducatedSystem : EntitySystem
     private void OnMapInit(Entity<UndereducatedComponent> ent, ref MapInitEvent _)
     {
         if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
-            && _defaultLanguage.TryGetValue(apperance.Species, out var language)
+            && DefaultLanguage.TryGetValue(apperance.Species, out var language)
             && _proto.TryIndex<LanguagePrototype>(language, out var languagePrototype))
         {
             ent.Comp.Language = languagePrototype.ID;
@@ -54,9 +55,9 @@ public sealed partial class UndereducatedSystem : EntitySystem
         }
 
         // Для малограмотных боргов
-        if (_languageSystem.CanSpeak(ent, "Binary"))
+        if (_languageSystem.CanSpeak(ent, BorgLanguage))
         {
-            ent.Comp.Language = "Binary";
+            ent.Comp.Language = BorgLanguage;
             return;
         }
 
@@ -83,7 +84,7 @@ public sealed partial class UndereducatedSystem : EntitySystem
 
         // По словарю
         if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
-            && _defaultLanguage.TryGetValue(apperance.Species, out var language)
+            && DefaultLanguage.TryGetValue(apperance.Species, out var language)
             && _proto.TryIndex<LanguagePrototype>(language, out languagePrototype))
         {
             tag = languagePrototype.KeyWithPrefix;
