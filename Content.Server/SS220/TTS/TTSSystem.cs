@@ -15,8 +15,6 @@ using Robust.Shared.Random;
 using Robust.Shared.Network;
 using Robust.Server.Player;
 using Content.Server.SS220.Language;
-using Content.Shared.Ghost;
-using Content.Shared.Radio;
 using Content.Shared.SS220.Language.Systems;
 
 
@@ -512,6 +510,13 @@ public sealed partial class TTSSystem : EntitySystem
             if (!_playerManager.TryGetSessionByEntity(receiver, out var session)
                 || !soundData.TryGetValue(out var audioData))
                 continue;
+
+            var ev = new TelepathyTtsSendAttemptEvent(receiver, args.Channel);
+            RaiseLocalEvent(receiver, ev);
+
+            if (ev.Cancelled)
+                continue;
+
             _netManager.ServerSendMessage(new MsgPlayTts
             {
                 Data = audioData,

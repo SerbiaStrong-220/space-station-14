@@ -10,18 +10,32 @@ public sealed partial class GhostHearingWindow : FancyWindow
 {
     public event Action<string, bool>? OnChannelToggled;
 
+    public event Action<bool>? OnAllChannelToggled;
+
+    private bool _toggleState = true;
+
     public GhostHearingWindow()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+
+        ToggleAllChannels.OnPressed += _ =>
+        {
+            OnAllChannelToggled?.Invoke(_toggleState);
+        };
     }
 
     public void SetChannels(List<(string Key, Color Color, string DisplayName, bool Enabled)> channels)
     {
         ChannelsList.DisposeAllChildren();
 
+        var allOn = true;
+
         foreach (var (key, color, name, enabled) in channels)
         {
+            if (!enabled)
+                allOn = false;
+
             var checkbox = new CheckBox
             {
                 Text = name,
@@ -37,6 +51,11 @@ public sealed partial class GhostHearingWindow : FancyWindow
 
             ChannelsList.AddChild(checkbox);
         }
+
+        _toggleState = !allOn;
+
+        ToggleAllChannels.Text =
+            Loc.GetString("headset-ui-toggle-all-channels", ("value", _toggleState));
     }
 }
 

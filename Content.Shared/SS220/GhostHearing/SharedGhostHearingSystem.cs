@@ -1,3 +1,5 @@
+using Robust.Shared.Prototypes;
+
 namespace Content.Shared.SS220.GhostHearing;
 
 public abstract class SharedGhostHearingSystem : EntitySystem
@@ -6,4 +8,11 @@ public abstract class SharedGhostHearingSystem : EntitySystem
     {
         base.Initialize();
     }
+}
+
+public interface IHearableChannelPrototype : IPrototype
+{
+    string ID { get; }
+    string LocalizedName { get; }
+    Color Color { get; }
 }
