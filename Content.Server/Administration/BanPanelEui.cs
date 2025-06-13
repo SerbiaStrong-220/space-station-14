@@ -124,7 +124,8 @@ public sealed class BanPanelEui : BaseEui
             var now = DateTimeOffset.UtcNow;
             foreach (var role in roles)
             {
-                if (_prototypeManager.HasIndex<JobPrototype>(role))
+                if (_prototypeManager.HasIndex<JobPrototype>(role) ||
+                    _prototypeManager.HasIndex<AntagPrototype>(role)) // SS220 antag bans
                 {
                     _banManager.CreateRoleBan(targetUid, target, Player.UserId, addressRange, targetHWid, role, minutes, severity, reason, now, postBanInfo);
                 }
