@@ -12,6 +12,10 @@ using Content.Shared.IdentityManagement;
 using Content.Client.UserInterface.Controls;
 using Content.Client.VendingMachines.UI;
 using Robust.Client.UserInterface;
+using Content.Shared.SS220.CultYogg.MiGo;
+using Robust.Client.UserInterface.CustomControls;
+using Robust.Shared.Utility;
+using Content.Client.Botany.Components;
 
 namespace Content.Client.SS220.CultYogg.FungusMachine
 {
@@ -89,6 +93,12 @@ namespace Content.Client.SS220.CultYogg.FungusMachine
             _listItems[protoID] = (button, item);
             button.AddChild(item);
             button.AddStyleClass("ButtonSquare");
+
+            var shroomLocName = string.Concat("Food", protoID.ToString().AsSpan(0, protoID.ToString().Length - "Seeds".Length), "Cult");
+
+            var tooltip = new Tooltip();
+            tooltip.SetMessage(FormattedMessage.FromUnformatted(Loc.GetString("ent-" + shroomLocName + ".desc")));
+            button.TooltipSupplier = _ => tooltip;
         }
 
         public void Populate(List<FungusMachineInventoryEntry> inventory)
