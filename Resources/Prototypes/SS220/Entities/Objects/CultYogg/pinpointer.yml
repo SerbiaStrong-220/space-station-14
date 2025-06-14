@@ -22,9 +22,7 @@
     state: bug
   - type: Pinpointer
     mode: Component
-    whitelist:
-      components:
-          - HumanoidAppearance
+    targetsComponent: HumanoidAppearance
   - type: ActivatableUI
     key: enum.PinpointerUIKey.Key
   - type: UserInterface

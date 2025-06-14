@@ -1,15 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.DeviceNetwork.Components;
 using Content.Server.Medical.SuitSensors;
+using Content.Shared.Access.Components;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Pinpointer;
 using Content.Shared.SS220.Pinpointer;
 using Content.Shared.Whitelist;
+using JetBrains.FormatRipper.Elf;
 using Robust.Shared.Timing;
 using System.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Content.Server.SS220.Pinpointer;
 
@@ -21,6 +23,7 @@ public sealed class PinpointerSystem : EntitySystem
     [Dependency] private readonly SuitSensorSystem _suit = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly IComponentFactory _componentFactory = default!;
 
     public override void Initialize()
     {
@@ -120,27 +123,14 @@ public sealed class PinpointerSystem : EntitySystem
     {
         comp.Targets.Clear();
 
-        if (comp.Whitelist is null)
+        if (!_componentFactory.TryGetRegistration(comp.TargetsComponent, out var registration))
             return;
 
-        foreach (var ent in _lookup.GetEntitiesInRange(Transform(uid).Coordinates, 32f))//ToDo_SS220 idk mak distance
+        var query1 = EntityManager.AllEntityQueryEnumerator(registration.Type);
+        while (query1.MoveNext(out var target, out _))
         {
-            if (_whitelistSystem.IsWhitelistFail(comp.Whitelist, ent))
-                continue;
-
-            comp.Targets.Add(new TrackedItem(GetNetEntity(ent), MetaData(ent).EntityName));
+            comp.Targets.Add(new TrackedItem(GetNetEntity(target), MetaData(target).EntityName));
         }
-
-        /*
-         var query = AllEntityQueryEnumerator<T>();
-            var comps = new EntityUid[Count<T>()];
-            var i = 0;
-
-            while (query.MoveNext(out var uid, out _))
-            {
-                comps[i++] = uid;
-            }
-         */
     }
 
     private bool IsTargetValid(PinpointerComponent comp)
