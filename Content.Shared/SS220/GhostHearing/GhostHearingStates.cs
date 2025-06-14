@@ -34,6 +34,17 @@ public sealed partial class GhostHearingChannelToggledMessage : BoundUserInterfa
 }
 
 [Serializable, NetSerializable]
+public sealed partial class GhostHearingToggledAllChannelsMessage : BoundUserInterfaceMessage
+{
+    public bool Enabled;
+
+    public GhostHearingToggledAllChannelsMessage(bool enabled)
+    {
+        Enabled = enabled;
+    }
+}
+
+[Serializable, NetSerializable]
 public sealed partial class GhostHearingSetListEvent : EntityEventArgs
 {
     public NetEntity Owner;
