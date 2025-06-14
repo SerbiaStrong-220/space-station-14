@@ -30,6 +30,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
     private Vector2 _baseMinSize;
     private ZoneOptions _curOption;
     private BoxContainer? _paramsAdditionalButtonsBox;
+    private bool _isRespawnConfirmed;
 
     public ZonesControlWindow()
     {

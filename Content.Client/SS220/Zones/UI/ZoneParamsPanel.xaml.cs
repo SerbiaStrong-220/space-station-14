@@ -25,7 +25,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     private readonly ZonesSystem _zones = default!;
 
-    public Action<ZoneParams>? ParamsChanged;
+    public Action? OnRefreshed;
 
     public Entity<ZoneComponent>? ZoneEntity
     {
@@ -35,7 +35,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     private Entity<ZoneComponent>? _zoneEntity;
 
-    public ZoneParams CurParams
+    public ZoneParams CurrentParams
     {
         get => _curParams;
         set
@@ -43,7 +43,6 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             _curParams = value;
             CancelLayout();
             Refresh();
-            ParamsChanged?.Invoke(value);
         }
     }
     private ZoneParams _curParams = default!;
@@ -96,14 +95,14 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         NameLineEdit.OnFocusExit += _ => Refresh();
         NameLineEdit.OnTextEntered += args =>
         {
-            CurParams.Name = args.Text;
+            CurrentParams.Name = args.Text;
             Refresh();
         };
 
         PrototypeIDLineEdit.OnFocusExit += _ => Refresh();
         PrototypeIDLineEdit.OnTextEntered += args =>
         {
-            CurParams.ProtoID = args.Text;
+            CurrentParams.ProtoID = args.Text;
             Refresh();
         };
 
@@ -112,7 +111,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         {
             if (Color.TryParse(args.Text, out var color))
             {
-                CurParams.Color = color;
+                CurrentParams.Color = color;
                 Refresh();
             }
         };
@@ -123,21 +122,21 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             if (NetEntity.TryParse(args.Text, out var netEnt) &&
                 _zones.IsValidContainer(_entityManager.GetEntity(netEnt)))
             {
-                CurParams.Container = netEnt;
+                CurrentParams.Container = netEnt;
                 Refresh();
             }
         };
 
         AttachToGridCheckbox.OnPressed += _ =>
         {
-            CurParams.AttachToGrid = AttachToGridCheckbox.Pressed;
+            CurrentParams.AttachToGrid = AttachToGridCheckbox.Pressed;
             Refresh();
         };
 
         ColorSelectorButton.AddStyleClass(StyleNano.StyleClassChatFilterOptionButton);
         ColorSelectorButton.OnPressed += _ =>
         {
-            _selectorPopup.SetColor(CurParams.Color);
+            _selectorPopup.SetColor(CurrentParams.Color);
 
             var globalPos = ColorSelectorButton.GlobalPosition;
             var box = UIBox2.FromDimensions(globalPos, _selectorPopup.MinSize);
@@ -146,7 +145,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         _selectorPopup.OnColorSelected += color =>
         {
-            CurParams.Color = color;
+            CurrentParams.Color = color;
             Refresh();
         };
         _selectorPopup.OnVisibilityChanged += args =>
@@ -160,7 +159,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         CutSpaceOptionSelector.OnItemSelected += args =>
         {
-            CurParams.CutSpaceOption = (CutSpaceOptions)args.Id;
+            CurrentParams.CutSpaceOption = (CutSpaceOptions)args.Id;
             Refresh();
         };
 
@@ -179,29 +178,30 @@ public sealed partial class ZoneParamsPanel : PanelContainer
     {
         _selectorPopup.Close();
 
-        NameLineEdit.Text = CurParams.Name;
-        PrototypeIDLineEdit.Text = CurParams.ProtoID;
-        HexColorLineEdit.Text = CurParams.Color.ToHex();
-        ContainerNetIDLineEdit.Text = CurParams.Container.IsValid() ? CurParams.Container.ToString() : string.Empty;
-        AttachToGridCheckbox.Pressed = CurParams.AttachToGrid;
-        CutSpaceOptionSelector.SelectId((int)CurParams.CutSpaceOption);
+        NameLineEdit.Text = CurrentParams.Name;
+        PrototypeIDLineEdit.Text = CurrentParams.ProtoID;
+        HexColorLineEdit.Text = CurrentParams.Color.ToHex();
+        ContainerNetIDLineEdit.Text = CurrentParams.Container.IsValid() ? CurrentParams.Container.ToString() : string.Empty;
+        AttachToGridCheckbox.Pressed = CurrentParams.AttachToGrid;
+        CutSpaceOptionSelector.SelectId((int)CurrentParams.CutSpaceOption);
 
         Box2ListContainer.RemoveAllChildren();
-        for (var i = 0; i < CurParams.OriginalRegion.Count; i++)
+        for (var i = 0; i < CurrentParams.OriginalRegion.Count; i++)
         {
-            var box = CurParams.OriginalRegion[i];
+            var box = CurrentParams.OriginalRegion[i];
             var entry = new ZoneBoxEntry(box);
             var index = i;
             entry.OnBoxChanged += newBox =>
             {
-                var newSize = CurParams.OriginalRegion.ToList();
+                var newSize = CurrentParams.OriginalRegion.ToList();
                 newSize[index] = newBox;
-                CurParams.SetOriginalSize(newSize);
+                CurrentParams.SetOriginalSize(newSize);
             };
             Box2ListContainer.AddChild(entry);
         }
 
         _overlayProvider.Refresh();
+        OnRefreshed?.Invoke();
     }
 
     public void SetZoneEntity(Entity<ZoneComponent>? entity)
@@ -211,7 +211,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         if (string.IsNullOrEmpty(_originalParams.Name))
             _originalParams.Name = $"Zone {_zones.GetZonesCount() + 1}";
 
-        CurParams = _originalParams.GetCopy();
+        CurrentParams = _originalParams.GetCopy();
     }
 
     private void StartLayout(BoxLayoutMode mode)
@@ -225,12 +225,12 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         {
             case BoxLayoutMode.Adding:
                 _boxLayoutManager.StartNew();
-                _boxLayoutManager.AttachToGrid = CurParams.AttachToGrid;
+                _boxLayoutManager.AttachToGrid = CurrentParams.AttachToGrid;
                 break;
 
             case BoxLayoutMode.Cutting:
                 _boxLayoutManager.StartNew();
-                _boxLayoutManager.AttachToGrid = CurParams.AttachToGrid;
+                _boxLayoutManager.AttachToGrid = CurrentParams.AttachToGrid;
                 _boxLayoutManager.SetColor(Color.Red);
                 break;
         }
@@ -266,16 +266,16 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     private void OnLayoutEnded(BoxLayoutManager.BoxParams @params)
     {
-        var newParams = CurParams;
-        if (!CurParams.Container.IsValid())
+        var newParams = CurrentParams;
+        if (!CurrentParams.Container.IsValid())
             newParams.Container = @params.Parent;
-        else if (@params.Parent != CurParams.Container)
+        else if (@params.Parent != CurrentParams.Container)
         {
             CancelLayout();
             return;
         }
 
-        var newSize = CurParams.ActiveRegion.ToList();
+        var newSize = CurrentParams.ActiveRegion.ToList();
         switch (_layoutMode)
         {
             case BoxLayoutMode.Adding:
@@ -284,8 +284,8 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
             case BoxLayoutMode.Cutting:
                 var cutter = @params.Box;
-                if (CurParams.AttachToGrid)
-                    _zones.AttachToGrid(CurParams.Container, ref cutter);
+                if (CurrentParams.AttachToGrid)
+                    _zones.AttachToGrid(CurrentParams.Container, ref cutter);
 
                 newSize = MathHelperExtensions.SubstructBox(newSize, cutter).ToList();
                 break;
@@ -302,7 +302,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         newParams.SetOriginalSize(newSize);
         newParams.RecalculateRegions();
-        CurParams = newParams;
+        CurrentParams = newParams;
     }
 
     private void OnLayoutCancelled()
@@ -313,7 +313,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     public ZoneParams GetParams()
     {
-        return CurParams;
+        return CurrentParams;
     }
 
     public void SetOverlay(bool enabled)
@@ -348,8 +348,8 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         public void Refresh()
         {
-            _addedBoxes = GetChanges(_panel.OriginalParams, _panel.CurParams);
-            _deletedBoxes = GetChanges(_panel.CurParams, _panel.OriginalParams);
+            _addedBoxes = GetChanges(_panel.OriginalParams, _panel.CurrentParams);
+            _deletedBoxes = GetChanges(_panel.CurrentParams, _panel.OriginalParams);
         }
 
         public override List<BoxesOverlay.BoxOverlayData> GetBoxesDatas()

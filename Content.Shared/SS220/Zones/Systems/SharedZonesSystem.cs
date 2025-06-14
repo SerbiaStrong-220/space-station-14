@@ -126,18 +126,13 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return new Box2(bottomLeft, topRight);
     }
 
-    /// <summary>
-    /// Determines whether the <paramref name="entity"/> is located inside the <paramref name="zone"/>.
-    /// </summary>
-    /// <remarks>
-    /// The check is performed at the <see cref="TransformComponent.Coordinates"/> of the <paramref name="entity"/>
-    /// </remarks>
+    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, MapCoordinates, RegionTypes)"/>
     public bool InZone(Entity<ZoneComponent> zone, EntityUid entity, RegionTypes regionType = RegionTypes.Active)
     {
         return InZone(zone, _transform.GetMapCoordinates(entity), regionType);
     }
 
-    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, Vector2)"/>
+    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, MapCoordinates, RegionTypes)"/>
     public bool InZone(Entity<ZoneComponent> zone, EntityCoordinates point, RegionTypes regionType = RegionTypes.Active)
     {
         if (GetEntity(zone.Comp.ZoneParams.Container) != point.EntityId)
@@ -147,7 +142,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     }
 
     /// <summary>
-    /// Determines whether the <paramref name="worldPoint"/> is located inside the <paramref name="zone"/>.
+    /// Determines whether the <paramref name="point"/> is located inside the <paramref name="zone"/>.
     /// </summary>
     public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point, RegionTypes regionType = RegionTypes.Active)
     {
