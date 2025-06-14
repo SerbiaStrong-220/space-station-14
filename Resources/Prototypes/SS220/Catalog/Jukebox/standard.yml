@@ -121,3 +121,15 @@
   name: Andrew Sega (remixed by Rivgane) - Mechanism 8
   path:
     path: /Audio/SS220/Jukebox/mechanismeight.ogg
+
+- type: jukebox
+  id: sakura
+  name: Q__ntum - Sakura
+  path:
+    path: /Audio/SS220/Lobby/sakura.ogg
+
+- type: jukebox
+  id: you_see_her
+  name: Q__ntum - You see her. She's coming.
+  path:
+    path: /Audio/SS220/Lobby/you_see_her.ogg
