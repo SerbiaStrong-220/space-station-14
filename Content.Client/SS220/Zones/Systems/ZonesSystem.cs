@@ -1,0 +1,111 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Client.Administration.Managers;
+using Content.Client.SS220.Overlays;
+using Content.Client.SS220.Zones.Overlays;
+using Content.Client.SS220.Zones.UI;
+using Content.Shared.Administration;
+using Content.Shared.SS220.Zones.Components;
+using Content.Shared.SS220.Zones.Systems;
+using Robust.Client.Console;
+
+namespace Content.Client.SS220.Zones.Systems;
+
+public sealed partial class ZonesSystem : SharedZonesSystem
+{
+    [Dependency] private readonly IClientConsoleHost _clientConsoleHost = default!;
+    [Dependency] private readonly IClientAdminManager _clientAdmin = default!;
+
+    public ZonesControlWindow ControlWindow = default!;
+
+    private BoxesOverlay _overlay = default!;
+    private ZonesBoxesOverlayProvider _overlayProvider = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        ControlWindow = new ZonesControlWindow();
+
+        _overlay = BoxesOverlay.GetOverlay();
+
+        _overlayProvider = new ZonesBoxesOverlayProvider();
+
+        _clientAdmin.AdminStatusUpdated += OnAdminStatusUpdated;
+
+        SubscribeLocalEvent<ZoneComponent, ComponentInit>(OnZoneInit);
+        SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnZoneShutdown);
+        SubscribeLocalEvent<ZoneComponent, AfterAutoHandleStateEvent>(OnAfterZoneStateHandled);
+
+        SubscribeLocalEvent<ZonesContainerComponent, ComponentInit>(OnContainerInit);
+        SubscribeLocalEvent<ZonesContainerComponent, ComponentShutdown>(OnContainerShutdown);
+        SubscribeLocalEvent<ZonesContainerComponent, AfterAutoHandleStateEvent>(OnAfterContainerStateHandled);
+    }
+
+    private void OnAdminStatusUpdated()
+    {
+        SetOverlay(_overlay.HasProvider(_overlayProvider));
+    }
+
+    private void OnZoneInit(Entity<ZoneComponent> entity, ref ComponentInit args)
+    {
+        ControlWindow.RefreshEntries();
+    }
+
+    private void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
+    {
+        ControlWindow.RefreshEntries();
+    }
+
+    private void OnAfterZoneStateHandled(Entity<ZoneComponent> entity, ref AfterAutoHandleStateEvent args)
+    {
+        ControlWindow.RefreshEntries();
+    }
+
+    private void OnContainerInit(Entity<ZonesContainerComponent> entity, ref ComponentInit args)
+    {
+        ControlWindow.RefreshEntries();
+    }
+
+    private void OnContainerShutdown(Entity<ZonesContainerComponent> entity, ref ComponentShutdown args)
+    {
+        ControlWindow.RefreshEntries();
+    }
+
+    private void OnAfterContainerStateHandled(Entity<ZonesContainerComponent> entity, ref AfterAutoHandleStateEvent args)
+    {
+        ControlWindow.RefreshEntries();
+    }
+
+    public void SetOverlay(bool value)
+    {
+        if (!_clientAdmin.HasFlag(AdminFlags.Mapping))
+            value = false;
+
+        if (value)
+            _overlay.AddProvider(_overlayProvider);
+        else
+            _overlay.RemoveProvider(_overlayProvider);
+    }
+
+    public void ExecuteDeleteZonesContainer(EntityUid container)
+    {
+        _clientConsoleHost.ExecuteCommand($"zones:delete_container {GetNetEntity(container)}");
+    }
+
+    public void ExecuteDeleteZone(EntityUid zone)
+    {
+        _clientConsoleHost.ExecuteCommand($"zones:delete {GetNetEntity(zone)}");
+    }
+
+    public void ExecuteCreateZone(ZoneParams @params)
+    {
+        var tags = string.Join(' ', @params.GetTags());
+        _clientConsoleHost.ExecuteCommand($"zones:create {tags}");
+    }
+
+    public void ExecuteChangeZone(Entity<ZoneComponent> zone, ZoneParams newParams)
+    {
+        var tags = string.Join(' ', newParams.GetTags());
+        _clientConsoleHost.ExecuteCommand($"zones:change {GetNetEntity(zone)} {tags}");
+    }
+}

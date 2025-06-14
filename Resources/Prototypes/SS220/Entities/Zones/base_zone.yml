@@ -1,0 +1,5 @@
+- type: entity
+  id: BaseZone
+  name: base zone
+  components:
+  - type: Zone
