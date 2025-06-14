@@ -1,0 +1,25 @@
+# Original code licensed under Imperial CLA.
+# Copyright holders: orix0689 (discord) and pocchitsu (discord)
+# See Content.Shared/SS220/Ninja/Objectives/LeaveNoTrace/license.txt
+
+# Modified and/or redistributed under SS220 CLA with hosting restrictions.
+# Full license text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Imperial/SS220 start
+- type: entity
+  id: WhistleNinjaExclamation
+  name: exclamation
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Structures/Storage/closet.rsi
+    state: cardboard_special
+    drawdepth: Effects
+    offset: 0, 1
+    noRot: true
+  - type: Transform
+    noRot: true
+  - type: Tag
+    tags:
+    - HideContextMenu
+# Imperial/SS220 end
