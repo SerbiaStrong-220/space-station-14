@@ -146,7 +146,7 @@
   - type: HitscanBatteryAmmoProvider
     proto: RedLightLaser
     fireCost: 50
-  # SS220 EDIT END    
+  # SS220 EDIT END
 
 - type: entity
   name: retro laser blaster
