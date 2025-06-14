@@ -1,0 +1,26 @@
+- type: entity
+  parent: ClothingShoesClown
+  id: ClothingShoesClownKing
+  name: the king's shoes
+  suffix: Unremoveable
+  description: Legend has it that the last king died due to an arrow hitting his heel.
+  components:
+  - type: Sprite
+    sprite: Clothing/Shoes/Specific/cluwne.rsi
+  - type: Clothing
+    sprite: Clothing/Shoes/Specific/cluwne.rsi
+  - type: Unremoveable
+    lockToHands: false
+  - type: NoSlip
+  - type: ItemSlots
+    slots:
+      item:
+        name: clothing-boots-sidearm
+        whitelist:
+          tags:
+          - Knife
+          - Sidearm
+  - type: ContainerFill
+    containers:
+     item:
+      - CombatKnife
