@@ -121,3 +121,13 @@
   cost: 2
   components:
   - type: FrontalLisp
+
+- type: trait
+  id: Undereducated
+  name: trait-Undereducated-name
+  description: trait-Undereducated-desc
+  category: SpeechTraits
+  cost: 2
+  components:
+  - type: Undereducated
+    language: "i_love_Megumin"
