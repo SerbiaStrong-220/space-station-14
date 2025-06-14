@@ -16,6 +16,7 @@
   description: Costs 30 Essence.
   components:
   - type: Action
+    itemIconStyle: BigAction #SS220 I guess..
     useDelay: 15
     icon:
       sprite: SS220/Interface/Actions/actions_revenant.rsi
