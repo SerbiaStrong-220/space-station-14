@@ -3,6 +3,7 @@ using Content.Shared.SS220.CultYogg.FungusMachine;
 using Robust.Client.UserInterface.Controls;
 using System.Linq;
 using Robust.Client.UserInterface;
+using Content.Client.UserInterface.Controls;
 
 namespace Content.Client.SS220.CultYogg.FungusMachine.UI
 {
@@ -36,7 +37,7 @@ namespace Content.Client.SS220.CultYogg.FungusMachine.UI
             _menu.OnItemSelected += OnItemSelected;
             _menu.OnSearchChanged += OnSearchChanged;
 
-            _menu.Populate(_cachedInventory, out _cachedFilteredIndex);
+            _menu.Populate(_cachedInventory);
         }
 
         protected override void UpdateState(BoundUserInterfaceState state)
@@ -48,15 +49,18 @@ namespace Content.Client.SS220.CultYogg.FungusMachine.UI
 
             _cachedInventory = newState.Inventory;
 
-            _menu?.Populate(_cachedInventory, out _cachedFilteredIndex, _menu.SearchBar.Text);
+            _menu?.Populate(_cachedInventory);
         }
 
-        private void OnItemSelected(ItemList.ItemListSelectedEventArgs args)
+        private void OnItemSelected(GUIBoundKeyEventArgs args, ListData data)
         {
             if (_cachedInventory.Count == 0)
                 return;
 
-            var selectedItem = _cachedInventory.ElementAtOrDefault(_cachedFilteredIndex.ElementAtOrDefault(args.ItemIndex));
+            if (data is not FungusItemsListData itemData)
+                return;
+
+            var selectedItem = _cachedInventory.ElementAtOrDefault(itemData.ItemIndex);
 
             if (selectedItem == null)
                 return;
@@ -66,7 +70,7 @@ namespace Content.Client.SS220.CultYogg.FungusMachine.UI
 
         private void OnSearchChanged(string? filter)
         {
-            _menu?.Populate(_cachedInventory, out _cachedFilteredIndex, filter);
+            _menu?.Populate(_cachedInventory);
         }
     }
 }

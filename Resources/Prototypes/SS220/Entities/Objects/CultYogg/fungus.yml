@@ -43,7 +43,6 @@
           collection: MetalGlassBreak
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: WiresPanel
   - type: Clickable
   - type: InteractionOutline
   - type: Physics
@@ -85,7 +84,7 @@
   id: CondimenttInventory
   startingInventory:
     MiGomyceteSeeds: 0
-    CultStrangeFruitSeed: 0
+    StrangeFruitSeeds: 0
     NullificationShroomSeeds: 0
     SidiousShroomSeeds: 0
     LubroShroomSeeds: 0

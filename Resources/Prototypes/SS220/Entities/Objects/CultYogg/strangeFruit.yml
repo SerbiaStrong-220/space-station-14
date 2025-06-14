@@ -4,7 +4,7 @@
   name: strange fruit
   parent: BaseItem
   suffix: CultYogg
-  id: ProductStrangeFruitCultYogg
+  id: FoodStrangeFruitCult
   components:
   - type: FlavorProfile
     flavors:
@@ -97,7 +97,7 @@
   suffix: CultYogg
   name: packet of strange fruit seed
   description: "The iconic, extremely deadly mushroom to be used for purely ornamental purposes."
-  id: CultStrangeFruitSeed
+  id: StrangeFruitSeeds
   components:
     - type: Seed
       seedId: StrangeFruit
@@ -110,9 +110,9 @@
   noun: seeds-noun-seeds
   displayName: seeds-strange-fruit-display-name
   plantRsi: SS220/Objects/CultYogg/strangefruit.rsi
-  packetPrototype: CultStrangeFruitSeed
+  packetPrototype: StrangeFruitSeeds
   productPrototypes:
-    - ProductStrangeFruitCultYogg
+    - FoodStrangeFruitCult
   lifespan: 25
   maturation: 12
   production: 3
