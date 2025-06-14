@@ -5,14 +5,16 @@
   description: A neosilk clip-on red tie.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Ties/redtie.rsi
+    sprite: SS220/Clothing/Neck/Ties/red.rsi #SS220 Law Department Fashion
   - type: Clothing
-    sprite: Clothing/Neck/Ties/redtie.rsi
+    sprite: SS220/Clothing/Neck/Ties/red.rsi #SS220 Law Department Fashion
   - type: Tag
     tags:
     - HamsterWearable
     - WhitelistChameleon
     - ClothMade
+    - InShirtTie #SS220 Law Department Fashion
+    - TieRed #SS220 Law Department Fashion
     - Recyclable
 
 - type: entity
@@ -22,9 +24,19 @@
   description: A loosely tied necktie, a perfect accessory for the over-worked detective.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Ties/dettie.rsi
+    sprite: SS220/Clothing/Neck/Ties/dark.rsi #SS220 Law Department Fashion
   - type: Clothing
-    sprite: Clothing/Neck/Ties/dettie.rsi
+    sprite: SS220/Clothing/Neck/Ties/dark.rsi #SS220 Law Department Fashion
+  #SS220 Law Department Fashion Begin
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - ClothMade
+    - InShirtTie
+    - TieDark
+    - Recyclable
+  #SS220 Law Department Fashion End
 
 - type: entity
   parent: ClothingNeckBase
@@ -33,15 +45,17 @@
   description: Why do we all have to wear these ridiculous ties?
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Ties/scitie.rsi
+    sprite: SS220/Clothing/Neck/Ties/sci.rsi #SS220 Law Department Fashion
   - type: Clothing
-    sprite: Clothing/Neck/Ties/scitie.rsi
+    sprite: SS220/Clothing/Neck/Ties/sci.rsi #SS220 Law Department Fashion
   - type: Tag
     tags:
     - ClothMade
     - Recyclable
     - HamsterWearable
     - WhitelistChameleon
+    - InShirtTie #SS220 Law Department Fashion
+    - TieSci #SS220 Law Department Fashion
   #ss220 special_sounds start
   - type: SpecialSounds
   - type: Vocal
