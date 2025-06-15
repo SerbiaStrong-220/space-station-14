@@ -121,6 +121,9 @@ public sealed class PinpointerSystem : EntitySystem
     {
         comp.Targets.Clear();
 
+        if (comp.TargetsComponent is null)
+            return;
+
         if (!_componentFactory.TryGetRegistration(comp.TargetsComponent, out var registration))
             return;
 
