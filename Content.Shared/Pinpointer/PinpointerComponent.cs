@@ -109,7 +109,7 @@ public sealed partial class PinpointerComponent : Component
     /// </summary>
     [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public string TargetsComponent;
+    public string? TargetsComponent;
     //ss220 add pinpointer ui end
 }
 

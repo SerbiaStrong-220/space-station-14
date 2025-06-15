@@ -40,5 +40,5 @@
           Unknown: { state: bug_null }
           Reached: { state: pinondirect }
           Close: { state: eye_close }
-          Medium: { state: eye_close }
-          Far: { state: eye_close }
+          Medium: { state: eye_medium }
+          Far: { state: eye_far }
