@@ -105,6 +105,7 @@ public sealed partial class PinpointerComponent : Component
 
     /// <summary>
     /// The target component that will be searched for
+    /// Not the same variable as "Component" because it is used by different systems
     /// </summary>
     [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
