@@ -8,10 +8,8 @@ using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Pinpointer;
 using Content.Shared.SS220.Pinpointer;
 using Content.Shared.Whitelist;
-using JetBrains.FormatRipper.Elf;
 using Robust.Shared.Timing;
 using System.Linq;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Content.Server.SS220.Pinpointer;
 
