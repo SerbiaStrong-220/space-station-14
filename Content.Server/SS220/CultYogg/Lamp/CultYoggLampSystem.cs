@@ -36,8 +36,8 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
 
     private void OnShutdown(Entity<CultYoggLampComponent> ent, ref ComponentShutdown args)
     {
-        _actions.RemoveAction(ent, ent.Comp.ToggleActionEntity);
-        _actions.RemoveAction(ent, ent.Comp.SelfToggleActionEntity);
+        _actions.RemoveAction(ent.Comp.ToggleActionEntity);
+        _actions.RemoveAction(ent.Comp.SelfToggleActionEntity);
     }
 
     private void OnGetActions(Entity<CultYoggLampComponent> ent, ref GetItemActionsEvent args)

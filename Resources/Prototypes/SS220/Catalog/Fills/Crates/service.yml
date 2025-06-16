@@ -1,0 +1,154 @@
+# SS220-wood-and-plants-in-cargo-begin
+- type: entity
+  id: CratePottedPlant
+  parent: CrateGenericSteel
+  name: potted plant crate
+  description: Contains one random potted plant for your station!
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RandomPottedPlantsTable
+
+- type: entity
+  id: CrateRandomPottedPlants
+  parent: CrateGenericSteel
+  name: potted plants crate
+  description: Contains five random potted plants for your station! This is a better deal.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RandomPottedPlantsTable
+        rolls: !type:ConstantNumberSelector
+          value: 5
+
+- type: entity
+  id: CrateBioLumPottedPlant
+  parent: CrateGenericSteel
+  name: potted bioluminescent plant crate
+  description: Contains one exclusive random bioluminescent potted plant for your station! Wow... it's glowing.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RandomPottedBioLumPlantsTable
+
+- type: entity
+  id: CrateRandomBioLumPottedPlants
+  parent: CrateGenericSteel
+  name: potted bioluminescent plants crate
+  description: Contains five exclusive random bioluminescent potted plants for your station! Wow... it's glowing. This is a better deal.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RandomPottedBioLumPlantsTable
+        rolls: !type:ConstantNumberSelector
+          value: 5
+
+- type: entity
+  id: CratePlasticPottedPlant
+  parent: CrateGenericSteel
+  name: potted plastic plant crate
+  description: Contains one cheap random plastic potted plant for your station! It looks like the real thing.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RandomPottedPlasticPlantsTable
+
+- type: entity
+  id: CrateRandomPlasticPottedPlants
+  parent: CrateGenericSteel
+  name: potted plastic plants crate
+  description: Contains five cheap ones random plastic potted plants for your station! It looks like the real thing. This is a better deal?..
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RandomPottedPlasticPlantsTable
+        rolls: !type:ConstantNumberSelector
+          value: 5
+
+- type: entityTable
+  id: RandomPottedPlantsTable
+  table: !type:GroupSelector
+    children: 
+      - id: PottedPlantAlt0
+      - id: PottedPlantAlt1
+      - id: PottedPlantAlt2
+      - id: PottedPlantAlt3
+      - id: PottedPlantAlt4
+      - id: PottedPlant0
+      - id: PottedPlant1
+      - id: PottedPlant2
+      - id: PottedPlant3
+      - id: PottedPlant4
+      - id: PottedPlant5
+      - id: PottedPlant6
+      - id: PottedPlant7
+      - id: PottedPlant8
+      - id: PottedPlant10
+      - id: PottedPlant11
+      - id: PottedPlant12
+      - id: PottedPlant13
+      - id: PottedPlant14
+      - id: PottedPlant15
+      - id: PottedPlant16
+      - id: PottedPlant17
+      - id: PottedPlant18
+      - id: PottedPlant19
+      - id: PottedPlant20
+      - id: PottedPlant21
+      - id: PottedPlant22
+      - id: PottedPlant23
+      - id: PottedPlant24
+      - id: PottedPlant26
+
+- type: entityTable
+  id: RandomPottedBioLumPlantsTable
+  table: !type:GroupSelector
+    children: 
+    - id: PottedPlantBioluminscentSS220_1
+    - id: PottedPlantBioluminscentSS220_2
+    - id: PottedPlantBioluminscentSS220_3
+    - id: PottedPlantBioluminscentSS220_4
+    - id: PottedPlantBioluminscentSS220_5
+    - id: PottedPlantBioluminscentSS220_6
+    - id: PottedPlantBioluminscentSS220_7
+    - id: PottedPlantBioluminscentSS220_8
+    - id: PottedPlantBioluminscentSS220_9
+    - id: PottedPlantBioluminscentSS220_10
+    - id: PottedPlantBioluminscentSS220_11
+    - id: PottedPlantBioluminscentSS220_12
+    - id: PottedPlantBioluminscentSS220_13
+    - id: PottedPlantBioluminscentSS220_14
+    - id: PottedPlantBioluminscentSS220_15
+    - id: PottedPlantBioluminscentSS220_16
+    - id: PottedPlantBioluminscentSS220_17
+    - id: PottedPlantBioluminscentSS220_18
+    - id: PottedPlantBioluminscentSS220_19
+    - id: PottedPlantBioluminscentSS220_20
+    - id: PottedPlantBioluminscentSS220_21
+    - id: PottedPlantBioluminscentSS220_22
+    - id: PottedPlantBioluminscentSS220_23
+    - id: PottedPlantBioluminscentSS220_23
+    - id: PottedPlantBioluminscentSS220_24
+    - id: PottedPlantBioluminscentSS220_25
+    - id: PottedPlantBioluminscentSS220_26
+    - id: PottedPlantBioluminscentSS220_27
+    - id: PottedPlantBioluminscentSS220_28
+    - id: PottedPlantBioluminscentSS220_29
+    - id: PottedPlantBioluminscentSS220_30
+    - id: PottedPlantBioluminscent
+
+- type: entityTable
+  id: RandomPottedPlasticPlantsTable
+  table: !type:GroupSelector
+    children: 
+    - id: PottedPlant27
+    - id: PottedPlant28
+    - id: PottedPlant29
+    - id: PottedPlant30
+# SS220-wood-and-plants-in-cargo-end

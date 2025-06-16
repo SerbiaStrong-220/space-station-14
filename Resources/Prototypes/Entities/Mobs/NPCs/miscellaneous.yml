@@ -227,9 +227,7 @@
       150: 0.7 #SS220 Old-Tomato-Killer-Balance
   - type: FootstepModifier
     footstepSoundCollection:
-      path: /Audio/Effects/Footsteps/slime1.ogg
-      params:
-        volume: 3
+      collection: FootstepSlime
   - type: Tag
     tags:
       - FootstepSound

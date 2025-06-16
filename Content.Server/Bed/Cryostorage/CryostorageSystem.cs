@@ -251,15 +251,6 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             if (_stationRecords.TryGetRecord<GeneralStationRecord>(key, out var entry, stationRecords))
                 jobName = entry.JobTitle;
 
-            // SS220 Cryostorage ghost role fix begin
-            if (!_stationRecords.TryGetRecord<GeneralStationRecord>(key, out var record, stationRecords)
-                || !_prototypeManager.TryIndex<JobPrototype>(record.JobPrototype, out var jobProto)
-                || !jobProto.JoinNotifyCrew)
-            {
-                return;
-            }
-            // SS220 Cryostorage ghost role fix end
-
             // _stationRecords.RemoveRecord(key, stationRecords);
 
             // start 220 cryo department record
@@ -279,7 +270,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
                 ("entity", ent.Owner), // gender things for supporting downstreams with other languages
                 ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))
             ), Loc.GetString("earlyleave-cryo-sender"),
-            playSound: false
+            playDefaultSound: false
         );
     }
 

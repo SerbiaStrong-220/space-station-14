@@ -39,6 +39,8 @@
         density: 190
         mask:
         - TableMask
+        layer:
+        - InteractImpassable
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic

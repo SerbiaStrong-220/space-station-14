@@ -53,11 +53,12 @@
   components:
   - type: LimitedCharges
     maxCharges: 1
-  - type: InstantAction
+  - type: Action
     checkCanInteract: false
     itemIconStyle: BigAction
     priority: -20
     icon:
       sprite: SS220/Objects/ChemicalImplants/implanters.rsi
       state: icon_empty
+  - type: InstantAction
     event: !type:UseChemicalImplantEvent
