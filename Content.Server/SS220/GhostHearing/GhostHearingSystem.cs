@@ -143,7 +143,10 @@ public sealed class GhostHearingSystem : SharedGhostHearingSystem
         if (!TryComp<GhostHearingComponent>(ev.User, out var ghost))
             return;
 
-        if (!_prototypeManager.TryIndex<TelepathyChannelPrototype>(ev.Channel?.ID!, out var channelProto))
+        if (ev.Channel is null)
+            return;
+
+        if (!_prototypeManager.TryIndex<TelepathyChannelPrototype>(ev.Channel.ID, out var channelProto))
             return;
 
         if (ghost.RadioChannels.TryGetValue(channelProto, out var canHear) && !canHear)
