@@ -1,6 +1,6 @@
 using Content.Client.Gameplay;
 using Content.Client.Info;
-using Content.Client.SS220.UserInterface;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -14,6 +14,7 @@ public sealed class CloseAllWindowsUIController : UIController
 {
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!; //ss220 add pin for ui
 
     public override void Initialize()
     {
@@ -26,10 +27,8 @@ public sealed class CloseAllWindowsUIController : UIController
         foreach (var childControl in new List<Control>(_uiManager.WindowRoot.Children)) // Copy children list as it will be modified on Close()
         {
             //ss220 add pin for ui start
-            if (PinUISystem.GetPinned(childControl))
-            {
+            if (_entityManager.System<PinUISystem>().IsPinned(childControl))
                 continue;
-            }
             //ss220 add pin for ui end
 
             if (childControl is BaseWindow)

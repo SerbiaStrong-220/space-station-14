@@ -1,6 +1,6 @@
 using Content.Client.Gameplay;
 using Content.Client.Info;
-using Content.Client.SS220.UserInterface;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -14,6 +14,7 @@ public sealed class CloseRecentWindowUIController : UIController
 {
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!; //ss220 add pin for ui
 
     /// <summary>
     /// A list of windows that have been interacted with recently.  Windows should only
@@ -46,10 +47,8 @@ public sealed class CloseRecentWindowUIController : UIController
             if (window.IsOpen)
             {
                 //ss220 add pin for ui start
-                if (PinUISystem.GetPinned(window))
-                {
+                if (_entityManager.System<PinUISystem>().IsPinned(window))
                     return;
-                }
                 //ss220 add pin for ui end
 
                 window.Close();
