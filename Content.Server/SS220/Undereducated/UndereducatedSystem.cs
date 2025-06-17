@@ -105,32 +105,31 @@ public sealed partial class UndereducatedSystem : EntitySystem
 
         languageMessage.ChangeNodes(node =>
         {
-            nodesCount--;
             newMessage.Clear();
             var words = SpaceRegex().Split(node.Message);
             var wordsCount = words.Length;
-            newMessage.Append(node.Language.KeyWithPrefix + ' ');
 
             foreach (var word in words)
             {
-                wordsCount--;
-                if (string.IsNullOrWhiteSpace(word) || node.Language.KeyWithPrefix == tagByRace)
-                {
-                    newMessage.Append(word);
-                }
-                else if (_random.Prob(ent.Comp.ChanseToReplace))
+                if (!string.IsNullOrWhiteSpace(word)
+                && node.Language.KeyWithPrefix != tagByRace
+                && _random.Prob(ent.Comp.ChanseToReplace))
                 {
                     newMessage.Append(tagByRace).Append(' ').Append(word);
-                    if (nodesCount != 0 || wordsCount != 0)
+                    if (nodesCount != 1 || wordsCount != 1)
                         newMessage.Append(' ').Append(node.Language.KeyWithPrefix);
                 }
                 else
                 {
+                    if (wordsCount == words.Length)
+                        newMessage.Append(node.Language.KeyWithPrefix).Append(' ');
                     newMessage.Append(word);
                 }
                 newMessage.Append(' ');
+                wordsCount--;
             }
             node.SetMessage(newMessage.ToString().Trim());
+            nodesCount--;
         });
 
         args.Message = languageMessage.GetMessageWithLanguageKeys();
