@@ -7,7 +7,6 @@ using Content.Shared.Objectives.Components;
 using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.SS220.CultYogg.Sacraficials;
 using Content.Server.SS220.Objectives.Components;
-using Robust.Shared.Serialization;
 
 namespace Content.Server.SS220.Objectives.Systems;
 
@@ -31,51 +30,51 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
         SubscribeLocalEvent<CultYoggSummonConditionComponent, CultYoggReinitObjEvent>(OnReInit);
         SubscribeLocalEvent<CultYoggSummonConditionComponent, CultYoggUpdateSacrObjEvent>(OnSacrUpdate);
     }
+
     //check if gamerule was rewritten
     private void OnInit(Entity<CultYoggSummonConditionComponent> ent, ref ComponentInit args)
     {
-        TaskNumberUpdate(ent);
+        ObjNumberUpdate(ent);
     }
 
     private void OnAfterAssign(Entity<CultYoggSummonConditionComponent> ent, ref ObjectiveAfterAssignEvent args)
     {
         SacraficialsUpdate(ent);
     }
+
     private void OnSacrUpdate(Entity<CultYoggSummonConditionComponent> ent, ref CultYoggUpdateSacrObjEvent args)
     {
         SacraficialsUpdate(ent);
     }
+
     private void OnReInit(Entity<CultYoggSummonConditionComponent> ent, ref CultYoggReinitObjEvent args)
     {
         SacraficialsUpdate(ent);
     }
+
     private void OnGetProgress(Entity<CultYoggSummonConditionComponent> ent, ref ObjectiveGetProgressEvent args)
     {
         args.Progress = 0;
 
-        var ruleComp = _cultRule.GetCultGameRule();
-
-        if (ruleComp is null)
+        if (!_cultRule.TryGetCultGameRule(out var rule))
             return;
 
-        args.Progress = ruleComp.AmountOfSacrifices / ent.Comp.reqSacrAmount;
+        args.Progress = (float)rule.Comp.AmountOfSacrifices / (float)ent.Comp.ReqSacrAmount;
     }
 
-    private void TaskNumberUpdate(Entity<CultYoggSummonConditionComponent> ent)
+    private void ObjNumberUpdate(Entity<CultYoggSummonConditionComponent> ent)
     {
-        var ruleComp = _cultRule.GetCultGameRule();
-
-        if (ruleComp is null)
+        if (!_cultRule.TryGetCultGameRule(out var rule))
             return;
 
         var sacrificesRequired = 0;
-        foreach ((_, var stageDefinition) in ruleComp.Stages)
+        foreach ((_, var stageDefinition) in rule.Comp.Stages)
         {
             if (stageDefinition.SacrificesRequired is { } stageSacrifices)
                 sacrificesRequired = stageSacrifices;
         }
 
-        ent.Comp.reqSacrAmount = sacrificesRequired;
+        ent.Comp.ReqSacrAmount = sacrificesRequired;
     }
 
     private void SacraficialsUpdate(Entity<CultYoggSummonConditionComponent> ent)
@@ -102,6 +101,7 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
         _metaData.SetEntityName(ent, title.ToString());
     }
 }
+
 [ByRefEvent, Serializable]
 public sealed class CultYoggReinitObjEvent : EntityEventArgs
 {

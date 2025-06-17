@@ -250,6 +250,7 @@
   - PassengerJumpskirtTurtleneck
   - PassengerJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
   - RainbowJumpsuit
+  - RainbowJumpskirt
 
 - type: loadoutGroup
   id: PassengerFace
@@ -682,6 +683,7 @@
   loadouts:
   - EmergencyNitrogenMime
   - EmergencyOxygenMime
+  - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
@@ -1427,7 +1429,7 @@
   loadouts:
   - BrownShoes
   - MedicalWinterBoots
-  - CMOCorpShoes #ss220 new cmo 
+  - CMOCorpShoes #ss220 new cmo
 
 - type: loadoutGroup
   id: MedicalDoctorHead

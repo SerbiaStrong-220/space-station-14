@@ -1,4 +1,4 @@
-﻿using Content.Shared.Radio;
+﻿using Content.Shared.SS220.GhostHearing;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Ghost;
@@ -12,9 +12,9 @@ public sealed partial class GhostHearingComponent : Component
     public bool IsEnabled;
 
     [DataField]
-    public Dictionary<RadioChannelPrototype, bool> RadioChannels = new();
+    public Dictionary<IHearableChannelPrototype, bool> RadioChannels = new();
 
     [DataField]
-    public Dictionary<RadioChannelPrototype, bool> DisplayChannels = new();
+    public Dictionary<IHearableChannelPrototype, bool> DisplayChannels = new();
 }
 //ss220 add filter tts for ghost end

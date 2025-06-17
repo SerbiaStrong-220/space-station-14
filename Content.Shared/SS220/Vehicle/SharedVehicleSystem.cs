@@ -18,6 +18,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Serialization;
+using Content.Shared.Actions.Components;
 
 namespace Content.Shared.SS220.Vehicle;
 

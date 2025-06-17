@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
@@ -9,7 +10,6 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using static Content.Shared.Fax.AdminFaxEuiMsg;
 
 namespace Content.Shared.SS220.InnerHandToggleable;
 
@@ -66,7 +66,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
 
     private void OnComponentShutdown(Entity<InnerHandToggleableComponent> ent, ref ComponentShutdown args)
     {
-        _actionsSystem.RemoveAction(ent, ent.Comp.ActionEntity);
+        _actionsSystem.RemoveAction(ent.Comp.ActionEntity);
         foreach (var hand in ent.Comp.HandsContainers.Values)
         {
             if (hand.Container is null)
@@ -106,7 +106,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         if (innerToggle.InnerItemUid != null)//if the inner item is inside
             return;
 
-        _actionsSystem.RemoveAction(ent, ent.Comp.ActionEntity);
+        _actionsSystem.RemoveAction(ent.Comp.ActionEntity);
     }
 
     private void OnDidSwitchHand(Entity<InnerHandToggleableComponent> ent, ref DidSwitchHandEvent args)
@@ -133,7 +133,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
             return;
         }
 
-        _actionsSystem.RemoveAction(ent, ent.Comp.ActionEntity);
+        _actionsSystem.RemoveAction(ent.Comp.ActionEntity);
     }
 
     /// <summary>
@@ -147,10 +147,10 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         if (!_actionsSystem.AddAction(ent, ref ent.Comp.ActionEntity, ent.Comp.Action))
             return;
 
-        if (!TryComp<InstantActionComponent>(ent.Comp.ActionEntity, out var instantAction))
+        if (!TryComp<ActionComponent>(ent.Comp.ActionEntity, out var action))
             return;
 
-        _actionsSystem.SetEntityIcon(ent.Comp.ActionEntity.Value, item, instantAction);
+        _actionsSystem.SetEntityIcon((ent.Comp.ActionEntity.Value, action), item);
         _actionsSystem.SetToggled(ent.Comp.ActionEntity, toggle);
 
         if (toggle)
