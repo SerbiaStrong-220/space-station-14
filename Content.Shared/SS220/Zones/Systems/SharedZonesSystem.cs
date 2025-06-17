@@ -439,6 +439,12 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
         return result;
     }
+
+    public static bool NeedRecreate(ZoneParams originalParams, ZoneParams newParams)
+    {
+        return newParams.Container != originalParams.Container ||
+            newParams.ProtoID != originalParams.ProtoID;
+    }
 }
 
 /// <summary>

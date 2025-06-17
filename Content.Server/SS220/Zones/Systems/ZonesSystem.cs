@@ -190,10 +190,9 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (!IsValidContainer(newParams.Container))
             return;
 
-        if (zone.Comp.ZoneParams.Container != newParams.Container ||
-            zone.Comp.ZoneParams.ProtoID != newParams.ProtoID)
+        if (NeedRecreate(zone.Comp.ZoneParams, newParams))
         {
-            DeleteZone((zone, zone));
+            DeleteZone(zone);
             CreateZone(newParams);
             return;
         }
