@@ -94,10 +94,24 @@ namespace Content.Client.SS220.CultYogg.FungusMachine
             button.AddChild(item);
             button.AddStyleClass("ButtonSquare");
 
-            var shroomLocName = string.Concat("Food", protoID.ToString().AsSpan(0, protoID.ToString().Length - "Seeds".Length), "Cult");
+            var tooltipLocString = protoID.ToString();
+
+            if (tooltipLocString.StartsWith("Cult"))
+            {
+                tooltipLocString = tooltipLocString.Substring(4);
+            }
+
+            if (tooltipLocString.EndsWith("Seeds"))
+            {
+                tooltipLocString = tooltipLocString.Substring(0, tooltipLocString.Length - 5);
+            }
+            else if (tooltipLocString.EndsWith("Seed"))
+            {
+                tooltipLocString = tooltipLocString.Substring(0, tooltipLocString.Length - 4);
+            }
 
             var tooltip = new Tooltip();
-            tooltip.SetMessage(FormattedMessage.FromUnformatted(Loc.GetString("ent-" + shroomLocName + ".desc")));
+            tooltip.SetMessage(FormattedMessage.FromUnformatted(Loc.GetString($"cult-yogg-{tooltipLocString}-plant-tooltip")));
             button.TooltipSupplier = _ => tooltip;
         }
 
