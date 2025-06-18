@@ -52,11 +52,13 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
 
     protected void UpdateVisuals(Entity<ChameleonStructureComponent> ent)
     {
-        if (string.IsNullOrEmpty(ent.Comp.Default) ||
-    !_proto.TryIndex(ent.Comp.Default, out EntityPrototype? proto))
+        if (string.IsNullOrEmpty(ent.Comp.Default))
             return;
 
-        UpdateSprite(ent, proto);
+        if (!_proto.TryIndex(ent.Comp.Default, out EntityPrototype? proto))
+            return;
+
+        UpdateSprite(ent, proto); // maybe later figure out
     }
 
     /// <summary>

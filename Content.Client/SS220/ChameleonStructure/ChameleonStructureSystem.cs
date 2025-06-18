@@ -1,9 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Clothing.Components;
+using Content.Shared.Coordinates;
 using Content.Shared.Polymorph.Components;
 using Content.Shared.SS220.ChameleonStructure;
 using Robust.Client.GameObjects;
+using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.ChameleonStructure;
@@ -14,6 +16,8 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IComponentFactory _factory = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly IEntityManager _entManager = default!;
 
     public override void Initialize()
     {
@@ -26,7 +30,7 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
 
     private void OnMapInit(Entity<ChameleonStructureComponent> ent, ref MapInitEvent args)
     {
-        SetSelectedPrototype(ent, ent.Comp.Default, true);
+       // SetSelectedPrototype(ent, ent.Comp.Default, true);
     }
 
     private void OnSelected(Entity<ChameleonStructureComponent> ent, ChameleonStructurePrototypeSelectedMessage args)
@@ -78,18 +82,26 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
     {
         base.UpdateSprite(ent, proto);
 
+        var xform = Transform(ent);
+
+        var clone = Spawn(proto.ID, xform.Coordinates);
+
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        if (!proto.TryGetComponent(out SpriteComponent? otherSprite, _factory))
+        if (!TryComp(clone, out SpriteComponent? otherSprite))
             return;
+
+        //if (!proto.TryGetComponent(out SpriteComponent? otherSprite, _factory))
+        //    return;
 
         if (otherSprite is null)
             return;
 
         //var dragSprite = Comp<SpriteComponent>(otherSprite.Value);
 
-        //_sprite.CopySprite((uid, sprite), otherSprite);
-        sprite.CopyFrom(otherSprite);
+        _sprite.CopySprite((clone, otherSprite), (ent, sprite));
+        //sprite.CopyFrom(otherSprite);
+        //_sprite.QueueUpdateIsInert((ent, otherSprite));
     }
 }

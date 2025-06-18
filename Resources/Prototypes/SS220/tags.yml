@@ -332,3 +332,8 @@
 - type: Tag
   id: CultYoggInnerHandToggleable
 # ss220 Cult_update2 end
+
+# ss220 ChameleonStructure start
+- type: Tag
+  id: WhitelistChameleonStructureWall
+# ss220 ChameleonStructure end

@@ -650,6 +650,12 @@
         layer:
         - WallLayer
         density: 2000
+  # ss220 ChameleonStructure start
+  - type: Tag
+    tags:
+    - Wall
+    - WhitelistChameleonStructureWall
+  # ss220 ChameleonStructure end
 
 - type: entity
   parent: WallReinforced
@@ -1015,6 +1021,12 @@
   - type: IconSmooth
     key: walls
     base: solid
+  # ss220 ChameleonStructure start
+  - type: Tag
+    tags:
+    - Wall
+    - WhitelistChameleonStructureWall
+  # ss220 ChameleonStructure end
 
 - type: entity
   parent: WallDiagonalBase

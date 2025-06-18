@@ -86,12 +86,12 @@
   - type: CultYoggBuilding
     eraseTime: 3
   - type: ChameleonStructure
-    default: ClothingBackpack
+    default: WallSolid
     userWhitelist:
       components:
       #- CultYogg
       - HumanoidAppearance  #ToDo_SS220 del this on release
-    requireTag: WhitelistChameleonPDA
+    requireTag: WhitelistChameleonStructureWall
   - type: UserInterface
     interfaces:
       enum.ChameleonStructureUiKey.Key:
