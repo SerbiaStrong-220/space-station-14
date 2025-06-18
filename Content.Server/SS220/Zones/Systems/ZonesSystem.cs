@@ -3,6 +3,7 @@ using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using System.Linq;
 using System.Numerics;
@@ -21,8 +22,10 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         base.Initialize();
 
         SubscribeLocalEvent<ZonesContainerComponent, ComponentShutdown>(OnZonesContainerShutdown);
+        SubscribeLocalEvent<ZonesContainerComponent, ComponentGetState>(OnContainerGetState);
 
         SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnZoneShutdown);
+        SubscribeLocalEvent<ZoneComponent, ComponentGetState>(OnZoneGetState);
 
         SubscribeLocalEvent<TileChangedEvent>(OnTileChanged);
     }
@@ -32,9 +35,19 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         ClearZonesContainer(entity);
     }
 
+    private void OnContainerGetState(Entity<ZonesContainerComponent> entity, ref ComponentGetState args)
+    {
+        args.State = new ZonesContainerComponentState(entity.Comp.Zones);
+    }
+
     private void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
     {
         DeleteZone(entity.Owner);
+    }
+
+    private void OnZoneGetState(Entity<ZoneComponent> entity, ref ComponentGetState args)
+    {
+        args.State = new ZoneComponentState(entity.Comp.ZoneParams);
     }
 
     private void OnTileChanged(ref TileChangedEvent args)

@@ -7,6 +7,7 @@ using Content.Shared.Administration;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Client.Console;
+using Robust.Shared.GameStates;
 
 namespace Content.Client.SS220.Zones.Systems;
 
@@ -32,13 +33,11 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
         _clientAdmin.AdminStatusUpdated += OnAdminStatusUpdated;
 
-        SubscribeLocalEvent<ZoneComponent, ComponentInit>(OnZoneInit);
         SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnZoneShutdown);
-        SubscribeLocalEvent<ZoneComponent, AfterAutoHandleStateEvent>(OnAfterZoneStateHandled);
+        SubscribeLocalEvent<ZoneComponent, ComponentHandleState>(OnZoneHandleState);
 
-        SubscribeLocalEvent<ZonesContainerComponent, ComponentInit>(OnContainerInit);
         SubscribeLocalEvent<ZonesContainerComponent, ComponentShutdown>(OnContainerShutdown);
-        SubscribeLocalEvent<ZonesContainerComponent, AfterAutoHandleStateEvent>(OnAfterContainerStateHandled);
+        SubscribeLocalEvent<ZonesContainerComponent, ComponentHandleState>(OnContainerHandleState);
     }
 
     private void OnAdminStatusUpdated()
@@ -46,23 +45,17 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         SetOverlay(_overlay.HasProvider(_overlayProvider));
     }
 
-    private void OnZoneInit(Entity<ZoneComponent> entity, ref ComponentInit args)
-    {
-        ControlWindow.RefreshEntries();
-    }
-
     private void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
     {
         ControlWindow.RefreshEntries();
     }
 
-    private void OnAfterZoneStateHandled(Entity<ZoneComponent> entity, ref AfterAutoHandleStateEvent args)
+    private void OnZoneHandleState(Entity<ZoneComponent> entity, ref ComponentHandleState args)
     {
-        ControlWindow.RefreshEntries();
-    }
+        if (args.Current is not ZoneComponentState state)
+            return;
 
-    private void OnContainerInit(Entity<ZonesContainerComponent> entity, ref ComponentInit args)
-    {
+        entity.Comp.ZoneParams = state.ZoneParams;
         ControlWindow.RefreshEntries();
     }
 
@@ -71,8 +64,13 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         ControlWindow.RefreshEntries();
     }
 
-    private void OnAfterContainerStateHandled(Entity<ZonesContainerComponent> entity, ref AfterAutoHandleStateEvent args)
+
+    private void OnContainerHandleState(Entity<ZonesContainerComponent> entity, ref ComponentHandleState args)
     {
+        if (args.Current is not ZonesContainerComponentState state)
+            return;
+
+        entity.Comp.Zones = state.Zones;
         ControlWindow.RefreshEntries();
     }
 

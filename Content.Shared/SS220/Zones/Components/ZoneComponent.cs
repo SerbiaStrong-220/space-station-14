@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Zones.Components;
 
@@ -9,12 +10,11 @@ namespace Content.Shared.SS220.Zones.Components;
 /// A zone can be used to determine a certain area on the <see cref="ZoneParams.Container"/>
 /// in which various events can occur, as well as with entities entering, staying inside, and leaving the zone.
 /// </summary>
-[AutoGenerateComponentState]
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(SharedZonesSystem))]
 public sealed partial class ZoneComponent : Component
 {
-    [ViewVariables, AutoNetworkedField]
+    [ViewVariables]
     public ZoneParams ZoneParams = new();
 
     /// <summary>
@@ -22,4 +22,10 @@ public sealed partial class ZoneComponent : Component
     /// </summary>
     [ViewVariables]
     public HashSet<EntityUid> Entities = new();
+}
+
+[Serializable, NetSerializable]
+public sealed class ZoneComponentState(ZoneParams @params) : IComponentState
+{
+    public ZoneParams ZoneParams = @params;
 }
