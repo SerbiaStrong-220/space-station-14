@@ -11,7 +11,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Content.Shared.SS220.ChameleonStructure;
 
