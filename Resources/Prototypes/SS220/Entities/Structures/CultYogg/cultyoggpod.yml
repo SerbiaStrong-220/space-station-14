@@ -65,6 +65,8 @@
         density: 60
         mask:
         - MachineMask
+        layer:
+        - InteractImpassable
   - type: GenericVisualizer
     visuals:
       enum.CultPodVisuals.Inserted:

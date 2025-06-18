@@ -111,7 +111,8 @@ public sealed class RoleBanCommand : IConsoleCommand
                 return;
         }
 
-        if (!_proto.HasIndex<JobPrototype>(job))
+        if (!_proto.HasIndex<JobPrototype>(job) &&
+            !_proto.HasIndex<AntagPrototype>(job)) // SS220 antag bans
         {
             shell.WriteError(Loc.GetString("cmd-roleban-job-parse", ("job", job)));
             return;
@@ -160,8 +161,13 @@ public sealed class RoleBanCommand : IConsoleCommand
         {
             1 => CompletionResult.FromHintOptions(CompletionHelper.SessionNames(),
                 Loc.GetString("cmd-roleban-hint-1")),
-            2 => CompletionResult.FromHintOptions(CompletionHelper.PrototypeIDs<JobPrototype>(),
+            // SS220 antag bans begin
+            //2 => CompletionResult.FromHintOptions(CompletionHelper.PrototypeIDs<JobPrototype>(),
+            //    Loc.GetString("cmd-roleban-hint-2")),
+            2 => CompletionResult.FromHintOptions([.. CompletionHelper.PrototypeIDs<JobPrototype>(),
+                .. CompletionHelper.PrototypeIDs<AntagPrototype>()],
                 Loc.GetString("cmd-roleban-hint-2")),
+            // SS220 antag bans end
             3 => CompletionResult.FromHint(Loc.GetString("cmd-roleban-hint-3")),
             4 => CompletionResult.FromHintOptions(durOpts, Loc.GetString("cmd-roleban-hint-4")),
             5 => CompletionResult.FromHintOptions(severities, Loc.GetString("cmd-roleban-hint-5")),

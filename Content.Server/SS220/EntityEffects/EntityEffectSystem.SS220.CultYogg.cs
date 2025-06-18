@@ -41,8 +41,7 @@ public sealed partial class EntityEffectSystem : EntitySystem
     private void OnExecuteChemElixirOfLiberation(ref ExecuteEntityEffectEvent<ChemElixirOfLiberationEffect> args)
     {
         if (TryComp<CultYoggComponent>(args.Args.TargetEntity, out var comp))
-            _cultYogg.NullifyShroomEffect(args.Args.TargetEntity, comp);
-
+            _cultYogg.ResetCultist((args.Args.TargetEntity, comp));
     }
 
     private void OnExecuteChemRemoveHallucination(ref ExecuteEntityEffectEvent<ChemRemoveHallucinationsEffect> args)

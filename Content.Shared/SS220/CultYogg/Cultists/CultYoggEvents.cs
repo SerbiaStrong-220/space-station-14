@@ -15,10 +15,6 @@ public sealed class ChangeCultYoggStageEvent(CultYoggStage stage) : EntityEventA
 }
 
 [ByRefEvent, Serializable]
-public record struct CultYoggDeleteVisualsEvent;
-
-
-[ByRefEvent, Serializable]
 public sealed class CultYoggDeCultingEvent(EntityUid entity) : EntityEventArgs
 {
     public readonly EntityUid Entity = entity;
@@ -26,6 +22,10 @@ public sealed class CultYoggDeCultingEvent(EntityUid entity) : EntityEventArgs
 
 [ByRefEvent, Serializable]
 public record struct CultYoggForceAscendingEvent;
+
+[ByRefEvent, Serializable]
+public record struct CultYoggAscendingEvent;
+
 
 [ByRefEvent, Serializable]
 public record struct CultYoggSacrificedTargetEvent(Entity<CultYoggAltarComponent> Altar);
