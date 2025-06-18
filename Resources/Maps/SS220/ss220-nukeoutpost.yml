@@ -3221,7 +3221,6 @@ entities:
     - type: MetaData
     - type: Transform
     - type: Map
-      mapPaused: True
     - type: GridTree
     - type: FTLDestination
       whitelist:
@@ -8632,6 +8631,8 @@ entities:
     - EnergySword
     - ItemToggleSize
     - UseDelay
+    - Blocking
+    - Reflect
 - proto: ExpensiveLighterSyndicate
   entities:
   - uid: 1175
