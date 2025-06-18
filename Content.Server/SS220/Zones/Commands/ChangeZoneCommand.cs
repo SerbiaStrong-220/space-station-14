@@ -15,6 +15,10 @@ public sealed class ChangeZoneCommand : LocalizedCommands
 
     public override string Command => $"{SharedZonesSystem.ZoneCommandsPrefix}change";
 
+    public override string Description => Loc.GetString("zone-command-change-zone-desc");
+
+    public override string Help => $"{Command} {{zone uid}} {{new params}}";
+
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length < 2)
@@ -27,10 +31,38 @@ public sealed class ChangeZoneCommand : LocalizedCommands
         if (!_entityManager.TryGetComponent<ZoneComponent>(zone, out var zoneComp))
             return;
 
-        var @params = new ZoneParams();
+        var @params = new ZoneParams(zoneComp.ZoneParams);
         @params.ParseTags(argStr);
 
         var zonesSystem = _entityManager.System<ZonesSystem>();
         zonesSystem.ChangeZone((zone, zoneComp), @params);
+    }
+
+    public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
+    {
+        var result = CompletionResult.Empty;
+        if (args.Length <= 0)
+            return result;
+
+        if (args.Length == 1)
+            result = CompletionResult.FromHintOptions(GetZonesList(), Loc.GetString("zone-command-change-zone-uid-hint"));
+        else
+            result = CompletionResult.FromHint(Loc.GetString("zone-command-params-types-array"));
+
+        return result;
+
+        List<CompletionOption> GetZonesList()
+        {
+            var result = new List<CompletionOption>();
+            var query = _entityManager.EntityQueryEnumerator<ZoneComponent>();
+            while (query.MoveNext(out var uid, out var zoneComp))
+            {
+                var option = new CompletionOption(_entityManager.GetNetEntity(uid).ToString());
+                option.Hint = zoneComp.ZoneParams.Name;
+                result.Add(option);
+            }
+
+            return result;
+        }
     }
 }

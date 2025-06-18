@@ -7,27 +7,27 @@
         <BoxContainer Name="MainBox" Orientation="Vertical" Margin="5" HorizontalExpand="True" VerticalExpand="True" Access="Public">
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
-                    <Label Name="NameLabel" Text="{Loc zone-state-box-name-label}" MouseFilter="Stop"/>
+                    <Label Name="NameLabel" Text="{Loc zone-params-panel-name-label}" MouseFilter="Stop"/>
                     <LineEdit Name="NameLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
-                    <Label Name="PrototypeIDLabel" Text="{Loc zone-state-box-prototype-id-label}" MouseFilter="Stop"/>
+                    <Label Name="PrototypeIDLabel" Text="{Loc zone-params-panel-prototype-id-label}" MouseFilter="Stop"/>
                     <LineEdit Name="PrototypeIDLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
-                    <Label Name="HexColorLabel" Text="{Loc zone-state-box-hex-color-label}" MouseFilter="Stop"/>
+                    <Label Name="HexColorLabel" Text="{Loc zone-params-panel-hex-color-label}" MouseFilter="Stop"/>
                     <LineEdit Name="HexColorLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
                     <Button Name="ColorSelectorButton">
 						<TextureRect Stretch="KeepAspectCentered" TexturePath="/Textures/SS220/Interface/Zones/palette.svg.192dpi.png" SetSize="24 24"/>
                     </Button>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
-                    <Label Name="ContainerNetIDLabel" Text="{Loc zone-state-box-container-net-id-label}" MouseFilter="Stop"/>
+                    <Label Name="ContainerNetIDLabel" Text="{Loc zone-params-panel-container-net-id-label}" MouseFilter="Stop"/>
                     <LineEdit Name="ContainerNetIDLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
                 </BoxContainer>
-                <CheckBox Name="AttachToGridCheckbox" Text="{Loc zone-state-box-attach-to-grid-check-box}" LeftAlign="False" Margin ="5 2" />
+                <CheckBox Name="AttachToGridCheckbox" Text="{Loc zone-params-panel-attach-to-grid-check-box}" LeftAlign="False" Margin ="5 2" />
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
-                    <Label Name="CutSpaceOptionLabel" Text="{Loc zone-state-box-cut-space-option-label}" HorizontalExpand="True" MouseFilter="Stop"/>
+                    <Label Name="CutSpaceOptionLabel" Text="{Loc zone-params-panel-cut-space-option-label}" HorizontalExpand="True" MouseFilter="Stop"/>
                     <OptionButton Name="CutSpaceOptionSelector" Margin="10 0 0 0"/>
                 </BoxContainer>
             </BoxContainer>
@@ -49,10 +49,10 @@
                         <BoxContainer Name="Box2ListContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True"/>
                     </ScrollContainer>
                     <BoxContainer Orientation="Horizontal" HorizontalExpand="True"  Margin="0 2 0 0">
-                        <Button Name="AddBoxButton" Text="{Loc zone-state-box-add-box-button}" Access="Public" ToggleMode="True" HorizontalExpand="True"/>
-                        <Button Name="CutBoxButton" Text="{Loc zone-state-box-cut-box-button}" Access="Public" ToggleMode="True" HorizontalExpand="True"/>
+                        <Button Name="AddBoxButton" Text="{Loc zone-params-panel-add-box-button}" Access="Public" ToggleMode="True" HorizontalExpand="True"/>
+                        <Button Name="CutBoxButton" Text="{Loc zone-params-panel-cut-box-button}" Access="Public" ToggleMode="True" HorizontalExpand="True"/>
                     </BoxContainer>
-                    <Button Name="ShowChangesButton" Text="{Loc zone-state-box-show-changes-button}" Access="Public" ToggleMode="True" Margin="0 2 0 2" HorizontalExpand="True"/>
+                    <Button Name="ShowChangesButton" Text="{Loc zone-params-panel-show-changes-button}" Access="Public" ToggleMode="True" Margin="0 2 0 2" HorizontalExpand="True"/>
                 </BoxContainer>
             </PanelContainer>
         </BoxContainer>

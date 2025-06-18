@@ -13,6 +13,9 @@ public sealed partial class ZoneControlWindowCommand : LocalizedCommands
 
     public override string Command => SharedZonesSystem.ZoneCommandsPrefix + "control_window";
 
+    public override string Description => Loc.GetString("zone-command-control-window-desc");
+
+
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         var window = _entityManager.System<ZonesSystem>().ControlWindow;

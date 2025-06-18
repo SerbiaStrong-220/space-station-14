@@ -15,6 +15,10 @@ public sealed partial class DeleteZonesContainerCommand : LocalizedCommands
 
     public override string Command => SharedZonesSystem.ZoneCommandsPrefix + "delete_container";
 
+    public override string Description => Loc.GetString("zone-commnad-delete-zones-container-desc");
+
+    public override string Help => $"{Command} {{zones container uid}}";
+
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length != 1)
@@ -29,5 +33,30 @@ public sealed partial class DeleteZonesContainerCommand : LocalizedCommands
 
         var zoneSys = _entityManager.System<ZonesSystem>();
         zoneSys.DeleteZonesContaner((container, containerComp));
+    }
+
+    public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
+    {
+        var result = CompletionResult.Empty;
+        if (args.Length == 1)
+            result = CompletionResult.FromHintOptions(GetZonesContainersList(), Loc.GetString("zone-command-delete-zones-container-uid-hint"));
+
+        return result;
+
+        List<CompletionOption> GetZonesContainersList()
+        {
+            var result = new List<CompletionOption>();
+            var query = _entityManager.EntityQueryEnumerator<ZonesContainerComponent>();
+            while (query.MoveNext(out var uid, out var zoneComp))
+            {
+                var option = new CompletionOption(_entityManager.GetNetEntity(uid).ToString());
+                if (_entityManager.TryGetComponent<MetaDataComponent>(uid, out var metadataComp))
+                    option.Hint = metadataComp.EntityName;
+
+                result.Add(option);
+            }
+
+            return result;
+        }
     }
 }

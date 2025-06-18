@@ -14,6 +14,10 @@ public sealed partial class CreateZoneCommand : LocalizedCommands
 
     public override string Command => $"{SharedZonesSystem.ZoneCommandsPrefix}create";
 
+    public override string Description => Loc.GetString("zone-commnad-create-zone-desc");
+
+    public override string Help => $"{Command} {{zone params}}";
+
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length < 1)
@@ -24,5 +28,15 @@ public sealed partial class CreateZoneCommand : LocalizedCommands
 
         var zonesSystem = _entityManager.System<ZonesSystem>();
         zonesSystem.CreateZone(@params);
+    }
+
+    public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
+    {
+        var result = CompletionResult.Empty;
+        if (args.Length <= 0)
+            return result;
+
+        result = CompletionResult.FromHint(Loc.GetString("zone-command-params-types-array"));
+        return result;
     }
 }

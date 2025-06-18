@@ -15,6 +15,10 @@ public sealed partial class DeleteZoneCommand : LocalizedCommands
 
     public override string Command => SharedZonesSystem.ZoneCommandsPrefix + "delete";
 
+    public override string Description => Loc.GetString("zone-commnad-delete-zone-desc");
+
+    public override string Help => $"{Command} {{zone uid}}";
+
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length != 1)
@@ -29,5 +33,28 @@ public sealed partial class DeleteZoneCommand : LocalizedCommands
 
         var zoneSys = _entityManager.System<ZonesSystem>();
         zoneSys.DeleteZone((zoneUid, zoneComp));
+    }
+
+    public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
+    {
+        var result = CompletionResult.Empty;
+        if (args.Length == 1)
+            result = CompletionResult.FromHintOptions(GetZonesList(), Loc.GetString("zone-command-delete-zone-uid-hint"));
+
+        return result;
+
+        List<CompletionOption> GetZonesList()
+        {
+            var result = new List<CompletionOption>();
+            var query = _entityManager.EntityQueryEnumerator<ZoneComponent>();
+            while (query.MoveNext(out var uid, out var zoneComp))
+            {
+                var option = new CompletionOption(_entityManager.GetNetEntity(uid).ToString());
+                option.Hint = zoneComp.ZoneParams.Name;
+                result.Add(option);
+            }
+
+            return result;
+        }
     }
 }

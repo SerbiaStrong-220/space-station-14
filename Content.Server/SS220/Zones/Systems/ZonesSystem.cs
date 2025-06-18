@@ -16,6 +16,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
 
     public override void Initialize()
     {
@@ -189,6 +190,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
         var zoneComp = EnsureComp<ZoneComponent>(zone);
         zoneComp.ZoneParams = @params;
+        _metaData.SetEntityName(zone, @params.Name);
         Dirty(zone, zoneComp);
 
         var zoneContainer = EnsureComp<ZonesContainerComponent>(container);
@@ -211,6 +213,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         }
 
         zone.Comp.ZoneParams = newParams;
+        _metaData.SetEntityName(zone, newParams.Name);
         Dirty(zone);
     }
 
