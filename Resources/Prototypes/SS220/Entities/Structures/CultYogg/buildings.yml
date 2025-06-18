@@ -89,12 +89,13 @@
     default: ClothingBackpack
     userWhitelist:
       components:
-      - CultYogg
+      #- CultYogg
+      - HumanoidAppearance  #ToDo_SS220 del this on release
     requireTag: WhitelistChameleonPDA
   - type: UserInterface
     interfaces:
-      enum.ChameleonUiKey.Key:
-        type: ChameleonSctructureBoundUserInterface
+      enum.ChameleonStructureUiKey.Key:
+        type: ChameleonStructureBoundUserInterface
 
 - type: entity
   parent: BaseMaterialDoorNavMap
