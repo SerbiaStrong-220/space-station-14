@@ -1,12 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.IdentityManagement;
-using Content.Shared.Clothing.Components;
-using Content.Shared.Clothing.EntitySystems;
-using Content.Shared.IdentityManagement.Components;
-using Content.Shared.Prototypes;
 using Content.Shared.SS220.ChameleonStructure;
-using Content.Shared.Verbs;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.ChameleonStructure;
@@ -14,8 +8,6 @@ namespace Content.Server.SS220.ChameleonStructure;
 public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly IdentitySystem _identity = default!;
 
     public override void Initialize()
     {

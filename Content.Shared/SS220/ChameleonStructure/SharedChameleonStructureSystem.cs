@@ -5,7 +5,6 @@ using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Content.Shared.Coordinates;
 
 namespace Content.Shared.SS220.ChameleonStructure;
 
