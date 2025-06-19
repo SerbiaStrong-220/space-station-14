@@ -72,7 +72,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         var toDelete = _zoneContainerEntries.ToDictionary();
         var toAdd = new Dictionary<EntityUid, ZoneContainerEntry>();
 
-        var query = _entityManager.EntityQueryEnumerator<ZonesContainerComponent>();
+        var query = _entityManager.AllEntityQueryEnumerator<ZonesContainerComponent>();
         while (query.MoveNext(out var uid, out var zoneData))
         {
             if (zoneData.Zones.Count <= 0)

@@ -14,7 +14,7 @@ namespace Content.Shared.SS220.Zones.Components;
 [Access(typeof(SharedZonesSystem))]
 public sealed partial class ZoneComponent : Component
 {
-    [ViewVariables]
+    [DataField]
     public ZoneParams ZoneParams = new();
 
     /// <summary>

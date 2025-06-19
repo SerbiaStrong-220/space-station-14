@@ -25,7 +25,7 @@ public sealed partial class ZonesBoxesOverlayProvider : BoxesOverlayProvider
     public override List<BoxOverlayData> GetBoxesDatas()
     {
         List<BoxOverlayData> overlayData = [];
-        var query = _entityManager.EntityQueryEnumerator<ZonesContainerComponent>();
+        var query = _entityManager.AllEntityQueryEnumerator<ZonesContainerComponent>();
         while (query.MoveNext(out var parent, out var container))
         {
             foreach (var netZone in container.Zones)

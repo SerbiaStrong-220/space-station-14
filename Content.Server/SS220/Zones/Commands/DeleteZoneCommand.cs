@@ -46,7 +46,7 @@ public sealed partial class DeleteZoneCommand : LocalizedCommands
         List<CompletionOption> GetZonesList()
         {
             var result = new List<CompletionOption>();
-            var query = _entityManager.EntityQueryEnumerator<ZoneComponent>();
+            var query = _entityManager.AllEntityQueryEnumerator<ZoneComponent>();
             while (query.MoveNext(out var uid, out var zoneComp))
             {
                 var option = new CompletionOption(_entityManager.GetNetEntity(uid).ToString());

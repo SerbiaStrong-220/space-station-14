@@ -182,13 +182,13 @@ public abstract partial class SharedZonesSystem : EntitySystem
     {
         HashSet<Entity<ZoneComponent>> result = new();
 
-        var query = EntityQueryEnumerator<ZonesContainerComponent>();
+        var query = AllEntityQuery<ZonesContainerComponent>();
         while (query.MoveNext(out var uid, out var container))
         {
             if (Transform(uid).MapID != point.MapId)
                 continue;
 
-            foreach (var zone in GetZonesInContainer((uid, container)))
+            foreach (var zone in GetZonesFromContainer((uid, container)))
             {
                 if (InZone(zone, point, regionType))
                     result.Add(zone);
@@ -288,7 +288,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     public int GetZonesCount()
     {
         var result = 0;
-        var query = EntityQueryEnumerator<ZoneComponent>();
+        var query = AllEntityQuery<ZoneComponent>();
         while (query.MoveNext(out _, out _))
             result++;
 
@@ -427,7 +427,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return world;
     }
 
-    public HashSet<Entity<ZoneComponent>> GetZonesInContainer(Entity<ZonesContainerComponent> entity)
+    public HashSet<Entity<ZoneComponent>> GetZonesFromContainer(Entity<ZonesContainerComponent> entity)
     {
         HashSet<Entity<ZoneComponent>> result = new();
         foreach (var netUid in entity.Comp.Zones)
@@ -473,7 +473,7 @@ public sealed partial class ZoneParams()
     /// The entity that this zone is assigned to.
     /// Used to determine local coordinates
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
     public NetEntity Container
     {
         get => _container;
@@ -485,25 +485,25 @@ public sealed partial class ZoneParams()
     /// <summary>
     /// Name of the zone
     /// </summary>
-    [ViewVariables]
+    [DataField, ViewVariables]
     public string Name = string.Empty;
 
     /// <summary>
     /// ID of the zone's entity prototype
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
     public EntProtoId<ZoneComponent> ProtoID = SharedZonesSystem.BaseZoneId;
 
     /// <summary>
     /// Current color of the zone
     /// </summary>
-    [ViewVariables]
+    [DataField, ViewVariables]
     public Color Color = SharedZonesSystem.DefaultColor;
 
     /// <summary>
     /// Should the size of the zone be attached to the grid
     /// </summary>
-    [ViewVariables]
+    [DataField, ViewVariables]
     public bool AttachToGrid
     {
         get => _attachToGrid;
@@ -519,7 +519,7 @@ public sealed partial class ZoneParams()
     /// Space cutting option.
     /// It only works if the <see cref="Container"/> is a grid
     /// </summary>
-    [ViewVariables]
+    [DataField, ViewVariables]
     public CutSpaceOptions CutSpaceOption
     {
         get => _cutSpaceOption;
@@ -534,21 +534,21 @@ public sealed partial class ZoneParams()
     /// <summary>
     /// Original size of the zone
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
     [Access(Other = AccessPermissions.Read)]
     public List<Box2> OriginalRegion = new();
 
     /// <summary>
     /// Disabled zone size
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
     [Access(Other = AccessPermissions.Read)]
     public List<Box2> DisabledRegion = new();
 
     /// <summary>
     /// The <see cref="OriginalRegion"/> with the cut-out <see cref="DisabledRegion"/>
     /// </summary>
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
     [Access(Other = AccessPermissions.Read)]
     public List<Box2> ActiveRegion = new();
 
@@ -596,14 +596,19 @@ public sealed partial class ZoneParams()
             CutSpaceOption = cutSpaceOption;
     }
 
-    public static bool operator ==(ZoneParams left, ZoneParams right)
+    public static bool operator ==(ZoneParams? left, ZoneParams? right)
     {
+        if (left is null)
+            return right is null;
+        else if (right is null)
+            return false;
+
         return left.Equals(right);
     }
 
-    public static bool operator !=(ZoneParams left, ZoneParams right)
+    public static bool operator !=(ZoneParams? left, ZoneParams? right)
     {
-        return !left.Equals(right);
+        return !(left == right);
     }
 
     public override int GetHashCode()

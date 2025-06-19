@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.Zones.Components;
 [Access(typeof(SharedZonesSystem))]
 public sealed partial class ZonesContainerComponent : Component
 {
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
     public HashSet<NetEntity> Zones = new();
 }
 
