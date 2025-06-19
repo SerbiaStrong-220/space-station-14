@@ -4,9 +4,11 @@ using Content.Server.Chat.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.SS220.Language;
 using Content.Shared.SS220.Language.Systems;
+using Content.Shared.SS220.Undereducated;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -18,12 +20,14 @@ public sealed partial class UndereducatedSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedLanguageSystem _languageSystem = default!;
 
+    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+
     [GeneratedRegex(@"\s+", RegexOptions.Compiled)]
     private static partial Regex SpaceRegex();
 
-    private static readonly string BorgLanguage = "Binary";
     private static readonly Dictionary<string, ProtoId<LanguagePrototype>> DefaultLanguage = new()
     {
+        // Race languages
         ["Human"] = "SolCommon", // %sl
         ["Reptilian"] = "Sintaunathi", // %sin
         ["Tajaran"] = "Siiktajr", // %sii
@@ -34,6 +38,13 @@ public sealed partial class UndereducatedSystem : EntitySystem
         ["Dwarf"] = "Eldwarf", // %el
         ["Arachnid"] = "Arati", // %ara
         ["Vulpkanin"] = "Canilunzt", // %cani
+        // Not race languages
+        ["Binary"] = "Binary", // %bin
+        ["Clownish"] = "Clownish", // %clw
+        ["Tradeband"] = "Tradeband", // %trd
+        ["Codespeak"] = "Codespeak", // %cod
+        ["Gutter"] = "Gutter", // %gt
+        ["NeoRusskiya"] = "NeoRusskiya", // %ru
     };
 
     public override void Initialize()
@@ -42,30 +53,55 @@ public sealed partial class UndereducatedSystem : EntitySystem
 
         SubscribeLocalEvent<UndereducatedComponent, TransformOriginalEvent>(OnBeforeAccent);
         SubscribeLocalEvent<UndereducatedComponent, MapInitEvent>(OnMapInit);
+
+        SubscribeLocalEvent<UndereducatedComponent, UndereducatedConfigRequest>(OnConfigReceived);
     }
 
     private void OnMapInit(Entity<UndereducatedComponent> ent, ref MapInitEvent _)
     {
+        List<string> spokenLanguages = [];
         if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
             && DefaultLanguage.TryGetValue(apperance.Species, out var language)
             && _proto.TryIndex<LanguagePrototype>(language, out var languagePrototype))
-        {
             ent.Comp.Language = languagePrototype.ID;
-            return;
-        }
 
-        // Для малограмотных боргов
-        if (_languageSystem.CanSpeak(ent, BorgLanguage))
-        {
-            ent.Comp.Language = BorgLanguage;
-            return;
-        }
+        else if (_languageSystem.CanSpeak(ent, DefaultLanguage.GetValueOrDefault("Binary", "Binary")))
+            ent.Comp.Language = DefaultLanguage.GetValueOrDefault("Binary", "Binary");
 
-        // Для малограмотных торгоматов
-        if (_languageSystem.CanSpeak(ent, _languageSystem.UniversalLanguage))
+        else if (_languageSystem.CanSpeak(ent, _languageSystem.UniversalLanguage))
             ent.Comp.Language = _languageSystem.UniversalLanguage;
+
         else if (_languageSystem.CanSpeak(ent, _languageSystem.GalacticLanguage))
             ent.Comp.Language = _languageSystem.GalacticLanguage;
+
+        FillSpokenLanguage(ent, out spokenLanguages);
+        ent.Comp.SpokenLanguages = spokenLanguages;
+        Dirty(ent);
+    }
+
+    private void FillSpokenLanguage(Entity<UndereducatedComponent> ent, out List<string> spokenLanguages)
+    {
+        spokenLanguages = [];
+        var allLanguages = DefaultLanguage.Values.ToList();
+
+        foreach (var language in allLanguages)
+        {
+            if (_languageSystem.CanSpeak(ent, language))
+            {
+                spokenLanguages.Add(language);
+            }
+        }
+    }
+
+    private void OnConfigReceived(Entity<UndereducatedComponent> entity, ref UndereducatedConfigRequest args)
+    {
+        if (entity.Comp.Tuned)
+            return;
+
+        entity.Comp.Language = args.SelectedLanguage;
+        entity.Comp.ChanseToReplace = args.Chance;
+        entity.Comp.Tuned = true;
+        Dirty(entity);
     }
 
     private bool TryGetLanguageTag(Entity<UndereducatedComponent> ent, [NotNullWhen(true)] out string? tag)
