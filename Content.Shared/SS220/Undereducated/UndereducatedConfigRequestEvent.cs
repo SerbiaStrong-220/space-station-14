@@ -4,21 +4,16 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Undereducated;
 
-[Serializable, NetSerializable]
-public sealed class UndereducatedConfigRequest : BoundUserInterfaceMessage
+[NetSerializable, Serializable]
+public sealed class UndereducatedConfigRequestEvent : EntityEventArgs
 {
+    public NetEntity NetEntity;
     public string SelectedLanguage;
     public float Chance;
-
-    public UndereducatedConfigRequest(string selectedLanguage, float chance)
+    public UndereducatedConfigRequestEvent(NetEntity ent, string selectedLanguage, float сhance)
     {
+        NetEntity = ent;
         SelectedLanguage = selectedLanguage;
-        Chance = chance;
+        Chance = сhance;
     }
-}
-
-[NetSerializable, Serializable]
-public enum UndereducatedUiKey : byte
-{
-    Key
 }

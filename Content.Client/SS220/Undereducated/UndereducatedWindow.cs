@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.Undereducated;
-using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using System.Numerics;
@@ -11,28 +10,21 @@ namespace Content.Client.SS220.Undereducated;
 
 public sealed partial class UndereducatedWindow : DefaultWindow
 {
-    private readonly UserInterfaceSystem _uiSystem;
-    private readonly EntityUid _entity;
     private List<string> _spokenLanguages;
-
-    [Dependency] private readonly IEntityManager _entManager = default!;
-
     private OptionButton _languageOption = default!;
     private Slider _chanceSlider = default!;
     private Button _submitButton = default!;
 
-    private string _currentLanguage;
-    private float _currentChance;
+    public string SelectedLanguage;
+    public float SelectedChance;
 
-    public UndereducatedWindow(EntityUid owner, UndereducatedComponent comp)
+    public UndereducatedWindow(UndereducatedComponent comp)
     {
         IoCManager.InjectDependencies(this);
-        _uiSystem = _entManager.System<UserInterfaceSystem>();
-        _entity = owner;
-        _spokenLanguages = comp.SpokenLanguages;
 
-        _currentLanguage = comp.Language;
-        _currentChance = comp.ChanseToReplace;
+        _spokenLanguages = comp.SpokenLanguages;
+        SelectedLanguage = comp.Language;
+        SelectedChance = comp.ChanseToReplace;
 
         BuildWindow();
     }
@@ -54,7 +46,7 @@ public sealed partial class UndereducatedWindow : DefaultWindow
             _languageOption.AddItem(language);
         }
 
-        var langIndex = _spokenLanguages.IndexOf(_currentLanguage);
+        var langIndex = _spokenLanguages.IndexOf(SelectedLanguage);
         if (langIndex >= 0)
         {
             _languageOption.Select(langIndex);
@@ -63,6 +55,7 @@ public sealed partial class UndereducatedWindow : DefaultWindow
         _languageOption.OnItemSelected += args =>
         {
             _languageOption.Select(args.Id);
+            SelectedLanguage = _spokenLanguages[_languageOption.SelectedId];
         };
 
         vbox.AddChild(_languageOption);
@@ -75,27 +68,22 @@ public sealed partial class UndereducatedWindow : DefaultWindow
             Value = 5,
             HorizontalExpand = true
         };
-        _chanceSlider.Value = _currentChance;
+        _chanceSlider.Value = SelectedChance;
+        _chanceSlider.OnValueChanged += args =>
+        {
+            SelectedChance = 1f - args.Value / 100;
+        };
         vbox.AddChild(_chanceSlider);
 
         _submitButton = new Button { Text = "Применить" };
-        _submitButton.OnPressed += OnSubmit;
+        _submitButton.OnPressed += args =>
+        {
+            SelectedLanguage = _spokenLanguages[_languageOption.SelectedId];
+            SelectedChance = 1f - _chanceSlider.Value / 100;
+            Close();
+        };
         vbox.AddChild(_submitButton);
 
         Contents.AddChild(vbox);
     }
-
-    private void OnSubmit(BaseButton.ButtonEventArgs args)
-    {
-        if (_languageOption.SelectedId < 0 || _languageOption.SelectedId >= _spokenLanguages.Count)
-            return;
-        var selectedLanguage = _spokenLanguages[_languageOption.SelectedId];
-
-        float chance = 1f - _chanceSlider.Value / 100;
-
-        var message = new UndereducatedConfigRequest(selectedLanguage, chance);
-        _uiSystem.ClientSendUiMessage(_entity, UndereducatedUiKey.Key, message);
-        Close();
-    }
-
 }

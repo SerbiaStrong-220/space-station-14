@@ -7,6 +7,7 @@ using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.Undereducated;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,6 @@ public sealed partial class UndereducatedSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedLanguageSystem _languageSystem = default!;
-
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
 
     [GeneratedRegex(@"\s+", RegexOptions.Compiled)]
     private static partial Regex SpaceRegex();
@@ -54,7 +53,7 @@ public sealed partial class UndereducatedSystem : EntitySystem
         SubscribeLocalEvent<UndereducatedComponent, TransformOriginalEvent>(OnBeforeAccent);
         SubscribeLocalEvent<UndereducatedComponent, MapInitEvent>(OnMapInit);
 
-        SubscribeLocalEvent<UndereducatedComponent, UndereducatedConfigRequest>(OnConfigReceived);
+        SubscribeNetworkEvent<UndereducatedConfigRequestEvent>(OnConfigReceived);
     }
 
     private void OnMapInit(Entity<UndereducatedComponent> ent, ref MapInitEvent _)
@@ -93,15 +92,23 @@ public sealed partial class UndereducatedSystem : EntitySystem
         }
     }
 
-    private void OnConfigReceived(Entity<UndereducatedComponent> entity, ref UndereducatedConfigRequest args)
+    private void OnConfigReceived(UndereducatedConfigRequestEvent args)
     {
-        if (entity.Comp.Tuned)
+        var ent = GetEntity(args.NetEntity);
+
+        if (!TryComp<UndereducatedComponent>(ent, out var comp) || comp.Tuned)
             return;
 
-        entity.Comp.Language = args.SelectedLanguage;
-        entity.Comp.ChanseToReplace = args.Chance;
-        entity.Comp.Tuned = true;
-        Dirty(entity);
+        if (args.Chance > 1f || args.Chance < 0f)
+            args.Chance = 0.05f;
+
+        if (!comp.SpokenLanguages.Contains(args.SelectedLanguage) || !_languageSystem.CanSpeak(ent, args.SelectedLanguage))
+            args.SelectedLanguage = comp.Language;
+
+        comp.Language = args.SelectedLanguage;
+        comp.ChanseToReplace = args.Chance;
+        comp.Tuned = true;
+        Dirty(ent, comp);
     }
 
     private bool TryGetLanguageTag(Entity<UndereducatedComponent> ent, [NotNullWhen(true)] out string? tag)
