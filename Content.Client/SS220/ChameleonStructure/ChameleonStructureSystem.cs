@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Client.IconSmoothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Polymorph.Components;
@@ -90,6 +91,12 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
+        if (!TryComp(ent, out IconSmoothComponent? smooth))
+            return;
+
+        if (smooth is null)
+            return;
+
         /*
         if (!TryComp(clone, out SpriteComponent? otherSprite))
             return;
@@ -101,23 +108,23 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
         if (otherSprite is null)
             return;
 
+        if (!proto.TryGetComponent(out IconSmoothComponent? OtherSmooth, _factory))
+            return;
+
+        if (OtherSmooth is null)
+            return;
+
         //var dragSprite = Comp<SpriteComponent>(otherSprite.Value);
 
-        /*
-        var despawn = EnsureComp<TimedDespawnComponent>(clone);
-        despawn.Lifetime = 0.01f;
-        _transformSystem.SetLocalRotationNoLerp(clone, Angle.FromDegrees(180.0f));
-        */
         //_sprite.CopySprite((clone, otherSprite), (ent, sprite));
 
-        //_sprite.CopySprite((ent, sprite), (clone, otherSprite));
 
-
-        //sprite.CopyFrom(otherSprite);
-        //_sprite.QueueUpdateIsInert((ent, otherSprite));
+        smooth.StateBase = OtherSmooth.StateBase;
+        sprite.CopyFrom(otherSprite);
 
         //_sprite.SetBaseRsi((ent, sprite), otherSprite.BaseRSI);//that was the last chance
 
-        //Dirty(ent, sprite);
+
+        Dirty(ent, sprite);
     }
 }

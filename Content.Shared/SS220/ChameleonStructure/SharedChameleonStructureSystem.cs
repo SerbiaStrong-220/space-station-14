@@ -49,12 +49,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
             Act = () => UI.TryToggleUi(ent.Owner, ChameleonStructureUiKey.Key, user)
         });
     }
-    protected virtual void UpdateSprite(EntityUid ent, EntityPrototype proto)
-    {
-        /*
-        var disguise = SpawnAttachedTo("ChameleonDisguise", ent.ToCoordinates());
-        */
-    }
+    protected virtual void UpdateSprite(EntityUid ent, EntityPrototype proto) { }
 
     protected void UpdateVisuals(Entity<ChameleonStructureComponent> ent)
     {
