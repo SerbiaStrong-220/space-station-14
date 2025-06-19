@@ -5,6 +5,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared.Coordinates;
 
 namespace Content.Shared.SS220.ChameleonStructure;
 
@@ -48,7 +49,12 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
             Act = () => UI.TryToggleUi(ent.Owner, ChameleonStructureUiKey.Key, user)
         });
     }
-    protected virtual void UpdateSprite(EntityUid uid, EntityPrototype proto) { }
+    protected virtual void UpdateSprite(EntityUid ent, EntityPrototype proto)
+    {
+        /*
+        var disguise = SpawnAttachedTo("ChameleonDisguise", ent.ToCoordinates());
+        */
+    }
 
     protected void UpdateVisuals(Entity<ChameleonStructureComponent> ent)
     {
