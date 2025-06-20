@@ -7,7 +7,6 @@ using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.Undereducated;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -24,7 +23,7 @@ public sealed partial class UndereducatedSystem : EntitySystem
     [GeneratedRegex(@"\s+", RegexOptions.Compiled)]
     private static partial Regex SpaceRegex();
 
-    private static readonly Dictionary<string, ProtoId<LanguagePrototype>> DefaultLanguage = new()
+    private static readonly Dictionary<string, ProtoId<LanguagePrototype>> AllLanguages = new()
     {
         // Race languages
         ["Human"] = "SolCommon", // %sl
@@ -58,14 +57,17 @@ public sealed partial class UndereducatedSystem : EntitySystem
 
     private void OnMapInit(Entity<UndereducatedComponent> ent, ref MapInitEvent _)
     {
-        List<string> spokenLanguages = [];
+        GetSpokenLanguages(ent, out var spokenLanguages);
+        ent.Comp.SpokenLanguages = spokenLanguages;
+
         if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
-            && DefaultLanguage.TryGetValue(apperance.Species, out var language)
+            && AllLanguages.TryGetValue(apperance.Species, out var language)
+            && spokenLanguages.Contains(language)
             && _proto.TryIndex<LanguagePrototype>(language, out var languagePrototype))
             ent.Comp.Language = languagePrototype.ID;
 
-        else if (_languageSystem.CanSpeak(ent, DefaultLanguage.GetValueOrDefault("Binary", "Binary")))
-            ent.Comp.Language = DefaultLanguage.GetValueOrDefault("Binary", "Binary");
+        else if (spokenLanguages.Contains(AllLanguages.GetValueOrDefault("Binary", "Binary")))
+            ent.Comp.Language = AllLanguages.GetValueOrDefault("Binary", "Binary");
 
         else if (_languageSystem.CanSpeak(ent, _languageSystem.UniversalLanguage))
             ent.Comp.Language = _languageSystem.UniversalLanguage;
@@ -73,15 +75,13 @@ public sealed partial class UndereducatedSystem : EntitySystem
         else if (_languageSystem.CanSpeak(ent, _languageSystem.GalacticLanguage))
             ent.Comp.Language = _languageSystem.GalacticLanguage;
 
-        FillSpokenLanguage(ent, out spokenLanguages);
-        ent.Comp.SpokenLanguages = spokenLanguages;
         Dirty(ent);
     }
 
-    private void FillSpokenLanguage(Entity<UndereducatedComponent> ent, out List<string> spokenLanguages)
+    private void GetSpokenLanguages(EntityUid ent, out List<string> spokenLanguages)
     {
         spokenLanguages = [];
-        var allLanguages = DefaultLanguage.Values.ToList();
+        var allLanguages = AllLanguages.Values.ToList();
 
         foreach (var language in allLanguages)
         {
@@ -116,7 +116,6 @@ public sealed partial class UndereducatedSystem : EntitySystem
         tag = null;
         LanguagePrototype? languagePrototype;
 
-        // По компоненту
         if (ent.Comp.Language.Length > 0
             && _languageSystem.CanSpeak(ent, ent.Comp.Language)
             && _proto.TryIndex<LanguagePrototype>(ent.Comp.Language, out languagePrototype))
@@ -125,9 +124,8 @@ public sealed partial class UndereducatedSystem : EntitySystem
             return true;
         }
 
-        // По словарю
         if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
-            && DefaultLanguage.TryGetValue(apperance.Species, out var language)
+            && AllLanguages.TryGetValue(apperance.Species, out var language)
             && _proto.TryIndex<LanguagePrototype>(language, out languagePrototype))
         {
             tag = languagePrototype.KeyWithPrefix;

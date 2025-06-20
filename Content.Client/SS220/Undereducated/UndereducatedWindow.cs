@@ -31,51 +31,69 @@ public sealed partial class UndereducatedWindow : DefaultWindow
 
     private void BuildWindow()
     {
-        Title = "Настройка акцента";
+        Resizable = false;
+        Title = "Настройка малограмотного акцента";
 
         var vbox = new BoxContainer
         {
             Orientation = LayoutOrientation.Vertical,
-            MinSize = new Vector2(300, 150)
+            MinSize = new Vector2(350, 175),
+            MaxSize = new Vector2(350, 175),
         };
 
         vbox.AddChild(new Label { Text = "Ваш родной язык:" });
+
         _languageOption = new OptionButton();
         foreach (var language in _spokenLanguages)
         {
             _languageOption.AddItem(language);
         }
-
         var langIndex = _spokenLanguages.IndexOf(SelectedLanguage);
         if (langIndex >= 0)
         {
             _languageOption.Select(langIndex);
         }
-
         _languageOption.OnItemSelected += args =>
         {
             _languageOption.Select(args.Id);
             SelectedLanguage = _spokenLanguages[_languageOption.SelectedId];
         };
-
         vbox.AddChild(_languageOption);
 
-        vbox.AddChild(new Label { Text = "Ваш уровень знания других языков (%):" });
+        vbox.AddChild(new Label { Text = " " });
+
+        var percentLable = new Label();
+        percentLable.Text = "Ваш уровень знания других языков : " + "95" + "%";
+        vbox.AddChild(percentLable);
         _chanceSlider = new Slider
         {
-            MinValue = 5,
-            MaxValue = 100,
-            Value = 5,
-            HorizontalExpand = true
+            MinValue = 0,
+            MaxValue = 95,
+            Value = 95,
+            HorizontalExpand = true,
+            ToolTip = "Меньшее значение - больше автозамен слов",
+            TooltipDelay = 0.9f
         };
-        _chanceSlider.Value = SelectedChance;
         _chanceSlider.OnValueChanged += args =>
         {
+            percentLable.Text = "Ваш уровень знания других языков : " + Math.Round(_chanceSlider.Value, 2) + "%";
             SelectedChance = 1f - args.Value / 100;
         };
         vbox.AddChild(_chanceSlider);
 
-        _submitButton = new Button { Text = "Применить" };
+        vbox.AddChild(new Label
+        {
+            Text = " ",
+            ToolTip = "Мяу?",
+            TooltipDelay = 10
+        });
+
+        _submitButton = new Button
+        {
+            Text = "Применить",
+            ToolTip = "Или просто закройте окно, все значения сохраняются",
+            TooltipDelay = 0.9f
+        };
         _submitButton.OnPressed += args =>
         {
             SelectedLanguage = _spokenLanguages[_languageOption.SelectedId];
