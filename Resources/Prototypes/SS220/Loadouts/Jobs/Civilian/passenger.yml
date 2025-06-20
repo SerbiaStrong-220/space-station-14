@@ -59,7 +59,7 @@
 # Лодаут на jumpsuit 14 для пассажира
 - type: loadout
   id: PassengerJumpsuitBlueYellow14
-  equipment: 
+  equipment:
     jumpsuit: ClothingUniformBlueYellow14
   effects:
   - !type:GroupLoadoutEffect

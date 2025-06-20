@@ -759,7 +759,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/ussp_uniform.rsi
 
-# Пассажирский жёлтый комбез 
+# Пассажирский жёлтый комбез
 
 - type: entity
   parent: ClothingUniformBase
