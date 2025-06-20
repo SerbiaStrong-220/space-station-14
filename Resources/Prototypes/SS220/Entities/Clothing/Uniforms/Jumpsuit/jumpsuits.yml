@@ -759,16 +759,16 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/ussp_uniform.rsi
 
-# Пассажирский жёлтый комбез
+# Пассажирский жёлтый комбез 
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformYellow220
+  id: ClothingUniformBlueYellow14
   name: yellow jumpsuit
   description: A yellow jumpsuit!
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_officer.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/fallout.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_officer.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/fallout.rsi

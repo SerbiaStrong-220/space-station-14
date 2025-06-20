@@ -48,7 +48,7 @@
 
 # Ограничение по времени для пассажира с jumpsuit 220
 - type: loadoutEffectGroup
-  id: Passenger220JumpsuitTime
+  id: PassengerBlueYellowJumpsuitTime
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -56,11 +56,11 @@
       role: JobPassenger
       time: 79200 # 22 часа
 
-# Лодаут на jumpsuit 220 для пассажира
+# Лодаут на jumpsuit 14 для пассажира
 - type: loadout
-  id: PassengerJumpsuit220
+  id: PassengerJumpsuitBlueYellow14
   equipment: 
-    jumpsuit: ClothingUniformYellow220
+    jumpsuit: ClothingUniformBlueYellow14
   effects:
   - !type:GroupLoadoutEffect
-    proto: Passenger220JumpsuitTime
+    proto: PassengerBlueYellowJumpsuitTime
