@@ -431,10 +431,6 @@
     Gas:
       effects:
       - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          reagent: Frezon
-          min: 0.5
         scaleByQuantity: true
         ignoreResistances: true
         damage:
