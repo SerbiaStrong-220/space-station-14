@@ -55,5 +55,10 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
 
         UpdateUi(ent);
         Dirty(ent, ent.Comp);
+
+        if (!TryComp<AppearanceComponent>(ent, out var appearance))//it fixes wrong layer states
+            return;
+
+        Dirty(ent, appearance);
     }
 }
