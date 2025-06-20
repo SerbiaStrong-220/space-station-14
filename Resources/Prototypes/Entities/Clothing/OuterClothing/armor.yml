@@ -278,7 +278,7 @@
     walkModifier: 1 #ss220 raid suit rework
     sprintModifier: 0.95 #ss220 raid suit rework
   #Shoulder mounted flashlight
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       outerClothing:
@@ -287,6 +287,7 @@
       outerClothing-vox:
       - state: equipped-OUTERCLOTHING-light-vox
         shader: unshaded
+  - type: ItemTogglePointLight
   - type: Appearance
   - type: HandheldLight
     addPrefix: false

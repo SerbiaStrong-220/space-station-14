@@ -3,6 +3,7 @@ cult-yogg-building-frame-examined-material-full = [color=green]{$currentAmount}/
 cult-yogg-building-frame-examined-material-needed = {$currentAmount}/{$totalAmount} {$material}
 cult-yogg-building-frame-verb-destroy = Отменить постройку
 cult-yogg-building-tile-blocked-popup = Здесь нельзя разместить постройку
+cult-yogg-building-cant-erase-non-cultists-buildings = Вы не можете разбирать не постройки культа
 cult-yogg-building-cooldown-popup = Ми-Го ещё не готов возвести следующую постройку
 cult-yogg-migo-erect-menu-title = Возведение
 cult-yogg-migo-erect-menu-erase-button = Разобрать сооружение

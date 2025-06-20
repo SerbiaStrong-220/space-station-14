@@ -1,9 +1,11 @@
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement.Components;
+using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 
@@ -15,6 +17,8 @@ public abstract class SharedOrigamiSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
 
     public override void Initialize()
     {
@@ -38,8 +42,22 @@ public abstract class SharedOrigamiSystem : EntitySystem
         if (!HasComp<OrigamiUserComponent>(args.Component.Thrower))
             return;
 
-        if (TryComp<IdentityBlockerComponent>(args.Target, out var identityBlocker)
-            && identityBlocker.Coverage is IdentityBlockerCoverage.EYES or IdentityBlockerCoverage.FULL)
+        if (_gun.TryGetGun(args.Component.Thrower.Value, out _, out _))
+            return;
+
+        var hasEyeProtection = false;
+
+        foreach (var slot in ent.Comp.BlockerSlots)
+        {
+            if (!_inventory.TryGetSlotEntity(args.Target, slot, out var slotEntity)
+                || !IsEyeBlocker(slotEntity.Value))
+                continue;
+
+            hasEyeProtection = true;
+            break;
+        }
+
+        if (hasEyeProtection)
         {
             _damageable.TryChangeDamage(args.Target, ent.Comp.Damage);
             return;
@@ -47,6 +65,12 @@ public abstract class SharedOrigamiSystem : EntitySystem
 
         _damageable.TryChangeDamage(args.Target, ent.Comp.DamageWithoutGlasses);
         _stun.TryParalyze(args.Target, TimeSpan.FromSeconds(ent.Comp.TimeParalyze), true);
+    }
+
+    private bool IsEyeBlocker(EntityUid uid)
+    {
+        return TryComp<IdentityBlockerComponent>(uid, out var comp) &&
+               comp.Coverage is IdentityBlockerCoverage.EYES or IdentityBlockerCoverage.FULL;
     }
 
     private void OnDoAfter(StartLearnOrigamiDoAfter args)

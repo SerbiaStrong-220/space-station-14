@@ -2,6 +2,7 @@
   id: HandheldHealthAnalyzerUnpowered
   parent: BaseItem
   name: health analyzer
+  suffix: Always Powered
   description: A hand-held body scanner capable of distinguishing vital signs of the subject.
   components:
   - type: Sprite
@@ -22,8 +23,10 @@
     interfaces:
       enum.HealthAnalyzerUiKey.Key:
         type: HealthAnalyzerBoundUserInterface
-  - type: ItemToggle
-    onUse: false
+  #ss220 fix interact with 'E' start
+  #- type: ItemToggle
+  #  onUse: false
+  #ss220 fix interact with 'E' end
   - type: HealthAnalyzer
     scanningEndSound:
       path: "/Audio/Items/Medical/healthscanner.ogg"
@@ -44,7 +47,7 @@
 - type: entity
   id: HandheldHealthAnalyzer
   parent: [ HandheldHealthAnalyzerUnpowered, PowerCellSlotSmallItem]
-  suffix: Powered
+  suffix: ""
   components:
   - type: PowerCellDraw
     drawRate: 1.2 #Calculated for 5 minutes on a small cell

@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server.PDA.Ringer;
 using Content.Server.Store.Systems;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.FixedPoint;
@@ -21,6 +22,9 @@ public sealed class UplinkSystem : EntitySystem
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    //ss220 adduplink command generate code and open uplink start
+    [Dependency] private readonly RingerSystem _ringer = default!;
+    //ss220 adduplink command generate code and open uplink end
 
     [ValidatePrototypeId<CurrencyPrototype>]
     public const string TelecrystalCurrencyPrototype = "Telecrystal";
@@ -139,4 +143,15 @@ public sealed class UplinkSystem : EntitySystem
 
         return null;
     }
+
+    //ss220 adduplink command generate code and open uplink start
+    public void GenerateCodeAndOpenUplink(EntityUid uplinkEntity)
+    {
+        var ev = new GenerateUplinkCodeEvent();
+        RaiseLocalEvent(uplinkEntity, ref ev);
+
+        if (ev.Code != null)
+            _ringer.TryToggleUplink(uplinkEntity, ev.Code);
+    }
+    //ss220 adduplink command generate code and open uplink end
 }

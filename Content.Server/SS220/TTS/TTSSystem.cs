@@ -88,11 +88,20 @@ public sealed partial class TTSSystem : EntitySystem
         }
 
         if (!GetVoicePrototype(voiceId, out var protoVoice))
-        {
             return;
+
+        var receivers = new List<RadioEventReceiver>();
+
+        foreach (var receiver in args.Receivers)
+        {
+            var ev = new RadioTtsSendAttemptEvent(args.Channel);
+            RaiseLocalEvent(receiver.Actor, ev);
+
+            if (!ev.Cancelled)
+                receivers.Add(receiver);
         }
 
-        HandleRadio(args.Receivers, args.Message, protoVoice.Speaker);
+        HandleRadio(receivers.ToArray(), args.Message, protoVoice.Speaker);
     }
 
     private bool GetVoicePrototype(string voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
@@ -501,6 +510,13 @@ public sealed partial class TTSSystem : EntitySystem
             if (!_playerManager.TryGetSessionByEntity(receiver, out var session)
                 || !soundData.TryGetValue(out var audioData))
                 continue;
+
+            var ev = new TelepathyTtsSendAttemptEvent(receiver, args.Channel);
+            RaiseLocalEvent(receiver, ev);
+
+            if (ev.Cancelled)
+                continue;
+
             _netManager.ServerSendMessage(new MsgPlayTts
             {
                 Data = audioData,
