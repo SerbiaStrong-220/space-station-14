@@ -336,4 +336,7 @@
 # ss220 ChameleonStructure start
 - type: Tag
   id: WhitelistChameleonStructureWall
+
+- type: Tag
+  id: WhitelistChameleonStructureAirlock
 # ss220 ChameleonStructure end

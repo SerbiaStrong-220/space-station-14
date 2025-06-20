@@ -286,6 +286,8 @@
       #  type: StationAiBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
+      enum.ChameleonStructureUiKey.Key:
+        type: ChameleonStructureBoundUserInterface
   - type: Airtight
     noAirWhenFullyAirBlocked: false
   #ss220 airlock visuals fix start
@@ -344,3 +346,10 @@
   #  - Networking
   #placement:
   #  mode: SnapgridCenter
+  - type: ChameleonStructure
+    default: Airlock
+    userWhitelist:
+      components:
+      #- CultYogg
+      - HumanoidAppearance  #ToDo_SS220 del this on release
+    requireTag: WhitelistChameleonStructureAirlock

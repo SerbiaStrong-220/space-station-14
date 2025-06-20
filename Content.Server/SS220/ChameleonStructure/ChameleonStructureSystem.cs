@@ -12,6 +12,7 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<ChameleonStructureComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ChameleonStructureComponent, ChameleonStructurePrototypeSelectedMessage>(OnSelected);
     }
