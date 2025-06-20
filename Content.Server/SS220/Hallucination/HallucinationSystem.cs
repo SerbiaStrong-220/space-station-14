@@ -69,16 +69,15 @@ public sealed class HallucinationSystem : EntitySystem
     }
 
     /// <summary>
-    /// Make some additional changes to smoothly switch active status of source
+    /// Set active flag of source
     /// </summary>
-    public void SetHallucinationSourceActiveFlag(EntityUid source, bool active)
+    public void SetHallucinationSourceActiveFlag(Entity<HallucinationSourceComponent?> source, bool active)
     {
-        HallucinationSourceComponent? sourceComp = null;
-        if (!Resolve(source, ref sourceComp))
+        if (!Resolve(source, ref source.Comp))
             return;
 
-        sourceComp.IsActive = active;
-        sourceComp.NextUpdateTime = _gameTiming.CurTime;
+        source.Comp.IsActive = active;
+        source.Comp.NextUpdateTime = _gameTiming.CurTime;
     }
 
     /// <summary>

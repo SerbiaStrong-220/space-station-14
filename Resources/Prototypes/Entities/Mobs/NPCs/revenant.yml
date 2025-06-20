@@ -107,7 +107,9 @@
     damage:
       types:
         Cold: 11
-    specialDamageComp: MindShield
+    specialDamageWhitelist:
+      components:
+      - MindShield
     specialDamage:
       types:
         Cold: 26

@@ -3,6 +3,7 @@
 using Content.Shared.Damage;
 using Content.Shared.SS220.Damage.Components;
 using Content.Shared.Stunnable;
+using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -14,6 +15,7 @@ public sealed class StunsContactsSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -73,23 +75,8 @@ public sealed class StunsContactsSystem : EntitySystem
 
     private DamageSpecifier GetDamage(EntityUid target, DamageOnStunContactComponent component)
     {
-        return component.SpecialDamage is null || !EntityHaveSpecialComponent(target, component)
+        return component.SpecialDamage is null || !_whitelist.IsWhitelistPass(component.SpecialDamageWhitelist, target)
                 ? component.Damage
                 : component.SpecialDamage;
     }
-
-    private bool EntityHaveSpecialComponent(EntityUid target, DamageOnStunContactComponent component)
-    {
-        if (component.SpecialDamageComponentName is null)
-            return false;
-
-        Factory.TryGetRegistration(component.SpecialDamageComponentName, out var registration);
-        DebugTools.Assert(registration is not null);
-
-        if (registration is null)
-            return false;
-
-        return HasComp(target, registration.Type);
-    }
-    //SS220-add-damage-to-special-comp-end
 }

@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Damage;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.Damage.Components;
@@ -22,8 +23,8 @@ public sealed partial class DamageOnStunContactComponent : Component
     public DamageSpecifier? SpecialDamage;
 
     /// <summary>
-    /// Special component name for damage (value without "Component")
+    /// Special damage will be applied if whitelist condition matches
     /// </summary>
-    [DataField("specialDamageComp")]
-    public string? SpecialDamageComponentName;
+    [DataField]
+    public EntityWhitelist? SpecialDamageWhitelist;
 }
