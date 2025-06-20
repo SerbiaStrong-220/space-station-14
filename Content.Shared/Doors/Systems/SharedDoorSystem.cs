@@ -24,6 +24,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Map.Components;
+using Content.Shared.SS220.AccessWhitelist;
 
 namespace Content.Shared.Doors.Systems;
 
@@ -47,6 +48,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private readonly SharedAccessWhitelistSystem _accessWhitelist = default!;//SS220 ChameleonStructure
 
 
     [ValidatePrototypeId<TagPrototype>]
@@ -638,6 +640,11 @@ public abstract partial class SharedDoorSystem : EntitySystem
         // if there is no "user" we skip the access checks. Access is also ignored in some game-modes.
         if (user == null || AccessType == AccessTypes.AllowAll)
             return true;
+
+        //SS220 ChameleonStructure start
+        if (TryComp<AccessWhitelistComponent>(uid, out var accessWhitlist) && !_accessWhitelist.CheckAccess((uid, accessWhitlist), user))
+            return false;
+        //SS220 ChameleonStructure end
 
         // If the door is on emergency access we skip the checks.
         if (TryComp<AirlockComponent>(uid, out var airlock) && airlock.EmergencyAccess)

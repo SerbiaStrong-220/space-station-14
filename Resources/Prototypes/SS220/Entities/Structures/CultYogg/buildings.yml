@@ -213,6 +213,12 @@
       board: [ DoorElectronics ]
   #- type: AccessReader
   #  containerAccessProvider: board
+  - type: AccessWhitelist
+    whitelist:
+      components:
+      - CultYogg
+      - MiGo
+      #- HumanoidAppearance  #ToDo_SS220 del this on release
   - type: Door
     crushDamage:
       types:
@@ -242,9 +248,10 @@
           False: { visible: False }
   - type: WiresVisuals
   - type: ElectrocutionHUDVisuals
-  #- type: ApcPowerReceiver
-  #  powerLoad: 20
-  #- type: ExtensionCableReceiver
+  - type: ApcPowerReceiver
+    powerLoad: 20
+    needsPower: false
+  - type: ExtensionCableReceiver
   - type: Electrified
     enabled: false
     usesApcPower: true
