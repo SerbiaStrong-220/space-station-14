@@ -68,6 +68,7 @@
   - type: Tag
     tags:
       - Wall
+      - WhitelistChameleonStructureWall
   - type: Sprite
     sprite: SS220/Structures/Walls/cult_yogg_walls.rsi
   - type: Icon
@@ -86,11 +87,9 @@
   - type: CultYoggBuilding
     eraseTime: 3
   - type: ChameleonStructure
-    default: WallSolid
     userWhitelist:
       components:
-      #- CultYogg
-      - HumanoidAppearance  #ToDo_SS220 del this on release
+      - CultYogg
     requireTag: WhitelistChameleonStructureWall
   - type: UserInterface
     interfaces:
@@ -151,12 +150,10 @@
         stackAmount: 5
 
 - type: entity
-  #parent: Airlock #maybe should use some sindy doors
   parent: BaseStructure
-  id: AirlockCultYogg
+  id: CultYoggAirlock
   suffix: CultYogg
   components:
-  #- type: StationAiWhitelist
   - type: MeleeSound
     soundGroups:
       Brute:
@@ -182,11 +179,6 @@
       shader: unshaded
     - state: panel_open
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
-    - state: electrified_ai
-      sprite: Interface/Misc/ai_hud.rsi
-      shader: unshaded
-      visible: false
-      map: ["enum.ElectrifiedLayers.HUD"]
     - state: electrified
       sprite: Effects/electricity.rsi
       shader: unshaded
@@ -211,14 +203,11 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronics ]
-  #- type: AccessReader
-  #  containerAccessProvider: board
   - type: AccessWhitelist
     whitelist:
       components:
       - CultYogg
       - MiGo
-      #- HumanoidAppearance  #ToDo_SS220 del this on release
   - type: Door
     crushDamage:
       types:
@@ -260,49 +249,23 @@
   - type: Wires
     boardName: wires-board-name-airlock
     layoutId: Airlock
-  #- type: DoorSignalControl
-  #- type: DeviceNetwork
-  #  deviceNetId: Wireless
-  #  receiveFrequencyId: BasicDevice
-  #- type: WirelessNetworkConnection
-  #  range: 200
-  #- type: DeviceLinkSink
-  #  ports:
-  #    - Open
-  #    - Close
-  #    - Toggle
-  #    - AutoClose
-  #    - DoorBolt
-  #- type: DeviceLinkSource
-  #  ports:
-  #    - DoorStatus
-  #  lastSignals:
-  #    DoorStatus: false
   - type: SoundOnOverload
   - type: SpawnOnOverload
   - type: UserInterface
     interfaces:
-      #enum.AiUi.Key:
-      #  type: StationAiBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
       enum.ChameleonStructureUiKey.Key:
         type: ChameleonStructureBoundUserInterface
   - type: Airtight
     noAirWhenFullyAirBlocked: false
-  #ss220 airlock visuals fix start
   - type: AirlockVisuals
-  #ss220 airlock visuals fix end
   - type: RadiationBlocker
     resistance: 3
   - type: Occluder
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StrongMetallic
-  #- type: RCDDeconstructable
-  #  cost: 6
-  #  delay: 8
-  #  fx: EffectRCDDeconstruct8
   - type: Destructible
     thresholds:
     - trigger:
@@ -311,45 +274,26 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-      # TODO this should go to the broken node first
       - !type:PlaySoundBehavior
         sound:
           collection: MetalSlam
-  #- type: Construction
-  #  graph: Airlock
-  #  node: airlock
-  #  containers:
-  #  - board
   - type: PlacementReplacement
     key: walls
   - type: IconSmooth
     key: walls
     mode: NoSprite
-  #- type: PaintableAirlock
-  #  group: Standard
-  #  department: Civilian
-  #- type: StaticPrice
-  #  price: 180 # SS220 Zones-Cargo-reb-test-fix
   - type: LightningTarget
     priority: 1
   - type: Tag
     tags:
       - Airlock
-      # This tag is used to nagivate the Airlock construction graph. It's needed because the construction graph is shared between Airlock, AirlockGlass, and HighSecDoor
-  #- type: PryUnpowered
+      - WhitelistChameleonStructureAirlock
   - type: FoVOverlay
   - type: BlockWeather
-  #- type: GuideHelp
-  #  guides:
-  #  - Airlocks
-  #  - WirePanels
-  #  - Networking
-  #placement:
-  #  mode: SnapgridCenter
   - type: ChameleonStructure
-    default: Airlock
     userWhitelist:
       components:
-      #- CultYogg
-      - HumanoidAppearance  #ToDo_SS220 del this on release
+      - CultYogg
     requireTag: WhitelistChameleonStructureAirlock
+  - type: CultYoggBuilding
+    eraseTime: 3

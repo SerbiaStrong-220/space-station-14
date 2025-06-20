@@ -8,10 +8,6 @@
   },
   "states": [
     {
-       "name": "assembly",
-       "directions": 4
-    },
-    {
         "name": "bolted_unlit",
         "directions": 4
     },
