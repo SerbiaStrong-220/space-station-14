@@ -1,12 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Client.IconSmoothing;
-using Content.Shared.Clothing.Components;
-using Content.Shared.Coordinates;
-using Content.Shared.Polymorph.Components;
 using Content.Shared.SS220.ChameleonStructure;
 using Robust.Client.GameObjects;
-using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 
@@ -15,11 +11,8 @@ namespace Content.Client.SS220.ChameleonStructure;
 // All valid items for chameleon are calculated on client startup and stored in dictionary.
 public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IComponentFactory _factory = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private readonly IconSmoothSystem _smooth = default!;
 
     public override void Initialize()
     {
@@ -44,47 +37,38 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
     {
         base.UpdateSprite(ent, proto);
 
-        //var xform = Transform(ent);
-
-        //var clone = Spawn(proto.ID, xform.Coordinates);
-
-        if (!TryComp(ent, out SpriteComponent? sprite))
+        if (!TryComp<SpriteComponent>(ent, out var sprite))
             return;
 
-        if (!TryComp(ent, out IconSmoothComponent? smooth))
+        var clone = Spawn(proto.ID, Transform(ent).Coordinates);
+
+        if (!TryComp<SpriteComponent>(clone, out var cloneSprite))
             return;
 
-        if (smooth is null)
+        if (!TryCopySmooth(ent, clone))//Prevent errors
             return;
 
-        /*
-        if (!TryComp(clone, out SpriteComponent? otherSprite))
-            return;
-        */
+        _sprite.CopySprite((clone, cloneSprite), (ent, sprite));
 
-        if (!proto.TryGetComponent(out SpriteComponent? otherSprite, _factory))
-            return;
-
-        if (otherSprite is null)
-            return;
-
-        if (!proto.TryGetComponent(out IconSmoothComponent? OtherSmooth, _factory))
-            return;
-
-        if (OtherSmooth is null)
-            return;
-
-        //var dragSprite = Comp<SpriteComponent>(otherSprite.Value);
-
-        //_sprite.CopySprite((clone, otherSprite), (ent, sprite));
-
-
-        smooth.StateBase = OtherSmooth.StateBase;
-        sprite.CopyFrom(otherSprite);
-
-        //_sprite.SetBaseRsi((ent, sprite), otherSprite.BaseRSI);//that was the last chance
-
+        var despawn = EnsureComp<TimedDespawnComponent>(clone);//Idk how else get rid of it
+        despawn.Lifetime = 0.25f;
 
         Dirty(ent, sprite);
+
+        _smooth.DirtyNeighbours(ent);//requred to fix our FOV
+    }
+
+    private bool TryCopySmooth(EntityUid ent, EntityUid clone)//Should be optional, but idk how to do it
+    {
+        if (!TryComp<IconSmoothComponent>(ent, out var smooth))
+            return false;
+
+        if (!TryComp<IconSmoothComponent>(clone, out var cloneSmooth))
+            return false;
+
+        smooth.StateBase = cloneSmooth.StateBase;
+
+        Dirty(ent, smooth);
+        return true;
     }
 }
