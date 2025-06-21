@@ -17,9 +17,6 @@ public sealed class ServerTrapSystem : EntitySystem
 
     private void OnAfterTrigger(Entity<TrapComponent> ent, ref TrapAfterTriggerEvent args)
     {
-        if (args.Activator is not { } activator)
-            return;
-
-        _forensicsSystem.TransferDna(args.Item, activator);
+        _forensicsSystem.TransferDna(ent.Owner, args.Activator);
     }
 }
