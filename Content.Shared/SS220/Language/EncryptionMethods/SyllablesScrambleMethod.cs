@@ -1,12 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Random.Helpers;
-using Content.Shared.SS220.Language.Systems;
-using Content.Shared.SS220.Undereducated;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.Language.Systems;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Language.EncryptionMethods;
 

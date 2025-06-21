@@ -22,8 +22,7 @@ public sealed partial class UndereducatedSystem : EntitySystem
 
     [GeneratedRegex(@"\s+", RegexOptions.Compiled)]
     private static partial Regex SpaceRegex();
-
-    private static readonly Dictionary<string, ProtoId<LanguagePrototype>> AllLanguages = new()
+    private static readonly Dictionary<string, ProtoId<LanguagePrototype>> SpeciesLanguageDict = new()
     {
         // Race languages
         ["Human"] = "SolCommon", // %sl
@@ -51,7 +50,6 @@ public sealed partial class UndereducatedSystem : EntitySystem
 
         SubscribeLocalEvent<UndereducatedComponent, TransformOriginalEvent>(OnBeforeAccent);
         SubscribeLocalEvent<UndereducatedComponent, MapInitEvent>(OnMapInit);
-
         SubscribeNetworkEvent<UndereducatedConfigRequestEvent>(OnConfigReceived);
     }
 
@@ -61,13 +59,13 @@ public sealed partial class UndereducatedSystem : EntitySystem
         ent.Comp.SpokenLanguages = spokenLanguages;
 
         if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
-            && AllLanguages.TryGetValue(apperance.Species, out var language)
+            && SpeciesLanguageDict.TryGetValue(apperance.Species, out var language)
             && spokenLanguages.Contains(language)
             && _proto.TryIndex<LanguagePrototype>(language, out var languagePrototype))
             ent.Comp.Language = languagePrototype.ID;
 
-        else if (spokenLanguages.Contains(AllLanguages.GetValueOrDefault("Binary", "Binary")))
-            ent.Comp.Language = AllLanguages.GetValueOrDefault("Binary", "Binary");
+        else if (spokenLanguages.Contains(SpeciesLanguageDict.GetValueOrDefault("Binary", "Binary")))
+            ent.Comp.Language = SpeciesLanguageDict.GetValueOrDefault("Binary", "Binary");
 
         else if (_languageSystem.CanSpeak(ent, _languageSystem.UniversalLanguage))
             ent.Comp.Language = _languageSystem.UniversalLanguage;
@@ -81,7 +79,7 @@ public sealed partial class UndereducatedSystem : EntitySystem
     private void GetSpokenLanguages(EntityUid ent, out List<string> spokenLanguages)
     {
         spokenLanguages = [];
-        var allLanguages = AllLanguages.Values.ToList();
+        var allLanguages = SpeciesLanguageDict.Values.ToList();
 
         foreach (var language in allLanguages)
         {
@@ -99,8 +97,7 @@ public sealed partial class UndereducatedSystem : EntitySystem
         if (!TryComp<UndereducatedComponent>(ent, out var comp) || comp.Tuned)
             return;
 
-        if (args.Chance > 1f || args.Chance < 0f)
-            args.Chance = 0.05f;
+        args.Chance = Math.Clamp(args.Chance, 0f, 1f);
 
         if (!comp.SpokenLanguages.Contains(args.SelectedLanguage) || !_languageSystem.CanSpeak(ent, args.SelectedLanguage))
             args.SelectedLanguage = comp.Language;
@@ -125,7 +122,7 @@ public sealed partial class UndereducatedSystem : EntitySystem
         }
 
         if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
-            && AllLanguages.TryGetValue(apperance.Species, out var language)
+            && SpeciesLanguageDict.TryGetValue(apperance.Species, out var language)
             && _proto.TryIndex<LanguagePrototype>(language, out languagePrototype))
         {
             tag = languagePrototype.KeyWithPrefix;

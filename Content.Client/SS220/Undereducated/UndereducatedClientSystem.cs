@@ -13,6 +13,7 @@ public sealed class UndereducatedClientSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<UndereducatedComponent, PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeLocalEvent<UndereducatedComponent, PlayerDetachedEvent>(OnPlayerDeattached);
     }
 
     private void OnPlayerAttached(Entity<UndereducatedComponent> ent, ref PlayerAttachedEvent args)
@@ -35,5 +36,10 @@ public sealed class UndereducatedClientSystem : EntitySystem
             };
             _window.OpenCentered();
         }
+    }
+
+    private void OnPlayerDeattached(Entity<UndereducatedComponent> ent, ref PlayerDetachedEvent args)
+    {
+        _window?.Close();
     }
 }

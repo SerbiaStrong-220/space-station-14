@@ -10,10 +10,11 @@ namespace Content.Client.SS220.Undereducated;
 
 public sealed partial class UndereducatedWindow : DefaultWindow
 {
-    private List<string> _spokenLanguages;
+    private readonly List<string> _spokenLanguages;
     private OptionButton _languageOption = default!;
     private Slider _chanceSlider = default!;
     private Button _submitButton = default!;
+    private int _secret = 0;
 
     public string SelectedLanguage;
     public float SelectedChance;
@@ -32,7 +33,7 @@ public sealed partial class UndereducatedWindow : DefaultWindow
     private void BuildWindow()
     {
         Resizable = false;
-        Title = "Настройка малограмотного акцента";
+        Title = Loc.GetString("window-undereducated-title");
 
         var vbox = new BoxContainer
         {
@@ -41,8 +42,8 @@ public sealed partial class UndereducatedWindow : DefaultWindow
             MaxSize = new Vector2(350, 175),
         };
 
-        vbox.AddChild(new Label { Text = "Ваш родной язык:" });
-
+        var langLable = new Label { Text = Loc.GetString("window-undereducated-language-option-label") };
+        vbox.AddChild(langLable);
         _languageOption = new OptionButton();
         foreach (var language in _spokenLanguages)
         {
@@ -57,13 +58,16 @@ public sealed partial class UndereducatedWindow : DefaultWindow
         {
             _languageOption.Select(args.Id);
             SelectedLanguage = _spokenLanguages[_languageOption.SelectedId];
+            _secret++;
+            if (_secret == 30)
+                langLable.Text = $"{Loc.GetString("window-undereducated-language-option-label")} {Loc.GetString("window-undereducated-language-option-label-secret")}";
         };
         vbox.AddChild(_languageOption);
 
         vbox.AddChild(new Label { Text = " " });
 
         var percentLable = new Label();
-        percentLable.Text = "Ваш уровень знания других языков : " + "95" + "%";
+        percentLable.Text = $"{Loc.GetString("window-undereducated-percent-slider-label")} 95%";
         vbox.AddChild(percentLable);
         _chanceSlider = new Slider
         {
@@ -71,27 +75,22 @@ public sealed partial class UndereducatedWindow : DefaultWindow
             MaxValue = 95,
             Value = 95,
             HorizontalExpand = true,
-            ToolTip = "Меньшее значение - больше автозамен слов",
+            ToolTip = Loc.GetString("window-undereducated-percent-slider-tooltip"),
             TooltipDelay = 0.9f
         };
         _chanceSlider.OnValueChanged += args =>
         {
-            percentLable.Text = "Ваш уровень знания других языков : " + Math.Round(_chanceSlider.Value, 2) + "%";
+            percentLable.Text = $"{Loc.GetString("window-undereducated-percent-slider-label")} {Math.Round(_chanceSlider.Value, 2)}%";
             SelectedChance = 1f - args.Value / 100;
         };
         vbox.AddChild(_chanceSlider);
 
-        vbox.AddChild(new Label
-        {
-            Text = " ",
-            ToolTip = "Мяу?",
-            TooltipDelay = 10
-        });
+        vbox.AddChild(new Label { Text = " " });
 
         _submitButton = new Button
         {
-            Text = "Применить",
-            ToolTip = "Или просто закройте окно, все значения сохраняются",
+            Text = Loc.GetString("window-undereducated-confirm-button-text"),
+            ToolTip = Loc.GetString("window-undereducated-confirm-button-tooltip"),
             TooltipDelay = 0.9f
         };
         _submitButton.OnPressed += args =>
