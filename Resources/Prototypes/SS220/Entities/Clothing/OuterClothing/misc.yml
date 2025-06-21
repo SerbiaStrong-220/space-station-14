@@ -79,3 +79,43 @@
     sprite: SS220/Clothing/OuterClothing/Misc/scarlet_typhoon.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Misc/scarlet_typhoon.rsi
+
+# Волшебник
+- type: entity
+  parent: ClothingOuterWizardBase
+  id: ClothingOuterWizardWhite
+  name: white wizard robes
+  description: A bizarre gem-encrusted white robe that radiates magical energies.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_white.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodWizardWhite
+
+- type: entity
+  parent: ClothingOuterWizardBase
+  id: ClothingOuterWizardBlack
+  name: black wizard robes
+  description: A bizarre gem-encrusted black robe that radiates magical energies.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_black.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_black.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodWizardBlack
+
+- type: entity
+  parent: ClothingOuterWizardBase
+  id: ClothingOuterWizardGreen
+  name: green wizard robes
+  description: A bizarre gem-encrusted green robe that radiates magical energies.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_green.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodWizardGreen
