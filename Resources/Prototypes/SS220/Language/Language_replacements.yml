@@ -1,0 +1,61 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: languageReplacements
+  id: SolCommon
+  replacements:
+    привет: dishao
+    пока: beis
+
+- type: languageReplacements
+  id: Sintaunathi
+  replacements:
+    привет: тест
+    пока: успех
+
+- type: languageReplacements
+  id: Siiktajr
+  replacements:
+    привет: тест
+    пока: успех
+
+- type: languageReplacements
+  id: VoxPidgin
+  replacements:
+    привет: тест
+    пока: успех
+
+- type: languageReplacements
+  id: Rootspeak
+  replacements:
+    привет: тест
+    пока: успех
+
+- type: languageReplacements
+  id: Bubblish
+  replacements:
+    привет: тест
+    пока: успех
+
+- type: languageReplacements
+  id: Tkachi
+  replacements:
+    привет: тест
+    пока: успех
+
+- type: languageReplacements
+  id: Eldwarf
+  replacements:
+    привет: тест
+    пока: успех
+
+- type: languageReplacements
+  id: Arati
+  replacements:
+    привет: тест
+    пока: успех
+
+- type: languageReplacements
+  id: Canilunzt
+  replacements:
+    привет: тест
+    пока: успех

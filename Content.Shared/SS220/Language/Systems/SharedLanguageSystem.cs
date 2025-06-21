@@ -214,11 +214,11 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Sets the color of the prototype language to the message 
+    ///     Sets the color of the prototype language to the message
     /// </summary>
     public string SetColor(string message, LanguagePrototype proto)
     {
-        if (proto.Color == null)
+        if (proto.Color == null || string.IsNullOrEmpty(message))
             return message;
 
         var color = proto.Color.Value.ToHex();
