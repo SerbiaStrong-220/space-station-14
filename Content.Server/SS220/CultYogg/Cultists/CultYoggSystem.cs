@@ -39,7 +39,6 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private readonly ThirstSystem _thirstSystem = default!;
     [Dependency] private readonly VomitSystem _vomitSystem = default!;
 
-
     private const string CultDefaultMarking = "CultStage-Halo";
 
     public override void Initialize()
@@ -59,11 +58,6 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     #region StageUpdating
     private void OnUpdateStage(Entity<CultYoggComponent> ent, ref ChangeCultYoggStageEvent args)
     {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
         if (ent.Comp.CurrentStage == args.Stage)
             return;
 
@@ -81,11 +75,13 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         switch (ent.Comp.CurrentStage)
         {
             case CultYoggStage.Initial:
-                return;
+                break;
+
             case CultYoggStage.Reveal:
                 ent.Comp.PreviousEyeColor = new Color(huAp.EyeColor.R, huAp.EyeColor.G, huAp.EyeColor.B, huAp.EyeColor.A);
                 huAp.EyeColor = Color.Green;
                 break;
+
             case CultYoggStage.Alarm:
                 if (!_prototype.HasIndex<MarkingPrototype>(CultDefaultMarking))
                 {
@@ -121,6 +117,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
                 huAp.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
                 break;
+
             case CultYoggStage.God:
                 if (!TryComp<MobStateComponent>(ent, out var mobstate))
                     return;
@@ -131,6 +128,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                     RaiseLocalEvent(ent, ref ev);
                 }
                 break;
+
             default:
                 Log.Error("Something went wrong with CultYogg stages");
                 break;
@@ -152,6 +150,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         {
             huAp.MarkingSet.Markings[MarkingCategories.Tail].Add(ent.Comp.PreviousTail);
         }
+
         Dirty(ent.Owner, huAp);
     }
     #endregion
