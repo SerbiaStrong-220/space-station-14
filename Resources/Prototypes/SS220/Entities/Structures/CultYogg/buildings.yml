@@ -90,6 +90,7 @@
     userWhitelist:
       components:
       - CultYogg
+      - MiGo
     requireTag: WhitelistChameleonStructureWall
   - type: UserInterface
     interfaces:
