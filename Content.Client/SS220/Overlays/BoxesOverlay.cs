@@ -17,10 +17,10 @@ public sealed class BoxesOverlay : Overlay
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
-    private ShaderInstance _shader;
-    private Texture _defaultTexture;
+    private readonly ShaderInstance _shader;
+    private readonly Texture _defaultTexture;
 
-    private Dictionary<Type, BoxesOverlayProvider> _providers = new();
+    private readonly Dictionary<Type, BoxesOverlayProvider> _providers = new();
 
     private BoxesOverlay() : base()
     {
@@ -49,6 +49,9 @@ public sealed class BoxesOverlay : Overlay
 
         foreach (var provider in _providers.Values)
         {
+            if (!provider.Active)
+                continue;
+
             foreach (var data in provider.GetBoxesDatas())
                 DrawBox(args, data);
         }
@@ -73,53 +76,37 @@ public sealed class BoxesOverlay : Overlay
         drawHandle.DrawTextureRect(texture, data.Box, data.Color);
     }
 
-    public bool AddProvider(BoxesOverlayProvider provider)
+    public bool AddProvider<T>(T provider) where T : BoxesOverlayProvider
     {
-        return _providers.TryAdd(provider.GetType(), provider);
+        return _providers.TryAdd(typeof(T), provider);
     }
 
-    public bool RemoveProvider(BoxesOverlayProvider provider)
+    public bool RemoveProvder<T>() where T : BoxesOverlayProvider
     {
-        return RemoveProvider(provider.GetType());
-    }
-
-    public bool RemoveProvider<T>() where T : BoxesOverlayProvider
-    {
-        return RemoveProvider(typeof(T));
-    }
-
-    public bool RemoveProvider(Type providerType)
-    {
-        return _providers.Remove(providerType);
-    }
-
-    public bool HasProvider(BoxesOverlayProvider provider)
-    {
-        return HasProvider(provider.GetType());
+        return _providers.Remove(typeof(T));
     }
 
     public bool HasProvider<T>() where T : BoxesOverlayProvider
     {
-        return HasProvider(typeof(T));
+        return _providers.ContainsKey(typeof(T));
     }
 
-    public bool HasProvider(Type providerType)
+    public bool TryGetProvider<T>([NotNullWhen(true)] out T? provider) where T : BoxesOverlayProvider
     {
-        return _providers.ContainsKey(providerType);
-    }
-
-    public bool TryGetProvider<T>([NotNullWhen(true)] out BoxesOverlayProvider? provider) where T : BoxesOverlayProvider
-    {
-        return TryGetProvider(typeof(T), out provider);
-    }
-
-    public bool TryGetProvider(Type providerType, [NotNullWhen(true)] out BoxesOverlayProvider? provider)
-    {
-        return _providers.TryGetValue(providerType, out provider);
+        provider = null;
+        if (_providers.TryGetValue(typeof(T), out var result))
+        {
+            provider = (T)result;
+            return true;
+        }
+        else
+            return false;
     }
 
     public abstract class BoxesOverlayProvider
     {
+        public bool Active = false;
+
         public BoxesOverlayProvider()
         {
             IoCManager.InjectDependencies(this);

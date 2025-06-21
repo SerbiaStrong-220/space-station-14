@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.SS220.Zones;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
@@ -7,7 +8,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using System.Linq;
 using System.Numerics;
-using static Content.Shared.SS220.Zones.Systems.ZoneParams;
+using static Content.Shared.SS220.Zones.ZoneParams;
 
 namespace Content.Server.SS220.Zones.Systems;
 
@@ -178,9 +179,6 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
         if (string.IsNullOrEmpty(@params.Name))
             @params.Name = $"Zone {GetZonesCount() + 1}";
-
-        if (string.IsNullOrEmpty(@params.ProtoID))
-            @params.ProtoID = BaseZoneId;
 
         @params.RecalculateRegions();
 

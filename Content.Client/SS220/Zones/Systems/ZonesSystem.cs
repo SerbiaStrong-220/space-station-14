@@ -4,6 +4,7 @@ using Content.Client.SS220.Overlays;
 using Content.Client.SS220.Zones.Overlays;
 using Content.Client.SS220.Zones.UI;
 using Content.Shared.Administration;
+using Content.Shared.SS220.Zones;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Client.Console;
@@ -18,7 +19,6 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     public ZonesControlWindow ControlWindow = default!;
 
-    private BoxesOverlay _overlay = default!;
     private ZonesBoxesOverlayProvider _overlayProvider = default!;
 
     public override void Initialize()
@@ -27,9 +27,15 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
         ControlWindow = new ZonesControlWindow();
 
-        _overlay = BoxesOverlay.GetOverlay();
+        var overlay = BoxesOverlay.GetOverlay();
 
-        _overlayProvider = new ZonesBoxesOverlayProvider();
+        if (overlay.TryGetProvider<ZonesBoxesOverlayProvider>(out var provider))
+            _overlayProvider = provider;
+        else
+        {
+            _overlayProvider = new ZonesBoxesOverlayProvider();
+            overlay.AddProvider(_overlayProvider);
+        }
 
         _clientAdmin.AdminStatusUpdated += OnAdminStatusUpdated;
 
@@ -42,7 +48,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     private void OnAdminStatusUpdated()
     {
-        SetOverlay(_overlay.HasProvider(_overlayProvider));
+        SetOverlay(_overlayProvider.Active);
     }
 
     private void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
@@ -79,10 +85,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (!_clientAdmin.HasFlag(AdminFlags.Mapping))
             value = false;
 
-        if (value)
-            _overlay.AddProvider(_overlayProvider);
-        else
-            _overlay.RemoveProvider(_overlayProvider);
+        _overlayProvider.Active = value;
     }
 
     public void ExecuteDeleteZonesContainer(EntityUid container)

@@ -20,7 +20,6 @@ public sealed partial class ZoneBoxEntry : PanelContainer
             Refresh();
         }
     }
-
     private Box2 _box;
 
     public ZoneBoxEntry() : this(null) { }

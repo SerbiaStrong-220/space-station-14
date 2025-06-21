@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Content.Client.SS220.UserInterface.Utility;
 
 [Virtual]
-public sealed class ConfirmableButton : Button
+public class ConfirmableButton : Button
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 

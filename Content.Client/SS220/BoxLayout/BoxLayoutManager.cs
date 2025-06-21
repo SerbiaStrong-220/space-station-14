@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.SS220.Overlays;
+using Content.Shared.Input;
 using Content.Shared.SS220.Maths;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -39,20 +40,33 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
 
     public BoxParams? CurParams => GetBoxParams();
 
-    private BoxesOverlay? _overlay;
     private BoxLayoutBoxesOverlayProvider _overlayProvider = default!;
 
-    internal EntityUid? Parent;
-    internal Vector2? Point1;
-    internal Vector2? Point2;
-    internal Color Color = Color.Green;
+    public EntityUid? Parent => _parent;
+    private EntityUid? _parent;
+
+    public Vector2? Point1 => _point1;
+    private Vector2? _point1;
+
+    public Vector2? Point2 => _point2;
+    private Vector2? _point2;
+
+    public Color Color => _color;
+    private Color _color = Color.Green;
 
     public void Initialize()
     {
         IoCManager.InjectDependencies(this);
         _input.UIKeyBindStateChanged += OnUIKeyBindStateChanged;
-        _overlay = BoxesOverlay.GetOverlay();
-        _overlayProvider = new BoxLayoutBoxesOverlayProvider(this);
+
+        var overlay = BoxesOverlay.GetOverlay();
+        if (overlay.TryGetProvider<BoxLayoutBoxesOverlayProvider>(out var provider))
+            _overlayProvider = provider;
+        else
+        {
+            _overlayProvider = new BoxLayoutBoxesOverlayProvider();
+            overlay.AddProvider(_overlayProvider);
+        }
     }
 
     private bool OnUIKeyBindStateChanged(BoundKeyEventArgs args)
@@ -61,24 +75,31 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
             return false;
 
         if (args.Function == EngineKeyFunctions.UIClick)
-            return OnLeftClick();
+        {
+            var handled = HandleUIClick();
+            if (handled)
+                args.Handle();
+
+            return handled;
+        }
         else if (args.Function == EngineKeyFunctions.UIRightClick)
         {
             Cancel();
+            args.Handle();
             return true;
         }
         else
             return false;
     }
 
-    private bool OnLeftClick()
+    private bool HandleUIClick()
     {
         var mapCoords = GetMouseMapCoordinates();
         if (mapCoords.MapId == MapId.Nullspace)
             return false;
 
         var transform = _entity.System<TransformSystem>();
-        if (Point1 == null)
+        if (_point1 == null)
         {
             EntityCoordinates coords;
             if (_map.TryFindGridAt(mapCoords, out var grid, out _))
@@ -86,12 +107,12 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
             else
                 coords = transform.ToCoordinates(mapCoords);
 
-            Parent = coords.EntityId;
-            Point1 = coords.Position;
+            _parent = coords.EntityId;
+            _point1 = coords.Position;
         }
-        else if (Point2 == null && Parent != null)
+        else if (_point2 == null && _parent != null)
         {
-            var map = transform.GetMapId(Parent.Value);
+            var map = transform.GetMapId(_parent.Value);
             if (mapCoords.MapId != map)
             {
                 var error = $"The coordinate was obtained from map {mapCoords.MapId}, when it should be from map {map}";
@@ -101,8 +122,8 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
                 return false;
             }
 
-            var coords = transform.ToCoordinates(Parent.Value, mapCoords);
-            Point2 = coords.Position;
+            var coords = transform.ToCoordinates(_parent.Value, mapCoords);
+            _point2 = coords.Position;
         }
         BoxEndedCheck();
 
@@ -121,7 +142,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
 
     public BoxParams? GetBoxParams()
     {
-        if (Point1 is not { } p1 || Point2 is not { } p2 || Parent is not { } parent)
+        if (_point1 is not { } p1 || _point2 is not { } p2 || _parent is not { } parent)
             return null;
 
         var box = Box2.FromTwoPoints(p1, p2);
@@ -164,9 +185,9 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
 
     private void Clear()
     {
-        Point1 = null;
-        Point2 = null;
-        Parent = null;
+        _point1 = null;
+        _point2 = null;
+        _parent = null;
         SetColor(null);
         AttachToGrid = false;
     }
@@ -174,15 +195,12 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
     public void SetColor(Color? newColor)
     {
         newColor ??= DefaultColor;
-        Color = newColor.Value;
+        _color = newColor.Value;
     }
 
-    public void SetOverlay(bool enabled)
+    public void SetOverlay(bool active)
     {
-        if (enabled)
-            _overlay?.AddProvider(_overlayProvider);
-        else
-            _overlay?.RemoveProvider(_overlayProvider);
+        _overlayProvider.Active = active;
     }
 
     public MapCoordinates GetMouseMapCoordinates()
@@ -196,29 +214,28 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         public Box2 Box;
     }
 
-    private sealed class BoxLayoutBoxesOverlayProvider(BoxLayoutManager layoutManager) : BoxesOverlay.BoxesOverlayProvider()
+    private sealed class BoxLayoutBoxesOverlayProvider() : BoxesOverlay.BoxesOverlayProvider()
     {
         [Dependency] private readonly IEntityManager _entityManager = default!;
-
-        private readonly BoxLayoutManager _layoutManager = layoutManager;
+        [Dependency] private readonly IBoxLayoutManager _boxLayoutManager = default!;
 
         public override List<BoxesOverlay.BoxOverlayData> GetBoxesDatas()
         {
             var list = new List<BoxesOverlay.BoxOverlayData>();
-            if (!_layoutManager.Active ||
-                _layoutManager.Point1 is not { } point1 ||
-                _layoutManager.Parent is not { } parent)
+            if (!_boxLayoutManager.Active ||
+                _boxLayoutManager.Point1 is not { } point1 ||
+                _boxLayoutManager.Parent is not { } parent)
                 return list;
 
             var transform = _entityManager.System<TransformSystem>();
-            var mapCoords = _layoutManager.GetMouseMapCoordinates();
+            var mapCoords = _boxLayoutManager.GetMouseMapCoordinates();
             if (transform.GetMapId(parent) != mapCoords.MapId)
                 return list;
 
             var point2 = transform.ToCoordinates(parent, mapCoords).Position;
             var box = Box2.FromTwoPoints(point1, point2);
 
-            if (_layoutManager.AttachToGrid)
+            if (_boxLayoutManager.AttachToGrid)
             {
                 var gridSize = 1f;
                 if (_entityManager.TryGetComponent<MapGridComponent>(parent, out var mapGrid))
@@ -227,7 +244,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
                 MathHelperExtensions.AttachToGrid(ref box, gridSize);
             }
 
-            list.Add(new BoxesOverlay.BoxOverlayData(parent, box, _layoutManager.Color.WithAlpha(0.5f)));
+            list.Add(new BoxesOverlay.BoxOverlayData(parent, box, _boxLayoutManager.Color.WithAlpha(0.5f)));
 
             return list;
         }
