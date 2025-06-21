@@ -70,30 +70,30 @@ public sealed partial class PinpointerComponent : Component
     [DataField]
     [AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public HashSet<TrackedItem> Sensors = [];//ToDo_SS220 fix cursed pinpointer
+    public HashSet<TrackedItem> Sensors = [];//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
 
     [DataField]
     [AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public HashSet<TrackedItem> TrackedItems = [];//ToDo_SS220 fix cursed pinpointer
+    public HashSet<TrackedItem> TrackedItems = [];//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
 
     [DataField]
     [AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public HashSet<TrackedItem> Targets = [];//ToDo_SS220 fix cursed pinpointer
+    public HashSet<TrackedItem> Targets = [];//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
 
     [DataField]
     [AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public PinpointerMode Mode = PinpointerMode.Crew;//ToDo_SS220 fix cursed pinpointer
+    public PinpointerMode Mode = PinpointerMode.Crew;//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
 
     [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public EntityUid? TrackedByDnaEntity;//ToDo_SS220 fix cursed pinpointer
+    public EntityUid? TrackedByDnaEntity;//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
 
     [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public string? DnaToTrack;//ToDo_SS220 fix cursed pinpointer
+    public string? DnaToTrack;//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
 
     [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
@@ -109,7 +109,7 @@ public sealed partial class PinpointerComponent : Component
     /// </summary>
     [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public string? TargetsComponent;//ToDo_SS220 fix cursed pinpointer
+    public string? TargetsComponent;//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
     //ss220 add pinpointer ui end
 }
 
