@@ -68,6 +68,7 @@
   - type: Tag
     tags:
       - Wall
+      - WhitelistChameleonStructureWall
   - type: Sprite
     sprite: SS220/Structures/Walls/cult_yogg_walls.rsi
   - type: Icon
@@ -85,6 +86,21 @@
     base: cult
   - type: CultYoggBuilding
     eraseTime: 3
+  - type: ChameleonStructure
+    userWhitelist:
+      components:
+      - CultYogg
+      - MiGo
+    requireTag: WhitelistChameleonStructureWall
+  - type: UserInterface
+    interfaces:
+      enum.ChameleonStructureUiKey.Key:
+        type: ChameleonStructureBoundUserInterface
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-chameleon-structure-cultyogg
+      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
+      - CultYoggRole
 
 - type: entity
   parent: BaseMaterialDoorNavMap
@@ -138,3 +154,157 @@
         stackAmount: 3
       - id: SheetTokl1
         stackAmount: 5
+
+- type: entity
+  parent: BaseStructure
+  id: CultYoggAirlock
+  suffix: CultYogg
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg"
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: SS220/Structures/CultYogg/airlock.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+      visible: false
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: bolted_unlit
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+    - state: emergency_unlit
+      map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
+      shader: unshaded
+    - state: panel_open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: electrified
+      sprite: Effects/electricity.rsi
+      shader: unshaded
+      visible: false
+      map: ["enum.ElectrifiedLayers.Sparks"]
+  - type: AnimationPlayer
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49" # don't want this colliding with walls or they won't close
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - AirlockLayer
+  - type: LayerChangeOnWeld
+    unWeldedLayer: AirlockLayer
+    weldedLayer: WallLayer
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronics ]
+  - type: AccessWhitelist
+    whitelist:
+      components:
+      - CultYogg
+      - MiGo
+  - type: Door
+    crushDamage:
+      types:
+        Blunt: 15
+    openSound:
+      path: /Audio/Machines/airlock_open.ogg
+    closeSound:
+      path: /Audio/Machines/airlock_close.ogg
+    denySound:
+      path: /Audio/Machines/airlock_deny.ogg
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+  - type: Weldable
+    fuel: 5
+    time: 3
+  - type: Airlock
+    openUnlitVisible: true # Corvax-Resprite-Airlocks
+  - type: NavMapDoor
+  - type: DoorBolt
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ElectrifiedVisuals.ShowSparks:
+        enum.ElectrifiedLayers.Sparks:
+          True: { visible: True }
+          False: { visible: False }
+  - type: WiresVisuals
+  - type: ElectrocutionHUDVisuals
+  - type: ApcPowerReceiver
+    powerLoad: 20
+    needsPower: false
+  - type: ExtensionCableReceiver
+  - type: Electrified
+    enabled: false
+    usesApcPower: true
+  - type: WiresPanel
+  - type: WiresPanelSecurity
+  - type: Wires
+    boardName: wires-board-name-airlock
+    layoutId: Airlock
+  - type: SoundOnOverload
+  - type: SpawnOnOverload
+  - type: UserInterface
+    interfaces:
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+      enum.ChameleonStructureUiKey.Key:
+        type: ChameleonStructureBoundUserInterface
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+  - type: AirlockVisuals
+  - type: RadiationBlocker
+    resistance: 3
+  - type: Occluder
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StrongMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+  - type: PlacementReplacement
+    key: walls
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+  - type: LightningTarget
+    priority: 1
+  - type: Tag
+    tags:
+      - Airlock
+      - WhitelistChameleonStructureAirlock
+  - type: FoVOverlay
+  - type: BlockWeather
+  - type: ChameleonStructure
+    userWhitelist:
+      components:
+      - CultYogg
+    requireTag: WhitelistChameleonStructureAirlock
+  - type: CultYoggBuilding
+    eraseTime: 3
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-chameleon-structure-cultyogg
+      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
+      - CultYoggRole
