@@ -17,7 +17,7 @@
       map: ["enum.PinpointerLayers.Screen"]
       shader: unshaded
       visible: false
-      offset: "-0.0075,0.25125"
+      offset: "-0.0075,0.27125"
   - type: Icon
     sprite: SS220/Objects/CultYogg/pinpointer.rsi
     state: bug
