@@ -100,5 +100,4 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
             _data.Add(proto.ID);
         }
     }
-
 }
