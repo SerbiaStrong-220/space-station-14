@@ -373,3 +373,12 @@
   result: PlushieMigo
   corruptionReverseEffect: ExorcismUncorruptEffect
 # Fun end
+
+# Pinpointer beginning
+- type: corrupted
+  id: HandheldGPSBasic
+  from:
+    prototypeId: HandheldGPSBasic
+  result: CultPinpointer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+# Pinpointer end
