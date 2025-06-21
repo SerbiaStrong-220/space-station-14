@@ -332,3 +332,134 @@
 - type: Tag
   id: CultYoggInnerHandToggleable
 # ss220 Cult_update2 end
+
+# Теги для рубашек   Начало 
+- type: Tag
+  id: InShirtBelt
+
+- type: Tag
+  id: InShirtTie
+
+- type: Tag
+  id: InShirtAccessory
+
+- type: Tag
+  id: InShirtVest
+
+- type: Tag
+  id: InShirtJacket
+
+- type: Tag
+  id: BeltGoldBuckle
+
+- type: Tag
+  id: BeltSilverBuckle
+
+- type: Tag
+  id: BeltCarpLeatherGoldBuckle
+
+- type: Tag
+  id: BeltCarpLeatherSilverBuckle
+
+- type: Tag
+  id: BeltLeatherGoldBuckle
+
+- type: Tag
+  id: BeltLeatherSilverBuckle
+
+- type: Tag
+  id: JacketsVestBlue
+
+- type: Tag
+  id: JacketsVestBlueindigo
+
+- type: Tag
+  id: JacketsVestDark
+
+- type: Tag
+  id: JacketsVestDarkcarp
+
+- type: Tag
+  id: JacketsVestGold
+
+- type: Tag
+  id: JacketsVestGrey
+
+- type: Tag
+  id: JacketsVestOfficialgrey
+
+- type: Tag
+  id: JacketsVestOfficialred
+
+- type: Tag
+  id: JacketsVestPink
+
+- type: Tag
+  id: JacketsVestVictorian
+
+- type: Tag
+  id: JacketsVestVictorianRed
+
+- type: Tag
+  id: JacketBlue
+
+- type: Tag
+  id: JacketBlueindigo
+
+- type: Tag
+  id: JacketDark
+
+- type: Tag
+  id: JacketDarkcarp
+
+- type: Tag
+  id: JacketGold
+
+- type: Tag
+  id: JacketGrey
+
+- type: Tag
+  id: JacketOfficialgrey
+
+- type: Tag
+  id: JacketOfficialred
+
+- type: Tag
+  id: JacketPink
+
+- type: Tag
+  id: JacketTrusted
+
+- type: Tag
+  id: TieBlue
+
+- type: Tag
+  id: TieBlueindigo
+
+- type: Tag
+  id: TieDark
+
+- type: Tag
+  id: TieDeepdark
+
+- type: Tag
+  id: TieScarlet
+
+- type: Tag
+  id: TieGrey
+
+- type: Tag
+  id: TieNanotrasen
+
+- type: Tag
+  id: TieOrange
+
+- type: Tag
+  id: TieWhite
+
+- type: Tag
+  id: TieSci
+
+- type: Tag
+  id: TieRed
+# Теги для рубашек   Конец

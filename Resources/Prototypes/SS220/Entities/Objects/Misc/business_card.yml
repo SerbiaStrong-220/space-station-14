@@ -1,0 +1,80 @@
+- type: entity
+  id: LawDepartmentBusinessCard
+  name: law department business card
+  parent: [ Paper ]
+  description: A luxurious black card with gilded justice scales motif. The gold foil lettering shines against the matte black background, signifying the unyielding authority of station law.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Misc/business_card.rsi
+      layers:
+      - state: law_card
+      - state: law_card
+        map: ["enum.PaperVisualLayers.Writing"]
+        visible: false
+      - state: paper_stamp-generic
+        map: ["enum.PaperVisualLayers.Stamp"]
+        sprite: Objects/Misc/bureaucracy.rsi
+        visible: false
+    - type: Paper
+      content: "[color=#e1c494]Справедливость — основа закона.[/color]"
+    - type: PaperVisuals
+      headerImagePath: "/Textures/SS220/Interface/BusinessCard/paper_heading_law_department_cardlogo.svg.96dpi.png"
+      headerMargin: 0.0, 0.0, 0.0, 2.0
+      backgroundImagePath: "/Textures/SS220/Interface/BusinessCard/paper_background_law_department_card.svg.96dpi.png"
+      backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
+      contentMargin: 4.0, 4.0, 4.0, 4.0
+      maxWritableArea: 510.0, 256.0
+
+- type: entity
+  id: MagistrateBusinessCard
+  name: magistrate business card
+  parent: [ Paper ]
+  description: A luxurious black card with gilded justice scales motif. The gold foil lettering shines against the matte black background. A physical manifestation of judicial power.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Misc/business_card.rsi
+      layers:
+      - state: magistrate_card
+      - state: magistrate_card
+        map: ["enum.PaperVisualLayers.Writing"]
+        visible: false
+      - state: paper_stamp-generic
+        map: ["enum.PaperVisualLayers.Stamp"]
+        sprite: Objects/Misc/bureaucracy.rsi
+        visible: false
+    - type: Paper
+      content: "[color=#e1c494]Не бойтесь власти, если правы; \nбойтесь магистрата, если неправы.[/color]"
+    - type: PaperVisuals
+      headerImagePath: "/Textures/SS220/Interface/BusinessCard/paper_heading_magistrate_cardlogo.svg.96dpi.png"
+      headerMargin: 0.0, 0.0, 0.0, 2.0
+      backgroundImagePath: "/Textures/SS220/Interface/BusinessCard/paper_background_law_department_card.svg.96dpi.png"
+      backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
+      contentMargin: 4.0, 4.0, 4.0, 4.0
+      maxWritableArea: 510.0, 256.0
+
+- type: entity
+  id: IAABusinessCard
+  name: iaa business card
+  parent: [ Paper ]
+  description: Crisp blue polymer card with clean white lettering. The minimalist design belies its function - this card opens doors and closes cases with equal efficiency.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Misc/business_card.rsi
+      layers:
+      - state: iaa_card
+      - state: iaa_card
+        map: ["enum.PaperVisualLayers.Writing"]
+        visible: false
+      - state: paper_stamp-generic
+        map: ["enum.PaperVisualLayers.Stamp"]
+        sprite: Objects/Misc/bureaucracy.rsi
+        visible: false
+    - type: Paper
+      content: "[color=#ffffff]Процедуры существуют не для ограничений, а для защиты. Вашей и корпорации.[/color]"
+    - type: PaperVisuals
+      headerImagePath: "/Textures/SS220/Interface/BusinessCard/paper_heading_iaa_cardlogo.svg.96dpi.png"
+      headerMargin: 0.0, 0.0, 0.0, 2.0
+      backgroundImagePath: "/Textures/SS220/Interface/BusinessCard/paper_background_iaa_card.svg.96dpi.png"
+      backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
+      contentMargin: 4.0, 4.0, 4.0, 4.0
+      maxWritableArea: 510.0, 256.0

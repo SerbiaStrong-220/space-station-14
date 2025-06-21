@@ -1,0 +1,166 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckTieBlue
+  name: classic blue tie
+  description: A timeless silk tie in blue. The cornerstone of professional elegance.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Ties/blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Ties/blue.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - ClothMade
+    - InShirtTie
+    - TieBlue
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckTieBlueindigo
+  name: blueindigo tie
+  description: Silk tie blending blue and indigo, evoking dusk skies.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Ties/blueindigo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Ties/blueindigo.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - ClothMade
+    - InShirtTie
+    - TieBlueindigo
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckTieDark
+  name: formal tie
+  description: Jet-black silk tie. Minimalist perfection for high-stakes negotiations and evening events.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Ties/dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Ties/dark.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - ClothMade
+    - InShirtTie
+    - TieDark
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckTieDeepdark
+  name: deep dark tie
+  description: A tie so dark it absorbs light.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Ties/deepdark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Ties/deepdark.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - ClothMade
+    - InShirtTie
+    - TieDeepdark
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckTieScarlet
+  name: scarlet tie
+  description: Blood-red silk tie. For executives who leave marks, not apologies.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Ties/scarlet.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Ties/scarlet.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - ClothMade
+    - InShirtTie
+    - TieScarlet
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckTieGrey
+  name: ash tie
+  description: Cool-toned grey tie. The diplomat's choice for neutral ground.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Ties/grey.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Ties/grey.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - ClothMade
+    - InShirtTie
+    - TieGrey
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckTieNanotrasen
+  name: nanotrasen corporate tie
+  description: Official tie embroidered with NT insignia. Loyalty woven into every thread.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Ties/nanotrasen.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Ties/nanotrasen.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - ClothMade
+    - InShirtTie
+    - TieNanotrasen
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckTieOrange
+  name: orangetie
+  description: Vibrant orange tie for innovators. Stands out in boardrooms and labs alike.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Ties/orange.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Ties/orange.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - ClothMade
+    - InShirtTie
+    - TieOrange
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckTieWhite
+  name: white tie
+  description: Pristine white tie. Reserved for ceremonial occasions and those who command purity.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Ties/white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Ties/white.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+    - ClothMade
+    - InShirtTie
+    - TieWhite
