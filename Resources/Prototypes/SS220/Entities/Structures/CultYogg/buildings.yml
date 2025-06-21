@@ -96,6 +96,11 @@
     interfaces:
       enum.ChameleonStructureUiKey.Key:
         type: ChameleonStructureBoundUserInterface
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-chameleon-structure-cultyogg
+      whitelistMindRoles: #WhitelistBody isnt working, so i usuing this one
+      - CultYoggRole
 
 - type: entity
   parent: BaseMaterialDoorNavMap
@@ -298,3 +303,8 @@
     requireTag: WhitelistChameleonStructureAirlock
   - type: CultYoggBuilding
     eraseTime: 3
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-chameleon-structure-cultyogg
+      whitelistMindRoles: #WhitelistBody isnt working, so i usuing this one
+      - CultYoggRole

@@ -19,6 +19,11 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
 
     private void OnMapInit(Entity<ChameleonStructureComponent> ent, ref MapInitEvent args)
     {
+        if (string.IsNullOrEmpty(ent.Comp.Default))
+        {
+            ent.Comp.Default = MetaData(ent).EntityPrototype?.ID;//Not sure if this secure from null
+        }
+
         SetSelectedPrototype(ent, ent.Comp.Default, true);
     }
 

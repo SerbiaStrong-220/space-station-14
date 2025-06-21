@@ -17,6 +17,7 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<ChameleonStructureComponent, AfterAutoHandleStateEvent>(HandleState);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnProtoReloaded);
