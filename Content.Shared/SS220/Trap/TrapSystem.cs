@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Construction.EntitySystems;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
@@ -165,6 +166,9 @@ public sealed class TrapSystem : EntitySystem
     private void OnStartCollide(Entity<TrapComponent> ent, ref StartCollideEvent args)
     {
         if (ent.Comp.State == TrapArmedState.Unarmed)
+            return;
+
+        if (!HasComp<DamageableComponent>(args.OtherEntity)) //you sure that this something that should activate the trap?
             return;
 
         if (_entityWhitelist.IsBlacklistPass(ent.Comp.Blacklist, args.OtherEntity))
