@@ -1,8 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  #parent: [PinpointerBase, CultYoggRestrictedItem]
-  parent: PinpointerBase #ToDo_SS220 Del this after tests
+  parent: [PinpointerBase, CultYoggRestrictedItem]
   id: CultPinpointer
   name: cult pinpointer
   description: A handheld tracking device that leads to the direction of any crew member.
@@ -23,8 +22,7 @@
     state: bug
   - type: Pinpointer
     mode: Component
-    targetsComponent: HumanoidAppearance #ToDo_SS220 Del this after tests
-    #targetsComponent: CultYoggSacrificial
+    targetsComponent: CultYoggSacrificial
   - type: ActivatableUI
     key: enum.PinpointerUIKey.Key
   - type: UserInterface
