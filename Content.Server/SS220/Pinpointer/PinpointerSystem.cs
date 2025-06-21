@@ -50,7 +50,7 @@ public sealed class PinpointerSystem : EntitySystem
 
     private void UpdateTrackers(EntityUid uid, PinpointerComponent comp)
     {
-        switch (comp.Mode)
+        switch (comp.Mode)//ToDo_SS220 fix cursed pinpointer
         {
             case PinpointerMode.Crew:
                 UpdateCrewTrackers(uid, comp);
@@ -75,6 +75,7 @@ public sealed class PinpointerSystem : EntitySystem
         Dirty(uid, comp);
     }
 
+    //ToDo_SS220 fix cursed pinpointer
     private void UpdateCrewTrackers(EntityUid uid, PinpointerComponent comp)
     {
         comp.Sensors.Clear();
@@ -97,6 +98,7 @@ public sealed class PinpointerSystem : EntitySystem
         }
     }
 
+    //ToDo_SS220 fix cursed pinpointer
     private void UpdateItemTrackers(EntityUid uid, PinpointerComponent comp)
     {
         comp.TrackedItems.Clear();
@@ -117,6 +119,7 @@ public sealed class PinpointerSystem : EntitySystem
         comp.TrackedItems.Add(new TrackedItem(GetNetEntity(comp.TrackedByDnaEntity.Value), comp.DnaToTrack));
     }
 
+    //ToDo_SS220 fix cursed pinpointer
     private void UpdateTargetsTrackers(EntityUid uid, PinpointerComponent comp)
     {
         comp.Targets.Clear();
@@ -145,18 +148,21 @@ public sealed class PinpointerSystem : EntitySystem
         };
     }
 
+    //ToDo_SS220 fix cursed pinpointer
     private void OnPickCrew(Entity<PinpointerComponent> ent, ref PinpointerCrewTargetPick args)
     {
         _pinpointer.SetTarget(ent.Owner, GetEntity(args.Target));
         _pinpointer.SetActive(ent.Owner, true);
     }
 
+    //ToDo_SS220 fix cursed pinpointer
     private void OnPickTarget(Entity<PinpointerComponent> ent, ref PinpointerTargetPick args)
     {
         _pinpointer.SetTarget(ent.Owner, GetEntity(args.Target));
         _pinpointer.SetActive(ent.Owner, true);
     }
 
+    //ToDo_SS220 fix cursed pinpointer
     private void OnDnaPicked(Entity<PinpointerComponent> ent, ref PinpointerDnaPick args)
     {
         var query = EntityQueryEnumerator<DnaComponent>();
@@ -181,7 +187,7 @@ public sealed class PinpointerSystem : EntitySystem
         if (!Exists(ent.Owner) || !_uiSystem.IsUiOpen(ent.Owner, PinpointerUIKey.Key))
             return;
 
-        switch (ent.Comp.Mode)
+        switch (ent.Comp.Mode)//ToDo_SS220 fix cursed pinpointer
         {
             case PinpointerMode.Crew:
                 _uiSystem.SetUiState(ent.Owner, PinpointerUIKey.Key, new PinpointerCrewUIState(ent.Comp.Sensors));

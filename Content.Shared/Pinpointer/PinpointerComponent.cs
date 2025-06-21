@@ -70,30 +70,30 @@ public sealed partial class PinpointerComponent : Component
     [DataField]
     [AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public HashSet<TrackedItem> Sensors = [];
+    public HashSet<TrackedItem> Sensors = [];//ToDo_SS220 fix cursed pinpointer
 
     [DataField]
     [AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public HashSet<TrackedItem> TrackedItems = [];
+    public HashSet<TrackedItem> TrackedItems = [];//ToDo_SS220 fix cursed pinpointer
 
     [DataField]
     [AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public HashSet<TrackedItem> Targets = [];
+    public HashSet<TrackedItem> Targets = [];//ToDo_SS220 fix cursed pinpointer
 
     [DataField]
     [AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public PinpointerMode Mode = PinpointerMode.Crew;
+    public PinpointerMode Mode = PinpointerMode.Crew;//ToDo_SS220 fix cursed pinpointer
 
     [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public EntityUid? TrackedByDnaEntity;
+    public EntityUid? TrackedByDnaEntity;//ToDo_SS220 fix cursed pinpointer
 
     [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public string? DnaToTrack;
+    public string? DnaToTrack;//ToDo_SS220 fix cursed pinpointer
 
     [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
@@ -109,7 +109,7 @@ public sealed partial class PinpointerComponent : Component
     /// </summary>
     [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)]
-    public string? TargetsComponent;
+    public string? TargetsComponent;//ToDo_SS220 fix cursed pinpointer
     //ss220 add pinpointer ui end
 }
 

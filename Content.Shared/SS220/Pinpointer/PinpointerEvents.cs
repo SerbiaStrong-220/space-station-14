@@ -7,19 +7,19 @@ namespace Content.Shared.SS220.Pinpointer;
 [Serializable, NetSerializable]
 public enum PinpointerUIKey
 {
-    Key,
+    Key
 }
 
 [Serializable]
 [NetSerializable]
-public sealed partial class PinpointerTargetPick(NetEntity target) : BoundUserInterfaceMessage
+public sealed partial class PinpointerTargetPick(NetEntity target) : BoundUserInterfaceMessage//ToDo_SS220 fix cursed pinpointer
 {
     public NetEntity Target = target;
 }
 
 [Serializable]
 [NetSerializable]
-public sealed partial class PinpointerCrewTargetPick(NetEntity target) : BoundUserInterfaceMessage
+public sealed partial class PinpointerCrewTargetPick(NetEntity target) : BoundUserInterfaceMessage//ToDo_SS220 fix cursed pinpointer
 {
     public NetEntity Target = target;
 }
@@ -27,41 +27,41 @@ public sealed partial class PinpointerCrewTargetPick(NetEntity target) : BoundUs
 
 [Serializable]
 [NetSerializable]
-public sealed partial class PinpointerDnaPick(string? dna) : BoundUserInterfaceMessage
+public sealed partial class PinpointerDnaPick(string? dna) : BoundUserInterfaceMessage//ToDo_SS220 fix cursed pinpointer
 {
     public string? Dna = dna;
 }
 
 [Serializable]
 [NetSerializable]
-public sealed partial class PinpointerComponentUIState(HashSet<TrackedItem> targets) : BoundUserInterfaceState
+public sealed partial class PinpointerComponentUIState(HashSet<TrackedItem> targets) : BoundUserInterfaceState//ToDo_SS220 fix cursed pinpointer
 {
     public HashSet<TrackedItem> Targets = targets;
 }
 
 [Serializable]
 [NetSerializable]
-public sealed partial class PinpointerCrewUIState(HashSet<TrackedItem> sensors) : BoundUserInterfaceState
+public sealed partial class PinpointerCrewUIState(HashSet<TrackedItem> sensors) : BoundUserInterfaceState//ToDo_SS220 fix cursed pinpointer
 {
     public HashSet<TrackedItem> Sensors = sensors;
 }
 
 [Serializable]
 [NetSerializable]
-public sealed partial class PinpointerItemUIState(HashSet<TrackedItem> items) : BoundUserInterfaceState
+public sealed partial class PinpointerItemUIState(HashSet<TrackedItem> items) : BoundUserInterfaceState//ToDo_SS220 fix cursed pinpointer
 {
     public HashSet<TrackedItem> Items = items;
 }
 
 [Serializable]
 [NetSerializable]
-public struct TrackedItem(NetEntity entity, string name)
+public struct TrackedItem(NetEntity entity, string name)//ToDo_SS220 fix cursed pinpointer
 {
     public NetEntity Entity { get; } = entity;
     public string Name { get; } = name;
 }
 
-public enum PinpointerMode
+public enum PinpointerMode//ToDo_SS220 fix cursed pinpointer
 {
     Crew,
     Item,
