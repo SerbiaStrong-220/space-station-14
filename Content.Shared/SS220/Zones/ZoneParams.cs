@@ -189,7 +189,7 @@ public sealed partial class ZoneParams()
         if (!isFieldsEquals)
             return false;
 
-        return IsRegionEquals(this, other, RegionTypes.Original);
+        return IsRegionEquals(this, other, RegionType.Original);
     }
 
     public bool TryChangeContainer(NetEntity newContainer)
@@ -281,23 +281,23 @@ public sealed partial class ZoneParams()
         DisabledRegion = @params.DisabledRegion;
     }
 
-    public List<Box2> GetRegion(RegionTypes type)
+    public List<Box2> GetRegion(RegionType type)
     {
         return type switch
         {
-            RegionTypes.Original => OriginalRegion,
-            RegionTypes.Active => ActiveRegion,
-            RegionTypes.Disabled => DisabledRegion,
+            RegionType.Original => OriginalRegion,
+            RegionType.Active => ActiveRegion,
+            RegionType.Disabled => DisabledRegion,
             _ => ActiveRegion
         };
     }
 
-    public static bool IsRegionEquals(ZoneParams left, ZoneParams right, RegionTypes region = RegionTypes.Original)
+    public static bool IsRegionEquals(ZoneParams left, ZoneParams right, RegionType region = RegionType.Original)
     {
         return IsRegionEquals(left, right, region, region);
     }
 
-    public static bool IsRegionEquals(ZoneParams left, ZoneParams right, RegionTypes leftRegion, RegionTypes rightRegion)
+    public static bool IsRegionEquals(ZoneParams left, ZoneParams right, RegionType leftRegion, RegionType rightRegion)
     {
         var ourBoxes = GetSortedBoxes(left.GetRegion(leftRegion));
         var otherBoxes = GetSortedBoxes(right.GetRegion(rightRegion));
@@ -342,7 +342,7 @@ public sealed partial class ZoneParams()
         Forever
     }
 
-    public enum RegionTypes
+    public enum RegionType
     {
         Original,
         Active,

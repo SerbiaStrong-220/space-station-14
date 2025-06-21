@@ -60,7 +60,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
                 continue;
 
             var coords = _map.GridTileToLocal(args.Entity, args.Entity, entry.GridIndices);
-            var zones = GetZonesByPoint(coords, RegionTypes.Original);
+            var zones = GetZonesByPoint(coords, RegionType.Original);
             foreach (var zone in zones)
                 RecalculateZoneRegions(zone);
         }

@@ -3,6 +3,7 @@ using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Random;
 using System.Linq;
 using System.Numerics;
 using static Content.Shared.SS220.Zones.ZoneParams;
@@ -14,6 +15,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public const string ZoneCommandsPrefix = "zones:";
 
@@ -42,7 +44,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
         var entitiesToLeave = zone.Comp.Entities.ToHashSet();
         var entitiesToEnter = new HashSet<EntityUid>();
-        var curEntities = GetInZoneEntities(zone, RegionTypes.Active);
+        var curEntities = GetInZoneEntities(zone, RegionType.Active);
         foreach (var entity in curEntities)
         {
             if (entitiesToLeave.Remove(entity))
@@ -72,7 +74,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// Returns entities located in the <paramref name="zone"/>.
     /// The check is performed at the <see cref="TransformComponent.Coordinates"/> of the entities.
     /// </summary>
-    public IEnumerable<EntityUid> GetInZoneEntities(Entity<ZoneComponent> zone, RegionTypes regionType = RegionTypes.Original)
+    public IEnumerable<EntityUid> GetInZoneEntities(Entity<ZoneComponent> zone, RegionType regionType = RegionType.Original)
     {
         HashSet<EntityUid> entities = [];
         var container = GetEntity(zone.Comp.ZoneParams.Container);
@@ -92,14 +94,14 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return entities;
     }
 
-    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, MapCoordinates, RegionTypes)"/>
-    public bool InZone(Entity<ZoneComponent> zone, EntityUid entity, RegionTypes regionType = RegionTypes.Active)
+    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, MapCoordinates, RegionType)"/>
+    public bool InZone(Entity<ZoneComponent> zone, EntityUid entity, RegionType regionType = RegionType.Active)
     {
         return InZone(zone, _transform.GetMapCoordinates(entity), regionType);
     }
 
-    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, MapCoordinates, RegionTypes)"/>
-    public bool InZone(Entity<ZoneComponent> zone, EntityCoordinates point, RegionTypes regionType = RegionTypes.Active)
+    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, MapCoordinates, RegionType)"/>
+    public bool InZone(Entity<ZoneComponent> zone, EntityCoordinates point, RegionType regionType = RegionType.Active)
     {
         if (GetEntity(zone.Comp.ZoneParams.Container) != point.EntityId)
             return false;
@@ -110,7 +112,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <summary>
     /// Determines whether the <paramref name="point"/> is located inside the <paramref name="zone"/>.
     /// </summary>
-    public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point, RegionTypes regionType = RegionTypes.Active)
+    public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point, RegionType regionType = RegionType.Active)
     {
         var container = GetEntity(zone.Comp.ZoneParams.Container);
         if (!container.IsValid())
@@ -129,14 +131,14 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return false;
     }
 
-    /// <inheritdoc cref="GetZonesByPoint(MapCoordinates, RegionTypes)"/>
-    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapId mapId, Vector2 point, RegionTypes regionType = RegionTypes.Active)
+    /// <inheritdoc cref="GetZonesByPoint(MapCoordinates, RegionType)"/>
+    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapId mapId, Vector2 point, RegionType regionType = RegionType.Active)
     {
         return GetZonesByPoint(new MapCoordinates(point, mapId), regionType);
     }
 
-    /// <inheritdoc cref="GetZonesByPoint(MapCoordinates, RegionTypes)"/>
-    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(EntityCoordinates point, RegionTypes regionType = RegionTypes.Active)
+    /// <inheritdoc cref="GetZonesByPoint(MapCoordinates, RegionType)"/>
+    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(EntityCoordinates point, RegionType regionType = RegionType.Active)
     {
         return GetZonesByPoint(_transform.ToMapCoordinates(point), regionType);
     }
@@ -144,7 +146,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <summary>
     /// Returns zones containing a <paramref name="point"/>
     /// </summary>
-    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapCoordinates point, RegionTypes regionType = RegionTypes.Active)
+    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapCoordinates point, RegionType regionType = RegionType.Active)
     {
         HashSet<Entity<ZoneComponent>> result = new();
 
@@ -327,6 +329,19 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return MathHelperExtensions.SubstructBox(result, excess);
     }
 
+    public EntityCoordinates? GetRandomCoordinateInZone(Entity<ZoneComponent> zone, RegionType regionType)
+    {
+        var region = zone.Comp.ZoneParams.GetRegion(regionType);
+        if (region.Count <= 0)
+            return null;
+
+        var box = _random.Pick(region);
+        var x = _random.NextFloat(box.Left, box.Right);
+        var y = _random.NextFloat(box.Bottom, box.Top);
+
+        return new EntityCoordinates(GetEntity(zone.Comp.ZoneParams.Container), x, y);
+    }
+
     public bool IsValidContainer(NetEntity netEntity)
     {
         return IsValidContainer(GetEntity(netEntity));
@@ -337,7 +352,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return uid.IsValid() && (HasComp<MapComponent>(uid) || HasComp<MapGridComponent>(uid));
     }
 
-    public List<Box2Rotated> GetWorldRegion(Entity<ZoneComponent> zone, RegionTypes regionType)
+    public List<Box2Rotated> GetWorldRegion(Entity<ZoneComponent> zone, RegionType regionType)
     {
         var world = new List<Box2Rotated>();
         var local = zone.Comp.ZoneParams.GetRegion(regionType);
