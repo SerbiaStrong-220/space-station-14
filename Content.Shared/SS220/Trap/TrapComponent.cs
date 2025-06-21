@@ -116,9 +116,9 @@ public sealed class TrapToggledEvent : EntityEventArgs
 public sealed class TrapAfterTriggerEvent
 {
     public EntityUid Item { get; set; }
-    public EntityUid? Activator{ get; set; }
+    public EntityUid Activator{ get; set; }
 
-    public TrapAfterTriggerEvent(EntityUid item, EntityUid? activator)
+    public TrapAfterTriggerEvent(EntityUid item, EntityUid activator)
     {
         Item = item;
         Activator = activator;
