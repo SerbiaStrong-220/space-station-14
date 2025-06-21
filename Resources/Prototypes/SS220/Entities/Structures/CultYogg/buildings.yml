@@ -99,7 +99,7 @@
   - type: HiddenDescription
     entries:
     - label: hidden-desc-chameleon-structure-cultyogg
-      whitelistMindRoles: #WhitelistBody isnt working, so i usuing this one
+      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
       - CultYoggRole
 
 - type: entity
@@ -306,5 +306,5 @@
   - type: HiddenDescription
     entries:
     - label: hidden-desc-chameleon-structure-cultyogg
-      whitelistMindRoles: #WhitelistBody isnt working, so i usuing this one
+      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
       - CultYoggRole
