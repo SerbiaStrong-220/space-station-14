@@ -283,7 +283,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     }
 
     /// <inheritdoc cref="CutSpace(Entity{MapGridComponent}, IEnumerable{Box2}, out IEnumerable{Box2})"/>
-    public void CutSpace(EntityUid parent, ref IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes) 
+    public void CutSpace(EntityUid parent, ref IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
     {
         spaceBoxes = [];
         if (!TryComp<MapGridComponent>(parent, out var mapGrid))
