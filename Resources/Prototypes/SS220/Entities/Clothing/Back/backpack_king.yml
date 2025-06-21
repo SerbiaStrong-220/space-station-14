@@ -1,0 +1,22 @@
+- type: entity
+  parent: ClothingBackpackClown
+  id: ClothingBackpackClownKing
+  name: the clown king's chest
+  suffix: Unremoveable
+  description: Mein Clownskönig, these people are shedding blood for you...
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Backpacks/cluwne.rsi
+  - type: Unremoveable
+    deleteOnDrop: false
+    lockToHands: false
+  - type: Storage
+    grid:
+    - 0,0,8,6 
+#  - type: StorageFill
+#    contents:
+#      - id: ClothingShoesClownKing
+#      - id: ClothingUniformJumpsuitClownKing 
+#      - id: ClothingMaskClownKing
+#      - id: ClothingHandsGlovesClownKing    
+# не работает из-за бага с Unremoveable
