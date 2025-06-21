@@ -11,10 +11,9 @@
     - type: HiddenDescription
       entries:
       - label: hidden-desc-toy-weapons-magazine-syndicate
-        whitelistMind:
-          components:
-            - TraitorRole
-            - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
       - label: hidden-desc-toy-weapons-magazine-clown
         jobRequired:
           - Clown

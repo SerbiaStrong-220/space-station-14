@@ -19,13 +19,12 @@
         enum.ChameleonUiKey.Key:
           type: ChameleonBoundUserInterface
 # Corvax-HiddenDesc-Start
-    - type: HiddenDescription 
+    - type: HiddenDescription
       entries:
       - label: corvax-hidden-desc-Chameleon-syndicate
-        whitelistMind:
-          components:
-            - TraitorRole
-            - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
       - label: corvax-hidden-desc-Chameleon-research
         jobRequired:
           - ResearchAssistant

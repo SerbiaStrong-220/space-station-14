@@ -173,7 +173,7 @@
   weight: 10
   roles:
   - Boxer
-  - Reporter
+  #- Reporter #ss220 remove reporter from specific department
   - Zookeeper
 #  - Psychologist SS220-psychologist-chat-color-fix
   primary: false

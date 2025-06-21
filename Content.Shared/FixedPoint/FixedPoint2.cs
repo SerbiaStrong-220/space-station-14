@@ -313,11 +313,6 @@ namespace Content.Shared.FixedPoint
             }
             return 0;
         }
-
-        internal void Deconstruct(out object key, out object value)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public static class FixedPoint2EnumerableExt

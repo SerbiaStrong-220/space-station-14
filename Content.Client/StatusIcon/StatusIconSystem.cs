@@ -1,5 +1,6 @@
 using Content.Shared.CCVar;
 using Content.Shared.Ghost;
+using Content.Shared.SS220.DarkReaper;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Content.Shared.Stealth.Components;
@@ -91,6 +92,11 @@ public sealed class StatusIconSystem : SharedStatusIconSystem
 
         if (data.ShowTo != null && !_entityWhitelist.IsValid(data.ShowTo, viewer))
             return false;
+
+        //ss220 fix dark reaper in hud's start
+        if (TryComp<DarkReaperComponent>(ent, out var darkReaper) && !darkReaper.PhysicalForm)
+            return false;
+        //ss220 fix dark reaper in hud's end
 
         return true;
     }

@@ -157,7 +157,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,-0.28125"
+          bounds: "-0.5,-0.5,0.5,-0.36" # SS220-Collision-fix 
         density: 1500
         mask:
         - FullTileMask

@@ -14,4 +14,6 @@
     Blindness: 0.15
     Muted: 0.15
     Narcolepsy: 0.3
+    Slowness: 0.45
+    Nervousness: 0.45
     # WheelchairBound: 0.05 # Removed bcz req wheelchair spawnfix

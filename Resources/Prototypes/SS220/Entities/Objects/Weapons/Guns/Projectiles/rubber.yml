@@ -8,11 +8,12 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
     - state: rubber
+  - type: StaminaDamageOnCollide
+    damage: 22
   - type: Projectile
     damage:
       types:
         Blunt: 3
-        Stamina: 22
     soundHit:
       path: /Audio/Weapons/Guns/Hits/snap.ogg
 
@@ -22,11 +23,12 @@
   parent: BaseBulletRubber
   categories: [ HideSpawnMenu ]
   components:
+  - type: StaminaDamageOnCollide
+    damage: 35
   - type: Projectile
     damage:
       types:
         Blunt: 3
-        Stamina: 35
 
 - type: entity
   id: BulletPistolRubber
@@ -34,11 +36,12 @@
   parent: BaseBulletRubber
   categories: [ HideSpawnMenu ]
   components:
+  - type: StaminaDamageOnCollide
+    damage: 22
   - type: Projectile
     damage:
       types:
         Blunt: 3
-        Stamina: 22
 
 - type: entity
   id: BulletRifleRubber
@@ -46,11 +49,12 @@
   parent: BaseBulletRubber
   categories: [ HideSpawnMenu ]
   components:
+  - type: StaminaDamageOnCollide
+    damage: 25
   - type: Projectile
     damage:
       types:
         Blunt: 3
-        Stamina: 25
 
 - type: entity
   id: BulletCaselessRifleRubber
@@ -69,8 +73,9 @@
   parent: BaseBulletRubber
   categories: [ HideSpawnMenu ]
   components:
+  - type: StaminaDamageOnCollide
+    damage: 20
   - type: Projectile
     damage:
       types:
         Blunt: 3
-        Stamina: 20

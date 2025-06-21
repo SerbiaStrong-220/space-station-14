@@ -57,7 +57,8 @@
     damage:
       types:
         Slash: 7
-        Stamina: 22
+  - type: StaminaDamageOnHit
+    damage: 22
   - type: SlowOnDamage
     speedModifierThresholds:
       40: 0.70
@@ -120,7 +121,6 @@
       borg_brain:
         - PositronicBrain
       borg_module:
-        - BorgModuleGPS
         - BorgModuleTool
   - type: ItemSlots
     slots:

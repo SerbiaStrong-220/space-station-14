@@ -38,10 +38,19 @@
   - type: Sprite
     layers:
     - state: rubber
-      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#245EE3"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#245EE3"
 
 - type: entity
   id: MagazineLightRifleRubber

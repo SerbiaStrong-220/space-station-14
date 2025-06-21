@@ -30,13 +30,18 @@
   - ClothingUniformJumpsuitCaptain
   - ClothingUniformJumpskirtCaptain
   - ClothingUniformJumpsuitCapFormal
-  - ClothingUniformJumpskirtCapFormalDress
+  # - ClothingUniformJumpskirtCapFormalDress #SS220 Removing formal dress
   - ClothingHeadBeretCap #SS220 CapBeret
   - ClothingHeadCaptainCap #SS220 Captain's Cap tweak
   # HoP
   - ClothingHeadHatHopcap
   - ClothingUniformJumpsuitHoP
   - ClothingUniformJumpskirtHoP
+  # Generic
+  - ClothingHeadHatBeretCommand
+  - ClothingHeadHatCommandSoft
+  - ClothingUniformJumpskirtCommandGeneric
+  - ClothingUniformJumpsuitCommandGeneric
 
 - type: latheRecipePack
   id: ClothingEngineering
@@ -91,7 +96,7 @@
   - ClothingUniformJumpsuitHoS
   - ClothingUniformJumpskirtHoS
   - ClothingUniformJumpsuitHosFormal
-  - ClothingUniformJumpskirtHosFormal
+  # - ClothingUniformJumpskirtHosFormal #SS220 Removing formal dress
   - ClothingUniformJumpsuitHoSAlt
   - ClothingUniformJumpskirtHoSAlt
   - ClothingUniformJumpsuitHoSBlue

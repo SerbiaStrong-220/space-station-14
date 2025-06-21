@@ -17,10 +17,10 @@
   result: CultYoggPod
   materials:
   - stack: CableHVlive
-    count: 10
+    count: 5
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coilhv}
   - stack: Tokl
-    count: 30
+    count: 15
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
 
 - type: cultYoggBuilding
@@ -36,7 +36,7 @@
     count: 5
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coilhv}
   - stack: Tokl
-    count: 15
+    count: 10
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
 
 - type: cultYoggBuilding
@@ -46,13 +46,13 @@
   result: CultYoggAltar
   materials:
   - stack: CableMVlive
-    count: 15
+    count: 10
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coilmv}
   - stack: Cablelive
-    count: 5
+    count: 10
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coillv}
   - stack: Tokl
-    count: 16
+    count: 10
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
 
 - type: cultYoggBuilding
@@ -62,10 +62,13 @@
   result: CultYoggPond
   materials:
   - stack: Cablelive
-    count: 15
+    count: 5
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coillv}
+  - stack: CableHVlive
+    count: 5
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coilhv}
   - stack: Tokl
-    count: 25
+    count: 8
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
 
 # TODO: раскомментить после того, как будут спрайты кровати

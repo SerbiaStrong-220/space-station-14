@@ -69,7 +69,7 @@
     energy: 0
   - type: LightBehaviour
     behaviours:
-      - !type:RandomizeBehaviour 
+      - !type:RandomizeBehaviour
         id: exorcism_performance
         interpolate: Linear
         isLooped: true
@@ -110,10 +110,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-BibleNecronomicon-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-BibleNecronomicon-service
       jobRequired:
         - Chaplain
@@ -121,11 +120,13 @@
 # Corvax-HiddenDesc-End
 
 - type: entity
+  parent: BaseAction
   id: ActionBibleSummon
   name: Summon familiar
   description: Summon a familiar that will aid you and gain humanlike intelligence once inhabited by a soul.
   components:
-  - type: InstantAction
+  - type: Action
     icon: { sprite: Clothing/Head/Hats/witch.rsi, state: icon }
-    event: !type:SummonActionEvent
     useDelay: 1
+  - type: InstantAction
+    event: !type:SummonActionEvent

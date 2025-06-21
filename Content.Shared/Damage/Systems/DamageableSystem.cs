@@ -2,7 +2,6 @@ using System.Linq;
 using Content.Shared.CCVar;
 using Content.Shared.Chemistry;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Mind.Components;
@@ -26,7 +25,6 @@ namespace Content.Shared.Damage
         [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
         [Dependency] private readonly IConfigurationManager _config = default!;
         [Dependency] private readonly SharedChemistryGuideDataSystem _chemistryGuideData = default!;
-        [Dependency] private readonly StaminaSystem _stamina = default!; // SS220 Stamina armor
 
         private EntityQuery<AppearanceComponent> _appearanceQuery;
         private EntityQuery<DamageableComponent> _damageableQuery;
@@ -213,11 +211,6 @@ namespace Content.Shared.Damage
                     return damage;
                 }
             }
-
-            // SS220 Stamina begin
-            if (damage.DamageDict.TryGetValue("Stamina", out var staminavalue))
-                _stamina.TakeStaminaDamage(uid.Value, staminavalue.Float(), source: origin);
-            // SS220 Stamina end
 
             // TODO DAMAGE PERFORMANCE
             // Consider using a local private field instead of creating a new dictionary here.

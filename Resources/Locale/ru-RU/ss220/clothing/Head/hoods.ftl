@@ -28,3 +28,5 @@ ent-ClothingHeadHatHoodWizardBlack = чёрный капюшон робы вол
     .desc = Копюшон робы волшебника
 ent-ClothingHeadHatHoodWizardGreen = зелёный капюшон робы волшебника
     .desc = { ent-ClothingHeadHatHoodWizardBlue.desc }
+    
+ent-ClothingHeadHatHoodOwl = капюшон героя-совы

@@ -37,10 +37,9 @@
         - Scientist
         - Borg
       - label: hidden-desc-MindSlaveImplant-syndicate
-        whitelistMind:
-          mindRoles:
-          - TraitorRole
-          - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -71,10 +70,9 @@
           - Scientist
           - Borg
       - label: hidden-desc-ThermalGoogles-syndicate
-        whitelistMind:
-          mindRoles:
-            - TraitorRole
-            - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -102,10 +100,9 @@
       - Scientist
       - Borg
     - label: hidden-desc-DnaCopyImplant-syndicate
-      whitelistMind:
-        mindRoles:
-        - TraitorRole
-        - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -145,8 +142,7 @@
       - Scientist
       - Borg
     - label: hidden-desc-AdrenalImplant-syndicate
-      whitelistMind:
-        mindRoles:
-        - TraitorRole
-        - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
 

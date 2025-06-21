@@ -99,12 +99,26 @@
       - Power
     - type: NameIdentifier #SS220 PowerId
       group: PowerId
-    - type: ActivatableUI #SS220 smes-ui-fix
-      key: enum.SmesUiKey.Key
-    - type: UserInterface #SS220 smes-ui-fix
+    # Interface
+    - type: BatteryInterface
+      minChargeRate: 5000
+      maxChargeRate: 150000
+      minSupply: 5000
+      maxSupply: 150000
+    - type: UserInterface
       interfaces:
-        enum.SmesUiKey.Key:
-          type: SmesBoundUserInterface
+        enum.BatteryUiKey.Key:
+          type: BatteryBoundUserInterface
+    - type: ActivatableUI
+      key: enum.BatteryUiKey.Key
+# UPSTREAM_TODO: remove if not needed
+    # - type: ActivatableUI #SS220 smes-ui-fix
+    #   key: enum.SmesUiKey.Key
+    # - type: UserInterface #SS220 smes-ui-fix
+    #   interfaces:
+    #     enum.SmesUiKey.Key:
+    #       type: SmesBoundUserInterface
+
 
 # SMES' in use
 

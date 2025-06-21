@@ -50,6 +50,7 @@ public sealed partial class CultYoggPodSystem : SharedCultYoggPodSystem
         healComp.TimeBetweenIncidents = ent.Comp.HealingFreq;
         healComp.BloodlossModifier = ent.Comp.BloodlossModifier;
         healComp.ModifyBloodLevel = ent.Comp.ModifyBloodLevel;
+        healComp.ModifyStamina = ent.Comp.ModifyStamina;
         Dirty(args.Entity, healComp);
 
         _appearance.SetData(ent, CultYoggPodComponent.CultPodVisuals.Inserted, true);

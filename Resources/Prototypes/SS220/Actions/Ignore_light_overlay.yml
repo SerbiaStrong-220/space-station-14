@@ -3,13 +3,14 @@
   name: Activate Keen Hearing
   description:  Your hearing is sharp, but not for long.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: BigAction
     useDelay: 120 # [2 minutes * 60 seconds]
     priority: -2
     icon:
       sprite: SS220/Interface/Actions/keen_hearing.rsi
       state: icon-human
+  - type: InstantAction
     event:
       !type:UseKeenHearingEvent
         duration: 5

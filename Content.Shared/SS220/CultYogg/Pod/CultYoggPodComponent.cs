@@ -16,7 +16,7 @@ public sealed partial class CultYoggPodComponent : Component
     /// <summary>
     /// Time between each healing incident
     /// </summary>
-    [DataField]
+    [DataField(required: true)]
     public TimeSpan HealingFreq = TimeSpan.FromSeconds(1);
 
     [DataField]
@@ -28,32 +28,17 @@ public sealed partial class CultYoggPodComponent : Component
     [DataField]
     public EntityWhitelist? CultistsWhitelist = new()
     {
-        Components = new[]
-        {
+        Components =
+        [
             "CultYogg",
             "MiGo"
-        }
+        ]
     };
 
-    [DataField]
-    public DamageSpecifier Heal = new DamageSpecifier // god forgive me for hardcoding values
-    {
-        DamageDict = new()
-        {
-            { "Slash", -6 },
-            { "Blunt", -6 },
-            { "Piercing", -6},
-            { "Heat", -4},
-            { "Cold", -4},
-            { "Shock", -4},
-            { "Asphyxiation", -2.5},
-            { "Bloodloss", -2.5 },
-            { "Radiation", -1 },
-            { "Stamina", -5 }
-        }
-    };
+    [DataField(required: true)]
+    public DamageSpecifier Heal = new();
 
-    [DataField]
+    [DataField(required: true)]
     public float BloodlossModifier = -4;
 
     /// <summary>
@@ -61,6 +46,9 @@ public sealed partial class CultYoggPodComponent : Component
     /// </summary>
     [DataField]
     public float ModifyBloodLevel = 2;
+
+    [DataField]
+    public float ModifyStamina = -5;
 
     public ContainerSlot MobContainer = default!;
 

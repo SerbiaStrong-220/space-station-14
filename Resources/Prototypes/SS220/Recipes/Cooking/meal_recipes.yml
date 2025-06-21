@@ -4,7 +4,7 @@
   result: FoodCheburek
   time: 15
   reagents:
-    TableSalt: 5  
+    TableSalt: 5
   solids:
     FoodDough: 1
     FoodMeatCutlet: 1
@@ -16,7 +16,7 @@
   result: FoodShawarma
   time: 15
   reagents:
-    Mayo: 5  
+    Mayo: 5
   solids:
     FoodDough: 1
     FoodMeatChicken: 1
@@ -70,7 +70,7 @@
   result: FoodSoupOkroshkaKvass
   time: 10
   reagents:
-    Kvass: 10  
+    Kvass: 10
   solids:
     FoodBowlBig: 1
     FoodMeatChicken: 1
@@ -235,3 +235,52 @@
     FoodCakePlain: 1
     FoodButterSlice: 3
 #SS220 McQ'Lich end
+
+- type: microwaveMealRecipe
+  id: RecipeGreenCaramelRooster
+  name: green caramel rooster
+  result: GreenCaramelRoosterFood
+  time: 10
+  reagents:
+    JuiceLime: 5
+  solids:
+    CaramelFood: 2
+
+- type: microwaveMealRecipe
+  id: RecipeYellowCaramelRooster
+  name: yellow caramel rooster
+  result: YellowCaramelRoosterFood
+  time: 10
+  reagents:
+    JuiceLemon: 5
+  solids:
+    CaramelFood: 2
+
+- type: microwaveMealRecipe
+  id: RecipeRedCaramelRooster
+  name: red caramel rooster
+  result: RedCaramelRoosterFood
+  time: 10
+  reagents:
+    Grenadine: 5
+  solids:
+    CaramelFood: 2
+#SS220 cluwnecomms start
+- type: microwaveMealRecipe
+  id: CluwneComms
+  name: cluwnecomms circuitboard
+  result: CluwneCommsComputerCircuitboard
+  time: 15
+  solids:
+    CommsComputerCircuitboard: 1
+    FoodBanana: 1
+    TrashBananaPeel: 1
+
+- type: microwaveMealRecipe
+  id: DeCluwneComms
+  name: cleansing the circuitboard
+  result: CommsComputerCircuitboard
+  time: 15
+  solids:
+    CluwneCommsComputerCircuitboard: 1
+#SS220 cluwnecomms end

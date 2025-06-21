@@ -1,4 +1,3 @@
-# spo9k emote sounds start
 - type: emoteSounds
   id: MaleFelinid
   params:
@@ -19,7 +18,7 @@
     Crying:
       collection: MaleCry
     Whistle:
-      collection: Whistles                                                                      
+      collection: Whistles
     Hiss:
       collection: FelinidHisses
     Meow:
@@ -49,15 +48,15 @@
     Giggle:
       collection: FemaleLaugh
     Cough:
-      collection: FemaleCoughs 
+      collection: FemaleCoughs
     Yawn:
-      collection: FemaleYawn  
+      collection: FemaleYawn
     Sigh:
       collection: FemaleSigh
     Crying:
       collection: FemaleCry
     Whistle:
-      collection: Whistles                           
+      collection: Whistles
     Hiss:
       collection: FelinidHisses
     Meow:
@@ -74,8 +73,7 @@
       collection: Gasp
     CritGasp:
       collection: FemaleCritGasp
-# spo9k emote sounds end
-# Lanc emore sounds start
+
 - type: emoteSounds
   id: MaleVulpkanin
   params:
@@ -106,7 +104,7 @@
       collection: MaleSneezes
     Cough:
       collection: MaleCoughs
-    Fart: 
+    Fart:
       collection: Fart
       params:
         volume: 2
@@ -149,7 +147,7 @@
       collection: FemaleSneezes
     Cough:
       collection: FemaleCoughs
-    Fart: 
+    Fart:
       collection: Fart
       params:
         volume: 2
@@ -161,8 +159,7 @@
       collection: FemaleCritGasp
     Weh:
       collection: Weh
-# Lanc emote sounds end
-# Cat emotes start
+
 - type: emoteSounds
   id: Cat
   params:
@@ -181,4 +178,3 @@
       collection: FelinidGrowls
     Purr:
       collection: FelinidPurrs
-# Cat emotes end

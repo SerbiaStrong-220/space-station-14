@@ -1,0 +1,21 @@
+- type: entity
+  parent: Multitool
+  id: MultitoolSyndie
+  name: multitool
+  description: An advanced tool to copy, store, and send electrical pulses and signals through wires and machines.
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/multitool.rsi
+    layers:
+    - state: icon
+    - state: green-unlit
+      map: [ "base" ]
+      shader: unshaded
+  - type: GenericVisualizer
+    visuals:
+      enum.LocateAiVisuals.Visuals:
+        base:
+          True: { state: red-unlit }
+          False: { state: green-unlit }
+  - type: LocateAi
+  - type: Appearance

@@ -19,11 +19,13 @@
   - type: Tag
     tags:
     - Omnivorous
+    - CultYoggStealthProvidable
   - type: OnUseTimerTrigger
     delay: 5
   - type: TileSpawnInRangeOnTrigger
     kudzuProtoId: StrangeKudzu
   - type: DeleteOnTrigger
+
 
 - type: entity
   id: StrangeKudzu

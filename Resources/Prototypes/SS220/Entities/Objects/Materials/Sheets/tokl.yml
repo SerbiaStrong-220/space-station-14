@@ -32,6 +32,9 @@
   - type: CultYoggCorrupted
     originalPrototypeId: SheetSteel
     recipe: SheetTokl
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
 
 - type: entity
   parent: SheetTokl

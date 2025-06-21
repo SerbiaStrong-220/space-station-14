@@ -15,8 +15,11 @@
       types:
         Blunt: 7
   - type: Wieldable
+  - type: ComponentsOnWield
+    components:
+    - type: StaminaDamageOnHit
+      damage:  14
   - type: IncreaseDamageOnWield
     damage:
       types:
         Blunt: -7
-        Stamina: 14

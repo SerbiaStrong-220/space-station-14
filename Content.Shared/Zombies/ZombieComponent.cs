@@ -143,8 +143,7 @@ public sealed partial class ZombieComponent : Component
             { "Piercing", -10 },
             { "Heat", -10 },
             { "Shock", -10 },
-            { "Cold", -10 },
-            { "Stamina", -25 }
+            { "Cold", -10 }
         }
         //SS220-zomb_reb
     };

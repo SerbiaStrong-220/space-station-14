@@ -158,7 +158,6 @@
 # SS220 wintercoats hoods end
 
 # Волшебник
-
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatHoodWizardBlue
@@ -256,6 +255,24 @@
     sprite: SS220/Clothing/Head/Hoods/wizard_green.rsi
   - type: Tag
     tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodOwl
+  categories: [ HideSpawnMenu ]
+  name: the owl hero's hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/owl.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/owl.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
     - WhitelistChameleon
   - type: HideLayerClothing
     slots:

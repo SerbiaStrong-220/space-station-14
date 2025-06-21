@@ -22,7 +22,8 @@
         Heat: 0.85
         Caustic: 0.85
         Radiation: 0.85
-        Stamina: 0.9
+  - type: StaminaResistance
+    damageCoefficient: 0.9
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 0.90

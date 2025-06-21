@@ -10,7 +10,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 40 #ss220lowTTKUpdate
+        Piercing: 40
+        Structural: 15
+
 
 - type: entity
   id: PelletShotgunBeanbag
@@ -25,7 +27,8 @@
     damage:
       types:
         Blunt: 16 #ss220lowTTKUpdate
-        Stamina: 60 # 2 hits to stun #ss220lowTTKUpdate
+  - type: StaminaDamageOnCollide
+    damage: 60 # 2 hits to stun #ss220lowTTKUpdate
 
 - type: entity
   id: PelletShotgun
@@ -40,6 +43,8 @@
     damage:
       types:
         Piercing: 15 #ss220lowTTKUpdate
+        Structural: 15
+
 
 - type: entity
   id: PelletShotgunSpread

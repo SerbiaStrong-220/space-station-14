@@ -354,6 +354,7 @@
   id: SeniorShoes
   name: loadout-group-medical-doctor-shoes
   loadouts:
+  - MedicalBrownShoes
   - WhiteShoes
   - MedicalWinterBoots
 
@@ -494,6 +495,11 @@
   - Glasses
   - CyberMedVisor
   - CMOCorpGlasses
+  - MedicalHud
+  - MedicalEyePatchHud
+  - Glasses
+  - GlassesJamjar
+  - GlassesJensen
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)

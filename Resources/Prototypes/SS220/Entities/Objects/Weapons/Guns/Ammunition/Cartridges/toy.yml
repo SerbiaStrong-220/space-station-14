@@ -11,10 +11,9 @@
   - type: HiddenDescription
     entries:
     - label: hidden-desc-toy-weapons-ammo-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: hidden-desc-toy-weapons-ammo-clown
       jobRequired:
         - Clown
@@ -98,10 +97,9 @@
   - type: HiddenDescription
     entries:
     - label: hidden-desc-toy-weapons-ammo-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: hidden-desc-toy-weapons-ammo-clown
       jobRequired:
         - Clown

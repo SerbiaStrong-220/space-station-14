@@ -17,17 +17,16 @@
   - type: ActivateOnPaperOpened
   - type: ExplodeOnTrigger
   - type: TriggerOnSignal
-  - type: DeviceLinkSink
+  - type: DeviceLinkSink # This should be changed into separate behavior where triggering via signal makes beep, while triggering manually is quiet, when that functionality is supported.
     ports:
       - Trigger
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-PenExploding-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-PenExploding-research
       jobRequired:
         - ResearchAssistant

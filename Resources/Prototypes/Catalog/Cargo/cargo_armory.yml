@@ -35,7 +35,7 @@
     state: implanter0
   product: CrateTrackingImplants
   cost: 1000
-  category: cargoproduct-category-name-armory
+  category: cargoproduct-category-name-medical #SS220-move-tracking-to-med
   group: market
 
 - type: cargoProduct

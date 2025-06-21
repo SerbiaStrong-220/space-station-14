@@ -10,23 +10,24 @@
     sprite: SS220/Objects/Weapons/Melee/Stunning/ntbaton.rsi
     layers:
     - state: telescope_off
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: SwitchableWeapon
     openSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
     closeSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
     damageOpen:
       types:
         Blunt: 120
-        Stamina: 0
     damageFolded:
       types:
         Blunt: 28
-        Stamina: 120
+    staminaDamageFolded: 0
+    staminaDamageOpen: 120
     sizeOpened: Large
     sizeClosed: Small
   - type: StaminaDamageOnHit
     damage: 0
   - type: MeleeWeapon
+    wideAnimationRotation: -135
     soundHit: !type:SoundCollectionSpecifier
       collection: HomerunBaton
     damage:
@@ -42,8 +43,8 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-     enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+     enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: {state: telescope_on}
           False: {state: telescope_off}
   - type: MeleeThrowOnHit

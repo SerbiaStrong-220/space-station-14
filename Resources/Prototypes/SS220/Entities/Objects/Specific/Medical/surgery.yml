@@ -43,7 +43,6 @@
         - Scientist
         - Borg
     - label: hidden-desc-implant-mindslave-fixer-manipulator-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative

@@ -3,6 +3,7 @@ using Content.Client.Items;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Client.Implants;
 
@@ -27,7 +28,14 @@ public sealed class ImplanterSystem : SharedImplanterSystem
             foreach (var implant in component.DeimplantWhitelist)
             {
                 if (_proto.TryIndex(implant, out var proto))
-                    implants.Add(proto.ID, proto.Name);
+                // SS220-implant-name-fix-begin
+                {
+                    var locData = Loc.GetEntityData(proto.ID);
+                    var name = locData.Attributes.FirstOrNull(x => x.Key == "true-name")?.Value ??
+                                string.Join(" ", proto.Name, locData.Suffix);
+                    implants.Add(proto.ID, name);
+                }
+                // SS220-implant-name-fix-end
             }
 
             bui.UpdateState(implants, component.DeimplantChosen);

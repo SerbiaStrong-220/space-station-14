@@ -49,9 +49,8 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-SpiderCharge-ninja
-      whitelistMind:
-        components:
-          - NinjaRole
+      whitelistMindRoles:
+      - NinjaRole
     - label: corvax-hidden-desc-SpiderCharge-research
       jobRequired:
         - ResearchAssistant

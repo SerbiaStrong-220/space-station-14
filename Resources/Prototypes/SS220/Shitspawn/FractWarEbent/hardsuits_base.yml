@@ -17,7 +17,8 @@
         Heat: 0.14
         Radiation: 0.2
         Caustic: 0.2
-        Stamina: 0.2
+  - type: StaminaResistance
+    damageCoefficient: 0.2
   - type: ExplosionResistance
     damageCoefficient: 0.2
 
@@ -39,7 +40,8 @@
         Heat: 0.2
         Radiation: 0
         Caustic: 0.5
-        Stamina: 0
+  - type: StaminaResistance
+    damageCoefficient: 0
   - type: ExplosionResistance
     damageCoefficient: 0.1
 
@@ -61,7 +63,8 @@
         Heat: 0.3
         Radiation: 0.6
         Caustic: 0.2
-        Stamina: 0.3
+  - type: StaminaResistance
+    damageCoefficient: 0.3
   - type: ExplosionResistance
     damageCoefficient: 0.35
 
@@ -89,7 +92,8 @@
         Heat: 0.3
         Radiation: 0.5
         Caustic: 0.5
-        Stamina: 0.3
+  - type: StaminaResistance
+    damageCoefficient: 0.3
   - type: ExplosionResistance
     damageCoefficient: 0.3
 
@@ -111,7 +115,8 @@
         Heat: 0.4
         Radiation: 0.7
         Caustic: 0.4
-        Stamina: 0.4
+  - type: StaminaResistance
+    damageCoefficient: 0.4
   - type: ExplosionResistance
     damageCoefficient: 0.4
 
@@ -133,7 +138,8 @@
         Heat: 0.4
         Radiation: 0.7
         Caustic: 0.7
-        Stamina: 0.4
+  - type: StaminaResistance
+    damageCoefficient: 0.4
   - type: ExplosionResistance
     damageCoefficient: 0.4
 
@@ -153,8 +159,9 @@
         Slash: 0.17
         Piercing: 0.17
         Heat: 0.17
-        Stamina: 0
         Radiation: 0.2
         Caustic: 0.3
+  - type: StaminaResistance
+    damageCoefficient: 0
   - type: ExplosionResistance
     damageCoefficient: 0.15

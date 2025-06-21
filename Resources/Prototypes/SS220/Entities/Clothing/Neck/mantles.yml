@@ -32,3 +32,23 @@
     sprite: SS220/Clothing/Neck/Cloaks/captain_white_mantle.rsi
   - type: Clothing
     sprite: SS220/Clothing/Neck/Cloaks/captain_white_mantle.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCMOParadeCloak
+  name: chief medical officer's parade cloak
+  description: The owner has seen everything and more. From the dwarf under the bahus to the smoking chemist in the lab. 
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/cmo_parade_cloak.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Cloaks/cmo_parade_cloak.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-flip-verb
+    foldVerbText: fold-flip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: flipped
+    foldedHeldPrefix: flipped
+
