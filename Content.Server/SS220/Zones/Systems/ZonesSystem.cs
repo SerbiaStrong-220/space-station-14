@@ -54,6 +54,9 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     private void OnTileChanged(ref TileChangedEvent args)
     {
+        if (!HasComp<TransformComponent>(args.Entity))
+            return;
+
         foreach (var entry in args.Changes)
         {
             if (!entry.OldTile.IsEmpty && !entry.NewTile.IsEmpty)
