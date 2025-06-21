@@ -3,25 +3,24 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Administration.Logs;
-using Content.Server.CartridgeLoader.Cartridges;
-using Content.Server.DeviceNetwork.Components;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Power.Components;
+using Content.Server.SS220.CartridgeLoader.Cartridges;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
-using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.GameTicking;
-using Content.Shared.Messenger;
 using Content.Shared.PDA;
+using Content.Shared.SS220.CartridgeLoader.Cartridges;
+using Content.Shared.SS220.Messenger;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
 
-namespace Content.Server.Messenger;
+namespace Content.Server.SS220.Messenger;
 
 public sealed class MessengerServerSystem : EntitySystem
 {
@@ -78,6 +77,9 @@ public sealed class MessengerServerSystem : EntitySystem
             foreach (var (entityUid, contactKey) in server.GetClientToContact())
             {
                 if (!_entityManager.TryGetComponent<IdCardComponent>(entityUid, out var card))
+                    continue;
+
+                if (string.IsNullOrEmpty(card.FullName))
                     continue;
 
                 server.UpdateContactName(contactKey, card.FullName);
@@ -319,8 +321,7 @@ public sealed class MessengerServerSystem : EntitySystem
     {
         idCardUid = null;
         idCardComponent = null;
-        
-        //SS220-messenger-fix begin
+
         if (payload.TryGetValue(MessengerClientCartridgeSystem.NetworkKey.DeviceUid.ToString(), out NetEntity? netLoader))
             return GetIdCardComponent(GetEntity(netLoader), out idCardUid, out idCardComponent);
 
@@ -328,7 +329,6 @@ public sealed class MessengerServerSystem : EntitySystem
             return GetIdCardComponent(loader, out idCardUid, out idCardComponent);
 
         return false;
-        //SS220-messenger-fix end
     }
 
     private void SendResponse(EntityUid uid, DeviceNetworkPacketEvent args, NetworkPayload payload)
@@ -343,6 +343,7 @@ public sealed class MessengerServerSystem : EntitySystem
         var servers =
             EntityQuery<DeviceNetworkComponent, MessengerServerComponent, ApcPowerReceiverComponent,
                 TransformComponent>();
+
         foreach (var (deviceNet, _, power, transform) in servers)
         {
             if (transform.MapID != mapId || !power.Powered)
@@ -363,11 +364,7 @@ public sealed class MessengerServerSystem : EntitySystem
         if (!EntityManager.TryGetComponent(serverUid, out AccessReaderComponent? reader))
             return false;
 
-        if (!_accessSystem.IsAllowed(idCardUid.Value, serverUid, reader))
-            return false;
-
-
-        return true;
+        return _accessSystem.IsAllowed(idCardUid.Value, serverUid, reader);
     }
 
     private bool GetIdCardComponent(EntityUid? loaderUid, [NotNullWhen(true)] out EntityUid? idCardUid,
