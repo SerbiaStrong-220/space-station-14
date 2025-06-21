@@ -14,6 +14,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
 
     private readonly List<EntProtoId> _data = [];
 
@@ -59,6 +60,10 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
             return;
 
         UpdateSprite(ent, proto); // maybe later figure out
+
+        var meta = MetaData(ent);
+        _metaData.SetEntityName(ent, proto.Name, meta);
+        _metaData.SetEntityDescription(ent, proto.Description, meta);
     }
 
     /// <summary>
