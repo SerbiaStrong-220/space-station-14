@@ -51,8 +51,7 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
 
         _sprite.CopySprite((clone, cloneSprite), (ent, sprite));
 
-        var despawn = EnsureComp<TimedDespawnComponent>(clone);//Idk how else get rid of it
-        despawn.Lifetime = 0.25f;
+        Del(clone);
 
         Dirty(ent, sprite);
 
