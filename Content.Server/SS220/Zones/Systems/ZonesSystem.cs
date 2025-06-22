@@ -6,6 +6,7 @@ using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using static Content.Shared.SS220.Zones.ZoneParams;
@@ -49,7 +50,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     private void OnZoneGetState(Entity<ZoneComponent> entity, ref ComponentGetState args)
     {
-        args.State = new ZoneComponentState(entity.Comp.ZoneParams);
+        args.State = new ZoneComponentState(entity.Comp.ZoneParams.GetState());
     }
 
     private void OnTileChanged(ref TileChangedEvent args)
@@ -70,7 +71,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     }
 
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>
-    public Entity<ZoneComponent>? CreateZone(
+    public (Entity<ZoneComponent>? Zone, string? FailReason) CreateZone(
         IEnumerable<(EntityCoordinates, EntityCoordinates)> boxCoordinates,
         string? protoId = null,
         string? name = null,
@@ -78,28 +79,35 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         bool attachToGrid = false,
         CutSpaceOptions cutSpaceOption = CutSpaceOptions.None)
     {
-        EntityUid? container = null;
-        var vectors = boxCoordinates.Select(e =>
+        try
         {
-            var p1 = e.Item1;
-            var p2 = e.Item2;
+            EntityUid? container = null;
+            var vectors = boxCoordinates.Select(e =>
+            {
+                var p1 = e.Item1;
+                var p2 = e.Item2;
 
-            container ??= p1.EntityId;
-            if (container != p1.EntityId || container != p2.EntityId)
-                throw new Exception($"An attempt to create a zone for coordinates from different parents. parent1: {p1.EntityId}, parent2: {p2.EntityId}; expected: {container}");
+                container ??= p1.EntityId;
+                if (container != p1.EntityId || container != p2.EntityId)
+                    throw new Exception($"Can't create a a zone with coordinates from different parents. parent1: {p1.EntityId}, parent2: {p2.EntityId}; expected: {container}");
 
-            var v1 = new Vector2(p1.X, p1.Y);
-            var v2 = new Vector2(p2.X, p2.Y);
-            return (v1, v2);
-        });
-        if (container == null)
-            return null;
+                var v1 = new Vector2(p1.X, p1.Y);
+                var v2 = new Vector2(p2.X, p2.Y);
+                return (v1, v2);
+            });
+            if (container == null)
+                return (null, "Can't create a zone with an invalid container");
 
-        return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cutSpaceOption);
+            return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cutSpaceOption);
+        }
+        catch (Exception e)
+        {
+            return (null, e.Message);
+        }
     }
 
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>
-    public Entity<ZoneComponent>? CreateZone(
+    public (Entity<ZoneComponent>? Zone, string? FailReason) CreateZone(
         IEnumerable<(MapCoordinates, MapCoordinates)> boxCoordinates,
         string? protoId = null,
         string? name = null,
@@ -107,32 +115,39 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         bool attachToGrid = false,
         CutSpaceOptions cutSpaceOption = CutSpaceOptions.None)
     {
-        EntityUid? container = null;
-        var vectors = boxCoordinates.Select(e =>
+        try
         {
-            var p1 = e.Item1;
-            var p2 = e.Item2;
+            EntityUid? container = null;
+            var vectors = boxCoordinates.Select(e =>
+            {
+                var p1 = e.Item1;
+                var p2 = e.Item2;
 
-            var map1 = _map.GetMap(p1.MapId);
-            var map2 = _map.GetMap(p2.MapId);
+                var map1 = _map.GetMap(p1.MapId);
+                var map2 = _map.GetMap(p2.MapId);
 
-            container ??= map1;
-            if (container != map1 || container != map2)
-                throw new Exception($"An attempt to create a zone for coordinates from different maps. map1: {map1}, map2: {map2}; expected: {container}");
+                container ??= map1;
+                if (container != map1 || container != map2)
+                    throw new Exception($"Can't create a zone with coordinates from different maps. map1: {map1}, map2: {map2}; expected: {container}");
 
-            var v1 = new Vector2(p1.X, p1.Y);
-            var v2 = new Vector2(p2.X, p2.Y);
-            return (v1, v2);
-        });
+                var v1 = new Vector2(p1.X, p1.Y);
+                var v2 = new Vector2(p2.X, p2.Y);
+                return (v1, v2);
+            });
 
-        if (container == null)
-            return null;
+            if (container == null)
+                return (null, "Can't create a zone with an invalid container");
 
-        return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cutSpaceOption);
+            return CreateZone(GetNetEntity(container.Value), vectors, protoId, name, color, attachToGrid, cutSpaceOption);
+        }
+        catch (Exception e)
+        {
+            return (null, e.Message);
+        }
     }
 
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>
-    public Entity<ZoneComponent>? CreateZone(
+    public (Entity<ZoneComponent>? Zone, string? FailReason) CreateZone(
         NetEntity container,
         IEnumerable<(Vector2, Vector2)> points,
         string? protoId = null,
@@ -141,14 +156,14 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         bool attachToGrid = false,
         CutSpaceOptions cutSpaceOption = CutSpaceOptions.None)
     {
-        var size = points.Select(p => Box2.FromTwoPoints(p.Item1, p.Item2));
-        return CreateZone(container, size, protoId, name, color, attachToGrid, cutSpaceOption);
+        var region = points.Select(p => Box2.FromTwoPoints(p.Item1, p.Item2));
+        return CreateZone(container, region, protoId, name, color, attachToGrid, cutSpaceOption);
     }
 
     /// <inheritdoc cref="CreateZone(ZoneParams)"/>
-    public Entity<ZoneComponent>? CreateZone(
+    public (Entity<ZoneComponent>? Zone, string? FailReason) CreateZone(
         NetEntity container,
-        IEnumerable<Box2> originalSize,
+        IEnumerable<Box2> originalRegion,
         string? protoId = null,
         string? name = null,
         Color? color = null,
@@ -157,28 +172,28 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     {
         var @params = new ZoneParams()
         {
-            Container = container,
+            Container =  GetEntity(container),
             ProtoID = protoId ?? string.Empty,
             Name = name ?? string.Empty,
             Color = color ?? DefaultColor,
             AttachToGrid = attachToGrid,
             CutSpaceOption = cutSpaceOption
         };
-        @params.SetOriginalSize(originalSize);
+        @params.SetOriginalSize(originalRegion);
         return CreateZone(@params);
     }
 
     /// <summary>
     /// Creates new zone
     /// </summary>
-    public Entity<ZoneComponent>? CreateZone(ZoneParams @params)
+    public (Entity<ZoneComponent>? Zone, string? FailReason) CreateZone(ZoneParams @params)
     {
-        if (@params.OriginalRegion.Count <= 0 || !@params.Container.IsValid())
-            return null;
+        if (@params.OriginalRegion.Count <= 0)
+            return (null, "Can't create a zone with an empty region");
 
-        var container = GetEntity(@params.Container);
+        var container = @params.Container;
         if (!IsValidContainer(container))
-            return null;
+            return (null, "Can't create a zone with an invalid container");
 
         if (string.IsNullOrEmpty(@params.Name))
             @params.Name = $"Zone {GetZonesCount() + 1}";
@@ -198,7 +213,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         zoneContainer.Zones.Add(GetNetEntity(zone));
         Dirty(container, zoneContainer);
 
-        return (zone, zoneComp);
+        return ((zone, zoneComp), null);
     }
 
     public void ChangeZone(Entity<ZoneComponent> zone, ZoneParams newParams)
@@ -238,7 +253,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     /// </summary>
     public void DeleteZone(Entity<ZoneComponent> zone)
     {
-        var container = GetEntity(zone.Comp.ZoneParams.Container);
+        var container = zone.Comp.ZoneParams.Container;
         if (TryComp<ZonesContainerComponent>(container, out var containerComp))
         {
             containerComp.Zones.Remove(GetNetEntity(zone));

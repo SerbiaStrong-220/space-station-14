@@ -7,12 +7,12 @@ using Robust.Shared.Serialization;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
+using static Content.Shared.SS220.Zones.ZoneParams;
 
 namespace Content.Shared.SS220.Zones;
 
-[Serializable, NetSerializable]
 [DataDefinition]
-public sealed partial class ZoneParams()
+public sealed partial class ZoneParams
 {
     public static readonly EntProtoId<ZoneComponent> DefaultZoneId = "BaseZone";
     public static readonly Color DefaultColor = Color.Gray;
@@ -22,13 +22,14 @@ public sealed partial class ZoneParams()
     /// The entity that this zone is assigned to.
     /// Used to determine local coordinates
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public NetEntity Container
+    public EntityUid Container
     {
-        get => _container;
+        get => _container ?? EntityUid.Invalid;
         set => TryChangeContainer(value);
     }
-    private NetEntity _container = NetEntity.Invalid;
+
+    [DataField("container"), ViewVariables(VVAccess.ReadOnly)]
+    private EntityUid? _container;
 
     /// <summary>
     /// Name of the zone
@@ -101,9 +102,18 @@ public sealed partial class ZoneParams()
     public List<Box2> ActiveRegion = new();
     #endregion
 
+    public ZoneParams()
+    {
+    }
+
     public ZoneParams(ZoneParams @params) : this()
     {
         CopyFrom(@params);
+    }
+
+    public ZoneParams(ZoneParamsState state) : this()
+    {
+        HandleState(state);
     }
 
     #region API
@@ -111,9 +121,10 @@ public sealed partial class ZoneParams()
     {
         // Cursed because GetFields() doesn't accesible on the client side
 
+        var entMng = IoCManager.Resolve<IEntityManager>();
         if (TryParseTag(input, nameof(Container).ToLower(), out var value) &&
             NetEntity.TryParse(value, out var container))
-            Container = container;
+            Container = entMng.GetEntity(container);
 
         if (TryParseTag(input, nameof(OriginalRegion).ToLower(), out value))
         {
@@ -192,11 +203,14 @@ public sealed partial class ZoneParams()
         return IsRegionEquals(this, other, RegionType.Original);
     }
 
-    public bool TryChangeContainer(NetEntity newContainer)
+    public bool TryChangeContainer(EntityUid? newContainer)
     {
-        var zonesSys = IoCManager.Resolve<IEntityManager>().System<SharedZonesSystem>();
-        if (!zonesSys.IsValidContainer(newContainer))
-            return false;
+        if (newContainer != null)
+        {
+            var zonesSys = IoCManager.Resolve<IEntityManager>().System<SharedZonesSystem>();
+            if (!zonesSys.IsValidContainer(newContainer.Value))
+                return false;
+        }
 
         _container = newContainer;
         return true;
@@ -206,11 +220,12 @@ public sealed partial class ZoneParams()
     {
         // Cursed because GetFields() doesn't accesible on the client side
 
+        var entMng = IoCManager.Resolve<IEntityManager>();
         var original = OriginalRegion.Select(b => b.ToString());
         var originalStr = string.Join("; ", original);
 
         return [
-            $"{nameof(Container).ToLower()}={Container}",
+            $"{nameof(Container).ToLower()}={entMng.GetNetEntity(Container)}",
             $"{nameof(OriginalRegion).ToLower()}=\"{originalStr}\"",
             $"{nameof(Name).ToLower()}=\"{Name}\"",
             $"{nameof(ProtoID).ToLower()}=\"{ProtoID}\"",
@@ -270,15 +285,7 @@ public sealed partial class ZoneParams()
 
     public void CopyFrom(ZoneParams @params)
     {
-        _container = @params.Container;
-        Name = @params.Name;
-        ProtoID = @params.ProtoID;
-        Color = @params.Color;
-        _attachToGrid = @params.AttachToGrid;
-        _cutSpaceOption = @params.CutSpaceOption;
-        OriginalRegion = @params.OriginalRegion;
-        ActiveRegion = @params.ActiveRegion;
-        DisabledRegion = @params.DisabledRegion;
+        HandleState(@params.GetState());
     }
 
     public List<Box2> GetRegion(RegionType type)
@@ -318,6 +325,35 @@ public sealed partial class ZoneParams()
         var sorted = GetSortedBoxes(OriginalRegion);
         return HashCode.Combine(Container, Name, ProtoID, Color, AttachToGrid, sorted);
     }
+
+    public ZoneParamsState GetState()
+    {
+        var entMng = IoCManager.Resolve<IEntityManager>();
+        return new ZoneParamsState(
+            entMng.GetNetEntity(Container),
+            Name,
+            ProtoID,
+            Color,
+            AttachToGrid,
+            CutSpaceOption,
+            OriginalRegion,
+            DisabledRegion,
+            ActiveRegion);
+    }
+
+    public void HandleState(ZoneParamsState state)
+    {
+        var entMng = IoCManager.Resolve<IEntityManager>();
+        Container = entMng.GetEntity(state.Container);
+        Name = state.Name;
+        ProtoID = state.ProtoID;
+        Color = state.Color;
+        AttachToGrid = state.AttachToGrid;
+        CutSpaceOption = state.CutSpaceOption;
+        OriginalRegion = state.OriginalRegion;
+        DisabledRegion = state.DisabledRegion;
+        ActiveRegion = state.ActiveRegion;
+    }
     #endregion
 
     public static bool operator ==(ZoneParams? left, ZoneParams? right)
@@ -348,4 +384,27 @@ public sealed partial class ZoneParams()
         Active,
         Disabled
     }
+}
+
+[Serializable, NetSerializable]
+public struct ZoneParamsState(
+    NetEntity container,
+    string name,
+    EntProtoId<ZoneComponent> protoID,
+    Color color,
+    bool attachToGrid,
+    CutSpaceOptions cutSpaceOption,
+    List<Box2> originalRegion,
+    List<Box2> disabledRegion,
+    List<Box2> activeRegion)
+{
+    public NetEntity Container = container;
+    public string Name = name;
+    public EntProtoId<ZoneComponent> ProtoID = protoID;
+    public Color Color = color;
+    public bool AttachToGrid = attachToGrid;
+    public CutSpaceOptions CutSpaceOption = cutSpaceOption;
+    public List<Box2> OriginalRegion = originalRegion;
+    public List<Box2> DisabledRegion = disabledRegion;
+    public List<Box2> ActiveRegion = activeRegion;
 }

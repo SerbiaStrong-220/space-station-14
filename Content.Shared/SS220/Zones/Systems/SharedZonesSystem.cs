@@ -77,7 +77,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     public IEnumerable<EntityUid> GetInZoneEntities(Entity<ZoneComponent> zone, RegionType regionType = RegionType.Original)
     {
         HashSet<EntityUid> entities = [];
-        var container = GetEntity(zone.Comp.ZoneParams.Container);
+        var container = zone.Comp.ZoneParams.Container;
         if (!container.IsValid())
             return entities;
 
@@ -103,7 +103,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <inheritdoc cref="InZone(Entity{ZoneComponent}, MapCoordinates, RegionType)"/>
     public bool InZone(Entity<ZoneComponent> zone, EntityCoordinates point, RegionType regionType = RegionType.Active)
     {
-        if (GetEntity(zone.Comp.ZoneParams.Container) != point.EntityId)
+        if (zone.Comp.ZoneParams.Container != point.EntityId)
             return false;
 
         return InZone(zone, _transform.ToMapCoordinates(point), regionType);
@@ -114,7 +114,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// </summary>
     public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point, RegionType regionType = RegionType.Active)
     {
-        var container = GetEntity(zone.Comp.ZoneParams.Container);
+        var container = zone.Comp.ZoneParams.Container;
         if (!container.IsValid())
             return false;
 
@@ -339,7 +339,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         var x = _random.NextFloat(box.Left, box.Right);
         var y = _random.NextFloat(box.Bottom, box.Top);
 
-        return new EntityCoordinates(GetEntity(zone.Comp.ZoneParams.Container), x, y);
+        return new EntityCoordinates(zone.Comp.ZoneParams.Container, x, y);
     }
 
     public bool IsValidContainer(NetEntity netEntity)
@@ -359,7 +359,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         if (local.Count <= 0)
             return world;
 
-        var container = GetEntity(zone.Comp.ZoneParams.Container);
+        var container = zone.Comp.ZoneParams.Container;
         var xformQuery = GetEntityQuery<TransformComponent>();
         var (_, containerRot, matrix) = _transform.GetWorldPositionRotationMatrix(container, xformQuery);
         foreach (var box in local)

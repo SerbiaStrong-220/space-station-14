@@ -61,7 +61,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (args.Current is not ZoneComponentState state)
             return;
 
-        entity.Comp.ZoneParams = state.ZoneParams;
+        entity.Comp.ZoneParams.HandleState(state.State);
         ControlWindow.RefreshEntries();
     }
 

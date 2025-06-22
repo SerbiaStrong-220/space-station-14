@@ -135,10 +135,10 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         ContainerNetIDLineEdit.OnFocusExit += _ => Refresh();
         ContainerNetIDLineEdit.OnTextEntered += args =>
         {
-            if (NetEntity.TryParse(args.Text, out var netEnt) &&
-                _zones.IsValidContainer(_entityManager.GetEntity(netEnt)))
+            if (EntityUid.TryParse(args.Text, out var uid) &&
+                _zones.IsValidContainer(uid))
             {
-                CurrentParams.Container = netEnt;
+                CurrentParams.Container = uid;
                 Refresh();
             }
         };
@@ -202,7 +202,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         NameLineEdit.Text = CurrentParams.Name;
         PrototypeIDLineEdit.Text = CurrentParams.ProtoID;
         HexColorLineEdit.Text = CurrentParams.Color.ToHex();
-        ContainerNetIDLineEdit.Text = CurrentParams.Container.IsValid() ? CurrentParams.Container.ToString() : string.Empty;
+        ContainerNetIDLineEdit.Text = (CurrentParams.Container is { } container && container.IsValid()) ? container.ToString() : string.Empty;
         AttachToGridCheckbox.Pressed = CurrentParams.AttachToGrid;
         CutSpaceOptionSelector.SelectId((int)CurrentParams.CutSpaceOption);
 
@@ -287,7 +287,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     private void OnLayoutEnded(BoxLayoutManager.BoxParams @params)
     {
-        var newParams = CurrentParams;
+        var newParams = CurrentParams.GetCopy();
         if (!CurrentParams.Container.IsValid())
             newParams.Container = @params.Parent;
         else if (@params.Parent != CurrentParams.Container)
@@ -296,7 +296,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             return;
         }
 
-        var newSize = CurrentParams.OriginalRegion.ToList();
+        var newSize = newParams.OriginalRegion.ToList();
         switch (_layoutMode)
         {
             case BoxLayoutMode.Adding:
@@ -306,7 +306,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             case BoxLayoutMode.Cutting:
                 var cutter = @params.Box;
                 if (CurrentParams.AttachToGrid)
-                    _zones.AttachToGrid(CurrentParams.Container, ref cutter);
+                    _zones.AttachToGrid(newParams.Container, ref cutter);
 
                 newSize = MathHelperExtensions.SubstructBox(newSize, cutter).ToList();
                 break;
@@ -397,8 +397,8 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         private (EntityUid Parent, List<Box2> Boxes) GetChanges(ZoneParams left, ZoneParams right)
         {
-            var leftParent = _entityManager.GetEntity(left.Container);
-            var rightParent = _entityManager.GetEntity(right.Container);
+            var leftParent = left.Container;
+            var rightParent = right.Container;
 
             var result = right.OriginalRegion.ToList();
             if (leftParent == rightParent)

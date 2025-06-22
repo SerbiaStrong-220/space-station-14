@@ -28,7 +28,12 @@ public sealed partial class CreateZoneCommand : LocalizedCommands
         @params.ParseTags(argStr);
 
         var zonesSystem = _entityManager.System<ZonesSystem>();
-        zonesSystem.CreateZone(@params);
+        var (zone, failReason) = zonesSystem.CreateZone(@params);
+        if (zone == null)
+        {
+            failReason ??= "Error creating a new zone";
+            shell.WriteError(failReason);
+        }
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)

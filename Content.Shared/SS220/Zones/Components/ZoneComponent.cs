@@ -25,7 +25,7 @@ public sealed partial class ZoneComponent : Component
 }
 
 [Serializable, NetSerializable]
-public sealed class ZoneComponentState(ZoneParams @params) : IComponentState
+public sealed class ZoneComponentState(ZoneParamsState state) : IComponentState
 {
-    public ZoneParams ZoneParams = @params;
+    public readonly ZoneParamsState State = state;
 }

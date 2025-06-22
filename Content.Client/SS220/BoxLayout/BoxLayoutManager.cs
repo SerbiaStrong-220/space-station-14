@@ -160,7 +160,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
 
         return new BoxParams()
         {
-            Parent = _entity.GetNetEntity(parent),
+            Parent = parent,
             Box = box
         };
     }
@@ -210,7 +210,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
 
     public struct BoxParams
     {
-        public NetEntity Parent;
+        public EntityUid Parent;
         public Box2 Box;
     }
 
