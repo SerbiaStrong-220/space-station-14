@@ -5,10 +5,12 @@ using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Nutrition.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Reflect;
 using Robust.Shared.Random;
+using System.Linq;
 
 namespace Content.Shared.SS220.Felinids.Systems;
 
@@ -60,12 +62,50 @@ public sealed class SharedDodgeSystem : EntitySystem
     {
         dodgeChance = ent.Comp.BaseDodgeChance;
 
-        if (TryComp<MobThresholdsComponent>(ent, out var mobThresholds)
-            && mobThresholds.CurrentThresholdState is MobState.Dead)
+        if (TryComp<MobThresholdsComponent>(ent, out var mobThresholds))
         {
-            dodgeChance = 0f;
-            return;
+            if (mobThresholds.CurrentThresholdState is MobState.Dead
+                || mobThresholds.CurrentThresholdState is MobState.Critical)
+            {
+                dodgeChance = 0f;
+                return;
+            }
+
+            if (TryComp<DamageableComponent>(ent, out var damageable))
+            {
+                var deadThreshold = (int)mobThresholds.Thresholds.Last().Key;
+                var damage = (int)damageable.TotalDamage;
+
+                var dodgeMod = 0.025f; // 0 - Отлично
+                if (damage >= deadThreshold * 0.065f)
+                    dodgeMod = 0f; // 13 - хорошо
+                if (damage >= deadThreshold * 0.19f)
+                    dodgeMod = 0f; // 38 - не очень
+                if (damage >= deadThreshold * 0.315f)
+                    dodgeMod = -0.025f; // 63 - плохо
+                if (damage >= deadThreshold * 0.44f)
+                    dodgeMod = -0.05f; // 88 - ужасно
+
+                dodgeChance += dodgeMod;
+            }
         }
 
+        if (TryComp<HungerComponent>(ent, out var hunger))
+        {
+            switch (hunger.CurrentThreshold)
+            {
+                case HungerThreshold.Peckish: dodgeChance += -0.05f; break;
+                case HungerThreshold.Starving: dodgeChance += -0.1f; break;
+            }
+        }
+
+        if (TryComp<ThirstComponent>(ent, out var thirst))
+        {
+            switch (thirst.CurrentThirstThreshold)
+            {
+                case ThirstThreshold.Thirsty: dodgeChance += -0.05f; break;
+                case ThirstThreshold.Parched: dodgeChance += -0.1f; break;
+            }
+        }
     }
 }
