@@ -195,12 +195,17 @@ public sealed partial class ZoneParams
             Name == other.Name &&
             ProtoID == other.ProtoID &&
             Color == other.Color &&
-            AttachToGrid == other.AttachToGrid;
+            AttachToGrid == other.AttachToGrid &&
+            CutSpaceOption == other.CutSpaceOption;
 
         if (!isFieldsEquals)
             return false;
 
-        return IsRegionEquals(this, other, RegionType.Original);
+        var isRegionsEquals = IsRegionEquals(this, other, RegionType.Original) &&
+            IsRegionEquals(this, other, RegionType.Disabled) &&
+            IsRegionEquals(this, other, RegionType.Active);
+
+        return isRegionsEquals;
     }
 
     public bool TryChangeContainer(EntityUid? newContainer)
