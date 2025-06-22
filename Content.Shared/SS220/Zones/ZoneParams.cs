@@ -344,15 +344,17 @@ public sealed partial class ZoneParams
     public void HandleState(ZoneParamsState state)
     {
         var entMng = IoCManager.Resolve<IEntityManager>();
-        Container = entMng.GetEntity(state.Container);
+        _container = entMng.GetEntity(state.Container);
         Name = state.Name;
         ProtoID = state.ProtoID;
         Color = state.Color;
-        AttachToGrid = state.AttachToGrid;
-        CutSpaceOption = state.CutSpaceOption;
+        _attachToGrid = state.AttachToGrid;
+        _cutSpaceOption = state.CutSpaceOption;
         OriginalRegion = state.OriginalRegion;
         DisabledRegion = state.DisabledRegion;
         ActiveRegion = state.ActiveRegion;
+
+        RecalculateRegions();
     }
     #endregion
 
