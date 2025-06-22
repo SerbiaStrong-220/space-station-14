@@ -6,7 +6,6 @@ using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using static Content.Shared.SS220.Zones.ZoneParams;
@@ -188,6 +187,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     /// </summary>
     public (Entity<ZoneComponent>? Zone, string? FailReason) CreateZone(ZoneParams @params)
     {
+        @params = @params.GetCopy();
         if (@params.OriginalRegion.Count <= 0)
             return (null, "Can't create a zone with an empty region");
 

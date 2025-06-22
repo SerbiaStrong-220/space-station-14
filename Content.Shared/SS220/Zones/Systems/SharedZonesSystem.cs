@@ -42,7 +42,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         if (!_map.IsInitialized(map))
             return;
 
-        var entitiesToLeave = zone.Comp.Entities.ToHashSet();
+        var entitiesToLeave = zone.Comp.EnteredEntities.ToHashSet();
         var entitiesToEnter = new HashSet<EntityUid>();
         var curEntities = GetInZoneEntities(zone, RegionType.Active);
         foreach (var entity in curEntities)
@@ -55,7 +55,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
         foreach (var entity in entitiesToLeave)
         {
-            zone.Comp.Entities.Remove(entity);
+            zone.Comp.EnteredEntities.Remove(entity);
             var ev = new LeavedZoneEvent(zone, entity);
             RaiseLocalEvent(zone, ev);
             RaiseLocalEvent(entity, ev);
@@ -63,7 +63,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
         foreach (var entity in entitiesToEnter)
         {
-            zone.Comp.Entities.Add(entity);
+            zone.Comp.EnteredEntities.Add(entity);
             var ev = new EnteredZoneEvent(zone, entity);
             RaiseLocalEvent(zone, ev);
             RaiseLocalEvent(entity, ev);

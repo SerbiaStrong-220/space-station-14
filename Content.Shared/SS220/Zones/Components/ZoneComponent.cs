@@ -21,7 +21,7 @@ public sealed partial class ZoneComponent : Component
     /// An array of entities currently located in the zone
     /// </summary>
     [ViewVariables]
-    public HashSet<EntityUid> Entities = new();
+    public HashSet<EntityUid> EnteredEntities = new();
 }
 
 [Serializable, NetSerializable]
