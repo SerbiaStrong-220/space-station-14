@@ -64,6 +64,10 @@ public sealed class ReflectSystem : EntitySystem
 
     private void OnReflectUserHitscan(Entity<ReflectComponent> ent, ref HitScanReflectAttemptEvent args)
     {
+        if (args.Reflected)
+            return;
+
+        if (!ent.Comp.InRightPlace)
             return; // only reflect when equipped correctly
 
         if (TryReflectHitscan(ent, ent.Owner, args.Shooter, args.SourceItem, args.Direction, args.Reflective, out var dir))

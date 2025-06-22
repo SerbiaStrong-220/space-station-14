@@ -13,7 +13,7 @@
     useDelay: 15
   - type: TargetAction
   - type: EntityTargetAction
-    event: !type:CultYoggCorruptItemEvent
+    event: !type:CultYoggCorruptItemActionEvent
 
 - type: entity
   id: ActionCultYoggCorruptItemInHand
@@ -26,7 +26,7 @@
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: corrupt}
   - type: InstantAction
-    event: !type:CultYoggCorruptItemInHandEvent
+    event: !type:CultYoggCorruptItemInHandActionEvent
 
 - type: entity
   id: ActionCultYoggPukeShroom
@@ -35,12 +35,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 60
+    useDelay: 30
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: migopuke}
     checkCanInteract: false
   - type: InstantAction
-    event: !type:CultYoggPukeShroomEvent
+    event: !type:CultYoggPukeShroomActionEvent
 
 - type: entity
   id: ActionCultYoggDigest
@@ -54,20 +54,7 @@
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: IconMycosis}
     checkCanInteract: false
   - type: InstantAction
-    event: !type:CultYoggDigestEvent
-
-- type: entity
-  id: ActionCultYoggAscending
-  name: Exaltation
-  description: Reveal your true nature.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Action
-    useDelay: 30
-    itemIconStyle: NoItem
-    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: ascend}
-  - type: InstantAction
-    event: !type:CultYoggAscendingEvent
+    event: !type:CultYoggDigestActionEvent
 
 #Mi'Go actions
 - type: entity

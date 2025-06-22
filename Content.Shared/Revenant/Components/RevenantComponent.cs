@@ -13,6 +13,13 @@ namespace Content.Shared.Revenant.Components;
 [AutoGenerateComponentState]
 public sealed partial class RevenantComponent : Component
 {
+    // SS220 revenant-stuns-damage-dealer-begin
+    /// <summary>
+    /// For how much time attacker will be stunned after damaging owner
+    /// </summary>
+    [DataField]
+    public TimeSpan? StunTime = null;
+    // SS220 revenant-stuns-damage-dealer-end
     /// <summary>
     /// The total amount of Essence the revenant has. Functions
     /// as health and is regenerated.

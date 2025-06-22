@@ -164,7 +164,7 @@ public sealed class TelepathySystem : EntitySystem
 
         if (senderUid != null && HasComp<TTSComponent>(senderUid))
         {
-            RaiseLocalEvent(new TelepathySpokeEvent(senderUid.Value, message, [.. telephatyTtsRecievers]));
+            RaiseLocalEvent(new TelepathySpokeEvent(senderUid.Value, message, [.. telephatyTtsRecievers], prototype));
         }
     }
 

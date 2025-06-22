@@ -158,7 +158,7 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
         {
             Broadcast = false,
             BreakOnDamage = true,
-            BreakOnMove = true,
+            BreakOnMove = false,
             NeedHand = true,
             BlockDuplicate = true,
             CancelDuplicate = true,

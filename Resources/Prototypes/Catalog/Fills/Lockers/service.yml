@@ -79,6 +79,8 @@
         amount: 2
       - id: Plunger
         amount: 2
+      - id: BearTrap #SS220 TrapSystem
+        amount: 2 #SS220 TrapSystem
 
 - type: entity
   id: ClosetLegalFilled
