@@ -90,7 +90,7 @@
   groups:
   - HatSeniorMedical
   - MedicalNeck
-  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
+# - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorMedicalJumpsuit
   - MedicalGloves
   - MedicalsBackpack
@@ -98,6 +98,7 @@
   - SeniorMedicalOuterClothing
   - SurvivalMedical
   - SeniorShoes
+  - MedicalEyewear
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
