@@ -57,16 +57,14 @@ public abstract partial class SharedZonesSystem : EntitySystem
         {
             zone.Comp.EnteredEntities.Remove(entity);
             var ev = new LeavedZoneEvent(zone, entity);
-            RaiseLocalEvent(zone, ev);
-            RaiseLocalEvent(entity, ev);
+            RaiseLocalEvent(ev);
         }
 
         foreach (var entity in entitiesToEnter)
         {
             zone.Comp.EnteredEntities.Add(entity);
             var ev = new EnteredZoneEvent(zone, entity);
-            RaiseLocalEvent(zone, ev);
-            RaiseLocalEvent(entity, ev);
+            RaiseLocalEvent(ev);
         }
     }
 
