@@ -297,8 +297,8 @@
   - DetectiveShoesBootsLaceup
 
 - type: loadoutGroup
-  id: DetectiveHolsters
-  name: loadout-group-detective-holsters
+  id: DetectiveNeck
+  name: loadout-group-detective-neck
   loadouts:
   - DefaultDetectiveHolster
   - HolsterLegendaryMarksman

@@ -442,12 +442,11 @@
   id: JobDetective
   groups:
   - DetectiveHead
-  # - DetectiveNeck #SS220 holster to neck
+  - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit
   - DetectiveSecBackpack #ss220 backpack noir
   - DetectiveOuterClothing
   - DetectiveShoes #SS220 dec-lux-shoes
-  - DetectiveHolsters # SS220 playtime holsters
   - SurvivalSecurity
   - Trinkets
   - SecurityStar
