@@ -772,3 +772,15 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/fallout.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/fallout.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformWastelandSuit
+  name: wasteland suit
+  description: I found myself in a desert, everything around was dried up. And the hearts of the humanoids too. I watched the life of these humanoids from afar and kept thinking, why do they continue to live? What is the point? What are they hoping for?
+  suffix: For emagging clothesmate
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wasteland_suit.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wasteland_suit.rsi
