@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server.Cargo.Systems;
+using Content.Server.SS220.AdditionalInfoForRoundEnd;
 using Content.Server.Weapons.Ranged.Components;
 using Content.Shared.Cargo;
 using Content.Shared.Damage;
@@ -34,6 +35,9 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    //ss220 add additional info for round start
+    [Dependency] private readonly RoundEndInfoManager _infoManager = default!;
+    //ss220 add additional info for round end
 
     private const float DamagePitchVariation = 0.05f;
 
@@ -293,6 +297,13 @@ public sealed partial class GunSystem : SharedGunSystem
         {
             FiredProjectiles = shotProjectiles,
         });
+
+        //ss220 add additional info for round start
+        if (user == null)
+            return;
+
+        _infoManager.EnsureInfo<GunInfo>().AddValueForMind(user.Value);
+        //ss220 add additional info for round end
 
         void CreateAndFireProjectiles(EntityUid ammoEnt, AmmoComponent ammoComp)
         {

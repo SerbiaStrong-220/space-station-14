@@ -5,6 +5,7 @@ using Content.Client.RoundEnd;
 using Content.Shared.GameTicking;
 using Content.Shared.GameWindow;
 using Content.Shared.Roles;
+using Content.Shared.SS220.AdditionalInfoForRoundEnd;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.State;
@@ -56,6 +57,10 @@ namespace Content.Client.GameTicking.Managers
             SubscribeNetworkEvent<RequestWindowAttentionEvent>(OnAttentionRequest);
             SubscribeNetworkEvent<TickerLateJoinStatusEvent>(LateJoinStatus);
             SubscribeNetworkEvent<TickerJobsAvailableEvent>(UpdateJobsAvailable);
+
+            //ss220 add additional info for round start
+            SubscribeNetworkEvent<RoundEndAdditionalInfoEvent>(RoundEndAdditionalInfo);
+            //ss220 add additional info for round end
 
             _admin.AdminStatusUpdated += OnAdminUpdated;
             OnAdminUpdated();
@@ -156,5 +161,12 @@ namespace Content.Client.GameTicking.Managers
             _userInterfaceManager.GetUIController<Content.Client.SS220.RoundEnd.RoundEndSummaryUIController>().OpenRoundEndSummaryWindow(message);
             // SS220 Round End Titles end
         }
+
+        //ss220 add additional info for round start
+        private void RoundEndAdditionalInfo(RoundEndAdditionalInfoEvent message)
+        {
+            _userInterfaceManager.GetUIController<Content.Client.SS220.RoundEnd.RoundEndSummaryUIController>().AdditionalInfo(message);
+        }
+        //ss220 add additional info for round end
     }
 }

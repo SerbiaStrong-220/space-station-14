@@ -1,8 +1,10 @@
 using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
+using Content.Server.SS220.AdditionalInfoForRoundEnd;
 using Content.Server.Stack;
 using Content.Server.Store.Components;
+using Content.Server.Traitor.Uplink;
 using Content.Shared.Actions;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
@@ -30,6 +32,9 @@ public sealed partial class StoreSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    //ss220 add additional info for round start
+    [Dependency] private readonly RoundEndInfoManager _infoManager = default!;
+    //ss220 add additional info for round end
 
     private void InitializeUi()
     {
@@ -268,6 +273,11 @@ public sealed partial class StoreSystem
 
         listing.PurchaseAmount++; //track how many times something has been purchased
         _audio.PlayEntity(component.BuySuccessSound, msg.Actor, uid); //cha-ching!
+
+        //ss220 add additional info for round start
+        var tcAmount = listing.Cost[UplinkSystem.TelecrystalCurrencyPrototype].Value / 100;
+        _infoManager.EnsureInfo<AntagPurchaseInfo>().AddPurchase(msg.Actor, listing.ID, tcAmount);
+        //ss220 add additional info for round end
 
         var buyFinished = new StoreBuyFinishedEvent
         {
