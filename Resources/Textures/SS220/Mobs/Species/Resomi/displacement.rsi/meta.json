@@ -19,10 +19,6 @@
             "directions": 4
         },
         {
-            "name": "hand",
-            "directions": 4
-        },
-        {
             "name": "head",
             "directions": 4
         },
@@ -47,7 +43,7 @@
             "directions": 4
         },
         {
-            "name": "hair",
+            "name": "hand",
             "directions": 4
         },
         {
@@ -56,6 +52,10 @@
         },
         {
             "name": "hand_r",
+            "directions": 4
+        },
+        {
+            "name": "suitstorage",
             "directions": 4
         }
     ]

@@ -195,6 +195,11 @@
           32:
             sprite: SS220/Mobs/Species/Resomi/displacement.rsi
             state: neck
+      suitstorage:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Species/Resomi/displacement.rsi
+            state: suitstorage
   - type: Bloodstream
     bloodReagent: ResomiBlood
 
