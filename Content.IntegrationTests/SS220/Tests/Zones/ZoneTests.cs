@@ -25,14 +25,14 @@ public sealed class ZoneTests
     [TestPrototypes]
     private const string Prototypes = @"
 - type: entity
-  name: ZoneDummy
-  id: ZoneDummy
+  name: ZoneTest
+  id: ZoneTest
   components:
   - type: Zone
 
 - type: entity
-  name: ZoneItemDummy
-  id: ZoneItemDummy
+  name: ZoneItemTest
+  id: ZoneItemTest
   components:
   - type: Item
   - type: Physics
@@ -81,7 +81,7 @@ public sealed class ZoneTests
             zoneParams = new ZoneParams()
             {
                 Container = grid.Owner,
-                ProtoID = "ZoneDummy",
+                ProtoID = "ZoneTest",
                 Name = "TestZone"
             };
             zoneParams.SetOriginalSize([zoneBox]);
@@ -126,7 +126,7 @@ public sealed class ZoneTests
         await server.WaitAssertion(() =>
         {
             var coords = new EntityCoordinates(grid, 3.5f, 3.5f);
-            item = entMng.SpawnEntity("ZoneItemDummy", coords);
+            item = entMng.SpawnEntity("ZoneItemTest", coords);
             Assert.That(zoneSys.InZone(zone, item), Is.True);
         });
         await server.WaitRunTicks(5);
@@ -188,7 +188,7 @@ public sealed class ZoneTests
             zoneParams = new ZoneParams()
             {
                 Container = grid.Owner,
-                ProtoID = "ZoneDummy",
+                ProtoID = "ZoneTest",
                 Name = "TestZone"
             };
             zoneParams.SetOriginalSize([zoneBox]);
@@ -239,7 +239,7 @@ public sealed class ZoneTests
             zoneParams = new ZoneParams()
             {
                 Container = container,
-                ProtoID = "ZoneDummy",
+                ProtoID = "ZoneTest",
                 Name = "TestZone"
             };
             zoneParams.SetOriginalSize([zoneBox]);
@@ -253,7 +253,7 @@ public sealed class ZoneTests
         await server.WaitAssertion(() =>
         {
             var coords = new EntityCoordinates(container, 0, 0);
-            item = entMng.SpawnEntity("ZoneItemDummy", coords);
+            item = entMng.SpawnEntity("ZoneItemTest", coords);
             Assert.That(zoneSys.InZone(zone, item), Is.True);
         });
         var box = zone.Comp.ZoneParams.OriginalRegion.First();
