@@ -286,7 +286,7 @@ public sealed class ZoneTests
             }));
         }
 
-        // Check on border box positions
+        // Check outside box positions
         points = GetNearestPoints(box, GetPointsOption.OutsideBox);
         foreach (var point in points)
         {
@@ -323,15 +323,15 @@ public sealed class ZoneTests
         var vectorOffset = new Vector2(offset, offset);
         switch (option)
         {
-            case GetPointsOption.OnBorder:
-                break;
-
             case GetPointsOption.InsideBox:
                 box = Box2.FromTwoPoints(box.BottomLeft + vectorOffset, box.TopRight - vectorOffset);
                 break;
 
             case GetPointsOption.OutsideBox:
                 box = Box2.FromTwoPoints(box.BottomLeft - vectorOffset, box.TopRight + vectorOffset);
+                break;
+
+            default:
                 break;
         }
 

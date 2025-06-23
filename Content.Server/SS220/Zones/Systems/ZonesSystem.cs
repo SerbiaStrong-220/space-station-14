@@ -202,7 +202,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             return (null, "Can't create a zone with an invalid prototype id");
 
         if (!proto.HasComponent<ZoneComponent>())
-            return (null, $"Can't create a zone with prototype that doesn't contain a {nameof(ZoneComponent)}");
+            return (null, $"Can't create a zone with prototype that doesn't has a {nameof(ZoneComponent)}");
 
         if (string.IsNullOrEmpty(@params.Name))
             @params.Name = $"Zone {GetZonesCount() + 1}";
