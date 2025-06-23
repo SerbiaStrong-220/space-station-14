@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Prototypes;
 using Content.Shared.SS220.Zones;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
@@ -6,6 +7,7 @@ using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Numerics;
 using static Content.Shared.SS220.Zones.ZoneParams;
@@ -18,6 +20,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -194,6 +197,12 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         var container = @params.Container;
         if (!IsValidContainer(container))
             return (null, "Can't create a zone with an invalid container");
+
+        if (!_prototype.TryIndex<EntityPrototype>(@params.ProtoID, out var proto))
+            return (null, "Can't create a zone with an invalid prototype id");
+
+        if (!proto.HasComponent<ZoneComponent>())
+            return (null, $"Can't create a zone with prototype that doesn't contain a {nameof(ZoneComponent)}");
 
         if (string.IsNullOrEmpty(@params.Name))
             @params.Name = $"Zone {GetZonesCount() + 1}";

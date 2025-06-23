@@ -1,8 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.IntegrationTests.Pair;
+using Content.Server.Database;
 using Content.Server.SS220.Zones.Systems;
 using Content.Shared.SS220.Zones;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
+using Robust.Server.GameObjects;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -11,6 +14,7 @@ using Robust.Shared.Maths;
 using Robust.Shared.Utility;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace Content.IntegrationTests.SS220.Tests.Zones;
 
@@ -31,6 +35,19 @@ public sealed class ZoneTests
   id: ZoneItemDummy
   components:
   - type: Item
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: ""-0.25,-0.25,0.25,0.25""
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3  # fite me
+        friction: 0.2
 ";
 
     [Test]
@@ -201,6 +218,91 @@ public sealed class ZoneTests
         await pair.CleanReturnAsync();
     }
 
+    [Test]
+    public async Task ZoneBoundsTest()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+
+        var map = await pair.CreateTestMap();
+
+        var entMng = server.ResolveDependency<IEntityManager>();
+        var zoneSys = entMng.System<ZonesSystem>();
+        var xForm = entMng.System<TransformSystem>();
+
+        var container = map.MapUid;
+        ZoneParams zoneParams = default;
+        Entity<ZoneComponent> zone = default;
+        await server.WaitPost(() =>
+        {
+            var zoneBox = new Box2(0, 0, 2, 2);
+            zoneParams = new ZoneParams()
+            {
+                Container = container,
+                ProtoID = "ZoneDummy",
+                Name = "TestZone"
+            };
+            zoneParams.SetOriginalSize([zoneBox]);
+
+            var (newZone, failReason) = zoneSys.CreateZone(zoneParams);
+            Assert.That(newZone, Is.Not.Null, $"Failed to create a new zone by reason: \"{failReason ?? "Unknown"}\"");
+            zone = newZone.Value;
+        });
+
+        EntityUid item = default;
+        await server.WaitAssertion(() =>
+        {
+            var coords = new EntityCoordinates(container, 0, 0);
+            item = entMng.SpawnEntity("ZoneItemDummy", coords);
+            Assert.That(zoneSys.InZone(zone, item), Is.True);
+        });
+        var box = zone.Comp.ZoneParams.OriginalRegion.First();
+
+        // Check inside box positions
+        var points = GetNearestPoints(box, GetPointsOption.InsideBox);
+        foreach (var point in points)
+        {
+            await server.WaitPost(() => xForm.SetLocalPosition(item, point));
+            await server.WaitRunTicks(1);
+            await server.WaitAssertion(() => Assert.Multiple(() =>
+            {
+                Assert.That(zoneSys.InZone(zone, item, ZoneParams.RegionType.Original));
+                Assert.That(zoneSys.GetInZoneEntities(zone, ZoneParams.RegionType.Original).ToList(), Has.Count.EqualTo(1));
+                Assert.That(zone.Comp.EnteredEntities, Has.Count.EqualTo(1));
+            }));
+        }
+
+        // Check on border box positions
+        points = GetNearestPoints(box, GetPointsOption.OnBorder);
+        foreach (var point in points)
+        {
+            await server.WaitPost(() => xForm.SetLocalPosition(item, point));
+            await server.WaitRunTicks(1);
+            await server.WaitAssertion(() => Assert.Multiple(() =>
+            {
+                Assert.That(zoneSys.InZone(zone, item, ZoneParams.RegionType.Original));
+                Assert.That(zoneSys.GetInZoneEntities(zone, ZoneParams.RegionType.Original).ToList(), Has.Count.EqualTo(1));
+                Assert.That(zone.Comp.EnteredEntities, Has.Count.EqualTo(1));
+            }));
+        }
+
+        // Check on border box positions
+        points = GetNearestPoints(box, GetPointsOption.OutsideBox);
+        foreach (var point in points)
+        {
+            await server.WaitPost(() => xForm.SetLocalPosition(item, point));
+            await server.WaitRunTicks(1);
+            await server.WaitAssertion(() => Assert.Multiple(() =>
+            {
+                Assert.That(!zoneSys.InZone(zone, item, ZoneParams.RegionType.Original));
+                Assert.That(zoneSys.GetInZoneEntities(zone, ZoneParams.RegionType.Original).ToList(), Has.Count.EqualTo(0));
+                Assert.That(zone.Comp.EnteredEntities, Has.Count.EqualTo(0));
+            }));
+        }
+
+        await pair.CleanReturnAsync();
+    }
+
     private static List<(Vector2i Index, Tile Tile)> GetTiles(Vector2i size)
     {
         var list = new List<(Vector2i Index, Tile Tile)>();
@@ -213,5 +315,62 @@ public sealed class ZoneTests
                 list.Add((new Vector2i(x, y), tile));
 
         return list;
+    }
+
+    private static List<Vector2> GetNearestPoints(Box2 box, GetPointsOption option, float offset = 0.01f, float step = 0.01f)
+    {
+        var result = new List<Vector2>();
+        var vectorOffset = new Vector2(offset, offset);
+        switch (option)
+        {
+            case GetPointsOption.OnBorder:
+                break;
+
+            case GetPointsOption.InsideBox:
+                box = Box2.FromTwoPoints(box.BottomLeft + vectorOffset, box.TopRight - vectorOffset);
+                break;
+
+            case GetPointsOption.OutsideBox:
+                box = Box2.FromTwoPoints(box.BottomLeft - vectorOffset, box.TopRight + vectorOffset);
+                break;
+        }
+
+        var xValues = GetValues(box.Left, box.Right, step);
+        var yValues = GetValues(box.Bottom, box.Top, step);
+
+        var bottomPoints = xValues.Select(n => new Vector2(n, box.Bottom));
+        result.AddRange(bottomPoints);
+
+        var leftPoints = yValues.Select(n => new Vector2(box.Left, n));
+        result.AddRange(leftPoints);
+
+        var topPoints = xValues.Select(n => new Vector2(n, box.Top));
+        result.AddRange(topPoints);
+
+        var rigntPoints = yValues.Select(n => new Vector2(box.Right, n));
+        result.AddRange(rigntPoints);
+
+        return result;
+
+        List<float> GetValues(float start, float end, float step)
+        {
+            var result = new List<float>();
+            var accumulate = start;
+            while (accumulate < end)
+            {
+                result.Add(accumulate);
+                accumulate += step;
+            }
+
+            result.Add(end);
+            return result;
+        }
+    }
+
+    private enum GetPointsOption
+    {
+        OnBorder,
+        InsideBox,
+        OutsideBox
     }
 }

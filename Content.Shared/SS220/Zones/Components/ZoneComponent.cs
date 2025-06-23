@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Zones.Systems;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -21,7 +22,7 @@ public sealed partial class ZoneComponent : Component
     /// An array of entities currently located in the zone
     /// </summary>
     [ViewVariables]
-    public HashSet<EntityUid> EnteredEntities = new();
+    public HashSet<EntityUid> EnteredEntities = [];
 }
 
 [Serializable, NetSerializable]

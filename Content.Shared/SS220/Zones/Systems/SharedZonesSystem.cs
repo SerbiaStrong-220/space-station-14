@@ -84,7 +84,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         var mapId = Transform(container).MapID;
         foreach (var bounds in GetWorldRegion(zone, regionType))
         {
-            foreach (var uid in _entityLookup.GetEntitiesIntersecting(mapId, bounds, LookupFlags.Uncontained))
+            foreach (var uid in _entityLookup.GetEntitiesIntersecting(mapId, bounds, LookupFlags.Dynamic | LookupFlags.Static))
             {
                 if (InZone(zone, uid, regionType))
                     entities.Add(uid);
