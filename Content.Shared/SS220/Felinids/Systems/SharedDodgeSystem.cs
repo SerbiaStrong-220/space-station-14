@@ -7,8 +7,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Projectiles;
+using Content.Shared.SS220.Felinids.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Reflect;
 using Robust.Shared.Random;
 using System.Linq;
 
@@ -64,8 +64,7 @@ public sealed class SharedDodgeSystem : EntitySystem
 
         if (TryComp<MobThresholdsComponent>(ent, out var mobThresholds))
         {
-            if (mobThresholds.CurrentThresholdState is MobState.Dead
-                || mobThresholds.CurrentThresholdState is MobState.Critical)
+            if (mobThresholds.CurrentThresholdState >= MobState.Critical)
             {
                 dodgeChance = 0f;
                 return;
@@ -73,20 +72,27 @@ public sealed class SharedDodgeSystem : EntitySystem
 
             if (TryComp<DamageableComponent>(ent, out var damageable))
             {
-                var deadThreshold = (int)mobThresholds.Thresholds.Last().Key;
-                var damage = (int)damageable.TotalDamage;
+                // 200 хуман
+                // 1 урона - отлично: +2,5% - 0.005f
+                // 13 урона - хорошо: Нет в диздоке - 0.065f
+                // 38 урона - не очень: 0 - 0.19f
+                // 63 урона - плохо : -2,5% - 0.315f
+                // 88 урона  ужасно: -5% - 0.44f
+                // 180 фелинид
+                // 79 > урона - ужасно
+                // 56 > урона - плохо
+                // 33 > урона - не очень
+                // 11 > урона - хорошо
+                // 0 = отлично
 
-                var dodgeMod = 0.025f; // 0 - Отлично
-                if (damage >= deadThreshold * 0.065f)
-                    dodgeMod = 0f; // 13 - хорошо
-                if (damage >= deadThreshold * 0.19f)
-                    dodgeMod = 0f; // 38 - не очень
-                if (damage >= deadThreshold * 0.315f)
-                    dodgeMod = -0.025f; // 63 - плохо
-                if (damage >= deadThreshold * 0.44f)
-                    dodgeMod = -0.05f; // 88 - ужасно
-
-                dodgeChance += dodgeMod;
+                var damagePercent = (float)damageable.TotalDamage / (float)mobThresholds.Thresholds.Last().Key;
+                var damageAffect = damagePercent switch
+                {
+                    <= 0.005f => 0.025f,
+                    >= 0.44f => -0.05f,
+                    _ => -0.1491f * damagePercent * damagePercent - 0.10606f * damagePercent + 0.025533f
+                };
+                dodgeChance += (float)Math.Round(damageAffect, 4);
             }
         }
 

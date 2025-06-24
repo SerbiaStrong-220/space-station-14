@@ -2,7 +2,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.Weapons.Reflect;
+namespace Content.Shared.SS220.Felinids.Components;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class DodgeComponent : Component
