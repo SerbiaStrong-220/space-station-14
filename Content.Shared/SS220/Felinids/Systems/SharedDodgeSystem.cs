@@ -37,7 +37,7 @@ public sealed class SharedDodgeSystem : EntitySystem
             return;
 
         args.Reflected = true;
-        _adminLogger.Add(LogType.HitScanHit, LogImpact.Medium, $"{ToPrettyString(ent)} dodge hitscan from {ToPrettyString(args.SourceItem)}");
+        _adminLogger.Add(LogType.HitScanHit, LogImpact.Medium, $"{ToPrettyString(ent)} dodged hitscan from {ToPrettyString(args.SourceItem)}");
     }
 
     private void OnProjectileAttempt(Entity<DodgeComponent> ent, ref ProjectileReflectAttemptEvent args)
