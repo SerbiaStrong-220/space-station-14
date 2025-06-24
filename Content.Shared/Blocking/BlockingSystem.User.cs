@@ -1,6 +1,7 @@
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Inventory;
+using Content.Shared.Wieldable;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -21,6 +22,10 @@ public sealed partial class BlockingSystem
         SubscribeLocalEvent<BlockingUserComponent, ContainerGettingInsertedAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<BlockingUserComponent, AnchorStateChangedEvent>(OnAnchorChanged);
         SubscribeLocalEvent<BlockingUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
+
+        //ss220 fix wield weapon while blocking start (#3062)
+        SubscribeLocalEvent<BlockingUserComponent, WieldAttemptEvent>(OnTryWieldWeapon);
+        //ss220 fix wield weapon while blocking end
     }
 
     private void OnParentChanged(EntityUid uid, BlockingUserComponent component, ref EntParentChangedMessage args)
@@ -98,6 +103,20 @@ public sealed partial class BlockingSystem
         StopBlockingHelper(component.BlockingItem.Value, blockingComponent, uid);
 
     }
+
+    //ss220 fix wield weapon while blocking start (#3062)
+    private void OnTryWieldWeapon(Entity<BlockingUserComponent> ent, ref WieldAttemptEvent args)
+    {
+        if (ent.Comp.BlockingItem == null)
+            return;
+
+        if (!TryComp<BlockingComponent>(ent.Comp.BlockingItem, out var blocking))
+            return;
+
+        if (blocking.IsBlocking)
+            args.Cancel();
+    }
+    //ss220 fix wield weapon while blocking end
 
     /// <summary>
     /// Check for the shield and has the user stop blocking
