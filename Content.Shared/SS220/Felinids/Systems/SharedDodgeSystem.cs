@@ -50,7 +50,7 @@ public sealed class SharedDodgeSystem : EntitySystem
             return;
 
         args.Cancelled = true;
-        _adminLogger.Add(LogType.BulletHit, LogImpact.Medium, $"{ToPrettyString(ent)} dodge {ToPrettyString(args.ProjUid)} from {ToPrettyString(args.Component.Weapon)}");
+        _adminLogger.Add(LogType.BulletHit, LogImpact.Medium, $"{ToPrettyString(ent)} dodged {ToPrettyString(args.ProjUid)} from {ToPrettyString(args.Component.Weapon)}");
 
         projectile.Shooter = ent;
         projectile.Weapon = ent;
