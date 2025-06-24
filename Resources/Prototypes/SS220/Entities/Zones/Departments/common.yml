@@ -1,0 +1,49 @@
+- type: entity
+  parent: ZoneBase
+  id: ZoneStationCommon
+  name: station common
+
+- type: entity
+  parent: ZoneStationCommon
+  id: ZoneStationCommonArrival
+  name: station arrival
+
+- type: entity
+  parent: ZoneStationCommon
+  id: ZoneStationCommonEscape
+  name: station escape
+
+- type: entity
+  parent: ZoneStationCommon
+  id: ZoneStationCommonEscapePod
+  name: station escape pod
+
+- type: entity
+  parent: ZoneStationCommon
+  id: ZoneStationCommonCentralCommandDock
+  name: station central command dock
+
+- type: entity
+  parent: ZoneStationCommon
+  id: ZoneStationCommonBathroom
+  name: station bathroom
+
+- type: entity
+  parent: ZoneStationCommon
+  id: ZoneStationCommonDump
+  name: station dump
+
+- type: entity
+  parent: ZoneStationCommon
+  id: ZoneStationCommonCryopod
+  name: station cryopod
+
+- type: entity
+  parent: ZoneStationCommon
+  id: ZoneStationCommonToolStorage
+  name: station tool storage
+
+- type: entity
+  parent: ZoneStationCommon
+  id: ZoneStationCommonCorridor
+  name: station corridor

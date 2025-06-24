@@ -14,7 +14,7 @@ namespace Content.Shared.SS220.Zones;
 [DataDefinition]
 public sealed partial class ZoneParams
 {
-    public static readonly EntProtoId<ZoneComponent> DefaultZoneId = "BaseZone";
+    public static readonly EntProtoId<ZoneComponent> DefaultZoneId = "ZoneDefault";
     public static readonly Color DefaultColor = Color.Gray;
 
     #region Fields

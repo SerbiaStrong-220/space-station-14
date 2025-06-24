@@ -3,6 +3,7 @@ using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Linq;
 using System.Numerics;
@@ -16,7 +17,9 @@ public abstract partial class SharedZonesSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
+    public static readonly ProtoId<EntityCategoryPrototype> ZonesCategoryId = "Zones";
     public const string ZoneCommandsPrefix = "zones:";
 
     public override void Update(float frameTime)
@@ -387,6 +390,11 @@ public abstract partial class SharedZonesSystem : EntitySystem
     {
         return newParams.Container != originalParams.Container ||
             newParams.ProtoID != originalParams.ProtoID;
+    }
+
+    public IEnumerable<EntityPrototype> EnumerateZonePrototypes()
+    {
+        return _prototype.Categories[ZonesCategoryId];
     }
 }
 

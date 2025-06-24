@@ -1,5 +1,10 @@
 - type: entity
-  id: BaseZone
-  name: base zone
+  id: ZoneBase
+  abstract: true
   components:
   - type: Zone
+
+- type: entity
+  parent: ZoneBase
+  id: ZoneDefault
+  name: default

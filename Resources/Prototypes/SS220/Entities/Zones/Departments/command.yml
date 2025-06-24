@@ -1,0 +1,34 @@
+- type: entity
+  parent: ZoneBase
+  id: ZoneCommand
+  name: command
+
+- type: entity
+  parent: ZoneCommand
+  id: ZoneCommandBridge
+  name: command bride
+
+- type: entity
+  parent: ZoneCommand
+  id: ZoneCommandStorage
+  name: command storage
+
+- type: entity
+  parent: ZoneCommand
+  id: ZoneCommandOfficeCaptain
+  name: captain office
+
+- type: entity
+  parent: ZoneCommand
+  id: ZoneCommandOfficeHoP
+  name: HoP office
+
+- type: entity
+  parent: ZoneCommand
+  id: ZoneCommandBlueshieldRoom
+  name: blueshield room
+
+- type: entity
+  parent: ZoneCommand
+  id: ZoneCommandEVAStorage
+  name: EVA storage

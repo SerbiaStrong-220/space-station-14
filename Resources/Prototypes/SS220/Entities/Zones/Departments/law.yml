@@ -1,0 +1,19 @@
+- type: entity
+  parent: ZoneBase
+  id: ZoneLaw
+  name: law
+
+- type: entity
+  parent: ZoneLaw
+  id: ZoneLawCourtroom
+  name: courtroom
+
+- type: entity
+  parent: ZoneLaw
+  id: ZoneLawOfficeMagistrate
+  name: magistrate office
+
+- type: entity
+  parent: ZoneLaw
+  id: ZoneLawOfficeIAA
+  name: IAA office
