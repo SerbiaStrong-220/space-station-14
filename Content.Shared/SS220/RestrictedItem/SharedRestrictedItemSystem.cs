@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Administration.Managers;
 using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -21,6 +22,7 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly ISharedAdminManager _adminManager = default!;
 
     public override void Initialize()
     {
@@ -54,6 +56,9 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
 
     protected bool ItemCheck(EntityUid user, Entity<RestrictedItemComponent> item)
     {
+        if (_adminManager.IsAdmin(user))
+            return true;
+
         if (_whitelistSystem.IsWhitelistFail(item.Comp.Whitelist, user))
         {
             if (_net.IsServer)
