@@ -3,59 +3,126 @@
 - type: languageReplacements
   id: SolCommon
   replacements:
-    привет: dishao
-    пока: beis
+    accent-HumanReplace-words-1-1: accent-HumanReplace-words-replace-1
+    accent-HumanReplace-words-1-2: accent-HumanReplace-words-replace-1
+    accent-HumanReplace-words-1-3: accent-HumanReplace-words-replace-1
+    accent-HumanReplace-words-1-4: accent-HumanReplace-words-replace-1
+    accent-HumanReplace-words-1-5: accent-HumanReplace-words-replace-1
+    accent-HumanReplace-words-2-1: accent-HumanReplace-words-replace-2
+    accent-HumanReplace-words-2-2: accent-HumanReplace-words-replace-2
+    accent-HumanReplace-words-2-3: accent-HumanReplace-words-replace-2
+    accent-HumanReplace-words-3-1: accent-HumanReplace-words-replace-3
+    accent-HumanReplace-words-3-2: accent-HumanReplace-words-replace-3
+    accent-HumanReplace-words-4-1: accent-HumanReplace-words-replace-4
+    accent-HumanReplace-words-4-2: accent-HumanReplace-words-replace-4
+    accent-HumanReplace-words-5: accent-HumanReplace-words-replace-5
+    accent-HumanReplace-words-6: accent-HumanReplace-words-replace-6
 
 - type: languageReplacements
   id: Sintaunathi
   replacements:
-    привет: тест
-    пока: успех
+    accent-ReptilianReplace-words-1-1: accent-ReptilianReplace-words-replace-1
+    accent-ReptilianReplace-words-1-2: accent-ReptilianReplace-words-replace-1
+    accent-ReptilianReplace-words-1-3: accent-ReptilianReplace-words-replace-1
+    accent-ReptilianReplace-words-1-4: accent-ReptilianReplace-words-replace-1
+    accent-ReptilianReplace-words-1-5: accent-ReptilianReplace-words-replace-1
+    accent-ReptilianReplace-words-2-1: accent-ReptilianReplace-words-replace-2
+    accent-ReptilianReplace-words-2-2: accent-ReptilianReplace-words-replace-2
+    accent-ReptilianReplace-words-2-3: accent-ReptilianReplace-words-replace-2
+    accent-ReptilianReplace-words-3-1: accent-ReptilianReplace-words-replace-3
+    accent-ReptilianReplace-words-3-2: accent-ReptilianReplace-words-replace-3
+    accent-ReptilianReplace-words-4-1: accent-ReptilianReplace-words-replace-4
+    accent-ReptilianReplace-words-4-2: accent-ReptilianReplace-words-replace-4
+    accent-ReptilianReplace-words-5-1: accent-ReptilianReplace-words-replace-5
+    accent-ReptilianReplace-words-5-2: accent-ReptilianReplace-words-replace-5
+    accent-ReptilianReplace-words-5-3: accent-ReptilianReplace-words-replace-5
+    accent-ReptilianReplace-words-5-4: accent-ReptilianReplace-words-replace-5
+    accent-ReptilianReplace-words-5-5: accent-ReptilianReplace-words-replace-5
+    accent-ReptilianReplace-words-5-6: accent-ReptilianReplace-words-replace-5
 
 - type: languageReplacements
   id: Siiktajr
   replacements:
-    привет: тест
-    пока: успех
+    accent-TajaranReplace-words-1-1: accent-TajaranReplace-words-replace-1
+    accent-TajaranReplace-words-1-2: accent-TajaranReplace-words-replace-1
+    accent-TajaranReplace-words-1-3: accent-TajaranReplace-words-replace-1
+    accent-TajaranReplace-words-1-4: accent-TajaranReplace-words-replace-1
+    accent-TajaranReplace-words-2-1: accent-TajaranReplace-words-replace-2
+    accent-TajaranReplace-words-2-2: accent-TajaranReplace-words-replace-2
+    accent-TajaranReplace-words-2-3: accent-TajaranReplace-words-replace-2
+    accent-TajaranReplace-words-3-1: accent-TajaranReplace-words-replace-3
+    accent-TajaranReplace-words-3-2: accent-TajaranReplace-words-replace-3
+    accent-TajaranReplace-words-4-1: accent-TajaranReplace-words-replace-4
+    accent-TajaranReplace-words-4-2: accent-TajaranReplace-words-replace-4
+    accent-TajaranReplace-words-5-1: accent-TajaranReplace-words-replace-5
+    accent-TajaranReplace-words-5-2: accent-TajaranReplace-words-replace-5
+    accent-TajaranReplace-words-5-3: accent-TajaranReplace-words-replace-5
+    accent-TajaranReplace-words-5-4: accent-TajaranReplace-words-replace-5
+    accent-TajaranReplace-words-5-5: accent-TajaranReplace-words-replace-5
+    accent-TajaranReplace-words-5-6: accent-TajaranReplace-words-replace-5
 
-- type: languageReplacements
-  id: VoxPidgin
-  replacements:
-    привет: тест
-    пока: успех
-
-- type: languageReplacements
-  id: Rootspeak
-  replacements:
-    привет: тест
-    пока: успех
+# - type: languageReplacements
+#   id: Rootspeak
+#   replacements:
+#     привет: тест
+#     пока: успех
 
 - type: languageReplacements
   id: Bubblish
   replacements:
-    привет: тест
-    пока: успех
+    accent-SlimePersonReplace-words-1-1: accent-SlimePersonReplace-words-replace-1
+    accent-SlimePersonReplace-words-1-2: accent-SlimePersonReplace-words-replace-1
+    accent-SlimePersonReplace-words-2-1: accent-SlimePersonReplace-words-replace-2
+    accent-SlimePersonReplace-words-2-2: accent-SlimePersonReplace-words-replace-2
+    accent-SlimePersonReplace-words-3-1: accent-SlimePersonReplace-words-replace-3
+    accent-SlimePersonReplace-words-3-2: accent-SlimePersonReplace-words-replace-3
+    accent-SlimePersonReplace-words-3-3: accent-SlimePersonReplace-words-replace-3
+    accent-SlimePersonReplace-words-3-4: accent-SlimePersonReplace-words-replace-3
+    accent-SlimePersonReplace-words-3-5: accent-SlimePersonReplace-words-replace-3
+    accent-SlimePersonReplace-words-3-6: accent-SlimePersonReplace-words-replace-3
 
 - type: languageReplacements
   id: Tkachi
   replacements:
-    привет: тест
-    пока: успех
+    accent-MothReplace-words-1-1: accent-MothReplace-words-replace-1
+    accent-MothReplace-words-1-2: accent-MothReplace-words-replace-1
+    accent-MothReplace-words-1-3: accent-MothReplace-words-replace-1
+    accent-MothReplace-words-1-4: accent-MothReplace-words-replace-1
+    accent-MothReplace-words-1-5: accent-MothReplace-words-replace-1
+    accent-MothReplace-words-2-1: accent-MothReplace-words-replace-2
+    accent-MothReplace-words-2-2: accent-MothReplace-words-replace-2
+    accent-MothReplace-words-2-3: accent-MothReplace-words-replace-2
+    accent-MothReplace-words-3-1: accent-MothReplace-words-replace-3
+    accent-MothReplace-words-3-2: accent-MothReplace-words-replace-3
+    accent-MothReplace-words-3-3: accent-MothReplace-words-replace-3
+    accent-MothReplace-words-3-4: accent-MothReplace-words-replace-3
+    accent-MothReplace-words-3-5: accent-MothReplace-words-replace-3
+    accent-MothReplace-words-3-6: accent-MothReplace-words-replace-3
 
 - type: languageReplacements
   id: Eldwarf
   replacements:
-    привет: тест
-    пока: успех
+    accent-DwarfReplace-words-1-1: accent-DwarfReplace-words-replace-1
+    accent-DwarfReplace-words-1-2: accent-DwarfReplace-words-replace-1
+    accent-DwarfReplace-words-1-3: accent-DwarfReplace-words-replace-1
+    accent-DwarfReplace-words-1-4: accent-DwarfReplace-words-replace-1
+    accent-DwarfReplace-words-1-5: accent-DwarfReplace-words-replace-1
+    accent-DwarfReplace-words-2-1: accent-DwarfReplace-words-replace-2
+    accent-DwarfReplace-words-2-2: accent-DwarfReplace-words-replace-2
+    accent-DwarfReplace-words-2-3: accent-DwarfReplace-words-replace-2
+    accent-DwarfReplace-words-3-1: accent-DwarfReplace-words-replace-3
+    accent-DwarfReplace-words-3-2: accent-DwarfReplace-words-replace-3
+    accent-DwarfReplace-words-4-1: accent-DwarfReplace-words-replace-4
+    accent-DwarfReplace-words-4-2: accent-DwarfReplace-words-replace-4
+    accent-DwarfReplace-words-5-1: accent-DwarfReplace-words-replace-5
+    accent-DwarfReplace-words-5-2: accent-DwarfReplace-words-replace-5
+    accent-DwarfReplace-words-5-3: accent-DwarfReplace-words-replace-5
+    accent-DwarfReplace-words-5-4: accent-DwarfReplace-words-replace-5
+    accent-DwarfReplace-words-5-5: accent-DwarfReplace-words-replace-5
+    accent-DwarfReplace-words-5-6: accent-DwarfReplace-words-replace-5
 
-- type: languageReplacements
-  id: Arati
-  replacements:
-    привет: тест
-    пока: успех
-
-- type: languageReplacements
-  id: Canilunzt
-  replacements:
-    привет: тест
-    пока: успех
+# - type: languageReplacements
+#   id: Arati
+#   replacements:
+#     привет: тест
+#     пока: успех

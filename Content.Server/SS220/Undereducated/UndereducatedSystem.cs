@@ -3,12 +3,12 @@
 using Content.Server.Chat.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.SS220.Language;
+using Content.Shared.SS220.Language.Components;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.Undereducated;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -55,39 +55,22 @@ public sealed partial class UndereducatedSystem : EntitySystem
 
     private void OnMapInit(Entity<UndereducatedComponent> ent, ref MapInitEvent _)
     {
-        GetSpokenLanguages(ent, out var spokenLanguages);
-        ent.Comp.SpokenLanguages = spokenLanguages;
-
         if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
             && SpeciesLanguageDict.TryGetValue(apperance.Species, out var language)
-            && spokenLanguages.Contains(language)
-            && _proto.TryIndex<LanguagePrototype>(language, out var languagePrototype))
-            ent.Comp.Language = languagePrototype.ID;
+            && _languageSystem.CanSpeak(ent, language))
+            ent.Comp.Language = language;
 
-        else if (spokenLanguages.Contains(SpeciesLanguageDict.GetValueOrDefault("Binary", "Binary")))
-            ent.Comp.Language = SpeciesLanguageDict.GetValueOrDefault("Binary", "Binary");
-
-        else if (_languageSystem.CanSpeak(ent, _languageSystem.UniversalLanguage))
-            ent.Comp.Language = _languageSystem.UniversalLanguage;
-
-        else if (_languageSystem.CanSpeak(ent, _languageSystem.GalacticLanguage))
-            ent.Comp.Language = _languageSystem.GalacticLanguage;
+        else if (TryComp<LanguageComponent>(ent, out var langComp))
+        {
+            var i = 0;
+            while (i <= langComp.AvailableLanguages.Count - 1
+                && !langComp.AvailableLanguages[i].CanSpeak)
+                i++;
+            if (i <= langComp.AvailableLanguages.Count - 1)
+                ent.Comp.Language = langComp.AvailableLanguages[i].Id;
+        }
 
         Dirty(ent);
-    }
-
-    private void GetSpokenLanguages(EntityUid ent, out List<string> spokenLanguages)
-    {
-        spokenLanguages = [];
-        var allLanguages = SpeciesLanguageDict.Values.ToList();
-
-        foreach (var language in allLanguages)
-        {
-            if (_languageSystem.CanSpeak(ent, language))
-            {
-                spokenLanguages.Add(language);
-            }
-        }
     }
 
     private void OnConfigReceived(UndereducatedConfigRequestEvent args)
@@ -99,7 +82,7 @@ public sealed partial class UndereducatedSystem : EntitySystem
 
         args.Chance = Math.Clamp(args.Chance, 0f, 1f);
 
-        if (!comp.SpokenLanguages.Contains(args.SelectedLanguage) || !_languageSystem.CanSpeak(ent, args.SelectedLanguage))
+        if (!_languageSystem.CanSpeak(ent, args.SelectedLanguage))
             args.SelectedLanguage = comp.Language;
 
         comp.Language = args.SelectedLanguage;

@@ -16,6 +16,6 @@ public sealed partial class UndereducatedComponent : Component
     [DataField, AutoNetworkedField]
     public bool Tuned = false;
 
-    [DataField, AutoNetworkedField]
-    public List<String> SpokenLanguages = [];
+    //[DataField, AutoNetworkedField]
+    //public List<String> SpokenLanguages = [];
 }

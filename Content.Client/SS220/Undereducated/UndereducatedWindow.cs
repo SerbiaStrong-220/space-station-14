@@ -19,11 +19,11 @@ public sealed partial class UndereducatedWindow : DefaultWindow
     public string SelectedLanguage;
     public float SelectedChance;
 
-    public UndereducatedWindow(UndereducatedComponent comp)
+    public UndereducatedWindow(UndereducatedComponent comp, List<string> langList)
     {
         IoCManager.InjectDependencies(this);
 
-        _spokenLanguages = comp.SpokenLanguages;
+        _spokenLanguages = langList;
         SelectedLanguage = comp.Language;
         SelectedChance = comp.ChanseToReplace;
 
