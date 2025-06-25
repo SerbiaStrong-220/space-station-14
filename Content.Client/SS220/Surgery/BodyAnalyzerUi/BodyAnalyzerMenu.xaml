@@ -8,7 +8,7 @@
     xmlns:surgeryUiParts="clr-namespace:Content.Client.SS220.Surgery.UiParts"
     Title="{Loc 'surgery-observer-title'}"
     Resizable="False"
-    SetSize="920 384"
+    SetSize="920 444"
     RectClipContent="False">
     <Control>
         <PanelContainer>
@@ -16,12 +16,12 @@
                 <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
             </PanelContainer.PanelOverride>
         </PanelContainer>
-        <BoxContainer Name="ContentBoxContainer" Orientation="Horizontal">
-            <BoxContainer Name="PatientInfo" Orientation="Vertical" SetSize="460 360">
+        <BoxContainer Name="ContentBoxContainer" Orientation="Horizontal" Margin="5">
+            <BoxContainer Name="PatientInfo" Orientation="Vertical" SetSize="460 420">
                 <surgeryUiParts:PatientStatus Name="PatientStatus" HorizontalExpand="False" VerticalExpand="True"/>
                 <surgeryUiParts:TreatmentSuggestion Name="TreatmentSuggestion" HorizontalExpand="False"  VerticalExpand="True"/>
             </BoxContainer>
-            <BoxContainer Name="HandBook" Orientation="Vertical" SetSize="460 360">
+            <BoxContainer Name="HandBook" Orientation="Vertical" SetSize="460 420">
                 <surgeryUiParts:OperationList Name="OperationList" VerticalExpand="True" HorizontalExpand="False"/>
                 <surgeryUiParts:OperationDescription Name="OperationDescription" Visible ="False"
                     VerticalAlignment="Stretch" HorizontalExpand="False"  VerticalExpand="True"/>

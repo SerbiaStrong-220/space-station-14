@@ -2,8 +2,10 @@
 
 using Content.Client.Atmos.Rotting;
 using Content.Client.SS220.LimitationRevive;
+using Content.Client.SS220.Surgery.UiParts;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Timing;
 
@@ -28,8 +30,11 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
 
         if (TryComp<RottingComponent>(target, out var rottingComponent))
             patientStatus.BodyDecayDegree = _rotting.RotStage(target, rottingComponent);
+        else
+            patientStatus.BodyDecayDegree = 0;
 
-        if (TryComp<LimitationReviveComponent>(target, out var limitationReviveComponent))
+        if (TryComp<LimitationReviveComponent>(target, out var limitationReviveComponent)
+                && mobStateComponent?.CurrentState == MobState.Dead) // kinda bad fix
             patientStatus.BrainRotDegree = GetBrainRotDegree(limitationReviveComponent);
 
         return patientStatus;

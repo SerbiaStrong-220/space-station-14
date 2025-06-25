@@ -22,8 +22,7 @@ public sealed partial class PatientStatus : Control
         if (data.OverallDamage >= 0)
             OverallDamage.Text = data.OverallDamage.ToString();
 
-        if (data.PatientState != Shared.Mobs.MobState.Invalid)
-            MobStatus.Text = Loc.GetString($"patient-status-mob-state-{data.PatientState}");
+        MobStatus.Text = Loc.GetString($"patient-status-mob-state-{data.PatientState}");
 
         if (data.BodyDecayDegree >= 0)
             DecayDegree.Text = _localizationManager.TryGetString($"patient-status-decay-degree-{data.BodyDecayDegree}", out var locStr)
@@ -31,5 +30,7 @@ public sealed partial class PatientStatus : Control
 
         if (data.BrainRotDegree >= 0)
             BrainRotStatus.Text = Loc.GetString($"patient-status-brain-rot-degree", ("degree", data.BrainRotDegree));
+        else
+            BrainRotStatus.Text = Loc.GetString($"patient-status-brain-rot-none");
     }
 }

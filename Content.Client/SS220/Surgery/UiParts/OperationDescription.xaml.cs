@@ -79,7 +79,12 @@ public sealed partial class OperationDescription : Control
             return;
 
         builder.AppendLine(Loc.GetString("operation-description-node-name", ("name", node.Name)));
-        builder.AppendLine(_surgeryGraph.Description(node));
+
+        var surgeryNodeDescription = _surgeryGraph.Description(node) is null ?
+                                        "#err" :
+                                        Loc.GetString(_surgeryGraph.Description(node)!);
+
+        builder.AppendLine(surgeryNodeDescription);
 
         foreach (var edge in node.Edges)
         {
@@ -90,16 +95,18 @@ public sealed partial class OperationDescription : Control
 
     private void AddConditionInfo(SurgeryGraphEdge edge, StringBuilder builder)
     {
-        if (edge.Conditions.Count == 0)
+        var surgeryConditions = _surgeryGraph.GetConditions(edge);
+
+        if (surgeryConditions.Count == 0)
             return;
 
-        builder.AppendLine("operation-description-condition-section-name");
+        builder.AppendLine(Loc.GetString("operation-description-condition-section-name"));
 
-        foreach (var condition in edge.Conditions)
+        foreach (var condition in surgeryConditions)
         {
-            var info = condition.ConditionDescriptionLocPath();
+            var infoLocPath = condition.ConditionDescriptionLocPath();
             builder.Append(NodeDataTabulation);
-            builder.AppendLine(info);
+            builder.AppendLine(Loc.GetString(infoLocPath));
         }
     }
 }
