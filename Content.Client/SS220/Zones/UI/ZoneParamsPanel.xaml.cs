@@ -56,7 +56,8 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     private ZoneParamsBoxesOverlayProvider _overlayProvider;
 
-    private ZoneColorSelectorPopup _selectorPopup = new();
+    private ZonePrototypeSelectorPopup _prototypeSelectorPopup = new();
+    private ZoneColorSelectorPopup _colorSelectorPopup = new();
 
     public ZoneParamsPanel() : this(null) { }
 
@@ -86,6 +87,9 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         foreach (var value in Enum.GetValues<CutSpaceOptions>())
             CutSpaceOptionSelector.AddItem(Loc.GetString($"zone-cut-space-option-{value}"), (int)value);
+
+        PrototypeSelectorButton.AddStyleClass(StyleNano.StyleClassChatFilterOptionButton);
+        ColorSelectorButton.AddStyleClass(StyleNano.StyleClassChatFilterOptionButton);
 
         InitInteractions();
         InitTooltips();
@@ -125,22 +129,29 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         AttachToGridCheckbox.OnPressed += _ => SetAttachToGrid(AttachToGridCheckbox.Pressed);
 
-        ColorSelectorButton.AddStyleClass(StyleNano.StyleClassChatFilterOptionButton);
-        ColorSelectorButton.OnPressed += _ =>
+        PrototypeSelectorButton.OnPressed += _ =>
         {
-            _selectorPopup.SetColor(CurrentParams.Color);
+            _prototypeSelectorPopup.Refresh();
 
             var globalPos = ColorSelectorButton.GlobalPosition;
-            var box = UIBox2.FromDimensions(globalPos, _selectorPopup.MinSize);
-            _selectorPopup.Open(box);
+            var box = UIBox2.FromDimensions(globalPos, _prototypeSelectorPopup.MinSize);
+            _prototypeSelectorPopup.Open(box);
         };
 
-        _selectorPopup.OnColorSelected += SetColor;
-        _selectorPopup.OnVisibilityChanged += args =>
+        _prototypeSelectorPopup.OnPrototypeSelected += proto => SetProtoID(proto.ID);
+        _prototypeSelectorPopup.OnVisibilityChanged += args => PrototypeSelectorButton.Pressed = args.Visible;
+
+        ColorSelectorButton.OnPressed += _ =>
         {
-            ColorSelectorButton.Pressed = args.Visible;
-            Refresh();
+            _colorSelectorPopup.SetColor(CurrentParams.Color);
+
+            var globalPos = ColorSelectorButton.GlobalPosition;
+            var box = UIBox2.FromDimensions(globalPos, _colorSelectorPopup.MinSize);
+            _colorSelectorPopup.Open(box);
         };
+
+        _colorSelectorPopup.OnColorSelected += SetColor;
+        _colorSelectorPopup.OnVisibilityChanged += args => ColorSelectorButton.Pressed = args.Visible;
 
         CutSpaceOptionSelector.OnItemSelected += args => SetCutSpaceOption((CutSpaceOptions)args.Id);
     }
@@ -157,7 +168,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     protected override void ExitedTree()
     {
-        _selectorPopup.Close();
+        _colorSelectorPopup.Close();
         RemoveLayoutReact();
         SetOverlay(false);
         base.ExitedTree();
@@ -165,7 +176,8 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     public void Refresh()
     {
-        _selectorPopup.Close();
+        _prototypeSelectorPopup.Close();
+        _colorSelectorPopup.Close();
 
         NameLineEdit.Text = CurrentParams.Name;
         PrototypeIDLineEdit.Text = CurrentParams.ProtoID;

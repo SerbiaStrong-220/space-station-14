@@ -1,1 +1,3 @@
+zone-prototype-selector-popup-searchbar-placeholder = Поиск...
+
 zone-color-selector-popup-accept-button = Применить

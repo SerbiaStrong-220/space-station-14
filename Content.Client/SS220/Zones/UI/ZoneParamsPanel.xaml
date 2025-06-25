@@ -13,6 +13,9 @@
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
                     <Label Name="PrototypeIDLabel" Text="{Loc zone-params-panel-prototype-id-label}" MouseFilter="Stop"/>
                     <LineEdit Name="PrototypeIDLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
+                    <Button Name="PrototypeSelectorButton">
+                        <TextureRect Stretch="KeepAspectCentered" TexturePath="/Textures/SS220/Interface/Zones/list.svg.192dpi.png" SetSize="24 24"/>
+                    </Button>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
                     <Label Name="HexColorLabel" Text="{Loc zone-params-panel-hex-color-label}" MouseFilter="Stop"/>
