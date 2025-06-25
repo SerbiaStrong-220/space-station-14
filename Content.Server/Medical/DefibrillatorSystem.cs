@@ -28,6 +28,7 @@ using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
 using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
 using Content.Shared.Ghost; //SS220 LimitationRevive
 using Content.Shared.Inventory;
+using Content.Shared.SS220.Surgery.Components;
 
 namespace Content.Server.Medical;
 
@@ -66,6 +67,14 @@ public sealed class DefibrillatorSystem : EntitySystem
     {
         if (args.Handled || args.Target is not { } target)
             return;
+
+        //ss220-surgery-update-begin
+        if (HasComp<DirectCompactDefibrillatorComponent>(uid))
+        {
+            _popup.PopupClient(Loc.GetString("compact-defibrillator-cant-zap"), args.User);
+            return;
+        }
+        //ss220-surgery-update-end
 
         args.Handled = TryStartZap(uid, target, args.User, component);
     }

@@ -240,7 +240,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             bool isAbleToPerform = true;
             foreach (var condition in SurgeryGraph.GetConditions(edge))
             {
-                if (!condition.Condition(used, EntityManager))
+                if (!condition.Condition(entity.Owner, used, user, EntityManager))
                     isAbleToPerform = false;
             }
             // if passed all conditions than break

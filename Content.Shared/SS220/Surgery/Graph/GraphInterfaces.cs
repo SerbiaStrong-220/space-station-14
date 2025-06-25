@@ -19,6 +19,7 @@ public partial interface IAbstractSurgeryGraphAvailabilityCondition
     bool Condition(EntityUid uid, IEntityManager entityManager, [NotNullWhen(false)] out string? reason);
 }
 
+[Serializable]
 [DataDefinition]
 public partial struct FlippingCondition<T>
 {

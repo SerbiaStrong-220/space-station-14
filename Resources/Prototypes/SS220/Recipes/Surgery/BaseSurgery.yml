@@ -59,7 +59,7 @@
     - !type:SurgeryToolTypeCondition
       surgeryTool: scalpel
     actions:
-    - !type:ApplyBleedingSurgeryAction
+    - !type:ApplyBleedingAction
       bleedAmount: 2
 
 - type: abstractSurgeryEdge
@@ -72,7 +72,7 @@
     - !type:SurgeryToolTypeCondition
       surgeryTool: retractor
     actions:
-    - !type:ApplyBleedingSurgeryAction
+    - !type:ApplyBleedingAction
       bleedAmount: -2
 
 - type: abstractSurgeryEdge
@@ -85,7 +85,7 @@
     - !type:SurgeryToolTypeCondition
       surgeryTool: saw
     actions:
-    - !type:ApplyBleedingSurgeryAction
+    - !type:ApplyBleedingAction
       bleedAmount: 2
 
 - type: abstractSurgeryEdge
@@ -98,7 +98,7 @@
     - !type:SurgeryToolTypeCondition
       surgeryTool: hemostat
     actions:
-    - !type:ApplyBleedingSurgeryAction
+    - !type:ApplyBleedingAction
       bleedAmount: -2
 
 - type: abstractSurgeryEdge
@@ -111,5 +111,5 @@
     - !type:SurgeryToolTypeCondition
       surgeryTool: cautery
     actions:
-    - !type:ApplyBleedingSurgeryAction
+    - !type:ApplyBleedingAction
       bleedAmount: -2

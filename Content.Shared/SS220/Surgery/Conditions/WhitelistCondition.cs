@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.Surgery.Graph;
+using Content.Shared.Whitelist;
 using JetBrains.Annotations;
 
 namespace Content.Shared.SS220.Surgery.Conditions;
@@ -8,21 +9,17 @@ namespace Content.Shared.SS220.Surgery.Conditions;
 [UsedImplicitly]
 [Serializable]
 [DataDefinition]
-public sealed partial class SurgeryHaveComponentCondition : ISurgeryGraphCondition
+public sealed partial class WhitelistCondition : ISurgeryGraphCondition
 {
     [DataField(required: true)]
-    public string Component = "";
+    public EntityWhitelist Whitelist;
 
-    public bool Condition(EntityUid uid, IEntityManager entityManager)
+    public bool Condition(EntityUid targetUid, EntityUid toolUid, EntityUid userUid, IEntityManager entityManager)
     {
-        var compReg = entityManager.ComponentFactory.GetRegistration(Component);
-        if (entityManager.HasComponent(uid, compReg.Type))
-            return true;
-
-        return false;
+        return entityManager.System<EntityWhitelistSystem>().IsWhitelistPass(Whitelist, toolUid);
     }
 
-    public string ConditionDescriptionLocPath()
+    public string ConditionDescription()
     {
         return "ConditionDescriptionLocPath";
     }

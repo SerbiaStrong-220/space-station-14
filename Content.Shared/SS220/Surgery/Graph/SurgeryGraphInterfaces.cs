@@ -5,13 +5,13 @@ namespace Content.Shared.SS220.Surgery.Graph;
 [ImplicitDataDefinitionForInheritors]
 public partial interface ISurgeryGraphCondition
 {
-    public bool Condition(EntityUid uid, IEntityManager entityManager);
-    public string ConditionDescriptionLocPath();
+    public bool Condition(EntityUid targetUid, EntityUid toolUid, EntityUid userUid, IEntityManager entityManager);
+    public string ConditionDescription();
 }
 
 [ImplicitDataDefinitionForInheritors]
 public partial interface ISurgeryGraphAction
 {
-    void PerformAction(EntityUid uid, EntityUid? userUid, EntityUid? used, IEntityManager entityManager);
+    void PerformAction(EntityUid uid, EntityUid userUid, EntityUid? used, IEntityManager entityManager);
 }
 

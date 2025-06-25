@@ -30,30 +30,19 @@
   - node: saw bone
     baseNode: saw bone
     edges:
-    - to: clamp bleeders
-      baseEdge: clamp bleeders
-  - node: clamp bleeders
-    baseNode: clamp bleeders
+    - to: heart incision
+      baseEdge: incision
+  - node: heart incision
+    baseNode: incision
     edges:
-    - to: fix disfunction
-      delay: 6
-      sound:
-        path: /Audio/SS220/Surgery/organ.ogg
-        params:
-          variation: 0.125
+    - to: heart incision
+      actions:
+      - !type:TryCompactDefibZapAction
       conditions:
       - !type:WhitelistCondition
         whitelist:
           components:
-          - MindSlaveDisfunctionFixer
-      actions:
-      - !type:FixMindSlaveDisfunctionAction
-  - node: fix disfunction
-    nodeText:
-      examineDescription: mind-slave-disfunction-fix-surgery-examine-description
-      popup: mind-slave-disfunction-fix-surgery-popup
-      description: mind-slave-disfunction-fix-surgery-description
-    edges:
+          - DirectCompactDefibrillator
     - to: seal wound
       baseEdge: seal wound
   - node: seal wound

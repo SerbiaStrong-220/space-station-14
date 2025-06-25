@@ -28,17 +28,17 @@ public sealed partial class TreatmentSuggestion : Control
         TreatmentSuggestionText.Text = builder.ToString();
     }
 
-    private void AddSection(List<string> data, string sectionName, StringBuilder builder)
+    private void AddSection(List<string> dataLocPaths, string sectionName, StringBuilder builder)
     {
-        if (data.Count == 0)
+        if (dataLocPaths.Count == 0)
             return;
 
         builder.Append(sectionName);
 
-        foreach (var text in data)
+        foreach (var locPath in dataLocPaths)
         {
             builder.Append(InSectionTextTabulation);
-            builder.AppendLine(text);
+            builder.AppendLine(Loc.GetString(locPath));
         }
     }
 }

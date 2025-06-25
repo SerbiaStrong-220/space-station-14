@@ -4,7 +4,6 @@ treatment-recommendation-problem-section-name = Обнаруженные про�
 treatment-recommendation-operation-section-name = Рекомендованные процедуры:
 treatment-recommendation-suggestion-section-name = Напоминание:
 
-
 treatment-recommendation-more-200-damage = Тело пациента слишком повреждено!
 treatment-recommendation-more-200-damage-help = Рекомендуется восстановить тело. При помощи { ent-HandheldHealthAnalyzer } проверьте категории повреждений. Механические и ожоги можно восстановить при помощи операции TODO_НАМЕ или специализированных наборов.
 

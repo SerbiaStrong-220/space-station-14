@@ -1,0 +1,51 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: surgeryGraph
+  id: HealDeadBody
+  nameLocPath: surgery-heal-dead-body-name
+  descriptionLocPath: surgery-heal-dead-body-description
+  postscriptLocPath: surgery-heal-dead-body-postscript
+  targetPuppetPart: torso
+  start: start
+  end: seal wound
+  graph:
+  - node: start
+    nodeText:
+      examineDescription: surgery-heal-dead-body-examine-description
+      popup: surgery-heal-dead-body-popup
+      description: surgery-heal-dead-body-description
+    edges:
+    - to: incision
+      baseEdge: incision
+      actions:
+      - !type:ApplyBleedingAction
+        bleedAmount: 0
+  - node: incision
+    baseNode: incision
+    edges:
+    - to: retract skin
+      baseEdge: retract skin
+  - node: retract skin
+    baseNode: retract skin
+    edges:
+    - to: retract skin
+      baseEdge: retract skin
+      actions:
+      - !type:ConsumeReagentInHandAction
+        reagentId: Tricordrazine
+        consumedAmount: 5
+      - !type:ApplyDamageAction
+        damage:
+          groups:
+            Brute: -10
+            Burn: -10
+      conditions:
+      - !type:SurgeryToolTypeCondition
+        surgeryTool: retractor
+      - !type:HaveReagentInHandCondition
+        reagentId: Tricordrazine
+        consumedAmount: 5
+    - to: seal wound
+      baseEdge: seal wound
+  - node: seal wound
+    baseNode: seal wound

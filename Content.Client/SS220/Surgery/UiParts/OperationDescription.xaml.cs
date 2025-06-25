@@ -104,9 +104,9 @@ public sealed partial class OperationDescription : Control
 
         foreach (var condition in surgeryConditions)
         {
-            var infoLocPath = condition.ConditionDescriptionLocPath();
+            var info = condition.ConditionDescription();
             builder.Append(NodeDataTabulation);
-            builder.AppendLine(Loc.GetString(infoLocPath));
+            builder.AppendLine(info);
         }
     }
 }
