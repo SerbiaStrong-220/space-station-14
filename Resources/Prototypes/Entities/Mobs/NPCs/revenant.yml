@@ -55,6 +55,7 @@
       settings: default
   - type: GhostTakeoverAvailable
   - type: Revenant
+    stunTime: 4 # SS220 revenant-buff
     malfunctionWhitelist:
       components:
       # emag lockers open
@@ -97,19 +98,35 @@
   #ss220 spec fix end
   #ss220 revenant buff start
   - type: DamageOnAttacked
+    popupText: revenant-attacked-by-popup
     damage:
       types:
         Cold: 10
     ignoreResistances: true
-  - type: DamageContacts
+  - type: DamageOnStunContact
     damage:
       types:
-        Cold: 5 #may be painful if spammed, but doesnt ignores protection.
-  - type: Electrified #idk this seems lame but it works fine
-    shockTime: 8 #4 seconds of stun
-    shockDamage: 2
-    requirePower: false
-    ignoreInsulation: true
+        Cold: 11
+    specialDamageWhitelist:
+      components:
+      - MindShield
+    specialDamage:
+      types:
+        Cold: 26
+  - type: StunsContacts
+    stunTime: 2
+    stunDelayTime: 1
+  - type: HallucinationImmune
+  - type: HallucinationSource
+    range: 5
+    isActive: false
+    hallucination:
+        componentName: MindShield
+        randomEntities: HallucinationRevenant
+        betweenHallucinations: 0.5
+        hallucinationMinTime: 5
+        hallucinationMaxTime: 10
+        totalDuration: 20
   #ss220 revenant buff end
   - type: BlockBuckleVerbsInteraction #ss220 revenant unbuckle verbs interaction fix
   - type: Reactive

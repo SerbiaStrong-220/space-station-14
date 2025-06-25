@@ -2627,7 +2627,23 @@
        !type:String
        pda-wizard
   - type: PdaBorderColor
-    borderColor: "#7F3300"
+    borderColor: "#cf7207" # SS220 Wizard getting used to
   - type: Icon
-    sprite: Objects/Devices/pda.rsi
+    sprite: SS220/Objects/Devices/pda.rsi # SS220 Wizard getting used to
     state: pda-wizard
+    # SS220 Wizard getting used to Begin
+  - type: Sprite
+    sprite: SS220/Objects/Devices/pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - state: "screen-library"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+    # SS220 Wizard getting used to End

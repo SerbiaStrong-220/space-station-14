@@ -21,6 +21,8 @@ public sealed class HallucinationSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
+    private const float HallucinationRadius = 5f;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -89,7 +91,7 @@ public sealed class HallucinationSystem : EntitySystem
         var spawnedEntityUid = EntityManager.SpawnAtPosition(randomProto.ID,
                                                             Transform(_playerManager.LocalEntity!.Value).Coordinates);
         var randomCoordinates = _transformSystem.GetWorldPosition(_playerManager.LocalEntity!.Value)
-                                + new Vector2(_random.NextFloat(-6f, 6f), _random.NextFloat(-6f, 6f));
+                                + new Vector2(_random.NextFloat(-HallucinationRadius, HallucinationRadius), _random.NextFloat(-HallucinationRadius, HallucinationRadius));
         _transformSystem.SetWorldPosition(spawnedEntityUid, randomCoordinates);
 
         var lifeTime = _random.NextFloat(hallucination.TimeParams.HallucinationMinTime, hallucination.TimeParams.HallucinationMaxTime);
