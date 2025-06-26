@@ -41,7 +41,6 @@ using Content.Shared.SS220.RestrictedItem;
 using Content.Shared.SS220.Roles;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.SS220.Telepathy;
-using JetBrains.FormatRipper.Elf;
 using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
