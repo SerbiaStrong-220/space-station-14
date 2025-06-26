@@ -114,7 +114,7 @@
     - CombatKnife
     - Knife
   - type: Sprite
-    sprite: Objects/Weapons/Melee/combat_knife.rsi
+    sprite: SS220/Objects/Weapons/Melee/combat_knife.rsi #ss220 resprite
     state: icon
   - type: MeleeWeapon
     wideAnimationRotation: -135
@@ -131,10 +131,10 @@
       types:
         Slash: 10
   - type: Item
-    sprite: Objects/Weapons/Melee/combat_knife.rsi
+    sprite: SS220/Objects/Weapons/Melee/combat_knife.rsi #ss220 resprite
     storedSprite:
       state: storage
-      sprite: Objects/Weapons/Melee/combat_knife.rsi
+      sprite: SS220/Objects/Weapons/Melee/combat_knife.rsi #ss220 resprite
   - type: DisarmMalus
     malus: 0.225
   - type: ThrowingAngle
