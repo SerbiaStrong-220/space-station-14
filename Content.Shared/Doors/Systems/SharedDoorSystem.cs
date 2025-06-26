@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
@@ -12,19 +11,20 @@ using Content.Shared.Popups;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Prying.Components;
 using Content.Shared.Prying.Systems;
+using Content.Shared.SS220.Doors;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Tools.Systems;
 using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Map.Components;
-using Content.Shared.SS220.AccessWhitelist;
+using System.Linq;
 
 namespace Content.Shared.Doors.Systems;
 
@@ -48,7 +48,6 @@ public abstract partial class SharedDoorSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
-    [Dependency] private readonly SharedAccessWhitelistSystem _accessWhitelist = default!;//SS220 ChameleonStructure
 
 
     [ValidatePrototypeId<TagPrototype>]
@@ -642,7 +641,10 @@ public abstract partial class SharedDoorSystem : EntitySystem
             return true;
 
         //SS220 ChameleonStructure start
-        if (TryComp<AccessWhitelistComponent>(uid, out var accessWhitlist) && !_accessWhitelist.CheckAccess((uid, accessWhitlist), user))
+        var ev = new DoorAccesAttemptEvent(user);
+        RaiseLocalEvent(uid, ref ev);
+
+        if (ev.Cancelled)
             return false;
         //SS220 ChameleonStructure end
 
