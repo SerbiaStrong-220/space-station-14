@@ -299,7 +299,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (sacrComp.WasSacraficed)
             return;
 
-        SetNewSacraficial(rule.Comp, sacrComp.Tier);
+        SetNewSacraficial(rule.Value.Comp, sacrComp.Tier);
 
         RemComp<CultYoggSacrificialComponent>(args.Entity);
 
@@ -330,10 +330,10 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (!TryGetCultGameRule(out var rule))
             return;
 
-        if (!TryMakeCultistMind(args.Target.Value, rule, true))
+        if (!TryMakeCultistMind(args.Target.Value, rule.Value, true))
             return;
 
-        MakeCultist(args.Target.Value, rule, false);
+        MakeCultist(args.Target.Value, rule.Value, false);
     }
     #endregion
 
@@ -421,9 +421,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (!TryGetCultGameRule(out var rule))
             return;
 
-        DeCultMind(args.Entity, rule.Comp);
+        DeCultMind(args.Entity, rule.Value.Comp);
 
-        DeMakeCultist(args.Entity, rule.Comp);
+        DeMakeCultist(args.Entity, rule.Value.Comp);
     }
 
     public void DeCultMind(EntityUid uid, CultYoggRuleComponent component)
@@ -484,8 +484,8 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (!TryGetCultGameRule(out var rule))
             return;
 
-        var ev = new TelepathyAnnouncementSendEvent(message, rule.Comp.TelepathyChannel);
-        RaiseLocalEvent(rule, ev, true);
+        var ev = new TelepathyAnnouncementSendEvent(message, rule.Value.Comp.TelepathyChannel);
+        RaiseLocalEvent(rule.Value, ev, true);
     }
     #endregion
 
@@ -662,9 +662,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     }
     #endregion
 
-    public bool TryGetCultGameRule(out Entity<CultYoggRuleComponent> rule)
+    public bool TryGetCultGameRule([NotNullWhen(true)] out Entity<CultYoggRuleComponent>? rule)
     {
-        rule = default;
+        rule = null;
 
         var query = QueryAllRules();
         while (query.MoveNext(out var uid, out var cultComp, out _))

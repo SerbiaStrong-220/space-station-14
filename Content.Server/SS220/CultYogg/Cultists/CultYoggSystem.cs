@@ -318,8 +318,9 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
     private void OnCloning(Entity<CultYoggComponent> ent, ref CloningEvent args)//ToDo_SS220 somthing wierd happned when we are cloning with cult markings
     {
-        _cultRuleSystem.TryGetCultGameRule(out var rule);
+        if (!_cultRuleSystem.TryGetCultGameRule(out var rule))
+            return;
 
-        _cultRuleSystem.MakeCultist(args.CloneUid, rule);
+        _cultRuleSystem.MakeCultist(args.CloneUid, rule.Value);
     }
 }
