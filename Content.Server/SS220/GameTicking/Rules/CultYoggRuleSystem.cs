@@ -350,14 +350,14 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     /// The separation is made for better operation of the cloner and from potential other problems.
     /// </summary>
     /// <param name="initial">Flag for appearing in post-match credits</param>
-    /// <param name="shouldBebriefed">Should there be sounds and briefing?</param>
-    public bool TryMakeCultistMind(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false, bool shouldBebriefed = true)
+    /// <param name="sendBriefing">Should there be sounds and briefing?</param>
+    public bool TryMakeCultistMind(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false, bool sendBriefing = true)
     {
         //Grab the mind if it wasnt provided
         if (!_mind.TryGetMind(uid, out var mindId, out var mindComp))
             return false;
 
-        if (shouldBebriefed)
+        if (sendBriefing)
             _antag.SendBriefing(uid, Loc.GetString("cult-yogg-role-greeting"), null, rule.Comp.GreetSoundNotification);
 
         if (initial && !rule.Comp.InitialCultistMinds.Contains(mindId))
@@ -386,7 +386,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         return true;
     }
 
-    public void MakeCultist(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false, bool shouldBebriefed = true)
+    public void MakeCultist(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false, bool sendBriefing = true)
     {
         // Change the faction
         _npcFaction.RemoveFaction(uid, rule.Comp.NanoTrasenFaction, false);

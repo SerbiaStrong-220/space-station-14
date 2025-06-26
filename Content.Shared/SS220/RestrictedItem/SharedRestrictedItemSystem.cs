@@ -35,7 +35,7 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
 
     private void OnPickupAttempt(Entity<RestrictedItemComponent> ent, ref GettingPickedUpAttemptEvent args)
     {
-        if (!ItemCheck(args.User, ent))
+        if (!CanInteract(args.User, ent))
             args.Cancel();
     }
 
@@ -44,17 +44,17 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
         if (ent.Comp.CanBePulled)
             return;
 
-        if (!ItemCheck(args.Puller, ent))
+        if (!CanInteract(args.Puller, ent))
             args.Cancel();
     }
 
     private void OnEquipAttempt(Entity<RestrictedItemComponent> ent, ref BeingEquippedAttemptEvent args)
     {
-        if (!ItemCheck(args.EquipTarget, ent))
+        if (!CanInteract(args.EquipTarget, ent))
             args.Cancel();
     }
 
-    protected bool ItemCheck(EntityUid user, Entity<RestrictedItemComponent> item)
+    protected bool CanInteract(EntityUid user, Entity<RestrictedItemComponent> item)
     {
         if (_adminManager.IsAdmin(user))
             return true;
