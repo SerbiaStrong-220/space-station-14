@@ -4,7 +4,6 @@ using Content.Client.IconSmoothing;
 using Content.Shared.SS220.ChameleonStructure;
 using Robust.Client.GameObjects;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Spawners;
 
 namespace Content.Client.SS220.ChameleonStructure;
 
@@ -26,7 +25,7 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
     private void OnProtoReloaded(PrototypesReloadedEventArgs args)
     {
         if (args.WasModified<EntityPrototype>())
-            PrepareAllVariants();
+            UpdateData();
     }
 
     private void HandleState(Entity<ChameleonStructureComponent> ent, ref AfterAutoHandleStateEvent args)

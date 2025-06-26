@@ -19,12 +19,12 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
 
     private void OnMapInit(Entity<ChameleonStructureComponent> ent, ref MapInitEvent args)
     {
-        if (string.IsNullOrEmpty(ent.Comp.Default))
+        if (string.IsNullOrEmpty(ent.Comp.Prototype))
         {
-            ent.Comp.Default = MetaData(ent).EntityPrototype?.ID;//Not sure if this secure from null
+            ent.Comp.Prototype = MetaData(ent).EntityPrototype?.ID;//Not sure if this secure from null
         }
 
-        SetSelectedPrototype(ent, ent.Comp.Default, true);
+        SetSelectedPrototype(ent, ent.Comp.Prototype, true);
     }
 
     private void OnSelected(Entity<ChameleonStructureComponent> ent, ref ChameleonStructurePrototypeSelectedMessage args)
@@ -34,18 +34,18 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
 
     private void UpdateUi(Entity<ChameleonStructureComponent> ent)
     {
-        var state = new ChameleonStructureBoundUserInterfaceState(ent.Comp.Default, ent.Comp.RequireTag);
+        var state = new ChameleonStructureBoundUserInterfaceState(ent.Comp.Prototype, ent.Comp.RequireTag);
         UI.SetUiState(ent.Owner, ChameleonStructureUiKey.Key, state);
     }
 
     /// <summary>
-    ///     Change chameleon items name, description and sprite to mimic other entity prototype.
+    ///     Change chameleon structure name, description and sprite to mimic other entity prototype.
     /// </summary>
     public void SetSelectedPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false)
     {
         // check that wasn't already selected
         // forceUpdate on component init ignores this check
-        if (ent.Comp.Default == protoId && !forceUpdate)
+        if (ent.Comp.Prototype == protoId && !forceUpdate)
             return;
 
         // make sure that it is valid change
@@ -55,7 +55,7 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
         if (!IsValidTarget(proto, ent.Comp.RequireTag))
             return;
 
-        ent.Comp.Default = protoId;
+        ent.Comp.Prototype = protoId;
         UpdateVisuals(ent);
 
         UpdateUi(ent);

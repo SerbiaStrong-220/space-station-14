@@ -24,12 +24,12 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
 
         SubscribeLocalEvent<ChameleonStructureComponent, GetVerbsEvent<InteractionVerb>>(OnVerb);
         SubscribeLocalEvent<ChameleonStructureComponent, PrototypesReloadedEventArgs>(OnPrototypeReload);
-        PrepareAllVariants();
+        UpdateData();
     }
 
     private void OnPrototypeReload(Entity<ChameleonStructureComponent> ent, ref PrototypesReloadedEventArgs args)
     {
-        PrepareAllVariants();
+        UpdateData();
     }
     private void OnVerb(Entity<ChameleonStructureComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
     {
@@ -53,10 +53,10 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
 
     protected void UpdateVisuals(Entity<ChameleonStructureComponent> ent)
     {
-        if (string.IsNullOrEmpty(ent.Comp.Default))
+        if (string.IsNullOrEmpty(ent.Comp.Prototype))
             return;
 
-        if (!_proto.TryIndex(ent.Comp.Default, out EntityPrototype? proto))
+        if (!_proto.TryIndex(ent.Comp.Prototype, out EntityPrototype? proto))
             return;
 
         UpdateSprite(ent, proto); // maybe later figure out
@@ -91,7 +91,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         return _data;
     }
 
-    protected void PrepareAllVariants()
+    protected void UpdateData()
     {
         _data.Clear();
         var prototypes = _proto.EnumeratePrototypes<EntityPrototype>();
