@@ -488,7 +488,7 @@
   groups:
   - GroupTankHarness
   - MedicalDoctorHead
-  - MedicalGlasses #SS220-Two Floppa Iteration
+# - MedicalGlasses #SS220-Two Floppa Iteration
   - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - MedicalDoctorJumpsuit
@@ -540,7 +540,7 @@
   - ParamedicHead
   - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
-  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
+# - MedicalGlasses #SS220-Two Floppa Iteration
   - ParamedicJumpsuit
   - MedicalGloves
   - MedicalBackpack
