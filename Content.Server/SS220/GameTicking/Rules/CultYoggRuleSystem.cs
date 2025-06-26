@@ -347,6 +347,11 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         MakeCultist(args.EntityUid, ent, true);
     }
 
+    /// <summary>
+    /// The separation is made for better operation of the cloner and from potential other problems.
+    /// </summary>
+    /// <param name="initial">Flag for appearing in post-match credits</param>
+    /// <param name="shouldBebriefed">Should there be sounds and briefing?</param>
     public bool TryMakeCultistMind(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false, bool shouldBebriefed = true)
     {
         //Grab the mind if it wasnt provided
