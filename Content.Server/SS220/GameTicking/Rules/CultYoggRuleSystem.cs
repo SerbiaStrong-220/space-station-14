@@ -41,6 +41,7 @@ using Content.Shared.SS220.RestrictedItem;
 using Content.Shared.SS220.Roles;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.SS220.Telepathy;
+using JetBrains.FormatRipper.Elf;
 using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -330,6 +331,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (!TryGetCultGameRule(out var rule))
             return;
 
+        if (!TryMakeCultistMind(args.Target.Value, rule, true))
+            return;
+
         MakeCultist(args.Target.Value, rule, false);
     }
     #endregion
@@ -337,20 +341,49 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     #region Cultists making
     private void AfterEntitySelected(Entity<CultYoggRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
+        if (!TryMakeCultistMind(args.EntityUid, ent, true))
+            return;
+
         MakeCultist(args.EntityUid, ent, true);
     }
 
-    public void MakeCultist(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false)
+    public bool TryMakeCultistMind(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false, bool shouldBebriefed = true)
     {
         //Grab the mind if it wasnt provided
         if (!_mind.TryGetMind(uid, out var mindId, out var mindComp))
-            return;
+            return false;
 
-        _antag.SendBriefing(uid, Loc.GetString("cult-yogg-role-greeting"), null, rule.Comp.GreetSoundNotification);
+        if (shouldBebriefed)
+            _antag.SendBriefing(uid, Loc.GetString("cult-yogg-role-greeting"), null, rule.Comp.GreetSoundNotification);
 
-        if (initial && !rule.Comp.InitialCultistMinds.Contains (mindId))
+        if (initial && !rule.Comp.InitialCultistMinds.Contains(mindId))
             rule.Comp.InitialCultistMinds.Add(mindId);
 
+        foreach (var obj in rule.Comp.ListofObjectives)
+        {
+            _role.MindAddRole(mindId, rule.Comp.MindCultYoggAntagId, mindComp, true);
+            var objective = _mind.TryAddObjective(mindId, mindComp, obj);
+        }
+
+        rule.Comp.TotalCultistsConverted++;
+
+        var amountOfCultists = rule.Comp.TotalCultistsConverted;
+        var totalCrew = rule.Comp.InitialCrewCount;
+
+        while (TryGetNextStage(rule, out var nextStage, out var nextStageDefinition)
+            && nextStageDefinition.CultistsFractionRequired is { } cultistsFractionRequired
+            && cultistsFractionRequired * totalCrew <= amountOfCultists)
+        {
+            ProgressToStage(rule, nextStage);
+        }
+
+        DirtyEntity(mindId);//Not quite sure if it is required
+
+        return true;
+    }
+
+    public void MakeCultist(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false, bool shouldBebriefed = true)
+    {
         // Change the faction
         _npcFaction.RemoveFaction(uid, rule.Comp.NanoTrasenFaction, false);
         _npcFaction.AddFaction(uid, rule.Comp.CultYoggFaction);
@@ -373,23 +406,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         EnsureComp<ShowCultYoggIconsComponent>(uid);//icons of cultists and sacraficials
         EnsureComp<ZombieImmuneComponent>(uid);//they are practically mushrooms
 
-        foreach (var obj in rule.Comp.ListofObjectives)
-        {
-            _role.MindAddRole(mindId, rule.Comp.MindCultYoggAntagId, mindComp, true);
-            var objective = _mind.TryAddObjective(mindId, mindComp, obj);
-        }
-
-        rule.Comp.TotalCultistsConverted++;
-
-        var amountOfCultists = rule.Comp.TotalCultistsConverted;
-        var totalCrew = rule.Comp.InitialCrewCount;
-        while (TryGetNextStage(rule, out var nextStage, out var nextStageDefinition)
-            && nextStageDefinition.CultistsFractionRequired is { } cultistsFractionRequired
-            && cultistsFractionRequired * totalCrew <= amountOfCultists)
-        {
-            ProgressToStage(rule, nextStage);
-        }
-
         DirtyEntity(uid);
     }
     #endregion
@@ -401,10 +417,12 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (!TryGetCultGameRule(out var rule))
             return;
 
+        DeCultMind(args.Entity, rule.Comp);
+
         DeMakeCultist(args.Entity, rule.Comp);
     }
 
-    public void DeMakeCultist(EntityUid uid, CultYoggRuleComponent component)
+    public void DeCultMind(EntityUid uid, CultYoggRuleComponent component)
     {
         if (!_mind.TryGetMind(uid, out var mindId, out var mindComp))
             return;
@@ -422,6 +440,17 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         _role.MindRemoveRole<CultYoggRoleComponent>(mindId);
 
+        if (mindComp.UserId != null &&
+            _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
+        {
+            _euiManager.OpenEui(new DeCultReminderEui(), session);
+        }
+
+        DirtyEntity(mindId);//Not quite sure if it is required
+    }
+
+    public void DeMakeCultist(EntityUid uid, CultYoggRuleComponent component)
+    {
         //Remove all corrupted items
         _stuckOnEquip.RemoveAllStuckItems(uid);
 
@@ -438,12 +467,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         RemComp<ShowCultYoggIconsComponent>(uid);
         RemComp<ZombieImmuneComponent>(uid);
-
-        if (mindComp.UserId != null &&
-            _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
-        {
-            _euiManager.OpenEui(new DeCultReminderEui(), session);
-        }
 
         DirtyEntity(uid);
     }

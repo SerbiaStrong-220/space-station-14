@@ -20,6 +20,7 @@ using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.EntityEffects;
 using Content.Shared.SS220.StuckOnEquip;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -318,5 +319,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     private void OnCloning(Entity<CultYoggComponent> ent, ref CloningEvent args)
     {
         _cultRuleSystem.TryGetCultGameRule(out var rule);
+
+        _cultRuleSystem.MakeCultist(args.CloneUid, rule);
     }
 }
