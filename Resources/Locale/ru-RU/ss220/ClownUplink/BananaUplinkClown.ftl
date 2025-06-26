@@ -38,6 +38,6 @@ uplink-clown-category-trinkets = Безделушки
 
 uplink-clown-currency = Банановая кожура
 
-ent-BananaPhoneInstrument2 = бананафон
+ent-ClownUplink = бананафон
     .desc = Прямая связь с Великой Хонк-Матерью. Ответственный клоун временно отсутствует — оставьте кожуру после сигнала.
     .suffix = Аплинк Клоун
