@@ -71,7 +71,6 @@ public sealed class SharedDodgeSystem : EntitySystem
                 dodgeChance = 0f;
                 return;
             }
-
             if (TryComp<DamageableComponent>(ent, out var damageable))
             {
                 var damagePercent = (float)damageable.TotalDamage / (float)mobThresholds.Thresholds.Last().Key;
@@ -80,17 +79,9 @@ public sealed class SharedDodgeSystem : EntitySystem
         }
 
         if (TryComp<HungerComponent>(ent, out var hunger) && _hunger.GetHunger(hunger) < hunger.Thresholds[HungerThreshold.Okay])
-            // 200 -  максимум
-            // 150 < окей - 0f %
-            // 100 < голодаем - 0.05f %
-            // 50 < Очень голодны - 0.1f %
             dodgeChance += (float)Math.Round(_hunger.GetHunger(hunger) * 0.001f - 0.15f * ent.Comp.HungerAffect, 3);
 
         if (TryComp<ThirstComponent>(ent, out var thirst) && thirst.CurrentThirst < thirst.ThirstThresholds[ThirstThreshold.Okay])
-            // 600 -  максимум
-            // 450 < окей - 0f %
-            // 300 < жажда - 0.05f %
-            // 150 < Сильная жажда - 0.1f %
             dodgeChance += (float)Math.Round(thirst.CurrentThirst * 0.000333f - 0.15f * ent.Comp.ThirstAffect, 3);
     }
 }
