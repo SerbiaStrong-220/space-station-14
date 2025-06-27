@@ -11,5 +11,11 @@ public sealed partial class DodgeComponent : Component
     ///     Base chance to dodge bullet or hitscan.
     /// </summary>
     [DataField]
-    public float BaseDodgeChance = 0.15f;
+    public float BaseDodgeChance = 0.18f;
+
+    /// <summary>
+    ///     Multiplier of the effect of damage on the chance of dodge.
+    /// </summary>s
+    [DataField]
+    public float DamageAffect = 0.32f;
 }

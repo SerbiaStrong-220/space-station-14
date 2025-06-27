@@ -86,13 +86,7 @@ public sealed class SharedDodgeSystem : EntitySystem
                 // 0 = отлично
 
                 var damagePercent = (float)damageable.TotalDamage / (float)mobThresholds.Thresholds.Last().Key;
-                var damageAffect = damagePercent switch
-                {
-                    <= 0.005f => 0.025f,
-                    >= 0.44f => -0.05f,
-                    _ => -0.1491f * damagePercent * damagePercent - 0.10606f * damagePercent + 0.025533f
-                };
-                dodgeChance += (float)Math.Round(damageAffect, 4);
+                dodgeChance -= damagePercent * damagePercent * ent.Comp.DamageAffect;
             }
         }
 
