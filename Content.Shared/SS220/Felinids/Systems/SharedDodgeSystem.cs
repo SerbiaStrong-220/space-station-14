@@ -79,9 +79,9 @@ public sealed class SharedDodgeSystem : EntitySystem
         }
 
         if (TryComp<HungerComponent>(ent, out var hunger) && _hunger.GetHunger(hunger) < hunger.Thresholds[HungerThreshold.Okay])
-            dodgeChance += (float)Math.Round(_hunger.GetHunger(hunger) * 0.001f - 0.15f * ent.Comp.HungerAffect, 3);
+            dodgeChance -= ent.Comp.HungerAffect * (hunger.Thresholds[HungerThreshold.Okay] - _hunger.GetHunger(hunger)) / 1000f;
 
         if (TryComp<ThirstComponent>(ent, out var thirst) && thirst.CurrentThirst < thirst.ThirstThresholds[ThirstThreshold.Okay])
-            dodgeChance += (float)Math.Round(thirst.CurrentThirst * 0.000333f - 0.15f * ent.Comp.ThirstAffect, 3);
+            dodgeChance -= ent.Comp.ThirstAffect * (thirst.ThirstThresholds[ThirstThreshold.Okay] - thirst.CurrentThirst) / 3000f;
     }
 }
