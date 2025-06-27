@@ -6,6 +6,7 @@ using Content.Shared.Database;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.Felinids.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -19,6 +20,7 @@ public sealed class SharedDodgeSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedProjectileSystem _projectileSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly HungerSystem _hunger = default!;
 
     public override void Initialize()
     {
@@ -72,40 +74,23 @@ public sealed class SharedDodgeSystem : EntitySystem
 
             if (TryComp<DamageableComponent>(ent, out var damageable))
             {
-                // 200 хуман
-                // 1 урона - отлично: +2,5% - 0.005f
-                // 13 урона - хорошо: Нет в диздоке - 0.065f
-                // 38 урона - не очень: 0 - 0.19f
-                // 63 урона - плохо : -2,5% - 0.315f
-                // 88 урона  ужасно: -5% - 0.44f
-                // 180 фелинид
-                // 79 > урона - ужасно
-                // 56 > урона - плохо
-                // 33 > урона - не очень
-                // 11 > урона - хорошо
-                // 0 = отлично
-
                 var damagePercent = (float)damageable.TotalDamage / (float)mobThresholds.Thresholds.Last().Key;
-                dodgeChance -= damagePercent * damagePercent * ent.Comp.DamageAffect;
+                dodgeChance -= damagePercent * damagePercent * 0.32f * ent.Comp.DamageAffect;
             }
         }
 
-        if (TryComp<HungerComponent>(ent, out var hunger))
-        {
-            switch (hunger.CurrentThreshold)
-            {
-                case HungerThreshold.Peckish: dodgeChance += -0.05f; break;
-                case HungerThreshold.Starving: dodgeChance += -0.1f; break;
-            }
-        }
+        if (TryComp<HungerComponent>(ent, out var hunger) && _hunger.GetHunger(hunger) < hunger.Thresholds[HungerThreshold.Okay])
+            // 200 -  максимум
+            // 150 < окей - 0f %
+            // 100 < голодаем - 0.05f %
+            // 50 < Очень голодны - 0.1f %
+            dodgeChance += (float)Math.Round(_hunger.GetHunger(hunger) * 0.001f - 0.15f * ent.Comp.HungerAffect, 3);
 
-        if (TryComp<ThirstComponent>(ent, out var thirst))
-        {
-            switch (thirst.CurrentThirstThreshold)
-            {
-                case ThirstThreshold.Thirsty: dodgeChance += -0.05f; break;
-                case ThirstThreshold.Parched: dodgeChance += -0.1f; break;
-            }
-        }
+        if (TryComp<ThirstComponent>(ent, out var thirst) && thirst.CurrentThirst < thirst.ThirstThresholds[ThirstThreshold.Okay])
+            // 600 -  максимум
+            // 450 < окей - 0f %
+            // 300 < жажда - 0.05f %
+            // 150 < Сильная жажда - 0.1f %
+            dodgeChance += (float)Math.Round(thirst.CurrentThirst * 0.000333f - 0.15f * ent.Comp.ThirstAffect, 3);
     }
 }
