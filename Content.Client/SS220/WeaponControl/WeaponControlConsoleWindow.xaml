@@ -1,0 +1,12 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:bui="clr-namespace:Content.Client.SS220.WeaponControl"
+                      xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
+                      Title="{Loc 'weapon-control-console-window-title'}"
+                      SetSize="648 648"
+                      MinSize="256 256">
+    <ui:ShuttleNavControl Name="NavRadar"
+                     Margin="4"
+                     HorizontalExpand = "True"
+                     VerticalExpand = "True"/>
+</controls:FancyWindow>
