@@ -68,6 +68,15 @@ public sealed partial class EmotePrototype : IPrototype
     /// </summary>
     [DataField]
     public HashSet<string> ChatTriggers = new();
+
+    //SS220-conditional-emotes begin
+
+    /// <summary>
+    ///     Determines emote visibility in radial UI
+    /// </summary>
+    [DataField]
+    public bool UiAvailable = true;
+    //SS220-conditional-emotes begin
 }
 
 /// <summary>
