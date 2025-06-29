@@ -9,6 +9,8 @@
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/ce_dark.rsi
+  - type: StealTarget
+    stealGroup: HeadCloak
 
 - type: entity
   parent: ClothingNeckBase
@@ -37,7 +39,7 @@
   parent: ClothingNeckBase
   id: ClothingNeckCMOParadeCloak
   name: chief medical officer's parade cloak
-  description: The owner has seen everything and more. From the dwarf under the bahus to the smoking chemist in the lab. 
+  description: The owner has seen everything and more. From the dwarf under the bahus to the smoking chemist in the lab.
   suffix: For playtime
   components:
   - type: Sprite
