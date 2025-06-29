@@ -10,7 +10,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 28
+        Piercing: 40
+        Structural: 15
+
 
 - type: entity
   id: PelletShotgunBeanbag
@@ -24,8 +26,9 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 10
-        Stamina: 40 # 3 hits to stun
+        Blunt: 16 #ss220lowTTKUpdate
+  - type: StaminaDamageOnCollide
+    damage: 60 # 2 hits to stun #ss220lowTTKUpdate
 
 - type: entity
   id: PelletShotgun
@@ -39,7 +42,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Piercing: 15 #ss220lowTTKUpdate
+        Structural: 15
+
 
 - type: entity
   id: PelletShotgunSpread
@@ -49,7 +54,7 @@
   - type: ProjectileSpread
     proto: PelletShotgun
     count: 6
-    spread: 15
+    spread: 22 #ss220lowTTKUpdate
 
 - type: entity
   id: PelletShotgunIncendiary
@@ -63,8 +68,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 7 #weaponBalance
-        Heat: 3 #weaponBalance
+        Piercing: 10 #ss220weaponBalance #Incendary rebalance
+        Heat: 3 #ss220weaponBalance
   - type: IgnitionSource
     ignited: true
 
@@ -114,8 +119,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 4 #ss220 handmade gun buff
-        Slash: 5 #ss220 handmade gun buff
+        Piercing: 6 #ss220 handmade gun buff
+        Slash: 7 #ss220 handmade gun buff
 
 - type: entity
   id: PelletShotgunImprovisedSpread
@@ -214,7 +219,7 @@
     damage:
       types:
         Radiation: 5
-        Piercing: 5
+        Piercing: 7 #ss220lowTTKUpdate
 
 - type: entity
   id: PelletShotgunUraniumSpread

@@ -18,6 +18,7 @@ public sealed partial class PendingZombieComponent : Component
         DamageDict = new ()
         {
             { "Cellular", 0.33 }, // SS220 zombie-balance
+            { "Poison", 0.4 },
         }
     };
 

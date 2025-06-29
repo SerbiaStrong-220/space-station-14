@@ -38,7 +38,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Collections;
 using Content.Shared.SS220.DarkReaper;
 using Content.Shared.Ghost.Roles.Components;
-using Content.Shared.Roles.Jobs;
 
 namespace Content.Server.Ghost.Roles;
 
@@ -78,18 +77,22 @@ public sealed class GhostRoleSystem : EntitySystem
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(Reset);
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
+
         SubscribeLocalEvent<GhostTakeoverAvailableComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<GhostTakeoverAvailableComponent, MindRemovedMessage>(OnMindRemoved);
         SubscribeLocalEvent<GhostTakeoverAvailableComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<GhostTakeoverAvailableComponent, TakeGhostRoleEvent>(OnTakeoverTakeRole);
+
         SubscribeLocalEvent<GhostRoleComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<GhostRoleComponent, ComponentStartup>(OnRoleStartup);
         SubscribeLocalEvent<GhostRoleComponent, ComponentShutdown>(OnRoleShutdown);
         SubscribeLocalEvent<GhostRoleComponent, EntityPausedEvent>(OnPaused);
         SubscribeLocalEvent<GhostRoleComponent, EntityUnpausedEvent>(OnUnpaused);
+
         SubscribeLocalEvent<GhostRoleRaffleComponent, ComponentInit>(OnRaffleInit);
         SubscribeLocalEvent<GhostRoleRaffleComponent, ComponentShutdown>(OnRaffleShutdown);
+
         SubscribeLocalEvent<GhostRoleMobSpawnerComponent, TakeGhostRoleEvent>(OnSpawnerTakeRole);
-        SubscribeLocalEvent<GhostTakeoverAvailableComponent, TakeGhostRoleEvent>(OnTakeoverTakeRole);
         SubscribeLocalEvent<GhostRoleMobSpawnerComponent, GetVerbsEvent<Verb>>(OnVerb);
         SubscribeLocalEvent<GhostRoleMobSpawnerComponent, GhostRoleRadioMessage>(OnGhostRoleRadioMessage);
         _playerManager.PlayerStatusChanged += PlayerStatusChanged;
@@ -368,12 +371,6 @@ public sealed class GhostRoleSystem : EntitySystem
             return;
 
         _ghostRoles[role.Comp.Identifier = GetNextRoleIdentifier()] = role;
-        //SS220 Log-for-null-meta-excep begin
-        if (TryComp(role.Owner, out MetaDataComponent? metaData)
-                                        && metaData.EntityPrototype != null)
-            Log.Info($"|error in GhostRoleSystem| Added entity to _ghostRoles with uid - {role.Owner}, proto id: {metaData.EntityPrototype}");
-        else Log.Info($"|error in GhostRoleSystem| Added entity to _ghostRoles with uid - {role.Owner}, with null Meta");
-        //SS220 Log-for-null-meta-excep end
         UpdateAllEui();
     }
 
@@ -384,13 +381,6 @@ public sealed class GhostRoleSystem : EntitySystem
             return;
 
         _ghostRoles.Remove(comp.Identifier);
-        //SS220 Log-for-null-meta-excep begin
-        if (TryComp(role.Owner, out MetaDataComponent? metaData)
-                                        && metaData.EntityPrototype != null)
-            Log.Info($"|error in GhostRoleSystem| Removed entity from _ghostRoles with uid - {role.Owner}, proto id: {metaData.EntityPrototype}");
-        else
-            Log.Info($"|error in GhostRoleSystem| Removed entity from _ghostRoles with uid - {role.Owner}, with null Meta");
-        //SS220 Log-for-null-meta-excep end
         if (TryComp(role.Owner, out GhostRoleRaffleComponent? raffle))
         {
             // if a raffle is still running, get rid of it
@@ -578,10 +568,14 @@ public sealed class GhostRoleSystem : EntitySystem
 
         var newMind = _mindSystem.CreateMind(player.UserId,
             EntityManager.GetComponent<MetaDataComponent>(mob).EntityName);
-        _roleSystem.MindAddRole(newMind, new GhostRoleMarkerRoleComponent { Name = role.RoleName });
 
         _mindSystem.SetUserId(newMind, player.UserId);
         _mindSystem.TransferTo(newMind, mob);
+
+        _roleSystem.MindAddRoles(newMind.Owner, role.MindRoles, newMind.Comp);
+
+        if (_roleSystem.MindHasRole<GhostRoleMarkerRoleComponent>(newMind!, out var markerRole))
+            markerRole.Value.Comp2.Name = role.RoleName;
     }
 
     /// <summary>
@@ -679,10 +673,7 @@ public sealed class GhostRoleSystem : EntitySystem
 
         if (ghostRole.JobProto != null)
         {
-            if (HasComp<JobComponent>(args.Mind))
-                _roleSystem.MindRemoveRole<JobComponent>(args.Mind);
-
-            _roleSystem.MindAddRole(args.Mind, new JobComponent { Prototype = ghostRole.JobProto });
+            _roleSystem.MindAddJobRole(args.Mind, args.Mind, silent:false,ghostRole.JobProto);
         }
 
         ghostRole.Taken = true;

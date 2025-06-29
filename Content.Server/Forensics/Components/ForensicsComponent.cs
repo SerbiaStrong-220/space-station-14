@@ -9,6 +9,11 @@ namespace Content.Server.Forensics
         [DataField("fibers")]
         public HashSet<string> Fibers = new();
 
+		//SS220 Micro_fibers start
+        //Smth left from backpacks and pockets
+        [DataField("microFibers")]
+        public HashSet<string> MicroFibers = new();
+		//SS220 Micro_fibers end
         [DataField("dnas")]
         public HashSet<string> DNAs = new();
 

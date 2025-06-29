@@ -13,5 +13,6 @@ store-category-implants = Импланты
 store-category-job = Работа
 store-category-armor = Броня
 store-category-pointless = Безделушки
+store-discounted-items = Скидки
 # Revenant
 store-category-abilities = Способности

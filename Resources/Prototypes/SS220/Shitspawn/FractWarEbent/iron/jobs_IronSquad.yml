@@ -8,7 +8,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
+    access: [["SyndicateAgent"], ["NuclearOperative"]]
   - type: StorageFill
     contents:
     - id: ClothingHeadHatChameleon
@@ -48,6 +48,9 @@
       - id: EnergySwordDouble
       - id: DnaScramblerImplanter
       - id: ExGrenade
+      - id: GlowstickRed
+        amount: 2
+      - id: Binoculars
 
 - type: startingGear
   id: EbentIronSquadLeaderGear
@@ -63,8 +66,6 @@
     id: SyndiPDAAgentLeader
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltMilitaryWebbingEbent_IronSquad
-    pocket1: FreedomImplanter
-    pocket2: StorageImplanter
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadLeader
@@ -90,6 +91,11 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: IronSquadLeader
@@ -100,6 +106,7 @@
   setPreference: false
   canBeAntag: false
   access:
+  - SyndicateAgent
   - NuclearOperative
 
 - type: playTimeTracker
@@ -113,28 +120,19 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
+    access: [["SyndicateAgent"], ["NuclearOperative"]]
   - type: StorageFill
     contents:
-    - id: ClothingHeadHatChameleon
-    - id: ClothingUniformJumpsuitPyjamaSyndicateRed
-    - id: ClothingUniformJumpsuitPyjamaSyndicatePink
-    - id: ClothingUniformJumpskirtSyndieFormalDress
-    - id: ClothingUniformJumpsuitSyndieFormal
-    - id: ClothingOuterCoatSyndieCap
-    - id: ClothingHeadHatSyndie
-    - id: ClothingMaskNeckGaiter
-    - id: ClothingUniformJumpskirtOperative
-    - id: ClothingUniformJumpsuitOperative
     - id: SyndicateJawsOfLife
-    - id: ClothingHeadHatBeretMerc
     - id: ClothingNeckSyndicakePin
-    - id: ClothingNeckCloakHerald
-    - id: ClothingNeckCloakGoliathCloak
-    - id: ClothingNeckScarfStripedSyndieRed
     - id: ClothingBeltChiefEngineerFilled
     - id: JetpackVoidFilled
     - id: JobIconChangerIOT
+    - id: ClothingBackpackChameleonFill
+    - id: RCD
+    - id: RCDAmmo
+      amount: 4
+    - id: ClothingEyesGlassesMeson
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -155,12 +153,11 @@
         amount: 2
       - id: CombatMedipen
       - id: EnergySword
-      - id: RCD
-      - id: EnergyShield
-      - id: RCDAmmo
-        amount: 3
       - id: DnaScramblerImplanter
       - id: ExGrenade
+      - id: GlowstickRed
+        amount: 2
+      - id: Binoculars
 
 - type: startingGear
   id: EbentIronSquadEngineerGear
@@ -177,8 +174,6 @@
     id: SyndiPDAAgentEngineer
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltMilitaryWebbingEbent_IronSquad
-    pocket1: FreedomImplanter
-    pocket2: StorageImplanter
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadEngineer
@@ -204,6 +199,11 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: IronSquadEngineer
@@ -213,13 +213,9 @@
   playTimeTracker: IronSquadEngineer
   setPreference: false
   canBeAntag: false
-  accessGroups:
-  - Command
   access:
-  - Maintenance
-  - External
+  - SyndicateAgent
   - NuclearOperative
-  - Bar
 
 - type: playTimeTracker
   id: IronSquadEngineer
@@ -232,7 +228,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
+    access: [["SyndicateAgent"], ["NuclearOperative"]]
   - type: StorageFill
     contents:
     - id: ClothingUniformJumpsuitPyjamaSyndicateRed
@@ -240,12 +236,13 @@
     - id: ClothingMaskNeckGaiter
     - id: ClothingUniformJumpskirtOperative
     - id: ClothingUniformJumpsuitOperative
-    - id: ClothingBackpackDuffelSyndicateMedicalBundleFilled
     - id: BoxBeaker
       amount: 2
     - id: EmergencyRollerBedSpawnFolded
       amount: 2
     - id: ClothingEyesHudMedSec
+    - id: SyndiHypo
+    - id: DefibrillatorSyndicate
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -264,9 +261,10 @@
       - id: MagazinePistolSubMachineGun
         amount: 2
       - id: EnergySword
-      - id: SyndiHypo
       - id: DnaScramblerImplanter
       - id: ExGrenade
+      - id: GlowstickRed
+        amount: 2
 
 - type: startingGear
   id: EbentIronSquadCorpsmanGear
@@ -275,7 +273,7 @@
     back: ClothingBackpackNuclearCorpsman
     shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasNuclear
-    gloves: ClothingHandsGlovesNitrile
+    gloves: ClothingHandsGlovesCombat
     neck: ClothingCloakIronSquadMed
     outerClothing: ClothingOuterHardsuitIronMed
     suitstorage: OxygenTankFilled
@@ -313,6 +311,11 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: IronSquadCorpsman
@@ -322,13 +325,9 @@
   playTimeTracker: IronSquadCorpsman
   setPreference: false
   canBeAntag: false
-  accessGroups:
-  - Command
   access:
-  - Maintenance
-  - External
+  - SyndicateAgent
   - NuclearOperative
-  - Bar
 
 - type: playTimeTracker
   id: IronSquadCorpsman
@@ -341,7 +340,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
+    access: [["SyndicateAgent"], ["NuclearOperative"]]
   - type: StorageFill
     contents:
     - id: ClothingHeadHatChameleon
@@ -360,6 +359,8 @@
       amount: 2
     - id: ClothingEyesHudMedSec
     - id: JobIconChangerIOT
+    - id: SyndiHypo
+    - id: DefibrillatorSyndicate
 
 - type: entity
   parent: ClothingBackpackNuclear
@@ -380,11 +381,11 @@
         amount: 2
       - id: CombatMedipen
       - id: EnergySword
-      - id: BoxDeathRattleImplants
-      - id: SyndiHypo
-      - id: EnergyShield
       - id: DnaScramblerImplanter
       - id: ExGrenade
+      - id: GlowstickRed
+        amount: 2
+      - id: Binoculars
 
 - type: startingGear
   id: EbentIronSquadCMOGear
@@ -393,15 +394,14 @@
     back: ClothingBackpackNuclearCMO
     shoes: ClothingShoesBootsMagSyndieEbent
     mask: ClothingMaskGasNuclear
-    gloves: ClothingHandsGlovesNitrile
+    eyes: ClothingEyesHudMedical
+    gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitIronCMO
     suitstorage: OxygenTankFilled
     neck: ClothingCloakIronSquadCMO
     id: SyndiPDAAgentCMO
     ears: ClothingHeadsetAltSyndicateEbent
     belt: ClothingBeltMilitaryWebbingEbent_IronSquad
-    pocket1: FreedomImplanter
-    pocket2: StorageImplanter
 
 - type: entity
   id: RandomHumanoidSpawnerEbentIronSquadCMO
@@ -427,6 +427,11 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: IronSquadCMO
@@ -436,13 +441,9 @@
   playTimeTracker: IronSquadCMO
   setPreference: false
   canBeAntag: false
-  accessGroups:
-  - Command
   access:
-  - Maintenance
-  - External
+  - SyndicateAgent
   - NuclearOperative
-  - Bar
 
 - type: playTimeTracker
   id: IronSquadCMO
@@ -455,7 +456,7 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
+    access: [["SyndicateAgent"], ["NuclearOperative"]]
   - type: StorageFill
     contents:
     - id: ClothingHeadHatChameleon
@@ -485,6 +486,8 @@
       - id: EnergySword
       - id: DnaScramblerImplanter
       - id: ExGrenade
+      - id: GlowstickRed
+        amount: 2
 
 - type: startingGear
   id: EbentIronSquadTrooperGear
@@ -530,6 +533,11 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: IronSquadFighter
@@ -539,13 +547,9 @@
   playTimeTracker: IronSquadFighter
   setPreference: false
   canBeAntag: false
-  accessGroups:
-  - Command
   access:
-  - Maintenance
-  - External
+  - SyndicateAgent
   - NuclearOperative
-  - Bar
 
 - type: playTimeTracker
   id: IronSquadFighter

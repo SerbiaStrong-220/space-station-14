@@ -53,15 +53,14 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         {
             // Reset on disconnect, just in case.
             _roles.Clear();
+            _jobWhitelists.Clear();
+            _roleBans.Clear();
         }
     }
 
     private void RxRoleBans(MsgRoleBans message)
     {
         _sawmill.Debug($"Received roleban info containing {message.Bans.Count} entries.");
-
-        if (_roleBans.Equals(message.Bans))
-            return;
 
         _roleBans.Clear();
         _roleBans.AddRange(message.Bans);
@@ -190,4 +189,18 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
 
         return _roles;
     }
+
+    // SS220 Add role-ban check begin
+    public bool IsRoleBaned(string role, [NotNullWhen(true)] out FormattedMessage? reason)
+    {
+        if (_roleBans.Contains($"Job:{role}"))
+        {
+            reason = FormattedMessage.FromUnformatted(Loc.GetString("role-ban"));
+            return true;
+        }
+
+        reason = null;
+        return false;
+    }
+    // SS220 Add role-ban check end
 }

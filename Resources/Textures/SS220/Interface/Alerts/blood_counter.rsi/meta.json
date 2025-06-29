@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made for SS220 by DaGo7393 (Discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "blood0"
+    },
+    {
+      "name": "blood1"
+    },
+    {
+      "name": "blood2"
+    },
+    {
+      "name": "blood3"
+    },
+    {
+      "name": "blood4"
+    },
+    {
+      "name": "blood5"
+    },
+    {
+      "name": "blood6"
+    },
+    {
+      "name": "blood7"
+    },
+    {
+      "name": "blood8"
+    },
+    {
+      "name": "blood9"
+    },
+    {
+      "name": "blood10"
+    },
+    {
+      "name": "blood11"
+    },
+    {
+      "name": "blood12"
+    },
+    {
+      "name": "blood13"
+    },
+    {
+      "name": "blood14"
+    },
+    {
+      "name": "blood15"
+    },
+    {
+      "name": "blood16"
+    },
+    {
+      "name": "blood17"
+    },
+    {
+      "name": "blood18"
+    },
+    {
+      "name": "blood19"
+    },
+    {
+      "name": "blood20"
+    },
+    {
+      "name": "blood21"
+    },
+    {
+      "name": "blood22"
+    },
+    {
+      "name": "blood23"
+    }
+  ]
+}

@@ -8,26 +8,26 @@
       steps:
       - tag: Pipe
         icon:
-          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeStraight
-        name: pipe
+        name: construction-graph-tag-pipe
       #ss220 handmade gun buff
-      #- tag: ModularReceiver
-      #  icon:
-      #    sprite: Objects/Misc/modular_receiver.rsi
-      #    state: icon
-      #  name: modular receiver
+      # - tag: ModularReceiver
+      #   icon:
+      #     sprite: Objects/Misc/modular_receiver.rsi
+      #     state: icon
+      #   name: construction-graph-tag-modular-receiver
       - tag: RifleStock
         icon:
           sprite: Objects/Misc/rifle_stock.rsi
           state: icon
-        name: rifle stock
-      #ss220 handmade gun buff begin
+        name: construction-graph-tag-rifle-stock
+        #ss200 handmade gun buff begin
       - tag: Igniter
+        name: construction-graph-tag-igniter
         icon:
           sprite: Objects/Devices/igniter.rsi
           state: icon
-        name: Igniter
       - material: Cloth
         amount: 3
         doAfter: 25

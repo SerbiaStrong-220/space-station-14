@@ -193,10 +193,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-WetFloorSignMineExplosive-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-WetFloorSignMineExplosive-research
       jobRequired:
         - ResearchAssistant
@@ -204,7 +203,7 @@
         - Scientist
         - Borg
 # Corvax-HiddenDesc-End
-        
+
 - type: entity
   name: plunger
   id: Plunger
@@ -265,6 +264,9 @@
       types:
         Blunt: 3
   - type: Plunger
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 100
 
 - type: entity
   name: golden plunger

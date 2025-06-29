@@ -18,3 +18,11 @@
   - ChiefEngineer
   - Engineering
   - Atmospherics
+
+# SS220 revert "remove fire remote controller" begin
+- type: accessGroup
+  id: FireFight
+  tags:
+    - Engineering
+    - Atmospherics
+# SS220 revert "remove fire remote controller" end

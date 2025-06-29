@@ -8,6 +8,7 @@ using Content.Client.Options;
 using Content.Client.DebugMon;
 using Content.Client.Eui;
 using Content.Client.Fullscreen;
+using Content.Client.GameTicking.Managers;
 using Content.Client.GhostKick;
 using Content.Client.Guidebook;
 using Content.Client.Input;
@@ -22,6 +23,7 @@ using Content.Client.Replay;
 using Content.Client.Screenshot;
 using Content.Client.Singularity;
 using Content.Client.Stylesheets;
+using Content.Client.UserInterface;
 using Content.Client.Viewport;
 using Content.Client.Voting;
 using Content.Shared.Ame.Components;
@@ -40,6 +42,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Content.Client.SS220.Discord;
 using Robust.Shared.Timing;
+using Content.Client.SS220.TTS;
 
 namespace Content.Client.Entry
 {
@@ -79,6 +82,9 @@ namespace Content.Client.Entry
         [Dependency] private readonly ILogManager _logManager = default!;
         [Dependency] private readonly DiscordPlayerInfoManager _discordPlayerInfoManager = default!; // SS220 discord info manager
         [Dependency] private readonly DebugMonitorManager _debugMonitorManager = default!;
+        [Dependency] private readonly TitleWindowManager _titleWindowManager = default!;
+        [Dependency] private readonly TTSManager _ttsManager = default!; // SS220 TTS
+        [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
 
         public override void Init()
         {
@@ -149,6 +155,12 @@ namespace Content.Client.Entry
             _configManager.SetCVar("interface.resolutionAutoScaleMinimum", 0.5f);
         }
 
+        public override void Shutdown()
+        {
+            base.Shutdown();
+            _titleWindowManager.Shutdown();
+        }
+
         public override void PostInit()
         {
             base.PostInit();
@@ -172,7 +184,9 @@ namespace Content.Client.Entry
             _discordAuthManager.Initialize(); // Corvax-DiscordAuth
             _userInterfaceManager.SetActiveTheme(_configManager.GetCVar(CVars.InterfaceTheme));
             _documentParsingManager.Initialize();
-            _discordPlayerInfoManager.Initialize();
+            _discordPlayerInfoManager.Initialize(); // SS220 tier info
+            _titleWindowManager.Initialize();
+            _ttsManager.Initialize(); // SS220 TTS
 
             _baseClient.RunLevelChanged += (_, args) =>
             {
@@ -228,6 +242,15 @@ namespace Content.Client.Entry
             if (level == ModUpdateLevel.FramePreEngine)
             {
                 _debugMonitorManager.FrameUpdate();
+            }
+
+            if (level == ModUpdateLevel.PreEngine)
+            {
+                if (_baseClient.RunLevel is ClientRunLevel.InGame or ClientRunLevel.SinglePlayerGame)
+                {
+                    var updateSystem = _entitySystemManager.GetEntitySystem<BuiPreTickUpdateSystem>();
+                    updateSystem.RunUpdates();
+                }
             }
         }
     }

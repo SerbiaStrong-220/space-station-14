@@ -2,7 +2,7 @@
 - type: alert
   id: ItemOffer
   icons:
-  - sprite: /Textures/SS220/Alerts/ItemOfferAlarm.rsi
+  - sprite: /Textures/SS220/Interface/Alerts/item_offer.rsi
     state: mrrroew
   clickEvent: !type:ItemOfferAlertEvent
   name: Передача предмета

@@ -44,7 +44,7 @@
 # stacktype for SpaceCashFake
 - type: stack
   id: FakeCredit
-  name: speso
+  name: stack-fake-credit
   icon: { sprite: /Textures/Objects/Economy/cash.rsi, state: cash }
   spawn: SpaceCashFake
 

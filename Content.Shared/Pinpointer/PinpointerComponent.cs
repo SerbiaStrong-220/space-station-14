@@ -1,3 +1,4 @@
+using Content.Shared.SS220.Pinpointer;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -62,6 +63,39 @@ public sealed partial class PinpointerComponent : Component
 
     [ViewVariables]
     public bool HasTarget => DistanceToTarget != Distance.Unknown;
+
+    //ss220 add pinpointer ui start
+    [DataField]
+    [AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public HashSet<TrackedItem> Sensors = [];
+
+    [DataField]
+    [AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public HashSet<TrackedItem> TrackedItems = [];
+
+    [DataField]
+    [AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public PinpointerMode Mode = PinpointerMode.Crew;
+
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public EntityUid? TrackedByDnaEntity;
+
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public string? DnaToTrack;
+
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(2f);
+
+    [DataField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public TimeSpan NextUpdate;
+    //ss220 add pinpointer ui end
 }
 
 [Serializable, NetSerializable]

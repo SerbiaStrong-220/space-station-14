@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobCaptain
       time: 540000 #250 часов, форма для самых лучших
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: CapOfficerCutlass
@@ -16,6 +21,11 @@
       !type:RoleTimeRequirement
       role: JobCaptain
       time: 363600 # 101 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
 - type: loadout
@@ -25,6 +35,22 @@
     proto: CaptainSenior
   equipment:
     jumpsuit: ClothingUniformWhiteJumpsuitCaptain
+
+- type: loadout
+  id: CaptainWhiteJumpskirt
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    jumpsuit: ClothingUniformWhiteJumpskirtCaptain
+
+- type: loadout
+  id: CaptainWhiteFormalSuit
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWhiteCapFormal
 
 # Head
 - type: loadout
@@ -53,6 +79,22 @@
   equipment:
     head: ClothingHeadWhiteBeretCap
 
+- type: loadout
+  id: CaptainWhiteHat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    head: ClothingHeadWhiteCapHat
+
+- type: loadout
+  id: CaptainWhiteHardhat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    head: ClothingHeadWhiteCapHardhat
+
 # Neck
 - type: loadout
   id: CaptainFormalWhiteCloak
@@ -61,6 +103,14 @@
     proto: CaptainSenior
   equipment:
     neck: ClothingNeckCloakWhiteCapFormal
+
+- type: loadout
+  id: CaptainWhiteMantle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    neck: ClothingNeckWhiteMantleCap
 
 # Back
 - type: loadout
@@ -103,6 +153,14 @@
     proto: CaptainSenior
   equipment:
     outerClothing: ClothingOuterWhiteCoatCaptain
+
+- type: loadout
+  id: CaptainWhiteWintercoat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: CaptainSenior
+  equipment:
+    outerClothing: ClothingOuterWhiteWinterCap
 
 # Gloves
 

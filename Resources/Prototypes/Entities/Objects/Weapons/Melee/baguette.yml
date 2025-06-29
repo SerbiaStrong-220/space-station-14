@@ -4,6 +4,7 @@
   suffix: Weapon
   components:
   - type: MeleeWeapon
+    attackRate: 1.4
     wideAnimationRotation: -120
     damage:
       types:
@@ -13,3 +14,15 @@
   - type: Reflect
     reflectProb: 0.05
     spread: 90
+# SS220 Throwable Changes begin
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 13.5
+# SS220 Throwable Changes end

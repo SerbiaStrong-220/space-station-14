@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
@@ -6,10 +5,13 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
 using Content.Shared.SS220.IgnoreLightVision;
+using Content.Shared.SS220.MindSlave;
 using Content.Shared.Tag;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Shared.Implants;
 
@@ -19,21 +21,16 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
 
     public const string BaseStorageId = "storagebase";
 
-    //SS220-mindslave begin
-    [ValidatePrototypeId<TagPrototype>]
-    private const string MindSlaveTag = "MindSlave";
-    //SS220-mindslave end
-
-    //SS220-removable-mindshield begin
-    [ValidatePrototypeId<TagPrototype>]
-    public const string MindShieldTag = "MindShield";
-    //SS220-removable-mindshield end
     //SS220 thermalvision begin
     public const string ThermalImplantTag = "ThermalImplant";
     //SS220 thermalvision end
+
+    private static readonly ProtoId<TagPrototype> MicroBombTag = "MicroBomb";
+    private static readonly ProtoId<TagPrototype> MacroBombTag = "MacroBomb";
 
     public override void Initialize()
     {
@@ -57,11 +54,11 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
         }
 
         //replace micro bomb with macro bomb
-        if (_container.TryGetContainer(component.ImplantedEntity.Value, ImplanterComponent.ImplantSlotId, out var implantContainer) && _tag.HasTag(uid, "MacroBomb"))
+        if (_container.TryGetContainer(component.ImplantedEntity.Value, ImplanterComponent.ImplantSlotId, out var implantContainer) && _tag.HasTag(uid, MacroBombTag))
         {
             foreach (var implant in implantContainer.ContainedEntities)
             {
-                if (_tag.HasTag(implant, "MicroBomb"))
+                if (_tag.HasTag(implant, MicroBombTag))
                 {
                     _container.Remove(implant, implantContainer);
                     QueueDel(implant);
@@ -88,7 +85,7 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
             _actionsSystem.RemoveProvidedActions(component.ImplantedEntity.Value, uid);
 
         //SS220-mindslave start
-        if (_tag.HasTag(uid, MindSlaveTag))
+        if (HasComp<MindSlaveImplantComponent>(uid))
         {
             var mindSlaveRemoved = new MindSlaveRemoved(uid, component.ImplantedEntity);
             RaiseLocalEvent(uid, ref mindSlaveRemoved);
@@ -96,7 +93,7 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
         //SS220-mindslave end
 
         //SS220-removable-mindshield begin
-        if (_tag.HasTag(uid, MindShieldTag) && TryComp<MindShieldComponent>(component.ImplantedEntity.Value, out var mindShield))
+        if (HasComp<MindShieldImplantComponent>(uid) && TryComp<MindShieldComponent>(component.ImplantedEntity.Value, out var mindShield))
             RemComp(component.ImplantedEntity.Value, mindShield);
         //SS220-removable-mindshield end
         //SS220 thermalvision begin
@@ -106,16 +103,11 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
         if (!_container.TryGetContainer(uid, BaseStorageId, out var storageImplant))
             return;
 
-        var entCoords = Transform(component.ImplantedEntity.Value).Coordinates;
-
         var containedEntites = storageImplant.ContainedEntities.ToArray();
 
         foreach (var entity in containedEntites)
         {
-            if (Terminating(entity))
-                continue;
-
-            _container.RemoveEntity(storageImplant.Owner, entity, force: true, destination: entCoords);
+            _transformSystem.DropNextTo(entity, uid);
         }
     }
 
@@ -125,20 +117,36 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
     /// </summary>
     public void AddImplants(EntityUid uid, IEnumerable<String> implants)
     {
-        var coords = Transform(uid).Coordinates;
         foreach (var id in implants)
         {
-            var ent = Spawn(id, coords);
-            if (TryComp<SubdermalImplantComponent>(ent, out var implant))
-            {
-                ForceImplant(uid, ent, implant);
-            }
-            else
-            {
-                Log.Warning($"Found invalid starting implant '{id}' on {uid} {ToPrettyString(uid):implanted}");
-                Del(ent);
-            }
+            AddImplant(uid, id);
         }
+    }
+
+    /// <summary>
+    /// Adds a single implant to a person, and returns the implant.
+    /// Logs any implant ids that don't have <see cref="SubdermalImplantComponent"/>.
+    /// </summary>
+    /// <returns>
+    /// The implant, if it was successfully created. Otherwise, null.
+    /// </returns>>
+    public EntityUid? AddImplant(EntityUid uid, String implantId)
+    {
+        var coords = Transform(uid).Coordinates;
+        var ent = Spawn(implantId, coords);
+
+        if (TryComp<SubdermalImplantComponent>(ent, out var implant))
+        {
+            ForceImplant(uid, ent, implant);
+        }
+        else
+        {
+            Log.Warning($"Found invalid starting implant '{implantId}' on {uid} {ToPrettyString(uid):implanted}");
+            Del(ent);
+            return null;
+        }
+
+        return ent;
     }
 
     /// <summary>

@@ -7,6 +7,11 @@
       !type:RoleTimeRequirement
       role: JobIAA
       time: 720000 # 200 hrs Ахуеть, да?
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # TrustedLawyer time
 - type: loadoutEffectGroup
@@ -17,8 +22,18 @@
       !type:RoleTimeRequirement
       role: JobIAA
       time: 180000 # 50 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Head
+- type: loadout
+  id: BeretIAA
+  equipment:
+    head: ClothingHeadHatBeretIAA
+
 - type: loadout
   id: DevilHorns
   effects:

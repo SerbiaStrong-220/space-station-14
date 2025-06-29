@@ -2,3 +2,8 @@
   id: SurveillanceBodyCameraSecurity
   name: device-frequency-prototype-name-surveillance-body-camera-security
   frequency: 1940
+
+- type: deviceFrequency
+  id: OreSilo
+  name: device-frequency-prototype-name-ore-silo
+  frequency: 1941

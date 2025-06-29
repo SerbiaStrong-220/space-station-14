@@ -81,7 +81,7 @@
       amount: 1
     Sulfur:
       amount: 1
-    Oxygen: 
+    Oxygen:
       amount: 2
   products:
     SulfuricAcid: 3
@@ -206,6 +206,20 @@
       duration: 15
 
 - type: reaction
+  id: Flash
+  impact: High
+  priority: 20
+  reactants:
+    Aluminium:
+      amount: 1
+    Potassium:
+      amount: 1
+    Sulfur:
+      amount: 1
+  effects:
+    - !type:FlashReactionEffect
+
+- type: reaction
   id: TableSalt
   minTemp: 370
   reactants:
@@ -293,6 +307,15 @@
      amount: 1
   products:
     Desoxyephedrine: 4 #I kinda remember having to heat this up, and if you heated it up too much, it went boom, I can't remember the specific values tho.
+  # SS220 add oxygen gas for reaction Desoxyephedrine begin
+  effects:
+  - !type:CreateGas
+    gas: Oxygen
+  - !type:PopupMessage
+    visualType: Medium
+    messages: [ "haloperidol-nitrousoxide-created " ]
+    type: Pvs
+  # SS220 add oxygen gas for reaction Desoxyephedrine end
 
 - type: reaction
   id: Stimulants
@@ -510,3 +533,4 @@
       amount: 1
   products:
     Tazinide: 1
+

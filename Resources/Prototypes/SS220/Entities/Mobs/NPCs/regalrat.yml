@@ -1,0 +1,27 @@
+#Different action to loot trashpiles with own weights
+- type: weightedRandomEntity
+  id: RatKingLootTrashPiles
+  weights:
+    RandomSpawner100: 75
+    FoodCheeseSlice: 20
+    FoodCheese: 5
+
+- type: weightedRandomEntity
+  id: RatKingLootTrashCans
+  weights:
+    RandomSpawner100: 50
+    MobCockroach: 25
+    FoodTacoRat: 20
+    FoodCheese: 5
+
+- type: entity
+  id: ActionRatKingRummage
+  name: Rummage
+  description: Rummage trash to find some cheesy-cheese.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_rat_king.rsi
+      state: ratKingRummage
+    event: !type:RatKingRummageActionEvent

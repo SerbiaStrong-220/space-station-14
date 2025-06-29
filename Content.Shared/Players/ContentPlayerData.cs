@@ -33,12 +33,6 @@ public sealed class ContentPlayerData
     [ViewVariables, Access(typeof(SharedMindSystem), typeof(SharedGameTicker))]
     public EntityUid? Mind { get; set; }
 
-    /// <summary>
-    ///     If true, the player is an admin and they explicitly de-adminned mid-game,
-    ///     so they should not regain admin if they reconnect.
-    /// </summary>
-    public bool ExplicitlyDeadminned { get; set; }
-
     //SS220 Shlepovend begin
     [ViewVariables(VVAccess.ReadWrite)]
     public int? ShlepovendTokens { get; set; } = null;

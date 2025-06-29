@@ -1,0 +1,40 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: cult lantern
+  parent: BaseItem
+  id: CultYoggLantern
+  suffix: CultYogg
+  description: description
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/lantern_cult.rsi
+    layers:
+      - state: lantern
+      - state: lantern_on
+        shader: unshaded
+        visible: false
+        map: [ "light" ]
+  - type: Clothing
+    sprite: SS220/Objects/CultYogg/lantern_cult.rsi
+    equippedPrefix: off
+    quickEquip: false
+    slots:
+    - Belt
+  - type: Item
+    heldPrefix: off
+  - type: CultYoggLamp
+    addPrefix: true
+  - type: PointLight
+    enabled: false
+    radius: 3
+    energy: 2
+    netsync: false
+  - type: ToggleableLightVisuals
+  - type: Appearance
+  - type: Physics
+    canCollide: false
+  - type: StealthProvider
+    whitelist:
+      tags:
+      - CultYoggStealthProvidable

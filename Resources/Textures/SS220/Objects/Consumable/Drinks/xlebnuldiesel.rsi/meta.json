@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by koreusky_samovar (Discord) for SS220",
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon_empty"
+    },
+    {
+      "name": "fill-1"
+    },
+    {
+      "name": "fill-2"
+    },
+    {
+      "name": "fill-3"
+    },
+    {
+      "name": "fill-4"
+    },
+    {
+      "name": "fill-5"
+    },
+    {
+      "name": "fill-6"
+    }
+  ]
+}

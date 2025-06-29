@@ -13,8 +13,17 @@
   - AllAccess
   access:
   - CentralCommand
+  - CentralCommandERT # SS220 centcomm access fix
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: ERTLeaderGear
@@ -105,10 +114,14 @@
   - AllAccess
   access:
   - CentralCommand
+  - CentralCommandERT # SS220 centcomm access fix
   special:
   - !type:AddComponentSpecial
     components:
     - type: BibleUser #Lets them heal with bibles
+    - type: DefibrillatorSkill #SS220 LimitationRevive
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
 
@@ -189,8 +202,17 @@
   - AllAccess
   access:
   - CentralCommand
+  - CentralCommandERT # SS220 centcomm access fix
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: ERTEngineerGear
@@ -263,8 +285,17 @@
   - AllAccess
   access:
   - CentralCommand
+  - CentralCommandERT # SS220 centcomm access fix
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: ERTSecurityGear
@@ -355,8 +386,17 @@
   - AllAccess
   access:
   - CentralCommand
+  - CentralCommandERT # SS220 centcomm access fix
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: ERTMedicalGear
@@ -375,11 +415,12 @@
   storage:
     back:
     - Hypospray
-    - MedkitAdvancedFilled
+    - MedkitCombatFilled
+    - MedkitCombatFilled
     - CrowbarRed
-    - OmnizineChemistryBottle
-    - EpinephrineChemistryBottle
-    - EpinephrineChemistryBottle
+    - ChemistryBottleOmnizine
+    - ChemistryBottleEpinephrine
+    - ChemistryBottleEpinephrine
 
 - type: startingGear
   id: ERTMedicalGearEVA
@@ -398,11 +439,12 @@
   storage:
     back:
     - Hypospray
-    - MedkitAdvancedFilled
+    - MedkitCombatFilled
+    - MedkitCombatFilled
     - CrowbarRed
-    - OmnizineChemistryBottle
-    - EpinephrineChemistryBottle
-    - EpinephrineChemistryBottle
+    - ChemistryBottleOmnizine
+    - ChemistryBottleEpinephrine
+    - ChemistryBottleEpinephrine
 
 # Janitor
 - type: job
@@ -419,8 +461,17 @@
   - AllAccess
   access:
   - CentralCommand
+  - CentralCommandERT # SS220 centcomm access fix
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: ERTJanitorGear

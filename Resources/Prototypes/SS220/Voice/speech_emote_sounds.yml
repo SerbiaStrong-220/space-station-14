@@ -19,7 +19,7 @@
     Crying:
       collection: MaleCry
     Whistle:
-      collection: Whistles                                                                      
+      collection: Whistles
     Hiss:
       collection: FelinidHisses
     Meow:
@@ -49,15 +49,15 @@
     Giggle:
       collection: FemaleLaugh
     Cough:
-      collection: FemaleCoughs 
+      collection: FemaleCoughs
     Yawn:
-      collection: FemaleYawn  
+      collection: FemaleYawn
     Sigh:
       collection: FemaleSigh
     Crying:
       collection: FemaleCry
     Whistle:
-      collection: Whistles                           
+      collection: Whistles
     Hiss:
       collection: FelinidHisses
     Meow:
@@ -106,7 +106,7 @@
       collection: MaleSneezes
     Cough:
       collection: MaleCoughs
-    Fart: 
+    Fart:
       collection: Fart
       params:
         volume: 2
@@ -149,7 +149,7 @@
       collection: FemaleSneezes
     Cough:
       collection: FemaleCoughs
-    Fart: 
+    Fart:
       collection: Fart
       params:
         volume: 2
@@ -203,7 +203,7 @@
     Crying:
       collection: MaleCry
     Whistle:
-      collection: Whistles                                                                      
+      collection: Whistles
     Hiss:
       collection: FelinidHisses
     Meow:
@@ -235,15 +235,15 @@
     Giggle:
       collection: FemaleLaugh
     Cough:
-      collection: FemaleCoughs 
+      collection: FemaleCoughs
     Yawn:
-      collection: FemaleYawn  
+      collection: FemaleYawn
     Sigh:
       collection: FemaleSigh
     Crying:
       collection: FemaleCry
     Whistle:
-      collection: Whistles                           
+      collection: Whistles
     Hiss:
       collection: FelinidHisses
     Meow:

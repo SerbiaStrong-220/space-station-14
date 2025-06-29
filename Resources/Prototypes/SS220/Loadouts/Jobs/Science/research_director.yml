@@ -7,6 +7,25 @@
       !type:RoleTimeRequirement
       role: JobResearchDirector
       time: 180000 # 30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: ResearchDirectorProfessor
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobResearchDirector
+      time: 72000 # 20 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Jumpsuit
 - type: loadout
@@ -16,6 +35,22 @@
     proto: ResearchDirectorTime
   equipment:
     jumpsuit: ClothingUniformJumpsuitRDAlt
+
+- type: loadout
+  id: ResearchDirectorJumpsuitProfessor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ResearchDirectorProfessor
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitProfessor
+
+- type: loadout
+  id: ResearchDirectorJumpskirtProfessor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ResearchDirectorProfessor
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtProfessor
 
 # PDA
 - type: loadout

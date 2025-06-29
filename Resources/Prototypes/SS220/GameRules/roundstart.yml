@@ -1,0 +1,86 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: BaseCultYoggRule
+  parent: BaseGameRule
+  abstract: true
+  components:
+  - type: GameRule
+    delay:
+      min: 120
+      max: 180
+  - type: CultYoggRule
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ CultistOfYoggSothoth ]
+      max: 4
+      playerRatio: 10
+      blacklist:
+        components:
+        - BibleUser
+        - CultYoggSacrificial
+      lateJoinAdditional: false
+      mindRoles:
+        - MindRoleCultYogg
+  - type: AntagObjectives
+    objectives:
+    - CultYoggSacraficeObjective
+
+- type: entity
+  id: CultYoggRuleMidPop
+  parent: BaseCultYoggRule
+  components:
+  - type: GameRule
+    minPlayers: 40 # WARNING: this should be always synced with other cult game rules and presets!
+  - type: CultYoggRule
+    stages:
+      Initial: {}
+      Reveal:
+        sacrificesRequired: 1
+        cultistsFractionRequired: 0.2
+      Alarm:
+        sacrificesRequired: 2
+        cultistsFractionRequired: 0.3
+      God:
+        sacrificesRequired: 3
+
+- type: entity
+  id: CultYoggRuleHighPop
+  parent: BaseCultYoggRule
+  components:
+  - type: GameRule
+    minPlayers: 60 # WARNING: this should be always synced with other cult game rules and presets!
+  - type: CultYoggRule
+    stages:
+      Initial: {}
+      Reveal:
+        sacrificesRequired: 1
+        cultistsFractionRequired: 0.1
+      Alarm:
+        sacrificesRequired: 2
+        cultistsFractionRequired: 0.2
+      God:
+        sacrificesRequired: 3
+
+- type: entity
+  parent: BaseGameRule
+  id: FractWar
+  components:
+  - type: LoadMapRule
+    mapPath: /Maps/SS220/EventMaps/FractWarShuttlesMap.yml
+  - type: FractWarRule
+
+- type: entity
+  categories: [ GameRules ]
+  parent: BaseGameRule
+  id: SurvivalRule
+  components:
+  - type: GameRule
+    minPlayers: 30
+
+- type: entity
+  id: EmergencyShuttleAutoCall
+  parent: BaseGameRule
+  categories: [ GameRules ]
+  components:
+  - type: EmergencyShuttleAutoCallRule

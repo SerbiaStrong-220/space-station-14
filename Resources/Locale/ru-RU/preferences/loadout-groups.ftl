@@ -14,6 +14,7 @@ loadout-group-survival-syndicate = Github заставил меня переве
 loadout-group-breath-tool = Расозависимое дыхательное снаряжение
 loadout-group-tank-harness = Расозависимое снаряжение для выживания
 loadout-group-EVA-tank = Расозависимый газовый баллон
+loadout-group-pocket-tank-double = Расозависимый двойной аварийный газовый баллон в кармане
 loadout-group-survival-mime = Мимский аварийный запас
 # Command
 loadout-group-captain-head = Капитан, голова
@@ -70,6 +71,7 @@ loadout-group-mime-mask = Мим, маска
 loadout-group-mime-jumpsuit = Мим, комбинезон
 loadout-group-mime-backpack = Мим, рюкзак
 loadout-group-mime-outerclothing = Мим, верхняя одежда
+loadout-group-mime-belt = Мим, пояс
 loadout-group-musician-jumpsuit = Музыкант, комбинезон
 loadout-group-musician-outerclothing = Музыкант, верхняя одежда
 # Cargo
@@ -169,14 +171,6 @@ loadout-group-paramedic-jumpsuit = Парамедик, комбинезон
 loadout-group-paramedic-outerclothing = Парамедик, верхняя одежда
 loadout-group-paramedic-shoes = Парамедик, обувь
 loadout-group-paramedic-backpack = Парамедик, рюкзак
-
-# SS220-Brigmedic
-loadout-group-brigmedic-head = Бригмедик, голова
-loadout-group-brigmedic-jumpsuit = Бригмедик, комбинезон
-loadout-group-brigmedic-outerclothing = Бригмедик, верхняя одежда
-loadout-group-brigmedic-shoes = Бригмедик, обувь
-loadout-group-brigmedic-backpack = Бригмедик, рюкзак
-loadout-group-brigmedic-mask = Бригмедик, маска
 
 # Wildcards
 loadout-group-reporter-jumpsuit = Репортёр, комбинезон

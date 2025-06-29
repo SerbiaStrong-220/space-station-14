@@ -1,0 +1,21 @@
+- type: alert
+  id: MiGoAstralAlert
+  category: CountDown
+  icons:
+  - sprite: /Textures/SS220/Interface/Alerts/migo_astral.rsi
+    state: astral
+  alertViewEntity: AlertAstralTimer
+  name: alerts-migo-astral-time-name
+  description: alerts-migo-astral-time-desc
+
+- type: entity
+  id: AlertAstralTimer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/SS220/Interface/Alerts/migo_astral.rsi
+    layers:
+    - map: [ "enum.AlertVisualLayers.Base" ]
+    - map: [ "enum.MiGoTimerVisualLayers.Digit1" ]
+    - map: [ "enum.MiGoTimerVisualLayers.Digit2" ]
+      offset: 0.125, 0 #this sing moving

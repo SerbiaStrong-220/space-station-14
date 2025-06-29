@@ -48,5 +48,11 @@ namespace Content.Server.Chat.Managers
         /// <param name="player">The player sending a chat message.</param>
         /// <returns>False if the player has violated rate limits and should be blocked from sending further messages.</returns>
         RateLimitStatus HandleRateLimit(ICommonSession player);
+
+        // SS220 delete prohibited characters begin
+        public string DeleteProhibitedCharacters(string message, EntityUid player);
+
+        public string DeleteProhibitedCharacters(string message, ICommonSession? player = null);
+        // SS220 delete prohibited characters end
     }
 }

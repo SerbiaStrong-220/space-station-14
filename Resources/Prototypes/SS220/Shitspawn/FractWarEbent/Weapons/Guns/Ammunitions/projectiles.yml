@@ -5,7 +5,7 @@
   id: PulseErt_Lmg
   damage:
     types:
-      Heat: 22
+      Heat: 30
   muzzleFlash:
     sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: muzzle_beam_heavy
@@ -31,8 +31,8 @@
     impactEffect: BulletImpactEffectBlaster
     damage:
       types:
-        Heat: 13
-        Piercing: 5
+        Heat: 18
+        Piercing: 6
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -47,4 +47,4 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 17
+        Piercing: 26

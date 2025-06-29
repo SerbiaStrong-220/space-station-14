@@ -1,0 +1,1 @@
+quick-dialog-ui-confirm = Подтвердить

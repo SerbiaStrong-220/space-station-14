@@ -4,6 +4,8 @@
     ClothingBackpackDuffelMedical: 4
     ClothingBackpackMedical: 4
     ClothingBackpackSatchelMedical: 4
+    ClothingUniformJumpsuitIntern: 4 #ss220 new assistant uniforms
+    ClothingUniformJumpskirtIntern: 4 #ss220 new assistant uniforms
     ClothingUniformJumpsuitMedicalDoctor: 4
     ClothingUniformJumpskirtMedicalDoctor: 4
     ClothingBeltMedical: 4
@@ -25,3 +27,6 @@
     ClothingShoesBootsWinterMed: 2
   contrabandInventory:
     ClothingUniformJumpskirtOfLife: 1
+    ToyFigurineMedicalDoctor: 1
+    ToyFigurineParamedic: 1
+    ToyFigurineChiefMedicalOfficer: 1

@@ -1,0 +1,102 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: venomancer
+  parent: [BaseItem, CultYoggRestrictedItem]
+  suffix: CultYogg
+  id: Venomancer
+  components:
+    - type: CultYoggWeapon
+      item: CultYoggCocoonVenomancer
+    - type: Gun
+      soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+      cameraRecoilScalar: 1
+      fireRate: 1
+      soundEmpty: null
+      projectileSpeed: 25
+    - type: SolutionAmmoProvider
+      solutionId: acid
+      proto: AcidSpit
+      fireCost: 5
+    - type: SolutionContainerManager
+      solutions:
+        acid:
+          maxVol: 25
+          reagents:
+          - ReagentId: CultYoggVenomancerAcid
+            Quantity: 25
+    - type: SolutionRegeneration
+      solution: acid
+      duration: 3
+      generated:
+        reagents:
+          - ReagentId: CultYoggVenomancerAcid
+            Quantity: 5
+    - type: Sprite
+      sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_venomancer.rsi
+      layers:
+        - state: icon
+          map: ["sprite"]
+    - type: Item
+      size: Ginormous
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.AmmoVisuals.HasAmmo:
+          sprite:
+            False: {state: "icon_empty"}
+            True: {state: "icon"}
+    - type: GunByHasAmmoVisuals
+      spriteLayer: null
+      inhandVisuals:
+        left:
+        - state: fullammo-inhand-left
+          shader: unshaded
+        right:
+        - state: fullammo-inhand-right
+          shader: unshaded
+    - type: StuckOnEquip
+      inHandItem: true
+    - type: Tag
+      tags:
+      - CultYoggStealthProvidable
+
+- type: entity
+  id: AcidSpit
+  suffix: CultYogg
+  name: acid spit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Clickable
+  - type: Physics
+    bodyType: Dynamic
+    linearDamping: 1
+    angularDamping: 2.5
+  - type: TimedDespawn
+    lifetime: 10
+  - type: Projectile
+    impactEffect: AcidImpactEffect
+    damage:
+      types:
+        Burn: 3
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/xeno_toxic.rsi
+    layers:
+      - state: xeno_toxic
+  - type: Ammo
+    muzzleFlash: null
+  - type: SolutionContainerManager
+    solutions:
+      vapor:
+        maxVol: 50
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.10,-0.30,0.10,0.15"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: Vapor

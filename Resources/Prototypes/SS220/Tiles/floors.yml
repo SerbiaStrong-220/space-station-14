@@ -36,21 +36,9 @@
   heatCapacity: 10000
 
 - type: tile
-  id: FloorTechMaintMono
-  name: стальной технический моно пол
-  sprite: /Textures/SS220/Tiles/steel_maint_mono.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepHull
-  itemDrop: FloorTileItemSteelMaint
-  heatCapacity: 10000
-
-- type: tile
-  id: FloorTechMaintDrain
+  id: FloorTechMaintDrainVertical
   name: технический пол с вертикальной решёткой
-  sprite: /Textures/SS220/Tiles/tech_maint_drain.png
+  sprite: /Textures/SS220/Tiles/tech_maint_drain_vertical.png
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -84,56 +72,8 @@
   heatCapacity: 10000
 
 - type: tile
-  id: FloorDutch
-  name: керамическая плитка
-  sprite: /Textures/SS220/Tiles/dutch.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: FloorTileItemDutch
-  heatCapacity: 10000
-
-- type: tile
-  id: FloorDutchHorizontal
-  name: керамическая горизонтальная плитка
-  sprite: /Textures/SS220/Tiles/dutch_horizontal.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: FloorTileItemDutch
-  heatCapacity: 10000
-
-- type: tile
-  id: FloorDutchMini
-  name: керамическая мини-плитка
-  sprite: /Textures/SS220/Tiles/dutch_mini.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: FloorTileItemDutchMini
-  heatCapacity: 10000
-
-- type: tile
-  id: FloorDutchMiniHorizontal
-  name: керамическая горизонтальная мини-плитка
-  sprite: /Textures/SS220/Tiles/dutch_horizontal_mini.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepFloor
-  itemDrop: FloorTileItemDutchMini
-  heatCapacity: 10000
-
-- type: tile
   id: FloorPurpleCircuit
-  name: фиолетовый микросхемный пол
+  name: tiles-purple-circuit-floor
   sprite: /Textures/SS220/Tiles/purple_circuit.png
   variants: 4
   placementVariants:
@@ -151,7 +91,7 @@
 
 - type: tile
   id: FloorYellowCircuit
-  name: жёлтый микросхемный пол
+  name: tiles-yellow-circuit-floor
   sprite: /Textures/SS220/Tiles/yellow_circuit.png
   variants: 4
   placementVariants:
@@ -169,7 +109,7 @@
 
 - type: tile
   id: FloorOrangeCircuit
-  name: оранжевый микросхемный пол
+  name: tiles-orange-circuit-floor
   sprite: /Textures/SS220/Tiles/orange_circuit.png
   variants: 4
   placementVariants:
@@ -187,7 +127,7 @@
 
 - type: tile
   id: FloorRedCircuit
-  name: красный микросхемный пол
+  name: tiles-red-circuit-floor
   sprite: /Textures/SS220/Tiles/red_circuit.png
   variants: 4
   placementVariants:
@@ -559,12 +499,7 @@
   id: FloorRedGlass
   name: tiles-red-glass-floor
   sprite: /Textures/SS220/Tiles/redglass.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
+  variants: 1
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -577,12 +512,7 @@
   id: FloorUGlass
   name: tiles-uranium-glass-floor
   sprite: /Textures/SS220/Tiles/uglass.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
+  variants: 1
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -595,12 +525,7 @@
   id: FloorPGlass
   name: tiles-plasma-glass-floor
   sprite: /Textures/SS220/Tiles/pglass.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
+  variants: 1
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -613,12 +538,7 @@
   id: FloorShuttleGlass
   name: tiles-shuttle-glass-floor
   sprite: /Textures/SS220/Tiles/shuttleglass.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
+  variants: 1
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -631,12 +551,7 @@
   id: FloorRUGlass
   name: tiles-reinforced-uranium-glass-floor
   sprite: /Textures/SS220/Tiles/ruglass.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
+  variants: 1
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -649,12 +564,7 @@
   id: FloorRPGlass
   name: tiles-reinforced-plasma-glass-floor
   sprite: /Textures/SS220/Tiles/rpglass.png
-  variants: 4
-  placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
+  variants: 1
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
@@ -822,6 +732,7 @@
 - type: tile
   id: FloorTileMud
   name: tiles-mud
+  tags: [ tile-tag-nature ]
   sprite: /Textures/SS220/Tiles/mud.png
   baseTurf: FloorDirt
   isSubfloor: false
@@ -832,6 +743,7 @@
 - type: tile
   id: FloorRocks
   name: tiles-rocks
+  tags: [ tile-tag-nature ]
   sprite: /Textures/SS220/Tiles/rocks.png
   variants: 9
   placementVariants:
@@ -853,6 +765,7 @@
 - type: tile
   id: FloorWasteland
   name: tiles-wasteland
+  tags: [ tile-tag-nature ]
   sprite: /Textures/SS220/Tiles/wasteland.png
   variants: 9
   placementVariants:
@@ -1082,3 +995,1360 @@
   footstepSounds:
     collection: FootstepAsteroid
   itemDrop: FloorTileItemSand
+
+- type: tile
+  id: Floor220Curse
+  name: проклятье 220
+  sprite: /Textures/SS220/Tiles/curse220.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepAsteroid
+  itemDrop: FloorTileItemSand
+
+- type: tile
+  id: FloorSnowLawn
+  name: snow-lawn-floor
+  tags: [ tile-tag-nature ]
+  sprite: /Textures/Tiles/Planet/Snow/snow.png
+  variants: 13
+  placementVariants:
+  - 0.8
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0166
+  - 0.0116
+  - 0.0116
+  isSubfloor: false
+  footstepSounds:
+    collection: FootstepSnow
+  heatCapacity: 10000
+  indestructible: true
+
+
+- type: tile
+  id: FloorDarkCalifornia
+  name: floor-dark-california
+  sprite: /Textures/SS220/Tiles/dark_california.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemDarkCalifornia
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDarkEightBricks
+  name: floor-dark-eight-bricks
+  sprite: /Textures/SS220/Tiles/dark_eight_bricks.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemDarkEightBricks
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDarkMixedBricks
+  name: floor-dark-mixed-bricks
+  sprite: /Textures/SS220/Tiles/dark_mixed_bricks.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemDarkMixedBricks
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDarkMixedBricksMini
+  name: floor-dark-mixed-bricks-mini
+  sprite: /Textures/SS220/Tiles/dark_mixed_bricks_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemDarkMixedBricksMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDarkMixedPavementHorizontal
+  name: floor-dark-mixed-pavement-horizontal
+  sprite: /Textures/SS220/Tiles/dark_mixed_pavement_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemDarkMixedPavementHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDarkMixedPavementVertical
+  name: floor-dark-mixed-pavement-vertical
+  sprite: /Textures/SS220/Tiles/dark_mixed_pavement_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemDarkMixedPavementVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDarkShiftedEightBricks
+  name: floor-dark-shifted-eight-bricks
+  sprite: /Textures/SS220/Tiles/dark_shifted_eight_bricks.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemDarkShiftedEightBricks
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDarkShiftedMiniHorizontal
+  name: floor-dark-shifted-mini-horizontal
+  sprite: /Textures/SS220/Tiles/dark_shifted_mini_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemDarkShiftedMiniHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorDarkShiftedMiniVertical
+  name: floor-dark-shifted-mini-vertical
+  sprite: /Textures/SS220/Tiles/dark_shifted_mini_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemDarkShiftedMiniVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorFreezerHorizontal
+  name: floor-freezer-horizontal
+  sprite: /Textures/SS220/Tiles/freezer_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemFreezerHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorFreezerMini
+  name: floor-freezer-mini
+  sprite: /Textures/SS220/Tiles/freezer_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemFreezerMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorFreezerMiniHorizontal
+  name: floor-freezer-mini-horizontal
+  sprite: /Textures/SS220/Tiles/freezer_mini_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemFreezerMiniHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorFreezerMiniVertical
+  name: floor-freezer-mini-vertical
+  sprite: /Textures/SS220/Tiles/freezer_mini_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemFreezerMiniVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorFreezerMono
+  name: floor-freezer-mono
+  sprite: /Textures/SS220/Tiles/freezer_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemFreezerMono
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorFreezerVertical
+  name: floor-freezer-vertical
+  sprite: /Textures/SS220/Tiles/freezer_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemFreezerVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorGratingMaintDrainHorizontal
+  name: floor-grating-maint-drain-horizontal
+  sprite: /Textures/SS220/Tiles/grating_maint_drain_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemGratingMaintDrainHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorGratingMaintDrainMiddle
+  name: floor-grating-maint-drain-middle
+  sprite: /Textures/SS220/Tiles/grating_maint_drain_middle.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemGratingMaintDrainMiddle
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorGratingMaintDrainVertical
+  name: floor-grating-maint-drain-vertical
+  sprite: /Textures/SS220/Tiles/grating_maint_drain_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemGratingMaintDrainVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorGratingMaintHorizontal
+  name: floor-grating-maint-horizontal
+  sprite: /Textures/SS220/Tiles/grating_maint_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemGratingMaintHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorGratingMaintMini
+  name: floor-grating-maint-mini
+  sprite: /Textures/SS220/Tiles/grating_maint_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemGratingMaintMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorGratingMaintMono
+  name: floor-grating-maint-mono
+  sprite: /Textures/SS220/Tiles/grating_maint_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemGratingMaintMono
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorGratingMaintVertical
+  name: floor-grating-maint-vertical
+  sprite: /Textures/SS220/Tiles/grating_maint_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemGratingMaintVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningDarkGratingDirectedHorizontal
+  name: floor-mining-dark-grating-directed-horizontal
+  sprite: /Textures/SS220/Tiles/mining_dark_grating_directed_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningDarkGratingDirectedHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningDarkGratingDirectedVertical
+  name: floor-mining-dark-grating-directed-vertical
+  sprite: /Textures/SS220/Tiles/mining_dark_grating_directed_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningDarkGratingDirectedVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningDarkGratingHorizontal
+  name: floor-mining-dark-grating-horizontal
+  sprite: /Textures/SS220/Tiles/mining_dark_grating_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningDarkGratingHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningDarkGratingMiddle
+  name: floor-mining-dark-grating-middle
+  sprite: /Textures/SS220/Tiles/mining_dark_grating_middle.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningDarkGratingMiddle
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningDarkGratingVertical
+  name: floor-mining-dark-grating-vertical
+  sprite: /Textures/SS220/Tiles/mining_dark_grating_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningDarkGratingVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningDarkMono
+  name: floor-mining-dark-mono
+  sprite: /Textures/SS220/Tiles/mining_dark_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningDarkMono
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningDarkReinforced
+  name: floor-mining-dark-reinforced
+  sprite: /Textures/SS220/Tiles/mining_dark_reinforced.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningDarkReinforced
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningGratingDirectedHorizontal
+  name: floor-mining-grating-directed-horizontal
+  sprite: /Textures/SS220/Tiles/mining_grating_directed_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningGratingDirectedHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningGratingDirectedVertical
+  name: floor-mining-grating-directed-vertical
+  sprite: /Textures/SS220/Tiles/mining_grating_directed_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningGratingDirectedVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningGratingHorizontal
+  name: floor-mining-grating-horizontal
+  sprite: /Textures/SS220/Tiles/mining_grating_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningGratingHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningGratingMiddle
+  name: floor-mining-grating-middle
+  sprite: /Textures/SS220/Tiles/mining_grating_middle.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningGratingMiddle
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningGratingVertical
+  name: floor-mining-grating-vertical
+  sprite: /Textures/SS220/Tiles/mining_grating_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningGratingVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningLightGratingDirectedHorizontal
+  name: floor-mining-light-grating-directed-horizontal
+  sprite: /Textures/SS220/Tiles/mining_light_grating_directed_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningLightGratingDirectedHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningLightGratingDirectedVertical
+  name: floor-mining-light-grating-directed-vertical
+  sprite: /Textures/SS220/Tiles/mining_light_grating_directed_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningLightGratingDirectedVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningLightGratingHorizontal
+  name: floor-mining-light-grating-horizontal
+  sprite: /Textures/SS220/Tiles/mining_light_grating_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningLightGratingHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningLightGratingMiddle
+  name: floor-mining-light-grating-middle
+  sprite: /Textures/SS220/Tiles/mining_light_grating_middle.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningLightGratingMiddle
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningLightGratingVertical
+  name: floor-mining-light-grating-vertical
+  sprite: /Textures/SS220/Tiles/mining_light_grating_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningLightGratingVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningLightMono
+  name: floor-mining-light-mono
+  sprite: /Textures/SS220/Tiles/mining_light_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningLightMono
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningLightReinforced
+  name: floor-mining-light-reinforced
+  sprite: /Textures/SS220/Tiles/mining_light_reinforced.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningLightReinforced
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningMono
+  name: floor-mining-mono
+  sprite: /Textures/SS220/Tiles/mining_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningMono
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorMiningReinforced
+  name: floor-mining-reinforced
+  sprite: /Textures/SS220/Tiles/mining_reinforced.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemMiningReinforced
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorRockVaultHerringbone
+  name: floor-rock-vault-herringbone
+  sprite: /Textures/SS220/Tiles/rock_vault_herringbone.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemRockVaultHerringbone
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorRockVaultHorizontal
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  name: floor-rock-vault-horizontal
+  sprite: /Textures/SS220/Tiles/rock_vault_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemRockVaultHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorRockVaultMini
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  name: floor-rock-vault-mini
+  sprite: /Textures/SS220/Tiles/rock_vault_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemRockVaultMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorRockVaultMono
+  name: floor-rock-vault-mono
+  sprite: /Textures/SS220/Tiles/rock_vault_mono.png
+  variants: 2
+  placementVariants:
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemRockVaultMono
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorRockVaultPavementHorizontal
+  name: floor-rock-vault-pavement-horizontal
+  sprite: /Textures/SS220/Tiles/rock_vault_pavement_horizontal.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemRockVaultPavementHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorRockVaultVertical
+  name: floor-rock-vault-vertical
+  sprite: /Textures/SS220/Tiles/rock_vault_vertical.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemRockVaultVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitary
+  name: floor-sanitary
+  sprite: /Textures/SS220/Tiles/sanitary.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitary
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryDark
+  name: floor-sanitary-dark
+  sprite: /Textures/SS220/Tiles/sanitary_dark.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryDark
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryDarkHorizontal
+  name: floor-sanitary-dark-horizontal
+  sprite: /Textures/SS220/Tiles/sanitary_dark_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryDarkHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryDarkMini
+  name: floor-sanitary-dark-mini
+  sprite: /Textures/SS220/Tiles/sanitary_dark_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryDarkMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryDarkMiniHorizontal
+  name: floor-sanitary-dark-mini-horizontal
+  sprite: /Textures/SS220/Tiles/sanitary_dark_mini_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryDarkMiniHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryDarkMiniVertical
+  name: floor-sanitary-dark-mini-vertical
+  sprite: /Textures/SS220/Tiles/sanitary_dark_mini_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryDarkMiniVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryDarkMono
+  name: floor-sanitary-dark-mono
+  sprite: /Textures/SS220/Tiles/sanitary_dark_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryDarkMono
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryDarkVertical
+  name: floor-sanitary-dark-vertical
+  sprite: /Textures/SS220/Tiles/sanitary_dark_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryDarkVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryHorizontal
+  name: floor-sanitary-horizontal
+  sprite: /Textures/SS220/Tiles/sanitary_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryMini
+  name: floor-sanitary-mini
+  sprite: /Textures/SS220/Tiles/sanitary_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryMiniHorizontal
+  name: floor-sanitary-mini-horizontal
+  sprite: /Textures/SS220/Tiles/sanitary_mini_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryMiniHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryMiniVertical
+  name: floor-sanitary-mini-vertical
+  sprite: /Textures/SS220/Tiles/sanitary_mini_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryMiniVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryMono
+  name: floor-sanitary-mono
+  sprite: /Textures/SS220/Tiles/sanitary_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryMono
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryVertical
+  name: floor-sanitary-vertical
+  sprite: /Textures/SS220/Tiles/sanitary_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSanitaryVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorShowroomHorizontal
+  name: floor-showroom-horizontal
+  sprite: /Textures/SS220/Tiles/showroom_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemShowroomHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorShowroomMini
+  name: floor-showroom-mini
+  sprite: /Textures/SS220/Tiles/showroom_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemShowroomMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorShowroomMiniHorizontal
+  name: floor-showroom-mini-horizontal
+  sprite: /Textures/SS220/Tiles/showroom_mini_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemShowroomMiniHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorShowroomMiniVertical
+  name: floor-showroom-mini-vertical
+  sprite: /Textures/SS220/Tiles/showroom_mini_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemShowroomMiniVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorShowroomMono
+  name: floor-showroom-mono
+  sprite: /Textures/SS220/Tiles/showroom_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemShowroomMono
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorShowroomVertical
+  name: floor-showroom-vertical
+  sprite: /Textures/SS220/Tiles/showroom_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemShowroomVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelCalifornia
+  name: floor-steel-california
+  sprite: /Textures/SS220/Tiles/steel_california.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelCalifornia
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelEightBricks
+  name: floor-steel-eight-bricks
+  sprite: /Textures/SS220/Tiles/steel_eight_bricks.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelEightBricks
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelMaintDrainHorizontal
+  name: floor-steel-maint-drain-horizontal
+  sprite: /Textures/SS220/Tiles/steel_maint_drain_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelMaintDrainHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelMaintDrainMiddle
+  name: floor-steel-maint-drain-middle
+  sprite: /Textures/SS220/Tiles/steel_maint_drain_middle.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelMaintDrainMiddle
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelMaintDrainVertical
+  name: floor-steel-maint-drain-vertical
+  sprite: /Textures/SS220/Tiles/steel_maint_drain_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelMaintDrainVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelMaintHorizontal
+  name: floor-steel-maint-horizontal
+  sprite: /Textures/SS220/Tiles/steel_maint_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelMaintHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelMaintMini
+  name: floor-steel-maint-mini
+  sprite: /Textures/SS220/Tiles/steel_maint_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelMaintMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelMaintMono
+  name: floor-steel-maint-mono
+  sprite: /Textures/SS220/Tiles/steel_maint_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelMaintMono
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelMaintVertical
+  name: floor-steel-maint-vertical
+  sprite: /Textures/SS220/Tiles/steel_maint_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelMaintVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelMixedBricks
+  name: floor-steel-mixed-bricks
+  sprite: /Textures/SS220/Tiles/steel_mixed_bricks.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelMixedBricks
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelMixedBricksMini
+  name: floor-steel-mixed-bricks-mini
+  sprite: /Textures/SS220/Tiles/steel_mixed_bricks_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelMixedBricksMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelMixedPavementHorizontal
+  name: floor-steel-mixed-pavement-horizontal
+  sprite: /Textures/SS220/Tiles/steel_mixed_pavement_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelMixedPavementHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelMixedPavementVertical
+  name: floor-steel-mixed-pavement-vertical
+  sprite: /Textures/SS220/Tiles/steel_mixed_pavement_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelMixedPavementVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelShiftedEightBricks
+  name: floor-steel-shifted-eight-bricks
+  sprite: /Textures/SS220/Tiles/steel_shifted_eight_bricks.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelShiftedEightBricks
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelShiftedMiniHorizontal
+  name: floor-steel-shifted-mini-horizontal
+  sprite: /Textures/SS220/Tiles/steel_shifted_mini_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelShiftedMiniHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSteelShiftedMiniVertical
+  name: floor-steel-shifted-mini-vertical
+  sprite: /Textures/SS220/Tiles/steel_shifted_mini_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemSteelShiftedMiniVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTechMaintHorizontal
+  name: floor-tech-maint-horizontal
+  sprite: /Textures/SS220/Tiles/tech_maint_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemTechMaintHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTechMaintMini
+  name: floor-tech-maint-mini
+  sprite: /Textures/SS220/Tiles/tech_maint_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemTechMaintMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTechMaintMono
+  name: floor-tech-maint-mono
+  sprite: /Textures/SS220/Tiles/tech_maint_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemTechMaintMono
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorTechMaintVertical
+  name: floor-tech-maint-vertical
+  sprite: /Textures/SS220/Tiles/tech_maint_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemTechMaintVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhiteCalifornia
+  name: floor-white-california
+  sprite: /Textures/SS220/Tiles/white_california.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemWhiteCalifornia
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhiteEightBricks
+  name: floor-white-eight-bricks
+  sprite: /Textures/SS220/Tiles/white_eight_bricks.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemWhiteEightBricks
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhiteMixedBricks
+  name: floor-white-mixed-bricks
+  sprite: /Textures/SS220/Tiles/white_mixed_bricks.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemWhiteMixedBricks
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhiteMixedBricksMini
+  name: floor-white-mixed-bricks-mini
+  sprite: /Textures/SS220/Tiles/white_mixed_bricks_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemWhiteMixedBricksMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhiteMixedPavementHorizontal
+  name: floor-white-mixed-pavement-horizontal
+  sprite: /Textures/SS220/Tiles/white_mixed_pavement_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemWhiteMixedPavementHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhiteMixedPavementVertical
+  name: floor-white-mixed-pavement-vertical
+  sprite: /Textures/SS220/Tiles/white_mixed_pavement_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemWhiteMixedPavementVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhiteShiftedEightBricks
+  name: floor-white-shifted-eight-bricks
+  sprite: /Textures/SS220/Tiles/white_shifted_eight_bricks.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemWhiteShiftedEightBricks
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhiteShiftedMiniHorizontal
+  name: floor-white-shifted-mini-horizontal
+  sprite: /Textures/SS220/Tiles/white_shifted_mini_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemWhiteShiftedMiniHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorWhiteShiftedMiniVertical
+  name: floor-white-shifted-mini-vertical
+  sprite: /Textures/SS220/Tiles/white_shifted_mini_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemWhiteShiftedMiniVertical
+  heatCapacity: 10000
+
+
+- type: tile
+  id: FloorConcretePavementHorizontal
+  name: floor-concrete-pavement-horizontal
+  sprite: /Textures/SS220/Tiles/concrete_pavement_horizontal.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemConcretePavementHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorConcretePavementVertical
+  name: floor-concrete-pavement-vertical
+  sprite: /Textures/SS220/Tiles/concrete_pavement_vertical.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemConcretePavementVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorGrayconcretePavementHorizontal
+  name: floor-grayconcrete-pavement-horizontal
+  sprite: /Textures/SS220/Tiles/grayconcrete_pavement_horizontal.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemGrayconcretePavementHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorGrayconcretePavementVertical
+  name: floor-grayconcrete-pavement-vertical
+  sprite: /Textures/SS220/Tiles/grayconcrete_pavement_vertical.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemGrayconcretePavementVertical
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorOldconcretePavementHorizontal
+  name: floor-oldconcrete-pavement-horizontal
+  sprite: /Textures/SS220/Tiles/oldconcrete_pavement_horizontal.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemOldconcretePavementHorizontal
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorOldconcretePavementVertical
+  name: floor-oldconcrete-pavement-vertical
+  sprite: /Textures/SS220/Tiles/oldconcrete_pavement_vertical.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorItemOldconcretePavementVertical
+  heatCapacity: 10000

@@ -68,4 +68,6 @@
       - FoodBurgerCrazy
       - FoodPizzaArnoldSlice
       - FoodPizzaUraniumSlice
+      - SpicyPizzaFood #SS220spicyUPD
+      - FoodPizzaWorldpeasSlice
     rareChance: 0.05

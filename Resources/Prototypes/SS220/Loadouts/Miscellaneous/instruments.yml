@@ -9,3 +9,8 @@
       !type:RoleTimeRequirement
       role: JobMusician
       time: 360000 # 100 hour of rock and roll
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier

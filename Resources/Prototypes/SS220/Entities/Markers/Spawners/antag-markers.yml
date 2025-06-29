@@ -1,0 +1,16 @@
+- type: entity
+  parent: MarkerBase
+  id: SpiderQueenSpawnMarker
+  name: spider queen spawn marker
+  description: A marker indicating the coordinate at which the spider queen can spawn.
+  suffix: Spiders hive
+  components:
+  - type: Sprite
+    layers:
+    - state: pink
+    - sprite: Mobs/Animals/spider.rsi
+      state: midwife
+  - type: Tag
+    tags:
+    - SpiderQueenSpawnMarker
+  - type: AntagSpawnMarker

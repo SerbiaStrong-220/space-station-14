@@ -92,9 +92,11 @@
       - id: ClothingMaskGasAtmosBlue    #SS220 Blue Atmos Mask
       - id: ClothingOuterSuitAtmosFire
       - id: ClothingHeadHelmetAtmosFire
+      - id: ClothingHandsGlovesColorYellow # SS220 Atmos-Ruber-Gloves
       - id: GasAnalyzer
       - id: MedkitOxygenFilled
       - id: HolofanProjector
+      - id: DoorRemoteFirefight # SS220 revert "remove fire remote controller"
       - id: ClothingShoesBootsMag
       - id: RCD
       - id: RCDAmmo
@@ -110,9 +112,11 @@
       - id: ClothingMaskGasAtmosBlue    #SS220 Blue Atmos Mask
       - id: ClothingOuterSuitAtmosFire
       - id: ClothingHeadHelmetAtmosFire
+      - id: ClothingHandsGlovesColorYellow # SS220 Atmos-Ruber-Gloves
       - id: GasAnalyzer
       - id: MedkitOxygenFilled
       - id: HolofanProjector
+      - id: DoorRemoteFirefight # SS220 revert "remove fire remote controller"
       - id: RCD
       - id: RCDAmmo
 

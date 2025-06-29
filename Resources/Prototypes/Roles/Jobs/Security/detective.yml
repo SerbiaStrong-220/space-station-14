@@ -22,7 +22,7 @@
   - Detective
 #  extendedAccess: #SS220-Transfer Detective To Security
   - Security
-  - Cryogenics 
+  - Cryogenics
   special: #SS220-Transfer Detective To Security begin
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ] #SS220-Transfer Detective To Security end

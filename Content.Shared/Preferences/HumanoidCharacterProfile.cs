@@ -30,6 +30,7 @@ namespace Content.Shared.Preferences
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
         public const int MaxNameLength = 32;
+        public const int MaxLoadoutNameLength = 32;
         public const int MaxDescLength = 512;
 
         /// <summary>
@@ -694,16 +695,38 @@ namespace Content.Shared.Preferences
             // Track points count for each group.
             var groups = new Dictionary<string, int>();
             var result = new List<ProtoId<TraitPrototype>>();
+            var selectedTraits = new HashSet<ProtoId<TraitPrototype>>(); //ss220 add traits
 
             foreach (var trait in traits)
             {
                 if (!protoManager.TryIndex(trait, out var traitProto))
                     continue;
 
+                //ss220 add traits start
+                var isExcluded = false;
+                if (traitProto.MutuallyExclusiveWith != null)
+                {
+                    foreach (var excluded in traitProto.MutuallyExclusiveWith)
+                    {
+                        var proto = protoManager.Index<TraitPrototype>(excluded);
+
+                        if (!selectedTraits.Contains(proto))
+                            continue;
+
+                        isExcluded = true;
+                        break;
+                    }
+                }
+
+                if (isExcluded)
+                    continue;
+                //ss220 add traits end
+
                 // Always valid.
                 if (traitProto.Category == null)
                 {
                     result.Add(trait);
+                    selectedTraits.Add(trait); //ss220 add traits
                     continue;
                 }
 
@@ -720,6 +743,7 @@ namespace Content.Shared.Preferences
 
                 groups[category.ID] = existing;
                 result.Add(trait);
+                selectedTraits.Add(trait); //ss220 add traits
             }
 
             return result;

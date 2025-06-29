@@ -119,3 +119,17 @@
   - type: NpcFactionMember
     factions:
       - SimpleHostile
+
+- type: entity
+  parent: BaseWeaponTurret
+  id: WeaponTurretDeathSquad
+  name: turret
+  description: A turret with an automatic fire system.
+  suffix: DS, Death Squad, Эскадрон Смерти
+  components:
+  - type: NpcFactionMember
+    factions:
+    - DeathSquad
+  - type: Gun
+    fireRate: 6
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/minigun.ogg

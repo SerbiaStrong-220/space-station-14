@@ -1,0 +1,87 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "by MIXnikita (Github) for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "Bend-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "Bend-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "TJunction-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "TJunction-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "Fourway-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "Fourway-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "pipeBroken",
+            "directions": 1
+        },
+        {
+            "name": "pipeTJunction",
+            "directions": 4
+        },
+        {
+            "name": "pipeHalf",
+            "directions": 4
+        },
+        {
+            "name": "pipeBend",
+            "directions": 4
+        },
+        {
+            "name": "pipeFourway",
+            "directions": 4
+        },
+        {
+            "name": "pipeStraight",
+            "directions": 4
+        },
+        {
+            "name": "pipeConnector",
+            "directions": 4
+        },
+        {
+            "name": "pipeTrinaryConnectors",
+            "directions": 4
+        },
+        {
+            "name": "storageStraight",
+            "directions": 4
+        },
+        {
+            "name": "storageBend",
+            "directions": 4
+        },
+        {
+            "name": "storageTJunction",
+            "directions": 4
+        }
+    ]
+}

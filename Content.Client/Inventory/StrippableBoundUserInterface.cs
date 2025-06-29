@@ -17,6 +17,7 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Strip.Components;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
+using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input;
@@ -29,10 +30,13 @@ namespace Content.Client.Inventory
     [UsedImplicitly]
     public sealed class StrippableBoundUserInterface : BoundUserInterface
     {
+        [Dependency] private readonly IPlayerManager _player = default!;
         [Dependency] private readonly IUserInterfaceManager _ui = default!;
+
         private readonly ExamineSystem _examine;
         private readonly InventorySystem _inv;
         private readonly SharedCuffableSystem _cuffable;
+        private readonly StrippableSystem _strippable;
 
         [ViewVariables]
         private const int ButtonSeparation = 4;
@@ -51,6 +55,8 @@ namespace Content.Client.Inventory
             _examine = EntMan.System<ExamineSystem>();
             _inv = EntMan.System<InventorySystem>();
             _cuffable = EntMan.System<SharedCuffableSystem>();
+            _strippable = EntMan.System<StrippableSystem>();
+
             _virtualHiddenEntity = EntMan.SpawnEntity(HiddenPocketEntityId, MapCoordinates.Nullspace);
         }
 
@@ -58,11 +64,9 @@ namespace Content.Client.Inventory
         {
             base.Open();
 
-            _strippingMenu = this.CreateWindow<StrippingMenu>();
+            _strippingMenu = this.CreateWindowCenteredLeft<StrippingMenu>();
             _strippingMenu.OnDirty += UpdateMenu;
             _strippingMenu.Title = Loc.GetString("strippable-bound-user-interface-stripping-menu-title", ("ownerName", Identity.Name(Owner, EntMan)));
-
-            _strippingMenu?.OpenCenteredLeft();
         }
 
         protected override void Dispose(bool disposing)
@@ -185,9 +189,15 @@ namespace Content.Client.Inventory
                 return;
 
             if (ev.Function == ContentKeyFunctions.ExamineEntity)
+            {
                 _examine.DoExamine(slot.Entity.Value);
+                ev.Handle();
+            }
             else if (ev.Function == EngineKeyFunctions.UseSecondary)
+            {
                 _ui.GetUIController<VerbMenuUIController>().OpenVerbMenu(slot.Entity.Value);
+                ev.Handle();
+            }
         }
 
         private void AddInventoryButton(EntityUid invUid, string slotId, InventoryComponent inv)
@@ -198,7 +208,8 @@ namespace Content.Client.Inventory
             var entity = container.ContainedEntity;
 
             // If this is a full pocket, obscure the real entity
-            if (entity != null && slotDef.StripHidden)
+            // this does not work for modified clients because they are still sent the real entity
+            if (entity != null && _strippable.IsStripHidden(slotDef, _player.LocalEntity))
                 entity = _virtualHiddenEntity;
 
             var button = new SlotButton(new SlotData(slotDef, container));
@@ -206,12 +217,14 @@ namespace Content.Client.Inventory
 
             _strippingMenu!.InventoryContainer.AddChild(button);
 
-            UpdateEntityIcon(button, entity);
+            //ss220 add fully hidden pockets start
+            UpdateEntityIcon(button, entity, slotDef.FullyHidden);
+            //ss220 add fully hidden pockets end
 
             LayoutContainer.SetPosition(button, slotDef.StrippingWindowPos * (SlotControl.DefaultButtonSize + ButtonSeparation));
         }
 
-        private void UpdateEntityIcon(SlotControl button, EntityUid? entity)
+        private void UpdateEntityIcon(SlotControl button, EntityUid? entity, bool isFullyHidden = false) //ss220 add fully hidden pockets
         {
             // Hovering, highlighting & storage are features of general hands & inv GUIs. This UI just re-uses these because I'm lazy.
             button.ClearHover();
@@ -230,6 +243,11 @@ namespace Content.Client.Inventory
                 viewEnt = entity;
             else
                 return;
+
+            //ss220 add fully hidden pockets start
+            if (isFullyHidden)
+                viewEnt = null;
+            //ss220 add fully hidden pockets end
 
             button.SetEntity(viewEnt);
         }

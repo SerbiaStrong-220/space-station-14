@@ -1,4 +1,4 @@
-﻿using Content.Shared.Sticky.Systems;
+using Content.Shared.Sticky.Systems;
 ﻿using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
@@ -87,4 +87,12 @@ public sealed partial class StickyComponent : Component
     /// </summary>
     [DataField]
     public SpriteSpecifier VerbIcon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/eject.svg.192dpi.png"));
+
+    // SS220 rotate ent face to the user begin
+    /// <summary>
+    /// Should the entity turn its face to the user when stuck
+    /// </summary>
+    [DataField]
+    public bool RotateFaceToUser = false;
+    // SS220 rotate ent face to the user end
 }

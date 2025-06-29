@@ -7,7 +7,7 @@
   description: Did you know that Central Committee officers like to play baseball with the heads of the incompetent management of their assets?
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Melee/ntbaton.rsi
+    sprite: SS220/Objects/Weapons/Melee/Stunning/ntbaton.rsi
     layers:
     - state: telescope_off
       map: [ "enum.ToggleVisuals.Layer" ]
@@ -17,24 +17,25 @@
     damageOpen:
       types:
         Blunt: 120
-        Stamina: 0
     damageFolded:
       types:
         Blunt: 28
-        Stamina: 120
+    staminaDamageFolded: 0
+    staminaDamageOpen: 120
     sizeOpened: Large
     sizeClosed: Small
   - type: StaminaDamageOnHit
     damage: 0
   - type: MeleeWeapon
+    wideAnimationRotation: -135
     soundHit: !type:SoundCollectionSpecifier
-      collection: BatonHit
+      collection: HomerunBaton
     damage:
       types:
         Blunt: 0
   - type: Item
     size: Normal
-    sprite: SS220/Objects/Weapons/Melee/ntbaton.rsi
+    sprite: SS220/Objects/Weapons/Melee/Stunning/ntbaton.rsi
   - type: UseDelay
     delay: 1.0
   - type: DisarmMalus
@@ -46,3 +47,22 @@
         enum.ToggleVisuals.Layer:
           True: {state: telescope_on}
           False: {state: telescope_off}
+  - type: MeleeThrowOnHit
+    distance: 1
+
+- type: entity
+  parent: NTbaton
+  id: NTbatonStrong
+  suffix: Strong
+  components:
+  - type: MeleeThrowOnHit
+    distance: 10
+
+- type: entity
+  parent: NTbaton
+  id: NTbatonPowerful
+  suffix: Powerful
+  components:
+  - type: MeleeThrowOnHit
+    distance: 20
+    speed: 20

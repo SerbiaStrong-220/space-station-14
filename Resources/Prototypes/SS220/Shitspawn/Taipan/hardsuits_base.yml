@@ -1,0 +1,93 @@
+- type: entity
+  parent: [ ClothingOuterHardsuitBase ]
+  id: NTHS220S
+  name: NTHS-220-S
+  description: Специальная разработка бронескафандра ДСО. Цвет миротворцев - зеленый!
+  suffix: Taipan, Shitspawn
+  components:
+  - type: Sprite
+    sprite: SS220/Shitspawn/Taipan/Clothing/OuterClothing/Hardsuits/tnt.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: SS220/Shitspawn/Taipan/Clothing/OuterClothing/Hardsuits/tnt.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.3
+        Slash: 0.1
+        Piercing: 0.2
+        Heat: 0.1 #ss-220 armReb
+        Radiation: 0.7
+        Caustic: 0.2
+  - type: StaminaResistance
+    damageCoefficient: 0.4
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototype: NTHS220Shelmet
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
+  - type: Tag
+    tags:
+    - Hardsuit
+
+- type: entity
+  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContraband ]
+  id: THS111S
+  name: THS-111-S
+  description: Специальная разработка бронескафандра станции Тайпан. Обеспечивает надёжную защиту носителя.
+  suffix: Taipan, Shitspawn
+  components:
+  - type: Sprite
+    sprite: SS220/Shitspawn/Taipan/Clothing/OuterClothing/Hardsuits/tsynd.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: SS220/Shitspawn/Taipan/Clothing/OuterClothing/Hardsuits/tsynd.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.3
+        Slash: 0.1
+        Piercing: 0.2
+        Heat: 0.1 #ss-220 armReb
+        Radiation: 0.7
+        Caustic: 0.2
+  - type: StaminaResistance
+    damageCoefficient: 0.4
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototype: THS111Shelmet
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+  #ss220 special_sounds end
+  - type: Tag
+    tags:
+    - Hardsuit

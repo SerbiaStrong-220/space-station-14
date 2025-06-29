@@ -1,3 +1,4 @@
+using Content.Shared.SS220.Language.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 
@@ -41,7 +42,7 @@ public sealed partial class TraitPrototype : IPrototype
     /// The components that get added to the player, when they pick this trait.
     /// </summary>
     [DataField]
-    public ComponentRegistry Components { get; private set; } = default!;
+    public ComponentRegistry? Components { get; private set; } = default!; // SS220 Add nullable
 
     /// <summary>
     /// Gear that is given to the player, when they pick this trait.
@@ -60,4 +61,12 @@ public sealed partial class TraitPrototype : IPrototype
     /// </summary>
     [DataField]
     public ProtoId<TraitCategoryPrototype>? Category;
+
+    [DataField]
+    public List<LanguageDefinition> LearnedLanguages = new(); // SS220-Add-Languages
+
+    //ss220 add traits start
+    [DataField]
+    public List<string>? MutuallyExclusiveWith { get; private set; }
+    //ss220 add traits end
 }

@@ -20,6 +20,12 @@
     hideLayersOnEquip:
     - Hair
     - Snout
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: SolCommon
+  # SS220-Add-Languages end
   - type: Inventory
     femaleDisplacements:
       jumpsuit:
@@ -31,6 +37,9 @@
   - type: Emoting
     chatEmoteCooldown: 5.0
   #ss220 emote 5 sec end
+  #SS220 LimitationRevive - start
+  - type: LimitationRevive
+  #SS220 LimitationRevive - end
 
 - type: entity
   parent: BaseSpeciesDummy

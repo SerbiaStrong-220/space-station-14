@@ -12,6 +12,7 @@ namespace Content.Client.UserInterface.Controls
             FullButtonTexturePath = slotData.FullTextureName;
             Blocked = slotData.Blocked;
             Highlight = slotData.Highlighted;
+            StuckOnEquip = slotData.StuckOnEquip; //ss220 StuckOnEquip
             StorageTexturePath = "Slots/back";
             SlotName = slotData.SlotName;
         }

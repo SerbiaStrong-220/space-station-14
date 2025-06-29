@@ -12,10 +12,10 @@
   - type: Clickable
   - type: Tag
     tags:
-      - Structure
+    - Structure
   - type: Sprite
     drawdepth: WallMountedItems
-    sprite: Structures/Storage/Shelfs/wood.rsi
+    sprite: SS220/Structures/Storage/Shelfs/wood.rsi #SS220 Shelfs Resprite
     state: base
   - type: Transform
   - type: Damageable
@@ -57,16 +57,18 @@
   - type: Lock
   - type: LockVisuals
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/wood.rsi
+    sprite: SS220/Structures/Storage/Shelfs/wood.rsi #SS220 Shelfs Resprite
     state: base
     layers:
     - state: rbase
       map: ["enum.StorageVisualLayers.Base"]
-    - state: unlocked
-      shader: unshaded
+    # - state: unlocked  #SS220 Shelfs Resprite
+    #   shader: unshaded #SS220 Shelfs Resprite
       # used to keep the unlocked light visible while open.
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
+    - state: unlocked #SS220 Shelfs Resprite
+      shader: unshaded #SS220 Shelfs Resprite
     - state: locked
       map: ["enum.LockVisualLayers.Lock"]
       shader: unshaded
@@ -74,7 +76,6 @@
   - type: EntityStorageVisuals
     stateDoorOpen: open
     stateDoorClosed: closed
-
   - type: AccessReader
 
 # Normal
@@ -115,7 +116,7 @@
   description: A sturdy place to place, well, anything really.
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/metal.rsi
+    sprite: SS220/Structures/Storage/Shelfs/metal.rsi #SS220 Shelfs Resprite
     state: base
   - type: Damageable
     damageModifierSet: Metallic
@@ -136,9 +137,6 @@
             max: 4
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: Tag
-    tags:
-    - Structure
   - type: Construction
     graph: Shelf
     node: ShelfMetal
@@ -150,7 +148,7 @@
   description: A fragile place to place, well, anything really.
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/glass.rsi
+    sprite: SS220/Structures/Storage/Shelfs/glass.rsi #SS220 Shelfs Resprite
     state: base
   - type: Damageable
     damageModifierSet: Glass
@@ -171,9 +169,6 @@
             max: 2
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: Tag
-    tags:
-    - Structure
   - type: Construction
     graph: Shelf
     node: ShelfGlass
@@ -186,7 +181,7 @@
   description: A safe place to put your favorite bottle of whiskey.
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/wood.rsi
+    sprite: SS220/Structures/Storage/Shelfs/wood.rsi #SS220 Shelfs Resprite
     state: base
     layers:
     - state: rbase
@@ -223,7 +218,7 @@
   description: A strong & shiny place to keep all your vials safe.
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/metal.rsi
+    sprite: SS220/Structures/Storage/Shelfs/metal.rsi #SS220 Shelfs Resprite
   - type: Destructible
     thresholds:
     - trigger:
@@ -257,7 +252,7 @@
   description: Crystal clear reinforced glass doors to show off all your fancy bottles you definitely didn't sell a co-worker's favorite mothroach for.
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/glass.rsi
+    sprite: SS220/Structures/Storage/Shelfs/glass.rsi #SS220 Shelfs Resprite
   - type: Destructible
     thresholds:
     - trigger:
@@ -292,7 +287,7 @@
   description: Made out of the finest synthetic wood for all alcohol holding needs.
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/Departments/Service/bar.rsi
+    sprite: SS220/Structures/Storage/Shelfs/Departments/Service/bar.rsi #SS220 Shelfs Resprite
     state: base
     layers:
       - state: base
@@ -322,13 +317,6 @@
     grid:
     - 0,0,5,1
     - 0,3,5,4
-    maxItemSize: Normal
-    whitelist:
-      tags:
-        - DrinkGlass
-        - DrinkBottle
-        - DrinkCan
-        - Beer
   - type: Construction
     graph: Shelf
     node: ShelfBar
@@ -340,7 +328,7 @@
   description: Holds knifes, spice, and everything nice!
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/Departments/Service/kitchen.rsi
+    sprite: SS220/Structures/Storage/Shelfs/Departments/Service/kitchen.rsi #SS220 Shelfs Resprite
     state: base
     layers:
       - state: base
@@ -376,25 +364,6 @@
     grid:
     - 0,0,5,1
     - 0,3,5,4
-    maxItemSize: Normal
-    whitelist:
-      tags:
-        - DrinkBottle
-        - DrinkCan
-        - DrinkCup
-        - DrinkGlass
-        - BoxCardboard
-        - MonkeyCube
-        - Enzyme
-        - Mayo
-        - Packet
-        - Cleaver
-        - Knife
-        - KitchenKnife
-        - RollingPin
-        - Ingredient
-        - Trash
-        - Plastic
   - type: Construction
     graph: Shelf
     node: ShelfKitchen
@@ -406,22 +375,28 @@
   description: Keeps all your chemicals safe and out of the clow- er, public hands!
   components:
   - type: Sprite
-    sprite: Structures/Storage/Shelfs/Departments/Medical/chemistry.rsi
+    sprite: SS220/Structures/Storage/Shelfs/Departments/Medical/chemistry.rsi #SS220 Shelfs Resprite
     layers:
     - state: base
       map: ["enum.StorageVisualLayers.Base"]
-    - state: unlocked
-      shader: unshaded
-    - state: chem-0
-    - map: ["enum.StorageFillLayers.Fill"]
+    #SS220 Shelfs Resprite begin
+    # - state: unlocked  
+    #   shader: unshaded
+    #- state: chem-0
+    #- map: ["enum.StorageFillLayers.Fill"]
+    #SS220 Shelfs Resprite end
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
+    - state: unlocked #SS220 Shelfs Resprite
+      shader: unshaded #SS220 Shelfs Resprite
     - state: locked
       map: ["enum.LockVisualLayers.Lock"]
       shader: unshaded
-  - type: StorageFillVisualizer
-    maxFillLevels: 7
-    fillBaseName: chem
+      #SS220 Shelfs Resprite Begin
+  # - type: StorageFillVisualizer
+  #   maxFillLevels: 7
+  #   fillBaseName: chem
+      #SS220 Shelfs Resprite End
   - type: Destructible
     thresholds:
     - trigger:
@@ -448,17 +423,9 @@
     grid:
     - 0,0,5,1
     - 0,3,5,4
-    maxItemSize: Normal
-    whitelist:
-      tags:
-        - ChemDispensable
-        - GlassBeaker
-        - Bottle
   - type: Construction
     graph: Shelf
     node: ShelfChemistry
-
-
 
 # Access presets
 # Try to keep alphabetical sorting if adding more

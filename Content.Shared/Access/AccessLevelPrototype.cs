@@ -5,7 +5,7 @@ namespace Content.Shared.Access
     /// <summary>
     ///     Defines a single access level that can be stored on ID cards and checked for.
     /// </summary>
-    [Prototype("accessLevel")]
+    [Prototype]
     public sealed partial class AccessLevelPrototype : IPrototype
     {
         [ViewVariables]
@@ -15,7 +15,7 @@ namespace Content.Shared.Access
         /// <summary>
         ///     The player-visible name of the access level, in the ID card console and such.
         /// </summary>
-        [DataField("name")]
+        [DataField]
         public string? Name { get; set; }
 
         //SS220-door-electronic-configurator begin
@@ -25,6 +25,12 @@ namespace Content.Shared.Access
         [DataField("canBeSwitchableInReader")]
         public bool CanBeSwitchableInReader { get; set; } = true;
         //SS220-door-electronic-configurator begin
+
+        /// <summary>
+        ///     Denotes whether this access level is intended to be assignable to a crew ID card.
+        /// </summary>
+        [DataField]
+        public bool CanAddToIdCard = true;
 
         public string GetAccessLevelName()
         {

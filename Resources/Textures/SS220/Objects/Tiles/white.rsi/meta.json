@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by @Kit0vras (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "white-california"
+    },
+    {
+      "name": "white-diagonal-mini"
+    },
+    {
+      "name": "white-diagonal"
+    },
+    {
+      "name": "white-eight-bricks"
+    },
+    {
+      "name": "white-herringbone"
+    },
+    {
+      "name": "white-mini"
+    },
+    {
+      "name": "white-mixed-bricks-mini"
+    },
+    {
+      "name": "white-mixed-bricks"
+    },
+    {
+      "name": "white-mixed-pavement-vertical"
+    },
+    {
+      "name": "white-mixed-pavement-horizontal"
+    },
+    {
+      "name": "white-mono"
+    },
+    {
+      "name": "white-offset"
+    },
+    {
+      "name": "white-pavement-vertical"
+    },
+    {
+      "name": "white-pavement"
+    },
+    {
+      "name": "white-reinforced"
+    },
+    {
+      "name": "white-shifted-eight-bricks"
+    },
+    {
+      "name": "white-shifted-mini-vertical"
+    },
+    {
+      "name": "white-shifted-mini-horizontal"
+    },
+    {
+      "name": "white"
+    }
+  ]
+}

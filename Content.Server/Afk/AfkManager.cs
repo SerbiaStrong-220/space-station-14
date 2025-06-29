@@ -1,5 +1,6 @@
-﻿using Content.Server.Administration.Managers;
+using Content.Server.Administration.Managers;
 using Content.Shared.CCVar;
+using Content.Shared.SS220.CCVars;
 using JetBrains.Annotations;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -79,13 +80,13 @@ namespace Content.Server.Afk
 
         public bool IsAfkKick(ICommonSession player)
         {
-            if (!_cfg.GetCVar(CCVars.AfkTimeKickEnabled))
+            if (!_cfg.GetCVar(CCVars220.AfkTimeKickEnabled))
                 return false;
             if (!_lastActionTimes.TryGetValue(player, out var time))
                 // Some weird edge case like disconnected clients. Just say true I guess.
                 return true;
 
-            var timeOut = TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.AfkTimeKick));
+            var timeOut = TimeSpan.FromSeconds(_cfg.GetCVar(CCVars220.AfkTimeKick));
             return _gameTiming.RealTime - time > timeOut;
         }
 

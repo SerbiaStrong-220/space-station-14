@@ -6,6 +6,7 @@ using Content.Shared.Devour.Components;
 using Content.Shared.Humanoid;
 using Content.Server.Body.Components;
 using Robust.Server.Containers;
+using Content.Shared.Mobs.Components; // SS220 dragon devour fix
 
 namespace Content.Server.Devour;
 
@@ -31,8 +32,6 @@ public sealed class DevourSystem : SharedDevourSystem
         if (component.FoodPreference == FoodPreference.All ||
             (component.FoodPreference == FoodPreference.Humanoid && HasComp<HumanoidAppearanceComponent>(args.Args.Target)))
         {
-            ichorInjection.ScaleSolution(0.5f);
-
             if (component.ShouldStoreDevoured && args.Args.Target is not null)
             {
                 ContainerSystem.Insert(args.Args.Target.Value, component.Stomach);
@@ -47,9 +46,15 @@ public sealed class DevourSystem : SharedDevourSystem
             QueueDel(args.Args.Target.Value);
         }
 
-        _audioSystem.PlayPvs(component.SoundDevour, uid);
+        // SS220 dragon devour fix begin
+        //_audioSystem.PlayPvs(component.SoundDevour, uid);
+        if (HasComp<MobStateComponent>(args.Args.Target))
+            _audioSystem.PlayPvs(component.SoundDevourMob, uid);
+        else
+            _audioSystem.PlayPvs(component.SoundDevour, uid);
+        // SS220 dragon devour fix end
     }
-    
+
     private void OnGibContents(EntityUid uid, DevourerComponent component, ref BeingGibbedEvent args)
     {
         if (!component.ShouldStoreDevoured)

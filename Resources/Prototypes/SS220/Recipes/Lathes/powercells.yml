@@ -1,0 +1,10 @@
+- type: latheRecipe
+  id: BlasterPowerCellAlt
+  result: BlasterPowerCellAltPrinted
+  categories: [ Parts ]
+  completetime: 10
+  materials:
+    Steel: 300
+    Glass: 200
+    Plastic: 300
+    Gold: 50

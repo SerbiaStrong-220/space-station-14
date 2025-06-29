@@ -1,0 +1,30 @@
+- type: entity
+  parent: Smoke
+  id: BloodMist
+  name: blood mist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    color: "#FF0000"
+    sprite: Effects/chemsmoke.rsi
+    state: chemsmoke
+  - type: TimedDespawn
+    lifetime: 15
+
+- type: entity
+  parent: Smoke
+  id: BloodMistSpread
+  name: blood mist
+  categories:
+  components:
+  - type: Sprite
+    color: "#FF0000"
+    sprite: Effects/chemsmoke.rsi
+    state: chemsmoke 
+  - type: TriggerOnSpawn 
+  - type: TimedDespawn
+    lifetime: 15
+  - type: SmokeOnTrigger
+    duration: 15
+    spreadAmount: 30
+    smokePrototype: BloodMist

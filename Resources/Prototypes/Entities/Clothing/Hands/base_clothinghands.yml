@@ -23,6 +23,18 @@
     tags:
     - ClothMade
     - WhitelistChameleon
+  #SS220 WristWatch on glove begin
+  - type: ItemSlots
+    slots:
+      item_watch:
+        name: wrist-watch-slot-component-slot-name
+        whitelist:
+          tags:
+          - WristWatch
+  - type: ContainerContainer
+    containers:
+      item_watch: !type:ContainerSlot
+  #SS220 WristWatch on glove end
   - type: DamageOnInteractProtection
     damageProtection:
       flatReductions:
@@ -69,11 +81,8 @@
   abstract: true
   id: GoldRingBase
   components:
-    - type: PhysicalComposition
-      materialComposition:
-        Gold: 200 # 2 bars
-    - type: StaticPrice
-      price: 300
+  - type: StaticPrice
+    price: 300
 
 - type: entity
   abstract: true
@@ -81,8 +90,5 @@
   name: silver ring
   description: Looks slightly less valuable than a gold one.
   components:
-    - type: PhysicalComposition
-      materialComposition:
-        Silver: 200 # 2 bars
-    - type: StaticPrice
-      price: 275
+  - type: StaticPrice
+    price: 275

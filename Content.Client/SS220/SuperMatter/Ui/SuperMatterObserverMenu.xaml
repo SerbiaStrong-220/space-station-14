@@ -1,0 +1,70 @@
+ <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:plot="clr-namespace:Content.Client.SS220.UserInterface.PlotFigure"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    Title="{Loc 'supermatter-observer-title'}"
+    Resizable="False"
+    MinSize="800 680"
+    SetSize="800 680"
+    RectClipContent="False">
+    <Control>
+        <PanelContainer>
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
+            </PanelContainer.PanelOverride>
+        </PanelContainer>
+        <BoxContainer Name="ContentHolderContainer" Orientation="Vertical">
+
+            <BoxContainer Name="ServerNavigationBar" VerticalAlignment="Center" HorizontalExpand="True" MinHeight="32" MaxHeight="32" Margin="2 2 6 2">
+            <!-- Here goes all avaible "Servers" with SM data -->
+            </BoxContainer>
+            <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
+            <BoxContainer Name="CrystalNavigationBar" VerticalAlignment="Center" HorizontalExpand="True" MinHeight="32" MaxHeight="32" Margin="2 2 6 2">
+            <!-- Here goes all avaible "Servers" with SM data -->
+            </BoxContainer>
+            <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
+            <BoxContainer Name="UpperDataContainer" MinHeight="256" HorizontalExpand="True" Orientation="Horizontal" Margin="4 4">
+                <plot:PlotSequencedView Name="PlotValueOverTime" HorizontalExpand="True" MaxWidth="512"  MouseFilter="Stop" MinWidth ="320"/>
+                <BoxContainer HorizontalExpand="True" HorizontalAlignment="Center" Orientation="Vertical" MaxWidth="320" MinWidth ="192">
+                    <Control VerticalExpand ="True" HorizontalExpand="True" MaxWidth="320" MinWidth ="192"/>
+                    <RichTextLabel Name="NameLabel" HorizontalExpand="True" MaxWidth="320" MinWidth ="192"/>
+                    <RichTextLabel Name="IntegrityLabel" HorizontalExpand="True" MaxWidth="320" MinWidth ="192"/>
+                    <RichTextLabel Name="PressureLabel" HorizontalExpand="True" MaxWidth="320" MinWidth ="192"/>
+                    <RichTextLabel Name="TemperatureLabel" HorizontalExpand="True" MaxWidth="320" MinWidth ="192"/>
+                    <RichTextLabel Name="MatterLabel" HorizontalExpand="True" MaxWidth="320" MinWidth ="192"/>
+                    <RichTextLabel Name="InternalEnergyLabel" HorizontalExpand="True" MaxWidth="320" MinWidth ="192" />
+                    <RichTextLabel Name="DelamStatus" HorizontalExpand="True" MaxWidth="320" MinWidth ="192" />
+                    <Control VerticalExpand ="True" HorizontalExpand="True" MaxWidth="320" MinWidth ="192" />
+                </BoxContainer>
+                <!-- Here go numberic Data -->
+                </BoxContainer>
+            <BoxContainer Name="LowerDataContainer" MinHeight="256" HorizontalExpand="True" Orientation="Horizontal" Margin="4 4">
+                <plot:Pseudo3DColoredView Name="ColorState" HorizontalExpand="True" MaxSize="512 256" MinSize="384 256"
+                    MouseFilter="Stop"  Margin="4 4" Offsets="1 1" Sizes="100 100" Steps="25 100"/>
+                <BoxContainer Name="GasScrollContainer" HorizontalExpand="True" Orientation="Vertical" MouseFilter="Pass">
+                    <RichTextLabel Name="MolesAmount" HorizontalExpand="True" HorizontalAlignment="Center"/>
+                    <ScrollContainer Name="GasScroll" HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True"
+                                        MaxSize="256 256" MinSize="192 192" Margin="2 2 2 20" MouseFilter="Pass">
+                        <BoxContainer Name="GasContainer" MinSize="192 256" Orientation="Vertical" HorizontalExpand="True" MouseFilter="Pass"  Margin="0 0 4 0">
+                            <!-- Gas Ratio Bars goes here-->
+                        </BoxContainer>
+                    </ScrollContainer>
+                </BoxContainer>
+            </BoxContainer>
+            <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
+            <BoxContainer Orientation="Vertical">
+                <PanelContainer StyleClasses="LowDivider" />
+                <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
+                    <Label Text="{Loc 'smObserver-footer-left'}" StyleClasses="WindowFooterText" />
+                    <Label Text="{Loc 'smObserver-footer-right'}" StyleClasses="WindowFooterText"
+                            HorizontalAlignment="Right" HorizontalExpand="True"  Margin="0 0 5 0" />
+                    <TextureRect StyleClasses="NTLogoDark" Stretch="KeepAspectCentered"
+                            VerticalAlignment="Center" HorizontalAlignment="Right" SetSize="19 19"/>
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </Control>
+</controls:FancyWindow>

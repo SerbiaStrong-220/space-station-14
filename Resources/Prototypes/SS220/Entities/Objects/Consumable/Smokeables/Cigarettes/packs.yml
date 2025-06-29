@@ -2,7 +2,7 @@
 
 - type: entity
   id: CigPackBaseSS220
-  parent: [ BaseStorageItem, BaseBagOpenClose ]
+  parent: [ CigPackBase ]
   name: cigarette pack
   abstract: true
   components:
@@ -53,25 +53,6 @@
       map: ["10"]
       sprite: SS220/Objects/Consumable/Smokeables/Cigaretts/Packs/visualizer.rsi
       visible: false
-  - type: Tag
-    tags:
-    - CigPack
-    - Trash
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 50
-  - type: SpaceGarbage
-  - type: Item
-    size: Tiny
-    shape:
-    - 0,0,0,1
-  - type: Storage
-    grid:
-    - 0,0,4,1
-  - type: StorageFill
-    contents:
-    - id: Cigarette
-      amount: 10
   - type: ItemCounter
     count:
       tags: [Cigarette]
@@ -87,7 +68,6 @@
     - 8
     - 9
     - 10
-  - type: Appearance
 
 - type: entity
   id: CigPackENG

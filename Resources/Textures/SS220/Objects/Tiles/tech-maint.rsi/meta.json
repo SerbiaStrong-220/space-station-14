@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by @Kit0vras (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name":"tech-maint-drain-middle"
+    },
+    {
+      "name":"tech-maint-drain-horizontal"
+    },
+    {
+      "name":"tech-maint-drain-vertical"
+    },
+    {
+      "name":"tech-maint-horizontal"
+    },
+    {
+      "name":"tech-maint-mini"
+    },
+    {
+      "name":"tech-maint-mono"
+    },
+    {
+      "name":"tech-maint-vertical"
+    },
+    {
+      "name":"tech-maint"
+    }
+  ]
+}

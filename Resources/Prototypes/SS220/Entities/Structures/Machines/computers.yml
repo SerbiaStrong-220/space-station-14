@@ -70,3 +70,129 @@
       board: SalvageShuttleConsoleCircuitboard
     - type: StealTarget
       stealGroup: SalvageShuttleConsoleCircuitboard
+
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: ComputerPdaIdPainter
+  name: pda and id painter computer
+  description: pda and id painter computer
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Machines/pda_id_painter.rsi
+    snapCardinals: false
+    layers:
+    - state: default
+    - state: off
+      shader: unshaded
+      map: [ "leds" ]
+      visible: true
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        leds:
+          True: { state: on, visible: true }
+          False: { state: off, visible: true }
+  - type: PdaIdPainter
+    idCardSlot:
+      name: pda-id-painter-console-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - IdCard
+    pdaSlot:
+      name: pda-id-painter-console-pda
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - Pda
+  - type: AccessReader
+    access: [ [ "Command" ] ]
+  - type: ActivatableUI
+    key: enum.PdaIdPainterUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.PdaIdPainterUiKey.Key:
+        type: PdaIdPainterBoundUserInterface
+  - type: Machine
+    board: PdaIdPainterMachineCircuitboard
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      machine_parts: !type:Container
+      machine_board: !type:Container
+      id_painter_slot: !type:ContainerSlot
+      pda_painter_slot: !type:ContainerSlot
+  - type: Appearance
+  - type: ActivatableUIRequiresPower
+  - type: WiresPanel
+  - type: WiresVisuals
+
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerCluwneComms
+  name: cluwne communications computer
+  description: Used to create memed announces
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Machines/cluwneComms.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: cluwne_computer
+    - map: ["computerLayerKeyboard"]
+      state: cluwne_keyboard
+    - map: ["computerLayerScreen"]
+      state: cluwne_screen
+    - map: ["computerLayerKeys"]
+      state: cluwne_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: AccessReader
+    access: [[ "Theatre" ]]
+  - type: ActivatableUI
+    key: enum.CluwneCommsConsoleUiKey.Key
+  - type: CluwneCommsConsole
+    title: cluwne-comms-console-announcement-title-station
+    sound:
+      path: /Audio/SS220/Announcements/cluwne_comm_announce.ogg
+      params:
+        volume: -4
+  - type: UserInterface
+    interfaces:
+      enum.CluwneCommsConsoleUiKey.Key:
+        type: CluwneCommsConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Computer
+    board: CluwneCommsComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#3c5eb5"
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: monitorBroken
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CluwneCommsComputerCircuitboard:
+            min: 1
+            max: 1
+

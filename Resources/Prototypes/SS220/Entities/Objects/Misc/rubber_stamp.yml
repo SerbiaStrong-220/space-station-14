@@ -108,6 +108,20 @@
     state: stamp-centcom
 
 - type: entity
+  name: CentCom rubber stamp
+  parent: RubberStampBaseAlt
+  id: RubberStampDoAP
+  suffix: DO NOT MAP
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-DoAP
+    stampedColor: "#e23e29"
+    stampState: "paper_stamp-centcom"
+  - type: Sprite
+    sprite: SS220/Objects/Misc/stamps.rsi
+    state: stamp-centcom
+
+- type: entity
   parent: RubberStampBase
   id: RubberStampMagistrate
   name: magistrate rubber stamp

@@ -1,0 +1,54 @@
+- type: constructionGraph
+  id: SpiderCocoon
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:SpawnPrototype
+          prototype: MaterialWebSilk1
+          amount: 4
+        - !type:DeleteEntity
+
+    - node: cocoonHorizontal
+      entity: SpiderCocoonHorizontal
+      edges:
+        - to: cocoonHorizontalDestroyed
+          completed:
+            - !type:EmptyContainer
+              container: cocoon
+            - !type:SpawnPrototype
+              prototype: MaterialWebSilk1
+              amount: 2
+          steps:
+            - tool: Slicing
+              doAfter: 10
+
+    - node: cocoonVertical
+      entity: SpiderCocoonVertical
+      edges:
+        - to: cocoonVerticalDestroyed
+          completed:
+            - !type:EmptyContainer
+              container: cocoon
+            - !type:SpawnPrototype
+              prototype: MaterialWebSilk1
+              amount: 2
+          steps:
+            - tool: Slicing
+              doAfter: 10
+
+    - node: cocoonHorizontalDestroyed
+      entity: SpiderCocoonHorizontalDestroyed
+      edges:
+        - to: start
+          steps:
+            - tool: Slicing
+              doAfter: 4
+
+    - node: cocoonVerticalDestroyed
+      entity: SpiderCocoonVerticalDestroyed
+      edges:
+        - to: start
+          steps:
+            - tool: Slicing
+              doAfter: 4

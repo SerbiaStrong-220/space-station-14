@@ -1,0 +1,39 @@
+- type: entity
+  id: ClownMimeCyborgInstruction
+  suffix: "ClownMime Instruction"
+  parent: Paper
+  components:
+  - type: Paper
+    stampState: paper_stamp-clown
+    stampedBy:
+    - stampedName: Хонкомама
+      stampedColor: "#C71585"
+    - stampedName: Хранительница тишины
+      stampedColor: "#696969"
+    content: book-text-clownmime-scribbles
+  - type: PaperVisuals
+    backgroundImagePath: "/Textures/Interface/Paper/paper_background_default.svg.96dpi.png"
+    contentImagePath: "/Textures/Interface/Paper/paper_content_lined.svg.96dpi.png"
+    backgroundModulate: "#cccccc"
+    contentImageModulate: "#cccccc"
+    backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
+    contentMargin: 16.0, 16.0, 16.0, 16.0
+
+- type: entity
+  id: PaperDnaCopyImplanter
+  parent: Paper
+  components:
+  - type: Paper
+    content: book-text-identity-implant-info
+
+- type: entity
+  parent: PaperNtFormSec
+  id: PilotBriefing
+  name: брифинг пилота
+  components:
+    - type: Paper
+      content: pilot-briefing-text
+      stampState: paper_stamp-centcom
+      stampedBy:
+      - stampedName: Центком
+        stampedColor: "#006000"

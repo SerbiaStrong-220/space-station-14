@@ -1,0 +1,99 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/3f2ebd858fa918a0bd4afad227731376475d599f",
+    "size": {
+      "x": 64,
+      "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+          },
+          {
+            "name": "broken",
+            "delays": [
+                [
+                  1,
+                  1,
+                  1,
+                  67,
+                  20,
+                  10,
+                  10,
+                  30
+                ]
+            ]
+          },
+          {
+            "name": "shame"
+          },
+          {
+            "name": "off"
+          },
+          {
+            "name": "on"
+          },
+          {
+            "name": "warn"
+          },
+          {
+            "name": "num_0"
+          },
+          {
+            "name": "num_1"
+          },
+          {
+            "name": "num_2"
+          },
+          {
+            "name": "num_3"
+          },
+          {
+            "name": "num_4"
+          },
+          {
+            "name": "num_5"
+          },
+          {
+            "name": "num_6"
+          },
+          {
+            "name": "num_7"
+          },
+          {
+            "name": "num_8"
+          },
+          {
+            "name": "num_9"
+          },
+          {
+            "name": "rising"
+          },
+          {
+            "name": "falling"
+          },
+          {
+            "name": "event",
+            "delays": [
+                [
+                  0.2,
+                  0.2,
+                  0.2,
+                  0.2,
+                  0.2,
+                  0.2,
+                  0.2,
+                  0.2,
+                  0.2,
+                  0.2,
+                  0.2,
+                  0.2,
+                  0.2,
+                  1,
+                  4
+                ]
+            ]
+          }
+    ]
+  }

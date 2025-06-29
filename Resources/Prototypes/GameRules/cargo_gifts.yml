@@ -16,7 +16,7 @@
     - id: GiftsVendingRestock
 
 # Game Rules
-    
+
 - type: entity
   id: CargoGiftsBase
   parent: BaseGameRule
@@ -213,24 +213,4 @@
       SecurityRiot: 2
       SecurityRestraints: 2
       SecurityNonLethal: 2
-
-#ss220-gamma
-- type: entity
-  id: GiftsGamma
-  parent: CargoGiftsBase #SS220 GiftsGamma event fix
-  categories: [ GameRules ]
-  components:
-  #SS220 GiftsGamma event fix begin
-  - type: StationEvent
-    cannotStartRandomly: true
-  #SS220 GiftsGamma event fix end
-  - type: CargoGiftsRule
-    description: cargo-gift-dest-gamma
-    sender: cargo-gift-default-sender
-    dest: cargo-gift-dest-all
-    gifts:
-      SecurityArmor: 2
-      SecurityHelmet: 2
-      ArmorySmg: 3
-      ArmoryShotgun: 3
-#ss220-gammaend
+      SecurityNonlethalThrowables: 1

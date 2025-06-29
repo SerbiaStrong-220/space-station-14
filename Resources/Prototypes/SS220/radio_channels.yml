@@ -190,16 +190,7 @@
   frequency: 1001
   color: "#FFB6C1"
   longRange: true
-# Admin memes end
-
-#Spider queen antag
-- type: radioChannel #Connection
-  id: HiveRadio
-  name: chat-radio-hive
-  keycode: 'у'
-  frequency: 2885
-  color: "#cc80ff"
-  longRange: true
+# Admin memes end 
 
 #Department Internal Affairs
 - type: radioChannel
@@ -207,4 +198,4 @@
   name: chat-radio-law
   keycode: 'ю'
   frequency: 1373
-  color: "#323ba9"
+  color: "#5b65e2"

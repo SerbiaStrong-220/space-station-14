@@ -8,14 +8,14 @@
     proto: CartridgeRiflePractice
   - type: Sprite
     layers:
-    - state: base-b
+    - state: base-big
       map: ["enum.GunVisualLayers.Base"]
-    - state: magb-2
+    - state: mag-big-2
       map: ["enum.GunVisualLayers.Mag"]
-    - state: practice-b
+#    - state: practice-b # Need sprite
   - type: MagazineVisuals
-    magState: magb
-    steps: 3
+    magState: mag-big
+    steps: 4
     zeroVisible: false
   - type: Appearance
 
@@ -32,7 +32,7 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
-    - state: rubber
+#    - state: rubber # Need sprite
 
 - type: entity
   parent: BaseMagazineBoxMagnum
@@ -47,7 +47,7 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
-    - state: rubber
+#    - state: rubber # Need sprite
 
 - type: entity
   parent: BaseMagazineBoxLightRifle
@@ -62,7 +62,7 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
-    - state: rubber
+#    - state: rubber # Need sprite
 
 - type: entity
   parent: BaseMagazineBoxCaselessRifle
@@ -74,14 +74,14 @@
     proto: CartridgeCaselessRifleRubber
   - type: Sprite
     layers:
-    - state: base-b
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: magb-2
+    - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
-    - state: rubber-b
+#    - state: rubber-b # Need sprite
   - type: MagazineVisuals
-    magState: magb
-    steps: 3
+    magState: mag
+    steps: 4
     zeroVisible: false
   - type: Appearance
 
@@ -98,7 +98,7 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
-    - state: rubber
+#    - state: rubber # Need sprite
 
 - type: entity
   parent: BaseMagazineBoxCaselessRifle
@@ -113,4 +113,4 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
-    - state: rubber
+#    - state: rubber # Need sprite

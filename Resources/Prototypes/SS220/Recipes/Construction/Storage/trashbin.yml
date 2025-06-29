@@ -1,0 +1,11 @@
+- type: construction
+  id: TrashBin
+  graph: TrashBin
+  startNode: start
+  targetNode: TrashBin
+  category: construction-category-storage
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked

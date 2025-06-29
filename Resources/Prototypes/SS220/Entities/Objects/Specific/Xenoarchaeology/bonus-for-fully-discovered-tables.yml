@@ -1,0 +1,42 @@
+- type: entityTable
+  id: XenoArtifactBonusForFullyDiscoveredTable
+  table: !type:GroupSelector
+    children:
+    - id: BlueprintBeltChiefEngineer
+    - id: BlueprintSeismicCharge
+    - id: BlueprintFulton
+    - id: BlueprintSuperSynthesizerInstrument
+    - id: BlueprintFultonBeacon
+    - id: BlueprintClothingBeltMilitaryWebbing
+    - id: BlueprintWallmountGeneratorAPUElectronics
+    - id: BlueprintWeaponCrusher
+    - id: BlueprintWeaponCrusherGlaive
+    - id: BlueprintJetpackVoid
+    - id: BlueprintToySword
+    - id: BlueprintDoubleToySword
+    - id: BlueprintWelderIndustrial
+    - id: BlueprintWelderIndustrialAdvanced
+    - id: BlueprintSawAdvanced
+    - id: BlueprintGlowstickBlue
+    - id: BlueprintSyndicateMicrowaveMachineCircuitboard
+    - id: BlueprintPowerCellHyperPrinted
+    - id: ClothingOuterCoatExpensive
+    - id: PowerCellAntiqueProto
+    - id: MetalFoamGrenade
+    - id: WeaponLaserGun
+    - id: FireAxe
+    - id: ClothingHeadHatChameleon
+    - id: UsspPDA
+    - id: SyndiPDA
+    - id: SoapOmega
+    - id: ClothingOuterCoatExpensive
+    - id: ClothingBackpackERTSecurity
+    - id: WeaponTeslaGun
+    - id: Chainsaw
+    - id: EnergyDaggerLoud
+    - id: BorgModuleSyndicateWeapon
+    - id: WeaponMeleeToolboxRobust
+    - id: PresentRandomUnsafe
+    - id: TeslaToy
+    - id: ClothingHeadHatCatEars
+    - id: DnaScramblerImplanter

@@ -1,7 +1,7 @@
 # SS220 CBURN questions
 id-card-access-level-central-command-cburn = РХБЗ
 id-card-access-level-central-command-ert = ОБР
-id-card-access-level-central-command-gsn = ГСН
+id-card-access-level-central-command-bs-operative = Оперативник "Синий Щит"
 id-card-access-level-central-command-death-squad = Эскадрон смерти
 
 id-card-access-level-ussp = СССП

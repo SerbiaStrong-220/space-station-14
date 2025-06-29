@@ -1,0 +1,62 @@
+- type: entity
+  abstract: true
+  parent: [ClothingNeckBase, BaseFoldable]
+  id: ClothingNeckOtherShoulderBase
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-other-shoulder-verb
+    foldVerbText: fold-other-shoulder-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: other-shoulder
+    foldedHeldPrefix: other-shoulder
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_other-shoulder
+      map: ["foldedLayer"]
+      visible: false
+
+- type: entity
+  abstract: true
+  parent: ClothingNeckOtherShoulderBase
+  id: ClothingNeckOtherShoulderedBase
+  suffix: OtherShoulder
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: other-shoulder
+  - type: Item
+    heldPrefix: other-shoulder
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon_other-shoulder
+      map: ["foldedLayer"]
+      visible: true
+
+- type: entity
+  parent: ClothingHeadEyeBaseFlippableAlt
+  id: ClothingNeckBaseFlippedAlt
+  suffix: flipped
+  abstract: true
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: flipped
+  - type: Item
+    heldPrefix: flipped
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon_flipped
+      map: ["foldedLayer"]
+      visible: true

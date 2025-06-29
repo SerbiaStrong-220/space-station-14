@@ -1,0 +1,44 @@
+ <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<cartridges:SupermatterObserverUiFragment
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:pda="clr-namespace:Content.Client.PDA"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:cartridges="clr-namespace:Content.Client.SS220.Cartridges"
+    xmlns:plot="clr-namespace:Content.Client.SS220.UserInterface.PlotFigure"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls" VerticalExpand="True" Margin="1 0 2 0">
+    <Control HorizontalExpand="True">
+        <PanelContainer>
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
+            </PanelContainer.PanelOverride>
+        </PanelContainer>
+        <BoxContainer Name="ContentHolderContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal" VerticalAlignment="Center" HorizontalExpand="True">
+                <BoxContainer Name="ServerNavigationBar" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalExpand="True" MinHeight="24" MaxHeight="24" Margin="2 2 6 2">
+                <!-- Here goes all avaible "Servers" with SM data -->
+                </BoxContainer>
+                <pda:PdaNavigationButton Name="RefreshButton" SetWidth="32" CurrentTabBorderThickness="0 0 2 0" IsCurrent="True"/>
+            </BoxContainer>
+            <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
+            <BoxContainer Name="CrystalNavigationBar" VerticalAlignment="Center" HorizontalExpand="True" MinHeight="24" MaxHeight="24" Margin="2 2 6 2">
+            <!-- Here goes all avaible "Servers" with SM data -->
+            </BoxContainer>
+            <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
+            <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
+                <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+                    <plot:PlotSequencedView Name="PlotValueOverTime" HorizontalExpand="True" MinSize="168 232" MouseFilter="Stop" Margin="2 4 20 4"/>
+                    <PanelContainer StyleClasses="LowDivider" Margin="2 0 2 0"/>
+                    <plot:Pseudo3DColoredView Name="ColorState" HorizontalExpand="True" MouseFilter="Stop" MinSize="168 232"
+                        Margin="2 4 20 4" Offsets="1 1" Sizes="100 100" Steps="25 100"/>
+                </BoxContainer>
+            </ScrollContainer>
+            <BoxContainer Orientation="Vertical">
+                <PanelContainer StyleClasses="LowDivider" />
+                <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
+                    <Label Text="{Loc 'smObserver-cartridge-footer-left'}" StyleClasses="WindowFooterText" />
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </Control>
+</cartridges:SupermatterObserverUiFragment>

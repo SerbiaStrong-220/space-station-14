@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Anomaly.Components;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
@@ -174,6 +175,11 @@ public abstract partial class SharedTetherGunSystem : EntitySystem
     {
         if (HasComp<TetheredComponent>(target) || !TryComp<PhysicsComponent>(target, out var physics))
             return false;
+
+        // SS220 Anomaly fix and tether gravy gun used remove
+        if (HasComp<AnomalyComponent>(target))
+            return false;
+        // SS220 Anomaly fix and tether gravy gun used remove
 
         if (physics.BodyType == BodyType.Static && !component.CanUnanchor ||
             _container.IsEntityInContainer(target))

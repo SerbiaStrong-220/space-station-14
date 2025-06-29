@@ -1,0 +1,1 @@
+markings-category-Foots = Ступни

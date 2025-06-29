@@ -28,9 +28,11 @@
       params:
         variation: 0.250
   - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit: #ss220 stunprod stamina damage fix
+      path: /Audio/Weapons/egloves.ogg #ss220 stunprod stamina damage fix
     activatedDamage:
       types:
-        Shock: 5
+        Blunt: 0 #ss220 stunprod fix
   - type: Stunbaton
     energyPerUse: 120
   - type: MeleeWeapon
@@ -41,11 +43,17 @@
     angle: 60
     animation: WeaponArcThrust
   - type: StaminaDamageOnHit
-    damage: 35
+    damage: 35 #ss220 stunprod stamina damage
     sound: /Audio/Weapons/egloves.ogg
   - type: StaminaDamageOnCollide
-    damage: 35
+    damage: 35 #ss220 stunprod stamina damage
     sound: /Audio/Weapons/egloves.ogg
+  #ss220 stunprod stamina damage fix begin
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 4
+  #ss220 stunprod stamina damage fix end
   - type: LandAtCursor # it deals stamina damage when thrown
   - type: Battery
     maxCharge: 360

@@ -7,6 +7,7 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Speech;
+using Content.Shared.SS220.Telepathy;
 using Content.Shared.Throwing;
 
 namespace Content.Shared.Administration;
@@ -33,6 +34,7 @@ public abstract class SharedAdminFrozenSystem : EntitySystem
         SubscribeLocalEvent<AdminFrozenComponent, ChangeDirectionAttemptEvent>(OnAttempt);
         SubscribeLocalEvent<AdminFrozenComponent, EmoteAttemptEvent>(OnEmoteAttempt);
         SubscribeLocalEvent<AdminFrozenComponent, SpeakAttemptEvent>(OnSpeakAttempt);
+        SubscribeLocalEvent<AdminFrozenComponent, TelepathySendAttemptEvent>(OnTelepathyAttempt); // SS220 Block telepathy on death
     }
 
     private void OnInteractAttempt(Entity<AdminFrozenComponent> ent, ref InteractionAttemptEvent args)
@@ -86,4 +88,12 @@ public abstract class SharedAdminFrozenSystem : EntitySystem
         if (component.Muted)
             args.Cancel();
     }
+
+    // SS220 Block telepathy on death begin
+    private void OnTelepathyAttempt(Entity<AdminFrozenComponent> entity, ref TelepathySendAttemptEvent args)
+    {
+        if (entity.Comp.Muted)
+            args.Cancelled = true;
+    }
+    // SS220 Block telepathy on death end
 }

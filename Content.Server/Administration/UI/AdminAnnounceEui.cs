@@ -1,15 +1,18 @@
+using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.EUI;
 using Content.Shared.Administration;
+using Content.Shared.Database;
 using Content.Shared.Eui;
 
 namespace Content.Server.Administration.UI
 {
     public sealed class AdminAnnounceEui : BaseEui
     {
+        [Dependency] private readonly IAdminLogManager _adminLogManager = default!; // SS220-add-eui-log
         [Dependency] private readonly IAdminManager _adminManager = default!;
         [Dependency] private readonly IChatManager _chatManager = default!;
         private readonly ChatSystem _chatSystem;
@@ -42,7 +45,10 @@ namespace Content.Server.Administration.UI
                         Close();
                         break;
                     }
-
+                    // SS220-add-eui-log
+                    _adminLogManager.Add(LogType.Chat, LogImpact.Low,
+                        $"Announcement from {Player:user}, announcer: {doAnnounce.Announcer},  message: {doAnnounce.Announcement}");
+                    // SS220-add-eui-log
                     switch (doAnnounce.AnnounceType)
                     {
                         case AdminAnnounceType.Server:

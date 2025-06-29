@@ -1,5 +1,6 @@
 using Content.Shared.CriminalRecords.Systems;
 using Content.Shared.Dataset;
+using Content.Shared.SS220.CriminalRecords; // SS220-criminal-console-fix
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -21,7 +22,15 @@ public sealed partial class CriminalRecordsHackerComponent : Component
     /// Dataset of random reasons to use.
     /// </summary>
     [DataField]
-    public ProtoId<DatasetPrototype> Reasons = "CriminalRecordsWantedReasonPlaceholders";
+    public ProtoId<LocalizedDatasetPrototype> Reasons = "CriminalRecordsWantedReasonPlaceholders";
+
+    // SS220-criminal-console-fix
+    /// <summary>
+    /// CriminalStatus which will be after hacking
+    /// </summary>
+    [DataField]
+    public ProtoId<CriminalStatusPrototype> CriminalStatusPrototype = "wanted";
+    // SS220-criminal-console-fix
 
     /// <summary>
     /// Announcement made after the console is hacked.

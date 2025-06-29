@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by @Kit0vras (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "dark-california"
+    },
+    {
+      "name": "dark-diagonal-mini"
+    },
+    {
+      "name": "dark-diagonal"
+    },
+    {
+      "name": "dark-eight-bricks"
+    },
+    {
+      "name": "dark-herringbone"
+    },
+    {
+      "name": "dark-mini"
+    },
+    {
+      "name": "dark-mixed-bricks-mini"
+    },
+    {
+      "name": "dark-mixed-bricks"
+    },
+    {
+      "name": "dark-mixed-pavement-vertical"
+    },
+    {
+      "name": "dark-mixed-pavement-horizontal"
+    },
+    {
+      "name": "dark-mono"
+    },
+    {
+      "name": "dark-offset"
+    },
+    {
+      "name": "dark-pavement-vertical"
+    },
+    {
+      "name": "dark-pavement"
+    },
+    {
+      "name": "dark-reinforced"
+    },
+    {
+      "name": "dark-shifted-eight-bricks"
+    },
+    {
+      "name": "dark-shifted-mini-vertical"
+    },
+    {
+      "name": "dark-shifted-mini-horizontal"
+    },
+    {
+      "name": "dark"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+- type: entity
+  id: LockerDeathsquadOperativeFilled
+  suffix: Filled
+  parent: LockerDeathsquad
+  components:
+  - type: StorageFill
+    contents:
+    - id: FlashlightSeclite
+    - id: ClothingEyesHudOmniversal
+    - id: ClothingMaskGasDeathSquad
+    - id: ClothingHandsGlovesDQ
+    - id: ClothingShoesBootsMagDQ
+    - id: ClothingHeadsetAltCentComm
+    - id: ClothingBackpackDeathSquadOperativeFilled
+
+- type: entity
+  id: LockerDeathsquadCommanderFilled
+  suffix: Filled
+  parent: LockerDeathsquadCommander
+  components:
+  - type: StorageFill
+    contents:
+    - id: FlashlightSeclite
+    - id: ClothingEyesHudOmniversal
+    - id: ClothingMaskGasDeathSquad
+    - id: ClothingHandsGlovesDQ
+    - id: ClothingShoesBootsMagDQ
+    - id: ClothingHeadsetAltCentComm
+    - id: WeaponRifleSP
+    - id: Chainsword
+    - id: ClothingOuterHardsuitDeathsquadCommander
+    - id: ClothingBackpackDeathSquadOperativeFilled
+    - id: MagazineMagnumSubMachineGunSP-91-RC
+      amount: 2
+
+- type: entity
+  id: LockerDeathsquadSpecialistFilled
+  suffix: Filled
+  parent: LockerDeathsquadSpecialist
+  components:
+  - type: StorageFill
+    contents:
+    - id: FlashlightSeclite
+    - id: ClothingEyesHudOmniversal
+    - id: ClothingMaskGasDeathSquad
+    - id: ClothingHandsGlovesDQ
+    - id: ClothingShoesBootsMagDQ
+    - id: ClothingHeadsetAltCentComm
+    - id: WeaponPulseShotgun
+    - id: ClothingOuterHardsuitDeathsquadAlpha
+    - id: ClothingBackpackDeathSquadSpecialistFilled

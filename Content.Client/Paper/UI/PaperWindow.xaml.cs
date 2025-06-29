@@ -9,7 +9,10 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Utility;
 using Robust.Client.UserInterface.RichText;
+using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
+using Content.Client.SS220.Language;
+using Robust.Client.Player;
 
 namespace Content.Client.Paper.UI
 {
@@ -18,6 +21,10 @@ namespace Content.Client.Paper.UI
     {
         [Dependency] private readonly IInputManager _inputManager = default!;
         [Dependency] private readonly IResourceCache _resCache = default!;
+        [Dependency] private readonly IPlayerManager _player = default!; // SS220 languages
+        [Dependency] private readonly IEntityManager _entityManager = default!; // SS220 languages
+
+        private readonly LanguageSystem _languageSystem; // SS220 languages
 
         private static Color DefaultTextColor = new(25, 25, 25);
 
@@ -43,7 +50,9 @@ namespace Content.Client.Paper.UI
             typeof(BulletTag),
             typeof(ColorTag),
             typeof(HeadingTag),
-            typeof(ItalicTag)
+            typeof(ItalicTag),
+            typeof(MonoTag),
+            typeof(LanguageMessageTag) // SS220 language
         };
 
         public event Action<string>? OnSaved;
@@ -66,6 +75,11 @@ namespace Content.Client.Paper.UI
         {
             IoCManager.InjectDependencies(this);
             RobustXamlLoader.Load(this);
+
+            // SS220 languages begin
+            _languageSystem = _entityManager.System<LanguageSystem>();
+            _languageSystem.OnNodeInfoUpdated += _ => UpdateWrittenTextMarkups();
+            // SS220 languages end
 
             // We can't configure the RichTextLabel contents from xaml, so do it here:
             BlankPaperIndicator.SetMessage(Loc.GetString("paper-ui-blank-page-message"), null, DefaultTextColor);
@@ -147,6 +161,16 @@ namespace Content.Client.Paper.UI
             HeaderImage.Margin = new Thickness(visuals.HeaderMargin.Left, visuals.HeaderMargin.Top,
                     visuals.HeaderMargin.Right, visuals.HeaderMargin.Bottom);
 
+            // Then the footer
+            if (visuals.FooterImagePath is {} path)
+            {
+                FooterImage.TexturePath = path.ToString();
+                FooterImage.MinSize = FooterImage.TextureNormal?.Size ?? Vector2.Zero;
+            }
+
+            FooterImage.ModulateSelfOverride = visuals.FooterImageModulate;
+            FooterImage.Margin = new Thickness(visuals.FooterMargin.Left, visuals.FooterMargin.Top,
+                    visuals.FooterMargin.Right, visuals.FooterMargin.Bottom);
 
             PaperContent.ModulateSelfOverride = visuals.ContentImageModulate;
             WrittenTextLabel.ModulateSelfOverride = visuals.FontAccentColor;
@@ -246,6 +270,7 @@ namespace Content.Client.Paper.UI
             bool wasEditing = InputContainer.Visible;
             InputContainer.Visible = isEditing;
             EditButtons.Visible = isEditing;
+            DocumentHelper.Visible = isEditing; // SS220 Document helper
 
             var msg = new FormattedMessage();
             msg.AddMarkupPermissive(state.Text);
@@ -259,15 +284,28 @@ namespace Content.Client.Paper.UI
                 // player opens the UI for reading. In this case, don't update the
                 // text input, as this player is currently writing new text and we
                 // don't want to lose any text they already input.
+
+                // SS220 languages begin
+                var inputText = state.Text;
+                var player = _player.LocalEntity;
+                inputText = _languageSystem.DecryptLanguageMarkups(inputText, true, player);
+                // SS220 languages end
+
                 Input.TextRope = Rope.Leaf.Empty;
                 Input.CursorPosition = new TextEdit.CursorPos();
-                Input.InsertAtCursor(state.Text);
+                // SS220 languages begin
+                //Input.InsertAtCursor(state.Text);
+                Input.InsertAtCursor(inputText);
+                // SS220 languages end
             }
 
             for (var i = 0; i <= state.StampedBy.Count * 3 + 1; i++)
             {
                 msg.AddMarkupPermissive("\r\n");
             }
+
+            _languageSystem.FindAndRequestNodeInfoForMarkups(msg.ToMarkup()); // SS220 languages
+            WrittenTextLabel.RemoveAllChildren(); // SS220 Markups control on paper fix
             WrittenTextLabel.SetMessage(msg, _allowedTags, DefaultTextColor);
 
             WrittenTextLabel.Visible = !isEditing && state.Text.Length > 0;
@@ -343,5 +381,30 @@ namespace Content.Client.Paper.UI
                 SaveButton.Disabled = false;
             }
         }
+
+        // SS220 Document helper begin
+        public void InsertAtCursor(string value)
+        {
+            Input.InsertAtCursor(value);
+        }
+        // SS220 Document helper end
+
+        // SS220 languages begin
+        private void UpdateWrittenTextMarkups()
+        {
+            if (WrittenTextLabel.Disposed)
+                return;
+
+            var text = WrittenTextLabel.GetMessage();
+            if (text == null)
+                return;
+
+            var msg = new FormattedMessage();
+            msg.AddMarkupPermissive(text);
+
+            WrittenTextLabel.RemoveAllChildren();
+            WrittenTextLabel.SetMessage(msg, _allowedTags, DefaultTextColor);
+        }
+        // SS220 languages end
     }
 }

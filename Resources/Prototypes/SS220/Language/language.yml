@@ -1,0 +1,298 @@
+# Based on SS13 Paradise (https://github.com/ParadiseSS13/Paradise/blob/017a56f8080361f04c296c94859802aaddf25114/code/modules/mob/language.dm#L4)
+
+# Everyone understands you, you understand everyone, but there's no right to speak all languages
+- type: language
+  id: Universal
+  key: uni
+  scrambleMethod: !type:EmptyScrambleMethod # Doesn't scramble messages
+
+# Galactic common lanaguges region:
+- type: language
+  id: Galactic
+  key: gl
+  name: "language-galacticcommon-name"
+  description: "language-galacticcommon-desc"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [бла, бла, бла, бле, мех, ньех, нах, ах, угу, увы]
+
+- type: language
+  id: SolCommon
+  key: sl
+  name: "language-solcommon-name"
+  description: "language-solcommon-desc"
+  color: "#2f2fad"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [tao, shi, tzu, yi, com, be, is, i, op, vi, ed, lec, mo, cle, te, dis, e]
+
+- type: language
+  id: Tradeband
+  key: trd
+  name: "language-tradeband-name"
+  description: "language-tradeband-desc"
+  color: "#87451c"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 1
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [lorem, ipsum, dolor, sit, amet, consectetur, adipiscing, elit, sed, do, eiusmod, tempor, incididunt, ut, labore,
+                et, dolore, magna, aliqua, ut, enim, ad, minim, veniam, quis, nostrud, exercitation,
+                ullamco, laboris, nisi, ut, aliquip, ex, ea, commodo, consequat, duis, aute, irure,
+                dolor, in, reprehenderit, in, voluptate, velit, esse, cillum, dolore, eu, fugiat,
+                nulla, pariatur, excepteur, sint, occaecat, cupidatat, non, proident, sunt, in,
+                culpa, qui, officia, deserunt, mollit, anim, id, est, laborum]
+
+- type: language
+  id: Codespeak
+  key: cod
+  name: "language-codespeak-name"
+  description: "language-codespeak-desc"
+  color: "#8f4a4b"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 1
+    specialCharacters:
+      - character: " "
+      - character: ", "
+        capitalize: false
+        weight: 0.3
+    syllables: [виски, кола, тоник, водка, вермут, ром, эхо, лима, альфа, дельта, гамма, сигма, чарли, зомби, шлюз, бармен, повар, грузчик, учёный, инженер, карп, ИИ, борг, смена, цель, русский, перчатки, адвокат, пьяный, бипски, иан, морти, черный, белый, капитан, и]
+
+- type: language
+  id: Gutter
+  key: gt
+  name: "language-gutter-name"
+  description: "language-gutter-desc"
+  color: "#7092BE"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 0.55
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [gra, ba, ba, breh, bra, rah, dur, ra, ro, gro, go, ber, bar, geh, heh, gra]
+
+- type: language
+  id: Clownish
+  key: clw
+  name: "language-clownish-name"
+  description: "language-clownish-desc"
+  color: "#ff0000"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 0.6
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [хонк, cкуик, ойк, бонк, тут, наф, пуп, ви, вуб, ниф]
+
+- type: language
+  id: NeoRusskiya
+  key: ru
+  name: "language-neorusskiya-name"
+  description: "language-neorusskiya-desc"
+  color: "#7c4848"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 0.65
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [dyen, bar, bota, vyek, tvo, slov, slav, syen, doup, vah, laz, gloz,
+                yet, nyet, da, sky, glav, glaz, netz, doomat, zat, moch, boz, comy, vrad, vrade,
+                tay, bli, ay, nov, livn, tolv, glaz, gliz, ouy, zet, yevt, dat, botat, nev, novy, vzy,
+                nov, sho, obsh, dasky, key, skey, ovsky, skaya, bib, kiev, studen, var, bul, vyan, tzion,
+                vaya, myak, gino, volo, olam, miti, nino, menov, perov, odasky, trov, niki, ivano, dostov,
+                sokol, oupa, pervom, schel, tizan, chka, tagan, dobry, okt, boda, veta, idi, cyk, blyt, hui,
+                na, udi, litchki, casa, linka, toly, anatov, vich, vech, vuch, toi, ka, vod]
+
+# Race region:
+- type: language
+  id: Sintaunathi
+  key: sin
+  name: "language-unathi-name"
+  description: "language-unathi-desc"
+  color: "#228B22"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [za, az, ze, ez, zi, iz, zo, oz, zu, uz, zs, sz, ha, ah, he, eh,
+              hi, ih, ho, oh, hu, uh, hs, sh, la, al, le, el, li, il, lo, ol,
+              lu, ul, ls, sl, ka, ak, ke, ek, ki, ik, ko, ok, ku, uk, ks, sk,
+              sa, as, se, es, si, is, so, os, su, us, ss, ss, ra, ar, re, er,
+              ri, ir, ro, or, ru, ur, rs, sr, a, a, e, e, i, i, o, o, u, u,
+              s, s]
+
+- type: language
+  id: Siiktajr
+  key: sii
+  name: "language-siiktajr-name"
+  description: "language-siiktajr-desc"
+  color: "#803B56"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 0.4
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [rr, rrr, taj'r, kir, raj, kii, mir, kah, hrar, jun,
+              kra, ahkъ, nal, vah, khaz, jri, ran, hal, nja, dar,
+              darr, mi, jr'i, dynh, manq', rhe, zar, ketъ, rir, rik,
+              r'rhaz, kal, chur, eech, thaa, dra, jurl, jurl, azuъ,
+              mah, sanu, dra, ii'r, ъka, aasi, far, mah, tul, ragh
+              wa, baq, ara, qara, zir', sam, mak, cresh, khan]
+
+- type: language
+  id: VoxPidgin
+  key: vox
+  name: "language-voxpidgin-name"
+  description: "language-voxpidgin-desc"
+  color: "#AA00AA"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [ti, ti, ti, hi, hi, ki, ki, ki,
+                ki, ya, ta, ha, ka, ya, yi, chi, cha, kah,
+                SKRE, AHK, EHK, RAWK, KRA, AAA, EEE, KI,
+                II, KRI, KA]
+
+- type: language
+  id: Rootspeak
+  key: rt
+  name: "language-rootspeak-name"
+  description: "language-rootspeak-desc"
+  color: "#804000"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 0.3
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [hs, zt, kr, st, sh]
+
+- type: language
+  id: Bubblish
+  key: bbl
+  name: "language-bobblish-name"
+  description: "language-bobblish-desc"
+  color: "#0077AA"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 0.6
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [блоб, плап, поп, боп, буп, пламп, буб, баб, бламп]
+
+- type: language
+  id: Tkachi
+  key: tch
+  name: "language-tkachi-name"
+  description: "language-tkachi-desc"
+  color: "#869b29"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 0.55
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+      - character: "-"
+        weight: 0.5
+    syllables: [år, i, går, sek, mo, ff, ok, gj, ø, gå, la, le, lit, ygg, van,
+                dår, næ, møt, idd, hvo, ja, på, han, så, ån, det, att, nå, gö, bra,
+                int, tyc, om, när, två, må, dag, sjä, vii, vuo, eil, tun, käyt, teh,
+                vä, hei, huo, suo, ää, ten, ja, heu, stu, uhr, kön, we, hön]
+
+- type: language
+  id: Eldwarf
+  key: el
+  name: "language-eldwarf-name"
+  description: "language-eldwarf-desc"
+  color: "#515d63"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 0.55
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [вр, врон, рон, крон, друк, трым, бд, шкж, брм, рыт, грн, драш, клм, трк, врг, хрм,
+                рд, клыт, зм, эмээ, гнык, зрм, длк, брг, грд, скрын, вродд, бдар, глтх, скрр,
+                трг, бртх, хыкл, тр, крг, рдм, грыж, мд, гхрм, клм, прк, кнур]
+
+- type: language
+  id: Arati
+  key: ara
+  name: "language-arati-name"
+  description: "language-arati-desc"
+  color: "#68477a"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 0.52
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+      - character: "'"
+        weight: 0.7
+    syllables: [шаш, хаш, раш, шар, хра, хашт, шара, шкар, храк, тар, хар, схр,
+                карш, аш, шр, зз, ср, хаз, рашк, харш, рашн, шан, харз, шах, шарз, рашар,
+                кар, харат, хш, харр, арш', ашан, шанн, хсар, ашат, хаа, хазт, рашта, зара,
+                хаш, анн, аро', хат]
+
+- type: language
+  id: Canilunzt
+  key: cani
+  name: "language-canilunzt-name"
+  description: "language-canilunzt-desc"
+  color: "#B97A57"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 0.45
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [rur, ya, cen, rawr, bar, kuk, tek, qat, uk, wu, vuh, tah, tch, schz, auch,
+                ist, ein, entch, zwichs, tut, mir, wo, bis, es, vor, nic, gro, lll,
+                enem, zandt, tzch, noch, hel, ischt, far, wa, baram, iereng, tech, lach,
+                sam, mak, lich, gen, or, ag, eck, gec, stag, onn, bin, ket, jarl, vulf,
+                einech, cresthz, azunein, ghzth]
+
+# Misc region:
+- type: language
+  id: Binary
+  key: bin
+  name: "language-binary-name"
+  description: "language-binary-desc"
+  color: "#2cc2e8"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    scrambledLengthCoefficient: 0.5
+    specialCharacterChance: 0.8
+    specialCharacters:
+      - character: " "
+    syllables: [1, 0]

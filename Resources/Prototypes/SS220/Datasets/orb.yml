@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: PonderingOrbPhrases
+  values:
+    prefix: pondering-orb-
+    count: 20

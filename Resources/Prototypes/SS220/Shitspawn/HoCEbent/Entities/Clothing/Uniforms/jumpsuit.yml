@@ -1,0 +1,25 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformBluesoldier
+  name: kingdom army shirt
+  description: The clothing of a soldier of the great army of the kingdom.
+  suffix: Ebent, HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Shitspawn/HoCEbent/Clothing/Uniforms/Jumpsuit/bluesoldier.rsi
+  - type: Clothing
+    sprite: SS220/Shitspawn/HoCEbent/Clothing/Uniforms/Jumpsuit/bluesoldier.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformRedsoldier
+  name: republican army shirt
+  description: The clothing of a soldier of the army of the River Republic.
+  suffix: Ebent, HOCebent
+  components:
+  - type: Sprite
+    sprite: SS220/Shitspawn/HoCEbent/Clothing/Uniforms/Jumpsuit/redsoldier.rsi
+  - type: Clothing
+    sprite: SS220/Shitspawn/HoCEbent/Clothing/Uniforms/Jumpsuit/redsoldier.rsi

@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from TG Station at https://github.com/tgstation/tgstation/blob/HEAD/icons/obj/stack_objects.dmi. Inhands by mubururu_ (github).",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "goliath_hide"
+    },
+    {
+      "name": "goliathhide-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "goliathhide-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "goliath_hide_2"
+    },
+    {
+      "name": "goliath_hide_3"
+    }
+  ]
+}

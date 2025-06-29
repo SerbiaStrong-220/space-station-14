@@ -1,11 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Numerics;
 using Content.Server.Audio;
-using Content.Server.DeviceLinking.Events;
 using Content.Server.Popups;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Damage;
+using Content.Shared.DeviceLinking.Events;
 using Content.Shared.SS220.ForcefieldGenerator;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;

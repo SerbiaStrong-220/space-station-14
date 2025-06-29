@@ -2,7 +2,7 @@
 - type: entity
   id: BaseMagazineRifle
   name: "magazine (.20 rifle)"
-  parent: [ BaseItem]
+  parent: [ BaseItem, BaseSecurityContraband ]
   abstract: true
   components:
   - type: Tag
@@ -46,6 +46,16 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#9b0000"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#9b0000"
 
 - type: entity
   id: MagazineRifleEmpty
@@ -59,10 +69,14 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-#SS220-FixAmmoSprite-Begin
-    - state: mag-2
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-#SS220-FixAmmoSprite-End
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      right:
+      - state: inhand-right-mag
 
 - type: entity
   id: MagazineRifleIncendiary
@@ -85,6 +99,16 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#ea5800"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#ea5800"
 
 - type: entity
   id: MagazineRifleUranium
@@ -99,3 +123,13 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-2 #SS220-FixAmmoSprite
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#00cd42"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#00cd42"

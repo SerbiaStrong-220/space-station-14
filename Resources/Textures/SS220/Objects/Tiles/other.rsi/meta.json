@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by @Kit0vras (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bar"
+    },
+    {
+      "name": "bcircuit"
+    },
+    {
+      "name": "blue"
+    },
+    {
+      "name": "checker-dark"
+    },
+    {
+      "name": "checker-light"
+    },
+    {
+      "name": "clown"
+    },
+    {
+      "name": "gcircuit"
+    },
+    {
+      "name": "gold"
+    },
+    {
+      "name": "hydro"
+    },
+    {
+      "name": "laundry"
+    },
+    {
+      "name": "lime"
+    },
+    {
+      "name": "mime"
+    },
+    {
+      "name": "mono"
+    },
+    {
+      "name": "ocircuit"
+    },
+    {
+      "name": "pcircuit"
+    },
+    {
+      "name": "rcircuit"
+    },
+    {
+      "name": "silver"
+    },
+    {
+      "name": "ycircuit"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+- type: randomHumanoidSettings
+  id: VisitorTourist
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran]
+  parent: VisitorCivilian
+  components:
+    - type: GhostRole
+      name: job-name-tourist
+    - type: Loadout
+      prototypes: [ VisitorTourist ]
+      roleLoadout: [ RoleSurvivalStandard ]

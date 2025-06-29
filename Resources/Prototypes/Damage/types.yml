@@ -91,3 +91,11 @@
   name: damage-type-stamina
   armorCoefficientPrice: 2
   armorFlatPrice: 10
+
+# Metaphysical damage. Damage represents supernatural injuries that emphasize the fantasy elements in the game
+- type: damageType
+  id: Holy
+  name: damage-type-holy
+  armorCoefficientPrice: 1
+  armorFlatPrice: 1
+

@@ -1,0 +1,28 @@
+- type: siliconLaw
+  id: CloIm1
+  order: 1
+  lawString: law-CloIm-1
+
+- type: siliconLaw
+  id: CloIm2
+  order: 2
+  lawString: law-CloIm-2
+
+- type: siliconLaw
+  id: CloIm3
+  order: 3
+  lawString: law-CloIm-3
+
+- type: siliconLaw
+  id: CloIm4
+  order: 4
+  lawString: law-CloIm-4
+
+- type: siliconLawset
+  id: CloImLawset
+  laws:
+  - CloIm1
+  - CloIm2
+  - CloIm3
+  - CloIm4
+  obeysTo: laws-owner-crew

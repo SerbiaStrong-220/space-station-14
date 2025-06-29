@@ -1,0 +1,43 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Flipped
+- type: entity
+  parent: [ClothingUniformBase, BaseFoldable]
+  id: ClothingUniformBaseFoldable
+  abstract: true
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-tie-verb
+    foldVerbText: fold-untie-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: tie
+    foldedHeldPrefix: tie
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_tie
+      map: ["foldedLayer"]
+      visible: false
+
+- type: entity
+  parent: ClothingUniformBaseFoldable
+  id: ClothingUniformBaseFoldableTie
+  abstract: true
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: tie
+  - type: Item
+    heldPrefix: tie
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon_tie
+      map: ["foldedLayer"]
+      visible: true

@@ -102,22 +102,13 @@
 
   - !type:CorridorClutterDunGen
     contents:
-    - id: FloraStalagmite1
-    - id: FloraStalagmite2
-    - id: FloraStalagmite3
-    - id: FloraStalagmite4
-    - id: FloraStalagmite5
-    - id: FloraStalagmite6
+    - id: FloraStalagmite
 
   - !type:BoundaryWallDunGen
 
 - type: dungeonConfig
   id: LavaBrig
   data:
-    #ss220 lava exp fix start
-    tiles:
-      FallbackTile: FloorSteel
-    #ss220 lava exp fix end
     colors:
       Decals: "#DE3A3A96"
     entities:
@@ -131,6 +122,8 @@
       Junction: BaseAirlock
       WallMounts: ScienceLabsWalls
       Window: BaseWindow
+    tiles:
+      FallbackTile: FloorDark
     whitelists:
       Rooms:
         tags:

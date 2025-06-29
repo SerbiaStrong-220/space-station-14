@@ -25,6 +25,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    private readonly SharedTransformSystem _transformSystem;
     private readonly SpriteSystem _spriteSystem;
 
     private NetEntity? _trackedEntity;
@@ -36,10 +37,10 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
+        _transformSystem = _entManager.System<SharedTransformSystem>();
         _spriteSystem = _entManager.System<SpriteSystem>();
 
         NavMap.TrackedEntitySelectedAction += SetTrackedEntityFromNavMap;
-
     }
 
     public void Set(string stationName, EntityUid? mapUid)
@@ -78,10 +79,28 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
 
         NoServerLabel.Visible = false;
 
+        // Collect one status per user, using the sensor with the most data available.
+        Dictionary<NetEntity, SuitSensorStatus> uniqueSensorsMap = new();
+        foreach (var sensor in sensors)
+        {
+            if (uniqueSensorsMap.TryGetValue(sensor.OwnerUid, out var existingSensor))
+            {
+                // Skip if we already have a sensor with more data for this mob.
+                if (existingSensor.Coordinates != null && sensor.Coordinates == null)
+                    continue;
+
+                if (existingSensor.DamagePercentage != null && sensor.DamagePercentage == null)
+                    continue;
+            }
+
+            uniqueSensorsMap[sensor.OwnerUid] = sensor;
+        }
+        var uniqueSensors = uniqueSensorsMap.Values.ToList();
+
         // Order sensor data
-        var orderedSensors = sensors.OrderBy(n => n.Name).OrderBy(j => j.Job);
+        var orderedSensors = uniqueSensors.OrderBy(n => n.Name).OrderBy(j => j.Job);
         var assignedSensors = new HashSet<SuitSensorStatus>();
-        var departments = sensors.SelectMany(d => d.JobDepartments).Distinct().OrderBy(n => n);
+        var departments = uniqueSensors.SelectMany(d => d.JobDepartments).Distinct().OrderBy(n => n);
 
         // Create department labels and populate lists
         foreach (var department in departments)
@@ -166,12 +185,45 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
             // Add a button that will hold a username and other details
             NavMap.LocalizedNames.TryAdd(sensor.SuitSensorUid, sensor.Name + ", " + sensor.Job);
 
+            //SS220-colorful-sensors begin
+            var specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "alive");
+            var dotColor = Color.LightGray;
+
+            if (!sensor.IsAlive)
+            {
+                specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "dead");
+                dotColor = Color.Violet;
+            }
+            else if (sensor.DamagePercentage != null)
+            {
+                var index = MathF.Round(4f * sensor.DamagePercentage.Value);
+
+                if (index >= 5)
+                {
+                    specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "critical");
+                    dotColor = Color.Red;
+                }
+                else
+                {
+                    specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "health" + index);
+                    dotColor = index switch
+                    {
+                        0 or 1 => Color.LimeGreen,
+                        2 => Color.Gold,
+                        3 or 4 => Color.Crimson,
+                        _ => Color.LightGray
+                    };
+                }
+            }
+            //SS220-colorful-sensors end
+
             var sensorButton = new CrewMonitoringButton()
             {
                 SuitSensorUid = sensor.SuitSensorUid,
                 Coordinates = coordinates,
                 Disabled = (coordinates == null),
                 HorizontalExpand = true,
+                DotColor = dotColor, //SS220-colorful-sensors
             };
 
             if (sensor.SuitSensorUid == _trackedEntity)
@@ -210,8 +262,9 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
 
             statusContainer.AddChild(suitCoordsIndicator);
 
+            //SS220-colorful-sensors begin (moved up to pass dot color to update later)
             // Specify texture for the user status icon
-            var specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "alive");
+            /*var specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "alive");
 
             if (!sensor.IsAlive)
             {
@@ -227,7 +280,8 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
 
                 else
                     specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "health" + index);
-            }
+            }*/
+            //SS220-colorful-sensors end
 
             // Status icon
             var statusIcon = new AnimatedTextureRect
@@ -290,9 +344,9 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
             {
                 NavMap.TrackedEntities.TryAdd(sensor.SuitSensorUid,
                     new NavMapBlip
-                    (coordinates.Value,
+                    (CoordinatesToLocal(coordinates.Value),
                     _blipTexture,
-                    (_trackedEntity == null || sensor.SuitSensorUid == _trackedEntity) ? Color.LimeGreen : Color.LimeGreen * Color.DimGray,
+                    (_trackedEntity == null || sensor.SuitSensorUid == _trackedEntity) ? dotColor : dotColor * Color.DimGray, //SS220-colorful-sensors
                     sensor.SuitSensorUid == _trackedEntity));
 
                 NavMap.Focus = _trackedEntity;
@@ -305,12 +359,14 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
                     if (_trackedEntity == sensor.SuitSensorUid)
                     {
                         _trackedEntity = null;
+                        UpdateSensorsTable(_trackedEntity, sensor.SuitSensorUid); //SS220-colorful-sensors
                     }
 
                     else
                     {
                         _trackedEntity = sensor.SuitSensorUid;
                         NavMap.CenterToCoordinates(coordinates.Value);
+                        UpdateSensorsTable(_trackedEntity, null); //SS220-colorful-sensors
                     }
 
                     NavMap.Focus = _trackedEntity;
@@ -342,7 +398,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
             if (sensor is not CrewMonitoringButton)
                 continue;
 
-            var castSensor = (CrewMonitoringButton) sensor;
+            var castSensor = (CrewMonitoringButton)sensor;
 
             if (castSensor.SuitSensorUid == prevTrackedEntity)
                 castSensor.RemoveStyleClass(StyleNano.StyleClassButtonColorGreen);
@@ -356,9 +412,9 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
             if (NavMap.TrackedEntities.TryGetValue(castSensor.SuitSensorUid, out var data))
             {
                 data = new NavMapBlip
-                    (data.Coordinates,
+                    (CoordinatesToLocal(data.Coordinates),
                     data.Texture,
-                    (currTrackedEntity == null || castSensor.SuitSensorUid == currTrackedEntity) ? Color.LimeGreen : Color.LimeGreen * Color.DimGray,
+                    (currTrackedEntity == null || castSensor.SuitSensorUid == currTrackedEntity) ? castSensor.DotColor : castSensor.DotColor * Color.DimGray, //SS220-colorful-sensors
                     castSensor.SuitSensorUid == currTrackedEntity);
 
                 NavMap.TrackedEntities[castSensor.SuitSensorUid] = data;
@@ -371,35 +427,16 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
         if (!_tryToScrollToListFocus)
             return;
 
-        if (!TryGetVerticalScrollbar(SensorScroller, out var vScrollbar))
-            return;
-
         if (TryGetNextScrollPosition(out float? nextScrollPosition))
         {
-            vScrollbar.ValueTarget = nextScrollPosition.Value;
+            SensorScroller.VScrollTarget = nextScrollPosition.Value;
 
-            if (MathHelper.CloseToPercent(vScrollbar.Value, vScrollbar.ValueTarget))
+            if (MathHelper.CloseToPercent(SensorScroller.VScroll, SensorScroller.VScrollTarget))
             {
                 _tryToScrollToListFocus = false;
                 return;
             }
         }
-    }
-
-    private bool TryGetVerticalScrollbar(ScrollContainer scroll, [NotNullWhen(true)] out VScrollBar? vScrollBar)
-    {
-        vScrollBar = null;
-
-        foreach (var child in scroll.Children)
-        {
-            if (child is not VScrollBar)
-                continue;
-
-            vScrollBar = (VScrollBar) child;
-            return true;
-        }
-
-        return false;
     }
 
     private bool TryGetNextScrollPosition([NotNullWhen(true)] out float? nextScrollPosition)
@@ -409,7 +446,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
         foreach (var sensor in SensorsTable.Children)
         {
             if (sensor is CrewMonitoringButton &&
-                ((CrewMonitoringButton) sensor).SuitSensorUid == _trackedEntity)
+                ((CrewMonitoringButton)sensor).SuitSensorUid == _trackedEntity)
                 return true;
 
             nextScrollPosition += sensor.Height;
@@ -419,6 +456,26 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
         nextScrollPosition = null;
 
         return false;
+    }
+
+    /// <summary>
+    /// Converts the input coordinates to an EntityCoordinates which are in
+    /// reference to the grid that the map is displaying. This is a stylistic
+    /// choice; this window deliberately limits the rate that blips update,
+    /// but if the blip is attached to another grid which is moving, that
+    /// blip will move smoothly, unlike the others. By converting the
+    /// coordinates, we are back in control of the blip movement.
+    /// </summary>
+    private EntityCoordinates CoordinatesToLocal(EntityCoordinates refCoords)
+    {
+        if (NavMap.MapUid != null)
+        {
+            return _transformSystem.WithEntityId(refCoords, (EntityUid)NavMap.MapUid);
+        }
+        else
+        {
+            return refCoords;
+        }
     }
 
     private void ClearOutDatedData()
@@ -435,4 +492,5 @@ public sealed class CrewMonitoringButton : Button
     public int IndexInTable;
     public NetEntity SuitSensorUid;
     public EntityCoordinates? Coordinates;
+    public Color DotColor; //SS220-colorful-sensors
 }

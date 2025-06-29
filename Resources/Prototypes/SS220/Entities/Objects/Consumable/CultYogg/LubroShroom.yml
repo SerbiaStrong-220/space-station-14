@@ -1,0 +1,108 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: LubroShroom
+  parent: [FoodProduceBase, ClothingShoesBase, CultYoggRestrictedItem]
+  id: FoodLubroShroomCult
+  description: We didn't understand how to use it, so we just wear it on our feet
+  components:
+  - type: Food
+  - type: Clothing
+    sprite: SS220/Objects/CultYogg/lurbo_shroom.rsi
+    equipSound: /Audio/SS220/CultYogg/lurbo_kill.ogg
+    unequipSound: /Audio/SS220/CultYogg/lurbo_unequip.ogg
+    soundOnPocketSlot: false
+    equipDelay: 1
+    unequipDelay: 1
+  - type: NoSlip
+  - type: LimitiedEquip
+    items:
+      - id: FoodLubroShroomCultDead
+  - type: FlavorProfile
+    flavors:
+      - menacing
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 2.0
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: Water
+          Quantity: 1
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/lurbo_shroom.rsi
+    state: produce
+  - type: Produce
+    seedId: LubroShroomSpores
+  - type: Extractable
+    grindableSolutionName: food
+  - type: Tag
+    tags:
+    - Omnivorous
+    - CultYoggStealthProvidable
+
+- type: entity
+  parent: SeedBase
+  name: packet of LubroShroom spores
+  description: We didn't understand how to use it, so we just wear it on our feet
+  id: LubroShroomSeeds
+  components:
+    - type: Seed
+      seedId: LubroShroomSpores
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/lurbo_shroom.rsi
+
+- type: seed
+  id: LubroShroomSpores
+  name: seeds-lurbo-shroom-name
+  noun: seeds-noun-spores
+  displayName: seeds-lurbo-shroom-display-name
+  plantRsi: SS220/Objects/CultYogg/lurbo_shroom.rsi
+  packetPrototype: LubroShroomSeeds
+  productPrototypes:
+    - FoodLubroShroomCult
+  lifespan: 55
+  maturation: 40
+  production: 2
+  yield: 1
+  potency: 2
+  growthStages: 7
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 1
+      PotencyDivisor: 1
+    Water:
+      Min: 1
+      Max: 1
+      PotencyDivisor: 1
+
+- type: entity
+  name: LubroShroomDead
+  parent: FoodBase
+  id: FoodLubroShroomCultDead
+  description: Now it's dead and useless.
+  components:
+  - type: Food
+  - type: FlavorProfile
+    flavors:
+      - menacing
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 2.0
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: Water
+          Quantity: 1
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/lurbo_shroom_dead.rsi
+    state: icon
+  - type: Extractable
+    grindableSolutionName: food
+  - type: Tag
+    tags:
+    - Omnivorous
+    - CultYoggStealthProvidable

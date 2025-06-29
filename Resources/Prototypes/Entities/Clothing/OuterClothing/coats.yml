@@ -4,13 +4,17 @@
   name: bomber jacket
   description: A thick, well-worn WW2 leather bomber jacket.
   components:
+# SS220 resprite begin
   - type: Sprite
-    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+#    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/bomber.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+#    sprite: Clothing/OuterClothing/Coats/bomber.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/bomber.rsi
+# SS220 resprite end
 
 - type: entity
-  parent: [ClothingOuterStorageBase, AllowSuitStorageClothing, ClothingOuterArmorBasic]
+  parent: [ClothingOuterStorageBase, AllowSuitStorageClothing, ClothingOuterArmorBase]
   id: ClothingOuterCoatDetective
   name: detective trenchcoat
   description: An 18th-century multi-purpose trenchcoat. Someone who wears this means serious business.
@@ -32,18 +36,27 @@
         Heat: 0.80
   - type: ExplosionResistance
     damageCoefficient: 1 #its a coat. it doesnt do shit
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-brown
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterCoatDetectiveLoadout]
   id: ClothingOuterCoatDetectiveLoadoutGrey
   name: noir trenchcoat
-  description: Ah, your trusty coat. There's a few tears here and there, giving it a more timely look. Or at least, that's what you told yourself when you found out gettin' it repaired would set you back 200 speos.
+  description: Ah, your trusty coat. There's a few tears here and there, giving it a more timely look. Or at least, that's what you told yourself when you found out gettin' it repaired would set you back 200 spesos.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Coats/detective_grey.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/detective_grey.rsi
-
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-grey
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterCoatDetective
@@ -73,9 +86,9 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.7
+        Blunt: 0.65
+        Slash: 0.65
+        Piercing: 0.6
         Heat: 0.7
         Caustic: 0.75 # not the full 90% from ss13 because of the head
   - type: ExplosionResistance
@@ -89,10 +102,11 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
+        Blunt: 0.65
+        Slash: 0.65
         Piercing: 0.7
         Heat: 0.7
+        Caustic: 0.9
   - type: ExplosionResistance
     damageCoefficient: 0.9
 
@@ -106,6 +120,11 @@
     sprite: Clothing/OuterClothing/Coats/hos_trenchcoat.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/hos_trenchcoat.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-cotton
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageToggleableBase
@@ -119,6 +138,11 @@
     sprite: Clothing/OuterClothing/Coats/jensencoat.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodChaplainHood
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -146,6 +170,11 @@
         reagents:
         - ReagentId: Fiber
           Quantity: 20
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-brown
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageFoldableBase
@@ -168,6 +197,11 @@
       Male: MaleMedic
       Unsexed: MaleMedic
   #ss220 special_sounds end
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLab]
@@ -195,6 +229,11 @@
       Male: MaleMedic
       Unsexed: MaleMedic
   #ss220 special_sounds end
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabChem]
@@ -222,6 +261,11 @@
       Male: MaleMedic
       Unsexed: MaleMedic
   #ss220 special_sounds end
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabViro]
@@ -249,6 +293,11 @@
       Male: MaleMedic
       Unsexed: MaleMedic
   #ss220 special_sounds end
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabGene]
@@ -271,6 +320,11 @@
         Slash: 0.95
         Heat: 0.95
         Caustic: 0.65
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-blue
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabCmo]
@@ -291,6 +345,11 @@
     modifiers:
       coefficients:
         Caustic: 0.75
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatRnd]
@@ -311,6 +370,11 @@
     modifiers:
       coefficients:
         Caustic: 0.75
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatRobo]
@@ -332,6 +396,11 @@
       coefficients:
         Caustic: 0.75
         Radiation: 0.9
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-demron
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatRD]
@@ -348,9 +417,14 @@
     sprite: Clothing/OuterClothing/Coats/pirate.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/pirate.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-brown
+#SS220 Micro_fibers end
 
 - type: entity
-  parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase]
+  parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase, BaseSecurityContraband]
   id: ClothingOuterCoatWarden
   name: warden's armored jacket
   description: A sturdy, utilitarian jacket designed to protect a warden from any brig-bound threats.
@@ -368,7 +442,22 @@
       toggleable-clothing: !type:ContainerSlot {}
       storagebase: !type:Container
         ents: []
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
+  #ss220 handheld radio on outer clothing start
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  #ss220 handheld radio on outer clothing end
 # SS220 new hood end
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-cotton
+    microFiberColor: micro-fibers-red
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -380,6 +469,11 @@
     sprite: Clothing/OuterClothing/Coats/damedanecoat.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/damedanecoat.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-silver
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -391,9 +485,14 @@
     sprite: Clothing/OuterClothing/Coats/clownpriest.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/clownpriest.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-red
+#SS220 Micro_fibers end
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageBase] # SS220 Remove BaseMajorContraband
   id: ClothingOuterDogi
   name: samurai dogi
   description: Dogi is a type of traditional Japanese clothing. The dogi is made of heavy, durable fabric, it is practical in combat and stylish in appearance. It is decorated with intricate patterns and embroidery on the back.
@@ -408,6 +507,11 @@
         Blunt: 0.8
         Slash: 0.65
         Piercing: 0.85
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -416,9 +520,14 @@
   description: A paramedic's trusty windbreaker, for all the space wind.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi #ss220 resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/windbreaker_paramedic.rsi #ss220 resprite
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-blue
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterStorageBase]
@@ -430,6 +539,11 @@
     sprite: Clothing/OuterClothing/Coats/syndicate/coatsyndiecap.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/syndicate/coatsyndiecap.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-red
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingOuterCoatHoSTrench] # BaseSyndicateContraband as first parent so contraband system takes that as priority, yeah I know
@@ -441,6 +555,11 @@
     sprite: Clothing/OuterClothing/Coats/syndicate/coatsyndiecaparmored.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/syndicate/coatsyndiecaparmored.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-cotton
+    microFiberColor: micro-fibers-red
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -460,9 +579,14 @@
         Piercing: 0.65
         Heat: 0.85
         Caustic: 0.75
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-cotton
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: ClothingOuterStorageFoldableBase
   id: ClothingOuterCoatLabSeniorResearcher
   name: senior researcher lab coat
   description: A suit that protects against minor chemical spills. Has a purple collar and wrist trims.
@@ -475,9 +599,19 @@
     modifiers:
       coefficients:
         Caustic: 0.75
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabSeniorResearcher]
+  id: ClothingOuterCoatLabSeniorResearcherOpened
+  name: senior researcher lab coat
+
+- type: entity
+  parent: ClothingOuterStorageFoldableBase
   id: ClothingOuterCoatLabSeniorPhysician
   name: senior physician lab coat
   description: A suit that protects against minor chemical spills. Has light blue sleeves and an orange waist trim.
@@ -490,6 +624,16 @@
     modifiers:
       coefficients:
         Caustic: 0.75
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-spunbond
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
+
+- type: entity
+  parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatLabSeniorPhysician]
+  id: ClothingOuterCoatLabSeniorPhysicianOpened
+  name: senior physician lab coat
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -501,9 +645,14 @@
     sprite: Clothing/OuterClothing/Coats/space_asshole.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/space_asshole.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-cotton
+    microFiberColor: micro-fibers-light-brown
+#SS220 Micro_fibers end
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: ClothingOuterStorageFoldableBase
   id: ClothingOuterCoatExpensive
   name: expensive coat
   description: Very fluffy pink coat, made out of very expensive fur (clearly).
@@ -512,6 +661,16 @@
     sprite: Clothing/OuterClothing/Coats/expensive_coat.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/expensive_coat.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-fur
+    microFiberColor: micro-fibers-pink
+#SS220 Micro_fibers end
+
+- type: entity
+  parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatExpensive]
+  id: ClothingOuterCoatExpensiveOpened
+  name: expensive coat
 
 #SS220-DressTweak-Begin
 

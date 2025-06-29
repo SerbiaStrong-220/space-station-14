@@ -1,0 +1,17 @@
+﻿<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'pinpointer-ui-title'}"
+                      MinSize="350 300"
+                      Resizable="True">
+
+    <BoxContainer Orientation="Vertical" VerticalExpand="True">
+        <Label Text="{Loc 'pinpointer-ui-person-to-track'}" Name="LabelTrack" Access="Public" Margin="5 0 0 0" HorizontalExpand="True"/>
+        <PanelContainer StyleClasses="HighDivider"/>
+
+        <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+            <BoxContainer Name="CrewList" Orientation="Vertical"/>
+        </ScrollContainer>
+        <LineEdit Name="SearchBar" PlaceHolder="{Loc 'object-tab-object-search'}" HorizontalExpand="true"/>
+    </BoxContainer>
+
+</controls:FancyWindow>

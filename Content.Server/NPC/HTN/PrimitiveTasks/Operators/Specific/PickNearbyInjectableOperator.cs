@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Content.Server.NPC.Components;
+using Content.Shared.NPC.Components;
 using Content.Server.NPC.Pathfinding;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Damage;
@@ -8,6 +8,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Silicons.Bots;
 using Content.Shared.Emag.Components;
+using Content.Shared.Stealth.Components;
+using Robust.Shared.Containers;
 
 namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 
@@ -17,6 +19,7 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
     private EntityLookupSystem _lookup = default!;
     private MedibotSystem _medibot = default!;
     private PathfindingSystem _pathfinding = default!;
+    private SharedContainerSystem _container = default!; //ss220 stealth inject fix
 
     [DataField("rangeKey")] public string RangeKey = NPCBlackboard.MedibotInjectRange;
 
@@ -38,6 +41,7 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
         _lookup = sysManager.GetEntitySystem<EntityLookupSystem>();
         _medibot = sysManager.GetEntitySystem<MedibotSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
+        _container = sysManager.GetEntitySystem<SharedContainerSystem>(); //ss220 npc stealth inject fix
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
@@ -56,6 +60,7 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
         var recentlyInjected = _entManager.GetEntityQuery<NPCRecentlyInjectedComponent>();
         var mobState = _entManager.GetEntityQuery<MobStateComponent>();
         var emaggedQuery = _entManager.GetEntityQuery<EmaggedComponent>();
+        var stealthQuery = _entManager.GetEntityQuery<StealthComponent>(); //ss220 medibot inject in stealth entity fix
 
         foreach (var entity in _lookup.GetEntitiesInRange(owner, range))
         {
@@ -64,6 +69,17 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
                 damageQuery.TryGetComponent(entity, out var damage) &&
                 !recentlyInjected.HasComponent(entity))
             {
+                //ss220 medibot inject in stealth entity fix start
+                if (_container.IsEntityInContainer(entity))
+                {
+                    continue;
+                }
+                if (stealthQuery.TryGetComponent(entity, out var stealthComponent) && stealthComponent.Enabled)
+                {
+                    continue;
+                }
+                //ss220 medibot inject in stealth entity fix end
+
                 // no treating dead bodies
                 if (!_medibot.TryGetTreatment(medibot, state.CurrentState, out var treatment))
                     continue;

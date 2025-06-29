@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: NamesArachnidFemale
+  values:
+    prefix: name-arachnid-female-
+    count: 22

@@ -6,9 +6,9 @@
   description: Given to crewmates for exemplary bravery in the face of danger.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/bronzeheart.rsi
+    sprite: SS220/Clothing/Neck/Medals/bronzeheart.rsi #SS220 Resprited
   - type: Clothing
-    sprite: Clothing/Neck/Medals/bronzeheart.rsi
+    sprite: SS220/Clothing/Neck/Medals/bronzeheart.rsi #SS220 Resprited
   - type: Tag
     tags:
       - Medal
@@ -21,9 +21,9 @@
   description: Given to crewmates who display excellent crewmanship.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/gold.rsi
+    sprite: SS220/Clothing/Neck/Medals/gold.rsi #SS220 resprited
   - type: Clothing
-    sprite: Clothing/Neck/Medals/gold.rsi
+    sprite: SS220/Clothing/Neck/Medals/gold.rsi #SS220 resprited
   - type: StealTarget
     stealGroup: ClothingNeckGoldmedal
   - type: Tag
@@ -38,9 +38,9 @@
   description: Given for the best work in the cargo department.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/cargomedal.rsi
+    sprite: SS220/Clothing/Neck/Medals/cargomedal.rsi #SS220 Resprited
   - type: Clothing
-    sprite: Clothing/Neck/Medals/cargomedal.rsi
+    sprite: SS220/Clothing/Neck/Medals/cargomedal.rsi #SS220 Resprited
   - type: Tag
     tags:
       - Medal
@@ -53,9 +53,9 @@
   description: Given for the best work in the engineering department.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/engineermedal.rsi
+    sprite: SS220/Clothing/Neck/Medals/engineermedal.rsi #SS220 Resprited
   - type: Clothing
-    sprite: Clothing/Neck/Medals/engineermedal.rsi
+    sprite: SS220/Clothing/Neck/Medals/engineermedal.rsi #SS220 Resprited
   - type: Tag
     tags:
       - Medal
@@ -68,9 +68,9 @@
   description: Given for the best work in the medical department.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/medicalmedal.rsi
+    sprite: SS220/Clothing/Neck/Medals/medicalmedal.rsi #SS220 Resprited
   - type: Clothing
-    sprite: Clothing/Neck/Medals/medicalmedal.rsi
+    sprite: SS220/Clothing/Neck/Medals/medicalmedal.rsi #SS220 Resprited
   - type: Tag
     tags:
       - Medal
@@ -83,9 +83,9 @@
   description: Given for the best work in the science department.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/sciencemedal.rsi
+    sprite: SS220/Clothing/Neck/Medals/sciencemedal.rsi #SS220 Resprited
   - type: Clothing
-    sprite: Clothing/Neck/Medals/sciencemedal.rsi
+    sprite: SS220/Clothing/Neck/Medals/sciencemedal.rsi #SS220 Resprited
   - type: Tag
     tags:
       - Medal
@@ -98,9 +98,9 @@
   description: Given for the best work in the security department.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/securitymedal.rsi
+    sprite: SS220/Clothing/Neck/Medals/securitymedal.rsi #SS220 Resprited
   - type: Clothing
-    sprite: Clothing/Neck/Medals/securitymedal.rsi
+    sprite: SS220/Clothing/Neck/Medals/securitymedal.rsi #SS220 Resprited
   - type: Tag
     tags:
       - Medal
@@ -113,9 +113,9 @@
   description: Given for the best joke in the universe. HONK!
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Medals/clownmedal.rsi
+    sprite: SS220/Clothing/Neck/Medals/clownmedal.rsi #SS220 Resprited
   - type: Clothing
-    sprite: Clothing/Neck/Medals/clownmedal.rsi
+    sprite: SS220/Clothing/Neck/Medals/clownmedal.rsi #SS220 Resprited
   - type: StealTarget
     stealGroup: ClothingNeckClownmedal
   - type: Tag

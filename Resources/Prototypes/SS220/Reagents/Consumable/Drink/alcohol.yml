@@ -81,3 +81,65 @@
         reagent: Ethanol
         amount: 0.12
   fizziness: 0.15
+
+#Bacchus' Blessing
+
+- type: reagent
+  id: Bacchus
+  name: reagent-name-bacchus
+  parent: BaseAlcohol
+  desc: reagent-desc-bacchus
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: Bacchus
+  color: "#8B4513"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/bacchus_blessing.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 3
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 1
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 1.5
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 1
+      - !type:Drunk
+        boozePower: 20
+        conditions:
+        - !type:ReagentThreshold
+          min: 1
+      - !type:HealthChange
+        conditions:
+          - !type:ReagentThreshold
+            min: 1
+          - !type:OrganType
+            type: Dwarf #dwarfs dont care
+            shouldHave: false
+        damage:
+          types:
+            Poison: 2
+  fizziness: 0.2
+
+#Xlebnuldiesel
+
+- type: reagent
+  id: Xlebnuldiesel
+  name: reagent-name-xlebnuldiesel
+  parent: BaseAlcohol
+  desc: reagent-desc-xlebnuldiesel
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: Xlebnuldiesel
+  color: "#33EE00"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/xlebnuldiesel.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false

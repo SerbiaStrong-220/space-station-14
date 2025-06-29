@@ -1,0 +1,15 @@
+{
+   "copyright" : "Sprited by karmag (Discord) from SS220",
+   "license" : "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+   "size" : {
+      "x" : 32,
+      "y" : 32
+   },
+   "states" : [
+      {
+         "directions" : 1,
+         "name" : "medibot"
+      }
+   ],
+   "version" : 1
+}

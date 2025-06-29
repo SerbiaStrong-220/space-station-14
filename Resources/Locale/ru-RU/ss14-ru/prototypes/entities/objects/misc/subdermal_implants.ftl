@@ -1,15 +1,17 @@
 ent-BaseSubdermalImplant = имплант
-    .desc = Микрочип, который вживляют под кожу.
-# Corvax-HiddenDesc-Start
+    .desc = Имплант без подписи.
+
+# to make implant correct name not code-by use .true-name placed like .desc
+
 ent-SadTromboneImplant = { ent-BaseSubdermalImplant }
     .suffix = Грустный тромбон
-    .desc = { ent-BaseSubdermalImplant.desc }
+    .desc = имплант подписан "грустный тромбон"
 ent-LightImplant = { ent-BaseSubdermalImplant }
     .suffix = Свет
-    .desc = { ent-BaseSubdermalImplant.desc }
+    .desc = имплант подписан "свет"
 ent-BikeHornImplant = { ent-BaseSubdermalImplant }
-    .suffix = хонк-имплант
-    .desc = { ent-BaseSubdermalImplant.desc }
+    .suffix = Хонк-имплант
+    .desc = имплант подписан "велосипедный клаксон"
 ent-TrackingImplant = { ent-BaseSubdermalImplant }
     .suffix = Трекер
     .desc = { ent-BaseSubdermalImplant.desc }
@@ -46,4 +48,12 @@ ent-DeathRattleImplant = { ent-BaseSubdermalImplant }
 ent-MindShieldImplant = { ent-BaseSubdermalImplant }
     .suffix = Щит разума
     .desc = { ent-BaseSubdermalImplant.desc }
-# Corvax-HiddenDesc-End
+ent-FakeMindShieldImplant = { ent-BaseSubdermalImplant }
+    .suffix = Фальшивый щит разума
+    .desc = { ent-BaseSubdermalImplant.desc }
+ent-RadioImplant = { ent-BaseSubdermalImplant }
+    .suffix = Радио Синдикат
+    .desc = { ent-BaseSubdermalImplant.desc }
+ent-RadioImplantCentcomm = { ent-BaseSubdermalImplant }
+    .suffix = Радио ЦК
+    .desc = имплант подписан "Радио"

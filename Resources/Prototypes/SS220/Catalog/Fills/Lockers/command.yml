@@ -9,12 +9,15 @@
     contents:
     - id: WeaponDisabler
     - id: MedkitAdvancedFilled
-    - id: ClothingUniformJumpsuitBlueShield2 #SS220 new jumpsuit
+#    - id: ClothingUniformJumpsuitBlueShield2 #SS220 BlueShield Rework
 #   - id: ClothingCloakBlueShield #SS220 new cloak
     - id: ExpensiveLighterShield #SS220-Zippo
 #   - id: HandheldCrewMonitor #ss220-fix-blueshield
-    - id: ClothingOuterSRTCoat #SS220-CentComm
+#    - id: ClothingOuterBSOCoat #SS220 BlueShield Rework
+    - id: BlueShieldGasMask
     - id: RubberStampBlueShield #SS220-additional paperwork
+    - id: JetpackMiniBlueFilled #SS220 BlueShield Rework
+    - id: PinpointerCrew
 
 - type: entity
   parent: GunSafe
@@ -27,9 +30,6 @@
     contents:
 #    - id: WeaponDisabler #SS220-MinorTweaks
 #      amount: 1 #SS220-MinorTweaks
-    - id: WeaponSubMachineGunDrozdRubber #SS220-MinorTweaks(#Rubber)
-      amount: 1
-    - id: MagazinePistolSubMachineGun
-      amount: 2
-    - id: MagazinePistolSubMachineGunRubber #SS220-MinorTweaks
-      amount: 2
+    - id: WeaponBlasterKRS #SS220-BlueShield Rework
+    - id: BlasterPowerCellAlt
+      amount: 3

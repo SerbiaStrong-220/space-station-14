@@ -24,13 +24,19 @@
   - type: FlavorProfile
     flavors:
       - people
+  - type: Tag # SS220-TaRaKaCheCki start
+    tags:
+      - Trash # SS220-TaRaKaCheCki end
 
 - type: entity
   id: OrganDionaBrain
   parent: [BaseDionaOrgan, OrganHumanBrain]
   name: brain
-  description: "The source of incredible, unending intelligence. Honk."
+  description: "The central hub of a diona's pseudo-neurological activity, its root-like tendrils search for its former body."
   components:
+  - type: Item
+    size: Small
+    heldPrefix: brain
   - type: Sprite
     state: brain
   - type: SolutionContainerManager
@@ -64,7 +70,7 @@
   id: OrganDionaStomach
   parent: BaseDionaOrgan
   name: stomach
-  description: "Gross. This is hard to stomach."
+  description: "The diona's equivalent of a stomach, it reeks of asparagus and vinegar."
   components:
   - type: Sprite
     state: stomach
@@ -90,18 +96,21 @@
       - id: Narcotic
       - id: Alcohol
         rateModifier: 0.1
+  - type: Item
+    size: Small
+    heldPrefix: stomach
 
 - type: entity
   id: OrganDionaLungs
   parent: BaseDionaOrgan
   name: lungs
-  description: "Filters oxygen from an atmosphere, which is then sent into the bloodstream to be used as an electron carrier."
+  description: "A spongy mess of slimy, leaf-like structures. Capable of breathing both carbon dioxide and oxygen."
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/organs.rsi
-    layers:
-      - state: lung-l
-      - state: lung-r
+    state: lungs
+  - type: Item
+    size: Small
+    heldPrefix: lungs
   - type: Lung 
   - type: Metabolizer
     removeEmpty: true
@@ -164,6 +173,14 @@
   suffix: Brain
   description: Contains the brain of a formerly fully-formed Diona. Killing this would kill the Diona forever. You monster.
   components:
+  #SS220 dionalang begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+    - id: Rootspeak
+      canSpeak: true
+  #ss220 DionaLang end
   - type: IsDeadIC
   - type: Body
     prototype: AnimalNymphBrain

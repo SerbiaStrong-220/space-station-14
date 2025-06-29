@@ -170,7 +170,7 @@
     - state: robotics_label
 
 - type: entity
-  parent: [ EncryptionKey ]
+  parent: [ EncryptionKey ] # SS220 Remove BaseSecurityContraband`
   id: EncryptionKeySecurity
   name: security encryption key
   description: An encryption key used by security.

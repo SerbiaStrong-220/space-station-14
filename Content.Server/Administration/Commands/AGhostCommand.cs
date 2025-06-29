@@ -1,10 +1,12 @@
-﻿using System.Linq;
+using System.Linq;
+using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Shared.Actions;
 using Content.Shared.Administration;
+using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
@@ -21,7 +23,10 @@ namespace Content.Server.Administration.Commands;
 public sealed class AGhostCommand : LocalizedCommands
 {
     [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+
+    // SS220 additional command log
+    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
 
     public override string Command => "aghost";
     public override string Help => "aghost";
@@ -97,6 +102,9 @@ public sealed class AGhostCommand : LocalizedCommands
         }
         //SS220-lobby-ghost-bug end
 
+        //SS220 admin action log
+        LogAdminAction(shell, args);
+
         if (mind.VisitingEntity != default && _entities.TryGetComponent<GhostComponent>(mind.VisitingEntity, out var oldGhostComponent))
         {
             mindSystem.UnVisit(mindId, mind);
@@ -118,8 +126,8 @@ public sealed class AGhostCommand : LocalizedCommands
             // TODO: Remove duplication between all this and "GamePreset.OnGhostAttempt()"...
             if (!string.IsNullOrWhiteSpace(mind.CharacterName))
                 metaDataSystem.SetEntityName(ghost, mind.CharacterName);
-            else if (!string.IsNullOrWhiteSpace(mind.Session?.Name))
-                metaDataSystem.SetEntityName(ghost, mind.Session.Name);
+            else if (!string.IsNullOrWhiteSpace(player.Name))
+                metaDataSystem.SetEntityName(ghost, player.Name);
 
             mindSystem.Visit(mindId, ghost, mind);
         }
@@ -130,7 +138,8 @@ public sealed class AGhostCommand : LocalizedCommands
         }
 
         var comp = _entities.GetComponent<GhostComponent>(ghost);
-        ghostSystem.SetCanReturnToBody(comp, canReturn);
+
+        ghostSystem.SetCanReturnToBody((ghost, comp), canReturn);
 
         //SS220-ghost-hats begin
         var actions = _entities.System<SharedActionsSystem>();
@@ -172,4 +181,33 @@ public sealed class AGhostCommand : LocalizedCommands
         handsSystem.TryDrop(playerAttachedEntity.Value, checkActionBlocker: false, doDropInteraction: false,
             handsComp: handsComponent);
     }
+
+    //SS220 admin action log start
+    private void LogAdminAction(IConsoleShell shell, string[] args)
+    {
+        if (shell.Player is { } player)
+        {
+            if (args.Length == 0)
+            {
+                _adminLogger.Add(LogType.AdminCommand, $"{player} aghost self");
+            }
+            else
+            {
+                _adminLogger.Add(LogType.AdminCommand, $"{player} aghost {args[0]}");
+            }
+        }
+        else
+        {
+            if (args.Length == 0)
+            {
+                _adminLogger.Add(LogType.AdminCommand, $"Unknown aghost self");
+            }
+            else
+            {
+                _adminLogger.Add(LogType.AdminCommand, $"Unknown aghost {args[0]}");
+            }
+        }
+
+    }
+    //SS220 admin action log end
 }

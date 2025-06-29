@@ -1,0 +1,64 @@
+- type: entity
+  name: fusee
+  parent: [ BaseItem, BaseGunWieldable ]
+  id: WeaponFusee
+  description: Guns at the ready! Aim! Fire!
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/lsmg.ogg
+      params:
+        volume: 2
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Snipers/fusee.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: AmmoCounter
+  - type: Sharp #because bayonet
+  - type: Item
+    size: Ginormous
+  - type: Gun
+    minAngle: 50
+    maxAngle: 70
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: UseDelayOnShoot
+  - type: UseDelay
+    delay: 8
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CartridgeUnitary
+    capacity: 1
+    proto: CartridgeUnitary
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Piercing: 60 #doesnt work BRUH
+    angle: 0
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: StaticPrice
+    price: 50
+  - type: GunRequiresWield
+  - type: HeldSpeedModifier
+    sprintModifier: 0.7
+    mirrorClothingModifier: false
+  - type: Blocking # not the best option, but blocking hardcoded to shields sadly
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 1.0
+    activeBlockModifier:
+      coefficients:
+        Blunt: 1.0
+

@@ -1,27 +1,5 @@
-- type: dataset
-  id: names_dwarf_female
+- type: localizedDataset
+  id: NamesDwarfFemale
   values:
-  - Артин
-  - Бардрин
-  - Вистра
-  - Гуннлода
-  - Гурдис
-  - Дагнал
-  - Диеза
-  - Илде
-  - Катра
-  - Кристид
-  - Лифтраса
-  - Одхильд
-  - Мардред
-  - Рисвин
-  - Саннл
-  - Торбера
-  - Торгга
-  - Фалкрунн
-  - Финеллен
-  - Хельджа
-  - Хлин
-  - Эльдет
-  - Эмбер
-
+    prefix: name-dwarf-female-
+    count: 23

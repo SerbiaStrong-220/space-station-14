@@ -1,0 +1,50 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: cult pond
+  parent: BaseStructure
+  id: CultYoggPond
+  suffix: CultYogg
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.1"
+        density: 190
+        hard: true
+        mask:
+        - MachineMask
+        layer:
+        - BulletImpassable
+  - type: Appearance
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nocturine
+          Quantity: 10
+  - type: DrawableSolution
+    solution: drink
+  - type: Sprite
+    sprite: SS220/Structures/CultYogg/yoggpond.rsi
+    state: pond
+    noRot: true
+  - type: InteractionOutline
+  - type: Transform
+  - type: CultPond
+    solutionName: drink
+  - type: CultYoggBuilding
+    eraseTime: 5
+    spawnOnErase:
+      - id: CableApcStack1Live
+        stackAmount: 7
+      - id: SheetTokl1
+        stackAmount: 12
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable

@@ -1,8 +1,10 @@
+using Content.Server.Administration;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Stack
@@ -15,6 +17,7 @@ namespace Content.Server.Stack
     public sealed class StackSystem : SharedStackSystem
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private readonly QuickDialogSystem _quickDialog = default!; //ss220 add custom amount
 
         public static readonly int[] DefaultSplitAmounts = { 1, 5, 10, 20, 30, 50 };
 
@@ -86,7 +89,7 @@ namespace Content.Server.Stack
         public EntityUid Spawn(int amount, StackPrototype prototype, EntityCoordinates spawnPosition)
         {
             // Set the output result parameter to the new stack entity...
-            var entity = Spawn(prototype.Spawn, spawnPosition);
+            var entity = SpawnAtPosition(prototype.Spawn, spawnPosition);
             var stack = Comp<StackComponent>(entity);
 
             // And finally, set the correct amount!
@@ -169,6 +172,34 @@ namespace Content.Server.Stack
         {
             if (!args.CanAccess || !args.CanInteract || args.Hands == null || stack.Count == 1)
                 return;
+
+            //ss220 add custom amount start
+            var customAmount = new AlternativeVerb
+            {
+                Text = Loc.GetString("custom-amount"),
+                Category = VerbCategory.Split,
+                Act = () =>
+                {
+                    if (!TryComp<ActorComponent>(args.User, out var actorComp))
+                        return;
+
+                    _quickDialog.OpenDialog(actorComp.PlayerSession,
+                        Loc.GetString("custom-amount-title"),
+                        Loc.GetString("custom-amount-prompt"),
+                        (int amount) =>
+                        {
+                            UserSplit(uid, args.User, amount, stack);
+                        },
+                        () =>
+                        {
+
+                        });
+                },
+                Priority = 1,
+            };
+
+            args.Verbs.Add(customAmount);
+            //ss220 add custom amount end
 
             AlternativeVerb halve = new()
             {

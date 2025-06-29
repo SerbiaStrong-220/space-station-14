@@ -1,0 +1,23 @@
+- type: entity
+  parent: [ BaseCartridge ]
+  id: CartridgeUnitary
+  name: unitary cartridge
+  suffix: HOCebent, Ebent
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CartridgeUnitary
+    - ShellShotgun #So it can fit in bandolier. Lame but i dont think someone will try to shoot it from enforcer...
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: BulletUnitarySlug
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell.rsi
+    layers:
+    - state: blank
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 10

@@ -1,0 +1,1 @@
+health-analyzer-window-entity-death-counter-text = Биологических смертей:

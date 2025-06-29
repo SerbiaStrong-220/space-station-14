@@ -1,0 +1,526 @@
+- type: entity
+  parent: CratePlastic
+  id: CrateFreezerCookingEvent
+  name: Супер холодильник
+  suffix: Lanc, event.
+  components:
+  - type: Icon
+    sprite: Structures/Storage/Crates/freezer.rsi
+  - type: Sprite
+    sprite: Structures/Storage/Crates/freezer.rsi
+#SS220 Crate-tg-resprite begin
+    offset: 0, 0.25
+    layers:
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+#SS220 Crate-tg-resprite end
+#SS220 crates-labels-fix begin
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      map: ["enum.PaperLabelVisuals.Layer"]
+#SS220 crates-labels-fix end
+  - type: AntiRottingContainer
+  - type: ExplosionResistance
+    damageCoefficient: 0.50
+  - type: EntityStorage
+    capacity: 5000
+  - type: StorageFill
+    contents:
+      - id: FoodLemon
+        amount: 10
+      - id: FoodLingzhi
+        amount: 10
+      - id: FoodSpaceshroom
+        amount: 10
+      - id: FoodPumpkin
+        amount: 10
+      - id: FoodCarrot
+        amount: 10
+      - id: FoodMimana
+        amount: 10
+      - id: FoodChiliPepper
+        amount: 10
+      - id: FoodTomato
+        amount: 10
+      - id: FoodCorn
+        amount: 10
+      - id: FoodBlueTomato
+        amount: 10
+      - id: FoodBerries
+        amount: 10
+      - id: Foodbeet
+        amount: 10
+      - id: FoodChillyPepper
+        amount: 10
+      - id: FoodLime
+        amount: 10
+      - id: FoodOnionRed
+        amount: 10
+      - id: FoodBluePumpkin
+        amount: 10
+      - id: FoodApple
+        amount: 10
+      - id: FoodLemoon
+        amount: 10
+      - id: FoodGoldenApple
+        amount: 10
+      - id: FoodBanana
+        amount: 10
+      - id: FoodEggplant
+        amount: 10
+      - id: FoodWatermelon
+        amount: 10
+      - id: FoodOrange
+        amount: 10
+      - id: FoodGrape
+        amount: 10
+      - id: FoodCabbage
+        amount: 10
+      - id: FoodCherry
+        amount: 10
+      - id: FoodGarlic
+        amount: 10
+      - id: FoodPineapple
+        amount: 10
+      - id: FoodFlyAmanita
+        amount: 10
+
+- type: entity
+  parent: BaseStructureDynamic
+  id: SmartFridgecookingEvent
+  name: Супер умный холодильник
+  suffix: Lanc, event.
+  description: A refrigerated storage unit for keeping items cold and fresh.
+  components:
+  - type: StationAiWhitelist
+  - type: Advertise
+    pack: SmartFridgeAds
+  - type: Speech
+  - type: Appearance
+  - type: Sprite
+    sprite: Structures/Machines/smartfridge.rsi
+    snapCardinals: true
+    layers:
+    - state: smartfridge
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: smartfridge_door
+      map: ["enum.StorageVisualLayers.Door"]
+#      shader: unshaded #SS220-SmartFridgeResprite
+  - type: EntityStorageVisuals
+    stateBaseClosed: smartfridge
+    stateDoorOpen: smartfridge_open
+    stateDoorClosed: smartfridge_door
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#9dc5c9"
+  - type: EntityStorage
+    isCollidableWhenOpen: true
+    capacity: 5000
+    closeSound:
+      path: /Audio/Machines/windoor_open.ogg
+      params:
+        volume: -3
+    openSound:
+      path: /Audio/Machines/windoor_open.ogg
+      params:
+        volume: -3
+  - type: ContainerContainer
+    containers:
+      entity_storage: !type:Container
+  - type: UseDelay
+    delay: 1
+  - type: AntiRottingContainer
+  - type: ResistLocker
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    noRot: true
+    anchored: True
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
+  - type: Anchorable
+    delay: 2
+  - type: InteractionOutline
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Breakage"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: DamageOnHighSpeedImpact
+    damage:
+      types:
+        Blunt: 5
+    soundHit:
+      collection: MetalThud
+  - type: StorageFill
+    contents:
+      - id: RiceBushel
+        amount: 10
+      - id: LeavesCannabis
+        amount: 10
+      - id: WheatBushel
+        amount: 20
+      - id: FoodAloe
+        amount: 10
+      - id: FoodAmbrosiaVulgaris
+        amount: 10
+      - id: FoodAmbrosiaDeus
+        amount: 10
+      - id: FoodGalaxythistle
+        amount: 10
+      - id: FoodMushroom
+        amount: 10
+      - id: FoodCocoaBeans
+        amount: 10
+      - id: FoodPotato
+        amount: 10
+      - id: FoodKoibean
+        amount: 10
+      - id: FoodSpacemansTrumpet
+        amount: 10
+      - id: LeavesCannabisRainbow
+        amount: 10
+      - id: Sugarcane
+        amount: 20
+      - id: PoppySeeds
+        amount: 10
+      - id: MeatwheatBushel
+        amount: 10
+      - id: FoodLaughinPeaPod
+        amount: 10
+      - id: CottonBol
+        amount: 10
+      - id: FoodCocoaPod
+        amount: 10
+      - id: FoodSoybeans
+        amount: 10
+      - id: FoodPeaPod
+        amount: 10
+      - id: FoodGlasstle
+        amount: 10
+
+- type: entity
+  id: LockerFreezerBasecookingEvent
+  parent: LockerBase
+  name: Супер холодильник
+  suffix: Lanc, event.
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: freezer
+    stateDoorOpen: freezer_open
+    stateDoorClosed: freezer_door
+  - type: ExplosionResistance
+    damageCoefficient: 0.50
+  - type: AntiRottingContainer
+  - type: EntityStorage
+    capacity: 5000
+  - type: StorageFill
+    contents:
+      - id: OrganHumanAppendix
+        amount: 3
+      - id: OrganHumanEyes
+        amount: 3
+      - id: OrganDionaEyes
+        amount: 3
+      - id: OrganHumanBrain
+        amount: 5
+      - id: FoodMeatRouny
+        amount: 5
+      - id: FoodMeatFish
+        amount: 10
+      - id: FoodMeatSlime
+        amount: 10
+      - id: FoodMeatTomato
+        amount: 10
+      - id: FoodMeatDuck
+        amount: 10
+      - id: FoodMeatSpiderLeg
+        amount: 10
+      - id: FoodMeatCorgi
+        amount: 5
+      - id: FoodEgg
+        amount: 10
+      - id: FoodMeatCrab
+        amount: 20
+      - id: FoodMeatSnake
+        amount: 10
+      - id: FoodMeatGoliath
+        amount: 10
+      - id: FoodMeat
+        amount: 10
+      - id: FoodMeatDragon
+        amount: 10
+      - id: FoodMeatSnail
+        amount: 10
+      - id: FoodMeatHuman
+        amount: 10
+      - id: FoodPeaPod
+        amount: 10
+      - id: FoodMeatSpider
+        amount: 10
+      - id: FoodMeatPlant
+        amount: 10
+      - id: FoodMeatPenguin
+        amount: 10
+      - id: FoodMeatRat
+        amount: 5
+      - id: FoodMeatRotten
+        amount: 10
+      - id: FoodMeatLizard
+        amount: 10
+      - id: FoodMeatChicken
+        amount: 10
+      - id: FoodMeatXeno
+        amount: 10
+      - id: OrganArachnidEyes
+        amount: 10
+      - id: FoodMeatBacon
+        amount: 10
+      - id: FoodMeatClown
+        amount: 10
+      - id: FoodMeatBear
+        amount: 10
+      - id: OrganHumanHeart
+        amount: 5
+
+- type: entity
+  parent: CrateGeneric
+  id: CrateWoodCookingEvent
+  name: Спер деревянный ящик для готовки
+  description: Странно оттдающий блю-спейс пылью ящик из дерева.
+  suffix: Lanc, event.
+  components:
+  - type: Sprite
+    offset: 0, 0
+    sprite: SS220/Structures/Storage/Crates/wood_crate.rsi
+    layers:
+    - state: base
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      sprite: Structures/Storage/Crates/labels.rsi
+      map: ["enum.PaperLabelVisuals.Layer"]
+      offset: "-0.03125,0.28125"
+  - type: Icon
+    sprite: SS220/Structures/Storage/Crates/wood_crate.rsi
+    state: base
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 1
+            max: 4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: CrateWood
+    node: cratewood
+    containers:
+    - entity_storage
+  - type: EntityStorage
+    capacity: 5000
+  - type: StorageFill
+    contents:
+      - id: Flare
+        amount: 10
+      - id: Bucket
+        amount: 3
+      - id: FoodCondimentBottleColdsauce
+        amount: 3
+      - id: FoodCondimentPacketMustard
+        amount: 10
+      - id: Wrench
+        amount: 1
+      - id: DrinkSodaWaterBottleFull
+        amount: 4
+      - id: ClothingShoesClown
+        amount: 1
+      - id: AnomalyCoreFlesh
+        amount: 3
+      - id: FoodPlateTin
+        amount: 5
+      - id: FoodCondimentBottleEnzyme
+        amount: 5
+      - id: FoodShakerSalt
+        amount: 5
+      - id: FoodSnackPistachios
+        amount: 5
+      - id: FoodFrozenPopsicleTrash
+        amount: 5
+      - id: FoodCondimentPacketAstrotame
+        amount: 5
+      - id: CapacitorStockPart
+        amount: 10
+      - id: FoodDonkpocket
+        amount: 10
+      - id: ModularReceiver
+        amount: 3
+      - id: DrinkSoyMilkCarton
+        amount: 5
+      - id: Screwdriver
+        amount: 1
+      - id: ClothingOuterGhostSheet
+        amount: 1
+      - id: d20Dice
+        amount: 1
+      - id: DrinkColaBottleFull
+        amount: 5
+      - id: DrinkOatMilkCarton
+        amount: 5
+      - id: DrinkBottleOfNothingFull
+        amount: 1
+      - id: ShardGlass
+        amount: 10
+      - id: SheetPlasma
+        amount: 1
+      - id: SheetUranium
+        amount: 1
+      - id: FoodCondimentPacketSoy
+        amount: 10
+      - id: WhoopieCushion
+        amount: 1
+      - id: BikeHornInstrument
+        amount: 1
+      - id: FoodKebabSkewer
+        amount: 10
+      - id: DrinkMilkCarton
+        amount: 5
+      - id: ClothingMaskClown
+        amount: 1
+      - id: BikeHorn
+        amount: 1
+      - id: ClothingMaskMime
+        amount: 1
+      - id: ChemistryBottleNitrogen
+        amount: 5
+      - id: DrinkCreamCarton
+        amount: 3
+      - id: FoodShakerPepper
+        amount: 5
+      - id: FoodSnackRaisins
+        amount: 5
+      - id: ChemistryBottleCognizine
+        amount: 5
+      - id: DrinkWineBottleFull
+        amount: 3
+      - id: CrayonGreen
+        amount: 3
+      - id: BaseBallBat
+        amount: 1
+      - id: DrinkBottleOfNothingFull
+        amount: 1
+      - id: ClothingHeadHatWizard
+        amount: 1
+      - id: FoodCondimentBottleHotsauce
+        amount: 5
+      - id: FoodCondimentBottleVinegar
+        amount: 5
+      - id: FoodCondimentBottleBBQ
+        amount: 5
+      - id: ReagentContainerMayo
+        amount: 5
+      - id: FoodCondimentBottleKetchup
+        amount: 5
+      - id: AdvMopItem
+        amount: 1
+      - id: MedicatedSuture
+        amount: 10
+      - id: RegenerativeMesh
+        amount: 10
+      - id: ChemistryBottleOmnizine
+        amount: 2
+      - id: Syringe
+        amount: 3
+
+- type: entity
+  id: EventDresser
+  parent: BaseStructure
+  name: Вместительный шкаф
+  description: Шкаф, который СБ могут использовать для засад всем отделом.
+  suffix: Lanc, event.
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/furniture.rsi
+    state: dresser
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5000
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 3
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Storage
+    grid:
+    - 0,0,15,19 #SS220 a lot bigger dresser for event
+    maxItemSize: Normal
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Tag
+    tags:
+    - Wooden
+  - type: Anchorable
+  - type: Rotatable
+  - type: Construction
+    graph: Dresser
+    node: dresser

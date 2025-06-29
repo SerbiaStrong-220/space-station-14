@@ -1,0 +1,12 @@
+- type: spriteFont
+  id: CalculatorDisplayFont
+  texture: /Textures/SS220/Interface/Calculator/calculator-digits.png
+  glyphMap: >
+    1234567
+    890-.
+  gridSize: 18, 32
+  scale: 2
+  glyphs:
+    '.':
+      size: 0, 32
+      offset: -2, -2

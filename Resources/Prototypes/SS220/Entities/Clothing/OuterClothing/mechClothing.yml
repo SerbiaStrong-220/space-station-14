@@ -1,0 +1,63 @@
+- type: entity
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]
+  id: ClothingOuterMechLoader
+  name: loader class exoskeleton
+  description: Enhances the user's physical capabilities, making it easy to lift heavy objects and reducing the risk of injury.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Armor/mech_loader.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Armor/mech_loader.rsi
+    equipDelay: 2
+    unequipDelay: 2
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.85  
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.85
+        Caustic: 0.85
+  - type: Mech
+    maxEquipmentAmount: 2
+    airtight: true
+    equipmentWhitelist:
+      tags:
+      - SmallMech
+  - type: WiresPanel      
+  - type: HeldSpeedModifier
+  - type: GroupExamine
+  - type: ContainerContainer
+    containers:
+      mech-equipment-container: !type:Container
+      mech-battery-slot: !type:ContainerSlot
+      item_radio: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item_radio:
+        name: clothing-outer-radio-handheld
+        whitelist:
+          tags:
+          - Radio
+  - type: UserInterface
+    interfaces:
+      enum.MechUiKey.Key:
+        type: MechBoundUserInterface
+  - type: DoAfter
+  - type: ClothingSpeedModifier
+    walkModifier: 0.75
+    sprintModifier: 0.75
+
+- type: entity
+  parent: ClothingOuterMechLoader
+  id: ClothingOuterMechLoaderFull
+  suffix: Full
+  components:
+  - type: ContainerFill
+    containers:
+      mech-battery-slot:
+      - PowerCellHigh
+  - type: Mech
+    startingEquipment:
+    - MechEquipmentGrabberSmall
+    - MechEquipmentGrabberSmall

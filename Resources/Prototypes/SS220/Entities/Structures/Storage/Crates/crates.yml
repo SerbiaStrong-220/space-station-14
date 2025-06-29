@@ -5,9 +5,9 @@
   description: Хранит самые красные секреты
   components:
   - type: Icon
-    sprite: SS220/Structures/Storage/Crates/ussp_crate.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Structures/Storage/Crates/ussp_crate.rsi
   - type: Sprite
-    sprite: SS220/Structures/Storage/Crates/ussp_crate.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Structures/Storage/Crates/ussp_crate.rsi
     offset: 0, 0
     layers:
     - state: base
@@ -66,3 +66,11 @@
     node: cratewood
     containers:
     - entity_storage
+
+- type: entity
+  parent: CrateMedicalSecure
+  id: CrateMedicalSecureImplant
+  name: secure medical crate
+  components:
+  - type: AccessReader
+    access: [["Medical"], ["Command"], ["Security"]]

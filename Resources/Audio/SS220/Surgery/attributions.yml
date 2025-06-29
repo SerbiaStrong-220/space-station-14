@@ -1,0 +1,4 @@
+- files: ["scalpel.ogg", "incision.ogg", "seal_wound.ogg", "cautery.ogg", "organ.ogg", "hemostat.ogg", "saw.ogg", "retractor.ogg", "retract_skin.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tg station"
+  source: "https://github.com/tgstation/tgstation/commit/436ba869ebcd0b60b63973fb7562f447ee655205"

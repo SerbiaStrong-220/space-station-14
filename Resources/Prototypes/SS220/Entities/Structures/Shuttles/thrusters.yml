@@ -1,0 +1,306 @@
+- type: entity
+  id: ThrusterShunting
+  name: shunting thruster
+  parent: [ BaseThruster, ConstructibleMachine ]
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Thruster
+    thrust: 33
+    damage:
+      types:
+        Heat: 13
+  - type: WallMount
+  - type: Construction
+    graph: ThrusterShunting
+    node: thrusterShunting
+  - type: Rotatable #The component responsible for rotating the pinned object until
+    rotateWhileAnchored: true #the bug with it flipping 180 degrees during construction is fixed.
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Machine
+    board: ThrusterShuntingMachineCircuitboard
+  - type: ApcPowerReceiver
+    powerLoad: 500
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
+        - !type:ChangeConstructionNodeBehavior
+          node: machineFrame
+  - type: Sprite
+    sprite: SS220/Structures/Shuttles/thruster_shunting.rsi
+    layers:
+    - state: base
+      map: ["enum.ThrusterVisualLayers.Base"]
+    - state: thrust
+      map: ["enum.ThrusterVisualLayers.ThrustOn"]
+      shader: unshaded
+      visible: false
+    - state: thrust_burn_unshaded
+      map: ["enum.ThrusterVisualLayers.ThrustingUnshaded"]
+      shader: unshaded
+      visible: false
+      offset: 0, 1
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: ThrusterShuntingFrame
+  name: shunting thruster frame
+  description: A thruster that allows a shuttle to move.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: SS220/Structures/Shuttles/thruster_shunting.rsi
+    state: frame-base
+  - type: Construction
+    graph: ThrusterShunting
+    node: thrusterShuntingFrame
+  - type: WallMount
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors: #excess damage, don't spawn entities.
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: DebugThrusterShunting
+  parent: ThrusterShunting
+  suffix: DEBUG
+  components:
+  - type: Thruster
+    requireSpace: false
+  - type: ApcPowerReceiver
+    needsPower: false
+    powerLoad: 0
+
+- type: entity
+  id: ThrusterBigLeft
+  name: big thruster (left)
+  parent: [ BaseThruster, ConstructibleMachine ]
+  components:
+  - type: Thruster
+    thrust: 50
+    damage:
+      types:
+        Heat: 20
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.05,0.45"
+        density: 20
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Machine
+    board: ThrusterBigLeftMachineCircuitboard
+  - type: ApcPowerReceiver
+    powerLoad: 750
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
+        - !type:ChangeConstructionNodeBehavior
+          node: machineFrame
+  - type: Sprite
+    sprite: SS220/Structures/Shuttles/thruster_big_left.rsi
+    layers:
+    - state: base
+      map: ["enum.ThrusterVisualLayers.Base"]
+    - state: thrust
+      map: ["enum.ThrusterVisualLayers.ThrustOn"]
+      shader: unshaded
+      visible: false
+    - state: thrust_burn_unshaded
+      map: ["enum.ThrusterVisualLayers.ThrustingUnshaded"]
+      shader: unshaded
+      visible: false
+      offset: 0, 1
+
+- type: entity
+  id: ThrusterBigLeftUnanchored
+  parent: ThrusterBigLeft
+  suffix: Unanchored
+  components:
+    - type: Transform
+      anchored: false
+    - type: Physics
+      bodyType: Dynamic
+
+- type: entity
+  id: DebugThrusterBigLeft
+  parent: ThrusterBigLeft
+  suffix: DEBUG
+  components:
+  - type: Thruster
+    requireSpace: false
+  - type: ApcPowerReceiver
+    needsPower: false
+    powerLoad: 0
+
+- type: entity
+  id: ThrusterBigRight
+  name: big thruster (right)
+  parent: [ ThrusterBigLeft ]
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.05,-0.45,0.45,0.45"
+        density: 20
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Machine
+    board: ThrusterBigRightMachineCircuitboard
+  - type: Sprite
+    sprite: SS220/Structures/Shuttles/thruster_big_right.rsi
+
+- type: entity
+  id: ThrusterBigRightUnanchored
+  parent: ThrusterBigRight
+  suffix: Unanchored
+  components:
+    - type: Transform
+      anchored: false
+    - type: Physics
+      bodyType: Dynamic
+
+- type: entity
+  id: DebugThrusterBigRight
+  parent: ThrusterBigRight
+  suffix: DEBUG
+  components:
+  - type: Thruster
+    requireSpace: false
+  - type: ApcPowerReceiver
+    needsPower: false
+    powerLoad: 0
+
+- type: entity
+  id: ThrusterBigCenter
+  name: big thruster (center)
+  parent: [ BaseThruster, ConstructibleMachine ]
+  components:
+  - type: Thruster
+    thrust: 200
+    damage:
+      types:
+        Heat: 80
+  - type: Machine
+    board: ThrusterBigCenterMachineCircuitboard
+  - type: ApcPowerReceiver
+    powerLoad: 3000
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
+        - !type:ChangeConstructionNodeBehavior
+          node: machineFrame
+  - type: Sprite
+    sprite: SS220/Structures/Shuttles/thruster_big_center.rsi
+    layers:
+    - state: base
+      map: ["enum.ThrusterVisualLayers.Base"]
+    - state: thrust
+      map: ["enum.ThrusterVisualLayers.ThrustOn"]
+      shader: unshaded
+      visible: false
+    - state: thrust_burn_unshaded
+      map: ["enum.ThrusterVisualLayers.ThrustingUnshaded"]
+      shader: unshaded
+      visible: false
+      offset: 0, 1
+
+- type: entity
+  id: ThrusterBigCenterUnanchored
+  parent: ThrusterBigCenter
+  suffix: Unanchored
+  components:
+    - type: Transform
+      anchored: false
+    - type: Physics
+      bodyType: Dynamic
+
+- type: entity
+  id: DebugThrusterBigCenter
+  parent: ThrusterBigCenter
+  suffix: DEBUG
+  components:
+  - type: Thruster
+    requireSpace: false
+  - type: ApcPowerReceiver
+    needsPower: false
+    powerLoad: 0

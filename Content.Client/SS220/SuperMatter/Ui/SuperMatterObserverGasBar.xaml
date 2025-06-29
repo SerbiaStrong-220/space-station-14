@@ -1,0 +1,14 @@
+ <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+<supermatter:SuperMatterObserverGasBar
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:supermatter="clr-namespace:Content.Client.SS220.SuperMatter.Ui"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <ProgressBar Name="FillingBar" HorizontalExpand="true" VerticalExpand="true" MinValue="0" MaxValue="1"
+    MinHeight="32" Page="0" Value="0.5" MouseFilter="Stop" TrackingTooltip="true" TooltipDelay="0">
+        <ProgressBar.BackgroundStyleBoxOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#2B2A26" BorderThickness="2 2 0 4"/>
+        </ProgressBar.BackgroundStyleBoxOverride>
+        <Label Name="BarLabel" Margin="2 2 0 14"/>
+    </ProgressBar>
+</supermatter:SuperMatterObserverGasBar>

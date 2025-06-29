@@ -57,6 +57,11 @@
     noRot: true
   - type: Anchorable
   - type: Pullable
+  #SS220 Add lying action begin
+  - type: Tag
+    tags:
+    - Bed
+  #SS220 Add lying action end
 
 
 - type: entity

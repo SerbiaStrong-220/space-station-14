@@ -1,0 +1,40 @@
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodKulichBase
+  abstract: true
+  components:
+  - type: FlavorProfile
+    flavors:
+      - sweet
+  - type: Food
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/kulich.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 35
+        - ReagentId: Vitamin
+          Quantity: 10
+  - type: Item
+    sprite: SS220/Objects/Consumable/Food/kulich.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: Tag
+    tags:
+    - Cake
+
+- type: entity
+  name: кулич
+  parent: FoodKulichBase
+  id: FoodKulich
+  description: Атеист? Почему рот в куличе?
+  components:
+  - type: Food
+  - type: Sprite
+    state: icon

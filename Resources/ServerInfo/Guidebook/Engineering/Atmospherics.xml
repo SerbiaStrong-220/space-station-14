@@ -41,26 +41,14 @@ In the event you finish all the tasks at hand, you can make some extra power or 
     <GuideEntityEmbed Entity="TritiumCanister"/>
   </Box>
 
-  ##Frezon
-  Frezon is a bluish-green gas that is very complex and very dangerous. To obtain frezon, you must mix Tritium, Oxygen, and Nitrogen in a 70K room to start the reaction, and prevent the Tritium from combusting with the oxygen.
+  ## Responsibilities
+  Generally, you'll be responding to [textlink="atmospheric upsets" link="AtmosphericUpsets"] throughout the station.
+  These can range from minor leaks to full-on [textlink="fires" link="Fires"] or [textlink="spacing" link="Spacing"] incidents.
 
-  <Box>
-    <GuideEntityEmbed Entity="TritiumCanister"/>
-    <GuideEntityEmbed Entity="AirCanister"/>
-    <GuideEntityEmbed Entity="GasVentScrubber"/>
-    <GuideEntityEmbed Entity="StorageCanister" Caption="Frezon Canister"/>
-  </Box>
+  People from other departments may also request [textlink="canned gasses" link="GasCanisters"] for their department duties, such as [textlink="plasma" link="Gasses"] for the [textlink="Research Department" link="Science"] or [textlink="carbon dioxide" link="Gasses"] for [textlink="Chemistry" link="Chemist"].
 
-  It is critical to understand that a frezon leak can devastate the station, causing a wintery hell filled with itchy sweaters and cold burns. Frezon is very cold, and can freeze the station to death if even a few moles get out, so make sure that you lock your canisters or just move your Frezon straight into a storage room.
+  In your downtime, you may seek to improve the station by setting up rooms with different atmospheres for [textlink="Voxes" link="Vox"] and other species, or by setting up production of [textlink="exotic gasses" link="Gasses"] for the station's needs.
 
-  ## Reference Sheet
-  - Standard atmospheric mix is [color=#a4885c]78% N2 and 22% O2 at 101.24kPa.[/color]
-  - Gas obeys real math. You can use the equation:
-  <Box>
-    [color=cyan]PV = nRT[/color]
-  </Box>
-  <Box>
-    ([color=#a4885c]Pressure kPa * Volume L = Moles * R * Temperature K[/color])
-  </Box> to derive information you might need to know about a gas. R is approximately 8.31446.
+  When there's no work to do, you may be expected to help regular Station Engineers with their tasks, and mentor new Station Engineers and Atmospheric Technicians.
 
 </Document>

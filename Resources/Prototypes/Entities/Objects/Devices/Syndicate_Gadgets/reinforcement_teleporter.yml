@@ -24,8 +24,13 @@
   components:
   - type: GhostRole
     name: ghost-role-information-syndicate-reinforcement-spy-name
-    description: ghost-role-information-syndicate-reinforcement-description
-    rules: ghost-role-information-rules-default-solo-antagonist
+    description: ghost-role-information-syndicate-reinforcement-spy-description
+    rules: ghost-role-information-syndicate-reinforcement-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+        - !type:OverallPlaytimeRequirement
+          time: 72000 #SS220 ghostrole-times (20h overall) end
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
   - type: GhostRoleMobSpawner
@@ -35,10 +40,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-ReinforcementRadioSyndicate-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-ReinforcementRadio-engineering
       jobRequired:
         - ChiefEngineer
@@ -64,6 +68,11 @@
     name: ghost-role-information-nukeop-reinforcement-name
     description: ghost-role-information-nukeop-reinforcement-description
     rules: ghost-role-information-nukeop-reinforcement-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+      - !type:OverallPlaytimeRequirement
+        time: 72000 #SS220 ghostrole-times (20h overall) end
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
   - type: GhostRoleMobSpawner
@@ -78,7 +87,12 @@
   - type: GhostRole
     name: ghost-role-information-syndicate-monkey-reinforcement-name
     description: ghost-role-information-syndicate-monkey-reinforcement-description
-    rules: ghost-role-information-rules-default-familiar
+    rules: ghost-role-information-syndicate-reinforcement-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+      - !type:OverallPlaytimeRequirement
+        time: 72000 #SS220 ghostrole-times (20h overall) end
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
   - type: GhostRoleMobSpawner
@@ -88,10 +102,9 @@
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-ReinforcementRadioSyndicateMonkey-syndicate
-      whitelistMind:
-        components:
-          - TraitorRole
-          - NukeOperative
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
     - label: corvax-hidden-desc-ReinforcementRadio-engineering
       jobRequired:
         - ChiefEngineer
@@ -112,6 +125,11 @@
   id: ReinforcementRadioSyndicateAncestorNukeops # Reinforcement radio exclusive to nukeops uplink
   suffix: NukeOps
   components:
+  - type: GhostRole
+    rules: ghost-role-information-nukeop-reinforcement-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+      - !type:OverallPlaytimeRequirement
+        time: 72000 #SS220 ghostrole-times (20h overall) end
   - type: GhostRoleMobSpawner
     prototype: MobMonkeySyndicateAgentNukeops
     selectablePrototypes: ["SyndicateMonkeyNukeops", "SyndicateKoboldNukeops"]
@@ -125,7 +143,12 @@
   - type: GhostRole
     name: ghost-role-information-SyndiCat-name
     description: ghost-role-information-SyndiCat-description
-    rules: ghost-role-information-rules-default-familiar
+    rules: ghost-role-information-syndicate-reinforcement-rules
+    requirements: #SS220 ghostrole-times (20h overall) start
+      - !type:OverallPlaytimeRequirement
+        time: 72000 #SS220 ghostrole-times (20h overall) end
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
   - type: GhostRoleMobSpawner
@@ -144,6 +167,14 @@
       name: ghost-role-information-syndicate-cyborg-assault-name
       description: ghost-role-information-syndicate-cyborg-description
       rules: ghost-role-information-silicon-rules
+      requirements: #SS220 ghostrole-times (20h overall 10h silicon) start
+        - !type:OverallPlaytimeRequirement
+          time: 72000
+        - !type:RoleTimeRequirement
+          role: JobBorg
+          time: 36000 #SS220 ghostrole-times (20h overall 10h silicon) end
+      mindRoles:
+      - MindRoleGhostRoleSilicon
       raffle:
         settings: default
     - type: GhostRoleMobSpawner
@@ -152,10 +183,9 @@
     - type: HiddenDescription
       entries:
       - label: corvax-hidden-desc-ReinforcementRadioSyndicateCyborgAssault-syndicate
-        whitelistMind:
-          components:
-            - TraitorRole
-            - NukeOperative
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
       - label: corvax-hidden-desc-ReinforcementRadio-engineering
         jobRequired:
           - ChiefEngineer

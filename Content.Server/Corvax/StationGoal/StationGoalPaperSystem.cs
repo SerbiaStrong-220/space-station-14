@@ -1,17 +1,15 @@
-using System.Linq;
 using Content.Server.Fax;
-using Content.Server.GameTicking.Events;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
-using Content.Server.Paper;
+using Content.Shared.Corvax.CCCVars;
 using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Paper;
-using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Photocopier;
+using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Server.Player;
 
 namespace Content.Server.Corvax.StationGoal
 {
@@ -22,18 +20,21 @@ namespace Content.Server.Corvax.StationGoal
     {
         [Dependency] private readonly IPrototypeManager _proto = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly FaxSystem _faxSystem = default!;
+        [Dependency] private readonly FaxSystem _fax = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly StationSystem _station = default!;
+        [Dependency] private readonly IConfigurationManager _cfg = default!;
 
         public override void Initialize()
         {
-            base.Initialize();
-            SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
+            SubscribeLocalEvent<RoundStartedEvent>(OnRoundStarted);
         }
 
-        private void OnRoundStarting(RoundStartingEvent ev)
+        private void OnRoundStarted(RoundStartedEvent ev)
         {
+            if (!_cfg.GetCVar(CCCVars.StationGoal))
+                return;
+
             var playerCount = _playerManager.PlayerCount;
 
             var query = EntityQueryEnumerator<StationGoalComponent>();
@@ -67,26 +68,33 @@ namespace Content.Server.Corvax.StationGoal
             }
         }
 
-        public bool SendStationGoal(EntityUid? ent, ProtoId<StationGoalPrototype> goal)
+        public bool SendStationGoal(EntityUid ent, ProtoId<StationGoalPrototype> goal)
         {
             return SendStationGoal(ent, _proto.Index(goal));
         }
+
         /// <summary>
         ///     Send a station goal on selected station to all faxes which are authorized to receive it.
         /// </summary>
         /// <returns>True if at least one fax received paper</returns>
-        public bool SendStationGoal(EntityUid? ent, StationGoalPrototype goal)
+        public bool SendStationGoal(EntityUid ent, StationGoalPrototype goal)
         {
-            if (ent is null)
-                return false;
-
+            // SS220 Photocopy begin
+            //var printout = new FaxPrintout(
+            //    Loc.GetString(goal.Text, ("station", MetaData(ent).EntityName), ("rand_planet_name", GetRandomPlanetName())), //SS220 Random planet name
+            //    Loc.GetString("station-goal-fax-paper-name"),
+            //    null,
+            //    null,
+            //    "paper_stamp-centcom",
+            //    [new() { StampedName = Loc.GetString("stamp-component-stamped-name-centcom"), StampedColor = Color.FromHex("#006600") }]
+            //);
             if (!TryComp<StationDataComponent>(ent, out var stationData))
                 return false;
 
             var dataToCopy = new Dictionary<Type, IPhotocopiedComponentData>();
             var paperDataToCopy = new PaperPhotocopiedData()
             {
-                Content = Loc.GetString(goal.Text, ("station", MetaData(ent.Value).EntityName), ("rand_planet_name", GetRandomPlanetName())), //SS220 Random planet name
+                Content = Loc.GetString(goal.Text, ("station", MetaData(ent).EntityName), ("rand_planet_name", GetRandomPlanetName())), //SS220 Random planet name
                 StampState = "paper_stamp-centcom",
                 StampedBy = [
                     new()
@@ -104,27 +112,24 @@ namespace Content.Server.Corvax.StationGoal
                 PrototypeId = "PaperNtFormCc"
             };
 
-            var printout = new FaxPrintout(dataToCopy, metaData);
+            var printout = new PhotocopyableFaxPrintout(dataToCopy, metaData);
+            // SS220 Photocopy end
 
             var wasSent = false;
             var query = EntityQueryEnumerator<FaxMachineComponent>();
             while (query.MoveNext(out var faxUid, out var fax))
             {
-                if (!fax.ReceiveStationGoal)
+                if (!fax.ReceiveAllStationGoals && !(fax.ReceiveStationGoal && _station.GetOwningStation(faxUid) == ent))
                     continue;
 
-                var largestGrid = _station.GetLargestGrid(stationData);
-                var grid = Transform(faxUid).GridUid;
-                if (grid is not null && largestGrid == grid.Value)
-                {
-                    _faxSystem.Receive(faxUid, printout, null, fax);
-                    foreach (var spawnEnt in goal.Spawns)
-                    {
-                        SpawnAtPosition(spawnEnt, Transform(faxUid).Coordinates);
-                    }
-                    wasSent = true;
-                }
+                _fax.Receive(faxUid, printout, null, fax);
+
+                foreach (var spawnEnt in goal.Spawns)
+                    SpawnAtPosition(spawnEnt, Transform(faxUid).Coordinates);
+
+                wasSent |= fax.ReceiveStationGoal;
             }
+
             return wasSent;
         }
 
@@ -132,7 +137,7 @@ namespace Content.Server.Corvax.StationGoal
         private string GetRandomPlanetName()
         {
             var rand = new Random();
-            string name = $"{(char) rand.Next(65, 90)}-";
+            string name = $"{(char)rand.Next(65, 90)}-";
 
             for (var i = 1; i <= 5; i++)
                 name += $"{rand.Next(0, 9)}{(i != 5 ? "-" : "")}";

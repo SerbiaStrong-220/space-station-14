@@ -1,6 +1,6 @@
 - type: job
   id: SeniorService
-  name: ведущий сервисного отдела
+  name: сервисный администратор #SS220 Rename
   description: job-description-senior-service
   playTimeTracker: JobSeniorService
   requirements:

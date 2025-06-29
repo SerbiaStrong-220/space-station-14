@@ -14,6 +14,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Physics.Events;
 using Content.Shared.Projectiles;
+using Content.Shared.SS220.Temperature;
 
 namespace Content.Server.Temperature.Systems;
 
@@ -130,7 +131,7 @@ public sealed class TemperatureSystem : EntitySystem
     public void ChangeHeat(EntityUid uid, float heatAmount, bool ignoreHeatResistance = false,
         TemperatureComponent? temperature = null)
     {
-        if (!Resolve(uid, ref temperature))
+        if (!Resolve(uid, ref temperature, false))
             return;
 
         if (!ignoreHeatResistance)
@@ -154,6 +155,14 @@ public sealed class TemperatureSystem : EntitySystem
 
         if (transform.MapUid == null)
             return;
+
+        //ss220 add resist for temperature start
+        var ev = new TemperatureChangeAttemptEvent();
+        RaiseLocalEvent(uid, ev);
+
+        if (ev.Cancelled)
+            return;
+        //ss220 add resist for temperature end
 
         var temperatureDelta = args.GasMixture.Temperature - temperature.CurrentTemperature;
         var airHeatCapacity = _atmosphere.GetHeatCapacity(args.GasMixture, false);
@@ -311,7 +320,7 @@ public sealed class TemperatureSystem : EntitySystem
 
     private void ChangeTemperatureOnCollide(Entity<ChangeTemperatureOnCollideComponent> ent, ref ProjectileHitEvent args)
     {
-        _temperature.ChangeHeat(args.Target, ent.Comp.Heat, ent.Comp.IgnoreHeatResistance);// adjust the temperature 
+        _temperature.ChangeHeat(args.Target, ent.Comp.Heat, ent.Comp.IgnoreHeatResistance);// adjust the temperature
     }
 
     private void OnParentChange(EntityUid uid, TemperatureComponent component,

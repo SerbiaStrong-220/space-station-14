@@ -133,7 +133,7 @@
         reagents:
           - ReagentId: NeoNicotinoid
             Quantity: 55
-          - ReagentId: Barozine
+          - ReagentId: Nicotizine
             Quantity: 35
 
 - type: entity

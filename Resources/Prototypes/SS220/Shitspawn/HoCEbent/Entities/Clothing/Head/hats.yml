@@ -1,0 +1,28 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadKiver
+  name: kiver
+  description: The headdress of a soldier of the Kingdom's great army.
+  suffix: Ebent, HOCebent
+  components:
+    - type: Sprite
+      sprite: SS220/Shitspawn/HoCEbent/Clothing/Head/Hats/kiver.rsi
+    - type: Clothing
+      sprite: SS220/Shitspawn/HoCEbent/Clothing/Head/Hats/kiver.rsi
+    - type: Tag
+      tags:
+      - ClothMade
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadPithHelmet
+  name: pith helmet
+  description: Army helmet of the army of the River Republic.
+  suffix: Ebent, HOCebent
+  components:
+    - type: Sprite
+      sprite: SS220/Shitspawn/HoCEbent/Clothing/Head/Hats/pith_helmet.rsi
+    - type: Clothing
+      sprite: SS220/Shitspawn/HoCEbent/Clothing/Head/Hats/pith_helmet.rsi

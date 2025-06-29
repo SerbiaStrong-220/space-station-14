@@ -1,0 +1,20 @@
+#Svarshik's toy guns
+- type: entity
+  id: BriefcaseSyndieSniperToyBundleFilled
+  parent: BriefcaseSyndie
+  suffix: Toy, Sniper Bundle
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,6,3
+  - type: StorageFill
+    contents:
+      - id: WeaponSniperHristovToy
+      - id: MagazineBoxAntiMaterielToyStun
+        amount: 2
+      - id: MagazineBoxAntiMaterielToyHappiness
+      - id: ClothingUniformJumpsuitTacticool
+      - id: ClothingHeadHatSyndie

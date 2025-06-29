@@ -1,11 +1,19 @@
 using System.Linq;
+using Content.Server.Lathe;
+using Content.Server.Lathe.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Shared.Localizations;
 using Content.Shared.Research.Components;
+using Content.Shared.Research.Prototypes;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Research.Systems;
 
 public sealed partial class ResearchSystem
 {
+    [Dependency] private readonly LatheSystem _lathe = default!; //SS220-lathe-announcement-fix
+    [Dependency] private readonly IPrototypeManager _proto = default!; //SS220-lathe-announcement-fix
+
     private void InitializeServer()
     {
         SubscribeLocalEvent<ResearchServerComponent, ComponentStartup>(OnServerStartup);
@@ -35,6 +43,47 @@ public sealed partial class ResearchSystem
         {
             RaiseLocalEvent(client, ref args);
         }
+        //SS220-lathe-announcement-fix begin
+        var announcedChannels = new HashSet<string>();
+
+        foreach (var client in component.Clients)
+        {
+            if (!TryComp<LatheAnnouncingComponent>(client, out var annComp))
+                continue;
+
+            if (!_lathe.TryGetAvailableRecipes(client, out var potentialRecipes))
+                continue;
+
+            var recipeNames = new List<string>();
+            foreach (var recipeId in args.NewlyUnlockedRecipes ?? [])
+            {
+                if (!potentialRecipes.Contains(new(recipeId)))
+                    continue;
+
+                if (!_proto.TryIndex<LatheRecipePrototype>(recipeId, out var recipe))
+                    continue;
+
+                var itemName = _lathe.GetRecipeName(recipe);
+                recipeNames.Add(Loc.GetString("lathe-unlock-recipe-radio-broadcast-item", ("item", itemName)));
+            }
+
+            if (recipeNames.Count == 0)
+                continue;
+
+            var message = Loc.GetString(
+                "lathe-unlock-recipe-radio-broadcast",
+                ("items", ContentLocalizationManager.FormatList(recipeNames))
+            );
+
+            foreach (var channel in annComp.Channels)
+            {
+                if (!announcedChannels.Add(channel))
+                    continue;
+
+                _radio.SendRadioMessage(client, message, channel, client, escapeMarkup: false);
+            }
+        }
+        //SS220-lathe-announcement-fix end
     }
 
     private bool CanRun(EntityUid uid)
@@ -61,7 +110,7 @@ public sealed partial class ResearchSystem
     /// <param name="serverComponent"></param>
     /// <param name="dirtyServer">Whether or not to dirty the server component after registration</param>
     public void RegisterClient(EntityUid client, EntityUid server, ResearchClientComponent? clientComponent = null,
-        ResearchServerComponent? serverComponent = null,  bool dirtyServer = true)
+        ResearchServerComponent? serverComponent = null, bool dirtyServer = true)
     {
         if (!Resolve(client, ref clientComponent) || !Resolve(server, ref serverComponent))
             return;

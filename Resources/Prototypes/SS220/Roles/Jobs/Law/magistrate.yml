@@ -60,10 +60,9 @@
   id: MagistrateGear
   equipment:
     shoes: ClothingShoesBootsLaceup
-    eyes: ClothingEyesGlassesCommand
     id: MagistratePDA
   inhand:
-    - BriefcaseBrownFilled
+    - BriefcaseMagistrateFilled
   storage:
     back:
     - Flash

@@ -5,6 +5,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Audio.Components;
+using Robust.Shared.Audio.Systems; //ss220-jukebox-tweak
 using Robust.Shared.Input;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -30,6 +31,7 @@ public sealed partial class JukeboxMenu : FancyWindow
     public event Action? OnStopPressed;
     public event Action<ProtoId<JukeboxPrototype>>? OnSongSelected;
     public event Action<float>? SetTime;
+    public event Action<float>? SetGain; //SS220-jukebox-tweak
 
     private EntityUid? _audio;
 
@@ -63,6 +65,11 @@ public sealed partial class JukeboxMenu : FancyWindow
         PlaybackSlider.OnReleased += PlaybackSliderKeyUp;
 
         SetPlayPauseButton(_audioSystem.IsPlaying(_audio), force: true);
+
+        //SS220-jukebox-tweak-begin
+        VolumeSlider.OnReleased += VolumeSliderKeyUp;
+        VolumeSlider.MaxValue = 1;
+        //SS220-jukebox-tweak-end
     }
 
     public JukeboxMenu(AudioSystem audioSystem)
@@ -73,6 +80,12 @@ public sealed partial class JukeboxMenu : FancyWindow
     public void SetAudioStream(EntityUid? audio)
     {
         _audio = audio;
+        //ss220-jukebox-tweak-begin
+        if (_entManager.TryGetComponent(_audio, out AudioComponent? audioComp))
+        {
+            VolumeSlider.Value = SharedAudioSystem.VolumeToGain(audioComp.Volume);
+        }
+        //ss220-jukebox-tweak-end
     }
 
     private void PlaybackSliderKeyUp(Slider args)
@@ -80,6 +93,13 @@ public sealed partial class JukeboxMenu : FancyWindow
         SetTime?.Invoke(PlaybackSlider.Value);
         _lockTimer = 0.5f;
     }
+
+    //SS220-jukebox-tweak-begin
+    private void VolumeSliderKeyUp(Slider args)
+    {
+        SetGain?.Invoke(VolumeSlider.Value);
+    }
+    //SS220-jukebox-tweak-end
 
     /// <summary>
     /// Re-populates the list of jukebox prototypes available.

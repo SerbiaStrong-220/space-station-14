@@ -3,6 +3,7 @@
   parent: [ BaseStorageItem, BaseBagOpenClose ]
   name: cigar case
   description: A case for holding your cigars when you are not smoking them.
+  suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
     sprite: Objects/Consumable/Smokeables/Cigars/case.rsi
@@ -70,15 +71,74 @@
 
 - type: entity
   id: CigarGoldCase
-  parent: CigarCase
+  parent: [ BaseStorageItem, BaseBagOpenClose ] #SS220-add-time-loadout-suffix
   name: premium cigar case
   description: "A case of premium Havanian cigars. You'll only see heads with these."
   components:
+#SS220-add-time-suffix-loadout-begin
+  - type: Sprite
+    sprite: Objects/Consumable/Smokeables/Cigars/premium-case.rsi #SS220 cigar resprite
+    layers:
+    - state: closed
+      map: ["closeLayer"]
+    - state: open
+      map: ["openLayer"]
+    - state: cigar1
+      map: ["cigar1"]
+      visible: false
+    - state: cigar2
+      map: ["cigar2"]
+      visible: false
+    - state: cigar3
+      map: ["cigar3"]
+      visible: false
+    - state: cigar4
+      map: ["cigar4"]
+      visible: false
+    - state: cigar5
+      map: ["cigar5"]
+      visible: false
+    - state: cigar6
+      map: ["cigar6"]
+      visible: false
+    - state: cigar7
+      map: ["cigar7"]
+      visible: false
+    - state: cigar8
+      map: ["cigar8"]
+      visible: false
+  - type: Storage
+    whitelist: # SS220 cigarette pack fix beginning
+      tags:
+        - Cigarette
+        - Lighter
+        - Cigar # SS220 cigarette pack fix end
+    grid:
+    - 0,0,3,1
+  - type: Item
+    sprite: Objects/Consumable/Smokeables/Cigars/premium-case.rsi #SS220 cigar resprite
+    size: Normal
+    shape:
+    - 0,0,2,1
+    storedRotation: 90
+#SS220-add-time-suffix-loadout-end
   - type: StorageFill
     contents:
     - id: CigarGold
       amount: 8
-  - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigars/premium-case.rsi #SS220 cigar resprite
-  - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigars/premium-case.rsi #SS220 cigar resprite
+#SS220-add-time-suffix-loadout-begin
+  - type: ItemCounter
+    count:
+      tags: [Cigar]
+    composite: true
+    layerStates:
+    - cigar1
+    - cigar2
+    - cigar3
+    - cigar4
+    - cigar5
+    - cigar6
+    - cigar7
+    - cigar8
+  - type: Appearance
+#SS220-add-time-suffix-loadout-end

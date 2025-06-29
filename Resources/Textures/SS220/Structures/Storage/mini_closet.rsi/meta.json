@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "copyright": "Created by kit0vras (Discord) for SS220",
+  "license": "CC-BY-SA-3.0",
+  "states": [
+    {
+      "name": "minifreezer"
+    },
+    {
+      "name": "minifreezer_open"
+    },
+    {
+      "name": "minifreezer_door"
+    },
+    {
+      "name": "bounty"
+    },
+    {
+      "name": "captains_paper"
+    },
+    {
+      "name": "invoice"
+    },
+    {
+      "name": "paper"
+    },
+    {
+      "name": "locked"
+    },
+    {
+      "name": "unlocked"
+    },
+    {
+      "name": "welded"
+    }
+  ]
+}

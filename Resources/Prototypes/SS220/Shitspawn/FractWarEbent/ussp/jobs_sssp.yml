@@ -25,6 +25,7 @@
       amount: 6
     - id: EnergyAxe
     - id: JobIconChangerUSSP
+    - id: Binoculars
 
 - type: startingGear
   id: EbentUSSPLeaderGear
@@ -66,6 +67,11 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: USSPLeader
@@ -108,9 +114,10 @@
     - id: JetpackVoidFilled
     - id: RCD
     - id: RCDAmmo
-      amount: 3
+      amount: 4
     - id: JobIconChangerUSSP
-
+    - id: ClothingEyesGlassesMeson
+    - id: Binoculars
 
 - type: startingGear
   id: EbentUSSPEngineerGear
@@ -153,6 +160,11 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: USSPEngineer
@@ -195,6 +207,7 @@
     - id: ClothingUniformJumpsuitUssp
     - id: ClothingOuterCoatUssp
     - id: ClothingEyesHudMedSec
+    - id: DefibrillatorCompact
 
 - type: startingGear
   id: EbentUSSPCorpsmanGear
@@ -240,6 +253,11 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: USSPCorpsman
@@ -283,6 +301,8 @@
     - id: ClothingOuterCoatUssp
     - id: ClothingEyesHudMedSec
     - id: JobIconChangerUSSP
+    - id: DefibrillatorCompact
+    - id: Binoculars
 
 - type: startingGear
   id: EbentUSSPCMOGear
@@ -291,6 +311,7 @@
     back: ClothingBackpackUSSPFilled
     shoes: ClothingShoesBootsMagUssp
     mask: ClothingMaskGasUssp
+    eyes: ClothingEyesHudMedical
     gloves: ClothingHandsGlovesLeatherUSSPBlack
     outerClothing: ClothingOuterHardsuitUSSPCMO
     suitstorage: OxygenTankFilled
@@ -324,6 +345,11 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: USSPCMO
@@ -405,6 +431,11 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
+    - type: LimitationRevive
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: USSPFighter

@@ -7,12 +7,12 @@
         - to: fumoMaiden
           steps:
             - tag: ShrineMaiden
-              name: shrine maiden outfit
+              name: construction-graph-tag-shrine-maiden
               icon:
                 sprite: Clothing/OuterClothing/Suits/shrine-maiden.rsi
                 state: icon
             - tag: ShrineMaidenWig
-              name: shrine maiden's wig
+              name: construction-graph-tag-shrine-maiden-wig
               icon:
                 sprite: Clothing/Head/Misc/shrine-maidens-wig.rsi
                 state: icon
@@ -31,12 +31,12 @@
         - to: fumoMagician
           steps:
             - tag: MagicianDress
-              name: magician's dress
+              name: construction-graph-tag-magician-dress
               icon:
-                sprite: SS220/Clothing/Uniforms/magiciansdress.rsi
+                sprite: SS220/Clothing/Uniforms/Jumpskirt/specific_magiciansdress.rsi
                 state: icon
             - tag: MagicianHat
-              name: magician's hat
+              name: construction-graph-tag-magician-hat
               icon:
                 sprite: SS220/Clothing/Head/Hats/magicianshat.rsi
                 state: icon
@@ -55,12 +55,12 @@
         - to: fumoMaid
           steps:
             - tag: Janimaid
-              name: janitorial maid uniform
+              name: construction-graph-tag-jani-maid
               icon:
                 sprite: Clothing/Uniforms/Jumpskirt/janimaid.rsi
                 state: icon
             - tag: Knife
-              name: kitchen knife
+              name: construction-graph-tag-knife
               icon:
                 sprite: Objects/Weapons/Melee/kitchen_knife.rsi
                 state: icon

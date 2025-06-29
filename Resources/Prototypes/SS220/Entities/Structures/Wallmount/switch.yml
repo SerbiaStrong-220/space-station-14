@@ -17,3 +17,23 @@
     - state: off
       shader: unshaded
       map: [ "indicator" ]
+
+- type: entity
+  parent: SignalSwitchDirectional
+  id: KnifeSwinch
+  name: knife signal switch
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: SignalSwitch
+    state: true
+    clickSound:
+      path: /Audio/SS220/Machines/Switch/knife_switch.ogg
+  - type: Sprite
+    sprite: SS220/Structures/Wallmounts/knife_switch.rsi
+    layers:
+    - state: base
+    - state: off
+      map: [ "indicator" ]

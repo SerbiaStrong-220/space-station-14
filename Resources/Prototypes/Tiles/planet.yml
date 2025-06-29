@@ -1,6 +1,7 @@
 - type: tile
   id: FloorPlanetDirt
   name: tiles-dirt-floor
+  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/dirt.rsi/dirt.png
   variants: 4
   placementVariants:
@@ -19,6 +20,7 @@
 - type: tile
   id: FloorDesert
   name: tiles-desert-floor
+  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/Desert/desert.png
   variants: 6
   placementVariants:
@@ -38,6 +40,7 @@
 - type: tile
   id: FloorLowDesert
   name: tiles-low-desert-floor
+  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/Desert/low_desert.png
   variants: 6
   placementVariants:
@@ -58,6 +61,7 @@
 - type: tile
   id: FloorPlanetGrass
   name: tiles-grass-planet-floor
+  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/Grass/grass.png
   variants: 4
   placementVariants:
@@ -88,6 +92,7 @@
 - type: tile
   id: FloorBasalt
   name: tiles-basalt-floor
+  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/basalt.png
   isSubfloor: true
   footstepSounds:
@@ -100,6 +105,7 @@
 - type: tile
   id: FloorSnow
   name: tiles-snow
+  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/Snow/snow.png
   variants: 13
   placementVariants:
@@ -133,20 +139,20 @@
 - type: tile
   id: FloorIce
   name: tiles-ice
+  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/Snow/ice.png
   isSubfloor: true
   friction: 0.05
   heatCapacity: 10000
   weather: true
-  mobFriction: 0.5
-  mobFrictionNoInput: 0.05
-  mobAcceleration: 2
+  mobAcceleration: 0.1
   indestructible: true
 
 # Dug snow
 - type: tile
   id: FloorSnowDug
   name: tiles-snow-dug
+  tags: [ tile-tag-nature ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Planet/Snow/snow_dug.png
   edgeSpritePriority: 1
   edgeSprites:

@@ -8,6 +8,11 @@
     sprite: Clothing/OuterClothing/Misc/apron.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/apron.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-flax
+    microFiberColor: micro-fibers-yellow
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -20,6 +25,11 @@
     sprite: Clothing/OuterClothing/Misc/apronbar.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/apronbar.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-flax
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -32,6 +42,11 @@
     sprite: Clothing/OuterClothing/Misc/apronbotanist.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/apronbotanist.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-flax
+    microFiberColor: micro-fibers-blue
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -44,6 +59,11 @@
     sprite: Clothing/OuterClothing/Misc/apronchef.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/apronchef.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-flax
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -55,6 +75,11 @@
     sprite: Clothing/OuterClothing/Misc/chef.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/chef.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-textile
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingOuterBase
@@ -138,9 +163,9 @@
   description: This robe commands authority.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Misc/judge.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/judge.rsi #SS220 Law Department Sprite Update
   - type: Clothing
-    sprite: Clothing/OuterClothing/Misc/judge.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/judge.rsi #SS220 Law Department Sprite Update
 
 - type: entity
   parent: ClothingOuterBase
@@ -168,7 +193,7 @@
 
 - type: entity
   abstract: true
-  parent: ClothingOuterBase
+  parent: [ ClothingOuterBase, AllowSuitStorageClothingGasTanks, BaseMagicalContraband ]
   id: ClothingOuterWizardBase
   components:
   - type: WizardClothes

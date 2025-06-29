@@ -42,3 +42,23 @@
   id: french75
   flavorType: Complex
   description: терпко-сладко
+
+- type: flavor
+  id: HolyMoly
+  flavorType: Base
+  description: божественно
+
+- type: flavor
+  id: Bacchus
+  flavorType: Complex
+  description: flavor-complex-bacchus
+
+- type: flavor
+  id: Xlebnuldiesel
+  flavorType: Complex
+  description: flavor-complex-xlebnuldiesel
+
+- type: flavor
+  id: rrranta
+  flavorType: Complex
+  description: flavor-complex-rrranta

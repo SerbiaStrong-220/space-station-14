@@ -244,13 +244,14 @@
     layers:
     - state: declone
       shader: unshaded
+  - type: StaminaDamageOnCollide
+    damage: 15
   - type: Projectile
     damage:
       types:
         Blunt: 35
         Piercing: 35
         Structural: 95
-        Stamina: 15
 
 
 
@@ -318,12 +319,14 @@
     reflective: None
   - type: TimedDespawn
     lifetime: 4
+  - type: StaminaDamageOnCollide
+    damage: 50
+    ignoreResistance: true
   - type: Projectile
     damage:
       types:
         Piercing: 20
         Structural: 30
-        Stamina: 50
     ignoreResistances: true
 
 

@@ -2,6 +2,7 @@ name: Publish
 
 concurrency:
   group: publish
+  cancel-in-progress: true
 
 on:
   workflow_dispatch:
@@ -16,30 +17,30 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get install -y python3-paramiko python3-lxml
 
-    - uses: actions/checkout@v3.6.0
+    - uses: actions/checkout@v4.2.2
       with:
         submodules: 'recursive'
 
     # Corvax-Secrets-Start
-    - name: Setup secrets
-      env:
-        SSH_KEY: ${{ secrets.SECRETS_PRIVATE_KEY }}
-      if: ${{ env.SSH_KEY != '' }}
-      run: |
-        mkdir ~/.ssh
-        echo "${{ secrets.SECRETS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        echo "HOST *" > ~/.ssh/config
-        echo "StrictHostKeyChecking no" >> ~/.ssh/config
-        git -c submodule.Secrets.update=checkout submodule update --init
-        cp -R Secrets/Prototypes Resources/Prototypes/CorvaxSecrets
-        cp -R Secrets/ServerPrototypes Resources/Prototypes/CorvaxSecretsServer
+    #- name: Setup secrets
+    #  env:
+    #    SSH_KEY: ${{ secrets.SECRETS_PRIVATE_KEY }}
+    #  if: ${{ env.SSH_KEY != '' }}
+    #  run: |
+    #    mkdir ~/.ssh
+    #    echo "${{ secrets.SECRETS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+    #    chmod 600 ~/.ssh/id_rsa
+    #    echo "HOST *" > ~/.ssh/config
+    #    echo "StrictHostKeyChecking no" >> ~/.ssh/config
+    #    git -c submodule.Secrets.update=checkout submodule update --init
+    #    cp -R Secrets/Prototypes Resources/Prototypes/CorvaxSecrets
+    #    cp -R Secrets/ServerPrototypes Resources/Prototypes/CorvaxSecretsServer
     # Corvax-Secrets-End
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3.2.0
+      uses: actions/setup-dotnet@v4.1.0
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 9.0.x
 
     - name: Get Engine Tag
       run: |
@@ -63,15 +64,16 @@ jobs:
       env:
         PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
         GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
+# SS220 temp disable discord publish
+    # - name: Publish changelog (Discord)
+    #   continue-on-error: true
+    #   run: Tools/actions_changelogs_since_last_run.py
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     DISCORD_WEBHOOK_URL: ${{ secrets.CHANGELOG_DISCORD_WEBHOOK }}
 
-    - name: Publish changelog (Discord)
-      run: Tools/actions_changelogs_since_last_run.py
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DISCORD_WEBHOOK_URL: ${{ secrets.CHANGELOG_DISCORD_WEBHOOK }}
-
-    - name: Publish changelog (RSS)
-      run: Tools/actions_changelog_rss.py
-      env:
-        CHANGELOG_RSS_KEY: ${{ secrets.CHANGELOG_RSS_KEY }}
-        TRANSLATION_API_URL: ${{ secrets.CHANGELOG_TRANSLATION_API_URL }}
+    # - name: Publish changelog (RSS)
+    #   continue-on-error: true
+    #   run: Tools/actions_changelog_rss.py
+    #   env:
+    #     CHANGELOG_RSS_KEY: ${{ secrets.CHANGELOG_RSS_KEY }}

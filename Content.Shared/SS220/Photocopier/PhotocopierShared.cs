@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Fax.Components;
 using Content.Shared.SS220.Photocopier.Forms.FormManagerShared;
 using Robust.Shared.Serialization;
 
@@ -109,4 +110,20 @@ public enum BurnButtWireKey : byte
 public enum SusFormsWireKey : byte
 {
     StatusKey,
+}
+
+[DataDefinition]
+public sealed partial class PhotocopyableFaxPrintout : FaxPrintout
+{
+    [DataField("dataToCopy")]
+    public Dictionary<Type, IPhotocopiedComponentData>? DataToCopy { get; private set; }
+
+    [DataField("metaData")]
+    public PhotocopyableMetaData? MetaData { get; private set; }
+
+    public PhotocopyableFaxPrintout(Dictionary<Type, IPhotocopiedComponentData>? dataToCopy, PhotocopyableMetaData? metaData) : base(string.Empty, string.Empty)
+    {
+        DataToCopy = dataToCopy;
+        MetaData = metaData;
+    }
 }

@@ -1,0 +1,36 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineRrranta
+  name: Vending Machine Rrr-anta
+  description: Vending machine that dispenses Rrr-anta drinks.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Machines/VendingMachines/rrrantamat.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: VendingMachine
+    pack: RrrantaInventory
+    dispenseOnHitChance: 0.25
+    dispenseOnHitThreshold: 2
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    ejectState: eject-unshaded
+    denyState: deny-unshaded
+    ejectDelay: 1.9
+    initialStockQuality: 0.33
+  - type: Advertise
+    pack: RrrantaAds
+  - type: SpeakOnUIClosed
+    pack: RrrantaGoodbyes
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#879709"

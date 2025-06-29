@@ -13,7 +13,12 @@
   description: Costs 30 Essence.
   components:
   - type: InstantAction
-    icon: Interface/Actions/defile.png
+    #SS220 revenant-sprite-port begin
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_revenant.rsi
+      state: defile
+    #SS220 revenant-sprite-port end
     event: !type:RevenantDefileActionEvent
     useDelay: 15
 
@@ -23,7 +28,12 @@
   description: Costs 40 Essence.
   components:
   - type: InstantAction
-    icon: Interface/Actions/overloadlight.png
+    #SS220 revenant-sprite-port begin
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_revenant.rsi
+      state: overloadlight
+    #SS220 revenant-sprite-port end
     event: !type:RevenantOverloadLightsActionEvent
     useDelay: 20
 
@@ -43,6 +53,11 @@
   description: Costs 60 Essence.
   components:
   - type: InstantAction
-    icon: Interface/Actions/malfunction.png
+    #SS220 revenant-sprite-port begin
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/actions_revenant.rsi
+      state: malfunction
+    #SS220 revenant-sprite-port end
     event: !type:RevenantMalfunctionActionEvent
     useDelay: 20

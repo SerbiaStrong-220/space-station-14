@@ -1,0 +1,19 @@
+- type: entity
+  parent: LightTubeCrystalCyan
+  name: purple crystal light tube
+  id: LightTubeCrystalPurple
+  components:
+  - type: LightBulb
+    color: "#bc13fe" #Неоновый фиолетовый
+    lightEnergy: 3
+    lightRadius: 8
+    lightSoftness: 0.5
+    BurningTemperature: 350
+    PowerUse: 60
+  - type: Construction
+    graph: PurpleLight
+    node: icon
+  - type: ToolRefinable
+    refineResult:
+    - id: SheetGlass1
+    - id: ShardCrystalPurple

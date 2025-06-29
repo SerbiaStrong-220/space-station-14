@@ -1,0 +1,107 @@
+## Static
+
+- type: latheRecipePack
+  id: TopicalsStatic
+  recipes:
+  - Brutepack
+  - Ointment
+  - Gauze
+
+- type: latheRecipePack
+  id: BasicChemistryStatic
+  recipes:
+  - Beaker
+  - LargeBeaker
+  - Syringe
+  - PillCanister
+  - HandLabeler
+  - BaseChemistryEmptyVial
+
+- type: latheRecipePack
+  parent: BasicChemistryStatic
+  id: ChemistryStatic
+  recipes:
+  - Jug
+  - ChemistryEmptyBottle01
+  - ClothingEyesGlassesChemical
+
+- type: latheRecipePack
+  id: SurgeryStatic
+  recipes:
+  - Scalpel
+  - Retractor
+  - Cautery
+  - Drill
+  - Saw
+  - Hemostat
+
+- type: latheRecipePack
+  id: MedicalStatic
+  recipes:
+  - Implanter
+  - Defibrillator
+  - HandheldHealthAnalyzer
+  - DiseaseSwab
+  - BodyBag
+  - WhiteCane
+  - MedAutoinjector #ss220 Autoinjecors update
+
+- type: latheRecipePack
+  id: RollerBedsStatic
+  recipes:
+  - RollerBedSpawnFolded
+  - CheapRollerBedSpawnFolded
+  - EmergencyRollerBedSpawnFolded
+  - VehicleWheelchairFolded #SS220 Readd-Vehicles
+
+- type: latheRecipePack
+  id: MedicalClothingStatic
+  recipes:
+  - ClothingHandsGlovesLatex
+  - ClothingHandsGlovesNitrile
+  - ClothingMaskSterile
+
+# These are all empty
+- type: latheRecipePack
+  id: EmptyMedkitsStatic
+  recipes:
+  - Medkit
+  - MedkitBurn
+  - MedkitToxin
+  - MedkitO2
+  - MedkitBrute
+  - MedkitAdvanced
+  - MedkitRadiation
+  - MedkitCombat
+
+- type: latheRecipePack
+  id: MedicalBoardsStatic
+  recipes:
+  - ElectrolysisUnitMachineCircuitboard
+  - CentrifugeMachineCircuitboard
+  - ChemDispenserMachineCircuitboard
+  - ChemMasterMachineCircuitboard
+  - CondenserMachineCircuitBoard
+  - HotplateMachineCircuitboard
+
+## Dynamic
+
+# Shared with protolathe
+- type: latheRecipePack
+  id: Chemistry
+  recipes:
+  - ChemicalPayload
+  - CryostasisBeaker
+  - SyringeCryostasis
+  - BluespaceBeaker
+  - SyringeBluespace
+
+- type: latheRecipePack
+  id: MedicalBoards
+  recipes:
+  - StasisBedMachineCircuitboard
+  - CryoPodMachineCircuitboard
+  - BiomassReclaimerMachineCircuitboard
+  - MedicalScannerMachineCircuitboard #ss220 more recipies
+  - CloningPodMachineCircuitboard #ss220 more recipies
+  - CloningConsoleComputerCircuitboard #ss220 more recipies

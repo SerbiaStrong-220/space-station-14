@@ -1,0 +1,16 @@
+- type: constructionGraph
+  id: PaperAirplane
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: paperairplane
+          steps:
+            - tag: Paper
+              name: construction-graph-tag-paper
+              doAfter: 1
+              icon:
+                sprite: Objects/Misc/bureaucracy.rsi
+                state: paper
+    - node: paperairplane
+      entity: PaperAirplane

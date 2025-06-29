@@ -1,0 +1,65 @@
+- type: guideEntry
+  id: SS220SpaceLaw
+  name: Космический закон
+  priority: 1
+  text: "/ServerInfo/SS220/Guidebook/Security/SpaceLaw.xml"
+  children:
+  - SS220LethalForce
+  - SS220ArticleDirectory
+  - SS220Modificator
+
+- type: guideEntry
+  id: SS220LethalForce
+  name:  ROE, регламент применение силы
+  priority: 2
+  text: "/ServerInfo/SS220/Guidebook/Security/LethalForce.xml"
+
+- type: guideEntry
+  id: SS220Modificator
+  name: Модификаторы наказаний
+  priority: 3
+  text: "/ServerInfo/SS220/Guidebook/Security/Modificator.xml"
+
+# ТАБЛИЦА КЗ
+
+- type: guideEntry
+  id: SS220ArticleDirectory
+  name: Справочник статей
+  priority: 1
+  text: "/ServerInfo/SS220/Guidebook/Security/ArticleDirectory.xml"
+  children:
+  - SS2201xxArticle
+  - SS2202xxArticle
+  - SS2203xxArticle
+  - SS2204xxArticle
+  - SS2205xxArticle
+
+- type: guideEntry
+  id: SS2201xxArticle
+  name: Статьи 1xx
+  priority: 1
+  text: "/ServerInfo/SS220/Guidebook/Security/1xx.xml"
+
+- type: guideEntry
+  id: SS2202xxArticle
+  name: Статьи 2xx
+  priority: 2
+  text: "/ServerInfo/SS220/Guidebook/Security/2xx.xml"
+
+- type: guideEntry
+  id: SS2203xxArticle
+  name: Статьи 3xx
+  priority: 3
+  text: "/ServerInfo/SS220/Guidebook/Security/3xx.xml"
+
+- type: guideEntry
+  id: SS2204xxArticle
+  name: Статьи 4xx
+  priority: 4
+  text: "/ServerInfo/SS220/Guidebook/Security/4xx.xml"
+
+- type: guideEntry
+  id: SS2205xxArticle
+  name: Статьи 5xx
+  priority: 5
+  text: "/ServerInfo/SS220/Guidebook/Security/5xx.xml"

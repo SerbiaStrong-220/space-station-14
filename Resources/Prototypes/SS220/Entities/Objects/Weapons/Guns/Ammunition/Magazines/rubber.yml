@@ -8,6 +8,7 @@
   - type: Sprite
     layers:
     - state: rubber
+      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -22,6 +23,7 @@
   - type: Sprite
     layers:
     - state: rubber
+      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -36,6 +38,7 @@
   - type: Sprite
     layers:
     - state: rubber
+      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -50,6 +53,7 @@
   - type: Sprite
     layers:
     - state: rubber
+      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -64,6 +68,7 @@
   - type: Sprite
     layers:
     - state: rubber
+      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_rifle_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -79,6 +84,7 @@
   - type: Sprite
     layers:
     - state: rubber
+      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_rifle_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -98,6 +104,7 @@
   - type: Sprite
     layers:
     - state: rubber
+      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Magnum/magnum_smg_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -112,6 +119,7 @@
   - type: Sprite
     layers:
     - state: rubber
+      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]

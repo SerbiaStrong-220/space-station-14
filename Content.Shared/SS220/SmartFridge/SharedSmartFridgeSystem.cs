@@ -56,10 +56,9 @@ public abstract class SharedSmartFridgeSystem : EntitySystem
             return true;
         }
 
-
-        sortedInventory.Add(metadata.EntityName,
-            new VendingMachineInventoryEntry(InventoryType.Regular, metadata.EntityName, 1, GetNetEntity(entityUid))
-        );
+        var newEntry = new VendingMachineInventoryEntry(InventoryType.Regular, metadata.EntityName, 1);
+        newEntry.EntityUids.Add(GetNetEntity(entityUid));
+        sortedInventory.Add(metadata.EntityName, newEntry);
 
         return true;
     }

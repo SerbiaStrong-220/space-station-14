@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Sprite made by discord:kuro_0001 (388673708753027083)",
+  "copyright": "Sprite made by discord:kuro_0001 (388673708753027083), vox states sprited by Estkemran (Github) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,10 @@
     },
     {
       "name": "equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-vox",
       "directions": 4
     },
     {

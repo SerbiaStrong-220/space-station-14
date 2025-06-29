@@ -3,6 +3,12 @@
     <BoxContainer Margin="4 0" Orientation="Vertical">
         <ItemList Name="MusicList" SelectMode="Button" Margin="3 3 3 3"
         HorizontalExpand="True" VerticalExpand="True" SizeFlagsStretchRatio="8"/>
+        <!-- SS220-jukebox-tweak-begin -->
+        <BoxContainer Orientation="Vertical">
+            <Label Name="Volume" Text="{Loc 'jukebox-menu-slidervolume'}" />
+            <Slider Name="VolumeSlider" HorizontalExpand="True" />
+        </BoxContainer>
+        <!-- SS220-jukebox-tweak-end -->
         <BoxContainer Orientation="Vertical">
             <Label Name="SongSelected" Text="{Loc 'jukebox-menu-selectedsong'}" />
             <Label Name="SongName" Text="---" />

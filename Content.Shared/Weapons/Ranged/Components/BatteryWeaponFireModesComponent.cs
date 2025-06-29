@@ -1,4 +1,5 @@
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -45,10 +46,10 @@ public sealed partial class BatteryWeaponFireMode
     public string? FireModeName;
 
     /// <summary>
-    /// Sound of a gunshot that is used in the selected fire mode
+    /// Gun modifiers of this fire mode
     /// </summary>
     [DataField]
-    public string? SoundGunshot;
+    public FireModeGunModifiers? GunModifiers;
 
     /// <summary>
     /// Sprite of the remaining charge that is used in the selected fire mode
@@ -63,3 +64,45 @@ public sealed partial class BatteryWeaponFireMode
     [DataField]
     public float FireCost = 100;
 }
+
+[Serializable, NetSerializable]
+public enum BatteryWeaponFireModeVisuals : byte
+{
+    State
+}
+
+//SS220 Add firemode modificators begin
+/// <summary>
+/// Gun modifiers that can be applied in each fire mode
+/// </summary>
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class FireModeGunModifiers
+{
+    [DataField]
+    public SoundSpecifier? SoundGunshot;
+
+    [DataField]
+    public float? CameraRecoilScala;
+
+    [DataField]
+    public Angle? AngleIncrease;
+
+    [DataField]
+    public Angle? AngleDecay;
+
+    [DataField]
+    public Angle? MaxAngle;
+
+    [DataField]
+    public Angle? MinAngle;
+
+    [DataField]
+    public int? ShotsPerBurst;
+
+    [DataField]
+    public float? FireRate;
+
+    [DataField]
+    public float? ProjectileSpeed;
+}
+//SS220 Add firemode modificators end

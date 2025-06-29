@@ -9,6 +9,11 @@
       !type:RoleTimeRequirement
       role: JobChaplain
       time: 180000 #50 часов
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Neck
 

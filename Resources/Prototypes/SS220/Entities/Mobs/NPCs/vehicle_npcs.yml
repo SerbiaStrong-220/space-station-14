@@ -38,3 +38,9 @@
     voice: fact_core
   - type: Cart #SS220-Cart-system
   - type: CartPuller #SS220-Cart-system
+#SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+#SS220 Languages tweaks end

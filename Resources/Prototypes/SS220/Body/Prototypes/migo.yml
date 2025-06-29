@@ -1,0 +1,24 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: body
+  name: MiGoBody
+  id: MiGoBody
+  root: torso
+  slots:
+    torso:
+      part: TorsoAnimal
+      connections:
+      - right arm
+      - left arm
+    right arm:
+      part: RightArmDiona
+      connections:
+      - right hand
+    left arm:
+      part: LeftArmDiona
+      connections:
+      - left hand
+    right hand:
+      part: RightHandDiona
+    left hand:
+      part: LeftHandDiona

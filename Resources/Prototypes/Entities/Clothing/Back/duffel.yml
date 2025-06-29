@@ -14,6 +14,11 @@
     walkModifier: 1
     sprintModifier: 0.9
   - type: HeldSpeedModifier
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-textile
+    microFiberColor: micro-fibers-grey
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -23,6 +28,11 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/engineering.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-rubber
+    microFiberColor: micro-fibers-yellow
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -32,6 +42,11 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/atmospherics.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-rubber
+    microFiberColor: micro-fibers-light-blue
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -41,6 +56,11 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/medical.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-synthetic
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingBackpackDuffel]
@@ -50,6 +70,11 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/captain.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-blue
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -62,24 +87,39 @@
   - type: Storage
     storageOpenSound:
       collection: BikeHorn
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-textile
+    microFiberColor: micro-fibers-green
+#SS220 Micro_fibers end
 
 - type: entity
-  parent: [ClothingBackpackDuffel]
+  parent: [ClothingBackpackDuffel, BaseSecurityContraband]
   id: ClothingBackpackDuffelSecurity
   name: security duffel bag
   description: A large duffel bag for holding extra security related goods.
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/security.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
-  parent: [ClothingBackpackDuffel]
+  parent: [ClothingBackpackDuffel, BaseSecurityContraband]
   id: ClothingBackpackDuffelBrigmedic
   name: brigmedic duffel bag
   description: A large duffel bag for holding extra medical related goods.
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/brigmedic.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-synthetic
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -89,6 +129,11 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/chemistry.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-synthetic
+    microFiberColor: micro-fibers-orange
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -98,6 +143,11 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/virology.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-synthetic
+    microFiberColor: micro-fibers-green
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -107,6 +157,11 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/genetics.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-synthetic
+    microFiberColor: micro-fibers-blue
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -120,6 +175,11 @@
       collection: null
     storageInsertSound:
       collection: null
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-textile
+    microFiberColor: micro-fibers-white
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -129,6 +189,11 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/science.rsi
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-synthetic
+    microFiberColor: micro-fibers-purple
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -138,6 +203,11 @@
   components:
     - type: Sprite
       sprite: Clothing/Back/Duffels/hydroponics.rsi
+#SS220 Micro_fibers start
+    - type: MicroFiber
+      microFiberMaterial: micro-fibers-floral
+      microFiberColor: micro-fibers-green
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -147,6 +217,11 @@
   components:
     - type: Sprite
       sprite: Clothing/Back/Duffels/cargo.rsi
+#SS220 Micro_fibers start
+    - type: MicroFiber
+      microFiberMaterial: micro-fibers-textile
+      microFiberColor: micro-fibers-yellow
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffel
@@ -156,6 +231,11 @@
   components:
     - type: Sprite
       sprite: Clothing/Back/Duffels/salvage.rsi
+#SS220 Micro_fibers start
+    - type: MicroFiber
+      microFiberMaterial: micro-fibers-leather
+      microFiberColor: micro-fibers-brown
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ClothingBackpackDuffel]
@@ -170,6 +250,11 @@
   - type: Storage
     grid:
     - 0,0,8,4
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-reinforced-textile
+    microFiberColor: micro-fibers-black
+#SS220 Micro_fibers end
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicate
@@ -182,7 +267,6 @@
 - type: entity
   parent: ClothingBackpackDuffelSyndicate
   id: ClothingBackpackDuffelSyndicateAmmo
-  name: syndicate duffel bag
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/syndicate.rsi
@@ -203,7 +287,6 @@
 - type: entity
   parent: ClothingBackpackDuffelSyndicate
   id: ClothingBackpackDuffelSyndicateMedical
-  name: syndicate duffel bag
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/syndicate.rsi
@@ -243,6 +326,10 @@
   - type: ClothingSpeedModifier
     sprintModifier: 1 # makes its stats identical to other variants of bag of holding
   - type: HeldSpeedModifier
+#SS220 Micro_fibers start
+  - type: MicroFiber
+    microFiberMaterial: micro-fibers-plasma
+#SS220 Micro_fibers end
 
 - type: entity
   parent: [ ClothingBackpackDuffel]

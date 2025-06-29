@@ -7,7 +7,7 @@
   suffix: USSP
   components:
   - type: Sprite
-    sprite: SS220/Objects/Misc/door_electronics_ussp.rsi
+    sprite: SS220/Shitspawn/FractWarEbent/Objects/Misc/door_electronics_ussp.rsi
 
 - type: entity
   parent: DoorElectronicsUssp
@@ -48,3 +48,12 @@
   components:
   - type: AccessReader
     access: [["Magistrate"]]
+
+# BlueShield access
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsBlueshield
+  suffix: Blushield, Locked
+  components:
+  - type: AccessReader
+    access: [["Blueshield"]]

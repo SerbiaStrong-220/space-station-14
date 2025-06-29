@@ -8,7 +8,7 @@
       steps:
       - material: Steel
         amount: 2
-        doAfter: 5 
+        doAfter: 5
       - material: Cable
         amount: 5
         doAfter: 5
@@ -16,10 +16,10 @@
         amount: 2
         doAfter: 10
       - tag: PowerCellHigh
-        name: Power Cell High 
+        name: construction-graph-tag-power-cell-high
         icon:
           sprite: Objects/Power/power_cells.rsi
           state: high
-        doAfter: 5 
+        doAfter: 5
   - node: pistol
     entity: WeaponMakeshiftLaser

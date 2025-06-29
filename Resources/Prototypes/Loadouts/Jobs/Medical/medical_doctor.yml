@@ -17,6 +17,11 @@
       !type:DepartmentTimeRequirement
       department: Medical
       time: 216000 # 60 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Other Timers
 
@@ -28,6 +33,11 @@
       !type:RoleTimeRequirement
       role: JobMedicalDoctor
       time: 108000 #30 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Head
 
@@ -175,3 +185,14 @@
   id: SterileMask
   equipment:
     mask: ClothingMaskSterile
+
+#Eyewear
+- type: loadout
+  id: MedicalHud
+  equipment:
+    eyes: ClothingEyesHudMedical
+
+- type: loadout
+  id: MedicalEyePatchHud
+  equipment:
+    eyes: ClothingEyesEyepatchHudMedical

@@ -163,17 +163,23 @@ namespace Content.Client.Inventory
         }
 
         public void UpdateSlot(EntityUid owner, InventorySlotsComponent component, string slotName,
-            bool? blocked = null, bool? highlight = null)
+            bool? blocked = null, bool? highlight = null, bool? stuckOnEquip = null)//ss220 StuckOnEquip
         {
             var oldData = component.SlotData[slotName];
             var newHighlight = oldData.Highlighted;
             var newBlocked = oldData.Blocked;
+            var newStuckOnEquip = oldData.StuckOnEquip;//ss220 StuckOnEquip
 
             if (blocked != null)
                 newBlocked = blocked.Value;
 
             if (highlight != null)
                 newHighlight = highlight.Value;
+
+            //ss220 StuckOnEquip begin
+            if (stuckOnEquip != null)
+                newStuckOnEquip = stuckOnEquip.Value;
+            //ss220 StuckOnEquip end
 
             var newData = component.SlotData[slotName] =
                 new SlotData(component.SlotData[slotName], newHighlight, newBlocked);
@@ -235,12 +241,27 @@ namespace Content.Client.Inventory
             EntityManager.RaisePredictiveEvent(new InteractInventorySlotEvent(GetNetEntity(item.Value), altInteract: true));
         }
 
+        protected override void UpdateInventoryTemplate(Entity<InventoryComponent> ent)
+        {
+            base.UpdateInventoryTemplate(ent);
+
+            if (TryComp(ent, out InventorySlotsComponent? inventorySlots))
+            {
+                foreach (var slot in ent.Comp.Slots)
+                {
+                    if (inventorySlots.SlotData.TryGetValue(slot.Name, out var slotData))
+                        slotData.SlotDef = slot;
+                }
+            }
+        }
+
         public sealed class SlotData
         {
-            public readonly SlotDefinition SlotDef;
+            public SlotDefinition SlotDef;
             public EntityUid? HeldEntity => Container?.ContainedEntity;
             public bool Blocked;
             public bool Highlighted;
+            public bool StuckOnEquip; //ss220 StuckOnEquip
 
             [ViewVariables]
             public ContainerSlot? Container;
@@ -254,20 +275,22 @@ namespace Content.Client.Inventory
             public string FullTextureName => SlotDef.FullTextureName;
 
             public SlotData(SlotDefinition slotDef, ContainerSlot? container = null, bool highlighted = false,
-                bool blocked = false)
+                bool blocked = false, bool stuckOnEquip = false)//ss220 StuckOnEquip
             {
                 SlotDef = slotDef;
                 Highlighted = highlighted;
                 Blocked = blocked;
                 Container = container;
+                StuckOnEquip = stuckOnEquip; //ss220 StuckOnEquip
             }
 
-            public SlotData(SlotData oldData, bool highlighted = false, bool blocked = false)
+            public SlotData(SlotData oldData, bool highlighted = false, bool blocked = false, bool stuckOnEquip = false)//ss220 StuckOnEquip
             {
                 SlotDef = oldData.SlotDef;
                 Highlighted = highlighted;
                 Container = oldData.Container;
                 Blocked = blocked;
+                StuckOnEquip = stuckOnEquip; //ss220 StuckOnEquip
             }
 
             public static implicit operator SlotData(SlotDefinition s)

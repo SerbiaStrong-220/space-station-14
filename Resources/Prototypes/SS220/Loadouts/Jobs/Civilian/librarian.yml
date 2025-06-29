@@ -1,0 +1,20 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Job Time
+- type: loadoutEffectGroup
+  id: LibrarianMonocle
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobLibrarian
+      time: 72000 # 20
+
+# Eyes
+- type: loadout
+  id: LibrarianMonocle
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: LibrarianMonocle
+  equipment:
+    eyes: ClothingEyesMonocle

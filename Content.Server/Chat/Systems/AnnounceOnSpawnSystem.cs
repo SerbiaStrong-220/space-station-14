@@ -17,6 +17,6 @@ public sealed class AnnounceOnSpawnSystem : EntitySystem
     {
         var message = Loc.GetString(comp.Message);
         var sender = comp.Sender != null ? Loc.GetString(comp.Sender) : Loc.GetString("chat-manager-sender-announcement");
-        _chat.DispatchGlobalAnnouncement(message, sender, playSound: true, comp.Color);
+        _chat.DispatchGlobalAnnouncement(message, sender, playSound: true, comp.Sound, comp.Color);
     }
 }

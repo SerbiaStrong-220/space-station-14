@@ -37,6 +37,11 @@ public sealed partial class JukeboxComponent : Component
 
     [ViewVariables]
     public float SelectAccumulator;
+
+    //ss220-jukebox-tweak-begin
+    [DataField, AutoNetworkedField]
+    public float Gain = 1;
+    //ss220-jukebox-tweak-end
 }
 
 [Serializable, NetSerializable]
@@ -59,6 +64,14 @@ public sealed class JukeboxSetTimeMessage(float songTime) : BoundUserInterfaceMe
 {
     public float SongTime { get; } = songTime;
 }
+
+//ss220-jukebox-tweak-begin
+[Serializable, NetSerializable]
+public sealed class JukeboxSetGainMessage(float gain) : BoundUserInterfaceMessage
+{
+    public float Gain { get; } = gain;
+}
+//ss220-jukebox-tweak-end
 
 [Serializable, NetSerializable]
 public enum JukeboxVisuals : byte

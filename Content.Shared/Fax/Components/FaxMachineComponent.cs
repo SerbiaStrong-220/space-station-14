@@ -64,16 +64,15 @@ public sealed partial class FaxMachineComponent : Component
     /// <summary>
     /// Should that fax receive station goal info
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("receiveStationGoal")]
-    public bool ReceiveStationGoal { get; set; } = false;
-    // Corvax-StationGoal-End
+    [DataField]
+    public bool ReceiveStationGoal { get; set; }
 
     /// <summary>
-    /// Sound to play when fax has been emagged
+    /// Should that fax receive station goals from other stations
     /// </summary>
     [DataField]
-    public SoundSpecifier EmagSound = new SoundCollectionSpecifier("sparks");
+    public bool ReceiveAllStationGoals { get; set; }
+    // Corvax-StationGoal-End
 
     /// <summary>
     /// Sound to play when fax printing new message
@@ -153,22 +152,58 @@ public sealed partial class FaxMachineComponent : Component
     public EntProtoId PrintOfficePaperId = "PaperOffice";
 }
 
-[DataDefinition]
-public sealed partial class FaxPrintout
+[DataDefinition, Virtual] // SS220 Make virtual
+public partial class FaxPrintout
 {
-    [DataField("dataToCopy")]
-    public Dictionary<Type, IPhotocopiedComponentData>? DataToCopy { get; private set; }
+    [DataField(required: true)]
+    public string Name { get; private set; } = default!;
 
-    [DataField("metaData")]
-    public PhotocopyableMetaData? MetaData { get; private set; }
+    [DataField]
+    public string? Label { get; private set; }
 
-    private FaxPrintout()
+    [DataField(required: true)]
+    public string Content { get; private set; } = default!;
+
+    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>), required: true)]
+    public string PrototypeId { get; private set; } = default!;
+
+    [DataField("stampState")]
+    public string? StampState { get; private set; }
+
+    [DataField("stampedBy")]
+    public List<StampDisplayInfo> StampedBy { get; private set; } = new();
+
+    [DataField]
+    public bool Locked { get; private set; }
+
+    protected FaxPrintout() // SS220 Make protected
     {
     }
 
-    public FaxPrintout(Dictionary<Type, IPhotocopiedComponentData>? dataToCopy, PhotocopyableMetaData? metaData)
+    public FaxPrintout(string content, string name, string? label = null, string? prototypeId = null, string? stampState = null, List<StampDisplayInfo>? stampedBy = null, bool locked = false)
     {
-        DataToCopy = dataToCopy;
-        MetaData = metaData;
+        Content = content;
+        Name = name;
+        Label = label;
+        PrototypeId = prototypeId ?? "";
+        StampState = stampState;
+        StampedBy = stampedBy ?? new List<StampDisplayInfo>();
+        Locked = locked;
     }
 }
+
+//ss220 autogamma update
+public sealed class FaxSendAttemptEvent : CancellableEntityEventArgs
+{
+    public EntityUid FaxEnt;
+    public string DestinationFaxAddress;
+    public string SenderFaxAddress;
+
+    public FaxSendAttemptEvent(EntityUid faxEnt, string destinationFaxAddress, string senderFaxAddress)
+    {
+        FaxEnt = faxEnt;
+        DestinationFaxAddress = destinationFaxAddress;
+        SenderFaxAddress = senderFaxAddress;
+    }
+}
+//ss220 autogamma update

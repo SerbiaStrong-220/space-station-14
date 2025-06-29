@@ -20,8 +20,11 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
-    - state: paper #SS220-Closet-Resprite-start
-      map: ["enum.PaperLabelVisuals.Layer"] #SS220-Closet-Resprite-end
+    - state: paper
+      visible: false
+      sprite: Structures/Storage/closet_labels.rsi
+      offset: "-0.065,0"
+      map: ["enum.PaperLabelVisuals.Layer"]
   - type: Destructible
     thresholds:
     - trigger:
@@ -51,6 +54,10 @@
     node: done
     containers:
     - entity_storage
+  #ss220 lockpick add start
+  - type: TargetLockPick
+    chanceToLockPick: 0.75 # need to discuss
+  #ss220 lockpick add end
 
 - type: entity
   id: LockerBaseSecure

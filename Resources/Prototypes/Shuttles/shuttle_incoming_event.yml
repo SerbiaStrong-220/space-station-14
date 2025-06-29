@@ -6,17 +6,17 @@
 - type: preloadedGrid
   id: ShuttleCargoLost
   path: /Maps/SS220/Shuttles/lostSoul/lost_cargo.yml # SS220 ReWork Soul Shuttle
-  copies: 2
+  copies: 1 #SS220 ReWork Soul Shuttle
 
 - type: preloadedGrid
   id: TravelingCuisine
   path: /Maps/SS220/Shuttles/lostSoul/traveling_china_cuisine.yml # SS220 ReWork Soul Shuttle
-  copies: 2
+  copies: 1 #SS220 ReWork Soul Shuttle
 
 - type: preloadedGrid
   id: DisasterEvacPod
   path: /Maps/SS220/Shuttles/lostSoul/disaster_evacpod.yml # SS220 ReWork Soul Shuttle
-  copies: 3
+  copies: 2 #SS220 ReWork Soul Shuttle
 
 # The power of 3 clowns has proved too strong for the players and may need to be 1984ed.
 - type: preloadedGrid
@@ -89,6 +89,11 @@
 - type: preloadedGrid
   id: Lambordeere
   path: /Maps/Shuttles/ShuttleEvent/lambordeere.yml
+  copies: 1
+
+- type: preloadedGrid
+  id: ManOWar
+  path: /Maps/Shuttles/ShuttleEvent/manowar.yml
   copies: 1
 
 - type: preloadedGrid

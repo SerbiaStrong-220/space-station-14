@@ -34,6 +34,7 @@
     shape:
       !type:PhysShapeCircle
       radius: 0.2
+  - type: StationAiWhitelist
   - type: Photocopier
     formCollections: [ "nanotrasen_station" ]
     contrabandFormCollections: [ "syndicate" ]
@@ -84,6 +85,7 @@
   parent: PhotocopierBase
   name: central command photocopier
   components:
+  - type: StationAiWhitelist
   - type: Photocopier
     formCollections: [ "nanotrasen_station", "nanotrasen_central_command" ]
     tonerSlot:

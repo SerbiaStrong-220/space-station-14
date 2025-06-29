@@ -53,6 +53,8 @@
       - id: ClothingHeadMirror
       - id: ClothingEyesGlasses
       - id: ClothingOuterWinterCMO
+#      - id: ClothingUniformJumpsuitCMOCorporate #SS220-CMOCorporate remove only in loadout
+#      - id: ClothingUniformJumpskirtCMOCorporate #SS220-CMOCorporate remove only in loadout
       - id: ClothingOuterCoatCMOFormalDress #SS220-FormalDress
 #     - id: ClothingCloakCmo #SS220-cloak-dress-tweak
 
@@ -88,6 +90,7 @@
       - id: ClothingOuterWinterHoS
       - id: ClothingHeadBigCapHoS # SS220-FreedomHoSCap
 #     - id: ClothingNeckCloakHos #SS220-cloak-dress-tweak
+      - id: ClothingOuterCoatHoSbomber # SS220-NewBomberForHos   
 
 - type: entity
   id: DresserQuarterMasterFilled

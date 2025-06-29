@@ -1,6 +1,6 @@
 - type: species
   id: Gingerbread
-  name: species-name-human
+  name: species-name-gingerbread
   roundStart: false
   prototype: MobGingerbread
   sprites: MobGingerbreadSprites
@@ -12,6 +12,7 @@
 - type: speciesBaseSprites
   id: MobGingerbreadSprites
   sprites:
+    Special: MobHumanoidAnyMarking #SS220 CultYogg
     Head: MobGingerbreadHead
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking

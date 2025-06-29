@@ -1,0 +1,61 @@
+- type: entity
+  id: BookSpaceLaws
+  parent: BaseGuidebook
+  name: космический закон
+  description: Единственное законодательство, которое использует NanoTrasen на территориях станций.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/books.rsi
+    state: space_law
+  - type: GuideHelp
+    guides:
+    - SS220SpaceLaw
+
+- type: entity
+  id: OrigamiBook
+  parent: BaseItem
+  name: Origami Arts Book
+  description: This book allows you to master the Art of Origami. After reading it, you will learn to fold paper airplanes that deal significant damage and fly at increased speed.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/books.rsi
+    layers:
+    - state: paper
+    - state: cover_base
+      color: "#332d27"
+      map: [ "cover" ]
+    - state: decor_wingette
+      color: "#453f3a"
+      map: [ "decor" ]
+    - state: icon_text
+      map: [ "icon" ]
+    - state: overlay_null
+      map: [ "overlay" ]
+  - type: OrigamiBook
+    delayToLearn: 6
+    chanceToLearn: 0.17
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Ash:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Flammable
+    fireSpread: true
+    alwaysCombustible: true
+    damage:
+      types:
+        Heat: 1
+  - type: Appearance
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: fire
+  - type: Damageable
+    damageModifierSet: Wood

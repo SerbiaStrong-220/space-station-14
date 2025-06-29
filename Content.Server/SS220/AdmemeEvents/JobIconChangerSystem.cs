@@ -6,6 +6,7 @@ using Robust.Server.GameObjects;
 using System.Linq;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
+using Content.Shared.SS220.AdmemeEvents.EventRole;
 
 namespace Content.Server.SS220.AdmemeEvents;
 

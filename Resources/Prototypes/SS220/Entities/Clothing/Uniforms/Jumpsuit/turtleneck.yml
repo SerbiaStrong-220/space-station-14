@@ -18,6 +18,7 @@
   id: ClothingUniformJumpsuitParamedicTurtleneck
   name: paramedic turtleneck
   description: A reliable and comfortable choice for rescuers, it provides protection from cold and moisture during rescue operations.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_turtle.rsi
@@ -29,6 +30,7 @@
   id: ClothingUniformJumpsuitAtmosphericTechnicianTurtleneck
   name: atmospheric technician turtle
   description: Built to withstand high humidity and temperature extremes, ideal for professionals in the atmospheric research industry.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/atmospheric_technician_turtle.rsi
@@ -44,6 +46,7 @@
   id: ClothingUniformJumpsuitChemistTurtleneck
   name: chemist turtle
   description: Specially designed for safe handling of chemicals, provides reliable protection from harmful substances and keeps the user safe.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/chemist_turtle.rsi
@@ -59,6 +62,7 @@
   id: ClothingUniformJumpsuitBlueShieldTurtle
   name: blueshield turtleneck
   description: A stylish turtleneck that will help the Blue Shield officer be ready for any extreme situation. High quality materials and a layer of armor make it indispensable for the front line.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_turtle.rsi
@@ -75,6 +79,7 @@
   id: ClothingUniformJumpsuitWardenTurtleneck
   name: warden turtleneck
   description: A special turtleneck for riot control.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/warden_turtle.rsi
@@ -86,6 +91,7 @@
   id: ClothingUniformJumpsuitSalvageSpecialistTurtleneck
   name: salvage specialist turtleneck
   description: Show that you are better than the damn dwarves!
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_turtle.rsi
@@ -97,6 +103,7 @@
   id: ClothingUniformJumpsuitBrigmedicTurtleneck
   name: brigmedic turtleneck
   description: A brigmedic turtleneck.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/brigmedic_turtle.rsi

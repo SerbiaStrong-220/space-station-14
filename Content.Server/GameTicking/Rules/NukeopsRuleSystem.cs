@@ -9,7 +9,6 @@ using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Components;
-using Content.Server.Store.Components;
 using Content.Server.Store.Systems;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mobs;
@@ -26,22 +25,30 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.StationEvents.Components;
 using System.Linq;
+using Content.Server.AlertLevel;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
 using Content.Server.Maps;
+using Content.Server.Station.Systems;
+using Content.Shared.Fax.Components;
+using Content.Server.DeviceNetwork.Components;
+using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.GameTicking.Rules;
 
 public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 {
+    [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly AlertLevelSystem _alertLevel = default!; //ss220 nukeops autogamma
+    [Dependency] private readonly StationSystem _station = default!; //ss220 nukeops autogamma
+    [Dependency] private readonly GameTicker _gameTicker = default!; //ss220 nukeops autogamma
 
     [ValidatePrototypeId<CurrencyPrototype>]
     private const string TelecrystalCurrencyPrototype = "Telecrystal";
@@ -64,15 +71,20 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         SubscribeLocalEvent<NukeOperativeComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<NukeOperativeComponent, EntityZombifiedEvent>(OnOperativeZombified);
 
+        SubscribeLocalEvent<NukeopsRoleComponent, GetBriefingEvent>(OnGetBriefing);
+
         SubscribeLocalEvent<ConsoleFTLAttemptEvent>(OnShuttleFTLAttempt);
         SubscribeLocalEvent<WarDeclaredEvent>(OnWarDeclared);
         SubscribeLocalEvent<CommunicationConsoleCallShuttleAttemptEvent>(OnShuttleCallAttempt);
+        SubscribeLocalEvent<FaxSendAttemptEvent>(OnFaxSendAttemptEvent); //ss220 autogamma update
 
         SubscribeLocalEvent<NukeopsRuleComponent, AfterAntagEntitySelectedEvent>(OnAfterAntagEntSelected);
         SubscribeLocalEvent<NukeopsRuleComponent, RuleLoadedGridsEvent>(OnRuleLoadedGrids);
     }
 
-    protected override void Started(EntityUid uid, NukeopsRuleComponent component, GameRuleComponent gameRule,
+    protected override void Started(EntityUid uid,
+        NukeopsRuleComponent component,
+        GameRuleComponent gameRule,
         GameRuleStartedEvent args)
     {
         var eligible = new List<Entity<StationEventEligibleComponent, NpcFactionMemberComponent>>();
@@ -92,7 +104,9 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     }
 
     #region Event Handlers
-    protected override void AppendRoundEndText(EntityUid uid, NukeopsRuleComponent component, GameRuleComponent gameRule,
+    protected override void AppendRoundEndText(EntityUid uid,
+        NukeopsRuleComponent component,
+        GameRuleComponent gameRule,
         ref RoundEndTextAppendEvent args)
     {
         var winText = Loc.GetString($"nukeops-{component.WinType.ToString().ToLower()}");
@@ -234,7 +248,8 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 
         // If the disk is currently at Central Command, the crew wins - just slightly.
         // This also implies that some nuclear operatives have died.
-        SetWinType(ent, diskAtCentCom
+        SetWinType(ent,
+            diskAtCentCom
             ? WinType.CrewMinor
             : WinType.OpsMinor);
         ent.Comp.WinConditions.Add(diskAtCentCom
@@ -278,6 +293,38 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
         }
     }
 
+    //ss220 autogamma update
+    private void OnFaxSendAttemptEvent(FaxSendAttemptEvent ev)
+    {
+        var faxQuery = EntityQueryEnumerator<FaxMachineComponent, DeviceNetworkComponent>();
+        while (faxQuery.MoveNext(out var uid, out _, out var deviceNetwork))
+        {
+            //we still want to to communicate by fax within the map
+            if (ev.DestinationFaxAddress == deviceNetwork.Address &&
+             Transform(uid).MapUid == Transform(ev.FaxEnt).MapUid)
+                return;
+        }
+
+        var nukeQuery = EntityQueryEnumerator<GameRuleComponent, NukeopsRuleComponent>();
+        while (nukeQuery.MoveNext(out _, out _, out var nukeops))
+        {
+            if (nukeops is { WarDeclaredTime: not null })
+            {
+                var warTime = Timing.CurTime.Subtract(nukeops.WarDeclaredTime.Value);
+                if (warTime < nukeops.WarFaxDisabled)
+                {
+
+                    var nukeShuttle = Transform(ev.FaxEnt).GridUid;
+                    if (!HasComp<NukeOpsShuttleComponent>(nukeShuttle)) // spam to captain from nukeops shuttle muhaha
+                        ev.Cancel();
+
+                    return;
+                }
+            }
+        }
+    }
+    //ss220 autogamma update
+
     private void OnShuttleFTLAttempt(ref ConsoleFTLAttemptEvent ev)
     {
         var query = QueryActiveRules();
@@ -313,7 +360,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             {
                 // Nukies must wait some time after declaration of war to get on the station
                 var warTime = Timing.CurTime.Subtract(nukeops.WarDeclaredTime.Value);
-                if (warTime < nukeops.WarNukieArriveDelay)
+                if (warTime < nukeops.WarEvacShuttleDisabled)
                 {
                     ev.Cancelled = true;
                     ev.Reason = Loc.GetString("war-ops-shuttle-call-unavailable");
@@ -344,6 +391,19 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 ev.DeclaratorEntity.Comp.ShuttleDisabledTime = timeRemain;
 
                 DistributeExtraTc((uid, nukeops));
+
+                //ss220 nukeops autogamma
+                foreach (var station in _station.GetStations())
+                {
+                    _alertLevel.SetLevel(station, "gamma", true, true, true);
+                }
+                var shedulerQuery = EntityQueryEnumerator<GameRuleComponent, BasicStationEventSchedulerComponent>();
+                while (shedulerQuery.MoveNext(out var ent, out var gameRuleComp, out _))
+                {
+                    _gameTicker.EndGameRule(ent, gameRuleComp); // shutdown all inappropriate events during the war
+                    //I don't know how to do it any other way, maybe I'm just dumb ^_^
+                }
+                //ss220 nukeops autogamma
             }
         }
     }
@@ -466,8 +526,11 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             : WinCondition.AllNukiesDead);
 
         SetWinType(ent, WinType.CrewMajor, false);
-        _roundEndSystem.DoRoundEndBehavior(
-            nukeops.RoundEndBehavior, nukeops.EvacShuttleTime, nukeops.RoundEndTextSender, nukeops.RoundEndTextShuttleCall, nukeops.RoundEndTextAnnouncement);
+        _roundEndSystem.DoRoundEndBehavior(nukeops.RoundEndBehavior,
+            nukeops.EvacShuttleTime,
+            nukeops.RoundEndTextSender,
+            nukeops.RoundEndTextShuttleCall,
+            nukeops.RoundEndTextAnnouncement);
 
         // prevent it called multiple times
         nukeops.RoundEndBehavior = RoundEndBehavior.Nothing;
@@ -475,14 +538,20 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
 
     private void OnAfterAntagEntSelected(Entity<NukeopsRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
-        if (ent.Comp.TargetStation is not { } station)
-            return;
+        var target = (ent.Comp.TargetStation is not null) ? Name(ent.Comp.TargetStation.Value) : "the target";
 
-        _antag.SendBriefing(args.Session, Loc.GetString("nukeops-welcome",
-                ("station", station),
+        _antag.SendBriefing(args.Session,
+            Loc.GetString("nukeops-welcome",
+                ("station", target),
                 ("name", Name(ent))),
             Color.Red,
             ent.Comp.GreetSoundNotification);
+    }
+
+    private void OnGetBriefing(Entity<NukeopsRoleComponent> role, ref GetBriefingEvent args)
+    {
+        // TODO Different character screen briefing for the 3 nukie types
+        args.Append(Loc.GetString("nukeops-briefing"));
     }
 
     /// <remarks>

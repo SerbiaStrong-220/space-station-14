@@ -16,6 +16,10 @@
     shoes: ClothingShoesColorWhite
     id: ReporterPDA
     ears: ClothingHeadsetService
-  #storage:
-    #back:
-    #- Stuff
+# SS220 Tape Recorder #32234 early merge begin
+  storage:
+    back:
+    - TapeRecorder
+    - CassetteTape
+    - CassetteTape
+# SS220 Tape Recorder #32234 early merge end

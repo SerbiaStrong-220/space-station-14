@@ -1,0 +1,22 @@
+<!--© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt-->
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    MinSize="200 200">
+    <BoxContainer Orientation="Vertical" Margin="8">
+        <BoxContainer Name="Prompts" Orientation="Vertical"/>
+        <BoxContainer Orientation="Vertical"
+                      HorizontalExpand="True"
+                      VerticalExpand="True">
+            <BoxContainer MinHeight="20"></BoxContainer>
+            <Button Name="OkButton"
+                    Text="{Loc 'quick-dialog-ui-confirm'}"
+                    StyleClasses="OpenBoth"
+                    MaxWidth="120"
+                    HorizontalAlignment="Center"
+                    VerticalExpand="False"
+                    HorizontalExpand="False">
+            </Button>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

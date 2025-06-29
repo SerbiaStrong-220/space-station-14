@@ -21,6 +21,11 @@ public sealed partial class AntagRandomObjectivesComponent : Component
     /// </summary>
     [DataField(required: true)]
     public float MaxDifficulty;
+
+    // SS220 reinforcement objective fix begin
+    [DataField]
+    public bool Enabled = true;
+    // SS220 reinforcement objective fix end
 }
 
 /// <summary>
@@ -28,7 +33,7 @@ public sealed partial class AntagRandomObjectivesComponent : Component
 /// Difficulty is checked over all sets, but each set has its own probability and pick count.
 /// </summary>
 [DataRecord]
-public record struct AntagObjectiveSet()
+public partial record struct AntagObjectiveSet()
 {
     /// <summary>
     /// The grouping used by the objective system to pick random objectives.

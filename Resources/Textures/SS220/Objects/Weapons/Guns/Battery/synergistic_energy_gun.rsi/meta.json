@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by abubben (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "enhanced-mag-unshaded-0"
+    },
+    {
+      "name": "enhanced-mag-unshaded-1"
+    },
+    {
+      "name": "enhanced-mag-unshaded-2"
+    },
+    {
+      "name": "enhanced-mag-unshaded-3"
+    },
+    {
+      "name": "enhanced-mag-0"
+    },
+    {
+      "name": "enhanced-mag-1"
+    },
+    {
+      "name": "enhanced-mag-2"
+    },
+    {
+      "name": "enhanced-mag-3"
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "laser-mag-unshaded-0"
+    },
+    {
+      "name": "laser-mag-unshaded-1"
+    },
+    {
+      "name": "laser-mag-unshaded-2"
+    },
+    {
+      "name": "laser-mag-unshaded-3"
+    },
+    {
+      "name": "laser-mag-0"
+    },
+    {
+      "name": "laser-mag-1"
+    },
+    {
+      "name": "laser-mag-2"
+    },
+    {
+      "name": "laser-mag-3"
+    }
+  ]
+}

@@ -9,6 +9,11 @@
       !type:RoleTimeRequirement
       role: JobChef
       time: 900000 #250 часов, форма для самых лучших
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Head
 - type: loadout

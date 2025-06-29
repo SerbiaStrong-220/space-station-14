@@ -1,0 +1,123 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# WARNING: Put here music ONLY with mono channel!
+
+- type: jukebox
+  id: requiem
+  name: Quantum (Feat Z.W.E.I) - Requiem
+  path:
+    path: /Audio/SS220/Jukebox/Requiem.ogg
+
+- type: jukebox
+  id: life_at_station
+  name: Quantum (Feat Z.W.E.I) - Life at the station
+  path:
+    path: /Audio/SS220/Jukebox/Life_At_The_Station.ogg
+
+- type: jukebox
+  id: junk_recyclers
+  name: Quantum (Feat Z.W.E.I) - Junk recyclers
+  path:
+    path: /Audio/SS220/Jukebox/Junk_Recyclers.ogg
+
+- type: jukebox
+  id: your_green_eyes
+  name: Quantum (Feat Z.W.E.I) - Your green eyes
+  path:
+    path: /Audio/SS220/Jukebox/Your_Green_Eyes.ogg
+
+- type: jukebox
+  id: neon
+  name: Quantum (Feat Z.W.E.I) - Neon
+  path:
+    path: /Audio/SS220/Jukebox/neon.ogg
+
+- type: jukebox
+  id: doubleu
+  name: Quantum (Feat Z.W.E.I) - double u
+  path:
+    path: /Audio/SS220/Jukebox/double-u.ogg
+
+- type: jukebox
+  id: vincent_helman
+  name: Quantum (Feat Z.W.E.I) - Vincent Helman
+  path:
+    path: /Audio/SS220/Jukebox/Vincent_Helman.ogg
+
+- type: jukebox
+  id: the_bar_counter
+  name: Quantum (Feat Z.W.E.I) - The bar counter
+  path:
+    path: /Audio/SS220/Jukebox/The_Bar_Counter.ogg
+
+- type: jukebox
+  id: tchaikovsky_waltz_of_the_flowers
+  name: Pyotr Ilyich Tchaikovsky - Waltz of the Flowers
+  path:
+    path: /Audio/SS220/Jukebox/Pyotr Ilyich Tchaikovsky - Waltz of the Flowers.ogg
+
+- type: jukebox
+  id: chopin_nocturne_9_2
+  name: Frédéric Chopin - Nocturne in E flat major, Op. 9 no. 2
+  path:
+    path: /Audio/SS220/Jukebox/Frédéric Chopin - Nocturne in E flat major, Op. 9 no. 2.ogg
+
+- type: jukebox
+  id: beethoven_moonlight_sonata
+  name: Ludwig van Beethoven - Moonlight Sonata, Op. 27 No. 2
+  path:
+    path: /Audio/SS220/Jukebox/Ludwig van Beethoven - Moonlight Sonata, Op. 27 No. 2.ogg
+
+- type: jukebox
+  id: ebilla_big_hole
+  name: E6illa - Big hole
+  path:
+    path: /Audio/SS220/Lobby/big_hole.ogg
+
+- type: jukebox
+  id: ebilla_since_2569
+  name: E6illa - Since 2569
+  path:
+    path: /Audio/SS220/Jukebox/since_2569.ogg
+
+- type: jukebox
+  id: ebilla_nordic
+  name: E6illa - Nordic
+  path:
+    path: /Audio/SS220/Jukebox/nordic.ogg
+
+- type: jukebox
+  id: ebilla_blues
+  name: E6illa - Blues
+  path:
+    path: /Audio/SS220/Jukebox/blues.ogg
+
+- type: jukebox
+  id: ebilla_station_area
+  name: E6illa - Station area
+  path:
+    path: /Audio/SS220/Lobby/station_area.ogg
+
+- type: jukebox
+  id: ebilla_silence_and_you
+  name: E6illa - Silence and you
+  path:
+    path: /Audio/SS220/Lobby/silence_and_you.ogg
+
+- type: jukebox
+  id: ebilla_sky_rocket
+  name: E6illa - Sky rocket
+  path:
+    path: /Audio/SS220/Lobby/sky_rocket.ogg
+
+- type: jukebox
+  id: rivgane_crimsonstorm
+  name: Rivgane - Crimson storm
+  path:
+    path: /Audio/SS220/Lobby/crimsonstorm.ogg
+
+- type: jukebox
+  id: rivgane_mechanismeight
+  name: Andrew Sega (remixed by Rivgane) - Mechanism 8
+  path:
+    path: /Audio/SS220/Jukebox/mechanismeight.ogg

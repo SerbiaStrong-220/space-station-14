@@ -1,0 +1,22 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: [ClothingEyesBase, ClothingHeadEyeBaseFlippableAlt]
+  id: ClothingEyesMonocle
+  name: monocle
+  description: An accessory that emphasizes sophistication and sophistication, a symbol of elegance and attention to detail.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Specific/monocle.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Specific/monocle.rsi
+  - type: VisionCorrection
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: [ClothingEyesMonocle, ClothingHeadEyeBaseFlippedAlt]
+  id: ClothingEyesMonocleFlipped
+  name: monocle

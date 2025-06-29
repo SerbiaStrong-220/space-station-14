@@ -1,0 +1,170 @@
+- type: rcd
+  id: WallReinforced
+  category: WallsAndFlooring
+  sprite: /Textures/SS220/Interface/Radial/RCD/reinforced_wall.png
+  mode: ConstructObject
+  prototype: WallReinforced
+  cost: 10
+  delay: 6
+  collisionMask: FullTileMask
+  rotation: Fixed
+  fx: EffectRCDConstruct4
+
+- type: rcd
+  id: StraightPipe
+  category: Pipes
+  sprite: /Textures/SS220/Interface/Radial/RCD/pipeStraight.png
+  mode: ConstructObject
+  prototype: GasPipeStraight
+  cost: 1
+  delay: 0
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct0
+
+- type: rcd
+  id: PipeFourway
+  category: Pipes
+  sprite: /Textures/SS220/Interface/Radial/RCD/pipeFourway.png
+  mode: ConstructObject
+  prototype: GasPipeFourway
+  cost: 1
+  delay: 0
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct0
+
+- type: rcd
+  id: PipeTjunction
+  category: Pipes
+  sprite: /Textures/SS220/Interface/Radial/RCD/pipeTjunction.png
+  mode: ConstructObject
+  prototype: GasPipeTJunction
+  cost: 1
+  delay: 0
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct0
+
+- type: rcd
+  id: PipeBend
+  category: Pipes
+  sprite: /Textures/SS220/Interface/Radial/RCD/pipeBend.png
+  mode: ConstructObject
+  prototype: GasPipeBend
+  cost: 1
+  delay: 0
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct0
+
+- type: rcd
+  id: PassiveVent
+  category: Pipes
+  sprite: /Textures/SS220/Interface/Radial/RCD/vent_passive.png
+  mode: ConstructObject
+  prototype: GasPassiveVent
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: AirVent
+  category: Pipes
+  sprite: /Textures/SS220/Interface/Radial/RCD/vent_air.png
+  mode: ConstructObject
+  prototype: GasVentPump
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: Scrubber
+  category: Pipes
+  sprite: /Textures/SS220/Interface/Radial/RCD/scrub.png
+  mode: ConstructObject
+  prototype: GasVentScrubber
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: DisposalPipe
+  category: Disposals
+  sprite: /Textures/SS220/Interface/Radial/RCD/conpipe-s.png
+  mode: ConstructObject
+  prototype: DisposalPipe
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: DisposalTrunk
+  category: Disposals
+  sprite: /Textures/SS220/Interface/Radial/RCD/conpipe-t.png
+  mode: ConstructObject
+  prototype: DisposalTrunk
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: DisposalJunction
+  category: Disposals
+  sprite: /Textures/SS220/Interface/Radial/RCD/conpipe-j1.png
+  mode: ConstructObject
+  prototype: DisposalJunction
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct1
+
+
+- type: rcd
+  id: DisposalJunctionFlipped
+  category: Disposals
+  sprite: /Textures/SS220/Interface/Radial/RCD/conpipe-j2.png
+  mode: ConstructObject
+  prototype: DisposalJunctionFlipped
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct1
+
+
+- type: rcd
+  id: DisposalYJunction
+  category: Disposals
+  sprite: /Textures/SS220/Interface/Radial/RCD/conpipe-y.png
+  mode: ConstructObject
+  prototype: DisposalYJunction
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct1
+
+
+- type: rcd
+  id: DisposalBend
+  category: Disposals
+  sprite: /Textures/SS220/Interface/Radial/RCD/conpipe-c.png
+  mode: ConstructObject
+  prototype: DisposalBend
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct1

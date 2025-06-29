@@ -25,7 +25,7 @@
     ClothingHeadHatTophat: 1
     # Corvax-LawyerDrip-End
     BriefcaseBrown: 2
-    BookSpaceLaw: 3
+    BookSpaceLaws: 3 # SS220 Space Law Replace
     LuxuryPen: 2
     ClothingWristWatchGold: 1 # SS220 Wrist Watch
     CigPackAVD: 2 #SS220 Cigaretts
@@ -35,5 +35,6 @@
     ClothingHeadHatPwig: 1
     # "Legally" obtained currency
     SpaceCash100: 2
+    ToyFigurineLawyer: 1
   emaggedInventory:
     CyberPen: 1

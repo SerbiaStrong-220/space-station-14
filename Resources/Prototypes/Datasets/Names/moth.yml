@@ -1,0 +1,17 @@
+- type: localizedDataset
+  id: NamesMothFirstMale
+  values:
+    prefix: names-moth-first-male-dataset-
+    count: 39
+
+- type: localizedDataset
+  id: NamesMothFirstFemale
+  values:
+    prefix: names-moth-first-female-dataset-
+    count: 38
+
+- type: localizedDataset
+  id: NamesMothLast
+  values:
+    prefix: ss220-names-moth-last- # SS220 moth names
+    count: 34 # SS220 moth names

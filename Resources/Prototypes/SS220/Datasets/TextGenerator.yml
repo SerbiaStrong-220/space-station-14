@@ -1,0 +1,16 @@
+- type: dataset
+  id: MindSlaveStopWordTexts
+  values:
+  - stop-word-text-template-0
+  - stop-word-text-template-1
+  - stop-word-text-template-2
+  - stop-word-text-template-3
+  - stop-word-text-template-4
+  - stop-word-text-template-5
+  - stop-word-text-template-6
+  - stop-word-text-template-7
+  - stop-word-text-template-8
+  - stop-word-text-template-9
+  - stop-word-text-template-10
+  - stop-word-text-template-11
+  - stop-word-text-template-12

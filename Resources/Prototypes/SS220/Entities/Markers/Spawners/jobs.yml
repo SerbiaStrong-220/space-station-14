@@ -1,0 +1,93 @@
+# Follow the alphabetical order of.
+# Следуйте алфавитному порядку.
+
+# Адвокат
+- type: entity
+  id: SpawnPointActualFuckingLawyer
+  parent: SpawnPointJobBase
+  name: lawyer
+  components:
+  - type: SpawnPoint
+    job_id: Lawyer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: lawyer
+
+# Ведущий врач
+- type: entity
+  id: SpawnPointSeniorPhysician
+  parent: SpawnPointJobBase
+  name: seniorphysician
+  components:
+  - type: SpawnPoint
+    job_id: SeniorPhysician
+  - type: Sprite
+    layers:
+      - state: green
+      - state: seniorphysician
+
+# Ведущий инженер
+- type: entity
+  id: SpawnPointSeniorEngineer
+  parent: SpawnPointJobBase
+  name: seniorengineer
+  components:
+  - type: SpawnPoint
+    job_id: SeniorEngineer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: seniorengineer
+
+# Ведущий учёный
+- type: entity
+  id: SpawnPointSeniorResearcher
+  parent: SpawnPointJobBase
+  name: seniorresearcher
+  components:
+  - type: SpawnPoint
+    job_id: SeniorResearcher
+  - type: Sprite
+    layers:
+      - state: green
+      - state: seniorresearcher
+
+# Инструктор
+- type: entity
+  id: SpawnPointSeniorOfficer
+  parent: SpawnPointJobBase
+  name: seniorofficer
+  components:
+  - type: SpawnPoint
+    job_id: SeniorOfficer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: seniorofficer
+
+# Магистрат
+- type: entity
+  id: SpawnPointMagistrate
+  parent: SpawnPointJobBase
+  name: magistrate
+  components:
+  - type: SpawnPoint
+    job_id: Magistrate
+  - type: Sprite
+    layers:
+      - state: green
+      - state: lawyer
+
+# Сервисный администратор
+- type: entity
+  id: SpawnPointServiceOfficer
+  parent: SpawnPointJobBase
+  name: seniorservice
+  components:
+  - type: SpawnPoint
+    job_id: SeniorService
+  - type: Sprite
+    layers:
+      - state: green
+      - state: serviceworker

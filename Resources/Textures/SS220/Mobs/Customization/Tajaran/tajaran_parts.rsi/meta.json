@@ -1,42 +1,42 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "by spo9k\u0026lina, modified by Estkemran (Github) for SS220, tajaran_tail Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/fc9b91e3cb51b20987aab9630e73ac587bc00f3f, ears_common_outer & ears_common_inner sprited by Estkemran (Github) for SS220",
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by Estkemran (Github) for SS220",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "ears_nyshka_inner",
-      "directions": 4
-    },
-    {
-      "name": "ears_nyshka_outer",
-      "directions": 4
-    },
-    {
-      "name": "ears_piercing_inner",
-      "directions": 4
-    },
-    {
-      "name": "ears_piercing_outer",
-      "directions": 4
-    },
-    {
-      "name": "ears_vini_inner",
-      "directions": 4
-    },
-    {
-      "name": "ears_vini_outer",
-      "directions": 4
-    },
-    {
       "name": "ears_common_inner",
       "directions": 4
     },
     {
       "name": "ears_common_outer",
+      "directions": 4
+    },
+    {
+      "name": "ears_pointy_inner",
+      "directions": 4
+    },
+    {
+      "name": "ears_pointy_outer",
+      "directions": 4
+    },
+    {
+      "name": "ears_siberia_inner",
+      "directions": 4
+    },
+    {
+      "name": "ears_siberia_outer",
+      "directions": 4
+    },
+    {
+      "name": "ears_short_inner",
+      "directions": 4
+    },
+    {
+      "name": "ears_short_outer",
       "directions": 4
     },
     {
@@ -51,11 +51,35 @@
       "name": "tajaran_tail_wagging",
       "directions": 4,
       "delays": [
-                [0.2, 0.2, 0.2, 0.2, 0.2],
-                [0.2, 0.2, 0.2, 0.2, 0.2],
-                [0.2, 0.2, 0.2, 0.2, 0.2],
-                [0.2, 0.2, 0.2, 0.2, 0.2]
+                [0.1, 0.12, 0.15, 0.15, 0.12, 0.12, 0.12, 0.15, 0.15, 0.12, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.15, 0.12, 0.12, 0.12, 0.15, 0.15, 0.12, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.12, 0.15, 0.12, 0.12, 0.15, 0.12, 0.15, 0.12, 0.1],
+                [0.1, 0.12, 0.15, 0.12, 0.15, 0.12, 0.12, 0.15, 0.12, 0.15, 0.12, 0.1]
             ]
+    },
+    {
+      "name": "nose_bluish",
+      "directions": 4
+    },
+    {
+      "name": "nose_dark",
+      "directions": 4
+    },
+    {
+      "name": "nose_orange",
+      "directions": 4
+    },
+    {
+      "name": "nose_pink_bright",
+      "directions": 4
+    },
+    {
+      "name": "nose_pink_light",
+      "directions": 4
+    },
+    {
+      "name": "nose_black",
+      "directions": 4
     }
   ]
 }

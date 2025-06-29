@@ -69,13 +69,10 @@ public sealed partial class ExplosionSystem
 
     private List<EntityUid> _anchored = new();
 
-    private void OnMapChanged(MapChangedEvent ev)
+    private void OnMapRemoved(MapRemovedEvent ev)
     {
         // If a map was deleted, check the explosion currently being processed belongs to that map.
-        if (ev.Created)
-            return;
-
-        if (_activeExplosion?.Epicenter.MapId != ev.Map)
+        if (_activeExplosion?.Epicenter.MapId != ev.MapId)
             return;
 
         QueueDel(_activeExplosion.VisualEnt);
@@ -151,7 +148,7 @@ public sealed partial class ExplosionSystem
             }
 #if EXCEPTION_TOLERANCE
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Ensure the system does not get stuck in an error-loop.
                 if (_activeExplosion != null)
@@ -466,7 +463,7 @@ public sealed partial class ExplosionSystem
                 }
 
                 // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
-                _damageableSystem.TryChangeDamage(entity, damage, ignoreResistances: true);
+                _damageableSystem.TryChangeDamage(entity, damage * _damageableSystem.UniversalExplosionDamageModifier, ignoreResistances: true);
 
             }
         }
@@ -514,7 +511,8 @@ public sealed partial class ExplosionSystem
         List<(Vector2i GridIndices, Tile Tile)> damagedTiles,
         ExplosionPrototype type)
     {
-        if (_tileDefinitionManager[tileRef.Tile.TypeId] is not ContentTileDefinition tileDef)
+        if (_tileDefinitionManager[tileRef.Tile.TypeId] is not ContentTileDefinition tileDef
+            || tileDef.Indestructible)
             return;
 
         if (!CanCreateVacuum)
@@ -719,7 +717,7 @@ sealed class Explosion
 
         if (spaceData != null)
         {
-            var mapUid = mapMan.GetMapEntityId(epicenter.MapId);
+            var mapUid = mapSystem.GetMap(epicenter.MapId);
 
             _explosionData.Add(new()
             {

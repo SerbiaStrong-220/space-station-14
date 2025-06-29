@@ -54,6 +54,24 @@
     - ClothingSponsorNeckAdministrator
 
 - type: loadout
+  id: MentorNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MentorSponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckMentor
+
+- type: loadout
+  id: ModeratorNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ModeratorSponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckModerator
+
+- type: loadout
   id: HeadDeveloperNeck
   effects:
   - !type:GroupLoadoutEffect
@@ -61,3 +79,12 @@
   storage:
     back:
     - ClothingSponsorNeckHeadDevelopment
+
+- type: loadout
+  id: WikiEditorsNeck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WikiEditSponsorTier
+  storage:
+    back:
+    - ClothingSponsorNeckWikiEditors

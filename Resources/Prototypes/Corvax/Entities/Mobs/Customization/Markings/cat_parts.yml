@@ -4,6 +4,7 @@
   markingCategory: HeadTop
   speciesRestriction: [Human]
   sponsorOnly: false # Corvax-Sponsors
+  abstract: true #ss220 no cat tail n ears
   coloring:
     default:
       type:
@@ -28,6 +29,7 @@
   markingCategory: HeadTop
   speciesRestriction: [Human]
   sponsorOnly: false # Corvax-Sponsors
+  abstract: true #ss220 no cat tail n ears
   coloring:
     default:
       type:
@@ -52,6 +54,7 @@
   markingCategory: HeadTop
   speciesRestriction: [Human]
   sponsorOnly: false # Corvax-Sponsors
+  abstract: true #ss220 no cat tail n ears
   coloring:
     default:
       type:
@@ -76,6 +79,7 @@
   markingCategory: Tail
   speciesRestriction: [Human]
   sponsorOnly: false # Corvax-Sponsors
+  abstract: true #ss220 no cat tail n ears
   coloring:
     default:
       type:
