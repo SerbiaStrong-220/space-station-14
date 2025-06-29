@@ -34,7 +34,7 @@ public sealed class SharedDodgeSystem : EntitySystem
 
     private void OnPreventCollide(Entity<DodgeComponent> ent, ref PreventCollideEvent args)
     {
-        UpdateDodgeChance(ent, out var dodgeChance);
+        GetDodgeChance(ent, out var dodgeChance);
 
         if (dodgeChance <= 0
         || !_random.Prob(dodgeChance))
@@ -46,7 +46,7 @@ public sealed class SharedDodgeSystem : EntitySystem
 
     private void OnHitscanAttempt(Entity<DodgeComponent> ent, ref HitScanReflectAttemptEvent args)
     {
-        UpdateDodgeChance(ent, out var dodgeChance);
+        GetDodgeChance(ent, out var dodgeChance);
 
         if (dodgeChance <= 0
             || !_random.Prob(dodgeChance))
@@ -58,7 +58,7 @@ public sealed class SharedDodgeSystem : EntitySystem
 
     private void OnProjectileAttempt(Entity<DodgeComponent> ent, ref ProjectileReflectAttemptEvent args)
     {
-        UpdateDodgeChance(ent, out var dodgeChance);
+        GetDodgeChance(ent, out var dodgeChance);
 
         if (dodgeChance <= 0
             || !_random.Prob(dodgeChance)
@@ -74,7 +74,7 @@ public sealed class SharedDodgeSystem : EntitySystem
         Dirty(args.ProjUid, projectile);
     }
 
-    private void UpdateDodgeChance(Entity<DodgeComponent> ent, out float dodgeChance)
+    private void GetDodgeChance(Entity<DodgeComponent> ent, out float dodgeChance)
     {
         dodgeChance = ent.Comp.BaseDodgeChance;
 
