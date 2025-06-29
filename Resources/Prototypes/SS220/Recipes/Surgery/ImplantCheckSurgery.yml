@@ -1,0 +1,41 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: surgeryGraph
+  id: ImplantCheck
+  nameLocPath: implant-check-surgery-name
+  descriptionLocPath: implant-check-surgery-description
+  postscriptLocPath: implant-check-surgery-postscript
+  targetPuppetPart: head
+  start: start
+  end: seal wound
+  graph:
+  - node: start
+    nodeText:
+      examineDescription: implant-check-surgery-examine-description
+      popup: implant-check-surgery-popup
+      description: implant-check-surgery-description
+    edges:
+    - to: incision
+      baseEdge: incision
+  - node: incision
+    baseNode: incision
+    edges:
+    - to: retract skin
+      baseEdge: retract skin
+      delay: 12
+  - node: retract skin
+    baseNode: retract skin
+    edges:
+    - to: retract skin
+      delay: 40
+      actions:
+      - !type:CheckImplantAction
+      conditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - ImplantCheckInSurgery
+    - to: seal wound
+      baseEdge: seal wound
+  - node: seal wound
+    baseNode: seal wound

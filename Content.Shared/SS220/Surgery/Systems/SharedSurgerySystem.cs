@@ -14,13 +14,11 @@ using Robust.Shared.Network;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 
-
 namespace Content.Server.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem : EntitySystem
 {
     [Dependency] protected readonly SurgeryGraphSystem SurgeryGraph = default!;
-
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;

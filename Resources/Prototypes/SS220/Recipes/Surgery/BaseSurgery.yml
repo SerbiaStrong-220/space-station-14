@@ -80,7 +80,7 @@
   edge:
     to: abstract
     delay: 12
-    sound:
+    sound: /Audio/SS220/Surgery/saw.ogg
     conditions:
     - !type:SurgeryToolTypeCondition
       surgeryTool: saw
