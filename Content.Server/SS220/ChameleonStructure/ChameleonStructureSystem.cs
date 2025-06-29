@@ -24,12 +24,12 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
             ent.Comp.Prototype = MetaData(ent).EntityPrototype?.ID;//Not sure if this secure from null
         }
 
-        SetSelectedPrototype(ent, ent.Comp.Prototype, true);
+        SetPrototype(ent, ent.Comp.Prototype, true);
     }
 
     private void OnSelected(Entity<ChameleonStructureComponent> ent, ref ChameleonStructurePrototypeSelectedMessage args)
     {
-        SetSelectedPrototype(ent, args.SelectedId);
+        SetPrototype(ent, args.SelectedId);
     }
 
     private void UpdateUi(Entity<ChameleonStructureComponent> ent)
@@ -41,7 +41,7 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
     /// <summary>
     ///     Change chameleon structure name, description and sprite to mimic other entity prototype.
     /// </summary>
-    public void SetSelectedPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false)
+    public void SetPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false)
     {
         // check that wasn't already selected
         // forceUpdate on component init ignores this check
