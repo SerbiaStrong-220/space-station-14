@@ -2,24 +2,28 @@
 
 using Content.Server.Humanoid;
 using Content.Server.Medical;
+using Content.Server.SS220.GameTicking.Rules;
+using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
+using Content.Shared.Cloning.Events;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Mind;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
-using Content.Shared.SS220.StuckOnEquip;
-using Robust.Shared.Timing;
-using Robust.Shared.Prototypes;
-using System.Linq;
-using Robust.Shared.Audio.Systems;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs;
 using Content.Shared.SS220.EntityEffects;
+using Content.Shared.SS220.StuckOnEquip;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
@@ -38,6 +42,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
     [Dependency] private readonly ThirstSystem _thirstSystem = default!;
     [Dependency] private readonly VomitSystem _vomitSystem = default!;
+    [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
 
     private const string CultDefaultMarking = "CultStage-Halo";
 
@@ -53,6 +58,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         SubscribeLocalEvent<CultYoggComponent, OnSaintWaterDrinkEvent>(OnSaintWaterDrinked);
         SubscribeLocalEvent<CultYoggComponent, CultYoggForceAscendingEvent>(OnForcedAcsending);
         SubscribeLocalEvent<CultYoggComponent, ChangeCultYoggStageEvent>(OnUpdateStage);
+        SubscribeLocalEvent<CultYoggComponent, CloningEvent>(OnCloning);
     }
 
     #region StageUpdating
@@ -309,4 +315,12 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         purifyedComp.PurifyingDecayEventTime = _timing.CurTime + purifyedComp.BeforeDeclinesTime; //setting timer, when purifying will be removed
     }
     #endregion
+
+    private void OnCloning(Entity<CultYoggComponent> ent, ref CloningEvent args)//ToDo_SS220 somthing wierd happned when we are cloning with cult markings
+    {
+        if (!_cultRuleSystem.TryGetCultGameRule(out var rule))
+            return;
+
+        _cultRuleSystem.MakeCultist(args.CloneUid, rule.Value);
+    }
 }
