@@ -38,8 +38,6 @@
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/blueshield.rsi
-    - type: StealTarget
-      stealGroup: HeadCloak
 
 - type: entity
   parent: ClothingNeckBase
