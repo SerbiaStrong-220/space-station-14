@@ -23,6 +23,7 @@ using Robust.Shared.Utility;
 using Content.Shared.UserInterface;
 using Robust.Shared.Prototypes;
 using Content.Server.SS220.CruiseControl;
+using Content.Shared.Access.Systems;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -58,7 +59,11 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         SubscribeLocalEvent<ShuttleConsoleComponent, ComponentShutdown>(OnConsoleShutdown);
         SubscribeLocalEvent<ShuttleConsoleComponent, PowerChangedEvent>(OnConsolePowerChange);
         SubscribeLocalEvent<ShuttleConsoleComponent, AnchorStateChangedEvent>(OnConsoleAnchorChange);
-        SubscribeLocalEvent<ShuttleConsoleComponent, ActivatableUIOpenAttemptEvent>(OnConsoleUIOpenAttempt);
+
+        // ss220 add ui requires access start (#282)
+        SubscribeLocalEvent<ShuttleConsoleComponent, ActivatableUIOpenAttemptEvent>(OnConsoleUIOpenAttempt, after: [typeof(ActivatableUIRequiresAccessSystem)]);
+        // ss220 add ui requires access end
+
         Subs.BuiEvents<ShuttleConsoleComponent>(ShuttleConsoleUiKey.Key, subs =>
         {
             subs.Event<ShuttleConsoleFTLBeaconMessage>(OnBeaconFTLMessage);
@@ -154,6 +159,11 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     private void OnConsoleUIOpenAttempt(EntityUid uid, ShuttleConsoleComponent component,
         ActivatableUIOpenAttemptEvent args)
     {
+        // ss220 add ui requires access start (#282)
+        if (args.Cancelled)
+            return;
+        // ss220 add ui requires access end
+
         if (!TryPilot(args.User, uid))
             args.Cancel();
     }
