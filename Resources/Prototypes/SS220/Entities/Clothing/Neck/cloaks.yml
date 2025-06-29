@@ -18,6 +18,8 @@
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/captain_white_formal.rsi
+  - type: StealTarget
+    stealGroup: HeadCloak
 
 - type: entity
   parent: ClothingNeckBase
@@ -36,6 +38,8 @@
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/blueshield.rsi
+    - type: StealTarget
+      stealGroup: HeadCloak
 
 - type: entity
   parent: ClothingNeckBase
