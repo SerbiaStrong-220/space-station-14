@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Language.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Language.EncryptionMethods;
@@ -39,6 +40,9 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
     [DataField]
     public List<SyllablesSpecialCharacter> SpecialCharacters = new();
 
+    [DataField]
+    public string ReplaceDictonary;
+
     private int _inputSeed;
     private bool _capitalize = false;
 
@@ -54,6 +58,8 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
             return message;
 
         var random = IoCManager.Resolve<IRobustRandom>();
+        var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
+        var locManager = IoCManager.Resolve<ILocalizationManager>();
         _inputSeed = seed ?? random.Next();
         _capitalize = char.IsUpper(message[0]);
 
@@ -62,7 +68,7 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
         {
             var word = m.Value.ToLower();
             seed = _inputSeed + SharedLanguageSystem.GetSeedFromString(word);
-            var scrambledWord = ScrambleWord(m.Value, seed.Value);
+            var scrambledWord = ScrambleWord(m.Value, seed.Value, prototypeManager, locManager);
             result.Append(scrambledWord);
         }
 
@@ -73,8 +79,26 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
         return result.ToString().Trim();
     }
 
-    private string ScrambleWord(string word, int seed)
+    private string ScrambleWord(string word, int seed, IPrototypeManager prototypeManager, ILocalizationManager locManager)
     {
+        if (prototypeManager.TryIndex<LanguageReplacementsPrototype>(ReplaceDictonary, out var prototype))
+        {
+            foreach (var (first, replace) in prototype.Replacements)
+            {
+                if (word.ToLower() == locManager.GetString(first))
+                {
+                    var replacedWord = locManager.GetString(replace);
+                    if (_capitalize)
+                    {
+                        _capitalize = false;
+                        replacedWord = string.Concat(replacedWord.Substring(0, 1).ToUpper(), replacedWord.AsSpan(1));
+                        return replacedWord + " ";
+                    }
+                    else
+                        return replacedWord + " ";
+                }
+            }
+        }
         var random = new System.Random(seed);
         var scrambledMessage = new StringBuilder();
         var scrambledLength = word.Length * ScrambledLengthCoefficient;
