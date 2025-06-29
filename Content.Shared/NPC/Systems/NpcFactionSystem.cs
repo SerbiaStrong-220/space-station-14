@@ -225,6 +225,11 @@ public sealed partial class NpcFactionSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, false) || !Resolve(other, ref other.Comp, false))
             return false;
 
+        //ss220 add tarot card start
+        if (ent.Comp.FriendlyEntities != null && ent.Comp.FriendlyEntities.Contains(other.Owner))
+            return true;
+        //ss220 add tarot card end
+
         return ent.Comp.Factions.Overlaps(other.Comp.Factions) || ent.Comp.FriendlyFactions.Overlaps(other.Comp.Factions);
     }
 
@@ -304,6 +309,28 @@ public sealed partial class NpcFactionSystem : EntitySystem
         sourceFaction.Hostile.Add(target);
         RefreshFactions();
     }
+
+    //ss220 add friendly/hostile entities for npc start
+    public void MakeFriendlyEntities(EntityUid npc, EntityUid target)
+    {
+        if (!TryComp<NpcFactionMemberComponent>(npc, out var npcFaction))
+            return;
+
+        npcFaction.FriendlyEntities ??= [];
+
+        npcFaction.FriendlyEntities.Add(target);
+    }
+
+    public void MakeHostileEntities(EntityUid npc, EntityUid target)
+    {
+        if (!TryComp<NpcFactionMemberComponent>(npc, out var npcFaction))
+            return;
+
+        npcFaction.FriendlyEntities ??= [];
+
+        npcFaction.FriendlyEntities.Remove(target);
+    }
+    //ss220 add friendly/hostile entities for npc end
 
     private void RefreshFactions()
     {
