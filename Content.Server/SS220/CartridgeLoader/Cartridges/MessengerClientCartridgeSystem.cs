@@ -1,19 +1,19 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Administration.Logs;
+using Content.Server.CartridgeLoader;
 using Content.Server.Chat.Systems;
-using Content.Server.DeviceNetwork;
 using Content.Server.DeviceNetwork.Systems;
-using Content.Server.Messenger;
+using Content.Server.SS220.Messenger;
 using Content.Shared.CartridgeLoader;
-using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
-using Content.Shared.Messenger;
 using Content.Shared.PDA.Ringer;
+using Content.Shared.SS220.CartridgeLoader.Cartridges;
+using Content.Shared.SS220.Messenger;
 
-namespace Content.Server.CartridgeLoader.Cartridges;
+namespace Content.Server.SS220.CartridgeLoader.Cartridges;
 
 public sealed class MessengerClientCartridgeSystem : EntitySystem
 {
