@@ -16,7 +16,7 @@
         maxDistance: 5
         variation: 0.2
     icon:
-      sprite: SS220/Interface/Actions/magic_spells_other.rsi # SS220 Wizard getting used to
+      sprite: SS220/Interface/Actions/Magic/spells_paradise.rsi # SS220 Wizard getting used to
       state: item_recall
   - type: InstantAction
     event: !type:OnItemRecallActionEvent

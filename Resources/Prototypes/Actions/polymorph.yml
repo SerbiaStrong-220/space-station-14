@@ -41,7 +41,7 @@
   - type: Action
     icon:
       # SS220 Wizard getting used to Begin
-      sprite: SS220/Interface/Actions/magic_spells_other.rsi
+      sprite: SS220/Interface/Actions/Magic/spells_paradise.rsi
       state: nullrod
       # SS220 Wizard getting used to End
   - type: InstantAction
@@ -58,7 +58,7 @@
   - type: Action
     useDelay: 30
     icon:
-      sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
+      sprite: SS220/Interface/Actions/Magic/spells_goon.rsi # SS220 Wizard getting used to
       state: jaunt
   - type: InstantAction
     event: !type:PolymorphActionEvent

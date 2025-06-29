@@ -19,7 +19,7 @@
     itemIconStyle: BigAction #SS220 I guess..
     useDelay: 15
     icon:
-      sprite: SS220/Interface/Actions/actions_revenant.rsi
+      sprite: SS220/Interface/Actions/Antags/revenant.rsi
       state: defile
   - type: InstantAction
     event: !type:RevenantDefileActionEvent
@@ -34,7 +34,7 @@
     #SS220 revenant-sprite-port begin
     itemIconStyle: BigAction
     icon:
-      sprite: SS220/Interface/Actions/actions_revenant.rsi
+      sprite: SS220/Interface/Actions/Antags/revenant.rsi
       state: overloadlight
     #SS220 revenant-sprite-port end
     useDelay: 20
@@ -63,7 +63,7 @@
     #SS220 revenant-sprite-port begin
     itemIconStyle: BigAction
     icon:
-      sprite: SS220/Interface/Actions/actions_revenant.rsi
+      sprite: SS220/Interface/Actions/Antags/revenant.rsi
       state: malfunction
     #SS220 revenant-sprite-port end
     useDelay: 20

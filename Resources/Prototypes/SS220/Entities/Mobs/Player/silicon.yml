@@ -5,7 +5,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi # SS220-Resprite
       state: crew_monitor
     keywords: [ "AI", "console", "interface" ]
     priority: -21
@@ -19,7 +19,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi # SS220-Resprite
       state: comms_console
     keywords: [ "AI", "console", "interface" ]
     priority: -20
@@ -33,7 +33,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi # SS220-Resprite
       state: criminal_records
     keywords: [ "AI", "console", "interface" ]
     priority: -19
@@ -47,7 +47,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi # SS220-Resprite
       state: robotics_console
     keywords: [ "AI", "console", "interface" ]
     priority: -18
@@ -61,7 +61,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi # SS220-Resprite
       state: station_map
     keywords: [ "AI", "console", "interface" ]
     priority: -17
@@ -75,7 +75,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi # SS220-Resprite
       state: power_console
     keywords: [ "AI", "console", "interface" ]
     priority: -16
@@ -89,7 +89,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi # SS220-Resprite
       state: alert_console
     keywords: [ "AI", "console", "interface" ]
     priority: -15
@@ -103,7 +103,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi # SS220-Resprite
       state: mass_scanner
     keywords: [ "AI", "console", "interface" ]
     priority: -14
@@ -117,7 +117,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi # SS220-Resprite
       state: cargo_console
     keywords: [ "AI", "console", "interface" ]
     priority: -13
@@ -131,7 +131,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi # SS220-Resprite
       state: rad_console
     keywords: [ "AI", "console", "interface" ]
     priority: -12
@@ -145,7 +145,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi # SS220-Resprite
       state: solar_console
     keywords: [ "AI", "console", "interface" ]
     priority: -11
@@ -159,7 +159,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi # SS220-Resprite
       state: sm_console
     keywords: [ "AI", "console", "interface" ]
     priority: -10

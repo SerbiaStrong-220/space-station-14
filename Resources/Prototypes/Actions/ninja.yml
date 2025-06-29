@@ -9,10 +9,10 @@
     priority: -13
     # ss220 actions resprites start
     icon:
-      sprite: SS220/Interface/Actions/ninja.rsi
+      sprite: SS220/Interface/Actions/Antags/ninja.rsi
       state: ninjaGlovesOff
     iconOn:
-      sprite: SS220/Interface/Actions/ninja.rsi
+      sprite: SS220/Interface/Actions/Antags/ninja.rsi
       state: ninjaGlovesOn
     itemIconStyle: NoItem
     # ss220 actions resprites end
@@ -30,7 +30,7 @@
   - type: Action
     useDelay: 0.5
     icon:
-      sprite: SS220/Interface/Actions/ninja.rsi # ss220 actions resprites
+      sprite: SS220/Interface/Actions/Antags/ninja.rsi # ss220 actions resprites
       state: ninjaThrowingStar # ss220 actions resprites
     itemIconStyle: NoItem
     priority: -10
@@ -46,7 +46,7 @@
   - type: Action
     useDelay: 1
     icon:
-      sprite: SS220/Interface/Actions/ninja.rsi # ss220 actions resprites
+      sprite: SS220/Interface/Actions/Antags/ninja.rsi # ss220 actions resprites
       state: ninjaTeleport # ss220 actions resprites
     itemIconStyle: NoItem
     priority: -11
@@ -61,7 +61,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/ninja.rsi # ss220 actions resprites
+      sprite: SS220/Interface/Actions/Antags/ninja.rsi # ss220 actions resprites
       state: ninjaEMP # ss220 actions resprites
     itemIconStyle: NoItem # ss220 actions resprites
     priority: -13
@@ -77,7 +77,7 @@
   - type: Action
     # have to plan (un)cloaking ahead of time
     icon: # ss220 actions resprites
-      sprite: SS220/Interface/Actions/ninja.rsi # ss220 actions resprites
+      sprite: SS220/Interface/Actions/Antags/ninja.rsi # ss220 actions resprites
       state: ninjaInvisible # ss220 actions resprites
     itemIconStyle: NoItem # ss220 actions resprites
     useDelay: 5
@@ -94,7 +94,7 @@
   components:
   - type: Action
     icon:
-      sprite: SS220/Interface/Actions/ninja.rsi # ss220 actions resprites
+      sprite: SS220/Interface/Actions/Antags/ninja.rsi # ss220 actions resprites
       state: ninjadash # ss220 actions resprites
     itemIconStyle: NoItem
     sound:

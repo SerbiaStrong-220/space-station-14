@@ -9,7 +9,7 @@
     itemIconStyle: BigAction
     icon:
     # SS220 Wizard getting used to Begin
-      sprite: SS220/Interface/Actions/magic_spells_other.rsi
+      sprite: SS220/Interface/Actions/Magic/spells_paradise.rsi
       state: ghost
     # SS220 Wizard getting used to End
   - type: InstantAction
@@ -29,7 +29,7 @@
     itemIconStyle: BigAction
     icon:
     # SS220 Wizard getting used to Begin
-      sprite: SS220/Interface/Actions/magic_spells_other.rsi
+      sprite: SS220/Interface/Actions/Magic/spells_paradise.rsi
       state: gun
     # SS220 Wizard getting used to End
   - type: InstantAction
@@ -180,7 +180,7 @@
     useDelay: 300
     itemIconStyle: BigAction
     icon:
-      sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
+      sprite: SS220/Interface/Actions/Magic/spells_goon.rsi # SS220 Wizard getting used to
       state: magicmissile
   - type: InstantAction
     event: !type:RandomGlobalSpawnSpellEvent

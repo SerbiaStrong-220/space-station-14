@@ -7,7 +7,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite: SS220/Interface/Actions/bible.rsi, state: exorcism }
+    icon: { sprite: SS220/Interface/Actions/Jobs/chaplain.rsi, state: exorcism }
     itemIconStyle: BigAction
     useDelay: 10
   - type: InstantAction

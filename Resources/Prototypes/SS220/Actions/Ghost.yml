@@ -5,7 +5,7 @@
   components:
   - type: Action
     useDelay: 1200
-    icon: SS220/Interface/Actions/respawn.png
+    icon: SS220/Interface/Actions/Ghost/respawn.png
     checkCanInteract: false
   - type: InstantAction
     event: !type:RespawnActionEvent

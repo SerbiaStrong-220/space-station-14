@@ -4,7 +4,7 @@
   description: action-cqc-blowback-desc
   components:
   - type: Action
-    icon: SS220/Interface/Actions/CQCCombat/blowback.png
+    icon: SS220/Interface/Actions/Different/cqc/blowback.png
     useDelay: 7
     priority: -10
   - type: TargetAction
@@ -17,7 +17,7 @@
   description: action-cqc-punch-desc
   components:
   - type: Action
-    icon: SS220/Interface/Actions/CQCCombat/punch.png
+    icon: SS220/Interface/Actions/Different/cqc/punch.png
     useDelay: 2
     priority: -10
   - type: TargetAction
@@ -30,7 +30,7 @@
   description: action-cqc-disarm-desc
   components:
   - type: Action
-    icon: SS220/Interface/Actions/CQCCombat/disarm.png
+    icon: SS220/Interface/Actions/Different/cqc/disarm.png
     useDelay: 4
     checkCanInteract: false
     priority: -10
@@ -44,7 +44,7 @@
   description: action-cqc-longsleep-desc
   components:
   - type: Action
-    icon: SS220/Interface/Actions/CQCCombat/longsleep.png
+    icon: SS220/Interface/Actions/Different/cqc/longsleep.png
     useDelay: 40
     priority: -10
   - type: InstantAction

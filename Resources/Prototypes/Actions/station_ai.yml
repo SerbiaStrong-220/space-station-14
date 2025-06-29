@@ -10,8 +10,8 @@
     itemIconStyle: BigAction
     icon:
       # SS220-resprite start
-      #sprite: Interface/Actions/actions_ai.rsi
-      sprite: SS220/Interface/Actions/actions_ai.rsi
+      #sprite: Interface/Actions/Silicon/ai.rsi
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi
       state: ai_core
       # SS220-resprite end
   - type: InstantAction
@@ -27,8 +27,8 @@
     priority: -5
     icon:
       # SS220-resprite start
-      #sprite: Interface/Actions/actions_ai.rsi
-      sprite: SS220/Interface/Actions/actions_ai.rsi
+      #sprite: Interface/Actions/Silicon/ai.rsi
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi
       state: camera_light
       # SS220-resprite end
   - type: InstantAction
@@ -58,8 +58,8 @@
     itemIconStyle: NoItem
     icon:
       # SS220-resprite start
-      #sprite: SS220/Interface/Actions/actions_ai.rsi
-      sprite: SS220/Interface/Actions/actions_ai.rsi
+      #sprite: SS220/Interface/Actions/Silicon/ai.rsi
+      sprite: SS220/Interface/Actions/Silicon/ai.rsi
       state: state_laws
       # SS220-resprite end
     useDelay: 0.5
