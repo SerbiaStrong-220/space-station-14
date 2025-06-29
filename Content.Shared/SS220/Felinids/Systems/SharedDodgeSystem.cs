@@ -10,6 +10,7 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.Felinids.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 using System.Linq;
 
@@ -28,6 +29,18 @@ public sealed class SharedDodgeSystem : EntitySystem
 
         SubscribeLocalEvent<DodgeComponent, HitScanReflectAttemptEvent>(OnHitscanAttempt);
         SubscribeLocalEvent<DodgeComponent, ProjectileReflectAttemptEvent>(OnProjectileAttempt);
+        SubscribeLocalEvent<DodgeComponent, PreventCollideEvent>(OnPreventCollide);
+    }
+
+    private void OnPreventCollide(Entity<DodgeComponent> ent, ref PreventCollideEvent args)
+    {
+        UpdateDodgeChance(ent, out var dodgeChance);
+
+        if (dodgeChance <= 0
+        || !_random.Prob(dodgeChance))
+            return;
+
+        args.Cancelled = true;
     }
 
     private void OnHitscanAttempt(Entity<DodgeComponent> ent, ref HitScanReflectAttemptEvent args)
@@ -73,15 +86,37 @@ public sealed class SharedDodgeSystem : EntitySystem
             }
             if (TryComp<DamageableComponent>(ent, out var damageable))
             {
-                var damagePercent = (float)damageable.TotalDamage / (float)mobThresholds.Thresholds.Last().Key;
-                dodgeChance -= damagePercent * damagePercent * 0.32f * ent.Comp.DamageAffect;
+                // Результаты соответствуют таблице диз.дока
+                // 1 урона (отлично), dodgeChance -= ~0
+                // 13 урона (хорошо), dodgeChance -= ~0
+                // 38 урона (не очень), dodgeChance -= ~0
+                // 63 урона (плохо), dodgeChance -= ~0.013f // результат слегка выше, чем в таблице, не критично
+                // 88 урона (ужасно), dodgeChance -= ~0.025f
+                var sex2 = mobThresholds.Thresholds.ElementAt(mobThresholds.Thresholds.Count - 2);
+                var sex1 = mobThresholds.Thresholds.ElementAt(mobThresholds.Thresholds.Count - 1);
+                var damagePercent = (float)damageable.TotalDamage / (float)mobThresholds.Thresholds.ElementAt(mobThresholds.Thresholds.Count - 2).Key;
+                dodgeChance -= damagePercent * damagePercent * ent.Comp.BaseDodgeChance * ent.Comp.DamageAffect;
             }
         }
 
         if (TryComp<HungerComponent>(ent, out var hunger) && _hunger.GetHunger(hunger) < hunger.Thresholds[HungerThreshold.Okay])
-            dodgeChance -= ent.Comp.HungerAffect * (hunger.Thresholds[HungerThreshold.Okay] - _hunger.GetHunger(hunger)) / 1000f;
+        {
+            // 200 -  максимум
+            // 150 < окей - 0f %
+            // 100 < голодаем - 0.05f %
+            // 50 < Очень голодны - 0.1f %
+            var hungerPercent = _hunger.GetHunger(hunger) / hunger.Thresholds[HungerThreshold.Okay];
+            dodgeChance -= ent.Comp.BaseDodgeChance * ent.Comp.HungerAffect / hungerPercent;
+        }
 
         if (TryComp<ThirstComponent>(ent, out var thirst) && thirst.CurrentThirst < thirst.ThirstThresholds[ThirstThreshold.Okay])
-            dodgeChance -= ent.Comp.ThirstAffect * (thirst.ThirstThresholds[ThirstThreshold.Okay] - thirst.CurrentThirst) / 3000f;
+        {
+            // 600 -  максимум
+            // 450 < окей - 0f %
+            // 300 < жажда - 0.05f %
+            // 150 < Сильная жажда - 0.1f %
+            var thirstPercent = thirst.CurrentThirst / thirst.ThirstThresholds[ThirstThreshold.Okay];
+            dodgeChance -= ent.Comp.BaseDodgeChance * ent.Comp.ThirstAffect / thirstPercent;
+        }
     }
 }

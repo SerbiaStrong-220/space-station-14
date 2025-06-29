@@ -15,19 +15,19 @@ public sealed partial class DodgeComponent : Component
 
     /// <summary>
     ///     Multiplier of the effect of damage on the chance of dodge.
-    /// </summary>s
+    /// </summary>
     [DataField]
-    public float DamageAffect = 1f;
+    public float DamageAffect = 0.35f;
 
     /// <summary>
     ///     Multiplier of the effect of hunger on the chance of dodge.
-    /// </summary>s
+    /// </summary>
     [DataField]
-    public float HungerAffect = 1f;
+    public float HungerAffect = 0.2f;
 
     /// <summary>
     ///     Multiplier of the effect of thirst on the chance of dodge.
-    /// </summary>s
+    /// </summary>
     [DataField]
-    public float ThirstAffect = 1f;
+    public float ThirstAffect = 0.2f;
 }
