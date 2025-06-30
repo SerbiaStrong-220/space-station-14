@@ -240,6 +240,15 @@
       visible: false
   - type: Icon
     state: pda-security
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - AstroNavCartridge
+    - MessengerCartridgeClient
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
