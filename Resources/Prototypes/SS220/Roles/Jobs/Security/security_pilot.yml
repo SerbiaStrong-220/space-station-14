@@ -29,6 +29,7 @@
   id: SecurityPilotGear
   equipment:
     ears: ClothingHeadsetSecurity
+    id: SecurityPilotPDA
     belt: ClothingBeltSecurityFilled
     gloves: ClothingHandsGlovesCombat
     pocket1: WeaponPistolMk58Nonlethal
