@@ -211,7 +211,7 @@
   #ss220 add pdaidpainter end
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: SecurityPilotPDA
   name: КПК пилота СБ
   description: Красный, чтобы скрыть пятна крови ассистента.

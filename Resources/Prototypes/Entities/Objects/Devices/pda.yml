@@ -1471,6 +1471,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
+    - MessengerCartridgeClient
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2236,6 +2237,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
+    - MessengerCartridgeClient
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2285,6 +2287,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - MedTekCartridge
+    - MessengerCartridgeClient
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2494,6 +2497,16 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-seniorofficer
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - AstroNavCartridge
+    - LogProbeCartridge
+    - MessengerCartridgeClient
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
