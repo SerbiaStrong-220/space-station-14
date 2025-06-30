@@ -37,6 +37,12 @@ public sealed class SharedDodgeSystem : EntitySystem
 
     private void OnPreventCollide(Entity<DodgeComponent> ent, ref PreventCollideEvent args)
     {
+        if (ent.Comp.EntityWhitelist.Contains(args.OtherEntity))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if (args.OtherFixture.Hard)
             return;
 
@@ -44,12 +50,6 @@ public sealed class SharedDodgeSystem : EntitySystem
 
         if (!TryComp<ProjectileComponent>(collidedEntity, out _) && !TryComp<DamageOnHighSpeedImpactComponent>(collidedEntity, out _))
             return;
-
-        if (ent.Comp.EntityWhitelist.Contains(collidedEntity))
-        {
-            args.Cancelled = true;
-            return;
-        }
 
         GetDodgeChance(ent, out var dodgeChance);
 
