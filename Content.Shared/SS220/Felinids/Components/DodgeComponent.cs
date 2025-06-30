@@ -23,11 +23,13 @@ public sealed partial class DodgeComponent : Component
     ///     Multiplier of the effect of hunger on the chance of dodge.
     /// </summary>
     [DataField]
-    public float HungerAffect = 0.2f;
+    public float HungerAffect = 0.8f;
 
     /// <summary>
     ///     Multiplier of the effect of thirst on the chance of dodge.
     /// </summary>
     [DataField]
-    public float ThirstAffect = 0.2f;
+    public float ThirstAffect = 0.8f;
+
+    public List<EntityUid> EntityWhitelist = [];
 }

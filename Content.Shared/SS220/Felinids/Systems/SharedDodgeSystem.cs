@@ -2,9 +2,11 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Projectiles;
@@ -12,7 +14,7 @@ using Content.Shared.SS220.Felinids.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
-using System.Linq;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Felinids.Systems;
 
@@ -22,6 +24,7 @@ public sealed class SharedDodgeSystem : EntitySystem
     [Dependency] private readonly SharedProjectileSystem _projectileSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
+    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
 
     public override void Initialize()
     {
@@ -34,14 +37,33 @@ public sealed class SharedDodgeSystem : EntitySystem
 
     private void OnPreventCollide(Entity<DodgeComponent> ent, ref PreventCollideEvent args)
     {
+        if (args.OtherFixture.Hard)
+            return;
+
+        var collidedEntity = args.OtherEntity;
+
+        if (!TryComp<ProjectileComponent>(collidedEntity, out _) && !TryComp<DamageOnHighSpeedImpactComponent>(collidedEntity, out _))
+            return;
+
+        if (ent.Comp.EntityWhitelist.Contains(collidedEntity))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         GetDodgeChance(ent, out var dodgeChance);
 
         if (dodgeChance <= 0
         || !_random.Prob(dodgeChance))
             return;
 
-        _adminLogger.Add(LogType.HitScanHit, LogImpact.Medium, $"{ToPrettyString(ent)} dodged {ToPrettyString(args.OtherEntity)} from throw");
         args.Cancelled = true;
+        _adminLogger.Add(LogType.ThrowHit, LogImpact.Medium, $"{ToPrettyString(ent)} dodged {ToPrettyString(collidedEntity)} from throw hit");
+
+        ent.Comp.EntityWhitelist.Add(collidedEntity);
+        // OnPreventCollide вызывается множество раз, пока предмет пролетает через существо.
+        // Таймер на 150 миллисекунд для предотвращения множественных проверок в этот промежуток.
+        Timer.Spawn(150, () => { ent.Comp.EntityWhitelist.Remove(collidedEntity); });
     }
 
     private void OnHitscanAttempt(Entity<DodgeComponent> ent, ref HitScanReflectAttemptEvent args)
@@ -85,23 +107,26 @@ public sealed class SharedDodgeSystem : EntitySystem
                 dodgeChance = 0f;
                 return;
             }
-            if (TryComp<DamageableComponent>(ent, out var damageable))
+            if (TryComp<DamageableComponent>(ent, out var damageable)
+                && _mobThreshold.TryGetThresholdForState(ent, MobState.Critical, out var criticalThreshold, mobThresholds))
             {
-                var damagePercent = (float)damageable.TotalDamage / (float)mobThresholds.Thresholds.ElementAt(mobThresholds.Thresholds.Count - 2).Key;
+                var damagePercent = (float)damageable.TotalDamage / (float)criticalThreshold;
                 dodgeChance -= damagePercent * damagePercent * ent.Comp.BaseDodgeChance * ent.Comp.DamageAffect;
             }
         }
 
-        if (TryComp<HungerComponent>(ent, out var hunger) && _hunger.GetHunger(hunger) < hunger.Thresholds[HungerThreshold.Okay])
+        if (TryComp<HungerComponent>(ent, out var hunger)
+            && _hunger.GetHunger(hunger) < hunger.Thresholds[HungerThreshold.Okay])
         {
-            var hungerPercent = _hunger.GetHunger(hunger) / hunger.Thresholds[HungerThreshold.Okay];
-            dodgeChance -= ent.Comp.BaseDodgeChance * ent.Comp.HungerAffect / hungerPercent;
+            var hungerPercent = Math.Clamp(1 - (_hunger.GetHunger(hunger) / hunger.Thresholds[HungerThreshold.Okay]), 0f, 1f);
+            dodgeChance -= ent.Comp.BaseDodgeChance * ent.Comp.HungerAffect * hungerPercent;
         }
 
-        if (TryComp<ThirstComponent>(ent, out var thirst) && thirst.CurrentThirst < thirst.ThirstThresholds[ThirstThreshold.Okay])
+        if (TryComp<ThirstComponent>(ent, out var thirst)
+            && thirst.CurrentThirst < thirst.ThirstThresholds[ThirstThreshold.Okay])
         {
-            var thirstPercent = thirst.CurrentThirst / thirst.ThirstThresholds[ThirstThreshold.Okay];
-            dodgeChance -= ent.Comp.BaseDodgeChance * ent.Comp.ThirstAffect / thirstPercent;
+            var thirstPercent = Math.Clamp(1 - (thirst.CurrentThirst / thirst.ThirstThresholds[ThirstThreshold.Okay]), 0f, 1f);
+            dodgeChance -= ent.Comp.BaseDodgeChance * ent.Comp.ThirstAffect * thirstPercent;
         }
     }
 }
