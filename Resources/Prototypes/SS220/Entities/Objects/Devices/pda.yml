@@ -103,8 +103,7 @@
       visible: false
   - type: Icon
     state: pda-magistrate
-#SS220 SD-pda-some-fixes start
-  - type: CartridgeLoader 
+  - type: CartridgeLoader
     preinstalled:
     - CrewManifestCartridge
     - NotekeeperCartridge
@@ -112,7 +111,6 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - MessengerCartridgeClient
-#SS220 SD-pda-some-fixes end
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -250,8 +248,7 @@
       visible: false
   - type: Icon
     state: pda-security
-#SS220 SD-pda-some-fixes start
-  - type: CartridgeLoader 
+  - type: CartridgeLoader
     preinstalled:
     - CrewManifestCartridge
     - NotekeeperCartridge
@@ -260,7 +257,6 @@
     - WantedListCartridge
     - AstroNavCartridge
     - MessengerCartridgeClient
-#SS220 SD-pda-some-fixes end
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
