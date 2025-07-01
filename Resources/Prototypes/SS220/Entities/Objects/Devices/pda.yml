@@ -72,7 +72,7 @@
   #ss220 add pdaidpainter end
 
 - type: entity
-  parent: BaseSecurityPDA
+  parent: BasePDA
   id: MagistratePDA
   name: magistrate PDA
   description: Concentration of justice. Don't drown!
@@ -103,6 +103,16 @@
       visible: false
   - type: Icon
     state: pda-magistrate
+#SS220 SD-pda-some-fixes start
+  - type: CartridgeLoader 
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - MessengerCartridgeClient
+#SS220 SD-pda-some-fixes end
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
