@@ -1471,7 +1471,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
-    - MessengerCartridgeClient
+    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2237,7 +2237,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
-    - MessengerCartridgeClient
+    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2504,9 +2504,8 @@
     - NanoTaskCartridge
     - NewsReaderCartridge
     - WantedListCartridge
-    - AstroNavCartridge
     - LogProbeCartridge
-    - MessengerCartridgeClient
+    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
