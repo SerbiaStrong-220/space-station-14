@@ -2287,7 +2287,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - MedTekCartridge
-    - MessengerCartridgeClient
+    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
