@@ -1325,6 +1325,7 @@
   abstract: true
   components:
   - type: CombatMode
+  - type: Blindable #SS220 Fix Ancestor Mob Blindable
 #SS220 languages tweaks begin
   - type: Language
     availableLanguages:
