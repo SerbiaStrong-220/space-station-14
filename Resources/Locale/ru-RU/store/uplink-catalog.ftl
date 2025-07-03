@@ -112,7 +112,7 @@ uplink-radio-jammer-name = Глушитель связи
 uplink-radio-jammer-desc = При активации это устройство блокирует любую исходящую поблизости радиосвязь и скрывает датчики комбинезонов с мониторов. (Замаскирован под оценочный инструмент.)
 uplink-syndicate-weapon-module-name = Оружейный модуль киборга
 # SS220 Fix Weapon Module Desc Begin
-uplink-syndicate-weapon-module-desc = Модернизирует киборга с помощью гадюки и лазерного кинжала.
+uplink-syndicate-weapon-module-desc = Модернизирует киборга с помощью эфа и энергокинжала.
 # SS220 Fix Weapon Module Desc End
 uplink-syndicate-martyr-module-name = Модуль киборга Мученик
 uplink-syndicate-martyr-module-desc = Превратите с помощью этого модуля своего емагнутого друга-борга в ходячую бомбу. Убедитесь, что они верны вашему делу, результаты могут варьироваться.
