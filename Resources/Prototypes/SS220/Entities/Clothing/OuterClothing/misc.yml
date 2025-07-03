@@ -73,7 +73,7 @@
   id: ClothingOuterScarletTyphoon
   name: the scarlet typhoon
   description: You know, it's kind of awkward for me to introduce myself, but if you insist, then I'm a peaceful hunter chasing a mirage named love.
-  suffix: For emagg clothing vendomat
+  suffix: For emagg clothesmate
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Misc/scarlet_typhoon.rsi
