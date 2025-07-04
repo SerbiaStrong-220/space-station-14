@@ -1,3 +1,4 @@
+using Content.Server.SS220.AdditionalInfoForRoundEnd;
 using Content.Shared.Destructible;
 using Content.Shared.Mining;
 using Content.Shared.Mining.Components;
@@ -15,6 +16,9 @@ public sealed class MiningSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    //ss220 add additional info for round start
+    [Dependency] private readonly RoundEndInfoManager _infoManager = default!;
+    //ss220 add additional info for round end
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -40,6 +44,10 @@ public sealed class MiningSystem : EntitySystem
         {
             Spawn(proto.OreEntity, coords.Offset(_random.NextVector2(0.2f)));
         }
+
+        //ss220 add additional info for round start
+        _infoManager.EnsureInfo<OreInfo>().TotalOre += toSpawn;
+        //ss220 add additional info for round end
     }
 
     private void OnMapInit(EntityUid uid, OreVeinComponent component, MapInitEvent args)
