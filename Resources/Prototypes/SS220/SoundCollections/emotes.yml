@@ -302,3 +302,13 @@
   - /Audio/SS220/Voice/Goal/wycc_goal1.ogg
   - /Audio/SS220/Voice/Goal/wycc_goal2.ogg
   - /Audio/SS220/Voice/Goal/wycc_goal3.ogg
+
+- type: soundCollection
+  id: TajaranMeows
+  files:
+  - /Audio/SS220/Emotes/Tajaran/tajaran_meow.ogg
+
+- type: soundCollection
+  id: TajaranAnnoyedMeows
+  files:
+  - /Audio/SS220/Emotes/Tajaran/annoyed_tajaran_meow.ogg
