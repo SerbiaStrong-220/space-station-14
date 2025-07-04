@@ -246,7 +246,7 @@ public sealed partial class LanguageMessage
         {
             var node = Nodes[i];
             var scrambled = sanitize && listener != null && !_languageSystem.CanUnderstand(listener.Value, node.Language.ID);
-            if (i == 0)
+            if (message.Length <= 0 || message.EndsWith(' '))
                 message += node.GetMessage(scrambled, colored);
             else
                 message += " " + node.GetMessage(scrambled, colored);
@@ -263,7 +263,7 @@ public sealed partial class LanguageMessage
         string messageWithLanguageTags = "";
         for (var i = 0; i < Nodes.Count; i++)
         {
-            if (i == 0)
+            if (messageWithLanguageTags.Length <= 0 || messageWithLanguageTags.EndsWith(' '))
             {
                 if (withDefault)
                     messageWithLanguageTags += Nodes[i].GetMessageWithKey();
@@ -285,12 +285,12 @@ public sealed partial class LanguageMessage
     }
 
     /// <summary>
-    /// Changes the message value of each <see cref="Nodes"/> by function
+    /// Changes each node from <see cref="Nodes"/> by action
     /// </summary>
-    public void ChangeInNodeMessage(Func<string, string> func)
+    public void ChangeNodes(Action<LanguageNode> action)
     {
         foreach (var node in Nodes)
-            node.SetMessage(func.Invoke(node.Message));
+            action.Invoke(node);
     }
 }
 
