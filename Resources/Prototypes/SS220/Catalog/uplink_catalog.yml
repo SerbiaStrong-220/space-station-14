@@ -256,26 +256,6 @@
   categories:
   - UplinkWearables
 
-# READD-VEHICLES
-- type: listing
-  id: UplinkSyndicateSegwayCrate
-  name: uplink-syndicate-segway-crate-name
-  description: uplink-syndicate-segway-crate-desc
-  icon: { sprite: /Textures/Objects/Vehicles/syndicatesegway.rsi, state: icon }
-  productEntity: CrateFunSyndicateSegway
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 2
-  cost:
-    Telecrystal: 5
-  categories:
-  - UplinkDeception
-  conditions:
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
-
 #SS220 SpicyUPD begin
 - type: listing
   id: UplinkSpicyPizza
