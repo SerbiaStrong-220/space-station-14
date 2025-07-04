@@ -48,7 +48,7 @@ public sealed partial class UndereducatedSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<UndereducatedComponent, TransformOriginalEvent>(OnBeforeAccent);
+        SubscribeLocalEvent<UndereducatedComponent, TransformOriginalEvent>(TransformMessage);
         SubscribeLocalEvent<UndereducatedComponent, MapInitEvent>(OnMapInit);
         SubscribeNetworkEvent<UndereducatedConfigRequestEvent>(OnConfigReceived);
     }
@@ -76,7 +76,6 @@ public sealed partial class UndereducatedSystem : EntitySystem
     private void OnConfigReceived(UndereducatedConfigRequestEvent args)
     {
         var ent = GetEntity(args.NetEntity);
-
         if (!TryComp<UndereducatedComponent>(ent, out var comp) || comp.Tuned)
             return;
 
@@ -115,7 +114,7 @@ public sealed partial class UndereducatedSystem : EntitySystem
         return false;
     }
 
-    private void OnBeforeAccent(Entity<UndereducatedComponent> ent, ref TransformOriginalEvent args)
+    private void TransformMessage(Entity<UndereducatedComponent> ent, ref TransformOriginalEvent args)
     {
         if (string.IsNullOrEmpty(args.Message) || !TryGetLanguageTag(ent, out var tagByRace))
             return;

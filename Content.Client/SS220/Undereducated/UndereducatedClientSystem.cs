@@ -36,8 +36,10 @@ public sealed class UndereducatedClientSystem : EntitySystem
             _window = new UndereducatedWindow(ent.Comp, langList);
             _window.OnClose += () =>
             {
-                if (ent != _playerManager.LocalSession?.AttachedEntity
-                || !TryComp<UndereducatedComponent>(ent, out var comp) || comp.Tuned)
+                if (ent != _playerManager.LocalSession?.AttachedEntity)
+                    return;
+
+                if (!TryComp<UndereducatedComponent>(ent, out var comp) || comp.Tuned)
                     _window = null;
                 else
                 {
