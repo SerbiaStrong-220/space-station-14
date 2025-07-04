@@ -14,6 +14,7 @@ using Content.Shared.FixedPoint;
 using Robust.Client.Graphics;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 using Robust.Client.GameObjects;
+using Content.Client.SS220.UserInterface.System.PinUI;
 
 namespace Content.Client.Chemistry.UI
 {
@@ -96,6 +97,11 @@ namespace Content.Client.Chemistry.UI
 
             Tabs.SetTabTitle(0, Loc.GetString("chem-master-window-input-tab"));
             Tabs.SetTabTitle(1, Loc.GetString("chem-master-window-output-tab"));
+
+            // SS220 add pin button begin
+            var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+            pinButton.Margin = new Thickness(0, 0, 5, 0);
+            // SS220 add pin button end
         }
 
         private ReagentButton MakeReagentButton(string text, ChemMasterReagentAmount amount, ReagentId id, bool isBuffer, string styleClass)
