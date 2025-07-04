@@ -147,6 +147,15 @@
         conditions:
           - !type:ReagentThreshold
             min: 6
+    Poison:
+      effects:
+        - !type:HealthChange
+          conditions:
+            - !type:ReagentThreshold
+              min: 15
+          damage:
+            types:
+              Caustic: 2
 
 - type: reagent
   id: Rice
