@@ -4,7 +4,7 @@
   description: action-toggle-ghostrole-cast-settings-desc
   components:
   - type: Action
-    icon: SS220/Interface/Actions/GhostRoleSettings.png
+    icon: SS220/Interface/Actions/Ghost/GhostRoleSettings.png
     useDelay: 1
     clientExclusive: true
     checkCanInteract: false
@@ -18,7 +18,7 @@
   description: action-toggle-ghostrole-cast-desc
   components:
   - type: Action
-    icon: SS220/Interface/Actions/GhostRoleCast.png
+    icon: SS220/Interface/Actions/Ghost/GhostRoleCast.png
     useDelay: 1
     clientExclusive: true
     checkCanInteract: false
@@ -35,7 +35,7 @@
   description: action-toggle-ghostrole-remove-desc
   components:
   - type: Action
-    icon: SS220/Interface/Actions/GhostRoleRemove.png
+    icon: SS220/Interface/Actions/Ghost/GhostRoleRemove.png
     useDelay: 1
     clientExclusive: true
     checkCanInteract: false
