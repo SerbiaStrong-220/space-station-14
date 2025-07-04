@@ -47,8 +47,10 @@ public sealed class SharedDodgeSystem : EntitySystem
         var collidedEntity = args.OtherEntity;
 
         if (!HasComp<ProjectileComponent>(collidedEntity)
-            && !HasComp<DamageOnHighSpeedImpactComponent>(collidedEntity)
-            && !TryDodge(ent, out _))
+            && !HasComp<DamageOnHighSpeedImpactComponent>(collidedEntity))
+            return;
+
+        if (!TryDodge(ent, out _))
             return;
 
         args.Cancelled = true;
