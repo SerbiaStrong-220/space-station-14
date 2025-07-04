@@ -1,12 +1,15 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Ghost;
+using Content.Server.Zombies;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Traits;
-using Content.Server.Zombies;
+using JetBrains.FormatRipper.Elf;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
@@ -52,16 +55,26 @@ public sealed class LimitationReviveSystem : EntitySystem
 
     private void OnAddReviweDebuffs(Entity<LimitationReviveComponent> ent, ref AddReviweDebuffsEvent args)
     {
+        TryAddTrait(ent);
+    }
+
+    public bool TryAddTrait(Entity<LimitationReviveComponent> ent)
+    {
         //rn i am too tired to check if this ok
         if (!_random.Prob(ent.Comp.ChanceToAddTrait))
-            return;
+            return false;
 
         var traitString = _prototype.Index<WeightedRandomPrototype>(ent.Comp.WeightListProto).Pick(_random);
 
         var traitProto = _prototype.Index<TraitPrototype>(traitString);
 
         if (traitProto.Components is not null)
+        {
             _entityManager.AddComponents(ent, traitProto.Components, false);
+            return true;
+        }
+
+        return false;
     }
 
     private void OnCloning(Entity<LimitationReviveComponent> ent, ref CloningEvent args)
@@ -87,6 +100,8 @@ public sealed class LimitationReviveSystem : EntitySystem
                 continue;
 
             _damageableSystem.TryChangeDamage(ent, limitationRevive.Damage, true);
+
+            TryAddTrait((ent, limitationRevive));
 
             limitationRevive.DamageTime = null;
         }
