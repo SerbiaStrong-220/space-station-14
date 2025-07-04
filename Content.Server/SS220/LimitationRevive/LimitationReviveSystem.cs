@@ -38,12 +38,15 @@ public sealed class LimitationReviveSystem : EntitySystem
         if (args.NewMobState == MobState.Dead)
         {
             ent.Comp.DamageTime = _timing.CurTime + ent.Comp.BeforeDamageDelay;
+            return;
         }
 
         if (args.OldMobState == MobState.Dead)
         {
-            ent.Comp.DamageTime = null;
-            ent.Comp.DeathCounter++;
+            if (ent.Comp.DamageTime == null)
+                ent.Comp.DeathCounter++;
+            else
+                ent.Comp.DamageTime = null;
         }
     }
 

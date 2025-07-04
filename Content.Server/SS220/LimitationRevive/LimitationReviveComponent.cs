@@ -28,7 +28,7 @@ public sealed partial class LimitationReviveComponent : Component
     /// Delay before target takes brain damage
     /// </summary>
     [DataField]
-    public TimeSpan BeforeDamageDelay = TimeSpan.FromSeconds(60);
+    public TimeSpan BeforeDamageDelay = TimeSpan.FromSeconds(180);
 
     /// <summary>
     /// The exact time when the target will take damage
