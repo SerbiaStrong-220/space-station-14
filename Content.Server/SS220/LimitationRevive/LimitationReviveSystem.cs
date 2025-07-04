@@ -1,15 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Ghost;
+using Content.Server.Power.Components;
 using Content.Server.Zombies;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Rejuvenate;
 using Content.Shared.Traits;
-using JetBrains.FormatRipper.Elf;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
@@ -34,6 +33,7 @@ public sealed class LimitationReviveSystem : EntitySystem
         SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnMobStateChanged, before: [typeof(ZombieSystem)]);
         SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
         SubscribeLocalEvent<LimitationReviveComponent, AddReviweDebuffsEvent>(OnAddReviweDebuffs);
+        SubscribeLocalEvent<LimitationReviveComponent, RejuvenateEvent>(OnRejuvenate);
     }
 
     private void OnMobStateChanged(Entity<LimitationReviveComponent> ent, ref MobStateChangedEvent args)
@@ -46,7 +46,7 @@ public sealed class LimitationReviveSystem : EntitySystem
 
         if (args.OldMobState == MobState.Dead)
         {
-            if (ent.Comp.DamageTime == null)
+            if (ent.Comp.DamageTime == null)//is null if we got brain dmg
                 ent.Comp.DeathCounter++;
             else
                 ent.Comp.DamageTime = null;
@@ -70,6 +70,7 @@ public sealed class LimitationReviveSystem : EntitySystem
 
         if (traitProto.Components is not null)
         {
+            ent.Comp.RecievedDebuffs.Add(traitString);
             _entityManager.AddComponents(ent, traitProto.Components, false);
             return true;
         }
@@ -83,6 +84,25 @@ public sealed class LimitationReviveSystem : EntitySystem
         _serialization.CopyTo(ent.Comp, ref targetComp, notNullableOverride: true);
 
         targetComp.DeathCounter = 0;
+    }
+
+    private void OnRejuvenate(Entity<LimitationReviveComponent> ent, ref RejuvenateEvent args)
+    {
+        ent.Comp.DeathCounter = 0;
+        ClearAllRecievedDebuffs(ent);
+    }
+
+    public void ClearAllRecievedDebuffs(Entity<LimitationReviveComponent> ent)
+    {
+        foreach (var debufName in ent.Comp.RecievedDebuffs)
+        {
+            var debufProto = _prototype.Index<TraitPrototype>(debufName);
+
+            if (debufProto.Components is not null)
+                _entityManager.RemoveComponents(ent, debufProto.Components);
+        }
+
+        ent.Comp.RecievedDebuffs = [];
     }
 
     public override void Update(float frameTime)

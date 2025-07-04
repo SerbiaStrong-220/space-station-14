@@ -51,6 +51,9 @@ public sealed partial class LimitationReviveComponent : Component
     [DataField]
     public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";
 
+    [ViewVariables]
+    public List<string> RecievedDebuffs = [];
+
     /// <summary>
     /// The probability from 0 to 1 that a negative feature will be added in case of unsuccessful use of the defibrillator.
     /// </summary>
