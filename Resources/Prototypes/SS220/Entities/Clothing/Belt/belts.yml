@@ -455,7 +455,6 @@
         - WetFloorSign
         - HolosignProjector
         - Plunger
-        - JanicartKeys # SS220 Readd-Vehicles
       components:
         - LightReplacer
         - SmokeOnTrigger

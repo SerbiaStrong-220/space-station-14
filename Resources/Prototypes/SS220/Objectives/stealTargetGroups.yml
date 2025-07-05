@@ -1,11 +1,4 @@
 - type: stealTargetGroup
-  id: VehicleSecway
-  name: steal-target-groups-secway
-  sprite:
-    sprite: Objects/Vehicles/secway.rsi
-    state: icon
-
-- type: stealTargetGroup
   id: EngravedKnuckleduster
   name: steal-target-groups-engraved-knuckleduster
   sprite:

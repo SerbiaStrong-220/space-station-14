@@ -52,7 +52,6 @@
   - RollerBedSpawnFolded
   - CheapRollerBedSpawnFolded
   - EmergencyRollerBedSpawnFolded
-  - VehicleWheelchairFolded #SS220 Readd-Vehicles
 
 - type: latheRecipePack
   id: MedicalClothingStatic

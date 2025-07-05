@@ -95,6 +95,3 @@ ent-MobStevenCrocodileGhostRole = стивен
 ent-SpawnMobStevenCrocodile = Спавнер Стивена
 ghost-role-information-pet-steven-name = Стивен
 ghost-role-information-pet-steven-description = Питомец Магистрата. Символ статуса и силы, преданный друг своего хозяина, который не прочь прикусить деловые бумаги и поиграть с финансовыми документами.
-
-ghost-role-information-taxibot-name = { ent-MobTaxiBot }
-ghost-role-information-taxibot-description = { ent-MobTaxiBot.desc }

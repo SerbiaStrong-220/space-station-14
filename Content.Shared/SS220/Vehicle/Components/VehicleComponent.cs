@@ -49,15 +49,17 @@ public sealed partial class VehicleComponent : Component
 
     /// Use ambient sound component for the idle sound.
 
-    [DataField("hornAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string? HornAction = "ActionVehicleHorn";
+    // remove vehicle begin
+    //[DataField("hornAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    //public string? HornAction = "ActionVehicleHorn";
 
-    /// <summary>
-    /// The action for the horn (if any)
-    /// </summary>
-    [DataField("hornActionEntity")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public EntityUid? HornActionEntity;
+    ///// <summary>
+    ///// The action for the horn (if any)
+    ///// </summary>
+    //[DataField("hornActionEntity")]
+    //[ViewVariables(VVAccess.ReadWrite)]
+    //public EntityUid? HornActionEntity;
+    // remove vehicle end
 
     /// <summary>
     /// Whether the vehicle has a key currently inside it or not.
