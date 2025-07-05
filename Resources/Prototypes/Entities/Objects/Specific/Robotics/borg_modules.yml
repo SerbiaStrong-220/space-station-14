@@ -581,10 +581,6 @@
   - type: ItemBorgModule
     items:
     - SheetSteelLingering0
-    #ss220 add plasteel and rglass for borg module start
-    - SheetPlasteelLingering0
-    - SheetRGlassLingering0
-    #ss220 add plasteel and rglass for borg module end
     - SheetGlassLingering0
     - SheetRGlassLingering0
     - SheetRPGlassLingering0

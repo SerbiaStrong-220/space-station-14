@@ -103,6 +103,14 @@
       visible: false
   - type: Icon
     state: pda-magistrate
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - MessengerCartridgeClient
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -211,7 +219,7 @@
   #ss220 add pdaidpainter end
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: SecurityPilotPDA
   name: КПК пилота СБ
   description: Красный, чтобы скрыть пятна крови ассистента.
@@ -240,6 +248,15 @@
       visible: false
   - type: Icon
     state: pda-security
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - AstroNavCartridge
+    - MessengerCartridgeClient
   #ss220 add pdaidpainter start
   - type: Tag
     tags:

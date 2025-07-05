@@ -208,6 +208,11 @@
     color: "#c94242"
   - type: Computer
     board: SyndicateShuttleConsoleCircuitboard
+  # ss220 add ui requires access start (#282)
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [["SyndicateAgent"], ["NuclearOperative"]]
+  # ss220 add ui requires access end
 
 - type: entity
   parent: BaseComputerShuttle
@@ -732,8 +737,11 @@
       state: syndie_key
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
+  # ss220 add ui requires access start (#282)
+  - type: ActivatableUIRequiresAccess
   - type: AccessReader
-    access: [[ "NuclearOperative" ]]
+    access: [["SyndicateAgent"], ["NuclearOperative"]]
+  # ss220 add ui requires access end
   - type: CommunicationsConsole
     title: comms-console-announcement-title-nukie
     color: "#ff0000"

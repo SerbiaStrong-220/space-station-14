@@ -43,7 +43,7 @@
 - type: chameleonOutfit
   id: ResearchDirectorChameleonOutfit
   job: ResearchDirector
-  hasMindShield: true
+# hasMindShield: false #ss220 ChameleonOutfit fix
   equipment:
     head: ClothingHeadHatBeretRND
     eyes: ClothingEyesGlasses
