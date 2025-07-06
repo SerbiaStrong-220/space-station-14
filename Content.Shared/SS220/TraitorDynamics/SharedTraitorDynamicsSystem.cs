@@ -44,7 +44,7 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
 
             if (playerCount == default || force)
             {
-                selectedDynamic = dynamicProto.Name;
+                selectedDynamic = dynamicProto.ID;
                 break;
             }
 

@@ -86,7 +86,7 @@
   - type: EmergencyShuttleAutoCallRule
 
 - type: entity
-  id: DynamicTraitor
+  id: TraitorDynamic
   parent: Traitor
   components:
   - type: TraitorRule

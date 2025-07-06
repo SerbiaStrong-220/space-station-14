@@ -218,8 +218,8 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
                 if (dynamic != default && _prototype.TryIndex<DynamicPrototype>(dynamic, out var dynamicProto))
                 {
                     //not support color tags
-                    var cleanInfo = Regex.Replace(Loc.GetString(dynamicProto.Name), @"[^а-яА-ЯёЁ0-9\s.,!?-]", "");
-                    dynamicInfo = $"{Loc.GetString("dynamic-supply-level")} {cleanInfo}";
+                    var cleanName = Regex.Replace(Loc.GetString(dynamicProto.Name), @"[^а-яА-ЯёЁ0-9\s.,!?-]", "");
+                    dynamicInfo = Loc.GetString("dynamic-supply-level", ("dynamic", cleanName));
                 }
 
                 // If giveUplink is false the uplink code part is omitted
@@ -262,7 +262,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         var dynamic = _dynamics.GetCurrentDynamic();
         if (dynamic != default && _prototype.TryIndex<DynamicPrototype>(dynamic, out var dynamicProto))
         {
-            sb.AppendLine($"{Loc.GetString("dynamic-supply-level")} {Loc.GetString(dynamicProto.Name)}");
+            sb.AppendLine(Loc.GetString("dynamic-supply-level", ("dynamic", Loc.GetString(dynamicProto.Name))));
         }
         //SS220-dynamics-info
 

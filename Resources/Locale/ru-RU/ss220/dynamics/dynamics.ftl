@@ -1,6 +1,6 @@
 dynamic-was-set = Был установлен динамик агентов: {$dynamic}
 dynamic-show-end-round = В раунде был динамик агентов: {$dynamic}
-dynamic-supply-level = Уровень снабжения агентов в секторе: 
+dynamic-supply-level = Уровень снабжения агентов в секторе:  {$dynamic}
 dynamic-type-label = Название операции:
 
 dynamic-unknown-name = НЕИЗВЕСТНО
@@ -23,6 +23,6 @@ dynamic-hard-lore-name-3 = грохочущая буря
 dynamic-hard-lore-name-4 = разрушающее давление
 dynamic-hard-lore-name-5 = резкая помеха
 
-dynamic-light-name = [color=green]низкий[/color] 
+dynamic-light-name = [color=green]низкий[/color]
 dynamic-medium-name = [color=yellow]средний[/color]
 dynamic-hard-name = [color=red]высокий[/color]
