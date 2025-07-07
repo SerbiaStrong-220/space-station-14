@@ -147,6 +147,7 @@
         conditions:
           - !type:ReagentThreshold
             min: 6
+# SS220 acid damage vinegar begin
     Poison:
       effects:
         - !type:HealthChange
@@ -156,6 +157,7 @@
           damage:
             types:
               Caustic: 2
+# SS220 acid damage vinegar end
 
 - type: reagent
   id: Rice
