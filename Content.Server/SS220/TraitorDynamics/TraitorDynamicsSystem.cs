@@ -49,10 +49,10 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
 
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
         SubscribeLocalEvent<DynamicAddedEvent>(OnDynamicAdded);
-        SubscribeLocalEvent<StoreFinishedEvent>(OnStoreInit);
+        SubscribeLocalEvent<StoreFinishedEvent>(OnStoreFinish);
     }
 
-    private void OnStoreInit(ref StoreFinishedEvent ev)
+    private void OnStoreFinish(ref StoreFinishedEvent ev)
     {
         if (CurrentDynamic == null)
             return;
