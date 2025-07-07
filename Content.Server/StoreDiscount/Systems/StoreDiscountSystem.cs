@@ -6,6 +6,7 @@ using Content.Shared.Store;
 using Content.Shared.StoreDiscount.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Shared.SS220.TraitorDynamics;
 
 namespace Content.Server.StoreDiscount.Systems;
 
@@ -67,6 +68,9 @@ public sealed class StoreDiscountSystem : EntitySystem
         var discounts = InitializeDiscounts(ev.Listings);
         ApplyDiscounts(ev.Listings, discounts);
         discountComponent.Discounts = discounts;
+
+        var newEv = new StoreFinishedEvent(ev.TargetUser, ev.Store, ev.Listings);
+        RaiseLocalEvent(ref newEv);
     }
 
     private IReadOnlyList<StoreDiscountData> InitializeDiscounts(
@@ -413,7 +417,7 @@ public sealed class StoreDiscountSystem : EntitySystem
                 if (!listing.OriginalCost.TryGetValue(currency, out var originalPrice))
                     continue;
 
-                var discountPercentage = (-discountAmount / originalPrice) * FixedPoint2.New(100);
+                var discountPercentage = (-discountAmount / originalPrice);
                 discountPercentage = FixedPoint2.New(Math.Round(discountPercentage.Double(), 2));
 
                 discountPercentages[currency] = discountPercentage;
@@ -440,5 +444,12 @@ public record struct StoreInitializedEvent(
     EntityUid TargetUser,
     EntityUid Store,
     bool UseDiscounts,
+    IReadOnlyList<ListingDataWithCostModifiers> Listings
+);
+
+[ByRefEvent]
+public record struct StoreFinishedEvent(
+    EntityUid TargetUser,
+    EntityUid Store,
     IReadOnlyList<ListingDataWithCostModifiers> Listings
 );
