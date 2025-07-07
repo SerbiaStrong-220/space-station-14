@@ -161,10 +161,9 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
             return;
 
         CurrentDynamic = dynamicProto;
-        _admin.Add(LogType.AntagSelection, LogImpact.High, $"Dynamic {dynamicProto.Name} was setted"); // TODO: log type must be changed
+        _admin.Add(LogType.AntagSelection, LogImpact.High, $"Dynamic {dynamicProto.ID} was setted"); // TODO: log type must be changed
 
-        var locName = Loc.GetString(dynamicProto.Name);
-        _chatManager.SendAdminAnnouncement(Loc.GetString("dynamic-was-set", ("dynamic", locName)));
+        _chatManager.SendAdminAnnouncement(Loc.GetString("dynamic-was-set", ("dynamic", dynamicProto.ID)));
 
         var ev = new DynamicAddedEvent(dynamicProto.ID);
         RaiseLocalEvent(ev);

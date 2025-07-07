@@ -26,7 +26,7 @@ public sealed class StoreUpdateState : BoundUserInterfaceState
     public readonly bool AllowRefund;
 
     //SS220 - show-in-uplink-type-dynamic-start
-    public StoreUpdateState(HashSet<ListingDataWithCostModifiers> listings, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> balance, bool showFooter, bool allowRefund, LocId? dynamicName = default )
+    public StoreUpdateState(HashSet<ListingDataWithCostModifiers> listings, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> balance, bool showFooter, bool allowRefund, LocId? dynamicName = null)
     {
         Listings = listings;
         Balance = balance;
