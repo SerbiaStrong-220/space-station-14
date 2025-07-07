@@ -27,7 +27,7 @@ public sealed partial class SuitSensorComponent : Component
     ///  How much time it takes to change another player's sensors
     /// </summary>
     [DataField]
-    public float SensorsTime = 1.75f;
+    public float SensorsTime = 6f; //ss220 change time for set sensors (old is 1.75f)
 
     /// <summary>
     ///     Current sensor mode. Can be switched by user verbs.
