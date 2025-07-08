@@ -1,9 +1,9 @@
+// Based on https://github.com/space-syndicate/space-station-14/blob/d69a4aa3d99a04cab64c8f807fea5e983e897866/Content.Server/Corvax/GuideGenerator/MixingCategoryEntry.cs
 using Content.Shared.Chemistry.Reaction;
 using System.Text.Json.Serialization;
 
 namespace Content.Server.SS220.Wiki.Chemistry;
 
-// Based on https://github.com/space-syndicate/space-station-14/blob/d69a4aa3d99a04cab64c8f807fea5e983e897866/Content.Server/Corvax/GuideGenerator/MixingCategoryEntry.cs
 public sealed class MixingCategoryWikiEntry
 {
     [JsonPropertyName("name")]
