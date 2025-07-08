@@ -2,6 +2,18 @@ name: "Wiki updater"
 
 on:
   workflow_dispatch:
+  push:
+    branch: [master]
+    paths:
+      - '.github/workflows/update-wiki.yml'
+      - 'Content.Shared/Chemistry/**.cs'
+      - 'Content.Server/Chemistry/**.cs'
+      - 'Content.Server/GuideGenerator/**.cs'
+      - 'Content.Server/SS220/Wiki/**.cs'
+      - 'Resources/**/Reagents/**.yml'
+      - 'Resources/**/Chemistry/**.yml'
+      - 'Resources/**/Recipes/Reactions/**.yml'
+      - 'RobustToolbox/'
 
 jobs:
   update-wiki:
