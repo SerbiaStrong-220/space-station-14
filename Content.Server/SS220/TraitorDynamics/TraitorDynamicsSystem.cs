@@ -13,6 +13,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.SS220.TraitorDynamics;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
+using Content.Shared.StoreDiscount.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -39,15 +40,24 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly StoreSystem _store = default!;
 
-    [ValidatePrototypeId<StoreCategoryPrototype>]
-    private const string DiscountedStoreCategoryPrototypeKey = "DiscountedItems";
+    [ValidatePrototypeId<DiscountCategoryPrototype>]
+    private const string Discount = "usualDiscounts";
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
-        SubscribeLocalEvent<DynamicAddedEvent>(OnDynamicAdded, before: [typeof(StoreDiscountSystem)]);
+        SubscribeLocalEvent<DynamicAddedEvent>(OnDynamicAdded);
+        SubscribeLocalEvent<StoreFinishedEvent>(OnStoreFinish);
+    }
+
+    private void OnStoreFinish(ref StoreFinishedEvent ev)
+    {
+        if (CurrentDynamic == null)
+            return;
+
+        ApplyDynamicPrice(ev.Store, ev.Listings, CurrentDynamic.Value);
     }
 
     private void OnDynamicAdded(DynamicAddedEvent ev)
@@ -101,11 +111,11 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
             if (!listing.DynamicsPrices.TryGetValue(currentDynamic, out var dynamicPrice))
                 continue;
 
-            listing.RemoveCostModifier(DiscountedStoreCategoryPrototypeKey);
+            listing.RemoveCostModifier(Discount);
             listing.SetNewCost(dynamicPrice);
 
             var finalPrice = ApplyDiscountsToPrice(dynamicPrice, listing, itemDiscounts);
-            listing.SetExactPrice(DiscountedStoreCategoryPrototypeKey, finalPrice);
+            listing.SetExactPrice(Discount, finalPrice);
         }
     }
 
@@ -129,7 +139,7 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
 
             var rawValue = currentPrice * discountPercent;
             var roundedValue = Math.Round(rawValue.Double(), MidpointRounding.AwayFromZero);
-            finalPrice[currency] = FixedPoint2.New(roundedValue);
+            finalPrice[currency] = Math.Max(currentPrice.Double() - roundedValue, 1);
         }
 
         return finalPrice;
