@@ -45,7 +45,7 @@ jobs:
         wiki_text_file: ./bin/Content.Server/data/chemicals_prototypes.json
         edit_summary: Update chemicals_prototypes.json via GitHub Actions
         page_name: "https://wiki14.ss220.club/index.php?title=Модуль:ChemistryAPI/chemicals_prototypes.json"
-        api_url: https://wiki14.ss220.club/w/api.php
+        api_url: https://wiki14.ss220.club/api.php
         username: ${{ secrets.WIKI_BOT_USER }}
         password: ${{ secrets.WIKI_BOT_PASS }}
 
@@ -55,6 +55,6 @@ jobs:
         wiki_text_file: ./bin/Content.Server/data/reactions_prototypes.json
         edit_summary: Update reactions_prototypes.json via GitHub Actions
         page_name: "https://wiki14.ss220.club/index.php?title=Модуль:ChemistryAPI/reactions_prototypes.json"
-        api_url: https://wiki14.ss220.club/w/api.php
+        api_url: https://wiki14.ss220.club/api.php
         username: ${{ secrets.WIKI_BOT_USER }}
         password: ${{ secrets.WIKI_BOT_PASS }}
