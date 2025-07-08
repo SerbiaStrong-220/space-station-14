@@ -36,7 +36,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore /p:WarningsAsErrors=nullable /m
 
     - name: Generate JSON blobs for prototypes
-      run: dotnet ./bin/Content.Server/Content.Server.dll --cvar autogen.destination_file=prototypes.json
+      run: dotnet ./bin/Content.Server/Content.Server.dll --cvar autogen.destination_file=.json
       continue-on-error: true
 
     - name: Upload chemicals_prototypes.json to wiki
@@ -44,7 +44,7 @@ jobs:
       with:
         wiki_text_file: ./bin/Content.Server/data/chemicals_prototypes.json
         edit_summary: Update chemicals_prototypes.json via GitHub Actions
-        page_name: "https://wiki14.ss220.club/index.php?title=Модуль:ChemistryAPI/chemicals_prototypes.json"
+        page_name: "Модуль:ChemistryAPI/chemicals_prototypes.json"
         api_url: https://wiki14.ss220.club/api.php
         username: ${{ secrets.WIKI_BOT_USER }}
         password: ${{ secrets.WIKI_BOT_PASS }}
@@ -54,7 +54,7 @@ jobs:
       with:
         wiki_text_file: ./bin/Content.Server/data/reactions_prototypes.json
         edit_summary: Update reactions_prototypes.json via GitHub Actions
-        page_name: "https://wiki14.ss220.club/index.php?title=Модуль:ChemistryAPI/reactions_prototypes.json"
+        page_name: "Модуль:ChemistryAPI/reactions_prototypes.json"
         api_url: https://wiki14.ss220.club/api.php
         username: ${{ secrets.WIKI_BOT_USER }}
         password: ${{ secrets.WIKI_BOT_PASS }}
