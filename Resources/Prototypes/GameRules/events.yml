@@ -685,11 +685,13 @@
   - type: StationEvent
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAnnouncementColor: "#18abf5"
-    startAnnouncement: station-event-ion-storm-start-announcement
-    startAudio:
-      path: /Audio/SS220/Announcements/i-storm1.ogg
-      params:
-        volume: -4
+    #ss220 disable ion storm announcement start
+    #startAnnouncement: station-event-ion-storm-start-announcement
+    #startAudio:
+      #path: /Audio/SS220/Announcements/i-storm1.ogg
+      #params:
+        #volume: -4
+    #ss220 disable ion storm announcement end
   # SS220 MoreAnonces (sound and alert upgrades) end
     weight: 8
     reoccurrenceDelay: 20
