@@ -41,7 +41,7 @@
 - type: gamePreset
   id: DynamicTraitor
   name: DynamicTraitor
-  description: воняешь немытым очком даун
+  description: traitor-description
   minPlayers: 5
   rules:
   - TraitorDynamic
