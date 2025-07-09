@@ -52,7 +52,7 @@ public sealed class ReagentWikiEntry
         var g = reagentPrototype.SubstanceColor.G;
         var b = reagentPrototype.SubstanceColor.B;
 
-        var luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+        var luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
         return (luminance > 0.5 ? Color.Black : Color.White).ToHex();
     }
 }
