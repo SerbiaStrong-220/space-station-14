@@ -182,30 +182,38 @@ moth-language-replace-words-1-3-1 = зздравствуй
 moth-language-replace-words-1-3-2 = ззздравствуй
 moth-language-replace-words-1-5-1 = зздравствуйте
 moth-language-replace-words-1-5-2 = ззздравствуйте
+
 moth-language-replace-words-5-2-1 = друззья
 moth-language-replace-words-5-2-2 = друзззья
 moth-language-replace-words-5-5-1 = подружжки
 moth-language-replace-words-5-5-2 = подружжжки
 moth-language-replace-words-5-6-1 = дружжки
 moth-language-replace-words-5-6-2 = дружжжки
+
 moth-language-replace-words-6-2-1 = привяззанность
 moth-language-replace-words-6-2-2 = привязззанность
+
 moth-language-replace-words-8-1-1 = жживотное
 moth-language-replace-words-8-1-2 = жжживотное
 moth-language-replace-words-8-3-1 = ззверь
 moth-language-replace-words-8-3-2 = зззверь
+
 moth-language-replace-words-11-4-1 = продажжа
 moth-language-replace-words-11-4-2 = продажжжа
+
 moth-language-replace-words-15-2-1 = ожжил
 moth-language-replace-words-15-2-2 = ожжжил
 moth-language-replace-words-15-3-1 = жжив
 moth-language-replace-words-15-3-2 = жжжив
 moth-language-replace-words-15-4-1 = жживой
 moth-language-replace-words-15-4-2 = жжживой
+
 moth-language-replace-words-18-3-1 = пизздец
 moth-language-replace-words-18-3-2 = пиззздец
+
 moth-language-replace-words-20-2-1 = божжество
 moth-language-replace-words-20-2-2 = божжжество
+
 moth-language-replace-words-32-1-1 = пожжалуйста
 moth-language-replace-words-32-1-2 = пожжжалуйста
 moth-language-replace-words-32-2-1 = плизз
@@ -222,22 +230,29 @@ lizard-language-replace-words-1-5-1 = ссдравсствуйте
 lizard-language-replace-words-1-5-2 = сссдравсствуйте
 lizard-language-replace-words-1-5-3 = ссдравссствуйте
 lizard-language-replace-words-1-5-4 = сссдравссствуйте
+
 lizard-language-replace-words-2-3-1 = доссвидания
 lizard-language-replace-words-2-3-2 = досссвидания
+
 lizard-language-replace-words-3-2-1 = ссамка
 lizard-language-replace-words-3-2-2 = сссамка
+
 lizard-language-replace-words-4-2-1 = ссамец
 lizard-language-replace-words-4-2-2 = сссамец
+
 lizard-language-replace-words-5-2-1 = друссья
 lizard-language-replace-words-5-2-2 = друсссья
+
 lizard-language-replace-words-6-2-1 = привяссанноссть
 lizard-language-replace-words-6-2-2 = привясссанноссть
 lizard-language-replace-words-6-2-3 = привяссанносссть
 lizard-language-replace-words-6-2-4 = привясссанносссть
+
 lizard-language-replace-words-8-2-1 = добыщща
 lizard-language-replace-words-8-2-2 = добыщщща
 lizard-language-replace-words-8-3-1 = ссверь
 lizard-language-replace-words-8-3-2 = сссверь
+
 lizard-language-replace-words-9-2-1 = рабсство
 lizard-language-replace-words-9-2-2 = рабссство
 lizard-language-replace-words-9-6-1 = сслуга
@@ -250,27 +265,36 @@ lizard-language-replace-words-9-9-1 = сслуги
 lizard-language-replace-words-9-9-2 = ссслуги
 lizard-language-replace-words-9-10-1 = сслугами
 lizard-language-replace-words-9-10-2 = ссслугами
+
 lizard-language-replace-words-11-3-1 = ссделка
 lizard-language-replace-words-11-3-2 = сссделка
+
 lizard-language-replace-words-14-1-1 = ссмерть
 lizard-language-replace-words-14-1-2 = сссмерть
+
 lizard-language-replace-words-15-1-1 = родилсся
 lizard-language-replace-words-15-1-2 = родилссся
+
 lizard-language-replace-words-16-4-1 = пошшли
 lizard-language-replace-words-16-4-2 = пошшшли
 lizard-language-replace-words-16-5-1 = пошшел
 lizard-language-replace-words-16-5-2 = пошшшел
 lizard-language-replace-words-16-6-1 = пошшла
 lizard-language-replace-words-16-6-2 = пошшшла
+
 lizard-language-replace-words-17-1-1 = трусс
 lizard-language-replace-words-17-1-2 = труссс
 lizard-language-replace-words-17-2-1 = сссыкло
+
 lizard-language-replace-words-18-3-1 = писсдец
 lizard-language-replace-words-18-3-2 = писссдец
+
 lizard-language-replace-words-20-2-1 = божесство
 lizard-language-replace-words-20-2-2 = божессство
+
 lizard-language-replace-words-22-1-1 = большшой
 lizard-language-replace-words-22-1-2 = большшшой
+
 lizard-language-replace-words-24-6-1 = ссемья
 lizard-language-replace-words-24-6-2 = сссемья
 lizard-language-replace-words-24-7-1 = ссемьи
@@ -279,6 +303,7 @@ lizard-language-replace-words-24-8-1 = ссемьей
 lizard-language-replace-words-24-8-2 = сссемьей
 lizard-language-replace-words-24-9-1 = ссемей
 lizard-language-replace-words-24-9-2 = сссемей
+
 lizard-language-replace-words-25-1-1 = щщессть
 lizard-language-replace-words-25-1-2 = щщщессть
 lizard-language-replace-words-25-1-3 = щщесссть
@@ -303,6 +328,7 @@ lizard-language-replace-words-25-6-1 = ссовесстью
 lizard-language-replace-words-25-6-2 = ссовессстью
 lizard-language-replace-words-25-6-3 = сссовесстью
 lizard-language-replace-words-25-6-4 = сссовессстью
+
 lizard-language-replace-words-26-1-1 = пссих
 lizard-language-replace-words-26-1-2 = псссих
 lizard-language-replace-words-26-2-1 = ссумашшедшший
@@ -315,12 +341,14 @@ lizard-language-replace-words-26-2-7 = сссумашшшедшший
 lizard-language-replace-words-26-2-8 = сссумашшшедшшший
 lizard-language-replace-words-26-3-1 = поехавшший
 lizard-language-replace-words-26-3-2 = поехавшшший
+
 lizard-language-replace-words-29-1-1 = сспассибо
 lizard-language-replace-words-29-1-2 = сспасссибо
 lizard-language-replace-words-29-1-3 = ссспассибо
 lizard-language-replace-words-29-1-4 = ссспасссибо
 lizard-language-replace-words-29-3-1 = ссяп
 lizard-language-replace-words-29-3-2 = сссяп
+
 lizard-language-replace-words-32-1-1 = пожалуйсста
 lizard-language-replace-words-32-1-2 = пожалуйссста
 lizard-language-replace-words-32-2-1 = плисс
@@ -337,28 +365,34 @@ tajaran-language-replace-words-1-4-1 = пррив
 tajaran-language-replace-words-1-4-2 = прррив
 tajaran-language-replace-words-1-5-1 = здрравствуйте
 tajaran-language-replace-words-1-5-2 = здррравствуйте
+
 tajaran-language-replace-words-2-2-1 = пррощай
 tajaran-language-replace-words-2-2-2 = прррощай
+
 tajaran-language-replace-words-5-1-1 = дрруг
 tajaran-language-replace-words-5-1-2 = дррруг
 tajaran-language-replace-words-5-2-1 = дррузья
-tajaran-language-replace-words-5-2-1 = дрррузья
+tajaran-language-replace-words-5-2-2 = дрррузья
 tajaran-language-replace-words-5-3-1 = подрруга
 tajaran-language-replace-words-5-3-2 = подррруга
 tajaran-language-replace-words-5-4-1 = подрруги
-tajaran-language-replace-words-5-4-1 = подррруги
+tajaran-language-replace-words-5-4-2 = подррруги
 tajaran-language-replace-words-5-5-1 = подрружки
-tajaran-language-replace-words-5-5-1 = подррружки
+tajaran-language-replace-words-5-5-2 = подррружки
 tajaran-language-replace-words-5-6-1 = дрружки
-tajaran-language-replace-words-5-6-1 = дррружки
+tajaran-language-replace-words-5-6-2 = дррружки
+
 tajaran-language-replace-words-6-2-1 = прривязанность
 tajaran-language-replace-words-6-2-2 = пррривязанность
+
 tajaran-language-replace-words-7-1-1 = прредатель
-tajaran-language-replace-words-7-1-1 = пррредатель
+tajaran-language-replace-words-7-1-2 = пррредатель
 tajaran-language-replace-words-7-2-1 = врраг
-tajaran-language-replace-words-7-2-1 = вррраг
+tajaran-language-replace-words-7-2-2 = вррраг
+
 tajaran-language-replace-words-8-3-1 = зверрь
 tajaran-language-replace-words-8-3-2 = зверррь
+
 tajaran-language-replace-words-9-1-1 = рраб
 tajaran-language-replace-words-9-1-2 = ррраб
 tajaran-language-replace-words-9-2-1 = ррабство
@@ -371,20 +405,24 @@ tajaran-language-replace-words-9-5-1 = ррабами
 tajaran-language-replace-words-9-5-2 = рррабами
 tajaran-language-replace-words-9-7-1 = пррислуга
 tajaran-language-replace-words-9-7-2 = прррислуга
+
 tajaran-language-replace-words-10-2-1 = крредиты
 tajaran-language-replace-words-10-2-2 = кррредиты
 tajaran-language-replace-words-10-3-1 = крредит
 tajaran-language-replace-words-10-3-2 = кррредит
+
 tajaran-language-replace-words-11-1-1 = барртерр
 tajaran-language-replace-words-11-1-2 = барртеррр
 tajaran-language-replace-words-11-1-3 = баррртерр
 tajaran-language-replace-words-11-1-4 = баррртеррр
 tajaran-language-replace-words-11-4-1 = прродажа
 tajaran-language-replace-words-11-4-2 = пррродажа
+
 tajaran-language-replace-words-13-1-1 = кррит
 tajaran-language-replace-words-13-1-2 = крррит
 tajaran-language-replace-words-13-2-1 = кррите
 tajaran-language-replace-words-13-2-2 = крррите
+
 tajaran-language-replace-words-14-1-1 = смеррть
 tajaran-language-replace-words-14-1-2 = смерррть
 tajaran-language-replace-words-14-2-1 = умерр
@@ -395,16 +433,22 @@ tajaran-language-replace-words-14-4-1 = мерртв
 tajaran-language-replace-words-14-4-2 = меррртв
 tajaran-language-replace-words-14-5-1 = трруп
 tajaran-language-replace-words-14-5-2 = тррруп
+
 tajaran-language-replace-words-15-1-1 = рродился
 tajaran-language-replace-words-15-1-2 = ррродился
+
 tajaran-language-replace-words-17-1-1 = тррус
 tajaran-language-replace-words-17-1-2 = трррус
+
 tajaran-language-replace-words-21-2-1 = кррохотный
 tajaran-language-replace-words-21-2-2 = крррохотный
+
 tajaran-language-replace-words-22-2-1 = огрромный
 tajaran-language-replace-words-22-2-2 = огррромный
+
 tajaran-language-replace-words-26-4-1 = нарркоман
 tajaran-language-replace-words-26-4-2 = наррркоман
+
 tajaran-language-replace-words-27-1-1 = имперрия
 tajaran-language-replace-words-27-1-2 = имперррия
 tajaran-language-replace-words-27-2-1 = импрреррией
@@ -423,8 +467,10 @@ tajaran-language-replace-words-27-7-1 = имперриями
 tajaran-language-replace-words-27-7-2 = имперрриями
 tajaran-language-replace-words-27-8-1 = имперриях
 tajaran-language-replace-words-27-8-2 = имперрриях
+
 tajaran-language-replace-words-29-2-1 = благодаррю
 tajaran-language-replace-words-29-2-2 = благодарррю
+
 tajaran-language-replace-words-36-2-1 = перредай
 tajaran-language-replace-words-36-2-2 = перрредай
 tajaran-language-replace-words-36-4-1 = веррни
@@ -519,9 +565,6 @@ language-tkachi-words-replace-6 = bazzairti
 language-tkachi-words-replace-10 = bazzarti
 language-tkachi-words-replace-11 = zhzharti
 language-tkachi-words-replace-12 = shshshona
-# 10
-# 11
-# 12
 # 13
 # 14
 # 15
@@ -542,7 +585,6 @@ language-tkachi-words-replace-29 = smizzsss
 language-tkachi-words-replace-30 = zho'zho
 language-tkachi-words-replace-31 = zzze
 language-tkachi-words-replace-32 = zzze
-# 32
 language-tkachi-words-replace-33 = ozzu
 language-tkachi-words-replace-34 = yazzu
 language-tkachi-words-replace-35 = korzho
@@ -577,7 +619,7 @@ language-eldwarf-words-replace-25 = хлест
 language-eldwarf-words-replace-26 = латорбир
 # 27
 language-eldwarf-words-replace-28 = гримстборитх
-language-eldwarf-words-replace-29 = кнур'де'бир 
+language-eldwarf-words-replace-29 = кнур'де'бир
 language-eldwarf-words-replace-30 = ой
 language-eldwarf-words-replace-31 = нэ
 language-eldwarf-words-replace-32 = оззу'да
@@ -605,7 +647,7 @@ language-sintaunathi-words-replace-15 = sasax
 language-sintaunathi-words-replace-16 = narrce
 language-sintaunathi-words-replace-17= nobibdek bdann
 language-sintaunathi-words-replace-18 = shhh
-language-sintaunathi-words-replace-18 = haavas
+language-sintaunathi-words-replace-19 = haavas
 language-sintaunathi-words-replace-20 = rizkh
 language-sintaunathi-words-replace-21 = khiss
 language-sintaunathi-words-replace-22 = khas
