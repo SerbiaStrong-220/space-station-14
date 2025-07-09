@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Shared.SS220.TraitorDynamics;
@@ -10,7 +11,7 @@ namespace Content.Server.SS220.TraitorDynamics;
 public sealed partial class ForceDynamicCommand : IConsoleCommand
 {
     [Dependency] private readonly EntityManager _entityManager = default!;
-    public string Command => "dynamic";
+    public string Command => "setdynamic";
     public string Description => "force dynamic for current round";
     public string Help => "dynamic <dynamicProtoId>";
     public void Execute(IConsoleShell shell, string argStr, string[] args)
@@ -24,11 +25,25 @@ public sealed partial class ForceDynamicCommand : IConsoleCommand
         var proto = IoCManager.Resolve<IPrototypeManager>();
         if (!proto.HasIndex<DynamicPrototype>(args[0]))
         {
-            shell.WriteLine($"can't find {args[0]} dynamic proto :(");
+            shell.WriteLine($"No dynamic proto exists with name {args[0]}");
             return;
         }
 
         var dynamic = _entityManager.System<TraitorDynamicsSystem>();
         dynamic.SetDynamic(args[0]);
+    }
+
+    public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
+    {
+        if (args.Length != 1)
+            return CompletionResult.Empty;
+
+        var options = IoCManager.Resolve<IPrototypeManager>()
+            .EnumeratePrototypes<DynamicPrototype>()
+            .OrderBy(p => p.ID)
+            .Select(p => p.ID);
+
+        return CompletionResult.FromHintOptions(options, "<dynamic>");
+
     }
 }

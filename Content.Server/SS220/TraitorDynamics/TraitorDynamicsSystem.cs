@@ -6,6 +6,7 @@ using Content.Server.Antag;
 using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
+using Content.Server.RoundEnd;
 using Content.Server.Store.Systems;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.Database;
@@ -13,7 +14,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.SS220.TraitorDynamics;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
-using Content.Shared.StoreDiscount.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -50,6 +50,7 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
         SubscribeLocalEvent<DynamicAddedEvent>(OnDynamicAdded);
         SubscribeLocalEvent<StoreFinishedEvent>(OnStoreFinish);
+        SubscribeLocalEvent<RoundEndSystemChangedEvent>(OnRoundEnded);
     }
 
     private void OnStoreFinish(ref StoreFinishedEvent ev)
@@ -102,10 +103,16 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         ev.AddLine(Loc.GetString("dynamic-show-end-round", ("dynamic", locName)));
     }
 
+    private void OnRoundEnded(RoundEndSystemChangedEvent ev)
+    {
+        if (!CurrentDynamic.HasValue)
+            return;
+
+        CurrentDynamic = null;
+    }
+
     private void ApplyDynamicPrice(EntityUid store, IReadOnlyList<ListingDataWithCostModifiers> listings, ProtoId<DynamicPrototype> currentDynamic)
     {
-        var itemDiscounts = _discount.GetItemsDiscount(store, listings);
-
         foreach (var listing in listings)
         {
             if (!listing.DynamicsPrices.TryGetValue(currentDynamic, out var dynamicPrice))
@@ -113,9 +120,21 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
 
             listing.RemoveCostModifier(Discount);
             listing.SetNewCost(dynamicPrice);
+        }
 
-            var finalPrice = ApplyDiscountsToPrice(dynamicPrice, listing, itemDiscounts);
-            listing.SetExactPrice(Discount, finalPrice);
+        var itemDiscounts = _discount.GetItemsDiscount(store, listings);
+
+        foreach (var listing in listings)
+        {
+            if (!listing.DynamicsPrices.TryGetValue(currentDynamic, out var dynamicPrice))
+                continue;
+
+            var discountPrices = ApplyDiscountsToPrice(dynamicPrice, listing, itemDiscounts);
+
+            if (!itemDiscounts.TryGetValue(listing.ID, out var _))
+                continue;
+
+            listing.SetExactPrice(Discount, discountPrices);
         }
     }
 
