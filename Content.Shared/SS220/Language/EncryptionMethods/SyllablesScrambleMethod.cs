@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -52,8 +53,8 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
             Syllables.Count == 0)
             return message;
 
-        var wordRegex = @"\S+";
-        var matches = Regex.Matches(message, wordRegex);
+        var spaceRegex = @"\S+";
+        var matches = Regex.Matches(message, spaceRegex);
         if (matches.Count <= 0)
             return message;
 
@@ -67,8 +68,13 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
         foreach (Match m in matches)
         {
             var word = m.Value.ToLower();
+            if (TryReplaceWord(word, prototypeManager, locManager, out var replaceddWord))
+            {
+                result.Append(replaceddWord);
+                continue;
+            }
             seed = _inputSeed + SharedLanguageSystem.GetSeedFromString(word);
-            var scrambledWord = ScrambleWord(m.Value, seed.Value, prototypeManager, locManager);
+            var scrambledWord = ScrambleWord(m.Value, seed.Value);
             result.Append(scrambledWord);
         }
 
@@ -79,26 +85,45 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
         return result.ToString().Trim();
     }
 
-    private string ScrambleWord(string word, int seed, IPrototypeManager prototypeManager, ILocalizationManager locManager)
+    private bool TryReplaceWord(string word, IPrototypeManager prototypeManager, ILocalizationManager locManager, out string replaced)
     {
-        if (prototypeManager.TryIndex<LanguageReplacementsPrototype>(ReplaceDictonary, out var prototype))
+        replaced = "";
+
+        if (!prototypeManager.TryIndex<LanguageReplacementsPrototype>(ReplaceDictonary, out var prototype))
+            return false;
+
+        var wordRegex = @"\w+";
+        var words = Regex.Matches(word, wordRegex);
+
+        foreach (Match m in words)
         {
             foreach (var (first, replace) in prototype.Replacements)
             {
-                if (word.ToLower() == locManager.GetString(first))
+                if (m.Value.ToLower() == locManager.GetString(first))
                 {
                     var replacedWord = locManager.GetString(replace);
                     if (_capitalize)
                     {
                         _capitalize = false;
                         replacedWord = string.Concat(replacedWord.Substring(0, 1).ToUpper(), replacedWord.AsSpan(1));
-                        return replacedWord + " ";
+                        replaced += replacedWord + " ";
                     }
                     else
-                        return replacedWord + " ";
+                    {
+                        replaced += replacedWord + " ";
+                    }
                 }
             }
         }
+
+        if (replaced.Length > 0)
+            return true;
+
+        return false;
+    }
+
+    private string ScrambleWord(string word, int seed)
+    {
         var random = new System.Random(seed);
         var scrambledMessage = new StringBuilder();
         var scrambledLength = word.Length * ScrambledLengthCoefficient;
