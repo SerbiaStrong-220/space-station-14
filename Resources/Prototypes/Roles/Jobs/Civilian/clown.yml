@@ -13,6 +13,7 @@
   icon: "JobIconClown"
   supervisors: job-supervisors-hop
   access:
+  - Service # ss220 fix
   - Theatre
   - Maintenance
   special:

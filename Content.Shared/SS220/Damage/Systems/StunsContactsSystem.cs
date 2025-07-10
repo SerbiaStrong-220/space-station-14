@@ -50,7 +50,8 @@ public sealed class StunsContactsSystem : EntitySystem
         if (!source.Comp.TimeEntitiesStunned.TryGetValue(targetUid, out var timeLastStunned)
             && _stun.TryParalyze(targetUid, source.Comp.StunTime, true, null))
         {
-            DebugTools.Assert(source.Comp.TimeEntitiesStunned.TryAdd(targetUid, _timing.CurTime));
+            var debugFlag = source.Comp.TimeEntitiesStunned.TryAdd(targetUid, _timing.CurTime);
+            DebugTools.Assert(debugFlag);
             return true;
         }
 

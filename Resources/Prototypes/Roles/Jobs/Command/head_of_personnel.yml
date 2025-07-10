@@ -87,7 +87,7 @@
 - type: chameleonOutfit
   id: HeadOfPersonnelChameleonOutfit
   job: HeadOfPersonnel
-  hasMindShield: true
+# hasMindShield: false #ss220 ChameleonOutfit fix
   equipment:
     head: ClothingHeadHatHopcap
     eyes: ClothingEyesHudCommand

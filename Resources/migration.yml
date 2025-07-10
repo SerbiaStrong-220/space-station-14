@@ -215,37 +215,34 @@ SpyCrewMonitorEmpty: null
 SyndiCrewMonitor: null
 SyndiCrewMonitorEmpty: null
 
-# SS220 Readd-Vehicles begin (commented out upstream)
-# SpawnVehicleWheelchair: null
-# SpawnVehicleWheelchairFolded: null
-# VehicleWheelchair: null
-# VehicleWheelchairFolded: null
-# VehicleSecwayStealObjective: null
-# VehicleKeyJanicart: null
-# VehicleKeySecway: null
-# VehicleKeyATV: null
-# VehicleKeySkeleton: null
-# VehicleKeySyndicateSegway: null
-# VehicleKeySkeletonMotorcycle: null
-# VehicleSecway: null
-# VehicleATV: null
-# VehicleSyndicateSegway: null
-# VehicleSkeletonMotorcycle: null
-# VehicleUnicycle: null
-# VehicleUnicycleFolded: null
-# ActionVehicleHorn: null
-# CrateFunATV: null
-# CrateFunSyndicateSegway: null
-# MobTaxiBot: null
-# SpawnVehicleMotobike: null
-# SpawnVehicleATV: null
-# SpawnVehicleSecway: null
-# SpawnVehicleJanicart: null
-# VehicleJanicart: null
-# VehicleJanicartDestroyed: null
-# SS220 Readd-Vehicles end
-
+SpawnVehicleWheelchair: null
+SpawnVehicleWheelchairFolded: null
+VehicleWheelchair: null
+VehicleWheelchairFolded: null
+VehicleSecwayStealObjective: null
+VehicleKeyJanicart: null
+VehicleKeySecway: null
+VehicleKeyATV: null
+VehicleKeySkeleton: null
+VehicleKeySyndicateSegway: null
+VehicleKeySkeletonMotorcycle: null
+VehicleSecway: null
+VehicleATV: null
+VehicleSyndicateSegway: null
+VehicleSkeletonMotorcycle: null
+VehicleUnicycle: null
+VehicleUnicycleFolded: null
+ActionVehicleHorn: null
+CrateFunATV: null
+CrateFunSyndicateSegway: null
+MobTaxiBot: null
 # MobSupplyBot: null
+SpawnVehicleMotobike: null
+SpawnVehicleATV: null
+SpawnVehicleSecway: null
+SpawnVehicleJanicart: null
+VehicleJanicart: null
+VehicleJanicartDestroyed: null
 
 # 2024-02-01
 YellowOxygenTank: OxygenTank
@@ -747,3 +744,10 @@ CapacitorStockPart: MicroManipulatorStockPart
 
 # 2025-05-30
 SpawnHonkBot: SpawnMobHonkBot
+
+# 2025-07-04 - SS220 remove vehicles
+VehicleParamedicATV: null
+VehicleKeyParamedicATV: null
+CrateParamedicATV: null
+SpawnVehicleParamedicATV: null
+SpawnVehicleSyndicateSegway: null

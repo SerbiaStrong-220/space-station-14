@@ -1,0 +1,19 @@
+- type: entity
+  id: WeaponRevolverLegendaryMarksman
+  parent: WeaponRevolverInspector
+  name: Legendary Marksman
+  description: Shooting is a stupid waste. I calculated that one bullet costs as much as four pancakes.
+  suffix: Revolver, For playtime
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Weapons/Guns/Revolvers/legendary_marksman.rsi
+
+- type: entity
+  id: WeaponRevolverBlackAngel
+  parent: WeaponRevolverInspector
+  name: Black Angel
+  description: "Remember: incompetent people will never learn truly effective ways to solve problems! But you are not one of them, are you?"
+  suffix: Revolver, For playtime
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Weapons/Guns/Revolvers/black_angel.rsi

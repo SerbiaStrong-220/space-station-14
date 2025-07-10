@@ -355,36 +355,6 @@
       Telecrystal: 1
 #ss220 dynamic-price end
 
-# READD-VEHICLES
-- type: listing
-  id: UplinkSyndicateSegwayCrate
-  name: uplink-syndicate-segway-crate-name
-  description: uplink-syndicate-segway-crate-desc
-  icon: { sprite: /Textures/Objects/Vehicles/syndicatesegway.rsi, state: icon }
-  productEntity: CrateFunSyndicateSegway
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 2
-  cost:
-    Telecrystal: 5
-  categories:
-  - UplinkDeception
-  conditions:
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
-#ss220 dynamic-price bgn
-  dynamicsPrices:
-    LightDynamic:
-      Telecrystal: 5
-    MediumDynamic:
-      Telecrystal: 5
-    HardDynamic:
-      Telecrystal: 5
-#ss220 dynamic-price end
-
-
 #SS220 SpicyUPD begin
 - type: listing
   id: UplinkSpicyPizza

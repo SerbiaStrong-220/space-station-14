@@ -16,7 +16,7 @@ RELEASE_DIR = "release"
 # Forks should change these to publish to their own infrastructure.
 #
 ROBUST_CDN_URL = "https://lk.ss220.club/cdn/"
-FORK_ID = "SS220MasterStation"
+FORK_ID = "SS220ReleaseStation"
 
 def main():
     parser = argparse.ArgumentParser()

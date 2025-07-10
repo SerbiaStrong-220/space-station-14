@@ -59,7 +59,7 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
         if (!_cultRule.TryGetCultGameRule(out var rule))
             return;
 
-        args.Progress = (float)rule.Comp.AmountOfSacrifices / (float)ent.Comp.ReqSacrAmount;
+        args.Progress = (float)rule.Value.Comp.AmountOfSacrifices / (float)ent.Comp.ReqSacrAmount;
     }
 
     private void ObjNumberUpdate(Entity<CultYoggSummonConditionComponent> ent)
@@ -68,7 +68,7 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
             return;
 
         var sacrificesRequired = 0;
-        foreach ((_, var stageDefinition) in rule.Comp.Stages)
+        foreach ((_, var stageDefinition) in rule.Value.Comp.Stages)
         {
             if (stageDefinition.SacrificesRequired is { } stageSacrifices)
                 sacrificesRequired = stageSacrifices;

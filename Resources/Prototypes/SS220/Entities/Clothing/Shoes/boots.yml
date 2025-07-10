@@ -179,3 +179,14 @@
       - state: equipped-FEET
         color: "#401e11"
       - state: soles-equipped-FEET
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesWandererBoots
+  name: wanderer boots
+  description: If you look back and see your future, then you did everything right...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/wanderer_boots.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/wanderer_boots.rsi
