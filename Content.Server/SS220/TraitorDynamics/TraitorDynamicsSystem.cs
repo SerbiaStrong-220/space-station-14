@@ -11,6 +11,8 @@ using Content.Server.Store.Systems;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
+using Content.Shared.Random;
+using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.TraitorDynamics;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
@@ -29,7 +31,7 @@ namespace Content.Server.SS220.TraitorDynamics;
 /// - Dynamic-specific pricing and discounts in stores
 /// - Round-end reporting of active dynamic
 /// </remarks>
-public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
+public sealed class TraitorDynamicsSystem : EntitySystem
 {
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -42,6 +44,11 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
 
     [ValidatePrototypeId<DiscountCategoryPrototype>]
     private const string Discount = "usualDiscounts";
+
+    [ValidatePrototypeId<WeightedRandomPrototype>]
+    private const string WeightsProto = "WeightedDynamicsList";
+
+    private ProtoId<DynamicPrototype>? CurrentDynamic = null; // prob we should have nullspace entity with comp
 
     public override void Initialize()
     {
@@ -131,7 +138,7 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
 
             var discountPrices = ApplyDiscountsToPrice(dynamicPrice, listing, itemDiscounts);
 
-            if (!itemDiscounts.TryGetValue(listing.ID, out var _))
+            if (!itemDiscounts.ContainsKey(listing.ID))
                 continue;
 
             listing.SetExactPrice(Discount, discountPrices);
@@ -201,5 +208,84 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
             return;
 
         dynamicProto.SelectedLoreName = _random.Pick(namesProto.ListNames);
+    }
+
+        /// <summary>
+    /// Gets a random DynamicPrototype from WeightedRandomPrototype, weeding out unsuitable dynamics
+    /// </summary>
+    /// <param name="playerCount"> current number of ready players, by this indicator the required number is compared </param>
+    /// <param name="force"> ignore player checks and force any dynamics </param>
+    /// <returns></returns>
+    public string GetRandomDynamic(int playerCount = 0, bool force = false)
+    {
+        var validWeight = _prototype.Index<WeightedRandomPrototype>(WeightsProto);
+        var tempWeight = validWeight;
+        var selectedDynamic = string.Empty;
+
+        while (tempWeight.Weights.Keys.Count > 0)
+        {
+            var currentDynamic = tempWeight.Pick(_random);
+
+            if (!_prototype.TryIndex<DynamicPrototype>(currentDynamic, out var dynamicProto))
+            {
+                tempWeight.Weights.Remove(currentDynamic);
+                continue;
+            }
+
+            if (playerCount == 0 || force)
+            {
+                selectedDynamic = dynamicProto.ID;
+                break;
+            }
+
+            if (TrySelectDynamic(currentDynamic, dynamicProto, playerCount, out selectedDynamic))
+                break;
+
+            tempWeight.Weights.Remove(currentDynamic);
+        }
+
+        return selectedDynamic;
+    }
+
+    private bool TrySelectDynamic(string currentDynamic, DynamicPrototype dynamicProto, int playerCount, out string selectedDynamic)
+    {
+        selectedDynamic = string.Empty;
+
+        if (playerCount < dynamicProto.PlayersRequerment)
+            return false;
+
+        selectedDynamic = currentDynamic;
+        return true;
+
+    }
+
+
+    /// <summary>
+    /// Tries to find the type of dynamic while in Traitor game rule
+    /// </summary>
+    /// <returns>installed dynamic</returns>
+    public ProtoId<DynamicPrototype>? GetCurrentDynamic()
+    {
+        return CurrentDynamic;
+    }
+
+    public sealed class DynamicAddedEvent : EntityEventArgs
+    {
+        public ProtoId<DynamicPrototype> Dynamic;
+
+        public DynamicAddedEvent(ProtoId<DynamicPrototype> dynamic)
+        {
+            Dynamic = dynamic;
+        }
+    }
+
+    public sealed class DynamicSetAttempt : CancellableEntityEventArgs
+    {
+        public ProtoId<DynamicPrototype> Dynamic;
+
+        public DynamicSetAttempt(ProtoId<DynamicPrototype> dynamic)
+        {
+            Dynamic = dynamic;
+        }
     }
 }

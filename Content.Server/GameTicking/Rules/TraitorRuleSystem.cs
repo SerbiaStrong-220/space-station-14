@@ -260,7 +260,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             sb.AppendLine(Loc.GetString("traitor-role-uplink-implant"));
         //SS220-dynamics-info
         var dynamic = _dynamics.GetCurrentDynamic();
-        if (dynamic != default && _prototype.TryIndex<DynamicPrototype>(dynamic, out var dynamicProto))
+        if (dynamic != null && _prototype.TryIndex(dynamic, out var dynamicProto))
         {
             sb.AppendLine(Loc.GetString("dynamic-supply-level", ("dynamic", Loc.GetString(dynamicProto.Name))));
         }
@@ -302,29 +302,29 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     }
 
     // SS220 Dynamics begin
-    private bool InitDynamic(EntityUid ent, TraitorRuleComponent? rule)
+    private void InitDynamic(EntityUid ent, TraitorRuleComponent? rule)
     {
         if (!Resolve(ent, ref rule))
-            return false;
+            return;
 
         if (!rule.UseDynamics)
-            return false;
+            return;
 
         if (rule.Dynamic != null)
         {
             _dynamics.SetDynamic(rule.Dynamic);
-            return true;
+            return;
         }
 
         var dynamic = _dynamics.GetCurrentDynamic();
         if (dynamic != null)
         {
             _adminLogger.Add(LogType.EventStarted, LogImpact.Low, $"Can't set random dynamic because it's already was setted");
-            return false;
+            return;
         }
 
         _dynamics.SetRandomDynamic();
-        return true;
+        return;
     }
     // SS220 Dynamics end
 }
