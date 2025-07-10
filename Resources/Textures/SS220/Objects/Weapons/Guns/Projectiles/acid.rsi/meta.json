@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by SkaldetSkaeg (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "acid_spit_effect",
+        "delays": [
+            [
+                0.05,
+                0.05,
+                0.05,
+                0.05,
+                0.05
+            ]
+        ]
+    }
+  ]
+}

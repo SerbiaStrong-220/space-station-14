@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
@@ -12,18 +11,20 @@ using Content.Shared.Popups;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Prying.Components;
 using Content.Shared.Prying.Systems;
+using Content.Shared.SS220.Doors;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Tools.Systems;
 using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Map.Components;
+using System.Linq;
 
 namespace Content.Shared.Doors.Systems;
 
@@ -638,6 +639,14 @@ public abstract partial class SharedDoorSystem : EntitySystem
         // if there is no "user" we skip the access checks. Access is also ignored in some game-modes.
         if (user == null || AccessType == AccessTypes.AllowAll)
             return true;
+
+        //SS220 ChameleonStructure start
+        var ev = new DoorAccesAttemptEvent(user);
+        RaiseLocalEvent(uid, ref ev);
+
+        if (ev.Cancelled)
+            return false;
+        //SS220 ChameleonStructure end
 
         // If the door is on emergency access we skip the checks.
         if (TryComp<AirlockComponent>(uid, out var airlock) && airlock.EmergencyAccess)

@@ -378,3 +378,7 @@
       path: /Audio/Magic/blink.ogg
   - type: UseDelay
     delay: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 0.01

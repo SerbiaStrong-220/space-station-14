@@ -11,7 +11,4 @@ public sealed partial class RenameStartComponent : Component
 {
     [DataField]
     public int MinChar = 2;
-
-    [DataField]
-    public int MaxChar = HumanoidCharacterProfile.MaxNameLength;
 }

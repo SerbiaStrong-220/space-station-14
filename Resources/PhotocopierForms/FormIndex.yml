@@ -81,8 +81,12 @@
     - /PhotocopierForms/nanotrasen_station/law/sec_sopb_crit.xml
     - /PhotocopierForms/nanotrasen_station/law/sec_vdc.xml
     - /PhotocopierForms/nanotrasen_station/law/sec_vdc_gop.xml
+    - /PhotocopierForms/nanotrasen_station/law/law_exc.xml
+    - /PhotocopierForms/nanotrasen_station/law/law_zap.xml
+    - /PhotocopierForms/nanotrasen_station/law/law_rec.xml
     - /PhotocopierForms/nanotrasen_station/law/law_anonymousdenunciation.xml
     - /PhotocopierForms/nanotrasen_station/law/law_request.xml #SS220-Law Department
+    - /PhotocopierForms/nanotrasen_station/law/law_pic.xml
   - Id: security
     Name: Служба Безопасности
     Color: "#DD4040FF"
@@ -90,9 +94,9 @@
     Forms:
     - /PhotocopierForms/nanotrasen_station/security/sec_awt.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_dty.xml
-    - /PhotocopierForms/nanotrasen_station/security/sec_exc.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_inw.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_itg.xml
+    - /PhotocopierForms/nanotrasen_station/security/sec_ssl.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_ord_imp.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_pmt.xml
     - /PhotocopierForms/nanotrasen_station/security/sec_rep_itg.xml
@@ -132,6 +136,7 @@
     - /PhotocopierForms/nanotrasen_station/science/rnd_rnt.xml
     - /PhotocopierForms/nanotrasen_station/science/rnd_rar.xml
     - /PhotocopierForms/nanotrasen_station/science/rnd_ror.xml
+    - /PhotocopierForms/nanotrasen_station/science/rnd_dfct.xml
   - Id: cargo
     Name: Отдел снабжения
     Color: "#C2904AFF"

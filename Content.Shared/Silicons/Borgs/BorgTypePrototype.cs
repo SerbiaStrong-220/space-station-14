@@ -1,4 +1,4 @@
-﻿using Content.Shared.Interaction.Components;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Radio;
 using Content.Shared.Silicons.Borgs.Components;
@@ -152,4 +152,9 @@ public sealed partial class BorgTypePrototype : IPrototype
     /// </summary>
     [DataField]
     public SoundSpecifier FootstepCollection { get; set; } = new SoundCollectionSpecifier(DefaultFootsteps);
+
+    // SS220 Borgs-Id-fix start
+    [DataField]
+    public string Name = string.Empty;
+    // SS220 Borgs-Id-fix end
 }

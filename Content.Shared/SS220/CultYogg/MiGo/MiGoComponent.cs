@@ -6,6 +6,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
@@ -50,8 +51,9 @@ public sealed partial class MiGoComponent : Component
     #endregion
 
     /// <summary>
-    ///Enlsavement variables
+    /// The effect necessary for enslavement
     /// <summary>
+    [ViewVariables]
     public string RequiedEffect = "Rave";//Required effect for enslavement
 
     [DataField]
@@ -60,19 +62,20 @@ public sealed partial class MiGoComponent : Component
     /// <summary>
     /// The time it takes to enslave the target
     /// </summary>
-    [DataField]
+    [ViewVariables]
     public TimeSpan EnslaveTime = TimeSpan.FromSeconds(3);
 
     /// <summary>
-    ///Erect variables
+    /// How long healing effect will occure
     /// <summary>
-    public TimeSpan HealingEffectTime = TimeSpan.FromSeconds(15);//How long heal effect will occure
+    [ViewVariables]
+    public TimeSpan HealingEffectTime = TimeSpan.FromSeconds(15);
 
     /// <summary>
-    ///Erect variables
+    /// How long does it take to erect a building
     /// <summary>
     [ViewVariables, DataField]
-    public float ErectDoAfterSeconds = 3f;
+    public TimeSpan ErectDoAfterSeconds = TimeSpan.FromSeconds(3);
 
     /// <summary>
     /// Base time to erase buildings.
@@ -84,18 +87,12 @@ public sealed partial class MiGoComponent : Component
     /// <summary>
     /// Which entities can be erased by MiGo
     /// </summary>
-    [DataField]
-    public EntityWhitelist? EraseWhitelist = new()
-    {
-        Components =
-        [
-            "CultYoggBuilding",
-            "CultYoggBuildingFrame"
-        ]
-    };
+    [DataField(required: true)]
+    public EntityWhitelist? EraseWhitelist = new();
+
     #region Astral
     /// <summary>
-    ///Astral variables
+    /// Flag to check if the target is in the astral plane
     /// <summary>
     [ViewVariables, AutoNetworkedField]
     public bool IsPhysicalForm = true;//Is MiGo in phisycal form?
@@ -150,6 +147,7 @@ public sealed partial class MiGoComponent : Component
     /// <summary>
     /// How long it takes to be able to replace this migo
     /// </summary>
+    [ViewVariables]
     public TimeSpan BeforeReplacementCooldown = TimeSpan.FromSeconds(300);
 
     /// <summary>
@@ -158,4 +156,17 @@ public sealed partial class MiGoComponent : Component
     [DataField]
     public TimeSpan? ReplacementEventTime;
     #endregion
+}
+
+[NetSerializable, Serializable]
+public enum MiGoTimerVisualLayers : byte
+{
+    Digit1,
+    Digit2
+}
+[Serializable, NetSerializable]
+public enum MiGoVisual
+{
+    Base,
+    Astral
 }

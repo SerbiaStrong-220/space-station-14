@@ -4,7 +4,7 @@
     "x": 32,
     "y": 32
   },
-  "copyright": "Taken from tgstation, brigmedic locker is a resprited CMO locker by PuroSlavKing (Github), n2 sprites based on fire and emergency sprites, using sprites from /vg/station at https://github.com/vgstation-coders/vgstation13/commit/02b9f6894af4419c9f7e699a22c402b086d8067e, blueshield locker is taken from tauceti at commit ac6dbf6bc0559f119c07bf9a6e5e8dd5e62aea75, clown and mime lockers are resprites of tgstation lockers by TheArturZh based on how they look in Paradise Station, ussp locker is made by MIXnikita for SS220, cabinet locker is made by Kit0vras (Github) for SS220",
+  "copyright": "Taken from tgstation, brigmedic locker is a resprited CMO locker by PuroSlavKing (Github), n2 sprites based on fire and emergency sprites, using sprites from /vg/station at https://github.com/vgstation-coders/vgstation13/commit/02b9f6894af4419c9f7e699a22c402b086d8067e, genpop lockers by EmoGarbage404 (github), sci bio locker is a resprited bio viro locker by Alpha-Two (github), blueshield locker is taken from tauceti at commit ac6dbf6bc0559f119c07bf9a6e5e8dd5e62aea75, clown and mime lockers are resprites of tgstation lockers by TheArturZh based on how they look in Paradise Station, ussp locker is made by MIXnikita for SS220, cabinet locker is made by Kit0vras (Github) for SS220",
   "license": "CC-BY-SA-3.0",
   "states": [
     {
@@ -60,6 +60,15 @@
     },
     {
       "name": "bio_door"
+    },
+    {
+        "name": "bio_sci"
+    },
+    {
+        "name": "bio_sci_door"
+    },
+    {
+        "name": "bio_sci_open"
     },
     {
       "name": "bio_jan"
@@ -339,7 +348,37 @@
       "name": "generic_icon"
     },
     {
-      "name": "green_door"
+        "name": "genpop"
+    },
+    {
+        "name": "genpop_door_1"
+    },
+    {
+        "name": "genpop_door_2"
+    },
+    {
+        "name": "genpop_door_3"
+    },
+    {
+        "name": "genpop_door_4"
+    },
+    {
+        "name": "genpop_door_5"
+    },
+    {
+        "name": "genpop_door_6"
+    },
+    {
+        "name": "genpop_door_7"
+    },
+    {
+        "name": "genpop_door_8"
+    },
+    {
+        "name": "genpop_open"
+    },
+    {
+        "name": "green_door"
     },
     {
       "name": "grey_door"

@@ -295,6 +295,14 @@
   - SecurityWinterBoots
   - BootsJackSec
   - DetectiveShoesBootsLaceup
+
+- type: loadoutGroup
+  id: DetectiveNeck
+  name: loadout-group-detective-neck
+  loadouts:
+  - DefaultDetectiveHolster
+  - HolsterLegendaryMarksman
+  - HolsterBlackAngel
   # Детектив (Конец)
 #! Служба безопасности (Конец)
 
@@ -492,12 +500,11 @@
   id: ChiefMedicalOfficerGlasses
   name: loadout-group-chief-medical-officer-eyes
   loadouts:
-  - Glasses
-  - CyberMedVisor
-  - CMOCorpGlasses
   - MedicalHud
   - MedicalEyePatchHud
+  - CyberMedVisor
   - Glasses
+  - CMOCorpGlasses
   - GlassesJamjar
   - GlassesJensen
 #! Медицинский отдел (Конец)

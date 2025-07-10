@@ -14,6 +14,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
+using Content.Shared.Storage; //SS220-dispensers-popup-fix
 
 namespace Content.Shared.Containers.ItemSlots
 {
@@ -72,7 +73,7 @@ namespace Content.Shared.Containers.ItemSlots
                     continue;
 
                 var item = Spawn(slot.StartingItem, Transform(uid).Coordinates);
-                    
+
                 if (slot.ContainerSlot != null)
                     _containers.Insert(item, slot.ContainerSlot);
             }
@@ -247,10 +248,13 @@ namespace Content.Shared.Containers.ItemSlots
                 // the popup messages will just all be the same, so it's probably fine.
                 //
                 // doing a check to make sure that they're all the same or something is probably frivolous
-                if (lockedFailPopup != null)
-                    _popupSystem.PopupClient(Loc.GetString(lockedFailPopup), uid, args.User);
-                else if (whitelistFailPopup != null)
-                    _popupSystem.PopupClient(Loc.GetString(whitelistFailPopup), uid, args.User);
+                if (!HasComp<StorageComponent>(args.Target)) //SS220-dispensers-popup-fix
+                {
+                    if (lockedFailPopup != null)
+                        _popupSystem.PopupClient(Loc.GetString(lockedFailPopup), uid, args.User);
+                    else if (whitelistFailPopup != null)
+                        _popupSystem.PopupClient(Loc.GetString(whitelistFailPopup), uid, args.User);
+                }
                 return;
             }
 

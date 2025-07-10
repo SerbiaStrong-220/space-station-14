@@ -173,11 +173,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
-      typeDamageOnDead:
-        types:
-          Сerebral: 400
+      reviveLimit: 3
+      beforeDamageDelay: 180
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -239,11 +236,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
-      typeDamageOnDead:
-        types:
-          Сerebral: 400
+      reviveLimit: 3
+      beforeDamageDelay: 180
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -310,11 +304,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
-      typeDamageOnDead:
-        types:
-          Сerebral: 400
+      reviveLimit: 3
+      beforeDamageDelay: 180
     - type: RandomHumanoidAppearance
       randomizeName: false
 
@@ -378,11 +369,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
-      typeDamageOnDead:
-        types:
-          Сerebral: 400
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: SpecOpsCMO
@@ -448,11 +436,8 @@
     - type: DefibrillatorSkill
       chanceWithMedSkill: 1
     - type: LimitationRevive
-      maxRevive: 3
-      delayBeforeDamage: 180
-      typeDamageOnDead:
-        types:
-          Сerebral: 400
+      reviveLimit: 3
+      beforeDamageDelay: 180
 
 - type: job
   id: SpecOpsFighter

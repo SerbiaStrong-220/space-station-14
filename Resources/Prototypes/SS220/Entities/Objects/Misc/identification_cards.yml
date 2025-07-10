@@ -132,20 +132,6 @@
       - WhitelistChameleonIdCard
     #ss220 add pdaidpainter end
 
-- type: entity
-  parent: IDCardStandard
-  id: PrisonerIDCard
-  name: prisoner ID card
-  components:
-    - type: IdCard
-      jobTitle: job-name-prisoner #SS220 (upstream 65 localization)
-    - type: Sprite
-      layers:
-        - state: orange
-        - state: idprisoner
-    - type: PresetIdCard
-      job: Prisoner
-
 # Deathsquad
 - type: entity
   parent: IDCardStandard

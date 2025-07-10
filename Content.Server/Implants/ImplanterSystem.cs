@@ -11,6 +11,7 @@ using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
 using Content.Shared.SS220.MindSlave;
 using Content.Shared.Tag; // SS220-mindslave
+using Robust.Server.Player;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -25,12 +26,9 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     [Dependency] private readonly MindSlaveSystem _mindslave = default!;
     [Dependency] private readonly TagSystem _tag = default!; // SS220-mindslave
     [Dependency] private readonly IPrototypeManager _proto = default!; //ss220 fix implant draw popup
+    [Dependency] private readonly IPlayerManager _players = default!; // SS220 mind-slave-without-mind-fix
 
-    //SS220-mindslave begin
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string MindSlaveImplantProto = "MindSlaveImplant";
-    private const float MindShieldRemoveTime = 40;
-    //SS220-mindslave end
+    private const float MindShieldRemoveTime = 40; //SS220-mindslave
     // SS220-fakeMS fix begin
     [ValidatePrototypeId<EntityPrototype>]
     private const string FakeMindShieldImplant = "FakeMindShieldImplant";
@@ -66,7 +64,8 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
             return;
         }
 
-        if (component.Implant == MindSlaveImplantProto)
+
+        if (HasComp<MindSlaveImplantComponent>(component.ImplanterSlot.Item)) // SS220 mindslave fix start
         {
             if (args.User == target)
             {
@@ -219,6 +218,13 @@ public sealed partial class ImplanterSystem : SharedImplanterSystem
     {
         if (args.Cancelled || args.Handled || args.Target == null || args.Used == null)
             return;
+
+        // SS220 mind-slave-without-mind-fix start
+        if (component.CurrentMode.ToString() == "Inject"
+            && HasComp<MindSlaveImplantComponent>(component.ImplanterSlot.Item)
+            && !_players.TryGetSessionByEntity(args.Target.Value, out _))
+            return;
+        // SS220 mind-slave-without-mind-fix end
 
         Implant(args.User, args.Target.Value, args.Used.Value, component);
 

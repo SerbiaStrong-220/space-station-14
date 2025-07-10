@@ -20,7 +20,7 @@
         - MachineMask
         layer:
         - BulletImpassable
-  - type: Anchorable
+        - InteractImpassable
   - type: Appearance
   - type: SolutionContainerManager
     solutions:

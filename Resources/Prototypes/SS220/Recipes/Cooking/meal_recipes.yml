@@ -236,6 +236,35 @@
     FoodButterSlice: 3
 #SS220 McQ'Lich end
 
+- type: microwaveMealRecipe
+  id: RecipeGreenCaramelRooster
+  name: green caramel rooster
+  result: GreenCaramelRoosterFood
+  time: 10
+  reagents:
+    JuiceLime: 5
+  solids:
+    CaramelFood: 2
+
+- type: microwaveMealRecipe
+  id: RecipeYellowCaramelRooster
+  name: yellow caramel rooster
+  result: YellowCaramelRoosterFood
+  time: 10
+  reagents:
+    JuiceLemon: 5
+  solids:
+    CaramelFood: 2
+
+- type: microwaveMealRecipe
+  id: RecipeRedCaramelRooster
+  name: red caramel rooster
+  result: RedCaramelRoosterFood
+  time: 10
+  reagents:
+    Grenadine: 5
+  solids:
+    CaramelFood: 2
 #SS220 cluwnecomms start
 - type: microwaveMealRecipe
   id: CluwneComms

@@ -13,6 +13,7 @@
   icon: "JobIconMime"
   supervisors: job-supervisors-hop
   access:
+  - Service # ss220 fix
   - Theatre
   - Maintenance
   special:
@@ -36,14 +37,25 @@
     - RubberStampMime
 
 - type: entity
+  parent: BaseAction
   id: ActionMimeInvisibleWall
   name: Create Invisible Wall
   description: Create an invisible wall in front of you, if placeable there.
   components:
-  - type: InstantAction
+  - type: Action
     priority: -1
     useDelay: 30
     icon:
       sprite: Structures/Walls/solid.rsi
       state: full
+  - type: InstantAction
     event: !type:InvisibleWallActionEvent
+
+- type: chameleonOutfit
+  id: MimeChameleonOutfit
+  job: Mime
+  equipment:
+    head: ClothingHeadHatMimesoft
+    eyes: ClothingEyesGlassesCheapSunglasses
+    neck: ClothingNeckScarfStripedZebra
+    outerClothing: ClothingOuterWinterMime

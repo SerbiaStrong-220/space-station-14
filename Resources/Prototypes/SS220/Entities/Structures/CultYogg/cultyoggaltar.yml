@@ -13,8 +13,6 @@
   - type: Icon
     sprite: SS220/Structures/CultYogg/yoggaltar.rsi
     state: cultaltar
-  - type: Anchorable
-  - type: Pullable
   - type: Appearance
   - type: CultYoggAltar
   - type: CultYoggBuilding
@@ -41,6 +39,8 @@
         density: 190
         mask:
         - TableMask
+        layer:
+        - InteractImpassable
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic

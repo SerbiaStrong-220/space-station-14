@@ -428,7 +428,6 @@
     - HamsterWearable
     - WhitelistChameleon
 
-
 # Служба безопасности
 
   # ГСБ
@@ -554,6 +553,35 @@
       Female: FemaleEngineer
       Unsexed: MaleEngineer
 
+# Медицинский
+
+  #Главный врач 
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatCapCMO
+  name: chief medical officer's parade cap
+  description: A sign that you can definitely be trusted with someone's life.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/cmo_parade_cap.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/cmo_parade_cap.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - Ian # SS220 Shapochki
+    - HamsterWearable
+  #ss220 special_sounds start
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleDoctor
+      Female: FemaleDoctor
+      Unsexed: MaleDoctor
+  #ss220 special_sounds end
+ 
 
 # OTHER
 
