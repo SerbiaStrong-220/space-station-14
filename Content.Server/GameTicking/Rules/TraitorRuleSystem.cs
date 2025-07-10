@@ -61,6 +61,12 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         InitDynamic(uid, component); // SS220 Dynamics
     }
 
+    protected override void Ended(EntityUid uid, TraitorRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+    {
+        base.Ended(uid, component, gameRule, args);
+        _dynamics.RemoveDynamic();
+    }
+
     private void AfterEntitySelected(Entity<TraitorRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
         Log.Debug($"AfterAntagEntitySelected {ToPrettyString(ent)}");

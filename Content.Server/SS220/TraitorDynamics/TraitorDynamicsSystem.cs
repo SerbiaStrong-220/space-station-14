@@ -210,6 +210,11 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         dynamicProto.SelectedLoreName = _random.Pick(namesProto.ListNames);
     }
 
+    public void RemoveDynamic()
+    {
+        CurrentDynamic = null;
+    }
+
         /// <summary>
     /// Gets a random DynamicPrototype from WeightedRandomPrototype, weeding out unsuitable dynamics
     /// </summary>
