@@ -923,7 +923,7 @@
   id: AgentIDCard
   suffix: Agent
   components:
-  - type: PresetIdCard
+  - type: TraitorAgent
     job: Passenger
   - type: Access
     tags:

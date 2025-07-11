@@ -1,0 +1,24 @@
+- type: job
+  id: TraitorAgent
+  name: job-name-passenger
+  description: job-description-passenger
+  playTimeTracker: JobPassenger
+  startingGear: PassengerGear
+  icon: "JobIconPassenger"
+  supervisors: job-supervisors-everyone
+  access:
+  - SyndicateAgent
+  - Maintenance
+
+- type: job
+  id: NuclearAgent
+  name: job-name-passenger
+  description: job-description-passenger
+  playTimeTracker: JobPassenger
+  startingGear: PassengerGear
+  icon: "JobIconPassenger"
+  supervisors: job-supervisors-everyone
+  access:
+  - SyndicateAgent
+  - NuclearOperative
+  - Maintenance
