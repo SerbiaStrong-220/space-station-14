@@ -5,9 +5,9 @@
   - type: Store
     name: store-preset-name-uplink
     categories:
-    - uplink_wearables_clown
-    - additional_clown
-    - trinkets_clown
+    - UplinkWearablesClown
+    - AdditionalClown
+    - TrinketsClown
     currencyWhitelist:
     - TrashBananaPeel
     balance:
@@ -21,7 +21,7 @@
   cost:
     TrashBananaPeel: 20
   categories:
-    - uplink_wearables_clown
+    - UplinkWearablesClown
 
 - type: listing
   id: Healing_toolbox_set
@@ -31,7 +31,7 @@
   cost:
     TrashBananaPeel: 75
   categories:
-    - uplink_wearables_clown
+    - UplinkWearablesClown
 
 - type: listing
   id: Magic_plush_set
@@ -39,7 +39,7 @@
   cost:
     TrashBananaPeel: 3
   categories:
-    - additional_clown
+    - AdditionalClown
 
 - type: listing
   id: Uplink_emp_implanter_set
@@ -48,7 +48,7 @@
   cost:
     TrashBananaPeel: 5
   categories:
-    - additional_clown
+    - AdditionalClown
 
 - type: listing
   id: Mob_honk_bot_set
@@ -57,7 +57,7 @@
   cost:
     TrashBananaPeel: 100
   categories:
-    - uplink_wearables_clown
+    - UplinkWearablesClown
 
 - type: listing
   id: Present_random_set
@@ -67,7 +67,7 @@
   cost:
     TrashBananaPeel: 2
   categories:
-    - additional_clown
+    - AdditionalClown
 
 - type: listing
   id: Uplink_clothing_no_slips_shoes_set
@@ -75,7 +75,7 @@
   cost:
     TrashBananaPeel: 2
   categories:
-    - additional_clown
+    - AdditionalClown
 
 - type: listing
   id: Uplink_toolbox_set
@@ -85,7 +85,7 @@
   cost:
     TrashBananaPeel: 10
   categories:
-    - additional_clown
+    - AdditionalClown
 
 - type: listing
   id: Bread_set
@@ -95,7 +95,7 @@
   cost:
     TrashBananaPeel: 30
   categories:
-    - uplink_wearables_clown
+    - UplinkWearablesClown
 
 - type: listing
   id: Cig_pack_syndicate_set
@@ -105,7 +105,7 @@
   cost:
     TrashBananaPeel: 10
   categories:
-    - additional_clown
+    - AdditionalClown
 
 - type: listing
   id: Soap_omega_set
@@ -115,7 +115,7 @@
   cost:
     TrashBananaPeel: 110
   categories:
-    - uplink_wearables_clown
+    - UplinkWearablesClown
 
 - type: listing
   id: Food_box_donkpocket_teriyaki_set
@@ -125,7 +125,7 @@
   cost:
     TrashBananaPeel: 55
   categories:
-    - uplink_wearables_clown
+    - UplinkWearablesClown
 
 - type: listing
   id: Drink_nukie_can_set
@@ -135,7 +135,7 @@
   cost:
     TrashBananaPeel: 25
   categories:
-    - trinkets_clown
+    - TrinketsClown
 
 - type: listing
   id: Syndicate_bomb_fake_set
@@ -145,7 +145,7 @@
   cost:
     TrashBananaPeel: 5
   categories:
-    - uplink_wearables_clown
+    - UplinkWearablesClown
 
 - type: listing
   id: Golden_bike_horn_set
@@ -153,7 +153,7 @@
   cost:
     TrashBananaPeel: 25
   categories:
-    - trinkets_clown
+    - TrinketsClown
 
 - type: listing
   id: Clothing_shoes_bling_set
@@ -161,7 +161,7 @@
   cost:
     TrashBananaPeel: 25
   categories:
-    - trinkets_clown
+    - TrinketsClown
 
 - type: listing
   id: Floor_tile_item_clown_set
@@ -169,7 +169,7 @@
   cost:
     TrashBananaPeel: 1
   categories:
-    - trinkets_clown
+    - TrinketsClown
 
 - type: listing
   id: Floor_tile_item_carpet_clown_set
@@ -177,7 +177,7 @@
   cost:
     TrashBananaPeel: 1
   categories:
-    - trinkets_clown
+    - TrinketsClown
 
 - type: listing
   id: Clothing_outer_hardsuit_clown_set
@@ -185,7 +185,7 @@
   cost:
     TrashBananaPeel: 60
   categories:
-    - additional_clown
+    - AdditionalClown
 
 - type: listing
   id: Toy_sword_set
@@ -193,20 +193,20 @@
   cost:
     TrashBananaPeel: 4
   categories:
-    - additional_clown
+    - AdditionalClown
 
 - type: storeCategory
-  id: Uplink_wearables_clown
+  id: UplinkWearablesClown
   name: uplink-clown-category-main
   priority: 1
 
 - type: storeCategory
-  id: Additional_clown
+  id: AdditionalClown
   name: uplink-clown-category-bonus
   priority: 2
 
 - type: storeCategory
-  id: Trinkets_clown
+  id: TrinketsClown
   name: uplink-clown-category-trinkets
   priority: 3
 
