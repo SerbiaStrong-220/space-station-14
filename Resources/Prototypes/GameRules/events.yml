@@ -684,18 +684,21 @@
   components:
   - type: StationEvent
   # SS220 MoreAnonces (sound and alert upgrades) bgn
-    startAnnouncementColor: "#18abf5"
-    #ss220 disable ion storm announcement start
-    #startAnnouncement: station-event-ion-storm-start-announcement
-    #startAudio:
-      #path: /Audio/SS220/Announcements/i-storm1.ogg
-      #params:
-        #volume: -4
-    #ss220 disable ion storm announcement end
+    #ss220 tweak ion storm start
+    endAnnouncementColor: "#18abf5"
+    endAnnouncement: station-event-ion-storm-start-announcement
+    endAudio:
+      path: /Audio/SS220/Announcements/i-storm1.ogg
+      params:
+        volume: -4
+    #ss220 tweak ion storm start
   # SS220 MoreAnonces (sound and alert upgrades) end
     weight: 8
     reoccurrenceDelay: 20
-    duration: 1
+    #ss220 tweak ion storm start
+    duration: 900
+    maxDuration: 1200
+    #ss220 tweak ion storm end
   - type: IonStormRule
 
 - type: entity
