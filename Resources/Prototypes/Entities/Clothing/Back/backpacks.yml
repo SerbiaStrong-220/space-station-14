@@ -302,6 +302,10 @@
     microFiberMaterial: micro-fibers-reinforced-textile
     microFiberColor: micro-fibers-black
 #SS220 Micro_fibers end
+#SS220 ERT-ExplosionResistance-fix start
+  - type: ExplosionResistance
+    damageCoefficient: 0
+#SS220 ERT-ExplosionResistance-fix end
 
 - type: entity
   parent: ClothingBackpackERTLeader
