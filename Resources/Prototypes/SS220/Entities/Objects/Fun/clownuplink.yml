@@ -1,5 +1,5 @@
 - type: entity
-  id: store_preset_uplink_clown
+  id: Store_preset_uplink_clown
   abstract: true
   components:
   - type: Store
@@ -9,210 +9,210 @@
     - additional_clown
     - trinkets_clown
     currencyWhitelist:
-    - trash_banana_peel
+    - TrashBananaPeel
     balance:
-      trash_banana_peel: 0
+      TrashBananaPeel: 0
 
 - type: listing
-  id: food_pie_banana_cream_set
+  id: Food_pie_banana_cream_set
   name: uplink-clown-foodpie-name
   description: uplink-clown-foodpie-desc
   productEntity: FoodPieBananaCream
   cost:
-    trash_banana_peel: 20
+    TrashBananaPeel: 20
   categories:
     - uplink_wearables_clown
 
 - type: listing
-  id: healing_toolbox_set
+  id: Healing_toolbox_set
   name: uplink-clown-gloves-name
   description: uplink-clown-gloves-desc
   productEntity: ClothingHandsGlovesColorYellow
   cost:
-    trash_banana_peel: 75
+    TrashBananaPeel: 75
   categories:
     - uplink_wearables_clown
 
 - type: listing
-  id: magic_plush_set
+  id: Magic_plush_set
   productEntity: WhoopieCushion
   cost:
-    trash_banana_peel: 3
+    TrashBananaPeel: 3
   categories:
     - additional_clown
 
 - type: listing
-  id: uplink_emp_implanter_set
+  id: Uplink_emp_implanter_set
   name: uplink-clown-implanter-name
   productEntity: BikeHornImplanter
   cost:
-    trash_banana_peel: 5
+    TrashBananaPeel: 5
   categories:
     - additional_clown
 
 - type: listing
-  id: mob_honk_bot_set
+  id: Mob_honk_bot_set
   name: uplink-clown-honkbot-name
   productEntity: MobHonkBot
   cost:
-    trash_banana_peel: 100
+    TrashBananaPeel: 100
   categories:
     - uplink_wearables_clown
 
 - type: listing
-  id: present_random_set
+  id: Present_random_set
   name: uplink-clown-present-name
   description: uplink-clown-present-desc
   productEntity: PresentRandom
   cost:
-    trash_banana_peel: 2
+    TrashBananaPeel: 2
   categories:
     - additional_clown
 
 - type: listing
-  id: uplink_clothing_no_slips_shoes_set
+  id: Uplink_clothing_no_slips_shoes_set
   productEntity: ToyHammer
   cost:
-    trash_banana_peel: 2
+    TrashBananaPeel: 2
   categories:
     - additional_clown
 
 - type: listing
-  id: uplink_toolbox_set
+  id: Uplink_toolbox_set
   name: uplink-clown-duffel-name
   description: uplink-clown-duffel-desc
   productEntity: ClothingBackpackDuffelSyndicateCostumeClown
   cost:
-    trash_banana_peel: 10
+    TrashBananaPeel: 10
   categories:
     - additional_clown
 
 - type: listing
-  id: bread_set
+  id: Bread_set
   name: uplink-clown-soap-name
   description: uplink-clown-soap-desc
   productEntity: SoapSyndie
   cost:
-    trash_banana_peel: 30
+    TrashBananaPeel: 30
   categories:
     - uplink_wearables_clown
 
 - type: listing
-  id: cig_pack_syndicate_set
+  id: Cig_pack_syndicate_set
   name: uplink-clown-cigpack-name
   description: uplink-clown-cigpack-desc
   productEntity: CigPackSyndicate
   cost:
-    trash_banana_peel: 10
+    TrashBananaPeel: 10
   categories:
     - additional_clown
 
 - type: listing
-  id: soap_omega_set
+  id: Soap_omega_set
   name: uplink-clown-omegasoap-name
   description: uplink-clown-omegasoap-desc
   productEntity: SoapOmega
   cost:
-    trash_banana_peel: 110
+    TrashBananaPeel: 110
   categories:
     - uplink_wearables_clown
 
 - type: listing
-  id: food_box_donkpocket_teriyaki_set
+  id: Food_box_donkpocket_teriyaki_set
   name: uplink-clown-ears-name
   description: uplink-clown-ears-desc
   productEntity: ClothingHeadHatCatEars
   cost:
-    trash_banana_peel: 55
+    TrashBananaPeel: 55
   categories:
     - uplink_wearables_clown
 
 - type: listing
-  id: drink_nukie_can_set
+  id: Drink_nukie_can_set
   name: uplink-clown-nukiecan-name
   description: uplink-clown-nukiecan-desc
   productEntity: DrinkNukieCan
   cost:
-    trash_banana_peel: 25
+    TrashBananaPeel: 25
   categories:
     - trinkets_clown
 
 - type: listing
-  id: syndicate_bomb_fake_set
+  id: Syndicate_bomb_fake_set
   name: uplink-clown-fakebomb-name
   description: uplink-clown-fakebomb-desc
   productEntity: SnapPopBox
   cost:
-    trash_banana_peel: 5
+    TrashBananaPeel: 5
   categories:
     - uplink_wearables_clown
 
 - type: listing
-  id: golden_bike_horn_set
+  id: Golden_bike_horn_set
   productEntity: GoldenBikeHorn
   cost:
-    trash_banana_peel: 25
+    TrashBananaPeel: 25
   categories:
     - trinkets_clown
 
 - type: listing
-  id: clothing_shoes_bling_set
+  id: Clothing_shoes_bling_set
   productEntity: ClothingShoesBling
   cost:
-    trash_banana_peel: 25
+    TrashBananaPeel: 25
   categories:
     - trinkets_clown
 
 - type: listing
-  id: floor_tile_item_clown_set
+  id: Floor_tile_item_clown_set
   productEntity: FloorTileItemClown
   cost:
-    trash_banana_peel: 1
+    TrashBananaPeel: 1
   categories:
     - trinkets_clown
 
 - type: listing
-  id: floor_tile_item_carpet_clown_set
+  id: Floor_tile_item_carpet_clown_set
   productEntity: FloorTileItemCarpetClown
   cost:
-    trash_banana_peel: 1
+    TrashBananaPeel: 1
   categories:
     - trinkets_clown
 
 - type: listing
-  id: clothing_outer_hardsuit_clown_set
+  id: Clothing_outer_hardsuit_clown_set
   productEntity: ClothingOuterHardsuitClown
   cost:
-    trash_banana_peel: 60
+    TrashBananaPeel: 60
   categories:
     - additional_clown
 
 - type: listing
-  id: toy_sword_set
+  id: Toy_sword_set
   productEntity: ToySword
   cost:
-    trash_banana_peel: 4
+    TrashBananaPeel: 4
   categories:
     - additional_clown
 
 - type: storeCategory
-  id: uplink_wearables_clown
+  id: Uplink_wearables_clown
   name: uplink-clown-category-main
   priority: 1
 
 - type: storeCategory
-  id: additional_clown
+  id: Additional_clown
   name: uplink-clown-category-bonus
   priority: 2
 
 - type: storeCategory
-  id: trinkets_clown
+  id: Trinkets_clown
   name: uplink-clown-category-trinkets
   priority: 3
 
 - type: entity
-  parent: [BaseItem, store_preset_uplink_clown]
-  id: clown_uplink
+  parent: [BaseItem, Store_preset_uplink_clown]
+  id: ClownUplink
   name: banana phone
   description: Direct connection with the Glorious Honkmother.
   suffix: clown uplink
@@ -259,11 +259,12 @@
     verbImage: null
   - type: Store
     balance:
-      trash_banana_peel: 0
+      TrashBananaPeel: 0
 
 - type: currency
-  id: trash_banana_peel
+  id: TrashBananaPeel
   displayName: uplink-clown-currency
   cash:
-    1: trash_banana_peel
+    1: TrashBananaPeel
   canWithdraw: false
+
