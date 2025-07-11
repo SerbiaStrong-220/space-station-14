@@ -924,7 +924,7 @@
   suffix: Agent
   components:
   - type: PresetIdCard
-    job: TraitorAgent
+    job: Passenger
   - type: Access
     tags:
     - Maintenance
