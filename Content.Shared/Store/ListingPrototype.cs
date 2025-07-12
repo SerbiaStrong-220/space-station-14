@@ -43,7 +43,7 @@ public partial class ListingData : IEquatable<ListingData>
         other.DiscountDownTo,
         other.DisableRefund,
         other.DynamicsPrices, // SS220 TraitorDynamics
-        other.CostBeforeDynamic) // SS220 TraitorDynamics
+        other.CostFromCatalog) // SS220 TraitorDynamics
     {
 
     }
@@ -92,7 +92,7 @@ public partial class ListingData : IEquatable<ListingData>
         DisableRefund = disableRefund;
         DynamicsPrices = new Dictionary<ProtoId<DynamicPrototype>,
             Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>(dynamicsPrices); // SS220 TraitorDynamics
-        CostBeforeDynamic = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(costBeforeDynamic); // SS220 TraitorDynamics
+        CostFromCatalog = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(costBeforeDynamic); // SS220 TraitorDynamics
     }
 
     [ViewVariables]
@@ -209,7 +209,7 @@ public partial class ListingData : IEquatable<ListingData>
     public Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> DynamicsPrices = new();
 
     [DataField]
-    public IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> CostBeforeDynamic = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>();
+    public IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> CostFromCatalog = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>();
     // SS220 TraitorDynamics
 
     /// <summary>
@@ -314,7 +314,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             listingData.DiscountDownTo,
             listingData.DisableRefund,
             listingData.DynamicsPrices,
-            listingData.CostBeforeDynamic) // SS220 TraitorDynamics
+            listingData.CostFromCatalog) // SS220 TraitorDynamics
     {
     }
 
@@ -392,6 +392,11 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     public void SetNewCost(Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> newCost)
     {
         OriginalCost = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(newCost);
+    }
+
+    public void ReturnCostFromCatalog()
+    {
+        OriginalCost = CostFromCatalog;
     }
     //SS220 - set-dynamics-price-end
 

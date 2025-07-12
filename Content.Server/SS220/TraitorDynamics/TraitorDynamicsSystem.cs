@@ -91,13 +91,12 @@ public sealed class TraitorDynamicsSystem : EntitySystem
                 continue;
 
             if (comp.AccountOwner == null)
-                return;
+                continue;
 
             var listings = _store.GetAvailableListings(comp.AccountOwner.Value, store, comp).ToArray();
             ApplyDynamicPrice(store, listings, dynamic.ID);
         }
     }
-
 
     private void OnRoundEndAppend(RoundEndTextAppendEvent ev)
     {
@@ -115,7 +114,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         if (!CurrentDynamic.HasValue)
             return;
 
-        CurrentDynamic = null;
+        RemoveDynamic();
     }
 
     private void ApplyDynamicPrice(EntityUid store, IReadOnlyList<ListingDataWithCostModifiers> listings, ProtoId<DynamicPrototype> currentDynamic)
@@ -213,6 +212,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     public void RemoveDynamic()
     {
         CurrentDynamic = null;
+        ResetDynamicPrices();
     }
 
         /// <summary>
@@ -250,6 +250,25 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         }
 
         return selectedDynamic;
+    }
+
+    private void ResetDynamicPrices()
+    {
+        var query = EntityQueryEnumerator<StoreComponent>();
+        while (query.MoveNext(out var store, out var comp))
+        {
+            if (!comp.UseDynamicPrices)
+                continue;
+
+            if (comp.AccountOwner == null)
+                continue;
+
+            var listings = _store.GetAvailableListings(comp.AccountOwner.Value, store, comp).ToArray();
+            foreach (var listing in listings)
+            {
+                listing.ReturnCostFromCatalog();
+            }
+        }
     }
 
     private bool TrySelectDynamic(string currentDynamic, DynamicPrototype dynamicProto, int playerCount, out string selectedDynamic)

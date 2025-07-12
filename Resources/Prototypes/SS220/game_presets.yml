@@ -40,7 +40,7 @@
 
 - type: gamePreset
   id: DynamicTraitor
-  name: DynamicTraitor
+  name: dynamic-traitor-tile
   description: traitor-description
   minPlayers: 5
   rules:
