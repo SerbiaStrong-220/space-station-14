@@ -1,6 +1,7 @@
 dynamic-was-set = Был установлен динамик агентов: {$dynamic}
 dynamic-show-end-round = В раунде был динамик агентов: {$dynamic}
 dynamic-supply-level = Уровень снабжения агентов в секторе:  {$dynamic}
+dynamic-traitor-tile = Динамические предатели
 dynamic-type-label = Название операции:
 
 dynamic-unknown-name = НЕИЗВЕСТНО
