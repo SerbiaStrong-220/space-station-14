@@ -64,5 +64,5 @@ public sealed partial class LimitationReviveComponent : Component
     /// How much will the initial metabolic change be adjusted?
     /// </summary>
     [DataField]
-    public float MetabolismModifier = 0.25f; // original bed vaule is 10f (StasisBedComponent), not ok and i dont want to change official code
+    public float MetabolismModifier = 0.2f; // original bed vaule is 10f (StasisBedComponent), not ok and i dont want to change official code
 }
