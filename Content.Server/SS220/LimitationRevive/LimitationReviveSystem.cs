@@ -8,6 +8,7 @@ using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Traits;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
@@ -26,6 +27,7 @@ public sealed class LimitationReviveSystem : EntitySystem
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private readonly IComponentFactory _componentFactory = default!;
 
     public override void Initialize()
     {
@@ -67,14 +69,22 @@ public sealed class LimitationReviveSystem : EntitySystem
 
         var traitProto = _prototype.Index<TraitPrototype>(traitString);
 
-        if (traitProto.Components is not null)
+        if (traitProto.Components is null)
+            return false;
+
+        foreach (var comp in traitProto.Components)
         {
-            ent.Comp.RecievedDebuffs.Add(traitString);
-            _entityManager.AddComponents(ent, traitProto.Components, false);
-            return true;
+            var reg = _componentFactory.GetRegistration(comp.Key);
+
+            if (_entityManager.HasComponent(ent, reg))
+            {
+                return false;
+            }
         }
 
-        return false;
+        ent.Comp.RecievedDebuffs.Add(traitString);
+        _entityManager.AddComponents(ent, traitProto.Components, false);
+        return true;
     }
 
     private void OnCloning(Entity<LimitationReviveComponent> ent, ref CloningEvent args)
