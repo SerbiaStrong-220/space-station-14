@@ -142,9 +142,9 @@ public sealed class LimitationReviveSystem : EntitySystem
         if (ent.Comp.DamageTime is null)//update timer before damage, cause we cant get current metabolism from anywhere
         {
             if (args.Apply)
-                ent.Comp.BeforeDamageDelay *= args.Multiplier * ent.Comp.MetabolismModifier;
+                ent.Comp.BeforeDamageDelay *= args.Multiplier * ent.Comp.MetabolismModifierAffect;
             else
-                ent.Comp.BeforeDamageDelay /= args.Multiplier * ent.Comp.MetabolismModifier;
+                ent.Comp.BeforeDamageDelay /= args.Multiplier * ent.Comp.MetabolismModifierAffect;
 
             return;
         }
@@ -152,9 +152,9 @@ public sealed class LimitationReviveSystem : EntitySystem
         var newTime = (ent.Comp.DamageTime - _timing.CurTime);
 
         if (args.Apply)
-            newTime *= args.Multiplier * ent.Comp.MetabolismModifier;
+            newTime *= args.Multiplier * ent.Comp.MetabolismModifierAffect;
         else
-            newTime /= args.Multiplier * ent.Comp.MetabolismModifier;
+            newTime /= args.Multiplier * ent.Comp.MetabolismModifierAffect;
 
         ent.Comp.DamageTime = _timing.CurTime + newTime;
     }
