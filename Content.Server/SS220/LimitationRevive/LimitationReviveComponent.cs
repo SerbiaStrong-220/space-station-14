@@ -56,4 +56,10 @@ public sealed partial class LimitationReviveComponent : Component
     /// </summary>
     [DataField]
     public float ChanceToAddTrait = 0.6f;
+
+    /// <summary>
+    /// How much will the initial metabolic change be adjusted?
+    /// </summary>
+    [DataField]
+    public float MetabolismModifier = 0.25f;
 }
