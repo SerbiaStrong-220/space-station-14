@@ -28,7 +28,7 @@ public sealed partial class LimitationReviveComponent : Component
     /// Delay before target takes brain damage
     /// </summary>
     [DataField]
-    public TimeSpan BeforeDamageDelay = TimeSpan.FromSeconds(60);
+    public TimeSpan BeforeDamageDelay = TimeSpan.FromSeconds(180);
 
     /// <summary>
     /// The exact time when the target will take damage
@@ -50,6 +50,9 @@ public sealed partial class LimitationReviveComponent : Component
 
     [DataField]
     public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";
+
+    [ViewVariables]
+    public List<string> RecievedDebuffs = [];
 
     /// <summary>
     /// The probability from 0 to 1 that a negative feature will be added in case of unsuccessful use of the defibrillator.
