@@ -132,30 +132,6 @@ public sealed partial class MiGoComponent : Component
     [DataField]
     public ProtoId<AlertPrototype> AstralAlert = "MiGoAstralAlert";
     #endregion
-
-    #region Replacement
-    /// <summary>
-    ///Replacement required cause MiGo is key character among
-    /// <summary>
-
-    //Marking if entity can be gibbed and replaced
-    public bool MayBeReplaced = false;
-
-    //Should the timer count down the time
-    public bool ShouldBeCounted = false;
-
-    /// <summary>
-    /// How long it takes to be able to replace this migo
-    /// </summary>
-    [ViewVariables]
-    public TimeSpan BeforeReplacementCooldown = TimeSpan.FromSeconds(300);
-
-    /// <summary>
-    /// Buffer to markup when time has come
-    /// </summary>
-    [DataField]
-    public TimeSpan? ReplacementEventTime;
-    #endregion
 }
 
 [NetSerializable, Serializable]
