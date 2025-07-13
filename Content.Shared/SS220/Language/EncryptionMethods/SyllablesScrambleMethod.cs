@@ -52,8 +52,8 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
             Syllables.Count == 0)
             return message;
 
-        var spaceRegex = @"\S+";
-        var matches = Regex.Matches(message, spaceRegex);
+        var wordRegex = @"\w+";
+        var matches = Regex.Matches(message, wordRegex);
         if (matches.Count <= 0)
             return message;
 
@@ -91,27 +91,22 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
         if (!prototypeManager.TryIndex<LanguageReplacementsPrototype>(ReplaceDictonary, out var prototype))
             return false;
 
-        var wordRegex = @"\w+";
-        var words = Regex.Matches(word, wordRegex);
-
-        foreach (Match m in words)
+        foreach (var (first, replace) in prototype.Replacements)
         {
-            foreach (var (first, replace) in prototype.Replacements)
+            if (word.ToLower() == locManager.GetString(first))
             {
-                if (m.Value.ToLower() == locManager.GetString(first))
+                var wordToReplace = locManager.GetString(replace);
+                if (_capitalize)
                 {
-                    var replacedWord = locManager.GetString(replace);
-                    if (_capitalize)
-                    {
-                        _capitalize = false;
-                        replacedWord = string.Concat(replacedWord.Substring(0, 1).ToUpper(), replacedWord.AsSpan(1));
-                        replaced += replacedWord + " ";
-                    }
-                    else
-                    {
-                        replaced += replacedWord + " ";
-                    }
+                    _capitalize = false;
+                    wordToReplace = string.Concat(wordToReplace.Substring(0, 1).ToUpper(), wordToReplace.AsSpan(1));
+                    replaced += wordToReplace + " ";
                 }
+                else
+                {
+                    replaced += wordToReplace + " ";
+                }
+                break;
             }
         }
 

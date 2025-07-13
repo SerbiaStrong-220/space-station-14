@@ -52,22 +52,26 @@ public sealed class UndereducatedClientSystem : EntitySystem
         }
     }
 
-    private bool TryGetSpokenLanguageList(LanguageComponent langComp, out List<string> langList)
+    private bool TryGetSpokenLanguageList(LanguageComponent langComp, out List<string> availableLanguagesList)
     {
-        langList = [];
-        var i = 0;
-        while (i <= langComp.AvailableLanguages.Count - 1)
-        {
-            if (langComp.AvailableLanguages[i].Id != _languageSystem.GalacticLanguage
-                && langComp.AvailableLanguages[i].Id != _languageSystem.UniversalLanguage
-                && langComp.AvailableLanguages[i].CanSpeak)
-                langList.Add(langComp.AvailableLanguages[i].Id);
-            i++;
-        }
-        if (langList.Count <= 0)
-            return false;
+        availableLanguagesList = [];
 
-        return true;
+        List<string> blackList = [];
+        blackList.Add(_languageSystem.GalacticLanguage);
+        blackList.Add(_languageSystem.UniversalLanguage);
+
+        foreach (var lang in langComp.AvailableLanguages)
+        {
+            if (blackList.Contains(lang.Id) || !lang.CanSpeak)
+                continue;
+
+            availableLanguagesList.Add(lang.Id);
+        }
+
+        if (availableLanguagesList.Count > 0)
+            return true;
+
+        return false;
     }
 
     private void OnPlayerDeattached(Entity<UndereducatedComponent> ent, ref PlayerDetachedEvent args)

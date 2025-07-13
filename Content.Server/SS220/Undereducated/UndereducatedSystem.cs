@@ -62,12 +62,14 @@ public sealed partial class UndereducatedSystem : EntitySystem
 
         else if (TryComp<LanguageComponent>(ent, out var langComp))
         {
-            var i = 0;
-            while (i <= langComp.AvailableLanguages.Count - 1
-                && !langComp.AvailableLanguages[i].CanSpeak)
-                i++;
-            if (i <= langComp.AvailableLanguages.Count - 1)
-                ent.Comp.Language = langComp.AvailableLanguages[i].Id;
+            foreach (var lang in langComp.AvailableLanguages)
+            {
+                if (lang.CanSpeak)
+                {
+                    ent.Comp.Language = lang.Id;
+                    break;
+                }
+            }
         }
 
         Dirty(ent);
@@ -81,10 +83,9 @@ public sealed partial class UndereducatedSystem : EntitySystem
 
         args.Chance = Math.Clamp(args.Chance, 0f, 1f);
 
-        if (!_languageSystem.CanSpeak(ent, args.SelectedLanguage))
-            args.SelectedLanguage = comp.Language;
+        if (_languageSystem.CanSpeak(ent, args.SelectedLanguage))
+            comp.Language = args.SelectedLanguage;
 
-        comp.Language = args.SelectedLanguage;
         comp.ChanseToReplace = args.Chance;
         comp.Tuned = true;
         Dirty(ent, comp);
