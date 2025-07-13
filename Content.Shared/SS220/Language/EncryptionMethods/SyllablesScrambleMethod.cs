@@ -67,9 +67,9 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
         foreach (Match m in matches)
         {
             var word = m.Value.ToLower();
-            if (TryReplaceWord(word, prototypeManager, locManager, out var replaceddWord))
+            if (TryReplaceWord(word, prototypeManager, locManager, out var replaced))
             {
-                result.Append(replaceddWord);
+                result.Append(replaced);
                 continue;
             }
             seed = _inputSeed + SharedLanguageSystem.GetSeedFromString(word);
