@@ -239,7 +239,7 @@
         - !type:DoActsBehavior
           acts: ["Destruction"]
   - type: Gun
-    projectileSpeed: 800 #modet by MIXnikita for SS220
+    projectileSpeed: 40 #modet by MIXnikita for SS220
     fireRate: 0.3
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
