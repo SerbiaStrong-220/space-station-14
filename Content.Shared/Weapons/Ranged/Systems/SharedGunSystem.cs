@@ -37,6 +37,8 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.SS220.Felinids.Events;
+using Content.Shared.SS220.Felinids.Components;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -393,8 +395,18 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         if (userImpulse && TryComp<PhysicsComponent>(user, out var userPhysics))
         {
-            if (_gravity.IsWeightless(user, userPhysics))
+            // SS220 felinids recoil begin
+            if (HasComp<FelinidsRecoilComponent>(user))
+            {
+                var felinidRecoil = new FelinidsRecoilEvent(user, gunUid, fromCoordinates, toCoordinates.Value, userPhysics);
+                RaiseLocalEvent(user, felinidRecoil);
+            }
+            //if (_gravity.IsWeightless(user, userPhysics))
+            // SS220 felinids recoil end
+            else if (_gravity.IsWeightless(user, userPhysics))
+            {
                 CauseImpulse(fromCoordinates, toCoordinates.Value, user, userPhysics);
+            }
         }
     }
 
