@@ -1,24 +1,34 @@
 
-using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Shuttles.UI;
 
-[Serializable, NetSerializable]
-public abstract class ShuttleNavInfo { }
-
-#region Projectile
-[Serializable, NetSerializable]
-public sealed class ShuttleNavProjectilesInfo : ShuttleNavInfo
+[Serializable, NetSerializable, DataDefinition]
+public abstract partial class ShuttleNavInfo
 {
-    public List<ProjectileInfo> Infos = [];
-
-    [Serializable, NetSerializable]
-    public struct ProjectileInfo
-    {
-        public MapCoordinates Coordinates;
-        public float CircleRadius;
-        public Color Color;
-    }
+    [DataField]
+    public bool Show = false;
 }
-#endregion
+
+[Serializable, NetSerializable, DataDefinition]
+public sealed partial class ShuttleNavProjectileInfo : ShuttleNavInfo
+{
+    [DataField]
+    public Color Color = Color.Yellow;
+
+    [DataField]
+    public float Radius = 0.75f;
+}
+
+[Serializable, NetSerializable, DataDefinition]
+public sealed partial class ShuttleNavHitscanInfo : ShuttleNavInfo
+{
+    [DataField]
+    public Color Color = Color.Red;
+
+    [DataField]
+    public float Width = 0.5f;
+
+    [DataField]
+    public TimeSpan AnimationLength = TimeSpan.FromSeconds(1.5f);
+}
