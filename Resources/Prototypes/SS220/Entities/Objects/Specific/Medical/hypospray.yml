@@ -27,3 +27,33 @@
       map: [ "enum.SolutionContainerLayers.Fill" ]
   - type: Tag
     tags: []
+
+
+- type: entity
+  parent: ChemicalMedipen
+  id: EmergencyBrainDmg
+  name: brain saving medicine
+  description: desc
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nicergoline
+          Quantity: 20
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: holypen_empty
+  - type: Hypospray
+    solutionName: pen
+    transferAmount: 95
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi
+    netsync: false
+    layers:
+    - state: holypen
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: Tag
+    tags: []

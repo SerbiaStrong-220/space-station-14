@@ -228,21 +228,16 @@
               Сerebral: -3.4
 
 - type: reagent
-  id: Nicergoline
-  name: reagent-name-nicergoline
+  id: Nicergolinen
+  name: reagent-name-nicergolinen
   group: Medicine
-  desc: reagent-desc-nicergoline
+  desc: reagent-desc-nicergolinen
   physicalDesc: reagent-physical-desc-odorless #ToDo_SS220 change this
   flavor: medicine
   color: "#afdd9a" #ToDo_SS220 change this
   metabolisms:
     Medicine:
       effects:
-      - !type:GenericStatusEffect
-        key: Jitter
-        time: 10.0
-        type: Remove
-      - !type:GenericStatusEffect
-        key: Stutter
-        time: 10.0
-        type: Remove
+      - !type:ChemicalAdaptation
+        duration: 300
+        modifier: 0.5

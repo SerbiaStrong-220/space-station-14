@@ -8,3 +8,6 @@
 
 - type: statusEffect
   id: MiGoHeal
+
+- type: statusEffect
+  id: ChemicalAdaptation
