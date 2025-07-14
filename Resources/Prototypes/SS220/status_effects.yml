@@ -10,4 +10,4 @@
   id: MiGoHeal
 
 - type: statusEffect
-  id: ChemicalAdaptation
+  id: ChemicalAdaptationEffect

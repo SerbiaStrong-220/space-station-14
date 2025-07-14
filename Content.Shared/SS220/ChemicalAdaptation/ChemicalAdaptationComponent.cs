@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.ChemicalAdaptation;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ChemicalAdaptationComponent : Component
 {
-    public Dictionary<string, AdaptationInfo> ChemicalAdaptations;
+    public Dictionary<string, AdaptationInfo> ChemicalAdaptations = [];
 }
 public sealed partial class AdaptationInfo(TimeSpan duration, float modifier)
 {

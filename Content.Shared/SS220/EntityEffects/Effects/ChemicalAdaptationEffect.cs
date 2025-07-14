@@ -4,7 +4,7 @@ using Content.Shared.EntityEffects;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.EntityEffects.Effects;
+namespace Content.Server.SS220.EntityEffects.Effects;
 
 /// <summary>
 /// </summary>
