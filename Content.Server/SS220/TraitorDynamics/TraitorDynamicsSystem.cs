@@ -42,9 +42,6 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly StoreSystem _store = default!;
 
-    [ValidatePrototypeId<DiscountCategoryPrototype>]
-    private const string Discount = "usualDiscounts";
-
     [ValidatePrototypeId<WeightedRandomPrototype>]
     private const string WeightsProto = "WeightedDynamicsList";
 
@@ -124,8 +121,11 @@ public sealed class TraitorDynamicsSystem : EntitySystem
             if (!listing.DynamicsPrices.TryGetValue(currentDynamic, out var dynamicPrice))
                 continue;
 
-            listing.RemoveCostModifier(Discount);
             listing.SetNewCost(dynamicPrice);
+            if (!listing.DiscountCategory.HasValue)
+                continue;
+
+            listing.RemoveCostModifier(listing.DiscountCategory.Value);
         }
 
         var itemDiscounts = _discount.GetItemsDiscount(store, listings);
@@ -140,7 +140,10 @@ public sealed class TraitorDynamicsSystem : EntitySystem
             if (!itemDiscounts.ContainsKey(listing.ID))
                 continue;
 
-            listing.SetExactPrice(Discount, discountPrices);
+            if (!listing.DiscountCategory.HasValue)
+                continue;
+
+            listing.SetExactPrice(listing.DiscountCategory.Value, discountPrices);
         }
     }
 
