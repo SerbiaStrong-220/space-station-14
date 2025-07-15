@@ -10,25 +10,46 @@ public abstract partial class ShuttleNavInfo
     public bool Enabled = false;
 }
 
+/// <summary>
+/// Information for drawing projectile as circle on a nav map
+/// </summary>
 [Serializable, NetSerializable, DataDefinition]
 public sealed partial class ShuttleNavProjectileInfo : ShuttleNavInfo
 {
+    /// <summary>
+    /// Circle color
+    /// </summary>
     [DataField]
     public Color Color = Color.Yellow;
 
+    /// <summary>
+    /// Circle radius
+    /// </summary>
     [DataField]
     public float Radius = 0.75f;
 }
 
+/// <summary>
+/// Information for drawing hitscan as line on a nav map
+/// </summary>
 [Serializable, NetSerializable, DataDefinition]
 public sealed partial class ShuttleNavHitscanInfo : ShuttleNavInfo
 {
+    /// <summary>
+    /// Line color
+    /// </summary>
     [DataField]
     public Color Color = Color.Red;
 
+    /// <summary>
+    /// Line width
+    /// </summary>
     [DataField]
     public float Width = 0.5f;
 
+    /// <summary>
+    /// How long will the hitscan take to draw after the shot
+    /// </summary>
     [DataField]
     public TimeSpan AnimationLength = TimeSpan.FromSeconds(1f);
 }
