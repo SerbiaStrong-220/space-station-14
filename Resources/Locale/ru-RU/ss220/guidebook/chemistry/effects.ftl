@@ -21,3 +21,15 @@ reagent-effect-guidebook-ss220-cult-cleanse =
         [1] Causes
         *[other] cause
     } cleansing obsession with evil
+
+reagent-effect-guidebook-ss220-brain-damage-slow =
+    { $chance ->
+        [1] Causes
+        *[other] cause
+    } may slow brain necrosis
+
+reagent-effect-guidebook-ss220-chemical-adaptation =
+    { $chance ->
+        [1] Causes
+        *[other] cause
+    } causes the body to become addicted, which can change the effectiveness of the drug

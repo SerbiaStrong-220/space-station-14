@@ -1,8 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.ChemicalAdaptation;
-using Content.Shared.StatusEffect;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.ChemicalAdaptation;
@@ -10,12 +8,7 @@ namespace Content.Server.SS220.ChemicalAdaptation;
 public sealed class ChemicalAdaptation : EntitySystem
 {
     [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
 
-    /// <inheritdoc/>
-    public override void Initialize()
-    {
-    }
     public override void Update(float frameTime)
     {
         base.Update(frameTime);

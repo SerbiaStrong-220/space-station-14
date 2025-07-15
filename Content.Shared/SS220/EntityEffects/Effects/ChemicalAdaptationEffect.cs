@@ -7,23 +7,26 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.SS220.EntityEffects.Effects;
 
 /// <summary>
+/// Saving the multiplying modifier
 /// </summary>
 [UsedImplicitly]
 public sealed partial class ChemicalAdaptationEffect : EventEntityEffect<ChemicalAdaptationEffect>
 {
     /// <summary>
+    /// How long will the modifier remain in effect
     /// </summary>
     [DataField(required: true)]
     public TimeSpan Duration;
 
     /// <summary>
+    /// Chemical modifier: greater than 1 if increasing is needed, less than 1 if decreasing is needed
     /// </summary>
     [DataField(required: true)]
     public float Modifier;
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return Loc.GetString("reagent-effect-guidebook-ss220-free-from-burden", ("chance", Probability));//ToDo_SS220 write smth here
+        return Loc.GetString("reagent-effect-guidebook-ss220-free-chemical-adaptation", ("chance", Probability));//ToDo_SS220 write smth here
     }
 }
 

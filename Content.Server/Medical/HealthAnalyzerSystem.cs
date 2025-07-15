@@ -18,7 +18,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
-using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
+using Content.Shared.SS220.LimitationRevive; //SS220 LimitationRevive
 
 namespace Content.Server.Medical;
 
