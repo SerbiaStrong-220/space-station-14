@@ -28,7 +28,7 @@ namespace Content.Client.Shuttles.UI;
 public sealed partial class ShuttleNavControl : BaseShuttleControl
 {
     [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!; // SS220 Add projectiles & hitscan on shuttle nav
     private readonly ShuttleNavInfoSystem _shuttleNavInfo; // SS220 Add projectiles & hitscan on shuttle nav
     private readonly SharedShuttleSystem _shuttles;
     private readonly SharedTransformSystem _transform;
