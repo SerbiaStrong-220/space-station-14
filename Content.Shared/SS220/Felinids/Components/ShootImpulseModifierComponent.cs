@@ -11,11 +11,11 @@ public sealed partial class ShootImpulseComponent : Component
     ///     After firing recoil modifier.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float ImpulseModifier = 1f;
+    public float ImpulseModifier = 1f; // TODO: Установить как 4 в прототипе фелинида
 
     /// <summary>
     ///     Add recoil in gravity?
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool RecoilOnGround = false;
+    public bool RecoilOnGround = false; // TODO: Активировать в прототипе фелинида
 }

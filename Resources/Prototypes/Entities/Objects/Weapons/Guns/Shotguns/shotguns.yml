@@ -33,7 +33,7 @@
       path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
-    recoil: 35
+    recoil: 30 # SS220 felinids recoil
   - type: BallisticAmmoProvider
     whitelist:
       tags:

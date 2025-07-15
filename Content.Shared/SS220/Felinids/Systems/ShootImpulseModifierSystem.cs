@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Atmos.Components;
 using Content.Shared.Gravity;
 using Content.Shared.SS220.Felinids.Components;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -10,7 +11,7 @@ public sealed class ShootImpulseModifierSystem : EntitySystem
 {
     [Dependency] private readonly SharedGravitySystem _gravity = default!;
 
-    private const float ImpulseOnGroundModifier = 10f;
+    private float _impulseOnGroundModifier = 5f;
 
     public override void Initialize()
     {
@@ -21,8 +22,7 @@ public sealed class ShootImpulseModifierSystem : EntitySystem
 
     private void OnModifyShootImpulse(ModifyShootImpulseEvent args)
     {
-        if (!_gravity.IsWeightless(args.Shooter)
-            && !HasComp<ShootImpulseComponent>(args.Shooter))
+        if (!CanTakeImpulse(args.Shooter))
         {
             args.ImpulseModifier = 0f;
             return;
@@ -38,7 +38,7 @@ public sealed class ShootImpulseModifierSystem : EntitySystem
             {
                 if (impulseComp.RecoilOnGround)
                 {
-                    impulseModifier *= ImpulseOnGroundModifier;
+                    impulseModifier *= _impulseOnGroundModifier;
                     impulseModifier *= impulseComp.ImpulseModifier;
                 }
                 else
@@ -47,6 +47,19 @@ public sealed class ShootImpulseModifierSystem : EntitySystem
         }
 
         args.ImpulseModifier = impulseModifier;
+    }
+
+    private bool CanTakeImpulse(EntityUid uid)
+    {
+        if (TryComp<MovedByPressureComponent>(uid, out var pressureComp)
+        && !pressureComp.Enabled)
+            return false;
+
+        if (!_gravity.IsWeightless(uid)
+        && !HasComp<ShootImpulseComponent>(uid))
+            return false;
+
+        return true;
     }
 
 }

@@ -35,7 +35,7 @@
     soundGunshot:
       collection: BulletMiss
     soundEmpty: null
-    recoil: 5
+    recoil: 5 # SS220 felinids recoil
   - type: ItemSlots
     slots:
       projectiles:

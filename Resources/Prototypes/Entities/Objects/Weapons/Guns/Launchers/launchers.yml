@@ -54,7 +54,7 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
-    recoil: 60
+    recoil: 50 # SS220 felinids recoil
   - type: BallisticAmmoProvider
     whitelist:
       tags:

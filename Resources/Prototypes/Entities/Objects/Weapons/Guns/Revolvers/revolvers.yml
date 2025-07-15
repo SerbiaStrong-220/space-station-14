@@ -35,7 +35,7 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/revolver.ogg
-    recoil: 15
+    recoil: 15 # SS220 felinids recoil
   - type: UseDelay
     delay: 0.66
   - type: ContainerContainer
