@@ -3,7 +3,7 @@
 using Content.Server.SS220.ChemicalAdaptation;
 using Content.Shared.EntityEffects;
 using Content.Shared.SS220.ChemicalAdaptation;
-using Content.Shared.SS220.EntityEffects.Effects;
+using Content.Server.SS220.EntityEffects.Effects;
 
 namespace Content.Server.EntityEffects;
 
