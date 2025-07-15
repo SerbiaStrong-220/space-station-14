@@ -35,6 +35,7 @@
     soundGunshot:
       collection: BulletMiss
     soundEmpty: null
+    recoil: 5
   - type: ItemSlots
     slots:
       projectiles:

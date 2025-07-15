@@ -29,6 +29,7 @@
       - Burst    #ss220 gunmodes
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
+    recoil: 25
   - type: ChamberMagazineAmmoProvider
     soundRack:
       path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg

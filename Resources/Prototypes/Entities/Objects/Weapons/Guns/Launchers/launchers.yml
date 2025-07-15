@@ -54,6 +54,7 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+    recoil: 60
   - type: BallisticAmmoProvider
     whitelist:
       tags:

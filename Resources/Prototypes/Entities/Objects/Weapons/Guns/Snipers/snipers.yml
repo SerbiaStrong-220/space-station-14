@@ -30,6 +30,7 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+    recoil: 35
   - type: BallisticAmmoProvider
     capacity: 10
     proto: CartridgeLightRifle
