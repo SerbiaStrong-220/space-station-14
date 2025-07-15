@@ -29,7 +29,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
 {
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
-    private readonly ShuttleNavInfoSystem _shuttleNavInfo; // SS220 Add projectiles & lasers on shuttle nav
+    private readonly ShuttleNavInfoSystem _shuttleNavInfo; // SS220 Add projectiles & hitscan on shuttle nav
     private readonly SharedShuttleSystem _shuttles;
     private readonly SharedTransformSystem _transform;
 
@@ -61,7 +61,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
     public ShuttleNavControl() : base(64f, 256f, 256f)
     {
         RobustXamlLoader.Load(this);
-        _shuttleNavInfo = EntManager.System<ShuttleNavInfoSystem>(); // SS220 Add projectiles & lasers on shuttle nav
+        _shuttleNavInfo = EntManager.System<ShuttleNavInfoSystem>(); // SS220 Add projectiles & hitscan on shuttle nav
         _shuttles = EntManager.System<SharedShuttleSystem>();
         _transform = EntManager.System<SharedTransformSystem>();
     }
@@ -287,11 +287,11 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
             DrawDocks(handle, gUid, curGridToView);
         }
 
-        // SS220 Add projectiles & lasers on shuttle nav begin
+        // SS220 Add projectiles & hitscan on shuttle nav begin
         var worldToView = worldToShuttle * shuttleToView;
         DrawProjectiles(handle, worldToView, xform);
         DrawHitscans(handle, worldToView, xform);
-        // SS220 Add projectiles & lasers on shuttle nav end
+        // SS220 Add projectiles & hitscan on shuttle nav end
 
         // If we've set the controlling console, and it's on a different grid
         // to the shuttle itself, then draw an additional marker to help the
@@ -358,7 +358,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
         return (value - MidPointVector) / MinimapScale;
     }
 
-    // SS220 Add projectiles & lasers on shuttle nav begin
+    // SS220 Add projectiles & hitscan on shuttle nav begin
     private void DrawProjectiles(DrawingHandleScreen handle, Matrix3x2 worldToView, TransformComponent gridXform)
     {
         foreach (var value in _shuttleNavInfo.ProjectilesToDraw)
@@ -367,14 +367,13 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
                 continue;
 
             var pos = Vector2.Transform(value.CurCoordinate.Position, worldToView);
-            handle.DrawCircle(pos, value.Info.Radius * MinimapScale, value.Info.Color);
+            handle.DrawCircle(pos, value.Info.Radius * MinimapScale, value.Info.Color.WithAlpha(0.85f));
         }
     }
 
     private void DrawHitscans(DrawingHandleScreen handle, Matrix3x2 worldToView, TransformComponent gridXform)
     {
-        const float minBrightness = 0.5f;
-        const float maxBrightness = 1f;
+        const float startColorBrightness = 0.5f;
 
         foreach (var value in _shuttleNavInfo.HitscansToDraw)
         {
@@ -382,61 +381,49 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
             if (remainingTime.TotalMilliseconds <= 0)
                 continue;
 
-            var animationProgress = (value.Info.AnimationLength - remainingTime) / value.Info.AnimationLength;
-            float brightness;
-            if (animationProgress < 0.5)
-                brightness = GetMinMaxProgress(minBrightness, maxBrightness, (float)animationProgress * 2);
-            else
-                brightness = GetMinMaxProgress(minBrightness, maxBrightness, (float)(1 - animationProgress) * 2);
+            var fromPos = value.FromCoordinates.Position;
+            var toPos = value.ToCoordinates.Position;
 
-            var color = ChangeBrightness(value.Info.Color, brightness);
-            var verts = GetVerts(value.FromCoordinates.Position, value.ToCoordinates.Position, value.Info.Width);
+            var dir = toPos - fromPos;
+            var normal = dir.Normalized();
+            var perp = new Vector2(-normal.Y, normal.X);
+            var vertsVector = perp * (value.Info.Width / 2) * (MinimapScale / 1.8f);
+
+            Vector2[] verts =
+            [
+                Vector2.Transform(fromPos + vertsVector, worldToView),
+                Vector2.Transform(fromPos - vertsVector, worldToView),
+                Vector2.Transform(toPos - vertsVector, worldToView),
+                Vector2.Transform(toPos + vertsVector, worldToView)
+            ];
+
+            var maxColor = value.Info.Color.WithAlpha(0.75f);
+            var minColor = new Color(
+                maxColor.R * startColorBrightness,
+                maxColor.G * startColorBrightness,
+                maxColor.B * startColorBrightness,
+                0.25f);
+
+            var animationProgress = (float)((value.Info.AnimationLength - remainingTime) / value.Info.AnimationLength);
+            (float Start, float End) maxColorOnProgress = (0.3f, 0.6f);
+            Color color;
+            if (animationProgress < maxColorOnProgress.Start)
+                color = Color.InterpolateBetween(minColor, maxColor, GetProgress(0, maxColorOnProgress.Start, animationProgress));
+            else if (animationProgress > maxColorOnProgress.End)
+                color = Color.InterpolateBetween(maxColor, minColor, GetProgress(maxColorOnProgress.End, 1f, animationProgress));
+            else
+                color = maxColor;
+
             handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, verts, color);
         }
 
-        Color ChangeBrightness(Color color, float brightness)
+        float GetProgress(float min, float max, float current)
         {
-            var r = Math.Min(color.R * brightness, 1f);
-            var g = Math.Min(color.G * brightness, 1f);
-            var b = Math.Min(color.B * brightness, 1f);
+            if (max == min)
+                return 1;
 
-            return new Color(r, g, b, color.A);
-        }
-
-        float GetMinMaxProgress(float min, float max, float progress)
-        {
-            var delta = max - min;
-            var increace = delta * progress;
-            var result = min + increace;
-            return Math.Clamp(result, min, max);
-        }
-
-        Vector2[] GetVerts(Vector2 p1, Vector2 p2, float width)
-        {
-            var direction = p2 - p1;
-            var center = (p1 + p2) / 2;
-
-            var length = direction.Length();
-
-            var dirNormalized = direction.Normalized();
-
-            var perp = new Vector2(-dirNormalized.Y, dirNormalized.X);
-            var vertsVector = perp * (width / 2) * (MinimapScale / 1.8f);
-
-            var bottomRight = Vector2.Transform(p1 + vertsVector, worldToView);
-            var bottomLeft = Vector2.Transform(p1 - vertsVector, worldToView);
-            var topRight = Vector2.Transform(p2 + vertsVector, worldToView);
-            var topLeft = Vector2.Transform(p2 - vertsVector, worldToView);
-
-            return
-            [
-                // for DrawPrimitiveTopology.TriangleFan
-                bottomLeft,
-                bottomRight,
-                topRight,
-                topLeft,
-            ];
+            return (float)Math.Clamp((current - min) / (max - min), 0f, 1f);
         }
     }
-    // SS220 Add projectiles & lasers on shuttle nav end
+    // SS220 Add projectiles & hitscan on shuttle nav end
 }

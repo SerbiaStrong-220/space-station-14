@@ -431,7 +431,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
     private void FireEffects(EntityCoordinates fromCoordinates, float distance, Angle angle, HitscanPrototype hitscan, EntityUid? hitEntity = null)
     {
-        _shuttleNavInfo.AddHitscan(TransformSystem.ToMapCoordinates(fromCoordinates), distance, angle, hitscan);
+        _shuttleNavInfo.AddHitscan(TransformSystem.ToMapCoordinates(fromCoordinates), distance, angle, hitscan); // SS220 Add hitscan on shuttle nav begin
 
         // Lord
         // Forgive me for the shitcode I am about to do

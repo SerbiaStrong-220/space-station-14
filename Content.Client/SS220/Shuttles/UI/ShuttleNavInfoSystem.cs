@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Shuttles.UI;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
@@ -46,7 +47,7 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
 
     public override void AddHitscan(MapCoordinates fromCoordinates, MapCoordinates toCoordinates, ShuttleNavHitscanInfo info)
     {
-        if (!info.Show)
+        if (!info.Enabled)
             return;
 
         HitscansToDraw.Add((fromCoordinates, toCoordinates, info, _timing.CurTime + info.AnimationLength));

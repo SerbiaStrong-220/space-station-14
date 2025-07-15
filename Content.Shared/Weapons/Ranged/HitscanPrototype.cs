@@ -61,8 +61,10 @@ public sealed partial class HitscanPrototype : IPrototype, IShootable
     public HitscanSpread? HitscanSpread;
     //SS220 Add hitscan spread end
 
+    // SS220 Add hitscan on shuttle nav begin
     [DataField("shuttleNavInfo")]
     public ShuttleNavHitscanInfo ShuttleNavHitscanInfo = new();
+    // SS220 Add hitscan on shuttle nav end
 }
 
 //SS220 Add hitscan spread begin

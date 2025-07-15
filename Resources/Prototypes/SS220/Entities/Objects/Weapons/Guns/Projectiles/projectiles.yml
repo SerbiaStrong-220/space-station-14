@@ -87,6 +87,8 @@
     damage:
       types:
         Blunt: 12
+    shuttleNavInfo:
+      enabled: true
 
 
 - type: entity
@@ -105,9 +107,6 @@
     totalIntensity: 400
     intensitySlope: 8
     maxIntensity: 20
-  - type: Projectile
-    shuttleNavInfo:
-      show: true
 
 - type: entity
   id: BulletGrenadeEMPArta
@@ -129,9 +128,6 @@
     radius: 5.5
     color: blue
     energy: 0.9
-  - type: Projectile
-    shuttleNavInfo:
-      show: true
 
 #Spider queen
 - type: entity

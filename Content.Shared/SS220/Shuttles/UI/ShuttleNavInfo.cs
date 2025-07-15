@@ -1,4 +1,4 @@
-
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Shuttles.UI;
@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.Shuttles.UI;
 public abstract partial class ShuttleNavInfo
 {
     [DataField]
-    public bool Show = false;
+    public bool Enabled = false;
 }
 
 [Serializable, NetSerializable, DataDefinition]
@@ -30,5 +30,5 @@ public sealed partial class ShuttleNavHitscanInfo : ShuttleNavInfo
     public float Width = 0.5f;
 
     [DataField]
-    public TimeSpan AnimationLength = TimeSpan.FromSeconds(1.5f);
+    public TimeSpan AnimationLength = TimeSpan.FromSeconds(1f);
 }

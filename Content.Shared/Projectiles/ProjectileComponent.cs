@@ -112,6 +112,8 @@ public sealed partial class ProjectileComponent : Component
     [DataField]
     public FixedPoint2 PenetrationAmount = FixedPoint2.Zero;
 
+    // SS220 Add projectiles on shuttle nav begin
     [DataField("shuttleNavInfo")]
     public ShuttleNavProjectileInfo ShuttleNavProjectileInfo = new();
+    // SS220 Add projectiles on shuttle nav end
 }
