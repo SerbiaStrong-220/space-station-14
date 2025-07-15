@@ -369,7 +369,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
         return true;
     }
 
-    //SS220 - set-dynamics-price-start
+    // SS220 DynamicTraitor begin
     /// <summary>
     /// Sets an exact price for the listing, with help modifiers.
     /// </summary>
@@ -393,7 +393,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     {
         OriginalCost = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(newCost);
     }
-    //SS220 - set-dynamics-price-end
+    // SS220 DynamicTraitor end
 
     /// <summary>
     /// Gets percent of reduced/increased cost that modifiers give respective to <see cref="ListingData.OriginalCost"/>.

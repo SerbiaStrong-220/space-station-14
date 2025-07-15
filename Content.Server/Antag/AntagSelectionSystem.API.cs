@@ -417,7 +417,7 @@ public sealed partial class AntagSelectionSystem
         return result;
     }
 
-    //SS220 - set-max-antag-api-start
+    // SS220 DynamicTraitor begin
     /// <summary>
     /// Sets the maximum value for the number of antagonists
     /// </summary>
@@ -432,5 +432,5 @@ public sealed partial class AntagSelectionSystem
             selectionComp.Definitions[i] = def;
         }
     }
-    //SS220 - set-max-antag-api-end
+    // SS220 DynamicTraitor end
 }

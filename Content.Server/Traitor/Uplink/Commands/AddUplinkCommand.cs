@@ -93,7 +93,7 @@ namespace Content.Server.Traitor.Uplink.Commands
                 }
             }
 
-            //ss220
+            // SS220 DynamicTraitor
             var useDynamics = false;
             if (args.Length >= 4)
             {
@@ -103,7 +103,7 @@ namespace Content.Server.Traitor.Uplink.Commands
                     return;
                 }
             }
-            //ss220
+            // SS220 DynamicTraitor
 
             // Finally add uplink
             var uplinkSys = _entManager.System<UplinkSystem>();

@@ -11,7 +11,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
-using Content.Shared.SS220.TraitorDynamics; //SS220 - show-in-uplink-type-dynamic
+using Content.Shared.SS220.TraitorDynamics; // SS220 DynamicTraitor
 
 namespace Content.Client.Store.Ui;
 
@@ -99,7 +99,7 @@ public sealed partial class StoreMenu : DefaultWindow
         TraitorFooter.Visible = visible;
     }
 
-    //SS220 - show-in-uplink-type-dynamic-start
+    // SS220 DynamicTraitor begin
     public void SetFooterDynamic(LocId? dynamicName)
     {
         if (!TraitorFooter.Visible)
@@ -112,7 +112,7 @@ public sealed partial class StoreMenu : DefaultWindow
         }
         DynamicLabel.Text += " " + Loc.GetString(dynamicName);
     }
-    //SS220 - show-in-uplink-type-dynamic-end
+    // SS220 DynamicTraitor end
 
     private void OnWithdrawButtonDown(BaseButton.ButtonEventArgs args)
     {

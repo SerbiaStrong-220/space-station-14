@@ -19,13 +19,11 @@ public sealed class StoreUpdateState : BoundUserInterfaceState
 
     public readonly bool ShowFooter;
 
-    //SS220 - show-in-uplink-type-dynamic-start
-    public readonly LocId? DynamicName;
-    //SS220 - show-in-uplink-type-dynamic-end
+    public readonly LocId? DynamicName; // SS220 DynamicTraitor
 
     public readonly bool AllowRefund;
 
-    //SS220 - show-in-uplink-type-dynamic-start
+    // SS220 DynamicTraitor begin
     public StoreUpdateState(HashSet<ListingDataWithCostModifiers> listings, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> balance, bool showFooter, bool allowRefund, LocId? dynamicName = null)
     {
         Listings = listings;
@@ -34,7 +32,7 @@ public sealed class StoreUpdateState : BoundUserInterfaceState
         AllowRefund = allowRefund;
         DynamicName = dynamicName;
     }
-    //SS220 - show-in-uplink-type-dynamic-end
+    // SS220 DynamicTraitor end
 }
 
 [Serializable, NetSerializable]

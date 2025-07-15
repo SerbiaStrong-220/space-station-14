@@ -44,18 +44,18 @@ public sealed class UplinkSystem : EntitySystem
         FixedPoint2 balance,
         EntityUid? uplinkEntity = null,
         bool giveDiscounts = false,
-        bool useDynamics = false)
+        bool useDynamics = false) // SS220 DynamicTraitor
     {
         // Try to find target item if none passed
 
         uplinkEntity ??= FindUplinkTarget(user);
 
         if (uplinkEntity == null)
-            return ImplantUplink(user, balance, giveDiscounts, useDynamics);
+            return ImplantUplink(user, balance, giveDiscounts, useDynamics); // SS220 DynamicTraitor
 
         EnsureComp<UplinkComponent>(uplinkEntity.Value);
 
-        SetUplink(user, uplinkEntity.Value, balance, giveDiscounts, useDynamics);
+        SetUplink(user, uplinkEntity.Value, balance, giveDiscounts, useDynamics); // SS220 DynamicTraitor
 
         // TODO add BUI. Currently can't be done outside of yaml -_-
         // ^ What does this even mean?
@@ -66,7 +66,7 @@ public sealed class UplinkSystem : EntitySystem
     /// <summary>
     /// Configure TC for the uplink
     /// </summary>
-    private void SetUplink(EntityUid user, EntityUid uplink, FixedPoint2 balance, bool giveDiscounts, bool useDynamics)
+    private void SetUplink(EntityUid user, EntityUid uplink, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
     {
         if (!_mind.TryGetMind(user, out var mind, out _))
             return;
@@ -93,7 +93,7 @@ public sealed class UplinkSystem : EntitySystem
     /// <summary>
     /// Implant an uplink as a fallback measure if the traitor had no PDA
     /// </summary>
-    private bool ImplantUplink(EntityUid user, FixedPoint2 balance, bool giveDiscounts, bool useDynamics)
+    private bool ImplantUplink(EntityUid user, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
     {
         var implantProto = new string(FallbackUplinkImplant);
 

@@ -21,8 +21,8 @@ using Robust.Shared.Random;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Content.Server.SS220.TraitorDynamics; //SS220-dynamics
-using Content.Shared.SS220.TraitorDynamics; //SS220-dynamics
+using Content.Server.SS220.TraitorDynamics;
+using Content.Shared.SS220.TraitorDynamics;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -218,7 +218,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             {
                 code = generatedCode;
 
-                //SS220-dynamics-in-brifing-start
+               // SS220 DynamicTraitor begin
                 var dynamicInfo = string.Empty;
                 var dynamic = _dynamics.GetCurrentDynamic();
                 if (dynamic != default && _prototype.TryIndex<DynamicPrototype>(dynamic, out var dynamicProto))
@@ -233,7 +233,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
                     briefing,
                     Loc.GetString("traitor-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))),
                     dynamicInfo);
-                //SS220-dynamics-in-brifing-end
+               // SS220 DynamicTraitor end
                 return (code, briefing);
             }
         }
@@ -264,13 +264,13 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             sb.AppendLine(Loc.GetString("traitor-role-uplink-code", ("code", string.Join("-", uplinkCode).Replace("sharp", "#"))));
         else
             sb.AppendLine(Loc.GetString("traitor-role-uplink-implant"));
-        //SS220-dynamics-info
+        // SS220 DynamicTraitor begin
         var dynamic = _dynamics.GetCurrentDynamic();
         if (dynamic != null && _prototype.TryIndex(dynamic, out var dynamicProto))
         {
             sb.AppendLine(Loc.GetString("dynamic-supply-level", ("dynamic", Loc.GetString(dynamicProto.Name))));
         }
-        //SS220-dynamics-info
+        // SS220 DynamicTraitor end
 
 
         return sb.ToString();
