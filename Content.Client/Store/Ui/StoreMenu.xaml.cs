@@ -11,7 +11,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
-using Content.Shared.SS220.TraitorDynamics; // SS220 DynamicTraitor
+using Content.Shared.SS220.TraitorDynamics;
 
 namespace Content.Client.Store.Ui;
 

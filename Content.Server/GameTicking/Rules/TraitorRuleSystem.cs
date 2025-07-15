@@ -39,8 +39,8 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly UplinkSystem _uplink = default!;
-    [Dependency] private readonly TraitorDynamicsSystem _dynamics = default!; //ss220-dynamics-info
-    [Dependency] private readonly IPrototypeManager _prototype = default!; //SS220-dynamics
+    [Dependency] private readonly TraitorDynamicsSystem _dynamics = default!; // SS220 TraitorDynamics
+    [Dependency] private readonly IPrototypeManager _prototype = default!; // SS220 TraitorDynamics
 
     public override void Initialize()
     {
@@ -59,11 +59,13 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         InitDynamic(uid, component); // SS220 Dynamics
     }
 
+    // SS220 TraitorDynamics start
     protected override void Ended(EntityUid uid, TraitorRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
     {
         base.Ended(uid, component, gameRule, args);
         _dynamics.RemoveDynamic();
     }
+    // SS220 TraitorDynamics end
 
     private void AfterEntitySelected(Entity<TraitorRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
