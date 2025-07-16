@@ -4,6 +4,6 @@
   description: Тёплое вязаное платье, которое вам не подарит бабушка.
   components:
   - type: Sprite
-    sprite: Clothing/WerbleSuit/suit.rsi
+    sprite: MetaFlud/Clothing/WerbleSuit/suit.rsi
   - type: Clothing
-    sprite: Clothing/WerbleSuit/suit.rsi
+    sprite: MetaFlud/Clothing/WerbleSuit/suit.rsi
