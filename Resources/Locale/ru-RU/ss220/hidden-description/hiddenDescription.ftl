@@ -21,6 +21,10 @@ hidden-desc-AdrenalImplant-medical = [color=#52B4E9]Этот имплант со
 hidden-desc-AdrenalImplant-research = [color=#D381C9]Имплант с запасом лечебных растворов, предназначенных для поддержки жизненных функций.[/color]
 hidden-desc-AdrenalImplant-syndicate = [color=#E31735]Имплант с инъекционным механизмом, содержащий жидкости для ускоренного восстановления организма.[/color]
 
+hidden-desc-AntiDropImplant-medical = [color=#52B4E9]Имплант, усиливающий моторный контроль, снижает риск непроизвольного отпускания предметов.[/color]
+hidden-desc-AntiDropImplant-research = [color=#D381C9]Имплант, синхронизированный с нервной системой, стабилизирует удержание и предотвращает потерю экипировки.[/color]
+hidden-desc-AntiDropImplant-syndicate = [color=#E31735]Имплант нервного захвата — держи своё до конца, даже если сам падаешь.[/color]
+
 # Regular decriptions below
 
 ent-ThermalVisorImplanter = { ent-Implanter }

@@ -157,20 +157,20 @@
   - type: TriggerImplantAction
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-DnaCopyImplant-medical
+    - label: hidden-desc-AntiDropImplant-medical
       jobRequired:
       - Paramedic
       - MedicalDoctor
       - SeniorPhysician
       - ChiefMedicalOfficer
       - Brigmedic
-    - label: hidden-desc-DnaCopyImplant-research
+    - label: hidden-desc-AntiDropImplant-research
       jobRequired:
       - ResearchAssistant
       - ResearchDirector
       - Scientist
       - Borg
-    - label: hidden-desc-DnaCopyImplant-syndicate
+    - label: hidden-desc-AntiDropImplant-syndicate
       whitelistMindRoles:
       - TraitorRole
       - NukeOperative
