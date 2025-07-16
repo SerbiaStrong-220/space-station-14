@@ -69,7 +69,7 @@ public partial class ListingData : IEquatable<ListingData>
         Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> dataDiscountDownTo,
         bool disableRefund,
         Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> dynamicsPrices, // SS220 TraitorDynamics
-        IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> costBeforeDynamic) // SS220 TraitorDynamics
+        IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> costFromCatalog) // SS220 TraitorDynamics
     {
         Name = name;
         DiscountCategory = discountCategory;
@@ -92,7 +92,7 @@ public partial class ListingData : IEquatable<ListingData>
         DisableRefund = disableRefund;
         DynamicsPrices = new Dictionary<ProtoId<DynamicPrototype>,
             Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>(dynamicsPrices); // SS220 TraitorDynamics
-        CostFromCatalog = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(costBeforeDynamic); // SS220 TraitorDynamics
+        CostFromCatalog = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(costFromCatalog); // SS220 TraitorDynamics
     }
 
     [ViewVariables]
@@ -209,7 +209,7 @@ public partial class ListingData : IEquatable<ListingData>
     public Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> DynamicsPrices = new();
 
     [DataField]
-    public IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> CostBeforeDynamic = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>();
+    public IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> CostFromCatalog = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>();
     // SS220 TraitorDynamics
 
     /// <summary>
