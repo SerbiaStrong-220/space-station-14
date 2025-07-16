@@ -5,9 +5,9 @@
   description: Дайте волю своему внутреннему голосу!
   components:
   - type: Sprite
-    sprite: Clothing/Maid/suit.rsi
+    sprite: MetaFlud/Clothing/Maid/suit.rsi
   - type: Clothing
-    sprite: Clothing/Maid/suit.rsi
+    sprite: MetaFlud/Clothing/Maid/suit.rsi
   - type: Tag
     tags:
     - ClothMade
@@ -19,9 +19,9 @@
   description: Такой каваи!
   components:
   - type: Sprite
-    sprite: Clothing/Maid/suitpink.rsi
+    sprite: MetaFlud/Clothing/Maid/suitpink.rsi
   - type: Clothing
-    sprite: Clothing/Maid/suitpink.rsi
+    sprite: MetaFlud/Clothing/Maid/suitpink.rsi
   - type: Tag
     tags:
     - ClothMade
@@ -33,9 +33,9 @@
   description: Красота она такая!
   components:
   - type: Sprite
-    sprite: Clothing/Maid/bezel.rsi
+    sprite: MetaFlud/Clothing/Maid/bezel.rsi
   - type: Clothing
-    sprite: Clothing/Maid/bezel.rsi
+    sprite: MetaFlud/Clothing/Maid/bezel.rsi
   - type: Tag
     tags:
     - ClothMade
