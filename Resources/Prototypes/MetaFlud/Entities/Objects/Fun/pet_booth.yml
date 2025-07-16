@@ -7,7 +7,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Items
-    sprite: Objects/PetBooth.rsi
+    sprite: MetaFlud/Objects/Fun/pet_booth.rsi
     layers:
     - state: pet_booth_base
       map: ["enum.StorageVisualLayers.Base"]
@@ -17,7 +17,7 @@
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
   - type: Icon
-    sprite: Objects/Storage/PetBooth.rsi
+    sprite: MetaFlud/Objects/Fun/pet_booth.rsi
     state: icon
   - type: InteractionOutline
   - type: Physics
@@ -59,7 +59,7 @@
   - type: ItemSlots
   - type: Item
     size: Ginormous
-    sprite: Objects/PetBooth.rsi
+    sprite: MetaFlud/Objects/Fun/pet_booth.rsi
   - type: Construction
     graph: PetCarrier
     node: petCarrier
