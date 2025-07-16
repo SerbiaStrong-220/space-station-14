@@ -5,9 +5,9 @@
   description: От них веет древностью.
   components:
   - type: Sprite
-    sprite: Clothing/Belt/kusanagi_sheath.rsi
+    sprite: MetaFlud/Clothing/Belt/kusanagi_sheath.rsi
   - type: Clothing
-    sprite: Clothing/Belt/kusanagi_sheath.rsi
+    sprite: MetaFlud/Clothing/Belt/kusanagi_sheath.rsi
   - type: ItemSlots
     slots:
       item:
