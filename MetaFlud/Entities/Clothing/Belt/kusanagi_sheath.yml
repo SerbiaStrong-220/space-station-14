@@ -1,0 +1,26 @@
+- type: entity
+  parent: ClothingBeltSheath
+  id: ClothingBeltKusanagiNoTsurugiSheath
+  name: ножны Кусанаги-но Цуруги
+  description: От них веет древностью.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Belt/kusanagi_sheath.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Belt/kusanagi_sheath.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - KusanagiNoTsurugi
+  - type: ItemMapper
+    mapLayers:
+      sheath-kusanagi:
+        whitelist:
+          tags:
+          - KusanagiNoTsurugi

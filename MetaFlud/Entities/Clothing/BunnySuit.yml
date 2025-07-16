@@ -1,0 +1,62 @@
+# Костюм зайчика без колготок
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformBunnySuit
+  name: Костюм кролика
+  description: Для настоящих кроликов.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/BunnySuit/suit.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/BunnySuit/suit.rsi
+
+# Ушки и хвост
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBunnyEars
+  name: Кроличьи ушки
+  description: Ушки и хвост.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/BunnySuit/ears.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/BunnySuit/ears.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+
+# Штуки на руках
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsBunnyMangets
+  name: Кроличьи манжеты
+  description: Манжеты
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/BunnySuit/hands.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/BunnySuit/hands.rsi
+
+# Костыль, часть колготок на ногах не видно из-за отрисовки
+# Так и надо
+- type: entity
+  parent: [ ClothingShoesMilitaryBase ]
+  id: ClothingBootsBunnySuitStockings
+  name: Кроличьи колготки
+  description: Колготки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/BunnySuit/stockings.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/BunnySuit/stockings.rsi
+
+- type: entity
+  parent: ClothingScarfBase
+  id: ClothinNeckButterfly
+  name: Кроличия бабочка
+  description: бабочка
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/BunnySuit/butterfly.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/BunnySuit/butterfly.rsi
