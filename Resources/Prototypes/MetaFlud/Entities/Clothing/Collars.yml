@@ -2,8 +2,8 @@
 - type: entity
   parent: ClothingScarfBase
   id: ClothinNeckStunСollar
-  name: Ошейник с электрошокером 
-  description: Ошейник нельзя снять, а при привязке к пульту может бить током. Имеет датчики.
+  name: Ошейник "Послушный"
+  description: Минималистично выполненный ошейник с интегрированной системой отслеживания, а также электрошокером. Имеет небольшой брелок с выгравированным логотипом НаноТрейзен. Между тем, ошейник имеет надёжную застёжку, не позволяющую снять аксессуар самостоятельно
   components:
   - type: Sprite
     sprite: MetaFlud/Clothing/Collars/stun.rsi
@@ -28,8 +28,8 @@
 - type: entity
   parent: ClothingScarfBase
   id: ClothinNeckObedientCollar
-  name: Отслеживающий ошейник 
-  description: Ошейник который нельзя снять. Имеет датчики.
+  name: Ошейник "Трекер"
+  description: Непримечательный на вид ошейник, имеющий в себе систему отслеживания координат и надёжную застёжку, что не даёт снять ошейник самостоятельно. Идеально подходит для трекирования непослушных глав.
   components:
   - type: Sprite
     sprite: MetaFlud/Clothing/Collars/obedient.rsi
@@ -46,8 +46,8 @@
 - type: entity
   parent: ClothingScarfBase
   id: ClothinNeckVelvetCollar
-  name: Бархатный ошейник 
-  description: Мягкий бархатный ошейник с маленьким брелком на ней.ц
+  name: Ошейник "Бархат"
+  description: Красивый бархатный ошейник из мягкой ткани, имеет в себе датчики координат. На этом ошейнике есть красивый брелок с неменее красивым логотипом НаноТрейзен
   components:
   - type: Sprite
     sprite: MetaFlud/Clothing/Collars/velvet.rsi
@@ -64,8 +64,8 @@
 - type: entity
   parent: ClothingScarfBase
   id: ClothinNeckBasicCollar
-  name: ошейник
-  description: Простой ошейник на застёжке
+  name: Ошейник
+  description: Обычного вида ошейник, который обычно надевают на собак.
   components:
   - type: Sprite
     sprite: MetaFlud/Clothing/Collars/basic.rsi
