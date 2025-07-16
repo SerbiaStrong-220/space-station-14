@@ -6,9 +6,9 @@
   description: Для настоящих кроликов.
   components:
   - type: Sprite
-    sprite: Clothing/BunnySuit/suit.rsi
+    sprite: MetaFlud/Clothing/BunnySuit/suit.rsi
   - type: Clothing
-    sprite: Clothing/BunnySuit/suit.rsi
+    sprite: MetaFlud/Clothing/BunnySuit/suit.rsi
 
 # Ушки и хвост
 - type: entity
@@ -18,9 +18,9 @@
   description: Ушки и хвост.
   components:
   - type: Sprite
-    sprite: Clothing/BunnySuit/ears.rsi
+    sprite: MetaFlud/Clothing/BunnySuit/ears.rsi
   - type: Clothing
-    sprite: Clothing/BunnySuit/ears.rsi
+    sprite: MetaFlud/Clothing/BunnySuit/ears.rsi
   - type: Tag
     tags:
     - ClothMade
@@ -33,9 +33,9 @@
   description: Манжеты
   components:
   - type: Sprite
-    sprite: Clothing/BunnySuit/hands.rsi
+    sprite: MetaFlud/Clothing/BunnySuit/hands.rsi
   - type: Clothing
-    sprite: Clothing/BunnySuit/hands.rsi
+    sprite: MetaFlud/Clothing/BunnySuit/hands.rsi
 
 # Костыль, часть колготок на ногах не видно из-за отрисовки
 - type: entity
@@ -45,9 +45,9 @@
   description: Колготки
   components:
   - type: Sprite
-    sprite: Clothing/BunnySuit/stockings.rsi
+    sprite: MetaFlud/Clothing/BunnySuit/stockings.rsi
   - type: Clothing
-    sprite: Clothing/BunnySuit/stockings.rsi
+    sprite: MetaFlud/Clothing/BunnySuit/stockings.rsi
 
 - type: entity
   parent: ClothingScarfBase
@@ -56,6 +56,6 @@
   description: бабочка
   components:
   - type: Sprite
-    sprite: Clothing/BunnySuit/butterfly.rsi
+    sprite: MetaFlud/Clothing/BunnySuit/butterfly.rsi
   - type: Clothing
-    sprite: Clothing/BunnySuit/butterfly.rsi
+    sprite: MetaFlud/Clothing/BunnySuit/butterfly.rsi
