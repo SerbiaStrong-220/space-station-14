@@ -1,9 +1,0 @@
-- parent: [ClothingUniformSkirtBase]
-  id: ClothingUniformBunnySuit
-  name: Вязаное платье
-  description: Тёплое вязаное платье, которое вам не подарит бабушка.
-  components:
-  - type: Sprite
-    sprite: MetaFlud/Clothing/WerbleSuit/suit.rsi
-  - type: Clothing
-    sprite: MetaFlud/Clothing/WerbleSuit/suit.rsi

@@ -1,9 +1,0 @@
-- type: entity
-  id: ClothingBeltKusanagiNoTsurugiSheathFilled
-  parent: ClothingBeltKusanagiNoTsurugiSheath
-  suffix: Filled
-  components:
-  - type: ContainerFill
-    containers:
-      item:
-       - KusanagiNoTsurugi
