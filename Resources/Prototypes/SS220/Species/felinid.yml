@@ -1,7 +1,7 @@
 - type: species
   id: Felinid
   name: Фелинид
-  roundStart: false #SS220 Vox Update V1
+  roundStart: true #MetaFlud update
   prototype: MobFelinid
   sprites: MobHumanSprites
   markingLimits: MobFelinidMarkingLimits
