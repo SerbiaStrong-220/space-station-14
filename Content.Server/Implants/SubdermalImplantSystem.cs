@@ -42,6 +42,7 @@ using Content.Shared.SS220.Store;
 using Content.Shared.Charges.Components;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
+using Content.Shared.SS220.AntiDrop;
 
 namespace Content.Server.Implants;
 
@@ -87,6 +88,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         SubscribeLocalEvent<SubdermalImplantComponent, UseAdrenalImplantEvent>(OnAdrenalImplant); //ss220 add adrenal implant
 
         SubscribeLocalEvent<SubdermalImplantComponent, UseDnaCopyImplantEvent>(OnDnaCopyImplant); //ss220 dna copy implant add
+        SubscribeLocalEvent<SubdermalImplantComponent, UseAntiDropImplantEvent>(OnAntiDropImplant); //ss220 add antidrop implant
     }
 
     // SS220 - chemical-implants start
@@ -406,4 +408,13 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         args.Handled = true;
     }
     //ss220 add adrenal implant end
+
+    //ss220 add antidrop implant start
+    private void OnAntiDropImplant(Entity<SubdermalImplantComponent> ent, ref UseAntiDropImplantEvent args)
+    {
+        EnsureComp<AntiDropComponent>(args.Performer);
+        args.Handled = true;
+        QueueDel(ent);
+    }
+    //ss220 add antidrop implant end
 }
