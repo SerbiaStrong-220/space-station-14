@@ -6,9 +6,9 @@
   description: Ошейник нельзя снять, а при привязке к пульту может бить током. Имеет датчики.
   components:
   - type: Sprite
-    sprite: Clothing/Collars/stun.rsi
+    sprite: MetaFlud/Clothing/Collars/stun.rsi
   - type: Clothing
-    sprite: Clothing/Collars/stun.rsi
+    sprite: MetaFlud/Clothing/Collars/stun.rsi
     stripDelay: 5
     equipDelay: 5 # to avoid accidentally falling into the trap associated with SelfUnremovableClothing
   - type: SelfUnremovableClothing
@@ -32,9 +32,9 @@
   description: Ошейник который нельзя снять. Имеет датчики.
   components:
   - type: Sprite
-    sprite: Clothing/Collars/obedient.rsi
+    sprite: MetaFlud/Clothing/Collars/obedient.rsi
   - type: Clothing
-    sprite: Clothing/Collars/obedient.rsi
+    sprite: MetaFlud/Clothing/Collars/obedient.rsi
     stripDelay: 5
     equipDelay: 5 # to avoid accidentally falling into the trap associated with SelfUnremovableClothing
   - type: SelfUnremovableClothing
@@ -50,9 +50,9 @@
   description: Мягкий бархатный ошейник с маленьким брелком на ней.ц
   components:
   - type: Sprite
-    sprite: Clothing/Collars/velvet.rsi
+    sprite: MetaFlud/Clothing/Collars/velvet.rsi
   - type: Clothing
-    sprite: Clothing/Collars/velvet.rsi
+    sprite: MetaFlud/Clothing/Collars/velvet.rsi
     stripDelay: 2
     equipDelay: 2 
     unequipDelay: 2
@@ -68,9 +68,9 @@
   description: Простой ошейник на застёжке
   components:
   - type: Sprite
-    sprite: Clothing/Collars/basic.rsi
+    sprite: MetaFlud/Clothing/Collars/basic.rsi
   - type: Clothing
-    sprite: Clothing/Collars/basic.rsi
+    sprite: MetaFlud/Clothing/Collars/basic.rsi
     stripDelay: 2
     equipDelay: 2
     unequipDelay: 2 
