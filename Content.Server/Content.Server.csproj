@@ -14,7 +14,8 @@
     <ServerGarbageCollection>true</ServerGarbageCollection>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FFMpegCore" />
+    <PackageReference Include="FFMpegCore" /> <!--SS220-add-?-->
+    <PackageReference Include="Discord.Net" />
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
   </ItemGroup>

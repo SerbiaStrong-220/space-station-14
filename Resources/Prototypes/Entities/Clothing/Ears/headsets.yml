@@ -24,6 +24,15 @@
     state: icon
   - type: Item
     size: Small
+  #ss220 add filter for radio headset start
+  - type: HeadsetToggled
+  - type: ActivatableUI
+    key: enum.HeadsetKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.HeadsetKey.Key:
+        type: HeadsetBoundUserInterface
+  #ss220 add filter for radio headset end
   - type: Clothing
     slots:
     - ears

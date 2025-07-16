@@ -60,4 +60,9 @@ public sealed partial class SlotDefinition
     ///     Entity blacklist for CanEquip checks.
     /// </summary>
     [DataField("blacklist")] public EntityWhitelist? Blacklist = null;
+
+    //ss220 add fully hidden pockets start
+    [DataField]
+    public bool FullyHidden;
+    //ss220 add fully hidden pockets end
 }

@@ -14,6 +14,7 @@ public sealed class CultYoggCocoonSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -21,6 +22,8 @@ public sealed class CultYoggCocoonSystem : EntitySystem
 
         SubscribeLocalEvent<CultYoggCocoonComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<CultYoggWeaponComponent, EntGotRemovedFromContainerMessage>(OnRemove);
+        SubscribeLocalEvent<CultYoggWeaponComponent, EntGotInsertedIntoContainerMessage>(OnInsert);
+
     }
     private void OnUseInHand(Entity<CultYoggCocoonComponent> ent, ref UseInHandEvent args)
     {
@@ -50,23 +53,28 @@ public sealed class CultYoggCocoonSystem : EntitySystem
     }
     private void OnRemove(Entity<CultYoggWeaponComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
+        if (_container.IsEntityOrParentInContainer(ent))
+            return;
+
         ent.Comp.BeforeCocooningTime = _timing.CurTime + ent.Comp.CocooningCooldown;
+    }
+
+    private void OnInsert(Entity<CultYoggWeaponComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    {
+        ent.Comp.BeforeCocooningTime = null;
     }
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<CultYoggWeaponComponent>();
-        while (query.MoveNext(out var ent, out var comp))
+        var query = EntityQueryEnumerator<CultYoggWeaponComponent, CultYoggCorruptedComponent>();
+        while (query.MoveNext(out var ent, out var comp, out var corruptComp))
         {
             if (comp.BeforeCocooningTime is null)
                 continue;
 
             if (_timing.CurTime < comp.BeforeCocooningTime)
                 continue;
-
-            if (!TryComp<CultYoggCorruptedComponent>(ent, out var corruptComp))
-                return;
 
             var coords = Transform(ent).Coordinates;
             var newEnt = Spawn(comp.Item, coords);

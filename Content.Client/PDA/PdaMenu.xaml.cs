@@ -32,7 +32,9 @@ namespace Content.Client.PDA
         private string _stationName = Loc.GetString("comp-pda-ui-unknown");
         private string _alertLevel = Loc.GetString("comp-pda-ui-unknown");
         private string _instructions = Loc.GetString("comp-pda-ui-unknown");
-        
+        //ss220 add color for job in pda start
+        private string _cardColor = Color.Yellow.ToHex();
+        //ss220 add color for job in pda end
 
         private int _currentView;
 
@@ -125,7 +127,7 @@ namespace Content.Client.PDA
                 _clipboard.SetText(_instructions);
             };
 
-            
+
 
 
             HideAllViews();
@@ -153,9 +155,17 @@ namespace Content.Client.PDA
             {
                 _owner = state.PdaOwnerInfo.IdOwner ?? Loc.GetString("comp-pda-ui-unknown");
                 _jobTitle = state.PdaOwnerInfo.JobTitle ?? Loc.GetString("comp-pda-ui-unassigned");
+
+                //ss220 add color for job in pda start
+                _cardColor = !string.IsNullOrEmpty(state.PdaOwnerInfo.CardColor)
+                    ? state.PdaOwnerInfo.CardColor
+                    : Color.Yellow.ToHex();
+
                 IdInfoLabel.SetMarkup(Loc.GetString("comp-pda-ui",
                     ("owner", _owner),
-                    ("jobTitle", _jobTitle)));
+                    ("jobTitle", _jobTitle),
+                    ("cardColor", _cardColor)));
+                //ss220 add color for job in pda end
             }
             else
             {
@@ -165,7 +175,7 @@ namespace Content.Client.PDA
             _stationName = state.StationName ?? Loc.GetString("comp-pda-ui-unknown");
             StationNameLabel.SetMarkup(Loc.GetString("comp-pda-ui-station",
                 ("station", _stationName)));
-            
+
 
             var stationTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
 

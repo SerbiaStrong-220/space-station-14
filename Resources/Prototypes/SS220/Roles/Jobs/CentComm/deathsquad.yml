@@ -10,7 +10,6 @@
   canBeAntag: false
   accessGroups:
   - AllAccess
-#  access: #SS220-DeathSquad Update
   - CentralCommand
   special:
   - !type:AddComponentSpecial

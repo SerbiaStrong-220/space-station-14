@@ -215,7 +215,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
 
         //SS220 LimitationRevive - start
         if (TryComp<LimitationReviveComponent>(target, out var reviveComp))
-             counterDeath = reviveComp.CounterOfDead;
+             counterDeath = reviveComp.DeathCounter;
         //SS220 LimitationRevive - end
 
         _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerScannedUserMessage(

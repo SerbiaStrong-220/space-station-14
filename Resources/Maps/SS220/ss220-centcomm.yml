@@ -7210,135 +7210,6 @@ entities:
     - type: ContainedSolution
       containerName: food
       container: 84
-- proto: ActionSleep
-  entities:
-  - uid: 87
-    components:
-    - type: Transform
-      parent: 86
-    - type: InstantAction
-      container: 86
-- proto: ActionToggleBlock
-  entities:
-  - uid: 90
-    components:
-    - type: Transform
-      parent: 89
-    - type: InstantAction
-      container: 89
-  - uid: 92
-    components:
-    - type: Transform
-      parent: 91
-    - type: InstantAction
-      container: 91
-  - uid: 94
-    components:
-    - type: Transform
-      parent: 93
-    - type: InstantAction
-      container: 93
-  - uid: 96
-    components:
-    - type: Transform
-      parent: 95
-    - type: InstantAction
-      container: 95
-  - uid: 98
-    components:
-    - type: Transform
-      parent: 97
-    - type: InstantAction
-      container: 97
-  - uid: 100
-    components:
-    - type: Transform
-      parent: 99
-    - type: InstantAction
-      container: 99
-- proto: ActionToggleInternals
-  entities:
-  - uid: 102
-    components:
-    - type: Transform
-      parent: 101
-    - type: InstantAction
-      container: 101
-  - uid: 105
-    components:
-    - type: Transform
-      parent: 104
-    - type: InstantAction
-      container: 104
-  - uid: 107
-    components:
-    - type: Transform
-      parent: 106
-    - type: InstantAction
-      container: 106
-  - uid: 112
-    components:
-    - type: Transform
-      parent: 111
-    - type: InstantAction
-      container: 111
-  - uid: 115
-    components:
-    - type: Transform
-      parent: 114
-    - type: InstantAction
-      container: 114
-  - uid: 117
-    components:
-    - type: Transform
-      parent: 116
-    - type: InstantAction
-      container: 116
-  - uid: 123
-    components:
-    - type: Transform
-      parent: 122
-    - type: InstantAction
-      container: 122
-  - uid: 125
-    components:
-    - type: Transform
-      parent: 124
-    - type: InstantAction
-      container: 124
-  - uid: 131
-    components:
-    - type: Transform
-      parent: 130
-    - type: InstantAction
-      container: 130
-      originalIconColor: '#FFFFFFFF'
-- proto: ActionToggleLight
-  entities:
-  - uid: 137
-    components:
-    - type: Transform
-      parent: 136
-    - type: InstantAction
-      container: 136
-  - uid: 139
-    components:
-    - type: Transform
-      parent: 138
-    - type: InstantAction
-      container: 138
-  - uid: 141
-    components:
-    - type: Transform
-      parent: 140
-    - type: InstantAction
-      container: 140
-  - uid: 143
-    components:
-    - type: Transform
-      parent: 142
-    - type: InstantAction
-      container: 142
 - proto: AirAlarm
   entities:
   - uid: 144
@@ -22839,14 +22710,6 @@ entities:
       rot: -3.141592653589793 rad
       pos: -12,0
       parent: 1
-    - type: AddSleepAction
-      sleepAction: 87
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 87
   - uid: 2912
     components:
     - type: Transform
@@ -30126,14 +29989,6 @@ entities:
     - type: Transform
       pos: -21.37021,1.4199334
       parent: 1
-    - type: GasTank
-      toggleActionEntity: 102
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 102
   - uid: 3925
     components:
     - type: Transform
@@ -30191,14 +30046,6 @@ entities:
     - type: Transform
       pos: -21.550766,1.6004888
       parent: 1
-    - type: GasTank
-      toggleActionEntity: 112
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 112
   - uid: 3935
     components:
     - type: Transform
@@ -31177,86 +31024,38 @@ entities:
     components:
     - type: Transform
       parent: 88
-    - type: Blocking
-      blockingToggleActionEntity: 90
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 90
   - uid: 91
     components:
     - type: Transform
       parent: 88
-    - type: Blocking
-      blockingToggleActionEntity: 92
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 92
   - uid: 93
     components:
     - type: Transform
       parent: 88
-    - type: Blocking
-      blockingToggleActionEntity: 94
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 94
   - uid: 95
     components:
     - type: Transform
       parent: 88
-    - type: Blocking
-      blockingToggleActionEntity: 96
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 96
   - uid: 97
     components:
     - type: Transform
       parent: 88
-    - type: Blocking
-      blockingToggleActionEntity: 98
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 98
   - uid: 99
     components:
     - type: Transform
       parent: 88
-    - type: Blocking
-      blockingToggleActionEntity: 100
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 100
 - proto: EnergySword
   entities:
   - uid: 3101
@@ -33487,20 +33286,12 @@ entities:
     - type: Transform
       pos: -19.529589,-14.476599
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 143
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 143
-    - type: ActionsContainer
   - uid: 2864
     components:
     - type: Transform
@@ -47395,22 +47186,14 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -1.7658213,-3.539352
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 139
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 139
     - type: Physics
       canCollide: True
-    - type: ActionsContainer
   - uid: 6080
     components:
     - type: Transform
@@ -47449,22 +47232,14 @@ entities:
     - type: Transform
       pos: 30.411673,1.8955836
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 137
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 137
     - type: Physics
       canCollide: True
-    - type: ActionsContainer
 - proto: LargeBeaker
   entities:
   - uid: 6086
@@ -48974,46 +48749,22 @@ entities:
     components:
     - type: Transform
       parent: 103
-    - type: GasTank
-      toggleActionEntity: 107
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 107
     - type: InsideEntityStorage
   - uid: 116
     components:
     - type: Transform
       parent: 113
-    - type: GasTank
-      toggleActionEntity: 117
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 117
     - type: InsideEntityStorage
   - uid: 122
     components:
     - type: Transform
       parent: 121
-    - type: GasTank
-      toggleActionEntity: 123
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 123
     - type: InsideEntityStorage
   - uid: 135
     components:
@@ -49226,61 +48977,29 @@ entities:
     components:
     - type: Transform
       parent: 103
-    - type: GasTank
-      toggleActionEntity: 105
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 105
     - type: InsideEntityStorage
   - uid: 114
     components:
     - type: Transform
       parent: 113
-    - type: GasTank
-      toggleActionEntity: 115
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 115
     - type: InsideEntityStorage
   - uid: 124
     components:
     - type: Transform
       parent: 121
-    - type: GasTank
-      toggleActionEntity: 125
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 125
     - type: InsideEntityStorage
   - uid: 130
     components:
     - type: Transform
       parent: 129
-    - type: GasTank
-      toggleActionEntity: 131
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 131
     - type: InsideEntityStorage
   - uid: 3260
     components:
@@ -49940,7 +49659,7 @@ entities:
         [italic]Дата: 10.01.2569 [/italic]
 
 
-        Приветствуем вас уважаемые Магистрат и Агенты Внутренних Дел, станции Frankenstein NX-160! Проследите за выполнением написания приговоров смотрителем и главой службы безопасности по отношению к заключенным по форме НТ-СБ-ПРИГ. Ранее в отдел был направлен указ на ведение документационной учетности. А также проследите за выполнением временных рамок уровней угроз на вашей станции. 
+        Приветствуем вас уважаемые Магистрат и Агенты Внутренних Дел, станции Frankenstein NX-160! Проследите за выполнением написания приговоров смотрителем и главой службы безопасности по отношению к заключенным по форме НТ-СБ-ПРИГ. Ранее в отдел был направлен указ на ведение документационной учетности. А также проследите за выполнением временных рамок уровней угроз на вашей станции.
 
 
         Офицер Центрального Командования: Ганри Макро
@@ -50014,7 +49733,7 @@ entities:
         Уважаемый Магистрат Феликс ⬛⬛⬛⬛, станции номер Frankenstein NX-160!
 
 
-        В связи с полученным нами запросом, предоставляем следующий ответ: Контракт был заключен с данным индивидом месяц назад, вся информация предоставленная вами частично достоверна, ⬛⬛⬛ работал под нашим началом, но на другой станции, модель станции была Нокс, цифровая и буквенная последовательность JR-298. Катастрофа произошедшая на данной станции стерла все признаки жизни с наших датчиков, никто не выжил, подробные данные засекречены. 
+        В связи с полученным нами запросом, предоставляем следующий ответ: Контракт был заключен с данным индивидом месяц назад, вся информация предоставленная вами частично достоверна, ⬛⬛⬛ работал под нашим началом, но на другой станции, модель станции была Нокс, цифровая и буквенная последовательность JR-298. Катастрофа произошедшая на данной станции стерла все признаки жизни с наших датчиков, никто не выжил, подробные данные засекречены.
 
 
         Офицер Центрального Командования: Ганри Макро
@@ -50235,7 +49954,7 @@ entities:
         [italic]Полное имя- Джованни[/italic] ⬛⬛⬛⬛⬛.
 
 
-        [italic]Список преступлений: наёмный убийца, военный преступник, скотоложец, вор-рецидивист.  Участвовал в восстании на Тау-кита четыре, где выступал в качестве полевого командира. По подтверждённым данным, был исполнителем покушения на жизнь одного из членов семьи Трейзен. 
+        [italic]Список преступлений: наёмный убийца, военный преступник, скотоложец, вор-рецидивист.  Участвовал в восстании на Тау-кита четыре, где выступал в качестве полевого командира. По подтверждённым данным, был исполнителем покушения на жизнь одного из членов семьи Трейзен.
 
 
         Особые приметы:человек, расса европиодная, рост около 186 см, крепкое телосложение, имеет родинку на правой ягодице. Ранее имел татуировки и аугментацию левой руки. Вероятно, частично изменил внешность.[/italic]
@@ -50754,7 +50473,7 @@ entities:
 
         [bold]Дополнительная информация[/bold]
 
-        : Среди экипажа имеются подстрекатели, которым удалось перехватить бумагу о цели нашей станции. Они порочат честь НТ, кричат про бунт, и предлагают задержать капитана. Открыто неповинуются ЦК. Имена: Кайси ⬛⬛⬛⬛⬛⬛ (главарь), Анники ⬛⬛⬛⬛⬛⬛⬛⬛, Растус ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛, Роман ⬛⬛⬛⬛⬛⬛, Демид ⬛⬛⬛⬛⬛⬛, и иные. Возможна крупномасштабная утечка информации. Запрашиваю экстренное решение проблемы. 
+        : Среди экипажа имеются подстрекатели, которым удалось перехватить бумагу о цели нашей станции. Они порочат честь НТ, кричат про бунт, и предлагают задержать капитана. Открыто неповинуются ЦК. Имена: Кайси ⬛⬛⬛⬛⬛⬛ (главарь), Анники ⬛⬛⬛⬛⬛⬛⬛⬛, Растус ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛, Роман ⬛⬛⬛⬛⬛⬛, Демид ⬛⬛⬛⬛⬛⬛, и иные. Возможна крупномасштабная утечка информации. Запрашиваю экстренное решение проблемы.
 
 
 
@@ -52049,7 +51768,7 @@ entities:
         [italic]Дата: 10/01/2569[/italic]
 
 
-        Я, Дженни ⬛⬛⬛⬛, как Агент Внутренних Дел, сообщаю: 
+        Я, Дженни ⬛⬛⬛⬛, как Агент Внутренних Дел, сообщаю:
 
 
         Примерно на десять минут от начала смены был установлен красный код в связи с агрессивной фауной, с которой служба безопасности успешно справилась.
@@ -52219,9 +51938,9 @@ entities:
         [italic]Дата: 31.01.2569 [/italic]
 
 
-        Я, Карл ⬛⬛⬛⬛⬛, в должности Агента Внутренних Дел, заявляю, что член экипажа Ник ⬛⬛⬛⬛⬛, в должности ВрИО главы научного отдела, нарушил один из пунктов из Стандартных Рабочих Процедур, а именно: Игнорирование запроса АВД на предоставление документации. 
+        Я, Карл ⬛⬛⬛⬛⬛, в должности Агента Внутренних Дел, заявляю, что член экипажа Ник ⬛⬛⬛⬛⬛, в должности ВрИО главы научного отдела, нарушил один из пунктов из Стандартных Рабочих Процедур, а именно: Игнорирование запроса АВД на предоставление документации.
 
-        Прошу капитана, вынести сотруднику дисциплинарное взыскание и предоставить отчётную документацию данного отдела. 
+        Прошу капитана, вынести сотруднику дисциплинарное взыскание и предоставить отчётную документацию данного отдела.
 
 
         [italic]После вынесения решения в отношении правонарушителя, желательно сообщить о решении заявителю.
@@ -52332,7 +52051,7 @@ entities:
         Научный отдел (ответственный за цель)
 
 
-        Не предоставили для проверки ни одного документа с начала смены. 
+        Не предоставили для проверки ни одного документа с начала смены.
 
         О данном нарушении СРП было доложено капитану.
 
@@ -52342,7 +52061,7 @@ entities:
         Данное наказание не оказало должного эффекта на сотрудников.
 
 
-        За этим Я, Карл ⬛⬛⬛⬛⬛, в должности Агента Внутренних Дел прошу ЦК принять необходимые меры для прекращения нарушения СРП главами отделов. 
+        За этим Я, Карл ⬛⬛⬛⬛⬛, в должности Агента Внутренних Дел прошу ЦК принять необходимые меры для прекращения нарушения СРП главами отделов.
 
 
         Все необходимые документы прилагаются к отчёту.
@@ -52419,9 +52138,9 @@ entities:
         [italic]Дата: 31.01.2569 [/italic]
 
 
-        Я, Карл  ⬛⬛⬛⬛⬛, в должности Агента Внутренних Дел, заявляю, что член экипажа Джон ⬛⬛⬛⬛, в должности Главы отдела снабжения, нарушил один из пунктов из Стандартных Рабочих Процедур, а именно: Игнорирование запроса АВД на предоставление документации. 
+        Я, Карл  ⬛⬛⬛⬛⬛, в должности Агента Внутренних Дел, заявляю, что член экипажа Джон ⬛⬛⬛⬛, в должности Главы отдела снабжения, нарушил один из пунктов из Стандартных Рабочих Процедур, а именно: Игнорирование запроса АВД на предоставление документации.
 
-        Прошу капитана, вынести сотруднику дисциплинарное взыскание и предоставить отчётную документацию данного отдела. 
+        Прошу капитана, вынести сотруднику дисциплинарное взыскание и предоставить отчётную документацию данного отдела.
 
 
         [italic]После вынесения решения в отношении правонарушителя, желательно сообщить о решении заявителю.
@@ -58011,14 +57730,6 @@ entities:
           showEnts: False
           occludes: True
           ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 141
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 141
-    - type: ActionsContainer
 - proto: SpeedLoaderMagnumAP
   entities:
   - uid: 3195

@@ -20,3 +20,9 @@
   id: SeniorMedicalLabCoat
   equipment:
     outerClothing: ClothingOuterCoatLabSeniorPhysician
+
+# Shoes
+- type: loadout
+  id: MedicalBrownShoes
+  equipment:
+    shoes: ClothingShoesColorBrown

@@ -147,7 +147,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
 
                     var announcement = Loc.GetString("dark-reaper-component-announcement");
                     var sender = Loc.GetString("comms-console-announcement-title-centcom");
-                    _chat.DispatchStationAnnouncement(stationUid ?? uid, announcement, sender, false, Color.Red);
+                    _chat.DispatchStationAnnouncement(stationUid ?? uid, announcement, sender, false, null, Color.Red);//SS220 CluwneComms
                 }
 
                 // update consoom counter alert

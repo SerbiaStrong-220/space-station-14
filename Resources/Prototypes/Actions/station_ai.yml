@@ -1,10 +1,11 @@
-﻿# Actions
+# Actions
 - type: entity
+  parent: BaseAction
   id: ActionJumpToCore
   name: Jump to core
   description: Sends your eye back to the core.
   components:
-  - type: InstantAction
+  - type: Action
     priority: -9
     itemIconStyle: BigAction
     icon:
@@ -13,14 +14,16 @@
       sprite: SS220/Interface/Actions/actions_ai.rsi
       state: ai_core
       # SS220-resprite end
+  - type: InstantAction
     event: !type:JumpToCoreEvent
 
 - type: entity
+  parent: BaseAction
   id: ActionSurvCameraLights
   name: Toggle camera lights
   description: Enable surveillance camera lights near wherever you're viewing.
   components:
-  - type: InstantAction
+  - type: Action
     priority: -5
     icon:
       # SS220-resprite start
@@ -28,6 +31,7 @@
       sprite: SS220/Interface/Actions/actions_ai.rsi
       state: camera_light
       # SS220-resprite end
+  - type: InstantAction
     event: !type:RelayedActionComponentChangeEvent
       components:
       - type: LightOnCollideCollider
@@ -44,13 +48,12 @@
 
 
 - type: entity
+  parent: BaseMentalAction
   id: ActionAIViewLaws
   name: View Laws
   description: View the laws that you must follow.
   components:
-  - type: InstantAction
-    checkCanInteract: false
-    checkConsciousness: false
+  - type: Action
     priority: -3
     itemIconStyle: NoItem
     icon:
@@ -59,5 +62,6 @@
       sprite: SS220/Interface/Actions/actions_ai.rsi
       state: state_laws
       # SS220-resprite end
-    event: !type:ToggleLawsScreenEvent
     useDelay: 0.5
+  - type: InstantAction
+    event: !type:ToggleLawsScreenEvent

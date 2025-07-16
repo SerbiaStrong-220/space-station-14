@@ -1,0 +1,70 @@
+- type: entity
+  parent: BaseItem
+  id: BaseBearTrap
+  abstract: true
+  components:
+  - type: Physics
+    bodyType: Dynamic
+  - type: CollisionWake
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.40,-0.40,0.40,0.40"
+        hard: false
+        layer:
+        - LowImpassable
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.40,-0.40,0.40,0.40"
+        density: 30
+        mask:
+        - ItemMask
+  - type: Ensnaring
+    freeTime: 2.0
+    breakoutTime: 3.5
+    walkSpeed: 0.4
+    sprintSpeed: 0.4
+    staminaDamage: 0
+    canThrowTrigger: false
+    canMoveBreakout: true
+    maxEnsnares: 10
+  - type: Trap
+    setTrapDelay: 5
+    defuseTrapDelay: 5
+  - type: Tag
+    tags:
+    - Unstackable
+
+- type: entity
+  name: bear trap
+  parent: BaseBearTrap
+  id: BearTrap
+  description: А useful item for hunting station rats or people
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Devices/traps/bearTrap.rsi
+    layers:
+    - state: trap-unarmed
+      map: ["base"]
+  - type: Item
+    sprite: SS220/Objects/Devices/traps/bearTrap.rsi
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TrapVisuals.Visual:
+        base:
+          Armed: { state: trap-armed }
+          Unarmed: { state: trap-unarmed }
+  - type: DamageOnTrigger
+    damage:
+      types:
+        Blunt: 15
+  - type: Trap
+    durationStun: 0
+    setTrapSound: /Audio/SS220/Items/Trap/sound_trap_set.ogg
+    defuseTrapSound: /Audio/SS220/Items/Trap/sound_trap_defuse.ogg
+    hitTrapSound: /Audio/SS220/Items/Trap/sound_trap_hit.ogg

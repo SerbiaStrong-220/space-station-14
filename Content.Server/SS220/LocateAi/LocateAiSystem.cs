@@ -34,7 +34,7 @@ public sealed class LocateAiSystem : SharedLocateAiSystem
 
                 continue;
             }
-            
+
             var detected =
                 _lookup.GetEntitiesInRange<StationAiCoreComponent>(Transform(uid).Coordinates,
                         locateAiComponent.RangeDetection)
@@ -51,6 +51,10 @@ public sealed class LocateAiSystem : SharedLocateAiSystem
     private void OnUseInHand(Entity<LocateAiComponent> ent, ref UseInHandEvent args)
     {
         ent.Comp.IsActive = !ent.Comp.IsActive;
-        _popup.PopupEntity(Loc.GetString("multitool-syndie-toggle"), args.User, args.User);
+
+        var message = Loc.GetString(
+            ent.Comp.IsActive ? "multitool-syndie-toggle-on" : "multitool-syndie-toggle-off");
+
+        _popup.PopupEntity(message, args.User, args.User);
     }
 }

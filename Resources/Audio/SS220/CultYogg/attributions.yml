@@ -37,3 +37,13 @@
   license: "CC-BY-4.0"
   copyright: "Original is created by DrMinky, modified by SkaldetSkaeg for SS220"
   source: "https://freesound.org/people/DrMinky/sounds/167074/"
+
+- files: ["lamp_on.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original is created by samararaine, modified by SkaldetSkaeg for SS220"
+  source: "https://freesound.org/people/samararaine/sounds/186374/"
+
+- files: ["lamp_off.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Original is created by 14GPanskaLetko_Dominik, modified by SkaldetSkaeg for SS220"
+  source: "https://freesound.org/people/14GPanskaLetko_Dominik/sounds/419290/"

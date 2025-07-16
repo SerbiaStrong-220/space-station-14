@@ -8,3 +8,6 @@ namespace Content.Shared.Polymorph;
 /// <param name="IsRevert">Whether this polymorph event was a revert back to the original entity</param>
 [ByRefEvent]
 public record struct PolymorphedEvent(EntityUid OldEntity, EntityUid NewEntity, bool IsRevert);
+
+[ByRefEvent]
+public record struct BeforePolymorpedEvent(EntityUid PolymorphingEntity, PolymorphConfiguration PolymorphConfiguration); //SS220-cryo-mobs-fix

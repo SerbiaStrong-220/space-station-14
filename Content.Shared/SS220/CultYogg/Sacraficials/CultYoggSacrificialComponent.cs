@@ -12,32 +12,36 @@ namespace Content.Shared.SS220.CultYogg.Sacraficials;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class CultYoggSacrificialComponent : Component
 {
-    /// <summary>
-    /// Icon
-    /// </summary>
-    [DataField]
-    public bool IconVisibleToGhost { get; set; } = true;
+    [ViewVariables]
+    public bool IconVisibleToGhost = true;
 
-    [DataField]
+    [ViewVariables]
     public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "CultYoggSacraficialTargetIcon";
 
     /// <summary>
     /// Tier number required for replacement if it needed
     /// </summary>
-    [DataField]
+    [ViewVariables]
     public int Tier = 0;//initilize as max possible tier
 
     /// <summary>
     /// Time required for announcement
     /// </summary>
-    [DataField]
+    [ViewVariables]
     public TimeSpan AnnounceReplacementCooldown = TimeSpan.FromSeconds(60);
+
     /// <summary>
     /// Time required for replacement
     /// </summary>
-    [DataField]
+    [ViewVariables]
     public TimeSpan ReplacementCooldown = TimeSpan.FromSeconds(300);
 
+    /// <summary>
+    /// Time penalty if sacrificial decides to commit suicide
+    /// </summary>
+    [ViewVariables]
+    public TimeSpan SuicidePenaltyTime = TimeSpan.FromSeconds(300);
 
+    [ViewVariables]
     public bool WasSacraficed = false;
 }

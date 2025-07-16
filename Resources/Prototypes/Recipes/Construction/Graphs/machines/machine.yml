@@ -95,6 +95,10 @@
       edges:
         - to: machineFrame
           completed:
+            #ss220 fix empty container for chem disp start
+            - !type:EmptyContainer
+              container: storagebase
+            #ss220 fix empty container for chem disp end
             - !type:RaiseEvent
               event: !type:MachineDeconstructedEvent
               broadcast: false

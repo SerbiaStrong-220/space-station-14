@@ -1,0 +1,22 @@
+- type: trait
+  id: Slowness
+  name: trait-slowness-name
+  description: trait-slowness-desc
+  category: Disabilities
+  mutuallyExclusiveWith:
+    - Nervousness
+  components:
+  - type: ChangeSpeedDoAfters
+    coefficient: 1.3
+
+- type: trait
+  id: Nervousness
+  name: trait-nervousness-name
+  description: trait-nervousness-desc
+  mutuallyExclusiveWith:
+    - Slowness
+  category: Disabilities
+  components:
+  - type: ChangeSpeedDoAfters
+    coefficient: 0.7
+    chanceToFail: 0.27
