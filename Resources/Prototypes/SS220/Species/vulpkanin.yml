@@ -3,7 +3,7 @@
 - type: species
   id: Vulpkanin
   name: species-name-vulpkanin
-  roundStart: false #увы.......
+  roundStart: true #не увы....... :jokerge:
   prototype: MobVulpkanin
   sprites: MobVulpkaninSprites
   defaultSkinTone: "#f5aaff"
