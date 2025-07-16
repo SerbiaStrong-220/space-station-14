@@ -289,8 +289,8 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
 
         // SS220 Add projectiles & hitscan on shuttle nav begin
         var worldToView = worldToShuttle * shuttleToView;
-        DrawProjectiles(handle, worldToView, xform);
-        DrawHitscans(handle, worldToView, xform);
+        DrawProjectiles(handle, worldToView, xform, viewBounds);
+        DrawHitscans(handle, worldToView, xform, viewBounds);
         // SS220 Add projectiles & hitscan on shuttle nav end
 
         // If we've set the controlling console, and it's on a different grid
@@ -359,11 +359,12 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
     }
 
     // SS220 Add projectiles & hitscan on shuttle nav begin
-    private void DrawProjectiles(DrawingHandleScreen handle, Matrix3x2 worldToView, TransformComponent gridXform)
+    private void DrawProjectiles(DrawingHandleScreen handle, Matrix3x2 worldToView, TransformComponent gridXform, Box2Rotated viewBounds)
     {
         foreach (var value in _shuttleNavInfo.ProjectilesToDraw)
         {
-            if (value.CurCoordinate.MapId != gridXform.MapID)
+            if (value.CurCoordinate.MapId != gridXform.MapID ||
+                !viewBounds.Contains(value.CurCoordinate.Position))
                 continue;
 
             var pos = Vector2.Transform(value.CurCoordinate.Position, worldToView);
@@ -371,7 +372,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
         }
     }
 
-    private void DrawHitscans(DrawingHandleScreen handle, Matrix3x2 worldToView, TransformComponent gridXform)
+    private void DrawHitscans(DrawingHandleScreen handle, Matrix3x2 worldToView, TransformComponent gridXform, Box2Rotated viewBounds)
     {
         const float startColorBrightness = 0.5f;
 
@@ -381,20 +382,32 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
             if (remainingTime.TotalMilliseconds <= 0)
                 continue;
 
+            if (value.FromCoordinates.MapId != gridXform.MapID)
+                continue;
+
             var fromPos = value.FromCoordinates.Position;
             var toPos = value.ToCoordinates.Position;
 
             var dir = toPos - fromPos;
-            var normal = dir.Normalized();
-            var perp = new Vector2(-normal.Y, normal.X);
-            var vertsVector = perp * (value.Info.Width / 2) * (MinimapScale / 1.8f);
+            var height = dir.Length();
+            var width = value.Info.Width;
+            var center = (fromPos + toPos) / 2;
+            var left = center.X - width / 2;
+            var bottom = center.Y - height / 2;
+
+            var worldBounds = new Box2Rotated(Box2.FromDimensions(left, bottom, width, height), dir.ToWorldAngle(), center);
+            var worldAABB = worldBounds.CalcBoundingBox();
+            var viewAABB = viewBounds.CalcBoundingBox();
+
+            if (!viewAABB.Intersects(worldAABB))
+                continue;
 
             Vector2[] verts =
             [
-                Vector2.Transform(fromPos + vertsVector, worldToView),
-                Vector2.Transform(fromPos - vertsVector, worldToView),
-                Vector2.Transform(toPos - vertsVector, worldToView),
-                Vector2.Transform(toPos + vertsVector, worldToView)
+                Vector2.Transform(worldBounds.BottomLeft, worldToView),
+                Vector2.Transform(worldBounds.BottomRight, worldToView),
+                Vector2.Transform(worldBounds.TopRight, worldToView),
+                Vector2.Transform(worldBounds.TopLeft, worldToView)
             ];
 
             var maxColor = value.Info.Color.WithAlpha(0.75f);

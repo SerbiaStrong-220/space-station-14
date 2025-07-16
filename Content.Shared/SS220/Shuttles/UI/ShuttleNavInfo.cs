@@ -45,7 +45,7 @@ public sealed partial class ShuttleNavHitscanInfo : ShuttleNavInfo
     /// Line width
     /// </summary>
     [DataField]
-    public float Width = 0.5f;
+    public float Width = 1f;
 
     /// <summary>
     /// How long will the hitscan take to draw after the shot

@@ -14,4 +14,4 @@
     state: impact_laser
   shuttleNavInfo:
     enabled: true
-    width: 0.3
+    width: 0.6
