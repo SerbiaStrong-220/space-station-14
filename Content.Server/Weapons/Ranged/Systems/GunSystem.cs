@@ -225,7 +225,9 @@ public sealed partial class GunSystem : SharedGunSystem
 
                                 FireEffects(fromEffect, result.Distance, dir.Normalized().ToAngle(), hitscan, hit);
 
-                                var ev = new HitScanReflectAttemptEvent(user, gunUid, hitscan.Reflective, dir, false);
+                                // ss220 add user for shooting start
+                                var ev = new HitScanReflectAttemptEvent(user, lastHit, gunUid, hitscan.Reflective, dir, false);
+                                // ss220 add user for shooting end
                                 RaiseLocalEvent(hit, ref ev);
 
                                 if (!ev.Reflected)

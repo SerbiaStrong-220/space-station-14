@@ -9,6 +9,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Standing;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
@@ -34,6 +35,9 @@ public sealed class ReflectSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly SharedProjectileSystem _projectileSystem = default!; // SS220 add barricade
+    // ss220 add user for shooting start
+    [Dependency] private readonly StandingStateSystem _stand = default!;
+    // ss220 add user for shooting end
 
     public override void Initialize()
     {
@@ -58,7 +62,7 @@ public sealed class ReflectSystem : EntitySystem
         if (!ent.Comp.InRightPlace)
             return; // only reflect when equipped correctly
 
-        if (TryReflectProjectile(ent, ent.Owner, args.ProjUid))
+        if (TryReflectProjectile(ent, args.Target, ent.Owner, args.ProjUid)) // ss220 add user for shooting
             args.Cancelled = true;
     }
 
@@ -70,11 +74,13 @@ public sealed class ReflectSystem : EntitySystem
         if (!ent.Comp.InRightPlace)
             return; // only reflect when equipped correctly
 
-        if (TryReflectHitscan(ent, ent.Owner, args.Shooter, args.SourceItem, args.Direction, args.Reflective, out var dir))
+        // ss220 add user for shooting start
+        if (TryReflectHitscan(ent, ent.Owner, args.Target, args.Shooter, args.SourceItem, args.Direction, args.Reflective, out var dir))
         {
             args.Direction = dir.Value;
             args.Reflected = true;
         }
+        // ss220 add user for shooting end
     }
 
     private void OnReflectCollide(Entity<ReflectComponent> ent, ref ProjectileReflectAttemptEvent args)
@@ -82,7 +88,7 @@ public sealed class ReflectSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (TryReflectProjectile(ent, ent.Owner, args.ProjUid))
+        if (TryReflectProjectile(ent, args.Target, ent.Owner, args.ProjUid)) // ss220 add user for shooting
             args.Cancelled = true;
     }
 
@@ -91,23 +97,29 @@ public sealed class ReflectSystem : EntitySystem
         if (args.Reflected)
             return;
 
-        if (TryReflectHitscan(ent, ent.Owner, args.Shooter, args.SourceItem, args.Direction, args.Reflective, out var dir))
+        // ss220 add user for shooting start
+        if (TryReflectHitscan(ent, ent.Owner, args.Target, args.Shooter, args.SourceItem, args.Direction, args.Reflective, out var dir))
         {
             args.Direction = dir.Value;
             args.Reflected = true;
         }
+        // ss220 add user for shooting end
     }
 
-    private bool TryReflectProjectile(Entity<ReflectComponent> reflector, EntityUid user, Entity<ProjectileComponent?> projectile)
+    // ss220 add user for shooting
+    private bool TryReflectProjectile(Entity<ReflectComponent> reflector, EntityUid? target, EntityUid user, Entity<ProjectileComponent?> projectile)
     {
+        // ss220 add user for shooting start
         if (!TryComp<ReflectiveComponent>(projectile, out var reflective) ||
             (reflector.Comp.Reflects & reflective.Reflective) == 0x0 ||
             !_toggle.IsActivated(reflector.Owner) ||
             !_random.Prob(reflector.Comp.ReflectProbProjectile) ||
-            !TryComp<PhysicsComponent>(projectile, out var physics))
+            !TryComp<PhysicsComponent>(projectile, out var physics) ||
+            (target != null && _stand.IsDown(target.Value)))
         {
             return false;
         }
+        // ss220 add user for shooting end
 
         var rotation = _random.NextAngle(-reflector.Comp.SpreadProjectile / 2, reflector.Comp.SpreadProjectile / 2).Opposite();
         var existingVelocity = _physics.GetMapLinearVelocity(projectile, component: physics);
@@ -144,19 +156,23 @@ public sealed class ReflectSystem : EntitySystem
     private bool TryReflectHitscan(
         Entity<ReflectComponent> reflector,
         EntityUid user,
+        EntityUid? target, // ss220 add user for shooting
         EntityUid? shooter,
         EntityUid shotSource,
         Vector2 direction,
         ReflectType hitscanReflectType,
         [NotNullWhen(true)] out Vector2? newDirection)
     {
+        // ss220 add user for shooting start
         if ((reflector.Comp.Reflects & hitscanReflectType) == 0x0 ||
             !_toggle.IsActivated(reflector.Owner) ||
-            !_random.Prob(reflector.Comp.ReflectProb))
+            !_random.Prob(reflector.Comp.ReflectProb) ||
+            (target != null && _stand.IsDown(target.Value)))
         {
             newDirection = null;
             return false;
         }
+        // ss220 add user for shooting end
 
         PlayAudioAndPopup(reflector.Comp, user);
 
