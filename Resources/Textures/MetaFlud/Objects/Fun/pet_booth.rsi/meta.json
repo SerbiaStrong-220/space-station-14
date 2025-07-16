@@ -1,0 +1,26 @@
+{
+    "version": 1,
+    "license": "CC0-1.0",
+    "copyright": "Taken from SS220 and edited by Krutiks",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "pet_booth_base"
+        },
+        {
+            "name": "pet_booth_door"
+        },
+        {
+            "name": "pet_booth_open"
+        },
+        {
+            "name": "icon"
+        },
+        {
+            "name": "welded"
+        }
+    ]
+}
