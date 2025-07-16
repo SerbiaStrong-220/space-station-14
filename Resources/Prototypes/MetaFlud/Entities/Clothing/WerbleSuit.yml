@@ -1,4 +1,5 @@
-- parent: [ClothingUniformSkirtBase]
+- type: entity
+  parent: [ClothingUniformSkirtBase]
   id: ClothingUniformBunnySuit
   name: Вязаное платье
   description: Тёплое вязаное платье, которое вам не подарит бабушка.
