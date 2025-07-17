@@ -401,35 +401,51 @@ public sealed class StoreDiscountSystem : EntitySystem
         EntityUid storeUid,
         IReadOnlyList<ListingDataWithCostModifiers> listings)
     {
-        var result = new Dictionary<string, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>();
-
         if (!TryComp<StoreDiscountComponent>(storeUid, out var discountComponent))
-            return result;
+            return new();
+
+        var result = new Dictionary<string, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>(discountComponent.Discounts.Count);
+        var listingIndex = listings.ToDictionary(l => l.ID);
 
         foreach (var discountData in discountComponent.Discounts)
         {
-            var listing = listings.FirstOrDefault(l => l.ID == discountData.ListingId);
-            if (listing == null)
+            if (!listingIndex.TryGetValue(discountData.ListingId, out var listing))
                 continue;
 
-            var discountPercentages = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>();
+            var discounts = GetCalculatedDiscounts(discountData, listing);
 
-            foreach (var (currency, discountAmount) in discountData.DiscountAmountByCurrency)
-            {
-                if (!listing.CostFromCatalog.TryGetValue(currency, out var originalPrice))
-                    continue;
-
-                var discountPercentage = (-discountAmount / originalPrice);
-                discountPercentage = FixedPoint2.New(Math.Round(discountPercentage.Double(), 2));
-
-                discountPercentages[currency] = discountPercentage;
-            }
-
-            if (discountPercentages.Count > 0)
-                result[discountData.ListingId.ToString()] = discountPercentages;
+            if (discounts.Count > 0)
+                result[discountData.ListingId] = discounts;
         }
 
         return result;
+    }
+
+    private Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> GetCalculatedDiscounts(
+        StoreDiscountData discountData,
+        ListingDataWithCostModifiers listing)
+    {
+        var discounts = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>();
+
+        foreach (var (currency, discountAmount) in discountData.DiscountAmountByCurrency)
+        {
+            if (!listing.CostFromCatalog.TryGetValue(currency, out var originalPrice))
+                continue;
+
+            if (originalPrice <= 0 || discountAmount <= 0)
+                continue;
+
+            var discountPercentage = CalculateDiscountPercentage(discountAmount, originalPrice);
+            discounts[currency] = discountPercentage;
+        }
+
+        return discounts;
+    }
+
+    private FixedPoint2 CalculateDiscountPercentage(FixedPoint2 discountAmount, FixedPoint2 originalPrice)
+    {
+        var percentage = -discountAmount / originalPrice;
+        return FixedPoint2.New(Math.Round(percentage.Double(), 2));
     }
 
     private void SetCostFromCatalog(IReadOnlyList<ListingDataWithCostModifiers> listings)

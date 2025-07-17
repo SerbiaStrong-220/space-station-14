@@ -199,7 +199,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
             return;
 
         CurrentDynamic = dynamicProto;
-        _admin.Add(LogType.AntagSelection, LogImpact.High, $"Dynamic {dynamicProto.ID} was setted"); // TODO: log type must be changed
+        _admin.Add(LogType.EventStarted, LogImpact.High, $"Dynamic {dynamicProto.ID} was setted");
 
         _chatManager.SendAdminAnnouncement(Loc.GetString("dynamic-was-set", ("dynamic", dynamicProto.ID)));
 
