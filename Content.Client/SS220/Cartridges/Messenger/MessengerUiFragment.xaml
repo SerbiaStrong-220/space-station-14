@@ -4,7 +4,7 @@
     <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
         <BoxContainer>
             <LineEdit Name="ChatsSearch" Access="Public" HorizontalExpand="true" PlaceHolder="{Loc 'messenger-ui-search-line'}"/>
-            <Button Name="ClearAllChatButton" StyleClasses="OpenBoth" SetWidth="120" Text="Очистить"/>
+            <Button Name="ClearAllChatButton" StyleClasses="OpenBoth" SetWidth="220" Text="{Loc 'messenger-ui-delete-all'}"/>
         </BoxContainer>
         <Button Visible="False" Name="BackButton" Text="{Loc 'messenger-ui-back-button'}"/>
         <Label Visible="False" Name="ChatNameLabel" Align="Center"></Label>
@@ -14,7 +14,7 @@
         <LineEdit Name="MessageInput" Visible="False" HorizontalExpand="True" SetHeight="32"/>
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
             <Button Name="SendButton" StyleClasses="OpenRight" HorizontalExpand="True" Visible="False" Text="{Loc 'messenger-ui-send-message-button'}"/>
-            <Button Name="ClearCurrentChatButton" StyleClasses="OpenLeft" SetWidth="120" Visible="False" Text="Очистить"/>
+            <Button Name="ClearCurrentChatButton" StyleClasses="OpenLeft" SetWidth="120" Visible="False" Text="{Loc 'messenger-ui-delete'}"/>
         </BoxContainer>
         <Label Visible="False" Name="ErrorLabel"></Label>
     </BoxContainer>
