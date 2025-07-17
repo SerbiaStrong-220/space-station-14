@@ -32,17 +32,20 @@ public sealed class ChemicalAdaptation : SharedChemicalAdaptationSystem
         }
     }
 
-    public void EnsureChemAdaptation(ChemicalAdaptationComponent comp, string chemId, TimeSpan duration, float modifier)
+    public void EnsureChemAdaptation(ChemicalAdaptationComponent comp, string chemId, TimeSpan duration, float modifier, bool shoulAdd)
     {
         if (!comp.ChemicalAdaptations.TryGetValue(chemId, out var adapt))
         {
-            comp.ChemicalAdaptations.Add(chemId, new AdaptationInfo(duration, modifier));
+            comp.ChemicalAdaptations.Add(chemId, new AdaptationInfo(duration, modifier, shoulAdd));
             return;
         }
 
         adapt.Modifier *= modifier;
-        adapt.Duration = _time.CurTime + duration;
 
+        if (shoulAdd)
+            adapt.Duration += duration;
+        else
+            adapt.Duration = _time.CurTime + duration;
     }
 
     public void RemoveAdaptation(EntityUid ent, ChemicalAdaptationComponent comp, string chemId)

@@ -13,9 +13,11 @@ public sealed partial class ChemicalAdaptationComponent : Component
 {
     public Dictionary<string, AdaptationInfo> ChemicalAdaptations = [];
 }
-public sealed partial class AdaptationInfo(TimeSpan duration, float modifier)
+public sealed partial class AdaptationInfo(TimeSpan duration, float modifier, bool shoulAdd)
 {
     public float Modifier = modifier;
 
     public TimeSpan Duration = duration;
+
+    public bool ShoulAdd = shoulAdd;
 }

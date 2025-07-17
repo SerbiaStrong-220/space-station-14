@@ -24,6 +24,12 @@ public sealed partial class ChemicalAdaptationEffect : EventEntityEffect<Chemica
     [DataField(required: true)]
     public float Modifier;
 
+    /// <summary>
+    /// "True" if you need to add Duration with each use of the effect, "false" if you need to update to Duration
+    /// </summary>
+    [DataField]
+    public bool ShoulAdd = false;
+
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return Loc.GetString("reagent-effect-guidebook-ss220-free-chemical-adaptation", ("chance", Probability));
