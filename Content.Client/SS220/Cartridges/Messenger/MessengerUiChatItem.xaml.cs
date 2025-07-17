@@ -9,8 +9,11 @@ namespace Content.Client.SS220.Cartridges.Messenger;
 [GenerateTypedNameReferences]
 public sealed partial class MessengerUiChatItem : BoxContainer
 {
-    public MessengerUiChatItem(string chatName, string lastMessage,
-        Action<BaseButton.ButtonEventArgs>? onPressedOpenChatHistory, bool isNewMessage)
+    public MessengerUiChatItem(
+        string chatName,
+        string lastMessage,
+        Action<BaseButton.ButtonEventArgs>? onPressedOpenChatHistory,
+        bool isNewMessage)
     {
         RobustXamlLoader.Load(this);
         ChatName.Text = chatName;

@@ -15,6 +15,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
     public event Action<uint, string>? OnMessageSendButtonPressed;
     public event Action<uint>? OnHistoryViewPressed;
     public event Action<bool>? OnBackButtonPressed;
+    public event Action<uint, bool>? OnClearChatPressed;
 
     public uint CurrentChat;
     public string? SearchString;
@@ -31,6 +32,17 @@ public sealed partial class MessengerUiFragment : BoxContainer
         {
             OnMessageSendButtonPressed?.Invoke(CurrentChat, MessageInput.Text);
             MessageInput.Clear();
+        };
+
+        ClearCurrentChatButton.OnPressed += _ =>
+        {
+            OnClearChatPressed?.Invoke(CurrentChat, false);
+            MessageInput.Clear();
+        };
+
+        ClearAllChatButton.OnPressed += _ =>
+        {
+            OnClearChatPressed?.Invoke(CurrentChat, true);
         };
 
         BackButton.OnPressed += _ =>
@@ -53,27 +65,32 @@ public sealed partial class MessengerUiFragment : BoxContainer
 
         foreach (var chat in chatsSorted)
         {
-            var lastMessage = "";
+            var lastMessage = string.Empty;
             var chatName = ChatName(messengerUiState, chat);
 
             if (chat.LastMessage != null &&
                 messengerUiState.Messages.TryGetValue(chat.LastMessage.Value, out var lastMsg))
             {
-                if (lastMsg.Text != "")
-                    lastMessage = $"{lastMsg.Text}";
+                if (lastMsg.Text != string.Empty)
+                    lastMessage = lastMsg.Text;
             }
 
-            ChatsContainer.AddChild(new MessengerUiChatItem(chatName, lastMessage, _ =>
-            {
-                CurrentChat = chat.Id;
-                OnHistoryViewPressed?.Invoke(chat.Id);
-            }, chat.NewMessages));
+            ChatsContainer.AddChild(new MessengerUiChatItem(
+                chatName,
+                lastMessage,
+                _ =>
+                {
+                    CurrentChat = chat.Id;
+                    OnHistoryViewPressed?.Invoke(chat.Id);
+                },
+                chat.NewMessages));
         }
 
         ChatNameLabel.Visible = false;
         BackButton.Visible = false;
         MessageInput.Visible = false;
         SendButton.Visible = false;
+        ClearCurrentChatButton.Visible = false;
         ErrorLabel.Visible = false;
     }
 
@@ -101,7 +118,6 @@ public sealed partial class MessengerUiFragment : BoxContainer
     {
         ChatsContainer.RemoveAllChildren();
 
-
         if (messengerUiState.Chats.TryGetValue(CurrentChat, out var chat))
         {
             chat.NewMessages = false;
@@ -116,14 +132,21 @@ public sealed partial class MessengerUiFragment : BoxContainer
 
                 if (message.FromContactId == messengerUiState.ClientContact.Id)
                 {
-                    var messageItem = new MessengerUiMessageItem($"{message.Text}", message.Time,
-                        Label.AlignMode.Right, HAlignment.Right);
+                    var messageItem = new MessengerUiMessageItem(
+                        message.Text,
+                        message.Time,
+                        Label.AlignMode.Right,
+                        HAlignment.Right);
+
                     ChatsContainer.AddChild(messageItem);
                 }
                 else
                 {
-                    var messageItem = new MessengerUiMessageItem($"{message.Text}", message.Time,
-                        Label.AlignMode.Left, HAlignment.Left);
+                    var messageItem = new MessengerUiMessageItem(message.Text,
+                        message.Time,
+                        Label.AlignMode.Left,
+                        HAlignment.Left);
+
                     ChatsContainer.AddChild(messageItem);
                 }
             }
@@ -135,6 +158,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
         BackButton.Visible = true;
         MessageInput.Visible = true;
         SendButton.Visible = true;
+        ClearCurrentChatButton.Visible = true;
         ErrorLabel.Visible = false;
     }
 
@@ -146,6 +170,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
         BackButton.Visible = false;
         MessageInput.Visible = false;
         SendButton.Visible = false;
+        ClearCurrentChatButton.Visible = false;
         ErrorLabel.Visible = true;
         ErrorLabel.Text = err;
     }

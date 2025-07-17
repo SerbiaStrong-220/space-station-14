@@ -10,12 +10,12 @@ namespace Content.Client.SS220.Cartridges.Messenger;
 [GenerateTypedNameReferences]
 public sealed partial class MessengerUiMessageItem : BoxContainer
 {
-    private readonly StyleBoxFlat _styleBoxRight = new()
+    private static readonly StyleBoxFlat _styleBoxRight = new()
     {
         BackgroundColor = Color.FromHex("#03adfc20"),
     };
 
-    private readonly StyleBoxFlat _styleBoxLeft = new()
+    private static readonly StyleBoxFlat _styleBoxLeft = new()
     {
         BackgroundColor = Color.FromHex("#59595920"),
     };

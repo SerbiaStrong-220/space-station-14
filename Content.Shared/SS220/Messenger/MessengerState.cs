@@ -23,7 +23,7 @@ public sealed class MessengerChat
 
     public MessengerChat()
     {
-        Name = "";
+        Name = string.Empty;
         Kind = MessengerChatKind.Contact;
         MembersId = new();
     }
@@ -53,7 +53,7 @@ public sealed class MessengerContact
 
     public MessengerContact()
     {
-        Name = "";
+        Name = string.Empty;
     }
 }
 
@@ -78,6 +78,6 @@ public sealed class MessengerMessage
     {
         FromContactId = 0;
         Time = new TimeSpan();
-        Text = "";
+        Text = string.Empty;
     }
 }

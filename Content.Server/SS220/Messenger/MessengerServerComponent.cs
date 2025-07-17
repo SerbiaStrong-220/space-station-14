@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Shared.SS220.Messenger;
 
 namespace Content.Server.SS220.Messenger;
@@ -87,9 +88,6 @@ public sealed partial class MessengerServerComponent : Component
         if (contact == null)
             return;
 
-        if (contact.Name == name)
-            return;
-
         contact.Name = name;
     }
 
@@ -112,6 +110,31 @@ public sealed partial class MessengerServerComponent : Component
     public MessageKey AddMessage(MessengerMessage message)
     {
         return _messagesStore.Add(message);
+    }
+
+    public bool DeleteMessage(MessageKey key)
+    {
+        return _messagesStore.Delete(key);
+    }
+
+    public void ClearAllMessages()
+    {
+        foreach (var key in _messagesStore.GetAllKeys())
+        {
+            _messagesStore.Delete(key);
+        }
+
+        foreach (var chatKey in _chatsStore.GetAllKeys())
+        {
+            var chat = _chatsStore.Get(chatKey);
+            if (chat == null)
+                continue;
+
+            chat.MessagesId.Clear();
+            chat.LastMessageId = null;
+
+            _chatsStore.Set(chatKey, chat);
+        }
     }
 
     public MessengerMessage GetMessage(MessageKey key)
@@ -192,7 +215,7 @@ public abstract class Key : IId
 
     public override int GetHashCode()
     {
-        return (int) Id;
+        return (int)Id;
     }
 
     public override bool Equals(object? obj)
@@ -242,6 +265,12 @@ public sealed class SequenceDataStore<TKey, TValue> where TKey : IId, new() wher
     {
         return _storage.Remove(key.Id);
     }
+
+    public IEnumerable<TKey> GetAllKeys()
+    {
+        return _storage.Keys.Select(id => new TKey { Id = id });
+    }
+
 }
 
 public interface IId

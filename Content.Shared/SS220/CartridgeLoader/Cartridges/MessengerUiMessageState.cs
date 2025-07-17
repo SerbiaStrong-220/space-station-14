@@ -27,8 +27,14 @@ public sealed class MessengerChatUiState
     public bool NewMessages;
     public bool ForceUpdate;
 
-    public MessengerChatUiState(uint id, string? name, MessengerChatKind kind, HashSet<uint> members,
-        HashSet<uint> messages, uint? lastMessage, int sortNumber)
+    public MessengerChatUiState(
+        uint id,
+        string? name,
+        MessengerChatKind kind,
+        HashSet<uint> members,
+        HashSet<uint> messages,
+        uint? lastMessage,
+        int sortNumber)
     {
         Id = id;
         Name = name ?? "unknown";
@@ -107,5 +113,18 @@ public sealed class MessengerNewChatMessageUiState : BoundUserInterfaceState
     {
         ChatId = chatId;
         Message = message;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class MessengerDeleteMsgInChatUiState : BoundUserInterfaceState
+{
+    public uint? ChatId;
+    public bool DeleteAll;
+
+    public MessengerDeleteMsgInChatUiState(uint? chatId, bool deleteAll = false)
+    {
+        ChatId = chatId;
+        DeleteAll = deleteAll;
     }
 }
