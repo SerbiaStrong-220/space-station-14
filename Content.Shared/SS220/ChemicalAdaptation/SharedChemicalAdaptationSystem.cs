@@ -15,7 +15,7 @@ public abstract class SharedChemicalAdaptationSystem : EntitySystem
         if (!adaptComp.ChemicalAdaptations.TryGetValue(reagent, out var adaptationInfo))
             return false;
 
-        value = Convert.ToInt32(value * adaptationInfo.Modifier);
+        value = (int)(value * adaptationInfo.Modifier);
 
         return true;
     }
