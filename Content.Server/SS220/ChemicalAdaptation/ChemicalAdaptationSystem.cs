@@ -5,7 +5,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.ChemicalAdaptation;
 
-public sealed class ChemicalAdaptation : EntitySystem
+public sealed class ChemicalAdaptation : SharedChemicalAdaptationSystem
 {
     [Dependency] private readonly IGameTiming _time = default!;
 
@@ -16,30 +16,36 @@ public sealed class ChemicalAdaptation : EntitySystem
         var query = EntityQueryEnumerator<ChemicalAdaptationComponent>();
         while (query.MoveNext(out var ent, out var comp))
         {
+            List<string> onRemove = [];
             foreach (var (name, info) in comp.ChemicalAdaptations)
             {
                 if (info.Duration > _time.CurTime)
                     continue;
 
-                RemoveChem(ent, comp, name);
-                return; //idk how to properly del element from list in cycle, so "return"
+                onRemove.Add(name);
+            }
+
+            foreach (var name in onRemove)
+            {
+                RemoveAdaptation(ent, comp, name);
             }
         }
     }
 
     public void EnsureChemAdaptation(ChemicalAdaptationComponent comp, string chemId, TimeSpan duration, float modifier)
     {
-        if (comp.ChemicalAdaptations.TryGetValue(chemId, out var adapt))
+        if (!comp.ChemicalAdaptations.TryGetValue(chemId, out var adapt))
         {
-            adapt.Modifier *= modifier;
-            adapt.Duration = _time.CurTime + duration;
+            comp.ChemicalAdaptations.Add(chemId, new AdaptationInfo(duration, modifier));
             return;
         }
 
-        comp.ChemicalAdaptations.Add(chemId, new AdaptationInfo(duration, modifier));
+        adapt.Modifier *= modifier;
+        adapt.Duration = _time.CurTime + duration;
+
     }
 
-    public void RemoveChem(EntityUid ent, ChemicalAdaptationComponent comp, string chemId)
+    public void RemoveAdaptation(EntityUid ent, ChemicalAdaptationComponent comp, string chemId)
     {
         comp.ChemicalAdaptations.Remove(chemId);
 

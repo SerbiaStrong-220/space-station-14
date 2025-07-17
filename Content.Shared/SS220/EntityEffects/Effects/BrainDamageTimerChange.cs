@@ -17,7 +17,10 @@ public sealed partial class BrainDamageTimerChange : EntityEffect
     /// How long will brain damage be delayed with one assimilation of the reagent?
     /// </summary>
     [DataField(required: true)]
-    public TimeSpan ProlongedTime;
+    public TimeSpan AddTime;
+
+    [Dependency] private readonly SharedLimitationReviveSystem _limRevive = default!;
+    [Dependency] private readonly SharedChemicalAdaptationSystem _chemAdaptation = default!;
 
     public override void Effect(EntityEffectBaseArgs args)
     {
@@ -33,13 +36,9 @@ public sealed partial class BrainDamageTimerChange : EntityEffect
         if (limitComp.DamageTime is null)
             return;
 
-        var mod = 1f;//buffer in case we don't have a modifier
+        _chemAdaptation.TryModifyValue(args.TargetEntity, reagentArgs.Reagent.ID, ref AddTime);
 
-        if (args.EntityManager.TryGetComponent<ChemicalAdaptationComponent>(args.TargetEntity, out var adaptComp) &&
-            adaptComp.ChemicalAdaptations.TryGetValue(reagentArgs.Reagent.ID, out var value))
-	    mod = value.Modifier;
-
-        limitComp.DamageTime += ProlongedTime * mod;//not sure, maybe it should be function. but then you'll have to move a lot to shared...
+        _limRevive.UpdateTimer(limitComp, AddTime);
     }
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
