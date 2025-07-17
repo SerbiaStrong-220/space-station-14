@@ -2,6 +2,7 @@
   id: TraitorPassenger
   name: job-name-passenger
   description: job-description-passenger
+  playTimeTracker: AntagTraitor
   startingGear: PassengerGear
   icon: "JobIconPassenger"
   supervisors: job-supervisors-everyone
