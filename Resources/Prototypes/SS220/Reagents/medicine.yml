@@ -243,4 +243,4 @@
         duration: 1200
         modifier: 0.8
       - !type:BrainDamageTimerChange
-        prolongedTime: 60
+        addTime: 60
