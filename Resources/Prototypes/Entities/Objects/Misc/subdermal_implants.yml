@@ -138,7 +138,7 @@
 
 #Security implants
 
-#Tracking implant edited by KRTKS for SS220
+#SS220-tracking-implant-fix begin
 - type: entity
   parent: DeathRattleImplant
   id: TrackingImplant
@@ -152,6 +152,7 @@
         - MobState # admeme implanting a chair with tracking implant needs to give the chair mobstate so it can die first
     - type: Rattle
       radioChannel: Security
+#SS220-tracking-implant-fix end
     - type: SuitSensor
       randomMode: false
       controlsLocked: true
