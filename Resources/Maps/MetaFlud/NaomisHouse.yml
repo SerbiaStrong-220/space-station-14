@@ -4,8 +4,8 @@ meta:
   engineVersion: 261.1.0
   forkId: ""
   forkVersion: ""
-  time: 07/14/2025 12:22:36
-  entityCount: 2287
+  time: 07/16/2025 23:47:47
+  entityCount: 2286
 maps:
 - 1
 grids:
@@ -42,7 +42,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: Map Entity
+      name: Naomi's House
     - type: Transform
     - type: Map
       mapPaused: True
@@ -1611,7 +1611,7 @@ entities:
       pos: 16.5,5.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -20234.129
+      secondsUntilStateChange: -21205.229
       state: Opening
   - uid: 476
     components:
@@ -2246,7 +2246,7 @@ entities:
   - uid: 748
     components:
     - type: Transform
-      pos: 8.2033415,0.8841286
+      pos: 8.220079,0.80644894
       parent: 2
 - proto: BriefcaseBrownFilled
   entities:
@@ -2256,8 +2256,20 @@ entities:
       desc: Явно оставлен Айлис, некогда побывавшей в гостях у Наоми. Тихо стоит у рабочего стола.
       name: Потрёпанный чемодан
     - type: Transform
-      pos: 22.450619,7.9894214
+      pos: 25.345188,8.083771
       parent: 2
+    - type: Storage
+      storedItems:
+        264:
+          position: 0,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 264
 - proto: Bucket
   entities:
   - uid: 2029
@@ -4142,13 +4154,6 @@ entities:
       inSlot: head
     - type: Physics
       canCollide: False
-- proto: ClothingHeadHatDogEars
-  entities:
-  - uid: 893
-    components:
-    - type: Transform
-      pos: 7.4858513,-5.5576916
-      parent: 2
 - proto: ClothingHeadHatPartyRed
   entities:
   - uid: 619
@@ -4203,7 +4208,7 @@ entities:
       inSlot: outerClothing
     - type: Physics
       canCollide: False
-- proto: ClothingOuterWinterBar
+- proto: ClothingOuterWinterCap
   entities:
   - uid: 269
     components:
@@ -4212,18 +4217,9 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: ClothingOuterWinterCap
+- proto: ClothingOuterWinterColorWhite
   entities:
-  - uid: 264
-    components:
-    - type: Transform
-      parent: 261
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-- proto: ClothingOuterWinterQM
-  entities:
-  - uid: 291
+  - uid: 266
     components:
     - type: Transform
       parent: 261
@@ -4232,34 +4228,16 @@ entities:
     - type: InsideEntityStorage
 - proto: ClothingShoesBootsLaceup
   entities:
-  - uid: 268
+  - uid: 271
     components:
     - type: Transform
       parent: 261
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: ClothingShoesColorBlack
-  entities:
-  - uid: 332
-    components:
-    - type: Transform
-      parent: 261
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-- proto: ClothingShoesColorBlue
+- proto: ClothingShoesBootsWinter
   entities:
   - uid: 267
-    components:
-    - type: Transform
-      parent: 261
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-- proto: ClothingShoesColorWhite
-  entities:
-  - uid: 297
     components:
     - type: Transform
       parent: 261
@@ -4283,30 +4261,8 @@ entities:
   - uid: 258
     components:
     - type: Transform
-      pos: 26.710772,6.502634
+      pos: 26.690681,6.4593573
       parent: 2
-- proto: ClothingSponsorMaidHat
-  entities:
-  - uid: 272
-    components:
-    - type: Transform
-      parent: 270
-    - type: Clothing
-      inSlotFlag: HEAD
-      inSlot: head
-    - type: Physics
-      canCollide: False
-- proto: ClothingSponsorMaidSuit
-  entities:
-  - uid: 271
-    components:
-    - type: Transform
-      parent: 270
-    - type: Clothing
-      inSlotFlag: INNERCLOTHING
-      inSlot: jumpsuit
-    - type: Physics
-      canCollide: False
 - proto: ClothingUniformJumpsuitCaptain
   entities:
   - uid: 274
@@ -4331,7 +4287,7 @@ entities:
       canCollide: False
 - proto: ClothingUniformJumpsuitTurtleAltColorBlue
   entities:
-  - uid: 744
+  - uid: 272
     components:
     - type: Transform
       parent: 261
@@ -4340,22 +4296,27 @@ entities:
     - type: InsideEntityStorage
 - proto: ClothingUniformJumpsuitTurtleAltColorGrey
   entities:
-  - uid: 266
+  - uid: 268
     components:
     - type: Transform
       parent: 261
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: ClothingUniformJumpsuitTurtleAltColorMaroon
+- proto: Cobweb1
   entities:
-  - uid: 265
+  - uid: 291
     components:
     - type: Transform
-      parent: 261
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      rot: 1.5707963267948966 rad
+      pos: 7.5,-5.5
+      parent: 2
+  - uid: 297
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,-4.5
+      parent: 2
 - proto: ComfyChair
   entities:
   - uid: 1497
@@ -5051,13 +5012,6 @@ entities:
     - type: Transform
       pos: 10.47284,7.7868767
       parent: 2
-- proto: DogBed
-  entities:
-  - uid: 627
-    components:
-    - type: Transform
-      pos: 7.5,-5.5
-      parent: 2
 - proto: DresserFilled
   entities:
   - uid: 804
@@ -5165,11 +5119,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 1451
-    components:
-    - type: Transform
-      pos: 7.154587,-5.1095557
-      parent: 2
 - proto: DrinkMugBlack
   entities:
   - uid: 405
@@ -8574,21 +8523,37 @@ entities:
     - type: Transform
       pos: 13.687055,-3.6784074
       parent: 2
-- proto: GasPassiveVent
+- proto: GasOutletInjector
   entities:
-  - uid: 793
+  - uid: 893
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 9.5,-14.5
+      pos: 7.5,-12.5
       parent: 2
 - proto: GasPipeBend
   entities:
+  - uid: 332
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 7.5,-13.5
+      parent: 2
   - uid: 788
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 7.5,-14.5
+      parent: 2
+  - uid: 1451
+    components:
+    - type: Transform
+      pos: 9.5,-13.5
+      parent: 2
+  - uid: 1896
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,-14.5
       parent: 2
 - proto: GasPipeStraight
   entities:
@@ -8601,6 +8566,12 @@ entities:
     components:
     - type: Transform
       pos: 7.5,-15.5
+      parent: 2
+  - uid: 2000
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.5,-13.5
       parent: 2
 - proto: GasPort
   entities:
@@ -8706,13 +8677,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 10.5,-13.5
-      parent: 2
-- proto: Handcuffs
-  entities:
-  - uid: 2001
-    components:
-    - type: Transform
-      pos: 9.492879,-5.2332077
       parent: 2
 - proto: HappyHonk
   entities:
@@ -8827,6 +8791,8 @@ entities:
     - type: Transform
       pos: 27.529247,8.504009
       parent: 2
+    - type: AccessReader
+      access: []
     - type: EntityStorage
       air:
         volume: 200
@@ -8853,25 +8819,30 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 268
-          - 267
-          - 332
-          - 297
+          - 272
           - 269
-          - 291
-          - 264
+          - 271
+          - 267
+          - 268
           - 266
-          - 744
-          - 265
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
+  - uid: 793
+    components:
+    - type: Transform
+      pos: 37.5,8.5
+      parent: 2
+    - type: AccessReader
+      access: []
   - uid: 800
     components:
     - type: Transform
       pos: 9.5,-16.5
       parent: 2
+    - type: AccessReader
+      access: []
 - proto: LockerFreezerDoubleBase
   entities:
   - uid: 341
@@ -8985,7 +8956,7 @@ entities:
   - uid: 270
     components:
     - type: MetaData
-      desc: Манекен, на котором весит одежда, предназначенная для особой работы на станциях Центрального Командования. Только для хороших де... сотрудников!
+      desc: Здесь ничего и никогда не было.
       name: Манекен
     - type: Transform
       rot: -0.20115530490875244 rad
@@ -8993,44 +8964,10 @@ entities:
       parent: 2
     - type: Pullable
       prevFixedRotation: True
-    - type: ContainerContainer
-      containers:
-        jumpsuit: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: 271
-        outerClothing: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        neck: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        mask: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        eyes: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        head: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: 272
-        suitstorage: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        back: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
   - uid: 273
     components:
     - type: MetaData
-      desc: Манекен, одежда на котором явно предназначенна для самой ответственной работы Капитаном на станциях НаноТрейзен. Одевая эту форму, вы явно ощутите груз на своих плечах
+      desc: Не нашёл того чего искал на другом манекене и решил осмотреть этот? Жалко.
       name: Манекен
     - type: Transform
       rot: -0.39269908169872414 rad
@@ -9259,6 +9196,22 @@ entities:
       parent: 2
 - proto: Paper
   entities:
+  - uid: 265
+    components:
+    - type: Transform
+      pos: 7.5025673,-5.430072
+      parent: 2
+    - type: Paper
+      stampState: paper_stamp-lawyer
+      stampedBy:
+      - stampedColor: '#233D57FF'
+        stampedName: Совесть.
+      content: "\n    \n\n\n\n\n\n\n\n \n                            И что ты хотел здесь найти?"
+  - uid: 627
+    components:
+    - type: Transform
+      pos: 23.4282,8.469077
+      parent: 2
   - uid: 734
     components:
     - type: Transform
@@ -9280,11 +9233,6 @@ entities:
     components:
     - type: Transform
       pos: 23.292215,8.621268
-      parent: 2
-  - uid: 1896
-    components:
-    - type: Transform
-      pos: 23.462748,8.536051
       parent: 2
 - proto: Pen
   entities:
@@ -9887,6 +9835,18 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 7.560473,-12.929152
       parent: 2
+- proto: RubberStampLawyer
+  entities:
+  - uid: 744
+    components:
+    - type: MetaData
+      desc: Именная печать с инициалами Наоми Ивакуры
+      name: Именная печать
+    - type: Transform
+      pos: 25.21635,8.868946
+      parent: 2
+    - type: Stamp
+      stampedName: ~Ивакура Н. К.~
 - proto: SandBattlemap
   entities:
   - uid: 725
@@ -12652,7 +12612,7 @@ entities:
   - uid: 458
     components:
     - type: MetaData
-      desc: Рыба курит. Рыба в аквариуме. Огонь под водой. Странно.
+      desc: '"Зачем вам курящая рыба в аквариуме?" - А тебя это ебать не должно.'
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 14.612384,6.925777
@@ -12745,13 +12705,6 @@ entities:
     components:
     - type: Transform
       pos: 28.434772,-4.3489833
-      parent: 2
-- proto: Stunbaton
-  entities:
-  - uid: 2000
-    components:
-    - type: Transform
-      pos: 9.542071,-5.302038
       parent: 2
 - proto: SubstationBasic
   entities:
@@ -13150,6 +13103,14 @@ entities:
     - type: Transform
       pos: 11.5,6.5
       parent: 2
+- proto: Telescopichka
+  entities:
+  - uid: 264
+    components:
+    - type: Transform
+      parent: 280
+    - type: Physics
+      canCollide: False
 - proto: ToiletDirtyWater
   entities:
   - uid: 249
@@ -13244,6 +13205,8 @@ entities:
     - type: Transform
       pos: 10.5,-2.5
       parent: 2
+    - type: AccessReader
+      access: []
 - proto: VendingMachineCoffee
   entities:
   - uid: 754
@@ -14950,7 +14913,7 @@ entities:
       pos: 9.5,6.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -30572.223
+      secondsUntilStateChange: -31543.322
       state: Opening
     - type: Airlock
       autoClose: False
@@ -15277,14 +15240,14 @@ entities:
   - uid: 301
     components:
     - type: MetaData
-      desc: Здесь живёт владелица этого дома. Пожалуйста, стучите, прежде чем войти, иначе вы рискуете застать кого-то в одном лишь нижнем белье
-      name: Дверь в комнату Наоми
+      desc: Обычная дверь в обычную комнату
+      name: Дверь
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 24.5,5.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -20102.195
+      secondsUntilStateChange: -21073.295
       state: Opening
   - uid: 427
     components:
@@ -15369,7 +15332,7 @@ entities:
       pos: 22.5,-6.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -31801.355
+      secondsUntilStateChange: -32772.453
       state: Opening
   - uid: 707
     components:
@@ -15398,7 +15361,7 @@ entities:
       pos: 8.5,-15.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -19892.695
+      secondsUntilStateChange: -20863.795
       state: Opening
   - uid: 941
     components:
