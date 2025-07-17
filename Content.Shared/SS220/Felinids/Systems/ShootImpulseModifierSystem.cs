@@ -30,7 +30,7 @@ public sealed class ShootImpulseModifierSystem : EntitySystem
 
         var impulseModifier = 1f;
 
-        if (TryComp<ShootImpulseComponent>(args.Shooter, out var impulseComp))
+        if (TryComp<ShootImpulseModifierComponent>(args.Shooter, out var impulseComp))
         {
             if (_gravity.IsWeightless(args.Shooter))
                 impulseModifier *= impulseComp.ImpulseModifier;
@@ -56,7 +56,7 @@ public sealed class ShootImpulseModifierSystem : EntitySystem
             return false;
 
         if (!_gravity.IsWeightless(uid)
-        && !HasComp<ShootImpulseComponent>(uid))
+        && !HasComp<ShootImpulseModifierComponent>(uid))
             return false;
 
         return true;
