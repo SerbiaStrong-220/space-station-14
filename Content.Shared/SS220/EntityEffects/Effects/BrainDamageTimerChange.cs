@@ -1,7 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.SS220.LimitationRevive;
+using Content.Shared.Alert;
 using Content.Shared.SS220.ChemicalAdaptation;
+using Content.Shared.SS220.LimitationRevive;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.EntityEffects.Effects;
@@ -19,11 +20,12 @@ public sealed partial class BrainDamageTimerChange : EntityEffect
     [DataField(required: true)]
     public TimeSpan AddTime;
 
-    [Dependency] private readonly SharedLimitationReviveSystem _limRevive = default!;
-    [Dependency] private readonly SharedChemicalAdaptationSystem _chemAdaptation = default!;
-
     public override void Effect(EntityEffectBaseArgs args)
     {
+
+        var limReviveSys = args.EntityManager.EntitySysManager.GetEntitySystem<SharedLimitationReviveSystem>();
+        var chemAdaptSys = args.EntityManager.EntitySysManager.GetEntitySystem<SharedChemicalAdaptationSystem>();
+
         if (args is not EntityEffectReagentArgs reagentArgs)
             return;
 
@@ -36,9 +38,9 @@ public sealed partial class BrainDamageTimerChange : EntityEffect
         if (limitComp.DamageTime is null)
             return;
 
-        _chemAdaptation.TryModifyValue(args.TargetEntity, reagentArgs.Reagent.ID, ref AddTime);
+        chemAdaptSys.TryModifyValue(args.TargetEntity, reagentArgs.Reagent.ID, ref AddTime);
 
-        _limRevive.UpdateTimer(limitComp, AddTime);
+        limReviveSys.UpdateTimer(limitComp, AddTime);
     }
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
