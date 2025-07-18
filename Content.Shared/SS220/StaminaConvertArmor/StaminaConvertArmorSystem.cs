@@ -6,15 +6,15 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.ElectricityArmor;
+namespace Content.Shared.SS220.StaminaConvertArmor;
 
 /// <summary>
-/// Handles the logic for <see cref="ElectricityArmorComponent"/>:
+/// Handles the logic for <see cref="StaminaConvertArmorComponent"/>:
 /// - Converts a portion of stamina damage into electrical-type damage.
 /// - Blocks specified status effects from applying while the armor is equipped.
 /// - Relays events via inventory slots to ensure effects apply correctly when worn.
 /// </summary>
-public sealed class ElectricityArmorSystem : EntitySystem
+public sealed class StaminaConvertArmorSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
@@ -24,27 +24,28 @@ public sealed class ElectricityArmorSystem : EntitySystem
     public override void Initialize()
     {
         // ref events
-        SubscribeLocalEvent<ElectricityArmorComponent, BeforeStaminaDamageEvent>(OnStaminaResist);
-        SubscribeLocalEvent<ElectricityArmorComponent, BeforeStatusEffectAddAttemptEvent>(OnBeforeAddStatus);
+        SubscribeLocalEvent<StaminaConvertArmorComponent, BeforeStaminaDamageEvent>(OnStaminaResist);
+        SubscribeLocalEvent<StaminaConvertArmorComponent, BeforeStatusEffectAddedRelayEvent>(OnBeforeAddStatus);
 
         // ref relay events
-        SubscribeLocalEvent<ElectricityArmorComponent, InventoryRelayedEvent<BeforeStaminaDamageEvent>>(RelayedResistance);
-        SubscribeLocalEvent<ElectricityArmorComponent, InventoryRelayedEvent<BeforeStatusEffectAddAttemptEvent>>(RelayedEffects);
+        SubscribeLocalEvent<StaminaConvertArmorComponent, InventoryRelayedEvent<BeforeStaminaDamageEvent>>(RelayedResistance);
+        SubscribeLocalEvent<StaminaConvertArmorComponent, InventoryRelayedEvent<BeforeStatusEffectAddedRelayEvent>>(RelayedEffects);
 
         // clothing events
-        SubscribeLocalEvent<ElectricityArmorComponent, ClothingGotEquippedEvent>(OnGotEquipped);
-        SubscribeLocalEvent<ElectricityArmorComponent, ClothingGotUnequippedEvent>(OnGotUnequipped);
+        SubscribeLocalEvent<StaminaConvertArmorComponent, ClothingGotEquippedEvent>(OnGotEquipped);
+        SubscribeLocalEvent<StaminaConvertArmorComponent, ClothingGotUnequippedEvent>(OnGotUnequipped);
     }
 
     /// <summary>
     /// Converts a portion of stamina damage into another damage type when applicable.
     /// </summary>
-    private void OnStaminaResist(Entity<ElectricityArmorComponent> ent, ref BeforeStaminaDamageEvent args)
+    private void OnStaminaResist(Entity<StaminaConvertArmorComponent> ent, ref BeforeStaminaDamageEvent args)
     {
         if (ent.Comp.User == null)
             return;
 
-        if (_mobState.IsDead(ent.Comp.User.Value))
+        var user = GetEntity(ent.Comp.User.Value);
+        if (_mobState.IsDead(user))
             return;
 
         if (!_proto.TryIndex(ent.Comp.DamageType, out var damageProto))
@@ -55,14 +56,14 @@ public sealed class ElectricityArmorSystem : EntitySystem
 
         var toConvert = args.Value * ent.Comp.DamageCoefficient;
 
-        _damage.TryChangeDamage(ent.Comp.User, new DamageSpecifier(damageProto, FixedPoint2.New(toConvert)));
+        _damage.TryChangeDamage(user, new DamageSpecifier(damageProto, FixedPoint2.New(toConvert)));
         args.Value -= toConvert;
     }
 
     /// <summary>
     /// Prevents the application of blocked status effects while armor is worn.
     /// </summary>
-    private void OnBeforeAddStatus(Entity<ElectricityArmorComponent> ent, ref BeforeStatusEffectAddAttemptEvent args)
+    private void OnBeforeAddStatus(Entity<StaminaConvertArmorComponent> ent, ref BeforeStatusEffectAddedRelayEvent args)
     {
         if (ent.Comp.User == null)
             return;
@@ -74,7 +75,7 @@ public sealed class ElectricityArmorSystem : EntitySystem
     /// <summary>
     /// Forwards stamina resistance logic via an inventory relay system.
     /// </summary>
-    private void RelayedResistance(Entity<ElectricityArmorComponent> ent, ref InventoryRelayedEvent<BeforeStaminaDamageEvent> args)
+    private void RelayedResistance(Entity<StaminaConvertArmorComponent> ent, ref InventoryRelayedEvent<BeforeStaminaDamageEvent> args)
     {
         OnStaminaResist(ent, ref args.Args);
     }
@@ -82,7 +83,7 @@ public sealed class ElectricityArmorSystem : EntitySystem
     /// <summary>
     /// Forwards status effect filtering logic via an inventory relay system.
     /// </summary>
-    private void RelayedEffects(Entity<ElectricityArmorComponent> ent, ref InventoryRelayedEvent<BeforeStatusEffectAddAttemptEvent> args)
+    private void RelayedEffects(Entity<StaminaConvertArmorComponent> ent, ref InventoryRelayedEvent<BeforeStatusEffectAddedRelayEvent> args)
     {
         OnBeforeAddStatus(ent, ref args.Args);
     }
@@ -90,16 +91,18 @@ public sealed class ElectricityArmorSystem : EntitySystem
     /// <summary>
     /// Stores the entity that equipped the armor.
     /// </summary>
-    private void OnGotEquipped(Entity<ElectricityArmorComponent> ent, ref ClothingGotEquippedEvent args)
+    private void OnGotEquipped(Entity<StaminaConvertArmorComponent> ent, ref ClothingGotEquippedEvent args)
     {
-        ent.Comp.User = args.Wearer;
+        ent.Comp.User = GetNetEntity(args.Wearer);
+        Dirty(ent);
     }
 
     /// <summary>
     /// Clears the wearer reference when armor is unequipped.
     /// </summary>
-    private void OnGotUnequipped(Entity<ElectricityArmorComponent> ent, ref ClothingGotUnequippedEvent args)
+    private void OnGotUnequipped(Entity<StaminaConvertArmorComponent> ent, ref ClothingGotUnequippedEvent args)
     {
         ent.Comp.User = null;
+        Dirty(ent);
     }
 }

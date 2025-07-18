@@ -89,7 +89,7 @@
     sprite: Clothing/OuterClothing/Armor/security.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Armor/security.rsi
-  - type: ElectricityArmor
+  - type: StaminaConvertArmor
     damageType: Shock
     damageCoefficient: 0.3
     ignoredEffects:

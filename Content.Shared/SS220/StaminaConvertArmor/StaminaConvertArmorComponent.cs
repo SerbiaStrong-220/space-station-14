@@ -2,7 +2,7 @@ using Content.Shared.Damage.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.ElectricityArmor;
+namespace Content.Shared.SS220.StaminaConvertArmor;
 
 /// <summary>
 /// Represents armor that interacts with stamina damage and status effects.
@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.ElectricityArmor;
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent]
-public sealed partial class ElectricityArmorComponent : Component
+public sealed partial class StaminaConvertArmorComponent : Component
 {
     /// <summary>
     /// The type of damage to apply when converting stamina damage.
@@ -34,5 +34,5 @@ public sealed partial class ElectricityArmorComponent : Component
     /// The entity wearing this armor, set when the item is equipped.
     /// </summary>
     [ViewVariables]
-    public EntityUid? User;
+    public NetEntity? User;
 }

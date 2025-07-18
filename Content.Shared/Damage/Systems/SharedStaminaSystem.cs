@@ -11,7 +11,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Rounding;
-using Content.Shared.SS220.ElectricityArmor;
+using Content.Shared.SS220.StaminaConvertArmor;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
@@ -373,7 +373,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         }
 
         //ss220 add electricity armor start
-        var evAttempt = new BeforeStatusEffectAddAttemptEvent("Paralyze");
+        var evAttempt = new BeforeStatusEffectAddedRelayEvent("Paralyze");
         RaiseLocalEvent(uid, ref evAttempt);
         if (evAttempt.Cancelled)
             return;
