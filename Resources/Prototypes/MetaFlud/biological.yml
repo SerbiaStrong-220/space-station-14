@@ -1,0 +1,21 @@
+- type: reagent
+  id: FemboyMilk
+  name: Необычное молочко
+  group: Biological
+  desc: Молочко с необычными свойствами. Ты только попробуй, ням-ням...
+  flavor: вязко и сладко
+  color: "#2cf274"
+  recognizable: true
+  physicalDesc: густо
+  viscosity: 0.25
+  tileReactions:
+    - !type:SpillTileReaction
+  metabolisms:
+    Food:
+      effects:
+      - !type:SatiateHunger
+        factor: 1
+  footstepSound:
+    collection: FootstepSlime # makes sense
+    params:
+      volume: 6
