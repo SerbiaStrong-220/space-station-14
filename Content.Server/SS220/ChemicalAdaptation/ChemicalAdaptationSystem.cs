@@ -55,4 +55,43 @@ public sealed class ChemicalAdaptation : SharedChemicalAdaptationSystem
         if (comp.ChemicalAdaptations.Count == 0)
             RemCompDeferred<ChemicalAdaptationComponent>(ent);
     }
+
+    public override bool TryModifyValue(EntityUid ent, string reagent, ref int value)
+    {
+        if (!TryComp<ChemicalAdaptationComponent>(ent, out var adaptComp))
+            return false;
+
+        if (!adaptComp.ChemicalAdaptations.TryGetValue(reagent, out var adaptationInfo))
+            return false;
+
+        value = (int)(value * adaptationInfo.Modifier);
+
+        return true;
+    }
+
+    public override bool TryModifyValue(EntityUid ent, string reagent, ref float value)
+    {
+        if (!TryComp<ChemicalAdaptationComponent>(ent, out var adaptComp))
+            return false;
+
+        if (!adaptComp.ChemicalAdaptations.TryGetValue(reagent, out var adaptationInfo))
+            return false;
+
+        value = value * adaptationInfo.Modifier;
+
+        return true;
+    }
+
+    public override bool TryModifyValue(EntityUid ent, string reagent, ref TimeSpan value)
+    {
+        if (!TryComp<ChemicalAdaptationComponent>(ent, out var adaptComp))
+            return false;
+
+        if (!adaptComp.ChemicalAdaptations.TryGetValue(reagent, out var adaptationInfo))
+            return false;
+
+        value = value * adaptationInfo.Modifier;
+
+        return true;
+    }
 }

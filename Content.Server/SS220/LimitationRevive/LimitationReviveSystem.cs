@@ -160,8 +160,14 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
         ent.Comp.DamageTime = _timing.CurTime + newTime;
     }
 
-    public override void UpdateTimer(LimitationReviveComponent comp, TimeSpan addTime)
+    public override void UpdateTimer(EntityUid ent, TimeSpan addTime)
     {
-        comp.DamageTime += addTime;
+        if (!TryComp<LimitationReviveComponent>(ent, out var limComp))
+            return;
+
+        if (limComp.DamageTime == null)
+            return;
+
+        limComp.DamageTime += addTime;
     }
 }
