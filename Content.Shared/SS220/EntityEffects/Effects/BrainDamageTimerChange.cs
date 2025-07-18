@@ -38,9 +38,11 @@ public sealed partial class BrainDamageTimerChange : EntityEffect
         if (limitComp.DamageTime is null)
             return;
 
-        chemAdaptSys.TryModifyValue(args.TargetEntity, reagentArgs.Reagent.ID, ref AddTime);
+        var timeBuffer = AddTime;
 
-        limReviveSys.UpdateTimer(limitComp, AddTime);
+        chemAdaptSys.TryModifyValue(args.TargetEntity, reagentArgs.Reagent.ID, ref timeBuffer);
+
+        limReviveSys.UpdateTimer(limitComp, timeBuffer);
     }
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
