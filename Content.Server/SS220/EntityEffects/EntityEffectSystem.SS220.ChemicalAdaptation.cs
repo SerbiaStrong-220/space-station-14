@@ -20,9 +20,9 @@ public sealed partial class EntityEffectSystem : EntitySystem
 
         var modifier = args.Effect.Modifier;
         var duration = args.Effect.Duration;
-        var shoulAdd = args.Effect.ShoulAdd;
+        var refresh = args.Effect.Refresh;
 
         var chem = EnsureComp<ChemicalAdaptationComponent>(reagentArgs.TargetEntity);
-        _adaptation.EnsureChemAdaptation(chem, reagentArgs.Reagent.ID, duration, modifier, shoulAdd);
+        _adaptation.EnsureChemAdaptation(chem, reagentArgs.Reagent.ID, duration, modifier, refresh);
     }
 }

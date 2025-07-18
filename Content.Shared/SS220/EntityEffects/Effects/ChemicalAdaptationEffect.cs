@@ -25,10 +25,10 @@ public sealed partial class ChemicalAdaptationEffect : EventEntityEffect<Chemica
     public float Modifier;
 
     /// <summary>
-    /// "True" if you need to add Duration with each use of the effect, "false" if you need to update to Duration
+    /// "False" if you need to add Duration with each use of the effect, "true" if you need to refresh Duration
     /// </summary>
     [DataField]
-    public bool ShoulAdd = false;
+    public bool Refresh = false;
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
