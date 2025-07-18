@@ -1,0 +1,14 @@
+- type: entity
+  parent: [DrinkCartonVisualsOpenable, DrinkCartonBaseLargeFull]
+  id: DrinkFemboyMilkCarton
+  name: Молоко
+  description: Вкусная и полезная белая жидкость! С наших собственных ферм
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: FemboyMilk
+          Quantity: 100
+  - type: Sprite
+    sprite: MetaFlud/Objects/Consumable/Drinks/femboymilk.rsi
