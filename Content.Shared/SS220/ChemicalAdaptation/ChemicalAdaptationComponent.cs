@@ -2,7 +2,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Server.SS220.ChemicalAdaptation;
+namespace Content.Shared.SS220.ChemicalAdaptation;
 
 /// <summary>
 /// The component is designed to accumulate and retain drug effect modifiers.
