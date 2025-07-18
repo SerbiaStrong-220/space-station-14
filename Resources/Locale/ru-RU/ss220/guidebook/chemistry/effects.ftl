@@ -26,10 +26,10 @@ reagent-effect-guidebook-ss220-brain-damage-slow =
     { $chance ->
         [1] Causes
         *[other] cause
-    } may slow brain necrosis
+    } slowing of brain necrosis
 
 reagent-effect-guidebook-ss220-chemical-adaptation =
     { $chance ->
         [1] Causes
         *[other] cause
-    } causes the body to become addicted, which can change the effectiveness of the drug
+    } body addaptation, which can change the effectiveness of the drug

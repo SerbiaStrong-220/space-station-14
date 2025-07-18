@@ -16,16 +16,16 @@ public sealed class ChemicalAdaptation : SharedChemicalAdaptationSystem
         var query = EntityQueryEnumerator<ChemicalAdaptationComponent>();
         while (query.MoveNext(out var ent, out var comp))
         {
-            List<string> onRemove = [];
+            List<string> toRemove = [];
             foreach (var (name, info) in comp.ChemicalAdaptations)
             {
                 if (info.Duration > _time.CurTime)
                     continue;
 
-                onRemove.Add(name);
+                toRemove.Add(name);
             }
 
-            foreach (var name in onRemove)
+            foreach (var name in toRemove)
             {
                 RemoveAdaptation(ent, comp, name);
             }
