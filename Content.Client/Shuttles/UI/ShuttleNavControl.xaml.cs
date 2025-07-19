@@ -361,36 +361,38 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
     // SS220 Add projectiles & hitscan on shuttle nav begin
     private void DrawProjectiles(DrawingHandleScreen handle, Matrix3x2 worldToView, TransformComponent gridXform, Box2Rotated viewBounds)
     {
-        foreach (var value in _shuttleNavInfo.ProjectilesToDraw)
+        foreach (var info in _shuttleNavInfo.ProjectilesToDraw)
         {
-            if (value.CurCoordinate.MapId != gridXform.MapID ||
-                !viewBounds.Contains(value.CurCoordinate.Position))
+            if (info.CurCoordinates.MapId != gridXform.MapID ||
+                !viewBounds.Contains(info.CurCoordinates.Position))
                 continue;
 
-            var pos = Vector2.Transform(value.CurCoordinate.Position, worldToView);
-            handle.DrawCircle(pos, value.Info.Radius * MinimapScale, value.Info.Color.WithAlpha(0.85f));
+            var pos = Vector2.Transform(info.CurCoordinates.Position, worldToView);
+            handle.DrawCircle(pos, info.Radius * MinimapScale, info.Color.WithAlpha(0.85f));
         }
     }
 
     private void DrawHitscans(DrawingHandleScreen handle, Matrix3x2 worldToView, TransformComponent gridXform, Box2Rotated viewBounds)
     {
         const float startColorBrightness = 0.5f;
+        const float maxColorOnProgressStart = 0.3f;
+        const float maxColorOnProgressEnd = 0.6f;
 
-        foreach (var value in _shuttleNavInfo.HitscansToDraw)
+        foreach (var info in _shuttleNavInfo.HitscansToDraw)
         {
-            var remainingTime = value.EndTime - _gameTiming.CurTime;
+            var remainingTime = info.EndTime - _gameTiming.CurTime;
             if (remainingTime.TotalMilliseconds <= 0)
                 continue;
 
-            if (value.FromCoordinates.MapId != gridXform.MapID)
+            if (info.FromCoordinates.MapId != gridXform.MapID)
                 continue;
 
-            var fromPos = value.FromCoordinates.Position;
-            var toPos = value.ToCoordinates.Position;
+            var fromPos = info.FromCoordinates.Position;
+            var toPos = info.ToCoordinates.Position;
 
             var dir = toPos - fromPos;
             var height = dir.Length();
-            var width = value.Info.Width;
+            var width = info.Width;
             var center = (fromPos + toPos) / 2;
             var left = center.X - width / 2;
             var bottom = center.Y - height / 2;
@@ -410,20 +412,19 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
                 Vector2.Transform(worldBounds.TopLeft, worldToView)
             ];
 
-            var maxColor = value.Info.Color.WithAlpha(0.75f);
+            var maxColor = info.Color.WithAlpha(0.75f);
             var minColor = new Color(
                 maxColor.R * startColorBrightness,
                 maxColor.G * startColorBrightness,
                 maxColor.B * startColorBrightness,
                 0.25f);
 
-            var animationProgress = (float)((value.Info.AnimationLength - remainingTime) / value.Info.AnimationLength);
-            (float Start, float End) maxColorOnProgress = (0.3f, 0.6f);
+            var animationProgress = (float)((info.AnimationLength - remainingTime) / info.AnimationLength);
             Color color;
-            if (animationProgress < maxColorOnProgress.Start)
-                color = Color.InterpolateBetween(minColor, maxColor, GetProgress(0, maxColorOnProgress.Start, animationProgress));
-            else if (animationProgress > maxColorOnProgress.End)
-                color = Color.InterpolateBetween(maxColor, minColor, GetProgress(maxColorOnProgress.End, 1f, animationProgress));
+            if (animationProgress < maxColorOnProgressStart)
+                color = Color.InterpolateBetween(minColor, maxColor, GetProgress(0, maxColorOnProgressStart, animationProgress));
+            else if (animationProgress > maxColorOnProgressEnd)
+                color = Color.InterpolateBetween(maxColor, minColor, GetProgress(maxColorOnProgressEnd, 1f, animationProgress));
             else
                 color = maxColor;
 

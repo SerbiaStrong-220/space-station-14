@@ -2,6 +2,7 @@
 using Content.Shared.SS220.Shuttles.UI;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Client.SS220.Shuttles.UI;
 
@@ -9,8 +10,8 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    public List<(MapCoordinates FromCoordinates, MapCoordinates ToCoordinates, ShuttleNavHitscanInfo Info, TimeSpan EndTime)> HitscansToDraw = [];
-    public List<(MapCoordinates CurCoordinate, ShuttleNavProjectileInfo Info)> ProjectilesToDraw = [];
+    public List<ProjectileDrawInfo> ProjectilesToDraw = [];
+    public List<HitscanDrawInfo> HitscansToDraw = [];
 
     public override void Initialize()
     {
@@ -24,20 +25,20 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
     {
         base.Update(frameTime);
 
-        var toDelete = new List<(MapCoordinates FromCoordinates, MapCoordinates ToCoordinates, ShuttleNavHitscanInfo Info, TimeSpan EndTime)>();
-        foreach (var value in HitscansToDraw)
+        var toDelete = new List<HitscanDrawInfo>();
+        foreach (var info in HitscansToDraw)
         {
-            if (value.EndTime <= _timing.CurTime)
-                toDelete.Add(value);
+            if (info.EndTime <= _timing.CurTime)
+                toDelete.Add(info);
         }
 
-        foreach (var value in toDelete)
-            HitscansToDraw.Remove(value);
+        foreach (var info in toDelete)
+            HitscansToDraw.Remove(info);
     }
 
     private void OnUpdateProjectiles(ShuttleNavInfoUpdateProjectilesMessage msg)
     {
-        ProjectilesToDraw = [.. msg.List];
+        ProjectilesToDraw = [.. msg.List.Select(x => new ProjectileDrawInfo(x.CurCoordinates, x.Info))];
     }
 
     private void OnAddHitscan(ShuttleNavInfoAddHitscanMessage msg)
@@ -50,6 +51,31 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
         if (!info.Enabled)
             return;
 
-        HitscansToDraw.Add((fromCoordinates, toCoordinates, info, _timing.CurTime + info.AnimationLength));
+        HitscansToDraw.Add(new HitscanDrawInfo(fromCoordinates, toCoordinates, info.Color, info.Width, info.AnimationLength, _timing.CurTime + info.AnimationLength));
+    }
+
+    public struct ProjectileDrawInfo(MapCoordinates curCoordinates, Color color, float radius)
+    {
+        public MapCoordinates CurCoordinates = curCoordinates;
+        public Color Color = color;
+        public float Radius = radius;
+
+        public ProjectileDrawInfo(MapCoordinates curCoordinate, ShuttleNavProjectileInfo info) : this(curCoordinate, info.Color, info.Radius) { }
+    }
+
+    public struct HitscanDrawInfo(
+        MapCoordinates fromCoordinates,
+        MapCoordinates toCoordinates,
+        Color color,
+        float width,
+        TimeSpan animationLength,
+        TimeSpan endTime)
+    {
+        public MapCoordinates FromCoordinates = fromCoordinates;
+        public MapCoordinates ToCoordinates = toCoordinates;
+        public Color Color = color;
+        public float Width = width;
+        public TimeSpan AnimationLength = animationLength;
+        public TimeSpan EndTime = endTime;
     }
 }
