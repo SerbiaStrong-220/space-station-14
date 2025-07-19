@@ -1,0 +1,271 @@
+# Белый, Красный, Розовый
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBowWhite
+  name: Белый ободок с бантиком
+  description: Милый белый ободок с бантиком.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    layers:
+    - state: icon
+      color: "#ffffff" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    clothingVisuals:
+      head:
+        - state: equipped-HELMET
+          color: "#ffffff" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#ffffff"  
+      right:
+      - state: inhand-right
+        color: "#ffffff" 
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBowRed
+  name: Красный ободок с бантиком
+  description: Милый красный ободок с бантиком.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    layers:
+    - state: icon
+      color: "#731111" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    clothingVisuals:
+      head:
+        - state: equipped-HELMET
+          color: "#731111" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#731111"  
+      right:
+      - state: inhand-right
+        color: "#731111" 
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBowPink
+  name: Розовый ободок с бантиком
+  description: Милый розовый ободок с бантиком.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    layers:
+    - state: icon
+      color: "#FF34EF" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    clothingVisuals:
+      head:
+        - state: equipped-HELMET
+          color: "#FF34EF" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#FF34EF"  
+      right:
+      - state: inhand-right
+        color: "#FF34EF" 
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBowBlue
+  name: Синий ободок с бантиком
+  description: Милый синий ободок с бантиком.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    layers:
+    - state: icon
+      color: "#004DA6" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    clothingVisuals:
+      head:
+        - state: equipped-HELMET
+          color: "#004DA6" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#004DA6"  
+      right:
+      - state: inhand-right
+        color: "#004DA6" 
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBowLightBLue
+  name: Голубой ободок с бантиком
+  description: Милый синий ободок с бантиком.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    layers:
+    - state: icon
+      color: "#4A6DD9" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    clothingVisuals:
+      head:
+        - state: equipped-HELMET
+          color: "#4A6DD9" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#4A6DD9"  
+      right:
+      - state: inhand-right
+        color: "#4A6DD9"
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBowYellow
+  name: Жёлтый ободок с бантиком
+  description: Милый синий ободок с бантиком.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    layers:
+    - state: icon
+      color: "#EFB514" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    clothingVisuals:
+      head:
+        - state: equipped-HELMET
+          color: "#EFB514" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#EFB514"  
+      right:
+      - state: inhand-right
+        color: "#EFB514"
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBowYellow
+  name: Жёлтый ободок с бантиком
+  description: Милый синий ободок с бантиком.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    layers:
+    - state: icon
+      color: "#EFB514" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    clothingVisuals:
+      head:
+        - state: equipped-HELMET
+          color: "#EFB514" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#EFB514"  
+      right:
+      - state: inhand-right
+        color: "#EFB514" 
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBowOrange
+  name: Ораньжевый ободок с бантиком
+  description: Милый ораньжевый ободок с бантиком.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    layers:
+    - state: icon
+      color: "#E6741E" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    clothingVisuals:
+      head:
+        - state: equipped-HELMET
+          color: "#E6741E" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#E6741E"  
+      right:
+      - state: inhand-right
+        color: "#E6741E"
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBowGreen
+  name: Зелёный ободок с бантиком
+  description: Милый зелёный ободок с бантиком.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    layers:
+    - state: icon
+      color: "#1F592C" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    clothingVisuals:
+      head:
+        - state: equipped-HELMET
+          color: "#1F592C" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#1F592C"  
+      right:
+      - state: inhand-right
+        color: "#1F592C"
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBowBlack
+  name: Чёрный ободок с бантиком
+  description: Милый чёрный ободок с бантиком. Скелеты, кровь, кладбища, черепа.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    layers:
+    - state: icon
+      color: "#131214" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Head/bow.rsi
+    clothingVisuals:
+      head:
+        - state: equipped-HELMET
+          color: "#131214" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#131214"  
+      right:
+      - state: inhand-right
+        color: "#131214"
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBowFrog
+  name: Ободок в виде лягушки
+  description: Милые ободок с гялушонком. Чем-то напоминает Игоря.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Head/frog.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Head/frog.rsi
