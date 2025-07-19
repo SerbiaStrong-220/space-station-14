@@ -1,9 +1,15 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Message;
+using Content.Client.SS220.AdditionalInfoForRoundEnd;
 using Content.Shared.GameTicking;
+using Content.Shared.SS220.AdditionalInfoForRoundEnd;
+using Content.Shared.Store;
+using Robust.Client.Graphics;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
@@ -12,11 +18,24 @@ namespace Content.Client.RoundEnd
     public sealed class RoundEndSummaryWindow : DefaultWindow
     {
         private readonly IEntityManager _entityManager;
+        //ss220 add additional info for round start
+        private readonly IPrototypeManager _proto;
+        //ss220 add additional info for round end
+
         public int RoundId;
+
+        //ss220 add additional info for round start
+        private BoxContainer? _summaryContentContainer;
+        //ss220 add additional info for round end
 
         public RoundEndSummaryWindow(string gm, string roundEnd, TimeSpan roundTimeSpan, int roundId,
             RoundEndMessageEvent.RoundEndPlayerInfo[] info, IEntityManager entityManager)
         {
+            //ss220 add additional info for round start
+            IoCManager.InjectDependencies(this);
+            _proto = IoCManager.Resolve<IPrototypeManager>();
+            //ss220 add additional info for round end
+
             _entityManager = entityManager;
 
             MinSize = SetSize = new Vector2(520, 580);
@@ -89,8 +108,157 @@ namespace Content.Client.RoundEnd
             roundEndSummaryContainerScrollbox.AddChild(roundEndSummaryContainer);
             roundEndSummaryTab.AddChild(roundEndSummaryContainerScrollbox);
 
+            //ss220 add additional info for round start
+            roundEndSummaryContainer.AddChild(MakeAntagItemsSection());
+
+            _summaryContentContainer = roundEndSummaryContainer;
+            //ss220 add additional info for round end
             return roundEndSummaryTab;
         }
+
+        //ss220 add additional info for round start
+        /// <summary>
+        /// Provides UI construction and layout logic for additional round-end summary information,
+        /// including custom stat blocks and antagonist purchase data.
+        /// </summary>
+        public void PopulateAdditionalInfo(List<RoundEndInfoDisplayBlock> blocks)
+        {
+            foreach (var block in blocks)
+            {
+                var control = MakeBlocks(block);
+                _summaryContentContainer?.AddChild(control);
+            }
+        }
+
+        /// <summary>
+        /// Creates a styled panel containing a title and summary body for a single info block.
+        /// Used to display grouped round-end statistics such as kills, economy, or deaths.
+        /// </summary>
+        private PanelContainer MakeBlocks(RoundEndInfoDisplayBlock block)
+        {
+            var sectionPanel = new PanelContainer
+            {
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = block.Color,
+                    BorderColor = new Color(70, 70, 70),
+                    BorderThickness = new Thickness(2),
+                    ContentMarginTopOverride = 6,
+                    ContentMarginBottomOverride = 6,
+                    ContentMarginRightOverride = 6,
+                    ContentMarginLeftOverride = 6,
+                },
+                Margin = new Thickness(5),
+            };
+
+            var content = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+            };
+
+            var titleLabel = new Label
+            {
+                Text = block.Title,
+                FontColorOverride = Color.Gold,
+                StyleClasses = { "LabelHeading" },
+            };
+
+            var bodyLabel = new RichTextLabel
+            {
+                Text = block.Body,
+                Margin = new Thickness(0, 4, 0, 0),
+            };
+
+            content.AddChild(titleLabel);
+            content.AddChild(bodyLabel);
+            sectionPanel.AddChild(content);
+
+            return sectionPanel;
+        }
+
+        /// <summary>
+        /// Creates and returns a dedicated panel containing detailed information
+        /// about antagonist purchases made during the round, sorted by TC usage.
+        /// </summary>
+        private Control MakeAntagItemsSection()
+        {
+            if (RoundEndClientData.AntagItems.Count == 0)
+                return new Control();
+
+            var section = new PanelContainer
+            {
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = new Color(30, 30, 30, 200),
+                    BorderColor = new Color(80, 0, 0),
+                    BorderThickness = new Thickness(2),
+                },
+                Margin = new Thickness(6),
+            };
+
+            var content = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                SeparationOverride = 6
+            };
+
+            content.AddChild(new RichTextLabel
+            {
+                Text = Loc.GetString("additional-info-antag-items-label"),
+                Modulate = Color.OrangeRed,
+                StyleClasses = { "LabelHeading" },
+            });
+
+            foreach (var (playerName, data) in RoundEndClientData.AntagItems.OrderByDescending(p => p.Value.TotalTC))
+            {
+                var playerBox = new BoxContainer()
+                {
+                    Orientation = LayoutOrientation.Vertical,
+                };
+
+                playerBox.AddChild(new Label
+                {
+                    Text = playerName,
+                    FontColorOverride = Color.Red,
+                    StyleClasses = { "LabelBig" },
+                });
+
+                playerBox.AddChild(new RichTextLabel
+                {
+                    Text = Loc.GetString("additional-info-antag-total-spent-tc", ("value", data.TotalTC))
+                });
+
+                var iconGrid = new GridContainer
+                {
+                    Columns = 8,
+                    Margin = new Thickness(0, 4, 0, 4),
+                };
+
+                foreach (var item in data.Items)
+                {
+                    if (!_proto.TryIndex<ListingPrototype>(item, out var proto))
+                        continue;
+
+                    var icon = new EntityPrototypeView
+                    {
+                        Scale = new Vector2(1.25f),
+                        MinSize = new Vector2(32, 32),
+                        MouseFilter = MouseFilterMode.Stop,
+                        ToolTip = Loc.GetString(proto.Name!),
+                    };
+
+                    icon.SetPrototype(proto.ProductEntity);
+                    iconGrid.AddChild(icon);
+                }
+
+                playerBox.AddChild(iconGrid);
+                content.AddChild(playerBox);
+            }
+
+            section.AddChild(content);
+            return section;
+        }
+        //ss220 add additional info for round end
 
         private BoxContainer MakePlayerManifestTab(RoundEndMessageEvent.RoundEndPlayerInfo[] playersInfo)
         {
