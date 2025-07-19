@@ -432,7 +432,7 @@ public sealed class StoreDiscountSystem : EntitySystem
             if (!listing.CostFromCatalog.TryGetValue(currency, out var originalPrice))
                 continue;
 
-            if (originalPrice <= 0 || discountAmount <= 0)
+            if (originalPrice <= 0 || discountAmount >= 0) // discount modifier is negative value
                 continue;
 
             var discountPercentage = CalculateDiscountPercentage(discountAmount, originalPrice);
