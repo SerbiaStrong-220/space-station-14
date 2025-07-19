@@ -759,8 +759,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/ussp_uniform.rsi
 
-# Пассажирский жёлтый комбез
+- type: entity
+  parent: UnsensoredClothingUniformBase
+  id: ClothingUniformJumpsuitWizard
+  name: uniform wizard
+  description: A wizard's uniform, but you don't feel anything magical about it...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wizard.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wizard.rsi
 
+# Пассажирский жёлтый комбез
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformBlueYellow14
