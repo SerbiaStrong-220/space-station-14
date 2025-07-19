@@ -214,11 +214,19 @@ namespace Content.Server.Hands.Systems
                 if (hand.HeldEntity is not EntityUid held)
                     continue;
 
-                var throwAttempt = new FellDownThrowAttemptEvent(entity);
-                RaiseLocalEvent(hand.HeldEntity.Value, ref throwAttempt);
+                // ss220 add antidrop implant start
+                var throwAttemptItem = new FellDownThrowAttemptEvent(entity);
+                RaiseLocalEvent(hand.HeldEntity.Value, ref throwAttemptItem);
 
-                if (throwAttempt.Cancelled)
+                if (throwAttemptItem.Cancelled)
                     continue;
+
+                var throwAttemptUser = new FellDownThrowAttemptEvent(entity);
+                RaiseLocalEvent(entity.Owner, ref throwAttemptUser);
+
+                if (throwAttemptUser.Cancelled)
+                    continue;
+                // ss220 add antidrop implant end
 
                 if (!TryDrop(entity, hand, null, checkActionBlocker: false, handsComp: entity.Comp))
                     continue;
