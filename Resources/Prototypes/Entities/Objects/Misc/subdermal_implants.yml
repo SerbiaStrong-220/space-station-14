@@ -138,8 +138,9 @@
 
 #Security implants
 
+#SS220-tracking-implant-fix begin
 - type: entity
-  parent: BaseSubdermalImplant
+  parent: DeathRattleImplant
   id: TrackingImplant
   name: tracking implant
   description: This implant has a tracking device attached to the suit sensor network.
@@ -149,6 +150,9 @@
       whitelist:
         components:
         - MobState # admeme implanting a chair with tracking implant needs to give the chair mobstate so it can die first
+    - type: Rattle
+      radioChannel: Security
+#SS220-tracking-implant-fix end
     - type: SuitSensor
       randomMode: false
       controlsLocked: true
