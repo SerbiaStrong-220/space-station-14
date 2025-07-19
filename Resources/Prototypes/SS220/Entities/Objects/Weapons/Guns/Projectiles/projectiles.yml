@@ -87,6 +87,8 @@
     damage:
       types:
         Blunt: 12
+    shuttleNavInfo:
+      enabled: true
 
 
 - type: entity
