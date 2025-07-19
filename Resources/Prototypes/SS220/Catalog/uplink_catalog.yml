@@ -103,6 +103,24 @@
       components:
       - SurplusBundle
 
+- type: listing
+  id: UplinkKingClown
+  name: uplink-king-clown-name
+  description: uplink-king-clown-desc
+  productEntity: CrateNoFunToyBox
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Clown
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
+
  # Pointless
 
 - type: listing
