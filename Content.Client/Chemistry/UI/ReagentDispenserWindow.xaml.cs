@@ -1,3 +1,5 @@
+using Content.Client.SS220.UserInterface;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Chemistry;
@@ -30,6 +32,11 @@ namespace Content.Client.Chemistry.UI
         {
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
+
+            // SS220 add pin button begin
+            var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+            pinButton.Margin = new Thickness(0, 0, 5, 0);
+            // SS220 add pin button end
         }
 
         /// <summary>
