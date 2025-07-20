@@ -24,13 +24,18 @@
   - type: Appearance
   - type: SolutionContainerManager
     solutions:
-      drink:
-        maxVol: 10
+      pool:
+        maxVol: 30
         reagents:
         - ReagentId: Nocturine
-          Quantity: 10
+          Quantity: 30
+  - type: Drink
   - type: DrawableSolution
-    solution: drink
+    solution: pool
+  - type: DrainableSolution
+    solution: pool
+  - type: ExaminableSolution
+    solution: pool
   - type: Sprite
     sprite: SS220/Structures/CultYogg/yoggpond.rsi
     state: pond
@@ -38,7 +43,7 @@
   - type: InteractionOutline
   - type: Transform
   - type: CultPond
-    solutionName: drink
+    solutionName: pool
   - type: CultYoggBuilding
     eraseTime: 5
     spawnOnErase:
