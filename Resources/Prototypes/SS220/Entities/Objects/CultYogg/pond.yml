@@ -44,6 +44,7 @@
   - type: Transform
   - type: CultPond
     solutionName: pool
+    refillCooldown: 15
   - type: CultYoggBuilding
     eraseTime: 5
     spawnOnErase:

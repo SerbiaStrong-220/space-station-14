@@ -38,7 +38,7 @@ public sealed class CultPondSystem : EntitySystem
 
         // if the solution was draw from the pond when it was full, then the refill cooldown starts from that moment
         if (entity.Comp.IsFilled && args.Solution.AvailableVolume > 0)
-            entity.Comp.NextCharge = _timing.CurTime + TimeSpan.FromSeconds(entity.Comp.RefillCooldown);
+            entity.Comp.NextCharge = _timing.CurTime + entity.Comp.RefillCooldown;
 
         UpdateIsFilled(entity);
     }
@@ -48,42 +48,42 @@ public sealed class CultPondSystem : EntitySystem
         base.Update(frameTime);
         var query = EntityQueryEnumerator<CultPondComponent>();
 
-        while (query.MoveNext(out var uid, out var pondComponent))
+        while (query.MoveNext(out var uid, out var pondComp))
         {
-            if (pondComponent.NextCharge == null)
+            if (pondComp.NextCharge == null)
                 continue;
 
-            if (pondComponent.NextCharge > _timing.CurTime)
+            if (pondComp.NextCharge > _timing.CurTime)
                 continue;
 
             if (!TryComp<SolutionContainerManagerComponent>(uid, out var comp) ||
                 !_solutionContainers.TryGetSolution((uid, comp),
-                    pondComponent.Solution,
+                    pondComp.Solution,
                     out var soln,
                     out var solution))
                 continue;
 
-            if (pondComponent.Reagent == null)
+            if (pondComp.Reagent == null)
             {
                 if (solution.Contents.Count == 0)
                     continue;
-                pondComponent.Reagent = solution.Contents.FirstOrDefault();
+                pondComp.Reagent = solution.Contents.FirstOrDefault();
             }
 
-            pondComponent.NextCharge = _timing.CurTime + TimeSpan.FromSeconds(pondComponent.RefillCooldown);
+            pondComp.NextCharge = _timing.CurTime + pondComp.RefillCooldown;
 
             if (solution.MaxVolume == solution.Volume)
                 continue;
 
             var realTransferAmount =
-                FixedPoint2.Min(pondComponent.AmmountToAdd, solution.AvailableVolume);
+                FixedPoint2.Min(pondComp.AmmountToAdd, solution.AvailableVolume);
 
-            solution.AddReagent(pondComponent.Reagent.Value.Reagent, realTransferAmount);
+            solution.AddReagent(pondComp.Reagent.Value.Reagent, realTransferAmount);
 
             _solutionContainers.UpdateChemicals(soln.Value);
 
-            if (pondComponent.RechargeSound != null)
-                _audio.PlayPvs(pondComponent.RechargeSound, uid);
+            if (pondComp.RechargeSound != null)
+                _audio.PlayPvs(pondComp.RechargeSound, uid);
         }
     }
 
