@@ -305,13 +305,13 @@
     protoList:
      - AirlockChemistry
      - AirlockMaint
-     - Airlocks
-     - AirlockBrig
-     - AirlockEVALockeds
+     - Airlock
+     - AirlockSecurity
+     - AirlockCommand
      - AirlockVirology
      - AirlockHydroponics
      - AirlockFreezer
-     - AirlockEngineerings
+     - AirlockEngineering
      - AirlockMedical
      - AirlockScience
      - AirlockCargo
