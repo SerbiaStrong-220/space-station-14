@@ -49,6 +49,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
+using static Content.Shared.Administration.Notes.AdminMessageEuiState;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 
@@ -75,6 +76,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedRestrictedItemSystem _sharedRestrictedItemSystem = default!;
     [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
+    [Dependency] private readonly SharedMiGoSystem _migo = default!;
 
     private List<List<string>> _sacraficialTiers = [];
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
@@ -502,9 +504,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         }
         _roundEnd.RequestRoundEnd(DefaultShuttleArriving, null);
 
-        var selectedSong = _audio.GetSound(comp.SummonMusic);
+        var selectedSong = _audio.ResolveSound(comp.SummonMusic);
 
-        if (!string.IsNullOrEmpty(selectedSong))
+        if (selectedSong != null)
             _sound.DispatchStationEventMusic(godUid, selectedSong, StationEventMusicType.Nuke);//should i rename somehow?
 
         comp.Summoned = true;//Win EndText
@@ -658,6 +660,42 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         else if (stage is CultYoggStage.God)
         {
             SummonGod(rule, FindGodSummonCoordinates(rule));
+        }
+    }
+    #endregion
+
+    #region EnslavingToken
+
+    public void TryCheckMiGoTokens()
+    {
+        if (AnyCultistsAlive())
+            return;
+
+        SendCultAnounce(Loc.GetString("cult-yogg-add-token-no-cultists"));
+        AddMiGoEnslavementToken();
+    }
+    public bool AnyCultistsAlive()
+    {
+        var query = AllEntityQuery<CultYoggComponent, MobStateComponent, MindContainerComponent>();
+        while (query.MoveNext(out var _, out _, out var state, out var mind))
+        {
+            if (!mind.HasMind)
+                continue;
+
+            if (state.CurrentState != MobState.Dead)
+                return true;
+        }
+
+        return false;
+    }
+
+    private void AddMiGoEnslavementToken()
+    {
+        var query = AllEntityQuery<MiGoComponent>();
+        while (query.MoveNext(out var ent, out var migo))
+        {
+            _migo.ChangeEslavementToken((ent, migo), true);//not sure if it should be function or i shoud remove read-write access
+            Dirty(ent, migo);
         }
     }
     #endregion

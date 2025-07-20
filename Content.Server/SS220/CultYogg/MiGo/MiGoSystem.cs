@@ -20,6 +20,7 @@ using Content.Server.Projectiles;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.SS220.Temperature;
+using System.Runtime.InteropServices.Marshalling;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 
@@ -146,32 +147,42 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         if (args.Handled || args.Cancelled || args.Target == null)
             return;
 
+        args.Handled = true;
+
         var ev = new CultYoggEnslavedEvent(args.Target);
         RaiseLocalEvent(uid, ref ev, true);
 
         _statusEffectsSystem.TryRemoveStatusEffect(args.Target.Value, uid.Comp.RequiedEffect); //Remove Rave cause he already cultist
 
         // Remove ascension reagent
-        if (_body.TryGetBodyOrganEntityComps<StomachComponent>(args.Target.Value, out var stomachs))
+        if (!_body.TryGetBodyOrganEntityComps<StomachComponent>(args.Target.Value, out var stomachs))
+            return;
+        foreach (var stomach in stomachs)
         {
-            foreach (var stomach in stomachs)
-            {
-                if (stomach.Comp2.Body is not { } body)
-                    continue;
+            if (stomach.Comp2.Body is not { } body)
+                continue;
 
-                var reagentRoRemove = new ReagentQuantity(AscensionReagent, FixedPoint2.MaxValue);
-                _stomach.TryRemoveReagent(stomach, reagentRoRemove); // Removes from stomach
+            var reagentRoRemove = new ReagentQuantity(AscensionReagent, FixedPoint2.MaxValue);
+            _stomach.TryRemoveReagent(stomach, reagentRoRemove); // Removes from stomach
 
-                if (_solutionContainer.TryGetSolution(body, stomach.Comp1.BodySolutionName, out var bodySolutionEnt, out var bodySolution) &&
-                    bodySolution != null)
-                {
-                    bodySolution.RemoveReagent(reagentRoRemove); // Removes from body
-                    _solutionContainer.UpdateChemicals(bodySolutionEnt.Value);
-                }
-            }
+            if (!_solutionContainer.TryGetSolution(body, stomach.Comp1.BodySolutionName, out var bodySolutionEnt, out var bodySolution))
+                continue;
+
+            if (bodySolution == null)
+                continue;
+
+            bodySolution.RemoveReagent(reagentRoRemove); // Removes from body
+            _solutionContainer.UpdateChemicals(bodySolutionEnt.Value);
         }
 
-        args.Handled = true;
+        if (!uid.Comp.EnslavingToken)//Remove token if is was
+            return;
+
+        var query = AllEntityQuery<MiGoComponent>();
+        while (query.MoveNext(out var ent, out var migo))
+        {
+            ChangeEslavementToken((ent, migo), false);
+        }
     }
     #endregion
 }

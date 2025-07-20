@@ -275,7 +275,7 @@ public abstract class SharedMiGoSystem : EntitySystem
 
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (IsPaused(uid))
+            if (IsPaused(uid))//not sure what it is
                 continue;
 
             if (comp.MaterializationTime == null)
@@ -300,6 +300,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             ChangeForm(uid, comp, true);
 
             _actions.StartUseDelay(comp.MiGoAstralActionEntity);
+            DirtyEntity(uid);
         }
     }
     private void MiGoAstral(Entity<MiGoComponent> uid, ref MiGoAstralEvent args)
@@ -448,9 +449,8 @@ public abstract class SharedMiGoSystem : EntitySystem
         _audio.PlayPredicted(comp.EnslavingSound, target, target);
     }
 
-    protected bool CanEnslaveTarget(Entity<MiGoComponent> entity, EntityUid target, out string? reason)
+    protected bool CanEnslaveTarget(Entity<MiGoComponent> ent, EntityUid target, out string? reason)
     {
-        var (uid, comp) = entity;
         reason = null;
 
         if (!HasComp<HumanoidAppearanceComponent>(target))
@@ -471,7 +471,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             return false;
         }
 
-        if (!_statusEffectsSystem.HasStatusEffect(target, comp.RequiedEffect))
+        if (!_statusEffectsSystem.HasStatusEffect(target, ent.Comp.RequiedEffect) && !ent.Comp.EnslavingToken)
         {
             reason = Loc.GetString("cult-yogg-enslave-should-eat-shroom");
             return false;
@@ -500,6 +500,12 @@ public abstract class SharedMiGoSystem : EntitySystem
         }
 
         return true;
+    }
+
+    public void ChangeEslavementToken(Entity<MiGoComponent> ent, bool newVaule)
+    {
+        ent.Comp.EnslavingToken = newVaule;
+        Dirty(ent, ent.Comp);
     }
     #endregion
 }
