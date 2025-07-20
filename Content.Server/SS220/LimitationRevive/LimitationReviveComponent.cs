@@ -59,4 +59,10 @@ public sealed partial class LimitationReviveComponent : Component
     /// </summary>
     [DataField]
     public float ChanceToAddTrait = 0.6f;
+
+    /// <summary>
+    /// How much does the metabolic modifier affect the damage timer
+    /// </summary>
+    [DataField]
+    public float MetabolismModifierAffect = 0.2f; // original bed vaule is 10f (StasisBedComponent), not ok and i dont want to change official code
 }

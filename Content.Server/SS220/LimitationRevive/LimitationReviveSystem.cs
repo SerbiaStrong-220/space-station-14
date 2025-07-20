@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Body.Systems;
 using Content.Server.Zombies;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Damage;
@@ -8,7 +9,6 @@ using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Traits;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.Manager;
@@ -34,7 +34,8 @@ public sealed class LimitationReviveSystem : EntitySystem
         SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnMobStateChanged, before: [typeof(ZombieSystem)]);
         SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
         SubscribeLocalEvent<LimitationReviveComponent, AddReviweDebuffsEvent>(OnAddReviweDebuffs);
-        SubscribeLocalEvent<LimitationReviveComponent, RejuvenateEvent>(OnRejuvenate);
+		SubscribeLocalEvent<LimitationReviveComponent, RejuvenateEvent>(OnRejuvenate);
+		SubscribeLocalEvent<LimitationReviveComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
     }
 
     private void OnMobStateChanged(Entity<LimitationReviveComponent> ent, ref MobStateChangedEvent args)
@@ -134,5 +135,27 @@ public sealed class LimitationReviveSystem : EntitySystem
 
             limitationRevive.DamageTime = null;
         }
+    }
+
+    private void OnApplyMetabolicMultiplier(Entity<LimitationReviveComponent> ent, ref ApplyMetabolicMultiplierEvent args)
+    {
+        if (ent.Comp.DamageTime is null)//update timer before damage, cause we cant get current metabolism from anywhere
+        {
+            if (args.Apply)
+                ent.Comp.BeforeDamageDelay *= args.Multiplier * ent.Comp.MetabolismModifierAffect;
+            else
+                ent.Comp.BeforeDamageDelay /= args.Multiplier * ent.Comp.MetabolismModifierAffect;
+
+            return;
+        }
+
+        var newTime = (ent.Comp.DamageTime - _timing.CurTime);
+
+        if (args.Apply)
+            newTime *= args.Multiplier * ent.Comp.MetabolismModifierAffect;
+        else
+            newTime /= args.Multiplier * ent.Comp.MetabolismModifierAffect;
+
+        ent.Comp.DamageTime = _timing.CurTime + newTime;
     }
 }
