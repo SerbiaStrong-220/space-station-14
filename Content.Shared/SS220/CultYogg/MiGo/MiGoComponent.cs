@@ -71,6 +71,13 @@ public sealed partial class MiGoComponent : Component
     [ViewVariables]
     public TimeSpan HealingEffectTime = TimeSpan.FromSeconds(15);
 
+
+    /// <summary>
+    /// How far from altar MiGo can start action
+    /// <summary>
+    [ViewVariables]
+    public float SaraficeStartRange = 1f;
+
     /// <summary>
     /// How long does it take to erect a building
     /// <summary>
