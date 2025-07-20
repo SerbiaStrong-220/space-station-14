@@ -23,10 +23,16 @@ public sealed partial class ChameleonStructureComponent : Component
     public EntProtoId? Prototype;
 
     /// <summary>
-    ///     Filter possible chameleon options by a tag in addition to WhitelistChameleon.
+    ///     Filter possible chameleon options by a tag.
     /// </summary>
     [DataField]
     public string? RequireTag;
+
+    /// <summary>
+    ///     RequireTag alternative.
+    /// </summary>
+    [DataField]
+    public List<EntProtoId>? ProtoList;
 
     [DataField]
     public EntityWhitelist? UserWhitelist;
