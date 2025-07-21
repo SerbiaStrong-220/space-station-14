@@ -25,14 +25,6 @@
 - type: Tag
   id: WeaponRechargerWhitelist
 
-# READD-VEHICLES
-- type: Tag
-  id: JanicartKeys
-
-- type: Tag
-  id: VehicleKey
-######
-
 # ss220 shlepi
 - type: Tag
   id: ElWyccoAxe
@@ -332,3 +324,11 @@
 - type: Tag
   id: CultYoggInnerHandToggleable
 # ss220 Cult_update2 end
+
+# ss220 ChameleonStructure start
+- type: Tag
+  id: WhitelistChameleonStructureWall
+
+- type: Tag
+  id: WhitelistChameleonStructureAirlock
+# ss220 ChameleonStructure end

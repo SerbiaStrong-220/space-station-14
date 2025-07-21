@@ -15,3 +15,44 @@
   id: DetectiveShoesBootsLaceup
   equipment:
     shoes: ClothingShoesBootsLaceup
+
+# SS220 Holsters START
+- type: loadoutEffectGroup
+  id: HolsterLegendaryMarksmanTime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobDetective
+      time: 180000 # 50 hrs
+
+- type: loadoutEffectGroup
+  id: HolsterBlackAngelTime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobDetective
+      time: 360000 # 100 hrs
+
+- type: loadout
+  id: DefaultDetectiveHolster
+  equipment:
+    neck: ClothingBeltHolsterFilled
+
+- type: loadout
+  id: HolsterLegendaryMarksman
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HolsterLegendaryMarksmanTime
+  equipment:
+    neck: ClothingBeltLegendaryMarksmanHolsterFilled
+
+- type: loadout
+  id: HolsterBlackAngel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HolsterBlackAngelTime
+  equipment:
+    neck: ClothingBeltBlackAngelHolsterFilled
+# SS220 Holsters END

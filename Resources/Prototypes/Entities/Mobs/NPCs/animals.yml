@@ -1325,6 +1325,7 @@
   abstract: true
   components:
   - type: CombatMode
+  - type: Blindable #SS220 Fix Ancestor Mob Blindable
 #SS220 languages tweaks begin
   - type: Language
     availableLanguages:
@@ -3870,3 +3871,4 @@
     - DoorBumpOpener
   - type: StatusIcon # marks them as crew
     bounds: -0.5,-0.5,0.5,0.5
+  - type: Blindable #SS220 Fix Ancestor Mob Blindable

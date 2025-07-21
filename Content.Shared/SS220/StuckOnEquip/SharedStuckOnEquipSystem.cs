@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Administration.Managers;
 using Content.Shared.Hands;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -12,6 +13,7 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly ISharedAdminManager _adminManager = default!;
 
     public override void Initialize()
     {
@@ -31,6 +33,9 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
     }
     private void GotPickuped(Entity<StuckOnEquipComponent> ent, ref GotEquippedHandEvent args)
     {
+        if (_adminManager.IsAdmin(args.User))
+            return;
+
         if (!ent.Comp.InHandItem)
             return;
 
@@ -40,6 +45,9 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
 
     private void GotEquipped(Entity<StuckOnEquipComponent> ent, ref GotEquippedEvent args)
     {
+        if (_adminManager.IsAdmin(args.Equipee))
+            return;
+
         if (args.SlotFlags == SlotFlags.POCKET)
             return;
 

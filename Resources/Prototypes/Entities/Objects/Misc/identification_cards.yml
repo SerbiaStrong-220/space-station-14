@@ -1283,7 +1283,7 @@
   name: wizard ID card
   components:
   - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
+    sprite: SS220/Objects/Misc/id_cards.rsi # SS220 Wizard getting used to
     layers:
     - state: wizard
     - state: idwizard

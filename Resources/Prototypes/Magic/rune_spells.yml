@@ -6,8 +6,8 @@
   - type: Action
     itemIconStyle: BigAction
     icon:
-      sprite: Objects/Magic/magicactions.rsi
-      state: spell_default
+      sprite: SS220/Objects/Magic/scrolls.rsi #SS220 Resprite of Magic Scrolls
+      state: default #SS220 Resprite of Magic Scrolls
 
 - type: entity
   parent: BaseRuneAction
