@@ -14,7 +14,7 @@
       TrashBananaPeel: 0
 
 - type: listing
-  id: Foodpiebananacreamset
+  id: FoodPieBananaCreamset
   name: uplink-clown-foodpie-name
   description: uplink-clown-foodpie-desc
   productEntity: FoodPieBananaCream
@@ -51,7 +51,7 @@
     - AdditionalClown
 
 - type: listing
-  id: Mobhonkbotset
+  id: MobHonkbotset
   name: uplink-clown-honkbot-name
   productEntity: MobHonkBot
   cost:
@@ -60,7 +60,7 @@
     - UplinkWearablesClown
 
 - type: listing
-  id: Presentrandomset
+  id: PresentRandomset
   name: uplink-clown-present-name
   description: uplink-clown-present-desc
   productEntity: PresentRandom
@@ -88,7 +88,7 @@
     - AdditionalClown
 
 - type: listing
-  id: Breadset
+  id: BreadSet
   name: uplink-clown-soap-name
   description: uplink-clown-soap-desc
   productEntity: SoapSyndie
@@ -108,7 +108,7 @@
     - AdditionalClown
 
 - type: listing
-  id: Soapomegaset
+  id: SoapomegaSet
   name: uplink-clown-omegasoap-name
   description: uplink-clown-omegasoap-desc
   productEntity: SoapOmega
@@ -128,7 +128,7 @@
     - UplinkWearablesClown
 
 - type: listing
-  id: Drinknukiecanset
+  id: DrinkNukiecanSet
   name: uplink-clown-nukiecan-name
   description: uplink-clown-nukiecan-desc
   productEntity: DrinkNukieCan
@@ -148,7 +148,7 @@
     - UplinkWearablesClown
 
 - type: listing
-  id: Goldenbikehornset
+  id: GoldenBikehornset
   productEntity: GoldenBikeHorn
   cost:
     TrashBananaPeel: 25
