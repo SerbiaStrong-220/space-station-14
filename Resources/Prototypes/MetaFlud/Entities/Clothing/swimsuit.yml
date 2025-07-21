@@ -1,0 +1,338 @@
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformWhiteSwimSuit
+  name: Белый купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#ffffff" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#ffffff" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#ffffff"  
+      right:
+      - state: inhand-right
+        color: "#ffffff" 
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformBlackSwimSuit
+  name: Чёрный купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#2c2c2c" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#2c2c2c" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#2c2c2c"  
+      right:
+      - state: inhand-right
+        color: "#2c2c2c"
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformOrangeSwimSuit
+  name: Ораньжевый купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#E16C0D" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#E16C0D" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#E16C0D"  
+      right:
+      - state: inhand-right
+        color: "#E16C0D"
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformYellowSwimSuit
+  name: Жёлтый купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#EFB514" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#EFB514" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#EFB514"  
+      right:
+      - state: inhand-right
+        color: "#EFB514"
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformGreenSwimSuit
+  name: Зелёный купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#158C4F" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#158C4F" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#158C4F"  
+      right:
+      - state: inhand-right
+        color: "#158C4F"
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformLightGreenSwimSuit
+  name: Светло-зелёный купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#5bca91" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#5bca91" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#5bca91"  
+      right:
+      - state: inhand-right
+        color: "#5bca91" 
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformBrownSwimSuit
+  name: Коричневый купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#74452e" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#74452e" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#74452e"  
+      right:
+      - state: inhand-right
+        color: "#74452e" 
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformLightBrownSwimSuit
+  name: Бежевый купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#cfab99" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#cfab99" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#cfab99"  
+      right:
+      - state: inhand-right
+        color: "#cfab99" 
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformBlueSwimSuit
+  name: Синий купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#473da1" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#473da1" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#473da1"  
+      right:
+      - state: inhand-right
+        color: "#473da1" 
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformLightBlueSwimSuit
+  name: Голубой купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#5f94f5" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#5f94f5" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#5f94f5"  
+      right:
+      - state: inhand-right
+        color: "#5f94f5"
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformVioletSwimSuit
+  name: Фиолетовый купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#542A6C" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#542A6C" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#542A6C"  
+      right:
+      - state: inhand-right
+        color: "#542A6C"
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformRedSwimSuit
+  name: Красный купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#8f2e2e" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#8f2e2e" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#8f2e2e"  
+      right:
+      - state: inhand-right
+        color: "#8f2e2e" 
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformPinkSwimSuit
+  name: Розовый купальник
+  description: Купальник.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    layers:
+    - state: icon
+      color: "#f132a8" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/swimsuit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#f132a8" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#f132a8"  
+      right:
+      - state: inhand-right
+        color: "#f132a8"
+
