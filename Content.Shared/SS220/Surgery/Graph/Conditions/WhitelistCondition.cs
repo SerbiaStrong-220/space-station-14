@@ -14,7 +14,7 @@ public sealed partial class WhitelistCondition : IAbstractSurgeryGraphAvailabili
     [DataField(required: true)]
     public FlippingCondition<EntityWhitelist> FlippingCondition;
 
-    [DataField(required: true)]
+    [DataField]
     public string FailReasonPath = "code-issue-condition";
 
     public bool Condition(EntityUid uid, IEntityManager entityManager, [NotNullWhen(false)] out string? reason)
@@ -26,10 +26,4 @@ public sealed partial class WhitelistCondition : IAbstractSurgeryGraphAvailabili
                                             (x) => whitelist.IsWhitelistFail(x, uid));
 
     }
-}
-
-public enum WhitelistCheckTypes
-{
-    Whitelist,
-    Blacklist
 }

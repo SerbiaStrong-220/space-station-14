@@ -5,6 +5,18 @@
   nameLocPath: surgery-mind-slave-fix-name
   descriptionLocPath: surgery-mind-slave-fix-description
   postscriptLocPath: surgery-mind-slave-fix-postscript
+  performerAvailabilityCondition:
+  - !type:HaveMindRoleCondition
+    flippingCondition:
+      value: TraitorRole
+      conditionType: enum.FlippingConditionType.Straight
+  targetAvailabilityCondition:
+  - !type:WhitelistCondition
+    flippingCondition:
+      value:
+        components:
+        - MindSlave
+      conditionType: enum.FlippingConditionType.Straight
   targetPuppetPart: head
   start: start
   end: seal wound
