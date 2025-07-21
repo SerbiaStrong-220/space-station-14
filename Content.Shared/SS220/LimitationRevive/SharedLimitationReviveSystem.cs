@@ -7,5 +7,5 @@ namespace Content.Shared.SS220.LimitationRevive;
 /// </summary>
 public abstract class SharedLimitationReviveSystem : EntitySystem
 {
-    public virtual void UpdateTimer(EntityUid ent, TimeSpan addTime) { }
+    public virtual void IncreaseTimer(EntityUid ent, TimeSpan addTime) { }
 }

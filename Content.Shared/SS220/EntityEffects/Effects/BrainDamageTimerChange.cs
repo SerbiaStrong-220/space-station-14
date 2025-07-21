@@ -36,7 +36,7 @@ public sealed partial class BrainDamageTimerChange : EntityEffect
 
         chemAdaptSys.TryModifyValue(args.TargetEntity, reagentArgs.Reagent.ID, ref timeBuffer);
 
-        limReviveSys.UpdateTimer(args.TargetEntity, timeBuffer);
+        limReviveSys.IncreaseTimer(args.TargetEntity, timeBuffer);
     }
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
