@@ -59,7 +59,6 @@ public sealed partial class UndereducatedSystem : EntitySystem
             && SpeciesLanguageDict.TryGetValue(apperance.Species, out var language)
             && _languageSystem.CanSpeak(ent, language))
             ent.Comp.Language = language;
-
         else if (TryComp<LanguageComponent>(ent, out var langComp))
         {
             foreach (var lang in langComp.AvailableLanguages)
