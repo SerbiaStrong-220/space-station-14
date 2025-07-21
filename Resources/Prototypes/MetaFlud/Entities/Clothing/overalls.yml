@@ -1,0 +1,33 @@
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformOverallRed
+  name: Красный домашний комбинезон
+  description: Для работящих взрослых, либо для пачкающихся детей
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/overalls/red.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/overalls/red.rsi
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformOverallBlue
+  name: Синий домашний комбинезон
+  description: Для работящих взрослых, либо для пачкающихся детей
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/overalls/blue.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/overalls/blue.rsi
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformOverallPink
+  name: Розовый домашний комбинезон
+  description: Для работящих взрослых, либо для пачкающихся детей
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/overalls/pink.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/overalls/pink.rsi
+

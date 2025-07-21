@@ -157,32 +157,6 @@
 
 - type: entity
   parent: ClothingHeadBase
-  id: ClothingHeadBowYellow
-  name: Жёлтый ободок с бантиком
-  description: Милый синий ободок с бантиком.
-  components:
-  - type: Sprite
-    sprite: MetaFlud/Clothing/Head/bow.rsi
-    layers:
-    - state: icon
-      color: "#EFB514" 
-  - type: Clothing
-    sprite: MetaFlud/Clothing/Head/bow.rsi
-    clothingVisuals:
-      head:
-        - state: equipped-HELMET
-          color: "#EFB514" 
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        color: "#EFB514"  
-      right:
-      - state: inhand-right
-        color: "#EFB514" 
-
-- type: entity
-  parent: ClothingHeadBase
   id: ClothingHeadBowOrange
   name: Ораньжевый ободок с бантиком
   description: Милый ораньжевый ободок с бантиком.
