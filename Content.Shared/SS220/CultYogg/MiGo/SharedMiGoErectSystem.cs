@@ -46,7 +46,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
     private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
-    private readonly Dictionary<ProtoId<EntityPrototype>, MiGoCapturePrototype> _сaptureList = [];
+    private readonly Dictionary<EntProtoId, MiGoCapturePrototype> _сaptureList = [];
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -212,6 +212,10 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             return;
 
         var buildingUid = EntityManager.GetEntity(args.CapturedBuilding);
+
+        var prototypeId = MetaData(buildingUid).EntityPrototype?.ID;
+
+        var
     }
 
     /// <summary>
@@ -231,7 +235,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         foreach (var recipe in _prototypeManager.EnumeratePrototypes<MiGoCapturePrototype>())
         {
             if (recipe.ReplacedProto is { } prototypeId)
-                _сaptureList.Add(recipe);
+                _сaptureList.Add(prototypeId, recipe);
         }
     }
     #endregion
