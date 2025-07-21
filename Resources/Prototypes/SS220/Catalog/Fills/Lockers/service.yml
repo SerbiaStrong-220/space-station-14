@@ -16,7 +16,6 @@
     - id: ClownMimeCyborgInstruction #ss220-clownmimecyborg-update
     - id: MaterialBananium1 #ss220-clownmimecyborg-update
     - id: MaterialBananium1 #ss220-clownmimecyborg-update
-    - id: ClownUplink #ss220-uplink
     # ss220 clown uplink bgn
     - id: ClownUplink
       prob: 0.25 # 25% шанс появления
