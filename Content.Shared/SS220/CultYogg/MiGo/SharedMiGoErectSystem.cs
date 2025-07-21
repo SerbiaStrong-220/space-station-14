@@ -9,10 +9,12 @@ using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Buildings;
+using Content.Shared.SS220.CultYogg.Corruption;
 using Content.Shared.Stacks;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -44,11 +46,17 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
     private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
+    private readonly Dictionary<ProtoId<EntityPrototype>, MiGoCapturePrototype> _сaptureList = [];
+
     /// <inheritdoc/>
     public override void Initialize()
     {
+        InitializeCaptureRecipes();
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+
         SubscribeLocalEvent<MiGoComponent, MiGoErectBuildMessage>(OnBuildMessage);
         SubscribeLocalEvent<MiGoComponent, MiGoErectEraseMessage>(OnEraseMessage);
+        SubscribeLocalEvent<MiGoComponent, MiGoErectCaptureMessage>(OnCaptureMessage);
         SubscribeLocalEvent<MiGoComponent, MiGoErectDoAfterEvent>(OnDoAfterErect);
 
         SubscribeLocalEvent<CultYoggBuildingFrameComponent, ComponentInit>(OnBuildingFrameInit);
@@ -114,6 +122,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         });
     }
 
+    #region Erase
     private void OnEraseMessage(Entity<MiGoComponent> entity, ref MiGoErectEraseMessage args)
     {
         if (entity.Owner != args.Actor)
@@ -186,6 +195,46 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         _actionsSystem.SetCooldown(erectAction, cooldown);
         args.Handled = true;
     }
+    private void OnEraseDoAfter(MiGoEraseDoAfterEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (args.Target is { } target)
+            DeconstructBuilding(target);
+    }
+    #endregion
+
+    #region Capture
+    private void OnCaptureMessage(Entity<MiGoComponent> ent, ref MiGoErectCaptureMessage args)
+    {
+        if (ent.Owner != args.Actor)
+            return;
+
+        var buildingUid = EntityManager.GetEntity(args.CapturedBuilding);
+    }
+
+    /// <summary>
+    /// We need to re-initialize our recepies if prototypes are reloaded.
+    /// </summary>
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (!args.WasModified<CultYoggCorruptedPrototype>())
+            return;
+
+        InitializeCaptureRecipes();
+    }
+
+    private void InitializeCaptureRecipes()
+    {
+        _сaptureList.Clear();
+        foreach (var recipe in _prototypeManager.EnumeratePrototypes<MiGoCapturePrototype>())
+        {
+            if (recipe.ReplacedProto is { } prototypeId)
+                _сaptureList.Add(recipe);
+        }
+    }
+    #endregion
 
     private void OnBuildingFrameInit(Entity<CultYoggBuildingFrameComponent> entity, ref ComponentInit args)
     {
@@ -243,6 +292,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     {
         if (!TryGetNeededMaterials(entity, out var neededMaterials))
             return;
+
         using (args.PushGroup(nameof(CultYoggBuildingFrameComponent)))
         {
             for (var i = 0; i < neededMaterials.Count; i++)
@@ -261,15 +311,6 @@ public sealed class SharedMiGoErectSystem : EntitySystem
                 args.PushMarkup(Loc.GetString(locKey, ("material", materialName), ("currentAmount", addedCount), ("totalAmount", neededMaterial.Count)));
             }
         }
-    }
-
-    private void OnEraseDoAfter(MiGoEraseDoAfterEvent args)
-    {
-        if (args.Cancelled)
-            return;
-
-        if (args.Target is { } target)
-            DeconstructBuilding(target);
     }
 
     private Entity<CultYoggBuildingFrameComponent> PlaceBuildingFrame(CultYoggBuildingPrototype buildingPrototype, EntityCoordinates location, Direction direction)

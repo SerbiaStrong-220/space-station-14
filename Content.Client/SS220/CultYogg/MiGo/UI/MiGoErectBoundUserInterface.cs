@@ -95,9 +95,9 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
 
     public void SendCaptureMessage(EntityUid entity)
     {
-        SendMessage(new MiGoErectEraseMessage()
+        SendMessage(new MiGoErectCaptureMessage()
         {
-            BuildingFrame = _entityManager.GetNetEntity(entity),
+            CapturedBuilding = _entityManager.GetNetEntity(entity),
         });
     }
 
