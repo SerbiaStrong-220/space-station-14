@@ -502,7 +502,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         return true;
     }
 
-    public void ChangeEslavementToken(Entity<MiGoComponent> ent, bool newVaule)
+    public void SetEslavementToken(Entity<MiGoComponent> ent, bool newVaule)
     {
         ent.Comp.EnslavingToken = newVaule;
         Dirty(ent, ent.Comp);

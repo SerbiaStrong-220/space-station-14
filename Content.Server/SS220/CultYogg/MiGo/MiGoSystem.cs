@@ -181,7 +181,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         var query = AllEntityQuery<MiGoComponent>();
         while (query.MoveNext(out var ent, out var migo))
         {
-            ChangeEslavementToken((ent, migo), false);
+            SetEslavementToken((ent, migo), false);
         }
     }
     #endregion

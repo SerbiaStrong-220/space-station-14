@@ -666,7 +666,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     #region EnslavingToken
 
-    public void TryCheckMiGoTokens()
+    public void CheckMiGoTokens()
     {
         if (AnyCultistsAlive())
             return;
@@ -691,10 +691,10 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     private void AddMiGoEnslavementToken()
     {
-        var query = AllEntityQuery<MiGoComponent>();
+        var query = EntityQueryEnumerator<MiGoComponent>();
         while (query.MoveNext(out var ent, out var migo))
         {
-            _migo.ChangeEslavementToken((ent, migo), true);//not sure if it should be function or i shoud remove read-write access
+            _migo.SetEslavementToken((ent, migo), true);//not sure if it should be function or i shoud remove read-write access
             Dirty(ent, migo);
         }
     }

@@ -322,7 +322,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             DeleteVisuals(ent);
 
             RemComp<CultYoggComponent>(ent);
-            _cultRuleSystem.TryCheckMiGoTokens();//Add token if it was last cultist
+            _cultRuleSystem.CheckMiGoTokens();//Add token if it was last cultist
         }
 
         purifyedComp.PurifyingDecayEventTime = _timing.CurTime + purifyedComp.BeforeDeclinesTime; //setting timer, when purifying will be removed
@@ -333,16 +333,16 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     #region CheckFreeEslavementToken
     private void OnPlayerDetached(Entity<CultYoggComponent> ent, ref PlayerDetachedEvent args)
     {
-        _cultRuleSystem.TryCheckMiGoTokens();
+        _cultRuleSystem.CheckMiGoTokens();
     }
     private void OnCryoDeleted(Entity<CultYoggComponent> ent, ref BeingCryoDeletedEvent args)
     {
-        _cultRuleSystem.TryCheckMiGoTokens();
+        _cultRuleSystem.CheckMiGoTokens();
     }
 
     private void OnSuicide(Entity<CultYoggComponent> ent, ref SuicideEvent args)
     {
-        _cultRuleSystem.TryCheckMiGoTokens();
+        _cultRuleSystem.CheckMiGoTokens();
     }
     #endregion
 
