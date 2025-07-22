@@ -671,6 +671,12 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (AnyCultistsAlive())
             return;
 
+        if (!TryGetCultGameRule(out var rule))
+            return;
+
+        if (rule.Value.Comp.Summoned)//if it is endgame and all are MiGos == no new cultists
+            return;
+
         SendCultAnounce(Loc.GetString("cult-yogg-add-token-no-cultists"));
         AddSimplifiedEslavement();
     }
