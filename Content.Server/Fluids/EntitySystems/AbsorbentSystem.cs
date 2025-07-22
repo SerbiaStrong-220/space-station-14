@@ -287,6 +287,10 @@ public sealed class AbsorbentSystem : SharedAbsorbentSystem
 
         Solution puddleSplit;
         var isRemoved = false;
+
+        //ss220 add additional info for round start
+        puddle.LastInteractionUser = user;
+        //ss220 add additional info for round end
         if (absorber.UseAbsorberSolution)
         {
             // Check if we have any evaporative reagents on our absorber to transfer
