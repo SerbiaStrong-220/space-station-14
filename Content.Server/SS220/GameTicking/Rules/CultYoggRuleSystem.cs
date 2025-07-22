@@ -682,7 +682,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     }
     public bool AnyCultistsAlive()
     {
-        var query = AllEntityQuery<CultYoggComponent, MobStateComponent, MindContainerComponent>();
+        var query = EntityQueryEnumerator<CultYoggComponent, MobStateComponent, MindContainerComponent>();
         while (query.MoveNext(out var _, out _, out var state, out var mind))
         {
             if (!mind.HasMind)
