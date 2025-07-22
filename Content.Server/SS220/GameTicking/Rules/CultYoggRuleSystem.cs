@@ -664,15 +664,15 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     }
     #endregion
 
-    #region EnslavingToken
+    #region SimplifiedEslavement
 
-    public void CheckMiGoTokens()
+    public void CheckSimplifiedEslavement()
     {
         if (AnyCultistsAlive())
             return;
 
         SendCultAnounce(Loc.GetString("cult-yogg-add-token-no-cultists"));
-        AddMiGoEnslavementToken();
+        AddSimplifiedEslavement();
     }
     public bool AnyCultistsAlive()
     {
@@ -689,12 +689,12 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         return false;
     }
 
-    private void AddMiGoEnslavementToken()
+    private void AddSimplifiedEslavement()
     {
         var query = EntityQueryEnumerator<MiGoComponent>();
         while (query.MoveNext(out var ent, out var migo))
         {
-            _migo.SetEslavementToken((ent, migo), true);//not sure if it should be function or i shoud remove read-write access
+            _migo.SetSimplifiedEslavement((ent, migo), true);//not sure if it should be function or i shoud remove read-write access
             Dirty(ent, migo);
         }
     }

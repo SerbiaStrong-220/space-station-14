@@ -471,7 +471,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             return false;
         }
 
-        if (!_statusEffectsSystem.HasStatusEffect(target, ent.Comp.RequiedEffect) && !ent.Comp.EnslavingToken)
+        if (!_statusEffectsSystem.HasStatusEffect(target, ent.Comp.RequiedEffect) && !ent.Comp.isSimplifiedEslavement)
         {
             reason = Loc.GetString("cult-yogg-enslave-should-eat-shroom");
             return false;
@@ -502,9 +502,9 @@ public abstract class SharedMiGoSystem : EntitySystem
         return true;
     }
 
-    public void SetEslavementToken(Entity<MiGoComponent> ent, bool newVaule)
+    public void SetSimplifiedEslavement(Entity<MiGoComponent> ent, bool newVaule)
     {
-        ent.Comp.EnslavingToken = newVaule;
+        ent.Comp.isSimplifiedEslavement = newVaule;
         Dirty(ent, ent.Comp);
     }
     #endregion

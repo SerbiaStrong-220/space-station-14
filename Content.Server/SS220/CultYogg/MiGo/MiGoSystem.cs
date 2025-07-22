@@ -175,13 +175,13 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             _solutionContainer.UpdateChemicals(bodySolutionEnt.Value);
         }
 
-        if (!uid.Comp.EnslavingToken)//Remove token if is was
+        if (!uid.Comp.isSimplifiedEslavement)//Remove token if is was
             return;
 
-        var query = AllEntityQuery<MiGoComponent>();
+        var query = EntityQueryEnumerator<MiGoComponent>();
         while (query.MoveNext(out var ent, out var migo))
         {
-            SetEslavementToken((ent, migo), false);
+            SetSimplifiedEslavement((ent, migo), false);
         }
     }
     #endregion

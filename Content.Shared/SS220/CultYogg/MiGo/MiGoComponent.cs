@@ -63,7 +63,7 @@ public sealed partial class MiGoComponent : Component
     /// Allows you to resolve dead-end situations where there are no cultists left, allowing you to recruit without feeding the mushroom
     /// <summary>
     [AutoNetworkedField, ViewVariables]
-    public bool EnslavingToken { get; set; } = false;
+    public bool isSimplifiedEslavement { get; set; } = false;
 
     /// <summary>
     /// The time it takes to enslave the target
