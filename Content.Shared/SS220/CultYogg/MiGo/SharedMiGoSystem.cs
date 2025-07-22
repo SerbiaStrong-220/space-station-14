@@ -56,6 +56,11 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
 
+    /// <summary>
+    /// Allows you to resolve dead-end situations where there are no cultists left, allowing you to recruit without feeding the mushroom
+    /// <summary>
+    protected static bool IsEslavementSimplified = false;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -471,7 +476,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             return false;
         }
 
-        if (!_statusEffectsSystem.HasStatusEffect(target, ent.Comp.RequiedEffect) && !ent.Comp.isSimplifiedEslavement)
+        if (!_statusEffectsSystem.HasStatusEffect(target, ent.Comp.RequiedEffect) && !IsEslavementSimplified)
         {
             reason = Loc.GetString("cult-yogg-enslave-should-eat-shroom");
             return false;
@@ -502,10 +507,9 @@ public abstract class SharedMiGoSystem : EntitySystem
         return true;
     }
 
-    public void SetSimplifiedEslavement(Entity<MiGoComponent> ent, bool newVaule)
+    public void SetSimplifiedEslavement(bool newVaule)
     {
-        ent.Comp.isSimplifiedEslavement = newVaule;
-        Dirty(ent, ent.Comp);
+        IsEslavementSimplified = newVaule;
     }
     #endregion
 }

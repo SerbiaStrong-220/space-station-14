@@ -20,7 +20,6 @@ using Content.Server.Projectiles;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.SS220.Temperature;
-using System.Runtime.InteropServices.Marshalling;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 
@@ -175,14 +174,10 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             _solutionContainer.UpdateChemicals(bodySolutionEnt.Value);
         }
 
-        if (!uid.Comp.isSimplifiedEslavement)//Remove token if is was
+        if (IsEslavementSimplified)//Remove token if is was
             return;
 
-        var query = EntityQueryEnumerator<MiGoComponent>();
-        while (query.MoveNext(out var ent, out var migo))
-        {
-            SetSimplifiedEslavement((ent, migo), false);
-        }
+        SetSimplifiedEslavement(false);
     }
     #endregion
 }

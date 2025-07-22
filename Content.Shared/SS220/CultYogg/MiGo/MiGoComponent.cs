@@ -60,12 +60,6 @@ public sealed partial class MiGoComponent : Component
     public SoundSpecifier? EnslavingSound = new SoundPathSpecifier("/Audio/SS220/CultYogg/migo_slave.ogg");
 
     /// <summary>
-    /// Allows you to resolve dead-end situations where there are no cultists left, allowing you to recruit without feeding the mushroom
-    /// <summary>
-    [AutoNetworkedField, ViewVariables]
-    public bool isSimplifiedEslavement { get; set; } = false;
-
-    /// <summary>
     /// The time it takes to enslave the target
     /// </summary>
     [ViewVariables]

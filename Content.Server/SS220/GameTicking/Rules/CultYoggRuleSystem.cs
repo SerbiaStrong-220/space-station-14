@@ -49,7 +49,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
-using static Content.Shared.Administration.Notes.AdminMessageEuiState;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 
@@ -697,12 +696,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     private void AddSimplifiedEslavement()
     {
-        var query = EntityQueryEnumerator<MiGoComponent>();
-        while (query.MoveNext(out var ent, out var migo))
-        {
-            _migo.SetSimplifiedEslavement((ent, migo), true);//not sure if it should be function or i shoud remove read-write access
-            Dirty(ent, migo);
-        }
+        _migo.SetSimplifiedEslavement(true);//not sure if it should be function or i shoud remove read-write access
     }
     #endregion
 
