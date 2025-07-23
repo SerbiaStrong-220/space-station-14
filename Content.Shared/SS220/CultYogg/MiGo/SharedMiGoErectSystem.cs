@@ -16,7 +16,9 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Maths;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -46,7 +48,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
     private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
-    private readonly Dictionary<EntProtoId, MiGoCapturePrototype> _сaptureList = [];
+    private readonly Dictionary<EntProtoId, MiGoCapturePrototype> _сaptureDict = [];
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -195,6 +197,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         _actionsSystem.SetCooldown(erectAction, cooldown);
         args.Handled = true;
     }
+
     private void OnEraseDoAfter(MiGoEraseDoAfterEvent args)
     {
         if (args.Cancelled)
@@ -202,6 +205,53 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
         if (args.Target is { } target)
             DeconstructBuilding(target);
+    }
+
+    private void AddVerbs(Entity<CultYoggBuildingFrameComponent> entity, ref GetVerbsEvent<Verb> args)
+    {
+        if (!args.CanAccess)
+            return;
+
+        Verb destroyVerb = new()
+        {
+            Text = Loc.GetString("cult-yogg-building-frame-verb-destroy"),
+            Act = () => DeconstructBuilding(entity),
+        };
+        args.Verbs.Add(destroyVerb);
+    }
+
+    private void DeconstructBuilding(EntityUid uid)
+    {
+        if (_gameTiming.InPrediction)
+            return; // this should never run in client
+
+        var coords = Transform(uid).Coordinates;
+
+        if (TryComp<CultYoggBuildingFrameComponent>(uid, out var frameComp))
+        {
+            var dropItems = frameComp.Container.ContainedEntities;
+            foreach (var item in dropItems)
+            {
+                _transformSystem.AttachToGridOrMap(item);
+                _transformSystem.SetCoordinates(item, coords);
+            }
+        }
+        else if (TryComp<CultYoggBuildingComponent>(uid, out var buildingComp) &&
+            buildingComp.SpawnOnErase != null)
+        {
+            foreach (var proto in buildingComp.SpawnOnErase)
+            {
+                for (var i = 1; i <= proto.Amount; i++)
+                {
+                    var ent = Spawn(proto.Id, coords);
+
+                    if (proto.StackAmount is { } stackAmount)
+                        _stackSystem.SetCount(ent, stackAmount);
+                }
+            }
+        }
+
+        Del(uid);
     }
     #endregion
 
@@ -213,9 +263,32 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
         var buildingUid = EntityManager.GetEntity(args.CapturedBuilding);
 
-        var prototypeId = MetaData(buildingUid).EntityPrototype?.ID;
+        var prototypeId = MetaData(buildingUid).EntityPrototype;
 
-        var
+        if (prototypeId == null)
+            return;
+
+        if (!_сaptureDict.TryGetValue(prototypeId, out var replacement))
+        {
+            _popupSystem.PopupEntity(Loc.GetString("cult-yogg-building-cant-capture-this-building"), buildingUid, ent);
+            return;
+        }
+
+        StartReplacement(buildingUid, replacement);
+    }
+
+    private void StartReplacement(EntityUid buildingUid, MiGoCapturePrototype replacement)
+    {
+        if (_gameTiming.InPrediction)
+            return; // this should never run in client
+
+        var xform = Transform(buildingUid);
+        var rot = _transformSystem.GetWorldRotation(xform);
+
+        var frameEntity = SpawnAtPosition(replacement.ReplacementProto, xform.Coordinates);
+        Transform(frameEntity).LocalRotation = rot;
+
+        Del(buildingUid);
     }
 
     /// <summary>
@@ -231,11 +304,11 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
     private void InitializeCaptureRecipes()
     {
-        _сaptureList.Clear();
+        _сaptureDict.Clear();
         foreach (var recipe in _prototypeManager.EnumeratePrototypes<MiGoCapturePrototype>())
         {
             if (recipe.ReplacedProto is { } prototypeId)
-                _сaptureList.Add(prototypeId, recipe);
+                _сaptureDict.Add(prototypeId, recipe);
         }
     }
     #endregion
@@ -277,19 +350,6 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         };
 
         args.Verbs.Add(insertVerb);
-    }
-
-    private void AddVerbs(Entity<CultYoggBuildingFrameComponent> entity, ref GetVerbsEvent<Verb> args)
-    {
-        if (!args.CanAccess)
-            return;
-
-        Verb destroyVerb = new()
-        {
-            Text = Loc.GetString("cult-yogg-building-frame-verb-destroy"),
-            Act = () => DeconstructBuilding(entity),
-        };
-        args.Verbs.Add(destroyVerb);
     }
 
     private void OnBuildingFrameExamined(Entity<CultYoggBuildingFrameComponent> entity, ref ExaminedEvent args)
@@ -462,40 +522,6 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         Del(entity);
 
         return resultEntity;
-    }
-
-    private void DeconstructBuilding(EntityUid uid)
-    {
-        if (_gameTiming.InPrediction)
-            return; // this should never run in client
-
-        var coords = Transform(uid).Coordinates;
-
-        if (TryComp<CultYoggBuildingFrameComponent>(uid, out var frameComp))
-        {
-            var dropItems = frameComp.Container.ContainedEntities;
-            foreach (var item in dropItems)
-            {
-                _transformSystem.AttachToGridOrMap(item);
-                _transformSystem.SetCoordinates(item, coords);
-            }
-        }
-        else if (TryComp<CultYoggBuildingComponent>(uid, out var buildingComp) &&
-            buildingComp.SpawnOnErase != null)
-        {
-            foreach (var proto in buildingComp.SpawnOnErase)
-            {
-                for (var i = 1; i <= proto.Amount; i++)
-                {
-                    var ent = Spawn(proto.Id, coords);
-
-                    if (proto.StackAmount is { } stackAmount)
-                        _stackSystem.SetCount(ent, stackAmount);
-                }
-            }
-        }
-
-        Del(uid);
     }
 }
 
