@@ -33,6 +33,6 @@ public sealed partial class StaminaConvertArmorComponent : Component
     /// <summary>
     /// The entity wearing this armor, set when the item is equipped.
     /// </summary>
-    [ViewVariables]
+    [ViewVariables, AutoNetworkedField]
     public NetEntity? User;
 }
