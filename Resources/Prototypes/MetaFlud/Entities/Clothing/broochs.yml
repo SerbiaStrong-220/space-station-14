@@ -1,0 +1,13 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBrooch
+  name: Брошка
+  description: Красивая брошка для красивых девочек и мальчиков
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Head/brooch.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Head/brooch.rsi
+  - type: Tag
+    tags:
+    - ClothMade
