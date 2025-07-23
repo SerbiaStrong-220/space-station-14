@@ -146,3 +146,42 @@
       - TraitorRole
       - NukeOperative
 
+- type: entity
+  parent: DeathRattleImplant
+  id: DeathRattleImplantStation
+  name: station death rattle implant
+  description: This implant will inform the Security radio channel should the user fall into critical condition or die.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Rattle
+    radioChannel: Security
+    # hidden-desc-begin, also yeah mapping slide in 1 space =|
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-DeathRattleImplanterStation-medical
+      jobRequired:
+      - Paramedic
+      - MedicalDoctor
+      - SeniorPhysician
+      - Brigmedic
+      - ChiefMedicalOfficer
+    - label: hidden-desc-DeathRattleImplanterStation-research
+      jobRequired:
+      - ResearchAssistant
+      - ResearchDirector
+      - Scientist
+      - Borg
+    - label: hidden-desc-DeathRattleImplanterStation-security
+      jobRequired:
+      - Captain
+      - HeadOfSecurity
+      - SeniorOfficer
+      - SecurityOfficer
+      - Warden
+      - Detective
+      - BlueShield
+    - label: hidden-desc-DeathRattleImplanterStation-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    # hidden-desc-end

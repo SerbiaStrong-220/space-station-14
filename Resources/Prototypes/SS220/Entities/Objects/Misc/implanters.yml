@@ -32,3 +32,12 @@
   components:
   - type: Implanter
     implant: AdrenalImplant
+
+- type: entity
+  id: DeathRattleImplanterStation
+  name: station death rattle implanter
+  description: Death rattle. Made for station use.
+  parent: BaseImplantOnlyImplanter
+  components:
+  - type: Implanter
+    implant: DeathRattleImplantStation

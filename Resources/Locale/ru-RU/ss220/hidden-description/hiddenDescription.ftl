@@ -21,6 +21,11 @@ hidden-desc-AdrenalImplant-medical = [color=#52B4E9]Этот имплант со
 hidden-desc-AdrenalImplant-research = [color=#D381C9]Имплант с запасом лечебных растворов, предназначенных для поддержки жизненных функций.[/color]
 hidden-desc-AdrenalImplant-syndicate = [color=#E31735]Имплант с инъекционным механизмом, содержащий жидкости для ускоренного восстановления организма.[/color]
 
+hidden-desc-DeathRattleImplanterStation-medical = [color=#52B4E9]Сверив серийные номера, вы понимаете, что это легальный, сертифицированный имплант внутри.[/color]
+hidden-desc-DeathRattleImplanterStation-research = [color=#D381C9]Внутри имплантера находится имплант "Предсмертный хрип".[/color]
+hidden-desc-DeathRattleImplanterStation-security = [color=#009ae1]Внутри имплантера находится имплант "Предсмертный хрип" гражданского образца.[/color]
+hidden-desc-DeathRattleImplanterStation-syndicate = [color=#e31735]Внутри имплант "Предсмертный хрип" гражданского образца. Сообщает местоположение владельца при введении последнего в критическое состояние или убийства.[/color]
+
 # Regular decriptions below
 
 ent-ThermalVisorImplanter = { ent-Implanter }
@@ -48,6 +53,13 @@ ent-AdrenalImplanter = { ent-Implanter }
     .suffix = Адреналин
 
 ent-AdrenalImplant = имплант Адреналина
+    .desc = Микрочип, который вживляют под кожу.
+
+ent-DeathRattleImplanterStation = { ent-Implanter }
+    .desc = { ent-Implanter.desc }
+    .suffix = станционный предсмертный хрип
+
+ent-DeathRattleImplantStation = имплант "Предсмертный хрип"
     .desc = Микрочип, который вживляют под кожу.
 
 ent-ActionActivateAdrenalImplant = Ввести жидкость
