@@ -171,6 +171,7 @@
       - ResearchDirector
       - Scientist
       - Borg
+      - SeniorResearcher
     - label: hidden-desc-DeathRattleImplanterStation-security
       jobRequired:
       - Captain
@@ -184,4 +185,5 @@
       whitelistMindRoles:
       - TraitorRole
       - NukeOperative
+      - Thief
     # hidden-desc-end
