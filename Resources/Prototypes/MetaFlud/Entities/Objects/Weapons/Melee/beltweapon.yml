@@ -1,0 +1,26 @@
+- type: entity
+  parent: [BaseItem]
+  id: BeltWhip
+  name: Ремень
+  description: А ну за пивом кабанчиком
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Objects/Weapons/Melee/whip.rsi
+    state: icon
+    scale: 1.2,1.2
+  - type: Item
+    size: Normal
+    sprite: MetaFlud/Objects/Weapons/Melee/whip.rsi
+  - type: StaminaDamageOnHit
+    damage: 16
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/boxingpunch1.ogg
+    soundNoDamage:
+      collection: Whips
+      params:
+          variation: 0.03
+          volume: 3
+    damage:
+      types:
+        Blunt: 1
