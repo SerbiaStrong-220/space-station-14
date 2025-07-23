@@ -1,0 +1,71 @@
+- type: entity
+  parent: PosterBase
+  id: PosterLegitBeautiful
+  name: Пляжный эпизод
+  description: Красивый гладкий плакат с изображением не менее красивых Катерины и Шелли. На плакат можно смотреть долго.
+  suffix: Плакат
+  components:
+  - type: Sprite
+    sprite: MetaFlud/posters.rsi
+    state: poster1_legal
+    scale: 0.85,0.85
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitKaterin
+  name: Лучи солнца
+  description: Плакат, где Катерина купается в лучах солнца. Этот плакат очень тёплый
+  suffix: Плакат
+  components:
+  - type: Sprite
+    sprite: MetaFlud/posters.rsi
+    state: poster2_legal
+    scale: 0.85,0.85
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitFamily
+  name: Семья
+  description: На плакате изображены Шувя и её мать Катерина. От этого плаката веет заботой
+  suffix: Плакат
+  components:
+  - type: Sprite
+    sprite: MetaFlud/posters.rsi
+    state: poster3_legal
+    scale: 0.85,0.85
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitWinter
+  name: Зима
+  description: На плакате запечетлена рождественская езда на коньках, на одной из курортных планет. На нём много кто изображён!
+  suffix: Плакат
+  components:
+  - type: Sprite
+    sprite: MetaFlud/posters.rsi
+    state: poster5_legal
+    scale: 0.85,0.85
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitCampfire
+  name: Костёр
+  description: Катерина и Шелли задумчиво сидят у костра. Его содержание кажется филосовским
+  suffix: Плакат
+  components:
+  - type: Sprite
+    sprite: MetaFlud/posters.rsi
+    state: poster6_legal
+    scale: 0.85,0.85
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitBoth
+  name: Пара
+  description: На этом плакате изображены Игорь и Катерина, милая пара. Этот плакат излучает нежность
+  suffix: Плакат
+  components:
+  - type: Sprite
+    sprite: MetaFlud/posters.rsi
+    state: poster7_legal
+    scale: 0.85,0.85
