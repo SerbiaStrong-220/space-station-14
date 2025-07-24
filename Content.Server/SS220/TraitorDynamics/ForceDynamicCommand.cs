@@ -11,9 +11,11 @@ namespace Content.Server.SS220.TraitorDynamics;
 public sealed partial class ForceDynamicCommand : IConsoleCommand
 {
     [Dependency] private readonly EntityManager _entityManager = default!;
+
     public string Command => "setdynamic";
     public string Description => "force dynamic for current round";
     public string Help => "dynamic <dynamicProtoId>";
+
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length != 1)
@@ -25,7 +27,7 @@ public sealed partial class ForceDynamicCommand : IConsoleCommand
         var proto = IoCManager.Resolve<IPrototypeManager>();
         if (!proto.HasIndex<DynamicPrototype>(args[0]))
         {
-            shell.WriteLine($"No dynamic proto exists with name {args[0]}");
+            shell.WriteLine($"{nameof(DynamicPrototype)} with id {args[0]} doesn't exist");
             return;
         }
 

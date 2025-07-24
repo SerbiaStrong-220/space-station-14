@@ -52,12 +52,12 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
-        SubscribeLocalEvent<DynamicAddedEvent>(OnDynamicAdded);
-        SubscribeLocalEvent<StoreFinishedEvent>(OnStoreFinish);
+        SubscribeLocalEvent<DynamicSettedEvent>(OnDynamicAdded);
+        SubscribeLocalEvent<StoreDiscountsInitializedEvent>(OnStoreFinish);
         SubscribeLocalEvent<RoundEndSystemChangedEvent>(OnRoundEnded);
     }
 
-    private void OnStoreFinish(ref StoreFinishedEvent ev)
+    private void OnStoreFinish(ref StoreDiscountsInitializedEvent ev)
     {
         if (CurrentDynamic == null)
             return;
@@ -65,7 +65,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         ApplyDynamicPrice(ev.Store, ev.Listings, CurrentDynamic.Value);
     }
 
-    private void OnDynamicAdded(DynamicAddedEvent ev)
+    private void OnDynamicAdded(DynamicSettedEvent ev)
     {
         var dynamic = _prototype.Index(ev.Dynamic);
         var rules = _gameTicker.GetAllGameRulePrototypes();
@@ -203,7 +203,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
 
         _chatManager.SendAdminAnnouncement(Loc.GetString("dynamic-was-set", ("dynamic", dynamicProto.ID)));
 
-        var ev = new DynamicAddedEvent(dynamicProto.ID);
+        var ev = new DynamicSettedEvent(dynamicProto.ID);
         RaiseLocalEvent(ev);
 
         if (dynamicProto.LoreNames == default || !_prototype.TryIndex(dynamicProto.LoreNames, out var namesProto))
@@ -296,11 +296,11 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         return CurrentDynamic;
     }
 
-    public sealed class DynamicAddedEvent : EntityEventArgs
+    public sealed class DynamicSettedEvent : EntityEventArgs
     {
         public ProtoId<DynamicPrototype> Dynamic;
 
-        public DynamicAddedEvent(ProtoId<DynamicPrototype> dynamic)
+        public DynamicSettedEvent(ProtoId<DynamicPrototype> dynamic)
         {
             Dynamic = dynamic;
         }

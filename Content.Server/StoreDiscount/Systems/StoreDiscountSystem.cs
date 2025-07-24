@@ -69,10 +69,12 @@ public sealed class StoreDiscountSystem : EntitySystem
         ApplyDiscounts(ev.Listings, discounts);
         discountComponent.Discounts = discounts;
 
-        SetCostFromCatalog(ev.Listings);// SS220 TraitorDynamics
+        // SS220 TraitorDynamics - start
+        SetCostFromCatalog(ev.Listings);
 
-        var newEv = new StoreFinishedEvent(ev.TargetUser, ev.Store, ev.Listings);
+        var newEv = new StoreDiscountsInitializedEvent(ev.TargetUser, ev.Store, ev.Listings);
         RaiseLocalEvent(ref newEv);
+        // SS220 TraitorDynamics - end
     }
 
     private IReadOnlyList<StoreDiscountData> InitializeDiscounts(
@@ -474,7 +476,7 @@ public record struct StoreInitializedEvent(
 );
 
 [ByRefEvent]
-public record struct StoreFinishedEvent(
+public record struct StoreDiscountsInitializedEvent(
     EntityUid TargetUser,
     EntityUid Store,
     IReadOnlyList<ListingDataWithCostModifiers> Listings
