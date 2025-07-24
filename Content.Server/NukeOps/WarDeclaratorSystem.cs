@@ -70,7 +70,11 @@ public sealed class WarDeclaratorSystem : EntitySystem
 
         if (ev.Status == WarConditionStatus.WarReady)
         {
-            var title = Loc.GetString(ent.Comp.SenderTitle);
+            // ss220 add editable title for war declarator start
+            Loc.TryGetString(ent.Comp.SenderTitle, out var title);
+            title ??= ent.Comp.SenderTitle;
+            // ss220 add editable title for war declarator end
+
             _chat.DispatchGlobalAnnouncement(ent.Comp.Message, title, true, ent.Comp.Sound, ent.Comp.Color);
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(args.Actor):player} has declared war with this text: {ent.Comp.Message}");
         }
