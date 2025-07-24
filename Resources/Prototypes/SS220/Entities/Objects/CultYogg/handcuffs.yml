@@ -33,6 +33,7 @@
   - type: Tag
     tags:
     - Handcuffs
+    - CultYoggStealthProvidable
   - type: Appearance
   - type: MeleeWeapon
     wideAnimationRotation: 90

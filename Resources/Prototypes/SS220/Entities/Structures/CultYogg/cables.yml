@@ -49,6 +49,9 @@
     cost: 2
     delay: 0
     fx: EffectRCDConstruct0
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable
 
 - type: entity
   parent: CableBase

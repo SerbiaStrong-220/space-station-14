@@ -232,4 +232,23 @@ public abstract partial class SharedHandsSystem
         if (hand == handsComp.ActiveHand)
             RaiseLocalEvent(entity, new HandDeselectedEvent(uid));
     }
+
+    //SS220-cryo-mob-fix begin
+    /// <summary>
+    ///     Tries to remove entities with specified component from both hands
+    /// </summary>
+    public void DropEntitesFromHands<T>(EntityUid owner) where T : IComponent
+    {
+        if (!TryComp<HandsComponent>(owner, out var hands))
+            return;
+
+        foreach (var held in EnumerateHeld(owner, hands))
+        {
+            if (HasComp<T>(held))
+            {
+                TryDrop(owner, handsComp: hands);
+            }
+        }
+    }
+    //SS220-cryo-mob-fix end
 }

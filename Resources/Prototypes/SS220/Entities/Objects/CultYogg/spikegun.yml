@@ -49,6 +49,9 @@
           shader: unshaded
     - type: StuckOnEquip
       inHandItem: true
+    - type: Tag
+      tags:
+      - CultYoggStealthProvidable
 
 
 

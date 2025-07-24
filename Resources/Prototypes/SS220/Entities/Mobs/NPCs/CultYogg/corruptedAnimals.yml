@@ -75,6 +75,9 @@
     - type: Telepathy
       canSend: false
       telepathyChannelPrototype: TelepathyChannelYoggSothothCult
+    - type: Language
+      availableLanguages:
+      - id: Galactic
 
 - type: entity
   name: corrupted сow
@@ -746,8 +749,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Critical
-      120: Dead
+      30: Critical
+      40: Dead
   #- type: Thirst
   #  startingThirst: 25
   #  thresholds:

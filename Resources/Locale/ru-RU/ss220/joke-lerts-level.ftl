@@ -1,0 +1,15 @@
+joke-alert-level-announcement = Внимание! Уровень шуток станции теперь { $name }! { $announcement }
+joke-alert-level-unknown = Неизвестный.
+joke-alert-level-unknown-instructions = Неизвестно.
+joke-alert-level-rzhamma = Ржамма
+joke-alert-level-rzhamma-announcement = Центральное Хонкомандование объявило на станции уровень угрозы "Ржамма". Служба безопасности должна постоянно смотреть под ноги, гражданский персонал обязан немедленно направиться в бар с главами отделов для получения пирога.
+joke-alert-level-rzhamma-news-title = Инструкции кода Ржамма
+joke-alert-level-rzhamma-instructions =  Гражданский персонал обязан немедленно направиться в бар для получения кремового сюрприза. Корпорация Nanotrasen заверяет вас - будет вкусно.
+joke-alert-level-hehelta = Хехельта
+joke-alert-level-hehelta-announcement = Станция находится под угрозой неминуемого хехе. Членам экипажа рекомендуется слушать общий канал для получения дополнительной дозы анекдотов. Службе безопасности действовать по протоколу хехе хохо.
+joke-alert-level-hehelta-news-title = Инструкции кода Хехельта
+joke-alert-level-hehelta-instructions = Членам экипажа необходимо выслушать анекдот клоуна. От этого зависит ваше  психологическое здоровье и настрой на работу.
+joke-alert-level-pepsilon = Пепсилон
+joke-alert-level-pepsilon-announcement = Центральное Хонкомандование объявило на станции уровень угрозы "Пэпсилон". Объявляется выходной. Зарплата удвоена. Спасибо, что выбрали Nanotrasen.
+joke-alert-level-pepsilon-news-title = Инструкции кода Пепсилон
+joke-alert-level-pepsilon-instructions = ВСЕМ НА ВЫХОДНОЙ!

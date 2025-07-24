@@ -2,6 +2,9 @@
 uplink-ecrossbow-name = { ent-WeaponMiniEnergyCrossbow }
 uplink-ecrossbow-desc = { ent-WeaponMiniEnergyCrossbow.desc }
 
+uplink-origami-name = Коробка Искусства Оригами
+uplink-origami-desc = В этой коробке заключено забытое Искусство, позволяющее превращать обычную бумагу в смертоносное оружие. Перед применением, требует тщательного прочтения.
+
 # Misc
 
 uplink-clothing-eyes-hud-syndicate-agent-name = Визор агента Синдиката

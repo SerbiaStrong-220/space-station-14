@@ -222,9 +222,11 @@ public sealed class SuitSensorSystem : EntitySystem
         if (!_interactionSystem.InRangeUnobstructed(args.User, args.Target))
             return;
 
+        /* ss220 tweak sensors start
         // check if target is incapacitated (cuffed, dead, etc)
         if (component.User != null && args.User != component.User && _actionBlocker.CanInteract(component.User.Value, null))
             return;
+        // ss220 tweak sensors end */
 
         args.Verbs.UnionWith(new[]
         {
@@ -312,18 +314,29 @@ public sealed class SuitSensorSystem : EntitySystem
         if (!Resolve(sensors, ref comp))
             return;
 
+        // ss220 tweak sensors start
+        if (comp.User != null && userUid != comp.User && !_actionBlocker.CanInteract(comp.User.Value, null))
+        {
+            SetSensor(sensors, mode, userUid);
+            return;
+        }
+        // ss220 tweak sensors end
+
         if (comp.User == null || userUid == comp.User)
             SetSensor(sensors, mode, userUid);
         else
         {
             var doAfterEvent = new SuitSensorChangeDoAfterEvent(mode);
-            var doAfterArgs = new DoAfterArgs(EntityManager, userUid, comp.SensorsTime, doAfterEvent, sensors)
+            // ss220 tweak sensors start
+            var doAfterArgs = new DoAfterArgs(EntityManager, userUid, comp.SensorsTime, doAfterEvent, sensors, target: comp.User)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true
             };
 
-            _doAfterSystem.TryStartDoAfter(doAfterArgs);
+            if (_doAfterSystem.TryStartDoAfter(doAfterArgs))
+                _popupSystem.PopupEntity(Loc.GetString("suit-sensor-do-after-start"), comp.User.Value, comp.User.Value);
+            // ss220 tweak sensors end
         }
     }
 

@@ -32,6 +32,7 @@
   - ClothingNeckPluralPin
   - ClothingNeckOmnisexualPin
   - ClothingNeckGenderqueerPin
+  - ClothingNeckGenderfluidPin
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
@@ -249,6 +250,8 @@
   - PassengerJumpskirtTurtleneck
   - PassengerJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
   - RainbowJumpsuit
+  - RainbowJumpskirt
+  - PassengerJumpsuitBlueYellow14 #SS-220 Yellow Jumpsuit with 220 on it
 
 - type: loadoutGroup
   id: PassengerFace
@@ -681,6 +684,7 @@
   loadouts:
   - EmergencyNitrogenMime
   - EmergencyOxygenMime
+  - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
@@ -1389,6 +1393,7 @@
   loadouts:
   - ChiefMedicalOfficerBeret
   - CMOMedicalHeadMirror
+  - CapCMO #SS220-CMOParade
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerJumpsuit
@@ -1417,6 +1422,7 @@
   loadouts:
   - ChiefMedicalOfficerCloak
   - ChiefMedicalOfficerMantle
+  - ParadeCloakCMO #SS220-CMOParade
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerShoes
@@ -1424,7 +1430,7 @@
   loadouts:
   - BrownShoes
   - MedicalWinterBoots
-  - CMOCorpShoes #ss220 new cmo 
+  - CMOCorpShoes #ss220 new cmo
 
 - type: loadoutGroup
   id: MedicalDoctorHead
@@ -1479,6 +1485,7 @@
   name: loadout-group-medical-doctor-shoes
   loadouts:
   - WhiteShoes
+  - MedicalBlackShoes #ss220 add shoes for med
   - MedicalWinterBoots
   - MedicalDoctorShoesResponsibility #SS220-Responsibility
 
@@ -1587,6 +1594,7 @@
   loadouts:
   - MedicalHud
   - MedicalEyePatchHud
+  - CyberMedVisor #SS220 II floppa iteration
   - Glasses
   - GlassesJamjar
   - GlassesJensen

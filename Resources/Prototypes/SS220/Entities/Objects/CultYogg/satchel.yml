@@ -19,3 +19,6 @@
       components:
       - CultYogg
   - type: StuckOnEquip
+  - type: Tag
+    tags:
+    - CultYoggStealthProvidable

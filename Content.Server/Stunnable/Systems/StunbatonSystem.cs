@@ -8,7 +8,6 @@ using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
-using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Server.Stunnable.Systems
@@ -26,12 +25,19 @@ namespace Content.Server.Stunnable.Systems
 
             SubscribeLocalEvent<StunbatonComponent, ExaminedEvent>(OnExamined);
             SubscribeLocalEvent<StunbatonComponent, SolutionContainerChangedEvent>(OnSolutionChange);
+            SubscribeLocalEvent<StunbatonComponent, StaminaDamageOnHitAttemptEvent>(OnStaminaHitAttempt);
             SubscribeLocalEvent<StunbatonComponent, ItemToggleActivateAttemptEvent>(TryTurnOn);
             SubscribeLocalEvent<StunbatonComponent, ChargeChangedEvent>(OnChargeChanged);
-            SubscribeLocalEvent<StunbatonComponent, MeleeHitEvent>(OnEnergyDecrease); //ss220 stunbaton decrease energy fix
-            SubscribeLocalEvent<StunbatonComponent, ThrowDoHitEvent>(OnThrowEnergyDecrease); //ss220 stunbaton decrease energy fix
         }
 
+        private void OnStaminaHitAttempt(Entity<StunbatonComponent> entity, ref StaminaDamageOnHitAttemptEvent args)
+        {
+            if (!_itemToggle.IsActivated(entity.Owner) ||
+            !TryComp<BatteryComponent>(entity.Owner, out var battery) || !_battery.TryUseCharge(entity.Owner, entity.Comp.EnergyPerUse, battery))
+            {
+                args.Cancelled = true;
+            }
+        }
 
         private void OnExamined(Entity<StunbatonComponent> entity, ref ExaminedEvent args)
         {
@@ -94,25 +100,5 @@ namespace Content.Server.Stunnable.Systems
                 _itemToggle.TryDeactivate(entity.Owner, predicted: false);
             }
         }
-
-        //ss220 stunbaton decrease energy fix start
-        private void OnEnergyDecrease(Entity<StunbatonComponent> entity, ref MeleeHitEvent args)
-        {
-            if (TryComp<BatteryComponent>(entity.Owner, out var batteryComponent) && _itemToggle.IsActivated(entity.Owner))
-            {
-                _battery.TryUseCharge(entity.Owner, entity.Comp.EnergyPerUse, batteryComponent);
-            }
-
-        }
-
-        private void OnThrowEnergyDecrease(Entity<StunbatonComponent> entity, ref ThrowDoHitEvent args)
-        {
-            if (TryComp<BatteryComponent>(entity.Owner, out var batteryComponent) && _itemToggle.IsActivated(entity.Owner))
-            {
-                _battery.TryUseCharge(entity.Owner, entity.Comp.EnergyPerUse, batteryComponent);
-            }
-        }
-        //ss220 stunbaton decrease energy fix end
-
     }
 }

@@ -91,7 +91,7 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
         if (recipe is null)
             return null;
 
-        _containerSystem.TryRemoveFromContainer(corruptedEntity, force: true);
+        _containerSystem.TryRemoveFromContainer(corruptedEntity.Owner, force: true);
 
         var coords = Transform(corruptedEntity).Coordinates;
         EntityUid normalEntity;
@@ -158,7 +158,7 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
         {
             Broadcast = false,
             BreakOnDamage = true,
-            BreakOnMove = true,
+            BreakOnMove = false,
             NeedHand = true,
             BlockDuplicate = true,
             CancelDuplicate = true,

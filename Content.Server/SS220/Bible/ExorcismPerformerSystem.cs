@@ -14,6 +14,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Spawners;
 using Robust.Shared.Player;
 using Robust.Shared.Containers;
+using Content.Shared.Actions.Components;
 
 namespace Content.Server.SS220.Bible;
 
@@ -82,7 +83,7 @@ public sealed class ExorcismPerformerSystem : SharedExorcismPerformerSystem
         PlayPerformanceEffects((entity, entity.Comp));
 
         var exorcismAction = entity.Comp.ExorcismActionEntity;
-        if (exorcismAction != null && TryComp(exorcismAction, out InstantActionComponent? actionComponent))
+        if (exorcismAction != null && TryComp(exorcismAction, out ActionComponent? actionComponent))
             _actionsSystem.SetCooldown(exorcismAction, actionComponent.UseDelay ?? TimeSpan.FromSeconds(1));
     }
 

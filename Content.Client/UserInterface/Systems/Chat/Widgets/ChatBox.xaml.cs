@@ -34,8 +34,8 @@ public partial class ChatBox : UIWidget
         ChatInput.Input.OnTextEntered += OnTextEntered;
         ChatInput.Input.OnKeyBindDown += OnInputKeyBindDown;
         ChatInput.Input.OnTextChanged += OnTextChanged;
-        ChatInput.Input.OnFocusEnter += OnFocusEnter; // Corvax-TypingIndicator
-        ChatInput.Input.OnFocusExit += OnFocusExit; // Corvax-TypingIndicator
+        ChatInput.Input.OnFocusEnter += OnFocusEnter;
+        ChatInput.Input.OnFocusExit += OnFocusExit;
         ChatInput.ChannelSelector.OnChannelSelect += OnChannelSelect;
         ChatInput.FilterButton.Popup.OnChannelFilter += OnChannelFilter;
 
@@ -179,7 +179,6 @@ public partial class ChatBox : UIWidget
         }
     }
 
-    // Corvax-TypingIndicator-Start
     private void OnFocusEnter(LineEditEventArgs args)
     {
         // Warn typing indicator about focus
@@ -191,7 +190,6 @@ public partial class ChatBox : UIWidget
         // Warn typing indicator about focus
         _controller.NotifyChatFocus(false);
     }
-    // Corvax-TypingIndicator-End
 
     protected override void Dispose(bool disposing)
     {

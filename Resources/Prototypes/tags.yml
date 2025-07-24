@@ -79,6 +79,9 @@
   id: BodyBag
 
 - type: Tag
+  id: Boll
+
+- type: Tag
   id: Book
 
 - type: Tag
@@ -216,8 +219,6 @@
 - type: Tag
   id: CanPilot
 
-- type: Tag
-  id: CapacitorStockPart
 
 - type: Tag
   id: CaptainSabre
@@ -347,11 +348,17 @@
 - type: Tag
   id: CoordinatesDisk
 
+- type: Tag # designed to let corgis wear things; at present only for SmartCorgi.  View PR 33737 on upstream for more dog wearables
+  id: CorgiWearable
+
 - type: Tag #Ohioans die happy
   id: Corn
 
 - type: Tag
   id: CottonBoll
+
+- type: Tag
+  id: CottonBurger
 
 - type: Tag
   id: Cow
@@ -385,6 +392,9 @@
 
 - type: Tag
   id: CrayonYellow
+
+- type: Tag
+  id: Creamsicle
 
 - type: Tag
   id: Crowbar
@@ -435,6 +445,9 @@
 
 - type: Tag
   id: Diagonal
+
+- type: Tag
+  id: Diamond
 
 - type: Tag
   id: Dice
@@ -504,6 +517,33 @@
 
 - type: Tag
   id: EmitterBolt
+
+- type: Tag
+  id: EncryptionCargo
+
+- type: Tag
+  id: EncryptionCommand
+
+- type: Tag
+  id: EncryptionCommon
+
+- type: Tag
+  id: EncryptionElse
+
+- type: Tag
+  id: EncryptionEngineering
+
+- type: Tag
+  id: EncryptionMedical
+
+- type: Tag
+  id: EncryptionScience
+
+- type: Tag
+  id: EncryptionSecurity
+
+- type: Tag
+  id: EncryptionService
 
 - type: Tag
   id: Enzyme
@@ -586,6 +626,10 @@
 - type: Tag
   id: GeigerCounter
 
+# Used for warps
+- type: Tag
+  id: GhostOnlyWarp
+
 - type: Tag
   id: GlassAirlock
 
@@ -600,6 +644,9 @@
 
 - type: Tag
   id: Goliath
+
+- type: Tag
+  id: GoliathPlate
 
 - type: Tag
   id: GPS
@@ -618,6 +665,15 @@
 
 - type: Tag
   id: GuideEmbeded
+
+- type: Tag
+  id: GunUpgradeDamage
+
+- type: Tag
+  id: GunUpgradeRange
+
+- type: Tag
+  id: GunUpgradeReloadSpeed
 
 - type: Tag
   id: Hamster
@@ -686,6 +742,9 @@
   id: HighSecDoor
 
 - type: Tag
+  id: HivelordRemains
+
+- type: Tag
   id: HiViz
 
 - type: Tag
@@ -750,6 +809,10 @@
 
 - type: Tag
   id: JawsOfLife
+
+# SS220 JudgeGavel
+- type: Tag
+  id: JudgeGavel
 
 - type: Tag
   id: Kangaroo
@@ -883,6 +946,9 @@
   id: MimeHappyHonk
 
 - type: Tag
+  id: FakeMindShieldImplant
+
+- type: Tag
   id: MindTransferTarget
 
 - type: Tag
@@ -913,6 +979,9 @@
   id: Multitool
 
 - type: Tag
+  id: Mushroom
+
+- type: Tag
   id: NoBlockAnchoring
 
 - type: Tag
@@ -940,6 +1009,21 @@
   id: Ore
 
 - type: Tag
+  id: OreBananium
+
+- type: Tag
+  id: OreGold
+
+- type: Tag
+  id: OrePlasma
+
+- type: Tag
+  id: OreSilver
+
+- type: Tag
+  id: OreUranium
+
+- type: Tag
   id: Packet
 
 - type: Tag
@@ -950,6 +1034,9 @@
 
 - type: Tag
   id: Pancake
+
+- type: Tag
+  id: ParcelWrapBlacklist
 
 - type: Tag
   id: Payload # for grenade/bomb crafting
@@ -985,7 +1072,13 @@
   id: Pipe
 
 - type: Tag
+  id: Pistachios
+
+- type: Tag
   id: Pizza
+
+- type: Tag
+  id: PKAUpgrade
 
 - type: Tag
   id: PlantAnalyzer
@@ -1109,6 +1202,9 @@
   id: SalvageExperiment
 
 - type: Tag
+  id: SalvageScrap
+
+- type: Tag
   id: Scarf
 
 - type: Tag
@@ -1155,6 +1251,9 @@
 
 - type: Tag
   id: SilentStorageUser # used in SharedStorageSystem, so the entity will do all silently
+
+- type: Tag
+  id: SiliconEmotes
 
 - type: Tag
   id: SkeletonMotorcycleKeys
@@ -1405,95 +1504,19 @@
 - type: Tag
   id: WriteIgnoreStamps
 
-# SS220 - chemical-implants start
 - type: Tag
-  id: ChemicalImplant
-# SS220- - chemical-implants end
-
-# SS220 no-animal-zombs
-- type: Tag
-  id: ZombifyableByMelee
-
-# SS220 chiefs-belt start
-- type: Tag
-  id:  WaterBottle
+  id: XenoborgModuleEngi
 
 - type: Tag
-  id:  Vinegar
+  id: XenoborgModuleGeneric
 
 - type: Tag
-  id:  OilOlive
-# SS220 chiefs-belt end
-
-# SS220 RPK
-- type: Tag
-  id: MagazineUssp_RPK
-
-# SS220 Edit Biomass craft begin
-- type: Tag
-  id: Scalpel
-# SS220 Edit Biomass craft end
-
-# SS220 Flower update begin
-- type: Tag
-  id: wtulip
+  id: XenoborgModuleHeavy
 
 - type: Tag
-  id: ytulip
+  id: XenoborgModuleScout
 
 - type: Tag
-  id: ptulip
-
-- type: Tag
-  id: rclove
-
-- type: Tag
-  id: wclove
-
-- type: Tag
-  id: schamomile
-
-- type: Tag
-  id: wschamomile
-
-- type: Tag
-  id: sflower
-
-- type: Tag
-  id: lflower
-
-- type: Tag
-  id: wrose
-
-- type: Tag
-  id: rrose
-# SS220 Flower update end
-
-# SS220-TohaUpdate-Begin
-- type: Tag
-  id: MagicianHat
-
-- type: Tag
-  id: ShrineMaiden
-
-- type: Tag
-  id: Janimaid
-
-- type: Tag
-  id: MagicianDress
-
-- type: Tag
-  id: ShrineMaidenWig
-# SS220-TohaUpdate-End
-
-# SS220 Fix #2009 begin
-- type: Tag
-  id: HolofanProjectorSecurity
-# SS220 Fix #2009 end
-
-# ss220 migo damage in astral fix start
-- type: Tag
-  id: MiGoInAstral
-# ss220 migo damage in astral fix end
+  id: XenoborgModuleStealth
 
 # ALPHABETICAL

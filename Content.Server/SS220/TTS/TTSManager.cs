@@ -129,6 +129,11 @@ public sealed class TTSManager
                     requestUrl += "&effect=announce";
                 }
 
+                if (kind == TtsKind.Telepathy)
+                {
+                    requestUrl += "&effect=announce";
+                }
+
                 var httpRequest = new HttpRequestMessage(HttpMethod.Get, requestUrl);
                 var httpResponse = await _httpClient.SendAsync(httpRequest, cts.Token);
                 if (!httpResponse.IsSuccessStatusCode)

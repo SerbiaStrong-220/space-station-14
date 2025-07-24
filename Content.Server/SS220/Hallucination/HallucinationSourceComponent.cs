@@ -1,11 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Hallucination;
 
-// TODO HallucinationParams -> struct
 namespace Content.Server.SS220.Hallucination;
 [RegisterComponent]
 public sealed partial class HallucinationSourceComponent : Component
 {
+
+    /// <summary>
+    /// Simple flag to make effect switchable
+    /// </summary>
+    [DataField]
+    public bool IsActive = true;
+
     /// <summary>
     /// So i kinda need to write !HallucinationSetting params
     /// </summary>

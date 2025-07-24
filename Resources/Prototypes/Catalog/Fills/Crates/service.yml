@@ -7,7 +7,7 @@
   - type: StorageFill
     contents:
       - id: MopItem
-      - id: MopBucket
+      - id: MopBucketCubeWrapped
       - id: Bucket
         amount: 3
       - id: WetFloorSign
@@ -20,6 +20,8 @@
       - id: Plunger
         amount: 2
       - id: BoxCleanerGrenades
+      - id: BearTrap #SS220 TrapSystem
+        amount: 2 #SS220 TrapSystem
 
 - type: entity
   id: CrateServiceReplacementLights
@@ -367,3 +369,14 @@
         amount: 2
       - id: BoxCandleSmall
         amount: 2
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateServiceColorfulLights
+  name: colorful lights crate
+  description: It's not a party until it's hard to see, a little disorienting, and your ears hurt.
+  components:
+  - type: StorageFill
+    contents:
+    - id: BoxLightbulbColorfulMixed
+    - id: BoxLighttubeColorfulMixed

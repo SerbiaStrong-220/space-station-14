@@ -52,7 +52,6 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly IRobustRandom _random = default!; //SS220 LimitationRevive
-    [Dependency] private readonly LimitationReviveSystem _reviveSystem = default!; //SS220 LimitationRevive
     [Dependency] private readonly InventorySystem _inventory = default!; // SS220 NewDefib
 
     /// <inheritdoc/>
@@ -232,7 +231,7 @@ public sealed class DefibrillatorSystem : EntitySystem
         }
         //SS220 LimitationRevive - start
         else if (TryComp<LimitationReviveComponent>(target, out var limitRevive) &&
-                 limitRevive.CounterOfDead > limitRevive.MaxRevive)
+                 limitRevive.DeathCounter > limitRevive.ReviveLimit)
         {
             _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-death-no-exceeded"),
                 InGameICChatType.Speak, true);
@@ -242,7 +241,8 @@ public sealed class DefibrillatorSystem : EntitySystem
             _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-unsuccessful-zap"),
                 InGameICChatType.Speak, true);
 
-            _reviveSystem.TryDamageAfterDeath(target);
+            var debuffEv = new AddReviweDebuffsEvent();
+            RaiseLocalEvent(target, ref debuffEv);
             _electrocution.TryDoElectrocution(user, null, component.ZapDamage * component.ZapСoeffDamage,
                 component.WritheDuration, true, ignoreInsulation: true);
         }

@@ -51,3 +51,21 @@
     - 6pack4
     - 6pack5
   - type: Appearance
+
+- type: entity
+  parent: DrinkCanBaseFull
+  id: DrinkRrrantaCan
+  name: Rrr-anta
+  description: The most synthetic drink in the most synthetic container. Drink at your own risk.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Rrranta
+          Quantity: 30
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/rrranta.rsi
+  - type: Item
+    sprite: SS220/Objects/Consumable/Drinks/rrranta.rsi

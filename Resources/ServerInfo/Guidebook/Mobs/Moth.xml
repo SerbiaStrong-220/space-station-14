@@ -1,15 +1,15 @@
 <Document>
-  # Moth People
+  # Ниан
 
   <Box>
     <GuideEntityEmbed Entity="MobMoth" Caption=""/>
   </Box>
 
-  They can eat cotton, fabrics and clothing, but virtually none of the food that others would consider "edible". They prefer a somewhat lower temperature range than humans.
-  Their Insect Blood can't be metabolised from Iron like normal blood.
+  Они могут питаться хлопком, тканями и одеждой, но практически ничем из пищи, которую другие сочли бы "съедобной". Они предпочитают несколько более низкий температурный диапазон, чем люди.
+  Их кровь насекомых не может метаболизироваться из железа, как обычная кровь.
 
-  Their wings give them better acceleration if there is no gravity on the station, but they still can't move without equipment when floating out in space.
+  Их крылья придают им лучшее ускорение, если на станции нет гравитации, но они всё равно не могут передвигаться без оборудования, находясь в открытом космосе.
 
-  They take [color=#1e90ff]30% less Cold damage[/color] but [color=#ffa500]30% more Heat damage, and catch on fire more easily[/color].
+  Они получают [color=#1e90ff]на 30% меньше урона от холода[/color] но [color=#ffa500]на 15% больше высокотемпературного урона и легче воспламеняются[/color].
 
 </Document>

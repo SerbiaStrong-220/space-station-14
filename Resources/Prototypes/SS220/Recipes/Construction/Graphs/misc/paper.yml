@@ -7,7 +7,7 @@
         - to: paperairplane
           steps:
             - tag: Paper
-              name: a paper
+              name: construction-graph-tag-paper
               doAfter: 1
               icon:
                 sprite: Objects/Misc/bureaucracy.rsi

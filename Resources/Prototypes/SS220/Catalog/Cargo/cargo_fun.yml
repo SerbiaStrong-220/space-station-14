@@ -1,26 +1,4 @@
 - type: entity
-  id: CrateFunATV
-  parent: CrateLivestock
-  name: ящик с квадроциклом
-  description: Большой контейнер для предметов. На дне виднеются следы от шин.
-  components:
-  - type: StorageFill
-    contents:
-    - id: VehicleATV
-    - id: VehicleKeyATV
-
-- type: entity
-  id: CrateFunSyndicateSegway
-  parent: CrateLivestock
-  name: ящик для скота
-  description: Большой контейнер для предметов. На дне виднеются следы от шин.
-  components:
-  - type: StorageFill
-    contents:
-    - id: VehicleSyndicateSegway
-    - id: VehicleKeySyndicateSegway
-
-- type: entity
   id: CrateCargoLottery5
   parent: CratePrivateSecure
   name: ящик лотерейных билетов
@@ -42,4 +20,3 @@
     contents:
     - id: LotteryCash
       amount: 10
-  

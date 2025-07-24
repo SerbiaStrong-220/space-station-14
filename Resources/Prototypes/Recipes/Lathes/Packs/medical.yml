@@ -52,7 +52,6 @@
   - RollerBedSpawnFolded
   - CheapRollerBedSpawnFolded
   - EmergencyRollerBedSpawnFolded
-  - VehicleWheelchairFolded #SS220 Readd-Vehicles
 
 - type: latheRecipePack
   id: MedicalClothingStatic
@@ -95,6 +94,8 @@
   - SyringeCryostasis
   - BluespaceBeaker
   - SyringeBluespace
+  - LauncherSyringe
+  - MiniSyringe
 
 - type: latheRecipePack
   id: MedicalBoards

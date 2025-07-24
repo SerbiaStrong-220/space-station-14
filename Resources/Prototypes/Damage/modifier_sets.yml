@@ -252,6 +252,7 @@
     Bloodloss: 0.0 # no double dipping
     Cellular: 0.0
     Caustic: 0.0
+    Сerebral: 0.0 #SS220 Limitation revive
 
 - type: damageModifierSet
   id: SlimePet # Very survivable slimes
