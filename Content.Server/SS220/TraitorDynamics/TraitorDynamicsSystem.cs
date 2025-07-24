@@ -55,6 +55,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         SubscribeLocalEvent<DynamicSettedEvent>(OnDynamicAdded);
         SubscribeLocalEvent<StoreDiscountsInitializedEvent>(OnStoreFinish);
         SubscribeLocalEvent<RoundEndSystemChangedEvent>(OnRoundEnded);
+        SubscribeLocalEvent<DynamicRemoveEvent>(OnDynamicRemove);
     }
 
     private void OnStoreFinish(ref StoreDiscountsInitializedEvent ev)
@@ -112,6 +113,12 @@ public sealed class TraitorDynamicsSystem : EntitySystem
             return;
 
         RemoveDynamic();
+    }
+
+    private void OnDynamicRemove(DynamicRemoveEvent ev)
+    {
+        CurrentDynamic = null;
+        ResetDynamicPrices();
     }
 
     private void ApplyDynamicPrice(EntityUid store, IReadOnlyList<ListingDataWithCostModifiers> listings, ProtoId<DynamicPrototype> currentDynamic)
@@ -214,8 +221,8 @@ public sealed class TraitorDynamicsSystem : EntitySystem
 
     public void RemoveDynamic()
     {
-        CurrentDynamic = null;
-        ResetDynamicPrices();
+        var ev = new DynamicRemoveEvent();
+        RaiseLocalEvent(ev);
     }
 
         /// <summary>
@@ -227,16 +234,15 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     public string GetRandomDynamic(int playerCount = 0, bool force = false)
     {
         var validWeight = _prototype.Index<WeightedRandomPrototype>(WeightsProto);
-        var tempWeight = validWeight;
         var selectedDynamic = string.Empty;
 
-        while (tempWeight.Weights.Keys.Count > 0)
+        while (validWeight.Weights.Keys.Count > 0)
         {
-            var currentDynamic = tempWeight.Pick(_random);
+            var currentDynamic = validWeight.Pick(_random);
 
             if (!_prototype.TryIndex<DynamicPrototype>(currentDynamic, out var dynamicProto))
             {
-                tempWeight.Weights.Remove(currentDynamic);
+                validWeight.Weights.Remove(currentDynamic);
                 continue;
             }
 
@@ -246,10 +252,13 @@ public sealed class TraitorDynamicsSystem : EntitySystem
                 break;
             }
 
-            if (TrySelectDynamic(currentDynamic, dynamicProto, playerCount, out selectedDynamic))
+            if (playerCount >= dynamicProto.PlayersRequerment)
+            {
+                selectedDynamic = dynamicProto.ID;
                 break;
+            }
 
-            tempWeight.Weights.Remove(currentDynamic);
+            validWeight.Weights.Remove(currentDynamic);
         }
 
         return selectedDynamic;
@@ -272,18 +281,6 @@ public sealed class TraitorDynamicsSystem : EntitySystem
                 listing.ReturnCostFromCatalog();
             }
         }
-    }
-
-    private bool TrySelectDynamic(string currentDynamic, DynamicPrototype dynamicProto, int playerCount, out string selectedDynamic)
-    {
-        selectedDynamic = string.Empty;
-
-        if (playerCount < dynamicProto.PlayersRequerment)
-            return false;
-
-        selectedDynamic = currentDynamic;
-        return true;
-
     }
 
 
@@ -314,5 +311,9 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         {
             Dynamic = dynamic;
         }
+    }
+
+    public sealed class DynamicRemoveEvent : EntityEventArgs
+    {
     }
 }
