@@ -69,10 +69,12 @@ public sealed class StoreDiscountSystem : EntitySystem
         ApplyDiscounts(ev.Listings, discounts);
         discountComponent.Discounts = discounts;
 
-        SetCostFromCatalog(ev.Listings);// SS220 TraitorDynamics
+        // SS220 TraitorDynamics - start
+        SetCostFromCatalog(ev.Listings);
 
-        var newEv = new StoreFinishedEvent(ev.TargetUser, ev.Store, ev.Listings);
+        var newEv = new StoreDiscountsInitializedEvent(ev.TargetUser, ev.Store, ev.Listings);
         RaiseLocalEvent(ref newEv);
+        // SS220 TraitorDynamics - end
     }
 
     private IReadOnlyList<StoreDiscountData> InitializeDiscounts(
@@ -435,17 +437,12 @@ public sealed class StoreDiscountSystem : EntitySystem
             if (originalPrice <= 0 || discountAmount >= 0) // discount modifier is negative value
                 continue;
 
-            var discountPercentage = CalculateDiscountPercentage(discountAmount, originalPrice);
-            discounts[currency] = discountPercentage;
+            var percentage = -discountAmount / originalPrice;
+            var roundedPercentage = FixedPoint2.New(Math.Round(percentage.Double(), 2));
+            discounts[currency] = roundedPercentage;
         }
 
         return discounts;
-    }
-
-    private FixedPoint2 CalculateDiscountPercentage(FixedPoint2 discountAmount, FixedPoint2 originalPrice)
-    {
-        var percentage = -discountAmount / originalPrice;
-        return FixedPoint2.New(Math.Round(percentage.Double(), 2));
     }
 
     private void SetCostFromCatalog(IReadOnlyList<ListingDataWithCostModifiers> listings)
@@ -474,7 +471,7 @@ public record struct StoreInitializedEvent(
 );
 
 [ByRefEvent]
-public record struct StoreFinishedEvent(
+public record struct StoreDiscountsInitializedEvent(
     EntityUid TargetUser,
     EntityUid Store,
     IReadOnlyList<ListingDataWithCostModifiers> Listings
