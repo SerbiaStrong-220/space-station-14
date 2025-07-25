@@ -20,6 +20,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Linq;
 using System.Text;
+using Content.Server.SS220.TraitorDynamics;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -38,6 +39,8 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly UplinkSystem _uplink = default!;
+    [Dependency] private readonly TraitorDynamicsSystem _dynamics = default!; // SS220 TraitorDynamics
+    [Dependency] private readonly IPrototypeManager _prototype = default!; // SS220 TraitorDynamics
 
     public override void Initialize()
     {
@@ -53,7 +56,16 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     {
         base.Added(uid, component, gameRule, args);
         SetCodewords(component, args.RuleEntity);
+        InitDynamic(uid, component); // SS220 Dynamics
     }
+
+    // SS220 TraitorDynamics start
+    protected override void Ended(EntityUid uid, TraitorRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+    {
+        base.Ended(uid, component, gameRule, args);
+        _dynamics.RemoveDynamic();
+    }
+    // SS220 TraitorDynamics end
 
     private void AfterEntitySelected(Entity<TraitorRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
@@ -193,7 +205,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         Note[]? code = null;
 
         Log.Debug($"MakeTraitor {ToPrettyString(traitor)} - Uplink add");
-        var uplinked = _uplink.AddUplink(traitor, startingBalance, pda, true);
+        var uplinked = _uplink.AddUplink(traitor, startingBalance, pda, true, true); // SS220 Dynamics
 
         if (pda is not null && uplinked)
         {
@@ -240,6 +252,13 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             sb.AppendLine(Loc.GetString("traitor-role-uplink-code", ("code", string.Join("-", uplinkCode).Replace("sharp", "#"))));
         else
             sb.AppendLine(Loc.GetString("traitor-role-uplink-implant"));
+        // SS220 DynamicTraitor begin
+        var dynamic = _dynamics.GetCurrentDynamic();
+        if (dynamic != null && _prototype.TryIndex(dynamic, out var dynamicProto))
+        {
+            sb.AppendLine(Loc.GetString("dynamic-supply-level", ("dynamic", Loc.GetString(dynamicProto.Name))));
+        }
+        // SS220 DynamicTraitor end
 
 
         return sb.ToString();
@@ -275,4 +294,31 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
 
         return traitors;
     }
+
+    // SS220 Dynamics begin
+    private void InitDynamic(EntityUid ent, TraitorRuleComponent? rule)
+    {
+        if (!Resolve(ent, ref rule))
+            return;
+
+        if (!rule.UseDynamics)
+            return;
+
+        if (rule.Dynamic != null)
+        {
+            _dynamics.SetDynamic(rule.Dynamic);
+            return;
+        }
+
+        var dynamic = _dynamics.GetCurrentDynamic();
+        if (dynamic != null)
+        {
+            _adminLogger.Add(LogType.EventStarted, LogImpact.Low, $"Can't set random dynamic because it's already was setted");
+            return;
+        }
+
+        _dynamics.SetRandomDynamic();
+        return;
+    }
+    // SS220 Dynamics end
 }
