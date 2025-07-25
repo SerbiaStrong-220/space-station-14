@@ -219,6 +219,17 @@
   - UplinkImplants
 
 - type: listing
+  id: AntiDropImplanter
+  name: uplink-anti-drop-implanter-name
+  description: uplink-anti-drop-implanter-desc
+  icon: {sprite: /Textures/SS220/Interface/Actions/implants.rsi, state: antidrop}
+  productEntity: AntiDropImplanter
+  cost:
+    Telecrystal: 5
+  categories:
+  - UplinkImplants
+
+- type: listing
   id: ClothingHeadHelmetSwatSyndicate
   name: uplink-helmet-swat-syndicate-name
   description: uplink-helmet-swat-syndicate-desc

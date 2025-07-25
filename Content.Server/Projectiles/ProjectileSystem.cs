@@ -36,7 +36,9 @@ public sealed class ProjectileSystem : SharedProjectileSystem
 
         var target = args.OtherEntity;
         // it's here so this check is only done once before possible hit
-        var attemptEv = new ProjectileReflectAttemptEvent(uid, component, false);
+        // ss220 add user for shooting start
+        var attemptEv = new ProjectileReflectAttemptEvent(uid, target, component, false);
+        // ss220 add user for shooting end
         RaiseLocalEvent(target, ref attemptEv);
         if (attemptEv.Cancelled)
         {
