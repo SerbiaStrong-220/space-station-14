@@ -11,4 +11,4 @@
         - ReagentId: FemboyMilk
           Quantity: 100
   - type: Sprite
-    sprite: MetaFlud/Objects/Consumable/Drinks/femboymilk.rsi
+    sprite: MetaFlud/Consumable/Drinks/femboymilk.rsi
