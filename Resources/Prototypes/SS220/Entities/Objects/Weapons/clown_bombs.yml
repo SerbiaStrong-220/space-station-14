@@ -1,0 +1,152 @@
+- type: entity
+  abstract: true
+  parent: BasePlasticExplosive
+  id: CLKingClownBase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Bombs/clown.rsi
+    state: icon
+    layers:
+    - state: icon
+      map: ["base"]
+  - type: OnUseTimerTrigger
+    delay: 5
+    delayOptions: [5, 10, 15, 30, 60, 120]
+    initialBeepDelay: 0
+    beepSound: /Audio/Machines/Nuke/general_beep.ogg
+    startOnStick: true
+    canToggleStartOnStick: true
+  - type: TriggerOnSignal
+  - type: DeviceLinkSink
+    ports:
+      - Trigger
+  - type: DeleteOnTrigger
+
+- type: entity
+  parent: CLKingClownBase
+  id: CLPacific
+  name: birthday present
+  description: In the world of fun, let's say no to violence.
+  components:
+  - type: SmokeOnTrigger
+    duration: 15
+    spreadAmount: 50
+    smokePrototype: Foam
+    solution:
+      reagents:
+      - ReagentId: Pax
+        Quantity: 30
+
+- type: entity
+  parent: BaseItem
+  id: CLClusterFlash
+  name: the nerves of the king
+  description: It's going to be an amazing show!
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Bombs/c4gift.rsi
+    state: icon
+  - type: ScatteringGrenade
+    fillPrototype: GrenadeFlashBang
+    capacity: 10
+    distance: 9
+    velocity: 5
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: Appearance
+  - type: OnUseTimerTrigger
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
+    initialBeepDelay: 0
+    beepInterval: 0.5
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/clusterbang.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Effects/countdown.ogg
+  - type: GenericVisualizer
+    visuals:
+      enum.Trigger.TriggerVisuals.VisualState:
+        enum.ConstructionVisuals.Layer:
+          Primed: { state: primed }
+          Unprimed: { state: icon }
+
+- type: entity
+  parent: CLClusterFlash
+  id: CLClusterBomb
+  name: knurla
+  description: There's going to be a bombastic prank!
+  components:
+  - type: ScatteringGrenade
+    fillPrototype: SyndieTrickyBomb
+    capacity: 20
+    distance: 15
+    velocity: 7
+
+- type: entity
+  parent: CLClusterBomb
+  id: CLClusterClusterBomb
+  name: oi
+  description: Wow.
+  components:
+  - type: ScatteringGrenade
+    fillPrototype: CLClusterBomb
+    capacity: 5
+    distance: 2
+    velocity: 10
+
+- type: entity
+  parent: CLClusterFlash
+  id: CLClusterHole
+  name: officer's hole
+  description: Does it delay or attract...?
+  components:
+  - type: ScatteringGrenade
+    fillPrototype: WhiteholeGrenade
+    capacity: 6
+    distance: 5
+    velocity: 10
+
+- type: entity
+  parent: CLClusterHole
+  id: CLClusterClusterHole
+  suffix: double
+  name: clustered cluster hole
+  description: AS MUCH AS POSSIBLE!!!
+  components:
+  - type: ScatteringGrenade
+    fillPrototype: CLClusterHole
+    capacity: 2
+    distance: 5
+    velocity: 20
+
+- type: entity
+  parent: CLClusterHole
+  id: CLClusterClusterClusterHole
+  suffix: TRIPLE
+  name: clustered clustered cluster hole
+  description: It's not funny anymore...
+  components:
+  - type: ScatteringGrenade
+    fillPrototype: CLClusterClusterHole
+    capacity: 2
+    distance: 100
+    velocity: 100
+
+- type: entity
+  parent: CLClusterFlash
+  id: CLSnapPop
+  name: gap
+  description: Bang!
+  components:
+  - type: ScatteringGrenade
+    fillPrototype: SnapPop
+    capacity: 20
+    distance: 8
+    velocity: 8

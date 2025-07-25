@@ -1,0 +1,24 @@
+- type: entity
+  parent: ClothingMaskClownBase
+  id: ClothingMaskClownKing
+  name: face of the king
+  suffix: Unremoveable
+  description: The king's face is always beautiful.
+  components:
+  - type: Sprite
+    sprite: Clothing/Mask/cluwne.rsi
+  - type: Clothing
+    sprite: Clothing/Mask/cluwne.rsi
+  - type: Unremoveable
+    lockToHands: false
+  - type: AddAccentClothing
+    accent: StutteringAccent
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
