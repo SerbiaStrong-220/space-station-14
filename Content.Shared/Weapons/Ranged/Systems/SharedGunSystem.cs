@@ -393,8 +393,10 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         if (userImpulse && TryComp<PhysicsComponent>(user, out var userPhysics))
         {
-            if (_gravity.IsWeightless(user, userPhysics))
-                CauseImpulse(fromCoordinates, toCoordinates.Value, user, userPhysics);
+            // SS220 felinids recoil begin
+            //if (_gravity.IsWeightless(user, userPhysics))
+            CauseImpulse(fromCoordinates, toCoordinates.Value, user, userPhysics, (gunUid, gun));
+            // SS220 felinids recoil end
         }
     }
 
@@ -518,16 +520,33 @@ public abstract partial class SharedGunSystem : EntitySystem
         CreateEffect(gun, ev, user);
     }
 
-    public void CauseImpulse(EntityCoordinates fromCoordinates, EntityCoordinates toCoordinates, EntityUid user, PhysicsComponent userPhysics)
+    // SS220 felinids recoil begin
+
+    //public void CauseImpulse(EntityCoordinates fromCoordinates, EntityCoordinates toCoordinates, EntityUid user, PhysicsComponent userPhysics)
+    //{
+    //    var fromMap = TransformSystem.ToMapCoordinates(fromCoordinates).Position;
+    //    var toMap = TransformSystem.ToMapCoordinates(toCoordinates).Position;
+    //    var shotDirection = (toMap - fromMap).Normalized();
+
+    //    const float impulseStrength = 25.0f;
+    //    var impulseVector = shotDirection * impulseStrength;
+    //    Physics.ApplyLinearImpulse(user, -impulseVector, body: userPhysics);
+    //}
+
+    public void CauseImpulse(EntityCoordinates fromCoordinates, EntityCoordinates toCoordinates, EntityUid user, PhysicsComponent userPhysics, Entity<GunComponent> gun)
     {
         var fromMap = TransformSystem.ToMapCoordinates(fromCoordinates).Position;
         var toMap = TransformSystem.ToMapCoordinates(toCoordinates).Position;
         var shotDirection = (toMap - fromMap).Normalized();
 
-        const float impulseStrength = 25.0f;
-        var impulseVector =  shotDirection * impulseStrength;
-        Physics.ApplyLinearImpulse(user, -impulseVector, body: userPhysics);
+        var ev = new ModifyShootImpulseEvent((user, userPhysics), gun);
+        RaiseLocalEvent(ev);
+        var impulseVector = shotDirection * gun.Comp.Recoil * ev.ImpulseModifier;
+
+        if (!impulseVector.IsLengthZero())
+            Physics.ApplyLinearImpulse(user, -impulseVector, body: userPhysics);
     }
+    // SS220 felinids recoil end
 
     public void RefreshModifiers(Entity<GunComponent?> gun)
     {
@@ -658,3 +677,19 @@ public sealed partial class SuicideDoAfterEvent : SimpleDoAfterEvent
 {
 }
 ///SS220-new-feature kus end
+
+// SS220 felinids recoil begin
+public sealed partial class ModifyShootImpulseEvent : EntityEventArgs
+{
+    public readonly Entity<PhysicsComponent> Shooter;
+    public readonly Entity<GunComponent> Gun;
+    public float ImpulseModifier;
+
+    public ModifyShootImpulseEvent(Entity<PhysicsComponent> shoter, Entity<GunComponent> gun, float impulseModifier = 1f)
+    {
+        Shooter = shoter;
+        Gun = gun;
+        ImpulseModifier = impulseModifier;
+    }
+}
+// SS220 felinids recoil end
