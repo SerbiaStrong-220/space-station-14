@@ -3,39 +3,33 @@
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.SS220.CultYogg.Pond;
 
 [RegisterComponent, Access(typeof(CultPondSystem))]
-public sealed partial class CultPondComponent : Component
+public sealed partial class CultPondComponent : Component //ToDo_SS220 figure out: do we need this component and shouldn't it be somethink more widely used
 {
     [ViewVariables]
     public bool IsFilled = false;
 
-    [DataField("solutionName", required: true), ViewVariables(VVAccess.ReadWrite)]
+    [DataField("solutionName", required: true)]
     public string Solution;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("ammountToAdd")]
     public FixedPoint2 AmmountToAdd = FixedPoint2.New(10);
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("refillCooldown")]
-    [AutoNetworkedField]
-    public float RefillCooldown = 5f;
+    [DataField, AutoNetworkedField]
+    public TimeSpan RefillCooldown = TimeSpan.FromSeconds(15);
 
     /// <summary>
     /// For the future
     /// </summary>
-    [DataField("rechargeSound")]
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public SoundSpecifier? RechargeSound;
 
-    [ViewVariables(VVAccess.ReadWrite),
-    DataField("nextCharge", customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan? NextCharge;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("reagent")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public ReagentQuantity? Reagent;
 }

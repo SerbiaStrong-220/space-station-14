@@ -8,9 +8,6 @@ namespace Content.Shared.SS220.CultYogg.Altar;
 public sealed partial class CultYoggAltarComponent : Component
 {
     [DataField]
-    public float RitualStartRange = 6f;
-
-    [DataField]
     public TimeSpan RutualTime = TimeSpan.FromSeconds(25);
 
     [DataField]

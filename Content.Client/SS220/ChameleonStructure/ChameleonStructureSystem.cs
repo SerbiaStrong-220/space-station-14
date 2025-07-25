@@ -18,14 +18,6 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
         base.Initialize();
 
         SubscribeLocalEvent<ChameleonStructureComponent, AfterAutoHandleStateEvent>(HandleState);
-
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnProtoReloaded);
-    }
-
-    private void OnProtoReloaded(PrototypesReloadedEventArgs args)
-    {
-        if (args.WasModified<EntityPrototype>())
-            UpdateData();
     }
 
     private void HandleState(Entity<ChameleonStructureComponent> ent, ref AfterAutoHandleStateEvent args)

@@ -52,7 +52,7 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
         if (string.IsNullOrEmpty(protoId) || !_proto.TryIndex(protoId, out EntityPrototype? proto))
             return;
 
-        if (!IsValidTarget(proto, ent.Comp.RequireTag))
+        if (!IsValidTarget(proto, ent.Comp.RequireTag) && !(ent.Comp.ProtoList is not null && ent.Comp.ProtoList.Contains(proto)))
             return;
 
         ent.Comp.Prototype = protoId;

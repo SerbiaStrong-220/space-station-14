@@ -75,6 +75,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedRestrictedItemSystem _sharedRestrictedItemSystem = default!;
     [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
+    [Dependency] private readonly SharedMiGoSystem _migo = default!;
 
     private List<List<string>> _sacraficialTiers = [];
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
@@ -502,9 +503,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         }
         _roundEnd.RequestRoundEnd(DefaultShuttleArriving, null);
 
-        var selectedSong = _audio.GetSound(comp.SummonMusic);
+        var selectedSong = _audio.ResolveSound(comp.SummonMusic);
 
-        if (!string.IsNullOrEmpty(selectedSong))
+        if (selectedSong != null)
             _sound.DispatchStationEventMusic(godUid, selectedSong, StationEventMusicType.Nuke);//should i rename somehow?
 
         comp.Summoned = true;//Win EndText
@@ -659,6 +660,43 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         {
             SummonGod(rule, FindGodSummonCoordinates(rule));
         }
+    }
+    #endregion
+
+    #region SimplifiedEslavement
+
+    public void CheckSimplifiedEslavement()
+    {
+        if (AnyCultistsAlive())
+            return;
+
+        if (!TryGetCultGameRule(out var rule))
+            return;
+
+        if (rule.Value.Comp.Summoned)//if it is endgame and all are MiGos == no new cultists
+            return;
+
+        SendCultAnounce(Loc.GetString("cult-yogg-add-token-no-cultists"));
+        AddSimplifiedEslavement();
+    }
+    public bool AnyCultistsAlive()
+    {
+        var query = EntityQueryEnumerator<CultYoggComponent, MobStateComponent, MindContainerComponent>();
+        while (query.MoveNext(out var _, out _, out var state, out var mind))
+        {
+            if (!mind.HasMind)
+                continue;
+
+            if (state.CurrentState != MobState.Dead)
+                return true;
+        }
+
+        return false;
+    }
+
+    private void AddSimplifiedEslavement()
+    {
+        _migo.SetSimplifiedEslavement(true);//not sure if it should be function or i shoud remove read-write access
     }
     #endregion
 

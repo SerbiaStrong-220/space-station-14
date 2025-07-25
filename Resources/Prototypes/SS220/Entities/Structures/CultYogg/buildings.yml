@@ -300,7 +300,22 @@
     userWhitelist:
       components:
       - CultYogg
+      - MiGo
     requireTag: WhitelistChameleonStructureAirlock
+    protoList:
+     - AirlockChemistry
+     - AirlockMaint
+     - Airlock
+     - AirlockSecurity
+     - AirlockCommand
+     - AirlockVirology
+     - AirlockHydroponics
+     - AirlockFreezer
+     - AirlockEngineering
+     - AirlockMedical
+     - AirlockScience
+     - AirlockCargo
+     - AirlockClown
   - type: CultYoggBuilding
     eraseTime: 3
   - type: HiddenDescription
