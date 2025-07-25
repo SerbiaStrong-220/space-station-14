@@ -4,6 +4,7 @@ using Content.Server.SS220.DarkForces.Saint.Reagent;
 using Content.Shared.EntityEffects;
 using Content.Shared.SS220.EntityEffects.EffectConditions;
 using Content.Shared.SS220.EntityEffects.Effects;
+using Content.Server.SS220.EntityEffects.Effects;
 
 namespace Content.Server.EntityEffects;
 
@@ -17,5 +18,6 @@ public sealed partial class EntityEffectSystem : EntitySystem
         SubscribeLocalEvent<ExecuteEntityEffectEvent<ChemMiGomiceliumEffect>>(OnExecuteChemMiGomicelium);
         SubscribeLocalEvent<ExecuteEntityEffectEvent<ChemRemoveHallucinationsEffect>>(OnExecuteChemRemoveHallucination);
         SubscribeLocalEvent<ExecuteEntityEffectEvent<SaintWaterDrinkEffect>>(OnExecuteSaintWaterDrinkEffect);
+        SubscribeLocalEvent<ExecuteEntityEffectEvent<ChemicalAdaptationEffect>>(OnChemicalAdaptation);
     }
 }
