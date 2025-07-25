@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCuteApron
+  name: Фартук
+  description: Красивый вычурный фартук. Обычно идёт в комплекте с костюмом горничной.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/OuterClothing/apron.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/OuterClothing/apron.rsi
