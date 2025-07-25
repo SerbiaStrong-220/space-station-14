@@ -3,9 +3,6 @@ using Content.Shared.SS220.Contractor;
 
 namespace Content.Server.SS220.Contractor;
 
-/// <summary>
-/// This handles...
-/// </summary>
 public sealed class ContractorTargetSystem : EntitySystem
 {
     [Dependency] private readonly SharedTransformSystem _transform = default!;

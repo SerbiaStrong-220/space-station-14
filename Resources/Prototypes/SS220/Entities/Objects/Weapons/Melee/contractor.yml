@@ -14,7 +14,7 @@
     sprite: SS220/Objects/Weapons/Melee/Contractor/contractor-baton.rsi
     layers:
     - state: contractor_baton_off
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: Item
     size: Small
     sprite: SS220/Objects/Weapons/Melee/Contractor/contractor-baton.rsi
@@ -52,7 +52,7 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: {state: contractor_baton_on}
           False: {state: contractor_baton_off}

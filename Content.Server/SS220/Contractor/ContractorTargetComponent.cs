@@ -34,13 +34,13 @@ public sealed partial class ContractorTargetComponent : Component
     public TimeSpan EnteredPortalTime;
 
     /// <summary>
-    ///     The portal entity, which was opened by contractor on station
+    ///     The portal entity, which contractor opened on station
     /// </summary>
     [DataField]
     public EntityUid? PortalOnStationEntity;
 
     /// <summary>
-    ///     The portal entity, which was opened by contractor on tajpan
+    ///     The portal entity, which contractor opened on tajpan
     /// </summary>
     [DataField]
     public EntityUid? PortalOnTajpanEntity;

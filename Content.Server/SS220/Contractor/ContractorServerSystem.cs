@@ -43,6 +43,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
     [Dependency] private readonly IServerPreferencesManager _pref = default!;
 
     private const float BlockTimeBetweenPortal = 15f; // in seconds
+    private const int MaxAllowedTcPerContract = 8;
 
     public override void Initialize()
     {
@@ -152,7 +153,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         target.CanBeAssigned = false;
 
-        if (target.AmountTc > 8 || ev.TcReward > 8)
+        if (target.AmountTc > MaxAllowedTcPerContract || ev.TcReward > MaxAllowedTcPerContract)
         {
             _adminLogger.Add(
                 LogType.Action,
@@ -194,7 +195,14 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         if (contractorComponent.PortalOnStationEntity != null)
             return;
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, ev.Actor, 5f, new OpenPortalContractorEvent(), ev.Actor, entity)
+        _doAfter.TryStartDoAfter(
+            new DoAfterArgs(
+                EntityManager,
+                ev.Actor,
+                5f,
+                new OpenPortalContractorEvent(),
+                ev.Actor,
+                entity)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
@@ -216,7 +224,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         var telCrystal = _stack.SpawnMultiple("Telecrystal", (int)ev.Amount, coordinates);
 
-        if (telCrystal.FirstOrDefault() is {} tUid)
+        if (telCrystal.FirstOrDefault() is var tUid)
             _hands.PickupOrDrop(ev.Actor, tUid);
 
         contractorComponent.AmountTc -= ev.Amount;
@@ -275,14 +283,14 @@ public sealed class ContractorServerSystem : SharedContractorSystem
     /// <returns></returns>
     private (NetEntity Target, ContractorContract Contract)? GenerateContractForContractor(Entity<ContractorComponent> contractor)
     {
+        if (contractor.Comp.Contracts.Count >= contractor.Comp.MaxAvailableContracts)
+            return null;
+
         var playerPool = GetPlayerPool(contractor);
         _random.Shuffle(playerPool);
 
         foreach (var player in playerPool)
         {
-            if (contractor.Comp.Contracts.Count >= contractor.Comp.MaxAvailableContracts)
-                return null;
-
             if (!_mindSystem.TryGetMind(player, out var mindId, out _))
                 continue;
 
@@ -300,13 +308,14 @@ public sealed class ContractorServerSystem : SharedContractorSystem
                 contractor.Comp.Profiles.TryAdd(GetNetEntity(player), pref);
             }
 
-            return (GetNetEntity(player),
-                new ContractorContract
-                {
-                    Name = metaDataComponent.EntityName,
-                    Job = jobProto,
-                    AmountPositions = GeneratePositionsForTarget(),
-                });
+            var contract = new ContractorContract
+            {
+                Name = metaDataComponent.EntityName,
+                Job = jobProto,
+                AmountPositions = GeneratePositionsForTarget(),
+            };
+
+            return (GetNetEntity(player), contract);
         }
 
         return null;

@@ -43,7 +43,9 @@ public sealed class ContractorPortalServerSystem : EntitySystem
         if (!TryComp<ContractorPdaComponent>(contractorPdaEntity, out var contractorPdaComponent))
             return;
 
-        if (contractorComponent.CurrentContractEntity != GetNetEntity(args.OtherEntity))
+        var targetNetEntity = GetNetEntity(args.OtherEntity);
+
+        if (contractorComponent.CurrentContractEntity != targetNetEntity)
             return;
 
         targetComponent.PortalPosition = Transform(args.OtherEntity).Coordinates;
@@ -51,11 +53,11 @@ public sealed class ContractorPortalServerSystem : EntitySystem
 
         contractorComponent.CurrentContractEntity = null;
         contractorComponent.CurrentContractData = null;
-        contractorComponent.Contracts.Remove(GetNetEntity(args.OtherEntity));
+        contractorComponent.Contracts.Remove(targetNetEntity);
 
         contractorPdaComponent.CurrentContractEntity = null;
         contractorPdaComponent.CurrentContractData = null;
-        contractorPdaComponent.Contracts.Remove(GetNetEntity(args.OtherEntity));
+        contractorPdaComponent.Contracts.Remove(targetNetEntity);
 
         var needsPortalEntity = targetComponent.PortalOnStationEntity;
 
@@ -80,7 +82,7 @@ public sealed class ContractorPortalServerSystem : EntitySystem
         contractorComponent.Reputation += contractorComponent.ReputationAward;
         contractorComponent.AmountTc += targetComponent.AmountTc;
         contractorComponent.ContractsCompleted++;
-        contractorComponent.Profiles.Remove(GetNetEntity(args.OtherEntity));
+        contractorComponent.Profiles.Remove(targetNetEntity);
 
         _uiSystem.ServerSendUiMessage(contractorComponent.PdaEntity!.Value, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
 

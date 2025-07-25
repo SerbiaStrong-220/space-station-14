@@ -1,10 +1,8 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.SS220.CriminalRecords.UI;
-using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Contractor;
 using JetBrains.Annotations;
-using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
@@ -15,7 +13,6 @@ namespace Content.Client.SS220.Contractor.UI;
 [UsedImplicitly]
 public sealed class ContractorBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private ContractorPDAMenu? _menu;
@@ -65,20 +62,20 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         _menu.OpenCentered();
 
-        if (_playerManager.LocalSession?.AttachedEntity == null)
+        if (PlayerManager.LocalSession?.AttachedEntity == null)
             return;
 
         if (_contractorPdaComponent.PdaOwner == null)
             return;
 
-        var group = new ButtonGroup(false);
+        var group = new ButtonGroup();
 
         _menu.ContractsButton.Group = group;
         _menu.HubButton.Group = group;
 
         UpdateStats();
 
-        UpdateContracts(_playerManager.LocalSession.AttachedEntity.Value);
+        UpdateContracts(PlayerManager.LocalSession.AttachedEntity.Value);
         UpdateHub(_contractorPdaComponent.AvailableItems);
     }
 
@@ -150,14 +147,13 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         var contracts = _contractorComponent!.Contracts;
 
-        if (_contractorPdaComponent.PdaOwner != EntMan.GetNetEntity(player))
-            return;
+        //if (_contractorPdaComponent.PdaOwner != EntMan.GetNetEntity(player))
+            //return;
 
         foreach (var contract in contracts)
         {
             AddContract(contract.Key, contract.Value);
         }
-
     }
 
     private void AddContract(NetEntity target, ContractorContract contract)
@@ -376,7 +372,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         foreach (var item in shopItems)
         {
-            var protoItem = _prototypeManager.Index<EntityPrototype>(item.Key);
+            var protoItem = _prototypeManager.Index(item.Key);
 
             var shopItemContainer = new BoxContainer
             {
@@ -399,8 +395,6 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             var itemIcon = new EntityPrototypeView
             {
                 Scale = new Vector2(1.4f, 1.4f),
-                MinSize = new Vector2(32, 32),
-                MaxSize = new Vector2(50, 50),
                 VerticalAlignment = Control.VAlignment.Center,
                 HorizontalAlignment = Control.HAlignment.Left,
             };
@@ -474,7 +468,6 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         _menu.ContractorTopLabel.Text = Loc.GetString("contractor-uplink-available-contracts");
         _menu.HubPanel.Visible = false;
         _menu.ContractsListPanel.Visible = true;
-
     }
 
     public void OnHubButtonPressed()
@@ -507,10 +500,10 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_menu == null)
             return;
 
-        if (_contractorComponent == null || _contractorComponent.AmountTc <= 0)
+        if (EntMan.GetEntity(_contractorPdaComponent.PdaOwner) != PlayerManager.LocalEntity)
             return;
 
-        if (EntMan.GetEntity(_contractorPdaComponent.PdaOwner) != PlayerManager.LocalEntity)
+        if (_contractorComponent == null || _contractorComponent.AmountTc <= 0)
             return;
 
         _withdrawWindow?.Close();
@@ -563,6 +556,4 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         _withdrawWindow.Contents.AddChild(mainContainer);
         _withdrawWindow.OpenCentered();
     }
-
-
 }

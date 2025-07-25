@@ -1,8 +1,11 @@
 using Content.Shared.FixedPoint;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Contractor;
 
 [RegisterComponent]
+[NetworkedComponent]
 public sealed partial class ContractorWarpPointComponent : Component
 {
     [DataField]
@@ -15,10 +18,10 @@ public sealed partial class ContractorWarpPointComponent : Component
     public Difficulty Difficulty;
 }
 
-[Serializable]
+[Serializable, NetSerializable]
 public enum Difficulty
 {
     Easy,
     Medium,
-    Hard
+    Hard,
 }
