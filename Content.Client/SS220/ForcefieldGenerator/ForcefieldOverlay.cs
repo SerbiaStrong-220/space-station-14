@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using System.Linq;
 using System.Numerics;
+using Content.Shared.SS220.Forcefield.Components;
 using Content.Shared.SS220.ForcefieldGenerator;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
@@ -68,6 +70,40 @@ public sealed class ForcefieldOverlay : Overlay
             handle.SetTransform(position, rotation);
             handle.UseShader(_shader);
             handle.DrawRect(boxToRender, generatorComp.FieldColor);
+        }
+
+        handle.UseShader(null);
+        handle.SetTransform(Matrix3x2.Identity);
+
+        DrawNewForcefields(args);
+    }
+
+    private void DrawNewForcefields(in OverlayDrawArgs args)
+    {
+        if (ScreenTexture == null)
+            return;
+
+        var handle = args.WorldHandle;
+        var query = _entity.EntityQueryEnumerator<ForcefieldComponent>();
+
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            var verts = comp.Figure.GetTrianglesVerts();
+            if (!verts.Any())
+                continue;
+
+            var (pos, rot) = _transform.GetWorldPositionRotation(uid);
+
+            var reference = args.Viewport.WorldToLocal(pos);
+            reference.X = -reference.X;
+
+            _shader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
+            _shader.SetParameter("reference", reference);
+            _shader.SetParameter("visibility", 0.3f);
+
+            handle.SetTransform(pos, rot);
+            handle.UseShader(_shader);
+            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, verts.ToList(), Color.SkyBlue);
         }
 
         handle.UseShader(null);
