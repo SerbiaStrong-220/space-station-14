@@ -7,6 +7,7 @@ using Content.Shared.PowerCell;
 using Content.Shared.Movement.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
+using Content.Shared.SS220.WeaponControl;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -57,5 +58,26 @@ public sealed class RadarConsoleSystem : SharedRadarConsoleSystem
 
             _uiSystem.SetUiState(uid, RadarConsoleUiKey.Key, new NavBoundUserInterfaceState(state));
         }
+
+        //SS220 WeaponControl start
+        if (_uiSystem.HasUi(uid, WeaponControlConsoleUiKey.Key))
+        {
+            NavInterfaceState state;
+            var docks = _console.GetAllDocks();
+
+            if (coordinates != null && angle != null)
+            {
+                state = _console.GetNavState(uid, docks, coordinates.Value, angle.Value);
+            }
+            else
+            {
+                state = _console.GetNavState(uid, docks);
+            }
+
+            state.RotateWithEntity = !component.FollowEntity;
+
+            _uiSystem.SetUiState(uid, WeaponControlConsoleUiKey.Key, new NavBoundUserInterfaceState(state));
+        }
+        //SS220 WeaponControl end
     }
 }
