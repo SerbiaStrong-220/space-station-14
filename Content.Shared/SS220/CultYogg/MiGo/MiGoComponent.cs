@@ -71,6 +71,7 @@ public sealed partial class MiGoComponent : Component
     [ViewVariables]
     public TimeSpan HealingEffectTime = TimeSpan.FromSeconds(15);
 
+    #region Building
     /// <summary>
     /// How long does it take to erect a building
     /// <summary>
@@ -89,6 +90,7 @@ public sealed partial class MiGoComponent : Component
     /// </summary>
     [DataField(required: true)]
     public EntityWhitelist? EraseWhitelist = new();
+    #endregion
 
     #region Astral
     /// <summary>
@@ -164,6 +166,7 @@ public enum MiGoTimerVisualLayers : byte
     Digit1,
     Digit2
 }
+
 [Serializable, NetSerializable]
 public enum MiGoVisual
 {

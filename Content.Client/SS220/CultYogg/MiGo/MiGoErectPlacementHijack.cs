@@ -55,16 +55,20 @@ namespace Content.Client.SS220.CultYogg.MiGo
             base.StartHijack(manager);
             if (_prototype is null)
                 return;
+
             var entityProto = _prototypeManager.Index(_prototype.ResultProtoId);
             if (!entityProto.TryGetComponent<SpriteComponent>(out var sprite, _componentFactory))
                 return;
+
             if (sprite?.BaseRSI is null)
                 return;
+
             var textures = new List<IDirectionalTextureProvider>();
             foreach (var layer in sprite.AllLayers)
             {
                 if (layer?.ActualRsi is null || !layer.ActualRsi.TryGetState(layer.RsiState, out var state))
                     continue;
+
                 textures.Add(state);
             }
             manager.CurrentTextures = textures;
