@@ -216,7 +216,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         }
     }
 
-    private EntityCoordinates? SelectRandomTileInRange(TransformComponent userXform, float radius)
+    public EntityCoordinates? SelectRandomTileInRange(TransformComponent userXform, float radius) //ss220 add taro cards
     {
         var userCoords = _xform.ToMapCoordinates(userXform.Coordinates);
         _targetGrids.Clear();
