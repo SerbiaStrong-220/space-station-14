@@ -14,7 +14,7 @@ public sealed partial class EntityEffectSystem : EntitySystem
         SubscribeLocalEvent<CheckEntityEffectConditionEvent<HasComponentsCondition>>(OnCheckComponentCondition);
 
         SubscribeLocalEvent<ExecuteEntityEffectEvent<ChemElixirOfLiberationEffect>>(OnExecuteChemElixirOfLiberation);
-        SubscribeLocalEvent<ExecuteEntityEffectEvent<ChemMiGomiceliumEffect>>(OnExecuteChemMiGomicelium);
+        SubscribeLocalEvent<ExecuteEntityEffectEvent<ChemMiGomyceliumEffect>>(OnExecuteChemMyGomicelium);
         SubscribeLocalEvent<ExecuteEntityEffectEvent<ChemRemoveHallucinationsEffect>>(OnExecuteChemRemoveHallucination);
         SubscribeLocalEvent<ExecuteEntityEffectEvent<SaintWaterDrinkEffect>>(OnExecuteSaintWaterDrinkEffect);
     }
