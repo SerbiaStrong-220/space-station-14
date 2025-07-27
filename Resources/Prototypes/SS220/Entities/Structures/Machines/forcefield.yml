@@ -12,8 +12,7 @@
     figure: !type:ForcefieldParabola
     density: 100
     collisionMask:
-    - Impassable
-    - BulletImpassable
+    - None
     collisionLayer:
     - BulletImpassable
   - type: Clickable
@@ -32,8 +31,7 @@
     fieldFigure: !type:ForcefieldParabola
     fieldDensity: 100
     fieldCollisionMask:
-    - Impassable
-    - BulletImpassable
+    - None
     fieldCollisionLayer:
     - BulletImpassable
   - type: ForcefieldGeneratorVisuals

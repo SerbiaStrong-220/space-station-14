@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Damage;
 using Content.Shared.SS220.Forcefield.Components;
+using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Content.Server.SS220.Forcefield.Systems;
 public sealed partial class ForcefieldSystem : EntitySystem
 {
     [Dependency] private readonly FixtureSystem _fixture = default!;
+    [Dependency] private readonly PhysicsSystem _physics = default!;
 
     public override void Initialize()
     {
@@ -85,6 +87,7 @@ public sealed partial class ForcefieldSystem : EntitySystem
             );
         }
 
+        _physics.SetCanCollide(entity, true);
         _fixture.FixtureUpdate(entity, manager: fixtures);
     }
 }
