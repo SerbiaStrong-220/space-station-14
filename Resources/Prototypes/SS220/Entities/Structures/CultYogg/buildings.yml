@@ -151,6 +151,11 @@
     interfaces:
       enum.ChameleonStructureUiKey.Key:
         type: ChameleonStructureBoundUserInterface
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-chameleon-structure-cultyogg
+      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
+      - CultYoggRole
   - type: Tag
     tags:
       - Structure
