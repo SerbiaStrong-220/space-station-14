@@ -105,8 +105,8 @@
 - type: entity
   parent: BaseMaterialDoor
   id: CultYoggDoor
-  suffix: CultYogg
-  name: cursed door
+  suffix: CultYogg, secret door
+  name: cursed secreddoor
   description: Think twice before opening it.
   components:
   - type: Sprite
@@ -138,10 +138,24 @@
         acts: ["Destruction"]
   - type: CultYoggBuilding
     eraseTime: 3
+  - type: ChameleonStructure
+    userWhitelist:
+      components:
+      - CultYogg
+      - MiGo
+    requireTag: WhitelistChameleonStructureSecretDoor
+    protoList:
+     - SolidSecretDoor
+     - SolidSecretReinforcedDoor
+  - type: UserInterface
+    interfaces:
+      enum.ChameleonStructureUiKey.Key:
+        type: ChameleonStructureBoundUserInterface
   - type: Tag
     tags:
       - Structure
       - Wall
+      - WhitelistChameleonStructureSecretDoor
 
 - type: entity
   parent: Bed
