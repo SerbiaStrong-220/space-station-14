@@ -9,66 +9,29 @@ using System.Numerics;
 
 namespace Content.Shared.SS220.Forcefield.Systems;
 
-public sealed class SharedForcefieldSystem : EntitySystem
+public abstract class SharedForcefieldSystem : EntitySystem
 {
-    [Dependency] private readonly FixtureSystem _fixture = default!;
-
-    public override void Initialize()
-    {
-        SubscribeLocalEvent<ForcefieldComponent, MapInitEvent>(OnMapInit);
-    }
-
-    private void OnMapInit(Entity<ForcefieldComponent> entity, ref MapInitEvent args)
-    {
-        RefreshFixtures(entity.Owner);
-    }
-
     public void RefreshFigure(Entity<ForcefieldComponent> entity)
     {
         entity.Comp.Figure.Refresh();
         Dirty(entity);
+
+        if (TryComp<FixturesComponent>(entity, out var fixtures))
+            RefreshFixtures((entity, entity.Comp, fixtures));
     }
 
-    public void RefreshFixtures(Entity<ForcefieldComponent?, FixturesComponent?> entity)
+    public virtual void RefreshFixtures(Entity<ForcefieldComponent?, FixturesComponent?> entity)
     {
-        if (!Resolve(entity, ref entity.Comp1) ||
-            !Resolve(entity, ref entity.Comp2))
-            return;
-
-        RefreshFigure((entity, entity.Comp1));
-        var forcefield = entity.Comp1;
-        var fixtures = entity.Comp2;
-
-        foreach (var fixture in fixtures.Fixtures)
-            _fixture.DestroyFixture(entity, fixture.Key, false, manager: fixtures);
-
-        var shapes = forcefield.Figure.GetShapes();
-        for (var i = 0; i < shapes.Count(); i++)
-        {
-            var shape = shapes.ElementAt(i);
-            _fixture.TryCreateFixture(
-            entity,
-            shape,
-            $"shape{i + 1}",
-            density: forcefield.Destiny,
-            collisionLayer: forcefield.CollisionLayer,
-            collisionMask: forcefield.CollisionMask,
-            manager: fixtures,
-            updates: false
-            );
-        }
-
-        _fixture.FixtureUpdate(entity, manager: fixtures);
     }
 
-    public static Vector2[] GetParabolaPoints(float length, float height, Angle angle = default, int segments = 64)
+    public static Vector2[] GetParabolaPoints(float width, float height, Angle angle = default, int segments = 64)
     {
         var points = new List<Vector2>();
-        var halfLength = length / 2f;
-        var startX = -halfLength;
-        var endX = halfLength;
+        var halfWidth = width / 2f;
+        var startX = -halfWidth;
+        var endX = halfWidth;
 
-        var a = -4f * height / (length * length);
+        var a = -4f * height / (width * width);
         var rotationMatrix = Matrix3x2.CreateRotation((float)angle.Theta);
 
         for (var i = 0; i <= segments; i++)
@@ -88,6 +51,7 @@ public sealed class SharedForcefieldSystem : EntitySystem
 
 public interface IForcefieldFigure
 {
+    bool Dirty { get; set; }
     void Refresh();
     IEnumerable<IPhysShape> GetShapes();
     IEnumerable<Vector2> GetTrianglesVerts();
@@ -98,38 +62,93 @@ public interface IForcefieldFigure
 public sealed partial class ForcefieldParabola : IForcefieldFigure
 {
     [DataField]
-    public float Length = 4f;
+    public float Width
+    {
+        get => _width;
+        set
+        {
+            _width = value;
+            Dirty = true;
+        }
+    }
+    private float _width = 4f;
 
     [DataField]
-    public float Height = 0.5f;
+    public float Height
+    {
+        get => _height;
+        set
+        {
+            _height = value;
+            Dirty = true;
+        }
+    }
+    private float _height = 0.5f;
 
     [DataField]
-    public float Width = 0.33f;
+    public float Thickness
+    {
+        get => _thickness;
+        set
+        {
+            _thickness = value;
+            Dirty = true;
+        }
+    }
+    private float _thickness = 0.33f;
 
     [DataField]
-    public Angle Angle = default;
+    public Angle Angle
+    {
+        get => _angle;
+        set
+        {
+            _angle = value;
+            Dirty = true;
+        }
+    }
+    private Angle _angle = default;
 
     [DataField]
-    public Vector2 Offset = default;
+    public Vector2 Offset
+    {
+        get => _offset;
+        set
+        {
+            _offset = value;
+            Dirty = true;
+        }
+    }
+    private Vector2 _offset = default;
 
     [DataField]
-    public int Segments = 64;
+    public int Segments
+    {
+        get => _segments;
+        set
+        {
+            _segments = value;
+            Dirty = true;
+        }
+    }
+    private int _segments = 32;
 
+    public bool Dirty { get; set; }
     public Vector2[] InnerPoints { get; private set; } = [];
     public Vector2[] OuterPoints { get; private set; } = [];
 
     public ForcefieldParabola(
-        float length,
-        float height,
         float width,
+        float height,
+        float thickness,
         Angle angle = default,
         Vector2 offset = default,
-        int segments = 64
+        int segments = 32
     )
     {
-        Length = length;
-        Height = height;
         Width = width;
+        Height = height;
+        Thickness = thickness;
         Angle = angle;
         Offset = offset;
         Segments = segments;
@@ -144,37 +163,39 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
 
     public void Refresh()
     {
+        var direction = Angle.Opposite().ToWorldVec();
+
         var vertex = new Vector2(0, Height);
-        var right = new Vector2(Length / 2f, 0);
+        var right = new Vector2(Width / 2f, 0);
         var rightToVertexNormal = (right - vertex).Normalized();
         var perp = new Vector2(-rightToVertexNormal.Y, rightToVertexNormal.X);
 
-        var lengthOffset = perp.X * Width;
-        var heightOffset = (1 - perp.Y) * Width / 2;
-        var directionOffset = perp.Y * Width / 2;
+        var widthOffset = perp.X * Thickness;
+        var heightOffset = (1 - perp.Y) * Thickness / 2;
+        var directionOffset = direction * perp.Y * Thickness / 2;
 
-        var direction = Angle.Opposite().ToWorldVec();
-
-        var innerLength = Length - lengthOffset;
+        var innerWidth = Width - widthOffset;
         var innerHeight = Height - heightOffset;
-        var innerOffset = Offset - direction * directionOffset;
+        var innerOffset = Offset - directionOffset;
 
-        var innerPoints = SharedForcefieldSystem.GetParabolaPoints(innerLength, innerHeight, Angle, Segments);
+        var innerPoints = SharedForcefieldSystem.GetParabolaPoints(innerWidth, innerHeight, Angle, Segments);
         InnerPoints = [.. innerPoints.Select(x => x + innerOffset)];
 
-        var outerLength = Length + lengthOffset;
+        var outerWidth = Width + widthOffset;
         var outerHeight = Height + heightOffset;
-        var outerOffset = Offset + direction * directionOffset;
+        var outerOffset = Offset + directionOffset;
 
-        var outerPoints = SharedForcefieldSystem.GetParabolaPoints(outerLength, outerHeight, Angle, Segments);
+        var outerPoints = SharedForcefieldSystem.GetParabolaPoints(outerWidth, outerHeight, Angle, Segments);
         OuterPoints = [.. outerPoints.Select(x => x + outerOffset)];
+
+        Dirty = false;
     }
 
     public IEnumerable<IPhysShape> GetShapes()
     {
         var result = new List<IPhysShape>();
 
-        for (var i = 0; i < Segments - 1; i++)
+        for (var i = 0; i < Segments; i++)
         {
             var shape = new PolygonShape();
             shape.Set(new List<Vector2>([InnerPoints[i], OuterPoints[i], OuterPoints[i + 1], InnerPoints[i + 1]]));
@@ -189,7 +210,7 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
     {
         var verts = new List<Vector2>();
 
-        for (var i = 0; i < Segments - 1; i++)
+        for (var i = 0; i < Segments; i++)
         {
             verts.Add(InnerPoints[i]);
             verts.Add(OuterPoints[i]);
