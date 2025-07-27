@@ -1,12 +1,13 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Damage;
 using Content.Shared.SS220.Forcefield.Components;
-using Content.Shared.SS220.Forcefield.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using System.Linq;
 
 namespace Content.Server.SS220.Forcefield.Systems;
 
-public sealed partial class ForcefieldSystem : SharedForcefieldSystem
+public sealed partial class ForcefieldSystem : EntitySystem
 {
     [Dependency] private readonly FixtureSystem _fixture = default!;
 
@@ -15,6 +16,7 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         base.Initialize();
 
         SubscribeLocalEvent<ForcefieldComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ForcefieldComponent, DamageChangedEvent>(OnDamageChange);
     }
 
     public override void Update(float frameTime)
@@ -36,10 +38,26 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         RefreshFigure(entity);
     }
 
-    public override void RefreshFixtures(Entity<ForcefieldComponent?, FixturesComponent?> entity)
+    private void OnDamageChange(Entity<ForcefieldComponent> entity, ref DamageChangedEvent args)
     {
-        base.RefreshFixtures(entity);
+        if (entity.Comp.FieldOwner is { } owner)
+        {
+            var ev = new ForcefieldDamageChangedEvent(entity, args);
+            RaiseLocalEvent(GetEntity(owner), ev);
+        }
+    }
 
+    public void RefreshFigure(Entity<ForcefieldComponent> entity)
+    {
+        entity.Comp.Figure.Refresh();
+        Dirty(entity);
+
+        if (TryComp<FixturesComponent>(entity, out var fixtures))
+            RefreshFixtures((entity, entity.Comp, fixtures));
+    }
+
+    public void RefreshFixtures(Entity<ForcefieldComponent?, FixturesComponent?> entity)
+    {
         if (!Resolve(entity, ref entity.Comp1) ||
             !Resolve(entity, ref entity.Comp2))
             return;
@@ -51,14 +69,15 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
             _fixture.DestroyFixture(entity, fixture.Key, false, manager: fixtures);
 
         var shapes = forcefield.Figure.GetShapes();
+        var density = forcefield.Density / shapes.Count();
         for (var i = 0; i < shapes.Count(); i++)
         {
             var shape = shapes.ElementAt(i);
             _fixture.TryCreateFixture(
             entity,
             shape,
-            $"shape{i + 1}",
-            density: forcefield.Destiny,
+            $"shape{i}",
+            density: density,
             collisionLayer: forcefield.CollisionLayer,
             collisionMask: forcefield.CollisionMask,
             manager: fixtures,
@@ -68,4 +87,10 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
 
         _fixture.FixtureUpdate(entity, manager: fixtures);
     }
+}
+
+public sealed class ForcefieldDamageChangedEvent(Entity<ForcefieldComponent> forcefield, DamageChangedEvent ev) : EntityEventArgs
+{
+    public Entity<ForcefieldComponent> Forcefield = forcefield;
+    public DamageChangedEvent Event = ev;
 }

@@ -1,53 +1,10 @@
-
-using Content.Shared.SS220.Forcefield.Components;
-using Robust.Shared.Physics;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Robust.Shared.Physics.Collision.Shapes;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Serialization;
 using System.Linq;
 using System.Numerics;
 
-namespace Content.Shared.SS220.Forcefield.Systems;
-
-public abstract class SharedForcefieldSystem : EntitySystem
-{
-    public void RefreshFigure(Entity<ForcefieldComponent> entity)
-    {
-        entity.Comp.Figure.Refresh();
-        Dirty(entity);
-
-        if (TryComp<FixturesComponent>(entity, out var fixtures))
-            RefreshFixtures((entity, entity.Comp, fixtures));
-    }
-
-    public virtual void RefreshFixtures(Entity<ForcefieldComponent?, FixturesComponent?> entity)
-    {
-    }
-
-    public static Vector2[] GetParabolaPoints(float width, float height, Angle angle = default, int segments = 64)
-    {
-        var points = new List<Vector2>();
-        var halfWidth = width / 2f;
-        var startX = -halfWidth;
-        var endX = halfWidth;
-
-        var a = -4f * height / (width * width);
-        var rotationMatrix = Matrix3x2.CreateRotation((float)angle.Theta);
-
-        for (var i = 0; i <= segments; i++)
-        {
-            var x = MathHelper.Lerp(startX, endX, (float)i / segments);
-            var y = a * x * x + height;
-
-            var point = new Vector2(x, y);
-            point = Vector2.Transform(point, rotationMatrix);
-
-            points.Add(point);
-        }
-
-        return [.. points];
-    }
-}
+namespace Content.Shared.SS220.Forcefield;
 
 public interface IForcefieldFigure
 {
@@ -168,24 +125,24 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
         var vertex = new Vector2(0, Height);
         var right = new Vector2(Width / 2f, 0);
         var rightToVertexNormal = (right - vertex).Normalized();
-        var perp = new Vector2(-rightToVertexNormal.Y, rightToVertexNormal.X);
+        var parabolasOffset = new Vector2(-rightToVertexNormal.Y, rightToVertexNormal.X);
 
-        var widthOffset = perp.X * Thickness;
-        var heightOffset = (1 - perp.Y) * Thickness / 2;
-        var directionOffset = direction * perp.Y * Thickness / 2;
+        var widthOffset = parabolasOffset.X * Thickness;
+        var heightOffset = (1 - parabolasOffset.Y) * Thickness / 2;
+        var directionOffset = direction * parabolasOffset.Y * Thickness / 2;
 
         var innerWidth = Width - widthOffset;
         var innerHeight = Height - heightOffset;
         var innerOffset = Offset - directionOffset;
 
-        var innerPoints = SharedForcefieldSystem.GetParabolaPoints(innerWidth, innerHeight, Angle, Segments);
+        var innerPoints = GetParabolaPoints(innerWidth, innerHeight, Angle, Segments);
         InnerPoints = [.. innerPoints.Select(x => x + innerOffset)];
 
         var outerWidth = Width + widthOffset;
         var outerHeight = Height + heightOffset;
         var outerOffset = Offset + directionOffset;
 
-        var outerPoints = SharedForcefieldSystem.GetParabolaPoints(outerWidth, outerHeight, Angle, Segments);
+        var outerPoints = GetParabolaPoints(outerWidth, outerHeight, Angle, Segments);
         OuterPoints = [.. outerPoints.Select(x => x + outerOffset)];
 
         Dirty = false;
@@ -222,5 +179,29 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
         }
 
         return verts;
+    }
+
+    public static Vector2[] GetParabolaPoints(float width, float height, Angle angle = default, int segments = 32)
+    {
+        var points = new List<Vector2>();
+        var halfWidth = width / 2f;
+        var startX = -halfWidth;
+        var endX = halfWidth;
+
+        var a = -4f * height / (width * width);
+        var rotationMatrix = Matrix3x2.CreateRotation((float)angle.Theta);
+
+        for (var i = 0; i <= segments; i++)
+        {
+            var x = MathHelper.Lerp(startX, endX, (float)i / segments);
+            var y = a * x * x + height;
+
+            var point = new Vector2(x, y);
+            point = Vector2.Transform(point, rotationMatrix);
+
+            points.Add(point);
+        }
+
+        return [.. points];
     }
 }

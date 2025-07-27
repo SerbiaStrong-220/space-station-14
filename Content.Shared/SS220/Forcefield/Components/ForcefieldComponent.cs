@@ -1,5 +1,5 @@
-
-using Content.Shared.SS220.Forcefield.Systems;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -13,11 +13,26 @@ public sealed partial class ForcefieldComponent : Component
     public IForcefieldFigure Figure = default;
 
     [DataField, AutoNetworkedField]
-    public float Destiny;
+    public float Density;
 
     [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionLayer>)), AutoNetworkedField]
     public int CollisionLayer;
 
     [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionMask>)), AutoNetworkedField]
     public int CollisionMask;
+
+    [DataField, AutoNetworkedField]
+    public Color Color = Color.LightBlue;
+
+    [DataField, AutoNetworkedField]
+    public float Visibility = 0.1f;
+
+    [DataField, AutoNetworkedField]
+    public NetEntity? FieldOwner;
+
+    [ViewVariables(VVAccess.ReadOnly)]
+    public SoundSpecifier HitSound = new SoundPathSpecifier("/Audio/SS220/Effects/shield/eshild_hit.ogg", new()
+    {
+        Volume = 1.25f
+    });
 }

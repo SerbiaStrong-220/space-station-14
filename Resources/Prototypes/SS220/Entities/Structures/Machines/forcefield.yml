@@ -8,22 +8,19 @@
   components:
   - type: Damageable
     damageContainer: StructuralInorganic
-  - type: ForcefieldSS220
+  - type: Forcefield
+    figure: !type:ForcefieldParabola
+    density: 100
+    collisionMask:
+    - Impassable
+    - BulletImpassable
+    collisionLayer:
+    - BulletImpassable
   - type: Clickable
   - type: Physics
     bodyType: Static
     canCollide: true
   - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-1.5,-0.25,1.5,0.25"
-        density: 100
-        mask:
-        - None
-        layer:
-        - BulletImpassable
 
 - type: entity
   parent: BaseStructure
@@ -31,7 +28,16 @@
   name: генератор силового поля
   description: Генерирует направленное силовое поле, которое препятствует прониканию баллистических снарядов, но не способно сдерживать лазерное оружие.
   components:
-  - type: ForcefieldGeneratorSS220
+  - type: ForcefieldGenerator
+    fieldFigure: !type:ForcefieldParabola
+    fieldDensity: 100
+    fieldCollisionMask:
+    - Impassable
+    - BulletImpassable
+    fieldCollisionLayer:
+    - BulletImpassable
+  - type: ForcefieldGeneratorVisuals
+    powerSteps: 4
   - type: Fixtures
     fixtures:
       fix1:
@@ -59,31 +65,13 @@
     noRot: true
     layers:
       - state: base
-      - state: power_1
-        map: ["powerLight"]
+      - state: power_0
+        map: ["enum.ForcefieldGeneratorVisual.Charge"]
         shader: unshaded
       - state: light_on
-        map: ["activeLight"]
+        map: ["enum.ForcefieldGeneratorVisual.Active"]
         visible: false
         shader: unshaded
-  - type: GenericVisualizer
-    visuals:
-      enum.ForcefieldGeneratorVisual.Active:
-        activeLight:
-          True: {visible: true}
-          False: {visible: false}
-      enum.ForcefieldGeneratorVisual.Power_1:
-        powerLight:
-          True: {state: power_1}
-      enum.ForcefieldGeneratorVisual.Power_2:
-        powerLight:
-          True: {state: power_2}
-      enum.ForcefieldGeneratorVisual.Power_3:
-        powerLight:
-          True: {state: power_3}
-      enum.ForcefieldGeneratorVisual.Power_4:
-        powerLight:
-          True: {state: power_4}
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StrongMetallic

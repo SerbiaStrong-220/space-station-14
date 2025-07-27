@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Numerics;
 using Content.Shared.SS220.Forcefield.Components;
-using Content.Shared.SS220.ForcefieldGenerator;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
@@ -38,52 +37,6 @@ public sealed class ForcefieldOverlay : Overlay
             return;
 
         var handle = args.WorldHandle;
-        var queryEnum = _entity.EntityQueryEnumerator<ForcefieldSS220Component>();
-
-        while (queryEnum.MoveNext(out var uid, out var fieldComp))
-        {
-            if (fieldComp.Generator is not { } generator || !_entity.EntityExists(generator))
-            {
-                continue;
-            }
-
-            if (!_entity.TryGetComponent<ForcefieldGeneratorSS220Component>(generator, out var generatorComp))
-            {
-                continue;
-            }
-
-            var boxToRender = new Box2(
-                new Vector2(-generatorComp.FieldLength / 2, -generatorComp.FieldThickness / 2),
-                new Vector2(generatorComp.FieldLength / 2, generatorComp.FieldThickness / 2)
-            );
-
-            var (position, rotation) = _transform.GetWorldPositionRotation(uid);
-
-            var reference = args.Viewport.WorldToLocal(position);
-            reference.X = -reference.X;
-
-            _shader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
-            _shader.SetParameter("reference", reference);
-            var finalVisibility = Math.Clamp(generatorComp.FieldVisibility, -1f, 1f);
-            _shader.SetParameter("visibility", finalVisibility);
-
-            handle.SetTransform(position, rotation);
-            handle.UseShader(_shader);
-            handle.DrawRect(boxToRender, generatorComp.FieldColor);
-        }
-
-        handle.UseShader(null);
-        handle.SetTransform(Matrix3x2.Identity);
-
-        DrawNewForcefields(args);
-    }
-
-    private void DrawNewForcefields(in OverlayDrawArgs args)
-    {
-        if (ScreenTexture == null)
-            return;
-
-        var handle = args.WorldHandle;
         var query = _entity.EntityQueryEnumerator<ForcefieldComponent>();
 
         while (query.MoveNext(out var uid, out var comp))
@@ -99,7 +52,8 @@ public sealed class ForcefieldOverlay : Overlay
 
             _shader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
             _shader.SetParameter("reference", reference);
-            _shader.SetParameter("visibility", 0.3f);
+            var finalVisibility = Math.Clamp(comp.Visibility, -1f, 1f);
+            _shader.SetParameter("visibility", finalVisibility);
 
             handle.SetTransform(pos, rot);
             handle.UseShader(_shader);
