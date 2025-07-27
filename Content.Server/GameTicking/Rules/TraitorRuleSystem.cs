@@ -40,7 +40,6 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly UplinkSystem _uplink = default!;
     [Dependency] private readonly TraitorDynamicsSystem _dynamics = default!; // SS220 TraitorDynamics
-    [Dependency] private readonly IPrototypeManager _prototype = default!; // SS220 TraitorDynamics
 
     public override void Initialize()
     {
@@ -254,7 +253,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             sb.AppendLine(Loc.GetString("traitor-role-uplink-implant"));
         // SS220 DynamicTraitor begin
         var dynamic = _dynamics.GetCurrentDynamic();
-        if (dynamic != null && _prototype.TryIndex(dynamic, out var dynamicProto))
+        if (dynamic != null && _prototypeManager.TryIndex(dynamic, out var dynamicProto))
         {
             sb.AppendLine(Loc.GetString("dynamic-supply-level", ("dynamic", Loc.GetString(dynamicProto.Name))));
         }
@@ -313,7 +312,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         var dynamic = _dynamics.GetCurrentDynamic();
         if (dynamic != null)
         {
-            _adminLogger.Add(LogType.EventStarted, LogImpact.Low, $"Can't set random dynamic because it's already was setted");
+            Log.Error($"Can't set random dynamic because it's already was setted");
             return;
         }
 

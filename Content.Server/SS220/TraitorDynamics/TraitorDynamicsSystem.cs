@@ -45,7 +45,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     [ValidatePrototypeId<WeightedRandomPrototype>]
     private const string WeightsProto = "WeightedDynamicsList";
 
-    private ProtoId<DynamicPrototype>? CurrentDynamic = null; // prob we should have nullspace entity with comp
+    private ProtoId<DynamicPrototype>? _currentDynamic = null;
 
     public override void Initialize()
     {
@@ -60,10 +60,10 @@ public sealed class TraitorDynamicsSystem : EntitySystem
 
     private void OnStoreFinish(ref StoreDiscountsInitializedEvent ev)
     {
-        if (CurrentDynamic == null)
+        if (_currentDynamic == null)
             return;
 
-        ApplyDynamicPrice(ev.Store, ev.Listings, CurrentDynamic.Value);
+        ApplyDynamicPrice(ev.Store, ev.Listings, _currentDynamic.Value);
     }
 
     private void OnDynamicAdded(DynamicSettedEvent ev)
@@ -109,7 +109,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
 
     private void OnRoundEnded(RoundEndSystemChangedEvent ev)
     {
-        if (!CurrentDynamic.HasValue)
+        if (!_currentDynamic.HasValue)
             return;
 
         RemoveDynamic();
@@ -117,7 +117,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
 
     private void OnDynamicRemove(DynamicRemoveEvent ev)
     {
-        CurrentDynamic = null;
+        _currentDynamic = null;
         ResetDynamicPrices();
     }
 
@@ -194,18 +194,15 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     /// Sets the specified dynamic of DynamicPrototype
     /// </summary>
     /// <param name="proto"> The prototype ID of the dynamic mode </param>
-    public void SetDynamic(string proto)
+    public void SetDynamic(DynamicPrototype dynamicProto)
     {
-        if (!_prototype.TryIndex<DynamicPrototype>(proto, out var dynamicProto, true))
-            return;
-
         var attemptEv = new DynamicSetAttempt(dynamicProto.ID);
         RaiseLocalEvent(attemptEv);
 
         if (attemptEv.Cancelled)
             return;
 
-        CurrentDynamic = dynamicProto;
+        _currentDynamic = dynamicProto;
         _admin.Add(LogType.EventStarted, LogImpact.High, $"Dynamic {dynamicProto.ID} was setted");
 
         _chatManager.SendAdminAnnouncement(Loc.GetString("dynamic-was-set", ("dynamic", dynamicProto.ID)));
@@ -219,13 +216,21 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         dynamicProto.SelectedLoreName = _random.Pick(namesProto.ListNames);
     }
 
+    public void SetDynamic(string proto)
+    {
+        if (!_prototype.TryIndex<DynamicPrototype>(proto, out var dynamicProto, true))
+            return;
+
+        SetDynamic(dynamicProto);
+    }
+
     public void RemoveDynamic()
     {
         var ev = new DynamicRemoveEvent();
         RaiseLocalEvent(ev);
     }
 
-        /// <summary>
+    /// <summary>
     /// Gets a random DynamicPrototype from WeightedRandomPrototype, weeding out unsuitable dynamics
     /// </summary>
     /// <param name="playerCount"> current number of ready players, by this indicator the required number is compared </param>
@@ -290,7 +295,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     /// <returns>installed dynamic</returns>
     public ProtoId<DynamicPrototype>? GetCurrentDynamic()
     {
-        return CurrentDynamic;
+        return _currentDynamic;
     }
 
     public sealed class DynamicSettedEvent : EntityEventArgs
