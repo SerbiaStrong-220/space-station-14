@@ -180,8 +180,13 @@ public sealed class TelepathySystem : EntitySystem
             netSource,
             null
         );
-        if (TryComp(receiverUid, out ActorComponent? actor))
-            _netMan.ServerSendMessage(new MsgChatMessage() { Message = message }, actor.PlayerSession.Channel);
+        if (!TryComp(receiverUid, out ActorComponent? actor))
+            return;
+
+        if (actor.PlayerSession is null)
+            return;
+
+        _netMan.ServerSendMessage(new MsgChatMessage() { Message = message }, actor.PlayerSession.Channel);
     }
 
     private string GetWrappedTelepathyMessage(string messageString, EntityUid? senderUid, ChannelParameters telepathyChannelParameters)
