@@ -10,8 +10,7 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    public List<ProjectileDrawInfo> ProjectilesToDraw = [];
-    public List<HitscanDrawInfo> HitscansToDraw = [];
+    private readonly Dictionary<Type, List<IDrawInfo>> _toDraw = [];
 
     public override void Initialize()
     {
@@ -26,19 +25,24 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
         base.Update(frameTime);
 
         var toDelete = new List<HitscanDrawInfo>();
-        foreach (var info in HitscansToDraw)
+        foreach (var info in GetDrawInfo<HitscanDrawInfo>())
         {
             if (info.EndTime <= _timing.CurTime)
                 toDelete.Add(info);
         }
 
         foreach (var info in toDelete)
-            HitscansToDraw.Remove(info);
+            RemoveDrawInfo(info);
     }
 
     private void OnUpdateProjectiles(ShuttleNavInfoUpdateProjectilesMessage msg)
     {
-        ProjectilesToDraw = [.. msg.List.Select(x => new ProjectileDrawInfo(x.CurCoordinates, x.Info))];
+        ClearDrawInfo<ProjectileDrawInfo>();
+        foreach (var info in msg.List)
+        {
+            var drawInfo = new ProjectileDrawInfo(info.CurCoordinates, info.Info);
+            AddDrawInfo(drawInfo);
+        }
     }
 
     private void OnAddHitscan(ShuttleNavInfoAddHitscanMessage msg)
@@ -51,10 +55,47 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
         if (!info.Enabled)
             return;
 
-        HitscansToDraw.Add(new HitscanDrawInfo(fromCoordinates, toCoordinates, info.Color, info.Width, info.AnimationLength, _timing.CurTime + info.AnimationLength));
+        var drawInfo = new HitscanDrawInfo(fromCoordinates, toCoordinates, info.Color, info.Width, info.AnimationLength, _timing.CurTime + info.AnimationLength);
+        AddDrawInfo(drawInfo);
     }
 
-    public struct ProjectileDrawInfo(MapCoordinates curCoordinates, Color color, float radius)
+    public IEnumerable<T> GetDrawInfo<T>() where T : IDrawInfo
+    {
+        return GetToDrawList<T>().Select(x => (T)x);
+    }
+
+    public void AddDrawInfo<T>(T info) where T : IDrawInfo
+    {
+        var list = GetToDrawList<T>();
+        list.Add(info);
+    }
+
+    public bool RemoveDrawInfo<T>(T info) where T : IDrawInfo
+    {
+        var list = GetToDrawList<T>();
+        return list.Remove(info);
+    }
+
+    public void ClearDrawInfo<T>() where T : IDrawInfo
+    {
+        var list = GetToDrawList<T>();
+        list.Clear();
+    }
+
+    private List<IDrawInfo> GetToDrawList<T>() where T : IDrawInfo
+    {
+        if (!_toDraw.TryGetValue(typeof(T), out var list))
+        {
+            list = [];
+            _toDraw.Add(typeof(T), list);
+        }
+
+        return list;
+    }
+
+    public interface IDrawInfo { }
+
+    public struct ProjectileDrawInfo(MapCoordinates curCoordinates, Color color, float radius) : IDrawInfo
     {
         public MapCoordinates CurCoordinates = curCoordinates;
         public Color Color = color;
@@ -69,7 +110,7 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
         Color color,
         float width,
         TimeSpan animationLength,
-        TimeSpan endTime)
+        TimeSpan endTime) : IDrawInfo
     {
         public MapCoordinates FromCoordinates = fromCoordinates;
         public MapCoordinates ToCoordinates = toCoordinates;

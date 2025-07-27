@@ -361,7 +361,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
     // SS220 Add projectiles & hitscan on shuttle nav begin
     private void DrawProjectiles(DrawingHandleScreen handle, Matrix3x2 worldToView, TransformComponent gridXform, Box2Rotated viewBounds)
     {
-        foreach (var info in _shuttleNavInfo.ProjectilesToDraw)
+        foreach (var info in _shuttleNavInfo.GetDrawInfo<ShuttleNavInfoSystem.ProjectileDrawInfo>())
         {
             if (info.CurCoordinates.MapId != gridXform.MapID ||
                 !viewBounds.Contains(info.CurCoordinates.Position))
@@ -378,7 +378,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
         const float maxColorOnProgressStart = 0.3f;
         const float maxColorOnProgressEnd = 0.6f;
 
-        foreach (var info in _shuttleNavInfo.HitscansToDraw)
+        foreach (var info in _shuttleNavInfo.GetDrawInfo<ShuttleNavInfoSystem.HitscanDrawInfo>())
         {
             var remainingTime = info.EndTime - _gameTiming.CurTime;
             if (remainingTime.TotalMilliseconds <= 0)
