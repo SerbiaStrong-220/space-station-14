@@ -84,3 +84,10 @@
   categories: [ GameRules ]
   components:
   - type: EmergencyShuttleAutoCallRule
+
+- type: entity
+  id: TraitorDynamic
+  parent: Traitor
+  components:
+  - type: TraitorRule
+    useDynamics: true
