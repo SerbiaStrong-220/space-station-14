@@ -103,7 +103,7 @@
       - CultYoggRole
 
 - type: entity
-  parent: BaseMaterialDoorNavMap
+  parent: BaseMaterialDoor
   id: CultYoggDoor
   suffix: CultYogg
   name: cursed door
@@ -138,6 +138,10 @@
         acts: ["Destruction"]
   - type: CultYoggBuilding
     eraseTime: 3
+  - type: Tag
+    tags:
+      - Structure
+      - Wall
 
 - type: entity
   parent: Bed
