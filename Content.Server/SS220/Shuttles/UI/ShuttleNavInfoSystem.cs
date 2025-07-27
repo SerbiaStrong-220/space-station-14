@@ -2,12 +2,14 @@
 using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.SS220.Forcefield.Components;
 using Content.Shared.SS220.Shuttles.UI;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using System.Linq;
+using System.Numerics;
 
 namespace Content.Server.SS220.Shuttles.UI;
 
@@ -27,7 +29,9 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
     {
         base.Update(frameTime);
 
-        UpdateProjectiles();
+        var receivers = GetReceivers();
+        UpdateProjectiles(receivers);
+        UpdateForcefields(receivers);
     }
 
     public override void AddHitscan(MapCoordinates fromCoordinates, MapCoordinates toCoordinates, ShuttleNavHitscanInfo info)
@@ -46,9 +50,9 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
         }
     }
 
-    private void UpdateProjectiles()
+    private void UpdateProjectiles(ICommonSession[]? receivers = null)
     {
-        var receivers = GetReceivers();
+        receivers ??= GetReceivers();
         if (receivers.Length <= 0)
             return;
 
@@ -66,6 +70,35 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
         foreach (var receiver in receivers)
         {
             var ev = new ShuttleNavInfoUpdateProjectilesMessage(list);
+            RaiseNetworkEvent(ev, receiver);
+        }
+    }
+
+    private void UpdateForcefields(ICommonSession[]? receivers = null)
+    {
+        receivers ??= GetReceivers();
+        if (receivers.Length <= 0)
+            return;
+
+        var infos = new List<ShuttleNavForcefieldInfo>();
+        var query = EntityQueryEnumerator<ForcefieldComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            var localVerts = comp.Figure.GetTrianglesVerts();
+            var localToWorld = _transform.GetWorldMatrix(uid);
+            var mapId = _transform.GetMapId(uid);
+
+            var worldVerts = localVerts.Select(x => new MapCoordinates(Vector2.Transform(x, localToWorld), mapId)).ToList();
+            infos.Add(new ShuttleNavForcefieldInfo
+            {
+                Color = comp.Color,
+                TrianglesVerts = worldVerts,
+            });
+        }
+
+        foreach (var receiver in receivers)
+        {
+            var ev = new ShuttleNavInfoUpdateForcefieldsMessage(infos);
             RaiseNetworkEvent(ev, receiver);
         }
     }

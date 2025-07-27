@@ -290,6 +290,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
         // SS220 Add projectiles & hitscan on shuttle nav begin
         var worldToView = worldToShuttle * shuttleToView;
         DrawProjectiles(handle, worldToView, xform, viewBounds);
+        DrawForcefields(handle, worldToView, xform, viewBounds);
         DrawHitscans(handle, worldToView, xform, viewBounds);
         // SS220 Add projectiles & hitscan on shuttle nav end
 
@@ -369,6 +370,28 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
 
             var pos = Vector2.Transform(info.CurCoordinates.Position, worldToView);
             handle.DrawCircle(pos, info.Radius * MinimapScale, info.Color.WithAlpha(0.85f));
+        }
+    }
+
+    private void DrawForcefields(DrawingHandleScreen handle, Matrix3x2 worldToView, TransformComponent gridXform, Box2Rotated viewBounds)
+    {
+        foreach (var info in _shuttleNavInfo.GetDrawInfo<ShuttleNavInfoSystem.ForcefieldDrawInfo>())
+        {
+            var draw = false;
+            var verts = new List<Vector2>();
+            foreach (var coordinate in info.TrianglesVerts)
+            {
+                if (coordinate.MapId == gridXform.MapID &&
+                    viewBounds.Contains(coordinate.Position))
+                    draw = true;
+
+                verts.Add(Vector2.Transform(coordinate.Position, worldToView));
+            }
+
+            if (!draw)
+                continue;
+
+            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, verts, info.Color.WithAlpha(0.6f));
         }
     }
 

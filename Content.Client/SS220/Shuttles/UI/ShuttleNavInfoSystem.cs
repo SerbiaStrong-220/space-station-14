@@ -17,6 +17,7 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
         base.Initialize();
 
         SubscribeNetworkEvent<ShuttleNavInfoUpdateProjectilesMessage>(OnUpdateProjectiles);
+        SubscribeNetworkEvent<ShuttleNavInfoUpdateForcefieldsMessage>(OnUpdateForcefields);
         SubscribeNetworkEvent<ShuttleNavInfoAddHitscanMessage>(OnAddHitscan);
     }
 
@@ -41,6 +42,16 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
         foreach (var info in msg.List)
         {
             var drawInfo = new ProjectileDrawInfo(info.CurCoordinates, info.Info);
+            AddDrawInfo(drawInfo);
+        }
+    }
+
+    private void OnUpdateForcefields(ShuttleNavInfoUpdateForcefieldsMessage mgs)
+    {
+        ClearDrawInfo<ForcefieldDrawInfo>();
+        foreach (var info in mgs.Infos)
+        {
+            var drawInfo = new ForcefieldDrawInfo(info.TrianglesVerts, info.Color);
             AddDrawInfo(drawInfo);
         }
     }
@@ -118,5 +129,11 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
         public float Width = width;
         public TimeSpan AnimationLength = animationLength;
         public TimeSpan EndTime = endTime;
+    }
+
+    public struct ForcefieldDrawInfo(List<MapCoordinates> trianglesVerts, Color color) : IDrawInfo
+    {
+        public List<MapCoordinates> TrianglesVerts = trianglesVerts;
+        public Color Color = color;
     }
 }
