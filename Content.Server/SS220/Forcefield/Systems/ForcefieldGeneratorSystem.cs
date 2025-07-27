@@ -41,7 +41,7 @@ public sealed partial class ForcefieldGeneratorSystem : EntitySystem
             if (comp.Active)
             {
                 _battery.UseCharge(uid, comp.EnergyUpkeep * frameTime);
-                UpdateFieldActivity((uid, comp));
+                UpdateForcefieldActivity((uid, comp));
             }
         }
     }
@@ -77,8 +77,6 @@ public sealed partial class ForcefieldGeneratorSystem : EntitySystem
 
     public void SetActive(Entity<ForcefieldGeneratorComponent> entity, bool active)
     {
-        Log.Debug("Field active: " + active.ToString());
-
         if (active && (!TryComp<BatteryComponent>(entity, out var battery) || battery.CurrentCharge < battery.MaxCharge))
             return;
 
@@ -86,7 +84,7 @@ public sealed partial class ForcefieldGeneratorSystem : EntitySystem
         _pointLight.SetEnabled(entity, active);
 
         UpdateAppearance(entity);
-        UpdateFieldActivity(entity);
+        UpdateForcefieldActivity(entity);
         Dirty(entity);
     }
 
@@ -110,7 +108,7 @@ public sealed partial class ForcefieldGeneratorSystem : EntitySystem
         }
     }
 
-    private void SetFieldEnabled(Entity<ForcefieldGeneratorComponent> entity, bool enabled)
+    private void SetForcefieldEnabled(Entity<ForcefieldGeneratorComponent> entity, bool enabled)
     {
         if (entity.Comp.FieldEnabled == enabled)
             return;
@@ -158,7 +156,7 @@ public sealed partial class ForcefieldGeneratorSystem : EntitySystem
 
     private Entity<ForcefieldComponent> EnsureForcefieldEntity(Entity<ForcefieldGeneratorComponent> entity)
     {
-        if (GetFieldEntity(entity) is { } existing)
+        if (GetForcefieldEntity(entity) is { } existing)
             return existing;
 
         var forcefieldUid = Spawn(entity.Comp.ShieldProto, Transform(entity).Coordinates);
@@ -182,7 +180,7 @@ public sealed partial class ForcefieldGeneratorSystem : EntitySystem
         return (forcefieldUid, forcefieldComp);
     }
 
-    private Entity<ForcefieldComponent>? GetFieldEntity(ForcefieldGeneratorComponent comp)
+    private Entity<ForcefieldComponent>? GetForcefieldEntity(ForcefieldGeneratorComponent comp)
     {
         var uid = GetEntity(comp.FieldEntity);
         if (uid is null)
@@ -197,17 +195,17 @@ public sealed partial class ForcefieldGeneratorSystem : EntitySystem
         return (uid.Value, forcefieldComp);
     }
 
-    private void UpdateFieldActivity(Entity<ForcefieldGeneratorComponent> entity)
+    private void UpdateForcefieldActivity(Entity<ForcefieldGeneratorComponent> entity)
     {
         if (entity.Comp.Active)
         {
             if (TryComp<BatteryComponent>(entity, out var battery) && battery.CurrentCharge > 0)
             {
-                SetFieldEnabled(entity, true);
+                SetForcefieldEnabled(entity, true);
                 return;
             }
         }
 
-        SetFieldEnabled(entity, false);
+        SetForcefieldEnabled(entity, false);
     }
 }

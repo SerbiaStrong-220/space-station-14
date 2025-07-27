@@ -19,6 +19,7 @@ public sealed partial class ForcefieldSystem : EntitySystem
 
         SubscribeLocalEvent<ForcefieldComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ForcefieldComponent, DamageChangedEvent>(OnDamageChange);
+        SubscribeLocalEvent<ForcefieldComponent, MoveEvent>(OnMove);
     }
 
     public override void Update(float frameTime)
@@ -49,8 +50,17 @@ public sealed partial class ForcefieldSystem : EntitySystem
         }
     }
 
+    private void OnMove(Entity<ForcefieldComponent> entity, ref MoveEvent args)
+    {
+        RefreshFigure(entity);
+    }
+
     public void RefreshFigure(Entity<ForcefieldComponent> entity)
     {
+        if (TerminatingOrDeleted(entity))
+            return;
+
+        entity.Comp.Figure.OwnerRotation = Transform(entity).LocalRotation;
         entity.Comp.Figure.Refresh();
         Dirty(entity);
 
@@ -60,6 +70,9 @@ public sealed partial class ForcefieldSystem : EntitySystem
 
     public void RefreshFixtures(Entity<ForcefieldComponent?, FixturesComponent?> entity)
     {
+        if (TerminatingOrDeleted(entity))
+            return;
+
         if (!Resolve(entity, ref entity.Comp1) ||
             !Resolve(entity, ref entity.Comp2))
             return;

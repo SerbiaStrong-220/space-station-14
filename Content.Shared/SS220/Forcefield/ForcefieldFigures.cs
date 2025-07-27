@@ -8,6 +8,7 @@ namespace Content.Shared.SS220.Forcefield;
 
 public interface IForcefieldFigure
 {
+    Angle OwnerRotation { get; set; }
     bool Dirty { get; set; }
     void Refresh();
     IEnumerable<IPhysShape> GetShapes();
@@ -90,6 +91,16 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
     }
     private int _segments = 32;
 
+    public Angle OwnerRotation
+    {
+        get => _ownerRotation;
+        set
+        {
+            _ownerRotation = value;
+            Dirty = true;
+        }
+    }
+    private Angle _ownerRotation = default;
     public bool Dirty { get; set; }
     public Vector2[] InnerPoints { get; private set; } = [];
     public Vector2[] OuterPoints { get; private set; } = [];
@@ -120,7 +131,8 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
 
     public void Refresh()
     {
-        var direction = Angle.Opposite().ToWorldVec();
+        var angle = OwnerRotation + Angle;
+        var direction = angle.Opposite().ToWorldVec();
 
         var vertex = new Vector2(0, Height);
         var right = new Vector2(Width / 2f, 0);
@@ -135,14 +147,14 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
         var innerHeight = Height - heightOffset;
         var innerOffset = Offset - directionOffset;
 
-        var innerPoints = GetParabolaPoints(innerWidth, innerHeight, Angle, Segments);
+        var innerPoints = GetParabolaPoints(innerWidth, innerHeight, angle, Segments);
         InnerPoints = [.. innerPoints.Select(x => x + innerOffset)];
 
         var outerWidth = Width + widthOffset;
         var outerHeight = Height + heightOffset;
         var outerOffset = Offset + directionOffset;
 
-        var outerPoints = GetParabolaPoints(outerWidth, outerHeight, Angle, Segments);
+        var outerPoints = GetParabolaPoints(outerWidth, outerHeight, angle, Segments);
         OuterPoints = [.. outerPoints.Select(x => x + outerOffset)];
 
         Dirty = false;
