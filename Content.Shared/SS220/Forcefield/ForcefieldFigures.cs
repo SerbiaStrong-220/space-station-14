@@ -217,3 +217,134 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
         return [.. points];
     }
 }
+
+[Serializable, NetSerializable]
+[DataDefinition]
+public sealed partial class ForcefieldCircle : IForcefieldFigure
+{
+    [DataField]
+    public float Radius
+    {
+        get => _radius;
+        set
+        {
+            _radius = value;
+            Dirty = true;
+        }
+    }
+    private float _radius = 6f;
+
+    [DataField]
+    public float Thickness
+    {
+        get => _thickness;
+        set
+        {
+            _thickness = value;
+            Dirty = true;
+        }
+    }
+    private float _thickness = 0.33f;
+
+    [DataField]
+    public int Segments
+    {
+        get => _segments;
+        set
+        {
+            _segments = value;
+            Dirty = true;
+        }
+    }
+    private int _segments = 64;
+
+    [DataField]
+    public Vector2 Offset
+    {
+        get => _offset;
+        set
+        {
+            _offset = value;
+            Dirty = true;
+        }
+    }
+    private Vector2 _offset = default;
+
+    public Angle OwnerRotation { get; set; }
+    public bool Dirty { get; set; }
+
+    public Vector2[] InnerPoints { get; private set; } = [];
+    public Vector2[] OuterPoints { get; private set; } = [];
+
+    public void Refresh()
+    {
+        var radiusOffset = Thickness / 2;
+
+        var innerRadius = Radius - radiusOffset;
+        var innerPoints = GetCirclePoints(innerRadius, Segments);
+        InnerPoints = [.. innerPoints.Select(x => x + Offset)];
+
+        var outerRadius = Radius + radiusOffset;
+        var outerPoints = GetCirclePoints(outerRadius, Segments);
+        OuterPoints = [.. outerPoints.Select(x => x + Offset)];
+
+        Dirty = false;
+    }
+
+    public IEnumerable<IPhysShape> GetShapes()
+    {
+        var result = new List<IPhysShape>();
+
+        for (var i = 0; i < Segments; i++)
+        {
+            var shape = new PolygonShape();
+            shape.Set(new List<Vector2>([InnerPoints[i], OuterPoints[i], OuterPoints[i + 1], InnerPoints[i + 1]]));
+
+            result.Add(shape);
+        }
+
+        return result;
+    }
+
+    public IEnumerable<Vector2> GetTrianglesVerts()
+    {
+        var verts = new List<Vector2>();
+
+        for (var i = 0; i < Segments; i++)
+        {
+            verts.Add(InnerPoints[i]);
+            verts.Add(OuterPoints[i]);
+            verts.Add(OuterPoints[i + 1]);
+
+            verts.Add(InnerPoints[i]);
+            verts.Add(InnerPoints[i + 1]);
+            verts.Add(OuterPoints[i + 1]);
+        }
+
+        return verts;
+    }
+
+    public static Vector2[] GetCirclePoints(float radius, int segments = 64, bool clockwise = true)
+    {
+        if (segments <= 0)
+            throw new ArgumentException("The number of segments cannot be negative.", nameof(segments));
+        if (radius < 0)
+            throw new ArgumentException("The radius cannot be negative.", nameof(radius));
+
+        var points = new List<Vector2>();
+
+        var angleStep = 2 * Math.PI / segments;
+        for (var i = 0; i <= segments; i++)
+        {
+            var angle = i * angleStep;
+            if (clockwise)
+                angle = -angle;
+
+            var x = (float)(radius * Math.Cos(angle));
+            var y = (float)(radius * Math.Sin(angle));
+            points.Add(new Vector2(x, y));
+        }
+
+        return [.. points];
+    }
+}

@@ -1,4 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Forcefields
+
 - type: entity
   id: forcefield220
   name: силовое поле
@@ -21,14 +24,16 @@
     canCollide: true
   - type: Fixtures
 
+# Generators
+
 - type: entity
   parent: BaseStructure
-  id: forcefieldGenerator220
+  id: BaseForcefieldGenerator
+  abstract: true
   name: генератор силового поля
   description: Генерирует направленное силовое поле, которое препятствует прониканию баллистических снарядов, но не способно сдерживать лазерное оружие.
   components:
   - type: ForcefieldGenerator
-    fieldFigure: !type:ForcefieldParabola
     fieldDensity: 100
     fieldCollisionMask:
     - None
@@ -113,3 +118,20 @@
     enabled: false
     sound:
       path: /Audio/SS220/Effects/shield/eshild_loop.ogg
+
+- type: entity
+  parent: BaseForcefieldGenerator
+  id: ForcefieldGeneratorParabola
+  suffix: Parabola
+  components:
+  - type: ForcefieldGenerator
+    fieldFigure: !type:ForcefieldParabola
+      offset: 0, 4
+
+- type: entity
+  parent: BaseForcefieldGenerator
+  id: ForcefieldGeneratorCircle
+  suffix: Circle
+  components:
+  - type: ForcefieldGenerator
+    fieldFigure: !type:ForcefieldCircle
