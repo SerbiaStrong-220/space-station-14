@@ -421,8 +421,8 @@
       offset: 0.0
       #SS220 anti shroom meta start
       rarePrototypes:
-        - Migomycelium
-      rareChance: 0.05
+        - FoodMiGomyceteCult
+      rareChance: 0.03
       #SS220 anti shroom meta end
 
 
