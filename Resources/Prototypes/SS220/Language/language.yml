@@ -355,7 +355,7 @@
   id: Reptilian
   key: rpt
   name: "language-reptilian-name"
-  desc: "language-repilian-desc"
+  desc: "language-reptilian-desc"
   color: "#519d22"
   scrambleMethod: !type:SyllablesScrambleMethod
     scrambledLengthCoefficient: 0.5

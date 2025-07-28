@@ -3673,7 +3673,7 @@
   #SS220 Animalistic languages begin
   - type: Language
     availableLanguages:
-    - id: placeholder
+    - id: Piggish
       canSpeak: true
     - id: Galactic
       canSpeak: false
