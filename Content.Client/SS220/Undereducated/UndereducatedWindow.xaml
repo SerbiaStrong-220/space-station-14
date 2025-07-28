@@ -1,0 +1,33 @@
+<DefaultWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    MinSize="360, 175"
+    MaxSize="360, 175"
+    Resizable="False"
+    Title="{Loc 'window-undereducated-title'}">
+
+    <BoxContainer Orientation="Vertical">
+        
+        <Label Name="LanguageLabel"
+               Text="{Loc 'window-undereducated-language-option-label'}" />
+        
+        <OptionButton Name="LanguageOption" />
+
+        <Label Name="PercentLabel" />
+        
+        <Slider Name="ChanceSlider"
+                MinValue="0"
+                MaxValue="95"
+                Value="95"
+                HorizontalExpand="True"
+                ToolTip="{Loc 'window-undereducated-percent-slider-tooltip'}"
+                TooltipDelay="0.9" />
+
+        <Button Name="SubmitButton"
+                Text="{Loc 'window-undereducated-confirm-button-text'}"
+                ToolTip="{Loc 'window-undereducated-confirm-button-tooltip'}"
+                TooltipDelay="0.9" />
+        
+    </BoxContainer>
+    
+</DefaultWindow>
