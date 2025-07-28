@@ -1,11 +1,13 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: entity
   parent: VendingMachine
-  id: VendingSISailor
-  name: SISailor
+  id: VendingWeaponSISailor
+  name: WeaponSISailor
   description: desc
   components:
   - type: VendingMachine
-    pack: SISailorInventory
+    pack: WeaponSISailorInventory
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -24,12 +26,12 @@
 
 - type: entity
   parent: VendingMachine
-  id: VendingNTSailor
-  name: NTSailor
+  id: VendingWeaponNTSailor
+  name: WeaponNTSailor
   description: desc
   components:
   - type: VendingMachine
-    pack: NTSailorInventory
+    pack: WeaponNTSailorInventory
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -48,12 +50,12 @@
 
 - type: entity
   parent: VendingMachine
-  id: VendingSIPilot
-  name: SIPilot
+  id: VendingWeaponSIPilot
+  name: WeaponSIPilot
   description: desc
   components:
   - type: VendingMachine
-    pack: SIPilotInventory
+    pack: WeaponSIPilotInventory
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -72,12 +74,12 @@
 
 - type: entity
   parent: VendingMachine
-  id: VendingNTPilot
-  name: NTPilot
+  id: VendingWeaponNTPilot
+  name: WeaponNTPilot
   description: desc
   components:
   - type: VendingMachine
-    pack: NTPilotInventory
+    pack: WeaponNTPilotInventory
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -96,12 +98,12 @@
 
 - type: entity
   parent: VendingMachine
-  id: VendingSICaptain
-  name: SICaptain
+  id: VendingWeaponSICaptain
+  name: WeaponSICaptain
   description: desc
   components:
   - type: VendingMachine
-    pack: SICaptainInventory
+    pack: WeaponSICaptainInventory
     offState: off
     brokenState: broken
     normalState: normal-unshaded
@@ -120,12 +122,12 @@
 
 - type: entity
   parent: VendingMachine
-  id: VendingNTCaptain
-  name: NTCaptain
+  id: VendingWeaponNTCaptain
+  name: WeaponNTCaptain
   description: desc
   components:
   - type: VendingMachine
-    pack: NTCaptainInventory
+    pack: WeaponNTCaptainInventory
     offState: off
     brokenState: broken
     normalState: normal-unshaded

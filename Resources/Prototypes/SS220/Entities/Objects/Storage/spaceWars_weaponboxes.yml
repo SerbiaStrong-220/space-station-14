@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  id: Box1
+  id: LawyerSetBox
   parent: BaseItem
   name: Набор "Законник"
   description: Для тех, кто хочет найти, задержать, допросить.
@@ -24,7 +24,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box2
+  id: GoodCaptainSetBox
   parent: BaseItem
   name: Набор "Хороший капитан"
   description: Эталонное снаряжение капитана
@@ -46,7 +46,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box3
+  id: HooliganSetBox
   parent: BaseItem
   name: Набор "Хулиган"
   description: Для тех, кто предпочитает очень близкий контакт
@@ -68,7 +68,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box4
+  id: CorporationFighterSetBox
   parent: BaseItem
   name: Набор "Боец Корпорации"
   description: Для тех, кто ценит силу лазерных технологий
@@ -89,7 +89,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box5
+  id: PythonSetBox
   parent: BaseItem
   name: Набор "Питон"
   description: Для суровых капитанов
@@ -111,7 +111,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box6
+  id: KammererSetBox
   parent: BaseItem
   name: Набор "Каммерер"
   description: Для тех, кто когда-то служил в полиции
@@ -133,7 +133,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box7
+  id: BulldogSetBox
   parent: BaseItem
   name: Набор "Бульдог"
   description: Для тех, кто хочет, что бы его реально боялись
@@ -154,7 +154,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box8
+  id: CommunistSetBox
   parent: BaseItem
   name: Набор "Коммунист"
   description: Для тех, кто уважает старину
@@ -176,7 +176,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box9
+  id: MercenarySetBox
   parent: BaseItem
   name: Набор "Наёмник"
   description: Для профессионалов
@@ -199,7 +199,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box10
+  id: SoldierSetBox
   parent: BaseItem
   name: Набор "Солдат"
   description: Для регулярной армии
@@ -220,7 +220,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box11
+  id: KRSSetBox
   parent: BaseItem
   name: Набор "КРС"
   description: Для элитных войск
@@ -241,7 +241,27 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box12
+  id: GuardianSetBox
+  parent: BaseItem
+  name: Набор "Страж"
+  description: Для бывших работников СБ
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponSubMachineGunWt550
+      - id: MagazinePistolSubMachineGunTopMounted
+        amount: 5
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: OutpostSetBox
   parent: BaseItem
   name: Набор "Застава"
   description: Для любителей тяжелого вооружения
@@ -262,7 +282,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box13
+  id: OperativeSetBox
   parent: BaseItem
   name: Набор "Оперативник"
   description: Для членов  той самой организации
@@ -283,7 +303,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box14
+  id: ExperimentetBox
   parent: BaseItem
   name: Набор "Эксперимент"
   description: Для тех, кто хочет чего-то новенького
@@ -303,7 +323,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box15
+  id: 1984PistolSetBox
   parent: BaseItem
   name: Набор пистолетный "1984"
   description: Для тех, кто называет себя
@@ -325,7 +345,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box16
+  id: ViperPistolSetBox
   parent: BaseItem
   name: Набор пистолетный "Гадюка"
   description: Для тех, кто имеет свой подход
@@ -347,7 +367,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box17
+  id: MkPistolSetBox
   parent: BaseItem
   name: Набор пистолетный "Мк"
   description: Для самых стойких
@@ -369,7 +389,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box18
+  id: SurvivalKitSetBox
   parent: BaseItem
   name: Набор "Выживание"
   description: Для тех, кто оказался в трудном положении
@@ -393,7 +413,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box19
+  id: SaboteurSetBox
   parent: BaseItem
   name: Набор "Диверсант"
   description: Для тех, кто хочет действовать на нервы
@@ -415,7 +435,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box20
+  id: LighterSetBox
   parent: BaseItem
   name: Набор "Зажигалка"
   description: Для тех, кто любит огонь и дым
@@ -437,7 +457,7 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: Box21
+  id: BombistSetBox
   parent: BaseItem
   name: Набор "Бомбист"
   description: Для тех, кто хочет погромче
