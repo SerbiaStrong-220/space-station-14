@@ -29,7 +29,7 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
             Dirty = true;
         }
     }
-    private float _width = 4f;
+    private float _width = 6f;
 
     [DataField]
     public float Height
@@ -195,6 +195,11 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
 
     public static Vector2[] GetParabolaPoints(float width, float height, Angle angle = default, int segments = 32)
     {
+        if (segments <= 0)
+            throw new ArgumentException("The number of segments must be possitive.", nameof(segments));
+        if (width < 0)
+            throw new ArgumentException("The width cannot be negative", nameof(width));
+
         var points = new List<Vector2>();
         var halfWidth = width / 2f;
         var startX = -halfWidth;
@@ -343,6 +348,176 @@ public sealed partial class ForcefieldCircle : IForcefieldFigure
             var x = (float)(radius * Math.Cos(angle));
             var y = (float)(radius * Math.Sin(angle));
             points.Add(new Vector2(x, y));
+        }
+
+        return [.. points];
+    }
+}
+
+[Serializable, NetSerializable]
+[DataDefinition]
+public sealed partial class ForcefieldEllipse : IForcefieldFigure
+{
+    [DataField]
+    public float Width
+    {
+        get => _width;
+        set
+        {
+            _width = value;
+            Dirty = true;
+        }
+    }
+    private float _width = 6f;
+
+    [DataField]
+    public float Height
+    {
+        get => _height;
+        set
+        {
+            _height = value;
+            Dirty = true;
+        }
+    }
+    private float _height = 8f;
+
+    [DataField]
+    public float Thickness
+    {
+        get => _thickness;
+        set
+        {
+            _thickness = value;
+            Dirty = true;
+        }
+    }
+    private float _thickness = 0.33f;
+
+    [DataField]
+    public int Segments
+    {
+        get => _segments;
+        set
+        {
+            _segments = value;
+            Dirty = true;
+        }
+    }
+    private int _segments = 64;
+
+    [DataField]
+    public Vector2 Offset
+    {
+        get => _offset;
+        set
+        {
+            _offset = value;
+            Dirty = true;
+        }
+    }
+    private Vector2 _offset = default;
+
+    [DataField]
+    public Angle Angle
+    {
+        get => _angle;
+        set
+        {
+            _angle = value;
+            Dirty = true;
+        }
+    }
+    private Angle _angle = default;
+
+    public Angle OwnerRotation
+    {
+        get => _ownerRotation;
+        set
+        {
+            _ownerRotation = value;
+            Dirty = true;
+        }
+    }
+    private Angle _ownerRotation = default;
+    public bool Dirty { get; set; }
+    public Vector2[] InnerPoints { get; private set; } = [];
+    public Vector2[] OuterPoints { get; private set; } = [];
+
+    public void Refresh()
+    {
+        var angle = OwnerRotation + Angle;
+        var widthHeightOffset = Thickness / 2;
+
+        var innerWidth = Width - widthHeightOffset;
+        var innerHeight = Height - widthHeightOffset;
+        var innerPoints = GetEllipsePoints(innerWidth, innerHeight, angle, Segments);
+        InnerPoints = [.. innerPoints.Select(x => x + Offset)];
+
+        var outerWidth = Width + widthHeightOffset;
+        var outerHeight = Height + widthHeightOffset;
+        var outerPoints = GetEllipsePoints(outerWidth, outerHeight, angle, Segments);
+        OuterPoints = [.. outerPoints.Select(x => x + Offset)];
+    }
+
+    public IEnumerable<IPhysShape> GetShapes()
+    {
+        var result = new List<IPhysShape>();
+
+        for (var i = 0; i < Segments; i++)
+        {
+            var shape = new PolygonShape();
+            shape.Set(new List<Vector2>([InnerPoints[i], OuterPoints[i], OuterPoints[i + 1], InnerPoints[i + 1]]));
+
+            result.Add(shape);
+        }
+
+        return result;
+    }
+
+    public IEnumerable<Vector2> GetTrianglesVerts()
+    {
+        var verts = new List<Vector2>();
+
+        for (var i = 0; i < Segments; i++)
+        {
+            verts.Add(InnerPoints[i]);
+            verts.Add(OuterPoints[i]);
+            verts.Add(OuterPoints[i + 1]);
+
+            verts.Add(InnerPoints[i]);
+            verts.Add(InnerPoints[i + 1]);
+            verts.Add(OuterPoints[i + 1]);
+        }
+
+        return verts;
+    }
+
+    public static Vector2[] GetEllipsePoints(float width, float height, Angle angle = default, int segments = 64, bool clockwise = true)
+    {
+        if (segments <= 0)
+            throw new ArgumentException("The number of segments must be possitive.", nameof(segments));
+        if (width < 0)
+            throw new ArgumentException("The width cannot be negative.", nameof(width));
+        if (height < 0)
+            throw new ArgumentException("The height cannot be negative.", nameof(height));
+
+        var points = new List<Vector2>();
+
+        var rotationMatrix = Matrix3x2.CreateRotation((float)angle.Theta);
+        var angleStep = 2 * Math.PI / segments;
+        for (var i = 0; i <= segments; i++)
+        {
+            var pointAngle = i * angleStep;
+            if (clockwise)
+                pointAngle = -pointAngle;
+
+            var x = (float)(width / 2 * Math.Cos(pointAngle));
+            var y = (float)(height / 2 * Math.Sin(pointAngle));
+            var point = new Vector2(x, y);
+            point = Vector2.Transform(point, rotationMatrix);
+
+            points.Add(point);
         }
 
         return [.. points];

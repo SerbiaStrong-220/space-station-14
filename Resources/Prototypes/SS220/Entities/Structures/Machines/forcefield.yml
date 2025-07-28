@@ -135,3 +135,11 @@
   components:
   - type: ForcefieldGenerator
     fieldFigure: !type:ForcefieldCircle
+
+- type: entity
+  parent: BaseForcefieldGenerator
+  id: ForcefieldGeneratorEllipse
+  suffix: Ellipse
+  components:
+  - type: ForcefieldGenerator
+    fieldFigure: !type:ForcefieldEllipse
