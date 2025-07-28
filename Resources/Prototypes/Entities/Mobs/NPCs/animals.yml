@@ -1482,6 +1482,7 @@
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
+  #- type: MonkeyAccent
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
   - type: AlwaysRevolutionaryConvertible
@@ -1525,6 +1526,7 @@
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
+  #- type: MonkeyAccent
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -1571,6 +1573,9 @@
   components:
   - type: NameIdentifier
     group: Kobold
+  # - type: LizardAccent
+  # - type: ReplacementAccent
+  #   accent: kobold
 #SS220 Animalistic Languages begin
   - type: Language
     availableLanguages:
@@ -1873,6 +1878,8 @@
     spawned:
     - id: FoodMeatRat
       amount: 1
+    # - type: ReplacementAccent
+    # accent: mouse
   - type: Tag
     tags:
     - Trash
