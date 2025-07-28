@@ -12,7 +12,7 @@
     brokenState: broken
     normalState: normal-unshaded
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/bardrobe.rsi
+    sprite: Structures/Machines/VendingMachines/sec.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -36,7 +36,7 @@
     brokenState: broken
     normalState: normal-unshaded
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/bardrobe.rsi
+    sprite: Structures/Machines/VendingMachines/sec.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -60,7 +60,7 @@
     brokenState: broken
     normalState: normal-unshaded
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/bardrobe.rsi
+    sprite: SStructures/Machines/VendingMachines/sec.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -84,7 +84,7 @@
     brokenState: broken
     normalState: normal-unshaded
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/bardrobe.rsi
+    sprite: Structures/Machines/VendingMachines/sec.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -108,7 +108,7 @@
     brokenState: broken
     normalState: normal-unshaded
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/bardrobe.rsi
+    sprite: Structures/Machines/VendingMachines/sec.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -132,7 +132,7 @@
     brokenState: broken
     normalState: normal-unshaded
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/bardrobe.rsi
+    sprite: Structures/Machines/VendingMachines/sec.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
