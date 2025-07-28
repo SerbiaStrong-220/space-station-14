@@ -15,10 +15,9 @@
   scrambleMethod: !type:SyllablesScrambleMethod
     specialCharacters:
       - character: " "
-      - character: ". "
-        capitalize: true
+        capitalize: false
         weight: 0.3
-    syllables: [бла, бла, бла, бле, мех, ньех, нах, ах, угу, увы]
+    syllables: [tao, shi, tzu, yi, com, be, is, i, op, ed, lec, mo, cle, te, dis, e, za, vah, khaz, qr, xuq, zaoo, quum]
 
 - type: language
   id: SolCommon
@@ -31,8 +30,12 @@
       - character: " "
       - character: ". "
         capitalize: true
-        weight: 0.3
-    syllables: [tao, shi, tzu, yi, com, be, is, i, op, vi, ed, lec, mo, cle, te, dis, e]
+        weight: 0.1
+    syllables: [al, an, ar, as, at, ea, ed, en, er, es, ha, he, hi, in, is, it, le,
+                me, nd, ne, ng, nt, on, or, ou, re, se, st, te, th, ti, to, ve, wa,
+                all, and, are, but, ent, era, ere, eve, for, had, hat, hen, her, hin,
+                his, ing, ion, ith, not, ome, oul, our, sho, ted, ter, tha, the, thi,
+                kui, kan, kao, hong, ni, piao, shan, si]
 
 - type: language
   id: Tradeband
@@ -64,10 +67,9 @@
     specialCharacterChance: 1
     specialCharacters:
       - character: " "
-      - character: ", "
-        capitalize: false
-        weight: 0.3
-    syllables: [виски, кола, тоник, водка, вермут, ром, эхо, лима, альфа, дельта, гамма, сигма, чарли, зомби, шлюз, бармен, повар, грузчик, учёный, инженер, карп, ИИ, борг, смена, цель, русский, перчатки, адвокат, пьяный, бипски, иан, морти, черный, белый, капитан, и]
+    syllables: [виски, кола, тоник, водка, вермут, ром, эхо, лима, альфа, дельта, гамма, сигма, чарли,
+                зомби, шлюз, бармен, повар, грузчик, учёный, инженер, карп, ИИ, борг, смена, цель, русский,
+                перчатки, адвокат, пьяный, бипски, иан, морти, черный, белый, капитан, и]
 
 - type: language
   id: Gutter
@@ -292,7 +294,85 @@
   color: "#2cc2e8"
   scrambleMethod: !type:SyllablesScrambleMethod
     scrambledLengthCoefficient: 0.5
-    specialCharacterChance: 0.8
+    specialCharacterChance: 1
     specialCharacters:
       - character: " "
     syllables: [1, 0]
+
+#Animals region
+- type: language
+  id: Doggish
+  key: dog
+  name: "language-doggish-name"
+  description: "language-doggish-desc"
+  color: "#872c02"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 1
+    specialCharacters:
+      - character: " "
+    syllables: [гав, вуф, барк, уф, вув, уу, ваф, ррр]
+
+- type: language
+  id: Mousey
+  key: ms
+  name: "language-mousey-name"
+  description: "language-mousey-desc"
+  color: "#595b5b"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    scrambledLengthCoefficient: 0.5
+    specialCharacterChance: 1
+    specialCharacters:
+      - character: " "
+    syllables: [пии, пип, пииип, скуик, сквик, пи, чууу, иии, уиип]
+
+- type: language
+  id: Feline
+  key: cat
+  name: "language-feline-name"
+  description: "language-feline-desc"
+  color: "#efba6a"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    scrambledLengthCoefficient: 0.5
+    specialCharacterChance: 0.7
+    specialCharacters:
+      - character: " "
+    syllables: [Мяу, мя, ияу, ррр, шшш, мм, мррау, ххссс]
+
+- type: language
+  id: Monkey
+  key: mnk
+  name: "language-monkey-name"
+  description: "language-monkey-desc"
+  color: "#5b3700"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    scrambledLengthCoefficient: 0.5
+    specialCharacterChance: 0.7
+    specialCharacters:
+      - character: " "
+    syllables: [Ууук, аааг, уааа, уу, аа, уаааг]
+
+- type: language
+  id: Reptilian
+  key: rpt
+  name: "language-reptilian-name"
+  desc: "language-repilian-desc"
+  color: "#519d22"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    scrambledLengthCoefficient: 0.5
+    specialCharacterChance: 0.7
+    specialCharacters:
+      - character: " "
+    syllables: [йип, гррар, йап, скрит, гро, хисс, йии]
+  
+- type: language
+  id: SpiderTongue
+  key: spd 
+  name: "language-spider-name"
+  desc: "language-spider-desc"
+  color: "#720470"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    scrambledLengthCoefficient: 0.7
+    specialCharacterChance: 0.5
+    specialCharacters:
+      - character: " "
+    syllables: [сс, сшшш, ссс, хшш, хсс, хисс, хиссшу]
