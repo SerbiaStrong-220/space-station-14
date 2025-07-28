@@ -363,7 +363,7 @@
     specialCharacters:
       - character: " "
     syllables: [йип, гррар, йап, скрит, гро, хисс, йии]
-  
+
 - type: language
   id: SpiderTongue
   key: spd 
