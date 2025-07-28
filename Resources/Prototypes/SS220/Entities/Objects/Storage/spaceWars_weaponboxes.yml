@@ -439,7 +439,7 @@
 - type: entity
   id: Box21
   parent: BaseItem
-  name: ННабор "Бомбист"
+  name: Набор "Бомбист"
   description: Для тех, кто хочет погромче
   components:
   - type: Item
