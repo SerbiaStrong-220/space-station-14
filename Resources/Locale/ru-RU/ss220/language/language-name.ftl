@@ -24,3 +24,4 @@ language-mousey-name = Мышиный
 language-feline-name = Кошачий
 language-monkey-name = Обезьяний
 language-reptilian-name = Рептильный
+language-piggish-name = Свинячий

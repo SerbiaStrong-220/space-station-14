@@ -376,3 +376,16 @@
     specialCharacters:
       - character: " "
     syllables: [сс, сшшш, ссс, хшш, хсс, хисс, хиссшу]
+
+- type: language
+  id: Piggish
+  key: Pig
+  name: "language-piggish-name"
+  desc: "language-piggish-desc"
+  color: "#df3b9e"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    scrambledLengthCoefficient: 0.3
+    specialCharacterChance: 1
+    specialCharacters:
+      - character: " "
+    syllables: [хрю, хрю-хрю]

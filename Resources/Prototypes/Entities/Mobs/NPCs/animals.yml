@@ -3668,8 +3668,18 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Animals/pig_oink.ogg
-  - type: ReplacementAccent
-    accent: pig
+  # - type: ReplacementAccent
+  #   accent: pig
+  #SS220 Animalistic languages begin
+  - type: Language
+    availableLanguages:
+    - id: placeholder
+      canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+   #SS220 Animalistic languages end
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
