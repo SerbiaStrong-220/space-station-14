@@ -3,8 +3,10 @@ using Content.Shared.Damage;
 using Content.Shared.SS220.Forcefield.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using System.Linq;
+using System.Numerics;
 
 namespace Content.Server.SS220.Forcefield.Systems;
 
@@ -12,6 +14,7 @@ public sealed partial class ForcefieldSystem : EntitySystem
 {
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -19,6 +22,7 @@ public sealed partial class ForcefieldSystem : EntitySystem
 
         SubscribeLocalEvent<ForcefieldComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ForcefieldComponent, DamageChangedEvent>(OnDamageChange);
+        SubscribeLocalEvent<ForcefieldComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<ForcefieldComponent, MoveEvent>(OnMove);
     }
 
@@ -48,6 +52,17 @@ public sealed partial class ForcefieldSystem : EntitySystem
             var ev = new ForcefieldDamageChangedEvent(entity, args);
             RaiseLocalEvent(GetEntity(owner), ev);
         }
+    }
+
+    private void OnPreventCollide(Entity<ForcefieldComponent> entity, ref PreventCollideEvent args)
+    {
+        var worldPos = _transform.GetMapCoordinates(args.OtherEntity).Position;
+        var worldToLocal = _transform.GetInvWorldMatrix(entity);
+
+        var point = Vector2.Transform(worldPos, worldToLocal);
+        var inside = entity.Comp.Figure.IsInside(point);
+
+        args.Cancelled = inside;
     }
 
     private void OnMove(Entity<ForcefieldComponent> entity, ref MoveEvent args)
