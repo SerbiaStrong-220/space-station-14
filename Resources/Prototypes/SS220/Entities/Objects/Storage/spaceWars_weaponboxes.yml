@@ -1,0 +1,459 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: Box1
+  parent: BaseItem
+  name: Набор "Законник"
+  description: Для тех, кто хочет найти, задержать, допросить.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: GrenadeStinger
+        amount: 2
+      - id: WeaponDisablerSMG
+      - id: BoxHandcuff
+      - id: Stunbaton
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box2
+  parent: BaseItem
+  name: Набор "Хороший капитан"
+  description: Эталонное снаряжение капитана
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: SyndicateWhistle
+      - id: Telescopichka
+      - id: WeaponSynergisticEnergyGun
+      - id: ClothingBeltSheathFilled
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box3
+  parent: BaseItem
+  name: Набор "Хулиган"
+  description: Для тех, кто предпочитает очень близкий контакт
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: Truncheon
+      - id: WeaponShotgunSawn
+      - id: BoxLethalshot
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box4
+  parent: BaseItem
+  name: Набор "Боец Корпорации"
+  description: Для тех, кто ценит силу лазерных технологий
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponLaserCarbine
+      - id: WeaponLaserSvalinn
+      - id: PowerCellSmall
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box5
+  parent: BaseItem
+  name: Набор "Питон"
+  description: Для суровых капитанов
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: WeaponRevolverPythonAP
+      - id: SyndicateWhistle
+      - id: SpeedLoaderMagnumAP
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box6
+  parent: BaseItem
+  name: Набор "Каммерер"
+  description: Для тех, кто когда-то служил в полиции
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: WeaponShotgunKammerer
+      - id: ClothingBeltBandolier
+      - id: BoxLethalshot
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box7
+  parent: BaseItem
+  name: Набор "Бульдог"
+  description: Для тех, кто хочет, что бы его реально боялись
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: WeaponShotgunBulldog
+      - id: MagazineShotgun
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box8
+  parent: BaseItem
+  name: Набор "Коммунист"
+  description: Для тех, кто уважает старину
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: ExGrenade
+      - id: WeaponRifleAk
+      - id: MagazineLightRifle
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box9
+  parent: BaseItem
+  name: Набор "Наёмник"
+  description: Для профессионалов
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponRifleM90GrenadeLauncher
+      - id: MagazineRifle
+        amount: 2
+      - id: WeaponRifleM90GrenadeLauncher
+      - id: GrenadeIncendiary
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box10
+  parent: BaseItem
+  name: Набор "Солдат"
+  description: Для регулярной армии
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: WeaponRifleLecter
+      - id: MagazineRifle
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box11
+  parent: BaseItem
+  name: Набор "КРС"
+  description: Для элитных войск
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: WeaponBlasterKRS
+      - id: BlasterPowerCellAlt
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box12
+  parent: BaseItem
+  name: Набор "Застава"
+  description: Для любителей тяжелого вооружения
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: WeaponLightMachineGunL6
+      - id: MagazineLightRifleBox
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box13
+  parent: BaseItem
+  name: Набор "Оперативник"
+  description: Для членов  той самой организации
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: WeaponSubMachineGunC20r
+      - id: MagazinePistolSubMachineGun
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box14
+  parent: BaseItem
+  name: Набор "Эксперимент"
+  description: Для тех, кто хочет чего-то новенького
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: WeaponXrayCannon
+      - id: WeaponAdvancedRevolver
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box15
+  parent: BaseItem
+  name: Набор пистолетный "1984"
+  description: Для тех, кто называет себя
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: WeaponPistolN1984
+      - id: CombatKnife
+      - id: MagazineMagnum
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box16
+  parent: BaseItem
+  name: Набор пистолетный "Гадюка"
+  description: Для тех, кто имеет свой подход
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: WeaponPistolViper
+      - id: CombatKnife
+      - id: MagazinePistol
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box17
+  parent: BaseItem
+  name: Набор пистолетный "Мк"
+  description: Для самых стойких
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: WeaponPistolMk58
+      - id: CombatKnife
+      - id: MagazinePistol
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box18
+  parent: BaseItem
+  name: Набор "Выживание"
+  description: Для тех, кто оказался в трудном положении
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: FlashlightSeclite
+      - id: SpaceMedipen
+      - id: EmergencyMedipen
+      - id: BoxFlare
+      - id: PowerCellMedium
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box19
+  parent: BaseItem
+  name: Набор "Диверсант"
+  description: Для тех, кто хочет действовать на нервы
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: C4
+        amount: 2
+      - id: EmpGrenade
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box20
+  parent: BaseItem
+  name: Набор "Зажигалка"
+  description: Для тех, кто любит огонь и дым
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: GrenadeIncendiary
+        amount: 3
+      - id: SmokeGrenade
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: Box21
+  parent: BaseItem
+  name: ННабор "Бомбист"
+  description: Для тех, кто хочет погромче
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    layers:
+      - state: criminaldelivery
+  - type: SpawnItemsOnUse
+    items:
+      - id: SpecialDeliveryBoxTrash
+      - id: GrenadeShrapnel
+        amount: 3
+      - id: ExGrenade
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
