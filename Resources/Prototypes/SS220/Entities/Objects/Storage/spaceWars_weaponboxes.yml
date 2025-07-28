@@ -9,12 +9,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/help_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: HelpBoxTrash
       - id: GrenadeStinger
         amount: 2
       - id: WeaponDisablerSMG
@@ -32,12 +32,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/captain_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: СaptainBoxTrash
       - id: SyndicateWhistle
       - id: Telescopichka
       - id: WeaponSynergisticEnergyGun
@@ -54,12 +54,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/weapon_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: WeaponBoxTrash
       - id: Truncheon
       - id: WeaponShotgunSawn
       - id: BoxLethalshot
@@ -76,11 +76,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/weapon_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
+      - id: WeaponBoxTrash
       - id: WeaponLaserCarbine
       - id: WeaponLaserSvalinn
       - id: PowerCellSmall
@@ -97,12 +98,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/captain_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: СaptainBoxTrash
       - id: WeaponRevolverPythonAP
       - id: SyndicateWhistle
       - id: SpeedLoaderMagnumAP
@@ -119,12 +120,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/weapon_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: WeaponBoxTrash
       - id: WeaponShotgunKammerer
       - id: ClothingBeltBandolier
       - id: BoxLethalshot
@@ -141,12 +142,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/weapon_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: WeaponBoxTrash
       - id: WeaponShotgunBulldog
       - id: MagazineShotgun
         amount: 2
@@ -162,12 +163,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/weapon_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: WeaponBoxTrash
       - id: ExGrenade
       - id: WeaponRifleAk
       - id: MagazineLightRifle
@@ -184,12 +185,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/weapon_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: WeaponRifleM90GrenadeLauncher
+      - id: WeaponBoxTrash
       - id: MagazineRifle
         amount: 2
       - id: WeaponRifleM90GrenadeLauncher
@@ -207,12 +208,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/weapon_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: WeaponBoxTrash
       - id: WeaponRifleLecter
       - id: MagazineRifle
         amount: 3
@@ -228,12 +229,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/weapon_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: WeaponBoxTrash
       - id: WeaponBlasterKRS
       - id: BlasterPowerCellAlt
         amount: 3
@@ -249,9 +250,9 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/weapon_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
       - id: WeaponSubMachineGunWt550
@@ -269,12 +270,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/weapon_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: WeaponBoxTrash
       - id: WeaponLightMachineGunL6
       - id: MagazineLightRifleBox
         amount: 2
@@ -290,12 +291,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/weapon_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: WeaponBoxTrash
       - id: WeaponSubMachineGunC20r
       - id: MagazinePistolSubMachineGun
         amount: 3
@@ -311,12 +312,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/weapon_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: PistolBoxTrash
       - id: WeaponXrayCannon
       - id: WeaponAdvancedRevolver
     sound:
@@ -331,12 +332,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/pistol_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: PistolBoxTrash
       - id: WeaponPistolN1984
       - id: CombatKnife
       - id: MagazineMagnum
@@ -353,12 +354,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/pistol_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: PistolBoxTrash
       - id: WeaponPistolViper
       - id: CombatKnife
       - id: MagazinePistol
@@ -375,12 +376,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/pistol_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: PistolBoxTrash
       - id: WeaponPistolMk58
       - id: CombatKnife
       - id: MagazinePistol
@@ -397,12 +398,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/help_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: HelpBoxTrash
       - id: FlashlightSeclite
       - id: SpaceMedipen
       - id: EmergencyMedipen
@@ -421,12 +422,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/help_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: HelpBoxTrash
       - id: C4
         amount: 2
       - id: EmpGrenade
@@ -443,12 +444,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/help_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: HelpBoxTrash
       - id: GrenadeIncendiary
         amount: 3
       - id: SmokeGrenade
@@ -465,15 +466,84 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/criminaldelivery.rsi
+    sprite: SS220/Objects/Storage/help_box.rsi
     layers:
-      - state: criminaldelivery
+      - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: SpecialDeliveryBoxTrash
+      - id: HelpBoxTrash
       - id: GrenadeShrapnel
         amount: 3
       - id: ExGrenade
         amount: 2
     sound:
       path: /Audio/Effects/unwrap.ogg
+
+#Trash from boxes, cause idk if we should make them permanent
+- type: entity
+  id: HelpBoxTrash
+  parent: BaseItem
+  name: раскуроченная коробка
+  description: Когда-то она держала в себе кучу вещей, но теперь это мусор.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
+  - type: Sprite
+    sprite: SS220/Objects/Storage/help_box.rsi
+    state: icon_open
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage
+
+- type: entity
+  id: PistolBoxTrash
+  parent: BaseItem
+  name: раскуроченная коробка
+  description: Когда-то она держала в себе кучу вещей, но теперь это мусор.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
+  - type: Sprite
+    sprite: SS220/Objects/Storage/pistol_box.rsi
+    state: icon_open
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage
+
+- type: entity
+  id: WeaponBoxTrash
+  parent: BaseItem
+  name: раскуроченная коробка
+  description: Когда-то она держала в себе кучу вещей, но теперь это мусор.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
+  - type: Sprite
+    sprite: SS220/Objects/Storage/weapon_box.rsi
+    state: icon_open
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage
+
+- type: entity
+  id: СaptainBoxTrash
+  parent: BaseItem
+  name: раскуроченная коробка
+  description: Когда-то она держала в себе кучу вещей, но теперь это мусор.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
+  - type: Sprite
+    sprite: SS220/Objects/Storage/captain_box.rsi
+    state: icon_open
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage

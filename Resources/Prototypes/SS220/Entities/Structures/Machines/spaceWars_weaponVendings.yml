@@ -60,7 +60,7 @@
     brokenState: broken
     normalState: normal-unshaded
   - type: Sprite
-    sprite: SStructures/Machines/VendingMachines/sec.rsi
+    sprite: Structures/Machines/VendingMachines/sec.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
