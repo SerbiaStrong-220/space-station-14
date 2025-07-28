@@ -366,7 +366,7 @@
 
 - type: language
   id: SpiderTongue
-  key: spd 
+  key: spd
   name: "language-spider-name"
   description: "language-spider-desc"
   color: "#720470"
