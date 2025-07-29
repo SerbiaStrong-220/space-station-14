@@ -17,29 +17,26 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Weapons.Ranged;
 
-public sealed partial class StationaryGunSystem : EntitySystem
+public sealed partial class AutoShootGunSystem : EntitySystem
 {
     [Dependency] private readonly SharedGunSystem _gun = default!;
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<StationaryGunComponent, PowerChangedEvent>(OnSignalReceived);
-        SubscribeLocalEvent<StationaryGunComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
+        SubscribeLocalEvent<AutoShootGunComponent, PowerChangedEvent>(OnPowerChanged);
+        SubscribeLocalEvent<AutoShootGunComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
     }
 
-    private void OnSignalReceived(Entity<StationaryGunComponent> ent, ref PowerChangedEvent args)
+    private void OnPowerChanged(Entity<AutoShootGunComponent> ent, ref PowerChangedEvent args)
     {
-        if (args.Powered)
+        if (!TryComp<ApcPowerReceiverComponent>(ent, out var apc))
             return;
 
-        if (!ent.Comp.RequiredPower)
+        if (!apc.Powered)
             return;
 
-        if (!TryComp<AutoShootGunComponent>(ent, out var autoShoot))
-            return;
-
-        _gun.SetEnabled(ent, autoShoot, false);
+        _gun.SetEnabled(ent, ent.Comp, false);
     }
 
     private void OnAnchorStateChanged(Entity<AutoShootGunComponent> ent, ref AnchorStateChangedEvent args)

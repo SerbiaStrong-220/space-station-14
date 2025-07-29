@@ -33,7 +33,10 @@
   - type: GunSignalControl
   - type: StaticPrice
     price: 1500
-  - type: StationaryGun #SS220 unstopable gun shooting fix
+  #SS220 ShuttleGuns_fix start
+  - type: ApcPowerReceiver
+    powerLoad: 20
+  #SS220 ShuttleGuns_fix end
 
 # ---- Laser weapon branch ----
 # naming: LSE (Laser) + conventional power + suffix (c for PowerCage, e for wired energy) + Name
