@@ -3,6 +3,7 @@ using Content.Shared.SS220.Forcefield.Figures;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Dynamics;
+using Robust.Shared.Player;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.SS220.Forcefield.Components;
@@ -12,6 +13,9 @@ public sealed partial class ForcefieldComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public IForcefieldFigure Figure = default;
+
+    [DataField, AutoNetworkedField]
+    public ForcefieldCollisionOption CollisionOption = ForcefieldCollisionOption.OutsideGoing;
 
     [DataField, AutoNetworkedField]
     public float Density;
@@ -36,4 +40,14 @@ public sealed partial class ForcefieldComponent : Component
     {
         Volume = 1.25f
     });
+}
+
+public enum ForcefieldCollisionOption
+{
+    None = 0,
+
+    InsideGoing = 1 << 0,
+    OutsideGoing = 1 << 1,
+
+    All = ~0
 }

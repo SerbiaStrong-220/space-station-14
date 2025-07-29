@@ -1,20 +1,30 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Damage;
 using Content.Shared.SS220.Forcefield.Components;
+using Content.Shared.SS220.Forcefield.Systems;
 using Robust.Server.GameObjects;
+using Robust.Server.GameStates;
+using Robust.Server.Player;
+using Robust.Shared;
+using Robust.Shared.Utility;
+using Robust.Shared.Configuration;
 using Robust.Shared.Physics;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using System.Linq;
-using System.Numerics;
 
 namespace Content.Server.SS220.Forcefield.Systems;
 
-public sealed partial class ForcefieldSystem : EntitySystem
+public sealed partial class ForcefieldSystem : SharedForcefieldSystem
 {
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+
+    private readonly Dictionary<EntityUid, List<ICommonSession>> _curPvsOverrides = [];
 
     public override void Initialize()
     {
@@ -22,7 +32,6 @@ public sealed partial class ForcefieldSystem : EntitySystem
 
         SubscribeLocalEvent<ForcefieldComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ForcefieldComponent, DamageChangedEvent>(OnDamageChange);
-        SubscribeLocalEvent<ForcefieldComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<ForcefieldComponent, MoveEvent>(OnMove);
     }
 
@@ -33,6 +42,8 @@ public sealed partial class ForcefieldSystem : EntitySystem
         var query = EntityQueryEnumerator<ForcefieldComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            UpdatePvsOverride((uid, comp));
+
             if (!comp.Figure.Dirty)
                 continue;
 
@@ -52,17 +63,6 @@ public sealed partial class ForcefieldSystem : EntitySystem
             var ev = new ForcefieldDamageChangedEvent(entity, args);
             RaiseLocalEvent(GetEntity(owner), ev);
         }
-    }
-
-    private void OnPreventCollide(Entity<ForcefieldComponent> entity, ref PreventCollideEvent args)
-    {
-        var worldPos = _transform.GetMapCoordinates(args.OtherEntity).Position;
-        var worldToLocal = _transform.GetInvWorldMatrix(entity);
-
-        var point = Vector2.Transform(worldPos, worldToLocal);
-        var inside = entity.Comp.Figure.IsInside(point);
-
-        args.Cancelled = inside;
     }
 
     private void OnMove(Entity<ForcefieldComponent> entity, ref MoveEvent args)
@@ -117,6 +117,57 @@ public sealed partial class ForcefieldSystem : EntitySystem
 
         _physics.SetCanCollide(entity, true);
         _fixture.FixtureUpdate(entity, manager: fixtures);
+    }
+
+    private void UpdatePvsOverride(Entity<ForcefieldComponent> entity)
+    {
+        var pvsRange = _configurationManager.GetCVar(CVars.NetMaxUpdateRange);
+
+        var curOverrides = _curPvsOverrides.GetOrNew(entity);
+        var toRemove = curOverrides.ToList();
+        var toAdd = new List<ICommonSession>();
+
+        foreach (var session in _player.Sessions)
+        {
+            var attachedEnt = session.AttachedEntity;
+            if (attachedEnt is null)
+                continue;
+
+            var entMapCoords = _transform.GetMapCoordinates(attachedEnt.Value);
+            var forcefieldMapCoords = _transform.GetMapCoordinates(attachedEnt.Value);
+
+            if (forcefieldMapCoords.MapId != entMapCoords.MapId)
+                continue;
+
+            var entLocalCoords = _transform.ToCoordinates(entity.Owner, entMapCoords);
+            var closestPoint = entity.Comp.Figure.GetClosestPoint(entLocalCoords.Position);
+            if (closestPoint is null)
+                continue;
+
+            var distanse = (entLocalCoords.Position - closestPoint.Value).Length();
+            if (distanse > pvsRange)
+                continue;
+
+            if (!toRemove.Remove(session))
+                toAdd.Add(session);
+        }
+
+        foreach (var session in toRemove)
+        {
+            _pvsOverride.RemoveSessionOverride(entity, session);
+            curOverrides.Remove(session);
+        }
+
+        foreach (var session in toAdd)
+        {
+            _pvsOverride.AddSessionOverride(entity, session);
+            curOverrides.Add(session);
+        }
+
+        if (curOverrides.Count > 0)
+            _curPvsOverrides.TryAdd(entity, curOverrides);
+        else
+            _curPvsOverrides.Remove(entity);
     }
 }
 

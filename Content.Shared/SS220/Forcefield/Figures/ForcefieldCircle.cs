@@ -93,16 +93,19 @@ public sealed partial class ForcefieldCircle : IForcefieldFigure
 
     private void RefreshCircles()
     {
+        var rotationMatrix = Matrix3x2.CreateRotation((float)OwnerRotation.Opposite().Theta);
+        var offset = Vector2.Transform(Offset, rotationMatrix);
+
         _centralCircle.Radius = Radius;
         _centralCircle.Offset = Offset;
 
         var radiusOffset = Thickness / 2;
 
         _innerCircle.Radius = Radius - radiusOffset;
-        _innerCircle.Offset = Offset;
+        _innerCircle.Offset = offset;
 
         _outerCircle.Radius = Radius + radiusOffset;
-        _outerCircle.Offset = Offset;
+        _outerCircle.Offset = offset;
     }
 
     public IEnumerable<IPhysShape> GetShapes()
@@ -141,6 +144,25 @@ public sealed partial class ForcefieldCircle : IForcefieldFigure
     public bool IsInside(Vector2 point)
     {
         return _centralCircle.IsInside(point);
+    }
+
+    public Vector2? GetClosestPoint(Vector2 point)
+    {
+        Vector2? result = null;
+
+        var parabolaPoints = IsInside(point) ? InnerPoints : OuterPoints;
+        var distance = float.MaxValue;
+        foreach (var p in parabolaPoints)
+        {
+            var dist = (point - p).Length();
+            if (dist < distance)
+            {
+                result = p;
+                distance = dist;
+            }
+        }
+
+        return result;
     }
 
     [Serializable, NetSerializable]

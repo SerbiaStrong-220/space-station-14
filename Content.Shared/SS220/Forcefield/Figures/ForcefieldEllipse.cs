@@ -134,24 +134,27 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
 
     private void RefreshEllipses()
     {
-        var angle = OwnerRotation + Angle;
+        var angle = OwnerRotation.Opposite() + Angle;
+
+        var rotationMatrix = Matrix3x2.CreateRotation((float)OwnerRotation.Opposite().Theta);
+        var offset = Vector2.Transform(Offset, rotationMatrix);
 
         _centralEllipse.Width = Width;
         _centralEllipse.Height = Height;
         _centralEllipse.Angle = angle;
         _centralEllipse.Offset = Offset;
 
-        var widthHeightOffset = Thickness / 2;
+        var widthHeightOffset = Thickness;
 
         _innerEllipse.Width = Width - widthHeightOffset;
         _innerEllipse.Height = Height - widthHeightOffset;
         _innerEllipse.Angle = angle;
-        _innerEllipse.Offset = Offset;
+        _innerEllipse.Offset = offset;
 
         _outerEllipse.Width = Width + widthHeightOffset;
         _outerEllipse.Height = Height + widthHeightOffset;
         _outerEllipse.Angle = angle;
-        _outerEllipse.Offset = Offset;
+        _outerEllipse.Offset = offset;
     }
 
     public IEnumerable<IPhysShape> GetShapes()
@@ -187,39 +190,28 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
         return verts;
     }
 
-    public static Vector2[] GetEllipsePoints(float width, float height, Angle angle = default, int segments = 64, bool clockwise = true)
-    {
-        if (segments <= 0)
-            throw new ArgumentException("The number of segments must be possitive.", nameof(segments));
-        if (width < 0)
-            throw new ArgumentException("The width cannot be negative.", nameof(width));
-        if (height < 0)
-            throw new ArgumentException("The height cannot be negative.", nameof(height));
-
-        var points = new List<Vector2>();
-
-        var rotationMatrix = Matrix3x2.CreateRotation((float)angle.Theta);
-        var angleStep = 2 * Math.PI / segments;
-        for (var i = 0; i <= segments; i++)
-        {
-            var pointAngle = i * angleStep;
-            if (clockwise)
-                pointAngle = -pointAngle;
-
-            var x = (float)(width / 2 * Math.Cos(pointAngle));
-            var y = (float)(height / 2 * Math.Sin(pointAngle));
-            var point = new Vector2(x, y);
-            point = Vector2.Transform(point, rotationMatrix);
-
-            points.Add(point);
-        }
-
-        return [.. points];
-    }
-
     public bool IsInside(Vector2 point)
     {
         return _centralEllipse.IsInside(point);
+    }
+
+    public Vector2? GetClosestPoint(Vector2 point)
+    {
+        Vector2? result = null;
+
+        var parabolaPoints = IsInside(point) ? InnerPoints : OuterPoints;
+        var distance = float.MaxValue;
+        foreach (var p in parabolaPoints)
+        {
+            var dist = (point - p).Length();
+            if (dist < distance)
+            {
+                result = p;
+                distance = dist;
+            }
+        }
+
+        return result;
     }
 
     [Serializable, NetSerializable]
@@ -245,7 +237,7 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
                 if (value < 0)
                     throw new ArgumentException("The height cannot be negative.", nameof(Height));
 
-                _width = value;
+                _height = value;
             }
         }
         private float _height;
@@ -263,12 +255,12 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
             var angleStep = 2 * Math.PI / segments;
             for (var i = 0; i <= segments; i++)
             {
-                var pointAngle = i * angleStep;
+                var angle = i * angleStep;
                 if (clockwise)
-                    pointAngle = -pointAngle;
+                    angle = -angle;
 
-                var x = (float)(Width / 2 * Math.Cos(pointAngle));
-                var y = (float)(Height / 2 * Math.Sin(pointAngle));
+                var x = (float)(Width / 2 * Math.Cos(angle));
+                var y = (float)(Height / 2 * Math.Sin(angle));
                 var point = new Vector2(x, y);
                 point = Vector2.Transform(point, rotationMatrix);
 

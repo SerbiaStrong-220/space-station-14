@@ -134,7 +134,10 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
 
     private void RefreshParabolas()
     {
-        var angle = OwnerRotation + Angle;
+        var angle = OwnerRotation.Opposite() + Angle;
+
+        var rotationMatrix = Matrix3x2.CreateRotation((float)OwnerRotation.Opposite().Theta);
+        var offset = Vector2.Transform(Offset, rotationMatrix);
 
         _centralParabola.Width = Width;
         _centralParabola.Height = Height;
@@ -155,12 +158,12 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
         _innerParabola.Width = Width - widthOffset;
         _innerParabola.Height = Height - heightOffset;
         _innerParabola.Angle = angle;
-        _innerParabola.Offset = Offset - directionOffset;
+        _innerParabola.Offset = offset - directionOffset;
 
         _outerParabola.Width = Width + widthOffset;
         _outerParabola.Height = Height + heightOffset;
         _outerParabola.Angle = angle;
-        _outerParabola.Offset = Offset + directionOffset;
+        _outerParabola.Offset = offset + directionOffset;
     }
 
     public IEnumerable<IPhysShape> GetShapes()
@@ -171,6 +174,9 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
         {
             var shape = new PolygonShape();
             shape.Set(new List<Vector2>([InnerPoints[i], OuterPoints[i], OuterPoints[i + 1], InnerPoints[i + 1]]));
+
+            if (shape.VertexCount <= 0)
+                throw new Exception($"Failed to generate a {nameof(PolygonShape)}");
 
             result.Add(shape);
         }
@@ -201,6 +207,25 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
         return _centralParabola.IsInside(point);
     }
 
+    public Vector2? GetClosestPoint(Vector2 point)
+    {
+        Vector2? result = null;
+
+        var parabolaPoints = IsInside(point) ? InnerPoints : OuterPoints;
+        var distance = float.MaxValue;
+        foreach (var p in parabolaPoints)
+        {
+            var dist = (point - p).Length();
+            if (dist < distance)
+            {
+                result = p;
+                distance = dist;
+            }
+        }
+
+        return result;
+    }
+
     [Serializable, NetSerializable]
     private sealed class Parabola()
     {
@@ -220,7 +245,7 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
         public Angle Angle = default;
         public Vector2 Offset = default;
 
-        private float A => -4f * Height / (Width * Width);
+        private float A => -Height / (Width / 2 * Width / 2);
 
         public Vector2[] GetPoints(int segments)
         {

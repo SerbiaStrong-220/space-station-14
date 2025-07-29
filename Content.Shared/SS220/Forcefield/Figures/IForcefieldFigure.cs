@@ -12,4 +12,5 @@ public interface IForcefieldFigure
     IEnumerable<IPhysShape> GetShapes();
     IEnumerable<Vector2> GetTrianglesVerts();
     bool IsInside(Vector2 point);
+    Vector2? GetClosestPoint(Vector2 point);
 }
