@@ -394,7 +394,7 @@
     availableLanguages:
   #SS220 Animalistic languages begin
     - id: Doggish
-      canspeak: true
+      canSpeak: true
   #SS220 Animalistic languages end
     - id: SolCommon
       canSpeak: false
