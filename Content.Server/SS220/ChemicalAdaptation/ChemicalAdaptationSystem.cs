@@ -4,6 +4,6 @@ using Content.Shared.SS220.ChemicalAdaptation;
 
 namespace Content.Server.SS220.ChemicalAdaptation;
 
-public sealed class ChemicalAdaptation : SharedChemicalAdaptationSystem
+public sealed class ChemicalAdaptationSystem : SharedChemicalAdaptationSystem
 {
 }
