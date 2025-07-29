@@ -1,19 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.DeviceLinking.Components;
 using Content.Server.Power.Components;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Events;
-using Content.Shared.DeviceLinking.Events;
-using Content.Shared.FixedPoint;
 using Content.Shared.Power;
-using Content.Shared.PowerCell.Components;
-using Content.Shared.Projectiles;
-using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Weapons.Ranged;
 
@@ -33,7 +23,7 @@ public sealed partial class AutoShootGunSystem : EntitySystem
         if (!TryComp<ApcPowerReceiverComponent>(ent, out var apc))
             return;
 
-        if (!apc.Powered)
+        if (apc.Powered)
             return;
 
         _gun.SetEnabled(ent, ent.Comp, false);

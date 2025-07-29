@@ -27,13 +27,13 @@ public sealed partial class GunSignalControlSystem : EntitySystem
         if (!TryComp<GunComponent>(gunControl, out var gun))
             return;
 
-        //SS220 ShuttleGuns_fix start
+        //SS220 ShuttleGuns_fix start (#3180)
         if (EntityManager.TryGetComponent(gunControl, out TransformComponent? transform) && !transform.Anchored)
             return;
 
         if ((TryComp<ApcPowerReceiverComponent>(gunControl, out var apc) && !apc.Powered))
             return;
-        //SS220 ShuttleGuns_fix end
+        //SS220 ShuttleGuns_fix end (#3180)
 
         if (args.Port == gunControl.Comp.TriggerPort)
             _gun.AttemptShoot(gunControl, gun);
