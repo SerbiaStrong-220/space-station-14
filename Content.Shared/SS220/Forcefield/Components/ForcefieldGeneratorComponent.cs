@@ -16,7 +16,7 @@ public sealed partial class ForcefieldGeneratorComponent : Component
 {
     #region Field params
     [DataField(required: true)]
-    public IForcefieldFigure FieldFigure = default;
+    public IForcefieldFigure FieldFigure = new ForcefieldParabola();
 
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public Color FieldColor = Color.LightBlue;

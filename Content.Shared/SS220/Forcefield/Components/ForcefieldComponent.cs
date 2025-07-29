@@ -13,7 +13,7 @@ namespace Content.Shared.SS220.Forcefield.Components;
 public sealed partial class ForcefieldComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public IForcefieldFigure Figure = default;
+    public IForcefieldFigure Figure = new ForcefieldParabola();
 
     [DataField, AutoNetworkedField]
     public ForcefieldCollisionOption CollisionOption = ForcefieldCollisionOption.OutsideGoing;
