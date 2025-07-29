@@ -3,6 +3,7 @@
 - type: entity
   id: LawyerSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Законник"
   description: Для тех, кто хочет найти, задержать, допросить.
   components:
@@ -26,6 +27,7 @@
 - type: entity
   id: GoodCaptainSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Хороший капитан"
   description: Эталонное снаряжение капитана
   components:
@@ -48,6 +50,7 @@
 - type: entity
   id: HooliganSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Хулиган"
   description: Для тех, кто предпочитает очень близкий контакт
   components:
@@ -70,6 +73,7 @@
 - type: entity
   id: CorporationFighterSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Боец Корпорации"
   description: Для тех, кто ценит силу лазерных технологий
   components:
@@ -92,6 +96,7 @@
 - type: entity
   id: PythonSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Питон"
   description: Для суровых капитанов
   components:
@@ -114,6 +119,7 @@
 - type: entity
   id: KammererSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Каммерер"
   description: Для тех, кто когда-то служил в полиции
   components:
@@ -136,6 +142,7 @@
 - type: entity
   id: BulldogSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Бульдог"
   description: Для тех, кто хочет, что бы его реально боялись
   components:
@@ -157,6 +164,7 @@
 - type: entity
   id: CommunistSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Коммунист"
   description: Для тех, кто уважает старину
   components:
@@ -179,6 +187,7 @@
 - type: entity
   id: MercenarySetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Наёмник"
   description: Для профессионалов
   components:
@@ -202,6 +211,7 @@
 - type: entity
   id: SoldierSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Солдат"
   description: Для регулярной армии
   components:
@@ -223,6 +233,7 @@
 - type: entity
   id: KRSSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "КРС"
   description: Для элитных войск
   components:
@@ -244,6 +255,7 @@
 - type: entity
   id: GuardianSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Страж"
   description: Для бывших работников СБ
   components:
@@ -264,6 +276,7 @@
 - type: entity
   id: OutpostSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Застава"
   description: Для любителей тяжелого вооружения
   components:
@@ -285,6 +298,7 @@
 - type: entity
   id: OperativeSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Оперативник"
   description: Для членов  той самой организации
   components:
@@ -306,6 +320,7 @@
 - type: entity
   id: ExperimentetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Эксперимент"
   description: Для тех, кто хочет чего-то новенького
   components:
@@ -326,6 +341,7 @@
 - type: entity
   id: 1984PistolSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор пистолетный "1984"
   description: Для тех, кто называет себя
   components:
@@ -348,6 +364,7 @@
 - type: entity
   id: ViperPistolSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор пистолетный "Гадюка"
   description: Для тех, кто имеет свой подход
   components:
@@ -370,6 +387,7 @@
 - type: entity
   id: MkPistolSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор пистолетный "Мк"
   description: Для самых стойких
   components:
@@ -392,6 +410,7 @@
 - type: entity
   id: SurvivalKitSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Выживание"
   description: Для тех, кто оказался в трудном положении
   components:
@@ -416,6 +435,7 @@
 - type: entity
   id: SaboteurSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Диверсант"
   description: Для тех, кто хочет действовать на нервы
   components:
@@ -438,6 +458,7 @@
 - type: entity
   id: LighterSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Зажигалка"
   description: Для тех, кто любит огонь и дым
   components:
@@ -460,6 +481,7 @@
 - type: entity
   id: BombistSetBox
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: Набор "Бомбист"
   description: Для тех, кто хочет погромче
   components:
@@ -483,6 +505,7 @@
 - type: entity
   id: HelpBoxTrash
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: раскуроченная коробка
   description: Когда-то она держала в себе кучу вещей, но теперь это мусор.
   components:
@@ -500,6 +523,7 @@
 - type: entity
   id: PistolBoxTrash
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: раскуроченная коробка
   description: Когда-то она держала в себе кучу вещей, но теперь это мусор.
   components:
@@ -517,6 +541,7 @@
 - type: entity
   id: WeaponBoxTrash
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: раскуроченная коробка
   description: Когда-то она держала в себе кучу вещей, но теперь это мусор.
   components:
@@ -534,6 +559,7 @@
 - type: entity
   id: СaptainBoxTrash
   parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
   name: раскуроченная коробка
   description: Когда-то она держала в себе кучу вещей, но теперь это мусор.
   components:
