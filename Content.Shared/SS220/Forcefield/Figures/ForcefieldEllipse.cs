@@ -134,9 +134,9 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
 
     private void RefreshEllipses()
     {
-        var angle = OwnerRotation.Opposite() + Angle;
+        var angle = -OwnerRotation.Opposite() + Angle;
 
-        var rotationMatrix = Matrix3x2.CreateRotation((float)OwnerRotation.Opposite().Theta);
+        var rotationMatrix = Matrix3x2.CreateRotation((float)-OwnerRotation.Opposite().Theta);
         var offset = Vector2.Transform(Offset, rotationMatrix);
 
         _centralEllipse.Width = Width;
@@ -272,13 +272,13 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
 
         public bool IsInside(Vector2 point)
         {
-            var rotationMatrix = Matrix3x2.CreateRotation((float)Angle.Opposite().Theta);
+            var rotationMatrix = Matrix3x2.CreateRotation((float)-Angle.Theta);
             point = Vector2.Transform(point, rotationMatrix);
             point -= Offset;
 
-            var normalizedX = point.X / Width / 2;
-            var normalizedY = point.Y / Width / 2;
-            return normalizedX * normalizedX + normalizedY * normalizedY <= 1;
+            var a = Width / 2.0;
+            var b = Height / 2.0;
+            return Math.Pow(point.X / a, 2) + Math.Pow(point.Y / b, 2) <= 1;
         }
     }
 }

@@ -75,6 +75,7 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         if (TerminatingOrDeleted(entity))
             return;
 
+        var rot = Transform(entity).LocalRotation;
         entity.Comp.Figure.OwnerRotation = Transform(entity).LocalRotation;
         entity.Comp.Figure.Refresh();
         Dirty(entity);

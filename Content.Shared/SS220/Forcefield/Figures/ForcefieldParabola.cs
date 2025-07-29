@@ -134,9 +134,9 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
 
     private void RefreshParabolas()
     {
-        var angle = OwnerRotation.Opposite() + Angle;
+        var angle = -OwnerRotation.Opposite() + Angle;
 
-        var rotationMatrix = Matrix3x2.CreateRotation((float)OwnerRotation.Opposite().Theta);
+        var rotationMatrix = Matrix3x2.CreateRotation((float)-OwnerRotation.Opposite().Theta);
         var offset = Vector2.Transform(Offset, rotationMatrix);
 
         _centralParabola.Width = Width;
@@ -281,7 +281,7 @@ public sealed partial class ForcefieldParabola : IForcefieldFigure
 
         public bool IsInside(Vector2 point)
         {
-            var rotationMatrix = Matrix3x2.CreateRotation((float)Angle.Opposite().Theta);
+            var rotationMatrix = Matrix3x2.CreateRotation((float)-Angle.Theta);
             point = Vector2.Transform(point, rotationMatrix);
             point -= Offset;
 

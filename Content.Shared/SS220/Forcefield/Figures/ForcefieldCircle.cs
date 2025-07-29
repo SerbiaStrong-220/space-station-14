@@ -93,7 +93,7 @@ public sealed partial class ForcefieldCircle : IForcefieldFigure
 
     private void RefreshCircles()
     {
-        var rotationMatrix = Matrix3x2.CreateRotation((float)OwnerRotation.Opposite().Theta);
+        var rotationMatrix = Matrix3x2.CreateRotation((float)-OwnerRotation.Opposite().Theta);
         var offset = Vector2.Transform(Offset, rotationMatrix);
 
         _centralCircle.Radius = Radius;
