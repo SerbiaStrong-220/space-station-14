@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.DeviceLinking;
+using Content.Shared.Physics;
 using Content.Shared.SS220.Forcefield.Figures;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -24,13 +25,13 @@ public sealed partial class ForcefieldGeneratorComponent : Component
     public float FieldVisibility = 0.1f;
 
     [DataField, AutoNetworkedField]
-    public float FieldDensity;
+    public float FieldDensity = 1;
 
     [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionLayer>)), AutoNetworkedField]
-    public int FieldCollisionLayer;
+    public int FieldCollisionLayer = (int)CollisionGroup.None;
 
     [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionMask>)), AutoNetworkedField]
-    public int FieldCollisionMask;
+    public int FieldCollisionMask = (int)CollisionGroup.None;
     #endregion
 
     /// <summary>
