@@ -269,6 +269,14 @@ public sealed partial class GunComponent : Component
     public bool CanSuicide = false;
     ///SS220-new-feature kus end
 
+    //ShuttleGuns_fix start (#3180)
+    [DataField]
+    public bool CanShootUnanchored = false;
+
+    [DataField]
+    public bool RequiredPower = true;
+    //SS220 ShuttleGuns_fix end (#3180)
+
 
 }
 

@@ -28,10 +28,10 @@ public sealed partial class GunSignalControlSystem : EntitySystem
             return;
 
         //SS220 ShuttleGuns_fix start (#3180)
-        if (EntityManager.TryGetComponent(gunControl, out TransformComponent? transform) && !transform.Anchored)
+        if (EntityManager.TryGetComponent(gunControl, out TransformComponent? transform) && !transform.Anchored && !gun.CanShootUnanchored)
             return;
 
-        if ((TryComp<ApcPowerReceiverComponent>(gunControl, out var apc) && !apc.Powered))
+        if (TryComp<ApcPowerReceiverComponent>(gunControl, out var apc) && !apc.Powered && gun.RequiredPower)
             return;
         //SS220 ShuttleGuns_fix end (#3180)
 
