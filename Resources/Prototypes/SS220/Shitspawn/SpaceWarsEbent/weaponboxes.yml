@@ -10,7 +10,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/help_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/help_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -34,7 +34,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/captain_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/captain_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -57,7 +57,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -80,7 +80,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -103,7 +103,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/captain_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/captain_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -126,7 +126,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -149,7 +149,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -171,7 +171,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -194,7 +194,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -218,7 +218,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -240,7 +240,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -262,7 +262,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -283,7 +283,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -305,7 +305,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -327,7 +327,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -348,7 +348,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/pistol_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/pistol_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -371,7 +371,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/pistol_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/pistol_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -394,7 +394,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/pistol_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/pistol_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -417,7 +417,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/help_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/help_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -442,7 +442,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/help_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/help_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -465,7 +465,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/help_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/help_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -488,7 +488,7 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Objects/Storage/help_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/help_box.rsi
     layers:
       - state: icon
   - type: SpawnItemsOnUse
@@ -513,7 +513,7 @@
     materialComposition:
       Plastic: 100
   - type: Sprite
-    sprite: SS220/Objects/Storage/help_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/help_box.rsi
     state: icon_open
   - type: Tag
     tags:
@@ -531,7 +531,7 @@
     materialComposition:
       Plastic: 100
   - type: Sprite
-    sprite: SS220/Objects/Storage/pistol_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/pistol_box.rsi
     state: icon_open
   - type: Tag
     tags:
@@ -549,7 +549,7 @@
     materialComposition:
       Plastic: 100
   - type: Sprite
-    sprite: SS220/Objects/Storage/weapon_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
     state: icon_open
   - type: Tag
     tags:
@@ -567,7 +567,7 @@
     materialComposition:
       Plastic: 100
   - type: Sprite
-    sprite: SS220/Objects/Storage/captain_box.rsi
+    sprite: SS220/Shitspawn/SpaceWarsEbent/captain_box.rsi
     state: icon_open
   - type: Tag
     tags:
