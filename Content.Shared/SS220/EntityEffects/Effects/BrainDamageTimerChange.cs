@@ -34,7 +34,10 @@ public sealed partial class BrainDamageTimerChange : EntityEffect
 
         var timeBuffer = AddTime;
 
-        chemAdaptSys.TryModifyValue(args.TargetEntity, reagentArgs.Reagent.ID, ref timeBuffer);
+        if (chemAdaptSys.TryGetModifier(args.TargetEntity, reagentArgs.Reagent.ID, out var modifier))
+        {
+            timeBuffer *= modifier;
+        }
 
         limReviveSys.IncreaseTimer(args.TargetEntity, timeBuffer);
     }

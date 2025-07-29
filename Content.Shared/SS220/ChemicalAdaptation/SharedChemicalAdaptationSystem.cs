@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Robust.Shared.Timing;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.SS220.ChemicalAdaptation;
 
@@ -60,42 +61,21 @@ public abstract class SharedChemicalAdaptationSystem : EntitySystem
         Dirty(ent, ent.Comp);
     }
 
-    public bool TryModifyValue(EntityUid ent, string reagent, ref int value)
+    public bool TryGetModifier(EntityUid ent, string reagent, out float value)
     {
         if (!TryComp<ChemicalAdaptationComponent>(ent, out var adaptComp))
+        {
+            value = 0;
             return false;
+        }
 
         if (!adaptComp.ChemicalAdaptations.TryGetValue(reagent, out var adaptationInfo))
+        {
+            value = 0;
             return false;
+        }
 
-        value = (int)(value * adaptationInfo.Modifier);
-
-        return true;
-    }
-
-    public bool TryModifyValue(EntityUid ent, string reagent, ref float value)
-    {
-        if (!TryComp<ChemicalAdaptationComponent>(ent, out var adaptComp))
-            return false;
-
-        if (!adaptComp.ChemicalAdaptations.TryGetValue(reagent, out var adaptationInfo))
-            return false;
-
-        value = value * adaptationInfo.Modifier;
-
-        return true;
-    }
-
-    public bool TryModifyValue(EntityUid ent, string reagent, ref TimeSpan value)
-    {
-        if (!TryComp<ChemicalAdaptationComponent>(ent, out var adaptComp))
-            return false;
-
-        if (!adaptComp.ChemicalAdaptations.TryGetValue(reagent, out var adaptationInfo))
-            return false;
-
-        value = value * adaptationInfo.Modifier;
-
+        value = adaptationInfo.Modifier;
         return true;
     }
 }
