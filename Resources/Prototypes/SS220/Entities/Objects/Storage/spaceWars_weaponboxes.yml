@@ -39,7 +39,7 @@
       - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: СaptainBoxTrash
+      - id: CaptainBoxTrash
       - id: SyndicateWhistle
       - id: Telescopichka
       - id: WeaponSynergisticEnergyGun
@@ -108,7 +108,7 @@
       - state: icon
   - type: SpawnItemsOnUse
     items:
-      - id: СaptainBoxTrash
+      - id: CaptainBoxTrash
       - id: WeaponRevolverPythonAP
       - id: SyndicateWhistle
       - id: SpeedLoaderMagnumAP
@@ -557,7 +557,7 @@
   - type: SpaceGarbage
 
 - type: entity
-  id: СaptainBoxTrash
+  id: CaptainBoxTrash
   parent: BaseItem
   suffix: Shitspawn, Ebent, Space Wars
   name: раскуроченная коробка
