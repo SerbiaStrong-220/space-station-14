@@ -44,7 +44,7 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         {
             UpdatePvsOverride((uid, comp));
 
-            if (!comp.Figure.Dirty)
+            if (!comp.Params.Figure.Dirty)
                 continue;
 
             RefreshFigure((uid, comp));
@@ -75,9 +75,8 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         if (TerminatingOrDeleted(entity))
             return;
 
-        var rot = Transform(entity).LocalRotation;
-        entity.Comp.Figure.OwnerRotation = Transform(entity).LocalRotation;
-        entity.Comp.Figure.Refresh();
+        entity.Comp.Params.Figure.OwnerRotation = Transform(entity).LocalRotation;
+        entity.Comp.Params.Figure.Refresh();
         Dirty(entity);
 
         if (TryComp<FixturesComponent>(entity, out var fixtures))
@@ -99,8 +98,8 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         foreach (var fixture in fixtures.Fixtures)
             _fixture.DestroyFixture(entity, fixture.Key, false, manager: fixtures);
 
-        var shapes = forcefield.Figure.GetShapes();
-        var density = forcefield.Density / shapes.Count();
+        var shapes = forcefield.Params.Figure.GetShapes();
+        var density = forcefield.Params.Density / shapes.Count();
         for (var i = 0; i < shapes.Count(); i++)
         {
             var shape = shapes.ElementAt(i);
@@ -109,8 +108,8 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
             shape,
             $"shape{i}",
             density: density,
-            collisionLayer: forcefield.CollisionLayer,
-            collisionMask: forcefield.CollisionMask,
+            collisionLayer: forcefield.Params.CollisionLayer,
+            collisionMask: forcefield.Params.CollisionMask,
             manager: fixtures,
             updates: false
             );
@@ -141,7 +140,7 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
                 continue;
 
             var entLocalCoords = _transform.ToCoordinates(entity.Owner, entMapCoords);
-            var closestPoint = entity.Comp.Figure.GetClosestPoint(entLocalCoords.Position);
+            var closestPoint = entity.Comp.Params.Figure.GetClosestPoint(entLocalCoords.Position);
             if (closestPoint is null)
                 continue;
 

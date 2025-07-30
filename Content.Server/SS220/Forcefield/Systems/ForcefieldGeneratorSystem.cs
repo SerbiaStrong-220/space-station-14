@@ -165,12 +165,7 @@ public sealed partial class ForcefieldGeneratorSystem : EntitySystem
 
         var forcefieldComp = EnsureComp<ForcefieldComponent>(forcefieldUid);
 
-        forcefieldComp.Figure = entity.Comp.FieldFigure;
-        forcefieldComp.Density = entity.Comp.FieldDensity;
-        forcefieldComp.CollisionLayer = entity.Comp.FieldCollisionLayer;
-        forcefieldComp.CollisionMask = entity.Comp.FieldCollisionMask;
-        forcefieldComp.Color = entity.Comp.FieldColor;
-        forcefieldComp.Visibility = entity.Comp.FieldVisibility;
+        forcefieldComp.Params = entity.Comp.ForcefieldParams;
         forcefieldComp.FieldOwner = GetNetEntity(entity);
 
         Dirty(forcefieldUid, forcefieldComp);

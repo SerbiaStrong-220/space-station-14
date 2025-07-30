@@ -1,38 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.DeviceLinking;
-using Content.Shared.Physics;
-using Content.Shared.SS220.Forcefield.Figures;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.SS220.Forcefield.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ForcefieldGeneratorComponent : Component
 {
-    #region Field params
-    [DataField(required: true)]
-    public IForcefieldFigure FieldFigure = new ForcefieldParabola();
-
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public Color FieldColor = Color.LightBlue;
-
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public float FieldVisibility = 0.1f;
-
-    [DataField, AutoNetworkedField]
-    public float FieldDensity = 1;
-
-    [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionLayer>)), AutoNetworkedField]
-    public int FieldCollisionLayer = (int)CollisionGroup.None;
-
-    [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionMask>)), AutoNetworkedField]
-    public int FieldCollisionMask = (int)CollisionGroup.None;
-    #endregion
+    [DataField(required: true), AutoNetworkedField]
+    public ForcefieldParams ForcefieldParams = new();
 
     /// <summary>
     /// How much energy it costs per seond to keep the field up

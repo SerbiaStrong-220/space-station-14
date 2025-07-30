@@ -3,7 +3,6 @@ using Content.Shared.SS220.Weapons.Ranged.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
-using System.Numerics;
 
 namespace Content.Shared.SS220.Forcefield.Systems;
 
@@ -86,12 +85,12 @@ public abstract class SharedForcefieldSystem : EntitySystem
     {
         if (IsInside(entity, uid))
         {
-            if ((entity.Comp.CollisionOption & ForcefieldCollisionOption.InsideGoing) == 0)
+            if ((entity.Comp.Params.CollisionOption & ForcefieldCollisionOption.InsideGoing) == 0)
                 return false;
         }
         else
         {
-            if ((entity.Comp.CollisionOption & ForcefieldCollisionOption.OutsideGoing) == 0)
+            if ((entity.Comp.Params.CollisionOption & ForcefieldCollisionOption.OutsideGoing) == 0)
                 return false;
         }
 
@@ -110,6 +109,6 @@ public abstract class SharedForcefieldSystem : EntitySystem
             return false;
 
         var localCoords = _transform.ToCoordinates(entity.Owner, worldPos);
-        return entity.Comp.Figure.IsInside(localCoords.Position);
+        return entity.Comp.Params.Figure.IsInside(localCoords.Position);
     }
 }

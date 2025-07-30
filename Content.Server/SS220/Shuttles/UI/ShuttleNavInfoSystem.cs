@@ -84,14 +84,14 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
         var query = EntityQueryEnumerator<ForcefieldComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            var localVerts = comp.Figure.GetTrianglesVerts();
+            var localVerts = comp.Params.Figure.GetTrianglesVerts();
             var localToWorld = _transform.GetWorldMatrix(uid);
             var mapId = _transform.GetMapId(uid);
 
             var worldVerts = localVerts.Select(x => new MapCoordinates(Vector2.Transform(x, localToWorld), mapId)).ToList();
             infos.Add(new ShuttleNavForcefieldInfo
             {
-                Color = comp.Color,
+                Color = comp.Params.Color,
                 TrianglesVerts = worldVerts,
             });
         }

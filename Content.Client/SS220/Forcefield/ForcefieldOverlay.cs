@@ -41,7 +41,7 @@ public sealed class ForcefieldOverlay : Overlay
 
         while (query.MoveNext(out var uid, out var comp))
         {
-            var verts = comp.Figure.GetTrianglesVerts();
+            var verts = comp.Params.Figure.GetTrianglesVerts();
             if (!verts.Any())
                 continue;
 
@@ -52,7 +52,7 @@ public sealed class ForcefieldOverlay : Overlay
 
             _shader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
             _shader.SetParameter("reference", reference);
-            var finalVisibility = Math.Clamp(comp.Visibility, -1f, 1f);
+            var finalVisibility = Math.Clamp(comp.Params.Visibility, -1f, 1f);
             _shader.SetParameter("visibility", finalVisibility);
 
             handle.SetTransform(pos, rot);

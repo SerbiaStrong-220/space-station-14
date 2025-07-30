@@ -12,12 +12,14 @@
   - type: Damageable
     damageContainer: StructuralInorganic
   - type: Forcefield
-    figure: !type:ForcefieldParabola
-    density: 100
-    collisionMask:
-    - None
-    collisionLayer:
-    - BulletImpassable
+    params:
+      figure: !type:ForcefieldParabola
+        offset: 0, 4
+      density: 100
+      collisionMask:
+      - None
+      collisionLayer:
+      - BulletImpassable
   - type: Clickable
   - type: Physics
     bodyType: Static
@@ -34,11 +36,6 @@
   description: Генерирует направленное силовое поле, которое препятствует прониканию баллистических снарядов, но не способно сдерживать лазерное оружие.
   components:
   - type: ForcefieldGenerator
-    fieldDensity: 100
-    fieldCollisionMask:
-    - None
-    fieldCollisionLayer:
-    - BulletImpassable
   - type: ForcefieldGeneratorVisuals
     powerSteps: 4
   - type: Fixtures
@@ -125,8 +122,14 @@
   suffix: Parabola
   components:
   - type: ForcefieldGenerator
-    fieldFigure: !type:ForcefieldParabola
-      offset: 0, 4
+    forcefieldParams:
+      figure: !type:ForcefieldParabola
+        offset: 0, 4
+      density: 100
+      collisionMask:
+      - None
+      collisionLayer:
+      - BulletImpassable
 
 - type: entity
   parent: BaseForcefieldGenerator
@@ -134,7 +137,13 @@
   suffix: Circle
   components:
   - type: ForcefieldGenerator
-    fieldFigure: !type:ForcefieldCircle
+    forcefieldParams:
+      figure: !type:ForcefieldCircle
+      density: 100
+      collisionMask:
+      - None
+      collisionLayer:
+      - BulletImpassable
 
 - type: entity
   parent: BaseForcefieldGenerator
@@ -142,4 +151,10 @@
   suffix: Ellipse
   components:
   - type: ForcefieldGenerator
-    fieldFigure: !type:ForcefieldEllipse
+    forcefieldParams:
+      figure: !type:ForcefieldEllipse
+      density: 100
+      collisionMask:
+      - None
+      collisionLayer:
+      - BulletImpassable

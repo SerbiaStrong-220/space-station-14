@@ -4,7 +4,7 @@ using Content.Shared.SS220.Forcefield.Figures;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Dynamics;
-using Robust.Shared.Player;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.SS220.Forcefield.Components;
@@ -13,25 +13,7 @@ namespace Content.Shared.SS220.Forcefield.Components;
 public sealed partial class ForcefieldComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public IForcefieldFigure Figure = new ForcefieldParabola();
-
-    [DataField, AutoNetworkedField]
-    public ForcefieldCollisionOption CollisionOption = ForcefieldCollisionOption.OutsideGoing;
-
-    [DataField, AutoNetworkedField]
-    public float Density = 1;
-
-    [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionLayer>)), AutoNetworkedField]
-    public int CollisionLayer = (int)CollisionGroup.None;
-
-    [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionMask>)), AutoNetworkedField]
-    public int CollisionMask = (int)CollisionGroup.None;
-
-    [DataField, AutoNetworkedField]
-    public Color Color = Color.LightBlue;
-
-    [DataField, AutoNetworkedField]
-    public float Visibility = 0.1f;
+    public ForcefieldParams Params = new();
 
     [DataField, AutoNetworkedField]
     public NetEntity? FieldOwner;
@@ -41,6 +23,32 @@ public sealed partial class ForcefieldComponent : Component
     {
         Volume = 1.25f
     });
+}
+
+[Serializable, NetSerializable]
+[DataDefinition]
+public sealed partial class ForcefieldParams()
+{
+    [DataField(required: true)]
+    public IForcefieldFigure Figure = new ForcefieldParabola();
+
+    [DataField]
+    public ForcefieldCollisionOption CollisionOption = ForcefieldCollisionOption.OutsideGoing;
+
+    [DataField]
+    public float Density = 1;
+
+    [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionLayer>))]
+    public int CollisionLayer = (int)CollisionGroup.None;
+
+    [DataField(customTypeSerializer: typeof(FlagSerializer<CollisionMask>))]
+    public int CollisionMask = (int)CollisionGroup.None;
+
+    [DataField]
+    public Color Color = Color.LightBlue;
+
+    [DataField]
+    public float Visibility = 0.1f;
 }
 
 public enum ForcefieldCollisionOption

@@ -30,7 +30,7 @@ public sealed partial class ForcefieldCircle : IForcefieldFigure
             Dirty = true;
         }
     }
-    private float _thickness = 0.33f;
+    private float _thickness = 0.5f;
 
     [DataField]
     public Vector2 Offset
