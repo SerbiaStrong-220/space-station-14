@@ -11,7 +11,6 @@
   - type: InteractionOutline
   - type: Physics
     bodyType: Static
-    boltType: SMEmitterBolt
   - type: Fixtures
     fixtures:
       fix1:
@@ -106,6 +105,7 @@
   - type: SuperMatterEmitter
     energyToMatterRatio: 50
     powerConsumption: 600
+    boltType: SMEmitterBolt
   - type: ActivatableUI
     singleUser: true # this required to activate emitter by smEmitter BUI
     key: enum.SuperMatterEmitterUiKey.Key
