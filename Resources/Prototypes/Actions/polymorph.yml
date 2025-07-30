@@ -40,8 +40,10 @@
   components:
   - type: Action
     icon:
-      sprite: Objects/Fun/immovable_rod.rsi
-      state: icon
+      # SS220 Wizard getting used to Begin
+      sprite: SS220/Interface/Actions/magic_spells_other.rsi
+      state: nullrod
+      # SS220 Wizard getting used to End
   - type: InstantAction
     event: !type:PolymorphActionEvent
       protoId: WizardRod
@@ -56,7 +58,7 @@
   - type: Action
     useDelay: 30
     icon:
-      sprite: Objects/Magic/magicactions.rsi
+      sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
       state: jaunt
   - type: InstantAction
     event: !type:PolymorphActionEvent

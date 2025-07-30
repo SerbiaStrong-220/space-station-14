@@ -5,9 +5,9 @@
   description: Advanced armored jumpsuit used by special forces in special operations.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/deathsquad.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/deathsquad.rsi #SS220-deathsquad-resprite
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/deathsquad.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/deathsquad.rsi #SS220-deathsquad-resprite
 
 - type: entity
   parent: ClothingUniformBase

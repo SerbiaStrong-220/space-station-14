@@ -9,8 +9,9 @@
     sound: !type:SoundPathSpecifier
       path: /Audio/Magic/staff_animation.ogg
     icon:
-      sprite: Mobs/Species/Human/organs.rsi
-      state: brain
+    # SS220 Wizard getting used to Begin
+      sprite: SS220/Interface/Actions/magic_spells_other.rsi
+      state: mind
   - type: EntityTargetAction
     whitelist:
       components:

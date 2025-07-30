@@ -2,24 +2,34 @@
 
 using Content.Server.Humanoid;
 using Content.Server.Medical;
+using Content.Server.SS220.Bed.Cryostorage;
+using Content.Server.SS220.GameTicking.Rules;
+using Content.Server.SS220.GameTicking.Rules.Components;
+using Content.Server.SS220.Objectives.Components;
+using Content.Server.SS220.Objectives.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
+using Content.Shared.Cloning.Events;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
-using Content.Shared.SS220.StuckOnEquip;
-using Robust.Shared.Timing;
-using Robust.Shared.Prototypes;
-using System.Linq;
-using Robust.Shared.Audio.Systems;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs;
+using Content.Shared.SS220.CultYogg.Sacraficials;
 using Content.Shared.SS220.EntityEffects;
+using Content.Shared.SS220.StuckOnEquip;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
@@ -38,7 +48,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
     [Dependency] private readonly ThirstSystem _thirstSystem = default!;
     [Dependency] private readonly VomitSystem _vomitSystem = default!;
-
+    [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
 
     private const string CultDefaultMarking = "CultStage-Halo";
 
@@ -54,16 +64,16 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         SubscribeLocalEvent<CultYoggComponent, OnSaintWaterDrinkEvent>(OnSaintWaterDrinked);
         SubscribeLocalEvent<CultYoggComponent, CultYoggForceAscendingEvent>(OnForcedAcsending);
         SubscribeLocalEvent<CultYoggComponent, ChangeCultYoggStageEvent>(OnUpdateStage);
+        SubscribeLocalEvent<CultYoggComponent, CloningEvent>(OnCloning);
+
+        SubscribeLocalEvent<CultYoggComponent, PlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<CultYoggComponent, BeingCryoDeletedEvent>(OnCryoDeleted);
+        SubscribeLocalEvent<CultYoggComponent, SuicideEvent>(OnSuicide);
     }
 
     #region StageUpdating
     private void OnUpdateStage(Entity<CultYoggComponent> ent, ref ChangeCultYoggStageEvent args)
     {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
         if (ent.Comp.CurrentStage == args.Stage)
             return;
 
@@ -81,11 +91,13 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         switch (ent.Comp.CurrentStage)
         {
             case CultYoggStage.Initial:
-                return;
+                break;
+
             case CultYoggStage.Reveal:
                 ent.Comp.PreviousEyeColor = new Color(huAp.EyeColor.R, huAp.EyeColor.G, huAp.EyeColor.B, huAp.EyeColor.A);
                 huAp.EyeColor = Color.Green;
                 break;
+
             case CultYoggStage.Alarm:
                 if (!_prototype.HasIndex<MarkingPrototype>(CultDefaultMarking))
                 {
@@ -121,6 +133,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
                 huAp.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
                 break;
+
             case CultYoggStage.God:
                 if (!TryComp<MobStateComponent>(ent, out var mobstate))
                     return;
@@ -131,6 +144,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                     RaiseLocalEvent(ent, ref ev);
                 }
                 break;
+
             default:
                 Log.Error("Something went wrong with CultYogg stages");
                 break;
@@ -152,6 +166,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         {
             huAp.MarkingSet.Markings[MarkingCategories.Tail].Add(ent.Comp.PreviousTail);
         }
+
         Dirty(ent.Owner, huAp);
     }
     #endregion
@@ -278,6 +293,8 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         if (_stuckOnEquip.TryRemoveStuckItems(ent))//Idk how to deal with popup spamming
             _popup.PopupEntity(Loc.GetString("cult-yogg-dropped-items"), ent, ent);//and now i dont see any :(
+
+        Dirty(ent, ent.Comp);
     }
 
     private bool NoAcsendingCultists()//if anybody else is acsending
@@ -305,9 +322,35 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             DeleteVisuals(ent);
 
             RemComp<CultYoggComponent>(ent);
+            _cultRuleSystem.CheckSimplifiedEslavement();//Add token if it was last cultist
         }
 
         purifyedComp.PurifyingDecayEventTime = _timing.CurTime + purifyedComp.BeforeDeclinesTime; //setting timer, when purifying will be removed
+        Dirty(ent, ent.Comp);
     }
     #endregion
+
+    #region CheckSimplifiedEslavement
+    private void OnPlayerDetached(Entity<CultYoggComponent> ent, ref PlayerDetachedEvent args)
+    {
+        _cultRuleSystem.CheckSimplifiedEslavement();
+    }
+    private void OnCryoDeleted(Entity<CultYoggComponent> ent, ref BeingCryoDeletedEvent args)
+    {
+        _cultRuleSystem.CheckSimplifiedEslavement();
+    }
+
+    private void OnSuicide(Entity<CultYoggComponent> ent, ref SuicideEvent args)
+    {
+        _cultRuleSystem.CheckSimplifiedEslavement();
+    }
+    #endregion
+
+    private void OnCloning(Entity<CultYoggComponent> ent, ref CloningEvent args)//ToDo_SS220 somthing wierd happned when we are cloning with cult markings
+    {
+        if (!_cultRuleSystem.TryGetCultGameRule(out var rule))
+            return;
+
+        _cultRuleSystem.MakeCultist(args.CloneUid, rule.Value);
+    }
 }

@@ -51,7 +51,7 @@
 - type: chameleonOutfit
   id: ChiefMedicalOfficerChameleonOutfit
   job: ChiefMedicalOfficer
-  hasMindShield: true
+# hasMindShield: false #ss220 ChameleonOutfit fix
   equipment:
     head: ClothingHeadHatBeretCmo
     eyes: ClothingEyesHudMedical

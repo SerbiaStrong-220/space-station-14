@@ -1325,10 +1325,17 @@
   abstract: true
   components:
   - type: CombatMode
+  - type: Blindable #SS220 Fix Ancestor Mob Blindable
 #SS220 languages tweaks begin
   - type: Language
     availableLanguages:
     - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Feline
       canSpeak: false
 #SS220 languages tweaks end
   - type: Inventory
@@ -1464,10 +1471,18 @@
   components:
   - type: NameIdentifier
     group: Monkey
+#SS220 Animalistic languages begin
+  - type: Language
+    availableLanguages:
+    - id: Monkey
+      canSpeak: true
+    - id: Reptilian
+      canSpeak: false
+#SS220 Animalistic languages end
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
-  - type: MonkeyAccent
+  #- type: MonkeyAccent
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
   - type: AlwaysRevolutionaryConvertible
@@ -1498,12 +1513,20 @@
   components:
   - type: NameIdentifier
     group: Monkey
+#SS220 Animalistic languages begin
+  - type: Language
+    availableLanguages:
+    - id: Monkey
+      canSpeak: true
+    - id: Reptilian
+      canSpeak: false
+#SS220 Animalistic languages end
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
-  - type: MonkeyAccent
+  #- type: MonkeyAccent
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -1550,9 +1573,15 @@
   components:
   - type: NameIdentifier
     group: Kobold
-  - type: LizardAccent
-  - type: ReplacementAccent
-    accent: kobold
+  # - type: LizardAccent
+  # - type: ReplacementAccent
+  #   accent: kobold
+#SS220 Animalistic Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Reptilian
+      canSpeak: true
+#SS220 Animalistic Languages end
   - type: Speech
     speechSounds: Lizard
     speechVerb: Reptilian
@@ -1719,6 +1748,22 @@
   components:
   - type: Body
     prototype: Mouse
+#SS220 Animalistic Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Mousey
+      canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+#SS220 Animalistic Languages end
   - type: GhostRole
     makeSentient: true
     allowSpeech: true
@@ -1833,8 +1878,8 @@
     spawned:
     - id: FoodMeatRat
       amount: 1
-  - type: ReplacementAccent
-    accent: mouse
+    # - type: ReplacementAccent
+    # accent: mouse
   - type: Tag
     tags:
     - Trash
@@ -3028,6 +3073,14 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: cat
+#SS220 Animalistic Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Feline
+      canSpeak: true
+    - id: Galactic
+      canSpeak: false
+#SS220 Animalistic Languages end
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -3615,8 +3668,18 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Animals/pig_oink.ogg
-  - type: ReplacementAccent
-    accent: pig
+  # - type: ReplacementAccent
+  #   accent: pig
+  #SS220 Animalistic languages begin
+  - type: Language
+    availableLanguages:
+    - id: Piggish
+      canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+   #SS220 Animalistic languages end
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -3870,3 +3933,4 @@
     - DoorBumpOpener
   - type: StatusIcon # marks them as crew
     bounds: -0.5,-0.5,0.5,0.5
+  - type: Blindable #SS220 Fix Ancestor Mob Blindable

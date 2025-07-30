@@ -448,6 +448,13 @@
   - type: Extractable
     grindableSolutionName: food
   - type: SpaceGarbage
+
+  # ss220 clown uplink bgn
+  - type: Currency
+    price:
+      TrashBananaPeel: 1
+  # ss220 clown uplink end
+
   - type: Food
     requiresSpecialDigestion: true
 
@@ -472,6 +479,11 @@
           Quantity: 1
         - ReagentId: Carbon
           Quantity: 2
+  # ss220 clown uplink bgn
+  - type: Currency
+    price:
+      TrashBananaPeel: 2
+  # ss220 clown uplink end
 
 - type: entity
   name: mimana peel
@@ -489,6 +501,11 @@
       path: /Audio/Effects/slip.ogg
       params:
         volume: -100
+  # ss220 clown uplink bgn
+  - type: Currency
+    price:
+      TrashBananaPeel: 4
+  # ss220 clown uplink end
 
 - type: entity
   name: bananium peel
@@ -502,6 +519,11 @@
     sprite: Objects/Materials/materials.rsi
     heldPrefix: peel
   - type: Slippery
+  # ss220 clown uplink bgn
+  - type: Currency
+    price:
+      TrashBananaPeel: 5
+  # ss220 clown uplink end
 
 - type: entity
   name: carrot

@@ -211,6 +211,9 @@ namespace Content.Server.PDA
                     ActualOwnerName = pda.OwnerName,
                     IdOwner = id?.FullName,
                     JobTitle = id?.LocalizedJobTitle,
+                    //ss220 add color for job in pda start
+                    CardColor = id?.JobColor,
+                    //ss220 add color for job in pda end
                     StationAlertLevel = pda.StationAlertLevel,
                     StationAlertColor = pda.StationAlertColor
                 },
