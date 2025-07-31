@@ -1,22 +1,25 @@
 using System.Linq;
 using Content.Shared.GameTicking;
-using Content.Shared.SS220.AdditionalInfoForRoundEnd;
+using Content.Shared.Mind;
+using Content.Shared.SS220.RoundEndInfo;
 using Robust.Shared.Utility;
 
-namespace Content.Server.SS220.AdditionalInfoForRoundEnd;
+namespace Content.Server.SS220.RoundEndInfo;
 
 /// <summary>
 /// Sends and organizes server-side round end summary data for display on the client.
 /// Gathers statistics from IRoundEndInfoDisplay sources and broadcasts them
 /// as structured blocks. Also handles antagonist purchase info.
 /// </summary>
-public sealed class AdditionalInfoForRoundEndSystem : EntitySystem
+public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
 {
     [Dependency] private readonly RoundEndInfoManager _infoManager = default!;
 
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnd);
+        SubscribeLocalEvent<RoundEndInfoSendEvent>(OnRoundSend);
     }
 
     /// <summary>
@@ -24,7 +27,13 @@ public sealed class AdditionalInfoForRoundEndSystem : EntitySystem
     /// </summary>
     private void OnRoundEnd(RoundEndedEvent args)
     {
+        SendAdditionalInfo();
         _infoManager.ClearAllDatas();
+    }
+
+    private void OnRoundSend(RoundEndInfoSendEvent ev)
+    {
+        SendAntagInfo();
     }
 
     /// <summary>
@@ -39,9 +48,13 @@ public sealed class AdditionalInfoForRoundEndSystem : EntitySystem
 
         foreach (var allPurchase in info.GetAllPurchases())
         {
+            if (!TryComp(allPurchase.Key, out MindComponent? mind)
+                || string.IsNullOrEmpty(mind.CharacterName))
+                continue;
+
             ev.PlayerPurchases.Add(new RoundEndAntagPurchaseData
             {
-                Name = allPurchase.Key,
+                Name = mind.CharacterName,
                 ItemPrototypes = allPurchase.Value.ItemPrototypes,
                 TotalTC = allPurchase.Value.TotalTC,
             });
@@ -61,7 +74,7 @@ public sealed class AdditionalInfoForRoundEndSystem : EntitySystem
             .OrderBy(info => info.DisplayOrder)
             .GroupBy(info => info.DisplayOrder / 100);
 
-        var blocks = new List<RoundEndInfoDisplayBlock>();
+        var blocks = new List<IRoundEndInfoData>();
 
         foreach (var group in groups)
         {
@@ -72,19 +85,21 @@ public sealed class AdditionalInfoForRoundEndSystem : EntitySystem
             foreach (var display in group)
             {
                 title ??= display.Title;
-                display.AddSummaryText(builder);
+                builder.AddMessage(display.GetSummaryText());
                 builder.PushNewline();
                 color ??= display.BackgroundColor;
             }
 
             if (!builder.IsEmpty)
             {
-                blocks.Add(new RoundEndInfoDisplayBlock
+                var displayBlock = new RoundEndInfoDisplayBlock
                 {
                     Title = title ?? Loc.GetString("additional-info-no-category"),
                     Body = builder.ToMarkup(),
                     Color = color ?? new Color(30, 30, 30, 200),
-                });
+                };
+
+                blocks.Add(displayBlock);
             }
         }
 

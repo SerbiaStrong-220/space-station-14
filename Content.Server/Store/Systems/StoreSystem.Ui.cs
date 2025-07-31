@@ -1,7 +1,7 @@
 using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
-using Content.Server.SS220.AdditionalInfoForRoundEnd;
+using Content.Server.SS220.RoundEndInfo;
 using Content.Server.Stack;
 using Content.Server.Store.Components;
 using Content.Server.Traitor.Uplink;
@@ -275,8 +275,16 @@ public sealed partial class StoreSystem
         _audio.PlayEntity(component.BuySuccessSound, msg.Actor, uid); //cha-ching!
 
         //ss220 add additional info for round start
-        var tcAmount = listing.Cost[UplinkSystem.TelecrystalCurrencyPrototype].Value / 100;
-        _infoManager.EnsureInfo<AntagPurchaseInfo>().AddPurchase(msg.Actor, listing.ID, tcAmount);
+        if (listing.Cost.TryGetValue(UplinkSystem.TelecrystalCurrencyPrototype, out var costTc))
+        {
+            var mindForInfo = _mind.GetMind(msg.Actor);
+
+            if (mindForInfo != null)
+            {
+                var tcAmount = costTc.Value / 100;
+                _infoManager.EnsureInfo<AntagPurchaseInfo>().AddPurchase(mindForInfo.Value, listing.ID, tcAmount);
+            }
+        }
         //ss220 add additional info for round end
 
         var buyFinished = new StoreBuyFinishedEvent

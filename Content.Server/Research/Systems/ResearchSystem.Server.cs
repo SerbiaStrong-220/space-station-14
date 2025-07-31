@@ -2,7 +2,7 @@ using System.Linq;
 using Content.Server.Lathe;
 using Content.Server.Lathe.Components;
 using Content.Server.Power.EntitySystems;
-using Content.Server.SS220.AdditionalInfoForRoundEnd;
+using Content.Server.SS220.RoundEndInfo;
 using Content.Shared.Localizations;
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Prototypes;

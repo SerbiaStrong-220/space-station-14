@@ -1,4 +1,5 @@
-using Content.Server.SS220.AdditionalInfoForRoundEnd;
+using Content.Server.Mind;
+using Content.Server.SS220.RoundEndInfo;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
@@ -10,6 +11,7 @@ public sealed partial class PuddleSystem
 {
     //ss220 add additional info for round start
     [Dependency] private readonly RoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
     //ss220 add additional info for round end
 
     private static readonly TimeSpan EvaporationCooldown = TimeSpan.FromSeconds(1);
@@ -64,8 +66,11 @@ public sealed partial class PuddleSystem
                 Spawn("PuddleSparkle", xformQuery.GetComponent(uid).Coordinates);
 
                 //ss220 add additional info for round start
-                if (puddle.LastInteractionUser != null)
-                    _infoManager.EnsureInfo<PuddleInfo>().AddValueForMind(puddle.LastInteractionUser.Value);
+                if (puddle.LastInteractionUser != null &&
+                    _mind.TryGetMind(puddle.LastInteractionUser.Value, out var mind, out _))
+                {
+                    _infoManager.EnsureInfo<PuddleInfo>().AddMindToData(mind);
+                }
                 //ss220 add additional info for round end
 
                 QueueDel(uid);

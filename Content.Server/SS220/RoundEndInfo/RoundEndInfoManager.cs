@@ -3,10 +3,10 @@ using Content.Server.Administration.Systems;
 using Content.Server.Mind;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
-using Content.Shared.SS220.AdditionalInfoForRoundEnd;
+using Content.Shared.SS220.RoundEndInfo;
 using Robust.Shared.Utility;
 
-namespace Content.Server.SS220.AdditionalInfoForRoundEnd;
+namespace Content.Server.SS220.RoundEndInfo;
 
 /// <summary>
 /// Manages all IRoundEndInfo data used for compiling round-end summaries.
@@ -29,9 +29,6 @@ public sealed class RoundEndInfoManager
 
         var instance = new T();
 
-        if (instance is IRoundEndInfoWithInit init)
-            init.Initialize();
-
         _infos.Add(typeof(T), instance);
         return instance;
     }
@@ -53,20 +50,7 @@ public sealed class RoundEndInfoManager
 /// <summary>
 /// Base interface for any data provider that contributes to round-end summaries.
 /// </summary>
-public interface IRoundEndInfo
-{
-}
-
-/// <summary>
-/// Extension interface for IRoundEndInfo types that require initialization before use.
-/// </summary>
-public interface IRoundEndInfoWithInit : IRoundEndInfo
-{
-    /// <summary>
-    /// Called once when the info is created to set up dependencies or internal state.
-    /// </summary>
-    void Initialize();
-}
+public interface IRoundEndInfo;
 
 /// <summary>
 /// Interface for info types that contribute displayable content to the round-end UI.
@@ -89,45 +73,43 @@ public interface IRoundEndInfoDisplay : IRoundEndInfo
     /// Adds formatted text content to the summary using the provided message builder.
     /// </summary>
     /// <param name="message">A formatted message object to append data to.</param>
-    void AddSummaryText(FormattedMessage message);
+    FormattedMessage GetSummaryText();
 }
 
 /// <summary>
 /// Stores and aggregates antagonist item purchases during the round.
 /// Each purchase is tracked per player and contributes to the round-end summary.
 /// </summary>
-public sealed class AntagPurchaseInfo : IRoundEndInfoWithInit
+public sealed class AntagPurchaseInfo : IRoundEndInfo
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
-    private MindSystem _mind = default!;
 
     private readonly Dictionary<EntityUid, RoundEndAntagPurchaseData> _purchases = new();
 
-    public void Initialize()
+    public AntagPurchaseInfo()
     {
         IoCManager.InjectDependencies(this);
-        _mind = _entMan.System<MindSystem>();
     }
 
     /// <summary>
     /// Records a purchased antagonist item for the given user.
     /// </summary>
-    /// <param name="user">The entity that made the purchase.</param>
+    /// <param name="userMind">The mind entity, that made the purchase.</param>
     /// <param name="itemName">The prototype ID of the purchased item.</param>
     /// <param name="cost">TC cost of the item.</param>
-    public void AddPurchase(EntityUid user, string itemName, int cost)
+    public void AddPurchase(EntityUid userMind, string itemName, int cost)
     {
-        if (!_mind.TryGetMind(user, out var mindId, out var comp))
+        if (!_entMan.TryGetComponent<MindComponent>(userMind, out var mindComp))
             return;
 
-        if (!_purchases.TryGetValue(mindId, out var data))
+        if (!_purchases.TryGetValue(userMind, out var data))
         {
             data = new RoundEndAntagPurchaseData
             {
-                Name = comp.CharacterName ?? Loc.GetString("game-ticker-unknown-role")
+                Name = mindComp.CharacterName ?? Loc.GetString("game-ticker-unknown-role")
             };
 
-            _purchases[mindId] = data;
+            _purchases[userMind] = data;
         }
 
         data.ItemPrototypes.Add(itemName);
@@ -138,16 +120,9 @@ public sealed class AntagPurchaseInfo : IRoundEndInfoWithInit
     /// Retrieves all recorded antagonist purchases, grouped by player name.
     /// </summary>
     /// <returns>A dictionary of player names to their purchase data.</returns>
-    public Dictionary<string, RoundEndAntagPurchaseData> GetAllPurchases()
+    public Dictionary<EntityUid, RoundEndAntagPurchaseData> GetAllPurchases()
     {
-        var result = new Dictionary<string, RoundEndAntagPurchaseData>();
-
-        foreach (var (_, data) in _purchases)
-        {
-            result[data.Name] = data;
-        }
-
-        return result;
+        return _purchases;
     }
 }
 
@@ -155,10 +130,9 @@ public sealed class AntagPurchaseInfo : IRoundEndInfoWithInit
 /// Tracks food consumption per player during the round,
 /// and provides summary info for display at round end.
 /// </summary>
-public sealed class FoodInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
+public sealed class FoodInfo : IRoundEndInfoDisplay
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
-    private MindSystem _mind = default!;
 
     private readonly Dictionary<EntityUid, FoodData> _foodPlayersData = new();
 
@@ -168,25 +142,21 @@ public sealed class FoodInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     /// <inheritdoc/>
     public LocId Title => Loc.GetString("additional-info-economy-categories");
 
-    public void Initialize()
+    public FoodInfo()
     {
         IoCManager.InjectDependencies(this);
-        _mind = _entMan.System<MindSystem>();
     }
 
     /// <summary>
     /// Records a food-related event for the specified player's mind.
     /// </summary>
-    /// <param name="user">The entity associated with the eating action.</param>
-    public void AddValueForMind(EntityUid user)
+    /// <param name="userMind">The mind entity associated with the eating action.</param>
+    public void AddMindToData(EntityUid userMind)
     {
-        if (!_mind.TryGetMind(user, out var mind, out _))
-            return;
-
-        if (!_foodPlayersData.TryGetValue(mind, out var foodData))
+        if (!_foodPlayersData.TryGetValue(userMind, out var foodData))
         {
             foodData = new FoodData();
-            _foodPlayersData[mind] = foodData;
+            _foodPlayersData[userMind] = foodData;
         }
 
         foodData.AmountFood++;
@@ -195,25 +165,9 @@ public sealed class FoodInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     /// <summary>
     /// Returns the player who consumed the most food during the round.
     /// </summary>
-    private (string, int) TotalFattestPlayer()
+    private (EntityUid?, int) TotalFattestPlayer()
     {
-        var total = (string.Empty, 0);
-        var current = 0;
-
-        foreach (var (uid, foodData) in _foodPlayersData)
-        {
-            if (foodData.AmountFood <= current)
-                continue;
-
-            current = foodData.AmountFood;
-
-            if (_entMan.TryGetComponent(uid, out MindComponent? comp))
-            {
-                total = (comp.CharacterName ?? Loc.GetString("game-ticker-unknown-role"), current);
-            }
-        }
-
-        return total;
+        return RoundEndInfoUtils.GetTopBy(_foodPlayersData, d => d.AmountFood);
     }
 
     /// <summary>
@@ -225,13 +179,23 @@ public sealed class FoodInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     }
 
     /// <inheritdoc/>
-    public void AddSummaryText(FormattedMessage message)
+    public FormattedMessage GetSummaryText()
     {
+        var message = new FormattedMessage();
+
         var (fattest, count) = TotalFattestPlayer();
+
+        if (fattest == null
+            || !_entMan.TryGetComponent<MindComponent>(fattest.Value, out var mind)
+            || string.IsNullOrEmpty(mind.CharacterName))
+            return message;
+
         message.AddMarkupOrThrow(Loc.GetString("additional-info-total-food-eaten",
             ("foodValue", TotalFoodEaten()),
-            ("fattestName", fattest),
+            ("fattestName", mind.CharacterName),
             ("fattestValue", count)));
+
+        return message;
     }
 }
 
@@ -240,6 +204,10 @@ public sealed class FoodInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
 /// </summary>
 public sealed class CargoInfo : IRoundEndInfoDisplay
 {
+    [Dependency] private readonly IEntityManager _entMan = default!;
+
+    private readonly Dictionary<EntityUid, CargoData> _cargoDatas = new();
+
     /// <summary>
     /// Total station credits earned through cargo operations.
     /// </summary>
@@ -251,11 +219,55 @@ public sealed class CargoInfo : IRoundEndInfoDisplay
     /// <inheritdoc/>
     public LocId Title => Loc.GetString("additional-info-economy-categories");
 
-    /// <inheritdoc/>
-    public void AddSummaryText(FormattedMessage message)
+    public CargoInfo()
     {
-        message.AddMarkupOrThrow(Loc.GetString("additional-info-total-money-earned",
-            ("totalMoney", TotalMoneyEarned)));
+        IoCManager.InjectDependencies(this);
+    }
+
+    public void AddMindToData(EntityUid? userMind, string itemName, int cost)
+    {
+        if (userMind == null)
+            return;
+
+        if (!_cargoDatas.TryGetValue(userMind.Value, out var cargoData))
+        {
+            cargoData = new CargoData();
+            _cargoDatas[userMind.Value] = cargoData;
+        }
+
+        cargoData.Items.Add((itemName, cost));
+    }
+
+    private (EntityUid?, int) TotalOrderPlayer()
+    {
+        return RoundEndInfoUtils.GetTopBy(_cargoDatas, cargoData => cargoData.Items.Count);
+    }
+
+    private int TotalOrders()
+    {
+        return _cargoDatas.Sum(cargoData => cargoData.Value.Items.Count);
+    }
+
+    /// <inheritdoc/>
+    public FormattedMessage GetSummaryText()
+    {
+        var message = new FormattedMessage();
+
+        var totalOrders = TotalOrders();
+        var totalOrderPlayer = TotalOrderPlayer();
+
+        var player = totalOrderPlayer.Item1;
+        var count = totalOrderPlayer.Item2;
+
+        var name = RoundEndInfoUtils.GetMindName(_entMan, player);
+
+        message.AddMarkupOrThrow(Loc.GetString("additional-info-cargo",
+            ("totalMoney", TotalMoneyEarned),
+            ("totalOrders", totalOrders),
+            ("totalOrderPlayer", name),
+            ("totalOrderPlayerCount", count)));
+
+        return message;
     }
 }
 
@@ -276,10 +288,14 @@ public sealed class ResearchInfo : IRoundEndInfoDisplay
     public LocId Title => Loc.GetString("additional-info-economy-categories");
 
     /// <inheritdoc/>
-    public void AddSummaryText(FormattedMessage message)
+    public FormattedMessage GetSummaryText()
     {
+        var message = new FormattedMessage();
+
         message.AddMarkupOrThrow(Loc.GetString("additional-info-total-points-earned",
             ("totalPoints", TotalPoints)));
+
+        return message;
     }
 }
 
@@ -300,10 +316,14 @@ public sealed class OreInfo : IRoundEndInfoDisplay
     public LocId Title => Loc.GetString("round-end-title-ore-info");
 
     /// <inheritdoc/>
-    public void AddSummaryText(FormattedMessage message)
+    public FormattedMessage GetSummaryText()
     {
+        var message = new FormattedMessage();
+
         message.AddMarkupOrThrow(Loc.GetString("additional-info-total-ore",
             ("totalOre", TotalOre)));
+
+        return message;
     }
 }
 
@@ -311,10 +331,10 @@ public sealed class OreInfo : IRoundEndInfoDisplay
 /// Tracks how many puddles each player cleaned with a mop,
 /// and displays the most diligent janitor at round end.
 /// </summary>
-public sealed class PuddleInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
+public sealed class PuddleInfo : IRoundEndInfoDisplay
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
-    private MindSystem _mind = default!;
+    private readonly MindSystem _mind;
 
     private readonly Dictionary<EntityUid, PuddleData> _puddleDatas = new();
 
@@ -324,7 +344,7 @@ public sealed class PuddleInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     /// <inheritdoc/>
     public LocId Title => Loc.GetString("additional-info-janitor-categories");
 
-    public void Initialize()
+    public PuddleInfo()
     {
         IoCManager.InjectDependencies(this);
         _mind = _entMan.System<MindSystem>();
@@ -333,16 +353,16 @@ public sealed class PuddleInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     /// <summary>
     /// Increments the puddle-cleaning count for a player who used a mop.
     /// </summary>
-    /// <param name="user">The entity that cleaned a puddle.</param>
-    public void AddValueForMind(EntityUid user)
+    /// <param name="userMind">The mind entity that cleaned a puddle.</param>
+    public void AddMindToData(EntityUid? userMind)
     {
-        if (!_mind.TryGetMind(user, out var mind, out _))
+        if (userMind == null)
             return;
 
-        if (!_puddleDatas.TryGetValue(mind, out var puddleData))
+        if (!_puddleDatas.TryGetValue(userMind.Value, out var puddleData))
         {
             puddleData = new PuddleData();
-            _puddleDatas[mind] = puddleData;
+            _puddleDatas[userMind.Value] = puddleData;
         }
 
         puddleData.TotalPuddle++;
@@ -351,26 +371,9 @@ public sealed class PuddleInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     /// <summary>
     /// Finds the player who mopped the most puddles.
     /// </summary>
-    private (string, int) TotalPuddleByPlayer()
+    private (EntityUid?, int) TotalPuddleByPlayer()
     {
-        var total = (string.Empty, 0);
-
-        var current = 0;
-
-        foreach (var (uid, puddleData) in _puddleDatas)
-        {
-            if (puddleData.TotalPuddle <= current)
-                continue;
-
-            current = puddleData.TotalPuddle;
-
-            if (_entMan.TryGetComponent(uid, out MindComponent? comp))
-            {
-                total = (comp.CharacterName ?? Loc.GetString("game-ticker-unknown-role"), current);
-            }
-        }
-
-        return total;
+        return RoundEndInfoUtils.GetTopBy(_puddleDatas, d => d.TotalPuddle);
     }
 
     /// <summary>
@@ -382,13 +385,23 @@ public sealed class PuddleInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     }
 
     /// <inheritdoc/>
-    public void AddSummaryText(FormattedMessage message)
+    public FormattedMessage GetSummaryText()
     {
-        var (topName, topValue) = TotalPuddleByPlayer();
+        var message = new FormattedMessage();
+
+        var (topJanitor, topValue) = TotalPuddleByPlayer();
+
+        if (topJanitor == null
+            || !_entMan.TryGetComponent<MindComponent>(topJanitor.Value, out var mind)
+            || string.IsNullOrEmpty(mind.CharacterName))
+            return message;
+
         message.AddMarkupOrThrow(Loc.GetString("additional-info-total-puddles",
             ("puddleValue", TotalPuddles()),
-            ("janitorName", topName),
+            ("janitorName", mind.CharacterName),
             ("janitorValue", topValue)));
+
+        return message;
     }
 }
 
@@ -396,10 +409,9 @@ public sealed class PuddleInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
 /// Tracks and displays data about firearms usage during the round,
 /// including total shots fired and the player with the most shots.
 /// </summary>
-public sealed class GunInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
+public sealed class GunInfo : IRoundEndInfoDisplay
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
-    private MindSystem _mind = default!;
 
     private readonly Dictionary<EntityUid, GunData> _gunDatas = new();
 
@@ -409,24 +421,20 @@ public sealed class GunInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     /// <inheritdoc/>
     public LocId Title => Loc.GetString("additional-info-gun-categories");
 
-    public void Initialize()
+    public GunInfo()
     {
         IoCManager.InjectDependencies(this);
-        _mind = _entMan.System<MindSystem>();
     }
 
     /// <summary>
     /// Records that a shot was fired by the specified player.
     /// </summary>
-    public void AddValueForMind(EntityUid user)
+    public void AddMindToData(EntityUid userMind)
     {
-        if (!_mind.TryGetMind(user, out var mind, out _))
-            return;
-
-        if (!_gunDatas.TryGetValue(mind, out var gunData))
+        if (!_gunDatas.TryGetValue(userMind, out var gunData))
         {
             gunData = new GunData();
-            _gunDatas[mind] = gunData;
+            _gunDatas[userMind] = gunData;
         }
 
         gunData.TotalShots++;
@@ -435,26 +443,9 @@ public sealed class GunInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     /// <summary>
     /// Identifies the player who fired the most shots.
     /// </summary>
-    private (string, int) TotalShotsByPlayer()
+    private (EntityUid?, int) TotalShotsByPlayer()
     {
-        var total = (string.Empty, 0);
-
-        var current = 0;
-
-        foreach (var (uid, gunData) in _gunDatas)
-        {
-            if (gunData.TotalShots <= current)
-                continue;
-
-            current = gunData.TotalShots;
-
-            if (_entMan.TryGetComponent(uid, out MindComponent? comp))
-            {
-                total = (comp.CharacterName ?? Loc.GetString("game-ticker-unknown-role"), current);
-            }
-        }
-
-        return total;
+        return RoundEndInfoUtils.GetTopBy(_gunDatas, d => d.TotalShots);
     }
 
     /// <summary>
@@ -466,13 +457,23 @@ public sealed class GunInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     }
 
     /// <inheritdoc/>
-    public void AddSummaryText(FormattedMessage message)
+    public FormattedMessage GetSummaryText()
     {
-        var (topName, topValue) = TotalShotsByPlayer();
+        var message = new FormattedMessage();
+
+        var (topShooter, topValue) = TotalShotsByPlayer();
+
+        if (topShooter == null
+            || !_entMan.TryGetComponent<MindComponent>(topShooter.Value, out var mind)
+            || string.IsNullOrEmpty(mind.CharacterName))
+            return message;
+
         message.AddMarkupOrThrow(Loc.GetString("additional-info-total-shots",
             ("ammoValue", TotalShots()),
-            ("gunnerName", topName),
+            ("gunnerName", mind.CharacterName),
             ("gunnerValue", topValue)));
+
+        return message;
     }
 }
 
@@ -481,13 +482,12 @@ public sealed class GunInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
 /// Provides statistics such as total deaths, the player with the most deaths,
 /// and the first recorded death for inclusion in the round end summary.
 /// </summary>
-public sealed class DeathInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
+public sealed class DeathInfo : IRoundEndInfoDisplay
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
-    private MindSystem _mind = default!;
-    private SharedGameTicker _gameTicker = default!;
-    private AdminTestArenaSystem _adminTestArena = default!;
-    private SharedTransformSystem _transform = default!;
+    private readonly SharedGameTicker _gameTicker;
+    private readonly AdminTestArenaSystem _adminTestArena;
+    private readonly SharedTransformSystem _transform;
 
     private readonly Dictionary<EntityUid, DeathData> _deathDatas = new();
 
@@ -497,11 +497,10 @@ public sealed class DeathInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     /// <inheritdoc/>
     public LocId Title => Loc.GetString("additional-info-death-categories");
 
-    public void Initialize()
+    public DeathInfo()
     {
         IoCManager.InjectDependencies(this);
         _gameTicker = _entMan.System<SharedGameTicker>();
-        _mind = _entMan.System<MindSystem>();
         _adminTestArena = _entMan.System<AdminTestArenaSystem>();
         _transform = _entMan.System<SharedTransformSystem>();
     }
@@ -509,20 +508,17 @@ public sealed class DeathInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     /// <summary>
     /// Records the time of death for the given player if valid and not in the admin arena.
     /// </summary>
-    public void AddValueForMind(EntityUid user)
+    public void AddMindToData(EntityUid userMind)
     {
-        var map = _transform.GetMap(user);
+        var map = _transform.GetMap(userMind);
 
         if (map != null && _adminTestArena.ArenaMap.ContainsValue(map.Value))
             return;
 
-        if (!_mind.TryGetMind(user, out var mind, out _))
-            return;
-
-        if (!_deathDatas.TryGetValue(mind, out var deathData))
+        if (!_deathDatas.TryGetValue(userMind, out var deathData))
         {
             deathData = new DeathData();
-            _deathDatas[mind] = deathData;
+            _deathDatas[userMind] = deathData;
         }
 
         deathData.TimeOfDeath.Add(_gameTicker.RoundDuration());
@@ -531,54 +527,32 @@ public sealed class DeathInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     /// <summary>
     /// Finds the player with the highest number of recorded deaths.
     /// </summary>
-    private (string name, int deathCount) GetMostDeathsByPlayer()
+    private (EntityUid?, int) GetMostDeathsByPlayer()
     {
-        var mostDeathsName = string.Empty;
-        var mostDeathsCount = 0;
-
-        foreach (var (uid, deathData) in _deathDatas)
-        {
-            if (!_entMan.TryGetComponent(uid, out MindComponent? mind))
-                continue;
-
-            var name = mind.CharacterName ?? Loc.GetString("game-ticker-unknown-role");
-            var count = deathData.TimeOfDeath.Count;
-
-            if (count <= mostDeathsCount)
-                continue;
-
-            mostDeathsCount = count;
-            mostDeathsName = name;
-        }
-
-        return (mostDeathsName, mostDeathsCount);
+        return RoundEndInfoUtils.GetTopBy(_deathDatas, d => d.TimeOfDeath.Count);
     }
 
     /// <summary>
     /// Identifies the first death of the round and when it occurred.
     /// </summary>
-    private (string name, TimeSpan time) GetEarliestDeath()
+    private (EntityUid? uid, TimeSpan time) GetEarliestDeath()
     {
-        var earliestName = string.Empty;
-        var earliestTime = TimeSpan.Zero;
+        EntityUid? earliestUid = null;
+        var earliestTime = TimeSpan.MaxValue;
 
         foreach (var (uid, deathData) in _deathDatas)
         {
             foreach (var time in deathData.TimeOfDeath)
             {
-                if (time <= earliestTime)
+                if (time >= earliestTime)
                     continue;
 
                 earliestTime = time;
-
-                if (_entMan.TryGetComponent(uid, out MindComponent? mind))
-                    earliestName = mind.CharacterName ?? Loc.GetString("game-ticker-unknown-role");
-                else
-                    earliestName = Loc.GetString("game-ticker-unknown-role");
+                earliestUid = uid;
             }
         }
 
-        return (earliestName, earliestTime);
+        return (earliestUid, earliestTime);
     }
 
     /// <summary>
@@ -590,20 +564,63 @@ public sealed class DeathInfo : IRoundEndInfoWithInit, IRoundEndInfoDisplay
     }
 
     /// <inheritdoc/>
-    public void AddSummaryText(FormattedMessage message)
+    public FormattedMessage GetSummaryText()
     {
+        var message = new FormattedMessage();
+
         var totalDeath = TotalDeath();
 
         if (totalDeath == 0)
-            return;
+            return message;
 
-        var (suicideName, suicideValue) = GetMostDeathsByPlayer();
-        var (suicideEarlierName, suicideEarlierValue) = GetEarliestDeath();
+        var (suicideEntity, suicideValue) = GetMostDeathsByPlayer();
+        var (suicideEarlierEntity, suicideEarlierValue) = GetEarliestDeath();
+
+        if (suicideEntity == null
+            || suicideEarlierEntity == null)
+            return message;
+
+        var suicideName = RoundEndInfoUtils.GetMindName(_entMan, suicideEntity.Value);
+        var suicideEarlierName = RoundEndInfoUtils.GetMindName(_entMan, suicideEarlierEntity.Value);
+
         message.AddMarkupOrThrow(Loc.GetString("additional-info-total-death",
             ("deathValue", totalDeath),
             ("suicideName", suicideName),
             ("suicideValue", suicideValue),
             ("suicideEarlierName", suicideEarlierName),
             ("suicideEarlierValue", suicideEarlierValue.ToString(@"hh\:mm\:ss"))));
+
+        return message;
+    }
+}
+
+public static class RoundEndInfoUtils
+{
+    public static string GetMindName(IEntityManager entMan, EntityUid? uid)
+    {
+        return entMan.TryGetComponent(uid, out MindComponent? mind)
+            ? mind.CharacterName ?? Loc.GetString("game-ticker-unknown-role")
+            : Loc.GetString("game-ticker-unknown-role");
+    }
+
+    public static (EntityUid?, int) GetTopBy<TData>(
+        Dictionary<EntityUid, TData> dict,
+        Func<TData, int> selector)
+    {
+        EntityUid? topUid = null;
+        var topValue = 0;
+
+        foreach (var (uid, data) in dict)
+        {
+            var value = selector(data);
+
+            if (value <= topValue)
+                continue;
+
+            topValue = value;
+            topUid = uid;
+        }
+
+        return (topUid, topValue);
     }
 }

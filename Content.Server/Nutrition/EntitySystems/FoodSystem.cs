@@ -30,7 +30,8 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Utility;
 using System.Linq;
-using Content.Server.SS220.AdditionalInfoForRoundEnd;
+using Content.Server.Mind;
+using Content.Server.SS220.RoundEndInfo;
 using Content.Shared.Containers.ItemSlots;
 using Robust.Server.GameObjects;
 using Content.Shared.Whitelist;
@@ -63,6 +64,7 @@ public sealed class FoodSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     //ss220 add additional info for round start
     [Dependency] private readonly RoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
     //ss220 add additional info for round end
 
     public const float MaxFeedDistance = 1.0f;
@@ -352,7 +354,8 @@ public sealed class FoodSystem : EntitySystem
         RaiseLocalEvent(food, dev);
 
         //ss220 add additional info for round start
-        _infoManager.EnsureInfo<FoodInfo>().AddValueForMind(user);
+        if (_mind.TryGetMind(user, out var mind, out _))
+            _infoManager.EnsureInfo<FoodInfo>().AddMindToData(mind);
         //ss220 add additional info for round end
 
         if (component.Trash.Count == 0)

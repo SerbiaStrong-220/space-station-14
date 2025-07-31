@@ -1,4 +1,4 @@
-using Content.Server.SS220.AdditionalInfoForRoundEnd;
+using Content.Server.SS220.RoundEndInfo;
 using Content.Shared.Destructible;
 using Content.Shared.Mining;
 using Content.Shared.Mining.Components;

@@ -6,7 +6,7 @@ using Content.Server.GameTicking.Events;
 using Content.Server.Ghost;
 using Content.Server.Maps;
 using Content.Server.Roles;
-using Content.Server.SS220.AdditionalInfoForRoundEnd;
+using Content.Server.SS220.RoundEndInfo;
 using Content.Shared.Voting;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -27,6 +27,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Shared.CCVar;
+using Content.Shared.SS220.RoundEndInfo;
 
 
 namespace Content.Server.GameTicking
@@ -37,7 +38,7 @@ namespace Content.Server.GameTicking
         [Dependency] private readonly RoleSystem _role = default!;
         [Dependency] private readonly ITaskManager _taskManager = default!;
         //ss220 add additional info for round start
-        [Dependency] private readonly AdditionalInfoForRoundEndSystem _additionalInfo = default!;
+        [Dependency] private readonly RoundEndInfoSystem _roundEndInfo = default!;
         //ss220 add additional info for round end
 
         private static readonly Counter RoundNumberMetric = Metrics.CreateCounter(
@@ -619,8 +620,7 @@ namespace Content.Server.GameTicking
             // SS220 Round End Titles end
 
             //ss220 add additional info for round start
-            //this event specially send before RoundEndMessageEvent, cauze no data while after
-            _additionalInfo.SendAntagInfo();
+            RaiseLocalEvent(new RoundEndInfoSendEvent());
             //ss220 add additional info for round end
 
             var roundEndMessageEvent = new RoundEndMessageEvent(
@@ -635,10 +635,6 @@ namespace Content.Server.GameTicking
             );
             RaiseNetworkEvent(roundEndMessageEvent);
             RaiseLocalEvent(roundEndMessageEvent);
-
-            //ss220 add additional info for round start
-            _additionalInfo.SendAdditionalInfo();
-            //ss220 add additional info for round end
 
             RaiseLocalEvent(new RoundEndedEvent(RoundId, roundDuration)); // Corvax-RoundNotifications
 

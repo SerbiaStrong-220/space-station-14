@@ -17,8 +17,10 @@ additional-info-total-food-eaten =
     Всего еды съедено: { $foodValue }
     Больше всего еды было съедено: [bold][color=yellow]{ $fattestName } ({ $fattestValue } ед.)[/color][/bold]
 
-additional-info-total-money-earned =
+additional-info-cargo =
     Всего заработано: [bold][color=gold]{ $totalMoney }$[/color][/bold]
+    Всего заказов одобрено: [bold][color=gold]{ $totalOrders }[/color][/bold]
+    Больше всего заказов одобрил: [bold][color=gold]{ $totalOrderPlayer } ({$totalOrderPlayerCount})[/color][/bold]
 
 additional-info-total-points-earned =
     Всего заработано очков в отделе РнД: [bold][color=mediumpurple]{$totalPoints}[/color][/bold]

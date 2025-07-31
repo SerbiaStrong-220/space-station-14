@@ -6,9 +6,9 @@ using Content.Client.SS220.RoundEnd.UI;
 using Content.Shared.GameTicking;
 using Content.Shared.Input;
 using Content.Shared.Roles;
-using Content.Shared.SS220.AdditionalInfoForRoundEnd;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.Discord;
+using Content.Shared.SS220.RoundEndInfo;
 using Content.Shared.SS220.Utility;
 using JetBrains.Annotations;
 using Robust.Client.Input;
@@ -58,9 +58,19 @@ public sealed class RoundEndSummaryUIController : UIController,
     }
 
     //ss220 add additional info for round start
-    public void AdditionalInfo(RoundEndAdditionalInfoEvent message)
+    public void PopulateAdditionalInfo(RoundEndAdditionalInfoEvent message)
     {
-        _window?.PopulateAdditionalInfo(message.AdditionalInfo);
+        foreach (var info in message.AdditionalInfo)
+        {
+            switch (info)
+            {
+                case RoundEndInfoDisplayBlock block:
+                {
+                    _window?.PopulateAdditionalInfo(block);
+                    break;
+                }
+            }
+        }
     }
     //ss220 add additional info for round end
 

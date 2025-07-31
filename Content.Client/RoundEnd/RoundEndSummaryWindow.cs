@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Message;
-using Content.Client.SS220.AdditionalInfoForRoundEnd;
+using Content.Client.SS220.RoundEndInfo;
 using Content.Shared.GameTicking;
-using Content.Shared.SS220.AdditionalInfoForRoundEnd;
+using Content.Shared.SS220.RoundEndInfo;
 using Content.Shared.Store;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
@@ -17,10 +17,12 @@ namespace Content.Client.RoundEnd
 {
     public sealed class RoundEndSummaryWindow : DefaultWindow
     {
-        private readonly IEntityManager _entityManager;
         //ss220 add additional info for round start
-        private readonly IPrototypeManager _proto;
+        [Dependency] private readonly IPrototypeManager _proto = default!;
         //ss220 add additional info for round end
+
+        private readonly IEntityManager _entityManager;
+        private readonly RoundEndInfoSystem _roundEndInfo;
 
         public int RoundId;
 
@@ -33,7 +35,8 @@ namespace Content.Client.RoundEnd
         {
             //ss220 add additional info for round start
             IoCManager.InjectDependencies(this);
-            _proto = IoCManager.Resolve<IPrototypeManager>();
+
+            _roundEndInfo = entityManager.System<RoundEndInfoSystem>();
             //ss220 add additional info for round end
 
             _entityManager = entityManager;
@@ -121,13 +124,10 @@ namespace Content.Client.RoundEnd
         /// Provides UI construction and layout logic for additional round-end summary information,
         /// including custom stat blocks and antagonist purchase data.
         /// </summary>
-        public void PopulateAdditionalInfo(List<RoundEndInfoDisplayBlock> blocks)
+        public void PopulateAdditionalInfo(RoundEndInfoDisplayBlock block)
         {
-            foreach (var block in blocks)
-            {
-                var control = MakeBlocks(block);
-                _summaryContentContainer?.AddChild(control);
-            }
+            var control = MakeBlocks(block);
+            _summaryContentContainer?.AddChild(control);
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace Content.Client.RoundEnd
         /// </summary>
         private Control MakeAntagItemsSection()
         {
-            if (RoundEndClientData.AntagItems.Count == 0)
+            if (_roundEndInfo.AntagItems.Count == 0)
                 return new Control();
 
             var section = new PanelContainer
@@ -209,7 +209,7 @@ namespace Content.Client.RoundEnd
                 StyleClasses = { "LabelHeading" },
             });
 
-            foreach (var (playerName, data) in RoundEndClientData.AntagItems.OrderByDescending(p => p.Value.TotalTC))
+            foreach (var data in _roundEndInfo.AntagItems.OrderByDescending(p => p.TotalTC))
             {
                 var playerBox = new BoxContainer()
                 {
@@ -218,7 +218,7 @@ namespace Content.Client.RoundEnd
 
                 playerBox.AddChild(new Label
                 {
-                    Text = playerName,
+                    Text = data.Name,
                     FontColorOverride = Color.Red,
                     StyleClasses = { "LabelBig" },
                 });
@@ -234,9 +234,12 @@ namespace Content.Client.RoundEnd
                     Margin = new Thickness(0, 4, 0, 4),
                 };
 
-                foreach (var item in data.Items)
+                foreach (var item in data.ItemPrototypes)
                 {
                     if (!_proto.TryIndex<ListingPrototype>(item, out var proto))
+                        continue;
+
+                    if (string.IsNullOrEmpty(proto.Name))
                         continue;
 
                     var icon = new EntityPrototypeView
@@ -244,7 +247,7 @@ namespace Content.Client.RoundEnd
                         Scale = new Vector2(1.25f),
                         MinSize = new Vector2(32, 32),
                         MouseFilter = MouseFilterMode.Stop,
-                        ToolTip = Loc.GetString(proto.Name!),
+                        ToolTip = Loc.GetString(proto.Name),
                     };
 
                     icon.SetPrototype(proto.ProductEntity);

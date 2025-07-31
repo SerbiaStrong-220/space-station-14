@@ -2,9 +2,9 @@ using Content.Server.Chat.Systems;
 using Content.Server.Speech.Muting;
 using Content.Shared.Mobs;
 using Content.Server.EUI;
-using Content.Server.SS220.AdditionalInfoForRoundEnd;
 using Robust.Server.Player;
 using Content.Server.SS220.DeathReminder.DeathReminderEui;
+using Content.Server.SS220.RoundEndInfo;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mind;
 using Content.Shared.Speech.Muting;
@@ -47,6 +47,10 @@ public sealed class DeathgaspSystem: EntitySystem
                             _euiManager.OpenEui(new DeathReminderEui(), client);
                         }
                     }
+
+                    //ss220 add additional info for round start
+                    _infoManager.EnsureInfo<DeathInfo>().AddMindToData(mind);
+                    //ss220 add additional info for round end
                 }
             }
         }
@@ -54,10 +58,6 @@ public sealed class DeathgaspSystem: EntitySystem
         // don't deathgasp if they arent going straight from crit to dead
         if (args.NewMobState != MobState.Dead || args.OldMobState != MobState.Critical)
             return;
-
-        //ss220 add additional info for round start
-        _infoManager.EnsureInfo<DeathInfo>().AddValueForMind(uid);
-        //ss220 add additional info for round end
 
         Deathgasp(uid, component);
     }
