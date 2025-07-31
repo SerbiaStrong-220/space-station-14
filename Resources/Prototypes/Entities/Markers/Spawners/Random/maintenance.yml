@@ -419,6 +419,11 @@
         - Spaceshroom
       chance: 0.6
       offset: 0.0
+      #SS220 anti shroom meta start
+      rarePrototypes:
+        - FoodMiGomyceteCult
+      rareChance: 0.03
+      #SS220 anti shroom meta end
 
 
 - type: entityTable

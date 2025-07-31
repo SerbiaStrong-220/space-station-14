@@ -19,7 +19,7 @@ cult-yogg-digest-no-nutritions = Недостаточно питательных
 cult-yogg-digest-no-water = Недостаточно воды в организме
 
 cult-yogg-cant-sacrafice-in-astral = Невозможно выполнять призыв находясь в астрале
-cult-yogg-altar-not-enough-migo = Недостаточно Ми-Го рядом с алтарём
+cult-yogg-sacrifice-no-altars = Нет достаточно близких алтарей для старта жертвоприношения
 cult-yogg-sacrifice-started = {$user} начинает жертвоприношение, тело {$target} медленно поднимается в воздух
 cult-yogg-buckle-attempt = {$user} не является целью жертвоприношения
 
@@ -34,7 +34,6 @@ cult-yogg-resurrected-by-heal = Мистические силы возвраща
 cult-yogg-cleansing-start = Вы чувствуете, как святая вода внутри вас убивает споры.
 
 cult-yogg-acsending-have-acsending = Один из членов культа в данный момент возносится
-cult-yogg-acsending-migo-full = Достигнуто необходимое количество Ми-Го и все они живы
 cult-yogg-acsending-started = Вы чувствуете, как споры пришли в активность
 cult-yogg-acsending-stopped = Вы чувствуете, как споры внутри вас расщепились
 
