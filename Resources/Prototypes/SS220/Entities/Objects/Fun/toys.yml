@@ -373,7 +373,7 @@
       sprite: Objects/Weapons/Melee/energykatana_storage_64x.rsi 
     shape:
     - 0,0,0,3
-#SS220 the end of changes    
+#SS220 the end of changes
   - type: Clothing
     sprite: Objects/Weapons/Melee/energykatana.rsi
     slots:
