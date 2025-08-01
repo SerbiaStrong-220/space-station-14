@@ -53,3 +53,7 @@
 - type: lobbyBackground
   id: YouNoYou
   background: /Textures/SS220/LobbyScreens/YouNoYou.png
+
+- type: lobbyBackground
+  id: KuoryCap
+  background: /Textures/SS220/LobbyScreens/KuoryCap.png
