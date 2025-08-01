@@ -7,8 +7,8 @@
   components:
   - type: Action
     itemIconStyle: BigItem
-    icon: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: in }
-    iconOn: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: out }
+    icon: { sprite: SS220/Interface/Actions/Different/inner_toggle.rsi, state: in }
+    iconOn: { sprite: SS220/Interface/Actions/Different/inner_toggle.rsi, state: out }
     useDelay: 1 # equip noise spam.
   - type: InstantAction
     event: !type:ToggleInnerHandEvent

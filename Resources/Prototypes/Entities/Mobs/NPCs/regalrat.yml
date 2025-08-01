@@ -358,7 +358,7 @@
   - type: Action
     useDelay: 4
     icon:
-      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220 resprited
+      sprite: SS220/Interface/Actions/Antags/ratking.rsi #SS220 resprited
       state: ratKingArmy
   - type: InstantAction
     event: !type:RatKingRaiseArmyActionEvent
@@ -372,7 +372,7 @@
   - type: Action
     useDelay: 6
     icon:
-      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220 resprited
+      sprite: SS220/Interface/Actions/Antags/ratking.rsi #SS220 resprited
       state: ratKingDomain
   - type: InstantAction
     event: !type:RatKingDomainActionEvent
@@ -386,10 +386,10 @@
   - type: Action
     useDelay: 1
     icon:
-      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      sprite: SS220/Interface/Actions/Antags/ratking.rsi #SS220-resprite-ratking-action
       state: stayOff
     iconOn:
-      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      sprite: SS220/Interface/Actions/Antags/ratking.rsi #SS220-resprite-ratking-action
       state: stay
     priority: 5
   - type: InstantAction
@@ -405,10 +405,10 @@
   - type: Action
     useDelay: 1
     icon:
-      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      sprite: SS220/Interface/Actions/Antags/ratking.rsi #SS220-resprite-ratking-action
       state: followOff
     iconOn:
-      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      sprite: SS220/Interface/Actions/Antags/ratking.rsi #SS220-resprite-ratking-action
       state: follow
     priority: 6
   - type: InstantAction
@@ -424,10 +424,10 @@
   - type: Action
     useDelay: 1
     icon:
-      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      sprite: SS220/Interface/Actions/Antags/ratking.rsi #SS220-resprite-ratking-action
       state: attackOff
     iconOn:
-      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      sprite: SS220/Interface/Actions/Antags/ratking.rsi #SS220-resprite-ratking-action
       state: attack
     priority: 7
   - type: InstantAction
@@ -443,10 +443,10 @@
   - type: Action
     useDelay: 1
     icon:
-      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      sprite: SS220/Interface/Actions/Antags/ratking.rsi #SS220-resprite-ratking-action
       state: looseOff
     iconOn:
-      sprite: SS220/Interface/Actions/actions_rat_king.rsi #SS220-resprite-ratking-action
+      sprite: SS220/Interface/Actions/Antags/ratking.rsi #SS220-resprite-ratking-action
       state: loose
     priority: 8
   - type: InstantAction
