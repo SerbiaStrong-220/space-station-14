@@ -11,6 +11,7 @@ namespace Content.Shared.SS220.StaminaConvertArmor;
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class StaminaConvertArmorComponent : Component
 {
     /// <summary>
