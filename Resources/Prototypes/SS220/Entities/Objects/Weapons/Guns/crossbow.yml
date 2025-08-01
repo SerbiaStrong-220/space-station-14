@@ -66,3 +66,52 @@
   - type: GunRequiresWield
   - type: UseDelay
     delay: 0.5
+
+- type: entity
+  id: CrossbowKingClown
+  name: sweet revenge crossbow
+  parent: BaseItem
+  description: Revenge can sting to the core.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Crossbow/crossbow_clown.rsi
+    state: icon
+  - type: Item
+    size: Normal
+  - type: Gun
+    minAngle: 0
+    maxAngle: 5
+    fireRate: 1
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: BulletMiss
+    soundEmpty: null
+    clumsyProof: true
+  - type: Appearance
+  - type: Wieldable
+    wieldSound:
+      path: /Audio/Items/bow_pull.ogg
+  - type: UseDelay
+    delay: 0.1
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/bow.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
+  - type: ContainerContainer
+    containers:
+      projectiles: !type:ContainerSlot
+  - type: ContainerAmmoProvider
+    container: projectiles
+  - type: ItemSlots
+    slots:
+      projectiles:
+        name: Projectiles
+        startingItem: null
+        insertSound: /Audio/Weapons/Guns/Misc/arrow_nock.ogg
+        whitelist:
+          tags:
+          - Arrow
+          - Plunger

@@ -160,3 +160,33 @@
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
+
+#KingClown Hardsuit
+- type: entity
+  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase]
+  id: ClothingHeadHelmetHardsuitKingClown
+  name: fish firebrand
+  description: This is not a disguise. This is not an escape from space. It's fate.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/king_clown.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/king_clown.rsi
+    equipSound: /Audio/Mecha/mechmove03.ogg
+    unequipSound: /Audio/Effects/Emotes/parp1.ogg
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.85
+        Radiation: 0.6
+  - type: FireProtection
+    reduction: 0.2
+  - type: EyeProtection
+  - type: PointLight
+    color: "#1eff00ce"
+    radius: 6
+    energy: 4
