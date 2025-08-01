@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Client.Humanoid;
 using Content.Client.Inventory;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
@@ -80,6 +81,11 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
             StationRecordsFiltersValue.Text = "";
             FilterListingOfRecords();
         };
+
+        // SS220 add pin button begin
+        var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+        pinButton.Margin = new Thickness(0, 0, 5, 0);
+        // SS220 add pin button end
     }
 
     public void UpdateState(GeneralStationRecordConsoleState state)
