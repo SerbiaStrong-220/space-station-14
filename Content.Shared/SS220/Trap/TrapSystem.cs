@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Construction.EntitySystems;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
@@ -167,6 +168,9 @@ public sealed class TrapSystem : EntitySystem
         if (ent.Comp.State == TrapArmedState.Unarmed)
             return;
 
+        if (!HasComp<DamageableComponent>(args.OtherEntity)) //you sure that this something that should activate the trap?
+            return;
+
         if (_entityWhitelist.IsBlacklistPass(ent.Comp.Blacklist, args.OtherEntity))
             return;
 
@@ -182,8 +186,8 @@ public sealed class TrapSystem : EntitySystem
         if (!args.Activator.HasValue)
             return;
 
-        if (!TryComp<EnsnaringComponent>(ent.Owner, out var ensnaring))
-            return;
+        if (TryComp<EnsnaringComponent>(ent.Owner, out var ensnaring))
+            _ensnareableSystem.TryEnsnare(args.Activator.Value, ent.Owner, ensnaring);
 
         if (ent.Comp.DurationStun != TimeSpan.Zero && TryComp<StatusEffectsComponent>(args.Activator.Value, out var status))
         {
@@ -191,7 +195,8 @@ public sealed class TrapSystem : EntitySystem
             _stunSystem.TryKnockdown(args.Activator.Value, ent.Comp.DurationStun, true, status);
         }
 
-        _ensnareableSystem.TryEnsnare(args.Activator.Value, ent.Owner, ensnaring);
+        var ev = new TrapAfterTriggerEvent(ent.Owner, args.Activator.Value);
+        RaiseLocalEvent(ent.Owner, ev);
     }
 
     private void UpdateVisuals(EntityUid uid, TrapComponent? trapComp = null, AppearanceComponent? appearance = null)
