@@ -153,8 +153,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SubdermalImplant
-    implantAction: ActionActivateAntiDropImplant
   - type: TriggerImplantAction
+  - type: FellDownThrowIgnoreImplant
   - type: HiddenDescription
     entries:
     - label: hidden-desc-AntiDropImplant-medical

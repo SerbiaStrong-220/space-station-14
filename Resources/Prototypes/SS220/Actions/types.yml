@@ -56,18 +56,6 @@
     event: !type:UseAdrenalImplantEvent
 
 - type: entity
-  id: ActionActivateAntiDropImplant
-  components:
-  - type: Action
-    itemIconStyle: BigAction
-    priority: -20
-    icon:
-      sprite: /Textures/SS220/Interface/Actions/implants.rsi
-      state: antidrop
-  - type: InstantAction
-    event: !type:UseAntiDropImplantEvent
-
-- type: entity
   id: ActionActivateThermalVision
   name: Переключить термальные сенсоры
   description: Переключает термальные сенсоры в импланте владельца, что позволяет видеть живых существ сквозь преграды в ограниченном радиусе.

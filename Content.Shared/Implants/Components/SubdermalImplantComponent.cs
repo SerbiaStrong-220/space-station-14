@@ -121,7 +121,3 @@ public sealed partial class UseAdrenalImplantEvent : InstantActionEvent
 
 }
 //ss220 add adrenal implant end
-
-//ss220 add antidrop implant start
-public sealed partial class UseAntiDropImplantEvent : InstantActionEvent;
-//ss220 add antidrop implant end
