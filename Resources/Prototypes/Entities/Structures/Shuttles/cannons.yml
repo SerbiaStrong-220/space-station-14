@@ -33,6 +33,13 @@
   - type: GunSignalControl
   - type: StaticPrice
     price: 1500
+  #SS220 ShuttleGuns_fix start (#3180)
+  - type: ApcPowerReceiver
+    powerLoad: 20
+  - type: ExtensionCableReceiver
+  - type: LightningTarget
+    priority: 1
+  #SS220 ShuttleGuns_fix end (#3180)
 
 # ---- Laser weapon branch ----
 # naming: LSE (Laser) + conventional power + suffix (c for PowerCage, e for wired energy) + Name
