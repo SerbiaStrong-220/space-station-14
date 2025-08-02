@@ -10,7 +10,7 @@
   save: false
   components:
   - type: Damageable
-    damageContainer: StructuralInorganic
+    damageContainer: Forcefield
   - type: Forcefield
     params:
       figure: !type:ForcefieldParabola

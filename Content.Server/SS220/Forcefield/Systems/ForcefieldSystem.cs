@@ -12,6 +12,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using System.Linq;
+using Robust.Server.Audio;
 
 namespace Content.Server.SS220.Forcefield.Systems;
 
@@ -23,6 +24,7 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
 
     private readonly Dictionary<EntityUid, List<ICommonSession>> _curPvsOverrides = [];
 

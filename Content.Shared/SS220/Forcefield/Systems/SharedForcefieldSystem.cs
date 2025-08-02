@@ -1,5 +1,6 @@
 using Content.Shared.SS220.Forcefield.Components;
 using Content.Shared.SS220.Weapons.Ranged.Events;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -10,6 +11,7 @@ public abstract class SharedForcefieldSystem : EntitySystem
 {
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

@@ -9,15 +9,27 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.SS220.Forcefield.Components;
 
+/// <summary>
+/// A component that creates a force field that blocks or allows entities to pass through.
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ForcefieldComponent : Component
 {
+    /// <summary>
+    /// Force field parameters
+    /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public ForcefieldParams Params = new();
 
+    /// <summary>
+    /// The entity that created the force field
+    /// </summary>
     [DataField, AutoNetworkedField]
     public NetEntity? FieldOwner;
 
+    /// <summary>
+    /// The sound played when force field damaged
+    /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
     public SoundSpecifier HitSound = new SoundPathSpecifier("/Audio/SS220/Effects/shield/eshild_hit.ogg", new()
     {
