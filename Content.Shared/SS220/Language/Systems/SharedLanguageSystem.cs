@@ -214,7 +214,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Sets the color of the prototype language to the message 
+    ///     Sets the color of the prototype language to the message
     /// </summary>
     public string SetColor(string message, LanguagePrototype proto)
     {
