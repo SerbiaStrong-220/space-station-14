@@ -10,6 +10,9 @@ namespace Content.Shared.SS220.Forcefield.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ForcefieldGeneratorComponent : Component
 {
+    /// <summary>
+    /// Force field parameters
+    /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public ForcefieldParams ForcefieldParams = new();
 

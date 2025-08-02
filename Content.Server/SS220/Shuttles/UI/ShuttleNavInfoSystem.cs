@@ -84,7 +84,7 @@ public sealed class ShuttleNavInfoSystem : SharedShuttleNavInfoSystem
         var query = EntityQueryEnumerator<ForcefieldComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            var localVerts = comp.Params.Figure.GetTrianglesVerts();
+            var localVerts = comp.Params.Shape.GetTrianglesVerts();
             var localToWorld = _transform.GetWorldMatrix(uid);
             var mapId = _transform.GetMapId(uid);
 

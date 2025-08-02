@@ -12,7 +12,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using System.Linq;
-using Robust.Server.Audio;
 
 namespace Content.Server.SS220.Forcefield.Systems;
 
@@ -24,7 +23,6 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
 
     private readonly Dictionary<EntityUid, List<ICommonSession>> _curPvsOverrides = [];
 
@@ -46,7 +44,7 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         {
             UpdatePvsOverride((uid, comp));
 
-            if (!comp.Params.Figure.Dirty)
+            if (!comp.Params.Shape.Dirty)
                 continue;
 
             RefreshFigure((uid, comp));
@@ -77,8 +75,8 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         if (TerminatingOrDeleted(entity))
             return;
 
-        entity.Comp.Params.Figure.OwnerRotation = Transform(entity).LocalRotation;
-        entity.Comp.Params.Figure.Refresh();
+        entity.Comp.Params.Shape.OwnerRotation = Transform(entity).LocalRotation;
+        entity.Comp.Params.Shape.Refresh();
         Dirty(entity);
 
         if (TryComp<FixturesComponent>(entity, out var fixtures))
@@ -100,7 +98,7 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         foreach (var fixture in fixtures.Fixtures)
             _fixture.DestroyFixture(entity, fixture.Key, false, manager: fixtures);
 
-        var shapes = forcefield.Params.Figure.GetShapes();
+        var shapes = forcefield.Params.Shape.GetPhysShapes();
         var density = forcefield.Params.Density / shapes.Count();
         for (var i = 0; i < shapes.Count(); i++)
         {
@@ -142,7 +140,7 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
                 continue;
 
             var entLocalCoords = _transform.ToCoordinates(entity.Owner, entMapCoords);
-            var closestPoint = entity.Comp.Params.Figure.GetClosestPoint(entLocalCoords.Position);
+            var closestPoint = entity.Comp.Params.Shape.GetClosestPoint(entLocalCoords.Position);
             if (closestPoint is null)
                 continue;
 

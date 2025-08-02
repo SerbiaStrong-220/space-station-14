@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Physics;
-using Content.Shared.SS220.Forcefield.Figures;
+using Content.Shared.SS220.Forcefield.Shapes;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Dynamics;
@@ -41,11 +41,17 @@ public sealed partial class ForcefieldComponent : Component
 [DataDefinition]
 public sealed partial class ForcefieldParams()
 {
+    /// <summary>
+    /// The shape of the force field
+    /// </summary>
     [DataField(required: true)]
-    public IForcefieldFigure Figure = new ForcefieldParabola();
+    public IForcefieldShape Shape = new ForcefieldParabola();
 
+    /// <summary>
+    /// Force field collision options
+    /// </summary>
     [DataField]
-    public ForcefieldCollisionOption CollisionOption = ForcefieldCollisionOption.OutsideGoing;
+    public ForcefieldCollisionOptions CollisionOption = ForcefieldCollisionOptions.OutsideGoing;
 
     [DataField]
     public float Density = 1;
@@ -63,11 +69,18 @@ public sealed partial class ForcefieldParams()
     public float Visibility = 0.1f;
 }
 
-public enum ForcefieldCollisionOption
+public enum ForcefieldCollisionOptions
 {
     None = 0,
 
+    /// <summary>
+    /// The force field will collide with entities moving from its shape.
+    /// </summary>
     InsideGoing = 1 << 0,
+
+    /// <summary>
+    /// The force field will collide with entities moving into its shape.
+    /// </summary>
     OutsideGoing = 1 << 1,
 
     All = ~0

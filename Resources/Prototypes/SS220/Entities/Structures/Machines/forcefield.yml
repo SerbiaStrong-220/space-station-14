@@ -13,7 +13,7 @@
     damageContainer: Forcefield
   - type: Forcefield
     params:
-      figure: !type:ForcefieldParabola
+      shape: !type:ForcefieldParabola
         offset: 0, 4
       density: 100
       collisionMask:
@@ -123,7 +123,7 @@
   components:
   - type: ForcefieldGenerator
     forcefieldParams:
-      figure: !type:ForcefieldParabola
+      shape: !type:ForcefieldParabola
         offset: 0, 4
       density: 100
       collisionMask:
@@ -138,7 +138,7 @@
   components:
   - type: ForcefieldGenerator
     forcefieldParams:
-      figure: !type:ForcefieldCircle
+      shape: !type:ForcefieldCircle
       density: 100
       collisionMask:
       - None
@@ -152,7 +152,7 @@
   components:
   - type: ForcefieldGenerator
     forcefieldParams:
-      figure: !type:ForcefieldEllipse
+      shape: !type:ForcefieldEllipse
       density: 100
       collisionMask:
       - None

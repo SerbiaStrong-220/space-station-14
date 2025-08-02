@@ -11,7 +11,6 @@ public abstract class SharedForcefieldSystem : EntitySystem
 {
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -87,23 +86,29 @@ public abstract class SharedForcefieldSystem : EntitySystem
     {
         if (IsInside(entity, uid))
         {
-            if ((entity.Comp.Params.CollisionOption & ForcefieldCollisionOption.InsideGoing) == 0)
+            if ((entity.Comp.Params.CollisionOption & ForcefieldCollisionOptions.InsideGoing) == 0)
                 return false;
         }
         else
         {
-            if ((entity.Comp.Params.CollisionOption & ForcefieldCollisionOption.OutsideGoing) == 0)
+            if ((entity.Comp.Params.CollisionOption & ForcefieldCollisionOptions.OutsideGoing) == 0)
                 return false;
         }
 
         return true;
     }
 
+    /// <summary>
+    /// Is the entity inside the shape
+    /// </summary>
     public bool IsInside(Entity<ForcefieldComponent> entity, EntityUid uid)
     {
         return IsInside(entity, _transform.GetMapCoordinates(uid));
     }
 
+    /// <summary>
+    /// Is the world point inside the shape
+    /// </summary>
     public bool IsInside(Entity<ForcefieldComponent> entity, MapCoordinates worldPos)
     {
         var forcefieldMap = _transform.GetMapCoordinates(entity).MapId;
@@ -111,6 +116,6 @@ public abstract class SharedForcefieldSystem : EntitySystem
             return false;
 
         var localCoords = _transform.ToCoordinates(entity.Owner, worldPos);
-        return entity.Comp.Params.Figure.IsInside(localCoords.Position);
+        return entity.Comp.Params.Shape.IsInside(localCoords.Position);
     }
 }

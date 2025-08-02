@@ -1,12 +1,13 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Serialization;
 using System.Numerics;
 
-namespace Content.Shared.SS220.Forcefield.Figures;
+namespace Content.Shared.SS220.Forcefield.Shapes;
 
 [Serializable, NetSerializable]
 [DataDefinition]
-public sealed partial class ForcefieldEllipse : IForcefieldFigure
+public sealed partial class ForcefieldParabola : IForcefieldShape
 {
     [DataField]
     public float Width
@@ -30,7 +31,7 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
             Dirty = true;
         }
     }
-    private float _height = 8f;
+    private float _height = 0.5f;
 
     [DataField]
     public float Thickness
@@ -78,8 +79,9 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
             Dirty = true;
         }
     }
-    private int _segments = 64;
+    private int _segments = 32;
 
+    /// <inheritdoc/>
     public Angle OwnerRotation
     {
         get => _ownerRotation;
@@ -90,21 +92,24 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
         }
     }
     private Angle _ownerRotation = default;
+
+    /// <inheritdoc/>
     public bool Dirty { get; set; }
+
     public Vector2[] InnerPoints { get; private set; } = [];
     public Vector2[] OuterPoints { get; private set; } = [];
 
-    private readonly Ellipse _innerEllipse = new();
-    private readonly Ellipse _centralEllipse = new();
-    private readonly Ellipse _outerEllipse = new();
+    private Parabola _innerParabola = new();
+    private Parabola _centralParabola = new();
+    private Parabola _outerParabola = new();
 
-    public ForcefieldEllipse(
+    public ForcefieldParabola(
         float width,
         float height,
         float thickness,
         Angle angle = default,
         Vector2 offset = default,
-        int segments = 64
+        int segments = 32
     )
     {
         Width = width;
@@ -117,47 +122,58 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
         Refresh();
     }
 
-    public ForcefieldEllipse()
+    public ForcefieldParabola()
     {
         Refresh();
     }
 
+    /// <inheritdoc/>
     public void Refresh()
     {
-        RefreshEllipses();
+        RefreshParabolas();
 
-        InnerPoints = _innerEllipse.GetPoints(Segments);
-        OuterPoints = _outerEllipse.GetPoints(Segments);
+        InnerPoints = _innerParabola.GetPoints(Segments);
+        OuterPoints = _outerParabola.GetPoints(Segments);
 
         Dirty = false;
     }
 
-    private void RefreshEllipses()
+    private void RefreshParabolas()
     {
         var angle = -OwnerRotation.Opposite() + Angle;
 
         var rotationMatrix = Matrix3x2.CreateRotation((float)-OwnerRotation.Opposite().Theta);
         var offset = Vector2.Transform(Offset, rotationMatrix);
 
-        _centralEllipse.Width = Width;
-        _centralEllipse.Height = Height;
-        _centralEllipse.Angle = angle;
-        _centralEllipse.Offset = Offset;
+        _centralParabola.Width = Width;
+        _centralParabola.Height = Height;
+        _centralParabola.Angle = angle;
+        _centralParabola.Offset = Offset;
 
-        var widthHeightOffset = Thickness;
+        var direction = angle.Opposite().ToWorldVec();
 
-        _innerEllipse.Width = Width - widthHeightOffset;
-        _innerEllipse.Height = Height - widthHeightOffset;
-        _innerEllipse.Angle = angle;
-        _innerEllipse.Offset = offset;
+        var vertex = new Vector2(0, Height);
+        var right = new Vector2(Width / 2f, 0);
+        var rightToVertexNormal = (right - vertex).Normalized();
+        var parabolasOffset = new Vector2(-rightToVertexNormal.Y, rightToVertexNormal.X);
 
-        _outerEllipse.Width = Width + widthHeightOffset;
-        _outerEllipse.Height = Height + widthHeightOffset;
-        _outerEllipse.Angle = angle;
-        _outerEllipse.Offset = offset;
+        var widthOffset = parabolasOffset.X * Thickness;
+        var heightOffset = (1 - parabolasOffset.Y) * Thickness / 2;
+        var directionOffset = direction * parabolasOffset.Y * Thickness / 2;
+
+        _innerParabola.Width = Width - widthOffset;
+        _innerParabola.Height = Height - heightOffset;
+        _innerParabola.Angle = angle;
+        _innerParabola.Offset = offset - directionOffset;
+
+        _outerParabola.Width = Width + widthOffset;
+        _outerParabola.Height = Height + heightOffset;
+        _outerParabola.Angle = angle;
+        _outerParabola.Offset = offset + directionOffset;
     }
 
-    public IEnumerable<IPhysShape> GetShapes()
+    /// <inheritdoc/>
+    public IEnumerable<IPhysShape> GetPhysShapes()
     {
         var result = new List<IPhysShape>();
 
@@ -166,12 +182,16 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
             var shape = new PolygonShape();
             shape.Set(new List<Vector2>([InnerPoints[i], OuterPoints[i], OuterPoints[i + 1], InnerPoints[i + 1]]));
 
+            if (shape.VertexCount <= 0)
+                throw new Exception($"Failed to generate a {nameof(PolygonShape)}");
+
             result.Add(shape);
         }
 
         return result;
     }
 
+    /// <inheritdoc/>
     public IEnumerable<Vector2> GetTrianglesVerts()
     {
         var verts = new List<Vector2>();
@@ -190,11 +210,13 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
         return verts;
     }
 
+    /// <inheritdoc/>
     public bool IsInside(Vector2 point)
     {
-        return _centralEllipse.IsInside(point);
+        return _centralParabola.IsInside(point);
     }
 
+    /// <inheritdoc/>
     public Vector2? GetClosestPoint(Vector2 point)
     {
         Vector2? result = null;
@@ -215,7 +237,7 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
     }
 
     [Serializable, NetSerializable]
-    private sealed class Ellipse()
+    private sealed class Parabola()
     {
         public float Width
         {
@@ -223,51 +245,48 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
             set
             {
                 if (value < 0)
-                    throw new ArgumentException("The width cannot be negative.", nameof(Width));
+                    throw new ArgumentException("The width cannot be negative", nameof(Width));
 
                 _width = value;
             }
         }
-        private float _width;
-        public float Height
-        {
-            get => _height;
-            set
-            {
-                if (value < 0)
-                    throw new ArgumentException("The height cannot be negative.", nameof(Height));
-
-                _height = value;
-            }
-        }
-        private float _height;
+        private float _width = 0;
+        public float Height = 0;
         public Angle Angle = default;
         public Vector2 Offset = default;
 
-        public Vector2[] GetPoints(int segments = 64, bool clockwise = true)
+        private float A => -Height / (Width / 2 * Width / 2);
+
+        public Vector2[] GetPoints(int segments)
         {
             if (segments <= 0)
                 throw new ArgumentException("The number of segments must be possitive.", nameof(segments));
 
             var points = new List<Vector2>();
+            var halfWidth = Width / 2f;
+            var startX = -halfWidth;
+            var endX = halfWidth;
 
             var rotationMatrix = Matrix3x2.CreateRotation((float)Angle.Theta);
-            var angleStep = 2 * Math.PI / segments;
+
             for (var i = 0; i <= segments; i++)
             {
-                var angle = i * angleStep;
-                if (clockwise)
-                    angle = -angle;
+                var x = MathHelper.Lerp(startX, endX, (float)i / segments);
+                var y = GetY(x);
 
-                var x = (float)(Width / 2 * Math.Cos(angle));
-                var y = (float)(Height / 2 * Math.Sin(angle));
                 var point = new Vector2(x, y);
                 point = Vector2.Transform(point, rotationMatrix);
+                point += Offset;
 
                 points.Add(point);
             }
 
             return [.. points];
+        }
+
+        public float GetY(float x)
+        {
+            return A * x * x + Height;
         }
 
         public bool IsInside(Vector2 point)
@@ -276,9 +295,8 @@ public sealed partial class ForcefieldEllipse : IForcefieldFigure
             point = Vector2.Transform(point, rotationMatrix);
             point -= Offset;
 
-            var a = Width / 2.0;
-            var b = Height / 2.0;
-            return Math.Pow(point.X / a, 2) + Math.Pow(point.Y / b, 2) <= 1;
+            var parabolaY = GetY(point.X);
+            return parabolaY >= point.Y;
         }
     }
 }

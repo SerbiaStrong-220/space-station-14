@@ -41,7 +41,7 @@ public sealed class ForcefieldOverlay : Overlay
 
         while (query.MoveNext(out var uid, out var comp))
         {
-            var verts = comp.Params.Figure.GetTrianglesVerts();
+            var verts = comp.Params.Shape.GetTrianglesVerts();
             if (!verts.Any())
                 continue;
 

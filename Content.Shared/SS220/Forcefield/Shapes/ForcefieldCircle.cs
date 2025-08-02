@@ -1,12 +1,13 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Serialization;
 using System.Numerics;
 
-namespace Content.Shared.SS220.Forcefield.Figures;
+namespace Content.Shared.SS220.Forcefield.Shapes;
 
 [Serializable, NetSerializable]
 [DataDefinition]
-public sealed partial class ForcefieldCircle : IForcefieldFigure
+public sealed partial class ForcefieldCircle : IForcefieldShape
 {
     [DataField]
     public float Radius
@@ -56,7 +57,10 @@ public sealed partial class ForcefieldCircle : IForcefieldFigure
     }
     private int _segments = 64;
 
+    /// <inheritdoc/>
     public Angle OwnerRotation { get; set; }
+
+    /// <inheritdoc/>
     public bool Dirty { get; set; }
 
     public Vector2[] InnerPoints { get; private set; } = [];
@@ -81,6 +85,7 @@ public sealed partial class ForcefieldCircle : IForcefieldFigure
         Refresh();
     }
 
+    /// <inheritdoc/>
     public void Refresh()
     {
         RefreshCircles();
@@ -108,7 +113,8 @@ public sealed partial class ForcefieldCircle : IForcefieldFigure
         _outerCircle.Offset = offset;
     }
 
-    public IEnumerable<IPhysShape> GetShapes()
+    /// <inheritdoc/>
+    public IEnumerable<IPhysShape> GetPhysShapes()
     {
         var result = new List<IPhysShape>();
 
@@ -123,6 +129,7 @@ public sealed partial class ForcefieldCircle : IForcefieldFigure
         return result;
     }
 
+    /// <inheritdoc/>
     public IEnumerable<Vector2> GetTrianglesVerts()
     {
         var verts = new List<Vector2>();
@@ -141,11 +148,13 @@ public sealed partial class ForcefieldCircle : IForcefieldFigure
         return verts;
     }
 
+    /// <inheritdoc/>
     public bool IsInside(Vector2 point)
     {
         return _centralCircle.IsInside(point);
     }
 
+    /// <inheritdoc/>
     public Vector2? GetClosestPoint(Vector2 point)
     {
         Vector2? result = null;
