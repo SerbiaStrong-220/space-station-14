@@ -174,7 +174,7 @@
     - HideContextMenu
   # SS220 languages begin
   - type: Language
-    KnowAllLanguages: true # Used as transponder
+    knowAllLanguages: true # Used as transponder
   # SS220 languages end
 
 ## Mapping prototypes

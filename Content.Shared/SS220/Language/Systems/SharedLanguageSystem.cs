@@ -4,7 +4,6 @@ using Content.Shared.SS220.Language.Components;
 using Robust.Shared.Random;
 using Content.Shared.Paper;
 using Content.Shared.SS220.Paper;
-using System.Text;
 
 namespace Content.Shared.SS220.Language.Systems;
 
