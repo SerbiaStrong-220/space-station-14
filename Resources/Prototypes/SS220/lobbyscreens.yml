@@ -57,3 +57,11 @@
 - type: lobbyBackground
   id: KuoryCap
   background: /Textures/SS220/LobbyScreens/KuoryCap.png
+
+- type: lobbyBackground
+  id: camping
+  background: /Textures/SS220/LobbyScreens/camping.png
+
+- type: lobbyBackground
+  id: BTB-Art
+  background: /Textures/SS220/LobbyScreens/BTB-Art.png

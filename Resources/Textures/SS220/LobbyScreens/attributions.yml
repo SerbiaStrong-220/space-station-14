@@ -71,6 +71,16 @@
 
 - files: ["KuoryCap.png"]
   license: "CC-BY-NC-SA-3.0"
-  copyright: "masleena#3572 on discord"
+  copyright: Created by "masleena#3572 on discord"
   source: "https://t.me/kuory_tg"
+
+- files: ["camping.png"]
+  license: "CC-BY-3.0"
+  copyright: "Created by btb_mitw for SS220"
+  source: "https://github.com/SerbiaStrong-220"
+
+- files: ["BTB-Artl.png"]
+  license: "CC-BY-3.0"
+  copyright: "Created by btb_mitw for SS220"
+  source: "https://github.com/SerbiaStrong-220"
 
