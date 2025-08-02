@@ -182,7 +182,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
 
             return false;
         }
-        else if (comp.KnowAllLLanguages)
+        else if (comp.KnowAllLanguages)
             return true;
 
         return ContainsLanguage((uid, comp), languageId, true);
@@ -199,7 +199,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
 
         if (!TryComp<LanguageComponent>(uid, out var comp))
             return false;
-        else if (comp.KnowAllLLanguages)
+        else if (comp.KnowAllLanguages)
             return true;
 
         return ContainsLanguage((uid, comp), languageId);
