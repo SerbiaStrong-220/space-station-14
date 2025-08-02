@@ -11,6 +11,8 @@
     toggleOnInteract: false
   - type: RadioSpeaker
     toggleOnInteract: false
+  - type: Language
+    knowAllLanguages: true # Used as transponder
   - type: Speech
     speechVerb: Robotic
   - type: HandheldRadio

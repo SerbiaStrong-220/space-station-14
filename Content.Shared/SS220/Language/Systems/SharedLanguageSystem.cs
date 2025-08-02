@@ -4,7 +4,6 @@ using Content.Shared.SS220.Language.Components;
 using Robust.Shared.Random;
 using Content.Shared.Paper;
 using Content.Shared.SS220.Paper;
-using System.Text;
 
 namespace Content.Shared.SS220.Language.Systems;
 
@@ -182,7 +181,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
 
             return false;
         }
-        else if (comp.KnowAllLLanguages)
+        else if (comp.KnowAllLanguages)
             return true;
 
         return ContainsLanguage((uid, comp), languageId, true);
@@ -199,7 +198,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
 
         if (!TryComp<LanguageComponent>(uid, out var comp))
             return false;
-        else if (comp.KnowAllLLanguages)
+        else if (comp.KnowAllLanguages)
             return true;
 
         return ContainsLanguage((uid, comp), languageId);
@@ -214,7 +213,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Sets the color of the prototype language to the message 
+    ///     Sets the color of the prototype language to the message
     /// </summary>
     public string SetColor(string message, LanguagePrototype proto)
     {
