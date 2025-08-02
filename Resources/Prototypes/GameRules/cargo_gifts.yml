@@ -96,8 +96,8 @@
   - type: StationEvent
     weight: 4
     duration: 120
-    minimumPlayers: 0
-    earliestStart: 0
+    minimumPlayers: 40
+    earliestStart: 30
   - type: CargoGiftsRule
     description: cargo-gift-vending
     dest: cargo-gift-dest-supp
