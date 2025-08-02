@@ -3,3 +3,9 @@
   name: damage-type-cerebral
   armorCoefficientPrice: 1
   armorFlatPrice: 1
+
+- type: damageType
+  id: Forcefield
+  name: damage-type-forcefield
+  armorCoefficientPrice: 1
+  armorFlatPrice: 1

@@ -2,7 +2,7 @@
 using Robust.Client.Graphics;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client.SS220.ForcefieldGenerator;
+namespace Content.Client.SS220.Forcefield.Systems;
 
 public sealed class ForcefieldOverlaySystem : EntitySystem
 {
@@ -15,7 +15,7 @@ public sealed class ForcefieldOverlaySystem : EntitySystem
     {
         base.Initialize();
 
-        _overlay = new(this.EntityManager, _prototype);
+        _overlay = new(EntityManager, _prototype);
         _overlayManager.AddOverlay(_overlay);
     }
 

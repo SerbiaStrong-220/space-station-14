@@ -1,11 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using System.Linq;
 using System.Numerics;
-using Content.Shared.SS220.ForcefieldGenerator;
+using Content.Shared.SS220.Forcefield.Components;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client.SS220.ForcefieldGenerator;
+namespace Content.Client.SS220.Forcefield;
 
 public sealed class ForcefieldOverlay : Overlay
 {
@@ -36,38 +37,27 @@ public sealed class ForcefieldOverlay : Overlay
             return;
 
         var handle = args.WorldHandle;
-        var queryEnum = _entity.EntityQueryEnumerator<ForcefieldSS220Component>();
+        var query = _entity.EntityQueryEnumerator<ForcefieldComponent>();
 
-        while (queryEnum.MoveNext(out var uid, out var fieldComp))
+        while (query.MoveNext(out var uid, out var comp))
         {
-            if (fieldComp.Generator is not { } generator || !_entity.EntityExists(generator))
-            {
+            var verts = comp.Params.Shape.GetTrianglesVerts();
+            if (!verts.Any())
                 continue;
-            }
 
-            if (!_entity.TryGetComponent<ForcefieldGeneratorSS220Component>(generator, out var generatorComp))
-            {
-                continue;
-            }
+            var (pos, rot) = _transform.GetWorldPositionRotation(uid);
 
-            var boxToRender = new Box2(
-                new Vector2(-generatorComp.FieldLength / 2, -generatorComp.FieldThickness / 2),
-                new Vector2(generatorComp.FieldLength / 2, generatorComp.FieldThickness / 2)
-            );
-
-            var (position, rotation) = _transform.GetWorldPositionRotation(uid);
-
-            var reference = args.Viewport.WorldToLocal(position);
+            var reference = args.Viewport.WorldToLocal(pos);
             reference.X = -reference.X;
 
             _shader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
             _shader.SetParameter("reference", reference);
-            var finalVisibility = Math.Clamp(generatorComp.FieldVisibility, -1f, 1f);
+            var finalVisibility = Math.Clamp(comp.Params.Visibility, -1f, 1f);
             _shader.SetParameter("visibility", finalVisibility);
 
-            handle.SetTransform(position, rotation);
+            handle.SetTransform(pos, rot);
             handle.UseShader(_shader);
-            handle.DrawRect(boxToRender, generatorComp.FieldColor);
+            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, verts.ToList(), Color.SkyBlue);
         }
 
         handle.UseShader(null);

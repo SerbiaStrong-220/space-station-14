@@ -23,6 +23,16 @@
       ]
     },
     {
+      "name": "power_0",
+      "delays":
+      [
+        [
+          0.4,
+          0.2
+        ]
+      ]
+    },
+    {
       "name": "power_1",
       "delays":
       [
@@ -44,16 +54,6 @@
     },
     {
       "name": "power_3",
-      "delays":
-      [
-        [
-          0.4,
-          0.2
-        ]
-      ]
-    },
-    {
-      "name": "power_4",
       "delays":
       [
         [
