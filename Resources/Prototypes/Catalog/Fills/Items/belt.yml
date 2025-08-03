@@ -180,7 +180,7 @@
   - type: StorageFill
     contents:
     - id: WeaponWandPolymorphCarp
-    - id: WeaponWandFireball
+#    - id: WeaponWandFireball #SS220 Magic Weapon Resprite
     - id: WeaponWandDeath
     - id: WeaponWandPolymorphDoor
 

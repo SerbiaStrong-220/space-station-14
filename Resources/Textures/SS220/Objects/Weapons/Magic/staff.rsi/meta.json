@@ -1,0 +1,597 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from TG Station at https://github.com/tgstation, modified by Estkemran (Github) for SS220. All inhand states sprited by Estkemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "nothing"
+    },
+    {
+      "name": "nothing-unshaded",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "fire"
+    },
+    {
+      "name": "fire-unshaded",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+	  {
+      "name": "staff-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "staff-inhand-right",
+      "directions": 4
+    },
+	  {
+      "name": "staff-inhand-left-unshaded",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "staff-inhand-right-unshaded",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "animation"
+    },
+    {
+      "name": "animation-unshaded",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+	  {
+      "name": "animation-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "animation-inhand-right",
+      "directions": 4
+    },
+	  {
+      "name": "animation-inhand-left-unshaded",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "animation-inhand-right-unshaded",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "change",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "change-unshaded",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "chaos"
+    },
+    {
+      "name": "chaos-unshaded",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+	  {
+      "name": "chaos-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "chaos-inhand-right",
+      "directions": 4
+    },
+	  {
+      "name": "chaos-inhand-left-unshaded",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "chaos-inhand-right-unshaded",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "door",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+	  {
+      "name": "door-inhand-left",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "door-inhand-right",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "healing"
+    },
+    {
+      "name": "healing-unshaded",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2
+        ]
+      ]
+    },
+	  {
+      "name": "healing-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "healing-inhand-right",
+      "directions": 4
+    },
+	  {
+      "name": "healing-inhand-left-unshaded",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "healing-inhand-right-unshaded",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "locker"
+    },
+    {
+      "name": "locker-effect"
+    },
+	  {
+      "name": "locker-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "locker-inhand-right",
+      "directions": 4
+    }
+  ]
+}

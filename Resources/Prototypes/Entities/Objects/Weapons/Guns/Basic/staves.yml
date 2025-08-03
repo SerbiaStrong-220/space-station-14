@@ -9,8 +9,20 @@
   - type: Sprite
     layers:
     - state: healing
+    - state: healing-unshaded #SS220 Magic Weapon Resprite
+      shader: unshaded #SS220 Magic Weapon Resprite
   - type: Item
-    heldPrefix: healing
+    #SS220 Magic Weapon Resprite Begin
+    inhandVisuals:
+      left:
+      - state: healing-inhand-left
+      - state: healing-inhand-left-unshaded
+        shade: unshaded
+      right:
+      - state: healing-inhand-right
+      - state: healing-inhand-right-unshaded
+        shade: unshaded
+    #SS220 Magic Weapon Resprite End
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/Magic/staff_healing.ogg

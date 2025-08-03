@@ -6,8 +6,21 @@
   - type: Sprite
     layers:
     - state: poly
-    - state: poly-effect
+    - state: poly-effect #SS220 Magic Weapon Resprite
       map: ["effect"]
+      shader: unshaded #SS220 Magic Weapon Resprite
+    #SS220 Magic Weapon Resprite Begin
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: poly-inhand-left
+      - state: poly-inhand-left-unshaded
+        shader: unshaded
+      right:
+      - state: poly-inhand-right
+      - state: poly-inhand-right-unshaded
+        shader: unshaded
+    #SS220 Magic Weapon Resprite End
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/Magic/staff_animation.ogg
@@ -39,15 +52,30 @@
 
 - type: entity
   name: wand of fireball
-  parent: WeaponWandBase
-  id: WeaponWandFireball
+  parent: WeaponStaffBase #SS220 Magic Weapon Resprite
+  id: WeaponStaffFireball #SS220 Magic Weapon Resprite
   description: Great big balls of fire!
   components:
   - type: Sprite
+    sprite: SS220/Objects/Weapons/Magic/staff.rsi #SS220 Magic Weapon Resprite
     layers:
     - state: fire
-    - state: fire-effect
+    - state: fire-unshaded #SS220 Magic Weapon Resprite
       map: ["effect"]
+      shader: unshaded #SS220 Magic Weapon Resprite
+    #SS220 Magic Weapon Resprite Begin
+  - type: Item
+    sprite: SS220/Objects/Weapons/Magic/staff_x64.rsi
+    inhandVisuals:
+      left:
+      - state: fire-inhand-left
+      - state: fire-inhand-left-unshaded
+        shader: unshaded
+      right:
+      - state: fire-inhand-right
+      - state: fire-inhand-right-unshaded
+        shader: unshaded
+    #SS220 Magic Weapon Resprite End
   - type: Gun
     fireRate: 0.25
     soundGunshot:
@@ -61,9 +89,10 @@
   name: wand of the locker
   description: Stuff nerds at a distance!
   parent: WeaponWandBase
-  id: WeaponWandLocker
+  id: WeaponStaffLocker #SS220 Magic Weapon Resprite
   components:
   - type: Sprite
+    sprite: SS220/Objects/Weapons/Magic/staff.rsi #SS220 Magic Weapon Resprite
     layers:
     - state: locker
       map: ["base"]
@@ -102,8 +131,21 @@
   - type: Sprite
     layers:
     - state: death
-    - state: death-effect
+    - state: death-unshaded #SS220 Magic Weapon Resprite
       map: ["effect"]
+      shader: unshaded #SS220 Magic Weapon Resprite
+    #SS220 Magic Weapon Resprite Begin
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: death-inhand-left
+      - state: death-inhand-left-unshaded
+        shader: unshaded
+      right:
+      - state: death-inhand-right
+      - state: death-inhand-right-unshaded
+        shader: unshaded
+    #SS220 Magic Weapon Resprite End
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/mateba.ogg # PUNCH
@@ -123,6 +165,15 @@
     - state: door
     - state: door-effect
       map: ["effect"]
+    #SS220 Magic Weapon Resprite Begin
+  - type: Item
+    heldPrefix: door
+    inhandVisuals:
+      left:
+      - state: door-inhand-left
+      right:
+      - state: door-inhand-right
+    #SS220 Magic Weapon Resprite End
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/Magic/staff_door.ogg

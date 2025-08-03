@@ -200,7 +200,7 @@
         orGroup: Magics
       - id: WeaponWandPolymorphMonkey
         orGroup: Magics
-      - id: WeaponWandFireball
+      - id: WeaponStaffFireball #SS220 Magic Weapon Resprite
         orGroup: Magics
       - id: WeaponWandPolymorphDoor
         orGroup: Magics
