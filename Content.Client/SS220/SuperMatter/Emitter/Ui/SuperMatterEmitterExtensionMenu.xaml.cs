@@ -10,14 +10,14 @@ using Robust.Client.Graphics;
 namespace Content.Client.SS220.SuperMatter.Emitter.Ui;
 
 [GenerateTypedNameReferences]
-public sealed partial class SuperMatterEmitterMenu : FancyWindow
+public sealed partial class SuperMatterEmitterExtensionMenu : FancyWindow
 {
     [Dependency] ILocalizationManager _localization = default!;
 
     public event Action<BaseButton.ButtonEventArgs, int, int>? OnSubmitButtonPressed;
     public event Action<BaseButton.ButtonEventArgs>? OnEmitterActivatePressed;
 
-    public SuperMatterEmitterMenu()
+    public SuperMatterEmitterExtensionMenu()
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
@@ -48,11 +48,11 @@ public sealed partial class SuperMatterEmitterMenu : FancyWindow
         {
             case ActivationStateEnum.EmitterActivated:
                 ChangeButtonLabelColor(EmitterActivationButton, Color.LimeGreen);
-                EmitterActivationButton.Text = _localization.GetString("supermatter-emitter-activated-emitter");
+                EmitterActivationButton.Text = _localization.GetString("supermatter-emitter-extension-activated-emitter");
                 break;
             case ActivationStateEnum.EmitterDeactivated:
                 ChangeButtonLabelColor(EmitterActivationButton, Color.OrangeRed);
-                EmitterActivationButton.Text = _localization.GetString("supermatter-emitter-deactivated-emitter");
+                EmitterActivationButton.Text = _localization.GetString("supermatter-emitter-extension-deactivated-emitter");
                 break;
         }
     }
@@ -72,7 +72,7 @@ public sealed partial class SuperMatterEmitterMenu : FancyWindow
         PowerConsumptionSpinBox.AddRightButton(500, "+500");
         PowerConsumptionSpinBox.IsValid = PowerConsumptionValidate;
         // it should be here to Force SpinBox UpdateButtonCanPress() cause its private
-        PowerConsumptionSpinBox.Value = SuperMatterEmitterConsts.BaseEnergyConsumption;
+        PowerConsumptionSpinBox.Value = SuperMatterEmitterExtensionConsts.BaseEnergyConsumption;
         PowerConsumptionSpinBox.ValueChanged += (_) =>
         {
             ChangeApplyState(ApplyButtonStateEnum.ChangesNotSaved);
@@ -100,12 +100,12 @@ public sealed partial class SuperMatterEmitterMenu : FancyWindow
         {
             case ApplyButtonStateEnum.ChangesSaved:
                 ChangeButtonLabelColor(SubmitButton, Color.LightGreen);
-                SubmitDescription.Text = _localization.GetString("supermatter-emitter-changes-saved");
+                SubmitDescription.Text = _localization.GetString("supermatter-emitter-extension-changes-saved");
                 SubmitDescription.FontColorOverride = Color.LightGreen;
                 break;
             case ApplyButtonStateEnum.ChangesNotSaved:
                 ChangeButtonLabelColor(SubmitButton, Color.Orange);
-                SubmitDescription.Text = _localization.GetString("supermatter-emitter-changes-unsaved");
+                SubmitDescription.Text = _localization.GetString("supermatter-emitter-extension-changes-unsaved");
                 SubmitDescription.FontColorOverride = Color.Orange;
                 break;
         }
@@ -116,10 +116,10 @@ public sealed partial class SuperMatterEmitterMenu : FancyWindow
     }
     private void ChangeSliderLabels()
     {
-        MatterRatioResult.Text = _localization.GetString("supermatter-emitter-matter",
-                    ("value", (SuperMatterEmitterConsts.GetMatterFromPower((100 - MatterToEnergyRatioSlider.Value) / 100f * PowerConsumptionSpinBox.Value)).ToString("N1")));
-        EnergyRatioResult.Text = _localization.GetString("supermatter-emitter-energy",
-                    ("value", (SuperMatterEmitterConsts.GetEnergyFromPower(MatterToEnergyRatioSlider.Value / 100f * PowerConsumptionSpinBox.Value)).ToString("N1")));
+        MatterRatioResult.Text = _localization.GetString("supermatter-emitter-extension-matter",
+                    ("value", (SuperMatterEmitterExtensionConsts.GetMatterFromPower((100 - MatterToEnergyRatioSlider.Value) / 100f * PowerConsumptionSpinBox.Value)).ToString("N1")));
+        EnergyRatioResult.Text = _localization.GetString("supermatter-emitter-extension-energy",
+                    ("value", (SuperMatterEmitterExtensionConsts.GetEnergyFromPower(MatterToEnergyRatioSlider.Value / 100f * PowerConsumptionSpinBox.Value)).ToString("N1")));
     }
 
     private enum ApplyButtonStateEnum

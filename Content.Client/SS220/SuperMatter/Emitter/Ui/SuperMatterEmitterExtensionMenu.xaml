@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    Title="{Loc 'supermatter-emitter-title'}"
+    Title="{Loc 'supermatter-emitter-extension-title'}"
     Resizable="True"
     MinSize="360 180"
     RectClipContent="False">
@@ -16,15 +16,15 @@
         </PanelContainer>
         <BoxContainer Name="ContentHolderContainer" HorizontalExpand="True" Orientation="Vertical">
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
-                <Label Text="{Loc 'supermatter-emitter-power-consumption'}" HorizontalAlignment="Center" HorizontalExpand="True"/>
+                <Label Text="{Loc 'supermatter-emitter-extension-power-consumption'}" HorizontalAlignment="Center" HorizontalExpand="True"/>
                 <SpinBox Name="PowerConsumptionSpinBox" HorizontalAlignment="Center" HorizontalExpand="True"/>
             </BoxContainer>
             <PanelContainer StyleClasses="LowDivider" Margin="2 4 2 0"/>
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center">
-                <Label Text="{Loc 'supermatter-emitter-ratio'}" HorizontalAlignment="Center" HorizontalExpand="True" />
+                <Label Text="{Loc 'supermatter-emitter-extension-ratio'}" HorizontalAlignment="Center" HorizontalExpand="True" />
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-                    <Label Text="{Loc 'supermatter-emitter-matter-none'}" Name="MatterRatioResult" HorizontalAlignment="Left" HorizontalExpand="True" Margin="4 0 0 1" />
-                    <Label Text="{Loc 'supermatter-emitter-energy-none'}" Name="EnergyRatioResult" HorizontalAlignment="Right" HorizontalExpand="True" Margin="4 0 0 1" />
+                    <Label Text="{Loc 'supermatter-emitter-extension-matter-none'}" Name="MatterRatioResult" HorizontalAlignment="Left" HorizontalExpand="True" Margin="4 0 0 1" />
+                    <Label Text="{Loc 'supermatter-emitter-extension-energy-none'}" Name="EnergyRatioResult" HorizontalAlignment="Right" HorizontalExpand="True" Margin="4 0 0 1" />
                 </BoxContainer>
                 <SliderIntInput Name="MatterToEnergyRatioSlider" HorizontalAlignment="Stretch" HorizontalExpand="True"
                     MaxValue="100" MinValue="0" Value="50"/>
@@ -32,8 +32,8 @@
             <PanelContainer StyleClasses="LowDivider" Margin="4 4 4 2"/>
             <BoxContainer MaxHeight="30">
                 <Label Name="SubmitDescription" Margin="4 0 0 1" HorizontalExpand="True" HorizontalAlignment="Left"/>
-                <Button Name="EmitterActivationButton" Text="{Loc 'supermatter-emitter-deactivated-emitter'}" HorizontalExpand="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                <Button Name="SubmitButton" Text="{Loc 'supermatter-emitter-submit'}" HorizontalExpand="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                <Button Name="EmitterActivationButton" Text="{Loc 'supermatter-emitter-extension-deactivated-emitter'}" HorizontalExpand="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                <Button Name="SubmitButton" Text="{Loc 'supermatter-emitter-extension-submit'}" HorizontalExpand="True" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
             </BoxContainer>
         </BoxContainer>
     </Control>

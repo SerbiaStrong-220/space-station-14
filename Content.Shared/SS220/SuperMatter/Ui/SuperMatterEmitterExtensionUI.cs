@@ -4,7 +4,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.SuperMatter.Ui;
 
 [Serializable, NetSerializable]
-public enum SuperMatterEmitterUiKey : byte
+public enum SuperMatterEmitterExtensionUiKey : byte
 {
     Key
 }
@@ -13,7 +13,7 @@ public enum SuperMatterEmitterUiKey : byte
 /// This event raise to give users information about server's component values after its flatting.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class SuperMatterEmitterUpdate(int power, int ratio) : BoundUserInterfaceState
+public sealed class SuperMatterEmitterExtensionUpdate(int power, int ratio) : BoundUserInterfaceState
 {
     public int PowerConsumption { get; } = power;
     public int EnergyToMatterRatio { get; } = ratio;
@@ -24,11 +24,11 @@ public sealed class SuperMatterEmitterUpdate(int power, int ratio) : BoundUserIn
 /// This event raised when user applied changes in emitter interface
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class SuperMatterEmitterValueMessage(int power, int ratio) : BoundUserInterfaceMessage
+public sealed class SuperMatterEmitterExtensionValueMessage(int power, int ratio) : BoundUserInterfaceMessage
 {
     public int PowerConsumption = power;
     public int EnergyToMatterRatio = ratio;
 }
 
 [Serializable, NetSerializable]
-public sealed class SuperMatterEmitterEmitterActivateMessage() : BoundUserInterfaceMessage { }
+public sealed class SuperMatterEmitterExtensionEmitterActivateMessage() : BoundUserInterfaceMessage { }
