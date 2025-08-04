@@ -8,7 +8,6 @@ using Content.Shared.SS220.SuperMatter.Emitter;
 using Content.Shared.SS220.SuperMatter.Ui;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
-using static Prometheus.DotNetRuntime.EventListening.EventSources.DotNetRuntimeEventSource;
 
 namespace Content.Server.SS220.SuperMatter.Emitter;
 
