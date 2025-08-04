@@ -26,3 +26,6 @@ ghost-role-information-giant-fly-rules = Вы [color=red][bold]Командны�
 
 ghost-role-information-clownmime-cyborg-name = МимоКлоунский киборг
 ghost-role-information-clownmime-cyborg-description = Вы киборг, созданный с помощью магии хонка и минуты молчания(аминь), помогите своему создателю нести хонк по станции.
+
+ghost-role-information-wizard-name = Волшебник
+ghost-role-information-wizard-desc = ТЫ — ВОЛШЕБНИК! Покажи станции, на что способна твоя магия.

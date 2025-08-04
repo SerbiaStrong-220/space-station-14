@@ -12,3 +12,7 @@ ent-RubberStampMagistrate = печать магистрата
 
 ent-RubberStampBlueShield = печать Синего Щита
     .desc = { ent-RubberStampBase.desc }
+
+ent-RubberStampWizard = печать волшебника
+    .suffix = НЕ МАППИТЬ
+    .desc = Хаотичная печать волшебника для оформления упорядоченных документов, как иронично.
