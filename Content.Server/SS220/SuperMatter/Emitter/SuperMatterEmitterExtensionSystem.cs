@@ -1,21 +1,24 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Diagnostics;
 using System.Linq;
+using Content.Server.Popups;
 using Content.Server.Singularity.EntitySystems;
 using Content.Shared.Singularity.Components;
 using Content.Shared.SS220.SuperMatter.Emitter;
 using Content.Shared.SS220.SuperMatter.Ui;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
+using static Prometheus.DotNetRuntime.EventListening.EventSources.DotNetRuntimeEventSource;
 
 namespace Content.Server.SS220.SuperMatter.Emitter;
 
 
-public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
+public sealed class SuperMatterEmitterExtensionSystem : SharedSuperMatterEmitterExtensionSystem
 {
     [Dependency] EmitterSystem _emitter = default!;
     [Dependency] IPrototypeManager _prototypeManager = default!;
     [Dependency] UserInterfaceSystem _userInterface = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -37,6 +40,12 @@ public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
     }
     private void OnApplyMessage(Entity<SuperMatterEmitterExtensionComponent> entity, ref SuperMatterEmitterExtensionValueMessage args)
     {
+        if (!CanInteract(entity, args.Actor, out var reason))
+        {
+            _popup.PopupEntity(reason, entity, args.Actor);
+            return;
+        }
+
         entity.Comp.PowerConsumption = Math.Min(16384, args.PowerConsumption);
         entity.Comp.EnergyToMatterRatio = Math.Clamp(args.EnergyToMatterRatio, 0, 100);
 
@@ -72,6 +81,12 @@ public sealed class SuperMatterEmitterExtensionSystem : EntitySystem
 
     private void OnEmitterActivateMessage(Entity<SuperMatterEmitterExtensionComponent> entity, ref SuperMatterEmitterExtensionEmitterActivateMessage args)
     {
+        if (!CanInteract(entity, args.Actor, out var reason))
+        {
+            _popup.PopupEntity(reason, entity, args.Actor);
+            return;
+        }
+
         if (!TryComp<EmitterComponent>(entity, out var emitterComponent))
         {
             Log.Debug($"SM Emitter Extension exist in entity, but it doesnt have {nameof(EmitterComponent)}");
