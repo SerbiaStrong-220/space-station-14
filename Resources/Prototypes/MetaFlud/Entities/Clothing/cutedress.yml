@@ -53,7 +53,7 @@
 - type: entity
   parent: [ClothingUniformSkirtBase]
   id: ClothingUniformOrangeDress
-  name: Ораньжевое красивое платье
+  name: Оранжевое красивое платье
   description: Красивое платье.
   components:
   - type: Sprite
@@ -287,7 +287,7 @@
 - type: entity
   parent: [ClothingUniformSkirtBase]
   id: ClothingUniformRedDress
-  name: Красное красиове платье
+  name: Красивое красное платье
   description: Красивое платье.
   components:
   - type: Sprite
@@ -335,4 +335,5 @@
       right:
       - state: inhand-right
         color: "#f132a8"
+
 
