@@ -1,2 +1,2 @@
-ent-WeaponStaffPolymorphDoor = посох анимации
+ent-AnimationStaff = посох анимации
     .desc = Оживляет неживые предметы!

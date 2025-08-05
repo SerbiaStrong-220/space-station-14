@@ -1,4 +1,4 @@
 ent-WeaponStaffHealing = посох исцеления
     .desc = Вряд ли вам придётся использовать его слишком часто в своём стремлении к резне.
-ent-AnimationStaff = посох входа
+ent-WeaponStaffPolymorphDoor = посох входа
     .desc = На случай, когда нужен маршрут для побега.
