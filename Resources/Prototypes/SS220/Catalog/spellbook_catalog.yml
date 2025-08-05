@@ -1,0 +1,12 @@
+- type: listing
+  id: SpellbookEventContractofApprenticeship
+  name: spellbook-event-contract-of-apprenticeship-name
+  description: spellbook-event-contract-of-apprenticeship-description
+  productEntity: ContractofApprenticeship
+  cost:
+    WizCoin: 4
+  categories:
+  - SpellbookEvents
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1

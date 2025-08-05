@@ -84,3 +84,27 @@
   categories: [ GameRules ]
   components:
   - type: EmergencyShuttleAutoCallRule
+
+- type: entity
+  parent: BaseWizardRule
+  id: WizardReinforcement
+  components:
+  - type: AntagSelection
+    selectionTime: IntraPlayerSpawn
+    definitions:
+    - prefRoles: [ Wizard ]
+      # spawnerPrototype: SpawnPointGhostWizard
+      # roleLoadout:
+      # - RoleSurvivalExtended
+      # startingGear: WizardBlueGear
+      # components:
+      # - type: NpcFactionMember
+      #   factions:
+      #   - Wizard
+      # - type: RandomMetadata
+      #   nameSegments:
+      #   - NamesWizardFirst
+      #   - NamesWizardLast
+      #   nameFormat: name-format-wizard
+      mindRoles:
+      - MindRoleWizardReinforcement

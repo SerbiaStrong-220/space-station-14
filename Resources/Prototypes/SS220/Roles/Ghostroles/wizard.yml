@@ -1,0 +1,41 @@
+- type: ghostRole
+  id: WizardApprenticeshipFire
+  name: ghost-role-information-wizard-fire-apprentice-name
+  description: ghost-role-information-wizard-fire-apprentice-description
+  rules: ghost-role-information-wizard-fire-apprentice-rules
+  entityPrototype: MobHumanWizardApprenticeshipFire
+
+- type: ghostRole
+  id: WizardApprenticeshipDestruction
+  name: ghost-role-information-wizard-destruction-apprentice-name
+  description: ghost-role-information-wizard-destruction-apprentice-description
+  rules: ghost-role-information-wizard-destruction-apprentice-rules
+  entityPrototype: MobHumanWizardApprenticeshipDestruction
+
+- type: ghostRole
+  id: WizardApprenticeshipKeeper
+  name: ghost-role-information-wizard-keeper-apprentice-name
+  description: ghost-role-information-wizard-keeper-apprentice-description
+  rules: ghost-role-information-wizard-keeper-apprentice-rules
+  entityPrototype: MobHumanWizardApprenticeshipKeeper
+
+- type: ghostRole
+  id: WizardApprenticeshipRestoration
+  name: ghost-role-information-wizard-restoration-apprentice-name
+  description: ghost-role-information-wizard-restoration-apprentice-description
+  rules: ghost-role-information-wizard-restoration-apprentice-rules
+  entityPrototype: MobHumanWizardApprenticeshipRestoration
+
+- type: ghostRole
+  id: WizardApprenticeshipStealth
+  name: ghost-role-information-wizard-stealth-apprentice-name
+  description: ghost-role-information-wizard-stealth-apprentice-description
+  rules: ghost-role-information-wizard-stealth-apprentice-rules
+  entityPrototype: MobHumanWizardApprenticeshipStealth
+
+- type: ghostRole
+  id: WizardApprenticeshipTranslocation
+  name: ghost-role-information-wizard-translocation-apprentice-name
+  description: ghost-role-information-wizard-translocation-apprentice-description
+  rules: ghost-role-information-wizard-translocation-apprentice-rules
+  entityPrototype: MobHumanWizardApprenticeshipTranslocation
