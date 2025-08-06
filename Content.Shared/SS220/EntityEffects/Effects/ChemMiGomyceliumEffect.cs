@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.EntityEffects.Effects;
 /// Used when someone eats MiGoShroom
 /// </summary>
 [UsedImplicitly]
-public sealed partial class ChemMiGomiceliumEffect : EventEntityEffect<ChemMiGomiceliumEffect>
+public sealed partial class ChemMiGomyceliumEffect : EventEntityEffect<ChemMiGomyceliumEffect>
 {
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) => Loc.GetString("reagent-effect-guidebook-ss220-corrupt-mind", ("chance", Probability));
 }

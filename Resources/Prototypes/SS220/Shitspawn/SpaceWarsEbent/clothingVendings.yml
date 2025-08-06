@@ -1,0 +1,151 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: VendingMachine
+  suffix: Shitspawn, Ebent, Space Wars
+  id: VendingSISailor
+  name: SISailor
+  description: desc
+  components:
+  - type: VendingMachine
+    pack: SISailorInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/clothing.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: []
+
+- type: entity
+  parent: VendingMachine
+  suffix: Shitspawn, Ebent, Space Wars
+  id: VendingNTSailor
+  name: NTSailor
+  description: desc
+  components:
+  - type: VendingMachine
+    pack: NTSailorInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/clothing.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: []
+
+- type: entity
+  parent: VendingMachine
+  suffix: Shitspawn, Ebent, Space Wars
+  id: VendingSIPilot
+  name: SIPilot
+  description: desc
+  components:
+  - type: VendingMachine
+    pack: SIPilotInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/syndiedrobe.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: []
+
+- type: entity
+  parent: VendingMachine
+  suffix: Shitspawn, Ebent, Space Wars
+  id: VendingNTPilot
+  name: NTPilot
+  description: desc
+  components:
+  - type: VendingMachine
+    pack: NTPilotInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/secdrobe.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: []
+
+- type: entity
+  parent: VendingMachine
+  suffix: Shitspawn, Ebent, Space Wars
+  id: VendingSICaptain
+  name: SICaptain
+  description: desc
+  components:
+  - type: VendingMachine
+    pack: SICaptainInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: Sprite
+    sprite: SS220/Structures/Machines/centCommVend.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: []
+
+- type: entity
+  parent: VendingMachine
+  suffix: Shitspawn, Ebent, Space Wars
+  id: VendingNTCaptain
+  name: NTCaptain
+  description: desc
+  components:
+  - type: VendingMachine
+    pack: NTCaptainInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: Sprite
+    sprite: SS220/Structures/Machines/centCommVend.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: []

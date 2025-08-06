@@ -16,7 +16,7 @@ public sealed partial class EntityEffectSystem : EntitySystem
     [Dependency] private readonly CultYoggSystem _cultYogg = default!;
     [Dependency] private readonly CultYoggAnimalCorruptionSystem _cultYoggAnimalCorruption = default!;
 
-    private void OnExecuteChemMiGomicelium(ref ExecuteEntityEffectEvent<ChemMiGomiceliumEffect> args)
+    private void OnExecuteChemMiGomycelium(ref ExecuteEntityEffectEvent<ChemMiGomyceliumEffect> args)
     {
         var targetEntity = args.Args.TargetEntity;
 

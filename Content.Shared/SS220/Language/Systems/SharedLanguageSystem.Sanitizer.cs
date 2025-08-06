@@ -50,7 +50,7 @@ public abstract partial class SharedLanguageSystem
             if (_language.TryGetLanguageById(UniversalLanguage, out var UniLanguage))
                 avalibleLanguageKeys = UniLanguage.KeyWithPrefix;
         }
-        else if (languageComponent.KnowAllLLanguages)
+        else if (languageComponent.KnowAllLanguages)
             avalibleLanguageKeys = "knowall";
         else
         {
