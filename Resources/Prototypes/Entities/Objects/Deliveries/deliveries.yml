@@ -68,10 +68,6 @@
     - state: trash
       map: [ "enum.DeliveryVisualLayers.Trash" ]
       visible: false
-    - state: priority
-      map: [ "enum.DeliveryVisualLayers.PriorityTape" ]
-      visible: false
-      shader: unshaded
     - state: fragile
       map: [ "enum.DeliveryVisualLayers.FragileStamp" ]
       visible: false
@@ -80,6 +76,10 @@
       offset: -0.21875, -0.25
     - state: locked
       map: [ "enum.DeliveryVisualLayers.Lock" ]
+#    - state: priority
+      map: [ "enum.DeliveryVisualLayers.PriorityTape" ]
+      shader: unshaded
+      visible: false
     - state: broken
       map: [ "enum.DeliveryVisualLayers.Breakage" ]
       visible: false
