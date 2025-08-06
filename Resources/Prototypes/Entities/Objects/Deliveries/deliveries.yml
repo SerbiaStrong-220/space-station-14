@@ -76,7 +76,7 @@
       offset: -0.21875, -0.25
     - state: locked
       map: [ "enum.DeliveryVisualLayers.Lock" ]
-#    - state: priority
+    - state: priority
       map: [ "enum.DeliveryVisualLayers.PriorityTape" ]
       shader: unshaded
       visible: false
