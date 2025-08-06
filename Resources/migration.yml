@@ -751,3 +751,6 @@ VehicleKeyParamedicATV: null
 CrateParamedicATV: null
 SpawnVehicleParamedicATV: null
 SpawnVehicleSyndicateSegway: null
+
+# 2025-07-28 - SS220 forcefield refactor
+forcefieldGenerator220: ForcefieldGeneratorParabola

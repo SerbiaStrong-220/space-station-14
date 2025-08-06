@@ -8,6 +8,10 @@
   name: Spider queen
   description: spider dance
   components:
+  - type: Language
+    availableLanguages:
+    - id: SpiderTongue
+      canSpeak: True
   - type: Emoting
   - type: ThermalVision
     state: Half
@@ -128,6 +132,10 @@
   id: BaseMobSpiderServant
   abstract: true
   components:
+  - type: Language
+    availableLanguages:
+    - id: SpiderTongue
+      canSpeak: true
   - type: Stamina
     critThreshold: 150
   - type: HTN

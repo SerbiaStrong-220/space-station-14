@@ -28,7 +28,7 @@ public sealed partial class LimitationReviveComponent : Component
     /// Delay before target takes brain damage
     /// </summary>
     [DataField]
-    public TimeSpan BeforeDamageDelay = TimeSpan.FromSeconds(60);
+    public TimeSpan BeforeDamageDelay = TimeSpan.FromSeconds(180);
 
     /// <summary>
     /// The exact time when the target will take damage
@@ -51,9 +51,18 @@ public sealed partial class LimitationReviveComponent : Component
     [DataField]
     public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";
 
+    [ViewVariables]
+    public List<string> RecievedDebuffs = [];
+
     /// <summary>
     /// The probability from 0 to 1 that a negative feature will be added in case of unsuccessful use of the defibrillator.
     /// </summary>
     [DataField]
     public float ChanceToAddTrait = 0.6f;
+
+    /// <summary>
+    /// How much does the metabolic modifier affect the damage timer
+    /// </summary>
+    [DataField]
+    public float MetabolismModifierAffect = 0.2f; // original bed vaule is 10f (StasisBedComponent), not ok and i dont want to change official code
 }

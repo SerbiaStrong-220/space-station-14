@@ -1,0 +1,221 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: vendingMachineInventory
+  id: SISailorInventory
+  startingInventory:
+    ClothingHeadHatSyndie: 4
+    ClothingHeadHatParamedicsoft: 1
+    ClothingHeadHatBeretMerc: 4
+    ClothingHeadHatBeretEngineering: 1
+    ClothingHeadHatBeretMedic: 1
+
+    ClothingEyesGlassesMeson: 1
+    ClothingEyesGlassesHiddenSecurity: 2
+    ClothingEyesGlassesMercenary: 4
+
+    ClothingOuterArmorBulletproof: 2
+    ClothingOuterVestSecurityMedic: 1
+    ClothingBeltMilitaryWebbing: 4
+    ClothingOuterVestHazard: 1
+    ClothingOuterVestWeb: 2
+    ClothingOuterArmorBasic: 4
+
+    ClothingNeckScarfStripedSyndieRed: 6
+    ClothingNeckCloakBi: 3
+
+    ClothingUniformJumpsuitParamedicSyndie: 1
+
+    ClothingBackpackSyndicate: 8
+    ClothingBackpack: 8
+    ClothingBackpackEngineering: 1
+    ClothingBackpackMedical: 1
+
+    EventCaptureFlagSynd: 8
+    ClothingMaskGasSyndicate: 8
+
+    ClothingHandsGlovesCombat: 3
+    ClothingHandsMercGlovesCombat: 4
+    ClothingHandsGlovesFingerless: 5
+
+    ClothingBeltSyndieHolster: 3
+
+    ClothingShoesBootsCombat: 4
+    ClothingShoesBootsMerc: 8
+    ClothingShoesSwat: 8
+
+- type: vendingMachineInventory
+  id: NTSailorInventory
+  startingInventory:
+    ClothingHeadHatCorpsoft: 4
+    ClothingHeadHatParamedicsoft: 1
+    ClothingHeadCentcomCapNaval: 4
+    ClothingHeadHatBeretEngineering: 1
+    ClothingHeadHatBeretMedic: 1
+
+    ClothingEyesGlassesMeson: 1
+    ClothingEyesGlassesBallistic: 2
+    ClothingEyesGlassesMercenary: 4
+
+
+    ClothingOuterArmorBulletproof: 2
+    ClothingOuterVestSecurityMedic: 1
+    ClothingOuterArmorBasicSlim: 4
+    ClothingBeltMercWebbing: 4
+    ClothingOuterVestHazard: 1
+    ClothingOuterVestWebMerc: 2
+
+    ClothingNeckCloakNanotrasen: 3
+
+    ClothingUniformJumpsuitParamedic: 1
+
+    ClothingMilitaryBackpack: 8
+    ClothingBackpack: 8
+    ClothingBackpackEngineering: 1
+    ClothingBackpackMedical: 1
+
+    EventCaptureFlagNT: 8
+    ClothingMaskGasSecurity: 8
+
+    ClothingHandsGlovesCombat: 3
+    ClothingHandsMercGlovesCombat: 4
+    ClothingHandsGlovesFingerless: 5
+    ClothingBeltHolster: 2
+    ClothingShoesBootsJackSec: 4
+    ClothingShoesBootsMerc: 8
+    ClothingShoesSwat: 8
+
+- type: vendingMachineInventory
+  id: SIPilotInventory
+  startingInventory:
+    ClothingHeadHatPilotBeret: 3
+    ClothingHeadPilotCapCap: 3
+
+    ClothingEyesGlassesCommand: 3
+    ClothingEyesHudSyndChem: 3
+
+    ClothingBeltMilitaryWebbing: 4
+
+    ClothingOuterHardsuitSyndie: 4
+
+    ClothingOuterAerostaticBomberJacket: 2
+    ClothingOuterArmorBobmer: 2
+    ClothingOuterCoatBomber: 4
+
+    ClothingNeckCloakBi: 4
+
+    ClothingBackpackSyndicate: 4
+
+    EventCaptureFlagSynd: 8
+    ClothingMaskGasSyndicate: 4
+
+    ClothingHandsGlovesCombat: 3
+    ClothingHandsMercGlovesCombat: 3
+    ClothingHandsGlovesFingerless: 3
+
+    ClothingBeltSyndieHolster: 3
+
+    ClothingShoesBootsCombat: 4
+    ClothingShoesBootsMerc: 4
+    ClothingShoesSwat: 4
+    ClothingShoesBootsMag: 2
+
+- type: vendingMachineInventory
+  id: NTPilotInventory
+  startingInventory:
+    ClothingHeadHatPilotBeret: 3
+    ClothingHeadPilotCapCap: 3
+    ClothingHeadHatBeretNavyBlue: 2
+
+    ClothingEyesGlassesBallistic: 3
+    ClothingEyesGlassesCommand: 3
+
+    ClothingBeltMercWebbing: 4
+
+    ClothingOuterHardsuitERTSecurity: 4
+
+    ClothingOuterArmorBobmer: 4
+    ClothingOuterCoatBomber: 4
+
+    ClothingNeckCloakNanotrasen: 4
+
+    ClothingMilitaryBackpack: 4
+
+    EventCaptureFlagNT: 8
+    ClothingMaskGasSecurity: 4
+
+    ClothingHandsGlovesCombat: 3
+    ClothingHandsMercGlovesCombat: 3
+    ClothingHandsGlovesSecTactical: 3
+
+    ClothingBeltHolster: 3
+
+    ClothingShoesBootsJackSec: 4
+    ClothingShoesBootsMerc: 4
+    ClothingShoesSwat: 2
+    ClothingShoesBootsMag: 2
+
+- type: vendingMachineInventory
+  id: SICaptainInventory
+  startingInventory:
+    ClothingEyesGlassesCommand: 2
+    ClothingHeadHatCapcap: 2
+    ClothingHeadBeretCap: 2
+    ClothingHeadNavyCap: 2
+
+    ClothingOuterCoatSyndieCap: 2
+    ClothingOuterCoatSyndieCapArmored: 2
+    ClothingUniformJumpsuitNanotrasenAdmiral: 2
+    ClothingUniformJumpsuitSyndieFormal: 2
+    ClothingOuterCoatCaptain: 2
+    ClothingUniformJumpsuitWhiteCapFormal: 2
+
+    ClothingNeckCloakPirateCap: 2
+
+    ClothingBackpackSyndicate: 2
+
+    EventCaptureFlagSynd: 2
+
+    ClothingBeltSyndieHolster: 2
+
+    ClothingHandsGlovesRobohands: 2
+    ClothingHandsGlovesColorRed: 2
+
+    ClothingShoesBootsCombat: 2
+    ClothingShoesBootsCowboyBlack: 2
+    ClothingShoesBootsLaceup: 2
+
+- type: vendingMachineInventory
+  id: NTCaptainInventory
+  startingInventory:
+    ClothingEyesGlassesCommand: 2
+
+    ClothingHeadNavyCap: 2
+    ClothingHeadHatCapcap: 2
+    ClothingHeadBeretCap: 2
+    ClothingHeadWhiteCapHardhat: 2
+
+    ClothingUniformJumpsuitNanotrasenAdmiral: 2
+    ClothingUniformJumpsuitCapFormal: 2
+    ClothingUniformJumpsuitWhiteCapFormal: 2
+
+    ClothingOuterCoatOfficerFieldUniform: 2
+    ClothingOuterCoatCaptain: 2
+    ClothingNeckWhiteMantleCap: 2
+
+    ClothingNeckCloakCap: 2
+
+    EventCaptureFlagNT: 2
+
+    ClothingMaskGasCaptain: 2
+
+    ClothingBackpackSatchelCaptain: 2
+    ClothingBackpackCaptain: 2
+
+    ClothingHandsGlovesCaptain: 2
+    ClothingHandsGlovesColorWhite: 2
+
+    ClothingBeltHolster: 2
+
+    ClothingShoesBootsLaceup: 2
+    ClothingShoesBootsCowboyWhite: 2
+    ClothingShoesCentcomBlack: 2
+    ClothingShoesBootsCombat: 2
