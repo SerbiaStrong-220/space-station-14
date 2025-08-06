@@ -26,6 +26,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;//SS220 LimitationRevive
 using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
 using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
+using Content.Shared.SS220.LimitationRevive;//SS220 LimitationRevive
 using Content.Shared.Ghost; //SS220 LimitationRevive
 using Content.Shared.Inventory;
 

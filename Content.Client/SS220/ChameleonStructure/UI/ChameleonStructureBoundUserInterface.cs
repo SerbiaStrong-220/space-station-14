@@ -50,10 +50,10 @@ public sealed class ChameleonStructureBoundUserInterface : BoundUserInterface
         var newTargets = new List<EntProtoId>();
         foreach (var target in targets)
         {
-            if (string.IsNullOrEmpty(target) || !_proto.TryIndex(target, out EntityPrototype? proto))
+            if (string.IsNullOrEmpty(target))
                 continue;
 
-            if (!proto.TryGetComponent(out TagComponent? tag, EntMan.ComponentFactory) || !_tag.HasTag(tag, st.RequiredTag))
+            if (!_proto.TryIndex(target, out EntityPrototype? _))
                 continue;
 
             newTargets.Add(target);
