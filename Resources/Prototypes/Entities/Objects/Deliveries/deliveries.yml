@@ -61,7 +61,7 @@
   name: package
   components:
   - type: Sprite
-    sprite: Objects/Specific/Cargo/mail_large.rsi
+    sprite: SS220/Objects/Specific/Cargo/mail_large.rsi
     layers:
     - state: icon
       map: [ "enum.DeliveryVisualLayers.Icon" ]
