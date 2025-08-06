@@ -26,10 +26,10 @@ public sealed class CloseAllWindowsUIController : UIController
     {
         foreach (var childControl in new List<Control>(_uiManager.WindowRoot.Children)) // Copy children list as it will be modified on Close()
         {
-            //ss220 add pin for ui start
+            // ss220 add pin for ui start
             if (_entityManager.System<PinUISystem>().IsPinned(childControl))
                 continue;
-            //ss220 add pin for ui end
+            // ss220 add pin for ui end
 
             if (childControl is BaseWindow)
             {

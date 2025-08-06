@@ -14,6 +14,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Threading;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
@@ -97,6 +98,9 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
             BackgroundColor = _defaultLineColor
         };
         StatusColorIndicator.PanelOverride = _indicatorOverride;
+
+        var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+        pinButton.Margin = new Thickness(0, 0, 5, 0);
 
         MessageInput.Placeholder = new Rope.Leaf(Loc.GetString("criminal-records-ui-message-placeholder"));
         //MessageInput.OnKeyBindDown += _ => MessageInputChanged(); // Doesn't work 24.09.2023 textedit is broken

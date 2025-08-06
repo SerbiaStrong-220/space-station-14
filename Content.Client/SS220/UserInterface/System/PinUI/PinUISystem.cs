@@ -6,10 +6,9 @@ namespace Content.Client.SS220.UserInterface.System.PinUI;
 
 public sealed class PinUISystem : EntitySystem
 {
-
     public Action<PinStateChangedArgs>? OnPinStateChanged;
 
-    public readonly HashSet<Control> PinnedControls = new();
+    private readonly HashSet<Control> _pinnedControls = new();
 
     public static TextureButton AddPinButtonBeforeTarget(Control linkedControl, Control target)
     {
@@ -27,15 +26,15 @@ public sealed class PinUISystem : EntitySystem
 
     public void SetPinned(Control control, bool pinned)
     {
-        if (pinned && PinnedControls.Add(control))
+        if (pinned && _pinnedControls.Add(control))
             OnPinStateChanged?.Invoke(new PinStateChangedArgs(control, true));
-        else if (PinnedControls.Remove(control))
+        else if (_pinnedControls.Remove(control))
             OnPinStateChanged?.Invoke(new PinStateChangedArgs(control, false));
     }
 
     public bool IsPinned(Control control)
     {
-        return PinnedControls.Contains(control);
+        return _pinnedControls.Contains(control);
     }
 }
 
