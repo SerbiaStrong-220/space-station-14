@@ -11,6 +11,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
+using Content.Shared.SS220.TraitorDynamics;
 
 namespace Content.Client.Store.Ui;
 
@@ -97,6 +98,21 @@ public sealed partial class StoreMenu : DefaultWindow
     {
         TraitorFooter.Visible = visible;
     }
+
+    // SS220 DynamicTraitor begin
+    public void SetFooterDynamic(LocId? dynamicName)
+    {
+        if (!TraitorFooter.Visible)
+            return;
+
+        if (!dynamicName.HasValue)
+        {
+            DynamicLabel.Text += " " + Loc.GetString("dynamic-unknown-name");
+            return;
+        }
+        DynamicLabel.Text += " " + Loc.GetString(dynamicName);
+    }
+    // SS220 DynamicTraitor end
 
     private void OnWithdrawButtonDown(BaseButton.ButtonEventArgs args)
     {
@@ -217,6 +233,10 @@ public sealed partial class StoreMenu : DefaultWindow
             var enumerator = relativeModifiersSummary.GetEnumerator();
             enumerator.MoveNext();
             var amount = enumerator.Current.Value;
+            //SS220-modifier-cannot-be-0%-start
+             if (amount == 0)
+                 return string.Empty;
+            //SS220-modifier-cannot-be-0%-end
             discountMessage = Loc.GetString(
                 "store-ui-discount-display",
                 ("amount", (amount.ToString("P0")))
