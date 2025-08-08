@@ -88,10 +88,4 @@ public sealed partial class TraitorRuleComponent : Component
     /// </summary>
     [DataField]
     public FixedPoint2 StartingBalance = 20;
-
-    [DataField]
-    public bool UseDynamics; // SS220 Dynamics
-
-    [DataField]
-    public string? Dynamic; // SS220 Dynamics
 }

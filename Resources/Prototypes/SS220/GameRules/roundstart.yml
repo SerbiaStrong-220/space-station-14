@@ -89,5 +89,4 @@
   id: TraitorDynamic
   parent: Traitor
   components:
-  - type: TraitorRule
-    useDynamics: true
+  - type: TraitorDynamics

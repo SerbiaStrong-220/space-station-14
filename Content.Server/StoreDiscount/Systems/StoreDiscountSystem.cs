@@ -399,14 +399,14 @@ public sealed class StoreDiscountSystem : EntitySystem
     ///   Key - item (listingId)
     ///   Value - dictionary CurrencyPrototype, FixPoint2 percentages
     /// </returns>
-    public Dictionary<string, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> GetItemsDiscount(
+    public IEnumerable<ItemDiscounts> GetItemsDiscount(
         EntityUid storeUid,
         IReadOnlyList<ListingDataWithCostModifiers> listings)
     {
         if (!TryComp<StoreDiscountComponent>(storeUid, out var discountComponent))
-            return new();
+            return [];
 
-        var result = new Dictionary<string, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>(discountComponent.Discounts.Count);
+        var result = new List<ItemDiscounts>(discountComponent.Discounts.Count);
         var listingIndex = listings.ToDictionary(l => l.ID);
 
         foreach (var discountData in discountComponent.Discounts)
@@ -417,7 +417,7 @@ public sealed class StoreDiscountSystem : EntitySystem
             var discounts = GetCalculatedDiscounts(discountData, listing);
 
             if (discounts.Count > 0)
-                result[discountData.ListingId] = discounts;
+                result.Add(new ItemDiscounts(discountData.ListingId, discounts));
         }
 
         return result;
@@ -454,6 +454,20 @@ public sealed class StoreDiscountSystem : EntitySystem
     }
     //SS220 - dynamics - end
 }
+
+// SS220 TraitorDynamics begin
+public readonly struct ItemDiscounts
+{
+    public readonly string ListingId;
+    public readonly Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> Discounts;
+
+    public ItemDiscounts(string listingId, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> discounts)
+    {
+        ListingId = listingId;
+        Discounts = discounts;
+    }
+}
+// SS220 TraitorDynamics end
 
 /// <summary>
 /// Event of store being initialized.

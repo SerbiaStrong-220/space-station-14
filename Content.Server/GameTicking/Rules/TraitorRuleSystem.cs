@@ -300,12 +300,12 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         if (!Resolve(ent, ref rule))
             return;
 
-        if (!rule.UseDynamics)
+        if (!TryComp<TraitorDynamicsComponent>(ent, out var dynamicComp))
             return;
 
-        if (rule.Dynamic != null)
+        if (dynamicComp.Dynamic != null)
         {
-            _dynamics.SetDynamic(rule.Dynamic);
+            _dynamics.SetDynamic(dynamicComp.Dynamic);
             return;
         }
 
@@ -317,7 +317,6 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         }
 
         _dynamics.SetRandomDynamic();
-        return;
     }
     // SS220 Dynamics end
 }

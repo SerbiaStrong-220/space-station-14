@@ -123,61 +123,53 @@ public sealed class TraitorDynamicsSystem : EntitySystem
 
     private void ApplyDynamicPrice(EntityUid store, IReadOnlyList<ListingDataWithCostModifiers> listings, ProtoId<DynamicPrototype> currentDynamic)
     {
+        var itemDiscounts = _discount.GetItemsDiscount(store, listings);
+        var discountsLookup = itemDiscounts.ToDictionary(d => d.ListingId, d => d);
+
         foreach (var listing in listings)
         {
             if (!listing.DynamicsPrices.TryGetValue(currentDynamic, out var dynamicPrice))
+                continue;
+
+            if (!listing.DiscountCategory.HasValue)
+                continue;
+
+            if (!discountsLookup.TryGetValue(listing.ID, out var itemDiscount))
                 continue;
 
             listing.SetNewCost(dynamicPrice);
-            if (!listing.DiscountCategory.HasValue)
-                continue;
-
             listing.RemoveCostModifier(listing.DiscountCategory.Value);
-        }
+            var finalPrices = ApplyDiscountsToPrice(dynamicPrice, listing, itemDiscount);
 
-        var itemDiscounts = _discount.GetItemsDiscount(store, listings);
-
-        foreach (var listing in listings)
-        {
-            if (!listing.DynamicsPrices.TryGetValue(currentDynamic, out var dynamicPrice))
-                continue;
-
-            var discountPrices = ApplyDiscountsToPrice(dynamicPrice, listing, itemDiscounts);
-
-            if (!itemDiscounts.ContainsKey(listing.ID))
-                continue;
-
-            if (!listing.DiscountCategory.HasValue)
-                continue;
-
-            listing.SetExactPrice(listing.DiscountCategory.Value, discountPrices);
+            listing.SetExactPrice(listing.DiscountCategory.Value, finalPrices);
         }
     }
 
     private Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> ApplyDiscountsToPrice(
         Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> basePrice,
         ListingDataWithCostModifiers listing,
-        Dictionary<string, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> itemDiscounts)
+        ItemDiscounts itemDiscounts)
     {
-        if (!itemDiscounts.TryGetValue(listing.ID, out var currencyDiscounts))
-            return basePrice;
-
         var finalPrice = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(basePrice);
-
-        foreach (var (currency, discountPercent) in currencyDiscounts)
+        foreach (var (currency, amount) in basePrice)
         {
-            if (!listing.OriginalCost.ContainsKey(currency))
-                continue;
-
-            if (!finalPrice.TryGetValue(currency, out var currentPrice))
-                continue;
-
-            var rawValue = currentPrice * discountPercent;
-            var roundedValue = Math.Round(rawValue.Double(), MidpointRounding.AwayFromZero);
-            finalPrice[currency] = Math.Max(currentPrice.Double() - roundedValue, 1);
+            finalPrice[currency] = amount;
         }
 
-        return finalPrice;
+        foreach (var discount in itemDiscounts.Discounts)
+        {
+            if (!listing.OriginalCost.ContainsKey(discount.Key))
+                continue;
+
+            if (!finalPrice.TryGetValue(discount.Key, out var currentPrice))
+                continue;
+
+            var rawValue = currentPrice * discount.Value;
+            var roundedValue = Math.Round(rawValue.Double(), MidpointRounding.AwayFromZero);
+            finalPrice[discount.Key] = Math.Max(currentPrice.Double() - roundedValue, 1);
+        }
+
+        return new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(finalPrice);
     }
 
     /// <summary>

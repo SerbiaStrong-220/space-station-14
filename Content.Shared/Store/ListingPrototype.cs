@@ -391,7 +391,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     /// <param name="newCost"> new OriginalCost</param>
     public void SetNewCost(Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> newCost)
     {
-        OriginalCost = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(newCost);
+        OriginalCost = newCost.ToDictionary();
     }
 
     public void ReturnCostFromCatalog()
