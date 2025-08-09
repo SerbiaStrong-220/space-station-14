@@ -20,10 +20,7 @@ public sealed partial class AutoShootGunSystem : EntitySystem
 
     private void OnPowerChanged(Entity<AutoShootGunComponent> ent, ref PowerChangedEvent args)
     {
-        if (!TryComp<GunComponent>(ent, out var gun))
-            return;
-
-        if (gun.RequiredPower)
+        if (ent.Comp.RequiredPower)
             return;
 
         if (!TryComp<ApcPowerReceiverComponent>(ent, out var apc))
@@ -37,10 +34,7 @@ public sealed partial class AutoShootGunSystem : EntitySystem
 
     private void OnAnchorStateChanged(Entity<AutoShootGunComponent> ent, ref AnchorStateChangedEvent args)
     {
-        if (!TryComp<GunComponent>(ent, out var gun))
-            return;
-
-        if (gun.CanShootUnanchored)
+        if (ent.Comp.CanShootUnanchored)
             return;
 
         if (args.Transform.Anchored)

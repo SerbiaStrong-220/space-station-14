@@ -268,22 +268,6 @@ public sealed partial class GunComponent : Component
     [DataField, AutoNetworkedField]
     public bool CanSuicide = false;
     ///SS220-new-feature kus end
-
-    //ShuttleGuns_fix start (#3180)
-    /// <summary>
-    /// Shuttles canons field, make a true if you want the weapon to be able to start shooting when unanchored
-    /// </summary>
-    [DataField]
-    public bool CanShootUnanchored = false;
-
-    /// <summary>
-    /// Shuttles canons field, make true if you want the weapon to not require power to start shooting
-    /// </summary>
-    [DataField]
-    public bool RequiredPower = true;
-    //SS220 ShuttleGuns_fix end (#3180)
-
-
 }
 
 [Flags]
