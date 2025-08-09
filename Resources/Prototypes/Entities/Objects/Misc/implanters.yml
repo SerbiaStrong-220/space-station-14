@@ -49,6 +49,7 @@
       - FakeMindShieldImplant
       - MindSlaveImplant # SS220 implant-removing fix
       - RadioImplant
+      - AntiDropImplant # ss220 add anti drop for deimplanter
       deimplantFailureDamage:
         types:
           Cellular: 50
