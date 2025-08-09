@@ -1,0 +1,65 @@
+- type: entity
+  parent: ZoneBase
+  id: ZoneSecurity
+  name: security
+
+- type: entity
+  parent: ZoneSecurity
+  id: ZoneSecurityOfficeWarden
+  name: warden office
+
+- type: entity
+  parent: ZoneSecurity
+  id: ZoneSecurityOfficeHoS
+  name: HoS office
+
+- type: entity
+  parent: ZoneSecurity
+  id: ZoneSecurityInterrogationRoom
+  name: interrogation room
+
+- type: entity
+  parent: ZoneSecurity
+  id: ZoneSecurityArmory
+  name: security armory
+
+- type: entity
+  parent: ZoneSecurity
+  id: ZoneSecurityPrisonCell
+  name: security prison cell
+
+- type: entity
+  parent: ZoneSecurity
+  id: ZoneSecurityWardrobe
+  name: security wardrobe
+
+- type: entity
+  parent: ZoneSecurity
+  id: ZoneSecurityMedbay
+  name: security medbay
+
+- type: entity
+  parent: ZoneSecurity
+  id: ZoneSecurityDetective
+  name: detective
+
+# Permabrig
+- type: entity
+  parent: ZoneSecurity
+  id: ZoneSecurityPermabrig
+  name: permabrig
+
+- type: entity
+  parent: ZoneSecurityPermabrig
+  id: ZoneSecurityPermabrigHydroponics
+  name: permabrig hydroponics
+
+- type: entity
+  parent: ZoneSecurityPermabrig
+  id: ZoneSecurityPermabrigKitchen
+  name: permabrig kitchen
+
+- type: entity
+  parent: ZoneSecurityPermabrig
+  id: ZoneSecurityPermabrigBathroom
+  name: permabrig bathroom

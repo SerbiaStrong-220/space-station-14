@@ -1,0 +1,44 @@
+- type: entity
+  parent: ZoneBase
+  id: ZoneMedical
+  name: medical
+
+- type: entity
+  parent: ZoneMedical
+  id: ZoneMedicalChamber
+  name: medical chamber
+
+- type: entity
+  parent: ZoneMedical
+  id: ZoneMedicalOfficeCMO
+  name: CMO office
+
+- type: entity
+  parent: ZoneMedical
+  id: ZoneMedicalCryogenics
+  name: cryogenics
+
+- type: entity
+  parent: ZoneMedical
+  id: ZoneMedicalOperatingRoom
+  name: medcal operating room
+
+- type: entity
+  parent: ZoneMedical
+  id: ZoneMedicalChemistry
+  name: medical chemistry
+
+- type: entity
+  parent: ZoneMedical
+  id: ZoneMedicalMedicineStorage
+  name: medicine storage
+
+- type: entity
+  parent: ZoneMedical
+  id: ZoneMedicalMorgue
+  name: medical morgue
+
+- type: entity
+  parent: ZoneMedical
+  id: ZoneMedicalCloningZone
+  name: medical cloning zone
