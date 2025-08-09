@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Cargo.Components;
+using Content.Server.Mind;
+using Content.Server.SS220.RoundEndInfo;
 using Content.Server.Station.Components;
 using Content.Shared.Cargo;
 using Content.Shared.Cargo.BUI;
@@ -27,6 +29,9 @@ namespace Content.Server.Cargo.Systems
         [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
         [Dependency] private readonly EmagSystem _emag = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
+        // ss220 add round end info start
+        [Dependency] private readonly MindSystem _mind = default!;
+        // ss220 add round end info end
 
         private void InitializeConsole()
         {
@@ -258,6 +263,11 @@ namespace Content.Server.Cargo.Systems
             orderDatabase.Orders[component.Account].Remove(order);
             UpdateBankAccount((station.Value, bank), -cost, order.Account);
             UpdateOrders(station.Value);
+
+            // ss220 add round end info start
+            if (_mind.TryGetMind(player, out var mind, out _))
+                _roundEndInfo.EnsureInfo<CargoInfo>().AddMindToData(mind, order.ProductName, order.Price);
+            // ss220 add round end info end
         }
 
         private EntityUid? TryFulfillOrder(Entity<StationDataComponent> stationData, ProtoId<CargoAccountPrototype> account, CargoOrderData order, StationCargoOrderDatabaseComponent orderDatabase)
