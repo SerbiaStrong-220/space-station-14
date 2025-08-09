@@ -48,6 +48,10 @@ uplink-special-delivery-desc = Содержит случайную маску ж
 uplink-criminal-delivery-name = Криминальная посылка
 uplink-criminal-delivery-desc = Содержит случайную маску, замешанную в самых громких ограблениях прошлого.
 
+#Contraband-Poster
+uplink-contraband-poster-name = Коробка нелегальных постеров
+uplink-contraband-poster-desc = Обклей станцию пропагандой!
+
 # Wearables
 uplink-helmet-swat-syndicate-name = Шлем пехотинца Синдиката
 uplink-helmet-swat-syndicate-desc = Очень прочный шлем, обычно используемый военизированными формированиями Синдиката. Он украшен зловещим узором из красных и черных полос.
