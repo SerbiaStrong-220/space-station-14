@@ -127,9 +127,6 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         var curOverrides = _curPvsOverrides.GetOrNew(entity);
 
         foreach (var session in _player.Sessions)
-            CheckSessionAsync(session);
-
-        void CheckSessionAsync(ICommonSession session)
         {
             var attachedEnt = session.AttachedEntity;
             if (attachedEnt is null)
