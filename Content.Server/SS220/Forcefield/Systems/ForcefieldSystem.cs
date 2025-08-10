@@ -130,13 +130,13 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         {
             var attachedEnt = session.AttachedEntity;
             if (attachedEnt is null)
-                return;
+                continue;
 
             var entMapCoords = _transform.GetMapCoordinates(attachedEnt.Value);
             var forcefieldMapCoords = _transform.GetMapCoordinates(entity);
 
             if (forcefieldMapCoords.MapId != entMapCoords.MapId)
-                return;
+                continue;
 
             var entLocalCoords = _transform.ToCoordinates(entity.Owner, entMapCoords);
             var inPvs = entity.Comp.Params.Shape.InPvS(entLocalCoords.Position, pvsRange);
