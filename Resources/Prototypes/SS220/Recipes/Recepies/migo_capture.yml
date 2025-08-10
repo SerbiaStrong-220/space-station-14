@@ -2,6 +2,14 @@
 
 - type: miGoCapture
   id: Airlock
-  replacedProto: Airlock
+  from:
+    tag: Airlock
   replacementProto: CultYoggAirlock
+  replacementTime: 30
+
+- type: miGoCapture
+  id: Wall
+  from:
+    tag: Wall
+  replacementProto: WallCultYogg
   replacementTime: 30

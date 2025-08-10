@@ -11,6 +11,7 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.Corruption;
 using Content.Shared.Stacks;
+using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
@@ -48,7 +49,11 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
     private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
-    private readonly Dictionary<EntProtoId, MiGoCapturePrototype> _сaptureDict = [];
+    private readonly Dictionary<ProtoId<EntityPrototype>, MiGoCapturePrototype> _сaptureDictBySourcePrototypeId = [];
+    private readonly Dictionary<ProtoId<EntityPrototype>, MiGoCapturePrototype> _сaptureDictByParentPrototypeId = [];
+    private readonly Dictionary<ProtoId<TagPrototype>, MiGoCapturePrototype> _сaptureDictBySourceTag = [];
+
+    private readonly List<(Func<EntityUid, MiGoCapturePrototype?> source, string sourceName)> _recipeSources = [];
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -75,6 +80,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         _userInterfaceSystem.TryToggleUi(entity.Owner, MiGoUiKey.Erect, actor.PlayerSession);
     }
 
+    #region Building
     private void OnBuildMessage(Entity<MiGoComponent> entity, ref MiGoErectBuildMessage args)
     {
         if (entity.Owner != args.Actor)
@@ -124,6 +130,66 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         });
     }
 
+    private void OnDoAfterErect(Entity<MiGoComponent> entity, ref MiGoErectDoAfterEvent args)
+    {
+        if (args.Handled || args.Cancelled)
+            return;
+
+        if (_netManager.IsClient)
+            return;
+
+        if (!_prototypeManager.TryIndex(args.BuildingId, out var buildingPrototype))
+            return;
+
+        var location = GetCoordinates(args.Location);
+        if (buildingPrototype.FrameProtoId.HasValue)
+        {
+            PlaceBuildingFrame(buildingPrototype, location, args.Direction);
+        }
+        else
+        {
+            PlaceCompleteBuilding(buildingPrototype, location, args.Direction);
+        }
+
+        var erectAction = entity.Comp.MiGoErectActionEntity;
+        if (erectAction == null || !TryComp<ActionComponent>(erectAction, out var actionComponent))
+            return;
+
+        var cooldown = buildingPrototype.CooldownOverride ?? actionComponent.UseDelay ?? TimeSpan.FromSeconds(1);
+        _actionsSystem.SetCooldown(erectAction, cooldown);
+        args.Handled = true;
+    }
+
+    private Entity<CultYoggBuildingFrameComponent> PlaceBuildingFrame(CultYoggBuildingPrototype buildingPrototype, EntityCoordinates location, Direction direction)
+    {
+        var frameEntity = SpawnAtPosition(buildingPrototype.FrameProtoId, location);
+        Transform(frameEntity).LocalRotation = direction.ToAngle();
+
+        var resultEntityProto = _prototypeManager.Index(buildingPrototype.ResultProtoId);
+
+        _metaDataSystem.SetEntityName(frameEntity, Loc.GetString("cult-yogg-building-frame-name-template", ("name", resultEntityProto.Name)));
+
+        var frame = EnsureComp<CultYoggBuildingFrameComponent>(frameEntity);
+        frame.BuildingPrototypeId = buildingPrototype.ID;
+
+        while (frame.AddedMaterialsAmount.Count < buildingPrototype.Materials.Count)
+        {
+            frame.AddedMaterialsAmount.Add(0);
+        }
+        Dirty(new Entity<CultYoggBuildingFrameComponent>(frameEntity, frame));
+
+        return (frameEntity, frame);
+    }
+
+    private EntityUid PlaceCompleteBuilding(CultYoggBuildingPrototype buildingPrototype, EntityCoordinates location, Direction direction)
+    {
+        var building = SpawnAtPosition(buildingPrototype.ResultProtoId, location);
+        Transform(building).LocalRotation = direction.ToAngle();
+
+        return building;
+    }
+    #endregion
+
     #region Erase
     private void OnEraseMessage(Entity<MiGoComponent> entity, ref MiGoErectEraseMessage args)
     {
@@ -166,36 +232,6 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         };
 
         _doAfterSystem.TryStartDoAfter(doAfterArgs);
-    }
-
-    private void OnDoAfterErect(Entity<MiGoComponent> entity, ref MiGoErectDoAfterEvent args)
-    {
-        if (args.Handled || args.Cancelled)
-            return;
-
-        if (_netManager.IsClient)
-            return;
-
-        if (!_prototypeManager.TryIndex(args.BuildingId, out var buildingPrototype))
-            return;
-
-        var location = GetCoordinates(args.Location);
-        if (buildingPrototype.FrameProtoId.HasValue)
-        {
-            PlaceBuildingFrame(buildingPrototype, location, args.Direction);
-        }
-        else
-        {
-            PlaceCompleteBuilding(buildingPrototype, location, args.Direction);
-        }
-
-        var erectAction = entity.Comp.MiGoErectActionEntity;
-        if (erectAction == null || !TryComp<ActionComponent>(erectAction, out var actionComponent))
-            return;
-
-        var cooldown = buildingPrototype.CooldownOverride ?? actionComponent.UseDelay ?? TimeSpan.FromSeconds(1);
-        _actionsSystem.SetCooldown(erectAction, cooldown);
-        args.Handled = true;
     }
 
     private void OnEraseDoAfter(MiGoEraseDoAfterEvent args)
@@ -268,13 +304,13 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (prototypeId == null)
             return;
 
-        if (!_сaptureDict.TryGetValue(prototypeId, out var replacement))
+        if (!TryGetCaptureRecipe(buildingUid, out var recipe))
         {
             _popupSystem.PopupEntity(Loc.GetString("cult-yogg-building-cant-capture-this-building"), buildingUid, ent);
             return;
         }
 
-        StartReplacement(buildingUid, replacement);
+        StartReplacement(buildingUid, recipe);
     }
 
     private void StartReplacement(EntityUid buildingUid, MiGoCapturePrototype replacement)
@@ -283,7 +319,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             return; // this should never run in client
 
         var xform = Transform(buildingUid);
-        var rot = _transformSystem.GetWorldRotation(xform);
+        var rot = xform.LocalRotation;
 
         var frameEntity = SpawnAtPosition(replacement.ReplacementProto, xform.Coordinates);
         Transform(frameEntity).LocalRotation = rot;
@@ -296,7 +332,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     /// </summary>
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
-        if (!args.WasModified<CultYoggCorruptedPrototype>())
+        if (!args.WasModified<MiGoCapturePrototype>())
             return;
 
         InitializeCaptureRecipes();
@@ -304,15 +340,114 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
     private void InitializeCaptureRecipes()
     {
-        _сaptureDict.Clear();
+        _сaptureDictBySourcePrototypeId.Clear();
+        _сaptureDictByParentPrototypeId.Clear();
+        _сaptureDictBySourceTag.Clear();
+
         foreach (var recipe in _prototypeManager.EnumeratePrototypes<MiGoCapturePrototype>())
         {
-            if (recipe.ReplacedProto is { } prototypeId)
-                _сaptureDict.Add(prototypeId, recipe);
+            if (recipe.FromEntity.PrototypeId is { } prototypeId)
+                _сaptureDictBySourcePrototypeId.Add(prototypeId, recipe);
+            else if (recipe.FromEntity.ParentPrototypeId is { } parentPrototypeId)
+                _сaptureDictByParentPrototypeId.Add(parentPrototypeId, recipe);
+            else if (recipe.FromEntity.Tag is { } tag)
+                _сaptureDictBySourceTag.Add(tag, recipe);
+            else
+                Log.Warning("MiGoCapturePrototype with id '{0}' has no ways to be used", recipe.ID);
         }
+
+        _recipeSources.Add((GetRecipeBySourcePrototypeId, "Prototype Id"));
+        _recipeSources.Add((GetRecipeByParentPrototypeId, "Parent Prototype Id"));
+        _recipeSources.Add((GetRecipeBySourceTag, "Tag"));
+    }
+
+    /// <summary>
+    /// Returns recipe to corrupt specified entity, if any.
+    /// </summary>
+    /// <param name="uid">Entity to corrupt</param>
+    /// <param name="corruption">Result recipe</param>
+    private bool TryGetCaptureRecipe(EntityUid uid, [NotNullWhen(true)] out MiGoCapturePrototype? corruption)
+    {
+        corruption = null;
+        foreach (var (sourceFunc, sourceName) in _recipeSources)
+        {
+            corruption = sourceFunc(uid);
+            if (corruption is null)
+                continue;
+            Log.Debug("Founded corruption recipe {0} for {1} via {2}", corruption.ID, ToPrettyString(uid), sourceName);
+            return true;
+        }
+        return false;
+    }
+
+    private MiGoCapturePrototype? GetRecipeBySourcePrototypeId(EntityUid uid)
+    {
+        var prototypeId = MetaData(uid).EntityPrototype?.ID;
+        if (prototypeId == null)
+            return null;
+        return _сaptureDictBySourcePrototypeId.GetValueOrDefault(prototypeId);
+    }
+
+    private MiGoCapturePrototype? GetRecipeByParentPrototypeId(EntityUid uid)
+    {
+        var parents = MetaData(uid).EntityPrototype?.Parents;
+        if (parents == null)
+            return null;
+
+        foreach (var parentId in parents)
+        {
+            if (_сaptureDictByParentPrototypeId.TryGetValue(parentId, out var recipe))
+                return recipe;
+
+            var parentRecipe = GetRecipeByParentPrototypeId(parentId);
+            if (parentRecipe != null)
+                return parentRecipe;
+        }
+        return null;
+    }
+
+    private MiGoCapturePrototype? GetRecipeByParentPrototypeId(string id)
+    {
+        if (!_prototypeManager.TryIndex<EntityPrototype>(id, out var entProto))
+            return null;
+
+        var parents = entProto.Parents;
+        if (parents == null)
+            return null;
+
+        foreach (var parentId in parents)
+        {
+            if (_сaptureDictByParentPrototypeId.TryGetValue(parentId, out var recipe))
+                return recipe;
+
+            var parentRecipe = GetRecipeByParentPrototypeId(parentId);
+            if (parentRecipe != null)
+                return parentRecipe;
+        }
+        return null;
+    }
+
+    private MiGoCapturePrototype? GetRecipeBySourceTag(EntityUid uid)
+    {
+        if (!TryComp(uid, out TagComponent? tagComponent))
+            return null;
+        foreach (var tag in tagComponent.Tags)
+        {
+            if (_сaptureDictBySourceTag.TryGetValue(tag, out var recipe))
+                return recipe;
+        }
+        return null;
+    }
+
+    private CultYoggCorruptedPrototype? GetRecipeById(ProtoId<CultYoggCorruptedPrototype>? id)
+    {
+        if (!id.HasValue)
+            return null;
+        return _prototypeManager.Index(id.Value);
     }
     #endregion
 
+    #region FrameInteractions
     private void OnBuildingFrameInit(Entity<CultYoggBuildingFrameComponent> entity, ref ComponentInit args)
     {
         entity.Comp.Container = _containerSystem.EnsureContainer<Container>(entity, CultYoggBuildingFrameComponent.ContainerId);
@@ -375,35 +510,6 @@ public sealed class SharedMiGoErectSystem : EntitySystem
                 args.PushMarkup(Loc.GetString(locKey, ("material", materialName), ("currentAmount", addedCount), ("totalAmount", neededMaterial.Count)));
             }
         }
-    }
-
-    private Entity<CultYoggBuildingFrameComponent> PlaceBuildingFrame(CultYoggBuildingPrototype buildingPrototype, EntityCoordinates location, Direction direction)
-    {
-        var frameEntity = SpawnAtPosition(buildingPrototype.FrameProtoId, location);
-        Transform(frameEntity).LocalRotation = direction.ToAngle();
-
-        var resultEntityProto = _prototypeManager.Index(buildingPrototype.ResultProtoId);
-
-        _metaDataSystem.SetEntityName(frameEntity, Loc.GetString("cult-yogg-building-frame-name-template", ("name", resultEntityProto.Name)));
-
-        var frame = EnsureComp<CultYoggBuildingFrameComponent>(frameEntity);
-        frame.BuildingPrototypeId = buildingPrototype.ID;
-
-        while (frame.AddedMaterialsAmount.Count < buildingPrototype.Materials.Count)
-        {
-            frame.AddedMaterialsAmount.Add(0);
-        }
-        Dirty(new Entity<CultYoggBuildingFrameComponent>(frameEntity, frame));
-
-        return (frameEntity, frame);
-    }
-
-    private EntityUid PlaceCompleteBuilding(CultYoggBuildingPrototype buildingPrototype, EntityCoordinates location, Direction direction)
-    {
-        var building = SpawnAtPosition(buildingPrototype.ResultProtoId, location);
-        Transform(building).LocalRotation = direction.ToAngle();
-
-        return building;
     }
 
     private bool CanInsert(Entity<CultYoggBuildingFrameComponent> entity, EntityUid item)
@@ -523,6 +629,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
         return resultEntity;
     }
+    #endregion
 }
 
 [Serializable, NetSerializable]

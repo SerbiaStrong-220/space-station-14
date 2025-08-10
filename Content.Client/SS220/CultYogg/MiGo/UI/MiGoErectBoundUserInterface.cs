@@ -1,13 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Diagnostics.CodeAnalysis;
-using JetBrains.Annotations;
 using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.MiGo;
+using JetBrains.Annotations;
 using Robust.Client.Placement;
 using Robust.Client.Placement.Modes;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Client.SS220.CultYogg.MiGo.UI;
 
@@ -85,19 +85,34 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
         });
     }
 
-    public void SendEraseMessage(EntityUid entity)
+    public void SendEntity(EntityUid ent)
+    {
+        if (_state.MatchErase())
+        {
+            SendEraseMessage(ent);
+            return;
+        }
+
+        if (_state.MatchCapture())
+        {
+            SendCaptureMessage(ent);
+            return;
+        }
+    }
+
+    public void SendEraseMessage(EntityUid ent)
     {
         SendMessage(new MiGoErectEraseMessage()
         {
-            BuildingFrame = _entityManager.GetNetEntity(entity),
+            BuildingFrame = _entityManager.GetNetEntity(ent),
         });
     }
 
-    public void SendCaptureMessage(EntityUid entity)
+    public void SendCaptureMessage(EntityUid ent)
     {
         SendMessage(new MiGoErectCaptureMessage()
         {
-            CapturedBuilding = _entityManager.GetNetEntity(entity),
+            CapturedBuilding = _entityManager.GetNetEntity(ent),
         });
     }
 

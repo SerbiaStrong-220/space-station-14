@@ -9,27 +9,16 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.CultYogg.MiGo
 {
-    public sealed class MiGoErectPlacementHijack : PlacementHijack
+    public sealed class MiGoErectPlacementHijack(MiGoErectBoundUserInterface presenter, CultYoggBuildingPrototype? prototype) : PlacementHijack
     {
-        private readonly IEntityManager _entityManager;
-        private readonly IPrototypeManager _prototypeManager;
-        private readonly IComponentFactory _componentFactory;
+        private readonly IEntityManager _entityManager = IoCManager.Resolve<IEntityManager>();
+        private readonly IPrototypeManager _prototypeManager = IoCManager.Resolve<IPrototypeManager>();
+        private readonly IComponentFactory _componentFactory = IoCManager.Resolve<IComponentFactory>();
 
-        private readonly MiGoErectBoundUserInterface _presenter;
-        private readonly CultYoggBuildingPrototype? _prototype;
+        private readonly MiGoErectBoundUserInterface _presenter = presenter;
+        private readonly CultYoggBuildingPrototype? _prototype = prototype;
 
-        public override bool CanRotate { get; }
-
-        public MiGoErectPlacementHijack(MiGoErectBoundUserInterface presenter, CultYoggBuildingPrototype? prototype)
-        {
-            _entityManager = IoCManager.Resolve<IEntityManager>();
-            _prototypeManager = IoCManager.Resolve<IPrototypeManager>();
-            _componentFactory = IoCManager.Resolve<IComponentFactory>();
-
-            _presenter = presenter;
-            _prototype = prototype;
-            CanRotate = true;
-        }
+        public override bool CanRotate { get; } = true;
 
         /// <inheritdoc />
         public override bool HijackPlacementRequest(EntityCoordinates coordinates)
@@ -43,9 +32,9 @@ namespace Content.Client.SS220.CultYogg.MiGo
         }
 
         /// <inheritdoc />
-        public override bool HijackDeletion(EntityUid entity)
+        public override bool HijackDeletion(EntityUid ent)
         {
-            _presenter.SendEraseMessage(entity);
+            _presenter.SendEntity(ent);
             return true;
         }
 

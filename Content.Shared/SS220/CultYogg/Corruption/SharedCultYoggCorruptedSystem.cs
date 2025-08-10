@@ -44,7 +44,7 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
     private readonly Dictionary<ProtoId<TagPrototype>, CultYoggCorruptedPrototype> _recipiesBySourceTag = [];
     private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
-    private readonly List<(Func<EntityUid, CultYoggCorruptedPrototype?> source, string sourceName)> _recipeSources = new();
+    private readonly List<(Func<EntityUid, CultYoggCorruptedPrototype?> source, string sourceName)> _recipeSources = [];
 
     public override void Initialize()
     {
