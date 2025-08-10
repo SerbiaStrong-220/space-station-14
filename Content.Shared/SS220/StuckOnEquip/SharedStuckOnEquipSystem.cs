@@ -64,7 +64,7 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
     public void UnstuckItem(Entity<StuckOnEquipComponent> ent)
     {
         ent.Comp.IsStuck = false;
-        Dirty(ent);
+        Dirty(ent, ent.Comp);
     }
 
     public void RemoveAllStuckItems(EntityUid target)

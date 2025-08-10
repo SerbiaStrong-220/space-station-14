@@ -148,7 +148,7 @@ public sealed class DumpableSystem : EntitySystem
 
         var dumped = false;
 
-        if (HasComp<DisposalUnitComponent>(args.Args.Target))
+        if (TryComp<DisposalUnitComponent>(args.Args.Target, out var disposal)) // ss220 remove duplicated sound
         {
             dumped = true;
 
@@ -156,6 +156,10 @@ public sealed class DumpableSystem : EntitySystem
             {
                 _disposalUnitSystem.DoInsertDisposalUnit(args.Args.Target.Value, entity, args.Args.User);
             }
+
+            // ss220 remove duplicated sound begin
+            _audio.PlayPredicted(disposal.InsertSound, args.Args.Target.Value, user: args.Args.User);
+            // ss220 remove duplicated sound end
         }
         else if (HasComp<PlaceableSurfaceComponent>(args.Args.Target))
         {

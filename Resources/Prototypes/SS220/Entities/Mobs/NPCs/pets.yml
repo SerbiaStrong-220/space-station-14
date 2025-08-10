@@ -6,7 +6,17 @@
   components:
   - type: Language
     availableLanguages:
+    - id: Doggish
+      canSpeak: True
     - id: Galactic
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
       canSpeak: false
   - type: GhostRole
     makeSentient: true
