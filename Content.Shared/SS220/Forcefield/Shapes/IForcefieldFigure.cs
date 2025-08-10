@@ -32,10 +32,13 @@ public interface IForcefieldShape
     IEnumerable<Vector2> GetTrianglesVerts();
 
     /// <summary>
-    /// Is the <paramref name="point"/> inside the shape
+    /// Is the <paramref name="point"/> inside the shape area
     /// </summary>
     bool IsInside(Vector2 point);
 
+    /// <summary>
+    /// Is the <paramref name="point"/> on the shape
+    /// </summary>
     bool IsOnShape(Vector2 point);
 
     /// <summary>
@@ -43,5 +46,8 @@ public interface IForcefieldShape
     /// </summary>
     Vector2 GetClosestPoint(Vector2 point);
 
-    bool InPvS(Vector2 point, float pvsRange);
+    /// <summary>
+    /// Is the shape in the player's pvs range
+    /// </summary>
+    bool InPvS(Vector2 playerPos, float pvsRange);
 }

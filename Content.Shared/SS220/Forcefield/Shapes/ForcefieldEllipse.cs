@@ -227,9 +227,9 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
         return ellipse.GetClosestPoint(point);
     }
 
-    public bool InPvS(Vector2 point, float pvsRange)
+    public bool InPvS(Vector2 playerPos, float pvsRange)
     {
-        var distanceToCenter = point.Length();
+        var distanceToCenter = playerPos.Length();
         if (distanceToCenter < pvsRange)
             return true;
 
@@ -237,8 +237,8 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
         if (distanceToCenter > checkRadius)
             return false;
 
-        var closestPoint = GetClosestPoint(point);
-        var distanceToClosest = (point - closestPoint).Length();
+        var closestPoint = GetClosestPoint(playerPos);
+        var distanceToClosest = (playerPos - closestPoint).Length();
         return distanceToClosest < pvsRange;
     }
 

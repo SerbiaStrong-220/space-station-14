@@ -4,7 +4,8 @@
 
 - type: entity
   parent: PlushieLizard #Weh!
-  id: ForcefieldPlushie
+  id: ForcefieldDebugPlushie
+  name: forcefield debug pluhie
   suffix: DEBUG
   components:
   - type: Forcefield
