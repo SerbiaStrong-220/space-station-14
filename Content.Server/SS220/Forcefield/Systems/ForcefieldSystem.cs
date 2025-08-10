@@ -12,6 +12,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using System.Linq;
+using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Forcefield.Systems;
 
@@ -98,7 +99,7 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         foreach (var fixture in fixtures.Fixtures)
             _fixture.DestroyFixture(entity, fixture.Key, false, manager: fixtures);
 
-        var shapes = forcefield.Params.Shape.GetPhysShapes();
+        var shapes = forcefield.Params.Shape.CahcedPhysShapes;
         var density = forcefield.Params.Density / shapes.Count();
         for (var i = 0; i < shapes.Count(); i++)
         {
@@ -124,50 +125,47 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         var pvsRange = _configurationManager.GetCVar(CVars.NetMaxUpdateRange);
 
         var curOverrides = _curPvsOverrides.GetOrNew(entity);
-        var toRemove = curOverrides.ToList();
-        var toAdd = new List<ICommonSession>();
 
-        foreach (var session in _player.Sessions)
+        for (var i = 0; i < 60; i++)
+        {
+            foreach (var session in _player.Sessions)
+                CheckSessionAsync(session);
+        }
+
+        void CheckSessionAsync(ICommonSession session)
         {
             var attachedEnt = session.AttachedEntity;
             if (attachedEnt is null)
-                continue;
+                return;
 
             var entMapCoords = _transform.GetMapCoordinates(attachedEnt.Value);
-            var forcefieldMapCoords = _transform.GetMapCoordinates(attachedEnt.Value);
+            var forcefieldMapCoords = _transform.GetMapCoordinates(entity);
 
             if (forcefieldMapCoords.MapId != entMapCoords.MapId)
-                continue;
+                return;
 
             var entLocalCoords = _transform.ToCoordinates(entity.Owner, entMapCoords);
-            var closestPoint = entity.Comp.Params.Shape.GetClosestPoint(entLocalCoords.Position);
-            if (closestPoint is null)
-                continue;
+            var inPvs = entity.Comp.Params.Shape.InPvS(entLocalCoords.Position, pvsRange);
 
-            var distanse = (entLocalCoords.Position - closestPoint.Value).Length();
-            if (distanse > pvsRange)
-                continue;
-
-            if (!toRemove.Remove(session))
-                toAdd.Add(session);
+            if (inPvs)
+            {
+                if (!curOverrides.Contains(session))
+                {
+                    _pvsOverride.AddSessionOverride(entity, session);
+                    curOverrides.Add(session);
+                }
+            }
+            else
+            {
+                if (curOverrides.Contains(session))
+                {
+                    _pvsOverride.RemoveSessionOverride(entity, session);
+                    curOverrides.Remove(session);
+                }
+            }
         }
 
-        foreach (var session in toRemove)
-        {
-            _pvsOverride.RemoveSessionOverride(entity, session);
-            curOverrides.Remove(session);
-        }
-
-        foreach (var session in toAdd)
-        {
-            _pvsOverride.AddSessionOverride(entity, session);
-            curOverrides.Add(session);
-        }
-
-        if (curOverrides.Count > 0)
-            _curPvsOverrides.TryAdd(entity, curOverrides);
-        else
-            _curPvsOverrides.Remove(entity);
+        _curPvsOverrides.TryAdd(entity.Owner, curOverrides);
     }
 }
 

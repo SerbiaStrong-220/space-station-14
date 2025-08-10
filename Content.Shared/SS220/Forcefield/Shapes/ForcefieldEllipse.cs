@@ -98,6 +98,12 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
     public Vector2[] InnerPoints { get; private set; } = [];
     public Vector2[] OuterPoints { get; private set; } = [];
 
+    public IPhysShape[] CahcedPhysShapes => _cahcedPhysShapes;
+    private IPhysShape[] _cahcedPhysShapes = [];
+
+    public Vector2[] CahcedTrianglesVerts => _cahcedTrianglesVerts;
+    private Vector2[] _cahcedTrianglesVerts = [];
+
     private readonly Ellipse _innerEllipse = new();
     private readonly Ellipse _centralEllipse = new();
     private readonly Ellipse _outerEllipse = new();
@@ -133,6 +139,9 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
 
         InnerPoints = _innerEllipse.GetPoints(Segments);
         OuterPoints = _outerEllipse.GetPoints(Segments);
+
+        _cahcedPhysShapes = [.. GetPhysShapes()];
+        _cahcedTrianglesVerts = [.. GetTrianglesVerts()];
 
         Dirty = false;
     }
@@ -203,24 +212,34 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
         return _centralEllipse.IsInside(point);
     }
 
-    /// <inheritdoc/>
-    public Vector2? GetClosestPoint(Vector2 point)
+    public bool IsOnShape(Vector2 point)
     {
-        Vector2? result = null;
+        return _outerEllipse.IsInside(point) && !_innerEllipse.IsInside(point);
+    }
 
-        var parabolaPoints = IsInside(point) ? InnerPoints : OuterPoints;
-        var distance = float.MaxValue;
-        foreach (var p in parabolaPoints)
-        {
-            var dist = (point - p).Length();
-            if (dist < distance)
-            {
-                result = p;
-                distance = dist;
-            }
-        }
+    /// <inheritdoc/>
+    public Vector2 GetClosestPoint(Vector2 point)
+    {
+        if (IsOnShape(point))
+            return point;
 
-        return result;
+        var ellipse = IsInside(point) ? _innerEllipse : _outerEllipse;
+        return ellipse.GetClosestPoint(point);
+    }
+
+    public bool InPvS(Vector2 point, float pvsRange)
+    {
+        var distanceToCenter = point.Length();
+        if (distanceToCenter < pvsRange)
+            return true;
+
+        var checkRadius = pvsRange + Math.Max(Height, Width);
+        if (distanceToCenter > checkRadius)
+            return false;
+
+        var closestPoint = GetClosestPoint(point);
+        var distanceToClosest = (point - closestPoint).Length();
+        return distanceToClosest < pvsRange;
     }
 
     [Serializable, NetSerializable]
@@ -253,6 +272,28 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
         public Angle Angle = default;
         public Vector2 Offset = default;
 
+        private Matrix3x2 EntityToLocal
+        {
+            get
+            {
+                var rotationMatrix = Matrix3x2.CreateRotation((float)-Angle.Theta);
+                var offsetMatrix = Matrix3x2.CreateTranslation(-Offset);
+
+                return rotationMatrix * offsetMatrix;
+            }
+        }
+
+        private Matrix3x2 LocalToEntity
+        {
+            get
+            {
+                var rotationMatrix = Matrix3x2.CreateRotation((float)Angle.Theta);
+                var offsetMatrix = Matrix3x2.CreateTranslation(Offset);
+
+                return rotationMatrix * offsetMatrix;
+            }
+        }
+
         public Vector2[] GetPoints(int segments = 64, bool clockwise = true)
         {
             if (segments <= 0)
@@ -268,9 +309,7 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
                 if (clockwise)
                     angle = -angle;
 
-                var x = (float)(Width / 2 * Math.Cos(angle));
-                var y = (float)(Height / 2 * Math.Sin(angle));
-                var point = new Vector2(x, y);
+                var point = GetPoint(angle);
                 point = Vector2.Transform(point, rotationMatrix);
 
                 points.Add(point);
@@ -279,15 +318,29 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
             return [.. points];
         }
 
+        public Vector2 GetPoint(Angle angle)
+        {
+            var x = (float)(Width / 2 * Math.Cos(angle));
+            var y = (float)(Height / 2 * Math.Sin(angle));
+            return new Vector2(x, y);
+        }
+
         public bool IsInside(Vector2 point)
         {
-            var rotationMatrix = Matrix3x2.CreateRotation((float)-Angle.Theta);
-            point = Vector2.Transform(point, rotationMatrix);
-            point -= Offset;
+            point = Vector2.Transform(point, EntityToLocal);
 
             var a = Width / 2.0;
             var b = Height / 2.0;
             return Math.Pow(point.X / a, 2) + Math.Pow(point.Y / b, 2) <= 1;
+        }
+
+        public Vector2 GetClosestPoint(Vector2 point)
+        {
+            point = Vector2.Transform(point, EntityToLocal);
+            var angle = point.ToAngle();
+
+            var closestPoint = GetPoint(angle);
+            return Vector2.Transform(closestPoint, LocalToEntity);
         }
     }
 }
