@@ -669,6 +669,8 @@
         - Gun
         - BallisticAmmoProvider
         - CartridgeAmmo
+      tags:             # SS220 blueshield-whitelist-storage-fix
+        - KRSPowerCell  # SS220 blueshield-whitelist-storage-fix
 
 - type: entity
   parent: [ClothingBeltStorageBase]
