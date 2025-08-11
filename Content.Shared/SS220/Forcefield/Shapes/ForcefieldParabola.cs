@@ -227,6 +227,7 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
         return _centralParabola.IsInside(entityPoint);
     }
 
+    /// <inheritdoc/>
     public bool IsOnShape(Vector2 entityPoint)
     {
         return _outerParabola.IsInside(entityPoint) && !_innerParabola.IsInside(entityPoint);

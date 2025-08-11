@@ -31,22 +31,22 @@ public interface IForcefieldShape
     IEnumerable<Vector2> GetTrianglesVerts();
 
     /// <summary>
-    /// Is the <paramref name="point"/> inside the shape area
+    /// Is the <paramref name="entityPoint"/> inside the shape area
     /// </summary>
     bool IsInside(Vector2 entityPoint);
 
     /// <summary>
-    /// Is the <paramref name="point"/> on the shape
+    /// Is the <paramref name="entityPoint"/> on the shape
     /// </summary>
     bool IsOnShape(Vector2 entityPoint);
 
     /// <summary>
-    /// Gets the closest point on the shape's boundary to the specified <paramref name="point"/>.
+    /// Gets the closest point on the shape's boundary to the specified <paramref name="entityPoint"/>.
     /// </summary>
     Vector2 GetClosestPoint(Vector2 entityPoint);
 
     /// <summary>
-    /// Is the shape within the radius of a certain point
+    /// Is the shape within the <paramref name="range"/> of a <paramref name="entityPoint"/>.
     /// </summary>
     bool InRange(Vector2 entityPoint, float range);
 }

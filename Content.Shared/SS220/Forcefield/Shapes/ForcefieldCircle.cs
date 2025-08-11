@@ -165,6 +165,7 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
         return _centralCircle.IsInside(entityPoint);
     }
 
+    /// <inheritdoc/>
     public bool IsOnShape(Vector2 entityPoint)
     {
         return _outerCircle.IsInside(entityPoint) && !_innerCircle.IsInside(entityPoint);

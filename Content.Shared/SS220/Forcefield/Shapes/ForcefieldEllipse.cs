@@ -212,6 +212,7 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
         return _centralEllipse.IsInside(entityPoint);
     }
 
+    /// <inheritdoc/>
     public bool IsOnShape(Vector2 entityPoint)
     {
         return _outerEllipse.IsInside(entityPoint) && !_innerEllipse.IsInside(entityPoint);
