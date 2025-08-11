@@ -12,4 +12,6 @@ public sealed partial class DamageOnTriggerComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite), DataField]
     public DamageSpecifier? Damage;
+    [ViewVariables(VVAccess.ReadWrite), DataField]
+    public bool Log = false;
 }

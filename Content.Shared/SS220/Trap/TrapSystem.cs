@@ -16,8 +16,8 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
-using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Administration.Logs;
 
 namespace Content.Shared.SS220.Trap;
 
@@ -198,10 +198,6 @@ public sealed class TrapSystem : EntitySystem
         _ensnareableSystem.TryEnsnare(args.Activator.Value, ent.Owner, ensnaring);
         _adminLogger.Add(LogType.Action, LogImpact.Medium,
                     $"{ToPrettyString(args.Activator.Value)} caused trap {ToPrettyString(ent.Owner):entity}");
-        if (!TryComp<DamageOnTriggerComponent>(ent.Owner!, out var damaged) || damaged.Damage == null) return;
-        foreach (var i in damaged.Damage.DamageDict)
-            _adminLogger.Add(LogType.Action, LogImpact.Medium,
-                        $"{ToPrettyString(ent.Owner)} damaged {ToPrettyString(args.Activator.Value):entity} for {i.Key}, {i.Value}");
     }
 
     private void UpdateVisuals(EntityUid uid, TrapComponent? trapComp = null, AppearanceComponent? appearance = null)
