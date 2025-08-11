@@ -8,8 +8,22 @@
   replacementTime: 30
 
 - type: miGoCapture
+  id: GlassAirlock
+  from:
+    tag: GlassAirlock
+  replacementProto: CultYoggAirlock
+  replacementTime: 30
+
+- type: miGoCapture
   id: Wall
   from:
-    tag: Wall
+    parentPrototypeId: BaseWall
   replacementProto: WallCultYogg
+  replacementTime: 30
+
+- type: miGoCapture
+  id: BaseSecretDoor
+  from:
+    parentPrototypeId: BaseSecretDoor
+  replacementProto: CultYoggDoor
   replacementTime: 30

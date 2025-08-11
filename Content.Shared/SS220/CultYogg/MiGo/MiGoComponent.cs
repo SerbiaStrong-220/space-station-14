@@ -96,6 +96,12 @@ public sealed partial class MiGoComponent : Component
     /// </summary>
     [DataField(required: true)]
     public EntityWhitelist? EraseWhitelist = new();
+
+    /// <summary>
+    /// How long healing effect will occure
+    /// <summary>
+    [ViewVariables]
+    public TimeSpan CaptureDoAfterTime = TimeSpan.FromSeconds(5);
     #endregion
 
     #region Astral

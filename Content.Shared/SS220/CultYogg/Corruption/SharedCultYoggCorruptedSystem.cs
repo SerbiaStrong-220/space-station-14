@@ -4,6 +4,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.SoftDelete;
@@ -14,8 +15,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using System.Diagnostics.CodeAnalysis;
-using Robust.Shared.GameObjects;
-using Content.Shared.Popups;
 
 namespace Content.Shared.SS220.CultYogg.Corruption;
 

@@ -10,17 +10,13 @@ using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.SS220.ChameleonStructure;
 using Content.Shared.SS220.CultYogg.Buildings;
-using Content.Shared.SS220.CultYogg.Corruption;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
-using Robust.Shared.Maths;
 using Robust.Shared.Network;
-using Robust.Shared.Physics;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -75,6 +71,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         SubscribeLocalEvent<CultYoggBuildingFrameComponent, ExaminedEvent>(OnBuildingFrameExamined);
 
         SubscribeLocalEvent<MiGoEraseDoAfterEvent>(OnEraseDoAfter);
+        SubscribeLocalEvent<MiGoCaptureDoAfterEvent>(OnCaptureDoAfter);
     }
 
     public void OpenUI(Entity<MiGoComponent> entity, ActorComponent actor)
@@ -301,6 +298,12 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
         var buildingUid = EntityManager.GetEntity(args.CapturedBuilding);
 
+        if (HasComp<CultYoggBuildingComponent>(buildingUid))
+        {
+            _popupSystem.PopupEntity(Loc.GetString("cult-yogg-building-cant-capture-cult-building"), buildingUid, ent);
+            return;
+        }
+
         var prototypeId = MetaData(buildingUid).EntityPrototype;
 
         if (prototypeId == null)
@@ -312,10 +315,36 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             return;
         }
 
-        StartReplacement(buildingUid, recipe);
+        if (recipe == null)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("cult-yogg-building-cant-capture-this-building"), buildingUid, ent);
+            return;
+        }
+
+        //var e = new MiGoCaptureDoAfterEvent() { Recipe = recipe, BuildingProto = prototypeId };
+        //var doafterArgs = new DoAfterArgs(EntityManager, ent.Owner, ent.Comp.CaptureDoAfterTime, e, null, buildingUid)
+        //{
+        //    Broadcast = false,
+        //    BreakOnDamage = true,
+        //    BreakOnMove = true,
+        //    NeedHand = false,
+        //    BlockDuplicate = true,
+        //    CancelDuplicate = true,
+        //    DuplicateCondition = DuplicateConditions.SameEvent
+        //};
+        //_doAfterSystem.TryStartDoAfter(doafterArgs);
     }
 
-    private void StartReplacement(EntityUid buildingUid, MiGoCapturePrototype replacement)
+    private void OnCaptureDoAfter(MiGoCaptureDoAfterEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        //if (args.Target is { } target)
+        //    StartReplacement(target, args.Recipe, args.BuildingProto);
+    }
+
+    private void StartReplacement(EntityUid buildingUid, MiGoCapturePrototype replacement, EntityPrototype buildingProto)
     {
         if (_gameTiming.InPrediction)
             return; // this should never run in client
@@ -326,12 +355,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         var newEntity = SpawnAtPosition(replacement.ReplacementProto, xform.Coordinates);
         Transform(newEntity).LocalRotation = rot;
 
-        if (!TryPrototype(buildingUid, out var prototype))
-            return;
-
         if (TryComp<ChameleonStructureComponent>(newEntity, out var structureChameleon))
         {
-            _chameleonStructureSystem.SetPrototype((newEntity, structureChameleon), prototype.ID);
+            _chameleonStructureSystem.SetPrototype((newEntity, structureChameleon), buildingProto.ID);
         }
 
         Del(buildingUid);
@@ -348,6 +374,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         InitializeCaptureRecipes();
     }
 
+    /// <summary>
+    /// Fills in the recipes dictionary from prototypes cache.
+    /// </summary>
     private void InitializeCaptureRecipes()
     {
         _сaptureDictBySourcePrototypeId.Clear();
@@ -372,24 +401,27 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     }
 
     /// <summary>
-    /// Returns recipe to corrupt specified entity, if any.
+    /// Returns recipe to capture specified entity, if any.
     /// </summary>
     /// <param name="uid">Entity to corrupt</param>
-    /// <param name="corruption">Result recipe</param>
-    private bool TryGetCaptureRecipe(EntityUid uid, [NotNullWhen(true)] out MiGoCapturePrototype? corruption)
+    /// <param name="capture">Result recipe</param>
+    private bool TryGetCaptureRecipe(EntityUid uid, [NotNullWhen(true)] out MiGoCapturePrototype? capture)
     {
-        corruption = null;
+        capture = null;
         foreach (var (sourceFunc, sourceName) in _recipeSources)
         {
-            corruption = sourceFunc(uid);
-            if (corruption is null)
+            capture = sourceFunc(uid);
+            if (capture is null)
                 continue;
-            Log.Debug("Founded corruption recipe {0} for {1} via {2}", corruption.ID, ToPrettyString(uid), sourceName);
+            Log.Debug("Founded corruption recipe {0} for {1} via {2}", capture.ID, ToPrettyString(uid), sourceName);
             return true;
         }
         return false;
     }
 
+    /// <summary>
+    /// Just use <see cref="TryGetCaptureRecipe(EntityUid, out MiGoCapturePrototype?)"/>
+    /// </summary>
     private MiGoCapturePrototype? GetRecipeBySourcePrototypeId(EntityUid uid)
     {
         var prototypeId = MetaData(uid).EntityPrototype?.ID;
@@ -398,6 +430,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         return _сaptureDictBySourcePrototypeId.GetValueOrDefault(prototypeId);
     }
 
+    /// <summary>
+    /// Just use <see cref="TryGetCaptureRecipe(EntityUid, out MiGoCapturePrototype?)"/>
+    /// </summary>
     private MiGoCapturePrototype? GetRecipeByParentPrototypeId(EntityUid uid)
     {
         var parents = MetaData(uid).EntityPrototype?.Parents;
@@ -415,7 +450,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         }
         return null;
     }
-
+    /// <summary>
+    /// Overload to see parents
+    /// </summary>
     private MiGoCapturePrototype? GetRecipeByParentPrototypeId(string id)
     {
         if (!_prototypeManager.TryIndex<EntityPrototype>(id, out var entProto))
@@ -437,6 +474,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         return null;
     }
 
+    /// <summary>
+    /// Just use <see cref="TryGetCaptureRecipe(EntityUid, out MiGoCapturePrototype?)"/>
+    /// </summary>
     private MiGoCapturePrototype? GetRecipeBySourceTag(EntityUid uid)
     {
         if (!TryComp(uid, out TagComponent? tagComponent))
@@ -447,13 +487,6 @@ public sealed class SharedMiGoErectSystem : EntitySystem
                 return recipe;
         }
         return null;
-    }
-
-    private CultYoggCorruptedPrototype? GetRecipeById(ProtoId<CultYoggCorruptedPrototype>? id)
-    {
-        if (!id.HasValue)
-            return null;
-        return _prototypeManager.Index(id.Value);
     }
     #endregion
 
@@ -653,4 +686,11 @@ public sealed partial class MiGoErectDoAfterEvent : SimpleDoAfterEvent
 [Serializable, NetSerializable]
 public sealed partial class MiGoEraseDoAfterEvent : SimpleDoAfterEvent
 {
+}
+
+[Serializable, NetSerializable]
+public sealed partial class MiGoCaptureDoAfterEvent : SimpleDoAfterEvent
+{
+    //public MiGoCapturePrototype Recipe;
+    //public EntityPrototype BuildingProto;
 }
