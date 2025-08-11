@@ -20,7 +20,7 @@ public sealed partial class AutoShootGunSystem : EntitySystem
 
     private void OnPowerChanged(Entity<AutoShootGunComponent> ent, ref PowerChangedEvent args)
     {
-        if (ent.Comp.RequiredPower)
+        if (!ent.Comp.RequiredPower)
             return;
 
         if (!TryComp<ApcPowerReceiverComponent>(ent, out var apc))
