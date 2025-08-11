@@ -79,7 +79,7 @@ public sealed class ItemToggleSystem : EntitySystem
             return;
 
 
-        if (_sharedContainerSystem.IsEntityInContainer(ent.Owner)) return; // ss220 fix
+        if (_sharedContainerSystem.IsEntityInContainer(ent.Owner) && HasComp<ItemToggleSizeComponent>(ent.Owner)) return; // ss220 fix
 
         var user = args.User;
 
