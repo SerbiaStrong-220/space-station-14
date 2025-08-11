@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Collision.Shapes;
 using System.Numerics;
 
@@ -34,20 +33,20 @@ public interface IForcefieldShape
     /// <summary>
     /// Is the <paramref name="point"/> inside the shape area
     /// </summary>
-    bool IsInside(Vector2 point);
+    bool IsInside(Vector2 entityPoint);
 
     /// <summary>
     /// Is the <paramref name="point"/> on the shape
     /// </summary>
-    bool IsOnShape(Vector2 point);
+    bool IsOnShape(Vector2 entityPoint);
 
     /// <summary>
     /// Gets the closest point on the shape's boundary to the specified <paramref name="point"/>.
     /// </summary>
-    Vector2 GetClosestPoint(Vector2 point);
+    Vector2 GetClosestPoint(Vector2 entityPoint);
 
     /// <summary>
-    /// Is the shape in the player's pvs range
+    /// Is the shape within the radius of a certain point
     /// </summary>
-    bool InPvS(Vector2 playerPos, float pvsRange);
+    bool InRange(Vector2 entityPoint, float range);
 }

@@ -12,7 +12,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using System.Linq;
-using Robust.Shared.Timing;
+using System.Numerics;
 
 namespace Content.Server.SS220.Forcefield.Systems;
 
@@ -123,7 +123,7 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
     private void UpdatePvsOverride(Entity<ForcefieldComponent> entity)
     {
         var pvsRange = _configurationManager.GetCVar(CVars.NetMaxUpdateRange);
-
+        var invWorldMatrix = _transform.GetInvWorldMatrix(entity);
         var curOverrides = _curPvsOverrides.GetOrNew(entity);
 
         foreach (var session in _player.Sessions)
@@ -138,8 +138,8 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
             if (forcefieldMapCoords.MapId != entMapCoords.MapId)
                 continue;
 
-            var entLocalCoords = _transform.ToCoordinates(entity.Owner, entMapCoords);
-            var inPvs = entity.Comp.Params.Shape.InPvS(entLocalCoords.Position, pvsRange);
+            var entLocalPos = Vector2.Transform(entMapCoords.Position, invWorldMatrix);
+            var inPvs = entity.Comp.Params.Shape.InRange(entLocalPos, pvsRange);
 
             if (inPvs)
             {

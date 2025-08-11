@@ -207,39 +207,34 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
     }
 
     /// <inheritdoc/>
-    public bool IsInside(Vector2 point)
+    public bool IsInside(Vector2 entityPoint)
     {
-        return _centralEllipse.IsInside(point);
+        return _centralEllipse.IsInside(entityPoint);
     }
 
-    public bool IsOnShape(Vector2 point)
+    public bool IsOnShape(Vector2 entityPoint)
     {
-        return _outerEllipse.IsInside(point) && !_innerEllipse.IsInside(point);
+        return _outerEllipse.IsInside(entityPoint) && !_innerEllipse.IsInside(entityPoint);
     }
 
     /// <inheritdoc/>
-    public Vector2 GetClosestPoint(Vector2 point)
+    public Vector2 GetClosestPoint(Vector2 entityPoint)
     {
-        if (IsOnShape(point))
-            return point;
+        if (IsOnShape(entityPoint))
+            return entityPoint;
 
-        var ellipse = IsInside(point) ? _innerEllipse : _outerEllipse;
-        return ellipse.GetClosestPoint(point);
+        var ellipse = IsInside(entityPoint) ? _innerEllipse : _outerEllipse;
+        return ellipse.GetClosestPoint(entityPoint);
     }
 
-    public bool InPvS(Vector2 playerPos, float pvsRange)
+    /// <inheritdoc/>
+    public bool InRange(Vector2 entityPoint, float range)
     {
-        var distanceToCenter = playerPos.Length();
-        if (distanceToCenter < pvsRange)
+        if (IsOnShape(entityPoint))
             return true;
 
-        var checkRadius = pvsRange + Math.Max(Height, Width);
-        if (distanceToCenter > checkRadius)
-            return false;
-
-        var closestPoint = GetClosestPoint(playerPos);
-        var distanceToClosest = (playerPos - closestPoint).Length();
-        return distanceToClosest < pvsRange;
+        var ellipse = IsInside(entityPoint) ? _innerEllipse : _outerEllipse;
+        return ellipse.InRange(entityPoint, range);
     }
 
     [Serializable, NetSerializable]
@@ -276,10 +271,10 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
         {
             get
             {
-                var rotationMatrix = Matrix3x2.CreateRotation((float)-Angle.Theta);
                 var offsetMatrix = Matrix3x2.CreateTranslation(-Offset);
+                var rotationMatrix = Matrix3x2.CreateRotation((float)-Angle.Theta);
 
-                return rotationMatrix * offsetMatrix;
+                return offsetMatrix * rotationMatrix;
             }
         }
 
@@ -325,22 +320,36 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
             return new Vector2(x, y);
         }
 
-        public bool IsInside(Vector2 point)
+        public bool IsInside(Vector2 entityPoint)
         {
-            point = Vector2.Transform(point, EntityToLocal);
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
 
             var a = Width / 2.0;
             var b = Height / 2.0;
-            return Math.Pow(point.X / a, 2) + Math.Pow(point.Y / b, 2) <= 1;
+            return Math.Pow(localPoint.X / a, 2) + Math.Pow(localPoint.Y / b, 2) <= 1;
         }
 
-        public Vector2 GetClosestPoint(Vector2 point)
+        public Vector2 GetClosestPoint(Vector2 entityPoint)
         {
-            point = Vector2.Transform(point, EntityToLocal);
-            var angle = point.ToAngle();
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+            var angle = localPoint.ToAngle();
 
             var closestPoint = GetPoint(angle);
             return Vector2.Transform(closestPoint, LocalToEntity);
+        }
+
+        public bool InRange(Vector2 entityPoint, float range)
+        {
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+
+            var distanceToCenter = localPoint.Length();
+            var checkRange = range + Math.Max(Height, Width);
+            if (distanceToCenter > checkRange)
+                return false;
+
+            var closestPoint = GetClosestPoint(entityPoint);
+            var distanceToClosest = (entityPoint - closestPoint).Length();
+            return distanceToClosest < range;
         }
     }
 }

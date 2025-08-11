@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Entry;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Serialization;
 using System.Linq;
@@ -159,39 +160,34 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
     }
 
     /// <inheritdoc/>
-    public bool IsInside(Vector2 point)
+    public bool IsInside(Vector2 entityPoint)
     {
-        return _centralCircle.IsInside(point);
+        return _centralCircle.IsInside(entityPoint);
     }
 
-    public bool IsOnShape(Vector2 point)
+    public bool IsOnShape(Vector2 entityPoint)
     {
-        return _outerCircle.IsInside(point) && !_innerCircle.IsInside(point);
+        return _outerCircle.IsInside(entityPoint) && !_innerCircle.IsInside(entityPoint);
     }
 
     /// <inheritdoc/>
-    public Vector2 GetClosestPoint(Vector2 point)
+    public Vector2 GetClosestPoint(Vector2 entityPoint)
     {
-        if (IsOnShape(point))
-            return point;
+        if (IsOnShape(entityPoint))
+            return entityPoint;
 
-        var circle = IsInside(point) ? _innerCircle : _outerCircle;
-        return circle.GetClosestPoint(point);
+        var circle = IsInside(entityPoint) ? _innerCircle : _outerCircle;
+        return circle.GetClosestPoint(entityPoint);
     }
 
-    public bool InPvS(Vector2 playerPos, float pvsRange)
+    /// <inheritdoc/>
+    public bool InRange(Vector2 entityPoint, float range)
     {
-        var distanceToCenter = playerPos.Length();
-        if (distanceToCenter < pvsRange)
+        if (IsOnShape(entityPoint))
             return true;
 
-        var checkRadius = pvsRange + Radius;
-        if (distanceToCenter > checkRadius)
-            return false;
-
-        var closestPoint = GetClosestPoint(playerPos);
-        var distanceToClosest = (playerPos - closestPoint).Length();
-        return distanceToClosest < pvsRange;
+        var circle = IsInside(entityPoint) ? _innerCircle : _outerCircle;
+        return circle.InRange(entityPoint, range);
     }
 
     [Serializable, NetSerializable]
@@ -241,21 +237,35 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
             return new Vector2(x, y);
         }
 
-        public bool IsInside(Vector2 point)
+        public bool IsInside(Vector2 entityPoint)
         {
-            point = Vector2.Transform(point, EntityToLocal);
-            var posSquared = point.X * point.X + point.Y * point.Y;
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+            var posSquared = Math.Pow(localPoint.X, 2) + Math.Pow(localPoint.Y, 2);
 
             return posSquared <= Radius * Radius;
         }
 
-        public Vector2 GetClosestPoint(Vector2 point)
+        public Vector2 GetClosestPoint(Vector2 entityPoint)
         {
-            point = Vector2.Transform(point, EntityToLocal);
-            var angle = point.ToAngle();
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+            var angle = localPoint.ToAngle();
 
             var closestPoint = GetPoint(angle);
             return Vector2.Transform(closestPoint, LocalToEntity);
+        }
+
+        public bool InRange(Vector2 entityPoint, float range)
+        {
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+
+            var distanceToCenter = localPoint.Length();
+            var checkRange = range + Radius;
+            if (distanceToCenter > checkRange)
+                return false;
+
+            var closestPoint = GetClosestPoint(entityPoint);
+            var distanceToClosest = (entityPoint - closestPoint).Length();
+            return distanceToClosest < range;
         }
     }
 }

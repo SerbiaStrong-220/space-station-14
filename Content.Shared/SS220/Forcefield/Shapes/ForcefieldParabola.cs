@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Entry;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Serialization;
@@ -221,39 +222,34 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
     }
 
     /// <inheritdoc/>
-    public bool IsInside(Vector2 point)
+    public bool IsInside(Vector2 entityPoint)
     {
-        return _centralParabola.IsInside(point);
+        return _centralParabola.IsInside(entityPoint);
     }
 
-    public bool IsOnShape(Vector2 point)
+    public bool IsOnShape(Vector2 entityPoint)
     {
-        return _outerParabola.IsInside(point) && !_innerParabola.IsInside(point);
+        return _outerParabola.IsInside(entityPoint) && !_innerParabola.IsInside(entityPoint);
     }
 
     /// <inheritdoc/>
-    public Vector2 GetClosestPoint(Vector2 point)
+    public Vector2 GetClosestPoint(Vector2 entityPoint)
     {
-        if (IsOnShape(point))
-            return point;
+        if (IsOnShape(entityPoint))
+            return entityPoint;
 
-        var parabola = IsInside(point) ? _innerParabola : _outerParabola;
-        return parabola.GetClosestPoint(point);
+        var parabola = IsInside(entityPoint) ? _innerParabola : _outerParabola;
+        return parabola.GetClosestPoint(entityPoint);
     }
 
-    public bool InPvS(Vector2 playerPos, float pvsRange)
+    /// <inheritdoc/>
+    public bool InRange(Vector2 entityPoint, float range)
     {
-        var distanceToCenter = playerPos.Length();
-        if (distanceToCenter < pvsRange)
+        if (IsOnShape(entityPoint))
             return true;
 
-        var checkRadius = pvsRange + Math.Max(Height, Width / 2);
-        if (distanceToCenter > checkRadius)
-            return false;
-
-        var closestPoint = GetClosestPoint(playerPos);
-        var distanceToClosest = (playerPos - closestPoint).Length();
-        return distanceToClosest < pvsRange;
+        var parabola = IsInside(entityPoint) ? _innerParabola : _outerParabola;
+        return parabola.InRange(entityPoint, range);
     }
 
     [Serializable, NetSerializable]
@@ -281,10 +277,10 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
         {
             get
             {
-                var rotationMatrix = Matrix3x2.CreateRotation((float)-Angle.Theta);
                 var offsetMatrix = Matrix3x2.CreateTranslation(-Offset);
+                var rotationMatrix = Matrix3x2.CreateRotation((float)-Angle.Theta);
 
-                return rotationMatrix * offsetMatrix;
+                return offsetMatrix * rotationMatrix;
             }
         }
 
@@ -337,22 +333,22 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
             return (-sqrt, sqrt);
         }
 
-        public bool IsInside(Vector2 point)
+        public bool IsInside(Vector2 entityPoint)
         {
-            point = Vector2.Transform(point, EntityToLocal);
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
 
-            var parabolaY = GetY(point.X);
-            return parabolaY >= point.Y;
+            var parabolaY = GetY(localPoint.X);
+            return parabolaY >= localPoint.Y;
         }
 
-        public Vector2 GetClosestPoint(Vector2 point)
+        public Vector2 GetClosestPoint(Vector2 entityPoint)
         {
-            point = Vector2.Transform(point, EntityToLocal);
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
 
-            var x1 = Math.Clamp(point.X, -Width / 2, Width / 2);
-            var y2 = Math.Clamp(point.Y, 0, Height);
+            var x1 = Math.Clamp(localPoint.X, -Width / 2, Width / 2);
+            var y2 = Math.Clamp(localPoint.Y, 0, Height);
             float x2;
-            if (point.X > 0)
+            if (localPoint.X > 0)
                 x2 = GetX(y2).RightX;
             else
                 x2 = GetX(y2).LeftX;
@@ -362,6 +358,20 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
             var closestPoint = new Vector2(centralX, centralY);
 
             return Vector2.Transform(closestPoint, LocalToEntity);
+        }
+
+        public bool InRange(Vector2 entityPoint, float range)
+        {
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+
+            var distanceToCenter = localPoint.Length();
+            var checkRange = range + Math.Max(Height, Width / 2);
+            if (distanceToCenter > checkRange)
+                return false;
+
+            var closestPoint = GetClosestPoint(entityPoint);
+            var distanceToClosest = (entityPoint - closestPoint).Length();
+            return distanceToClosest < range;
         }
     }
 }
