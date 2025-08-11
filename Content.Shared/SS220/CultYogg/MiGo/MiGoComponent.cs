@@ -11,7 +11,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedMiGoSystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]
+[Access(typeof(SharedMiGoSystem), typeof(SharedMiGoErectSystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]
 public sealed partial class MiGoComponent : Component
 {
     #region Abilities
@@ -98,10 +98,15 @@ public sealed partial class MiGoComponent : Component
     public EntityWhitelist? EraseWhitelist = new();
 
     /// <summary>
-    /// How long healing effect will occure
+    /// How long capturing DoAfter will occure
     /// <summary>
     [ViewVariables]
     public TimeSpan CaptureDoAfterTime = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    /// List of capruring results
+    /// <summary>
+    public Dictionary<string, TimeSpan> CaptureCooldowns = [];
     #endregion
 
     #region Astral

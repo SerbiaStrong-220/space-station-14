@@ -10,11 +10,13 @@ using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.SS220.ChameleonStructure;
 using Content.Shared.SS220.CultYogg.Buildings;
+using Content.Shared.SS220.CultYogg.Corruption;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -44,6 +46,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedChameleonStructureSystem _chameleonStructureSystem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
@@ -321,18 +324,24 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             return;
         }
 
-        //var e = new MiGoCaptureDoAfterEvent() { Recipe = recipe, BuildingProto = prototypeId };
-        //var doafterArgs = new DoAfterArgs(EntityManager, ent.Owner, ent.Comp.CaptureDoAfterTime, e, null, buildingUid)
-        //{
-        //    Broadcast = false,
-        //    BreakOnDamage = true,
-        //    BreakOnMove = true,
-        //    NeedHand = false,
-        //    BlockDuplicate = true,
-        //    CancelDuplicate = true,
-        //    DuplicateCondition = DuplicateConditions.SameEvent
-        //};
-        //_doAfterSystem.TryStartDoAfter(doafterArgs);
+        if (ent.Comp.CaptureCooldowns.TryGetValue(recipe.ReplacementProto.Id, out var cooldownTime) && cooldownTime > _timing.CurTime)
+        {
+            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-caprure-cooldown", ("time", Math.Round((cooldownTime - _timing.CurTime).TotalSeconds))), ent);
+            return;
+        }
+
+        var e = new MiGoCaptureDoAfterEvent() { Recipe = recipe };
+        var doafterArgs = new DoAfterArgs(EntityManager, ent.Owner, ent.Comp.CaptureDoAfterTime, e, ent.Owner, buildingUid)
+        {
+            Broadcast = true,
+            BreakOnDamage = true,
+            BreakOnMove = true,
+            NeedHand = false,
+            BlockDuplicate = true,
+            CancelDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
+        };
+        _doAfterSystem.TryStartDoAfter(doafterArgs);
     }
 
     private void OnCaptureDoAfter(MiGoCaptureDoAfterEvent args)
@@ -340,8 +349,22 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        //if (args.Target is { } target)
-        //    StartReplacement(target, args.Recipe, args.BuildingProto);
+        if (args.Recipe == null)
+            return;
+
+
+        if (args.Target is { } target)
+        {
+            var prototypeId = MetaData(target).EntityPrototype;
+
+            if (prototypeId == null)
+                return;
+
+            StartReplacement(target, args.Recipe, prototypeId);
+        }
+
+        if (TryComp<MiGoComponent>(args.User, out var miGo))
+            AddCaptureCooldownByResult((args.User, miGo), args.Recipe);//its wierd, but idk how to not make it with this event
     }
 
     private void StartReplacement(EntityUid buildingUid, MiGoCapturePrototype replacement, EntityPrototype buildingProto)
@@ -357,7 +380,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
         if (TryComp<ChameleonStructureComponent>(newEntity, out var structureChameleon))
         {
-            _chameleonStructureSystem.SetPrototype((newEntity, structureChameleon), buildingProto.ID);
+            _chameleonStructureSystem.SetPrototype((newEntity, structureChameleon), buildingProto.ID);//make it chameleon if possible
         }
 
         Del(buildingUid);
@@ -413,7 +436,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             capture = sourceFunc(uid);
             if (capture is null)
                 continue;
-            Log.Debug("Founded corruption recipe {0} for {1} via {2}", capture.ID, ToPrettyString(uid), sourceName);
+            Log.Debug("Founded capture recipe {0} for {1} via {2}", capture.ID, ToPrettyString(uid), sourceName);
             return true;
         }
         return false;
@@ -481,12 +504,18 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     {
         if (!TryComp(uid, out TagComponent? tagComponent))
             return null;
+
         foreach (var tag in tagComponent.Tags)
         {
             if (_сaptureDictBySourceTag.TryGetValue(tag, out var recipe))
                 return recipe;
         }
         return null;
+    }
+
+    private void AddCaptureCooldownByResult(Entity<MiGoComponent> ent, MiGoCapturePrototype recipe)
+    {
+        ent.Comp.CaptureCooldowns.TryAdd(recipe.ReplacementProto.Id, _timing.CurTime + recipe.ReplacementCooldown);
     }
     #endregion
 
@@ -691,6 +720,6 @@ public sealed partial class MiGoEraseDoAfterEvent : SimpleDoAfterEvent
 [Serializable, NetSerializable]
 public sealed partial class MiGoCaptureDoAfterEvent : SimpleDoAfterEvent
 {
-    //public MiGoCapturePrototype Recipe;
-    //public EntityPrototype BuildingProto;
+    public MiGoCapturePrototype? Recipe;
+    //public EntityPrototype? BuildingProto;
 }

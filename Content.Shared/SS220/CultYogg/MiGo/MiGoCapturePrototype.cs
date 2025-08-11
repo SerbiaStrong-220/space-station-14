@@ -9,7 +9,8 @@ namespace Content.Shared.SS220.CultYogg.MiGo;
 /// <summary>
 ///     Recipes for buildings that MiGo can replace with cult buildings
 /// </summary>
-[Prototype, Serializable]
+[Prototype]
+[Serializable, NetSerializable]
 public sealed partial class MiGoCapturePrototype : IPrototype
 {
     [IdDataField]
@@ -32,7 +33,7 @@ public sealed partial class MiGoCapturePrototype : IPrototype
     /// Made to prevent MiGos from trying to capture the entire station.
     /// </summary>
     [DataField]
-    public TimeSpan ReplacementTime { get; private set; } = TimeSpan.FromSeconds(30);
+    public TimeSpan ReplacementCooldown { get; private set; } = TimeSpan.FromSeconds(30);
 }
 
 [DataDefinition]
