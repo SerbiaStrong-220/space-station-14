@@ -8,6 +8,7 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.SS220SharedTriggers.Events;
 using Content.Shared.SS220.SS220SharedTriggers.System;
+using Content.Shared.SS220.SS220SharedTriggers.DamageOnTrigger;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
@@ -197,6 +198,10 @@ public sealed class TrapSystem : EntitySystem
         _ensnareableSystem.TryEnsnare(args.Activator.Value, ent.Owner, ensnaring);
         _adminLogger.Add(LogType.Action, LogImpact.Medium,
                     $"{ToPrettyString(args.Activator.Value)} caused trap {ToPrettyString(ent.Owner):entity}");
+        if (!TryComp<DamageOnTriggerComponent>(ent.Owner!, out var damaged) || damaged.Damage == null) return;
+        foreach (var i in damaged.Damage.DamageDict)
+            _adminLogger.Add(LogType.Action, LogImpact.Medium,
+                        $"{ToPrettyString(ent.Owner)} damaged {ToPrettyString(args.Activator.Value):entity} for {i.Key}, {i.Value}");
     }
 
     private void UpdateVisuals(EntityUid uid, TrapComponent? trapComp = null, AppearanceComponent? appearance = null)
