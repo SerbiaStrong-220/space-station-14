@@ -366,14 +366,14 @@
     damage:
       types:
         Slash: 0.01
- #SS220 the beginning of changes
+  # Energy Katana in storage fix begin
   - type: Item
     storedSprite:
       state: storage
       sprite: Objects/Weapons/Melee/energykatana_storage_64x.rsi
     shape:
     - 0,0,0,3
-#SS220 the end of changes
+  # Energy Katana in storage fix end
   - type: Clothing
     sprite: Objects/Weapons/Melee/energykatana.rsi
     slots:
