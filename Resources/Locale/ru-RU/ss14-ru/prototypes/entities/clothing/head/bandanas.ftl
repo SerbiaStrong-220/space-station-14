@@ -1,3 +1,4 @@
+# SS220 Bandana desc tweak begin
 ent-ClothingHeadBandBlack = чёрная бандана
     .desc = Черная бандана, чтобы выглядеть круто.
 ent-ClothingHeadBandBlue = синяя бандана
@@ -18,3 +19,4 @@ ent-ClothingHeadBandMerc = бандана наёмника
     .desc = Для защиты головы от солнца, насекомых и других угроз сверху.
 ent-ClothingHeadBandBrown = коричневая бандана
     .desc = Коричневая бандана, чтобы выглядеть круто.
+# SS220 Bandana desc tweak end
