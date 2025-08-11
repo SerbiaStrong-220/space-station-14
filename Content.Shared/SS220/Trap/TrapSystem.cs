@@ -120,8 +120,6 @@ public sealed class TrapSystem : EntitySystem
 
         var ev = new TrapArmedEvent();
         RaiseLocalEvent(ent, ev);
-        _adminLogger.Add(LogType.Action, LogImpact.Medium,
-                    $"{ToPrettyString(user)} armed trap {ToPrettyString(ent.Owner):entity}");
     }
 
     public void DefuseTrap(Entity<TrapComponent> ent, EntityUid? user, bool withSound = true)
@@ -140,8 +138,6 @@ public sealed class TrapSystem : EntitySystem
 
         var ev = new TrapDefusedEvent();
         RaiseLocalEvent(ent, ev);
-        _adminLogger.Add(LogType.Action, LogImpact.Medium,
-                    $"{ToPrettyString(user)} defused trap {ToPrettyString(ent.Owner):entity}");
     }
 
     public bool CanArmTrap(Entity<TrapComponent> ent, EntityUid? user)
