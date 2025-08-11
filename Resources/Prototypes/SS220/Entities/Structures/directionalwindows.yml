@@ -782,9 +782,9 @@
             max: 3
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: StaticPrice
   - type: RadiationBlocker
     resistance: 1.5
+  - type: StaticPrice
     price: 300
 
 - type: entity
