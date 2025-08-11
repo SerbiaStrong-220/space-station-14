@@ -48,7 +48,7 @@
             Quantity: 1
     - type: InjectionOnTrigger
       reagent: Toxin
-      quantity: 3
+      quantity: 4
     - type: Produce
       seedId: MikoTrapShroomSpores
     - type: Extractable
