@@ -10,6 +10,7 @@ using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 using System.Text;
+using Content.Server.Administration.Logs;
 
 namespace Content.Server.CartridgeLoader.Cartridges;
 
