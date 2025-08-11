@@ -8,6 +8,7 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
+using Content.Shared.SS220.ChameleonStructure;
 using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.Corruption;
 using Content.Shared.Stacks;
@@ -46,6 +47,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedChameleonStructureSystem _chameleonStructureSystem = default!;
 
     private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
@@ -321,8 +323,16 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         var xform = Transform(buildingUid);
         var rot = xform.LocalRotation;
 
-        var frameEntity = SpawnAtPosition(replacement.ReplacementProto, xform.Coordinates);
-        Transform(frameEntity).LocalRotation = rot;
+        var newEntity = SpawnAtPosition(replacement.ReplacementProto, xform.Coordinates);
+        Transform(newEntity).LocalRotation = rot;
+
+        if (!TryPrototype(buildingUid, out var prototype))
+            return;
+
+        if (TryComp<ChameleonStructureComponent>(newEntity, out var structureChameleon))
+        {
+            _chameleonStructureSystem.SetPrototype((newEntity, structureChameleon), prototype.ID);
+        }
 
         Del(buildingUid);
     }
