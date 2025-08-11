@@ -22,7 +22,7 @@
   replacementCooldown: 10
 
 - type: miGoCapture
-  id: Window
+  id: WindowParent
   from:
     parentPrototypeId: Window
   replacementProto: WallCultYogg
