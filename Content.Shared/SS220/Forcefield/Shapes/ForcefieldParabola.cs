@@ -142,8 +142,8 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
         InnerPoints = _innerParabola.GetPoints(Segments);
         OuterPoints = _outerParabola.GetPoints(Segments);
 
-        UpdatePhysShapes();
-        UpdateTrianglesVerts();
+        RefreshPhysShapes();
+        RefreshTrianglesVerts();
 
         Dirty = false;
     }
@@ -191,7 +191,7 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
         return _cachedPhysShapes;
     }
 
-    private void UpdatePhysShapes()
+    private void RefreshPhysShapes()
     {
         _cachedPhysShapes.Clear();
 
@@ -216,7 +216,7 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
         return _cachedTrianglesVerts;
     }
 
-    private void UpdateTrianglesVerts()
+    private void RefreshTrianglesVerts()
     {
         _cachedTrianglesVerts.Clear();
 

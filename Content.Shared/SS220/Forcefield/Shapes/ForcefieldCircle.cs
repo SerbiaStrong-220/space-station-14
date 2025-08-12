@@ -99,8 +99,8 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
         InnerPoints = _innerCircle.GetPoints(Segments);
         OuterPoints = _outerCircle.GetPoints(Segments);
 
-        UpdatePhysShapes();
-        UpdateTrianglesVerts();
+        RefreshPhysShapes();
+        RefreshTrianglesVerts();
 
         Dirty = false;
     }
@@ -131,7 +131,7 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
         return _cachedPhysShapes;
     }
 
-    private void UpdatePhysShapes()
+    private void RefreshPhysShapes()
     {
         _cachedPhysShapes.Clear();
 
@@ -156,7 +156,7 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
         return _cachedTrianglesVerts;
     }
 
-    private void UpdateTrianglesVerts()
+    private void RefreshTrianglesVerts()
     {
         _cachedTrianglesVerts.Clear();
 

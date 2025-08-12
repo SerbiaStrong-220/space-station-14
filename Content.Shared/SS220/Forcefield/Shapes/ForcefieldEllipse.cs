@@ -138,8 +138,8 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
         InnerPoints = _innerEllipse.GetPoints(Segments);
         OuterPoints = _outerEllipse.GetPoints(Segments);
 
-        UpdatePhysShapes();
-        UpdateTrianglesVerts();
+        RefreshPhysShapes();
+        RefreshTrianglesVerts();
 
         Dirty = false;
     }
@@ -178,7 +178,7 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
         return _cachedPhysShapes;
     }
 
-    private void UpdatePhysShapes()
+    private void RefreshPhysShapes()
     {
         _cachedPhysShapes.Clear();
 
@@ -203,7 +203,7 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
         return _cachedTrianglesVerts;
     }
 
-    private void UpdateTrianglesVerts()
+    private void RefreshTrianglesVerts()
     {
         _cachedTrianglesVerts.Clear();
 
