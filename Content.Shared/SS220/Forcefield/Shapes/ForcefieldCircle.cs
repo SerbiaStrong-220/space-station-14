@@ -2,6 +2,7 @@
 using Content.Shared.Entry;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Serialization;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 
@@ -68,11 +69,8 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
     public Vector2[] InnerPoints { get; private set; } = [];
     public Vector2[] OuterPoints { get; private set; } = [];
 
-    public IPhysShape[] CahcedPhysShapes => _cahcedPhysShapes;
-    private IPhysShape[] _cahcedPhysShapes = [];
-
-    public Vector2[] CahcedTrianglesVerts => _cahcedTrianglesVerts;
-    private Vector2[] _cahcedTrianglesVerts = [];
+    private readonly List<IPhysShape> _cachedPhysShapes = [];
+    private readonly List<Vector2> _cachedTrianglesVerts = [];
 
     private readonly Circle _innerCircle = new();
     private readonly Circle _centralCircle = new();
@@ -101,8 +99,8 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
         InnerPoints = _innerCircle.GetPoints(Segments);
         OuterPoints = _outerCircle.GetPoints(Segments);
 
-        _cahcedPhysShapes = [.. GetPhysShapes()];
-        _cahcedTrianglesVerts = [.. GetTrianglesVerts()];
+        UpdatePhysShapes();
+        UpdateTrianglesVerts();
 
         Dirty = false;
     }
@@ -125,38 +123,53 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
     }
 
     /// <inheritdoc/>
-    public IEnumerable<IPhysShape> GetPhysShapes()
+    public IReadOnlyList<IPhysShape> GetPhysShapes()
     {
-        var result = new List<IPhysShape>();
+        if (Dirty)
+            Refresh();
+
+        return _cachedPhysShapes;
+    }
+
+    private void UpdatePhysShapes()
+    {
+        _cachedPhysShapes.Clear();
 
         for (var i = 0; i < Segments; i++)
         {
             var shape = new PolygonShape();
             shape.Set(new List<Vector2>([InnerPoints[i], OuterPoints[i], OuterPoints[i + 1], InnerPoints[i + 1]]));
 
-            result.Add(shape);
-        }
+            if (shape.VertexCount <= 0)
+                throw new Exception($"Failed to generate a {nameof(PolygonShape)} of {nameof(ForcefieldCircle)} for segment: {i}");
 
-        return result;
+            _cachedPhysShapes.Add(shape);
+        }
     }
 
     /// <inheritdoc/>
-    public IEnumerable<Vector2> GetTrianglesVerts()
+    public IReadOnlyList<Vector2> GetTrianglesVerts()
     {
-        var verts = new List<Vector2>();
+        if (Dirty)
+            Refresh();
+
+        return _cachedTrianglesVerts;
+    }
+
+    private void UpdateTrianglesVerts()
+    {
+        _cachedTrianglesVerts.Clear();
 
         for (var i = 0; i < Segments; i++)
         {
-            verts.Add(InnerPoints[i]);
-            verts.Add(OuterPoints[i]);
-            verts.Add(OuterPoints[i + 1]);
+            _cachedTrianglesVerts.Add(InnerPoints[i]);
+            _cachedTrianglesVerts.Add(OuterPoints[i]);
+            _cachedTrianglesVerts.Add(OuterPoints[i + 1]);
 
-            verts.Add(InnerPoints[i]);
-            verts.Add(InnerPoints[i + 1]);
-            verts.Add(OuterPoints[i + 1]);
+            _cachedTrianglesVerts.Add(InnerPoints[i]);
+            _cachedTrianglesVerts.Add(InnerPoints[i + 1]);
+            _cachedTrianglesVerts.Add(OuterPoints[i + 1]);
         }
-
-        return verts;
     }
 
     /// <inheritdoc/>

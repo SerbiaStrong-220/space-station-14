@@ -54,8 +54,8 @@ public sealed class ForcefieldOverlay : Overlay
             if (fieldMap != playerMap)
                 continue;
 
-            var verts = comp.Params.Shape.CahcedTrianglesVerts;
-            if (verts.Length <= 0)
+            var verts = comp.Params.Shape.GetTrianglesVerts();
+            if (verts.Count <= 0)
                 continue;
 
             var (pos, rot) = _transform.GetWorldPositionRotation(uid);

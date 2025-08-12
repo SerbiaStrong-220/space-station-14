@@ -99,9 +99,9 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
         foreach (var fixture in fixtures.Fixtures)
             _fixture.DestroyFixture(entity, fixture.Key, false, manager: fixtures);
 
-        var shapes = forcefield.Params.Shape.CahcedPhysShapes;
-        var density = forcefield.Params.Density / shapes.Count();
-        for (var i = 0; i < shapes.Count(); i++)
+        var shapes = forcefield.Params.Shape.GetPhysShapes();
+        var density = forcefield.Params.Density / shapes.Count;
+        for (var i = 0; i < shapes.Count; i++)
         {
             var shape = shapes.ElementAt(i);
             _fixture.TryCreateFixture(

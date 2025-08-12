@@ -17,18 +17,15 @@ public interface IForcefieldShape
     bool Dirty { get; set; }
     void Refresh();
 
-    IPhysShape[] CahcedPhysShapes { get; }
-    Vector2[] CahcedTrianglesVerts { get; }
-
     /// <summary>
     /// Gets an array consisting of <see cref="IPhysShape"/> to create a hitbox
     /// </summary>
-    IEnumerable<IPhysShape> GetPhysShapes();
+    IReadOnlyList<IPhysShape> GetPhysShapes();
 
     /// <summary>
     /// Gets an array consisting of triangles verts for <see cref="DrawPrimitiveTopology.TriangleList"/>
     /// </summary>
-    IEnumerable<Vector2> GetTrianglesVerts();
+    IReadOnlyList<Vector2> GetTrianglesVerts();
 
     /// <summary>
     /// Is the <paramref name="entityPoint"/> inside the shape area

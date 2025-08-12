@@ -393,7 +393,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
 
             var draw = false;
             var verts = new List<Vector2>();
-            foreach (var localPos in comp.Params.Shape.CahcedTrianglesVerts)
+            foreach (var localPos in comp.Params.Shape.GetTrianglesVerts())
             {
                 var mapPos = Vector2.Transform(localPos, worldMatrix);
                 if (viewBounds.Contains(mapPos))
