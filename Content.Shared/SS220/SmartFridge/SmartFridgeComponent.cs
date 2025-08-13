@@ -68,7 +68,7 @@ public sealed partial class SmartFridgeComponent : Component
     /// of <see cref="VendingMachineComponent.DenyDelay"/>. If set to <c>false</c> will play a sprite
     /// flick animation for the state and then linger on the final frame until the end of the delay.
     /// </summary>
-    [DataField]
+    [DataField("loopDeny")]
     public bool LoopDenyAnimation = true;
     #endregion
 }
