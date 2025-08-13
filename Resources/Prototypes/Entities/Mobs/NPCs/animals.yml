@@ -1,6 +1,6 @@
 - type: entity
   name: bat
-  parent: [ SimpleMobBase, FlyingMobBase, MobCombat, MobPassiveCollision ] # SS220 Mob Collision Tweak
+  parent: [ SimpleMobBase, FlyingMobBase, MobCombat, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobBat
   description: Some cultures find them terrifying, others crunchy on the teeth.
   components:
@@ -81,7 +81,7 @@
 
 - type: entity
   name: bee
-  parent: [ SimpleMobBase, FlyingMobBase, MobPassiveCollision ] # SS220 Mob Collision Tweak
+  parent: [ SimpleMobBase, FlyingMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobBee
   description: Nice to have, but you can't build a civilization on a foundation of honey alone.
   components:
@@ -342,7 +342,7 @@
 
 - type: entity # TODO: figure out how to make these guys gib when stepped on
   name: cockroach
-  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Mob Collision Tweak
+  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobCockroach
   description: This station is just crawling with bugs.
   components:
@@ -768,7 +768,7 @@
 
 - type: entity
   name: butterfly
-  parent: [ SimpleMobBase, FlyingMobBase, MobPassiveCollision ] # SS220 Mob Collision Tweak
+  parent: [ SimpleMobBase, FlyingMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobButterfly
   description: Despite popular misconceptions, it's not actually made of butter.
   components:
@@ -1742,7 +1742,7 @@
 
 - type: entity
   name: mouse
-  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Mob Collision Tweak
+  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobMouse
   description: Squeak!
   components:
@@ -2127,7 +2127,7 @@
 
 - type: entity
   name: slug
-  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Mob Collision Tweak
+  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobSlug
   description: And they called this a lizard?
   components:
@@ -2174,7 +2174,7 @@
 
 - type: entity
   name: frog
-  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Mob Collision Tweak
+  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobFrog
   description: Hop hop hop. Lookin' moist.
   components:
@@ -2243,7 +2243,7 @@
 # Would be cool to have some functionality for the parrot to be able to sit on stuff
 - type: entity
   name: parrot
-  parent: [ SimpleMobBase, FlyingMobBase, MobPassiveCollision ] # SS220 Mob Collision Tweak
+  parent: [ SimpleMobBase, FlyingMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobParrot
   description: Infiltrates your domain, spies on you, and somehow still a cool pet.
   components:
@@ -3458,7 +3458,7 @@
 
 - type: entity
   name: hamster
-  parent: [ SimpleMobBase, MobCombat, StripableInventoryBase, MobPassiveCollision ] # SS220 Mob Collision Tweak
+  parent: [ SimpleMobBase, MobCombat, StripableInventoryBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobHamster
   description: A cute, fluffy, robust hamster.
   components:
