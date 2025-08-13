@@ -392,7 +392,7 @@
     - type: SalvageMobRestrictions
 
 - type: entity
-  parent: SimpleSpaceMobBase
+  parent: [ SimpleSpaceMobBase, MobPassiveCollision ] # SS220 Mob Collision Tweak
   id: MobSnail
   name: snail
   description: Revolting unless you're french.

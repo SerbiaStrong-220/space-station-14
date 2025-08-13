@@ -1,7 +1,7 @@
 - type: entity
   name: space carp
   id: BaseMobCarp
-  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat, MobPassiveCollision ] # SS220 Mob Collision Tweak
   description: It's a space carp.
   abstract: true
   components:

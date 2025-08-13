@@ -1,0 +1,12 @@
+- type: entity
+  save: false
+  id: MobPassiveCollision
+  abstract: true
+  components:
+  - type: MobCollision
+    colliding: false
+    bufferAccumulator: 0
+    speedModifier: 0
+    minimumSpeedModifier: 0
+    strength: 0
+    fixtureId: ""
