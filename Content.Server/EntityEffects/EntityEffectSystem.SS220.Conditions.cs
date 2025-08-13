@@ -5,13 +5,12 @@ using Content.Shared.SS220.EntityEffects.EffectConditions;
 
 namespace Content.Server.EntityEffects;
 
-public sealed partial class EntityEffectSystem : EntitySystem
+public sealed partial class EntityEffectSystem
 {
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
 
     private void OnCheckComponentCondition(ref CheckEntityEffectConditionEvent<HasComponentsCondition> args)
     {
-
         if (args.Condition.Components.Length == 0)
         {
             args.Result = true;
@@ -25,22 +24,21 @@ public sealed partial class EntityEffectSystem : EntitySystem
             if (!_componentFactory.TryGetRegistration(component, out var registration) ||
                 availability != ComponentAvailability.Available)
                 continue;
-            else if (availability == ComponentAvailability.Unknown)
-                Log.Error($"Unknown component name {component} passed to {this.ToString()}!");
 
             if (HasComp(args.Args.TargetEntity, registration.Type))
             {
-                if (!args.Condition.RequireAll)
-                {
-                    condition = true;
-                    break;
-                }
-            }
-            else if (args.Condition.RequireAll)
-            {
-                condition = false;
+                if (args.Condition.RequireAll)
+                    continue;
+
+                condition = true;
                 break;
             }
+
+            if (!args.Condition.RequireAll)
+                continue;
+
+            condition = false;
+            break;
         }
 
         args.Result = condition ^ args.Condition.Inverted;

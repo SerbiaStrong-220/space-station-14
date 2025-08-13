@@ -10,8 +10,9 @@ namespace Content.Shared.SS220.SS220SharedTriggers.DamageOnTrigger;
 [RegisterComponent]
 public sealed partial class DamageOnTriggerComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [DataField]
     public DamageSpecifier? Damage;
-    [ViewVariables(VVAccess.ReadWrite), DataField]
-    public bool Log = false;
+
+    [DataField]
+    public bool Log;
 }

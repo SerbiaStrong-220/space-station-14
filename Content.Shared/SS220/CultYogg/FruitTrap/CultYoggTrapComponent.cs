@@ -23,6 +23,7 @@ public sealed partial class CultYoggTrapComponent : Component
     /// </summary>
     [DataField]
     public float ArmedVisibility;
+
     /// <summary>
     /// Value visibility <see cref="StealthComponent"/> on un armed trap
     /// </summary>

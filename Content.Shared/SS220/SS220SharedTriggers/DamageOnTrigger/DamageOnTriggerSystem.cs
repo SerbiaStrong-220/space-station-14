@@ -14,6 +14,7 @@ public sealed class DamageOnTriggerSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+
     /// <inheritdoc/>
     public override void Initialize()
     {

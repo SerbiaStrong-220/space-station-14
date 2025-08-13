@@ -2,9 +2,8 @@
 
 using Content.Server.EUI;
 
-namespace Content.Server.SS220.CultYogg.DeCultReminder
+namespace Content.Server.SS220.CultYogg.DeCultReminder;
+
+public sealed class DeCultReminderEui : BaseEui
 {
-    public sealed class DeCultReminderEui : BaseEui
-    {
-    }
 }

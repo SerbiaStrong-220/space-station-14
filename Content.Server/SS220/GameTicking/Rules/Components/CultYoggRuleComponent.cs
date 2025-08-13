@@ -4,7 +4,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Cultists;
-using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -77,6 +76,7 @@ public sealed partial class CultYoggRuleComponent : Component
     {
         Tags = ["CultYoggInnerHandToggleable"]
     };
+
     /// <summary>
     /// Check for an endgame screen title
     /// </summary>
@@ -84,7 +84,7 @@ public sealed partial class CultYoggRuleComponent : Component
     public int AmountOfSacrifices = 0;
 
     [DataField]
-    public bool Summoned = false;
+    public bool Summoned;
 
     [DataField]
     public SoundSpecifier SummonMusic = new SoundCollectionSpecifier("CultYoggMusic");//ToDo make own
@@ -126,6 +126,7 @@ public sealed partial class CultYoggStageDefinition
     /// </summary>
     [DataField]
     public int? SacrificesRequired;
+
     /// <summary>
     /// Fraction of total crew converted to cultists that will progress cult to this stage.
     /// </summary>

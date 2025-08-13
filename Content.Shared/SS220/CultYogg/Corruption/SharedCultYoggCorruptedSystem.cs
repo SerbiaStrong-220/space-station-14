@@ -14,7 +14,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using System.Diagnostics.CodeAnalysis;
-using Robust.Shared.GameObjects;
 using Content.Shared.Popups;
 
 namespace Content.Shared.SS220.CultYogg.Corruption;

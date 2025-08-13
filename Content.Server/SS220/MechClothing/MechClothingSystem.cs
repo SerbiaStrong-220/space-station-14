@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Interaction;
 using Content.Server.Mech.Equipment.Components;
 using Content.Server.Mech.Systems;
@@ -28,6 +29,7 @@ public sealed class MechClothingSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly MechSystem _mech = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+
     /// <inheritdoc/>
     public override void Initialize()
     {

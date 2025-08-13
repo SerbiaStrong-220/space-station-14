@@ -25,6 +25,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaData = default!;
 
     public const string InnerHandPrefix = "inner_";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -198,16 +199,15 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
             }
         }
 
-        if (innerToggle.InnerItemUid == null && handsComp.ActiveHand.HeldEntity != null)
-        {
-            if (TryComp<StuckOnEquipComponent>(handsComp.ActiveHand.HeldEntity, out var stuckOnEquip))
-                _stuckOnEquip.UnstuckItem((handsComp.ActiveHand.HeldEntity.Value, stuckOnEquip));
-
-            innerToggle.InnerItemUid = handsComp.ActiveHand.HeldEntity.Value;
-            _containerSystem.Insert((handsComp.ActiveHand.HeldEntity.Value, null, null), innerToggle.Container);
-            _actionsSystem.SetToggled(ent.Comp.ActionEntity, true); // we don't update the whole action because the hand and the action do not change
-            _metaData.SetEntityName(ent.Comp.ActionEntity.Value, Loc.GetString("action-inner-hand-toggle-name-out"));
+        if (innerToggle.InnerItemUid != null || handsComp.ActiveHand.HeldEntity == null)
             return;
-        }
+
+        if (TryComp<StuckOnEquipComponent>(handsComp.ActiveHand.HeldEntity, out var stuckOnEquip))
+            _stuckOnEquip.UnstuckItem((handsComp.ActiveHand.HeldEntity.Value, stuckOnEquip));
+
+        innerToggle.InnerItemUid = handsComp.ActiveHand.HeldEntity.Value;
+        _containerSystem.Insert((handsComp.ActiveHand.HeldEntity.Value, null, null), innerToggle.Container);
+        _actionsSystem.SetToggled(ent.Comp.ActionEntity, true); // we don't update the whole action because the hand and the action do not change
+        _metaData.SetEntityName(ent.Comp.ActionEntity.Value, Loc.GetString("action-inner-hand-toggle-name-out"));
     }
 }

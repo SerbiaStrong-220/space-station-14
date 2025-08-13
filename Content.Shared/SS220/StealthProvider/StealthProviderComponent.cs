@@ -21,6 +21,7 @@ public sealed partial class StealthProviderComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public List<Entity<ProvidedStealthComponent>> ProvidedEntities = new List<Entity<ProvidedStealthComponent>>();
 }
+
 [ByRefEvent]
 public record struct StealthProviderStatusChanged(bool Enabled)
 {

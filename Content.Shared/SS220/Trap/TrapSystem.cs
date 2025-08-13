@@ -8,7 +8,6 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.SS220SharedTriggers.Events;
 using Content.Shared.SS220.SS220SharedTriggers.System;
-using Content.Shared.SS220.SS220SharedTriggers.DamageOnTrigger;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;

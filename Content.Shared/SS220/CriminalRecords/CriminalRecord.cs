@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -21,10 +22,7 @@ public sealed class CriminalRecordCatalog
         if (!LastRecordTime.HasValue)
             return null;
 
-        if (Records.TryGetValue(LastRecordTime.Value, out var record))
-            return record;
-
-        return null;
+        return Records.GetValueOrDefault(LastRecordTime.Value);
     }
 }
 

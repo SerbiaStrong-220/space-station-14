@@ -13,14 +13,14 @@ namespace Content.Shared.SS220.Telepathy;
 [NetworkedComponent]
 public sealed partial class TelepathyComponent : Component
 {
-    [DataField("canSend", required: true)]
+    [DataField(required: true)]
     public bool CanSend;
 
     [DataField]
     public ProtoId<TelepathyChannelPrototype>? TelepathyChannelPrototype;
 
     [DataField]
-    public bool ReceiveAllChannels = false;
+    public bool ReceiveAllChannels;
 }
 
 public sealed partial class TelepathySendEvent : InstantActionEvent

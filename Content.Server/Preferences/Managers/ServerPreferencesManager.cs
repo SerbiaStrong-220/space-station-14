@@ -12,7 +12,6 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Content.Server.SS220.RoleSpeciesRestrict;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Preferences.Managers
@@ -115,24 +114,6 @@ namespace Content.Server.Preferences.Managers
             // var allowedMarkings = _sponsors.TryGetInfo(message.MsgChannel.UserId, out var sponsor) ? sponsor.AllowedMarkings : new string[]{};
             // profile.EnsureValid(_cfg, _protos, allowedMarkings);
             // Corvax-Sponsors-End
-
-            //ss-220 arahFix
-            //if (profile is HumanoidCharacterProfile human)
-            //{
-
-            //    foreach (var (k, v) in human.JobPriorities)
-            //    {
-            //        if (session == null)
-            //            continue;
-
-            //        if (!_iEntitySystemManager.GetEntitySystem<RoleSpeciesRestrictSystem>().IsAllowed(session, k))
-            //        {
-            //            human = human.WithJobPriority(k, JobPriority.Never);
-            //        }
-            //    }
-            //    profile = human;
-            //}
-            //ss-220 arahFixend
 
             if (session != null)
                 profile.EnsureValid(session, _dependencies);
