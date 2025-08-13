@@ -73,6 +73,12 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         if (_entityEnteredSSDTimes.Count == 0)
             return;
 
+        foreach (var key in _entityEnteredSSDTimes.Keys.ToList())
+        {
+            if (Deleted(key.Item1))
+                _entityEnteredSSDTimes.Remove(key);
+        }
+
         _toRemove.Clear();
 
         foreach (var pair in _entityEnteredSSDTimes)
@@ -136,7 +142,10 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     /// <returns> true if player successfully transferred to cryo storage, otherwise returns false</returns>
     public bool TeleportEntityToCryoStorage(EntityUid target)
     {
-        var station = _station.GetOwningStation(target);
+        if (!TryComp(target, out TransformComponent? xform))
+            return false;
+
+        var station = _station.GetOwningStation(target, xform);
         if (station is null)
             return false;
 
