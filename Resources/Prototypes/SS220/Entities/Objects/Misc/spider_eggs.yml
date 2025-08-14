@@ -36,9 +36,9 @@
     damage:
       types:
         Blunt: 0.1
-        Heat: 0.1 
+        Heat: 0.1
   - type: Damageable
-    damageContainer: Biological        
+    damageContainer: Biological
   - type: Destructible
     thresholds:
     - trigger:
@@ -56,13 +56,13 @@
             min: 1
             max: 1
       - !type:DoActsBehavior
-        acts: [ "Destruction" ]     
+        acts: [ "Destruction" ]
   - type: SpiderEgg
   - type: StaticPrice
-    price: 500 
+    price: 500
 
 #Spiders
-- type: entity 
+- type: entity
   parent: BaseSpiderEgg
   id: SpiderEggDrone
   categories: [ HideSpawnMenu ]
@@ -72,23 +72,23 @@
   - type: SpiderEgg
     incubationTime: 55
     spawnProtos:
-      - id: MobSpiderDrone
+      - id: MobSpiderDroneGhostRole
         amount: 1
 
 - type: entity
   parent: BaseSpiderEgg
-  id: SpiderEggHunter 
+  id: SpiderEggHunter
   categories: [ HideSpawnMenu ]
   name: the-egg-of-the-spider-guard
   description: Is it a gemstone? Is it an egg? It looks expensive.
   components:
   - type: SpiderEgg
-    incubationTime: 80 
+    incubationTime: 80
     spawnProtos:
-      - id: MobSpiderHunter
+      - id: MobSpiderHunterGhostRole
         amount: 1
 
-- type: entity 
+- type: entity
   parent: BaseSpiderEgg
   id: SpiderEggGhost
   categories: [ HideSpawnMenu ]
@@ -96,20 +96,20 @@
   description: Is this a gem? Is this an egg? It looks expensive.
   components:
   - type: SpiderEgg
-    incubationTime: 80 
+    incubationTime: 80
     spawnProtos:
-      - id: MobSpiderGhost  
-        amount: 1 
+      - id: MobSpiderGhostGhostRole
+        amount: 1
 
-- type: entity 
+- type: entity
   parent: BaseSpiderEgg
   id: SpiderEggShooter
-  categories: [ HideSpawnMenu ]
+  categories: [ HideSpawnMenu ]%
   name: spider hive egg
   description: Is this a gem? Is this an egg? It looks expensive.
   components:
   - type: SpiderEgg
-    incubationTime: 80 
+    incubationTime: 80
     spawnProtos:
-      - id: MobSpiderShooter
+      - id: MobSpiderShooterGhostRole
         amount: 1
