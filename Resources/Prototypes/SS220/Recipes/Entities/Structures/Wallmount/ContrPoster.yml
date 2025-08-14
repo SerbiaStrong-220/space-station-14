@@ -13,4 +13,4 @@
                 state: contrposter
               doAfter: 1
     - node: contrposter
-      entity: PosterContraband
+      entity: PosterContrabandSpawner

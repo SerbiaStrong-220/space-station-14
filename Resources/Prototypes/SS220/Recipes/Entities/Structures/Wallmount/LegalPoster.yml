@@ -13,4 +13,4 @@
                 state: legalposter
               doAfter: 1
     - node: legalposter
-      entity: PostersLegit
+      entity: PostersLegitSpawner
