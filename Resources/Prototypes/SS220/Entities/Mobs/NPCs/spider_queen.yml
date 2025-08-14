@@ -152,6 +152,7 @@
 #Spider queen
 - type: entity
   parent:
+  - MobSpiderQueenGhostRole
   - BaseMobSpiderQueen
   id: MobSpiderQueen
   name: Spider queen
@@ -256,6 +257,7 @@
 #Spiders-servants
 - type: entity
   parent:
+  - MobSpiderDroneGhostRole
   - BaseMobSpiderServant
   id: MobSpiderDrone
   name: spider drone
@@ -322,6 +324,7 @@
 
 - type: entity
   parent:
+  - MobSpiderHunterGhostRole
   - BaseMobSpiderServant
   id: MobSpiderHunter
   name: spider hunt
@@ -386,6 +389,7 @@
 
 - type: entity
   parent:
+  - MobSpiderGhostGhostRole
   - BaseMobSpiderServant
   id: MobSpiderGhost
   name: spider ghost
@@ -471,6 +475,7 @@
 
 - type: entity
   parent:
+  - MobSpiderShooterGhostRole
   - BaseMobSpiderServant
   id: MobSpiderShooter
   name: spider shooter
@@ -552,6 +557,7 @@
 
 - type: entity
   parent:
+  - MobSpiderLittleGhostRole
   - BaseMobSpiderQueen
   id: MobSpiderLittle
   name: small spider
@@ -626,8 +632,7 @@
       time: 216000 # 60h
     raffle:
       settings: default
-  - type: GhostRoleMobSpawner
-    prototype: MobSpiderQueen
+  - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
   name: Ghost role
@@ -645,8 +650,7 @@
       time: 18000 # 5h
     raffle:
       settings: short
-  - type: GhostRoleMobSpawner
-    prototype: MobSpiderDrone
+  - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
   name: Ghost role
@@ -664,8 +668,7 @@
       time: 18000 # 5h
     raffle:
       settings: short
-  - type: GhostRoleMobSpawner
-    prototype: MobSpiderHunter
+  - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
   name: Ghost role
@@ -683,8 +686,7 @@
       time: 18000 # 5h
     raffle:
       settings: short
-  - type: GhostRoleMobSpawner
-    prototype: MobSpiderGhost
+  - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
   name: Ghost role
@@ -702,8 +704,7 @@
       time: 3600 # 5h
     raffle:
       settings: short
-  - type: GhostRoleMobSpawner
-    prototype: MobSpiderShooter
+  - type: GhostTakeoverAvailable #Ghost role
 
 - type: entity
   name: Ghost role
@@ -721,5 +722,4 @@
       time: 3600 # 1h
     raffle:
       settings: short
-  - type: GhostRoleMobSpawner
-    prototype: MobSpiderLittle
+  - type: GhostTakeoverAvailable #Ghost role

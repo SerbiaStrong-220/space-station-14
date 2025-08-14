@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Server.Mind;
 using Content.Server.NPC;
 using Content.Server.NPC.Systems;
 using Content.Server.SS220.SpiderQueen.Components;
@@ -13,6 +14,7 @@ public sealed partial class SpiderEggSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly NPCSystem _npc = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
 
     public override void Update(float frameTime)
     {
@@ -38,6 +40,7 @@ public sealed partial class SpiderEggSystem : EntitySystem
         foreach (var proto in protos)
         {
             var ent = Spawn(proto, coordinates);
+            _mind.TransferTo(uid, ent); // transferto сам по себе если не может зарезолвить mind дает return, так что вообще без разницы на любые проверки
             if (component.EggOwner is { } owner)
                 _npc.SetBlackboard(ent, NPCBlackboard.FollowTarget, new EntityCoordinates(owner, Vector2.Zero));
         }
