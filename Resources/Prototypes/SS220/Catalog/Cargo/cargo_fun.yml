@@ -27,6 +27,6 @@
     sprite: SS220/Objects/Misc/Legalposter.rsi
     state: legalposter
   product: BoxLegalPosters
-  cost: 1500
+  cost: 500
   category: cargoproduct-category-name-fun
   group: market

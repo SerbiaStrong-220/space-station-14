@@ -1,5 +1,5 @@
 - type: entity
-  id: PostersLegit
+  id: PostersLegitSpawner
   name: random legit poster
   parent: VisibleMarkerBase
   components:
@@ -65,7 +65,7 @@
     chance: 1
 
 - type: entity
-  id: PosterContraband
+  id: PosterContrabandSpawner
   name: random contraband poster
   parent: VisibleMarkerBase
   components:

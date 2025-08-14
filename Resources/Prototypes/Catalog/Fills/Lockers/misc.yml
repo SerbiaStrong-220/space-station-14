@@ -198,9 +198,14 @@
     # Recursive
     - id: ClosetMaintenanceFilledRandom
       prob: 0.01
+    # Posters
+    - id: Contrposters
+      prob: 0.20
+    - id: Legalposters
+      prob: 0.25
 
 - type: entity
-  id: ClosetMaintenanceFilledRandom
+  id:
   suffix: Filled, Random
   parent: ClosetMaintenance
   components:
