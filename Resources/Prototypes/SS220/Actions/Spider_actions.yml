@@ -127,7 +127,7 @@
   - type: InstantAction
     event: !type:SpiderNearbySpawnEvent
       prototypes:
-      - id: MobSpiderLittleGhostRole
+      - id: MobSpiderLittle
         amount: 3
       offset: 0, 0.5
       cost: 20
