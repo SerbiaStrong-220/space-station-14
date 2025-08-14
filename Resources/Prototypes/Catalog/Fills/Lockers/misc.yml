@@ -205,7 +205,7 @@
       prob: 0.25
 
 - type: entity
-  id:
+  id: ClosetMaintenanceFilledRandom
   suffix: Filled, Random
   parent: ClosetMaintenance
   components:
