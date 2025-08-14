@@ -3,6 +3,8 @@ using Content.Server.Mind;
 using Content.Server.NPC;
 using Content.Server.NPC.Systems;
 using Content.Server.SS220.SpiderQueen.Components;
+using Content.Shared.Mind.Components;
+using Content.Shared.Speech;
 using Content.Shared.Storage;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
@@ -15,7 +17,15 @@ public sealed partial class SpiderEggSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly NPCSystem _npc = default!;
     [Dependency] private readonly MindSystem _mind = default!;
-
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<SpiderEggComponent, SpeakAttemptEvent>(OnTrySpeak);
+    }
+    private void OnTrySpeak(EntityUid uid, SpiderEggComponent comp, ref SpeakAttemptEvent ev)
+    {
+        ev.Cancel();
+    }
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -40,7 +50,8 @@ public sealed partial class SpiderEggSystem : EntitySystem
         foreach (var proto in protos)
         {
             var ent = Spawn(proto, coordinates);
-            _mind.TransferTo(uid, ent); // transferto сам по себе если не может зарезолвить mind дает return, так что вообще без разницы на любые проверки
+            if (TryComp<MindContainerComponent>(uid, out var mind) && mind.HasMind)
+                _mind.TransferTo(mind.Mind.Value, ent); // transferto сам по себе если не может зарезолвить mind дает return, так что вообще без разницы на любые проверки
             if (component.EggOwner is { } owner)
                 _npc.SetBlackboard(ent, NPCBlackboard.FollowTarget, new EntityCoordinates(owner, Vector2.Zero));
         }
