@@ -147,6 +147,7 @@
         - SpiderQueen
         - SpiderServant
         - SpiderLittle
+    - type: HealOnCollide
 
 - type: entity
   parent: BaseSpiderWeb
