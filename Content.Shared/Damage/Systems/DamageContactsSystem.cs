@@ -5,7 +5,8 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Content.Shared.SS220.Buckle; // ss220-flesh-kudzu-damage-fix
-using Content.Shared.SS220.Vehicle.Components; // ss220-flesh-kudzu-damage-fix
+using Content.Shared.SS220.Vehicle.Components;
+using Content.Shared.SS220.HealOnCollide.Bloodstream; // ss220-flesh-kudzu-damage-fix
 
 namespace Content.Shared.Damage.Systems;
 
@@ -15,6 +16,7 @@ public sealed class DamageContactsSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedBloodstreamExtensionSystem _sharedBloodstream = default!; //SS220 Add BloodlossModifier
 
     public override void Initialize()
     {
@@ -41,6 +43,8 @@ public sealed class DamageContactsSystem : EntitySystem
 
             if (damaged.Damage != null)
                 _damageable.TryChangeDamage(ent, damaged.Damage, ignoreResistances: damaged.IgnoreResistances, interruptsDoAfters: false); //SS220 Add IgnoreResistances param
+            if (damaged.BloodlossModifier.HasValue) //SS220 Add BloodlossModifier start
+                _sharedBloodstream.TryModifyBleedAmount(ent, damaged.BloodlossModifier.Value); //SS220 Add BloodlossModifier end
         }
     }
 
