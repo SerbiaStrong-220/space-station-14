@@ -4,7 +4,7 @@ using Content.Shared.Damage;
 using Content.Shared.Random;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.SS220.LimitationRevive;
+namespace Content.Shared.SS220.LimitationRevive;
 
 /// <summary>
 /// This is used for limiting the number of defibrillator resurrections

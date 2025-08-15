@@ -2,7 +2,7 @@ using Content.Server.Body.Components;
 using Content.Server.Medical.Components;
 using Content.Server.PowerCell;
 using Content.Server.Temperature.Components;
-using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
+using Content.Shared.SS220.LimitationRevive; //SS220 LimitationRevive
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
