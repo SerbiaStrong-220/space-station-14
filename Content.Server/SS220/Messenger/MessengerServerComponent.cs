@@ -2,9 +2,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Shared.Messenger;
+using Content.Shared.SS220.Messenger;
 
-namespace Content.Server.Messenger;
+namespace Content.Server.SS220.Messenger;
 
 [RegisterComponent]
 public sealed partial class MessengerServerComponent : Component
@@ -38,10 +38,10 @@ public sealed partial class MessengerServerComponent : Component
     {
         key = null;
 
-        if (!_clientToContact.ContainsKey(client))
+        if (!_clientToContact.TryGetValue(client, out var value))
             return false;
 
-        key = _clientToContact[client];
+        key = value;
 
         return true;
     }
@@ -59,10 +59,7 @@ public sealed partial class MessengerServerComponent : Component
     {
         var chats = _privateChats.Get(key);
 
-        if (chats == null)
-            return new();
-
-        return new HashSet<ChatKey>(chats);
+        return chats == null ? new() : new HashSet<ChatKey>(chats);
     }
 
     public HashSet<ChatKey> GetPublicChats()
@@ -91,9 +88,6 @@ public sealed partial class MessengerServerComponent : Component
         if (contact == null)
             return;
 
-        if (contact.Name == name)
-            return;
-
         contact.Name = name;
     }
 
@@ -105,8 +99,10 @@ public sealed partial class MessengerServerComponent : Component
     public MessengerChat GetChat(ChatKey key)
     {
         var chat = _chatsStore.Get(key);
+
         if (chat == null)
             return new();
+
         chat.Id = key.Id;
         return chat;
     }
@@ -116,11 +112,38 @@ public sealed partial class MessengerServerComponent : Component
         return _messagesStore.Add(message);
     }
 
+    public bool DeleteMessage(MessageKey key)
+    {
+        return _messagesStore.Delete(key);
+    }
+
+    public void ClearAllMessages()
+    {
+        foreach (var key in _messagesStore.GetAllKeys())
+        {
+            _messagesStore.Delete(key);
+        }
+
+        foreach (var chatKey in _chatsStore.GetAllKeys())
+        {
+            var chat = _chatsStore.Get(chatKey);
+            if (chat == null)
+                continue;
+
+            chat.MessagesId.Clear();
+            chat.LastMessageId = null;
+
+            _chatsStore.Set(chatKey, chat);
+        }
+    }
+
     public MessengerMessage GetMessage(MessageKey key)
     {
         var message = _messagesStore.Get(key);
+
         if (message == null)
             return new();
+
         message.Id = key.Id;
         return message;
     }
@@ -140,7 +163,8 @@ public sealed partial class MessengerServerComponent : Component
         AddPrivateChats(contact, new List<ChatKey> { chat });
     }
 
-    private void AddKeyToHasSet<TKey, TValue>(SequenceDataStore<TKey, HashSet<TValue>> storage, TKey key,
+    private void AddKeyToHasSet<TKey, TValue>(SequenceDataStore<TKey, HashSet<TValue>> storage,
+        TKey key,
         List<TValue> list) where TKey : IId, new()
     {
         var existList = storage.Get(key);
@@ -191,12 +215,12 @@ public abstract class Key : IId
 
     public override int GetHashCode()
     {
-        return (int) Id;
+        return (int)Id;
     }
 
     public override bool Equals(object? obj)
     {
-        return obj is Key && Equals((Key) obj);
+        return obj is Key key && Equals(key);
     }
 
     private bool Equals(Key p)
@@ -234,16 +258,19 @@ public sealed class SequenceDataStore<TKey, TValue> where TKey : IId, new() wher
 
     public TValue? Get(TKey key)
     {
-        if (!_storage.ContainsKey(key.Id))
-            return default;
-
-        return _storage[key.Id];
+        return !_storage.TryGetValue(key.Id, out var value) ? default : value;
     }
 
     public bool Delete(TKey key)
     {
         return _storage.Remove(key.Id);
     }
+
+    public IEnumerable<TKey> GetAllKeys()
+    {
+        return _storage.Keys.Select(id => new TKey { Id = id });
+    }
+
 }
 
 public interface IId
