@@ -12,7 +12,7 @@
     sound: !type:SoundPathSpecifier
       path: /Audio/Magic/fireball.ogg
     icon:
-      sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
+      sprite: SS220/Interface/Actions/Magic/spells_goon.rsi # SS220 Wizard getting used to
       state: fireball
   - type: TargetAction
     range: 60

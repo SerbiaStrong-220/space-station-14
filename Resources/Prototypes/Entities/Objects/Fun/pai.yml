@@ -199,7 +199,7 @@
   description: View a mass scanner interface.
   components:
   - type: Action
-    icon: { sprite: Interface/Actions/actions_ai.rsi, state: mass_scanner }
+    icon: { sprite: SS220/Interface/Actions/Silicon/ai.rsi, state: mass_scanner } # SS220 Cleaning in the "Actions" folder
     itemIconStyle: NoItem
   - type: InstantAction
     event: !type:OpenUiActionEvent
