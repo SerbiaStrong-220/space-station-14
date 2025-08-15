@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Antag;
-using Content.Server.Body.Components;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
@@ -11,12 +10,12 @@ using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Server.Popups;
 using Content.Server.Roles;
-using Content.Server.Speech;
 using Content.Server.SS220.MindSlave.Components;
 using Content.Server.SS220.MindSlave.Systems;
 using Content.Server.SS220.MindSlave.UI;
 using Content.Server.SS220.Telepathy;
 using Content.Shared.Alert;
+using Content.Shared.Body.Events;
 using Content.Shared.Cloning.Events;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Implants;
@@ -26,13 +25,13 @@ using Content.Shared.Mobs;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Objectives.Systems;
+using Content.Shared.Roles.Components;
+using Content.Shared.Speech;
 using Content.Shared.SS220.MindSlave;
 using Content.Shared.SS220.Telepathy;
-using Content.Shared.SS220.UpdateChannels;
 using Content.Shared.Tag;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.MindSlave;

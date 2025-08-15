@@ -125,7 +125,7 @@
     damage:
       types:
         Bloodloss: -10
-    ModifyBloodLevel: 15
+    modifyBloodLevel: 15
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
     healingEndSound:

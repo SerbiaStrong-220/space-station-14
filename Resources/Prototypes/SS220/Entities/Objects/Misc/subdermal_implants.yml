@@ -49,7 +49,7 @@
   components:
     - type: SubdermalImplant
       implantAction: ActionActivateThermalVision
-    - type: TriggerImplantAction
+    - type: TriggerOnActivateImplant
     - type: ThermalVisionImplant
     - type: Tag
       tags:
@@ -82,7 +82,7 @@
   components:
   - type: SubdermalImplant
     implantAction: ActionActivateDnaCopy
-  - type: TriggerImplantAction
+  - type: TriggerOnActivateImplant
   - type: TransferIdentity
   - type: HiddenDescription
     entries:
@@ -125,7 +125,7 @@
           Quantity: 30
         - ReagentId: Epinephrine
           Quantity: 28.5
-  - type: TriggerImplantAction
+  - type: TriggerOnActivateImplant
   - type: HiddenDescription
     entries:
     - label: hidden-desc-AdrenalImplant-medical

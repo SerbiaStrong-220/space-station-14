@@ -9,7 +9,7 @@
   components:
   - type: Sprite
     sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Grenades/usspnade.rsi
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 5
   - type: ExplodeOnTrigger
   - type: Explosive

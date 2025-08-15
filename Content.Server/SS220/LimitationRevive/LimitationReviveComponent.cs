@@ -2,6 +2,7 @@
 
 using Content.Shared.Damage;
 using Content.Shared.Random;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.LimitationRevive;
@@ -34,7 +35,7 @@ public sealed partial class LimitationReviveComponent : Component
     /// The exact time when the target will take damage
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public TimeSpan? DamageTime;
+    public TimeSpan? DamageCountingTime;
 
     /// <summary>
     /// How much and what type of damage will be dealt
@@ -65,4 +66,11 @@ public sealed partial class LimitationReviveComponent : Component
     /// </summary>
     [DataField]
     public float MetabolismModifierAffect = 0.2f; // original bed vaule is 10f (StasisBedComponent), not ok and i dont want to change official code
+
+    /// <summary>
+    /// Multiplier applied to <see cref="UpdateInterval"/> for adjusting based on metabolic rate multiplier.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadOnly)]
+    public float UpdateIntervalMultiplier = 1f;
+
 }

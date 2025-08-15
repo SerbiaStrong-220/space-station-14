@@ -26,8 +26,8 @@
     denyState: deny-unshaded
     ejectDelay: 1.9
     initialStockQuality: 0.33
-  - type: Advertise
-    pack: RrrantaAds
+  - type: DatasetVocalizer
+    dataset: RrrantaAds
   - type: SpeakOnUIClosed
     pack: RrrantaGoodbyes
   - type: PointLight

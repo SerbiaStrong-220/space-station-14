@@ -212,7 +212,7 @@
     CaramelBasedFood: 1
 
 - type: microwaveMealRecipe
-  id: double Caramel
+  id: doubleCaramel
   name: double caramelka
   result: DoubleCaramelCaneFood
   time: 20

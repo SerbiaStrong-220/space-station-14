@@ -1,10 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Medical.SuitSensors;
-using Content.Shared.Access.Components;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Medical.SuitSensor;
+using Content.Shared.Medical.SuitSensors;
 using Content.Shared.Pinpointer;
 using Content.Shared.SS220.Pinpointer;
 using Content.Shared.Whitelist;

@@ -33,7 +33,6 @@
             False: {state: "icon_empty"}
             True: {state: "icon"}
     - type: GunByHasAmmoVisuals
-      spriteLayer: null
       inhandVisuals:
         left:
         - state: fullammo-inhand-left
@@ -131,7 +130,7 @@
           softness: 1
           offset: "0, 0"
         - type: ExplodeOnTrigger
-        - type: SoundOnTrigger
+        - type: EmitSoundOnTrigger
           sound:
             path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
             params:

@@ -141,8 +141,9 @@
       - Wall
   - type: Sprite
     sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
-    shader: unshaded
     color: gray
+    layers:
+    - shader: unshaded
   - type: Icon
     sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
   - type: Destructible

@@ -42,7 +42,6 @@
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: gigahamlet
   - type: DamageStateVisuals
-    rotate: true
     states:
       Alive:
         Base: gigahamlet

@@ -73,22 +73,9 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                     _entMan.RemoveComponent<ItemReceiverComponent>(uid);
                 }
                 //FunTust: added a new variable responsible for whether the object is still in the hand during transmission
-                var foundInHand = false;
-                foreach (var hand in giverHands.Hands)
-                {
-                    if (hand.Value.Container!.Contains(comp.Item!.Value))
-                        //break;
-                        //FunTust: Now we check all hands and if found, we change the value of the variable
-                        foundInHand = true;
-                    /*
-                     FunTust: Actually, what caused the error was that if the object was in the second hand,
-                    then when we checked the first hand we didn't find it and deleted the transfer request.
-                    _alerts.ClearAlert(uid, AlertType.ItemOffer);
-                    _entMan.RemoveComponent<ItemReceiverComponent>(uid);
-                    */
-                }
-                //FunTust: Just moved it here with a variable check, maybe not the most elegant solution,
-                //but it should work and it shouldn't affect performance too much because there are only 2 hands.
+
+                var foundInHand = _hands.IsHolding((comp.Giver, giverHands), comp.Item!.Value);
+
                 if (!foundInHand)
                 {
                     _alerts.ClearAlert(uid, ItemOfferAlert);
@@ -99,7 +86,12 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
 
         private void AddOfferVerb(EntityUid uid, HandsComponent component, GetVerbsEvent<EquipmentVerb> args)
         {
-            if (!args.CanInteract || !args.CanAccess || args.Hands == null || args.Hands.ActiveHandEntity == null)
+            if (!args.CanInteract || !args.CanAccess || args.Hands == null)
+                return;
+
+            var handHeldEntity = _hands.GetActiveItem(args.User);
+
+            if (handHeldEntity is null)
                 return;
 
             EquipmentVerb verb = new EquipmentVerb()
@@ -129,10 +121,6 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                 _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
             };
         }
-        private bool FindFreeHand(HandsComponent component, [NotNullWhen(true)] out string? freeHand)
-        {
-            return (freeHand = component.GetFreeHandNames().Any() ? component.GetFreeHandNames().First() : null) != null;
-        }
 
         private void DoItemOffer(EntityUid user, EntityUid target)
         {
@@ -140,7 +128,7 @@ namespace Content.Server.SS220.ItemOfferVerb.Systems
                 return;
 
             // (fix https://github.com/SerbiaStrong-220/space-station-14/issues/2054)
-            if (HasComp<BorgChassisComponent>(user) || !FindFreeHand(handsComponent, out _) || target == user )
+            if (HasComp<BorgChassisComponent>(user) || _hands.CountFreeHands(target) == 0 || target == user)
                 return;
 
             if (!_hands.TryGetActiveItem(user, out var item))

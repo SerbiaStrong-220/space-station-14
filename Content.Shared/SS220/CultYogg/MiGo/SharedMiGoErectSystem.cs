@@ -84,7 +84,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             return;
         }
         var location = GetCoordinates(args.Location);
-        var tileRef = location.GetTileRef();
+        var tileRef = _turfSystem.GetTileRef(location);
 
         if (tileRef == null || _turfSystem.IsTileBlocked(tileRef.Value,
             Physics.CollisionGroup.MachineMask | Physics.CollisionGroup.Impassable | Physics.CollisionGroup.Opaque,

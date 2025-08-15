@@ -2,6 +2,7 @@
 
 namespace Content.Shared.SS220.SS220SharedTriggers.Events;
 
+// TODO-SS220 move to wizden system
 public sealed class SharedTriggerEvent : EntityEventArgs
 {
     /// <summary>

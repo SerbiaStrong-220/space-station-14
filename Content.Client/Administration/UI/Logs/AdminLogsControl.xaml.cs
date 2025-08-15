@@ -1,5 +1,5 @@
 using System.Linq;
-using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;
 using Content.Client.Administration.UI.CustomControls;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -15,20 +15,13 @@ namespace Content.Client.Administration.UI.Logs;
 [GenerateTypedNameReferences]
 public sealed partial class AdminLogsControl : Control
 {
-    /// <summary>
-    /// <para>List of used tags can be found here: Robust.Client/UserInterface/RichText/MarkupTagManager.cs</para>
-    /// <para>Pattern test online: https://regex101.com/r/3krK2I/2</para>
-    /// </summary>
-    private const string BBCodeRegexPattern = "((\\[|\\[/)(color|cmdlink|font|bold|italic)=?\\w*\\])";
     private readonly Comparer<AdminLogTypeButton> _adminLogTypeButtonComparer =
-        Comparer<AdminLogTypeButton>.Create(
-            (a, b) => string.Compare(a.Type.ToString(), b.Type.ToString(), StringComparison.Ordinal)
-        );
+        Comparer<AdminLogTypeButton>.Create((a, b) =>
+            string.Compare(a.Type.ToString(), b.Type.ToString(), StringComparison.Ordinal));
 
     private readonly Comparer<AdminLogPlayerButton> _adminLogPlayerButtonComparer =
-        Comparer<AdminLogPlayerButton>.Create(
-            (a, b) => string.Compare(a.Text, b.Text, StringComparison.Ordinal)
-        );
+        Comparer<AdminLogPlayerButton>.Create((a, b) =>
+            string.Compare(a.Text, b.Text, StringComparison.Ordinal));
 
     public AdminLogsControl()
     {
@@ -51,19 +44,8 @@ public sealed partial class AdminLogsControl : Control
 
         ResetRoundButton.OnPressed += ResetRoundPressed;
 
-        RecievedLogs = new List<SharedAdminLog>();
-
         SetImpacts(Enum.GetValues<LogImpact>().OrderBy(impact => impact).ToArray());
         SetTypes(Enum.GetValues<LogType>());
-        //SS220 admin_logs_time_filter end
-        EarlyBorderEditHours.OnTextChanged += e => OnEarlyBorderHoursChange(e.Text);
-        EarlyBorderEditMinutes.OnTextChanged += e => OnEarlyBorderMinutesChange(e.Text);
-        EarlyBorderEditSeconds.OnTextChanged += e => OnEarlyBorderSecondsChange(e.Text);
-
-        LateBorderEditHours.OnTextChanged += e => OnLateBorderHoursChange(e.Text);
-        LateBorderEditMinutes.OnTextChanged += e => OnLateBorderMinutesChange(e.Text);
-        LateBorderEditSeconds.OnTextChanged += e => OnLateBorderSecondsChange(e.Text);
-        //SS220 admin_logs_time_filter end
     }
 
     private int CurrentRound { get; set; }
@@ -73,12 +55,6 @@ public sealed partial class AdminLogsControl : Control
     private int ShownLogs { get; set; }
     private int TotalLogs { get; set; }
     private int RoundLogs { get; set; }
-
-    /// <summary>
-    /// Storage of recieved logs
-    /// </summary>
-    private List<SharedAdminLog> RecievedLogs { get; set; }
-
     public bool IncludeNonPlayerLogs { get; set; }
 
     public HashSet<LogType> SelectedTypes { get; } = new();
@@ -263,49 +239,22 @@ public sealed partial class AdminLogsControl : Control
     private void UpdateLogs()
     {
         ShownLogs = 0;
-        var logsText = "";
 
-        FormBordersDateTime(RecievedLogs); //SS220 admin_logs_time_filter
-
-        // build logs string
-        for (var i = RecievedLogs.Count - 1; i >= 0; i--)
+        foreach (var child in LogsContainer.Children)
         {
-            var log = RecievedLogs[i];
-            if (ShouldShowLog(log))
+            if (child is not AdminLogLabel log)
+            {
+                continue;
+            }
+
+            child.Visible = ShouldShowLog(log);
+            if (child.Visible)
             {
                 ShownLogs++;
-                logsText += string.Format(
-                    "{0:HH:mm:ss} - {1}\n{2}\n\n",
-                    log.Date,
-                    log.Type,
-                    log.Message
-                );
             }
         }
-        // set new text in TextEdit and clear BB tags only in result log string to
-        // preserve original log messages for posible future use
-        AdminLogsTextEdit.TextRope = new Robust.Shared.Utility.Rope.Leaf(
-                Regex.Replace(logsText, BBCodeRegexPattern, "")
-            );
-        UpdateCount(ShownLogs, RecievedLogs.Count);
-        ScrollLogsToBottom();
-    }
 
-    /// <summary>
-    /// Try to scroll AdminLogsTextEdit to the end
-    /// </summary>
-    private void ScrollLogsToBottom()
-    {
-        // find scrollbar in TextEdit's children
-        // it must be at index 1, but may be changed in future
-        for (var i = 0; i < AdminLogsTextEdit.ChildCount; i++)
-        {
-            if (AdminLogsTextEdit.GetChild(i) is VScrollBar scrollbar)
-            {
-                scrollbar.ValueTarget = float.PositiveInfinity;
-                break;
-            }
-        }
+        UpdateCount();
     }
 
     private bool ShouldShowType(AdminLogTypeButton button)
@@ -320,38 +269,31 @@ public sealed partial class AdminLogsControl : Control
                button.Text.Contains(PlayerSearch.Text, StringComparison.OrdinalIgnoreCase);
     }
 
-    private bool LogMatchesPlayerFilter(SharedAdminLog log)
+    private bool LogMatchesPlayerFilter(AdminLogLabel label)
     {
-        if (log.Players.Length == 0)
+        if (label.Log.Players.Length == 0)
             return SelectedPlayers.Count == 0 || IncludeNonPlayerLogs;
 
-        return SelectedPlayers.Overlaps(log.Players);
+        return SelectedPlayers.Overlaps(label.Log.Players);
     }
 
-    private bool ShouldShowLog(SharedAdminLog log)
+    private bool ShouldShowLog(AdminLogLabel label)
     {
         // Check log type
-        if (!SelectedTypes.Contains(log.Type))
+        if (!SelectedTypes.Contains(label.Log.Type))
             return false;
 
         // Check players
-        if (!LogMatchesPlayerFilter(log))
+        if (!LogMatchesPlayerFilter(label))
             return false;
 
         // Check impact
-        if (!SelectedImpacts.Contains(log.Impact))
+        if (!SelectedImpacts.Contains(label.Log.Impact))
             return false;
 
         // Check search
-        if (!log.Message.Contains(LogSearch.Text, StringComparison.OrdinalIgnoreCase))
+        if (!label.Log.Message.Contains(LogSearch.Text, StringComparison.OrdinalIgnoreCase))
             return false;
-        //SS220 admin_logs_time_filter start
-        if (!CheckEarlyTimeFilter(log))
-            return false;
-
-        if (!CheckLateTimeFilter(log))
-            return false;
-        //SS220 admin_logs_time_filter end
 
         return true;
     }
@@ -522,14 +464,32 @@ public sealed partial class AdminLogsControl : Control
 
     public void AddLogs(List<SharedAdminLog> logs)
     {
-        RecievedLogs.AddRange(logs);
-        UpdateLogs();
+        var span = CollectionsMarshal.AsSpan(logs);
+        for (var i = 0; i < span.Length; i++)
+        {
+            ref var log = ref span[i];
+            var separator = new HSeparator();
+            var label = new AdminLogLabel(ref log, separator);
+            label.Visible = ShouldShowLog(label);
+
+            TotalLogs++;
+            if (label.Visible)
+            {
+                ShownLogs++;
+            }
+
+            LogsContainer.AddChild(label);
+            LogsContainer.AddChild(separator);
+        }
+
+        UpdateCount();
     }
 
     public void SetLogs(List<SharedAdminLog> logs)
     {
-        RecievedLogs = logs;
-        UpdateLogs();
+        LogsContainer.RemoveAllChildren();
+        UpdateCount(0, 0);
+        AddLogs(logs);
     }
 
     public void UpdateCount(int? shown = null, int? total = null, int? round = null)

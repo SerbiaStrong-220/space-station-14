@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Client.Gameplay;
+using Content.Client.Hands.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.RCD.Systems;
@@ -22,6 +23,7 @@ public sealed class AlignPlacerItemConstruction : PlacementMode
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IStateManager _stateManager = default!;
+    [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
 
     private readonly RCDSystem _rcdSystem;
@@ -93,7 +95,7 @@ public sealed class AlignPlacerItemConstruction : PlacementMode
         if (!_entityManager.TryGetComponent<HandsComponent>(player, out var hands))
             return false;
 
-        var heldEntity = hands.ActiveHand?.HeldEntity;
+        var heldEntity = _hands.GetActiveItem((player.Value, hands));
 
         if (!_entityManager.TryGetComponent<PlacerItemComponent>(heldEntity, out var placerItemComp))
             return false;

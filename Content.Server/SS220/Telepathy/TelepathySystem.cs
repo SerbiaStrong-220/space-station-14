@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Server.Administration.Logs;
-using Content.Server.Chat.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
@@ -46,9 +46,11 @@ public sealed class TelepathySystem : EntitySystem
 
     private void OnRoundStart(RoundStartedEvent args)
     {
-        foreach (var channel in _dynamicChannels)
+        var cachedChannels = _dynamicChannels.Keys.ToList();
+
+        foreach (var channel in cachedChannels)
         {
-            FreeUniqueTelepathyChannel(channel.Key);
+            FreeUniqueTelepathyChannel(channel);
         }
     }
 

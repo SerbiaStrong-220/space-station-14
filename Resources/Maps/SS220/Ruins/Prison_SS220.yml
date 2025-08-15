@@ -1502,24 +1502,18 @@ entities:
     - type: Transform
       pos: 3.5,-16.5
       parent: 1
-    - type: PaintableAirlock
-      department: Cargo
   - uid: 25
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -5.5,-8.5
       parent: 1
-    - type: PaintableAirlock
-      department: Engineering
   - uid: 26
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 6.5,-6.5
       parent: 1
-    - type: PaintableAirlock
-      department: Medical
   - uid: 27
     components:
     - type: Transform
@@ -1532,8 +1526,6 @@ entities:
     - type: Transform
       pos: 9.5,-10.5
       parent: 1
-    - type: PaintableAirlock
-      department: Medical
   - uid: 29
     components:
     - type: Transform
@@ -8626,7 +8618,7 @@ entities:
 
 
 
-                  [italic]Уважаемый Заключенный каторги! На каторге 
+                  [italic]Уважаемый Заключенный каторги! На каторге
                   присуствует агрессивная фауна и большое
                   количество мин. Так что, береги свои ноги,
                   Путник![italic]

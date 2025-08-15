@@ -1,9 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Body.Components;
-using Content.Server.SS220.Autoinjector;
 using Content.Server.SS220.CultYogg.Pond;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -17,6 +16,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
+using Content.Shared.SS220.AutoInjector;
 using Content.Shared.SS220.CultYogg.SedativeSting;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Melee.Events;

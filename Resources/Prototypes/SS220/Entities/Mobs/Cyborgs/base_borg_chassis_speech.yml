@@ -1,7 +1,7 @@
 #BaseBorgChassisSpeech отличается от BaseBorgChassis тем, что у него не имеется компонента UnblockableSpeech, дабы mimesPower работал и борг не мог говорить, пока не снимет обет
 - type: entity
   parent: [BaseMob, StripableInventoryBase]
-  id: BaseBorgChassisSpeech 
+  id: BaseBorgChassisSpeech
   name: cyborg
   description: A man-machine hybrid that assists in station activity. They love being asked to state their laws over and over.
   save: false
@@ -174,7 +174,9 @@
   - type: Lock
     locked: true
     unlockOnClick: false
-  - type: ActivatableUIRequiresLock
+  - type: UIRequiresLock
+    userInterfaceKeys:
+    - enum.BorgUiKey.Key
   - type: LockedWiresPanel
   - type: Damageable
     damageContainer: Silicon
@@ -221,8 +223,8 @@
       id: blinking
       interpolate: Nearest
       maxDuration: 1.0
-      minValue: 0.1
-      maxValue: 2.0
+      startValue: 0.1
+      endValue: 2.0
       isLooped: true
   - type: ToggleableLightVisuals
   - type: PointLight

@@ -141,7 +141,7 @@
     - state: snotlet
   - type: Slippery
     slipData:
-      paralyzeTime: 1.5
+      knockdownTime: 1.5
       launchForwardsMultiplier: 1.5
   - type: SolutionContainerManager
     solutions:

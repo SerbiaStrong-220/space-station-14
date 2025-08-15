@@ -73,12 +73,14 @@
     - fullstatereset
     - exec # macro moment #SS220 exec-command-perms-change
     - dumpentities
+    - showaccessreaders
 
 - Flags: MAPPING
   Commands:
     - mapping
     - toggleautosave
     - toggledecals
+    - showaccessreaders
 
 - Flags: QUERY
   Commands:

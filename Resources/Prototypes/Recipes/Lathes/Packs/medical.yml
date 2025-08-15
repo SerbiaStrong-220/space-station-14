@@ -45,6 +45,8 @@
   - BodyBag
   - WhiteCane
   - MedAutoinjector #ss220 Autoinjecors update
+  - OffsetCane
+  - OffsetCaneWood
 
 - type: latheRecipePack
   id: RollerBedsStatic

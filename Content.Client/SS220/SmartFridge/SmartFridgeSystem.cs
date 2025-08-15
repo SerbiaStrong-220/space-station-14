@@ -15,11 +15,11 @@ public sealed class SmartFridgeSystem : SharedSmartFridgeSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SmartFridgeComponent, AppearanceChangeEvent>(OnAppearanceChange);
-        SubscribeLocalEvent<SmartFridgeComponent, AnimationCompletedEvent>(OnAnimationCompleted);
+        SubscribeLocalEvent<SmartFridge220Component, AppearanceChangeEvent>(OnAppearanceChange);
+        SubscribeLocalEvent<SmartFridge220Component, AnimationCompletedEvent>(OnAnimationCompleted);
     }
 
-    private void OnAnimationCompleted(EntityUid uid, SmartFridgeComponent component, AnimationCompletedEvent args)
+    private void OnAnimationCompleted(EntityUid uid, SmartFridge220Component component, AnimationCompletedEvent args)
     {
         if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
@@ -33,7 +33,7 @@ public sealed class SmartFridgeSystem : SharedSmartFridgeSystem
         UpdateAppearance(uid, visualState, component, sprite);
     }
 
-    private void OnAppearanceChange(EntityUid uid, SmartFridgeComponent component, ref AppearanceChangeEvent args)
+    private void OnAppearanceChange(EntityUid uid, SmartFridge220Component component, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
             return;
@@ -47,7 +47,7 @@ public sealed class SmartFridgeSystem : SharedSmartFridgeSystem
         UpdateAppearance(uid, visualState, component, args.Sprite);
     }
 
-    private void UpdateAppearance(EntityUid uid, SmartFridgeVisualState visualState, SmartFridgeComponent component, SpriteComponent sprite)
+    private void UpdateAppearance(EntityUid uid, SmartFridgeVisualState visualState, SmartFridge220Component component, SpriteComponent sprite)
     {
         SetLayerState(SmartFridgeVisualLayers.Base, component.OffState, sprite);
 

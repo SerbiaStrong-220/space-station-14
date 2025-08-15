@@ -209,15 +209,18 @@ namespace Content.Shared.VendingMachines
         #endregion
     }
 
-    [Serializable, NetSerializable]
-    public sealed class VendingMachineInventoryEntry
+    [Serializable, NetSerializable, DataDefinition]
+    public sealed partial class VendingMachineInventoryEntry
     {
-        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField]
         public InventoryType Type;
-        [ViewVariables(VVAccess.ReadWrite)]
+
+        [DataField]
         public string ID;
-        [ViewVariables(VVAccess.ReadWrite)]
+
+        [DataField]
         public uint Amount;
+
         // SS220 Injectable vends start
         [ViewVariables(VVAccess.ReadWrite)]
         public List<NetEntity> EntityUids;

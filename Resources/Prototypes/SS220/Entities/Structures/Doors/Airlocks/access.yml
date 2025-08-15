@@ -50,8 +50,6 @@
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/clown.rsi
-  - type: PaintableAirlock
-    group: Glass
 
 - type: entity
   parent: AirlockClown
@@ -90,8 +88,6 @@
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/centcomm_glass.rsi
-  - type: PaintableAirlock
-    group: Glass
   - type: Wires
     layoutId: AirlockCommand
 
@@ -102,8 +98,6 @@
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/centcomm_glass.rsi
-  - type: PaintableAirlock
-    group: Glass
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsCentralCommand ]
@@ -210,8 +204,6 @@
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/Airlocks/Glass/ussp_basic.rsi
-  - type: PaintableAirlock
-    group: Glass
 
 - type: entity
   parent: AirlockGlassUssp

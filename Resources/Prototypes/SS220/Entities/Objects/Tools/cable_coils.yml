@@ -76,14 +76,14 @@
   - type: Stack
     count: 10
 
-- type: entity
-  parent: CableHVStack10Live
-  id: CableHVStackLingering10Live
-  suffix: Lingering, 10
-  components:
-  - type: Stack
-    lingering: true
-    count: 10
+# - type: entity
+#   parent: CableHVStack10Live
+#   id: CableHVStackLingering10Live
+#   suffix: Lingering, 10
+#   components:
+#   - type: Stack
+#     lingering: true
+#     count: 10
 
 - type: entity
   parent: CableHVStackLive
@@ -138,14 +138,14 @@
   - type: Stack
     count: 10
 
-- type: entity
-  parent: CableMVStack10Live
-  id: CableMVStackLingering10Live
-  suffix: Lingering, 10
-  components:
-  - type: Stack
-    lingering: true
-    count: 10
+# - type: entity
+#   parent: CableMVStack10Live
+#   id: CableMVStackLingering10Live
+#   suffix: Lingering, 10
+#   components:
+#   - type: Stack
+#     lingering: true
+#     count: 10
 
 - type: entity
   parent: CableMVStackLive
@@ -200,14 +200,14 @@
     - type: Stack
       count: 10
 
-- type: entity
-  parent: CableApcStack10Live
-  id: CableApcStackLingering10Live
-  suffix: Lingering, 10
-  components:
-  - type: Stack
-    lingering: true
-    count: 10
+# - type: entity
+#   parent: CableApcStack10Live
+#   id: CableApcStackLingering10Live
+#   suffix: Lingering, 10
+#   components:
+#   - type: Stack
+#     lingering: true
+#     count: 10
 
 - type: entity
   parent: CableApcStackLive

@@ -163,6 +163,7 @@
   - type: PdaBorderColor
     borderColor: "#98afb8"
     accentHColor: "#542a6c"
+  - type: Sprite
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix

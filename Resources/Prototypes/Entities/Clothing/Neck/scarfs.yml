@@ -144,6 +144,8 @@
         - Scarf # SS220-pr: FIX CLOTHING TAGS
         - ClothMade # SS220-pr: FIX CLOTHING TAGS
         - WhitelistChameleon # SS220-pr: FIX CLOTHING TAGS
+    - type: StaticPrice
+      price: 500
 
 - type: entity
   parent: [ ClothingScarfBase]
@@ -155,6 +157,8 @@
       sprite: Clothing/Neck/Scarfs/syndiered.rsi
     - type: Clothing
       sprite: Clothing/Neck/Scarfs/syndiered.rsi
+    - type: StaticPrice
+      price: 500
 
 - type: entity
   parent: [ ClothingScarfBase]

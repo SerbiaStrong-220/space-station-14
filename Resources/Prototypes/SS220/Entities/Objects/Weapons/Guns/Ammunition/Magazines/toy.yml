@@ -100,7 +100,7 @@
   components:
     - type: Sprite
       layers:
-        - state: red
+        - state: base
           map: ["enum.GunVisualLayers.Base"]
         - state: mag-1
           map: ["enum.GunVisualLayers.Mag"]
@@ -111,7 +111,7 @@
   components:
     - type: Sprite
       layers:
-        - state: red
+        - state: base
           map: ["enum.GunVisualLayers.Base"]
         - state: mag-1
           map: ["enum.GunVisualLayers.Mag"]
@@ -122,7 +122,7 @@
   components:
     - type: Sprite
       layers:
-        - state: red
+        - state: base
           map: ["enum.GunVisualLayers.Base"]
         - state: mag-1
           map: ["enum.GunVisualLayers.Mag"]
@@ -132,8 +132,8 @@
   parent: [ BaseMagazineToyCaps, BaseMagazinePistolCaselessRifleToy ]
   components:
   - type: Sprite
-    slayers:
-    - state: red
+    layers:
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -191,7 +191,7 @@
   components:
     - type: Sprite
       layers:
-        - state: red
+        - state: base
           map: ["enum.GunVisualLayers.Base"]
         - state: mag-1
           map: ["enum.GunVisualLayers.Mag"]
@@ -202,7 +202,7 @@
   components:
     - type: Sprite
       layers:
-        - state: red
+        - state: base
           map: ["enum.GunVisualLayers.Base"]
         - state: mag-1
           map: ["enum.GunVisualLayers.Mag"]
@@ -213,7 +213,7 @@
   components:
     - type: Sprite
       layers:
-        - state: red
+        - state: base
           map: ["enum.GunVisualLayers.Base"]
         - state: mag-1
           map: ["enum.GunVisualLayers.Mag"]
@@ -223,8 +223,8 @@
   parent: [ BaseMagazineToyFoam, BaseMagazinePistolCaselessRifleToy ]
   components:
   - type: Sprite
-    slayers:
-    - state: red
+    layers:
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]

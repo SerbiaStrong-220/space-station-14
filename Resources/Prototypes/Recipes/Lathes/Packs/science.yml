@@ -39,6 +39,7 @@
   #- DeviceQuantumSpinInverter #SS220 - Until better times
   - DeviceDesynchronizer
   - ThermalVisorRND # SS220 Thermals
+  - ClothingBackpackHarmpack
 
 - type: latheRecipePack
   id: ScienceClothing
@@ -46,6 +47,7 @@
   - ClothingShoesBootsMagSci
   - ClothingShoesBootsMoon
   - ClothingShoesBootsSpeed
+  - ClothingShoesBootsJump
   - ClothingBackpackHolding
   - ClothingBackpackSatchelHolding
   - ClothingBackpackDuffelHolding

@@ -11,7 +11,6 @@ using System.Numerics;
 using System.Linq;
 using Robust.Client.Graphics;
 using Content.Shared.Atmos;
-using Vector3 = Robust.Shared.Maths.Vector3;
 
 namespace Content.Client.SS220.SuperMatter.Ui;
 

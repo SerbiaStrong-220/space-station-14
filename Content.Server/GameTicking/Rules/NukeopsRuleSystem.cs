@@ -17,6 +17,7 @@ using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Nuke;
 using Content.Shared.NukeOps;
+using Content.Shared.Roles.Components;
 using Content.Shared.Store;
 using Content.Shared.Tag;
 using Content.Shared.Zombies;
@@ -26,12 +27,11 @@ using Robust.Shared.Utility;
 using Content.Server.StationEvents.Components;
 using System.Linq;
 using Content.Server.AlertLevel;
+using Content.Shared.Station.Components;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
-using Content.Server.Maps;
 using Content.Server.Station.Systems;
 using Content.Shared.Fax.Components;
-using Content.Server.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.GameTicking.Rules;
@@ -50,11 +50,8 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     [Dependency] private readonly StationSystem _station = default!; //ss220 nukeops autogamma
     [Dependency] private readonly GameTicker _gameTicker = default!; //ss220 nukeops autogamma
 
-    [ValidatePrototypeId<CurrencyPrototype>]
-    private const string TelecrystalCurrencyPrototype = "Telecrystal";
-
-    [ValidatePrototypeId<TagPrototype>]
-    private const string NukeOpsUplinkTagPrototype = "NukeOpsUplink";
+    private static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
+    private static readonly ProtoId<TagPrototype> NukeOpsUplinkTagPrototype = "NukeOpsUplink";
 
     [ValidatePrototypeId<TagPrototype>]
     private const string LoneOpsUplinkTagPrototype = "LoneOpsUplink"; //SS220 Lone-Ops-War

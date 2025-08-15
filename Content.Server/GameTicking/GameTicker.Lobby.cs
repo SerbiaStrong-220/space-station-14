@@ -8,6 +8,7 @@ using Content.Server.Administration.Managers;
 using Content.Server.AlertLevel;
 using Content.Server.Station.Systems;
 using Content.Shared.Administration;
+using Content.Shared.Station.Components;
 
 namespace Content.Server.GameTicking
 {
@@ -34,7 +35,6 @@ namespace Content.Server.GameTicking
         [ViewVariables]
         private bool _roundStartCountdownHasNotStartedYetDueToNoPlayers;
 
-        [Dependency] private readonly IAdminManager _adminMgr = default!;
         [Dependency] private readonly StationSystem _stationSystem = default!; //ss220 add alert level in lobby start
 
         //ss220 add alert level in lobby start
@@ -92,7 +92,7 @@ namespace Content.Server.GameTicking
 
             // SS220 Ограничение информации для пользователей о текущем режиме игры.
             // Для не администрации текущий режим всегда отображается как секрет.
-            var isAdmin = _adminMgr.HasAdminFlag(session, AdminFlags.Admin);
+            var isAdmin = _adminManager.HasAdminFlag(session, AdminFlags.Admin);
 
             var gmTitle = isAdmin
                 ? Loc.GetString(preset.ModeTitle)

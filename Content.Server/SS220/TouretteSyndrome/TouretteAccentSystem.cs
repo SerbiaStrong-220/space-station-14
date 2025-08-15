@@ -5,6 +5,7 @@ using Robust.Shared.Random;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Linq;
+using Content.Shared.Speech;
 
 namespace Content.Server.Speech.EntitySystems;
 

@@ -40,9 +40,9 @@
     noRot: true
     drawdepth: Ghosts
     sprite: SS220/Mobs/CultYogg/nyarlathotep.rsi
-    shader: unshaded
     layers:
     - state: nyarlathoteph
+      shader: unshaded
   - type: ChasingWalk
     impulseInterval: 1
     minSpeed: 3

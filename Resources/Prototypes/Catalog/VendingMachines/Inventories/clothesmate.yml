@@ -81,6 +81,7 @@
     ClothingHeadFishCap: 2
     ClothingHeadRastaHat: 2
     #ClothingHeadHatNewYearsCap: 5 #SS220 New years cap \ Убрать после нового года
+    ClothingHeadPropellerHat: 2
     ClothingBeltStorageWaistbag: 3
     ClothingEyesGlasses: 6
     ClothingHandsGlovesColorBlack: 4
@@ -103,11 +104,11 @@
     ToyFigurineGreytider: 1
     ClothingBackpackSatchelSmugglerUnanchored: 1
     ClothingHeadHatSolidHeadband: 2
-  # DO NOT ADD MORE, USE UNIFORM DYING
-  emaggedInventory:
     # SS220 VASH THE STAMPEDE KIT START
     ClothingOuterScarletTyphoon: 1
     ClothingUniformWastelandSuit: 1
     ClothingHandsStormgloves: 1
     ClothingShoesWandererBoots: 1
     # SS220 VASH THE STAMPEDE KIT END
+  # DO NOT ADD MORE, USE UNIFORM DYING
+

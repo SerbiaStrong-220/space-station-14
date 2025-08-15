@@ -49,6 +49,7 @@
                     <Control HorizontalExpand="True"/>
                     <Label Name="Count" Access="Public"/>
                     <Control HorizontalExpand="True"/>
+                    <Button Name="ExportLogs" Access="Public" Text="{Loc admin-logs-export}"/>
                     <Button Name="PopOutButton" Access="Public" Text="{Loc admin-logs-pop-out}"/>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal">
@@ -57,6 +58,7 @@
                     <Button Name="RefreshButton" Access="Public" Text="{Loc admin-logs-refresh}" StyleClasses="ButtonSquare"/>
                     <Button Name="NextButton" Access="Public" Text="{Loc admin-logs-next}" StyleClasses="OpenLeft"/>
                 </BoxContainer>
+                <!-- SS220-time-filter-add-begin -->
                 <BoxContainer Name="TimeFilterContainer" HorizontalExpand="True">
                     <Collapsible Orientation="Vertical">
                         <CollapsibleHeading Title="{Loc admin-logs-time-filter-title}"/>
@@ -94,8 +96,9 @@
                     </Collapsible>
                 </BoxContainer>
                 <aui:VSeparator/>
-                <ScrollContainer Name="AdminLogsScrollContainer" Access="Public" VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
-                    <TextEdit Name="AdminLogsTextEdit" Access="Public" VerticalExpand="True"/>
+                <!-- SS220-time-filter-add-end -->
+                <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
+                    <BoxContainer Name="LogsContainer" Access="Public" Orientation="Vertical" VerticalExpand="True"/>
                 </ScrollContainer>
             </BoxContainer>
         </BoxContainer>

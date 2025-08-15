@@ -21,8 +21,8 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     private const float RadiationPerEnergy = 70f;
 
-    private const float IntegrityDamageICAnnounceDelay = 12f;
-    private const float IntegrityDamageStationAnnouncementDelay = 8f;
+    private const float IntegrityDamageICAnnounceDelay = 60f;
+    private const float IntegrityDamageStationAnnouncementDelay = 5f * 60f;
 
     private const float ReleasedEnergyToGasHeat = 60f;
 

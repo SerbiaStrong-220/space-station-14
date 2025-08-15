@@ -3,7 +3,7 @@
 using System.Text.RegularExpressions;
 using Robust.Shared.Random;
 using Content.Server.SS220.Speech.Components;
-using Content.Server.Speech;
+using Content.Shared.Speech;
 
 namespace Content.Server.SS220.Speech.EntitySystems;
 

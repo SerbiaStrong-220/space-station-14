@@ -97,7 +97,6 @@
       Dead: 0
     baseDecayRate: 0.1
   - type: DamageStateVisuals
-    rotate: true
     states:
       Alive:
         Base: regalrat
@@ -115,7 +114,7 @@
       - !type:OverallPlaytimeRequirement
         time: 72000 #SS220 ghostrole-times (20h overall) end
     mindRoles:
-    - MindRoleGhostRoleFreeAgent
+    - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
   - type: GhostTakeoverAvailable

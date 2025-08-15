@@ -11,6 +11,9 @@
             "name": "base"
         },
         {
+            "name": "stripe"
+        },
+        {
             "name": "inhand-left-mag",
             "directions": 4
         },

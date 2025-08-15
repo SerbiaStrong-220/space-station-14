@@ -11,7 +11,7 @@ namespace Content.Client.SS220.SmartFridge
     public sealed class SmartFridgeBoundUserInterface : BoundUserInterface
     {
         [ViewVariables]
-        private SmartFridgeMenu? _menu;
+        private SmartFridge220Menu? _menu;
 
         [ViewVariables]
         private List<VendingMachineInventoryEntry> _cachedInventory = new();
@@ -27,7 +27,7 @@ namespace Content.Client.SS220.SmartFridge
         {
             base.Open();
 
-            _menu = new SmartFridgeMenu { Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName };
+            _menu = new SmartFridge220Menu { Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName };
 
             _menu.OnClose += Close;
             _menu.OnItemSelected += OnItemSelected;

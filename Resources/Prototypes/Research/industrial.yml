@@ -15,6 +15,7 @@
   - OreProcessorIndustrialMachineCircuitboard
   - ClothingMaskWeldingGas
   - ClothingEyesHudSupply #ss220 HUD CARGO ADD
+  - ClothingShoesBootsJump
 
 - type: technology
   id: SpaceScanning

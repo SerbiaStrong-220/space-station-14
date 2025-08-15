@@ -13,6 +13,7 @@
     tags:
     - SuitEVA
     - MonkeyWearable
+    - CorgiWearable
     - WhitelistChameleon
 
 #Syndicate EVA
@@ -39,6 +40,8 @@
       Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
+  - type: StaticPrice
+    price: 1000 # Helmet is 500
 
 #Emergency EVA
 - type: entity
@@ -74,6 +77,12 @@
           tags:
           - Radio
   #ss220 handheld radio on outer clothing end
+  - type: Tag
+    tags:
+    - CorgiWearable
+    - ScurretWearable
+    - MonkeyWearable
+    - WhitelistChameleon
 
 #Prisoner EVA
 - type: entity
@@ -184,3 +193,7 @@
           tags:
           - Radio
   #ss220 handheld radio on outer clothing end
+  - type: Tag
+    tags:
+    - CorgiWearable
+    - WhitelistChameleon

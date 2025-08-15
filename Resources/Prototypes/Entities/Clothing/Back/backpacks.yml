@@ -40,6 +40,10 @@
     microFiberMaterial: micro-fibers-textile
     microFiberColor: micro-fibers-grey
 #SS220 Micro_fibers end
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - Backpack
 
 - type: entity
   parent: ClothingBackpack
@@ -448,9 +452,10 @@
   #SS220-underused-uplinks-stuff begin
   - type: Storage
     grid:
-    - 0,0,7,4
-    maxItemSize: Huge
-  #SS220-underused-uplinks-stuff end
+    - 0,0,7,3
+    - 8,1,8,3
+  - type: StaticPrice
+    price: 1000 #SS220-underused-uplinks-stuff end
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-reinforced-textile
@@ -517,9 +522,9 @@
     equipDelay: 5 # to avoid accidentally falling into the trap associated with SelfUnremovableClothing
   - type: SelfUnremovableClothing
   - type: ShockOnTrigger
+    targetContainer: true
     damage: 5
     duration: 3
-    cooldown: 4
   - type: TriggerOnSignal
   - type: DeviceLinkSink
     ports:
