@@ -27,6 +27,7 @@ using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.SS220.BackEndApi;
 using Content.Server.SS220.Discord;
+using Content.Server.SS220.RoundEndInfo;
 using Content.Server.Voting.Managers;
 using Content.Server.Worldgen.Tools;
 using Content.Shared.Administration.Logs;
@@ -70,6 +71,7 @@ namespace Content.Server.IoC
             IoCManager.Register<SponsorsManager>(); // Corvax-Sponsors
             IoCManager.Register<JoinQueueManager>(); // Corvax-Queue
             IoCManager.Register<TTSManager>(); // Corvax-TTS
+            IoCManager.Register<RoundEndInfoManager>(); //ss220 add additional info for round
             IoCManager.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
             IoCManager.Register<ServerInfoManager>();
             IoCManager.Register<PoissonDiskSampler>();
