@@ -726,5 +726,4 @@ public sealed partial class MiGoEraseDoAfterEvent : SimpleDoAfterEvent
 public sealed partial class MiGoCaptureDoAfterEvent : SimpleDoAfterEvent
 {
     public MiGoCapturePrototype? Recipe;
-    //public EntityPrototype? BuildingProto;
 }
