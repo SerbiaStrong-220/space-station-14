@@ -19,24 +19,37 @@ public sealed class HealOnCollideSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<HealOnCollideComponent, StartCollideEvent>(StartCollide);
+        SubscribeLocalEvent<HealOnCollideComponent, EndCollideEvent>(EndCollide);
+    }
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<HealOnCollideComponent>();
+        while (query.MoveNext(out var _, out var comp))
+        {
+            foreach (var other in comp.Collided)
+            {
+                if (comp.Healed.TryGetValue(other, out var timeSpan))
+                {
+                    if (timeSpan + TimeSpan.FromSeconds(comp.Cooldown) > _gameTiming.CurTime)
+                        continue;
+                    comp.Healed[other] = _gameTiming.CurTime;
+                }
+                else
+                    comp.Healed.Add(other, _gameTiming.CurTime);
+                _damageableSystem.TryChangeDamage(other, comp.Heal);
+                if (comp.StopBlooding)
+                    _bloodstreamSystem.TryModifyBleedAmount(other, comp.BloodlossModifier);
+            }
+        }
     }
     private void StartCollide(EntityUid uid, HealOnCollideComponent comp, ref StartCollideEvent ev)
     {
-        Log.Debug("0000");
-        if (!comp.Healed.TryGetValue(ev.OtherEntity, out var timeSpan))
-        {
-            comp.Healed.Add(ev.OtherEntity, _gameTiming.CurTime);
-            _damageableSystem.TryChangeDamage(ev.OtherEntity, comp.Heal);
-            if (comp.StopBlooding)
-                _bloodstreamSystem.TryModifyBleedAmount(ev.OtherEntity, comp.BloodlossModifier);
-            return;
-        }
-        Log.Debug((timeSpan + TimeSpan.FromSeconds(comp.Cooldown) > _gameTiming.CurTime).ToString());
-        Log.Debug(timeSpan.ToString());
-        if (timeSpan + TimeSpan.FromSeconds(comp.Cooldown) > _gameTiming.CurTime) return;
-        comp.Healed[ev.OtherEntity] = _gameTiming.CurTime;
-        _damageableSystem.TryChangeDamage(ev.OtherEntity, comp.Heal);
-        if (comp.StopBlooding)
-            _bloodstreamSystem.TryModifyBleedAmount(ev.OtherEntity, comp.BloodlossModifier);
+        comp.Collided.Add(ev.OtherEntity);
+    }
+    private void EndCollide(EntityUid uid, HealOnCollideComponent comp, ref EndCollideEvent ev)
+    {
+        comp.Collided.Remove(ev.OtherEntity);
     }
 }

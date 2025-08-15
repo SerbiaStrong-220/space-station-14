@@ -12,15 +12,16 @@ public sealed partial class HealOnCollideComponent : Component
     {
         DamageDict = new()
         {
-            { "Blunt", 0 }
+            { "Bloodloss", 5 }
         }
     };
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public bool StopBlooding = true;
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public int BloodlossModifier = -10;
+    public float BloodlossModifier = -12; // wanna 12.5, but float can't. like 5% at 1 sec
     public Dictionary<EntityUid, TimeSpan> Healed = [];
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public int Cooldown = 15;
+    public int Cooldown = 1;
+    public List<EntityUid> Collided = [];
 
 }
