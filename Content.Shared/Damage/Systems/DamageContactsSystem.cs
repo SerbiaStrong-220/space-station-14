@@ -42,6 +42,7 @@ public sealed class DamageContactsSystem : EntitySystem
 
             if (damaged.Damage != null)
                 _damageable.TryChangeDamage(ent, damaged.Damage, ignoreResistances: damaged.IgnoreResistances, interruptsDoAfters: false); //SS220 Add IgnoreResistances param
+
             if (damaged.BloodlossModifier.HasValue) //SS220 Add BloodlossModifier start
                 _sharedBloodstream.TryModifyBleedAmount(ent, damaged.BloodlossModifier.Value); //SS220 Add BloodlossModifier end
         }
