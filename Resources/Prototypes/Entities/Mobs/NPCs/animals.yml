@@ -1476,8 +1476,20 @@
     availableLanguages:
     - id: Monkey
       canSpeak: true
+    - id: Galactic
+      canSpeak: false
     - id: Reptilian
       canSpeak: false
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
 #SS220 Animalistic languages end
   - type: Speech
     speechSounds: Monkey
@@ -1520,6 +1532,18 @@
       canSpeak: true
     - id: Reptilian
       canSpeak: false
+  #SS220 Animalistic languages fix begin
+    - id: Galactic
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
 #SS220 Animalistic languages end
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
@@ -1581,6 +1605,16 @@
     availableLanguages:
     - id: Reptilian
       canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
 #SS220 Animalistic Languages end
   - type: Speech
     speechSounds: Lizard
@@ -1709,6 +1743,24 @@
       0: Alive
       100: Critical
       200: Dead
+#SS220 Animalistic languages fixes begin
+  - type: Language
+    availableLanguages:
+    - id: Reptilian
+      canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -1762,6 +1814,8 @@
     - id: Reptilian
       canSpeak: false
     - id: Monkey
+      canSpeak: false
+    - id: Piggish
       canSpeak: false
 #SS220 Animalistic Languages end
   - type: GhostRole
@@ -3469,6 +3523,22 @@
     name: ghost-role-information-hamster-name
     description: ghost-role-information-hamster-description
     rules: ghost-role-information-nonantagonist-rules
+    #SS220 Animalistic languages fix begin
+  - type: Language
+    availableLanguages:
+    - id: Mousey
+      canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: GhostTakeoverAvailable
   - type: Speech
     speechVerb: SmallMob
@@ -3552,8 +3622,8 @@
     spawned:
     - id: FoodMeat
       amount: 1
-  - type: ReplacementAccent
-    accent: mouse
+  # - type: ReplacementAccent
+  #   accent: mouse
   - type: Tag
     tags:
     - VimPilot
