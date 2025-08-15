@@ -104,7 +104,7 @@ public sealed class DamageContactsSystem : EntitySystem
 
         var damagedByContact = EnsureComp<DamagedByContactComponent>(otherUid);
         damagedByContact.Damage = component.Damage;
-        damagedByContact.BloodlossModifier = component.BloodlossModifier;
+        damagedByContact.BloodlossModifier = component.BloodlossModifier; // SS220 Add bloodstream
 
         damagedByContact.IgnoreResistances = component.IgnoreResistances; //SS220 Add IgnoreResistances param
         //SS220 Add stand still time begin
