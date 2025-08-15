@@ -28,7 +28,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
-public sealed class SharedMiGoErectSystem : EntitySystem //ToDo_SS220 Make it whole virtual
+public sealed class SharedMiGoErectSystem : EntitySystem
 {
     [Dependency] private readonly SharedUserInterfaceSystem _userInterfaceSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -161,8 +161,11 @@ public sealed class SharedMiGoErectSystem : EntitySystem //ToDo_SS220 Make it wh
         args.Handled = true;
     }
 
-    private Entity<CultYoggBuildingFrameComponent> PlaceBuildingFrame(CultYoggBuildingPrototype buildingPrototype, EntityCoordinates location, Direction direction)
+    private void PlaceBuildingFrame(CultYoggBuildingPrototype buildingPrototype, EntityCoordinates location, Direction direction)
     {
+        if (_netManager.IsClient)//no spawning on client
+            return;
+
         var frameEntity = SpawnAtPosition(buildingPrototype.FrameProtoId, location);
         Transform(frameEntity).LocalRotation = direction.ToAngle();
 
@@ -179,11 +182,14 @@ public sealed class SharedMiGoErectSystem : EntitySystem //ToDo_SS220 Make it wh
         }
         Dirty(new Entity<CultYoggBuildingFrameComponent>(frameEntity, frame));
 
-        return (frameEntity, frame);
+        return;
     }
 
-    private EntityUid PlaceCompleteBuilding(CultYoggBuildingPrototype buildingPrototype, EntityCoordinates location, Direction direction)
+    private EntityUid? PlaceCompleteBuilding(CultYoggBuildingPrototype buildingPrototype, EntityCoordinates location, Direction direction)
     {
+        if (_netManager.IsClient)//no spawning on client
+            return null;
+
         var building = SpawnAtPosition(buildingPrototype.ResultProtoId, location);
         Transform(building).LocalRotation = direction.ToAngle();
 
@@ -684,7 +690,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem //ToDo_SS220 Make it wh
         return true;
     }
 
-    private EntityUid CompleteBuilding(Entity<CultYoggBuildingFrameComponent> entity)
+    private EntityUid? CompleteBuilding(Entity<CultYoggBuildingFrameComponent> entity)
     {
         if (_gameTiming.InPrediction) // this should never run in client
             return default;
