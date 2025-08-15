@@ -41,6 +41,7 @@ public sealed partial class DamageContactsComponent : Component
     [DataField]
     public bool IgnoreResistances = false;
     //SS220 Add IgnoreResistances datafield end
+
     //SS220 Add BloodlossModifier datafield start
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public float? BloodlossModifier;
