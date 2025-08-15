@@ -1,0 +1,80 @@
+- type: entity
+  id: BoxLegalPosters
+  parent: BaseStorageItem
+  name: box of legal posters
+  description: box
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/legal_box.rsi
+    state: icon
+    layers:
+      - state: box
+        map: ["box"]
+      - state: box1
+        map: ["box1"]
+        visible: false
+      - state: box2
+        map: ["box2"]
+        visible: false
+      - state: box3
+        map: ["box3"]
+        visible: false
+      - state: open
+        map: ["openLayer"]
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        openLayer:
+          Open: { state: open }
+          Closed: { state: close }
+  - type: Item
+    size: Huge
+  - type: MultiHandedItem
+  - type: Storage
+    grid:
+    - 0,0,5,1
+    whitelist:
+      tags:
+      - Legalposter
+    hideStackVisualsWhenClosed: false
+  - type: StorageFill
+    contents:
+      - id: Legalposters
+        amount: 3
+  - type: ItemCounter
+    count:
+      tags: [Legalposter]
+    composite: true
+    layerStates:
+    - box1
+    - box2
+    - box3
+  - type: Appearance
+
+- type: entity
+  id: BoxContraPosters
+  parent: BoxLegalPosters
+  name: box of Contraband posters
+  description: box
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Storage/contra_box.rsi
+  - type: Storage
+    grid:
+    - 0,0,5,1
+    whitelist:
+      tags:
+      - Contrposter
+    hideStackVisualsWhenClosed: false
+  - type: StorageFill
+    contents:
+      - id: Contrposters
+        amount: 3
+  - type: ItemCounter
+    count:
+      tags: [Contrposter]
+    composite: true
+    layerStates:
+    - box1
+    - box2
+    - box3
