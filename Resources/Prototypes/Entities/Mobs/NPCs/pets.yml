@@ -308,6 +308,7 @@
     - id: Galactic
       canSpeak: false
     - id: SolCommon
+      canSpeak: false
   #SS220 languages revive end
   - type: Tag
     tags:
