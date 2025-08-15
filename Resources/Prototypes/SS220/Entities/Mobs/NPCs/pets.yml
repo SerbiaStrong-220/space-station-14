@@ -18,6 +18,8 @@
       canSpeak: false
     - id: Reptilian
       canSpeak: false
+    - id: Piggish
+      canSpeak: false
   - type: GhostRole
     makeSentient: true
     allowSpeech: true
