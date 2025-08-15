@@ -331,4 +331,7 @@
 
 - type: Tag
   id: WhitelistChameleonStructureAirlock
+
+- type: Tag
+  id: WhitelistChameleonStructureSecretDoor
 # ss220 ChameleonStructure end

@@ -9,6 +9,7 @@ using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers; // ss220 fix
 using Robust.Shared.Network;
 
 namespace Content.Shared.Item.ItemToggle;
@@ -25,6 +26,7 @@ public sealed class ItemToggleSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedContainerSystem _sharedContainerSystem = default!; // ss220 fix
 
     private EntityQuery<ItemToggleComponent> _query;
 
@@ -75,6 +77,9 @@ public sealed class ItemToggleSystem : EntitySystem
     {
         if (!args.CanAccess || !args.CanInteract || !ent.Comp.OnActivate)
             return;
+
+
+        if (_sharedContainerSystem.IsEntityInContainer(ent.Owner) && HasComp<ItemToggleSizeComponent>(ent.Owner)) return; // ss220 fix
 
         var user = args.User;
 

@@ -22,15 +22,23 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<ChameleonStructureComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ChameleonStructureComponent, GetVerbsEvent<InteractionVerb>>(OnVerb);
         SubscribeLocalEvent<ChameleonStructureComponent, PrototypesReloadedEventArgs>(OnPrototypeReload);
-        UpdateData();
+    }
+
+    private void OnInit(Entity<ChameleonStructureComponent> ent, ref ComponentInit args)
+    {
+        UpdateData(ent);
     }
 
     private void OnPrototypeReload(Entity<ChameleonStructureComponent> ent, ref PrototypesReloadedEventArgs args)
     {
-        UpdateData();
+        UpdateData(ent);
+
+        Dirty(ent, ent.Comp);
     }
+
     private void OnVerb(Entity<ChameleonStructureComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract)
@@ -91,7 +99,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         return _data;
     }
 
-    protected void UpdateData()
+    protected void UpdateData(Entity<ChameleonStructureComponent> ent)
     {
         _data.Clear();
         var prototypes = _proto.EnumeratePrototypes<EntityPrototype>();
@@ -99,10 +107,21 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         foreach (var proto in prototypes)
         {
             // check if this is valid clothing
-            if (!IsValidTarget(proto))
+            if (!IsValidTarget(proto, ent.Comp.RequireTag))
                 continue;
 
             _data.Add(proto.ID);
+        }
+
+        if (ent.Comp.ProtoList is null)
+            return;
+
+        foreach (var proto in ent.Comp.ProtoList)
+        {
+            if (_data.Contains(proto))
+                continue;
+
+            _data.Add(proto);
         }
     }
 }

@@ -73,9 +73,9 @@ public sealed partial class CultYoggRuleComponent : Component
     public string TelepathyChannel = "TelepathyChannelYoggSothothCult";
 
     [DataField]
-    public EntityWhitelist WhitelistToggleable = new EntityWhitelist
+    public EntityWhitelist WhitelistToggleable = new()
     {
-        Tags = new() { "CultYoggInnerHandToggleable" }
+        Tags = ["CultYoggInnerHandToggleable"]
     };
     /// <summary>
     /// Check for an endgame screen title
@@ -108,7 +108,7 @@ public sealed partial class CultYoggRuleComponent : Component
     /// <summary>
     /// When should cultists be selected and the announcement made
     /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), ViewVariables(VVAccess.ReadWrite)]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan? AnnounceAt;
 
     /// <summary>

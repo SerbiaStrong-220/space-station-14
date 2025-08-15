@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Server.Body.Systems;
 using Content.Server.Body.Components;
+using Content.Server.Body.Systems;
+using Content.Server.Damage.Systems;
 using Content.Server.EUI;
 using Content.Server.Ghost;
 using Content.Server.Popups;
@@ -11,9 +12,9 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.MiGo;
-using Robust.Shared.Timing;
 using Robust.Server.Player;
-using Content.Server.Damage.Systems;
+using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 
@@ -28,8 +29,8 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly StaminaSystem _stamina = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     public override void Initialize()
     {
@@ -74,15 +75,26 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
         if (!_mobState.IsDead(uid, mobComp))
             return;
 
-        if (_mobThreshold.TryGetDeadThreshold(uid, out var threshold) && damageableComp.TotalDamage < threshold)
-        {
-            _mobState.ChangeMobState(uid, MobState.Critical);
-            _popup.PopupEntity(Loc.GetString("cult-yogg-resurrected-by-heal", ("target", uid)), uid, PopupType.Medium);
+        if (!_mobThreshold.TryGetDeadThreshold(uid, out var threshold))
+            return;
 
-            if (_mind.TryGetMind(uid, out var _, out var mind) &&
-                mind.CurrentEntity == uid &&
-                _playerManager.TryGetSessionById(mind.UserId, out var session))
-                _euiManager.OpenEui(new ReturnToBodyEui(mind, _mind, _playerManager), session);
-        }
+        if (damageableComp.TotalDamage > threshold)
+            return;
+
+        _mobState.ChangeMobState(uid, MobState.Critical);
+        _popup.PopupEntity(Loc.GetString("cult-yogg-resurrected-by-heal", ("target", uid)), uid, PopupType.Medium);
+
+        if (!_mind.TryGetMind(uid, out var _, out var mind))
+            return;
+
+        if (!_player.TryGetSessionById(mind.UserId, out var playerSession))
+            return;
+
+        var session = playerSession;
+
+        if (mind.CurrentEntity == uid)
+            return;
+
+        _euiManager.OpenEui(new ReturnToBodyEui(mind, _mind, _player), session);
     }
 }

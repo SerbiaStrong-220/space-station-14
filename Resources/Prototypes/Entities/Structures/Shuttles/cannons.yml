@@ -33,6 +33,13 @@
   - type: GunSignalControl
   - type: StaticPrice
     price: 1500
+  #SS220 ShuttleGuns_fix start (#3180)
+  - type: ApcPowerReceiver
+    powerLoad: 20
+  - type: ExtensionCableReceiver
+  - type: LightningTarget
+    priority: 1
+  #SS220 ShuttleGuns_fix end (#3180)
 
 # ---- Laser weapon branch ----
 # naming: LSE (Laser) + conventional power + suffix (c for PowerCage, e for wired energy) + Name
@@ -93,7 +100,7 @@
             - PowerCell
             - PowerCellSmall
   - type: HitscanBatteryAmmoProvider
-    proto: RedLightLaser
+    proto: RedShuttleLightLaser # SS220 Add hitscan on shuttle nav
     fireCost: 50
 
 - type: entity
@@ -239,7 +246,7 @@
         - !type:DoActsBehavior
           acts: ["Destruction"]
   - type: Gun
-    projectileSpeed: 800 #modet by MIXnikita for SS220
+    projectileSpeed: 80 # SS220 Fix speed
     fireRate: 0.3
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
