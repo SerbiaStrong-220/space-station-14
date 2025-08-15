@@ -63,7 +63,7 @@ public sealed partial class SpiderEggSystem : EntitySystem
     {
         var roundSec = (int)Math.Round(comp.IncubationTime);
         var has = HasComp<SpiderComponent>(ev.Examiner); // у королевы все равно есть SpiderComponent
-        if (uid == ev.Examiner || has)
+        if (ev.Examiner == ev.Examined || has)
         {
             ev.PushMarkup(has ? Loc.GetString("SpiderEgg-IncubationYou", ("sec", roundSec)) : Loc.GetString("SpiderEgg-IncubationMe", ("sec", roundSec)));
         }
