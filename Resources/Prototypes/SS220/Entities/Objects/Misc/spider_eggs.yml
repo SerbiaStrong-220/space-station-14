@@ -60,6 +60,7 @@
   - type: SpiderEgg
   - type: StaticPrice
     price: 500
+  - type: Examiner
 
 #Spiders
 - type: entity
