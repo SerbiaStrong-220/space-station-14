@@ -61,12 +61,11 @@ public sealed partial class SpiderEggSystem : EntitySystem
     }
     private void OnExamine(EntityUid uid, SpiderEggComponent comp, ExaminedEvent ev)
     {
-        var sec = (double)Math.Abs(comp.IncubationTime);
-        var roundSec = (int)Math.Round(sec);
+        var roundSec = (int)Math.Round(comp.IncubationTime);
         var has = HasComp<SpiderComponent>(ev.Examiner); // у королевы все равно есть SpiderComponent
         if (uid == ev.Examiner || has)
         {
-            ev.PushMarkup(has ? $"Оно вылупится через {roundSec} секунд." : $"Вы вылупитесь через {roundSec} секунд.");
+            ev.PushMarkup(has ? Loc.GetString("SpiderEgg-IncubationYou", ("sec", roundSec)) : Loc.GetString("SpiderEgg-IncubationMe", ("sec", roundSec)));
         }
     }
 }
