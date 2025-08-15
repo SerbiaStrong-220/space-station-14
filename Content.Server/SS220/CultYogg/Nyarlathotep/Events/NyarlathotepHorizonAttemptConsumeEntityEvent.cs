@@ -10,22 +10,22 @@ namespace Content.Server.SS220.CultYogg.Nyarlathotep.Events;
 /// </summary>
 [ByRefEvent]
 public record struct NyarlathotepHorizonAttemptConsumeEntityEvent
-    (EntityUid Entity, EntityUid NyarlathotepHorizonUid, NyarlathotepHorizonComponent NyarlathotepHorizon)
+    (EntityUid entity, EntityUid nyarlathotepHorizonUid, NyarlathotepHorizonComponent nyarlathotepHorizon)
 {
     /// <summary>
     /// The entity that the Nyarlathotep horizon is attempting to consume.
     /// </summary>
-    public readonly EntityUid Entity = Entity;
+    public readonly EntityUid Entity = entity;
 
     /// <summary>
     /// The uid of the Nyarlathotep consuming the entity.
     /// </summary>
-    public readonly EntityUid NyarlathotepHorizonUid = NyarlathotepHorizonUid;
+    public readonly EntityUid NyarlathotepHorizonUid = nyarlathotepHorizonUid;
 
     /// <summary>
     /// The Nyarlathotep horizon consuming the target entity.
     /// </summary>
-    public readonly NyarlathotepHorizonComponent NyarlathotepHorizon = NyarlathotepHorizon;
+    public readonly NyarlathotepHorizonComponent NyarlathotepHorizon = nyarlathotepHorizon;
 
     /// <summary>
     /// Whether the Nyarlathotep has been prevented from consuming the target entity.

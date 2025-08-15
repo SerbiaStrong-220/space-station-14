@@ -320,6 +320,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
                 var visibleEyes = materializeData.Cooldown.HasValue &&
                                        materializeData.Cooldown.Value.End > _timing.CurTime &&
                                        !comp.PhysicalForm;
+
                 _appearance.SetData(uid, DarkReaperVisual.GhostCooldown, visibleEyes);
             }
 

@@ -70,7 +70,7 @@ public sealed class BloomLightOverlay : Overlay
                     color = lightComp.Color;
             }
 
-            var (_, _, worldMatrix) = xform.GetWorldPositionRotationMatrix(xformQuery);
+            var worldMatrix = _transform.GetWorldMatrix(xform);
             handle.SetTransform(worldMatrix);
 
             foreach (var mask in comp.LightMasks)

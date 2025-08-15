@@ -26,8 +26,6 @@ public sealed partial class FungusMachineMenu : FancyWindow
 
     public FungusMachineMenu()
     {
-        MinSize = new Vector2(x: 200, y: 150);
-        SetSize = new Vector2(x: 250, y: 150);
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 

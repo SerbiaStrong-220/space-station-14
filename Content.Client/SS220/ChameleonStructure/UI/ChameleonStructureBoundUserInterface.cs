@@ -50,7 +50,7 @@ public sealed class ChameleonStructureBoundUserInterface : BoundUserInterface
             if (string.IsNullOrEmpty(target))
                 continue;
 
-            if (!_proto.TryIndex(target, out _))
+            if (!_proto.HasIndex(target))
                 continue;
 
             newTargets.Add(target);

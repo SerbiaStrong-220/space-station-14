@@ -19,13 +19,6 @@ public sealed partial class GhostRoleCastWindow : DefaultWindow
     public GhostRoleCastWindow()
     {
         RobustXamlLoader.Load(this);
-
-        RoleNameLabel.MinSize = new Vector2(150, 0);
-        RoleName.MinSize = new Vector2(300, 0);
-        RoleDescriptionLabel.MinSize = new Vector2(150, 0);
-        RoleDescription.MinSize = new Vector2(300, 0);
-        RoleRulesLabel.MinSize = new Vector2(150, 0);
-        RoleRules.MinSize = new Vector2(300, 0);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

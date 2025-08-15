@@ -108,15 +108,7 @@ namespace Content.Server.Preferences.Managers
             var curPrefs = prefsData.Prefs!;
             var session = _playerManager.GetSessionById(userId);
 
-            // Corvax-Sponsors-Start: Ensure removing sponsor markings if client somehow bypassed client filtering
-            // TODO: Make SponsorManager shared
-            // WARN! It's not removing markings from DB!
-            // var allowedMarkings = _sponsors.TryGetInfo(message.MsgChannel.UserId, out var sponsor) ? sponsor.AllowedMarkings : new string[]{};
-            // profile.EnsureValid(_cfg, _protos, allowedMarkings);
-            // Corvax-Sponsors-End
-
-            if (session != null)
-                profile.EnsureValid(session, _dependencies);
+            profile.EnsureValid(session, _dependencies);
 
             var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
             {

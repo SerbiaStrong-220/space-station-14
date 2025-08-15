@@ -33,7 +33,7 @@ public sealed class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<
 
         while (entityQuery.MoveNext(out var uid, out var comp))
         {
-            if (!(_gameTiming.CurTime > comp.ToggleTime))
+            if (_gameTiming.CurTime <= comp.ToggleTime)
                 continue;
 
             Toggle((uid, comp));
