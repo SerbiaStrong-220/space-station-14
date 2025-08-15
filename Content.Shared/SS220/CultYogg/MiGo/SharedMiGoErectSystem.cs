@@ -46,7 +46,6 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedChameleonStructureSystem _chameleonStructureSystem = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
@@ -54,7 +53,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     private readonly Dictionary<ProtoId<EntityPrototype>, MiGoCapturePrototype> _сaptureDictByParentPrototypeId = [];
     private readonly Dictionary<ProtoId<TagPrototype>, MiGoCapturePrototype> _сaptureDictBySourceTag = [];
 
-    private readonly List<(Func<EntityUid, MiGoCapturePrototype?> source, string sourceName)> _recipeSources = [];
+    private readonly List<(Func<EntityUid, MiGoCapturePrototype?> source, string sourceName)> _recipeSources = [];//ToDo_SS220 Remake this into 1 generated list "proto_source"->"proto_result"
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -324,9 +323,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.CaptureCooldowns.TryGetValue(recipe.ReplacementProto.Id, out var cooldownTime) && cooldownTime > _timing.CurTime)
+        if (ent.Comp.CaptureCooldowns.TryGetValue(recipe.ReplacementProto.Id, out var cooldownTime) && cooldownTime > _gameTiming.CurTime)
         {
-            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-caprure-cooldown", ("time", Math.Round((cooldownTime - _timing.CurTime).TotalSeconds))), ent);
+            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-caprure-cooldown", ("time", Math.Round((cooldownTime - _gameTiming.CurTime).TotalSeconds))), ent);
             return;
         }
 
@@ -415,7 +414,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             else if (recipe.FromEntity.Tag is { } tag)
                 _сaptureDictBySourceTag.Add(tag, recipe);
             else
-                Log.Warning("MiGoCapturePrototype with id '{0}' has no ways to be used", recipe.ID);
+                Log.Warning($"MiGoCapturePrototype with id '{recipe.ID}' has no ways to be used");
         }
 
         _recipeSources.Add((GetRecipeBySourcePrototypeId, "Prototype Id"));
@@ -436,7 +435,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             capture = sourceFunc(uid);
             if (capture is null)
                 continue;
-            Log.Debug("Founded capture recipe {0} for {1} via {2}", capture.ID, ToPrettyString(uid), sourceName);
+            Log.Debug($"Founded capture recipe {capture.ID} for {ToPrettyString(uid)} via {sourceName}");
             return true;
         }
         return false;
@@ -515,7 +514,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
     private void AddCaptureCooldownByResult(Entity<MiGoComponent> ent, MiGoCapturePrototype recipe)
     {
-        ent.Comp.CaptureCooldowns.TryAdd(recipe.ReplacementProto.Id, _timing.CurTime + recipe.ReplacementCooldown);
+        ent.Comp.CaptureCooldowns.TryAdd(recipe.ReplacementProto.Id, _gameTiming.CurTime + recipe.ReplacementCooldown);
     }
     #endregion
 
