@@ -98,13 +98,13 @@ namespace Content.Shared.SS220.CluwneComms
         /// Just made them instakill for memes
         /// </summary>
         [DataField]
-        public float ExplosionTotalIntensity = 250f;
+        public float ExplosionTotalIntensity = 75f;
 
         [DataField]
         public float ExplosionSlope = 10f;
 
         [DataField]
-        public float ExplosionMaxTileIntensity = 50f;
+        public float ExplosionMaxTileIntensity = 15f;
 
         [DataField]
         public float ExplosionProbability = 0.1f;
