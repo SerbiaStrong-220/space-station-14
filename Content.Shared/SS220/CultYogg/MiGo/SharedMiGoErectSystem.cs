@@ -28,7 +28,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
-public sealed class SharedMiGoErectSystem : EntitySystem
+public sealed class SharedMiGoErectSystem : EntitySystem //ToDo_SS220 Make it whole virtual
 {
     [Dependency] private readonly SharedUserInterfaceSystem _userInterfaceSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
