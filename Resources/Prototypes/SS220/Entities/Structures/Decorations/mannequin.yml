@@ -1,0 +1,102 @@
+- type: entity
+  id: MannequinLimbs
+  parent: [Mannequin]
+  name: mannequin
+  description: It can wear any clothing with style.
+  suffix:  With limbs
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decorations/mannequin-limbs.rsi
+    state: mannequin
+    noRot: true
+    layers:
+    - map: [ "mannequin" ]
+      sprite: SS220/Structures/Decorations/mannequin-limbs.rsi
+      state: mannequin
+    - map: [ "jumpsuit" ]
+    - map: [ "gloves" ]
+    - map: [ "shoes" ]
+    - map: [ "ears" ]
+    - map: [ "eyes" ]
+    - map: [ "belt" ]
+    - map: [ "id" ]
+    - map: [ "outerClothing" ]
+    - map: [ "back" ]
+    - map: [ "neck" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.CreamPiedVisuals.Creamed:
+        clownedon:
+          True: {visible: true}
+          False: {visible: false}
+  - type: Construction
+    graph: MannequinLimbs
+    node: mannequinlimbs
+  - type: ContainerContainer
+    containers:
+      jumpsuit: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      gloves: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      shoes: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      ears: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      eyes: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      belt: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      id: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      outerClothing: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      back: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      neck: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      mask: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      head: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      pocket1: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      pocket2: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+  - type: Inventory
+    templateId: human
