@@ -1,4 +1,6 @@
 using System.Linq;
+using Content.Client.SS220.UserInterface;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Shared.Access;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
@@ -94,6 +96,11 @@ namespace Content.Client.Access.UI
             {
                 button.OnPressed += _ => SubmitData();
             }
+
+            // SS220 add pin button begin
+            var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+            pinButton.Margin = new Thickness(0, 0, 5, 0);
+            // SS220 add pin button end
         }
 
         private void ClearAllAccess()
