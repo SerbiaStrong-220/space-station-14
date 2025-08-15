@@ -15,6 +15,9 @@
     },
     {
       "name": "mindslave_fixer"
-    }
+    },
+	{
+	  "name": "antidrop"
+	}
   ]
 }
