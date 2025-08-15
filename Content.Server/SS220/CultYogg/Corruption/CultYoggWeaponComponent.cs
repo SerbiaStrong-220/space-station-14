@@ -7,7 +7,6 @@ namespace Content.Server.SS220.CultYogg.Corruption;
 /// <summary>
 /// Component made only to prevent random pickup and potential hand blocking
 /// </summary>
-
 [RegisterComponent]
 public sealed partial class CultYoggWeaponComponent : Component
 {
@@ -17,10 +16,11 @@ public sealed partial class CultYoggWeaponComponent : Component
     [DataField]
     public TimeSpan CocooningCooldown = TimeSpan.FromSeconds(5);
 
-    public TimeSpan? BeforeCocooningTime;
     /// <summary>
     /// What kind of entity it will cocoon in.
     /// </summary>
-    [DataField("item", required: true)]
+    [DataField(required: true)]
     public ProtoId<EntityPrototype>? Item { get; private set; }
+
+    public TimeSpan? BeforeCocooningTime;
 }

@@ -3,4 +3,4 @@
 namespace Content.Server.SS220.LimitationRevive;
 
 [ByRefEvent]
-public readonly record struct AddReviweDebuffsEvent();
+public readonly record struct AddReviveDebuffsEvent();

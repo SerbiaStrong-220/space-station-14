@@ -21,23 +21,20 @@ public sealed class DetectiveCameraSystem : EntitySystem
         SubscribeLocalEvent<DetectiveCameraComponent, UseInHandEvent>(OnUseInHand);
     }
 
-    private void OnComponentStartup(EntityUid uid, DetectiveCameraComponent component, ComponentStartup args)
+    private void OnComponentStartup(Entity<DetectiveCameraComponent> ent, ref ComponentStartup args)
     {
-        if (!TryComp<SurveillanceCameraComponent>(uid, out var camera))
+        if (!TryComp<SurveillanceCameraComponent>(ent, out var camera))
             return;
 
-        _camera.SetActive(uid, false, camera);
+        _camera.SetActive(ent, false, camera);
     }
 
-    private void OnUseInHand(EntityUid uid, DetectiveCameraComponent? component, UseInHandEvent args)
+    private void OnUseInHand(Entity<DetectiveCameraComponent> ent, ref UseInHandEvent args)
     {
         if (args.Handled)
             return;
 
-        if (!Resolve(uid, ref component))
-            return;
-
-        if (!TryToggle(uid, args.User, component))
+        if (!TryToggle(ent, args.User, ent))
             return;
 
         args.Handled = true;
@@ -74,7 +71,4 @@ public sealed class DetectiveCameraSystem : EntitySystem
     }
 }
 
-public readonly record struct DetectiveCameraToggledEvent(bool IsEnabled)
-{
-
-}
+public readonly record struct DetectiveCameraToggledEvent(bool IsEnabled);

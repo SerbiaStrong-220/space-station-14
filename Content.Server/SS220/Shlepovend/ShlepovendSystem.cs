@@ -3,7 +3,6 @@ using Content.Server.GameTicking.Events;
 using Content.Shared.UserInterface;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Players;
-using Content.Shared.SS220.Discord;
 using Content.Shared.SS220.Shlepovend;
 using Robust.Server.Audio;
 using Robust.Server.Player;

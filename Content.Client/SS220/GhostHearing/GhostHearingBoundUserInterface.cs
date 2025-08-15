@@ -51,5 +51,4 @@ public sealed partial class GhostHearingBoundUserInterface : BoundUserInterface
 
         _window?.Dispose();
     }
-
 }

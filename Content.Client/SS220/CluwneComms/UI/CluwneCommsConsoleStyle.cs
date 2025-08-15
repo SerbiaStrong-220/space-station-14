@@ -4,7 +4,6 @@ using System.Numerics;
 using Content.Client.SS220.StyleTools;
 using Content.Client.SS220.UserInterface;
 using Robust.Client.Graphics;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 

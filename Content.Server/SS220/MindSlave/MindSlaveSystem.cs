@@ -4,7 +4,6 @@ using Content.Server.Antag;
 using Content.Server.Body.Components;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind;
 using Content.Server.Objectives.Components;
@@ -28,11 +27,8 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.SS220.MindSlave;
 using Content.Shared.SS220.Telepathy;
-using Content.Shared.SS220.UpdateChannels;
-using Content.Shared.Tag;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.MindSlave;
@@ -50,12 +46,10 @@ public sealed class MindSlaveSystem : EntitySystem
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
     [Dependency] private readonly TelepathySystem _telepathy = default!;
-    [Dependency] private readonly TraitorRuleSystem _traitorRule = default!;
     [Dependency] private readonly AlertsSystem _alert = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly EuiManager _eui = default!;
     [Dependency] private readonly SharedSubdermalImplantSystem _implant = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
 
     [ValidatePrototypeId<EntityPrototype>]
     private const string MindSlaveAntagId = "MindRoleMindSlave";
@@ -100,7 +94,6 @@ public sealed class MindSlaveSystem : EntitySystem
         if (TryComp<MindSlaveDisfunctionComponent>(entity.Owner, out var mindSlaveDisfunction))
         {
             _mindSlaveDisfunction.UnpauseDisfunction((entity.Owner, mindSlaveDisfunction));
-            return;
         }
     }
 

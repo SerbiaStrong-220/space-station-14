@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Content.Shared.Whitelist;
@@ -20,9 +21,9 @@ public abstract class SharedFungusMachineSystem : EntitySystem
         SubscribeLocalEvent<FungusMachineComponent, ActivatableUIOpenAttemptEvent>(OnAttemptOpenUI);
     }
 
-    protected virtual void OnComponentInit(EntityUid uid, FungusMachineComponent component, ComponentInit args)
+    protected virtual void OnComponentInit(Entity<FungusMachineComponent> ent, ref ComponentInit args)
     {
-        RestockInventoryFromPrototype(uid, component);
+        RestockInventoryFromPrototype(ent);
     }
 
     private void OnAttemptOpenUI(Entity<FungusMachineComponent> entity, ref ActivatableUIOpenAttemptEvent args)
@@ -37,7 +38,6 @@ public abstract class SharedFungusMachineSystem : EntitySystem
         {
             _popupSystem.PopupPredicted(Loc.GetString("cult-yogg-fungus-denied-to-use"), uid, user);
             args.Cancel();
-            return;
         }
     }
 
@@ -65,9 +65,7 @@ public abstract class SharedFungusMachineSystem : EntitySystem
     private void AddInventoryFromPrototype(EntityUid uid, Dictionary<string, uint>? entries, FungusMachineComponent? component = null)
     {
         if (!Resolve(uid, ref component) || entries == null)
-        {
             return;
-        }
 
         var inventory = component.Inventory;
 

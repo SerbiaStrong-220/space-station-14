@@ -5,7 +5,6 @@ using Content.Shared.Stealth.Components;
 namespace Content.Shared.SS220.StealthProvider;
 public sealed class SharedProvidedStealthSystem : EntitySystem
 {
-
     public override void Initialize()
     {
         base.Initialize();

@@ -14,9 +14,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Network;
 using Robust.Server.Player;
-using Content.Server.SS220.Language;
 using Content.Shared.SS220.Language.Systems;
-
 
 namespace Content.Server.SS220.TTS;
 
@@ -32,7 +30,6 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly IServerNetManager _netManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
 
     private ISawmill _sawmill = default!;
 

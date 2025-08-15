@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.SS220.Discord;
 using Robust.Client.Console;
 using Robust.Client.UserInterface;
@@ -25,7 +26,7 @@ public sealed partial class DiscordLinkRequiredGui : Control
 
         ByPassCheck.Visible = _cfg.GetCVar(CCVars220.ByPassDiscordLinkCheck);
 
-        QuitButton.OnPressed += (_) =>
+        QuitButton.OnPressed += _ =>
         {
             _consoleHost.ExecuteCommand("quit");
         };

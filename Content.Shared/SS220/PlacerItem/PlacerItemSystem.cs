@@ -5,19 +5,15 @@ using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Physics;
-using Content.Shared.RCD.Systems;
-using Content.Shared.SS220.PlacerItem.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
-using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.SS220.PlacerItem.Systems;
+namespace Content.Shared.SS220.PlacerItem;
 
 public sealed partial class PlacerItemSystem : EntitySystem
 {
@@ -29,7 +25,6 @@ public sealed partial class PlacerItemSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly RCDSystem _rcdSystem = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
 
     public override void Initialize()
@@ -83,11 +78,11 @@ public sealed partial class PlacerItemSystem : EntitySystem
             BlockDuplicate = false
         };
 
-        if (_doAfter.TryStartDoAfter(doAfterArgs))
-        {
-            comp.Active = false;
-            args.Handled = true;
-        };
+        if (!_doAfter.TryStartDoAfter(doAfterArgs))
+            return;
+
+        comp.Active = false;
+        args.Handled = true;
     }
 
     private void OnDoAfter(Entity<PlacerItemComponent> entity, ref PlacerItemDoAfterEvent args)

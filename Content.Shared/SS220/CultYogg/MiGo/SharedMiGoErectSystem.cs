@@ -42,7 +42,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
-    private readonly List<EntityUid> _dropEntitiesBuffer = [];
+    //private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -250,9 +250,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
                 var neededMaterial = neededMaterials[i];
                 var addedCount = entity.Comp.AddedMaterialsAmount[i];
 
-                var locKey = addedCount >= neededMaterial.Count ?
-                    "cult-yogg-building-frame-examined-material-full" :
-                    "cult-yogg-building-frame-examined-material-needed";
+                var locKey = addedCount >= neededMaterial.Count
+                    ? "cult-yogg-building-frame-examined-material-full"
+                    : "cult-yogg-building-frame-examined-material-needed";
 
                 if (!_prototypeManager.TryIndex(neededMaterial.StackType, out var stackType))
                     continue;

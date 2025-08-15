@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Administration.Logs;
-using Content.Server.Chat.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
@@ -28,7 +27,7 @@ public sealed class TelepathySystem : EntitySystem
     /// <summary>
     /// Key is a "fake" protoId. It wont indexed.
     /// </summary>
-    private SortedDictionary<ProtoId<TelepathyChannelPrototype>, ChannelParameters> _dynamicChannels = new();
+    private readonly SortedDictionary<ProtoId<TelepathyChannelPrototype>, ChannelParameters> _dynamicChannels = new();
     private readonly Color _baseDynamicChannelColor = Color.Lime;
 
     /// <inheritdoc/>
@@ -94,7 +93,7 @@ public sealed class TelepathySystem : EntitySystem
     /// </summary>
     public void FreeUniqueTelepathyChannel(ProtoId<TelepathyChannelPrototype> protoId, bool delete = true)
     {
-        if (!_dynamicChannels.TryGetValue(protoId, out var _)) // SS220 removing-telepathy-from-a-slave fix
+        if (!_dynamicChannels.TryGetValue(protoId, out _)) // SS220 removing-telepathy-from-a-slave fix
         {
             Log.Error($"Tried to free unregistered channel, passed id was {protoId}");
             return;
@@ -181,9 +180,6 @@ public sealed class TelepathySystem : EntitySystem
             null
         );
         if (!TryComp(receiverUid, out ActorComponent? actor))
-            return;
-
-        if (actor.PlayerSession is null)
             return;
 
         _netMan.ServerSendMessage(new MsgChatMessage() { Message = message }, actor.PlayerSession.Channel);

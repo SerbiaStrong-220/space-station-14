@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.CultYogg.Cultists;
 using Robust.Client.GameObjects;
 
@@ -36,11 +37,11 @@ public sealed class PurifyingVisualizerSystem : VisualizerSystem<CultYoggPurifie
         sprite.LayerSetVisible(PurifyingVisualLayers.Particles, true);
         sprite.LayerSetShader(PurifyingVisualLayers.Particles, "unshaded");
 
-        if (uid.Comp.Sprite != null)
-        {
-            sprite.LayerSetRSI(PurifyingVisualLayers.Particles, uid.Comp.Sprite.RsiPath);
-            sprite.LayerSetState(PurifyingVisualLayers.Particles, uid.Comp.Sprite.RsiState);
-        }
+        if (uid.Comp.Sprite == null)
+            return;
+
+        sprite.LayerSetRSI(PurifyingVisualLayers.Particles, uid.Comp.Sprite.RsiPath);
+        sprite.LayerSetState(PurifyingVisualLayers.Particles, uid.Comp.Sprite.RsiState);
     }
 }
 

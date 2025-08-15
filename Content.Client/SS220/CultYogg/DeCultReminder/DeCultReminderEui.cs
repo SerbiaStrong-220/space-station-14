@@ -4,29 +4,28 @@ using Content.Client.Eui;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
 
-namespace Content.Client.SS220.CultYogg.DeCultReminder
+namespace Content.Client.SS220.CultYogg.DeCultReminder;
+
+[UsedImplicitly]
+public sealed class DeCultReminderEui : BaseEui
 {
-    [UsedImplicitly]
-    public sealed class DeCultReminderEui : BaseEui
+    private readonly DeCultReminderWindow _window;
+
+    public DeCultReminderEui()
     {
-        private readonly DeCultReminderWindow _window;
+        _window = new();
 
-        public DeCultReminderEui()
-        {
-            _window = new();
+        _window.AcceptButton.OnPressed += _ => _window.Close();
+    }
 
-            _window.AcceptButton.OnPressed += _ => _window.Close();
-        }
+    public override void Opened()
+    {
+        IoCManager.Resolve<IClyde>().RequestWindowAttention();
+        _window.OpenCentered();
+    }
 
-        public override void Opened()
-        {
-            IoCManager.Resolve<IClyde>().RequestWindowAttention();
-            _window.OpenCentered();
-        }
-
-        public override void Closed()
-        {
-            _window.Close();
-        }
+    public override void Closed()
+    {
+        _window.Close();
     }
 }

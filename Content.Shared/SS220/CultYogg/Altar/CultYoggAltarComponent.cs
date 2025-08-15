@@ -11,7 +11,7 @@ public sealed partial class CultYoggAltarComponent : Component
     public TimeSpan RutualTime = TimeSpan.FromSeconds(25);
 
     [DataField]
-    public bool Used = false;
+    public bool Used;
 
     [Serializable, NetSerializable]
     public enum CultYoggAltarVisuals

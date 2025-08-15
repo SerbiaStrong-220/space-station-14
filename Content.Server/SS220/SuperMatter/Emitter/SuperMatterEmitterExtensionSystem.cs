@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Diagnostics;
 using System.Linq;
 using Content.Server.Popups;
@@ -10,7 +11,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.SuperMatter.Emitter;
-
 
 public sealed class SuperMatterEmitterExtensionSystem : SharedSuperMatterEmitterExtensionSystem
 {
@@ -37,6 +37,7 @@ public sealed class SuperMatterEmitterExtensionSystem : SharedSuperMatterEmitter
         if (!boltProto.Components.ContainsKey("SuperMatterEmitterBolt"))
             Log.Debug($"Added SM Emitter Extension to entity, but its EmitterComponent.BoltType dont have {nameof(SuperMatterEmitterBoltComponent)}");
     }
+
     private void OnApplyMessage(Entity<SuperMatterEmitterExtensionComponent> entity, ref SuperMatterEmitterExtensionValueMessage args)
     {
         if (!CanInteract(entity, args.Actor, out var reason))
@@ -70,7 +71,7 @@ public sealed class SuperMatterEmitterExtensionSystem : SharedSuperMatterEmitter
 
     private void UpdateCorrespondingComponents(EntityUid uid, SuperMatterEmitterExtensionComponent comp, out EmitterComponent? emitterComponent)
     {
-        if (!TryComp<EmitterComponent>(uid, out emitterComponent))
+        if (!TryComp(uid, out emitterComponent))
         {
             Log.Debug($"SM Emitter Extension exist in entity, but it doesnt have {nameof(EmitterComponent)}");
             return;

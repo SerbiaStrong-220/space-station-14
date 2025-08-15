@@ -21,7 +21,7 @@ using Robust.Shared.Random;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 using Robust.Shared.Containers;
-using Content.Server.SS220.Forensics;
+using Content.Server.SS220.Forensics.Components;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Hands.Components;
 

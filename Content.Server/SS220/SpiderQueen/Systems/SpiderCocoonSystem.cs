@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
@@ -80,11 +81,13 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         }
     }
 
-    private void OnAlternativeVerb(EntityUid uid, SpiderCocoonComponent component, GetVerbsEvent<AlternativeVerb> args)
+    private void OnAlternativeVerb(Entity<SpiderCocoonComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess ||
             !TryComp<SpiderQueenComponent>(args.User, out var spiderQueen))
             return;
+
+        var user = args.User;
 
         var extractVerb = new AlternativeVerb
         {
@@ -92,11 +95,11 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
             Act = () =>
             {
                 var doAfterEventArgs = new DoAfterArgs(EntityManager,
-                    args.User,
+                    user,
                     spiderQueen.CocoonExtractTime,
                     new CocoonExtractBloodPointsEvent(),
-                    uid,
-                    uid)
+                    ent.Owner,
+                    ent.Owner)
                 {
                     Broadcast = false,
                     BreakOnDamage = false,

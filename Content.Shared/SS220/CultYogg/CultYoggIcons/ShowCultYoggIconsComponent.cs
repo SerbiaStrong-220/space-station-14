@@ -13,7 +13,6 @@ namespace Content.Shared.SS220.CultYogg.CultYoggIcons;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ShowCultYoggIconsComponent : Component
 {
-
     [DataField]
     public bool IconVisibleToGhost { get; set; } = true; //isn't working when we moved it here.
     //ToDo: Discuss, should i safe it here or move icons on different component?

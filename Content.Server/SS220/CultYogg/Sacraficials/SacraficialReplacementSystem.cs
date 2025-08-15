@@ -17,8 +17,8 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
     [Dependency] private readonly CultYoggRuleSystem _cultRule = default!;
 
     //dictionary of sacraficials uids and time when they left body by gibbing/ghosting/leaving anything
-    private Dictionary<EntityUid, TimeSpan> _replaceSacrSchedule = [];
-    private Dictionary<EntityUid, TimeSpan> _announceSchedule = [];
+    private readonly Dictionary<EntityUid, TimeSpan> _replaceSacrSchedule = [];
+    private readonly Dictionary<EntityUid, TimeSpan> _announceSchedule = [];
 
     public override void Initialize()
     {
@@ -31,6 +31,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
         SubscribeLocalEvent<CultYoggSacrificialComponent, BeingCryoDeletedEvent>(OnCryoDeleted);
         SubscribeLocalEvent<CultYoggSacrificialComponent, SuicideEvent>(OnSuicide);
     }
+
     private void OnInit(Entity<CultYoggSacrificialComponent> ent, ref ComponentInit args)
     {
         var ev = new CultYoggUpdateSacrObjEvent();
@@ -42,24 +43,23 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
 
         _cultRule.SendCultAnounce(Loc.GetString("cult-yogg-sacraficial-was-picked", ("name", MetaData(ent).EntityName)));
     }
+
     private void OnRemove(Entity<CultYoggSacrificialComponent> ent, ref ComponentRemove args)
     {
         var ev = new CultYoggUpdateSacrObjEvent();
         var query = EntityQueryEnumerator<CultYoggSummonConditionComponent>();
-        while (query.MoveNext(out var uid, out var _))
+        while (query.MoveNext(out var uid, out _))
         {
             RaiseLocalEvent(uid, ref ev);
         }
     }
+
     private void OnPlayerAttached(Entity<CultYoggSacrificialComponent> ent, ref PlayerAttachedEvent args)
     {
         _replaceSacrSchedule.Remove(ent);
 
-        if (_announceSchedule.ContainsKey(ent))//if the announcement was not sent
-        {
-            _announceSchedule.Remove(ent);
+        if (_announceSchedule.Remove(ent))//if the announcement was not sent
             return;
-        }
 
         _cultRule.SendCultAnounce(Loc.GetString("cult-yogg-sacraficial-cant-be-replaced", ("name", MetaData(ent).EntityName)));
     }
@@ -76,7 +76,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev, true);
     }
 
-    private void ReplacamantStatusAnnounce(EntityUid uid)
+    private void ReplacementStatusAnnounce(EntityUid uid)
     {
         if (!TryComp<CultYoggSacrificialComponent>(uid, out var comp))
             return;
@@ -104,7 +104,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
             if (_timing.CurTime < pair.Value)
                 continue;
 
-            ReplacamantStatusAnnounce(pair.Key);
+            ReplacementStatusAnnounce(pair.Key);
 
             _announceSchedule.Remove(pair.Key);
         }

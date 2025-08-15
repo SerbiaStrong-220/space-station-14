@@ -1,13 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Medical.SuitSensors;
-using Content.Shared.Access.Components;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Pinpointer;
 using Content.Shared.SS220.Pinpointer;
-using Content.Shared.Whitelist;
 using Robust.Shared.Timing;
 using System.Linq;
 
@@ -19,8 +17,6 @@ public sealed class PinpointerSystem : EntitySystem
     [Dependency] private readonly SharedPinpointerSystem _pinpointer = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SuitSensorSystem _suit = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
 
     public override void Initialize()

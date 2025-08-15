@@ -17,12 +17,12 @@ public sealed class ItemToggleDamageOtherOnHitSystem : EntitySystem
 
         if (args.Activated)
         {
-            if (component.ActivatedDamage != null)
-            {
-                //Setting deactivated damage to the weapon's regular value before changing it.
-                component.DeactivatedDamage ??= damageOtherOnHit.Damage;
-                damageOtherOnHit.Damage = component.ActivatedDamage;
-            }
+            if (component.ActivatedDamage == null)
+                return;
+
+            //Setting deactivated damage to the weapon's regular value before changing it.
+            component.DeactivatedDamage ??= damageOtherOnHit.Damage;
+            damageOtherOnHit.Damage = component.ActivatedDamage;
         }
         else
         {

@@ -6,52 +6,50 @@ using Robust.Client.UserInterface.CustomControls;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 using System.Numerics;
 
+namespace Content.Client.SS220.CultYogg.DeCultReminder;
 
-namespace Content.Client.SS220.CultYogg.DeCultReminder
+public sealed class DeCultReminderWindow : DefaultWindow
 {
-    public sealed class DeCultReminderWindow : DefaultWindow
+    public readonly Button AcceptButton;
+
+    public DeCultReminderWindow()
     {
-        public readonly Button AcceptButton;
+        Title = Loc.GetString("decult-reminder-window-title");
 
-        public DeCultReminderWindow()
+        Contents.AddChild(new BoxContainer
         {
-            Title = Loc.GetString("decult-reminder-window-title");
-
-            Contents.AddChild(new BoxContainer
+            Orientation = LayoutOrientation.Vertical,
+            Children =
             {
-                Orientation = LayoutOrientation.Vertical,
-                Children =
+                new BoxContainer
                 {
-                    new BoxContainer
+                    Orientation = LayoutOrientation.Vertical,
+                    Children =
                     {
-                        Orientation = LayoutOrientation.Vertical,
-                        Children =
+                        (new Label
                         {
-                            (new Label()
+                            Text = Loc.GetString("decult-reminder-window-text")
+                        }),
+                        new BoxContainer
+                        {
+                            Orientation = LayoutOrientation.Horizontal,
+                            Align = AlignMode.Center,
+                            Children =
                             {
-                                Text = Loc.GetString("decult-reminder-window-text")
-                            }),
-                            new BoxContainer
-                            {
-                                Orientation = LayoutOrientation.Horizontal,
-                                Align = AlignMode.Center,
-                                Children =
+                                (AcceptButton = new Button
                                 {
-                                    (AcceptButton = new Button
-                                    {
-                                        Text = Loc.GetString("decult-reminder-window-accept-button"),
-                                    }),
+                                    Text = Loc.GetString("decult-reminder-window-accept-button"),
+                                }),
 
-                                    (new Control()
-                                    {
-                                        MinSize = new Vector2(20, 0)
-                                    }),
-                                }
-                            },
-                        }
-                    },
-                }
-            });
-        }
+                                (new Control
+                                {
+                                    MinSize = new Vector2(20, 0)
+                                }),
+                            }
+                        },
+                    }
+                },
+            }
+        });
     }
 }

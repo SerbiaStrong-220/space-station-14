@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Numerics;
 using Content.Client.SS220.Overlays;
 using Robust.Client.GameObjects;
@@ -17,7 +18,7 @@ public sealed class TextureFadeOverlay : StackableOverlay
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
-    private readonly SpriteSystem _spriteSystem = default!;
+    private readonly SpriteSystem _spriteSystem;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     public SpriteSpecifier? Sprite;

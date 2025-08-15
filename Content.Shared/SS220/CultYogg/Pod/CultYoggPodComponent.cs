@@ -3,10 +3,8 @@
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
 using Content.Shared.Damage;
-using Content.Shared.DoAfter;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
-using Content.Shared.SS220.CultYogg.MiGo;
 
 namespace Content.Shared.SS220.CultYogg.Pod;
 

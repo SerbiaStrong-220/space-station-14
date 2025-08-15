@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Alert;
 using Content.Shared.SS220.ChemicalAdaptation;
 using Content.Shared.SS220.LimitationRevive;
 using Robust.Shared.Prototypes;
@@ -11,7 +10,6 @@ namespace Content.Shared.EntityEffects.Effects;
 /// Narrowly targeted effect to increase time to brain damage.
 /// Uses ChemicalAdaptation to reduce the effectiveness of use
 /// </summary>
-
 public sealed partial class BrainDamageTimerChange : EntityEffect
 {
     /// <summary>

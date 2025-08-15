@@ -8,8 +8,6 @@ namespace Content.Client.SS220.Shlepovend;
 
 public sealed class ShlepovendBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-
     [ViewVariables]
     private ShlepovendWindow? _window;
 

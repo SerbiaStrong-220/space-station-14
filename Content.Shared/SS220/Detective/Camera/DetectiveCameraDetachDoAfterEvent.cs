@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.Detective.Camera;
 public sealed partial class DetectiveCameraDetachDoAfterEvent : SimpleDoAfterEvent
 {
     [NonSerialized]
-    [DataField("detachTarget", required: true)]
+    [DataField(required: true)]
     public EntityUid DetachTarget;
 
     public DetectiveCameraDetachDoAfterEvent(EntityUid owner)

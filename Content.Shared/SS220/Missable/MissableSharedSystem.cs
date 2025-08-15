@@ -13,6 +13,7 @@ public sealed class MissableSharedSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly INetManager _net = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -26,6 +27,7 @@ public sealed class MissableSharedSystem : EntitySystem
         if (HasChance(GetEntity(args.Target)))
             args.Handled = true;
     }
+
     private bool HasChance(EntityUid entity)
     {
         if (!HasComp<MissableComponent>(entity))
@@ -34,9 +36,7 @@ public sealed class MissableSharedSystem : EntitySystem
         var missEvent = new MissableCanMissEvent();
         RaiseLocalEvent(entity, missEvent);
 
-        bool anywayMiss = false;
-        if (missEvent.Handled && missEvent.ShouldBeMiss)
-            anywayMiss = true;
+        var anywayMiss = missEvent is { Handled: true, ShouldBeMiss: true };
 
         var bonusEvent = new MissableMissChanceBonusEvent();
         RaiseLocalEvent(entity, bonusEvent);
@@ -56,8 +56,9 @@ public sealed class MissableSharedSystem : EntitySystem
         }
         return false;
     }
-    private void RollChanceToMiss(EntityUid entity, MissableComponent comp, AttackedEvent args)
+
+    private void RollChanceToMiss(Entity<MissableComponent> ent , ref AttackedEvent args)
     {
-        args.Cancelled = HasChance(entity);
+        args.Cancelled = HasChance(ent.Owner);
     }
 }

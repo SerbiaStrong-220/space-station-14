@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.SuperMatter.Ui;
 using Robust.Client.UserInterface;
 
@@ -10,6 +11,7 @@ public sealed class SuperMatterObserverBUI : BoundUserInterface
     private SuperMatterObserverMenu? _menu;
 
     public SuperMatterObserverBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey) { }
+
     protected override void Open()
     {
         base.Open();
@@ -17,13 +19,11 @@ public sealed class SuperMatterObserverBUI : BoundUserInterface
 
         _menu.OnServerButtonPressed += (args, observerComp) =>
         {
-            if (args.Button.Pressed)
-                _menu.Observer = observerComp;
-            else
-                _menu.Observer = null;
+            _menu.Observer = args.Button.Pressed ? observerComp : null;
             _menu.CrystalKey = null;
             _menu.LoadCrystal();
         };
+
         _menu.OnCrystalButtonPressed += (args, crystalKey) =>
         {
             if (args.Button.Pressed)
@@ -33,6 +33,7 @@ public sealed class SuperMatterObserverBUI : BoundUserInterface
             _menu.LoadCachedData();
         };
     }
+
     public void DirectUpdateState(BoundUserInterfaceState state)
     {
         switch (state)

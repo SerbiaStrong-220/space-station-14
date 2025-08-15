@@ -3,8 +3,9 @@ namespace Content.Server.SS220.AutoEngrave;
 [RegisterComponent]
 public sealed partial class AutoEngravingComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite), DataField("autoEngraveLocKey")]
+    [DataField]
     public string? AutoEngraveLocKey;
-    [ViewVariables(VVAccess.ReadWrite), DataField("engravedText")]
-    public string EngravedText = "";
+
+    [DataField(required: true)]
+    public string EngravedText;
 }

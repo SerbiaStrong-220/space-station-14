@@ -16,7 +16,7 @@ public sealed partial class CultPondComponent : Component //ToDo_SS220 figure ou
     public string Solution;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public FixedPoint2 AmmountToAdd = FixedPoint2.New(10);
+    public FixedPoint2 AmountToAdd = FixedPoint2.New(10);
 
     [DataField, AutoNetworkedField]
     public TimeSpan RefillCooldown = TimeSpan.FromSeconds(15);

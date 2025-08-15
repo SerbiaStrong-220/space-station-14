@@ -1,15 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos;
 using Robust.Server.GameObjects;
-using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.SS220.Atmos;
 
 public sealed partial class ItemGasSpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
@@ -20,7 +19,7 @@ public sealed partial class ItemGasSpawnerSystem : EntitySystem
         var query = EntityQueryEnumerator<ItemGasSpawnerComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            var isLimitReached = comp.LimitedSpawn && comp.RemainingAmountToSpawn <= 0;
+            var isLimitReached = comp is { LimitedSpawn: true, RemainingAmountToSpawn: <= 0 };
             if (isLimitReached ||
                 !GetValidEnvironment(uid, comp, out var environment))
                 continue;

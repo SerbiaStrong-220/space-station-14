@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.Pinpointer;
 [Serializable, NetSerializable]
 public enum PinpointerUIKey
 {
-    Key
+    Key,
 }
 
 [Serializable]
@@ -65,5 +65,5 @@ public enum PinpointerMode//ToDo_SS220 fix cursed pinpointer https://github.com/
 {
     Crew,
     Item,
-    Component
+    Component,
 }

@@ -22,10 +22,10 @@ public sealed partial class TelepathyChannelPrototype : IHearableChannelPrototyp
 [DataDefinition]
 public sealed partial class ChannelParameters()
 {
-    [DataField("name")]
+    [DataField]
     public string Name { get; private set; } = string.Empty;
 
-    [DataField("color")]
+    [DataField]
     public Color Color { get; private set; } = Color.Lime;
 
     public ChannelParameters(string name, Color color) : this()

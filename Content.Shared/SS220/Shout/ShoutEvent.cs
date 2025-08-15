@@ -13,7 +13,7 @@ public sealed partial class ShoutActionEvent : InstantActionEvent
     /// <summary>
     /// Sound played when action button is pressed
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public SoundSpecifier? ShoutSound;
 
     /// <summary>

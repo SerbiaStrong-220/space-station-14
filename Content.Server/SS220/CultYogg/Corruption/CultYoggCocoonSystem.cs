@@ -25,6 +25,7 @@ public sealed class CultYoggCocoonSystem : EntitySystem
         SubscribeLocalEvent<CultYoggWeaponComponent, EntGotInsertedIntoContainerMessage>(OnInsert);
 
     }
+
     private void OnUseInHand(Entity<CultYoggCocoonComponent> ent, ref UseInHandEvent args)
     {
         if (args.Handled)
@@ -51,6 +52,7 @@ public sealed class CultYoggCocoonSystem : EntitySystem
 
         args.Handled = true;
     }
+
     private void OnRemove(Entity<CultYoggWeaponComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
         if (_container.IsEntityOrParentInContainer(ent))
@@ -63,6 +65,7 @@ public sealed class CultYoggCocoonSystem : EntitySystem
     {
         ent.Comp.BeforeCocooningTime = null;
     }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);

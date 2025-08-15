@@ -2,7 +2,6 @@ using Content.Server.Popups;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.SS220.LocateAi;
-using Robust.Server.GameObjects;
 
 namespace Content.Server.SS220.LocateAi;
 

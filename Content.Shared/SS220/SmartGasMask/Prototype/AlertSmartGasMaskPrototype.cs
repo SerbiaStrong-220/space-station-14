@@ -32,7 +32,7 @@ public sealed partial class AlertSmartGasMaskPrototype : IPrototype
 
     //Message that will be played when selecting an action
     [DataField]
-    public List<LocId> LocIdMessage = new List<LocId>() { };
+    public List<LocId> LocIdMessage = new();
 
     [DataField]
     public TimeSpan CoolDown { get; set; } = TimeSpan.FromSeconds(10);

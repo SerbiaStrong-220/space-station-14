@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
@@ -34,7 +35,7 @@ public sealed partial class CultYoggPurifiedComponent : Component
     [DataField]
     public SoundSpecifier PurifyingCollection = new SoundCollectionSpecifier("CultYoggPurifyingSounds");
 
-    [DataField("sprite")]
+    [DataField]
     public SpriteSpecifier.Rsi Sprite = new(new("SS220/Effects/cult_yogg_purifying.rsi"), "purifyingEffect");
 
     /// <summary>

@@ -1,7 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.SS220.TextureFade;
 using Content.Shared.SS220.CultYogg.Rave;
-using Content.Shared.SS220.EntityEffects;
+using Content.Shared.SS220.EntityEffects.Events;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Player;

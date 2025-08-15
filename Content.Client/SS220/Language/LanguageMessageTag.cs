@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.Language.Systems;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
@@ -9,7 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Client.SS220.Language;
 
-public sealed class LanguageMessageTag : IMarkupTag
+public sealed class LanguageMessageTag : IMarkupTagHandler
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;

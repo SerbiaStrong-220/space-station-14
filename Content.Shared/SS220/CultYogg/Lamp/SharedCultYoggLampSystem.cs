@@ -8,12 +8,14 @@ using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.CultYogg.Lamp;
+
 public abstract class SharedCultYoggLampSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedItemSystem _itemSys = default!;
     [Dependency] private readonly ClothingSystem _clothingSys = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -55,11 +57,12 @@ public abstract class SharedCultYoggLampSystem : EntitySystem
             Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/light.svg.192dpi.png")),
             Act = ent.Comp.Activated
                 ? () => TurnOff(ent)
-                : () => TurnOn(@event.User, ent)
+                : () => TurnOn(@event.User, ent),
         };
 
         args.Verbs.Add(verb);
     }
+
     public abstract bool TurnOff(Entity<CultYoggLampComponent> ent);
     public abstract bool TurnOn(EntityUid user, Entity<CultYoggLampComponent> uid);
 }

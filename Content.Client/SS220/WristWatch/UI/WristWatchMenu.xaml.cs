@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Numerics;
 using System.Text;
 using Content.Client.Resources;
@@ -20,7 +21,7 @@ public sealed partial class WristWatchMenu : BaseWindow
     private readonly StringBuilder _stringBuilder = new();
     private readonly char[] _timeTextBuffer = new char[6];
 
-    private WristWatchBoundUserInterface? _owner;
+    private readonly WristWatchBoundUserInterface? _owner;
     private WristWatchStylePrototype? _style;
 
     // It wont compile without this

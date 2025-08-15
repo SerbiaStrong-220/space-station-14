@@ -7,106 +7,94 @@ using Content.Shared.SS220.GhostRoleCast;
 using Robust.Client.UserInterface;
 using Robust.Shared.Player;
 
-namespace Content.Client.SS220.GhostRoleCast
+namespace Content.Client.SS220.GhostRoleCast;
 
+public sealed class GhostRoleCastSystem : EntitySystem
 {
-    public sealed class GhostRoleCastSystem : EntitySystem
+    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IConsoleHost _consoleHost = default!;
+    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+
+    public override void Initialize()
     {
-        [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly IConsoleHost _consoleHost = default!;
-        [Dependency] private readonly IUserInterfaceManager _uimanager = default!;
+        base.Initialize();
 
-        public override void Initialize()
-        {
-            base.Initialize();
+        SubscribeLocalEvent<GhostRoleCastComponent, ToggleGhostRoleCastActionEvent>(OnToggleGhostRoleCast);
+        SubscribeLocalEvent<GhostRoleCastComponent, ToggleGhostRoleRemoveActionEvent>(OnToggleGhostRoleRemove);
+        SubscribeLocalEvent<GhostRoleCastComponent, ToggleGhostRoleCastSettingsEvent>(OnToggleGhostRoleSettings);
+    }
 
-            SubscribeLocalEvent<GhostRoleCastComponent, ToggleGhostRoleCastActionEvent>(OnToggleGhostRoleCast);
-            SubscribeLocalEvent<GhostRoleCastComponent, ToggleGhostRoleRemoveActionEvent>(OnToggleGhostRoleRemove);
-            SubscribeLocalEvent<GhostRoleCastComponent, ToggleGhostRoleCastSettingsEvent>(OnToggleGhostRoleSettings);
-        }
+    private void OnToggleGhostRoleCast(Entity<GhostRoleCastComponent> ent, ref ToggleGhostRoleCastActionEvent args)
+    {
+        if (args.Handled)
+            return;
 
-        private void OnToggleGhostRoleCast(EntityUid uid, GhostRoleCastComponent component, ToggleGhostRoleCastActionEvent args)
-        {
-            if (args.Handled)
-                return;
+        _popup.PopupEntity(Loc.GetString("action-toggle-ghostrole-cast-popup"), args.Performer);
 
-            _popup.PopupEntity(Loc.GetString("action-toggle-ghostrole-cast-popup"), args.Performer);
+        var flag = _playerManager.TryGetSessionByEntity(args.Performer, out var playersession);
+        if (flag == false)
+            return;
 
-            var flag = _playerManager.TryGetSessionByEntity(args.Performer, out var playersession);
-            if (flag == false)
-                return;
+        var roleName = ent.Comp.GhostRoleName;
+        var roleDesc = ent.Comp.GhostRoleDesc;
+        var roleRule = ent.Comp.GhostRoleRule;
 
-            var rolename = component.GhostRoleName;
-            var roledesc = component.GhostRoleDesc;
-            var rolerule = component.GhostRoleRule;
+        if (string.IsNullOrEmpty(roleName))
+            roleName = EntityManager.GetComponent<MetaDataComponent>(args.Target).EntityName;
+        if (string.IsNullOrEmpty(roleDesc))
+            roleDesc = EntityManager.GetComponent<MetaDataComponent>(args.Target).EntityName;
+        if (string.IsNullOrEmpty(roleRule))
+            roleRule = Loc.GetString("ghost-role-component-default-rules");
 
-            if (rolename == "")
-                rolename = EntityManager.GetComponent<MetaDataComponent>(args.Target).EntityName;
-            if (roledesc == "")
-                roledesc = EntityManager.GetComponent<MetaDataComponent>(args.Target).EntityName;
-            if (rolerule == "")
-                rolerule = Loc.GetString("ghost-role-component-default-rules");
+        var targetNetUid = GetNetEntity(args.Target);
 
-            var targetNetUid = GetNetEntity(args.Target);
+        var makeGhostRoleCommand =
+            $"makeghostrole " +
+            $"\"{CommandParsing.Escape(targetNetUid.ToString())}\" " +
+            $"\"{CommandParsing.Escape(roleName)}\" " +
+            $"\"{CommandParsing.Escape(roleDesc)}\" " +
+            $"\"{CommandParsing.Escape(roleRule)}\"";
 
-            var makeGhostRoleCommand =
-                $"makeghostrole " +
-                $"\"{CommandParsing.Escape(targetNetUid.ToString())}\" " +
-                $"\"{CommandParsing.Escape(rolename)}\" " +
-                $"\"{CommandParsing.Escape(roledesc)}\" " +
-                $"\"{CommandParsing.Escape(rolerule)}\"";
+        _consoleHost.ExecuteCommand(playersession, makeGhostRoleCommand);
+        args.Handled = true;
+    }
 
-            _consoleHost.ExecuteCommand(playersession, makeGhostRoleCommand);
+    private void OnToggleGhostRoleRemove(Entity<GhostRoleCastComponent> ent, ref ToggleGhostRoleRemoveActionEvent args)
+    {
+        if (args.Handled)
+            return;
 
-            //if (makesentient)
-            //{
-            //    var makesentientcommand = $"makesentient \"{commandparsing.escape(uid.tostring())}\"";
-            //    _consolehost.executecommand(player.session, makesentientcommand);
-            //}
+        _popup.PopupEntity(Loc.GetString("action-toggle-ghostrole-remove-popup"), args.Performer);
 
-            args.Handled = true;
-        }
+        var flag = _playerManager.TryGetSessionByEntity(args.Performer, out var playerSession);
+        if (flag == false)
+            return;
 
-        private void OnToggleGhostRoleRemove(EntityUid uid, GhostRoleCastComponent component, ToggleGhostRoleRemoveActionEvent args)
-        {
-            if (args.Handled)
-                return;
+        var targetNetUid = GetNetEntity(args.Target);
 
-            _popup.PopupEntity(Loc.GetString("action-toggle-ghostrole-remove-popup"), args.Performer);
+        var removeGhostRoleCommand =
+            $"rmcomp " +
+            $"\"{CommandParsing.Escape(targetNetUid.ToString())}\" " +
+            $"\"{CommandParsing.Escape("GhostRole")}\"";
 
-            var flag = _playerManager.TryGetSessionByEntity(args.Performer, out var playersession);
-            if (flag == false)
-            {
-                return;
-            }
+        _consoleHost.ExecuteCommand(playerSession, removeGhostRoleCommand);
 
-            var targetNetUid = GetNetEntity(args.Target);
+        var removeGhostTakeoverAvailableCommand =
+            $"rmcomp " +
+            $"\"{CommandParsing.Escape(targetNetUid.ToString())}\" " +
+            $"\"{CommandParsing.Escape("GhostTakeoverAvailable")}\"";
 
-            var removeGhostRoleCommand =
-                $"rmcomp " +
-                $"\"{CommandParsing.Escape(targetNetUid.ToString())}\" " +
-                $"\"{CommandParsing.Escape("GhostRole")}\"";
+        _consoleHost.ExecuteCommand(playerSession, removeGhostTakeoverAvailableCommand);
+        args.Handled = true;
+    }
 
-            _consoleHost.ExecuteCommand(playersession, removeGhostRoleCommand);
+    private void OnToggleGhostRoleSettings(Entity<GhostRoleCastComponent> ent, ref ToggleGhostRoleCastSettingsEvent args)
+    {
+        if (args.Handled)
+            return;
 
-            var removeGhostTakeoverAvailableCommand =
-                $"rmcomp " +
-                $"\"{CommandParsing.Escape(targetNetUid.ToString())}\" " +
-                $"\"{CommandParsing.Escape("GhostTakeoverAvailable")}\"";
-
-            _consoleHost.ExecuteCommand(playersession, removeGhostTakeoverAvailableCommand);
-
-            args.Handled = true;
-        }
-
-        private void OnToggleGhostRoleSettings(EntityUid uid, GhostRoleCastComponent component, ToggleGhostRoleCastSettingsEvent args)
-        {
-            if (args.Handled)
-                return;
-
-            var uicontroller = _uimanager.GetUIController<GhostRoleCastUIController>();
-            uicontroller.ToggleWindow();
-        }
+        var uiController = _uiManager.GetUIController<GhostRoleCastUIController>();
+        uiController.ToggleWindow();
     }
 }

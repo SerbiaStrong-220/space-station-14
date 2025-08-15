@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Client.Graphics;
 using System.Linq;
 using System.Numerics;
@@ -23,26 +24,31 @@ public sealed class PlotSequencedView : Plot
     /// Defines maximum number of points that will be stored/drawn
     /// </summary>
     public int PointStored = 128;
+
     /// <summary>
     /// Save thing in case we somehow have ymax = ymin and etc
     /// </summary>
     public float YMaxOffset = 0.1f;
+
     /// <summary>
     /// Save thing if we have null in width of X data
     /// </summary>
     public float XWidthSave = 1f;
+
     private void DrawFirstGraphicLine(DrawingHandleScreen handle, Vector2 from, Vector2 to)
                     => DrawLine(handle, from, to, FirstGraphicThickness, FirstGraphicColor);
 
     private PlotPoints2D _plotPoints;
     private readonly Font _font;
-    public PlotSequencedView() : base()
+
+    public PlotSequencedView()
     {
         _font = AxisFont;
         RectClipContent = false;
         IoCManager.InjectDependencies(this);
         _plotPoints = new PlotPoints2D(PointStored);
     }
+
     public void LoadPlot2DTimePoints(PlotPoints2D plotPoints, LabelContainer? label = null)
     {
         if (label == null)
@@ -51,16 +57,19 @@ public sealed class PlotSequencedView : Plot
             plotPoints.CopyLabels(label);
         _plotPoints = plotPoints;
     }
+
     public void AddPointToPlot(Vector2 point)
     {
         _plotPoints.AddPoint(point);
     }
+
     public void SetLabels(string? xLabel, string? yLabel, string? title)
     {
         _plotPoints.XLabel = xLabel;
         _plotPoints.YLabel = yLabel;
         _plotPoints.Title = title;
     }
+
     public float GetLastAddedPointX()
     {
         if (_plotPoints.Point2Ds == null)
@@ -68,6 +77,7 @@ public sealed class PlotSequencedView : Plot
 
         return _plotPoints.Point2Ds.Last().X;
     }
+
     protected override void Draw(DrawingHandleScreen handle)
     {
         if (_plotPoints == null)

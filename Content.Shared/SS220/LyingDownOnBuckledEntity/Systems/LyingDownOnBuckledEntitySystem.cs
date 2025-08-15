@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
@@ -32,7 +33,7 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-    private string StandUpAction = "ActionStandUp";
+    private const string StandUpAction = "ActionStandUp";
 
     public override void Initialize()
     {

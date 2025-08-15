@@ -18,7 +18,7 @@ namespace Content.Client.SS220.TTS;
 /// Plays TTS audio in world
 /// </summary>
 // ReSharper disable once InconsistentNaming
-public sealed partial class TTSSystem : EntitySystem
+public sealed partial class TTSSystem
 {
     [Dependency] private readonly IAudioManager _audioManager = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
@@ -40,7 +40,7 @@ public sealed partial class TTSSystem : EntitySystem
     private readonly Dictionary<EntityUid, Queue<PlayRequest>> _playQueues = new();
     private readonly Dictionary<EntityUid, EntityUid?> _playingStreams = new();
 
-    private EntityUid _fakeRecipient = new();
+    private readonly EntityUid _fakeRecipient = new();
 
     public override void Initialize()
     {

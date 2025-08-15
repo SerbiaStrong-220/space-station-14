@@ -1,14 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.SS220.DarkForces.Saint.Reagent;
+using Content.Server.SS220.EntityEffects.Effects;
 using Content.Shared.EntityEffects;
 using Content.Shared.SS220.EntityEffects.EffectConditions;
 using Content.Shared.SS220.EntityEffects.Effects;
-using Content.Server.SS220.EntityEffects.Effects;
 
 namespace Content.Server.EntityEffects;
 
-public sealed partial class EntityEffectSystem : EntitySystem
+public sealed partial class EntityEffectSystem
 {
     private void InitializeSS220()
     {

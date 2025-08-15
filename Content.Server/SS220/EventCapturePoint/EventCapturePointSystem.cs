@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Numerics;
 using Content.Server.SS220.FractWar;
 using Content.Shared.DoAfter;
@@ -64,20 +65,18 @@ public sealed class EventCapturePointSystem : EntitySystem
                 component.PointRetentionTime[flagFraction] += TimeSpan.FromSeconds(frameTime);
         }
 
-        if (_timing.CurTime >= _nextRefreshWinPoints)
-        {
-            RefreshWinPoints(gameRule);
-            _nextRefreshWinPoints = _timing.CurTime + TimeSpan.FromSeconds(RefreshWinPointsRate);
-        }
+        if (_timing.CurTime < _nextRefreshWinPoints)
+            return;
+
+        RefreshWinPoints(gameRule);
+        _nextRefreshWinPoints = _timing.CurTime + TimeSpan.FromSeconds(RefreshWinPointsRate);
     }
 
     #region Listeners
     private void OnActivated(Entity<EventCapturePointComponent> entity, ref ActivateInWorldEvent args)
     {
         if (entity.Comp.FlagEntity.HasValue)
-        {
             RemoveFlag(entity, args.User);
-        }
     }
 
     private void OnFlagInstalled(Entity<EventCapturePointComponent> entity, ref FlagInstallationFinshedEvent args)

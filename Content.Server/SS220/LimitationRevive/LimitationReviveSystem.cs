@@ -34,7 +34,7 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
     {
         SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnMobStateChanged, before: [typeof(ZombieSystem)]);
         SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
-        SubscribeLocalEvent<LimitationReviveComponent, AddReviweDebuffsEvent>(OnAddReviweDebuffs);
+        SubscribeLocalEvent<LimitationReviveComponent, AddReviveDebuffsEvent>(OnAddReviweDebuffs);
         SubscribeLocalEvent<LimitationReviveComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<LimitationReviveComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
     }
@@ -56,7 +56,7 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
         }
     }
 
-    private void OnAddReviweDebuffs(Entity<LimitationReviveComponent> ent, ref AddReviweDebuffsEvent args)
+    private void OnAddReviweDebuffs(Entity<LimitationReviveComponent> ent, ref AddReviveDebuffsEvent args)
     {
         TryAddTrait(ent);
     }

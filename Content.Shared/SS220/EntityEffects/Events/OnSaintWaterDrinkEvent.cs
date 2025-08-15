@@ -1,8 +1,8 @@
-﻿﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.FixedPoint;
 
-namespace Content.Shared.SS220.EntityEffects;
+namespace Content.Shared.SS220.EntityEffects.Events;
 
 /**
  * Событие прокидывается, когда святая вода выпита.

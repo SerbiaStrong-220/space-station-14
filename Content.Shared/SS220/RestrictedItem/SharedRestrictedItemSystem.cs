@@ -59,20 +59,19 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
         if (_adminManager.IsAdmin(user))
             return true;
 
-        if (_whitelistSystem.IsWhitelistFail(item.Comp.Whitelist, user))
-        {
-            if (_net.IsServer)
-                _popup.PopupEntity(Loc.GetString(item.Comp.LocalizedPopup), item);
+        if (!_whitelistSystem.IsWhitelistFail(item.Comp.Whitelist, user))
+            return true;
 
-            if (!item.Comp.DamageOnFail.Empty)
-                _damageable.TryChangeDamage(user, item.Comp.DamageOnFail, true);
+        if (_net.IsServer)
+            _popup.PopupEntity(Loc.GetString(item.Comp.LocalizedPopup), item);
 
-            _audio.PlayPredicted(item.Comp.SoundOnFail, item, user);
+        if (!item.Comp.DamageOnFail.Empty)
+            _damageable.TryChangeDamage(user, item.Comp.DamageOnFail, true);
 
-            return false;
-        }
+        _audio.PlayPredicted(item.Comp.SoundOnFail, item, user);
 
-        return true;
+        return false;
+
     }
     public void DropAllRestrictedItems(EntityUid ent)
     {

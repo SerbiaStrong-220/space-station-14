@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Objectives.Systems;
 using Content.Server.Roles;
 using Content.Server.SS220.Objectives.Components;
@@ -41,7 +42,7 @@ public sealed partial class CreateCocoonsConditionSystem : EntitySystem
 
         var progress = spiderQueen.CocoonsList.Count >= target
             ? 1f
-            : (float)spiderQueen.CocoonsList.Count / (float)target;
+            : spiderQueen.CocoonsList.Count / (float)target;
 
         if (progress == 1f)
             spiderQueenRole.Value.Comp2.IsCreateCocoonsCompletedOnce = true;

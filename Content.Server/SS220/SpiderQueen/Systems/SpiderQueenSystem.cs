@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
 using Content.Server.SS220.SpiderQueen.Components;
@@ -8,13 +9,10 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
-using Content.Shared.RCD.Systems;
-using Content.Shared.SS220.Photocopier.Forms;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
 using Content.Shared.Storage;
-using Microsoft.CodeAnalysis;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -42,7 +40,6 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly RCDSystem _rCDSystem = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
 
     public override void Initialize()
@@ -140,7 +137,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
     private void OnAfterCocooning(Entity<SpiderQueenComponent> entity, ref AfterCocooningEvent args)
     {
-        if (args.Cancelled || args.Target is not EntityUid target)
+        if (args.Cancelled || args.Target is not { } target)
             return;
 
         if (!TryComp<TransformComponent>(target, out var transform) || !_mobState.IsDead(target))
