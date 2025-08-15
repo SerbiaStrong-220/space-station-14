@@ -152,8 +152,8 @@
 #Spider queen
 - type: entity
   parent:
-  - MobSpiderQueenGhostRole
   - BaseMobSpiderQueen
+  - MobSpiderQueenGhostRole
   id: MobSpiderQueen
   name: Spider queen
   description: spider dance
@@ -557,8 +557,8 @@
 
 - type: entity
   parent:
-  - MobSpiderLittleGhostRole
   - BaseMobSpiderQueen
+  - MobSpiderLittleGhostRole
   id: MobSpiderLittle
   name: small spider
   description: spider dance
