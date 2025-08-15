@@ -103,7 +103,6 @@
   parent: MobBearSpace
   description: It looks friendly. Why don't you give it a hug?
   components:
-  #SS220 Goal start
   - type: Emoting
   - type: ActionGrant
     actions:
@@ -117,4 +116,3 @@
     rules: ghost-role-information-freeagent-rules
     mindRoles:
     - MindRoleGhostRoleFreeAgent
-  #SS220 Goal end
