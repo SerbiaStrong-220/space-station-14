@@ -1,0 +1,43 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: miGoCapture
+  id: Airlock
+  from:
+    tag: Airlock
+  replacementProto: CultYoggAirlock
+  replacementCooldown: 180
+
+- type: miGoCapture
+  id: GlassAirlock
+  from:
+    tag: GlassAirlock
+  replacementProto: CultYoggAirlock
+  replacementCooldown: 180
+
+- type: miGoCapture
+  id: Wall
+  from:
+    parentPrototypeId: BaseWall
+  replacementProto: WallCultYogg
+  replacementCooldown: 10
+
+- type: miGoCapture
+  id: WindowParent
+  from:
+    parentPrototypeId: Window
+  replacementProto: WallCultYogg
+  replacementCooldown: 10
+
+- type: miGoCapture
+  id: Window
+  from:
+    prototypeId: Window
+  replacementProto: WallCultYogg
+  replacementCooldown: 10
+
+- type: miGoCapture
+  id: BaseSecretDoor
+  from:
+    parentPrototypeId: BaseSecretDoor
+  replacementProto: CultYoggDoor
+  replacementCooldown: 10

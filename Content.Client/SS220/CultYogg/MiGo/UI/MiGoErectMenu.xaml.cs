@@ -23,12 +23,14 @@ public sealed partial class MiGoErectMenu : FancyWindow
         IoCManager.InjectDependencies(this);
         _owner = owner;
         EraseButton.OnToggled += (args) => OnEraseToggled(args.Pressed);
+        CaptureButton.OnToggled += (args) => OnCaptureToggled(args.Pressed);
     }
 
     protected override Vector2 ArrangeOverride(Vector2 finalSize)
     {
         finalSize = base.ArrangeOverride(finalSize);
         var maxGridWidth = ItemsScrollContainer.Width - ItemsContainer.Margin.SumHorizontal;
+
         if (maxGridWidth != _maxItemsGridWidth)
         {
             _maxItemsGridWidth = maxGridWidth;
@@ -42,6 +44,7 @@ public sealed partial class MiGoErectMenu : FancyWindow
     {
         _buildings = state.Buildings;
         ItemsContainer.DisposeAllChildren();
+
         foreach (var building in _buildings.OrderBy(x => x.Order))
         {
             var item = new MiGoErectMenuItem();
@@ -57,6 +60,7 @@ public sealed partial class MiGoErectMenu : FancyWindow
         {
             if (child is not MiGoErectMenuItem item)
                 continue;
+
             item.Pressed = building == item.Building;
         }
     }
@@ -66,15 +70,26 @@ public sealed partial class MiGoErectMenu : FancyWindow
         EraseButton.Pressed = isErase;
     }
 
+    public void SetCaptureEnabled(bool isCapture)
+    {
+        CaptureButton.Pressed = isCapture;
+    }
+
     public void OnItemToggled(MiGoErectMenuItem item)
     {
         if (item.Building is null)
             return;
+
         _owner.OnBuildingToggle(item.Building);
     }
 
     public void OnEraseToggled(bool isErase)
     {
         _owner.OnEraseToggle(isErase);
+    }
+
+    public void OnCaptureToggled(bool isCapture)
+    {
+        _owner.OnCaptureToggle(isCapture);
     }
 }
