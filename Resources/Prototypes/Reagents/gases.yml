@@ -400,6 +400,7 @@
       - !type:HealthChange
         scaleByQuantity: true
         ignoreResistances: true
+        damageCorpses: false
         damage:
           types:
             Cellular: 1
@@ -437,6 +438,7 @@
           min: 0.5
         scaleByQuantity: true
         ignoreResistances: true
+        damageCorpses: false
         damage:
           types:
             Cellular: 0.5
