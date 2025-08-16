@@ -11,21 +11,16 @@ using Robust.Shared.Map;
 namespace Content.Client.SS220.CultYogg.MiGo.UI;
 
 [UsedImplicitly]
-public sealed class MiGoErectBoundUserInterface : BoundUserInterface
+public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private readonly IPlacementManager _placementManager = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
 
     [ViewVariables]
     private MiGoErectMenu? _menu;
-    private EntityUid _owner;
+    private readonly EntityUid _owner = owner;
     private PlacementInformation? _placementInformation;
     private ErectMenuState _state;
-
-    public MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-        _owner = owner;
-    }
 
     protected override void Open()
     {
@@ -42,9 +37,12 @@ public sealed class MiGoErectBoundUserInterface : BoundUserInterface
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
+
         if (!disposing)
             return;
+
         SetState(ErectMenuState.None());
+
         _menu?.Close();
         _placementManager.PlacementChanged -= OnPlacementChanged;
     }
@@ -167,6 +165,7 @@ public sealed class MiGoErectBoundUserInterface : BoundUserInterface
     {
         if (!IsMyPlacementActive())
             return;
+
         _placementManager.Clear();
         _placementInformation = null;
     }
@@ -180,9 +179,20 @@ public sealed class MiGoErectBoundUserInterface : BoundUserInterface
             _building = building;
         }
 
-        public static ErectMenuState None() => new();
-        public static ErectMenuState Building(CultYoggBuildingPrototype building) => new(Key.Building, building);
-        public static ErectMenuState Erase() => new(Key.Erase);
+        public static ErectMenuState None()
+        {
+            return new();
+        }
+
+        public static ErectMenuState Building(CultYoggBuildingPrototype building)
+        {
+            return new(Key.Building, building);
+        }
+
+        public static ErectMenuState Erase()
+        {
+            return new(Key.Erase);
+        }
 
         public bool MatchNone()
         {

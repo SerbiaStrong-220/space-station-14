@@ -13,19 +13,9 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ChameleonStructureComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ChameleonStructureComponent, ChameleonStructurePrototypeSelectedMessage>(OnSelected);
     }
 
-    private void OnMapInit(Entity<ChameleonStructureComponent> ent, ref MapInitEvent args)
-    {
-        if (string.IsNullOrEmpty(ent.Comp.Prototype))
-        {
-            ent.Comp.Prototype = MetaData(ent).EntityPrototype?.ID;//Not sure if this secure from null
-        }
-
-        SetPrototype(ent, ent.Comp.Prototype, true);
-    }
 
     private void OnSelected(Entity<ChameleonStructureComponent> ent, ref ChameleonStructurePrototypeSelectedMessage args)
     {
@@ -41,7 +31,7 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
     /// <summary>
     ///     Change chameleon structure name, description and sprite to mimic other entity prototype.
     /// </summary>
-    public void SetPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false)
+    public override void SetPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false)
     {
         // check that wasn't already selected
         // forceUpdate on component init ignores this check

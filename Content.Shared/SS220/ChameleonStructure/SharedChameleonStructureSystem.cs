@@ -16,20 +16,25 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
 
-    private readonly List<EntProtoId> _data = [];
-
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ChameleonStructureComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<ChameleonStructureComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ChameleonStructureComponent, GetVerbsEvent<InteractionVerb>>(OnVerb);
         SubscribeLocalEvent<ChameleonStructureComponent, PrototypesReloadedEventArgs>(OnPrototypeReload);
     }
 
-    private void OnInit(Entity<ChameleonStructureComponent> ent, ref ComponentInit args)
+    private void OnMapInit(Entity<ChameleonStructureComponent> ent, ref MapInitEvent args)
     {
         UpdateData(ent);
+
+        if (string.IsNullOrEmpty(ent.Comp.Prototype))
+        {
+            ent.Comp.Prototype = MetaData(ent).EntityPrototype?.ID;//Not sure if this secure from null
+        }
+
+        SetPrototype(ent, ent.Comp.Prototype, true);
     }
 
     private void OnPrototypeReload(Entity<ChameleonStructureComponent> ent, ref PrototypesReloadedEventArgs args)
@@ -57,6 +62,8 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
             Act = () => UI.TryToggleUi(ent.Owner, ChameleonStructureUiKey.Key, user)
         });
     }
+
+    public virtual void SetPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false) { }
     protected virtual void UpdateSprite(EntityUid ent, EntityPrototype proto) { }
 
     protected void UpdateVisuals(Entity<ChameleonStructureComponent> ent)
@@ -91,17 +98,9 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    ///     Get a list of valid chameleon targets
-    /// </summary>
-    public IEnumerable<EntProtoId> GetValidTargets()
-    {
-        return _data;
-    }
-
     protected void UpdateData(Entity<ChameleonStructureComponent> ent)
     {
-        _data.Clear();
+        ent.Comp.ChemeleonData.Clear();
         var prototypes = _proto.EnumeratePrototypes<EntityPrototype>();
 
         foreach (var proto in prototypes)
@@ -110,7 +109,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
             if (!IsValidTarget(proto, ent.Comp.RequireTag))
                 continue;
 
-            _data.Add(proto.ID);
+            ent.Comp.ChemeleonData.Add(proto.ID);
         }
 
         if (ent.Comp.ProtoList is null)
@@ -118,10 +117,10 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
 
         foreach (var proto in ent.Comp.ProtoList)
         {
-            if (_data.Contains(proto))
+            if (ent.Comp.ChemeleonData.Contains(proto))
                 continue;
 
-            _data.Add(proto);
+            ent.Comp.ChemeleonData.Add(proto);
         }
     }
 }

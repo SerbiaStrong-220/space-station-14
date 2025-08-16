@@ -12,7 +12,6 @@ namespace Content.Client.SS220.ChameleonStructure.UI;
 public sealed class ChameleonStructureBoundUserInterface : BoundUserInterface
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    private readonly ChameleonStructureSystem _chameleon;
     private readonly TagSystem _tag;
 
     [ViewVariables]
@@ -39,13 +38,7 @@ public sealed class ChameleonStructureBoundUserInterface : BoundUserInterface
         if (state is not ChameleonStructureBoundUserInterfaceState st)
             return;
 
-        var targets = _chameleon.GetValidTargets();
-
-        if (st.RequiredTag == null)
-        {
-            _menu?.UpdateState(targets, st.SelectedId);
-            return;
-        }
+        var targets = st.ChameleonData;
 
         var newTargets = new List<EntProtoId>();
         foreach (var target in targets)
