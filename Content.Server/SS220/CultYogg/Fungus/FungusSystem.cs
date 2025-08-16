@@ -23,7 +23,7 @@ public sealed class FungusSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-
+    private readonly List<EntityUid> _recentlyProcessedUsers = new();
 
     public override void Initialize()
     {
@@ -220,41 +220,52 @@ public sealed class FungusSystem : EntitySystem
 
     private void OnUIButton(Entity<FungusMachineComponent> entity, ref FungusSelectedId args)
     {
-        var (uid, component) = entity;
+        var actor = args.Actor;
 
-        if (args.Actor is not { Valid: true } entit || Deleted(entit))
+        if (_recentlyProcessedUsers.Contains(actor))
             return;
 
-        var entry = GetEntry(uid, args.Id, component);
+        _recentlyProcessedUsers.Add(actor);
 
-        if (entry == null)
+        try
         {
-            _popup.PopupEntity(Loc.GetString("vending-machine-component-try-eject-invalid-item"), uid);
-            return;
-        }
+            var (uid, component) = entity;
 
-        if (string.IsNullOrEmpty(entry.Id))
-            return;
+            if (args.Actor is not { Valid: true } entit || Deleted(entit))
+                return;
 
-        var proto = _prototype.Index(entry.Id);
+            var entry = GetEntry(uid, args.Id, component);
 
-        if (TryComp(uid, out FungusComponent? fungusComponent))
-        {
-            if (proto.TryGetComponent<SeedComponent>("Seed", out var seedComponent))
+            if (entry == null)
+                return;
+
+            if (string.IsNullOrEmpty(entry.Id))
+                return;
+
+            var proto = _prototype.Index(entry.Id);
+
+            if (TryComp(uid, out FungusComponent? fungusComponent))
             {
-                if (!_botany.TryGetSeed(seedComponent, out var seed))
-                    return;
+                if (proto.TryGetComponent<SeedComponent>("Seed", out var seedComponent))
+                {
+                    if (!_botany.TryGetSeed(seedComponent, out var seed))
+                        return;
 
-                _popup.PopupEntity(Loc.GetString("plant-holder-component-plant-success-message",
-                        ("seedName", Loc.GetString(seed.Name)),
-                        ("seedNoun", Loc.GetString(seed.Noun))),
-                        uid,
-                        PopupType.Medium);
-                fungusComponent.Seed = seed;
-                fungusComponent.Age = 1;
-                fungusComponent.LastCycle = _gameTiming.CurTime;
-                UpdateSprite(uid, fungusComponent);
+                    _popup.PopupEntity(Loc.GetString("plant-holder-component-plant-success-message",
+                            ("seedName", Loc.GetString(seed.Name)),
+                            ("seedNoun", Loc.GetString(seed.Noun))),
+                            uid,
+                            PopupType.Medium);
+                    fungusComponent.Seed = seed;
+                    fungusComponent.Age = 1;
+                    fungusComponent.LastCycle = _gameTiming.CurTime;
+                    UpdateSprite(uid, fungusComponent);
+                }
             }
+        }
+        finally
+        {
+            Timer.Spawn(100, () => _recentlyProcessedUsers.Remove(actor));
         }
     }
 
