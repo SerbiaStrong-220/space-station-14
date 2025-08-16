@@ -23,10 +23,10 @@ public sealed class MiGoSystem : SharedMiGoSystem
 
     private void OnAppearanceChange(Entity<MiGoComponent> ent, ref AppearanceChangeEvent args)
     {
-)
         if (!TryComp<SpriteComponent>(ent, out var sprite))
             return;
 
+        if (!_sprite.LayerMapTryGet((ent, sprite), MiGoVisual.Base, out var layerIndex, false))
             return;
 
         _sprite.LayerSetColor((ent, sprite), layerIndex, ent.Comp.IsPhysicalForm ? Color.White : MiGoAstralColor);

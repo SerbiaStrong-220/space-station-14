@@ -8,27 +8,58 @@ using Robust.Client.Placement;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
-
 namespace Content.Client.SS220.CultYogg.MiGo;
 
-public sealed class MiGoErectPlacementHijack : PlacementHijack
+public sealed class MiGoErectPlacementHijack(MiGoErectBoundUserInterface presenter, CultYoggBuildingPrototype? prototype) : PlacementHijack
 {
-        private readonly IComponentFactory _componentFactory;
+    private readonly IPrototypeManager _prototypeManager = IoCManager.Resolve<IPrototypeManager>();
+    private readonly IComponentFactory _componentFactory = IoCManager.Resolve<IComponentFactory>();
 
+    private readonly MiGoErectBoundUserInterface _presenter = presenter;
+    private readonly CultYoggBuildingPrototype? _prototype = prototype;
 
-        public override bool CanRotate { get; }
+    public override bool CanRotate { get; } = true;
 
-
-        public override bool HijackPlacementRequest(EntityCoordinates coordinates)
+    /// <inheritdoc />
+    public override bool HijackPlacementRequest(EntityCoordinates coordinates)
+    {
+        if (_prototype != null)
         {
+            var dir = Manager.Direction;
+            _presenter.SendBuildMessage(_prototype, coordinates, dir);
+        }
+        return true;
+    }
 
+    /// <inheritdoc />
+    public override bool HijackDeletion(EntityUid entity)
+    {
+        _presenter.SendEntity(entity);
+        return true;
+    }
+
+    /// <inheritdoc />
+    public override void StartHijack(PlacementManager manager)
+    {
+        base.StartHijack(manager);
+        if (_prototype is null)
+            return;
+
+        var entityProto = _prototypeManager.Index(_prototype.ResultProtoId);
+        if (!entityProto.TryGetComponent<SpriteComponent>(out var sprite, _componentFactory))
+            return;
+
+        if (sprite.BaseRSI is null)
+            return;
+
+        var textures = new List<IDirectionalTextureProvider>();
+        foreach (var layer in sprite.AllLayers)
+        {
+            if (layer?.ActualRsi is null || !layer.ActualRsi.TryGetState(layer.RsiState, out var state))
+                continue;
+            textures.Add(state);
         }
 
-
-        {
-            _presenter.SendEntity(ent);
-            return true;
-        }
-
+        manager.CurrentTextures = textures;
     }
 }
