@@ -185,10 +185,10 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         return;
     }
 
-    private EntityUid? PlaceCompleteBuilding(CultYoggBuildingPrototype buildingPrototype, EntityCoordinates location, Direction direction)
+    private EntityUid PlaceCompleteBuilding(CultYoggBuildingPrototype buildingPrototype, EntityCoordinates location, Direction direction)
     {
         if (_netManager.IsClient)//no spawning on client
-            return null;
+            return default;
 
         var building = SpawnAtPosition(buildingPrototype.ResultProtoId, location);
         Transform(building).LocalRotation = direction.ToAngle();
@@ -690,7 +690,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         return true;
     }
 
-    private EntityUid? CompleteBuilding(Entity<CultYoggBuildingFrameComponent> entity)
+    private EntityUid CompleteBuilding(Entity<CultYoggBuildingFrameComponent> entity)
     {
         if (_gameTiming.InPrediction) // this should never run in client
             return default;
