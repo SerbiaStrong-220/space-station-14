@@ -10,33 +10,22 @@
       item: CultYoggCocoonVenomancer
     - type: Gun
       soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
-      cameraRecoilScalar: 1
-      fireRate: 1
+      fireRate: 2
+      selectedMode: SemiAuto
       soundEmpty: null
       projectileSpeed: 25
-    - type: SolutionAmmoProvider
-      solutionId: acid
-      proto: AcidSpit
-      fireCost: 5
-    - type: SolutionContainerManager
-      solutions:
-        acid:
-          maxVol: 25
-          reagents:
-          - ReagentId: CultYoggVenomancerAcid
-            Quantity: 25
-    - type: SolutionRegeneration
-      solution: acid
-      duration: 3
-      generated:
-        reagents:
-          - ReagentId: CultYoggVenomancerAcid
-            Quantity: 5
+    - type: AmmoCounter
     - type: Sprite
       sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_venomancer.rsi
       layers:
         - state: icon
           map: ["sprite"]
+    - type: BasicEntityAmmoProvider
+      proto: ShellShotgun
+      capacity: 15
+    - type: RechargeBasicEntityAmmo
+      rechargeCooldown: 2.5
+      rechargeSound: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
     - type: Item
       size: Ginormous
     - type: Appearance
@@ -100,3 +89,12 @@
         - Impassable
         - BulletImpassable
   - type: Vapor
+
+- type: entity
+  id: CartridgeCaselessRifle
+  name: cartridge (.25 caseless)
+  parent: BaseCartridgeCaselessRifle
+  description: A small caliber utilizing caseless technology, omitting conventional brass casing in favor of hardened propellant. Standard kinetic ammunition is common and useful in most situations.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletCaselessRifle

@@ -53,8 +53,6 @@
       tags:
       - CultYoggStealthProvidable
 
-
-
 - type: entity
   id: Spike
   name: spike
@@ -81,6 +79,8 @@
       types:
         Piercing: 15
         Blunt: 7
+        Poison: 4
+        Heat: 2
   - type: TimedDespawn
     lifetime: 0.6
   - type: GatheringProjectile
