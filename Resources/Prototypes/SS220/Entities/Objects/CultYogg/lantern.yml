@@ -55,6 +55,7 @@
   description: description
   components:
   - type: Sprite
+    noRot: true
     sprite: SS220/Objects/CultYogg/lightbulb.rsi
     layers:
       - state: icon
@@ -62,12 +63,12 @@
         shader: unshaded
         visible: false
         map: [ "light" ]
+  - type: Physics
+    bodyType: Dynamic
+    bodyStatus: InAir
   - type: Item
     heldPrefix: off
     size: Normal
-  - type: Physics
-    bodyType: Dynamic
-    fixedRotation: false
   - type: CultYoggLamp
     addPrefix: true
   - type: ToggleableVisuals
@@ -88,6 +89,8 @@
       - state: inhand-right-light
         shader: unshaded
   - type: Appearance
+  - type: AnimationPlayer
+  - type: FloatingVisuals
 
 - type: entity
   name: cult lightbulb tube
@@ -97,6 +100,7 @@
   description: description
   components:
   - type: Sprite
+    noRot: true
     sprite: SS220/Objects/CultYogg/lightbulb_tube.rsi
     layers:
       - state: icon
@@ -104,12 +108,12 @@
         shader: unshaded
         visible: false
         map: [ "light" ]
+  - type: Physics
+    bodyType: Dynamic
+    bodyStatus: InAir
   - type: Item
     heldPrefix: off
     size: Normal
-  - type: Physics
-    bodyType: Dynamic
-    fixedRotation: false
   - type: CultYoggLamp
     addPrefix: true
   - type: ToggleableVisuals
@@ -130,3 +134,5 @@
       - state: inhand-right-light
         shader: unshaded
   - type: Appearance
+  - type: AnimationPlayer
+  - type: FloatingVisuals
