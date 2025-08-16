@@ -400,6 +400,7 @@
       - !type:HealthChange
         scaleByQuantity: true
         ignoreResistances: true
+        damageCorpses: false
         damage:
           types:
             Cellular: 1
@@ -431,8 +432,13 @@
     Gas:
       effects:
       - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Frezon
+          min: 0.5
         scaleByQuantity: true
         ignoreResistances: true
+        damageCorpses: false
         damage:
           types:
             Cellular: 0.5
