@@ -26,8 +26,4 @@ public sealed partial class StationMinimapData
     [ViewVariables(VVAccess.ReadOnly)]
     [DataField]
     public float MapScale = 1;
-
-    public StationMinimapData()
-    {
-    }
 }

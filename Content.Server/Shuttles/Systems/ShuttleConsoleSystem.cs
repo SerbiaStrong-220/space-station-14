@@ -68,6 +68,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         {
             subs.Event<ShuttleConsoleFTLBeaconMessage>(OnBeaconFTLMessage);
             subs.Event<ShuttleConsoleFTLPositionMessage>(OnPositionFTLMessage);
+            subs.Event<BoundUIOpenedEvent>(OnConsoleUIOpen); // SS220 Shuttle nav info
             subs.Event<BoundUIClosedEvent>(OnConsoleUIClose);
         });
 
@@ -143,6 +144,17 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         }
     }
 
+    // SS220 Shuttle nav info begin
+    private void OnConsoleUIOpen(Entity<ShuttleConsoleComponent> entity, ref BoundUIOpenedEvent args)
+    {
+        if ((ShuttleConsoleUiKey)args.UiKey != ShuttleConsoleUiKey.Key)
+            return;
+
+        var ev = new ShuttleConsoleBoundUIOpenedEvent(entity, args);
+        RaiseLocalEvent(ev);
+    }
+    // SS220 Shuttle nav info end
+
     /// <summary>
     /// Stop piloting if the window is closed.
     /// </summary>
@@ -154,6 +166,11 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         }
 
         RemovePilot(args.Actor);
+
+        // SS220 Shuttle nav info begin
+        var ev = new ShuttleConsoleBoundUIClosedEvent((uid, component), args);
+        RaiseLocalEvent(ev);
+        // SS220 Shuttle nav info end
     }
 
     private void OnConsoleUIOpenAttempt(EntityUid uid, ShuttleConsoleComponent component,
@@ -457,4 +474,18 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             beacons ?? new List<ShuttleBeaconObject>(),
             exclusions ?? new List<ShuttleExclusionObject>());
     }
+
+    // SS220 Shuttle nav info begin
+    public sealed class ShuttleConsoleBoundUIOpenedEvent(Entity<ShuttleConsoleComponent> console, BoundUIOpenedEvent openedEvent) : EntityEventArgs
+    {
+        public Entity<ShuttleConsoleComponent> Console = console;
+        public BoundUIOpenedEvent OpenedEvent = openedEvent;
+    }
+
+    public sealed class ShuttleConsoleBoundUIClosedEvent(Entity<ShuttleConsoleComponent> console, BoundUIClosedEvent closedEvent) : EntityEventArgs
+    {
+        public Entity<ShuttleConsoleComponent> Console = console;
+        public BoundUIClosedEvent ClosedEvent = closedEvent;
+    }
+    // SS220 Shuttle nav info end
 }

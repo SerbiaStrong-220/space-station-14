@@ -57,13 +57,13 @@ public sealed partial class CultYoggComponent : Component
     /// <summary>
     /// The lowest hunger threshold that this mob can be in before it's allowed to digest another shroom.
     /// </summary>
-    [DataField("minHungerThreshold"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public HungerThreshold MinHungerThreshold = HungerThreshold.Starving;
 
     /// <summary>
     /// The lowest thirst threshold that this mob can be in before it's allowed to digest another shroom.
     /// </summary>
-    [DataField("minThirstThreshold"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public ThirstThreshold MinThirstThreshold = ThirstThreshold.Parched;
     #endregion
 
@@ -76,6 +76,7 @@ public sealed partial class CultYoggComponent : Component
 
     [ViewVariables]
     public float AmountAscensionReagentAscend = 6f; // This is equal to 3 shrooms
+
     [ViewVariables, Access(Other = AccessPermissions.ReadWrite)]
     public float ConsumedAscensionReagent = 0; //buffer
     #endregion
@@ -87,7 +88,6 @@ public sealed partial class CultYoggComponent : Component
     [DataField]
     public Marking? PreviousTail;
 
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField, AutoNetworkedField]
     public CultYoggStage CurrentStage = CultYoggStage.Initial;
     #endregion

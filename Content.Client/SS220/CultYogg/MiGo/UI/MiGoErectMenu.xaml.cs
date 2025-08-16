@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Linq;
 using System.Numerics;
 using Content.Client.UserInterface.Controls;
@@ -15,7 +16,7 @@ public sealed partial class MiGoErectMenu : FancyWindow
     private readonly MiGoErectBoundUserInterface _owner;
     private List<CultYoggBuildingPrototype>? _buildings;
 
-    private float _maxItemsGridWidth = 0f;
+    private float _maxItemsGridWidth;
 
     public MiGoErectMenu(MiGoErectBoundUserInterface owner)
     {

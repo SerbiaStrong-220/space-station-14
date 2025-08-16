@@ -15,6 +15,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using System.Diagnostics.CodeAnalysis;
+using Robust.Shared.GameObjects;
 
 namespace Content.Shared.SS220.CultYogg.Corruption;
 
@@ -42,6 +43,7 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
     private readonly Dictionary<ProtoId<EntityPrototype>, CultYoggCorruptedPrototype> _recipiesByParentPrototypeId = [];
     private readonly Dictionary<ProtoId<TagPrototype>, CultYoggCorruptedPrototype> _recipiesBySourceTag = [];
     private readonly List<EntityUid> _dropEntitiesBuffer = [];
+
 
     private readonly List<(Func<EntityUid, CultYoggCorruptedPrototype?> source, string sourceName)> _recipeSources = [];//ToDo_SS220 Remake this into 1 generated list "proto_source"->"proto_result"
 
@@ -210,6 +212,7 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
             corruption = sourceFunc(uid);
             if (corruption is null)
                 continue;
+
             Log.Debug($"Founded corruption recipe {corruption.ID} for {ToPrettyString(uid)} via {sourceName}");
             return true;
         }

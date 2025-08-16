@@ -1,7 +1,6 @@
 // EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Actions;
-using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.SS220.IgnoreLightVision;
 using Robust.Shared.Prototypes;
@@ -17,7 +16,7 @@ public sealed class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
-    private EntProtoId _actionProto = "ActionToggleKeenHearing";
+    private readonly EntProtoId _actionProto = "ActionToggleKeenHearing";
 
     public override void Initialize()
     {
@@ -34,11 +33,11 @@ public sealed class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<
 
         while (entityQuery.MoveNext(out var uid, out var comp))
         {
-            if (_gameTiming.CurTime > comp.ToggleTime)
-            {
-                Toggle((uid, comp));
-                comp.ToggleTime = null;
-            }
+            if (_gameTiming.CurTime <= comp.ToggleTime)
+                continue;
+
+            Toggle((uid, comp));
+            comp.ToggleTime = null;
         }
     }
 
@@ -48,6 +47,7 @@ public sealed class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<
         if (ent.Comp.AddAction)
             _actions.AddAction(ent.Owner, _actionProto);
     }
+
     protected override void OnComponentRemove(Entity<KeenHearingComponent> ent, ref ComponentRemove args)
     {
         base.OnComponentRemove(ent, ref args);

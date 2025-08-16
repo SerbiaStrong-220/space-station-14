@@ -47,7 +47,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedChameleonStructureSystem _chameleonStructureSystem = default!;
 
-    private readonly List<EntityUid> _dropEntitiesBuffer = [];
+    //private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
     private readonly Dictionary<ProtoId<EntityPrototype>, MiGoCapturePrototype> _сaptureDictBySourcePrototypeId = [];
     private readonly Dictionary<ProtoId<EntityPrototype>, MiGoCapturePrototype> _сaptureDictByParentPrototypeId = [];
@@ -576,9 +576,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
                 var neededMaterial = neededMaterials[i];
                 var addedCount = entity.Comp.AddedMaterialsAmount[i];
 
-                var locKey = addedCount >= neededMaterial.Count ?
-                    "cult-yogg-building-frame-examined-material-full" :
-                    "cult-yogg-building-frame-examined-material-needed";
+                var locKey = addedCount >= neededMaterial.Count
+                    ? "cult-yogg-building-frame-examined-material-full"
+                    : "cult-yogg-building-frame-examined-material-needed";
 
                 if (!_prototypeManager.TryIndex(neededMaterial.StackType, out var stackType))
                     continue;

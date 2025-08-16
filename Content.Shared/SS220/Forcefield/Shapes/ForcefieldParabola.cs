@@ -1,6 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Entry;
+using Pidgin;
+using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Serialization;
+using System.Diagnostics;
 using System.Numerics;
 
 namespace Content.Shared.SS220.Forcefield.Shapes;
@@ -99,6 +103,9 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
     public Vector2[] InnerPoints { get; private set; } = [];
     public Vector2[] OuterPoints { get; private set; } = [];
 
+    private readonly List<IPhysShape> _cachedPhysShapes = [];
+    private readonly List<Vector2> _cachedTrianglesVerts = [];
+
     private Parabola _innerParabola = new();
     private Parabola _centralParabola = new();
     private Parabola _outerParabola = new();
@@ -134,6 +141,9 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
 
         InnerPoints = _innerParabola.GetPoints(Segments);
         OuterPoints = _outerParabola.GetPoints(Segments);
+
+        RefreshPhysShapes();
+        RefreshTrianglesVerts();
 
         Dirty = false;
     }
@@ -173,9 +183,17 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
     }
 
     /// <inheritdoc/>
-    public IEnumerable<IPhysShape> GetPhysShapes()
+    public IReadOnlyList<IPhysShape> GetPhysShapes()
     {
-        var result = new List<IPhysShape>();
+        if (Dirty)
+            Refresh();
+
+        return _cachedPhysShapes;
+    }
+
+    private void RefreshPhysShapes()
+    {
+        _cachedPhysShapes.Clear();
 
         for (var i = 0; i < Segments; i++)
         {
@@ -183,57 +201,67 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
             shape.Set(new List<Vector2>([InnerPoints[i], OuterPoints[i], OuterPoints[i + 1], InnerPoints[i + 1]]));
 
             if (shape.VertexCount <= 0)
-                throw new Exception($"Failed to generate a {nameof(PolygonShape)}");
+                throw new Exception($"Failed to generate a {nameof(PolygonShape)} of {nameof(ForcefieldParabola)} for segment: {i}");
 
-            result.Add(shape);
+            _cachedPhysShapes.Add(shape);
         }
-
-        return result;
     }
 
     /// <inheritdoc/>
-    public IEnumerable<Vector2> GetTrianglesVerts()
+    public IReadOnlyList<Vector2> GetTrianglesVerts()
     {
-        var verts = new List<Vector2>();
+        if (Dirty)
+            Refresh();
+
+        return _cachedTrianglesVerts;
+    }
+
+    private void RefreshTrianglesVerts()
+    {
+        _cachedTrianglesVerts.Clear();
 
         for (var i = 0; i < Segments; i++)
         {
-            verts.Add(InnerPoints[i]);
-            verts.Add(OuterPoints[i]);
-            verts.Add(OuterPoints[i + 1]);
+            _cachedTrianglesVerts.Add(InnerPoints[i]);
+            _cachedTrianglesVerts.Add(OuterPoints[i]);
+            _cachedTrianglesVerts.Add(OuterPoints[i + 1]);
 
-            verts.Add(InnerPoints[i]);
-            verts.Add(InnerPoints[i + 1]);
-            verts.Add(OuterPoints[i + 1]);
+            _cachedTrianglesVerts.Add(InnerPoints[i]);
+            _cachedTrianglesVerts.Add(InnerPoints[i + 1]);
+            _cachedTrianglesVerts.Add(OuterPoints[i + 1]);
         }
-
-        return verts;
     }
 
     /// <inheritdoc/>
-    public bool IsInside(Vector2 point)
+    public bool IsInside(Vector2 entityPoint)
     {
-        return _centralParabola.IsInside(point);
+        return _centralParabola.IsInside(entityPoint);
     }
 
     /// <inheritdoc/>
-    public Vector2? GetClosestPoint(Vector2 point)
+    public bool IsOnShape(Vector2 entityPoint)
     {
-        Vector2? result = null;
+        return _outerParabola.IsInside(entityPoint) && !_innerParabola.IsInside(entityPoint);
+    }
 
-        var parabolaPoints = IsInside(point) ? InnerPoints : OuterPoints;
-        var distance = float.MaxValue;
-        foreach (var p in parabolaPoints)
-        {
-            var dist = (point - p).Length();
-            if (dist < distance)
-            {
-                result = p;
-                distance = dist;
-            }
-        }
+    /// <inheritdoc/>
+    public Vector2 GetClosestPoint(Vector2 entityPoint)
+    {
+        if (IsOnShape(entityPoint))
+            return entityPoint;
 
-        return result;
+        var parabola = IsInside(entityPoint) ? _innerParabola : _outerParabola;
+        return parabola.GetClosestPoint(entityPoint);
+    }
+
+    /// <inheritdoc/>
+    public bool InRange(Vector2 entityPoint, float range)
+    {
+        if (IsOnShape(entityPoint))
+            return true;
+
+        var parabola = IsInside(entityPoint) ? _innerParabola : _outerParabola;
+        return parabola.InRange(entityPoint, range);
     }
 
     [Serializable, NetSerializable]
@@ -256,6 +284,28 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
         public Vector2 Offset = default;
 
         private float A => -Height / (Width / 2 * Width / 2);
+
+        private Matrix3x2 EntityToLocal
+        {
+            get
+            {
+                var offsetMatrix = Matrix3x2.CreateTranslation(-Offset);
+                var rotationMatrix = Matrix3x2.CreateRotation((float)-Angle.Theta);
+
+                return offsetMatrix * rotationMatrix;
+            }
+        }
+
+        private Matrix3x2 LocalToEntity
+        {
+            get
+            {
+                var rotationMatrix = Matrix3x2.CreateRotation((float)Angle.Theta);
+                var offsetMatrix = Matrix3x2.CreateTranslation(Offset);
+
+                return rotationMatrix * offsetMatrix;
+            }
+        }
 
         public Vector2[] GetPoints(int segments)
         {
@@ -289,14 +339,51 @@ public sealed partial class ForcefieldParabola : IForcefieldShape
             return A * x * x + Height;
         }
 
-        public bool IsInside(Vector2 point)
+        public (float LeftX, float RightX) GetX(float y)
         {
-            var rotationMatrix = Matrix3x2.CreateRotation((float)-Angle.Theta);
-            point = Vector2.Transform(point, rotationMatrix);
-            point -= Offset;
+            var sqrt = MathF.Sqrt(y - Height / A);
+            return (-sqrt, sqrt);
+        }
 
-            var parabolaY = GetY(point.X);
-            return parabolaY >= point.Y;
+        public bool IsInside(Vector2 entityPoint)
+        {
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+
+            var parabolaY = GetY(localPoint.X);
+            return parabolaY >= localPoint.Y;
+        }
+
+        public Vector2 GetClosestPoint(Vector2 entityPoint)
+        {
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+
+            var x1 = Math.Clamp(localPoint.X, -Width / 2, Width / 2);
+            var y2 = Math.Clamp(localPoint.Y, 0, Height);
+            float x2;
+            if (localPoint.X > 0)
+                x2 = GetX(y2).RightX;
+            else
+                x2 = GetX(y2).LeftX;
+
+            var centralX = x1 + (x2 - x1) / 2;
+            var centralY = GetY(centralX);
+            var closestPoint = new Vector2(centralX, centralY);
+
+            return Vector2.Transform(closestPoint, LocalToEntity);
+        }
+
+        public bool InRange(Vector2 entityPoint, float range)
+        {
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+
+            var distanceToCenter = localPoint.Length();
+            var checkRange = range + Math.Max(Height, Width / 2);
+            if (distanceToCenter > checkRange)
+                return false;
+
+            var closestPoint = GetClosestPoint(entityPoint);
+            var distanceToClosest = (entityPoint - closestPoint).Length();
+            return distanceToClosest < range;
         }
     }
 }

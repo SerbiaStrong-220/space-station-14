@@ -13,219 +13,218 @@ using Robust.Shared.Utility;
 using System.Globalization;
 using System.Numerics;
 
-namespace Content.Client.SS220.CluwneComms.UI
+namespace Content.Client.SS220.CluwneComms.UI;
+
+[GenerateTypedNameReferences]
+public sealed partial class CluwneCommsConsoleMenu : BaseWindow
 {
-    [GenerateTypedNameReferences]
-    public sealed partial class CluwneCommsConsoleMenu : BaseWindow
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IStylesheetManager _stylesheetManager = default!;
+    [Dependency] private readonly IResourceCache _resourceCache = default!;
+
+    private readonly CluwneCommsConsoleStyle _style = new();
+
+    public bool CanAnnounce;
+    public bool CanAlert;
+    public string CurrentLevel = string.Empty;
+
+    //timers buffer
+    public TimeSpan? AnnounceCountdownEnd;
+    public TimeSpan? AlertCountdownEnd;
+
+    public event Action<string>? OnAnnounce;
+    public event Action<string, string, string>? OnAlert;
+    public event Action? OnBoom;
+
+    public CluwneCommsConsoleMenu()
     {
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly ILocalizationManager _loc = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly IStylesheetManager _stylesheetManager = default!;
-        [Dependency] private readonly IResourceCache _resourceCache = default!;
+        IoCManager.InjectDependencies(this);
+        RobustXamlLoader.Load(this);
+        Stylesheet = _style.Create(_stylesheetManager.SheetSpace, _resourceCache);
+        AlertLevelButton.OptionsScroll.Parent!.Stylesheet = Stylesheet;
 
-        private readonly CluwneCommsConsoleStyle _style = new();
+        Tabs.SetTabTitle(0, Loc.GetString("cluwne-comms-console-menu-code-tab"));
+        Tabs.SetTabTitle(1, Loc.GetString("cluwne-comms-console-menu-announcement-tab"));
 
-        public bool CanAnnounce;
-        public bool CanAlert;
-        public string CurrentLevel = string.Empty;
+        CloseButton.OnPressed += _ => Close();
 
-        //timers buffer
-        public TimeSpan? AnnounceCountdownEnd;
-        public TimeSpan? AlertCountdownEnd;
+        AnnounceTriggers();
 
-        public event Action<string>? OnAnnounce;
-        public event Action<string, string, string>? OnAlert;
-        public event Action? OnBoom;
+        AlertTriggers();
 
-        public CluwneCommsConsoleMenu()
+        BoomButton.OnPressed += _ => OnBoom?.Invoke();
+    }
+
+    private void AnnounceTriggers()
+    {
+        MessageInput.Edit.Placeholder = new Rope.Leaf(_loc.GetString("cluwne-comms-console-menu-announcement-placeholder"));
+
+        var maxAnnounceLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
+        MessageInput.MaxLength = maxAnnounceLength;
+        MessageInput.Edit.OnTextChanged += (args) =>
         {
-            IoCManager.InjectDependencies(this);
-            RobustXamlLoader.Load(this);
-            Stylesheet = _style.Create(_stylesheetManager.SheetSpace, _resourceCache);
-            AlertLevelButton.OptionsScroll.Parent!.Stylesheet = Stylesheet;
+            if (args.Control.TextLength > maxAnnounceLength)
+            {
+                AnnounceButton.Disabled = true;
+                AnnounceButton.ToolTip = Loc.GetString("comms-console-message-too-long");
+            }
+            else
+            {
+                AnnounceButton.Disabled = !CanAnnounce;
+                AnnounceButton.ToolTip = null;
+            }
+        };
 
-            Tabs.SetTabTitle(0, Loc.GetString("cluwne-comms-console-menu-code-tab"));
-            Tabs.SetTabTitle(1, Loc.GetString("cluwne-comms-console-menu-announcement-tab"));
+        AnnounceButton.OnPressed += _ => OnAnnounce?.Invoke(Rope.Collapse(MessageInput.TextRope));
+    }
 
-            CloseButton.OnPressed += _ => Close();
+    private void AlertTriggers()
+    {
+        var maxAnnounceLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
 
-            AnnounceTriggers();
-
-            AlertTriggers();
-
-            BoomButton.OnPressed += _ => OnBoom?.Invoke();
-        }
-
-        private void AnnounceTriggers()
+        AlertInput.Edit.Placeholder = new Rope.Leaf(_loc.GetString("cluwne-comms-console-menu-alert-placeholder"));
+        AlertInput.MaxLength = maxAnnounceLength;
+        AlertInput.Edit.OnTextChanged += (args) =>
         {
-            MessageInput.Edit.Placeholder = new Rope.Leaf(_loc.GetString("cluwne-comms-console-menu-announcement-placeholder"));
-
-            var maxAnnounceLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
-            MessageInput.MaxLength = maxAnnounceLength;
-            MessageInput.Edit.OnTextChanged += (args) =>
+            if (args.Control.TextLength > maxAnnounceLength)
             {
-                if (args.Control.TextLength > maxAnnounceLength)
-                {
-                    AnnounceButton.Disabled = true;
-                    AnnounceButton.ToolTip = Loc.GetString("comms-console-message-too-long");
-                }
-                else
-                {
-                    AnnounceButton.Disabled = !CanAnnounce;
-                    AnnounceButton.ToolTip = null;
-                }
-            };
+                AlertLevelButton.Disabled = true;
+                AlertLevelButton.ToolTip = Loc.GetString("comms-console-message-too-long");
+            }
+            else
+            {
+                AlertLevelButton.Disabled = !CanAlert;
+                AlertLevelButton.ToolTip = null;
+            }
+        };
 
-            AnnounceButton.OnPressed += _ => OnAnnounce?.Invoke(Rope.Collapse(MessageInput.TextRope));
-        }
-
-        private void AlertTriggers()
+        InstructionInput.Edit.Placeholder = new Rope.Leaf(_loc.GetString("cluwne-comms-console-menu-instruction-placeholder"));
+        var maxInstructionLength = SharedNewsSystem.MaxContentLength;
+        InstructionInput.MaxLength = maxInstructionLength;
+        MessageInput.Edit.OnTextChanged += (args) =>
         {
-            var maxAnnounceLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
-
-            AlertInput.Edit.Placeholder = new Rope.Leaf(_loc.GetString("cluwne-comms-console-menu-alert-placeholder"));
-            AlertInput.MaxLength = maxAnnounceLength;
-            AlertInput.Edit.OnTextChanged += (args) =>
+            if (args.Control.TextLength > maxAnnounceLength)
             {
-                if (args.Control.TextLength > maxAnnounceLength)
-                {
-                    AlertLevelButton.Disabled = true;
-                    AlertLevelButton.ToolTip = Loc.GetString("comms-console-message-too-long");
-                }
-                else
-                {
-                    AlertLevelButton.Disabled = !CanAlert;
-                    AlertLevelButton.ToolTip = null;
-                }
-            };
-
-            InstructionInput.Edit.Placeholder = new Rope.Leaf(_loc.GetString("cluwne-comms-console-menu-instruction-placeholder"));
-            var maxInstructionLength = SharedNewsSystem.MaxContentLength;
-            InstructionInput.MaxLength = maxInstructionLength;
-            MessageInput.Edit.OnTextChanged += (args) =>
+                AlertLevelButton.Disabled = true;
+                AlertLevelButton.ToolTip = Loc.GetString("comms-console-message-too-long");
+            }
+            else
             {
-                if (args.Control.TextLength > maxAnnounceLength)
-                {
-                    AlertLevelButton.Disabled = true;
-                    AlertLevelButton.ToolTip = Loc.GetString("comms-console-message-too-long");
-                }
-                else
-                {
-                    AlertLevelButton.Disabled = !CanAlert;
-                    AlertLevelButton.ToolTip = null;
-                }
-            };
+                AlertLevelButton.Disabled = !CanAlert;
+                AlertLevelButton.ToolTip = null;
+            }
+        };
 
 
-            string code = "";//buffer cause idk how to get option button label on id
-            AlertLevelButton.OnItemSelected += args =>
+        string code = "";//buffer cause idk how to get option button label on id
+        AlertLevelButton.OnItemSelected += args =>
+        {
+            AlertLevelButton.SelectId(args.Id);
+
+            var metadata = AlertLevelButton.GetItemMetadata(args.Id);
+            if (metadata != null && metadata is string cast)
             {
-                AlertLevelButton.SelectId(args.Id);
+                code = cast;
 
-                var metadata = AlertLevelButton.GetItemMetadata(args.Id);
-                if (metadata != null && metadata is string cast)
-                {
-                    code = cast;
-
-                    AlertInput.TextRope = new Rope.Leaf(_loc.GetString("joke-alert-level-" + code + "-announcement"));
-                    InstructionInput.TextRope = new Rope.Leaf(_loc.GetString("joke-alert-level-" + code + "-instructions"));
-                }
-                else
-                {
-                    code = "";
-                    AlertInput.TextRope = new Rope.Leaf("");
-                    InstructionInput.TextRope = new Rope.Leaf("");
-                }
-            };
-
-            InstructionInput.Edit.OnTextChanged += (args) =>
+                AlertInput.TextRope = new Rope.Leaf(_loc.GetString("joke-alert-level-" + code + "-announcement"));
+                InstructionInput.TextRope = new Rope.Leaf(_loc.GetString("joke-alert-level-" + code + "-instructions"));
+            }
+            else
             {
-                if (args.Control.TextLength > maxInstructionLength)
-                {
-                    AlertButton.Disabled = true;
-                    AlertButton.ToolTip = Loc.GetString("comms-console-message-too-long");
-                }
-                else
-                {
-                    AlertButton.Disabled = !CanAlert;
-                    AlertButton.ToolTip = null;
-                }
-            };
-
-            AlertButton.OnPressed += _ =>
-            {
-                OnAlert?.Invoke(code, Rope.Collapse(AlertInput.TextRope), Rope.Collapse(InstructionInput.TextRope));
-                AlertLevelButton.SelectId(AlertLevelButton.ItemCount - 1);
+                code = "";
                 AlertInput.TextRope = new Rope.Leaf("");
                 InstructionInput.TextRope = new Rope.Leaf("");
-            };
-        }
-
-        protected override void FrameUpdate(FrameEventArgs args)
-        {
-            base.FrameUpdate(args);
-            UpdateCountdown();
-        }
-
-        protected override DragMode GetDragModeFor(Vector2 relativeMousePos)
-        {
-            return DragMode.Move;
-        }
-
-        public void UpdateAlertLevels(List<string>? alerts)
-        {
-            AlertLevelButton.Clear();
-
-            if (alerts == null)
-            {
-                AlertLevelButton.AddItem("-");
-                AlertLevelButton.SetItemMetadata(AlertLevelButton.ItemCount - 1, "currentAlert");
-                return;
             }
+        };
 
-            foreach (var alert in alerts)
+        InstructionInput.Edit.OnTextChanged += (args) =>
+        {
+            if (args.Control.TextLength > maxInstructionLength)
             {
-                var name = alert;
-                if (_loc.TryGetString($"joke-alert-level-{alert}", out var locName))
-                    name = locName;
-
-                AlertLevelButton.AddItem(name);
-                AlertLevelButton.SetItemMetadata(AlertLevelButton.ItemCount - 1, alert);
+                AlertButton.Disabled = true;
+                AlertButton.ToolTip = Loc.GetString("comms-console-message-too-long");
             }
+            else
+            {
+                AlertButton.Disabled = !CanAlert;
+                AlertButton.ToolTip = null;
+            }
+        };
 
-            AlertLevelButton.AddItem("-");
+        AlertButton.OnPressed += _ =>
+        {
+            OnAlert?.Invoke(code, Rope.Collapse(AlertInput.TextRope), Rope.Collapse(InstructionInput.TextRope));
             AlertLevelButton.SelectId(AlertLevelButton.ItemCount - 1);
+            AlertInput.TextRope = new Rope.Leaf("");
+            InstructionInput.TextRope = new Rope.Leaf("");
+        };
+    }
+
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+        UpdateCountdown();
+    }
+
+    protected override DragMode GetDragModeFor(Vector2 relativeMousePos)
+    {
+        return DragMode.Move;
+    }
+
+    public void UpdateAlertLevels(List<string>? alerts)
+    {
+        AlertLevelButton.Clear();
+
+        if (alerts == null)
+        {
+            AlertLevelButton.AddItem("-");
+            AlertLevelButton.SetItemMetadata(AlertLevelButton.ItemCount - 1, "currentAlert");
+            return;
         }
 
-        //was added specifically to the buttons so as not to frustrate the user
-        private void UpdateCountdown()
+        foreach (var alert in alerts)
         {
-            if (AnnounceCountdownEnd == null)
-            {
-                AnnounceButton.Text = _loc.GetString($"cluwne-comms-console-menu-announcement-button");
-            }
-            else
-            {
-                var diff = MathHelper.Max((AnnounceCountdownEnd - _timing.CurTime) ?? TimeSpan.Zero, TimeSpan.Zero);
+            var name = alert;
+            if (_loc.TryGetString($"joke-alert-level-{alert}", out var locName))
+                name = locName;
 
-                var infoText = Loc.GetString($"cluwne-comms-console-menu-time-remaining",
-                    ("time", diff.ToString(@"mm\:ss", CultureInfo.CurrentCulture)));
-                AnnounceButton.Text = infoText;
-            }
+            AlertLevelButton.AddItem(name);
+            AlertLevelButton.SetItemMetadata(AlertLevelButton.ItemCount - 1, alert);
+        }
 
-            if (AlertCountdownEnd == null)
-            {
-                AlertButton.Text = _loc.GetString($"cluwne-comms-console-menu-code-button");
-            }
-            else
-            {
-                var diff = MathHelper.Max((AlertCountdownEnd - _timing.CurTime) ?? TimeSpan.Zero, TimeSpan.Zero);
+        AlertLevelButton.AddItem("-");
+        AlertLevelButton.SelectId(AlertLevelButton.ItemCount - 1);
+    }
 
-                var infoText = Loc.GetString($"cluwne-comms-console-menu-time-remaining",
-                    ("time", diff.ToString(@"mm\:ss", CultureInfo.CurrentCulture)));
-                AlertButton.Text = infoText;
-            }
+    //was added specifically to the buttons so as not to frustrate the user
+    private void UpdateCountdown()
+    {
+        if (AnnounceCountdownEnd == null)
+        {
+            AnnounceButton.Text = _loc.GetString($"cluwne-comms-console-menu-announcement-button");
+        }
+        else
+        {
+            var diff = MathHelper.Max((AnnounceCountdownEnd - _timing.CurTime) ?? TimeSpan.Zero, TimeSpan.Zero);
+
+            var infoText = Loc.GetString($"cluwne-comms-console-menu-time-remaining",
+                ("time", diff.ToString(@"mm\:ss", CultureInfo.CurrentCulture)));
+            AnnounceButton.Text = infoText;
+        }
+
+        if (AlertCountdownEnd == null)
+        {
+            AlertButton.Text = _loc.GetString($"cluwne-comms-console-menu-code-button");
+        }
+        else
+        {
+            var diff = MathHelper.Max((AlertCountdownEnd - _timing.CurTime) ?? TimeSpan.Zero, TimeSpan.Zero);
+
+            var infoText = Loc.GetString($"cluwne-comms-console-menu-time-remaining",
+                ("time", diff.ToString(@"mm\:ss", CultureInfo.CurrentCulture)));
+            AlertButton.Text = infoText;
         }
     }
 }

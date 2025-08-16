@@ -20,20 +20,30 @@ public interface IForcefieldShape
     /// <summary>
     /// Gets an array consisting of <see cref="IPhysShape"/> to create a hitbox
     /// </summary>
-    IEnumerable<IPhysShape> GetPhysShapes();
+    IReadOnlyList<IPhysShape> GetPhysShapes();
 
     /// <summary>
     /// Gets an array consisting of triangles verts for <see cref="DrawPrimitiveTopology.TriangleList"/>
     /// </summary>
-    IEnumerable<Vector2> GetTrianglesVerts();
+    IReadOnlyList<Vector2> GetTrianglesVerts();
 
     /// <summary>
-    /// Is the <paramref name="point"/> inside the shape
+    /// Is the <paramref name="entityPoint"/> inside the shape area
     /// </summary>
-    bool IsInside(Vector2 point);
+    bool IsInside(Vector2 entityPoint);
 
     /// <summary>
-    /// Gets the closest point on the shape's boundary to the specified <paramref name="point"/>.
+    /// Is the <paramref name="entityPoint"/> on the shape
     /// </summary>
-    Vector2? GetClosestPoint(Vector2 point);
+    bool IsOnShape(Vector2 entityPoint);
+
+    /// <summary>
+    /// Gets the closest point on the shape's boundary to the specified <paramref name="entityPoint"/>.
+    /// </summary>
+    Vector2 GetClosestPoint(Vector2 entityPoint);
+
+    /// <summary>
+    /// Is the shape within the <paramref name="range"/> of a <paramref name="entityPoint"/>.
+    /// </summary>
+    bool InRange(Vector2 entityPoint, float range);
 }
