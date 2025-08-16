@@ -89,8 +89,9 @@
       - state: inhand-right-light
         shader: unshaded
   - type: Appearance
-  - type: AnimationPlayer
+  - type: AnimationPlayer #ToDo_SS200 figure out why animation isn't working
   - type: FloatingVisuals
+    canFloat: true
 
 - type: entity
   name: cult lightbulb tube
@@ -134,5 +135,6 @@
       - state: inhand-right-light
         shader: unshaded
   - type: Appearance
-  - type: AnimationPlayer
+  - type: AnimationPlayer #ToDo_SS200 figure out why animation isn't working
   - type: FloatingVisuals
+    canFloat: true
