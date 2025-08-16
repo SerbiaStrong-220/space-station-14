@@ -9,6 +9,13 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 using FancyWindow = Content.Client.UserInterface.Controls.FancyWindow;
 using Content.Shared.IdentityManagement;
+using Content.Client.UserInterface.Controls;
+using Content.Client.VendingMachines.UI;
+using Robust.Client.UserInterface;
+using Content.Shared.SS220.CultYogg.MiGo;
+using Robust.Client.UserInterface.CustomControls;
+using Robust.Shared.Utility;
+using Content.Client.Botany.Components;
 
 namespace Content.Client.SS220.CultYogg.FungusMachine
 {
@@ -19,14 +26,15 @@ namespace Content.Client.SS220.CultYogg.FungusMachine
         [Dependency] private readonly IEntityManager _entityManager = default!;
 
         private readonly Dictionary<EntProtoId, EntityUid> _dummies = [];
+        private readonly Dictionary<EntProtoId, (ListContainerButton Button, VendingMachineItem Item)> _listItems = new();
 
-        public event Action<ItemList.ItemListSelectedEventArgs>? OnItemSelected;
+        public event Action<GUIBoundKeyEventArgs, ListData>? OnItemSelected;
         public event Action<string>? OnSearchChanged;
 
         public FungusMachineMenu()
         {
             MinSize = new Vector2(x: 200, y: 150);
-			SetSize = new Vector2(x: 250, y: 150);
+            SetSize = new Vector2(x: 250, y: 150);
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
 
@@ -35,10 +43,20 @@ namespace Content.Client.SS220.CultYogg.FungusMachine
                 OnSearchChanged?.Invoke(SearchBar.Text);
             };
 
-            FungusContents.OnItemSelected += args =>
+            /*FungusContents.OnItemSelected += args =>
             {
                 OnItemSelected?.Invoke(args);
-            };
+            };*/
+
+            FungusContents.SearchBar = SearchBar;
+            FungusContents.DataFilterCondition += DataFilterCondition;
+            FungusContents.GenerateItem += GenerateButton;
+            FungusContents.ItemKeyBindDown += HandleItemKeyBindDown;
+        }
+
+        private void HandleItemKeyBindDown(GUIBoundKeyEventArgs args, ListData data)
+        {
+            OnItemSelected?.Invoke(args, data);
         }
 
         protected override void Dispose(bool disposing)
@@ -55,28 +73,61 @@ namespace Content.Client.SS220.CultYogg.FungusMachine
             _dummies.Clear();
         }
 
-        public void Populate(List<FungusMachineInventoryEntry> inventory, out List<int> filteredInventory,  string? filter = null)
+        private bool DataFilterCondition(string filter, ListData data)
         {
-            filteredInventory = new();
+            if (data is not FungusItemsListData { ItemText: var text })
+                return false;
 
-            while (inventory.Count != FungusContents.Count)
+            if (string.IsNullOrEmpty(filter))
+                return true;
+
+            return text.Contains(filter, StringComparison.CurrentCultureIgnoreCase);
+        }
+
+        private void GenerateButton(ListData data, ListContainerButton button)
+        {
+            if (data is not FungusItemsListData { ItemProtoID: var protoID, ItemText: var text })
+                return;
+
+            var item = new VendingMachineItem(protoID, text);
+            _listItems[protoID] = (button, item);
+            button.AddChild(item);
+            button.AddStyleClass("ButtonSquare");
+
+            var tooltipLocString = protoID.ToString();
+
+            if (tooltipLocString.StartsWith("Cult"))
             {
-                if (inventory.Count > FungusContents.Count)
-                    FungusContents.AddItem(string.Empty);
-                else
-                    FungusContents.RemoveAt(FungusContents.Count - 1);
+                tooltipLocString = tooltipLocString.Substring(4);
             }
 
-            var longestEntry = string.Empty;
-            var spriteSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SpriteSystem>();
+            if (tooltipLocString.EndsWith("Seeds"))
+            {
+                tooltipLocString = tooltipLocString.Substring(0, tooltipLocString.Length - 5);
+            }
+            else if (tooltipLocString.EndsWith("Seed"))
+            {
+                tooltipLocString = tooltipLocString.Substring(0, tooltipLocString.Length - 4);
+            }
 
-            var filterCount = 0;
+            var tooltip = new Tooltip();
+            tooltip.SetMessage(FormattedMessage.FromUnformatted(Loc.GetString($"cult-yogg-{tooltipLocString}-plant-tooltip")));
+            button.TooltipSupplier = _ => tooltip;
+        }
+
+        public void Populate(List<FungusMachineInventoryEntry> inventory)
+        {
+            _listItems.Clear();
+
+            var longestEntry = string.Empty;
+            var listData = new List<FungusItemsListData>();
+
             for (var i = 0; i < inventory.Count; i++)
             {
                 var entry = inventory[i];
-                var fungusItem = FungusContents[i - filterCount];
-                fungusItem.Text = string.Empty;
-                fungusItem.Icon = null;
+
+                if (!_prototypeManager.TryIndex(entry.Id, out var prototype))
+                    continue;
 
                 if (!_dummies.TryGetValue(entry.Id, out var dummy))
                 {
@@ -85,36 +136,29 @@ namespace Content.Client.SS220.CultYogg.FungusMachine
                 }
 
                 var itemName = Identity.Name(dummy, _entityManager);
-                Texture? icon = null;
-                if (_prototypeManager.TryIndex<EntityPrototype>(entry.Id, out var prototype))
+                var itemText = $"{itemName}";
+
+                if (itemText.Length > longestEntry.Length)
+                    longestEntry = itemText;
+
+                listData.Add(new FungusItemsListData(prototype.ID, i)
                 {
-                    icon = spriteSystem.GetPrototypeIcon(prototype).Default;
-                }
-
-                if (!string.IsNullOrEmpty(filter) &&
-                    !itemName.ToLowerInvariant().Contains(filter.Trim().ToLowerInvariant()))
-                {
-                    FungusContents.Remove(fungusItem);
-                    filterCount++;
-                    continue;
-                }
-
-                if (itemName.Length > longestEntry.Length)
-                    longestEntry = itemName;
-
-                fungusItem.Text = $"{itemName}";
-                fungusItem.Icon = icon;
-                filteredInventory.Add(i);
+                    ItemText = itemText,
+                });
             }
 
+            FungusContents.PopulateList(listData);
             SetSizeAfterUpdate(longestEntry.Length, inventory.Count);
         }
 
         private void SetSizeAfterUpdate(int longestEntryLength, int contentCount)
         {
-            SetSize = new Vector2(
-                x: Math.Clamp((longestEntryLength + 2) * 12, 250, 300),
-                y: Math.Clamp(contentCount * 50, 150, 350));
+            SetSize = new Vector2(Math.Clamp((longestEntryLength + 2) * 12, 250, 400),
+                Math.Clamp(contentCount * 50, 150, 350));
         }
+    }
+    public record FungusItemsListData(EntProtoId ItemProtoID, int ItemIndex) : ListData
+    {
+        public string ItemText = string.Empty;
     }
 }

@@ -23,7 +23,7 @@ public sealed class FungusSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-
+    private readonly List<EntityUid> _recentlyProcessedUsers = new();
 
     public override void Initialize()
     {
@@ -66,7 +66,7 @@ public sealed class FungusSystem : EntitySystem
         if (component.Seed == null)
             return 0;
 
-        var result = Math.Max(1, (int) (component.Age * component.Seed.GrowthStages / component.Seed.Maturation));
+        var result = Math.Max(1, (int)(component.Age * component.Seed.GrowthStages / component.Seed.Maturation));
         return result > component.Seed.GrowthStages ? component.Seed.GrowthStages : result;
     }
 
@@ -77,9 +77,32 @@ public sealed class FungusSystem : EntitySystem
 
         using (args.PushGroup(nameof(FungusComponent)))
         {
-            args.PushMarkup(entity.Comp.Seed == null
-                ? Loc.GetString("plant-holder-component-nothing-planted-message")
-                : Loc.GetString("plant-holder-component-dead-plant-matter-message"));
+            var seed = entity.Comp.Seed;
+            if (seed != null)
+            {
+                args.PushMarkup(Loc.GetString("plant-holder-component-something-already-growing-message", ("seedName", Loc.GetString(seed.DisplayName))));
+                var currentStage = GetCurrentGrowthStage(entity);
+                if (currentStage <= Math.Floor((double)seed.GrowthStages / 3))
+                {
+                    args.PushMarkup(Loc.GetString("cult-yogg-fungus-stage-1"));
+                }
+                else if (currentStage <= Math.Floor(seed.GrowthStages / 1.5))
+                {
+                    args.PushMarkup(Loc.GetString("cult-yogg-fungus-stage-2"));
+                }
+                else if (currentStage < seed.GrowthStages)
+                {
+                    args.PushMarkup(Loc.GetString("cult-yogg-fungus-stage-3"));
+                }
+                else
+                {
+                    args.PushMarkup(Loc.GetString("cult-yogg-fungus-stage-4"));
+                }
+            }
+            else
+            {
+                args.PushMarkup(Loc.GetString("plant-holder-component-nothing-planted-message"));
+            }
         }
     }
 
@@ -197,41 +220,52 @@ public sealed class FungusSystem : EntitySystem
 
     private void OnUIButton(Entity<FungusMachineComponent> entity, ref FungusSelectedId args)
     {
-        var (uid, component) = entity;
+        var actor = args.Actor;
 
-        if (args.Actor is not { Valid: true } entit || Deleted(entit))
+        if (_recentlyProcessedUsers.Contains(actor))
             return;
 
-        var entry = GetEntry(uid, args.Id, component);
+        _recentlyProcessedUsers.Add(actor);
 
-        if (entry == null)
+        try
         {
-            _popup.PopupEntity(Loc.GetString("vending-machine-component-try-eject-invalid-item"), uid);
-            return;
-        }
+            var (uid, component) = entity;
 
-        if (string.IsNullOrEmpty(entry.Id))
-            return;
+            if (args.Actor is not { Valid: true } entit || Deleted(entit))
+                return;
 
-        var proto = _prototype.Index(entry.Id);
+            var entry = GetEntry(uid, args.Id, component);
 
-        if (TryComp(uid, out FungusComponent? fungusComponent))
-        {
-            if (proto.TryGetComponent<SeedComponent>("Seed", out var seedComponent))
+            if (entry == null)
+                return;
+
+            if (string.IsNullOrEmpty(entry.Id))
+                return;
+
+            var proto = _prototype.Index(entry.Id);
+
+            if (TryComp(uid, out FungusComponent? fungusComponent))
             {
-                if (!_botany.TryGetSeed(seedComponent, out var seed))
-                    return;
+                if (proto.TryGetComponent<SeedComponent>("Seed", out var seedComponent))
+                {
+                    if (!_botany.TryGetSeed(seedComponent, out var seed))
+                        return;
 
-                _popup.PopupEntity(Loc.GetString("plant-holder-component-plant-success-message",
-                        ("seedName",  Loc.GetString(seed.Name)),
-                        ("seedNoun", Loc.GetString(seed.Noun))),
-                        uid,
-                        PopupType.Medium);
-                fungusComponent.Seed = seed;
-                fungusComponent.Age = 1;
-                fungusComponent.LastCycle = _gameTiming.CurTime;
-                UpdateSprite(uid, fungusComponent);
+                    _popup.PopupEntity(Loc.GetString("plant-holder-component-plant-success-message",
+                            ("seedName", Loc.GetString(seed.Name)),
+                            ("seedNoun", Loc.GetString(seed.Noun))),
+                            uid,
+                            PopupType.Medium);
+                    fungusComponent.Seed = seed;
+                    fungusComponent.Age = 1;
+                    fungusComponent.LastCycle = _gameTiming.CurTime;
+                    UpdateSprite(uid, fungusComponent);
+                }
             }
+        }
+        finally
+        {
+            Timer.Spawn(100, () => _recentlyProcessedUsers.Remove(actor));
         }
     }
 
