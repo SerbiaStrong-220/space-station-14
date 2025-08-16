@@ -100,7 +100,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
 
     protected void UpdateData(Entity<ChameleonStructureComponent> ent)
     {
-        ent.Comp.ChemeleonData.Clear();
+        ent.Comp.ChameleonData.Clear();
         var prototypes = _proto.EnumeratePrototypes<EntityPrototype>();
 
         foreach (var proto in prototypes)
@@ -109,7 +109,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
             if (!IsValidTarget(proto, ent.Comp.RequireTag))
                 continue;
 
-            ent.Comp.ChemeleonData.Add(proto.ID);
+            ent.Comp.ChameleonData.Add(proto.ID);
         }
 
         if (ent.Comp.ProtoList is null)
@@ -117,10 +117,10 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
 
         foreach (var proto in ent.Comp.ProtoList)
         {
-            if (ent.Comp.ChemeleonData.Contains(proto))
+            if (ent.Comp.ChameleonData.Contains(proto))
                 continue;
 
-            ent.Comp.ChemeleonData.Add(proto);
+            ent.Comp.ChameleonData.Add(proto);
         }
     }
 }

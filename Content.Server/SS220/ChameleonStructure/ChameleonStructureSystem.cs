@@ -24,7 +24,7 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
 
     private void UpdateUi(Entity<ChameleonStructureComponent> ent)
     {
-        var state = new ChameleonStructureBoundUserInterfaceState(ent.Comp.Prototype, ent.Comp.RequireTag);
+        var state = new ChameleonStructureBoundUserInterfaceState(ent.Comp.Prototype, ent.Comp.ChameleonData);
         UI.SetUiState(ent.Owner, ChameleonStructureUiKey.Key, state);
     }
 
