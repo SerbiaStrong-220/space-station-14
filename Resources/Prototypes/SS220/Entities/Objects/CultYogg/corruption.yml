@@ -382,3 +382,19 @@
   result: CultPinpointer
   corruptionReverseEffect: ExorcismUncorruptEffect
 # Pinpointer end
+
+# Pinpointer beginning
+- type: corrupted
+  id: WarmLightBulb
+  from:
+    parentPrototypeId: BaseLightbulb
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: LightTube
+  from:
+    parentPrototypeId: BaseLightTube
+  result: CultYoggTubeLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
+# Pinpointer end
