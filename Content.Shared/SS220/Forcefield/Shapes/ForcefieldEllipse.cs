@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Serialization;
+using System.Diagnostics;
 using System.Numerics;
 
 namespace Content.Shared.SS220.Forcefield.Shapes;
@@ -98,6 +99,9 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
     public Vector2[] InnerPoints { get; private set; } = [];
     public Vector2[] OuterPoints { get; private set; } = [];
 
+    private readonly List<IPhysShape> _cachedPhysShapes = [];
+    private readonly List<Vector2> _cachedTrianglesVerts = [];
+
     private readonly Ellipse _innerEllipse = new();
     private readonly Ellipse _centralEllipse = new();
     private readonly Ellipse _outerEllipse = new();
@@ -134,6 +138,9 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
         InnerPoints = _innerEllipse.GetPoints(Segments);
         OuterPoints = _outerEllipse.GetPoints(Segments);
 
+        RefreshPhysShapes();
+        RefreshTrianglesVerts();
+
         Dirty = false;
     }
 
@@ -163,64 +170,85 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
     }
 
     /// <inheritdoc/>
-    public IEnumerable<IPhysShape> GetPhysShapes()
+    public IReadOnlyList<IPhysShape> GetPhysShapes()
     {
-        var result = new List<IPhysShape>();
+        if (Dirty)
+            Refresh();
+
+        return _cachedPhysShapes;
+    }
+
+    private void RefreshPhysShapes()
+    {
+        _cachedPhysShapes.Clear();
 
         for (var i = 0; i < Segments; i++)
         {
             var shape = new PolygonShape();
             shape.Set(new List<Vector2>([InnerPoints[i], OuterPoints[i], OuterPoints[i + 1], InnerPoints[i + 1]]));
 
-            result.Add(shape);
-        }
+            if (shape.VertexCount <= 0)
+                throw new Exception($"Failed to generate a {nameof(PolygonShape)} of {nameof(ForcefieldEllipse)} for segment: {i}");
 
-        return result;
+            _cachedPhysShapes.Add(shape);
+        }
     }
 
     /// <inheritdoc/>
-    public IEnumerable<Vector2> GetTrianglesVerts()
+    public IReadOnlyList<Vector2> GetTrianglesVerts()
     {
-        var verts = new List<Vector2>();
+        if (Dirty)
+            Refresh();
+
+        return _cachedTrianglesVerts;
+    }
+
+    private void RefreshTrianglesVerts()
+    {
+        _cachedTrianglesVerts.Clear();
 
         for (var i = 0; i < Segments; i++)
         {
-            verts.Add(InnerPoints[i]);
-            verts.Add(OuterPoints[i]);
-            verts.Add(OuterPoints[i + 1]);
+            _cachedTrianglesVerts.Add(InnerPoints[i]);
+            _cachedTrianglesVerts.Add(OuterPoints[i]);
+            _cachedTrianglesVerts.Add(OuterPoints[i + 1]);
 
-            verts.Add(InnerPoints[i]);
-            verts.Add(InnerPoints[i + 1]);
-            verts.Add(OuterPoints[i + 1]);
+            _cachedTrianglesVerts.Add(InnerPoints[i]);
+            _cachedTrianglesVerts.Add(InnerPoints[i + 1]);
+            _cachedTrianglesVerts.Add(OuterPoints[i + 1]);
         }
-
-        return verts;
     }
 
     /// <inheritdoc/>
-    public bool IsInside(Vector2 point)
+    public bool IsInside(Vector2 entityPoint)
     {
-        return _centralEllipse.IsInside(point);
+        return _centralEllipse.IsInside(entityPoint);
     }
 
     /// <inheritdoc/>
-    public Vector2? GetClosestPoint(Vector2 point)
+    public bool IsOnShape(Vector2 entityPoint)
     {
-        Vector2? result = null;
+        return _outerEllipse.IsInside(entityPoint) && !_innerEllipse.IsInside(entityPoint);
+    }
 
-        var parabolaPoints = IsInside(point) ? InnerPoints : OuterPoints;
-        var distance = float.MaxValue;
-        foreach (var p in parabolaPoints)
-        {
-            var dist = (point - p).Length();
-            if (dist < distance)
-            {
-                result = p;
-                distance = dist;
-            }
-        }
+    /// <inheritdoc/>
+    public Vector2 GetClosestPoint(Vector2 entityPoint)
+    {
+        if (IsOnShape(entityPoint))
+            return entityPoint;
 
-        return result;
+        var ellipse = IsInside(entityPoint) ? _innerEllipse : _outerEllipse;
+        return ellipse.GetClosestPoint(entityPoint);
+    }
+
+    /// <inheritdoc/>
+    public bool InRange(Vector2 entityPoint, float range)
+    {
+        if (IsOnShape(entityPoint))
+            return true;
+
+        var ellipse = IsInside(entityPoint) ? _innerEllipse : _outerEllipse;
+        return ellipse.InRange(entityPoint, range);
     }
 
     [Serializable, NetSerializable]
@@ -253,6 +281,28 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
         public Angle Angle = default;
         public Vector2 Offset = default;
 
+        private Matrix3x2 EntityToLocal
+        {
+            get
+            {
+                var offsetMatrix = Matrix3x2.CreateTranslation(-Offset);
+                var rotationMatrix = Matrix3x2.CreateRotation((float)-Angle.Theta);
+
+                return offsetMatrix * rotationMatrix;
+            }
+        }
+
+        private Matrix3x2 LocalToEntity
+        {
+            get
+            {
+                var rotationMatrix = Matrix3x2.CreateRotation((float)Angle.Theta);
+                var offsetMatrix = Matrix3x2.CreateTranslation(Offset);
+
+                return rotationMatrix * offsetMatrix;
+            }
+        }
+
         public Vector2[] GetPoints(int segments = 64, bool clockwise = true)
         {
             if (segments <= 0)
@@ -268,9 +318,7 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
                 if (clockwise)
                     angle = -angle;
 
-                var x = (float)(Width / 2 * Math.Cos(angle));
-                var y = (float)(Height / 2 * Math.Sin(angle));
-                var point = new Vector2(x, y);
+                var point = GetPoint(angle);
                 point = Vector2.Transform(point, rotationMatrix);
 
                 points.Add(point);
@@ -279,15 +327,43 @@ public sealed partial class ForcefieldEllipse : IForcefieldShape
             return [.. points];
         }
 
-        public bool IsInside(Vector2 point)
+        public Vector2 GetPoint(Angle angle)
         {
-            var rotationMatrix = Matrix3x2.CreateRotation((float)-Angle.Theta);
-            point = Vector2.Transform(point, rotationMatrix);
-            point -= Offset;
+            var x = (float)(Width / 2 * Math.Cos(angle));
+            var y = (float)(Height / 2 * Math.Sin(angle));
+            return new Vector2(x, y);
+        }
+
+        public bool IsInside(Vector2 entityPoint)
+        {
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
 
             var a = Width / 2.0;
             var b = Height / 2.0;
-            return Math.Pow(point.X / a, 2) + Math.Pow(point.Y / b, 2) <= 1;
+            return Math.Pow(localPoint.X / a, 2) + Math.Pow(localPoint.Y / b, 2) <= 1;
+        }
+
+        public Vector2 GetClosestPoint(Vector2 entityPoint)
+        {
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+            var angle = localPoint.ToAngle();
+
+            var closestPoint = GetPoint(angle);
+            return Vector2.Transform(closestPoint, LocalToEntity);
+        }
+
+        public bool InRange(Vector2 entityPoint, float range)
+        {
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+
+            var distanceToCenter = localPoint.Length();
+            var checkRange = range + Math.Max(Height, Width);
+            if (distanceToCenter > checkRange)
+                return false;
+
+            var closestPoint = GetClosestPoint(entityPoint);
+            var distanceToClosest = (entityPoint - closestPoint).Length();
+            return distanceToClosest < range;
         }
     }
 }

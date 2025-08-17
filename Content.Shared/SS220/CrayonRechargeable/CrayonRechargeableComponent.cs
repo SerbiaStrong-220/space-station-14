@@ -1,14 +1,13 @@
-namespace Content.Shared.SS220.CrayonRechargeable
+namespace Content.Shared.SS220.CrayonRechargeable;
+
+[RegisterComponent]
+public sealed partial class CrayonRechargeableComponent : Component
 {
-    [RegisterComponent]
-    public sealed partial class CrayonRechargeableComponent : Component
-    {
-        [DataField, ViewVariables(VVAccess.ReadWrite)]
-        public int ChargesPerWait { get; set; } = 1;
+    [DataField]
+    public int ChargesPerWait { get; set; } = 1;
 
-        [DataField, ViewVariables(VVAccess.ReadWrite)]
-        public TimeSpan WaitingForCharge { get; set; } = TimeSpan.FromSeconds(2.3f);
+    [DataField]
+    public TimeSpan WaitingForCharge { get; set; } = TimeSpan.FromSeconds(2.3f);
 
-        public TimeSpan NextChargeTime = TimeSpan.Zero;
-    }
+    public TimeSpan NextChargeTime = TimeSpan.Zero;
 }

@@ -8,7 +8,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Labels.EntitySystems;
 using Content.Shared.Verbs;
-using Content.Server.SS220.Forensics;
+using Content.Server.SS220.Forensics.Components;
 
 namespace Content.Server.Forensics
 {

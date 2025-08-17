@@ -2,7 +2,9 @@
 using System.Linq;
 using System.Numerics;
 using Content.Shared.SS220.Forcefield.Components;
+using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 
@@ -10,9 +12,11 @@ namespace Content.Client.SS220.Forcefield;
 
 public sealed class ForcefieldOverlay : Overlay
 {
-    private EntityManager _entity;
-    private SharedTransformSystem _transform;
-    private IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IEntityManager _entity = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+
+    private readonly TransformSystem _transform;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
     public override bool RequestScreenTexture => true;
@@ -20,11 +24,11 @@ public sealed class ForcefieldOverlay : Overlay
     private readonly ShaderInstance _shader;
     private readonly ShaderInstance _shader_unshaded;
 
-    public ForcefieldOverlay(EntityManager entMan, IPrototypeManager protoMan)
+    public ForcefieldOverlay()
     {
-        _entity = entMan;
-        _transform = entMan.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
-        _prototype = protoMan;
+        IoCManager.InjectDependencies(this);
+
+        _transform = _entity.System<TransformSystem>();
         _shader_unshaded = _prototype.Index<ShaderPrototype>("unshaded").InstanceUnique();
         _shader = _prototype.Index<ShaderPrototype>("Stealth").InstanceUnique();
 
@@ -36,13 +40,22 @@ public sealed class ForcefieldOverlay : Overlay
         if (ScreenTexture == null)
             return;
 
+        var player = _player.LocalEntity;
+        if (player == null)
+            return;
+
+        var playerMap = _transform.GetMapId(player.Value);
+
         var handle = args.WorldHandle;
         var query = _entity.EntityQueryEnumerator<ForcefieldComponent>();
-
         while (query.MoveNext(out var uid, out var comp))
         {
+            var fieldMap = _transform.GetMapId(uid);
+            if (fieldMap != playerMap)
+                continue;
+
             var verts = comp.Params.Shape.GetTrianglesVerts();
-            if (!verts.Any())
+            if (verts.Count <= 0)
                 continue;
 
             var (pos, rot) = _transform.GetWorldPositionRotation(uid);

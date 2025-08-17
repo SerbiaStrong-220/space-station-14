@@ -6,6 +6,7 @@ using Content.Server.Popups;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Singularity.Components;
+using Content.Server.SS220.SuperMatter.Crystal.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Examine;
@@ -15,7 +16,6 @@ using Content.Shared.Singularity.Components;
 using Content.Shared.Timing;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
-using Content.Server.SS220.SuperMatterCrystal.Components; // SS220-SM-fix
 
 namespace Content.Server.Singularity.EntitySystems;
 

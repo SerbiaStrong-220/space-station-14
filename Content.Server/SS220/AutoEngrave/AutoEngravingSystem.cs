@@ -11,11 +11,11 @@ public sealed class AutoEngravingSystem : EntitySystem
         SubscribeLocalEvent<AutoEngravingComponent, ExaminedEvent>(OnExamine);
     }
 
-    private void OnExamine(EntityUid uid, AutoEngravingComponent component, ExaminedEvent args)
+    private void OnExamine(Entity<AutoEngravingComponent> ent, ref ExaminedEvent args)
     {
-        if (component.AutoEngraveLocKey is null)
+        if (ent.Comp.AutoEngraveLocKey is null)
             return;
 
-        args.PushMarkup(Loc.GetString(component.AutoEngraveLocKey, ("engraved", component.EngravedText)));
+        args.PushMarkup(Loc.GetString(ent.Comp.AutoEngraveLocKey, ("engraved", ent.Comp.EngravedText)));
     }
 }

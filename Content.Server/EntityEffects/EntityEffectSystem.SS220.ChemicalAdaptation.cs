@@ -1,14 +1,15 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.SS220.ChemicalAdaptation;
-using Content.Shared.EntityEffects;
 using Content.Server.SS220.EntityEffects.Effects;
+using Content.Shared.EntityEffects;
+using Content.Shared.SS220.ChemicalAdaptation;
 
 namespace Content.Server.EntityEffects;
 
-public sealed partial class EntityEffectSystem : EntitySystem
+public sealed partial class EntityEffectSystem
 {
     [Dependency] private readonly SharedChemicalAdaptationSystem _adaptation = default!;
+
     private void OnChemicalAdaptation(ref ExecuteEntityEffectEvent<ChemicalAdaptationEffect> args)
     {
         if (args.Args is not EntityEffectReagentArgs reagentArgs)

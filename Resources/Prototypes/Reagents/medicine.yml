@@ -579,7 +579,7 @@
       - !type:HealthChange
         damage:
           types:
-            Cellular: -0.3
+            Cellular: -0.6 # SS220 Phalanximine_tweaks based on https://github.com/SerbiaStrong-220/DevTeam220/issues/445
             Radiation: 0.15
             Caustic: 0.15
       - !type:HealthChange
@@ -589,14 +589,16 @@
         damage:
           types:
             Radiation: 0.2
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          reagent: Arithrazine
-          min: 1
-        damage:
-          types:
-            Caustic: 0.3
+      # SS220 Phalanximine_tweaks based on https://github.com/SerbiaStrong-220/DevTeam220/issues/445 begin
+      # - !type:HealthChange
+      #   conditions:
+      #   - !type:ReagentThreshold
+      #     reagent: Arithrazine
+      #     min: 1
+      #   damage:
+      #     types:
+      #       Caustic: 0.3
+      # SS220 Phalanximine_tweaks end
 
 - type: reagent
   id: PolypyryliumOligomers
