@@ -707,10 +707,16 @@
     sprite: Clothing/Mask/ninja.rsi
   - type: Item
     storedRotation: -90
-  - type: VoiceMask
   - type: EyeProtection
   - type: BreathMask
   - type: IdentityBlocker
+##SS220 - HOP&Ninja-fix start
+  - type: VoiceMask
+  - type: UserInterface
+    interfaces:
+      enum.VoiceMaskUIKey.Key:
+        type: VoiceMaskBoundUserInterface
+##SS220 - HOP&Ninja-fix end
 
 - type: entity
   parent: ClothingMaskGas
