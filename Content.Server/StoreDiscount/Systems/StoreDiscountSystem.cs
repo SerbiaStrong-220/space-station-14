@@ -219,20 +219,10 @@ public sealed class StoreDiscountSystem : EntitySystem
 
     private void ApplyDiscounts(IReadOnlyList<ListingDataWithCostModifiers> listings, IReadOnlyCollection<StoreDiscountData> discounts)
     {
-        var stackTrace = new StackTrace();
-        StackFrame[] frames = stackTrace.GetFrames();
-        foreach (var frame in frames)
-        {
-
-            Console.WriteLine($"{frame}");
-        }
-        Console.WriteLine("11111");
-        Console.WriteLine(discounts.Count.ToString());
         foreach (var discountData in discounts)
         {
             if (discountData.Count <= 0)
             {
-                Console.WriteLine("11112");
                 continue;
             }
 
@@ -249,8 +239,8 @@ public sealed class StoreDiscountSystem : EntitySystem
 
             if (found == null)
             {
-                Console.WriteLine($"Attempted to apply discount to listing item with {discountData.ListingId}, but found no such listing item.");
-                continue; // ss220 nukeops discount
+                Log.Warning($"Attempted to apply discount to listing item with {discountData.ListingId}, but found no such listing item.");
+                return;
             }
 
             found.AddCostModifier(discountData.DiscountCategory, discountData.DiscountAmountByCurrency);
