@@ -84,7 +84,7 @@ public sealed partial class CluwneCommsConsoleComponent : Component
     [ViewVariables]
     [DataField]
     public Color Color = Color.Gold;
-;
+
     /// <summary>
     /// List of alerts
     /// </summary>
