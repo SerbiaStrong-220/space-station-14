@@ -62,10 +62,11 @@
   - Salvage
   - Security
   - Brig
-#  - Lawyer #SS220-Law Department
+  - Lawyer #SS220-Law Department
   - Cargo
   - Atmospherics
   - Medical
+  - Paramedic #SS220 PaNfixes
   special:
   - !type:AddComponentSpecial
     components:
