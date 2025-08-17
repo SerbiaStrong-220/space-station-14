@@ -90,6 +90,11 @@
     graph: DisposalMachine
     node: disposal_unit
   - type: DisposalUnit
+    # ss220 fix ai inside disposal unit start
+    blacklist:
+      components:
+      - StationAiHeld
+    # ss220 fix ai inside disposal unit end
   - type: ThrowInsertContainer
     containerId: disposals
   - type: UserInterface
@@ -125,6 +130,11 @@
     - state: dispover-handle
       map: [ "enum.DisposalUnitVisualLayers.OverlayEngaged" ]
   - type: DisposalUnit
+    # ss220 fix ai inside disposal unit start
+    blacklist:
+      components:
+      - StationAiHeld
+    # ss220 fix ai inside disposal unit end
   - type: UserInterface
     interfaces:
       enum.DisposalUnitUiKey.Key:

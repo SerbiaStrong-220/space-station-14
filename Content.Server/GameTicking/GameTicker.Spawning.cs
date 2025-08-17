@@ -156,10 +156,6 @@ namespace Content.Server.GameTicking
                     return;
             }
 
-            //SS220 Species-Job-Requirement
-            //if (jobId != null && !_roleSpeciesRestrictSystem.IsAllowed(player, jobId))
-               // return;
-
             SpawnPlayer(player, character, station, jobId, lateJoin, silent);
         }
 

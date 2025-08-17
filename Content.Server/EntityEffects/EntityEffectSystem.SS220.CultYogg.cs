@@ -1,17 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.SS220.CultYogg.AnimalCorruption;
 using Content.Server.SS220.CultYogg.Cultists;
-using Content.Shared.SS220.EntityEffects.Effects;
-using Content.Shared.SS220.CultYogg.Cultists;
+using Content.Server.SS220.DarkForces.Saint.Reagent;
 using Content.Shared.EntityEffects;
 using Content.Shared.Humanoid;
-using Content.Server.SS220.CultYogg;
-using Content.Shared.SS220.EntityEffects;
-using Content.Server.SS220.DarkForces.Saint.Reagent;
+using Content.Shared.SS220.CultYogg.Cultists;
+using Content.Shared.SS220.EntityEffects.Effects;
+using Content.Shared.SS220.EntityEffects.Events;
 
 namespace Content.Server.EntityEffects;
 
-public sealed partial class EntityEffectSystem : EntitySystem
+public sealed partial class EntityEffectSystem
 {
     [Dependency] private readonly CultYoggSystem _cultYogg = default!;
     [Dependency] private readonly CultYoggAnimalCorruptionSystem _cultYoggAnimalCorruption = default!;

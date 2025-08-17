@@ -2,7 +2,7 @@
 
 using Content.Shared.SS220.IgnoreLightVision;
 
-namespace Content.Server.SS220.IgnoreLightVision.KeenHearing;
+namespace Content.Server.SS220.IgnoreLightVision.ThermalVision;
 
 /// <summary>
 /// for getting component state

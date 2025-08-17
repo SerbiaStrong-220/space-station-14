@@ -9,8 +9,8 @@ public sealed partial class DisarmOnAttackComponent : Component
 {
     //Should be between 0 and 1
     [DataField(required: true)]
-    public float Chance = 0;
+    public float Chance;
 
     [DataField]
-    public float HeavyAttackChance = 0;
+    public float HeavyAttackChance;
 }

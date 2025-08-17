@@ -15,6 +15,8 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
+using Content.Shared.Database;
+using Content.Shared.Administration.Logs;
 
 namespace Content.Shared.SS220.Trap;
 
@@ -35,6 +37,7 @@ public sealed class TrapSystem : EntitySystem
     [Dependency] private readonly AnchorableSystem _anchorableSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -110,7 +113,7 @@ public sealed class TrapSystem : EntitySystem
         if (user != null && withSound)
             _audio.PlayPredicted(ent.Comp.SetTrapSound, xform, user);
 
-        ent.Comp.State =TrapArmedState.Armed;
+        ent.Comp.State = TrapArmedState.Armed;
         Dirty(ent);
         UpdateVisuals(ent.Owner, ent.Comp);
         _transformSystem.AnchorEntity(ent.Owner);
@@ -192,6 +195,8 @@ public sealed class TrapSystem : EntitySystem
         }
 
         _ensnareableSystem.TryEnsnare(args.Activator.Value, ent.Owner, ensnaring);
+        _adminLogger.Add(LogType.Action, LogImpact.Medium,
+                    $"{ToPrettyString(args.Activator.Value)} caused trap {ToPrettyString(ent.Owner):entity}");
     }
 
     private void UpdateVisuals(EntityUid uid, TrapComponent? trapComp = null, AppearanceComponent? appearance = null)

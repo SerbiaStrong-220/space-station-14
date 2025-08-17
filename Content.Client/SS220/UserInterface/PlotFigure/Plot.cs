@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.Resources;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -32,6 +33,7 @@ public abstract class Plot : Control
         IoCManager.InjectDependencies(this);
         AxisFont = ResourceCache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", FontSize);
     }
+
     internal void DrawThickLine(DrawingHandleScreen handle, Vector2 from, Vector2 to, float thickness, Color color)
     {
         var fromToVector = to - from;
@@ -75,6 +77,7 @@ public abstract class Plot : Control
         AddAxisLabels(handle, mainLabels);
         AddAxisLabels(handle, secondLabels);
     }
+
     // TODO add logic for secondLabels like moving swapping etc etc
     // good luck guys =)
     private void AddAxisLabels(DrawingHandleScreen handle, LabelContainer? labels)
@@ -88,6 +91,7 @@ public abstract class Plot : Control
         if (labels.Title != null)
             handle.DrawString(AxisFont, CorrectVector(PixelWidth / 2f - FontSize * labels.Title.Length / 4f, PixelHeight), labels.Title, AxisColor);
     }
+
     internal Vector2 CorrectVector(float x, float y)
     {
         return new Vector2(GetCorrectX(x), GetCorrectY(y));
@@ -97,32 +101,39 @@ public abstract class Plot : Control
     {
         return new Vector2(GetCorrectX(vector.X), GetCorrectY(vector.Y));
     }
+
     internal float GetCorrectX(float x)
     {
         return Math.Clamp(x, 0f, PixelWidth);
     }
+
     internal float GetCorrectY(float y)
     {
         return Math.Clamp(PixelHeight - y, 0f, PixelHeight);
     }
+
     /// <summary> Helps with resizing into axises plot </summary>
     internal Vector2 InsideVector(float x, float y)
     {
         return new Vector2(GetInsideX(x), GetInsideY(y));
     }
+
     internal Vector2 InsideVector(Vector2 vector)
     {
         return new Vector2(GetInsideX(vector.X), GetInsideY(vector.Y));
     }
+
     internal float GetInsideX(float x)
     {
         return GetCorrectX(x) / PixelWidth * (PixelWidth - 2 * AxisBorderPosition) + AxisBorderPosition;
     }
+
     internal float GetInsideY(float y)
     {
         y = Math.Clamp(y, 0f, MaxHeight);
         return GetCorrectY(y / PixelHeight * (PixelHeight - 3 * AxisBorderPosition) + AxisBorderPosition);
     }
+
     private void DrawArrowHeadHat(DrawingHandleScreen handle, Vector2 from, Vector2 to, float arrowRange, Color color, Vector2 perpendicularClockwise)
     {
         DrawTriangleStrip(handle, [ to + perpendicularClockwise * arrowRange,
@@ -130,6 +141,7 @@ public abstract class Plot : Control
                                     to,
                                     to - perpendicularClockwise * arrowRange], color);
     }
+
     private void DrawTriangleStrip(DrawingHandleScreen handle, Vector2[] vectors, Color color)
     {
         Span<DrawVertexUV2D> toSpanVector = new DrawVertexUV2D[vectors.Length];

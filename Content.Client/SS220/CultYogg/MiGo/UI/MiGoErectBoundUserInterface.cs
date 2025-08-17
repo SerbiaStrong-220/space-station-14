@@ -86,7 +86,7 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
 
     public void SendEraseMessage(EntityUid entity)
     {
-        SendMessage(new MiGoErectEraseMessage()
+        SendMessage(new MiGoErectEraseMessage
         {
             BuildingFrame = _entityManager.GetNetEntity(entity),
         });

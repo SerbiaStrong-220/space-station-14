@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
@@ -19,6 +20,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.CriminalRecords;
+
 public sealed class CriminalRecordSystem : EntitySystem
 {
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
@@ -40,7 +42,7 @@ public sealed class CriminalRecordSystem : EntitySystem
     // TheArturZh 25.09.2023 22:15
     // TODO: bad code. make it use InventoryRelayedEvent. Create separate components for examining and for examined subscription.
     // no pohuy prosto zaebalsya(
-    private void OnStatusExamine(EntityUid uid, StatusIconComponent comp, ExaminedEvent args)
+    private void OnStatusExamine(Entity<StatusIconComponent> ent, ref ExaminedEvent args)
     {
         var scannerOn = false;
 
@@ -54,12 +56,10 @@ public sealed class CriminalRecordSystem : EntitySystem
         }
         // SS220 ADD GHOST HUD'S END
 
-        if (_inventory.TryGetSlotEntity(args.Examiner, "eyes", out var ent))
+        if (_inventory.TryGetSlotEntity(args.Examiner, "eyes", out _))
         {
             if (HasComp<ShowCriminalRecordIconsComponent>(ent))
-            {
                 scannerOn = true;
-            }
         }
 
         if (!scannerOn)
@@ -67,7 +67,7 @@ public sealed class CriminalRecordSystem : EntitySystem
 
         CriminalRecord? record = null;
 
-        if (_accessReader.FindAccessItemsInventory(uid, out var items))
+        if (_accessReader.FindAccessItemsInventory(ent.Owner, out var items))
         {
             foreach (var item in items)
             {
@@ -145,13 +145,8 @@ public sealed class CriminalRecordSystem : EntitySystem
     public EntityUid? UpdateIdCards(StationRecordKey key, GeneralStationRecord generalRecord)
     {
         CriminalRecord? criminalRecord = null;
-        if (generalRecord.CriminalRecords != null)
-        {
-            if (generalRecord.CriminalRecords.LastRecordTime is int lastRecordTime)
-            {
-                generalRecord.CriminalRecords.Records.TryGetValue(lastRecordTime, out criminalRecord);
-            }
-        }
+        if (generalRecord.CriminalRecords?.LastRecordTime is { } lastRecordTime)
+            generalRecord.CriminalRecords.Records.TryGetValue(lastRecordTime, out criminalRecord);
 
         var stationUid = key.OriginStation;
         var query = EntityQueryEnumerator<IdCardComponent, StationRecordKeyStorageComponent>();
@@ -162,12 +157,10 @@ public sealed class CriminalRecordSystem : EntitySystem
                 continue;
 
             if (keyStorage.Key.Value.Id != key.Id || keyStorage.Key.Value.OriginStation != stationUid)
-            {
                 continue;
-            }
 
             idCard.CurrentSecurityRecord = criminalRecord;
-            EntityManager.Dirty(uid, idCard);
+            Dirty(uid, idCard);
             return uid;
         }
         return null;
@@ -214,7 +207,7 @@ public sealed class CriminalRecordSystem : EntitySystem
         if (!_stationRecords.TryGetRecord(key, out stationRecord))
             return false;
 
-        if (stationRecord.CriminalRecords is not CriminalRecordCatalog catalog)
+        if (stationRecord.CriminalRecords is not { } catalog)
             return false;
 
         criminalRecord = catalog.GetLastRecord();
@@ -248,7 +241,7 @@ public sealed class CriminalRecordSystem : EntitySystem
             }
         }
 
-        var criminalRecord = new CriminalRecord()
+        var criminalRecord = new CriminalRecord
         {
             Message = message,
             RecordType = validatedRecordType
