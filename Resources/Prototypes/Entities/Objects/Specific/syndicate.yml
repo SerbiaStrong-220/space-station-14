@@ -133,6 +133,7 @@
   - type: Tag
     tags:
     - NukeOpsUplink
+  - type: NukeOpsDiscount #SS220 NukeOpsUplink
 
 - type: entity
   parent: BaseUplinkRadio
@@ -159,6 +160,7 @@
   - type: Tag
     tags:
     - LoneOpsUplink # SS220 Lone-Ops-Uplink
+  - type: NukeOpsDiscount #SS220 NukeOpsUplink
 
 - type: entity
   parent: BaseUplinkRadio
