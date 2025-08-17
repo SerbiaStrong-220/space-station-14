@@ -393,7 +393,7 @@ public sealed class StoreDiscountSystem : EntitySystem
         var discounts = InitializeDiscounts(listings);
         ApplyDiscounts(listings, discounts);
         discountComponent.Discounts = discounts;
-    }
+    } // ss220 nukeops discount end
 }
 
 /// <summary>
