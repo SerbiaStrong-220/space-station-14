@@ -399,8 +399,7 @@ public sealed class StoreDiscountSystem : EntitySystem
         if (!comp.UseDiscounts) return;
 
         var discountComponent = EnsureComp<StoreDiscountComponent>(uid);
-        var listings = _store.GetAllListings()
-                .ToArray();
+        var listings = comp.FullListingsCatalog.ToList();
         var discounts = InitializeDiscounts(listings);
         ApplyDiscounts(listings, discounts);
         discountComponent.Discounts = discounts;
