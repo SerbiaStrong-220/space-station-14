@@ -4,6 +4,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
+namespace Content.Shared.SS220.CluwneComms;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class CluwneCommsConsoleComponent : Component
