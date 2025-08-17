@@ -384,7 +384,8 @@ public sealed class StoreDiscountSystem : EntitySystem
             return null;
         }
     }
-    public void OnStoreInitialized(EntityUid uid, StoreComponent comp) // ss220 nukeops discount start
+    // ss220 nukeops discount start
+    public void TryApplyDiscounts(EntityUid uid, StoreComponent comp)
     {
         if (!comp.UseDiscounts) return;
 
@@ -393,7 +394,8 @@ public sealed class StoreDiscountSystem : EntitySystem
         var discounts = InitializeDiscounts(listings);
         ApplyDiscounts(listings, discounts);
         discountComponent.Discounts = discounts;
-    } // ss220 nukeops discount end
+    }
+    // ss220 nukeops discount end
 }
 
 /// <summary>
