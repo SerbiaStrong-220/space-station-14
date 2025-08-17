@@ -307,6 +307,7 @@ public sealed class StoreDiscountSystem : EntitySystem
         public CategoriesWithCumulativeWeightMap(IEnumerable<DiscountCategoryPrototype> prototypes)
         {
             var asArray = prototypes.ToArray();
+            _weights = new (asArray.Length);
             _categories = new(asArray.Length);
 
             var currentIndex = 0;
