@@ -1,9 +1,13 @@
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Server.Store.Conditions;
 using Content.Server.Store.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Store;
+using Content.Shared.Store.Components;
 using Content.Shared.StoreDiscount.Components;
+using Robust.Server.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -19,6 +23,7 @@ public sealed class StoreDiscountSystem : EntitySystem
 
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly StoreSystem _store = default!; // ss220 nukeops discount
 
     /// <inheritdoc />
     public override void Initialize()
@@ -56,17 +61,12 @@ public sealed class StoreDiscountSystem : EntitySystem
     }
 
     /// <summary> Initialized discounts if required. </summary>
-    private void OnStoreInitialized(ref StoreInitializedEvent ev)
+    public void OnStoreInitialized(ref StoreInitializedEvent ev) // ss220 nukeops discount
     {
-        // ss-220-nukeops-discount start
-
-        // if (!ev.UseDiscounts)
-        // {
-        //     return;
-        // }
-
-        if (!EnsureComp<StoreComponent>(ev.Store).UseDiscounts) return;
-        // ss-220-nukeops-discount end
+        if (!ev.UseDiscounts)
+        {
+            return;
+        }
 
         var discountComponent = EnsureComp<StoreDiscountComponent>(ev.Store);
         var discounts = InitializeDiscounts(ev.Listings);
@@ -219,10 +219,20 @@ public sealed class StoreDiscountSystem : EntitySystem
 
     private void ApplyDiscounts(IReadOnlyList<ListingDataWithCostModifiers> listings, IReadOnlyCollection<StoreDiscountData> discounts)
     {
+        var stackTrace = new StackTrace();
+        StackFrame[] frames = stackTrace.GetFrames();
+        foreach (var frame in frames)
+        {
+
+            Console.WriteLine($"{frame}");
+        }
+        Console.WriteLine("11111");
+        Console.WriteLine(discounts.Count.ToString());
         foreach (var discountData in discounts)
         {
             if (discountData.Count <= 0)
             {
+                Console.WriteLine("11112");
                 continue;
             }
 
@@ -239,8 +249,8 @@ public sealed class StoreDiscountSystem : EntitySystem
 
             if (found == null)
             {
-                Log.Warning($"Attempted to apply discount to listing item with {discountData.ListingId}, but found no such listing item.");
-                return;
+                Console.WriteLine($"Attempted to apply discount to listing item with {discountData.ListingId}, but found no such listing item.");
+                continue; // ss220 nukeops discount
             }
 
             found.AddCostModifier(discountData.DiscountCategory, discountData.DiscountAmountByCurrency);
@@ -307,7 +317,7 @@ public sealed class StoreDiscountSystem : EntitySystem
         public CategoriesWithCumulativeWeightMap(IEnumerable<DiscountCategoryPrototype> prototypes)
         {
             var asArray = prototypes.ToArray();
-            _weights = new (asArray.Length);
+            _weights = new(asArray.Length);
             _categories = new(asArray.Length);
 
             var currentIndex = 0;
@@ -352,7 +362,7 @@ public sealed class StoreDiscountSystem : EntitySystem
 
             for (var i = indexToRemove + 1; i < _categories.Count; i++)
             {
-                _weights[i]-= discountCategory.Weight;
+                _weights[i] -= discountCategory.Weight;
             }
 
             _totalWeight -= discountCategory.Weight;
@@ -383,6 +393,17 @@ public sealed class StoreDiscountSystem : EntitySystem
 
             return null;
         }
+    }
+    public void OnStoreInitialized(EntityUid uid, StoreComponent comp) // ss220 nukeops discount start
+    {
+        if (!comp.UseDiscounts) return;
+
+        var discountComponent = EnsureComp<StoreDiscountComponent>(uid);
+        var listings = _store.GetAllListings()
+                .ToArray();
+        var discounts = InitializeDiscounts(listings);
+        ApplyDiscounts(listings, discounts);
+        discountComponent.Discounts = discounts;
     }
 }
 
