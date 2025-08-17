@@ -58,10 +58,15 @@ public sealed class StoreDiscountSystem : EntitySystem
     /// <summary> Initialized discounts if required. </summary>
     private void OnStoreInitialized(ref StoreInitializedEvent ev)
     {
-        if (!ev.UseDiscounts)
-        {
-            return;
-        }
+        // ss-220-nukeops-discount start
+
+        // if (!ev.UseDiscounts)
+        // {
+        //     return;
+        // }
+
+        if (!EnsureComp<StoreComponent>(ev.Store).UseDiscounts) return;
+        // ss-220-nukeops-discount end
 
         var discountComponent = EnsureComp<StoreDiscountComponent>(ev.Store);
         var discounts = InitializeDiscounts(ev.Listings);
