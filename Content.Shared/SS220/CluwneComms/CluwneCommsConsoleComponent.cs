@@ -100,7 +100,7 @@ public sealed partial class CluwneCommsConsoleComponent : Component
     public float ExplosionTotalIntensity = 75f;
 
     [DataField]
-    public float ExplosionSlope = 10f;
+    public float ExplosionSlope = 9f;
 
     [DataField]
     public float ExplosionMaxTileIntensity = 15f;
