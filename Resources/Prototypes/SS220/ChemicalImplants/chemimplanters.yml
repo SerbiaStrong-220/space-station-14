@@ -54,6 +54,7 @@
   - type: LimitedCharges
     maxCharges: 4
   - type: Action
+    useDelay: 60
     checkCanInteract: false
     itemIconStyle: BigAction
     priority: -20
