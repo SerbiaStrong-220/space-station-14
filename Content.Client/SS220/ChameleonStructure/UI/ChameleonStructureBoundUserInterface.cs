@@ -12,8 +12,6 @@ public sealed class ChameleonStructureBoundUserInterface(EntityUid owner, Enum u
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
-    private readonly TagSystem _tag;
-
     [ViewVariables]
     private ChameleonStructureMenu? _menu;
 
@@ -32,9 +30,7 @@ public sealed class ChameleonStructureBoundUserInterface(EntityUid owner, Enum u
         if (state is not ChameleonStructureBoundUserInterfaceState st)
             return;
 
-
         var targets = st.ChameleonData;
-
 
         if (targets == null)
             return;
