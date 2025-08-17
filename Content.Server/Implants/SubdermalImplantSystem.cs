@@ -104,7 +104,9 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         if (!_solutionContainer.TryGetSolution(new(uid, _implantSolutionComp), "beaker", out var beakerSolution))
             return;
 
-        _solutionContainer.TryTransferSolution(chemicalSolution.Value, beakerSolution.Value.Comp.Solution, beakerSolution.Value.Comp.Solution.Volume / 4);
+        if (!TryComp<LimitedChargesComponent>(args.Action, out var limitedCharges)) return;
+
+        _solutionContainer.TryTransferSolution(chemicalSolution.Value, beakerSolution.Value.Comp.Solution, beakerSolution.Value.Comp.Solution.Volume / limitedCharges.MaxCharges);
 
         args.Handled = true;
 
