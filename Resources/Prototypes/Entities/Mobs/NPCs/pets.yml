@@ -392,9 +392,13 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
-    - id: Galactic
-      canSpeak: false
+  #SS220 Animalistic languages begin
+    - id: Doggish
+      canSpeak: true
+  #SS220 Animalistic languages end
     - id: SolCommon
+      canSpeak: false
+    - id: Galactic
       canSpeak: false
   #SS220 languages revive end
   - type: Physics

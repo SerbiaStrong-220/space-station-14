@@ -148,10 +148,10 @@ namespace Content.Server.Entry
             if (!string.IsNullOrEmpty(dest))
             {
                 var resPath = new ResPath(dest).ToRootedPath();
-                var file = resourceManager.UserData.OpenWriteText(resPath.WithName("chem_" + dest));
+                var file = resourceManager.UserData.OpenWriteText(resPath.WithName("chemicals_prototypes" + dest)); // SS220 Wiki
                 ChemistryJsonGenerator.PublishJson(file);
                 file.Flush();
-                file = resourceManager.UserData.OpenWriteText(resPath.WithName("react_" + dest));
+                file = resourceManager.UserData.OpenWriteText(resPath.WithName("reactions_prototypes" + dest)); // SS220 Wiki
                 ReactionJsonGenerator.PublishJson(file);
                 file.Flush();
                 IoCManager.Resolve<IBaseServer>().Shutdown("Data generation done");

@@ -20,7 +20,7 @@ public sealed class ChemistryJsonGenerator
             prototype
                 .EnumeratePrototypes<ReagentPrototype>()
                 .Where(x => !x.Abstract)
-                .Select(x => new ReagentEntry(x))
+                .Select(x => new SS220.Wiki.Chemistry.ReagentWikiEntry(x)) // SS220 Wiki
                 .ToDictionary(x => x.Id, x => x);
 
         var reactions =
@@ -39,6 +39,7 @@ public sealed class ChemistryJsonGenerator
         var serializeOptions = new JsonSerializerOptions
         {
             WriteIndented = true,
+            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals, // SS220 Wiki
             Converters =
             {
                 new UniversalJsonConverter<EntityEffect>(),

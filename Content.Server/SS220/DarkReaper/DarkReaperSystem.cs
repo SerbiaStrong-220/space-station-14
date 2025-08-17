@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Numerics;
 using Content.Server.Actions;
 using Content.Server.AlertLevel;
@@ -9,7 +10,6 @@ using Content.Server.Light.Components;
 using Content.Server.Light.EntitySystems;
 using Content.Server.Station.Systems;
 using Content.Shared.Alert;
-using Content.Shared.Buckle.Components;
 using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
@@ -63,17 +63,17 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         var isTransitioning = comp.PhysicalForm != isMaterial;
         base.ChangeForm(uid, comp, isMaterial);
 
-        if (isTransitioning && !isMaterial)
-        {
-            if (comp.ActivePortal != null)
-            {
-                QueueDel(comp.ActivePortal);
-                comp.ActivePortal = null;
-            }
+        if (!isTransitioning || isMaterial)
+            return;
 
-            if (TryComp<EmbeddedContainerComponent>(uid, out var embeddedContainer))
-                _projectile.DetachAllEmbedded((uid, embeddedContainer));
+        if (comp.ActivePortal != null)
+        {
+            QueueDel(comp.ActivePortal);
+            comp.ActivePortal = null;
         }
+
+        if (TryComp<EmbeddedContainerComponent>(uid, out var embeddedContainer))
+            _projectile.DetachAllEmbedded((uid, embeddedContainer));
     }
 
     protected override void CreatePortal(EntityUid uid, DarkReaperComponent comp)
@@ -84,77 +84,76 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         BooInRadius(uid, 6);
     }
 
-    protected override void OnAfterConsumed(EntityUid uid, DarkReaperComponent comp, AfterConsumed args)
+    protected override void OnAfterConsumed(Entity<DarkReaperComponent> ent, ref AfterConsumed args)
     {
-        base.OnAfterConsumed(uid, comp, args);
+        base.OnAfterConsumed(ent, ref args);
 
-        if (!args.Cancelled && args.Target is EntityUid target)
+        if (args is not { Cancelled: false, Target: { } target })
+            return;
+
+        if (!ent.Comp.PhysicalForm || !target.IsValid() || EntityManager.IsQueuedForDeletion(target) ||
+            !_mobState.IsDead(target))
+            return;
+
+        if (!_container.TryGetContainer(ent.Owner, DarkReaperComponent.ConsumedContainerId, out var container))
+            return;
+
+        if (!_container.CanInsert(target, container))
+            return;
+
+        if (_buckle.IsBuckled(args.Target.Value))
+            _buckle.TryUnbuckle(args.Target.Value, args.Target.Value, true);
+
+        // spawn gore
+        Spawn(ent.Comp.EntityToSpawnAfterConsuming, Transform(target).Coordinates);
+
+        // randomly drop inventory items
+        if (_inventory.TryGetContainerSlotEnumerator(target, out var slots))
         {
-            if (comp.PhysicalForm && target.IsValid() && !EntityManager.IsQueuedForDeletion(target) && _mobState.IsDead(target))
+            while (slots.MoveNext(out var containerSlot))
             {
-                if (!_container.TryGetContainer(uid, DarkReaperComponent.ConsumedContainerId, out var container))
-                    return;
+                if (containerSlot.ContainedEntity is not { } containedEntity)
+                    continue;
 
-                if (!_container.CanInsert(target, container))
-                    return;
+                if (!_random.Prob(ent.Comp.InventoryDropProbabilityOnConsumed))
+                    continue;
 
-                if (_buckle.IsBuckled(args.Target.Value))
-                {
-                    _buckle.TryUnbuckle(args.Target.Value, args.Target.Value, true);
-                }
+                if (!_container.TryRemoveFromContainer(containedEntity))
+                    continue;
 
-                // spawn gore
-                Spawn(comp.EntityToSpawnAfterConsuming, Transform(target).Coordinates);
+                // set random rotation
+                _transform.SetLocalRotationNoLerp(containedEntity, Angle.FromDegrees(_random.NextDouble(0, 360)));
 
-                // randomly drop inventory items
-                if (_inventory.TryGetContainerSlotEnumerator(target, out var slots))
-                {
-                    while (slots.MoveNext(out var containerSlot))
-                    {
-                        if (containerSlot.ContainedEntity is not { } containedEntity)
-                            continue;
-
-                        if (!_random.Prob(comp.InventoryDropProbabilityOnConsumed))
-                            continue;
-
-                        if (!_container.TryRemoveFromContainer(containedEntity))
-                            continue;
-
-                        // set random rotation
-                        _transform.SetLocalRotationNoLerp(containedEntity, Angle.FromDegrees(_random.NextDouble(0, 360)));
-
-                        // apply random impulse
-                        var maxAxisImp = comp.SpawnOnDeathImpulseStrength;
-                        var impulseVec = new Vector2(_random.NextFloat(-maxAxisImp, maxAxisImp), _random.NextFloat(-maxAxisImp, maxAxisImp));
-                        _physics.ApplyLinearImpulse(containedEntity, impulseVec);
-                    }
-                }
-
-                _container.Insert(target, container);
-                _damageable.TryChangeDamage(uid, comp.HealPerConsume, true, origin: args.Args.User);
-
-                comp.Consumed++;
-                var stageBefore = comp.CurrentStage;
-                UpdateStage(uid, comp);
-
-                // warn a crew if alert stage is reached
-                if (comp.CurrentStage > stageBefore && comp.CurrentStage == comp.AlertStage)
-                {
-                    var reaperXform = Transform(uid);
-                    var stationUid = _station.GetStationInMap(reaperXform.MapID);
-                    if (stationUid != null)
-                        _alertLevel.SetLevel(stationUid.Value, comp.AlertLevelOnAlertStage, true, true, true, false);
-
-                    var announcement = Loc.GetString("dark-reaper-component-announcement");
-                    var sender = Loc.GetString("comms-console-announcement-title-centcom");
-                    _chat.DispatchStationAnnouncement(stationUid ?? uid, announcement, sender, false, null, Color.Red);//SS220 CluwneComms
-                }
-
-                // update consoom counter alert
-                UpdateAlert(uid, comp);
-                Dirty(uid, comp);
+                // apply random impulse
+                var maxAxisImp = ent.Comp.SpawnOnDeathImpulseStrength;
+                var impulseVec = new Vector2(_random.NextFloat(-maxAxisImp, maxAxisImp), _random.NextFloat(-maxAxisImp, maxAxisImp));
+                _physics.ApplyLinearImpulse(containedEntity, impulseVec);
             }
         }
+
+        _container.Insert(target, container);
+        _damageable.TryChangeDamage(ent.Owner, ent.Comp.HealPerConsume, true, origin: args.Args.User);
+
+        ent.Comp.Consumed++;
+        var stageBefore = ent.Comp.CurrentStage;
+        UpdateStage(ent, ent.Comp);
+
+        // warn a crew if alert stage is reached
+        if (ent.Comp.CurrentStage > stageBefore && ent.Comp.CurrentStage == ent.Comp.AlertStage)
+        {
+            var reaperXform = Transform(ent);
+            var stationUid = _station.GetStationInMap(reaperXform.MapID);
+            if (stationUid != null)
+                _alertLevel.SetLevel(stationUid.Value, ent.Comp.AlertLevelOnAlertStage, true, true, true, false);
+
+            var announcement = Loc.GetString("dark-reaper-component-announcement");
+            var sender = Loc.GetString("comms-console-announcement-title-centcom");
+            _chat.DispatchStationAnnouncement(stationUid ?? ent, announcement, sender, false, null, Color.Red);//SS220 CluwneComms
+        }
+
+        // update consoom counter alert
+        UpdateAlert(ent, ent.Comp);
+        Dirty(ent);
     }
 
     private void UpdateAlert(EntityUid uid, DarkReaperComponent comp)
@@ -163,13 +162,16 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         _alerts.ClearAlert(uid, DeadscoreStage2Alert);
 
         string alert;
-        if (comp.CurrentStage == 1)
-            alert = DeadscoreStage1Alert;
-        else if (comp.CurrentStage == 2)
-            alert = DeadscoreStage2Alert;
-        else
+        switch (comp.CurrentStage)
         {
-            return;
+            case 1:
+                alert = DeadscoreStage1Alert;
+                break;
+            case 2:
+                alert = DeadscoreStage2Alert;
+                break;
+            default:
+                return;
         }
 
         if (!comp.ConsumedPerStage.TryGetValue(comp.CurrentStage - 1, out var severity))
@@ -177,15 +179,16 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
 
         severity -= comp.Consumed;
 
-        if (alert == DeadscoreStage1Alert && severity > 3)
+        switch (alert)
         {
-            severity = 3; // 3 is a max value our sprite can display at stage 1
-            _sawmill.Error("Had to clamp alert severity. It shouldn't happen. Report it to Artur.");
-        }
-        else if (alert == DeadscoreStage2Alert && severity > 8)
-        {
-            severity = 8; // 8 is a max value our sprite can display at stage 2
-            _sawmill.Error("Had to clamp alert severity. It shouldn't happen. Report it to Artur.");
+            case DeadscoreStage1Alert when severity > 3:
+                severity = 3; // 3 is a max value our sprite can display at stage 1
+                _sawmill.Error("Had to clamp alert severity. It shouldn't happen. Report it to Artur.");
+                break;
+            case DeadscoreStage2Alert when severity > 8:
+                severity = 8; // 8 is a max value our sprite can display at stage 2
+                _sawmill.Error("Had to clamp alert severity. It shouldn't happen. Report it to Artur.");
+                break;
         }
 
         if (severity <= 0)
@@ -198,39 +201,39 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         _alerts.ShowAlert(uid, alert, (short) severity);
     }
 
-    protected override void OnCompInit(EntityUid uid, DarkReaperComponent comp, ComponentStartup args)
+    protected override void OnCompInit(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
     {
-        base.OnCompInit(uid, comp, args);
+        base.OnCompInit(ent, ref args);
 
-        _container.EnsureContainer<Container>(uid, DarkReaperComponent.ConsumedContainerId);
+        _container.EnsureContainer<Container>(ent, DarkReaperComponent.ConsumedContainerId);
 
-        if (!comp.RoflActionEntity.HasValue)
-            _actions.AddAction(uid, ref comp.RoflActionEntity, comp.RoflAction);
+        if (!ent.Comp.RoflActionEntity.HasValue)
+            _actions.AddAction(ent, ref ent.Comp.RoflActionEntity, ent.Comp.RoflAction);
 
-        if (!comp.StunActionEntity.HasValue)
-            _actions.AddAction(uid, ref comp.StunActionEntity, comp.StunAction);
+        if (!ent.Comp.StunActionEntity.HasValue)
+            _actions.AddAction(ent, ref ent.Comp.StunActionEntity, ent.Comp.StunAction);
 
-        if (!comp.ConsumeActionEntity.HasValue)
-            _actions.AddAction(uid, ref comp.ConsumeActionEntity, comp.ConsumeAction);
+        if (!ent.Comp.ConsumeActionEntity.HasValue)
+            _actions.AddAction(ent, ref ent.Comp.ConsumeActionEntity, ent.Comp.ConsumeAction);
 
-        if (!comp.MaterializeActionEntity.HasValue)
-            _actions.AddAction(uid, ref comp.MaterializeActionEntity, comp.MaterializeAction);
+        if (!ent.Comp.MaterializeActionEntity.HasValue)
+            _actions.AddAction(ent, ref ent.Comp.MaterializeActionEntity, ent.Comp.MaterializeAction);
 
-        if (!comp.BloodMistActionEntity.HasValue)
-            _actions.AddAction(uid, ref comp.BloodMistActionEntity, comp.BloodMistAction);
+        if (!ent.Comp.BloodMistActionEntity.HasValue)
+            _actions.AddAction(ent, ref ent.Comp.BloodMistActionEntity, ent.Comp.BloodMistAction);
 
-        UpdateAlert(uid, comp);
+        UpdateAlert(ent, ent.Comp);
     }
 
-    protected override void OnCompShutdown(EntityUid uid, DarkReaperComponent comp, ComponentShutdown args)
+    protected override void OnCompShutdown(Entity<DarkReaperComponent> ent, ref ComponentShutdown args)
     {
-        base.OnCompShutdown(uid, comp, args);
+        base.OnCompShutdown(ent, ref args);
 
-        _actions.RemoveAction(uid, comp.RoflActionEntity);
-        _actions.RemoveAction(uid, comp.StunActionEntity);
-        _actions.RemoveAction(uid, comp.ConsumeActionEntity);
-        _actions.RemoveAction(uid, comp.MaterializeActionEntity);
-        _actions.RemoveAction(uid, comp.BloodMistActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.RoflActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.StunActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.ConsumeActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.MaterializeActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.BloodMistActionEntity);
     }
 
     protected override void DoStunAbility(EntityUid uid, DarkReaperComponent comp)

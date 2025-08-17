@@ -2,7 +2,7 @@
 
 using Content.Shared.GameTicking.Components;
 using Content.Server.GameTicking.Rules;
-using Content.Server.GameTicking.Rules.Components;
+using Content.Server.SS220.GameTicking.Rules.Components;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 

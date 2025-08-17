@@ -7,7 +7,6 @@ using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Corruption;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.CultYogg.Cultists;
@@ -48,23 +47,23 @@ public abstract class SharedCultYoggSystem : EntitySystem
     }
 
     #region Stage
-    private void OnExamined(EntityUid uid, CultYoggComponent component, ExaminedEvent args)
+    private void OnExamined(Entity<CultYoggComponent> ent, ref ExaminedEvent args)
     {
-        if (component.CurrentStage < CultYoggStage.Reveal)
+        if (ent.Comp.CurrentStage < CultYoggStage.Reveal)
             return;
 
-        if (TryComp<InventoryComponent>(uid, out var item)
-            && _inventory.TryGetSlotEntity(uid, "eyes", out _, item))
+        if (TryComp<InventoryComponent>(ent.Owner, out var item)
+            && _inventory.TryGetSlotEntity(ent.Owner, "eyes", out _, item))
             return;
 
-        if (_inventory.TryGetSlotEntity(uid, "head", out var itemHead, item))
+        if (_inventory.TryGetSlotEntity(ent.Owner, "head", out var itemHead, item))
         {
             if (TryComp(itemHead, out IdentityBlockerComponent? block)
                 && (block.Coverage == IdentityBlockerCoverage.EYES || block.Coverage == IdentityBlockerCoverage.FULL))
                 return;
         }
 
-        if (_inventory.TryGetSlotEntity(uid, "mask", out var itemMask, item))
+        if (_inventory.TryGetSlotEntity(ent.Owner, "mask", out var itemMask, item))
         {
             if (TryComp(itemMask, out IdentityBlockerComponent? block)
                 && (block.Coverage == IdentityBlockerCoverage.EYES || block.Coverage == IdentityBlockerCoverage.FULL))
@@ -73,7 +72,7 @@ public abstract class SharedCultYoggSystem : EntitySystem
             }
         }
 
-        args.PushMarkup($"[color=green]{Loc.GetString("cult-yogg-stage-eyes-markups", ("ent", uid))}[/color]");
+        args.PushMarkup($"[color=green]{Loc.GetString("cult-yogg-stage-eyes-markups", ("ent", ent.Owner))}[/color]");
     }
     #endregion
 

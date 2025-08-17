@@ -63,6 +63,7 @@
     damage:
       types:
         Blunt: 15
+    log: true
   - type: Trap
     durationStun: 0
     setTrapSound: /Audio/SS220/Items/Trap/sound_trap_set.ogg
