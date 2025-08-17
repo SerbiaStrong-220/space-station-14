@@ -95,7 +95,8 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         if (component.ImplantedEntity is not { } ent)
             return;
         if (!TryComp<SolutionContainerManagerComponent>(args.Performer, out var _performerSolutionComp)
-            || !TryComp<SolutionContainerManagerComponent>(uid, out var _implantSolutionComp))
+            || !TryComp<SolutionContainerManagerComponent>(uid, out var _implantSolutionComp)
+            || !TryComp<LimitedChargesComponent>(uid, out var limitedChargesComp))
             return;
 
         if (!_solutionContainer.TryGetSolution(new(args.Performer, _performerSolutionComp), "chemicals", out var chemicalSolution))
@@ -104,7 +105,7 @@ public sealed class SubdermalImplantSystem : SharedSubdermalImplantSystem
         if (!_solutionContainer.TryGetSolution(new(uid, _implantSolutionComp), "beaker", out var beakerSolution))
             return;
 
-        _solutionContainer.TryTransferSolution(chemicalSolution.Value, beakerSolution.Value.Comp.Solution, beakerSolution.Value.Comp.Solution.Volume);
+        _solutionContainer.TryTransferSolution(chemicalSolution.Value, beakerSolution.Value.Comp.Solution, beakerSolution.Value.Comp.Solution.Volume / limitedChargesComp.MaxCharges);
 
         args.Handled = true;
 
