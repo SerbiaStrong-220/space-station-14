@@ -10,6 +10,9 @@ namespace Content.Shared.SS220.EntityEffects.Effects;
 /// </summary>
 public sealed partial class ChemRemoveHallucinationsEffect : EventEntityEffect<ChemRemoveHallucinationsEffect>
 {
-    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) => Loc.GetString("reagent-effect-guidebook-ss220-remove-hallucinations", ("chance", Probability));
+    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+    {
+        return Loc.GetString("reagent-effect-guidebook-ss220-remove-hallucinations");
+    }
 }
 
