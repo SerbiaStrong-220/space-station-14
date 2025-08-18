@@ -61,7 +61,7 @@ public sealed class StoreDiscountSystem : EntitySystem
     }
 
     /// <summary> Initialized discounts if required. </summary>
-    public void OnStoreInitialized(ref StoreInitializedEvent ev) // ss220 nukeops discount
+    private void OnStoreInitialized(ref StoreInitializedEvent ev)
     {
         if (!ev.UseDiscounts)
         {
@@ -385,7 +385,7 @@ public sealed class StoreDiscountSystem : EntitySystem
         }
     }
     // ss220 nukeops discount start
-    public void TryApplyDiscounts(EntityUid uid, StoreComponent comp)
+    public void TryAddDiscounts(EntityUid uid, StoreComponent comp)
     {
         if (!comp.UseDiscounts) return;
 

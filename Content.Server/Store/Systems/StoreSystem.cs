@@ -53,7 +53,7 @@ public sealed partial class StoreSystem : EntitySystem
     {
         RefreshAllListings(component);
         component.StartingMap = Transform(uid).MapUid;
-        _discount.OnStoreInitialized(uid, component); //SS220-nukeops-discount
+        _discount.TryAddDiscounts(uid, component); //SS220-nukeops-discount
     }
 
     private void OnStartup(EntityUid uid, StoreComponent component, ComponentStartup args)
