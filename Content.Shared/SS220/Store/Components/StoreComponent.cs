@@ -3,5 +3,5 @@ namespace Content.Shared.Store.Components;
 public sealed partial class StoreComponent
 {
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public bool UseDiscounts = true;
+    public bool UseDiscounts = false;
 }
