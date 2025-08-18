@@ -54,7 +54,7 @@ public sealed partial class RandomWalkComponent : Component
     /// </summary>
     [DataField("change")]
     [ViewVariables(VVAccess.ReadWrite)]
-    public float Сhange = 1f;
+    public float Change = 1f;
 
     #region Update Timing
 
