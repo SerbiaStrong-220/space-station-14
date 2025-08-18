@@ -514,7 +514,7 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: ClothingOuterStorageFoldableBase
+  parent: ClothingOuterStorageFoldableBase # SS220 Foldable paramedic coat
   id: ClothingOuterCoatParamedicWB
   name: paramedic windbreaker
   description: A paramedic's trusty windbreaker, for all the space wind.
