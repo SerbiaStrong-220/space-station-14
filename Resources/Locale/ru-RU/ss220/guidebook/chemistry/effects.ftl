@@ -9,7 +9,7 @@ reagent-effect-guidebook-ss220-cult-cleanse = пара глотков может
 
 reagent-effect-guidebook-ss220-brain-damage-slow = продлевает жизнь мозга на {$time} секунд
 
-reagent-effect-guidebook-ss220-chemical-adaptation = усваивание вызывает привыкание к реагента в {$modifier} от предыдущего эффекта реагента, которое длится {$duration} секунд, { $refresh ->
+reagent-effect-guidebook-ss220-chemical-adaptation = усваивание вызывает привыкание к реагенту в {$modifier} от предыдущего эффекта реагента, которое длится {$duration} секунд, { $refresh ->
     [true] длительность обновляется при каждом усваивании
     *[false] усваивание не влияет на длительность
     }
