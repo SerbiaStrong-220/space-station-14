@@ -2,8 +2,7 @@ reagent-effect-guidebook-ss220-corrupt-mind = causes clouding of the mind, is a 
 
 reagent-effect-guidebook-ss220-remove-hallucinations = may help relieve symptoms of visual hallucinations, but is not a cure
 
-reagent-effect-guidebook-ss220-free-from-burden =
-helps to get rid of unwanted limbs and also clears excess fungal infection
+reagent-effect-guidebook-ss220-free-from-burden = helps to get rid of unwanted limbs and also clears excess fungal infection
 
 reagent-effect-guidebook-ss220-cult-cleanse = a couple of sips can cleanse you from the influence of cosmic heresy, and even the smallest drop can help with the slightest manifestation of fungal infection
 
