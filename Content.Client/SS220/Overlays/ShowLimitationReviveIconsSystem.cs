@@ -61,39 +61,39 @@ public sealed class ShowLimitationReviveIconsSystem : EquipmentHudSystem<ShowLim
         if (!IsActive)
             return;
 
-        var healthIcons = DecideHealthIcons(entity);
+        //var healthIcons = DecideHealthIcons(entity);
 
-        args.StatusIcons.AddRange(healthIcons);
+        //args.StatusIcons.AddRange(healthIcons);
     }
 
-    private IReadOnlyList<LimitationReviveIconPrototype> DecideHealthIcons(Entity<LimitationReviveComponent> ent)
-    {
-        /*
-        var damageableComponent = entity.Comp;
+    //private IReadOnlyList<LimitationReviveIconPrototype> DecideHealthIcons(Entity<LimitationReviveComponent> ent)
+    //{
+    //    /*
+    //    var damageableComponent = entity.Comp;
 
-        if (damageableComponent.DamageContainerID == null ||
-            !DamageContainers.Contains(damageableComponent.DamageContainerID))
-        {
-            return Array.Empty<HealthIconPrototype>();
-        }
-        */
-        var result = new List<HealthIconPrototype>();
-        /*
+    //    if (damageableComponent.DamageContainerID == null ||
+    //        !DamageContainers.Contains(damageableComponent.DamageContainerID))
+    //    {
+    //        return Array.Empty<HealthIconPrototype>();
+    //    }
+    //    */
+    //    var result = new List<HealthIconPrototype>();
+    //    /*
 
-        // Here you could check health status, diseases, mind status, etc. and pick a good icon, or multiple depending on whatever.
-        if (damageableComponent?.DamageContainerID == "Biological")
-        {
-            if (TryComp<MobStateComponent>(entity, out var state))
-            {
-                // Since there is no MobState for a rotting mob, we have to deal with this case first.
-                if (HasComp<RottingComponent>(entity) && _prototypeMan.TryIndex(damageableComponent.RottingIcon, out var rottingIcon))
-                    result.Add(rottingIcon);
-                else if (damageableComponent.HealthIcons.TryGetValue(state.CurrentState, out var value) && _prototypeMan.TryIndex(value, out var icon))
-                    result.Add(icon);
-            }
-        }
-        */
+    //    // Here you could check health status, diseases, mind status, etc. and pick a good icon, or multiple depending on whatever.
+    //    if (damageableComponent?.DamageContainerID == "Biological")
+    //    {
+    //        if (TryComp<MobStateComponent>(entity, out var state))
+    //        {
+    //            // Since there is no MobState for a rotting mob, we have to deal with this case first.
+    //            if (HasComp<RottingComponent>(entity) && _prototypeMan.TryIndex(damageableComponent.RottingIcon, out var rottingIcon))
+    //                result.Add(rottingIcon);
+    //            else if (damageableComponent.HealthIcons.TryGetValue(state.CurrentState, out var value) && _prototypeMan.TryIndex(value, out var icon))
+    //                result.Add(icon);
+    //        }
+    //    }
+    //    */
 
-        return result;
-    }
+    //    return result;
+    //}
 }
