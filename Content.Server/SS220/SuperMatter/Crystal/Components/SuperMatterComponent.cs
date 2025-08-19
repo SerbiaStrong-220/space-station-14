@@ -1,11 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Robust.Shared.Audio;
+
 using Content.Shared.Atmos;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
+namespace Content.Server.SS220.SuperMatter.Crystal.Components;
 
-namespace Content.Server.SS220.SuperMatterCrystal.Components;
 [RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class SuperMatterComponent : Component
 {
@@ -39,6 +40,7 @@ public sealed partial class SuperMatterComponent : Component
     public float AccumulatedZapEnergy = 0f;
     [ViewVariables(VVAccess.ReadOnly)]
     public float AccumulatedRadiationEnergy = 0f;
+
     /// <summary>
     /// Admins, you can use this to stop delamination just make it like 100 or more.
     /// </summary>
@@ -83,7 +85,8 @@ public sealed partial class SuperMatterComponent : Component
             };
         }
     }
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+
+    [DataField]
     public float Temperature
     {
         get => _temperature;
@@ -98,6 +101,7 @@ public sealed partial class SuperMatterComponent : Component
             };
         }
     }
+
     [ViewVariables(VVAccess.ReadWrite)]
     public float Matter
     {
@@ -112,6 +116,7 @@ public sealed partial class SuperMatterComponent : Component
             };
         }
     }
+
     [ViewVariables(VVAccess.ReadWrite)]
     public float InternalEnergy
     {
@@ -135,6 +140,7 @@ public sealed partial class SuperMatterComponent : Component
     // ProtoId Sector
     [DataField]
     public EntProtoId ConsumeResultEntityPrototype = "Ash";
+
     /// <summary> For future realization </summary>
     [DataField]
     public EntProtoId ResonanceSpawnPrototype = "TeslaEnergyBall";
@@ -154,6 +160,7 @@ public sealed partial class SuperMatterComponent : Component
     // Audio Sector
     [DataField(required: true)]
     public SoundCollectionSpecifier ConsumeSound;
+
     [DataField]
     public SoundSpecifier CalmSound = new SoundPathSpecifier("/Audio/SS220/Ambience/Supermatter/calm.ogg");
     [DataField]

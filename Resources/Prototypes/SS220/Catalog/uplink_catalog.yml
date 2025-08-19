@@ -162,6 +162,19 @@
   categories:
   - UplinkPointless
 
+#Posters
+
+- type: listing
+  id: UplinkContrabandPosters
+  name: uplink-contraband-poster-name
+  description: uplink-contraband-poster-desc
+  icon: { sprite: SS220/Objects/Misc/Contrposter.rsi, state: contrposter }
+  productEntity: BoxContraPosters
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkPointless
+
 - type: listing
   id: UplinkThermalGlasses
   name: uplink-thermal-glasses-name

@@ -366,8 +366,14 @@
     damage:
       types:
         Slash: 0.01
+  # Energy Katana in storage fix begin
   - type: Item
-    sprite: Objects/Weapons/Melee/energykatana.rsi
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/energykatana_storage_64x.rsi
+    shape:
+    - 0,0,0,3
+  # Energy Katana in storage fix end
   - type: Clothing
     sprite: Objects/Weapons/Melee/energykatana.rsi
     slots:

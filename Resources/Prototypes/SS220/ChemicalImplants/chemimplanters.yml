@@ -52,8 +52,9 @@
   description: chemical-implant-action-desc
   components:
   - type: LimitedCharges
-    maxCharges: 1
+    maxCharges: 4
   - type: Action
+    useDelay: 60
     checkCanInteract: false
     itemIconStyle: BigAction
     priority: -20

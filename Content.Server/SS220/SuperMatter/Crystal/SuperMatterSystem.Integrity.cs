@@ -1,12 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using System.ComponentModel;
-using Content.Server.SS220.SuperMatterCrystal.Components;
+
+using Content.Server.SS220.SuperMatter.Crystal.Components;
 using Content.Shared.Atmos;
 using Content.Shared.SS220.SuperMatter.Functions;
 
-namespace Content.Server.SS220.SuperMatterCrystal;
+namespace Content.Server.SS220.SuperMatter.Crystal;
 
-public sealed partial class SuperMatterSystem : EntitySystem
+public sealed partial class SuperMatterSystem
 {
     /// <summary> Based lie, negative damage = heal, no exception will thrown </summary>
     /// <returns> if positive - damage, if negative - heal </returns>
@@ -18,6 +18,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var damage = damageFromDelta > 0 ? damageFromDelta * temperatureFactor : damageFromDelta;
         return damage;
     }
+
     public float GetInternalEnergyToMatterDamageFactor(float internalEnergy, float matter)
     {
         var safeInternalEnergy = GetSafeInternalEnergyToMatterValue(matter);
@@ -25,15 +26,18 @@ public sealed partial class SuperMatterSystem : EntitySystem
         var damageFromDelta = SuperMatterFunctions.EnergyToMatterDamageFactorFunction(delta, matter / MatterNondimensionalization);
         return damageFromDelta;
     }
+
     public float GetSafeInternalEnergyToMatterValue(float matter)
     {
         var normalizedMatter = matter / MatterNondimensionalization;
         return SuperMatterFunctions.SafeInternalEnergyToMatterFunction(normalizedMatter);
     }
+
     public void AddIntegrityDamage(SuperMatterComponent smComp, float damage)
     {
         smComp.IntegrityDamageAccumulator += damage;
     }
+
     public float GetIntegrity(SuperMatterComponent smComp)
     {
         return MathF.Round(smComp.Integrity, 2);
@@ -41,6 +45,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     private const float MaxDamagePerSecond = 0.5f;
     private const float MaxRegenerationPerSecond = 1.2f;
+
     /// <summary> Based lie: negative damage = heal, no exception will thrown </summary>
     /// <returns> Return false only if SM integrity WILL fall below zero, but wont set it to zero </returns>
     private bool TryImplementIntegrityDamage(Entity<SuperMatterComponent> entity)
@@ -66,6 +71,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
     private const float TemperatureDamageFactorCoeff = 3f;
     private const float TemperatureDamageFactorSlowerOffset = 20f;
+
     private float TemperatureDamageFactorFunction(float normalizedTemperature)
     {
         var normalizedMaxTemperature = Atmospherics.Tmax / SuperMatterFunctions.SuperMatterTriplePointTemperature;
@@ -80,6 +86,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
     /// </summary>
     private const float StartIntegrityDecrease = 50f;
     private const float DepthOfCoefficient = 0.75f;
+
     private float GetIntegrityDamageCoefficient(float integrity)
     {
         var coeff = 1f;

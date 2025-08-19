@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Robust.Shared.Timing;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.SS220.ChemicalAdaptation;
 
@@ -63,13 +62,8 @@ public abstract class SharedChemicalAdaptationSystem : EntitySystem
 
     public bool TryGetModifier(EntityUid ent, string reagent, out float value)
     {
-        if (!TryComp<ChemicalAdaptationComponent>(ent, out var adaptComp))
-        {
-            value = 0;
-            return false;
-        }
-
-        if (!adaptComp.ChemicalAdaptations.TryGetValue(reagent, out var adaptationInfo))
+        if (!TryComp<ChemicalAdaptationComponent>(ent, out var adaptComp)
+            || !adaptComp.ChemicalAdaptations.TryGetValue(reagent, out var adaptationInfo))
         {
             value = 0;
             return false;

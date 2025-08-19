@@ -3,7 +3,6 @@
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.SS220.PlacerItem;
-using Content.Shared.SS220.PlacerItem.Components;
 using Robust.Client.Placement;
 using Robust.Client.Player;
 using Robust.Shared.Enums;

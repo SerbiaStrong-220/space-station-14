@@ -1,5 +1,3 @@
-using Content.Shared.Humanoid;
-
 namespace Content.Server.SS220.PenScrambler;
 
 [RegisterComponent]

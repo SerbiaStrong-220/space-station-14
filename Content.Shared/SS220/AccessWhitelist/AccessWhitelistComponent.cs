@@ -11,6 +11,6 @@ namespace Content.Shared.SS220.AccessWhitelist;
 [RegisterComponent, AutoGenerateComponentState]
 public sealed partial class AccessWhitelistComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite), DataField(required: true), AutoNetworkedField]
+    [DataField(required: true), AutoNetworkedField]
     public EntityWhitelist? Whitelist;
 }
