@@ -1,6 +1,6 @@
 - type: entity
   name: bat
-  parent: [ SimpleMobBase, FlyingMobBase, MobCombat ]
+  parent: [ SimpleMobBase, FlyingMobBase, MobCombat, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobBat
   description: Some cultures find them terrifying, others crunchy on the teeth.
   components:
@@ -81,7 +81,7 @@
 
 - type: entity
   name: bee
-  parent: [ SimpleMobBase, FlyingMobBase ]
+  parent: [ SimpleMobBase, FlyingMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobBee
   description: Nice to have, but you can't build a civilization on a foundation of honey alone.
   components:
@@ -343,7 +343,7 @@
 
 - type: entity # TODO: figure out how to make these guys gib when stepped on
   name: cockroach
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobCockroach
   description: This station is just crawling with bugs.
   components:
@@ -769,7 +769,7 @@
 
 - type: entity
   name: butterfly
-  parent: [ SimpleMobBase, FlyingMobBase ]
+  parent: [ SimpleMobBase, FlyingMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobButterfly
   description: Despite popular misconceptions, it's not actually made of butter.
   components:
@@ -1478,8 +1478,20 @@
     availableLanguages:
     - id: Monkey
       canSpeak: true
+    - id: Galactic
+      canSpeak: false
     - id: Reptilian
       canSpeak: false
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
 #SS220 Animalistic languages end
   - type: Speech
     speechSounds: Monkey
@@ -1525,6 +1537,18 @@
       canSpeak: true
     - id: Reptilian
       canSpeak: false
+  #SS220 Animalistic languages fix begin
+    - id: Galactic
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
 #SS220 Animalistic languages end
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
@@ -1586,6 +1610,16 @@
     availableLanguages:
     - id: Reptilian
       canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
 #SS220 Animalistic Languages end
   - type: Speech
     speechSounds: Lizard
@@ -1717,6 +1751,24 @@
       0: Alive
       100: Critical
       200: Dead
+#SS220 Animalistic languages fixes begin
+  - type: Language
+    availableLanguages:
+    - id: Reptilian
+      canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -1750,7 +1802,7 @@
 
 - type: entity
   name: mouse
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobMouse
   description: Squeak!
   components:
@@ -1770,6 +1822,8 @@
     - id: Reptilian
       canSpeak: false
     - id: Monkey
+      canSpeak: false
+    - id: Piggish
       canSpeak: false
 #SS220 Animalistic Languages end
   - type: GhostRole
@@ -2135,7 +2189,7 @@
 
 - type: entity
   name: slug
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobSlug
   description: And they called this a lizard?
   components:
@@ -2182,7 +2236,7 @@
 
 - type: entity
   name: frog
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobFrog
   description: Hop hop hop. Lookin' moist.
   components:
@@ -2250,7 +2304,7 @@
 
 # Would be cool to have some functionality for the parrot to be able to sit on stuff
 - type: entity
-  parent: [ SimpleMobBase, FlyingMobBase ]
+  parent: [ SimpleMobBase, FlyingMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobParrotBase
   name: parrot
   abstract: true
@@ -3504,7 +3558,7 @@
 
 - type: entity
   name: hamster
-  parent: [ SimpleMobBase, MobCombat, StripableInventoryBase]
+  parent: [ SimpleMobBase, MobCombat, StripableInventoryBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobHamster
   description: A cute, fluffy, robust hamster.
   components:
@@ -3515,6 +3569,22 @@
     name: ghost-role-information-hamster-name
     description: ghost-role-information-hamster-description
     rules: ghost-role-information-nonantagonist-rules
+    #SS220 Animalistic languages fix begin
+  - type: Language
+    availableLanguages:
+    - id: Mousey
+      canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: GhostTakeoverAvailable
   - type: Speech
     speechVerb: SmallMob
@@ -3598,8 +3668,10 @@
     spawned:
     - id: FoodMeat
       amount: 1
-  - type: ReplacementAccent
-    accent: mouse
+  #SS220 Animalistic languages fix begin
+  # - type: ReplacementAccent
+  #   accent: mouse
+  #SS220 Animalistic languages fix end
   - type: Tag
     tags:
     - VimPilot
