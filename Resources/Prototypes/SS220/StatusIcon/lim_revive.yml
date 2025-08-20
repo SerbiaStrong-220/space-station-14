@@ -1,0 +1,36 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: limitationReviveIcon
+  id: LimReviveIcon
+  abstract: true
+  priority: 3
+  locationPreference: Left
+  isShaded: true
+
+- type: limitationReviveIcon
+  parent: LimReviveIcon
+  id: LimitationReviveIconHightTime
+  icon:
+    sprite: /SS220/Interface/Misc/lim_revive_icons.rsi
+    state: hight_time
+
+- type: limitationReviveIcon
+  parent: LimReviveIcon
+  id: LimitationReviveIconMidTime
+  icon:
+    sprite: /SS220/Interface/Misc/lim_revive_icons.rsi
+    state: mid_time
+
+- type: limitationReviveIcon
+  parent: LimReviveIcon
+  id: LimReviveLowTime
+  icon:
+    sprite: /SS220/Interface/Misc/lim_revive_icons.rsi
+    state: low_time
+
+- type: limitationReviveIcon
+  parent: LimReviveIcon
+  id: LimitationReviveIconNoTime
+  icon:
+    sprite: /SS220/Interface/Misc/lim_revive_icons.rsi
+    state: no_time
