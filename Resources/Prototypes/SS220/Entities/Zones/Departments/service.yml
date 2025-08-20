@@ -1,0 +1,59 @@
+- type: entity
+  parent: ZoneBase
+  id: ZoneService
+  name: service
+
+- type: entity
+  parent: ZoneService
+  id: ZoneServiceBar
+  name: service bar
+
+- type: entity
+  parent: ZoneService
+  id: ZoneServiceBartenderRoom
+  name: bartender's room
+
+- type: entity
+  parent: ZoneService
+  id: ZoneServiceCanteen
+  name: service canteen
+
+- type: entity
+  parent: ZoneService
+  id: ZoneServiceFreezerRoom
+  name: freezer room
+
+- type: entity
+  parent: ZoneService
+  id: ZoneServiceBotanistRoom
+  name: botanist room
+
+- type: entity
+  parent: ZoneService
+  id: ZoneServiceJanitorRoom
+  name: janitor's room
+
+- type: entity
+  parent: ZoneService
+  id: ZoneServiceMimeRoom
+  name: mime room
+
+- type: entity
+  parent: ZoneService
+  id: ZoneServiceClownRoom
+  name: clown's room
+
+- type: entity
+  parent: ZoneService
+  id: ZoneServiceChurch
+  name: church
+
+- type: entity
+  parent: ZoneService
+  id: ZoneServiceCrematory
+  name: crematory
+
+- type: entity
+  parent: ZoneService
+  id: ZoneServiceVoxDining
+  name: vox dinning zone
