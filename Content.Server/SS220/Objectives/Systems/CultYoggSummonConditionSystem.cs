@@ -59,7 +59,7 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
         if (!_cultRule.TryGetCultGameRule(out var rule))
             return;
 
-        args.Progress = (float)rule.Value.Comp.AmountOfSacrifices / (float)ent.Comp.ReqSacrAmount;
+        args.Progress = rule.Value.Comp.AmountOfSacrifices / (float)ent.Comp.ReqSacrAmount;
     }
 
     private void ObjNumberUpdate(Entity<CultYoggSummonConditionComponent> ent)

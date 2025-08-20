@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.SS220.CriminalRecords.UI;
 using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.StationRecords;
@@ -8,7 +9,7 @@ namespace Content.Client.SS220.CriminalRecords;
 
 public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
 {
-    CriminalRecordsWindow? _window;
+    private CriminalRecordsWindow? _window;
 
     public CriminalRecordsBoundUserInterface(EntityUid owner, Enum key) : base(owner, key)
     {

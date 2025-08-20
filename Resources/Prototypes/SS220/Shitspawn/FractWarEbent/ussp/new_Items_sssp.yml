@@ -225,7 +225,7 @@
       path: "/Audio/Items/Medical/healthscanner.ogg"
   - type: GuideHelp
     guides:
-    - Medical Doctor
+    - MedicalDoctor
   #ss220 add pdaidpainter start
   - type: Tag
     tags:

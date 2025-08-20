@@ -41,6 +41,7 @@ using Content.Shared.SS220.RestrictedItem;
 using Content.Shared.SS220.Roles;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.SS220.Telepathy;
+using Content.Shared.Station.Components;
 using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -118,7 +119,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         var ev = new CultYoggReinitObjEvent();
         var query = EntityQueryEnumerator<CultYoggSummonConditionComponent>();
-        while (query.MoveNext(out var ent, out var _))
+        while (query.MoveNext(out var ent, out _))
         {
             RaiseLocalEvent(ent, ref ev); //Reinitialise objective if gamerule was forced
         }
@@ -178,9 +179,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     private void SetSacraficials(CultYoggRuleComponent component)
     {
         var allHumans = GetAliveNoneCultHumans();
-
-        if (allHumans is null)
-            return;
 
         _adminLogger.Add(LogType.EventRan, LogImpact.High, $"Amount of tiers is {_sacraficialTiers.Count}");
         for (int i = 0; i < _sacraficialTiers.Count; i++)
@@ -242,8 +240,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     private List<EntityUid> GetAliveNoneCultHumans()//maybe add here sacraficials and cultists filter
     {
-        var mindQuery = EntityQuery<MindComponent>();
-
         var allHumans = new List<EntityUid>();
 
         if (!TryGetRandomStation(out var station))//IDK how to get station so i took this realization
@@ -311,9 +307,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     {
         var allHumans = GetAliveNoneCultHumans();
 
-        if (allHumans is null)
-            return;
-
         SetSacraficeTarget(comp, PickFromTierPerson(allHumans, tier), tier);
     }
     #endregion
@@ -367,7 +360,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         foreach (var obj in rule.Comp.ListofObjectives)
         {
             _role.MindAddRole(mindId, rule.Comp.MindCultYoggAntagId, mindComp, true);
-            var objective = _mind.TryAddObjective(mindId, mindComp, obj);
+            _mind.TryAddObjective(mindId, mindComp, obj);
         }
 
         rule.Comp.TotalCultistsConverted++;
@@ -505,8 +498,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         var selectedSong = _audio.ResolveSound(comp.SummonMusic);
 
-        if (selectedSong != null)
-            _sound.DispatchStationEventMusic(godUid, selectedSong, StationEventMusicType.Nuke);//should i rename somehow?
+        _sound.DispatchStationEventMusic(godUid, selectedSong, StationEventMusicType.Nuke);//should i rename somehow?
 
         comp.Summoned = true;//Win EndText
     }
@@ -539,7 +531,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         foreach (var station in _station.GetStations())
         {
-            if (_station.GetLargestGrid(Comp<StationDataComponent>(station)) is { } grid)
+            if (_station.GetLargestGrid((station, Comp<StationDataComponent>(station))) is { } grid)
                 return Transform(grid).Coordinates;
         }
 
@@ -588,6 +580,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
                 ("username", data.UserName)));
         }
     }
+
     private float GetCultistsFraction()
     {
         int cultistsCount = 0;
@@ -679,10 +672,11 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         SendCultAnounce(Loc.GetString("cult-yogg-add-token-no-cultists"));
         AddSimplifiedEslavement();
     }
+
     public bool AnyCultistsAlive()
     {
         var query = EntityQueryEnumerator<CultYoggComponent, MobStateComponent, MindContainerComponent>();
-        while (query.MoveNext(out var _, out _, out var state, out var mind))
+        while (query.MoveNext(out _, out _, out var state, out var mind))
         {
             if (!mind.HasMind)
                 continue;

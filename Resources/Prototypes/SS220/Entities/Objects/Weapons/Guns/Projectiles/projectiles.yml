@@ -296,8 +296,8 @@
       - state: grenade
   - type: SpawnOnTrigger
     proto: GrenadeFlashEffect
-  - type: ActiveTimerTrigger
-    timeRemaining: 0.3
+  - type: TimerTrigger
+    delay: 0.3
   - type: DeleteOnTrigger
 
 - type: entity

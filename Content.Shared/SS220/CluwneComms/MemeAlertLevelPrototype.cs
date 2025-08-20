@@ -23,16 +23,16 @@ public sealed partial class MemelertLevelDetail
     /// <summary>
     /// What is announced upon this alert level change. Can be a localized string.
     /// </summary>
-    [DataField("announcement")] public string Announcement { get; private set; } = string.Empty;
+    [DataField] public string Announcement { get; private set; } = string.Empty;
 
     /// <summary>
     /// The sound that this alert level will play in-game once selected.
     /// </summary>
-    [DataField("sound")] public SoundSpecifier? Sound { get; private set; }
+    [DataField] public SoundSpecifier? Sound { get; private set; }
 
     /// <summary>
     /// The color that this alert level will show in-game in chat.
     /// </summary>
-    [DataField("color")] public Color Color { get; private set; } = Color.White;
+    [DataField] public Color Color { get; private set; } = Color.White;
 }
 

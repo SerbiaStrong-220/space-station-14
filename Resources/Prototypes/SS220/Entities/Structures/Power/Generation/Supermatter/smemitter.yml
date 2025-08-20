@@ -20,6 +20,7 @@
       map: ["enum.LockVisualLayers.Lock"]
   - type: Emitter
     boltType: SMEmitterBolt
+    activateOnInteract: false # activates from UI
   - type: Machine
     board: SuperMatterEmitterCircuitboard
   - type: SuperMatterEmitterExtension

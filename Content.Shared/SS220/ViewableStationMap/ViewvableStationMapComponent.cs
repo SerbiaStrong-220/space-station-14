@@ -9,7 +9,7 @@ public sealed partial class ViewableStationMapComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField, AutoNetworkedField]
-    public StationMinimapData? MinimapData = null;
+    public StationMinimapData? MinimapData;
 }
 
 [Serializable, NetSerializable, UsedImplicitly]
