@@ -90,7 +90,7 @@
   - type: Vapor
 
 - type: entity
-  id: CartridgeCaselessRifle
+  id: CartridgeCaselessRifle2
   name: cartridge (.25 caseless)
   parent: BaseCartridgeCaselessRifle
   description: A small caliber utilizing caseless technology, omitting conventional brass casing in favor of hardened propellant. Standard kinetic ammunition is common and useful in most situations.
