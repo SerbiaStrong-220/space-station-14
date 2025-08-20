@@ -269,7 +269,13 @@ public sealed partial class GunComponent : Component
     public bool CanSuicide = false;
     ///SS220-new-feature kus end
 
-
+    // SS220 felinids recoil bebin
+    /// <summary>
+    ///    After firing recoil modifier.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float Recoil = 25f;
+    // SS220 felinids recoil end
 }
 
 [Flags]
