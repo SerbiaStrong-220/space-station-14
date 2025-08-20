@@ -98,10 +98,10 @@
       - MobCrocodileSpaceSalvage
 
 - type: entity
-  name: the spawner Bear Space
-  id: SpawnMobBearSpaceAI
+  id: SpawnMobBearSpaceGhostRole
   parent: MarkerBase
-  suffix: AI, without goal
+  name: Space Bear Spawner
+  suffix: Ghost Role
   components:
   - type: Sprite
     layers:
