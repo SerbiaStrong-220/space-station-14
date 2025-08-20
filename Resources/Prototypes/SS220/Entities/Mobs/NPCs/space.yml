@@ -119,8 +119,8 @@
     - MindRoleGhostRoleFreeAgent
 
 - type: entity
-  id: MobBearSpaceAI
-  suffix: Without Goal
+  id: MobBearSpaceGhostRole
+  suffix: Ghost Role
   parent: MobBearSpace
   description: It looks friendly. Why don't you give it a hug?
   components:
