@@ -100,6 +100,7 @@
 
 - type: entity
   id: MobBearSpaceAIGoal
+  suffix: With Goal
   parent: MobBearSpace
   description: It looks friendly. Why don't you give it a hug?
   components:
@@ -107,6 +108,22 @@
   - type: ActionGrant
     actions:
     - ActionGoal
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: false
+    allowMovement: true
+    name: ghost-role-information-space-bear-name
+    description: ghost-role-information-space-bear-description
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+
+- type: entity
+  id: MobBearSpaceAI
+  suffix: Without Goal
+  parent: MobBearSpace
+  description: It looks friendly. Why don't you give it a hug?
+  components:
   - type: GhostRole
     makeSentient: true
     allowSpeech: false

@@ -96,3 +96,33 @@
   - type: ConditionalSpawner
     prototypes:
       - MobCrocodileSpaceSalvage
+
+- type: entity
+  name: the spawner Bear Space
+  id: SpawnMobBearSpaceAI
+  parent: MarkerBase
+  suffix: AI, without goal
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: bear
+      sprite: Mobs/Animals/bear.rsi
+  - type: ConditionalSpawner
+    prototypes:
+      - MobBearSpaceAI
+
+- type: entity
+  name: the spawner Bear Space
+  id: SpawnMobBearSpaceAIGoal
+  parent: MarkerBase
+  suffix: AI, with goal
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: bear
+      sprite: Mobs/Animals/bear.rsi
+  - type: ConditionalSpawner
+    prototypes:
+      - MobBearSpaceAIGoal
