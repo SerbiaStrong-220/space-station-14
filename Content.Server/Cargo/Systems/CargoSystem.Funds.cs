@@ -45,6 +45,10 @@ public sealed partial class CargoSystem
             return;
         }
 
+        //SS220-request-console-emagging begin
+        ent.Comp.IsEmagged = _emag.CheckFlag(ent, EmagType.Interaction);
+        //SS220-request-console-emagging end
+
         ent.Comp.NextAccountActionTime = Timing.CurTime + ent.Comp.AccountActionDelay;
         UpdateBankAccount((station, bank), -args.Amount,  ent.Comp.Account, dirty: false);
         _audio.PlayPvs(ApproveSound, ent);
@@ -90,7 +94,10 @@ public sealed partial class CargoSystem
 
     private void OnToggleLimit(Entity<CargoOrderConsoleComponent> ent, ref CargoConsoleToggleLimitMessage args)
     {
-        if (!_accessReaderSystem.FindAccessTags(args.Actor).Intersect(ent.Comp.RemoveLimitAccess).Any())
+        //SS220-request-console-emagging begin
+        if (!_emag.CheckFlag(ent, EmagType.Interaction)
+            && !_accessReaderSystem.FindAccessTags(args.Actor).Intersect(ent.Comp.RemoveLimitAccess).Any())
+        //SS220-request-console-emagging end
         {
             ConsolePopup(args.Actor, Loc.GetString("cargo-console-order-not-allowed"));
             PlayDenySound(ent, ent.Comp);
