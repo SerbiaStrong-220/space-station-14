@@ -1,5 +1,27 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+# Debug
+
+- type: entity
+  parent: PlushieLizard #Weh!
+  id: ForcefieldDebugPlushie
+  name: forcefield debug pluhie
+  suffix: DEBUG
+  components:
+  - type: Forcefield
+    params:
+      shape: !type:ForcefieldParabola
+        offset: 0, 4
+      density: 100
+      collisionMask:
+      - None
+      collisionLayer:
+      - BulletImpassable
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Fixtures
+
 # Forcefields
 
 - type: entity

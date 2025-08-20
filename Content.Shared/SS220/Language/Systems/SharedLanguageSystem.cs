@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Ghost;
 using Content.Shared.SS220.Language.Components;
 using Robust.Shared.Random;
@@ -176,12 +177,10 @@ public abstract partial class SharedLanguageSystem : EntitySystem
         if (!TryComp<LanguageComponent>(uid, out var comp))
         {
             // Энтити без компонента языка всегда говорят на универсальном
-            if (languageId == UniversalLanguage)
-                return true;
-
-            return false;
+            return languageId == UniversalLanguage;
         }
-        else if (comp.KnowAllLanguages)
+
+        if (comp.KnowAllLanguages)
             return true;
 
         return ContainsLanguage((uid, comp), languageId, true);

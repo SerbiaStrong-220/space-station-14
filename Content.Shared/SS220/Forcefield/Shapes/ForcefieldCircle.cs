@@ -1,6 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Entry;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Serialization;
+using System.Diagnostics;
+using System.Linq;
 using System.Numerics;
 
 namespace Content.Shared.SS220.Forcefield.Shapes;
@@ -66,6 +69,9 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
     public Vector2[] InnerPoints { get; private set; } = [];
     public Vector2[] OuterPoints { get; private set; } = [];
 
+    private readonly List<IPhysShape> _cachedPhysShapes = [];
+    private readonly List<Vector2> _cachedTrianglesVerts = [];
+
     private readonly Circle _innerCircle = new();
     private readonly Circle _centralCircle = new();
     private readonly Circle _outerCircle = new();
@@ -93,6 +99,9 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
         InnerPoints = _innerCircle.GetPoints(Segments);
         OuterPoints = _outerCircle.GetPoints(Segments);
 
+        RefreshPhysShapes();
+        RefreshTrianglesVerts();
+
         Dirty = false;
     }
 
@@ -114,64 +123,85 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
     }
 
     /// <inheritdoc/>
-    public IEnumerable<IPhysShape> GetPhysShapes()
+    public IReadOnlyList<IPhysShape> GetPhysShapes()
     {
-        var result = new List<IPhysShape>();
+        if (Dirty)
+            Refresh();
+
+        return _cachedPhysShapes;
+    }
+
+    private void RefreshPhysShapes()
+    {
+        _cachedPhysShapes.Clear();
 
         for (var i = 0; i < Segments; i++)
         {
             var shape = new PolygonShape();
             shape.Set(new List<Vector2>([InnerPoints[i], OuterPoints[i], OuterPoints[i + 1], InnerPoints[i + 1]]));
 
-            result.Add(shape);
-        }
+            if (shape.VertexCount <= 0)
+                throw new Exception($"Failed to generate a {nameof(PolygonShape)} of {nameof(ForcefieldCircle)} for segment: {i}");
 
-        return result;
+            _cachedPhysShapes.Add(shape);
+        }
     }
 
     /// <inheritdoc/>
-    public IEnumerable<Vector2> GetTrianglesVerts()
+    public IReadOnlyList<Vector2> GetTrianglesVerts()
     {
-        var verts = new List<Vector2>();
+        if (Dirty)
+            Refresh();
+
+        return _cachedTrianglesVerts;
+    }
+
+    private void RefreshTrianglesVerts()
+    {
+        _cachedTrianglesVerts.Clear();
 
         for (var i = 0; i < Segments; i++)
         {
-            verts.Add(InnerPoints[i]);
-            verts.Add(OuterPoints[i]);
-            verts.Add(OuterPoints[i + 1]);
+            _cachedTrianglesVerts.Add(InnerPoints[i]);
+            _cachedTrianglesVerts.Add(OuterPoints[i]);
+            _cachedTrianglesVerts.Add(OuterPoints[i + 1]);
 
-            verts.Add(InnerPoints[i]);
-            verts.Add(InnerPoints[i + 1]);
-            verts.Add(OuterPoints[i + 1]);
+            _cachedTrianglesVerts.Add(InnerPoints[i]);
+            _cachedTrianglesVerts.Add(InnerPoints[i + 1]);
+            _cachedTrianglesVerts.Add(OuterPoints[i + 1]);
         }
-
-        return verts;
     }
 
     /// <inheritdoc/>
-    public bool IsInside(Vector2 point)
+    public bool IsInside(Vector2 entityPoint)
     {
-        return _centralCircle.IsInside(point);
+        return _centralCircle.IsInside(entityPoint);
     }
 
     /// <inheritdoc/>
-    public Vector2? GetClosestPoint(Vector2 point)
+    public bool IsOnShape(Vector2 entityPoint)
     {
-        Vector2? result = null;
+        return _outerCircle.IsInside(entityPoint) && !_innerCircle.IsInside(entityPoint);
+    }
 
-        var parabolaPoints = IsInside(point) ? InnerPoints : OuterPoints;
-        var distance = float.MaxValue;
-        foreach (var p in parabolaPoints)
-        {
-            var dist = (point - p).Length();
-            if (dist < distance)
-            {
-                result = p;
-                distance = dist;
-            }
-        }
+    /// <inheritdoc/>
+    public Vector2 GetClosestPoint(Vector2 entityPoint)
+    {
+        if (IsOnShape(entityPoint))
+            return entityPoint;
 
-        return result;
+        var circle = IsInside(entityPoint) ? _innerCircle : _outerCircle;
+        return circle.GetClosestPoint(entityPoint);
+    }
+
+    /// <inheritdoc/>
+    public bool InRange(Vector2 entityPoint, float range)
+    {
+        if (IsOnShape(entityPoint))
+            return true;
+
+        var circle = IsInside(entityPoint) ? _innerCircle : _outerCircle;
+        return circle.InRange(entityPoint, range);
     }
 
     [Serializable, NetSerializable]
@@ -191,6 +221,9 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
         private float _radius;
         public Vector2 Offset = default;
 
+        private Matrix3x2 EntityToLocal => Matrix3x2.CreateTranslation(-Offset);
+        private Matrix3x2 LocalToEntity => Matrix3x2.CreateTranslation(Offset);
+
         public Vector2[] GetPoints(int segments = 64, bool clockwise = true)
         {
             if (segments <= 0)
@@ -205,20 +238,48 @@ public sealed partial class ForcefieldCircle : IForcefieldShape
                 if (clockwise)
                     angle = -angle;
 
-                var x = (float)(Radius * Math.Cos(angle));
-                var y = (float)(Radius * Math.Sin(angle));
-                points.Add(new Vector2(x, y));
+                points.Add(GetPoint(angle));
             }
 
             return [.. points];
         }
 
-        public bool IsInside(Vector2 point)
+        public Vector2 GetPoint(Angle angle)
         {
-            point -= Offset;
-            var posSquared = point.X * point.X + point.Y * point.Y;
+            var x = (float)(Radius * Math.Cos(angle));
+            var y = (float)(Radius * Math.Sin(angle));
+            return new Vector2(x, y);
+        }
+
+        public bool IsInside(Vector2 entityPoint)
+        {
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+            var posSquared = Math.Pow(localPoint.X, 2) + Math.Pow(localPoint.Y, 2);
 
             return posSquared <= Radius * Radius;
+        }
+
+        public Vector2 GetClosestPoint(Vector2 entityPoint)
+        {
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+            var angle = localPoint.ToAngle();
+
+            var closestPoint = GetPoint(angle);
+            return Vector2.Transform(closestPoint, LocalToEntity);
+        }
+
+        public bool InRange(Vector2 entityPoint, float range)
+        {
+            var localPoint = Vector2.Transform(entityPoint, EntityToLocal);
+
+            var distanceToCenter = localPoint.Length();
+            var checkRange = range + Radius;
+            if (distanceToCenter > checkRange)
+                return false;
+
+            var closestPoint = GetClosestPoint(entityPoint);
+            var distanceToClosest = (entityPoint - closestPoint).Length();
+            return distanceToClosest < range;
         }
     }
 }

@@ -4,9 +4,6 @@ using Content.Server.Humanoid;
 using Content.Server.Medical;
 using Content.Server.SS220.Bed.Cryostorage;
 using Content.Server.SS220.GameTicking.Rules;
-using Content.Server.SS220.GameTicking.Rules.Components;
-using Content.Server.SS220.Objectives.Components;
-using Content.Server.SS220.Objectives.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -21,15 +18,13 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
-using Content.Shared.SS220.CultYogg.Sacraficials;
-using Content.Shared.SS220.EntityEffects;
 using Content.Shared.SS220.StuckOnEquip;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Linq;
+using Content.Shared.SS220.EntityEffects.Events;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
@@ -335,6 +330,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     {
         _cultRuleSystem.CheckSimplifiedEslavement();
     }
+
     private void OnCryoDeleted(Entity<CultYoggComponent> ent, ref BeingCryoDeletedEvent args)
     {
         _cultRuleSystem.CheckSimplifiedEslavement();

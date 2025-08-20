@@ -26,12 +26,11 @@ using Content.Shared.Zombies;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind;
-using Content.Shared.Roles;
 using Content.Shared.Verbs;
-using Robust.Shared.Utility;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Audio;
 using Content.Shared.Movement.Pulling.Events;
+using Content.Shared.Roles.Components;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
@@ -44,7 +43,6 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMiGoErectSystem _miGoErectSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedCultYoggHealSystem _heal = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -58,7 +56,7 @@ public abstract class SharedMiGoSystem : EntitySystem
 
     /// <summary>
     /// Allows you to resolve dead-end situations where there are no cultists left, allowing you to recruit without feeding the mushroom
-    /// <summary>
+    /// </summary>
     protected static bool IsEslavementSimplified = false;
 
     public override void Initialize()
@@ -98,22 +96,20 @@ public abstract class SharedMiGoSystem : EntitySystem
 
     private void OnBoundUIOpened(Entity<MiGoComponent> entity, ref BoundUIOpenedEvent args)
     {
-        if (args.UiKey.ToString() == "Erect")
+        switch (args.UiKey.ToString())
         {
-            _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoErectBuiState()
-            {
-                Buildings = _proto.GetInstances<CultYoggBuildingPrototype>().Values.ToList(),
-            });
-            return;
-        }
-
-        if (args.UiKey.ToString() == "Plant")
-        {
-            _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoPlantBuiState()
-            {
-                Seeds = _proto.GetInstances<CultYoggSeedsPrototype>().Values.ToList(),
-            });
-            return;
+            case "Erect":
+                _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoErectBuiState()
+                {
+                    Buildings = _proto.GetInstances<CultYoggBuildingPrototype>().Values.ToList(),
+                });
+                return;
+            case "Plant":
+                _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoPlantBuiState()
+                {
+                    Seeds = _proto.GetInstances<CultYoggSeedsPrototype>().Values.ToList(),
+                });
+                return;
         }
     }
 
@@ -124,6 +120,8 @@ public abstract class SharedMiGoSystem : EntitySystem
             return;
 
         // Enslave verb
+        // ToDo for a future verb
+        /*
         if (TryComp<MiGoComponent>(args.User, out var miGoComp) && miGoComp.IsPhysicalForm)
         {
             var enslaveVerb = new Verb
@@ -142,8 +140,6 @@ public abstract class SharedMiGoSystem : EntitySystem
                 }
             };
 
-            //ToDo for a future verb
-            /*
             var healVerb = new Verb
             {
                 Text = Loc.GetString("cult-yogg-heal-verb"),
@@ -157,8 +153,8 @@ public abstract class SharedMiGoSystem : EntitySystem
 
             args.Verbs.Add(enslaveVerb);
             args.Verbs.Add(healVerb);
-            */
         }
+        */
     }
 
     #region Heal
@@ -243,6 +239,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             TryDoSacrifice(altar, uid);
         }
     }
+
     private bool TryDoSacrifice(Entity<CultYoggAltarComponent> ent, EntityUid user)
     {
         if (!TryComp<StrapComponent>(ent, out var strapComp))
@@ -302,6 +299,7 @@ public abstract class SharedMiGoSystem : EntitySystem
                 _audio.PlayPredicted(comp.SoundMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
                 comp.AudioPlayed = true;
             }
+
             ChangeForm(uid, comp, true);
 
             _actions.StartUseDelay(comp.MiGoAstralActionEntity);
@@ -341,6 +339,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             }
         }
     }
+
     private void OnAfterMaterialize(Entity<MiGoComponent> uid, ref AfterMaterialize args)
     {
         if (args.Cancelled)
@@ -399,7 +398,6 @@ public abstract class SharedMiGoSystem : EntitySystem
             _eye.SetDrawLight((uid, eye), isMaterial);
         }
     }
-
 
     private void CheckAct(Entity<MiGoComponent> uid, ref AttackAttemptEvent args)
     {

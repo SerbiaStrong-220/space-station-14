@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.SS220.Speech.Components;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Inventory;
@@ -13,7 +14,7 @@ public sealed partial class ClothingSpecialEmotesSystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
 
-    private Dictionary<EntityUid, List<ProtoId<EmotePrototype>>> _temporaryEmotes = new();
+    private readonly Dictionary<EntityUid, List<ProtoId<EmotePrototype>>> _temporaryEmotes = new();
 
     public override void Initialize()
     {

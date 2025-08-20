@@ -6,15 +6,16 @@ using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.SS220.CultYogg.Lamp;
 using Content.Shared.SS220.StealthProvider;
-using Content.Shared.Materials;
 
 namespace Content.Server.SS220.CultYogg.Lamp;
+
 public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPointLightSystem _lights = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -32,7 +33,6 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
         _actionContainer.EnsureAction(ent, ref component.ToggleActionEntity, component.ToggleAction);
         _actions.AddAction(ent, ref component.SelfToggleActionEntity, component.ToggleAction);
     }
-
 
     private void OnShutdown(Entity<CultYoggLampComponent> ent, ref ComponentShutdown args)
     {
@@ -66,16 +66,16 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
         if (ToggleStatus(args.User, ent))
             args.Handled = true;
     }
+
     public bool ToggleStatus(EntityUid user, Entity<CultYoggLampComponent> ent)
     {
         return ent.Comp.Activated ? TurnOff(ent) : TurnOn(user, ent);
     }
+
     public override bool TurnOff(Entity<CultYoggLampComponent> ent)
     {
         if (!ent.Comp.Activated || !_lights.TryGetLight(ent, out var pointLightComponent))
-        {
             return false;
-        }
 
         _lights.SetEnabled(ent, false, pointLightComponent);
         SetActivated(ent, false);
@@ -89,9 +89,7 @@ public sealed class CultYoggLampSystem : SharedCultYoggLampSystem
     public override bool TurnOn(EntityUid user, Entity<CultYoggLampComponent> ent)
     {
         if (ent.Comp.Activated || !_lights.TryGetLight(ent, out var pointLightComponent))
-        {
             return false;
-        }
 
         _lights.SetEnabled(ent, true, pointLightComponent);
         SetActivated(ent, true);

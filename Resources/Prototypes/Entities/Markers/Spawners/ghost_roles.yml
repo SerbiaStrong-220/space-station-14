@@ -23,7 +23,7 @@
       - !type:OverallPlaytimeRequirement
         time: 72000 #SS220 ghostrole-times (20h overall) end
     mindRoles:
-    - MindRoleGhostRoleFreeAgent
+    - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
   - type: GhostRoleMobSpawner
