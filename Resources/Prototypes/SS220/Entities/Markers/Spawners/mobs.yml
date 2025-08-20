@@ -113,10 +113,9 @@
       - MobBearSpaceAI
 
 - type: entity
-  name: the spawner Bear Space
-  id: SpawnMobBearSpaceAIGoal
-  parent: MarkerBase
-  suffix: AI, with goal
+  id: SpawnMobBearSpaceGhostRoleGoal
+  parent: SpawnMobBearSpaceGhostRole
+  suffix: Ghost Role, With Goal
   components:
   - type: Sprite
     layers:
