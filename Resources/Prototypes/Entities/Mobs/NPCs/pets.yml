@@ -498,8 +498,10 @@
     tags:
     - CannotSuicide
     - VimPilot
+  #SS220 Animalistic languages fix begin
   # - type: ReplacementAccent
   #   accent: cat
+  #SS220 Animalistic languages fix end
   - type: StealTarget
     stealGroup: AnimalNamedCat
 
