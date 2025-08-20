@@ -710,8 +710,10 @@
     spawned:
     - id: FoodMeat
       amount: 3
+  #SS220 Animalistic languages fix begin
   # - type: ReplacementAccent
   #   accent: dog
+  #SS220 Animalistic languages fix end
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-dog
