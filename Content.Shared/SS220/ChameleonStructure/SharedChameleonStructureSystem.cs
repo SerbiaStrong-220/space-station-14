@@ -62,8 +62,6 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         });
     }
 
-    public virtual void SetPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false) { }
-
     protected virtual void UpdateSprite(EntityUid ent, EntityPrototype proto) { }
 
     protected void UpdateVisuals(Entity<ChameleonStructureComponent> ent)
@@ -101,7 +99,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
 
     private void UpdateUi(Entity<ChameleonStructureComponent> ent)
     {
-        var state = new ChameleonStructureBoundUserInterfaceState(ent.Comp.Prototype, ent.Comp.RequireTag);
+        var state = new ChameleonStructureBoundUserInterfaceState(ent.Comp.Prototype, ent.Comp.ChameleonData);
         UI.SetUiState(ent.Owner, ChameleonStructureUiKey.Key, state);
     }
 
@@ -134,13 +132,6 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         Dirty(ent, appearance);
     }
 
-    /// <summary>
-    ///     Get a list of valid chameleon targets
-    /// </summary>
-    public IEnumerable<EntProtoId> GetValidTargets()
-    {
-        return _data;
-    }
     protected void UpdateData(Entity<ChameleonStructureComponent> ent)
     {
         ent.Comp.ChameleonData.Clear();
