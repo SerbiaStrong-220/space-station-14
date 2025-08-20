@@ -45,6 +45,7 @@ public sealed class TrapSystem : EntitySystem
         SubscribeLocalEvent<TrapComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<TrapComponent, TrapInteractionDoAfterEvent>(OnTrapInteractionDoAfter);
         SubscribeLocalEvent<TrapComponent, StartCollideEvent>(OnStartCollide);
+        // TODO-SS220 move to wizden system
         SubscribeLocalEvent<TrapComponent, SharedTriggerEvent>(OnTrigger);
     }
 
@@ -190,8 +191,8 @@ public sealed class TrapSystem : EntitySystem
 
         if (ent.Comp.DurationStun != TimeSpan.Zero && TryComp<StatusEffectsComponent>(args.Activator.Value, out var status))
         {
-            _stunSystem.TryStun(args.Activator.Value, ent.Comp.DurationStun, true, status);
-            _stunSystem.TryKnockdown(args.Activator.Value, ent.Comp.DurationStun, true, status);
+            _stunSystem.TryUpdateStunDuration(args.Activator.Value, ent.Comp.DurationStun);
+            _stunSystem.TryKnockdown(args.Activator.Value, ent.Comp.DurationStun, true);
         }
 
         _ensnareableSystem.TryEnsnare(args.Activator.Value, ent.Owner, ensnaring);

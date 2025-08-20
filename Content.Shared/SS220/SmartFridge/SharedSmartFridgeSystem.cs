@@ -88,7 +88,7 @@ public abstract class SharedSmartFridgeSystem : EntitySystem
             return;
 
         // If the user's active hand is empty, try pick up the item.
-        if (hands.ActiveHandEntity == null)
+        if (_sharedHandsSystem.GetActiveItem(player) == null)
         {
             if (_sharedHandsSystem.TryPickupAnyHand(player, entity, handsComp: hands)
                 && storageComp.StorageRemoveSound != null)

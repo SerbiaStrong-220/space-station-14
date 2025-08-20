@@ -50,6 +50,8 @@
       - Service
       - Theatre
       - Magistrate #SS220-Magistrate Foundation
+      - GenpopEnter
+      - GenpopLeave
       privilegedIdSlot:
         name: id-card-console-privileged-id
         ejectSound: /Audio/Machines/id_swipe.ogg

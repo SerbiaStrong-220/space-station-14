@@ -3,6 +3,7 @@
 using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
@@ -15,6 +16,7 @@ public abstract class SharedCultYoggSystem : EntitySystem
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedCultYoggCorruptedSystem _cultYoggCorruptedSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -105,10 +107,7 @@ public abstract class SharedCultYoggSystem : EntitySystem
         if (!_entityManager.TryGetComponent<HandsComponent>(uid, out var hands))
             return;
 
-        if (hands.ActiveHand == null)
-            return;
-
-        var handItem = hands.ActiveHand.HeldEntity;
+        var handItem = _hands.GetActiveItem((uid, hands));
         if (handItem == null)
             return;
 

@@ -1,12 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using System.Diagnostics.CodeAnalysis;
-using JetBrains.Annotations;
+
 using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.MiGo;
+using JetBrains.Annotations;
 using Robust.Client.Placement;
 using Robust.Client.Placement.Modes;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Client.SS220.CultYogg.MiGo.UI;
 
@@ -60,18 +61,19 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
     public void OnBuildingToggle(CultYoggBuildingPrototype building)
     {
         if (_state.MatchBuilding(out var currentBuilding) && currentBuilding == building)
-        {
             SetState(ErectMenuState.None());
-        }
         else
-        {
             SetState(ErectMenuState.Building(building));
-        }
     }
 
     public void OnEraseToggle(bool isErase)
     {
         SetState(isErase ? ErectMenuState.Erase() : ErectMenuState.None());
+    }
+
+    public void OnCaptureToggle(bool isCapture)
+    {
+        SetState(isCapture ? ErectMenuState.Capture() : ErectMenuState.None());
     }
 
     public void SendBuildMessage(CultYoggBuildingPrototype building, EntityCoordinates location, Direction direction)
@@ -84,11 +86,34 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
         });
     }
 
-    public void SendEraseMessage(EntityUid entity)
+    public void SendEntity(EntityUid ent)
+    {
+        if (_state.MatchErase())
+        {
+            SendEraseMessage(ent);
+            return;
+        }
+
+        if (_state.MatchCapture())
+        {
+            SendCaptureMessage(ent);
+            return;
+        }
+    }
+
+    public void SendEraseMessage(EntityUid ent)
     {
         SendMessage(new MiGoErectEraseMessage
         {
-            BuildingFrame = _entityManager.GetNetEntity(entity),
+            BuildingFrame = _entityManager.GetNetEntity(ent),
+        });
+    }
+
+    public void SendCaptureMessage(EntityUid ent)
+    {
+        SendMessage(new MiGoErectCaptureMessage()
+        {
+            CapturedBuilding = _entityManager.GetNetEntity(ent),
         });
     }
 
@@ -113,6 +138,11 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
             _menu?.SetEraseEnabled(true);
             ActivatePlacement(null);
         }
+        else if (state.MatchCapture())
+        {
+            _menu?.SetCaptureEnabled(true);
+            ActivatePlacement(null);
+        }
     }
 
     private void ExitState(ErectMenuState state)
@@ -127,14 +157,17 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
             _menu?.SetEraseEnabled(false);
             ClearPlacement();
         }
+        else if (state.MatchCapture())
+        {
+            _menu?.SetCaptureEnabled(false);
+            ClearPlacement();
+        }
     }
 
     private void OnPlacementChanged(object? sender, EventArgs e)
     {
         if (IsMyPlacementActive()) // In this context, this will be true if our placement was disabled
-        {
             SetState(ErectMenuState.None());
-        }
     }
 
     private bool IsMyPlacementActive()
@@ -156,9 +189,7 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
             _placementManager.BeginPlacing(_placementInformation, hijack);
         }
         else
-        {
             _placementManager.ToggleEraserHijacked(hijack);
-        }
     }
 
     private void ClearPlacement()
@@ -194,6 +225,10 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
             return new(Key.Erase);
         }
 
+        public static ErectMenuState Capture()
+        {
+            return new(Key.Capture);
+        }
         public bool MatchNone()
         {
             return _key == Key.None;
@@ -210,6 +245,11 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
             return _key == Key.Erase;
         }
 
+        public bool MatchCapture()
+        {
+            return _key == Key.Capture;
+        }
+
         private readonly Key _key;
         private readonly CultYoggBuildingPrototype? _building;
 
@@ -217,7 +257,8 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
         {
             None,
             Building,
-            Erase
+            Erase,
+            Capture
         }
     }
 }

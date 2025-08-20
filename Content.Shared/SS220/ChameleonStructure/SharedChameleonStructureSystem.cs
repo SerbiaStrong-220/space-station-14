@@ -24,7 +24,6 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         SubscribeLocalEvent<ChameleonStructureComponent, GetVerbsEvent<InteractionVerb>>(OnVerb);
         SubscribeLocalEvent<ChameleonStructureComponent, PrototypesReloadedEventArgs>(OnPrototypeReload);
     }
-
     private void OnMapInit(Entity<ChameleonStructureComponent> ent, ref MapInitEvent args)
     {
         UpdateData(ent);
@@ -64,6 +63,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
     }
 
     public virtual void SetPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false) { }
+
     protected virtual void UpdateSprite(EntityUid ent, EntityPrototype proto) { }
 
     protected void UpdateVisuals(Entity<ChameleonStructureComponent> ent)
@@ -98,6 +98,49 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         return true;
     }
 
+
+    private void UpdateUi(Entity<ChameleonStructureComponent> ent)
+    {
+        var state = new ChameleonStructureBoundUserInterfaceState(ent.Comp.Prototype, ent.Comp.RequireTag);
+        UI.SetUiState(ent.Owner, ChameleonStructureUiKey.Key, state);
+    }
+
+    /// <summary>
+    ///     Change chameleon structure name, description and sprite to mimic other entity prototype.
+    /// </summary>
+    public void SetPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false)
+    {
+        // check that wasn't already selected
+        // forceUpdate on component init ignores this check
+        if (ent.Comp.Prototype == protoId && !forceUpdate)
+            return;
+
+        // make sure that it is valid change
+        if (string.IsNullOrEmpty(protoId) || !_proto.TryIndex(protoId, out EntityPrototype? proto))
+            return;
+
+        if (!IsValidTarget(proto, ent.Comp.RequireTag) && !(ent.Comp.ProtoList is not null && ent.Comp.ProtoList.Contains(proto)))
+            return;
+
+        ent.Comp.Prototype = protoId;
+        UpdateVisuals(ent);
+
+        UpdateUi(ent);
+        Dirty(ent, ent.Comp);
+
+        if (!TryComp<AppearanceComponent>(ent, out var appearance))//it fixes wrong layer states
+            return;
+
+        Dirty(ent, appearance);
+    }
+
+    /// <summary>
+    ///     Get a list of valid chameleon targets
+    /// </summary>
+    public IEnumerable<EntProtoId> GetValidTargets()
+    {
+        return _data;
+    }
     protected void UpdateData(Entity<ChameleonStructureComponent> ent)
     {
         ent.Comp.ChameleonData.Clear();
@@ -119,7 +162,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         {
             if (ent.Comp.ChameleonData.Contains(proto))
                 continue;
-
+;
             ent.Comp.ChameleonData.Add(proto);
         }
     }

@@ -36,7 +36,6 @@
             False: {state: "icon_empty"}
             True: {state: "icon"}
     - type: GunByHasAmmoVisuals
-      spriteLayer: null
       inhandVisuals:
         left:
         - state: fullammo-inhand-left

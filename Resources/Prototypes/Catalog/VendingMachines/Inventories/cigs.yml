@@ -22,6 +22,5 @@
     GroundTobacco: 3
     CigarGold: 2
     Igniter: 1
-  emaggedInventory:
-    CigPackSyndicate: 1
+    CigPackSyndicate: 1 # SS220-let-give-players-something-value-able-ish
     ExpensiveLighterSyndicate: 1 #SS220-Zippo

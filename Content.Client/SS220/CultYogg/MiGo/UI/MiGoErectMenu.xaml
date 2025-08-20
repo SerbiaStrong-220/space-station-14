@@ -4,11 +4,12 @@
                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                      Title="{Loc 'cult-yogg-migo-erect-menu-title'}"
                      MinSize="200 300"
-                     SetSize="340 515">
+                     SetSize="450 515">
     <BoxContainer Orientation="Vertical" Margin="10 10 10 10">
         <BoxContainer Orientation="Horizontal">
             <Control HorizontalExpand="True" />
             <Button Name="EraseButton" ToggleMode="True" Text="{Loc 'cult-yogg-migo-erect-menu-erase-button'}" />
+            <Button Name="CaptureButton" ToggleMode="True" Text="{Loc 'cult-yogg-migo-erect-menu-capture-button'}" />
         </BoxContainer>
         <Control Margin="0 10 0 0" HorizontalExpand="True" VerticalExpand="True" >
             <PanelContainer>

@@ -7,7 +7,7 @@ using Robust.Shared.Audio;
 namespace Content.Shared.SS220.SmartFridge;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class SmartFridgeComponent : Component
+public sealed partial class SmartFridge220Component : Component
 {
     /// <summary>
     /// Used by the server to determine how long the vending machine stays in the "Deny" state.
@@ -105,11 +105,11 @@ public enum SmartFridgeVisualLayers : byte
     Screen
 }
 
-[Serializable, NetSerializable]
-public enum SmartFridgeUiKey
-{
-    Key,
-}
+// [Serializable, NetSerializable]
+// public enum SmartFridgeUiKey
+// {
+//     Key,
+// }
 
 [Serializable, NetSerializable]
 public sealed class SmartFridgeInteractWithItemEvent : BoundUserInterfaceMessage

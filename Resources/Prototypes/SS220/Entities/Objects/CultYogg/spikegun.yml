@@ -39,7 +39,6 @@
             False: {state: "icon_noammo"}
             True: {state: "icon_fullammo"}
     - type: GunByHasAmmoVisuals
-      spriteLayer: null
       inhandVisuals:
         left:
         - state: fullammo-inhand-left

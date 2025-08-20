@@ -16,44 +16,8 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
         SubscribeLocalEvent<ChameleonStructureComponent, ChameleonStructurePrototypeSelectedMessage>(OnSelected);
     }
 
-
     private void OnSelected(Entity<ChameleonStructureComponent> ent, ref ChameleonStructurePrototypeSelectedMessage args)
     {
         SetPrototype(ent, args.SelectedId);
-    }
-
-    private void UpdateUi(Entity<ChameleonStructureComponent> ent)
-    {
-        var state = new ChameleonStructureBoundUserInterfaceState(ent.Comp.Prototype, ent.Comp.ChameleonData);
-        UI.SetUiState(ent.Owner, ChameleonStructureUiKey.Key, state);
-    }
-
-    /// <summary>
-    ///     Change chameleon structure name, description and sprite to mimic other entity prototype.
-    /// </summary>
-    public override void SetPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false)
-    {
-        // check that wasn't already selected
-        // forceUpdate on component init ignores this check
-        if (ent.Comp.Prototype == protoId && !forceUpdate)
-            return;
-
-        // make sure that it is valid change
-        if (string.IsNullOrEmpty(protoId) || !_proto.TryIndex(protoId, out EntityPrototype? proto))
-            return;
-
-        if (!IsValidTarget(proto, ent.Comp.RequireTag) && !(ent.Comp.ProtoList is not null && ent.Comp.ProtoList.Contains(proto)))
-            return;
-
-        ent.Comp.Prototype = protoId;
-        UpdateVisuals(ent);
-
-        UpdateUi(ent);
-        Dirty(ent, ent.Comp);
-
-        if (!TryComp<AppearanceComponent>(ent, out var appearance))//it fixes wrong layer states
-            return;
-
-        Dirty(ent, appearance);
     }
 }
