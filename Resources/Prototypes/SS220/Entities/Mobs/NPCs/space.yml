@@ -99,9 +99,9 @@
   - type: SalvageMobRestrictions
 
 - type: entity
-  id: MobBearSpaceAIGoal
-  suffix: With Goal
-  parent: MobBearSpace
+  id: MobBearSpaceGhostRoleGoal
+  parent: MobBearSpaceGhostRole
+  suffix: Ghost Role, With Goal
   description: It looks friendly. Why don't you give it a hug?
   components:
   - type: Emoting
@@ -119,9 +119,9 @@
     - MindRoleGhostRoleFreeAgent
 
 - type: entity
-  id: MobBearSpaceAI
-  suffix: Without Goal
+  id: MobBearSpaceGhostRole
   parent: MobBearSpace
+  suffix: Ghost Role
   description: It looks friendly. Why don't you give it a hug?
   components:
   - type: GhostRole

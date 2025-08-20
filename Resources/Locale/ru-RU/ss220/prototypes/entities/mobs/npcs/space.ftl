@@ -1,7 +1,7 @@
-ent-MobBearSpaceAIGoal = космический медведь
+ent-MobBearSpaceGhostRoleGoal = космический медведь
     .desc = Выглядит дружелюбно. Почему бы тебе не обнять его?
-    .suffix = С Голом
+    .suffix = Гост роль, С голом
 
-ent-MobBearSpaceAI = космический медведь
+ent-MobBearSpaceGhostRole = космический медведь
     .desc = Выглядит дружелюбно. Почему бы тебе не обнять его?
-    .suffix = Без Гола
+    .suffix = Гост роль

@@ -113,10 +113,8 @@
 #SS220 Prying start
   - type: Prying
     speedModifier: 1.5
-    pryPowered: !type:Bool
-        true
-    force: !type:Bool
-      true
+    pryPowered: true
+    force: true
     useSound:
       path: /Audio/Items/crowbar.ogg
 #SS220 Prying end

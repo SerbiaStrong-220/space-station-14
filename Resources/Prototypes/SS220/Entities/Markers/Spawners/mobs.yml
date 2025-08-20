@@ -98,10 +98,10 @@
       - MobCrocodileSpaceSalvage
 
 - type: entity
-  name: the spawner Bear Space
-  id: SpawnMobBearSpaceAI
+  id: SpawnMobBearSpaceGhostRole
   parent: MarkerBase
-  suffix: AI, without goal
+  name: the spawner Bear Space
+  suffix: Ghost Role
   components:
   - type: Sprite
     layers:
@@ -110,13 +110,12 @@
       sprite: Mobs/Animals/bear.rsi
   - type: ConditionalSpawner
     prototypes:
-      - MobBearSpaceAI
+      - MobBearSpaceGhostRole
 
 - type: entity
-  name: the spawner Bear Space
-  id: SpawnMobBearSpaceAIGoal
-  parent: MarkerBase
-  suffix: AI, with goal
+  id: SpawnMobBearSpaceGhostRoleGoal
+  parent: SpawnMobBearSpaceGhostRole
+  suffix: Ghost Role, With Goal
   components:
   - type: Sprite
     layers:
@@ -125,4 +124,4 @@
       sprite: Mobs/Animals/bear.rsi
   - type: ConditionalSpawner
     prototypes:
-      - MobBearSpaceAIGoal
+      - MobBearSpaceGhostRoleGoal
