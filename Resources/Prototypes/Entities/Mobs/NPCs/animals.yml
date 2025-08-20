@@ -3622,8 +3622,10 @@
     spawned:
     - id: FoodMeat
       amount: 1
+  #SS220 Animalistic languages fix begin
   # - type: ReplacementAccent
   #   accent: mouse
+  #SS220 Animalistic languages fix end
   - type: Tag
     tags:
     - VimPilot
