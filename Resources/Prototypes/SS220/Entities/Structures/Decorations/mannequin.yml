@@ -98,5 +98,25 @@
         showEnts: False
         occludes: False
         ent: null
+      hands_right: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      hands_left: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
   - type: Inventory
     templateId: human
+  - type: Hands
+    hands:
+      hands_right:
+        location: Right
+      hands_left:
+        location: Left
+    sortedHands:
+    - hands_right
+    - hands_left
+  - type: Body
+    prototype: Mannequin
+
