@@ -11,7 +11,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedMiGoSystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]
+[Access(typeof(SharedMiGoSystem), typeof(SharedMiGoErectSystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]
 public sealed partial class MiGoComponent : Component
 {
     #region Abilities
@@ -71,13 +71,13 @@ public sealed partial class MiGoComponent : Component
     [ViewVariables]
     public TimeSpan HealingEffectTime = TimeSpan.FromSeconds(15);
 
-
     /// <summary>
     /// How far from altar MiGo can start action
     /// </summary>
     [ViewVariables]
     public float SaraficeStartRange = 1f;
 
+    #region Building
     /// <summary>
     /// How long does it take to erect a building
     /// </summary>
@@ -96,6 +96,18 @@ public sealed partial class MiGoComponent : Component
     /// </summary>
     [DataField(required: true)]
     public EntityWhitelist? EraseWhitelist = new();
+
+    /// <summary>
+    /// How long capturing DoAfter will occure
+    /// <summary>
+    [ViewVariables]
+    public TimeSpan CaptureDoAfterTime = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    /// List of capruring results
+    /// <summary>
+    public Dictionary<string, TimeSpan> CaptureCooldowns = [];
+    #endregion
 
     #region Astral
     /// <summary>
@@ -147,6 +159,7 @@ public enum MiGoTimerVisualLayers : byte
     Digit1,
     Digit2
 }
+
 [Serializable, NetSerializable]
 public enum MiGoVisual
 {

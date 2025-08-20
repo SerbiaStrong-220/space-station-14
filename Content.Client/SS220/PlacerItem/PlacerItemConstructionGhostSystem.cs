@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Client.Hands.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.SS220.PlacerItem;
@@ -13,6 +14,7 @@ public sealed class PlacerItemConstructionGhostSystem : EntitySystem
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPlacementManager _placementManager = default!;
+    [Dependency] private readonly HandsSystem _hands = default!;
 
     private string _placementMode = typeof(AlignPlacerItemConstruction).Name;
     private Direction _placementDirection = default;
@@ -33,7 +35,7 @@ public sealed class PlacerItemConstructionGhostSystem : EntitySystem
         if (!TryComp<HandsComponent>(player, out var hands))
             return;
 
-        var heldEntity = hands.ActiveHand?.HeldEntity;
+        var heldEntity = _hands.GetActiveItem((player.Value, hands));
         if (!TryComp<PlacerItemComponent>(heldEntity, out var comp) || !comp.Active)
         {
             if (placerIsPlacerItem)

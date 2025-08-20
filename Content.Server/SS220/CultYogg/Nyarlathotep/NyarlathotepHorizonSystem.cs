@@ -3,7 +3,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Body.Systems;
 using Content.Server.SS220.CultYogg.Nyarlathotep.Events;
-using Content.Server.Station.Components;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
@@ -11,6 +10,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Singularity.Components;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.CultYogg.Nyarlathotep;
+using Content.Shared.Station.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Events;

@@ -48,8 +48,8 @@
 
 - type: entity
   id: ActionUseChemicalImplant
-  name: chemical-implant-action-name
-  description: chemical-implant-action-desc
+  name: chemical implant action
+  description: chemical implant action desc
   components:
   - type: LimitedCharges
     maxCharges: 4

@@ -3,6 +3,7 @@
 using Content.Server.Botany;
 using Content.Server.Botany.Components;
 using Content.Server.Botany.Systems;
+using Content.Server.Hands.Systems;
 using Content.Server.Popups;
 using Content.Shared.Botany;
 using Content.Shared.Examine;
@@ -23,6 +24,7 @@ public sealed class FungusSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly HandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -144,7 +146,7 @@ public sealed class FungusSystem : EntitySystem
 
         if (TryComp<HandsComponent>(user, out var hands))
         {
-            if (!_botany.CanHarvest(component.Seed, hands.ActiveHandEntity))
+            if (!_botany.CanHarvest(component.Seed, _hands.GetActiveItem((user, hands))))
             {
                 return false;
             }
