@@ -32,7 +32,7 @@ public sealed partial class DefibrillatorComponent : Component
     /// Multiplied damage for a failed defibrillator attempt.
     /// </summary>
     [DataField]
-    public int ZapСoeffDamage = 8;
+    public int ZapCoeffDamage = 8;
     //SS220 LimitationRevive - end
 
     /// <summary>

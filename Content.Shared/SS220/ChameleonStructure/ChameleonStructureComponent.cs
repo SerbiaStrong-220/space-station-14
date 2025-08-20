@@ -16,7 +16,7 @@ public sealed partial class ChameleonStructureComponent : Component
 {
     /// <summary>
     ///     EntityPrototype id that chameleon item is trying to mimic.
-    ///     Сan be set as default.
+    ///     can be set as default.
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
     [DataField, AutoNetworkedField]

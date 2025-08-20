@@ -1,5 +1,5 @@
 - type: damageType
-  id: Сerebral
+  id: Cerebral
   name: damage-type-cerebral
   armorCoefficientPrice: 1
   armorFlatPrice: 1

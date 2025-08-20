@@ -41,17 +41,17 @@ namespace Content.Server.SS220.SmartFridge
             component.Broken = true;
             TryUpdateVisualState(uid, component);
         }
-        public void Deny(EntityUid uid, SmartFridgeComponent? сomponent = null)
+        public void Deny(EntityUid uid, SmartFridgeComponent? component = null)
         {
-            if (!Resolve(uid, ref сomponent))
+            if (!Resolve(uid, ref component))
                 return;
 
-            if (сomponent.Denying)
+            if (component.Denying)
                 return;
 
-            сomponent.Denying = true;
-            Audio.PlayPvs(сomponent.SoundDeny, uid, AudioParams.Default.WithVolume(-2f));
-            TryUpdateVisualState(uid, сomponent);
+            component.Denying = true;
+            Audio.PlayPvs(component.SoundDeny, uid, AudioParams.Default.WithVolume(-2f));
+            TryUpdateVisualState(uid, component);
         }
 
         /// <summary>
