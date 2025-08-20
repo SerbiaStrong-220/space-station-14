@@ -130,6 +130,9 @@
   - type: Airtight
     noAirWhenFullyAirBlocked: false
   #ss220 airlock visuals fix start
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
   - type: AirlockVisuals
   #ss220 airlock visuals fix end
   - type: RadiationBlocker
