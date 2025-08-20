@@ -111,10 +111,10 @@
     interactSuccessSound:
       path: /Audio/Animals/sloth_squeak.ogg
   #SS220 Goal start
-  - type: Emoting
-  - type: ActionGrant
-    actions:
-    - ActionGoal
+  #- type: Emoting
+  #- type: ActionGrant
+  #  actions:
+  #  - ActionGoal
   - type: GhostRole
     makeSentient: true
     allowSpeech: false
@@ -125,6 +125,14 @@
     mindRoles:
     - MindRoleGhostRoleFreeAgent
   #SS220 Goal end
+  - type: Prying
+    speedModifier: 1.5
+    pryPowered: !type:Bool
+        true
+    force: !type:Bool
+      true
+    useSound:
+      path: /Audio/Items/crowbar.ogg
 
 - type: entity
   id: MobBearSpaceSalvage
