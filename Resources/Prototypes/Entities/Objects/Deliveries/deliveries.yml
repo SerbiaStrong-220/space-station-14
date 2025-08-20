@@ -61,12 +61,16 @@
   name: package
   components:
   - type: Sprite
-    sprite: SS220/Objects/Specific/Cargo/mail_large.rsi
+    sprite: SS220/Objects/Specific/Cargo/mail_large.rsi #SS220 package-resprite
     layers:
     - state: icon
       map: [ "enum.DeliveryVisualLayers.Icon" ]
     - state: trash
       map: [ "enum.DeliveryVisualLayers.Trash" ]
+      visible: false
+    - state: priority
+      map: [ "enum.DeliveryVisualLayers.PriorityTape" ]
+      shader: unshaded
       visible: false
     - state: fragile
       map: [ "enum.DeliveryVisualLayers.FragileStamp" ]
@@ -76,10 +80,6 @@
       offset: -0.21875, -0.25
     - state: locked
       map: [ "enum.DeliveryVisualLayers.Lock" ]
-    - state: priority
-      map: [ "enum.DeliveryVisualLayers.PriorityTape" ]
-      shader: unshaded
-      visible: false
     - state: broken
       map: [ "enum.DeliveryVisualLayers.Breakage" ]
       visible: false
