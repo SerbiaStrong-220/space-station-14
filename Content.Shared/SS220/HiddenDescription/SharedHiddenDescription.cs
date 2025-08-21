@@ -1,15 +1,17 @@
-using Content.Server.Mind;
+// Original code by Corvax dev team, no specific for SS220 license
+
+using Content.Shared.Mind;
 using Content.Shared.Examine;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Content.Shared.Whitelist;
 
-namespace Content.Server.Corvax.HiddenDescription;
+namespace Content.Server.SS220.HiddenDescription;
 
 public sealed partial class HiddenDescriptionSystem : EntitySystem
 {
 
-    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
 
@@ -20,6 +22,7 @@ public sealed partial class HiddenDescriptionSystem : EntitySystem
         SubscribeLocalEvent<HiddenDescriptionComponent, ExaminedEvent>(OnExamine);
     }
 
+    //Unfortunately cause of mind check it fails to be predicted
     private void OnExamine(Entity<HiddenDescriptionComponent> hiddenDesc, ref ExaminedEvent args)
     {
         PushExamineInformation(hiddenDesc.Comp, ref args);

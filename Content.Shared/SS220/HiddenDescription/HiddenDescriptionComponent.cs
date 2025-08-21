@@ -1,8 +1,10 @@
+// Original code by Corvax dev team, no specific for SS220 license
+
 using Content.Shared.Roles;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.Corvax.HiddenDescription;
+namespace Content.Server.SS220.HiddenDescription;
 
 /// <summary>
 /// A component that shows players with specific roles or jobs additional information about entities

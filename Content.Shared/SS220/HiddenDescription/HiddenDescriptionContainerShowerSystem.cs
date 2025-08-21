@@ -1,12 +1,13 @@
+// Original code by Corvax dev team, no specific for SS220 license
 
 using Content.Shared.Examine;
-using Robust.Server.Containers;
+using Robust.Shared.Containers;
 
-namespace Content.Server.Corvax.HiddenDescription;
+namespace Content.Server.SS220.HiddenDescription;
 
 public sealed class HiddenDescriptionContainerShowerSystem : EntitySystem
 {
-    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly HiddenDescriptionSystem _hiddenDescription = default!;
 
     public override void Initialize()
