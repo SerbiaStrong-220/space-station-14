@@ -45,10 +45,6 @@ public sealed partial class CargoSystem
             return;
         }
 
-        //SS220-request-console-emagging begin
-        ent.Comp.IsEmagged = _emag.CheckFlag(ent, EmagType.Interaction);
-        //SS220-request-console-emagging end
-
         ent.Comp.NextAccountActionTime = Timing.CurTime + ent.Comp.AccountActionDelay;
         UpdateBankAccount((station, bank), -args.Amount,  ent.Comp.Account, dirty: false);
         _audio.PlayPvs(ApproveSound, ent);

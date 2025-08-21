@@ -119,6 +119,9 @@ namespace Content.Server.Cargo.Systems
             if (_emag.CheckFlag(ent, EmagType.Interaction))
                 return;
 
+            //SS220-request-console-emagging begin
+            ent.Comp.IsEmagged = true;
+            //SS220-request-console-emagging end
             args.Handled = true;
         }
 
