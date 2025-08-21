@@ -56,9 +56,9 @@ public sealed class CriminalRecordSystem : EntitySystem
         }
         // SS220 ADD GHOST HUD'S END
 
-        if (_inventory.TryGetSlotEntity(args.Examiner, "eyes", out _))
+        if (_inventory.TryGetSlotEntity(args.Examiner, "eyes", out var eyesSlotEntity))
         {
-            if (HasComp<ShowCriminalRecordIconsComponent>(ent))
+            if (HasComp<ShowCriminalRecordIconsComponent>(eyesSlotEntity))
                 scannerOn = true;
         }
 
