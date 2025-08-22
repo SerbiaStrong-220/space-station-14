@@ -1,5 +1,5 @@
 - type: entity
   save: false
   name: Urist McKpb
-  parent: [BaseMobKpb, BaseMob]
+  parent: BaseMobKpb
   id: MobKpb
