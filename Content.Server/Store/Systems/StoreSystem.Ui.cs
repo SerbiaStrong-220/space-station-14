@@ -251,7 +251,7 @@ public sealed partial class StoreSystem
         // ss220 tweak product event start
         if (listing.ProductEvent is { } ev)
         {
-            ev.ListingId = listing.ID;
+            ev.Listing = listing;
             ev.Purchaser = buyer;
             ev.StoreUid = uid;
 

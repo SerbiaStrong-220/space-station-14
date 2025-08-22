@@ -1,3 +1,5 @@
+using Content.Shared.Store;
+
 namespace Content.Shared.SS220.Store.Listing;
 
 /// <summary>
@@ -11,7 +13,7 @@ public abstract partial class ListingPurchasedEvent : EntityEventArgs
     /// Unique identifier of the purchased listing.
     /// Used to resolve listing metadata, pricing, and effects.
     /// </summary>
-    public string ListingId = string.Empty;
+    public ListingDataWithCostModifiers Listing;
 
     /// <summary>
     /// Entity that initiated the purchase.

@@ -40,7 +40,12 @@ public sealed class ShutdownNearestApcSystem : EntitySystem
             count++;
         }
 
-        _adminLog.Add(LogType.Action, LogImpact.High,
-            $"{ToPrettyString(args.Purchaser):player} отключил {count} ЛКП в радиусе {args.Radius} тайлов, используя Тактический подавитель энергии");
+        var name = string.Empty;
+
+        if (args.Listing.Name != null)
+            name = Loc.GetString(args.Listing.Name);
+
+        _adminLog.Add(LogType.Action, LogImpact.Medium,
+            $"{ToPrettyString(args.Purchaser):player} shut down {count} APC(s) within {args.Radius} meters, using {name}");
     }
 }
