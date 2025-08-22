@@ -5,9 +5,9 @@
   description: Advanced armored jumpsuit used by special forces in special operations.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/deathsquad.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/deathsquad.rsi #SS220-deathsquad-resprite
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/deathsquad.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/deathsquad.rsi #SS220-deathsquad-resprite
 
 - type: entity
   parent: ClothingUniformBase
@@ -526,6 +526,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - PrisonUniform
     - WhitelistChameleon
 
@@ -881,6 +882,8 @@
     sprite: Clothing/Uniforms/Jumpsuit/operative.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/operative.rsi
+  - type: StaticPrice
+    price: 500
 
 - type: entity
   parent: ClothingUniformBase

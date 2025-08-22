@@ -41,7 +41,7 @@ using Content.Shared.SS220.RestrictedItem;
 using Content.Shared.SS220.Roles;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.SS220.Telepathy;
-using Content.Shared.SS220.UpdateChannels;
+using Content.Shared.Station.Components;
 using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -75,6 +75,8 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     [Dependency] private readonly EuiManager _euiManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedRestrictedItemSystem _sharedRestrictedItemSystem = default!;
+    [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
+    [Dependency] private readonly SharedMiGoSystem _migo = default!;
 
     private List<List<string>> _sacraficialTiers = [];
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
@@ -90,8 +92,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         SubscribeLocalEvent<SacraficialReplacementEvent>(SacraficialReplacement);
 
         SubscribeLocalEvent<CultYoggRuleComponent, CultYoggSacrificedTargetEvent>(OnTargetSacrificed);
-
-        SubscribeLocalEvent<CultYoggAnouncementEvent>(SendCultAnounce);
     }
 
     #region Sacreficials picking
@@ -119,7 +119,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         var ev = new CultYoggReinitObjEvent();
         var query = EntityQueryEnumerator<CultYoggSummonConditionComponent>();
-        while (query.MoveNext(out var ent, out var _))
+        while (query.MoveNext(out var ent, out _))
         {
             RaiseLocalEvent(ent, ref ev); //Reinitialise objective if gamerule was forced
         }
@@ -159,7 +159,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
             if (departament.ID == comp.SecondTierDepartament)
                 continue;
 
-            foreach (ProtoId<JobPrototype> role in departament.Roles)
+            foreach (var role in departament.Roles)
             {
                 if (firstTier.Contains(role.Id))
                     continue;
@@ -179,9 +179,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     private void SetSacraficials(CultYoggRuleComponent component)
     {
         var allHumans = GetAliveNoneCultHumans();
-
-        if (allHumans is null)
-            return;
 
         _adminLogger.Add(LogType.EventRan, LogImpact.High, $"Amount of tiers is {_sacraficialTiers.Count}");
         for (int i = 0; i < _sacraficialTiers.Count; i++)
@@ -243,9 +240,11 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     private List<EntityUid> GetAliveNoneCultHumans()//maybe add here sacraficials and cultists filter
     {
-        var mindQuery = EntityQuery<MindComponent>();
-
         var allHumans = new List<EntityUid>();
+
+        if (!TryGetRandomStation(out var station))//IDK how to get station so i took this realization
+            return allHumans;
+
         // HumanoidAppearanceComponent is used to prevent mice, pAIs, etc from being chosen
         var query = EntityQueryEnumerator<MindContainerComponent, MobStateComponent, HumanoidAppearanceComponent>();
         while (query.MoveNext(out var uid, out var mc, out var mobState, out _))
@@ -258,6 +257,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
                 continue;
 
             if (HasComp<CultYoggSacrificialComponent>(uid))
+                continue;
+
+            if (_station.GetOwningStation(uid) != station)
                 continue;
 
             // the player has to be alive
@@ -285,9 +287,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     private void SacraficialReplacement(ref SacraficialReplacementEvent args)
     {
-        var cultRuleComp = GetCultGameRule();
-
-        if (cultRuleComp == null)
+        if (!TryGetCultGameRule(out var rule))
             return;
 
         if (!TryComp<CultYoggSacrificialComponent>(args.Entity, out var sacrComp))
@@ -296,19 +296,16 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (sacrComp.WasSacraficed)
             return;
 
-        SetNewSacraficial(cultRuleComp, sacrComp.Tier);
+        SetNewSacraficial(rule.Value.Comp, sacrComp.Tier);
 
         RemComp<CultYoggSacrificialComponent>(args.Entity);
 
-        var ev = new CultYoggAnouncementEvent(args.Entity, Loc.GetString("cult-yogg-sacraficial-was-replaced", ("name", MetaData(args.Entity).EntityName)));
-        RaiseLocalEvent(args.Entity, ref ev, true);
+        SendCultAnounce(Loc.GetString("cult-yogg-sacraficial-was-replaced", ("name", MetaData(args.Entity).EntityName)));
     }
+
     private void SetNewSacraficial(CultYoggRuleComponent comp, int tier)
     {
         var allHumans = GetAliveNoneCultHumans();
-
-        if (allHumans is null)
-            return;
 
         SetSacraficeTarget(comp, PickFromTierPerson(allHumans, tier), tier);
     }
@@ -327,27 +324,64 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (!TryGetCultGameRule(out var rule))
             return;
 
-        MakeCultist(args.Target.Value, rule, false);
+        if (!TryMakeCultistMind(args.Target.Value, rule.Value, true))
+            return;
+
+        MakeCultist(args.Target.Value, rule.Value, false);
     }
     #endregion
 
     #region Cultists making
     private void AfterEntitySelected(Entity<CultYoggRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
     {
+        if (!TryMakeCultistMind(args.EntityUid, ent, true))
+            return;
+
         MakeCultist(args.EntityUid, ent, true);
     }
 
-    public void MakeCultist(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false)
+    /// <summary>
+    /// The separation is made for better operation of the cloner and from potential other problems.
+    /// </summary>
+    /// <param name="initial">Flag for appearing in post-match credits</param>
+    /// <param name="sendBriefing">Should there be sounds and briefing?</param>
+    public bool TryMakeCultistMind(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false, bool sendBriefing = true)
     {
         //Grab the mind if it wasnt provided
         if (!_mind.TryGetMind(uid, out var mindId, out var mindComp))
-            return;
+            return false;
 
-        _antag.SendBriefing(uid, Loc.GetString("cult-yogg-role-greeting"), null, rule.Comp.GreetSoundNotification);
+        if (sendBriefing)
+            _antag.SendBriefing(uid, Loc.GetString("cult-yogg-role-greeting"), null, rule.Comp.GreetSoundNotification);
 
-        if (initial && !rule.Comp.InitialCultistMinds.Contains (mindId))
+        if (initial && !rule.Comp.InitialCultistMinds.Contains(mindId))
             rule.Comp.InitialCultistMinds.Add(mindId);
 
+        foreach (var obj in rule.Comp.ListofObjectives)
+        {
+            _role.MindAddRole(mindId, rule.Comp.MindCultYoggAntagId, mindComp, true);
+            _mind.TryAddObjective(mindId, mindComp, obj);
+        }
+
+        rule.Comp.TotalCultistsConverted++;
+
+        var amountOfCultists = rule.Comp.TotalCultistsConverted;
+        var totalCrew = rule.Comp.InitialCrewCount;
+
+        while (TryGetNextStage(rule, out var nextStage, out var nextStageDefinition)
+            && nextStageDefinition.CultistsFractionRequired is { } cultistsFractionRequired
+            && cultistsFractionRequired * totalCrew <= amountOfCultists)
+        {
+            ProgressToStage(rule, nextStage);
+        }
+
+        DirtyEntity(mindId);//Not quite sure if it is required
+
+        return true;
+    }
+
+    public void MakeCultist(EntityUid uid, Entity<CultYoggRuleComponent> rule, bool initial = false, bool sendBriefing = true)
+    {
         // Change the faction
         _npcFaction.RemoveFaction(uid, rule.Comp.NanoTrasenFaction, false);
         _npcFaction.AddFaction(uid, rule.Comp.CultYoggFaction);
@@ -370,23 +404,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         EnsureComp<ShowCultYoggIconsComponent>(uid);//icons of cultists and sacraficials
         EnsureComp<ZombieImmuneComponent>(uid);//they are practically mushrooms
 
-        foreach (var obj in rule.Comp.ListofObjectives)
-        {
-            _role.MindAddRole(mindId, rule.Comp.MindCultYoggAntagId, mindComp, true);
-            var objective = _mind.TryAddObjective(mindId, mindComp, obj);
-        }
-
-        rule.Comp.TotalCultistsConverted++;
-
-        var amountOfCultists = rule.Comp.TotalCultistsConverted;
-        var totalCrew = rule.Comp.InitialCrewCount;
-        while (TryGetNextStage(rule, out var nextStage, out var nextStageDefinition)
-            && nextStageDefinition.CultistsFractionRequired is { } cultistsFractionRequired
-            && cultistsFractionRequired * totalCrew <= amountOfCultists)
-        {
-            ProgressToStage(rule, nextStage);
-        }
-
         DirtyEntity(uid);
     }
     #endregion
@@ -395,20 +412,20 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     private void DeCult(ref CultYoggDeCultingEvent args)
     {
-        var cultRuleComp = GetCultGameRule();//ToDo bug potentialy if somebody will make cultist without gamerule, ask head dev
-
-        if (cultRuleComp == null)
+        if (!TryGetCultGameRule(out var rule))
             return;
 
-        DeMakeCultist(args.Entity, cultRuleComp);
+        DeCultMind(args.Entity, rule.Value.Comp);
+
+        DeMakeCultist(args.Entity, rule.Value.Comp);
     }
 
-    public void DeMakeCultist(EntityUid uid, CultYoggRuleComponent component)
+    public void DeCultMind(EntityUid uid, CultYoggRuleComponent component)
     {
         if (!_mind.TryGetMind(uid, out var mindId, out var mindComp))
             return;
 
-        if (!_role.MindHasRole<CultYoggRoleComponent>(mindId, out var cultRoleEnt))
+        if (!_role.MindHasRole<CultYoggRoleComponent>(mindId, out var _))
             return;
 
         foreach (var obj in component.ListofObjectives)
@@ -421,9 +438,19 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         _role.MindRemoveRole<CultYoggRoleComponent>(mindId);
 
+        if (mindComp.UserId != null &&
+            _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
+        {
+            _euiManager.OpenEui(new DeCultReminderEui(), session);
+        }
+
+        DirtyEntity(mindId);//Not quite sure if it is required
+    }
+
+    public void DeMakeCultist(EntityUid uid, CultYoggRuleComponent component)
+    {
         //Remove all corrupted items
-        var stuckEv = new DropAllStuckOnEquipEvent(uid);//ToDo_SS220 make it function
-        RaiseLocalEvent(uid, ref stuckEv, true);
+        _stuckOnEquip.RemoveAllStuckItems(uid);
 
         _sharedRestrictedItemSystem.DropAllRestrictedItems(uid);
 
@@ -439,28 +466,20 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         RemComp<ShowCultYoggIconsComponent>(uid);
         RemComp<ZombieImmuneComponent>(uid);
 
-        if (mindComp.UserId != null &&
-            _playerManager.TryGetSessionById(mindComp.UserId.Value, out var session))
-        {
-            _euiManager.OpenEui(new DeCultReminderEui(), session);
-        }
-
         DirtyEntity(uid);
     }
     #endregion
 
     #region Anounce
-    private void SendCultAnounce(ref CultYoggAnouncementEvent args)
+    public void SendCultAnounce(string message)
     {
         //ToDo refactor without spam
 
-        var ruleComp = GetCultGameRule();
-
-        if (ruleComp == null)
+        if (!TryGetCultGameRule(out var rule))
             return;
 
-        var ev = new TelepathyAnnouncementSendEvent(args.Message, ruleComp.TelepathyChannel);
-        RaiseLocalEvent(args.Entity, ev, true);
+        var ev = new TelepathyAnnouncementSendEvent(message, rule.Value.Comp.TelepathyChannel);
+        RaiseLocalEvent(rule.Value, ev, true);
     }
     #endregion
 
@@ -477,10 +496,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         }
         _roundEnd.RequestRoundEnd(DefaultShuttleArriving, null);
 
-        var selectedSong = _audio.GetSound(comp.SummonMusic);
+        var selectedSong = _audio.ResolveSound(comp.SummonMusic);
 
-        if (!string.IsNullOrEmpty(selectedSong))
-            _sound.DispatchStationEventMusic(godUid, selectedSong, StationEventMusicType.Nuke);//should i rename somehow?
+        _sound.DispatchStationEventMusic(godUid, selectedSong, StationEventMusicType.Nuke);//should i rename somehow?
 
         comp.Summoned = true;//Win EndText
     }
@@ -513,7 +531,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         foreach (var station in _station.GetStations())
         {
-            if (_station.GetLargestGrid(Comp<StationDataComponent>(station)) is { } grid)
+            if (_station.GetLargestGrid((station, Comp<StationDataComponent>(station))) is { } grid)
                 return Transform(grid).Coordinates;
         }
 
@@ -562,6 +580,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
                 ("username", data.UserName)));
         }
     }
+
     private float GetCultistsFraction()
     {
         int cultistsCount = 0;
@@ -625,7 +644,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         {
             foreach (var station in _station.GetStations())
             {
-                _chat.DispatchStationAnnouncement(station, Loc.GetString("cult-yogg-cultists-warning"), playSound: false, colorOverride: Color.Red);
+                _chat.DispatchStationAnnouncement(station, Loc.GetString("cult-yogg-cultists-warning"), playDefaultSound: false, colorOverride: Color.Red);
                 _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
                 _alertLevel.SetLevel(station, "gamma", true, true, true);
             }
@@ -637,16 +656,47 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     }
     #endregion
 
-    public CultYoggRuleComponent? GetCultGameRule()
+    #region SimplifiedEslavement
+
+    public void CheckSimplifiedEslavement()
     {
-        if (TryGetCultGameRule(out var rule))
-            return rule.Comp;
-        return null;
+        if (AnyCultistsAlive())
+            return;
+
+        if (!TryGetCultGameRule(out var rule))
+            return;
+
+        if (rule.Value.Comp.Summoned)//if it is endgame and all are MiGos == no new cultists
+            return;
+
+        SendCultAnounce(Loc.GetString("cult-yogg-add-token-no-cultists"));
+        AddSimplifiedEslavement();
     }
 
-    public bool TryGetCultGameRule(out Entity<CultYoggRuleComponent> rule)
+    public bool AnyCultistsAlive()
     {
-        rule = default;
+        var query = EntityQueryEnumerator<CultYoggComponent, MobStateComponent, MindContainerComponent>();
+        while (query.MoveNext(out _, out _, out var state, out var mind))
+        {
+            if (!mind.HasMind)
+                continue;
+
+            if (state.CurrentState != MobState.Dead)
+                return true;
+        }
+
+        return false;
+    }
+
+    private void AddSimplifiedEslavement()
+    {
+        _migo.SetSimplifiedEslavement(true);//not sure if it should be function or i shoud remove read-write access
+    }
+    #endregion
+
+    public bool TryGetCultGameRule([NotNullWhen(true)] out Entity<CultYoggRuleComponent>? rule)
+    {
+        rule = null;
 
         var query = QueryAllRules();
         while (query.MoveNext(out var uid, out var cultComp, out _))
@@ -656,21 +706,5 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         }
 
         return false;
-    }
-}
-
-/// <summary>
-///     Raised when we need announce smth to all cultists and we dont have their channel
-/// </summary>
-[ByRefEvent, Serializable]
-public sealed class CultYoggAnouncementEvent : EntityEventArgs
-{
-    public readonly EntityUid Entity;
-    public readonly string Message;
-
-    public CultYoggAnouncementEvent(EntityUid entity, string message)
-    {
-        Entity = entity;
-        Message = message;
     }
 }

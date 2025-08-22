@@ -23,6 +23,7 @@ using Robust.Shared.Utility;
 using Content.Shared.UserInterface;
 using Robust.Shared.Prototypes;
 using Content.Server.SS220.CruiseControl;
+using Content.Shared.Access.Systems;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -58,11 +59,16 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         SubscribeLocalEvent<ShuttleConsoleComponent, ComponentShutdown>(OnConsoleShutdown);
         SubscribeLocalEvent<ShuttleConsoleComponent, PowerChangedEvent>(OnConsolePowerChange);
         SubscribeLocalEvent<ShuttleConsoleComponent, AnchorStateChangedEvent>(OnConsoleAnchorChange);
-        SubscribeLocalEvent<ShuttleConsoleComponent, ActivatableUIOpenAttemptEvent>(OnConsoleUIOpenAttempt);
+
+        // ss220 add ui requires access start (#282)
+        SubscribeLocalEvent<ShuttleConsoleComponent, ActivatableUIOpenAttemptEvent>(OnConsoleUIOpenAttempt, after: [typeof(ActivatableUIRequiresAccessSystem)]);
+        // ss220 add ui requires access end
+
         Subs.BuiEvents<ShuttleConsoleComponent>(ShuttleConsoleUiKey.Key, subs =>
         {
             subs.Event<ShuttleConsoleFTLBeaconMessage>(OnBeaconFTLMessage);
             subs.Event<ShuttleConsoleFTLPositionMessage>(OnPositionFTLMessage);
+            subs.Event<BoundUIOpenedEvent>(OnConsoleUIOpen); // SS220 Shuttle nav info
             subs.Event<BoundUIClosedEvent>(OnConsoleUIClose);
         });
 
@@ -138,6 +144,17 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         }
     }
 
+    // SS220 Shuttle nav info begin
+    private void OnConsoleUIOpen(Entity<ShuttleConsoleComponent> entity, ref BoundUIOpenedEvent args)
+    {
+        if ((ShuttleConsoleUiKey)args.UiKey != ShuttleConsoleUiKey.Key)
+            return;
+
+        var ev = new ShuttleConsoleBoundUIOpenedEvent(entity, args);
+        RaiseLocalEvent(ev);
+    }
+    // SS220 Shuttle nav info end
+
     /// <summary>
     /// Stop piloting if the window is closed.
     /// </summary>
@@ -149,11 +166,21 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         }
 
         RemovePilot(args.Actor);
+
+        // SS220 Shuttle nav info begin
+        var ev = new ShuttleConsoleBoundUIClosedEvent((uid, component), args);
+        RaiseLocalEvent(ev);
+        // SS220 Shuttle nav info end
     }
 
     private void OnConsoleUIOpenAttempt(EntityUid uid, ShuttleConsoleComponent component,
         ActivatableUIOpenAttemptEvent args)
     {
+        // ss220 add ui requires access start (#282)
+        if (args.Cancelled)
+            return;
+        // ss220 add ui requires access end
+
         if (!TryPilot(args.User, uid))
             args.Cancel();
     }
@@ -237,6 +264,8 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
                     _xformQuery.TryGetComponent(comp.DockedWith, out var otherDockXform) ?
                     GetNetEntity(otherDockXform.GridUid) :
                     null,
+                Color = comp.RadarColor,
+                HighlightedColor = comp.HighlightedRadarColor
             };
 
             gridDocks.Add(state);
@@ -323,7 +352,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
 
     public void AddPilot(EntityUid uid, EntityUid entity, ShuttleConsoleComponent component)
     {
-        if (!EntityManager.TryGetComponent(entity, out PilotComponent? pilotComponent)
+        if (!TryComp(entity, out PilotComponent? pilotComponent)
         || component.SubscribedPilots.Contains(entity))
         {
             return;
@@ -337,7 +366,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
 
         pilotComponent.Console = uid;
         ActionBlockerSystem.UpdateCanMove(entity);
-        pilotComponent.Position = EntityManager.GetComponent<TransformComponent>(entity).Coordinates;
+        pilotComponent.Position = Comp<TransformComponent>(entity).Coordinates;
         Dirty(entity, pilotComponent);
     }
 
@@ -360,12 +389,12 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         _popup.PopupEntity(Loc.GetString("shuttle-pilot-end"), pilotUid, pilotUid);
 
         if (pilotComponent.LifeStage < ComponentLifeStage.Stopping)
-            EntityManager.RemoveComponent<PilotComponent>(pilotUid);
+            RemComp<PilotComponent>(pilotUid);
     }
 
     public void RemovePilot(EntityUid entity)
     {
-        if (!EntityManager.TryGetComponent(entity, out PilotComponent? pilotComponent))
+        if (!TryComp(entity, out PilotComponent? pilotComponent))
             return;
 
         RemovePilot(entity, pilotComponent);
@@ -447,4 +476,18 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             beacons ?? new List<ShuttleBeaconObject>(),
             exclusions ?? new List<ShuttleExclusionObject>());
     }
+
+    // SS220 Shuttle nav info begin
+    public sealed class ShuttleConsoleBoundUIOpenedEvent(Entity<ShuttleConsoleComponent> console, BoundUIOpenedEvent openedEvent) : EntityEventArgs
+    {
+        public Entity<ShuttleConsoleComponent> Console = console;
+        public BoundUIOpenedEvent OpenedEvent = openedEvent;
+    }
+
+    public sealed class ShuttleConsoleBoundUIClosedEvent(Entity<ShuttleConsoleComponent> console, BoundUIClosedEvent closedEvent) : EntityEventArgs
+    {
+        public Entity<ShuttleConsoleComponent> Console = console;
+        public BoundUIClosedEvent ClosedEvent = closedEvent;
+    }
+    // SS220 Shuttle nav info end
 }

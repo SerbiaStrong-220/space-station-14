@@ -1,5 +1,4 @@
 using Content.Shared.Damage;
-using Robust.Shared.GameStates;
 
 namespace Content.Server.SS220.ItemToggle;
 
@@ -12,12 +11,12 @@ public sealed partial class ItemToggleDamageOtherOnHitComponent : Component
     /// <summary>
     ///     Damage done by this item when activated.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField]
-    public DamageSpecifier? ActivatedDamage = null;
+    [DataField]
+    public DamageSpecifier? ActivatedDamage;
 
     /// <summary>
     ///     Damage done by this item when deactivated.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField]
-    public DamageSpecifier? DeactivatedDamage = null;
+    [DataField]
+    public DamageSpecifier? DeactivatedDamage;
 }

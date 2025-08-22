@@ -68,6 +68,7 @@ construction-graph-tag-match-stick = спичка
 construction-graph-tag-potat = картофель
 construction-graph-tag-wheat-bushel = бушель пшеницы
 construction-graph-tag-corgi-hide = шкура корги
+soil-construction-graph-any-mushroom = любой гриб
 
 # toys
 construction-graph-tag-rubber-ducky = резиновая уточка
@@ -184,3 +185,7 @@ construction-graph-tag-energy-sword = энергомеч
 construction-graph-tag-toy-energy-sword = игрушечный энергомеч
 
 construction-graph-tag-power-cell-high = батарея высокой ёмкости
+
+# posters
+construction-graph-tag-Contrposter = Недопустимый постер
+construction-graph-tag-Legalposter = Допустимый постер

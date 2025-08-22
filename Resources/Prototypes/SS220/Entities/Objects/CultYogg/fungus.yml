@@ -22,6 +22,7 @@
         - MachineMask
         layer:
         - BulletImpassable
+        - InteractImpassable
   - type: Sprite
     noRot: true
     sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi
@@ -88,3 +89,4 @@
     NullificationShroomSeeds: 0
     SidiousShroomSeeds: 0
     LubroShroomSeeds: 0
+    MikoTrapShroomSeeds: 0

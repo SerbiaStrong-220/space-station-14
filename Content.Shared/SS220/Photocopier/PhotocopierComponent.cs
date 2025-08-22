@@ -20,81 +20,77 @@ public sealed partial class PhotocopierComponent : Component
     /// Minimal time interval between attempts to manually cause photocopier to burn someone's butt.
     /// Also is the manual butt burn animation duration.
     /// </summary>
-    [DataField("manualButtBurnDuration")]
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float ManualButtBurnDuration = 1.0f;
 
     /// <summary>
     /// Used by the server to determine how long the photocopier stays in the "Printing" state.
     /// </summary>
-    [DataField("printingTime")]
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float PrintingTime = 2.0f;
 
     /// <summary>
     /// Sound that plays when inserting paper.
     /// Whether it plays or not depends on power availability.
     /// </summary>
-    [DataField("paperInsertSound")]
+    [DataField]
     public SoundSpecifier PaperInsertSound =
         new SoundPathSpecifier("/Audio/Machines/scanning.ogg")
         {
             Params = new AudioParams
             {
-                Volume = 0f
-            }
+                Volume = 0f,
+            },
         };
 
     /// <summary>
     /// Sound that plays when printing
     /// </summary>
-    [DataField("printSound")]
+    [DataField]
     public SoundSpecifier PrintSound =
         new SoundPathSpecifier("/Audio/Machines/printer.ogg")
         {
             Params = new AudioParams
             {
-                Volume = -2f
-            }
+                Volume = -2f,
+            },
         };
 
     /// <summary>
     /// Sound that plays when a hacked photocopier burns someones butt
     /// </summary>
-    [DataField("buttDamageSound")]
+    [DataField]
     public SoundSpecifier ButtDamageSound =
         new SoundPathSpecifier("/Audio/Items/welder2.ogg")
         {
             Params = new AudioParams
             {
-                Volume = -4f
-            }
+                Volume = -4f,
+            },
         };
 
     /// <summary>
     /// Contains an item to be copied, assumes it's paper or container of papers
     /// </summary>
-    [DataField("paperSlot", required: true)]
+    [DataField(required: true)]
     public ItemSlot PaperSlot = new();
 
     /// <summary>
     /// Contains a toner cartridge
     /// </summary>
-    [DataField("tonerSlot", required: true)]
+    [DataField(required: true)]
     public ItemSlot TonerSlot = new();
 
     /// <summary>
     /// Collections of forms available in UI
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("formCollections")]
+    [DataField]
     public HashSet<string> FormCollections = new();
 
     /// <summary>
     /// Maximum amount of copies that can be queued
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("maxQueueLength")]
+    [DataField]
     public int MaxQueueLength
     {
         get => _maxQueueLength;
@@ -111,12 +107,10 @@ public sealed partial class PhotocopierComponent : Component
     /// <summary>
     /// Damage dealt to a creature when they try to photocopy their butt on a hacked photocopier.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("buttDamage")]
+    [DataField]
     public DamageSpecifier? ButtDamage;
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("contrabandFormCollections")]
+    [DataField]
     public HashSet<string> ContrabandFormCollections = new();
 
     /// STATE
@@ -131,16 +125,14 @@ public sealed partial class PhotocopierComponent : Component
     /// <summary>
     /// Whether this photocopier currently burns butts or not. Set by WireAction.
     /// </summary>
-    [DataField("burnsButts")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool BurnsButts = false;
+    [DataField]
+    public bool BurnsButts;
 
     /// <summary>
     /// Whether this photocopier currently provides contraband forms or not. Set by WireAction.
     /// </summary>
-    [DataField("susFormsUnlocked")]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool SusFormsUnlocked = false;
+    [DataField]
+    public bool SusFormsUnlocked;
 
     /// <summary>
     /// Currently queued documents to be copied.

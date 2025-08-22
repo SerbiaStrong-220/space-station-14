@@ -109,8 +109,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         EntityUid? entity = null;
         if (args.Type == CryostorageRemoveItemBuiMessage.RemovalType.Hand)
         {
-            if (_hands.TryGetHand(cryoContained, args.Key, out var hand))
-                entity = hand.HeldEntity;
+            entity = _hands.GetHeldItem(cryoContained, args.Key);
         }
         else
         {
@@ -270,7 +269,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
                 ("entity", ent.Owner), // gender things for supporting downstreams with other languages
                 ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))
             ), Loc.GetString("earlyleave-cryo-sender"),
-            playSound: false
+            playDefaultSound: false
         );
     }
 
@@ -348,10 +347,10 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
 
         foreach (var hand in _hands.EnumerateHands(uid))
         {
-            if (hand.HeldEntity == null)
+            if (!_hands.TryGetHeldItem(uid, hand, out var heldEntity))
                 continue;
 
-            data.HeldItems.Add(hand.Name, Name(hand.HeldEntity.Value));
+            data.HeldItems.Add(hand, Name(heldEntity.Value));
         }
 
         return data;

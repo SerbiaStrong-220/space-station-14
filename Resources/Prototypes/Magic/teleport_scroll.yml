@@ -11,9 +11,9 @@
   - type: ActivatableUI
     key: enum.TeleportLocationUiKey.Key
   - type: Sprite
-    sprite: Objects/Magic/magicactions.rsi
+    sprite: SS220/Objects/Magic/scrolls.rsi #SS220 Resprite of Magic Scrolls
     layers:
-    - state: spell_default
+    - state: teleport #SS220 Resprite of Magic Scrolls
   - type: TeleportLocations
     name: teleportation-scroll-window-title
     teleportEffect: WizardSmoke

@@ -47,7 +47,7 @@
   parent: ActionToggleMagboots
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     icon: { sprite: /Textures/SS220/Shitspawn/FractWarEbent/Clothing/Shoes/Boots/magsyndieebent.rsi, state: icon }
     iconOn: /Textures/SS220/Shitspawn/FractWarEbent/Clothing/Shoes/Boots/magsyndieebent.rsi/icon-on.png
 
