@@ -112,7 +112,6 @@ namespace Content.IntegrationTests.Tests
             "Axioma",
 			"Donuts",
             "Eclipse",
-            "Nightshift",
             "SS220_syndicate",
             "SS220_CentComm",
 
