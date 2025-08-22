@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
@@ -9,7 +10,6 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using static Content.Shared.Fax.AdminFaxEuiMsg;
 
 namespace Content.Shared.SS220.InnerHandToggleable;
 
@@ -25,6 +25,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaData = default!;
 
     public const string InnerHandPrefix = "inner_";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -66,7 +67,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
 
     private void OnComponentShutdown(Entity<InnerHandToggleableComponent> ent, ref ComponentShutdown args)
     {
-        _actionsSystem.RemoveAction(ent, ent.Comp.ActionEntity);
+        _actionsSystem.RemoveAction(ent.Comp.ActionEntity);
         foreach (var hand in ent.Comp.HandsContainers.Values)
         {
             if (hand.Container is null)
@@ -83,7 +84,7 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         if (!_whitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, args.Equipped))
             return;
 
-        if (!ent.Comp.HandsContainers.TryGetValue(args.Hand.Name, out var innerToggle))
+        if (!ent.Comp.HandsContainers.TryGetValue(args.HandId, out var innerToggle))
             return;
 
         if (innerToggle.InnerItemUid != null)//if we don't have space for a new item, we don't update the action
@@ -97,16 +98,16 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         if (!TryComp<HandsComponent>(ent, out var handsComp))
             return;
 
-        if (args.Hand != handsComp.ActiveHand)//if the item was lost not from the ActiveHand, cause action matters only in it
+        if (args.HandId != handsComp.ActiveHandId)//if the item was lost not from the ActiveHand, cause action matters only in it
             return;
 
-        if (!ent.Comp.HandsContainers.TryGetValue(handsComp.ActiveHand.Name, out var innerToggle))
+        if (!ent.Comp.HandsContainers.TryGetValue(handsComp.ActiveHandId, out var innerToggle))
             return;
 
         if (innerToggle.InnerItemUid != null)//if the inner item is inside
             return;
 
-        _actionsSystem.RemoveAction(ent, ent.Comp.ActionEntity);
+        _actionsSystem.RemoveAction(ent.Comp.ActionEntity);
     }
 
     private void OnDidSwitchHand(Entity<InnerHandToggleableComponent> ent, ref DidSwitchHandEvent args)
@@ -114,10 +115,10 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         if (!TryComp<HandsComponent>(ent, out var handsComp))
             return;
 
-        if (handsComp.ActiveHand == null)
+        if (handsComp.ActiveHandId == null)
             return;
 
-        if (!ent.Comp.HandsContainers.TryGetValue(handsComp.ActiveHand.Name, out var innerToggle))
+        if (!ent.Comp.HandsContainers.TryGetValue(handsComp.ActiveHandId, out var innerToggle))
             return;
 
         if (innerToggle.InnerItemUid != null)//if there is an item inside, then the action gets its icon
@@ -126,14 +127,16 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
             return;
         }
 
+        var activeHandHeldEntity = _hand.GetActiveItem((ent, handsComp));
+
         //if there is an object in the hand, there is nothing inside and it fits -- we update the action
-        if (handsComp.ActiveHand.HeldEntity != null && _whitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, handsComp.ActiveHand.HeldEntity.Value))
+        if (activeHandHeldEntity != null && _whitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, activeHandHeldEntity.Value))
         {
-            UpdateToggleAction(ent, handsComp.ActiveHand.HeldEntity.Value, false);
+            UpdateToggleAction(ent, activeHandHeldEntity.Value, false);
             return;
         }
 
-        _actionsSystem.RemoveAction(ent, ent.Comp.ActionEntity);
+        _actionsSystem.RemoveAction(ent.Comp.ActionEntity);
     }
 
     /// <summary>
@@ -147,10 +150,10 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         if (!_actionsSystem.AddAction(ent, ref ent.Comp.ActionEntity, ent.Comp.Action))
             return;
 
-        if (!TryComp<InstantActionComponent>(ent.Comp.ActionEntity, out var instantAction))
+        if (!TryComp<ActionComponent>(ent.Comp.ActionEntity, out var action))
             return;
 
-        _actionsSystem.SetEntityIcon(ent.Comp.ActionEntity.Value, item, instantAction);
+        _actionsSystem.SetEntityIcon((ent.Comp.ActionEntity.Value, action), item);
         _actionsSystem.SetToggled(ent.Comp.ActionEntity, toggle);
 
         if (toggle)
@@ -170,10 +173,10 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         if (!TryComp<HandsComponent>(ent, out var handsComp))
             return;
 
-        if (handsComp.ActiveHand == null)
+        if (handsComp.ActiveHandId == null)
             return;
 
-        if (!ent.Comp.HandsContainers.TryGetValue(handsComp.ActiveHand.Name, out var innerToggle))
+        if (!ent.Comp.HandsContainers.TryGetValue(handsComp.ActiveHandId, out var innerToggle))
             return;
 
         if (innerToggle.Container == null)
@@ -182,14 +185,16 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
         if (ent.Comp.ActionEntity == null)
             return;
 
-        if (innerToggle.InnerItemUid != null && !handsComp.ActiveHand.IsEmpty)
+        var activeHandHeldItem = _hand.GetHeldItem((ent, handsComp), handsComp.ActiveHandId);
+
+        if (innerToggle.InnerItemUid != null && !(activeHandHeldItem == null))
         {
             _popup.PopupClient(Loc.GetString("action-inner-hand-toggle-activehand-full-popup"), ent, ent);
         }
 
-        if (innerToggle.InnerItemUid != null && handsComp.ActiveHand.IsEmpty)
+        if (innerToggle.InnerItemUid != null && (activeHandHeldItem == null))
         {
-            if (_hand.TryPickup(ent, innerToggle.InnerItemUid.Value, handsComp.ActiveHand))
+            if (_hand.TryPickup(ent, innerToggle.InnerItemUid.Value, handsComp.ActiveHandId))
             {
                 innerToggle.InnerItemUid = null;
                 _actionsSystem.SetToggled(ent.Comp.ActionEntity, false);// we don't update the whole action because the hand and the action do not change
@@ -198,16 +203,15 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
             }
         }
 
-        if (innerToggle.InnerItemUid == null && handsComp.ActiveHand.HeldEntity != null)
-        {
-            if (TryComp<StuckOnEquipComponent>(handsComp.ActiveHand.HeldEntity, out var stuckOnEquip))
-                _stuckOnEquip.UnstuckItem((handsComp.ActiveHand.HeldEntity.Value, stuckOnEquip));
-
-            innerToggle.InnerItemUid = handsComp.ActiveHand.HeldEntity.Value;
-            _containerSystem.Insert((handsComp.ActiveHand.HeldEntity.Value, null, null), innerToggle.Container);
-            _actionsSystem.SetToggled(ent.Comp.ActionEntity, true); // we don't update the whole action because the hand and the action do not change
-            _metaData.SetEntityName(ent.Comp.ActionEntity.Value, Loc.GetString("action-inner-hand-toggle-name-out"));
+        if (innerToggle.InnerItemUid != null || activeHandHeldItem == null)
             return;
-        }
+
+        if (TryComp<StuckOnEquipComponent>(activeHandHeldItem, out var stuckOnEquip))
+            _stuckOnEquip.UnstuckItem((activeHandHeldItem.Value, stuckOnEquip));
+
+        innerToggle.InnerItemUid = activeHandHeldItem;
+        _containerSystem.Insert((activeHandHeldItem.Value, null, null), innerToggle.Container);
+        _actionsSystem.SetToggled(ent.Comp.ActionEntity, true); // we don't update the whole action because the hand and the action do not change
+        _metaData.SetEntityName(ent.Comp.ActionEntity.Value, Loc.GetString("action-inner-hand-toggle-name-out"));
     }
 }

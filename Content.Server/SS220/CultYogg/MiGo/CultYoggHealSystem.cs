@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Body.Systems;
-using Content.Server.Body.Components;
+using Content.Server.Damage.Systems;
 using Content.Server.EUI;
 using Content.Server.Ghost;
 using Content.Server.Popups;
@@ -11,15 +12,13 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.MiGo;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Server.Player;
-using Content.Server.Damage.Systems;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 
 public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
 {
-
     [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EuiManager _euiManager = default!;
@@ -28,8 +27,8 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IGameTiming _time = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly StaminaSystem _stamina = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     public override void Initialize()
     {
@@ -37,16 +36,18 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
 
         SubscribeLocalEvent<CultYoggHealComponent, ComponentStartup>(SetupMiGoHeal);
     }
+
     private void SetupMiGoHeal(Entity<CultYoggHealComponent> uid, ref ComponentStartup args)
     {
         uid.Comp.NextIncidentTime = _time.CurTime + uid.Comp.TimeBetweenIncidents;
     }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
         var query = EntityQueryEnumerator<CultYoggHealComponent, MobStateComponent>();
-        while (query.MoveNext(out var uid, out var healComp, out var _))
+        while (query.MoveNext(out var uid, out var healComp, out _))
         {
             if (healComp.NextIncidentTime > _time.CurTime)
                 continue;
@@ -56,6 +57,7 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
             healComp.NextIncidentTime = _time.CurTime + healComp.TimeBetweenIncidents;
         }
     }
+
     public void Heal(EntityUid uid, CultYoggHealComponent component)
     {
         if (!TryComp<MobStateComponent>(uid, out var mobComp))
@@ -74,15 +76,24 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
         if (!_mobState.IsDead(uid, mobComp))
             return;
 
-        if (_mobThreshold.TryGetDeadThreshold(uid, out var threshold) && damageableComp.TotalDamage < threshold)
-        {
-            _mobState.ChangeMobState(uid, MobState.Critical);
-            _popup.PopupEntity(Loc.GetString("cult-yogg-resurrected-by-heal", ("target", uid)), uid, PopupType.Medium);
+        if (!_mobThreshold.TryGetDeadThreshold(uid, out var threshold))
+            return;
 
-            if (_mind.TryGetMind(uid, out var _, out var mind) &&
-                mind.CurrentEntity == uid &&
-                _playerManager.TryGetSessionById(mind.UserId, out var session))
-                _euiManager.OpenEui(new ReturnToBodyEui(mind, _mind, _playerManager), session);
-        }
+        if (damageableComp.TotalDamage > threshold)
+            return;
+
+        _mobState.ChangeMobState(uid, MobState.Critical);
+        _popup.PopupEntity(Loc.GetString("cult-yogg-resurrected-by-heal", ("target", uid)), uid, PopupType.Medium);
+
+        if (!_mind.TryGetMind(uid, out _, out var mind))
+            return;
+
+        if (!_player.TryGetSessionById(mind.UserId, out var playerSession))
+            return;
+
+        if (mind.CurrentEntity == uid)
+            return;
+
+        _euiManager.OpenEui(new ReturnToBodyEui(mind, _mind, _player), playerSession);
     }
 }

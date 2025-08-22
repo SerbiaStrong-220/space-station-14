@@ -23,6 +23,11 @@ public sealed partial class GhostHearingBoundUserInterface : BoundUserInterface
         {
             SendMessage(new GhostHearingChannelToggledMessage(channel, enabled));
         };
+
+        _window.OnAllChannelToggled += (enabled) =>
+        {
+            SendMessage(new GhostHearingToggledAllChannelsMessage(enabled));
+        };
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -46,5 +51,4 @@ public sealed partial class GhostHearingBoundUserInterface : BoundUserInterface
 
         _window?.Dispose();
     }
-
 }

@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.CultYogg.Rave;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -13,11 +14,13 @@ public sealed partial class RaveComponent : SharedRaveComponent
     /// </summary>
     [DataField]
     public TimeSpan MinIntervalPhrase = TimeSpan.FromSeconds(20);
+
     /// <summary>
     /// The maximum time in seconds between pronouncing rleh phrase.
     /// </summary>
     [DataField]
     public TimeSpan MaxIntervalPhrase = TimeSpan.FromSeconds(40);
+
     /// <summary>
     /// Buffer that contains next event
     /// </summary>

@@ -241,7 +241,7 @@ public sealed class DefibrillatorSystem : EntitySystem
             _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-unsuccessful-zap"),
                 InGameICChatType.Speak, true);
 
-            var debuffEv = new AddReviweDebuffsEvent();
+            var debuffEv = new AddReviveDebuffsEvent();
             RaiseLocalEvent(target, ref debuffEv);
             _electrocution.TryDoElectrocution(user, null, component.ZapDamage * component.ZapСoeffDamage,
                 component.WritheDuration, true, ignoreInsulation: true);

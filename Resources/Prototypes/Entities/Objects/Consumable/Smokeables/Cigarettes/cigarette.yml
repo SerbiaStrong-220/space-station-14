@@ -58,7 +58,7 @@
     state: burnt-icon
   - type: Smokable
     state: Burnt
-  - type: SolutionContainerManager 
+  - type: SolutionContainerManager
     solutions:
       smokable:
         maxVol: 20
@@ -67,7 +67,7 @@
         reagents:
         - ReagentId: GastroToxin
           Quantity: 1
-  - type: Food 
+  - type: Food
   - type: FlavorProfile
     flavors:
       - punishment #SS220-Eat-Cigarettes-end
@@ -184,7 +184,7 @@
             Quantity: 20 #SS220 Cigarettes end
 
 - type: entity
-  id: CigaretteIpecac
+  id: CigaretteNutriment
   parent: SoakedHealCigarette #  SS220 Cigarettes
   name: Grandma's Christmas Fruitcake
   components:
@@ -194,7 +194,9 @@
         maxVol: 40
         reagents:
           - ReagentId: Nicotine
-            Quantity: 20
+            Quantity: 10
+          - ReagentId: Nutriment
+            Quantity: 10
           - ReagentId: Ipecac
             Quantity: 12 #SS220 Cigarettes end
 
@@ -229,9 +231,9 @@
             Quantity: 20 #SS220 Cigarettes end
 
 - type: entity
-  id: CigarettePax
+  id: CigaretteSaline
   parent: SoakedCigarette
-  name: Switzerland Express
+  name: North Atlantic Cruise
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
     solutions:
@@ -259,9 +261,9 @@
             Quantity: 55 #SS220 Cigarettes end
 
 - type: entity
-  id: CigaretteBlackPepper
+  id: CigaretteFrezon
   parent: SoakedCigarette
-  name: English Spice
+  name: Atmospheric Adventure
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
     solutions:
@@ -269,9 +271,12 @@
         maxVol: 110
         reagents:
           - ReagentId: NeoNicotinoid
-            Quantity: 55
+            Quantity: 50
           - ReagentId: Blackpepper
-            Quantity: 55 #SS220 Cigarettes end
+            Quantity: 50
+          - ReagentId: Frezon
+            Quantity: 10
+          #SS220 Cigarettes end
 
 - type: entity
   id: CigaretteCapsaicinOil
@@ -289,9 +294,9 @@
             Quantity: 55 #SS220 Cigarettes end
 
 - type: entity
-  id: CigaretteBread
+  id: CigaretteRadium
   parent: SoakedCigarette
-  name: Double Toasted
+  name: Ex Ray
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
     solutions:
@@ -299,12 +304,15 @@
         maxVol: 40
         reagents:
           - ReagentId: NeoNicotinoid
-            Quantity: 55 #SS220 Cigarettes end
+            Quantity: 25
+          - ReagentId: Radium
+            Quantity: 10
+          #SS220 Cigarettes end
 
 - type: entity
-  id: CigaretteMilk
+  id: CigaretteHaloperidol
   parent: SoakedCigarette
-  name: Bovine Extract
+  name: Warm Bovine Extract
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
     solutions:
@@ -314,12 +322,15 @@
           - ReagentId: NeoNicotinoid
             Quantity: 55
           - ReagentId: Milk
-            Quantity: 25 #SS220 Cigarettes end
+            Quantity: 25
+          - ReagentId: Haloperidol
+            Quantity: 10
+          #SS220 Cigarettes end
 
 - type: entity
-  id: CigaretteBanana
+  id: CigaretteLaughter
   parent: SoakedCigarette
-  name: Clown Adjancency Bonus
+  name: Clown Adjacency Bonus
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
     solutions:
@@ -329,12 +340,15 @@
           - ReagentId: NeoNicotinoid
             Quantity: 55
           - ReagentId: BananaHonk
-            Quantity: 25 #SS220 Cigarettes end
+            Quantity: 25
+          - ReagentId: Laughter
+            Quantity: 10
+          #SS220 Cigarettes end
 
 - type: entity
-  id: CigaretteSpaceDrugs
+  id: CigaretteLipolicide
   parent: SoakedCigarette
-  name: 80's Power Hour
+  name: 80's Workout Routine
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
     solutions:
@@ -344,12 +358,15 @@
           - ReagentId: NeoNicotinoid
             Quantity: 55
           - ReagentId: SpaceDrugs
-            Quantity: 25 #SS220 Cigarettes end
+            Quantity: 25
+          - ReagentId: Lipolicide
+            Quantity: 20
+          #SS220 Cigarettes end
 
 - type: entity
-  id: CigaretteMuteToxin
+  id: CigaretteSodiumPolyacrylate
   parent: SoakedCigarette
-  name: Mixed Lozenges
+  name: Unhealthy Habits
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
     solutions:
@@ -357,9 +374,12 @@
         maxVol: 110
         reagents:
           - ReagentId: NeoNicotinoid
-            Quantity: 55
+            Quantity: 50
           - ReagentId: MuteToxin
-            Quantity: 55 #SS220 Cigarettes end
+            Quantity: 50
+          - ReagentId: SodiumPolyacrylate
+            Quantity: 10
+          #SS220 Cigarettes end
 
 - type: entity
   id: CigaretteMold
@@ -407,9 +427,9 @@
             Quantity: 55 #SS220 Cigarettes end
 
 - type: entity
-  id: CigaretteTHC
+  id: CigaretteRobustHarvest
   parent: SoakedCigarette
-  name: Hippy Romance Novel
+  name: Hippie Romance Novel
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
     solutions:
@@ -420,3 +440,52 @@
             Quantity: 55
           - ReagentId: THC
             Quantity: 35 #SS220 Cigarettes end
+          - ReagentId: Nicotine
+            Quantity: 10
+          - ReagentId: RobustHarvest
+            Quantity: 10
+
+- type: entity
+  id: CigarettePhlogiston
+  parent: SoakedCigarette
+  name: Dragon Dating Sim
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nicotine
+          Quantity: 10
+        - ReagentId: Phlogiston
+          Quantity: 10
+
+- type: entity
+  id: CigaretteBanana
+  parent: SoakedCigarette
+  name: Pun Pun's Tropical Getaway
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nicotine
+          Quantity: 10
+        - ReagentId: Potassium
+          Quantity: 10
+
+- type: entity
+  id: CigaretteBlackPepper
+  parent: SoakedCigarette
+  name: English Spice
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+        - ReagentId: Nicotine
+          Quantity: 10
+        - ReagentId: Blackpepper
+          Quantity: 10

@@ -83,6 +83,7 @@
       shader: unshaded
     - state: full
       shader: unshaded
+  - type: StationAiWhitelist #SS220 AI power control
   - type: Battery
     maxCharge: 2500000
     startingCharge: 0
@@ -252,12 +253,12 @@
   - type: ContainerFill
     containers:
       board: [ WallmountSubstationElectronics ]
-      capacitor: [ CapacitorStockPart ]
+      manipulator: [ MicroManipulatorStockPart ]
       powercell: [ PowerCellSmall ]
   - type: ContainerContainer
     containers:
       board: !type:Container
-      capacitor: !type:Container
+      manipulator: !type:Container
       powercell: !type:Container
 
       # Construction Frame
