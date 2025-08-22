@@ -41,4 +41,11 @@ public sealed class LanguageMessageTag : IMarkupTagHandler
         control = label;
         return true;
     }
+
+    /// <inheritdoc/>
+    // If it breaks again, then change class parent to `IMarkupTag` and delete this method :o
+    bool IMarkupTagHandler.TryCreateControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
+    {
+        return TryGetControl(node, out control);
+    }
 }
