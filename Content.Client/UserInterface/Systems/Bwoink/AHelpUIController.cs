@@ -41,7 +41,6 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
     [UISystemDependency] private readonly AudioSystem _audio = default!;
 
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
     private AudioParams _AHelpParams = new();
     private BwoinkSystem? _bwoinkSystem;
     private MenuButton? GameAHelpButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.AHelpButton;
@@ -52,13 +51,15 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
     private bool _bwoinkSoundEnabled;
     private string? _aHelpSound;
 
+    protected override string SawmillName => "c.s.go.es.bwoink";
+
     public override void Initialize()
     {
         base.Initialize();
 
         // SS220 Ahelp-Volume begin
-        _AHelpParams = new(_configManager.GetCVar(CCVars220.AHelpVolume), 1, 0, 0, 0, false, 0f); // Set AHelp volume on start
-        _configManager.OnValueChanged(CCVars220.AHelpVolume, AHelpVolumeCVarChanged); // Track AHekp volume change
+        _AHelpParams = new(_config.GetCVar(CCVars220.AHelpVolume), 1, 0, 0, 0, false, 0f); // Set AHelp volume on start
+        _config.OnValueChanged(CCVars220.AHelpVolume, AHelpVolumeCVarChanged); // Track AHekp volume change
         // SS220 Ahelp-Volume end
 
         SubscribeNetworkEvent<BwoinkDiscordRelayUpdated>(DiscordRelayUpdated);
@@ -143,7 +144,7 @@ public sealed class AHelpUIController: UIController, IOnSystemChanged<BwoinkSyst
 
     private void ReceivedBwoink(object? sender, SharedBwoinkSystem.BwoinkTextMessage message)
     {
-        Logger.InfoS("c.s.go.es.bwoink", $"@{message.UserId}: {message.Text}");
+        Log.Info($"@{message.UserId}: {message.Text}");
         var localPlayer = _playerManager.LocalSession;
         if (localPlayer == null)
         {

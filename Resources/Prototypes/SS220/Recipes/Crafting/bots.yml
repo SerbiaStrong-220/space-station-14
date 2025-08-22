@@ -1,8 +1,0 @@
-- type: construction
-  id: taxibot
-  graph: TaxiBot
-  startNode: start
-  targetNode: bot
-  category: construction-category-utilities
-  objectType: Item
-

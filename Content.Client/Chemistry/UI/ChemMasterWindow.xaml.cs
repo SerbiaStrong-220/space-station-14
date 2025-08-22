@@ -124,6 +124,9 @@ namespace Content.Client.Chemistry.UI
                 ("25", ChemMasterReagentAmount.U25, StyleBase.ButtonOpenBoth),
                 ("30", ChemMasterReagentAmount.U30, StyleBase.ButtonOpenBoth),
                 ("50", ChemMasterReagentAmount.U50, StyleBase.ButtonOpenBoth),
+                // ss220 add 75u for chem master start
+                ("75", ChemMasterReagentAmount.U75, StyleBase.ButtonOpenBoth),
+                // ss220 add 75u for chem master end
                 ("100", ChemMasterReagentAmount.U100, StyleBase.ButtonOpenBoth),
                 (Loc.GetString("chem-master-window-buffer-all-amount"), ChemMasterReagentAmount.All, StyleBase.ButtonOpenLeft),
             };

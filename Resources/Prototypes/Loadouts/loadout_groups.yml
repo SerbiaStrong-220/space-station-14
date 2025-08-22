@@ -5,6 +5,9 @@
   minLimit: 0
   maxLimit: 3
   loadouts:
+  # ss220 add station map to loadout start
+  - HandheldStationMap
+  # ss220 add station map to loadout end
   - FlowerWreath
   - Hairflower
   - Headphones
@@ -36,6 +39,12 @@
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  - OffsetCane
+  - OffsetCaneWood
+  - OffsetCaneClown
+  - OffsetCaneMime
+  - OffsetCaneNT
+  - Cane
   - TowelColorBlack
   - TowelColorWhite
   # SS220 Too many towels begin
@@ -250,6 +259,8 @@
   - PassengerJumpskirtTurtleneck
   - PassengerJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
   - RainbowJumpsuit
+  - RainbowJumpskirt
+  - PassengerJumpsuitBlueYellow14 #SS-220 Yellow Jumpsuit with 220 on it
 
 - type: loadoutGroup
   id: PassengerFace
@@ -452,6 +463,17 @@
   loadouts:
   - ChaplainNeck
   - ChaplainNeckCloak #ss220-dress-cloak-tweak
+
+- type: loadoutGroup
+  id: ChaplainBible
+  name: loadout-group-chaplain-bible
+  minLimit: 1
+  loadouts:
+  - Bible
+  - BibleDruid
+  - BibleNanoTrasen
+  - BibleSatanic
+  - BibleTanakh
 
 - type: loadoutGroup
   id: JanitorHead
@@ -682,6 +704,7 @@
   loadouts:
   - EmergencyNitrogenMime
   - EmergencyOxygenMime
+  - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
 
 - type: loadoutGroup
@@ -1427,7 +1450,7 @@
   loadouts:
   - BrownShoes
   - MedicalWinterBoots
-  - CMOCorpShoes #ss220 new cmo 
+  - CMOCorpShoes #ss220 new cmo
 
 - type: loadoutGroup
   id: MedicalDoctorHead
@@ -1591,6 +1614,7 @@
   loadouts:
   - MedicalHud
   - MedicalEyePatchHud
+  - CyberMedVisor #SS220 II floppa iteration
   - Glasses
   - GlassesJamjar
   - GlassesJensen

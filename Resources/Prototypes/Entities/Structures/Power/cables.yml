@@ -117,8 +117,8 @@
   - type: Sprite
     sprite: SS220/Structures/Power/Cables/mv_cable.rsi #ss220-engineering-update-power
     state: mvcable_0
-  - type: Icon
     color: Yellow
+  - type: Icon
     sprite: SS220/Structures/Power/Cables/mv_cable.rsi #ss220-engineering-update-power
     state: mvcable_4
   - type: NodeContainer
@@ -171,7 +171,6 @@
     sprite: SS220/Structures/Power/Cables/lv_cable.rsi #ss220-engineering-update-power
     state: lvcable_0
   - type: Icon
-    color: Green
     sprite: SS220/Structures/Power/Cables/lv_cable.rsi #ss220-engineering-update-power
     state: lvcable_4
   - type: NodeContainer

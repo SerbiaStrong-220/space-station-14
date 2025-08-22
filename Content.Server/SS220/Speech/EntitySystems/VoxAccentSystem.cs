@@ -3,7 +3,7 @@
 using System.Text.RegularExpressions;
 using Robust.Shared.Random;
 using Content.Server.SS220.Speech.Components;
-using Content.Server.Speech;
+using Content.Shared.Speech;
 
 namespace Content.Server.SS220.Speech.EntitySystems;
 
@@ -19,7 +19,7 @@ public sealed class VoxAccentSystem : EntitySystem
     private static readonly Regex RegexUpperCH = new("CH+");
     private static readonly Regex RegexRuLowerCH = new("ч+");
     private static readonly Regex RegexRuUpperCH = new("Ч+");
-    
+
     public override void Initialize()
     {
         base.Initialize();

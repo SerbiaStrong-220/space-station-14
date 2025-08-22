@@ -39,9 +39,9 @@
           bounds: "-0.45,-0.45,0.45,0.45"
         density: 55
         mask:
-        - TableMask
+        - MachineMask
         layer:
-        - TableLayer
+        - MachineLayer
   - type: Destructible
     thresholds:
     - trigger:
@@ -90,8 +90,14 @@
     graph: DisposalMachine
     node: disposal_unit
   - type: DisposalUnit
+    # ss220 fix ai inside disposal unit start
+    blacklist:
+      components:
+      - StationAiHeld
+    # ss220 fix ai inside disposal unit end
   - type: ThrowInsertContainer
     containerId: disposals
+    probability: 0.67
   - type: UserInterface
     interfaces:
       enum.DisposalUnitUiKey.Key:
@@ -125,6 +131,11 @@
     - state: dispover-handle
       map: [ "enum.DisposalUnitVisualLayers.OverlayEngaged" ]
   - type: DisposalUnit
+    # ss220 fix ai inside disposal unit start
+    blacklist:
+      components:
+      - StationAiHeld
+    # ss220 fix ai inside disposal unit end
   - type: UserInterface
     interfaces:
       enum.DisposalUnitUiKey.Key:

@@ -2,10 +2,10 @@ using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Tesla.Components;
 using Content.Server.Lightning;
+using Content.Server.SS220.SuperMatter.Crystal.Components;
 // SS220-SM-fix-begin
 using Content.Shared.Damage;
-using Content.Server.SS220.SuperMatterCrystal.Components;
-// SS220-SM-fix-begin
+// SS220-SM-fix-end
 
 namespace Content.Server.Tesla.EntitySystems;
 
@@ -18,7 +18,7 @@ public sealed class TeslaCoilSystem : EntitySystem
     //SS220-fix-SM-begin
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    //SS220-fix-SM-begin
+    //SS220-fix-SM-end
 
     public override void Initialize()
     {
@@ -28,7 +28,7 @@ public sealed class TeslaCoilSystem : EntitySystem
         // SS220-SM-fix-begin
         SubscribeLocalEvent<TeslaCoilComponent, DamageChangedEvent>(OnDamage);
         SubscribeLocalEvent<TeslaCoilComponent, AnchorStateChangedEvent>(OnAnchorChange);
-        // SS220-SM-fix-begin
+        // SS220-SM-fix-end
     }
 
     //When struck by lightning, charge the internal battery

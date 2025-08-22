@@ -44,6 +44,8 @@
   - type: Tag
     tags:
     - HudMedical
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
@@ -58,6 +60,8 @@
   - type: Tag
     tags:
     - HudSecurity
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: [ClothingEyesBase]
@@ -70,6 +74,10 @@
   - type: Clothing
     sprite: Clothing/Eyes/Hud/command.rsi
   - type: ShowJobIcons
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingEyesBase
@@ -85,6 +93,10 @@
   - type: StealTarget
     stealGroup: ClothingEyesHudBeer
   - type: SolutionScanner
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingEyesBase
@@ -213,6 +225,10 @@
   - type: IdentityBlocker
     coverage: EYES
   #SS220 Syndie visor buff end
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons]
@@ -242,6 +258,10 @@
     coverage: EYES
   - type: SolutionScanner #because nukie medic should make chems
   #SS220 Syndie visor buff end
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: [ClothingEyesGlassesSunglasses, ShowSecurityIcons]
@@ -258,6 +278,11 @@
     sprite: Clothing/Eyes/Hud/medpatch.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/medpatch.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
+    - HudMedical
 
 - type: entity
   parent: [ClothingEyesEyepatchHudMedical, ClothingHeadEyeBaseFlipped]
@@ -274,6 +299,11 @@
     sprite: Clothing/Eyes/Hud/secpatch.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/secpatch.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
+    - HudSecurity
 
 - type: entity
   parent: [ClothingEyesEyepatchHudSecurity,  ClothingHeadEyeBaseFlipped]

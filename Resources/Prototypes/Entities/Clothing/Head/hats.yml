@@ -2,7 +2,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatBeaverHat
   name: beaver hat
-  description: 'Gentlemen?'
+  description: "\"Gentlemen?\""
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beaver_hat.rsi
@@ -13,7 +13,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatBeret
   name: beret
-  description: A beret, an artists favorite headwear.
+  description: An artist's favorite headwear.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret.rsi
@@ -21,7 +21,10 @@
     sprite: Clothing/Head/Hats/beret.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -29,7 +32,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretFrench
   name: french beret
-  description: A French beret, "vive la France".
+  description: A French beret. "Vive la France!"
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_french.rsi
@@ -39,14 +42,17 @@
     accent: FrenchAccent
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
+    - Recyclable
     - WhitelistChameleon
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretSecurity
   name: security beret
-  description: A stylish clothing option for security officers.
+  description: A beret with the security department's insignia. For officers that are more inclined towards style than safety.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_security.rsi
@@ -56,6 +62,9 @@
     tags:
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
+    - PetWearable
+    - CorgiWearable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -63,7 +72,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatSecurityTrooper
   name: trooper hat
-  description: A campaign hat for the Nanotrasen Troopers, comes with a case too, but you lost it.
+  description: A campaign hat for the Nanotrasen Troopers. It's supposed to come with a case, too...
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hats/security_trooper_hat.rsi #SS220-resprite-trooper-uniform
@@ -87,7 +96,8 @@
     - type: Tag
       tags:
       - Ian # SS220 Shapochki
-
+      - PetWearable
+      - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -101,8 +111,11 @@
     sprite: Clothing/Head/Hats/beret_rnd.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -110,7 +123,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretEngineering
   name: engineering beret
-  description: A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety.
+  description: A beret with the engineering department's insignia. For engineers that are more inclined towards style than safety.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_engineering.rsi
@@ -118,8 +131,11 @@
     sprite: Clothing/Head/Hats/beret_engineering.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
   #ss220 special_sounds start
@@ -135,7 +151,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretQM
   name: quartermaster's beret
-  description: A beret with the cargo's insignia emblazoned on it. For quartermasters that are more inclined towards style.
+  description: A beret with the cargo department's insignia.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_qm.rsi
@@ -143,7 +159,10 @@
     sprite: Clothing/Head/Hats/beret_qm.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -159,8 +178,11 @@
     sprite: Clothing/Head/Hats/beret_hos.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -168,7 +190,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretWarden
   name: warden's beret
-  description: A corporate blue beret with a warden's rank emblem. For officers that are more inclined towards style than safety.
+  description: A corporate-blue beret with a warden's rank emblem. For officers that are more inclined towards style than safety.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_warden.rsi
@@ -177,6 +199,8 @@
   - type: Tag
     tags:
     - Ian # SS220 Shapochki
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -188,34 +212,46 @@
     sprite: Clothing/Head/Hats/beret_physician.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/beret_physician.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretBrigmedic
   name: brigmedical beret
-  description: White beret, looks like a cream pie on the head.
+  description: A white beret for brigmedics.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_brigmedic.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/beret_brigmedic.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: [ ClothingHeadBase ]
   id: ClothingHeadHatBeretMerc
   name: mercenary beret
-  description: Olive beret, the badge depicts a jackal on a rock.
+  description: An olive beret with a badge depicting a jackal on a rock.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_merc.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/beret_merc.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretCommand
   name: command beret
-  description: A beret with a Command insignia emblazoned on it. It has an aura of authority.
+  description: A beret with the Nanotrasen logo. It has an aura of authority.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_command.rsi
@@ -226,23 +262,29 @@
     - ClothMade
     - HamsterWearable
     - WhitelistChameleon
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBowlerHat
   name: bowler hat
-  description: Stylish bowler hat.
+  description: A stylish bowler hat.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/bowler_hat.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/bowler_hat.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: [ClothingHeadBase]
   id: ClothingHeadHatCaptain
   name: captain's hardhat
-  description: It's good being the king.
+  description: Feels good being the king.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/captain.rsi
@@ -250,8 +292,11 @@
     sprite: Clothing/Head/Hats/captain.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -274,7 +319,7 @@
   parent: [ ClothingHeadBase]
   id: ClothingHeadHatCentcom
   name: CentComm brand hat
-  description: "It's good to be the emperor."
+  description: Feels good being the king's boss.
   categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
@@ -284,12 +329,14 @@
   - type: Tag
     tags:
     - Ian # SS220 Shapochki
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatChef
   name: chef's hat
-  description: "It's a hat used by chefs to keep hair out of your food. Judging by the food in the mess, they don't work."
+  description: A hat used by chefs to keep their hair out of your food. Judging by the food in the mess, they don't work.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/chefhat.rsi
@@ -311,7 +358,10 @@
         - ChefPilot
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -319,7 +369,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatFedoraBrown
   name: brown fedora
-  description: It's a brown fedora.
+  description: A brown fedora.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/brownfedora.rsi
@@ -327,7 +377,10 @@
     sprite: Clothing/Head/Hats/brownfedora.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -335,12 +388,16 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatFedoraGrey
   name: grey fedora
-  description: It's a grey fedora.
+  description: A grey fedora.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/greyfedora.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/greyfedora.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -352,12 +409,16 @@
     sprite: Clothing/Head/Hats/fez.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/fez.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: [ClothingHeadBase]
   id: ClothingHeadHatHopcap
   name: head of personnel's cap
-  description: A grand, stylish head of personnel's cap.
+  description: A stylish cap worn by the Head of Personnel. Shows paperwork who's in charge.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/hopcap.rsi
@@ -365,8 +426,11 @@
     sprite: Clothing/Head/Hats/hopcap.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
   #ss220 special_sounds start
@@ -380,7 +444,7 @@
   parent: [ClothingHeadBase]
   id: ClothingHeadHatHoshat
   name: head of security cap
-  description: The robust standard-issue cap of the Head of Security. For showing the officers who's in charge.
+  description: A stylish cap worn by the Head of Security. Shows the officers who's in charge.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/hoshat.rsi
@@ -388,8 +452,11 @@
     sprite: Clothing/Head/Hats/hoshat.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -403,6 +470,12 @@
     sprite: Clothing/Head/Hats/outlawhat.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/outlawhat.rsi
+  - type: StaticPrice
+    price: 500
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -414,6 +487,10 @@
     sprite: Clothing/Head/Hats/witchhat.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/witchhat.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -425,17 +502,25 @@
     sprite: Clothing/Head/Hats/paper.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/paper.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatPirate
   name: pirate hat
-  description: 'Yo ho ho and a bottle of rum!'
+  description: "\"Yo ho ho and a bottle of rum!\""
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/pirate.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/pirate.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -451,22 +536,29 @@
     tags:
     - WhitelistChameleon
     - ClothMade
+    - Recyclable
   - type: HideLayerClothing
-    slots:
-    - Hair
-    - HeadTop
-    - HeadSide
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadHatWizardBase
   id: ClothingHeadHatRedwizard
   name: red wizard hat
-  description: Strange-looking red hat-wear that most certainly belongs to a real magic user.
+  description: A strange-looking red hat that most certainly belongs to a powerful magic-user.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/redwizard.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/redwizard.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
+    - ClothMade
+    - WhitelistChameleon
 
 - type: entity
   parent: [ClothingHeadBase, BaseFoldable]
@@ -483,6 +575,12 @@
       Male: MaleSanta
   #ss220 special_sounds end
   - type: Appearance
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
+    slots: []
   - type: Foldable
     canFoldInsideContainer: true
   - type: FoldableClothing
@@ -496,13 +594,16 @@
     - state: icon-nobeard
       map: [ "foldedLayer" ]
       visible: true
-
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatSombrero
   name: sombrero
-  description: "Perfectly for Space Mexico, si?"
+  description: "\"Perfect for Space Mexico, si?\""
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/sombrero.rsi
@@ -510,6 +611,10 @@
     sprite: Clothing/Head/Hats/sombrero.rsi
   - type: AddAccentClothing
     accent: SpanishAccent
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -526,8 +631,14 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -540,12 +651,18 @@
     sprite: SS220/Clothing/Head/Hats/surgcap_green.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/surgcap_green.rsi
+  #SS220-surgery-resprite end
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
-    #SS220-surgery-resprite end
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -558,12 +675,12 @@
     sprite: SS220/Clothing/Head/Hats/surgcap_purple.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/surgcap_purple.rsi
-  - type: Tag
-    tags:
-    - ClothMade
-    - HamsterWearable
-    - WhitelistChameleon
-    #SS220-surgery-resprite end
+  #SS220-surgery-resprite end
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -577,7 +694,10 @@
     sprite: Clothing/Head/Hats/tophat.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -585,7 +705,7 @@
   parent: [ClothingHeadBase, BaseFoldable]
   id: ClothingHeadHatUshanka
   name: ushanka
-  description: "Perfect for winter in Siberia, da?"
+  description: "\"Perfect for winter in Siberia, da?\""
   components:
   - type: Clothing
     sprite: Clothing/Head/Hats/ushanka.rsi
@@ -651,18 +771,24 @@
   parent: ClothingHeadHatWizardBase
   id: ClothingHeadHatVioletwizard
   name: violet wizard hat
-  description: "Strange-looking violet hat-wear that most certainly belongs to a real magic user."
+  description: A strange-looking violet hat that most certainly belongs to a powerful magic-user.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/violetwizard.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/violetwizard.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
+    - ClothMade
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatWarden
   name: warden's cap
-  description: A police officer's Hat. This hat emphasizes that you are THE LAW
+  description: This hat emphasizes that you are THE LAW.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/warden.rsi
@@ -670,6 +796,10 @@
     sprite: Clothing/Head/Hats/warden.rsi
   - type: StealTarget
     stealGroup: ClothingHeadHatWarden
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -684,8 +814,11 @@
     sprite: Clothing/Head/Hats/witch.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - WhitelistChameleon
     - ClothMade
+    - Recyclable
   - type: HideLayerClothing
     slots:
     - Hair
@@ -694,12 +827,17 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatWizardFake
   name: fake wizard hat
-  description: It has WIZZARD written across it in sequins. Comes with a cool beard.
+  description: It has "WIZZARD" written across it in garish sequins. Comes with a cool beard.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/wizard_fake.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/wizard_fake.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   abstract: true
@@ -712,7 +850,7 @@
   parent: ClothingHeadHatWizardBase
   id: ClothingHeadHatWizard
   name: wizard hat
-  description: Strange-looking blue hat-wear that most certainly belongs to a powerful magic user.
+  description: A strange-looking blue hat that most certainly belongs to a powerful magic-user.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/wizardhat.rsi
@@ -720,7 +858,10 @@
     sprite: Clothing/Head/Hats/wizardhat.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -728,7 +869,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatXmasCrown
   name: xmas crown
-  description: 'Happy Christmas!'
+  description: "\"Happy Christmas!\""
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/xmascrown.rsi
@@ -739,7 +880,7 @@
   parent: ClothingHeadHeadHatBaseFlippable #SS220-Botany-Resprite
   id: ClothingHeadHatTrucker
   name: trucker hat
-  description: Formerly Chucks, this hat is yours now.
+  description: Formerly Chuck's, this hat is yours now.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/truckershat.rsi
@@ -756,6 +897,11 @@
     sprite: Clothing/Head/Hats/pyjamasyndicateblack.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/pyjamasyndicateblack.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: [ ClothingHeadBase]
@@ -767,6 +913,11 @@
     sprite: Clothing/Head/Hats/pyjamasyndicatepink.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/pyjamasyndicatepink.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: [ ClothingHeadBase]
@@ -778,18 +929,28 @@
     sprite: Clothing/Head/Hats/pyjamasyndicatered.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/pyjamasyndicatered.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadPaperSack
   name: papersack hat
-  description: A paper sack with crude holes cut out for eyes. Useful for hiding one's identity or ugliness.
+  description: A paper sack with crude holes cut out for eyes. Useful for hiding one's identity and/or ugliness.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/papersack.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/papersack.rsi
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -802,12 +963,17 @@
   - type: Clothing
     sprite: Clothing/Head/Hats/papersacksmile.rsi
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadFishCap
   name: fishing cap
-  description: Women fear me. Fish fear me. Men turn their eyes away from me. As I walk no beast dares make a sound in my presence. I am alone on this barren Earth.
+  description: "\"Women fear me. Fish fear me. Men turn their eyes away from me. As I walk no beast dares make a sound in my presence. I am alone on this barren Earth.\""
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/fishcap.rsi
@@ -818,7 +984,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadWehcellentCap
   name: wehcellent cap
-  description: It was a net hat! Tiders wear them all the time! It's got airholes in the back to keep a cross-breeze going and everything!
+  description: "\"It was a net hat! Tiders wear them all the time! It's got airholes in the back to keep a cross-breeze going and everything!\""
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/wehcellentcap.rsi
@@ -838,6 +1004,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -851,6 +1018,11 @@
     sprite: Clothing/Head/Hats/rasta.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/rasta.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -867,7 +1039,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatJester
   name: jester hat
-  description: A hat with bells, to add some merriness to the suit.
+  description: A hat with bells, to add some merriness to your head.
   components:
     - type: Sprite
       sprite: Clothing/Head/Hats/jester.rsi
@@ -882,12 +1054,17 @@
       sprite: Clothing/Head/Hats/jester2.rsi
     - type: Clothing
       sprite: Clothing/Head/Hats/jester2.rsi
+    - type: HideLayerClothing
+      layers:
+        Hair: HEAD
+        HeadTop : HEAD
+        HeadSide : HEAD
 
 - type: entity
   parent: [ClothingHeadBase]
   id: ClothingHeadHatBeretCmo
   name: chief medical officer's beret
-  description: Turquoise beret with a cross on the front. The sight of it calms you down and makes it clear that you will be cured.
+  description: A turquoise beret with a cross on the front. The sight of it calms you down and makes it clear that you will be cured.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_cmo.rsi
@@ -895,8 +1072,11 @@
     sprite: Clothing/Head/Hats/beret_cmo.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
   #ss220 special_sounds start
@@ -912,7 +1092,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatPirateTricord
   name: pirate hat
-  description: 'Yo ho ho and a bottle of rum!'
+  description: "\"Yo ho ho and a bottle of rum!\""
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/piratetricord.rsi
@@ -982,7 +1162,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatTacticalMaidHeadband
   name: tactical maid headband
-  description: "A red headband - don't imagine yourself a Rambo and don't pick up a few machine guns."
+  description: A red headband - don't imagine yourself a Rambo and don't pick up a few machine guns.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/tacticalmaidheadband.rsi
@@ -1015,7 +1195,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatMagician
   name: magician's tophat
-  description: "A magician's tophat."
+  description: A magician's top hat.
   components:
   - type: Icon
     sprite: Clothing/Head/Hats/magician.rsi
@@ -1044,12 +1224,15 @@
     containers:
       storagebase: !type:Container
   - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatCapcap
   name: cap cap
-  description: A grand, stylish captain cap.
+  description: A grand, stylish cap worn by the Captain. Shows the station who's in charge.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/capcap.rsi
@@ -1059,7 +1242,10 @@
     sprite: Clothing/Head/Hats/capcap.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
+    - Recyclable
     - WhitelistChameleon
     - Ian # SS220 Shapochki
     - HamsterWearable
@@ -1072,7 +1258,7 @@
   parent: [ ClothingHeadBase]
   id: ClothingHeadHatCentcomcap
   name: CentComm cap
-  description: An extravagant, fancy Central Commander cap.
+  description: An extravagant, stylish cap worn by CentComm officials. Shows the Captain who's in charge.
   categories: [ HideSpawnMenu ] #SS220 New CentCom
   components:
   - type: Sprite
@@ -1083,7 +1269,10 @@
     sprite: Clothing/Head/Hats/comcap.rsi
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - ClothMade
+    - Recyclable
     - WhitelistChameleon
     - Ian # SS220 Shapochki
     - HamsterWearable
@@ -1098,6 +1287,11 @@
     sprite: Clothing/Head/Hats/gladiator.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/gladiator.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -1111,8 +1305,10 @@
     sprite: Clothing/Head/Hats/party_red.rsi
   - type: Tag
     tags:
-      - WhitelistChameleon
-      - HamsterWearable
+    - PetWearable
+    - CorgiWearable
+    - WhitelistChameleon
+    - HamsterWearable
 
 - type: entity
   parent: ClothingHeadHatPartyRed
@@ -1123,6 +1319,12 @@
     sprite: Clothing/Head/Hats/party_yellow.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/party_yellow.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
+    - WhitelistChameleon
+    - HamsterWearable
 
 - type: entity
   parent: ClothingHeadHatPartyRed
@@ -1133,6 +1335,12 @@
     sprite: Clothing/Head/Hats/party_green.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/party_green.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
+    - WhitelistChameleon
+    - HamsterWearable
 
 - type: entity
   parent: ClothingHeadHatPartyRed
@@ -1143,6 +1351,12 @@
     sprite: Clothing/Head/Hats/party_blue.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/party_blue.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
+    - WhitelistChameleon
+    - HamsterWearable
 
 - type: entity
   parent: ClothingHeadHatPartyRed
@@ -1154,6 +1368,12 @@
     sprite: Clothing/Head/Hats/party_water_cup.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/party_water_cup.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
+    - WhitelistChameleon
+    - HamsterWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -1173,7 +1393,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatBrownFlatcap
   name: brown flatcap
-  description: Stupid clown! You made me look bad!
+  description: "\"Stupid clown! You made me look bad!\""
   components:
   - type: Tag
     tags:
@@ -1187,7 +1407,7 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatCowboyBrown
   name: brown cowboy hat
-  description: This hat ain't big enough for the both of us.
+  description: "\"This hat ain't big enough for the two of us.\""
   components:
     - type: Sprite
       sprite: Clothing/Head/Hats/cowboyhatbrown.rsi
@@ -1196,6 +1416,12 @@
     - type: AddAccentClothing
       accent: ReplacementAccent
       replacement: cowboy
+    - type: Tag
+      tags:
+      - PetWearable
+      - CorgiWearable
+      - WhitelistChameleon
+      - HamsterWearable
 
 - type: entity
   parent: ClothingHeadHatCowboyBrown
@@ -1206,6 +1432,12 @@
       sprite: Clothing/Head/Hats/cowboyhatblack.rsi
     - type: Clothing
       sprite: Clothing/Head/Hats/cowboyhatblack.rsi
+    - type: Tag
+      tags:
+      - PetWearable
+      - CorgiWearable
+      - WhitelistChameleon
+      - HamsterWearable
 
 - type: entity
   parent: ClothingHeadHatCowboyBrown
@@ -1216,6 +1448,12 @@
       sprite: Clothing/Head/Hats/cowboyhatgrey.rsi
     - type: Clothing
       sprite: Clothing/Head/Hats/cowboyhatgrey.rsi
+    - type: Tag
+      tags:
+      - PetWearable
+      - CorgiWearable
+      - WhitelistChameleon
+      - HamsterWearable
 
 - type: entity
   parent: ClothingHeadHatCowboyBrown
@@ -1226,6 +1464,12 @@
       sprite: Clothing/Head/Hats/cowboyhatred.rsi
     - type: Clothing
       sprite: Clothing/Head/Hats/cowboyhatred.rsi
+    - type: Tag
+      tags:
+      - PetWearable
+      - CorgiWearable
+      - WhitelistChameleon
+      - HamsterWearable
 
 - type: entity
   parent: ClothingHeadHatCowboyBrown
@@ -1236,6 +1480,12 @@
       sprite: Clothing/Head/Hats/cowboyhatwhite.rsi
     - type: Clothing
       sprite: Clothing/Head/Hats/cowboyhatwhite.rsi
+    - type: Tag
+      tags:
+      - PetWearable
+      - CorgiWearable
+      - WhitelistChameleon
+      - HamsterWearable
 
 - type: entity
   parent: ClothingHeadHatCowboyBrown
@@ -1246,6 +1496,12 @@
       sprite: Clothing/Head/Hats/cowboyhatbountyhunter.rsi
     - type: Clothing
       sprite: Clothing/Head/Hats/cowboyhatbountyhunter.rsi
+    - type: Tag
+      tags:
+      - PetWearable
+      - CorgiWearable
+      - WhitelistChameleon
+      - HamsterWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -1262,6 +1518,8 @@
     node: strawhat
   - type: Tag
     tags:
+    - PetWearable
+    - CorgiWearable
     - HamsterWearable
   - type: Flammable
     fireSpread: true
@@ -1295,20 +1553,65 @@
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretMedic
   name: medical beret
-  description: White beret that encourages you to be clean.
+  description: A sterile white beret.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_medic.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/beret_medic.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
 
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatSolidHeadband
   name: solid headband
-  description: "You'll feel like you're Invisible while wearing this! (DISCLAIMER: DOES NOT ACTUALLY MAKE THE WEARER INVISIBLE)"
+  description: "\"You'll feel like you're Invisible while wearing this! (DISCLAIMER: DOES NOT ACTUALLY MAKE THE WEARER INVISIBLE)\""
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/solidheadband.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/solidheadband.rsi
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadPropellerHat
+  name: propeller hat
+  description: You're the bestest boy.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/propellerhat.rsi
+    layers:
+    - state: icon
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Clothing
+    equippedPrefix: off
+    sprite: Clothing/Head/Hats/propellerhat.rsi
+  - type: ToggleableVisuals
+    spriteLayer: enum.ToggleableVisuals.Layer
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}
+  - type: ItemToggle
+    predictable: true
+    soundActivate:
+      path: /Audio/Items/flashlight_on.ogg
+    soundDeactivate:
+      path: /Audio/Items/flashlight_off.ogg
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable

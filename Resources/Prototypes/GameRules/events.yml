@@ -604,7 +604,7 @@
     earliestStart: 35
     weight: 5.5
     minimumPlayers: 20
-    duration: 1
+    duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end scrreen (not always "Neutral outcome!") and... ending the game if the station is nuked.
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/Shuttles/ShuttleEvent/striker.yml
@@ -684,16 +684,21 @@
   components:
   - type: StationEvent
   # SS220 MoreAnonces (sound and alert upgrades) bgn
-    startAnnouncementColor: "#18abf5"
-    startAnnouncement: station-event-ion-storm-start-announcement
-    startAudio:
+    #ss220 tweak ion storm start
+    endAnnouncementColor: "#18abf5"
+    endAnnouncement: station-event-ion-storm-start-announcement
+    endAudio:
       path: /Audio/SS220/Announcements/i-storm1.ogg
       params:
         volume: -4
+    #ss220 tweak ion storm start
   # SS220 MoreAnonces (sound and alert upgrades) end
     weight: 8
     reoccurrenceDelay: 20
-    duration: 1
+    #ss220 tweak ion storm start
+    duration: 900
+    maxDuration: 1200
+    #ss220 tweak ion storm end
   - type: IonStormRule
 
 - type: entity

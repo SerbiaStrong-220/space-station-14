@@ -8,7 +8,7 @@
       steps:
       - tag: Bucket
         icon:
-          sprite: Objects/Tools/bucket.rsi
+          sprite: SS220/Objects/Tools/bucket.rsi #SS220 Resprite Buckets
           state: icon
         name: construction-graph-tag-bucket
       - tag: ProximitySensor

@@ -102,14 +102,22 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
     private void OnHeadsetReceive(EntityUid uid, HeadsetComponent component, ref RadioReceiveEvent args)
     {
+        var parent = Transform(uid).ParentUid;
+
+        if (parent.IsValid())
+        {
+            var relayEvent = new HeadsetRadioReceiveRelayEvent(args);
+            RaiseLocalEvent(parent, ref relayEvent);
+        }
+
         // SS220 TTS-Radio begin
-        var actorUid = Transform(uid).ParentUid;
-        if (TryComp(actorUid, out ActorComponent? actor))
+        if (TryComp(parent, out ActorComponent? actor))
         {
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
-            if (actorUid != args.MessageSource && TryComp(args.MessageSource, out TTSComponent? _))
+
+            if (parent != args.MessageSource && TryComp(args.MessageSource, out TTSComponent? _))
             {
-                args.Receivers.Add(new(actorUid));
+                args.Receivers.Add(new(parent));
             }
         }
         // SS220 TTS-Radio end

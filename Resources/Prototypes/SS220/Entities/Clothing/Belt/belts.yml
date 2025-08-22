@@ -58,7 +58,6 @@
         name: clothing-boots-sidearm
         whitelist:
           tags:
-            - Sidearm
             - Medkit
           components:
             - Stunbaton
@@ -455,7 +454,6 @@
         - WetFloorSign
         - HolosignProjector
         - Plunger
-        - JanicartKeys # SS220 Readd-Vehicles
       components:
         - LightReplacer
         - SmokeOnTrigger

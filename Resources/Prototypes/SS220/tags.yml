@@ -22,13 +22,8 @@
 - type: Tag
   id: KRSPowerCell
 
-# READD-VEHICLES
 - type: Tag
-  id: JanicartKeys
-
-- type: Tag
-  id: VehicleKey
-######
+  id: WeaponRechargerWhitelist
 
 # ss220 shlepi
 - type: Tag
@@ -324,3 +319,27 @@
 - type: Tag
   id: MiGoInAstral
 # ss220 migo damage in astral fix end
+
+# ss220 Cult_update2 start
+- type: Tag
+  id: CultYoggInnerHandToggleable
+# ss220 Cult_update2 end
+
+# ss220 ChameleonStructure start
+- type: Tag
+  id: WhitelistChameleonStructureWall
+
+- type: Tag
+  id: WhitelistChameleonStructureAirlock
+
+- type: Tag
+  id: WhitelistChameleonStructureSecretDoor
+# ss220 ChameleonStructure end
+
+# ss220 Posters update start
+- type: Tag
+  id: Contrposter
+
+- type: Tag
+  id: Legalposter
+# ss220 Posters update end

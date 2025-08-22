@@ -7,7 +7,6 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Sound.Components;
-using Content.Shared.SS220.CCVars;
 using Content.Shared.Throwing;
 using Content.Shared.UserInterface;
 using Content.Shared.Whitelist;
@@ -34,18 +33,13 @@ public abstract class SharedEmitSoundSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] private readonly INetManager _netMan = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefMan = default!;
     [Dependency] protected readonly IRobustRandom Random = default!;
     [Dependency] private   readonly SharedAmbientSoundSystem _ambient = default!;
     [Dependency] private   readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-
-    // SS220 performance-test-begin
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
-    private bool _lessSound;
-    // SS220 performance-test-end
+    [Dependency] private readonly TurfSystem _turf = default!;
 
     public override void Initialize()
     {
@@ -63,49 +57,6 @@ public abstract class SharedEmitSoundSystem : EntitySystem
         SubscribeLocalEvent<EmitSoundOnCollideComponent, StartCollideEvent>(OnEmitSoundOnCollide);
 
         SubscribeLocalEvent<SoundWhileAliveComponent, MobStateChangedEvent>(OnMobState);
-
-        // We need to handle state manually here
-        // BaseEmitSoundComponent isn't registered so we have to subscribe to each one
-        // TODO: Make it use autonetworking instead of relying on inheritance
-        SubscribeEmitComponent<EmitSoundOnActivateComponent>();
-        SubscribeEmitComponent<EmitSoundOnCollideComponent>();
-        SubscribeEmitComponent<EmitSoundOnDropComponent>();
-        SubscribeEmitComponent<EmitSoundOnInteractUsingComponent>();
-        SubscribeEmitComponent<EmitSoundOnLandComponent>();
-        SubscribeEmitComponent<EmitSoundOnPickupComponent>();
-        SubscribeEmitComponent<EmitSoundOnSpawnComponent>();
-        SubscribeEmitComponent<EmitSoundOnThrowComponent>();
-        SubscribeEmitComponent<EmitSoundOnUIOpenComponent>();
-        SubscribeEmitComponent<EmitSoundOnUseComponent>();
-
-        // Helper method so it's a little less ugly
-        void SubscribeEmitComponent<T>() where T : BaseEmitSoundComponent
-        {
-            SubscribeLocalEvent<T, ComponentGetState>(GetBaseEmitState);
-            SubscribeLocalEvent<T, ComponentHandleState>(HandleBaseEmitState);
-        }
-
-        Subs.CVar(_configManager, CCVars220.LessSoundSources, value => _lessSound = value, true); // SS220 performance-test
-    }
-
-    private static void GetBaseEmitState<T>(Entity<T> ent, ref ComponentGetState args) where T : BaseEmitSoundComponent
-    {
-        args.State = new EmitSoundComponentState(ent.Comp.Sound);
-    }
-
-    private static void HandleBaseEmitState<T>(Entity<T> ent, ref ComponentHandleState args) where T : BaseEmitSoundComponent
-    {
-        if (args.Current is not EmitSoundComponentState state)
-            return;
-
-        ent.Comp.Sound = state.Sound switch
-        {
-            SoundPathSpecifier pathSpec => new SoundPathSpecifier(pathSpec.Path, pathSpec.Params),
-            SoundCollectionSpecifier collectionSpec => collectionSpec.Collection != null
-                ? new SoundCollectionSpecifier(collectionSpec.Collection, collectionSpec.Params)
-                : null,
-            _ => null,
-        };
     }
 
     private void HandleEmitSoundOnUIOpen(EntityUid uid, EmitSoundOnUIOpenComponent component, AfterActivatableUIOpenEvent args)
@@ -145,7 +96,7 @@ public abstract class SharedEmitSoundSystem : EntitySystem
         var tile = _map.GetTileRef(xform.GridUid.Value, grid, xform.Coordinates);
 
         // Handle maps being grids (we'll still emit the sound).
-        if (xform.GridUid != xform.MapUid && tile.IsSpace(_tileDefMan))
+        if (xform.GridUid != xform.MapUid && _turf.IsSpace(tile))
             return;
 
         // hand throwing not predicted sadly
@@ -194,8 +145,7 @@ public abstract class SharedEmitSoundSystem : EntitySystem
     }
     protected void TryEmitSound(EntityUid uid, BaseEmitSoundComponent component, EntityUid? user=null, bool predict=true)
     {
-        // if (component.Sound == null) // SS220 performance-test
-        if (component.Sound == null || _lessSound) // SS220 performance-test
+        if (component.Sound == null)
             return;
 
         if (component.Positional)

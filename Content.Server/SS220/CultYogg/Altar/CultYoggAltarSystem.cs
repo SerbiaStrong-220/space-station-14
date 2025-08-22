@@ -9,6 +9,7 @@ using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 
 namespace Content.Server.SS220.CultYogg.Altar;
 
@@ -16,6 +17,7 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
 {
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly BodySystem _body = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -40,7 +42,7 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
         RemComp<DestructibleComponent>(ent);
 
         var query = EntityQueryEnumerator<GameRuleComponent, CultYoggRuleComponent>();
-        while (query.MoveNext(out var uid, out _, out var cultRule))
+        while (query.MoveNext(out var uid, out _, out _))
         {
             var ev = new CultYoggSacrificedTargetEvent(ent);
             RaiseLocalEvent(uid, ref ev, true);
@@ -48,14 +50,14 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
 
         //send cooldown to a MiGo sacrifice action
         var queryMiGo = EntityQueryEnumerator<MiGoComponent>(); //ToDo ask if this code is ok
-        while (queryMiGo.MoveNext(out var uid, out var comp))
+        while (queryMiGo.MoveNext(out _, out var comp))
         {
             var sacrAction = comp.MiGoSacrificeActionEntity;
 
             if (comp.MiGoErectActionEntity == null)
                 continue;
 
-            if (!TryComp<InstantActionComponent>(sacrAction, out var actionComponent))
+            if (!TryComp<ActionComponent>(sacrAction, out var actionComponent))
                 continue;
 
             if (actionComponent.UseDelay == null)

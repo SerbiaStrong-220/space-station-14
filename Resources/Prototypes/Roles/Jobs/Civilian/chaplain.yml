@@ -7,6 +7,7 @@
   icon: "JobIconChaplain"
   supervisors: job-supervisors-hop
   access:
+  - Service # SS220-add-chaplain-service-worker
   - Chapel
   - Maintenance
   special:
@@ -22,5 +23,16 @@
     ears: ClothingHeadsetService
   storage:
     back:
-    - Bible
     - RubberStampChaplain
+
+- type: chameleonOutfit
+  id: ChaplainChameleonOutfit
+  job: Chaplain
+  equipment:
+    head: ClothingHeadHatPlaguedoctor
+    eyes: ClothingEyesGlasses
+    mask: ClothingMaskPlague
+    neck: ClothingNeckStoleChaplain
+    outerClothing: ClothingOuterPlagueSuit
+    gloves: ClothingHandsGlovesColorBlack
+

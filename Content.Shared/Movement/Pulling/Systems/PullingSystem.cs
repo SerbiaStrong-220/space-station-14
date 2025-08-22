@@ -5,10 +5,12 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
 using Content.Shared.Hands;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -29,6 +31,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Movement.Pulling.Systems;
 
@@ -49,6 +52,7 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
 
     public override void Initialize()
     {
@@ -71,9 +75,12 @@ public sealed class PullingSystem : EntitySystem
         SubscribeLocalEvent<PullerComponent, EntityUnpausedEvent>(OnPullerUnpaused);
         SubscribeLocalEvent<PullerComponent, VirtualItemDeletedEvent>(OnVirtualItemDeleted);
         SubscribeLocalEvent<PullerComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
-        SubscribeLocalEvent<PullerComponent, ComponentStartup>(OnPullerStartup);
+        SubscribeLocalEvent<PullerComponent, ComponentStartup>(OnPullerStartup); // SS220-cart-system
         SubscribeLocalEvent<PullerComponent, DropHandItemsEvent>(OnDropHandItems);
         SubscribeLocalEvent<PullerComponent, StopPullingAlertEvent>(OnStopPullingAlert);
+
+        SubscribeLocalEvent<HandsComponent, PullStartedMessage>(HandlePullStarted);
+        SubscribeLocalEvent<HandsComponent, PullStoppedMessage>(HandlePullStopped);
 
         SubscribeLocalEvent<PullableComponent, StrappedEvent>(OnBuckled);
         SubscribeLocalEvent<PullableComponent, BuckledEvent>(OnGotBuckled);
@@ -97,6 +104,37 @@ public sealed class PullingSystem : EntitySystem
         entity.Comp.NeedsHands = false;
     }
     //SS220-Cart-system end
+
+    private void HandlePullStarted(EntityUid uid, HandsComponent component, PullStartedMessage args)
+    {
+        if (args.PullerUid != uid)
+            return;
+
+        if (TryComp(args.PullerUid, out PullerComponent? pullerComp) && !pullerComp.NeedsHands)
+            return;
+
+        if (!_virtual.TrySpawnVirtualItemInHand(args.PulledUid, uid))
+        {
+            DebugTools.Assert("Unable to find available hand when starting pulling??");
+        }
+    }
+
+    private void HandlePullStopped(EntityUid uid, HandsComponent component, PullStoppedMessage args)
+    {
+        if (args.PullerUid != uid)
+            return;
+
+        // Try find hand that is doing this pull.
+        // and clear it.
+        foreach (var held in _handsSystem.EnumerateHeld((uid, component)))
+        {
+            if (!TryComp(held, out VirtualItemComponent? virtualItem) || virtualItem.BlockingEntity != args.PulledUid)
+                continue;
+
+            _handsSystem.TryDrop((args.PullerUid, component), held);
+            break;
+        }
+    }
 
     private void OnStateChanged(EntityUid uid, PullerComponent component, ref UpdateMobStateEvent args)
     {
@@ -205,7 +243,7 @@ public sealed class PullingSystem : EntitySystem
         if (component.Pulling != args.BlockingEntity)
             return;
 
-        if (EntityManager.TryGetComponent(args.BlockingEntity, out PullableComponent? comp))
+        if (TryComp(args.BlockingEntity, out PullableComponent? comp))
         {
             TryStopPull(args.BlockingEntity, comp);
         }
@@ -403,7 +441,7 @@ public sealed class PullingSystem : EntitySystem
             return false;
         }
 
-        if (!EntityManager.TryGetComponent<PhysicsComponent>(pullableUid, out var physics))
+        if (!TryComp<PhysicsComponent>(pullableUid, out var physics))
         {
             return false;
         }

@@ -170,6 +170,10 @@
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
           - Stunbaton
+          # SS220 Added WeaponRechargerWhitelist tag for charging support begin
+          tags:
+          - WeaponRechargerWhitelist
+          # SS220 Added WeaponRechargerWhitelist tag for charging support end
 
 - type: entity
   parent: BaseItemRecharger
@@ -198,7 +202,7 @@
           - PotatoBattery
 
 - type: entity
-  parent: BaseItemRecharger
+  parent: [ BaseItemRecharger, BaseWallmount ]
   id: WallWeaponCapacitorRecharger
   name: wall recharger
   components:
@@ -213,8 +217,7 @@
     - map: ["enum.PowerChargerVisualLayers.Light"]
       state: "light-off"
       shader: "unshaded"
-  - type: WallMount
-  - type: Fixtures
+  - type: Fixtures # SS220/Directionl wall charger
     fixtures: {} # SS220/Directionl wall charger
   - type: Charger
     chargeRate: 25
@@ -230,6 +233,10 @@
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
           - Stunbaton
+          # SS220 Added WeaponRechargerWhitelist tag for charging support begin
+          tags:
+          - WeaponRechargerWhitelist
+          # SS220 Added WeaponRechargerWhitelist tag for charging support end
 
 - type: entity
   parent: BaseRecharger
