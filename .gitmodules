@@ -7,3 +7,6 @@
     url = git@gitlab.com:Morbo/corvax-secrets.git
     branch = master
     update = none
+[submodule "space-station-14"]
+	path = space-station-14
+	url = https://github.com/SerbiaStrong-220/space-station-14.git
