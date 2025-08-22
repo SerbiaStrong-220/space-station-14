@@ -48,20 +48,21 @@
     radiatingBehaviourId: radiating
   - type: LightBehaviour
     behaviours:
-      - !type: FadeBehaviour
+      - type: FadeBehaviour
         id: radiating
         maxDuration: 2.0
         startValue: 3.0
         endValue: 2.0
         isLooped: true
         reverseWhenFinished: true
-      - !type: PulseBehaviour
+      - type: PulseBehaviour
         id: blinking
         interpolate: Nearest
         maxDuration: 1.0
         amplitude: 1.0
         frequency: 1.0
         isLooped: true
+
   - type: TypingIndicator
     proto: robot
   - type: PowerCellSlot
