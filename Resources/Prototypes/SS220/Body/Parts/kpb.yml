@@ -1,0 +1,104 @@
+- type: entity
+  id: PartKpb
+  parent: [BaseItem, BasePart]
+  name: "Kpb body part"
+  abstract: true
+
+
+
+- type: entity
+  id: TorsoKpb
+  name: "Kpb torso"
+  parent: [PartKpb, BaseTorso]
+  components:
+    - type: Sprite
+      sprite: SS220/Mobs/Species/Kpb/parts.rsi
+      state: "torso_m"
+
+- type: entity
+  id: HeadKpb
+  name: "Kpb head"
+  parent: [PartKpb, BaseHead]
+  components:
+    - type: Sprite
+      sprite: SS220/Mobs/Species/Kpb/parts.rsi
+      state: "head_m"
+
+
+- type: entity
+  id: LeftArmKpb
+  name: "left Kpb arm"
+  parent: [PartKpb, BaseLeftArm]
+  components:
+    - type: Sprite
+      sprite: SS220/Mobs/Species/Kpb/parts.rsi
+      state: "l_arm"
+
+- type: entity
+  id: RightArmKpb
+  name: "right Kpb arm"
+  parent: [PartKpb, BaseRightArm]
+  components:
+    - type: Sprite
+      sprite: SS220/Mobs/Species/Kpb/parts.rsi
+      state: "r_arm"
+
+- type: entity
+  id: LeftHandKpb
+  name: "left Kpb hand"
+  parent: [PartKpb, BaseLeftHand]
+  components:
+    - type: Sprite
+      sprite: SS220/Mobs/Species/Kpb/parts.rsi
+      state: "l_hand"
+
+- type: entity
+  id: RightHandKpb
+  name: "right Kpb hand"
+  parent: [PartKpb, BaseRightHand]
+  components:
+    - type: Sprite
+      sprite: SS220/Mobs/Species/Kpb/parts.rsi
+      state: "r_hand"
+
+- type: entity
+  id: LeftLegKpb
+  name: "left Kpb leg"
+  parent: [PartKpb, BaseLeftLeg]
+  components:
+    - type: Sprite
+      sprite: SS220/Mobs/Species/Kpb/parts.rsi
+      state: "l_leg"
+    - type: MovementBodyPart
+      walkSpeed : 2.7
+      sprintSpeed : 4.5
+
+- type: entity
+  id: RightLegKpb
+  name: "right Kpb leg"
+  parent: [PartKpb, BaseRightLeg]
+  components:
+    - type: Sprite
+      sprite: SS220/Mobs/Species/Kpb/parts.rsi
+      state: "r_leg"
+    - type: MovementBodyPart
+      walkSpeed : 2.7
+      sprintSpeed : 4.5
+
+- type: entity
+  id: LeftFootKpb
+  name: "left Kpb foot"
+  parent: [PartKpb, BaseLeftFoot]
+  components:
+    - type: Sprite
+      sprite: SS220/Mobs/Species/Kpb/parts.rsi
+      state: "l_foot"
+
+- type: entity
+  id: RightFootKpb
+  name: "right Kpb foot"
+  parent: [PartKpb, BaseRightFoot]
+  components:
+    - type: Sprite
+      sprite: SS220/Mobs/Species/Kpb/parts.rsi
+      state: "r_foot"

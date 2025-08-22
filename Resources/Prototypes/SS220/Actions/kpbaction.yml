@@ -1,0 +1,32 @@
+- type: entity
+  id: ActionDrainBattery
+  name: ent-ActionDrainBattery
+  description: ent-ActionDrainBattery.desc
+  components:
+    - type: Action
+      icon:
+        sprite: SS220/Interface/Actions/kpb/drainbattery.rsi
+        state: off
+      iconOn:
+        sprite: SS220/Interface/Actions/kpb/drainbattery.rsi
+        state: on
+      itemIconStyle: NoItem
+    - type: InstantAction
+      event: !type:ToggleDrainActionEvent
+
+# Action: KPB Screen
+- type: entity
+  id: ActionKpbScreen
+  name: ent-ActionKpbScreen
+  description: ent-ActionKpbScreen.desc
+  components:
+    - type: Action
+      id: KpbScreen
+      icon:
+        sprite: SS220/Interface/Actions/kpb/kpbscreen.rsi
+        state: screen
+      itemIconStyle: BigAction
+    - type: InstantAction
+      event: !type:KpbScreenActionEvent
+      useDelay: 2
+      categories: [ HideSpawnMenu ]
