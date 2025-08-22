@@ -21,12 +21,10 @@
   description: ent-ActionKpbScreen.desc
   components:
     - type: Action
-      id: KpbScreen
+      useDelay: 2
       icon:
         sprite: SS220/Interface/Actions/kpb/kpbscreen.rsi
         state: screen
       itemIconStyle: BigAction
     - type: InstantAction
       event: !type:KpbScreenActionEvent
-      useDelay: 2
-      categories: [ HideSpawnMenu ]
