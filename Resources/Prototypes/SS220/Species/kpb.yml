@@ -1,0 +1,152 @@
+- type: species
+  id: Kpb
+  name: species-name-kpb
+  roundStart: true
+  prototype: MobKpb
+  sprites: MobKpbSprites
+  defaultSkinTone: "#eb943d"
+  markingLimits: MobKpbMarkingLimits
+  dollPrototype: MobKpbDummy
+  skinColoration: Hues
+  minAge: 1
+  maxAge: 55
+  oldAge: 50
+  youngAge: 25
+  maleFirstNames: NamesKpbFirstMale
+  femaleFirstNames: NamesKpbFirstFemale
+  maleLastNames: NamesKpbLast 
+  femaleLastNames: NamesKpbLast 
+  
+- type: speciesBaseSprites
+  id: MobKpbSprites
+  sprites:
+    Head: MobKpbHead
+    Snout: MobHumanoidAnyMarking
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Hair: MobHumanoidMarkingMatchSkin
+    FacialHair: MobKpbScreen
+    Chest: MobKpbTorso
+    LArm: MobKpbLArm
+    RArm: MobKpbRArm
+    LHand: MobKpbLHand
+    RHand: MobKpbRHand
+    LLeg: MobKpbLLeg
+    RLeg: MobKpbRLeg
+    LFoot: MobKpbLFoot
+    RFoot: MobKpbRFoot
+
+- type: markingPoints
+  id: MobKpbMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Hair:
+      points: 1
+      required: true
+      defaultMarkings: [ RobotAntennaTv, RobotAntennaTesla, RobotAntennaCat ]
+    FacialHair:
+      points: 1
+      required: false
+    HeadTop:
+      points: 1
+      required: false
+    UndergarmentTop:
+      points: 1
+      required: false
+    Chest:
+      points: 0
+      required: false
+    Legs:
+      points: 0
+      required: false
+    Arms:
+      points: 0
+      required: false
+
+- type: humanoidBaseSprite
+  id: MobKpbScreen
+
+- type: humanoidBaseSprite
+  id: MobKpbHead
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobKpbHeadMale
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobKpbHeadFemale
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: head_f
+
+- type: humanoidBaseSprite
+  id: MobKpbTorso
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobKpbTorsoMale
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobKpbTorsoFemale
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: torso_f
+
+- type: humanoidBaseSprite
+  id: MobKpbLLeg
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobKpbLHand
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobKpbLArm
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobKpbLFoot
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobKpbRLeg
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobKpbRHand
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobKpbRArm
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobKpbRFoot
+  baseSprite:
+    sprite: SS220/Mobs/Species/Kpb/parts.rsi
+    state: r_foot

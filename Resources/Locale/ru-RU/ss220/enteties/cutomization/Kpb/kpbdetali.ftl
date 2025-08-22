@@ -1,0 +1,10 @@
+ent-ActionDrainBattery = Разрядить батарею
+    .desc = Разряжает батарею устройства.
+ent-ActionKpbScreen = Экран КПБ
+    .desc = Открывает интерфейс КПБ.
+ent-BaseMobKpb = Урист МакКПБ
+    .desc = Базовая форма КПБ.
+popup-sleep-kpb = КПБ уходит в режим сна.
+kpb-component-ready = Компонент готов
+kpb-component-disabled = Компонент отключен
+species-name-kpb = КПБ

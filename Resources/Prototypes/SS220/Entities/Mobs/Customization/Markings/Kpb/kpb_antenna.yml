@@ -1,0 +1,116 @@
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaTv
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_antenna_tv
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaTesla
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_antenna_tesla
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaCyberhead
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_antenna_cyberhead
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaAntlers
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_antenna_antlers
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaDroneeyes
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_antenna_droneeyes
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaCrowned
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_antenna_crowned
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaTowers
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_antenna_towers
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaDuality
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_antenna_duality
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaHoloaura
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_antenna_holo_aura
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaWireless
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_antenna_wireless_connection
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaSmallEye
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_small_eye
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaCat
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_antenna_cat
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotAntennaTvAlt
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_antenna.rsi
+      state: kpb_antenna_tvalt

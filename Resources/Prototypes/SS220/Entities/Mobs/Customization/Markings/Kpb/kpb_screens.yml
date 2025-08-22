@@ -1,0 +1,512 @@
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenStatic
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_static
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenBlue
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_blue
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenBreakout
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_breakout
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenEight
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_eight
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenGoggles
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_goggles
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenExclaim
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_exclaim
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenHeart
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_heart
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenMonoeye
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_monoeye
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenNature
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_nature
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenOrange
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_orange
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenPink
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_pink
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenQuestion
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_question
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenShower
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_shower
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenYellow
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_yellow
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenScroll
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_scroll
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenConsole
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_console
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenRgb
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_rgb
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenGlider
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_glider
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenRainbowhoriz
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_rainbowhoriz
+      
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenBsod
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_bsod
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenRedtext
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_redtext
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenSinewave
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_sinewave
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenSquarewave
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_squarewave
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenEcgwave
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_ecgwave
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenEyes
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_eyes
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenEyestall
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_eyestall
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenEyesangry
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_eyesangry
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenLoading
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_loading
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenWindowsxp
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_windowsxp
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenTetris
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_tetris
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenTv
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_tv
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenTextdrop
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_textdrop
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenStars
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_stars
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenRainbowdiag
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_rainbowdiag
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenBlank
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_blank
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenSmile
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_smile
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenFrown
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_frown
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenRing
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_ring
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: ScreenL
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_l
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenPoxui
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_poxui
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenAbsolutepoxui
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_absolute_poxui
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenAwesome
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_awesome
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenBestfriend
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_best_friend
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenBigsmile
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_bigsmile
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenBoredom
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_boredom
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenClown
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_clown
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenCreeper
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_creeper
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenDealmaker
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_dealmaker
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenMime
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_mime
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenMonkey
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_monkey
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenMrgutsy
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_mr_gutsy
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenNerd
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_nerd
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenNya
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_nya
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenOko
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_oko
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenRock
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_rock
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenSkull
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_skull
+
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: SScreenTenna
+  bodyPart: FacialHair
+  markingCategory: FacialHair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_tenna
