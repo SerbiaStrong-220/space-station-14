@@ -341,6 +341,11 @@
         type: KpbScreenBoundUserInterface
   - type: KpbScreen
   - type: Puller
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Binary
+    - id: Universal
   - type: Speech
     speechSounds: Alto
   - type: DamageForceSay
