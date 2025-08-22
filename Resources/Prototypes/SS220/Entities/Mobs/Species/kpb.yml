@@ -340,6 +340,11 @@
       enum.KpbScreenUiKey.Key:
         type: KpbScreenBoundUserInterface
   - type: KpbScreen
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Binary
+    - id: Universal
   - type: Puller
   - type: Speech
     speechSounds: Alto
