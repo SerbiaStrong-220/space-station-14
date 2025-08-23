@@ -8,9 +8,11 @@ namespace Content.Client.Administration.UI.CustomControls;
 
 public sealed class AdminLogLabel : RichTextLabel
 {
+    //SS220-make-copy-for-logs-begin
     private readonly Color _selectedTextColor = Color.FromHex("#b3f1abff");
     // null used for base RichTextLabel color
     private readonly Color? _textColor = null;
+    //SS220-make-copy-for-logs-begin
 
     public AdminLogLabel(ref SharedAdminLog log, HSeparator separator)
     {

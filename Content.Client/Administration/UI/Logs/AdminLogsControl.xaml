@@ -80,6 +80,7 @@
                 <aui:VSeparator/>
                 <!-- SS220-time-filter-add-end -->
                 <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
+                    <!-- SS220 below added MouseFilter="Pass" for add-logs-copying -->
                     <BoxContainer Name="LogsContainer" MouseFilter="Pass" Access="Public" Orientation="Vertical" VerticalExpand="True"/>
                 </ScrollContainer>
             </BoxContainer>
