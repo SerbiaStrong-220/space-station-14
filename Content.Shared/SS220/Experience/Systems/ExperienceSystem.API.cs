@@ -8,12 +8,12 @@ namespace Content.Shared.SS220.Experience.Systems;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
-    public bool TryGetSkillTreeLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out uint? level)
+    public bool TryGetSkillTreeLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level)
     {
         return TryGetSkillTreeLevels(entity, skillTree, out level, out _);
     }
 
-    public bool TryGetSkillTreeSubLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out uint? sublevel)
+    public bool TryGetSkillTreeSubLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? sublevel)
     {
         return TryGetSkillTreeLevels(entity, skillTree, out _, out sublevel);
     }

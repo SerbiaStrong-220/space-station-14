@@ -31,10 +31,10 @@ public struct SkillTreeExperienceInfo
     /// <summary>
     /// Defines current skill level
     /// </summary>
-    public uint SkillLevel;
+    public int SkillLevel;
 
     /// <summary>
     /// Defines sublevel level
     /// </summary>
-    public uint ExperienceLevel;
+    public int ExperienceLevel;
 }

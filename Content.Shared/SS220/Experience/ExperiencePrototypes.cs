@@ -22,7 +22,7 @@ public sealed class SkillPrototype : IPrototype
 public partial struct SkillLevelInfo
 {
     [DataField]
-    public uint NumberOfSublevels;
+    public int NumberOfSublevels;
 
     [DataField]
     public LocId LevelUpPopup = "experience-skill-level-up-base-popup";

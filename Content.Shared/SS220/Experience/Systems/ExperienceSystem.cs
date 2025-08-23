@@ -11,12 +11,12 @@ public sealed partial class ExperienceSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    private const uint StartSkillLevelIndex = 0;
-    private const uint StartSubLevelIndex = 0;
+    private const int StartSkillLevelIndex = 0;
+    private const int StartSubLevelIndex = 0;
     private const float StartSublevelProgress = 0f;
     private const float EndSublevelProgress = 1f;
 
-    public bool TryGetSkillTreeLevels(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out uint? level, [NotNullWhen(true)] out uint? sublevel)
+    public bool TryGetSkillTreeLevels(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level, [NotNullWhen(true)] out int? sublevel)
     {
         if (!Resolve(entity.Owner, ref entity.Comp) || !entity.Comp.Skills.TryGetValue(skillTree, out var info))
         {
@@ -65,6 +65,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
 
         var prototype = _prototype.Index(skillTree);
+        //TODO
     }
 
     public void InitExperienceSkillTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree)
@@ -98,30 +99,35 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         var treeProto = _prototype.Index(tree);
 
-        if (!CanProgressLevel(info, treeProto))
+        if (!CanProgressTree(info, treeProto))
         {
             var lastSkill = treeProto.SkillTree.Last();
             var lastSkillProto = _prototype.Index(lastSkill);
             info.ExperienceLevel = Math.Min(info.ExperienceLevel, lastSkillProto.LevelInfo.NumberOfSublevels);
         }
 
-        if (!CanProgressSublevel(info, treeProto))
-            return;
+        const int maxCycle = 100;
+        int cycle;
+        bool canProgress = true;
+        for (cycle = 0; (cycle < maxCycle) && canProgress; cycle++)
+        {
+            canProgress = CanProgressLevel(info, treeProto);
+            if (canProgress)
+            {
+
+            }
+        }
+
+        if (cycle == maxCycle - 1)
+        {
+            Log.Error("Cant");
+        }
+
 
 
     }
 
-    private bool CanProgressSublevel(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
-    {
-        // TODO
-        return false;
-    }
 
-    private bool CanProgressLevel(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
-    {
-        // TODO
-        return false;
-    }
 
 
 }
