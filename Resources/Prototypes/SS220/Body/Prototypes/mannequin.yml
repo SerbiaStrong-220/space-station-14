@@ -1,0 +1,40 @@
+- type: body
+  id: Mannequin
+  name: "mannequin"
+  root: torso
+  slots:
+    head:
+      part: HeadHuman
+      connections:
+      - torso
+    torso:
+      part: TorsoMannequin
+      connections:
+      - right_arm
+      - left_arm
+      - right_leg
+      - left_leg
+    right_arm:
+      part: RightArmHuman
+      connections:
+      - right_hand
+    left_arm:
+      part: LeftArmHuman
+      connections:
+      - left_hand
+    right_hand:
+      part: RightHandHuman
+    left_hand:
+      part: LeftHandHuman
+    right_leg:
+      part: RightLegHuman
+      connections:
+      - right_foot
+    left_leg:
+      part: LeftLegHuman
+      connections:
+      - left_foot
+    right_foot:
+      part: RightFootHuman
+    left_foot:
+      part: LeftFootHuman
