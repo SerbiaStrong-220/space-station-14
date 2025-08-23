@@ -8,6 +8,7 @@ namespace Content.Client.SS220.CultYogg.MiGo;
 
 public sealed class MiGoSystem : SharedMiGoSystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     private static readonly Color MiGoAstralColor = Color.FromHex("#bbbbff88");
 
     public override void Initialize()
@@ -19,15 +20,16 @@ public sealed class MiGoSystem : SharedMiGoSystem
     }
 
     //copypaste from reaper, trying make MiGo transparent without a sprite
-    private void OnAppearanceChange(Entity<MiGoComponent> uid, ref AppearanceChangeEvent args)
+
+    private void OnAppearanceChange(Entity<MiGoComponent> ent, ref AppearanceChangeEvent args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite))
+        if (!TryComp<SpriteComponent>(ent, out var sprite))
             return;
 
-        if (!sprite.LayerMapTryGet(MiGoVisual.Base, out var layerIndex))
+        if (!_sprite.LayerMapTryGet((ent, sprite), MiGoVisual.Base, out var layerIndex, false))
             return;
 
-        sprite.LayerSetColor(layerIndex, uid.Comp.IsPhysicalForm ? Color.White : MiGoAstralColor);
+        _sprite.LayerSetColor((ent, sprite), layerIndex, ent.Comp.IsPhysicalForm ? Color.White : MiGoAstralColor);
     }
 
     //trying to make alert revenant-like
@@ -38,7 +40,8 @@ public sealed class MiGoSystem : SharedMiGoSystem
 
         var timeLeft = ent.Comp.AlertTime.Int();
         var sprite = args.SpriteViewEnt.Comp;
-        sprite.LayerSetState(MiGoTimerVisualLayers.Digit1, $"{(timeLeft / 10) % 10}");
-        sprite.LayerSetState(MiGoTimerVisualLayers.Digit2, $"{(timeLeft % 10)}");
+
+        _sprite.LayerSetRsiState((args.SpriteViewEnt, sprite), MiGoTimerVisualLayers.Digit1, $"{timeLeft / 10 % 10}");
+        _sprite.LayerSetRsiState((args.SpriteViewEnt, sprite), MiGoTimerVisualLayers.Digit2, $"{timeLeft % 10}");
     }
 }

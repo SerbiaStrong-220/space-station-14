@@ -6,7 +6,6 @@ using Content.Server.AlertLevel;
 using Content.Server.Buckle.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Ghost;
-using Content.Server.Light.Components;
 using Content.Server.Light.EntitySystems;
 using Content.Server.Station.Systems;
 using Content.Shared.Alert;
@@ -20,6 +19,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Shared.Projectiles;
 using Content.Server.Projectiles;
+using Content.Shared.Light.Components;
 
 namespace Content.Server.SS220.DarkReaper;
 

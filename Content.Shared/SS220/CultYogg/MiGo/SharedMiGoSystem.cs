@@ -26,11 +26,11 @@ using Content.Shared.Zombies;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind;
-using Content.Shared.Roles;
 using Content.Shared.Verbs;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Audio;
 using Content.Shared.Movement.Pulling.Events;
+using Content.Shared.Roles.Components;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 

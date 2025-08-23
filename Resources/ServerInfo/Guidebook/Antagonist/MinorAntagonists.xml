@@ -1,7 +1,7 @@
 <Document>
   # Малые антагонисты
 
-  Большинство, если не все, второстепенные антагонисты - это управляемые призраками роли, которые дают мертвецам новые способы устроить хаос на станции. Они возникают в результате случайных событий.
+Большинство, если не все, второстепенные антагонисты - это управляемые призраками роли, которые дают мертвецам новые способы устроить хаос на станции. Они возникают в результате случайных событий.
 
  # Paradox Clone
 
@@ -9,7 +9,9 @@
     <GuideEntityEmbed Entity="ParadoxCloneDummy"/>
   </Box>
 
-  A perfect copy of a random crewmember that was thrown into our universe by a space-time anomaly. To fix the paradox and survive they have to find and kill their original counterpart. They have no special abilities, but are have identical appearance, DNA, fingerprints, clothing, equipment and IDs, making it hard to figure out who is the orginal and who is the clone, unless you know your fellow crewmembers well.
+  A perfect copy of a random crewmember that was thrown into our universe by a space-time anomaly. To fix the paradox and survive they have to find and kill their original counterpart.
+
+They have no special abilities, but are identical in appearance, DNA, fingerprints, clothing, equipment and IDs, making it hard to figure out who is the original and who is the clone... unless you know your fellow crewmembers well!
 
 
   # Ревенант
@@ -40,6 +42,14 @@
   </Box>
 
   Крысиный король - это гигантская крыса, способная устроить гнездо и создать крыс, которые будут выполнять её приказы (обычно для получения пищи).
+
+  Rat kings are abnormally large rodents capable of [color=yellow]raising huge rat armies[/color] by eating equally huge amounts of food.
+  - You have several abilities that come at the cost of your [bold]hunger.[/bold]
+  - One such ability is [color=yellow][italic]Raise Army[/italic][/color], which summons a [bold]Rat Servant[/bold]. You can [bold]command[/bold] your servants to stay in place, follow you, attack a target of your choice or attack indiscriminately.
+  - You can conjure a cloud of [color=#77b58e]ammonia[/color] using [color=purple][italic]Rat King's Domain[/italic][/color]. This purple gas is mildly poisonous to humans but heals rats.
+  - [color=#9daa98][italic]Rummage[/italic][/color] through a disposal unit by using the context menu. Use this to find [bold]scraps of food[/bold] to grow your army.
+  - Besides your abilities, [bold]you are stronger than most other animals.[/bold] You and your servants are capable of speech and you're both small enough to fit under airlocks and tables.
+  - [bold]Your underlings are still very fragile![/bold] Beware of spacings, explosions and the business end of a melee weapon.
 
   ## Способности
 
@@ -87,5 +97,5 @@
 
   Slimes and spiders have no remarkable features, but will [color=cyan]infest the station[/color] from time to time regardless. Both will give chase and attack anything they see.
   - Slimes may [bold]deal extra cellular or poison damage[/bold], based upon their color. Water hurts them just as it would hurt a slime person.
-  - Spiders have a venomous bite and can [bold]create webs[/bold] that are hard to move though. Webs are easily destroyed with a blade. They can also pry open doors, windoors, and airlocks.
+  - Spiders have a venomous bite and can [bold]create webs[/bold] that are hard to move through, but are easily destroyed with a blade. They can also pry open doors, windoors, and airlocks.
 </Document>

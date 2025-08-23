@@ -42,6 +42,6 @@ public sealed partial class BrainDamageTimerChange : EntityEffect
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return Loc.GetString("reagent-effect-guidebook-ss220-brain-damage-slow", ("chance", Probability));
+        return Loc.GetString("reagent-effect-guidebook-ss220-brain-damage-slow", ("time", AddTime.TotalSeconds));
     }
 }

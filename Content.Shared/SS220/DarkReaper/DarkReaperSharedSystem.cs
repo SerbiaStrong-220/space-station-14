@@ -180,7 +180,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         var entities = _lookup.GetEntitiesInRange(uid, comp.StunAbilityRadius);
         foreach (var entity in entities)
         {
-            _stun.TryParalyze(entity, comp.StunDuration, true);
+            _stun.TryUpdateParalyzeDuration(entity, comp.StunDuration);
         }
 
         var confusedEntities = _lookup.GetEntitiesInRange(uid, comp.StunAbilityConfusion);

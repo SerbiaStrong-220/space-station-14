@@ -58,7 +58,6 @@
         name: clothing-boots-sidearm
         whitelist:
           tags:
-            - Sidearm
             - Medkit
           components:
             - Stunbaton

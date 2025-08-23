@@ -239,7 +239,7 @@ namespace Content.Server.Connection
             if (bans.Count > 0)
             {
                 var firstBan = bans[0];
-                var message = firstBan.FormatBanMessage(_cfg, _loc);
+                var message = firstBan.FormatBanMessage(_cfg, _loc, _plyMgr); // SS220-ad-login-into-ban-screen
                 return (ConnectionDenyReason.Ban, message, bans);
             }
 
