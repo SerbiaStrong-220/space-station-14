@@ -1,0 +1,17 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: constructionGraph
+  id: ShawarmaGrilled
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: shawarma grilled
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 335
+
+  - node: shawarma grilled
+    entity: FoodShawarmaOnGrill

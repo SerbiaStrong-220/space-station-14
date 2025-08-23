@@ -5,7 +5,7 @@
   components:
   - type: FlavorProfile
     flavors:
-      - shawarma
+    - shawarma
   - type: Food
     transferAmount: 3
   - type: Sprite
@@ -23,7 +23,16 @@
     sprite: SS220/Objects/Consumable/Food/shawarma.rsi
   - type: Tag
     tags:
-      - Meat
+    - Meat
+  #SS220-grill-update-2 begin
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.FoodCookingVisuals.Grilling:
+        enum.FoodCookingVisuals.Grilling:
+          False: { visible: false }
+          True: { visible: true, sprite: SS220/Effects/grillingEffect.rsi, state: grillingSmoke }
+  #SS220-grill-update-2 end
 
 - type: entity
   name: шаурма
@@ -34,6 +43,18 @@
   - type: Food
   - type: Sprite
     state: shawarma
+    #SS220-grill-update-2 begin
+  - type: Construction
+    graph: ShawarmaGrilled
+    node: start
+    defaultTarget: shawarma grilled
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    conductivity: 10
+    thickness: 0.002
+    area: 1
+    #SS220-grill-update-2 end
 
 - type: entity
   name: шаурма на гриле
@@ -44,4 +65,8 @@
   - type: Food
   - type: Sprite
     state: shawarmaGrill
-  
+    #SS220-grill-update-2 begin
+  - type: Construction
+    graph: ShawarmaGrilled
+    node: shawarma grilled
+    #SS220-grill-update-2 end

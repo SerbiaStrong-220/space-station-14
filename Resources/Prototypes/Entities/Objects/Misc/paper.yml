@@ -57,6 +57,7 @@
   - type: Item
     size: Tiny
   - type: PhysicalComposition
+  - type: Temperature #SS220-grill-update-2 So that paper can be grilled.
 
 - type: entity
   name: paper

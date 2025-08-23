@@ -1,3 +1,5 @@
+using Content.Server.Atmos.Components;
+using Content.Server.Atmos.EntitySystems;
 using Content.Server.Construction.Components;
 using Content.Server.Power.Components;
 using Content.Shared.Placeable;
@@ -22,6 +24,8 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
     //SS220-grill-update end
+    
+    [Dependency] private readonly FlammableSystem _flammableSystem = default!; //SS220-grill-update-2
 
     public override void Initialize()
     {
@@ -95,6 +99,14 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
             foreach (var ent in placer.PlacedEntities)
             {
                 _temperature.ChangeHeat(ent, energy);
+
+                //SS220-grill-update-2 begin
+                // If it burns -> burn it
+                if (HasComp<FlammableComponent>(ent))
+                {
+                    _flammableSystem.Ignite(ent, heater.Owner);
+                }
+                //SS220-grill-update-2 end
 
                 //SS220-grill-update begin
                 // Skip visuals, if entity can't be cooked on the grill or if entity is already cooked
