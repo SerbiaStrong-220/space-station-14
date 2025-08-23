@@ -142,3 +142,16 @@
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "summon"}
   - type: InstantAction
     event: !type:MiGoSacrificeEvent
+
+- type: entity
+  id: ActionMiGoToggleLight
+  name: Toggle Lighting
+  description: Toggle light rendering to better observe dark areas.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    icon: Interface/VerbIcons/light.svg.192dpi.png
+    itemIconStyle: NoItem
+    clientExclusive: true
+  - type: InstantAction
+    event: !type:MiGoToggleLightEvent
