@@ -99,6 +99,7 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    - Kpb # ss220-kpb
     tags:
     - SiliconEmotes
   chatMessages: ["chat-emote-msg-sigh"]
@@ -125,6 +126,7 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    - Kpb # ss220-kpb
     tags:
     - SiliconEmotes
   chatMessages: ["chat-emote-msg-whistle"]

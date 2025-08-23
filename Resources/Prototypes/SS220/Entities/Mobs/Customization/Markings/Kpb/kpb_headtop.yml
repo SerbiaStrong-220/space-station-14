@@ -1,0 +1,8 @@
+- type: marking
+  speciesRestriction: [ Kpb ]
+  id: RobotHeadWires
+  bodyPart: Head
+  markingCategory: HeadTop
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_headtops.rsi
+      state: kpb_wires

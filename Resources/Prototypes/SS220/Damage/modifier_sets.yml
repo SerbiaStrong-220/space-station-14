@@ -124,3 +124,11 @@
     Blunt: 0.7
     Slash: 0.5
     Radiation: 0.4
+
+- type: damageModifierSet
+  id: Kpb
+  coefficients:
+    Blunt: 1.5
+    Slash: 1.5
+    Piercing: 1.5
+    Heat: 1.5
