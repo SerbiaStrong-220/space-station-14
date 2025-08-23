@@ -19,33 +19,52 @@ public sealed class LanguageMessageTag : IMarkupTagHandler
 
     private static Color DefaultTextColor = new(25, 25, 25);
 
-    public bool TryGetControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
+    /// <inheritdoc/>
+    public void PushDrawContext(MarkupNode node, MarkupDrawingContext context)
     {
-        control = null;
         if (!node.Value.TryGetString(out var key))
-            return false;
+        {
+            context.Color.Push(DefaultTextColor);
+            return;
+        }
 
         var player = _player.LocalEntity;
         if (player == null)
-            return false;
+        {
+            context.Color.Push(DefaultTextColor);
+            return;
+        }
 
         var languageSystem = _entityManager.System<LanguageSystem>();
         if (!languageSystem.TryGetPaperMessageFromKey(key, out var message, out var language))
-            return false;
-
-        var label = new Label
         {
-            Text = message,
-            FontColorOverride = language.Color ?? DefaultTextColor,
-        };
-        control = label;
-        return true;
+            context.Color.Push(DefaultTextColor);
+            return;
+        }
+
+        context.Color.Push(language.Color ?? DefaultTextColor);
     }
 
     /// <inheritdoc/>
-    // If it breaks again, then change class parent to `IMarkupTag` and delete this method :o
-    bool IMarkupTagHandler.TryCreateControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
+    public void PopDrawContext(MarkupNode node, MarkupDrawingContext context)
     {
-        return TryGetControl(node, out control);
+        context.Color.Pop();
+    }
+
+    /// <inheritdoc/>
+    public string TextBefore(MarkupNode node)
+    {
+        if (!node.Value.TryGetString(out var key))
+            return "";
+
+        var player = _player.LocalEntity;
+        if (player == null)
+            return "";
+
+        var languageSystem = _entityManager.System<LanguageSystem>();
+        if (!languageSystem.TryGetPaperMessageFromKey(key, out var message, out var language))
+            return "";
+
+        return message;
     }
 }
