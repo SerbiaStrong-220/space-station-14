@@ -23,20 +23,14 @@ public sealed class LanguageMessageTag : IMarkupTagHandler
     public void PushDrawContext(MarkupNode node, MarkupDrawingContext context)
     {
         if (!node.Value.TryGetString(out var key))
-        {
-            context.Color.Push(DefaultTextColor);
             return;
-        }
 
         var player = _player.LocalEntity;
         if (player == null)
-        {
-            context.Color.Push(DefaultTextColor);
             return;
-        }
 
         var languageSystem = _entityManager.System<LanguageSystem>();
-        if (!languageSystem.TryGetPaperMessageFromKey(key, out var message, out var language))
+        if (!languageSystem.TryGetPaperMessageFromKey(key, out _, out var language))
         {
             context.Color.Push(DefaultTextColor);
             return;
@@ -55,15 +49,15 @@ public sealed class LanguageMessageTag : IMarkupTagHandler
     public string TextBefore(MarkupNode node)
     {
         if (!node.Value.TryGetString(out var key))
-            return "";
+            return string.Empty;
 
         var player = _player.LocalEntity;
         if (player == null)
-            return "";
+            return string.Empty;
 
         var languageSystem = _entityManager.System<LanguageSystem>();
-        if (!languageSystem.TryGetPaperMessageFromKey(key, out var message, out var language))
-            return "";
+        if (!languageSystem.TryGetPaperMessageFromKey(key, out var message, out _))
+            return string.Empty;
 
         return message;
     }
