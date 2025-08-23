@@ -2,6 +2,7 @@
 
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.StatusEffect;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -125,7 +126,7 @@ public sealed partial class DarkReaperComponent : Component
     /// ConfusionEffectName - name of effect that applied
     /// </summary>
     [DataField]
-    public string ConfusionEffectName = "Flashed";
+    public EntProtoId ConfusionEffectName = "FlashSlowdownStatusEffect";
 
     /// <summary>
     /// Duration of the stun that is applied by the ability

@@ -20,6 +20,7 @@ using Robust.Shared.Utility;
 using Content.Shared.Projectiles;
 using Content.Server.Projectiles;
 using Content.Shared.Light.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.DarkReaper;
 
@@ -43,13 +44,9 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
     [Dependency] private readonly BuckleSystem _buckle = default!;
     [Dependency] private readonly ProjectileSystem _projectile = default!;
 
-    private readonly ISawmill _sawmill = Logger.GetSawmill("DarkReaper");
+    private readonly ProtoId<AlertPrototype> _deadscoreStage1Alert = "DeadscoreStage1";
 
-    [ValidatePrototypeId<AlertPrototype>]
-    private const string DeadscoreStage1Alert = "DeadscoreStage1";
-
-    [ValidatePrototypeId<AlertPrototype>]
-    private const string DeadscoreStage2Alert = "DeadscoreStage2";
+    private readonly ProtoId<AlertPrototype> _deadscoreStage2Alert = "DeadscoreStage2";
 
     private const int MaxBooEntities = 30;
 
@@ -58,30 +55,30 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         base.Initialize();
     }
 
-    public override void ChangeForm(EntityUid uid, DarkReaperComponent comp, bool isMaterial)
+    public override void ChangeForm(Entity<DarkReaperComponent> entity, bool isMaterial)
     {
-        var isTransitioning = comp.PhysicalForm != isMaterial;
-        base.ChangeForm(uid, comp, isMaterial);
+        var isTransitioning = entity.Comp.PhysicalForm != isMaterial;
+        base.ChangeForm(entity, isMaterial);
 
         if (!isTransitioning || isMaterial)
             return;
 
-        if (comp.ActivePortal != null)
+        if (entity.Comp.ActivePortal != null)
         {
-            QueueDel(comp.ActivePortal);
-            comp.ActivePortal = null;
+            QueueDel(entity.Comp.ActivePortal);
+            entity.Comp.ActivePortal = null;
         }
 
-        if (TryComp<EmbeddedContainerComponent>(uid, out var embeddedContainer))
-            _projectile.DetachAllEmbedded((uid, embeddedContainer));
+        if (TryComp<EmbeddedContainerComponent>(entity, out var embeddedContainer))
+            _projectile.DetachAllEmbedded((entity, embeddedContainer));
     }
 
-    protected override void CreatePortal(EntityUid uid, DarkReaperComponent comp)
+    protected override void CreatePortal(Entity<DarkReaperComponent> entity)
     {
-        base.CreatePortal(uid, comp);
+        base.CreatePortal(entity);
 
         // Make lights blink
-        BooInRadius(uid, 6);
+        BooInRadius(entity, 6);
     }
 
     protected override void OnAfterConsumed(Entity<DarkReaperComponent> ent, ref AfterConsumed args)
@@ -152,53 +149,53 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         }
 
         // update consoom counter alert
-        UpdateAlert(ent, ent.Comp);
+        UpdateAlert(ent);
         Dirty(ent);
     }
 
-    private void UpdateAlert(EntityUid uid, DarkReaperComponent comp)
+    private void UpdateAlert(Entity<DarkReaperComponent> entity)
     {
-        _alerts.ClearAlert(uid, DeadscoreStage1Alert);
-        _alerts.ClearAlert(uid, DeadscoreStage2Alert);
+        _alerts.ClearAlert(entity, _deadscoreStage1Alert);
+        _alerts.ClearAlert(entity, _deadscoreStage2Alert);
 
         string alert;
-        switch (comp.CurrentStage)
+        switch (entity.Comp.CurrentStage)
         {
             case 1:
-                alert = DeadscoreStage1Alert;
+                alert = _deadscoreStage1Alert;
                 break;
             case 2:
-                alert = DeadscoreStage2Alert;
+                alert = _deadscoreStage2Alert;
                 break;
             default:
                 return;
         }
 
-        if (!comp.ConsumedPerStage.TryGetValue(comp.CurrentStage - 1, out var severity))
+        if (!entity.Comp.ConsumedPerStage.TryGetValue(entity.Comp.CurrentStage - 1, out var severity))
             severity = 0;
 
-        severity -= comp.Consumed;
+        severity -= entity.Comp.Consumed;
 
-        switch (alert)
+        if (alert == _deadscoreStage1Alert && severity > 3)
         {
-            case DeadscoreStage1Alert when severity > 3:
-                severity = 3; // 3 is a max value our sprite can display at stage 1
-                _sawmill.Error("Had to clamp alert severity. It shouldn't happen. Report it to Artur.");
-                break;
-            case DeadscoreStage2Alert when severity > 8:
-                severity = 8; // 8 is a max value our sprite can display at stage 2
-                _sawmill.Error("Had to clamp alert severity. It shouldn't happen. Report it to Artur.");
-                break;
+            severity = 3; // 3 is a max value our sprite can display at stage 1
+            Log.Error("Had to clamp alert severity. It shouldn't happen. Report it.");
+        }
+
+        if (alert == _deadscoreStage2Alert && severity > 8)
+        {
+            severity = 8; // 8 is a max value our sprite can display at stage 2
+            Log.Error("Had to clamp alert severity. It shouldn't happen. Report it.");
         }
 
         if (severity <= 0)
         {
-            _alerts.ClearAlert(uid, DeadscoreStage1Alert);
-            _alerts.ClearAlert(uid, DeadscoreStage2Alert);
+            _alerts.ClearAlert(entity, _deadscoreStage1Alert);
+            _alerts.ClearAlert(entity, _deadscoreStage2Alert);
             return;
         }
 
-        _alerts.ShowAlert(uid, alert, (short) severity);
+        _alerts.ShowAlert(entity, alert, (short)severity);
     }
 
     protected override void OnCompInit(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
@@ -222,7 +219,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         if (!ent.Comp.BloodMistActionEntity.HasValue)
             _actions.AddAction(ent, ref ent.Comp.BloodMistActionEntity, ent.Comp.BloodMistAction);
 
-        UpdateAlert(ent, ent.Comp);
+        UpdateAlert(ent);
     }
 
     protected override void OnCompShutdown(Entity<DarkReaperComponent> ent, ref ComponentShutdown args)
@@ -236,20 +233,16 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         _actions.RemoveAction(ent.Owner, ent.Comp.BloodMistActionEntity);
     }
 
-    protected override void DoStunAbility(EntityUid uid, DarkReaperComponent comp)
+    protected override void DoStunAbility(Entity<DarkReaperComponent> entity)
     {
-        base.DoStunAbility(uid, comp);
+        base.DoStunAbility(entity);
 
         // Destroy lights in radius
-        var lightQuery = GetEntityQuery<PoweredLightComponent>();
-        var entities = _lookup.GetEntitiesInRange(uid, comp.StunAbilityLightBreakRadius);
+        var poweredLightEntities = _lookup.GetEntitiesInRange<PoweredLightComponent>(Transform(entity).Coordinates, entity.Comp.StunAbilityLightBreakRadius);
 
-        foreach (var entity in entities)
+        foreach (var lightEntity in poweredLightEntities)
         {
-            if (!lightQuery.TryGetComponent(entity, out var lightComp))
-                continue;
-
-            _poweredLight.TryDestroyBulb(entity, lightComp);
+            _poweredLight.TryDestroyBulb(lightEntity);
         }
     }
 

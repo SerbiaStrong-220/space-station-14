@@ -16,6 +16,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly PointLightSystem _pointLight = default!;
     [Dependency] private readonly LightBehaviorSystem _lightBehavior = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private static readonly Color ReaperGhostColor = Color.FromHex("#bbbbff88");
 
@@ -53,39 +54,40 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
             }
 
             if (data is bool isPhysical)
-                UpdateAppearance(uid, comp, sprite, isPhysical, hasGlare, ghostCooldown);
+                UpdateAppearance((uid, comp), sprite, isPhysical, hasGlare, ghostCooldown);
         }
     }
 
 
-    private void UpdateAppearance(EntityUid uid, DarkReaperComponent comp, SpriteComponent sprite, bool isPhysical, bool hasGlare, bool ghostCooldown)
+    private void UpdateAppearance(Entity<DarkReaperComponent> entity, SpriteComponent sprite, bool isPhysical, bool hasGlare, bool ghostCooldown)
     {
         var controlled = _playerManager.LocalSession?.AttachedEntity;
-        var isOwn = controlled == uid;
+        var isOwn = controlled == entity.Owner;
         var canSeeOthers = controlled.HasValue &&
                           (HasComp<GhostComponent>(controlled) ||
                            HasComp<DarkReaperComponent>(controlled) ||
                            HasComp<RevenantComponent>(controlled));
         var canSeeGhosted = isOwn || canSeeOthers;
 
-        if (TryComp<LightBehaviourComponent>(uid, out var lightBehaviour))
+        if (TryComp<LightBehaviourComponent>(entity, out var lightBehaviour))
         {
             if (hasGlare)
-                _lightBehavior.StartLightBehaviour((uid, lightBehaviour));
+                _lightBehavior.StartLightBehaviour((entity, lightBehaviour));
             else
-                _lightBehavior.StopLightBehaviour((uid, lightBehaviour));
+                _lightBehavior.StopLightBehaviour((entity, lightBehaviour));
         }
 
-        if (sprite.LayerMapTryGet(DarkReaperVisual.Stage, out var layerIndex))
+        Entity<SpriteComponent?> reaperSpriteEntity = (entity.Owner, sprite);
+        if (_sprite.LayerMapTryGet(reaperSpriteEntity, DarkReaperVisual.Stage, out var layerIndex, true))
         {
-            sprite.LayerSetVisible(layerIndex, (canSeeGhosted || isPhysical) && !ghostCooldown);
-            sprite.LayerSetColor(layerIndex, (canSeeGhosted && !isPhysical) ? ReaperGhostColor : Color.White);
+            _sprite.LayerSetVisible(reaperSpriteEntity, layerIndex, (canSeeGhosted || isPhysical) && !ghostCooldown);
+            _sprite.LayerSetColor(reaperSpriteEntity, layerIndex, (canSeeGhosted && !isPhysical) ? ReaperGhostColor : Color.White);
         }
 
-        _pointLight.SetEnabled(uid, hasGlare || ghostCooldown);
+        _pointLight.SetEnabled(entity, hasGlare || ghostCooldown);
     }
 
-    private void OnAppearanceChange(EntityUid uid, DarkReaperComponent component, ref AppearanceChangeEvent args)
+    private void OnAppearanceChange(Entity<DarkReaperComponent> entity, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
             return;
@@ -108,6 +110,6 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         }
 
         if (data is bool isPhysical)
-            UpdateAppearance(uid, component, args.Sprite, isPhysical, hasGlare, ghostCooldown);
+            UpdateAppearance(entity, args.Sprite, isPhysical, hasGlare, ghostCooldown);
     }
 }
