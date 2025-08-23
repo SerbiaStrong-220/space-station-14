@@ -50,6 +50,7 @@
                     <Label Name="Count" Access="Public"/>
                     <Control HorizontalExpand="True"/>
                     <Button Name="ExportLogs" Access="Public" Text="{Loc admin-logs-export}"/>
+                     <Button Name="CopyToClipboard" Access="Public" Text="{Loc admin-logs-copy-clipboard}"/> <!-- SS220-add-logs-copying -->
                     <Button Name="PopOutButton" Access="Public" Text="{Loc admin-logs-pop-out}"/>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal">
@@ -63,33 +64,14 @@
                     <Collapsible Orientation="Vertical">
                         <CollapsibleHeading Title="{Loc admin-logs-time-filter-title}"/>
                         <CollapsibleBody>
-                            <BoxContainer Orientation="Horizontal">
-                                <BoxContainer Orientation="Vertical">
+                            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                                     <Label Text="{Loc admin-logs-from}" />
+                                    <LineEdit Name="EarlyBorderTime" MinWidth="384" HorizontalExpand="True" PlaceHolder="[UTC] dd/mm/yyyy hh:mm:ss (MSK = UTC+3)"/>
+                                </BoxContainer>
+                                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                                     <Label Text="{Loc admin-logs-to}" />
-                                </BoxContainer>
-                                <BoxContainer Orientation="Vertical">
-                                    <LineEdit Name="EarlyBorderEditHours" MinWidth="32" />
-                                    <LineEdit Name="LateBorderEditHours" MinWidth="32" />
-                                </BoxContainer>
-                                <BoxContainer Orientation="Vertical">
-                                    <Label Text=":" />
-                                    <Label Text=":" />
-                                </BoxContainer>
-                                <BoxContainer Orientation="Vertical">
-                                    <LineEdit Name="EarlyBorderEditMinutes" MinWidth="32" />
-                                    <LineEdit Name="LateBorderEditMinutes" MinWidth="32" />
-                                </BoxContainer>
-                                <BoxContainer Orientation="Vertical">
-                                    <Label Text=":" />
-                                    <Label Text=":" />
-                                </BoxContainer>
-                                <BoxContainer Orientation="Vertical">
-                                    <LineEdit Name="EarlyBorderEditSeconds" MinWidth="32" />
-                                    <LineEdit Name="LateBorderEditSeconds" MinWidth="32" />
-                                </BoxContainer>
-                                <BoxContainer Orientation="Vertical">
-                                    <Label Name="SampleInfo" Text="{Loc admin-logs-sample-info}" />
+                                    <LineEdit Name="LateBorderTime" MinWidth="384" HorizontalExpand="True" PlaceHolder="[UTC] dd/mm/yyyy hh:mm:ss (MSK = UTC+3)"/>
                                 </BoxContainer>
                             </BoxContainer>
                         </CollapsibleBody>
@@ -98,7 +80,7 @@
                 <aui:VSeparator/>
                 <!-- SS220-time-filter-add-end -->
                 <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
-                    <BoxContainer Name="LogsContainer" Access="Public" Orientation="Vertical" VerticalExpand="True"/>
+                    <BoxContainer Name="LogsContainer" MouseFilter="Pass" Access="Public" Orientation="Vertical" VerticalExpand="True"/>
                 </ScrollContainer>
             </BoxContainer>
         </BoxContainer>
