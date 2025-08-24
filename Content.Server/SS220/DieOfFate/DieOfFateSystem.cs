@@ -1,20 +1,26 @@
-﻿using Content.Server.Administration.Systems;
+﻿using System.Linq;
+using Content.Server.Administration.Systems;
 using Content.Server.Body.Systems;
 using Content.Server.Dice;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Popups;
 using Content.Server.Stunnable;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Database;
 using Content.Shared.Dice;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.SS220.EntityBlockDamage;
+using Content.Shared.Storage;
+using Content.Shared.Tag;
 using Content.Shared.Throwing;
+using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -34,6 +40,28 @@ public sealed class DieOfFateSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+
+    private const float MovementModifier = 0.8f;
+
+    private const string HighRiskItem = "HighRiskItem";
+
+    private const string Monkey = "Monkey";
+    private const string MobAdultSlimesBlue = "MobAdultSlimesBlue";
+    private const string MobGoliath = "MobGoliath";
+
+    private const string Brute = "Brute";
+    private const string Blunt = "Blunt";
+
+    private const string CaptainIDCard = "CaptainIDCard";
+    private const string WeaponRifleAk = "WeaponRifleAk";
+    private const string SpaceCash20000 = "SpaceCash20000";
+    private const string KnockSpellbook = "KnockSpellbook";
+    private const string ClothingBackpackChameleonFill = "ClothingBackpackChameleonFill";
+    private const string SpaceCash50000 = "SpaceCash50000";
+    private const string FoodCakeBlueberry = "FoodCakeBlueberry";
 
     public override void Initialize()
     {
@@ -53,191 +81,207 @@ public sealed class DieOfFateSystem : EntitySystem
         ent.Comp.IsUsed = true;
     }
 
-    public void DoAction(EntityUid uid, int value)
+    public void DoAction(EntityUid user, int value)
     {
-        _popup.PopupEntity(Loc.GetString("tarot-cards-roll-dice", ("value", value)), uid, uid);
+        _popup.PopupEntity(Loc.GetString("tarot-cards-roll-dice", ("value", value)), user, user);
 
         switch (value)
         {
             case 1:
-                OnRollOne(uid);
+                OnRollOne(user);
                 break;
             case 2:
-                OnRollTwo(uid);
+                OnRollTwo(user);
                 break;
             case 3:
-                OnRollThree(uid);
+                OnRollThree(user);
                 break;
             case 4:
-                OnRollFour(uid);
+                OnRollFour(user);
                 break;
             case 5:
-                OnRollFive(uid);
+                OnRollFive(user);
                 break;
             case 6:
-                OnRollSix(uid);
+                OnRollSix(user);
                 break;
             case 7:
-                OnRollSeven(uid);
+                OnRollSeven(user);
                 break;
             case 8:
-                OnRollEight(uid);
+                OnRollEight(user);
                 break;
             case 9:
-                OnRollNine(uid);
+                OnRollNine(user);
                 break;
             case 10:
-                OnRollTen(uid);
+                OnRollTen(user);
                 break;
             case 11:
-                OnRollEleven(uid);
+                OnRollEleven(user);
                 break;
             case 12:
-                OnRollTwelve(uid);
+                OnRollTwelve(user);
                 break;
             case 13:
-                OnRollThirteen(uid);
+                OnRollThirteen(user);
                 break;
             case 14:
-                OnRollFourteen(uid);
+                OnRollFourteen(user);
                 break;
             case 15:
-                OnRollFifteen(uid);
+                OnRollFifteen(user);
                 break;
             case 16:
-                OnRollSixteen(uid);
+                OnRollSixteen(user);
                 break;
             case 17:
-                OnRollSeventeen(uid);
+                OnRollSeventeen(user);
                 break;
             case 18:
-                OnRollEighteen(uid);
+                OnRollEighteen(user);
                 break;
             case 19:
-                OnRollNineteen(uid);
+                OnRollNineteen(user);
                 break;
             case 20:
                 for (var i = 0; i < 3; i++)
                 {
                     var extraRoll = _random.Next(10, 20);
-                    DoAction(uid, extraRoll);
+                    DoAction(user, extraRoll);
                 }
                 break;
         }
+
+        _adminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(user):player} use Roll of Dice and value is {value}");
     }
 
-    private void OnRollOne(EntityUid target)
+    private void OnRollOne(EntityUid user)
     {
-        _body.GibBody(target, true);
+        _body.GibBody(user, true);
     }
 
-    private void OnRollTwo(EntityUid target)
+    private void OnRollTwo(EntityUid user)
     {
-        if (!TryComp<DamageableComponent>(target, out var damageableComponent))
+        if (!TryComp<DamageableComponent>(user, out var damageableComponent))
             return;
 
-        _suicide.ApplyLethalDamage((target, damageableComponent), "Blunt");
-        _popup.PopupEntity(Loc.GetString("tarot-cards-dice-death"), target);
+        _suicide.ApplyLethalDamage((user, damageableComponent), Blunt);
+        _popup.PopupEntity(Loc.GetString("tarot-cards-dice-death"), user);
     }
 
-    private void OnRollThree(EntityUid target)
+    private void OnRollThree(EntityUid user)
     {
-        SpawnAtPosition("MobGoliath", Transform(target).Coordinates);
+        SpawnAtPosition(MobGoliath, Transform(user).Coordinates);
     }
 
-    private void OnRollFour(EntityUid target)
+    private void OnRollFour(EntityUid user)
     {
-        if(!TryComp<InventoryComponent>(target, out var inventoryComponent))
+        if (!TryComp<InventoryComponent>(user, out var inventoryComponent))
             return;
 
         foreach (var slot in inventoryComponent.Containers)
         {
-            if(slot.ContainedEntity != null)
-                QueueDel(slot.ContainedEntity);
+            if (slot.ContainedEntity == null)
+                continue;
+
+            if (_tag.HasTag(slot.ContainedEntity.Value, HighRiskItem))
+                continue;
+
+            if (TryComp<StorageComponent>(slot.ContainedEntity.Value, out var storage))
+            {
+                foreach (var item in storage.Container.ContainedEntities.ToList())
+                {
+                    if (_tag.HasTag(item, HighRiskItem))
+                        _container.TryRemoveFromContainer(item, true);
+                }
+            }
+
+            QueueDel(slot.ContainedEntity);
         }
     }
 
-    private void OnRollFive(EntityUid target)
+    private void OnRollFive(EntityUid user)
     {
-        _polymorph.PolymorphEntity(target, "Monkey");
+        _polymorph.PolymorphEntity(user, MobAdultSlimesBlue);
     }
 
-    private void OnRollSix(EntityUid target)
+    private void OnRollSix(EntityUid user)
     {
-        if (!TryComp<MovementSpeedModifierComponent>(target, out var modifierComponent))
+        if (!TryComp<MovementSpeedModifierComponent>(user, out var modifierComponent))
             return;
 
-        _movement.ChangeBaseSpeed(target, modifierComponent.BaseWalkSpeed - 0.2f, modifierComponent.BaseSprintSpeed - 0.2f, modifierComponent.Acceleration);
+        _movement.ChangeBaseSpeed(user, modifierComponent.BaseWalkSpeed * MovementModifier, modifierComponent.BaseSprintSpeed * MovementModifier, modifierComponent.Acceleration);
     }
 
-    private void OnRollSeven(EntityUid target)
+    private void OnRollSeven(EntityUid user)
     {
-        _throwing.TryThrow(target, Transform(target).Coordinates, 40f);
-        _stun.TryParalyze(target, TimeSpan.FromSeconds(12), false);
+        _throwing.TryThrow(user, Transform(user).Coordinates, 40f);
+        _stun.TryAddParalyzeDuration(user, TimeSpan.FromSeconds(12));
 
-        var damageSpec = new DamageSpecifier(_proto.Index<DamageGroupPrototype>("Brute"), 50f);
+        var damageSpec = new DamageSpecifier(_proto.Index<DamageGroupPrototype>(Brute), 50f);
 
-        _damageable.TryChangeDamage(target, damageSpec, true);
+        _damageable.TryChangeDamage(user, damageSpec, true);
     }
 
-    private void OnRollEight(EntityUid target)
+    private void OnRollEight(EntityUid user)
     {
-        _explosion.QueueExplosion(target, "Default", 40, 1, 0);
+        _explosion.QueueExplosion(user, "Default", 40, 1, 0, canCreateVacuum: false);
     }
 
-    private void OnRollNine(EntityUid target)
+    private void OnRollNine(EntityUid user)
     {
-        _polymorph.PolymorphEntity(target, "Monkey");
+        _polymorph.PolymorphEntity(user, Monkey);
     }
 
-    private void OnRollTen(EntityUid target)
+    private void OnRollTen(EntityUid _)
     {
         // DO NOTHING
     }
 
-    private void OnRollEleven(EntityUid target)
+    private void OnRollEleven(EntityUid user)
     {
-        SpawnAtPosition("FoodCakeBlueberry", Transform(target).Coordinates);
+        SpawnAtPosition(FoodCakeBlueberry, Transform(user).Coordinates);
     }
 
-    private void OnRollTwelve(EntityUid target)
+    private void OnRollTwelve(EntityUid user)
     {
-        _rejuvenate.PerformRejuvenate(target);
+        _rejuvenate.PerformRejuvenate(user);
     }
 
-    private void OnRollThirteen(EntityUid target)
+    private void OnRollThirteen(EntityUid user)
     {
-        SpawnAtPosition("SpaceCash50000", Transform(target).Coordinates);
+        SpawnAtPosition(SpaceCash50000, Transform(user).Coordinates);
     }
 
-    private void OnRollFourteen(EntityUid target)
+    private void OnRollFourteen(EntityUid user)
     {
-        SpawnAtPosition("ClothingBackpackChameleonFill", Transform(target).Coordinates);
+        SpawnAtPosition(ClothingBackpackChameleonFill, Transform(user).Coordinates);
     }
 
-    private void OnRollFifteen(EntityUid target)
+    private void OnRollFifteen(EntityUid user)
     {
-        SpawnAtPosition("KnockSpellbook", Transform(target).Coordinates);
+        SpawnAtPosition(KnockSpellbook, Transform(user).Coordinates);
     }
 
-    private void OnRollSixteen(EntityUid target)
+    private void OnRollSixteen(EntityUid user)
     {
-        SpawnAtPosition("SpaceCash20000", Transform(target).Coordinates);
+        SpawnAtPosition(SpaceCash20000, Transform(user).Coordinates);
     }
 
-    private void OnRollSeventeen(EntityUid target)
+    private void OnRollSeventeen(EntityUid user)
     {
-        SpawnAtPosition("WeaponRifleAk", Transform(target).Coordinates);
+        SpawnAtPosition(WeaponRifleAk, Transform(user).Coordinates);
     }
 
-    private void OnRollEighteen(EntityUid target)
+    private void OnRollEighteen(EntityUid user)
     {
-        SpawnAtPosition("CaptainIDCard", Transform(target).Coordinates);
+        SpawnAtPosition(CaptainIDCard, Transform(user).Coordinates);
     }
 
-    private void OnRollNineteen(EntityUid target)
+    private void OnRollNineteen(EntityUid user)
     {
-        EnsureComp<EntityBlockDamageComponent>(target, out var blockDamage);
+        EnsureComp<EntityBlockDamageComponent>(user, out var blockDamage);
         blockDamage.BlockAllTypesDamage = true;
         blockDamage.DamageCoefficient = 0.5f;
     }
