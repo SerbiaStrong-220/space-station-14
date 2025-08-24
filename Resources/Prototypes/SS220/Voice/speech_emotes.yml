@@ -20,7 +20,7 @@
     - бурлит
     - бурлит.
     - бурлит!
-
+#SS220 Howls for vulps
 - type: emote
   id: Howl
   name: chat-emote-name-howl
@@ -121,6 +121,7 @@
   - гавкает!
   - гавкает?
 
+## spo9k vocal emotes start
 - type: emote
   id: Meow
   name: chat-emote-name-meow
@@ -183,3 +184,24 @@
     - мурчит
     - мурчит.
     - мурчит!
+
+  ## spo9k vocal emotes end
+
+- type: emote
+  id: Mrow
+  name: chat-emote-name-mrow
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: [chat-emote-msg-mrow]
+  chatTriggers:
+    - раздражённо мяукает
+    - раздраженно мяукает
+    - раздраженный мяу
+    - раздражённый мяу
+    - недовольно мяукает
+    - недовольный мяу

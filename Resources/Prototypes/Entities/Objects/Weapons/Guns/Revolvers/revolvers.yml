@@ -17,6 +17,7 @@
     shape:
     - 0,0,1,0
     - 0,1,0,1
+    storedOffset: 0,-6
   - type: Tag
     tags:
     - Sidearm
@@ -94,6 +95,9 @@
     sprite: SS220/Objects/Weapons/Guns/Revolvers/inspector.rsi # ss220 revolvers resprite
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Revolvers/inspector.rsi # ss220 revolvers resprite
+    # sprite: Objects/Weapons/Guns/Revolvers/inspector.rsi # ss220 revolvers resprite
+  - type: Item
+    storedOffset: 0,-2
   - type: RevolverAmmoProvider
     proto: CartridgeMagnumRubber #ss-220 civDec
     capacity: 6
@@ -110,6 +114,9 @@
     sprite: SS220/Objects/Weapons/Guns/Revolvers/mateba.rsi # ss220 revolvers resprite
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Revolvers/mateba.rsi # ss220 revolvers resprite
+    # sprite: Objects/Weapons/Guns/Revolvers/mateba.rsi # ss220 revolvers resprite
+  - type: Item
+    storedOffset: 0,-3
   - type: Gun
     fireRate: 3
     soundGunshot:
@@ -133,6 +140,9 @@
     sprite: SS220/Objects/Weapons/Guns/Revolvers/python.rsi # ss220 revolvers resprite
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Revolvers/python.rsi # ss220 revolvers resprite
+    # sprite: Objects/Weapons/Guns/Revolvers/python.rsi # ss220 revolvers resprite
+  - type: Item
+    storedOffset: 0,-2
   - type: Gun
     selectedMode: SemiAuto
     fireRate: 2
@@ -142,6 +152,8 @@
       path: /Audio/Weapons/Guns/Gunshots/revolver.ogg
       params:
         volume: 2.25
+  - type: StaticPrice
+    price: 1500 # Botany can shit these out like candy, but let's see how it goes
 
 - type: entity
   parent: WeaponRevolverPython
@@ -166,6 +178,9 @@
     sprite: SS220/Objects/Weapons/Guns/Revolvers/pirate_revolver.rsi # ss220 revolvers resprite
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Revolvers/pirate_revolver.rsi # ss220 revolvers resprite
+    # sprite: Objects/Weapons/Guns/Revolvers/pirate_revolver.rsi # ss220 revolvers resprite
+  - type: Item
+    storedOffset: 1,-5
   - type: Gun
     fireRate: 1
   - type: ContainerContainer
@@ -177,10 +192,8 @@
     ammoSlots: [ null, null, null, null, null ]
 
 - type: entity
-  name: pirate revolver
   parent: WeaponRevolverPirate
   id: WeaponRevolverPirateEmpty
-  description: An odd, old-looking revolver, favoured by pirate crews. Uses .45 magnum ammo.
   suffix: Empty
   components:
   - type: RevolverAmmoProvider

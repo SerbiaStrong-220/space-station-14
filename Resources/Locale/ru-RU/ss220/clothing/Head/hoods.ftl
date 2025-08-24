@@ -14,3 +14,4 @@ ent-ClothingHeadHatHoodWinterSyndieCapArmored = капюшон куртки си
     .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
 ent-ClothingHeadHatHoodWinterSyndieCap = капюшон куртки синдиката
     .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
+ent-ClothingHeadHatHoodOwl = капюшон героя-совы

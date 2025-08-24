@@ -106,11 +106,11 @@
     - map: [ "outerClothing" ]
     - map: [ "back" ]
     - map: [ "neck" ]
+    - map: [ "suitstorage" ] # This is not in the default order
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
-    - map: [ "suitstorage" ] # This is not in the default order
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "mask" ]
     - map: [ "head" ]
@@ -164,6 +164,11 @@
           32:
             sprite: Mobs/Species/Vox/displacement.rsi
             state: head
+      # neck:
+      #   sizeMaps:
+      #     32:
+      #       sprite: Mobs/Species/Vox/displacement.rsi
+      #       state: neck
       back:
         sizeMaps:
           32:
@@ -197,10 +202,7 @@
   #ss220 emote 5 sec end
   #SS220 LimitationRevive - start
   - type: LimitationRevive
-    maxRevive: 100 #has no death limit
-    typeDamageOnDead:
-      types:
-        Сerebral: 400
+    reviveLimit: 100 #has no death limit
   #SS220 LimitationRevive - end
   - type: Hands
     leftHandDisplacement:

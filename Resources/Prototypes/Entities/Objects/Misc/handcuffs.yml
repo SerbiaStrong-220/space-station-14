@@ -150,11 +150,11 @@
   - type: Item
     size: Normal
   - type: Handcuff
-    cuffedRSI: Clothing/OuterClothing/Misc/straight_jacket.rsi
+    cuffedRSI: SS220/Clothing/OuterClothing/Misc/straight_jacket.rsi # SS220 straitjacket resprite
     breakoutTime: 100
     cuffTime: 10
     uncuffTime: 10
     stunBonus: 4
   - type: Sprite
-    sprite: Clothing/OuterClothing/Misc/straight_jacket.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/straight_jacket.rsi # SS220 straitjacket resprite
     state: icon

@@ -1,14 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
-using Content.Server.DeviceNetwork.Components;
 using Content.Server.Medical.SuitSensors;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Medical.SuitSensor;
+using Content.Shared.Medical.SuitSensors;
 using Content.Shared.Pinpointer;
 using Content.Shared.SS220.Pinpointer;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Server.SS220.Pinpointer;
 
@@ -18,10 +18,12 @@ public sealed class PinpointerSystem : EntitySystem
     [Dependency] private readonly SharedPinpointerSystem _pinpointer = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SuitSensorSystem _suit = default!;
+    [Dependency] private readonly IComponentFactory _componentFactory = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<PinpointerComponent, PinpointerTargetPick>(OnPickCrew);
+        SubscribeLocalEvent<PinpointerComponent, PinpointerTargetPick>(OnPickTarget);
+        SubscribeLocalEvent<PinpointerComponent, PinpointerCrewTargetPick>(OnPickCrew);
         SubscribeLocalEvent<PinpointerComponent, PinpointerDnaPick>(OnDnaPicked);
     }
 
@@ -45,7 +47,7 @@ public sealed class PinpointerSystem : EntitySystem
 
     private void UpdateTrackers(EntityUid uid, PinpointerComponent comp)
     {
-        switch (comp.Mode)
+        switch (comp.Mode)//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
         {
             case PinpointerMode.Crew:
                 UpdateCrewTrackers(uid, comp);
@@ -53,6 +55,10 @@ public sealed class PinpointerSystem : EntitySystem
 
             case PinpointerMode.Item:
                 UpdateItemTrackers(uid, comp);
+                break;
+
+            case PinpointerMode.Component:
+                UpdateTargetsTrackers(uid, comp);
                 break;
         }
 
@@ -66,6 +72,7 @@ public sealed class PinpointerSystem : EntitySystem
         Dirty(uid, comp);
     }
 
+    //ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
     private void UpdateCrewTrackers(EntityUid uid, PinpointerComponent comp)
     {
         comp.Sensors.Clear();
@@ -88,6 +95,7 @@ public sealed class PinpointerSystem : EntitySystem
         }
     }
 
+    //ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
     private void UpdateItemTrackers(EntityUid uid, PinpointerComponent comp)
     {
         comp.TrackedItems.Clear();
@@ -108,22 +116,50 @@ public sealed class PinpointerSystem : EntitySystem
         comp.TrackedItems.Add(new TrackedItem(GetNetEntity(comp.TrackedByDnaEntity.Value), comp.DnaToTrack));
     }
 
+    //ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
+    private void UpdateTargetsTrackers(EntityUid uid, PinpointerComponent comp)
+    {
+        comp.Targets.Clear();
+
+        if (comp.TargetsComponent is null)
+            return;
+
+        if (!_componentFactory.TryGetRegistration(comp.TargetsComponent, out var registration))
+            return;
+
+        var query1 = EntityManager.AllEntityQueryEnumerator(registration.Type);
+        while (query1.MoveNext(out var target, out _))
+        {
+            comp.Targets.Add(new TrackedItem(GetNetEntity(target), MetaData(target).EntityName));
+        }
+    }
+
     private bool IsTargetValid(PinpointerComponent comp)
     {
         return comp.Mode switch
         {
             PinpointerMode.Crew => comp.Sensors.Any(sensor => GetEntity(sensor.Entity) == comp.Target),
             PinpointerMode.Item => comp.TrackedItems.Any(item => item.Entity == GetNetEntity(comp.Target!.Value)),
+            PinpointerMode.Component => comp.Targets.Any(target => GetEntity(target.Entity) == comp.Target),
             _ => false,
         };
     }
 
-    private void OnPickCrew(Entity<PinpointerComponent> ent, ref PinpointerTargetPick args)
+    //ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
+    private void OnPickCrew(Entity<PinpointerComponent> ent, ref PinpointerCrewTargetPick args)
     {
         _pinpointer.SetTarget(ent.Owner, GetEntity(args.Target));
         _pinpointer.SetActive(ent.Owner, true);
     }
 
+    //ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
+    private void OnPickTarget(Entity<PinpointerComponent> ent, ref PinpointerTargetPick args)
+    {
+        _pinpointer.SetTarget(ent.Owner, GetEntity(args.Target));
+        _pinpointer.SetActive(ent.Owner, true);
+    }
+
+    //ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
     private void OnDnaPicked(Entity<PinpointerComponent> ent, ref PinpointerDnaPick args)
     {
         var query = EntityQueryEnumerator<DnaComponent>();
@@ -148,7 +184,7 @@ public sealed class PinpointerSystem : EntitySystem
         if (!Exists(ent.Owner) || !_uiSystem.IsUiOpen(ent.Owner, PinpointerUIKey.Key))
             return;
 
-        switch (ent.Comp.Mode)
+        switch (ent.Comp.Mode)//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
         {
             case PinpointerMode.Crew:
                 _uiSystem.SetUiState(ent.Owner, PinpointerUIKey.Key, new PinpointerCrewUIState(ent.Comp.Sensors));
@@ -156,6 +192,10 @@ public sealed class PinpointerSystem : EntitySystem
 
             case PinpointerMode.Item:
                 _uiSystem.SetUiState(ent.Owner, PinpointerUIKey.Key, new PinpointerItemUIState(ent.Comp.TrackedItems));
+                break;
+
+            case PinpointerMode.Component:
+                _uiSystem.SetUiState(ent.Owner, PinpointerUIKey.Key, new PinpointerComponentUIState(ent.Comp.Targets));
                 break;
         }
     }

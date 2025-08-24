@@ -87,6 +87,8 @@
     damage:
       types:
         Blunt: 12
+    shuttleNavInfo:
+      enabled: true
 
 
 - type: entity
@@ -294,8 +296,8 @@
       - state: grenade
   - type: SpawnOnTrigger
     proto: GrenadeFlashEffect
-  - type: ActiveTimerTrigger
-    timeRemaining: 0.3
+  - type: TimerTrigger
+    delay: 0.3
   - type: DeleteOnTrigger
 
 - type: entity
@@ -411,7 +413,7 @@
 - type: entity
   name : Blaster bolt
   id: BulletBlasterAlt
-  parent: BulletDisabler
+  parent: BaseBlasterBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -432,7 +434,7 @@
 - type: entity
   name : Blaster bolt
   id: BulletBlasterPulse
-  parent: BulletDisabler
+  parent: BaseBlasterBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite

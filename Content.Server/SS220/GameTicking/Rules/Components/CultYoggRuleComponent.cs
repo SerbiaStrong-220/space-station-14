@@ -4,6 +4,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Cultists;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -14,9 +15,6 @@ namespace Content.Server.SS220.GameTicking.Rules.Components;
 [RegisterComponent, Access(typeof(CultYoggRuleSystem))]
 public sealed partial class CultYoggRuleComponent : Component
 {
-    [DataField]
-    public int ReqAmountOfMiGo = 3;
-
     [DataField]
     public Dictionary<CultYoggStage, CultYoggStageDefinition> Stages { get; private set; } = new();
 
@@ -72,6 +70,13 @@ public sealed partial class CultYoggRuleComponent : Component
     //telephaty channel
     [DataField]
     public string TelepathyChannel = "TelepathyChannelYoggSothothCult";
+
+    [DataField]
+    public EntityWhitelist WhitelistToggleable = new()
+    {
+        Tags = ["CultYoggInnerHandToggleable"]
+    };
+
     /// <summary>
     /// Check for an endgame screen title
     /// </summary>
@@ -79,9 +84,9 @@ public sealed partial class CultYoggRuleComponent : Component
     public int AmountOfSacrifices = 0;
 
     [DataField]
-    public bool Summoned = false;
+    public bool Summoned;
 
-    [DataField("summonMusic")]
+    [DataField]
     public SoundSpecifier SummonMusic = new SoundCollectionSpecifier("CultYoggMusic");//ToDo make own
     public enum SelectionState
     {
@@ -103,7 +108,7 @@ public sealed partial class CultYoggRuleComponent : Component
     /// <summary>
     /// When should cultists be selected and the announcement made
     /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), ViewVariables(VVAccess.ReadWrite)]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan? AnnounceAt;
 
     /// <summary>
@@ -121,6 +126,7 @@ public sealed partial class CultYoggStageDefinition
     /// </summary>
     [DataField]
     public int? SacrificesRequired;
+
     /// <summary>
     /// Fraction of total crew converted to cultists that will progress cult to this stage.
     /// </summary>

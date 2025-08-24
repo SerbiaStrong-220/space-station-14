@@ -7,6 +7,7 @@
     ClothingBackpackSatchel: 3
     ClothingBackpackSatchelLeather: 2
     ClothingRandomSpawner: 8
+    ClothingUniformRandomShorts: 4
     ClothingHeadHatBeret: 4
     ClothingHeadBandBlack: 2
     ClothingHeadBandBlue: 2
@@ -80,6 +81,7 @@
     ClothingHeadFishCap: 2
     ClothingHeadRastaHat: 2
     #ClothingHeadHatNewYearsCap: 5 #SS220 New years cap \ Убрать после нового года
+    ClothingHeadPropellerHat: 2
     ClothingBeltStorageWaistbag: 3
     ClothingEyesGlasses: 6
     ClothingHandsGlovesColorBlack: 4
@@ -102,6 +104,11 @@
     ToyFigurineGreytider: 1
     ClothingBackpackSatchelSmugglerUnanchored: 1
     ClothingHeadHatSolidHeadband: 2
+    # SS220 VASH THE STAMPEDE KIT START
+    ClothingOuterScarletTyphoon: 1
+    ClothingUniformWastelandSuit: 1
+    ClothingHandsStormgloves: 1
+    ClothingShoesWandererBoots: 1
+    # SS220 VASH THE STAMPEDE KIT END
   # DO NOT ADD MORE, USE UNIFORM DYING
-  emaggedInventory: # SS220 Scarlet Typhoon add for emag
-    ClothingOuterScarletTyphoon: 1 # SS220 Scarlet Typhoon add for emag
+

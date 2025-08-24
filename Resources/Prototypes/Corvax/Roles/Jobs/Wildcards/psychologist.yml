@@ -19,7 +19,7 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: DefibrillatorSkill 
+    - type: DefibrillatorSkill
   #SS220 LimitationRevive - end
 
 - type: startingGear
@@ -33,3 +33,15 @@
 #    - BoxSurvivalMedical #SS220-delete-dupe-box
     - PillCanisterPsycho #SS220-Pills-Psychologist
     - RubberStampPsychologist
+
+- type: chameleonOutfit
+  id: PsychologistChameleonOutfit
+  job: Psychologist
+  equipment:
+    head: ClothingHeadHatBeretMedic
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    outerClothing: ClothingOuterCoatLab
+    neck: ClothingNeckStethoscope
+    belt: ClothingBeltMedical
+    gloves: ClothingHandsGlovesLatex

@@ -66,3 +66,11 @@
   storage:
     back:
     - Flash
+
+- type: chameleonOutfit
+  id: MagistrateChameleonOutfit
+  job: Magistrate
+  hasMindShield: true
+  equipment:
+    mask: ClothingMaskBreath
+    gloves: ClothingHandsGlovesColorWhite

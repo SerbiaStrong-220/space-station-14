@@ -11,6 +11,6 @@ ent-ClothingOuterApronBard = накидка барда
     .suffix = За время в игре
 ent-ClothingOuterScarletTyphoon = алый тайфун
     .desc = Знаете, мне как-то неловко представляться, но если вы настаиваете, то я мирный охотник в погоне за миражом по имени любовь.
-    .suffix = За взлом одеждомата
+    .suffix = За емаг одеждомата
 
 clothing-outer-radio-handheld = Рация

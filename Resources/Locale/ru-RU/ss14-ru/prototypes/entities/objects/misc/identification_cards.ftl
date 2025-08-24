@@ -10,8 +10,10 @@ ent-ResearchAssistantIDCard = ID карта научного ассистент�
     .desc = { ent-PassengerIDCard.desc }
 ent-SecurityCadetIDCard = ID карта кадета СБ
     .desc = { ent-PassengerIDCard.desc }
-ent-ServiceWorkerIDCard = ID карта обслуживающего персонала
-    .desc = { ent-PassengerIDCard.desc }
+#ss220 fix naming in cards start
+#ent-ServiceWorkerIDCard = ID карта обслуживающего персонала
+#   .desc = { ent-PassengerIDCard.desc }
+#ss220 fix naming in cards end
 ent-CaptainIDCard = ID карта капитана
     .desc = { ent-IDCardStandard.desc }
 ent-SecurityIDCard = ID карта службы безопасности

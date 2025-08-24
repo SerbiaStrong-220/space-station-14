@@ -13,12 +13,13 @@
     tags:
     - SuitEVA
     - MonkeyWearable
+    - CorgiWearable
     - WhitelistChameleon
 
 #Syndicate EVA
 - type: entity
-  parent: [ ClothingOuterEVASuitBase]
-  id: ClothingOuterHardsuitSyndicate # TODO: rename to ClothingOuterEVASuitSyndicate
+  parent: [ ClothingOuterEVASuitBase, BaseSyndicateContraband ]
+  id: ClothingOuterEVASuitSyndicate
   name: syndicate EVA suit
   description: "Has a tag on the back that reads: 'Totally not property of an enemy corporation, honest!'"
   components:
@@ -39,6 +40,8 @@
       Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
+  - type: StaticPrice
+    price: 1000 # Helmet is 500
 
 #Emergency EVA
 - type: entity
@@ -74,6 +77,12 @@
           tags:
           - Radio
   #ss220 handheld radio on outer clothing end
+  - type: Tag
+    tags:
+    - CorgiWearable
+    - ScurretWearable
+    - MonkeyWearable
+    - WhitelistChameleon
 
 #Prisoner EVA
 - type: entity
@@ -116,12 +125,12 @@
   description: A void suit made for paramedics.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/paramed.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/paramed.rsi #ss220 paramedic softsuit resprite
     layers:
     - state: icon
   - type: Appearance
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/paramed.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/paramed.rsi #ss220 paramedic softsuit resprite
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -184,3 +193,7 @@
           tags:
           - Radio
   #ss220 handheld radio on outer clothing end
+  - type: Tag
+    tags:
+    - CorgiWearable
+    - WhitelistChameleon

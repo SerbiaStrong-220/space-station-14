@@ -36,3 +36,7 @@
           components:
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
+          # SS220 Added WeaponRechargerWhitelist tag for charging support begin
+          tags:
+          - WeaponRechargerWhitelist
+          # SS220 Added WeaponRechargerWhitelist tag for charging support end

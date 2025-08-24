@@ -11,7 +11,6 @@ using Content.Client.Gameplay;
 using Content.Client.Ghost;
 using Content.Client.Mind;
 using Content.Client.Roles;
-using Content.Client.SS220.UserInterface.System.Chat.Controls;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Screens;
 using Content.Client.UserInterface.Systems.Chat.Controls;
@@ -24,8 +23,9 @@ using Content.Shared.Damage.ForceSay;
 using Content.Shared.Decals;
 using Content.Shared.Input;
 using Content.Shared.Radio;
-using Content.Shared.SS220.Telepathy;
 using Content.Shared.Roles.RoleCodeword;
+using Content.Shared.SS220.Telepathy;
+using Content.Shared.SS220.UpdateChannels;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -44,9 +44,10 @@ using Robust.Shared.Replays;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
+
 namespace Content.Client.UserInterface.Systems.Chat;
 
-public sealed class ChatUIController : UIController
+public sealed partial class ChatUIController : UIController
 {
     [Dependency] private readonly IClientAdminManager _admin = default!;
     [Dependency] private readonly IChatManager _manager = default!;
@@ -69,8 +70,7 @@ public sealed class ChatUIController : UIController
     [UISystemDependency] private readonly MindSystem? _mindSystem = default!;
     [UISystemDependency] private readonly RoleCodewordSystem? _roleCodewordSystem = default!;
 
-    [ValidatePrototypeId<ColorPalettePrototype>]
-    private const string ChatNamePalette = "ChatNames";
+    private static readonly ProtoId<ColorPalettePrototype> ChatNamePalette = "ChatNames";
     private string[] _chatNameColors = default!;
     private bool _chatNameColorsEnabled;
 
@@ -189,6 +189,9 @@ public sealed class ChatUIController : UIController
         _net.RegisterNetMessage<MsgChatMessage>(OnChatMessage);
         _net.RegisterNetMessage<MsgDeleteChatMessagesBy>(OnDeleteChatMessagesBy);
         SubscribeNetworkEvent<DamageForceSayEvent>(OnDamageForceSay);
+        //ss220 fix telepathy channel start
+        SubscribeNetworkEvent<UpdateChannelEvent>(OnUpdateChannel);
+        //ss220 fix telepathy channel end
         _config.OnValueChanged(CCVars.ChatEnableColorName, (value) => { _chatNameColorsEnabled = value; });
         _chatNameColorsEnabled = _config.GetCVar(CCVars.ChatEnableColorName);
 
@@ -236,7 +239,7 @@ public sealed class ChatUIController : UIController
         gameplayStateLoad.OnScreenLoad += OnScreenLoad;
         gameplayStateLoad.OnScreenUnload += OnScreenUnload;
 
-        var nameColors = _prototypeManager.Index<ColorPalettePrototype>(ChatNamePalette).Colors.Values.ToArray();
+        var nameColors = _prototypeManager.Index(ChatNamePalette).Colors.Values.ToArray();
         _chatNameColors = new string[nameColors.Length];
         for (var i = 0; i < nameColors.Length; i++)
         {
@@ -245,6 +248,7 @@ public sealed class ChatUIController : UIController
 
         _config.OnValueChanged(CCVars.ChatWindowOpacity, OnChatWindowOpacityChanged);
 
+        InitializeHighlights();
     }
 
     public void OnScreenLoad()
@@ -431,6 +435,8 @@ public sealed class ChatUIController : UIController
     private void OnAttachedChanged(EntityUid uid)
     {
         UpdateChannelPermissions();
+
+        UpdateAutoFillHighlights();
     }
 
     private void AddSpeechBubble(ChatMessage msg, SpeechBubble.SpeechType speechType)
@@ -537,7 +543,6 @@ public sealed class ChatUIController : UIController
             FilterableChannels |= ChatChannel.Radio;
             FilterableChannels |= ChatChannel.Emotes;
             FilterableChannels |= ChatChannel.Notifications;
-            FilterableChannels |= ChatChannel.Telepathy; //ss220 telepathy
 
             // Can only send local / radio / emote when attached to a non-ghost entity.
             // TODO: this logic is iffy (checking if controlling something that's NOT a ghost), is there a better way to check this?
@@ -547,7 +552,6 @@ public sealed class ChatUIController : UIController
                 CanSendChannels |= ChatSelectChannel.Whisper;
                 CanSendChannels |= ChatSelectChannel.Radio;
                 CanSendChannels |= ChatSelectChannel.Emotes;
-                CanSendChannels |= ChatSelectChannel.Telepathy; //ss220 telepathy
             }
         }
 
@@ -558,14 +562,25 @@ public sealed class ChatUIController : UIController
             CanSendChannels |= ChatSelectChannel.Dead;
         }
 
-        // only admins can see / filter asay
-        if (_admin.HasFlag(AdminFlags.Admin) || _admin.HasFlag(AdminFlags.Adminchat))
+        //ss220 add hidden channel for telepathy for normal player start
+        var hasTelepathy = _player.LocalSession?.AttachedEntity is {} entityUid
+                           && EntityManager.HasComponent<TelepathyComponent>(entityUid);
+
+        var isAdmin = _admin.HasFlag(AdminFlags.Admin) || _admin.HasFlag(AdminFlags.Adminchat);
+
+        if (hasTelepathy || isAdmin)
         {
-            FilterableChannels |= ChatChannel.Admin;
-            FilterableChannels |= ChatChannel.AdminAlert;
-            FilterableChannels |= ChatChannel.AdminChat;
+            FilterableChannels |= ChatChannel.Telepathy;
+            CanSendChannels |= ChatSelectChannel.Telepathy;
+        }
+
+        // only admins can see / filter asay
+        if (isAdmin)
+        {
+            FilterableChannels |= ChatChannel.Admin | ChatChannel.AdminAlert | ChatChannel.AdminChat;
             CanSendChannels |= ChatSelectChannel.Admin;
         }
+        //ss220 add hidden channel for telepathy for normal player end
 
         SelectableChannels = CanSendChannels;
 
@@ -810,6 +825,13 @@ public sealed class ChatUIController : UIController
         chatBox.ChatInput.Input.ForceSubmitText();
     }
 
+    //ss220 fix telepathy channel start
+    private void OnUpdateChannel(UpdateChannelEvent ev, EntitySessionEventArgs _)
+    {
+        UpdateChannelPermissions();
+    }
+    //ss220 fix telepathy channel end
+
     private void OnChatMessage(MsgChatMessage message)
     {
         var msg = message.Message;
@@ -830,6 +852,12 @@ public sealed class ChatUIController : UIController
             var grammar = _ent.GetComponentOrNull<GrammarComponent>(_ent.GetEntity(msg.SenderEntity));
             if (grammar != null && grammar.ProperNoun == true)
                 msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
+        }
+
+        // Color any words chosen by the client.
+        foreach (var highlight in _highlights)
+        {
+            msg.WrappedMessage = SharedChatSystem.InjectTagAroundString(msg, highlight, "color", _highlightsColor);
         }
 
         // Color any codewords for minds that have roles that use them
@@ -937,12 +965,10 @@ public sealed class ChatUIController : UIController
         _typingIndicator?.ClientChangedChatText();
     }
 
-    // Corvax-TypingIndicator-Start
     public void NotifyChatFocus(bool isFocused)
     {
         _typingIndicator?.ClientChangedChatFocus(isFocused);
     }
-    // Corvax-TypingIndicator-End
 
     public void Repopulate()
     {

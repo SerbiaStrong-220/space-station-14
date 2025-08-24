@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server.PDA.Ringer;
 using Content.Server.Store.Systems;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.FixedPoint;
@@ -21,11 +22,13 @@ public sealed class UplinkSystem : EntitySystem
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly SharedSubdermalImplantSystem _subdermalImplant = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    //ss220 adduplink command generate code and open uplink start
+    [Dependency] private readonly RingerSystem _ringer = default!;
+    //ss220 adduplink command generate code and open uplink end
 
-    [ValidatePrototypeId<CurrencyPrototype>]
-    public const string TelecrystalCurrencyPrototype = "Telecrystal";
-    private const string FallbackUplinkImplant = "UplinkImplant";
-    private const string FallbackUplinkCatalog = "UplinkUplinkImplanter";
+    public static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
+    private static readonly EntProtoId FallbackUplinkImplant = "UplinkImplant";
+    private static readonly ProtoId<ListingPrototype> FallbackUplinkCatalog = "UplinkUplinkImplanter";
 
     /// <summary>
     /// Adds an uplink to the target
@@ -89,8 +92,6 @@ public sealed class UplinkSystem : EntitySystem
     /// </summary>
     private bool ImplantUplink(EntityUid user, FixedPoint2 balance, bool giveDiscounts)
     {
-        var implantProto = new string(FallbackUplinkImplant);
-
         if (!_proto.TryIndex<ListingPrototype>(FallbackUplinkCatalog, out var catalog))
             return false;
 
@@ -102,7 +103,7 @@ public sealed class UplinkSystem : EntitySystem
         else
             balance = balance - cost;
 
-        var implant = _subdermalImplant.AddImplant(user, implantProto);
+        var implant = _subdermalImplant.AddImplant(user, FallbackUplinkImplant);
 
         if (!HasComp<StoreComponent>(implant))
             return false;
@@ -139,4 +140,15 @@ public sealed class UplinkSystem : EntitySystem
 
         return null;
     }
+
+    //ss220 adduplink command generate code and open uplink start
+    public void GenerateCodeAndOpenUplink(EntityUid uplinkEntity)
+    {
+        var ev = new GenerateUplinkCodeEvent();
+        RaiseLocalEvent(uplinkEntity, ref ev);
+
+        if (ev.Code != null)
+            _ringer.TryToggleUplink(uplinkEntity, ev.Code);
+    }
+    //ss220 adduplink command generate code and open uplink end
 }

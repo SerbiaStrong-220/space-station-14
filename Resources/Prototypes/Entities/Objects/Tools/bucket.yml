@@ -1,15 +1,16 @@
 - type: entity
-  parent: BaseItem
+  parent: DrinkBase
   id: Bucket
   name: bucket
   description: It's a boring old bucket.
   components:
-  - type: Drink
-    solution: bucket
-    ignoreEmpty: true
   - type: Clickable
+  - type: Edible
+    edible: Drink
+    solution: bucket
+    destroyOnEmpty: false
   - type: Sprite
-    sprite: Objects/Tools/bucket.rsi
+    sprite: SS220/Objects/Tools/bucket.rsi #SS220 Resprite Buckets
     layers:
     - state: icon
     - map: ["enum.SolutionContainerLayers.Fill"]
@@ -18,7 +19,7 @@
   - type: Item
     size: Normal
   - type: Clothing
-    sprite: Objects/Tools/bucket.rsi
+    sprite: SS220/Objects/Tools/bucket.rsi #SS220 Resprite Buckets
     slots:
     - HEAD
     quickEquip: false
@@ -57,7 +58,7 @@
     solution: bucket
   - type: Appearance
   - type: SolutionContainerVisuals
-    maxFillLevels: 3
+    maxFillLevels: 4 #SS220 Resprite Buckets
     fillBaseName: fill-
   - type: ExaminableSolution
     solution: bucket
@@ -68,3 +69,23 @@
     materialComposition:
       Plastic: 50
   - type: DnaSubstanceTrace
+  # SS220 Resprite Buckets Begin
+  - type: Blindfold
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  # SS220 Resprite Buckets End
+
+- type: entity
+  parent: Bucket
+  id: BorgBucket
+  name: internal tank
+  description: The internal reservoir of a custodial cyborg, capable of holding a entire mop bucket worth of water.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      bucket:
+        maxVol: 500

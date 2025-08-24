@@ -1,6 +1,7 @@
 // EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.SS220.IgnoreLightVision;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -15,7 +16,7 @@ public sealed class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
-    private EntProtoId _actionProto = "ActionToggleKeenHearing";
+    private readonly EntProtoId _actionProto = "ActionToggleKeenHearing";
 
     public override void Initialize()
     {
@@ -32,13 +33,15 @@ public sealed class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<
 
         while (entityQuery.MoveNext(out var uid, out var comp))
         {
-            if (_gameTiming.CurTime > comp.ToggleTime)
-            {
-                Toggle((uid, comp));
-                comp.ToggleTime = null;
-            }
-        }
+            if (comp.ToggleTime is null)
+                continue;
 
+            if (_gameTiming.CurTime <= comp.ToggleTime)
+                continue;
+
+            Toggle((uid, comp));
+            comp.ToggleTime = null;
+        }
     }
 
     protected override void OnMapInit(Entity<KeenHearingComponent> ent, ref MapInitEvent args)
@@ -47,6 +50,7 @@ public sealed class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<
         if (ent.Comp.AddAction)
             _actions.AddAction(ent.Owner, _actionProto);
     }
+
     protected override void OnComponentRemove(Entity<KeenHearingComponent> ent, ref ComponentRemove args)
     {
         base.OnComponentRemove(ent, ref args);
@@ -57,11 +61,16 @@ public sealed class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<
         List<EntityUid> actionsToDelete = [];
 
         foreach (var action in _actions.GetActions(ent.Owner))
-            if (action.Comp.BaseEvent is UseKeenHearingEvent)
-                actionsToDelete.Add(action.Id);
+        {
+            if (TryComp<InstantActionComponent>(action.Owner, out var instantAction)
+                && instantAction.Event is UseKeenHearingEvent)
+                actionsToDelete.Add(action.Owner);
+        }
 
         foreach (var action in actionsToDelete)
+        {
             _actions.RemoveAction(action);
+        }
     }
 
     private void OnKeenHearingAction(Entity<KeenHearingComponent> ent, ref UseKeenHearingEvent args)

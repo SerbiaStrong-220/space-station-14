@@ -11,8 +11,6 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.Markdown.Value;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Controls.BaseButton;
@@ -25,7 +23,6 @@ public sealed class TileSpawningUIController220 : UIController
     [Dependency] private readonly IPlacementManager _placement = default!;
     [Dependency] private readonly IResourceCache _resources = default!;
     [Dependency] private readonly ITileDefinitionManager _tiles = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private TileSpawnWindow? _window;
     private bool _init;

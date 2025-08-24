@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Server.Body.Components;
+
 using Content.Server.Body.Systems;
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Shared.Alert;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -17,7 +16,11 @@ using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Content.Shared.Projectiles;
 using Content.Server.Projectiles;
-
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.SS220.Temperature;
+using Content.Shared.Body.Systems;
+using Content.Shared.Body.Components;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 
@@ -34,6 +37,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly ProjectileSystem _projectile = default!;
+    [Dependency] private readonly PullingSystem _pullingSystem = default!;
 
     private const string AscensionReagent = "TheBloodOfYogg";
 
@@ -43,6 +47,14 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
 
         //actions
         SubscribeLocalEvent<MiGoComponent, MiGoEnslaveDoAfterEvent>(MiGoEnslaveOnDoAfter);
+
+        SubscribeLocalEvent<MiGoComponent, TemperatureChangeAttemptEvent>(OnTemperatureDamage);
+    }
+
+    private void OnTemperatureDamage(Entity<MiGoComponent> ent, ref TemperatureChangeAttemptEvent args)
+    {
+        if (!ent.Comp.IsPhysicalForm)
+            args.Cancel();
     }
 
     #region Astral
@@ -103,6 +115,9 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             if (TryComp<EmbeddedContainerComponent>(uid, out var embeddedContainer))
                 _projectile.DetachAllEmbedded((uid, embeddedContainer));
 
+            if (TryComp(uid, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
+                _pullingSystem.TryStopPull(puller.Pulling.Value, pullable);
+
             _appearance.SetData(uid, MiGoVisual.Astral, false);
             _appearance.RemoveData(uid, MiGoVisual.Base);
         }
@@ -123,7 +138,6 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         var speed = comp.IsPhysicalForm ? comp.MaterialMovementSpeed : comp.UnMaterialMovementSpeed;
         _speedModifier.ChangeBaseSpeed(uid, speed, speed, modifComp.Acceleration, modifComp);
     }
-    // Update loop
 
     #endregion
 
@@ -133,32 +147,36 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         if (args.Handled || args.Cancelled || args.Target == null)
             return;
 
+        args.Handled = true;
+
         var ev = new CultYoggEnslavedEvent(args.Target);
         RaiseLocalEvent(uid, ref ev, true);
 
         _statusEffectsSystem.TryRemoveStatusEffect(args.Target.Value, uid.Comp.RequiedEffect); //Remove Rave cause he already cultist
 
         // Remove ascension reagent
-        if (_body.TryGetBodyOrganEntityComps<StomachComponent>(args.Target.Value, out var stomachs))
+        if (!_body.TryGetBodyOrganEntityComps<StomachComponent>(args.Target.Value, out var stomachs))
+            return;
+
+        foreach (var stomach in stomachs)
         {
-            foreach (var stomach in stomachs)
-            {
-                if (stomach.Comp2.Body is not { } body)
-                    continue;
+            if (stomach.Comp2.Body is not { } body)
+                continue;
 
-                var reagentRoRemove = new ReagentQuantity(AscensionReagent, FixedPoint2.MaxValue);
-                _stomach.TryRemoveReagent(stomach, reagentRoRemove); // Removes from stomach
+            var reagentRoRemove = new ReagentQuantity(AscensionReagent, FixedPoint2.MaxValue);
+            _stomach.TryRemoveReagent(stomach, reagentRoRemove); // Removes from stomach
 
-                if (_solutionContainer.TryGetSolution(body, stomach.Comp1.BodySolutionName, out var bodySolutionEnt, out var bodySolution) &&
-                    bodySolution != null)
-                {
-                    bodySolution.RemoveReagent(reagentRoRemove); // Removes from body
-                    _solutionContainer.UpdateChemicals(bodySolutionEnt.Value);
-                }
-            }
+            if (!_solutionContainer.TryGetSolution(body, stomach.Comp1.BodySolutionName, out var bodySolutionEnt, out var bodySolution))
+                continue;
+
+            bodySolution.RemoveReagent(reagentRoRemove); // Removes from body
+            _solutionContainer.UpdateChemicals(bodySolutionEnt.Value);
         }
 
-        args.Handled = true;
+        if (IsEslavementSimplified)//Remove token if is was
+            return;
+
+        SetSimplifiedEslavement(false);
     }
     #endregion
 }

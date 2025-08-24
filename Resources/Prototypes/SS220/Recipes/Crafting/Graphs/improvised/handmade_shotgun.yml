@@ -10,17 +10,17 @@
         icon:
           sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi #ss220 engineering-update-atmos
           state: pipeStraight
-        name: pipe
+        name: construction-graph-tag-pipe
       - tag: RifleStock
         icon:
           sprite: Objects/Misc/rifle_stock.rsi
           state: icon
-        name: rifle stock
+        name: construction-graph-tag-modular-receiver
       - tag: WeaponFlareGun
         icon:
           sprite: Objects/Weapons/Guns/Shotguns/flaregun.rsi
           state: base
-        name: Flare Gun
+        name: construction-graph-tag-weapon-flare-gun
         doAfter: 25
   - node: HDpistol
     entity: WeaponShotgunHandmade

@@ -156,6 +156,7 @@
     sprite: /Textures/Interface/Misc/job_icons.rsi
     state: Unknown
   jobName: job-name-unknown
+  allowSelection: false # SS220-remove-job-prototype-GhostRole-from-crew-monitoring-console
 
 - type: jobIcon
   parent: JobIcon
@@ -204,6 +205,14 @@
     sprite: /Textures/Interface/Misc/job_icons.rsi
     state: Clown
   jobName: job-name-clown
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconCluwne
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: Cluwne
+  jobName: job-name-cluwne
 
 - type: jobIcon
   parent: JobIcon

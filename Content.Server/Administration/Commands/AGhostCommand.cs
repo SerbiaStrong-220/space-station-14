@@ -138,7 +138,8 @@ public sealed class AGhostCommand : LocalizedCommands
         }
 
         var comp = _entities.GetComponent<GhostComponent>(ghost);
-        ghostSystem.SetCanReturnToBody(comp, canReturn);
+
+        ghostSystem.SetCanReturnToBody((ghost, comp), canReturn);
 
         //SS220-ghost-hats begin
         var actions = _entities.System<SharedActionsSystem>();
@@ -159,10 +160,11 @@ public sealed class AGhostCommand : LocalizedCommands
             return _entities.SpawnEntity(GameTicker.AdminObserverPrototypeName, coordinates);
         }
 
+
         //check if current player is aghost
         var playerAttachedEntity = player.AttachedEntity;
         if (playerAttachedEntity is { Valid: true } playerEntity &&
-            _entities.GetComponent<MetaDataComponent>(playerEntity).EntityPrototype?.ID == GameTicker.AdminObserverPrototypeName)
+            _entities.GetComponent<MetaDataComponent>(playerEntity).EntityPrototype?.ID == GameTicker.AdminObserverPrototypeName.Id)
         {
             EmptyHands(playerAttachedEntity);
             return _entities.SpawnEntity(GameTicker.ObserverPrototypeName, coordinates);
@@ -177,8 +179,7 @@ public sealed class AGhostCommand : LocalizedCommands
             return;
         var handsSystem = _entities.System<HandsSystem>();
         var handsComponent = _entities.GetComponent<HandsComponent>(playerAttachedEntity.Value);
-        handsSystem.TryDrop(playerAttachedEntity.Value, checkActionBlocker: false, doDropInteraction: false,
-            handsComp: handsComponent);
+        handsSystem.TryDrop((playerAttachedEntity.Value, handsComponent), checkActionBlocker: false, doDropInteraction: false);
     }
 
     //SS220 admin action log start

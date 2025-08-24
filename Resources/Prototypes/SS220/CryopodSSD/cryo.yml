@@ -19,9 +19,10 @@
 
 - type: entity
   id: ActionCryoGhost
-  name: action-name-cryo-ghost
-  description: action-desc-cryo-ghost
+  name: cryo ghost
+  description: desc cryo ghost
   components:
-    - type: InstantAction
+    - type: Action
       checkCanInteract: false
+    - type: InstantAction
       event: !type:CryopodGhostActionEvent

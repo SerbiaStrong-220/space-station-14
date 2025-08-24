@@ -31,6 +31,7 @@
     whitelist:
       tags:
       - Sheet
+      - RawMaterial
       - Ingot
   # SS220 Add access check for material eject begin
   - type: AccessReader

@@ -14,9 +14,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Network;
 using Robust.Server.Player;
-using Content.Server.SS220.Language;
 using Content.Shared.SS220.Language.Systems;
-
 
 namespace Content.Server.SS220.TTS;
 
@@ -32,7 +30,6 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly IServerNetManager _netManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -52,6 +49,7 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
         SubscribeLocalEvent<RadioSpokeEvent>(OnRadioReceiveEvent);
         SubscribeLocalEvent<AnnouncementSpokeEvent>(OnAnnouncementSpoke);
+        SubscribeLocalEvent<TelepathySpokeEvent>(OnTelepathySpoke);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeLocalEvent<TTSComponent, MapInitEvent>(OnInit);
 
@@ -87,11 +85,20 @@ public sealed partial class TTSSystem : EntitySystem
         }
 
         if (!GetVoicePrototype(voiceId, out var protoVoice))
-        {
             return;
+
+        var receivers = new List<RadioEventReceiver>();
+
+        foreach (var receiver in args.Receivers)
+        {
+            var ev = new RadioTtsSendAttemptEvent(args.Channel);
+            RaiseLocalEvent(receiver.Actor, ev);
+
+            if (!ev.Cancelled)
+                receivers.Add(receiver);
         }
 
-        HandleRadio(args.Receivers, args.Message, protoVoice.Speaker);
+        HandleRadio(receivers.ToArray(), args.Message, protoVoice.Speaker);
     }
 
     private bool GetVoicePrototype(string voiceId, [NotNullWhen(true)] out TTSVoicePrototype? voicePrototype)
@@ -463,6 +470,55 @@ public sealed partial class TTSSystem : EntitySystem
                 Data = audioData,
                 SourceUid = GetNetEntity(receiver.PlayTarget.EntityId),
                 Kind = TtsKind.Radio
+            }, session.Channel);
+        }
+    }
+
+    private async void OnTelepathySpoke(TelepathySpokeEvent args)
+    {
+        if (args.Receivers.Length == 0)
+            return;
+
+        if (!TryComp(args.Source, out TTSComponent? senderComponent))
+            return;
+
+        var voiceId = senderComponent.VoicePrototypeId;
+        if (voiceId == null)
+            return;
+
+        if (TryGetVoiceMaskUid(args.Source, out var maskUid))
+        {
+            var voiceEv = new TransformSpeakerVoiceEvent(maskUid.Value, voiceId);
+            RaiseLocalEvent(maskUid.Value, voiceEv);
+            voiceId = voiceEv.VoiceId;
+        }
+
+        if (!GetVoicePrototype(voiceId, out var protoVoice))
+        {
+            return;
+        }
+
+        using var soundData = await GenerateTts(args.Message, protoVoice.Speaker, TtsKind.Telepathy);
+        if (soundData is null)
+            return;
+
+        foreach (var receiver in args.Receivers)
+        {
+            if (!_playerManager.TryGetSessionByEntity(receiver, out var session)
+                || !soundData.TryGetValue(out var audioData))
+                continue;
+
+            var ev = new TelepathyTtsSendAttemptEvent(receiver, args.Channel);
+            RaiseLocalEvent(receiver, ev);
+
+            if (ev.Cancelled)
+                continue;
+
+            _netManager.ServerSendMessage(new MsgPlayTts
+            {
+                Data = audioData,
+                SourceUid = GetNetEntity(receiver),
+                Kind = TtsKind.Telepathy
             }, session.Channel);
         }
     }
