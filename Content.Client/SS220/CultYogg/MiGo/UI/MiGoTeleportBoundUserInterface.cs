@@ -2,51 +2,63 @@
 
 using Content.Client.UserInterface.Controls;
 using Robust.Client.UserInterface;
+using Content.Shared.SS220.CultYogg.MiGo;
 
-namespace Content.Client.SS220.CultYogg.MiGo.UI
+
+namespace Content.Client.SS220.CultYogg.MiGo.UI;
+
+public sealed class MiGoTeleportBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    public sealed class MiGoTeleportBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+    [ViewVariables]
+    private MiGoTeleportMenu? _menu;
+    private readonly EntityUid _owner = owner;
+
+    protected override void Open()
     {
-        [ViewVariables]
-        private MiGoTeleportMenu? _menu;
+        base.Open();
 
-        protected override void Open()
-        {
-            base.Open();
+        _menu = this.CreateWindowCenteredLeft<MiGoTeleportMenu>();
+        _menu.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;//ToDo_SS220 change this
+        _menu.OnItemSelected += OnItemSelected;
+        Refresh();
+    }
 
-            _menu = this.CreateWindowCenteredLeft<MiGoTeleportMenu>();
-            _menu.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;//ToDo_SS220 change this
-            _menu.OnItemSelected += OnItemSelected;
-            Refresh();
-        }
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        base.UpdateState(state);
 
-        public void Refresh()
-        {
-            /*
-            var enabled = EntMan.TryGetComponent(Owner, out VendingMachineComponent? bendy) && !bendy.Ejecting;
+        if (state is not MiGoTeleportBuiState msg)
+            return;
 
-            var system = EntMan.System<VendingMachineSystem>();
-            _cachedInventory = system.GetAllInventory(Owner);
+        _menu?.Update(_owner, msg);
+    }
 
-            _menu?.Populate(_cachedInventory, enabled);
-            */
-        }
+    public void Refresh()
+    {
+        /*
+        var enabled = EntMan.TryGetComponent(Owner, out VendingMachineComponent? bendy) && !bendy.Ejecting;
 
-        private void OnItemSelected(GUIBoundKeyEventArgs args, ListData data)
-        {
-        }
+        var system = EntMan.System<VendingMachineSystem>();
+        _cachedInventory = system.GetAllInventory(Owner);
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            if (!disposing)
-                return;
+        _menu?.Populate(_cachedInventory, enabled);
+        */
+    }
 
-            if (_menu == null)
-                return;
+    private void OnItemSelected(GUIBoundKeyEventArgs args, ListData data)
+    {
+    }
 
-            _menu.OnItemSelected -= OnItemSelected;
-            _menu.OnClose -= Close;
-        }
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (!disposing)
+            return;
+
+        if (_menu == null)
+            return;
+
+        _menu.OnItemSelected -= OnItemSelected;
+        _menu.OnClose -= Close;
     }
 }

@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
@@ -20,12 +21,14 @@ using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
 using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Buildings;
+using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.Sacraficials;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Verbs;
 using Content.Shared.Zombies;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
@@ -33,7 +36,6 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Linq;
-using System.Numerics;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
@@ -58,6 +60,7 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
 
     /// <summary>
     /// Allows you to resolve dead-end situations where there are no cultists left, allowing you to recruit without feeding the mushroom
@@ -117,12 +120,12 @@ public abstract class SharedMiGoSystem : EntitySystem
                     Seeds = _proto.GetInstances<CultYoggSeedsPrototype>().Values.ToList(),
                 });
                 return;
-                //case "Teleport":
-                //    _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoPlantBuiState()//ToDo_SS220
-                //    {
-                //        Seeds = _proto.GetInstances<CultYoggSeedsPrototype>().Values.ToList(),
-                //    });
-                //    return;
+            case "Teleport":
+                _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoTeleportBuiState()
+                {
+                    Warps = GetTeleportsPoints(),
+                });
+                return;
         }
     }
 
@@ -527,8 +530,23 @@ public abstract class SharedMiGoSystem : EntitySystem
     #region Teleport
     private void MiGoTeleportAction(Entity<MiGoComponent> ent, ref MiGoTeleportActionEvent args)
     {
+        if (args.Handled || !TryComp<ActorComponent>(ent, out var actor))
+            return;
 
-        return;
+        _miGoErectSystem.OpenUI(ent, actor);
+    }
+
+    private List<EntityUid> GetTeleportsPoints()
+    {
+        List<EntityUid> warps = [];
+
+        var queryMiGo = EntityQueryEnumerator<CultYoggComponent>();
+
+        while (queryMiGo.MoveNext(out var ent, out _))
+        {
+            warps.Add(ent);
+        }
+        return warps;
     }
 
     private void WarpTo(EntityUid uid, EntityUid target)

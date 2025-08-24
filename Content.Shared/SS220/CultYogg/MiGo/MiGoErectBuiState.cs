@@ -14,6 +14,12 @@ public sealed class MiGoErectBuiState : BoundUserInterfaceState
 }
 
 [Serializable, NetSerializable]
+public sealed class MiGoTeleportBuiState : BoundUserInterfaceState
+{
+    public List<EntityUid> Warps = [];
+}
+
+[Serializable, NetSerializable]
 public enum MiGoUiKey : byte
 {
     Erect,
