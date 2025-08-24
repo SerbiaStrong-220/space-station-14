@@ -83,7 +83,7 @@
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: heal}
   - type: TargetAction
   - type: EntityTargetAction
-    event: !type:MiGoHealEvent
+    event: !type:MiGoHealActionEvent
       heal:
         types:
           Slash: -6
@@ -115,7 +115,7 @@
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: migoastral}
   - type: InstantAction
-    event: !type:MiGoAstralEvent
+    event: !type:MiGoAstralActionEvent
 
 - type: entity
   id: ActionMiGoErect
@@ -128,7 +128,7 @@
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: build}
   - type: InstantAction
-    event: !type:MiGoErectEvent
+    event: !type:MiGoErectActionEvent
 
 - type: entity
   id: ActionMiGoSacrifice
@@ -141,7 +141,7 @@
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "summon"}
   - type: InstantAction
-    event: !type:MiGoSacrificeEvent
+    event: !type:MiGoSacrificeActionEvent
 
 - type: entity
   id: ActionMiGoTeleport
@@ -151,6 +151,7 @@
   components:
   - type: Action
     useDelay: 600
-    event: !type:MiGoTeleportEvent
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "summon"}
+  - type: InstantAction
+    event: !type:MiGoTeleportActionEvent

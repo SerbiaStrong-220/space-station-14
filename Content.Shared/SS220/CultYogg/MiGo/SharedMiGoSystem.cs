@@ -1,36 +1,39 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
+using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mind;
+using Content.Shared.Mindshield.Components;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
+using Content.Shared.Revolutionary.Components;
+using Content.Shared.Roles.Components;
 using Content.Shared.SS220.CultYogg.Altar;
+using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.Sacraficials;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.Verbs;
+using Content.Shared.Zombies;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Linq;
-using Content.Shared.SS220.CultYogg.Buildings;
-using Robust.Shared.Prototypes;
-using Content.Shared.Mindshield.Components;
-using Content.Shared.Zombies;
-using Content.Shared.Revolutionary.Components;
-using Content.Shared.Humanoid;
-using Content.Shared.Mind;
-using Content.Shared.Verbs;
-using Content.Shared.Mobs.Components;
-using Robust.Shared.Audio;
-using Content.Shared.Movement.Pulling.Events;
-using Content.Shared.Roles.Components;
+using System.Numerics;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
@@ -53,6 +56,8 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
     /// <summary>
     /// Allows you to resolve dead-end situations where there are no cultists left, allowing you to recruit without feeding the mushroom
@@ -66,10 +71,11 @@ public abstract class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<MiGoComponent, ComponentStartup>(OnCompInit);
 
         // actions
-        SubscribeLocalEvent<MiGoComponent, MiGoHealEvent>(MiGoHeal);
-        SubscribeLocalEvent<MiGoComponent, MiGoErectEvent>(MiGoErect);
-        SubscribeLocalEvent<MiGoComponent, MiGoSacrificeEvent>(MiGoSacrifice);
-        SubscribeLocalEvent<MiGoComponent, MiGoAstralEvent>(MiGoAstral);
+        SubscribeLocalEvent<MiGoComponent, MiGoHealActionEvent>(MiGoHealAction);
+        SubscribeLocalEvent<MiGoComponent, MiGoErectActionEvent>(MiGoErectAction);
+        SubscribeLocalEvent<MiGoComponent, MiGoSacrificeActionEvent>(MiGoSacrificeAction);
+        SubscribeLocalEvent<MiGoComponent, MiGoAstralActionEvent>(MiGoAstralAction);
+        SubscribeLocalEvent<MiGoComponent, MiGoTeleportActionEvent>(MiGoTeleportAction);
 
         //astral DoAfterEvents
         SubscribeLocalEvent<MiGoComponent, AfterMaterialize>(OnAfterMaterialize);
@@ -92,7 +98,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         _actions.AddAction(uid, ref uid.Comp.MiGoAstralActionEntity, uid.Comp.MiGoAstralAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoErectActionEntity, uid.Comp.MiGoErectAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoSacrificeActionEntity, uid.Comp.MiGoSacrificeAction);
-		_actions.AddAction(uid, ref uid.Comp.MiGoTeleportActionEntity, uid.Comp.MiGoTeleportAction);
+        _actions.AddAction(uid, ref uid.Comp.MiGoTeleportActionEntity, uid.Comp.MiGoTeleportAction);
     }
 
     private void OnBoundUIOpened(Entity<MiGoComponent> entity, ref BoundUIOpenedEvent args)
@@ -111,6 +117,12 @@ public abstract class SharedMiGoSystem : EntitySystem
                     Seeds = _proto.GetInstances<CultYoggSeedsPrototype>().Values.ToList(),
                 });
                 return;
+                //case "Teleport":
+                //    _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoPlantBuiState()//ToDo_SS220
+                //    {
+                //        Seeds = _proto.GetInstances<CultYoggSeedsPrototype>().Values.ToList(),
+                //    });
+                //    return;
         }
     }
 
@@ -159,7 +171,7 @@ public abstract class SharedMiGoSystem : EntitySystem
     }
 
     #region Heal
-    private void MiGoHeal(Entity<MiGoComponent> uid, ref MiGoHealEvent args)
+    private void MiGoHealAction(Entity<MiGoComponent> uid, ref MiGoHealActionEvent args)
     {
         if (args.Handled)
             return;
@@ -196,7 +208,7 @@ public abstract class SharedMiGoSystem : EntitySystem
     #endregion
 
     #region Erect
-    private void MiGoErect(Entity<MiGoComponent> entity, ref MiGoErectEvent args)
+    private void MiGoErectAction(Entity<MiGoComponent> entity, ref MiGoErectActionEvent args)
     {
         //will wait when sw will update ui parts to copy paste, cause rn it has an errors
         if (args.Handled || !TryComp<ActorComponent>(entity, out var actor))
@@ -210,7 +222,7 @@ public abstract class SharedMiGoSystem : EntitySystem
     #endregion
 
     #region MiGoSacrifice
-    private void MiGoSacrifice(Entity<MiGoComponent> uid, ref MiGoSacrificeEvent args)
+    private void MiGoSacrificeAction(Entity<MiGoComponent> uid, ref MiGoSacrificeActionEvent args)
     {
         if (!uid.Comp.IsPhysicalForm)
         {
@@ -307,7 +319,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             DirtyEntity(uid);
         }
     }
-    private void MiGoAstral(Entity<MiGoComponent> uid, ref MiGoAstralEvent args)
+    private void MiGoAstralAction(Entity<MiGoComponent> uid, ref MiGoAstralActionEvent args)
     {
         if (!uid.Comp.IsPhysicalForm)
         {
@@ -509,6 +521,22 @@ public abstract class SharedMiGoSystem : EntitySystem
     public void SetSimplifiedEslavement(bool newVaule)
     {
         IsEslavementSimplified = newVaule;
+    }
+    #endregion
+
+    #region Teleport
+    private void MiGoTeleportAction(Entity<MiGoComponent> ent, ref MiGoTeleportActionEvent args)
+    {
+
+        return;
+    }
+
+    private void WarpTo(EntityUid uid, EntityUid target)
+    {
+        _adminLogger.Add(LogType.Teleport, $"MiGo {ToPrettyString(uid)} teleported to {ToPrettyString(target)}");
+
+        var xform = Transform(uid);
+        _transformSystem.SetCoordinates(uid, xform, Transform(target).Coordinates);
     }
     #endregion
 }
