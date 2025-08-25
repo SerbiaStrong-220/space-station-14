@@ -1,298 +1,45 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
-using Content.Server.Administration.Systems;
-using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
-using Content.Server.Fluids.EntitySystems;
-using Content.Server.Hands.Systems;
-using Content.Server.Popups;
-using Content.Server.SS220.DieOfFate;
 using Content.Server.Storage.Components;
-using Content.Server.Stunnable;
 using Content.Shared.Anomaly.Components;
 using Content.Shared.Cargo.Prototypes;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Dataset;
 using Content.Shared.Doors.Components;
-using Content.Shared.Doors.Systems;
 using Content.Shared.EntityEffects;
 using Content.Shared.EntityEffects.Effects;
 using Content.Shared.EntityEffects.Effects.StatusEffects;
-using Content.Shared.Examine;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.FixedPoint;
-using Content.Shared.Hands;
 using Content.Shared.Humanoid;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
-using Content.Shared.Mind;
-using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
-using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Pinpointer;
 using Content.Shared.Prototypes;
-using Content.Shared.Roles.Jobs;
 using Content.Shared.SS220.EntityBlockDamage;
 using Content.Shared.SS220.EntityEffects;
 using Content.Shared.SS220.HereticAbilities;
-using Content.Shared.SS220.Tarot;
-using Content.Shared.StatusEffectNew;
-using Content.Shared.Throwing;
 using Content.Shared.Traits.Assorted;
-using Content.Shared.Trigger.Systems;
 using Content.Shared.VendingMachines;
 using Content.Shared.Weapons.Ranged.Components;
-using Robust.Server.GameObjects;
-using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 
-namespace Content.Server.SS220.Tarot;
+namespace Content.Server.SS220.Tarot.TarotCard;
 
-public sealed class TarotCardSystem : EntitySystem
+/// <summary>
+/// Contains only actions for Tarot Cards
+/// </summary>
+public sealed partial class TarotCardSystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly SharedDoorSystem _door = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly ScramOnTriggerSystem _scramOnTrigger = default!;
-    [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
-    [Dependency] private readonly PhysicsSystem _physics = default!;
-    [Dependency] private readonly SmokeSystem _smoke = default!;
-    [Dependency] private readonly DieOfFateSystem _dieOfFate = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-
-    private const string TarotCardEffectPrototype = "EffectTarotCard";
-
-    private readonly List<string> _headsOfDepartment =
-    [
-        "HeadOfPersonnel",
-        "HeadOfSecurity",
-        "ChiefEngineer",
-        "ResearchDirector",
-        "ChiefMedicalOfficer",
-        "Quartermaster",
-        "Captain",
-    ];
-
-    private const string StatusEffectPacifism = "StatusEffectPacifism";
-
-    private const string Chemicals = "chemicals";
-    private const string Food = "food";
-
-    private const string ToxinGroup = "Toxin";
-    private const string BurnGroup = "Burn";
-    private const string BruteGroup = "Brute";
-
-    private const string SpaceCash2500 = "SpaceCash2500";
-    private const string MobCatCake = "MobCatCake";
-    private const string MobCorgiCerberus = "MobCorgiCerberus";
-    private const string ArrivalBeaconTag = "station-beacon-arrivals";
-    private const string BridgeBeaconTag = "station-beacon-bridge";
-    private const string Omnizine = "Omnizine";
-    private const string JusticeItems = "JusticeItems";
-    private const string RandomArcadeSpawner = "RandomArcadeSpawner";
-    private const string RandomMessageToChat = "RandomMessageToChat";
-    private const string RandomAnomalyInjectorsSpawn = "RandomAnomalyInjectorsSpawn";
-    private const string PinpointerProto = "PinpointerUplink";
-    private const string StrangePill = "StrangePill";
-    private const string ClusterBangFull = "ClusterBangFull";
-
-    public override void Initialize()
-    {
-        SubscribeLocalEvent<TarotCardComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<TarotCardComponent, GotEquippedHandEvent>(OnGotEquipped);
-        SubscribeLocalEvent<TarotCardComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<TarotCardComponent, UseInHandEvent>(OnUseInHand);
-        SubscribeLocalEvent<TarotCardComponent, ThrowDoHitEvent>(OnThrow);
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var query = EntityQueryEnumerator<TarotCardComponent>();
-
-        while (query.MoveNext(out var card, out var cardComponent))
-        {
-            if (cardComponent.EntityEffect != null && !Exists(cardComponent.EntityEffect.Value))
-                QueueDel(card);
-        }
-    }
-
-    private void OnMapInit(Entity<TarotCardComponent> ent, ref MapInitEvent args)
-    {
-        ent.Comp.IsReversed = _random.Next(2) == 0;
-        _appearance.SetData(ent.Owner, TarotVisuals.Reversed, ent.Comp.IsReversed);
-    }
-
-    private void OnGotEquipped(Entity<TarotCardComponent> ent, ref GotEquippedHandEvent args)
-    {
-        ent.Comp.CardOwner = args.User;
-    }
-
-    private void OnExamined(Entity<TarotCardComponent> ent, ref ExaminedEvent args)
-    {
-        args.PushMarkup(Loc.GetString(ent.Comp.IsReversed ? "tarot-card-is-reverse" : "tarot-card-is-not-reverse"));
-    }
-
-    private void OnUseInHand(Entity<TarotCardComponent> ent, ref UseInHandEvent args)
-    {
-        if (ent.Comp.IsUsed)
-        {
-            _popup.PopupEntity(Loc.GetString("tarot-cards-failed-already-used"), args.User, args.User);
-            return;
-        }
-
-        HandleCardEffect(ent, args.User);
-        args.Handled = true;
-    }
-
-    private void OnThrow(Entity<TarotCardComponent> ent, ref ThrowDoHitEvent args)
-    {
-        if (ent.Comp.IsUsed)
-            return;
-
-        if (!HasComp<HumanoidAppearanceComponent>(args.Target))
-            return;
-
-        HandleCardEffect(ent, args.Target);
-        args.Handled = true;
-    }
-
-    private void HandleCardEffect(Entity<TarotCardComponent> card, EntityUid target)
-    {
-        var entityEffect = SpawnAttachedTo(TarotCardEffectPrototype, Transform(target).Coordinates);
-        card.Comp.EntityEffect = entityEffect;
-
-        if (!_transform.IsParentOf(Transform(target), entityEffect))
-            _transform.SetParent(entityEffect, target);
-
-        switch (card.Comp.CardType)
-        {
-            // DONE
-            case TarotCardType.Fool:
-                ApplyReversedEffect(card, target, ClearInventory, TeleportToArrivals);
-                break;
-            // DONE
-            case TarotCardType.Magician:
-                ApplyReversedEffect(card, target, PushPlayers, OpenNearestAirlock);
-                break;
-            // DONE
-            case TarotCardType.HighPriestess:
-                ApplyReversedEffect(card, target, SpawnRandomAnomaly, Slowdown);
-                break;
-            // DONE
-            case TarotCardType.Empress:
-                ApplyReversedEffect(card, target, EnsurePacified, TransferSolution);
-                break;
-            // DONE
-            case TarotCardType.Emperor:
-                ApplyReversedEffect(card, target, TeleportToHoD, TeleportToBridge);
-                break;
-            // DONE
-            case TarotCardType.Hierophant:
-                ApplyReversedEffect(card, target, SpawnCerberus, SpawnCatCake);
-                break;
-            // DONE
-            case TarotCardType.Lovers:
-                ApplyReversedEffect(card, target, HurtTarget, HealTarget);
-                break;
-            // DONE
-            case TarotCardType.Chariot:
-                ApplyReversedEffect(card, target, SpeedUpEntity, ApplyChariotEffects);
-                break;
-            case TarotCardType.Strength:
-                ApplyReversedEffect(card, target, MassHallucinations, HealTarget); // TODO
-                break;
-            // DONE
-            case TarotCardType.Hermit:
-                ApplyReversedEffect(card, target, TransformGuns, TeleportToVend);
-                break;
-            // DONE
-            case TarotCardType.WheelOfFortune:
-                ApplyReversedEffect(card, target, RollDieOfFortune, CreateGambling);
-                break;
-            // DONE
-            case TarotCardType.Justice:
-                ApplyReversedEffect(card, target, SpawnRandomCrate, SpawnJusticeItems);
-                break;
-            // DONE
-            case TarotCardType.HangedMan:
-                ApplyReversedEffect(card, target, FixturesSet, TeleportToRandomTile);
-                break;
-            // DONE
-            case TarotCardType.Death:
-                ApplyReversedEffect(card, target, ModifyThreshold, HurtAnother);
-                break;
-            // DONE
-            case TarotCardType.Temperance:
-                ApplyReversedEffect(card, target, EatPills, HealLing);
-                break;
-            // DONE
-            case TarotCardType.Devil:
-                ApplyReversedEffect(card, target, ClusterFlashBang, HelpMessage);
-                break;
-            case TarotCardType.Tower:
-                break;
-            // DONE
-            case TarotCardType.Star:
-                ApplyReversedEffect(card, target, TeleportToUser, GivePinpointer);
-                break;
-            case TarotCardType.Moon:
-                ApplyReversedEffect(card, target, RandomTeleportation, RandomTeleportation); // TODO: reverse action
-                break;
-            // DONE
-            case TarotCardType.Sun:
-                ApplyReversedEffect(card, target, SmokeGrenade, Rejuvenate);
-                break;
-            case TarotCardType.Judgement:
-                break;
-            // DONE
-            case TarotCardType.World:
-                ApplyReversedEffect(card, target, BlockActionInRange, BlockAction);
-                break;
-        }
-
-        card.Comp.IsUsed = true;
-    }
-
-    private static void ApplyReversedEffect(TarotCardComponent card, EntityUid target, Action<EntityUid, EntityUid?> reversedAction, Action<EntityUid, EntityUid?> normalAction)
-    {
-        if (card.IsReversed)
-        {
-            reversedAction(target, card.CardOwner);
-        }
-        else
-        {
-            normalAction(target, card.CardOwner);
-        }
-    }
-
+    // fool card start
     private void TeleportToArrivals(EntityUid target, EntityUid? user)
     {
         var query = EntityQueryEnumerator<NavMapBeaconComponent>();
@@ -320,7 +67,9 @@ public sealed class TarotCardSystem : EntitySystem
             }
         }
     }
+    // fool card end
 
+    // magician card start
     private void OpenNearestAirlock(EntityUid target, EntityUid? user)
     {
         var doorList = _lookup.GetEntitiesInRange<AirlockComponent>(Transform(target).Coordinates, 3f).ToList();
@@ -348,7 +97,9 @@ public sealed class TarotCardSystem : EntitySystem
             _throwing.TryThrow(ent, direction * 2, 4f, target, 0);
         }
     }
+    // magician card end
 
+    // high-priestess card start
     private void Slowdown(EntityUid target, EntityUid? user)
     {
         var moveSpeedEffect = new MovespeedModifier
@@ -375,7 +126,9 @@ public sealed class TarotCardSystem : EntitySystem
         EntityManager.AddComponents(target, injectorComponent.InjectionComponents);
         QueueDel(randomEntityAnomaly);
     }
+    // high-priestess card end
 
+    // empress card start
     private void TransferSolution(EntityUid target, EntityUid? user)
     {
         if (!TryComp<SolutionContainerManagerComponent>(target, out _) ||
@@ -395,7 +148,9 @@ public sealed class TarotCardSystem : EntitySystem
             _statusEffects.TryAddStatusEffectDuration(entity, StatusEffectPacifism, out _, TimeSpan.FromSeconds(40f));
         }
     }
+    // empress card end
 
+    // emperor card start
     private void TeleportToBridge(EntityUid target, EntityUid? user)
     {
         var query = EntityQueryEnumerator<NavMapBeaconComponent>();
@@ -433,7 +188,9 @@ public sealed class TarotCardSystem : EntitySystem
         _random.Shuffle(heads);
         _transform.SetCoordinates(target, Transform(heads.First()).Coordinates);
     }
+    // emperor card end
 
+    // hierophant card start
     private void SpawnCatCake(EntityUid target, EntityUid? user)
     {
         var coords = Transform(target).Coordinates;
@@ -458,16 +215,18 @@ public sealed class TarotCardSystem : EntitySystem
 
         _npcFaction.MakeFriendlyEntities(cerberus, target);
     }
+    // hierophant card end
 
+    // lovers card start
     private void HealTarget(EntityUid target, EntityUid? user)
     {
         if (!TryComp<DamageableComponent>(target, out var damageableComponent))
             return;
 
-        var damageSpec = new DamageSpecifier(_proto.Index<DamageGroupPrototype>("Burn"), -40);
-        damageSpec += new DamageSpecifier(_proto.Index<DamageTypePrototype>("Blunt"), -20);
-        damageSpec += new DamageSpecifier(_proto.Index<DamageTypePrototype>("Asphyxiation"), -40);
-        damageSpec += new DamageSpecifier(_proto.Index<DamageTypePrototype>("Poison"), -40);
+        var damageSpec = new DamageSpecifier(_proto.Index<DamageGroupPrototype>(BurnGroup), -40);
+        damageSpec += new DamageSpecifier(_proto.Index<DamageTypePrototype>(Blunt), -20);
+        damageSpec += new DamageSpecifier(_proto.Index<DamageTypePrototype>(Asphyxiation), -40);
+        damageSpec += new DamageSpecifier(_proto.Index<DamageTypePrototype>(Poison), -40);
 
         _bloodstream.TryModifyBloodLevel(target, 100f);
         _damageable.TryChangeDamage(target, damageSpec, true);
@@ -480,19 +239,16 @@ public sealed class TarotCardSystem : EntitySystem
         if(!TryComp<DamageableComponent>(target, out var damageableComponent))
             return;
 
-        var damageSpec = new DamageSpecifier(_proto.Index<DamageGroupPrototype>("Burn"), 40);
+        var damageSpec = new DamageSpecifier(_proto.Index<DamageGroupPrototype>(BurnGroup), 40);
         _stun.TryAddParalyzeDuration(target, TimeSpan.FromSeconds(4f));
         _bloodstream.TryModifyBloodLevel(target, -120f);
         _damageable.TryChangeDamage(target, damageSpec, true);
 
         Dirty(target, damageableComponent);
     }
+    // lovers card end
 
-    private void MassHallucinations(EntityUid target, EntityUid? user)
-    {
-        // TODO THIS SHIT
-    }
-
+    // chariot card start
     private void ApplyChariotEffects(EntityUid target, EntityUid? user)
     {
         // Pacified in 10 sec after use
@@ -545,83 +301,19 @@ public sealed class TarotCardSystem : EntitySystem
 
         moveSpeedEffect.Effect(new EntityEffectBaseArgs(target, EntityManager));
     }
+    // chariot card end
 
-    private void ModifyThreshold(EntityUid target, EntityUid? user)
+    // strength card start
+
+    // TODO normal action for strength
+
+    private void MassHallucinations(EntityUid target, EntityUid? user)
     {
-        var modifyThreshold = new ModifyThresholdEffect
-        {
-            Duration = 500f,
-            NewThresholds = new Dictionary<FixedPoint2, MobState>
-            {
-                { 150, MobState.Critical },
-            },
-        };
-
-        modifyThreshold.Effect(new EntityEffectBaseArgs(target, EntityManager));
+        // TODO THIS SHIT
     }
+    // strength card end
 
-    private void SpawnJusticeItems(EntityUid target, EntityUid? user)
-    {
-        var coords = Transform(target).Coordinates;
-        var items = _proto.Index<DatasetPrototype>(JusticeItems);
-
-        foreach (var item in items.Values)
-        {
-            SpawnAtPosition(item, coords);
-        }
-    }
-
-    private void SpawnRandomCrate(EntityUid target, EntityUid? user)
-    {
-        var protos = _proto.EnumeratePrototypes<CargoProductPrototype>();
-
-        List<string> listOfProto = [];
-
-        foreach (var proto in protos)
-        {
-            if (!_proto.TryIndex(proto.Product, out var prototype))
-                return;
-
-            if (prototype.HasComponent<EntityStorageComponent>())
-                listOfProto.Add(prototype.ID);
-        }
-
-        _random.Shuffle(listOfProto);
-
-        SpawnAtPosition(listOfProto.First(), Transform(target).Coordinates);
-    }
-
-    private void TeleportToRandomTile(EntityUid target, EntityUid? user)
-    {
-        var randomTile = _scramOnTrigger.SelectRandomTileInRange(Transform(target), 30f);
-        if (randomTile == null)
-            return;
-
-        _transform.SetCoordinates(target, randomTile.Value);
-    }
-
-    private void FixturesSet(EntityUid target, EntityUid? user)
-    {
-        EnsureComp<WalkThroughWallsComponent>(target, out var walkThroughWallsComponent);
-
-        walkThroughWallsComponent.Duration = 10f;
-        Dirty(target, walkThroughWallsComponent);
-    }
-
-    private void HurtAnother(EntityUid target, EntityUid? user)
-    {
-        var lookup =
-            _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(Transform(target).Coordinates, 4f);
-
-        var damageSpec = new DamageSpecifier(_proto.Index<DamageGroupPrototype>(BurnGroup), 20);
-        damageSpec += new DamageSpecifier(_proto.Index<DamageGroupPrototype>(BruteGroup), 20);
-
-        foreach (var entity in lookup)
-        {
-            _damageable.TryChangeDamage(entity, damageSpec, true);
-        }
-    }
-
+    // hermit card start
     private void TeleportToVend(EntityUid target, EntityUid? user)
     {
         List<EntityUid> vendMach = [];
@@ -652,7 +344,9 @@ public sealed class TarotCardSystem : EntitySystem
             QueueDel(gun);
         }
     }
+    // hermit card end
 
+    // wheel of fortune card start
     private void CreateGambling(EntityUid target, EntityUid? user)
     {
         var arcadeList = _proto.Index<DatasetPrototype>(RandomArcadeSpawner).Values;
@@ -667,7 +361,91 @@ public sealed class TarotCardSystem : EntitySystem
 
         _dieOfFate.DoAction(target, randomValue);
     }
+    // wheel of fortune card end
 
+    // justice card start
+    private void SpawnJusticeItems(EntityUid target, EntityUid? user)
+    {
+        var coords = Transform(target).Coordinates;
+        var items = _proto.Index<DatasetPrototype>(JusticeItems);
+
+        foreach (var item in items.Values)
+        {
+            SpawnAtPosition(item, coords);
+        }
+    }
+
+    private void SpawnRandomCrate(EntityUid target, EntityUid? user)
+    {
+        var protos = _proto.EnumeratePrototypes<CargoProductPrototype>();
+
+        List<string> listOfProto = [];
+
+        foreach (var proto in protos)
+        {
+            if (!_proto.TryIndex(proto.Product, out var prototype))
+                return;
+
+            if (prototype.HasComponent<EntityStorageComponent>())
+                listOfProto.Add(prototype.ID);
+        }
+
+        _random.Shuffle(listOfProto);
+
+        SpawnAtPosition(listOfProto.First(), Transform(target).Coordinates);
+    }
+    // justice card end
+
+    // hanged man card start
+    private void TeleportToRandomTile(EntityUid target, EntityUid? user)
+    {
+        var randomTile = _scramOnTrigger.SelectRandomTileInRange(Transform(target), 30f);
+        if (randomTile == null)
+            return;
+
+        _transform.SetCoordinates(target, randomTile.Value);
+    }
+
+    private void FixturesSet(EntityUid target, EntityUid? user)
+    {
+        EnsureComp<WalkThroughWallsComponent>(target, out var walkThroughWallsComponent);
+
+        walkThroughWallsComponent.Duration = 10f;
+        Dirty(target, walkThroughWallsComponent);
+    }
+    // hanged man card end
+
+    // death card start
+    private void HurtAnother(EntityUid target, EntityUid? user)
+    {
+        var lookup =
+            _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(Transform(target).Coordinates, 4f);
+
+        var damageSpec = new DamageSpecifier(_proto.Index<DamageGroupPrototype>(BurnGroup), 20);
+        damageSpec += new DamageSpecifier(_proto.Index<DamageGroupPrototype>(BruteGroup), 20);
+
+        foreach (var entity in lookup)
+        {
+            _damageable.TryChangeDamage(entity, damageSpec, true);
+        }
+    }
+
+    private void ModifyThreshold(EntityUid target, EntityUid? user)
+    {
+        var modifyThreshold = new ModifyThresholdEffect
+        {
+            Duration = 500f,
+            NewThresholds = new Dictionary<FixedPoint2, MobState>
+            {
+                { 150, MobState.Critical },
+            },
+        };
+
+        modifyThreshold.Effect(new EntityEffectBaseArgs(target, EntityManager));
+    }
+    // death card end
+
+    // temperance card start
     private void HealLing(EntityUid target, EntityUid? user)
     {
         RemCompDeferred<BlindableComponent>(target);
@@ -720,20 +498,22 @@ public sealed class TarotCardSystem : EntitySystem
             QueueDel(pill);
         }
     }
+    // temperance card end
 
+    // devil card start
     private void HelpMessage(EntityUid target, EntityUid? user)
     {
         var targetPos = Transform(target).LocalPosition;
 
         var allEntities =
             _lookup.GetEntitiesInRange<HumanoidAppearanceComponent>(Transform(target).Coordinates, 50f)
-            .Where(e =>
-            {
-                var entityPos = Transform(e).LocalPosition;
-                var distance = (entityPos - targetPos).Length();
-                return distance >= 30f;
-            })
-            .ToList();
+                .Where(e =>
+                {
+                    var entityPos = Transform(e).LocalPosition;
+                    var distance = (entityPos - targetPos).Length();
+                    return distance >= 30f;
+                })
+                .ToList();
 
         if (allEntities.Count == 0)
             return;
@@ -744,6 +524,26 @@ public sealed class TarotCardSystem : EntitySystem
         _chat.TrySendInGameICMessage(caller, helpMessage, InGameICChatType.Speak, ChatTransmitRange.Normal);
     }
 
+    private void ClusterFlashBang(EntityUid target, EntityUid? user)
+    {
+        var cluster = SpawnAtPosition(ClusterBangFull, Transform(target).Coordinates);
+        _trigger.Trigger(cluster, target);
+
+        if (!TryComp<PhysicsComponent>(cluster, out var physics))
+            return;
+
+        var direction = new Vector2(_random.NextFloat(-2f, 2f), _random.NextFloat(-2f, 2f));
+        _physics.ApplyLinearImpulse(cluster, direction, body: physics);
+    }
+    // devil card end
+
+    // tower card start
+
+    // TODO tower card
+
+    // tower card end
+
+    // star card start
     private void GivePinpointer(EntityUid target, EntityUid? user)
     {
         var pinpointerProto = _proto.Index(PinpointerProto);
@@ -761,7 +561,9 @@ public sealed class TarotCardSystem : EntitySystem
 
         _transform.SetCoordinates(target, Transform(user.Value).Coordinates);
     }
+    // star card end
 
+    // moon card start
     private void RandomTeleportation(EntityUid target, EntityUid? user)
     {
         var lookup =
@@ -789,16 +591,14 @@ public sealed class TarotCardSystem : EntitySystem
         }
     }
 
-    private void ClusterFlashBang(EntityUid target, EntityUid? user)
+    // TODO reverse action
+
+    // moon card end
+
+    // sun card start
+    private void Rejuvenate(EntityUid target, EntityUid? user)
     {
-        var cluster = SpawnAtPosition(ClusterBangFull, Transform(target).Coordinates);
-        _trigger.Trigger(cluster, target);
-
-        if (!TryComp<PhysicsComponent>(cluster, out var physics))
-            return;
-
-        var direction = new Vector2(_random.NextFloat(-2f, 2f), _random.NextFloat(-2f, 2f));
-        _physics.ApplyLinearImpulse(cluster, direction, body: physics);
+        _rejuvenate.PerformRejuvenate(target);
     }
 
     private void SmokeGrenade(EntityUid target, EntityUid? user)
@@ -810,12 +610,15 @@ public sealed class TarotCardSystem : EntitySystem
 
         _smoke.StartSmoke(ent, new Solution(), 40f, 50, smokeComponent);
     }
+    // sun card end
 
-    private void Rejuvenate(EntityUid target, EntityUid? user)
-    {
-        _rejuvenate.PerformRejuvenate(target);
-    }
+    // judgment card start
 
+    // TODO judgment card
+
+    // judgment card end
+
+    // world card start
     private void BlockAction(EntityUid target, EntityUid? user)
     {
         var blockMoveEffect = new BlockActionEffect
@@ -841,4 +644,5 @@ public sealed class TarotCardSystem : EntitySystem
             blockMoveEffect.Effect(new EntityEffectBaseArgs(entity, EntityManager));
         }
     }
+    // world card end
 }
