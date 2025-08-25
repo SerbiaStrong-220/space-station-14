@@ -20,7 +20,7 @@ public sealed partial class AdminLogsControl : Control
 
     public bool EarlyDateValid
     {
-        get { return _earlyDateValid; }
+        get => _earlyDateValid;
         set
         {
             if (value)
@@ -34,7 +34,7 @@ public sealed partial class AdminLogsControl : Control
 
     public bool LateDateValid
     {
-        get { return _lateDateValid; }
+        get => _lateDateValid;
         set
         {
             if (value)

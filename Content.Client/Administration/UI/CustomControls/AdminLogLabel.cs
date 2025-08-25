@@ -45,7 +45,7 @@ public sealed class AdminLogLabel : RichTextLabel
         // two purposes
         // 1. save marked log in case of mistake
         // 2. make copying intuitive
-        get { return Visible && _markedForCopying; }
+        get => Visible && _markedForCopying;
         set
         {
             if (value)
