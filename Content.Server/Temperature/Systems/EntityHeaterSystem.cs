@@ -129,14 +129,5 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
             return;
 
         power.Load = SettingPower(setting, ent.Comp.Power);
-
-        //SS220-grill-update begin
-        var ev = new HeaterSettingChangedEvent(ent, setting);
-        RaiseLocalEvent(ent, ref ev);
-        //SS220-grill-update end
     }
-
-    //SS220-grill-update
-    [ByRefEvent]
-    public readonly record struct HeaterSettingChangedEvent(EntityUid HeaterEntity, EntityHeaterSetting Setting);
 }

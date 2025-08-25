@@ -75,6 +75,11 @@ public abstract partial class SharedEntityHeaterSystem : EntitySystem
         // Only show the glowing heating element layer if there's power
         if (_receiver.IsPowered(ent.Owner))
             _appearance.SetData(ent, EntityHeaterVisuals.Setting, setting);
+
+        //SS220-grill-update begin
+        var ev = new HeaterSettingChangedEvent(ent, setting);
+        RaiseLocalEvent(ent, ref ev);
+        //SS220-grill-update end
     }
 
     protected float SettingPower(EntityHeaterSetting setting, float max)
@@ -94,4 +99,8 @@ public abstract partial class SharedEntityHeaterSystem : EntitySystem
             _ => 0.01f,
         };
     }
+
+    //SS220-grill-update
+    [ByRefEvent]
+    public readonly record struct HeaterSettingChangedEvent(EntityUid HeaterEntity, EntityHeaterSetting Setting);
 }
