@@ -121,9 +121,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
     /// <see cref="ApcPowerReceiverComponent"/> doesn't exist on the client, so we need
     /// this server-only override to handle setting the network load.
     /// </remarks>
-    protected override void ChangeSetting(Entity<EntityHeaterComponent> ent,
-        EntityHeaterSetting setting,
-        EntityUid? user = null)
+    protected override void ChangeSetting(Entity<EntityHeaterComponent> ent, EntityHeaterSetting setting, EntityUid? user = null)
     {
         base.ChangeSetting(ent, setting, user);
 
