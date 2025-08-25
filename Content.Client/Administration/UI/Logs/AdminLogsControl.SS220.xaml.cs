@@ -6,6 +6,9 @@ using Robust.Client.Animations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Animations;
+using Robust.Shared.Input;
+using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using System.Linq;
 using System.Text;
 
@@ -13,6 +16,29 @@ namespace Content.Client.Administration.UI.Logs;
 
 public sealed partial class AdminLogsControl : Control
 {
+    private readonly TimeSpan _buttonSafetyFreeDuration = TimeSpan.FromSeconds(3f);
+    private TimeSpan? _buttonSafetyFreeEnd = null;
+
+    private readonly ResPath _selectorIndicatorTexture = new("/Textures/Interface/VerbIcons/plus.svg.192dpi.png");
+
+    private readonly Color _hoverSelectOffColor = Color.FromHex("#d5d5d5ff");
+    private readonly Color _hoverSelectOnColor = Color.FromHex("#b3f4afff");
+
+    /// <summary>
+    /// Defines if we enter mode where every mouse hover selects (or deselects) log entry
+    /// </summary>
+    private bool _hoverSelectMode = false;
+
+    public bool HoverSelectMode
+    {
+        get => _hoverSelectMode;
+        set
+        {
+            SetHoverSelectMode(value);
+            SetHoverSelectModeView(value);
+            _hoverSelectMode = value;
+        }
+    }
     // admin-logs-time-filter start
     private readonly Color _validDateBorderColor = Color.FromHex("#88f19dff");
     // this is orange because being invalid means just pass check
@@ -50,6 +76,24 @@ public sealed partial class AdminLogsControl : Control
     private bool _earlyDateValid = false;
     private DateTime? _lateDateBorder;
     private bool _lateDateValid = false;
+
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+
+        // This checks for null for free, do not invert it as null always produces a false value
+        if (_gameTiming.CurTime > _buttonSafetyFreeEnd)
+        {
+            UnfreeClearSelection();
+        }
+    }
+
+    private void UnfreeClearSelection()
+    {
+        _buttonSafetyFreeEnd = null;
+        ClearSelection.ModulateSelfOverride = null;
+        ClearSelection.Text = Loc.GetString("admin-logs-clear-selection");
+    }
 
     private bool PassEarlyTimeFilter(SharedAdminLog log)
     {
@@ -115,30 +159,29 @@ public sealed partial class AdminLogsControl : Control
 
         UpdateLogs();
     }
-
     // admin-logs-time-filter end
 
     // add-logs-copying begin
     private void OnCopyToClipboard()
     {
         var builder = new StringBuilder();
-
+        int totalLogCopied = 0;
         foreach (var child in LogsContainer.Children.Reverse())
         {
             if (child is not AdminLogLabel log)
-            {
                 continue;
-            }
 
             if (!log.MarkedForCopying)
                 continue;
 
             builder.AppendLine(log.Text);
+            totalLogCopied++;
         }
 
         _clipboard.SetText(builder.ToString());
         if (!CopyToClipboard.HasRunningAnimation("work"))
             CopyToClipboard.PlayAnimation(_copyingEnded, "work");
+        _popup.PopupCursor(Loc.GetString("admin-logs-copy-clipboard-popup", ("count", totalLogCopied)), Shared.Popups.PopupType.Medium);
     }
 
     private readonly Animation _copyingEnded = new()
@@ -162,4 +205,42 @@ public sealed partial class AdminLogsControl : Control
         }
     };
 
+    protected override void KeyBindDown(GUIBoundKeyEventArgs args)
+    {
+        base.KeyBindDown(args);
+
+        if (args.Handled || args.Function != EngineKeyFunctions.UIRightClick)
+            return;
+
+        HoverSelectMode = true;
+    }
+
+    protected override void KeyBindUp(GUIBoundKeyEventArgs args)
+    {
+        base.KeyBindDown(args);
+
+        if (args.Handled || args.Function != EngineKeyFunctions.UIRightClick)
+            return;
+
+        HoverSelectMode = false;
+    }
+
+    private void SetHoverSelectModeView(bool hoverSelectMode)
+    {
+        if (hoverSelectMode)
+            SelectorModeIndicator.DisplayRect.ModulateSelfOverride = _hoverSelectOnColor;
+        else
+            SelectorModeIndicator.DisplayRect.ModulateSelfOverride = _hoverSelectOffColor;
+    }
+
+    private void SetHoverSelectMode(bool hoverSelectMode)
+    {
+        foreach (var child in LogsContainer.Children)
+        {
+            if (child is not AdminLogLabel log)
+                continue;
+
+            log.SelectHoverMode = hoverSelectMode;
+        }
+    }
 }

@@ -50,7 +50,6 @@
                     <Label Name="Count" Access="Public"/>
                     <Control HorizontalExpand="True"/>
                     <Button Name="ExportLogs" Access="Public" Text="{Loc admin-logs-export}"/>
-                     <Button Name="CopyToClipboard" Access="Public" Text="{Loc admin-logs-copy-clipboard}"/> <!-- SS220-add-logs-copying -->
                     <Button Name="PopOutButton" Access="Public" Text="{Loc admin-logs-pop-out}"/>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal">
@@ -60,22 +59,29 @@
                     <Button Name="NextButton" Access="Public" Text="{Loc admin-logs-next}" StyleClasses="OpenLeft"/>
                 </BoxContainer>
                 <!-- SS220-time-filter-add-begin -->
-                <BoxContainer Name="TimeFilterContainer" HorizontalExpand="True">
+                <BoxContainer Name="TimeFilterContainer" HorizontalExpand="True" Orientation="Horizontal">
                     <Collapsible Orientation="Vertical">
                         <CollapsibleHeading Title="{Loc admin-logs-time-filter-title}"/>
                         <CollapsibleBody>
                             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                                     <Label Text="{Loc admin-logs-from}" />
-                                    <LineEdit Name="EarlyBorderTime" MinWidth="384" HorizontalExpand="True" PlaceHolder="[UTC] dd/mm/yyyy hh:mm:ss (MSK = UTC+3)"/>
+                                    <LineEdit Name="EarlyBorderTime" MinWidth="344" HorizontalExpand="True" PlaceHolder="[UTC] dd/mm/yyyy hh:mm:ss (MSK = UTC+3)"/>
                                 </BoxContainer>
                                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                                     <Label Text="{Loc admin-logs-to}" />
-                                    <LineEdit Name="LateBorderTime" MinWidth="384" HorizontalExpand="True" PlaceHolder="[UTC] dd/mm/yyyy hh:mm:ss (MSK = UTC+3)"/>
+                                    <LineEdit Name="LateBorderTime" MinWidth="344" HorizontalExpand="True" PlaceHolder="[UTC] dd/mm/yyyy hh:mm:ss (MSK = UTC+3)"/>
                                 </BoxContainer>
                             </BoxContainer>
                         </CollapsibleBody>
                     </Collapsible>
+                    <BoxContainer MaxHeight="32" HorizontalExpand="True" VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <Button Name="ClearSelection" StyleClasses="ButtonSquare" Access="Public" Text="{Loc admin-logs-clear-selection}"/>
+                        <BoxContainer>
+                            <AnimatedTextureRect Name="SelectorModeIndicator" Margin="3 6 3 3"/>
+                        </BoxContainer>
+                        <Button Name="CopyToClipboard" StyleClasses="OpenLeft" Access="Public" Text="{Loc admin-logs-copy-clipboard}"/>
+                    </BoxContainer>
                 </BoxContainer>
                 <aui:VSeparator/>
                 <!-- SS220-time-filter-add-end -->

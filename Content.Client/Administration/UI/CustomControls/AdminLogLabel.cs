@@ -1,5 +1,4 @@
 ﻿using Content.Shared.Administration.Logs;
-using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input;
@@ -9,6 +8,8 @@ namespace Content.Client.Administration.UI.CustomControls;
 public sealed class AdminLogLabel : RichTextLabel
 {
     //SS220-make-copy-for-logs-begin
+    public bool SelectHoverMode = false;
+
     private readonly Color _selectedTextColor = Color.FromHex("#b3f1abff");
     // null used for base RichTextLabel color
     private readonly Color? _textColor = null;
@@ -20,13 +21,20 @@ public sealed class AdminLogLabel : RichTextLabel
         Separator = separator;
 
         //SS220-make-copy-for-logs-begin
-        MouseFilter = MouseFilterMode.Stop;
+        MouseFilter = MouseFilterMode.Pass;
         OnKeyBindDown += (args) =>
         {
-            if (args.Function != EngineKeyFunctions.UIClick)
-                return;
+            if (args.Function == EngineKeyFunctions.UIClick)
+                MarkedForCopying = !_markedForCopying;
 
-            MarkedForCopying = !_markedForCopying;
+            if (args.Function == EngineKeyFunctions.UIRightClick)
+                MarkedForCopying = true;
+        };
+
+        OnMouseEntered += (_) =>
+        {
+            if (SelectHoverMode)
+                MarkedForCopying = true;
         };
         //SS220-make-copy-for-logs-end
 
