@@ -31,7 +31,6 @@ public sealed partial class AdminLogsControl : Control
     {
         get => _hoverSelectMode;
         set => SetHoverSelectMode(value);
-
     }
     // admin-logs-time-filter start
     private readonly Color _validDateBorderColor = Color.FromHex("#88f19dff");
