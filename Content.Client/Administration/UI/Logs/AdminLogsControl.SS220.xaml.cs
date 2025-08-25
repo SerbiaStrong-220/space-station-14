@@ -1,13 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Client.Administration.UI.CustomControls;
+using Content.Client.SS220.UserInterface.Utility;
+using Content.Client.Stylesheets;
 using Content.Shared.Administration.Logs;
 using Robust.Client.Animations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Animations;
 using Robust.Shared.Input;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,6 @@ namespace Content.Client.Administration.UI.Logs;
 
 public sealed partial class AdminLogsControl : Control
 {
-    private readonly TimeSpan _buttonSafetyFreeDuration = TimeSpan.FromSeconds(3f);
-    private TimeSpan? _buttonSafetyFreeEnd = null;
-
     private readonly ResPath _selectorIndicatorTexture = new("/Textures/Interface/VerbIcons/plus.svg.192dpi.png");
 
     private readonly Color _hoverSelectOffColor = Color.FromHex("#d5d5d5ff");
@@ -32,12 +30,8 @@ public sealed partial class AdminLogsControl : Control
     public bool HoverSelectMode
     {
         get => _hoverSelectMode;
-        set
-        {
-            SetHoverSelectMode(value);
-            SetHoverSelectModeView(value);
-            _hoverSelectMode = value;
-        }
+        set => SetHoverSelectMode(value);
+
     }
     // admin-logs-time-filter start
     private readonly Color _validDateBorderColor = Color.FromHex("#88f19dff");
@@ -77,23 +71,11 @@ public sealed partial class AdminLogsControl : Control
     private DateTime? _lateDateBorder;
     private bool _lateDateValid = false;
 
-    protected override void FrameUpdate(FrameEventArgs args)
+    private readonly Dictionary<uint, ConfirmableButtonState> _confirmClearSelectionButtonStates = new()
     {
-        base.FrameUpdate(args);
-
-        // This checks for null for free, do not invert it as null always produces a false value
-        if (_gameTiming.CurTime > _buttonSafetyFreeEnd)
-        {
-            UnfreeClearSelection();
-        }
-    }
-
-    private void UnfreeClearSelection()
-    {
-        _buttonSafetyFreeEnd = null;
-        ClearSelection.ModulateSelfOverride = null;
-        ClearSelection.Text = Loc.GetString("admin-logs-clear-selection");
-    }
+        [0] = new ConfirmableButtonState(Loc.GetString("admin-logs-clear-selection"), null),
+        [1] = new ConfirmableButtonState(Loc.GetString("admin-logs-clear-selection-confirm"), StyleNano.ButtonColorCautionDefault)
+    };
 
     private bool PassEarlyTimeFilter(SharedAdminLog log)
     {
@@ -225,16 +207,15 @@ public sealed partial class AdminLogsControl : Control
         HoverSelectMode = false;
     }
 
-    private void SetHoverSelectModeView(bool hoverSelectMode)
+    private void SetHoverSelectMode(bool hoverSelectMode)
     {
+        _hoverSelectMode = hoverSelectMode;
+
         if (hoverSelectMode)
             SelectorModeIndicator.DisplayRect.ModulateSelfOverride = _hoverSelectOnColor;
         else
             SelectorModeIndicator.DisplayRect.ModulateSelfOverride = _hoverSelectOffColor;
-    }
 
-    private void SetHoverSelectMode(bool hoverSelectMode)
-    {
         foreach (var child in LogsContainer.Children)
         {
             if (child is not AdminLogLabel log)
