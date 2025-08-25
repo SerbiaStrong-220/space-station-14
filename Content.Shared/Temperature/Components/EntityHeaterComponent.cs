@@ -29,4 +29,15 @@ public sealed partial class EntityHeaterComponent : Component
     /// </summary>
     [DataField]
     public SoundPathSpecifier? SettingSound;
+
+    //SS220-grill-update begin
+    /// <summary>
+    /// Sound that plays, when food is on the grill
+    /// </summary>
+    [DataField("grillSound")]
+    public SoundSpecifier GrillSound = new SoundPathSpecifier("/Audio/SS220/Effects/grilling.ogg");
+
+    // To keep track of the grilling sound
+    public EntityUid? GrillingStream;
+    //SS220-grill-update end
 }
