@@ -19,24 +19,12 @@ public class ConfirmableButton : Button
     public ConfirmableButtonClicksAction ClicksActionWhenNotConfirmed = ConfirmableButtonClicksAction.Reset;
 
     [ViewVariables]
-    private float _confirmDelayMillisecond = 5000f;
+    public float ConfirmDelayMillisecond { get; set; }
 
-    public float ConfirmDelayMillisecond
-    {
-        get => _confirmDelayMillisecond;
-        set => _confirmDelayMillisecond = value;
-    }
-
-    public TimeSpan ConfirmDelay => TimeSpan.FromMilliseconds(_confirmDelayMillisecond);
-
-    private uint _clicksForConfirm = 2;
+    public TimeSpan ConfirmDelay => TimeSpan.FromMilliseconds(ConfirmDelayMillisecond);
 
     [ViewVariables]
-    public uint ClicksForConfirm
-    {
-        get => _clicksForConfirm;
-        set => _clicksForConfirm = value;
-    }
+    public uint ClicksForConfirm { get; set; }
 
     [ViewVariables]
     public string? DefaultText;
