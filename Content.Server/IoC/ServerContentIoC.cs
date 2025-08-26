@@ -75,6 +75,7 @@ namespace Content.Server.IoC
             IoCManager.Register<PoissonDiskSampler>();
             IoCManager.Register<DiscordPlayerManager>(); // SS220 discord player manager
             IoCManager.Register<DiscordBanPostManager>();  // SS220 discord ban post manager
+            IoCManager.Register<AuthBannedGuidManager>(); // SS220 add player name in ban info
             IoCManager.Register<ServerControlController>();
             IoCManager.Register<DiscordWebhook>();
             IoCManager.Register<VoteWebhooks>();

@@ -213,7 +213,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         {
             if (BanMatchesPlayer(player, def))
             {
-                KickForBanDef(player, def, _playerManager); // SS220-ad-login-into-ban-screen
+                KickForBanDef(player, def);
                 _sawmill.Info($"Kicked player {player.Name} ({player.UserId}) through {source}");
             }
         }
@@ -236,9 +236,9 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         return BanMatcher.BanMatches(ban, playerInfo);
     }
 
-    private void KickForBanDef(ICommonSession player, ServerBanDef def, IPlayerManager playerManager) // SS220-ad-login-into-ban-screen
+    private void KickForBanDef(ICommonSession player, ServerBanDef def)
     {
-        var message = def.FormatBanMessage(_cfg, _localizationManager, playerManager); // SS220-ad-login-into-ban-screen
+        var message = def.FormatBanMessage(_cfg, _localizationManager, player.Name); // SS220-ad-login-into-ban-screen
         player.Channel.Disconnect(message);
     }
 
