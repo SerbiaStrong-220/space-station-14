@@ -19,11 +19,3 @@ public enum EntityHeaterSetting
     Medium,
     High
 }
-
-//SS220-grill-visuals begin
-[Serializable, NetSerializable]
-public enum FoodCookingVisuals
-{
-    Grilling
-}
-//SS220-grill-visuals end

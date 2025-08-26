@@ -93,8 +93,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
         if (TryComp<ItemPlacerComponent>(ent, out var placer))
         {
             // When removing item from the grill, if it is the last one -> stop playing audio
-            if (placer.PlacedEntities.Count == 0 ||
-                _tagSystem.HasTag(args.OtherEntity, "Cooked")) // This is where the item is actually cooked
+            if (placer.PlacedEntities.Count == 0)
             {
                 _audio.Stop(ent.Comp.GrillingStream);
             }
