@@ -1,6 +1,8 @@
 using Content.Server.Construction.Components;
 using Content.Server.Power.Components;
+using Content.Shared.Nutrition.Components;
 using Content.Shared.Placeable;
+using Content.Shared.SS220.EntityEffects.Effects;
 using Content.Shared.Tag;
 using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
@@ -31,8 +33,16 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
 
         //SS220-grill-update begin
         SubscribeLocalEvent<EntityHeaterComponent, ItemRemovedEvent>(OnItemRemovedFromTheGrill);
+        SubscribeLocalEvent<EntityHeaterComponent, ItemPlacedEvent>(OnItemPlacedOnTheGrill);
         SubscribeLocalEvent<EntityHeaterComponent, HeaterSettingChangedEvent>(OnHeaterSettingChanged);
         //SS220-grill-update end
+    }
+
+    private void OnMapInit(Entity<EntityHeaterComponent> ent, ref MapInitEvent args)
+    {
+        // Set initial power level
+        if (TryComp<ApcPowerReceiverComponent>(ent, out var power))
+            power.Load = SettingPower(ent.Comp.Setting, ent.Comp.Power);
     }
 
     //SS220-grill-update begin
@@ -48,34 +58,85 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
             {
                 foreach (var item in placer.PlacedEntities)
                 {
-                    _appearance.SetData(item, FoodCookingVisuals.Grilling, false);
+                    RemComp<GrillingVisualComponent>(item);
+                }
+            }
+        }
+        else // Grill has been turned on
+        {
+            // Processing each item on the grill
+            if (TryComp<ItemPlacerComponent>(ent, out var placer))
+            {
+                foreach (var item in placer.PlacedEntities)
+                {
+                    // Skip visuals, if entity can't be cooked on the grill or if entity is already cooked
+                    if (!HasComp<ConstructionComponent>(ent) && !HasComp<FoodComponent>(ent) ||
+                        _tagSystem.HasTag(ent, $"Cooked"))
+                        continue;
+
+                    // We are grilling
+                    if (!HasComp<GrillingVisualComponent>(item))
+                        AddComp<GrillingVisualComponent>(item);
+
+                    // Maybe not the best way of doing it, but it'll have to do
+                    PlayGrillAudio(ent);
                 }
             }
         }
     }
-    //SS220-grill-update end
 
-    private void OnMapInit(Entity<EntityHeaterComponent> ent, ref MapInitEvent args)
-    {
-        // Set initial power level
-        if (TryComp<ApcPowerReceiverComponent>(ent, out var power))
-            power.Load = SettingPower(ent.Comp.Setting, ent.Comp.Power);
-    }
-
-    //SS220-grill-update begin
     private void OnItemRemovedFromTheGrill(Entity<EntityHeaterComponent> ent, ref ItemRemovedEvent args)
     {
         // Disable grill smoke visuals
-        _appearance.SetData(args.OtherEntity, FoodCookingVisuals.Grilling, false);
+        RemComp<GrillingVisualComponent>(args.OtherEntity);
 
         if (TryComp<ItemPlacerComponent>(ent, out var placer))
         {
             // When removing item from the grill, if it is the last one -> stop playing audio
-            if (placer.PlacedEntities.Count == 0)
+            if (placer.PlacedEntities.Count == 0 ||
+                _tagSystem.HasTag(args.OtherEntity, "Cooked")) // This is where the item is actually cooked
             {
                 _audio.Stop(ent.Comp.GrillingStream);
             }
         }
+    }
+
+    private void OnItemPlacedOnTheGrill(Entity<EntityHeaterComponent> ent, ref ItemPlacedEvent args)
+    {
+        // Items placed on turned off grill
+        if (ent.Comp.Setting == EntityHeaterSetting.Off)
+            return;
+
+        // I know this looks bad, but I couldn't figure out better way to check if everything is cooked on the grill
+        var isEverythingCooked = true;
+        // Food just been cooked (or cooked food was placed on the grill)
+        if (_tagSystem.HasTag(args.OtherEntity, $"Cooked"))
+        {
+            // If there is still uncooked food on the grill -> break
+            if (TryComp<ItemPlacerComponent>(ent, out var placer))
+            {
+                foreach (var item in placer.PlacedEntities)
+                {
+                    if (!_tagSystem.HasTag(item, "Cooked"))
+                        isEverythingCooked = false;
+                    break;
+                }
+            }
+
+            // Otherwise -> stop grilling audio
+            if(isEverythingCooked) _audio.Stop(ent.Comp.GrillingStream);
+        }
+
+        // Skip visuals, if entity can't be cooked on the grill or if entity is already cooked
+        if (!HasComp<ConstructionComponent>(args.OtherEntity) && !HasComp<FoodComponent>(args.OtherEntity) ||
+            _tagSystem.HasTag(args.OtherEntity, $"Cooked"))
+            return;
+
+        PlayGrillAudio(ent);
+
+        // We are grilling
+        if (!HasComp<GrillingVisualComponent>(args.OtherEntity))
+            AddComp<GrillingVisualComponent>(args.OtherEntity);
     }
     //SS220-grill-update end
 
@@ -95,24 +156,6 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
             foreach (var ent in placer.PlacedEntities)
             {
                 _temperature.ChangeHeat(ent, energy);
-
-                //SS220-grill-update begin
-                // Skip visuals, if entity can't be cooked on the grill or if entity is already cooked
-                if (!HasComp<ConstructionComponent>(ent) || _tagSystem.HasTag(ent, $"Cooked"))
-                    continue;
-
-                // If there is no grilling audio playing -> play grilling audio
-                if (!_audio.IsPlaying(heater.GrillingStream))
-                {
-                    heater.GrillingStream = _audio.PlayPvs(heater.GrillSound,
-                            ent,
-                            AudioParams.Default.WithMaxDistance(10f).WithLoop(true))
-                        ?.Entity;
-                }
-
-                // Enable grill smoke
-                _appearance.SetData(ent, FoodCookingVisuals.Grilling, true);
-                //SS220-grill-update end
             }
         }
     }
@@ -130,4 +173,18 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
 
         power.Load = SettingPower(setting, ent.Comp.Power);
     }
+
+    //SS220-grill-update begin
+    private void PlayGrillAudio(Entity<EntityHeaterComponent> grill)
+    {
+        // If there is no grilling audio playing -> play grilling audio
+        if (!_audio.IsPlaying(grill.Comp.GrillingStream))
+        {
+            grill.Comp.GrillingStream = _audio.PlayPvs(grill.Comp.GrillSound,
+                    grill,
+                    AudioParams.Default.WithMaxDistance(10f).WithLoop(true))
+                ?.Entity;
+        }
+    }
+    //SS220-grill-update end
 }

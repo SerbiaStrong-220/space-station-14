@@ -49,15 +49,6 @@
   - type: PhysicalComposition
     materialComposition:
       Meaterial: 300
-  #SS220-grill-update begin
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.FoodCookingVisuals.Grilling:
-        enum.FoodCookingVisuals.Grilling:
-          False: { visible: false }
-          True: { visible: true, sprite: SS220/Effects/grillingEffect.rsi, state: grillingSmoke }
-  #SS220-grill-update end
 
 - type: entity
   parent: FoodMeatBase
@@ -77,15 +68,6 @@
     entity: FoodMeatRotten
     # once it would say bloated, turn into the rotten prototype
     stage: 1
-    #SS220-grill-update begin
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.FoodCookingVisuals.Grilling:
-        enum.FoodCookingVisuals.Grilling:
-          False: { visible: false }
-          True: { visible: true, sprite: SS220/Effects/grillingEffect.rsi, state: grillingSmoke }
-    #SS220-grill-update end
 
 # bruh
 - type: Tag
