@@ -84,7 +84,7 @@ jobs:
       env:
         DISCORD_PUBLISH_NOTIFY: ${{ secrets.DISCORD_PUBLISH_NOTIFY }}
       run: |
-        curl -X PATCH -H "Content-Type: application/json" \
+        curl -X POST -H "Content-Type: application/json" \
         -d '{"username": "GitHub Publish Changes", "avatar_url": "https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/refs/heads/master/logo.png", "content": "✅ Успешно обновление по `${{GITHUB.REF_NAME}}` ветке!"}' \
         $DISCORD_PUBLISH_NOTIFY
     - name: SS220 PN2D - Failure
