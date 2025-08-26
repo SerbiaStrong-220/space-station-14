@@ -74,12 +74,12 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         foreach (var rule in rules)
         {
             if (!rule.TryGetComponent<AntagSelectionComponent>(out var selection, EntityManager.ComponentFactory))
+                continue
+
+            if (!dynamic.AntagLimits.TryGetValue(, out var value))
                 continue;
 
-            if (!dynamic.AntagLimits.TryGetValue(rule.ID, out var value))
-                continue;
-
-            _antag.SetMaxAntags(selection, value);
+            _antag.SetMaxAntags(selection,, value);
         }
 
         var query = EntityQueryEnumerator<StoreComponent>();

@@ -1,3 +1,4 @@
+using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.TraitorDynamics;
@@ -13,11 +14,11 @@ public sealed partial class DynamicPrototype : IPrototype
 
     /// <summary>
     /// Dictionary that defines maximum player counts for specific gamerules.
-    /// Key - the ID of the gamerule.
+    /// Key - the list of the pref roles.
     /// Value - maximum number of players allowed for this rule.
     /// </summary>
     [DataField]
-    public Dictionary<string, int> AntagLimits = new();
+    public Dictionary<List<ProtoId<AntagPrototype>>, int> AntagLimits = new();
 
     [DataField]
     public int PlayersRequerment;
