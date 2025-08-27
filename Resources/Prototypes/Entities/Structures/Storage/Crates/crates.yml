@@ -29,8 +29,6 @@
 #SS220 Crate-tg-resprite begin
     offset: 0, 0
     layers:
-    - state: base
-      map: ["enum.StorageVisualLayers.Base"]
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
     - state: welded
