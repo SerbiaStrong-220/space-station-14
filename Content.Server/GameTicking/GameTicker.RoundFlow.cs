@@ -31,7 +31,6 @@ namespace Content.Server.GameTicking
 {
     public sealed partial class GameTicker
     {
-        [Dependency] private readonly AuthBannedGuidManager _authBannedGuidManager = default!;
         [Dependency] private readonly DiscordWebhook _discord = default!;
         [Dependency] private readonly RoleSystem _role = default!;
         [Dependency] private readonly ITaskManager _taskManager = default!;
@@ -627,7 +626,6 @@ namespace Content.Server.GameTicking
             RaiseNetworkEvent(roundEndMessageEvent);
             RaiseLocalEvent(roundEndMessageEvent);
             RaiseLocalEvent(new RoundEndedEvent(RoundId, roundDuration)); // Corvax-RoundNotifications
-            _authBannedGuidManager.ResetCache();
 
             _replayRoundPlayerInfo = listOfPlayerInfoFinal;
             _replayRoundText = roundEndText;
