@@ -156,6 +156,11 @@ public sealed class SolutionContainerVisualsSystem : VisualizerSystem<SolutionCo
         if (!TryComp<ItemComponent>(uid, out var item))
             return;
 
+        // SS220-fix-middle-hand-sprites-begin
+        if (component.IgnoreLocationSprite.Contains(args.Location.ToString().ToLowerInvariant()))
+            return;
+        // SS220-fix-middle-hand-sprites-end
+
         if (!AppearanceSystem.TryGetData<float>(uid, SolutionContainerVisuals.FillFraction, out var fraction, appearance))
             return;
 
