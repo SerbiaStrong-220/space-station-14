@@ -7,6 +7,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Spawners;
 
 namespace Content.Server.Spider;
 
@@ -21,6 +22,8 @@ public sealed class SpiderSystem : SharedSpiderSystem
     ///     A recycled hashset used to check turfs for spiderwebs.
     /// </summary>
     private readonly HashSet<EntityUid> _webs = [];
+
+    private const float SpawnedAIWebLifetime = 120f; // SS220-fix-endless-web-in-tile
 
     public override void Initialize()
     {
@@ -48,7 +51,15 @@ public sealed class SpiderSystem : SharedSpiderSystem
                 continue;
 
             var transform = Transform(uid);
-            SpawnWeb((uid, spider), transform.Coordinates);
+            SpawnWeb((uid, spider), transform.Coordinates, out var spawned);
+            // SS220-fix-endless-web-in-tile-begin
+            // remove when PlacementReplacement will be fixed
+            foreach (var web in spawned)
+            {
+                var comp = EnsureComp<TimedDespawnComponent>(web);
+                comp.Lifetime = SpawnedAIWebLifetime;
+            }
+            // SS220-fix-endless-web-in-tile-end
         }
     }
 
@@ -65,7 +76,7 @@ public sealed class SpiderSystem : SharedSpiderSystem
             return;
         }
 
-        var result = SpawnWeb((uid, component), transform.Coordinates);
+        var result = SpawnWeb((uid, component), transform.Coordinates, out _); // SS220-fix-endless-web-in-tile
 
         if (result)
         {
@@ -76,14 +87,15 @@ public sealed class SpiderSystem : SharedSpiderSystem
             _popup.PopupEntity(Loc.GetString("spider-web-action-fail"), args.Performer, args.Performer);
     }
 
-    private bool SpawnWeb(Entity<SpiderComponent> ent, EntityCoordinates coords)
+    private bool SpawnWeb(Entity<SpiderComponent> ent, EntityCoordinates coords, out IEnumerable<EntityUid> spawned) // SS220-fix-endless-web-in-tile
     {
+        spawned = []; // SS220-fix-endless-web-in-tile-begin
         var result = false;
 
         // Spawn web in center
         if (!IsTileBlockedByWeb(coords))
         {
-            Spawn(ent.Comp.WebPrototype, coords);
+            spawned = spawned.Append(Spawn(ent.Comp.WebPrototype, coords)); // SS220-fix-endless-web-in-tile-begin
             result = true;
         }
 
@@ -96,7 +108,7 @@ public sealed class SpiderSystem : SharedSpiderSystem
             if (IsTileBlockedByWeb(outerSpawnCoordinates))
                 continue;
 
-            Spawn(ent.Comp.WebPrototype, outerSpawnCoordinates);
+            spawned = spawned.Append(Spawn(ent.Comp.WebPrototype, outerSpawnCoordinates)); // SS220-fix-endless-web-in-tile-begin
             result = true;
         }
 
