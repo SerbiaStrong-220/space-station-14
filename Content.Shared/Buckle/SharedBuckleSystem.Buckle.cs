@@ -29,6 +29,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Network;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Movement.Pulling.Components;
 
 namespace Content.Shared.Buckle;
 
@@ -39,6 +40,8 @@ public abstract partial class SharedBuckleSystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly INetManager _netManager = default!;
+
+    private const float MaxPullingDistance = 2f;
 
     private void InitializeBuckle()
     {
@@ -68,6 +71,8 @@ public abstract partial class SharedBuckleSystem
         });
 
         SubscribeLocalEvent<BuckleComponent, ModifyUncuffDurationEvent>(OnBuckleModifyUncuffDuration); // SS220 Add uncuff time modifier when buckled
+        SubscribeLocalEvent<ActivePullerComponent, BuckleAttemptEvent>(OnBuckleAttempt); // SS220-add-predicted-unbuckle-on-pulling
+
     }
 
     private void OnBuckleComponentShutdown(Entity<BuckleComponent> ent, ref ComponentShutdown args)
@@ -250,7 +255,7 @@ public abstract partial class SharedBuckleSystem
             Dirty(buckle.Comp.BuckledTo.Value, old);
         }
 
-        if (strap is {} strapEnt && Resolve(strapEnt.Owner, ref strapEnt.Comp))
+        if (strap is { } strapEnt && Resolve(strapEnt.Owner, ref strapEnt.Comp))
         {
             strapEnt.Comp.BuckledEntities.Add(buckle);
             buckle.Comp.FastenedSeatbelt = strapEnt.Comp.HasSeatbelt;
@@ -672,4 +677,16 @@ public abstract partial class SharedBuckleSystem
             TryBuckle(args.Target.Value, args.User, args.Used.Value, popup: false);
         }
     }
+    // SS220-add-predicted-unbuckle-on-pulling-begin
+    private void OnBuckleAttempt(Entity<ActivePullerComponent> entity, ref BuckleAttemptEvent args)
+    {
+        var bucklePosition = _transform.GetWorldPosition(args.Buckle);
+        var strapPosition = _transform.GetWorldPosition(args.Strap);
+
+        var diffDistance = bucklePosition - strapPosition;
+
+        if (diffDistance.LengthSquared() > MaxPullingDistance * MaxPullingDistance)
+            args.Cancelled = true;
+    }
+    // SS220-add-predicted-unbuckle-on-pulling-end
 }
