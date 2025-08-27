@@ -1,0 +1,512 @@
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenStatic
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_static
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenBlue
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_blue
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenBreakout
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_breakout
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenEight
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_eight
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenGoggles
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_goggles
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenExclaim
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_exclaim
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenHeart
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_heart
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenMonoeye
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_monoeye
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenNature
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_nature
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenOrange
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_orange
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenPink
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_pink
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenQuestion
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_question
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenShower
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_shower
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenYellow
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_yellow
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenScroll
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_scroll
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenConsole
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_console
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenRgb
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_rgb
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenGlider
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_glider
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenRainbowhoriz
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_rainbowhoriz
+      
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenBsod
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_bsod
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenRedtext
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_redtext
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenSinewave
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_sinewave
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenSquarewave
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_squarewave
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenEcgwave
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_ecgwave
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenEyes
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_eyes
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenEyestall
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_eyestall
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenEyesangry
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_eyesangry
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenLoading
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_loading
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenWindowsxp
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_windowsxp
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenTetris
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_tetris
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenTv
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_tv
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenTextdrop
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_textdrop
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenStars
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_stars
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenRainbowdiag
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_rainbowdiag
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenBlank
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_blank
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenSmile
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_smile
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenFrown
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_frown
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenRing
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_ring
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: ScreenL
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_l
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenPoxui
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_poxui
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenAbsolutepoxui
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_absolute_poxui
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenAwesome
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_awesome
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenBestfriend
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_best_friend
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenBigsmile
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_bigsmile
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenBoredom
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_boredom
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenClown
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_clown
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenCreeper
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_creeper
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenDealmaker
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_dealmaker
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenMime
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_mime
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenMonkey
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_monkey
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenMrgutsy
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_mr_gutsy
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenNerd
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_nerd
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenNya
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_nya
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenOko
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_oko
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenRock
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_rock
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenSkull
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_skull
+
+- type: marking
+  speciesRestriction: [Kpb]
+  id: SScreenTenna
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Kpb/kpb_screens.rsi
+      state: kpb_screen_tenna

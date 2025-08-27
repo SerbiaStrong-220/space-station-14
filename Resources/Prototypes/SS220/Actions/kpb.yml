@@ -1,0 +1,26 @@
+- type: entity
+  id: ActionDrainBattery
+  name: Drain Battery
+  description: Drains nearby batteries to recharge yourself
+  components:
+    - type: Action
+      icon:
+        sprite: SS220/Interface/Actions/kpb/drainbattery.rsi
+        state: off
+      iconOn:
+        sprite: SS220/Interface/Actions/kpb/drainbattery.rsi
+        state: on
+      itemIconStyle: NoItem
+    - type: InstantAction
+      event: !type:ToggleDrainActionEvent
+
+- type: entity
+  id: ActionKpbChangeFace
+  name: Change KPB Face
+  description: Opens the KPB face selection menu
+  components:
+    - type: Action
+      icon: { sprite: SS220/Interface/Actions/kpb/kpbscreen.rsi, state: screen }
+      itemIconStyle: NoItem
+    - type: InstantAction
+      event: !type:OpenKpbFaceActionEvent
