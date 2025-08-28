@@ -11,7 +11,7 @@
     snapCardinals: true
     layers:
     - state: icon
-    - map: ["enum.EntityHeaterVisuals.Setting"]
+    - map: [ "enum.EntityHeaterVisuals.Setting" ]
       shader: unshaded
       visible: false
   - type: ApcPowerReceiver
@@ -21,6 +21,13 @@
       path: /Audio/Weapons/click.ogg
       params:
         volume: -6
+    grillingSprite:
+      sprite: SS220/Effects/grillingEffect.rsi
+      state: grillingSmoke
+    heatingAnimationWhitelist:
+      components:
+      - Food
+      - Construction
   - type: ItemPlacer
     maxEntities: 4 # big grill, many steaks
     whitelist:

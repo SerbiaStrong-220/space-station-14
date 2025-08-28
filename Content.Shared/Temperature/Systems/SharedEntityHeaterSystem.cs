@@ -5,6 +5,8 @@ using Content.Shared.Power.EntitySystems;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Temperature.Systems;
 
@@ -100,7 +102,16 @@ public abstract partial class SharedEntityHeaterSystem : EntitySystem
         };
     }
 
-    //SS220-grill-update
+    //SS220-grill-update begin
     [ByRefEvent]
     public readonly record struct HeaterSettingChangedEvent(EntityUid HeaterEntity, EntityHeaterSetting Setting);
+
+    [Serializable, NetSerializable]
+    public sealed class HeaterVisualsEvent(NetEntity target, SpriteSpecifier.Rsi grillingSprite, string grillingLayer) : EntityEventArgs
+    {
+        public NetEntity Target = target;
+        public SpriteSpecifier.Rsi GrillingSprite = grillingSprite;
+        public string GrillingLayer = grillingLayer;
+    }
+    //SS220-grill-update end
 }

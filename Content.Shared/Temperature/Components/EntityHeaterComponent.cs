@@ -1,6 +1,8 @@
 using Content.Shared.Temperature.Systems;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Temperature.Components;
 
@@ -37,7 +39,17 @@ public sealed partial class EntityHeaterComponent : Component
     [DataField("grillSound")]
     public SoundSpecifier GrillSound = new SoundPathSpecifier("/Audio/SS220/Effects/grilling.ogg");
 
+    // Grill smoke sprite
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi GrillingSprite;
+
+    /// <summary>
+    /// Whitelist for entities that can have grilling visuals.
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public EntityWhitelist? HeatingAnimationWhitelist;
+
     // To keep track of the grilling sound
-    public EntityUid? GrillingStream;
+    public EntityUid? GrillingAudioStream;
     //SS220-grill-update end
 }

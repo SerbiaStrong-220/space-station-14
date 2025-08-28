@@ -1,12 +1,11 @@
-using Content.Server.Construction.Components;
 using Content.Server.Power.Components;
-using Content.Shared.Nutrition.Components;
 using Content.Shared.Placeable;
 using Content.Shared.SS220.EntityEffects.Effects;
 using Content.Shared.Tag;
 using Content.Shared.Temperature;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Temperature.Systems;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -23,6 +22,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     //SS220-grill-update end
 
     public override void Initialize()
@@ -52,7 +52,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
         // Stop grilling audio, disable grilling visuals for all food on the grill
         if (args.Setting == EntityHeaterSetting.Off)
         {
-            _audio.Stop(ent.Comp.GrillingStream);
+            _audio.Stop(ent.Comp.GrillingAudioStream);
 
             if (TryComp<ItemPlacerComponent>(ent, out var placer))
             {
@@ -70,13 +70,22 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
                 foreach (var item in placer.PlacedEntities)
                 {
                     // Skip visuals, if entity can't be cooked on the grill or if entity is already cooked
-                    if (!HasComp<ConstructionComponent>(ent) && !HasComp<FoodComponent>(ent) ||
-                        _tagSystem.HasTag(ent, $"Cooked"))
-                        continue;
+                    // Skip visuals, if entity can't be cooked on the grill or if entity is already cooked
+                    if(_whitelistSystem.IsWhitelistFail(ent.Comp.HeatingAnimationWhitelist, item)
+                       || _tagSystem.HasTag(item, $"Cooked"))
+                        return;
 
                     // We are grilling
                     if (!HasComp<GrillingVisualComponent>(item))
-                        AddComp<GrillingVisualComponent>(item);
+                    {
+                        var grillingVisual = AddComp<GrillingVisualComponent>(item);
+
+                        var ev = new HeaterVisualsEvent(GetNetEntity(item),
+                            ent.Comp.GrillingSprite,
+                            grillingVisual.GrillingLayer);
+
+                        RaiseNetworkEvent(ev);
+                    }
 
                     // Maybe not the best way of doing it, but it'll have to do
                     PlayGrillAudio(ent);
@@ -95,7 +104,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
             // When removing item from the grill, if it is the last one -> stop playing audio
             if (placer.PlacedEntities.Count == 0)
             {
-                _audio.Stop(ent.Comp.GrillingStream);
+                _audio.Stop(ent.Comp.GrillingAudioStream);
             }
         }
     }
@@ -123,19 +132,31 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
             }
 
             // Otherwise -> stop grilling audio
-            if(isEverythingCooked) _audio.Stop(ent.Comp.GrillingStream);
+            if(isEverythingCooked) _audio.Stop(ent.Comp.GrillingAudioStream);
         }
 
         // Skip visuals, if entity can't be cooked on the grill or if entity is already cooked
-        if (!HasComp<ConstructionComponent>(args.OtherEntity) && !HasComp<FoodComponent>(args.OtherEntity) ||
-            _tagSystem.HasTag(args.OtherEntity, $"Cooked"))
-            return;
+        if(_whitelistSystem.IsWhitelistFail(ent.Comp.HeatingAnimationWhitelist, args.OtherEntity)
+           || _tagSystem.HasTag(args.OtherEntity, $"Cooked"))
+        return;
+
+        // if (!HasComp<ConstructionComponent>(args.OtherEntity) && !HasComp<FoodComponent>(args.OtherEntity) ||
+        //     ))
+        //     return;
 
         PlayGrillAudio(ent);
 
         // We are grilling
         if (!HasComp<GrillingVisualComponent>(args.OtherEntity))
-            AddComp<GrillingVisualComponent>(args.OtherEntity);
+        {
+            var grillingVisual = AddComp<GrillingVisualComponent>(args.OtherEntity);
+
+            var ev = new HeaterVisualsEvent(GetNetEntity(args.OtherEntity),
+                ent.Comp.GrillingSprite,
+                grillingVisual.GrillingLayer);
+
+            RaiseNetworkEvent(ev);
+        }
     }
     //SS220-grill-update end
 
@@ -177,9 +198,9 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
     private void PlayGrillAudio(Entity<EntityHeaterComponent> grill)
     {
         // If there is no grilling audio playing -> play grilling audio
-        if (!_audio.IsPlaying(grill.Comp.GrillingStream))
+        if (!_audio.IsPlaying(grill.Comp.GrillingAudioStream))
         {
-            grill.Comp.GrillingStream = _audio.PlayPvs(grill.Comp.GrillSound,
+            grill.Comp.GrillingAudioStream = _audio.PlayPvs(grill.Comp.GrillSound,
                     grill,
                     AudioParams.Default.WithMaxDistance(10f).WithLoop(true))
                 ?.Entity;
