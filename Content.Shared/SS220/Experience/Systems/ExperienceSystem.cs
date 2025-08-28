@@ -2,6 +2,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -13,8 +14,8 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private const int StartSkillLevelIndex = 0;
     private const int StartSubLevelIndex = 0;
-    private const float StartSublevelProgress = 0f;
-    private const float EndSublevelProgress = 1f;
+    private readonly FixedPoint4 _startSublevelProgress = 0;
+    private readonly FixedPoint4 _endSublevelProgress = 1;
 
     public bool TryGetSkillTreeLevels(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level, [NotNullWhen(true)] out int? sublevel)
     {
@@ -25,7 +26,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             return false;
         }
 
-        sublevel = info.ExperienceLevel;
+        sublevel = info.SkillSublevel;
         level = info.SkillLevel;
         return true;
     }
@@ -35,17 +36,17 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!Resolve(entity.Owner, ref entity.Comp, false))
             return false;
 
-        if (!entity.Comp.LearningProgress.ContainsKey(skillTree))
-            entity.Comp.LearningProgress.Add(skillTree, StartSublevelProgress);
+        if (!entity.Comp.StudyingProgress.ContainsKey(skillTree))
+            entity.Comp.StudyingProgress.Add(skillTree, _startSublevelProgress);
 
-        var result = entity.Comp.LearningProgress[skillTree] + delta;
-        if (result > EndSublevelProgress)
+        var result = entity.Comp.StudyingProgress[skillTree] + delta;
+        if (result > _endSublevelProgress)
         {
             InternalProgressSubLevel(entity!, skillTree);
             return true;
         }
 
-        entity.Comp.LearningProgress[skillTree] = Math.Max(result, StartSublevelProgress);
+        entity.Comp.StudyingProgress[skillTree] = FixedPoint4.Max(result, _startSublevelProgress);
         return true;
     }
 
@@ -79,7 +80,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         var ev = new SkillTreeAdded
         {
             SkillTree = skillTree,
-            Info = new SkillTreeExperienceInfo { SkillLevel = StartSkillLevelIndex, ExperienceLevel = StartSubLevelIndex }
+            Info = new SkillTreeExperienceInfo { SkillLevel = StartSkillLevelIndex, SkillSublevel = StartSubLevelIndex }
         };
         RaiseLocalEvent(entity, ref ev);
 
@@ -88,6 +89,8 @@ public sealed partial class ExperienceSystem : EntitySystem
         ResolveLeveling(ev.Info, ev.SkillTree);
 
         entity.Comp.Skills.Add(skillTree, ev.Info);
+
+        DirtyField(entity!, nameof(ExperienceComponent.Skills));
     }
 
     private void InternalProgressSkillLevel(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree)
@@ -103,13 +106,13 @@ public sealed partial class ExperienceSystem : EntitySystem
         {
             var lastSkill = treeProto.SkillTree.Last();
             var lastSkillProto = _prototype.Index(lastSkill);
-            info.ExperienceLevel = Math.Min(info.ExperienceLevel, lastSkillProto.LevelInfo.NumberOfSublevels);
+            info.SkillSublevel = Math.Min(info.SkillSublevel, lastSkillProto.LevelInfo.MaximumSublevel);
         }
 
-        const int maxCycle = 100;
+        const int maxCycles = 50;
         int cycle;
         bool canProgress = true;
-        for (cycle = 0; (cycle < maxCycle) && canProgress; cycle++)
+        for (cycle = 0; (cycle < maxCycles) && canProgress; cycle++)
         {
             canProgress = CanProgressLevel(info, treeProto);
             if (canProgress)
@@ -118,9 +121,9 @@ public sealed partial class ExperienceSystem : EntitySystem
             }
         }
 
-        if (cycle == maxCycle - 1)
+        if (cycle == maxCycles - 1)
         {
-            Log.Error("Cant");
+            Log.Error($"Cant update progress for {maxCycles} while resolving {tree.Id}!");
         }
 
 

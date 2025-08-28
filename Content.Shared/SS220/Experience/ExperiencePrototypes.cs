@@ -21,14 +21,30 @@ public sealed class SkillPrototype : IPrototype
 [DataDefinition]
 public partial struct SkillLevelInfo
 {
+    /// <summary>
+    /// Sublevel starts from 0 and progress until reaching this value
+    /// </summary>
     [DataField]
-    public int NumberOfSublevels;
+    public int MaximumSublevel;
 
     [DataField]
     public LocId LevelUpPopup = "experience-skill-level-up-base-popup";
 
     [DataField]
     public LocId? SublevelUpPopup = null;
+
+    /// <summary>
+    /// Defines if this skill can be started studying
+    /// </summary>
+    [DataField]
+    public bool CanStartStudying = true;
+
+    /// <summary>
+    /// Defines if this skill
+    /// </summary>
+    [DataField]
+    public bool CanEndStudying = true;
+
 }
 
 [DataDefinition]
