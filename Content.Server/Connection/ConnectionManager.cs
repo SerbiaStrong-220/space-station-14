@@ -61,7 +61,7 @@ namespace Content.Server.Connection
         [Dependency] private readonly IServerDbManager _db = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
-        [Dependency] private readonly IPlayerLocator _playerLocator = default!;
+        [Dependency] private readonly IPlayerLocator _playerLocator = default!; // SS220-ad-login-into-ban-screen
         [Dependency] private readonly ILocalizationManager _loc = default!;
         [Dependency] private readonly ServerDbEntryManager _serverDbEntry = default!;
         [Dependency] private readonly DiscordPlayerManager _discordPlayerManager = default!;
