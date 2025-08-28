@@ -64,6 +64,8 @@
   - type: SuperMatter
     consumeSound:
       collection: SupermatterConsume
+      params:
+        volume: -5
   - type: RadiationSource
     enabled: true
     intensity: 2
