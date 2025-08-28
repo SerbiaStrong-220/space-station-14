@@ -7,6 +7,7 @@ using Content.Shared.Ninja.Components;
 using Content.Shared.Ninja.Systems;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell.Components;
+using Content.Shared.Projectiles;
 using Robust.Shared.Containers;
 
 namespace Content.Server.Ninja.Systems;
@@ -21,6 +22,7 @@ public sealed class NinjaSuitSystem : SharedNinjaSuitSystem
     [Dependency] private readonly SpaceNinjaSystem _ninja = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
 
     // How much the cell score should be increased per 1 AutoRechargeRate.
     private const int AutoRechargeValue = 100;
@@ -136,6 +138,11 @@ public sealed class NinjaSuitSystem : SharedNinjaSuitSystem
 
         if (CheckDisabled(ent, user))
             return;
+
+        // SS220-fix-katana-not-being-able-to-call-if-in-entity-begin
+        if (TryComp<EmbeddableProjectileComponent>(katana, out var embeddable))
+            _projectile.EmbedDetach(katana, embeddable);
+        // SS220-fix-katana-not-being-able-to-call-if-in-entity-end
 
         // TODO: teleporting into belt slot
         var message = _hands.TryPickupAnyHand(user, katana)
