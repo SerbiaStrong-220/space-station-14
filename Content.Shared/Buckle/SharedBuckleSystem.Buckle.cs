@@ -680,13 +680,25 @@ public abstract partial class SharedBuckleSystem
     // SS220-add-predicted-unbuckle-on-pulling-begin
     private void OnBuckleAttempt(Entity<ActivePullerComponent> entity, ref BuckleAttemptEvent args)
     {
-        var bucklePosition = _transform.GetWorldPosition(args.Buckle);
+        PullerComponent? pullerComponent = null;
+        if (!Resolve(entity, ref pullerComponent))
+            return;
+
+        if (pullerComponent.Pulling is null)
+            return;
+
+        var pulledEntityPosition = _transform.GetWorldPosition(pullerComponent.Pulling.Value);
         var strapPosition = _transform.GetWorldPosition(args.Strap);
 
-        var diffDistance = bucklePosition - strapPosition;
+        var diffDistance = pulledEntityPosition - strapPosition;
 
-        if (diffDistance.LengthSquared() > MaxPullingDistance * MaxPullingDistance)
-            args.Cancelled = true;
+        if (!(diffDistance.LengthSquared() > MaxPullingDistance * MaxPullingDistance))
+            return;
+
+        args.Cancelled = true;
+
+        if (args.Popup)
+            _popup.PopupClient(Loc.GetString("buckle-stopped-out-of-pulling-range"), args.Strap, args.Buckle);
     }
     // SS220-add-predicted-unbuckle-on-pulling-end
 }
