@@ -1,5 +1,6 @@
 using Content.Server.Body.Systems;
 using Content.Server.Popups;
+using Content.Server.SS220.Bed.Cryostorage;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -53,6 +54,7 @@ namespace Content.Server.Guardian
             SubscribeLocalEvent<GuardianHostComponent, MoveEvent>(OnHostMove);
             SubscribeLocalEvent<GuardianHostComponent, MobStateChangedEvent>(OnHostStateChange);
             SubscribeLocalEvent<GuardianHostComponent, ComponentShutdown>(OnHostShutdown);
+            SubscribeLocalEvent<GuardianHostComponent, BeingCryoDeletedEvent>(OnCryoDeleted); // fix-Fatal-error-on-host-cryo
 
             SubscribeLocalEvent<GuardianHostComponent, GuardianToggleActionEvent>(OnPerformAction);
 
@@ -136,6 +138,12 @@ namespace Content.Server.Guardian
             QueueDel(component.ActionEntity);
             component.ActionEntity = null;
         }
+        // fix-Fatal-error-on-host-cryo-begin
+        private void OnCryoDeleted(Entity<GuardianHostComponent> entity, ref BeingCryoDeletedEvent args)
+        {
+            OnHostShutdown(entity.Owner, entity.Comp, new());
+        }
+        // fix-Fatal-error-on-host-cryo-end
 
         private void OnGuardianAttackAttempt(EntityUid uid, GuardianComponent component, AttackAttemptEvent args)
         {

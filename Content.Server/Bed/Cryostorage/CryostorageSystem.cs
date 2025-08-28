@@ -61,6 +61,8 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!; // SS220 Cryostorage ghost role fix
     [Dependency] private readonly SharedContainerSystemExtensions _containerSystemExtensions = default!; //SS220 Cryo mobs fix
 
+    private const string GuardianContainerId = "GuardianContainer"; // SS220-fix-guardian-being-taken-by-player-falls-out-when-host-cryos
+
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -188,7 +190,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         if (!TryComp<CryostorageComponent>(cryostorageEnt, out var cryostorageComponent))
             return;
 
-        _containerSystemExtensions.RemoveEntitiesFromAllContainers<MindContainerComponent>(ent.Owner, [SharedBodySystem.BodyRootContainerId]); //SS220-cryo-mobs-fix
+        _containerSystemExtensions.RemoveEntitiesFromAllContainers<MindContainerComponent>(ent.Owner, [SharedBodySystem.BodyRootContainerId, GuardianContainerId]); //SS220-cryo-mobs-fix
 
         // if we have a session, we use that to add back in all the job slots the player had.
         if (userId != null)
