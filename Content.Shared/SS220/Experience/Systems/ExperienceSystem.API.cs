@@ -17,4 +17,18 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         return TryGetSkillTreeLevels(entity, skillTree, out _, out sublevel);
     }
+
+    public bool TryGetSkillTreeLevels(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level, [NotNullWhen(true)] out int? sublevel)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp) || !entity.Comp.Skills.TryGetValue(skillTree, out var info))
+        {
+            level = null;
+            sublevel = null;
+            return false;
+        }
+
+        sublevel = info.SkillSublevel;
+        level = info.SkillLevel;
+        return true;
+    }
 }

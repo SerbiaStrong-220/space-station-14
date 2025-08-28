@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -8,81 +7,109 @@ namespace Content.Shared.SS220.Experience.Systems;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
-    private bool CanProgressSublevel(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> tree)
+    /// <summary>
+    /// Checks if we can start studying next skill
+    /// image: [xxx]|[oo] -> [xxx][|oo]
+    /// </summary>
+    private bool CanProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
     {
-        if (!entity.Comp.StudyingProgress.TryGetValue(tree, out var progress))
-            return false;
+        if (TryGetNextSkillPrototype(info, treeProto, out var nextSkillProto))
+            return nextSkillProto.LevelInfo.CanStartStudying;
 
-        if (!entity.Comp.Skills.TryGetValue(tree, out var skillInfo))
-        {
-            Log.Error($"TreeProto have started studying but don't have skill info. Entity is {ToPrettyString(entity)}");
-            return false;
-        }
-
-        var treeProto = _prototype.Index(tree);
-        if (TryGetStudyingSkillPrototype(skillInfo, treeProto, out var skillProto)
-            && skillInfo.SkillSublevel == skillProto.LevelInfo.MaximumSublevel)
-            return skillProto.LevelInfo.CanEndStudying;
-
-        return progress >= _endSublevelProgress;
+        return false;
     }
 
+    /// <summary>
+    /// Checks if we can end studying current skill
+    /// image: [xx|][ooo] -> [xx]|[ooo]
+    /// </summary>
     private bool CanProgressLevel(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
     {
-        if (!TryGetStudyingSkillPrototype(info, treeProto, out var skillProto))
+        if (info.SkillLevel >= treeProto.SkillTree.Count)
+            return false;
+
+        if (!TryGetCurrentSkillPrototype(info, treeProto, out var skillProto))
+            return false;
+
+        if (!skillProto.LevelInfo.CanEndStudying)
             return false;
 
         return info.SkillSublevel >= skillProto.LevelInfo.MaximumSublevel;
     }
 
-    private bool CanProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
+    /// <summary>
+    /// Checks if we gain next sublevel
+    /// image: [xx|oo] -> [xxx|o]
+    /// </summary>
+    private bool CanProgressSublevel(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> tree)
     {
-        return info.SkillLevel < treeProto.SkillTree.Count - 1;
+        if (!entity.Comp.StudyingProgress.TryGetValue(tree, out var progress))
+            return false;
+
+        if (!entity.Comp.Skills.TryGetValue(tree, out var info) || !_prototype.TryIndex(tree, out var treeProto))
+            return false;
+
+        if (!TryGetCurrentSkillPrototype(info, treeProto, out var studyingSkillProto))
+            return false;
+
+        // We care of start only at start
+        if (info.SkillSublevel == _startLearningProgress && !studyingSkillProto.LevelInfo.CanStartStudying)
+            return false;
+
+        return progress >= _endLearningProgress;
     }
 
-    private void ProgressLevelInInfo(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
+    /// <summary>
+    /// Handles starting studying next skill
+    /// image: [xxx]|[oo] -> [xxx][|oo]
+    /// </summary>
+    private void InternalProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
     {
-        if (!TryGetStudyingSkillPrototype(info, treeProto, out var studyingSkillProto))
-            return;
+        DebugTools.Assert(CanProgressTree(info, treeProto), $"Called {nameof(InternalProgressTree)} but tree progress is blocked, info {info} and tree id is {treeProto.ID}");
 
-        if (!studyingSkillProto.LevelInfo.CanEndStudying)
-            return;
+        info.SkillLevel++;
+        info.SkillStudied = false;
+    }
 
+    /// <summary>
+    /// Handles ending studying skill
+    /// image: [xx|][ooo] -> [xx]|[ooo]
+    /// </summary>
+    private void InternalProgressLevel(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
+    {
         DebugTools.Assert(CanProgressLevel(info, treeProto));
 
-        info.SkillSublevel = Math.Max(StartSubLevelIndex, info.SkillSublevel - studyingSkillProto.LevelInfo.MaximumSublevel);
-        if (CanProgressTree(info, treeProto))
-            info.SkillLevel++;
-    }
-
-    private bool TryGetAcquiredSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
-    {
-        return TryGetSkillPrototypeInternal(info, treeProto, out skillPrototype);
-    }
-
-    private bool TryGetStudyingSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
-    {
-        return TryGetSkillPrototypeInternal(info, treeProto, out skillPrototype);
-    }
-
-    private bool TryGetSkillPrototypeInternal(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
-    {
-        skillPrototype = null;
-
-        if (info.SkillLevel >= treeProto.SkillTree.Count || info.SkillLevel < 0)
+        if (!TryGetCurrentSkillPrototype(info, treeProto, out var skillPrototype))
         {
-            Log.Error($"Got error with resolving skill in ${treeProto} skill tree with provided level {info.SkillLevel}");
-            return false;
+            Log.Error($"Cant get current skill proto for tree {treeProto.ID} and info is {info}");
+            return;
         }
 
-        var skillDefinition = treeProto.SkillTree[info.SkillLevel];
+        // we save meta level progress of sublevel
+        info.SkillSublevel = Math.Max(StartSubLevelIndex, info.SkillLevel - skillPrototype.LevelInfo.MaximumSublevel);
+        info.SkillStudied = true;
+    }
 
-        if (!_prototype.TryIndex(skillDefinition, out skillPrototype))
+    /// <summary>
+    /// Handles leveling sublevel
+    /// image: [xx|oo] -> [xxx|o]
+    /// </summary>
+    private void InternalProgressSublevel(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree)
+    {
+        DebugTools.Assert(CanProgressSublevel(entity, skillTree));
+
+        // start studying tree is not handled by this method
+        if (!entity.Comp.StudyingProgress.TryGetValue(skillTree, out var _))
+            return;
+
+        if (entity.Comp.Skills.TryGetValue(skillTree, out var info))
         {
-            Log.Error($"Cant index skill proto with id {skillDefinition}");
-            return false;
+            Log.Error($"Cant get skill info for progress sublevel in tree {skillTree} and entity {ToPrettyString(entity)}!");
+            return;
         }
 
-        return true;
+        // Do not overflow of it
+        entity.Comp.StudyingProgress[skillTree] = _startLearningProgress;
+        info.SkillSublevel++;
     }
 }
