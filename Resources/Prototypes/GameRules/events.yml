@@ -261,6 +261,11 @@
         highSensitiveVisionRadius: 4
         state: half
       # SS220 Ninja Keen-Hearing-end
+      # SS220-add-ninja-thieving-begin
+      - type: Thieving
+        stripTimeReduction: 2
+        stealthy: true
+      # SS220-add-ninja-thieving-end
       - type: NpcFactionMember
         factions:
         - Syndicate
