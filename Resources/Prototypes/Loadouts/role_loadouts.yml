@@ -117,7 +117,7 @@
   id: JobLawyer
   groups:
   - IAAGlasses #SS220-Two Floppa Iteration
-  - IAAHeadset #SS220-Law Department
+  - LawyerHeadset #SS220-Law Department & SS220 add-iaa-command-key
   - GroupTankHarness
   - LawyerNeck
   - LawyerJumpsuit
