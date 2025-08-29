@@ -116,7 +116,6 @@
     sprite: SS220/Structures/Power/Cables/CultYogg/mv_cable.rsi
     state: mvcable_0
   - type: Icon
-    color: Yellow
     sprite: SS220/Structures/Power/Cables/CultYogg/mv_cable.rsi
     state: mvcable_4
   - type: NodeContainer
@@ -161,7 +160,6 @@
     sprite: SS220/Structures/Power/Cables/CultYogg/lv_cable.rsi
     state: lvcable_0
   - type: Icon
-    color: Green
     sprite: SS220/Structures/Power/Cables/CultYogg/lv_cable.rsi
     state: lvcable_4
   - type: NodeContainer

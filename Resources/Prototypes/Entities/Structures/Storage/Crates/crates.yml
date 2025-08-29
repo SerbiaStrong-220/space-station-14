@@ -12,6 +12,8 @@
     - Energy
     reflectProb: 0.2
     spread: 90
+  - type: Paintable
+    group: CrateSteel
   - type: RadiationBlockingContainer
     resistance: 2.5
 
@@ -48,6 +50,8 @@
     - entity_storage
   - type: StaticPrice
     price: 100
+  - type: Paintable
+    group: CratePlastic
 
 - type: entity
   parent: CratePlastic
@@ -80,6 +84,8 @@
     node: done
     containers:
     - entity_storage
+  - type: Paintable
+    group: null
 
 - type: entity
   parent: CratePlastic
@@ -778,7 +784,7 @@
   parent: CrateGeneric
   id: CrateCoffin
   name: coffin
-  description: A comfy coffin, excelent place for the vampires and corpses.
+  description: A comfy coffin, excellent place for the vampires and corpses.
   components:
   - type: Sprite
     offset: 0, 0 #SS220 Crate-tg-resprite
@@ -958,6 +964,8 @@
         - HighImpassable
         - MidImpassable
 #SS220 CollisionTrash end
+  - type: Paintable
+    group: null
 
 - type: entity
   parent: CrateBaseSecure
@@ -988,6 +996,8 @@
   - type: AccessReader
     access: [["Janitor"]]
   - type: Cart #SS220-Cart-system
+  - type: Paintable
+    group: null
 
 - type: entity
   parent: CrateBaseWeldable

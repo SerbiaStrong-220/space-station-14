@@ -79,3 +79,18 @@
     sprite: SS220/Clothing/OuterClothing/Misc/scarlet_typhoon.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Misc/scarlet_typhoon.rsi
+
+- type: entity
+  parent: ClothingOuterBaseMedium
+  id: ClothingOuterArmorElectricity
+  suffix: Electrification armor
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Armor/security.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Armor/security.rsi
+  - type: StaminaConvertArmor
+    damageType: Shock
+    damageCoefficient: 0.3
+    ignoredEffects:
+    - Paralyze

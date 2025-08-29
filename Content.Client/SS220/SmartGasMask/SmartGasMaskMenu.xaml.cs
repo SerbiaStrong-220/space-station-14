@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Numerics;
-using Content.Client.MainMenu.UI;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.SS220.SmartGasMask;
 using Content.Shared.SS220.SmartGasMask.Prototype;
@@ -15,10 +15,10 @@ namespace Content.Client.SS220.SmartGasMask;
 [GenerateTypedNameReferences]
 public sealed partial class SmartGasMaskMenu : RadialMenu
 {
-    public event Action<ProtoId<AlertSmartGasMaskPrototype>>? SendAlertSmartGasMaskRadioMessageAction;
-
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+
+    public event Action<ProtoId<AlertSmartGasMaskPrototype>>? SendAlertSmartGasMaskRadioMessageAction;
 
     public EntityUid Entity { get; set; }
 

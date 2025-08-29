@@ -46,3 +46,9 @@ public sealed class ShuttleNavInfoUpdateProjectilesMessage(List<(MapCoordinates,
 {
     public List<(MapCoordinates CurCoordinates, ShuttleNavProjectileInfo Info)> List = list;
 }
+
+[Serializable, NetSerializable]
+public sealed class ShuttleNavInfoUpdateForcefieldsMessage(List<ShuttleNavForcefieldInfo> infos) : EntityEventArgs
+{
+    public List<ShuttleNavForcefieldInfo> Infos = infos;
+}

@@ -20,7 +20,7 @@
     tags:
     - Omnivorous
     - CultYoggStealthProvidable
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 5
   - type: TileSpawnInRangeOnTrigger
     kudzuProtoId: StrangeKudzu

@@ -1,0 +1,16 @@
+- type: constructionGraph
+  id: randomPosterLegal
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: legalposter
+          steps:
+            - tag: Legalposter
+              name: construction-graph-tag-Legalposter
+              icon:
+                sprite: SS220/Objects/Misc/Legalposter.rsi
+                state: legalposter
+              doAfter: 1
+    - node: legalposter
+      entity: PostersLegitSpawner
