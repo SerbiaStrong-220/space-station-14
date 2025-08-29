@@ -24,9 +24,9 @@ namespace Content.Shared.SS220.Experience;
 //  tree have 4 skills in it with maxSublevels 4 3 3 and 2.
 //  | shows StudyingProgress
 // it is possible to have images:
-//  [xx|][oo] <= this means that 1 skill cant be studied  SkillTreeExperienceInfo is (0, 2)
-//  [xx]| <= this will happen if we ended tree SkillTreeExperienceInfo is (1, null)
-//  [xx][|00] <= this !can! mean that we earned 1 skill but 2 banned from studying SkillTreeExperienceInfo is (1, 0)
+//  [xx|][oo] <= this means that 1 skill cant be studied  SkillTreeExperienceInfo is (0, 2, false)
+//  [xx]| <= this will happen if we ended tree SkillTreeExperienceInfo is (0, 0, true)
+//  [xx][|00] <= this !can! mean that we earned 1 skill but 2 banned from studying SkillTreeExperienceInfo is (1, 0, false)
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState(true, fieldDeltas: true)]
@@ -36,6 +36,13 @@ public sealed partial class ExperienceComponent : Component
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
     public SortedDictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
+
+    /// <summary>
+    /// This is used to override <see cref="ExperienceComponent.Skills"/> in checks
+    /// </summary>
+    [AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadOnly)]
+    public SortedDictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> OverrideSkills = new();
 
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
@@ -51,7 +58,7 @@ public sealed partial class ExperienceComponent : Component
 }
 
 [NetSerializable]
-public struct SkillTreeExperienceInfo
+public sealed class SkillTreeExperienceInfo
 {
     /// <summary>
     /// Defines current skill level
@@ -69,7 +76,7 @@ public struct SkillTreeExperienceInfo
     /// </summary>
     public bool SkillStudied;
 
-    public override readonly string ToString()
+    public override string ToString()
     {
         return $"level is {SkillLevel}, sublevel is {SkillSublevel}, skill studied is {SkillStudied}";
     }

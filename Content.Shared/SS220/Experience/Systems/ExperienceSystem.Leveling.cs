@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Diagnostics.CodeAnalysis;
+using Content.Shared.SS220.SuperMatter.Emitter;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -63,8 +65,11 @@ public sealed partial class ExperienceSystem : EntitySystem
     /// Handles starting studying next skill
     /// image: [xxx]|[oo] -> [xxx][|oo]
     /// </summary>
-    private void InternalProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
+    private void InternalProgressTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree)
     {
+        if (!ResolveInfoAndTree(entity, skillTree, out var info, out var treeProto))
+            return;
+
         DebugTools.Assert(CanProgressTree(info, treeProto), $"Called {nameof(InternalProgressTree)} but tree progress is blocked, info {info} and tree id is {treeProto.ID}");
 
         info.SkillLevel++;
@@ -75,8 +80,11 @@ public sealed partial class ExperienceSystem : EntitySystem
     /// Handles ending studying skill
     /// image: [xx|][ooo] -> [xx]|[ooo]
     /// </summary>
-    private void InternalProgressLevel(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
+    private void InternalProgressLevel(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree)
     {
+        if (!ResolveInfoAndTree(entity, skillTree, out var info, out var treeProto))
+            return;
+
         DebugTools.Assert(CanProgressLevel(info, treeProto));
 
         if (!TryGetCurrentSkillPrototype(info, treeProto, out var skillPrototype))
@@ -102,14 +110,38 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!entity.Comp.StudyingProgress.TryGetValue(skillTree, out var _))
             return;
 
-        if (entity.Comp.Skills.TryGetValue(skillTree, out var info))
-        {
-            Log.Error($"Cant get skill info for progress sublevel in tree {skillTree} and entity {ToPrettyString(entity)}!");
+        if (!ResolveInfoAndTree(entity, skillTree, out var info, out var _))
             return;
-        }
 
-        // Do not overflow of it
+        // Do not save overflow progress of it
         entity.Comp.StudyingProgress[skillTree] = _startLearningProgress;
         info.SkillSublevel++;
+    }
+
+    private bool ResolveInfoAndTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree,
+                                [NotNullWhen(true)] out SkillTreeExperienceInfo? info, [NotNullWhen(true)] out SkillTreePrototype? prototype,
+                                bool logMissing = true)
+    {
+        prototype = null;
+        info = null;
+
+        if (!entity.Comp.Skills.TryGetValue(skillTree, out var skillInfo))
+        {
+            if (logMissing)
+                Log.Error($"Cant get skill info for progress sublevel in tree {skillTree} and entity {ToPrettyString(entity)}!");
+
+            return false;
+        }
+
+        if (!_prototype.TryIndex(skillTree, out prototype))
+        {
+            if (logMissing)
+                Log.Error($"Cant index skill tree prototype with id {skillTree}");
+
+            return false;
+        }
+
+        info = skillInfo;
+        return true;
     }
 }
