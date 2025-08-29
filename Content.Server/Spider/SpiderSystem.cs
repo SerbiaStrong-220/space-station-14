@@ -7,7 +7,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Spawners;
 
 namespace Content.Server.Spider;
 
@@ -111,7 +110,6 @@ public sealed class SpiderSystem : SharedSpiderSystem
 
     private bool IsTileBlockedByWeb(EntityCoordinates coords)
     {
-
         _webs.Clear();
         // TODO-SS220-remove-after-pr-in-robustToolbox-6171
         // begin
