@@ -17,13 +17,16 @@ public sealed class SpiderSystem : SharedSpiderSystem
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    // TODO-SS220-remove-after-pr-in-robustToolbox-6171
+    // begin
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
+    // end
 
     /// <summary>
     ///     A recycled hashset used to check turfs for spiderwebs.
     /// </summary>
     private readonly HashSet<EntityUid> _webs = [];
-
-    private const float SpawnedAIWebLifetime = 120f; // SS220-fix-endless-web-in-tile
 
     public override void Initialize()
     {
@@ -51,15 +54,7 @@ public sealed class SpiderSystem : SharedSpiderSystem
                 continue;
 
             var transform = Transform(uid);
-            SpawnWeb((uid, spider), transform.Coordinates, out var spawned);
-            // SS220-fix-endless-web-in-tile-begin
-            // remove when PlacementReplacement will be fixed
-            foreach (var web in spawned)
-            {
-                var comp = EnsureComp<TimedDespawnComponent>(web);
-                comp.Lifetime = SpawnedAIWebLifetime;
-            }
-            // SS220-fix-endless-web-in-tile-end
+            SpawnWeb((uid, spider), transform.Coordinates);
         }
     }
 
@@ -76,7 +71,7 @@ public sealed class SpiderSystem : SharedSpiderSystem
             return;
         }
 
-        var result = SpawnWeb((uid, component), transform.Coordinates, out _); // SS220-fix-endless-web-in-tile
+        var result = SpawnWeb((uid, component), transform.Coordinates);
 
         if (result)
         {
@@ -87,15 +82,14 @@ public sealed class SpiderSystem : SharedSpiderSystem
             _popup.PopupEntity(Loc.GetString("spider-web-action-fail"), args.Performer, args.Performer);
     }
 
-    private bool SpawnWeb(Entity<SpiderComponent> ent, EntityCoordinates coords, out IEnumerable<EntityUid> spawned) // SS220-fix-endless-web-in-tile
+    private bool SpawnWeb(Entity<SpiderComponent> ent, EntityCoordinates coords)
     {
-        spawned = []; // SS220-fix-endless-web-in-tile-begin
         var result = false;
 
         // Spawn web in center
         if (!IsTileBlockedByWeb(coords))
         {
-            spawned = spawned.Append(Spawn(ent.Comp.WebPrototype, coords)); // SS220-fix-endless-web-in-tile-begin
+            Spawn(ent.Comp.WebPrototype, coords);
             result = true;
         }
 
@@ -108,7 +102,7 @@ public sealed class SpiderSystem : SharedSpiderSystem
             if (IsTileBlockedByWeb(outerSpawnCoordinates))
                 continue;
 
-            spawned = spawned.Append(Spawn(ent.Comp.WebPrototype, outerSpawnCoordinates)); // SS220-fix-endless-web-in-tile-begin
+            Spawn(ent.Comp.WebPrototype, outerSpawnCoordinates);
             result = true;
         }
 
@@ -117,8 +111,23 @@ public sealed class SpiderSystem : SharedSpiderSystem
 
     private bool IsTileBlockedByWeb(EntityCoordinates coords)
     {
+
         _webs.Clear();
-        _turf.GetEntitiesInTile(coords, _webs);
+        // TODO-SS220-remove-after-pr-in-robustToolbox-6171
+        // begin
+        var mapId = _transform.GetMapId(coords);
+
+        if (!_turf.TryGetTileRef(coords, out var tileRef))
+            return true;
+
+        var bounds = _lookup.GetWorldBounds(tileRef.Value);
+        bounds.Box = bounds.Box.Scale(0.5f); // handpicked for all 4 webs spawning in empty tiles (with larger values its spawn only under spider)
+
+        // LookupFlags.Static | LookupFlags.Sensors flags are found by hands, neither Static or Sensors will find it, only together
+        _lookup.GetEntitiesIntersecting(mapId, bounds.CalcBoundingBox(), _webs, LookupFlags.Static | LookupFlags.Sensors);
+
+        // _turf.GetEntitiesInTile(coords, _webs);
+        // end
         foreach (var entity in _webs)
         {
             if (HasComp<SpiderWebObjectComponent>(entity))
