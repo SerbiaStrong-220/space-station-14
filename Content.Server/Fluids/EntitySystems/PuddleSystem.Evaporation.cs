@@ -1,16 +1,16 @@
 using Content.Server.Mind;
-using Content.Server.SS220.RoundEndInfo;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Fluids.Components;
+using Content.Shared.SS220.RoundEndInfo;
 
 namespace Content.Server.Fluids.EntitySystems;
 
 public sealed partial class PuddleSystem
 {
     //ss220 add additional info for round start
-    [Dependency] private readonly RoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     //ss220 add additional info for round end
 

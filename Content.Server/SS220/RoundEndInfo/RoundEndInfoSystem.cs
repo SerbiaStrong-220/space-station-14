@@ -13,13 +13,12 @@ namespace Content.Server.SS220.RoundEndInfo;
 /// </summary>
 public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
 {
-    [Dependency] private readonly RoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnd);
-        SubscribeLocalEvent<RoundEndInfoSendEvent>(OnRoundSend);
     }
 
     /// <summary>
@@ -28,23 +27,17 @@ public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
     private void OnRoundEnd(RoundEndedEvent args)
     {
         SendAdditionalInfo();
-        _infoManager.ClearAllDatas();
-    }
-
-    private void OnRoundSend(RoundEndInfoSendEvent ev)
-    {
-        SendAntagInfo();
+        _infoManager.ClearAllData();
     }
 
     /// <summary>
     /// Compiles antagonist item purchases from AntagPurchaseInfo and sends them
     /// to all clients via a network event.
     /// </summary>
-    public void SendAntagInfo()
+    private void SendAntagInfo(List<IRoundEndInfoData> blocks)
     {
         var info = _infoManager.EnsureInfo<AntagPurchaseInfo>()!;
-
-        var ev = new RoundEndAntagItemsEvent();
+        var purchaseList = new List<RoundEndAntagPurchaseData>();
 
         foreach (var allPurchase in info.GetAllPurchases())
         {
@@ -52,7 +45,7 @@ public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
                 || string.IsNullOrEmpty(mind.CharacterName))
                 continue;
 
-            ev.PlayerPurchases.Add(new RoundEndAntagPurchaseData
+            purchaseList.Add(new RoundEndAntagPurchaseData
             {
                 Name = mind.CharacterName,
                 ItemPrototypes = allPurchase.Value.ItemPrototypes,
@@ -60,14 +53,14 @@ public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
             });
         }
 
-        RaiseNetworkEvent(ev);
+        blocks.AddRange(purchaseList.OrderByDescending(p => p.TotalTC));
     }
 
     /// <summary>
     /// Collects all IRoundEndInfoDisplay entries, groups them by category, formats their text content,
     /// and sends the aggregated result to clients for display in the round end summary UI.
     /// </summary>
-    public void SendAdditionalInfo()
+    private void SendAdditionalInfo()
     {
         var groups = _infoManager.GetAllInfos()
             .OfType<IRoundEndInfoDisplay>()
@@ -75,6 +68,9 @@ public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
             .GroupBy(info => info.DisplayOrder / 100);
 
         var blocks = new List<IRoundEndInfoData>();
+
+        // we need to add antag blocks firstly, cause antag info must be on top
+        SendAntagInfo(blocks);
 
         foreach (var group in groups)
         {
@@ -90,17 +86,17 @@ public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
                 color ??= display.BackgroundColor;
             }
 
-            if (!builder.IsEmpty)
-            {
-                var displayBlock = new RoundEndInfoDisplayBlock
-                {
-                    Title = title ?? Loc.GetString("additional-info-no-category"),
-                    Body = builder.ToMarkup(),
-                    Color = color ?? new Color(30, 30, 30, 200),
-                };
+            if (builder.IsEmpty)
+                continue;
 
-                blocks.Add(displayBlock);
-            }
+            var displayBlock = new RoundEndInfoDisplayBlock
+            {
+                Title = title ?? Loc.GetString("additional-info-no-category"),
+                Body = builder.ToMarkup(),
+                Color = color ?? new Color(30, 30, 30, 200),
+            };
+
+            blocks.Add(displayBlock);
         }
 
         RaiseNetworkEvent(new RoundEndAdditionalInfoEvent

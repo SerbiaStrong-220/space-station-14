@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Cargo.Components;
 using Content.Server.Mind;
-using Content.Server.SS220.RoundEndInfo;
 using Content.Server.Station.Components;
 using Content.Shared.Cargo;
 using Content.Shared.Cargo.BUI;
@@ -15,6 +14,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Labels.Components;
 using Content.Shared.Paper;
+using Content.Shared.SS220.RoundEndInfo;
 using Content.Shared.Station.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
@@ -266,7 +266,7 @@ namespace Content.Server.Cargo.Systems
 
             // ss220 add round end info start
             if (_mind.TryGetMind(player, out var mind, out _))
-                _roundEndInfo.EnsureInfo<CargoInfo>().AddMindToData(mind, order.ProductName, order.Price);
+                _infoManager.EnsureInfo<CargoInfo>().AddMindToData(mind, order.ProductName, order.Price);
             // ss220 add round end info end
         }
 

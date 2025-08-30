@@ -4,10 +4,10 @@ using Content.Shared.Mobs;
 using Content.Server.EUI;
 using Content.Server.SS220.Deathreminder;
 using Robust.Server.Player;
-using Content.Server.SS220.RoundEndInfo;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mind;
 using Content.Shared.Speech.Muting;
+using Content.Shared.SS220.RoundEndInfo;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Mobs;
@@ -20,7 +20,7 @@ public sealed class DeathgaspSystem: EntitySystem
     [Dependency] private readonly EuiManager _euiManager = null!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     //ss220 add additional info for round start
-    [Dependency] private readonly RoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
     //ss220 add additional info for round end
 
     public override void Initialize()

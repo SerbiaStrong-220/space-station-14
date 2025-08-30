@@ -36,6 +36,7 @@ using Content.Shared.Chat;
 using Content.Shared.Kitchen;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
+using Content.Shared.SS220.RoundEndInfo;
 
 namespace Content.Server.IoC
 {
@@ -71,12 +72,12 @@ namespace Content.Server.IoC
             IoCManager.Register<SponsorsManager>(); // Corvax-Sponsors
             IoCManager.Register<JoinQueueManager>(); // Corvax-Queue
             IoCManager.Register<TTSManager>(); // Corvax-TTS
-            IoCManager.Register<RoundEndInfoManager>(); //ss220 add additional info for round
             IoCManager.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
             IoCManager.Register<ServerInfoManager>();
             IoCManager.Register<PoissonDiskSampler>();
             IoCManager.Register<DiscordPlayerManager>(); // SS220 discord player manager
             IoCManager.Register<DiscordBanPostManager>();  // SS220 discord ban post manager
+            IoCManager.Register<ISharedRoundEndInfoManager, RoundEndInfoManager>(); //ss220 add additional info for round
             IoCManager.Register<ServerControlController>();
             IoCManager.Register<DiscordWebhook>();
             IoCManager.Register<VoteWebhooks>();

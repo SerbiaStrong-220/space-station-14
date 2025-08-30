@@ -7,7 +7,6 @@ using Content.Server.Station.Systems;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Server.Radio.EntitySystems;
-using Content.Server.SS220.RoundEndInfo;
 using Content.Shared.Cargo;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Cargo.Prototypes;
@@ -15,6 +14,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Paper;
+using Content.Shared.SS220.RoundEndInfo;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
@@ -45,7 +45,7 @@ public sealed partial class CargoSystem : SharedCargoSystem
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     //ss220 add additional info for round start
-    [Dependency] private readonly RoundEndInfoManager _roundEndInfo = default!;
+    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
     //ss220 add additional info for round end
 
     private EntityQuery<TransformComponent> _xformQuery;
@@ -119,7 +119,7 @@ public sealed partial class CargoSystem : SharedCargoSystem
 
         //ss220 add additional info for round start
         if (balanceAdded > 0)
-            _roundEndInfo.EnsureInfo<CargoInfo>().TotalMoneyEarned += balanceAdded;
+            _infoManager.EnsureInfo<CargoInfo>().TotalMoneyEarned += balanceAdded;
         //ss220 add additional info for round end
 
         var ev = new BankBalanceUpdatedEvent(ent, ent.Comp.Accounts);

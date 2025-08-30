@@ -1,9 +1,9 @@
-using Content.Server.SS220.RoundEndInfo;
 using Content.Shared.Destructible;
 using Content.Shared.Mining;
 using Content.Shared.Mining.Components;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.RoundEndInfo;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -17,7 +17,7 @@ public sealed class MiningSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     //ss220 add additional info for round start
-    [Dependency] private readonly RoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
     //ss220 add additional info for round end
 
     /// <inheritdoc/>

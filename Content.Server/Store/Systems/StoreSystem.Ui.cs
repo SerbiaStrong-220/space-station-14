@@ -1,7 +1,6 @@
 using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
-using Content.Server.SS220.RoundEndInfo;
 using Content.Server.Stack;
 using Content.Server.Store.Components;
 using Content.Server.Traitor.Uplink;
@@ -11,6 +10,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mind;
 using Content.Shared.PDA.Ringer;
+using Content.Shared.SS220.RoundEndInfo;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.UserInterface;
@@ -33,7 +33,7 @@ public sealed partial class StoreSystem
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     //ss220 add additional info for round start
-    [Dependency] private readonly RoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
     //ss220 add additional info for round end
 
     private void InitializeUi()

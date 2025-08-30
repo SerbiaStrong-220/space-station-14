@@ -7,9 +7,6 @@ namespace Content.Shared.SS220.RoundEndInfo;
 /// </summary>
 public abstract partial class SharedRoundEndInfoSystem : EntitySystem;
 
-[Serializable, NetSerializable]
-public sealed class RoundEndInfoSendEvent: EntityEventArgs;
-
 /// <summary>
 /// Marker interface for round-end data types.
 /// </summary>
@@ -69,18 +66,6 @@ public sealed class RoundEndAntagPurchaseData : IRoundEndInfoData
     /// The total amount of TC spent.
     /// </summary>
     public int TotalTC;
-}
-
-/// <summary>
-/// Event containing all antagonist purchase data for the round.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed class RoundEndAntagItemsEvent : EntityEventArgs
-{
-    /// <summary>
-    /// A list of antagonist purchase data per player.
-    /// </summary>
-    public List<RoundEndAntagPurchaseData> PlayerPurchases = new();
 }
 
 /// <summary>

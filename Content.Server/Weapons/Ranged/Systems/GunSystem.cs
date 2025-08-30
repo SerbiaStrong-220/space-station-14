@@ -26,6 +26,7 @@ using Robust.Shared.Utility;
 using Robust.Shared.Containers;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Server.SS220.Shuttles.UI;
+using Content.Shared.SS220.RoundEndInfo;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -38,7 +39,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     //ss220 add additional info for round start
-    [Dependency] private readonly RoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     //ss220 add additional info for round end
     [Dependency] private readonly ShuttleNavInfoSystem _shuttleNavInfo = default!; // SS220 Add projectiles & hitscan on shuttle nav

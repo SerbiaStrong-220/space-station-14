@@ -618,10 +618,6 @@ namespace Content.Server.GameTicking
             }
             // SS220 Round End Titles end
 
-            //ss220 add additional info for round start
-            RaiseLocalEvent(new RoundEndInfoSendEvent());
-            //ss220 add additional info for round end
-
             var roundEndMessageEvent = new RoundEndMessageEvent(
                 gamemodeTitle,
                 roundEndText,

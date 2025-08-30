@@ -58,18 +58,16 @@ public sealed class RoundEndSummaryUIController : UIController,
     }
 
     //ss220 add additional info for round start
-    public void PopulateAdditionalInfo(RoundEndAdditionalInfoEvent message)
+    public void PopulateAdditionalInfo(IRoundEndInfoData message)
     {
-        foreach (var info in message.AdditionalInfo)
+        switch (message)
         {
-            switch (info)
-            {
-                case RoundEndInfoDisplayBlock block:
-                {
-                    _window?.PopulateAdditionalInfo(block);
-                    break;
-                }
-            }
+            case RoundEndInfoDisplayBlock block:
+                _window?.PopulateAdditionalInfo(block);
+                break;
+            case RoundEndAntagPurchaseData antagBlock:
+                _window?.PopulateAntagInfo(antagBlock);
+                break;
         }
     }
     //ss220 add additional info for round end

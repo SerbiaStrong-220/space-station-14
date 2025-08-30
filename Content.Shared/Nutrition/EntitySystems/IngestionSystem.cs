@@ -15,13 +15,16 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
+using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
+using Content.Shared.SS220.RoundEndInfo;
 using Content.Shared.Tools.EntitySystems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Nutrition.EntitySystems;
@@ -54,6 +57,9 @@ public sealed partial class IngestionSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly ISharedRoundEndInfoManager _roundEndInfo = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     // Body Component Dependencies
     [Dependency] private readonly SharedBodySystem _body = default!;
@@ -393,6 +399,9 @@ public sealed partial class IngestionSystem : EntitySystem
 
         var eventArgs = new DestructionEventArgs();
         RaiseLocalEvent(food, eventArgs);
+
+        if (_net.IsServer && _mind.TryGetMind(args.User, out var mind, out _))
+            _roundEndInfo.EnsureInfo<FoodInfo>().AddMindToData(mind);
 
         PredictedDel(food);
 
