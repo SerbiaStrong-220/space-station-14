@@ -105,7 +105,7 @@
     FreezerHeaterStealObjective: 1
     TegStealObjective: 1
     BoozeDispenserStealObjective: 1
-    AltarNanotrasenStealObjective: 1
+#    AltarNanotrasenStealObjective: 1 ss220 delete-target-steal-altar-nanotrasen
     PlantRDStealObjective: 1
     ToiletGoldenStealObjective: 1
 
