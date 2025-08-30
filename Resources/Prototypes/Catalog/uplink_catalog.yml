@@ -2137,6 +2137,7 @@
     whitelist:
     - Botanist
     - HeadOfPersonnel
+    - SeniorService # SS220 add-seniorservice-work-sections-uplink
 
 - type: listing
   id: uplinkRiggedBoxingGlovesPassenger
@@ -2311,6 +2312,7 @@
     - Clown
     - Mime
     - HeadOfPersonnel
+    - SeniorService # SS220 add-seniorservice-work-sections-uplink
 
 - type: listing
   id: UplinkChimpUpgradeKit
@@ -2346,6 +2348,7 @@
     whitelist:
     - Janitor
     - HeadOfPersonnel
+    - SeniorService # SS220 add-seniorservice-work-sections-uplink
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -2371,6 +2374,7 @@
     - Scientist
     - ResearchDirector
     - Chef
+    - SeniorService # SS220 add-seniorservice-work-sections-uplink
 
 - type: listing
   id: UplinkCaneBlade
@@ -2412,6 +2416,7 @@
     whitelist:
     - Chef
     - Mime
+    - SeniorService # SS220 add-seniorservice-work-sections-uplink
 
 - type: listing
   id: UplinkContrabandLighter
