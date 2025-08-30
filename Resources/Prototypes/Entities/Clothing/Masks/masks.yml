@@ -402,6 +402,14 @@
     sprite: Clothing/Mask/swat.rsi
   - type: Clothing
     sprite: Clothing/Mask/swat.rsi
+    #SS220 - add-smart-mask-swat-and-blueshield - start
+  - type: UserInterface
+    interfaces:
+      enum.SmartGasMaskUiKey.Key:
+        type: SmartGasMaskBoundUserInterface
+  - type: SmartGasMask
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskSupport"]
+    #SS220 - add-smart-mask-swat-and-blueshield - end
   - type: Tag
     tags:
     - WhitelistChameleon
