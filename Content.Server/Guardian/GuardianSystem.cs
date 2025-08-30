@@ -121,7 +121,7 @@ namespace Content.Server.Guardian
 
         private void OnHostInit(EntityUid uid, GuardianHostComponent component, ComponentInit args)
         {
-            component.GuardianContainer = _container.EnsureContainer<ContainerSlot>(uid, "GuardianContainer");
+            component.GuardianContainer = _container.EnsureContainer<ContainerSlot>(uid, GuardianHostComponent.GuardianContainerId); // SS220-move-guardian-container-into-field
             _actionSystem.AddAction(uid, ref component.ActionEntity, component.Action);
         }
 
