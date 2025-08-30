@@ -51,7 +51,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             entity.Comp.Skills.Remove(skillTree);
         }
 
-        var ev = new SkillTreeAdded
+        var ev = new SkillTreeAddedEvent
         {
             SkillTree = skillTree,
             Info = new SkillTreeExperienceInfo { SkillLevel = StartSkillLevelIndex, SkillSublevel = StartSubLevelIndex }
@@ -59,17 +59,12 @@ public sealed partial class ExperienceSystem : EntitySystem
         RaiseLocalEvent(entity, ref ev);
 
         // never knows what coming...
-        DebugTools.Assert(ev.SkillTree == skillTree);
+        DebugTools.Assert(ev.SkillTree == skillTree, $"Raised {nameof(SkillTreeAddedEvent)} event with tree id {skillTree} but got with tree id {ev.SkillTree}");
         ResolveLeveling(ev.Info, ev.SkillTree);
 
         entity.Comp.Skills.Add(skillTree, ev.Info);
 
         DirtyField(entity!, nameof(ExperienceComponent.Skills));
-    }
-
-    private void InternalProgressSkillLevel(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree)
-    {
-        // TODO
     }
 
     private void ResolveLeveling(SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> tree)
