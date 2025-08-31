@@ -16,6 +16,28 @@ public sealed class SkillPrototype : IPrototype
 
     [DataField(required: true)]
     public SkillLevelDescription LevelDescription;
+
+    [DataField]
+    [AlwaysPushInheritance]
+    public ComponentRegistry Components { get; } = [];
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    [DataField]
+    public bool OverrideNotNullValues = false;
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    [DataField]
+    public bool OverrideNullValues = true;
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    [DataField]
+    public bool ApplyIfAlreadyHave = true;
 }
 
 [DataDefinition]
@@ -44,7 +66,6 @@ public partial struct SkillLevelInfo
     /// </summary>
     [DataField]
     public bool CanEndStudying = true;
-
 }
 
 [DataDefinition]

@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.SS220.SuperMatter.Emitter;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -9,6 +8,47 @@ namespace Content.Shared.SS220.Experience.Systems;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
+    #region Try methods
+
+    private bool TryProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
+    {
+        if (!CanProgressTree(info, treeProto))
+            return false;
+
+        InternalProgressTree(info, treeProto);
+        return true;
+    }
+
+    private bool TryProgressLevel(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> tree)
+    {
+        if (!ResolveInfoAndTree(entity, tree, out var info, out var treeProto))
+            return false;
+
+        return TryProgressLevel(entity, info, treeProto);
+    }
+
+    private bool TryProgressLevel(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
+    {
+        if (!CanProgressLevel(info, treeProto))
+            return false;
+
+        InternalProgressLevel(entity, info, treeProto);
+        return true;
+    }
+
+    private bool TryProgressSublevel(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> tree)
+    {
+        if (!CanProgressSublevel(entity, tree))
+            return false;
+
+        InternalProgressSublevel(entity, tree);
+        return true;
+    }
+
+    #endregion
+
+    #region Can methods
+
     /// <summary>
     /// Checks if we can start studying next skill
     /// image: [xxx]|[oo] -> [xxx][|oo]
@@ -61,6 +101,10 @@ public sealed partial class ExperienceSystem : EntitySystem
         return progress >= _endLearningProgress;
     }
 
+    #endregion
+
+    #region Internal methods
+
     /// <summary>
     /// Handles starting studying next skill
     /// image: [xxx]|[oo] -> [xxx][|oo]
@@ -70,8 +114,12 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!ResolveInfoAndTree(entity, skillTree, out var info, out var treeProto))
             return;
 
-        DebugTools.Assert(CanProgressTree(info, treeProto), $"Called {nameof(InternalProgressTree)} but tree progress is blocked, info {info} and tree id is {treeProto.ID}");
+        InternalProgressTree(info, treeProto);
+    }
 
+    private void InternalProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype skillTree)
+    {
+        DebugTools.Assert(CanProgressTree(info, skillTree), $"Called {nameof(InternalProgressTree)} but tree progress is blocked, info {info} and tree id is {skillTree.ID}");
         info.SkillLevel++;
         info.SkillStudied = false;
     }
@@ -85,17 +133,25 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!ResolveInfoAndTree(entity, skillTree, out var info, out var treeProto))
             return;
 
-        DebugTools.Assert(CanProgressLevel(info, treeProto));
+        InternalProgressLevel(entity, info, treeProto);
+    }
 
-        if (!TryGetCurrentSkillPrototype(info, treeProto, out var skillPrototype))
+    private void InternalProgressLevel(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, SkillTreePrototype skillTree)
+    {
+        DebugTools.Assert(CanProgressLevel(info, skillTree));
+
+        if (!TryGetCurrentSkillPrototype(info, skillTree, out var skillPrototype))
         {
-            Log.Error($"Cant get current skill proto for tree {treeProto.ID} and info is {info}");
+            Log.Error($"Cant get current skill proto for tree {skillTree.ID} and info is {info}");
             return;
         }
 
         // we save meta level progress of sublevel
         info.SkillSublevel = Math.Max(StartSubLevelIndex, info.SkillLevel - skillPrototype.LevelInfo.MaximumSublevel);
         info.SkillStudied = true;
+
+        var ev = new SkillLevelGained(skillTree.ID, skillPrototype);
+        RaiseLocalEvent(entity, ref ev);
     }
 
     /// <summary>
@@ -116,6 +172,8 @@ public sealed partial class ExperienceSystem : EntitySystem
         // Do not save overflow progress of it
         entity.Comp.StudyingProgress[skillTree] = _startLearningProgress;
         info.SkillSublevel++;
+
+        TryProgressLevel(entity, skillTree);
     }
 
     private bool ResolveInfoAndTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree,
@@ -144,4 +202,5 @@ public sealed partial class ExperienceSystem : EntitySystem
         info = skillInfo;
         return true;
     }
+    #endregion
 }

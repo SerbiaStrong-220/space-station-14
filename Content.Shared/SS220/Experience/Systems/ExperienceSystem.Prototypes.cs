@@ -1,11 +1,21 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Experience.Systems;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
+    private bool TryGetPreviousSkillPrototype(SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
+    {
+        skillPrototype = null;
+        if (!_prototype.Resolve(treeProto, out var resolvedProto))
+            return false;
+
+        return TryGetPreviousSkillPrototype(info, resolvedProto, out skillPrototype);
+    }
+
     private bool TryGetPreviousSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
         if (info.SkillLevel <= 0)
@@ -17,9 +27,27 @@ public sealed partial class ExperienceSystem : EntitySystem
         return ResolveSkillPrototypeInternal(info.SkillLevel - 1, treeProto, out skillPrototype);
     }
 
+    private bool TryGetCurrentSkillPrototype(SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
+    {
+        skillPrototype = null;
+        if (!_prototype.Resolve(treeProto, out var resolvedProto))
+            return false;
+
+        return TryGetCurrentSkillPrototype(info, resolvedProto, out skillPrototype);
+    }
+
     private bool TryGetCurrentSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
         return ResolveSkillPrototypeInternal(info.SkillLevel, treeProto, out skillPrototype);
+    }
+
+    private bool TryGetNextSkillPrototype(SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
+    {
+        skillPrototype = null;
+        if (!_prototype.Resolve(treeProto, out var resolvedProto))
+            return false;
+
+        return TryGetNextSkillPrototype(info, resolvedProto, out skillPrototype);
     }
 
     private bool TryGetNextSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)

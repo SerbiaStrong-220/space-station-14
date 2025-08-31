@@ -2,6 +2,7 @@
 
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Experience.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -33,6 +34,20 @@ namespace Content.Shared.SS220.Experience;
 [Access(typeof(ExperienceSystem))]
 public sealed partial class ExperienceComponent : Component
 {
+    public const string ContainerId = "experience-entity-container";
+
+    /// <summary>
+    /// Container which entity with skill components.
+    /// </summary>
+    [ViewVariables] public ContainerSlot ExperienceContainer = default!;
+
+    public const string OverrideContainerId = "override-experience-entity-container";
+
+    /// <summary>
+    /// Container which entity with skill components. This overrides base one.
+    /// </summary>
+    [ViewVariables] public ContainerSlot OverrideExperienceContainer = default!;
+
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
     public SortedDictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();

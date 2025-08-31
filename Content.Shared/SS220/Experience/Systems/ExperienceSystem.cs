@@ -17,14 +17,17 @@ public sealed partial class ExperienceSystem : EntitySystem
     private readonly FixedPoint4 _startLearningProgress = 0;
     private readonly FixedPoint4 _endLearningProgress = 1;
 
+    private readonly EntProtoId _baseSKillPrototype = "InitSkillEntity";
+
     public override void Initialize()
     {
         base.Initialize();
 
-
+        SubscribeLocalEvent<ExperienceComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<ExperienceComponent, ComponentShutdown>(OnShutdown);
     }
 
-    public bool TryProgressLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, float delta)
+    public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, float delta)
     {
         if (!Resolve(entity.Owner, ref entity.Comp, false))
             return false;
@@ -39,16 +42,17 @@ public sealed partial class ExperienceSystem : EntitySystem
             return true;
         }
 
-        entity.Comp.StudyingProgress[skillTree] = FixedPoint4.Max(result, _startLearningProgress);
+        entity.Comp.StudyingProgress[skillTree] = FixedPoint4.Clamp(result, _startLearningProgress, _endLearningProgress);
         return true;
     }
 
     public void InitExperienceSkillTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree)
     {
-        if (entity.Comp.Skills.ContainsKey(skillTree))
+        if (entity.Comp.Skills.ContainsKey(skillTree) || entity.Comp.StudyingProgress.ContainsKey(skillTree))
         {
-            Log.Error("Tried to init skill that already existed");
+            Log.Error("Tried to init skill that already existed or being studied");
             entity.Comp.Skills.Remove(skillTree);
+            entity.Comp.StudyingProgress.Remove(skillTree);
         }
 
         var ev = new SkillTreeAddedEvent
@@ -60,46 +64,34 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         // never knows what coming...
         DebugTools.Assert(ev.SkillTree == skillTree, $"Raised {nameof(SkillTreeAddedEvent)} event with tree id {skillTree} but got with tree id {ev.SkillTree}");
-        ResolveLeveling(ev.Info, ev.SkillTree);
+        ResolveInitLeveling(entity, ev.Info, ev.SkillTree);
 
         entity.Comp.Skills.Add(skillTree, ev.Info);
+        entity.Comp.StudyingProgress.Add(skillTree, _startLearningProgress);
 
         DirtyField(entity!, nameof(ExperienceComponent.Skills));
     }
 
-    private void ResolveLeveling(SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> tree)
+    private void ResolveInitLeveling(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> tree)
     {
         var treeProto = _prototype.Index(tree);
 
-        if (!CanProgressLevel(info, treeProto))
+        if (!CanProgressTree(info, treeProto))
         {
-            var lastSkill = treeProto.SkillTree.Last();
-            var lastSkillProto = _prototype.Index(lastSkill);
-            info.SkillSublevel = Math.Min(info.SkillSublevel, lastSkillProto.LevelInfo.MaximumSublevel);
+            info.SkillSublevel = 0;
+            info.SkillStudied = true;
+            return;
         }
 
-        const int maxCycles = 50;
+        const int maxCycles = 20;
         int cycle;
         bool canProgress = true;
-        for (cycle = 0; (cycle < maxCycles) && canProgress; cycle++)
+        for (cycle = 0; cycle < maxCycles && canProgress; cycle++)
         {
-            canProgress = CanProgressLevel(info, treeProto);
-            if (canProgress)
-            {
-
-            }
+            canProgress = TryProgressLevel(entity, info, treeProto) && TryProgressTree(info, treeProto);
         }
 
         if (cycle == maxCycles - 1)
-        {
             Log.Error($"Cant update progress for {maxCycles} while resolving {tree.Id}!");
-        }
-
-
-
     }
-
-
-
-
 }
