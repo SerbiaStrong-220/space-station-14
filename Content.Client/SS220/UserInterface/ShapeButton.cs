@@ -119,4 +119,23 @@ public sealed class ShapeButton : Button
         handle.DrawRect(box, Color.White);
         handle.UseShader(null);
     }
+
+    /// <summary>
+    /// Code is the same as in shader
+    /// </summary>
+    /// <param name="point">Mouse Position</param>
+    protected override bool HasPoint(Vector2 point)
+    {
+        var size = Size;
+        var half = size / 2f;
+
+        var local = point - half;
+
+        var r = Radius;
+
+        var q = new Vector2(MathF.Abs(local.X), MathF.Abs(local.Y)) - (half - new Vector2(BorderThickness)) + new Vector2(r);
+        var dist = (Vector2.Max(q, Vector2.Zero)).Length() - r;
+
+        return dist <= 0;
+    }
 }
