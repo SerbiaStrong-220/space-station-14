@@ -28,7 +28,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         QueueDel(_container.EmptyContainer(entity.Comp.OverrideExperienceContainer).FirstOrNull());
     }
 
-
     public bool TryAddSkillToSkillEntity(Entity<ExperienceComponent> entity, string containerId, SkillPrototype skill)
     {
         // TODO
@@ -49,4 +48,31 @@ public sealed partial class ExperienceSystem : EntitySystem
         // }
     }
 
+    public void SubscribeSkillEntityToEvent<T>() where T : EntityEventArgs
+    {
+        SubscribeLocalEvent<ExperienceComponent, T>(RelayEventToSkillEntity);
+    }
+
+    private void RelayEventToSkillEntity<T>(Entity<ExperienceComponent> entity, ref T args) where T : EntityEventArgs
+    {
+        var overrideSkillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
+        var skillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
+
+        if (skillEntity is null && overrideSkillEntity is null)
+            return;
+
+        // This check works as safe from missrelaying
+        if ((!TryComp<SkillComponent>(skillEntity, out var comp) && skillEntity is not null)
+            || (!TryComp<SkillComponent>(overrideSkillEntity, out var overrideComp) && overrideSkillEntity is not null))
+        {
+            Log.Error($"Got skill entities not null but without skill component! entity is {ToPrettyString(skillEntity)}, override is {ToPrettyString(overrideSkillEntity)}!");
+            return;
+        }
+
+        if (skillEntity is not null)
+            RaiseLocalEvent(skillEntity.Value, ref args);
+
+        if (overrideSkillEntity is not null)
+            RaiseLocalEvent(overrideSkillEntity.Value, ref args);
+    }
 }

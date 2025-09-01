@@ -3,6 +3,9 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.ChangeSpeedDoAfters.Events;
 
+[ByRefEvent]
+public record struct DoAfterBeforeComplete(DoAfterArgs DoAfterEvent, bool Cancel = false);
+
 /// <summary>
 /// This event raised every frameTime on user
 /// </summary>

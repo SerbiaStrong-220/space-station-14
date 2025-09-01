@@ -1,35 +1,38 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-// THE only reason if DoAfter living in on folder and namespace is it "WA DA IS IT" nature
+// THE only reason if DoAfter living in on folder and namespace is it abstract nature to match DoAfterEvents and base functions
+
+using Content.Shared.DoAfter;
+using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
+using Content.Shared.SS220.Experience.Systems;
+
 namespace Content.Shared.SS220.Experience.DoAfterEffect;
 
-public sealed partial class ExperienceSystem : EntitySystem
+public abstract partial class BaseSkillDoAfterEffectSystem<T1, T2> : EntitySystem where T1 : BaseSkillDoAfterEffectComponent
+                                                                                    where T2 : DoAfterEvent
 {
-    // public bool OverrideNotNullValues = false;
-    // public bool OverrideNullValues = true;
-    // public bool ApplyIfAlreadyHave = true;
-    public void Merge(Entity<SkillDoAfterEffectContainerComponent?> entity, ref readonly SkillDoAfterEffectComponent skillDoAfterEffect,
-                                                                  bool applyIfAlreadyHave, bool overrideNullValues, bool overrideNotNullValues)
-    {
-        entity.Comp = EnsureComp<SkillDoAfterEffectContainerComponent>(entity.Owner);
+    [Dependency] private readonly ExperienceSystem _experience = default!;
 
-        foreach (var (ev, effectInfo) in skillDoAfterEffect.Effect)
-        {
-            var evGuid = ev.GetType().GUID;
-            if (entity.Comp.EffectContainer.TryGetValue(evGuid, out var effect))
-            {
-                MergeDoAfterEffects(effect, in effectInfo, overrideNullValues, overrideNotNullValues);
-                entity.Comp.EffectContainer[evGuid] = effect;
-            }
-            else
-            {
-                entity.Comp.EffectContainer.Add(evGuid, effectInfo);
-            }
-        }
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<T1, BeforeDoAfterStartEvent>(OnDoAfterStart);
+        SubscribeLocalEvent<T1, T2>(OnDoAfterEnd);
+
+        _experience.SubscribeSkillEntityToEvent<T2>();
     }
 
-    private void MergeDoAfterEffects(DoAfterEffect effect, ref readonly DoAfterEffect skillEffect, bool overrideNullValues, bool overrideNotNullValues)
+    protected void OnDoAfterStart(Entity<T1> entity, ref BeforeDoAfterStartEvent args)
     {
+        if (!args.Args.Event.GetType().Equals(typeof(T2)))
+            return;
 
+
+    }
+    protected void OnDoAfterEnd(Entity<T1> entity, ref T2 args)
+    {
+        if (!args.Args.Event.GetType().Equals(typeof(T2)))
+            return;
     }
 }
