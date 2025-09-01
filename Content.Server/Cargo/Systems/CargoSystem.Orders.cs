@@ -266,7 +266,7 @@ namespace Content.Server.Cargo.Systems
 
             // ss220 add round end info start
             if (_mind.TryGetMind(player, out var mind, out _))
-                _infoManager.EnsureInfo<CargoInfo>().AddMindToData(mind, order.ProductName, order.Price);
+                _infoManager.EnsureInfo<CargoInfo>().RecordOrder(mind, order.ProductName, order.OrderQuantity, order.Price);
             // ss220 add round end info end
         }
 

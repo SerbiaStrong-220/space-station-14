@@ -1,10 +1,16 @@
+using System.Linq;
 using Content.Shared.Mind;
 
 namespace Content.Shared.SS220.RoundEndInfo;
 
+/// <summary>
+/// Shared realization server manager
+/// On a client all method's must return null or do nothing.
+/// </summary>
 public interface ISharedRoundEndInfoManager
 {
     public T EnsureInfo<T>() where T : class, IRoundEndInfo, new();
+    public bool TryGetInfo<T>(out T info) where T : IRoundEndInfo;
     public void ClearAllData();
     public IEnumerable<IRoundEndInfo> GetAllInfos();
 }
@@ -22,20 +28,10 @@ public static class RoundEndInfoUtils
         Dictionary<EntityUid, TData> dict,
         Func<TData, int> selector)
     {
-        EntityUid? topUid = null;
-        var topValue = 0;
+        if (dict.Count == 0)
+            return (null, 0);
 
-        foreach (var (uid, data) in dict)
-        {
-            var value = selector(data);
-
-            if (value <= topValue)
-                continue;
-
-            topValue = value;
-            topUid = uid;
-        }
-
-        return (topUid, topValue);
+        var topPair = dict.MaxBy(kvp => selector(kvp.Value));
+        return (topPair.Key, selector(topPair.Value));
     }
 }

@@ -8,8 +8,8 @@ namespace Content.Server.SS220.RoundEndInfo;
 
 /// <summary>
 /// Sends and organizes server-side round end summary data for display on the client.
-/// Gathers statistics from IRoundEndInfoDisplay sources and broadcasts them
-/// as structured blocks. Also handles antagonist purchase info.
+/// Gathers statistics from <see cref="IRoundEndInfoDisplay"/> sources and broadcasts them
+/// as structured blocks. Also handles <see cref="AntagPurchaseInfo"/>.
 /// </summary>
 public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
 {
@@ -31,15 +31,17 @@ public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
     }
 
     /// <summary>
-    /// Compiles antagonist item purchases from AntagPurchaseInfo and sends them
-    /// to all clients via a network event.
+    /// Compiles antagonist item purchases from <see cref="AntagPurchaseInfo"/> and sends them
+    /// to all clients via a network event <see cref="RoundEndAdditionalInfoEvent"/>.
     /// </summary>
-    private void SendAntagInfo(List<IRoundEndInfoData> blocks)
+    private void AddAntagPurchaseInfo(List<IRoundEndInfoData> blocks)
     {
-        var info = _infoManager.EnsureInfo<AntagPurchaseInfo>()!;
+        if (!_infoManager.TryGetInfo<AntagPurchaseInfo>(out var info))
+            return;
+
         var purchaseList = new List<RoundEndAntagPurchaseData>();
 
-        foreach (var allPurchase in info.GetAllPurchases())
+        foreach (var allPurchase in info.Purchases)
         {
             if (!TryComp(allPurchase.Key, out MindComponent? mind)
                 || string.IsNullOrEmpty(mind.CharacterName))
@@ -57,7 +59,7 @@ public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
     }
 
     /// <summary>
-    /// Collects all IRoundEndInfoDisplay entries, groups them by category, formats their text content,
+    /// Collects all <see cref="IRoundEndInfoDisplay"/> entries, groups them by category, formats their text content,
     /// and sends the aggregated result to clients for display in the round end summary UI.
     /// </summary>
     private void SendAdditionalInfo()
@@ -70,7 +72,7 @@ public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
         var blocks = new List<IRoundEndInfoData>();
 
         // we need to add antag blocks firstly, cause antag info must be on top
-        SendAntagInfo(blocks);
+        AddAntagPurchaseInfo(blocks);
 
         foreach (var group in groups)
         {

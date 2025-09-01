@@ -280,12 +280,10 @@ public sealed partial class StoreSystem
         //ss220 add additional info for round start
         if (listing.Cost.TryGetValue(UplinkSystem.TelecrystalCurrencyPrototype, out var costTc))
         {
-            var mindForInfo = _mind.GetMind(msg.Actor);
-
-            if (mindForInfo != null)
+            if (_mind.TryGetMind(msg.Actor, out var mind, out _))
             {
                 var tcAmount = costTc.Value / 100;
-                _infoManager.EnsureInfo<AntagPurchaseInfo>().AddPurchase(mindForInfo.Value, listing.ID, tcAmount);
+                _infoManager.EnsureInfo<AntagPurchaseInfo>().RecordPurchase(mind, listing.ID, tcAmount);
             }
         }
         //ss220 add additional info for round end

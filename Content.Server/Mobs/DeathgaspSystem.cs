@@ -49,7 +49,7 @@ public sealed class DeathgaspSystem: EntitySystem
                     }
 
                     //ss220 add additional info for round start
-                    _infoManager.EnsureInfo<DeathInfo>().AddMindToData(mind);
+                    _infoManager.EnsureInfo<DeathInfo>().RecordDeath(mind);
                     //ss220 add additional info for round end
                 }
             }

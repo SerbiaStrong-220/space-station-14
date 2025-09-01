@@ -21,6 +21,7 @@ additional-info-cargo =
     Всего заработано: [bold][color=gold]{ $totalMoney }$[/color][/bold]
     Всего заказов одобрено: [bold][color=gold]{ $totalOrders }[/color][/bold]
     Больше всего заказов одобрил: [bold][color=gold]{ $totalOrderPlayer } ({$totalOrderPlayerCount})[/color][/bold]
+    Самый покупаемый товар: [bold][color=gold]{ $maxOrderedItemName } ({ $maxOrderedItemCount } ед.)[/color][/bold]
 
 additional-info-total-points-earned =
     Всего заработано очков в отделе РнД: [bold][color=mediumpurple]{$totalPoints}[/color][/bold]
@@ -44,7 +45,7 @@ additional-info-janitor-categories =
 
 additional-info-total-puddles =
     Всего убрано луж: { $puddleValue }
-    Больше всего убрано луж: [bold][color=green]{ $janitorName } ({ $janitorValue })[/color][/bold]
+    Больше всего убрано луж: [bold][color=green]{ $janitorName } ({ $janitorValue } ед.)[/color][/bold]
 # JANITOR STATS END
 
 # DEATH STATS START

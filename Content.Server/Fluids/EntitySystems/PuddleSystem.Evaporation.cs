@@ -70,7 +70,7 @@ public sealed partial class PuddleSystem
                 if (puddle.LastInteractionUser != null &&
                     _mind.TryGetMind(puddle.LastInteractionUser.Value, out var mind, out _))
                 {
-                    _infoManager.EnsureInfo<PuddleInfo>().AddMindToData(mind);
+                    _infoManager.EnsureInfo<PuddleInfo>().RecordCleaning(mind);
                 }
                 //ss220 add additional info for round end
 

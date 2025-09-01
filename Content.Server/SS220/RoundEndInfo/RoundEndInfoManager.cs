@@ -8,7 +8,14 @@ namespace Content.Server.SS220.RoundEndInfo;
 /// </summary>
 public sealed class RoundEndInfoManager : ISharedRoundEndInfoManager
 {
+    [Dependency] private readonly IDynamicTypeFactory _dynamicFactory = default!;
+
     private readonly Dictionary<Type, IRoundEndInfo> _infos = new();
+
+    public RoundEndInfoManager()
+    {
+        IoCManager.InjectDependencies(this);
+    }
 
     /// <summary>
     /// Ensures that an instance of the specified IRoundEndInfo type exists and returns it.
@@ -21,19 +28,36 @@ public sealed class RoundEndInfoManager : ISharedRoundEndInfoManager
         if (_infos.TryGetValue(typeof(T), out var existing))
             return (T) existing;
 
-        var instance = new T();
-
+        var instance = _dynamicFactory.CreateInstance<T>();
         _infos.Add(typeof(T), instance);
         return instance;
+    }
+
+    public bool TryGetInfo<T>(out T info) where T : IRoundEndInfo
+    {
+        if (!_infos.TryGetValue(typeof(T), out var existing))
+        {
+            info = default!;
+            return false;
+        }
+
+        info = (T) existing;
+        return true;
     }
 
     /// <summary>
     /// Clears all stored IRoundEndInfo instances from the manager.
     /// </summary>
-    public void ClearAllData() => _infos.Clear();
+    public void ClearAllData()
+    {
+        _infos.Clear();
+    }
 
     /// <summary>
     /// Returns an enumeration of all currently stored IRoundEndInfo instances.
     /// </summary>
-    public IEnumerable<IRoundEndInfo> GetAllInfos() => _infos.Values;
+    public IEnumerable<IRoundEndInfo> GetAllInfos()
+    {
+        return _infos.Values;
+    }
 }

@@ -58,7 +58,7 @@ public sealed partial class IngestionSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly ISharedRoundEndInfoManager _roundEndInfo = default!;
+    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
     [Dependency] private readonly INetManager _net = default!;
 
     // Body Component Dependencies
@@ -401,7 +401,7 @@ public sealed partial class IngestionSystem : EntitySystem
         RaiseLocalEvent(food, eventArgs);
 
         if (_net.IsServer && _mind.TryGetMind(args.User, out var mind, out _))
-            _roundEndInfo.EnsureInfo<FoodInfo>().AddMindToData(mind);
+            _infoManager.EnsureInfo<FoodInfo>().RecordConsumption(mind);
 
         PredictedDel(food);
 

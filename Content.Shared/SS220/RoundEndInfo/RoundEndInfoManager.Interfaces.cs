@@ -41,12 +41,12 @@ public sealed class AntagPurchaseInfo : IRoundEndInfo
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
 
-    private readonly Dictionary<EntityUid, RoundEndAntagPurchaseData> _purchases = new();
+    /// <summary>
+    /// All recorded antagonist purchases, grouped by player.
+    /// </summary>
+    public IReadOnlyDictionary<EntityUid, RoundEndAntagPurchaseData> Purchases => _purchases;
 
-    public AntagPurchaseInfo()
-    {
-        IoCManager.InjectDependencies(this);
-    }
+    private readonly Dictionary<EntityUid, RoundEndAntagPurchaseData> _purchases = new();
 
     /// <summary>
     /// Records a purchased antagonist item for the given user.
@@ -54,7 +54,7 @@ public sealed class AntagPurchaseInfo : IRoundEndInfo
     /// <param name="userMind">The mind entity, that made the purchase.</param>
     /// <param name="itemName">The prototype ID of the purchased item.</param>
     /// <param name="cost">TC cost of the item.</param>
-    public void AddPurchase(EntityUid userMind, string itemName, int cost)
+    public void RecordPurchase(EntityUid userMind, string itemName, int cost)
     {
         if (!_entMan.TryGetComponent<MindComponent>(userMind, out var mindComp))
             return;
@@ -72,15 +72,6 @@ public sealed class AntagPurchaseInfo : IRoundEndInfo
         data.ItemPrototypes.Add(itemName);
         data.TotalTC += cost;
     }
-
-    /// <summary>
-    /// Retrieves all recorded antagonist purchases, grouped by player name.
-    /// </summary>
-    /// <returns>A dictionary of player names to their purchase data.</returns>
-    public Dictionary<EntityUid, RoundEndAntagPurchaseData> GetAllPurchases()
-    {
-        return _purchases;
-    }
 }
 
 /// <summary>
@@ -91,7 +82,7 @@ public sealed class FoodInfo : IRoundEndInfoDisplay
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
 
-    private readonly Dictionary<EntityUid, FoodData> _foodPlayersData = new();
+    private readonly Dictionary<EntityUid, FoodInfoState> _foodPlayersData = new();
 
     /// <inheritdoc/>
     public int DisplayOrder => 100;
@@ -99,24 +90,20 @@ public sealed class FoodInfo : IRoundEndInfoDisplay
     /// <inheritdoc/>
     public LocId Title => Loc.GetString("additional-info-economy-categories");
 
-    public FoodInfo()
-    {
-        IoCManager.InjectDependencies(this);
-    }
-
     /// <summary>
     /// Records a food-related event for the specified player's mind.
     /// </summary>
     /// <param name="userMind">The mind entity associated with the eating action.</param>
-    public void AddMindToData(EntityUid userMind)
+    public void RecordConsumption(EntityUid userMind)
     {
-        if (!_foodPlayersData.TryGetValue(userMind, out var foodData))
+        if (!_foodPlayersData.TryGetValue(userMind, out var foodInfoState))
         {
-            foodData = new FoodData();
-            _foodPlayersData[userMind] = foodData;
+            foodInfoState = new FoodInfoState();
+            _foodPlayersData[userMind] = foodInfoState;
         }
 
-        foodData.AmountFood++;
+        foodInfoState.TotalFood++;
+        _foodPlayersData[userMind] = foodInfoState;
     }
 
     /// <summary>
@@ -124,7 +111,7 @@ public sealed class FoodInfo : IRoundEndInfoDisplay
     /// </summary>
     private (EntityUid?, int) TotalFattestPlayer()
     {
-        return RoundEndInfoUtils.GetTopBy(_foodPlayersData, d => d.AmountFood);
+        return RoundEndInfoUtils.GetTopBy(_foodPlayersData, d => d.TotalFood);
     }
 
     /// <summary>
@@ -132,7 +119,7 @@ public sealed class FoodInfo : IRoundEndInfoDisplay
     /// </summary>
     private int TotalFoodEaten()
     {
-        return _foodPlayersData.Sum(foodData => foodData.Value.AmountFood);
+        return _foodPlayersData.Sum(foodInfoState => foodInfoState.Value.TotalFood);
     }
 
     /// <inheritdoc/>
@@ -163,7 +150,7 @@ public sealed class CargoInfo : IRoundEndInfoDisplay
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
 
-    private readonly Dictionary<EntityUid, CargoData> _cargoData = new();
+    private readonly Dictionary<EntityUid, CargoInfoState> _cargoData = new();
 
     /// <summary>
     /// Total station credits earned through cargo operations.
@@ -176,20 +163,15 @@ public sealed class CargoInfo : IRoundEndInfoDisplay
     /// <inheritdoc/>
     public LocId Title => Loc.GetString("additional-info-economy-categories");
 
-    public CargoInfo()
+    public void RecordOrder(EntityUid userMind, string itemName, int amount, int cost)
     {
-        IoCManager.InjectDependencies(this);
-    }
-
-    public void AddMindToData(EntityUid userMind, string itemName, int cost)
-    {
-        if (!_cargoData.TryGetValue(userMind, out var cargoData))
+        if (!_cargoData.TryGetValue(userMind, out var cargoInfoState))
         {
-            cargoData = new CargoData();
-            _cargoData[userMind] = cargoData;
+            cargoInfoState = new CargoInfoState();
+            _cargoData[userMind] = cargoInfoState;
         }
 
-        cargoData.Items.Add((itemName, cost));
+        cargoInfoState.Items.Add((itemName, amount, cost));
     }
 
     private (EntityUid?, int) TotalOrderPlayer()
@@ -202,6 +184,29 @@ public sealed class CargoInfo : IRoundEndInfoDisplay
         return _cargoData.Sum(cargoData => cargoData.Value.Items.Count);
     }
 
+    private (string ItemName, int Count) GetMostOrderedItem()
+    {
+        var itemCounts = new Dictionary<string, int>();
+
+        foreach (var cargoInfo in _cargoData.Values)
+        {
+            foreach (var (itemName, amount, _) in cargoInfo.Items)
+            {
+                if (!itemCounts.TryAdd(itemName, amount))
+                    itemCounts[itemName] += amount;
+            }
+        }
+
+        if (itemCounts.Count == 0)
+            return (string.Empty, 0);
+
+        var mostOrdered = itemCounts
+            .OrderByDescending(pair => pair.Value)
+            .First();
+
+        return (mostOrdered.Key, mostOrdered.Value);
+    }
+
     /// <inheritdoc/>
     public FormattedMessage GetSummaryText()
     {
@@ -209,6 +214,7 @@ public sealed class CargoInfo : IRoundEndInfoDisplay
 
         var totalOrders = TotalOrders();
         var totalOrderPlayer = TotalOrderPlayer();
+        var maxOrderedItem = GetMostOrderedItem();
 
         var player = totalOrderPlayer.Item1;
         var count = totalOrderPlayer.Item2;
@@ -219,7 +225,9 @@ public sealed class CargoInfo : IRoundEndInfoDisplay
             ("totalMoney", TotalMoneyEarned),
             ("totalOrders", totalOrders),
             ("totalOrderPlayer", name),
-            ("totalOrderPlayerCount", count)));
+            ("totalOrderPlayerCount", count),
+            ("maxOrderedItemName", maxOrderedItem.ItemName),
+            ("maxOrderedItemCount", maxOrderedItem.Count)));
 
         return message;
     }
@@ -289,7 +297,7 @@ public sealed class PuddleInfo : IRoundEndInfoDisplay
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
 
-    private readonly Dictionary<EntityUid, PuddleData> _puddleData = new();
+    private readonly Dictionary<EntityUid, PuddleInfoState> _puddleData = new();
 
     /// <inheritdoc/>
     public int DisplayOrder => 200;
@@ -297,24 +305,20 @@ public sealed class PuddleInfo : IRoundEndInfoDisplay
     /// <inheritdoc/>
     public LocId Title => Loc.GetString("additional-info-janitor-categories");
 
-    public PuddleInfo()
-    {
-        IoCManager.InjectDependencies(this);
-    }
-
     /// <summary>
     /// Increments the puddle-cleaning count for a player who used a mop.
     /// </summary>
     /// <param name="userMind">The mind entity that cleaned a puddle.</param>
-    public void AddMindToData(EntityUid userMind)
+    public void RecordCleaning(EntityUid userMind)
     {
-        if (!_puddleData.TryGetValue(userMind, out var puddleData))
+        if (!_puddleData.TryGetValue(userMind, out var puddleInfoState))
         {
-            puddleData = new PuddleData();
-            _puddleData[userMind] = puddleData;
+            puddleInfoState = new PuddleInfoState();
+            _puddleData[userMind] = puddleInfoState;
         }
 
-        puddleData.TotalPuddle++;
+        puddleInfoState.TotalPuddle++;
+        _puddleData[userMind] = puddleInfoState;
     }
 
     /// <summary>
@@ -362,7 +366,7 @@ public sealed class GunInfo : IRoundEndInfoDisplay
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
 
-    private readonly Dictionary<EntityUid, GunData> _gunData = new();
+    private readonly Dictionary<EntityUid, GunInfoState> _gunData = new();
 
     /// <inheritdoc/>
     public int DisplayOrder => 300;
@@ -370,23 +374,19 @@ public sealed class GunInfo : IRoundEndInfoDisplay
     /// <inheritdoc/>
     public LocId Title => Loc.GetString("additional-info-gun-categories");
 
-    public GunInfo()
-    {
-        IoCManager.InjectDependencies(this);
-    }
-
     /// <summary>
     /// Records that a shot was fired by the specified player.
     /// </summary>
-    public void AddMindToData(EntityUid userMind)
+    public void RecordShoot(EntityUid userMind)
     {
-        if (!_gunData.TryGetValue(userMind, out var gunData))
+        if (!_gunData.TryGetValue(userMind, out var gunInfoState))
         {
-            gunData = new GunData();
-            _gunData[userMind] = gunData;
+            gunInfoState = new GunInfoState();
+            _gunData[userMind] = gunInfoState;
         }
 
-        gunData.TotalShots++;
+        gunInfoState.TotalShots++;
+        _gunData[userMind] = gunInfoState;
     }
 
     /// <summary>
@@ -436,7 +436,7 @@ public sealed class DeathInfo : IRoundEndInfoDisplay
     [Dependency] private readonly IEntityManager _entMan = default!;
     private readonly SharedGameTicker _gameTicker;
 
-    private readonly Dictionary<EntityUid, DeathData> _deathData = new();
+    private readonly Dictionary<EntityUid, DeathInfoState> _deathData = new();
 
     /// <inheritdoc/>
     public int DisplayOrder => 400;
@@ -453,15 +453,15 @@ public sealed class DeathInfo : IRoundEndInfoDisplay
     /// <summary>
     /// Records the time of death for the given player if valid and not in the admin arena.
     /// </summary>
-    public void AddMindToData(EntityUid userMind)
+    public void RecordDeath(EntityUid userMind)
     {
-        if (!_deathData.TryGetValue(userMind, out var deathData))
+        if (!_deathData.TryGetValue(userMind, out var deathInfoState))
         {
-            deathData = new DeathData();
-            _deathData[userMind] = deathData;
+            deathInfoState = new DeathInfoState();
+            _deathData[userMind] = deathInfoState;
         }
 
-        deathData.TimeOfDeath.Add(_gameTicker.RoundDuration());
+        deathInfoState.TimeOfDeath.Add(_gameTicker.RoundDuration());
     }
 
     /// <summary>
