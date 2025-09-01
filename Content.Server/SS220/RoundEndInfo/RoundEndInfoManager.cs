@@ -8,13 +8,14 @@ namespace Content.Server.SS220.RoundEndInfo;
 /// </summary>
 public sealed class RoundEndInfoManager : ISharedRoundEndInfoManager
 {
-    [Dependency] private readonly IDynamicTypeFactory _dynamicFactory = default!;
+    private readonly IDynamicTypeFactory _dynamicFactory;
 
     private readonly Dictionary<Type, IRoundEndInfo> _infos = new();
 
     public RoundEndInfoManager()
     {
         IoCManager.InjectDependencies(this);
+        _dynamicFactory = IoCManager.Resolve<IDynamicTypeFactory>();
     }
 
     /// <summary>
