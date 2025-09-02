@@ -1,0 +1,32 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: PartMannequin
+  parent: [BaseItem, BasePart]
+  name: "Mannequin body part"
+  abstract: true
+  components:
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: TorsoMannequin
+  name: mannequin torso
+  parent: [PartMannequin, BaseTorso]
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decorations/mannequin-limbs.rsi
+    state: mannequin-torso
