@@ -1,6 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -8,14 +10,19 @@ namespace Content.Shared.SS220.Experience.Systems;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+
     #region Try methods
 
+    /// <summary>
+    ///  CARE this method are not making adminlog!
+    /// </summary>
     private bool TryProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
     {
         if (!CanProgressTree(info, treeProto))
             return false;
 
-        InternalProgressTree(info, treeProto);
+        InternalProgressTree(info, treeProto, null);
         return true;
     }
 
@@ -114,14 +121,17 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!ResolveInfoAndTree(entity, skillTree, out var info, out var treeProto))
             return;
 
-        InternalProgressTree(info, treeProto);
+        InternalProgressTree(info, treeProto, entity);
     }
 
-    private void InternalProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype skillTree)
+    private void InternalProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype skillTree, Entity<ExperienceComponent>? effectedEntity)
     {
         DebugTools.Assert(CanProgressTree(info, skillTree), $"Called {nameof(InternalProgressTree)} but tree progress is blocked, info {info} and tree id is {skillTree.ID}");
         info.SkillLevel++;
         info.SkillStudied = false;
+
+        if (effectedEntity is not null)
+            _adminLog.Add(LogType.Experience, $"{ToPrettyString(effectedEntity):user} gained new skill");
     }
 
     /// <summary>

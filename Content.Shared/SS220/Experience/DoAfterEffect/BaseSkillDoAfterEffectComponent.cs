@@ -6,15 +6,20 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect;
 /// <summary>
 /// This component hold data for changing DoAfter events parameters started by entity with <see cref="ExperienceComponent"/>
 /// </summary>
-[RegisterComponent]
 public abstract partial class BaseSkillDoAfterEffectComponent : Component
 {
     [DataField]
-    public float? DurationScale = null;
+    public float DurationScale = 1f;
 
     [DataField]
-    public float? FailureChance = null;
+    public float FailureChance = 0f;
 
     [DataField]
-    public bool? FullBlock = null;
+    public bool FullBlock = false;
+
+    [DataField]
+    public LocId? FailurePopup = null;
+
+    [DataField]
+    public LocId? FullBlockPopup = null;
 }

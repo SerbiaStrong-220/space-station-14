@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-namespace Content.Shared.SS220.Experience.SkillEffectComponents;
+namespace Content.Shared.SS220.Experience.SkillEffects.Components;
 
 /// <summary>
 /// This is used for filtering permission to shoot

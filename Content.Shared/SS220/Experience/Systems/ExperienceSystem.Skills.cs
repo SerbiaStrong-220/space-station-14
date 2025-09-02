@@ -48,12 +48,12 @@ public sealed partial class ExperienceSystem : EntitySystem
         // }
     }
 
-    public void SubscribeSkillEntityToEvent<T>() where T : EntityEventArgs
+    public void RelayEventToSkillEntity<T>() where T : notnull
     {
         SubscribeLocalEvent<ExperienceComponent, T>(RelayEventToSkillEntity);
     }
 
-    private void RelayEventToSkillEntity<T>(Entity<ExperienceComponent> entity, ref T args) where T : EntityEventArgs
+    private void RelayEventToSkillEntity<T>(Entity<ExperienceComponent> entity, ref T args) where T : notnull
     {
         var overrideSkillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
         var skillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
@@ -69,10 +69,10 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
         }
 
-        if (skillEntity is not null)
-            RaiseLocalEvent(skillEntity.Value, ref args);
-
         if (overrideSkillEntity is not null)
             RaiseLocalEvent(overrideSkillEntity.Value, ref args);
+
+        if (skillEntity is not null)
+            RaiseLocalEvent(skillEntity.Value, ref args);
     }
 }
