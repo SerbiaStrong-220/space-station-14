@@ -32,8 +32,8 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
         SubscribeLocalEvent<EntityHeaterComponent, MapInitEvent>(OnMapInit);
 
         //SS220-grill-update begin
-        SubscribeLocalEvent<EntityHeaterComponent, ItemRemovedEvent>(OnItemRemovedFromTheGrill);
-        SubscribeLocalEvent<EntityHeaterComponent, ItemPlacedEvent>(OnItemPlacedOnTheGrill);
+        SubscribeLocalEvent<EntityHeaterComponent, ItemRemovedEvent>(OnItemRemoved);
+        SubscribeLocalEvent<EntityHeaterComponent, ItemPlacedEvent>(OnItemPlaced);
         SubscribeLocalEvent<EntityHeaterComponent, HeaterSettingChangedEvent>(OnHeaterSettingChanged);
         //SS220-grill-update end
     }
@@ -93,7 +93,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
         }
     }
 
-    private void OnItemRemovedFromTheGrill(Entity<EntityHeaterComponent> ent, ref ItemRemovedEvent args)
+    private void OnItemRemoved(Entity<EntityHeaterComponent> ent, ref ItemRemovedEvent args)
     {
         // Disable grill smoke visuals
         RemComp<GrillingVisualComponent>(args.OtherEntity);
@@ -108,7 +108,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
         }
     }
 
-    private void OnItemPlacedOnTheGrill(Entity<EntityHeaterComponent> ent, ref ItemPlacedEvent args)
+    private void OnItemPlaced(Entity<EntityHeaterComponent> ent, ref ItemPlacedEvent args)
     {
         // Items placed on turned off grill
         if (ent.Comp.Setting == EntityHeaterSetting.Off)
