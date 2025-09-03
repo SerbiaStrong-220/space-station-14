@@ -14,7 +14,7 @@ public sealed partial class EntityHeaterSystem : SharedEntityHeaterSystem
         base.Initialize();
 
         SubscribeNetworkEvent<HeaterVisualsEvent>(OnGrillingVisualAdd);
-        SubscribeLocalEvent<GrillingVisualComponent, ComponentRemove>(OnGrillingVisualRemoved);
+        SubscribeLocalEvent<GrillingVisualComponent, ComponentShutdown>(OnGrillingVisualRemoved);
     }
 
     private void OnGrillingVisualAdd(HeaterVisualsEvent ev)
@@ -34,7 +34,7 @@ public sealed partial class EntityHeaterSystem : SharedEntityHeaterSystem
         }
     }
 
-    private void OnGrillingVisualRemoved(EntityUid ent, GrillingVisualComponent effect, ref ComponentRemove args)
+    private void OnGrillingVisualRemoved(EntityUid ent, GrillingVisualComponent effect, ref ComponentShutdown args)
     {
         if (TryComp<SpriteComponent>(ent, out var sprite))
         {
