@@ -3,6 +3,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.Experience.SkillChecks;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -25,6 +26,8 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         SubscribeLocalEvent<ExperienceComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<ExperienceComponent, ComponentShutdown>(OnShutdown);
+
+        SubscribeLocalEvent<ExperienceComponent, SkillCheckEvent>(OnSkillCheckEvent);
     }
 
     public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, float delta)

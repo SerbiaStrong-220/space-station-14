@@ -2,11 +2,9 @@
 
 namespace Content.Shared.SS220.Experience.SkillEffects.Components;
 
-/// <summary>
-/// This is used to stop entity from being disarmed
-/// </summary>
 [RegisterComponent]
-public sealed partial class SkillDisarmBlockEffectComponent : Component
+public sealed partial class SkillDisarmChanceChangerComponent : Component
 {
-
+    [DataField(required: true)]
+    public float Multiplier;
 }

@@ -23,7 +23,7 @@ public sealed class ActivatableUIRequiresSkillSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (!_experience.TryGetAcquiredSkills(args.User, activatableUI.Comp.TreeProtoId).Contains(activatableUI.Comp.SkillProtoId))
+        if (!_experience.GetAcquiredSkills(args.User, activatableUI.Comp.TreeProtoId).Contains(activatableUI.Comp.SkillProtoId))
         {
             args.Cancel();
             if (activatableUI.Comp.PopupMessage != null)

@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.Experience.Systems;
 public sealed partial class ExperienceSystem : EntitySystem
 {
     #region Skill getters
-    public HashSet<ProtoId<SkillPrototype>> TryGetAcquiredSkills(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree)
+    public HashSet<ProtoId<SkillPrototype>> GetAcquiredSkills(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree)
     {
         if (!Resolve(entity.Owner, ref entity.Comp))
             return [];

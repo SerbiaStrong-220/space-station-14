@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Mobs;
+using Content.Shared.SS220.Experience.SkillChecks;
 using Robust.Shared.Containers;
 using Robust.Shared.Utility;
 
@@ -9,7 +11,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
-    public void OnComponentInit(Entity<ExperienceComponent> entity, ref ComponentInit _)
+    private void OnComponentInit(Entity<ExperienceComponent> entity, ref ComponentInit _)
     {
         entity.Comp.ExperienceContainer = _container.EnsureContainer<ContainerSlot>(entity.Owner, ExperienceComponent.ContainerId);
         entity.Comp.OverrideExperienceContainer = _container.EnsureContainer<ContainerSlot>(entity.Owner, ExperienceComponent.OverrideContainerId);
@@ -22,10 +24,15 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
     }
 
-    public void OnShutdown(Entity<ExperienceComponent> entity, ref ComponentShutdown _)
+    private void OnShutdown(Entity<ExperienceComponent> entity, ref ComponentShutdown _)
     {
         QueueDel(_container.EmptyContainer(entity.Comp.ExperienceContainer).FirstOrNull());
         QueueDel(_container.EmptyContainer(entity.Comp.OverrideExperienceContainer).FirstOrNull());
+    }
+
+    private void OnSkillCheckEvent(Entity<ExperienceComponent> entity, ref SkillCheckEvent args)
+    {
+        args.HasSkill = GetAcquiredSkills(entity.AsNullable(), args.TreeProto).Contains(args.SkillProto);
     }
 
     public bool TryAddSkillToSkillEntity(Entity<ExperienceComponent> entity, string containerId, SkillPrototype skill)
