@@ -80,8 +80,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
                         var grillingVisual = AddComp<GrillingVisualComponent>(item);
 
                         var ev = new HeaterVisualsEvent(GetNetEntity(item),
-                            ent.Comp.GrillingSprite,
-                            grillingVisual.GrillingLayer);
+                            ent.Comp.GrillingSprite);
 
                         RaiseNetworkEvent(ev);
                     }
@@ -147,8 +146,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
             var grillingVisual = AddComp<GrillingVisualComponent>(args.OtherEntity);
 
             var ev = new HeaterVisualsEvent(GetNetEntity(args.OtherEntity),
-                ent.Comp.GrillingSprite,
-                grillingVisual.GrillingLayer);
+                ent.Comp.GrillingSprite);
 
             RaiseNetworkEvent(ev);
         }

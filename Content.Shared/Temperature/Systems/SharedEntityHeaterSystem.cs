@@ -22,6 +22,8 @@ public abstract partial class SharedEntityHeaterSystem : EntitySystem
 
     private readonly int _settingCount = Enum.GetValues<EntityHeaterSetting>().Length;
 
+    public const string GrillingLayer = "grilling-layer";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -107,11 +109,10 @@ public abstract partial class SharedEntityHeaterSystem : EntitySystem
     public readonly record struct HeaterSettingChangedEvent(EntityUid HeaterEntity, EntityHeaterSetting Setting);
 
     [Serializable, NetSerializable]
-    public sealed class HeaterVisualsEvent(NetEntity target, SpriteSpecifier.Rsi grillingSprite, string grillingLayer) : EntityEventArgs
+    public sealed class HeaterVisualsEvent(NetEntity target, SpriteSpecifier.Rsi grillingSprite) : EntityEventArgs
     {
         public NetEntity Target = target;
         public SpriteSpecifier.Rsi GrillingSprite = grillingSprite;
-        public string GrillingLayer = grillingLayer;
     }
     //SS220-grill-update end
 }

@@ -27,7 +27,7 @@ public sealed partial class EntityHeaterSystem : SharedEntityHeaterSystem
             {
                 RsiPath = ev.GrillingSprite.RsiPath.ToString(),
                 State = ev.GrillingSprite.RsiState,
-                MapKeys = [ev.GrillingLayer]
+                MapKeys = [GrillingLayer]
             };
 
             _spriteSystem.AddLayer((grillingEntity, sprite), layer, null);
@@ -38,7 +38,7 @@ public sealed partial class EntityHeaterSystem : SharedEntityHeaterSystem
     {
         if (TryComp<SpriteComponent>(ent, out var sprite))
         {
-            _spriteSystem.RemoveLayer((ent, sprite), effect.GrillingLayer);
+            _spriteSystem.RemoveLayer((ent, sprite), GrillingLayer);
         }
     }
 

@@ -7,8 +7,4 @@ namespace Content.Shared.SS220.EntityEffects.Effects;
 /// This is used for displaying grilling smoke
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class GrillingVisualComponent : Component
-{
-    [DataField]
-    public string GrillingLayer = "grilling-layer";
-}
+public sealed partial class GrillingVisualComponent : Component;
