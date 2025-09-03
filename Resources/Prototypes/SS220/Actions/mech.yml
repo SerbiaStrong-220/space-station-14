@@ -20,7 +20,7 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: SS220/Interface/Actions/actions_mecha.rsi
+      sprite: SS220/Interface/Actions/Silicon/mecha.rsi
       state: mech_grab
     useDelay: 1
     checkCanInteract: false
