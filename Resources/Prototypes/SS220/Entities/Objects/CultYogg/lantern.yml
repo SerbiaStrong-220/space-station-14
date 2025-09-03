@@ -31,6 +31,14 @@
     energy: 2
     netsync: false
   - type: ToggleableLightVisuals
+    spriteLayer: light
+    inhandVisuals:
+      left:
+      - state: inhand-left-light
+        shader: unshaded
+      right:
+      - state: inhand-right-light
+        shader: unshaded
   - type: Appearance
   - type: Physics
     canCollide: false
@@ -38,3 +46,95 @@
     whitelist:
       tags:
       - CultYoggStealthProvidable
+
+- type: entity
+  name: cult lightbulb
+  parent: BaseItem
+  id: CultYoggLightBulb
+  suffix: CultYogg
+  description: description
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Objects/CultYogg/lightbulb.rsi
+    layers:
+      - state: icon
+      - state: icon_on
+        shader: unshaded
+        visible: false
+        map: [ "light" ]
+  - type: Physics
+    bodyType: Dynamic
+    bodyStatus: InAir
+  - type: Item
+    heldPrefix: off
+    size: Normal
+  - type: CultYoggLamp
+    addPrefix: true
+  - type: ToggleableVisuals
+    spriteLayer: light
+  - type: ItemTogglePointLight
+  - type: PointLight
+    enabled: false
+    radius: 3
+    energy: 2
+    netsync: false
+  - type: ToggleableLightVisuals
+    spriteLayer: light
+    inhandVisuals:
+      left:
+      - state: inhand-left-light
+        shader: unshaded
+      right:
+      - state: inhand-right-light
+        shader: unshaded
+  - type: Appearance
+  - type: AnimationPlayer #ToDo_SS200 figure out why animation isn't working
+  - type: FloatingVisuals
+    canFloat: true
+
+- type: entity
+  name: cult lightbulb tube
+  parent: BaseItem
+  id: CultYoggTubeLightBulb
+  suffix: CultYogg
+  description: description
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Objects/CultYogg/lightbulb_tube.rsi
+    layers:
+      - state: icon
+      - state: icon_on
+        shader: unshaded
+        visible: false
+        map: [ "light" ]
+  - type: Physics
+    bodyType: Dynamic
+    bodyStatus: InAir
+  - type: Item
+    heldPrefix: off
+    size: Normal
+  - type: CultYoggLamp
+    addPrefix: true
+  - type: ToggleableVisuals
+    spriteLayer: light
+  - type: ItemTogglePointLight
+  - type: PointLight
+    enabled: false
+    radius: 3
+    energy: 2
+    netsync: false
+  - type: ToggleableLightVisuals
+    spriteLayer: light
+    inhandVisuals:
+      left:
+      - state: inhand-left-light
+        shader: unshaded
+      right:
+      - state: inhand-right-light
+        shader: unshaded
+  - type: Appearance
+  - type: AnimationPlayer #ToDo_SS200 figure out why animation isn't working
+  - type: FloatingVisuals
+    canFloat: true
