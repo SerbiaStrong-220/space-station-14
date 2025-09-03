@@ -107,12 +107,5 @@ public abstract partial class SharedEntityHeaterSystem : EntitySystem
     //SS220-grill-update begin
     [ByRefEvent]
     public readonly record struct HeaterSettingChangedEvent(EntityUid HeaterEntity, EntityHeaterSetting Setting);
-
-    [Serializable, NetSerializable]
-    public sealed class HeaterVisualsEvent(NetEntity target, SpriteSpecifier.Rsi grillingSprite) : EntityEventArgs
-    {
-        public NetEntity Target = target;
-        public SpriteSpecifier.Rsi GrillingSprite = grillingSprite;
-    }
     //SS220-grill-update end
 }
