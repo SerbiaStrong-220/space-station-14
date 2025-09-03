@@ -4,7 +4,6 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Temperature.Systems;
 
-//SS220-grill-update This is actually a Client system, I don't know why it named this way
 public sealed partial class EntityHeaterSystem : SharedEntityHeaterSystem
 {
     //SS220-grill-update begin

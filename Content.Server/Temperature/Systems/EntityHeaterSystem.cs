@@ -70,7 +70,6 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
                 foreach (var item in placer.PlacedEntities)
                 {
                     // Skip visuals, if entity can't be cooked on the grill or if entity is already cooked
-                    // Skip visuals, if entity can't be cooked on the grill or if entity is already cooked
                     if(_whitelistSystem.IsWhitelistFail(ent.Comp.HeatingAnimationWhitelist, item)
                        || _tagSystem.HasTag(item, $"Cooked"))
                         return;
@@ -139,10 +138,6 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
         if(_whitelistSystem.IsWhitelistFail(ent.Comp.HeatingAnimationWhitelist, args.OtherEntity)
            || _tagSystem.HasTag(args.OtherEntity, $"Cooked"))
         return;
-
-        // if (!HasComp<ConstructionComponent>(args.OtherEntity) && !HasComp<FoodComponent>(args.OtherEntity) ||
-        //     ))
-        //     return;
 
         PlayGrillAudio(ent);
 
