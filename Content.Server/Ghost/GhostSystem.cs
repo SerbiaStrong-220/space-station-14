@@ -105,7 +105,7 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, BooActionEvent>(OnActionPerform);
             SubscribeLocalEvent<GhostComponent, ToggleGhostHearingActionEvent>(OnGhostHearingAction);
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
-            SubscribeLocalEvent<GhostComponent, RespawnActionEvent>(OnActionRespanw);
+            SubscribeLocalEvent<GhostComponent, RespawnActionEvent>(OnActionRespawn);
             SubscribeLocalEvent<GhostComponent, ToggleAGhostBodyVisualsActionEvent>(OnToggleBodyVisualsAction);
             SubscribeLocalEvent<GhostComponent, ToggleHudOnOtherActionEvent>(OnToggleHudOnOther);
 
@@ -224,7 +224,7 @@ namespace Content.Server.Ghost
         //SS220-ghost-hats end
 
         //SS-220 noDeath
-        private void OnActionRespanw(EntityUid uid, GhostComponent component, RespawnActionEvent args)
+        private void OnActionRespawn(EntityUid uid, GhostComponent component, RespawnActionEvent args)
         {
             if (!TryComp<ActorComponent>(uid, out var actor))
                 return;
