@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "size": {
+        "x": 8,
+        "y": 8
+    },
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "Made by SkaldetSkaeg (GitHub) for SS220",
+    "states": [
+        {
+            "name": "hight_time"
+        },
+        {
+            "name": "mid_time"
+        },
+        {
+            "name": "low_time"
+        },
+        {
+            "name": "no_time"
+        }
+    ]
+}
