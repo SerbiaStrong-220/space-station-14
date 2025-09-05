@@ -17,19 +17,20 @@ public sealed partial class EntityHeaterSystem : SharedEntityHeaterSystem
         SubscribeLocalEvent<GrillingVisualComponent, ComponentShutdown>(OnGrillingVisualRemoved);
     }
 
-    private void OnGrillingVisualAdd(EntityUid ent, GrillingVisualComponent effect, ref AfterAutoHandleStateEvent args)
+    private void OnGrillingVisualAdd(Entity<GrillingVisualComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (TryComp<SpriteComponent>(ent, out var sprite))
-        {
-            var layer = new PrototypeLayerData
-            {
-                RsiPath = effect.GrillingSprite.RsiPath.ToString(),
-                State = effect.GrillingSprite.RsiState,
-                MapKeys = [GrillingLayer]
-            };
+        if (!TryComp<SpriteComponent>(ent, out var sprite))
+            return;
 
-            _spriteSystem.AddLayer((ent, sprite), layer, null);
-        }
+        var exist = _spriteSystem.TryGetLayer((ent.Owner, sprite), GrillingLayer, out var layer);
+
+        layer ??= new PrototypeLayerData();
+        layer.RsiPath = ent.Comp.GrillingSprite.RsiPath.ToString();
+        layer.State = ent.Comp.GrillingSprite.RsiState;
+        layer.MapKeys = [GrillingLayer];
+
+        if (!exist)
+            _spriteSystem.AddLayer((ent.Owner, sprite), layer, null);
     }
 
     private void OnGrillingVisualRemoved(EntityUid ent, GrillingVisualComponent effect, ref ComponentShutdown args)
