@@ -106,3 +106,13 @@
   id: LawHeadsetAlt
   equipment:
     ears: ClothingHeadsetAltLaw
+
+- type: loadout
+  id: IAAHeadset
+  equipment:
+    ears: ClothingHeadsetIAA
+
+- type: loadout
+  id: IAAHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltIAA

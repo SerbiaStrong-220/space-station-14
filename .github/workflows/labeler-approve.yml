@@ -8,7 +8,7 @@ permissions: write-all
 
 jobs:
   remove_label:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: github.event.review.state == 'approved'
     steps:
       - name: check all revs

@@ -3,6 +3,7 @@
 using Content.Shared.Construction;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Tag;
@@ -24,6 +25,7 @@ public sealed partial class PlacerItemSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
 
@@ -110,7 +112,7 @@ public sealed partial class PlacerItemSystem : EntitySystem
             return;
 
         if (!TryComp<HandsComponent>(user, out var hands) ||
-            uid != hands.ActiveHand?.HeldEntity)
+            uid != _hands.GetActiveItem((user.Value, hands)))
             return;
 
         if (!TryComp<PlacerItemComponent>(uid, out var comp))

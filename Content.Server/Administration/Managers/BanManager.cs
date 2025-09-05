@@ -238,7 +238,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
     private void KickForBanDef(ICommonSession player, ServerBanDef def)
     {
-        var message = def.FormatBanMessage(_cfg, _localizationManager);
+        var message = def.FormatBanMessage(_cfg, _localizationManager, player.Name); // SS220-ad-login-into-ban-screen
         player.Channel.Disconnect(message);
     }
 

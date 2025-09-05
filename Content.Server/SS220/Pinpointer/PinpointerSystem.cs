@@ -4,6 +4,7 @@ using Content.Server.Medical.SuitSensors;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Medical.SuitSensor;
+using Content.Shared.Medical.SuitSensors;
 using Content.Shared.Pinpointer;
 using Content.Shared.SS220.Pinpointer;
 using Robust.Shared.Timing;

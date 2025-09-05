@@ -30,7 +30,7 @@ jobs:
   build:
     name: Test Packaging
     if: github.actor != 'IanComradeBot' && github.event.pull_request.draft == false
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Master
@@ -47,7 +47,7 @@ jobs:
         run: |
           cd RobustToolbox/
           git submodule update --init --recursive
-          
+
       # Corvax-Secrets-Start
       - name: Setup secrets
         env:

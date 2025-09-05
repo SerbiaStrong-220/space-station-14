@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Administration.Logs;
-using Content.Server.Explosion.EntitySystems;
 using Content.Server.Popups;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -14,6 +13,7 @@ using Content.Shared.Sticky;
 using Content.Shared.Sticky.Components;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
+using Content.Shared.Trigger;
 
 namespace Content.Server.SS220.CultYogg.BurglarBug;
 

@@ -21,27 +21,27 @@ namespace Content.Server.SS220.SmartFridge
             base.Initialize();
 
             _sawmill = Logger.GetSawmill("smartfridge");
-            SubscribeLocalEvent<SmartFridgeComponent, PowerChangedEvent>(OnPowerChanged);
-            SubscribeLocalEvent<SmartFridgeComponent, ActivatableUIOpenAttemptEvent>(OnActivatableUIOpenAttempt);
-            SubscribeLocalEvent<SmartFridgeComponent, BreakageEventArgs>(OnBreak);
+            SubscribeLocalEvent<SmartFridge220Component, PowerChangedEvent>(OnPowerChanged);
+            SubscribeLocalEvent<SmartFridge220Component, ActivatableUIOpenAttemptEvent>(OnActivatableUIOpenAttempt);
+            SubscribeLocalEvent<SmartFridge220Component, BreakageEventArgs>(OnBreak);
 
         }
-        private void OnActivatableUIOpenAttempt(EntityUid uid, SmartFridgeComponent component, ActivatableUIOpenAttemptEvent args)
+        private void OnActivatableUIOpenAttempt(EntityUid uid, SmartFridge220Component component, ActivatableUIOpenAttemptEvent args)
         {
             if (component.Broken)
                 args.Cancel();
         }
-        private void OnPowerChanged(EntityUid uid, SmartFridgeComponent component, ref PowerChangedEvent args)
+        private void OnPowerChanged(EntityUid uid, SmartFridge220Component component, ref PowerChangedEvent args)
         {
             TryUpdateVisualState(uid, component);
         }
 
-        private void OnBreak(EntityUid uid, SmartFridgeComponent component, BreakageEventArgs eventArgs)
+        private void OnBreak(EntityUid uid, SmartFridge220Component component, BreakageEventArgs eventArgs)
         {
             component.Broken = true;
             TryUpdateVisualState(uid, component);
         }
-        public void Deny(EntityUid uid, SmartFridgeComponent? component = null)
+        public void Deny(EntityUid uid, SmartFridge220Component? сomponent = null)
         {
             if (!Resolve(uid, ref component))
                 return;
@@ -57,7 +57,7 @@ namespace Content.Server.SS220.SmartFridge
         /// <summary>
         /// Tries to update the visuals of the component based on its current state.
         /// </summary>
-        public void TryUpdateVisualState(EntityUid uid, SmartFridgeComponent? vendComponent = null)
+        public void TryUpdateVisualState(EntityUid uid, SmartFridge220Component? vendComponent = null)
         {
             if (!Resolve(uid, ref vendComponent))
                 return;

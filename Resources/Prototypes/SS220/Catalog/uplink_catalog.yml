@@ -370,3 +370,19 @@
     Telecrystal: 2
   categories:
   - UplinkDisruption
+
+- type: listing
+  id: UplinkShutdownNearestApc
+  name: uplink-shutdown-nearest-apc
+  description: uplink-shutdown-nearest-apc-desc
+  icon: { sprite: Interface/Actions/actions_ai.rsi, state: door_overcharge_on }
+  productEvent: !type:ShutdownNearestApcEvent
+    radius: 6
+  raiseProductEventOnUser: true
+  cost:
+    Telecrystal: 4
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 2
+  categories:
+  - UplinkDisruption

@@ -10,7 +10,6 @@
     noRot: true
     sprite: SS220/Structures/CultYogg/yoggpod.rsi
     state: yoggpod
-    map: ["base"]
   - type: Icon
     sprite: SS220/Structures/CultYogg/yoggpod.rsi
     state: yoggpod

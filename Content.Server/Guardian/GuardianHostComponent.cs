@@ -9,6 +9,8 @@ namespace Content.Server.Guardian
     [RegisterComponent]
     public sealed partial class GuardianHostComponent : Component
     {
+        public const string GuardianContainerId = "GuardianContainer"; // SS220-move-guardian-container-into-field
+
         /// <summary>
         /// Guardian hosted within the component
         /// </summary>

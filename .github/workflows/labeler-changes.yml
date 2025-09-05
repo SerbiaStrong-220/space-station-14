@@ -7,7 +7,7 @@ on:
 jobs:
   update_label:
     if: github.event.review.state == 'changes_requested'
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       actions: write
       pull-requests: write

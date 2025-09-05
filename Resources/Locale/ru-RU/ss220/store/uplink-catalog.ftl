@@ -23,6 +23,9 @@ uplink-syndicate-pen-signaller-desc = Ручка, со встроенным пе
 uplink-detector-ai = Детектор ИИ
 uplink-detector-ai-desc = Устройство, позволяющее определить, есть ли в радиусе 10 метров око ИИ.
 
+uplink-shutdown-nearest-apc = Подавитель ЛКП
+uplink-shutdown-nearest-apc-desc = Внимание! Активируется сразу после покупки! Активирует локализованный электромагнитный импульс, отключающий ближайшие ЛКП в радиусе 6 метров.
+
 # Implants
 uplink-mindslave-implanter-name = Имплантер Подчинитель разума
 uplink-mindslave-implanter-desc = { ent-MindSlaveImplant.desc }

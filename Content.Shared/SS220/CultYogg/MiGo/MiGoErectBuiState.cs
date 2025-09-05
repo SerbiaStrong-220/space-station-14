@@ -33,3 +33,9 @@ public sealed class MiGoErectEraseMessage : BoundUserInterfaceMessage
 {
     public NetEntity BuildingFrame;
 }
+
+[Serializable, NetSerializable]
+public sealed class MiGoErectCaptureMessage : BoundUserInterfaceMessage
+{
+    public NetEntity CapturedBuilding;
+}
