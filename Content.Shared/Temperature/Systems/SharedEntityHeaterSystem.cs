@@ -22,7 +22,8 @@ public abstract partial class SharedEntityHeaterSystem : EntitySystem
 
     private readonly int _settingCount = Enum.GetValues<EntityHeaterSetting>().Length;
 
-    public const string GrillingLayer = "grilling-layer";
+    //SS220-grill-update
+    protected const string GrillingLayer = "grilling-layer";
 
     public override void Initialize()
     {
