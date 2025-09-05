@@ -33,7 +33,7 @@ public sealed partial class EntityHeaterSystem : SharedEntityHeaterSystem
             _spriteSystem.AddLayer((ent.Owner, sprite), layer, null);
     }
 
-    private void OnGrillingVisualRemoved(EntityUid ent, GrillingVisualComponent effect, ref ComponentShutdown args)
+    private void OnGrillingVisualRemoved(Entity<GrillingVisualComponent> ent, ref ComponentShutdown args)
     {
         if (TryComp<SpriteComponent>(ent, out var sprite))
         {
