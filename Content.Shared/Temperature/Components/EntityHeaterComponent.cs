@@ -46,7 +46,7 @@ public sealed partial class EntityHeaterComponent : Component
     /// <summary>
     /// Whitelist for entities that can have grilling visuals.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public EntityWhitelist? HeatingAnimationWhitelist;
 
     // To keep track of the grilling sound
