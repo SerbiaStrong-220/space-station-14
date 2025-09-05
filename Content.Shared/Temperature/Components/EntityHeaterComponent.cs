@@ -36,7 +36,7 @@ public sealed partial class EntityHeaterComponent : Component
     /// <summary>
     /// Sound that plays, when food is on the grill
     /// </summary>
-    [DataField("grillSound")]
+    [DataField]
     public SoundSpecifier GrillSound = new SoundPathSpecifier("/Audio/SS220/Effects/grilling.ogg");
 
     // Grill smoke sprite
@@ -46,7 +46,7 @@ public sealed partial class EntityHeaterComponent : Component
     /// <summary>
     /// Whitelist for entities that can have grilling visuals.
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public EntityWhitelist? HeatingAnimationWhitelist;
 
     // To keep track of the grilling sound
