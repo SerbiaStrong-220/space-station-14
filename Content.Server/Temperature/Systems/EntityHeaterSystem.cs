@@ -130,13 +130,13 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
     private void UpdateGrillingVisuals(Entity<EntityHeaterComponent> grill, EntityUid uid)
     {
         var showAnimation = grill.Comp.Setting is not EntityHeaterSetting.Off
-                            && _whitelistSystem.IsWhitelistPass(grill.Comp.HeatingAnimationWhitelist, uid)
+                            && _whitelistSystem.IsWhitelistPass(grill.Comp.HeatingVisuals?.Whitelist, uid)
                             && !_tagSystem.HasTag(uid, $"Cooked");
 
         if (showAnimation)
         {
             var grillVisuals = EnsureComp<GrillingVisualComponent>(uid);
-            grillVisuals.GrillingSprite = grill.Comp.GrillingSprite;
+            grillVisuals.GrillingSprite = grill.Comp.HeatingVisuals?.Sprite;
             Dirty(uid, grillVisuals);
         }
         else

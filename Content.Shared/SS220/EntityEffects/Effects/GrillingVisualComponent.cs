@@ -11,5 +11,5 @@ namespace Content.Shared.SS220.EntityEffects.Effects;
 public sealed partial class GrillingVisualComponent : Component
 {
     [AutoNetworkedField]
-    public SpriteSpecifier.Rsi GrillingSprite;
+    public SpriteSpecifier.Rsi? GrillingSprite;
 }
