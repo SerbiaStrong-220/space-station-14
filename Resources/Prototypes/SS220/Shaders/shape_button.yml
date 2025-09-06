@@ -1,0 +1,4 @@
+- type: shader
+  id: ShapeShader
+  kind: source
+  path: "/Textures/SS220/Shaders/shape_button.swsl"
