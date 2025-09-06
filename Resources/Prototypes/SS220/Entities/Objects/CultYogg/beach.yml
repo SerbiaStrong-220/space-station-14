@@ -36,7 +36,7 @@
         Blunt: 17
         Structural: 5
   - type: DisarmOnAttack
-    chance: 0.6
+    chance: 0.3
     heavyAttackChance: 0.2
   - type: Tag
     tags:
