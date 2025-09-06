@@ -5,6 +5,7 @@ using Content.Server.Discord;
 using Content.Server.GameTicking.Events;
 using Content.Server.Maps;
 using Content.Server.Roles;
+using Content.Server.SS220.RoundEndInfo;
 using Content.Shared.Voting;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -25,6 +26,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Shared.CCVar;
+using Content.Shared.SS220.RoundEndInfo;
 
 
 namespace Content.Server.GameTicking
@@ -34,6 +36,9 @@ namespace Content.Server.GameTicking
         [Dependency] private readonly DiscordWebhook _discord = default!;
         [Dependency] private readonly RoleSystem _role = default!;
         [Dependency] private readonly ITaskManager _taskManager = default!;
+        //ss220 add additional info for round start
+        [Dependency] private readonly RoundEndInfoSystem _roundEndInfo = default!;
+        //ss220 add additional info for round end
 
         private static readonly Counter RoundNumberMetric = Metrics.CreateCounter(
             "ss14_round_number",
@@ -625,6 +630,7 @@ namespace Content.Server.GameTicking
             );
             RaiseNetworkEvent(roundEndMessageEvent);
             RaiseLocalEvent(roundEndMessageEvent);
+
             RaiseLocalEvent(new RoundEndedEvent(RoundId, roundDuration)); // Corvax-RoundNotifications
 
             _replayRoundPlayerInfo = listOfPlayerInfoFinal;

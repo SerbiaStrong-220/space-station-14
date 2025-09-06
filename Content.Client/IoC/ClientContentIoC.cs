@@ -26,10 +26,12 @@ using Content.Client.Lobby;
 using Content.Client.Players.RateLimiting;
 using Content.Shared.Administration.Managers;
 using Content.Client.SS220.Discord;
+using Content.Client.SS220.RoundEndInfo;
 using Content.Shared.Chat;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
 using Content.Client.SS220.TTS;
+using Content.Shared.SS220.RoundEndInfo;
 
 namespace Content.Client.IoC
 {
@@ -63,6 +65,7 @@ namespace Content.Client.IoC
             collection.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
             collection.Register<DocumentParsingManager>();
             collection.Register<DiscordPlayerInfoManager>(); //SS220 discord user info
+            collection.Register<ISharedRoundEndInfoManager, RoundEndInfoManager>(); //ss220 add additional info for round
             collection.Register<ContentReplayPlaybackManager>();
             collection.Register<ISharedPlaytimeManager, JobRequirementsManager>();
             collection.Register<MappingManager>();
