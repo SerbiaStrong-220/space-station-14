@@ -45,24 +45,24 @@ public sealed partial class EntityHeaterComponent : Component
 
     // Grill visuals
     [DataField]
-    public HeatingSprite? HeatingVisuals;
-
-    [Serializable, NetSerializable, DataDefinition]
-    public sealed partial class HeatingSprite
-    {
-        /// <summary>
-        /// Grill smoke sprite.
-        /// </summary>
-        [DataField(required: true)]
-        public SpriteSpecifier.Rsi? Sprite;
-
-        /// <summary>
-        /// Whitelist for entities that can have grilling visuals.
-        /// </summary>
-        [DataField]
-        public EntityWhitelist Whitelist = new();
-    }
+    public EntityHeaterEffectsVisuals? HeatingVisuals;
     //SS220-grill-update end
+}
+
+[Serializable, NetSerializable, DataDefinition]
+public sealed partial class EntityHeaterEffectsVisuals
+{
+    /// <summary>
+    /// Grill smoke sprite.
+    /// </summary>
+    [DataField(required: true)]
+    public SpriteSpecifier.Rsi? Sprite;
+
+    /// <summary>
+    /// Whitelist for entities that can have grilling visuals.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist Whitelist = new();
 }
 
 
