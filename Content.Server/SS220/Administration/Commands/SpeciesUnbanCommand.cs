@@ -1,0 +1,33 @@
+
+using Content.Server.Administration;
+using Content.Server.Administration.Managers;
+using Content.Shared.Administration;
+using Robust.Shared.Console;
+
+namespace Content.Server.SS220.Administration.Commands;
+
+[AdminCommand(AdminFlags.Ban)]
+public sealed class SpeciesUnbanCommand : LocalizedCommands
+{
+    [Dependency] private readonly IBanManager _ban = default!;
+
+    public override string Command => "speciesunban";
+
+    public override async void Execute(IConsoleShell shell, string argStr, string[] args)
+    {
+        if (args.Length != 1)
+        {
+            shell.WriteLine(Help);
+            return;
+        }
+
+        if (!int.TryParse(args[0], out var banId))
+        {
+            shell.WriteLine(Loc.GetString($"cmd-roleunban-unable-to-parse-id", ("id", args[0]), ("help", Help)));
+            return;
+        }
+
+        var response = await _ban.PardonSpeciesBan(banId, shell.Player?.UserId, DateTimeOffset.Now);
+        shell.WriteLine(response);
+    }
+}

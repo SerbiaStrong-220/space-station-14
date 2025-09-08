@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
+using Content.Server.SS220.Database;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
@@ -566,6 +567,63 @@ namespace Content.Server.Database
                 );
         }
         #endregion
+
+        // SS220 species ban begin
+        #region Species bans
+        /*
+         * SPECIES BANS
+         */
+        /// <summary>
+        ///     Looks up a species ban by id.
+        ///     This will return a pardoned species ban as well.
+        /// </summary>
+        /// <param name="id">The species ban id to look for.</param>
+        /// <returns>The species ban with the given id or null if none exist.</returns>
+        public abstract Task<ServerSpeciesBanDef?> GetServerSpeciesBanAsync(int id);
+
+        /// <summary>
+        ///     Looks up an user's species ban history.
+        ///     This will return pardoned species bans based on the <paramref name="includeUnbanned"/> bool.
+        ///     Requires one of <paramref name="address"/>, <paramref name="userId"/> or <paramref name="hwId"/> to not be null.
+        /// </summary>
+        /// <param name="address">The IP address of the user.</param>
+        /// <param name="userId">The NetUserId of the user.</param>
+        /// <param name="hwId">The Hardware Id of the user.</param>
+        /// <param name="modernHWIds">The modern HWIDs of the user.</param>
+        /// <param name="includeUnbanned">Whether expired and pardoned bans are included.</param>
+        /// <returns>The user's species ban history.</returns>
+        public abstract Task<List<ServerSpeciesBanDef>> GetServerSpeciesBansAsync(IPAddress? address,
+            NetUserId? userId,
+            ImmutableArray<byte>? hwId,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds,
+            bool includeUnbanned);
+
+        public abstract Task<ServerSpeciesBanDef> AddServerSpeciesBanAsync(ServerSpeciesBanDef serverSpeciesBan);
+        public abstract Task AddServerSpeciesUnbanAsync(ServerSpeciesUnbanDef serverSpeciesUnban);
+
+        public async Task EditServerSpeciesBan(int id, string reason, NoteSeverity severity, DateTimeOffset? expiration, Guid editedBy, DateTimeOffset editedAt)
+        {
+            await using var db = await GetDb();
+            var speciesBanDetails = await db.DbContext.SpeciesBan
+                .Where(b => b.Id == id)
+                .Select(b => new { b.BanTime, b.PlayerUserId })
+                .SingleOrDefaultAsync();
+
+            if (speciesBanDetails == default)
+                return;
+
+            await db.DbContext.SpeciesBan
+                .Where(b => b.BanTime == speciesBanDetails.BanTime && b.PlayerUserId == speciesBanDetails.PlayerUserId)
+                .ExecuteUpdateAsync(setters => setters
+                    .SetProperty(b => b.Severity, severity)
+                    .SetProperty(b => b.Reason, reason)
+                    .SetProperty(b => b.ExpirationTime, expiration.HasValue ? expiration.Value.UtcDateTime : null)
+                    .SetProperty(b => b.LastEditedById, editedBy)
+                    .SetProperty(b => b.LastEditedAt, editedAt.UtcDateTime)
+                );
+        }
+        #endregion
+        // SS220 species ban end
 
         #region Playtime
         public async Task<List<PlayTime>> GetPlayTimes(Guid player, CancellationToken cancel)
