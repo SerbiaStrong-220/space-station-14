@@ -14,7 +14,7 @@
     - id: ExpensiveLighterShield #SS220-Zippo
 #   - id: HandheldCrewMonitor #ss220-fix-blueshield
 #    - id: ClothingOuterBSOCoat #SS220 BlueShield Rework
-    - id: BlueShieldGasMask
+#    - id: BlueShieldGasMask #SS220 BlueShield GasMaskLoadout
     - id: RubberStampBlueShield #SS220-additional paperwork
     - id: JetpackMiniBlueFilled #SS220 BlueShield Rework
     - id: PinpointerCrew
