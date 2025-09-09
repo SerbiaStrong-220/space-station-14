@@ -255,6 +255,22 @@
     state: diagonal_checker_b
 
 - type: decal
+  id: DiagonalCheckerCOverlay
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
+    state: diagonal_checker_c
+
+- type: decal
+  id: DiagonalCheckerDOverlay
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
+    state: diagonal_checker_d
+
+- type: decal
   id: HerringboneOverlay
   tags: ["station", "overlay"]
   defaultCustomColor: true
@@ -309,6 +325,22 @@
   sprite:
     sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_diagonal_b
+
+- type: decal
+  id: MiniTileDiagonalCheckerCOverlay
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
+    state: minitile_diagonal_c
+
+- type: decal
+  id: MiniTileDiagonalCheckerDOverlay
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
+    state: minitile_diagonal_d
 
 - type: decal
   id: MiniTileBoxOverlay
