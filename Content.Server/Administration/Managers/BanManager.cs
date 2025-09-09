@@ -479,14 +479,16 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
     public void SendSpeciesBans(ICommonSession pSession)
     {
-        var speciesBans = _cachedSpeciesBans.GetValueOrDefault(pSession) ?? new List<ServerSpeciesBanDef>();
-        var bans = new MsgSpeciesBans
-        {
-            Bans = [.. speciesBans.Select(b => b.SpeciesId)]
-        };
+        // Отключено т.к. на клиенте негде ловить это сообщение
 
-        _sawmill.Debug($"Sent species bans to {pSession.Name}");
-        _netManager.ServerSendMessage(bans, pSession.Channel);
+        //var speciesBans = _cachedSpeciesBans.GetValueOrDefault(pSession) ?? new List<ServerSpeciesBanDef>();
+        //var bans = new MsgSpeciesBans
+        //{
+        //    Bans = [.. speciesBans.Select(b => b.SpeciesId)]
+        //};
+
+        //_sawmill.Debug($"Sent species bans to {pSession.Name}");
+        //_netManager.ServerSendMessage(bans, pSession.Channel);
     }
     #endregion
     // SS220 Species bans end

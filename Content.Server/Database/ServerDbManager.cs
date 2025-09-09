@@ -336,6 +336,7 @@ namespace Content.Server.Database
         Task<AdminMessageRecord?> GetAdminMessage(int id);
         Task<ServerBanNoteRecord?> GetServerBanAsNoteAsync(int id);
         Task<ServerRoleBanNoteRecord?> GetServerRoleBanAsNoteAsync(int id);
+        Task<ServerSpeciesBanNoteRecord?> GetServerSpeciesBanAsNoteAsync(int id); // SS220 Species bans
         Task<List<IAdminRemarksRecord>> GetAllAdminRemarks(Guid player);
         Task<List<IAdminRemarksRecord>> GetVisibleAdminNotes(Guid player);
         Task<List<AdminWatchlistRecord>> GetActiveWatchlists(Guid player);
@@ -348,6 +349,7 @@ namespace Content.Server.Database
         Task DeleteAdminMessage(int id, Guid deletedBy, DateTimeOffset deletedAt);
         Task HideServerBanFromNotes(int id, Guid deletedBy, DateTimeOffset deletedAt);
         Task HideServerRoleBanFromNotes(int id, Guid deletedBy, DateTimeOffset deletedAt);
+        Task HideServerSpeciesBanFromNotes(int id, Guid deletedBy, DateTimeOffset deletedAt); // SS220 Species bans
 
         /// <summary>
         /// Mark an admin message as being seen by the target player.
@@ -1010,6 +1012,14 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetServerRoleBanAsNoteAsync(id));
         }
 
+        // SS220 Species bans begin
+        public Task<ServerSpeciesBanNoteRecord?> GetServerSpeciesBanAsNoteAsync(int id)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetServerSpeciesBanAsNoteAsync((int)id));
+        }
+        // SS220 Species bans end
+
         public Task<List<IAdminRemarksRecord>> GetAllAdminRemarks(Guid player)
         {
             DbReadOpsMetric.Inc();
@@ -1080,6 +1090,14 @@ namespace Content.Server.Database
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.HideServerRoleBanFromNotes(id, deletedBy, deletedAt));
         }
+
+        // SS220 Species bans begin
+        public Task HideServerSpeciesBanFromNotes(int id, Guid deletedBy, DateTimeOffset deletedAt)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.HideServerSpeciesBanFromNotes(id, deletedBy, deletedAt));
+        }
+        // SS220 Species bans end
 
         public Task MarkMessageAsSeen(int id, bool dismissedToo)
         {
