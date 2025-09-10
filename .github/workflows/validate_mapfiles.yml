@@ -12,6 +12,10 @@ jobs:
     if: github.actor != 'IanComradeBot' && github.event.pull_request.draft == false
     runs-on: self-hosted
     steps:
+    # SS220 custom install start
+    - name: Set up Docker
+      uses: docker/setup-docker-action@v4
+    # SS220 custom install end
     - uses: actions/checkout@v4.2.2
     - name: Setup Submodule
       run: git submodule update --init
