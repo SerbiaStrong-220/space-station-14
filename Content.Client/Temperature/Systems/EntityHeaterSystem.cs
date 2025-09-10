@@ -29,7 +29,7 @@ public sealed partial class EntityHeaterSystem : SharedEntityHeaterSystem
             MapKeys = [GrillingLayer]
         };
 
-        if (_spriteSystem.TryGetLayer((ent.Owner, sprite), GrillingLayer, out var layer, true))
+        if (_spriteSystem.TryGetLayer((ent.Owner, sprite), GrillingLayer, out var layer, false))
             _spriteSystem.LayerSetData(layer, layerData);
         else
             _spriteSystem.AddLayer((ent.Owner, sprite), layerData, null);

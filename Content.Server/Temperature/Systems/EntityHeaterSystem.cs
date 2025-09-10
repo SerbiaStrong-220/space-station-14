@@ -40,20 +40,6 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
         //SS220-grill-update end
     }
 
-    // Grill is no longer a grill, clear the visuals and audio, just in case
-    private void OnHeaterRemoved(Entity<EntityHeaterComponent> ent, ref ComponentShutdown args)
-    {
-        _audio.Stop(ent.Comp.GrillingAudioStream);
-
-        if (TryComp<ItemPlacerComponent>(ent, out var placer))
-        {
-            foreach (var item in placer.PlacedEntities)
-            {
-                RemComp<GrillingVisualComponent>(item);
-            }
-        }
-    }
-
     private void OnMapInit(Entity<EntityHeaterComponent> ent, ref MapInitEvent args)
     {
         // Set initial power level
@@ -105,6 +91,21 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
         UpdateGrillingVisuals(ent, args.OtherEntity);
         UpdateGrillAudio(ent);
     }
+
+    // Grill is no longer a grill, clear the visuals and audio, just in case
+    private void OnHeaterRemoved(Entity<EntityHeaterComponent> ent, ref ComponentShutdown args)
+    {
+        _audio.Stop(ent.Comp.GrillingAudioStream);
+
+        if (TryComp<ItemPlacerComponent>(ent, out var placer))
+        {
+            foreach (var item in placer.PlacedEntities)
+            {
+                RemComp<GrillingVisualComponent>(item);
+            }
+        }
+    }
+    
     //SS220-grill-update end
 
     public override void Update(float deltaTime)
