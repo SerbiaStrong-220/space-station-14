@@ -189,7 +189,7 @@ public sealed partial class BanPanel : DefaultWindow
         // SS220-add-ghost-roles-ban-end
 
         // SS220 Species bans begin
-        foreach (var species in _protoMan.EnumeratePrototypes<SpeciesPrototype>().OrderBy(x => x.Name))
+        foreach (var species in _protoMan.EnumeratePrototypes<SpeciesPrototype>().OrderBy(x => Loc.GetString(x.Name)))
             AddSpeciesCheckbox(species);
         // SS220 Species bans end
     }
