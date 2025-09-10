@@ -30,6 +30,7 @@ using Content.Shared.Chat;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
 using Content.Client.SS220.TTS;
+using Content.Client.SS220.Species;
 
 namespace Content.Client.IoC
 {
@@ -65,6 +66,7 @@ namespace Content.Client.IoC
             collection.Register<DiscordPlayerInfoManager>(); //SS220 discord user info
             collection.Register<ContentReplayPlaybackManager>();
             collection.Register<ISharedPlaytimeManager, JobRequirementsManager>();
+            collection.Register<SpeciesRequirementsManager>(); // SS220 Species bans
             collection.Register<MappingManager>();
             collection.Register<DebugMonitorManager>();
             collection.Register<PlayerRateLimitManager>();

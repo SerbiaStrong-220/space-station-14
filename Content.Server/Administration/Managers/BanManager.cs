@@ -81,6 +81,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         ImmutableArray<byte>? hwId = netChannel.UserData.HWId.Length == 0 ? null : netChannel.UserData.HWId;
         var modernHwids = netChannel.UserData.ModernHWIds;
         var roleBans = await _db.GetServerRoleBansAsync(netChannel.RemoteEndPoint.Address, player.UserId, hwId, modernHwids, false);
+        var speciesBans = await _db.GetServerSpeciesBansAsync(netChannel.RemoteEndPoint.Address, player.UserId, hwId, modernHwids, false); // SS220 Species bans
 
         var userRoleBans = new List<ServerRoleBanDef>();
         foreach (var ban in roleBans)
@@ -91,8 +92,10 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         cancel.ThrowIfCancellationRequested();
         _cachedBanExemptions[player] = flags;
         _cachedRoleBans[player] = userRoleBans;
+        _cachedSpeciesBans[player] = [.. speciesBans]; // SS220 Species bans
 
         SendRoleBans(player);
+        SendSpeciesBans(player); // SS220 Species bans
     }
 
     private void ClearPlayerData(ICommonSession player)
@@ -144,7 +147,27 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         {
             roleBans.RemoveAll(ban => DateTimeOffset.Now > ban.ExpirationTime);
         }
+
+        SpeciesBansRestart(); // SS220 Species bans
     }
+
+    // SS220 Species bans begin
+    private void SpeciesBansRestart()
+    {
+        foreach (var (player, bans) in _cachedSpeciesBans.ToDictionary())
+        {
+            // Clear out players that have disconnected.
+            if (player.Status is SessionStatus.Disconnected)
+            {
+                _cachedSpeciesBans.Remove(player);
+                continue;
+            }
+
+            // Check for expired bans
+            bans.RemoveAll(ban => DateTimeOffset.Now > ban.ExpirationTime);
+        }
+    }
+    // SS220 Species bans end
 
     #region Server Bans
     public async void CreateServerBan(NetUserId? target, string? targetUsername, NetUserId? banningAdmin, (IPAddress, int)? addressRange, ImmutableTypedHwid? hwid, uint? minutes, NoteSeverity severity, string? banningAdminName, int statedRound, string reason, bool postBanInfo)
@@ -388,6 +411,16 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         return [.. speciesBans.Select(banDef => banDef.SpeciesId)];
     }
 
+    public bool IsSpeciesBanned(NetUserId playerUserId, SpeciesPrototype speciesPrototype)
+    {
+        return IsSpeciesBanned(playerUserId, speciesPrototype.ID);
+    }
+
+    public bool IsSpeciesBanned(NetUserId playerUserId, string speciesId)
+    {
+        return GetSpeciesBans(playerUserId)?.Contains(speciesId) is true;
+    }
+
     public async void CreateSpeciesBan(
         NetUserId? target,
         string? targetUsername,
@@ -479,16 +512,14 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
     public void SendSpeciesBans(ICommonSession pSession)
     {
-        // Отключено т.к. на клиенте негде ловить это сообщение
+        var speciesBans = _cachedSpeciesBans.GetValueOrDefault(pSession) ?? new List<ServerSpeciesBanDef>();
+        var bans = new MsgSpeciesBans
+        {
+            Bans = [.. speciesBans.Select(b => b.SpeciesId)]
+        };
 
-        //var speciesBans = _cachedSpeciesBans.GetValueOrDefault(pSession) ?? new List<ServerSpeciesBanDef>();
-        //var bans = new MsgSpeciesBans
-        //{
-        //    Bans = [.. speciesBans.Select(b => b.SpeciesId)]
-        //};
-
-        //_sawmill.Debug($"Sent species bans to {pSession.Name}");
-        //_netManager.ServerSendMessage(bans, pSession.Channel);
+        _sawmill.Debug($"Sent species bans to {pSession.Name}");
+        _netManager.ServerSendMessage(bans, pSession.Channel);
     }
     #endregion
     // SS220 Species bans end

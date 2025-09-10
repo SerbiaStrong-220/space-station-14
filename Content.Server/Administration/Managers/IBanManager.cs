@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Net;
 using System.Threading.Tasks;
 using Content.Shared.Database;
+using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Roles;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -56,6 +57,9 @@ public interface IBanManager
     // SS220 Species bans begin
     #region Species bans
     HashSet<string>? GetSpeciesBans(NetUserId playerUserId);
+
+    bool IsSpeciesBanned(NetUserId playerUserId, SpeciesPrototype speciesPrototype);
+    bool IsSpeciesBanned(NetUserId playerUserId, string speciesId);
 
     /// <summary>
     /// Creates a species ban for the specified target, username or GUID
