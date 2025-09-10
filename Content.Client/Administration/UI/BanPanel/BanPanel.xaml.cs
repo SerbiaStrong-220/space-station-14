@@ -372,7 +372,7 @@ public sealed partial class BanPanel : DefaultWindow
         var checkbox = new CheckBox()
         {
             Name = $"{SpeciesCheckboxNamePrefix}{species.ID}",
-            Text = Loc.GetString(species.Name),
+            Text = $"{Loc.GetString(species.Name)} (id: {species.ID})",
             Margin = new Thickness(5, 0, 0, 0)
         };
 
