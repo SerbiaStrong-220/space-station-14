@@ -253,7 +253,7 @@
   sprite:
     sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: diagonal_checker_b
-
+# SS220 Fix Rombs Decals begin
 - type: decal
   id: DiagonalCheckerCOverlay
   tags: ["station", "overlay"]
@@ -269,7 +269,7 @@
   sprite:
     sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: diagonal_checker_d
-
+# SS220 Fix Rombs Decals end
 - type: decal
   id: HerringboneOverlay
   tags: ["station", "overlay"]
@@ -325,7 +325,7 @@
   sprite:
     sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_diagonal_b
-
+# SS220 Fix Rombs Decals begin
 - type: decal
   id: MiniTileDiagonalCheckerCOverlay
   tags: ["station", "overlay"]
@@ -341,7 +341,7 @@
   sprite:
     sprite: SS220/Decals/Overlays/greyscale.rsi # SS220 Resprite Tiles
     state: minitile_diagonal_d
-
+# SS220 Fix Rombs Decals end
 - type: decal
   id: MiniTileBoxOverlay
   tags: ["station", "overlay"]
