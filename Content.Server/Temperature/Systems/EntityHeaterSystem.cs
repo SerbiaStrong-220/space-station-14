@@ -36,7 +36,22 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
         SubscribeLocalEvent<EntityHeaterComponent, ItemRemovedEvent>(OnItemRemoved);
         SubscribeLocalEvent<EntityHeaterComponent, ItemPlacedEvent>(OnItemPlaced);
         SubscribeLocalEvent<EntityHeaterComponent, HeaterSettingChangedEvent>(OnHeaterSettingChanged);
+        SubscribeLocalEvent<EntityHeaterComponent, ComponentShutdown>(OnHeaterRemoved);
         //SS220-grill-update end
+    }
+
+    // Grill is no longer a grill, clear the visuals and audio, just in case
+    private void OnHeaterRemoved(Entity<EntityHeaterComponent> ent, ref ComponentShutdown args)
+    {
+        _audio.Stop(ent.Comp.GrillingAudioStream);
+
+        if (TryComp<ItemPlacerComponent>(ent, out var placer))
+        {
+            foreach (var item in placer.PlacedEntities)
+            {
+                RemComp<GrillingVisualComponent>(item);
+            }
+        }
     }
 
     private void OnMapInit(Entity<EntityHeaterComponent> ent, ref MapInitEvent args)
