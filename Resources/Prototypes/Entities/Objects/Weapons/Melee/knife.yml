@@ -95,7 +95,7 @@
     - FoodRecipes
   # SS220 butchering-update begin
   - type: Clothing
-    sprite: Objects/Weapons/Melee/cleaver.rsi
+    sprite: SS220\Objects\Weapons\Melee\cleaver.rsi
     quickEquip: false
     slots:
     - Belt
