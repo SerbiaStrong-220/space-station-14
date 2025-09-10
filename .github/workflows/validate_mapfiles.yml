@@ -15,6 +15,10 @@ jobs:
     - uses: actions/checkout@v4.2.2
     - name: Setup Submodule
       run: git submodule update --init --recursive
+    - name: Update Engine Submodules
+      run: |
+        cd RobustToolbox/
+        git submodule update --init --recursive
     # Corvax-Secrets-Start
     - name: Setup secrets
       env:
