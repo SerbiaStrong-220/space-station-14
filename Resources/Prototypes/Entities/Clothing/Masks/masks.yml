@@ -771,6 +771,7 @@
   - type: Tag
     tags:
     - WhitelistChameleon
+    - WeldingMask
 
 # Entity tables
 - type: entityTable
