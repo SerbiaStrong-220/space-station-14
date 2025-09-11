@@ -72,6 +72,11 @@ public sealed partial class StealthComponent : Component
     /// </summary>
     [DataField("examinedDesc")]
     public string ExaminedDesc = "stealth-visual-effect";
+
+    // ss220 add full visibility for stealth start
+    [DataField]
+    public bool DisableDistortion;
+    // ss220 add full visibility for stealth end
 }
 
 [Serializable, NetSerializable]

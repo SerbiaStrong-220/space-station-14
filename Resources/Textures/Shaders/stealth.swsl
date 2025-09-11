@@ -2,6 +2,7 @@ light_mode unshaded;
 
 uniform sampler2D SCREEN_TEXTURE;
 uniform highp float visibility; // number between -1 and 1
+uniform bool disableDistortion; // ss220 add full visibility for stealth
 uniform mediump vec2 reference;
 
 const mediump float time_scale = 0.25;
@@ -15,22 +16,29 @@ void fragment() {
         discard;
     }
 
+    // ss220 add full visibility for stealth start
     // get distortion magnitude. hand crafted from a random jumble of trig functions
-    highp vec2 coords = (FRAGCOORD.xy + reference) * distance_scale;
-    highp float w = sin(TIME + (coords.x + coords.y + 2.0*sin(TIME*time_scale) * sin(TIME*time_scale + coords.x - coords.y)) );
+    // ss220 addition for distortion: if disableDistortion is true, then don't apply distortion
+    highp float w = 0.0;
 
-    // visualize distortion via:
-    // COLOR = vec4(w,w,w,1.0);
+    if (!(disableDistortion && visibility <= -1.0)) {
+        highp vec2 coords = (FRAGCOORD.xy + reference) * distance_scale;
+        w = sin(TIME + (coords.x + coords.y + 2.0 * sin(TIME * time_scale) * sin(TIME * time_scale + coords.x - coords.y)));
 
-    w *= (3.0 + visibility * 2.0);
+        // visualize distortion via:
+        // COLOR = vec4(w,w,w,1.0);
 
-    highp vec4 background = zTextureSpec(SCREEN_TEXTURE, ( FRAGCOORD.xy + vec2(w) ) * SCREEN_PIXEL_SIZE );
+        w *= (3.0 + visibility * 2.0);
+    }
+
+    highp vec4 background = zTextureSpec(SCREEN_TEXTURE, (FRAGCOORD.xy + vec2(w)) * SCREEN_PIXEL_SIZE);
 
     lowp float alpha;
-    if (visibility>0.0)
-      alpha = sprite.a * visibility;
+    if (visibility > 0.0)
+        alpha = sprite.a * visibility;
     else
-      alpha = 0.0;
+        alpha = 0.0;
+    // ss220 add full visibility for stealth end
 
     COLOR.xyz = mix(background.xyz, sprite.xyz, alpha);
     COLOR.a = 1.0;
