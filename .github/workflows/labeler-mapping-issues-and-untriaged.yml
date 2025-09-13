@@ -6,7 +6,7 @@ on:
 
 jobs:
   add-labels-and-assigness:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Check option and add label
         uses: actions/github-script@v6

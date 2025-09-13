@@ -9,7 +9,7 @@ on:
 jobs:
   send_changelog:
     if: github.event.pull_request.merged == true
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: Send a changelog to the Discord server
     steps:
       - name: Generate and send message
