@@ -74,7 +74,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         foreach (var rule in rules)
         {
             if (!rule.TryGetComponent<AntagSelectionComponent>(out var selection, EntityManager.ComponentFactory))
-                continue
+                continue;
 
             if (!dynamic.AntagLimits.TryGetValue(, out var value))
                 continue;
