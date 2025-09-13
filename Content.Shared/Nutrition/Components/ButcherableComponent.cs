@@ -1,4 +1,5 @@
 using Content.Shared.Storage;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Nutrition.Components
@@ -17,6 +18,15 @@ namespace Content.Shared.Nutrition.Components
 
         [ViewVariables(VVAccess.ReadWrite), DataField("butcheringType")]
         public ButcheringType Type = ButcheringType.Knife;
+
+        //SS220-butchering-update begin
+        [DataField]
+        public SoundSpecifier ButcheringSound = new SoundPathSpecifier(
+            "/Audio/SS220/Effects/butcher.ogg",
+            AudioParams.Default.AddVolume(-6));
+
+        public EntityUid? ButcheringAudioStream;
+        //SS220-butchering-update end
 
         /// <summary>
         /// Prevents butchering same entity on two and more spikes simultaneously and multiple doAfters on the same Spike
