@@ -50,6 +50,11 @@
             <ScrollContainer>
                 <BoxContainer Name="RolesContainer"  Orientation="Vertical" />
             </ScrollContainer>
+            <!-- SS220 Species bans begin -->
+            <ScrollContainer>
+                <BoxContainer Name="SpeciesContainer"  Orientation="Vertical" />
+            </ScrollContainer>
+            <!-- SS220 Species bans end -->
         </TabContainer>
         <Button Name="SubmitButton" Text="{Loc ban-panel-submit}" HorizontalExpand="True" />
     </BoxContainer>

@@ -21,6 +21,7 @@ public sealed record SharedAdminNote(
     DateTime? LastEditedAt, // When was it last edited?
     DateTime? ExpiryTime, // Does it expire?
     string[]? BannedRoles, // Only valid for role bans. List of banned roles
+    string[]? BannedSpecies, // SS220 Species bans // Only valid for species bans. List of banned species
     DateTime? UnbannedTime, // Only valid for bans. Set if unbanned
     string? UnbannedByName, // Only valid for bans. Set if unbanned
     int? StatedRound, // Only valid for bans

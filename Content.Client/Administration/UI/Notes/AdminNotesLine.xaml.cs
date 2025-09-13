@@ -116,6 +116,11 @@ public sealed partial class AdminNotesLine : BoxContainer
             case NoteType.RoleBan:
                 NoteLabel.SetMessage(FormatRoleBanMessage());
                 break;
+            // SS220 Species bans begin
+            case NoteType.SpeciesBan:
+                NoteLabel.SetMessage(FormatSpeciesBanMessage());
+                break;
+            // SS220 Species bans end
             case NoteType.Note:
             case NoteType.Watchlist:
             case NoteType.Message:
@@ -142,6 +147,14 @@ public sealed partial class AdminNotesLine : BoxContainer
         var banMessage = new StringBuilder($"{Loc.GetString("admin-notes-banned-from")} {string.Join(", ", Note.BannedRoles ?? new []{"unknown"})} ");
         return FormatBanMessageCommon(banMessage);
     }
+
+    // SS220 Species bans begin
+    private string FormatSpeciesBanMessage()
+    {
+        var banMessage = new StringBuilder($"{Loc.GetString("admin-notes-banned-from")} {string.Join(", ", Note.BannedSpecies ?? ["unknown"])} ");
+        return FormatBanMessageCommon(banMessage);
+    }
+    // SS220 Species bans end
 
     private string FormatBanMessageCommon(StringBuilder sb)
     {

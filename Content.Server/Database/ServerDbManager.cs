@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
+using Content.Server.SS220.Database;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Construction.Prototypes;
@@ -166,6 +167,42 @@ namespace Content.Server.Database
             DateTimeOffset editedAt);
         #endregion
 
+        // SS220 species ban begin
+        #region Species ban
+        /// <summary>
+        ///     Looks up a species ban by id.
+        ///     This will return a pardoned species ban as well.
+        /// </summary>
+        /// <param name="id">The species ban id to look for.</param>
+        /// <returns>The species ban with the given id or null if none exist.</returns>
+        Task<ServerSpeciesBanDef?> GetServerSpeciesBanAsync(int id);
+
+        /// <summary>
+        ///     Looks up an user's species ban history.
+        ///     This will return pardoned species bans based on the <paramref name="includeUnbanned"/> bool.
+        ///     Requires one of <paramref name="address"/>, <paramref name="userId"/>, or <paramref name="hwId"/> to not be null.
+        /// </summary>
+        /// <param name="address">The IP address of the user.</param>
+        /// <param name="userId">The NetUserId of the user.</param>
+        /// <param name="hwId">The Hardware Id of the user.</param>
+        /// <param name="modernHWIds">The modern HWIDs of the user.</param>
+        /// <param name="includeUnbanned">Whether expired and pardoned bans are included.</param>
+        /// <returns>The user's species ban history.</returns>
+        Task<List<ServerSpeciesBanDef>> GetServerSpeciesBansAsync(
+            IPAddress? address,
+            NetUserId? userId,
+            ImmutableArray<byte>? hwId,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds,
+            bool includeUnbanned = true);
+
+        Task<ServerSpeciesBanDef> AddServerSpeciesBanAsync(ServerSpeciesBanDef serverSpeciesBan);
+
+        Task AddServerSpeciesUnbanAsync(ServerSpeciesUnbanDef serverSpeciesUnban);
+
+        Task EditServerSpeciesBan(int id, string reason, NoteSeverity severity, DateTimeOffset? expiration, Guid editedBy, DateTimeOffset editedAt);
+        #endregion
+        // SS220 species ban end
+
         #region Playtime
 
         /// <summary>
@@ -299,6 +336,7 @@ namespace Content.Server.Database
         Task<AdminMessageRecord?> GetAdminMessage(int id);
         Task<ServerBanNoteRecord?> GetServerBanAsNoteAsync(int id);
         Task<ServerRoleBanNoteRecord?> GetServerRoleBanAsNoteAsync(int id);
+        Task<ServerSpeciesBanNoteRecord?> GetServerSpeciesBanAsNoteAsync(int id); // SS220 Species bans
         Task<List<IAdminRemarksRecord>> GetAllAdminRemarks(Guid player);
         Task<List<IAdminRemarksRecord>> GetVisibleAdminNotes(Guid player);
         Task<List<AdminWatchlistRecord>> GetActiveWatchlists(Guid player);
@@ -311,6 +349,7 @@ namespace Content.Server.Database
         Task DeleteAdminMessage(int id, Guid deletedBy, DateTimeOffset deletedAt);
         Task HideServerBanFromNotes(int id, Guid deletedBy, DateTimeOffset deletedAt);
         Task HideServerRoleBanFromNotes(int id, Guid deletedBy, DateTimeOffset deletedAt);
+        Task HideServerSpeciesBanFromNotes(int id, Guid deletedBy, DateTimeOffset deletedAt); // SS220 Species bans
 
         /// <summary>
         /// Mark an admin message as being seen by the target player.
@@ -609,6 +648,45 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.EditServerRoleBan(id, reason, severity, expiration, editedBy, editedAt));
         }
         #endregion
+
+        // SS220 species ban begin
+        #region Species ban
+        public Task<ServerSpeciesBanDef?> GetServerSpeciesBanAsync(int id)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetServerSpeciesBanAsync(id));
+        }
+
+        public Task<List<ServerSpeciesBanDef>> GetServerSpeciesBansAsync(
+            IPAddress? address,
+            NetUserId? userId,
+            ImmutableArray<byte>? hwId,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds,
+            bool includeUnbanned = true)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetServerSpeciesBansAsync(address, userId, hwId, modernHWIds, includeUnbanned));
+        }
+
+        public Task<ServerSpeciesBanDef> AddServerSpeciesBanAsync(ServerSpeciesBanDef serverSpeciesBan)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddServerSpeciesBanAsync(serverSpeciesBan));
+        }
+
+        public Task AddServerSpeciesUnbanAsync(ServerSpeciesUnbanDef serverSpeciesUnban)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddServerSpeciesUnbanAsync(serverSpeciesUnban));
+        }
+
+        public Task EditServerSpeciesBan(int id, string reason, NoteSeverity severity, DateTimeOffset? expiration, Guid editedBy, DateTimeOffset editedAt)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.EditServerSpeciesBan(id, reason, severity, expiration, editedBy, editedAt));
+        }
+        #endregion
+        // SS220 species ban end
 
         #region Playtime
 
@@ -934,6 +1012,14 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetServerRoleBanAsNoteAsync(id));
         }
 
+        // SS220 Species bans begin
+        public Task<ServerSpeciesBanNoteRecord?> GetServerSpeciesBanAsNoteAsync(int id)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetServerSpeciesBanAsNoteAsync((int)id));
+        }
+        // SS220 Species bans end
+
         public Task<List<IAdminRemarksRecord>> GetAllAdminRemarks(Guid player)
         {
             DbReadOpsMetric.Inc();
@@ -1004,6 +1090,14 @@ namespace Content.Server.Database
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.HideServerRoleBanFromNotes(id, deletedBy, deletedAt));
         }
+
+        // SS220 Species bans begin
+        public Task HideServerSpeciesBanFromNotes(int id, Guid deletedBy, DateTimeOffset deletedAt)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.HideServerSpeciesBanFromNotes(id, deletedBy, deletedAt));
+        }
+        // SS220 Species bans end
 
         public Task MarkMessageAsSeen(int id, bool dismissedToo)
         {

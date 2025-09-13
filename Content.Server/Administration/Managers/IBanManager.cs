@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Net;
 using System.Threading.Tasks;
 using Content.Shared.Database;
+using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Roles;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -52,4 +53,49 @@ public interface IBanManager
     /// </summary>
     /// <param name="pSession">Player's session</param>
     public void SendRoleBans(ICommonSession pSession);
+
+    // SS220 Species bans begin
+    #region Species bans
+    HashSet<string>? GetSpeciesBans(NetUserId playerUserId);
+
+    bool IsSpeciesBanned(NetUserId playerUserId, SpeciesPrototype speciesPrototype);
+    bool IsSpeciesBanned(NetUserId playerUserId, string speciesId);
+
+    /// <summary>
+    /// Creates a species ban for the specified target, username or GUID
+    /// </summary>
+    /// <param name="target">Target user, username or GUID, null for none</param>
+    /// <param name="speciesId">Species id to be banned from</param>
+    /// <param name="severity">Severity of the resulting ban note</param>
+    /// <param name="reason">Reason for the ban</param>
+    /// <param name="minutes">Number of minutes to ban for. 0 and null mean permanent</param>
+    /// <param name="timeOfBan">Time when the ban was applied, used for grouping species bans</param>
+    void CreateSpeciesBan(
+        NetUserId? target,
+        string? targetUsername,
+        NetUserId? banningAdmin,
+        (IPAddress, int)? addressRange,
+        ImmutableTypedHwid? hwid,
+        string speciesId,
+        uint? minutes,
+        NoteSeverity severity,
+        string reason,
+        DateTimeOffset timeOfBan,
+        bool postBanInfo);
+
+    /// <summary>
+    /// Pardons a species ban for the specified target, username or GUID
+    /// </summary>
+    /// <param name="banId">The id of the species ban to pardon.</param>
+    /// <param name="unbanningAdmin">The admin, if any, that pardoned the species ban.</param>
+    /// <param name="unbanTime">The time at which this species ban was pardoned.</param>
+    Task<string> PardonSpeciesBan(int banId, NetUserId? unbanningAdmin, DateTimeOffset unbanTime);
+
+    /// <summary>
+    /// Sends species bans to the target
+    /// </summary>
+    /// <param name="pSession">Player's session</param>
+    void SendSpeciesBans(ICommonSession pSession);
+    #endregion
+    // SS220 Species bans end
 }
