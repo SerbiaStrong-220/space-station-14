@@ -12,7 +12,9 @@ using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 using Content.Client.SS220.Language;
+using Content.Client.SS220.UserInterface;
 using Robust.Client.Player;
+using Content.Client.SS220.UserInterface.System.PinUI;
 
 namespace Content.Client.Paper.UI
 {
@@ -113,6 +115,8 @@ namespace Content.Client.Paper.UI
 
             SaveButton.Text = Loc.GetString("paper-ui-save-button",
                 ("keybind", _inputManager.GetKeyFunctionButtonString(EngineKeyFunctions.MultilineTextSubmit)));
+
+            PinButton.LinkedControl = this; // SS220 pin button
         }
 
         /// <summary>
