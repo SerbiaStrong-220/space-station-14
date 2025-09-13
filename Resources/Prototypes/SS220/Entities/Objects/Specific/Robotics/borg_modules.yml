@@ -28,7 +28,7 @@
       hands:
       - item: BorgFireAxe
     - type: BorgModuleIcon
-      icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: fireaxe-module }
+      icon: { sprite: SS220/Interface/Actions/Silicon/borg.rsi, state: fireaxe-module }
 
 - type: entity
   id: BorgModuleFlamingAxe
@@ -45,7 +45,7 @@
       hands:
       - item: BorgFireAxeFlaming
     - type: BorgModuleIcon
-      icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: syndicate-fireaxe-module }
+      icon: { sprite: SS220/Interface/Actions/Silicon/borg.rsi, state: syndicate-fireaxe-module }
     - type: HiddenDescription
       entries:
       - label: hidden-desc-flaming-axe-module-syndicate
@@ -79,7 +79,7 @@
     - item: CrowbarBaguetteCyborg
     - item: ToyFigurineMime
   - type: BorgModuleIcon
-    icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: ClownMime-module }
+    icon: { sprite: SS220/Interface/Actions/Silicon/borg.rsi, state: ClownMime-module }
 
 - type: entity
   id: BorgModuleClown
