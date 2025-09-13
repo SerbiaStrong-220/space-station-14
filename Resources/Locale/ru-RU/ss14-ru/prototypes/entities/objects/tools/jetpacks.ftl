@@ -31,7 +31,7 @@ ent-JetpackMiniFilled = мини джетпак
 # SS220-fix-translation begin	
 ent-JetpackSecurity = джетпак охраны
     .suffix = Пустой
-    .desc = Это реактивный ранец - джетпак. Вмещает 1,5 Л газа.
+    .desc = { ent-JetpackMini.desc }
 # SS220-fix-translation end
 ent-JetpackSecurityFilled = джетпак охраны
     .suffix = Полный
