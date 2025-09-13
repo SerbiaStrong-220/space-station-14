@@ -198,6 +198,19 @@
   categories:
   - UplinkPointless
 
+#Posters
+
+- type: listing
+  id: UplinkContrabandPosters
+  name: uplink-contraband-poster-name
+  description: uplink-contraband-poster-desc
+  icon: { sprite: SS220/Objects/Misc/Contrposter.rsi, state: contrposter }
+  productEntity: BoxContraPosters
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkPointless
+
 - type: listing
   id: UplinkThermalGlasses
   name: uplink-thermal-glasses-name
@@ -355,6 +368,17 @@
       Telecrystal: 1
 #ss220 dynamic-price end
 
+- type: listing
+  id: UplinkOuterElectrification
+  name: uplink-outer-electrification-name
+  description: uplink-outer-electrification-desc
+  icon: {sprite: Clothing/OuterClothing/Armor/security.rsi, state: icon}
+  productEntity: ClothingOuterArmorElectricity
+  cost:
+    Telecrystal: 5
+  categories:
+  - UplinkWearables
+
 #SS220 SpicyUPD begin
 - type: listing
   id: UplinkSpicyPizza
@@ -463,3 +487,19 @@
     HardDynamic:
       Telecrystal: 6
 #ss220 dynamic-price end
+
+- type: listing
+  id: UplinkShutdownNearestApc
+  name: uplink-shutdown-nearest-apc
+  description: uplink-shutdown-nearest-apc-desc
+  icon: { sprite: Interface/Actions/actions_ai.rsi, state: door_overcharge_on }
+  productEvent: !type:ShutdownNearestApcEvent
+    radius: 6
+  raiseProductEventOnUser: true
+  cost:
+    Telecrystal: 4
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 2
+  categories:
+  - UplinkDisruption

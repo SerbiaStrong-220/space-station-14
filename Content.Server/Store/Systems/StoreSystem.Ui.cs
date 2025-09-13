@@ -257,13 +257,16 @@ public sealed partial class StoreSystem
                 HandleRefundComp(uid, component, upgradeActionId.Value);
         }
 
-        if (listing.ProductEvent != null)
+        // ss220 tweak product event start
+        if (listing.ProductEvent is { } ev)
         {
-            if (!listing.RaiseProductEventOnUser)
-                RaiseLocalEvent(listing.ProductEvent);
-            else
-                RaiseLocalEvent(buyer, listing.ProductEvent);
+            ev.Listing = listing;
+            ev.Purchaser = buyer;
+            ev.StoreUid = uid;
+
+            RaiseLocalEvent(!listing.RaiseProductEventOnUser ? uid : buyer, (object) ev, broadcast: true);
         }
+        // ss220 tweak product event end
 
         if (listing.DisableRefund)
         {
@@ -280,6 +283,7 @@ public sealed partial class StoreSystem
 
         var buyFinished = new StoreBuyFinishedEvent
         {
+            User = buyer, // ss220 tweak product event start
             PurchasedItem = listing,
             StoreUid = uid
         };
@@ -361,7 +365,7 @@ public sealed partial class StoreSystem
 
             _actionContainer.RemoveAction(purchase, logMissing: false);
 
-            EntityManager.DeleteEntity(purchase);
+            Del(purchase);
         }
 
         component.BoughtEntities.Clear();
@@ -410,6 +414,7 @@ public sealed partial class StoreSystem
 /// <param name="PurchasedItem">ListingItem that was purchased.</param>
 [ByRefEvent]
 public readonly record struct StoreBuyFinishedEvent(
+    EntityUid User, // ss220 tweak product event
     EntityUid StoreUid,
     ListingDataWithCostModifiers PurchasedItem
 );

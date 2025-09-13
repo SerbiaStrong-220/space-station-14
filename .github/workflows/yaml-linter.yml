@@ -11,7 +11,7 @@ jobs:
   build:
     name: YAML Linter
     if: github.actor != 'IanComradeBot' && github.event.pull_request.draft == false
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4.2.2
       - name: Setup submodule
@@ -24,6 +24,10 @@ jobs:
           cd RobustToolbox/
           git submodule update --init --recursive
       - name: Setup .NET Core
+      # SS220 custom install start
+        env:
+          DOTNET_INSTALL_DIR: "./.dotnet"
+     # SS220 custom install end
         uses: actions/setup-dotnet@v4.1.0
         with:
           dotnet-version: 9.0.x

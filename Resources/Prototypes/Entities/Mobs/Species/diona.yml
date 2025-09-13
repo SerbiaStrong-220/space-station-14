@@ -142,6 +142,7 @@
   #SS220 LimitationRevive - start
   - type: LimitationRevive
   #SS220 LimitationRevive - end
+  - type: Rootable
 
 - type: entity
   parent: BaseSpeciesDummy

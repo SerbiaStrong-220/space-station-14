@@ -1,5 +1,6 @@
 using Content.Server.Body.Systems;
 using Content.Server.Popups;
+using Content.Server.SS220.Bed.Cryostorage;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -10,6 +11,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
@@ -52,10 +54,13 @@ namespace Content.Server.Guardian
             SubscribeLocalEvent<GuardianHostComponent, MoveEvent>(OnHostMove);
             SubscribeLocalEvent<GuardianHostComponent, MobStateChangedEvent>(OnHostStateChange);
             SubscribeLocalEvent<GuardianHostComponent, ComponentShutdown>(OnHostShutdown);
+            SubscribeLocalEvent<GuardianHostComponent, BeingCryoDeletedEvent>(OnCryoDeleted); // fix-Fatal-error-on-host-cryo
 
             SubscribeLocalEvent<GuardianHostComponent, GuardianToggleActionEvent>(OnPerformAction);
 
             SubscribeLocalEvent<GuardianComponent, AttackAttemptEvent>(OnGuardianAttackAttempt);
+
+            SubscribeLocalEvent<GuardianHostComponent, MechPilotRelayedEvent<GettingAttackedAttemptEvent>>(OnPilotAttackAttempt);
         }
 
         private void OnGuardianShutdown(EntityUid uid, GuardianComponent component, ComponentShutdown args)
@@ -116,7 +121,7 @@ namespace Content.Server.Guardian
 
         private void OnHostInit(EntityUid uid, GuardianHostComponent component, ComponentInit args)
         {
-            component.GuardianContainer = _container.EnsureContainer<ContainerSlot>(uid, "GuardianContainer");
+            component.GuardianContainer = _container.EnsureContainer<ContainerSlot>(uid, GuardianHostComponent.GuardianContainerId); // SS220-move-guardian-container-into-field
             _actionSystem.AddAction(uid, ref component.ActionEntity, component.Action);
         }
 
@@ -133,6 +138,12 @@ namespace Content.Server.Guardian
             QueueDel(component.ActionEntity);
             component.ActionEntity = null;
         }
+        // fix-Fatal-error-on-host-cryo-begin
+        private void OnCryoDeleted(Entity<GuardianHostComponent> entity, ref BeingCryoDeletedEvent args)
+        {
+            OnHostShutdown(entity.Owner, entity.Comp, new());
+        }
+        // fix-Fatal-error-on-host-cryo-end
 
         private void OnGuardianAttackAttempt(EntityUid uid, GuardianComponent component, AttackAttemptEvent args)
         {
@@ -142,6 +153,16 @@ namespace Content.Server.Guardian
             // why is this server side code? This should be in shared
             _popupSystem.PopupCursor(Loc.GetString("guardian-attack-host"), uid, PopupType.LargeCaution);
             args.Cancel();
+        }
+
+        private void OnPilotAttackAttempt(Entity<GuardianHostComponent> uid, ref MechPilotRelayedEvent<GettingAttackedAttemptEvent> args)
+        {
+            if (args.Args.Cancelled)
+                return;
+
+            _popupSystem.PopupCursor(Loc.GetString("guardian-attack-host"), args.Args.Attacker, PopupType.LargeCaution);
+
+            args.Args.Cancelled = true;
         }
 
         public void ToggleGuardian(EntityUid user, GuardianHostComponent hostComponent)

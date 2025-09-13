@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Server.Explosion.EntitySystems;
+
+using Content.Shared.Trigger;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
@@ -24,7 +25,7 @@ public sealed class TileSpawnInRangeOnTriggerSystem : EntitySystem
             return;
         }
 
-        if(!_prototypeManager.TryIndex(entity.Comp.KudzuProtoId, out var prototype, logError: true))
+        if (!_prototypeManager.TryIndex(entity.Comp.KudzuProtoId, out var prototype, logError: true))
             return;
 
         var xform = Transform(entity);

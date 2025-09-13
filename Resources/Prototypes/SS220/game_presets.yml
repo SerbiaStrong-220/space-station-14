@@ -19,7 +19,7 @@
   name: roles-antag-cult-yogg-name
   description: roles-antag-cult-yogg-objective
   showInVote: false
-  minPlayers: 40 # WARNING: this should be always synced with other cult game rules and presets!
+  minPlayers: 35 # WARNING: this should be always synced with other cult game rules and presets!
   maxPlayers: 59 # WARNING: this should be always synced with other cult game rules and presets!
   rules:
     - CultYoggRuleMidPop

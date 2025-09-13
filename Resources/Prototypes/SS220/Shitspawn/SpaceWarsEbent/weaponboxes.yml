@@ -1,0 +1,575 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: LawyerSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Законник"
+  description: Для тех, кто хочет найти, задержать, допросить.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/help_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: HelpBoxTrash
+      - id: GrenadeStinger
+        amount: 2
+      - id: WeaponDisablerSMG
+      - id: BoxHandcuff
+      - id: Stunbaton
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: GoodCaptainSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Хороший капитан"
+  description: Эталонное снаряжение капитана
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/captain_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: CaptainBoxTrash
+      - id: SyndicateWhistle
+      - id: Telescopichka
+      - id: WeaponSynergisticEnergyGun
+      - id: ClothingBeltSheathFilled
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: HooliganSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Хулиган"
+  description: Для тех, кто предпочитает очень близкий контакт
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponBoxTrash
+      - id: Truncheon
+      - id: WeaponShotgunSawn
+      - id: BoxLethalshot
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: CorporationFighterSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Боец Корпорации"
+  description: Для тех, кто ценит силу лазерных технологий
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponBoxTrash
+      - id: WeaponLaserCarbine
+      - id: WeaponLaserSvalinn
+      - id: PowerCellSmall
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: PythonSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Питон"
+  description: Для суровых капитанов
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/captain_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: CaptainBoxTrash
+      - id: WeaponRevolverPythonAP
+      - id: SyndicateWhistle
+      - id: SpeedLoaderMagnumAP
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: KammererSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Каммерер"
+  description: Для тех, кто когда-то служил в полиции
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponBoxTrash
+      - id: WeaponShotgunKammerer
+      - id: ClothingBeltBandolier
+      - id: BoxLethalshot
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: BulldogSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Бульдог"
+  description: Для тех, кто хочет, что бы его реально боялись
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponBoxTrash
+      - id: WeaponShotgunBulldog
+      - id: MagazineShotgun
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: CommunistSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Коммунист"
+  description: Для тех, кто уважает старину
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponBoxTrash
+      - id: ExGrenade
+      - id: WeaponRifleAk
+      - id: MagazineLightRifle
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: MercenarySetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Наёмник"
+  description: Для профессионалов
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponBoxTrash
+      - id: MagazineRifle
+        amount: 2
+      - id: WeaponRifleM90GrenadeLauncher
+      - id: GrenadeIncendiary
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: SoldierSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Солдат"
+  description: Для регулярной армии
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponBoxTrash
+      - id: WeaponRifleLecter
+      - id: MagazineRifle
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: KRSSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "КРС"
+  description: Для элитных войск
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponBoxTrash
+      - id: WeaponBlasterKRS
+      - id: BlasterPowerCellAlt
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: GuardianSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Страж"
+  description: Для бывших работников СБ
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponSubMachineGunWt550
+      - id: MagazinePistolSubMachineGunTopMounted
+        amount: 5
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: OutpostSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Застава"
+  description: Для любителей тяжелого вооружения
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponBoxTrash
+      - id: WeaponLightMachineGunL6
+      - id: MagazineLightRifleBox
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: OperativeSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Оперативник"
+  description: Для членов  той самой организации
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: WeaponBoxTrash
+      - id: WeaponSubMachineGunC20r
+      - id: MagazinePistolSubMachineGun
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: ExperimentetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Эксперимент"
+  description: Для тех, кто хочет чего-то новенького
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: PistolBoxTrash
+      - id: WeaponXrayCannon
+      - id: WeaponAdvancedRevolver
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: 1984PistolSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор пистолетный "1984"
+  description: Для тех, кто называет себя
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/pistol_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: PistolBoxTrash
+      - id: WeaponPistolN1984
+      - id: CombatKnife
+      - id: MagazineMagnum
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: ViperPistolSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор пистолетный "Гадюка"
+  description: Для тех, кто имеет свой подход
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/pistol_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: PistolBoxTrash
+      - id: WeaponPistolViper
+      - id: CombatKnife
+      - id: MagazinePistol
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: MkPistolSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор пистолетный "Мк"
+  description: Для самых стойких
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/pistol_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: PistolBoxTrash
+      - id: WeaponPistolMk58
+      - id: CombatKnife
+      - id: MagazinePistol
+        amount: 3
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: SurvivalKitSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Выживание"
+  description: Для тех, кто оказался в трудном положении
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/help_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: HelpBoxTrash
+      - id: FlashlightSeclite
+      - id: SpaceMedipen
+      - id: EmergencyMedipen
+      - id: BoxFlare
+      - id: PowerCellMedium
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: SaboteurSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Диверсант"
+  description: Для тех, кто хочет действовать на нервы
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/help_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: HelpBoxTrash
+      - id: C4
+        amount: 2
+      - id: EmpGrenade
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: LighterSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Зажигалка"
+  description: Для тех, кто любит огонь и дым
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/help_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: HelpBoxTrash
+      - id: GrenadeIncendiary
+        amount: 3
+      - id: SmokeGrenade
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: BombistSetBox
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: Набор "Бомбист"
+  description: Для тех, кто хочет погромче
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/help_box.rsi
+    layers:
+      - state: icon
+  - type: SpawnItemsOnUse
+    items:
+      - id: HelpBoxTrash
+      - id: GrenadeShrapnel
+        amount: 3
+      - id: ExGrenade
+        amount: 2
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+#Trash from boxes, cause idk if we should make them permanent
+- type: entity
+  id: HelpBoxTrash
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: раскуроченная коробка
+  description: Когда-то она держала в себе кучу вещей, но теперь это мусор.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/help_box.rsi
+    state: icon_open
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage
+
+- type: entity
+  id: PistolBoxTrash
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: раскуроченная коробка
+  description: Когда-то она держала в себе кучу вещей, но теперь это мусор.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/pistol_box.rsi
+    state: icon_open
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage
+
+- type: entity
+  id: WeaponBoxTrash
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: раскуроченная коробка
+  description: Когда-то она держала в себе кучу вещей, но теперь это мусор.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/weapon_box.rsi
+    state: icon_open
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage
+
+- type: entity
+  id: CaptainBoxTrash
+  parent: BaseItem
+  suffix: Shitspawn, Ebent, Space Wars
+  name: раскуроченная коробка
+  description: Когда-то она держала в себе кучу вещей, но теперь это мусор.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
+  - type: Sprite
+    sprite: SS220/Shitspawn/SpaceWarsEbent/captain_box.rsi
+    state: icon_open
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage

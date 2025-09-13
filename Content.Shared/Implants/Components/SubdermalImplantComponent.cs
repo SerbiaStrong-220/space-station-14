@@ -69,15 +69,19 @@ public sealed partial class UseChemicalImplantEvent : InstantActionEvent
 }
 // SS220 Chemical implants end
 
+// SS220 lazy-of-making-new-file-begin
+public sealed partial class UseAdrenalImplantEvent : InstantActionEvent
+{
+}
+public sealed partial class UseDnaCopyImplantEvent : InstantActionEvent
+{
+}
+// SS220 lazy-of-making-new-file-end
+
 /// <summary>
 /// Used for opening the storage implant via action.
 /// </summary>
 public sealed partial class OpenStorageImplantEvent : InstantActionEvent
-{
-
-}
-
-public sealed partial class UseFreedomImplantEvent : InstantActionEvent
 {
 
 }
@@ -97,27 +101,3 @@ public sealed partial class OpenUplinkImplantEvent : InstantActionEvent
 {
 
 }
-
-public sealed partial class UseScramImplantEvent : InstantActionEvent
-{
-
-}
-
-public sealed partial class UseDnaScramblerImplantEvent : InstantActionEvent
-{
-
-}
-
-//ss220 add dna copy implant start
-public sealed partial class UseDnaCopyImplantEvent : InstantActionEvent
-{
-
-}
-//ss220 add dna copy implant end
-
-//ss220 add adrenal implant start
-public sealed partial class UseAdrenalImplantEvent : InstantActionEvent
-{
-
-}
-//ss220 add adrenal implant end

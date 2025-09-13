@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.TraitorDynamics;
+using Content.Shared.SS220.Store.Listing; // ss220 tweak product event
 using Content.Shared.Store.Components;
 using Content.Shared.StoreDiscount.Components;
 using Robust.Shared.Prototypes;
@@ -59,7 +60,7 @@ public partial class ListingData : IEquatable<ListingData>
         EntProtoId? productAction,
         ProtoId<ListingPrototype>? productUpgradeId,
         EntityUid? productActionEntity,
-        object? productEvent,
+        ListingPurchasedEvent? productEvent, // ss220 tweak product event
         bool raiseProductEventOnUser,
         int purchaseAmount,
         string id,
@@ -176,11 +177,16 @@ public partial class ListingData : IEquatable<ListingData>
     [NonSerialized]
     public EntityUid? ProductActionEntity;
 
+    // ss220 tweak product event start
     /// <summary>
-    /// The event that is broadcast when the listing is purchased.
+    /// Defines the effect triggered when this listing is purchased.
+    /// This event is broadcast to relevant systems and may contain contextual data such as purchaser and store origin.
+    /// Must inherit from <see cref="ListingPurchasedEvent"/> to be properly handled.
     /// </summary>
     [DataField]
-    public object? ProductEvent;
+    [NonSerialized]
+    public ListingPurchasedEvent? ProductEvent;
+    // ss220 tweak product event end
 
     [DataField]
     public bool RaiseProductEventOnUser;
@@ -257,7 +263,6 @@ public partial class ListingData : IEquatable<ListingData>
 ///     Defines a set item listing that is available in a store
 /// </summary>
 [Prototype]
-[Serializable, NetSerializable]
 [DataDefinition]
 public sealed partial class ListingPrototype : ListingData, IPrototype
 {
@@ -470,7 +475,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
 ///     how <see cref="StoreDiscountComponent"/> will be filled by respective system.
 /// </summary>
 [Prototype]
-[DataDefinition, Serializable, NetSerializable]
+[DataDefinition]
 public sealed partial class DiscountCategoryPrototype : IPrototype
 {
     [ViewVariables]

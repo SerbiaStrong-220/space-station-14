@@ -4,7 +4,7 @@ using Content.Server.Popups;
 using Content.Server.SS220.MindSlave.DisfunctionComponents;
 using Content.Shared.Wieldable;
 
-namespace Content.Server.SS220.MindSlave.DisfunctionSystem;
+namespace Content.Server.SS220.MindSlave.DisfunctionSystems;
 
 public sealed class WieldUnabilitySystem : EntitySystem
 {

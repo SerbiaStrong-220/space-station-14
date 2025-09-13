@@ -35,16 +35,16 @@ public sealed class DiscordPlayerInfoManager
 
     public SponsorTier[] GetSponsorTier()
     {
-        return _info?.Tiers ?? Array.Empty<SponsorTier>();
+        return _info?.Tiers ?? [];
     }
 
     private void OnDiscordLinkRequired(MsgDiscordLinkRequired msg)
     {
-        if (_stateManager.CurrentState is not DiscordLinkRequiredState)
-        {
-            AuthUrl = msg.AuthUrl;
-            _stateManager.RequestStateChange<DiscordLinkRequiredState>();
-        }
+        if (_stateManager.CurrentState is DiscordLinkRequiredState)
+            return;
+
+        AuthUrl = msg.AuthUrl;
+        _stateManager.RequestStateChange<DiscordLinkRequiredState>();
     }
 
     public void ByPassCheck()
