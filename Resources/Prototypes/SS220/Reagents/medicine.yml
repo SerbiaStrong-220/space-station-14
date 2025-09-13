@@ -225,7 +225,7 @@
             max: 213.0
           damage:
             types:
-              Сerebral: -3.4
+              Cerebral: -3.4
 
 - type: reagent
   id: Nicergoline

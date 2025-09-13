@@ -43,8 +43,8 @@
         Asphyxiation: -10
         Bloodloss: -2.5
         Radiation: -2.5
-        Сerebral: -50
-        Сellular: -10
+        Cerebral: -50
+        Cellular: -10
         Caustic: -5
         Poison: -1
   - type: CultYoggBuilding
