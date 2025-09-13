@@ -1,0 +1,10 @@
+- type: entity
+  id: CrateDeathRattleImplants
+  parent: [ CrateMedicalSecureImplant ] #SS220 The implants are in new crates
+  name: death rattle implant crate
+  description: Crate filled with 3 death rattle implants.
+  components:
+  - type: StorageFill
+    contents:
+      - id: DeathRattleImplanterStation
+        amount: 3
