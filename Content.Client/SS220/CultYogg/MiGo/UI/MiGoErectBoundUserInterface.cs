@@ -43,6 +43,7 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
             return;
 
         SetState(ErectMenuState.None());
+
         _menu?.Close();
         _placementManager.PlacementChanged -= OnPlacementChanged;
     }
@@ -228,7 +229,6 @@ public sealed class MiGoErectBoundUserInterface(EntityUid owner, Enum uiKey) : B
         {
             return new(Key.Capture);
         }
-
         public bool MatchNone()
         {
             return _key == Key.None;
