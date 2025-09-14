@@ -22,22 +22,29 @@ public sealed class SkillPrototype : IPrototype
     public ComponentRegistry Components { get; } = [];
 
     /// <summary>
-    /// TODO
-    /// </summary>
-    [DataField]
-    public bool OverrideNotNullValues = false;
-
-    /// <summary>
-    /// TODO
-    /// </summary>
-    [DataField]
-    public bool OverrideNullValues = true;
-
-    /// <summary>
-    /// TODO
+    /// Deletes and then adds component if component with same type existed
     /// </summary>
     [DataField]
     public bool ApplyIfAlreadyHave = true;
+}
+
+[Prototype]
+public sealed class SkillTreePrototype : IPrototype
+{
+    [ViewVariables]
+    [IdDataField]
+    public string ID { get; private set; } = default!;
+
+    [DataField(required: true)]
+    public List<ProtoId<SkillPrototype>> SkillTree = new();
+}
+
+[Prototype]
+public sealed class KnowledgePrototype : IPrototype
+{
+    [ViewVariables]
+    [IdDataField]
+    public string ID { get; private set; } = default!;
 }
 
 [DataDefinition]
@@ -79,23 +86,4 @@ public partial struct SkillLevelDescription
 
     [DataField]
     public LocId? SkillHoverDescription = null;
-}
-
-[Prototype]
-public sealed class SkillTreePrototype : IPrototype
-{
-    [ViewVariables]
-    [IdDataField]
-    public string ID { get; private set; } = default!;
-
-    [DataField(required: true)]
-    public List<ProtoId<SkillPrototype>> SkillTree = new();
-}
-
-[Prototype]
-public sealed class KnowledgePrototype : IPrototype
-{
-    [ViewVariables]
-    [IdDataField]
-    public string ID { get; private set; } = default!;
 }

@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+using Content.Shared.Administration.Logs;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Experience.SkillChecks;
 using Robust.Shared.Prototypes;
@@ -12,11 +11,17 @@ namespace Content.Shared.SS220.Experience.Systems;
 public sealed partial class ExperienceSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
 
     private const int StartSkillLevelIndex = 0;
     private const int StartSubLevelIndex = 0;
     private readonly FixedPoint4 _startLearningProgress = 0;
     private readonly FixedPoint4 _endLearningProgress = 1;
+
+    private static readonly HashSet<string> ContainerIds = [
+        ExperienceComponent.ContainerId,
+        ExperienceComponent.OverrideContainerId
+    ];
 
     private readonly EntProtoId _baseSKillPrototype = "InitSkillEntity";
 

@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Database;
 using Content.Shared.Mobs;
 using Content.Shared.SS220.Experience.SkillChecks;
 using Robust.Shared.Containers;
@@ -37,22 +38,26 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     public bool TryAddSkillToSkillEntity(Entity<ExperienceComponent> entity, string containerId, SkillPrototype skill)
     {
-        // TODO
+        if (!ContainerIds.Contains(containerId))
+        {
+            Log.Error($"Tried to add skill {skill.ID} to entity {ToPrettyString(entity)} but skill entity container was incorrect, provided value {containerId}");
+            return false;
+        }
+
+        var skillEntity = containerId == ExperienceComponent.OverrideContainerId
+                            ? entity.Comp.OverrideExperienceContainer.ContainedEntity
+                            : entity.Comp.ExperienceContainer.ContainedEntity;
+
+        if (skillEntity is null)
+        {
+            Log.Error($"Got null skill entity for entity {entity} and container id {containerId}");
+            // TODO can I reinit skill entity here?
+            return false;
+        }
+
+        EntityManager.AddComponents(skillEntity.Value, skill.Components, skill.ApplyIfAlreadyHave);
+
         return true;
-
-
-        // var mat = (PhysicalCompositionComponent) compositionReg.Component;
-
-        // foreach (var (name, data) in comps)
-        // {
-        //     if (HasComp(target, data.Component.GetType()))
-        //         continue;
-
-        //     var component = (Component)Factory.GetComponent(name);
-        //     var temp = (object)component;
-        //     _seriMan.CopyTo(data.Component, ref temp);
-        //     AddComp(target, (Component)temp!);
-        // }
     }
 
     public void RelayEventToSkillEntity<T>() where T : notnull
@@ -68,7 +73,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (skillEntity is null && overrideSkillEntity is null)
             return;
 
-        // This check works as safe from missrelaying
+        // This check works as assert of not missrelaying
         if ((!TryComp<SkillComponent>(skillEntity, out var comp) && skillEntity is not null)
             || (!TryComp<SkillComponent>(overrideSkillEntity, out var overrideComp) && overrideSkillEntity is not null))
         {
@@ -78,8 +83,27 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         if (overrideSkillEntity is not null)
             RaiseLocalEvent(overrideSkillEntity.Value, ref args);
-
+        // TODO
+        // How to stop it from relaying to skill if override done it?
+        // Some prepredict can handle it? Like HasComp<Type>?
         if (skillEntity is not null)
             RaiseLocalEvent(skillEntity.Value, ref args);
+    }
+
+    public void AddToAdminLogs<T>(Entity<T> entity, string message, LogImpact logImpact = LogImpact.Low) where T : IComponent
+    {
+        if (!_container.TryGetOuterContainer(entity, Transform(entity), out var container))
+        {
+            Log.Error($"Couldn't resolve skill entity owner for entity {ToPrettyString(entity)}");
+            return;
+        }
+
+        if (!HasComp<ExperienceComponent>(container.Owner))
+        {
+            Log.Error($"Couldn't resolve {nameof(ExperienceComponent)} on entity {ToPrettyString(container.Owner)} which contains skill entity {ToPrettyString(entity)}");
+            return;
+        }
+
+        _adminLogManager.Add(LogType.Experience, logImpact, $"{ToPrettyString(container.Owner):user} {message} because of {nameof(T)}");
     }
 }

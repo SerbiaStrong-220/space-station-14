@@ -1,13 +1,13 @@
 - type: skillTree
   id: Piloting
   skillTree:
-  -
-  -
+  - PilotingBase
+  - PilotingCombat
 
 - type: skillTree
   id: CombatTraining
   skillTree:
-  -
-  -
-  -
-  -
+  - CombatTrainingInitial
+  - CombatTrainingBase
+  - CombatTrainingTrained
+  - CombatTrainingProfessional

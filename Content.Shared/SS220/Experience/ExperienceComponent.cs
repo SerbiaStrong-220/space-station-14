@@ -34,14 +34,14 @@ namespace Content.Shared.SS220.Experience;
 [Access(typeof(ExperienceSystem))]
 public sealed partial class ExperienceComponent : Component
 {
-    public const string ContainerId = "experience-entity-container";
+    public static readonly string ContainerId = "experience-entity-container";
 
     /// <summary>
     /// Container which entity with skill components.
     /// </summary>
     [ViewVariables] public ContainerSlot ExperienceContainer = default!;
 
-    public const string OverrideContainerId = "override-experience-entity-container";
+    public static readonly string OverrideContainerId = "override-experience-entity-container";
 
     /// <summary>
     /// Container which entity with skill components. This overrides base one.

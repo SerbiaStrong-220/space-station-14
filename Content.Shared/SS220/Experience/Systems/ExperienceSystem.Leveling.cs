@@ -10,8 +10,6 @@ namespace Content.Shared.SS220.Experience.Systems;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-
     #region Try methods
 
     /// <summary>
@@ -131,7 +129,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         info.SkillStudied = false;
 
         if (effectedEntity is not null)
-            _adminLog.Add(LogType.Experience, $"{ToPrettyString(effectedEntity):user} gained new skill");
+            _adminLogManager.Add(LogType.Experience, $"{ToPrettyString(effectedEntity):user} gained new skill");
     }
 
     /// <summary>
