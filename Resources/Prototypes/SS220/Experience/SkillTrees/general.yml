@@ -1,0 +1,13 @@
+- type: skillTree
+  id: Piloting
+  skillTree:
+  -
+  -
+
+- type: skillTree
+  id: CombatTraining
+  skillTree:
+  -
+  -
+  -
+  -
