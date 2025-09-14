@@ -69,6 +69,6 @@
   source: "https://github.com/SerbiaStrong-220"
 
 - files: [Vivaldi_Autumn.ogg, Vivaldi_Spring.ogg, Vivaldi_Summer.ogg, Vivaldi_Winter.ogg]
-  license: "Public Domain"
+  license: "Custom"
+  copyright:  "Public Domain. Recording provided by Musopen.org"
   source: "https://musopen.org/music/composer/antonio-vivaldi/"
-  copyright: "Recording provided by Musopen.org"
