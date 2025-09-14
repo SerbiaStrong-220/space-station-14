@@ -771,6 +771,7 @@
   - type: Tag
     tags:
     - WhitelistChameleon
+    - WeldingMask #SS220-clothingWeldingMaskGas-tweak
 
 # Entity tables
 - type: entityTable
