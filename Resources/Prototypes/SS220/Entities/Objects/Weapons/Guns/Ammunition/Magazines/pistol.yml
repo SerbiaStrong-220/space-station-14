@@ -7,8 +7,20 @@
     proto: CartridgePistol
   - type: Sprite
     layers:
-    - state: rubber
-      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi
+    - state: base
+      sprite: Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#1E90FF"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#1E90FF"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#1E90FF"

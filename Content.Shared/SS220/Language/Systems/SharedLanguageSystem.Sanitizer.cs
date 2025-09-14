@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.Language.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -11,17 +12,17 @@ namespace Content.Shared.SS220.Language.Systems;
 public abstract partial class SharedLanguageSystem
 {
     private Regex? _textWithKeyRegex;
-    private TimeSpan _regexTimeout = TimeSpan.FromSeconds(1);
+    private readonly TimeSpan _regexTimeout = TimeSpan.FromSeconds(1);
 
     // Cache for 1 tick
-    private Dictionary<string, LanguageMessage> _cachedMessages = new();
+    private readonly Dictionary<string, LanguageMessage> _cachedMessages = new();
 
     /// <summary>
     /// Sanitize the message by forming <see cref="LanguageMessage"/> by dividing the message into <see cref="LanguageNode"/>
     /// </summary>
     public LanguageMessage SanitizeMessage(EntityUid source, string message)
     {
-        var cacheKey = GetCahceKey(source, message);
+        var cacheKey = GetCacheKey(source, message);
         if (_cachedMessages.TryGetValue(cacheKey, out var cahcedLanguageMessage))
             return cahcedLanguageMessage;
 
@@ -42,13 +43,13 @@ public abstract partial class SharedLanguageSystem
         return languageMessage;
     }
 
-    private string GetCahceKey(EntityUid source, string message)
+    private string GetCacheKey(EntityUid source, string message)
     {
         var avalibleLanguageKeys = string.Empty;
         if (!TryComp<LanguageComponent>(source, out var languageComponent))
         {
-            if (_language.TryGetLanguageById(UniversalLanguage, out var UniLanguage))
-                avalibleLanguageKeys = UniLanguage.KeyWithPrefix;
+            if (_language.TryGetLanguageById(UniversalLanguage, out var uniLanguage))
+                avalibleLanguageKeys = uniLanguage.KeyWithPrefix;
         }
         else if (languageComponent.KnowAllLanguages)
             avalibleLanguageKeys = "knowall";
@@ -144,7 +145,8 @@ public abstract partial class SharedLanguageSystem
                 buffer.Item1 += messageWithoutTags;
                 continue;
             }
-            else if (buffer.Item2 != null)
+
+            if (buffer.Item2 != null)
             {
                 list.Add((buffer.Item1, buffer.Item2));
             }

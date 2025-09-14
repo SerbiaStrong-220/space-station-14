@@ -1,11 +1,11 @@
-action-cqc-blowback = Подсечка
-action-cqc-blowback-desc = Обездвиживает цель
+ent-CQCBlowback = Подсечка
+    .desc = Обездвиживает цель
 
-action-cqc-punch = Хук правой
-action-cqc-punch-desc = Усиленный удар по цели
+ent-CQCPunch = Хук правой
+    .desc = Усиленный удар по цели
 
-action-cqc-disarm = Обезоружить
-action-cqc-disarm-desc = Обезоруживает цель
+ent-CQCDisarm = Обезоружить
+    .desc = Обезоруживает цель
 
-action-cqc-longsleep = Славянский зажим яйцами
-action-cqc-longsleep-desc = Кладёт захваченную цель в очень долгий сон
+ent-CQCLongSleep = Славянский зажим яйцами
+    .desc = Кладёт захваченную цель в очень долгий сон

@@ -4,6 +4,13 @@
   name: бутылка водки "Казаки"
   description: Невероятно мутная бутылка неизвестной марки. Сколько оно тут валялось?
   components:
+  # TODO-SS220-Sprites-begin
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: fill-
+    inHandsMaxFillLevels: 3
+    inHandsFillBaseName: null # -fill-
+  # TODO-SS220-Sprites-end
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -13,13 +20,20 @@
   - type: Sprite
     sprite: SS220/Objects/Consumable/Drinks/vodkakazaki.rsi
   - type: Sealable
-  
+
 - type: entity
   parent: DrinkGlassBase
   id: DrinkVodkaKazakiGlass
   name: cтакан водки "Казаки"
   description: На вид и запах как просроченная водка. Мутное...
   components:
+  # TODO-SS220-Sprites-begin
+    - type: SolutionContainerVisuals
+      maxFillLevels: 4
+      fillBaseName: fill-
+      inHandsMaxFillLevels: 3
+      inHandsFillBaseName: null # -fill-
+  # TODO-SS220-Sprites-end
     - type: SolutionContainerManager
       solutions:
         drink:

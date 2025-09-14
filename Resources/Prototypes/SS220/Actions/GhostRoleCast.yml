@@ -1,7 +1,7 @@
 - type: entity
   id: ActionToggleGhostRoleName
-  name: action-toggle-ghostrole-cast-settings-name
-  description: action-toggle-ghostrole-cast-settings-desc
+  name: toggle ghostrole cast settings
+  description: toggle ghostrole cast settings desc
   components:
   - type: Action
     icon: SS220/Interface/Actions/GhostRoleSettings.png
@@ -14,8 +14,8 @@
 
 - type: entity
   id: ActionToggleGhostRoleCast
-  name: action-toggle-ghostrole-cast-name
-  description: action-toggle-ghostrole-cast-desc
+  name: toggle ghostrole cast
+  description: toggle ghostrole cast desc
   components:
   - type: Action
     icon: SS220/Interface/Actions/GhostRoleCast.png
@@ -31,8 +31,8 @@
 
 - type: entity
   id: ActionToggleGhostRoleRemove
-  name: action-toggle-ghostrole-remove-name
-  description: action-toggle-ghostrole-remove-desc
+  name: toggle ghostrole remove
+  description: toggle ghostrole remove desc
   components:
   - type: Action
     icon: SS220/Interface/Actions/GhostRoleRemove.png

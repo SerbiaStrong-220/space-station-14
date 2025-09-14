@@ -58,6 +58,8 @@
   - type: TargetLockPick
     chanceToLockPick: 0.75 # need to discuss
   #ss220 lockpick add end
+  - type: Paintable
+    group: Locker
 
 - type: entity
   id: LockerBaseSecure

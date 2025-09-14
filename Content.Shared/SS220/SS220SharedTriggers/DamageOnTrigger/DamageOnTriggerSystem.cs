@@ -4,9 +4,11 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.SS220.SS220SharedTriggers.Events;
+using Content.Shared.Trigger.Components.Effects;
 
 namespace Content.Shared.SS220.SS220SharedTriggers.DamageOnTrigger;
 
+// TODO-SS220 move to wizden system
 /// <summary>
 /// This handles deals damage when triggered
 /// </summary>
@@ -14,6 +16,7 @@ public sealed class DamageOnTriggerSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+
     /// <inheritdoc/>
     public override void Initialize()
     {
