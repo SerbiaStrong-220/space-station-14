@@ -135,6 +135,7 @@
   - type: ClothingSpeedModifier
     walkModifier: 1.5
     sprintModifier: 1.5
+    standing: true
   - type: Appearance
   - type: GenericVisualizer
     visuals:
