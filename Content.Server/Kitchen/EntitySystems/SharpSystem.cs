@@ -77,13 +77,13 @@ public sealed class SharpSystem : EntitySystem
         if (!sharp.Butchering.Add(target))
             return false;
 
-        //SS220-grill-update begin
+        //SS220-butchering-update begin
         if (!_audio.IsPlaying(butcher.ButcheringAudioStream))
         {
             var audioParams = AudioParams.Default.WithMaxDistance(10f);
             butcher.ButcheringAudioStream = _audio.PlayPvs(butcher.ButcheringSound, target, audioParams)?.Entity;
         }
-        //SS220-grill-update end
+        //SS220-butchering-update end
 
         // if the user isn't the entity with the sharp component,
         // they will need to be holding something with their hands, so we set needHand to true
