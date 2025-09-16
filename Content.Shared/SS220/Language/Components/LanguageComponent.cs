@@ -3,6 +3,7 @@ using Content.Shared.SS220.Language.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using System.Linq;
 
 namespace Content.Shared.SS220.Language.Components;
 
@@ -27,6 +28,7 @@ public sealed partial class LanguageComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public HashSet<LanguageDefinition> AvailableLanguages = [];
+    public IReadOnlyList<LanguageDefinition> SpokenLanguages => [.. AvailableLanguages.Where(l => l.CanSpeak)];
 
     [DataField, AutoNetworkedField]
     public bool KnowAllLanguages;

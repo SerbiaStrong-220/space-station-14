@@ -115,7 +115,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
 
         if (ent.Comp.AvailableLanguages.Remove(def))
         {
-            if (ent.Comp.SelectedLanguage == languageId && !TrySetLanguage(ent, 0))
+            if (ent.Comp.SelectedLanguage == languageId && !TrySelectRandomLanguage(ent))
                 ent.Comp.SelectedLanguage = null;
 
             Dirty(ent);
@@ -151,14 +151,14 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     }
 
     /// <summary>
-    /// Tries set <see cref="LanguageComponent.SelectedLanguage"/> by <paramref name="index"/> of <see cref="LanguageComponent.AvailableLanguages"/>
+    /// Tries set <see cref="LanguageComponent.SelectedLanguage"/> by random language from <see cref="LanguageComponent.AvailableLanguages"/>
     /// </summary>
-    public bool TrySetLanguage(Entity<LanguageComponent> ent, int index)
+    public bool TrySelectRandomLanguage(Entity<LanguageComponent> ent)
     {
-        if (ent.Comp.AvailableLanguages.Count <= index)
+        if (ent.Comp.AvailableLanguages.Count <= 0)
             return false;
 
-        ent.Comp.SelectedLanguage = ent.Comp.AvailableLanguages.ElementAt(index).Id;
+        ent.Comp.SelectedLanguage = _random.Pick(ent.Comp.SpokenLanguages).Id;
         Dirty(ent);
         return true;
     }
@@ -167,7 +167,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     /// Tries set <see cref="LanguageComponent.SelectedLanguage"/> by language id.
     /// Doesn't set language if <see cref="LanguageComponent.AvailableLanguages"/> doesn't contain this <paramref name="languageId"/>
     /// </summary>
-    public bool TrySetLanguage(Entity<LanguageComponent> ent, string languageId)
+    public bool TrySelectLanguage(Entity<LanguageComponent> ent, string languageId)
     {
         if (!CanSpeak(ent, languageId))
             return false;
