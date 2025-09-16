@@ -212,7 +212,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         // ss220 add block heavy attack and shooting while user is down start
         if (_standing.IsDown(user))
+        {
+            PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-attack"), user);
             return;
+        }
         // ss220 add block heavy attack and shooting while user is down end
 
         if (!TryGetWeapon(user, out var weaponUid, out var weapon) ||

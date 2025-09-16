@@ -248,7 +248,10 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         // ss220 add block heavy attack and shooting while user is down start
         if (_standing.IsDown(user))
+        {
+            PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-shooting"), user);
             return;
+        }
         // ss220 add block heavy attack and shooting while user is down end
 
         var toCoordinates = gun.ShootCoordinates;
