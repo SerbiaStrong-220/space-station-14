@@ -26775,8 +26775,6 @@ entities:
       pos: 4.5,-11.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 25028
 - proto: AltarFangs
@@ -92290,8 +92288,6 @@ entities:
       pos: 5.5,-12.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 12116
       - 25028
@@ -107776,8 +107772,6 @@ entities:
       pos: 5.5,-11.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 25028
     - type: AtmosPipeColor
@@ -108755,8 +108749,6 @@ entities:
       pos: 5.5,-9.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 25028
     - type: AtmosPipeColor
