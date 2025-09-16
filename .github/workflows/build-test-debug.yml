@@ -15,7 +15,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
 
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Master
@@ -34,10 +34,6 @@ jobs:
         git submodule update --init --recursive
 
     - name: Setup .NET Core
-    # SS220 custom install start
-      env:
-        DOTNET_INSTALL_DIR: "./.dotnet"
-    # SS220 custom install end
       uses: actions/setup-dotnet@v4.1.0
       with:
         dotnet-version: 9.0.x

@@ -30,7 +30,7 @@ jobs:
   build:
     name: Test Packaging
     if: github.actor != 'IanComradeBot' && github.event.pull_request.draft == false
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Master
@@ -63,10 +63,6 @@ jobs:
       # Corvax-Secrets-End
 
       - name: Setup .NET Core
-      # SS220 custom install start
-        env:
-          DOTNET_INSTALL_DIR: "./.dotnet"
-      # SS220 custom install end
         uses: actions/setup-dotnet@v4.1.0
         with:
           dotnet-version: 9.0.x

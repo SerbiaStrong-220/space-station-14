@@ -67,6 +67,7 @@
             Janitor: [ 1, 1 ]
             Mime: [ 1, 1 ]
             Chaplain: [ 1, 1 ]
+            Reporter: [ 1, 1 ]
 
         - type: StationGoal
           goals:
