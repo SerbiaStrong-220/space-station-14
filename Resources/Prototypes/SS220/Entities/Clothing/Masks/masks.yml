@@ -68,7 +68,7 @@
         Slash: 0.95
         Piercing: 0.95
         Heat: 0.9
-
+# Sec Tactical Gas Mask
 - type: entity
   parent: [ClothingMaskGasExplorer, BaseSecurityContraband]
   id: SecurityTacticalGasMask
