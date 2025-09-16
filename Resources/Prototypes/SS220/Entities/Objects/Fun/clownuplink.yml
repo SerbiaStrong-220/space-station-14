@@ -1,0 +1,270 @@
+- type: entity
+  id: StorePresetUplinkClown
+  abstract: true
+  components:
+  - type: Store
+    name: store-preset-name-uplink
+    categories:
+    - UplinkWearablesClown
+    - AdditionalClown
+    - TrinketsClown
+    currencyWhitelist:
+    - TrashBananaPeel
+    balance:
+      TrashBananaPeel: 0
+
+- type: listing
+  id: FoodPieBananaCreamSet
+  name: uplink-clown-foodpie-name
+  description: uplink-clown-foodpie-desc
+  productEntity: FoodPieBananaCream
+  cost:
+    TrashBananaPeel: 20
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: UplinkGlovesSet
+  name: uplink-clown-gloves-name
+  description: uplink-clown-gloves-desc
+  productEntity: ClothingHandsGlovesColorYellow
+  cost:
+    TrashBananaPeel: 75
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: MagicPlushSet
+  productEntity: WhoopieCushion
+  cost:
+    TrashBananaPeel: 3
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: UplinkHonkImplanterSet
+  name: uplink-clown-implanter-name
+  productEntity: BikeHornImplanter
+  cost:
+    TrashBananaPeel: 5
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: MobHonkBotSet
+  name: uplink-clown-honkbot-name
+  productEntity: MobHonkBot
+  cost:
+    TrashBananaPeel: 100
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: PresentRandomSet
+  name: uplink-clown-present-name
+  description: uplink-clown-present-desc
+  productEntity: PresentRandom
+  cost:
+    TrashBananaPeel: 2
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: ToyHammerSet
+  productEntity: ToyHammer
+  cost:
+    TrashBananaPeel: 2
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: ClothingBackpackDuffelSyndicateCostumeClownSet
+  name: uplink-clown-duffel-name
+  description: uplink-clown-duffel-desc
+  productEntity: ClothingBackpackDuffelSyndicateCostumeClown
+  cost:
+    TrashBananaPeel: 10
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: SoapSyndieSet
+  name: uplink-clown-soap-name
+  description: uplink-clown-soap-desc
+  productEntity: SoapSyndie
+  cost:
+    TrashBananaPeel: 30
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: CigPackSyndicateSet
+  name: uplink-clown-cigpack-name
+  description: uplink-clown-cigpack-desc
+  productEntity: CigPackSyndicate
+  cost:
+    TrashBananaPeel: 10
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: SoapOmegaSet
+  name: uplink-clown-omegasoap-name
+  description: uplink-clown-omegasoap-desc
+  productEntity: SoapOmega
+  cost:
+    TrashBananaPeel: 110
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: ClothingHeadHatCatEarsSet
+  name: uplink-clown-ears-name
+  description: uplink-clown-ears-desc
+  productEntity: ClothingHeadHatCatEars
+  cost:
+    TrashBananaPeel: 55
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: DrinkNukieCanSet
+  name: uplink-clown-nukiecan-name
+  description: uplink-clown-nukiecan-desc
+  productEntity: DrinkNukieCan
+  cost:
+    TrashBananaPeel: 25
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: SnapPopBoxSex
+  name: uplink-clown-fakebomb-name
+  description: uplink-clown-fakebomb-desc
+  productEntity: SnapPopBox
+  cost:
+    TrashBananaPeel: 5
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: GoldenBikeHornSet
+  productEntity: GoldenBikeHorn
+  cost:
+    TrashBananaPeel: 25
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: ClothingShoesBlingSet
+  productEntity: ClothingShoesBling
+  cost:
+    TrashBananaPeel: 25
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: FloorTileItemClownSet
+  productEntity: FloorTileItemClown
+  cost:
+    TrashBananaPeel: 1
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: FloorTileItemCarpetClown
+  productEntity: FloorTileItemCarpetClown
+  cost:
+    TrashBananaPeel: 1
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: ClothingOuterHardsuitClownSet
+  productEntity: ClothingOuterHardsuitClown
+  cost:
+    TrashBananaPeel: 60
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: ToySwordSet
+  productEntity: ToySword
+  cost:
+    TrashBananaPeel: 4
+  categories:
+    - AdditionalClown
+
+- type: storeCategory
+  id: UplinkWearablesClown
+  name: uplink-clown-category-main
+  priority: 1
+
+- type: storeCategory
+  id: AdditionalClown
+  name: uplink-clown-category-bonus
+  priority: 2
+
+- type: storeCategory
+  id: TrinketsClown
+  name: uplink-clown-category-trinkets
+  priority: 3
+
+- type: entity
+  parent: [BaseItem, StorePresetUplinkClown]
+  id: ClownUplink
+  name: banana phone
+  description: Direct connection with the Glorious Honkmother.
+  suffix: clown uplink
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/Instruments/otherinstruments.rsi
+    state: banana_phone
+  - type: Item
+    sprite: Objects/Devices/communication.rsi
+    heldPrefix: old-radio
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: EmitSoundOnLand
+    sound:
+       path: /Audio/Items/bikehorn.ogg
+  - type: Slippery
+  - type: StepTrigger
+  - type: CollisionWake
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.3,0.4,0.3"
+        hard: false
+        layer:
+        - SlipLayer
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.3,0.4,0.3"
+        density: 5
+        mask:
+        - ItemMask
+  - type: Prayable
+    sentMessage: prayer-popup-notify-honkmother-sent
+    notificationPrefix: prayer-chat-notify-honkmother
+    verb: prayer-verbs-call
+    verbImage: null
+  - type: Store
+    balance:
+      TrashBananaPeel: 0
+
+- type: currency
+  id: TrashBananaPeel
+  displayName: uplink-clown-currency
+  cash:
+    1: TrashBananaPeel
+  canWithdraw: false
+

@@ -22,8 +22,7 @@ public sealed class SetRadioReceiverToStationAiEyeSystem : EntitySystem
     private void OnStartup(Entity<SetRadioReceiverToStationAiEyeComponent> entity, ref ComponentStartup args)
     {
         if (TryGetCore(entity, out var core)
-            && core.Comp is { }
-            && TryComp<IntrinsicRadioReceiverComponent>(entity, out var receiverComponent))
+            && core.Comp is not null && TryComp<IntrinsicRadioReceiverComponent>(entity, out var receiverComponent))
         {
             receiverComponent.ReceiverEntityOverride = core.Comp.RemoteEntity;
         }

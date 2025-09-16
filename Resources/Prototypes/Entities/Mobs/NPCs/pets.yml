@@ -10,6 +10,20 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: Doggish
+      canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
     - id: SolCommon
@@ -21,6 +35,20 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: ian
+  - type: Inventory
+    speciesId: dog
+    templateId: petAdvanced
+    displacements:
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Pets/displacements.rsi
+            state: corgi_head_displacement
+      eyes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Pets/displacements.rsi
+            state: corgi_eyes_displacement
   - type: DamageStateVisuals
     states:
       Alive:
@@ -54,6 +82,20 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: Doggish
+      canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
     - id: SolCommon
       canSpeak: false
@@ -86,6 +128,20 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: Doggish
+      canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
     - id: SolCommon
@@ -107,6 +163,20 @@
     attributes:
       proper: true
       gender: female
+  - type: Inventory
+    speciesId: dog
+    templateId: petAdvanced
+    displacements:
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Pets/displacements.rsi
+            state: lisa_head_displacement
+      eyes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Pets/displacements.rsi
+            state: corgi_eyes_displacement
 
 - type: entity
   name: real mouse
@@ -144,6 +214,20 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: Doggish
+      canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
     - id: SolCommon
@@ -189,9 +273,23 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
-    - id: Galactic
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: true
+    - id: Doggish
       canSpeak: false
-    - id: Siiktajr
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
+  #SS220 Animalistic languages fix end
+    - id: Galactic
       canSpeak: false
   #SS220 languages revive end
   - type: Grammar
@@ -221,9 +319,23 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: true
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
-    - id: Siiktajr
+    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   - type: Tag
@@ -256,9 +368,23 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: true
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
-    - id: Siiktajr
+    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   - type: Tag
@@ -281,6 +407,20 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: true
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
     - id: SolCommon
@@ -313,9 +453,23 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: true
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
-    - id: Siiktajr
+    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   - type: Physics
@@ -372,8 +526,10 @@
     tags:
     - CannotSuicide
     - VimPilot
-  - type: ReplacementAccent
-    accent: cat
+  #SS220 Animalistic languages fix begin
+  # - type: ReplacementAccent
+  #   accent: cat
+  #SS220 Animalistic languages fix end
   - type: StealTarget
     stealGroup: AnimalNamedCat
 
@@ -389,12 +545,30 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: mcgriff
+    - map: [ "head" ]
+    - map: [ "eyes" ]
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
-    - id: Galactic
+  #SS220 Animalistic languages begin
+    - id: Doggish
+      canSpeak: true
+    #SS220 Animalistic languages fix begin
+    - id: Feline
       canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
+  #SS220 Animalistic languages end
     - id: SolCommon
+      canSpeak: false
+    - id: Galactic
       canSpeak: false
   #SS220 languages revive end
   - type: Physics
@@ -411,7 +585,18 @@
         - MobLayer
   - type: Inventory
     speciesId: puppy
-    templateId: pet
+    templateId: petAdvanced
+    displacements:
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Pets/displacements.rsi
+            state: mcgriff_head_displacement
+      eyes:
+        sizeMaps:
+          32:
+            sprite: Mobs/Pets/displacements.rsi
+            state: mcgriff_eyes_displacement
   - type: DamageStateVisuals
     states:
       Alive:
@@ -424,8 +609,10 @@
     spawned:
     - id: FoodMeat
       amount: 2
-  - type: ReplacementAccent
-    accent: dog
+  #SS220 Animalistic languages fix begin
+  # - type: ReplacementAccent
+  #   accent: dog
+  #SS220 Animalistic languages fix end
   - type: InteractionPopup
     successChance: 0.5
     interactSuccessString: petting-success-dog
@@ -446,6 +633,7 @@
     - VimPilot
   - type: StealTarget
     stealGroup: AnimalMcGriff
+  - type: MessyDrinker
 
 - type: entity
   name: Paperwork
@@ -475,6 +663,20 @@
     - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -504,6 +706,20 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: Doggish
+      canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
     - id: SolCommon
@@ -536,8 +752,10 @@
     spawned:
     - id: FoodMeat
       amount: 3
-  - type: ReplacementAccent
-    accent: dog
+  #SS220 Animalistic languages fix begin
+  # - type: ReplacementAccent
+  #   accent: dog
+  #SS220 Animalistic languages fix end
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-dog
@@ -558,6 +776,7 @@
   - type: Speech
     speechVerb: Canine
     speechSounds: Dog
+  - type: MessyDrinker
 
 - type: entity
   name: Morty
@@ -584,6 +803,20 @@
     - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: Tag
     tags:
     - CannotSuicide
@@ -628,6 +861,20 @@
     - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/possum.rsi
@@ -666,6 +913,20 @@
     - id: Tradeband #Cause cargo dep
       canSpeak: false
   #SS220 languages revive end
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: Tag
     tags:
     - CannotSuicide
@@ -691,6 +952,20 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  ##SS220 Animalistic languages fix begin
+    - id: Piggish
+      canSpeak: true
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+  ##SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
     - id: SolCommon
@@ -728,6 +1003,20 @@
     - id: Canilunzt #Vulp gagaga
       canSpeak: false
   #SS220 languages revive end
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: Grammar
     attributes:
       proper: true
@@ -761,6 +1050,20 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: Mousey
+      canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
     - id: SolCommon
@@ -801,6 +1104,22 @@
     - sadness
 
 - type: entity
+  parent: MobHamsterHamlet
+  id: MobHamsterHamletSlippery
+  suffix: Slippery
+  components:
+  - type: Slippery
+  - type: StepTrigger
+    requiredTriggeredSpeed: 1
+  - type: TriggerOnStepTrigger
+  - type: GibOnTrigger
+  - type: EmitSoundOnTrigger
+    sound:
+      path: "/Audio/Animals/mouse_squeak.ogg"
+    positional: true
+    predicted: true
+
+- type: entity
   name: Shiva
   parent: MobGiantSpider
   id: MobSpiderShiva
@@ -816,9 +1135,25 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: SpiderTongue
+      canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
-    - id: Arati
+    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   - type: NpcFactionMember
@@ -860,6 +1195,8 @@
       types:
         Piercing: 8
         Poison: 8
+  - type: Spider
+    spawnsWebsAsNonPlayer: false
   - type: Grammar
     attributes:
       proper: true
@@ -1020,6 +1357,20 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: Monkey
+      canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
     - id: SolCommon
@@ -1103,9 +1454,23 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: true
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
-    - id: Siiktajr
+    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   - type: Grammar
@@ -1116,3 +1481,21 @@
     - CannotSuicide
     - VimPilot
 # SS220 AVD pet end
+
+- type: entity
+  name: Polly the parrot
+  parent: MobParrotBase
+  id: MobPollyParrot
+  description: An expert in quantum cracker theory
+  components:
+  - type: Vocalizer
+    maxVocalizeInterval: 240 # polly is chattier
+  - type: RadioVocalizer
+    radioAttemptChance: 0.8 # polly wants to share with the world
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: male
+  - type: Loadout
+    prototypes: [ MobPollyGear ]
+

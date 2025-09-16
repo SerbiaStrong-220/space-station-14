@@ -20,3 +20,13 @@
     contents:
     - id: LotteryCash
       amount: 10
+
+- type: cargoProduct
+  id: BoxOfLegalPosters
+  icon:
+    sprite: SS220/Objects/Misc/Legalposter.rsi
+    state: legalposter
+  product: BoxLegalPosters
+  cost: 500
+  category: cargoproduct-category-name-fun
+  group: market

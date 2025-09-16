@@ -52,6 +52,14 @@
     sprite: SS220/Clothing/Mask/blueshield.rsi
   - type: Clothing
     sprite: SS220/Clothing/Mask/blueshield.rsi
+    #SS220 - add-smart-mask-swat-and-blueshield - start
+  - type: UserInterface
+    interfaces:
+      enum.SmartGasMaskUiKey.Key:
+        type: SmartGasMaskBoundUserInterface
+  - type: SmartGasMask
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskSupport"]
+    #SS220 - add-smart-mask-swat-and-blueshield - end
   - type: FlashImmunity
   - type: EyeProtection
   - type: Armor

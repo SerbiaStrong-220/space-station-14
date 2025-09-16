@@ -312,6 +312,8 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 2.5
   - type: StaticPrice
     price: 215
 
@@ -357,6 +359,8 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 1.5
   - type: StaticPrice
     price: 200
 
@@ -731,6 +735,8 @@
             max: 3
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 2.5
   - type: StaticPrice
     price: 322.5
 
@@ -776,6 +782,8 @@
             max: 3
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 1.5
   - type: StaticPrice
     price: 300
 
@@ -1140,6 +1148,8 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 2.5
   - type: StaticPrice
     price: 215
 
@@ -1185,6 +1195,8 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 1.5
   - type: StaticPrice
     price: 200
 
@@ -1569,6 +1581,8 @@
             max: 4
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 2.5
   - type: StaticPrice
     price: 430
 
@@ -1614,6 +1628,8 @@
             max: 4
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 1.5
   - type: StaticPrice
     price: 400
 
