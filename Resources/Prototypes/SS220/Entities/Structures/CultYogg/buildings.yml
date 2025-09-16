@@ -103,10 +103,10 @@
       - CultYoggRole
 
 - type: entity
-  parent: BaseMaterialDoorNavMap
+  parent: BaseMaterialDoor
   id: CultYoggDoor
-  suffix: CultYogg
-  name: cursed door
+  suffix: CultYogg, secret door
+  name: cursed secreddoor
   description: Think twice before opening it.
   components:
   - type: Sprite
@@ -138,6 +138,29 @@
         acts: ["Destruction"]
   - type: CultYoggBuilding
     eraseTime: 3
+  - type: ChameleonStructure
+    userWhitelist:
+      components:
+      - CultYogg
+      - MiGo
+    requireTag: WhitelistChameleonStructureSecretDoor
+    protoList:
+     - SolidSecretDoor
+     - SolidSecretReinforcedDoor
+  - type: UserInterface
+    interfaces:
+      enum.ChameleonStructureUiKey.Key:
+        type: ChameleonStructureBoundUserInterface
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-chameleon-structure-cultyogg
+      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
+      - CultYoggRole
+  - type: Tag
+    tags:
+      - Structure
+      - Wall
+      - WhitelistChameleonStructureSecretDoor
 
 - type: entity
   parent: Bed
@@ -300,7 +323,22 @@
     userWhitelist:
       components:
       - CultYogg
+      - MiGo
     requireTag: WhitelistChameleonStructureAirlock
+    protoList:
+     - AirlockChemistry
+     - AirlockMaint
+     - Airlock
+     - AirlockSecurity
+     - AirlockCommand
+     - AirlockVirology
+     - AirlockHydroponics
+     - AirlockFreezer
+     - AirlockEngineering
+     - AirlockMedical
+     - AirlockScience
+     - AirlockCargo
+     - AirlockClown
   - type: CultYoggBuilding
     eraseTime: 3
   - type: HiddenDescription

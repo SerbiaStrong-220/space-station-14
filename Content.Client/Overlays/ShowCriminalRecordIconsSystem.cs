@@ -15,7 +15,6 @@ public sealed class ShowCriminalRecordIconsSystem : EquipmentHudSystem<ShowCrimi
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeMan = default!;
 
     public override void Initialize()
     {
@@ -60,11 +59,11 @@ public sealed class ShowCriminalRecordIconsSystem : EquipmentHudSystem<ShowCrimi
 
         if (securityRecordType != null)
         {
-            if (_prototypeMan.TryIndex<CriminalStatusPrototype>(securityRecordType, out var criminalStatus))
+            if (_prototype.TryIndex<CriminalStatusPrototype>(securityRecordType, out var criminalStatus))
             {
                 if (criminalStatus.StatusIcon.HasValue)
                 {
-                    if (_prototypeMan.TryIndex(criminalStatus.StatusIcon, out var secIcon))
+                    if (_prototype.TryIndex(criminalStatus.StatusIcon, out var secIcon))
                         ev.StatusIcons.Add(secIcon);
                     else
                         Log.Error($"Invalid security status icon prototype: {secIcon}");

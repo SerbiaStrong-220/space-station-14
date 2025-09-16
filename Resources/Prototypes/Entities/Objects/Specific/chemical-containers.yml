@@ -26,6 +26,7 @@
       solution: beaker
     - type: ExaminableSolution
       solution: beaker
+      exactVolume: true
     - type: DrawableSolution
       solution: beaker
     - type: InjectableSolution
@@ -48,6 +49,11 @@
       fillBaseName: jug
       inHandsMaxFillLevels: 5
       inHandsFillBaseName: -fill-
+      # TODO-SS220-SPRITES-?
+      # SS220-fix-middle-hand-sprites-begin
+      ignoreLocationSprite:
+        - middle
+      # SS220-fix-middle-hand-sprites-end
     - type: StaticPrice
       price: 60
     - type: Damageable

@@ -2,14 +2,15 @@
 
 using Content.Server.Humanoid;
 using Content.Server.Medical;
+using Content.Server.SS220.Bed.Cryostorage;
 using Content.Server.SS220.GameTicking.Rules;
-using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -17,13 +18,13 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
-using Content.Shared.SS220.EntityEffects;
 using Content.Shared.SS220.StuckOnEquip;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Linq;
+using Content.Shared.SS220.EntityEffects.Events;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
@@ -59,6 +60,10 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         SubscribeLocalEvent<CultYoggComponent, CultYoggForceAscendingEvent>(OnForcedAcsending);
         SubscribeLocalEvent<CultYoggComponent, ChangeCultYoggStageEvent>(OnUpdateStage);
         SubscribeLocalEvent<CultYoggComponent, CloningEvent>(OnCloning);
+
+        SubscribeLocalEvent<CultYoggComponent, PlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<CultYoggComponent, BeingCryoDeletedEvent>(OnCryoDeleted);
+        SubscribeLocalEvent<CultYoggComponent, SuicideEvent>(OnSuicide);
     }
 
     #region StageUpdating
@@ -283,6 +288,8 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         if (_stuckOnEquip.TryRemoveStuckItems(ent))//Idk how to deal with popup spamming
             _popup.PopupEntity(Loc.GetString("cult-yogg-dropped-items"), ent, ent);//and now i dont see any :(
+
+        Dirty(ent, ent.Comp);
     }
 
     private bool NoAcsendingCultists()//if anybody else is acsending
@@ -310,9 +317,28 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             DeleteVisuals(ent);
 
             RemComp<CultYoggComponent>(ent);
+            _cultRuleSystem.CheckSimplifiedEslavement();//Add token if it was last cultist
         }
 
         purifyedComp.PurifyingDecayEventTime = _timing.CurTime + purifyedComp.BeforeDeclinesTime; //setting timer, when purifying will be removed
+        Dirty(ent, ent.Comp);
+    }
+    #endregion
+
+    #region CheckSimplifiedEslavement
+    private void OnPlayerDetached(Entity<CultYoggComponent> ent, ref PlayerDetachedEvent args)
+    {
+        _cultRuleSystem.CheckSimplifiedEslavement();
+    }
+
+    private void OnCryoDeleted(Entity<CultYoggComponent> ent, ref BeingCryoDeletedEvent args)
+    {
+        _cultRuleSystem.CheckSimplifiedEslavement();
+    }
+
+    private void OnSuicide(Entity<CultYoggComponent> ent, ref SuicideEvent args)
+    {
+        _cultRuleSystem.CheckSimplifiedEslavement();
     }
     #endregion
 

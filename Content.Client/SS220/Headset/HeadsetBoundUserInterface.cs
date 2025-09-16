@@ -46,6 +46,4 @@ public sealed partial class HeadsetBoundUserInterface : BoundUserInterface
 
         _window?.Dispose();
     }
-
-
 }

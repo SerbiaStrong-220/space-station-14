@@ -156,6 +156,7 @@
     sprite: /Textures/Interface/Misc/job_icons.rsi
     state: Unknown
   jobName: job-name-unknown
+  allowSelection: false # SS220-remove-job-prototype-GhostRole-from-crew-monitoring-console
 
 - type: jobIcon
   parent: JobIcon

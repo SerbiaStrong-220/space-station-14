@@ -44,6 +44,10 @@ public abstract partial class SharedBuckleSystem
         }
         else
         {
+            if (!TryComp(args.Dragged, out BuckleComponent? buckle) ||
+                !CanBuckle(args.Dragged, args.User, uid, true, out var _, buckle))
+                return;
+
             var doAfterArgs = new DoAfterArgs(EntityManager, args.User, component.BuckleDoafterTime, new BuckleDoAfterEvent(), args.Dragged, args.Dragged, uid)
             {
                 BreakOnMove = true,
@@ -210,6 +214,9 @@ public abstract partial class SharedBuckleSystem
         if (HasComp<BlockBuckleVerbsInteractionComponent>(args.User))
             return;
         //ss220 fix revenant verbs end
+
+        if (!CanUnbuckle((uid, component), args.User, false))
+            return;
 
         InteractionVerb verb = new()
         {

@@ -86,7 +86,6 @@ public sealed partial class IdCardConsoleComponent : Component
         "Bar",
         "Cargo",
         "Chapel",
-        "Chemistry",
         "Paramedic",
         "Cryogenics",
         "Engineering",

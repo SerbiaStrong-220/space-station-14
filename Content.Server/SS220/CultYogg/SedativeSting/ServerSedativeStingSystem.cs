@@ -1,9 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Body.Components;
-using Content.Server.SS220.Autoinjector;
 using Content.Server.SS220.CultYogg.Pond;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -17,6 +16,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
+using Content.Shared.SS220.AutoInjector;
 using Content.Shared.SS220.CultYogg.SedativeSting;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Melee.Events;
@@ -104,11 +104,12 @@ public sealed class ServerSedativeStingSystem : EntitySystem
         {
             foreach (var slot in slots)
             {
-                if (_inventory.TryGetSlotEntity(target, slot.Name, out var item) && HasComp<NeedleProtectionComponent>(item))
-                {
-                    _popup.PopupEntity(Loc.GetString("loc-hypo-protection-popup"), entity, user);
-                    return false;
-                }
+                if (!_inventory.TryGetSlotEntity(target, slot.Name, out var item) ||
+                    !HasComp<NeedleProtectionComponent>(item))
+                    continue;
+
+                _popup.PopupEntity(Loc.GetString("loc-hypo-protection-popup"), entity, user);
+                return false;
             }
         }
 
@@ -185,15 +186,14 @@ public sealed class ServerSedativeStingSystem : EntitySystem
                     ("target", Identity.Entity(target, EntityManager))),
                 entity.Owner,
                 user);
+
             return false;
         }
 
         var removedSolution = _solutionContainers.Draw(target.Owner, targetSolution, realTransferAmount);
 
         if (!_solutionContainers.TryAddSolution(soln.Value, removedSolution))
-        {
             return false;
-        }
 
         _popup.PopupEntity(Loc.GetString("injector-component-draw-better-success-message",
             ("amount", removedSolution.Volume),
@@ -201,6 +201,7 @@ public sealed class ServerSedativeStingSystem : EntitySystem
             ("target", Identity.Entity(target, EntityManager))),
             entity.Owner,
             user);
+
         return true;
     }
 }

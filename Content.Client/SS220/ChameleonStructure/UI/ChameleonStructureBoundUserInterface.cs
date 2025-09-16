@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Tag;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
@@ -13,7 +12,6 @@ public sealed class ChameleonStructureBoundUserInterface : BoundUserInterface
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     private readonly ChameleonStructureSystem _chameleon;
-    private readonly TagSystem _tag;
 
     [ViewVariables]
     private ChameleonStructureMenu? _menu;
@@ -21,7 +19,6 @@ public sealed class ChameleonStructureBoundUserInterface : BoundUserInterface
     public ChameleonStructureBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _chameleon = EntMan.System<ChameleonStructureSystem>();
-        _tag = EntMan.System<TagSystem>();
     }
 
     protected override void Open()
@@ -50,10 +47,10 @@ public sealed class ChameleonStructureBoundUserInterface : BoundUserInterface
         var newTargets = new List<EntProtoId>();
         foreach (var target in targets)
         {
-            if (string.IsNullOrEmpty(target) || !_proto.TryIndex(target, out EntityPrototype? proto))
+            if (string.IsNullOrEmpty(target))
                 continue;
 
-            if (!proto.TryGetComponent(out TagComponent? tag, EntMan.ComponentFactory) || !_tag.HasTag(tag, st.RequiredTag))
+            if (!_proto.HasIndex(target))
                 continue;
 
             newTargets.Add(target);
