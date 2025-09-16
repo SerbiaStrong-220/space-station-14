@@ -210,10 +210,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
 
-        // ss220 add block heavy attack while user is down start
+        // ss220 add block heavy attack and shooting while user is down start
         if (_standing.IsDown(user))
             return;
-        // ss220 add block heavy attack while user is down end
+        // ss220 add block heavy attack and shooting while user is down end
 
         if (!TryGetWeapon(user, out var weaponUid, out var weapon) ||
             weaponUid != GetEntity(msg.Weapon))
