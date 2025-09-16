@@ -352,6 +352,7 @@ public abstract class SharedAbsorbentSystem : EntitySystem
 
         _melee.DoLunge(user, absorbEnt, Angle.Zero, localPos, null);
 
+        puddle.LastInteractionUser = user; // ss220 add round end info
         return true;
     }
 }
