@@ -1,0 +1,4 @@
+- type: sinkPort
+  id: WeaponContolReceiver
+  name: signal-port-name-weapon-contol-receiver
+  description: signal-port-description-weapon-contol-receiver

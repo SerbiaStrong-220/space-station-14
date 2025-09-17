@@ -196,3 +196,46 @@
             min: 1
             max: 1
 
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerWeaponContol
+  name: weapon control computer
+  description: A computer for detecting nearby bodies, displaying them by position and mass, allows you to control linked gun.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: solar_screen
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: RadarConsole
+  - type: WorldLoader
+    radius: 256
+  - type: WeaponControlConsole
+  - type: ActivatableUI
+    key: enum.WeaponControlConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+        enum.WeaponControlConsoleUiKey.Key:
+          type: WeaponControlConsoleBoundUserInterface
+        enum.WiresUiKey.Key:
+          type: WiresBoundUserInterface
+  - type: Computer
+    board: WeaponContolConsoleCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#e6e227"
+  - type: DeviceList
+  - type: DeviceNetwork
+    deviceNetId: Wired
+  - type: DeviceLinkSource
+    range: 200
+    ports:
+      - WeaponContolSender
