@@ -916,7 +916,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         string SanitizeMessage(string message, bool getRadioKeycodePrefix, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true)
         {
             var newMessage = ReplaceWords(message);
-            newMessage = SanitizeMessageReplaceWords(message);
+            newMessage = SanitizeMessageReplaceWords(newMessage);
 
             if (getRadioKeycodePrefix)
                 GetRadioKeycodePrefix(source, newMessage, out newMessage, out prefix);
