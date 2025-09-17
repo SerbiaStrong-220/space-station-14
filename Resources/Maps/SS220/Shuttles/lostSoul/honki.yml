@@ -4,7 +4,7 @@ meta:
   engineVersion: 266.0.0
   forkId: ""
   forkVersion: ""
-  time: 09/17/2025 21:17:04
+  time: 09/17/2025 21:43:12
   entityCount: 441
 maps: []
 grids:
@@ -1010,16 +1010,9 @@ entities:
     - type: Transform
       pos: 6.4719753,-1.1571356
       parent: 2
-  - type: Store
-    name: store-preset-name-uplink
-    categories:
-    - UplinkWearablesClown
-    - AdditionalClown
-    - TrinketsClown
-    currencyWhitelist:
-    - TrashBananaPeel
-    balance:
-      TrashBananaPeel: 100
+    - type: Store
+      balance:
+        TrashBananaPeel: 100
 - proto: CluwneHorn
   entities:
   - uid: 26
@@ -1776,14 +1769,6 @@ entities:
       parent: 2
     - type: AtmosPipeColor
       color: '#FF1212FF'
-  - uid: 220
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 4.5,-5.5
-      parent: 2
-    - type: AtmosPipeColor
-      color: '#FF1212FF'
 - proto: GasPipeBend
   entities:
   - uid: 221
@@ -2272,6 +2257,12 @@ entities:
       color: '#0335FCFF'
 - proto: GasVentPump
   entities:
+  - uid: 1
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,-5.5
+      parent: 2
   - uid: 282
     components:
     - type: Transform
