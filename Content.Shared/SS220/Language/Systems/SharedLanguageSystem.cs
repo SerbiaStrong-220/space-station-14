@@ -155,7 +155,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     /// </summary>
     public bool TrySelectRandomLanguage(Entity<LanguageComponent> ent)
     {
-        if (ent.Comp.AvailableLanguages.Count <= 0)
+        if (ent.Comp.SpokenLanguages.Count <= 0)
             return false;
 
         ent.Comp.SelectedLanguage = _random.Pick(ent.Comp.SpokenLanguages).Id;
