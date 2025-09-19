@@ -1,0 +1,26 @@
+- type: dynamicName
+  id: NamesLightDynamic
+  listNames:
+  - dynamic-light-lore-name-1
+  - dynamic-light-lore-name-2
+  - dynamic-light-lore-name-3
+  - dynamic-light-lore-name-4
+  - dynamic-light-lore-name-5
+
+- type: dynamicName
+  id: NamesMediumDynamic
+  listNames:
+  - dynamic-medium-lore-name-1
+  - dynamic-medium-lore-name-2
+  - dynamic-medium-lore-name-3
+  - dynamic-medium-lore-name-4
+  - dynamic-medium-lore-name-5
+
+- type: dynamicName
+  id: NamesHardDynamic
+  listNames:
+  - dynamic-hard-lore-name-1
+  - dynamic-hard-lore-name-2
+  - dynamic-hard-lore-name-3
+  - dynamic-hard-lore-name-4
+  - dynamic-hard-lore-name-5
