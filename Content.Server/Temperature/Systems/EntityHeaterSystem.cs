@@ -67,12 +67,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
 
             default:
 
-                foreach (var item in placer.PlacedEntities)
-                {
-                    UpdateGrillingVisuals(ent, item);
-                }
-
-                UpdateGrillAudio(ent);
+                GrillVisualsUpdate(ent); //SS220-grill-update-2
                 break;
         }
     }
@@ -80,7 +75,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
     private void OnItemRemoved(Entity<EntityHeaterComponent> ent, ref ItemRemovedEvent args)
     {
         RemComp<GrillingVisualComponent>(args.OtherEntity);
-        UpdateGrillAudio(ent);
+        GrillVisualsUpdate(ent); //SS220-grill-update-2
     }
 
     private void OnItemPlaced(Entity<EntityHeaterComponent> ent, ref ItemPlacedEvent args)
@@ -88,8 +83,7 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
         if (ent.Comp.Setting is EntityHeaterSetting.Off)
             return;
 
-        UpdateGrillingVisuals(ent, args.OtherEntity);
-        UpdateGrillAudio(ent);
+        GrillVisualsUpdate(ent); //SS220-grill-update-2
     }
 
     // Grill is no longer a grill, clear the visuals and audio, just in case
@@ -142,42 +136,46 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
         power.Load = SettingPower(setting, ent.Comp.Power);
     }
 
-    //SS220-grill-update begin
-    private void UpdateGrillingVisuals(Entity<EntityHeaterComponent> grill, EntityUid uid)
+    //SS220-grill-update-2 begin
+    private void GrillVisualsUpdate(Entity<EntityHeaterComponent> grill)
     {
-        var showAnimation = grill.Comp.Setting is not EntityHeaterSetting.Off
-                            && _whitelistSystem.IsWhitelistPass(grill.Comp.HeatingVisuals?.Whitelist, uid)
-                            && !_tagSystem.HasTag(uid, $"Cooked");
+        var showVisuals = false;
 
-        if (showAnimation)
+        if (TryComp<ItemPlacerComponent>(grill, out var placer))
         {
-            var grillVisuals = EnsureComp<GrillingVisualComponent>(uid);
-            grillVisuals.GrillingSprite = grill.Comp.HeatingVisuals?.Sprite;
-            Dirty(uid, grillVisuals);
+            foreach (var item in placer.PlacedEntities)
+            {
+                if (grill.Comp.Setting != EntityHeaterSetting.Off &&
+                    _whitelistSystem.IsWhitelistPass(grill.Comp.HeatingVisuals?.Whitelist, item) &&
+                    !_tagSystem.HasTag(item, $"Cooked"))
+                {
+                    showVisuals = true;
+                    var grillVisuals = EnsureComp<GrillingVisualComponent>(item);
+                    grillVisuals.GrillingSprite = grill.Comp.HeatingVisuals?.Sprite;
+                    Dirty(item, grillVisuals);
+                }
+                else
+                {
+                    RemComp<GrillingVisualComponent>(item);
+                }
+            }
         }
+
+        if (showVisuals)
+            PlayGrillAudio(grill);
         else
-            RemComp<GrillingVisualComponent>(uid);
+            _audio.Stop(grill.Comp.GrillingAudioStream);
     }
+    //SS220-grill-update-2 end
 
-    private void UpdateGrillAudio(Entity<EntityHeaterComponent> ent)
+    //SS220-grill-update begin
+    private void PlayGrillAudio(Entity<EntityHeaterComponent> grill)
     {
-        var shouldPlay = ent.Comp.Setting is not EntityHeaterSetting.Off
-                         && TryComp<ItemPlacerComponent>(ent, out var placer)
-                         && placer.PlacedEntities.Any(e => !_tagSystem.HasTag(e, "Cooked"));
-
-        if (shouldPlay)
-            PlayGrillAudio(ent);
-        else
-            _audio.Stop(ent.Comp.GrillingAudioStream);
-    }
-
-    private void PlayGrillAudio(Entity<EntityHeaterComponent> ent)
-    {
-        if (_audio.IsPlaying(ent.Comp.GrillingAudioStream))
+        if (_audio.IsPlaying(grill.Comp.GrillingAudioStream))
             return;
 
         var audioParams = AudioParams.Default.WithMaxDistance(10f).WithLoop(true);
-        ent.Comp.GrillingAudioStream = _audio.PlayPvs(ent.Comp.GrillSound, ent, audioParams)?.Entity;
+        grill.Comp.GrillingAudioStream = _audio.PlayPvs(grill.Comp.GrillSound, grill, audioParams)?.Entity;
     }
     //SS220-grill-update end
 }

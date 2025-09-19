@@ -6,7 +6,7 @@
   - type: FlavorProfile
     flavors:
     - shawarma
-  - type: Food
+  - type: Edible
     transferAmount: 3
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/shawarma.rsi
@@ -25,13 +25,14 @@
     tags:
     - Meat
   #SS220-grill-update-2 begin
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.FoodCookingVisuals.Grilling:
-        enum.FoodCookingVisuals.Grilling:
-          False: { visible: false }
-          True: { visible: true, sprite: SS220/Effects/grillingEffect.rsi, state: grillingSmoke }
+  - type: Fixtures
+    fixtures:
+      fix1:
+        density: 1
+        mask:
+        - ItemMask
+        restitution: 0
+        friction: 0.2
   #SS220-grill-update-2 end
 
 - type: entity
@@ -40,7 +41,6 @@
   id: FoodShawarma
   description: Аппетитная начинка, завернутая в лаваш - блюдо, которое всегда поднимает настроение.
   components:
-  - type: Food
   - type: Sprite
     state: shawarma
     #SS220-grill-update-2 begin
@@ -51,9 +51,9 @@
   - type: Temperature
     currentTemperature: 290
   - type: InternalTemperature
-    conductivity: 10
-    thickness: 0.002
-    area: 1
+    conductivity: 0.4
+    thickness: 0.008
+    area: 0.0175 # ~7x25cm
     #SS220-grill-update-2 end
 
 - type: entity
@@ -62,7 +62,6 @@
   id: FoodShawarmaOnGrill
   description: То же блюдо, поднимающее вам настроение, но только круче!
   components:
-  - type: Food
   - type: Sprite
     state: shawarmaGrill
     #SS220-grill-update-2 begin

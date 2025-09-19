@@ -43,7 +43,7 @@
     currentTemperature: 290
   # required for cooking to work
   - type: InternalTemperature
-    thickness: 0.05 #SS220-grill-update-2 Slow down cooking of steak by 0.03
+    thickness: 0.02
     area: 0.02 # arbitrary number that sounds right for a slab of meat
   - type: Material
   - type: PhysicalComposition
@@ -101,7 +101,8 @@
     count: 3
     slice: FoodMeatCutlet
   - type: InternalTemperature
-    conductivity: 0.43
+    conductivity: 0.4 #SS220-grill-update-2 (0.43 -> 0.4)
+    thickness: 0.17 #SS220-grill-update-2 (0.02 -> 0.17)
   - type: Construction
     graph: MeatSteak
     node: start
@@ -578,6 +579,55 @@
     slice: FoodMeatSpiderCutlet
   - type: Item
     heldPrefix: spider
+  #SS220-grill-update-2 begin
+  - type: Construction
+    graph: SpiderSteak
+    node: start
+    defaultTarget: spider steak
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    conductivity: 0.4
+    thickness: 0.03
+    area: 0.0175 # ~7x25cm
+    #SS220-grill-update-2 end
+
+#SS220-grill-update-2 begin
+- type: entity
+  name: spider steak
+  parent: FoodMeatBase
+  id: FoodMeatSpiderSteak
+  description: A cooked spider. Smells primal.
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: spider-grilled
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 5
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatSpiderCutletCooked
+  - type: Construction
+    graph: SpiderSteak
+    node: spider steak
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: spider-inhand-left-grilled
+      right:
+      - state: spider-inhand-right-grilled
+#SS220-grill-update-2 end
 
 - type: entity
   name: raw spider leg
@@ -662,6 +712,53 @@
       - state: snake-inhand-left
       right:
       - state: snake-inhand-right
+  #SS220-grill-update-2 begin
+  - type: Construction
+    graph: SnakeSteak
+    node: start
+    defaultTarget: snake steak
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    conductivity: 0.4
+    thickness: 0.03
+    area: 0.0175 # ~7x25cm
+    #SS220-grill-update-2 end
+
+#SS220-grill-update-2 begin
+- type: entity
+  name: snake steak
+  parent: FoodMeatBase
+  id: FoodMeatSnakeSteak
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: snake-grilled
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Protein
+          Quantity: 8
+        - ReagentId: Toxin
+          Quantity: 1
+  - type: Construction
+    graph: SnakeSteak
+    node: snake steak
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: snake-inhand-left-grilled
+      right:
+      - state: snake-inhand-right-grilled
+#SS220-grill-update-2 end
 
 - type: entity
   name: raw xeno meat
