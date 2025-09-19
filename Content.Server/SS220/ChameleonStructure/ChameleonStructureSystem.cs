@@ -13,18 +13,7 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ChameleonStructureComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ChameleonStructureComponent, ChameleonStructurePrototypeSelectedMessage>(OnSelected);
-    }
-
-    private void OnMapInit(Entity<ChameleonStructureComponent> ent, ref MapInitEvent args)
-    {
-        if (string.IsNullOrEmpty(ent.Comp.Prototype))
-        {
-            ent.Comp.Prototype = MetaData(ent).EntityPrototype?.ID;//Not sure if this secure from null
-        }
-
-        SetPrototype(ent, ent.Comp.Prototype, true);
     }
 
     private void OnSelected(Entity<ChameleonStructureComponent> ent, ref ChameleonStructurePrototypeSelectedMessage args)

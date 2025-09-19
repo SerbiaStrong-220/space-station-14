@@ -8,18 +8,12 @@ using Content.Shared.SS220.ChameleonStructure;
 namespace Content.Client.SS220.ChameleonStructure.UI;
 
 [UsedImplicitly]
-public sealed class ChameleonStructureBoundUserInterface : BoundUserInterface
+public sealed class ChameleonStructureBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    private readonly ChameleonStructureSystem _chameleon;
 
     [ViewVariables]
     private ChameleonStructureMenu? _menu;
-
-    public ChameleonStructureBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-        _chameleon = EntMan.System<ChameleonStructureSystem>();
-    }
 
     protected override void Open()
     {
@@ -36,13 +30,10 @@ public sealed class ChameleonStructureBoundUserInterface : BoundUserInterface
         if (state is not ChameleonStructureBoundUserInterfaceState st)
             return;
 
-        var targets = _chameleon.GetValidTargets();
+        var targets = st.ChameleonData;
 
-        if (st.RequiredTag == null)
-        {
-            _menu?.UpdateState(targets, st.SelectedId);
+        if (targets == null)
             return;
-        }
 
         var newTargets = new List<EntProtoId>();
         foreach (var target in targets)
