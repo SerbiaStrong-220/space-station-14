@@ -130,6 +130,7 @@
   - type: Battery
     maxCharge: 8000000
     startingCharge: 8000000
+  - type: StationAiWhitelist #SS220 AI power control
 
 - type: entity
   parent: SMESBasic

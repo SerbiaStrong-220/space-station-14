@@ -269,7 +269,7 @@
     state: pda-internmed
   - type: GuideHelp
     guides:
-    - Medical Doctor
+    - MedicalDoctor
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -720,6 +720,13 @@
     - WhitelistChameleon
     - WhitelistChameleonPDA
   #ss220 add pdaidpainter end
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - AstroNavCartridge
 
 - type: entity
   parent: BasePDA
@@ -908,7 +915,7 @@
     - DoorBumpOpener
 
 - type: entity
-  parent: BaseSecurityPDA
+  parent: BasePDA #SS220 SD-pda-some-fixes
   id: LawyerPDA
   name: lawyer PDA
   description: For lawyers to poach dubious clients.
@@ -1249,7 +1256,7 @@
     state: pda-medical
   - type: GuideHelp
     guides:
-    - Medical Doctor
+    - MedicalDoctor
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -1471,6 +1478,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
+    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -1570,6 +1578,7 @@
     id: CentcomIDCard
     penSlot:
       startingItem: CentCommNewPen #SS220-CentcomFashion
+      priority: -1
       whitelist:
         tags:
         - Write
@@ -2236,6 +2245,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
+    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2285,6 +2295,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - MedTekCartridge
+    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2577,7 +2588,7 @@
       - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
-  parent: BasePDA
+  parent: [BasePDA, VoiceLock]
   id: ChameleonPDA
   name: passenger PDA
   description: Why isn't it gray?
@@ -2647,3 +2658,14 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false
     # SS220 Wizard getting used to End
+
+- type: entity
+  parent: ClearPDA
+  id: ScurretPDA
+  description: A temporary PDA granted to scurret temps. Doesn't do much. Wawa!
+  components:
+  - type: Pda
+    id: VisitorIDCard
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener

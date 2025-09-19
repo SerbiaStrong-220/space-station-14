@@ -13,7 +13,7 @@ public sealed partial class DamageOnStunContactComponent : Component
     /// <summary>
     /// The damage done those stunned by <see cref="StunsOnContactsComponent"/>
     /// </summary>
-    [DataField("damage", required: true)]
+    [DataField(required: true)]
     public DamageSpecifier Damage = new();
 
     /// <summary>

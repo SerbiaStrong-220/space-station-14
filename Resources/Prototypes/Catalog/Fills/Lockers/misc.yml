@@ -198,6 +198,12 @@
     # Recursive
     - id: ClosetMaintenanceFilledRandom
       prob: 0.01
+    # SS220 Posters start
+    - id: Contrposters
+      prob: 0.20
+    - id: Legalposters
+      prob: 0.25
+    # SS220 Posters end
 
 - type: entity
   id: ClosetMaintenanceFilledRandom

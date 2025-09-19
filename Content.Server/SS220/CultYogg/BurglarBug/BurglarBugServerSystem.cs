@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Administration.Logs;
-using Content.Server.Explosion.EntitySystems;
 using Content.Server.Popups;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -13,6 +13,7 @@ using Content.Shared.Sticky;
 using Content.Shared.Sticky.Components;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
+using Content.Shared.Trigger;
 
 namespace Content.Server.SS220.CultYogg.BurglarBug;
 
@@ -24,7 +25,6 @@ public sealed class BurglarBugServerSystem : EntitySystem
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
-
 
     public override void Initialize()
     {
@@ -49,6 +49,7 @@ public sealed class BurglarBugServerSystem : EntitySystem
             OpenDoor(uid, bugComponent);
         }
     }
+
     private void OpenDoor(EntityUid uid, BurglarBugComponent comp)
     {
         if (!HasComp<StickyComponent>(uid))
@@ -64,6 +65,7 @@ public sealed class BurglarBugServerSystem : EntitySystem
         }
         AfterUsed((uid, comp));
     }
+
     private void OnBreak(Entity<BurglarBugComponent> entity, ref StickyDoAfterEvent args)
     {
         if (args.Cancelled)
@@ -80,6 +82,7 @@ public sealed class BurglarBugServerSystem : EntitySystem
 
         entity.Comp.DoorOpenTime = _gameTiming.CurTime + TimeSpan.FromSeconds(entity.Comp.TimeToOpen);
     }
+
     private void OnActivate(Entity<BurglarBugComponent> entity, ref UseInHandEvent args)
     {
         entity.Comp.Activated = true;
@@ -102,6 +105,7 @@ public sealed class BurglarBugServerSystem : EntitySystem
             }
 
         }
+
         if (!entity.Comp.Activated)
         {
             if (entity.Comp.NotActivatedStickPopupCancellation != null)
@@ -112,6 +116,7 @@ public sealed class BurglarBugServerSystem : EntitySystem
             args.Cancelled = true;
             return;
         }
+
         if (TryComp<DoorComponent>(args.Target, out var door))
         {
             entity.Comp.Door = (args.Target, door);

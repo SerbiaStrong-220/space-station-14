@@ -12,7 +12,9 @@
     sprite: Clothing/Belt/utility.rsi
   - type: Storage
     maxItemSize: Normal
-    # TODO: Fill this out more.
+    # Don't add more than absolutely needed to this whitelist!
+    # Utility belts shouldn't just be free extra storage.
+    # This is only intended for basic engineering equipment.
     whitelist:
       tags:
         - Powerdrill
@@ -32,9 +34,11 @@
         - JawsOfLife
         - GPS
         - WeldingMask
+        - RemoteSignaller
       components:
         - StationMap
         - SprayPainter
+        - SprayPainterAmmo
         - NetworkConfigurator
         - RCD
         - RCDAmmo
@@ -85,6 +89,10 @@
     microFiberMaterial: micro-fibers-textile
     microFiberColor: micro-fibers-brown
 #SS220 Micro_fibers end
+  - type: Tag
+    tags:
+    - UtilityBelt
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -120,6 +128,7 @@
       components:
         - StationMap
         - SprayPainter
+        - SprayPainterAmmo
         - NetworkConfigurator
         - RCD
         - RCDAmmo
@@ -240,7 +249,8 @@
         - WetFloorSign
         - HolosignProjector
         - Plunger
-        - JanicartKeys # SS220 Readd-Vehicles
+        - GoldenPlunger
+        - WireBrush
       components:
         - LightReplacer
         - SmokeOnTrigger
@@ -670,6 +680,8 @@
         - Gun
         - BallisticAmmoProvider
         - CartridgeAmmo
+      tags:             # SS220 blueshield-whitelist-storage-fix
+        - KRSPowerCell  # SS220 blueshield-whitelist-storage-fix
 
 - type: entity
   parent: [ClothingBeltStorageBase]
@@ -698,6 +710,8 @@
     microFiberMaterial: micro-fibers-leather
     microFiberColor: micro-fibers-red
 #SS220 Micro_fibers end
+  - type: StaticPrice
+    price: 500
 
 - type: entity
   parent: ClothingBeltSecurity
@@ -759,6 +773,8 @@
     microFiberMaterial: micro-fibers-reinforced-textile
     microFiberColor: micro-fibers-grey
 #SS220 Micro_fibers end
+  - type: StaticPrice
+    price: 500
 
 - type: entity
   parent: ClothingBeltMilitaryWebbing

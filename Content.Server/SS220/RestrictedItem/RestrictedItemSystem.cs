@@ -15,7 +15,7 @@ public sealed partial class RestrictedItemSystem : SharedRestrictedItemSystem
 
     private void OnUseAttempt(Entity<RestrictedItemComponent> ent, ref GettingUsedAttemptEvent args)
     {
-        if (!ItemCheck(args.User, ent))
+        if (!CanInteract(args.User, ent))
             args.Cancel();
     }
 }
