@@ -744,9 +744,9 @@
   description: few people will want to resist you.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/mpolice.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/mpolice.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/mpolice.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/mpolice.rsi
 
 - type: entity
   parent: UnsensoredClothingUniformBase

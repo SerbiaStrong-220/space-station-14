@@ -20,9 +20,9 @@
   description: this is a reliable protection for detention.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Helmets/mpolice.rsi
+    sprite: SS220/Clothing/Head/Helmets/mpolice.rsi
   - type: Clothing
-    sprite: Clothing/Head/Helmets/mpolice.rsi
+    sprite: SS220/Clothing/Head/Helmets/mpolice.rsi
   - type: Armor
     modifiers:
       coefficients:
