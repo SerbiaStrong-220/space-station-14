@@ -74,7 +74,7 @@
   id: SecurityTacticalGasMask
   name: security tactical gas mask
   description: It is a cheaper modification of the Blue Shield gas mask, without flash protection, but with the same cool design.
-  suffix: За время в игре
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Mask/security_tac.rsi
