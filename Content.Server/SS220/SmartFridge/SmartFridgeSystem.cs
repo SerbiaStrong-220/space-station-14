@@ -41,7 +41,7 @@ namespace Content.Server.SS220.SmartFridge
             component.Broken = true;
             TryUpdateVisualState(uid, component);
         }
-        public void Deny(EntityUid uid, SmartFridge220Component? сomponent = null)
+        public void Deny(EntityUid uid, SmartFridge220Component? component = null)
         {
             if (!Resolve(uid, ref component))
                 return;
