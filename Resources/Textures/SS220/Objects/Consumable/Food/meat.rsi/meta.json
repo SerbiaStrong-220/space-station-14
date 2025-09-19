@@ -13,27 +13,43 @@
       {
         "name": "goliath-cooked"
       },
-	  {
+      {
+        "name": "goliath-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "goliath-inhand-left",
+        "directions": 4
+      },
+      {
+        "name": "goliath-cooked-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "goliath-cooked-inhand-left",
+        "directions": 4
+      },
+	    {
         "name": "spider-grilled"
       },
-	  {
-		"name": "spider-inhand-left-grilled",
-		"directions": 4
-	  },
-	  {
-		"name": "spider-inhand-right-grilled",
-		"directions": 4
-	  },
-	  {
+	    {
+        "name": "spider-inhand-left-grilled",
+        "directions": 4
+	    },
+	    {
+        "name": "spider-inhand-right-grilled",
+        "directions": 4
+      },
+      {
 		"name": "snake-grilled"
-	  },
-	  {
-		"name": "snake-inhand-left-grilled" ,
-		"directions": 4
-	  },
-	  {
-		"name": "snake-inhand-right-grilled" ,
-		"directions": 4
-	  }
+      },
+      {
+      "name": "snake-inhand-left-grilled" ,
+      "directions": 4
+      },
+      {
+      "name": "snake-inhand-right-grilled" ,
+      "directions": 4
+      }
     ]
   }

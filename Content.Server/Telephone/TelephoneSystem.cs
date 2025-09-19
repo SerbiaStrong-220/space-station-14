@@ -132,7 +132,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         // SS220 Holopad adapt begin
         if (TryComp<TTSComponent>(args.MessageSource, out var sourceTts))
         {
-            var ttsComponent = EnsureComp<TTSComponent>(entity);
+            var ttsComponent = EnsureComp<TTSComponent>(speaker);
             ttsComponent.VoicePrototypeId = sourceTts.VoicePrototypeId;
         }
         // SS220 Holopad adapt end

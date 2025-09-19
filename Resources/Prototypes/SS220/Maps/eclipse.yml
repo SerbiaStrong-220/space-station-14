@@ -4,7 +4,7 @@
   id: Eclipse
   mapName: 'NSS Eclipse'
   mapPath: /Maps/SS220/eclipse.yml
-  minPlayers: 40
+  minPlayers: 20 # decreased for 2 times by normal limit
   stations:
     Eclipse:
       stationProto: EclipseNanotrasenStation

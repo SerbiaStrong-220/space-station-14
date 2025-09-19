@@ -416,9 +416,9 @@
   - type: Item
     inhandVisuals:
       left:
-      - state: plain-inhand-left
+      - state: goliath-inhand-left # ss220 fix-goliath-meat-sprite
       right:
-      - state: plain-inhand-right
+      - state: goliath-inhand-right # ss220 fix-goliath-meat-sprite
 
 - type: entity
   name: dragon flesh
@@ -1424,9 +1424,9 @@
   - type: Item
     inhandVisuals:
       left:
-      - state: plain-cooked-inhand-left
+      - state: goliath-cooked-inhand-left # ss220 fix-goliath-meat-sprite
       right:
-      - state: plain-cooked-inhand-right
+      - state: goliath-cooked-inhand-right # ss220 fix-goliath-meat-sprite
 
 - type: entity
   name: rouny steak
