@@ -142,6 +142,7 @@
     maxSaturation: 15
   # SS220-Add-Languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
     - id: Bubblish
