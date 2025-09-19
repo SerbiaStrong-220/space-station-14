@@ -41,6 +41,12 @@
     sprite: SS220/Clothing/Mask/blueshield_alt.rsi
   - type: FlashImmunity
   - type: EyeProtection
+  - type: Armor
+    modifiers:
+      coefficients:
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.9
 
 - type: entity
   parent: ClothingMaskGasExplorer
