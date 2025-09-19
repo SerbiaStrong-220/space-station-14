@@ -75,6 +75,7 @@
   - type: DeviceLinkSink
     ports:
     - Trigger
+    triggerOnLink: false # ss220 add open/close ports to door
   - type: Explosive # Powerful explosion in a very small radius. Doesn't break underplating.
     explosionType: DemolitionCharge
     totalIntensity: 60

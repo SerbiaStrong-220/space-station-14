@@ -172,6 +172,7 @@ namespace Content.Client.Lobby
         private void LobbyLateJoinStatusUpdated()
         {
             Lobby!.ReadyButton.Disabled = _gameTicker.DisallowedLateJoin;
+            Lobby!.UpdateSpeciesBanStatus(); // SS220 Species bans
         }
 
         private void UpdateLobbyUi()
@@ -192,6 +193,8 @@ namespace Content.Client.Lobby
                 Lobby!.ReadyButton.Pressed = _gameTicker.AreWeReady;
                 Lobby!.ObserveButton.Disabled = true;
             }
+
+            Lobby!.UpdateSpeciesBanStatus(); // SS220 Species bans
 
             if (_gameTicker.ServerInfoBlob != null)
             {

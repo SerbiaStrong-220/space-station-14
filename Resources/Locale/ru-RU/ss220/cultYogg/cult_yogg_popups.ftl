@@ -27,7 +27,7 @@ cult-yogg-cultist-acsending = Ми-гомицелий проростает, ск
 
 cult-yogg-shroom-markup = В этом человеке пытаются прорасти споры.
 
-cult-yogg-stage-eyes-markups = Глаза горят неестественно зелёным пламенем
+cult-yogg-stage-eyes-markups = [color=green]Глаза горят неестественно зелёным пламенем[/color]
 
 cult-yogg-resurrected-by-heal = Мистические силы возвращают к жизни {$target}
 

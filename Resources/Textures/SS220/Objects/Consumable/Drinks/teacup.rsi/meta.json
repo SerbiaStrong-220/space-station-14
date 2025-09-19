@@ -1,0 +1,40 @@
+{
+    "version": 1,
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "Sprited by creamy (Discord) for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon-0"
+        },
+        {
+            "name": "icon-1"
+        },
+		{
+            "name": "icon-2"
+        },
+		{
+            "name": "icon-3"
+        },
+		{
+            "name": "icon-4"
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        },
+		{
+            "name": "icon-vend-tea"
+        },
+		{
+            "name": "icon-vend-green-tea"
+        }
+    ]
+}

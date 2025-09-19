@@ -93,7 +93,16 @@
     guides:
     - Chef
     - FoodRecipes
-# SS220 Throwable Changes begin
+  # SS220 butchering-update begin
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Melee/cleaver.rsi
+    quickEquip: false
+    slots:
+    - Belt
+  - type: Sharp
+    butcherDelayModifier: 0.5 # 1 -> 0.5
+  # SS220 butchering-update end
+  # SS220 Throwable Changes begin
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
     offset: -0.15,0.0

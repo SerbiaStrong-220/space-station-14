@@ -117,6 +117,10 @@
   - type: DeviceLinkSource
     ports:
       - DoorStatus
+      # ss220 add open/close ports to door start
+      - DoorOpened
+      - DoorClosed
+      # ss220 add open/close ports to door end
     lastSignals:
       DoorStatus: false
   - type: SoundOnOverload

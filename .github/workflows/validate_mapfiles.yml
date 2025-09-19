@@ -10,11 +10,15 @@ jobs:
   yaml-schema-validation:
     name: YAML map schema validator
     if: github.actor != 'IanComradeBot' && github.event.pull_request.draft == false
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4.2.2
     - name: Setup Submodule
-      run: git submodule update --init
+      run: git submodule update --init --recursive
+    - name: Update Engine Submodules
+      run: |
+        cd RobustToolbox/
+        git submodule update --init --recursive
     # Corvax-Secrets-Start
     - name: Setup secrets
       env:
