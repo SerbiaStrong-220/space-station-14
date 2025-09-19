@@ -124,6 +124,14 @@
   equipment:
     mask: ClothingMaskNeckGaiter
 
+- type: loadout
+  id: SecTacGasMask
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TacSec
+  equipment:
+    mask: SecurityTacticalGasMask
+
 # Neck
 - type: loadout
   id: ProtectGear
