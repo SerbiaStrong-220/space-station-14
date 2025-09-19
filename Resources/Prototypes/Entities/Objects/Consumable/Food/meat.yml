@@ -588,7 +588,7 @@
     currentTemperature: 290
   - type: InternalTemperature
     conductivity: 0.4
-    thickness: 0.03
+    thickness: 0.17
     area: 0.0175 # ~7x25cm
     #SS220-grill-update-2 end
 
@@ -721,7 +721,7 @@
     currentTemperature: 290
   - type: InternalTemperature
     conductivity: 0.4
-    thickness: 0.03
+    thickness: 0.17
     area: 0.0175 # ~7x25cm
     #SS220-grill-update-2 end
 
