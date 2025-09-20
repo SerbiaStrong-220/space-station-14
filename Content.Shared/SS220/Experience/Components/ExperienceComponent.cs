@@ -50,18 +50,18 @@ public sealed partial class ExperienceComponent : Component
 
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
-    public SortedList<ProtoId<SkillTreePrototype>, FixedPoint4> StudyingProgress = new();
+    public Dictionary<ProtoId<SkillTreePrototype>, FixedPoint4> StudyingProgress = new();
 
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
-    public SortedList<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
+    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
 
     /// <summary>
     /// This is used to override <see cref="ExperienceComponent.Skills"/> in checks
     /// </summary>
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
-    public SortedList<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> OverrideSkills = new();
+    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> OverrideSkills = new();
 
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
@@ -70,6 +70,12 @@ public sealed partial class ExperienceComponent : Component
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
     public HashSet<ProtoId<KnowledgePrototype>> ConstantKnowledge = new();
+
+    /// <summary>
+    /// This mask handles reiniting of experience to correctly process on spawn inits
+    /// </summary>
+    [ViewVariables(VVAccess.ReadOnly)]
+    public InitGainedExperienceType InitMask = InitGainedExperienceType.NotInitialized;
 }
 
 [Serializable, NetSerializable]

@@ -15,6 +15,7 @@ using Content.Shared.PDA;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Experience;
 using Content.Shared.Station;
 using JetBrains.Annotations;
 using Robust.Shared.Configuration;
@@ -164,10 +165,13 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
         DoJobSpecials(job, entity.Value);
         _identity.QueueIdentityUpdate(entity.Value);
-        //SS220-add-post-spawn-event
-        var afterProcessEv = new PlayerMobSpawnedAndProcessedEvent();
+        // SS220-add-experience-init-event-post-spawn
+        var afterProcessEv = new AfterExperienceInitComponentGained()
+        {
+            Type = job is null ? InitGainedExperienceType.ComponentInit : InitGainedExperienceType.JobInit
+        };
         RaiseLocalEvent(entity.Value, ref afterProcessEv);
-        //SS220-add-post-spawn-event
+        // SS220-add-experience-init-event-post-spawn
         return entity.Value;
     }
 

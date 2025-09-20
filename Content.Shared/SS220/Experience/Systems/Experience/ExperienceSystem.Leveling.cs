@@ -120,6 +120,8 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         InternalProgressTree(info, treeProto, entity);
+
+        DirtyField(entity.AsNullable(), nameof(ExperienceComponent.Skills));
     }
 
     private void InternalProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype skillTree, Entity<ExperienceComponent>? effectedEntity)
@@ -158,6 +160,8 @@ public sealed partial class ExperienceSystem : EntitySystem
         info.SkillSublevel = Math.Max(StartSubLevelIndex, info.SkillLevel - skillPrototype.LevelInfo.MaximumSublevel);
         info.SkillStudied = true;
 
+        DirtyField(entity.AsNullable(), nameof(ExperienceComponent.Skills));
+
         var ev = new SkillLevelGainedEvent(skillTree.ID, skillPrototype);
         RaiseLocalEvent(entity, ref ev);
     }
@@ -180,6 +184,8 @@ public sealed partial class ExperienceSystem : EntitySystem
         // Do not save overflow progress of it
         entity.Comp.StudyingProgress[skillTree] = _startLearningProgress;
         info.SkillSublevel++;
+
+        DirtyFields(entity.AsNullable(), null, [nameof(ExperienceComponent.Skills), nameof(ExperienceComponent.StudyingProgress)]);
 
         TryProgressLevel(entity, skillTree);
     }

@@ -2,10 +2,8 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.FixedPoint;
-using Content.Shared.Roles;
 using Content.Shared.SS220.Experience.SkillChecks;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Experience.Systems;
 
@@ -30,45 +28,14 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         base.Initialize();
 
+        InitializeGainedExperience();
+
         SubscribeLocalEvent<ExperienceComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<ExperienceComponent, PlayerMobSpawnedAndProcessedEvent>(OnPlayerMobAfterSpawned);
-        SubscribeLocalEvent<ExperienceComponent, ComponentStartup>(OnStartup);
         // TODO generic <T> version to bypass subscribe errors
         SubscribeLocalEvent<SkillRoleAddComponent, SkillTreeAddedEvent>(SkillAddOnSkillTreeAdded);
         SubscribeLocalEvent<ExperienceComponent, ComponentShutdown>(OnShutdown);
 
         SubscribeLocalEvent<ExperienceComponent, SkillCheckEvent>(OnSkillCheckEvent);
-    }
-
-    private void OnPlayerMobAfterSpawned(Entity<ExperienceComponent> entity, ref PlayerMobSpawnedAndProcessedEvent _)
-    {
-        // // TODO: Any general save from re initing?
-        // if (entity.Comp.Skills.Count != 0)
-        // {
-        //     Log.Error($"Got double initialization of component {nameof(ExperienceComponent)} on the entity {ToPrettyString(entity)}");
-        //     return;
-        // }
-
-        var treesProto = _prototype.EnumeratePrototypes<SkillTreePrototype>();
-        foreach (var treeProto in treesProto)
-        {
-            if (!treeProto.CanBeShownOnInit)
-                continue;
-
-            InitExperienceSkillTree(entity, treeProto);
-        }
-    }
-
-    private void OnStartup(Entity<ExperienceComponent> entity, ref ComponentStartup _)
-    {
-        var treesProto = _prototype.EnumeratePrototypes<SkillTreePrototype>();
-        foreach (var treeProto in treesProto)
-        {
-            if (!treeProto.CanBeShownOnInit)
-                continue;
-
-            InitExperienceSkillTree(entity, treeProto);
-        }
     }
 
     private void SkillAddOnSkillTreeAdded(Entity<SkillRoleAddComponent> entity, ref SkillTreeAddedEvent args)
@@ -111,11 +78,12 @@ public sealed partial class ExperienceSystem : EntitySystem
         return true;
     }
 
-    public void InitExperienceSkillTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree)
+    public void InitExperienceSkillTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree, bool logReiniting = true)
     {
         if (entity.Comp.Skills.ContainsKey(skillTree) || entity.Comp.StudyingProgress.ContainsKey(skillTree))
         {
-            Log.Error("Tried to init skill that already existed or being studied");
+            if (logReiniting)
+                Log.Error("Tried to init skill that already existed or being studied");
             entity.Comp.Skills.Remove(skillTree);
             entity.Comp.StudyingProgress.Remove(skillTree);
         }
@@ -132,7 +100,8 @@ public sealed partial class ExperienceSystem : EntitySystem
         entity.Comp.Skills.Add(skillTree, ev.Info);
         entity.Comp.StudyingProgress.Add(skillTree, _startLearningProgress);
 
-        // DirtyField(entity!, nameof(ExperienceComponent.Skills));
+        DirtyFields(entity.AsNullable(), null, [nameof(ExperienceComponent.Skills), nameof(ExperienceComponent.InitMask)]);
+
     }
 
     private void ResolveInitLeveling(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> tree)
