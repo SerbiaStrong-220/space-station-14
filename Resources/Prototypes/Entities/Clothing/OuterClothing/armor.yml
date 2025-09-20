@@ -114,7 +114,7 @@
 
 #Detective's vest
 - type: entity
-  parent: [ClothingOuterArmorBase, BaseSecurityContraband, ClothingOuterStorageBase]
+  parent: [ClothingOuterArmorBase, BaseSecurityContraband, ClothingOuterStorageBase] #SS220 detective outer rebalance
   id: ClothingOuterVestDetective
   name: detective's vest
   description: A hard-boiled private investigator's armored vest.
@@ -128,6 +128,11 @@
     grid:
     - 0,0,0,1
     - 2,0,2,1
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+      item_radio: !type:ContainerSlot #ss220 handheld radio on outer clothing
 #SS220 detective outer rebalance end
 
 - type: entity
