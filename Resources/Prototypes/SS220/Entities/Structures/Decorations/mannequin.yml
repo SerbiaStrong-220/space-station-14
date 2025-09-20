@@ -70,6 +70,10 @@
       - !type:EmptyAllContainersBehaviour
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
   - type: Inventory
     templateId: human
   - type: Hands
