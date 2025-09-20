@@ -18,5 +18,5 @@ ent-ActionMiGoErect = Воздвигнуть
     .desc = Воплотите основание великих алтарей.
 ent-ActionMiGoSacrifice = Призыв
     .desc = Исполните обряд над закрепленной на алтаре жертвой.
-ent-ActionMiGoToggleLight = { ent-ActionToggleLighting }
-    .desc = { ent-ActionToggleLighting.desc }
+ent-ActionMiGoToggleLight = Внутренний свет
+    .desc = Пробудите биолюминесценцию, доступную лишь разуму Ми-Го.
