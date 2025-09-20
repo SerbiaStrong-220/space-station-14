@@ -48,7 +48,6 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem // SS2
 
         args.Handled = true;
 
-        QueueDel(uid);
     }
     //ss220 dna copy implant add start
     private void OnDnaCopyImplant(Entity<SubdermalImplantComponent> ent, ref UseDnaCopyImplantEvent args)

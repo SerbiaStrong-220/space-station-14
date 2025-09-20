@@ -15,7 +15,7 @@ public sealed class DamageContactsSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    private readonly SharedBloodstreamExtensionSystem _sharedBloodstream = default!; //SS220 Add BloodlossModifier
+    [Dependency] private readonly SharedBloodstreamExtensionSystem _sharedBloodstream = default!; //SS220 Add BloodlossModifier
 
     public override void Initialize()
     {

@@ -5,6 +5,9 @@
   minLimit: 0
   maxLimit: 3
   loadouts:
+  # ss220 add station map to loadout start
+  - HandheldStationMap
+  # ss220 add station map to loadout end
   - FlowerWreath
   - Hairflower
   - Headphones

@@ -32,7 +32,7 @@ public sealed partial class ChemicalAdaptationEffect : EventEntityEffect<Chemica
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return Loc.GetString("reagent-effect-guidebook-ss220-free-chemical-adaptation", ("chance", Probability));
+        return Loc.GetString("reagent-effect-guidebook-ss220-chemical-adaptation", ("modifier", Math.Round(Modifier, 3)), ("duration", Duration.TotalSeconds), ("refresh", Refresh) );
     }
 }
 

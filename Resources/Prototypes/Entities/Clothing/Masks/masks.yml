@@ -402,6 +402,14 @@
     sprite: Clothing/Mask/swat.rsi
   - type: Clothing
     sprite: Clothing/Mask/swat.rsi
+    #SS220 - add-smart-mask-swat-and-blueshield - start
+  - type: UserInterface
+    interfaces:
+      enum.SmartGasMaskUiKey.Key:
+        type: SmartGasMaskBoundUserInterface
+  - type: SmartGasMask
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskSupport"]
+    #SS220 - add-smart-mask-swat-and-blueshield - end
   - type: Tag
     tags:
     - WhitelistChameleon
@@ -733,6 +741,13 @@
   - type: EyeProtection
   - type: BreathMask
   - type: IdentityBlocker
+# SS220 PaNfixes start
+  - type: VoiceMask
+  - type: UserInterface
+    interfaces:
+      enum.VoiceMaskUIKey.Key:
+        type: VoiceMaskBoundUserInterface
+# SS220 PaNfixes end
 
 - type: entity
   parent: ClothingMaskGas
@@ -756,6 +771,7 @@
   - type: Tag
     tags:
     - WhitelistChameleon
+    - WeldingMask #SS220-clothingWeldingMaskGas-tweak
 
 # Entity tables
 - type: entityTable

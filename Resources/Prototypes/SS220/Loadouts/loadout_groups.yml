@@ -133,8 +133,8 @@
   name: loadout-group-iaa-headset
   minLimit: 1
   loadouts:
-  - LawHeadset
-  - LawHeadsetAlt
+  - IAAHeadset
+  - IAAHeadsetAlt
   # Агент Внутренних Дел (Конец)
 
   # Адвокат (Начало)
@@ -144,6 +144,14 @@
   minLimit: 0
   loadouts:
   - OuterClothingJujutsuShlepa
+
+- type: loadoutGroup
+  id: LawyerHeadset
+  name: loadout-group-lawyer-headset
+  minLimit: 1
+  loadouts:
+  - LawHeadset
+  - LawHeadsetAlt
   # Адвокат (Конец)
 
   # Офицер "Синий Щит" (Начало)
