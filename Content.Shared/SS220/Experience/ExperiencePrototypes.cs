@@ -37,6 +37,9 @@ public sealed class SkillTreePrototype : IPrototype
 
     [DataField(required: true)]
     public List<ProtoId<SkillPrototype>> SkillTree = new();
+
+    [DataField]
+    public bool CanBeShownOnInit = true;
 }
 
 [Prototype]
@@ -46,6 +49,18 @@ public sealed class KnowledgePrototype : IPrototype
     [IdDataField]
     public string ID { get; private set; } = default!;
 }
+
+[Prototype]
+public sealed class AddSkillOnInitPrototype : IPrototype
+{
+    [ViewVariables]
+    [IdDataField]
+    public string ID { get; private set; } = default!;
+
+    [DataField(required: true)]
+    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
+}
+
 
 [DataDefinition]
 public partial struct SkillLevelInfo

@@ -2,6 +2,7 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.FixedPoint;
+using Content.Shared.Roles;
 using Content.Shared.SS220.Experience.SkillChecks;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -30,9 +31,65 @@ public sealed partial class ExperienceSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ExperienceComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<ExperienceComponent, PlayerMobSpawnedAndProcessedEvent>(OnPlayerMobAfterSpawned);
+        SubscribeLocalEvent<ExperienceComponent, ComponentStartup>(OnStartup);
+        // TODO generic <T> version to bypass subscribe errors
+        SubscribeLocalEvent<SkillRoleAddComponent, SkillTreeAddedEvent>(SkillAddOnSkillTreeAdded);
         SubscribeLocalEvent<ExperienceComponent, ComponentShutdown>(OnShutdown);
 
         SubscribeLocalEvent<ExperienceComponent, SkillCheckEvent>(OnSkillCheckEvent);
+    }
+
+    private void OnPlayerMobAfterSpawned(Entity<ExperienceComponent> entity, ref PlayerMobSpawnedAndProcessedEvent _)
+    {
+        // // TODO: Any general save from re initing?
+        // if (entity.Comp.Skills.Count != 0)
+        // {
+        //     Log.Error($"Got double initialization of component {nameof(ExperienceComponent)} on the entity {ToPrettyString(entity)}");
+        //     return;
+        // }
+
+        var treesProto = _prototype.EnumeratePrototypes<SkillTreePrototype>();
+        foreach (var treeProto in treesProto)
+        {
+            if (!treeProto.CanBeShownOnInit)
+                continue;
+
+            InitExperienceSkillTree(entity, treeProto);
+        }
+    }
+
+    private void OnStartup(Entity<ExperienceComponent> entity, ref ComponentStartup _)
+    {
+        var treesProto = _prototype.EnumeratePrototypes<SkillTreePrototype>();
+        foreach (var treeProto in treesProto)
+        {
+            if (!treeProto.CanBeShownOnInit)
+                continue;
+
+            InitExperienceSkillTree(entity, treeProto);
+        }
+    }
+
+    private void SkillAddOnSkillTreeAdded(Entity<SkillRoleAddComponent> entity, ref SkillTreeAddedEvent args)
+    {
+        if (_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto)
+            && skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
+        {
+            args.Info.SkillLevel += infoProto.SkillLevel;
+            args.Info.SkillSublevel += infoProto.SkillSublevel;
+        }
+
+        if (entity.Comp.Skills.TryGetValue(args.SkillTree, out var info))
+        {
+            args.Info.SkillLevel += info.SkillLevel;
+            args.Info.SkillSublevel += info.SkillSublevel;
+        }
+    }
+
+    private void OnSkillCheckEvent(Entity<ExperienceComponent> entity, ref SkillCheckEvent args)
+    {
+        args.HasSkill = GetAcquiredSkills(entity.AsNullable(), args.TreeProto).Contains(args.SkillProto);
     }
 
     public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, float delta)
@@ -70,14 +127,12 @@ public sealed partial class ExperienceSystem : EntitySystem
         };
         RaiseLocalEvent(entity, ref ev);
 
-        // never knows what coming...
-        DebugTools.Assert(ev.SkillTree == skillTree, $"Raised {nameof(SkillTreeAddedEvent)} event with tree id {skillTree} but got with tree id {ev.SkillTree}");
         ResolveInitLeveling(entity, ev.Info, ev.SkillTree);
 
         entity.Comp.Skills.Add(skillTree, ev.Info);
         entity.Comp.StudyingProgress.Add(skillTree, _startLearningProgress);
 
-        DirtyField(entity!, nameof(ExperienceComponent.Skills));
+        // DirtyField(entity!, nameof(ExperienceComponent.Skills));
     }
 
     private void ResolveInitLeveling(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> tree)

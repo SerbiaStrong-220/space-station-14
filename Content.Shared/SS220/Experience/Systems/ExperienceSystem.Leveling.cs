@@ -158,7 +158,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         info.SkillSublevel = Math.Max(StartSubLevelIndex, info.SkillLevel - skillPrototype.LevelInfo.MaximumSublevel);
         info.SkillStudied = true;
 
-        var ev = new SkillLevelGained(skillTree.ID, skillPrototype);
+        var ev = new SkillLevelGainedEvent(skillTree.ID, skillPrototype);
         RaiseLocalEvent(entity, ref ev);
     }
 

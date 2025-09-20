@@ -44,6 +44,8 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+      - type: SkillRoleAdd
+        skillAddId: BaseSkillAddition # SS220-skills-update
       - type: DefibrillatorSkill #SS220 LimitationRevive
 
 - type: startingGear

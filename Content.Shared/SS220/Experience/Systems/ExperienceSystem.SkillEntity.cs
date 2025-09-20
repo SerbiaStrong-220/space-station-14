@@ -1,8 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Database;
-using Content.Shared.Mobs;
-using Content.Shared.SS220.Experience.SkillChecks;
 using Robust.Shared.Containers;
 using Robust.Shared.Utility;
 
@@ -31,11 +29,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         QueueDel(_container.EmptyContainer(entity.Comp.OverrideExperienceContainer).FirstOrNull());
     }
 
-    private void OnSkillCheckEvent(Entity<ExperienceComponent> entity, ref SkillCheckEvent args)
-    {
-        args.HasSkill = GetAcquiredSkills(entity.AsNullable(), args.TreeProto).Contains(args.SkillProto);
-    }
-
     public bool TryAddSkillToSkillEntity(Entity<ExperienceComponent> entity, string containerId, SkillPrototype skill)
     {
         if (!ContainerIds.Contains(containerId))
@@ -62,7 +55,13 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     public void RelayEventToSkillEntity<T>() where T : notnull
     {
+        SubscribeLocalEvent<SkillComponent, SkillEntityOverrideCheckEvent<T>>(OnOverrideSkillEntityCheck);
         SubscribeLocalEvent<ExperienceComponent, T>(RelayEventToSkillEntity);
+    }
+
+    private void OnOverrideSkillEntityCheck<T>(Entity<SkillComponent> entity, ref SkillEntityOverrideCheckEvent<T> args) where T : notnull
+    {
+        args.Subscribed = true;
     }
 
     private void RelayEventToSkillEntity<T>(Entity<ExperienceComponent> entity, ref T args) where T : notnull
@@ -70,8 +69,11 @@ public sealed partial class ExperienceSystem : EntitySystem
         var overrideSkillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
         var skillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
 
-        if (skillEntity is null && overrideSkillEntity is null)
+        if (overrideSkillEntity is null && skillEntity is null)
+        {
+            Log.Error($"Event {nameof(T)} was skipped because entity {ToPrettyString(entity)} don't have any skill entity");
             return;
+        }
 
         // This check works as assert of not missrelaying
         if ((!TryComp<SkillComponent>(skillEntity, out var comp) && skillEntity is not null)
@@ -81,12 +83,18 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
         }
 
+        var overrideEv = new SkillEntityOverrideCheckEvent<T>();
+
         if (overrideSkillEntity is not null)
-            RaiseLocalEvent(overrideSkillEntity.Value, ref args);
-        // TODO
-        // How to stop it from relaying to skill if override done it?
-        // Some prepredict can handle it? Like HasComp<Type>?
-        if (skillEntity is not null)
+        {
+            if (overrideEv.Subscribed)
+            {
+                RaiseLocalEvent(overrideSkillEntity.Value, ref args);
+                return;
+            }
+        }
+
+        if (!overrideEv.Subscribed && skillEntity is not null)
             RaiseLocalEvent(skillEntity.Value, ref args);
     }
 

@@ -30,7 +30,7 @@ namespace Content.Shared.SS220.Experience;
 //  [xx][|00] <= this !can! mean that we earned 1 skill but 2 banned from studying SkillTreeExperienceInfo is (1, 0, false)
 
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState(true, fieldDeltas: true)]
+[NetworkedComponent, AutoGenerateComponentState(true, true)]
 [Access(typeof(ExperienceSystem))]
 public sealed partial class ExperienceComponent : Component
 {
@@ -50,18 +50,18 @@ public sealed partial class ExperienceComponent : Component
 
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
-    public SortedDictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
+    public SortedList<ProtoId<SkillTreePrototype>, FixedPoint4> StudyingProgress = new();
+
+    [AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadOnly)]
+    public SortedList<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
 
     /// <summary>
     /// This is used to override <see cref="ExperienceComponent.Skills"/> in checks
     /// </summary>
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
-    public SortedDictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> OverrideSkills = new();
-
-    [AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadOnly)]
-    public SortedDictionary<ProtoId<SkillTreePrototype>, FixedPoint4> StudyingProgress = new();
+    public SortedList<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> OverrideSkills = new();
 
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
@@ -72,27 +72,30 @@ public sealed partial class ExperienceComponent : Component
     public HashSet<ProtoId<KnowledgePrototype>> ConstantKnowledge = new();
 }
 
-[NetSerializable]
-public sealed class SkillTreeExperienceInfo
+[Serializable, NetSerializable]
+[DataDefinition]
+public sealed partial class SkillTreeExperienceInfo
 {
     /// <summary>
     /// Defines current skill level
     /// </summary>
+    [DataField]
     public int SkillLevel;
 
     /// <summary>
     /// Defines sublevel level
     /// </summary>
+    [DataField]
     public int SkillSublevel;
 
     /// <summary>
     /// Defines if current SkillLevel is studied
     /// help differ 2 situation [xx]|[oo] <--> [xx][|oo]
     /// </summary>
-    public bool SkillStudied;
+    public bool SkillStudied = false;
 
     public override string ToString()
     {
-        return $"level is {SkillLevel}, sublevel is {SkillSublevel}, skill studied is {SkillStudied}";
+        return $"level: {SkillLevel}. Sublevel: {SkillSublevel}. Studied: {SkillStudied}";
     }
 }

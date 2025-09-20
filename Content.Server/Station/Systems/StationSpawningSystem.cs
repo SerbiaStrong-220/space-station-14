@@ -164,6 +164,10 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
         DoJobSpecials(job, entity.Value);
         _identity.QueueIdentityUpdate(entity.Value);
+        //SS220-add-post-spawn-event
+        var afterProcessEv = new PlayerMobSpawnedAndProcessedEvent();
+        RaiseLocalEvent(entity.Value, ref afterProcessEv);
+        //SS220-add-post-spawn-event
         return entity.Value;
     }
 
