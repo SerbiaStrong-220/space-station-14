@@ -138,6 +138,14 @@
         showEnts: False
         occludes: True
         ent: null
+      hands_right: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      hands_left: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
   - type: Inventory
     templateId: human
   - type: Hands
