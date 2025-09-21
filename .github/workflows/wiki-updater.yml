@@ -1,0 +1,72 @@
+name: "Wiki updater"
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/wiki-updater.yml'
+      - '**/Chemistry/**/**.*'
+      - 'Content.Shared/**/EntityEffects/**/**.cs'
+      - 'Content.Server/GuideGenerator/**/**.cs'
+      - 'Content.Server/SS220/Wiki/**/**.cs'
+      - 'Resousces/Locale/**/chemistry/**/**.ftl'
+      - 'Resources/**/Reagents/**/**.yml'
+      - 'Resources/**/Recipes/Reactions/**/**.yml'
+      - 'RobustToolbox/'
+
+jobs:
+  update-wiki:
+    name: Build and Publish JSON blobs to wiki
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Master
+      uses: actions/checkout@v4.2.2
+
+    - name: Setup Submodule
+      run: |
+        git submodule update --init --recursive
+
+    - name: Pull Engine Updates
+      uses: space-wizards/submodule-dependency@v0.1.5
+
+    - name: Update Engine Submodules
+      run: |
+        cd RobustToolbox/
+        git submodule update --init --recursive
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4.1.0
+      with:
+        dotnet-version: 9.0.x
+
+    - name: Install Dependencies
+      run: dotnet restore
+
+    - name: Build Project
+      run: dotnet build --configuration Release --no-restore /p:WarningsAsErrors=nullable /m
+
+    - name: Generate JSON blobs for prototypes
+      run: dotnet ./bin/Content.Server/Content.Server.dll --cvar autogen.destination_file=.json
+      continue-on-error: true
+
+    - name: Upload chemicals_prototypes.json to wiki
+      uses: jtmullen/mediawiki-edit-action@v0.1.1
+      with:
+        wiki_text_file: ./bin/Content.Server/data/chemicals_prototypes.json
+        edit_summary: Update chemicals_prototypes.json via GitHub Actions
+        page_name: "Модуль:ChemistryAPI/chemicals_prototypes.json"
+        api_url: https://wiki14.ss220.club/api.php
+        username: ${{ secrets.WIKI_BOT_USER }}
+        password: ${{ secrets.WIKI_BOT_PASS }}
+
+    - name: Upload reactions_prototypes.json to wiki
+      uses: jtmullen/mediawiki-edit-action@v0.1.1
+      with:
+        wiki_text_file: ./bin/Content.Server/data/reactions_prototypes.json
+        edit_summary: Update reactions_prototypes.json via GitHub Actions
+        page_name: "Модуль:ChemistryAPI/reactions_prototypes.json"
+        api_url: https://wiki14.ss220.club/api.php
+        username: ${{ secrets.WIKI_BOT_USER }}
+        password: ${{ secrets.WIKI_BOT_PASS }}

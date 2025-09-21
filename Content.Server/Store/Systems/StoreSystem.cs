@@ -14,6 +14,7 @@ using Robust.Shared.Timing;
 using Content.Shared.Mind;
 using Content.Shared.DoAfter;
 using Content.Shared.SS220.Store;
+using Content.Server.StoreDiscount.Systems;
 
 namespace Content.Server.Store.Systems;
 
@@ -27,6 +28,7 @@ public sealed partial class StoreSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
+    [Dependency] private readonly StoreDiscountSystem _discount = default!; //SS220-nukeops-discount
 
     public override void Initialize()
     {
@@ -51,6 +53,7 @@ public sealed partial class StoreSystem : EntitySystem
     {
         RefreshAllListings(component);
         component.StartingMap = Transform(uid).MapUid;
+        _discount.TryAddDiscounts(uid, component); //SS220-nukeops-discount
     }
 
     private void OnStartup(EntityUid uid, StoreComponent component, ComponentStartup args)

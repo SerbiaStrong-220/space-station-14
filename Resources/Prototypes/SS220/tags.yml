@@ -331,4 +331,15 @@
 
 - type: Tag
   id: WhitelistChameleonStructureAirlock
+
+- type: Tag
+  id: WhitelistChameleonStructureSecretDoor
 # ss220 ChameleonStructure end
+
+# ss220 Posters update start
+- type: Tag
+  id: Contrposter
+
+- type: Tag
+  id: Legalposter
+# ss220 Posters update end

@@ -23,6 +23,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Containers;
 using Content.Shared.SS220.Weapons.Ranged.Events;
+using Content.Server.SS220.Shuttles.UI;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -34,6 +35,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly ShuttleNavInfoSystem _shuttleNavInfo = default!; // SS220 Add projectiles & hitscan on shuttle nav
 
     private const float DamagePitchVariation = 0.05f;
 
@@ -431,6 +433,8 @@ public sealed partial class GunSystem : SharedGunSystem
 
     private void FireEffects(EntityCoordinates fromCoordinates, float distance, Angle angle, HitscanPrototype hitscan, EntityUid? hitEntity = null)
     {
+        _shuttleNavInfo.AddHitscan(TransformSystem.ToMapCoordinates(fromCoordinates), distance, angle, hitscan); // SS220 Add hitscan on shuttle nav begin
+
         // Lord
         // Forgive me for the shitcode I am about to do
         // Effects tempt me not

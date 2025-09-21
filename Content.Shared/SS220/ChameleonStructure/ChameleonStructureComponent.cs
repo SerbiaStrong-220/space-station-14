@@ -16,17 +16,23 @@ public sealed partial class ChameleonStructureComponent : Component
 {
     /// <summary>
     ///     EntityPrototype id that chameleon item is trying to mimic.
-    ///     Сan be set as default.
+    ///     Can be set as default.
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
     [DataField, AutoNetworkedField]
     public EntProtoId? Prototype;
 
     /// <summary>
-    ///     Filter possible chameleon options by a tag in addition to WhitelistChameleon.
+    ///     Filter possible chameleon options by a tag.
     /// </summary>
     [DataField]
     public string? RequireTag;
+
+    /// <summary>
+    ///     RequireTag alternative.
+    /// </summary>
+    [DataField]
+    public List<EntProtoId>? ProtoList;
 
     [DataField]
     public EntityWhitelist? UserWhitelist;

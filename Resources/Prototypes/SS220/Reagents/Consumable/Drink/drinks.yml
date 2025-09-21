@@ -11,7 +11,7 @@
     state: icon
 
 - type: reagent
-  id: BerryСompote
+  id: BerryCompote
   name: reagent-name-berry-compote
   parent: BaseDrink
   desc: reagent-desc-berry-compote

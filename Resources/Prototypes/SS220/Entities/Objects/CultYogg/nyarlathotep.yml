@@ -26,6 +26,8 @@
   - type: StandingState
   - type: CanMoveInAir
   - type: MovementIgnoreGravity
+  - type: GravityAffected
+    weightless: false
   - type: Appearance
   - type: Physics
     bodyType: Dynamic
@@ -40,9 +42,9 @@
     noRot: true
     drawdepth: Ghosts
     sprite: SS220/Mobs/CultYogg/nyarlathotep.rsi
-    shader: unshaded
     layers:
     - state: nyarlathoteph
+      shader: unshaded
   - type: ChasingWalk
     impulseInterval: 1
     minSpeed: 3

@@ -8,6 +8,7 @@ namespace Content.Shared.SS220.AccessWhitelist;
 public sealed class SharedAccessWhitelistSystem : EntitySystem
 {
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+
     public override void Initialize()
     {
         base.Initialize();
