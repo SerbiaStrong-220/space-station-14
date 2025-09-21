@@ -6,7 +6,7 @@ using Robust.Shared.ViewVariables;
 namespace Content.Server.Spawners.Components;
 
 [RegisterComponent]
-public sealed partial class SurpriseSpawnerComponent : Component
+public sealed partial class SpawnOnStorageOpenComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField(required: true)]
