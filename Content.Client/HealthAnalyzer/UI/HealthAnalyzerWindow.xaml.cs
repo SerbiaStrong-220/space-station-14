@@ -4,6 +4,9 @@ using Content.Client.Message;
 using Content.Shared.Atmos;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Alert;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
@@ -35,6 +38,9 @@ namespace Content.Client.HealthAnalyzer.UI
         private readonly SpriteSystem _spriteSystem;
         private readonly IPrototypeManager _prototypes;
         private readonly IResourceCache _cache;
+        // ss220 add reagents to health analyzer start
+        private readonly SharedSolutionContainerSystem _solSystem;
+        // ss220 add reagents to health analyzer end
 
         public HealthAnalyzerWindow()
         {
@@ -45,10 +51,19 @@ namespace Content.Client.HealthAnalyzer.UI
             _spriteSystem = _entityManager.System<SpriteSystem>();
             _prototypes = dependencies.Resolve<IPrototypeManager>();
             _cache = dependencies.Resolve<IResourceCache>();
+            // ss220 add reagents to health analyzer start
+            _solSystem = _entityManager.System<SharedSolutionContainerSystem>();
+            // ss220 add reagents to health analyzer end
         }
 
         public void Populate(HealthAnalyzerScannedUserMessage msg)
         {
+            // ss220 add reagents to health analyzer start
+            ReagentsContainer.DisposeAllChildren();
+            ReagentPanelContainer.Visible = false;
+            ReagentLabelContainer.Visible = false;
+            // ss220 add reagents to health analyzer end
+
             var target = _entityManager.GetEntity(msg.TargetEntity);
 
             if (target == null
@@ -57,6 +72,38 @@ namespace Content.Client.HealthAnalyzer.UI
                 NoPatientDataText.Visible = true;
                 return;
             }
+
+            // ss220 add reagents to health analyzer start
+            if (_entityManager.TryGetComponent<SolutionContainerManagerComponent>(target, out var solComp))
+            {
+                if (_solSystem.TryGetSolution((target.Value, solComp), "chemicals", out var solutions))
+                {
+                    foreach (var (reagent, valueReagent) in solutions.Value.Comp.Solution.Contents)
+                    {
+                        if (!_prototypes.TryIndex<ReagentPrototype>(reagent.Prototype, out var reagentPrototype))
+                            continue;
+
+                        var title = Loc.GetString("health-analyzer-window-entity-reagent-text",
+                            ("reagentName", reagentPrototype.LocalizedName),
+                            ("reagentValue", valueReagent));
+
+                        var label = new Label
+                        {
+                            Text = title,
+                            Modulate = reagentPrototype.SubstanceColor,
+                        };
+
+                        ReagentsContainer.AddChild(label);
+                    }
+                }
+            }
+
+            if (ReagentsContainer.ChildCount != 0)
+            {
+                ReagentPanelContainer.Visible = true;
+                ReagentLabelContainer.Visible = true;
+            }
+            // ss220 add reagents to health analyzer end
 
             NoPatientDataText.Visible = false;
 
