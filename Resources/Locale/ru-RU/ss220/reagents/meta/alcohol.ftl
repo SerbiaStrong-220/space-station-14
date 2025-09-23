@@ -1,0 +1,1 @@
+reagent-name-campari = кампари
