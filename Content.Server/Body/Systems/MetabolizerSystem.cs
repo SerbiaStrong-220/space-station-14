@@ -34,7 +34,7 @@ namespace Content.Server.Body.Systems
         private EntityQuery<SolutionContainerManagerComponent> _solutionQuery;
 
         // ss220 add narcotic test start
-        private static readonly ProtoId<ReagentPrototype> NarcoticGroupPrototype = "Narcotics";
+        private const string NarcoticsGroup = "Narcotics";
         // ss220 add narcotic test end
 
         public override void Initialize()
@@ -150,7 +150,7 @@ namespace Content.Server.Body.Systems
                     continue;
 
                 // ss220 add narcotics test start
-                if (proto.Group == NarcoticGroupPrototype &&
+                if (proto.Group == NarcoticsGroup &&
                     ent.Comp2?.Body is { } body)
                 {
                     var narcoticsComp = EnsureComp<RecentlyUsedNarcoticsComponent>(body);
