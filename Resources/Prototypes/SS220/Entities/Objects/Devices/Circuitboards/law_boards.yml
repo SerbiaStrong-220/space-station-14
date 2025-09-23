@@ -1,0 +1,35 @@
+- type: entity
+  id: ErtDirectivesCircuitBoard
+  parent: BaseElectronics
+  name: law board (ErtDirectives)
+  description: An electronics board containing the ErtDirectives lawset.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: std_mod
+  - type: SiliconLawProvider
+    laws: ErtLawset
+
+- type: entity
+  id: TerminatorOSDirectivesCircuitBoard
+  parent: BaseElectronics
+  name: law board (TerminatorOS 3.1)
+  description: An electronics board containing the TerminatorOS 3.1 lawset.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: std_mod
+  - type: SiliconLawProvider
+    laws: TerminatorOSLawset
+
+- type: entity
+  id: EpsilonTerminatorDirectivesCircuitBoard
+  parent: BaseElectronics
+  name: law board (Epsilon Terminator)
+  description: An electronics board containing the Epsilon Terminator lawset.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: std_mod
+  - type: SiliconLawProvider
+    laws: EpsilonTerminatorLawset
