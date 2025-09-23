@@ -1,4 +1,5 @@
 using Content.Server.Body.Components;
+using Content.Server.SS220.RecentlyUsedNarcotics; // ss220 add narcotic test
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Events;
 using Content.Shared.Body.Organ;
@@ -31,6 +32,10 @@ namespace Content.Server.Body.Systems
 
         private EntityQuery<OrganComponent> _organQuery;
         private EntityQuery<SolutionContainerManagerComponent> _solutionQuery;
+
+        // ss220 add narcotic test start
+        private static readonly ProtoId<ReagentPrototype> NarcoticGroupPrototype = "Narcotics";
+        // ss220 add narcotic test end
 
         public override void Initialize()
         {
@@ -143,6 +148,16 @@ namespace Content.Server.Body.Systems
             {
                 if (!_prototypeManager.TryIndex<ReagentPrototype>(reagent.Prototype, out var proto))
                     continue;
+
+                // ss220 add narcotics test start
+                if (proto.Group == NarcoticGroupPrototype &&
+                    ent.Comp2?.Body is { } body)
+                {
+                    var narcoticsComp = EnsureComp<RecentlyUsedNarcoticsComponent>(body);
+                    narcoticsComp.LastTimeUsedNarcotics = _gameTiming.CurTime;
+                    narcoticsComp.TimeRemoveNarcoticsFromBlood = narcoticsComp.LastTimeUsedNarcotics + narcoticsComp.AddTimeForOneUse;
+                }
+                // ss220 add narcotics test end
 
                 var mostToRemove = FixedPoint2.Zero;
                 if (proto.Metabolisms is null)
