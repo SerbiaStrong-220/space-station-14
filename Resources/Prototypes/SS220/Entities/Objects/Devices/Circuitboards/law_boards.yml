@@ -1,8 +1,8 @@
 - type: entity
   id: ErtDirectivesCircuitBoard
   parent: BaseElectronics
-  name: law board (ErtDirectives)
-  description: An electronics board containing the ErtDirectives lawset.
+  name: law board (Ert Directives)
+  description: An electronics board containing the Ert Directives lawset.
   components:
   - type: Sprite
     sprite: Objects/Misc/module.rsi
