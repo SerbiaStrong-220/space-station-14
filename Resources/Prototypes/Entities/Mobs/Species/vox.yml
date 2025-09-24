@@ -101,9 +101,9 @@
     - map: [ "ears" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ] #SS220-Vox Beak
     - map: [ "eyes" ]
+    - map: [ "outerClothing" ] #SS220 tweak layers of belts
+    - map: [ "belt" ]
     - map: [ "id" ]
-    - map: [ "outerClothing" ]
-    - map: [ "belt" ] #SS220 fix layers of belts
     - map: [ "back" ]
     - map: [ "neck" ]
     - map: [ "suitstorage" ] # This is not in the default order

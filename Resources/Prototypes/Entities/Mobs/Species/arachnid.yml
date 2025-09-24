@@ -116,9 +116,9 @@
       - map: ["enum.HumanoidVisualLayers.RHand"]
       - map: [ "gloves" ]
       - map: [ "shoes" ]
+      - map: [ "outerClothing" ] #SS220 tweak layers of belts
+      - map: [ "belt" ]
       - map: [ "id" ]
-      - map: [ "outerClothing" ]
-      - map: [ "belt" ] #SS220 fix layers of belts
       - map: [ "enum.HumanoidVisualLayers.Tail" ] # Mentioned in moth code: This needs renaming lol.
       - map: [ "back" ]
       - map: [ "neck" ]
