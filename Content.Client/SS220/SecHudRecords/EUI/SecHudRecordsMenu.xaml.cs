@@ -19,6 +19,14 @@ public sealed partial class SecHudRecordsMenu : FancyWindow
     [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
+    private const float SpriteScale = 3f;
+    private const float StatusIconTextureScale = 2f;
+    private const float RecordLabelWidth = 400f;
+    private const float StatusButtonWidth = 280f;
+
+    private static readonly Color DefaultGroupColor = Color.Green;
+    private static readonly Color ChosenGroupColor = Color.Black;
+
     private readonly SpriteSystem _sprite;
 
     private CriminalStatusPrototype? _chosenStatus;
@@ -45,7 +53,12 @@ public sealed partial class SecHudRecordsMenu : FancyWindow
             if (_chosenStatus == null || TargetEntityId == null || player == null)
                 return;
 
-            _entMan.RaisePredictiveEvent(new UpdateCriminalRecordStatusEvent(TargetEntityId.Value, player.Value, _reasonText, _chosenStatus));
+            var ev = new UpdateCriminalRecordStatusEvent(TargetEntityId.Value,
+                player.Value,
+                _reasonText,
+                _chosenStatus);
+
+            _entMan.RaisePredictiveEvent(ev);
             Close();
         };
     }
@@ -64,7 +77,7 @@ public sealed partial class SecHudRecordsMenu : FancyWindow
         else
         {
             SpriteTarget.SetEntity(TargetEntityId.Value);
-            SpriteTarget.Scale = new Vector2(3f);
+            SpriteTarget.Scale = new Vector2(SpriteScale);
         }
 
         if (FullCatalog.Count == 0)
@@ -78,7 +91,7 @@ public sealed partial class SecHudRecordsMenu : FancyWindow
 
                 var label = new RichTextLabel
                 {
-                    MaxWidth = 400,
+                    MaxWidth = RecordLabelWidth,
                     Text = $"{protoHistoryRecord.Name}: {record.Item2}",
                     HorizontalAlignment = HAlignment.Left,
                     Modulate = protoHistoryRecord.Color,
@@ -94,7 +107,7 @@ public sealed partial class SecHudRecordsMenu : FancyWindow
         {
             var button = new ShapeButton
             {
-                SetWidth = 280f,
+                SetWidth = StatusButtonWidth,
                 Text = proto.Name,
                 Group = group,
             };
@@ -109,7 +122,7 @@ public sealed partial class SecHudRecordsMenu : FancyWindow
                     ModulateSelfOverride = Color.White,
                     HorizontalAlignment = HAlignment.Left,
                     VerticalAlignment = VAlignment.Center,
-                    TextureScale = new Vector2(2f),
+                    TextureScale = new Vector2(StatusIconTextureScale),
                 };
 
                 button.AddChild(textureRect);
@@ -126,11 +139,11 @@ public sealed partial class SecHudRecordsMenu : FancyWindow
 
                     if (groupButton == button)
                     {
-                        button.BorderColor = Color.Green;
+                        button.BorderColor = DefaultGroupColor;
                         continue;
                     }
 
-                    shapeButton.BorderColor = Color.Black;
+                    shapeButton.BorderColor = ChosenGroupColor;
                 }
             };
 

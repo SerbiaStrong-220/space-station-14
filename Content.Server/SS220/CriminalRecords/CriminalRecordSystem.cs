@@ -5,6 +5,7 @@ using Content.Server.Access.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.StationRecords.Systems;
+using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Database;
 using Content.Shared.SS220.CriminalRecords;
@@ -21,7 +22,7 @@ public sealed class CriminalRecordSystem : SharedCriminalRecordSystem
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IdCardSystem _idCard = default!;
 
-    private const string AccessForChangeStatus = "Brig";
+    private static readonly ProtoId<AccessLevelPrototype> AccessForChangeStatus = "Brig";
 
     public override void Initialize()
     {
@@ -50,9 +51,6 @@ public sealed class CriminalRecordSystem : SharedCriminalRecordSystem
         var key = storage.Key;
         if (key == null)
             return;
-
-        // if (!TryGetLastRecord(key.Value, out var generalRecord, out var criminalRecord))
-        //     return;
 
         AddCriminalRecordStatus(key.Value, args.Reason, args.StatusProto, user);
     }

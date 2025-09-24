@@ -8,6 +8,7 @@
   - type: ShowCriminalRecordIcons
   # - type: ShowContrabandDetails # SS220-unused-info
   - type: SecHudRecords #ss220 add criminal records for hud's
+    verbSprite: SS220/Interface/VerbIcons/protection_glasses.png
 
 - type: entity
   id: ShowMedicalIcons
