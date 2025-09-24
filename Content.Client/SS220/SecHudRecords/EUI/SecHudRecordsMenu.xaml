@@ -1,0 +1,29 @@
+<controls:SecHudRecordsMenu
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.SS220.SecHudRecords.EUI"
+    xmlns:userInterface="clr-namespace:Content.Client.SS220.UserInterface"
+    MinSize="400 250"
+    Resizable="True">
+
+    <BoxContainer Orientation="Vertical" Margin="5">
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <BoxContainer Orientation="Vertical" VerticalAlignment="Center" HorizontalExpand="False">
+                <SpriteView Name="SpriteTarget" SetSize="128 128"/>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="10 0 0 0">
+                <Label Text="{Loc 'sec-hud-records-history-status'}"/>
+                <BoxContainer Name="RecordHistory" Orientation="Vertical"/>
+                <Label Text="{Loc 'sec-hud-records-enter-reason'}" Margin="0 5 0 0" />
+                <LineEdit Name="Reason" PlaceHolder="{Loc 'sec-hud-records-reason'}" HorizontalExpand="True" />
+            </BoxContainer>
+        </BoxContainer>
+
+        <GridContainer Name="CriminalStatuses" Columns="2"/>
+
+        <userInterface:ShapeButton Name="ConfirmableButton"
+                                   Text="{Loc 'sec-hud-records-confirm'}"
+                                   SetSize="170 32"
+                                   Margin="0 10 0 0" />
+    </BoxContainer>
+</controls:SecHudRecordsMenu>

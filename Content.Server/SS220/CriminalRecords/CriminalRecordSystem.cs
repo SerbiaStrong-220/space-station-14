@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
+using Content.Server.Access.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.StationRecords.Systems;
@@ -18,6 +19,56 @@ public sealed class CriminalRecordSystem : SharedCriminalRecordSystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IAdminLogManager _logManager = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly IdCardSystem _idCard = default!;
+
+    private const string AccessForChangeStatus = "Brig";
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeNetworkEvent<UpdateCriminalRecordStatusEvent>(OnStatusChange);
+    }
+
+    private void OnStatusChange(UpdateCriminalRecordStatusEvent args)
+    {
+        if (args.StatusProto == null)
+            return;
+
+        var target = GetEntity(args.Target);
+        var user = GetEntity(args.User);
+
+        if (!_idCard.TryFindIdCard(target, out var idCardTarget))
+            return;
+
+        if (!TryComp<AccessComponent>(idCardTarget, out var accessReader) ||
+            !accessReader.Tags.Contains(AccessForChangeStatus))
+            return;
+
+        if (!TryComp<StationRecordKeyStorageComponent>(idCardTarget, out var storage))
+            return;
+
+        var key = storage.Key;
+        if (key == null)
+            return;
+
+        // if (!TryGetLastRecord(key.Value, out var generalRecord, out var criminalRecord))
+        //     return;
+
+        AddCriminalRecordStatus(key.Value, args.Reason, args.StatusProto, user);
+    }
+
+    public bool GetRecordCatalog(StationRecordKey record, [NotNullWhen(true)] out CriminalRecordCatalog? catalog)
+    {
+        if (!_stationRecords.TryGetRecord(record, out GeneralStationRecord? stationRecord) ||
+            stationRecord.CriminalRecords == null)
+        {
+            catalog = null;
+            return false;
+        }
+
+        catalog = stationRecord.CriminalRecords;
+        return true;
+    }
 
     public CriminalRecordCatalog EnsureRecordCatalog(GeneralStationRecord record)
     {

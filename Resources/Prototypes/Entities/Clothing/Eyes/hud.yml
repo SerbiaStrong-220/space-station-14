@@ -7,6 +7,7 @@
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons
   # - type: ShowContrabandDetails # SS220-unused-info
+  - type: SecHudRecords #ss220 add criminal records for hud's
 
 - type: entity
   id: ShowMedicalIcons
