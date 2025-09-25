@@ -4,10 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Server.Access.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
+using Content.Server.Radio.EntitySystems;
 using Content.Server.StationRecords.Systems;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Database;
+using Content.Shared.Radio;
 using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.StationRecords;
 using Robust.Shared.Prototypes;
@@ -21,8 +23,11 @@ public sealed class CriminalRecordSystem : SharedCriminalRecordSystem
     [Dependency] private readonly IAdminLogManager _logManager = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IdCardSystem _idCard = default!;
+    [Dependency] private readonly RadioSystem _radio = default!;
 
     private static readonly ProtoId<AccessLevelPrototype> AccessForChangeStatus = "Brig";
+    private static readonly ProtoId<RadioChannelPrototype> ReportRadioChannel = "Security";
+    private const int MaxMessageLength = 200;
 
     public override void Initialize()
     {
@@ -32,7 +37,7 @@ public sealed class CriminalRecordSystem : SharedCriminalRecordSystem
 
     private void OnStatusChange(UpdateCriminalRecordStatusEvent args)
     {
-        if (args.StatusProto == null)
+        if (args.StatusProto == null || !_prototype.TryIndex(args.StatusProto.Value, out var statusProto))
             return;
 
         var target = GetEntity(args.Target);
@@ -53,6 +58,20 @@ public sealed class CriminalRecordSystem : SharedCriminalRecordSystem
             return;
 
         AddCriminalRecordStatus(key.Value, args.Reason, args.StatusProto, user);
+
+        if (!string.IsNullOrWhiteSpace(statusProto.RadioReportMessage) &&
+            _stationRecords.TryGetRecord<GeneralStationRecord>(key.Value, out var generalRecord))
+        {
+            var messageCut = args.Reason;
+            if (messageCut.Length > MaxMessageLength)
+                messageCut = messageCut[..MaxMessageLength];
+
+            _radio.SendRadioMessage(
+                user,
+                Loc.GetString(statusProto.RadioReportMessage, ("target", generalRecord.Name), ("reason", messageCut)),
+                _prototype.Index(ReportRadioChannel),
+                user);
+        }
     }
 
     public bool GetRecordCatalog(StationRecordKey record, [NotNullWhen(true)] out CriminalRecordCatalog? catalog)

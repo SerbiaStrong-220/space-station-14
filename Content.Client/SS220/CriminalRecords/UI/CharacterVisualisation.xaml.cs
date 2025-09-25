@@ -11,6 +11,8 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Content.Shared.Clothing;
+using Content.Shared.Humanoid;
+using Robust.Client.GameObjects;
 using Robust.Client.Player;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
@@ -22,7 +24,9 @@ public sealed partial class CharacterVisualisation : BoxContainer
     private readonly IPrototypeManager _prototype;
     private readonly IPlayerManager _player;
     private readonly ClientInventorySystem _inventorySystem;
+    private readonly SpriteSystem _sprite;
     private EntityUid _previewDummy;
+
     private readonly SpriteView? _face;
     private readonly SpriteView? _side;
 
@@ -33,10 +37,10 @@ public sealed partial class CharacterVisualisation : BoxContainer
     public Vector2 SideScale { get; set; } = new Vector2(5f, 5f);
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public bool IsOnlyFace { get; set; } = false;
+    public bool IsOnlyFace { get; set; }
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public bool IsOnlySide { get; set; } = false;
+    public bool IsOnlySide { get; set; }
 
     public CharacterVisualisation()
     {
@@ -46,6 +50,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
         _prototype = IoCManager.Resolve<IPrototypeManager>();
         _player = IoCManager.Resolve<IPlayerManager>();
         _inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
+        _sprite = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SpriteSystem>();
 
         if (IsOnlyFace || !IsOnlySide)
         {
@@ -74,17 +79,8 @@ public sealed partial class CharacterVisualisation : BoxContainer
         _entMan.DeleteEntity(_previewDummy);
     }
 
-    public void SetupCharacterSpriteView(HumanoidCharacterProfile profile, string jobPrototype)
+    private void SetEntity()
     {
-        var appearanceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<HumanoidAppearanceSystem>();
-
-        _entMan.DeleteEntity(_previewDummy);
-
-        _previewDummy = _entMan.SpawnEntity(_prototype.Index(profile.Species).DollPrototype, MapCoordinates.Nullspace);
-        appearanceSystem.LoadProfile(_previewDummy, profile);
-        var realJobPrototype = _prototype.Index<JobPrototype>(jobPrototype);
-        GiveDummyJobClothes(_previewDummy, profile, realJobPrototype);
-
         if (IsOnlyFace && !IsOnlySide)
         {
             _face?.SetEntity(_previewDummy);
@@ -98,6 +94,35 @@ public sealed partial class CharacterVisualisation : BoxContainer
             _face?.SetEntity(_previewDummy);
             _side?.SetEntity(_previewDummy);
         }
+    }
+
+    public void SetupEntitySpriteView(EntityUid target, EntProtoId dollPrototype)
+    {
+        var appearanceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<HumanoidAppearanceSystem>();
+
+        _entMan.DeleteEntity(_previewDummy);
+        _previewDummy = _entMan.SpawnEntity(dollPrototype, MapCoordinates.Nullspace);
+        _entMan.EnsureComponent<HumanoidAppearanceComponent>(_previewDummy);
+        _entMan.EnsureComponent<SpriteComponent>(_previewDummy);
+
+        appearanceSystem.CloneAppearance(target, _previewDummy);
+        _sprite.CopySprite(target, _previewDummy);
+
+        SetEntity();
+    }
+
+    public void SetupCharacterSpriteView(HumanoidCharacterProfile profile, string jobPrototype)
+    {
+        var appearanceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<HumanoidAppearanceSystem>();
+
+        _entMan.DeleteEntity(_previewDummy);
+
+        _previewDummy = _entMan.SpawnEntity(_prototype.Index(profile.Species).DollPrototype, MapCoordinates.Nullspace);
+        appearanceSystem.LoadProfile(_previewDummy, profile);
+        var realJobPrototype = _prototype.Index<JobPrototype>(jobPrototype);
+        GiveDummyJobClothes(_previewDummy, profile, realJobPrototype);
+
+        SetEntity();
     }
 
     private void GiveDummyJobClothes(EntityUid dummy, HumanoidCharacterProfile profile, JobPrototype job)
