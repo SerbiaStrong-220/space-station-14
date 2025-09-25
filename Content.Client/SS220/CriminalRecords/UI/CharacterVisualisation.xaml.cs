@@ -23,8 +23,20 @@ public sealed partial class CharacterVisualisation : BoxContainer
     private readonly IPlayerManager _player;
     private readonly ClientInventorySystem _inventorySystem;
     private EntityUid _previewDummy;
-    private readonly SpriteView _face;
-    private readonly SpriteView _side;
+    private readonly SpriteView? _face;
+    private readonly SpriteView? _side;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public Vector2 FaceScale { get; set; } = new Vector2(5f, 5f);
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public Vector2 SideScale { get; set; } = new Vector2(5f, 5f);
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool IsOnlyFace { get; set; } = false;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool IsOnlySide { get; set; } = false;
 
     public CharacterVisualisation()
     {
@@ -35,17 +47,30 @@ public sealed partial class CharacterVisualisation : BoxContainer
         _player = IoCManager.Resolve<IPlayerManager>();
         _inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
 
-        _face = new SpriteView { Scale = new Vector2(5, 5) };
-        _side = new SpriteView { Scale = new Vector2(5, 5), OverrideDirection = Direction.East };
+        if (IsOnlyFace || !IsOnlySide)
+        {
+            _face = new SpriteView
+            {
+                Scale = FaceScale,
+            };
+            AddChild(_face);
+        }
 
-        AddChild(_face);
-        AddChild(_side);
+        if (IsOnlySide || !IsOnlyFace)
+        {
+            _side = new SpriteView
+            {
+                Scale = SideScale,
+                OverrideDirection = Direction.East,
+            };
+            AddChild(_side);
+        }
     }
 
     public void ResetCharacterSpriteView()
     {
-        _face.SetEntity(null);
-        _side.SetEntity(null);
+        _face?.SetEntity(null);
+        _side?.SetEntity(null);
         _entMan.DeleteEntity(_previewDummy);
     }
 
@@ -60,8 +85,19 @@ public sealed partial class CharacterVisualisation : BoxContainer
         var realJobPrototype = _prototype.Index<JobPrototype>(jobPrototype);
         GiveDummyJobClothes(_previewDummy, profile, realJobPrototype);
 
-        _face.SetEntity(_previewDummy);
-        _side.SetEntity(_previewDummy);
+        if (IsOnlyFace && !IsOnlySide)
+        {
+            _face?.SetEntity(_previewDummy);
+        }
+        else if (IsOnlySide && !IsOnlyFace)
+        {
+            _side?.SetEntity(_previewDummy);
+        }
+        else
+        {
+            _face?.SetEntity(_previewDummy);
+            _side?.SetEntity(_previewDummy);
+        }
     }
 
     private void GiveDummyJobClothes(EntityUid dummy, HumanoidCharacterProfile profile, JobPrototype job)

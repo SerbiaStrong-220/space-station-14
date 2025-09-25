@@ -2,13 +2,20 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client.SS220.SecHudRecords.EUI"
     xmlns:userInterface="clr-namespace:Content.Client.SS220.UserInterface"
+    xmlns:ui="clr-namespace:Content.Client.SS220.CriminalRecords.UI"
     MinSize="400 250"
     Resizable="True">
 
     <BoxContainer Orientation="Vertical" Margin="5">
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
             <BoxContainer Orientation="Vertical" VerticalAlignment="Center" HorizontalExpand="False">
-                <SpriteView Name="SpriteTarget" SetSize="128 128"/>
+                <ui:CharacterVisualisation Margin="10 10"
+                                           Name="RecordSprite"
+                                           HorizontalExpand="True"
+                                           VerticalExpand="True"
+                                           HorizontalAlignment="Center"
+                                           FaceScale="3 3"
+                                           IsOnlyFace="True"/>
             </BoxContainer>
 
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="10 0 0 0">

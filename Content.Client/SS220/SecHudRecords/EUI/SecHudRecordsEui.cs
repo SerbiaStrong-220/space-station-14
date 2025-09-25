@@ -23,6 +23,7 @@ public sealed class SecHudRecordsEui : BaseEui
 
     public override void Opened()
     {
+        base.Opened();
         _menu.OpenCenteredRight();
     }
 
@@ -37,6 +38,7 @@ public sealed class SecHudRecordsEui : BaseEui
         var secHudState = (SecHudRecordsEuiState) state;
         _menu.TargetEntityId = secHudState.TargetNetEntity;
         _menu.FullCatalog = secHudState.FullCatalog;
+        _menu.GeneralRecord = secHudState.Record;
         _menu.PopulatePrototypes();
     }
 }
