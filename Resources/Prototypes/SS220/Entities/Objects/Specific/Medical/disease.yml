@@ -7,7 +7,7 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: Objects/Specific/Medical/mouth_swab.rsi
+    sprite: SS220/Objects/Specific/Medical/mouth_swab.rsi
     layers:
     - state: icon
       map: [ "isUsed" ]
