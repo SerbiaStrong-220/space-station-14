@@ -30,7 +30,10 @@ public abstract partial class SharedLanguageSystem
         List<LanguageNode> nodes = [];
         var defaultLanguage = GetSelectedLanguage(source);
         if (defaultLanguage is null && !_language.TryGetLanguageById(UniversalLanguage, out defaultLanguage))
-            throw new Exception($"\"{UniversalLanguage}\" is invalid universal language id!");
+        {
+            Log.Fatal($"\"{UniversalLanguage}\" is invalid universal language id!");
+            return LanguageMessage.Empty;
+        }
 
         var languageStrings = SplitMessageByLanguages(source, message, defaultLanguage);
         foreach (var (inStringMessage, language) in languageStrings)
@@ -228,6 +231,8 @@ public sealed partial class LanguageMessage
     public string OriginalMessage;
 
     private readonly SharedLanguageSystem _languageSystem;
+
+    public static LanguageMessage Empty => new([], "");
 
     public LanguageMessage(List<LanguageNode> nodes, string originalMessage, SharedLanguageSystem? languageSystem = null)
     {
