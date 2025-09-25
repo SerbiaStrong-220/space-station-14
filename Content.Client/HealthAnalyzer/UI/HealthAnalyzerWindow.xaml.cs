@@ -4,6 +4,7 @@ using Content.Client.Message;
 using Content.Shared.Atmos;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Alert;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -60,8 +61,6 @@ namespace Content.Client.HealthAnalyzer.UI
         {
             // ss220 add reagents to health analyzer start
             ReagentsContainer.DisposeAllChildren();
-            ReagentPanelContainer.Visible = false;
-            ReagentLabelContainer.Visible = false;
             // ss220 add reagents to health analyzer end
 
             var target = _entityManager.GetEntity(msg.TargetEntity);
@@ -76,7 +75,7 @@ namespace Content.Client.HealthAnalyzer.UI
             // ss220 add reagents to health analyzer start
             if (_entityManager.TryGetComponent<SolutionContainerManagerComponent>(target, out var solComp))
             {
-                if (_solSystem.TryGetSolution((target.Value, solComp), "chemicals", out var solutions))
+                if (_solSystem.TryGetSolution((target.Value, solComp), BloodstreamComponent.DefaultChemicalsSolutionName, out var solutions))
                 {
                     foreach (var (reagent, valueReagent) in solutions.Value.Comp.Solution.Contents)
                     {
@@ -98,11 +97,8 @@ namespace Content.Client.HealthAnalyzer.UI
                 }
             }
 
-            if (ReagentsContainer.ChildCount != 0)
-            {
-                ReagentPanelContainer.Visible = true;
-                ReagentLabelContainer.Visible = true;
-            }
+            // ss220 add reagents to health analyzer start
+            ReagentsSection.Visible = ReagentsContainer.ChildCount > 0;
             // ss220 add reagents to health analyzer end
 
             NoPatientDataText.Visible = false;
