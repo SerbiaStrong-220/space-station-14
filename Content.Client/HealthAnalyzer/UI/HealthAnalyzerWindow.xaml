@@ -68,7 +68,6 @@
                 <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
                     <PanelContainer StyleClasses="LowDivider"/>
                     <Label Text="{Loc 'health-analyzer-window-reagents-title'}"
-                           Name="ReagentLabelContainer"
                            HorizontalExpand="True"
                            VerticalAlignment="Top"
                            Margin="0 0 0 2"/>
