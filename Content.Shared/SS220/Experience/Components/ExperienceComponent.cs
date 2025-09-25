@@ -75,7 +75,7 @@ public sealed partial class ExperienceComponent : Component
     /// This mask handles reiniting of experience to correctly process on spawn inits
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
-    public InitGainedExperienceType InitMask = InitGainedExperienceType.NotInitialized;
+    public byte InitMask = (byte)InitGainedExperienceType.NotInitialized;
 }
 
 [Serializable, NetSerializable]
@@ -98,6 +98,7 @@ public sealed partial class SkillTreeExperienceInfo
     /// Defines if current SkillLevel is studied
     /// help differ 2 situation [xx]|[oo] <--> [xx][|oo]
     /// </summary>
+    [DataField]
     public bool SkillStudied = false;
 
     public override string ToString()

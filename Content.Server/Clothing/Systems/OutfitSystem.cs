@@ -87,10 +87,19 @@ public sealed class OutfitSystem : EntitySystem
             if (!_prototypeManager.TryIndex<RoleLoadoutPrototype>(jobProtoId, out var jobProto))
                 break;
 
-            // SS220-ad-after-equip-to-outfit-set-begin
+            // SS220-experience-update-begin
+
+            // SS220-experience-update-end
+            // TODO remove null check before end merge
+            if (job.SkillOnInit is not null)
+            {
+                var skillRoleAddComp = EnsureComp<SkillRoleAddComponent>(target);
+                skillRoleAddComp.SkillAddId = job.SkillOnInit.Value;
+            }
+            // SS220-add-after-equip-to-outfit-set-begin
             foreach (var jobSpecial in job.Special)
                 jobSpecial.AfterEquip(target);
-            // SS220-ad-after-equip-to-outfit-set-end
+            // SS220-add-after-equip-to-outfit-set-end
 
             // Don't require a player, so this works on Urists
             profile ??= EntityManager.TryGetComponent<HumanoidAppearanceComponent>(target, out var comp)

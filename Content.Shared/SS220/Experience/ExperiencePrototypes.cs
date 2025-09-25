@@ -38,6 +38,9 @@ public sealed class SkillTreePrototype : IPrototype
     [DataField(required: true)]
     public List<ProtoId<SkillPrototype>> SkillTree = new();
 
+    [DataField(required: true)]
+    public LocId SkillGroupId;
+
     [DataField]
     public bool CanBeShownOnInit = true;
 }

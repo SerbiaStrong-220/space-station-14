@@ -31,27 +31,8 @@ public sealed partial class ExperienceSystem : EntitySystem
         InitializeGainedExperience();
 
         SubscribeLocalEvent<ExperienceComponent, ComponentInit>(OnComponentInit);
-        // TODO generic <T> version to bypass subscribe errors
-        SubscribeLocalEvent<SkillRoleAddComponent, SkillTreeAddedEvent>(SkillAddOnSkillTreeAdded);
         SubscribeLocalEvent<ExperienceComponent, ComponentShutdown>(OnShutdown);
-
         SubscribeLocalEvent<ExperienceComponent, SkillCheckEvent>(OnSkillCheckEvent);
-    }
-
-    private void SkillAddOnSkillTreeAdded(Entity<SkillRoleAddComponent> entity, ref SkillTreeAddedEvent args)
-    {
-        if (_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto)
-            && skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
-        {
-            args.Info.SkillLevel += infoProto.SkillLevel;
-            args.Info.SkillSublevel += infoProto.SkillSublevel;
-        }
-
-        if (entity.Comp.Skills.TryGetValue(args.SkillTree, out var info))
-        {
-            args.Info.SkillLevel += info.SkillLevel;
-            args.Info.SkillSublevel += info.SkillSublevel;
-        }
     }
 
     private void OnSkillCheckEvent(Entity<ExperienceComponent> entity, ref SkillCheckEvent args)

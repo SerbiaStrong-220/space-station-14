@@ -180,6 +180,17 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         if (!_prototypeManager.TryIndex(job ?? string.Empty, out JobPrototype? prototype))
             return;
 
+        // SS220-experience-update-begin
+        // TODO remove null check before end merge
+        if (prototype.SkillOnInit is not null)
+        {
+            var skillRoleAddComp = EnsureComp<SkillRoleAddComponent>(entity);
+            skillRoleAddComp.SkillAddId = prototype.SkillOnInit.Value;
+        }
+        // SS220-experience-update-end
+        // As a mark - DoJobSpecials should be later to give ability to change this with adding SkillRoleAddComponent
+        // SS220-experience-update-end**2
+
         foreach (var jobSpecial in prototype.Special)
         {
             jobSpecial.AfterEquip(entity);

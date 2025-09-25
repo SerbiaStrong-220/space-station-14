@@ -11,6 +11,9 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         SubscribeLocalEvent<ExperienceComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ExperienceComponent, AfterExperienceInitComponentGained>(OnPlayerMobAfterSpawned);
+
+        // TODO if more this event like will be added make generic <T> version to bypass subscribe errors
+        SubscribeLocalEvent<SkillRoleAddComponent, SkillTreeAddedEvent>(SkillAddOnSkillTreeAdded);
     }
 
     private void OnPlayerMobAfterSpawned(Entity<ExperienceComponent> entity, ref AfterExperienceInitComponentGained args)
@@ -25,7 +28,10 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void InitializeExperienceComp(Entity<ExperienceComponent> entity, InitGainedExperienceType type)
     {
-        if (type < entity.Comp.InitMask)
+        var byteType = (byte)type;
+        // This handles re initing experience if same init event type called again
+        var shiftedType = byteType << 1;
+        if (shiftedType > entity.Comp.InitMask)
         {
             // prevent release client meta
 #if !FULL_RELEASE
@@ -44,6 +50,24 @@ public sealed partial class ExperienceSystem : EntitySystem
             InitExperienceSkillTree(entity, treeProto, false);
         }
 
-        entity.Comp.InitMask |= type;
+        entity.Comp.InitMask |= (byte)byteType;
+    }
+
+    private void SkillAddOnSkillTreeAdded(Entity<SkillRoleAddComponent> entity, ref SkillTreeAddedEvent args)
+    {
+        if (_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto)
+            && skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
+        {
+            args.Info.SkillLevel += infoProto.SkillLevel;
+            args.Info.SkillSublevel += infoProto.SkillSublevel;
+            args.Info.SkillStudied &= infoProto.SkillStudied;
+        }
+
+        if (entity.Comp.Skills.TryGetValue(args.SkillTree, out var info))
+        {
+            args.Info.SkillLevel += info.SkillLevel;
+            args.Info.SkillSublevel += info.SkillSublevel;
+            args.Info.SkillStudied &= info.SkillStudied;
+        }
     }
 }
