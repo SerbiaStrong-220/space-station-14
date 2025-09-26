@@ -117,7 +117,7 @@
   id: JobLawyer
   groups:
   - IAAGlasses #SS220-Two Floppa Iteration
-  - IAAHeadset #SS220-Law Department
+  - LawyerHeadset #SS220-Law Department & SS220 add-iaa-command-key
   - GroupTankHarness
   - LawyerNeck
   - LawyerJumpsuit
@@ -139,6 +139,7 @@
   - ChaplainJumpsuit
   - CommonBackpack
   - ChaplainOuterClothing
+  - ChaplainBible
   - Glasses
   - Survival
   - Trinkets
@@ -389,6 +390,7 @@
   - HeadofSecurityHead
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - HeadofSecurityNeck
+  - SecurityMask #SS220 Security Tactical Gas Mask
   - HeadofSecurityJumpsuit
   - SecurityBackpack
   - SecurityBelt
@@ -406,6 +408,7 @@
   groups:
   - WardenHead
   - SecurityNeck #SS220 holster loadout
+  - SecurityMask #SS220 Security Tactical Gas Mask
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - WardenJumpsuit
   - SecurityBackpack

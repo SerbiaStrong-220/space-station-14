@@ -25,7 +25,7 @@
     anchored: true
     noRot: true
   - type: Sprite
-    sprite: Structures/Power/Generation/Singularity/collector.rsi
+    sprite: SS220/Structures/Power/Generation/Singularity/collector.rsi #SS220 collector sprite fix
     snapCardinals: true
     layers:
       - state: ca_off

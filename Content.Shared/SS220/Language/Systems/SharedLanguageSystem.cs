@@ -1,10 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Ghost;
 using Content.Shared.SS220.Language.Components;
 using Robust.Shared.Random;
 using Content.Shared.Paper;
 using Content.Shared.SS220.Paper;
-using System.Text;
 
 namespace Content.Shared.SS220.Language.Systems;
 
@@ -177,12 +177,10 @@ public abstract partial class SharedLanguageSystem : EntitySystem
         if (!TryComp<LanguageComponent>(uid, out var comp))
         {
             // Энтити без компонента языка всегда говорят на универсальном
-            if (languageId == UniversalLanguage)
-                return true;
-
-            return false;
+            return languageId == UniversalLanguage;
         }
-        else if (comp.KnowAllLLanguages)
+
+        if (comp.KnowAllLanguages)
             return true;
 
         return ContainsLanguage((uid, comp), languageId, true);
@@ -199,7 +197,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
 
         if (!TryComp<LanguageComponent>(uid, out var comp))
             return false;
-        else if (comp.KnowAllLLanguages)
+        else if (comp.KnowAllLanguages)
             return true;
 
         return ContainsLanguage((uid, comp), languageId);
@@ -214,7 +212,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Sets the color of the prototype language to the message 
+    ///     Sets the color of the prototype language to the message
     /// </summary>
     public string SetColor(string message, LanguagePrototype proto)
     {

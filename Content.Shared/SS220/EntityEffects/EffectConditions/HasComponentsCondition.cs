@@ -3,7 +3,6 @@
 using Content.Shared.EntityEffects;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using Serilog;
 
 namespace Content.Shared.SS220.EntityEffects.EffectConditions;
 
@@ -14,10 +13,10 @@ public sealed partial class HasComponentsCondition : EventEntityEffectCondition<
     public string[] Components;
 
     [DataField]
-    public bool RequireAll = false;
+    public bool RequireAll;
 
     [DataField]
-    public bool Inverted = false;
+    public bool Inverted;
 
     public override string GuidebookExplanation(IPrototypeManager prototype)
     {

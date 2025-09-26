@@ -1,0 +1,8 @@
+- type: construction
+  id: randomPosterLegal
+  graph: randomPosterLegal
+  startNode: start
+  targetNode: legalposter
+  category: construction-category-misc
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true

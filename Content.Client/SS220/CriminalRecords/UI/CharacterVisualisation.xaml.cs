@@ -2,8 +2,6 @@
 using System.Numerics;
 using Content.Client.Humanoid;
 using Content.Client.Inventory;
-using Content.Shared.GameTicking;
-using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
@@ -37,8 +35,8 @@ public sealed partial class CharacterVisualisation : BoxContainer
         _player = IoCManager.Resolve<IPlayerManager>();
         _inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
 
-        _face = new SpriteView() { Scale = new Vector2(5, 5) };
-        _side = new SpriteView() { Scale = new Vector2(5, 5), OverrideDirection = Direction.East };
+        _face = new SpriteView { Scale = new Vector2(5, 5) };
+        _side = new SpriteView { Scale = new Vector2(5, 5), OverrideDirection = Direction.East };
 
         AddChild(_face);
         AddChild(_side);
@@ -53,14 +51,14 @@ public sealed partial class CharacterVisualisation : BoxContainer
 
     public void SetupCharacterSpriteView(HumanoidCharacterProfile profile, string jobPrototype, bool onlyFaceSide = false)
     {
-        HumanoidAppearanceSystem appearanceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<HumanoidAppearanceSystem>();
+        var appearanceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<HumanoidAppearanceSystem>();
 
         _entMan.DeleteEntity(_previewDummy);
 
-        _previewDummy = _entMan.SpawnEntity(_prototype.Index<SpeciesPrototype>(profile.Species).DollPrototype, MapCoordinates.Nullspace);
+        _previewDummy = _entMan.SpawnEntity(_prototype.Index(profile.Species).DollPrototype, MapCoordinates.Nullspace);
         appearanceSystem.LoadProfile(_previewDummy, profile);
-        var realjobprototype = _prototype.Index<JobPrototype>(jobPrototype ?? SharedGameTicker.FallbackOverflowJob);
-        GiveDummyJobClothes(_previewDummy, profile, realjobprototype);
+        var realJobPrototype = _prototype.Index<JobPrototype>(jobPrototype);
+        GiveDummyJobClothes(_previewDummy, profile, realJobPrototype);
 
         _face.SetEntity(_previewDummy);
 
@@ -88,9 +86,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
             var itemType = ((IEquipmentLoadout) gear).GetGear(slot.Name);
 
             if (_inventorySystem.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
-            {
                 _entMan.DeleteEntity(unequippedItem.Value);
-            }
 
             if (itemType != string.Empty)
             {
@@ -118,19 +114,18 @@ public sealed partial class CharacterVisualisation : BoxContainer
         {
             foreach (var loadout in loadouts)
             {
-                if (!_prototype.TryIndex(loadout.Prototype, out var loadoutProto) ||
-                    loadoutProto.Equipment == null)
+                if (!_prototype.TryIndex(loadout.Prototype, out var loadoutProto))
                     continue;
 
                 foreach (var slot in slots)
                 {
                     var itemType = ((IEquipmentLoadout) loadoutProto).GetGear(slot.Name);
 
-                    if (itemType != string.Empty)
-                    {
-                        var item = _entMan.SpawnEntity(itemType, MapCoordinates.Nullspace);
-                        _inventorySystem.TryEquip(dummy, item, slot.Name, silent: true, force: true);
-                    }
+                    if (string.IsNullOrEmpty(itemType))
+                        continue;
+
+                    var item = _entMan.SpawnEntity(itemType, MapCoordinates.Nullspace);
+                    _inventorySystem.TryEquip(dummy, item, slot.Name, silent: true, force: true);
                 }
             }
         }

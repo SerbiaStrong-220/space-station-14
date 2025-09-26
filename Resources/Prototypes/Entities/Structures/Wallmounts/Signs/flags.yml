@@ -3,11 +3,8 @@
   id: BaseFlag
   abstract: true
   components:
-  - type: WallMount
-    arc: 360
   - type: Sprite
     snapCardinals: false # SS220 Resprite
-    drawdepth: WallMountedItems
     sprite: Structures/Wallmounts/flags.rsi
 
 - type: entity

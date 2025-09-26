@@ -89,3 +89,6 @@
 
 - files: ["astro.yml]
   authors: VictorBoum, UrPrice, AliceValestray, NightmareStalker, RtmFool, Heidem, Nozychek_, evgen_killred, vatzob
+
+- files: ["nightshift.yml"]
+  authors: VictorBoum, AliceValestray, rtmfool, murraingif, NightmareStalker, Thorofare, PorteRianes, Vnoeg
