@@ -77,8 +77,8 @@
                         </CollapsibleBody>
                     </Collapsible>
                     <BoxContainer MaxHeight="32" HorizontalExpand="True" VerticalAlignment="Top" HorizontalAlignment="Right">
-                        <util220:ConfirmableButton Name="ClearSelection" ConfirmDelayMillisecond="3000" ClicksForConfirm="2"
-                            StyleClasses="ButtonSquare" Access="Public" Text="{Loc admin-logs-clear-selection}"/>
+                        <util220:ConfirmableButton Name="ClearSelection" TimeoutDelayMilliseconds="3000" ClicksForConfirm="2"
+                            StyleClasses="ButtonSquare" Access="Public" DefaultText="{Loc admin-logs-clear-selection}"/>
                         <BoxContainer>
                             <AnimatedTextureRect Name="SelectorModeIndicator" Margin="3 6 3 3"/>
                         </BoxContainer>

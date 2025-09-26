@@ -6,7 +6,6 @@ using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Explosion.Components;
-using Content.Shared.Flash.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -20,7 +19,6 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
-using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
@@ -34,6 +32,8 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.Actions.Components;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.NPC.Prototypes;
 
 namespace Content.Shared.SS220.DarkReaper;
 
@@ -84,6 +84,11 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         SubscribeLocalEvent<DarkReaperComponent, AfterConsumed>(OnAfterConsumed);
     }
 
+    private readonly ProtoId<TagPrototype> _doorBumpOpenerTag = "DoorBumpOpener";
+    private readonly ProtoId<TagPrototype> _hideContextMenuTag = "HideContextMenu";
+    private readonly ProtoId<NpcFactionPrototype> _simpleHostileFraction = "SimpleHostile";
+    private readonly ProtoId<NpcFactionPrototype> _darkReaperPassive = "DarkReaperPassive";
+
     // Action bindings
     private void OnRoflAction(Entity<DarkReaperComponent> ent, ref ReaperRoflEvent args)
     {
@@ -95,7 +100,11 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     private void OnBloodMistAction(Entity<DarkReaperComponent> ent, ref ReaperBloodMistEvent args)
     {
         if (!ent.Comp.PhysicalForm)
+        {
+            _popup.PopupPredictedCursor(Loc.GetString("dark-reaper-cant-use-ability-in-non-physical-form"), ent);
             return;
+        }
+
         args.Handled = true;
         _audio.PlayPredicted(args.BloodMistSound, ent, ent);
         Spawn(args.BloodMistProto, Transform(ent).Coordinates);
@@ -104,7 +113,10 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     private void OnConsumeAction(Entity<DarkReaperComponent> ent, ref ReaperConsumeEvent args)
     {
         if (!ent.Comp.PhysicalForm)
+        {
+            _popup.PopupPredictedCursor(Loc.GetString("dark-reaper-cant-use-ability-in-non-physical-form"), ent);
             return;
+        }
 
         // Only consume dead
         if (!_mobState.IsDead(args.Target))
@@ -157,37 +169,39 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
     private void OnMaterializeAction(Entity<DarkReaperComponent> ent, ref ReaperMaterializeEvent args)
     {
-        DoMaterialize(ent, ent.Comp);
+        DoMaterialize(ent);
     }
 
     private void OnStunAction(Entity<DarkReaperComponent> ent, ref ReaperStunEvent args)
     {
         if (!ent.Comp.PhysicalForm)
+        {
+            _popup.PopupPredictedCursor(Loc.GetString("dark-reaper-cant-use-ability-in-non-physical-form"), ent);
             return;
+        }
 
         args.Handled = true;
-        DoStunAbility(ent, ent.Comp);
+        DoStunAbility(ent);
     }
 
     // Actions
-    protected virtual void DoStunAbility(EntityUid uid, DarkReaperComponent comp)
+    protected virtual void DoStunAbility(Entity<DarkReaperComponent> entity)
     {
-        _audio.PlayPredicted(comp.StunAbilitySound, uid, uid);
-        comp.StunScreamStart = _timing.CurTime;
-        Dirty(uid, comp);
-        _appearance.SetData(uid, DarkReaperVisual.StunEffect, true);
+        _audio.PlayPredicted(entity.Comp.StunAbilitySound, entity, entity);
+        entity.Comp.StunScreamStart = _timing.CurTime;
+        Dirty(entity);
+        _appearance.SetData(entity, DarkReaperVisual.StunEffect, true);
 
-        var entities = _lookup.GetEntitiesInRange(uid, comp.StunAbilityRadius);
-        foreach (var entity in entities)
+        var entitiesNearReaper = _lookup.GetEntitiesInRange(entity, entity.Comp.StunAbilityRadius);
+        foreach (var entityNearReaper in entitiesNearReaper)
         {
-            _stun.TryUpdateParalyzeDuration(entity, comp.StunDuration);
+            _stun.TryUpdateParalyzeDuration(entityNearReaper, entity.Comp.StunDuration);
         }
 
-        var confusedEntities = _lookup.GetEntitiesInRange(uid, comp.StunAbilityConfusion);
-        foreach (var entity in confusedEntities)
+        var confusedEntities = _lookup.GetEntitiesInRange(entity, entity.Comp.StunAbilityConfusion);
+        foreach (var confusedEntity in confusedEntities)
         {
-            if (!_statusEffectsSystem.TryAddStatusEffect<FlashedComponent>(entity, comp.ConfusionEffectName, comp.ConfusionDuration, true))
-                continue;
+            _statusEffectsSystem.TryUpdateStatusEffectDuration(confusedEntity, entity.Comp.ConfusionEffectName, out _, entity.Comp.ConfusionDuration);
         }
     }
 
@@ -196,16 +210,16 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         _audio.PlayPredicted(comp.RolfAbilitySound, uid, uid);
     }
 
-    protected void DoMaterialize(EntityUid uid, DarkReaperComponent comp)
+    protected void DoMaterialize(Entity<DarkReaperComponent> entity)
     {
-        if (!comp.PhysicalForm)
+        if (!entity.Comp.PhysicalForm)
         {
             var doafterArgs = new DoAfterArgs(
                 EntityManager,
-                uid,
+                entity,
                 TimeSpan.FromSeconds(1.25 /* Hand-picked value to match the sound */),
                 new AfterMaterialize(),
-                uid
+                entity
             )
             {
                 Broadcast = false,
@@ -219,18 +233,18 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             var started = _doAfter.TryStartDoAfter(doafterArgs);
             if (started)
             {
-                _physics.SetBodyType(uid, BodyType.Static);
-                _audio.PlayPredicted(comp.PortalOpenSound, uid, uid);
+                _physics.SetBodyType(entity, BodyType.Static);
+                _audio.PlayPredicted(entity.Comp.PortalOpenSound, entity, entity);
             }
         }
         else
         {
             var doafterArgs = new DoAfterArgs(
                 EntityManager,
-                uid,
+                entity,
                 TimeSpan.FromSeconds(4.14 /* Hand-picked value to match the sound */),
                 new AfterDeMaterialize(),
-                uid
+                entity
             )
             {
                 Broadcast = false,
@@ -244,7 +258,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             var started = _doAfter.TryStartDoAfter(doafterArgs);
             if (started)
             {
-                _audio.PlayPredicted(comp.PortalCloseSound, uid, uid);
+                _audio.PlayPredicted(entity.Comp.PortalCloseSound, entity, entity);
             }
         }
     }
@@ -268,7 +282,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
         if (!args.Cancelled)
         {
-            ChangeForm(ent, ent.Comp, true);
+            ChangeForm(ent, true);
             ent.Comp.MaterializedStart = _timing.CurTime;
 
             var cooldownStart = _timing.CurTime;
@@ -278,17 +292,17 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
             if (_net.IsServer)
             {
-                CreatePortal(ent, ent.Comp);
+                CreatePortal(ent);
             }
         }
     }
 
-    protected virtual void CreatePortal(EntityUid uid, DarkReaperComponent comp)
+    protected virtual void CreatePortal(Entity<DarkReaperComponent> entity)
     {
-        if (_prototype.HasIndex<EntityPrototype>(comp.PortalEffectPrototype))
+        if (_prototype.HasIndex<EntityPrototype>(entity.Comp.PortalEffectPrototype))
         {
-            var portalEntity = Spawn(comp.PortalEffectPrototype, Transform(uid).Coordinates);
-            comp.ActivePortal = portalEntity;
+            var portalEntity = Spawn(entity.Comp.PortalEffectPrototype, Transform(entity).Coordinates);
+            entity.Comp.ActivePortal = portalEntity;
         }
     }
 
@@ -299,7 +313,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        ChangeForm(ent, ent.Comp, false);
+        ChangeForm(ent, false);
         _actions.StartUseDelay(ent.Comp.MaterializeActionEntity);
     }
 
@@ -350,7 +364,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
                 if (diff > TimeSpan.Zero)
                     continue;
 
-                ChangeForm(uid, comp, false);
+                ChangeForm((uid, comp), false);
                 _actions.StartUseDelay(comp.MaterializeActionEntity);
             }
             else
@@ -364,7 +378,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     protected virtual void OnCompInit(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
     {
         UpdateStageAppearance(ent, ent.Comp);
-        ChangeForm(ent, ent.Comp, ent.Comp.PhysicalForm);
+        ChangeForm(ent, ent.Comp.PhysicalForm);
 
         _pointLight.SetEnabled(ent, ent.Comp.StunScreamStart.HasValue);
 
@@ -376,16 +390,17 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     {
     }
 
-    public virtual void ChangeForm(EntityUid uid, DarkReaperComponent comp, bool isMaterial)
+    public virtual void ChangeForm(Entity<DarkReaperComponent> entity, bool isMaterial)
     {
+        var (uid, comp) = entity;
         comp.PhysicalForm = isMaterial;
 
         if (TryComp<FixturesComponent>(uid, out var fixturesComp))
         {
             if (fixturesComp.Fixtures.TryGetValue("fix1", out var fixture))
             {
-                var mask = (int) (isMaterial ? CollisionGroup.MobMask : CollisionGroup.GhostImpassable);
-                var layer = (int) (isMaterial ? CollisionGroup.MobLayer : CollisionGroup.None);
+                var mask = (int)(isMaterial ? CollisionGroup.MobMask : CollisionGroup.None);
+                var layer = (int)(isMaterial ? CollisionGroup.MobLayer : CollisionGroup.GhostImpassable);
                 _physics.SetCollisionMask(uid, "fix1", fixture, mask);
                 _physics.SetCollisionLayer(uid, "fix1", fixture, layer);
             }
@@ -399,8 +414,8 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         if (isMaterial)
         {
             EnsureComp<PullerComponent>(uid).NeedsHands = false;
-            _tag.AddTag(uid, "DoorBumpOpener");
-            _tag.RemoveTag(uid, "HideContextMenu");
+            _tag.AddTag(uid, _doorBumpOpenerTag);
+            _tag.RemoveTag(uid, _hideContextMenuTag);
 
             if (TryComp<ExplosionResistanceComponent>(uid, out var explosionResistanceComponent))
                 explosionResistanceComponent.DamageCoefficient = 1f; //full damage
@@ -408,13 +423,13 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
-                _npcFaction.AddFaction(uid, "SimpleHostile");
+                _npcFaction.AddFaction(uid, _simpleHostileFraction);
             }
         }
         else
         {
-            _tag.RemoveTag(uid, "DoorBumpOpener");
-            _tag.AddTag(uid, "HideContextMenu");
+            _tag.RemoveTag(uid, _doorBumpOpenerTag);
+            _tag.AddTag(uid, _hideContextMenuTag);
             comp.StunScreamStart = null;
             comp.MaterializedStart = null;
 
@@ -424,7 +439,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
-                _npcFaction.AddFaction(uid, "DarkReaperPassive");
+                _npcFaction.AddFaction(uid, _darkReaperPassive);
             }
             _appearance.SetData(uid, DarkReaperVisual.StunEffect, false);
 

@@ -28,8 +28,10 @@ jobs:
       if: ${{GITHUB.REF_NAME == 'master' && github.repository == 'SerbiaStrong-220/space-station-14'}}
       run: exit 1
 
-    - name: Install dependencies
-      run: sudo apt-get install -y python3-paramiko python3-lxml
+  # SS220 custom install start
+   # - name: Install dependencies
+   #   run: sudo apt-get install -y python3-paramiko python3-lxml
+  # SS220 custom install end
 
     - uses: actions/checkout@v4.2.2
       with:

@@ -1098,6 +1098,10 @@
     sprite: Clothing/Head/Hats/piratetricord.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/piratetricord.rsi
+  # SS220 add-pirateaccent-tricord-and-coat BEGIN
+  - type: AddAccentClothing
+    accent: PirateAccent
+  # SS220 add-pirateaccent-tricord-and-coat END
 
 - type: entity
   parent: ClothingHeadBase

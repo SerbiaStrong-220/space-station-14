@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.SprayPainter.Prototypes;
 using Content.Shared.Storage;
 using Robust.Client.GameObjects;
@@ -47,6 +48,7 @@ public sealed class EntityStorageVisualizerSystem : VisualizerSystem<EntityStora
                 if (proto.TryGetComponent(out SpriteComponent? sprite, _componentFactory))
                 {
                     SpriteSystem.SetBaseRsi((uid, args.Sprite), sprite.BaseRSI);
+                    SpriteSystem.SetOffset((uid, args.Sprite), sprite.Offset); //SS220-fix-broken-repaint-into-base-plastic
                 }
                 if (proto.TryGetComponent(out EntityStorageVisualsComponent? visuals, _componentFactory))
                 {
@@ -89,7 +91,7 @@ public sealed class EntityStorageVisualizerSystem : VisualizerSystem<EntityStora
 
                 if (comp.StateDoorClosed != null)
                 {
-                    SpriteSystem.LayerSetRsiState((uid, args.Sprite), StorageVisualLayers.Door, comp.StateDoorClosed);
+                    LayerSetRsiState((uid, args.Sprite), StorageVisualLayers.Door, comp.StateDoorClosed); //SS220-fix-broken-repaint-into-base-plastic
                     SpriteSystem.LayerSetVisible((uid, args.Sprite), StorageVisualLayers.Door, true);
                 }
                 else
@@ -102,6 +104,14 @@ public sealed class EntityStorageVisualizerSystem : VisualizerSystem<EntityStora
             }
         }
     }
+
+    //SS220-fix-broken-repaint-into-base-plastic-begin
+    private void LayerSetRsiState(Entity<SpriteComponent?> sprite, Enum key, string state)
+    {
+        if (SpriteSystem.TryGetLayer(sprite, StorageVisualLayers.Door, out var layer, true))
+            SpriteSystem.LayerSetRsiState(layer, state, refresh: true);
+    }
+    //SS220-fix-broken-repaint-into-base-plastic-end
 }
 
 public enum StorageVisualLayers : byte
