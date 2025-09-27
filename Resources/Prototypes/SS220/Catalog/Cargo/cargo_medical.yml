@@ -1,0 +1,10 @@
+- type: cargoProduct
+  id: MedicalDeathRattleImplants
+  icon:
+    sprite: Objects/Specific/Medical/implanter.rsi
+    state: implanter0
+  product: CrateDeathRattleImplants
+  cost: 1500
+  category: cargoproduct-category-name-security
+  group: market
+
