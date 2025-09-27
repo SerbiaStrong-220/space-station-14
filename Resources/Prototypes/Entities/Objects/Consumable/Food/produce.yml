@@ -471,6 +471,18 @@
     slots:
     - HEAD
     quickEquip: false
+  # SS220-grilling-update-2 begin
+  - type: Construction
+    graph: BananaPeelGrilled
+    node: start
+    defaultTarget: banana peel grilled
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    conductivity: 100 # to compensate for density
+    thickness: 0.001
+    area: 0.0225 # ~15x15cm
+  # SS220-grilling-update-2 end
 
 - type: entity
   name: baked banana peel
@@ -501,6 +513,14 @@
     price:
       TrashBananaPeel: 2
   # ss220 clown uplink end
+  #SS220-grilling-update-2 begin
+  - type: Edible
+    requiresSpecialDigestion: true
+  - type: Tag
+    tags:
+    - Cooked
+  #SS220-grilling-update-2 end
+
 
 - type: entity
   name: mimana peel
