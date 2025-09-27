@@ -89,9 +89,9 @@
   description: the inscription "Military Police" on the badge of the vest.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/mpolice_armor.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/mpolice_armor.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/mpolice_armor.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/mpolice_armor.rsi
   - type: Armor
     modifiers:
       coefficients:

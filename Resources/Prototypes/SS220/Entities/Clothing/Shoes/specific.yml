@@ -8,9 +8,9 @@
   description: they go to detention in these shoes.
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Specific/mboots.rsi
+    sprite: SS220/Clothing/Shoes/Boots/mboots.rsi
   - type: Clothing
-    sprite: Clothing/Shoes/Specific/mboots.rsi
+    sprite: SS220/Clothing/Shoes/Boots/mboots.rsi
 
 - type: entity
   parent: ClothingShoesGaloshes
