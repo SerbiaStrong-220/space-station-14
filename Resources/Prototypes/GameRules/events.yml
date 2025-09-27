@@ -513,12 +513,14 @@
     duration: 60
   - type: VentCrittersRule
     entries:
-    - id: MobPurpleSnake
+  #SS220 snake ghost update start here!!!
+    - id: MobPurpleSnakeGhostRole
       prob: 0.02
-    - id: MobSmallPurpleSnake
+    - id: MobSmallPurpleSnakeGhostRole
       prob: 0.02
-    - id: MobCobraSpace
+    - id: MobCobraSpaceGhostRole
       prob: 0.02
+  #SS220 snake ghost update ended here!!!
 
 - type: entity
   id: SpiderSpawn
