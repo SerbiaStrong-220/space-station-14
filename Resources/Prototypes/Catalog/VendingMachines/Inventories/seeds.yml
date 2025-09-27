@@ -2,7 +2,7 @@
   id: MegaSeedServitorInventory
   startingInventory:
     AloeSeeds: 3
-    AmbrosiaVulgarisSeeds: 3
+    #AmbrosiaVulgarisSeeds: 3 #ss220 remove ambrosia from vend
     AppleSeeds: 5
     BananaSeeds: 5
     BerrySeeds: 5
