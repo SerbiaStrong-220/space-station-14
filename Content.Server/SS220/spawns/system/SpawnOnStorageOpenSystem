@@ -1,0 +1,30 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Server.Spawners.Components;
+using Content.Shared.Storage.Components;
+using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+
+namespace Content.Server.Spawners.Systems;
+
+public sealed class SpawnOnStorageOpenSystem : EntitySystem
+{
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<SpawnOnStorageOpenComponent, StorageAfterOpenEvent>(OnStorageOpen);
+    }
+
+    private void OnStorageOpen(EntityUid uid, SpawnOnStorageOpenComponent component, StorageAfterOpenEvent args)
+    {
+        if (component.Triggered)
+            return;
+
+        var coords = Transform(uid).Coordinates;
+
+        component.Triggered = true;
+
+        if (component.RemoveComponentAfterSpawn)
+            RemComp<SpawnOnStorageOpenComponent>(uid);
+    }
+}
