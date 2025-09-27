@@ -1,0 +1,17 @@
+- type: localizedDataset
+  id: NamesKpbFirstMale
+  values:
+    prefix: names-kpb-first-male-dataset-
+    count: 50
+
+- type: localizedDataset
+  id: NamesKpbFirstFemale
+  values:
+    prefix: names-kpb-first-female-dataset-
+    count: 37
+
+- type: localizedDataset
+  id: NamesKpbLast
+  values:
+    prefix: names-kpb-last-dataset-
+    count: 50
