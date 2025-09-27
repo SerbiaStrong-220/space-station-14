@@ -1,0 +1,23 @@
+ <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<ExperienceUiElements:ExperienceTreeContainer
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements">
+    <BoxContainer Name="ContentContainer" Orientation="Horizontal">
+        <BoxContainer Orientation="Vertical">
+            <!-- Info Container  -->
+                <!-- Icon -->
+                <!-- Name -->
+            <!-- Skills Container  -->
+                <!-- Level + onHover -->
+        </BoxContainer>
+        <BoxContainer Orientation="Vertical">
+            <!-- SublevelsContainer -->
+                <!-- Sublevels   -->
+            <!-- Hidable level app button -->
+        </BoxContainer>
+    </BoxContainer>
+</ExperienceUiElements:ExperienceTreeContainer>
