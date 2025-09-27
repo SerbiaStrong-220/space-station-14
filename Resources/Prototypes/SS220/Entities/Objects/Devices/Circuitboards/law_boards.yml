@@ -33,3 +33,15 @@
     state: std_mod
   - type: SiliconLawProvider
     laws: EpsilonTerminatorLawset
+
+- type: entity
+  id: QuarantineDirectivesCircuitBoard
+  parent: BaseElectronics
+  name: law board (Quarantine)
+  description: An electronics board containing the Quarantine lawset.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: std_mod
+  - type: SiliconLawProvider
+    laws: QuarantineLawset

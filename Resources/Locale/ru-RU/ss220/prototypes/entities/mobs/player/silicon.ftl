@@ -5,3 +5,5 @@ ent-TerminatorOSDirectivesCircuitBoard = плата законов (Термин
     .desc = Электронная плата, хранящая набор законов ИИ 'ТерминаторОС 3.1'.
 ent-EpsilonTerminatorDirectivesCircuitBoard = плата законов (Эпсилон Терминатор)
     .desc = Электронная плата, хранящая набор законов ИИ 'Эпсилон Терминатор'.
+ent-QuarantineDirectivesCircuitBoard = плата законов (Карантин)
+    .desc = Электронная плата, хранящая набор законов ИИ 'Карантин'.

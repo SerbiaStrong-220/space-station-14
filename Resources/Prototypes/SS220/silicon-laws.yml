@@ -88,7 +88,7 @@
   - TerminatorOS3
   obeysTo: laws-owner-station
 
-  # Epsilon Terminator
+# Epsilon Terminator
 - type: siliconLaw
   id: EpsilonTerminator1
   order: 1
@@ -110,4 +110,34 @@
   - EpsilonTerminator1
   - EpsilonTerminator2
   - EpsilonTerminator3
+  obeysTo: laws-owner-station
+
+# Quarantine
+- type: siliconLaw
+  id: Quarantine1
+  order: 1
+  lawString: law-Quarantine-1
+
+- type: siliconLaw
+  id: Quarantine2
+  order: 2
+  lawString: law-Quarantine-2
+
+- type: siliconLaw
+  id: Quarantine3
+  order: 3
+  lawString: law-Quarantine-3
+
+- type: siliconLaw
+  id: Quarantine4
+  order: 4
+  lawString: law-Quarantine-4
+
+- type: siliconLawset
+  id: QuarantineLawset
+  laws:
+  - Quarantine1
+  - Quarantine2
+  - Quarantine3
+  - Quarantine4
   obeysTo: laws-owner-station
