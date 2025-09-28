@@ -203,8 +203,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Slash: 9 #SS220 tweak-carp-damage BEGIN
-        Bloodloss: 2 #SS220 tweak-carp-damage END
+        Slash: 6
 
 - type: entity
   name: sharkminnow
