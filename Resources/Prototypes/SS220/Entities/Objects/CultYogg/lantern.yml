@@ -31,6 +31,14 @@
     energy: 2
     netsync: false
   - type: ToggleableLightVisuals
+    spriteLayer: light
+    inhandVisuals:
+      left:
+      - state: inhand-left-light
+        shader: unshaded
+      right:
+      - state: inhand-right-light
+        shader: unshaded
   - type: Appearance
   - type: Physics
     canCollide: false
