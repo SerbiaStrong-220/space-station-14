@@ -62,10 +62,11 @@
   - Salvage
   - Security
   - Brig
-#  - Lawyer #SS220-Law Department
+  - Lawyer #SS220-Law Department
   - Cargo
   - Atmospherics
   - Medical
+  - Paramedic #SS220 PaNfixes
   special:
   - !type:AddComponentSpecial
     components:
@@ -80,6 +81,7 @@
     gloves: ClothingHandsGlovesHop
     ears: ClothingHeadsetAltCommand
     belt: BoxFolderClipboard
+    eyes: ClothingEyesHudCommand
   storage:
     back:
     - Flash
@@ -87,7 +89,7 @@
 - type: chameleonOutfit
   id: HeadOfPersonnelChameleonOutfit
   job: HeadOfPersonnel
-  hasMindShield: true
+# hasMindShield: false #ss220 ChameleonOutfit fix
   equipment:
     head: ClothingHeadHatHopcap
     eyes: ClothingEyesHudCommand

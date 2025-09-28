@@ -45,3 +45,22 @@
     proto: PassengerTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpskirtTurtleAltColorGrey
+
+# Ограничение по времени для пассажира с jumpsuit 220
+- type: loadoutEffectGroup
+  id: PassengerBlueYellowJumpsuitTime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPassenger
+      time: 79200 # 22 часа
+
+# Лодаут на jumpsuit 14 для пассажира
+- type: loadout
+  id: PassengerJumpsuitBlueYellow14
+  equipment:
+    jumpsuit: ClothingUniformBlueYellow14
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: PassengerBlueYellowJumpsuitTime

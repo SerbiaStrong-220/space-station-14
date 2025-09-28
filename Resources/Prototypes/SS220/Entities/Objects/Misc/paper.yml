@@ -217,7 +217,7 @@
   # Командование
 - type: entity
   parent: BoxFolderBaseSS220
-  id: BoxFolderСaptain
+  id: BoxFolderCaptain
   name: папка капитана
   components:
   - type: Sprite

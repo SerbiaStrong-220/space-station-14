@@ -64,7 +64,7 @@
 - type: chameleonOutfit
   id: QuartermasterChameleonOutfit
   job: Quartermaster
-  hasMindShield: true
+# hasMindShield: true #ss220 ChameleonOutfit fix
   equipment:
     head: ClothingHeadHatQMsoft
     eyes: ClothingEyesGlassesSunglasses

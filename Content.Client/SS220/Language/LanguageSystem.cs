@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.GameTicking;
 using Content.Shared.SS220.Language;
 using Content.Shared.SS220.Language.Systems;
@@ -16,7 +17,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     // Не содержит информации о оригинальном сообщении, а лишь то, что видит кукла
     private Dictionary<string, string> KnownPaperNodes = new();
 
-    private List<string> _requestedNodeInfo = new();
+    private readonly List<string> _requestedNodeInfo = new();
 
     public override void Initialize()
     {
@@ -156,7 +157,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     {
         var key = GenerateCacheKey(language.ID, message);
         KnownPaperNodes[key] = message;
-        return $"[{LanguageMsgMarkup}=\"{key}\"]";
+        return $"[{LanguageMsgMarkup}=\"{key}\"/]";
     }
     #endregion
 }

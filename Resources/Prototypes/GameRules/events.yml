@@ -261,6 +261,11 @@
         highSensitiveVisionRadius: 4
         state: half
       # SS220 Ninja Keen-Hearing-end
+      # SS220-add-ninja-thieving-begin
+      - type: Thieving
+        stripTimeReduction: 2
+        stealthy: true
+      # SS220-add-ninja-thieving-end
       - type: NpcFactionMember
         factions:
         - Syndicate
@@ -684,16 +689,21 @@
   components:
   - type: StationEvent
   # SS220 MoreAnonces (sound and alert upgrades) bgn
-    startAnnouncementColor: "#18abf5"
-    startAnnouncement: station-event-ion-storm-start-announcement
-    startAudio:
+    #ss220 tweak ion storm start
+    endAnnouncementColor: "#18abf5"
+    endAnnouncement: station-event-ion-storm-start-announcement
+    endAudio:
       path: /Audio/SS220/Announcements/i-storm1.ogg
       params:
         volume: -4
+    #ss220 tweak ion storm start
   # SS220 MoreAnonces (sound and alert upgrades) end
     weight: 8
     reoccurrenceDelay: 20
-    duration: 1
+    #ss220 tweak ion storm start
+    duration: 900
+    maxDuration: 1200
+    #ss220 tweak ion storm end
   - type: IonStormRule
 
 - type: entity

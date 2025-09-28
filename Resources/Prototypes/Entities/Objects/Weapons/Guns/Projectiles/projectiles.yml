@@ -220,13 +220,46 @@
   - type: Projectile
     damage:
       types:
-        Heat: 5
+        Shock: 1
     soundHit:
       path: "/Audio/Weapons/Guns/Hits/taser_hit.ogg"
     forceSound: true
+  - type: TimedDespawn
+    lifetime: 0.170 # Very short range
   - type: StunOnCollide
-    stunAmount: 1
-    knockdownAmount: 1
+    stunAmount: 0
+    knockdownAmount: 2.5 # Enough to subdue and follow up with a stun batong
+    slowdownAmount: 2.5
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5
+
+- type: entity
+  parent: BulletTaser
+  id: BulletTaserSuper
+  categories: [ HideSpawnMenu ]
+  name: taser bolt
+  description: If you can see this, you've probably been stun-meta'd
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: Structures/Power/Generation/Tesla/energy_miniball.rsi
+    color: "#ffff33"
+    layers:
+    - state: tesla_projectile
+      shader: unshaded
+  - type: PointLight
+    enabled: true
+    color: "#ffff33"
+    radius: 2.0
+    energy: 7.01
+  - type: TimedDespawn
+    lifetime: 1.0 # Not so short range
+  - type: StunOnCollide
+    stunAmount: 5
+    knockdownAmount: 10
+    slowdownAmount: 10
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5
 
 - type: entity
   name : disabler bolt
@@ -465,7 +498,7 @@
       projectile:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.2,-0.2,0.2,0.2"
+          bounds: "-0.05,-0.05,0.05,0.05"
         hard: false
         mask:
         - Opaque
@@ -500,7 +533,7 @@
     impactEffect: BulletImpactEffectKinetic
     damage:
       types:
-        Blunt: 25
+        Blunt: 15
         Structural: 30
   # Short lifespan
   - type: TimedDespawn
@@ -557,8 +590,8 @@
         - MobState
     damage:
       types:
-        Blunt: 20
-        Slash: 5
+        Blunt: 18
+        Slash: 4
   - type: Projectile
     impactEffect: BulletImpactEffectKinetic
     damage:
@@ -567,6 +600,21 @@
   # Short lifespan
   - type: TimedDespawn
     lifetime: 0.4
+
+  # Deals less damage, glaive has better HP recovery
+- type: entity
+  id: BulletChargeGlaive
+  name: leech bolt
+  parent: BulletCharge
+  components:
+  - type: DamageMarkerOnCollide
+    whitelist:
+      components:
+        - MobState
+    damage:
+      types:
+        Blunt: 1
+        Slash: 5
 
 - type: entity
   parent: BaseBullet
@@ -800,6 +848,10 @@
         Blunt: 1
     soundHit:
       path: /Audio/Effects/gen_hit.ogg
+    # SS220 Add projectiles on shuttle nav begin
+    shuttleNavInfo:
+      enabled: true
+    # SS220 Add projectiles on shuttle nav end
   - type: StaminaDamageOnCollide
     damage: 80
 
@@ -819,6 +871,12 @@
     totalIntensity: 150 # a ~2 tile radius
     intensitySlope: 5
     maxIntensity: 10
+    canCreateVacuum: false
+    # SS220 Add projectiles on shuttle nav begin
+  - type: Projectile
+    shuttleNavInfo:
+      enabled: true
+  # SS220 Add projectiles on shuttle nav end
 
 - type: entity
   id: BulletGrenadeFlash
@@ -834,11 +892,13 @@
     range: 7
   - type: SpawnOnTrigger
     proto: GrenadeFlashEffect
-  - type: ActiveTimerTrigger
-    timeRemaining: 0.3
   - type: DeleteOnTrigger
+  # SS220 Add projectiles on shuttle nav begin
+  - type: Projectile
+    shuttleNavInfo:
+      enabled: true
+  # SS220 Add projectiles on shuttle nav end
 
-# This is supposed to spawn shrapnel and stuff so uhh... TODO?
 - type: entity
   id: BulletGrenadeFrag
   name: frag grenade
@@ -852,9 +912,21 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    totalIntensity: 175 # about a ~6 tile radius
+    totalIntensity: 50
     intensitySlope: 1
-    maxIntensity: 10
+    maxIntensity: 5
+    canCreateVacuum: false
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ProjectileGrenade
+    fillPrototype: PelletClusterLessLethal
+    capacity: 30
+  # SS220 Add projectiles on shuttle nav begin
+  - type: Projectile
+    shuttleNavInfo:
+      enabled: true
+  # SS220 Add projectiles on shuttle nav end
 
 - type: entity
   parent: BaseBulletTrigger
@@ -866,8 +938,6 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
     - state: cleanade
-  - type: ActiveTimerTrigger
-    timeRemaining: 0.3
   - type: SmokeOnTrigger
     duration: 3.5
     spreadAmount: 30
@@ -876,7 +946,7 @@
       reagents:
       - ReagentId: SpaceCleaner
         Quantity: 30
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound: /Audio/Items/smoke_grenade_smoke.ogg
   - type: ExplodeOnTrigger
   - type: Explosive
@@ -885,6 +955,11 @@
     intensitySlope: 1
     maxIntensity: 0.01
     tileBreakScale: 0.01
+  # SS220 Add projectiles on shuttle nav begin
+  - type: Projectile
+    shuttleNavInfo:
+      enabled: true
+  # SS220 Add projectiles on shuttle nav end
 
 - type: entity
   id: BulletGrenadeEMP
@@ -906,6 +981,11 @@
     radius: 3.5
     color: blue
     energy: 0.5
+  # SS220 Add projectiles on shuttle nav begin
+  - type: Projectile
+    shuttleNavInfo:
+      enabled: true
+  # SS220 Add projectiles on shuttle nav end
 
 - type: entity
   id: BulletCap
@@ -1238,7 +1318,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 13
+        Heat: 19  #ss220lowTTKUpdate
 
 - type: entity
   name: wide laser barrage
@@ -1272,3 +1352,47 @@
     proto: BulletDisablerSmg
     count: 3 #bit stronger than a disabler if you hit your shots you goober, still not a 2 hit stun though
     spread: 9
+
+# #SS220 Base blaster bullet prototype
+- type: entity
+  name : Bullet bolt
+  id: BaseBlasterBullet
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Reflective
+    reflective:
+    - Energy
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: omnilaser
+      shader: unshaded
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.3,0.15,0.3"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+      fly-by: *flybyfixture
+  - type: Ammo
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlaster
+    damage:
+      types:
+        Heat: 20
+        Piercing: 6
+    soundHit:
+      collection: WeakHit
+    forceSound: true
+# #SS220 Base blaster bullet prototype

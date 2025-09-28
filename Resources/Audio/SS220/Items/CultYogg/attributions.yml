@@ -1,0 +1,14 @@
+- files: ["sound_trapCult_defuse.ogg"]
+  license: "Custom"
+  copyright: "Created by Flouzi for SS220"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/2978"
+
+- files: ["sound_trapCult_hit.ogg"]
+  license: "Custom"
+  copyright: "Created by Flouzi for SS220"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/2978"
+
+- files: ["sound_trapCult_set.ogg"]
+  license: "Custom"
+  copyright: "Created by Flouzi for SS220"
+  source: "https://github.com/SerbiaStrong-220/space-station-14/pull/2978"

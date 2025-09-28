@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseItem]
+  parent: [FoodPizzaBase]
   id: SpicyPizzaSynd
   name: spicy meat pizza
   description: It seems that a whole bottle was poured on this one. Nevertheless, it looks very appetizing.
@@ -26,12 +26,12 @@
           Quantity: 25
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/clusterbangbanana.ogg 
+      path: /Audio/SS220/Effects/Drop/clusterbangbanana.ogg
       params:
         volume: 2
   - type: Sprite
     sprite: Objects/Consumable/Food/Baked/pizza.rsi
-    layers: 
+    layers:
     - state: spicy
   - type: Appearance
   - type: ScatteringGrenade
@@ -140,7 +140,7 @@
     sprite: Objects/Consumable/Food/Baked/pizza.rsi
 
 - type: entity
-  parent: [BaseItem]
+  parent: [FoodPizzaBase]
   id: SpicyPizzaFood
   name: spicy meat pizza
   description: It seems that a whole bottle was poured on this one. Nevertheless, it looks very appetizing.

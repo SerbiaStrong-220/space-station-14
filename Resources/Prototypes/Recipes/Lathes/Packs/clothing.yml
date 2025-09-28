@@ -138,6 +138,10 @@
   - ClothingUniformJumpsuitMime
   - ClothingUniformJumpskirtMime
   - ClothingUniformJumpsuitMusician
+  #ss220 add uniform to printer start
+  - ClothingUniformJumpsuitWaiter
+  - ClothingUniformJumpskirtWaitress
+  #ss220 add uniform to printer end
 
 - type: latheRecipePack
   id: WinterCoats

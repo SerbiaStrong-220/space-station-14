@@ -4,6 +4,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.SoftDelete;
@@ -15,7 +16,6 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.GameObjects;
-using Content.Shared.Popups;
 
 namespace Content.Shared.SS220.CultYogg.Corruption;
 
@@ -44,7 +44,8 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
     private readonly Dictionary<ProtoId<TagPrototype>, CultYoggCorruptedPrototype> _recipiesBySourceTag = [];
     private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
-    private readonly List<(Func<EntityUid, CultYoggCorruptedPrototype?> source, string sourceName)> _recipeSources = new();
+
+    private readonly List<(Func<EntityUid, CultYoggCorruptedPrototype?> source, string sourceName)> _recipeSources = [];//ToDo_SS220 Remake this into 1 generated list "proto_source"->"proto_result"
 
     public override void Initialize()
     {
@@ -158,7 +159,7 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
         {
             Broadcast = false,
             BreakOnDamage = true,
-            BreakOnMove = true,
+            BreakOnMove = false,
             NeedHand = true,
             BlockDuplicate = true,
             CancelDuplicate = true,
@@ -211,7 +212,8 @@ public sealed class SharedCultYoggCorruptedSystem : EntitySystem
             corruption = sourceFunc(uid);
             if (corruption is null)
                 continue;
-            Log.Debug("Founded corruption recipe {0} for {1} via {2}", corruption.ID, ToPrettyString(uid), sourceName);
+
+            Log.Debug($"Founded corruption recipe {corruption.ID} for {ToPrettyString(uid)} via {sourceName}");
             return true;
         }
         return false;

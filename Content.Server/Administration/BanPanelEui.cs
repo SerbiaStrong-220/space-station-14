@@ -1,5 +1,3 @@
-using System.Net;
-using System.Net.Sockets;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.Chat.Managers;
@@ -7,9 +5,12 @@ using Content.Server.EUI;
 using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Eui;
+using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Roles;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using System.Net;
+using System.Net.Sockets;
 
 namespace Content.Server.Administration;
 
@@ -52,7 +53,7 @@ public sealed class BanPanelEui : BaseEui
         switch (msg)
         {
             case BanPanelEuiStateMsg.CreateBanRequest r:
-                BanPlayer(r.Player, r.IpAddress, r.UseLastIp, r.Hwid, r.UseLastHwid, r.Minutes, r.Severity, r.StatedRound, r.Reason, r.Roles, r.Erase, r.PostBanInfo);
+                BanPlayer(r.Player, r.IpAddress, r.UseLastIp, r.Hwid, r.UseLastHwid, r.Minutes, r.Severity, r.StatedRound, r.Reason, r.Roles, /* SS220 Species bans */ r.Species, r.Erase, r.PostBanInfo);
                 break;
             case BanPanelEuiStateMsg.GetPlayerInfoRequest r:
                 ChangePlayer(r.PlayerUsername);
@@ -60,7 +61,7 @@ public sealed class BanPanelEui : BaseEui
         }
     }
 
-    private async void BanPlayer(string? target, string? ipAddressString, bool useLastIp, ImmutableTypedHwid? hwid, bool useLastHwid, uint minutes, NoteSeverity severity, int statedRound, string reason, IReadOnlyCollection<string>? roles, bool erase, bool postBanInfo)
+    private async void BanPlayer(string? target, string? ipAddressString, bool useLastIp, ImmutableTypedHwid? hwid, bool useLastHwid, uint minutes, NoteSeverity severity, int statedRound, string reason, IReadOnlyCollection<string>? roles, /* SS220 Species bans */ string[]? species, bool erase, bool postBanInfo)
     {
         if (!_admins.HasAdminFlag(Player, AdminFlags.Ban))
         {
@@ -124,7 +125,8 @@ public sealed class BanPanelEui : BaseEui
             var now = DateTimeOffset.UtcNow;
             foreach (var role in roles)
             {
-                if (_prototypeManager.HasIndex<JobPrototype>(role))
+                if (_prototypeManager.HasIndex<JobPrototype>(role) ||
+                    _prototypeManager.HasIndex<AntagPrototype>(role)) // SS220 antag bans
                 {
                     _banManager.CreateRoleBan(targetUid, target, Player.UserId, addressRange, targetHWid, role, minutes, severity, reason, now, postBanInfo);
                 }
@@ -137,6 +139,23 @@ public sealed class BanPanelEui : BaseEui
             Close();
             return;
         }
+
+        // SS220 Species bans begin
+        if (species?.Length > 0)
+        {
+            var now = DateTimeOffset.UtcNow;
+            foreach (var speciesId in species)
+            {
+                if (_prototypeManager.HasIndex<SpeciesPrototype>(speciesId))
+                    _banManager.CreateSpeciesBan(targetUid, target, Player.UserId, addressRange, targetHWid, speciesId, minutes, severity, reason, now, postBanInfo);
+                else
+                    _sawmill.Warning($"{Player.Name} ({Player.UserId}) tried to issue a species ban with an invalid speciesId: {speciesId}");
+            }
+
+            Close();
+            return;
+        }
+        // SS220 Species bans end
 
         if (erase &&
             targetUid != null)

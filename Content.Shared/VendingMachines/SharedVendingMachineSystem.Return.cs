@@ -7,7 +7,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.VendingMachines;
 
@@ -17,7 +16,6 @@ public abstract partial class SharedVendingMachineSystem
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     private void ReturnInitialize()
     {
@@ -26,7 +24,7 @@ public abstract partial class SharedVendingMachineSystem
 
     private void HandleAfterInteractUsing(Entity<VendingMachineComponent> entity, ref AfterInteractUsingEvent args)
     {
-        if (!_gameTiming.IsFirstTimePredicted)
+        if (!Timing.IsFirstTimePredicted)
             return;
 
         if (args.Handled || !args.CanReach)

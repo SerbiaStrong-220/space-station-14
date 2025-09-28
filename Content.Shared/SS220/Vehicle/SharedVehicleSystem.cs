@@ -169,10 +169,12 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             _actionsSystem.AddAction(args.Buckle, ref flashlight.ToggleActionEntity, flashlight.ToggleAction, uid, actions);
         }
 
-        if (component.HornSound != null)
-        {
-            _actionsSystem.AddAction(args.Buckle, ref component.HornActionEntity, component.HornAction, uid, actions);
-        }
+        // remove vehicle begin
+        //if (component.HornSound != null)
+        //{
+        //    _actionsSystem.AddAction(args.Buckle, ref component.HornActionEntity, component.HornAction, uid, actions);
+        //}
+        // remove vehicle end
 
         _joints.ClearJoints(args.Buckle);
 
@@ -199,9 +201,14 @@ public abstract partial class SharedVehicleSystem : EntitySystem
     /// </summary>
     private void OnEntInserted(EntityUid uid, VehicleComponent component, EntInsertedIntoContainerMessage args)
     {
-        if (args.Container.ID != KeySlot ||
-            !_tagSystem.HasTag(args.Entity, "VehicleKey"))
+        // remove vehicle begin
+        //if (args.Container.ID != KeySlot ||
+        //    !_tagSystem.HasTag(args.Entity, "VehicleKey"))
+        //    return;
+
+        if (args.Container.ID != KeySlot)
             return;
+        // remove vehicle end
 
         // Enable vehicle
         var inVehicle = EnsureComp<InVehicleComponent>(args.Entity);

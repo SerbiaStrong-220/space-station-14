@@ -10,7 +10,6 @@
     noRot: true
     sprite: SS220/Structures/CultYogg/yoggpod.rsi
     state: yoggpod
-    map: ["base"]
   - type: Icon
     sprite: SS220/Structures/CultYogg/yoggpod.rsi
     state: yoggpod
@@ -44,8 +43,8 @@
         Asphyxiation: -10
         Bloodloss: -2.5
         Radiation: -2.5
-        Сerebral: -50
-        Сellular: -10
+        Cerebral: -50
+        Cellular: -10
         Caustic: -5
         Poison: -1
   - type: CultYoggBuilding
@@ -65,6 +64,8 @@
         density: 60
         mask:
         - MachineMask
+        layer:
+        - InteractImpassable
   - type: GenericVisualizer
     visuals:
       enum.CultPodVisuals.Inserted:
