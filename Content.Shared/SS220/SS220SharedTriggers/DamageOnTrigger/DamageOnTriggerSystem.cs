@@ -1,17 +1,22 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Administration.Logs;
 using Content.Shared.Damage;
+using Content.Shared.Database;
 using Content.Shared.SS220.SS220SharedTriggers.Events;
+using Content.Shared.Trigger.Components.Effects;
 
 namespace Content.Shared.SS220.SS220SharedTriggers.DamageOnTrigger;
 
+// TODO-SS220 move to wizden system
 /// <summary>
 /// This handles deals damage when triggered
 /// </summary>
 public sealed class DamageOnTriggerSystem : EntitySystem
 {
-
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -27,5 +32,11 @@ public sealed class DamageOnTriggerSystem : EntitySystem
             return;
 
         _damageableSystem.TryChangeDamage(args.Activator, ent.Comp.Damage, true);
+
+        if (ent.Comp.Log)
+        {
+            _adminLogger.Add(LogType.Action, LogImpact.Medium,
+                        $"{ToPrettyString(ent.Owner)} damaged {ToPrettyString(args.Activator.Value):entity} for {ent.Comp.Damage.GetTotal()}");
+        }
     }
 }

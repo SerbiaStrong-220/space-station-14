@@ -1,7 +1,4 @@
 material-tokl = ток'л
-steel = сталь
-glass = стекло
-rods = металлические стержни
 
 stack-blood-salve-ebent = кровоостанавливающая мазь
 

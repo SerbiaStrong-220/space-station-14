@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.Stylesheets;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
@@ -53,13 +54,13 @@ public sealed partial class PictureViewerControls : BoxContainer
             Margin = new Thickness(5f, 5f)
         });
 
-        _recenterButton.OnPressed += (BaseButton.ButtonEventArgs _) =>
+        _recenterButton.OnPressed += _ =>
         {
             _viewer?.Recenter();
         };
     }
 
-    override protected void Draw(DrawingHandleScreen handle)
+    protected override void Draw(DrawingHandleScreen handle)
     {
         UpdateAll();
     }

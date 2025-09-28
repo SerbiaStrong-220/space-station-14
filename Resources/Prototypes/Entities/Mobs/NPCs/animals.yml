@@ -1,6 +1,6 @@
 - type: entity
   name: bat
-  parent: [ SimpleMobBase, FlyingMobBase, MobCombat ]
+  parent: [ SimpleMobBase, FlyingMobBase, MobCombat, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobBat
   description: Some cultures find them terrifying, others crunchy on the teeth.
   components:
@@ -81,7 +81,7 @@
 
 - type: entity
   name: bee
-  parent: [ SimpleMobBase, FlyingMobBase ]
+  parent: [ SimpleMobBase, FlyingMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobBee
   description: Nice to have, but you can't build a civilization on a foundation of honey alone.
   components:
@@ -113,6 +113,7 @@
       10: Dead
   - type: Stamina
     critThreshold: 10
+    animationThreshold: 1
   - type: DamageStateVisuals
     states:
       Alive:
@@ -342,7 +343,7 @@
 
 - type: entity # TODO: figure out how to make these guys gib when stepped on
   name: cockroach
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobCockroach
   description: This station is just crawling with bugs.
   components:
@@ -768,7 +769,7 @@
 
 - type: entity
   name: butterfly
-  parent: [ SimpleMobBase, FlyingMobBase ]
+  parent: [ SimpleMobBase, FlyingMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobButterfly
   description: Despite popular misconceptions, it's not actually made of butter.
   components:
@@ -1053,10 +1054,10 @@
     growthDelay: 20
   - type: ExaminableHunger
   - type: Wooly
-  - type: Food
+  - type: Edible
+    destroyOnEmpty: false
     solution: wool
     requiresSpecialDigestion: true
-    # Wooly prevents eating wool deleting the goat so its fine
     requireDead: false
   - type: FlavorProfile
     flavors:
@@ -1460,6 +1461,7 @@
       methods: [ Touch ]
       effects:
       - !type:WashCreamPieReaction
+  - type: Crawler
 
 
 
@@ -1476,8 +1478,20 @@
     availableLanguages:
     - id: Monkey
       canSpeak: true
+    - id: Galactic
+      canSpeak: false
     - id: Reptilian
       canSpeak: false
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
 #SS220 Animalistic languages end
   - type: Speech
     speechSounds: Monkey
@@ -1500,6 +1514,9 @@
         Piercing: 4
       groups:
         Burn: 3
+    catchingFailDamage:
+      types:
+        Blunt: 1
     clumsySound:
       path: /Audio/Animals/monkey_scream.ogg
 
@@ -1520,6 +1537,18 @@
       canSpeak: true
     - id: Reptilian
       canSpeak: false
+  #SS220 Animalistic languages fix begin
+    - id: Galactic
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
 #SS220 Animalistic languages end
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
@@ -1581,6 +1610,16 @@
     availableLanguages:
     - id: Reptilian
       canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
 #SS220 Animalistic Languages end
   - type: Speech
     speechSounds: Lizard
@@ -1696,6 +1735,9 @@
         Piercing: 7
       groups:
         Burn: 3
+    catchingFailDamage:
+      types:
+        Blunt: 1
     clumsySound:
       path: /Audio/Voice/Reptilian/reptilian_scream.ogg
 
@@ -1709,6 +1751,24 @@
       0: Alive
       100: Critical
       200: Dead
+#SS220 Animalistic languages fixes begin
+  - type: Language
+    availableLanguages:
+    - id: Reptilian
+      canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -1742,7 +1802,7 @@
 
 - type: entity
   name: mouse
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobMouse
   description: Squeak!
   components:
@@ -1762,6 +1822,8 @@
     - id: Reptilian
       canSpeak: false
     - id: Monkey
+      canSpeak: false
+    - id: Piggish
       canSpeak: false
 #SS220 Animalistic Languages end
   - type: GhostRole
@@ -2127,7 +2189,7 @@
 
 - type: entity
   name: slug
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobSlug
   description: And they called this a lizard?
   components:
@@ -2174,7 +2236,7 @@
 
 - type: entity
   name: frog
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobFrog
   description: Hop hop hop. Lookin' moist.
   components:
@@ -2242,9 +2304,10 @@
 
 # Would be cool to have some functionality for the parrot to be able to sit on stuff
 - type: entity
+  parent: [ SimpleMobBase, FlyingMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
+  id: MobParrotBase
   name: parrot
-  parent: [ SimpleMobBase, FlyingMobBase ]
-  id: MobParrot
+  abstract: true
   description: Infiltrates your domain, spies on you, and somehow still a cool pet.
   components:
   - type: MovementSpeedModifier
@@ -2255,7 +2318,7 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: parrot
-      sprite: Mobs/Animals/parrot.rsi
+      sprite: Mobs/Animals/parrot/parrot.rsi
   - type: Fixtures
     fixtures:
       fix1:
@@ -2285,7 +2348,29 @@
   - type: Vocal
     sounds:
       Unsexed: Parrot
-  - type: ParrotAccent
+  - type: ActiveListener
+  - type: Vocalizer
+  - type: RadioVocalizer
+  - type: ParrotListener
+  - type: ParrotMemory
+  - type: Inventory
+    templateId: parrot
+    speciesId: parrot
+    # transparent displacement map to hide the headset. this should be an animated displacement map to follow the parrot
+    # as it bobs up and down, but this in turn needs some way to change the displacement map on inventory entities when
+    # the parrot dies, otherwise the visuals will be broken
+    displacements:
+      ears:
+        sizeMaps:
+          32:
+            sprite: Mobs/Animals/parrot/displacement.rsi
+            state: ears
+  - type: InventorySlots
+  - type: Strippable
+  - type: UserInterface
+    interfaces:
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
   - type: InteractionPopup
     successChance: 0.6
     interactSuccessString: petting-success-bird
@@ -2297,6 +2382,12 @@
     bloodMaxVolume: 50
   - type: TTS # Corvax-TTS
     voice: ziggs
+
+- type: entity
+  parent: MobParrotBase
+  id: MobParrot
+  components:
+  - type: ParrotAccent # regular parrots have a parrotaccent. Polly is special and does not
 
 - type: entity
   name: penguin
@@ -2359,6 +2450,7 @@
       types:
         Heat : 0.2 #per second, scales with temperature & other constants
 
+# TODO: Make grenade penguin voice activated like the rest of the stealth items.
 - type: entity
   name: grenade penguin
   parent: [ MobPenguin, MobCombat]
@@ -2410,7 +2502,8 @@
   - type: Item
     size: Normal
     sprite: Mobs/Animals/grenadepenguin.rsi
-  - type: OnUseTimerTrigger
+  - type: TriggerOnUse
+  - type: TimerTrigger
     delay: 10
     beepSound:
       path: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg #funny sfx use
@@ -2423,6 +2516,8 @@
     intensitySlope: 20
     totalIntensity: 225
   - type: ExplodeOnTrigger
+    keysIn:
+    - timer
   - type: Destructible
     thresholds:
     - trigger:
@@ -2902,6 +2997,7 @@
   - type: HTN
     rootTask:
       task: RuminantHostileCompound
+  - type: MessyDrinker
   - type: Tag
     tags:
     - VimPilot
@@ -2948,6 +3044,7 @@
       gender: epicene
   - type: MobPrice
     price: 200
+  - type: MessyDrinker
 
 - type: entity
   parent: MobCorgiBase
@@ -3078,6 +3175,18 @@
     availableLanguages:
     - id: Feline
       canSpeak: true
+    - id: Doggish
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
     - id: Galactic
       canSpeak: false
 #SS220 Animalistic Languages end
@@ -3120,8 +3229,8 @@
     spawned:
     - id: FoodMeat
       amount: 3
-  - type: ReplacementAccent
-    accent: cat
+  # - type: ReplacementAccent
+  #   accent: cat
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-cat
@@ -3222,6 +3331,10 @@
   - type: NpcFactionMember
     factions:
     - Syndicate
+  - type: Access
+    tags:
+    - NuclearOperative
+    - SyndicateAgent
   - type: MeleeWeapon
     altDisarm: false
     angle: 0
@@ -3394,8 +3507,7 @@
   - type: Grammar
     attributes:
       gender: epicene
-  - type: ReplacementAccent
-    accent: sloth
+  - type: SlowAccent
   - type: Tag
     tags:
     - VimPilot
@@ -3458,7 +3570,7 @@
 
 - type: entity
   name: hamster
-  parent: [ SimpleMobBase, MobCombat, StripableInventoryBase]
+  parent: [ SimpleMobBase, MobCombat, StripableInventoryBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobHamster
   description: A cute, fluffy, robust hamster.
   components:
@@ -3469,6 +3581,22 @@
     name: ghost-role-information-hamster-name
     description: ghost-role-information-hamster-description
     rules: ghost-role-information-nonantagonist-rules
+    #SS220 Animalistic languages fix begin
+  - type: Language
+    availableLanguages:
+    - id: Mousey
+      canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: GhostTakeoverAvailable
   - type: Speech
     speechVerb: SmallMob
@@ -3552,8 +3680,10 @@
     spawned:
     - id: FoodMeat
       amount: 1
-  - type: ReplacementAccent
-    accent: mouse
+  #SS220 Animalistic languages fix begin
+  # - type: ReplacementAccent
+  #   accent: mouse
+  #SS220 Animalistic languages fix end
   - type: Tag
     tags:
     - VimPilot
@@ -3903,13 +4033,18 @@
       belt:
         sizeMaps:
           32:
-            sprite: Mobs/Pets/corgi.rsi
-            state: belt_displacement
+            sprite: Mobs/Pets/displacements.rsi
+            state: corgi_belt_displacement
       ears:
         sizeMaps:
           32:
-            sprite: Mobs/Pets/corgi.rsi
-            state: belt_displacement
+            sprite: Mobs/Pets/displacements.rsi
+            state: corgi_belt_displacement
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Pets/displacements.rsi
+            state: corgi_head_displacement
   - type: Hands # HANDS!
   - type: Puller
   - type: Cuffable # bad dog!
@@ -3934,3 +4069,6 @@
   - type: StatusIcon # marks them as crew
     bounds: -0.5,-0.5,0.5,0.5
   - type: Blindable #SS220 Fix Ancestor Mob Blindable
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen

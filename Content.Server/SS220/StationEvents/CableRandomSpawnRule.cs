@@ -20,9 +20,7 @@ public sealed class CableRandomSpawnRule : StationEventSystem<CableRandomSpawnRu
         base.Started(uid, component, gameRule, args);
 
         if (!TryGetRandomStation(out var station))
-        {
             return;
-        }
 
         var locations = EntityQueryEnumerator<CableComponent, TransformComponent>();
         var validLocations = new List<EntityCoordinates>();
@@ -39,9 +37,7 @@ public sealed class CableRandomSpawnRule : StationEventSystem<CableRandomSpawnRu
         }
 
         if (component.SpecialEntries.Count == 0 || validLocations.Count == 0)
-        {
             return;
-        }
 
         // guaranteed spawn
         var specialEntry = RobustRandom.Pick(component.SpecialEntries);

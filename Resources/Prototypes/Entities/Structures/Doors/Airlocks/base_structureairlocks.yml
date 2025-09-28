@@ -117,6 +117,10 @@
   - type: DeviceLinkSource
     ports:
       - DoorStatus
+      # ss220 add open/close ports to door start
+      - DoorOpened
+      - DoorClosed
+      # ss220 add open/close ports to door end
     lastSignals:
       DoorStatus: false
   - type: SoundOnOverload
@@ -130,6 +134,9 @@
   - type: Airtight
     noAirWhenFullyAirBlocked: false
   #ss220 airlock visuals fix start
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
   - type: AirlockVisuals
   #ss220 airlock visuals fix end
   - type: RadiationBlocker
@@ -161,12 +168,8 @@
     - board
   - type: PlacementReplacement
     key: walls
-  - type: IconSmooth
-    key: walls
-    mode: NoSprite
-  - type: PaintableAirlock
-    group: Standard
-    department: Civilian
+  - type: Paintable
+    group: AirlockStandard
   - type: StaticPrice
     price: 180 # SS220 Zones-Cargo-reb-test-fix
   - type: LightningTarget
@@ -227,8 +230,8 @@
   - type: Construction
     graph: Airlock
     node: glassAirlock
-  - type: PaintableAirlock
-    group: Glass
+  - type: Paintable
+    group: AirlockGlass
   - type: RadiationBlocker
     resistance: 2
   - type: Tag

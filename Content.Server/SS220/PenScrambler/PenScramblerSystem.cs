@@ -70,7 +70,7 @@ public sealed class PenScramblerSystem : EntitySystem
         }
     }
 
-    EntityUid? CloneToNullspace(Entity<PenScramblerComponent> ent, EntityUid target)
+    private EntityUid? CloneToNullspace(EntityUid target)
     {
         if (!TryComp<HumanoidAppearanceComponent>(target, out var humanoid)
             || !_prototype.TryIndex(humanoid.Species, out var speciesPrototype)
@@ -109,7 +109,7 @@ public sealed class PenScramblerSystem : EntitySystem
 
         // Create a nullspace clone of the target to copy from later
         // so we get an expected result even if target gets DNA scrambled / gibbed
-        EntityUid? mob = CloneToNullspace(ent, target);
+        var mob = CloneToNullspace(target);
 
         if (mob == null)
             return;

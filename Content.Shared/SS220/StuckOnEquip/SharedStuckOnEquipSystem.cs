@@ -24,6 +24,7 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
         SubscribeLocalEvent<StuckOnEquipComponent, GotEquippedHandEvent>(GotPickuped);
         SubscribeLocalEvent<MobStateChangedEvent>(OnDeath);
     }
+
     private void OnRemoveAttempt(Entity<StuckOnEquipComponent> ent, ref ContainerGettingRemovedAttemptEvent args)
     {
         if (!ent.Comp.IsStuck)
@@ -31,6 +32,7 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
 
         args.Cancel();
     }
+
     private void GotPickuped(Entity<StuckOnEquipComponent> ent, ref GotEquippedHandEvent args)
     {
         if (_adminManager.IsAdmin(args.User))

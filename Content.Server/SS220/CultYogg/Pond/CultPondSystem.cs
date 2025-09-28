@@ -2,9 +2,7 @@
 
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
-using Content.Shared.Nutrition.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -76,7 +74,7 @@ public sealed class CultPondSystem : EntitySystem
                 continue;
 
             var realTransferAmount =
-                FixedPoint2.Min(pondComp.AmmountToAdd, solution.AvailableVolume);
+                FixedPoint2.Min(pondComp.AmountToAdd, solution.AvailableVolume);
 
             solution.AddReagent(pondComp.Reagent.Value.Reagent, realTransferAmount);
 

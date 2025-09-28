@@ -1,9 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Speech;
+using Content.Server.SS220.MindSlave.DisfunctionComponents;
+using Content.Shared.Speech;
 using Robust.Shared.Random;
 
-namespace Content.Server.SS220.MindSlave.DisfunctionComponents;
+namespace Content.Server.SS220.MindSlave.DisfunctionSystems;
 
 public sealed class MindSlaveDisfunctionAccentSystem : EntitySystem
 {

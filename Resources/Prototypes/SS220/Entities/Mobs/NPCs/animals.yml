@@ -261,8 +261,8 @@
       id: blinking
       interpolate: Nearest
       maxDuration: 0.5
-      minValue: 0.05
-      maxValue: 1.0
+      startValue: 0.05
+      endValue: 1.0
       isLooped: true
   - type: ToggleableLightVisuals
   - type: PointLight
@@ -273,6 +273,7 @@
     radius: 2
     netsync: false
   - type: Language
+    selectedLanguage: Binary
     availableLanguages:
     - id: Galactic
       canSpeak: false

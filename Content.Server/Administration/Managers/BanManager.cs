@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 using Content.Server.Chat.Managers;
 using Content.Server.Database;
 using Content.Server.GameTicking;
+using Content.Server.SS220.Database;
 using Content.Server.SS220.Discord;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
+using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Players;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Players;
 using Robust.Server.Player;
 using Robust.Shared.Asynchronous;
 using Robust.Shared.Collections;
@@ -51,9 +54,12 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
     // Cached ban exemption flags are used to handle
     private readonly Dictionary<ICommonSession, ServerBanExemptFlags> _cachedBanExemptions = new();
 
+    private readonly Dictionary<ICommonSession, List<ServerSpeciesBanDef>> _cachedSpeciesBans = []; // SS220 Species bans
+
     public void Initialize()
     {
         _netManager.RegisterNetMessage<MsgRoleBans>();
+        _netManager.RegisterNetMessage<MsgSpeciesBans>(); // SS220 Species bans
 
         _db.SubscribeToJsonNotification<BanNotificationData>(
             _taskManager,
@@ -74,6 +80,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         ImmutableArray<byte>? hwId = netChannel.UserData.HWId.Length == 0 ? null : netChannel.UserData.HWId;
         var modernHwids = netChannel.UserData.ModernHWIds;
         var roleBans = await _db.GetServerRoleBansAsync(netChannel.RemoteEndPoint.Address, player.UserId, hwId, modernHwids, false);
+        var speciesBans = await _db.GetServerSpeciesBansAsync(netChannel.RemoteEndPoint.Address, player.UserId, hwId, modernHwids, false); // SS220 Species bans
 
         var userRoleBans = new List<ServerRoleBanDef>();
         foreach (var ban in roleBans)
@@ -84,8 +91,10 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         cancel.ThrowIfCancellationRequested();
         _cachedBanExemptions[player] = flags;
         _cachedRoleBans[player] = userRoleBans;
+        _cachedSpeciesBans[player] = [.. speciesBans]; // SS220 Species bans
 
         SendRoleBans(player);
+        SendSpeciesBans(player); // SS220 Species bans
     }
 
     private void ClearPlayerData(ICommonSession player)
@@ -137,7 +146,27 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         {
             roleBans.RemoveAll(ban => DateTimeOffset.Now > ban.ExpirationTime);
         }
+
+        SpeciesBansRestart(); // SS220 Species bans
     }
+
+    // SS220 Species bans begin
+    private void SpeciesBansRestart()
+    {
+        foreach (var (player, bans) in _cachedSpeciesBans.ToDictionary())
+        {
+            // Clear out players that have disconnected.
+            if (player.Status is SessionStatus.Disconnected)
+            {
+                _cachedSpeciesBans.Remove(player);
+                continue;
+            }
+
+            // Check for expired bans
+            bans.RemoveAll(ban => DateTimeOffset.Now > ban.ExpirationTime);
+        }
+    }
+    // SS220 Species bans end
 
     #region Server Bans
     public async void CreateServerBan(NetUserId? target, string? targetUsername, NetUserId? banningAdmin, (IPAddress, int)? addressRange, ImmutableTypedHwid? hwid, uint? minutes, NoteSeverity severity, string? banningAdminName, int statedRound, string reason, bool postBanInfo)
@@ -238,7 +267,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
     private void KickForBanDef(ICommonSession player, ServerBanDef def)
     {
-        var message = def.FormatBanMessage(_cfg, _localizationManager);
+        var message = def.FormatBanMessage(_cfg, _localizationManager, player.Name); // SS220-ad-login-into-ban-screen
         player.Channel.Disconnect(message);
     }
 
@@ -353,6 +382,146 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             .ToHashSet();
     }
     #endregion
+
+    // SS220 Species bans begin
+    #region Species ban
+    private async Task<ServerSpeciesBanDef> AddSpeciesBan(ServerSpeciesBanDef banDef)
+    {
+        banDef = await _db.AddServerSpeciesBanAsync(banDef);
+
+        if (banDef.UserId != null
+            && _playerManager.TryGetSessionById(banDef.UserId, out var player)
+            && _cachedSpeciesBans.TryGetValue(player, out var cachedBans))
+        {
+            cachedBans.Add(banDef);
+        }
+
+        return banDef;
+    }
+
+    public HashSet<string>? GetSpeciesBans(NetUserId playerUserId)
+    {
+        if (!_playerManager.TryGetSessionById(playerUserId, out var session))
+            return null;
+
+        if (!_cachedSpeciesBans.TryGetValue(session, out var speciesBans))
+            return null;
+
+        return [.. speciesBans.Select(banDef => banDef.SpeciesId)];
+    }
+
+    public bool IsSpeciesBanned(NetUserId playerUserId, SpeciesPrototype speciesPrototype)
+    {
+        return IsSpeciesBanned(playerUserId, speciesPrototype.ID);
+    }
+
+    public bool IsSpeciesBanned(NetUserId playerUserId, string speciesId)
+    {
+        return GetSpeciesBans(playerUserId)?.Contains(speciesId) is true;
+    }
+
+    public async void CreateSpeciesBan(
+        NetUserId? target,
+        string? targetUsername,
+        NetUserId? banningAdmin,
+        (IPAddress, int)? addressRange,
+        ImmutableTypedHwid? hwid,
+        string speciesId,
+        uint? minutes,
+        NoteSeverity severity,
+        string reason,
+        DateTimeOffset timeOfBan,
+        bool postBanInfo)
+    {
+        if (!_prototypeManager.HasIndex<SpeciesPrototype>(speciesId))
+            throw new ArgumentException($"Invalid speicies id '{speciesId}'", nameof(speciesId));
+
+        DateTimeOffset? expires = null;
+        if (minutes > 0)
+            expires = DateTimeOffset.Now + TimeSpan.FromMinutes(minutes.Value);
+
+        _systems.TryGetEntitySystem(out GameTicker? ticker);
+        int? roundId = ticker == null || ticker.RoundId == 0 ? null : ticker.RoundId;
+        var playtime = target == null
+            ? TimeSpan.Zero
+            : (await _db.GetPlayTimes(target.Value)).Find(p => p.Tracker == PlayTimeTrackingShared.TrackerOverall)?.TimeSpent ?? TimeSpan.Zero;
+
+        var banDef = new ServerSpeciesBanDef(
+            null,
+            target,
+            addressRange,
+            hwid,
+            timeOfBan,
+            expires,
+            roundId,
+            playtime,
+            reason,
+            severity,
+            banningAdmin,
+            null,
+            speciesId);
+
+        banDef = await AddSpeciesBan(banDef);
+
+        if (banDef is null)
+        {
+            _chat.SendAdminAlert(Loc.GetString("cmd-species-ban-existing", ("target", targetUsername ?? "null"), ("species", speciesId)));
+            return;
+        }
+
+        var length = expires == null ? Loc.GetString("cmd-species-ban-inf") : Loc.GetString("cmd-species-ban-until", ("expires", expires));
+        _chat.SendAdminAlert(Loc.GetString("cmd-species-ban-success", ("target", targetUsername ?? "null"), ("species", speciesId), ("reason", reason), ("length", length)));
+
+        if (target != null && _playerManager.TryGetSessionById(target.Value, out var session))
+            SendSpeciesBans(session);
+    }
+
+    public async Task<string> PardonSpeciesBan(int banId, NetUserId? unbanningAdmin, DateTimeOffset unbanTime)
+    {
+        var ban = await _db.GetServerSpeciesBanAsync(banId);
+
+        if (ban == null)
+            return $"No ban found with id {banId}";
+
+        if (ban.Unban != null)
+        {
+            var response = new StringBuilder("This ban has already been pardoned");
+
+            if (ban.Unban.UnbanningAdmin != null)
+            {
+                response.Append($" by {ban.Unban.UnbanningAdmin.Value}");
+            }
+
+            response.Append($" in {ban.Unban.UnbanTime}.");
+            return response.ToString();
+        }
+
+        await _db.AddServerSpeciesUnbanAsync(new ServerSpeciesUnbanDef(banId, unbanningAdmin, DateTimeOffset.Now));
+
+        if (ban.UserId is { } player
+            && _playerManager.TryGetSessionById(player, out var session)
+            && _cachedSpeciesBans.TryGetValue(session, out var speciesBans))
+        {
+            speciesBans.RemoveAll(speciesBan => speciesBan.Id == ban.Id);
+            SendSpeciesBans(session);
+        }
+
+        return $"Pardoned ban with id {banId}";
+    }
+
+    public void SendSpeciesBans(ICommonSession pSession)
+    {
+        var speciesBans = _cachedSpeciesBans.GetValueOrDefault(pSession) ?? new List<ServerSpeciesBanDef>();
+        var bans = new MsgSpeciesBans
+        {
+            Bans = [.. speciesBans.Select(b => b.SpeciesId)]
+        };
+
+        _sawmill.Debug($"Sent species bans to {pSession.Name}");
+        _netManager.ServerSendMessage(bans, pSession.Channel);
+    }
+    #endregion
+    // SS220 Species bans end
 
     public void SendRoleBans(ICommonSession pSession)
     {
