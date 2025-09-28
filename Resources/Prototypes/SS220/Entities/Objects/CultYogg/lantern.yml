@@ -29,7 +29,7 @@
     enabled: false
     radius: 3
     energy: 2
-    netsync: false
+    netsync: true
   - type: ToggleableLightVisuals
     spriteLayer: light
     inhandVisuals:
@@ -39,6 +39,7 @@
       right:
       - state: inhand-right-light
         shader: unshaded
+  - type: ItemTogglePointLight
   - type: Appearance
   - type: Physics
     canCollide: false
