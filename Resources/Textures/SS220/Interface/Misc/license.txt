@@ -3,4 +3,4 @@
 "sponsor_cash.png": Made by Meower / Whitly for SS220, EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 pin.png by Delapouite under CC BY 3.0
-https://game-icons.net/1x1/delapouite/protection-glasses.html
+https://game-icons.net/1x1/delapouite/pin.html
