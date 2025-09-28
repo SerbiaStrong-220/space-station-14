@@ -1,12 +1,12 @@
 // Original code licensed under Imperial CLA.
 // Copyright holders: orix0689 (discord) and pocchitsu (discord)
-// See Content.Shared/SS220/Ninja/Objectives/LeaveNoTrace/license.txt
 
 // Modified and/or redistributed under SS220 CLA with hosting restrictions.
 // Full license text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
+using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Objectives.Components;
 using Content.Shared.SS220.Ninja.Objectives.LeaveNoTrace.Events;
 using Content.Shared.Stealth.Components;
@@ -57,7 +57,7 @@ public abstract class SharedLeaveNoTraceSystem : EntitySystem
             }
 
             var ninjaPosition = Transform(uid).Coordinates;
-            var nearbyPlayers = _lookupSystem.GetEntitiesInRange<ActorComponent>(ninjaPosition, component.Range, LookupFlags.Dynamic);
+            var nearbyPlayers = _lookupSystem.GetEntitiesInRange<IdentityComponent>(ninjaPosition, component.Range, LookupFlags.Dynamic);
             var ninjaSeeingEntities = GetNinjaSeeingEntities(nearbyPlayers, uid);
 
             if (ninjaSeeingEntities.Count == 0)
@@ -100,7 +100,7 @@ public abstract class SharedLeaveNoTraceSystem : EntitySystem
     private bool NinjaIsVisible(EntityUid uid)
     {
         var ev = new NinjaHideAttemptEvent();
-        RaiseLocalEvent(uid, ev);
+        RaiseLocalEvent(uid, ref ev);
 
         if (ev.Cancelled)
             return true;
@@ -126,13 +126,13 @@ public abstract class SharedLeaveNoTraceSystem : EntitySystem
             return false;
 
         var ev = new NinjaRevealedAttemptEvent(ninja, entity);
-        RaiseLocalEvent(ninja, ev);
-        RaiseLocalEvent(entity, ev);
+        RaiseLocalEvent(ninja, ref ev);
+        RaiseLocalEvent(entity, ref ev);
 
         return !ev.Cancelled;
     }
 
-    private HashSet<EntityUid> GetNinjaSeeingEntities(HashSet<Entity<ActorComponent>> nearbyPlayers, EntityUid ninja)
+    private HashSet<EntityUid> GetNinjaSeeingEntities(HashSet<Entity<IdentityComponent>> nearbyPlayers, EntityUid ninja)
     {
         var entities = new HashSet<EntityUid>();
 
@@ -152,7 +152,7 @@ public abstract class SharedLeaveNoTraceSystem : EntitySystem
         if (component.IsSeen)
         {
             var ev = new NinjaHideEvent();
-            RaiseLocalEvent(ninja, ev);
+            RaiseLocalEvent(ninja, ref ev);
         }
 
         component.IsSeen = false;
@@ -165,7 +165,7 @@ public abstract class SharedLeaveNoTraceSystem : EntitySystem
         component.RevealEndTime = _timing.CurTime + component.TimeForReveal;
 
         var ev = new NinjaRevealedEvent();
-        RaiseLocalEvent(ninja, ev);
+        RaiseLocalEvent(ninja, ref ev);
     }
 
     #endregion

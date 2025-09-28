@@ -1,6 +1,5 @@
 // Original code licensed under Imperial CLA.
 // Copyright holders: orix0689 (discord) and pocchitsu (discord)
-// See Content.Shared/SS220/Ninja/Objectives/LeaveNoTrace/license.txt
 
 // Modified and/or redistributed under SS220 CLA with hosting restrictions.
 // Full license text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
@@ -28,6 +27,9 @@ public sealed class RevealOverlay : Overlay
     public override OverlaySpace Space => OverlaySpace.ScreenSpace;
     public override bool RequestScreenTexture => false;
 
+    private static readonly ProtoId<ShaderPrototype> SpriteFill = "SpriteFill";
+    private static readonly ProtoId<ShaderPrototype> Glitch = "Glitch";
+
     private const string FontPath = "/Fonts/SS220/Tuffy/Tuffy-Bold.ttf";
     private const int FontSize = 22;
     private float _scale;
@@ -42,6 +44,7 @@ public sealed class RevealOverlay : Overlay
     public float RevealProgress = 0.0f;
     public float FadeProgress = 0.0f;
     public string RevealLetter = "ВОБЛЯ";
+
     public TextureGlitchParametersData TextureParams
     {
         get => _textureGlitchParametersData;
@@ -51,6 +54,7 @@ public sealed class RevealOverlay : Overlay
             _buffer = GetBufferFromTextureParams(value);
         }
     }
+
     public GlitchShaderParametersData TextGlitchEffectParams = new();
 
     public bool IsReveal = false;
@@ -59,8 +63,8 @@ public sealed class RevealOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
-        _fillShader = _prototypeManager.Index<ShaderPrototype>("SpriteFill").InstanceUnique();
-        _glitchShader = _prototypeManager.Index<ShaderPrototype>("Glitch").InstanceUnique();
+        _fillShader = _prototypeManager.Index(SpriteFill).InstanceUnique();
+        _glitchShader = _prototypeManager.Index(Glitch).InstanceUnique();
         _font = _resourceCache.GetFont(FontPath, FontSize);
 
         _configurationManager.OnValueChanged(CVars.DisplayUIScale, v => _scale = v == 0 ? 1 : v, true);
@@ -116,7 +120,7 @@ public sealed class RevealOverlay : Overlay
 
         var progress = Math.Clamp(RevealProgress, 0.0f, 1.0f);
 
-        _fillShader?.SetParameter("progress", progress);
+        _fillShader.SetParameter("progress", progress);
         SetGlitchShaderParameters(TextureParams.Glitch);
 
         screen.RenderInRenderTarget(_buffer, () =>
