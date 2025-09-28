@@ -13,7 +13,6 @@ public sealed class MiGoErectBuiState : BoundUserInterfaceState
     public List<CultYoggBuildingPrototype> Buildings = [];
 }
 
-//[Serializable, NetSerializable]
 public sealed class MiGoTeleportBuiState : BoundUserInterfaceState
 {
     public List<EntityUid> Warps = [];
