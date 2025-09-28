@@ -10,6 +10,7 @@ namespace Content.Server.SS220.CultYogg.Cultists;
 public sealed class AcsendingSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly CultYoggSystem _cultYogg = default!;
 
     public override void Initialize()
     {
@@ -24,13 +25,18 @@ public sealed class AcsendingSystem : EntitySystem
         base.Update(frameTime);
 
         var query = EntityQueryEnumerator<AcsendingComponent>();
-        while (query.MoveNext(out var uid, out var acsend))
+        while (query.MoveNext(out var ent, out var acsend))
         {
             if (_timing.CurTime < acsend.AcsendingTime)
                 continue;
 
-            var ev = new CultYoggForceAscendingEvent();
-            RaiseLocalEvent(uid, ref ev);
+            if (TerminatingOrDeleted(ent))//idk what the bug that was, mb this will help
+                return;
+
+            if (TryComp<CultYoggComponent>(ent, out var cult))
+                _cultYogg.AcsendCultist((ent, cult));
+
+            RemComp<AcsendingComponent>(ent);
         }
     }
 
