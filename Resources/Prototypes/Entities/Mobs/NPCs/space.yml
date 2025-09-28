@@ -313,6 +313,13 @@
       thresholds:
         0: Alive
         45: Dead
+    #SS220 fauna damage modifiers update start here!!!
+    - type: Damageable
+      damageContainer: Biological
+      damageModifierSet: MobBasicSnake
+    - type: StaminaResistance
+      damageCoefficient: 0.2
+    #SS220 fauna damage modifiers update ended here!!!
     - type: Stamina
       critThreshold: 150
     - type: DamageStateVisuals

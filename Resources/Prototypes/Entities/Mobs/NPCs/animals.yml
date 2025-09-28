@@ -2604,6 +2604,13 @@
     thresholds:
       0: Alive
       90: Dead
+  #SS220 fauna damage modifiers update start here!!!
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: MobBasicSpider
+  - type: StaminaResistance
+    damageCoefficient: 0.2
+  #SS220 fauna damage modifiers update ended here!!!
   - type: SolutionContainerManager
     solutions:
       melee:
