@@ -68,8 +68,9 @@
         path: /Audio/Effects/bite.ogg
       damage:
         types:
-          Blunt: 5
-          Slash: 7
+          Blunt: 6 #SS220 tweak-carp-damage BEGIN
+          Slash: 9
+          Bloodloss: 2 #SS220 tweak-carp-damage END
     - type: TypingIndicator
       proto: alien
     - type: Tag
@@ -202,7 +203,8 @@
   - type: MeleeWeapon
     damage:
       types:
-        Slash: 6
+        Slash: 9 #SS220 tweak-carp-damage BEGIN
+        Bloodloss: 2 #SS220 tweak-carp-damage END
 
 - type: entity
   name: sharkminnow
