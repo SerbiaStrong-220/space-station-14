@@ -465,7 +465,7 @@
     layoutId: AirlockService
 
 - type: entity
-  parent: Airlock #SS220 Law Department
+  parent: AirlockGlass #SS220 Law Department
   id: AirlockLawyerGlassLocked
   suffix: Lawyer, Locked
   components:

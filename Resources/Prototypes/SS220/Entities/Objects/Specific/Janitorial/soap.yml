@@ -99,6 +99,7 @@
     delayBeforeTriggerContents: 60
     randomDistance: true
     velocity: 3
+    triggerKey: trigger
   - type: Item
     sprite: SS220/Objects/Specific/Janitorial/soap.rsi
     storedRotation: -90

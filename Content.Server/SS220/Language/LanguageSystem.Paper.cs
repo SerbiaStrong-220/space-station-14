@@ -67,7 +67,7 @@ public sealed partial class LanguageSystem
             _paperNodes[key] = node;
         }
 
-        return $"[{LanguageMsgMarkup}=\"{key}\"]";
+        return $"[{LanguageMsgMarkup}=\"{key}\"/]";
     }
 
     private void UpdateClientPaperNodeInfo(string key, string info, ICommonSession session)

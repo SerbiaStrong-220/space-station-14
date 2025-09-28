@@ -37,6 +37,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Standing;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -69,6 +70,10 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected readonly ThrowingSystem ThrowingSystem = default!;
     [Dependency] private   readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+
+    // ss220 add block heavy attack and shooting while user is down start
+    [Dependency] private readonly StandingStateSystem _standing = default!;
+    // ss220 add block heavy attack and shooting while user is down end
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
@@ -241,6 +246,14 @@ public abstract partial class SharedGunSystem : EntitySystem
             return;
         }
 
+        // ss220 add block heavy attack and shooting while user is down start
+        if (_standing.IsDown(user))
+        {
+            PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-shooting"), user);
+            return;
+        }
+        // ss220 add block heavy attack and shooting while user is down end
+
         var toCoordinates = gun.ShootCoordinates;
 
         if (toCoordinates == null)
@@ -397,7 +410,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         var shooterEv = new ShooterImpulseEvent();
         RaiseLocalEvent(user, ref shooterEv);
 
-        if (shooterEv.Push || _gravity.IsWeightless(user, userPhysics))
+        if (shooterEv.Push)
             CauseImpulse(fromCoordinates, toCoordinates.Value, user, userPhysics);
     }
 

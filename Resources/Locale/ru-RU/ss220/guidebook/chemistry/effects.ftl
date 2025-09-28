@@ -1,35 +1,15 @@
-reagent-effect-guidebook-ss220-corrupt-mind =
-    { $chance ->
-        [1] Causes
-        *[other] cause
-    } small infection in mind of entity and might mutate
+reagent-effect-guidebook-ss220-corrupt-mind = вызывает помутнение рассудка, является симптомом поражения мозга
 
-reagent-effect-guidebook-ss220-remove-hallucinations =
-    { $chance ->
-        [1] Causes
-        *[other] cause
-    } clear hallucinations
+reagent-effect-guidebook-ss220-remove-hallucinations = может помочь купировать симптомы визаульных галлюцинаций, но не является средством лечения
 
-reagent-effect-guidebook-ss220-free-from-burden =
-    { $chance ->
-        [1] Causes
-        *[other] cause
-    } can remove unwanted limbs and cancle effects
 
-reagent-effect-guidebook-ss220-cult-cleanse =
-    { $chance ->
-        [1] Causes
-        *[other] cause
-    } cleansing obsession with evil
+reagent-effect-guidebook-ss220-free-from-burden = помогает избавиться от нежелательных конечностей, а также очищает излишнее грибковое заражение
 
-reagent-effect-guidebook-ss220-brain-damage-slow =
-    { $chance ->
-        [1] Causes
-        *[other] cause
-    } slowing of brain necrosis
+reagent-effect-guidebook-ss220-cult-cleanse = пара глотков может очистить от влияния космической ереси, а даже малейшая капля может помочь при малейшем проявлении грибкового заражения
 
-reagent-effect-guidebook-ss220-chemical-adaptation =
-    { $chance ->
-        [1] Causes
-        *[other] cause
-    } body addaptation, which can change the effectiveness of the drug
+reagent-effect-guidebook-ss220-brain-damage-slow = продлевает жизнь мозга на {$time} секунд
+
+reagent-effect-guidebook-ss220-chemical-adaptation = усваивание вызывает привыкание к реагенту в {$modifier} от предыдущего эффекта реагента, { $refresh ->
+    [true] которое будет длиться {$duration} секунд с последнего усваивания
+    *[false] увеличивая длительность на {$duration} секунд
+    }

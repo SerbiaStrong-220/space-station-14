@@ -52,6 +52,14 @@
     sprite: SS220/Clothing/Mask/blueshield.rsi
   - type: Clothing
     sprite: SS220/Clothing/Mask/blueshield.rsi
+    #SS220 - add-smart-mask-swat-and-blueshield - start
+  - type: UserInterface
+    interfaces:
+      enum.SmartGasMaskUiKey.Key:
+        type: SmartGasMaskBoundUserInterface
+  - type: SmartGasMask
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskSupport"]
+    #SS220 - add-smart-mask-swat-and-blueshield - end
   - type: FlashImmunity
   - type: EyeProtection
   - type: Armor
@@ -60,6 +68,31 @@
         Slash: 0.95
         Piercing: 0.95
         Heat: 0.9
+# Sec Tactical Gas Mask
+- type: entity
+  parent: [ClothingMaskGasExplorer, BaseSecurityContraband]
+  id: SecurityTacticalGasMask
+  name: security tactical gas mask
+  description: It is a cheaper modification of the Blue Shield gas mask, without flash protection, but with the same cool design.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/security_tac.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/security_tac.rsi
+  - type: UserInterface
+    interfaces:
+      enum.SmartGasMaskUiKey.Key:
+        type: SmartGasMaskBoundUserInterface
+  - type: SmartGasMask
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskSupport"]
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
 
 # Syndie HOTLINE MIAMI MASKS
 

@@ -1,8 +1,6 @@
 using System.Net;
-using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.SS220.CCVars;
-using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 
@@ -73,8 +71,7 @@ namespace Content.Server.Database
             ExemptFlags = exemptFlags;
         }
 
-        public string FormatBanMessage(IConfigurationManager cfg, ILocalizationManager loc,
-            IPlayerManager playerManager) // SS220-ad-login-into-ban-screen
+        public string FormatBanMessage(IConfigurationManager cfg, ILocalizationManager loc, string? playerLogin) // SS220-ad-login-into-ban-screen
         {
             string expires;
             if (ExpirationTime is { } expireTime)
@@ -88,12 +85,8 @@ namespace Content.Server.Database
                 expires = loc.GetString("ban-banned-permanent");
             }
 
-            // SS220-ad-login-into-ban-begin-screen
-            string playerLogin = playerManager.TryGetSessionById(UserId, out var player)
-                                ? player.Name
-                                : "";
-            //  SS220-ad-login-into-ban-end-screen
-            string additionalInfo = cfg.GetCVar<string>(CCVars220.AdditionalBanInfo.Name); // add-some-admin-changeable-info
+            playerLogin = playerLogin is null ? "" : playerLogin; // SS220-ad-login-into-ban-screen
+            string additionalInfo = cfg.GetCVar(CCVars220.AdditionalBanInfo); // add-some-admin-changeable-info
 
             return $"""
                    {loc.GetString("ban-banned-1")}

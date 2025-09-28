@@ -80,7 +80,7 @@
       - id: Galactic
 
 - type: entity
-  name: corrupted сow
+  name: corrupted cow
   parent: [BaseMobCorrupted, MobCow]
   id: CultCowCorrupted
   components:

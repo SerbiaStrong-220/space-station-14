@@ -114,12 +114,12 @@
   description: A light and compact fibreglass-framed model fire extinguisher. It holds less water than its bigger brother.
   components:
   - type: Sprite
-    sprite: Objects/Misc/fire_extinguisher_mini.rsi
+    sprite: SS220/Objects/Misc/fire_extinguisher_mini.rsi  # SS220 from cabinet to 3/4 Part 1
     layers:
         - state: fire_extinguisher_closed
           map: [ "enabled" ]
   - type: Item
-    sprite: Objects/Misc/fire_extinguisher_mini.rsi
+    sprite: SS220/Objects/Misc/fire_extinguisher_mini.rsi  # SS220 from cabinet to 3/4 Part 1
     size: Small
   - type: SolutionContainerManager
     solutions:

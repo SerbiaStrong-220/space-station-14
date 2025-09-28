@@ -484,7 +484,7 @@ public abstract class SharedDisposalUnitSystem : EntitySystem
         EntityUid? user = null,
         bool doInsert = false)
     {
-        //Audio.PlayPredicted(component.InsertSound, uid, user: user); // ss220 remove duplicated sound
+        Audio.PlayPredicted(component.InsertSound, uid, user: user);
         if (doInsert && !Containers.Insert(inserted, component.Container))
             return;
 
