@@ -27,6 +27,7 @@
   - type: ActivatableUI
     key: enum.WristWatchUiKey.Key
     singleUser: true
+  - type: PinnableUI
   - type: StaticPrice
     price: 25
 
