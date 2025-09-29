@@ -943,11 +943,13 @@
   - type: Battery
     maxCharge: 1200
     startingCharge: 1200
-  - type: BatterySelfRecharger
-    autoRecharge: true
-    autoRechargeRate: 24
-    autoRechargePause: true
-    autoRechargePauseTime: 30
+    # SS220 Adding an energy shotgun to the warden Begin
+  # - type: BatterySelfRecharger
+  #   autoRecharge: true
+  #   autoRechargeRate: 24
+  #   autoRechargePause: true
+  #   autoRechargePauseTime: 30
+    # SS220 Adding an energy shotgun to the warden End
 
 - type: entity
   name: temperature gun

@@ -47,6 +47,7 @@
       amount: 2
     - id: NetworkConfigurator
     - id: Binoculars
+    - id: WeaponEnergyShotgun # SS220 Adding an energy shotgun to the warden
 
 - type: entityTable
   id: FillLockerWardenHarduit

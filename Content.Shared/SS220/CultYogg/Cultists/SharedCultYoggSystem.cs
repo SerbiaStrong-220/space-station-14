@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -61,20 +62,23 @@ public abstract class SharedCultYoggSystem : EntitySystem
         if (_inventory.TryGetSlotEntity(ent.Owner, "head", out var itemHead, item))
         {
             if (TryComp(itemHead, out IdentityBlockerComponent? block)
-                && (block.Coverage == IdentityBlockerCoverage.EYES || block.Coverage == IdentityBlockerCoverage.FULL))
+                && block.Coverage is IdentityBlockerCoverage.EYES or IdentityBlockerCoverage.FULL)
                 return;
         }
 
         if (_inventory.TryGetSlotEntity(ent.Owner, "mask", out var itemMask, item))
         {
-            if (TryComp(itemMask, out IdentityBlockerComponent? block)
-                && (block.Coverage == IdentityBlockerCoverage.EYES || block.Coverage == IdentityBlockerCoverage.FULL))
+            if (TryComp<MaskComponent>(itemMask, out var mask) && mask.IsToggled)
+            {
+            }
+            else if (TryComp<IdentityBlockerComponent>(itemMask, out var block)
+                && block.Coverage is IdentityBlockerCoverage.EYES or IdentityBlockerCoverage.FULL)
             {
                 return;
             }
         }
 
-        args.PushMarkup($"[color=green]{Loc.GetString("cult-yogg-stage-eyes-markups", ("ent", ent.Owner))}[/color]");
+        args.PushMarkup(Loc.GetString("cult-yogg-stage-eyes-markups"));
     }
     #endregion
 

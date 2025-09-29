@@ -82,13 +82,13 @@ internal sealed class RandomWalkController : VirtualController
         _physics.SetLinearVelocity(uid, physics.LinearVelocity * randomWalk.AccumulatorRatio + pushVec * pushStrength, body: physics);
 
         // SS220 Randomwalk-random-speed begin
-        randomWalk.MinSpeed *= randomWalk.Сhange;
-        randomWalk.MaxSpeed *= randomWalk.Сhange;
+        randomWalk.MinSpeed *= randomWalk.TickSpeedModifier;
+        randomWalk.MaxSpeed *= randomWalk.TickSpeedModifier;
         if (randomWalk.MaxSpeed < 0.1)
         {
             randomWalk.MinSpeed = 0;
             randomWalk.MaxSpeed = 0;
-            randomWalk.Сhange = 1;
+            randomWalk.TickSpeedModifier = 1;
         }
         // SS220 Randomwalk-random-speed end
     }
@@ -122,7 +122,7 @@ internal sealed class RandomWalkController : VirtualController
             randomWalk.MaxStepCooldown=TimeSpan.FromSeconds(1.0);
             randomWalk.MinSpeed=10;
             randomWalk.MaxSpeed=15;
-            randomWalk.Сhange=0.8f;
+            randomWalk.TickSpeedModifier = 0.8f; // SS220 anom_run (PR #461)
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Administration.Managers; // ss220 add "E" activation for strippable inv
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.CombatMode;
@@ -76,6 +77,9 @@ namespace Content.Shared.Interaction
         [Dependency] private readonly SharedPlayerRateLimitManager _rateLimit = default!;
         [Dependency] private readonly TagSystem _tagSystem = default!;
         [Dependency] private readonly UseDelaySystem _useDelay = default!;
+        // ss220 add "E" activation for strippable inv start
+        [Dependency] private readonly ISharedAdminManager _admin = default!;
+        // ss220 add "E" activation for strippable inv end
 
         private EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery;
         private EntityQuery<FixturesComponent> _fixtureQuery;
@@ -1404,6 +1408,11 @@ namespace Content.Shared.Interaction
         /// <inheritdoc cref="CanAccessViaStorage(Robust.Shared.GameObjects.EntityUid,Robust.Shared.GameObjects.EntityUid)"/>
         public bool CanAccessViaStorage(EntityUid user, EntityUid target, BaseContainer container)
         {
+            // ss220 add "E" activation for strippable inv start
+            if (HasComp<GhostComponent>(user) && _admin.IsAdmin(user))
+                return true;
+            // ss220 add "E" activation for strippable inv end
+
             if (StorageComponent.ContainerId != container.ID)
                 return false;
 

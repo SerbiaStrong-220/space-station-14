@@ -252,7 +252,7 @@
     Bloodloss: 0.0 # no double dipping
     Blunt: 0.08
     Caustic: 0.0
-    Сerebral: 0.0 #SS220 Limitation revive
+    Cerebral: 0.0 #SS220 Limitation revive
     Cellular: 0.0
     Cold: 0.0
     Heat: -0.5 # heat damage cauterizes wounds, but will still hurt obviously.

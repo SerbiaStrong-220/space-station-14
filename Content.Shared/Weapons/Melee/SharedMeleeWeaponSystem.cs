@@ -22,6 +22,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Standing; // ss220 add block heavy attack while user is down
 using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee.Events;
@@ -63,6 +64,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
+    // ss220 add block heavy attack while user is down start
+    [Dependency] private   readonly StandingStateSystem _standing = default!;
+    // ss220 add block heavy attack while user is down end
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -205,6 +209,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     {
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
+
+        // ss220 add block heavy attack and shooting while user is down start
+        if (_standing.IsDown(user))
+        {
+            PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-attack"), user);
+            return;
+        }
+        // ss220 add block heavy attack and shooting while user is down end
 
         if (!TryGetWeapon(user, out var weaponUid, out var weapon) ||
             weaponUid != GetEntity(msg.Weapon))

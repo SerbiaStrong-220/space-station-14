@@ -41,7 +41,8 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     /// </summary>
     private void OnMapInit(Entity<LanguageComponent> ent, ref MapInitEvent args)
     {
-        TrySetLanguage(ent, 0);
+        if (ent.Comp.SelectedLanguage is not { } languageId || !CanSpeak(ent, languageId))
+            TrySelectRandomLanguage(ent);
     }
 
     private void OnSendLanguageMessageAttemptEvent(Entity<LanguageComponent> ent, ref SendLanguageMessageAttemptEvent args)
@@ -56,7 +57,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         if (entity == null || !TryComp<LanguageComponent>(entity, out var comp))
             return;
 
-        TrySetLanguage((entity.Value, comp), msg.LanguageId);
+        TrySelectLanguage((entity.Value, comp), msg.LanguageId);
     }
 
     private void UpdateSeed()

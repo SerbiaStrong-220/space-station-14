@@ -4,7 +4,7 @@
   id: Axioma
   mapName: 'NSS Axioma'
   mapPath: /Maps/SS220/axioma.yml
-  minPlayers: 45
+  minPlayers: 25 ## normal limit: 45
   stations:
     Axioma:
       stationProto: AxiomaNanotrasenStation
