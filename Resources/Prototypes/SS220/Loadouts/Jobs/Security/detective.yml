@@ -25,6 +25,11 @@
       !type:RoleTimeRequirement
       role: JobDetective
       time: 180000 # 50 hrs
+    #SS220-добавление плашки администратор к кобуре легендарный стрелок start
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+    #SS220-добавление плашки администратор к кобуре легендарный стрелок ended
 
 - type: loadoutEffectGroup
   id: HolsterBlackAngelTime
@@ -34,6 +39,11 @@
       !type:RoleTimeRequirement
       role: JobDetective
       time: 360000 # 100 hrs
+    #SS220-добавление плашки администратор к кобуре чёрный ангел start
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+    #SS220-добавление плашки администратор к кобуре чёрный ангел ended
 
 - type: loadout
   id: DefaultDetectiveHolster
