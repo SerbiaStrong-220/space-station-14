@@ -47,7 +47,7 @@
   - type: Construction
     graph: ShawarmaGrilled
     node: start
-    defaultTarget: shawarma grilled
+    defaultTarget: шаурма на гриле
   - type: Temperature
     currentTemperature: 290
   - type: InternalTemperature
@@ -67,5 +67,5 @@
     #SS220-grill-update-2 begin
   - type: Construction
     graph: ShawarmaGrilled
-    node: shawarma grilled
+    node: шаурма на гриле
     #SS220-grill-update-2 end

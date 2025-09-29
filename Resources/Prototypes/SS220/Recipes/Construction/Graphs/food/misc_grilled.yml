@@ -7,13 +7,13 @@
   graph:
   - node: start
     edges:
-    - to: shawarma grilled
+    - to: шаурма на гриле
       completed:
       - !type:PlaySound
         sound: /Audio/Effects/sizzle.ogg
       steps:
       - minTemperature: 335
-  - node: shawarma grilled
+  - node: шаурма на гриле
     entity: FoodShawarmaOnGrill
 
 # Banana Peel
