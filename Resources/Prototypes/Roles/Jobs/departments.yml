@@ -52,7 +52,7 @@
   - ERTEngineer
   - DeathSquad
   editorHidden: true
-  weight: 120
+  weight: 160
   lightColor: "#387195" # SS220 Round End Titles
 
 - type: department
@@ -70,7 +70,7 @@
   - CentcomOperativeBSO
   editorHidden: true
   weight: 150
-  lightColor: "#387195" # SS220 Round End Titles
+  lightColor: "#dca248" # SS220 Round End Titles
 
 - type: department
   id: Command
