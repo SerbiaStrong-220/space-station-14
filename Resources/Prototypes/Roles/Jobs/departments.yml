@@ -56,6 +56,23 @@
   lightColor: "#387195" # SS220 Round End Titles
 
 - type: department
+  id: CentralCommand
+  name: department-CentralCommand
+  description: department-CentralCommand-description
+  color: "#e0ad5d" #ss220-chatcolor
+  roles:
+  - CentcommOfficer
+  - CentCommNanoTrasenDiplomat
+  - CentComNanoTrasenAdmiral
+  - DeathSquad
+  - DeathsquadCommander
+  - DeathsquadHealer
+  - CentcomOperativeBSO
+  editorHidden: true
+  weight: 150
+  lightColor: "#387195" # SS220 Round End Titles
+
+- type: department
   id: Command
   name: department-Command
   sort: 1
