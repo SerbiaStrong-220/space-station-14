@@ -90,14 +90,6 @@
   - ResearchDirector
   - Quartermaster
   - BlueShield
-  - CBURN
-  - ERTLeader
-  - ERTChaplain
-  - ERTJanitor
-  - ERTMedical
-  - ERTSecurity
-  - ERTEngineer
-  - DeathSquad
   primary: false
   weight: 100
   lightColor: "#2c60f8" # SS220 Round End Titles
