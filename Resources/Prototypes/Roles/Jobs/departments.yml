@@ -61,7 +61,7 @@
   id: DeathSquadron
   name: department-CentralCommand
   description: department-CentralCommand-description
-  color: "#18689a" #ss220-chatcolor
+  color: "#320206" #ss220-chatcolor
   roles:
   - CentralCommandOfficial
   - CBURN
@@ -70,7 +70,7 @@
   - ERTJanitor
   editorHidden: true
   weight: 120
-  lightColor: "#387195" # SS220 Round End Titles
+  lightColor: "#320206" # SS220 Round End Titles
 
 - type: department
   id: CentralCommand
