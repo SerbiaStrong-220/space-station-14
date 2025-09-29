@@ -29,7 +29,7 @@
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
-    #SS220-добавление плашки администратор к кобуре легендарный стрелок ended
+    #SS220-добавление плашки администратор к кобуре легендарный стрелок. ended
 
 - type: loadoutEffectGroup
   id: HolsterBlackAngelTime
