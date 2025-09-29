@@ -765,7 +765,7 @@
     - state: centcom
     - state: idcentcom
   - type: Item
-    heldPrefix: blue
+    heldPrefix: gold
   - type: IdCard
     jobTitle: job-name-cc-default #SS220 (upstream 65 localization)
     jobIcon: JobIconNanotrasen
