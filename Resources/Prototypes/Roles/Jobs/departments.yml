@@ -37,7 +37,7 @@
   - ServiceWorker
 
 - type: department
-  id: ERT
+  id: EmergencyResponseTeam
   name: department-CentralCommand
   description: department-CentralCommand-description
   color: "#18689a" #ss220-chatcolor
@@ -51,8 +51,25 @@
   - ERTSecurity
   - ERTEngineer
   - DeathSquad
+  - DeathsquadCommander
+  - DeathsquadHealer
   editorHidden: true
-  weight: 160
+  weight: 120
+  lightColor: "#387195" # SS220 Round End Titles
+
+- type: department
+  id: DeathSquadron
+  name: department-CentralCommand
+  description: department-CentralCommand-description
+  color: "#18689a" #ss220-chatcolor
+  roles:
+  - CentralCommandOfficial
+  - CBURN
+  - ERTLeader
+  - ERTChaplain
+  - ERTJanitor
+  editorHidden: true
+  weight: 120
   lightColor: "#387195" # SS220 Round End Titles
 
 - type: department
@@ -64,9 +81,6 @@
   - CentcommOfficer
   - CentCommNanoTrasenDiplomat
   - CentComNanoTrasenAdmiral
-  - DeathSquad
-  - DeathsquadCommander
-  - DeathsquadHealer
   - CentcomOperativeBSO
   editorHidden: true
   weight: 120
