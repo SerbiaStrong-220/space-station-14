@@ -36,6 +36,7 @@
   - Zookeeper
   - ServiceWorker
 
+##SS220 Centcomm_color_fix start
 - type: department
   id: EmergencyResponseTeam
   name: department-CentralCommand
@@ -72,6 +73,8 @@
   editorHidden: true
   weight: 120
   lightColor: "#dca248" # SS220 Round End Titles
+
+##SS220 Centcomm_color_fix end
 
 - type: department
   id: Command
