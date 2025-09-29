@@ -61,6 +61,7 @@
   color: "#320206" #ss220-chatcolor
   roles:
   - DeathSquad
+  - DeathsquadOperative
   - DeathsquadCommander
   - DeathsquadHealer
   editorHidden: true
