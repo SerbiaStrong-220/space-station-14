@@ -50,9 +50,6 @@
   - ERTMedical
   - ERTSecurity
   - ERTEngineer
-  - DeathSquad
-  - DeathsquadCommander
-  - DeathsquadHealer
   editorHidden: true
   weight: 120
   lightColor: "#387195" # SS220 Round End Titles
@@ -63,11 +60,9 @@
   description: department-CentralCommand-description
   color: "#320206" #ss220-chatcolor
   roles:
-  - CentralCommandOfficial
-  - CBURN
-  - ERTLeader
-  - ERTChaplain
-  - ERTJanitor
+  - DeathSquad
+  - DeathsquadCommander
+  - DeathsquadHealer
   editorHidden: true
   weight: 120
   lightColor: "#320206" # SS220 Round End Titles
