@@ -284,6 +284,13 @@
   id: ElectricGrillMachineCircuitboard
   result: ElectricGrillMachineCircuitboard
 
+#SS220-grill-update-3 begin
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
+  id: ElectricGrillAdvancedCircuitboard
+  result: ElectricGrillAdvancedCircuitboard
+#SS220-grill-update-3 end
+
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
   id: MicrowaveMachineCircuitboard
