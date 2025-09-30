@@ -1,5 +1,5 @@
 - type: entity
-  name: космическая гадюка
+  name: Space cobra
   parent: MobPurpleSnake
   id: MobPurpleSnakeGhostRole
   suffix: GhostRole
