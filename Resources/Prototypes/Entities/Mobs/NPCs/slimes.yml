@@ -142,13 +142,13 @@
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
-  #SS220 fauna damage modifiers update start here!!!
+  #SS220-fauna0damagesets-begin
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: MobBasicSlime
   - type: StaminaResistance
     damageCoefficient: 0.2
-  #SS220 fauna damage modifiers update ended here!!!
+  #SS220-fauna-damagesets-ended
 
 - type: entity
   name: blue slime
