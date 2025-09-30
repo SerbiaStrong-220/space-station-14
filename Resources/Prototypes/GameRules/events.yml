@@ -520,7 +520,7 @@
       prob: 0.02
     - id: MobCobraSpaceGhostRole
       prob: 0.02
-  #SS220 snake ghost update ended here!!!
+  #SS220-snake-ghost-role-spawn end
 
 - type: entity
   id: SpiderSpawn
