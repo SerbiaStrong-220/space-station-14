@@ -298,7 +298,7 @@
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
     - type: Sprite
-      drawdepth: SmallMobs #SS220 common sense fauna update
+      drawdepth: SmallMobs #SS220-fauna-update (Mobs layer originally)
       sprite: Mobs/Animals/spacecobra.rsi
       layers:
         - map: [ "enum.DamageStateVisualLayers.Base" ]
@@ -342,11 +342,9 @@
             radius: 0.40
           density: 120
           mask:
-          #SS220 common sense fauna update start here!!!
-          - SmallMobMask
+          - SmallMobMask #SS220-fauna-update
           layer:
-          - SmallMobLayer
-          #SS220 coomon sense fauna update ended here!!!
+          - SmallMobLayer #SS220-fauna-update
     - type: MeleeWeapon
       hidden: true
       soundHit:
@@ -382,7 +380,7 @@
     - type: StealthOnMove
       passiveVisibilityRate: -0.25
       movementVisibilityRate: 0.25
-      #SS220 common sense fauna update start here!!!
+      #SS220-fauna-update
     - type: ThermalVision
       state: Half
       visionRadius: 14
@@ -390,7 +388,7 @@
     - type: Tag
       tags:
       - FootstepSound
-      #SS220 common sense fauna update ended here!!!
+      #SS220-fauna-update
 
 - type: entity
   id: MobCobraSpaceSalvage
