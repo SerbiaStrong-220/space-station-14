@@ -377,13 +377,13 @@
         Base: dead_purple_snake
       Dead:
         Base: dead_purple_snake
-    #SS220 fauna damage modifiers update start here!!!
+    #SS220-fauna-damagesets-begin
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: MobBasicSnake
   - type: StaminaResistance
     damageCoefficient: 0.2
-    #SS220 fauna damage modifiers update ended here!!!
+    #SS220-fauna-damagesets-ended
   - type: Butcherable
     spawned:
     - id: FoodMeatSnake
