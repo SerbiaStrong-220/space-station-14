@@ -142,7 +142,7 @@
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
-  #SS220-fauna0damagesets-begin
+  #SS220-fauna-damagesets-begin
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: MobBasicSlime
