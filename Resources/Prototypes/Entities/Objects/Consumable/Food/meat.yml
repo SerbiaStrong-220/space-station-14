@@ -583,7 +583,7 @@
   - type: Construction
     graph: SpiderSteak
     node: start
-    defaultTarget: spider steak
+    defaultTarget: стейк из паука
   - type: Temperature
     currentTemperature: 290
   - type: InternalTemperature
@@ -620,7 +620,7 @@
     slice: FoodMeatSpiderCutletCooked
   - type: Construction
     graph: SpiderSteak
-    node: spider steak
+    node: стейк из паука
   - type: Item
     inhandVisuals:
       left:
@@ -716,7 +716,7 @@
   - type: Construction
     graph: SnakeSteak
     node: start
-    defaultTarget: snake steak
+    defaultTarget: стейк из змеи
   - type: Temperature
     currentTemperature: 290
   - type: InternalTemperature
@@ -751,7 +751,7 @@
           Quantity: 1
   - type: Construction
     graph: SnakeSteak
-    node: snake steak
+    node: стейк из змеи
   - type: Item
     inhandVisuals:
       left:

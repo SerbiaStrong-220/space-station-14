@@ -7,13 +7,13 @@
   graph:
   - node: start
     edges:
-    - to: spider steak
+    - to: стейк из паука
       completed:
       - !type:PlaySound
         sound: /Audio/Effects/sizzle.ogg
       steps:
       - minTemperature: 345
-  - node: spider steak
+  - node: стейк из паука
     entity: FoodMeatSpiderSteak
 
 # Snake
@@ -23,12 +23,12 @@
   graph:
   - node: start
     edges:
-    - to: snake steak
+    - to: стейк из змеи
       completed:
       - !type:PlaySound
         sound: /Audio/Effects/sizzle.ogg
       steps:
       - minTemperature: 345
-  - node: snake steak
+  - node: стейк из змеи
     entity: FoodMeatSnakeSteak
 #SS220-grill-update-2 end
