@@ -15,7 +15,7 @@
     - type: GhostTakeoverAvailable
 
 - type: entity
-  name: маленькая космическая гадюка
+  name: Little space cobra
   parent: MobSmallPurpleSnake
   id: MobSmallPurpleSnakeGhostRole
   suffix: GhostRole
