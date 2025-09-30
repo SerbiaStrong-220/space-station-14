@@ -513,7 +513,7 @@
     duration: 60
   - type: VentCrittersRule
     entries:
-  #SS220 snake ghost update start here!!!
+  #SS220-snake-ghost-role-spawn
     - id: MobPurpleSnakeGhostRole
       prob: 0.02
     - id: MobSmallPurpleSnakeGhostRole
