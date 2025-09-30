@@ -34,4 +34,3 @@ ghost-role-information-small-space-adder-name = Маленькая космич�
 ghost-role-information-cobra-space-name = Космическая кобра
 ghost-role-information-cobra-space-description = Когда вас заметят - будет слишком поздно. Выползайте на охоту!
 ghost-role-information-snake-overall-rules = Вы [color=red][bold]Командный антагонист[/bold][/color], в команде с другими змеями из далёкого космоса.
-#snake update ended here!!!
