@@ -2670,7 +2670,7 @@
   - type: ThermalVision
     state: Half
     visionRadius: 14
-  #SS220 fauna common sense update ended here!!!
+  #SS220-fauna-update-ended
 
 - type: entity
   parent: MobSpiderBase
