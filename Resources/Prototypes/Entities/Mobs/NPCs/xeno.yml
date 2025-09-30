@@ -426,10 +426,11 @@
     state: Half
     visionRadius: 14
   - type: NoSlip
+      #SS220-fauna-update-ended
   - type: Tag
     tags:
+    #- DoorBumpOpener #SS220-fauna-update (muted tag due to changes)
     - FootstepSound
-      #SS220-fauna-update-ended
 
 - type: entity
   name: space adder
