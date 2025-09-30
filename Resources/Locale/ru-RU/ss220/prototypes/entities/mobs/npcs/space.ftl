@@ -9,4 +9,3 @@ ent-MobBearSpaceGhostRole = космический медведь
 ent-MobCobraSpaceGhostRole = { ent-MobCobraSpace }
     .suffix = Роль призрака
     .desc = { ent-MobCobraSpace.desc }
-#snake update ended here!!!
