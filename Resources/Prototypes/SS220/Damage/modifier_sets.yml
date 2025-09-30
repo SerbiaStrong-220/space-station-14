@@ -125,7 +125,7 @@
     Slash: 0.5
     Radiation: 0.4
 
-#Minor fauna damage modifiers start here!!!
+#midround-fauna-damagesets-begin
 - type: damageModifierSet
   id: MobBasicSpider
   coefficients:
@@ -149,4 +149,4 @@
     Slash: 0.5
     Heat: 0.9
     Piercing: 0.6
-#Minor fauna damage modifiers ended here!!!
+#midround-fauna-damagesets-ended
