@@ -27,7 +27,6 @@ ghost-role-information-giant-fly-rules = Вы [color=red][bold]Командны�
 ghost-role-information-clownmime-cyborg-name = МимоКлоунский киборг
 ghost-role-information-clownmime-cyborg-description = Вы киборг, созданный с помощью магии хонка и минуты молчания(аминь), помогите своему создателю нести хонк по станции.
 
-#snake update start here!!!
 ghost-role-information-space-adder-name = Космическая гадюка
 ghost-role-information-space-adder-description = Обитатели этой станции выглядят очень аппетитно, как раз вам на зубок.
 ghost-role-information-small-space-adder-name = Маленькая космическая гадюка
