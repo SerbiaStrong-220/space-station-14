@@ -135,7 +135,7 @@
     - MindRoleGhostRoleFreeAgent
 
 - type: entity
-  name: Space Cobra
+  name: Space cobra
   id: MobCobraSpaceGhostRole
   suffix: GhostRole
   parent: MobCobraSpace
