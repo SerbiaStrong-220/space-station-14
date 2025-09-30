@@ -23,12 +23,12 @@
   graph:
   - node: start
     edges:
-    - to: banana peel grilled
+    - to: печёная банановая кожура
       completed:
       - !type:PlaySound
         sound: /Audio/Effects/sizzle.ogg
       steps:
       - minTemperature: 335
-  - node: banana peel grilled
+  - node: печёная банановая кожура
     entity: TrashBakedBananaPeel
 #SS220-grill-update-2 end
