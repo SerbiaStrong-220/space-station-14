@@ -11,11 +11,11 @@
             "name": "dead"
         },
         {
-            "name": "equipped-HELMET",
+            "name": "peel-equipped-HELMET",
             "directions": 4
         },
         {
-            "name": "equipped-HELMET-hamster",
+            "name": "peel-equipped-HELMET-hamster",
             "directions": 4
         },
         {
