@@ -1,0 +1,32 @@
+- type: entity
+  parent: BaseAction
+  id: ActionPryingBase
+  name: Prying
+  description: Pry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    icon: { sprite : SS220/Interface/Actions/prying.rsi, state: "pry" }
+  - type: TargetAction
+  - type: EntityTargetAction
+    event: !type:ActionPryingEvent
+
+- type: entity
+  parent: ActionPryingBase
+  id: ActionPryingTarantula
+  name: Prying
+  description: Pry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    icon: { sprite : SS220/Interface/Actions/prying.rsi, state: "pryTarantula" }
+
+- type: entity
+  parent: ActionPryingBase
+  id: ActionPryingClownSpider
+  name: Prying
+  description: Pry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    icon: { sprite : SS220/Interface/Actions/prying.rsi, state: "pryClownSpider" }

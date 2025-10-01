@@ -2733,6 +2733,11 @@
     damage:
       types:
         Piercing: 6
+  #ss220-prying-action-start
+  - type: ActionGrant
+    actions:
+    - ActionPryingTarantula
+  #ss220-prying-action-ended
 
 - type: entity
   parent:
@@ -2787,6 +2792,11 @@
     - type: Bloodstream
       bloodMaxVolume: 150
       bloodReagent: Laughter
+    #ss220-prying-action-start
+    - type: ActionGrant
+      actions:
+      - ActionPryingClownSpider
+    #ss220-prying-action-ended
 
 - type: entity
   name: wizard spider
@@ -2799,6 +2809,11 @@
     removes:
     - type: ReplacementAccent
       accent: xeno  #let this wizard speak
+    #ss220-prying-action-start
+  - type: ActionGrant
+    actions:
+    - ActionPryingTarantula
+    #ss220-prying-action-ended
 
 - type: entity
   name: possum
