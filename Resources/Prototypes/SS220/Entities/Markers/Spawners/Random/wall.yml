@@ -1,0 +1,67 @@
+- type: entity
+  name: Random Wall Spawner 0.5
+  id: WallSpawnerOS
+  suffix: 50% chance
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      layers:
+        - state: green
+    - type: RandomSpawner
+      prototypes:
+        - WallSolid
+      chance: 0.5
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Wall Spawner 0.9
+  id: WallSpawnerON
+  suffix: 90% chance
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      layers:
+        - state: green
+    - type: RandomSpawner
+      prototypes:
+        - WallSolid
+      chance: 0.9
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Wall Reinforced Spawner 0.5
+  id: WallReinforcedSpawnerOS
+  suffix: 50% chance
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      layers:
+        - state: green
+    - type: RandomSpawner
+      prototypes:
+        - WallReinforced
+      chance: 0.5
+  placement:
+    mode: AlignTileAny
+
+- type: entity
+  name: Random Wall Reinforced Spawner 0.9
+  id: WallReinforcedSpawnerON
+  suffix: 90% chance
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      layers:
+        - state: green
+    - type: RandomSpawner
+      prototypes:
+        - WallReinforced
+      chance: 0.9
+  placement:
+    mode: AlignTileAny
