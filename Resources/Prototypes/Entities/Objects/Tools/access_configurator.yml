@@ -32,6 +32,7 @@
       - ChiefEngineer
       - ChiefMedicalOfficer
       - Command
+      - Clown #SS220 new_accesses
       - Engineering
       - External
       - HeadOfPersonnel
@@ -40,17 +41,20 @@
       - Janitor
       - Kitchen
       - Lawyer
+      - Librarian #SS220 new_accesses
       - Maintenance
       - Medical
       - Quartermaster
       - Research
       - ResearchDirector
+      - Reporter #SS220 new_accesses
       - Salvage
       - Security
       - Service
-      - ServiceSS220 #SS220 new_accesses
       - Theatre
       - Magistrate #SS220-Magistrate Foundation
+      - Mime #SS220 new_accesses
+      - Musician #SS220 new_accesses
       - GenpopEnter
       - GenpopLeave
       privilegedIdSlot:
@@ -108,6 +112,7 @@
     - ChiefMedicalOfficer
     - Command
     - Cryogenics
+    - Clown #SS220 new_accesses
     - EmergencyShuttleRepealAll
     - Engineering
     - External
@@ -117,11 +122,13 @@
     - Janitor
     - Kitchen
     - Lawyer
+    - Librarian #SS220 new_accesses
     - Maintenance
     - Medical
     - Quartermaster
     - Research
     - ResearchDirector
+    - Reporter #SS220 new_accesses
     - Salvage
     - Security
     - Service
@@ -129,6 +136,8 @@
     - StationAi
     - Theatre
     - Magistrate #SS220-Magistrate Foundation
+    - Mime #SS220 new_accesses
+    - Musician #SS220 new_accesses
     - CentralCommand
     - NuclearOperative
     - SyndicateAgent

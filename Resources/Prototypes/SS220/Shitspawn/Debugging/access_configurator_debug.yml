@@ -26,6 +26,7 @@
       - ChiefEngineer
       - ChiefMedicalOfficer
       - Command
+      - Clown #SS220 new_accesses
       - Detective
       - Engineering
       - EmergencyShuttleRepealAll
@@ -35,6 +36,8 @@
       - Hydroponics
       - Janitor
       - Kitchen
+      - Lawyer
+      - Librarian #SS220 new_accesses
       - Maintenance
       - Medical
       - NuclearOperative
@@ -42,13 +45,15 @@
       - Quartermaster
       - Research
       - ResearchDirector
+      - Reporter #SS220 new_accesses
       - Salvage
       - Security
       - Service
-      - ServiceSS220 #SS220 new_accesses
       - SyndicateAgent
       - Theatre
       - Magistrate
+      - Mime #SS220 new_accesses
+      - Musician #SS220 new_accesses
       #New centcomm accesses begin
       - CentralCommand
       - CentralCommandCBURN

@@ -12,7 +12,8 @@
   id: StationAi
   name: id-card-access-level-station-ai
   canAddToIdCard: false
-  
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
+
 - type: accessGroup
   id: Silicon
   tags:
