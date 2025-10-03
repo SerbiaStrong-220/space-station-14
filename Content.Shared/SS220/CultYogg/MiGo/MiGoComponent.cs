@@ -17,6 +17,9 @@ public sealed partial class MiGoComponent : Component
     #region Abilities
     /// ABILITIES ///
     [DataField]
+    public EntProtoId MiGoToggleLightAction = "ActionMiGoToggleLight";
+
+    [DataField]
     public EntProtoId MiGoEnslavementAction = "ActionMiGoEnslavement";
 
     [DataField]
@@ -33,6 +36,9 @@ public sealed partial class MiGoComponent : Component
 
     [DataField]
     public EntProtoId MiGoTeleportAction = "ActionMiGoTeleport";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? MiGoToggleLightActionEntity;
 
     [DataField, AutoNetworkedField]
     public EntityUid? MiGoEnslavementActionEntity;

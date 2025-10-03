@@ -43,3 +43,7 @@ public sealed partial class MiGoSacrificeActionEvent : InstantActionEvent
 public sealed partial class MiGoTeleportActionEvent : InstantActionEvent
 {
 }
+
+public sealed partial class MiGoToggleLightEvent : InstantActionEvent
+{
+}

@@ -11,5 +11,8 @@ namespace Content.Shared.SS220.EntityEffects.Effects;
 [UsedImplicitly]
 public sealed partial class ChemMiGomyceliumEffect : EventEntityEffect<ChemMiGomyceliumEffect>
 {
-    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) => Loc.GetString("reagent-effect-guidebook-ss220-corrupt-mind", ("chance", Probability));
+    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+    {
+        return Loc.GetString("reagent-effect-guidebook-ss220-corrupt-mind");
+    }
 }

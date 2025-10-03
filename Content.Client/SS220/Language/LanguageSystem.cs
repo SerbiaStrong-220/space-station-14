@@ -157,7 +157,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     {
         var key = GenerateCacheKey(language.ID, message);
         KnownPaperNodes[key] = message;
-        return $"[{LanguageMsgMarkup}=\"{key}\"]";
+        return $"[{LanguageMsgMarkup}=\"{key}\"/]";
     }
     #endregion
 }

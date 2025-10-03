@@ -17,6 +17,6 @@ public sealed partial class DetectiveCameraAttachComponent : Component
     [DataField, AutoNetworkedField]
     public float DetachTime = 3f;
 
-    [DataField("сellSlotId"), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public string CellSlotId = "detective_camera_slot";
 }

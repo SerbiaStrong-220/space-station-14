@@ -17,6 +17,8 @@ using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
@@ -33,6 +35,8 @@ public sealed class SharpSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    //SS220-butchering-update
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -73,6 +77,14 @@ public sealed class SharpSystem : EntitySystem
         if (!sharp.Butchering.Add(target))
             return false;
 
+        //SS220-butchering-update begin
+        if (!_audio.IsPlaying(butcher.ButcheringAudioStream))
+        {
+            var audioParams = AudioParams.Default.WithMaxDistance(10f);
+            butcher.ButcheringAudioStream = _audio.PlayPvs(butcher.ButcheringSound, target, audioParams)?.Entity;
+        }
+        //SS220-butchering-update end
+
         // if the user isn't the entity with the sharp component,
         // they will need to be holding something with their hands, so we set needHand to true
         // so that the doafter can be interrupted if they drop the item in their hands
@@ -93,6 +105,9 @@ public sealed class SharpSystem : EntitySystem
     {
         if (args.Handled || !TryComp<ButcherableComponent>(args.Args.Target, out var butcher))
             return;
+
+        //SS220-butchering-update
+        _audio.Stop(butcher.ButcheringAudioStream);
 
         if (args.Cancelled)
         {

@@ -2663,6 +2663,14 @@
       groups:
         Brute: -0.07
         Burn: -0.07
+  #SS220-fuana-update-begin
+  - type: Magboots
+  - type: Puller
+    needsHands: false
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
+  #SS220-fauna-update-ended
 
 - type: entity
   parent: MobSpiderBase
@@ -3175,6 +3183,18 @@
     availableLanguages:
     - id: Feline
       canSpeak: true
+    - id: Doggish
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
     - id: Galactic
       canSpeak: false
 #SS220 Animalistic Languages end
@@ -3217,8 +3237,8 @@
     spawned:
     - id: FoodMeat
       amount: 3
-  - type: ReplacementAccent
-    accent: cat
+  # - type: ReplacementAccent
+  #   accent: cat
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-cat

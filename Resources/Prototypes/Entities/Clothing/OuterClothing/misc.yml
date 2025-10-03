@@ -203,9 +203,9 @@
   description: Ho ho ho!
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Misc/santa.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/santa.rsi # SS220 santa suit resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Misc/santa.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/santa.rsi # SS220 santa suit resprite
 
 - type: entity
   abstract: true

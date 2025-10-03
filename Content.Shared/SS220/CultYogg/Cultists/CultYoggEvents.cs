@@ -19,9 +19,6 @@ public sealed class CultYoggDeCultingEvent(EntityUid entity) : EntityEventArgs
 }
 
 [ByRefEvent, Serializable]
-public record struct CultYoggForceAscendingEvent;
-
-[ByRefEvent, Serializable]
 public record struct CultYoggAscendingEvent;
 
 

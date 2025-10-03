@@ -42,7 +42,9 @@ steal-target-groups-wanted-list-cartridge = картридж Список раз
 # Thief structures
 steal-target-groups-teg = часть термоэлектрического генератора
 steal-target-groups-freezer-heater = нагреватель или охладитель
-steal-target-groups-altar-nanotrasen = алтарь Nanotrasen (любой)
+# ss220 Addition to the description of NanoTrasen altar theft target begin
+steal-target-groups-altar-nanotrasen = алтарь Nanotrasen (любой религиозный)
+# ss220 Addition to the description of NanoTrasen altar theft target end
 steal-target-groups-nuclear-bomb = ядерная боеголовка
 steal-target-groups-fax-machine-captain = факс дальнего действия капитана
 steal-target-groups-chem-dispenser = химический раздатчик
