@@ -11,6 +11,14 @@
             "name": "dead"
         },
         {
+            "name": "equipped-HELMET",
+            "directions": 4
+        },
+        {
+            "name": "equipped-HELMET-hamster",
+            "directions": 4
+        },
+        {
             "name": "peel-equipped-HELMET",
             "directions": 4
         },
