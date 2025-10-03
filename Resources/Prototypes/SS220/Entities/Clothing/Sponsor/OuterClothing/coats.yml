@@ -98,6 +98,11 @@
   parent: [ ClothingSponsor1984, ClothingOuterCoatHoSTrench ]
   id: ClothingSponsor1984HoS
   suffix: Шлёпа, Глава СБ
+  components:
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
 
 # CyberPunk
 - type: entity
