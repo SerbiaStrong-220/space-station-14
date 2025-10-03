@@ -1264,16 +1264,18 @@
   metabolisms:
     Medicine:
       effects:
-        - !type:EventHealthChange
+        - !type:HealthChange
           conditions:
           - !type:Temperature
             max: 213.0
           damage:
             groups:
-              Brute: -4
-              Burn: -4
+              Brute: -12
+              Toxin: -4
             types:
-              Poison: -2
+              Cold: -4.0
+              Heat: -4.0
+              Shock: -4.0
               Caustic: -1.25
 
 - type: reagent
