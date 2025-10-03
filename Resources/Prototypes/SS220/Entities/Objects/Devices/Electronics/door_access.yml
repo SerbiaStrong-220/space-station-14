@@ -57,3 +57,13 @@
   components:
   - type: AccessReader
     access: [["Blueshield"]]
+
+# New_service_accesses
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsClown
+  suffix: Clown, Locked
+  components:
+  - type: AccessReader
+    access: [["Clown"]]

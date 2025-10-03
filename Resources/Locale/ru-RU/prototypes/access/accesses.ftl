@@ -17,6 +17,7 @@ id-card-access-level-chief-medical-officer = Главный врач
 id-card-access-level-medical = Медицинский
 id-card-access-level-chemistry = Химия
 id-card-access-level-paramedic = Парамедик
+id-card-access-level-psychologist = Психолог
 id-card-access-level-quartermaster = Квартирмейстер
 id-card-access-level-cargo = Снабжение
 id-card-access-level-salvage = Утилизаторский
