@@ -155,6 +155,7 @@
     clientExclusive: true
   - type: InstantAction
     event: !type:MiGoToggleLightEvent
+
 - type: entity
   id: ActionMiGoTeleport
   name: Teleport

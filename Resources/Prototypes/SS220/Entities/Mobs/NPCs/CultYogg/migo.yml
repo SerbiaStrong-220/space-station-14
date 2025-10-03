@@ -75,6 +75,8 @@
     states:
       Alive:
         Base: alive
+      Critical:
+        Base: critical
       Dead:
         Base: dead
   - type: Visibility
@@ -99,6 +101,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
+      200: Critical
       250: Dead
   - type: Destructible
     thresholds:
