@@ -94,6 +94,11 @@
     heatingCoefficient: 1.1
     coolingCoefficient: 0.1
 
+- type: entity
+  parent: [ ClothingSponsor1984, ClothingOuterCoatHoSTrench ]
+  id: ClothingSponsor1984HoS
+  suffix: Шлёпа, Глава СБ
+
 # CyberPunk
 - type: entity
   parent: ClothingSponsorOuterStorageBase
