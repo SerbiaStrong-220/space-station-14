@@ -6,19 +6,17 @@ using Content.Server.SS220.ItemOfferVerb.Components;
 using Content.Shared.Alert;
 using Content.Shared.Hands.Components;
 using Content.Shared.Popups;
-using Content.Shared.SS220.ItemOfferVerb;
-using Content.Shared.Verbs;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Interaction.Components;
 using Robust.Shared.Input.Binding;
 using Content.Shared.SS220.Input;
+using Content.Shared.SS220.ItemOffer;
+using Content.Shared.SS220.ItemOffer.Verb;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.ItemOfferVerb.Systems;
 
-public sealed class ItemOfferSystem : EntitySystem
+public sealed class ItemOfferSystem : SharedItemOfferSystem
 {
     [Dependency] private readonly EntityManager _entMan = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
@@ -31,7 +29,6 @@ public sealed class ItemOfferSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<HandsComponent, GetVerbsEvent<EquipmentVerb>>(AddOfferVerb);
         SubscribeLocalEvent<ItemReceiverComponent, ItemOfferAlertEvent>(OnItemOffserAlertClicked);
 
         CommandBinds.Builder
@@ -88,24 +85,6 @@ public sealed class ItemOfferSystem : EntitySystem
         }
     }
 
-    //TODO-SS220-move-to-shared-for-prediction
-    private void AddOfferVerb(EntityUid uid, HandsComponent component, GetVerbsEvent<EquipmentVerb> args)
-    {
-        if (!args.CanInteract || !args.CanAccess || _hands.GetActiveItem(args.User) == null)
-            return;
-
-        var verb = new EquipmentVerb()
-        {
-            Text = Loc.GetString("offer-verb-text"),
-            Act = () =>
-            {
-                DoItemOffer(args.User, uid);
-            },
-        };
-
-        args.Verbs.Add(verb);
-    }
-
     public void TransferItemInHands(EntityUid receiver, ItemReceiverComponent? itemReceiver)
     {
         if (itemReceiver == null)
@@ -133,7 +112,7 @@ public sealed class ItemOfferSystem : EntitySystem
         }
     }
 
-    private void DoItemOffer(EntityUid user, EntityUid target)
+    protected override void DoItemOffer(EntityUid user, EntityUid target)
     {
         if (!TryComp<HandsComponent>(target, out var handsComponent))
             return;

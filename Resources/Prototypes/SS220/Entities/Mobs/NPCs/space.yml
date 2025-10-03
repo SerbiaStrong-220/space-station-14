@@ -133,3 +133,19 @@
     rules: ghost-role-information-freeagent-rules
     mindRoles:
     - MindRoleGhostRoleFreeAgent
+
+- type: entity
+  name: Space cobra
+  id: MobCobraSpaceGhostRole
+  suffix: GhostRole
+  parent: MobCobraSpace
+  description: Long fangs and a glowing hood, and the alluring look begs to come closer.
+  components:
+    - type: GhostRole
+      makeSentient: true
+      name: ghost-role-information-cobra-space-name
+      description: ghost-role-information-cobra-space-description
+      rules: ghost-role-information-snake-overall-rules
+      mindRoles:
+        - MindRoleGhostRoleTeamAntagonist
+    - type: GhostTakeoverAvailable

@@ -36,13 +36,14 @@
   - Zookeeper
   - ServiceWorker
 
+##SS220 Centcomm_color_fix start
 - type: department
-  id: CentralCommand
+  id: EmergencyResponseTeam
   name: department-CentralCommand
   description: department-CentralCommand-description
   color: "#18689a" #ss220-chatcolor
   roles:
-  - CentralCommandOfficial
+  - CentcomOperativeBSO
   - CBURN
   - ERTLeader
   - ERTChaplain
@@ -51,9 +52,29 @@
   - ERTSecurity
   - ERTEngineer
   - DeathSquad
+  - DeathsquadCommander
+  - DeathsquadHealer
   editorHidden: true
   weight: 120
   lightColor: "#387195" # SS220 Round End Titles
+
+- type: department
+  id: CentralCommand
+  name: department-CentralCommand
+  description: department-CentralCommand-description
+  color: "#e0ad5d" #ss220-chatcolor
+  roles:
+  - CentralCommandOfficial
+  - CentcommOfficer
+  - CentcomFieldOfficer
+  - CentCommNanoTrasenDiplomat
+  - CentComNanoTrasenAdmiral
+  - SpecOpsLeader
+  editorHidden: true
+  weight: 120
+  lightColor: "#dca248" # SS220 Round End Titles
+
+##SS220 Centcomm_color_fix end
 
 - type: department
   id: Command
@@ -73,14 +94,6 @@
   - ResearchDirector
   - Quartermaster
   - BlueShield
-  - CBURN
-  - ERTLeader
-  - ERTChaplain
-  - ERTJanitor
-  - ERTMedical
-  - ERTSecurity
-  - ERTEngineer
-  - DeathSquad
   primary: false
   weight: 100
   lightColor: "#2c60f8" # SS220 Round End Titles

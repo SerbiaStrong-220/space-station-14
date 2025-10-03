@@ -110,6 +110,7 @@
     speechSounds: Slime
   - type: TypingIndicator
     proto: slime
+  - type: NoSlip #SS220-fauna-update
 
 - type: entity
   name: basic slime
