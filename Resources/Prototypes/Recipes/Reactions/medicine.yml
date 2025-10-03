@@ -602,7 +602,7 @@
     Blood:
       amount: 3
     Omnizine:
-      amount: 1
+      amount: 3  #ss220 necrosol-buff
     Cryoxadone:
       amount: 2
   products:
