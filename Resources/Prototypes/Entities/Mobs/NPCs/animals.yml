@@ -1210,6 +1210,11 @@
       NavSmash: !type:Bool
         true
   - type: Prying
+  #ss220-prying-action-start
+  - type: ActionGrant
+    actions:
+    - ActionPryingBase
+  #ss220-prying-action-ended
     pryPowered: true
     force: true
     speedModifier: 1.5
@@ -2796,7 +2801,7 @@
     #ss220-prying-action-start
     - type: ActionGrant
       actions:
-      - ActionPryingClownSpider
+      - ActionPryingClown
     #ss220-prying-action-ended
 
 - type: entity

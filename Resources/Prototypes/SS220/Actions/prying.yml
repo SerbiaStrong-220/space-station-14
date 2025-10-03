@@ -23,10 +23,50 @@
 
 - type: entity
   parent: ActionPryingBase
-  id: ActionPryingClownSpider
+  id: ActionPryingClown
   name: Prying
   description: Pry
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    icon: { sprite : SS220/Interface/Actions/prying.rsi, state: "pryClownSpider" }
+    icon: { sprite : SS220/Interface/Actions/prying.rsi, state: "pryClown" }
+
+- type: entity
+  parent: ActionPryingBase
+  id: ActionPryingSpace
+  name: Prying
+  description: Pry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    icon: { sprite : SS220/Interface/Actions/prying.rsi, state: "prySpace" }
+
+- type: entity
+  parent: ActionPryingBase
+  id: ActionPryingXeno
+  name: Prying
+  description: Pry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    icon: { sprite : SS220/Interface/Actions/prying.rsi, state: "pryXeno" }
+
+- type: entity
+  parent: ActionPryingBase
+  id: ActionPryingSpiderQueen
+  name: Prying
+  description: Pry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    icon: { sprite : SS220/Interface/Actions/prying.rsi, state: "prySpiderQueen" }
+
+- type: entity
+  parent: ActionPryingBase
+  id: ActionPryingDragon
+  name: Prying
+  description: Pry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    icon: { sprite : SS220/Interface/Actions/prying.rsi, state: "pryDragon" }

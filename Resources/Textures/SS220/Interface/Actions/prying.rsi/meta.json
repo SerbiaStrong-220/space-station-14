@@ -14,7 +14,19 @@
         "name": "pryTarantula"
       },
       {
-        "name": "pryClownSpider"
+        "name": "pryClown"
+      },
+      {
+        "name": "prySpace"
+      },
+      {
+        "name": "pryXeno"
+      },
+      {
+        "name": "prySpiderQueen"
+      },
+      {
+        "name": "pryDragon"
       }
     ]
   }

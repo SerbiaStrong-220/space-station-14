@@ -117,6 +117,9 @@
     force: true
     useSound:
       path: /Audio/Items/crowbar.ogg
+  - type: ActionGrant
+    actions:
+    - ActionPryingSpace
 #SS220 Prying end
 
 - type: entity
@@ -283,6 +286,17 @@
       Unsexed: UnisexArachnid
   - type: TypingIndicator
     proto: spider
+  #ss220-prying-action-start
+  - type: Prying
+    pryPowered: true
+    force: true
+    speedModifier: 1.5
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: ActionGrant
+    actions:
+    - ActionPryingSpace
+  #ss220-prying-action-ended
 
 - type: entity
   id: MobSpiderSpaceSalvage

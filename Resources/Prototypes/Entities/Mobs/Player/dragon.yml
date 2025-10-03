@@ -187,6 +187,11 @@
     speedModifier: 2.5 # fast because dragon strong
     useSound:
       path: /Audio/Items/crowbar.ogg
+  #ss220-prying-action-start
+  - type: ActionGrant
+    actions:
+    - ActionPryingDragon
+  #ss220-prying-action-ended
 
 - type: entity
   parent: BaseMobDragon
