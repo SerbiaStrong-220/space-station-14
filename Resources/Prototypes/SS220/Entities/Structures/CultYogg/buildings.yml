@@ -136,6 +136,9 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
   - type: CultYoggBuilding
     eraseTime: 3
   - type: ChameleonStructure

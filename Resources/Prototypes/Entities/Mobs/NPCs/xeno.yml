@@ -364,7 +364,7 @@
   description: A menacing purple snake from Kepler-283c.
   components:
   - type: Sprite
-    drawdepth: Mobs
+    drawdepth: SmallMobs #SS220-fauna-update
     sprite: Mobs/Aliens/Xenos/purple_snake.rsi
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -415,15 +415,21 @@
           radius: 0.35
         density: 25
         mask:
-        - MobMask
+        - SmallMobMask #SS220-fauna-update
         layer:
-        - MobLayer
+        - SmallMobLayer #SS220-fauna-update
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepSnake
+      #SS220-fauna-update-begin
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
+  - type: NoSlip
+      #SS220-fauna-update-ended
   - type: Tag
     tags:
-    - DoorBumpOpener
+    #- DoorBumpOpener #SS220-fauna-update (muted tag due to changes)
     - FootstepSound
 
 - type: entity

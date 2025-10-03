@@ -153,9 +153,9 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
             return true;
 
         var cryostorageComponents = EntityQueryEnumerator<CryostorageComponent>();
-        while (cryostorageComponents.MoveNext(out var cryostorageUid, out var сryostorageComp))
+        while (cryostorageComponents.MoveNext(out var cryostorageUid, out var cryostorageComp))
         {
-            if (TryTeleportToCryo(target, cryostorageUid, station.Value, сryostorageComp.TeleportPortralID))
+            if (TryTeleportToCryo(target, cryostorageUid, station.Value, cryostorageComp.TeleportPortralID))
                 return true;
         }
 

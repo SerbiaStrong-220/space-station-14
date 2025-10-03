@@ -818,3 +818,7 @@ FloorTileItemSteelLingering0: null
 PartRodMetalLingering0: null
 SheetGlassLingering0: null
 SheetSteelLingering0: null
+
+# 19-09-2025 - SS220 Fix cyrillic "C"
+BoxFolderСaptain: BoxFolderCaptain
+DrinkBerryСompote: DrinkBerryCompote
