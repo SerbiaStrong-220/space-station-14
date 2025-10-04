@@ -1,3 +1,4 @@
+using Content.Shared.Doors.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.StationAi;
 using Robust.Shared.Map.Components;
@@ -23,18 +24,19 @@ public sealed class StationAiVisionSystem : EntitySystem
     private SeedJob _seedJob;
     private ViewJob _job;
 
+    private readonly HashSet<Entity<AirlockComponent>> _airlocks = new();
     private readonly HashSet<Entity<OccluderComponent>> _occluders = new();
     private readonly HashSet<Entity<StationAiVisionComponent>> _seeds = new();
     private readonly HashSet<Vector2i> _viewportTiles = new();
 
+    private EntityQuery<AirlockComponent> _airlockQuery;
+    private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<OccluderComponent> _occluderQuery;
 
     // Dummy set
     private readonly HashSet<Vector2i> _singleTiles = new();
 
-    // Occupied tiles per-run.
-    // For now it's only 1-grid supported but updating to TileRefs if required shouldn't be too hard.
-    private readonly HashSet<Vector2i> _opaque = new();
+    private readonly HashSet<Vector2i> _tileOpaque = new();
 
     /// <summary>
     /// Do we skip line of sight checks and just check vision ranges.
@@ -45,6 +47,10 @@ public sealed class StationAiVisionSystem : EntitySystem
     {
         base.Initialize();
 
+        // ss220-mgs bgn
+        _airlockQuery = GetEntityQuery<AirlockComponent>();
+        _doorQuery = GetEntityQuery<DoorComponent>();
+        // ss220-mgs end
         _occluderQuery = GetEntityQuery<OccluderComponent>();
 
         _seedJob = new()
@@ -67,7 +73,6 @@ public sealed class StationAiVisionSystem : EntitySystem
     public bool IsAccessible(Entity<BroadphaseComponent, MapGridComponent> grid, Vector2i tile, float expansionSize = 8.5f, bool fastPath = false)
     {
         _viewportTiles.Clear();
-        _opaque.Clear();
         _seeds.Clear();
         _viewportTiles.Add(tile);
         var localBounds = _lookup.GetLocalBounds(tile, grid.Comp2.TileSize);
@@ -106,7 +111,7 @@ public sealed class StationAiVisionSystem : EntitySystem
             {
                 if (IsOccluded(grid, tileRef.GridIndices))
                 {
-                    _opaque.Add(tileRef.GridIndices);
+                    _tileOpaque.Add(tileRef.GridIndices); // ss220-mgs
                 }
             }
         }
@@ -118,7 +123,10 @@ public sealed class StationAiVisionSystem : EntitySystem
             _job.SeedTiles.Add(new HashSet<Vector2i>());
             _job.BoundaryTiles.Add(new HashSet<Vector2i>());
         }
-
+        // ss220-mgs bgn
+        _tileOpaque.Clear();
+        _job.Opaque = _tileOpaque;
+        // ss220-mgs end
         _singleTiles.Clear();
         _job.Grid = (grid.Owner, grid.Comp2);
         _job.VisibleTiles = _singleTiles;
@@ -127,7 +135,39 @@ public sealed class StationAiVisionSystem : EntitySystem
         return _job.VisibleTiles.Contains(tile);
     }
 
-    private bool IsOccluded(Entity<BroadphaseComponent, MapGridComponent> grid, Vector2i tile)
+    // ss220-mgs bgn
+    public bool TryAirlock(Entity<BroadphaseComponent, MapGridComponent> grid, Vector2i tile, out bool open)
+    {
+        var tileBounds = _lookup.GetLocalBounds(tile, grid.Comp2.TileSize).Enlarged(-0.05f);
+        _airlocks.Clear();
+        _lookup.GetLocalEntitiesIntersecting((grid.Owner, grid.Comp1), tileBounds, _airlocks, query: _airlockQuery, flags: LookupFlags.Static | LookupFlags.StaticSundries | LookupFlags.Approximate);
+
+        if (_airlocks.Count == 0)
+        {
+            open = false;
+            return false;
+        }
+
+        open = true;
+
+        foreach (var airlock in _airlocks)
+        {
+            if (!_doorQuery.TryComp(airlock.Owner, out var door))
+                continue;
+
+            if (door.State is DoorState.Closed or DoorState.Closing or DoorState.Welded)
+            {
+                open = false;
+                break;
+            }
+        }
+
+        return true;
+    }
+
+    public bool IsOccluded(Entity<BroadphaseComponent, MapGridComponent> grid, Vector2i tile)
+    // ss220-mgs end
+
     {
         var tileBounds = _lookup.GetLocalBounds(tile, grid.Comp2.TileSize).Enlarged(-0.05f);
         _occluders.Clear();
@@ -150,10 +190,17 @@ public sealed class StationAiVisionSystem : EntitySystem
     /// Gets a byond-equivalent for tiles in the specified worldAABB.
     /// </summary>
     /// <param name="expansionSize">How much to expand the bounds before to find vision intersecting it. Makes this the largest vision size + 1 tile.</param>
-    public void GetView(Entity<BroadphaseComponent, MapGridComponent> grid, Box2Rotated worldBounds, HashSet<Vector2i> visibleTiles, float expansionSize = 8.5f)
+
+    // ss220-mgs bgn
+    public void GetView(
+        Entity<BroadphaseComponent, MapGridComponent> grid,
+        Box2Rotated worldBounds,
+        HashSet<Vector2i> visibleTiles,
+        HashSet<Vector2i> opaque,
+        float expansionSize = 8.5f)
+    // ss220-mgs end
     {
         _viewportTiles.Clear();
-        _opaque.Clear();
         _seeds.Clear();
 
         // TODO: Would be nice to be able to run this while running the other stuff.
@@ -190,7 +237,7 @@ public sealed class StationAiVisionSystem : EntitySystem
         {
             if (IsOccluded(grid, tileRef.GridIndices))
             {
-                _opaque.Add(tileRef.GridIndices);
+                opaque.Add(tileRef.GridIndices); // ss220-mgs
             }
 
             _viewportTiles.Add(tileRef.GridIndices);
@@ -203,9 +250,9 @@ public sealed class StationAiVisionSystem : EntitySystem
             if (_viewportTiles.Contains(tileRef.GridIndices))
                 continue;
 
-            if (IsOccluded(grid, tileRef.GridIndices))
+            if (IsOccluded(grid, tileRef.GridIndices)) // ss220-mgs
             {
-                _opaque.Add(tileRef.GridIndices);
+                opaque.Add(tileRef.GridIndices); // ss220-mgs
             }
         }
 
@@ -219,6 +266,7 @@ public sealed class StationAiVisionSystem : EntitySystem
             _job.BoundaryTiles.Add(new HashSet<Vector2i>());
         }
 
+        _job.Opaque = opaque; // ss220-mgs
         _job.Grid = (grid.Owner, grid.Comp2);
         _job.VisibleTiles = visibleTiles;
         _parallel.ProcessNow(_job, _job.Data.Count);
@@ -321,6 +369,7 @@ public sealed class StationAiVisionSystem : EntitySystem
 
         public readonly List<HashSet<Vector2i>> SeedTiles = new();
         public readonly List<HashSet<Vector2i>> BoundaryTiles = new();
+        public HashSet<Vector2i> Opaque = new(); // ss220-mgs
 
         public void Execute(int index)
         {
@@ -393,7 +442,7 @@ public sealed class StationAiVisionSystem : EntitySystem
 
                     if (maxDelta == d + 1 && System.CheckNeighborsVis(vis2, tile, d))
                     {
-                        vis2[tile] = (System._opaque.Contains(tile) ? -1 : d + 1);
+                        vis2[tile] = (Opaque.Contains(tile) ? -1 : d + 1); // ss220-mgs
                     }
                 }
             }
@@ -407,7 +456,7 @@ public sealed class StationAiVisionSystem : EntitySystem
 
                     if (sumDelta == d + 1 && System.CheckNeighborsVis(vis1, tile, d))
                     {
-                        if (System._opaque.Contains(tile))
+                        if (Opaque.Contains(tile))
                         {
                             vis1[tile] = -1;
                         }
@@ -435,7 +484,7 @@ public sealed class StationAiVisionSystem : EntitySystem
             // Step 9
             foreach (var tile in seedTiles)
             {
-                if (!System._opaque.Contains(tile))
+                if (!Opaque.Contains(tile)) // ss220-mgs
                     continue;
 
                 var tileVis1 = vis1.GetValueOrDefault(tile);
@@ -443,10 +492,12 @@ public sealed class StationAiVisionSystem : EntitySystem
                 if (tileVis1 != 0)
                     continue;
 
-                if (System.IsCorner(seedTiles, System._opaque, vis1, tile, Vector2i.UpRight) ||
-                    System.IsCorner(seedTiles, System._opaque, vis1, tile, Vector2i.UpLeft) ||
-                    System.IsCorner(seedTiles, System._opaque, vis1, tile, Vector2i.DownLeft) ||
-                    System.IsCorner(seedTiles, System._opaque, vis1, tile, Vector2i.DownRight))
+                // ss220-mgs bgn
+                if (System.IsCorner(seedTiles, Opaque, vis1, tile, Vector2i.UpRight) ||
+                    System.IsCorner(seedTiles, Opaque, vis1, tile, Vector2i.UpLeft) ||
+                    System.IsCorner(seedTiles, Opaque, vis1, tile, Vector2i.DownLeft) ||
+                    System.IsCorner(seedTiles, Opaque, vis1, tile, Vector2i.DownRight))
+                // ss220-mgs end
                 {
                     boundary.Add(tile);
                 }
