@@ -262,3 +262,65 @@
       collection: Gasp
     CritGasp:
       collection: FemaleCritGasp
+      
+# species KPB
+- type: emoteSounds
+  id: MaleKpb
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      path: /Audio/SS220/Effects/Kpb/scream.ogg
+    Laugh:
+      path: /Audio/SS220/Effects/Kpb/laugh.ogg
+    Snore:
+      path: /Audio/Machines/buzz-two.ogg
+    Crying:
+      path: /Audio/SS220/Effects/Kpb/cry.ogg
+    Weh:
+      collection: Weh
+
+
+- type: emoteSounds
+  id: FemaleKpb
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      path: /Audio/SS220/Effects/Kpb/scream.ogg
+    Laugh:
+      path: /Audio/SS220/Effects/Kpb/laugh.ogg
+    Snore:
+      path: /Audio/Machines/buzz-two.ogg
+    Crying:
+      path: /Audio/SS220/Effects/Kpb/cry.ogg
+    Weh:
+      collection: Weh
+
+
+
+- type: emoteSounds
+  id: KpbEmotes
+  sounds:
+    BeepKpb:
+      path: /Audio/Machines/twobeep.ogg
+    ChimeKpb:
+      path: /Audio/Machines/chime.ogg
+    BuzzKpb:
+      path: /Audio/Machines/buzz-sigh.ogg
+    Buzz-TwoKpb:
+      path: /Audio/Machines/buzz-two.ogg
+    HonkKpb:
+      path: /Audio/Items/bikehorn.ogg
+    PingKpb:
+      path: /Audio/Effects/Cargo/ping.ogg
+    Clap:
+      collection: Claps
+    ClapSingle:
+      collection: ClapSingle
+    Snap:
+      collection: Snaps
+      params:
+        volume: -6
+    Salute:
+      collection: Salutes
