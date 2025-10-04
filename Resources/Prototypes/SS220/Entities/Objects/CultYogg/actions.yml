@@ -163,8 +163,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 600
     itemIconStyle: NoItem
-    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "summon"}
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "migo_teleport"}
   - type: InstantAction
     event: !type:MiGoTeleportActionEvent

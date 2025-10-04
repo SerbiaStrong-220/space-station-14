@@ -14,4 +14,12 @@
             SizeFlagsStretchRatio="3"
             HorizontalExpand="True"
             ClipText="True"/>
+    <Button Name="Spectate"
+            Access="Public"
+            Text="{Loc 'cargo-console-menu-cargo-order-row-approve-button'}"
+            StyleClasses="OpenRight" />
+    <Button Name="Teleport"
+            Access="Public"
+            Text="{Loc 'cargo-console-menu-cargo-order-row-cancel-button'}"
+            StyleClasses="OpenLeft" />
 </BoxContainer>

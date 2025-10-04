@@ -35,6 +35,8 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
@@ -60,7 +62,6 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
 
     /// <summary>
     /// Allows you to resolve dead-end situations where there are no cultists left, allowing you to recruit without feeding the mushroom
@@ -100,8 +101,8 @@ public abstract class SharedMiGoSystem : EntitySystem
         _actions.AddAction(uid, ref uid.Comp.MiGoAstralActionEntity, uid.Comp.MiGoAstralAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoErectActionEntity, uid.Comp.MiGoErectAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoSacrificeActionEntity, uid.Comp.MiGoSacrificeAction);
-		_actions.AddAction(uid, ref uid.Comp.MiGoToggleLightActionEntity, uid.Comp.MiGoToggleLightAction);
-		_actions.AddAction(uid, ref uid.Comp.MiGoTeleportActionEntity, uid.Comp.MiGoTeleportAction);
+        _actions.AddAction(uid, ref uid.Comp.MiGoToggleLightActionEntity, uid.Comp.MiGoToggleLightAction);
+        _actions.AddAction(uid, ref uid.Comp.MiGoTeleportActionEntity, uid.Comp.MiGoTeleportAction);
     }
 
     private void OnBoundUIOpened(Entity<MiGoComponent> entity, ref BoundUIOpenedEvent args)
@@ -534,18 +535,23 @@ public abstract class SharedMiGoSystem : EntitySystem
         if (args.Handled || !TryComp<ActorComponent>(ent, out var actor))
             return;
 
-        _miGoErectSystem.OpenUI(ent, actor);
+        args.Handled = true;
+
+        _userInterfaceSystem.TryToggleUi(ent.Owner, MiGoUiKey.Teleport, actor.PlayerSession);
+        //Dirty(ent, ent.Comp);
     }
 
-    private List<EntityUid> GetTeleportsPoints()
+    private List<(string, NetEntity?)> GetTeleportsPoints()
     {
-        List<EntityUid> warps = [];
+        List<(string, NetEntity?)> warps = [];
 
-        var queryMiGo = EntityQueryEnumerator<CultYoggComponent>();
+        //var queryMiGo = EntityQueryEnumerator<CultYoggComponent>();
+
+        var queryMiGo = EntityQueryEnumerator<HumanoidAppearanceComponent>();
 
         while (queryMiGo.MoveNext(out var ent, out _))
         {
-            warps.Add(ent);
+            warps.Add((MetaData(ent).EntityName, GetNetEntity(ent)));
         }
         return warps;
     }
