@@ -124,3 +124,29 @@
     Blunt: 0.7
     Slash: 0.5
     Radiation: 0.4
+
+#midround-fauna-damagesets-begin
+- type: damageModifierSet
+  id: MobBasicSpider
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.9
+    Piercing: 0.6
+    Heat: 1
+
+- type: damageModifierSet
+  id: MobBasicSlime
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.9
+    Heat: 0.6
+    Piercing: 1
+
+- type: damageModifierSet
+  id: MobBasicSnake
+  coefficients:
+    Blunt: 1
+    Slash: 0.5
+    Heat: 0.9
+    Piercing: 0.6
+#midround-fauna-damagesets-ended
