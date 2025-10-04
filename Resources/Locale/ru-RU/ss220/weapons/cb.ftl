@@ -1,0 +1,16 @@
+ent-CLPacific = подарок на день рождения
+   .desc = В мире веселья давайте скажем "нет" насилию.
+ent-CLClusterFlash = нервы короля
+   .desc = Это будет сногсшибательное шоу! 
+ent-CLClusterBomb = кнурла
+   .desc = Сейчас будет бомбезный розыгрыш!
+ent-CLClusterClusterBomb = ои
+   .desc = Ого. Нам конец.
+ent-CLClusterHole = дыра офицера
+   .desc = Оно оттягивает или притягивает...?
+ent-CLClusterClusterHole = кластерная кластерная граната
+   .desc = КАК МОЖНО БОЛЬШЕ!!!
+ent-CLClusterClusterClusterHole = кластерная кластерная кластерная граната
+   .desc = Это уже не смешно...
+ent-CLSnapPop = разрыв
+   .desc = Бабах!
