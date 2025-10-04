@@ -26,7 +26,7 @@ jobs:
         "embeds": [{
             "title": "<a:nian:1179921939301670992> Запущено обновление по `${{GITHUB.REF_NAME}}` ветке!",
             "description": "При успешном обновлении, сервера на этой ветке будут обновлены",
-            "color": bd932a
+            "color": 12341258
           }]
         }' \
         $DISCORD_PUBLISH_NOTIFY
@@ -100,9 +100,9 @@ jobs:
         "embeds": [{
             "title": "✅ Успешно обновление по `${{GITHUB.REF_NAME}}` ветке!",
             "description": "Обновление прошло успешно.",
-            "color": 73bd2a
+            "color": 7584042
           }]
-        ' \
+        }' \
         $DISCORD_PUBLISH_NOTIFY
     - name: SS220 PN2D - Failure
       if: failure()
@@ -116,7 +116,7 @@ jobs:
           "embeds": [{
             "title": "❌ Нуспешно обновление по `${{GITHUB.REF_NAME}}` ветке!",
             "description": "При попытке обновить сервера столкнулись с ошибкой.",
-            "color": bc2a2a
+            "color": 12345610
           }]
         }' \
         $DISCORD_PUBLISH_NOTIFY
@@ -130,7 +130,7 @@ jobs:
           "username": "SS220 Changelogger",
           "avatar_url": "https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/refs/heads/master/logo.png",
           "embeds": [{
-            "title": "Обновление отправлено на сервера <a:astronaut~1:1175836032667766814>",
+            "title": "Обновление отправлено на сервера :astronaut~1:>",
             "description": "Сервера автоматически перезапустятся для обновления в конце текущих раундов!",
             "color": 3447003
           }]
