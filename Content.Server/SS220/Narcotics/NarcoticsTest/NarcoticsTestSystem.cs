@@ -3,9 +3,9 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
-using Content.Shared.SS220.NarcoticsTest;
+using Content.Shared.SS220.Narcotics.NarcoticsTest;
 
-namespace Content.Server.SS220.NarcoticsTest;
+namespace Content.Server.SS220.Narcotics.NarcoticsTest;
 
 public sealed class NarcoticsTestSystem : EntitySystem
 {

@@ -13,6 +13,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.SS220.Narcotics;
 using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -153,9 +154,8 @@ namespace Content.Server.Body.Systems
                 if (proto.Group == NarcoticsGroup &&
                     ent.Comp2?.Body is { } body)
                 {
-                    var narcoticsComp = EnsureComp<RecentlyUsedNarcoticsComponent>(body);
-                    narcoticsComp.LastTimeUsedNarcotics = _gameTiming.CurTime;
-                    narcoticsComp.TimeRemoveNarcoticsFromBlood = narcoticsComp.LastTimeUsedNarcotics + narcoticsComp.AddTimeForOneUse;
+                    var ev = new MetabolizeNarcoticEvent(body, proto.ID);
+                    RaiseLocalEvent(body, ref ev, true);
                 }
                 // ss220 add narcotics test end
 
