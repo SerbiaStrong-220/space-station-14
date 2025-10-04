@@ -1,9 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Messenger;
+using Content.Shared.SS220.Messenger;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.CartridgeLoader.Cartridges;
+namespace Content.Shared.SS220.CartridgeLoader.Cartridges;
 
 [Serializable, NetSerializable]
 public sealed class MessengerUiState : BoundUserInterfaceState
@@ -27,8 +27,14 @@ public sealed class MessengerChatUiState
     public bool NewMessages;
     public bool ForceUpdate;
 
-    public MessengerChatUiState(uint id, string? name, MessengerChatKind kind, HashSet<uint> members,
-        HashSet<uint> messages, uint? lastMessage, int sortNumber)
+    public MessengerChatUiState(
+        uint id,
+        string? name,
+        MessengerChatKind kind,
+        HashSet<uint> members,
+        HashSet<uint> messages,
+        uint? lastMessage,
+        int sortNumber)
     {
         Id = id;
         Name = name ?? "unknown";
@@ -107,5 +113,18 @@ public sealed class MessengerNewChatMessageUiState : BoundUserInterfaceState
     {
         ChatId = chatId;
         Message = message;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class MessengerDeleteMsgInChatUiState : BoundUserInterfaceState
+{
+    public uint? ChatId;
+    public bool DeleteAll;
+
+    public MessengerDeleteMsgInChatUiState(uint? chatId, bool deleteAll = false)
+    {
+        ChatId = chatId;
+        DeleteAll = deleteAll;
     }
 }
