@@ -2,10 +2,10 @@
 using Content.Shared.SS220.Hallucination;
 
 namespace Content.Server.SS220.Hallucination;
+
 [RegisterComponent]
 public sealed partial class HallucinationSourceComponent : Component
 {
-
     /// <summary>
     /// Simple flag to make effect switchable
     /// </summary>
@@ -17,12 +17,13 @@ public sealed partial class HallucinationSourceComponent : Component
     /// </summary>
     [DataField]
     public HallucinationSetting Hallucination;
+
     /// <summary>
     /// In that range hallucination will be applied to entities
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField("range")]
     public float RangeOfHallucinations = 1f;
+
     /// <summary>
     /// Next time after which we will check entities to send them hallucination
     /// </summary>

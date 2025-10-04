@@ -1,19 +1,17 @@
-using Content.Server.Speech.Components;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using System.Linq;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Linq;
+using Content.Shared.Speech;
 
-namespace Content.Server.Speech.EntitySystems;
+namespace Content.Server.SS220.TouretteSyndrome;
 
-// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 public sealed class TouretteAccentSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
 
     public override void Initialize()
     {
@@ -23,16 +21,15 @@ public sealed class TouretteAccentSystem : EntitySystem
         SubscribeLocalEvent<TouretteAccentComponent, ComponentStartup>(OnTouretteStartup);
     }
 
-
-    private void OnTouretteStartup(EntityUid uid, TouretteAccentComponent component, ComponentStartup args)
+    private void OnTouretteStartup(Entity<TouretteAccentComponent> ent, ref ComponentStartup args)
     {
-        component.SwearChance = _random.NextFloat(0f, 0.7f);
+        ent.Comp.SwearChance = _random.NextFloat(0f, 0.7f);
 
-        if (component.SwearChance >= 0.6f)
-            component.SwearChance = 0f;
+        if (ent.Comp.SwearChance >= 0.6f)
+            ent.Comp.SwearChance = 0f;
 
         var en = _proto.EnumeratePrototypes<TouretteCollectionPrototype>();
-        component.TouretteWords = en.ToArray()[_random.Next(0, en.Count() - 1)].Replics;
+        ent.Comp.TouretteWords = en.ToArray()[_random.Next(0, en.Count() - 1)].Replics;
     }
 
     // converts left word when typed into the right word. For example typing you becomes ye.
@@ -53,8 +50,8 @@ public sealed class TouretteAccentSystem : EntitySystem
         return msg;
     }
 
-    private void OnAccentGet(EntityUid uid, TouretteAccentComponent component, AccentGetEvent args)
+    private void OnAccentGet(Entity<TouretteAccentComponent> ent, ref AccentGetEvent args)
     {
-        args.Message = Accentuate(args.Message, component);
+        args.Message = Accentuate(args.Message, ent.Comp);
     }
 }

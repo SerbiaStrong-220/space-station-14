@@ -12,6 +12,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using System.Linq;
+using System.Numerics;
 
 namespace Content.Server.SS220.Forcefield.Systems;
 
@@ -99,8 +100,8 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
             _fixture.DestroyFixture(entity, fixture.Key, false, manager: fixtures);
 
         var shapes = forcefield.Params.Shape.GetPhysShapes();
-        var density = forcefield.Params.Density / shapes.Count();
-        for (var i = 0; i < shapes.Count(); i++)
+        var density = forcefield.Params.Density / shapes.Count;
+        for (var i = 0; i < shapes.Count; i++)
         {
             var shape = shapes.ElementAt(i);
             _fixture.TryCreateFixture(
@@ -122,10 +123,8 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
     private void UpdatePvsOverride(Entity<ForcefieldComponent> entity)
     {
         var pvsRange = _configurationManager.GetCVar(CVars.NetMaxUpdateRange);
-
+        var invWorldMatrix = _transform.GetInvWorldMatrix(entity);
         var curOverrides = _curPvsOverrides.GetOrNew(entity);
-        var toRemove = curOverrides.ToList();
-        var toAdd = new List<ICommonSession>();
 
         foreach (var session in _player.Sessions)
         {
@@ -134,40 +133,33 @@ public sealed partial class ForcefieldSystem : SharedForcefieldSystem
                 continue;
 
             var entMapCoords = _transform.GetMapCoordinates(attachedEnt.Value);
-            var forcefieldMapCoords = _transform.GetMapCoordinates(attachedEnt.Value);
+            var forcefieldMapCoords = _transform.GetMapCoordinates(entity);
 
             if (forcefieldMapCoords.MapId != entMapCoords.MapId)
                 continue;
 
-            var entLocalCoords = _transform.ToCoordinates(entity.Owner, entMapCoords);
-            var closestPoint = entity.Comp.Params.Shape.GetClosestPoint(entLocalCoords.Position);
-            if (closestPoint is null)
-                continue;
+            var entLocalPos = Vector2.Transform(entMapCoords.Position, invWorldMatrix);
+            var inPvs = entity.Comp.Params.Shape.InRange(entLocalPos, pvsRange);
 
-            var distanse = (entLocalCoords.Position - closestPoint.Value).Length();
-            if (distanse > pvsRange)
-                continue;
-
-            if (!toRemove.Remove(session))
-                toAdd.Add(session);
+            if (inPvs)
+            {
+                if (!curOverrides.Contains(session))
+                {
+                    _pvsOverride.AddSessionOverride(entity, session);
+                    curOverrides.Add(session);
+                }
+            }
+            else
+            {
+                if (curOverrides.Contains(session))
+                {
+                    _pvsOverride.RemoveSessionOverride(entity, session);
+                    curOverrides.Remove(session);
+                }
+            }
         }
 
-        foreach (var session in toRemove)
-        {
-            _pvsOverride.RemoveSessionOverride(entity, session);
-            curOverrides.Remove(session);
-        }
-
-        foreach (var session in toAdd)
-        {
-            _pvsOverride.AddSessionOverride(entity, session);
-            curOverrides.Add(session);
-        }
-
-        if (curOverrides.Count > 0)
-            _curPvsOverrides.TryAdd(entity, curOverrides);
-        else
-            _curPvsOverrides.Remove(entity);
+        _curPvsOverrides.TryAdd(entity.Owner, curOverrides);
     }
 }
 

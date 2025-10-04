@@ -16,8 +16,6 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
 
-    private readonly List<EntProtoId> _data = [];
-
     public override void Initialize()
     {
         base.Initialize();
@@ -91,17 +89,45 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    ///     Get a list of valid chameleon targets
-    /// </summary>
-    public IEnumerable<EntProtoId> GetValidTargets()
+    private void UpdateUi(Entity<ChameleonStructureComponent> ent)
     {
-        return _data;
+        var state = new ChameleonStructureBoundUserInterfaceState(ent.Comp.Prototype, ent.Comp.ListData, ent.Comp.RequireTag);
+        UI.SetUiState(ent.Owner, ChameleonStructureUiKey.Key, state);
+    }
+
+    /// <summary>
+    ///     Change chameleon structure name, description and sprite to mimic other entity prototype.
+    /// </summary>
+    public void SetPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false)
+    {
+        // check that wasn't already selected
+        // forceUpdate on component init ignores this check
+        if (ent.Comp.Prototype == protoId && !forceUpdate)
+            return;
+
+        // make sure that it is valid change
+        if (string.IsNullOrEmpty(protoId) || !_proto.TryIndex(protoId, out EntityPrototype? proto))
+            return;
+
+        if (!IsValidTarget(proto, ent.Comp.RequireTag) && !(ent.Comp.ProtoList is not null && ent.Comp.ProtoList.Contains(proto)))
+            return;
+
+        ent.Comp.Prototype = protoId;
+        UpdateVisuals(ent);
+
+        UpdateUi(ent);
+        Dirty(ent, ent.Comp);
+
+        if (!TryComp<AppearanceComponent>(ent, out var appearance))//it fixes wrong layer states
+            return;
+
+        Dirty(ent, appearance);
     }
 
     protected void UpdateData(Entity<ChameleonStructureComponent> ent)
     {
-        _data.Clear();
+        ent.Comp.ListData.Clear();//clear list before updatint list
+
         var prototypes = _proto.EnumeratePrototypes<EntityPrototype>();
 
         foreach (var proto in prototypes)
@@ -110,7 +136,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
             if (!IsValidTarget(proto, ent.Comp.RequireTag))
                 continue;
 
-            _data.Add(proto.ID);
+            ent.Comp.ListData.Add(proto.ID);
         }
 
         if (ent.Comp.ProtoList is null)
@@ -118,10 +144,10 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
 
         foreach (var proto in ent.Comp.ProtoList)
         {
-            if (_data.Contains(proto))
+            if (ent.Comp.ListData.Contains(proto))
                 continue;
 
-            _data.Add(proto);
+            ent.Comp.ListData.Add(proto);
         }
     }
 }

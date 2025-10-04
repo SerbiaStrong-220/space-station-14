@@ -22,7 +22,7 @@ public sealed partial class ExorcismMenu : FancyWindow
         var loc = IoCManager.Resolve<ILocalizationManager>();
         MessageInput.Placeholder = new Rope.Leaf(loc.GetString("bible-exorcism-menu-message-placeholder"));
 
-        MessageInput.OnTextChanged += (args) =>
+        MessageInput.OnTextChanged += _ =>
         {
             var len = GetLength();
             if (len < LengthMin)
@@ -49,19 +49,9 @@ public sealed partial class ExorcismMenu : FancyWindow
         ReadButton.Disabled = true;
     }
 
-    public override void Close()
-    {
-        base.Close();
-    }
-
     public void RefreshLengthCounter()
     {
         RefreshLengthCounter(GetLength());
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
     }
 
     private void RefreshLengthCounter(int length)

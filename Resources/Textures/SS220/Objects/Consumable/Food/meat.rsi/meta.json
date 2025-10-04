@@ -12,6 +12,22 @@
       },
       {
         "name": "goliath-cooked"
+      },
+      {
+        "name": "goliath-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "goliath-inhand-left",
+        "directions": 4
+      },
+      {
+        "name": "goliath-cooked-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "goliath-cooked-inhand-left",
+        "directions": 4
       }
     ]
   }

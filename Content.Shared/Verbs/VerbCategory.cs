@@ -95,5 +95,8 @@ namespace Content.Shared.Verbs
         //SS220-SpecialSound-system  end
 
         public static readonly VerbCategory PowerLevel = new("verb-categories-power-level", null);
+
+        public static readonly VerbCategory Adjust =
+            new("verb-categories-adjust", "/Textures/Interface/VerbIcons/screwdriver.png");
     }
 }

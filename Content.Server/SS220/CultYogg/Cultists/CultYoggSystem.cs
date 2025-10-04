@@ -4,9 +4,6 @@ using Content.Server.Humanoid;
 using Content.Server.Medical;
 using Content.Server.SS220.Bed.Cryostorage;
 using Content.Server.SS220.GameTicking.Rules;
-using Content.Server.SS220.GameTicking.Rules.Components;
-using Content.Server.SS220.Objectives.Components;
-using Content.Server.SS220.Objectives.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -21,15 +18,13 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
-using Content.Shared.SS220.CultYogg.Sacraficials;
-using Content.Shared.SS220.EntityEffects;
 using Content.Shared.SS220.StuckOnEquip;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Linq;
+using Content.Shared.SS220.EntityEffects.Events;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
@@ -59,10 +54,8 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         // actions
         SubscribeLocalEvent<CultYoggComponent, CultYoggPukeShroomActionEvent>(OnPukeAction);
         SubscribeLocalEvent<CultYoggComponent, CultYoggDigestActionEvent>(OnDigestAction);
-        SubscribeLocalEvent<CultYoggComponent, CultYoggAscendingEvent>(OnAscending);
 
         SubscribeLocalEvent<CultYoggComponent, OnSaintWaterDrinkEvent>(OnSaintWaterDrinked);
-        SubscribeLocalEvent<CultYoggComponent, CultYoggForceAscendingEvent>(OnForcedAcsending);
         SubscribeLocalEvent<CultYoggComponent, ChangeCultYoggStageEvent>(OnUpdateStage);
         SubscribeLocalEvent<CultYoggComponent, CloningEvent>(OnCloning);
 
@@ -138,11 +131,10 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                 if (!TryComp<MobStateComponent>(ent, out var mobstate))
                     return;
 
-                if (mobstate.CurrentState != MobState.Dead) //if he is dead we skip him
-                {
-                    var ev = new CultYoggForceAscendingEvent();//making cultist MiGo
-                    RaiseLocalEvent(ent, ref ev);
-                }
+                if (mobstate.CurrentState == MobState.Dead) //if cultists is dead we skip this one
+                    return;
+
+                AcsendCultist(ent);
                 break;
 
             default:
@@ -224,27 +216,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     #endregion
 
     #region Ascending
-    private void OnAscending(Entity<CultYoggComponent> ent, ref CultYoggAscendingEvent _)
-    {
-        if (TerminatingOrDeleted(ent))
-            return;
-
-        if (HasComp<AcsendingComponent>(ent))
-            return;
-
-        // Get original body position and spawn MiGo here
-        var migo = _entityManager.SpawnAtPosition(ent.Comp.AscendedEntity, Transform(ent).Coordinates);
-
-        // Move the mind if there is one and it's supposed to be transferred
-        if (_mind.TryGetMind(ent, out var mindId, out var mind))
-            _mind.TransferTo(mindId, migo, mind: mind);
-
-        //Gib original body
-        if (TryComp<BodyComponent>(ent, out var body))
-            _body.GibBody(ent, body: body);
-    }
-
-    private void OnForcedAcsending(Entity<CultYoggComponent> ent, ref CultYoggForceAscendingEvent _)
+    public void AcsendCultist(Entity<CultYoggComponent> ent)
     {
         if (TerminatingOrDeleted(ent))
             return;
@@ -252,9 +224,9 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         // Get original body position and spawn MiGo here
         var migo = _entityManager.SpawnAtPosition(ent.Comp.AscendedEntity, Transform(ent).Coordinates);
 
-        // Move the mind if there is one and it's supposed to be transferred
+
         if (_mind.TryGetMind(ent, out var mindId, out var mind))
-            _mind.TransferTo(mindId, migo, mind: mind);
+            _mind.TransferTo(mindId, migo, mind: mind);// Move the mind if there is one and it's supposed to be transferred
 
         //Gib original body
         if (TryComp<BodyComponent>(ent, out var body))
@@ -335,6 +307,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     {
         _cultRuleSystem.CheckSimplifiedEslavement();
     }
+
     private void OnCryoDeleted(Entity<CultYoggComponent> ent, ref BeingCryoDeletedEvent args)
     {
         _cultRuleSystem.CheckSimplifiedEslavement();

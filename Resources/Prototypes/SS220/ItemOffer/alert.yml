@@ -1,9 +1,9 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 - type: alert
   id: ItemOffer
+  name: Передача предмета
+  description: Вам хотят передать предмет
   icons:
   - sprite: /Textures/SS220/Interface/Alerts/item_offer.rsi
     state: mrrroew
   clickEvent: !type:ItemOfferAlertEvent
-  name: Передача предмета
-  description: Вам хотят передать предмет

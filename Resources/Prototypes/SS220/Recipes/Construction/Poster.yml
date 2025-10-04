@@ -1,0 +1,8 @@
+- type: construction
+  id: randomPosterContraband
+  graph: randomPosterContraband
+  startNode: start
+  targetNode: contrposter
+  category: construction-category-misc
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true

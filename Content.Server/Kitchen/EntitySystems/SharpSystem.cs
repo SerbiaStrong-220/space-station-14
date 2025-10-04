@@ -1,23 +1,24 @@
 ﻿using Content.Server.Body.Systems;
 using Content.Server.Kitchen.Components;
-using Content.Server.Nutrition.EntitySystems;
-using Content.Shared.Body.Components;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Body.Components;
 using Content.Shared.Database;
-using Content.Shared.Interaction;
-using Content.Shared.Nutrition.Components;
-using Content.Shared.Popups;
-using Content.Shared.Storage;
-using Content.Shared.Verbs;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
-using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Interaction;
 using Content.Shared.Kitchen;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Popups;
+using Content.Shared.Storage;
+using Content.Shared.Verbs;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
@@ -34,12 +35,14 @@ public sealed class SharpSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    //SS220-butchering-update
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SharpComponent, AfterInteractEvent>(OnAfterInteract, before: [typeof(UtensilSystem)]);
+        SubscribeLocalEvent<SharpComponent, AfterInteractEvent>(OnAfterInteract, before: [typeof(IngestionSystem)]);
         SubscribeLocalEvent<SharpComponent, SharpDoAfterEvent>(OnDoAfter);
 
         SubscribeLocalEvent<ButcherableComponent, GetVerbsEvent<InteractionVerb>>(OnGetInteractionVerbs);
@@ -74,6 +77,14 @@ public sealed class SharpSystem : EntitySystem
         if (!sharp.Butchering.Add(target))
             return false;
 
+        //SS220-butchering-update begin
+        if (!_audio.IsPlaying(butcher.ButcheringAudioStream))
+        {
+            var audioParams = AudioParams.Default.WithMaxDistance(10f);
+            butcher.ButcheringAudioStream = _audio.PlayPvs(butcher.ButcheringSound, target, audioParams)?.Entity;
+        }
+        //SS220-butchering-update end
+
         // if the user isn't the entity with the sharp component,
         // they will need to be holding something with their hands, so we set needHand to true
         // so that the doafter can be interrupted if they drop the item in their hands
@@ -94,6 +105,9 @@ public sealed class SharpSystem : EntitySystem
     {
         if (args.Handled || !TryComp<ButcherableComponent>(args.Args.Target, out var butcher))
             return;
+
+        //SS220-butchering-update
+        _audio.Stop(butcher.ButcheringAudioStream);
 
         if (args.Cancelled)
         {
@@ -118,27 +132,26 @@ public sealed class SharpSystem : EntitySystem
             popupEnt = Spawn(proto, coords.Offset(_robustRandom.NextVector2(0.25f)));
         }
 
-        var hasBody = TryComp<BodyComponent>(args.Args.Target.Value, out var body);
-
         // only show a big popup when butchering living things.
-        var popupType = PopupType.Small;
-        if (hasBody)
-            popupType = PopupType.LargeCaution;
+        // Meant to differentiate cutting up clothes and cutting up your boss.
+        var popupType = HasComp<MobStateComponent>(args.Args.Target.Value)
+            ? PopupType.LargeCaution
+            : PopupType.Small;
 
         _popupSystem.PopupEntity(Loc.GetString("butcherable-knife-butchered-success", ("target", args.Args.Target.Value), ("knife", Identity.Entity(uid, EntityManager))),
-            popupEnt, args.Args.User, popupType);
+            popupEnt,
+            args.Args.User,
+            popupType);
 
-        if (hasBody)
-            _bodySystem.GibBody(args.Args.Target.Value, body: body);
-
+        _bodySystem.GibBody(args.Args.Target.Value); // does nothing if ent can't be gibbed
         _destructibleSystem.DestroyEntity(args.Args.Target.Value);
 
         args.Handled = true;
 
         _adminLogger.Add(LogType.Gib,
-            $"{EntityManager.ToPrettyString(args.User):user} " +
-            $"has butchered {EntityManager.ToPrettyString(args.Target):target} " +
-            $"with {EntityManager.ToPrettyString(args.Used):knife}");
+            $"{ToPrettyString(args.User):user} " +
+            $"has butchered {ToPrettyString(args.Target):target} " +
+            $"with {ToPrettyString(args.Used):knife}");
     }
 
     private void OnGetInteractionVerbs(EntityUid uid, ButcherableComponent component, GetVerbsEvent<InteractionVerb> args)

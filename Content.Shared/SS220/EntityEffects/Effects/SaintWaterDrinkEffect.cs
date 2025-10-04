@@ -9,6 +9,6 @@ public sealed partial class SaintWaterDrinkEffect : EventEntityEffect<SaintWater
 {
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return "Помогает бороться с нечистью";
+        return Loc.GetString("reagent-effect-guidebook-ss220-cult-cleanse");
     }
 }

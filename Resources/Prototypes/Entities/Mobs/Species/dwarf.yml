@@ -17,9 +17,7 @@
     damageRecovery:
       types:
         Asphyxiation: -1.0
-  - type: Sprite
-    noRot: true
-    drawdepth: Mobs
+  - type: ScaleVisuals
     scale: 1, 0.8
   - type: Body
     prototype: Dwarf
@@ -63,6 +61,7 @@
     speechSounds: Bass
   # SS220-Add-Languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
     - id: Eldwarf
@@ -93,7 +92,7 @@
   id: MobDwarfDummy
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
+  - type: ScaleVisuals
     scale: 1, 0.8
   - type: Inventory
     femaleDisplacements:

@@ -44,6 +44,9 @@
     },
     {
         "name": "IconMycosis"
-    }
+    },
+	{
+		"name": "migo_light"
+	}
   ]
 }
