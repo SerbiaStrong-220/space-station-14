@@ -16,10 +16,10 @@
             ClipText="True"/>
     <Button Name="Spectate"
             Access="Public"
-            Text="{Loc 'cargo-console-menu-cargo-order-row-approve-button'}"
+            Text="{Loc 'migo-teleport-action-button'}"
             StyleClasses="OpenRight" />
     <Button Name="Teleport"
             Access="Public"
-            Text="{Loc 'cargo-console-menu-cargo-order-row-cancel-button'}"
+            Text="{Loc 'migo-teleport-observe-button'}"
             StyleClasses="OpenLeft" />
 </BoxContainer>

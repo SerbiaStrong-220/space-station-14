@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:co="clr-namespace:Content.Client.UserInterface.Controls"
-    MinHeight="210">
+    MinHeight="510">
     <BoxContainer Name="MainContainer" Orientation="Vertical">
         <LineEdit Name="SearchBar" PlaceHolder="{Loc 'vending-machine-component-search-filter'}" HorizontalExpand="True"  Margin ="4 4"/>
         <ScrollContainer Name="StoreListingsScroll"  HScrollEnabled="False" HorizontalExpand="True" MinSize="100 256"  SizeFlagsStretchRatio="2" VerticalExpand="True">

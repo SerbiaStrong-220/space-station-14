@@ -14,22 +14,11 @@ public sealed class MiGoTeleportBoundUserInterface(EntityUid owner, Enum uiKey) 
     private MiGoTeleportMenu? _menu;
     private readonly EntityUid _owner = owner;
 
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-
     protected override void Open()
     {
         base.Open();
 
         _menu = this.CreateWindowCenteredLeft<MiGoTeleportMenu>();
-        _menu.Title = _entityManager.GetComponent<MetaDataComponent>(Owner).EntityName;//ToDo_SS220 change this
-    }
-
-    private void Populate(List<(string, NetEntity?)> warps)
-    {
-        if (_menu == null)
-            return;
-
-        _menu.Populate(warps);
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -40,7 +29,6 @@ public sealed class MiGoTeleportBoundUserInterface(EntityUid owner, Enum uiKey) 
             return;
 
         _menu?.Update(_owner, cState);
-        Populate(cState.Warps);
     }
 
     protected override void Dispose(bool disposing)

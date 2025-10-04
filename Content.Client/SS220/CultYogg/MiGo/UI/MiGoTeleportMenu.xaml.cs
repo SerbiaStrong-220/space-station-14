@@ -27,13 +27,8 @@ public sealed partial class MiGoTeleportMenu : FancyWindow
 
     public void Update(EntityUid uid, MiGoTeleportBuiState state)
     {
-
-    }
-
-    public void Populate(List<(string, NetEntity?)> warpTargets)
-    {
         ClearAllTargets();
-        foreach (var (name, netEnt) in warpTargets)
+        foreach (var (name, netEnt) in state.Warps)
         {
             if (netEnt == null)
                 continue;
