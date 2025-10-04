@@ -1,0 +1,12 @@
+- type: constructionGraph
+  id: Hedge
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DeleteEntity {}
+      edges:
+        - to: Hedge
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
