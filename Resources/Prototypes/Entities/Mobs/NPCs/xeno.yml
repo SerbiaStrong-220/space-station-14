@@ -27,6 +27,11 @@
     speedModifier: 1.5
     useSound:
       path: /Audio/Items/crowbar.ogg
+  #ss220-prying-action-start
+  - type: ActionGrant
+    actions:
+    - ActionPryingXeno
+  #ss220-prying-action-ended
   - type: Reactive
     groups:
       Flammable: [Touch]
