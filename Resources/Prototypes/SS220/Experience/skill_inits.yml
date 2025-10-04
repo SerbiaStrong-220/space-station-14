@@ -1,0 +1,7 @@
+- type: addSkillOnInit
+  id: BaseSkillAddition
+  skills:
+    CombatTraining:
+      skillLevel: 2
+      skillSubLevel: 0
+      skillStudied: true
