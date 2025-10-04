@@ -8,10 +8,12 @@ using Content.Shared.Chat;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mind;
 using Content.Shared.Preferences;
+using Content.Shared.Roles;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Antag;
 
@@ -416,4 +418,25 @@ public sealed partial class AntagSelectionSystem
 
         return result;
     }
+
+    // SS220 DynamicTraitor begin
+    /// <summary>
+    /// Sets the maximum value for the number of antagonists
+    /// </summary>
+    /// <param name="selectionComp"> base component</param>
+    /// <param name="maxAntags"> number of maximum antags</param>
+    public void SetMaxAntags(AntagSelectionComponent selectionComp, List<ProtoId<AntagPrototype>> antags, int maxAntags)
+    {
+        for (var i = 0; i < selectionComp.Definitions.Count; i++)
+        {
+            var def = selectionComp.Definitions[i];
+
+            if (!def.PrefRoles.Except(antags).Any())
+                return;
+
+            def.Max = maxAntags;
+            selectionComp.Definitions[i] = def;
+        }
+    }
+    // SS220 DynamicTraitor end
 }
