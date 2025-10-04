@@ -39,6 +39,7 @@
       - EmpImplant
       - AdrenalImplant # SS220 implant-removing fix
       - ThermalVisionImplant # SS220 implant-removing fix
+      - DeathRattleImplantStation # SS220 implant-removing fix
       - ScramImplant
       - DnaScramblerImplant
       - MicroBombImplant
