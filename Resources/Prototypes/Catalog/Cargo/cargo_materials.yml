@@ -14,7 +14,7 @@
     sprite: Objects/Materials/Sheets/metal.rsi
     state: steel_3
   product: CrateMaterialSteel
-  cost: 6000
+  cost: 3000
   category: cargoproduct-category-name-materials
   group: market
 
