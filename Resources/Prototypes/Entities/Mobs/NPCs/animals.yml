@@ -2663,6 +2663,14 @@
       groups:
         Brute: -0.07
         Burn: -0.07
+  #SS220-fuana-update-begin
+  - type: Magboots
+  - type: Puller
+    needsHands: false
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
+  #SS220-fauna-update-ended
 
 - type: entity
   parent: MobSpiderBase

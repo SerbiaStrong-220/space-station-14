@@ -59,11 +59,8 @@ public abstract partial class SharedLanguageSystem
             avalibleLanguageKeys = "knowall";
         else
         {
-            foreach (var definition in languageComponent.AvailableLanguages)
+            foreach (var definition in languageComponent.SpokenLanguages)
             {
-                if (!definition.CanSpeak)
-                    continue;
-
                 if (_language.TryGetLanguageById(definition.Id, out var language))
                 {
                     if (avalibleLanguageKeys.Length > 0)

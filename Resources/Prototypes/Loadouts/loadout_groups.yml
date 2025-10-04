@@ -1443,6 +1443,7 @@
   - ChiefMedicalOfficerCloak
   - ChiefMedicalOfficerMantle
   - ParadeCloakCMO #SS220-CMOParade
+  - CMOStethoscope #SS220-SethoscopeForAll
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerShoes
