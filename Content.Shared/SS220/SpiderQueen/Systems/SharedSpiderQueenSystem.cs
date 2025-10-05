@@ -22,6 +22,7 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -31,6 +32,7 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
         SubscribeLocalEvent<SpiderQueenComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SpiderQueenComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderCocooningActionEvent>(OnCocooningAction);
+        SubscribeLocalEvent<SpiderQueenComponent, SpiderOpenSpawnMenu>(OnSpawnMenuOpen);
     }
 
     private void OnStartup(Entity<SpiderQueenComponent> entity, ref ComponentStartup args)
@@ -54,6 +56,15 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
             args.PushMarkup(Loc.GetString("spider-queen-blood-points-amount",
                 ("current", entity.Comp.CurrentBloodPoints.Int()), ("max", entity.Comp.MaxBloodPoints.Int())));
         }
+    }
+
+    private void OnSpawnMenuOpen(Entity<SpiderQueenComponent> entity, ref SpiderOpenSpawnMenu args)
+    {
+        //if (!_ui.IsUiOpen(entity.Owner, SpiderQueenSpawnInterface.Key))
+        //{
+        //    _ui.OpenUi(entity.Owner, SpiderQueenSpawnInterface.Key, actorComponent.PlayerSession);
+        //    return;
+        //}
     }
 
     private void OnCocooningAction(Entity<SpiderQueenComponent> entity, ref SpiderCocooningActionEvent args)

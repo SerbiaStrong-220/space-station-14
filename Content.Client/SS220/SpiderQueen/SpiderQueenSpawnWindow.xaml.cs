@@ -8,5 +8,8 @@ namespace Content.Client.SS220.SpiderQueenInterface;
 [GenerateTypedNameReferences]
 public sealed partial class SpiderQueenSpawnWindow : FancyWindow
 {
-
+    public SpiderQueenSpawnWindow()
+    {
+        RobustXamlLoader.Load(this);
+    }
 }
