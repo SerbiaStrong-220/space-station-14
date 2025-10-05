@@ -37,3 +37,113 @@
     sprite: SS220/Structures/Doors/Airlocks/Glass/law_sec.rsi
   - type: Wires
     layoutId: AirlockSecurity
+
+#SS220 New_accesses_and_some_tweaks start
+- type: entity
+  parent: AirlockClown
+  id: AirlockClownAccess
+  suffix: Clown, Locked, Clown
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsClown ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockLibrarian
+  suffix: Librarian
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsLibrarian ]
+
+- type: entity
+  parent: AirlockStandardGlass
+  id: AirlockGlassLibrarian
+  suffix: Librarian
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsLibrarian ]
+
+- type: entity
+  parent: AirlockStandardGlass
+  id: AirlockStandartGlassReporter
+  suffix: Reporter
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsReporter ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockReporter
+  suffix: Reporter
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsReporter ]
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockGlassReporter
+  suffix: Reporter
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsReporter ]
+
+- type: entity
+  parent: AirlockStandardGlass
+  id: AirlockGlassMime
+  suffix: Mime
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsMime ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockMime
+  suffix: Mime
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsMime ]
+
+- type: entity
+  parent: AirlockStandardGlass
+  id: AirlockGlassMusician
+  suffix: Musician
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsMusician ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockMusician
+  suffix: Musician
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsMusician ]
+
+- type: entity
+  parent: AirlockMedical
+  id: AirlockMeidicalPsychologist
+  suffix: Medical, Psychologist
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPsychologist ]
+
+- type: entity
+  parent: AirlockMedicalGlass
+  id: AirlockMeidicalGlassPsychologist
+  suffix: Medical, Psychologist
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPsychologist ]
+#SS220 New_accesses_and_some_tweaks end
