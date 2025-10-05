@@ -41,7 +41,6 @@
   radioBold: true
   access:
   - Command
-
   - HeadOfPersonnel
   - Bar
   - Service
