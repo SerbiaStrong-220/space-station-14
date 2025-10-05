@@ -54,11 +54,22 @@
 - type: entity
   parent: AirlockClown
   id: AirlockClownLocked
-  suffix: Clown, Locked
+  suffix: Clown, Locked, Theatre
   components:
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsTheatre ]
+
+#SS220 New_accesses_and_some_tweaks start
+- type: entity
+  parent: AirlockClown
+  id: AirlockClownAccess
+  suffix: Clown, Locked, Clown
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsClown ]
+#SS220 New_accesses_and_some_tweaks end
 
 # External access
 - type: entity

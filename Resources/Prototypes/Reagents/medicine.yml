@@ -1246,7 +1246,7 @@
           - !type:MobStateCondition
             mobstate: Dead
 
-#ss220 necrosol-buff start
+#SS220 New_accesses_and_some_tweaks start
 - type: reagent
   id: Necrosol
   name: reagent-name-necrosol
@@ -1278,7 +1278,7 @@
               Heat: -4.0
               Shock: -4.0
               Caustic: -1.25
-#ss220 necrosol-buff end
+#SS220 New_accesses_and_some_tweaks end
 
 - type: reagent
   id : Aloxadone

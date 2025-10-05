@@ -58,7 +58,7 @@
   - type: AccessReader
     access: [["Blueshield"]]
 
-# New_service_accesses
+#SS220 New_accesses_and_some_tweaks start
 
 - type: entity
   parent: DoorElectronics
@@ -107,3 +107,4 @@
   components:
   - type: AccessReader
     access: [["Psychologist"]]
+#SS220 New_accesses_and_some_tweaks end

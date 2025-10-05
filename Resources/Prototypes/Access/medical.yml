@@ -16,11 +16,11 @@
   id: Paramedic
   name: id-card-access-level-paramedic
 
-#ss220 new_accesses start
+#SS220 New_accesses_and_some_tweaks start
 - type: accessLevel
   id: Psychologist
   name: id-card-access-level-psychologist
-#ss220 new_accesses end
+#SS220 New_accesses_and_some_tweaks end
 
 - type: accessGroup
   id: Medical
@@ -29,4 +29,4 @@
   - Medical
   - Chemistry
   - Paramedic
-  - Psychologist #ss220 new_accesses
+  - Psychologist #SS220 New_accesses_and_some_tweaks
