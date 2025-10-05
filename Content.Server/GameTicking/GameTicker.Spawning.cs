@@ -167,6 +167,18 @@ namespace Content.Server.GameTicking
             if (DummyTicker)
                 return;
 
+            // SS220 Species bans begin
+            if (!_randomizeCharacters && _banManager.IsSpeciesBanned(player.UserId, character.Species.Id))
+            {
+                if (!LobbyEnabled)
+                    JoinAsObserver(player);
+
+                _chatManager.DispatchServerMessage(player,
+                    Loc.GetString("game-ticker-player-species-is-banned-when-joining"));
+                return;
+            }
+            // SS220 Species bans end
+
             if (station == EntityUid.Invalid)
             {
                 var stations = GetSpawnableStations();
@@ -196,6 +208,11 @@ namespace Content.Server.GameTicking
                     var speciesPrototypes = _prototypeManager.EnumeratePrototypes<SpeciesPrototype>();
                     foreach (var proto in speciesPrototypes)
                     {
+                        // SS220 Species bans begin
+                        if (_banManager.IsSpeciesBanned(player.UserId, proto.ID))
+                            continue;
+                        // SS220 Species bans end
+
                         if (proto.RoundStart)
                             roundStart.Add(proto.ID);
                     }

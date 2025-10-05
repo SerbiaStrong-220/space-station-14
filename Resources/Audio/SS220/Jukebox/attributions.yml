@@ -67,3 +67,8 @@
   license: "CC-BY-3.0"
   copyright: "Mechanism 8 for Unreal Tournament '99, written by Andrew 'Necros' Sega, Remixed by Rivgane for SS220"
   source: "https://github.com/SerbiaStrong-220"
+
+- files: [Vivaldi_Autumn.ogg, Vivaldi_Spring.ogg, Vivaldi_Summer.ogg, Vivaldi_Winter.ogg]
+  license: "Custom"
+  copyright:  "Public Domain. Recording provided by Musopen.org"
+  source: "https://musopen.org/music/composer/antonio-vivaldi/"
