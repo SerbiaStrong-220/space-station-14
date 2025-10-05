@@ -54,6 +54,7 @@ public sealed partial class IdCardConsoleComponent : Component
         "ChiefEngineer",
         "ChiefMedicalOfficer",
         "Paramedic",
+        "Reporter", //SS220 New_accesses_and_some_tweaks
         "Command",
         "Cryogenics",
         "Engineering",
