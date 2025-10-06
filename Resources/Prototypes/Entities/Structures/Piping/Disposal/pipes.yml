@@ -236,6 +236,9 @@
       state: conpipe-j1s
   - type: DisposalTube
     containerId: DisposalRouter
+  # ss220 add disposal filter start
+  - type: DisposalFilter
+  # ss220 add disposal filter end
   - type: DisposalRouter
     degrees:
     - 0
@@ -252,12 +255,14 @@
           Anchored: { state: pipe-j1s }
   - type: Flippable
     mirrorEntity: DisposalRouterFlipped
+  # ss220 add disposal filter start
   - type: ActivatableUI
-    key: enum.DisposalRouterUiKey.Key
+    key: enum.DisposalFilterUiKey.Key
   - type: UserInterface
     interfaces:
-      enum.DisposalRouterUiKey.Key:
-        type: DisposalRouterBoundUserInterface
+      enum.DisposalFilterUiKey.Key:
+        type: DisposalFilterBoundUserInterface
+  # ss220 add disposal filter end
   - type: Fixtures
     fixtures:
       fix1:
@@ -451,6 +456,15 @@
     visible: true
   - type: DisposalTube
     containerId: DisposalJunction
+  # ss220 add disposal filter start
+  - type: DisposalFilter
+  - type: ActivatableUI
+    key: enum.DisposalFilterUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.DisposalFilterUiKey.Key:
+        type: DisposalFilterBoundUserInterface
+  # ss220 add disposal filter end
   - type: DisposalJunction
     degrees:
     - 0

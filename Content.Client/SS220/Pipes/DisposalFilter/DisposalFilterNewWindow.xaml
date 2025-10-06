@@ -1,0 +1,15 @@
+<controls:DisposalFilterNewWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.SS220.Pipes.DisposalFilter"
+    xmlns:userInterface="clr-namespace:Content.Client.SS220.UserInterface">
+
+    <!-- TODO SS220 init text by filter -->
+    <BoxContainer Orientation="Vertical">
+        <userInterface:ShapeButton Name="FilterByName" MinSize="128 32" Text="По имени"/>
+        <userInterface:ShapeButton Name="FilterIsOre" ToggleMode="True" MinSize="128 32" Text="Предмет - руда"/>
+        <userInterface:ShapeButton Name="FilterIsMob" ToggleMode="True" MinSize="128 32" Text="Предмет - существо"/>
+        <userInterface:ShapeButton Name="FilterIsMail" ToggleMode="True" MinSize="128 32" Text="Предмет - почта"/>
+        <userInterface:ShapeButton Name="FilterIsStackable" ToggleMode="True" MinSize="128 32" Text="Предмет - стопка"/>
+    </BoxContainer>
+
+</controls:DisposalFilterNewWindow>
