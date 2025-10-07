@@ -10,6 +10,7 @@ using Content.Shared.Rounding;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Content.Server.SS220.SpiderQueen.Systems.SpiderQueenInterfaceSystem;
 
 namespace Content.Shared.SS220.SpiderQueen.Systems;
 
@@ -32,7 +33,7 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
         SubscribeLocalEvent<SpiderQueenComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SpiderQueenComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderCocooningActionEvent>(OnCocooningAction);
-        SubscribeLocalEvent<SpiderQueenComponent, SpiderOpenSpawnMenu>(OnSpawnMenuOpen);
+        SubscribeLocalEvent<SpiderQueenComponent, SpiderOpenSpawnMenuAction>(OnSpawnMenuOpen);
     }
 
     private void OnStartup(Entity<SpiderQueenComponent> entity, ref ComponentStartup args)
@@ -58,13 +59,13 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
         }
     }
 
-    private void OnSpawnMenuOpen(Entity<SpiderQueenComponent> entity, ref SpiderOpenSpawnMenu args)
+    private void OnSpawnMenuOpen(Entity<SpiderQueenComponent> entity, ref SpiderOpenSpawnMenuAction args)
     {
-        //if (!_ui.IsUiOpen(entity.Owner, SpiderQueenSpawnInterface.Key))
-        //{
-        //    _ui.OpenUi(entity.Owner, SpiderQueenSpawnInterface.Key, actorComponent.PlayerSession);
-        //    return;
-        //}
+        if (!_ui.IsUiOpen(entity.Owner, SpiderQueenSpawnKey.Key))
+        {
+            _ui.OpenUi(entity.Owner, SpiderQueenSpawnKey.Key);
+            return;
+        }
     }
 
     private void OnCocooningAction(Entity<SpiderQueenComponent> entity, ref SpiderCocooningActionEvent args)

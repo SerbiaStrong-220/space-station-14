@@ -176,6 +176,13 @@
     - ActionSpawnWebTileBloodPoints
     - ActionSpawnSpiderWallWebDurableBloodPoints
     - ActionSpiderCoconning
+    - ActionSpiderOpenSpawnUI
+  - type: UserInterface
+    interfaces:
+      #ss220 add filter tts for ghost start
+      enum.SpiderQueenSpawnKey.Key:
+        type: SpiderQueenSpawnInterface
+      #ss220 add filter tts for ghost end
   - type: Hunger
     thresholds: # only animals and rats are derived from this prototype so let's override it here and in rats' proto
       Overfed: 150

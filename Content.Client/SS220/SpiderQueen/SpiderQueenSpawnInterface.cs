@@ -1,4 +1,3 @@
-using Content.Client.SS220.GhostHearing;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 

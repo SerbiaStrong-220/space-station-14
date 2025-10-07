@@ -354,3 +354,14 @@
   - type: EntityTargetAction
     event: !type:SpiderCocooningActionEvent
       cocooningTime: 15
+
+#Interfaces
+- type: entity
+  id: ActionSpiderOpenSpawnUI
+  name: open spawn menu
+  components:
+  - type: Action
+    icon: { sprite: SS220/Clothing/Neck/Misc/headphones.rsi, state: icon }
+    checkCanInteract: false
+  - type: InstantAction
+    event: !type:SpiderOpenSpawnMenuAction

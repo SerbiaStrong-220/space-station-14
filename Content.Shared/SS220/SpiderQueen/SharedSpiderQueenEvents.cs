@@ -9,10 +9,6 @@ using System.Numerics;
 
 namespace Content.Shared.SS220.SpiderQueen;
 
-public sealed partial class SpiderOpenSpawnMenu : InstantActionEvent
-{
-
-}
 public sealed partial class SpiderTargetSpawnEvent : WorldTargetActionEvent
 {
     /// <summary>
