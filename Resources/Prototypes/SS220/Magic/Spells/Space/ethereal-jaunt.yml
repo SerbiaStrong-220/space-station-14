@@ -1,0 +1,38 @@
+- type: entity
+  parent: BaseActionPolymorph
+  id: ActionPolymorphJaunt
+  name: Ethereal Jaunt
+  description: Melt into the Ethereal Plane for a quick getaway!
+  components:
+  - type: Magic
+  - type: Action
+    useDelay: 30
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: jaunt
+  - type: InstantAction
+    event: !type:PolymorphActionEvent
+      protoId: Jaunt
+    # TODO: Effect ECS (from cardboard box)
+  - type: ActionUpgrade
+    effectedLevels:
+      2: ActionPolymorphJauntII
+      3: ActionPolymorphJauntIII
+
+- type: entity
+  parent: ActionPolymorphJaunt
+  id: ActionPolymorphJauntII
+  name: Ethereal Jaunt II
+  description: Melt into the Ethereal Plane for an even quicker getaway!
+  components:
+  - type: Action
+    useDelay: 25
+
+- type: entity
+  parent: ActionPolymorphJaunt
+  id: ActionPolymorphJauntIII
+  name: Ethereal Jaunt III
+  description: Are you even tangible anymore?
+  components:
+  - type: Action
+    useDelay: 20

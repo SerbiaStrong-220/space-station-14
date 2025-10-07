@@ -124,3 +124,17 @@
     Blunt: 0.7
     Slash: 0.5
     Radiation: 0.4
+
+- type: damageModifierSet
+  id: GolemWizard
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.25
+    Piercing: 0.2
+    Heat: 0.9
+    Caustic: 1.2
+    Structural: 0.7 # Один удар топором 170 * 0.7 = 119. То есть для голема 2 удара и чуть урона сверху.
+  flatReductions:
+    Blunt: 5
+    Slash: 3
+    Piercing: 2

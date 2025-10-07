@@ -1,6 +1,8 @@
 # Волшебник
-store-caregory-spellbook-offensive = Атакующие заклинания
-store-caregory-spellbook-defensive = Защитные заклинания
-store-caregory-spellbook-utility = Вспомогательные заклинания
-store-caregory-spellbook-equipment = Снаряжение волшебника
-store-caregory-spellbook-events = Призывающие заклинания
+store-caregory-spellbook-destruction = Школа Разрушения
+store-caregory-spellbook-space = Школа Пространства
+store-caregory-spellbook-support = Школа Поддержки
+store-caregory-spellbook-equipment = Снаряжение Волшебника
+store-caregory-spellbook-polymorph = Школа Полиморфа
+store-caregory-spellbook-summon = Школа Призыва
+store-caregory-spellbook-void = Школа Пустоты

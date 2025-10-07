@@ -1,0 +1,28 @@
+- type: entity
+  parent: BaseAction
+  id: ActionHealingTouch
+  name: Healing Touch
+  description: ###
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+    icon: { sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi, state: healingtouch}
+  - type: TargetAction
+  - type: EntityTargetAction
+    event: !type:TouchHealSpellEvent
+      heal:
+        types:
+          Slash: -20
+          Blunt: -20
+          Piercing: -20
+          Heat: -20
+          Cold: -20
+          Shock: -20
+          Radiation: -25
+          Caustic: -30
+          Cellular: -15
+          Poison: -30
+          Asphyxiation: -20
+        groups:
+          Airloss: -50

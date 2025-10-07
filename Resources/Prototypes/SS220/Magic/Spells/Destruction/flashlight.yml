@@ -1,0 +1,49 @@
+- type: entity
+  parent: BaseAction
+  id: ActionFlashLight
+  name: Flash Light
+  description: Emits a blinding flash of light at the targeted location.
+  components:
+  - type: Magic
+  - type: Action
+    useDelay: 10
+    itemIconStyle: BigAction
+    raiseOnUser: true
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: flash_light
+  - type: InstantAction
+    event: !type:InstantSpawnSpellEvent
+      prototype: SpawnEffectFlashLight
+      posData: !type:TargetInFront
+
+- type: entity
+  id: SpawnEffectFlashLight
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Grenades/flashbang.rsi
+  - type: TriggerOnSpawn
+  - type: FlashOnTrigger
+    range: 7
+  - type: SoundOnTrigger
+    sound:
+      path: "/Audio/SS220/Magic/FlashLight/FlashLight.ogg"
+  - type: DeleteOnTrigger
+  - type: SpawnOnTrigger
+    proto: SpellFlashLightEffect
+  - type: Appearance
+
+- type: entity
+  id: SpellFlashLightEffect
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: PointLight
+      enabled: true
+      radius: 8
+      energy: 200 # It's magic.
+      netsync: false
+    - type: LightFade
+      duration: 2.5
+    - type: TimedDespawn
+      lifetime: 2.5

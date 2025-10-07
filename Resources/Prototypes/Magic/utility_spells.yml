@@ -1,17 +1,19 @@
-- type: entity
-  parent: BaseAction
-  id: ActionChargeSpell
-  name: Charge
-  description: Adds a charge back to your wand
-  components:
-  - type: Action
-    useDelay: 30
-    itemIconStyle: BigAction
-    icon:
-      sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
-      state: charge # SS220 Wizard getting used to
-  - type: InstantAction
-    event: !type:ChargeSpellEvent
-      charge: 1
-  - type: SpeakOnAction
-    sentence: action-speech-spell-charge
+# SS220 Wizard Update Begin
+# - type: entity
+#   parent: BaseAction
+#   id: ActionChargeSpell
+#   name: Charge
+#   description: Adds a charge back to your wand
+#   components:
+#   - type: Action
+#     useDelay: 30
+#     itemIconStyle: BigAction
+#     icon:
+#       sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
+#       state: charge # SS220 Wizard getting used to
+#   - type: InstantAction
+#     event: !type:ChargeSpellEvent
+#       charge: 1
+#   - type: SpeakOnAction
+#     sentence: action-speech-spell-charge
+# SS220 Wizard Update End

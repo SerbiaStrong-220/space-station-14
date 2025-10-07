@@ -1,0 +1,22 @@
+- type: entity
+  parent: BaseAction
+  id: ActionRepulse
+  name: Repulse
+  description: Pushes entities away from the user.
+  components:
+  - type: RepulseAttract
+    speed: 14 #Buff SS220 Wizard Update
+    range: 8 #Buff SS220 Wizard Update
+    whitelist:
+      components:
+      - MobMover
+      - Item
+  - type: Action
+    useDelay: 30 #Buff SS220 Wizard Update
+    raiseOnAction: true
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: repulse
+  - type: InstantAction
+    event: !type:RepulseAttractActionEvent

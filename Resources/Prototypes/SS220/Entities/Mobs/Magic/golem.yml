@@ -1,0 +1,85 @@
+- type: entity
+  parent: [ BaseMob, MobDamageable, MobPolymorphable, MobCombat ]
+  id: MobGolemWizard
+  name: golem
+  description:
+  components:
+  - type: Reactive
+    groups:
+      Acidic: [Touch]
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Magic/golem.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: live
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
+      state: live_light
+      shader: unshaded
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.48
+        density: 200
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: live
+        BaseUnshaded: live_light
+      Dead:
+        Base: dead
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - DoorBumpOpener
+      - FootstepSound
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 1.5
+    baseSprintSpeed : 2
+  - type: NpcFactionMember
+    factions:
+      - Wizard
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: GolemWizard
+  - type: HealthExaminable
+    examinableTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+    - Caustic
+    - Structural
+  - type: MeleeWeapon
+    soundHit:
+      collection: MetalThud
+    damage:
+      types:
+        Structural: 75
+        Blunt: 30
+  - type: StaminaDamageOnHit
+    damage: 120
+  - type: MeleeThrowOnHit
+    distance: 5
+    speed: 3
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      250: Dead
+  - type: ZombieImmune
+  - type: StatusEffects
+    allowed:
+    - RadiationProtection
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: FootstepModifier
+    footstepSoundCollection: null

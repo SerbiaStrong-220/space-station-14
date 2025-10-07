@@ -1,0 +1,80 @@
+# Destruction
+- type: listing
+  id: SpellbookFlashLight
+  name: spellbook-flash-light-name
+  description: spellbook-flash-light-desc
+  productAction: ActionFlashLight
+  cost:
+    WizCoin: 1
+  categories:
+  - SpellbookDestruction
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: SpellbookIceArrow
+  name: spellbook-icearrow-name
+  description: spellbook-icearrow--desc
+  productAction: ActionIceArrow
+  cost:
+    WizCoin: 1
+  categories:
+  - SpellbookDestruction
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: SpellbookEMP
+  name: spellbook-emp-name
+  description: spellbook-emp-desc
+  productAction: ActionEMP
+  cost:
+    WizCoin: 2
+  categories:
+  - SpellbookDestruction
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: SpellbookMutation
+  name: spellbook-mutation-name
+  description: spellbook-mutation-desc
+  productAction: ActionMutation
+  cost:
+    WizCoin: 4
+  categories:
+  - SpellbookDestruction
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Support
+- type: listing
+  id: SpellbookHealingTouch
+  name: spellbook-healing-touch-name
+  description: spellbook-healing-touch-desc
+  productAction: ActionHealingTouch
+  cost:
+    WizCoin: 1
+  categories:
+  - SpellbookSupport
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Summon
+- type: listing
+  id: SpellbookSummonGolem
+  name: spellbook-summon-golem-name
+  description: spellbook-summon-golem-desc
+  productAction: ActionSummonGolem
+  cost:
+    WizCoin: 3
+  categories:
+  - SpellbookSummon
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1

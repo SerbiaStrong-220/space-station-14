@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseActionPolymorph
+  id: ActionPolymorphWizardSpider
+  name: Spider Polymorph
+  description: Polymorphs you into a Spider.
+  components:
+  - type: Action
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: tarantula
+  - type: InstantAction
+    event: !type:PolymorphActionEvent
+      protoId: WizardSpider

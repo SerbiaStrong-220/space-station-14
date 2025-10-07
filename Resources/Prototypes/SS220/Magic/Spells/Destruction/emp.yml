@@ -1,0 +1,31 @@
+- type: entity
+  id: ActionEMP
+  name: Electromagnetic Pulse
+  description: Creates a large burst of electromagnetic waves, disabling nearby electronics.
+  noSpawn: true
+  components:
+  - type: Magic
+  - type: Action
+    useDelay: 20
+    itemIconStyle: BigAction
+    raiseOnUser: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: emp
+  - type: InstantAction
+    event: !type:InstantSpawnSpellEvent
+      prototype: EMPWizard
+  - type: SpeakOnAction
+    sentence: action-speech-spell-emp ###
+
+- type: entity
+  id: EMPWizard
+  suffix: Wizard
+  parent: AdminInstantEffectBase
+  components:
+  - type: EmpOnTrigger
+    range: 5
+    energyConsumption: 50000
+    disableDuration: 10

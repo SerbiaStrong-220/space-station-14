@@ -1,22 +1,24 @@
-- type: entity
-  parent: BaseAction
-  id: ActionSpawnMagicarpSpell
-  name: Summon Magicarp
-  description: This spell summons three Magi-Carp to your aid! May or may not turn on user.
-  components:
-  - type: Action
-    useDelay: 10
-    itemIconStyle: BigAction
-    icon:
-      sprite: SS220/Objects/Magic/scrolls.rsi #SS220 Resprite of Magic Scrolls
-      state: default #SS220 Resprite of Magic Scrolls
-  - type: TargetAction
-    range: 4
-  - type: WorldTargetAction
-    event: !type:WorldSpawnSpellEvent
-      prototypes:
-      - id: MobCarpMagic
-        amount: 3
-      offset: 0, 1
-  - type: SpeakOnAction
-    sentence: action-speech-spell-summon-magicarp
+# SS220 Wizard Update Begin
+# - type: entity
+#   parent: BaseAction
+#   id: ActionSpawnMagicarpSpell
+#   name: Summon Magicarp
+#   description: This spell summons three Magi-Carp to your aid! May or may not turn on user.
+#   components:
+#   - type: Action
+#     useDelay: 10
+#     itemIconStyle: BigAction
+#     icon:
+#       sprite: SS220/Objects/Magic/scrolls.rsi #SS220 Resprite of Magic Scrolls
+#       state: default #SS220 Resprite of Magic Scrolls
+#   - type: TargetAction
+#     range: 4
+#   - type: WorldTargetAction
+#     event: !type:WorldSpawnSpellEvent
+#       prototypes:
+#       - id: MobCarpMagic
+#         amount: 3
+#       offset: 0, 1
+#   - type: SpeakOnAction
+#     sentence: action-speech-spell-summon-magicarp
+# SS220 Wizard Update End

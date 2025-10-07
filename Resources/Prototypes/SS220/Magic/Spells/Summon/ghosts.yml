@@ -1,0 +1,14 @@
+- type: entity
+  parent: BaseAction
+  id: ActionSummonGhosts
+  name: Summon Ghosts
+  description: Makes all current ghosts permanently visible
+  components:
+  - type: Action
+    useDelay: 120
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: ghost
+  - type: InstantAction
+    event: !type:ToggleGhostVisibilityToAllEvent

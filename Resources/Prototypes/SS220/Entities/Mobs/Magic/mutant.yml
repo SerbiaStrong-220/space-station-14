@@ -1,0 +1,119 @@
+- type: entity
+  parent: [ SimpleMobBase, MobCombat ]
+  id: MobMutant
+  name: mutant
+  description: ###
+  suffix: Shitspawn
+  components:
+  - type: CombatMode
+  - type: InnateTool
+    tools:
+    - id: WeaponBehonkerLaser
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 5
+  - type: MobState
+  - type: Deathgasp
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+      - ActionCritFakeDeath
+      - ActionCritLastWords
+  - type: NoSlip
+  - type: Hunger
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.75
+        density: 80
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Magic/mutant.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: mutant
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
+      state: eyes
+      shader: unshaded
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 62.5
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 40
+  - type: Gun
+    fireRate: 1.2
+    useKey: false
+    selectedMode: SemiAuto
+    availableModes:
+      - SemiAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/laser.ogg
+  - type: DamageStateVisuals
+    rotate: true
+    states:
+      Alive:
+        Base: mutant
+        BaseUnshaded: eyes
+      Dead:
+        Base: dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      300: Dead
+  - type: Stamina
+    critThreshold: 300
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      150: 0.7
+      250: 0.5
+  - type: MeleeWeapon
+    range: 3
+    soundHit:
+        path: /Audio/Weapons/Xeno/alien_claw_flesh2.ogg
+    angle: 0
+    attackRate: 0.75
+    animation: WeaponArcFist
+    damage:
+      types:
+        Blunt: 66
+        Structural: 100
+  - type: MeleeThrowOnHit
+    distance: 6
+    speed: 4
+  - type: Bloodstream
+    bloodMaxVolume: 750
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: male
+  - type: NonSpreaderZombie
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damageCap: 300
+    damage:
+      types:
+        Radiation: 1
+        Slash: -0.5
+        Blunt: -0.5
+        Piercing: -0.5
+        Heat: -0.5
+        Cold: -0.5
+        Asphyxiation: -2
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+      - Wizard

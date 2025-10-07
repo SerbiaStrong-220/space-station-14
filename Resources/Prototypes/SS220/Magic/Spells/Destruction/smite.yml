@@ -1,0 +1,51 @@
+# Smite-like spell that you click on someone else to use
+- type: entity
+  abstract: true
+  parent: BaseAction
+  id: BaseEntitySpellAction
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    useDelay: 240 # SS220 Smite Delay from 90 to 240
+  - type: TargetAction
+    interactOnMiss: false
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - Body
+    canTargetSelf: false
+
+- type: entity
+  abstract: true
+  parent: BaseEntitySpellAction
+  id: BaseSmiteAction
+  components:
+  - type: Magic
+    requiresClothes: true
+
+- type: entity
+  parent: BaseSmiteAction
+  id: ActionSmite
+  name: Smite
+  description: Instantly gibs a target.
+  components:
+  - type: Action
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/disintegrate.ogg
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: gib
+  - type: EntityTargetAction
+    event: !type:SmiteSpellEvent
+  - type: SpeakOnAction
+    sentence: action-speech-spell-smite
+  - type: Magic
+    requiresClothes: true
+
+# For the Snail
+- type: entity
+  parent: ActionSmite
+  id: ActionSmiteNoReq
+  components:
+  - type: Magic
+    requiresClothes: false

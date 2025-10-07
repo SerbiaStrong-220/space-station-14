@@ -1,0 +1,21 @@
+# TODO: Second level upgrade sometime that allows swapping with all objects
+- type: entity
+  parent: BaseEntitySpellAction
+  id: ActionVoidApplause
+  name: Void Applause
+  description: Clap your hands and swap places with the target.
+  components:
+  - type: Action
+    useDelay: 15
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/Eldritch/voidblink.ogg
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: voidblink
+  - type: TargetAction
+    checkCanAccess: false
+    repeat: false
+    range: 16
+  - type: EntityTargetAction
+    event: !type:VoidApplauseSpellEvent
+      effect: EffectVoidBlink

@@ -1,20 +1,22 @@
-- type: entity
-  parent: BaseAction
-  id: ActionForceWall
-  name: forcewall
-  description: Creates a magical barrier.
-  components:
-  - type: Action
-    useDelay: 15
-    itemIconStyle: BigAction
-    sound: !type:SoundPathSpecifier
-      path: /Audio/Magic/forcewall.ogg
-    icon:
-      sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
-      state: shield
-  - type: InstantAction
-    event: !type:InstantSpawnSpellEvent
-      prototype: WallForce
-      posData: !type:TargetInFront
-  - type: SpeakOnAction
-    sentence: action-speech-spell-forcewall
+# SS220 Wizard Update Begin
+# - type: entity
+#   parent: BaseAction
+#   id: ActionForceWall
+#   name: forcewall
+#   description: Creates a magical barrier.
+#   components:
+#   - type: Action
+#     useDelay: 15
+#     itemIconStyle: BigAction
+#     sound: !type:SoundPathSpecifier
+#       path: /Audio/Magic/forcewall.ogg
+#     icon:
+#       sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
+#       state: shield
+#   - type: InstantAction
+#     event: !type:InstantSpawnSpellEvent
+#       prototype: WallForce
+#       posData: !type:TargetInFront
+#   - type: SpeakOnAction
+#     sentence: action-speech-spell-forcewall
+# SS220 Wizard Update End
