@@ -11,3 +11,6 @@ ent-ClothingBackpackBlueShieldHight = { ent-ClothingBackpackBlueShield }
 ent-ClothingBackpackBlueShieldHightFilled = { ent-ClothingBackpackBlueShield }
     .suffix = Тяжелый скафандр, заполненный
     .desc = { ent-ClothingBackpackBlueShield.desc }
+
+ent-ClothingBackpackSpaceNinja = рюкзак космического ниндзя
+    .desc = Рюкзак космического ниндзя.

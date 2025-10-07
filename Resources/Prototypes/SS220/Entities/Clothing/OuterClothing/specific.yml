@@ -162,8 +162,8 @@
   description: Ninja costume from the anime series "Samurai Vamplu", looks very futuristic.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/spaceninja.rsi #SS220 Ninja Resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/spaceninja.rsi #SS220 Ninja Resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetSpaceNinjaFake

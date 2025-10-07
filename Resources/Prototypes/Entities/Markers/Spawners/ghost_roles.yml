@@ -200,7 +200,7 @@
     sprite: Markers/jobs.rsi
     layers:
     - state: green
-    - sprite: Objects/Weapons/Melee/energykatana.rsi
+    - sprite: SS220/Objects/Weapons/Melee/Sword/energykatana.rsi #SS220 Ninja Resprite
       state: icon
 
 - type: entity

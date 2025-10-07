@@ -197,15 +197,15 @@
 
 #Space Ninja Helmet
 - type: entity
-  parent: [ClothingHeadEVAHelmetBase]
+  parent: [ ClothingHeadEVAHelmetBase, ClothingHeadSuitWithLightBase ] #SS220 Ninja Resprite
   id: ClothingHeadHelmetSpaceNinja
   name: space ninja helmet
   description: What may appear to be a simple black garment is in fact a highly sophisticated nano-weave helmet. Standard issue ninja gear.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Helmets/spaceninja.rsi
+    sprite: SS220/Clothing/Head/Helmets/spaceninja.rsi #SS220 Ninja Resprite
   - type: Clothing
-    sprite: Clothing/Head/Helmets/spaceninja.rsi
+    sprite: SS220/Clothing/Head/Helmets/spaceninja.rsi #SS220 Ninja Resprite
   - type: Tag
     tags:
     - WhitelistChameleon
@@ -215,6 +215,13 @@
     layers:
       Hair: HEAD
       Snout: HEAD
+    #SS220 Ninja Resprite Begin
+  - type: LocateAi
+  - type: PointLight
+    color: "#21a52e"
+    radius: 4.5
+    energy: 3
+    #SS220 Ninja Resprite End
 
 #Knight Helmet
 - type: entity

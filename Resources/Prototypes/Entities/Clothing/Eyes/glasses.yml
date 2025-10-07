@@ -303,9 +303,9 @@
   description: An advanced visor protecting a ninja's eyes from flashing lights.
   components:
   - type: Sprite
-    sprite: Clothing/Eyes/Glasses/ninjavisor.rsi
+    sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi #SS220 Ninja Resprite
   - type: Clothing
-    sprite: Clothing/Eyes/Glasses/ninjavisor.rsi
+    sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi #SS220 Ninja Resprite
   - type: FlashImmunity
 
 - type: entity

@@ -131,9 +131,9 @@
   description: A pair of nano-enhanced boots with built-in magnetic suction cups.
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Specific/spaceninja.rsi
+    sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi #SS220 Ninja Resprite
   - type: Clothing
-    sprite: Clothing/Shoes/Specific/spaceninja.rsi
+    sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi #SS220 Ninja Resprite
   - type: NoSlip
   - type: Magboots # always have gravity because le suction cups
   - type: ClothingSpeedModifier
