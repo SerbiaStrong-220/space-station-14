@@ -13,7 +13,8 @@
       sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
       state: voidblink
   - type: TargetAction
-    checkCanAccess: false
+    accessMask:
+    - Opaque
     repeat: false
     range: 16
   - type: EntityTargetAction
