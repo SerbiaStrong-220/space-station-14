@@ -18,8 +18,9 @@ jobs:
               'Axioma': {label: 'MI: Axioma', assignee: 'NightmareStalker'},
               'Donuts': {label: 'MI: Donuts', assignee: 'spo9k'},
               'Eclipse': {label: 'MI: Eclipse', assignee: 'AliceValestray'},
-              'Astro': {label: 'MI: Astro', assignee: 'UrPrice'},
-              'Другое': {label: 'MI: Other', assignee: 'UrPrice'}
+              'Astro': {label: 'MI: Astro', assignee: 'VictorBoum'},
+              'Nightshift': {label: 'MI: Nightshift', assignee: 'Heidem1'},
+              'Другое': {label: 'MI: Other', assignee: 'VictorBoum'}
             };
             let selectedOption = null;
             for (const option in options){

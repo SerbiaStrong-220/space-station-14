@@ -108,7 +108,7 @@ public sealed partial class PhotocopierWindow : FancyWindow
 
         const float tonerBarHueDiff = TonerBarFullHue - TonerBarEmptyHue;
         var tonerBarFillHue = TonerBarEmptyHue + tonerBarHueDiff * value;
-        var tonerBarFillColor = Color.FromHsv(new Robust.Shared.Maths.Vector4(
+        var tonerBarFillColor = Color.FromHsv(new Vector4(
             tonerBarFillHue, TonerBarColorSaturation, TonerBarColorValue, 1));
 
         TonerBar.ForegroundStyleBoxOverride ??= new StyleBoxFlat();

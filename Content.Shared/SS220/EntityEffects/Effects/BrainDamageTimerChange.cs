@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Alert;
 using Content.Shared.SS220.ChemicalAdaptation;
 using Content.Shared.SS220.LimitationRevive;
 using Robust.Shared.Prototypes;
@@ -11,7 +10,6 @@ namespace Content.Shared.EntityEffects.Effects;
 /// Narrowly targeted effect to increase time to brain damage.
 /// Uses ChemicalAdaptation to reduce the effectiveness of use
 /// </summary>
-
 public sealed partial class BrainDamageTimerChange : EntityEffect
 {
     /// <summary>
@@ -44,6 +42,6 @@ public sealed partial class BrainDamageTimerChange : EntityEffect
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return Loc.GetString("reagent-effect-guidebook-ss220-brain-damage-slow", ("chance", Probability));
+        return Loc.GetString("reagent-effect-guidebook-ss220-brain-damage-slow", ("time", AddTime.TotalSeconds));
     }
 }

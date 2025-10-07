@@ -133,3 +133,27 @@
   name: Q__ntum - You see her. She's coming.
   path:
     path: /Audio/SS220/Lobby/you_see_her.ogg
+
+- type: jukebox
+  id: vivaldi_Spring
+  name: Vivaldi - Spring
+  path:
+    path: /Audio/SS220/Jukebox/Vivaldi_Spring.ogg
+
+- type: jukebox
+  id: vivaldi_Autumn
+  name: Vivaldi - Autumn
+  path:
+    path: /Audio/SS220/Jukebox/Vivaldi_Autumn.ogg
+
+- type: jukebox
+  id: vivaldi_Summer
+  name: Vivaldi - Summer
+  path:
+    path: /Audio/SS220/Jukebox/Vivaldi_Summer.ogg
+
+- type: jukebox
+  id: vivaldi_Winter
+  name: Vivaldi - Winter
+  path:
+    path: /Audio/SS220/Jukebox/Vivaldi_Winter.ogg

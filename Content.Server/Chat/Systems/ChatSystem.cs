@@ -5,10 +5,8 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
-using Content.Server.Players.RateLimiting;
-using Content.Server.Speech.Prototypes;
 using Content.Server.Speech.EntitySystems;
-using Content.Server.Station.Components;
+using Content.Server.Speech.Prototypes;
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.ActionBlocker;
@@ -29,6 +27,7 @@ using Content.Shared.Players.RateLimiting;
 using Content.Shared.Radio;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.Telepathy;
+using Content.Shared.Station.Components;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -44,7 +43,6 @@ using Robust.Shared.Utility;
 using Robust.Shared.Timing;
 using Content.Server.SS220.Language; // SS220-Add-Languages-end
 using Robust.Shared.Map;
-using JetBrains.Annotations;
 using Content.Shared.SS220.Language.Systems;
 
 namespace Content.Server.Chat.Systems;
@@ -76,12 +74,6 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly LanguageSystem _languageSystem = default!; // SS220-Add-Languages
     [Dependency] private readonly InventorySystem _inventory = default!; //ss220 add identity concealment for chat and radio messages
     [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidAppearance = default!; //ss220 add identity concealment for chat and radio messages
-
-    public const int VoiceRange = 10; // how far voice goes in world units
-    public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
-    public const int WhisperMuffledRange = 5; // how far whisper goes at all, in world units
-    public const string DefaultAnnouncementSound = "/Audio/Announcements/announce.ogg";
-    public const string CentComAnnouncementSound = "/Audio/Corvax/Announcements/centcomm.ogg"; // Corvax-Announcements
 
     public readonly TimeSpan CoolDown = TimeSpan.FromSeconds(2); //ss220 chat unique
     public const int MaximumLengthMsg = 5; //ss220 chat unique
@@ -252,7 +244,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en");
 
         message = _chatManager.DeleteProhibitedCharacters(message, source); // SS220 delete prohibited characters
-        message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
+        message = SanitizeInGameICMessage(source, message, /* SS220 languages */ desiredType, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
 
         // Was there an emote in the message? If so, send it.
         if (player != null && emoteStr != message && emoteStr != null)
@@ -455,8 +447,8 @@ public sealed partial class ChatSystem : SharedChatSystem
             // you can't make a station announcement without a station
             return;
         }
-        if (!EntityManager.TryGetComponent<StationDataComponent>(station, out var stationDataComp))
-            return;
+
+        if (!TryComp<StationDataComponent>(station, out var stationDataComp)) return;
 
         var filter = _stationSystem.GetInStation(stationDataComp);
 
@@ -703,14 +695,9 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("entity", ent),
             ("message", FormattedMessage.RemoveMarkupOrThrow(action)));
 
-        if (checkEmote)
-        {
-            // SS220 Chat-Emote-Cooldown begin
-            TryEmoteChatInput(source, action, out var consumed);
-            if (consumed)
-                return;
-            // SS220 Chat-Emote-Cooldown end
-        }
+        if (checkEmote &&
+            !TryEmoteChatInput(source, action))
+            return;
 
         SendInVoiceRange(ChatChannel.Emotes, action, wrappedMessage, source, range, author);
         if (!hideLog)
@@ -870,43 +857,40 @@ public sealed partial class ChatSystem : SharedChatSystem
     }
 
     // ReSharper disable once InconsistentNaming
-    private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true)
+    private string SanitizeInGameICMessage(
+        EntityUid source,
+        string message,
+        InGameICChatType iCChatType, // SS220 Languages
+        out string? emoteStr,
+        bool capitalize = true,
+        bool punctuate = false,
+        bool capitalizeTheWordI = true)
     {
         var newMessage = message.Trim();
         // SS220 languages begin
-        var languageMessage = _languageSystem.SanitizeMessage(source, newMessage);
 
         var prefix = string.Empty;
-        var findEnglish = false;
+        var foundEnglish = false;
         string? newEmoteStr = null;
-        var i = 0;
-        languageMessage.ChangeInNodeMessage(msg =>
+        if (iCChatType is InGameICChatType.Speak or InGameICChatType.Whisper)
         {
-            i++;
-            if (i == 1) // only for 1st node
-                GetRadioKeycodePrefix(source, msg, out msg, out prefix);
-
-            var newLangMessage = ReplaceWords(msg);
-            newLangMessage = SanitizeMessageReplaceWords(newLangMessage);
-            _sanitizer.TrySanitizeEmoteShorthands(newLangMessage, source, out newLangMessage, out newEmoteStr, false);
-            if (!_sanitizer.CheckNoEnglish(source, newLangMessage))
-                findEnglish = true;
-
-            if (i == 1) // only for 1st node
+            var languageMessage = _languageSystem.SanitizeMessage(source, newMessage);
+            var i = 0;
+            languageMessage.ChangeInNodeMessage(msg =>
             {
-                if (capitalize)
-                    newLangMessage = SanitizeMessageCapital(newLangMessage);
-            }
+                i++;
+                var isFirst = i == 1;
+                return SanitizeMessage(msg, isFirst, isFirst && capitalize, punctuate, capitalizeTheWordI);
+            });
 
-            if (capitalizeTheWordI)
-                newLangMessage = SanitizeMessageCapitalizeTheWordI(newLangMessage, "i");
-            if (punctuate)
-                newLangMessage = SanitizeMessagePeriod(newLangMessage);
+            newMessage = languageMessage.GetMessageWithLanguageKeys();
+        }
+        else
+        {
+            newMessage = SanitizeMessage(message, true, capitalize, punctuate, capitalizeTheWordI);
+        }
 
-            return newLangMessage;
-        });
-
-        if (findEnglish)
+        if (foundEnglish)
         {
             emoteStr = "кашляет";
             return string.Empty;
@@ -927,10 +911,31 @@ public sealed partial class ChatSystem : SharedChatSystem
         //if (punctuate)
         //    newMessage = SanitizeMessagePeriod(newMessage);
 
-        newMessage = languageMessage.GetMessageWithLanguageKeys(false);
-        // SS220 languages end
-
         return prefix + newMessage;
+
+        string SanitizeMessage(string message, bool getRadioKeycodePrefix, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true)
+        {
+            var newMessage = ReplaceWords(message);
+            newMessage = SanitizeMessageReplaceWords(newMessage);
+
+            if (getRadioKeycodePrefix)
+                GetRadioKeycodePrefix(source, newMessage, out newMessage, out prefix);
+
+            _sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out newEmoteStr);
+            if (!_sanitizer.CheckNoEnglish(source, newMessage))
+                foundEnglish = true;
+
+            if (capitalize)
+                newMessage = SanitizeMessageCapital(newMessage);
+            if (capitalizeTheWordI)
+                newMessage = SanitizeMessageCapitalizeTheWordI(newMessage, "i");
+            if (punctuate)
+                newMessage = SanitizeMessagePeriod(newMessage);
+
+            return newMessage;
+        }
+
+        // SS220 languages end
     }
 
     private string SanitizeInGameOOCMessage(string message)
@@ -991,8 +996,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         return message;
     }
 
-    [ValidatePrototypeId<ReplacementAccentPrototype>]
-    public const string ChatSanitize_Accent = "chatsanitize";
+    public static readonly ProtoId<ReplacementAccentPrototype> ChatSanitize_Accent = "chatsanitize";
 
     public string SanitizeMessageReplaceWords(string message)
     {

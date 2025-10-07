@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Tag;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
@@ -9,20 +8,13 @@ using Content.Shared.SS220.ChameleonStructure;
 namespace Content.Client.SS220.ChameleonStructure.UI;
 
 [UsedImplicitly]
-public sealed class ChameleonStructureBoundUserInterface : BoundUserInterface
+public sealed class ChameleonStructureBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    private readonly ChameleonStructureSystem _chameleon;
-    private readonly TagSystem _tag;
+  
 
     [ViewVariables]
     private ChameleonStructureMenu? _menu;
-
-    public ChameleonStructureBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-        _chameleon = EntMan.System<ChameleonStructureSystem>();
-        _tag = EntMan.System<TagSystem>();
-    }
 
     protected override void Open()
     {
@@ -39,7 +31,7 @@ public sealed class ChameleonStructureBoundUserInterface : BoundUserInterface
         if (state is not ChameleonStructureBoundUserInterfaceState st)
             return;
 
-        var targets = _chameleon.GetValidTargets();
+        var targets = st.ListData;
 
         if (st.RequiredTag == null)
         {
@@ -53,7 +45,7 @@ public sealed class ChameleonStructureBoundUserInterface : BoundUserInterface
             if (string.IsNullOrEmpty(target))
                 continue;
 
-            if (!_proto.TryIndex(target, out EntityPrototype? _))
+            if (!_proto.HasIndex(target))
                 continue;
 
             newTargets.Add(target);

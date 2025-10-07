@@ -1,8 +1,8 @@
 - type: entity
   id: cqc_nonlethal
   parent: BaseItem
-  name: ent-cqc-nonlethal-name
-  description: ent-cqc-nonlethal-desc
+  name: cqc nonlethal book
+  description: cqc nonlethal book desc
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/books.rsi
@@ -27,8 +27,8 @@
 - type: entity
   id: cqc_lethal
   parent: BaseItem
-  name: ent-cqc-name
-  description: ent-cqc-desc
+  name: lethal cqc book
+  description: lethal cqc book desc
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/books.rsi

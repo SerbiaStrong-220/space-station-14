@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Chat.Systems;
 using Content.Shared.Dataset;
 using Content.Shared.StatusEffect;
@@ -9,7 +10,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Shared.SS220.EntityEffects;
+using Content.Shared.SS220.EntityEffects.Events;
 
 namespace Content.Server.SS220.CultYogg.Rave;
 
@@ -50,11 +51,11 @@ public sealed class RaveSystem : SharedRaveSystem
                 SetNextPhraseTimer(raving);
             }
 
-            if (raving.NextSoundTime <= _timing.CurTime)
-            {
-                _audio.PlayEntity(raving.RaveSoundCollection, uid, uid);
-                SetNextSoundTimer(raving);
-            }
+            if (raving.NextSoundTime > _timing.CurTime)
+                continue;
+
+            _audio.PlayEntity(raving.RaveSoundCollection, uid, uid);
+            SetNextSoundTimer(raving);
         }
     }
 
@@ -91,7 +92,7 @@ public sealed class RaveSystem : SharedRaveSystem
         _statusEffectsSystem.TryRemoveStatusEffect(uid, EffectKey);
     }
 
-    public void TryRemoveRavenessTime(EntityUid uid, double timeRemoved)
+    public void TryRemoveRavennessTime(EntityUid uid, double timeRemoved)
     {
         _statusEffectsSystem.TryRemoveTime(uid, EffectKey, TimeSpan.FromSeconds(timeRemoved));
     }

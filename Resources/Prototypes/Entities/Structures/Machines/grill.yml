@@ -21,6 +21,14 @@
       path: /Audio/Weapons/click.ogg
       params:
         volume: -6
+    #SS220-grill-update begin
+    heatingVisuals:
+      sprite: { sprite: SS220/Effects/grillingEffect.rsi, state: grillingSmoke }
+      whitelist:
+        components:
+        - Edible
+        - Construction
+    #SS220-grill-update end
   - type: ItemPlacer
     maxEntities: 4 # big grill, many steaks
     whitelist:

@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.SS220.Language;
 using Content.Shared.SS220.Language;
 using Content.Shared.SS220.Language.Components;
@@ -18,7 +19,7 @@ public sealed partial class LanguageSettingsPopup : Popup
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly LanguageManager _languageManager = default!;
 
-    private Dictionary<LanguagePrototype, Button> _buttonsDict = new();
+    private readonly Dictionary<LanguagePrototype, Button> _buttonsDict = new();
     private Button? _selectedLanguage;
 
     public LanguageSettingsPopup()
@@ -40,10 +41,9 @@ public sealed partial class LanguageSettingsPopup : Popup
         }
 
         var availableLanguages = new List<LanguagePrototype>();
-        foreach (var def in comp.AvailableLanguages)
+        foreach (var def in comp.SpokenLanguages)
         {
-            if (!def.CanSpeak ||
-                !_languageManager.TryGetLanguageById(def.Id, out var language))
+            if (!_languageManager.TryGetLanguageById(def.Id, out var language))
                 continue;
 
             availableLanguages.Add(language);

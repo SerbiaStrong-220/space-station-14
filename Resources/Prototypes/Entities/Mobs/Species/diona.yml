@@ -123,6 +123,7 @@
     - Dead
   # SS220-Add-Languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
     - id: Rootspeak
@@ -142,6 +143,7 @@
   #SS220 LimitationRevive - start
   - type: LimitationRevive
   #SS220 LimitationRevive - end
+  - type: Rootable
 
 - type: entity
   parent: BaseSpeciesDummy

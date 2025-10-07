@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Vector3 = System.Numerics.Vector3;
 using Robust.Client.Graphics;
 using System.Numerics;
@@ -19,6 +20,7 @@ public sealed class Pseudo3DColoredView : Plot
             MakeMeshgrid();
         }
     }
+
     public Vector2? Sizes
     {
         get => _sizes;
@@ -28,6 +30,7 @@ public sealed class Pseudo3DColoredView : Plot
             MakeMeshgrid();
         }
     }
+
     public Vector2? Steps
     {
         get => _steps;
@@ -65,6 +68,7 @@ public sealed class Pseudo3DColoredView : Plot
         _color2DPoint.YLabel = yLabel;
         _color2DPoint.Title = title;
     }
+
     public void MakeMeshgrid((float Offset, float Size, float Step) xParams, (float Offset, float Size, float Step) yParams)
     {
         if (_color2DPoint == null)
@@ -77,6 +81,7 @@ public sealed class Pseudo3DColoredView : Plot
 
         _color2DPoint = new Color2DPointView(xParams, yParams, _color2DPoint);
     }
+
     public void MakeMeshgrid()
     {
         if (!(Sizes.HasValue && Offsets.HasValue && Steps.HasValue))
@@ -97,11 +102,13 @@ public sealed class Pseudo3DColoredView : Plot
 
         _color2DPoint = new Color2DPointView(paramX, paramY, _color2DPoint);
     }
+
     public void EvalFunctionOnMeshgrid(Func<float, float, float> func)
     {
         _cachedFunction = func;
         _color2DPoint?.EvalFunction(func);
     }
+
     public void LoadMovingPoint(Vector2 position, Vector2 moveDirection)
     {
         if (position.X > GetFarestPossiblePlotPoint(_cachedParams.x)
@@ -124,6 +131,7 @@ public sealed class Pseudo3DColoredView : Plot
 
         _movingPoint?.Update(position, moveDirection);
     }
+
     protected override void Draw(DrawingHandleScreen handle)
     {
         if (_color2DPoint == null)
@@ -166,24 +174,29 @@ public sealed class Pseudo3DColoredView : Plot
     {
         return param.Offset + param.Step;
     }
+
     private float GetFarestPossiblePlotPoint((float Offset, float Size, float Step) param)
     {
         return param.Offset + (param.Size - 1) * param.Step;
     }
+
     /// <summary> Make sure that we wont get into wrong position by changing Meshgrid </summary>
     private float MakeOffsetFromCoord(float coord, (float Min, float Size, float Step) parameters)
     {
         return Math.Clamp(coord - parameters.Size / 2f * parameters.Step, parameters.Min, float.PositiveInfinity);
     }
+
     /// <summary> Adjust vector to borders also offsets it with AxisBorderPosition </summary>
     private float AdjustCoordToBorder(float coord, float curMin, float curMax, float availableSize)
     {
         return MakeToPixelRange(coord - curMin, curMin, curMax, availableSize) + AxisThickness / 2 + AxisBorderPosition;
     }
+
     private float MakeToPixelRange(float coord, float curMin, float curMax, float availableSize)
     {
         return coord / (curMax - curMin) * (availableSize - AxisBorderPosition - AxisThickness / 2);
     }
+
     /// <summary>
     /// Function to draw point with internal scaling of a point size
     /// </summary>

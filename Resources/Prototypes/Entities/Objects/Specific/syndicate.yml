@@ -130,6 +130,7 @@
 #SS220 NukeOpsUplink end
     balance:
       Telecrystal: 40
+    useDiscounts: true # SS220 Lone-Ops-Uplink
   - type: Tag
     tags:
     - NukeOpsUplink
@@ -155,7 +156,8 @@
     - UplinkPointless
 #SS220 NukeOpsUplink end
     balance:
-      Telecrystal: 40 # SS220 Lone-Ops-Uplink
+      Telecrystal: 40 # SS220 Lone-Ops-Uplink start
+    useDiscounts: true # SS220 Lone-Ops-Uplink end
   - type: Tag
     tags:
     - LoneOpsUplink # SS220 Lone-Ops-Uplink
