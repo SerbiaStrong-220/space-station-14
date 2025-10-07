@@ -100,10 +100,10 @@ public sealed partial class ExperienceSystem : EntitySystem
             return false;
 
         // We care of start only at start
-        if (info.SkillSublevel == _startLearningProgress && !studyingSkillProto.LevelInfo.CanStartStudying)
+        if (info.SkillSublevel == StartLearningProgress && !studyingSkillProto.LevelInfo.CanStartStudying)
             return false;
 
-        return progress >= _endLearningProgress;
+        return progress >= EndLearningProgress;
     }
 
     #endregion
@@ -182,7 +182,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         // Do not save overflow progress of it
-        entity.Comp.StudyingProgress[skillTree] = _startLearningProgress;
+        entity.Comp.StudyingProgress[skillTree] = StartLearningProgress;
         info.SkillSublevel++;
 
         DirtyFields(entity.AsNullable(), null, [nameof(ExperienceComponent.Skills), nameof(ExperienceComponent.StudyingProgress)]);

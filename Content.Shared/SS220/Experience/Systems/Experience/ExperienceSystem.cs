@@ -14,8 +14,8 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private const int StartSkillLevelIndex = 0;
     private const int StartSubLevelIndex = 0;
-    private readonly FixedPoint4 _startLearningProgress = 0;
-    private readonly FixedPoint4 _endLearningProgress = 1;
+    public static readonly FixedPoint4 StartLearningProgress = 0;
+    public static readonly FixedPoint4 EndLearningProgress = FixedPoint4.New(1f);
 
     private static readonly HashSet<string> ContainerIds = [
         ExperienceComponent.ContainerId,
@@ -46,16 +46,16 @@ public sealed partial class ExperienceSystem : EntitySystem
             return false;
 
         if (!entity.Comp.StudyingProgress.ContainsKey(skillTree))
-            entity.Comp.StudyingProgress.Add(skillTree, _startLearningProgress);
+            entity.Comp.StudyingProgress.Add(skillTree, StartLearningProgress);
 
         var result = entity.Comp.StudyingProgress[skillTree] + delta;
-        if (result > _endLearningProgress)
+        if (result > EndLearningProgress)
         {
             InternalProgressSublevel(entity!, skillTree);
             return true;
         }
 
-        entity.Comp.StudyingProgress[skillTree] = FixedPoint4.Clamp(result, _startLearningProgress, _endLearningProgress);
+        entity.Comp.StudyingProgress[skillTree] = FixedPoint4.Clamp(result, StartLearningProgress, EndLearningProgress);
         return true;
     }
 
@@ -79,7 +79,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         ResolveInitLeveling(entity, ev.Info, ev.SkillTree);
 
         entity.Comp.Skills.Add(skillTree, ev.Info);
-        entity.Comp.StudyingProgress.Add(skillTree, _startLearningProgress);
+        entity.Comp.StudyingProgress.Add(skillTree, StartLearningProgress);
 
         DirtyFields(entity.AsNullable(), null, [nameof(ExperienceComponent.Skills), nameof(ExperienceComponent.InitMask)]);
 

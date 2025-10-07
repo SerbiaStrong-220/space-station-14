@@ -8,16 +8,20 @@
     xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements">
     <BoxContainer Name="ContentContainer" Orientation="Horizontal">
         <BoxContainer Orientation="Vertical">
-            <!-- Info Container  -->
-                <!-- Icon -->
-                <!-- Name -->
-            <!-- Skills Container  -->
-                <!-- Level + onHover -->
+            <BoxContainer Name ="InfoContainer" Orientation="Horizontal">
+                <TextureRect Name="TreeIconRect"/>
+                <RichTextLabel Name="TreeName" Text="place-holder"/>
+            </BoxContainer>
+            <BoxContainer Name ="TreeLevelsContainer" Orientation="Horizontal">
+                <!-- Added here by code -->
+            </BoxContainer>
+            <Button Name="ShowSubLevelsButton" Text="\/"/>
         </BoxContainer>
-        <BoxContainer Orientation="Vertical">
-            <!-- SublevelsContainer -->
-                <!-- Sublevels   -->
-            <!-- Hidable level app button -->
+        <BoxContainer Name="SubdataContainer" Orientation="Vertical" Visible="False">
+            <BoxContainer Name="SublevelsContainer">
+                <!-- Sublevels visual added by code -->
+            </BoxContainer>
+            <Button Name="SubmitButton" Text="+"/>
         </BoxContainer>
     </BoxContainer>
 </ExperienceUiElements:ExperienceTreeContainer>

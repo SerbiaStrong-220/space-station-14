@@ -7,6 +7,9 @@
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements">
     <BoxContainer Name="GroupContainer" Orientation="Vertical">
-
+        <RichTextLabel Name="GroupName" Text="place-holder"/>
+        <BoxContainer Name="SkillTreeContainer" Orientation="Vertical">
+            <!-- Added here by code -->
+        </BoxContainer>
     </BoxContainer>
 </ExperienceUiElements:ExperienceGroupContainer>
