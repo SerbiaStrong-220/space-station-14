@@ -274,6 +274,7 @@
       - type: AutoImplant
         implants:
         - DeathAcidifierImplant
+        - NinjaAdrenalImplant #SS220 Ninja Resprite
       - type: RandomMetadata
         nameSegments:
         - NamesNinjaTitle

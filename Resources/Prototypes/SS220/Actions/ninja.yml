@@ -1,0 +1,16 @@
+- type: entity
+  id: ActionActivateNinjaAdrenalImplant
+  components:
+  - type: LimitedCharges
+    maxCharges: 4
+  - type: Action
+    checkCanInteract: false
+    checkConsciousness: false
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: SS220/Interface/Actions/ninja.rsi
+      state: ninjaAdrenal
+    useDelay: 30
+  - type: InstantAction
+    event: !type:UseAdrenalImplantEvent
