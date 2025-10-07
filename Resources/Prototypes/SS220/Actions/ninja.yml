@@ -1,5 +1,7 @@
 - type: entity
   id: ActionActivateNinjaAdrenalImplant
+  name: A boost of adrenaline
+  description: Inject five units of a stimulant, triggering the production of adrenaline. A side effect is the ingestion of one unit of radium into the blood.
   components:
   - type: LimitedCharges
     maxCharges: 4
