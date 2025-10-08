@@ -213,7 +213,7 @@
   id: ClothingOuterWizardBase
   components:
   - type: WizardClothes
-  #SS220 Wizard Clothing Resprite Begin
+  #SS220 Wizard Update Begin
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodWizardBlue
     slot: head
@@ -232,7 +232,7 @@
           tags:
           - Radio
   #ss220 handheld radio on outer clothing end
-  #SS220 Wizard Clothing Resprite End
+  #SS220 Wizard Update End
 
 # Is this wizard wearing a fanny pack???
 - type: entity
@@ -242,11 +242,11 @@
   description: A bizarre gem-encrusted violet robe that radiates magical energies.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/wizard_violet.rsi # SS220 Wizard Clothing Resprite
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_violet.rsi #SS220 Wizard Update
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/wizard_violet.rsi # SS220 Wizard Clothing Resprite
-  - type: ToggleableClothing # SS220 Wizard Clothing Resprite
-    clothingPrototype: ClothingHeadHatHoodWizardViolet # SS220 Wizard Clothing Resprite
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_violet.rsi #SS220 Wizard Update
+  - type: ToggleableClothing #SS220 Wizard Update
+    clothingPrototype: ClothingHeadHatHoodWizardViolet #SS220 Wizard Update
   - type: Tag
     tags:
     - CorgiWearable
@@ -259,11 +259,11 @@
   description: A bizarre gem-encrusted blue robe that radiates magical energies.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/wizard_blue.rsi # SS220 Wizard Clothing Resprite
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_blue.rsi #SS220 Wizard Update
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/wizard_blue.rsi # SS220 Wizard Clothing Resprite
-  - type: ToggleableClothing # SS220 Wizard Clothing Resprite
-    clothingPrototype: ClothingHeadHatHoodWizardBlue # SS220 Wizard Clothing Resprite
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_blue.rsi #SS220 Wizard Update
+  - type: ToggleableClothing #SS220 Wizard Update
+    clothingPrototype: ClothingHeadHatHoodWizardBlue #SS220 Wizard Update
   - type: Tag
     tags:
     - CorgiWearable
@@ -276,11 +276,11 @@
   description: Strange-looking, red, hat-wear that most certainly belongs to a real magic user.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/wizard_red.rsi # SS220 Wizard Clothing Resprite
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_red.rsi #SS220 Wizard Update
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/wizard_red.rsi # SS220 Wizard Clothing Resprite
-  - type: ToggleableClothing # SS220 Wizard Clothing Resprite
-    clothingPrototype: ClothingHeadHatHoodWizardRed # SS220 Wizard Clothing Resprite
+    sprite: SS220/Clothing/OuterClothing/Misc/wizard_red.rsi #SS220 Wizard Update
+  - type: ToggleableClothing #SS220 Wizard Update
+    clothingPrototype: ClothingHeadHatHoodWizardRed #SS220 Wizard Update
   - type: Tag
     tags:
     - CorgiWearable

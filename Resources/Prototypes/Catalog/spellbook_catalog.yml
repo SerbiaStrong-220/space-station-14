@@ -327,7 +327,7 @@
   name: spellbook-upgrade-fireball-name
   description: spellbook-upgrade-fireball-description
   icon:
-    sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi #SS220 Wizard Update
+    sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi # SS220 Wizard Update
     state: fireball
   cost:
     WizCoin: 2
@@ -347,7 +347,7 @@
   name: spellbook-upgrade-jaunt-name
   description: spellbook-upgrade-jaunt-description
   icon:
-    sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi #SS220 Wizard Update
+    sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi # SS220 Wizard Update
     state: jaunt
   cost:
     WizCoin: 2

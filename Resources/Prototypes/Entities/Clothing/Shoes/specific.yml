@@ -174,9 +174,9 @@
   description: A pair of magic shoes.
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Specific/wizard.rsi
+    sprite: SS220/Clothing/Shoes/Specific/wizard.rsi # SS220 Wizard Update
   - type: Clothing
-    sprite: Clothing/Shoes/Specific/wizard.rsi
+    sprite: SS220/Clothing/Shoes/Specific/wizard.rsi # SS220 Wizard Update
 
 - type: entity
   parent: [ClothingShoesBase, BaseChameleon]
