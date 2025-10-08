@@ -634,14 +634,25 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (MessageRangeCheck(session, data, range) != MessageRangeCheckResult.Full)
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
 
-            if (data.Range <= WhisperClearRange || data.Observer)
+            // ss220 add whisper range modify start
+            var whisperClearRange = (float)WhisperClearRange;
+            var whisperMuffledRange = (float)WhisperMuffledRange;
+            if (TryComp<HumanoidAppearanceComponent>(playerEntity, out var app))
+            {
+                var species = _prototypeManager.Index(app.Species);
+                whisperClearRange = species.BaseWhisperClearRange;
+                whisperMuffledRange = species.BaseWhisperMuffledRange;
+            }
+
+            if (data.Range <= whisperClearRange || data.Observer)
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, scrambledMessage /* SS220 languages */, wrappedMessage, source, false, session.Channel);
             //If listener is too far, they only hear fragments of the message
-            else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
+            else if (_examineSystem.InRangeUnOccluded(source, listener, whisperMuffledRange))
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedScrambledMessage /* SS220 languages */, wrappedobfuscatedMessage, source, false, session.Channel);
             //If listener is too far and has no line of sight, they can't identify the whisperer's identity
             else
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedScrambledMessage /* SS220 languages */, wrappedUnknownMessage, source, false, session.Channel);
+            // ss220 add whisper range modify end
         }
 
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
@@ -1011,6 +1022,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
     /// <summary>
     ///     Returns list of players and ranges for all players withing some range. Also returns observers with a range of -1.
+    ///     SS220: Can return entity, which more than <see cref="voiceGetRange"/>, if in SpeciesPrototype changed whisper settings.
     /// </summary>
     private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange)
     {
@@ -1039,12 +1051,22 @@ public sealed partial class ChatSystem : SharedChatSystem
                            && ghostComp.IsEnabled;
             //ss220 add filter tts for ghost end
 
+            // ss220 add whisper range modify start
+            var voiceRange = voiceGetRange;
+
+            if (TryComp<HumanoidAppearanceComponent>(playerEntity, out var huAp))
+            {
+                var species = _prototypeManager.Index(huAp.Species);
+                voiceRange = species.BaseWhisperMuffledRange;
+            }
+
             // even if they are a ghost hearer, in some situations we still need the range
-            if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceGetRange)
+            if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceRange)
             {
                 recipients.Add(player, new ICChatRecipientData(distance, observer));
                 continue;
             }
+            // ss220 add whisper range modify end
 
             if (observer)
                 recipients.Add(player, new ICChatRecipientData(-1, true));

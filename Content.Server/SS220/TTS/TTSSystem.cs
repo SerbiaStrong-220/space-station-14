@@ -4,10 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Content.Server.Chat.Systems;
 using Content.Server.VoiceMask;
+using Content.Shared.Chat;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.TTS;
 using Content.Shared.GameTicking;
+using Content.Shared.Humanoid;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -399,10 +401,22 @@ public sealed partial class TTSSystem : EntitySystem
         var xform = xformQuery.GetComponent(receiver.AttachedEntity.Value);
         var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
 
-        if (distance > ChatSystem.WhisperMuffledRange)
+        // ss220 add whisper range modify start
+        var whisperClearRange = (float)SharedChatSystem.WhisperClearRange;
+        var whisperMuffledRange = (float)SharedChatSystem.WhisperMuffledRange;
+
+        if (TryComp<HumanoidAppearanceComponent>(receiver.AttachedEntity.Value, out var huAp))
+        {
+            var species = _prototypeManager.Index(huAp.Species);
+            whisperClearRange = species.BaseWhisperClearRange;
+            whisperMuffledRange = species.BaseWhisperMuffledRange;
+        }
+
+        if (distance > whisperMuffledRange)
             return;
 
-        if (distance > ChatSystem.WhisperClearRange)
+        if (distance > whisperClearRange)
+        // ss220 add whisper range modify end
         {
             if (obfTtsMessage == null)
             {

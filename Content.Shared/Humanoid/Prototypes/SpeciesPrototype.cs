@@ -152,6 +152,14 @@ public sealed partial class SpeciesPrototype : IPrototype
     [DataField]
     public List<string> BlacklistJobsForStartingGear = new();
     //ss220 add species loadout end
+
+    // ss220 add whisper range modify start
+    [DataField("whisperClearRange")]
+    public float BaseWhisperClearRange = 2f;
+
+    [DataField("whisperMuffledRange")]
+    public float BaseWhisperMuffledRange = 5f;
+    // ss220 add whisper range modify end
 }
 
 public enum SpeciesNaming : byte

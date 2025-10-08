@@ -1,7 +1,10 @@
 using Content.Server.Chat.Systems;
+using Content.Shared.Chat; // ss220 add whisper range modify
+using Content.Shared.Humanoid; // ss220 add whisper range modify
 using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
 using Content.Shared.SS220.Language.Systems;
+using Robust.Shared.Prototypes; // ss220 add whisper range modify
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -10,6 +13,7 @@ namespace Content.Server.Speech.EntitySystems;
 /// </summary>
 public sealed class ListeningSystem : EntitySystem
 {
+    [Dependency] private readonly IPrototypeManager _proto = default!; // ss220 add whisper range modify
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
 
     public override void Initialize()
@@ -55,10 +59,20 @@ public sealed class ListeningSystem : EntitySystem
                 continue;
             }
 
-            if (obfuscatedEv != null && distance > ChatSystem.WhisperClearRange)
+            // ss220 add whisper range modify start
+            var whisperClearRange = (float)SharedChatSystem.WhisperClearRange;
+            if (TryComp<HumanoidAppearanceComponent>(listenerUid, out var huAp))
+            {
+                var species = _proto.Index(huAp.Species);
+                whisperClearRange = species.BaseWhisperClearRange;
+            }
+
+            if (obfuscatedEv != null && distance > whisperClearRange)
                 RaiseLocalEvent(listenerUid, obfuscatedEv);
             else
                 RaiseLocalEvent(listenerUid, ev);
+
+            // ss220 add whisper range modify end
         }
     }
 }
