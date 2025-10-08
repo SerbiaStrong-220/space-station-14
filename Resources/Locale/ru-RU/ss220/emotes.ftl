@@ -16,3 +16,5 @@ chat-emote-name-giggle = хихиканье
 chat-emote-msg-giggle = хихикает!
 chat-emote-name-hiss = шипение
 chat-emote-msg-hiss = шипит!
+chat-emote-name-mrow = раздражённое мяуканье
+chat-emote-msg-mrow = раздражённо мяукает

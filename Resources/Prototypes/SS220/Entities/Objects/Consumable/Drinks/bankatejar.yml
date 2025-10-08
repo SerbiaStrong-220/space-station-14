@@ -46,6 +46,13 @@
   name: банка банкате
   description: Вы же не собираетесь это пить, да?
   components:
+  # TODO-SS220-Sprites-begin
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: fill-
+    inHandsMaxFillLevels: 0
+    inHandsFillBaseName: null
+  # TODO-SS220-Sprites-end
   - type: SolutionContainerManager
     solutions:
       drink:

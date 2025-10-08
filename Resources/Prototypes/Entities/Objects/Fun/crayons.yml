@@ -21,7 +21,7 @@
       enum.CrayonUiKey.Key:
         type: CrayonBoundUserInterface
   - type: Crayon
-    capacity: 25
+    capacity: 50 # SS220 crayons buff
   - type: Food
   - type: FlavorProfile
     flavors:
@@ -88,7 +88,7 @@
   - type: Crayon
     color: Red
     selectableColor: true
-    capacity: 30
+    capacity: 60 # SS220 crayons buff
   - type: Tag
     tags:
     - Write

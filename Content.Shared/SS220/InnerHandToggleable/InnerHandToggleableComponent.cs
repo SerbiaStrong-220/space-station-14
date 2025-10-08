@@ -12,7 +12,6 @@ namespace Content.Shared.SS220.InnerHandToggleable;
 ///     Allows user to hide whitelisted items inside specific inner hand slot.
 ///     Actions appear depending on whether the item is equipped in a slot inside the hand or if the item is suitable for being placed in the hand.
 /// </summary>
-
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class InnerHandToggleableComponent : Component
 {

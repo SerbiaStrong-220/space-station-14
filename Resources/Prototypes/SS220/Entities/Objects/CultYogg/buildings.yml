@@ -71,6 +71,11 @@
     count: 8
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
 
+- type: cultYoggBuilding
+  id: CultYoggAirlock
+  order: 6
+  result: CultYoggAirlock
+
 # TODO: раскомментить после того, как будут спрайты кровати
 #- type: cultYoggBuilding
 #  id: CultYoggBedBuilding

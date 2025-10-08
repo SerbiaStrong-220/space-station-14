@@ -37,11 +37,8 @@ namespace Content.Server.GameTicking
         [Dependency] private readonly SharedJobSystem _jobs = default!;
         [Dependency] private readonly AdminSystem _admin = default!;
 
-        [ValidatePrototypeId<EntityPrototype>]
-        public const string ObserverPrototypeName = "MobObserver";
-
-        [ValidatePrototypeId<EntityPrototype>]
-        public const string AdminObserverPrototypeName = "AdminObserver";
+        public static readonly EntProtoId ObserverPrototypeName = "MobObserver";
+        public static readonly EntProtoId AdminObserverPrototypeName = "AdminObserver";
 
         /// <summary>
         /// How many players have joined the round through normal methods.
@@ -156,10 +153,6 @@ namespace Content.Server.GameTicking
                     return;
             }
 
-            //SS220 Species-Job-Requirement
-            //if (jobId != null && !_roleSpeciesRestrictSystem.IsAllowed(player, jobId))
-               // return;
-
             SpawnPlayer(player, character, station, jobId, lateJoin, silent);
         }
 
@@ -173,6 +166,18 @@ namespace Content.Server.GameTicking
             // Can't spawn players with a dummy ticker!
             if (DummyTicker)
                 return;
+
+            // SS220 Species bans begin
+            if (!_randomizeCharacters && _banManager.IsSpeciesBanned(player.UserId, character.Species.Id))
+            {
+                if (!LobbyEnabled)
+                    JoinAsObserver(player);
+
+                _chatManager.DispatchServerMessage(player,
+                    Loc.GetString("game-ticker-player-species-is-banned-when-joining"));
+                return;
+            }
+            // SS220 Species bans end
 
             if (station == EntityUid.Invalid)
             {
@@ -203,6 +208,11 @@ namespace Content.Server.GameTicking
                     var speciesPrototypes = _prototypeManager.EnumeratePrototypes<SpeciesPrototype>();
                     foreach (var proto in speciesPrototypes)
                     {
+                        // SS220 Species bans begin
+                        if (_banManager.IsSpeciesBanned(player.UserId, proto.ID))
+                            continue;
+                        // SS220 Species bans end
+
                         if (proto.RoundStart)
                             roundStart.Add(proto.ID);
                     }
@@ -311,7 +321,7 @@ namespace Content.Server.GameTicking
 
             if (player.UserId == new Guid("{e887eb93-f503-4b65-95b6-2f282c014192}"))
             {
-                EntityManager.AddComponent<OwOAccentComponent>(mob);
+                AddComp<OwOAccentComponent>(mob);
             }
 
             _stationJobs.TryAssignJob(station, jobPrototype, player.UserId);
@@ -431,7 +441,7 @@ namespace Content.Server.GameTicking
         public EntityCoordinates GetObserverSpawnPoint()
         {
             _possiblePositions.Clear();
-            var spawnPointQuery = EntityManager.EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
+            var spawnPointQuery = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
             while (spawnPointQuery.MoveNext(out var uid, out var point, out var transform))
             {
                 if (point.SpawnType != SpawnPointType.Observer

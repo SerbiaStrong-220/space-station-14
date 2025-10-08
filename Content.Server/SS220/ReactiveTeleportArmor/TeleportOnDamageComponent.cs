@@ -14,10 +14,10 @@ public sealed partial class TeleportOnDamageComponent : Component
     /// <summary>
     /// Up to how far to teleport the user
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float TeleportRadius = 50f;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public SoundSpecifier TeleportSound = new SoundPathSpecifier("/Audio/Effects/teleport_arrival.ogg");
 
     /// <summary>
@@ -26,7 +26,7 @@ public sealed partial class TeleportOnDamageComponent : Component
     [DataField]
     public FixedPoint2 WakeThreshold = FixedPoint2.New(4);
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float TeleportChance = .9f;
 
     /// <summary>

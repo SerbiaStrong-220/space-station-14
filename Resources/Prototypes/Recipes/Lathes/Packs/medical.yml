@@ -42,9 +42,12 @@
   - Defibrillator
   - HandheldHealthAnalyzer
   - DiseaseSwab
+  - DiseaseSwabNarcotic #ss220 add narcotic test
   - BodyBag
   - WhiteCane
   - MedAutoinjector #ss220 Autoinjecors update
+  - OffsetCane
+  - OffsetCaneWood
 
 - type: latheRecipePack
   id: RollerBedsStatic
@@ -52,7 +55,6 @@
   - RollerBedSpawnFolded
   - CheapRollerBedSpawnFolded
   - EmergencyRollerBedSpawnFolded
-  - VehicleWheelchairFolded #SS220 Readd-Vehicles
 
 - type: latheRecipePack
   id: MedicalClothingStatic

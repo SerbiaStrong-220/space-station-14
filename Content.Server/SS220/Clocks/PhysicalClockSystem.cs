@@ -2,7 +2,6 @@
 
 using Content.Server.GameTicking;
 using Content.Shared.Examine;
-using Robust.Shared.Timing;
 using Content.Shared.SS220.Clocks;
 
 namespace Content.Server.SS220.Clocks;
@@ -22,9 +21,9 @@ public sealed class PhysicalClockSystem : EntitySystem
         SubscribeLocalEvent<PhysicalClockComponent, ExaminedEvent>(OnExamine);
     }
 
-    private void OnExamine(EntityUid uid, PhysicalClockComponent component, ExaminedEvent args)
+    private void OnExamine(Entity<PhysicalClockComponent> ent, ref ExaminedEvent args)
     {
-        if (!component.Enabled)
+        if (!ent.Comp.Enabled)
             return;
 
         var gameTicker = _entitySystem.GetEntitySystem<GameTicker>();

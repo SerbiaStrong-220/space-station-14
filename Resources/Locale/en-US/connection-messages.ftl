@@ -23,6 +23,7 @@ ban-banned-2 = The ban reason is: "{$reason}"
 ban-banned-3 = If you don't agree with the sanction, you can apeal it in our Discord: https://discord.gg/ss220
 ban-banned-4 = Attempts to circumvent this ban such as creating a new account will be logged.
 ban-banned-8 = Ban number: { $banId }
+ban-banned-9 = Banned player login: "{$login}".
 
 soft-player-cap-full = The server is full!
 panic-bunker-account-denied = This server is in panic bunker mode, often enabled as a precaution against raids. New connections by accounts not meeting certain requirements are temporarily not accepted. Try again later

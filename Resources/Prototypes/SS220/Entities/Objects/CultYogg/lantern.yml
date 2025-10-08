@@ -11,7 +11,7 @@
     sprite: SS220/Objects/CultYogg/lantern_cult.rsi
     layers:
       - state: lantern
-      - state: lantern_on
+      - state: lantern-on
         shader: unshaded
         visible: false
         map: [ "light" ]
@@ -30,7 +30,16 @@
     radius: 3
     energy: 2
     netsync: false
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
+    spriteLayer: light
+    inhandVisuals:
+      left:
+      - state: inhand-left-light
+        shader: unshaded
+      right:
+      - state: inhand-right-light
+        shader: unshaded
+  - type: ItemTogglePointLight
   - type: Appearance
   - type: Physics
     canCollide: false

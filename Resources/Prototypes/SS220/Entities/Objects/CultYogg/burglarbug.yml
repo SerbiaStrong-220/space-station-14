@@ -30,7 +30,7 @@
       whitelist:
         components:
         - Door
-    - type: OnUseTimerTrigger
+    - type: TimerTrigger
       delay: 10
       examinable: false
     - type: StickyVisualizer

@@ -41,9 +41,10 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     [Dependency] private readonly GhostSystem _ghostSystem = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
 
-    private float _afkTeleportTocryo;
+    private float _afkTeleportToCryo;
 
-    private readonly Dictionary<(EntityUid, NetUserId), (TimeSpan, bool)> _entityEnteredSSDTimes = new();
+    private readonly Dictionary<(EntityUid, NetUserId), TimeSpan> _entityEnteredSSDTimes = new();
+    private readonly List<(EntityUid, NetUserId)> _toRemove = new();
 
     public override void Initialize()
     {
@@ -55,7 +56,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     }
 
     private void SetAfkTeleportToCryo(float value)
-        => _afkTeleportTocryo = value;
+        => _afkTeleportToCryo = value;
 
     public override void Shutdown()
     {
@@ -68,16 +69,36 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        foreach (var pair in _entityEnteredSSDTimes.Where(uid => HasComp<MindContainerComponent>(uid.Key.Item1)))
+
+        if (_entityEnteredSSDTimes.Count == 0)
+            return;
+
+        foreach (var key in _entityEnteredSSDTimes.Keys.ToList())
         {
-            if (pair.Value.Item2 && IsTeleportAfkToCryoTime(pair.Value.Item1) && TeleportEntityToCryoStorage(pair.Key.Item1))
-                _entityEnteredSSDTimes.Remove(pair.Key);
+            if (Deleted(key.Item1))
+                _entityEnteredSSDTimes.Remove(key);
+        }
+
+        _toRemove.Clear();
+
+        foreach (var pair in _entityEnteredSSDTimes)
+        {
+            if (!IsTeleportAfkToCryoTime(pair.Value))
+                continue;
+
+            if (TeleportEntityToCryoStorage(pair.Key.Item1))
+                _toRemove.Add(pair.Key);
+        }
+
+        foreach (var key in _toRemove)
+        {
+            _entityEnteredSSDTimes.Remove(key);
         }
     }
 
     private bool IsTeleportAfkToCryoTime(TimeSpan time)
     {
-        var timeOut = TimeSpan.FromSeconds(_afkTeleportTocryo);
+        var timeOut = TimeSpan.FromSeconds(_afkTeleportToCryo);
         return _gameTiming.CurTime - time > timeOut;
     }
 
@@ -98,19 +119,22 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
                 {
                     break;
                 }
-                _entityEnteredSSDTimes[(e.Session.AttachedEntity.Value, e.Session.UserId)]
-                    = (_gameTiming.CurTime, humanoidPreferences.TeleportAfkToCryoStorage);
+
+                if (!humanoidPreferences.TeleportAfkToCryoStorage)
+                    break;
+
+                _entityEnteredSSDTimes[(e.Session.AttachedEntity.Value, e.Session.UserId)] = _gameTiming.CurTime;
                 break;
             case SessionStatus.Connected:
-                if (_entityEnteredSSDTimes
-                    .TryFirstOrNull(item => item.Key.Item2 == e.Session.UserId, out var item))
+                foreach (var keys in _entityEnteredSSDTimes.Keys.ToList())
                 {
-                    _entityEnteredSSDTimes.Remove(item.Value.Key);
+                    if (keys.Item2 == e.Session.UserId)
+                        _entityEnteredSSDTimes.Remove(keys);
                 }
-
                 break;
         }
     }
+
     /// <summary>
     /// Tries to teleport target inside cryopod, if any available
     /// </summary>
@@ -118,7 +142,10 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
     /// <returns> true if player successfully transferred to cryo storage, otherwise returns false</returns>
     public bool TeleportEntityToCryoStorage(EntityUid target)
     {
-        var station = _station.GetOwningStation(target);
+        if (!TryComp(target, out TransformComponent? xform))
+            return false;
+
+        var station = _station.GetOwningStation(target, xform);
         if (station is null)
             return false;
 
@@ -126,9 +153,9 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
             return true;
 
         var cryostorageComponents = EntityQueryEnumerator<CryostorageComponent>();
-        while (cryostorageComponents.MoveNext(out var cryostorageUid, out var сryostorageComp))
+        while (cryostorageComponents.MoveNext(out var cryostorageUid, out var cryostorageComp))
         {
-            if (TryTeleportToCryo(target, cryostorageUid, station.Value, сryostorageComp.TeleportPortralID))
+            if (TryTeleportToCryo(target, cryostorageUid, station.Value, cryostorageComp.TeleportPortralID))
                 return true;
         }
 

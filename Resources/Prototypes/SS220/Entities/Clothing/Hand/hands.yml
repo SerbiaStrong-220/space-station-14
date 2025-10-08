@@ -198,3 +198,18 @@
     itemIconStyle: BigItem
   - type: InstantAction
     event: !type:ToggleActionEvent
+
+- type: entity
+  parent: ClothingHandsGlovesSyntheticBase
+  id: ClothingHandsStormgloves
+  name: stormgloves
+  suffix: For emagg clothesmate
+  description: Our young race believed that the planet's resources were endless. But when we realized the depth of our delusions, it was too late.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/stormgloves.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/stormgloves.rsi
+  - type: Fiber
+    fiberColor: fibers-brown
+  - type: FingerprintMask

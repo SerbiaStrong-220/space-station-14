@@ -1,0 +1,43 @@
+- type: entity
+  parent: Clothing
+  id: ClothingMultipleHeadphones
+  name: headphones
+  description: Quality headphones from Drunk Masters, with good sound insulation.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Misc/headphones.rsi #SS220HeadphonesResprite
+    layers:
+    - state: icon
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Clothing
+    equippedPrefix: off
+    sprite: SS220/Clothing/Neck/Misc/headphones.rsi #SS220HeadphonesResprite
+    slots:
+    - HEAD
+    - EARS
+    - NECK
+  - type: ToggleableVisuals
+    spriteLayer: enum.ToggleableVisuals.Layer
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+      ears:
+      - state: on-equipped-EARS
+      neck:
+      - state: on-equipped-NECK
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}
+  - type: ItemToggle
+    predictable: false
+    soundActivate:
+      path: /Audio/Items/flashlight_on.ogg
+    soundDeactivate:
+      path: /Audio/Items/flashlight_off.ogg
+  - type: Tag #SS220-pr: FIX CLOTHING TAGS
+    tags: #SS220-pr: FIX CLOTHING TAGS
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
