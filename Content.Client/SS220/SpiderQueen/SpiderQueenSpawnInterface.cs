@@ -11,11 +11,22 @@ public sealed partial class SpiderQueenSpawnInterface : BoundUserInterface
     public SpiderQueenSpawnInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
-
     protected override void Open()
     {
         base.Open();
 
         _window = this.CreateWindow<SpiderQueenSpawnWindow>();
+    }
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        base.UpdateState(state);
+    }
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (!disposing)
+            return;
+
+        _window?.Dispose();
     }
 }

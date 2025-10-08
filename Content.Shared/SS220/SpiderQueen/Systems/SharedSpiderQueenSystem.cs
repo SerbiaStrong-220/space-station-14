@@ -11,6 +11,8 @@ using Content.Shared.SS220.SpiderQueen.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Content.Server.SS220.SpiderQueen.Systems.SpiderQueenInterfaceSystem;
+using Content.Shared.SS220.GhostHearing;
+using Robust.Shared.Player;
 
 namespace Content.Shared.SS220.SpiderQueen.Systems;
 
@@ -33,6 +35,7 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
         SubscribeLocalEvent<SpiderQueenComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SpiderQueenComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderCocooningActionEvent>(OnCocooningAction);
+
         SubscribeLocalEvent<SpiderQueenComponent, SpiderOpenSpawnMenuAction>(OnSpawnMenuOpen);
     }
 
@@ -61,11 +64,16 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
 
     private void OnSpawnMenuOpen(Entity<SpiderQueenComponent> entity, ref SpiderOpenSpawnMenuAction args)
     {
+        if (!TryComp<ActorComponent>(entity.Owner, out var actorComponent))
+            return;
+
         if (!_ui.IsUiOpen(entity.Owner, SpiderQueenSpawnKey.Key))
         {
-            _ui.OpenUi(entity.Owner, SpiderQueenSpawnKey.Key);
+            _ui.OpenUi(entity.Owner, SpiderQueenSpawnKey.Key, actorComponent.PlayerSession);
             return;
         }
+
+        _ui.CloseUi(entity.Owner, SpiderQueenSpawnKey.Key);
     }
 
     private void OnCocooningAction(Entity<SpiderQueenComponent> entity, ref SpiderCocooningActionEvent args)
