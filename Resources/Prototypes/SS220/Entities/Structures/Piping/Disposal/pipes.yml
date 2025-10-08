@@ -49,6 +49,8 @@
     node: filterflipped
     containers:
     - DisposalRouter
+  - type: StaticPrice
+    price: 85
 
 - type: entity
   id: DisposalFilterPipeY
@@ -101,6 +103,8 @@
     node: filter
     containers:
     - DisposalRouter
+  - type: StaticPrice
+    price: 85
 
 - type: entity
   id: DisposalFilterPipeX
@@ -150,3 +154,5 @@
     node: xfilter
     containers:
     - DisposalJunction
+  - type: StaticPrice
+    price: 85

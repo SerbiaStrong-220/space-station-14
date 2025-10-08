@@ -38,7 +38,7 @@
       - material: Steel
         amount: 2
         doAfter: 1
-    # DisposalFilter
+    # DisposalFilter ss220 start
     - to: filter
       steps:
       - material: Steel
@@ -72,6 +72,7 @@
       - material: Glass
         amount: 1
         doAfter: 1
+    # DisposalFilter ss220 end
     # DisposalJunction
     - to: junction
       steps:
