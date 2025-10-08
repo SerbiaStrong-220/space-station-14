@@ -1,4 +1,4 @@
-namespace Content.Server.SS220.NarcoticsTest;
+namespace Content.Server.SS220.Narcotics.NarcoticsTest;
 
 [RegisterComponent]
 public sealed partial class NarcoticsTestComponent : Component
