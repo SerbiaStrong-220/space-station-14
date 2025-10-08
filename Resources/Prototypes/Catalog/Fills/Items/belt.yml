@@ -181,7 +181,7 @@
   - type: StorageFill
     contents:
     - id: WeaponWandPolymorphCarp
-    - id: WeaponWandFireball
+#    - id: WeaponWandFireball #SS220 Wizard Update
     - id: WeaponWandDeath
     - id: WeaponWandPolymorphDoor
 

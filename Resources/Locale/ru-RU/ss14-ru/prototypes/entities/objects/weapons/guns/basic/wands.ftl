@@ -4,10 +4,14 @@ ent-WeaponWandPolymorphCarp = волшебная палочка полиморф
     .desc = На случай, когда вам срочно нужно филе карпа, а клоун выглядит уж очень аппетитно.
 ent-WeaponWandPolymorphMonkey = волшебная палочка полиморфа обезьяны
     .desc = Когда вам нужен обезьяний друг.
-ent-WeaponWandFireball = волшебная палочка огненного шара
+#SS220 Magic Weapon Resprite Begin
+ent-WeaponStaffFireball = волшебный посох огненного шара
     .desc = Огромные огненные шары!
-ent-WeaponWandLocker = волшебная палочка шкафчика
+#SS220 Magic Weapon Resprite End
+#SS220 Magic Weapon Resprite Begin
+ent-WeaponStaffLocker = волшебный посох шкафчика
     .desc = Запихивайте ботаников на расстоянии!
+#SS220 Magic Weapon Resprite End
 ent-WeaponWandDeath = волшебная палочка мгновенной смерти
     .desc = Над созданием этого чуда трудились только лучшие умы отдела РНД Space Wizards.
 ent-WeaponWandPolymorphDoor = волшебная палочка входа

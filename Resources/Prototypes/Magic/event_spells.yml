@@ -201,7 +201,7 @@
 #         orGroup: Magics
 #       - id: WeaponWandPolymorphMonkey
 #         orGroup: Magics
-#       - id: WeaponWandFireball
+#       - id: WeaponStaffFireball #SS220 Wizard Update
 #         orGroup: Magics
 #       - id: WeaponWandPolymorphDoor
 #         orGroup: Magics

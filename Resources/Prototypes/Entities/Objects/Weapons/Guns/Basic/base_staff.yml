@@ -9,7 +9,7 @@
       params:
         volume: 2
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Basic/staves.rsi
+    sprite: SS220/Objects/Weapons/Magic/staff.rsi #SS220 Wizard Update
   - type: Item
     heldPrefix: staff
     size: Normal
