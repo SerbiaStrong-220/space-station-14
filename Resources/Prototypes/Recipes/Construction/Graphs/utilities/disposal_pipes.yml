@@ -216,10 +216,10 @@
       - !type:SpawnPrototype
         prototype: SheetGlass1
         amount: 2
-      - !type:DeleteEntity
-        steps:
-        - tool: Welding
-          doAfter: 1
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Welding
+        doAfter: 1
   - node: filterflipped
     entity: DisposalFilterPipeYFlipped
     edges:
@@ -234,10 +234,10 @@
       - !type:SpawnPrototype
         prototype: SheetGlass1
         amount: 2
-      - !type:DeleteEntity
-        steps:
-        - tool: Welding
-          doAfter: 1
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Welding
+        doAfter: 1
   - node: xfilter
     entity: DisposalFilterPipeX
     edges:
@@ -252,10 +252,10 @@
       - !type:SpawnPrototype
         prototype: SheetGlass1
         amount: 2
-      - !type:DeleteEntity
-        steps:
-        - tool: Welding
-          doAfter: 1
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Welding
+        doAfter: 1
   # DisposalJunction
   - node: junction
     entity: DisposalJunction
