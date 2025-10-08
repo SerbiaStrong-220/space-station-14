@@ -8,8 +8,8 @@
   supervisors: job-supervisors-hire
   access:
   - Service # ss220 fix
-  - Theatre
   - Maintenance # TODO Remove maint access for all gimmick jobs once access work is completed
+  - Theatre
   - Musician #SS220 New_accesses_and_some_tweaks
   special:
   - !type:GiveItemOnHolidaySpecial

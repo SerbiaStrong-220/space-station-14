@@ -53,6 +53,7 @@ public sealed partial class IdCardConsoleComponent : Component
         "Chemistry",
         "ChiefEngineer",
         "ChiefMedicalOfficer",
+        "Paramedic",
         "Command",
         "Cryogenics",
         "Clown", //SS220 New_accesses_and_some_tweaks
@@ -67,7 +68,6 @@ public sealed partial class IdCardConsoleComponent : Component
         "Librarian", //SS220 New_accesses_and_some_tweaks
         "Maintenance",
         "Medical",
-        "Paramedic",
         "Psychologist", //SS220 New_accesses_and_some_tweaks
         "Quartermaster",
         "Research",
@@ -102,7 +102,6 @@ public sealed partial class IdCardConsoleComponent : Component
         "Lawyer",
         "Maintenance",
         "Medical",
-        "Paramedic",
         "Research",
         "Salvage",
         "Service",
