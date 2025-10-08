@@ -1,7 +1,7 @@
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
-namespace Content.Client.SS220.SpiderQueenInterface;
+namespace Content.Client.SS220.SpiderQueen;
 
 [UsedImplicitly]
 public sealed partial class SpiderQueenSpawnInterface : BoundUserInterface
