@@ -173,8 +173,9 @@
     - WhitelistChameleon
   - type: HideLayerClothing
     slots:
-    - Hair# Волшебник
+    - Hair
 
+# Волшебник
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatHoodWizardBlue

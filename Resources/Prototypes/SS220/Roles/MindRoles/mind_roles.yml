@@ -37,3 +37,13 @@
     exclusiveAntag: true
     roleType: TeamAntagonist
   - type: CultYoggRole
+
+- type: entity
+  parent: MindRoleWizard
+  id: MindRoleWizardReinforcement
+  name: Wizard Reinforcement Role
+  components:
+  - type: MindRole
+    roleType: TeamAntagonist
+    subtype: role-subtype-wizard-reinforcement
+    antagPrototype: GenericTeamAntagonist

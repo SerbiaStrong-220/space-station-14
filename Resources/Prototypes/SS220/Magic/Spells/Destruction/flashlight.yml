@@ -26,7 +26,7 @@
   - type: TriggerOnSpawn
   - type: FlashOnTrigger
     range: 7
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound:
       path: "/Audio/SS220/Magic/FlashLight/FlashLight.ogg"
   - type: DeleteOnTrigger

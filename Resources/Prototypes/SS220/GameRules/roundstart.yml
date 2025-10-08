@@ -84,3 +84,36 @@
   categories: [ GameRules ]
   components:
   - type: EmergencyShuttleAutoCallRule
+
+- type: entity
+  parent: BaseGameRule
+  id: WizardReinforcement
+  components:
+  - type: AntagObjectives
+    objectives:
+    - WizardSurviveObjective
+    - WizardDemonstrateObjective
+  - type: AntagLoadProfileRule
+    speciesOverride: Human
+  - type: AntagSelection
+    selectionTime: IntraPlayerSpawn
+    definitions:
+    - prefRoles: [ Wizard ]
+      max: 1
+      playerRatio: 1
+      roleLoadout:
+       - RoleSurvivalExtended
+      briefing:
+        text: wizard-role-greeting
+        color: Turquoise
+      components:
+      - type: NpcFactionMember
+        factions:
+        - Wizard
+      - type: RandomMetadata
+        nameSegments:
+        - NamesWizardFirst
+        - NamesWizardLast
+        nameFormat: name-format-wizard
+      mindRoles:
+      - MindRoleWizardReinforcement

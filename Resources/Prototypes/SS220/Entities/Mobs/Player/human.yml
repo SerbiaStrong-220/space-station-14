@@ -1,0 +1,112 @@
+# Wizard
+- type: entity
+  parent: MobHuman
+  id: MobHumanWizardApprenticeshipBase
+  name: wizard apprentice
+  suffix: Human, Wizard, Base
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+    hair: HairBald
+  - type: Loadout
+    prototypes: [ WizardApprenticeClothing]
+    roleLoadout: [ RoleSurvivalSyndicate ]
+  - type: RandomMetadata
+    nameSegments:
+    - NamesWizardFirst
+    - NamesWizardLast
+  - type: NpcFactionMember
+    factions:
+    - Wizard
+
+- type: entity
+  parent: MobHumanWizardApprenticeshipBase
+  id: MobHumanWizardApprenticeship
+  name: wizard apprentice
+  suffix: Human, Wizard
+  components:
+  # make the player a traitor once its taken
+  - type: AutoTraitor
+    profile: WizardReinforcement
+
+- type: entity
+  parent: MobHumanWizardApprenticeship
+  id: MobHumanWizardApprenticeshipDestruction
+  name: apprenticeship of the destruction school
+  components:
+  - type: Loadout
+    prototypes: [ ApprenticeshipDestruction ]
+    roleLoadout: [ RoleSurvivalSyndicate ]
+  - type: ActionGrant
+    actions:
+    - ActionPolymorphWizardRod
+    - ActionSmite
+    - ActionBlink
+
+- type: entity
+  parent: MobHumanWizardApprenticeship
+  id: MobHumanWizardApprenticeshipFire
+  name: apprenticeship of the fire school
+  components:
+  - type: Loadout
+    prototypes: [ ApprenticeshipFire ]
+    roleLoadout: [ RoleSurvivalSyndicate ]
+  - type: ActionGrant
+    actions:
+    - ActionFireballII
+    - ActionSmoke
+    - ActionPolymorphJaunt
+
+- type: entity
+  parent: MobHumanWizardApprenticeship
+  id: MobHumanWizardApprenticeshipKeeper
+  name: apprenticeship of the keeper school
+  components:
+  - type: Loadout
+    prototypes: [ ApprenticeshipKeeper ]
+    roleLoadout: [ RoleSurvivalSyndicate ]
+  - type: CanHostGuardian
+  - type: ActionGrant
+    actions:
+    - ActionForceWall
+
+- type: entity
+  parent: MobHumanWizardApprenticeship
+  id: MobHumanWizardApprenticeshipRestoration
+  name: apprenticeship of the restoration school
+  components:
+  - type: Loadout
+    prototypes: [ ApprenticeshipRestoration ]
+    roleLoadout: [ RoleSurvivalSyndicate ]
+  - type: ActionGrant
+    actions:
+    - ActionKnock
+    - ActionChargeSpell
+    - ActionRepulse
+
+- type: entity
+  parent: MobHumanWizardApprenticeship
+  id: MobHumanWizardApprenticeshipStealth
+  name: apprenticeship of the stealth school
+  components:
+  - type: Loadout
+    prototypes: [ ApprenticeshipStealth ]
+    roleLoadout: [ RoleSurvivalSyndicate ]
+  - type: ActionGrant
+    actions:
+    - ActionMindSwap
+    - ActionPolymorphJaunt
+
+- type: entity
+  parent: MobHumanWizardApprenticeship
+  id: MobHumanWizardApprenticeshipTranslocation
+  name: apprenticeship of the translocation school
+  components:
+  - type: Loadout
+    prototypes: [ ApprenticeshipTranslocation ]
+    roleLoadout: [ RoleSurvivalSyndicate ]
+  - type: ActionGrant
+    actions:
+    - ActionBlink
+    - ActionPolymorphJaunt
+    - ActionVoidApplause
