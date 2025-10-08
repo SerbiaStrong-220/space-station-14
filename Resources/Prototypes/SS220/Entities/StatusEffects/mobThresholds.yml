@@ -1,0 +1,25 @@
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: MobThresholdsModifierStatusEffect
+  abstract: true
+  name: slowdown
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - MobThresholds
+  - type: MobThresholdsModifierStatusEffect
+
+- type: entity
+  parent: MobThresholdsModifierStatusEffect
+  id: MobThresholdsModifierStatusEffectExample
+  name: mob thresholds modifier status effect example
+  components:
+  - type: MobThresholdsModifierStatusEffect
+    modifiers:
+      Critical:
+        multiplier: 1.5
+        flat: -20
+      Dead:
+        multiplier: 2
+        flat: 45

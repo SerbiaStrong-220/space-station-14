@@ -20,7 +20,7 @@
   color: "#f04737"
   metamorphicSprite:
     sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi
-    state: icon   
+    state: icon
 
 #Bankate
 - type: reagent
@@ -136,11 +136,11 @@
         amount: 100000
       - !type:AdjustTemperature
         conditions:
-        - !type:Temperature 
+        - !type:Temperature
           min: 293.15
         amount: -10000
       - !type:PopupMessage
-        visualType: MediumCaution   
+        visualType: MediumCaution
         type: Local
         messages: [ "capsaicin-effect-heavy-burn" ]
         probability: 0.4
@@ -165,3 +165,20 @@
           types:
             Poison: 0.4
   fizziness: 0.6
+
+- type: reagent
+  id: MobThresholdsModifierReagentExample
+  name: reagent-name-rrranta
+  parent: BaseDrink
+  desc: reagent-desc-rrranta
+  physicalDesc: reagent-physical-desc-rrranta
+  flavor: rrranta
+  color: "#9aae07"
+  recognizable: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:MobThresholdsModifier
+        statusEffectId: MobThresholdsModifierStatusEffectExample
+        duration: 5
+        refresh: false

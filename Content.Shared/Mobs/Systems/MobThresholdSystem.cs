@@ -483,13 +483,15 @@ public sealed class MobThresholdSystem : EntitySystem
     // SS220 modifiable_mob_thresholds begin
     public void RefreshModifiers(Entity<MobThresholdsComponent> ent)
     {
-        var refreshEv = new RefreshMobThresholdsModifiers(ent);
+        var refreshEv = new RefreshMobThresholdsModifiersEvent(ent);
         RaiseLocalEvent(ent, refreshEv);
 
-        var modifiedThresholds = refreshEv.CalculateThresholds();
-        ent.Comp.Thresholds = modifiedThresholds;
+        // Сделано с сохранением экземпляра словаря в компоненте для удобства контроля через VV
+        ent.Comp.Thresholds.Clear();
+        foreach (var (key, value) in refreshEv.CalculateThresholds())
+            ent.Comp.Thresholds.Add(key, value);
 
-        var modifiedEv = new MobThresholdsModifiedEvent(ent);
+        var modifiedEv = new MobThresholdsRefreshedEvent(ent);
         RaiseLocalEvent(ent, ref modifiedEv, broadcast: true);
 
         if (!TryComp<MobStateComponent>(ent, out var mobState) || !TryComp<DamageableComponent>(ent, out var damageable))
@@ -514,12 +516,12 @@ public readonly record struct MobThresholdChecked(EntityUid Target, MobStateComp
     MobThresholdsComponent Threshold, DamageableComponent Damageable);
 
 // SS220 modifiable_mob_thresholds begin
-public sealed class RefreshMobThresholdsModifiers(Entity<MobThresholdsComponent> entity) : EntityEventArgs
+public sealed class RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsComponent> entity) : EntityEventArgs
 {
     public readonly Entity<MobThresholdsComponent> Entity = entity;
 
     private readonly Dictionary<MobState, FixedPoint2> _multipliers = [];
-    private readonly Dictionary<MobState, FixedPoint2> _flatModifiers = [];
+    private readonly Dictionary<MobState, FixedPoint2> _flats = [];
 
     private SortedDictionary<FixedPoint2, MobState>? _cachedCalculatedThresholds = null;
 
@@ -539,11 +541,11 @@ public sealed class RefreshMobThresholdsModifiers(Entity<MobThresholdsComponent>
     {
         if (!_multipliers.TryGetValue(state, out var exist))
         {
-            _flatModifiers[state] = value;
+            _flats[state] = value;
             return;
         }
 
-        _flatModifiers[state] = exist + value;
+        _flats[state] = exist + value;
         _cachedCalculatedThresholds = null;
     }
 
@@ -555,6 +557,7 @@ public sealed class RefreshMobThresholdsModifiers(Entity<MobThresholdsComponent>
         var baseThresholds = Entity.Comp.BaseThresholds.ToDictionary(x => x.Value, x => x.Key);
         var newThresholds = new Dictionary<MobState, FixedPoint2>();
 
+        // Вычисление новых значений с применением модификаторов
         foreach (var state in Enum.GetValues<MobState>())
         {
             if (state is MobState.Invalid)
@@ -566,23 +569,29 @@ public sealed class RefreshMobThresholdsModifiers(Entity<MobThresholdsComponent>
             if (_multipliers.TryGetValue(state, out var multiplier))
                 result *= multiplier;
 
-            if (_flatModifiers.TryGetValue(state, out var flatModifier))
+            if (_flats.TryGetValue(state, out var flatModifier))
                 result += flatModifier;
 
             newThresholds[state] = result;
         }
 
+        // Проверка того, чтобы порог стейта был больше порога предыдущего стейта и меньше порога следующего стейта.
+        // Например Alive < Critical < Dead
         var orderedPairs = newThresholds.OrderBy(x => x.Key).Select(x => (x.Key, x.Value)).ToList();
-        for (var i = 0; i < orderedPairs.Count; i++)
+        var i = 0;
+        while (i < orderedPairs.Count)
         {
+            if (i < 0)
+                i = 0;
+
             var (state, value) = orderedPairs[i];
             if (i != 0)
             {
                 var prevValue = orderedPairs[i - 1].Value;
-                if (value < prevValue)
+                if (value <= prevValue)
                 {
                     orderedPairs[i] = (state, prevValue + 0.01);
-                    i -= 2;
+                    i--;
                     continue;
                 }
             }
@@ -590,14 +599,15 @@ public sealed class RefreshMobThresholdsModifiers(Entity<MobThresholdsComponent>
             if (i != orderedPairs.Count - 1)
             {
                 var nextValue = orderedPairs[i + 1].Value;
-                if (value > nextValue)
+                if (value >= nextValue)
                 {
                     orderedPairs[i] = (state, nextValue - 0.01);
-                    i -= 2;
+                    i--;
                     continue;
                 }
             }
 
+            i++;
         }
 
         _cachedCalculatedThresholds = new SortedDictionary<FixedPoint2, MobState>(orderedPairs.ToDictionary(x => x.Value, x => x.Key));
@@ -606,9 +616,9 @@ public sealed class RefreshMobThresholdsModifiers(Entity<MobThresholdsComponent>
 }
 
 [ByRefEvent]
-public readonly struct MobThresholdsModifiedEvent(Entity<MobThresholdsComponent> entity)
+public readonly struct MobThresholdsRefreshedEvent(Entity<MobThresholdsComponent> entity)
 {
     public readonly Entity<MobThresholdsComponent> Entity = entity;
-    public IReadOnlyDictionary<MobState, FixedPoint2> NewValues => Entity.Comp.Thresholds.ToDictionary(x => x.Value, x => x.Key);
+    public IReadOnlyDictionary<MobState, FixedPoint2> NewThresholds => Entity.Comp.Thresholds.ToDictionary(x => x.Value, x => x.Key);
 }
 // SS220 modifiable_mob_thresholds end
