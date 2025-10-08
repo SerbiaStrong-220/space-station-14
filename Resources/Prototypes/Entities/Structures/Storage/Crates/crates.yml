@@ -23,14 +23,12 @@
   name: plastic crate
   components:
   - type: Icon
-    sprite: Structures/Storage/Crates/plastic.rsi
+    sprite: SS220/Structures/Storage/Crates/plastic.rsi #SS220 Crate-tg-resprite
   - type: Sprite
-    sprite: Structures/Storage/Crates/plastic.rsi
+    sprite: SS220/Structures/Storage/Crates/plastic.rsi #SS220 Crate-tg-resprite
 #SS220 Crate-tg-resprite begin
     offset: 0, 0
     layers:
-    - state: base
-      map: ["enum.StorageVisualLayers.Base"]
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
     - state: welded

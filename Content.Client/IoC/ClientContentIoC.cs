@@ -32,6 +32,7 @@ using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
 using Content.Client.SS220.TTS;
 using Content.Shared.SS220.RoundEndInfo;
+using Content.Client.SS220.Species;
 
 namespace Content.Client.IoC
 {
@@ -68,6 +69,7 @@ namespace Content.Client.IoC
             collection.Register<ISharedRoundEndInfoManager, RoundEndInfoManager>(); //ss220 add additional info for round
             collection.Register<ContentReplayPlaybackManager>();
             collection.Register<ISharedPlaytimeManager, JobRequirementsManager>();
+            collection.Register<SpeciesRequirementsManager>(); // SS220 Species bans
             collection.Register<MappingManager>();
             collection.Register<DebugMonitorManager>();
             collection.Register<PlayerRateLimitManager>();

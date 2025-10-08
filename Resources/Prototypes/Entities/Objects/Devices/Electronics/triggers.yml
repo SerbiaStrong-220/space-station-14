@@ -14,7 +14,7 @@
   description: A configurable timer.
   components:
   - type: Sprite
-    sprite: Objects/Devices/timer.rsi
+    sprite: SS220/Objects/Devices/timer.rsi # SS220 from cabinet to 3/4 Part 1
     state: timer
   - type: Item
     size: Small
@@ -44,7 +44,7 @@
   description: Adds a machine link that is triggered by signals.
   components:
   - type: Sprite
-    sprite: Objects/Devices/signaltrigger.rsi
+    sprite: SS220/Objects/Devices/signaltrigger.rsi # SS220 from cabinet to 3/4 Part 1
     state: signaltrigger
   - type: StaticPrice
     price: 40
@@ -80,7 +80,7 @@
   description: Adds a machine link that is triggered by vocal keywords.
   components:
   - type: Sprite
-    sprite: Objects/Devices/voice.rsi
+    sprite: SS220/Objects/Devices/voice.rsi # SS220 from cabinet to 3/4 Part 1
     state: voice
   - type: StaticPrice
     price: 40

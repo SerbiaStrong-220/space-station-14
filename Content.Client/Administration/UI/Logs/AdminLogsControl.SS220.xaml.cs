@@ -70,12 +70,6 @@ public sealed partial class AdminLogsControl : Control
     private DateTime? _lateDateBorder;
     private bool _lateDateValid = false;
 
-    private readonly Dictionary<uint, ConfirmableButtonState> _confirmClearSelectionButtonStates = new()
-    {
-        [0] = new ConfirmableButtonState(Loc.GetString("admin-logs-clear-selection"), null),
-        [1] = new ConfirmableButtonState(Loc.GetString("admin-logs-clear-selection-confirm"), StyleNano.ButtonColorCautionDefault)
-    };
-
     private bool PassEarlyTimeFilter(SharedAdminLog log)
     {
         if (!EarlyDateValid)

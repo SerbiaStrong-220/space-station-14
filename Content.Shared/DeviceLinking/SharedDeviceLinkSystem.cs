@@ -442,7 +442,11 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
             linkedPorts.Add((source, sink));
             sinkComponent.LinkedSources.Add(sourceUid);
 
-            SendNewLinkEvent(userId, sourceUid, source, sinkUid, sink);
+            // ss220 add open/close ports to door start
+            if (sinkComponent.TriggerOnLink)
+                SendNewLinkEvent(userId, sourceUid, source, sinkUid, sink);
+            // ss220 add open/close ports to door end
+
             CreateLinkPopup(userId, sourceUid, source, sinkUid, sink, false);
         }
 
