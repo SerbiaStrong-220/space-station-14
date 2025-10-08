@@ -227,11 +227,11 @@ public sealed partial class DisposalFilterWindow : FancyWindow
             FilterByDirectionContainer.AddChild(lowDivider);
         }
 
-        NoCriterialDirectionOption.SelectId((int)BaseDir);
+        NoCriterialDirectionOption.TrySelectId((int)BaseDir);
         NoCriterialDirectionOption.OnItemSelected += item =>
         {
             BaseDir = (Direction)item.Id;
-            NoCriterialDirectionOption.SelectId(item.Id);
+            NoCriterialDirectionOption.TrySelectId(item.Id);
         };
 
         ConfirmButton.OnPressed += _ =>

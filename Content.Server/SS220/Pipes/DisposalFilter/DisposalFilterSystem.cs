@@ -43,10 +43,7 @@ public sealed class DisposalFilterSystem : EntitySystem
     private void OnUiMessage(Entity<DisposalFilterComponent> ent, ref DisposalFilterBoundMessage args)
     {
         ent.Comp.FilterByDir.Clear();
-        foreach (var dir in args.DirByRules)
-        {
-            ent.Comp.FilterByDir.Add(dir);
-        }
+        ent.Comp.FilterByDir = args.DirByRules;
 
         ent.Comp.BaseDirection = args.BaseDir;
 
@@ -76,12 +73,13 @@ public sealed class DisposalFilterSystem : EntitySystem
         var ev = new GetDisposalsConnectableDirectionsEvent();
         RaiseLocalEvent(ent, ref ev);
 
-        ent.Comp.FilterByDir.Clear();
-
         var localRot = Transform(ent).LocalRotation;
         var localDir = localRot.GetDir();
-
         var inputDir = localDir.GetOpposite();
+
+        var baseDir = ent.Comp.BaseDirection ?? localDir;
+        var existingFilters = ent.Comp.FilterByDir.ToDictionary(f => f.OutputDir, f => f);
+        var newFilters = new List<FilterRule>();
 
         foreach (var angle in degrees)
         {
@@ -92,16 +90,13 @@ public sealed class DisposalFilterSystem : EntitySystem
             if (dir == inputDir)
                 continue;
 
-            if (ent.Comp.FilterByDir.All(rule => rule.OutputDir != dir))
-            {
-                ent.Comp.FilterByDir.Add(new FilterRule
-                {
-                    OutputDir = dir,
-                });
-            }
+            newFilters.Add(existingFilters.TryGetValue(dir, out var existing)
+                ? existing
+                : new FilterRule { OutputDir = dir });
         }
 
-        ent.Comp.BaseDirection = localDir;
+        ent.Comp.FilterByDir = newFilters;
+        ent.Comp.BaseDirection = baseDir;
 
         var state = new DisposalFilterBoundState(ent.Comp.FilterByDir, ent.Comp.BaseDirection.Value);
         _ui.SetUiState(ent.Owner, DisposalFilterUiKey.Key, state);
