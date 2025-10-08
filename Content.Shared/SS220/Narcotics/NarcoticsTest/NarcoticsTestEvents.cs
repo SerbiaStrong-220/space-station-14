@@ -1,7 +1,7 @@
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.SS220.NarcoticsTest;
+namespace Content.Shared.SS220.Narcotics.NarcoticsTest;
 
 [Serializable, NetSerializable]
 public enum NarcoticsData

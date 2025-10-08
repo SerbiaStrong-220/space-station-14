@@ -5,6 +5,7 @@ using Content.Server.Popups;
 using Content.Server.SS220.ItemOfferVerb.Components;
 using Content.Shared.Alert;
 using Content.Shared.Hands.Components;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Interaction.Components;
@@ -22,6 +23,7 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     private readonly ProtoId<AlertPrototype> _itemOfferAlert = "ItemOffer";
 
@@ -42,10 +44,14 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
         if (!args.EntityUid.IsValid() || !EntityManager.EntityExists(args.EntityUid))
             return false;
 
-        if (args.Session?.AttachedEntity == null)
+        var user = args.Session?.AttachedEntity;
+        if (user == null)
             return false;
 
-        DoItemOffer(args.Session.AttachedEntity.Value, args.EntityUid);
+        if (!_interaction.InRangeAndAccessible(user.Value, args.EntityUid))
+            return false;
+
+        DoItemOffer(user.Value, args.EntityUid);
         return true;
     }
 
