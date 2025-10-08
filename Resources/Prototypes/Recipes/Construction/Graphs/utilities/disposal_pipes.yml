@@ -38,6 +38,40 @@
       - material: Steel
         amount: 2
         doAfter: 1
+    # DisposalFilter
+    - to: filter
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+      - material: Plastic
+        amount: 2
+        doAfter: 1
+      - material: Glass
+        amount: 1
+        doAfter: 1
+    - to: filterflipped
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+      - material: Plastic
+        amount: 2
+        doAfter: 1
+      - material: Glass
+        amount: 1
+        doAfter: 1
+    - to: xfilter
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+      - material: Plastic
+        amount: 2
+        doAfter: 1
+      - material: Glass
+        amount: 1
+        doAfter: 1
     # DisposalJunction
     - to: junction
       steps:
@@ -167,6 +201,61 @@
       steps:
       - tool: Welding
         doAfter: 1
+  # Disposal Filter
+  - node: filter
+    entity: DisposalFilterPipeY
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetPlastic1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetGlass1
+        amount: 2
+      - !type:DeleteEntity
+        steps:
+        - tool: Welding
+          doAfter: 1
+  - node: filterflipped
+    entity: DisposalFilterPipeYFlipped
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetPlastic1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetGlass1
+        amount: 2
+      - !type:DeleteEntity
+        steps:
+        - tool: Welding
+          doAfter: 1
+  - node: xfilter
+    entity: DisposalFilterPipeX
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetPlastic1
+        amount: 2
+      - !type:SpawnPrototype
+        prototype: SheetGlass1
+        amount: 2
+      - !type:DeleteEntity
+        steps:
+        - tool: Welding
+          doAfter: 1
   # DisposalJunction
   - node: junction
     entity: DisposalJunction

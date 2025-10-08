@@ -36,6 +36,8 @@ public sealed partial class DisposalFilterWindow : FancyWindow
 
     private static readonly Vector2 RemoveButtonSize = new Vector2(20, 20);
 
+    private static readonly Vector2 RequiredAllButtonSize = new Vector2(60, 32);
+
     public DisposalFilterWindow()
     {
         IoCManager.InjectDependencies(this);
@@ -45,6 +47,8 @@ public sealed partial class DisposalFilterWindow : FancyWindow
     private void UpdateActiveFilters(FilterRule filter, BoxContainer filterContainer)
     {
         filterContainer.RemoveAllChildren();
+
+        var totalSubItems = 0;
 
         foreach (var condition in filter.Conditions.ToList())
         {
@@ -62,8 +66,7 @@ public sealed partial class DisposalFilterWindow : FancyWindow
                 })
                 .ToList();
 
-            if (subItems.Count == 0)
-                continue;
+            totalSubItems += subItems.Count;
 
             foreach (var (text, removeAction) in subItems)
             {
@@ -99,6 +102,35 @@ public sealed partial class DisposalFilterWindow : FancyWindow
             }
 
             filterContainer.AddChild(subItemsContainer);
+        }
+
+        if (totalSubItems >= 2)
+        {
+            var requiredAllButton = new ShapeButton
+            {
+                Text = Loc.GetString("filter-require-all"),
+                MinSize = RequiredAllButtonSize,
+                ToggleMode = true,
+                Pressed = filter.RequiredAll,
+                HorizontalAlignment = HAlignment.Center,
+            };
+
+            requiredAllButton.OnPressed += args =>
+            {
+                filter.RequiredAll = args.Button.Pressed;
+                OnConfirm?.Invoke(FilterRules, BaseDir);
+            };
+
+            var buttonContainer = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                HorizontalAlignment = HAlignment.Center,
+                HorizontalExpand = true,
+                Margin = SubItemsContainerMargin,
+            };
+
+            buttonContainer.AddChild(requiredAllButton);
+            filterContainer.AddChild(buttonContainer);
         }
     }
 

@@ -7,6 +7,7 @@ filter-delete-filter = Удалить этот фильтр
 filter-delete-text = ✕
 filter-new-filter-tooltip = Добавить фильтр
 filter-clear-filter-tooltip = Удалить все фильтры на это направление
+filter-require-all = Совпадение всех условий
 
 filter-name = Имя: { $name }
 

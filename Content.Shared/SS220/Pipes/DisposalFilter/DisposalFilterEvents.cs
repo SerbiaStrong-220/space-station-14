@@ -50,7 +50,7 @@ public sealed class NameContainsFilter : IFilterCondition
     {
         if (entry is List<string> list)
         {
-            ContainNames.AddRange(list);
+            ContainNames = list;
         }
     }
 }
@@ -135,17 +135,19 @@ public sealed class WhitelistFilter : IFilterCondition
 public sealed class FilterRule
 {
     [DataField] public List<IFilterCondition> Conditions = new();
+    [DataField] public bool RequiredAll;
     [DataField] public Direction OutputDir = Direction.Invalid;
 
     public bool Matches(EntityUid ent, IEntityManager entMan)
     {
-        foreach (var cond in Conditions)
-        {
-            if (!cond.Matches(ent, entMan))
-                return false;
-        }
+        if (Conditions.Count == 0)
+            return false;
 
-        return true;
+        var results = Conditions.Select(cond => cond.Matches(ent, entMan)).ToList();
+
+        return RequiredAll
+            ? results.All(r => r)
+            : results.Any(r => r);
     }
 
     public T EnsureFilter<T>() where T : IFilterCondition, new()

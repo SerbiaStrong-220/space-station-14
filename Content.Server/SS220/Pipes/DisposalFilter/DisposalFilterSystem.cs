@@ -1,7 +1,9 @@
 using System.Linq;
 using Content.Server.Disposal.Tube;
+using Content.Shared.Rotatable;
 using Content.Shared.SS220.Pipes.DisposalFilter;
 using Robust.Server.GameObjects;
+// ReSharper disable InvertIf
 
 namespace Content.Server.SS220.Pipes.DisposalFilter;
 
@@ -14,27 +16,25 @@ public sealed class DisposalFilterSystem : EntitySystem
         SubscribeLocalEvent<DisposalFilterComponent, GetDisposalsNextDirectionEvent>(OnGetDirection, after: [typeof(DisposalTubeSystem)]);
         SubscribeLocalEvent<DisposalFilterComponent, DisposalFilterBoundMessage>(OnUiMessage);
         SubscribeLocalEvent<DisposalFilterComponent, BoundUIOpenedEvent>(OnUiOpened);
+        SubscribeLocalEvent<DisposalFilterComponent, RotateEvent>(OnRotate);
     }
 
     private void OnGetDirection(Entity<DisposalFilterComponent> ent, ref GetDisposalsNextDirectionEvent args)
     {
-        var item = new EntityUid();
-        foreach (var entity in args.Holder.Container.ContainedEntities)
-        {
-            item = entity;
-            break;
-        }
-
-        if (item == default)
+        if (args.Holder.Container.ContainedEntities.Count == 0)
             return;
+
+        var item = args.Holder.Container.ContainedEntities[0];
 
         foreach (var dir in ent.Comp.FilterByDir)
         {
-            if (!dir.Matches(item, EntityManager))
-                continue;
+            var matches = dir.Matches(item, EntityManager);
 
-            args.Next = dir.OutputDir;
-            return;
+            if (matches)
+            {
+                args.Next = dir.OutputDir;
+                return;
+            }
         }
 
         args.Next = ent.Comp.BaseDirection ?? Transform(ent).LocalRotation.GetDir();
@@ -56,6 +56,16 @@ public sealed class DisposalFilterSystem : EntitySystem
 
     private void OnUiOpened(Entity<DisposalFilterComponent> ent, ref BoundUIOpenedEvent args)
     {
+        HandleBoundUI(ent);
+    }
+
+    private void OnRotate(Entity<DisposalFilterComponent> ent, ref RotateEvent args)
+    {
+        HandleBoundUI(ent);
+    }
+
+    private void HandleBoundUI(Entity<DisposalFilterComponent> ent)
+    {
         List<Angle> degrees = new();
         if (TryComp<DisposalJunctionComponent>(ent, out var junction))
             degrees = junction.Degrees;
@@ -66,14 +76,20 @@ public sealed class DisposalFilterSystem : EntitySystem
         var ev = new GetDisposalsConnectableDirectionsEvent();
         RaiseLocalEvent(ent, ref ev);
 
+        ent.Comp.FilterByDir.Clear();
+
+        var localRot = Transform(ent).LocalRotation;
+        var localDir = localRot.GetDir();
+
+        var inputDir = localDir.GetOpposite();
+
         foreach (var angle in degrees)
         {
-            var dir = (angle + Transform(ent).LocalRotation).GetDir();
+            var dir = (angle + localRot).GetDir();
             if (!ev.Connectable.Contains(dir))
                 continue;
 
-            var opposite = Transform(ent).LocalRotation.GetDir().GetOpposite();
-            if (dir == opposite)
+            if (dir == inputDir)
                 continue;
 
             if (ent.Comp.FilterByDir.All(rule => rule.OutputDir != dir))
@@ -85,7 +101,7 @@ public sealed class DisposalFilterSystem : EntitySystem
             }
         }
 
-        ent.Comp.BaseDirection ??= Transform(ent).LocalRotation.GetDir();
+        ent.Comp.BaseDirection = localDir;
 
         var state = new DisposalFilterBoundState(ent.Comp.FilterByDir, ent.Comp.BaseDirection.Value);
         _ui.SetUiState(ent.Owner, DisposalFilterUiKey.Key, state);
