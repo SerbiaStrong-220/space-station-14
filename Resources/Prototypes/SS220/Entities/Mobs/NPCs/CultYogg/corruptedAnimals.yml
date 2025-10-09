@@ -762,3 +762,6 @@
   #    Okay: 25
   #    Dead: 0
   #  baseDecayRate: 0.000001
+  - type: Tag #Not inheriting DoorBumpOpener
+    tags:
+      - CannotSuicide
