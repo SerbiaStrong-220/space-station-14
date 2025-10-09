@@ -15,7 +15,7 @@
 - type: listing
   id: SpellbookIceArrow
   name: spellbook-icearrow-name
-  description: spellbook-icearrow--desc
+  description: spellbook-icearrow-desc
   productAction: ActionIceArrow
   cost:
     WizCoin: 1
@@ -80,9 +80,9 @@
     stock: 1
 
 - type: listing
-  id: SpellbookEventContractofApprenticeship
-  name: spellbook-event-contract-of-apprenticeship-name
-  description: spellbook-event-contract-of-apprenticeship-description
+  id: SpellbookSummonContractofApprenticeship
+  name: spellbook-summon-contract-of-apprenticeship-name
+  description: spellbook-summon-contract-of-apprenticeship-description
   productEntity: ContractofApprenticeship
   cost:
     WizCoin: 4

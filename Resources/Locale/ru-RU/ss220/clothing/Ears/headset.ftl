@@ -18,3 +18,8 @@ ent-ClothingHeadsetCaptain = гарнитура капитана
 
 ent-ClothingHeadsetBlueShield = полноразмерная гарнитура "Синий Щит"
     .desc = Безупречная гарнитура для синего щита.
+
+ent-ClothingHeadsetWizard = гарнитура волшебника
+    .desc = Гарнитура, используемая устрашающими космическими волшебниками.
+ent-ClothingHeadsetAltWizard = полноразмерная гарнитура волшебника
+    .desc = { ent-ClothingHeadsetAlt.desc }

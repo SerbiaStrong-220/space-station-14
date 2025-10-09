@@ -2,8 +2,8 @@
   parent: [ SimpleMobBase, MobCombat ]
   id: MobMutant
   name: mutant
-  description: ###
-  suffix: Shitspawn
+  description: A horrifying magical mutation — a twisted form of a wizard transformed by unstable arcane energy. Strong but short-lived.
+  suffix: Wizard, Magical
   components:
   - type: CombatMode
   - type: InnateTool

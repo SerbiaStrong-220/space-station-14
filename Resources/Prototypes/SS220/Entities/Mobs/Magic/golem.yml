@@ -2,7 +2,8 @@
   parent: [ BaseMob, MobDamageable, MobPolymorphable, MobCombat ]
   id: MobGolemWizard
   name: golem
-  description:
+  description: A magical construct made of stone and arcane energy. Possesses great strength and durability, but lacks will and fully obeys its creator.
+  suffix: Wizard, Magical
   components:
   - type: Reactive
     groups:
