@@ -1,10 +1,9 @@
 using Content.Server.Chat.Systems;
-using Content.Shared.Chat; // ss220 add whisper range modify
-using Content.Shared.Humanoid; // ss220 add whisper range modify
+using Content.Shared.Chat;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
 using Content.Shared.SS220.Language.Systems;
-using Robust.Shared.Prototypes; // ss220 add whisper range modify
+using Content.Shared.SS220.VoiceRangeModify; // ss220 add whisper range modify
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -13,7 +12,6 @@ namespace Content.Server.Speech.EntitySystems;
 /// </summary>
 public sealed class ListeningSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!; // ss220 add whisper range modify
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
 
     public override void Initialize()
@@ -41,15 +39,25 @@ public sealed class ListeningSystem : EntitySystem
         var obfuscatedEv = obfuscatedMessage == null ? null : new ListenEvent(obfuscatedMessage, source, true /* SS220 languages*/, languageMessage /* SS220 languages*/);
         var query = EntityQueryEnumerator<ActiveListenerComponent, TransformComponent>();
 
-        while(query.MoveNext(out var listenerUid, out var listener, out var xform))
+        // ss220 add whisper range modify start
+        while(query.MoveNext(out var listenerUid, out _, out var xform))
         {
             if (xform.MapID != sourceXform.MapID)
                 continue;
 
+            // ss220 add whisper range modify start
+            var modifyWhisperEv = new WhisperModifyRangeEvent(SharedChatSystem.WhisperClearRange, SharedChatSystem.WhisperMuffledRange);
+            RaiseLocalEvent(listenerUid, ref modifyWhisperEv, true);
+            var whisperClearRange = modifyWhisperEv.WhisperClearRange;
+
+            var modifyVoiceRangeEv = new VoiceModifyRangeEvent(SharedChatSystem.VoiceRange);
+            RaiseLocalEvent(listenerUid, ref modifyVoiceRangeEv, true);
+            var voiceRange = modifyVoiceRangeEv.VoiceRange;
+
             // range checks
             // TODO proper speech occlusion
             var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).LengthSquared();
-            if (distance > listener.Range * listener.Range)
+            if (distance > voiceRange * voiceRange)
                 continue;
 
             RaiseLocalEvent(listenerUid, attemptEv);
@@ -57,14 +65,6 @@ public sealed class ListeningSystem : EntitySystem
             {
                 attemptEv.Uncancel();
                 continue;
-            }
-
-            // ss220 add whisper range modify start
-            var whisperClearRange = (float)SharedChatSystem.WhisperClearRange;
-            if (TryComp<HumanoidAppearanceComponent>(listenerUid, out var huAp))
-            {
-                var species = _proto.Index(huAp.Species);
-                whisperClearRange = species.BaseWhisperClearRange;
             }
 
             if (obfuscatedEv != null && distance > whisperClearRange)
