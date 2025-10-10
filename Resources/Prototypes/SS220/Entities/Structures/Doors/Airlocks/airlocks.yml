@@ -41,8 +41,8 @@
 #SS220 New_accesses_and_some_tweaks start
 - type: entity
   parent: AirlockClown
-  id: AirlockClownAccess
-  suffix: Clown, Locked, Clown
+  id: AirlockClownLocked
+  suffix: Clown, Locked
   components:
   - type: ContainerFill
     containers:
@@ -50,7 +50,7 @@
 
 - type: entity
   parent: Airlock
-  id: AirlockLibrarian
+  id: AirlockLibrarianLocked
   suffix: Librarian
   components:
   - type: ContainerFill
@@ -59,7 +59,7 @@
 
 - type: entity
   parent: AirlockStandardGlass
-  id: AirlockGlassLibrarian
+  id: AirlockGlassLibrarianLocked
   suffix: Librarian
   components:
   - type: ContainerFill
@@ -68,7 +68,7 @@
 
 - type: entity
   parent: AirlockStandardGlass
-  id: AirlockStandartGlassReporter
+  id: AirlockStandartGlassReporterLocked
   suffix: Reporter
   components:
   - type: ContainerFill
@@ -77,7 +77,7 @@
 
 - type: entity
   parent: Airlock
-  id: AirlockReporter
+  id: AirlockReporterLocked
   suffix: Reporter
   components:
   - type: ContainerFill
@@ -86,7 +86,7 @@
 
 - type: entity
   parent: AirlockGlass
-  id: AirlockGlassReporter
+  id: AirlockGlassReporterLocked
   suffix: Reporter
   components:
   - type: ContainerFill
@@ -95,7 +95,7 @@
 
 - type: entity
   parent: AirlockStandardGlass
-  id: AirlockGlassMime
+  id: AirlockGlassMimeLocked
   suffix: Mime
   components:
   - type: ContainerFill
@@ -104,7 +104,7 @@
 
 - type: entity
   parent: Airlock
-  id: AirlockMime
+  id: AirlockMimeLocked
   suffix: Mime
   components:
   - type: ContainerFill
@@ -113,7 +113,7 @@
 
 - type: entity
   parent: AirlockStandardGlass
-  id: AirlockGlassMusician
+  id: AirlockGlassMusicianLocked
   suffix: Musician
   components:
   - type: ContainerFill
@@ -122,7 +122,7 @@
 
 - type: entity
   parent: Airlock
-  id: AirlockMusician
+  id: AirlockMusicianLocked
   suffix: Musician
   components:
   - type: ContainerFill
@@ -131,7 +131,7 @@
 
 - type: entity
   parent: AirlockMedical
-  id: AirlockMeidicalPsychologist
+  id: AirlockMeidicalPsychologistLocked
   suffix: Medical, Psychologist
   components:
   - type: ContainerFill
@@ -140,7 +140,7 @@
 
 - type: entity
   parent: AirlockMedicalGlass
-  id: AirlockMeidicalGlassPsychologist
+  id: AirlockMeidicalGlassPsychologistLocked
   suffix: Medical, Psychologist
   components:
   - type: ContainerFill
