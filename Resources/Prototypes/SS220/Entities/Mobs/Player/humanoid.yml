@@ -243,6 +243,7 @@
       - AdrenalImplant
       - ThermalVisionImplant
       - DeathRattleImplantCentcomm
+      - MindShieldImplant
     - type: Loadout
       prototypes: [ ERTLeaderGammaGear ]
     - type: RandomMetadata
