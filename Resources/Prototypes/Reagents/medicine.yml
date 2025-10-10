@@ -144,7 +144,7 @@
       effects:
       - !type:EvenHealthChange
         damage:
-          Brute: -1.5
+          Brute: -1 #ss220_bicaridin_fix
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
