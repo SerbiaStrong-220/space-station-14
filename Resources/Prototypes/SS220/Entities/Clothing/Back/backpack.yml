@@ -40,3 +40,83 @@
   components:
   - type: ToggleableClothing
     clothingPrototype: ClothingOuterHardsuitHightBlueshield
+
+ # Гамма ОБР
+
+- type: entity
+  parent: [ ClothingBackpackERTLeader]
+  id: ClothingBackpackERTLeaderGammaFilled
+  name: ERT leader backpack
+  description: A spacious backpack with lots of pockets, worn by the Commander of an Emergency Response Team.
+  suffix: Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalCentcom
+        - id: MedkitCombatFilled
+        - id: MagazinePistolSubMachineGunAcp
+        - id: MagazinePistolSubMachineGunAcp
+        - id: CrowbarRed
+        - id: DoorRemoteAll
+        - id: PinpointerCrew
+        - id: ClothingMaskGasERT
+        - id: C4
+        - id: PinpointerNuclear
+        - id: WeaponPulsePistol
+        - id: StimpackMini 
+        - id: LaserCarabinePowerCell
+        - id: LaserCarabinePowerCell
+        - id: LaserCarabinePowerCell
+        - id: LaserCarabinePowerCell
+
+- type: entity
+  parent: [ ClothingBackpackERTSecurity]
+  id: ClothingBackpackERTSecurityGammaFilled
+  name: ERT security backpack
+  description: A spacious backpack with lots of pockets, worn by Security Officers of an Emergency Response Team.
+  suffix: Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalCentcom
+        - id: MedkitCombatFilled
+        - id: MagazinePistolSubMachineGunAcp
+        - id: MagazinePistolSubMachineGunAcp
+        - id: MagazinePistolSubMachineGunAcp
+        - id: CrowbarRed
+        - id: ClothingMaskGasERT
+        - id: C4
+        - id: PinpointerNuclear
+        - id: WeaponPulsePistol
+        - id: StimpackMini 
+        - id: LaserCarabinePowerCell
+        - id: LaserCarabinePowerCell
+        - id: LaserCarabinePowerCell
+        - id: LaserCarabinePowerCell
+
+- type: entity
+  parent: [ ClothingBackpackERTMedical]
+  id: ClothingBackpackERTMedicalGammaFilled
+  name: ERT medical backpack
+  description: A spacious backpack with lots of pockets, worn by Medical Officers of an Emergency Response Team.
+  suffix: Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalCentcom
+        - id: BoxBodyBag
+        - id: MedicatedSuture
+        - id: MedicatedSuture
+        - id: StimkitCombatFilled
+        - id: RegenerativeMesh
+        - id: RegenerativeMesh
+        - id: CrowbarRed
+        - id: ClothingMaskGasERT
+        - id: PinpointerCrew
+        - id: DefibrillatorCompact
+        - id: MagazinePistolSubMachineGunAcp
+        - id: MagazinePistolSubMachineGunAcp
+        - id: Hypospray
+        - id: LaserCarabinePowerCell
+        - id: LaserCarabinePowerCell
+        - id: LaserCarabinePowerCell

@@ -1,0 +1,18 @@
+- type: entity
+  id: CartridgeAmmoAcp
+  name: cartridge (.45 ACP)
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  components:
+  - type: Tag
+    tags:
+      - CartridgeAmmoAcp
+  - type: CartridgeAmmo
+    proto: BulletAmmoAcp
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+
