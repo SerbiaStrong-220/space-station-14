@@ -467,7 +467,8 @@
     requiresSpecialDigestion: true
   - type: Clothing
     sprite: Objects/Specific/Hydroponics/banana.rsi
-    equippedState: peel-equipped-HELMET
+    equippedPrefix: peel #SS220 Fix the banana peel viev pocket
+  #  equippedState: peel-equipped-HELMET #SS220 Fix the banana peel viev pocket
     slots:
     - HEAD
     quickEquip: false
@@ -491,7 +492,8 @@
   components:
   - type: Clothing
     sprite: Objects/Specific/Hydroponics/banana.rsi
-    equippedState: baked-peel-equipped-HELMET
+    equippedPrefix: baked #SS220 Fix the banana peel viev pocket
+  #  equippedState: baked-peel-equipped-HELMET #SS220 Fix the banana peel viev pocket
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/banana.rsi
     state: baked-peel
@@ -535,7 +537,8 @@
     heldPrefix: peel
   - type: Clothing
     sprite: Objects/Specific/Hydroponics/mimana.rsi
-    equippedState: equipped-HELMET
+    equippedPrefix: peel #SS220 Fix the banana peel viev pocket
+  #  equippedState: equipped-HELMET #SS220 Fix the banana peel viev pocket
   - type: Slippery
     slipSound:
       path: /Audio/Effects/slip.ogg
@@ -561,7 +564,8 @@
   - type: Slippery
   - type: Clothing
     sprite: Objects/Materials/materials.rsi
-    equippedState: peel-equipped-HELMET
+    equippedPrefix: peel #SS220 Fix the banana peel viev pocket
+  #  equippedState: peel-equipped-HELMET #SS220 Fix the banana peel viev pocket
   # ss220 clown uplink bgn
   - type: Currency
     price:

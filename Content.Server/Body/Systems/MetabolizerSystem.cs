@@ -1,4 +1,5 @@
 using Content.Server.Body.Components;
+using Content.Server.SS220.RecentlyUsedNarcotics; // ss220 add narcotic test
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Events;
 using Content.Shared.Body.Organ;
@@ -12,6 +13,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.SS220.Narcotics;
 using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -31,6 +33,10 @@ namespace Content.Server.Body.Systems
 
         private EntityQuery<OrganComponent> _organQuery;
         private EntityQuery<SolutionContainerManagerComponent> _solutionQuery;
+
+        // ss220 add narcotic test start
+        private const string NarcoticsGroup = "Narcotics";
+        // ss220 add narcotic test end
 
         public override void Initialize()
         {
@@ -143,6 +149,15 @@ namespace Content.Server.Body.Systems
             {
                 if (!_prototypeManager.TryIndex<ReagentPrototype>(reagent.Prototype, out var proto))
                     continue;
+
+                // ss220 add narcotics test start
+                if (proto.Group == NarcoticsGroup &&
+                    ent.Comp2?.Body is { } body)
+                {
+                    var ev = new MetabolizeNarcoticEvent(body, proto.ID);
+                    RaiseLocalEvent(body, ref ev, true);
+                }
+                // ss220 add narcotics test end
 
                 var mostToRemove = FixedPoint2.Zero;
                 if (proto.Metabolisms is null)
