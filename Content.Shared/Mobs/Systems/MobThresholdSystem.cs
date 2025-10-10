@@ -517,6 +517,9 @@ public readonly record struct MobThresholdChecked(EntityUid Target, MobStateComp
     MobThresholdsComponent Threshold, DamageableComponent Damageable);
 
 // SS220 modifiable_mob_thresholds begin
+/// <summary>
+/// Event that triggers when collecting info about mob threshold modifiers
+/// </summary>
 public sealed class RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsComponent> entity) : EntityEventArgs
 {
     public readonly Entity<MobThresholdsComponent> Entity = entity;
@@ -619,10 +622,12 @@ public sealed class RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsCompo
     }
 }
 
+/// <summary>
+/// Event that triggers when modifiers of mob threshold is refreshed
+/// </summary>
 [ByRefEvent]
 public readonly struct MobThresholdsRefreshedEvent(Entity<MobThresholdsComponent> entity)
 {
     public readonly Entity<MobThresholdsComponent> Entity = entity;
-    public IReadOnlyDictionary<MobState, FixedPoint2> NewThresholds => Entity.Comp.Thresholds.ToDictionary(x => x.Value, x => x.Key);
 }
 // SS220 modifiable_mob_thresholds end
