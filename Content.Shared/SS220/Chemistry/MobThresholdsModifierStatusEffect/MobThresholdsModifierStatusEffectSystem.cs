@@ -40,8 +40,7 @@ public sealed class MobThresholdsModifierStatusEffectSystem : EntitySystem
     {
         foreach (var (state, modifier) in entity.Comp.Modifiers)
         {
-            args.Args.ApplyMultiplier(state, modifier.Multiplier);
-            args.Args.ApplyFlatModifier(state, modifier.Flat);
+            args.Args.ApplyModifier(state, modifier.Flat, modifier.Multiplier);
         }
     }
 }

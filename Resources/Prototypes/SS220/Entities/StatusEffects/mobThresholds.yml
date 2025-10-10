@@ -2,7 +2,6 @@
   parent: MobStatusEffectDebuff
   id: MobThresholdsModifierStatusEffect
   abstract: true
-  name: slowdown
   components:
   - type: StatusEffect
     whitelist:

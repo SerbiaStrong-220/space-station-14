@@ -7,6 +7,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Network.Messages;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using static Lidgren.Network.NetPeerMetrics;
 
 namespace Content.Shared.Mobs.Systems;
 
@@ -520,64 +521,61 @@ public sealed class RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsCompo
 {
     public readonly Entity<MobThresholdsComponent> Entity = entity;
 
-    private readonly Dictionary<MobState, FixedPoint2> _multipliers = [];
-    private readonly Dictionary<MobState, FixedPoint2> _flats = [];
-
-    private SortedDictionary<FixedPoint2, MobState>? _cachedCalculatedThresholds = null;
+    private readonly Dictionary<MobState, Modifier> _modifiers = [];
+    private SortedDictionary<FixedPoint2, MobState>? _cachedResult = null;
 
     public void ApplyMultiplier(MobState state, FixedPoint2 value)
     {
-        if (!_multipliers.TryGetValue(state, out var exist))
-        {
-            _multipliers[state] = value;
-            return;
-        }
-
-        _multipliers[state] = exist * value;
-        _cachedCalculatedThresholds = null;
+        ApplyModifier(state, 0, value);
     }
 
-    public void ApplyFlatModifier(MobState state, FixedPoint2 value)
+    public void ApplyFlat(MobState state, FixedPoint2 value)
     {
-        if (!_multipliers.TryGetValue(state, out var exist))
+        ApplyModifier(state, value, 1);
+    }
+
+    public void ApplyModifier(MobState state, FixedPoint2 flat, FixedPoint2 multiplier)
+    {
+        if (!_modifiers.TryGetValue(state, out var modifier))
         {
-            _flats[state] = value;
-            return;
+            modifier = new Modifier(flat, multiplier);
+            _modifiers[state] = modifier;
+        }
+        else
+        {
+            modifier.Flat += flat;
+            modifier.Multiplier *= multiplier;
         }
 
-        _flats[state] = exist + value;
-        _cachedCalculatedThresholds = null;
+        _cachedResult = null;
     }
 
     public SortedDictionary<FixedPoint2, MobState> CalculateThresholds()
     {
-        if (_cachedCalculatedThresholds != null)
-            return new SortedDictionary<FixedPoint2, MobState>(_cachedCalculatedThresholds);
+        if (_cachedResult != null)
+            return new SortedDictionary<FixedPoint2, MobState>(_cachedResult);
 
-        var baseThresholds = Entity.Comp.BaseThresholds.ToDictionary(x => x.Value, x => x.Key);
-        var newThresholds = new Dictionary<MobState, FixedPoint2>();
-
-        // Вычисление новых значений с применением модификаторов
+        var thresholds = Entity.Comp.BaseThresholds.ToDictionary(x => x.Value, x => x.Key);
         foreach (var state in Enum.GetValues<MobState>())
         {
             if (state is MobState.Invalid)
                 continue;
 
-            if (!baseThresholds.TryGetValue(state, out var result))
+            if (!thresholds.TryGetValue(state, out var result))
                 continue;
 
-            if (_multipliers.TryGetValue(state, out var multiplier))
-                result *= multiplier;
+            if (_modifiers.TryGetValue(state, out var modifier))
+            {
+                result *= modifier.Multiplier;
+                result += modifier.Flat;
+            }
 
-            if (_flats.TryGetValue(state, out var flatModifier))
-                result += flatModifier;
-
-            newThresholds[state] = result;
+            thresholds[state] = result;
         }
 
         // Проверка того, чтобы порог стейта был больше порога предыдущего стейта и меньше порога следующего стейта.
         // Например Alive < Critical < Dead
-        var orderedPairs = newThresholds.OrderBy(x => x.Key).Select(x => (x.Key, x.Value)).ToList();
+        var orderedPairs = thresholds.OrderBy(x => x.Key).Select(x => (x.Key, x.Value)).ToList();
         var i = 0;
         while (i < orderedPairs.Count)
         {
@@ -610,8 +608,14 @@ public sealed class RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsCompo
             i++;
         }
 
-        _cachedCalculatedThresholds = new SortedDictionary<FixedPoint2, MobState>(orderedPairs.ToDictionary(x => x.Value, x => x.Key));
-        return new SortedDictionary<FixedPoint2, MobState>(_cachedCalculatedThresholds);
+        _cachedResult = new SortedDictionary<FixedPoint2, MobState>(orderedPairs.ToDictionary(x => x.Value, x => x.Key));
+        return new SortedDictionary<FixedPoint2, MobState>(_cachedResult);
+    }
+
+    private sealed class Modifier(FixedPoint2 flat, FixedPoint2 multiplier)
+    {
+        public FixedPoint2 Flat = flat;
+        public FixedPoint2 Multiplier = multiplier;
     }
 }
 

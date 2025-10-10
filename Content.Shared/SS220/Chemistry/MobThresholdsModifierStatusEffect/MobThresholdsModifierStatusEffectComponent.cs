@@ -16,9 +16,9 @@ public sealed partial class MobThresholdsModifierStatusEffectComponent : Compone
     public partial struct ModifierData()
     {
         [DataField]
-        public FixedPoint2 Multiplier = 1.0f;
+        public FixedPoint2 Multiplier = 1;
 
         [DataField]
-        public FixedPoint2 Flat = 0f;
+        public FixedPoint2 Flat = 0;
     }
 }
