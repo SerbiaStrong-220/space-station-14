@@ -76,3 +76,4 @@ research-technology-bluespace-cargo-transport = Блюспейс-транспо�
 #SS220
 research-technology-cloning-technology = Технология клонирования
 research-technology-handheld-electrical-propulsion = Ручные электродвигатели
+research-technology-advanced-kitchen-machinery = Продвинутая кухонная техника

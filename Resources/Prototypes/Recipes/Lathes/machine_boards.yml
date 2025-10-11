@@ -286,7 +286,7 @@
 
 #SS220-grill-update-3 begin
 - type: latheRecipe
-  parent: [ BaseCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
+  parent: [ BaseGoldCircuitboardRecipe, BaseServiceMachineRecipeCategory ]
   id: ElectricGrillAdvancedCircuitboard
   result: ElectricGrillAdvancedCircuitboard
 #SS220-grill-update-3 end

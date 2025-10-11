@@ -23,3 +23,15 @@
   - MedicalScannerMachineCircuitboard
   - CloningPodMachineCircuitboard
   - CloningConsoleComputerCircuitboard
+
+- type: technology
+  id: AdvancedElectricGrill
+  name: research-technology-advanced-kitchen-machinery
+  icon:
+    sprite: SS220/Structures/Machines/grill_advanced.rsi
+    state: icon
+  discipline: CivilianServices
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - ElectricGrillAdvancedCircuitboard
