@@ -8,7 +8,6 @@
   - CriminalRecords
   # SS220 space-law begin
   # - SpaceLaw
-  - SS220SpaceLaw
   # SS220 space-law end
 
 - type: guideEntry
@@ -26,14 +25,16 @@
   name: guide-entry-criminal-records
   text: "/ServerInfo/Guidebook/Security/CriminalRecords.xml"
 
-- type: guideEntry
-  id: SpaceLaw
-  name: guide-entry-rules-space-law
-  text: "/ServerInfo/Guidebook/ServerRules/SpaceLaw/SpaceLaw.xml"
-  children:
-  - SpaceLawCrimeList
+# SS220 Changes Space Law in the Guidebook BEGIN
+# - type: guideEntry
+#   id: SpaceLaw
+#   name: guide-entry-rules-space-law
+#   text: "/ServerInfo/Guidebook/ServerRules/SpaceLaw/SpaceLaw.xml"
+#   children:
+#   - SpaceLawCrimeList
 
-- type: guideEntry
-  id: SpaceLawCrimeList
-  name: guide-entry-rules-sl-crime-list
-  text: "/ServerInfo/Guidebook/ServerRules/SpaceLaw/SLCrimeList.xml"
+# - type: guideEntry
+#   id: SpaceLawCrimeList
+#   name: guide-entry-rules-sl-crime-list
+#   text: "/ServerInfo/Guidebook/ServerRules/SpaceLaw/SLCrimeList.xml"
+# SS220 Changes Space Law in the Guidebook END

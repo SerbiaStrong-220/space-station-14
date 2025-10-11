@@ -8,7 +8,6 @@
 
   Кодификация организована по принципу категории кода (_xx) - ряда несуммируемых преступлений и тяжести преступления (x__).
 
-  ## Космический закон
   <Table Columns="6">
     <ColorBox>
       <Box>
@@ -17,27 +16,27 @@
     </ColorBox>
     <ColorBox>
       <Box>
-        1-XX - Малозначительные
+        1-XX — Малозначительные
       </Box>
     </ColorBox>
     <ColorBox>
       <Box>
-        2-XX - Средней тяжести
+        2-XX — Средней тяжести
       </Box>
     </ColorBox>
     <ColorBox>
       <Box>
-        3-XX - Тяжкие
+        3-XX — Тяжкие
       </Box>
     </ColorBox>
     <ColorBox>
       <Box>
-        4-XX - Особо тяжкие
+        4-XX — Особо тяжкие
       </Box>
     </ColorBox>
     <ColorBox>
       <Box>
-        5-XX - высшая мера
+        5-XX — Высшая мера
       </Box>
     </ColorBox>
     <ColorBox>
@@ -228,7 +227,7 @@
     </ColorBox>
     <ColorBox Color="#b0653a">
       <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
-        Фладение контрабандой
+        Владение контрабандой
       </Box>
     </ColorBox>
     <ColorBox Color="#963535">
@@ -280,7 +279,7 @@
     </ColorBox>
     <ColorBox Color="#a69b38">
       <Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
-        Проникновение со взломов
+        Проникновение со взломом
       </Box>
     </ColorBox>
     <ColorBox Color="#b0653a">
@@ -329,7 +328,7 @@
   </Box>
 
   <Box Margin="10">
-  Таблички с подробным описанием [bold]всех[/bold] статей [color=#5a73bd][bold]космического закона.[/bold][/color]
+  Таблички с подробным описанием [bold]всех[/bold] статей [color=#5a73bd][bold]Космического закона[/bold][/color]
   </Box>
 
   - [color=#698f43][bold]1XX[/bold][/color] - [textlink="Малозначительные преступления" link="SS2201xxArticle"]

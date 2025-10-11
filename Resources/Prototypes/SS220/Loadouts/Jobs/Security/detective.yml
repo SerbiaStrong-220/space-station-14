@@ -25,6 +25,11 @@
       !type:RoleTimeRequirement
       role: JobDetective
       time: 180000 # 50 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadoutEffectGroup
   id: HolsterBlackAngelTime
@@ -34,6 +39,11 @@
       !type:RoleTimeRequirement
       role: JobDetective
       time: 360000 # 100 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 - type: loadout
   id: DefaultDetectiveHolster

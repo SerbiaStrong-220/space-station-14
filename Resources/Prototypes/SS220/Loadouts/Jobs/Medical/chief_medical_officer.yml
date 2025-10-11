@@ -62,7 +62,7 @@
   equipment:
     shoes: ClothingShoesCMOCorporate
 
-# Head 
+# Head
 - type: loadout
   id: CapCMO
   effects:
@@ -71,7 +71,7 @@
   equipment:
     head: ClothingHeadHatCapCMO
 
-# Neck 
+# Neck
 - type: loadout
   id: ParadeCloakCMO
   effects:
@@ -79,3 +79,8 @@
     proto: CMOParade
   equipment:
     neck: ClothingNeckCMOParadeCloak
+
+- type: loadout
+  id: CMOStethoscope
+  equipment:
+    neck: ClothingNeckStethoscope

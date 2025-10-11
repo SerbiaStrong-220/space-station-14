@@ -89,6 +89,7 @@
   components:
 #SS220 languages revive begin
     - type: Language
+      selectedLanguage: Galactic
       availableLanguages:
       - id: Galactic
       - id: SolCommon

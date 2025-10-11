@@ -97,6 +97,11 @@
   equipment:
     neck: ClothingNeckScarfStripedWhite
 
+- type: loadout
+  id: MedStethoscope
+  equipment:
+    neck: ClothingNeckStethoscope
+
 # Outerclothing
 - type: loadout
   id: CyberJacketMed

@@ -81,6 +81,7 @@
     allowedEmotes: ['Click', 'Chitter', 'Hiss'] #ss-220-emote-fix
   # SS220-Add-Languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
     - id: Arati
@@ -116,9 +117,9 @@
       - map: ["enum.HumanoidVisualLayers.RHand"]
       - map: [ "gloves" ]
       - map: [ "shoes" ]
+      - map: [ "outerClothing" ] #SS220 tweak layers of belts
       - map: [ "belt" ]
       - map: [ "id" ]
-      - map: [ "outerClothing" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ] # Mentioned in moth code: This needs renaming lol.
       - map: [ "back" ]
       - map: [ "neck" ]

@@ -11,6 +11,10 @@
         Slash: 16
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
+# SS220 AddExecution start
+  - type: Execution
+    doAfterDuration: 4.0
+# SS220 AddExecution end
   - type: Reflect
     reflectProb: 0.05
     spread: 90

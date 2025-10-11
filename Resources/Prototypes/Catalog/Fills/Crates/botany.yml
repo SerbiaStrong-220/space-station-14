@@ -6,6 +6,10 @@
   components:
   - type: StorageFill
     contents:
+      #ss220 remove ambrosia from vend start
+      - id: AmbrosiaVulgarisSeeds
+        amount: 2
+      #ss220 remove ambrosia from vend end
       - id: EggySeeds
         amount: 2
       - id: TowercapSeeds

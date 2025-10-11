@@ -17,3 +17,7 @@
     fillBaseName: fill-
     inHandsFillBaseName:  null
   - type: Sealable
+  #SS220-campari-label-fix begin
+  - type: Label
+    currentLabel: reagent-name-campari
+  #SS220-campari-label-fix end

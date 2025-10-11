@@ -16,8 +16,6 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
 
-    private readonly List<EntProtoId> _data = [];
-
     public override void Initialize()
     {
         base.Initialize();
@@ -93,7 +91,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
 
     private void UpdateUi(Entity<ChameleonStructureComponent> ent)
     {
-        var state = new ChameleonStructureBoundUserInterfaceState(ent.Comp.Prototype, ent.Comp.RequireTag);
+        var state = new ChameleonStructureBoundUserInterfaceState(ent.Comp.Prototype, ent.Comp.ListData, ent.Comp.RequireTag);
         UI.SetUiState(ent.Owner, ChameleonStructureUiKey.Key, state);
     }
 
@@ -126,17 +124,10 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         Dirty(ent, appearance);
     }
 
-    /// <summary>
-    ///     Get a list of valid chameleon targets
-    /// </summary>
-    public IEnumerable<EntProtoId> GetValidTargets()
-    {
-        return _data;
-    }
-
     protected void UpdateData(Entity<ChameleonStructureComponent> ent)
     {
-        _data.Clear();
+        ent.Comp.ListData.Clear();//clear list before updatint list
+
         var prototypes = _proto.EnumeratePrototypes<EntityPrototype>();
 
         foreach (var proto in prototypes)
@@ -145,7 +136,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
             if (!IsValidTarget(proto, ent.Comp.RequireTag))
                 continue;
 
-            _data.Add(proto.ID);
+            ent.Comp.ListData.Add(proto.ID);
         }
 
         if (ent.Comp.ProtoList is null)
@@ -153,10 +144,10 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
 
         foreach (var proto in ent.Comp.ProtoList)
         {
-            if (_data.Contains(proto))
+            if (ent.Comp.ListData.Contains(proto))
                 continue;
 
-            _data.Add(proto);
+            ent.Comp.ListData.Add(proto);
         }
     }
 }

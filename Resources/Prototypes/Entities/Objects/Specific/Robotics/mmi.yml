@@ -55,6 +55,7 @@
       - SecretStash
   # SS220-Add-Languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
     - id: Binary
@@ -112,6 +113,7 @@
       - Binary
     # SS220-Add-Languages begin
     - type: Language
+      selectedLanguage: Galactic
       availableLanguages:
       - id: Galactic
       - id: Binary

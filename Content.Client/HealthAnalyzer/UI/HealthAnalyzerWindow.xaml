@@ -63,6 +63,20 @@
                 Orientation="Vertical">
             </BoxContainer>
 
+            <!-- SS220 ADD REAGENTS TO HEALTH ANALYZER START -->
+            <PanelContainer Name="ReagentsSection" Visible="False" Margin="0 5 0 5">
+                <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+                    <PanelContainer StyleClasses="LowDivider"/>
+                    <Label Text="{Loc 'health-analyzer-window-reagents-title'}"
+                           HorizontalExpand="True"
+                           VerticalAlignment="Top"
+                           Margin="0 0 0 2"/>
+                    <ScrollContainer VerticalExpand="True" HorizontalExpand="True" MinSize="0 80">
+                        <BoxContainer Name="ReagentsContainer" Orientation="Vertical" SeparationOverride="2" Margin="5 0 0 0"/>
+                    </ScrollContainer>
+                </BoxContainer>
+            </PanelContainer>
+            <!-- SS220 ADD REAGENTS TO HEALTH ANALYZER END -->
         </BoxContainer>
     </ScrollContainer>
 </controls:FancyWindow>

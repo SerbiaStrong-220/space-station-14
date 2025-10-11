@@ -217,6 +217,7 @@
     - type: GhostTakeoverAvailable
 #SS220 Languages tweaks begin
     - type: Language
+      selectedLanguage: Galactic
       availableLanguages:
       - id: Galactic
         canSpeak: true

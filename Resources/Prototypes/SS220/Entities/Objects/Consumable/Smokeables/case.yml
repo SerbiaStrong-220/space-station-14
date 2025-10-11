@@ -29,6 +29,12 @@
       map: ["snuff6"]
       visible: false
   - type: Storage
+    whitelist:
+      tags:
+      - Smokable
+      - Cigarette
+      - Cigar
+      - Lighter
     grid:
     - 0,0,2,1
   - type: Item

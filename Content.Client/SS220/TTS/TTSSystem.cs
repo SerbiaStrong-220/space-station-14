@@ -203,7 +203,7 @@ public sealed partial class TTSSystem
 
     private void PlayTtsBytes(TtsAudioData data, EntityUid? sourceUid = null, AudioParams? audioParams = null, bool globally = false)
     {
-        _sawmill.Debug($"Play TTS audio {data.Length} bytes from {sourceUid} entity");
+        // _sawmill.Debug($"Play TTS audio {data.Length} bytes from {sourceUid} entity"); // hide console tts flood, noinfo for players
         if (data.Length == 0)
             return;
 

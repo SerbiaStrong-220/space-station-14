@@ -476,6 +476,7 @@
   name: loadout-group-medical-neck
   loadouts:
   - WhiteScarf
+  - MedStethoscope
 
 - type: loadoutGroup
   id: MedicalGlasses

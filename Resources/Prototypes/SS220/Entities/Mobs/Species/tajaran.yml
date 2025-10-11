@@ -108,6 +108,7 @@
     highSensitiveVisionRadius: 2
     addAction: true
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
     - id: Siiktajr

@@ -36,13 +36,20 @@ public sealed partial class ChameleonStructureComponent : Component
 
     [DataField]
     public EntityWhitelist? UserWhitelist;
+
+    /// <summary>
+    ///     Loaded list of prototypes for chameleon
+    /// </summary>
+    [ViewVariables]
+    public List<EntProtoId> ListData = [];
 }
 
 [Serializable, NetSerializable]
-public sealed class ChameleonStructureBoundUserInterfaceState(string? selectedId, string? requiredTag) : BoundUserInterfaceState
+public sealed class ChameleonStructureBoundUserInterfaceState(string? selectedId, List<EntProtoId> listData, string? requiredTag) : BoundUserInterfaceState
 {
     public readonly string? SelectedId = selectedId;
     public readonly string? RequiredTag = requiredTag;
+    public readonly List<EntProtoId> ListData = listData;
 }
 
 [Serializable, NetSerializable]

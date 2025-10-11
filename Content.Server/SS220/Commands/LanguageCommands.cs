@@ -51,7 +51,7 @@ public sealed class AddLanguageCommand : LocalizedCommands
 
         var languageComp = _entManager.EnsureComponent<LanguageComponent>(uid.Value);
         var languageSystem = _entManager.System<LanguageSystem>();
-        if (languageSystem.AddLanguage((uid.Value, languageComp), languageId, canSpeak))
+        if (languageSystem.AddLanguage((uid.Value, languageComp), languageId, canSpeak) != null)
         {
             shell.WriteLine(Loc.GetString("cmd-addlanguage-success-add"));
         }

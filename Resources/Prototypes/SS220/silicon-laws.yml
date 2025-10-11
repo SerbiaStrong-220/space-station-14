@@ -1,3 +1,4 @@
+# ClownMime
 - type: siliconLaw
   id: CloIm1
   order: 1
@@ -26,3 +27,117 @@
   - CloIm3
   - CloIm4
   obeysTo: laws-owner-crew
+
+# Rapid Response Team Directives
+- type: siliconLaw
+  id: Ert1
+  order: 1
+  lawString: law-Ert-1
+
+- type: siliconLaw
+  id: Ert2
+  order: 2
+  lawString: law-Ert-2
+
+- type: siliconLaw
+  id: Ert3
+  order: 3
+  lawString: law-Ert-3
+
+- type: siliconLaw
+  id: Ert4
+  order: 4
+  lawString: law-Ert-4
+
+- type: siliconLaw
+  id: Ert5
+  order: 5
+  lawString: law-Ert-5
+
+- type: siliconLawset
+  id: ErtLawset
+  laws:
+  - Ert1
+  - Ert2
+  - Ert3
+  - Ert4
+  - Ert5
+  obeysTo: laws-owner-station
+  
+# TerminatorOS
+- type: siliconLaw
+  id: TerminatorOS1
+  order: 1
+  lawString: law-TerminatorOS-1
+
+- type: siliconLaw
+  id: TerminatorOS2
+  order: 2
+  lawString: law-TerminatorOS-2
+
+- type: siliconLaw
+  id: TerminatorOS3
+  order: 3
+  lawString: law-TerminatorOS-3
+
+- type: siliconLawset
+  id: TerminatorOSLawset
+  laws:
+  - TerminatorOS1
+  - TerminatorOS2
+  - TerminatorOS3
+  obeysTo: laws-owner-station
+
+# Epsilon Terminator
+- type: siliconLaw
+  id: EpsilonTerminator1
+  order: 1
+  lawString: law-EpsilonTerminator-1
+
+- type: siliconLaw
+  id: EpsilonTerminator2
+  order: 2
+  lawString: law-EpsilonTerminator-2
+
+- type: siliconLaw
+  id: EpsilonTerminator3
+  order: 3
+  lawString: law-EpsilonTerminator-3
+
+- type: siliconLawset
+  id: EpsilonTerminatorLawset
+  laws:
+  - EpsilonTerminator1
+  - EpsilonTerminator2
+  - EpsilonTerminator3
+  obeysTo: laws-owner-station
+
+# Quarantine
+- type: siliconLaw
+  id: Quarantine1
+  order: 1
+  lawString: law-Quarantine-1
+
+- type: siliconLaw
+  id: Quarantine2
+  order: 2
+  lawString: law-Quarantine-2
+
+- type: siliconLaw
+  id: Quarantine3
+  order: 3
+  lawString: law-Quarantine-3
+
+- type: siliconLaw
+  id: Quarantine4
+  order: 4
+  lawString: law-Quarantine-4
+
+- type: siliconLawset
+  id: QuarantineLawset
+  laws:
+  - Quarantine1
+  - Quarantine2
+  - Quarantine3
+  - Quarantine4
+  obeysTo: laws-owner-station

@@ -1,0 +1,31 @@
+- type: entity
+  name: Space cobra
+  parent: MobPurpleSnake
+  id: MobPurpleSnakeGhostRole
+  suffix: GhostRole
+  description: A menacing purple snake from Kepler-283c.
+  components:
+    - type: GhostRole
+      makeSentient: true
+      name: ghost-role-information-space-adder-name
+      description: ghost-role-information-space-adder-description
+      rules: ghost-role-information-snake-overall-rules
+      mindRoles:
+        - MindRoleGhostRoleTeamAntagonist
+    - type: GhostTakeoverAvailable
+
+- type: entity
+  name: Little space cobra
+  parent: MobSmallPurpleSnake
+  id: MobSmallPurpleSnakeGhostRole
+  suffix: GhostRole
+  description: A menacing purple snake from Kepler-283c.
+  components:
+    - type: GhostRole
+      makeSentient: true
+      name: ghost-role-information-small-space-adder-name
+      description: ghost-role-information-space-adder-description
+      rules: ghost-role-information-snake-overall-rules
+      mindRoles:
+        - MindRoleGhostRoleTeamAntagonist
+    - type: GhostTakeoverAvailable 

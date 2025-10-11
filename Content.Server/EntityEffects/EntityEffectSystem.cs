@@ -777,8 +777,9 @@ public sealed partial class EntityEffectSystem : EntitySystem // SS220-add-parti
 
         // SS220-Add-Languages begin
         var languageComp = EnsureComp<LanguageComponent>(uid);
-
-        _language.AddLanguage((uid, languageComp), _language.GalacticLanguage, true);
+        var languageDef = _language.EnsureLanguage((uid, languageComp), _language.GalacticLanguage);
+        languageDef.CanSpeak = true;
+        Dirty(uid, languageComp);
         // SS220-Add-Languages end
 
         // Stops from adding a ghost role to things like people who already have a mind

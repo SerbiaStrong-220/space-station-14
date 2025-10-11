@@ -513,12 +513,21 @@
     duration: 60
   - type: VentCrittersRule
     entries:
-    - id: MobPurpleSnake
+    #SS220-snake-ghost-role (muted official entries)
+    #- id: MobPurpleSnake
+    #  prob: 0.02
+    #- id: MobSmallPurpleSnake
+    #  prob: 0.02
+    #- id: MobCobraSpace
+    #  prob: 0.02
+    #SS220-snake-ghost-role-entries
+    - id: MobPurpleSnakeGhostRole
       prob: 0.02
-    - id: MobSmallPurpleSnake
+    - id: MobSmallPurpleSnakeGhostRole
       prob: 0.02
-    - id: MobCobraSpace
+    - id: MobCobraSpaceGhostRole
       prob: 0.02
+    #SS220-snake-ghost-role-entries-end
 
 - type: entity
   id: SpiderSpawn
