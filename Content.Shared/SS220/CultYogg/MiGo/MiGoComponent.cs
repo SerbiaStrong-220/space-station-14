@@ -34,6 +34,9 @@ public sealed partial class MiGoComponent : Component
     [DataField]
     public EntProtoId MiGoSacrificeAction = "ActionMiGoSacrifice";
 
+    [DataField]
+    public EntProtoId MiGoTeleportAction = "ActionMiGoTeleport";
+
     [DataField, AutoNetworkedField]
     public EntityUid? MiGoToggleLightActionEntity;
 
@@ -54,6 +57,9 @@ public sealed partial class MiGoComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? MiGoSacrificeActionEntity;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? MiGoTeleportActionEntity;
     #endregion
 
     /// <summary>
