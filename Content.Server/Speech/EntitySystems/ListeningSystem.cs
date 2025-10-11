@@ -1,7 +1,9 @@
 using Content.Server.Chat.Systems;
+using Content.Shared.Chat;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
 using Content.Shared.SS220.Language.Systems;
+using Content.Shared.SS220.VoiceRangeModify; // ss220 add whisper range modify
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -37,15 +39,25 @@ public sealed class ListeningSystem : EntitySystem
         var obfuscatedEv = obfuscatedMessage == null ? null : new ListenEvent(obfuscatedMessage, source, true /* SS220 languages*/, languageMessage /* SS220 languages*/);
         var query = EntityQueryEnumerator<ActiveListenerComponent, TransformComponent>();
 
-        while(query.MoveNext(out var listenerUid, out var listener, out var xform))
+        // ss220 add whisper range modify start
+        while(query.MoveNext(out var listenerUid, out _, out var xform))
         {
             if (xform.MapID != sourceXform.MapID)
                 continue;
 
+            // ss220 add whisper range modify start
+            var modifyWhisperEv = new WhisperModifyRangeEvent(SharedChatSystem.WhisperClearRange, SharedChatSystem.WhisperMuffledRange);
+            RaiseLocalEvent(listenerUid, ref modifyWhisperEv, true);
+            var whisperClearRange = modifyWhisperEv.WhisperClearRange;
+
+            var modifyVoiceRangeEv = new VoiceModifyRangeEvent(SharedChatSystem.VoiceRange);
+            RaiseLocalEvent(listenerUid, ref modifyVoiceRangeEv, true);
+            var voiceRange = modifyVoiceRangeEv.VoiceRange;
+
             // range checks
             // TODO proper speech occlusion
             var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).LengthSquared();
-            if (distance > listener.Range * listener.Range)
+            if (distance > voiceRange * voiceRange)
                 continue;
 
             RaiseLocalEvent(listenerUid, attemptEv);
@@ -55,10 +67,12 @@ public sealed class ListeningSystem : EntitySystem
                 continue;
             }
 
-            if (obfuscatedEv != null && distance > ChatSystem.WhisperClearRange)
+            if (obfuscatedEv != null && distance > whisperClearRange)
                 RaiseLocalEvent(listenerUid, obfuscatedEv);
             else
                 RaiseLocalEvent(listenerUid, ev);
+
+            // ss220 add whisper range modify end
         }
     }
 }
