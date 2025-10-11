@@ -133,8 +133,8 @@
   name: loadout-group-iaa-headset
   minLimit: 1
   loadouts:
-  - LawHeadset
-  - LawHeadsetAlt
+  - IAAHeadset
+  - IAAHeadsetAlt
   # Агент Внутренних Дел (Конец)
 
   # Адвокат (Начало)
@@ -144,6 +144,14 @@
   minLimit: 0
   loadouts:
   - OuterClothingJujutsuShlepa
+
+- type: loadoutGroup
+  id: LawyerHeadset
+  name: loadout-group-lawyer-headset
+  minLimit: 1
+  loadouts:
+  - LawHeadset
+  - LawHeadsetAlt
   # Адвокат (Конец)
 
   # Офицер "Синий Щит" (Начало)
@@ -226,6 +234,7 @@
   minLimit: 0
   loadouts:
   - MaskTacSec
+  - SecTacGasMask
 
 - type: loadoutGroup
   id: SecurityGlasses
@@ -272,6 +281,7 @@
   - SecurityBeret
   - SecurityHat
   - PilotCapCap
+  - HelmetTacSec
 
 - type: loadoutGroup
   id: SecurityPilotOuterClothing
@@ -295,6 +305,14 @@
   - SecurityWinterBoots
   - BootsJackSec
   - DetectiveShoesBootsLaceup
+
+- type: loadoutGroup
+  id: DetectiveNeck
+  name: loadout-group-detective-neck
+  loadouts:
+  - DefaultDetectiveHolster
+  - HolsterLegendaryMarksman
+  - HolsterBlackAngel
   # Детектив (Конец)
 #! Служба безопасности (Конец)
 
@@ -458,6 +476,7 @@
   name: loadout-group-medical-neck
   loadouts:
   - WhiteScarf
+  - MedStethoscope
 
 - type: loadoutGroup
   id: MedicalGlasses
@@ -492,12 +511,11 @@
   id: ChiefMedicalOfficerGlasses
   name: loadout-group-chief-medical-officer-eyes
   loadouts:
-  - Glasses
-  - CyberMedVisor
-  - CMOCorpGlasses
   - MedicalHud
   - MedicalEyePatchHud
+  - CyberMedVisor
   - Glasses
+  - CMOCorpGlasses
   - GlassesJamjar
   - GlassesJensen
 #! Медицинский отдел (Конец)

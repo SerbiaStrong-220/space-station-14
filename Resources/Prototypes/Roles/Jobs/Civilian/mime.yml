@@ -13,13 +13,14 @@
   icon: "JobIconMime"
   supervisors: job-supervisors-hop
   access:
+  - Service # ss220 fix
   - Theatre
   - Maintenance
   special:
   - !type:AddComponentSpecial
     components:
     - type: MimePowers
-      preventWriting: true
+      #preventWriting: true #ss220 remove prevent writing for mime
     - type: FrenchAccent
     - type: RenameStart #SS220-RenameStart
 

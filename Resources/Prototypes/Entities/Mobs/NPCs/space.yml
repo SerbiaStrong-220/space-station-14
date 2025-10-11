@@ -34,7 +34,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead
+      80: Dead
   - type: Stamina
     critThreshold: 150
   - type: MovementAlwaysTouching
@@ -110,21 +110,14 @@
     interactFailureString: petting-failure-bear
     interactSuccessSound:
       path: /Audio/Animals/sloth_squeak.ogg
-  #SS220 Goal start
-  - type: Emoting
-  - type: ActionGrant
-    actions:
-    - ActionGoal
-  - type: GhostRole
-    makeSentient: true
-    allowSpeech: false
-    allowMovement: true
-    name: ghost-role-information-space-bear-name
-    description: ghost-role-information-space-bear-description
-    rules: ghost-role-information-freeagent-rules
-    mindRoles:
-    - MindRoleGhostRoleFreeAgent
-  #SS220 Goal end
+#SS220 Prying start
+  - type: Prying
+    speedModifier: 1.5
+    pryPowered: true
+    force: true
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+#SS220 Prying end
 
 - type: entity
   id: MobBearSpaceSalvage
@@ -183,6 +176,10 @@
     spawned:
     - id: FoodMeat
       amount: 1
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      60: Dead
 
 - type: entity
   id: MobKangarooSpaceSalvage
@@ -214,7 +211,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      90: Dead
+      45: Dead
   - type: Stamina
     critThreshold: 150
   - type: DamageStateVisuals
@@ -301,7 +298,7 @@
   description: Long fangs and a glowing hood, and the alluring look begs to come closer.
   components:
     - type: Sprite
-      drawdepth: Mobs
+      drawdepth: SmallMobs #SS220-fauna-update (Mobs layer originally)
       sprite: Mobs/Animals/spacecobra.rsi
       layers:
         - map: [ "enum.DamageStateVisualLayers.Base" ]
@@ -315,7 +312,14 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        100: Dead
+        45: Dead
+    #SS220-fauna-damagesets-begin
+    - type: Damageable
+      damageContainer: Biological
+      damageModifierSet: MobBasicSnake
+    - type: StaminaResistance
+      damageCoefficient: 0.2
+    #SS220-fauna-damagesets-ended
     - type: Stamina
       critThreshold: 150
     - type: DamageStateVisuals
@@ -345,9 +349,9 @@
             radius: 0.40
           density: 120
           mask:
-          - MobMask
+          - SmallMobMask #SS220-fauna-update
           layer:
-          - MobLayer
+          - SmallMobLayer #SS220-fauna-update
     - type: MeleeWeapon
       hidden: true
       soundHit:
@@ -383,6 +387,15 @@
     - type: StealthOnMove
       passiveVisibilityRate: -0.25
       movementVisibilityRate: 0.25
+      #SS220-fauna-update-start
+    - type: ThermalVision
+      state: Half
+      visionRadius: 14
+    - type: NoSlip
+    - type: Tag
+      tags:
+      - FootstepSound
+      #SS220-fauna-update-ended
 
 - type: entity
   id: MobCobraSpaceSalvage
@@ -392,7 +405,7 @@
     - type: SalvageMobRestrictions
 
 - type: entity
-  parent: SimpleSpaceMobBase
+  parent: [ SimpleSpaceMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobSnail
   name: snail
   description: Revolting unless you're french.

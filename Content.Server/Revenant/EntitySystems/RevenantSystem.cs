@@ -25,6 +25,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Server.Projectiles;
 using Content.Shared.Projectiles;
+using Content.Shared.Mindshield.Components;
 
 namespace Content.Server.Revenant.EntitySystems;
 
@@ -48,9 +49,9 @@ public sealed partial class RevenantSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly VisibilitySystem _visibility = default!;
     [Dependency] private readonly ProjectileSystem _projectile = default!; // SS220 fix
+    [Dependency] private readonly TurfSystem _turf = default!;
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string RevenantShopId = "ActionRevenantShop";
+    private static readonly EntProtoId RevenantShopId = "ActionRevenantShop";
 
     public override void Initialize()
     {
@@ -130,6 +131,12 @@ public sealed partial class RevenantSystem : EntitySystem
 
         var essenceDamage = args.DamageDelta.GetTotal().Float() * component.DamageToEssenceCoefficient * -1;
         ChangeEssenceAmount(uid, essenceDamage, component);
+        // SS220 revenant-stuns-damage-dealer-begin
+        if (component.StunTime is null || args.Origin is null || HasComp<MindShieldComponent>(args.Origin))
+            return;
+
+        _stun.TryUpdateParalyzeDuration(args.Origin.Value, component.StunTime.Value);
+        // SS220 revenant-stuns-damage-dealer-end
     }
 
     public bool ChangeEssenceAmount(EntityUid uid, FixedPoint2 amount, RevenantComponent? component = null, bool allowDeath = true, bool regenCap = false)
@@ -167,7 +174,7 @@ public sealed partial class RevenantSystem : EntitySystem
             return false;
         }
 
-        var tileref = Transform(uid).Coordinates.GetTileRef();
+        var tileref = _turf.GetTileRef(Transform(uid).Coordinates);
         if (tileref != null)
         {
             if(_physics.GetEntitiesIntersectingBody(uid, (int) CollisionGroup.Impassable).Count > 0)
@@ -180,7 +187,7 @@ public sealed partial class RevenantSystem : EntitySystem
         ChangeEssenceAmount(uid, -abilityCost, component, false);
 
         _statusEffects.TryAddStatusEffect<CorporealComponent>(uid, "Corporeal", TimeSpan.FromSeconds(debuffs.Y), false);
-        _stun.TryStun(uid, TimeSpan.FromSeconds(debuffs.X), false);
+        _stun.TryAddStunDuration(uid, TimeSpan.FromSeconds(debuffs.X));
 
         return true;
     }

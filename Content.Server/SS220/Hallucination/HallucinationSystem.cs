@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.Hallucination;
 using Robust.Shared.Timing;
 using Content.Shared.Inventory.Events;
@@ -9,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.GameStates;
 
 namespace Content.Server.SS220.Hallucination;
+
 /// <summary>
 /// System which make it easier to work with Hallucinations
 /// </summary>
@@ -24,7 +26,7 @@ public sealed class HallucinationSystem : EntitySystem
     /// <summary>
     /// Used to store protectComponents, see <see cref="HallucinationSystem.TryGetComponentType" />
     /// </summary>
-    private SortedDictionary<string, Type?> _cachedProtectComponentsType = [];
+    private readonly SortedDictionary<string, Type?> _cachedProtectComponentsType = [];
 
     public override void Initialize()
     {
@@ -32,8 +34,8 @@ public sealed class HallucinationSystem : EntitySystem
 
         SubscribeLocalEvent<HallucinationComponent, ComponentGetState>(GetComponentState);
         SubscribeLocalEvent<GotEquippedEvent>(OnEquip);
-
     }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -51,6 +53,9 @@ public sealed class HallucinationSystem : EntitySystem
         var sourceQuery = EntityQueryEnumerator<HallucinationSourceComponent>();
         while (sourceQuery.MoveNext(out var sourceUid, out var hallucinationSource))
         {
+            if (!hallucinationSource.IsActive)
+                continue;
+
             if (_gameTiming.CurTime < hallucinationSource.NextUpdateTime)
                 continue;
 
@@ -64,6 +69,19 @@ public sealed class HallucinationSystem : EntitySystem
                 TryAdd(entity.Owner, hallucinationSource.Hallucination);
         }
     }
+
+    /// <summary>
+    /// Set active flag of source
+    /// </summary>
+    public void SetHallucinationSourceActiveFlag(Entity<HallucinationSourceComponent?> source, bool active)
+    {
+        if (!Resolve(source, ref source.Comp))
+            return;
+
+        source.Comp.IsActive = active;
+        source.Comp.NextUpdateTime = _gameTiming.CurTime;
+    }
+
     /// <summary>
     /// Check if entity is protected from hallucination and if not.
     /// After that checks if hallucination exist and than renews its timer.
@@ -112,6 +130,7 @@ public sealed class HallucinationSystem : EntitySystem
         Dirty(target);
         return true;
     }
+
     /// <inheritdoc cref="HallucinationSystem.Remove" />
     public bool Remove(Entity<HallucinationComponent?> target, HallucinationSetting hallucination)
     {
@@ -121,6 +140,7 @@ public sealed class HallucinationSystem : EntitySystem
         var index = target.Comp.Hallucinations.IndexOf(hallucination);
         return Remove((target.Owner, target.Comp), index);
     }
+
     /// <inheritdoc cref="HallucinationSystem.Remove" />
     public bool Remove(Entity<HallucinationComponent?> target, TimeSpan time)
     {
@@ -148,6 +168,7 @@ public sealed class HallucinationSystem : EntitySystem
 
         Add((target, hallucinationComponent), hallucination);
     }
+
     private void Add(Entity<HallucinationComponent> target, HallucinationSetting hallucination)
     {
         var (_, comp) = target;
@@ -168,6 +189,7 @@ public sealed class HallucinationSystem : EntitySystem
 
         Dirty(target);
     }
+
     /// <summary>
     /// Think of sending only to PlayersEntity
     /// </summary>
@@ -175,9 +197,10 @@ public sealed class HallucinationSystem : EntitySystem
     {
         args.State = new HallucinationComponentState
         {
-            Hallucinations = entity.Comp.Hallucinations
+            Hallucinations = entity.Comp.Hallucinations,
         };
     }
+
     /// <summary>
     /// Here we proceed equipping clothing with protection
     /// </summary>
@@ -199,6 +222,7 @@ public sealed class HallucinationSystem : EntitySystem
             }
         }
     }
+
     /// <summary>
     /// Checks if Entity is protected by anything like components on Entity or equipment on it/him/her/etc
     /// </summary>
@@ -214,6 +238,9 @@ public sealed class HallucinationSystem : EntitySystem
         if (!TryGetComponentType(protection.ComponentName, out var protectionComponentType))
             return false;
 
+        if (HasComp(mobUid, protectionComponentType))
+            return true;
+
         var inventorySlot = protection.ItemSlot.HasValue ?
                         _inventory.GetSlotEnumerator(mobUid, protection.ItemSlot.Value) :
                         _inventory.GetSlotEnumerator(mobUid);
@@ -226,6 +253,7 @@ public sealed class HallucinationSystem : EntitySystem
 
         return false;
     }
+
     /// <summary>
     /// Use to check if item is able to protect from hallucination
     /// </summary>
@@ -240,6 +268,7 @@ public sealed class HallucinationSystem : EntitySystem
 
         return false;
     }
+
     private bool TryGetComponentType(string componentName, [NotNullWhen(true)] out Type? componentType)
     {
         if (_cachedProtectComponentsType.TryGetValue(componentName, out componentType))

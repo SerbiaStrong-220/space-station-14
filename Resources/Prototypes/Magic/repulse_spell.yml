@@ -16,7 +16,7 @@
     raiseOnAction: true
     itemIconStyle: BigAction
     icon:
-      sprite: Objects/Magic/magicactions.rsi
+      sprite: SS220/Interface/Actions/magic_spells_other.rsi # SS220 Wizard getting used to
       state: repulse
   - type: InstantAction
     event: !type:RepulseAttractActionEvent

@@ -1,6 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.StatusEffect;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -32,10 +34,10 @@ public sealed partial class DarkReaperComponent : Component
     /// <summary>
     /// Stage at which station receives alert
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField(serverOnly: true)]
+    [DataField(serverOnly: true)]
     public int AlertStage = 3;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField(serverOnly: true)]
+    [DataField(serverOnly: true)]
     public string AlertLevelOnAlertStage = "delta";
 
     /// <summary>
@@ -76,18 +78,17 @@ public sealed partial class DarkReaperComponent : Component
         "LeftHandHuman",
         "RightHandHuman",
         "TorsoSkeleton",
-        "NormalHeadSkeleton"
+        "NormalHeadSkeleton",
     };
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [DataField]
     public int SpawnOnDeathAmount = 8;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [DataField]
     public int SpawnOnDeathAdditionalPerStage = 4;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [DataField]
     public float SpawnOnDeathImpulseStrength = 30;
-
 
     /// ABILITY STATS ///
 
@@ -125,7 +126,7 @@ public sealed partial class DarkReaperComponent : Component
     /// ConfusionEffectName - name of effect that applied
     /// </summary>
     [DataField]
-    public string ConfusionEffectName = "Flashed";
+    public EntProtoId ConfusionEffectName = "FlashSlowdownStatusEffect";
 
     /// <summary>
     /// Duration of the stun that is applied by the ability
@@ -180,7 +181,7 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField, AutoNetworkedField]
     public SoundSpecifier PortalOpenSound = new SoundPathSpecifier("/Audio/SS220/DarkReaper/jnec_gate_open.ogg", new()
     {
-        MaxDistance = 8
+        MaxDistance = 8,
     });
 
     /// <summary>
@@ -189,7 +190,7 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField, AutoNetworkedField]
     public SoundSpecifier PortalCloseSound = new SoundPathSpecifier("/Audio/SS220/DarkReaper/jnec_gate_close.ogg", new()
     {
-        MaxDistance = 7
+        MaxDistance = 7,
     });
 
     /// CONSOOM
@@ -197,7 +198,7 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField, AutoNetworkedField]
     public SoundSpecifier ConsumeAbilitySound = new SoundPathSpecifier("/Audio/SS220/DarkReaper/jnec_eat.ogg", new()
     {
-        MaxDistance = 8
+        MaxDistance = 8,
     });
 
     [ViewVariables(VVAccess.ReadOnly), DataField]
@@ -207,14 +208,14 @@ public sealed partial class DarkReaperComponent : Component
     /// Entity that spawns when dark reaper consumes people.
     /// Intended to be a replacement for giblets, as dark reaper no longer gibs people.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [DataField]
     public EntProtoId EntityToSpawnAfterConsuming = "SS220Gore";
 
     /// <summary>
     /// Probability than item in inventory slot gets dropped when target is consumed.
     /// Rolls for each inventory slot.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField(serverOnly: true)]
+    [DataField(serverOnly: true)]
     public float InventoryDropProbabilityOnConsumed = 0.5f;
 
     /// STAGE PROGRESSION
@@ -222,7 +223,7 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField, AutoNetworkedField]
     public SoundSpecifier LevelupSound = new SoundPathSpecifier("/Audio/SS220/DarkReaper/jnec_levelup.ogg", new()
     {
-        MaxDistance = 8
+        MaxDistance = 8,
     });
 
     /// <summary>
@@ -236,7 +237,7 @@ public sealed partial class DarkReaperComponent : Component
         {
             { "Slash", 12 },
             { "Piercing", 4 },
-            { "Structural", 20 }
+            { "Structural", 20 },
         },
 
         // Stage 2
@@ -244,7 +245,7 @@ public sealed partial class DarkReaperComponent : Component
         {
             { "Slash", 16 },
             { "Piercing", 8 },
-            { "Structural", 40 }
+            { "Structural", 40 },
         },
 
         // Stage 3
@@ -252,7 +253,7 @@ public sealed partial class DarkReaperComponent : Component
         {
             { "Slash", 20 },
             { "Piercing", 16 },
-            { "Structural", 60 }
+            { "Structural", 60 },
         }
     };
 
@@ -269,7 +270,7 @@ public sealed partial class DarkReaperComponent : Component
             {
                 {"Radiation", 0},
                 {"Piercing", 0.7f},
-                {"Heat", 0.7f}
+                {"Heat", 0.7f},
             }
         },
 
@@ -280,7 +281,7 @@ public sealed partial class DarkReaperComponent : Component
             {
                 {"Radiation", 0},
                 {"Piercing", 0.6f},
-                {"Heat", 0.6f}
+                {"Heat", 0.6f},
             }
         },
 
@@ -296,7 +297,7 @@ public sealed partial class DarkReaperComponent : Component
                 {"Cold", 0.25f},
                 {"Shock", 0.25f},
                 {"Cellular", 0},
-                {"Radiation", 0}
+                {"Radiation", 0},
             }
         }
     };
@@ -305,7 +306,7 @@ public sealed partial class DarkReaperComponent : Component
     {
         // stage 1 is free (initial)
         3,
-        8
+        8,
     };
 
     /// ABILITIES ///

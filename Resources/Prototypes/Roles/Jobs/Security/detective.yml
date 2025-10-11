@@ -33,7 +33,7 @@
     eyes: ClothingEyesGlassesSecurity
     id: DetectivePDA
     ears: ClothingHeadsetSecurity
-    neck: ClothingBeltHolsterFilled #SS220 holster to neck
+    # neck: ClothingBeltHolsterFilled #SS220 Shoulder holster is now selectable in loadout
   storage:
     back:
     - Flash

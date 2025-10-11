@@ -9,9 +9,7 @@ namespace Content.Shared.SS220.CultYogg.Cultists;
 [ByRefEvent, Serializable]
 public sealed class ChangeCultYoggStageEvent(CultYoggStage stage) : EntityEventArgs
 {
-    public CultYoggStage Stage = stage;
-
-    public bool Handled = false;
+    public CultYoggStage Stage { get; } = stage;
 }
 
 [ByRefEvent, Serializable]
@@ -19,9 +17,6 @@ public sealed class CultYoggDeCultingEvent(EntityUid entity) : EntityEventArgs
 {
     public readonly EntityUid Entity = entity;
 }
-
-[ByRefEvent, Serializable]
-public record struct CultYoggForceAscendingEvent;
 
 [ByRefEvent, Serializable]
 public record struct CultYoggAscendingEvent;

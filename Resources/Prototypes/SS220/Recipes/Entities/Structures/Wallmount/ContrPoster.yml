@@ -1,0 +1,16 @@
+- type: constructionGraph
+  id: randomPosterContraband
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: contrposter
+          steps:
+            - tag: Contrposter
+              name: construction-graph-tag-Contrposter
+              icon:
+                sprite: SS220/Objects/Misc/Contrposter.rsi
+                state: contrposter
+              doAfter: 1
+    - node: contrposter
+      entity: PosterContrabandSpawner

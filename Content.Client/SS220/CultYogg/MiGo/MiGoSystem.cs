@@ -1,18 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Client.Alerts;
+using Content.Client.Movement.Systems;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Robust.Client.GameObjects;
-using Robust.Client.Player;
-using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.CultYogg.MiGo;
 
 public sealed class MiGoSystem : SharedMiGoSystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly ContentEyeSystem _contentEye = default!;
+    [Dependency] private readonly PointLightSystem _pointLightSystem = default!;
 
     private static readonly Color MiGoAstralColor = Color.FromHex("#bbbbff88");
 
@@ -20,19 +19,50 @@ public sealed class MiGoSystem : SharedMiGoSystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<MiGoComponent, MiGoToggleLightEvent>(OnMiGoToggleLightAction);
+
         SubscribeLocalEvent<MiGoComponent, AppearanceChangeEvent>(OnAppearanceChange);
         SubscribeLocalEvent<MiGoComponent, UpdateAlertSpriteEvent>(OnUpdateAlert);
     }
-    //copypaste from reaper, trying make MiGo transparent without a sprite
-    private void OnAppearanceChange(Entity<MiGoComponent> uid, ref AppearanceChangeEvent args)
+
+    private void OnMiGoToggleLightAction(Entity<MiGoComponent> ent, ref MiGoToggleLightEvent args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite))
-            return;
-        if (!sprite.LayerMapTryGet(MiGoVisual.Base, out var layerIndex))
+        if (args.Handled)
             return;
 
-        sprite.LayerSetColor(layerIndex, uid.Comp.IsPhysicalForm ? Color.White : MiGoAstralColor);
+        TryComp<PointLightComponent>(ent, out var light);
+
+        if (!TryComp<EyeComponent>(ent, out var eye))
+            return;
+
+        if (!eye.DrawLight)
+        {
+            // normal lighting
+            _contentEye.RequestEye(eye.DrawFov, true);
+        }
+        else if (light != null)
+        {
+            // personal lighting
+            var newState = !light.Enabled;
+            _pointLightSystem.SetEnabled(ent.Owner, newState, light);
+        }
+
+        args.Handled = true;
     }
+
+    //copypaste from reaper, trying make MiGo transparent without a sprite
+
+    private void OnAppearanceChange(Entity<MiGoComponent> ent, ref AppearanceChangeEvent args)
+    {
+        if (!TryComp<SpriteComponent>(ent, out var sprite))
+            return;
+
+        if (!_sprite.LayerMapTryGet((ent, sprite), MiGoVisual.Base, out var layerIndex, false))
+            return;
+
+        _sprite.LayerSetColor((ent, sprite), layerIndex, ent.Comp.IsPhysicalForm ? Color.White : MiGoAstralColor);
+    }
+
     //trying to make alert revenant-like
     private void OnUpdateAlert(Entity<MiGoComponent> ent, ref UpdateAlertSpriteEvent args)
     {
@@ -41,7 +71,8 @@ public sealed class MiGoSystem : SharedMiGoSystem
 
         var timeLeft = ent.Comp.AlertTime.Int();
         var sprite = args.SpriteViewEnt.Comp;
-        sprite.LayerSetState(MiGoTimerVisualLayers.Digit1, $"{(timeLeft / 10) % 10}");
-        sprite.LayerSetState(MiGoTimerVisualLayers.Digit2, $"{(timeLeft % 10)}");
+
+        _sprite.LayerSetRsiState((args.SpriteViewEnt, sprite), MiGoTimerVisualLayers.Digit1, $"{timeLeft / 10 % 10}");
+        _sprite.LayerSetRsiState((args.SpriteViewEnt, sprite), MiGoTimerVisualLayers.Digit2, $"{timeLeft % 10}");
     }
 }

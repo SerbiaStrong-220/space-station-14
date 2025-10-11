@@ -13,7 +13,7 @@
     - type: Implanter
       whitelist:
         components:
-        - Body # no chair microbomb
+        - MobState # no chair microbomb
       blacklist:
         components:
         - Guardian # no holoparasite macrobomb wombo combo
@@ -49,6 +49,7 @@
       - FakeMindShieldImplant
       - MindSlaveImplant # SS220 implant-removing fix
       - RadioImplant
+      - ChameleonControllerImplant
       deimplantFailureDamage:
         types:
           Cellular: 50
@@ -253,7 +254,7 @@
 
 - type: entity
   id: ChameleonControllerImplanter
-  suffix: chameleon controller
+  name: chameleon controller implanter
   parent: BaseImplantOnlyImplanterSyndi
   components:
   - type: Implanter

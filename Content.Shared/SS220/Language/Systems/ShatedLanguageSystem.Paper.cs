@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Paper;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
@@ -13,8 +14,8 @@ public abstract partial class SharedLanguageSystem
 
     private const string TagStartPattern = $@"\[{PaperLanguageTagName}[^\]]*]";
     private const string TagEndPattern = $@"\[\/{PaperLanguageTagName}\]";
-    private Regex _tagStartRegex = new Regex(TagStartPattern);
-    private Regex _tagEndRegex = new Regex(TagEndPattern);
+    private readonly Regex _tagStartRegex = new Regex(TagStartPattern);
+    private readonly Regex _tagEndRegex = new Regex(TagEndPattern);
 
     private Regex? _languageMarkupRegex;
 

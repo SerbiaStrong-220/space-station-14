@@ -1,0 +1,50 @@
+const highp float MaxRippleTime = 0.5;
+
+uniform highp float radius;
+uniform highp float border_thickness;
+uniform highp float ripple_width;
+uniform highp float time;
+
+uniform highp vec4 fill_color;
+uniform highp vec4 border_color;
+uniform highp vec4 ripple_color;
+
+uniform bool ripple_enabled;
+
+uniform highp vec2 click_position;
+uniform highp vec2 rect_size;
+
+highp float roundedBox(highp vec2 p, highp vec2 b, highp float r)
+{
+    highp vec2 q = abs(p) - b + vec2(r);
+    return length(max(q, 0.0)) - r;
+}
+
+void fragment()
+{
+    highp vec2 uv = UV;
+    highp vec2 local = (uv - 0.5) * rect_size;
+
+    highp float dist = roundedBox(local, rect_size * 0.5 - vec2(border_thickness), radius);
+    lowp float mask = smoothstep(0.0, 1.0, -dist);
+    lowp float border_mask = smoothstep(-border_thickness, 0.0, -dist);
+    lowp vec4 baseColor = mix(border_color, fill_color, border_mask);
+
+    if (ripple_enabled)
+    {
+        highp vec2 clickLocal = vec2(click_position.x, rect_size.y - click_position.y) - rect_size * 0.5;
+        highp float ripple_radius = time * 120.0;
+        highp float ripple_falloff = clamp(1.0 - time / MaxRippleTime, 0.0, 1.0);
+        ripple_falloff = ripple_falloff * ripple_falloff * (3.0 - 2.0 * ripple_falloff); // easeOutQuad
+
+        highp float ripple_strength = 1.0 - smoothstep(ripple_radius - ripple_width, ripple_radius, length(local - clickLocal));
+        ripple_strength *= ripple_falloff;
+
+        baseColor.rgb = mix(baseColor.rgb, ripple_color.rgb, ripple_strength * ripple_color.a);
+        baseColor.a += ripple_strength * ripple_color.a * 0.2;
+    }
+
+    COLOR = vec4(baseColor.rgb, baseColor.a * mask);
+}
+
+
