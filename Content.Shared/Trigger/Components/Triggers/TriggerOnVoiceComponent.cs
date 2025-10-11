@@ -92,4 +92,12 @@ public sealed partial class TriggerOnVoiceComponent : BaseTriggerOnXComponent
     /// </summary>
     [DataField]
     public LocId? InspectInitializedLoc = "trigger-on-voice-examine";
+
+    // ss220 add visibility only for recorder start
+    [DataField]
+    public bool IsVisibleOnlyToRecorder;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Recorder;
+    // ss220 add visibility only for recorder end
 }
