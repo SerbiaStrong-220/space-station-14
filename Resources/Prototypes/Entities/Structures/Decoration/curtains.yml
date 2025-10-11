@@ -7,12 +7,14 @@
   placement:
     mode: SnapgridCenter
   components:
+  # SS220-toggle curtains start
   - type: DoorSignalControl
   - type: DeviceLinkSink
     ports:
       - Open
       - Close
       - Toggle
+  # SS220-toggle curtains ended
   - type: Occluder
   - type: AnimationPlayer
   - type: Fixtures
