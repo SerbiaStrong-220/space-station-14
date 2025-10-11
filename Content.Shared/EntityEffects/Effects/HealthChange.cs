@@ -6,6 +6,9 @@ using Content.Shared.Localizations;
 using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Text.Json.Serialization;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 
 namespace Content.Shared.EntityEffects.Effects
 {
@@ -33,6 +36,10 @@ namespace Content.Shared.EntityEffects.Effects
         [DataField]
         [JsonPropertyName("ignoreResistances")]
         public bool IgnoreResistances = true;
+
+        [DataField]
+        [JsonPropertyName("damageCorpses")]
+        public bool DamageCorpses = true;
 
         protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         {
@@ -89,6 +96,11 @@ namespace Content.Shared.EntityEffects.Effects
 
         public override void Effect(EntityEffectBaseArgs args)
         {
+            var mobStateSystem = args.EntityManager.System<MobStateSystem>();
+            args.EntityManager.TryGetComponent<MobStateComponent>(args.TargetEntity, out var comp);
+            if (mobStateSystem.IsDead(args.TargetEntity, comp) && !DamageCorpses)
+                return;
+
             var scale = FixedPoint2.New(1);
             var damageSpec = new DamageSpecifier(Damage);
 
