@@ -360,7 +360,7 @@
   description: Cool katana! Just like in anime!
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Melee/energykatana.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/energykatana.rsi #SS220 Ninja Resprite
   - type: MeleeWeapon
     wideAnimationRotation: -60
     damage:
@@ -375,7 +375,7 @@
     - 0,0,0,3
   # Energy Katana in storage fix end
   - type: Clothing
-    sprite: Objects/Weapons/Melee/energykatana.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/energykatana.rsi #SS220 Ninja Resprite
     slots:
     - Back
     - Belt
