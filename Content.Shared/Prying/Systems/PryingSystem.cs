@@ -10,6 +10,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Serialization;
 using PryUnpoweredComponent = Content.Shared.Prying.Components.PryUnpoweredComponent;
+using Content.Shared.SS220.Prying; //ss220-prying-action
 
 namespace Content.Shared.Prying.Systems;
 
@@ -31,7 +32,21 @@ public sealed class PryingSystem : EntitySystem
         SubscribeLocalEvent<DoorComponent, GetVerbsEvent<AlternativeVerb>>(OnDoorAltVerb);
         SubscribeLocalEvent<DoorComponent, DoorPryDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<DoorComponent, InteractUsingEvent>(TryPryDoor);
+        SubscribeLocalEvent<PryingComponent, ActionPryingEvent>(OnPryActionEvent); //ss220-prying-action
     }
+
+    //ss220-prying-action-start
+    private void OnPryActionEvent(Entity<PryingComponent> entity, ref ActionPryingEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryComp(args.Target, out DoorComponent? comp))
+            return;
+
+        args.Handled = TryPry(args.Target, args.Performer, out _, args.Performer);
+    }
+    //ss220-prying-action-ended
 
     private void TryPryDoor(EntityUid uid, DoorComponent comp, InteractUsingEvent args)
     {
