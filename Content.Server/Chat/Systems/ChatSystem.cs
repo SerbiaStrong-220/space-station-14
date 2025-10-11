@@ -876,11 +876,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         {
             var languageMessage = _languageSystem.SanitizeMessage(source, newMessage);
             var i = 0;
-            languageMessage.ChangeInNodeMessage(msg =>
+            languageMessage.ChangeNodes(node =>
             {
                 i++;
                 var isFirst = i == 1;
-                return SanitizeMessage(msg, isFirst, isFirst && capitalize, punctuate, capitalizeTheWordI);
+                string msg = node.Message;
+                node.SetMessage(SanitizeMessage(msg, isFirst, isFirst && capitalize, punctuate, capitalizeTheWordI));
             });
 
             newMessage = languageMessage.GetMessageWithLanguageKeys();
