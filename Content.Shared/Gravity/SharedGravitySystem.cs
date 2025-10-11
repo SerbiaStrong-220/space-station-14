@@ -142,7 +142,12 @@ public abstract partial class SharedGravitySystem : EntitySystem
         if (args.OldParent == args.Transform.GridUid)
             return;
 
-        RefreshWeightless(entity.AsNullable()); // ss220 fix magboots
+        // ss220 fix magboots start
+        if (entity.Comp.LifeStage <= ComponentLifeStage.Initialized)
+            return;
+
+        RefreshWeightless(entity.AsNullable());
+        // ss220 fix magboots end
     }
 
     private void OnBodyTypeChanged(Entity<GravityAffectedComponent> entity, ref PhysicsBodyTypeChangedEvent args)
