@@ -9,6 +9,7 @@
   access:
   - Service
   - Maintenance
+  - Reporter #SS220 New_accesses_and_some_tweaks
 
 - type: startingGear
   id: ReporterGear
