@@ -71,7 +71,7 @@ public sealed class ScramOnTriggerSystem : EntitySystem
         }
     }
 
-    private EntityCoordinates? SelectRandomTileInRange(TransformComponent userXform, float radius)
+    public EntityCoordinates? SelectRandomTileInRange(TransformComponent userXform, float radius) //ss220 tarot cards
     {
         var userCoords = _transform.ToMapCoordinates(userXform.Coordinates);
         _targetGrids.Clear();
