@@ -1,0 +1,16 @@
+- type: skill
+  id: PilotingBase
+  levelInfo:
+    maximumSublevel: 1
+  levelDescription:
+    skillName: piloting-base-name
+    skillDescription: piloting-base-desc
+
+- type: skill
+  id: PilotingCombat
+  levelInfo:
+    maximumSublevel: 1
+    canStartStudying: false
+  levelDescription:
+    skillName: piloting-combat-name
+    skillDescription: piloting-combat-desc
