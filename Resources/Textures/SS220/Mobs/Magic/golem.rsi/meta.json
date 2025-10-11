@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Created by Jaba (discord) & vladimir.s (discord)",
+  "states": [
+    {
+      "name": "live",
+      "directions": 4
+    },
+    {
+      "name": "live_light",
+      "directions": 4
+    },
+    {
+      "name": "rock_projectile"
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

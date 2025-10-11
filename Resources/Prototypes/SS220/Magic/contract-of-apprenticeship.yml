@@ -1,0 +1,24 @@
+- type: entity
+  parent: ReinforcementRadio
+  id: ContractofApprenticeship
+  name: contract of apprenticeship
+  description: A magical contract binding a wizard's apprentice to you, using it, will summon them to you.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Magic/scrolls.rsi
+    layers:
+    - state: default
+  - type: GhostRole
+    name: ghost-role-information-syndicate-reinforcement-spy-name
+    description: ghost-role-information-syndicate-reinforcement-spy-description
+    rules: ghost-role-information-syndicate-reinforcement-rules
+    requirements:
+        - !type:OverallPlaytimeRequirement
+          time: 72000
+    mindRoles:
+    - MindRoleWizard
+    raffle:
+      settings: default
+  - type: GhostRoleMobSpawner
+    prototype: MobHumanWizardApprenticeship
+    selectablePrototypes: [ "WizardApprenticeshipFire", "WizardApprenticeshipDestruction", "WizardApprenticeshipKeeper", "WizardApprenticeshipRestoration", "WizardApprenticeshipStealth", "WizardApprenticeshipTranslocation" ]

@@ -30,10 +30,14 @@
   - type: Store
     name: store-preset-name-spellbook
     categories:
-    - SpellbookOffensive    #Fireball, Rod Form
-    - SpellbookDefensive    #Magic Missile, Wall of Force
-    - SpellbookUtility      #Body Swap, Lich, Teleport, Knock, Polymorph
-    - SpellbookEquipment    #Battlemage Robes, Staff of Locker
-    - SpellbookEvents       #Summon Weapons, Summon Ghosts
+    # SS220 Wizard Update Begin
+    - SpellbookDestruction      #Fireball, Rod Form
+    - SpellbookSpace            #Blink, Wall of Force, Body Swap
+    - SpellbookSupport          #Knock, Charge, Smoke
+    - SpellbookEquipment        #Battlemage Robes, Staff of Locker
+    - SpellbookPolymorph        #Polymorph-Spider
+    - SpellbookSummon           #Summon Weapons, Summon Ghosts
+    - SpellbookVoid             #VoidApplause
+    # SS220 Wizard Update End
     currencyWhitelist:
     - WizCoin

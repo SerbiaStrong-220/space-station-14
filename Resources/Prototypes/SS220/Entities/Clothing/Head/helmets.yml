@@ -34,3 +34,29 @@
         Caustic: 0.95
   - type: ExplosionResistance
     damageCoefficient: 0.75
+
+#Wizard Helmet
+- type: entity
+  parent: ClothingHeadHelmetBase
+  id: ClothingHeadHelmetWizardHelmRed
+  name: wizard helm
+  description: Strange-looking helmet that most certainly belongs to a real magic user.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Helmets/wizardhelmred.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Helmets/wizardhelmred.rsi
+  - type: IngestionBlocker
+  - type: IdentityBlocker
+  - type: TemperatureProtection
+    heatingCoefficient: 0.01
+    coolingCoefficient: 0.2
+  - type: FireProtection
+    reduction: 0.15 # not fully sealed so less protection
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - FireHelmet

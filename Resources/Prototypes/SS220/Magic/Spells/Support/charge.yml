@@ -1,0 +1,17 @@
+- type: entity
+  parent: BaseAction
+  id: ActionChargeSpell
+  name: Charge
+  description: Adds a charge back to your wand
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: charge
+  - type: InstantAction
+    event: !type:ChargeSpellEvent
+      charge: 1
+  - type: SpeakOnAction
+    sentence: action-speech-spell-charge

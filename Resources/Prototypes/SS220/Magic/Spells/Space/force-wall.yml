@@ -1,0 +1,36 @@
+- type: entity
+  parent: BaseAction
+  id: ActionForceWall
+  name: Force Wall
+  description: Creates a magical barrier.
+  components:
+  - type: Action
+    useDelay: 15
+    itemIconStyle: BigAction
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: forcewall
+  - type: InstantAction
+    event: !type:InstantSpawnSpellEvent
+      prototype: WallForceMagic
+      posData: !type:TargetInFront
+  - type: SpeakOnAction
+    sentence: action-speech-spell-forcewall
+
+- type: entity
+  parent: WallForce
+  id: WallForceMagic
+  name: force wall
+  components:
+  - type: TimedDespawn
+    lifetime: 14 #Buff SS220 Wizard Update
+  - type: Sprite
+    sprite: SS220/Structures/Walls/forcewall.rsi
+  - type: Icon
+    sprite: SS220/Structures/Walls/forcewall.rsi
+  - type: Reflect #Buff SS220 Wizard Update
+    enabled: true
+    reflectProb: .5
+    spread: 90

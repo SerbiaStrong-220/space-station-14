@@ -9,10 +9,21 @@
       params:
         volume: 2
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Basic/wands.rsi
+    sprite: SS220/Objects/Weapons/Magic/wands.rsi #SS220 Wizard Update
   - type: Item
     heldPrefix: wand
     size: Normal
+    #SS220 Wizard Update Begin
+    inhandVisuals:
+      left:
+      - state: wand-inhand-left
+      - state: wand-inhand-left-unshaded
+        shader: unshaded
+      right:
+      - state: wand-inhand-right
+      - state: wand-inhand-right-unshaded
+        shader: unshaded
+    #SS220 Wizard Update End
   - type: Gun
     fireRate: 0.5
     selectedMode: SemiAuto

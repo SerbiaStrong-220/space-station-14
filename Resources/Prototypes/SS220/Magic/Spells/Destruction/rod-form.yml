@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseActionPolymorph
+  id: ActionPolymorphWizardRod
+  name: Rod Form
+  description: CLANG!
+  components:
+  - type: Action
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: nullrod
+  - type: InstantAction
+    event: !type:PolymorphActionEvent
+      protoId: WizardRod

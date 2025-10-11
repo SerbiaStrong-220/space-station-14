@@ -1,0 +1,21 @@
+- type: entity
+  parent: BaseSmiteAction
+  id: ActionCluwne
+  name: Cluwne's Curse
+  description: Turns someone into a Cluwne!
+  components:
+  - type: Action
+    useDelay: 120
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Items/brokenbikehorn.ogg
+    icon:
+      sprite: SSS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: cluwne
+  - type: EntityTargetAction
+    event: !type:ChangeComponentsSpellEvent
+      toAdd:
+      - type: Cluwne
+  - type: SpeakOnAction
+    sentence: action-speech-spell-cluwne
+  - type: Magic
+    requiresClothes: true
