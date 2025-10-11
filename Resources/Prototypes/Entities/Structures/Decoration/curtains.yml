@@ -7,6 +7,12 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: DoorSignalControl
+  - type: DeviceLinkSink
+    ports:
+      - Open
+      - Close
+      - Toggle
   - type: Occluder
   - type: AnimationPlayer
   - type: Fixtures
