@@ -1,10 +1,9 @@
-
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 namespace Content.Shared.SS220.Hallucination;
 
 public abstract class SharedHallucinationSystem : EntitySystem
 {
-
     /// <summary>
     /// Check if entity is protected from hallucination and if not.
     /// After that checks if hallucination exist and than renews its timer.
