@@ -91,7 +91,9 @@ public abstract class SharedMiGoSystem : EntitySystem
 
         SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnGetVerb);
 
-        SubscribeLocalEvent<MiGoComponent, MiGoTeleportToTargetMessage>(OnTeleportToTarget);
+        SubscribeLocalEvent<MiGoComponent, MiGoTeleportToTargetMessage>(OnMiGoTeleportToTarget);
+        SubscribeLocalEvent<MiGoComponent, MiGoSpectateMessage>(OnMiGoSpectate);
+
         SubscribeLocalEvent<MiGoComponent, InteractionAttemptEvent>(OnInteractionAttempt);
     }
 
@@ -562,7 +564,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         return warps;
     }
 
-    private void OnTeleportToTarget(Entity<MiGoComponent> ent, ref MiGoTeleportToTargetMessage args)
+    private void OnMiGoTeleportToTarget(Entity<MiGoComponent> ent, ref MiGoTeleportToTargetMessage args)
     {
         if (ent.Comp.IsPhysicalForm)
         {
@@ -601,6 +603,24 @@ public abstract class SharedMiGoSystem : EntitySystem
 
         var xform = Transform(ent);
         _transformSystem.SetCoordinates(ent, xform, Transform(target).Coordinates);
+    }
+
+    private void OnMiGoSpectate(Entity<MiGoComponent> ent, ref MiGoSpectateMessage args)
+    {
+        if (!TryComp<ActorComponent>(ent, out var actor))
+            return;
+
+        if (args.Target == null)
+            return;
+
+        if (!TryGetEntity(args.Target.Value, out var target))
+            return;
+
+        //_userInterfaceSystem.TryToggleUi(ent.Owner, MiGoUiKey.Teleport, actor.PlayerSession);
+
+        //ToDo SS220, idk maybe it should be different type of UI
+        //var ui = new AdminCameraEui(target);
+        //_euiManager.OpenEui(ui, player);
     }
     #endregion
 }

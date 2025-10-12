@@ -1,14 +1,9 @@
 <BoxContainer xmlns="https://spacestation14.io"
             Orientation="Horizontal"
             HorizontalExpand="True"
+            Margin="0 1"
             SeparationOverride="4">
-    <SpriteView Name="DollView"
-            Margin="4 0 0 0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Stretch="Fill"
-            SetSize="64 64"
-            />
+    <!-- <SpriteView Name="DollView" Margin="4 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" SetSize="64 64"/>-->
     <BoxContainer Orientation="Vertical">
         <Label Name="NameLabel" SizeFlagsStretchRatio="3" HorizontalExpand="True"  ClipText="True"/>
         <BoxContainer Orientation="Horizontal">

@@ -19,10 +19,10 @@ namespace Content.Client.SS220.CultYogg.MiGo.UI;
 public sealed partial class MiGoTeleportMenu : FancyWindow
 {
     public event Action<ButtonEventArgs>? OnTeleportToTarget;
+    public event Action<ButtonEventArgs>? OnSpectate;
     public MiGoTeleportMenu()
     {
-        MinSize = new Vector2(250, 150);
-        SetSize = new Vector2(450, 150);
+        MinSize = new Vector2(256, 320);
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
     }
@@ -37,6 +37,7 @@ public sealed partial class MiGoTeleportMenu : FancyWindow
 
             var target = new MiGoTeleportTarget(name, netEnt);
             target.Teleport.OnPressed += (args) => { OnTeleportToTarget?.Invoke(args); };
+            target.Spectate.OnPressed += (args) => { OnSpectate?.Invoke(args); };
             StoreListingsContainer.AddChild(target);
         }
     }

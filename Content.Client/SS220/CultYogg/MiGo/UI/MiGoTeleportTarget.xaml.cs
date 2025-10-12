@@ -17,9 +17,9 @@ public sealed partial class MiGoTeleportTarget : BoxContainer
         if (target.HasValue)
         {
             TargetNetEnt = target.Value;
-            DollView.SetEntity(target.Value);
+            //DollView.SetEntity(target.Value);
         }
 
-        NameLabel.Text = name;
+        NameLabel.Text = "\t\t\t\t" + name;//cause center aligment isnt working
     }
 }
