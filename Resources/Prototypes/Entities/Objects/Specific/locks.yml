@@ -19,6 +19,7 @@
     recordingVerbMessage: voice-trigger-lock-verb-message
     inspectUninitializedLoc: voice-trigger-lock-on-uninitialized
     inspectInitializedLoc: voice-trigger-lock-on-examine
+    isVisibleOnlyToRecorder: true #ss220 add visibility only for recorder
   - type: LockOnTrigger
   - type: ActiveListener
   - type: VoiceTriggerLock
