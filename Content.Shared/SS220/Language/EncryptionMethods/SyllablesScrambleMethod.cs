@@ -41,7 +41,7 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
     public List<SyllablesSpecialCharacter> SpecialCharacters = new();
 
     [DataField]
-    public string ReplaceDictonary;
+    public string? ReplaceDictonary = null;
 
     private int _inputSeed;
     private bool _capitalize = false;
@@ -88,7 +88,7 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
     {
         replaced = "";
 
-        if (!prototypeManager.TryIndex<LanguageReplacementsPrototype>(ReplaceDictonary, out var prototype))
+        if (ReplaceDictonary == null || !prototypeManager.TryIndex<LanguageReplacementsPrototype>(ReplaceDictonary, out var prototype))
             return false;
 
         foreach (var (first, replace) in prototype.Replacements)
