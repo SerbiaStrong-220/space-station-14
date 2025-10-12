@@ -169,7 +169,7 @@
 # Примеры нового
 - type: reagent
   id: MobThresholdsModifierReagentExample
-  name: изменение порогов MobState
+  name: MobThresholdsModifierReagentExample-name
   parent: BaseDrink
   desc: reagent-desc-rrranta
   physicalDesc: reagent-physical-desc-rrranta
@@ -186,7 +186,7 @@
 
 - type: reagent
   id: HallucinationReagentExample
-  name: галлюцинации
+  name: HallucinationReagentExample-name
   parent: BaseDrink
   desc: reagent-desc-rrranta
   physicalDesc: reagent-physical-desc-rrranta
@@ -209,7 +209,7 @@
 
 - type: reagent
   id: StaminaDamageReagentExample
-  name: урон по стамине
+  name: StaminaDamageReagentExample-name
   parent: BaseDrink
   desc: reagent-desc-rrranta
   physicalDesc: reagent-physical-desc-rrranta
