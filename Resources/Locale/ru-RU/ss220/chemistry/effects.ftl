@@ -24,3 +24,8 @@ reaction-effect-guidebook-hallucination = Вызывает галлюцинац�
         [few] секунды
         *[other] секунд
     }
+
+reaction-effect-guidebook-stamina-damage = { $heals ->
+        [true] Восстанавливает { $value }ед. стамины
+        *[false] Наносит { $value }ед. урона по стамине
+    }

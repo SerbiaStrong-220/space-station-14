@@ -206,3 +206,18 @@
           componentName: EyeProtection
           itemSlot: EYES
           checkPockets: false
+
+- type: reagent
+  id: StaminaDamageReagentExample
+  name: урон по стамине
+  parent: BaseDrink
+  desc: reagent-desc-rrranta
+  physicalDesc: reagent-physical-desc-rrranta
+  flavor: rrranta
+  color: "#9aae07"
+  recognizable: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:StaminaDamage
+        value: 20
