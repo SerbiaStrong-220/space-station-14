@@ -45,7 +45,7 @@ public sealed partial class MobThresholdsModifier : EntityEffect
         var factory = IoCManager.Resolve<IComponentFactory>();
         if (!prototype.TryIndex<EntityPrototype>(StatusEffectId, out var statusProto) ||
             !statusProto.TryGetComponent<MobThresholdsModifierStatusEffectComponent>(out var component, factory))
-            return string.Empty;
+            return null;
 
         var lines = new List<string>();
         foreach (var (state, modifier) in component.Modifiers)
@@ -70,7 +70,7 @@ public sealed partial class MobThresholdsModifier : EntityEffect
         }
 
         if (lines.Count <= 0)
-            return string.Empty;
+            return null;
 
         var statesChanges = string.Join("; ", lines);
         var result = Loc.GetString("reagent-effect-guidebook-mob-thresholds-modifier",

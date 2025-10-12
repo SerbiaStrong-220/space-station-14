@@ -166,9 +166,10 @@
             Poison: 0.4
   fizziness: 0.6
 
+# Примеры нового
 - type: reagent
   id: MobThresholdsModifierReagentExample
-  name: reagent-name-rrranta
+  name: изменение порогов MobState
   parent: BaseDrink
   desc: reagent-desc-rrranta
   physicalDesc: reagent-physical-desc-rrranta
@@ -182,3 +183,26 @@
         statusEffectId: MobThresholdsModifierStatusEffectExample
         duration: 5
         refresh: false
+
+- type: reagent
+  id: HallucinationReagentExample
+  name: галлюцинации
+  parent: BaseDrink
+  desc: reagent-desc-rrranta
+  physicalDesc: reagent-physical-desc-rrranta
+  flavor: rrranta
+  color: "#9aae07"
+  recognizable: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:Hallucination
+        setting:
+          randomEntities: HallucinationSupermatterCrystal
+          betweenHallucinations: 4
+          hallucinationMinTime: 2
+          hallucinationMaxTime: 10
+          totalDuration: 20
+          componentName: EyeProtection
+          itemSlot: EYES
+          checkPockets: false
