@@ -14,6 +14,12 @@ public sealed class UndereducatedClientSystem : EntitySystem
     [Dependency] private readonly SharedLanguageSystem _languageSystem = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
 
+    private static readonly string[] LanguagesBlacklist =
+    {
+       SharedLanguageSystem.GalacticLanguage,
+       SharedLanguageSystem.UniversalLanguage
+    };
+
     public override void Initialize()
     {
         base.Initialize();
@@ -56,13 +62,9 @@ public sealed class UndereducatedClientSystem : EntitySystem
     {
         availableLanguagesList = [];
 
-        List<string> blackList = [];
-        blackList.Add(_languageSystem.GalacticLanguage);
-        blackList.Add(_languageSystem.UniversalLanguage);
-
         foreach (var lang in langComp.AvailableLanguages)
         {
-            if (blackList.Contains(lang.Id) || !lang.CanSpeak)
+            if (Array.IndexOf(LanguagesBlacklist, lang.Id) >= 0 || !lang.CanSpeak)
                 continue;
 
             availableLanguagesList.Add(lang.Id);

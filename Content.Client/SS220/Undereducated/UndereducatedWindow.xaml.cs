@@ -11,7 +11,6 @@ namespace Content.Client.SS220.Undereducated;
 public sealed partial class UndereducatedWindow : DefaultWindow
 {
     private readonly List<string> _spokenLanguages;
-    private int _secret = 0;
 
     public string SelectedLanguage { get; private set; }
     public float SelectedChance { get; private set; }
@@ -45,13 +44,6 @@ public sealed partial class UndereducatedWindow : DefaultWindow
         {
             LanguageOption.Select(args.Id);
             SelectedLanguage = _spokenLanguages[LanguageOption.SelectedId];
-
-            // easter egg
-            _secret++;
-            if (_secret == 30)
-            {
-                LanguageLabel.Text = $"{Loc.GetString("window-undereducated-language-option-label")} " + $"{Loc.GetString("window-undereducated-language-option-label-secret")}";
-            }
         };
 
         PercentLabel.Text = $"{Loc.GetString("window-undereducated-percent-slider-label")} {Math.Round(ChanceSlider.Value, 2)}%";

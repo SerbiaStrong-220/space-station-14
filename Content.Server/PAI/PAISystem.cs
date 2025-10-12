@@ -12,6 +12,7 @@ using Content.Shared.Store.Components;
 using Content.Shared.Instruments;
 using Robust.Shared.Player;
 using Content.Server.SS220.Language;
+using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.Language.Components; // SS220-Add-Languages
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
@@ -149,7 +150,7 @@ public sealed class PAISystem : SharedPAISystem
         if (TryComp<LanguageComponent>(uid, out var languageComp))
         {
             _language.ClearLanguages((uid, languageComp));
-            _language.AddLanguages((uid, languageComp), [_language.UniversalLanguage, _language.GalacticLanguage], true);
+            _language.AddLanguages((uid, languageComp), [SharedLanguageSystem.UniversalLanguage, SharedLanguageSystem.GalacticLanguage], true);
         }
         // SS220-Add-Languages end
     }

@@ -141,8 +141,8 @@ public sealed partial class UndereducatedSystem : EntitySystem
                 }
                 else
                 {
-                    if (wordsCount == words.Length)
-                        newMessage.Append(node.Language.KeyWithPrefix).Append(' ');
+                    //if (wordsCount == words.Length)
+                    //    newMessage.Append(node.Language.KeyWithPrefix).Append(' ');
                     newMessage.Append(word);
                 }
                 newMessage.Append(' ');

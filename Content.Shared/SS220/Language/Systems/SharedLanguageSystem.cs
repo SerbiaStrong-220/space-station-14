@@ -15,8 +15,8 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     [Dependency] private readonly LanguageManager _language = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
-    public readonly string UniversalLanguage = "Universal";
-    public readonly string GalacticLanguage = "Galactic";
+    public const string UniversalLanguage = "Universal";
+    public const string GalacticLanguage = "Galactic";
 
     public int Seed = 0;
 

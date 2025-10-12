@@ -2,7 +2,6 @@ trait-Undereducated-name = Малограмотный
 trait-Undereducated-desc = Вы плохо знаете иностранные языки и часто прибегаете к родной речи. Вероятно, вам понадобится переводчик.
 window-undereducated-title = Настройка малограмотного акцента
 window-undereducated-language-option-label = Ваш родной язык:
-window-undereducated-language-option-label-secret = мур мяу UwU няя >_<
 window-undereducated-percent-slider-label = Ваш уровень знания других языков:
 window-undereducated-percent-slider-tooltip = Меньшее значение - больше автозамен слов
 window-undereducated-confirm-button-text = Применить
