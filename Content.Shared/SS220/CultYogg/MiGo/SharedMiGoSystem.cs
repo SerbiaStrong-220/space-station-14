@@ -92,6 +92,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnGetVerb);
 
         SubscribeLocalEvent<MiGoComponent, MiGoTeleportToTargetMessage>(OnTeleportToTarget);
+        SubscribeLocalEvent<MiGoComponent, InteractionAttemptEvent>(OnInteractionAttempt);
     }
 
     protected virtual void OnCompInit(Entity<MiGoComponent> uid, ref ComponentStartup args)
@@ -128,6 +129,12 @@ public abstract class SharedMiGoSystem : EntitySystem
                 });
                 return;
         }
+    }
+
+    private void OnInteractionAttempt(Entity<MiGoComponent> ent, ref InteractionAttemptEvent args)
+    {
+        if (!ent.Comp.IsPhysicalForm && args.Target != null && args.Target != ent.Owner)
+            args.Cancelled = true;
     }
 
     private void OnGetVerb(GetVerbsEvent<Verb> args)

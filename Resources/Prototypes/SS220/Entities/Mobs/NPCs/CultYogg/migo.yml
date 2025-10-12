@@ -14,15 +14,30 @@
   components:
   #cultists comps
   - type: MiGo
-    # showInHands: false
-    # disableExplosionRecursion: true
-    # canBeStripped: false
     eraseWhitelist:
       components:
       - CultYoggBuilding
       - CultYoggBuildingFrame
   - type: Body
     prototype: MiGoBody
+  - type: Hands
+    hands:
+      body_part_slot_right hand:
+        location: Right
+        whitelist:
+          tags:
+          - CultYoggStealthProvidable #ToDo_SS220 add special tag
+      body_part_slot_left hand:
+        location: Left
+        whitelist:
+          tags:
+          - CultYoggStealthProvidable #ToDo_SS220 add special tag
+    sortedHands:
+    - body_part_slot_right hand
+    - body_part_slot_left hand
+    showInHands: false
+    disableExplosionRecursion: true
+    canBeStripped: false
   - type: ComplexInteraction #For UI opening only
   - type: ShowHealthBars
   - type: Telepathy
