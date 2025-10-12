@@ -7,7 +7,6 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Network.Messages;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using static Lidgren.Network.NetPeerMetrics;
 
 namespace Content.Shared.Mobs.Systems;
 

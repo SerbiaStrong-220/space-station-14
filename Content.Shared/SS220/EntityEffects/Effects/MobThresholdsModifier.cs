@@ -42,6 +42,42 @@ public sealed partial class MobThresholdsModifier : EntityEffect
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return string.Empty;
+        var factory = IoCManager.Resolve<IComponentFactory>();
+        if (!prototype.TryIndex<EntityPrototype>(StatusEffectId, out var statusProto) ||
+            !statusProto.TryGetComponent<MobThresholdsModifierStatusEffectComponent>(out var component, factory))
+            return string.Empty;
+
+        var lines = new List<string>();
+        foreach (var (state, modifier) in component.Modifiers)
+        {
+            var info = string.Empty;
+            if (modifier.Multiplier != 1)
+                info += Loc.GetString("reagent-effect-guidebook-mob-thresholds-modifier-multiplier", ("multiplier", modifier.Multiplier));
+
+            if (modifier.Flat != 0)
+            {
+                if (!string.IsNullOrEmpty(info))
+                    info += " " + Loc.GetString("units-si--y") + " ";
+
+                info += Loc.GetString("reagent-effect-guidebook-mob-thresholds-modifier-flat", ("flat", modifier.Flat));
+            }
+
+            if (string.IsNullOrEmpty(info))
+                continue;
+
+            var line = $"{state} - {info}";
+            lines.Add(line);
+        }
+
+        if (lines.Count <= 0)
+            return string.Empty;
+
+        var statesChanges = string.Join("; ", lines);
+        var result = Loc.GetString("reagent-effect-guidebook-mob-thresholds-modifier",
+            ("refresh", Refresh),
+            ("duration", Duration.TotalSeconds),
+            ("stateschanges", statesChanges));
+
+        return result;
     }
 }
