@@ -19,7 +19,7 @@ id-card-access-level-chemistry = Химия
 id-card-access-level-paramedic = Парамедик
 # SS220 New_accesses_and_some_tweaks start
 id-card-access-level-psychologist = Психолог
-#SS220 New_accesses_and_some_tweaks end
+# SS220 New_accesses_and_some_tweaks end
 id-card-access-level-quartermaster = Квартирмейстер
 id-card-access-level-cargo = Снабжение
 id-card-access-level-salvage = Утилизаторский
