@@ -24,7 +24,6 @@
   - type: Tag
     tags:
     - Meat
-  #SS220-grill-update-2 begin
   - type: Fixtures
     fixtures:
       fix1:
@@ -33,7 +32,6 @@
         - ItemMask
         restitution: 0
         friction: 0.2
-  #SS220-grill-update-2 end
 
 - type: entity
   name: шаурма
@@ -43,7 +41,6 @@
   components:
   - type: Sprite
     state: shawarma
-    #SS220-grill-update-2 begin
   - type: Construction
     graph: ShawarmaGrilled
     node: start
@@ -54,7 +51,6 @@
     conductivity: 0.4
     thickness: 0.008
     area: 0.0175 # ~7x25cm
-    #SS220-grill-update-2 end
 
 - type: entity
   name: шаурма на гриле
@@ -64,8 +60,6 @@
   components:
   - type: Sprite
     state: shawarmaGrill
-    #SS220-grill-update-2 begin
   - type: Construction
     graph: ShawarmaGrilled
     node: шаурма на гриле
-    #SS220-grill-update-2 end
