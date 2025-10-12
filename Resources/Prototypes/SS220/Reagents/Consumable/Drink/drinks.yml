@@ -202,7 +202,7 @@
           betweenHallucinations: 4
           hallucinationMinTime: 2
           hallucinationMaxTime: 10
-          totalDuration: 20
+          totalDuration: 22
           componentName: EyeProtection
           itemSlot: EYES
           checkPockets: false

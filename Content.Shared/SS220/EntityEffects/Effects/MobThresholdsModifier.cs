@@ -50,22 +50,21 @@ public sealed partial class MobThresholdsModifier : EntityEffect
         var lines = new List<string>();
         foreach (var (state, modifier) in component.Modifiers)
         {
-            var info = string.Empty;
-            if (modifier.Multiplier != 1)
-                info += Loc.GetString("reagent-effect-guidebook-mob-thresholds-modifier-multiplier", ("multiplier", modifier.Multiplier));
+            var writeMultiplier = modifier.Multiplier != 1;
+            var writeFlat = modifier.Flat != 0;
 
-            if (modifier.Flat != 0)
-            {
-                if (!string.IsNullOrEmpty(info))
-                    info += " " + Loc.GetString("units-si--y") + " ";
-
-                info += Loc.GetString("reagent-effect-guidebook-mob-thresholds-modifier-flat", ("flat", modifier.Flat));
-            }
-
-            if (string.IsNullOrEmpty(info))
+            if (!writeMultiplier && !writeFlat)
                 continue;
 
-            var line = $"{state} - {info}";
+            var modifierType = writeMultiplier && writeFlat ? "both"
+                : writeMultiplier ? "multiplier"
+                : "flat";
+
+            var line = "\n    " + Loc.GetString("reagent-effect-guidebook-mob-thresholds-modifier-line",
+                ("mobstate", state.ToString()),
+                ("modifierType", modifierType),
+                ("multiplier", modifier.Multiplier.Float()),
+                ("flat", modifier.Flat.Float()));
             lines.Add(line);
         }
 
