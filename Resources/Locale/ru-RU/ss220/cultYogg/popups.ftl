@@ -11,6 +11,10 @@ cult-yogg-enslave-should-eat-shroom = Кандидат не имеет спор 
 cult-yogg-enslave-cant-be-a-chaplain = Кандидат слишком свят
 cult-yogg-enslave-is-sacraficial = Существо ценно, как жертва
 
+cult-yogg-teleport-must-be-in-astral = Для телепортации необходимо находится в астрале
+cult-yogg-teleport-must-be-cultist = Цель телепорта должна принадлежать культу
+cult-yogg-teleport-must-be-on-station = Цель телепорта должна быть в пределах станции
+
 cult-yogg-heal-verb = [italic]Исцелить[/italic]
 cult-yogg-heal-only-cultists = Оболочка не принадлежит культу
 cult-yogg-cant-heal-this = МиГо не способен вылечить { $target }
@@ -49,3 +53,4 @@ cult-yogg-altar-used = Нерушимая конструкция теперь л
 
 cult-yogg-dropped-items = Вы избавились от грибных предметов
 cult-yogg-dropped-items-not-first = и вы избавились от грибных предметов
+

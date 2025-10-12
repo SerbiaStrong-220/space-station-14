@@ -10,6 +10,7 @@ using System.Linq;
 using System.Numerics;
 using System.Reflection;
 using System.Xml.Linq;
+using static Robust.Client.UserInterface.Controls.BaseButton;
 using FancyWindow = Content.Client.UserInterface.Controls.FancyWindow;
 
 namespace Content.Client.SS220.CultYogg.MiGo.UI;
@@ -17,6 +18,7 @@ namespace Content.Client.SS220.CultYogg.MiGo.UI;
 [GenerateTypedNameReferences]
 public sealed partial class MiGoTeleportMenu : FancyWindow
 {
+    public event Action<ButtonEventArgs>? OnTeleportToTarget;
     public MiGoTeleportMenu()
     {
         MinSize = new Vector2(250, 150);
@@ -34,6 +36,7 @@ public sealed partial class MiGoTeleportMenu : FancyWindow
                 continue;
 
             var target = new MiGoTeleportTarget(name, netEnt);
+            target.Teleport.OnPressed += (args) => { OnTeleportToTarget?.Invoke(args); };
             StoreListingsContainer.AddChild(target);
         }
     }

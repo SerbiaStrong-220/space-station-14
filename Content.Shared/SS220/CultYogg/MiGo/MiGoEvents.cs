@@ -14,14 +14,26 @@ public sealed partial class MiGoEnslaveDoAfterEvent : SimpleDoAfterEvent { }
 [Serializable, NetSerializable]
 public sealed partial class AfterMaterialize : DoAfterEvent
 {
-    public override DoAfterEvent Clone() => this;
+    public override DoAfterEvent Clone()
+    {
+        return this;
+    }
 }
 
 [Serializable, NetSerializable]
 public sealed partial class AfterDeMaterialize : DoAfterEvent
 {
-    public override DoAfterEvent Clone() => this;
+    public override DoAfterEvent Clone()
+    {
+        return this;
+    }
 }
 
 [ByRefEvent, Serializable]
 public record struct CultYoggEnslavedEvent(EntityUid? Target);
+
+[Serializable, NetSerializable]
+public sealed class MiGoTeleportToTargetMessage(NetEntity? target) : BoundUserInterfaceMessage
+{
+    public NetEntity? Target = target;
+}

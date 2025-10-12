@@ -9,12 +9,14 @@ namespace Content.Client.SS220.CultYogg.MiGo.UI;
 [GenerateTypedNameReferences]
 public sealed partial class MiGoTeleportTarget : BoxContainer
 {
+    public NetEntity? TargetNetEnt;
     public MiGoTeleportTarget(string name, NetEntity? target)
     {
         RobustXamlLoader.Load(this);
 
         if (target.HasValue)
         {
+            TargetNetEnt = target.Value;
             DollView.SetEntity(target.Value);
         }
 

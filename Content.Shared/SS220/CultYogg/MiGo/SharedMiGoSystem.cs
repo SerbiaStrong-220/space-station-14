@@ -20,7 +20,9 @@ using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
 using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Buildings;
+using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.Sacraficials;
+using Content.Shared.Station;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Verbs;
 using Content.Shared.Zombies;
@@ -57,6 +59,7 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly SharedStationSystem _station = default!;
 
     /// <summary>
     /// Allows you to resolve dead-end situations where there are no cultists left, allowing you to recruit without feeding the mushroom
@@ -87,6 +90,8 @@ public abstract class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<MiGoComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
 
         SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnGetVerb);
+
+        SubscribeLocalEvent<MiGoComponent, MiGoTeleportToTargetMessage>(OnTeleportToTarget);
     }
 
     protected virtual void OnCompInit(Entity<MiGoComponent> uid, ref ComponentStartup args)
@@ -533,7 +538,6 @@ public abstract class SharedMiGoSystem : EntitySystem
         args.Handled = true;
 
         _userInterfaceSystem.TryToggleUi(ent.Owner, MiGoUiKey.Teleport, actor.PlayerSession);
-        //Dirty(ent, ent.Comp);
     }
 
     private List<(string, NetEntity?)> GetTeleportsPoints()
@@ -542,21 +546,54 @@ public abstract class SharedMiGoSystem : EntitySystem
 
         //var queryMiGo = EntityQueryEnumerator<CultYoggComponent>();
 
-        var queryMiGo = EntityQueryEnumerator<HumanoidAppearanceComponent>();
+        var queryMiGo = EntityQueryEnumerator<HumanoidAppearanceComponent>();//ToDo_SS220 del this on release
 
         while (queryMiGo.MoveNext(out var ent, out _))
         {
-            warps.Add((MetaData(ent).EntityName, GetNetEntity(ent)));
+            warps.Add((MetaData(ent).EntityName, GetNetEntity(ent)));//Am i doing some canser move with sending netent?
         }
         return warps;
     }
 
-    private void WarpTo(EntityUid uid, EntityUid target)
+    private void OnTeleportToTarget(Entity<MiGoComponent> ent, ref MiGoTeleportToTargetMessage args)
     {
-        _adminLogger.Add(LogType.Teleport, $"MiGo {ToPrettyString(uid)} teleported to {ToPrettyString(target)}");
+        if (ent.Comp.IsPhysicalForm)
+        {
+            _popup.PopupClient(Loc.GetString("cult-yogg-teleport-must-be-in-astral"), ent.Owner);
+            return;
+        }
 
-        var xform = Transform(uid);
-        _transformSystem.SetCoordinates(uid, xform, Transform(target).Coordinates);
+        if (args.Target == null)
+            return;
+
+        if (!TryGetEntity(args.Target.Value, out var target))
+            return;
+
+        //if (!HasComp<CultYoggComponent>(target))//ToDo_SS220 uncoment this before release
+        //{
+        //    _popup.PopupClient(Loc.GetString("cult-yogg-teleport-must-be-cultist"), ent.Owner);
+        //    return;
+        //}
+
+        //do not allow MiGo teleport on other maps (not sure if i did it correctly)
+        var mapPos = _transformSystem.GetMapCoordinates(target.Value);
+        var station = _station.GetStationInMap(mapPos.MapId);
+
+        if (station == null)
+        {
+            _popup.PopupClient(Loc.GetString("cult-yogg-teleport-must-be-on-station"), ent.Owner);
+            return;
+        }
+
+        WarpTo(ent, target.Value);
+    }
+
+    private void WarpTo(EntityUid ent, EntityUid target)
+    {
+        _adminLogger.Add(LogType.Teleport, $"MiGo {ToPrettyString(ent)} teleported to {ToPrettyString(target)}");
+
+        var xform = Transform(ent);
+        _transformSystem.SetCoordinates(ent, xform, Transform(target).Coordinates);
     }
     #endregion
 }
