@@ -14,11 +14,11 @@
       - Open
       - Close
       - Toggle
-  #  - type: DeviceLinkSource
-  #  ports:
-  #  - DoorStatus
-  #  lastSignals:
-  #    DoorStatus: false
+  - type: DeviceLinkSource
+    ports:
+      - DoorStatus
+    lastSignals:
+      DoorStatus: false
   # SS220-toggle curtains ended
   - type: Occluder
   - type: AnimationPlayer
