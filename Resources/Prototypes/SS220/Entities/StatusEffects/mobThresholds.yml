@@ -17,8 +17,8 @@
   - type: MobThresholdsModifierStatusEffect
     modifiers:
       Critical:
-        multiplier: 1.5
+        multiplier: 4
         flat: -20
       Dead:
-        multiplier: 2
+        multiplier: 1
         flat: 45

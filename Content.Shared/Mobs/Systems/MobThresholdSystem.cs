@@ -557,40 +557,46 @@ public struct RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsComponent> 
 
         // Check that the state value is greater than the previous state and less than the next state.
         // For example, Alive < Critical < Dead
-        var orderedPairs = thresholds.OrderBy(x => x.Key).Select(x => (x.Key, x.Value)).ToList();
-        var i = 0;
-        while (i < orderedPairs.Count)
+        var orderedDict = thresholds.OrderBy(x => x.Key).ToDictionary();
+        var orderedKeys = orderedDict.Keys.ToList();
+        var orderedValues = orderedDict.Values.ToList();
+
+        var valueChanged = true;
+        while (valueChanged)
         {
-            if (i < 0)
-                i = 0;
+            valueChanged = false;
+            var sanitizedValues = new List<FixedPoint2>(orderedValues.Count);
 
-            var (state, value) = orderedPairs[i];
-            if (i != 0)
+            FixedPoint2? prev = null;
+            foreach (var next in orderedValues)
             {
-                var prevValue = orderedPairs[i - 1].Value;
-                if (value <= prevValue)
+                if (prev is null)
                 {
-                    orderedPairs[i] = (state, prevValue + FixedPoint2.Epsilon);
-                    i--;
+                    prev = next;
                     continue;
                 }
-            }
 
-            if (i != orderedPairs.Count - 1)
-            {
-                var nextValue = orderedPairs[i + 1].Value;
-                if (value >= nextValue)
+                if (prev <= next)
                 {
-                    orderedPairs[i] = (state, nextValue - FixedPoint2.Epsilon);
-                    i--;
-                    continue;
+                    sanitizedValues.Add(next - FixedPoint2.Epsilon);
+                    valueChanged = true;
                 }
+                else
+                    sanitizedValues.Add(prev.Value);
+
+                prev = next;
             }
 
-            i++;
+            if (prev is not null)
+                sanitizedValues.Add(prev.Value);
+
+            orderedValues = sanitizedValues;
         }
 
-        _cachedResult = new SortedDictionary<FixedPoint2, MobState>(orderedPairs.ToDictionary(x => x.Value, x => x.Key));
+        _cachedResult = [];
+        for (var i = 0; i < orderedKeys.Count; i++)
+            _cachedResult.Add(orderedValues[i], orderedKeys[i]);
+
         return new SortedDictionary<FixedPoint2, MobState>(_cachedResult);
     }
 }
