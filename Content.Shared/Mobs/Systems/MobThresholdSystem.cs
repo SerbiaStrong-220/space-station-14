@@ -576,7 +576,7 @@ public struct RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsComponent> 
                     continue;
                 }
 
-                if (prev <= next)
+                if (prev >= next)
                 {
                     sanitizedValues.Add(next - FixedPoint2.Epsilon);
                     valueChanged = true;
