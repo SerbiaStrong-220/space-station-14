@@ -57,6 +57,11 @@
   equipment:
     eyes: ClothingEyesMonocle
 
+- type: loadout
+  id: AdministrativeVisor
+  equipment:
+    eyes: ClothingEyesHudCommand
+
 # Outerclothing
 - type: loadout
   id: MagistrateRobesJudge

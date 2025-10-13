@@ -43,6 +43,7 @@
   loadouts:
   - GlassesCommand
   - MagistrateMonocle
+  - AdministrativeVisor
 
 - type: loadoutGroup
   id: MagistrateJumpsuit
@@ -121,6 +122,7 @@
   - GlassesJensen
   - Sunglasses
   - GlassesujutsuShlepa
+  - AdministrativeVisor
 
 - type: loadoutGroup
   id: IAABackpacks
