@@ -9,10 +9,10 @@ namespace Content.Shared.SS220.SpeciesWearRestriction;
 public sealed partial class SpeciesWearRestrictionComponent : Component
 {
     [DataField]
-    public List<ProtoId<SpeciesPrototype>> AllowedSpecies = new();
+    public HashSet<ProtoId<SpeciesPrototype>> AllowedSpecies = new();
 
     [DataField]
-    public List<ProtoId<SpeciesPrototype>> RestrictedSpecies = new();
+    public HashSet<ProtoId<SpeciesPrototype>> RestrictedSpecies = new();
 
     [DataField]
     public LocId FailedEquipPopup = string.Empty;

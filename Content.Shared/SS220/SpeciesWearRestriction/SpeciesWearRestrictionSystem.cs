@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.SpeciesWearRestriction;
 public sealed class SpeciesWearRestrictionSystem : EntitySystem
 {
     // ReSharper disable once MemberCanBePrivate.Global
-    // remove when use in another system
+    // remove this resharper comment when use in another system
     public const SlotFlags ClothingSlots =
         SlotFlags.INNERCLOTHING | SlotFlags.OUTERCLOTHING | SlotFlags.MASK |
         SlotFlags.HEAD | SlotFlags.FEET | SlotFlags.LEGS | SlotFlags.GLOVES |
@@ -26,7 +26,6 @@ public sealed class SpeciesWearRestrictionSystem : EntitySystem
         if (!TryComp<HumanoidAppearanceComponent>(args.EquipTarget, out var huAp))
         {
             TrySetReason(ent, ref args);
-            args.Cancel();
             return;
         }
 
@@ -35,14 +34,12 @@ public sealed class SpeciesWearRestrictionSystem : EntitySystem
         if (ent.Comp.RestrictedSpecies.Count > 0 && ent.Comp.RestrictedSpecies.Contains(species))
         {
             TrySetReason(ent, ref args);
-            args.Cancel();
             return;
         }
 
         if (ent.Comp.AllowedSpecies.Count > 0 && !ent.Comp.AllowedSpecies.Contains(species))
         {
             TrySetReason(ent, ref args);
-            args.Cancel();
         }
     }
 
@@ -50,5 +47,7 @@ public sealed class SpeciesWearRestrictionSystem : EntitySystem
     {
         if (!string.IsNullOrEmpty(ent.Comp.FailedEquipPopup))
             args.Reason = Loc.GetString(ent.Comp.FailedEquipPopup);
+
+        args.Cancel();
     }
 }
