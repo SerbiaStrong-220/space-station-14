@@ -73,10 +73,7 @@ public sealed class MobThresholdModifiersTest
         {
             var result = value;
             if (statusEffectComp.Modifiers.TryGetValue(state, out var modifier))
-            {
-                result *= modifier.Multiplier;
-                result += modifier.Flat;
-            }
+                modifier.Apply(ref result);
 
             targetThresholds[state] = result;
         }
@@ -90,11 +87,13 @@ public sealed class MobThresholdModifiersTest
 
         var current = mobThresholds.Thresholds.ToDictionary(x => x.Value, x => x.Key).OrderBy(x => x.Key).ToDictionary();
         var target = targetThresholds.OrderBy(x => x.Key).ToDictionary();
+
+        // Check if effect applied
         Assert.That(current, Is.EqualTo(target));
 
         await pair.RunSeconds(2);
 
-        // After status effect ended
+        // Check that after removing modifiers we have base thresholds
         Assert.That(mobThresholds.Thresholds, Is.EqualTo(mobThresholds.BaseThresholds));
 
         await pair.CleanReturnAsync();

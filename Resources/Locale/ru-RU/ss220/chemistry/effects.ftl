@@ -5,12 +5,12 @@ reagent-effect-guidebook-mob-thresholds-modifier =
                     [one] секунду
                     [few] секунды
                     *[other] секунд
-                } (складывается) вызывает именение порогов состояний сущности: { $stateschanges }
+                } (складывается) вызывает изменение порогов состояний сущности: { $stateschanges }
             *[true] На { $duration } { $duration ->
                     [one] секунду
                     [few] секунды
                     *[other] секунд
-                } вызывает именение порогов состояний сущности: { $stateschanges }
+                } вызывает изменение порогов состояний сущности: { $stateschanges }
     }
 reagent-effect-guidebook-mob-thresholds-modifier-line = { $mobstate }: { $modifierType ->
         [multiplier] в { $multiplier } { $multiplier ->

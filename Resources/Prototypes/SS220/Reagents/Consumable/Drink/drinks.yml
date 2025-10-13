@@ -179,7 +179,7 @@
   metabolisms:
     Drink:
       effects:
-      - !type:MobThresholdsModifier
+      - !type:MobThresholdsChange
         statusEffectId: MobThresholdsModifierStatusEffectExample
         duration: 5
         refresh: false

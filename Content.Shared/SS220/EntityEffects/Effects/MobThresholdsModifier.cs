@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.EntityEffects.Effects;
 
-public sealed partial class MobThresholdsModifier : EntityEffect
+public sealed partial class MobThresholdsChange : EntityEffect
 {
     /// <summary>
     /// Id of the status effect entity with <see cref="MobThresholdsModifierStatusEffectComponent"/>.

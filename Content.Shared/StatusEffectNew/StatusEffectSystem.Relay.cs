@@ -17,7 +17,7 @@ public sealed partial class StatusEffectsSystem
         SubscribeLocalEvent<StatusEffectContainerComponent, RejuvenateEvent>(RelayStatusEffectEvent);
 
         SubscribeLocalEvent<StatusEffectContainerComponent, RefreshMovementSpeedModifiersEvent>(RelayStatusEffectEvent);
-        SubscribeLocalEvent<StatusEffectContainerComponent, RefreshMobThresholdsModifiersEvent>(RelayStatusEffectEvent); // SS220 modifiable_mob_thresholds
+        SubscribeLocalEvent<StatusEffectContainerComponent, RefreshMobThresholdsModifiersEvent>(RefRelayStatusEffectEvent); // SS220 modifiable_mob_thresholds
         SubscribeLocalEvent<StatusEffectContainerComponent, UpdateCanMoveEvent>(RelayStatusEffectEvent);
 
         SubscribeLocalEvent<StatusEffectContainerComponent, RefreshFrictionModifiersEvent>(RefRelayStatusEffectEvent);

@@ -4,6 +4,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.StatusEffectNew;
 
 namespace Content.Shared.SS220.Chemistry.MobThresholdsModifierStatusEffect;
+
 public sealed class MobThresholdsModifierStatusEffectSystem : EntitySystem
 {
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
@@ -40,7 +41,7 @@ public sealed class MobThresholdsModifierStatusEffectSystem : EntitySystem
     {
         foreach (var (state, modifier) in entity.Comp.Modifiers)
         {
-            args.Args.ApplyModifier(state, modifier.Flat, modifier.Multiplier);
+            args.Args.ApplyModifier(state, modifier);
         }
     }
 }

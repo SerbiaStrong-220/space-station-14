@@ -1,12 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Events;
 using Robust.Shared.GameStates;
-using Robust.Shared.Network.Messages;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Mobs.Systems;
 
@@ -329,6 +329,27 @@ public sealed class MobThresholdSystem : EntitySystem
         VerifyThresholds(uid, component);
     }
 
+    // SS220 modifiable_mob_thresholds begin
+    public void RefreshModifiers(Entity<MobThresholdsComponent> ent)
+    {
+        var refreshEv = new RefreshMobThresholdsModifiersEvent(ent);
+        RaiseLocalEvent(ent, ref refreshEv);
+
+        // Done with saving the dictionary instance in the component for easy control via VV
+        ent.Comp.Thresholds.Clear();
+        foreach (var (key, value) in refreshEv.CalculateThresholds())
+            ent.Comp.Thresholds.Add(key, value);
+
+        var modifiedEv = new MobThresholdsRefreshedEvent(ent);
+        RaiseLocalEvent(ent, ref modifiedEv, broadcast: true);
+
+        if (!TryComp<MobStateComponent>(ent, out var mobState) || !TryComp<DamageableComponent>(ent, out var damageable))
+            return;
+
+        CheckThresholds(ent, mobState, ent, damageable);
+        UpdateAllEffects((ent, ent, mobState, damageable), mobState.CurrentState);
+    }
+    // SS220 modifiable_mob_thresholds end
     #endregion
 
     #region Private Implementation
@@ -479,28 +500,6 @@ public sealed class MobThresholdSystem : EntitySystem
     {
         UpdateAllEffects((ent, ent, null, null), args.NewMobState);
     }
-
-    // SS220 modifiable_mob_thresholds begin
-    public void RefreshModifiers(Entity<MobThresholdsComponent> ent)
-    {
-        var refreshEv = new RefreshMobThresholdsModifiersEvent(ent);
-        RaiseLocalEvent(ent, refreshEv);
-
-        // Сделано с сохранением экземпляра словаря в компоненте для удобства контроля через VV
-        ent.Comp.Thresholds.Clear();
-        foreach (var (key, value) in refreshEv.CalculateThresholds())
-            ent.Comp.Thresholds.Add(key, value);
-
-        var modifiedEv = new MobThresholdsRefreshedEvent(ent);
-        RaiseLocalEvent(ent, ref modifiedEv, broadcast: true);
-
-        if (!TryComp<MobStateComponent>(ent, out var mobState) || !TryComp<DamageableComponent>(ent, out var damageable))
-            return;
-
-        CheckThresholds(ent, mobState, ent, damageable);
-        UpdateAllEffects((ent, ent, mobState, damageable), mobState.CurrentState);
-    }
-    // SS220 modifiable_mob_thresholds end
     #endregion
 }
 
@@ -519,36 +518,20 @@ public readonly record struct MobThresholdChecked(EntityUid Target, MobStateComp
 /// <summary>
 /// Event that triggers when collecting info about mob threshold modifiers
 /// </summary>
-public sealed class RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsComponent> entity) : EntityEventArgs
+[ByRefEvent]
+public struct RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsComponent> entity)
 {
     public readonly Entity<MobThresholdsComponent> Entity = entity;
 
-    private readonly Dictionary<MobState, Modifier> _modifiers = [];
+    private readonly Dictionary<MobState, MobThresholdsModifier> _modifiers = [];
     private SortedDictionary<FixedPoint2, MobState>? _cachedResult = null;
 
-    public void ApplyMultiplier(MobState state, FixedPoint2 value)
+    public void ApplyModifier(MobState state, MobThresholdsModifier modifier)
     {
-        ApplyModifier(state, 0, value);
-    }
+        if (_modifiers.TryGetValue(state, out var exist))
+            modifier += exist;
 
-    public void ApplyFlat(MobState state, FixedPoint2 value)
-    {
-        ApplyModifier(state, value, 1);
-    }
-
-    public void ApplyModifier(MobState state, FixedPoint2 flat, FixedPoint2 multiplier)
-    {
-        if (!_modifiers.TryGetValue(state, out var modifier))
-        {
-            modifier = new Modifier(flat, multiplier);
-            _modifiers[state] = modifier;
-        }
-        else
-        {
-            modifier.Flat += flat;
-            modifier.Multiplier *= multiplier;
-        }
-
+        _modifiers[state] = modifier;
         _cachedResult = null;
     }
 
@@ -567,16 +550,13 @@ public sealed class RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsCompo
                 continue;
 
             if (_modifiers.TryGetValue(state, out var modifier))
-            {
-                result *= modifier.Multiplier;
-                result += modifier.Flat;
-            }
+                modifier.Apply(ref result);
 
             thresholds[state] = result;
         }
 
-        // Проверка того, чтобы порог стейта был больше порога предыдущего стейта и меньше порога следующего стейта.
-        // Например Alive < Critical < Dead
+        // Check that the state value is greater than the previous state and less than the next state.
+        // For example, Alive < Critical < Dead
         var orderedPairs = thresholds.OrderBy(x => x.Key).Select(x => (x.Key, x.Value)).ToList();
         var i = 0;
         while (i < orderedPairs.Count)
@@ -590,7 +570,7 @@ public sealed class RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsCompo
                 var prevValue = orderedPairs[i - 1].Value;
                 if (value <= prevValue)
                 {
-                    orderedPairs[i] = (state, prevValue + 0.01);
+                    orderedPairs[i] = (state, prevValue + FixedPoint2.Epsilon);
                     i--;
                     continue;
                 }
@@ -601,7 +581,7 @@ public sealed class RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsCompo
                 var nextValue = orderedPairs[i + 1].Value;
                 if (value >= nextValue)
                 {
-                    orderedPairs[i] = (state, nextValue - 0.01);
+                    orderedPairs[i] = (state, nextValue - FixedPoint2.Epsilon);
                     i--;
                     continue;
                 }
@@ -613,11 +593,52 @@ public sealed class RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsCompo
         _cachedResult = new SortedDictionary<FixedPoint2, MobState>(orderedPairs.ToDictionary(x => x.Value, x => x.Key));
         return new SortedDictionary<FixedPoint2, MobState>(_cachedResult);
     }
+}
 
-    private sealed class Modifier(FixedPoint2 flat, FixedPoint2 multiplier)
+[Serializable, NetSerializable, DataDefinition]
+public partial struct MobThresholdsModifier()
+{
+    [DataField]
+    public FixedPoint2 Flat = 0f;
+
+    [DataField]
+    public FixedPoint2 Multiplier = 1f;
+
+    public MobThresholdsModifier(FixedPoint2 flat, FixedPoint2 multiplier) : this()
     {
-        public FixedPoint2 Flat = flat;
-        public FixedPoint2 Multiplier = multiplier;
+        Flat = flat;
+        Multiplier = multiplier;
+    }
+
+    public static implicit operator MobThresholdsModifier((FixedPoint2 Flat, FixedPoint2 Multiplier) pair) => new(pair.Flat, pair.Multiplier);
+    public static implicit operator MobThresholdsModifier((float Flat, float Multiplier) pair) => new(pair.Flat, pair.Multiplier);
+    public static implicit operator MobThresholdsModifier((double Flat, double Multiplier) pair) => new(pair.Flat, pair.Multiplier);
+    public static implicit operator MobThresholdsModifier((int Flat, int Multiplier) pair) => new(pair.Flat, pair.Multiplier);
+
+    public static MobThresholdsModifier operator +(MobThresholdsModifier left, MobThresholdsModifier right)
+    {
+        left.Flat += right.Flat;
+        left.Multiplier *= right.Multiplier;
+        return left;
+    }
+
+    public static MobThresholdsModifier operator -(MobThresholdsModifier left, MobThresholdsModifier right)
+    {
+        left.Flat -= right.Flat;
+        left.Multiplier /= right.Multiplier;
+        return left;
+    }
+
+    public readonly FixedPoint2 Apply(FixedPoint2 value)
+    {
+        Apply(ref value);
+        return value;
+    }
+
+    public readonly void Apply(ref FixedPoint2 value)
+    {
+        value *= Multiplier;
+        value += Flat;
     }
 }
 
