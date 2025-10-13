@@ -122,6 +122,13 @@
     shape: # Yes, this is cursed, but it breaks otherwise, dont question it.
     - 0,0,0,1
   - type: Storage
+    # SS220 cigarette pack fix start
+    whitelist:
+      tags:
+      - Cigarette
+      - Lighter
+      - Cigar
+    # SS220 cigarette pack fix end
     grid:
     - 0,0,4,1
   - type: ItemCounter
