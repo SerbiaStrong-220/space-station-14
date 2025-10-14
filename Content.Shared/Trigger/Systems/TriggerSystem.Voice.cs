@@ -30,6 +30,11 @@ public sealed partial class TriggerSystem
         if (!args.IsInDetailsRange || !component.ShowExamine)
             return;
 
+        // ss220 add visibility only to recorder start
+        if (component is { IsVisibleOnlyToRecorder: true, Recorder: not null } && component.Recorder.Value != args.Examiner)
+            return;
+        // ss220 add visibility only to recorder end
+
         if (component.InspectUninitializedLoc != null && string.IsNullOrWhiteSpace(component.KeyPhrase))
         {
             args.PushText(Loc.GetString(component.InspectUninitializedLoc));
@@ -145,6 +150,9 @@ public sealed partial class TriggerSystem
     {
         ent.Comp.KeyPhrase = message;
         ent.Comp.IsRecording = false;
+        //ss220 add visibility only to recorder start
+        ent.Comp.Recorder = source;
+        //ss220 add visibility only to recorder end
         Dirty(ent);
 
         _adminLogger.Add(LogType.Trigger, LogImpact.Low,

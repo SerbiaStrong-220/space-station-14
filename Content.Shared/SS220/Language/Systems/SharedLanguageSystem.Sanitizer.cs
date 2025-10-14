@@ -5,6 +5,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Content.Shared.SS220.Language.Systems;
@@ -26,10 +27,13 @@ public abstract partial class SharedLanguageSystem
         if (_cachedMessages.TryGetValue(cacheKey, out var cahcedLanguageMessage))
             return cahcedLanguageMessage;
 
-        List<LanguageNode> nodes = new();
+        List<LanguageNode> nodes = [];
         var defaultLanguage = GetSelectedLanguage(source);
-        if (defaultLanguage == null && !_language.TryGetLanguageById(UniversalLanguage, out defaultLanguage))
-            return new LanguageMessage(nodes, message, this);
+        if (defaultLanguage is null && !_language.TryGetLanguageById(UniversalLanguage, out defaultLanguage))
+        {
+            Log.Fatal($"\"{UniversalLanguage}\" is invalid universal language id!");
+            return LanguageMessage.Empty;
+        }
 
         var languageStrings = SplitMessageByLanguages(source, message, defaultLanguage);
         foreach (var (inStringMessage, language) in languageStrings)
@@ -55,11 +59,8 @@ public abstract partial class SharedLanguageSystem
             avalibleLanguageKeys = "knowall";
         else
         {
-            foreach (var definition in languageComponent.AvailableLanguages)
+            foreach (var definition in languageComponent.SpokenLanguages)
             {
-                if (!definition.CanSpeak)
-                    continue;
-
                 if (_language.TryGetLanguageById(definition.Id, out var language))
                 {
                     if (avalibleLanguageKeys.Length > 0)
@@ -228,6 +229,8 @@ public sealed partial class LanguageMessage
 
     private readonly SharedLanguageSystem _languageSystem;
 
+    public static LanguageMessage Empty => new([], "");
+
     public LanguageMessage(List<LanguageNode> nodes, string originalMessage, SharedLanguageSystem? languageSystem = null)
     {
         Nodes = nodes;
@@ -238,44 +241,45 @@ public sealed partial class LanguageMessage
     /// <summary>
     /// Gets a united message from <see cref="Nodes"/>
     /// </summary>
-    public string GetMessage(EntityUid? listener, bool sanitize, bool colored = true)
+    public string GetMessage(EntityUid? listener, bool sanitize, bool colored = true, bool allowEmpty = false)
     {
-        var message = "";
         if (Nodes.Count <= 0)
             return OriginalMessage;
 
+        var sb = new StringBuilder();
+        var messages = new List<string>();
         for (var i = 0; i < Nodes.Count; i++)
         {
             var node = Nodes[i];
+            if (node.Empty && !allowEmpty)
+                continue;
+
             var scrambled = sanitize && listener != null && !_languageSystem.CanUnderstand(listener.Value, node.Language.ID);
-            if (i == 0)
-                message += node.GetMessage(scrambled, colored);
-            else
-                message += " " + node.GetMessage(scrambled, colored);
+            messages.Add(node.GetMessage(scrambled, colored));
         }
 
-        return message;
+        sb.AppendJoin(' ', messages);
+        return sb.ToString();
     }
 
     /// <summary>
     /// Gets a united message from <see cref="Nodes"/> with language keys
     /// </summary>
-    public string GetMessageWithLanguageKeys(bool withDefault = true)
+    public string GetMessageWithLanguageKeys(bool allowEmpty = false)
     {
-        string messageWithLanguageTags = "";
+        var sb = new StringBuilder();
+        var messages = new List<string>();
         for (var i = 0; i < Nodes.Count; i++)
         {
-            if (i == 0)
-            {
-                if (withDefault)
-                    messageWithLanguageTags += Nodes[i].GetMessageWithKey();
-                else
-                    messageWithLanguageTags += Nodes[i].GetMessage(false, false);
-            }
-            else
-                messageWithLanguageTags += " " + Nodes[i].GetMessageWithKey();
+            var node = Nodes[i];
+            if (node.Empty && !allowEmpty)
+                continue;
+
+            messages.Add(node.GetMessageWithKey());
         }
-        return messageWithLanguageTags;
+
+        sb.AppendJoin(' ', messages);
+        return sb.ToString();
     }
 
     /// <summary>
@@ -330,6 +334,7 @@ public sealed partial class LanguageNode
     private string _message = string.Empty;
 
     public string ScrambledMessage = string.Empty;
+    public bool Empty => string.IsNullOrEmpty(Message);
 
     private readonly SharedLanguageSystem _languageSystem;
 

@@ -42,6 +42,12 @@ public sealed partial class IngestionSystem
         var ev = new GetUtensilsEvent();
         RaiseLocalEvent(target, ref ev);
 
+        // SS220-Ingestion-popup-fix begin
+        // Target doesn't require to use Utensil here, get out
+        if (ev.RequiredTypes == UtensilType.None)
+            return false;
+        // SS220-Ingestion-popup-fix end
+
         //Prevents food usage with a wrong utensil
         if ((ev.Types & utensil.Comp.Types) == 0)
         {

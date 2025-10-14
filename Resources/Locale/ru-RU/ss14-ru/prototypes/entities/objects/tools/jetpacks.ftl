@@ -28,9 +28,11 @@ ent-JetpackMini = мини джетпак
 ent-JetpackMiniFilled = мини джетпак
     .suffix = Полный
     .desc = { ent-JetpackMini.desc }
+# SS220-fix-translation begin	
 ent-JetpackSecurity = джетпак охраны
     .suffix = Пустой
-    .desc = { ent-BaseJetpack.desc }
+    .desc = { ent-JetpackMini.desc }
+# SS220-fix-translation end
 ent-JetpackSecurityFilled = джетпак охраны
     .suffix = Полный
     .desc = { ent-JetpackSecurity.desc }

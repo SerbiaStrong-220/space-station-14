@@ -61,6 +61,7 @@
     speechSounds: Bass
   # SS220-Add-Languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
     - id: Eldwarf

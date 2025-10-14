@@ -14,7 +14,7 @@
                 <graphics:StyleBoxFlat BackgroundColor="#1D1A28"/>
             </PanelContainer.PanelOverride>
 
-            <!-- Character photo with сriminal status over it -->
+            <!-- Character photo with criminal status over it -->
             <!-- Control is used so shit can be layered -->
             <ui:CharacterVisualisation Margin="10 10" Name="CharVis" HorizontalExpand="True" VerticalExpand="True" HorizontalAlignment="Center"/>
 
