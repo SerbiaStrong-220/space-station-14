@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ SimpleSpaceMobBase, FlyingMobBase ]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobPassiveCollision ] #SS220 PR: Tweak Carp Damage
   id: BaseMobDragon
   suffix: ""
   name: space dragon
