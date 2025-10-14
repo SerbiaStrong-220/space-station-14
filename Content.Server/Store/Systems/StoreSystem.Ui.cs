@@ -33,7 +33,7 @@ public sealed partial class StoreSystem
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     //ss220 add additional info for round start
-    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
     //ss220 add additional info for round end
 
     private void InitializeUi()

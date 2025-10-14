@@ -15,7 +15,7 @@ public sealed partial class ResearchSystem
     [Dependency] private readonly LatheSystem _lathe = default!; //SS220-lathe-announcement-fix
     [Dependency] private readonly IPrototypeManager _proto = default!; //SS220-lathe-announcement-fix
     //ss220 add additional info for round start
-    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
     //ss220 add additional info for round end
 
     private void InitializeServer()

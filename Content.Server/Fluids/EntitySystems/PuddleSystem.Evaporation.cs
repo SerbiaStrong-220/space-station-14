@@ -10,7 +10,7 @@ namespace Content.Server.Fluids.EntitySystems;
 public sealed partial class PuddleSystem
 {
     //ss220 add additional info for round start
-    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     //ss220 add additional info for round end
 

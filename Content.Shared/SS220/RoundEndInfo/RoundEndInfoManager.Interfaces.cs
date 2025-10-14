@@ -63,7 +63,7 @@ public sealed class AntagPurchaseInfo : IRoundEndInfo
         {
             data = new RoundEndAntagPurchaseData
             {
-                Name = mindComp.CharacterName ?? Loc.GetString("game-ticker-unknown-role")
+                Name = mindComp.CharacterName ?? Loc.GetString("game-ticker-unknown-role"),
             };
 
             _purchases[userMind] = data;

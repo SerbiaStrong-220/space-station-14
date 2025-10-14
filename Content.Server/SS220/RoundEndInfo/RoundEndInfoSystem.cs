@@ -13,7 +13,7 @@ namespace Content.Server.SS220.RoundEndInfo;
 /// </summary>
 public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
 {
-    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
 
     public override void Initialize()
     {

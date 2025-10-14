@@ -2,7 +2,7 @@ using Content.Shared.SS220.RoundEndInfo;
 
 namespace Content.Client.SS220.RoundEndInfo;
 
-public sealed class RoundEndInfoManager : ISharedRoundEndInfoManager
+public sealed class RoundEndInfoManager : IRoundEndInfoManager
 {
     /// <summary>
     /// Must always return null

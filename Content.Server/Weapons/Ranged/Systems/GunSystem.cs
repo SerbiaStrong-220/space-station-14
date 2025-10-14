@@ -39,7 +39,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     //ss220 add additional info for round start
-    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     //ss220 add additional info for round end
     [Dependency] private readonly ShuttleNavInfoSystem _shuttleNavInfo = default!; // SS220 Add projectiles & hitscan on shuttle nav

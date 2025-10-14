@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.RoundEndInfo;
 /// Shared realization server manager
 /// On a client all method's must return null or do nothing.
 /// </summary>
-public interface ISharedRoundEndInfoManager
+public interface IRoundEndInfoManager
 {
     public T EnsureInfo<T>() where T : class, IRoundEndInfo, new();
     public bool TryGetInfo<T>(out T info) where T : IRoundEndInfo;

@@ -66,7 +66,7 @@ namespace Content.Client.IoC
             collection.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
             collection.Register<DocumentParsingManager>();
             collection.Register<DiscordPlayerInfoManager>(); //SS220 discord user info
-            collection.Register<ISharedRoundEndInfoManager, RoundEndInfoManager>(); //ss220 add additional info for round
+            collection.Register<IRoundEndInfoManager, RoundEndInfoManager>(); //ss220 add additional info for round
             collection.Register<ContentReplayPlaybackManager>();
             collection.Register<ISharedPlaytimeManager, JobRequirementsManager>();
             collection.Register<SpeciesRequirementsManager>(); // SS220 Species bans

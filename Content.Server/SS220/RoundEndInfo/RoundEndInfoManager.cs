@@ -6,7 +6,7 @@ namespace Content.Server.SS220.RoundEndInfo;
 /// Manages all IRoundEndInfo data used for compiling round-end summaries.
 /// Responsible for creating, storing, retrieving, and clearing instances of various info providers.
 /// </summary>
-public sealed class RoundEndInfoManager : ISharedRoundEndInfoManager
+public sealed class RoundEndInfoManager : IRoundEndInfoManager
 {
     private readonly Dictionary<Type, IRoundEndInfo> _infos = new();
 

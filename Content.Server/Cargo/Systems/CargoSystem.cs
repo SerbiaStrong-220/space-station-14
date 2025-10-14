@@ -45,7 +45,7 @@ public sealed partial class CargoSystem : SharedCargoSystem
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     //ss220 add additional info for round start
-    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
     //ss220 add additional info for round end
 
     private EntityQuery<TransformComponent> _xformQuery;

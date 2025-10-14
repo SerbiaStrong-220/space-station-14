@@ -20,7 +20,7 @@ public sealed class DeathgaspSystem: EntitySystem
     [Dependency] private readonly EuiManager _euiManager = null!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     //ss220 add additional info for round start
-    [Dependency] private readonly ISharedRoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
     //ss220 add additional info for round end
 
     public override void Initialize()
