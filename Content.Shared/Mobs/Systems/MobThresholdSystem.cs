@@ -500,6 +500,7 @@ public sealed class MobThresholdSystem : EntitySystem
     {
         UpdateAllEffects((ent, ent, null, null), args.NewMobState);
     }
+
     #endregion
 }
 
@@ -555,7 +556,7 @@ public struct RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsComponent> 
             thresholds[state] = result;
         }
 
-        // Check that the state value is greater than the previous state and less than the next state.
+        // Ensure that the state value is greater than the previous state and less than the next state.
         // For example, Alive < Critical < Dead
         var orderedDict = thresholds.OrderBy(x => x.Key).ToDictionary();
         var orderedKeys = orderedDict.Keys.ToList();
