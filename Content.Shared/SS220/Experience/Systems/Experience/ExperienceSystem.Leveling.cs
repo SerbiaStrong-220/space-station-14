@@ -156,6 +156,9 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
         }
 
+        if (!TryAddSkillToSkillEntity(entity, ExperienceComponent.ContainerId, skillPrototype))
+            return;
+
         // we save meta level progress of sublevel
         info.SkillSublevel = Math.Max(StartSubLevelIndex, info.SkillLevel - skillPrototype.LevelInfo.MaximumSublevel);
         info.SkillStudied = true;
@@ -163,6 +166,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         DirtyField(entity.AsNullable(), nameof(ExperienceComponent.Skills));
 
         var ev = new SkillLevelGainedEvent(skillTree.ID, skillPrototype);
+
         RaiseLocalEvent(entity, ref ev);
     }
 

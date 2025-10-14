@@ -40,10 +40,27 @@ public sealed class SkillTreePrototype : IPrototype
     public List<ProtoId<SkillPrototype>> SkillTree = new();
 
     [DataField(required: true)]
-    public LocId SkillGroupId;
+    public LocId SkillTreeName;
+
+    [DataField(required: true)]
+    public ProtoId<SkillTreeGroupPrototype> SkillGroupId;
 
     [DataField]
     public bool CanBeShownOnInit = true;
+}
+
+/// <summary>
+/// Just QoDevEx thing
+/// </summary>
+[Prototype]
+public sealed class SkillTreeGroupPrototype : IPrototype
+{
+    [ViewVariables]
+    [IdDataField]
+    public string ID { get; private set; } = default!;
+
+    [DataField(required: true)]
+    public LocId GroupName;
 }
 
 [Prototype]
@@ -104,7 +121,7 @@ public partial struct SkillLevelDescription
     public LocId SkillDescription;
 
     [DataField]
-    public LocId? SkillHoverDescription = null;
+    public LocId? SkillHoverOverrideDescription = null;
 
     [DataField]
     public ResPath? SkillIconResPath = null;

@@ -31,6 +31,31 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     #region TryGet methods
 
+    public bool TryGetExperienceEntityFromSkillEntity(Entity<SkillComponent?> entity, [NotNullWhen(true)] out Entity<ExperienceComponent>? experienceEntity)
+    {
+        experienceEntity = null;
+
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
+            return false;
+
+        if (!_container.IsEntityInContainer(entity))
+        {
+            Log.Error($"Got entity {ToPrettyString(entity)} with {nameof(SkillComponent)} but not in container");
+            return false;
+        }
+
+        var parentUid = Transform(entity).ParentUid;
+
+        if (!TryComp<ExperienceComponent>(parentUid, out var experienceComponent))
+        {
+            Log.Error($"Got entity {ToPrettyString(entity)} in container which entity owner don't have {nameof(ExperienceComponent)}");
+            return false;
+        }
+
+        experienceEntity = (parentUid, experienceComponent);
+        return true;
+    }
+
     public bool TryGetSkillTreeLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level)
     {
         return TryGetSkillTreeLevels(entity, skillTree, out level, out _);

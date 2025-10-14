@@ -16,7 +16,16 @@
                 <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
             </PanelContainer.PanelOverride>
         </PanelContainer>
-        <!-- Shitty code here -->
-        <!-- Hidable Confirm button for leveling up -->
+    <ScrollContainer>
+        <BoxContainer Orientation="Vertical">
+            <BoxContainer Name="knowledgesContainer">
+                <!-- Added by code -->
+            </BoxContainer>
+            <BoxContainer Name="ExperienceTreeGroupsContainer">
+                <!-- Added by code -->
+            </BoxContainer>
+            <Button Name="SubmitButton" Text="+SuBmIt+"/>
+        </BoxContainer>
+    </ScrollContainer>
     </Control>
 </controls:FancyWindow>

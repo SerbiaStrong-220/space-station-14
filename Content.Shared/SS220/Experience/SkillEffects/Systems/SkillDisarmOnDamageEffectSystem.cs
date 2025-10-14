@@ -3,6 +3,8 @@
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Popups;
 using Content.Shared.SS220.Experience.SkillEffects.Components;
 using Content.Shared.SS220.Experience.Systems;
 using Robust.Shared.Network;
@@ -13,6 +15,7 @@ namespace Content.Shared.SS220.Experience.SkillEffects.Systems;
 public sealed class SkillDisarmOnDamageEffectSystem : EntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
+    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly INetManager _netManager = default!;
@@ -35,17 +38,22 @@ public sealed class SkillDisarmOnDamageEffectSystem : EntitySystem
         if (args.DamageDelta is null)
             return;
 
-        if (DamageSpecifier.GetNegative(args.DamageDelta).GetTotal() < entity.Comp.DamageThreshold)
+        if (DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() < entity.Comp.DamageThreshold)
             return;
 
         if (!_random.Prob(entity.Comp.DisarmChance))
             return;
 
-        foreach (var hand in _hands.EnumerateHands(entity.Owner))
+        if (!_experience.TryGetExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
+            return;
+
+        foreach (var hand in _hands.EnumerateHands(experienceEntity.Value.Owner))
         {
-            _hands.TryDrop(entity.Owner, hand);
+            _hands.TryDrop(experienceEntity.Value.Owner, hand);
         }
 
-        _experience.AddToAdminLogs(entity, "dropped all items in hand", LogImpact.High);
+        _popupSystem.PopupEntity(Loc.GetString(entity.Comp.OnDropPopup, ("target", Identity.Entity(experienceEntity.Value.Owner, EntityManager))), experienceEntity.Value.Owner, PopupType.MediumCaution);
+
+        _experience.AddToAdminLogs(entity, "dropped all items in hands", LogImpact.High);
     }
 }

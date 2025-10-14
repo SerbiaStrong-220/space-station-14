@@ -1,13 +1,15 @@
 - type: skillTree
   id: Piloting
-  skillGroupId: skill-group-general
+  skillGroupId: SkillGroupGeneral
+  skillTreeName: piloting-skill-tree-name
   skillTree:
   - PilotingBase
   - PilotingCombat
 
 - type: skillTree
   id: CombatTraining
-  skillGroupId: skill-group-general
+  skillGroupId: SkillGroupGeneral
+  skillTreeName: combat-training-skill-tree-name
   skillTree:
   - CombatTrainingInitial
   - CombatTrainingBase

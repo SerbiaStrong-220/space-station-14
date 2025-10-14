@@ -8,7 +8,7 @@
   components:
   - type: SkillDisarmOnDamageEffect
     disarmChance: 0.5
-    damageThreshold: 15
+    damageThreshold: 15.
 
 - type: skill
   id: CombatTrainingBase
@@ -20,7 +20,7 @@
   components:
   - type: SkillDisarmOnDamageEffect
     disarmChance: 0.5
-    damageThreshold: 20
+    damageThreshold: 20.
 
 - type: skill
   id: CombatTrainingTrained
@@ -32,7 +32,7 @@
   components:
   - type: SkillDisarmOnDamageEffect
     disarmChance: 0.3
-    damageThreshold: 30
+    damageThreshold: 30.
 
 - type: skill
   id: CombatTrainingProfessional
@@ -44,4 +44,4 @@
   components:
   - type: SkillDisarmOnDamageEffect
     disarmChance: 0.2
-    damageThreshold: 40
+    damageThreshold: 40.

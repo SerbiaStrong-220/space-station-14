@@ -35,18 +35,18 @@ namespace Content.Shared.SS220.Experience;
 public sealed partial class ExperienceComponent : Component
 {
     public static readonly string ContainerId = "experience-entity-container";
+    public static readonly string OverrideContainerId = "override-experience-entity-container";
 
     /// <summary>
     /// Container which entity with skill components.
     /// </summary>
-    [ViewVariables] public ContainerSlot ExperienceContainer = default!;
-
-    public static readonly string OverrideContainerId = "override-experience-entity-container";
-
+    [ViewVariables]
+    public ContainerSlot ExperienceContainer = default!;
     /// <summary>
     /// Container which entity with skill components. This overrides base one.
     /// </summary>
-    [ViewVariables] public ContainerSlot OverrideExperienceContainer = default!;
+    [ViewVariables]
+    public ContainerSlot OverrideExperienceContainer = default!;
 
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
@@ -74,6 +74,7 @@ public sealed partial class ExperienceComponent : Component
     /// <summary>
     /// This mask handles reiniting of experience to correctly process on spawn inits
     /// </summary>
+    [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
     public byte InitMask = (byte)InitGainedExperienceType.NotInitialized;
 }

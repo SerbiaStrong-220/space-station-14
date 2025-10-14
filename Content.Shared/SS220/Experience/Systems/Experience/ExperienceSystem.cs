@@ -29,9 +29,8 @@ public sealed partial class ExperienceSystem : EntitySystem
         base.Initialize();
 
         InitializeGainedExperience();
+        InitializeSkillEntityEvents();
 
-        SubscribeLocalEvent<ExperienceComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<ExperienceComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<ExperienceComponent, SkillCheckEvent>(OnSkillCheckEvent);
     }
 
@@ -72,7 +71,12 @@ public sealed partial class ExperienceSystem : EntitySystem
         var ev = new SkillTreeAddedEvent
         {
             SkillTree = skillTree,
-            Info = new SkillTreeExperienceInfo { SkillLevel = StartSkillLevelIndex, SkillSublevel = StartSubLevelIndex }
+            Info = new SkillTreeExperienceInfo
+            {
+                SkillLevel = StartSkillLevelIndex,
+                SkillSublevel = StartSubLevelIndex,
+                SkillStudied = true
+            }
         };
         RaiseLocalEvent(entity, ref ev);
 
@@ -82,7 +86,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         entity.Comp.StudyingProgress.Add(skillTree, StartLearningProgress);
 
         DirtyFields(entity.AsNullable(), null, [nameof(ExperienceComponent.Skills), nameof(ExperienceComponent.InitMask)]);
-
     }
 
     private void ResolveInitLeveling(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> tree)

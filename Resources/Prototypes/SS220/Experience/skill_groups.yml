@@ -1,0 +1,3 @@
+- type: skillTreeGroup
+  id: SkillGroupGeneral
+  groupName: skill-group-general

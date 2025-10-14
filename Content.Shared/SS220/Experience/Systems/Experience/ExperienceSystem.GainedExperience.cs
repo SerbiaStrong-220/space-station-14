@@ -31,7 +31,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         var byteType = (byte)type;
         // This handles re initing experience if same init event type called again
         var shiftedType = byteType << 1;
-        if (shiftedType > entity.Comp.InitMask)
+        if (shiftedType < entity.Comp.InitMask)
         {
             // prevent release client meta
 #if !FULL_RELEASE
@@ -51,6 +51,8 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
 
         entity.Comp.InitMask |= (byte)byteType;
+
+        EnsureSkill(entity);
     }
 
     private void SkillAddOnSkillTreeAdded(Entity<SkillRoleAddComponent> entity, ref SkillTreeAddedEvent args)

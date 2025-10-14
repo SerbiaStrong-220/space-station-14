@@ -12,4 +12,7 @@ public sealed partial class SkillDisarmOnDamageEffectComponent : Component
 
     [DataField(required: true)]
     public FixedPoint2 DamageThreshold;
+
+    [DataField]
+    public LocId OnDropPopup = "disarm-on-damage-popup";
 }

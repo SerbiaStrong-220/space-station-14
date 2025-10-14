@@ -1,15 +1,13 @@
  <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
 
-<ExperienceUiElements:ExperienceGroupContainer
+<ExperienceUiElements:KnowledgeLabel
     xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements">
-    <BoxContainer Name="GroupContainer" Orientation="Vertical" HorizontalExpand="True">
-        <RichTextLabel Name="GroupName" Text="place-holder"/>
-        <BoxContainer Name="SkillTreeContainer" Orientation="Vertical">
-            <!-- Added here by code -->
-        </BoxContainer>
+    <BoxContainer Orientation="Vertical">
+        <RichTextLabel Name="KnowledgeName" Text="name-place-holder"/>
+        <RichTextLabel Name="KnowledgeDescription" Text="description-place-holder"/>
     </BoxContainer>
-</ExperienceUiElements:ExperienceGroupContainer>
+</ExperienceUiElements:KnowledgeLabel>
