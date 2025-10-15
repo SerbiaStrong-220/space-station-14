@@ -43,8 +43,8 @@
     currentTemperature: 290
   # required for cooking to work
   - type: InternalTemperature
-    conductivity: 0.43 #SS220-grill-update-2
     thickness: 0.19 #SS220-grill-update-2 (0.02 -> 0.19)
+    conductivity: 0.43 #SS220-grill-update-2
     area: 0.02 # arbitrary number that sounds right for a slab of meat
   - type: Material
   - type: PhysicalComposition
@@ -101,6 +101,8 @@
   - type: SliceableFood
     count: 3
     slice: FoodMeatCutlet
+#  - type: InternalTemperature #SS220-grill-update-2. Unnecessary, parent already have it
+#    conductivity: 0.43 #SS220-grill-update-2. Unnecessary, parent already have it
   - type: Construction
     graph: MeatSteak
     node: start
