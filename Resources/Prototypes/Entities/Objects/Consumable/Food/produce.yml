@@ -476,7 +476,7 @@
   - type: Construction
     graph: BananaPeelGrilled
     node: start
-    defaultTarget: печёная банановая кожура
+    defaultTarget: banana peel grilled
   - type: Temperature
     currentTemperature: 290
   - type: InternalTemperature

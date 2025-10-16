@@ -593,7 +593,7 @@
   - type: Construction
     graph: SpiderSteak
     node: start
-    defaultTarget: стейк из паука
+    defaultTarget: spider steak
   - type: InternalTemperature
     conductivity: 0.42
   #SS220-grill-update-2 end
@@ -626,7 +626,7 @@
     slice: FoodMeatSpiderCutletCooked
   - type: Construction
     graph: SpiderSteak
-    node: стейк из паука
+    node: spider steak
   - type: Item
     inhandVisuals:
       left:
@@ -722,7 +722,7 @@
   - type: Construction
     graph: SnakeSteak
     node: start
-    defaultTarget: стейк из змеи
+    defaultTarget: snake steak
   - type: InternalTemperature
     conductivity: 0.42
   #SS220-grill-update-2 end
@@ -753,7 +753,7 @@
           Quantity: 1
   - type: Construction
     graph: SnakeSteak
-    node: стейк из змеи
+    node: snake steak
   - type: Item
     inhandVisuals:
       left:

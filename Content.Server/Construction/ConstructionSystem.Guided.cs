@@ -89,9 +89,15 @@ namespace Content.Server.Construction
                     }
                     else
                     {
+                        //SS220-grill-update-2 begin
+                        var nodeName = string.IsNullOrEmpty(target.LocalizedName)
+                            ? target.Name
+                            : Loc.GetString(target.LocalizedName);
+                        //SS220-grill-update-2 end
+
                         args.PushMarkup(Loc.GetString(
                             "construction-component-to-create-header",
-                            ("targetName", target.Name)) + "\n");
+                            ("targetName", nodeName)) + "\n"); //SS220-grill-update-2. target.Name -> nodeName
                     }
                 }
 
