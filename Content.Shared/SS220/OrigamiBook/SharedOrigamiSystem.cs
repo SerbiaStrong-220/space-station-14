@@ -64,7 +64,7 @@ public abstract class SharedOrigamiSystem : EntitySystem
         }
 
         _damageable.TryChangeDamage(args.Target, ent.Comp.DamageWithoutGlasses);
-        _stun.TryParalyze(args.Target, TimeSpan.FromSeconds(ent.Comp.TimeParalyze), true);
+        _stun.TryUpdateParalyzeDuration(args.Target, TimeSpan.FromSeconds(ent.Comp.TimeParalyze));
     }
 
     private bool IsEyeBlocker(EntityUid uid)

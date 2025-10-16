@@ -18,14 +18,6 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
         base.Initialize();
 
         SubscribeLocalEvent<ChameleonStructureComponent, AfterAutoHandleStateEvent>(HandleState);
-
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnProtoReloaded);
-    }
-
-    private void OnProtoReloaded(PrototypesReloadedEventArgs args)
-    {
-        if (args.WasModified<EntityPrototype>())
-            UpdateData();
     }
 
     private void HandleState(Entity<ChameleonStructureComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -42,19 +34,15 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
 
         var clone = Spawn(proto.ID, Transform(ent).Coordinates);
 
-        if (!TryComp<SpriteComponent>(clone, out var cloneSprite))
-            return;
+        if (TryComp<SpriteComponent>(clone, out var cloneSprite) && TryCopySmooth(ent, clone))
+        {
+            _sprite.CopySprite((clone, cloneSprite), (ent, sprite));
 
-        if (!TryCopySmooth(ent, clone))//Prevent errors
-            return;
-
-        _sprite.CopySprite((clone, cloneSprite), (ent, sprite));
+            Dirty(ent, sprite);
+            _smooth.DirtyNeighbours(ent); //required to fix our FOV
+        }
 
         Del(clone);
-
-        Dirty(ent, sprite);
-
-        _smooth.DirtyNeighbours(ent);//requred to fix our FOV
     }
 
     private bool TryCopySmooth(EntityUid ent, EntityUid clone)//Should be optional, but idk how to do it

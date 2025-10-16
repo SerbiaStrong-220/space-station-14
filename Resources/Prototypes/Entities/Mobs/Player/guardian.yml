@@ -217,6 +217,7 @@
     - type: GhostTakeoverAvailable
 #SS220 Languages tweaks begin
     - type: Language
+      selectedLanguage: Galactic
       availableLanguages:
       - id: Galactic
         canSpeak: true
@@ -271,6 +272,9 @@
           Piercing: 4
         groups:
           Burn: 3
+      catchingFailDamage:
+        types:
+          Blunt: 1
     - type: MeleeWeapon
       angle: 30
       animation: WeaponArcFist

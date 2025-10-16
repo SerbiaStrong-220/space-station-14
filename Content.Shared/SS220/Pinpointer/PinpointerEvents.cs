@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.Pinpointer;
 [Serializable, NetSerializable]
 public enum PinpointerUIKey
 {
-    Key
+    Key,
 }
 
 [Serializable]
@@ -55,15 +55,13 @@ public sealed partial class PinpointerItemUIState(HashSet<TrackedItem> items) : 
 
 [Serializable]
 [NetSerializable]
-public struct TrackedItem(NetEntity entity, string name)//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
+public record struct TrackedItem(NetEntity Entity, string Name, string? Job = null)//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
 {
-    public NetEntity Entity { get; } = entity;
-    public string Name { get; } = name;
 }
 
 public enum PinpointerMode//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
 {
     Crew,
     Item,
-    Component
+    Component,
 }

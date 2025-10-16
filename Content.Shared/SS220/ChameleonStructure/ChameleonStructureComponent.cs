@@ -16,27 +16,40 @@ public sealed partial class ChameleonStructureComponent : Component
 {
     /// <summary>
     ///     EntityPrototype id that chameleon item is trying to mimic.
-    ///     Сan be set as default.
+    ///     Can be set as default.
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
     [DataField, AutoNetworkedField]
     public EntProtoId? Prototype;
 
     /// <summary>
-    ///     Filter possible chameleon options by a tag in addition to WhitelistChameleon.
+    ///     Filter possible chameleon options by a tag.
     /// </summary>
     [DataField]
     public string? RequireTag;
 
+    /// <summary>
+    ///     RequireTag alternative.
+    /// </summary>
+    [DataField]
+    public List<EntProtoId>? ProtoList;
+
     [DataField]
     public EntityWhitelist? UserWhitelist;
+
+    /// <summary>
+    ///     Loaded list of prototypes for chameleon
+    /// </summary>
+    [ViewVariables]
+    public List<EntProtoId> ListData = [];
 }
 
 [Serializable, NetSerializable]
-public sealed class ChameleonStructureBoundUserInterfaceState(string? selectedId, string? requiredTag) : BoundUserInterfaceState
+public sealed class ChameleonStructureBoundUserInterfaceState(string? selectedId, List<EntProtoId> listData, string? requiredTag) : BoundUserInterfaceState
 {
     public readonly string? SelectedId = selectedId;
     public readonly string? RequiredTag = requiredTag;
+    public readonly List<EntProtoId> ListData = listData;
 }
 
 [Serializable, NetSerializable]

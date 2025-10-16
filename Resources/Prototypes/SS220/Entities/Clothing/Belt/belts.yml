@@ -58,7 +58,6 @@
         name: clothing-boots-sidearm
         whitelist:
           tags:
-            - Sidearm
             - Medkit
           components:
             - Stunbaton
@@ -455,6 +454,8 @@
         - WetFloorSign
         - HolosignProjector
         - Plunger
+        - GoldenPlunger
+        - WireBrush
       components:
         - LightReplacer
         - SmokeOnTrigger
@@ -474,6 +475,7 @@
         amount: 2
       - id: FlashlightLantern
       - id: LightReplacer
+      - id: WireBrush
 
 - type: entity
   parent: ClothingBeltMedical

@@ -1,13 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Body.Systems;
 using Content.Server.Zombies;
+using Content.Shared.Body.Events;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Rejuvenate;
+using Content.Shared.SS220.LimitationRevive;
 using Content.Shared.Traits;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -19,7 +20,7 @@ namespace Content.Server.SS220.LimitationRevive;
 /// <summary>
 /// This handles limiting the number of defibrillator resurrections
 /// </summary>
-public sealed class LimitationReviveSystem : EntitySystem
+public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
 {
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -33,29 +34,29 @@ public sealed class LimitationReviveSystem : EntitySystem
     {
         SubscribeLocalEvent<LimitationReviveComponent, MobStateChangedEvent>(OnMobStateChanged, before: [typeof(ZombieSystem)]);
         SubscribeLocalEvent<LimitationReviveComponent, CloningEvent>(OnCloning);
-        SubscribeLocalEvent<LimitationReviveComponent, AddReviweDebuffsEvent>(OnAddReviweDebuffs);
-		SubscribeLocalEvent<LimitationReviveComponent, RejuvenateEvent>(OnRejuvenate);
-		SubscribeLocalEvent<LimitationReviveComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
+        SubscribeLocalEvent<LimitationReviveComponent, AddReviveDebuffsEvent>(OnAddReviweDebuffs);
+        SubscribeLocalEvent<LimitationReviveComponent, RejuvenateEvent>(OnRejuvenate);
+        SubscribeLocalEvent<LimitationReviveComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
     }
 
     private void OnMobStateChanged(Entity<LimitationReviveComponent> ent, ref MobStateChangedEvent args)
     {
         if (args.NewMobState == MobState.Dead)
         {
-            ent.Comp.DamageTime = _timing.CurTime + ent.Comp.BeforeDamageDelay;
+            ent.Comp.DamageCountingTime = TimeSpan.Zero;
             return;
         }
 
         if (args.OldMobState == MobState.Dead)
         {
-            if (ent.Comp.DamageTime == null)//is null if we got brain dmg
+            if (ent.Comp.DamageCountingTime == null)//is null if we got brain dmg
                 ent.Comp.DeathCounter++;
             else
-                ent.Comp.DamageTime = null;
+                ent.Comp.DamageCountingTime = null;
         }
     }
 
-    private void OnAddReviweDebuffs(Entity<LimitationReviveComponent> ent, ref AddReviweDebuffsEvent args)
+    private void OnAddReviweDebuffs(Entity<LimitationReviveComponent> ent, ref AddReviveDebuffsEvent args)
     {
         TryAddTrait(ent);
     }
@@ -123,39 +124,36 @@ public sealed class LimitationReviveSystem : EntitySystem
 
         while (query.MoveNext(out var ent, out var limitationRevive))
         {
-            if (limitationRevive.DamageTime is null)
+            if (limitationRevive.DamageCountingTime is null)
                 continue;
 
-            if (_timing.CurTime < limitationRevive.DamageTime)
+            limitationRevive.DamageCountingTime += TimeSpan.FromSeconds(frameTime / limitationRevive.UpdateIntervalMultiplier);
+
+            if (limitationRevive.DamageCountingTime < limitationRevive.BeforeDamageDelay)
                 continue;
 
             _damageableSystem.TryChangeDamage(ent, limitationRevive.Damage, true);
 
             TryAddTrait((ent, limitationRevive));
 
-            limitationRevive.DamageTime = null;
+            limitationRevive.DamageCountingTime = null;
         }
     }
 
     private void OnApplyMetabolicMultiplier(Entity<LimitationReviveComponent> ent, ref ApplyMetabolicMultiplierEvent args)
     {
-        if (ent.Comp.DamageTime is null)//update timer before damage, cause we cant get current metabolism from anywhere
-        {
-            if (args.Apply)
-                ent.Comp.BeforeDamageDelay *= args.Multiplier * ent.Comp.MetabolismModifierAffect;
-            else
-                ent.Comp.BeforeDamageDelay /= args.Multiplier * ent.Comp.MetabolismModifierAffect;
+        ent.Comp.UpdateIntervalMultiplier = args.Multiplier;
+    }
 
+    public override void IncreaseTimer(EntityUid ent, TimeSpan addTime)
+    {
+        if (!TryComp<LimitationReviveComponent>(ent, out var limComp))
             return;
-        }
 
-        var newTime = (ent.Comp.DamageTime - _timing.CurTime);
+        if (limComp.DamageCountingTime == null)
+            return;
 
-        if (args.Apply)
-            newTime *= args.Multiplier * ent.Comp.MetabolismModifierAffect;
-        else
-            newTime /= args.Multiplier * ent.Comp.MetabolismModifierAffect;
-
-        ent.Comp.DamageTime = _timing.CurTime + newTime;
+        // TODO-SS220: please make it logic to adjust time passed and not the time start point
+        limComp.DamageCountingTime -= addTime;
     }
 }

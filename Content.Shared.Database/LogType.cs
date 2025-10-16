@@ -480,6 +480,11 @@ public enum LogType
     /// </summary>
     ShuttleImpact = 106,
 
+    /// <summary>
+    /// Events relating to midi playback.
+    /// </summary>
+    Instrument = 107,
+
     //SS220 log types start
 
     /// <summary>

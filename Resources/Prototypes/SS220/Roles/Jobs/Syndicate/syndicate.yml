@@ -1,0 +1,12 @@
+- type: job
+  id: TraitorPassenger
+  name: job-name-passenger
+  description: job-description-passenger
+  playTimeTracker: AntagTraitor
+  setPreference: false
+  startingGear: PassengerGear
+  icon: "JobIconPassenger"
+  supervisors: job-supervisors-everyone
+  access:
+  - SyndicateAgent
+  - Maintenance

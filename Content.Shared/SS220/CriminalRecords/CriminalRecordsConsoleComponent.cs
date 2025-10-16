@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Radio;
 using Content.Shared.Roles;
 using Content.Shared.StationRecords;
@@ -13,13 +14,13 @@ public sealed partial class CriminalRecordsConsole220Component : Component
 {
     public uint? ActiveKey { get; set; }
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public bool IsSecurity = true;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public int MaxMessageLength = 200;
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public TimeSpan EditCooldown = TimeSpan.FromSeconds(5);
 
     [ViewVariables(VVAccess.ReadWrite)]
@@ -138,4 +139,18 @@ public sealed class DeleteCriminalRecordStatus : BoundUserInterfaceMessage
     {
         Time = time;
     }
+}
+
+[Serializable, NetSerializable]
+public sealed class UpdateCriminalRecordStatusEvent(
+    NetEntity target,
+    NetEntity user,
+    string reason,
+    ProtoId<CriminalStatusPrototype>? statusProto)
+    : EntityEventArgs
+{
+    public NetEntity Target = target;
+    public NetEntity User = user;
+    public string Reason = reason;
+    public ProtoId<CriminalStatusPrototype>? StatusProto = statusProto;
 }

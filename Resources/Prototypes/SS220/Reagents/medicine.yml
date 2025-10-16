@@ -225,4 +225,22 @@
             max: 213.0
           damage:
             types:
-              Сerebral: -3.4
+              Cerebral: -3.4
+
+- type: reagent
+  id: Nicergoline
+  name: reagent-name-nicergoline
+  group: Medicine
+  desc: reagent-desc-nicergoline
+  physicalDesc: reagent-physical-desc-sour
+  flavor: medicine
+  color: "#e4a010"
+  worksOnTheDead: true
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:ChemicalAdaptationEffect
+        duration: 1200
+        modifier: 0.8
+      - !type:BrainDamageTimerChange
+        addTime: 60

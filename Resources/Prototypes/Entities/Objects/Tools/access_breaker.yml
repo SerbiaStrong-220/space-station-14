@@ -12,6 +12,26 @@
     state: icon
   - type: Item
     sprite: Objects/Tools/access_breaker.rsi
+# Corvax-HiddenDesc-Start
+  - type: HiddenDescription
+    entries:
+    - label: corvax-hidden-desc-access-breaker-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: corvax-hidden-desc-access-breaker-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+    - label: corvax-hidden-desc-access-breaker-engineering
+      jobRequired:
+        - ChiefEngineer
+        - AtmosphericTechnician
+        - StationEngineer
+        - TechnicalAssistant
+# Corvax-HiddenDesc-End
 
 - type: entity
   parent: AccessBreakerUnlimited
@@ -20,3 +40,5 @@
   components:
   - type: LimitedCharges
   - type: AutoRecharge
+  - type: StaticPrice
+    price: 2000

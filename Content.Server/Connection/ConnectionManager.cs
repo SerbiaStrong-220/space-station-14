@@ -22,6 +22,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Content.Server.Administration;
 
 /*
  * TODO: Remove baby jail code once a more mature gateway process is established. This code is only being issued as a stopgap to help with potential tiding in the immediate future.
@@ -60,6 +61,7 @@ namespace Content.Server.Connection
         [Dependency] private readonly IServerDbManager _db = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
+        [Dependency] private readonly IPlayerLocator _playerLocator = default!; // SS220-ad-login-into-ban-screen
         [Dependency] private readonly ILocalizationManager _loc = default!;
         [Dependency] private readonly ServerDbEntryManager _serverDbEntry = default!;
         [Dependency] private readonly DiscordPlayerManager _discordPlayerManager = default!;
@@ -239,7 +241,8 @@ namespace Content.Server.Connection
             if (bans.Count > 0)
             {
                 var firstBan = bans[0];
-                var message = firstBan.FormatBanMessage(_cfg, _loc);
+                var name = firstBan.UserId.HasValue ? await _playerLocator.LookupIdAsync(firstBan.UserId.Value) : null; // SS220-ad-login-into-ban-screen
+                var message = firstBan.FormatBanMessage(_cfg, _loc, name?.Username); // SS220-ad-login-into-ban-screen
                 return (ConnectionDenyReason.Ban, message, bans);
             }
 

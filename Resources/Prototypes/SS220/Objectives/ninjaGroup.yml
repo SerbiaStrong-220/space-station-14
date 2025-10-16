@@ -2,6 +2,7 @@
   id: NinjaObjectiveGroups
   weights:
     NinjaIntimidateTargetGroup: 1
+    NinjaLeaveNoTraceTraceGroup: 1
 
 - type: weightedRandom
   id: NinjaIntimidateTargetGroup
@@ -9,3 +10,8 @@
     NinjaIntimidateBruteTargetObjective: 5 # easiest
     NinjaIntimidateBurnTargetObjective: 3
     NinjaIntimidateToxinTargetObjective: 1 # hardest
+
+- type: weightedRandom
+  id: NinjaLeaveNoTraceTraceGroup
+  weights:
+    LeaveNoTraceObjective: 1
