@@ -9,7 +9,6 @@ public sealed partial class ExperienceSystem : EntitySystem
 {
     private void InitializeGainedExperience()
     {
-        SubscribeLocalEvent<ExperienceComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ExperienceComponent, AfterExperienceInitComponentGained>(OnPlayerMobAfterSpawned);
 
         // TODO if more this event like will be added make generic <T> version to bypass subscribe errors
@@ -19,11 +18,6 @@ public sealed partial class ExperienceSystem : EntitySystem
     private void OnPlayerMobAfterSpawned(Entity<ExperienceComponent> entity, ref AfterExperienceInitComponentGained args)
     {
         InitializeExperienceComp(entity, args.Type);
-    }
-
-    private void OnStartup(Entity<ExperienceComponent> entity, ref ComponentStartup _)
-    {
-        InitializeExperienceComp(entity, InitGainedExperienceType.ComponentInit);
     }
 
     private void InitializeExperienceComp(Entity<ExperienceComponent> entity, InitGainedExperienceType type)
@@ -52,7 +46,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         entity.Comp.InitMask |= (byte)byteType;
 
-        EnsureSkill(entity);
+        EnsureSkill(entity!);
     }
 
     private void SkillAddOnSkillTreeAdded(Entity<SkillRoleAddComponent> entity, ref SkillTreeAddedEvent args)

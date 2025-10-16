@@ -3,16 +3,35 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Experience.Systems;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
+    #region Progress skill tree
+
+    public bool TryAddSkillTreeProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, FixedPoint4 addition)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
+            return false;
+
+        if (!entity.Comp.StudyingProgress.ContainsKey(skillTree))
+            return false;
+
+        entity.Comp.StudyingProgress[skillTree] += addition;
+
+        TryProgressSublevel(entity!, skillTree);
+        return true;
+    }
+
+    #endregion
+
     #region Skill getters
     public HashSet<ProtoId<SkillPrototype>> GetAcquiredSkills(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree)
     {
-        if (!Resolve(entity.Owner, ref entity.Comp))
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return [];
 
         if (!entity.Comp.OverrideSkills.ContainsKey(skillTree) || !entity.Comp.Skills.ContainsKey(skillTree))

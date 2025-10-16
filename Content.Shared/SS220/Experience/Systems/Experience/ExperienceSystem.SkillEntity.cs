@@ -1,8 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Shared.Database;
 using Robust.Shared.Containers;
-using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -11,16 +11,37 @@ namespace Content.Shared.SS220.Experience.Systems;
 public sealed partial class ExperienceSystem : EntitySystem
 {
     private readonly EntProtoId _baseSkillProto = "InitSkillEntity";
+    // private HashSet<EntityUid> _entityToEnsure = new();
 
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private void InitializeSkillEntityEvents()
     {
         SubscribeLocalEvent<ExperienceComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<ExperienceComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ExperienceComponent, ComponentShutdown>(OnShutdown);
 
     }
+
+    // private void UpdateSkillEntity()
+    // {
+    //     HashSet<EntityUid> entityToClear = new();
+    //     foreach (var entity in _entityToEnsure)
+    //     {
+    //         if (MetaData(entity).EntityLifeStage > EntityLifeStage.MapInitialized)
+    //         {
+    //             entityToClear.Add(entity);
+    //             continue;
+    //         }
+
+    //         if (MetaData(entity).EntityLifeStage != EntityLifeStage.MapInitialized)
+    //             continue;
+
+    //         EnsureSkill(entity);
+    //         entityToClear.Add(entity);
+    //     }
+
+    //     _entityToEnsure = [.. _entityToEnsure.Except(entityToClear)];
+    // }
 
     private void OnComponentInit(Entity<ExperienceComponent> entity, ref ComponentInit _)
     {
@@ -28,11 +49,8 @@ public sealed partial class ExperienceSystem : EntitySystem
         entity.Comp.OverrideExperienceContainer = _container.EnsureContainer<ContainerSlot>(entity.Owner, ExperienceComponent.OverrideContainerId);
     }
 
-    private void OnMapInit(Entity<ExperienceComponent> entity, ref MapInitEvent _)
+    private void OnMapInitSkillEntity(Entity<ExperienceComponent> entity, ref MapInitEvent _)
     {
-        // entity.Comp.ExperienceContainer = _container.EnsureContainer<ContainerSlot>(entity.Owner, ExperienceComponent.ContainerId);
-        // entity.Comp.OverrideExperienceContainer = _container.EnsureContainer<ContainerSlot>(entity.Owner, ExperienceComponent.OverrideContainerId);
-
         if (entity.Comp.ExperienceContainer.Count != 0 || entity.Comp.OverrideExperienceContainer.Count != 0)
         {
             Log.Warning($"Something was in {ToPrettyString(entity)} experience containers, cleared it");
@@ -160,10 +178,31 @@ public sealed partial class ExperienceSystem : EntitySystem
     /// <summary>
     /// Easy-to-use-slow-to-compute-method for ensuring components on skill entity
     /// </summary>
-    public void EnsureSkill(Entity<ExperienceComponent> entity)
+    public void EnsureSkill(Entity<ExperienceComponent?> entity)
     {
-        EnsureSkill(entity, ExperienceComponent.ContainerId);
-        EnsureSkill(entity, ExperienceComponent.OverrideContainerId);
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
+            return;
+
+        // if (MetaData(entity).EntityLifeStage < EntityLifeStage.MapInitialized)
+        // {
+        //     _entityToEnsure.Add(entity.Owner);
+        // }
+
+        // TODO this seem can work without mapinit of entity so I need to add cache and resolve in update func;
+        EnsureSkill(entity!, ExperienceComponent.ContainerId);
+        EnsureSkill(entity!, ExperienceComponent.OverrideContainerId);
+    }
+
+    /// <summary>
+    /// Method to bypass possible collection override in update loop
+    /// </summary>
+    private void EnsureSkill(EntityUid uid)
+    {
+        if (!TryComp<ExperienceComponent>(uid, out var comp))
+            return;
+
+        EnsureSkill((uid, comp), ExperienceComponent.ContainerId);
+        EnsureSkill((uid, comp), ExperienceComponent.OverrideContainerId);
     }
 
     /// <summary>

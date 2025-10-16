@@ -14,7 +14,7 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect;
 public abstract partial class BaseSkillDoAfterEffectSystem<T1, T2> : EntitySystem where T1 : BaseSkillDoAfterEffectComponent
                                                                                     where T2 : DoAfterEvent
 {
-    [Dependency] private readonly ExperienceSystem _experience = default!;
+    [Dependency] protected readonly ExperienceSystem Experience = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly INetManager _netManager = default!;
@@ -26,7 +26,7 @@ public abstract partial class BaseSkillDoAfterEffectSystem<T1, T2> : EntitySyste
         SubscribeLocalEvent<T1, BeforeDoAfterStartEvent>(OnDoAfterStartInternal);
         SubscribeLocalEvent<T1, DoAfterBeforeComplete>(OnDoAfterEndInternal);
 
-        _experience.RelayEventToSkillEntity<T2>();
+        Experience.RelayEventToSkillEntity<T2>();
     }
 
     private void OnDoAfterStartInternal(Entity<T1> entity, ref BeforeDoAfterStartEvent args)
@@ -37,7 +37,7 @@ public abstract partial class BaseSkillDoAfterEffectSystem<T1, T2> : EntitySyste
         OnDoAfterStart(entity, ref args);
     }
 
-    protected void OnDoAfterEndInternal(Entity<T1> entity, ref DoAfterBeforeComplete args)
+    private void OnDoAfterEndInternal(Entity<T1> entity, ref DoAfterBeforeComplete args)
     {
         if (!args.Args.Event.GetType().Equals(typeof(T2)))
             return;
@@ -45,7 +45,7 @@ public abstract partial class BaseSkillDoAfterEffectSystem<T1, T2> : EntitySyste
         OnDoAfterEnd(entity, ref args);
     }
 
-    protected void OnDoAfterStart(Entity<T1> entity, ref BeforeDoAfterStartEvent args)
+    protected virtual void OnDoAfterStart(Entity<T1> entity, ref BeforeDoAfterStartEvent args)
     {
         if (!entity.Comp.FullBlock)
         {
@@ -59,7 +59,7 @@ public abstract partial class BaseSkillDoAfterEffectSystem<T1, T2> : EntitySyste
             _popup.PopupClient(Loc.GetString(entity.Comp.FullBlockPopup), args.Args.User);
     }
 
-    protected void OnDoAfterEnd(Entity<T1> entity, ref DoAfterBeforeComplete args)
+    protected virtual void OnDoAfterEnd(Entity<T1> entity, ref DoAfterBeforeComplete args)
     {
         if (_netManager.IsClient)
             return;

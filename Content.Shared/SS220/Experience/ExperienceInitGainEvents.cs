@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.Experience;
 public enum InitGainedExperienceType : byte
 {
     NotInitialized = 1 << 0,
-    ComponentInit = 1 << 1,
+    MapInit = 1 << 1,
     JobInit = 1 << 2
 }
 

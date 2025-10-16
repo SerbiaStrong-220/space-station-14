@@ -2,13 +2,13 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.SS220.Experience.SkillEffects.Components;
+namespace Content.Shared.SS220.Experience.DoAfterEffect.Components;
 
+/// <summary>
+/// Provides changes in <see cref="HealingDoAfterEvent"/>
+/// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class SkillDisarmChanceChangerComponent : Component
-{
-    [DataField(required: true)]
-    [AutoNetworkedField]
-    public float Multiplier;
-}
+public sealed partial class SkillMedicineDoAfterComponent : BaseSkillDoAfterEffectComponent { }
+
+

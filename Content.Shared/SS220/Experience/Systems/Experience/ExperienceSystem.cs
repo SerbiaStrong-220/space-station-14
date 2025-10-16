@@ -14,7 +14,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private const int StartSkillLevelIndex = 0;
     private const int StartSubLevelIndex = 0;
-    public static readonly FixedPoint4 StartLearningProgress = 0;
+    public static readonly FixedPoint4 StartLearningProgress = 0f;
     public static readonly FixedPoint4 EndLearningProgress = FixedPoint4.New(1f);
 
     private static readonly HashSet<string> ContainerIds = [
@@ -32,11 +32,19 @@ public sealed partial class ExperienceSystem : EntitySystem
         InitializeSkillEntityEvents();
 
         SubscribeLocalEvent<ExperienceComponent, SkillCheckEvent>(OnSkillCheckEvent);
+        SubscribeLocalEvent<ExperienceComponent, MapInitEvent>(OnMapInit);
     }
 
     private void OnSkillCheckEvent(Entity<ExperienceComponent> entity, ref SkillCheckEvent args)
     {
         args.HasSkill = GetAcquiredSkills(entity.AsNullable(), args.TreeProto).Contains(args.SkillProto);
+    }
+
+    private void OnMapInit(Entity<ExperienceComponent> entity, ref MapInitEvent args)
+    {
+        OnMapInitSkillEntity(entity, ref args);
+
+        InitializeExperienceComp(entity, InitGainedExperienceType.MapInit);
     }
 
     public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, float delta)

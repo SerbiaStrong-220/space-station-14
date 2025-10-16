@@ -18,10 +18,10 @@
         </PanelContainer>
     <ScrollContainer>
         <BoxContainer Orientation="Vertical">
-            <BoxContainer Name="knowledgesContainer">
+            <BoxContainer Name="knowledgesContainer" Orientation="Vertical">
                 <!-- Added by code -->
             </BoxContainer>
-            <BoxContainer Name="ExperienceTreeGroupsContainer">
+            <BoxContainer Name="ExperienceTreeGroupsContainer" Orientation="Vertical">
                 <!-- Added by code -->
             </BoxContainer>
             <Button Name="SubmitButton" Text="+SuBmIt+"/>

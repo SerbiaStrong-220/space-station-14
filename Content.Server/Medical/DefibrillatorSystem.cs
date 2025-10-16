@@ -28,6 +28,7 @@ using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
 using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
 using Content.Shared.Ghost; //SS220 LimitationRevive
 using Content.Shared.Inventory;
+using Content.Shared.SS220.Experience.SkillEffects.Components;
 
 namespace Content.Server.Medical;
 
@@ -202,22 +203,25 @@ public sealed class DefibrillatorSystem : EntitySystem
         ICommonSession? session = null;
 
         //SS220 LimitationRevive - start
-        var successZap = false;
+        var defibChancesEvent = new GetDefibrillatorUseChances();
 
-        if (TryComp<DefibrillatorSkillComponent>(user, out var defibSkillComp))
-        {
-            if (_random.Prob(defibSkillComp.ChanceWithMedSkill))
-                successZap = true;
-        }
-        else
-        {
-            if (_random.Prob(component.ChanceWithoutMedSkill))
-                successZap = true;
-        }
+        RaiseLocalEvent(user, ref defibChancesEvent);
+
+        var successZap = _random.Prob(defibChancesEvent.FailureChance);
+        var selfDamage = _random.Prob(defibChancesEvent.SelfDamageChance);
 
         if (HasComp<GhostComponent>(user)) //for admins with aghost
+        {
             successZap = true;
+            selfDamage = false;
+        }
+
+        if (selfDamage)
+            _electrocution.TryDoElectrocution(user, null, component.ZapDamage * component.ZapСoeffDamage,
+                component.WritheDuration, true, ignoreInsulation: true);
+
         //SS220 LimitationRevive - end
+
         var dead = true;
         if (_rotting.IsRotten(target))
         {
@@ -243,8 +247,6 @@ public sealed class DefibrillatorSystem : EntitySystem
 
             var debuffEv = new AddReviveDebuffsEvent();
             RaiseLocalEvent(target, ref debuffEv);
-            _electrocution.TryDoElectrocution(user, null, component.ZapDamage * component.ZapСoeffDamage,
-                component.WritheDuration, true, ignoreInsulation: true);
         }
         //SS220 LimitationRevive - end
         else

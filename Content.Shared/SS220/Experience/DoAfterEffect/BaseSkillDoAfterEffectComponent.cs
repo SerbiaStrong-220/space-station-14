@@ -9,12 +9,15 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect;
 public abstract partial class BaseSkillDoAfterEffectComponent : Component
 {
     [DataField]
+    [AutoNetworkedField]
     public float DurationScale = 1f;
 
     [DataField]
+    [AutoNetworkedField]
     public float FailureChance = 0f;
 
     [DataField]
+    [AutoNetworkedField]
     public bool FullBlock = false;
 
     [DataField]

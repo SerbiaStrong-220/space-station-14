@@ -168,7 +168,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         // SS220-add-experience-init-event-post-spawn
         var afterProcessEv = new AfterExperienceInitComponentGained()
         {
-            Type = job is null ? InitGainedExperienceType.ComponentInit : InitGainedExperienceType.JobInit
+            Type = job is null ? InitGainedExperienceType.MapInit : InitGainedExperienceType.JobInit
         };
         RaiseLocalEvent(entity.Value, ref afterProcessEv);
         // SS220-add-experience-init-event-post-spawn
