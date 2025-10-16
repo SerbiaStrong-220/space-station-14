@@ -1,6 +1,7 @@
 using Content.Shared.Access;
 using Content.Shared.Guidebook;
 using Content.Shared.Players.PlayTimeTracking;
+using Content.Shared.SS220.Experience;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -113,6 +114,12 @@ namespace Content.Shared.Roles
 
         [DataField]
         public ProtoId<StartingGearPrototype>? StartingGear { get; private set; }
+
+        // SS220-Experience-update-begin
+        [DataField]
+        // TODO: uncomment [DataField(required: true)]
+        public ProtoId<AddSkillOnInitPrototype>? SkillOnInit { get; private set; }
+        // SS220-Experience-update-end
 
         /// <summary>
         /// Use this to spawn in as a non-humanoid (borg, test subject, etc.)
