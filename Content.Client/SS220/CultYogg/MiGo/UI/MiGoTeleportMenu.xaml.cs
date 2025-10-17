@@ -23,7 +23,6 @@ public sealed partial class MiGoTeleportMenu : FancyWindow
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        Panel.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#000000") };
         SearchBar.OnTextChanged += OnSearchTextChanged;
     }
 

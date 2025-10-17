@@ -3,12 +3,14 @@
             HorizontalExpand="True"
             Margin="0 1"
             SeparationOverride="4">
+    <PanelContainer Name="Panel" Access="Public">
     <!-- <SpriteView Name="DollView" Margin="4 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" SetSize="64 64"/>-->
-    <BoxContainer Orientation="Vertical">
-        <Label Name="NameLabel" SizeFlagsStretchRatio="3" HorizontalExpand="True"  ClipText="True"/>
-        <BoxContainer Orientation="Horizontal">
-            <Button Name="Teleport" Access="Public" Text="{Loc 'migo-teleport-action-button'}" StyleClasses="OpenRight"/>
+        <BoxContainer Orientation="Vertical">
+            <Label Name="NameLabel" SizeFlagsStretchRatio="3" HorizontalExpand="True"  ClipText="True"/>
+            <BoxContainer Orientation="Horizontal">
+                <Button Name="Teleport" Access="Public" Text="{Loc 'migo-teleport-action-button'}" StyleClasses="OpenRight"/>
             <!--  <Button Name="Spectate" Access="Public" Text="{Loc 'migo-teleport-observe-button'}" StyleClasses="OpenLeft"/>-->
+            </BoxContainer>
         </BoxContainer>
-    </BoxContainer>
+    </PanelContainer>
 </BoxContainer>
