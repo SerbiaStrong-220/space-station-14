@@ -8,7 +8,7 @@
         <Label Name="NameLabel" SizeFlagsStretchRatio="3" HorizontalExpand="True"  ClipText="True"/>
         <BoxContainer Orientation="Horizontal">
             <Button Name="Teleport" Access="Public" Text="{Loc 'migo-teleport-action-button'}" StyleClasses="OpenRight"/>
-            <Button Name="Spectate" Access="Public" Text="{Loc 'migo-teleport-observe-button'}" StyleClasses="OpenLeft"/>
+            <!--  <Button Name="Spectate" Access="Public" Text="{Loc 'migo-teleport-observe-button'}" StyleClasses="OpenLeft"/>-->
         </BoxContainer>
     </BoxContainer>
 </BoxContainer>

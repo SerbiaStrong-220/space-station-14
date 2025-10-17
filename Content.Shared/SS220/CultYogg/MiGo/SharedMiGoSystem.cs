@@ -92,7 +92,6 @@ public abstract class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnGetVerb);
 
         SubscribeLocalEvent<MiGoComponent, MiGoTeleportToTargetMessage>(OnMiGoTeleportToTarget);
-        SubscribeLocalEvent<MiGoComponent, MiGoSpectateMessage>(OnMiGoSpectate);
 
         SubscribeLocalEvent<MiGoComponent, InteractionAttemptEvent>(OnInteractionAttempt);
     }
@@ -578,7 +577,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         if (!TryGetEntity(args.Target.Value, out var target))
             return;
 
-        //if (!HasComp<CultYoggComponent>(target))//ToDo_SS220 uncoment this before release
+        //if (!HasComp<CultYoggComponent>(target))//ToDo_SS220 uncomment this before release
         //{
         //    _popup.PopupClient(Loc.GetString("cult-yogg-teleport-must-be-cultist"), ent.Owner);
         //    return;
@@ -603,24 +602,6 @@ public abstract class SharedMiGoSystem : EntitySystem
 
         var xform = Transform(ent);
         _transformSystem.SetCoordinates(ent, xform, Transform(target).Coordinates);
-    }
-
-    private void OnMiGoSpectate(Entity<MiGoComponent> ent, ref MiGoSpectateMessage args)
-    {
-        if (!TryComp<ActorComponent>(ent, out var actor))
-            return;
-
-        if (args.Target == null)
-            return;
-
-        if (!TryGetEntity(args.Target.Value, out var target))
-            return;
-
-        //_userInterfaceSystem.TryToggleUi(ent.Owner, MiGoUiKey.Teleport, actor.PlayerSession);
-
-        //ToDo SS220, idk maybe it should be different type of UI
-        //var ui = new AdminCameraEui(target);
-        //_euiManager.OpenEui(ui, player);
     }
     #endregion
 }

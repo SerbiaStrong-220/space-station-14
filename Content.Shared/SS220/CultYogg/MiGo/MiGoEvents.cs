@@ -37,9 +37,3 @@ public sealed class MiGoTeleportToTargetMessage(NetEntity? target) : BoundUserIn
 {
     public NetEntity? Target = target;
 }
-
-[Serializable, NetSerializable]
-public sealed class MiGoSpectateMessage(NetEntity? target) : BoundUserInterfaceMessage
-{
-    public NetEntity? Target = target;
-}
