@@ -5,15 +5,12 @@
     xmlns:co="clr-namespace:Content.Client.UserInterface.Controls">
     <BoxContainer Name="MainContainer" Orientation="Vertical">
         <LineEdit Name="SearchBar" PlaceHolder="{Loc 'vending-machine-component-search-filter'}" HorizontalExpand="True"  Margin ="4 4"/>
-        <ScrollContainer Name="StoreListingsScroll"  HScrollEnabled="False" HorizontalExpand="True" MinSize="100 256"  SizeFlagsStretchRatio="2" VerticalExpand="True">
-            <BoxContainer Name="StoreListingsContainer"  MinSize="100 256" Orientation="Vertical" SizeFlagsStretchRatio="2" VerticalExpand="True">
-                <!--  Listings are added here by code  -->
-            </BoxContainer>
-        </ScrollContainer>
-        <BoxContainer Orientation="Vertical">
-            <PanelContainer StyleClasses="LowDivider" />
-            <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
-            </BoxContainer>
-        </BoxContainer>
+        <PanelContainer StyleClasses="BackgroundDark" Name="Panel" Access="Public">
+            <ScrollContainer Name="StoreListingsScroll"  HScrollEnabled="False" HorizontalExpand="True" MinSize="100 256"  SizeFlagsStretchRatio="2" VerticalExpand="True">
+                <BoxContainer Name="StoreListingsContainer"  MinSize="100 256" Orientation="Vertical" SizeFlagsStretchRatio="2" VerticalExpand="True"  StyleClasses="BackgroundDark">
+                    <!--  Listings are added here by code  -->
+                </BoxContainer>
+            </ScrollContainer>
+        </PanelContainer>
     </BoxContainer>
 </controls:FancyWindow>
