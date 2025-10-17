@@ -58,7 +58,7 @@
     eyes: ClothingEyesMonocle
 
 - type: loadout
-  id: AdministrativeVisor
+  id: EyesHudCommand
   equipment:
     eyes: ClothingEyesHudCommand
 
