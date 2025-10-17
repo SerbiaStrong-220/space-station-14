@@ -1099,6 +1099,7 @@
   loadouts:
   - RoboticistCap
   - SkullBandana
+  - ScientistBeret #SS220 Add-Scientist-Beret
   # - ScientificBeret  #SS220 Seniors roles
 
 - type: loadoutGroup
