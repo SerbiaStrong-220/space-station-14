@@ -445,6 +445,7 @@
   id: JobDetective
   groups:
   - DetectiveHead
+  - DetectiveGlasses #SS220 Add glasses for detective
   - DetectiveNeck #SS220 holster to neck
   - DetectiveJumpsuit
   - DetectiveSecBackpack #ss220 backpack noir
