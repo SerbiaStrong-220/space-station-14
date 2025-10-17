@@ -15,14 +15,14 @@ public sealed partial class MiGoTeleportTarget : BoxContainer
     {
         RobustXamlLoader.Load(this);
 
-        Panel.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#46494d") };
+        Panel.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#343536") };
 
         if (target.HasValue)
         {
             TargetNetEnt = target.Value;
-            //DollView.SetEntity(target.Value); //for maybe later
+            //DollView.SetEntity(target.Value); //for better visualisation,  maybe later
         }
 
-        NameLabel.Text = "\t\t\t\t" + name;//cause center aligment isnt working
+        NameLabel.Text = name;//cause center aligment isnt working
     }
 }

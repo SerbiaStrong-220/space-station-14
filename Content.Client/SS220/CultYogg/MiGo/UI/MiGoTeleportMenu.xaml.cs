@@ -16,6 +16,7 @@ public sealed partial class MiGoTeleportMenu : FancyWindow
 {
     public List<(string, NetEntity?)> Warps = [];
     public event Action<ButtonEventArgs>? OnTeleportToTarget;
+    public event Action<ButtonEventArgs>? OnSpectate;
 
     public MiGoTeleportMenu()
     {
@@ -50,6 +51,7 @@ public sealed partial class MiGoTeleportMenu : FancyWindow
 
             var target = new MiGoTeleportTarget(name, netEnt);
             target.Teleport.OnPressed += (args) => { OnTeleportToTarget?.Invoke(args); };
+            target.Spectate.OnPressed += (args) => { OnSpectate?.Invoke(args); };
             TeleportListingsContainer.AddChild(target);
         }
     }
