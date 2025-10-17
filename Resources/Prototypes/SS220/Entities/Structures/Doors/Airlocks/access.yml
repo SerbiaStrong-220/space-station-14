@@ -53,8 +53,8 @@
 
 - type: entity
   parent: AirlockClown
-  id: AirlockClownLocked
-  suffix: Clown, Locked
+  id: AirlockClownTheatreLocked
+  suffix: Clown, Locked, Theatre
   components:
   - type: ContainerFill
     containers:
