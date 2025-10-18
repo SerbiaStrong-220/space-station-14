@@ -16,11 +16,12 @@ public sealed partial class MiGoTeleportMenu : FancyWindow
 {
     public List<(string, NetEntity?)> Warps = [];
     public event Action<ButtonEventArgs>? OnTeleportToTarget;
-    public event Action<ButtonEventArgs>? OnSpectate;
+    //public event Action<ButtonEventArgs>? OnSpectate;
 
     public MiGoTeleportMenu()
     {
-        MinSize = new Vector2(256, 333);
+        //MinSize = new Vector2(256, 333);//size when we have 2 buttons on target
+        MinSize = new Vector2(165, 333);
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
@@ -51,7 +52,7 @@ public sealed partial class MiGoTeleportMenu : FancyWindow
 
             var target = new MiGoTeleportTarget(name, netEnt);
             target.Teleport.OnPressed += (args) => { OnTeleportToTarget?.Invoke(args); };
-            target.Spectate.OnPressed += (args) => { OnSpectate?.Invoke(args); };
+            //target.Spectate.OnPressed += (args) => { OnSpectate?.Invoke(args); };
             TeleportListingsContainer.AddChild(target);
         }
     }

@@ -4,8 +4,8 @@
     xmlns:co="clr-namespace:Content.Client.UserInterface.Controls">
     <BoxContainer Name="MainContainer" Orientation="Vertical">
         <LineEdit Name="SearchBar" PlaceHolder="{Loc 'migo-teleport-search-filter'}" HorizontalExpand="True"  Margin ="4 4"/>
-        <ScrollContainer Name="TeleportListingsScroll"  HScrollEnabled="False" HorizontalExpand="True" MinSize="100 256"  SizeFlagsStretchRatio="2" VerticalExpand="True">
-            <BoxContainer Name="TeleportListingsContainer"  MinSize="100 256" Orientation="Vertical" SizeFlagsStretchRatio="2" VerticalExpand="True"  StyleClasses="BackgroundDark">
+        <ScrollContainer Name="TeleportListingsScroll"  HScrollEnabled="False" HorizontalExpand="True" MinSize="100 200"  SizeFlagsStretchRatio="2" VerticalExpand="True">
+            <BoxContainer Name="TeleportListingsContainer" Orientation="Vertical" SizeFlagsStretchRatio="2" VerticalExpand="True"  StyleClasses="BackgroundDark">
                     <!--  Listings are added here by code  -->
             </BoxContainer>
         </ScrollContainer>

@@ -552,11 +552,9 @@ public abstract class SharedMiGoSystem : EntitySystem
     {
         List<(string, NetEntity?)> warps = [];
 
-        //var queryMiGo = EntityQueryEnumerator<CultYoggComponent>();
+        var query = EntityQueryEnumerator<CultYoggComponent>();
 
-        var queryMiGo = EntityQueryEnumerator<HumanoidAppearanceComponent>();//ToDo_SS220 del this on release
-
-        while (queryMiGo.MoveNext(out var ent, out _))
+        while (query.MoveNext(out var ent, out _))
         {
             warps.Add((MetaData(ent).EntityName, GetNetEntity(ent)));//Am i doing some canser move with sending netent?
         }
@@ -577,11 +575,11 @@ public abstract class SharedMiGoSystem : EntitySystem
         if (!TryGetEntity(args.Target.Value, out var target))
             return;
 
-        //if (!HasComp<CultYoggComponent>(target))//ToDo_SS220 uncomment this before release
-        //{
-        //    _popup.PopupClient(Loc.GetString("cult-yogg-teleport-must-be-cultist"), ent.Owner);
-        //    return;
-        //}
+        if (!HasComp<CultYoggComponent>(target))
+        {
+            _popup.PopupClient(Loc.GetString("cult-yogg-teleport-must-be-cultist"), ent.Owner);
+            return;
+        }
 
         //do not allow MiGo teleport on other maps (not sure if i did it correctly)
         var mapPos = _transformSystem.GetMapCoordinates(target.Value);
@@ -602,6 +600,14 @@ public abstract class SharedMiGoSystem : EntitySystem
 
         var xform = Transform(ent);
         _transformSystem.SetCoordinates(ent, xform, Transform(target).Coordinates);
+    }
+
+    public void UpdateTeleportTargets(EntityUid ent)
+    {
+        _userInterfaceSystem.SetUiState(ent, MiGoUiKey.Teleport, new MiGoTeleportBuiState()
+        {
+            Warps = GetTeleportsPoints(),
+        });
     }
     #endregion
 }
