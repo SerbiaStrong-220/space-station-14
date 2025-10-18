@@ -1,8 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.CultYogg.Buildings;
-using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
@@ -19,30 +17,11 @@ public sealed class MiGoTeleportBuiState : BoundUserInterfaceState
     public List<(string, NetEntity?)> Warps = [];
 }
 
+
 [Serializable, NetSerializable]
 public enum MiGoUiKey : byte
 {
     Erect,
     Plant,
     Teleport
-}
-
-[Serializable, NetSerializable]
-public sealed class MiGoErectBuildMessage : BoundUserInterfaceMessage
-{
-    public ProtoId<CultYoggBuildingPrototype> BuildingId;
-    public NetCoordinates Location;
-    public Direction Direction;
-}
-
-[Serializable, NetSerializable]
-public sealed class MiGoErectEraseMessage : BoundUserInterfaceMessage
-{
-    public NetEntity BuildingFrame;
-}
-
-[Serializable, NetSerializable]
-public sealed class MiGoErectCaptureMessage : BoundUserInterfaceMessage
-{
-    public NetEntity CapturedBuilding;
 }

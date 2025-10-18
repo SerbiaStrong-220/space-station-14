@@ -2,6 +2,9 @@
 
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
+using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
+using Content.Shared.SS220.CultYogg.Buildings;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
@@ -36,4 +39,25 @@ public record struct CultYoggEnslavedEvent(EntityUid? Target);
 public sealed class MiGoTeleportToTargetMessage(NetEntity? target) : BoundUserInterfaceMessage
 {
     public NetEntity? Target = target;
+}
+
+
+[Serializable, NetSerializable]
+public sealed class MiGoErectBuildMessage : BoundUserInterfaceMessage
+{
+    public ProtoId<CultYoggBuildingPrototype> BuildingId;
+    public NetCoordinates Location;
+    public Direction Direction;
+}
+
+[Serializable, NetSerializable]
+public sealed class MiGoErectEraseMessage : BoundUserInterfaceMessage
+{
+    public NetEntity BuildingFrame;
+}
+
+[Serializable, NetSerializable]
+public sealed class MiGoErectCaptureMessage : BoundUserInterfaceMessage
+{
+    public NetEntity CapturedBuilding;
 }
