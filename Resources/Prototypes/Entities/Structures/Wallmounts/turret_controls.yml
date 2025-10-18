@@ -184,11 +184,41 @@
     - BasicSilicon
     - Borg
   - type: DeployableTurretController
-    accessGroups:
-    - Silicon
+#SS220 Add all access settings to AI sentry panel begin
     accessLevels:
+    - Armory
+    - Atmospherics
+    - Bar
     - BasicSilicon
     - Borg
+    - Brig
+    - Detective
+    - Captain
+    - Cargo
+    - Chapel
+    - Chemistry
+    - ChiefEngineer
+    - ChiefMedicalOfficer
+    - Command
+    - Cryogenics
+    - Engineering
+    - External
+    - HeadOfPersonnel
+    - HeadOfSecurity
+    - Hydroponics
+    - Janitor
+    - Kitchen
+    - Lawyer
+    - Maintenance
+    - Medical
+    - Quartermaster
+    - Research
+    - ResearchDirector
+    - Salvage
+    - Security
+    - Service
+    - Theatre
+#SS220 Add all access settings to AI sentry panel end
 
 - type: entity
   parent: WeaponEnergyTurretStationControlPanelBase

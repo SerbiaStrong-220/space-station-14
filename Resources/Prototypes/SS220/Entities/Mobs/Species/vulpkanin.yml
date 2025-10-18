@@ -70,6 +70,7 @@
       types:
         Slash: 5.5
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
     - id: Canilunzt
