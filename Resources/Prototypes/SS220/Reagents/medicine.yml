@@ -12,7 +12,7 @@
       - !type:GenericStatusEffect
         key: Jitter
         time: 10.0
-        type: Remove
+        # type: Remove
       - !type:GenericStatusEffect
         key: Stutter
         time: 10.0
