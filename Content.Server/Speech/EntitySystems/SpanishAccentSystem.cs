@@ -6,13 +6,16 @@ namespace Content.Server.Speech.EntitySystems
 {
     public sealed class SpanishAccentSystem : EntitySystem
     {
-        [Dependency] private readonly ReplacementAccentSystem _replacement = default!; // SS220 fix spanish accent
-        public override void Initialize()
-        {
-            SubscribeLocalEvent<SpanishAccentComponent, AccentGetEvent>(OnAccent);
-        }
-        public const string SpanishAccentId = "spanish";
-        public string Accentuate(string message)
+    [Dependency] private readonly ReplacementAccentSystem _replacement = default!; // SS220 fix spanish accent
+
+    public const string SpanishAccentId = "spanish"; // SS220 fix spanish accent
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<SpanishAccentComponent, AccentGetEvent>(OnAccent);
+    }
+
+    public string Accentuate(string message)
         {
             // Insert E before every S
             message = InsertS(message);
