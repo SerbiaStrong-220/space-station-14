@@ -150,10 +150,6 @@
         type: Add
         time: 5
         refresh: false
-      - !type:HealthChange
-        damage:
-          types:
-            Poison: 1.0
       - !type:MobThresholdsChange
         statusEffectId: MobThresholdsCriticalFrontier
         duration: 5
