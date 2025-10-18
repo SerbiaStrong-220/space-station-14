@@ -34,6 +34,63 @@ public interface IRoundEndInfoDisplay : IRoundEndInfo
 }
 
 /// <summary>
+/// Generic base class for round-end info types that track data per player.
+/// Provides helper methods for recording, summarizing, and ranking data.
+/// </summary>
+/// <typeparam name="TState">The per-player data structure used by this info type.</typeparam>
+public abstract class RoundEndInfoBase<TState> : IRoundEndInfoDisplay where TState : struct, IBaseInfoState
+{
+    [Dependency] protected readonly IEntityManager EntMan = default!;
+
+    /// <summary>
+    /// Internal per-player data store, mapping each player’s mind entity to their statistics.
+    /// </summary>
+    protected readonly Dictionary<EntityUid, TState> Data = new();
+
+    public abstract int DisplayOrder { get; }
+    public abstract LocId Title { get; }
+    public abstract FormattedMessage GetSummaryText();
+
+    /// <summary>
+    /// Called when a valid player record event occurs.
+    /// Override this method to update the provided state structure.
+    /// </summary>
+    protected abstract void RecordInternal(ref TState state);
+
+    /// <summary>
+    /// Records data for a specific player, if allowed by event checks. (e.g., admin test arena)
+    /// </summary>
+    public void Record(EntityUid userMind)
+    {
+        var ev = new RoundEndAdditionalInfoCheckMapEvent(userMind);
+        EntMan.EventBus.RaiseLocalEvent(userMind, ref ev, true);
+        if (ev.Cancelled)
+            return;
+
+        var state = Data.GetValueOrDefault(userMind);
+
+        RecordInternal(ref state);
+        Data[userMind] = state;
+    }
+
+    /// <summary>
+    /// Returns the entity with the highest value based on a selector function.
+    /// </summary>
+    protected (EntityUid?, int) GetTop(Func<TState, int> selector)
+    {
+        return RoundEndInfoUtils.GetTopBy(Data, selector);
+    }
+
+    /// <summary>
+    /// Returns the total sum of a given selector across all tracked players.
+    /// </summary>
+    protected int GetTotal(Func<TState, int> selector)
+    {
+        return Data.Sum(pair => selector(pair.Value));
+    }
+}
+
+/// <summary>
 /// Stores and aggregates antagonist item purchases during the round.
 /// Each purchase is tracked per player and contributes to the round-end summary.
 /// </summary>
@@ -51,12 +108,18 @@ public sealed class AntagPurchaseInfo : IRoundEndInfo
     /// <summary>
     /// Records a purchased antagonist item for the given user.
     /// </summary>
-    /// <param name="userMind">The mind entity, that made the purchase.</param>
+    /// <param name="userMind">The mind entity that made the purchase.</param>
     /// <param name="itemName">The prototype ID of the purchased item.</param>
     /// <param name="cost">TC cost of the item.</param>
     public void RecordPurchase(EntityUid userMind, string itemName, int cost)
     {
         if (!_entMan.TryGetComponent<MindComponent>(userMind, out var mindComp))
+            return;
+
+        var ev = new RoundEndAdditionalInfoCheckMapEvent(mindComp.CurrentEntity);
+        _entMan.EventBus.RaiseLocalEvent(userMind, ref ev, true);
+
+        if (ev.Cancelled)
             return;
 
         if (!_purchases.TryGetValue(userMind, out var data))
@@ -78,64 +141,33 @@ public sealed class AntagPurchaseInfo : IRoundEndInfo
 /// Tracks food consumption per player during the round,
 /// and provides summary info for display at round end.
 /// </summary>
-public sealed class FoodInfo : IRoundEndInfoDisplay
+public sealed class FoodInfo : RoundEndInfoBase<FoodInfoState>
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-
-    private readonly Dictionary<EntityUid, FoodInfoState> _foodPlayersData = new();
+    /// <inheritdoc/>
+    public override int DisplayOrder => 100;
 
     /// <inheritdoc/>
-    public int DisplayOrder => 100;
+    public override LocId Title => Loc.GetString("additional-info-economy-categories");
 
-    /// <inheritdoc/>
-    public LocId Title => Loc.GetString("additional-info-economy-categories");
-
-    /// <summary>
-    /// Records a food-related event for the specified player's mind.
-    /// </summary>
-    /// <param name="userMind">The mind entity associated with the eating action.</param>
-    public void RecordConsumption(EntityUid userMind)
+    protected override void RecordInternal(ref FoodInfoState state)
     {
-        if (!_foodPlayersData.TryGetValue(userMind, out var foodInfoState))
-        {
-            foodInfoState = new FoodInfoState();
-            _foodPlayersData[userMind] = foodInfoState;
-        }
-
-        foodInfoState.TotalFood++;
-        _foodPlayersData[userMind] = foodInfoState;
-    }
-
-    /// <summary>
-    /// Returns the player who consumed the most food during the round.
-    /// </summary>
-    private (EntityUid?, int) TotalFattestPlayer()
-    {
-        return RoundEndInfoUtils.GetTopBy(_foodPlayersData, d => d.TotalFood);
-    }
-
-    /// <summary>
-    /// Calculates the total amount of food consumed by all tracked players.
-    /// </summary>
-    private int TotalFoodEaten()
-    {
-        return _foodPlayersData.Sum(foodInfoState => foodInfoState.Value.TotalFood);
+        state.TotalFood++;
     }
 
     /// <inheritdoc/>
-    public FormattedMessage GetSummaryText()
+    public override FormattedMessage GetSummaryText()
     {
         var message = new FormattedMessage();
 
-        var (fattest, count) = TotalFattestPlayer();
+        var (fattest, count) = GetTop(top => top.TotalFood);
 
-        if (fattest == null
-            || !_entMan.TryGetComponent<MindComponent>(fattest.Value, out var mind)
-            || string.IsNullOrEmpty(mind.CharacterName))
+        if (fattest == null ||
+            !EntMan.TryGetComponent<MindComponent>(fattest.Value, out var mind) ||
+            string.IsNullOrEmpty(mind.CharacterName))
             return message;
 
         message.AddMarkupOrThrow(Loc.GetString("additional-info-total-food-eaten",
-            ("foodValue", TotalFoodEaten()),
+            ("foodValue", GetTotal(top => top.TotalFood)),
             ("fattestName", mind.CharacterName),
             ("fattestValue", count)));
 
@@ -146,50 +178,49 @@ public sealed class FoodInfo : IRoundEndInfoDisplay
 /// <summary>
 /// Displays the total amount of money earned by Cargo during the round.
 /// </summary>
-public sealed class CargoInfo : IRoundEndInfoDisplay
+public sealed class CargoInfo : RoundEndInfoBase<CargoInfoState>
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-
-    private readonly Dictionary<EntityUid, CargoInfoState> _cargoData = new();
-
-    /// <summary>
-    /// Total station credits earned through cargo operations.
-    /// </summary>
     public int TotalMoneyEarned;
 
-    /// <inheritdoc/>
-    public int DisplayOrder => 102;
-
-    /// <inheritdoc/>
-    public LocId Title => Loc.GetString("additional-info-economy-categories");
+    public override int DisplayOrder => 102;
+    public override LocId Title => Loc.GetString("additional-info-economy-categories");
 
     public void RecordOrder(EntityUid userMind, string itemName, int amount, int cost)
     {
-        if (!_cargoData.TryGetValue(userMind, out var cargoInfoState))
-        {
-            cargoInfoState = new CargoInfoState();
-            _cargoData[userMind] = cargoInfoState;
-        }
+        var ev = new RoundEndAdditionalInfoCheckMapEvent(userMind);
+        EntMan.EventBus.RaiseLocalEvent(userMind, ref ev, true);
+        if (ev.Cancelled)
+            return;
 
-        cargoInfoState.Items.Add((itemName, amount, cost));
+        var state = Data.GetValueOrDefault(userMind);
+
+        state.Items ??= [];
+
+        state.Items.Add((itemName, amount, cost));
+        Data[userMind] = state;
     }
+
+    protected override void RecordInternal(ref CargoInfoState state) { }
 
     private (EntityUid?, int) TotalOrderPlayer()
     {
-        return RoundEndInfoUtils.GetTopBy(_cargoData, cargoData => cargoData.Items.Count);
+        return RoundEndInfoUtils.GetTopBy(Data, cargoData => cargoData.Items?.Count ?? 0);
     }
 
     private int TotalOrders()
     {
-        return _cargoData.Sum(cargoData => cargoData.Value.Items.Count);
+        return Data.Sum(cargoData => cargoData.Value.Items?.Count ?? 0);
     }
 
     private (string ItemName, int Count) GetMostOrderedItem()
     {
         var itemCounts = new Dictionary<string, int>();
 
-        foreach (var cargoInfo in _cargoData.Values)
+        foreach (var cargoInfo in Data.Values)
         {
+            if (cargoInfo.Items == null)
+                continue;
+
             foreach (var (itemName, amount, _) in cargoInfo.Items)
             {
                 if (!itemCounts.TryAdd(itemName, amount))
@@ -200,15 +231,11 @@ public sealed class CargoInfo : IRoundEndInfoDisplay
         if (itemCounts.Count == 0)
             return (string.Empty, 0);
 
-        var mostOrdered = itemCounts
-            .OrderByDescending(pair => pair.Value)
-            .First();
-
+        var mostOrdered = itemCounts.MaxBy(pair => pair.Value);
         return (mostOrdered.Key, mostOrdered.Value);
     }
 
-    /// <inheritdoc/>
-    public FormattedMessage GetSummaryText()
+    public override FormattedMessage GetSummaryText()
     {
         var message = new FormattedMessage();
 
@@ -218,8 +245,7 @@ public sealed class CargoInfo : IRoundEndInfoDisplay
 
         var player = totalOrderPlayer.Item1;
         var count = totalOrderPlayer.Item2;
-
-        var name = RoundEndInfoUtils.GetMindName(_entMan, player);
+        var name = RoundEndInfoUtils.GetMindName(EntMan, player);
 
         message.AddMarkupOrThrow(Loc.GetString("additional-info-cargo",
             ("totalMoney", TotalMoneyEarned),
@@ -293,64 +319,33 @@ public sealed class OreInfo : IRoundEndInfoDisplay
 /// Tracks how many puddles each player cleaned with a mop,
 /// and displays the most diligent janitor at round end.
 /// </summary>
-public sealed class PuddleInfo : IRoundEndInfoDisplay
+public sealed class PuddleInfo : RoundEndInfoBase<PuddleInfoState>
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-
-    private readonly Dictionary<EntityUid, PuddleInfoState> _puddleData = new();
+    /// <inheritdoc/>
+    public override int DisplayOrder => 200;
 
     /// <inheritdoc/>
-    public int DisplayOrder => 200;
+    public override LocId Title => Loc.GetString("additional-info-janitor-categories");
 
-    /// <inheritdoc/>
-    public LocId Title => Loc.GetString("additional-info-janitor-categories");
-
-    /// <summary>
-    /// Increments the puddle-cleaning count for a player who used a mop.
-    /// </summary>
-    /// <param name="userMind">The mind entity that cleaned a puddle.</param>
-    public void RecordCleaning(EntityUid userMind)
+    protected override void RecordInternal(ref PuddleInfoState state)
     {
-        if (!_puddleData.TryGetValue(userMind, out var puddleInfoState))
-        {
-            puddleInfoState = new PuddleInfoState();
-            _puddleData[userMind] = puddleInfoState;
-        }
-
-        puddleInfoState.TotalPuddle++;
-        _puddleData[userMind] = puddleInfoState;
-    }
-
-    /// <summary>
-    /// Finds the player who mopped the most puddles.
-    /// </summary>
-    private (EntityUid?, int) TotalPuddleByPlayer()
-    {
-        return RoundEndInfoUtils.GetTopBy(_puddleData, d => d.TotalPuddle);
-    }
-
-    /// <summary>
-    /// Returns the total number of puddles cleaned by all players.
-    /// </summary>
-    private int TotalPuddles()
-    {
-        return _puddleData.Sum(puddleData => puddleData.Value.TotalPuddle);
+        state.TotalPuddle++;
     }
 
     /// <inheritdoc/>
-    public FormattedMessage GetSummaryText()
+    public override FormattedMessage GetSummaryText()
     {
         var message = new FormattedMessage();
 
-        var (topJanitor, topValue) = TotalPuddleByPlayer();
+        var (topJanitor, topValue) = GetTop(top => top.TotalPuddle);
 
-        if (topJanitor == null
-            || !_entMan.TryGetComponent<MindComponent>(topJanitor.Value, out var mind)
-            || string.IsNullOrEmpty(mind.CharacterName))
+        if (topJanitor == null ||
+            !EntMan.TryGetComponent<MindComponent>(topJanitor.Value, out var mind) ||
+            string.IsNullOrEmpty(mind.CharacterName))
             return message;
 
         message.AddMarkupOrThrow(Loc.GetString("additional-info-total-puddles",
-            ("puddleValue", TotalPuddles()),
+            ("puddleValue", GetTotal(top => top.TotalPuddle)),
             ("janitorName", mind.CharacterName),
             ("janitorValue", topValue)));
 
@@ -362,63 +357,33 @@ public sealed class PuddleInfo : IRoundEndInfoDisplay
 /// Tracks and displays data about firearms usage during the round,
 /// including total shots fired and the player with the most shots.
 /// </summary>
-public sealed class GunInfo : IRoundEndInfoDisplay
+public sealed class GunInfo : RoundEndInfoBase<GunInfoState>
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-
-    private readonly Dictionary<EntityUid, GunInfoState> _gunData = new();
+    /// <inheritdoc/>
+    public override int DisplayOrder => 300;
 
     /// <inheritdoc/>
-    public int DisplayOrder => 300;
+    public override LocId Title => Loc.GetString("additional-info-gun-categories");
 
-    /// <inheritdoc/>
-    public LocId Title => Loc.GetString("additional-info-gun-categories");
-
-    /// <summary>
-    /// Records that a shot was fired by the specified player.
-    /// </summary>
-    public void RecordShoot(EntityUid userMind)
+    protected override void RecordInternal(ref GunInfoState state)
     {
-        if (!_gunData.TryGetValue(userMind, out var gunInfoState))
-        {
-            gunInfoState = new GunInfoState();
-            _gunData[userMind] = gunInfoState;
-        }
-
-        gunInfoState.TotalShots++;
-        _gunData[userMind] = gunInfoState;
-    }
-
-    /// <summary>
-    /// Identifies the player who fired the most shots.
-    /// </summary>
-    private (EntityUid?, int) TotalShotsByPlayer()
-    {
-        return RoundEndInfoUtils.GetTopBy(_gunData, d => d.TotalShots);
-    }
-
-    /// <summary>
-    /// Calculates the total number of shots fired during the round.
-    /// </summary>
-    private int TotalShots()
-    {
-        return _gunData.Sum(gunData => gunData.Value.TotalShots);
+        state.TotalShots++;
     }
 
     /// <inheritdoc/>
-    public FormattedMessage GetSummaryText()
+    public override FormattedMessage GetSummaryText()
     {
         var message = new FormattedMessage();
 
-        var (topShooter, topValue) = TotalShotsByPlayer();
+        var (topShooter, topValue) = GetTop(top => top.TotalShots);
 
-        if (topShooter == null
-            || !_entMan.TryGetComponent<MindComponent>(topShooter.Value, out var mind)
-            || string.IsNullOrEmpty(mind.CharacterName))
+        if (topShooter == null ||
+            !EntMan.TryGetComponent<MindComponent>(topShooter.Value, out var mind) ||
+            string.IsNullOrEmpty(mind.CharacterName))
             return message;
 
         message.AddMarkupOrThrow(Loc.GetString("additional-info-total-shots",
-            ("ammoValue", TotalShots()),
+            ("ammoValue", GetTotal(total => total.TotalShots)),
             ("gunnerName", mind.CharacterName),
             ("gunnerValue", topValue)));
 
@@ -431,57 +396,52 @@ public sealed class GunInfo : IRoundEndInfoDisplay
 /// Provides statistics such as total deaths, the player with the most deaths,
 /// and the first recorded death for inclusion in the round end summary.
 /// </summary>
-public sealed class DeathInfo : IRoundEndInfoDisplay
+public sealed class DeathInfo : RoundEndInfoBase<DeathInfoState>
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
     private readonly SharedGameTicker _gameTicker;
 
-    private readonly Dictionary<EntityUid, DeathInfoState> _deathData = new();
-
-    /// <inheritdoc/>
-    public int DisplayOrder => 400;
-
-    /// <inheritdoc/>
-    public LocId Title => Loc.GetString("additional-info-death-categories");
+    public override int DisplayOrder => 400;
+    public override LocId Title => Loc.GetString("additional-info-death-categories");
 
     public DeathInfo()
     {
         IoCManager.InjectDependencies(this);
-        _gameTicker = _entMan.System<SharedGameTicker>();
+        _gameTicker = EntMan.System<SharedGameTicker>();
     }
 
-    /// <summary>
-    /// Records the time of death for the given player if valid and not in the admin arena.
-    /// </summary>
     public void RecordDeath(EntityUid userMind)
     {
-        if (!_deathData.TryGetValue(userMind, out var deathInfoState))
-        {
-            deathInfoState = new DeathInfoState();
-            _deathData[userMind] = deathInfoState;
-        }
+        var ev = new RoundEndAdditionalInfoCheckMapEvent(userMind);
+        EntMan.EventBus.RaiseLocalEvent(userMind, ref ev, true);
 
-        deathInfoState.TimeOfDeath.Add(_gameTicker.RoundDuration());
+        if (ev.Cancelled)
+            return;
+
+        var state = Data.GetValueOrDefault(userMind);
+
+        state.TimeOfDeath ??= [];
+        state.TimeOfDeath.Add(_gameTicker.RoundDuration());
+
+        Data[userMind] = state;
     }
 
-    /// <summary>
-    /// Finds the player with the highest number of recorded deaths.
-    /// </summary>
+    protected override void RecordInternal(ref DeathInfoState state) { }
+
     private (EntityUid?, int) GetMostDeathsByPlayer()
     {
-        return RoundEndInfoUtils.GetTopBy(_deathData, d => d.TimeOfDeath.Count);
+        return RoundEndInfoUtils.GetTopBy(Data, d => d.TimeOfDeath?.Count ?? 0);
     }
 
-    /// <summary>
-    /// Identifies the first death of the round and when it occurred.
-    /// </summary>
-    private (EntityUid? uid, TimeSpan time) GetEarliestDeath()
+    private (EntityUid?, TimeSpan) GetEarliestDeath()
     {
         EntityUid? earliestUid = null;
         var earliestTime = TimeSpan.MaxValue;
 
-        foreach (var (uid, deathData) in _deathData)
+        foreach (var (uid, deathData) in Data)
         {
+            if (deathData.TimeOfDeath == null)
+                continue;
+
             foreach (var time in deathData.TimeOfDeath)
             {
                 if (time >= earliestTime)
@@ -495,40 +455,128 @@ public sealed class DeathInfo : IRoundEndInfoDisplay
         return (earliestUid, earliestTime);
     }
 
-    /// <summary>
-    /// Calculates the total number of deaths recorded this round.
-    /// </summary>
     private int TotalDeath()
     {
-        return _deathData.Sum(deathData => deathData.Value.TimeOfDeath.Count);
+        return Data.Sum(d => d.Value.TimeOfDeath?.Count ?? 0);
     }
 
-    /// <inheritdoc/>
-    public FormattedMessage GetSummaryText()
+    public override FormattedMessage GetSummaryText()
     {
         var message = new FormattedMessage();
 
         var totalDeath = TotalDeath();
-
         if (totalDeath == 0)
             return message;
 
-        var (suicideEntity, suicideValue) = GetMostDeathsByPlayer();
-        var (suicideEarlierEntity, suicideEarlierValue) = GetEarliestDeath();
+        var (mostDeathsUid, mostDeathsCount) = GetMostDeathsByPlayer();
+        var (earliestUid, earliestTime) = GetEarliestDeath();
 
-        if (suicideEntity == null
-            || suicideEarlierEntity == null)
+        if (mostDeathsUid == null || earliestUid == null)
             return message;
 
-        var suicideName = RoundEndInfoUtils.GetMindName(_entMan, suicideEntity.Value);
-        var suicideEarlierName = RoundEndInfoUtils.GetMindName(_entMan, suicideEarlierEntity.Value);
+        var mostDeathsName = RoundEndInfoUtils.GetMindName(EntMan, mostDeathsUid.Value);
+        var earliestName = RoundEndInfoUtils.GetMindName(EntMan, earliestUid.Value);
 
         message.AddMarkupOrThrow(Loc.GetString("additional-info-total-death",
             ("deathValue", totalDeath),
-            ("suicideName", suicideName),
-            ("suicideValue", suicideValue),
-            ("suicideEarlierName", suicideEarlierName),
-            ("suicideEarlierValue", suicideEarlierValue.ToString(@"hh\:mm\:ss"))));
+            ("suicideName", mostDeathsName),
+            ("suicideValue", mostDeathsCount),
+            ("suicideEarlierName", earliestName),
+            ("suicideEarlierValue", earliestTime.ToString(@"hh\:mm\:ss"))));
+
+        return message;
+    }
+}
+
+public sealed class EmergencyShuttleInfo : RoundEndInfoBase<EmergencyShuttleInfoState>
+{
+    public override int DisplayOrder => 500;
+    public override LocId Title => Loc.GetString("additional-info-emergency-shuttles-categories");
+    protected override void RecordInternal(ref EmergencyShuttleInfoState state) { }
+
+    public void RecordShuttle(EntityUid? shuttle)
+    {
+        if (shuttle == null)
+            return;
+
+        var state = Data.GetValueOrDefault(shuttle.Value);
+
+        state.FirstEmergencyCallTime ??= EntMan.System<SharedGameTicker>().RoundDuration();
+        state.TotalCalled++;
+        state.LastEmergencyCallTime = EntMan.System<SharedGameTicker>().RoundDuration();
+
+        Data[shuttle.Value] = state;
+    }
+
+    public override FormattedMessage GetSummaryText()
+    {
+        var message = new FormattedMessage();
+        var mostCalled = Data.FirstOrDefault(d => d.Value.FirstEmergencyCallTime != null).Value;
+
+        if (mostCalled.FirstEmergencyCallTime == null)
+            return message;
+
+        message.AddMarkupOrThrow(Loc.GetString("additional-info-emergency-shuttles",
+            ("firstShuttleTime", mostCalled.FirstEmergencyCallTime.Value.ToString(@"hh\:mm\:ss")),
+            ("lastShuttleTime", mostCalled.LastEmergencyCallTime!.Value.ToString(@"hh\:mm\:ss")),
+            ("countCalls", mostCalled.TotalCalled)));
+
+        return message;
+    }
+}
+
+public sealed class HealingInfo : RoundEndInfoBase<HealingInfoState>
+{
+    public override int DisplayOrder => 600;
+    public override LocId Title => Loc.GetString("additional-info-healing-categories");
+
+    public void RecordHealing(EntityUid healer, int amount)
+    {
+        var state = Data.GetValueOrDefault(healer);
+        state.TotalHealed += amount;
+
+        Data[healer] = state;
+    }
+
+    protected override void RecordInternal(ref HealingInfoState state) { }
+
+    public override FormattedMessage GetSummaryText()
+    {
+        var message = new FormattedMessage();
+
+        var total = GetTotal(total => total.TotalHealed);
+        var top = GetTop(top => top.TotalHealed);
+        var name = RoundEndInfoUtils.GetMindName(EntMan, top.Item1);
+
+        message.AddMarkupOrThrow(Loc.GetString("additional-info-healing",
+            ("totalHealing", total),
+            ("topHealerName", name),
+            ("topHealerCount", top.Item2)));
+
+        return message;
+    }
+}
+
+public sealed class StunBatonInfo : RoundEndInfoBase<StunBatonInfoState>
+{
+    public override int DisplayOrder => 700;
+    public override LocId Title => Loc.GetString("additional-info-sec-categories");
+
+    protected override void RecordInternal(ref StunBatonInfoState state)
+    {
+        state.TotalHits++;
+    }
+
+    public override FormattedMessage GetSummaryText()
+    {
+        var message = new FormattedMessage();
+
+        var top = GetTop(top => top.TotalHits);
+        var name = RoundEndInfoUtils.GetMindName(EntMan, top.Item1);
+        message.AddMarkupOrThrow(Loc.GetString("additional-info-sec-baton",
+            ("totalHits", GetTotal(total => total.TotalHits)),
+            ("topSecName", name),
+            ("topSecCount", top.Item2)));
 
         return message;
     }

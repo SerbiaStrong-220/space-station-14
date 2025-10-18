@@ -13,6 +13,17 @@ public abstract partial class SharedRoundEndInfoSystem : EntitySystem;
 public interface IRoundEndInfoData;
 
 /// <summary>
+/// Event used to determine whether a player should be included when recording additional round-end information.
+/// </summary>
+/// <remarks>
+/// This event is raised locally on the player's mind before adding a new round-end entry.
+/// Any system can handle this event and set <see cref="Cancelled"/> to <c>true</c>
+/// to exclude the player from being counted in round-end statistics (e.g., if they are in an admin arena).
+/// </remarks>
+[ByRefEvent]
+public record struct RoundEndAdditionalInfoCheckMapEvent(EntityUid? User, bool Cancelled = false);
+
+/// <summary>
 /// Event sent at the end of the round containing additional round-end information blocks.
 /// </summary>
 [Serializable, NetSerializable]

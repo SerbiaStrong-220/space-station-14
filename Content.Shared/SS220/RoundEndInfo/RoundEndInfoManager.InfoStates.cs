@@ -22,7 +22,7 @@ public record struct PuddleInfoState(int TotalPuddle) : IBaseInfoState;
 /// </summary>
 public struct CargoInfoState() : IBaseInfoState
 {
-    public List<(string, int, int)> Items { get; } = new();
+    public List<(string, int, int)>? Items { get; set; } = new();
 }
 
 /// <summary>
@@ -30,6 +30,16 @@ public struct CargoInfoState() : IBaseInfoState
 /// </summary>
 public record struct DeathInfoState() : IBaseInfoState
 {
-    public List<TimeSpan> TimeOfDeath { get; } = new();
+    public List<TimeSpan>? TimeOfDeath { get; set; } = new();
 }
 
+public record struct EmergencyShuttleInfoState : IBaseInfoState
+{
+    public TimeSpan? FirstEmergencyCallTime { get; set; }
+    public TimeSpan? LastEmergencyCallTime { get; set; }
+    public int TotalCalled { get; set; }
+}
+
+public record struct HealingInfoState(int TotalHealed) : IBaseInfoState;
+
+public record struct StunBatonInfoState(int TotalHits) : IBaseInfoState;

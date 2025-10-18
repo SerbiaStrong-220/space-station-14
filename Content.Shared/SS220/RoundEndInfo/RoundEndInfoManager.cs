@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.Mind;
+using Robust.Shared.Network;
 
 namespace Content.Shared.SS220.RoundEndInfo;
 
@@ -9,10 +10,10 @@ namespace Content.Shared.SS220.RoundEndInfo;
 /// </summary>
 public interface IRoundEndInfoManager
 {
-    public T EnsureInfo<T>() where T : class, IRoundEndInfo, new();
-    public bool TryGetInfo<T>(out T info) where T : IRoundEndInfo;
-    public void ClearAllData();
-    public IEnumerable<IRoundEndInfo> GetAllInfos();
+    T EnsureInfo<T>() where T : class, IRoundEndInfo, new();
+    bool TryGetInfo<T>(out T info) where T : IRoundEndInfo;
+    void ClearAllData();
+    IEnumerable<IRoundEndInfo> GetAllInfos();
 }
 
 public static class RoundEndInfoUtils

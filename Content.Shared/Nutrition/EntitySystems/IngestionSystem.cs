@@ -400,8 +400,10 @@ public sealed partial class IngestionSystem : EntitySystem
         var eventArgs = new DestructionEventArgs();
         RaiseLocalEvent(food, eventArgs);
 
+        //ss220 add additional info for round start
         if (_net.IsServer && _mind.TryGetMind(args.User, out var mind, out _))
-            _infoManager.EnsureInfo<FoodInfo>().RecordConsumption(mind);
+            _infoManager.EnsureInfo<FoodInfo>().Record(mind);
+        //ss220 add additional info for round end
 
         PredictedDel(food);
 

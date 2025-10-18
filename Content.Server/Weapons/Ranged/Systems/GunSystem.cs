@@ -304,13 +304,8 @@ public sealed partial class GunSystem : SharedGunSystem
         });
 
         //ss220 add additional info for round start
-        if (user == null)
-            return;
-
-        if (!_mind.TryGetMind(user.Value, out var mind, out _))
-            return;
-
-        _infoManager.EnsureInfo<GunInfo>().RecordShoot(mind);
+        if (user != null && _mind.TryGetMind(user.Value, out var mind, out _))
+            _infoManager.EnsureInfo<GunInfo>().Record(mind);
         //ss220 add additional info for round end
 
         void CreateAndFireProjectiles(EntityUid ammoEnt, AmmoComponent ammoComp)

@@ -162,8 +162,8 @@ namespace Content.Client.RoundEnd
             content.AddChild(new RichTextLabel
             {
                 Text = Loc.GetString("additional-info-antag-items-label"),
-                Modulate = Color.OrangeRed,
                 StyleClasses = { "LabelHeading" },
+                Margin = new Thickness(4, 0, 0, 0),
             });
 
             _antagItemContainer = content;
@@ -184,18 +184,19 @@ namespace Content.Client.RoundEnd
                 Text = data.Name,
                 FontColorOverride = Color.Red,
                 StyleClasses = { "LabelBig" },
-                Margin = new Thickness(3, 0, 0, 0),
+                Margin = new Thickness(4, 0, 0, 0),
             });
 
             playerBox.AddChild(new RichTextLabel
             {
                 Text = Loc.GetString("additional-info-antag-total-spent-tc", ("value", data.TotalTC)),
+                Margin = new Thickness(4, 0, 0, 0),
             });
 
             var iconGrid = new GridContainer
             {
                 Columns = 8,
-                Margin = new Thickness(0, 4, 0, 4),
+                Margin = new Thickness(4, 4, 0, 4),
             };
 
             foreach (var item in data.ItemPrototypes)
@@ -248,10 +249,9 @@ namespace Content.Client.RoundEnd
                 Orientation = LayoutOrientation.Vertical,
             };
 
-            var titleLabel = new Label
+            var titleLabel = new RichTextLabel
             {
-                Text = block.Title,
-                FontColorOverride = Color.Gold,
+                Text = Loc.GetString(block.Title),
                 StyleClasses = { "LabelHeading" },
             };
 

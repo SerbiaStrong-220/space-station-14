@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server.Administration.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.SS220.RoundEndInfo;
@@ -13,12 +14,15 @@ namespace Content.Server.SS220.RoundEndInfo;
 /// </summary>
 public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
 {
+    [Dependency] private readonly AdminTestArenaSystem _arena = default!;
     [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnd);
+        SubscribeLocalEvent<RoundStartedEvent>(OnRoundStart);
+        SubscribeLocalEvent<RoundEndAdditionalInfoCheckMapEvent>(OnMapCheck);
     }
 
     /// <summary>
@@ -28,6 +32,39 @@ public sealed class RoundEndInfoSystem : SharedRoundEndInfoSystem
     {
         SendAdditionalInfo();
         _infoManager.ClearAllData();
+    }
+
+    /// <summary>
+    /// Clears all stored data when the round starts.
+    /// </summary>
+    private void OnRoundStart(RoundStartedEvent args)
+    {
+        _infoManager.ClearAllData();
+    }
+
+    /// <summary>
+    /// Handles <see cref="RoundEndAdditionalInfoCheckMapEvent"/> to determine whether a player
+    /// should be excluded from round-end statistics based on their current map.
+    /// </summary>
+    private void OnMapCheck(ref RoundEndAdditionalInfoCheckMapEvent args)
+    {
+        if (args.User == null || !Exists(args.User) || TerminatingOrDeleted(args.User))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        var user = args.User.Value;
+
+        if (TryComp<MindComponent>(args.User, out var mind) && mind.CurrentEntity != null)
+            user = mind.CurrentEntity.Value;
+
+        var xform = Transform(user);
+
+        if (_arena.ArenaMap.ToList().All(kvp => kvp.Value != xform.MapUid))
+            return;
+
+        args.Cancelled = true;
     }
 
     /// <summary>
