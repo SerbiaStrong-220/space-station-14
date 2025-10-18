@@ -282,7 +282,7 @@ public sealed partial class StoreSystem
         {
             if (_mind.TryGetMind(msg.Actor, out var mind, out _))
             {
-                var tcAmount = costTc.Value / 100;
+                var tcAmount = costTc.Int();
                 _infoManager.EnsureInfo<AntagPurchaseInfo>().RecordPurchase(mind, listing.ID, tcAmount);
             }
         }
