@@ -30,7 +30,7 @@
       effects:
       - !type:Hallucination
         setting:
-          randomEntities: HallucinationSupermatterCrystal
+          randomEntities: HallucinationRevenant
           betweenHallucinations: 4
           hallucinationMinTime: 2
           hallucinationMaxTime: 10
@@ -80,14 +80,14 @@
             Poison: 1.0
       - !type:Hallucination
         setting:
-          randomEntities: HallucinationSupermatterCrystal
+          randomEntities: HallucinationRevenant
           betweenHallucinations: 4
           hallucinationMinTime: 2
           hallucinationMaxTime: 10
           totalDuration: 3
           checkPockets: false
       - !type:MobThresholdsChange
-        statusEffectId: MobThresholdsCriticalMorphine
+        statusEffectId: MobThresholdsModifierMorphine
         duration: 5
         refresh: false
     Medicine:
@@ -147,7 +147,7 @@
         time: 5
         refresh: false
       - !type:MobThresholdsChange
-        statusEffectId: MobThresholdsCriticalFrontier
+        statusEffectId: MobThresholdsModifierFrontier
         duration: 5
         refresh: false
       - !type:StaminaDamage
@@ -155,7 +155,7 @@
         value: 10
       - !type:Hallucination
         setting:
-          randomEntities: HallucinationSupermatterCrystal
+          randomEntities: HallucinationRevenant
           betweenHallucinations: 4
           hallucinationMinTime: 2
           hallucinationMaxTime: 10

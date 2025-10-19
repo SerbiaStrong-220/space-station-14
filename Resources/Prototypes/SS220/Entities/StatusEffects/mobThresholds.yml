@@ -11,22 +11,8 @@
 
 - type: entity
   parent: MobThresholdsModifierStatusEffect
-  id: MobThresholdsModifierStatusEffectExample
-  name: mob thresholds modifier status effect example
-  components:
-  - type: MobThresholdsModifierStatusEffect
-    modifiers:
-      Critical:
-        multiplier: 4.
-        flat: -20
-      Dead:
-        multiplier: 1.
-        flat: 45
-
-- type: entity
-  parent: MobThresholdsModifierStatusEffect
-  id: MobThresholdsCriticalMorphine
-  name: mob thresholds critical morphine
+  id: MobThresholdsModifierMorphine
+  name: mob thresholds modifier by morphine
   components:
   - type: MobThresholdsModifierStatusEffect
     modifiers:
@@ -35,8 +21,8 @@
 
 - type: entity
   parent: MobThresholdsModifierStatusEffect
-  id: MobThresholdsCriticalFrontier
-  name: mob thresholds critical frontier
+  id: MobThresholdsModifierFrontier
+  name: mob thresholds modifier by frontier
   components:
   - type: MobThresholdsModifierStatusEffect
     modifiers:
