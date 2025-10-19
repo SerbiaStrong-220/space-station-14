@@ -110,7 +110,7 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
         {
             ent.Comp.IsActivated = false;
 
-            var args = new EmergencyShuttleLockdownActiveEvent();
+            var args = new EmergencyShuttleLockdownDeactiveEvent();
             RaiseLocalEvent(ent, ref args);
 
             SendAnounce(ent);
