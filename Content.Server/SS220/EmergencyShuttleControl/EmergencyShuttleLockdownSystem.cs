@@ -165,6 +165,9 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
     /// </summary>
     private bool ValidateGridInStation(Entity<EmergencyShuttleLockdownComponent> ent)
     {
+        if (!ent.Comp.IsOnlyInStationActive)
+            return true;
+
         EmergencyShuttleLockdownComponent comp = ent.Comp;
 
         var xform = Transform(ent.Owner);
