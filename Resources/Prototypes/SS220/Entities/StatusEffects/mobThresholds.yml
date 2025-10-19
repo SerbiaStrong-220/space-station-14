@@ -22,3 +22,23 @@
       Dead:
         multiplier: 1.
         flat: 45
+
+- type: entity
+  parent: MobThresholdsModifierStatusEffect
+  id: MobThresholdsCriticalMorphine
+  name: mob thresholds critical morphine
+  components:
+  - type: MobThresholdsModifierStatusEffect
+    modifiers:
+      Critical:
+        flat: 20
+
+- type: entity
+  parent: MobThresholdsModifierStatusEffect
+  id: MobThresholdsCriticalFrontier
+  name: mob thresholds critical frontier
+  components:
+  - type: MobThresholdsModifierStatusEffect
+    modifiers:
+      Critical:
+        flat: 50
