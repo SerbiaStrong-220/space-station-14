@@ -80,10 +80,13 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
         Deactivate(ent);
     }
 
-    private void OnUseInHand(Entity<EmergencyShuttleLockdownComponent> entity, ref UseInHandEvent args)
+    private void OnUseInHand(Entity<EmergencyShuttleLockdownComponent> entity, ref UseInHandEvent e)
     {
         if (entity.Comp.IsInHandActive)
-            RaiseLocalEvent(entity, new EmergencyShuttleLockdownToggleActionEvent());
+        {
+            var args = new EmergencyShuttleLockdownToggleActionEvent();
+            RaiseLocalEvent(entity, ref args);
+        }
     }
     #endregion
 
@@ -92,10 +95,11 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
         if (!_emergency.EmergencyShuttleArrived && ValidateGridInStation(ent))
         {
             ent.Comp.IsActivated = true;
-
             _roundEnd.CancelRoundEndCountdown(ent.Owner, false);
 
-            RaiseLocalEvent(ent, new EmergencyShuttleLockdownActiveEvent());
+            var args = new EmergencyShuttleLockdownActiveEvent();
+            RaiseLocalEvent(ent, ref args);
+
             SendAnounce(ent);
         }
     }
@@ -105,7 +109,10 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
         if (!_emergency.EmergencyShuttleArrived && ValidateGridInStation(ent))
         {
             ent.Comp.IsActivated = false;
-            RaiseLocalEvent(ent, new EmergencyShuttleLockdownDeactiveEvent());
+
+            var args = new EmergencyShuttleLockdownActiveEvent();
+            RaiseLocalEvent(ent, ref args);
+
             SendAnounce(ent);
         }
     }
