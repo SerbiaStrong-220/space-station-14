@@ -60,18 +60,26 @@ public sealed partial class MobThresholdsChange : EntityEffect
                 : writeMultiplier ? "multiplier"
                 : "flat";
 
+            var multiplierDesc = Loc.GetString("reagent-effect-guidebook-mob-thresholds-modifier-multiplier",
+                ("value", modifier.Multiplier.Float()));
+
+            var flat = modifier.Flat.Float();
+            var flatDesc = Loc.GetString("reagent-effect-guidebook-mob-thresholds-modifier-flat",
+                ("increase", flat >= 0),
+                ("value", flat));
+
             var line = "\n    " + Loc.GetString("reagent-effect-guidebook-mob-thresholds-modifier-line",
                 ("mobstate", state.ToString()),
                 ("modifierType", modifierType),
-                ("multiplier", modifier.Multiplier.Float()),
-                ("flat", modifier.Flat.Float()));
+                ("multiplier", multiplierDesc),
+                ("flat", flatDesc));
             lines.Add(line);
         }
 
         if (lines.Count <= 0)
             return null;
 
-        var statesChanges = string.Join("; ", lines);
+        var statesChanges = string.Join(';', lines);
         var result = Loc.GetString("reagent-effect-guidebook-mob-thresholds-modifier",
             ("refresh", Refresh),
             ("duration", Duration.TotalSeconds),

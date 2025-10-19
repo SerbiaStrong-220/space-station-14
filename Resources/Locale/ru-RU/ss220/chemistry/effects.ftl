@@ -5,7 +5,7 @@ reagent-effect-guidebook-mob-thresholds-modifier =
                     [one] секунду
                     [few] секунды
                     *[other] секунд
-                } (складывается) вызывает изменение порогов состояний сущности: { $stateschanges }
+                } (накапливается) вызывает изменение порогов состояний сущности: { $stateschanges }
             *[true] На { $duration } { $duration ->
                     [one] секунду
                     [few] секунды
@@ -13,20 +13,19 @@ reagent-effect-guidebook-mob-thresholds-modifier =
                 } вызывает изменение порогов состояний сущности: { $stateschanges }
     }
 reagent-effect-guidebook-mob-thresholds-modifier-line = { $mobstate }: { $modifierType ->
-        [multiplier] в { $multiplier } { $multiplier ->
-                [one] раз
-                [few] раза
-                *[other] раз
-            }
-        [flat] на { $flat } ед
-        *[both] в { $multiplier } { $multiplier ->
-                [one] раз
-                [few] раза
-                *[other] раз
-            } и на { $flat } ед
+        [multiplier] { $multiplier }
+        [flat] { $flat }
+        *[both] { $multiplier } и { $flat }
     }
-reagent-effect-guidebook-mob-thresholds-modifier-flat = на { $flat } ед
-reagent-effect-guidebook-mob-thresholds-modifier-and = и
+reagent-effect-guidebook-mob-thresholds-modifier-multiplier = в { $value } { $value ->
+        [one] раз
+        [few] раза
+        *[other] раз
+    }
+reagent-effect-guidebook-mob-thresholds-modifier-flat = { $increase ->
+        *[true] увеличивает
+        [false] уменьшает
+    } на { $value } ед
 
 reaction-effect-guidebook-hallucination = Вызывает галлюцинации длительностью в { $duration } { $duration ->
         [one] секунду
