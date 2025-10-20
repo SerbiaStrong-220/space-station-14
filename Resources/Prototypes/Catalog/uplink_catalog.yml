@@ -1715,6 +1715,21 @@
   categories:
     - UplinkWearables
 
+#SS220 Thief's gloves back to uplink START
+- type: listing
+  id: UplinkgClothingThievingGloves
+  name: uplink-clothing-chameleon-thieving-gloves-name
+  description: uplink-clothing-chameleon-thieving-gloves-desc
+  productEntity: ClothingHandsChameleonThief
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 2 #ss220-uplink-discounts
+  cost:
+    Telecrystal: 3 #ss220-uplink-discounts
+  categories:
+  - UplinkWearables
+#SS220 Thief's gloves back to uplink END
+
 - type: listing
   id: UplinkClothingNoSlipsShoes
   name: uplink-clothing-no-slips-shoes-name
