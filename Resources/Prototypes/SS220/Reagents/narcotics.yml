@@ -30,7 +30,7 @@
       effects:
       - !type:Hallucination
         setting:
-          randomEntities: HallucinationRevenant
+          randomEntities: HallucinationReagentOpium
           betweenHallucinations: 4
           hallucinationMinTime: 2
           hallucinationMaxTime: 10
@@ -80,7 +80,7 @@
             Poison: 1.0
       - !type:Hallucination
         setting:
-          randomEntities: HallucinationRevenant
+          randomEntities: HallucinationReagentMorphine
           betweenHallucinations: 4
           hallucinationMinTime: 2
           hallucinationMaxTime: 10
@@ -155,7 +155,7 @@
         value: 10
       - !type:Hallucination
         setting:
-          randomEntities: HallucinationRevenant
+          randomEntities: HallucinationReagentFrontier
           betweenHallucinations: 4
           hallucinationMinTime: 2
           hallucinationMaxTime: 10
