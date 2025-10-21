@@ -80,12 +80,12 @@ public sealed partial class UndereducatedSystem : EntitySystem
         if (!TryComp<UndereducatedComponent>(ent, out var comp) || comp.Tuned)
             return;
 
-        args.Chance = Math.Clamp(args.Chance, 0f, 1f);
+        var chance = Math.Clamp(args.Chance, 0f, 1f);
 
         if (_languageSystem.CanSpeak(ent, args.SelectedLanguage))
             comp.Language = args.SelectedLanguage;
 
-        comp.ChanseToReplace = args.Chance;
+        comp.ChanseToReplace = chance;
         comp.Tuned = true;
         Dirty(ent, comp);
     }
