@@ -53,7 +53,7 @@ accent-spanish-words-14 = привет
 accent-spanish-words-14-2 = здравствуй
 accent-spanish-words-replace-14 = hola
 
-accent-spanish-words-15 = пока
+accent-spanish-words-15 = увидимся
 accent-spanish-words-15-2 = прощай
 accent-spanish-words-replace-15 = adiós
 
