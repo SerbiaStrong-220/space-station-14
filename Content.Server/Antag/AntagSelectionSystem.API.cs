@@ -420,22 +420,51 @@ public sealed partial class AntagSelectionSystem
     }
 
     // SS220 DynamicTraitor begin
-    /// <summary>
-    /// Sets the maximum value for the number of antagonists
-    /// </summary>
-    /// <param name="selectionComp"> base component</param>
-    /// <param name="maxAntags"> number of maximum antags</param>
-    public void SetMaxAntags(AntagSelectionComponent selectionComp, List<ProtoId<AntagPrototype>> antags, int maxAntags)
-    {
-        for (var i = 0; i < selectionComp.Definitions.Count; i++)
-        {
-            var def = selectionComp.Definitions[i];
 
-            if (!def.PrefRoles.Except(antags).Any())
+    public void SetAntagLimit(AntagSelectionComponent comp, string roleId, int? newMin = null, int? newMax = null)
+    {
+        for (var i = 0; i < comp.Definitions.Count; i++)
+        {
+            var def = comp.Definitions[i];
+
+            var hasRole = def.PrefRoles.Contains(roleId);
+
+            if (!hasRole)
+                continue;
+
+            if (newMin.HasValue)
+                def.Min = newMin.Value;
+
+            if (newMax.HasValue)
+                def.Max = newMax.Value;
+
+            comp.Definitions[i] = def;
+            return;
+        }
+    }
+
+    public void SetAntagLimit(Entity<AntagSelectionComponent?> ent, string roleId, int? newMin = null, int? newMax = null)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
                 return;
 
-            def.Max = maxAntags;
-            selectionComp.Definitions[i] = def;
+        for (var i = 0; i < ent.Comp.Definitions.Count; i++)
+        {
+            var def = ent.Comp.Definitions[i];
+
+            var hasRole = def.PrefRoles.Contains(roleId);
+
+            if (!hasRole)
+                continue;
+
+            if (newMin.HasValue)
+                def.Min = newMin.Value;
+
+            if (newMax.HasValue)
+                def.Max = newMax.Value;
+
+            ent.Comp.Definitions[i] = def;
+            return;
         }
     }
     // SS220 DynamicTraitor end

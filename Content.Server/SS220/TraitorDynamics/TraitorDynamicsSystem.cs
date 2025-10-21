@@ -67,34 +67,60 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     }
 
     private void OnDynamicAdded(DynamicSettedEvent ev)
+{
+    var dynamic = _prototype.Index(ev.Dynamic);
+    var rules = _gameTicker.GetAllGameRulePrototypes();
+
+    var roleMap = new Dictionary<string, List<(EntityPrototype Rule, AntagSelectionComponent Comp)>>();
+
+    foreach (var rule in rules)
     {
-        var dynamic = _prototype.Index(ev.Dynamic);
-        var rules = _gameTicker.GetAllGameRulePrototypes();
+        if (!rule.TryGetComponent<AntagSelectionComponent>(out var selection, EntityManager.ComponentFactory))
+            continue;
 
-        foreach (var rule in rules)
+        foreach (var def in selection.Definitions)
         {
-            if (!rule.TryGetComponent<AntagSelectionComponent>(out var selection, EntityManager.ComponentFactory))
-                continue;
+            var allRoles = def.PrefRoles.Select(p => p.Id);
 
-            if (!dynamic.AntagLimits.TryGetValue(, out var value))
-                continue;
+            foreach (var role in allRoles)
+            {
+                if (!roleMap.TryGetValue(role, out var list))
+                {
+                    list = new List<(EntityPrototype, AntagSelectionComponent)>();
+                    roleMap[role] = list;
+                }
 
-            _antag.SetMaxAntags(selection,, value);
-        }
-
-        var query = EntityQueryEnumerator<StoreComponent>();
-        while (query.MoveNext(out var store, out var comp))
-        {
-            if (!comp.UseDynamicPrices)
-                continue;
-
-            if (comp.AccountOwner == null)
-                continue;
-
-            var listings = _store.GetAvailableListings(comp.AccountOwner.Value, store, comp).ToArray();
-            ApplyDynamicPrice(store, listings, dynamic.ID);
+                list.Add((rule, selection));
+            }
         }
     }
+
+    foreach (var (roleProto, limit) in dynamic.AntagLimits)
+    {
+        var roleId = roleProto.Id;
+
+        if (!roleMap.TryGetValue(roleId, out var entries))
+            continue;
+
+        foreach (var (_, comp) in entries)
+        {
+            _antag.SetAntagLimit(comp, roleId, newMax: limit);
+        }
+    }
+
+    var query = EntityQueryEnumerator<StoreComponent>();
+    while (query.MoveNext(out var store, out var comp))
+    {
+        if (!comp.UseDynamicPrices)
+            continue;
+
+        if (comp.AccountOwner == null)
+            continue;
+
+        var listings = _store.GetAvailableListings(comp.AccountOwner.Value, store, comp).ToArray();
+        ApplyDynamicPrice(store, listings, dynamic.ID);
+    }
+}
 
     private void OnRoundEndAppend(RoundEndTextAppendEvent ev)
     {
@@ -131,13 +157,14 @@ public sealed class TraitorDynamicsSystem : EntitySystem
             if (!listing.DynamicsPrices.TryGetValue(currentDynamic, out var dynamicPrice))
                 continue;
 
+            listing.SetNewCost(dynamicPrice);
+
             if (!listing.DiscountCategory.HasValue)
                 continue;
 
             if (!discountsLookup.TryGetValue(listing.ID, out var itemDiscount))
                 continue;
 
-            listing.SetNewCost(dynamicPrice);
             listing.RemoveCostModifier(listing.DiscountCategory.Value);
             var finalPrices = ApplyDiscountsToPrice(dynamicPrice, listing, itemDiscount);
 
@@ -233,29 +260,43 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         var validWeight = _prototype.Index<WeightedRandomPrototype>(WeightsProto);
         var selectedDynamic = string.Empty;
 
-        while (validWeight.Weights.Keys.Count > 0)
+        var originalProto = new Dictionary<string, float>(validWeight.Weights);
+
+        try
         {
-            var currentDynamic = validWeight.Pick(_random);
-
-            if (!_prototype.TryIndex<DynamicPrototype>(currentDynamic, out var dynamicProto))
+            while (validWeight.Weights.Keys.Count > 0)
             {
+                var currentDynamic = validWeight.Pick(_random);
+
+                if (!_prototype.TryIndex<DynamicPrototype>(currentDynamic, out var dynamicProto))
+                {
+                    validWeight.Weights.Remove(currentDynamic);
+                    continue;
+                }
+
+                if (playerCount == 0 || force)
+                {
+                    selectedDynamic = dynamicProto.ID;
+                    break;
+                }
+
+                if (playerCount >= dynamicProto.PlayersRequerment)
+                {
+                    selectedDynamic = dynamicProto.ID;
+                    break;
+                }
+
                 validWeight.Weights.Remove(currentDynamic);
-                continue;
             }
+        }
 
-            if (playerCount == 0 || force)
+        finally
+        {
+            validWeight.Weights.Clear();
+            foreach (var k in originalProto)
             {
-                selectedDynamic = dynamicProto.ID;
-                break;
+                validWeight.Weights[k.Key] = k.Value;
             }
-
-            if (playerCount >= dynamicProto.PlayersRequerment)
-            {
-                selectedDynamic = dynamicProto.ID;
-                break;
-            }
-
-            validWeight.Weights.Remove(currentDynamic);
         }
 
         return selectedDynamic;
